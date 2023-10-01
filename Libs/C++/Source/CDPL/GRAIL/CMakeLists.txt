@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
-SET(cdpl-grail_LIB_SRCS
+set(cdpl-grail_LIB_SRCS
     AttributedGridProperty.cpp
     AttributedGridPropertyDefault.cpp
     DataFormat.cpp
@@ -45,54 +45,54 @@ SET(cdpl-grail_LIB_SRCS
     FeatureExtendedTypeFunction.cpp
     )
   
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-  SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
+  set_target_properties(cdpl-grail-static PROPERTIES 
     OUTPUT_NAME cdpl-grail
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK")
 
-  TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static
+  target_link_libraries(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static
     cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
 
-  INSTALL(TARGETS cdpl-grail-static DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+  install(TARGETS cdpl-grail-static DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+endif(NOT PYPI_PACKAGE_BUILD)
     
-ADD_LIBRARY(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_library(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared
+target_link_libraries(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared
   cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
 
-SET_TARGET_PROPERTIES(cdpl-grail-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-grail-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-grail
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-grail.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-grail.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-grail.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-grail.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-grail.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-grail.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
   @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-grail-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-grail-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-grail-shared
+else()
+  install(TARGETS cdpl-grail-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

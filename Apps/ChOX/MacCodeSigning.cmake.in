@@ -22,8 +22,8 @@
 ##
 
 
-IF("@CDPKIT_CODE_SIGNING_IDENTITY@" STREQUAL "-")
-  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--deep" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--sign" "-" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
-ELSE()
-  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--deep" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--options" "runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
-ENDIF()
+if("@CDPKIT_CODE_SIGNING_IDENTITY@" STREQUAL "-")
+  execute_process(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--deep" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--sign" "-" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
+else()
+  execute_process(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--deep" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--options" "runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
+endif()

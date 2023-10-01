@@ -21,37 +21,37 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(DOXYGEN_EXECUTABLE)
-  ADD_SUBDIRECTORY(Doxygen)
-ENDIF(DOXYGEN_EXECUTABLE)
+if(DOXYGEN_EXECUTABLE)
+  add_subdirectory(Doxygen)
+endif(DOXYGEN_EXECUTABLE)
 
-IF(SPHINX_FOUND)
-  ADD_SUBDIRECTORY(Sphinx)
+if(SPHINX_FOUND)
+  add_subdirectory(Sphinx)
 
-  ADD_CUSTOM_TARGET(doc
+  add_custom_target(doc
     ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMAND ${CMAKE_COMMAND} -E rename
     "${CMAKE_CURRENT_BINARY_DIR}/Sphinx/html" "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMENT "-- Generating CDPKit documentation HTML pages...")
 
-  ADD_DEPENDENCIES(doc sphinx-doc)
+  add_dependencies(doc sphinx-doc)
   
-  IF(DOXYGEN_EXECUTABLE)
-    ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
+  if(DOXYGEN_EXECUTABLE)
+    add_custom_command(TARGET doc POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E rm -r
       "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/c++_api_doc"
       COMMAND ${CMAKE_COMMAND} -E rename
       "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/c++_api_doc")
 
-    ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
+    add_custom_command(TARGET doc POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E rm -r
       "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/python_api_doc"
       COMMAND ${CMAKE_COMMAND} -E rename
       "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/python_api_doc")
 
-    ADD_DEPENDENCIES(doc c++-api-doc python-api-doc)
-  ENDIF(DOXYGEN_EXECUTABLE)
+    add_dependencies(doc c++-api-doc python-api-doc)
+  endif(DOXYGEN_EXECUTABLE)
 
-  INSTALL(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION "${CDPKIT_DOC_INSTALL_DIR}"
+  install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION "${CDPKIT_DOC_INSTALL_DIR}"
     COMPONENT Documentation OPTIONAL)
-ENDIF(SPHINX_FOUND)
+endif(SPHINX_FOUND)

@@ -21,25 +21,25 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 
-ADD_CUSTOM_COMMAND(OUTPUT ChEMBL-Solvents.smi.str
+add_custom_command(OUTPUT ChEMBL-Solvents.smi.str
   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
   "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
   "ChEMBL-Solvents.smi.str"
   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
   COMMENT "-- Processing ChEMBL-Solvents.smi..."
   )
-ADD_CUSTOM_COMMAND(OUTPUT ChEMBL-Salts.smi.str
+add_custom_command(OUTPUT ChEMBL-Salts.smi.str
   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
   "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
   "ChEMBL-Salts.smi.str"
   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
   COMMENT "-- Processing ChEMBL-Salts.smi..."
   )
-ADD_CUSTOM_TARGET(gen-chem-data-files DEPENDS ChEMBL-Solvents.smi.str ChEMBL-Salts.smi.str)
+add_custom_target(gen-chem-data-files DEPENDS ChEMBL-Solvents.smi.str ChEMBL-Salts.smi.str)
            
-SET(cdpl-chem_LIB_SRCS
+set(cdpl-chem_LIB_SRCS
     ChEMBL-Solvents.smi.str
     ChEMBL-Salts.smi.str
 
@@ -311,56 +311,56 @@ SET(cdpl-chem_LIB_SRCS
     ReactionComponentGroupingMatchExpression.cpp
    )
 
-LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
+link_libraries(${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
-  ADD_DEPENDENCIES(cdpl-chem-static gen-chem-data-files)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
+  add_dependencies(cdpl-chem-static gen-chem-data-files)
   
-  SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
+  set_target_properties(cdpl-chem-static PROPERTIES 
     OUTPUT_NAME cdpl-chem
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK")
 
-  TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+  target_link_libraries(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
-  INSTALL(TARGETS cdpl-chem-static
+  install(TARGETS cdpl-chem-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
-ADD_DEPENDENCIES(cdpl-chem-shared gen-chem-data-files)
+add_library(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
+add_dependencies(cdpl-chem-shared gen-chem-data-files)
 
-TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
-SET_TARGET_PROPERTIES(cdpl-chem-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-chem-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-chem
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-chem.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-chem.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-chem.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-chem.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-chem.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-chem.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-chem-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-chem-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-chem-shared
+else()
+  install(TARGETS cdpl-chem-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

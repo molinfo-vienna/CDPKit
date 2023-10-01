@@ -21,4 +21,4 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(CDPL) 
+add_subdirectory(CDPL) 

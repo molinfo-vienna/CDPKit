@@ -21,6 +21,6 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(InChI)
-ADD_SUBDIRECTORY(SQLite3) 
+add_subdirectory(InChI)
+add_subdirectory(SQLite3) 
 

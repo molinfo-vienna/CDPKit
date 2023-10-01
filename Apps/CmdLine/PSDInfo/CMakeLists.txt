@@ -21,27 +21,27 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
 
-SET(psdinfo_SRCS
+set(psdinfo_SRCS
     Main.cpp
     PSDInfoImpl.cpp
    )
 
-ADD_EXECUTABLE(psdinfo ${psdinfo_SRCS})
+add_executable(psdinfo ${psdinfo_SRCS})
 
-SET_TARGET_PROPERTIES(psdinfo PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
+set_target_properties(psdinfo PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/psdinfo.exe")
-ELSE()
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/psdinfo")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/psdinfo.exe")
+else()
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/psdinfo")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-TARGET_LINK_LIBRARIES(psdinfo cmdline-static cdpl-pharm-shared cdpl-util-shared)
+target_link_libraries(psdinfo cmdline-static cdpl-pharm-shared cdpl-util-shared)
 
-INSTALL(TARGETS psdinfo DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
+install(TARGETS psdinfo DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(test-suite_SRCS
+set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     FontTest.cpp
@@ -54,20 +54,20 @@ SET(test-suite_SRCS
     Utilities.cpp
    )
 
-IF(Qt5Gui_FOUND)
-  SET(test-suite_SRCS
+if(Qt5Gui_FOUND)
+  set(test-suite_SRCS
       ${test-suite_SRCS}
       QtRenderer2DTest.cpp
       QtFontMetricsTest.cpp
       QtObjectFactoryTest.cpp
      )    
 
-  LINK_LIBRARIES(cdpl-vis-qt-static Qt5::Gui Qt5::Widgets)
-ENDIF(Qt5Gui_FOUND)
+  link_libraries(cdpl-vis-qt-static Qt5::Gui Qt5::Widgets)
+endif(Qt5Gui_FOUND)
 
-IF(CAIRO_FOUND)
-  IF(HAVE_CAIRO_PNG_SUPPORT)
-    SET(test-suite_SRCS
+if(CAIRO_FOUND)
+  if(HAVE_CAIRO_PNG_SUPPORT)
+    set(test-suite_SRCS
         ${test-suite_SRCS}
         CairoRenderer2DTest.cpp
         CairoFontMetricsTest.cpp
@@ -76,48 +76,48 @@ IF(CAIRO_FOUND)
         PNGMolecularGraphOutputHandlerTest.cpp
         PNGReactionOutputHandlerTest.cpp 
        )    
-  ENDIF(HAVE_CAIRO_PNG_SUPPORT)
+  endif(HAVE_CAIRO_PNG_SUPPORT)
 
-  IF(HAVE_CAIRO_PDF_SUPPORT)
-    SET(test-suite_SRCS
+  if(HAVE_CAIRO_PDF_SUPPORT)
+    set(test-suite_SRCS
         ${test-suite_SRCS}
         PDFMolecularGraphWriterTest.cpp
         PDFReactionWriterTest.cpp
         PDFMolecularGraphOutputHandlerTest.cpp
         PDFReactionOutputHandlerTest.cpp 
        )    
-  ENDIF(HAVE_CAIRO_PDF_SUPPORT)
+  endif(HAVE_CAIRO_PDF_SUPPORT)
 
-  IF(HAVE_CAIRO_PS_SUPPORT)
-    SET(test-suite_SRCS
+  if(HAVE_CAIRO_PS_SUPPORT)
+    set(test-suite_SRCS
         ${test-suite_SRCS}
         PSMolecularGraphWriterTest.cpp
         PSReactionWriterTest.cpp
         PSMolecularGraphOutputHandlerTest.cpp
         PSReactionOutputHandlerTest.cpp 
        )    
-  ENDIF(HAVE_CAIRO_PS_SUPPORT)
+  endif(HAVE_CAIRO_PS_SUPPORT)
 
-  IF(HAVE_CAIRO_SVG_SUPPORT)
-    SET(test-suite_SRCS
+  if(HAVE_CAIRO_SVG_SUPPORT)
+    set(test-suite_SRCS
         ${test-suite_SRCS}
         SVGMolecularGraphWriterTest.cpp
         SVGReactionWriterTest.cpp
         SVGMolecularGraphOutputHandlerTest.cpp
         SVGReactionOutputHandlerTest.cpp 
        )    
-  ENDIF(HAVE_CAIRO_SVG_SUPPORT)
+  endif(HAVE_CAIRO_SVG_SUPPORT)
 
-  LINK_LIBRARIES(${CAIRO_LIBRARIES})
-  INCLUDE_DIRECTORIES("${CAIRO_INCLUDE_DIR}")
-ENDIF(CAIRO_FOUND)
+  link_libraries(${CAIRO_LIBRARIES})
+  include_directories("${CAIRO_INCLUDE_DIR}")
+endif(CAIRO_FOUND)
 
-SET(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(vis-test-suite ${test-suite_SRCS})
+add_executable(vis-test-suite ${test-suite_SRCS})
 
-TARGET_LINK_LIBRARIES(vis-test-suite cdpl-vis-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(vis-test-suite cdpl-vis-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Vis" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/vis-test-suite")

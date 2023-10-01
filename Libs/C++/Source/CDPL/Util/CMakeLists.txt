@@ -21,62 +21,62 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(cdpl-util_LIB_SRCS
+set(cdpl-util_LIB_SRCS
     BronKerboschAlgorithm.cpp
     FileRemover.cpp
     FileFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+link_libraries(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
 
-  TARGET_LINK_LIBRARIES(cdpl-util-static cdpl-base-static)
+  target_link_libraries(cdpl-util-static cdpl-base-static)
 
-  SET_TARGET_PROPERTIES(cdpl-util-static PROPERTIES 
+  set_target_properties(cdpl-util-static PROPERTIES 
     OUTPUT_NAME cdpl-util
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_UTIL_STATIC_LINK")
 
-  INSTALL(TARGETS cdpl-util-static
+  install(TARGETS cdpl-util-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-util-shared SHARED ${cdpl-util_LIB_SRCS})
+add_library(cdpl-util-shared SHARED ${cdpl-util_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-util-shared cdpl-base-shared)
+target_link_libraries(cdpl-util-shared cdpl-base-shared)
 
-SET_TARGET_PROPERTIES(cdpl-util-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-util-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-util
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-util.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-util.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-util.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-util.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-util.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-util.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-util-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-util-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-util-shared
+else()
+  install(TARGETS cdpl-util-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

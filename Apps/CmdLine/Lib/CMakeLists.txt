@@ -21,17 +21,17 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
-SET(cmdline_LIB_SRCS
+set(cmdline_LIB_SRCS
   CmdLineBase.cpp
   HelperFunctions.cpp)
 
-ADD_LIBRARY(cmdline-static STATIC ${cmdline_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_library(cmdline-static STATIC ${cmdline_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-SET_TARGET_PROPERTIES(cmdline-static PROPERTIES 
+set_target_properties(cmdline-static PROPERTIES 
   OUTPUT_NAME cmdline
   CLEAN_DIRECT_OUTPUT 1)
 
-TARGET_LINK_LIBRARIES(cmdline-static ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(cmdline-static ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 

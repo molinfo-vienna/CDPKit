@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
-SET(cdpl-shape_LIB_SRCS
+set(cdpl-shape_LIB_SRCS
     GaussianShape.cpp
     GaussianShapeFunction.cpp
 
@@ -50,52 +50,52 @@ SET(cdpl-shape_LIB_SRCS
     GaussianProductList.cpp
    )
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-shape-static STATIC ${cdpl-shape_LIB_SRCS})
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-shape-static STATIC ${cdpl-shape_LIB_SRCS})
 
-  SET_TARGET_PROPERTIES(cdpl-shape-static PROPERTIES 
+  set_target_properties(cdpl-shape-static PROPERTIES 
     OUTPUT_NAME cdpl-shape
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_SHAPE_STATIC_LINK")
 
-  TARGET_LINK_LIBRARIES(cdpl-shape-static cdpl-base-static cdpl-util-static cdpl-math-static cdpl-chem-static cdpl-pharm-static)
+  target_link_libraries(cdpl-shape-static cdpl-base-static cdpl-util-static cdpl-math-static cdpl-chem-static cdpl-pharm-static)
 
-  INSTALL(TARGETS cdpl-shape-static
+  install(TARGETS cdpl-shape-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-shape-shared SHARED ${cdpl-shape_LIB_SRCS})
+add_library(cdpl-shape-shared SHARED ${cdpl-shape_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-shape-shared cdpl-base-shared cdpl-util-shared cdpl-math-shared cdpl-chem-shared cdpl-pharm-shared)
+target_link_libraries(cdpl-shape-shared cdpl-base-shared cdpl-util-shared cdpl-math-shared cdpl-chem-shared cdpl-pharm-shared)
 
-SET_TARGET_PROPERTIES(cdpl-shape-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-shape-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-shape
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-shape.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-shape.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-shape-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-shape-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-shape-shared
+else()
+  install(TARGETS cdpl-shape-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

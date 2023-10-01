@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
-SET(cdpl-molprop_LIB_SRCS
+set(cdpl-molprop_LIB_SRCS
     AtomProperty.cpp
     BondProperty.cpp
     AtomPropertyDefault.cpp
@@ -82,53 +82,53 @@ SET(cdpl-molprop_LIB_SRCS
     HBondAcceptorAtomTyper.cpp
    )
  
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-  SET_TARGET_PROPERTIES(cdpl-molprop-static PROPERTIES 
+  set_target_properties(cdpl-molprop-static PROPERTIES 
     OUTPUT_NAME cdpl-molprop
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_MOLPROP_STATIC_LINK")
 
-  INSTALL(TARGETS cdpl-molprop-static
+  install(TARGETS cdpl-molprop-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 
-  TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+  target_link_libraries(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_library(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
+target_link_libraries(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
 
-SET_TARGET_PROPERTIES(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-molprop
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-molprop.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-molprop.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-molprop.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-molprop.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-molprop.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-molprop.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-molprop-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-molprop-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-molprop-shared
+else()
+  install(TARGETS cdpl-molprop-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)
 

@@ -21,10 +21,10 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
-  ADD_SUBDIRECTORY(ChOX) 
-ENDIF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
+if(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
+  add_subdirectory(ChOX) 
+endif(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
 
-IF(Boost_PROGRAM_OPTIONS_FOUND AND Threads_FOUND)
-  ADD_SUBDIRECTORY(CmdLine) 
-ENDIF(Boost_PROGRAM_OPTIONS_FOUND AND Threads_FOUND)
+if(Boost_PROGRAM_OPTIONS_FOUND AND Threads_FOUND)
+  add_subdirectory(CmdLine) 
+endif(Boost_PROGRAM_OPTIONS_FOUND AND Threads_FOUND)

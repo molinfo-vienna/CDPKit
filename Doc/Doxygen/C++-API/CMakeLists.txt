@@ -22,25 +22,25 @@
 ##
 
 
-SET(CXX_API_DOC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
+set(CXX_API_DOC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
-CONFIGURE_FILE(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
-CONFIGURE_FILE(Doxyfile-xml.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-xml" @ONLY)
-CONFIGURE_FILE(CopyDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake" @ONLY)
+configure_file(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
+configure_file(Doxyfile-xml.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-xml" @ONLY)
+configure_file(CopyDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake" @ONLY)
 
-ADD_CUSTOM_TARGET(copy-c++-api-doc-sources
+add_custom_target(copy-c++-api-doc-sources
   ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"
   COMMENT "-- Copying CDPL C++ API documentation source files...")
 
-ADD_CUSTOM_TARGET(c++-api-doc
+add_custom_target(c++-api-doc
   ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
   COMMAND "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
   COMMENT "-- Generating CDPL C++ API documentation HTML files...")
-ADD_DEPENDENCIES(c++-api-doc copy-c++-api-doc-sources)
+add_dependencies(c++-api-doc copy-c++-api-doc-sources)
 
-ADD_CUSTOM_TARGET(c++-api-doc-xml
+add_custom_target(c++-api-doc-xml
   ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/xml"
   COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-xml"
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
   COMMENT "-- Generating CDPL C++ API documentation XML files...")
-ADD_DEPENDENCIES(c++-api-doc-xml copy-c++-api-doc-sources)
+add_dependencies(c++-api-doc-xml copy-c++-api-doc-sources)

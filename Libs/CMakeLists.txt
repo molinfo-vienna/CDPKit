@@ -21,8 +21,8 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(C++) 
+add_subdirectory(C++) 
 
-IF(BUILD_PYTHON_MODULES)
-  ADD_SUBDIRECTORY(Python) 
-ENDIF(BUILD_PYTHON_MODULES)
+if(BUILD_PYTHON_MODULES)
+  add_subdirectory(Python) 
+endif(BUILD_PYTHON_MODULES)

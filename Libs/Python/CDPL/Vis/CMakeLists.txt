@@ -21,15 +21,15 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-FILE(GLOB PYTHON_FILES "*.py")
+file(GLOB PYTHON_FILES "*.py")
 
-FOREACH(PYTHON_FILE ${PYTHON_FILES})
-  CONFIGURE_FILE("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
-ENDFOREACH(PYTHON_FILE)
+foreach(PYTHON_FILE ${PYTHON_FILES})
+  configure_file("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
+endforeach(PYTHON_FILE)
 
-SET(vis_MOD_SRCS
+set(vis_MOD_SRCS
     Module.cpp
     SizeSpecificationExport.cpp
     ColorExport.cpp
@@ -83,67 +83,67 @@ SET(vis_MOD_SRCS
     FromPythonConverterRegistration.cpp
    )
 
-IF(HAVE_CAIRO_PNG_SUPPORT)
-  SET(vis_MOD_SRCS
+if(HAVE_CAIRO_PNG_SUPPORT)
+  set(vis_MOD_SRCS
       ${vis_MOD_SRCS}
       PNGMolecularGraphWriterExport.cpp
       PNGReactionWriterExport.cpp
       PNGMolecularGraphOutputHandlerExport.cpp
       PNGReactionOutputHandlerExport.cpp
      )    
-ENDIF(HAVE_CAIRO_PNG_SUPPORT)
+endif(HAVE_CAIRO_PNG_SUPPORT)
 
-IF(HAVE_CAIRO_PDF_SUPPORT)
-  SET(vis_MOD_SRCS
+if(HAVE_CAIRO_PDF_SUPPORT)
+  set(vis_MOD_SRCS
       ${vis_MOD_SRCS}
       PDFMolecularGraphWriterExport.cpp
       PDFReactionWriterExport.cpp
       PDFMolecularGraphOutputHandlerExport.cpp
       PDFReactionOutputHandlerExport.cpp
      )    
-ENDIF(HAVE_CAIRO_PDF_SUPPORT)
+endif(HAVE_CAIRO_PDF_SUPPORT)
 
-IF(HAVE_CAIRO_PS_SUPPORT)
-  SET(vis_MOD_SRCS
+if(HAVE_CAIRO_PS_SUPPORT)
+  set(vis_MOD_SRCS
       ${vis_MOD_SRCS}
       PSMolecularGraphWriterExport.cpp
       PSReactionWriterExport.cpp
       PSMolecularGraphOutputHandlerExport.cpp
       PSReactionOutputHandlerExport.cpp
      )    
-ENDIF(HAVE_CAIRO_PS_SUPPORT)
+endif(HAVE_CAIRO_PS_SUPPORT)
 
-IF(HAVE_CAIRO_SVG_SUPPORT)
-  SET(vis_MOD_SRCS
+if(HAVE_CAIRO_SVG_SUPPORT)
+  set(vis_MOD_SRCS
       ${vis_MOD_SRCS}
       SVGMolecularGraphWriterExport.cpp
       SVGReactionWriterExport.cpp
       SVGMolecularGraphOutputHandlerExport.cpp
       SVGReactionOutputHandlerExport.cpp
      )    
-ENDIF(HAVE_CAIRO_SVG_SUPPORT)
+endif(HAVE_CAIRO_SVG_SUPPORT)
 
-ADD_LIBRARY(_vis MODULE ${vis_MOD_SRCS})
+add_library(_vis MODULE ${vis_MOD_SRCS})
 
-TARGET_LINK_LIBRARIES(_vis cdpl-vis-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
+target_link_libraries(_vis cdpl-vis-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
 
-SET_TARGET_PROPERTIES(_vis PROPERTIES PREFIX "")
+set_target_properties(_vis PROPERTIES PREFIX "")
 
-IF(WIN32)
-  SET_TARGET_PROPERTIES(_vis PROPERTIES SUFFIX ".pyd")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis/_vis.pyd")
-ELSE(WIN32)
-  SET_TARGET_PROPERTIES(_vis PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis/_vis.so")
-ENDIF(WIN32)
+if(WIN32)
+  set_target_properties(_vis PROPERTIES SUFFIX ".pyd")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis/_vis.pyd")
+else(WIN32)
+  set_target_properties(_vis PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis/_vis.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)
-INSTALL(TARGETS _vis DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
+install(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)
+install(TARGETS _vis DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
 
-IF(PYTHON_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(PYTHON_TESTS_ENABLED)
+if(PYTHON_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(PYTHON_TESTS_ENABLED)

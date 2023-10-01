@@ -24,24 +24,24 @@
 # Copy files from source directory to processed source directory, substituting any
 # variables.  Create destination directory if it does not exist.
 MACRO(CONFIGURE_FILES SRC_DIR DEST_DIR)
-  FILE(GLOB_RECURSE TEMPLATE_FILES RELATIVE "${SRC_DIR}" "${SRC_DIR}/*.in")
+  file(GLOB_RECURSE TEMPLATE_FILES RELATIVE "${SRC_DIR}" "${SRC_DIR}/*.in")
 
-  FOREACH(TEMPLATE_FILE ${TEMPLATE_FILES})
-    SET(SRC_FILE_PATH "${SRC_DIR}/${TEMPLATE_FILE}")
-    GET_FILENAME_COMPONENT(DEST_FILE_NAME "${TEMPLATE_FILE}" NAME_WLE)
-    GET_FILENAME_COMPONENT(DEST_FILE_DIR "${TEMPLATE_FILE}" DIRECTORY)
-    SET(DEST_FILE_PATH "${DEST_DIR}/${DEST_FILE_DIR}/${DEST_FILE_NAME}")
-    #MESSAGE(STATUS "Configuring file ${SRC_FILE_PATH}...")
-    CONFIGURE_FILE("${SRC_FILE_PATH}" "${DEST_FILE_PATH}" @ONLY)
-  ENDFOREACH(TEMPLATE_FILE)
+  foreach(TEMPLATE_FILE ${TEMPLATE_FILES})
+    set(SRC_FILE_PATH "${SRC_DIR}/${TEMPLATE_FILE}")
+    get_filename_component(DEST_FILE_NAME "${TEMPLATE_FILE}" NAME_WLE)
+    get_filename_component(DEST_FILE_DIR "${TEMPLATE_FILE}" DIRECTORY)
+    set(DEST_FILE_PATH "${DEST_DIR}/${DEST_FILE_DIR}/${DEST_FILE_NAME}")
+    #message(STATUS "Configuring file ${SRC_FILE_PATH}...")
+    configure_file("${SRC_FILE_PATH}" "${DEST_FILE_PATH}" @ONLY)
+  endforeach(TEMPLATE_FILE)
 ENDMACRO(CONFIGURE_FILES)
 
-IF(SPHINX_FOUND)
-  SET(SPHINX_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source")
-  SET(SPHINX_PROC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/ProcSource")
-  SET(SPHINX_BUILD_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
+if(SPHINX_FOUND)
+  set(SPHINX_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source")
+  set(SPHINX_PROC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/ProcSource")
+  set(SPHINX_BUILD_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
-  ADD_CUSTOM_TARGET(sphinx-doc
+  add_custom_target(sphinx-doc
     ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMAND "${PYTHON_EXECUTABLE}" "${SPHINX_EXECUTABLE}"
     -q -a -n -E -b html
@@ -50,33 +50,33 @@ IF(SPHINX_FOUND)
     "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMENT "-- Running Sphinx...")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
-    "FILE(COPY \"${SPHINX_SOURCE_DIR}\" DESTINATION \"${CMAKE_CURRENT_BINARY_DIR}\" PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)\n"
-    "FILE(COPY \"${SPHINX_PROC_SOURCE_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}\")")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
+    "file(COPY \"${SPHINX_SOURCE_DIR}\" DESTINATION \"${CMAKE_CURRENT_BINARY_DIR}\" PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)\n"
+    "file(COPY \"${SPHINX_PROC_SOURCE_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}\")")
 
-  ADD_CUSTOM_TARGET(copy-sphinx-sources
+  add_custom_target(copy-sphinx-sources
     ${CMAKE_COMMAND} -E rm -r -f "${SPHINX_BUILD_SOURCE_DIR}"
     COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
     COMMENT "-- Copying Sphinx source files...")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
-    "FILE(GLOB SOURCE_FILES \"${CDPKIT_EXAMPLES_DIR}/C++/*.cpp\" \"${CDPKIT_EXAMPLES_DIR}/Python/*.py\")\n"
-    "FILE(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/examples\")")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
+    "file(GLOB SOURCE_FILES \"${CDPKIT_EXAMPLES_DIR}/C++/*.cpp\" \"${CDPKIT_EXAMPLES_DIR}/Python/*.py\")\n"
+    "file(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/examples\")")
 
-  ADD_CUSTOM_TARGET(copy-sphinx-example-files 
+  add_custom_target(copy-sphinx-example-files 
     ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
     COMMENT "-- Copying example source code files...")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyGraphicsFiles.cmake"
-    "FILE(COPY \"${CDPKIT_DOC_GRAPHICS_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/graphics\")")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyGraphicsFiles.cmake"
+    "file(COPY \"${CDPKIT_DOC_GRAPHICS_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/graphics\")")
 
-  ADD_CUSTOM_TARGET(copy-sphinx-graphics-files 
+  add_custom_target(copy-sphinx-graphics-files 
     ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyGraphicsFiles.cmake"
     COMMENT "-- Copying graphics files...")
 
-  ADD_DEPENDENCIES(copy-sphinx-example-files copy-sphinx-sources)
-  ADD_DEPENDENCIES(copy-sphinx-graphics-files copy-sphinx-sources)
-  ADD_DEPENDENCIES(sphinx-doc copy-sphinx-sources copy-sphinx-example-files copy-sphinx-graphics-files)
+  add_dependencies(copy-sphinx-example-files copy-sphinx-sources)
+  add_dependencies(copy-sphinx-graphics-files copy-sphinx-sources)
+  add_dependencies(sphinx-doc copy-sphinx-sources copy-sphinx-example-files copy-sphinx-graphics-files)
   
   CONFIGURE_FILES("${SPHINX_SOURCE_DIR}" "${SPHINX_PROC_SOURCE_DIR}")
-ENDIF(SPHINX_FOUND)
+endif(SPHINX_FOUND)

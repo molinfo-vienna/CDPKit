@@ -21,8 +21,8 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(Source) 
+add_subdirectory(Source) 
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_SUBDIRECTORY(Include) 
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_subdirectory(Include) 
+endif(NOT PYPI_PACKAGE_BUILD)

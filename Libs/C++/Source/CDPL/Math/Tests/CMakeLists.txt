@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(test-suite_SRCS
+set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     SpecialFunctionsTest.cpp
@@ -62,16 +62,16 @@ SET(test-suite_SRCS
     #VectorIteratorTest.cpp
    )
 
-IF(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-self-assign-overloaded")
-ENDIF()
+if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-self-assign-overloaded")
+endif()
 
-SET(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(math-test-suite ${test-suite_SRCS})
+add_executable(math-test-suite ${test-suite_SRCS})
 
-TARGET_LINK_LIBRARIES(math-test-suite cdpl-math-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(math-test-suite cdpl-math-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Math" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/math-test-suite")

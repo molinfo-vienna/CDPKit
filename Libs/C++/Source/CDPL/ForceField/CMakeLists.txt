@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 
-SET(PARAMETER_FILES
+set(PARAMETER_FILES
     MMFFANG.PAR
     MMFFAROM.PAR
     MMFFBNDK.PAR
@@ -47,20 +47,20 @@ SET(PARAMETER_FILES
     MMFFFCHG.PAR    
    )
 
-FOREACH(PARAM_FILE ${PARAMETER_FILES})
-  ADD_CUSTOM_COMMAND(OUTPUT "${PARAM_FILE}.str"
+foreach(PARAM_FILE ${PARAMETER_FILES})
+  add_custom_command(OUTPUT "${PARAM_FILE}.str"
     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
     "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}" 
     "${PARAM_FILE}.str"
     DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}"
     COMMENT "-- Processing ${PARAM_FILE}..."
     )
-  SET(PARAMETER_FILE_STRINGS "${PARAMETER_FILE_STRINGS}" "${PARAM_FILE}.str") 
-ENDFOREACH(PARAM_FILE)
+  set(PARAMETER_FILE_STRINGS "${PARAMETER_FILE_STRINGS}" "${PARAM_FILE}.str") 
+endforeach(PARAM_FILE)
 
-ADD_CUSTOM_TARGET(gen-forcefield-data-files DEPENDS ${PARAMETER_FILE_STRINGS})
+add_custom_target(gen-forcefield-data-files DEPENDS ${PARAMETER_FILE_STRINGS})
 
-SET(cdpl-forcefield_LIB_SRCS
+set(cdpl-forcefield_LIB_SRCS
     ${PARAMETER_FILE_STRINGS}
 
     Exceptions.cpp
@@ -121,56 +121,56 @@ SET(cdpl-forcefield_LIB_SRCS
     DataIOUtilities.cpp
    )
 
-LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
+link_libraries(${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-  ADD_DEPENDENCIES(cdpl-forcefield-static gen-forcefield-data-files)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+  add_dependencies(cdpl-forcefield-static gen-forcefield-data-files)
   
-  SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES 
+  set_target_properties(cdpl-forcefield-static PROPERTIES 
     OUTPUT_NAME cdpl-forcefield
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_FORCEFIELD_STATIC_LINK")
 
-  TARGET_LINK_LIBRARIES(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static)
+  target_link_libraries(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static)
 
-  INSTALL(TARGETS cdpl-forcefield-static
+  install(TARGETS cdpl-forcefield-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-ADD_DEPENDENCIES(cdpl-forcefield-shared gen-forcefield-data-files)
+add_library(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_dependencies(cdpl-forcefield-shared gen-forcefield-data-files)
 
-TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
+target_link_libraries(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
 
-SET_TARGET_PROPERTIES(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-forcefield
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-forcefield.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-forcefield.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-forcefield-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-forcefield-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-forcefield-shared
+else()
+  install(TARGETS cdpl-forcefield-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

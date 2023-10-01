@@ -21,20 +21,20 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(test-suite_SRCS
+set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     SimilarityFunctionsTest.cpp
    )
 
-SET(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(descr-test-suite ${test-suite_SRCS})
+add_executable(descr-test-suite ${test-suite_SRCS})
 
-TARGET_LINK_LIBRARIES(descr-test-suite cdpl-descr-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(descr-test-suite cdpl-descr-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Descr" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/descr-test-suite")

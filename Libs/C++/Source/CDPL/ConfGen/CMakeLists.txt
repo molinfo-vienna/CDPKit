@@ -21,33 +21,33 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
-SET(DATA_FILES
+set(DATA_FILES
     TorsionLibrary.xml
     FallbackTorsionLibrary.xml
    )
 
-IF(MSVC)
-  CONFIGURE_FILE(FragmentLibraryData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc" @ONLY)
-ELSE()
-  SET(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl)
-ENDIF()
+if(MSVC)
+  configure_file(FragmentLibraryData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc" @ONLY)
+else()
+  set(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl)
+endif()
     
-FOREACH(DATA_FILE ${DATA_FILES})
-  ADD_CUSTOM_COMMAND(OUTPUT "${DATA_FILE}.str"
+foreach(DATA_FILE ${DATA_FILES})
+  add_custom_command(OUTPUT "${DATA_FILE}.str"
     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
     "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}" 
     "${DATA_FILE}.str"
     DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}"
     COMMENT "-- Processing ${DATA_FILE}..."
     )
-  SET(DATA_FILE_STRINGS "${DATA_FILE_STRINGS}" "${DATA_FILE}.str") 
-ENDFOREACH(DATA_FILE)
+  set(DATA_FILE_STRINGS "${DATA_FILE_STRINGS}" "${DATA_FILE}.str") 
+endforeach(DATA_FILE)
 
-ADD_CUSTOM_TARGET(gen-confgen-data-files DEPENDS ${DATA_FILE_STRINGS})
+add_custom_target(gen-confgen-data-files DEPENDS ${DATA_FILE_STRINGS})
 
-SET(cdpl-confgen_LIB_SRCS
+set(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
 
     DataFormat.cpp
@@ -113,62 +113,62 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentAssemblerImpl.cpp
    )
 
-IF(MSVC)
-  SET(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc")
-ENDIF()
+if(MSVC)
+  set(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc")
+endif()
   
-LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
+link_libraries(${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-  ADD_DEPENDENCIES(cdpl-confgen-static gen-confgen-data-files)
+if(NOT PYPI_PACKAGE_BUILD)
+  add_library(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+  add_dependencies(cdpl-confgen-static gen-confgen-data-files)
   
-  SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES 
+  set_target_properties(cdpl-confgen-static PROPERTIES 
     OUTPUT_NAME cdpl-confgen
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK")
 
-  TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static
+  target_link_libraries(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static
     cdpl-util-static cdpl-forcefield-static)
 
-  INSTALL(TARGETS cdpl-confgen-static
+  install(TARGETS cdpl-confgen-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT PYPI_PACKAGE_BUILD)
+endif(NOT PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-ADD_DEPENDENCIES(cdpl-confgen-shared gen-confgen-data-files)
+add_library(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_dependencies(cdpl-confgen-shared gen-confgen-data-files)
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
+target_link_libraries(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
   cdpl-util-shared cdpl-forcefield-shared)
 
-SET_TARGET_PROPERTIES(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+set_target_properties(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-confgen
   CLEAN_DIRECT_OUTPUT 1
   INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-confgen.dll")
-ELSEIF(APPLE)
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-confgen.dylib")
-ELSE()            
-  SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-confgen.so")
-ENDIF(WIN32)
+if(WIN32)
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-confgen.dll")
+elseif(APPLE)
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-confgen.dylib")
+else()            
+  set(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-confgen.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-IF(WIN32 AND PYPI_PACKAGE_BUILD)
-   INSTALL(TARGETS cdpl-confgen-shared
+if(WIN32 AND PYPI_PACKAGE_BUILD)
+   install(TARGETS cdpl-confgen-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
-ELSE()
-  INSTALL(TARGETS cdpl-confgen-shared
+else()
+  install(TARGETS cdpl-confgen-shared
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
-ENDIF(WIN32 AND PYPI_PACKAGE_BUILD)
+endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-IF(CDPL_CXX_UNIT_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPL_CXX_UNIT_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(CDPL_CXX_UNIT_TESTS_ENABLED)

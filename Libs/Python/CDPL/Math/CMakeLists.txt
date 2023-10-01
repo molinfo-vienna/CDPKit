@@ -21,27 +21,27 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(NUMPY_FOUND)
-  INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${NUMPY_INCLUDE_DIRS}")
-ELSE(NUMPY_FOUND)
-  INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
-ENDIF(NUMPY_FOUND)
+if(NUMPY_FOUND)
+  include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${NUMPY_INCLUDE_DIRS}")
+else(NUMPY_FOUND)
+  include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
+endif(NUMPY_FOUND)
 
-FILE(GLOB PYTHON_FILES "*.py")
+file(GLOB PYTHON_FILES "*.py")
 
-FOREACH(PYTHON_FILE ${PYTHON_FILES})
-  CONFIGURE_FILE("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
-ENDFOREACH(PYTHON_FILE)
+foreach(PYTHON_FILE ${PYTHON_FILES})
+  configure_file("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
+endforeach(PYTHON_FILE)
 
-IF(MINGW)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-maybe-uninitialized")
-ENDIF(MINGW)
+if(MINGW)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-maybe-uninitialized")
+endif(MINGW)
 
-IF(NOT WIN32)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-ENDIF(NOT WIN32)
+if(NOT WIN32)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+endif(NOT WIN32)
 
-SET(math_impl_MOD_SRCS
+set(math_impl_MOD_SRCS
     VectorExpressionExport.cpp
     MatrixExpressionExport.cpp
     QuaternionExpressionExport.cpp
@@ -133,40 +133,40 @@ SET(math_impl_MOD_SRCS
     FromPythonToGridConverterRegistration.cpp
    )
 
-SET(math_MOD_SRCS
+set(math_MOD_SRCS
     Module.cpp
    )
 
-IF(NUMPY_FOUND)
-  SET(math_impl_MOD_SRCS
+if(NUMPY_FOUND)
+  set(math_impl_MOD_SRCS
       ${math_impl_MOD_SRCS}
       NumPy.cpp
      )
-ENDIF(NUMPY_FOUND)
+endif(NUMPY_FOUND)
 
-ADD_LIBRARY(_math-impl STATIC ${math_impl_MOD_SRCS})
-ADD_LIBRARY(_math MODULE ${math_MOD_SRCS})
+add_library(_math-impl STATIC ${math_impl_MOD_SRCS})
+add_library(_math MODULE ${math_MOD_SRCS})
 
-TARGET_LINK_LIBRARIES(_math _math-impl cdpl-math-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
+target_link_libraries(_math _math-impl cdpl-math-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
 
-SET_TARGET_PROPERTIES(_math PROPERTIES PREFIX "")
-SET_TARGET_PROPERTIES(_math-impl PROPERTIES PREFIX "")
+set_target_properties(_math PROPERTIES PREFIX "")
+set_target_properties(_math-impl PROPERTIES PREFIX "")
 
-IF(WIN32)
-  SET_TARGET_PROPERTIES(_math PROPERTIES SUFFIX ".pyd")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math/_math.pyd")
-ELSE(WIN32)
-  SET_TARGET_PROPERTIES(_math PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math/_math.so")
-ENDIF(WIN32)
+if(WIN32)
+  set_target_properties(_math PROPERTIES SUFFIX ".pyd")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math/_math.pyd")
+else(WIN32)
+  set_target_properties(_math PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math/_math.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)
-INSTALL(TARGETS _math DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
+install(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)
+install(TARGETS _math DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
 
-IF(PYTHON_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(PYTHON_TESTS_ENABLED)
+if(PYTHON_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(PYTHON_TESTS_ENABLED)

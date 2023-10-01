@@ -21,18 +21,18 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-FILE(GLOB inchi_LIB_SRCS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
+file(GLOB inchi_LIB_SRCS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
 
-IF(NOT WIN32)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-ENDIF()
+if(NOT WIN32)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+endif()
 
-IF(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-comment -Wno-parentheses -Wno-unused-value -Wno-pointer-bool-conversion -Wno-unsequenced -Wno-constant-logical-operand")
-ENDIF()
+if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-comment -Wno-parentheses -Wno-unused-value -Wno-pointer-bool-conversion -Wno-unsequenced -Wno-constant-logical-operand")
+endif()
 
-ADD_LIBRARY(inchi OBJECT ${inchi_LIB_SRCS})
-SET_TARGET_PROPERTIES(inchi PROPERTIES COMPILE_DEFINITIONS "TARGET_API_LIB")
+add_library(inchi OBJECT ${inchi_LIB_SRCS})
+set_target_properties(inchi PROPERTIES COMPILE_DEFINITIONS "TARGET_API_LIB")
 

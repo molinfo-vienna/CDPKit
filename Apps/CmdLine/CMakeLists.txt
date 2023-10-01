@@ -21,13 +21,13 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(Lib) 
-ADD_SUBDIRECTORY(TautGen)
-ADD_SUBDIRECTORY(GenFragLib)  
-ADD_SUBDIRECTORY(ConfGen)  
-ADD_SUBDIRECTORY(StructGen)  
-ADD_SUBDIRECTORY(ShapeScreen)  
-ADD_SUBDIRECTORY(PSDCreate) 
-ADD_SUBDIRECTORY(PSDScreen) 
-ADD_SUBDIRECTORY(PSDMerge)
-ADD_SUBDIRECTORY(PSDInfo)    
+add_subdirectory(Lib) 
+add_subdirectory(TautGen)
+add_subdirectory(GenFragLib)  
+add_subdirectory(ConfGen)  
+add_subdirectory(StructGen)  
+add_subdirectory(ShapeScreen)  
+add_subdirectory(PSDCreate) 
+add_subdirectory(PSDScreen) 
+add_subdirectory(PSDMerge)
+add_subdirectory(PSDInfo)    

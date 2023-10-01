@@ -21,15 +21,15 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-FILE(GLOB PYTHON_FILES "*.py")
+file(GLOB PYTHON_FILES "*.py")
 
-FOREACH(PYTHON_FILE ${PYTHON_FILES})
-  CONFIGURE_FILE("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
-ENDFOREACH(PYTHON_FILE)
+foreach(PYTHON_FILE ${PYTHON_FILES})
+  configure_file("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
+endforeach(PYTHON_FILE)
 
-SET(confgen_MOD_SRCS
+set(confgen_MOD_SRCS
     Module.cpp
 
     ForceFieldTypeExport.cpp
@@ -82,27 +82,27 @@ SET(confgen_MOD_SRCS
     FromPythonConverterRegistration.cpp
     )    
 
-ADD_LIBRARY(_confgen MODULE ${confgen_MOD_SRCS})
+add_library(_confgen MODULE ${confgen_MOD_SRCS})
 
-TARGET_LINK_LIBRARIES(_confgen cdpl-confgen-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
+target_link_libraries(_confgen cdpl-confgen-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
 
-SET_TARGET_PROPERTIES(_confgen PROPERTIES PREFIX "")
+set_target_properties(_confgen PROPERTIES PREFIX "")
 
-IF(WIN32)
-  SET_TARGET_PROPERTIES(_confgen PROPERTIES SUFFIX ".pyd")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen/_confgen.pyd")
-ELSE(WIN32)
-  SET_TARGET_PROPERTIES(_confgen PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
-  SET(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen/_confgen.so")
-ENDIF(WIN32)
+if(WIN32)
+  set_target_properties(_confgen PROPERTIES SUFFIX ".pyd")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen/_confgen.pyd")
+else(WIN32)
+  set_target_properties(_confgen PROPERTIES INSTALL_RPATH "${CDPKIT_PYTHON_MODULE_INSTALL_RPATH2}")
+  set(BINARY_INPUT_FILE "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen/_confgen.so")
+endif(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
-INSTALL(TARGETS _confgen DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
+install(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
+install(TARGETS _confgen DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
+install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)
 
-IF(PYTHON_TESTS_ENABLED)
-  ADD_SUBDIRECTORY(Tests)
-ENDIF(PYTHON_TESTS_ENABLED)
+if(PYTHON_TESTS_ENABLED)
+  add_subdirectory(Tests)
+endif(PYTHON_TESTS_ENABLED)

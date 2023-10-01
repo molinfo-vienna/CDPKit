@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(test-suite_SRCS
+set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     BasicFeatureTest.cpp
@@ -32,12 +32,12 @@ SET(test-suite_SRCS
     PharmacophoreTest.cpp
    )
 
-SET(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(pharm-test-suite ${test-suite_SRCS})
+add_executable(pharm-test-suite ${test-suite_SRCS})
 
-TARGET_LINK_LIBRARIES(pharm-test-suite cdpl-pharm-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(pharm-test-suite cdpl-pharm-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Pharm" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/pharm-test-suite")

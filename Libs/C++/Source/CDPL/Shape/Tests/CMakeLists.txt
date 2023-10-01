@@ -21,9 +21,9 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(test-suite_SRCS
+set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     GaussianShapeFunctionTest.cpp
@@ -33,12 +33,12 @@ SET(test-suite_SRCS
     TestData.cpp
     )
 
-SET(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(shape-test-suite ${test-suite_SRCS})
+add_executable(shape-test-suite ${test-suite_SRCS})
 
-TARGET_LINK_LIBRARIES(shape-test-suite cdpl-shape-shared cdpl-chem-shared cdpl-biomol-shared cdpl-util-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(shape-test-suite cdpl-shape-shared cdpl-chem-shared cdpl-biomol-shared cdpl-util-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Shape" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/shape-test-suite")
