@@ -1,5 +1,5 @@
 ##
-# InstallExternalRuntimeDependencies.cmake
+# InstallExternalRuntimeDependencies.cmake.in
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

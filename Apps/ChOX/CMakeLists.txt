@@ -164,6 +164,9 @@ ELSE(APPLE)
     SET_TARGET_PROPERTIES(chox PROPERTIES OUTPUT_NAME ChOX)
 
     SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/ChOX.exe")
+
+    CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/WinDeployQt.cmake.in"
+      "${CMAKE_CURRENT_BINARY_DIR}/WinDeployQt.cmake" @ONLY)
   ELSE(WIN32)
     ADD_EXECUTABLE(chox ${chox_SRCS})
 
@@ -172,24 +175,28 @@ ELSE(APPLE)
     CONFIGURE_FILE(chox.desktop.in "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" @ONLY)
     CONFIGURE_FILE(qt.conf.in "${CMAKE_CURRENT_BINARY_DIR}/_qt.conf" @ONLY)
 
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/iconengines" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/imageformats" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/platforminputcontexts" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/platforms" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins" FILES_MATCHING PATTERN "libqxcb.*")
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/printsupport" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
-    INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/xcbglintegrations" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
+    IF(EXISTS "${QT_BIN_DIR}/../plugins")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/iconengines" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/imageformats" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/platforminputcontexts" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/platforms" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins" FILES_MATCHING PATTERN "libqxcb.*")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/printsupport" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
+      INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/xcbglintegrations" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
 
-    INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/_qt.conf" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" RENAME "qt.conf" COMPONENT Applications)
-    INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-    INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-    
-    SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins/platforms/libqxcb.so")
+      INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/_qt.conf" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" RENAME "qt.conf" COMPONENT Applications)
+      INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+      INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+      
+      SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins/platforms/libqxcb.so")
 
-    CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
-      "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" @ONLY)
+      CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" @ONLY)
 
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" COMPONENT Applications)
-
+      INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" COMPONENT Applications)
+    ELSE()
+      MESSAGE("!! Warning: Qt plugins directory not found -> can't fully deploy Qt applications.")
+    ENDIF(EXISTS "${QT_BIN_DIR}/../plugins")
+  
     SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
   ENDIF(WIN32)
 
@@ -203,10 +210,9 @@ IF(NOT APPLE)
   INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
   INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
 
-  IF(WIN32)
-    INCLUDE(WinDeployQt)
-    WinDeployQt(chox "${CMAKE_CURRENT_BINARY_DIR}" Applications "${CDPKIT_EXECUTABLE_INSTALL_DIR}")
-  ENDIF(WIN32)
+  IF(WIN32 AND WINDEPLOYQT_EXECUTABLE)
+    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/WinDeployQt.cmake" COMPONENT Applications)
+  ENDIF(WIN32 AND WINDEPLOYQT_EXECUTABLE)
 ELSE(NOT APPLE)
   INSTALL(TARGETS chox BUNDLE DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
   
