@@ -1,6 +1,14 @@
 master:
 
- - Support for building manylinux2014 compliant wheels
+v1.0.2:
+
+ - Wheel files built for Linux now support Python3.11
+ - Support for building wheel files on Windows
+ - Build system cleanup
+ 
+v1.0.1:
+
+ - Support for building manylinux2014 compliant wheel files for the CDPL Python bindings 
  - Documentation updates
 
 v1.0.0:
