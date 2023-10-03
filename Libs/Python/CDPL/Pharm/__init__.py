@@ -28,7 +28,3 @@ import CDPL.Biomol
 import CDPL.MolProp
 
 from ._pharm import *
-
-
-buildFeatureTypeHistogramString = generateFeatureTypeHistogramString
-buildInteractionPharmacophore = generateInteractionPharmacophore
