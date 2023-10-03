@@ -45,6 +45,7 @@ BOOST_PYTHON_MODULE(_grail)
     exportFeatureInteractionScoreGridCalculator();
     exportGRAILDataSetGenerator();
     exportGRAILDescriptorCalculator();
+    exportGRAILXDescriptorCalculator();
     exportBindingAffinityCalculator();
             
     exportAttributedGridFunctions();
