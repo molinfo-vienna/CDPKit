@@ -1,14 +1,20 @@
 master:
 
+ - GRAIL(X)DescriptorCalculator now only considers heavy atoms for the calculation of
+   environment HBA/HBD occupation scores which do not represent a complementary feature type
+ - New class 'GRAILDescriptorCalculator' now calculates a shorter descriptor (35 elements) with
+   not further subdivided H-bond donor/acceptor feature types
+ - Old class 'GRAILDescriptorCalculator' renamed into 'GRAILXDescriptorCalculator'
+
 v1.0.2:
 
- - Wheel files built for Linux now support Python3.11
- - Support for building wheel files on Windows
+ - Manylinux2014 wheel files now support Python3.11
+ - Added support for building CDPL Python bindings wheel files on Windows
  - Build system cleanup
  
 v1.0.1:
 
- - Support for building manylinux2014 compliant wheel files for the CDPL Python bindings 
+ - Added support for building manylinux2014 compliant CDPL Python bindings wheel files
  - Documentation updates
 
 v1.0.0:
