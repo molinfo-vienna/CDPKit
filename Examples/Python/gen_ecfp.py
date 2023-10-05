@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# descr_gen_ecfp.py 
+# gen_ecfp.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

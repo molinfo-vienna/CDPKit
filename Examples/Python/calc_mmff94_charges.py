@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# forcefield_mmff94_charges.py 
+# calc_mmff94_charges.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

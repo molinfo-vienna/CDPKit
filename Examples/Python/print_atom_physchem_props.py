@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# molprop_atom_elem_props.py 
+# print_atom_physchem_props.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -27,26 +27,17 @@ import CDPL.MolProp as MolProp
 
 # outputs the corresponding properties of each atom of the provided molecular graph
 def outputProperties(molgraph: Chem.MolecularGraph) -> None:
+    Chem.calcImplicitHydrogenCounts(molgraph, False)    # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False)   # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                  # perceive SSSR and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                  # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)           # perceive aromaticity and set corresponding atom and bond properties
+    Chem.calcTopologicalDistanceMatrix(molgraph, False) # calculate topological distance matrix and store as Chem.MolecularGraph property
+                                                        # (required for effective polarizability calculations)
     for atom in molgraph.atoms:
         print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
-        print('\tAtomic weight: %s' % str(MolProp.getAtomicWeight(atom)))
-        print('\tPTE IUPAC group: %s' % str(MolProp.getIUPACGroup(atom)))
-        print('\tPTE period: %s' % str(MolProp.getPeriod(atom)))
-        print('\tVdW radius: %s' % str(MolProp.getVdWRadius(atom)))
-        print('\tCovalent radius (bond order=1): %s' % str(MolProp.getCovalentRadius(atom, 1)))
-        print('\tCovalent radius (bond order=2): %s' % str(MolProp.getCovalentRadius(atom, 2)))
-        print('\tCovalent radius (bond order=3): %s' % str(MolProp.getCovalentRadius(atom, 3)))
-        print('\tAllred Rochow electronegativity: %s' % str(MolProp.getAllredRochowElectronegativity(atom)))
-        print('\tElement name: %s' % MolProp.getElementName(atom))
-        print('\tValence electron count: %s' % str(MolProp.getElementValenceElectronCount(atom)))
-        print('\tAtom type specifies chemical element: %s' % str(MolProp.isChemicalElement(atom)))
-        print('\tIs main group element: %s' % str(MolProp.isMainGroupElement(atom)))
-        print('\tIs metal: %s' % str(MolProp.isMetal(atom)))
-        print('\tIs transition metal: %s' % str(MolProp.isTransitionMetal(atom)))
-        print('\tIs non-metal: %s' % str(MolProp.isNonMetal(atom)))
-        print('\tIs semi-metal: %s' % str(MolProp.isSemiMetal(atom)))
-        print('\tIs halogen: %s' % str(MolProp.isHalogen(atom)))
-        print('\tIs noble gas: %s' % str(MolProp.isNobleGas(atom)))
+        print('\tHybrid polarizability: %s' % str(MolProp.getHybridPolarizability(atom, molgraph)))
+        print('\tEffective polarizability: %s' % str(MolProp.calcEffectivePolarizability(atom, molgraph)))
 
 def main() -> None:
     if len(sys.argv) < 2:
@@ -54,7 +45,7 @@ def main() -> None:
 
     # create reader for input molecules (format specified by file extension)
     reader = Chem.MoleculeReader(sys.argv[1]) 
-  
+    
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
     

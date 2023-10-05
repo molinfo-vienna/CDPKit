@@ -1,9 +1,9 @@
 Retrieving feature properties
 =============================
 
-.. literalinclude:: /examples/pharm_print_ph4_ftrs.py
+.. literalinclude:: /examples/print_ph4_ftrs.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/pharm_print_ph4_ftrs.py>`
+:download:`Download source file</examples/print_ph4_ftrs.py>`

@@ -1,9 +1,9 @@
 ChEMBL structure curation pipeline
 ==================================
 
-.. literalinclude:: /examples/chem_chembl_preproc.py
+.. literalinclude:: /examples/chembl_preproc.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/chem_chembl_preproc.py>`
+:download:`Download source file</examples/chembl_preproc.py>`

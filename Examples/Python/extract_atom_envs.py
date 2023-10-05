@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# chem_seq_mol_input.py 
+# extract_atom_envs.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -24,13 +24,29 @@ import os
 import CDPL.Chem as Chem
 
 
-# function called for each read molecule
-def procMolecule(mol: Chem.Molecule) -> None: 
-    print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, mol.numBonds))
+# extracts the structural environments of the atoms in the specified molecular graph and outputs them as SMILES strings
+def printEnvironments(molgraph: Chem.MolecularGraph) -> None: 
+    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
+
+    frag = Chem.Fragment()                            # for storing extracted atom environments
     
+    print('- Atom environments (radius = 3 bonds)')
+    
+    for atom in molgraph.atoms:
+        Chem.getEnvironment(atom, molgraph, 3, frag)     # extract environment of atom reaching out up to three bonds
+        Chem.perceiveComponents(frag, False)             # perceive molecular graph components (required for SMILES generation)
+
+        smiles = Chem.generateSMILES(frag, False, False) # generate non-canonical SMILES string with explicit hydrogen atoms
+        
+        print('Atom #%s: %s' % (str(molgraph.getAtomIndex(atom)), smiles))
+
 def main() -> None:
     if len(sys.argv) < 2:
-        sys.exit('Usage: %s <input mol. file>' % sys.argv[0])
+        sys.exit('Usage: %s <mol. input file>' % sys.argv[0])
 
     # create reader for input molecules (format specified by file extension)
     reader = Chem.MoleculeReader(sys.argv[1]) 
@@ -42,7 +58,7 @@ def main() -> None:
     try:
         while reader.read(mol): 
             try:
-                procMolecule(mol)
+                printEnvironments(mol)
             except Exception as e:
                 sys.exit('Error: processing of molecule failed: ' + str(e))
                 

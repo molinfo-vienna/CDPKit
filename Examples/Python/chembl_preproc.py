@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# chem_chembl_preproc.py 
+# chembl_preproc.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

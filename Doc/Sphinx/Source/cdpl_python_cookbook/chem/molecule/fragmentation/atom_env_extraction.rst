@@ -1,9 +1,9 @@
 Extraction of atom environments
 ===============================
 
-.. literalinclude:: /examples/chem_atom_env_extraction.py
+.. literalinclude:: /examples/extract_atom_envs.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/chem_atom_env_extraction.py>`
+:download:`Download source file</examples/extract_atom_envs.py>`

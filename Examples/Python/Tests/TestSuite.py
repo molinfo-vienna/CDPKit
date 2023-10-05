@@ -97,42 +97,42 @@ def checkScriptExecution(script_name, args):
 if __name__ == '__main__':
     errors = False
     
-    errors |= checkScriptOutput('chem_seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('chem_atom_env_extraction', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('chem_sd_proc', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptFileOutput('chem_chembl_preproc', outputFilePath('chem_chembl_preproc.sdf'),
-                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_chembl_preproc.sdf') ])
-    errors |= checkScriptFileOutput('chem_prot_phys_cond', outputFilePath('chem_prot_phys_cond.smi'),
-                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_prot_phys_cond.smi') ])
-    errors |= checkScriptFileOutput('chem_substruct_filter', outputFilePath('chem_substruct_filter.smi'),
-                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_substruct_filter.smi'),
+    errors |= checkScriptOutput('seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('extract_atom_envs', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('sd_proc', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptFileOutput('chembl_preproc', outputFilePath('chembl_preproc.sdf'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chembl_preproc.sdf') ])
+    errors |= checkScriptFileOutput('prot_phys_cond', outputFilePath('prot_phys_cond.smi'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('prot_phys_cond.smi') ])
+    errors |= checkScriptFileOutput('substruct_filter', outputFilePath('substruct_filter.smi'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('substruct_filter.smi'),
                                       '-p', 'c1ccccc1' ])
  
-    errors |= checkScriptFileOutput('pharm_gen_mol_ph4s', outputFilePath('pharm_gen_mol_ph4s.pml'),
-                                    [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('pharm_gen_mol_ph4s.pml') ])
-    errors |= checkScriptOutput('pharm_gen_ia_ph4s',
+    errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
+                                    [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
+    errors |= checkScriptOutput('gen_ia_ph4s',
                                     [ '-r', testDataFilePath('1ke6.pdb'), '-l', testDataFilePath('1ke6_B_LS2.sdf'), '-s', 'LS2',
-                                      '-o', outputFilePath('pharm_gen_ia_ph4s.pml'), '-x' ])
-    errors |= checkScriptFileOutput('pharm_align_mols', outputFilePath('pharm_align_mols.sdf'),
-                                    [ '-r', outputFilePath('pharm_gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
-                                      '-o', outputFilePath('pharm_align_mols.sdf'), '-n', '10', '-d', '0.5' ])
-    errors |= checkScriptOutput('pharm_seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
-    errors |= checkScriptOutput('pharm_print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
+                                      '-o', outputFilePath('gen_ia_ph4s.pml'), '-x' ])
+    errors |= checkScriptFileOutput('align_mols_to_ph4', outputFilePath('align_mols_to_ph4.sdf'),
+                                    [ '-r', outputFilePath('gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
+                                      '-o', outputFilePath('align_mols_to_ph4.sdf'), '-n', '10', '-d', '0.5' ])
+    errors |= checkScriptOutput('seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
+    errors |= checkScriptOutput('print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 
-    errors |= checkScriptOutput('molprop_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Morphine.jme') ])
-    errors |= checkScriptOutput('molprop_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('molprop_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('molprop_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('print_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('print_atom_class_props', [ testDataFilePath('Morphine.jme') ])
+    errors |= checkScriptOutput('print_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('print_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('print_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
 
-    errors |= checkScriptFileOutput('descr_gen_ecfp', outputFilePath('test.out'),
+    errors |= checkScriptFileOutput('gen_ecfp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out'), '-y', '-c' ])
-    errors |= checkScriptOutput('descr_gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
 
-    errors |= checkScriptOutput('forcefield_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
-    errors |= checkScriptFileOutput('confgen_ensembles', outputFilePath('test.mol2'),
+    errors |= checkScriptFileOutput('gen_confs', outputFilePath('test.mol2'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
-    errors |= checkScriptFileOutput('confgen_3d_structs', outputFilePath('test.mol2'),
+    errors |= checkScriptFileOutput('gen_3d_structs', outputFilePath('test.mol2'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2') ])
     sys.exit(errors)

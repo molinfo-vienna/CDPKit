@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_align_mols.py 
+# align_mols_to_ph4.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

@@ -1,9 +1,9 @@
 Molecule to reference pharmacophore alignment
 =============================================
 
-.. literalinclude:: /examples/pharm_align_mols.py
+.. literalinclude:: /examples/align_mols_to_ph4.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/pharm_align_mols.py>`
+:download:`Download source file</examples/align_mols_to_ph4.py>`

@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# chem_prot_phys_cond.py 
+# prot_phys_cond.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# chem_sd_proc.py 
+# sd_proc.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

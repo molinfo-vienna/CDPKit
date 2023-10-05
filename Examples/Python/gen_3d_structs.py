@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# confgen_ensembles.py 
+# gen_3d_structs.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -26,25 +26,22 @@ import CDPL.Chem as Chem
 import CDPL.ConfGen as ConfGen
 
 
-# generates a conformer ensemble of the argument molecule using
-# the provided initialized ConfGen.ConformerGenerator instance
-def genConfEnsemble(mol: Chem.Molecule, conf_gen: ConfGen.ConformerGenerator) -> (int, int):
-    # prepare the molecule for conformer generation
+# generates a low-energy 3D structure of the argument molecule using
+# the provided initialized ConfGen.StructureGenerator instance
+def gen3DStructure(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -> int:
+    # prepare the molecule for 3D structure generation
     ConfGen.prepareForConformerGeneration(mol) 
 
-    # generate the conformer ensemble
-    status = conf_gen.generate(mol)             
-    num_confs = conf_gen.getNumConformers()
+    # generate the 3D structure
+    status = struct_gen.generate(mol)             
     
     # if sucessful, store the generated conformer ensemble as
     # per atom 3D coordinates arrays (= the way conformers are represented in CDPKit)
-    if status == ConfGen.ReturnCode.SUCCESS or status == ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
-        conf_gen.setConformers(mol)                
-    else:
-        num_confs = 0
+    if status == ConfGen.ReturnCode.SUCCESS:
+        struct_gen.setCoordinates(mol)                
         
-    # return status code and the number of generated conformers
-    return (status, num_confs)
+    # return status code
+    return status
 
 def main() -> None:
     args = parseArgs()
@@ -52,17 +49,17 @@ def main() -> None:
     # create reader for input molecules (format specified by file extension)
     reader = Chem.MoleculeReader(args.in_file) 
 
-    # create writer for the generated conformer ensembles (format specified by file extension)
+    # create writer for the generated 3D structures (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
-    # create and initialize an instance of the class ConfGen.ConformerGenerator which
-    # will perform the actual conformer ensemble generation work
-    conf_gen = ConfGen.ConformerGenerator()
+    # export only a single 3D structure (in case of multi-conf. input molecules)
+    Chem.setMultiConfExportParameter(writer, False)
+    
+    # create and initialize an instance of the class ConfGen.StructureGenerator which will
+    # perform the actual 3D structure generation work
+    struct_gen = ConfGen.StructureGenerator()
 
-    conf_gen.settings.timeout = args.max_time * 1000          # apply the -t argument
-    conf_gen.settings.minRMSD = args.min_rmsd                 # apply the -r argument
-    conf_gen.settings.energyWindow = args.e_window            # apply the -e argument
-    conf_gen.settings.maxNumOutputConformers = args.max_confs # apply the -n argument
+    struct_gen.settings.timeout = args.max_time * 1000 # apply the -t argument
 
     # dictionary mapping status codes to human readable strings
     status_to_str = { ConfGen.ReturnCode.UNINITIALIZED                  : 'uninitialized',
@@ -93,32 +90,28 @@ def main() -> None:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
             if not args.quiet:
-                print('- Generating conformers for molecule %s...' % mol_id)
+                print('- Generating 3D structure of molecule %s...' % mol_id)
 
             try:
-                # generate conformer ensemble for read molecule
-                status, num_confs = genConfEnsemble(mol, conf_gen) 
+                # generate 3D structure of the read molecule
+                status = gen3DStructure(mol, struct_gen) 
 
                 # check for severe error reported by status code
-                if status != ConfGen.ReturnCode.SUCCESS and status != ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
+                if status != ConfGen.ReturnCode.SUCCESS:
                     if args.quiet:
-                        print('Error: conformer ensemble generation for molecule %s failed: %s' % (mol_id, status_to_str[status]))
+                        print('Error: 3D structure generation for molecule %s failed: %s' % (mol_id, status_to_str[status]))
                     else:
-                        print(' -> Conformer ensemble generation failed: %s' % status_to_str[status])
+                        print(' -> 3D structure generation failed: %s' % status_to_str[status])
+                else: 
+                    # enforce the output of 3D coordinates in case of MDL file formats
+                    Chem.setMDLDimensionality(mol, 3)
 
-                elif not args.quiet:  # arrives here only if no severe error occurred
-                    if status == ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
-                        print(' -> Generated %s conformers (warning: too much top. symmetry - output ensemble may contain duplicates)' % str(num_confs))
-                    else:
-                        print(' -> Generated %s conformers' % str(num_confs))
-                        
-                # output generated ensemble (if available)
-                if num_confs > 0:
+                    # output the generated 3D structure                    
                     if not writer.write(mol):   
-                        sys.exit('Error: output of conformer ensemble for molecule %s failed' % mol_id)
+                        sys.exit('Error: writing 3D structure of molecule %s failed' % mol_id)
                         
             except Exception as e:
-                sys.exit('Error: conformer ensemble generation or output for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: 3D structure generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
             i += 1
                 
@@ -141,20 +134,6 @@ def parseArgs() -> argparse.Namespace:
                         required=True,
                         metavar='<file>',
                         help='Conformer ensemble output file')
-    parser.add_argument('-e',
-                        dest='e_window',
-                        required=False,
-                        metavar='<float>',
-                        type=float,
-                        default=20.0,
-                        help='Output conformer energy window (default: 20.0)')
-    parser.add_argument('-r',
-                        dest='min_rmsd',
-                        required=False,
-                        metavar='<float>',
-                        type=float,
-                        default=0.5,
-                        help='Output conformer RMSD threshold (default: 0.5)')
     parser.add_argument('-t',
                         dest='max_time',
                         required=False,
@@ -162,12 +141,6 @@ def parseArgs() -> argparse.Namespace:
                         type=int,
                         default=3600,
                         help='Max. allowed molecule processing time (default: 3600 sec)')
-    parser.add_argument('-n',
-                        dest='max_confs',
-                        required=False,
-                        metavar='<int>',
-                        type=int,
-                        help='Max. output ensemble size (default: 100)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,

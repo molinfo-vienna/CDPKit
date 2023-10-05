@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_gen_ia_ph4s.py 
+# gen_ia_ph4s.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

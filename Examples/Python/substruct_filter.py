@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# chem_substruct_filter.py 
+# substruct_filter.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

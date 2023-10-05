@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# molprop_atom_class_props.py 
+# print_atom_class_props.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

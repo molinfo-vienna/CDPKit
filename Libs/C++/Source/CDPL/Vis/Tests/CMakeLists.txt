@@ -46,11 +46,6 @@ set(test-suite_SRCS
     TextLabelPrimitive2DTest.cpp
     EllipsePrimitive2DTest.cpp
     DataFormatTest.cpp
-    #ControlParameterFunctionsTest.cpp
-    #AtomFunctionsTest.cpp
-    #BondFunctionsTest.cpp
-    #MolecularGraphFunctionsTest.cpp
-    #ReactionFunctionsTest.cpp
     Utilities.cpp
    )
 
@@ -118,6 +113,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(vis-test-suite ${test-suite_SRCS})
 
-target_link_libraries(vis-test-suite cdpl-vis-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(vis-test-suite cdpl-vis-shared cdpl-vis-qt-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 ADD_TEST("CDPL::Vis" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/vis-test-suite")

@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_seq_ph4_input.py 
+# seq_ph4_input.py 
 #
 # This file is part of the Pharmical Data Processing Toolkit
 #

@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_print_ph4_ftrs.py 
+# print_ph4_ftrs.py 
 #
 # This file is part of the Pharmical Data Processing Toolkit
 #
