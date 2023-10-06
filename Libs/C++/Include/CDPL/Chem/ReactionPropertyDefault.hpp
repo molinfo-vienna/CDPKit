@@ -47,12 +47,12 @@ namespace CDPL
         namespace ReactionPropertyDefault
         {
 
-            extern CDPL_CHEM_API const std::string NAME;
+            extern CDPL_CHEM_API const std::string                        NAME;
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
             extern CDPL_CHEM_API const unsigned int                       MDL_RXN_FILE_VERSION;
-            extern CDPL_CHEM_API const std::string MDL_COMMENT;
-            extern CDPL_CHEM_API const std::string MDL_PROGRAM_NAME;
-            extern CDPL_CHEM_API const std::string MDL_USER_INITIALS;
+            extern CDPL_CHEM_API const std::string                        MDL_COMMENT;
+            extern CDPL_CHEM_API const std::string                        MDL_PROGRAM_NAME;
+            extern CDPL_CHEM_API const std::string                        MDL_USER_INITIALS;
         } // namespace ReactionPropertyDefault
     } // namespace Chem
 } // namespace CDPL

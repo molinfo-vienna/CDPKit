@@ -48,12 +48,12 @@ namespace CDPL
         namespace BondPropertyDefault
         {
 
-            extern CDPL_CHEM_API const std::size_t      ORDER;
-            extern CDPL_CHEM_API const unsigned int     DIRECTION;
-            extern CDPL_CHEM_API const unsigned int     STEREO_2D_FLAG;
-            extern CDPL_CHEM_API const StereoDescriptor STEREO_DESCRIPTOR;
-            extern CDPL_CHEM_API const unsigned int     REACTION_CENTER_STATUS;
-            extern CDPL_CHEM_API const unsigned int     SYBYL_TYPE;
+            extern CDPL_CHEM_API const std::size_t                        ORDER;
+            extern CDPL_CHEM_API const unsigned int                       DIRECTION;
+            extern CDPL_CHEM_API const unsigned int                       STEREO_2D_FLAG;
+            extern CDPL_CHEM_API const StereoDescriptor                   STEREO_DESCRIPTOR;
+            extern CDPL_CHEM_API const unsigned int                       REACTION_CENTER_STATUS;
+            extern CDPL_CHEM_API const unsigned int                       SYBYL_TYPE;
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
         } // namespace BondPropertyDefault
     } // namespace Chem
