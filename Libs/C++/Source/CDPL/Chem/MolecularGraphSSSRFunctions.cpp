@@ -27,11 +27,41 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateSSSR(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasSSSR(src_molgraph))
+            return;
+
+        const FragmentList::SharedPointer& src_rings = getSSSR(src_molgraph);
+        FragmentList::SharedPointer tgt_rings(new FragmentList());
+
+        translateFragments(src_molgraph, *src_rings, tgt_mol, *tgt_rings);
+        setSSSR(tgt_mol, tgt_rings);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateSSSR);
+        }
+    } init;
+}
 
 
 Chem::FragmentList::SharedPointer Chem::perceiveSSSR(const MolecularGraph& molgraph)
@@ -83,28 +113,5 @@ Chem::FragmentList::SharedPointer Chem::extractSSSRSubset(const MolecularGraph& 
 
     setSSSR(tgt_molgraph, tgt_sssr);
 
-    return tgt_sssr;
-}
-
-Chem::FragmentList::SharedPointer Chem::copySSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph)
-{
-    const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
-    FragmentList::SharedPointer tgt_sssr(new FragmentList());
-
-    for (FragmentList::ConstElementIterator it = src_sssr->getElementsBegin(), end = src_sssr->getElementsEnd(); it != end; ++it) {
-        const Fragment& src_ring = *it;
-        Fragment::SharedPointer tgt_ring(new Fragment());
-
-        for (Fragment::ConstAtomIterator a_it = src_ring.getAtomsBegin(), a_end = src_ring.getAtomsEnd(); a_it != a_end; ++a_it)
-            tgt_ring->addAtom(tgt_molgraph.getAtom(src_molgraph.getAtomIndex(*a_it)));
-
-        for (Fragment::ConstBondIterator b_it = src_ring.getBondsBegin(), b_end = src_ring.getBondsEnd(); b_it != b_end; ++b_it)
-            tgt_ring->addBond(tgt_molgraph.getBond(src_molgraph.getBondIndex(*b_it)));
-
-        tgt_sssr->addElement(tgt_ring);
-    }
-
-    setSSSR(tgt_molgraph, tgt_sssr);
-    
     return tgt_sssr;
 }

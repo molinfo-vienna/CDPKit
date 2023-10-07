@@ -29,10 +29,40 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateComponentGroups(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasComponentGroups(src_molgraph))
+            return;
+
+        const FragmentList::SharedPointer& src_comp_grps = getComponentGroups(src_molgraph);
+        FragmentList::SharedPointer tgt_comp_grps(new FragmentList());
+
+        translateFragments(src_molgraph, *src_comp_grps, tgt_mol, *tgt_comp_grps);
+        setComponentGroups(tgt_mol, tgt_comp_grps);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateComponentGroups);
+        }
+    } init;
+}
 
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const MolecularGraph& molgraph)

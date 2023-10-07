@@ -27,9 +27,39 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/CompleteRingSet.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateRings(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasRings(src_molgraph))
+            return;
+
+        const FragmentList::SharedPointer& src_rings = getRings(src_molgraph);
+        FragmentList::SharedPointer tgt_rings(new FragmentList());
+
+        translateFragments(src_molgraph, *src_rings, tgt_mol, *tgt_rings);
+        setRings(tgt_mol, tgt_rings);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateRings);
+        }
+    } init;
+}
 
 
 Chem::FragmentList::SharedPointer Chem::perceiveRings(const MolecularGraph& molgraph)

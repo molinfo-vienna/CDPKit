@@ -160,6 +160,8 @@ namespace
         Reaction::SharedPointer clone() const {
             return this->get_override("clone")();
         }
+
+        using Reaction::invokeCopyPostprocessingFunctions;
     };
 }
 
@@ -224,6 +226,10 @@ void CDPLPythonChem::exportReaction()
              python::with_custodian_and_ward_postcall<0, 1>())
         .def("getProducts", &createComponentSequence<Chem::ReactionRole::PRODUCT>, python::arg("self"), 
              python::with_custodian_and_ward_postcall<0, 1>())
+        .def("registerCopyPostprocessingFunction", &Chem::Reaction::registerCopyPostprocessingFunction, python::arg("func"))
+        .staticmethod("registerCopyPostprocessingFunction")
+        .def("invokeCopyPostprocessingFunctions", &ReactionWrapper::invokeCopyPostprocessingFunctions,
+             (python::arg("self"), python::arg("src_rxn")))
         .def("__getitem__", getComponentFunc, (python::arg("self"), python::arg("idx")), 
              python::return_internal_reference<1>())
         .def("__delitem__", removeComponentFunc, (python::arg("self"), python::arg("idx")))

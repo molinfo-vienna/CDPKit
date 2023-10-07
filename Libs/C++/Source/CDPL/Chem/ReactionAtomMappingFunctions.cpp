@@ -38,6 +38,43 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    void translateAtomMapping(Chem::Reaction& tgt_rxn, const Chem::Reaction& src_rxn)
+    {
+        using namespace Chem;
+        
+        if (tgt_rxn.getNumComponents() != src_rxn.getNumComponents() ||
+            !hasAtomMapping(src_rxn))
+            return;
+
+        const AtomMapping::SharedPointer& src_mapping  = getAtomMapping(src_rxn);
+        AtomMapping::SharedPointer tgt_mapping(new AtomMapping());
+
+        for (const auto& mpg : *src_mapping) {
+            if (!mpg.first || !mpg.second)
+                continue;
+ 
+            std::size_t atom1_comp_idx = src_rxn.getComponentIndex(mpg.first->getMolecule());
+            std::size_t atom2_comp_idx = src_rxn.getComponentIndex(mpg.second->getMolecule());
+
+            tgt_mapping->insertEntry(&tgt_rxn.getComponent(atom1_comp_idx).getAtom(mpg.first->getIndex()),
+                                     &tgt_rxn.getComponent(atom2_comp_idx).getAtom(mpg.second->getIndex()));
+        }
+
+        setAtomMapping(tgt_rxn, tgt_mapping);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Reaction::registerCopyPostprocessingFunction(&translateAtomMapping);
+        }
+    } init;
+}
+
 
 Chem::AtomMapping::SharedPointer Chem::perceiveAtomMapping(const Reaction& rxn)
 {

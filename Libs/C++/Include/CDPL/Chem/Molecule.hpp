@@ -30,6 +30,7 @@
 #define CDPL_CHEM_MOLECULE_HPP
 
 #include <memory>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -73,6 +74,8 @@ namespace CDPL
              */
             typedef BondContainer::BondIterator BondIterator;
 
+            typedef std::function<void(Molecule&, const MolecularGraph&)> CopyPostprocessingFunction;
+            
             /**
              * \brief Virtual destructor.
              *
@@ -338,6 +341,11 @@ namespace CDPL
              * \return A reference to itself.
              */
             Molecule& operator-=(const MolecularGraph& molgraph);
+
+            static void registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func);
+
+          protected:
+            void invokeCopyPostprocessingFunctions(const MolecularGraph& src_molgraph);
         };
     } // namespace Chem
 } // namespace CDPL

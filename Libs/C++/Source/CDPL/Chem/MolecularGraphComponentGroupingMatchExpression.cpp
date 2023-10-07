@@ -43,10 +43,15 @@ Chem::MolecularGraphComponentGroupingMatchExpression::MolecularGraphComponentGro
 Chem::MolecularGraphComponentGroupingMatchExpression::MolecularGraphComponentGroupingMatchExpression(const MolecularGraphComponentGroupingMatchExpression& rhs):
     compGrouping(rhs.compGrouping) {}
 
-bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const MolecularGraph&, const MolecularGraph& target_molgraph, 
+bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const MolecularGraph& query_molgraph, const MolecularGraph& target_molgraph, 
                                                                       const AtomBondMapping& mapping, const Base::Any&) const
 {
-    if (!compGrouping || compGrouping->getSize() == 0)
+    FragmentList::SharedPointer comp_grouping;
+    
+    if (!compGrouping)
+        comp_grouping = getComponentGroups(query_molgraph);
+    
+    if (!comp_grouping || comp_grouping->getSize() == 0)
         return true;
 
     const FragmentList& target_comps = *getComponents(target_molgraph);
@@ -61,9 +66,9 @@ bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const Mole
 
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-    FragmentList::ConstElementIterator comp_grps_end = compGrouping->getElementsEnd();
+    FragmentList::ConstElementIterator comp_grps_end = comp_grouping->getElementsEnd();
 
-    for (FragmentList::ConstElementIterator cg_it = compGrouping->getElementsBegin(); cg_it != comp_grps_end; ) {
+    for (FragmentList::ConstElementIterator cg_it = comp_grouping->getElementsBegin(); cg_it != comp_grps_end; ) {
         const Fragment& comp_grp = *cg_it;
         const Atom* first_mpd_atom = 0;
 

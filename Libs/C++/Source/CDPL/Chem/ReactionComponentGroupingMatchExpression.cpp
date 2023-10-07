@@ -34,6 +34,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
 
 
 using namespace CDPL;
@@ -45,10 +46,15 @@ Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchEx
 Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs):
     compGrouping(rhs.compGrouping) {}
 
-bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, 
+bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction& query_rxn, const Reaction& target_rxn, 
                                                                 const AtomBondMapping& mapping, const Base::Any&) const
 {
-    if (!compGrouping || compGrouping->getSize() == 0)
+    FragmentList::SharedPointer comp_grouping;
+
+    if (!compGrouping)
+        comp_grouping = getComponentGroups(query_rxn);
+    
+    if (!comp_grouping || comp_grouping->getSize() == 0)
         return true;
 
     std::lock_guard<std::mutex> lock(mutex);
@@ -66,9 +72,9 @@ bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&,
 
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-    FragmentList::ConstElementIterator comp_grps_end = compGrouping->getElementsEnd();
+    FragmentList::ConstElementIterator comp_grps_end = comp_grouping->getElementsEnd();
 
-    for (FragmentList::ConstElementIterator cg_it = compGrouping->getElementsBegin(); cg_it != comp_grps_end; ) {
+    for (FragmentList::ConstElementIterator cg_it = comp_grouping->getElementsBegin(); cg_it != comp_grps_end; ) {
         const Fragment& comp_grp = *cg_it;
         const Atom* first_mpd_atom = 0;
 

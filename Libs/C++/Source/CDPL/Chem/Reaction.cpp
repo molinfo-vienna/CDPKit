@@ -24,6 +24,8 @@
  
 #include "StaticInit.hpp"
 
+#include <vector>
+
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
@@ -50,6 +52,15 @@ namespace
             default:
                 throw Base::ValueError("Reaction: invalid reaction role");
         }
+    }
+
+    typedef std::vector<Chem::Reaction::CopyPostprocessingFunction> CopyPostprocFuncList;
+
+    CopyPostprocFuncList& getCopyPostprocFuncs()
+    {
+        static CopyPostprocFuncList func_list;
+
+        return func_list;
     }
 }
 
@@ -151,6 +162,18 @@ Chem::Reaction& Chem::Reaction::operator=(const Reaction& rxn)
     copy(rxn);
 
     return *this;
+}
+
+void Chem::Reaction::registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func)
+{
+    getCopyPostprocFuncs().emplace_back(func);
+}
+
+
+void Chem::Reaction::invokeCopyPostprocessingFunctions(const Reaction& src_rxn)
+{
+    for (const auto& func : getCopyPostprocFuncs())
+        func(*this, src_rxn);
 }
 
 

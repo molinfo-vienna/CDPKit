@@ -118,6 +118,8 @@ namespace
         MolecularGraph::SharedPointer clone() const {
             return this->get_override("clone")();
         }
+
+        using Molecule::invokeCopyPostprocessingFunctions;
     };
 }
 
@@ -170,6 +172,10 @@ void CDPLPythonChem::exportMolecule()
              python::with_custodian_and_ward_postcall<0, 1>())
         .def("getBonds", &createMutableBondSequence<Chem::Molecule>, python::arg("self"),
              python::with_custodian_and_ward_postcall<0, 1>())
+        .def("registerCopyPostprocessingFunction", &Chem::Molecule::registerCopyPostprocessingFunction, python::arg("func"))
+        .staticmethod("registerCopyPostprocessingFunction")
+        .def("invokeCopyPostprocessingFunctions", &MoleculeWrapper::invokeCopyPostprocessingFunctions,
+             (python::arg("self"), python::arg("src_molgraph")))
         .def("__iadd__", addMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
         .def("__iadd__", addMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
         .def("__isub__", &Chem::Molecule::operator-=, (python::arg("self"), python::arg("molgraph")), python::return_self<>())

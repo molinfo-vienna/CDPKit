@@ -49,30 +49,6 @@ python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));
 python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
 python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME))); 
 
-#define EXPORT_BOND_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                    \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
-            python::return_value_policy<python::copy_const_reference>());                                    \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
-python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
-python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME))); 
-
-#define EXPORT_BOND_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
-            python::return_value_policy<python::copy_const_reference,                                        \
-            python::with_custodian_and_ward_postcall<0, 1> >());                                             \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
-python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
-python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),    \
-            python::with_custodian_and_ward<1, 2>());                                                            
-
-#define EXPORT_BOND_FUNCS_INT_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                  \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
-            python::return_internal_reference<1>());                                                         \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
-python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
-python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),    \
-            python::with_custodian_and_ward<1, 2>());  
-
 
 namespace
 {

@@ -268,12 +268,6 @@ void Chem::ProtonationStateStandardizer::copyMolecule(const Molecule& mol, Molec
 {
     mol_copy.copy(mol);
 
-    copyAtomStereoDescriptors(mol, mol_copy);
-    copyBondStereoDescriptors(mol, mol_copy);
-
-    if (hasSSSR(mol))
-        copySSSR(mol, mol_copy);
-
     clearComponents(mol_copy);
 }
 

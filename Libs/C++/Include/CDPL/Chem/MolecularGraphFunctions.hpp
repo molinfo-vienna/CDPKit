@@ -116,8 +116,6 @@ namespace CDPL
 
         CDPL_CHEM_API FragmentList::SharedPointer extractSSSRSubset(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite);
 
-        CDPL_CHEM_API FragmentList::SharedPointer copySSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph);
-
 
         CDPL_CHEM_API const Fragment::SharedPointer& getCyclicSubstructure(const MolecularGraph& molgraph);
 
@@ -504,11 +502,11 @@ namespace CDPL
                                                   FragmentList& cont_frag_list, bool append = false, bool atoms = true,
                                                   bool bonds = true);
 
-        CDPL_CHEM_API void copyAtomStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph,
-                                                     std::size_t atom_idx_offs = 0);
-
-        CDPL_CHEM_API void copyBondStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph,
-                                                     std::size_t atom_idx_offs = 0, std::size_t bond_idx_offs = 0);
+        CDPL_CHEM_API void translateFragment(const MolecularGraph& src_molgraph, const Fragment& src_frag,
+                                             const MolecularGraph& tgt_molgraph, Fragment& tgt_frag, bool append = false);
+        
+        CDPL_CHEM_API void translateFragments(const MolecularGraph& src_molgraph, const FragmentList& src_frag_list,
+                                              const MolecularGraph& tgt_molgraph, FragmentList& tgt_frag_list, bool append = false);
 
         CDPL_CHEM_API void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list,
                                               const Util::BitSet& split_bond_mask, bool append = false);

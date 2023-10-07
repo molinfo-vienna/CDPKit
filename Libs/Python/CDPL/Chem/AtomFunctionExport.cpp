@@ -76,14 +76,6 @@ python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("atom"));
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("atom"));                            \
 python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("atom"), python::arg(#ARG_NAME))); 
 
-#define EXPORT_ATOM_FUNCS_INT_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                  \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("atom"),                              \
-            python::return_internal_reference<1>());                                                         \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("atom"));                             \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("atom"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("atom"), python::arg(#ARG_NAME)),       \
-            python::with_custodian_and_ward<1, 2>());  
-
 
 namespace
 {
@@ -340,7 +332,7 @@ void CDPLPythonChem::exportAtomFunctions()
     EXPORT_ATOM_FUNCS(MDLStereoCareFlag, flag)
     EXPORT_ATOM_FUNCS_COPY_REF_CW(MatchExpression, expr)
     EXPORT_ATOM_FUNCS_COPY_REF(MatchExpressionString, expr_str)
-    EXPORT_ATOM_FUNCS_INT_REF_CW(StereoDescriptor, descr)
+    EXPORT_ATOM_FUNCS_INT_REF(StereoDescriptor, descr)
     EXPORT_ATOM_FUNCS(SybylType, type)
     EXPORT_ATOM_FUNCS(MOL2Charge, charge)
     EXPORT_ATOM_FUNCS_COPY_REF(MOL2Name, name)

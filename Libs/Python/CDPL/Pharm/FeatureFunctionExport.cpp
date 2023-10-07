@@ -61,8 +61,7 @@ python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"
             python::with_custodian_and_ward_postcall<0, 1> >());                                              \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
 python::def("clear"#FUNC_SUFFIX, &Pharm::clear##FUNC_SUFFIX, python::arg("feature"));                         \
-python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)),    \
-            python::with_custodian_and_ward<1, 2>());                                                            
+python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)));
 
 
 namespace

@@ -30,6 +30,7 @@
 #define CDPL_CHEM_REACTION_HPP
 
 #include <memory>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
@@ -69,6 +70,8 @@ namespace CDPL
              */
             typedef Util::IndexedElementIterator<Molecule, ComponentAccessor> ComponentIterator;
 
+            typedef std::function<void(Reaction&, const Reaction&)> CopyPostprocessingFunction;
+  
             /**
              * \brief Virtual destructor.
              */
@@ -333,6 +336,11 @@ namespace CDPL
              */
             Reaction& operator=(const Reaction& rxn);
 
+            static void registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func);
+
+          protected:
+            void invokeCopyPostprocessingFunctions(const Reaction& src_rxn);
+            
           private:
             class CDPL_CHEM_API ConstComponentAccessor
             {

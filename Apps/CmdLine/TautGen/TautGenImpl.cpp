@@ -305,23 +305,20 @@ private:
                 stdTautomer = taut;
                 tautScore = score;
                 hashCode = hash;
-
-                copyAtomStereoDescriptors(stdTautomer, taut, 0);
-                copyBondStereoDescriptors(stdTautomer, taut, 0, 0);
             }
         }
 
         return (parent->maxNumTautomers == 0 || numGenMolTauts < parent->maxNumTautomers);
     }
 
-    void initMolecule(CDPL::Chem::MolecularGraph& molgraph, bool override) const {
+    void initMolecule(CDPL::Chem::MolecularGraph& molgraph, bool overwrite) const {
         using namespace CDPL;
         using namespace Chem;
 
-        setRingFlags(molgraph, override);
-        perceiveHybridizationStates(molgraph, override);
-        perceiveSSSR(molgraph, override);
-        setAromaticityFlags(molgraph, override);
+        setRingFlags(molgraph, overwrite);
+        perceiveHybridizationStates(molgraph, overwrite);
+        perceiveSSSR(molgraph, overwrite);
+        setAromaticityFlags(molgraph, overwrite);
     }
 
     void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, std::uint64_t hash) {

@@ -69,13 +69,12 @@ namespace
             if (constraint.getID() == ReactionMatchConstraint::COMPONENT_GROUPING && 
                 constraint.getRelation() == MatchConstraint::EQUAL) {
 
-                const FragmentList::SharedPointer& comp_groups = 
-                    rxn.getProperty<FragmentList::SharedPointer>(ReactionProperty::COMPONENT_GROUPS);
+                const FragmentList::SharedPointer& comp_groups = getComponentGroups(rxn);
 
                 if (comp_groups->getSize() == 0)
                     continue;
 
-                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionComponentGroupingMatchExpression(comp_groups));
+                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionComponentGroupingMatchExpression(FragmentList::SharedPointer()));
                 
                 expr_list_ptr->addElement(expr_ptr);
                 continue;
@@ -84,13 +83,12 @@ namespace
             if (constraint.getID() == ReactionMatchConstraint::ATOM_MAPPING && 
                 constraint.getRelation() == MatchConstraint::EQUAL) {
 
-                const AtomMapping::SharedPointer& atom_mapping = 
-                    rxn.getProperty<AtomMapping::SharedPointer>(ReactionProperty::ATOM_MAPPING);
+                const AtomMapping::SharedPointer& atom_mapping = getAtomMapping(rxn);
 
                 if (atom_mapping->getSize() == 0)
                     continue;
 
-                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionAtomMappingMatchExpression(atom_mapping));
+                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionAtomMappingMatchExpression(AtomMapping::SharedPointer()));
 
                 expr_list_ptr->addElement(expr_ptr);
                 continue;

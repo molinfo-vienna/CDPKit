@@ -40,13 +40,18 @@ using namespace CDPL;
 Chem::ReactionAtomMappingMatchExpression::ReactionAtomMappingMatchExpression(const AtomMapping::SharedPointer& atom_mapping):
     atomMapping(atom_mapping) {}
 
-bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, const AtomBondMapping& mapping, 
+bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping, 
                                                           const Base::Any& matched_rxn_roles) const
 {
     if (matched_rxn_roles.isEmpty())
         return true;
 
-    if (!atomMapping || atomMapping->getSize() == 0)
+    AtomMapping::SharedPointer qry_atom_mapping;
+
+    if (!atomMapping)
+        qry_atom_mapping = getAtomMapping(query_rxn);
+    
+    if (!qry_atom_mapping || qry_atom_mapping->getSize() == 0)
         return true;
 
     if ((matched_rxn_roles.getData<unsigned int>() & (ReactionRole::REACTANT | ReactionRole::PRODUCT)) !=
@@ -60,9 +65,9 @@ bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction&, const
 
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-    AtomMapping::ConstEntryIterator query_atom_pairs_end = atomMapping->getEntriesEnd();
+    AtomMapping::ConstEntryIterator query_atom_pairs_end = qry_atom_mapping->getEntriesEnd();
 
-    for (AtomMapping::ConstEntryIterator query_ap_it = atomMapping->getEntriesBegin(); query_ap_it != query_atom_pairs_end; ) {
+    for (AtomMapping::ConstEntryIterator query_ap_it = qry_atom_mapping->getEntriesBegin(); query_ap_it != query_atom_pairs_end; ) {
         const Atom* query_reac_atom = query_ap_it->first;
         const Atom* target_reac_atom = atom_mapping[query_reac_atom];
 

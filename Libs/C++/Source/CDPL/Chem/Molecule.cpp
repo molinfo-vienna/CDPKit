@@ -24,6 +24,8 @@
  
 #include "StaticInit.hpp"
 
+#include <vector>
+
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -31,6 +33,20 @@
 
 
 using namespace CDPL;
+
+
+namespace
+{
+
+    typedef std::vector<Chem::Molecule::CopyPostprocessingFunction> CopyPostprocFuncList;
+
+    CopyPostprocFuncList& getCopyPostprocFuncs()
+    {
+        static CopyPostprocFuncList func_list;
+
+        return func_list;
+    }
+}
 
 
 Chem::Molecule::AtomIterator Chem::Molecule::removeAtom(const AtomIterator& it)
@@ -92,4 +108,15 @@ Chem::Molecule& Chem::Molecule::operator-=(const MolecularGraph& molgraph)
     remove(molgraph);
 
     return *this;
+}
+
+void Chem::Molecule::registerCopyPostprocessingFunction(const CopyPostprocessingFunction& func)
+{
+    getCopyPostprocFuncs().emplace_back(func);
+}
+
+void Chem::Molecule::invokeCopyPostprocessingFunctions(const MolecularGraph& src_molgraph)
+{
+    for (const auto& func : getCopyPostprocFuncs())
+        func(*this, src_molgraph);
 }

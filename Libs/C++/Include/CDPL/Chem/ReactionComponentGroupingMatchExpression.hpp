@@ -80,7 +80,7 @@ namespace CDPL
              * components. If the provided mapping candidate fails to fulfill one of these requirements, the expression evaluates
              * to \c false.
              *
-             * \param query_rxn The query reaction (ignored).
+             * \param query_rxn The query reaction.
              * \param target_rxn The target reaction.
              * \param mapping The currrent query to target atom/bond mapping candidate.
              * \param aux_data Auxiliary information for expression evaluation (ignored).

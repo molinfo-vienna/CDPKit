@@ -56,6 +56,7 @@ Chem::BasicReaction::BasicReaction(const BasicReaction& rxn):
     compCache.setCleanupFunction(&BasicMolecule::clear);
 
     copyComponents(rxn);
+    invokeCopyPostprocessingFunctions(rxn);
 }
 
 Chem::BasicReaction::BasicReaction(const Reaction& rxn): 
@@ -64,6 +65,7 @@ Chem::BasicReaction::BasicReaction(const Reaction& rxn):
     compCache.setCleanupFunction(&BasicMolecule::clear);
 
     copyComponents(rxn);
+    invokeCopyPostprocessingFunctions(rxn);
 }
 
 Chem::BasicReaction::~BasicReaction() {}
@@ -452,6 +454,7 @@ void Chem::BasicReaction::copy(const BasicReaction& rxn)
     clearComponents();
     copyComponents(rxn);
     copyProperties(rxn);
+    invokeCopyPostprocessingFunctions(rxn);
 }
 
 void Chem::BasicReaction::copy(const Reaction& rxn)
@@ -462,6 +465,7 @@ void Chem::BasicReaction::copy(const Reaction& rxn)
     clearComponents();
     copyComponents(rxn);
     copyProperties(rxn);
+    invokeCopyPostprocessingFunctions(rxn);
 }
 
 const Chem::BasicMolecule& Chem::BasicReaction::getReactant(std::size_t idx) const

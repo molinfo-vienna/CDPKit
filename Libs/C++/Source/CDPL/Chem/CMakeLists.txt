@@ -269,7 +269,7 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphSybylAtomTypesFunction.cpp
     MolecularGraphCanonicalizationFunctions.cpp 
     MolecularGraphFragmentMembershipFunctions.cpp 
-    MolecularGraphCopyStereoDescriptorsFunctions.cpp  
+    MolecularGraphFragmentTranslationFunctions.cpp
     MolecularGraphSplitIntoFragmentsFunction.cpp  
     MolecularGraphConformerFunctions.cpp
     MolecularGraphPiElectronSystemsFunctions.cpp
@@ -309,6 +309,8 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphComponentGroupingMatchExpression.cpp
     ReactionAtomMappingMatchExpression.cpp
     ReactionComponentGroupingMatchExpression.cpp
+
+    StereoDescriptorTranslation.cpp
    )
 
 link_libraries(${Boost_IOSTREAMS_LIBRARY})

@@ -455,13 +455,6 @@ Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStanda
 void Chem::ChEMBLStandardizer::copyMolecule(const Molecule& mol, Molecule& mol_copy) const
 {
     mol_copy.copy(mol);
-//    mol_copy.clearProperties();
-
-    copyAtomStereoDescriptors(mol, mol_copy);
-    copyBondStereoDescriptors(mol, mol_copy);
-
-    if (hasSSSR(mol))
-        copySSSR(mol, mol_copy);
 
     clearComponents(mol_copy);
 }

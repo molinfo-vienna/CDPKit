@@ -50,8 +50,7 @@ python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),
             python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
 python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)),       \
-            python::with_custodian_and_ward<1, 2>());                                                            
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
 
 
 namespace
@@ -186,46 +185,43 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                  python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveComponentGroups",
                 static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponentGroups),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveComponents", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveComponents),
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveComponents", 
                 static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponents),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveRings", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveRings),
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveRings", 
                 static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveRings),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveSSSR),
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveSSSR",
                 static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveSSSR),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-      python::def("extractSSSRSubset", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSRSubset),
-                 (python::arg("src_molgraph"), python::arg("tgt_molgraph")),
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+    python::def("extractSSSRSubset", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSRSubset),
+                (python::arg("src_molgraph"), python::arg("tgt_molgraph")),
                 python::with_custodian_and_ward_postcall<0, 1>());
     python::def("extractSSSRSubset", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractSSSRSubset),
-                 (python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")),
+                (python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")),
                 python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("copySSSR", &Chem::copySSSR,
-                 (python::arg("src_molgraph"), python::arg("tgt_molgraph")),
-                python::with_custodian_and_ward_postcall<0, 2>());
     python::def("perceiveCyclicSubstructure", static_cast<Chem::Fragment::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveCyclicSubstructure),
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveCyclicSubstructure", 
                 static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveCyclicSubstructure),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveAromaticSubstructure", static_cast<Chem::Fragment::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveAromaticSubstructure),
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveAromaticSubstructure", 
                 static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveAromaticSubstructure),
-                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("getAromaticRings", &Chem::getAromaticRings,
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("getAromaticSSSRSubset", &Chem::getAromaticSSSRSubset,
-                 python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("calcTopologicalDistanceMatrix", 
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+    python::def("calcTopologicalDistanceMatrix",
                 static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
@@ -269,14 +265,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                  python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
                  python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
 
-    python::def("hasMatchConstraints", &Chem::hasMatchConstraints, python::arg("molgraph"));
-    python::def("setMatchConstraints", &Chem::setMatchConstraints, 
-                (python::arg("molgraph"), python::arg("constr")));
-    python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("molgraph"));
-    python::def("getMatchConstraints", &Chem::getMatchConstraints, 
-                python::arg("molgraph"), python::return_value_policy<python::copy_const_reference, 
-                python::with_custodian_and_ward_postcall<0, 1> >());
-
     python::def("canonicalize", static_cast<void (*)(Chem::MolecularGraph& molgraph, bool, bool, bool, bool)>(&Chem::canonicalize), 
                 (python::arg("molgraph"), python::arg("atoms") = true, python::arg("atom_nbrs") = true, 
                  python::arg("bonds") = true, python::arg("bond_atoms") = false));
@@ -285,12 +273,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"),  python::arg("func"), python::arg("atoms") = true, 
                  python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
 
-    python::def("copyAtomStereoDescriptors", &Chem::copyAtomStereoDescriptors,
-                (python::arg("molgraph"), python::arg("tgt_molgraph"), python::arg("atom_idx_offs") = 0));
-    python::def("copyBondStereoDescriptors", &Chem::copyBondStereoDescriptors,
-                (python::arg("molgraph"), python::arg("tgt_molgraph"), python::arg("atom_idx_offs") = 0, 
-                 python::arg("bond_idx_offs") = 0));
-
+    python::def("translateFragment", &Chem::translateFragment,
+                (python::arg("src_molgraph"), python::arg("src_frag"), python::arg("tgt_molgraph"), python::arg("tgt_frag"),
+                 python::arg("append") = false));
+    python::def("translateFragments", &Chem::translateFragments,
+                (python::arg("src_molgraph"), python::arg("src_frag_list"), python::arg("tgt_molgraph"), python::arg("tgt_frag_list"),
+                 python::arg("append") = false));
+   
     python::def("setConformation", &Chem::setConformation,
                 (python::arg("molgraph"), python::arg("conf_idx"), python::arg("coords"), python::arg("energy")));
     python::def("addConformation", &Chem::addConformation,
@@ -303,6 +292,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(Rings, rings)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MatchExpression, expr)
+    EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MatchConstraints, constr)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(ComponentGroups, comp_groups)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(Components, comps)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(PiElectronSystems, pi_systems)

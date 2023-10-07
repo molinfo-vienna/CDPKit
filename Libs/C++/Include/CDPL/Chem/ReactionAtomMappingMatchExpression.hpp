@@ -76,7 +76,7 @@ namespace CDPL
              * is not unique (i.e. maps to multiple product atoms of the same class), then the target reaction has to match only one of the specified
              * mappings for that query atom.
              *
-             * \param query_rxn The query reaction (ignored).
+             * \param query_rxn The query reaction .
              * \param target_rxn The checked target reaction.
              * \param mapping The current query to target atom/bond mapping candidate.
              * \param matched_rxn_roles Holds a bitwise OR combination of the flags defined in namespace Chem::ReactionRole specifying

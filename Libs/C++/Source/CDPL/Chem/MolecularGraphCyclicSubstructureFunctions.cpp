@@ -29,9 +29,39 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/CyclicSubstructure.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateCyclicSubstructure(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasCyclicSubstructure(src_molgraph))
+            return;
+
+        const Fragment::SharedPointer& src_substruct = getCyclicSubstructure(src_molgraph);
+        Fragment::SharedPointer tgt_substruct(new Fragment());
+
+        translateFragment(src_molgraph, *src_substruct, tgt_mol, *tgt_substruct);
+        setCyclicSubstructure(tgt_mol, tgt_substruct);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateCyclicSubstructure);
+        }
+    } init;
+}
 
 
 Chem::Fragment::SharedPointer Chem::perceiveCyclicSubstructure(const MolecularGraph& molgraph)

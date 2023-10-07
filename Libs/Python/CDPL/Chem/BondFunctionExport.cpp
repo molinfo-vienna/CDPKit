@@ -62,16 +62,14 @@ python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"), 
             python::with_custodian_and_ward_postcall<0, 1> >());                                             \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("bond"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),       \
-            python::with_custodian_and_ward<1, 2>());                                                            
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)));
 
-#define EXPORT_BOND_FUNCS_INT_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                  \
+#define EXPORT_BOND_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                     \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
             python::return_internal_reference<1>());                                                         \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("bond"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),       \
-            python::with_custodian_and_ward<1, 2>());  
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)));
 
 
 namespace
@@ -177,7 +175,7 @@ void CDPLPythonChem::exportBondFunctions()
     EXPORT_BOND_FUNCS(SybylType, type)
     EXPORT_BOND_FUNCS(StereoCenterFlag, is_center)
     EXPORT_BOND_FUNCS(Direction, dir)
-    EXPORT_BOND_FUNCS_INT_REF_CW(StereoDescriptor, descr)
+    EXPORT_BOND_FUNCS_INT_REF(StereoDescriptor, descr)
     EXPORT_BOND_FUNCS_COPY_REF_CW(MatchExpression, expr)
     EXPORT_BOND_FUNCS(ReactionCenterStatus, status)
     EXPORT_BOND_FUNCS(2DStereoFlag, flag)

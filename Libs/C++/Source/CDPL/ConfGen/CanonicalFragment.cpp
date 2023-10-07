@@ -250,8 +250,8 @@ ConfGen::CanonicalFragment& ConfGen::CanonicalFragment::operator=(const Canonica
     molecule.operator=(frag.molecule);
     hashCode = frag.hashCode;
 
-    if (hasSSSR(frag))
-        copySSSR(frag, *this);
+    if (hasSSSR(molecule))
+        setSSSR(*this, getSSSR(molecule));
     
     atomMapping.clear();
 

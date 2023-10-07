@@ -78,7 +78,7 @@ namespace CDPL
              * components. If the provided mapping candidate fails to fulfill one of these requirements, the expression evaluates
              * to \c false.
              *
-             * \param query_molgraph The query molecular graph (ignored).
+             * \param query_molgraph The query molecular graph.
              * \param target_molgraph The target molecular graph.
              * \param mapping The current query to target atom/bond mapping candidate.
              * \param aux_data Auxiliary information for expression evaluation (ignored).

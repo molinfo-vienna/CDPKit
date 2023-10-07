@@ -36,8 +36,7 @@ python::def("get"#FUNC_SUFFIX, &ForceField::get##FUNC_SUFFIX, python::arg("molgr
             python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
 python::def("has"#FUNC_SUFFIX, &ForceField::has##FUNC_SUFFIX, python::arg("molgraph"));                          \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("molgraph"));                      \
-python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)), \
-            python::with_custodian_and_ward<1, 2>());                                                            
+python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
 
 
 void CDPLPythonForceField::exportMolecularGraphFunctions()

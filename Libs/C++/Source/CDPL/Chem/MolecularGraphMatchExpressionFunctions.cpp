@@ -79,13 +79,12 @@ namespace
             if (constraint.getRelation() != MatchConstraint::EQUAL)
                 continue;
 
-            const FragmentList::SharedPointer& comp_groups = 
-                molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::COMPONENT_GROUPS);
+            const FragmentList::SharedPointer& comp_groups = getComponentGroups(molgraph);
 
             if (comp_groups->getSize() == 0)
                 continue;
 
-            MatchExpression<MolecularGraph>::SharedPointer expr_ptr(new MolecularGraphComponentGroupingMatchExpression(comp_groups));
+            MatchExpression<MolecularGraph>::SharedPointer expr_ptr(new MolecularGraphComponentGroupingMatchExpression(FragmentList::SharedPointer()));
                 
             expr_list_ptr->addElement(expr_ptr);
         }

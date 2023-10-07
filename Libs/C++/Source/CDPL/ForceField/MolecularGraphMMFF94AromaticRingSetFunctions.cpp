@@ -27,9 +27,40 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/MolecularGraphProperty.hpp"
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateMMFF94AromaticRings(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !ForceField::hasMMFF94AromaticRings(src_molgraph))
+            return;
+
+        const FragmentList::SharedPointer& src_rings = ForceField::getMMFF94AromaticRings(src_molgraph);
+        FragmentList::SharedPointer tgt_rings(new FragmentList());
+
+        translateFragments(src_molgraph, *src_rings, tgt_mol, *tgt_rings);
+        ForceField::setMMFF94AromaticRings(tgt_mol, tgt_rings);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateMMFF94AromaticRings);
+        }
+    } init;
+}
 
 
 Chem::FragmentList::SharedPointer ForceField::perceiveMMFF94AromaticRings(const Chem::MolecularGraph& molgraph)

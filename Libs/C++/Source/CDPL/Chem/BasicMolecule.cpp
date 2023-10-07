@@ -81,8 +81,8 @@ Chem::BasicMolecule::BasicMolecule(const MolecularGraph& molgraph):
     atomCache.setCleanupFunction(&BasicMolecule::clearAtom);
     bondCache.setCleanupFunction(&BasicMolecule::clearBond);
 
-    append(molgraph);
     copyProperties(molgraph);
+    append(molgraph);
 }
 
 Chem::BasicMolecule::~BasicMolecule() {}
@@ -376,7 +376,9 @@ void Chem::BasicMolecule::copy(const BasicMolecule& mol)
         const Bond* bond = it->get();        
 
         addBond(bond->getBegin().getIndex(), bond->getEnd().getIndex()).copyProperties(*bond);
-    } 
+    }
+
+    invokeCopyPostprocessingFunctions(mol);
 }
 
 void Chem::BasicMolecule::copy(const Molecule& mol)
@@ -386,6 +388,7 @@ void Chem::BasicMolecule::copy(const Molecule& mol)
 
     doCopy(mol);
     copyProperties(mol);
+    invokeCopyPostprocessingFunctions(mol);
 }
 
 void Chem::BasicMolecule::copy(const MolecularGraph& molgraph)
@@ -395,6 +398,7 @@ void Chem::BasicMolecule::copy(const MolecularGraph& molgraph)
 
     doCopy(molgraph);
     copyProperties(molgraph);
+    invokeCopyPostprocessingFunctions(molgraph);
 }
 
 void Chem::BasicMolecule::append(const BasicMolecule& mol)
@@ -421,16 +425,20 @@ void Chem::BasicMolecule::append(const BasicMolecule& mol)
 
         addBond(old_num_atoms + bond->getBegin().getIndex(), old_num_atoms + bond->getEnd().getIndex()).copyProperties(*bond); 
     }
+
+    invokeCopyPostprocessingFunctions(mol);
 }
 
 void Chem::BasicMolecule::append(const Molecule& mol)
 {   
     doAppend(mol);
+    invokeCopyPostprocessingFunctions(mol);
 }
 
 void Chem::BasicMolecule::append(const MolecularGraph& molgraph)
 {   
     doAppend(molgraph);
+    invokeCopyPostprocessingFunctions(molgraph);
 }
 
 void Chem::BasicMolecule::remove(const MolecularGraph& molgraph)

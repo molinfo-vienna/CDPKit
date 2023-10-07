@@ -27,11 +27,41 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/AromaticSubstructure.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translateAromaticSubstructure(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasAromaticSubstructure(src_molgraph))
+            return;
+
+        const Fragment::SharedPointer& src_substruct = getAromaticSubstructure(src_molgraph);
+        Fragment::SharedPointer tgt_substruct(new Fragment());
+
+        translateFragment(src_molgraph, *src_substruct, tgt_mol, *tgt_substruct);
+        setAromaticSubstructure(tgt_mol, tgt_substruct);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateAromaticSubstructure);
+        }
+    } init;
+}
 
 
 Chem::Fragment::SharedPointer Chem::perceiveAromaticSubstructure(const MolecularGraph& molgraph)

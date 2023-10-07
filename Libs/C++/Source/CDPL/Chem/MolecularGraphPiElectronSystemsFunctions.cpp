@@ -27,9 +27,47 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/PiElectronSystemList.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+    void translatePiElectronSystems(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() != src_molgraph.getNumAtoms() ||
+            tgt_mol.getNumBonds() != src_molgraph.getNumBonds() ||
+            !hasPiElectronSystems(src_molgraph))
+            return;
+
+        const ElectronSystemList::SharedPointer& src_pi_sys_list = getPiElectronSystems(src_molgraph);
+        ElectronSystemList::SharedPointer tgt_pi_sys_list(new ElectronSystemList());
+
+        for (const auto& src_pi_sys : *src_pi_sys_list) {
+            ElectronSystem::SharedPointer tgt_pi_sys(new ElectronSystem());
+
+            for (std::size_t i = 0, num_atoms = src_pi_sys.getNumAtoms(); i < num_atoms; i++)
+                tgt_pi_sys->addAtom(tgt_mol.getAtom(src_molgraph.getAtomIndex(src_pi_sys.getAtom(i))), src_pi_sys.getElectronContrib(i));
+            
+            tgt_pi_sys_list->addElement(tgt_pi_sys);
+        }
+
+        setPiElectronSystems(tgt_mol, tgt_pi_sys_list);
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translatePiElectronSystems);
+        }
+    } init;
+}
 
 
 Chem::ElectronSystemList::SharedPointer Chem::perceivePiElectronSystems(const MolecularGraph& molgraph)
