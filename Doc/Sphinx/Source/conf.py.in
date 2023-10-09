@@ -101,7 +101,7 @@ html_theme_options = {
 }
 
 html_logo = '@CDPKIT_DOC_GRAPHICS_DIR@/logo.svg'
-html_favicon = '@CDPKIT_DOC_GRAPHICS_DIR@/fav_icon.svg'
+html_favicon = '@CDPKIT_DOC_GRAPHICS_DIR@/favicon.svg'
 html_copy_source = True
 
 html_css_files = [
