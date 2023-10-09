@@ -248,7 +248,6 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphSMILESFunction.cpp
     MolecularGraphINCHIFunctions.cpp
     MolecularGraphHashCodeFunction.cpp
-    MolecularGraphSubstructSearchInitializationFunctions.cpp
     MolecularGraphBond2DStereoFlagsFunction.cpp 
     MolecularGraphBondDirectionsFunction.cpp 
     MolecularGraphCIPPrioritiesFunction.cpp 
@@ -273,6 +272,7 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphSplitIntoFragmentsFunction.cpp  
     MolecularGraphConformerFunctions.cpp
     MolecularGraphPiElectronSystemsFunctions.cpp
+    MolecularGraphInitializationFunctions.cpp
     
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
@@ -281,10 +281,10 @@ set(cdpl-chem_LIB_SRCS
     ReactionAtomMappingFunctions.cpp
     ReactionHashCodeFunction.cpp
     ReactionSMILESFunction.cpp
-    ReactionSubstructSearchInitializationFunctions.cpp
     ReactionMaxAtomMappingIDFunction.cpp
     ReactionMaxComponentGroupIDFunction.cpp
-
+    ReactionInitializationFunctions.cpp
+    
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeRemoveAtomsFunctions.cpp
 
@@ -309,8 +309,6 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphComponentGroupingMatchExpression.cpp
     ReactionAtomMappingMatchExpression.cpp
     ReactionComponentGroupingMatchExpression.cpp
-
-    StereoDescriptorTranslation.cpp
    )
 
 link_libraries(${Boost_IOSTREAMS_LIBRARY})

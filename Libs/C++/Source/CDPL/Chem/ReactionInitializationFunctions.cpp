@@ -1,5 +1,5 @@
 /* 
- * ReactionSubstructSearchInitializationFunctions.cpp 
+ * ReactionInitializationFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,9 +24,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-#include <functional>
-
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -40,16 +37,20 @@ void Chem::initSubstructureSearchQuery(Reaction& rxn, bool overwrite)
     perceiveComponentGroups(rxn, overwrite);
     perceiveAtomMapping(rxn, overwrite);
 
-    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
-                            std::placeholders::_1, overwrite));
+    for (auto& comp : rxn)
+        initSubstructureSearchQuery(comp, overwrite);
 
-    generateMatchExpressions(rxn ,overwrite);
+    generateMatchExpressions(rxn, overwrite);
 }
 
 void Chem::initSubstructureSearchTarget(Reaction& rxn, bool overwrite)
 {
-    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchTarget),
-                            std::placeholders::_1, overwrite));
+    for (auto& comp : rxn)
+        initSubstructureSearchTarget(comp, overwrite);
+}
+
+void Chem::calcBasicProperties(Reaction& rxn, bool overwrite)
+{
+    for (auto& comp : rxn)
+        calcBasicProperties(comp, overwrite);
 }

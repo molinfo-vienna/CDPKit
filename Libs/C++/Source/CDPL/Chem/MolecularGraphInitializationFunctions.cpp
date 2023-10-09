@@ -1,5 +1,5 @@
 /* 
- * MolecularGraphSubstructSearchInitializationFunctions.cpp 
+ * MolecularGraphInitializationFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,6 +30,18 @@
 using namespace CDPL; 
 
 
+void Chem::calcBasicProperties(MolecularGraph& molgraph, bool overwrite)
+{
+    perceiveComponents(molgraph, overwrite);
+    perceiveSSSR(molgraph, overwrite);
+    setRingFlags(molgraph, overwrite);
+
+    calcImplicitHydrogenCounts(molgraph, overwrite);
+    perceiveHybridizationStates(molgraph, overwrite);
+
+    setAromaticityFlags(molgraph, overwrite);
+}
+
 void Chem::initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite)
 {
     initSubstructureSearchTarget(molgraph, overwrite);
@@ -40,15 +52,7 @@ void Chem::initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite)
 
 void Chem::initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite)
 {
-    perceiveComponents(molgraph, overwrite);
-    perceiveSSSR(molgraph, overwrite);
-    setRingFlags(molgraph, overwrite);
-
-    calcImplicitHydrogenCounts(molgraph, overwrite);
-    perceiveHybridizationStates(molgraph, overwrite);
-
-    setAromaticityFlags(molgraph, overwrite);
-
+    calcBasicProperties(molgraph, overwrite);
     calcAtomStereoDescriptors(molgraph, overwrite);
     calcBondStereoDescriptors(molgraph, overwrite);
 }

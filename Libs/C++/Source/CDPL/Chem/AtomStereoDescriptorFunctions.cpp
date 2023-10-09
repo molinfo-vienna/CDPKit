@@ -32,6 +32,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/MDLParity.hpp"
@@ -49,6 +50,61 @@ using namespace CDPL;
 namespace
 {
 
+    void translateAtomStereoDescriptors(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() < src_molgraph.getNumAtoms())
+            return;
+
+        std::size_t atom_idx_offs = tgt_mol.getNumAtoms() - src_molgraph.getNumAtoms();
+        
+        MolecularGraph::ConstAtomIterator atoms_end = src_molgraph.getAtomsEnd();
+        std::size_t i = atom_idx_offs;
+        std::size_t num_tgt_atoms = tgt_mol.getNumAtoms();
+
+        for (MolecularGraph::ConstAtomIterator a_it = src_molgraph.getAtomsBegin(); a_it != atoms_end && i < num_tgt_atoms; ++a_it, i++) {
+            const Atom& atom = *a_it;
+            Atom& tgt_atom = tgt_mol.getAtom(i);
+            const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
+
+            if (!stereo_desc.isValid(atom)) {
+                clearStereoDescriptor(tgt_atom);
+                continue;
+            }
+
+            const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
+
+            try {
+                if (stereo_desc.getNumReferenceAtoms() == 3)
+                    setStereoDescriptor(tgt_atom,
+                                        StereoDescriptor(stereo_desc.getConfiguration(),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
+                else
+                    setStereoDescriptor(tgt_atom,
+                                        StereoDescriptor(stereo_desc.getConfiguration(),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+                                                         tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+            } catch (const Base::IndexError& e) {
+                clearStereoDescriptor(tgt_atom);
+            } catch (const Base::ItemNotFound& e) {
+                clearStereoDescriptor(tgt_atom);
+            }
+        }
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateAtomStereoDescriptors);
+        }
+    } init;
+    
     Chem::StereoDescriptor makeStereoDescriptor(unsigned int config, const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
     {
         using namespace Chem;

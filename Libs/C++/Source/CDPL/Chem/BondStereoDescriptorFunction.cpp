@@ -44,7 +44,59 @@ using namespace CDPL;
 
 namespace
 {
+    
+    void translateBondStereoDescriptors(Chem::Molecule& tgt_mol, const Chem::MolecularGraph& src_molgraph)
+    {
+        using namespace Chem;
+        
+        if (tgt_mol.getNumAtoms() < src_molgraph.getNumAtoms())
+            return;
 
+        if (tgt_mol.getNumBonds() < src_molgraph.getNumBonds())
+            return;
+
+        std::size_t atom_idx_offs = tgt_mol.getNumAtoms() - src_molgraph.getNumAtoms();
+        std::size_t bond_idx_offs = tgt_mol.getNumBonds() - src_molgraph.getNumBonds();
+        
+        MolecularGraph::ConstBondIterator bonds_end = src_molgraph.getBondsEnd();
+        std::size_t i = bond_idx_offs;
+        std::size_t num_tgt_bonds = tgt_mol.getNumBonds();
+
+        for (MolecularGraph::ConstBondIterator b_it = src_molgraph.getBondsBegin(); b_it != bonds_end && i < num_tgt_bonds; ++b_it, i++) {
+            const Bond& bond = *b_it;
+            Bond& tgt_bond = tgt_mol.getBond(i);
+            const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
+
+            if (!stereo_desc.isValid(bond)) {
+                clearStereoDescriptor(tgt_bond);
+                continue;
+            }
+
+            const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
+
+            try {
+                setStereoDescriptor(tgt_bond,
+                                    StereoDescriptor(stereo_desc.getConfiguration(),
+                                                     tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+                                                     tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+                                                     tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+                                                     tgt_mol.getAtom(src_molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+            } catch (const Base::IndexError& e) {
+                clearStereoDescriptor(tgt_bond);
+            } catch (const Base::ItemNotFound& e) {
+                clearStereoDescriptor(tgt_bond);
+            }
+        }
+    }
+    
+    struct Init
+    {
+
+        Init() {
+            Chem::Molecule::registerCopyPostprocessingFunction(&translateBondStereoDescriptors);
+        }
+    } init;
+    
     Chem::StereoDescriptor makeStereoDescriptor(unsigned int config, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
     {
         using namespace Chem;

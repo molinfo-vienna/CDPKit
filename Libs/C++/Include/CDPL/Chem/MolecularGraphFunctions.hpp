@@ -512,6 +512,9 @@ namespace CDPL
                                               const Util::BitSet& split_bond_mask, bool append = false);
 
         CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
+
+        CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
+        
     } // namespace Chem
 } // namespace CDPL
 
