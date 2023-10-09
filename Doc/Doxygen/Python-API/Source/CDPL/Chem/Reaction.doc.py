@@ -233,6 +233,19 @@ class Reaction(Base.PropertyContainer):
 
     ##
     # \brief 
+    # \param func 
+    #
+    @staticmethod
+    def registerCopyPostprocessingFunction(func: object) -> None: pass
+
+    ##
+    # \brief 
+    # \param src_rxn 
+    #
+    def invokeCopyPostprocessingFunctions(src_rxn: Reaction) -> None: pass
+
+    ##
+    # \brief 
     # \param arg1 
     # \return 
     #

@@ -30,14 +30,6 @@ def generateInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapp
 ##
 # \brief 
 # \param pharm 
-# \param iactions 
-# \param append 
-#
-def generateInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapping, append: bool = False) -> None: pass
-
-##
-# \brief 
-# \param pharm 
 # \param cntnr 
 # \param coords_func 
 # \param vdw_scaling_fact 

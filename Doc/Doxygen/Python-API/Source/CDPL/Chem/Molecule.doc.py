@@ -233,6 +233,19 @@ class Molecule(MolecularGraph):
     def getBonds() -> BondSequence: pass
 
     ##
+    # \brief 
+    # \param func 
+    #
+    @staticmethod
+    def registerCopyPostprocessingFunction(func: object) -> None: pass
+
+    ##
+    # \brief 
+    # \param src_molgraph 
+    #
+    def invokeCopyPostprocessingFunctions(src_molgraph: MolecularGraph) -> None: pass
+
+    ##
     # \brief Returns a reference to the atom at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the atom to return.

@@ -126,14 +126,6 @@ def setSSSR(molgraph: MolecularGraph, sssr: FragmentList) -> None: pass
 
 ##
 # \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \return 
-#
-def copySSSR(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph) -> FragmentList: pass
-
-##
-# \brief 
 # \param molgraph 
 # \param canonical 
 # \param ord_h_deplete 
@@ -1016,27 +1008,10 @@ def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 ##
 # \brief 
 # \param molgraph 
-# \param tgt_molgraph 
-# \param atom_idx_offs 
-# \param bond_idx_offs 
-#
-def copyBondStereoDescriptors(molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, atom_idx_offs: int = 0, bond_idx_offs: int = 0) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
 # \param overwrite 
 # \param dim 
 #
 def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param tgt_molgraph 
-# \param atom_idx_offs 
-#
-def copyAtomStereoDescriptors(molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, atom_idx_offs: int = 0) -> None: pass
 
 ##
 # \brief 
@@ -1048,6 +1023,16 @@ def copyAtomStereoDescriptors(molgraph: MolecularGraph, tgt_molgraph: MolecularG
 # \param bonds 
 #
 def getContainedFragments(molgraph: MolecularGraph, frag_list: FragmentList, cont_frag_list: FragmentList, append: bool = False, atoms: bool = True, bonds: bool = True) -> None: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param src_frag_list 
+# \param tgt_molgraph 
+# \param tgt_frag_list 
+# \param append 
+#
+def translateFragments(src_molgraph: MolecularGraph, src_frag_list: FragmentList, tgt_molgraph: MolecularGraph, tgt_frag_list: FragmentList, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -1191,6 +1176,16 @@ def extractSSSRSubset(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph
 # \return 
 #
 def extractSSSRSubset(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param src_frag 
+# \param tgt_molgraph 
+# \param tgt_frag 
+# \param append 
+#
+def translateFragment(src_molgraph: MolecularGraph, src_frag: Fragment, tgt_molgraph: MolecularGraph, tgt_frag: Fragment, append: bool = False) -> None: pass
 
 ##
 # \brief 

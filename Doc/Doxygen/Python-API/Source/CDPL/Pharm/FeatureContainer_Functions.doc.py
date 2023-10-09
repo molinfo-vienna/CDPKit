@@ -56,13 +56,6 @@ def generateFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
 ##
 # \brief 
 # \param cntnr 
-# \return 
-#
-def generateFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
-
-##
-# \brief 
-# \param cntnr 
 # \param hist 
 # \param append 
 #
