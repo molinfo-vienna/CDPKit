@@ -134,17 +134,17 @@ namespace CDPLPythonUtil
                 .def("setEntry", &setEntry, (python::arg("self"), python::arg("key"), python::arg("value")),
                      EntryAdditionPolicy2())
                 .def("getKeys", &getKeys, python::arg("self"))
+                .def("keys", &getKeys, python::arg("self"))
                 .def("getValues", &getValues, python::arg("self"))
+                .def("values", &getValues, python::arg("self"))
                 .def("getEntries", &getEntries, python::arg("self"))
+                .def("items", &getEntries, python::arg("self"))
                 .def("__len__", &MapType::getSize, python::arg("self"))
                 .def("__getitem__", getValueFunc, (python::arg("self"), python::arg("key")),
                      ValueReturnPolicy())
                 .def("__setitem__", &setItem, (python::arg("self"), python::arg("key"), python::arg("value")),
                      EntryAdditionPolicy2())
                 .def("__delitem__", removeEntryFunc, (python::arg("self"), python::arg("key")))
-                .add_property("keys", &getKeys)
-                .add_property("values", &getValues)
-                .add_property("entries", &getEntries)
                 .add_property("size", &MapType::getSize);
         }
 
