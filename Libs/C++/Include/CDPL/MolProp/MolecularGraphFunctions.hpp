@@ -66,7 +66,7 @@ namespace CDPL
 
         CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph);
 
-        CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type);
+        CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
 
         CDPL_MOLPROP_API std::size_t getImplicitHydrogenCount(const Chem::MolecularGraph& molgraph);
 

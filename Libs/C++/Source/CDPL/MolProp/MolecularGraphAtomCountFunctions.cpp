@@ -29,6 +29,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
 
@@ -40,21 +41,31 @@ std::size_t MolProp::getAtomCount(const Chem::MolecularGraph& molgraph)
     return (molgraph.getNumAtoms() + getImplicitHydrogenCount(molgraph));
 }
 
-std::size_t MolProp::getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type)
+std::size_t MolProp::getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
     using namespace Chem;
     
     std::size_t count = 0;
-
+    bool type_matches_h = atomTypesMatch(type, AtomType::H);
+    
     for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
         const Atom& atom = *it;
         unsigned int atm_type = getType(atom);
 
-        if (atm_type == type)
-            count++;
+        if (strict) {
+            if (atm_type == type)
+                count++;
     
-        if (type == AtomType::H)
-            count += getImplicitHydrogenCount(atom);
+            if (type == AtomType::H)
+                count += getImplicitHydrogenCount(atom);
+
+        } else {
+            if (atomTypesMatch(type, atm_type))
+                count++;
+            
+            if (type_matches_h)
+                count += getImplicitHydrogenCount(atom);
+        }
     }
 
     return count;

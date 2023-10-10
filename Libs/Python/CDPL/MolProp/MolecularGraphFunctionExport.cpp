@@ -64,15 +64,15 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
     python::def("calcMassComposition", &MolProp::calcMassComposition, 
                 (python::arg("molgraph"), python::arg("comp")));
     python::def("generateElementHistogram", &MolProp::generateElementHistogram, 
-                (python::arg("molgraph"), python::arg("hist")));
+                (python::arg("molgraph"), python::arg("hist"), python::arg("append") = false));
 
     python::def("calcCyclomaticNumber", &MolProp::calcCyclomaticNumber, python::arg("molgraph"));
     python::def("getComponentCount", &MolProp::getComponentCount, python::arg("molgraph"));
     
     python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&MolProp::getAtomCount),
                 python::arg("molgraph"));
-    python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, unsigned int)>(&MolProp::getAtomCount),
-                (python::arg("molgraph"), python::arg("type")));
+    python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, unsigned int, bool)>(&MolProp::getAtomCount),
+                (python::arg("molgraph"), python::arg("type"), python::arg("strict") = true));
     python::def("getImplicitHydrogenCount", &MolProp::getImplicitHydrogenCount, python::arg("molgraph"));
     python::def("getOrdinaryHydrogenCount", &MolProp::getOrdinaryHydrogenCount, 
                 (python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
