@@ -63,11 +63,11 @@ def generateMassCompositionString(molgraph: Chem.MolecularGraph) -> object: pass
 
 ##
 # \brief 
-# \param arg1 
 # \param molgraph 
 # \param hist 
+# \param append 
 #
-def generateElementHistogram(arg1: Chem.MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
+def generateElementHistogram(molgraph: Chem.MolecularGraph, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -200,9 +200,10 @@ def getAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 # \brief 
 # \param molgraph 
 # \param type 
+# \param strict 
 # \return 
 #
-def getAtomCount(molgraph: Chem.MolecularGraph, type: int) -> int: pass
+def getAtomCount(molgraph: Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 

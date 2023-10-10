@@ -112,13 +112,31 @@ class MassComposition(Boost.Python.instance):
     # \brief 
     # \return 
     #
+    def keys() -> object: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
     def getValues() -> object: pass
 
     ##
     # \brief 
     # \return 
     #
+    def values() -> object: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
     def getEntries() -> object: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def items() -> object: pass
 
     ##
     # \brief 
@@ -212,11 +230,5 @@ class MassComposition(Boost.Python.instance):
     def __gt__(mass_comp: object) -> bool: pass
 
     objectID = property(getObjectID)
-
-    keys = property(getKeys)
-
-    values = property(getValues)
-
-    entries = property(getEntries)
 
     size = property(getSize)
