@@ -1,6 +1,10 @@
 master:
 
- - New utility functions 'calcBasicProperties()' enabling a more comfortable initialization of Chem::MolecularGraph
+ - Python exports of Util::Map and Util::MultiMap do not provide the properties 'keys', 'values', and 'entries' anymore.
+   They were replaced by the corresponding methods keys(), values() and items()
+ - MolProp::getAtomCount() function has been extended by a 'strict' argument which, if set to 'false', instructs
+   the accounting procedure to regard the meaning of generic atom types (e.g. any halogen)
+ - New utility functions Chem::calcBasicProperties() enabling a more comfortable initialization of Chem::MolecularGraph
    and Chem::Reaction instances for further processing
  - CDPL Python bindings code cleanup
  - CDPL API cleanup
@@ -8,9 +12,9 @@ master:
    now get automatically translated to values referencing the corresponding atoms/bonds of the copying target
  - GRAIL(X)DescriptorCalculator now only considers heavy atoms for the calculation of
    environment HBA/HBD occupation scores which do not represent a complementary feature type
- - New class 'GRAILDescriptorCalculator' now calculates a shorter descriptor (35 elements) with
+ - New class GRAILDescriptorCalculator now calculates a shorter descriptor (35 elements) with
    not further subdivided H-bond donor/acceptor feature types
- - Old class 'GRAILDescriptorCalculator' renamed into 'GRAILXDescriptorCalculator'
+ - Old class GRAILDescriptorCalculator renamed into GRAILXDescriptorCalculator
 
 v1.0.2:
 
