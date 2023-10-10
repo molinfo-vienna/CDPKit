@@ -73,7 +73,8 @@ void CDPLPythonMolProp::exportAtomContainerFunctions()
     using namespace CDPL;
 
     python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper1, python::arg("cntnr"));
-    python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3, (python::arg("cntnr"), python::arg("type"), python::arg("strict") = true));
+    python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3,
+                (python::arg("cntnr"), python::arg("type"), python::arg("strict") = true));
     python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper1, python::arg("cntnr"));
     python::def("getRingAtomCount", &getRingAtomCountWrapper1, python::arg("cntnr"));
     python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
@@ -81,12 +82,16 @@ void CDPLPythonMolProp::exportAtomContainerFunctions()
     python::def("getNetFormalCharge", &getNetFormalChargeWrapper1, python::arg("cntnr"));
     python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
 
-    python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));
-    python::def("generateExplicitMassCompositionString", &generateExplicitMassCompositionStringWrapper, python::arg("cntnr"));
+    python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2,
+                (python::arg("cntnr"), python::arg("mass_comp")));
+    python::def("generateExplicitMassCompositionString", &generateExplicitMassCompositionStringWrapper,
+                python::arg("cntnr"));
 
     python::def("generateExplicitMolecularFormula", &generateExplicitMolecularFormulaWrapper, python::arg("cntnr"));
-    python::def("generateExplicitElementHistogram", &generateExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
+    python::def("generateExplicitElementHistogram", &generateExplicitElementHistogramWrapper3,
+                (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
 
     python::def("calcDipoleMoment", &calcDipoleMomentWrapper2, (python::arg("cntnr"), python::arg("moment")));
-    python::def("calcDipoleMoment", &calcDipoleMomentWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
+    python::def("calcDipoleMoment", &calcDipoleMomentWrapper3,
+                (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
 }
