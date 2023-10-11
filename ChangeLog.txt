@@ -1,6 +1,6 @@
 master:
 
- - Fixed the throwing of an exception that is caused by a missing locale setting when trying to load gz- or bz2-compressed files in ChOX
+ - Fixed the throwing of exceptions when the env. variable LC_ALL has not been initialized
  - Python exports of Util::Map and Util::MultiMap do not provide the properties 'keys', 'values', and 'entries' anymore.
    They were replaced by the corresponding methods keys(), values() and items()
  - MolProp::getAtomCount() function has been extended by a 'strict' argument which, if set to 'false', instructs
