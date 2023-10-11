@@ -2,7 +2,7 @@ Structure Standardization, Curation and Database Preparation
 ============================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    chembl_pipeline
    prot_phys_cond
