@@ -80,11 +80,11 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
 
     # check if the found chem. elements are all in the set of allowed elements (if specified)
     if not checkAllowedElements(elem_histo, args.allowed_elements):    
-        return (None, 'element whitelist test not passed')
+        return (None, 'prohibited element detected')
 
     # check if none of the found chem. elements is in the set of excluded elements (if specified)
     if not checkExcludedElements(elem_histo, args.excluded_elements):
-        return (None, 'element blacklist test not passed')
+        return (None, 'prohibited element detected')
 
     # check if all specified minium chem. element atom counts are reached
     if not checkMinAtomCounts(elem_histo, args.min_atom_counts):
@@ -97,11 +97,11 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     log_msg = None
     
     if chgs_mod:
-        log_msg = 'reduced charges'
+        log_msg = 'reduced charged atom count'
 
     if comps_strpd:
         if log_msg:
-            log_msg += ' and removed components'
+            log_msg += ', removed components'
         else:
             log_msg = 'removed components'
             
@@ -316,7 +316,6 @@ def main() -> None:
     in_mol = Chem.BasicMolecule()
 
     i = 1
-    num_unchanged = 0
     num_changed = 0
     num_disc = 0
     
@@ -330,8 +329,6 @@ def main() -> None:
                 mol_id = '#' + str(i)  # fallback if name is empty or not available
             else:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
-
-            i += 1
             
             try:
                 # process input molecule
@@ -344,6 +341,7 @@ def main() -> None:
                     num_disc += 1
                         
                     if not disc_writer: # check whether discarded molecules should be saved to a separate file
+                        i += 1
                         continue
 
                     # write discarded molecule to the specified target file
@@ -358,8 +356,6 @@ def main() -> None:
                     else:
                         if args.verb_level > 2:
                             print('- Molecule %s: left unchanged' % mol_id)
-                            
-                        num_unchanged += 1
 
                     # molecule passed all checks and needs to be written to the regular output file
                     out_mol_writer = writer
@@ -380,17 +376,18 @@ def main() -> None:
 
                 except Exception as e: # handle exception raised in case of severe write errors
                     sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
+
+                i += 1
                 
             except Exception as e: # handle exception raised in case of severe processing errors
                 sys.exit('Error: processing of molecule %s failed: %s' % (mol_id, str(e)))
-            
+                
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit('Error: reading of molecule %s failed: %s' % (str(i), str(e)))
 
     if args.verb_level > 0:
         print('Summary:')
         print(' - %s molecules processed' % str(i))
-        print(' - %s left unchanged' % str(num_unchanged))
         print(' - %s modified ' % str(num_changed))
         print(' - %s discarded' % str(num_disc))
         
