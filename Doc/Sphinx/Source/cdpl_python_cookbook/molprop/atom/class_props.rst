@@ -1,4 +1,4 @@
-Classification properties
+Classification Properties
 =========================
 
 .. literalinclude:: /examples/print_atom_class_props.py

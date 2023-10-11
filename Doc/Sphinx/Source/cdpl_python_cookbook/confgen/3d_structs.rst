@@ -1,4 +1,4 @@
-Single low-energy 3D structures
+Single Low-energy 3D Structures
 ===============================
 
 .. literalinclude:: /examples/gen_3d_structs.py

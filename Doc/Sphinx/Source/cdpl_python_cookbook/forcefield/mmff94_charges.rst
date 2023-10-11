@@ -1,4 +1,4 @@
-MMFF94 atom charges
+MMFF94 Atom Charges
 ===================
 
 .. literalinclude:: /examples/calc_mmff94_charges.py

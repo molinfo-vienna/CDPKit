@@ -1,4 +1,4 @@
-Extraction of atom environments
+Extraction of Atom Environments
 ===============================
 
 .. literalinclude:: /examples/extract_atom_envs.py

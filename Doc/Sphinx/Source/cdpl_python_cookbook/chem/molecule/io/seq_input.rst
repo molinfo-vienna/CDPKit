@@ -1,4 +1,4 @@
-Sequential input
+Sequential Input
 ================
 
 .. literalinclude:: /examples/seq_mol_input.py

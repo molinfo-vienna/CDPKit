@@ -1,4 +1,4 @@
-Chemical element properties
+Chemical Element Properties
 ===========================
 
 .. literalinclude:: /examples/print_atom_elem_props.py

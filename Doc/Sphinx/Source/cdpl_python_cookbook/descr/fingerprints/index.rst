@@ -1,4 +1,4 @@
-Generation of fingerprints
+Generation of Fingerprints
 ==========================
 
 .. toctree::

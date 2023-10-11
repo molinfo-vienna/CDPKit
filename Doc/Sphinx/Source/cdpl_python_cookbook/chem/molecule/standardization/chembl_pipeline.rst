@@ -1,4 +1,4 @@
-ChEMBL structure curation pipeline
+ChEMBL Structure Curation Pipeline
 ==================================
 
 .. literalinclude:: /examples/chembl_preproc.py

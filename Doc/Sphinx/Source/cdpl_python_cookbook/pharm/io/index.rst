@@ -1,4 +1,4 @@
-Input and output
+Input and Output
 ================
 
 .. toctree::

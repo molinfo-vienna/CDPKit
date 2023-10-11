@@ -1,4 +1,4 @@
-Connectivity properties
+Connectivity Properties
 =======================
 
 .. literalinclude:: /examples/print_atom_con_props.py

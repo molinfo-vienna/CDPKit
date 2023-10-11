@@ -1,4 +1,4 @@
-Generating protonation states at physiological pH
+Generating Protonation States at Physiological pH
 =================================================
 
 .. literalinclude:: /examples/prot_phys_cond.py

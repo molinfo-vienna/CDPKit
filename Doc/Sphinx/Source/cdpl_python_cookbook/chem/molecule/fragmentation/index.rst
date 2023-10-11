@@ -1,4 +1,4 @@
-Fragmentation and extraction of substructures
+Fragmentation and Extraction of Substructures
 =============================================
 
 .. toctree::

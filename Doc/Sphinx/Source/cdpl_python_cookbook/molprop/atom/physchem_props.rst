@@ -1,4 +1,4 @@
-Physicochemical properties
+Physicochemical Properties
 ==========================
 
 .. literalinclude:: /examples/print_atom_physchem_props.py

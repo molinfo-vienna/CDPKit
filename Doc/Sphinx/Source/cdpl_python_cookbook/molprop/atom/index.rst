@@ -1,4 +1,4 @@
-Atomic properties
+Atomic Properties
 =================
 
 .. toctree::

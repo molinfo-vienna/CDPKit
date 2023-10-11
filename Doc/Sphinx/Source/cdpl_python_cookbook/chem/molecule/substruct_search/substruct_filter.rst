@@ -1,4 +1,4 @@
-Testing for the presence of substructures
+Testing for the Presence of Substructures
 =========================================
 
 .. literalinclude:: /examples/substruct_filter.py
