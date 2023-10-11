@@ -60,8 +60,7 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
                     lgst_comp_hvy_atom_count = hvy_atom_count    # if so, store for later use
                     lgst_comp = comp
 
-            # if argument mol has a structure data property
-            # then keep it (for SDF output)
+            # if the input molecule has structure data then pass them on (for SDF output)
             if Chem.hasStructureData(mol):                       
                 Chem.setStructureData(lgst_comp, Chem.getStructureData(mol))
 
@@ -72,18 +71,19 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     # calc. implicit hydrogen counts (if not done already)
     Chem.calcImplicitHydrogenCounts(mol, False)
     
-    # create data structure for storing per-element atom counts
+    # create instance of class MolProp.ElementHistogram for storing the per-element atom counts
+    # of the molecule (or its largest comp.)
     elem_histo = MolProp.ElementHistogram()              
 
     # get per-element atom counts
     MolProp.generateElementHistogram(mol, elem_histo, False)    
 
-    # check if the found chem. elements are all in the whitelist (if specified)
-    if not checkElementWhitelist(elem_histo, args.elem_whitelist):    
+    # check if the found chem. elements are all in the set of allowed elements (if specified)
+    if not checkAllowedElements(elem_histo, args.allowed_elements):    
         return (None, 'element whitelist test not passed')
 
-    # check if none of the found chem. elements is blacklisted (if specified)
-    if not checkElementBlacklist(elem_histo, args.elem_blacklist):
+    # check if none of the found chem. elements is in the set of excluded elements (if specified)
+    if not checkExcludedElements(elem_histo, args.excluded_elements):
         return (None, 'element blacklist test not passed')
 
     # check if all specified minium chem. element atom counts are reached
@@ -107,32 +107,32 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
             
     return (mol, log_msg)
 
-# check wheter all found chem. elements are in the whitelist (if specified)
-def checkElementWhitelist(elem_histo: MolProp.ElementHistogram, elem_whitelist: list) -> bool:
-    if not elem_whitelist:
+# checks if all found chem. elements are in the set of allowed elements (if specified)
+def checkAllowedElements(elem_histo: MolProp.ElementHistogram, elem_list: list) -> bool:
+    if not elem_list:
         return True
 
     for atom_type in elem_histo.getKeys():
-        in_whitelist = False
+        allowed = False
         
-        for wl_atom_type in elem_whitelist:
-            if Chem.atomTypesMatch(wl_atom_type, atom_type):
-                in_whitelist = True
+        for all_atom_type in elem_list:
+            if Chem.atomTypesMatch(all_atom_type, atom_type):
+                allowed = True
                 break
 
-        if not in_whitelist:
+        if not allowed:
             return False
 
     return True
 
-# checks if none of the found chem. elements is in the blacklist (if specified)
-def checkElementBlacklist(elem_histo: MolProp.ElementHistogram, elem_blacklist: list) -> bool:
-    if not elem_blacklist:
+# checks if none of the found chem. elements is in the set of excluded elements (if specified)
+def checkExcludedElements(elem_histo: MolProp.ElementHistogram, elem_list: list) -> bool:
+    if not elem_list:
         return True
 
     for atom_type in elem_histo.getKeys():
-        for bl_atom_type in elem_blacklist:
-            if Chem.atomTypesMatch(bl_atom_type, atom_type):
+        for x_atom_type in elem_list:
+            if Chem.atomTypesMatch(x_atom_type, atom_type):
                 return False
 
     return True
@@ -256,16 +256,16 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Minimize number of charged atoms (default: false)')
-    parser.add_argument('-b',
-                        dest='elem_blacklist',
+    parser.add_argument('-x',
+                        dest='excluded_elements',
                         required=False,
                         metavar="<element list>",
-                        help='Chem. element blacklist (default: none)')
-    parser.add_argument('-w',
-                        dest='elem_whitelist',
+                        help='List of excluded chem. elements (default: no elements are excluded)')
+    parser.add_argument('-a',
+                        dest='allowed_elements',
                         required=False,
                         metavar="<element list>",
-                        help='Chem. element whitelist (default: all elements)')
+                        help='List of allowed chem. elements (default: all elements are allowed)')
     parser.add_argument('-m',
                         dest='min_atom_counts',
                         required=False,
@@ -292,8 +292,8 @@ def main() -> None:
 
     # convert specified lists of chem. element/gen. type symbols into a corresponding list of
     # numeric atom types (defined in Chem.Atomtype)
-    args.elem_whitelist  = parseElementList(args.elem_whitelist)
-    args.elem_blacklist  = parseElementList(args.elem_blacklist)
+    args.allowed_elements  = parseElementList(args.allowed_elements)
+    args.excluded_elements = parseElementList(args.excluded_elements)
 
     # convert specified comma separated lists of chem. element (or generic type) symbol/count pairs (sep. by colon) into
     # corresponding dictionaries mapping numeric atom types (defined in Chem.AtomType) to integers
@@ -361,7 +361,7 @@ def main() -> None:
                             
                         num_unchanged += 1
 
-                    # molecule passed the checks and needs to be written to the regular output file
+                    # molecule passed all checks and needs to be written to the regular output file
                     out_mol_writer = writer
                     
                 try:
@@ -381,12 +381,10 @@ def main() -> None:
                 except Exception as e: # handle exception raised in case of severe write errors
                     sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
                 
-            except Exception as e: # handle exception raised in case of severe structure processing errors
-                raise e
+            except Exception as e: # handle exception raised in case of severe processing errors
                 sys.exit('Error: processing of molecule %s failed: %s' % (mol_id, str(e)))
             
     except Exception as e: # handle exception raised in case of severe read errors
-        raise e
         sys.exit('Error: reading of molecule %s failed: %s' % (str(i), str(e)))
 
     if args.verb_level > 0:
