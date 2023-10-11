@@ -101,7 +101,7 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('extract_atom_envs', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('clean_mol_db', outputFilePath('clean_mol_db.smi'),
-                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('clean_mol_db.smi'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf.gz'), '-o', outputFilePath('clean_mol_db.smi'),
                                       '-a', 'C,H,N,O,S,P,F,Cl,Br,I', '-m', 'C,A:3', '-c', '-s' ])
     errors |= checkScriptFileOutput('chembl_preproc', outputFilePath('chembl_preproc.sdf'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chembl_preproc.sdf') ])
