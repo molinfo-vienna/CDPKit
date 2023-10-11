@@ -25,6 +25,10 @@
 #include <iostream>
 #include <exception>
 
+#ifndef _WIN32
+# include <cstdlib>
+#endif // _WIN32
+
 #include <QApplication>
 #include <QStringList>
 
@@ -55,6 +59,10 @@ namespace
 
 int main(int argc, char** argv)
 {
+#ifndef _WIN32
+    setenv("LC_ALL", "C", 1);  // required for using boost filesystem functionality
+#endif // _WIN32
+
     ChOXApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("CDPKit");
