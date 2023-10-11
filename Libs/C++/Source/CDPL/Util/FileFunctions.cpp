@@ -37,7 +37,7 @@ namespace
     struct Init {
         
         Init() {
-            setenv("LC_ALL", "C", 1);  // prevent the throwing of an exception if LC_ALL is not set!
+            setenv("LC_ALL", "C", 0);  // prevent the throwing of an exception if LC_ALL is not set!
         }
     } init;
 }
