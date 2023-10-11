@@ -22,9 +22,26 @@
  */
 
 
+#if defined(unix) || defined(__unix__) || defined(__unix)
+# include <stdlib.h>
+#endif
+
 #include <boost/filesystem.hpp>
 
 #include "CDPL/Util/FileFunctions.hpp"
+
+#if defined(unix) || defined(__unix__) || defined(__unix)
+namespace
+{
+
+    struct Init {
+        
+        Init() {
+            setenv("LC_ALL", "C", 1);  // prevent the throwing of an exception if LC_ALL is not set!
+        }
+    } init;
+}
+#endif
 
 
 using namespace CDPL;
