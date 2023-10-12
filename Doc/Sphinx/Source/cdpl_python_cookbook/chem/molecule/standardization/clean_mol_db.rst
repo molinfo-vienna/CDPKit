@@ -1,8 +1,8 @@
 Database Cleaning
 =================
 
-The script *clean_mol_db.py* read molecules from an input file, performs (optional) preprocessing,
-and finally writes all (preprocessed) molecules that fulfill particular user-defined criteria to an output file.
+The script *clean_mol_db.py* reads molecules from an input file, performs (optional) preprocessing,
+and then writes only those molecules that fulfill particular user-defined criteria to an output file.
 
 **Synopsis**
 
@@ -58,7 +58,7 @@ and finally writes all (preprocessed) molecules that fulfill particular user-def
     Verbosity level (default: 1; 0 -> no console output,
     1 -> print summary, 2 -> verbose, 3 -> extra verbose).
 
-The options *-a* and *-x* both take a list of chemical elements as argument.
+The options *-a* and *-x* both require a list of chemical elements as argument.
 Chemical element lists are specified in the form *<S>,...,<S>* where *<S>* is
 the symbol of a chemical element or generic atom type. Supported generic
 types are:
@@ -77,10 +77,11 @@ Q       any element except hydrogen and carbon
 QH      any element except carbon
 ======  =======
 
-The options *-m* and *-M* both take a list of chemical element counts as argument.
+The options *-m* and *-M* both require a list of chemical element counts as argument.
 Chemical element counts are specified in the form *<S>:<N>,...,<S>:<N>* where *<S>* is
 the symbol of a chemical element or generic atom type (see above) and *<N>* is
-the corresponding element count. If only *<S>* gets specified then the count is assumed to be ``1``.
+the corresponding minimum or maximum count. If the count part is omitted and only *<S>*
+gets specified then the count is assumed to be ``1``.
 
 **Example usage**
 
@@ -89,16 +90,15 @@ the corresponding element count. If only *<S>* gets specified then the count is 
    python clean_mol_db.py -i <path/to/molecule/input/file> -o <path/to/molecule/output/file> -a C,H,N,O,S,P,F,Cl,Br,I -m C,A:3 -M F:9 -c -s
 
 When executed as shown, the script will perform the following operations on each
-read input molecule in the given order:
+read input molecule (in the order listed):
 
 #. Reduction of the number of charged atoms (if any and if possible)
 #. Removal of all but the largest molecular graph component (only if multi-comp. molecule)
-#. Check whether the molecule resulting from the last operation only contains atoms 
-   being either C, H, N, O, S, P, F, Cl, Br, or I
-#. Check whether the working molecule comprises at least one carbon atom and a minimum of three heavy atoms
-#. Check whether the working molecule comprises not more than 9 fluorine atoms
+#. Check whether the chem. element of each atom of the working molecule (= result of prev. steps) is either C, H, N, O, S, P, F, Cl, Br, or I.
+#. Check whether the atom list of the working molecule contains at least one carbon and three heavy atoms
+#. Check whether the atom list of the working molecule contains not more than 9 fluorine atoms
 
-The first check that fails leads to an exclusion of the molecule from further processing. Molecules passing all checks will
+The first check that fails leads to a rejection of the molecule. Working molecules that pass all checks will
 be written to the specified output file.
    
 **Code**
