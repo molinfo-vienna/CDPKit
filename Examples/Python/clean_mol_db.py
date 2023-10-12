@@ -27,7 +27,7 @@ import CDPL.MolProp as MolProp
     
 # performs a (optional) standardization of the argument molecule and then checks whether
 # it fulfills certain user-defined criteria for inclusion/exclusion
-def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
+def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> (Chem.MolecularGraph, str):
     chgs_mod = False
 
     if args.min_charges:
@@ -225,67 +225,6 @@ def parseElementCountList(elem_count_list: str) -> [int]:
         atom_type_counts[atom_type] = count
             
     return atom_type_counts
-                        
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Strips compounds that fulfill particular user-defined criteria from a molecule database')
-
-    parser.add_argument('-i',
-                        dest='in_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Input molecule file')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Output molecule file')
-    parser.add_argument('-d',
-                        dest='disc_file',
-                        required=False,
-                        metavar='<file>',
-                        help='Discarded molecule output file')
-    parser.add_argument('-s',
-                        dest='strip_comps',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Keep only the largest molecule component (default: false)')
-    parser.add_argument('-c',
-                        dest='min_charges',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Minimize number of charged atoms (default: false)')
-    parser.add_argument('-x',
-                        dest='excluded_elements',
-                        required=False,
-                        metavar="<element list>",
-                        help='List of excluded chem. elements (default: no elements are excluded)')
-    parser.add_argument('-a',
-                        dest='allowed_elements',
-                        required=False,
-                        metavar="<element list>",
-                        help='List of allowed chem. elements (default: all elements are allowed)')
-    parser.add_argument('-m',
-                        dest='min_atom_counts',
-                        required=False,
-                        metavar="<element count list>",
-                        help='Minimum chem. element specific atom counts (default: no count limits)')
-    parser.add_argument('-M',
-                        dest='max_atom_counts',
-                        required=False,
-                        metavar="<element count list>",
-                        help='Maximum chem. element specific atom counts (default: no count limits)')
-    parser.add_argument('-v',
-                        dest='verb_level',
-                        required=False,
-                        metavar='<0|1|2|3>',
-                        choices=range(0, 4),
-                        default=1,
-                        help='Verbosity level (default: 1; 0 -> no console output, 1 -> print summary, 2 -> verbose, 3 -> extra verbose)',
-                        type=int)
-
-    return parser.parse_args()
 
 def main() -> None:
     args = parseArgs() # process command line arguments
@@ -393,6 +332,67 @@ def main() -> None:
         
     writer.close()
     sys.exit(0)
-        
+                                
+def parseArgs() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Strips compounds that fulfill particular user-defined criteria from a molecule database')
+
+    parser.add_argument('-i',
+                        dest='in_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Input molecule file')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Output molecule file')
+    parser.add_argument('-d',
+                        dest='disc_file',
+                        required=False,
+                        metavar='<file>',
+                        help='Discarded molecule output file')
+    parser.add_argument('-s',
+                        dest='strip_comps',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Keep only the largest molecule component (default: false)')
+    parser.add_argument('-c',
+                        dest='min_charges',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Minimize number of charged atoms (default: false)')
+    parser.add_argument('-x',
+                        dest='excluded_elements',
+                        required=False,
+                        metavar="<element list>",
+                        help='List of excluded chem. elements (default: no elements are excluded)')
+    parser.add_argument('-a',
+                        dest='allowed_elements',
+                        required=False,
+                        metavar="<element list>",
+                        help='List of allowed chem. elements (default: all elements are allowed)')
+    parser.add_argument('-m',
+                        dest='min_atom_counts',
+                        required=False,
+                        metavar="<element count list>",
+                        help='Minimum chem. element specific atom counts (default: no count limits)')
+    parser.add_argument('-M',
+                        dest='max_atom_counts',
+                        required=False,
+                        metavar="<element count list>",
+                        help='Maximum chem. element specific atom counts (default: no count limits)')
+    parser.add_argument('-v',
+                        dest='verb_level',
+                        required=False,
+                        metavar='<0|1|2|3>',
+                        choices=range(0, 4),
+                        default=1,
+                        help='Verbosity level (default: 1; 0 -> no console output, 1 -> print summary, 2 -> verbose, 3 -> extra verbose)',
+                        type=int)
+
+    return parser.parse_args()
+
 if __name__ == '__main__':
     main()
