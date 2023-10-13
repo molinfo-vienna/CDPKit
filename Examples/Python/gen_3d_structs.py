@@ -19,7 +19,6 @@
 
 
 import sys
-import os
 import argparse
 
 import CDPL.Chem as Chem

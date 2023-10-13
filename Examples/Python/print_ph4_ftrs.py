@@ -19,7 +19,6 @@
 
 
 import sys
-import os
 
 import CDPL.Pharm as Pharm
 import CDPL.Chem as Chem

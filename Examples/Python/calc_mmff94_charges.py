@@ -19,7 +19,6 @@
 
 
 import sys
-import os
 
 import CDPL.Chem as Chem
 import CDPL.ForceField as ForceField

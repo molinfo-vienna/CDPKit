@@ -19,7 +19,6 @@
 
 
 import sys
-import os
 import numpy
 
 import CDPL.Chem as Chem

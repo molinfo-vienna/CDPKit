@@ -19,7 +19,6 @@
 
 
 import sys
-import os
 import argparse
 
 import CDPL.Chem as Chem
@@ -34,11 +33,9 @@ def filterMolecules() -> None:
     # create writer for the output of matching molecules (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
+    # parse the substructure SMARTS pattern
     try:
         sub_srch_ptn = Chem.parseSMARTS(args.smarts_ptn)
-
-        Chem.initSubstructureSearchQuery(sub_srch_ptn, False)
-
     except Exception as e:
         sys.exit('Error: parsing of SMARTS pattern failed: %s' % str(e))
 
