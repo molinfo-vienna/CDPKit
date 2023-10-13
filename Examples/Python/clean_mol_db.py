@@ -254,7 +254,7 @@ def main() -> None:
     # create instances of the default implementation of the Chem.Molecule interface for the input and output molecules
     in_mol = Chem.BasicMolecule()
 
-    i = 1
+    i = 0
     num_changed = 0
     num_disc = 0
     
@@ -265,9 +265,9 @@ def main() -> None:
             mol_id = Chem.getName(in_mol).strip() 
 
             if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty or not available
+                mol_id = '#' + str(i + 1)  # fallback if name is empty or not available
             else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+                mol_id = '\'%s\' (#%s)' % (mol_id, str(i + 1))
             
             try:
                 # process input molecule
