@@ -119,7 +119,7 @@ void CDPLPythonChem::exportBond()
         .add_property("begin", python::make_function(getBeginFunc, python::return_internal_reference<1>()))
         .add_property("end", python::make_function(getEndFunc, python::return_internal_reference<1>()))
         .add_property("molecule", python::make_function(getMoleculeFunc, python::return_internal_reference<1>()))
-        .add_property("index", &Chem::Atom::getIndex)
+        .add_property("index", &Chem::Bond::getIndex)
         .add_property("atoms", python::make_function(&createAtomSequence<Chem::Bond>, 
                                                      python::with_custodian_and_ward_postcall<0, 1>()));
 
