@@ -25,11 +25,11 @@
 #include <cstdint>
 
 #include "CDPL/Chem/Entity3DMapping.hpp"
-#include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -75,6 +75,8 @@ void CDPLPythonChem::exportFunctionWrappers()
     CDPLPythonBase::Function2Export<std::uint64_t(const Atom&, const MolecularGraph&), Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
     CDPLPythonBase::Function2Export<std::size_t(const Atom&, const MolecularGraph&), Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
     CDPLPythonBase::Function2Export<bool(const MolecularGraph&, const AtomBondMapping&)>("BoolMolecularGraphAtomBondMappingFunctor");
+    CDPLPythonBase::Function2Export<void(Molecule&, const MolecularGraph&)>("VoidMoleculeMolecularGraphFunctor");
+    CDPLPythonBase::Function2Export<void(Reaction&, const Reaction&)>("VoidMoleculeMolecularGraphFunctor");
 
     CDPLPythonBase::Function3Export<double(const Math::Vector3D&, const Math::Vector3D&, const Atom&), const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");
     CDPLPythonBase::Function3Export<double(const Atom&, const Atom&, unsigned int), Atom&, Atom&>("DoubleAtom2UIntFunctor");     
