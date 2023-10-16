@@ -109,7 +109,7 @@ def main() -> None:
                     if status == ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
                         print(' -> Generated %s conformers (warning: too much top. symmetry - output ensemble may contain duplicates)' % str(num_confs))
                     else:
-                        print(' -> Generated %s conformers' % str(num_confs))
+                        print(' -> Generated %s conformer(s)' % str(num_confs))
                         
                 # output generated ensemble (if available)
                 if num_confs > 0:
