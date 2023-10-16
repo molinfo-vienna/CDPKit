@@ -80,19 +80,19 @@ BOOST_PYTHON_MODULE(_math)
     exportRange();
     exportSlice();
 
-    exportVectorSliceTypes();
     exportConstVectorSliceTypes();
-    exportVectorRangeTypes();
+    exportVectorSliceTypes();
     exportConstVectorRangeTypes();
+    exportVectorRangeTypes();
 
-    exportMatrixRangeTypes();
     exportConstMatrixRangeTypes();
-    exportMatrixSliceTypes();
+    exportMatrixRangeTypes();
     exportConstMatrixSliceTypes();
-    exportMatrixRowTypes();
+    exportMatrixSliceTypes();
     exportConstMatrixRowTypes();
-    exportMatrixColumnTypes();
+    exportMatrixRowTypes();
     exportConstMatrixColumnTypes();
+    exportMatrixColumnTypes();
 
     exportVectorQuaternionAdapterTypes();
     exportConstVectorQuaternionAdapterTypes();
@@ -104,8 +104,8 @@ BOOST_PYTHON_MODULE(_math)
     exportTriangularMatrixAdapterTypes2();
     exportTriangularMatrixAdapterTypes3();
     exportTriangularMatrixAdapterTypes4();
-    exportMatrixTransposeTypes();
     exportConstMatrixTransposeTypes();
+    exportMatrixTransposeTypes();
 
     exportQuaternionAdapterTypes();
 
