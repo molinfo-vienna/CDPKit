@@ -4,5 +4,6 @@
 .. toctree::
    :maxdepth: 2
 
-   3d_structs
-   ensembles
+   gen_3d_struct
+   gen_ensemble
+   tor_driving
