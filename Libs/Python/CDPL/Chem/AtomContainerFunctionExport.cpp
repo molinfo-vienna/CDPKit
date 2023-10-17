@@ -47,7 +47,6 @@ namespace
     MAKE_FUNCTION_WRAPPER3(bool, calcCentroid, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
     MAKE_FUNCTION_WRAPPER3(bool, calcCenterOfMass, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
-    MAKE_FUNCTION_WRAPPER4(std::size_t, createAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int, bool);
     MAKE_FUNCTION_WRAPPER4(void, getConformation, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&, bool);
     MAKE_FUNCTION_WRAPPER4(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&, const CDPL::Chem::Atom3DCoordinatesFunction&, bool);
     MAKE_FUNCTION_WRAPPER4(void, copyAtomsIf, CDPL::Chem::AtomContainer&, CDPL::Chem::Molecule&, const CDPL::Chem::AtomPredicate&, bool);
@@ -57,6 +56,7 @@ namespace
     MAKE_FUNCTION_WRAPPER4(bool, insideBoundingBox, CDPL::Chem::AtomContainer&, const CDPL::Math::Vector3D&, const CDPL::Math::Vector3D&, const CDPL::Chem::Atom3DCoordinatesFunction&);
     MAKE_FUNCTION_WRAPPER4(bool, intersectsBoundingBox, CDPL::Chem::AtomContainer&, const CDPL::Math::Vector3D&, const CDPL::Math::Vector3D&, const CDPL::Chem::Atom3DCoordinatesFunction&);
 
+    MAKE_FUNCTION_WRAPPER5(std::size_t, createAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int, bool, bool);
     MAKE_FUNCTION_WRAPPER5(void, calcBoundingBox, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3D&, CDPL::Math::Vector3D&, const CDPL::Chem::Atom3DCoordinatesFunction&, bool);
 }
 
@@ -82,9 +82,15 @@ void CDPLPythonChem::exportAtomContainerFunctions()
     python::def("transformConformation", &Chem::transformConformation, (python::arg("cntnr"), python::arg("conf_idx"), python::arg("mtx")));
     python::def("transformConformations", &Chem::transformConformations, (python::arg("cntnr"), python::arg("mtx")));
     python::def("getNumConformations", &getNumConformationsWrapper1, python::arg("cntnr"));
-
-    python::def("createAtomTypeMask",  &createAtomTypeMaskWrapper4, 
-                (python::arg("cntnr"), python::arg("mask"), python::arg("type"), python::arg("reset") = true));
+    python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&, const Math::Vector3DArray&)>(&Chem::alignConformations),
+                (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_conf")));
+    python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&, std::size_t)>(&Chem::alignConformations),
+                (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_conf_idx") = 0));
+    python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, std::size_t)>(&Chem::alignConformations),
+                (python::arg("cntnr"), python::arg("ref_conf_idx") = 0));
+   
+    python::def("createAtomTypeMask",  &createAtomTypeMaskWrapper5, 
+                (python::arg("cntnr"), python::arg("mask"), python::arg("type"), python::arg("reset") = true, python::arg("strict") = true));
     python::def("copyAtomsIf", static_cast<void (*)(CDPL::Chem::AtomContainer&, CDPL::Chem::Molecule&, const CDPL::Chem::AtomPredicate&, bool)>(&copyAtomsIfWrapper4),
                 (python::arg("cntnr"), python::arg("mol"), python::arg("pred"), python::arg("append") = false));
     python::def("copyAtomsIf", static_cast<void (*)(CDPL::Chem::AtomContainer&, CDPL::Chem::Fragment&, const CDPL::Chem::AtomPredicate&, bool)>(&copyAtomsIfWrapper4),

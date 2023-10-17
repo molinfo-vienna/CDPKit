@@ -26,12 +26,15 @@
 
 #include <algorithm>
 #include <limits>
+#include <vector>
 
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
+#include "CDPL/Math/KabschAlgorithm.hpp"
 
 
 using namespace CDPL; 
@@ -131,4 +134,65 @@ void Chem::transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mt
 {
     for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
         transform(*get3DCoordinatesArray(*it), mtx);
+}
+
+bool Chem::alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_conf)
+{
+    std::size_t num_confs = getNumConformations(cntnr);
+
+    if (num_confs == 0)
+        return true;
+    
+    std::vector<std::size_t> ref_atom_inds;
+    
+    for (std::size_t i = ref_atoms.find_first(), num_atoms = cntnr.getNumAtoms(); i != Util::BitSet::npos && i < num_atoms; i = ref_atoms.find_next(i))
+        ref_atom_inds.push_back(i);
+
+    std::size_t num_ref_atoms = ref_atom_inds.size();
+
+    if (num_ref_atoms == 0)
+        return false;
+    
+    Math::DMatrix ref_coords(3, num_ref_atoms);
+
+    for (std::size_t i = 0; i < num_ref_atoms; i++)
+        column(ref_coords, i) = ref_conf[ref_atom_inds[i]];
+      
+    Math::KabschAlgorithm<double> kabsch_algo;    
+    Math::DMatrix algnd_coords(3, num_ref_atoms);
+    bool no_errors = true;
+    
+    for (std::size_t i = 0; i < num_confs; i++) {
+        for (std::size_t j = 0; j < num_ref_atoms; j++) {
+            Math::Vector3DArray& coords_array = *get3DCoordinatesArray(cntnr.getAtom(ref_atom_inds[j]));
+            column(algnd_coords, j) = coords_array[i];
+        }
+
+        if (!kabsch_algo.align(algnd_coords, ref_coords)) {
+            no_errors = false;
+            continue;
+        }
+
+        transformConformation(cntnr, i, kabsch_algo.getTransform());
+    }
+    
+    return no_errors;
+}
+
+bool Chem::alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, std::size_t ref_conf_idx)
+{
+    Math::Vector3DArray ref_conf;
+
+    getConformation(cntnr, ref_conf_idx, ref_conf, false);
+
+    return alignConformations(cntnr, ref_atoms, ref_conf);
+}
+   
+bool Chem::alignConformations(AtomContainer& cntnr, std::size_t ref_conf_idx)
+{
+    Util::BitSet ref_atoms;
+
+    createAtomTypeMask(cntnr, ref_atoms, AtomType::A, false, false);
+    
+    return alignConformations(cntnr, ref_atoms, ref_conf_idx);
 }

@@ -79,13 +79,19 @@ namespace CDPL
 
         CDPL_CHEM_API void transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_conf);
+
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, std::size_t ref_conf_idx = 0);
+
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, std::size_t ref_conf_idx = 0);
+        
 
         CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
 
         CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
 
 
-        CDPL_CHEM_API std::size_t createAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);
+        CDPL_CHEM_API std::size_t createAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true, bool strict = true);
 
 
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);

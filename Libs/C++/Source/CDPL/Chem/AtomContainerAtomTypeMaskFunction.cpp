@@ -26,12 +26,13 @@
 
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::createAtomTypeMask(const Chem::AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset)
+std::size_t Chem::createAtomTypeMask(const Chem::AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset, bool strict)
 {
     std::size_t num_atoms = cntnr.getNumAtoms();
 
@@ -45,11 +46,16 @@ std::size_t Chem::createAtomTypeMask(const Chem::AtomContainer& cntnr, Util::Bit
 
     for (std::size_t i = 0; i < num_atoms; i++) {
         const Atom& atom = cntnr.getAtom(i);
-        
-        if (getType(atom) == type) {
-            mask.set(i);
-            num_bits++;
-        }
+
+        if (strict) {
+            if (type != getType(atom))
+                continue;
+            
+        } else if (!atomTypesMatch(type, getType(atom)))
+            continue;
+              
+        mask.set(i);
+        num_bits++;
     }
 
     return num_bits;
