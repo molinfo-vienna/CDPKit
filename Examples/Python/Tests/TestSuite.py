@@ -45,7 +45,7 @@ def checkScriptOutput(script_name, args):
         exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
         if output == exp_output:
-            print('OK', file=sys.stderr)
+            print('ok', file=sys.stderr)
             return False
 
         print('\nScript output check FAILED:\nExpected output = \'%s\'\nReceived output = \'%s\'' % (exp_output, output), file=sys.stderr)
@@ -67,7 +67,7 @@ def checkScriptFileOutput(script_name, out_file, args):
         exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
         if output == exp_output:
-            print('OK', file=sys.stderr)
+            print('ok', file=sys.stderr)
             return False
 
         print('\nScript output check FAILED:\nExpected output = \'%s\'\nReceived output = \'%s\'' % (exp_output, output), file=sys.stderr)
@@ -86,13 +86,12 @@ def checkScriptExecution(script_name, args):
     try:
         subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
 
-        print('OK', file=sys.stderr)
+        print('ok', file=sys.stderr)
         return False
     
     except Exception as e:
         print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
         return True
-
 
 if __name__ == '__main__':
     errors = False
@@ -134,8 +133,11 @@ if __name__ == '__main__':
 
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
+    errors |= checkScriptFileOutput('tor_drive', outputFilePath('test.mol2'),
+                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.mol2'), '-a', '-q', '-n', '20', '-f', 'c1cccc2c1C(C)OC2' ])
     errors |= checkScriptFileOutput('gen_confs', outputFilePath('test.mol2'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
     errors |= checkScriptFileOutput('gen_3d_structs', outputFilePath('test.mol2'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2') ])
+    
     sys.exit(errors)
