@@ -1,5 +1,8 @@
 master:
 
+ - New class for the extraction of Bemis-Murcko scaffolds
+ - New functions for conformer alignment
+ - Function overload resolution order fixes in the CDPL.Math Python package
  - Fixed the throwing of exceptions when the env. variable LC_ALL has not been initialized
  - Python exports of Util::Map and Util::MultiMap do not provide the properties 'keys', 'values', and 'entries' anymore.
    They were replaced by the corresponding methods keys(), values() and items()
