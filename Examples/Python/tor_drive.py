@@ -114,9 +114,21 @@ def performTorsionDriving(mol: Chem.Molecule, tor_driver: ConfGen.TorsionDriver,
 # aligns a set of conformers on the heavy atoms of a given reference structure (fixed substructure
 # or input molecule)
 def alignConformers(ref_struct: Chem.AtomContainer, ref_conf: Math.Vector3DArray, confs: []) -> None:
-    kabsch_algo = Math.DKabschAlgorithm()  # create instance of the class implementing Kabsch's alignment algorithm
-    ref_atom_inds = [atom.index for atom in ref_struct.atoms if Chem.getType(atom) != Chem.AtomType.H] # get reference structure heavy atom indices
+    # first, try to use only the heavy atoms of the reference structure for alignment
+    ref_atom_inds = [atom.index for atom in ref_struct.atoms if Chem.getType(atom) != Chem.AtomType.H] 
     num_ref_atoms = len(ref_atom_inds)
+
+    # if num. heavy atoms < 3 (3 atoms are required for a defined orientation) use all atoms
+    if num_ref_atoms < 3: 
+        ref_atom_inds = [atom.index for atom in ref_struct.atoms] 
+        num_ref_atoms = len(ref_atom_inds)
+
+    if num_ref_atoms < 1: # in this case, an alignment is not possible
+        return
+        
+    # create instance of the class implementing Kabsch's alignment algorithm
+    kabsch_algo = Math.DKabschAlgorithm()  
+
     ref_coords = Math.DMatrix(3, num_ref_atoms)   # matrix storing the reference 3D coordinates
     algnd_coords = Math.DMatrix(3, num_ref_atoms) # matrix storing the 3D coordinates to align
 
