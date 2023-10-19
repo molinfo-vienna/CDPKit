@@ -51,7 +51,7 @@ def performTorsionDriving(mol: Chem.Molecule, tor_driver: ConfGen.TorsionDriver,
                 continue
             
             if ConfGen.isRotatableBond(bond, mol, args.rot_term_het_grps):
-                rot_bonds.set(bond.index)
+                rot_bonds.set(bond.getIndex())
 
         status = tor_driver.setup(mol, rot_bonds)  # setup torsion driver
 
