@@ -166,6 +166,7 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         metavar='<int>',
                         type=int,
+                        default=100,
                         help='Max. output ensemble size (default: 100)')
     parser.add_argument('-q',
                         dest='quiet',
