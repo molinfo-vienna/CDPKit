@@ -287,6 +287,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("getConformationEnergy", &Chem::getConformationEnergy,
                 (python::arg("molgraph"), python::arg("conf_idx")));
 
+    python::def("calcBasicProperties", &Chem::calcBasicProperties,
+                (python::arg("molgraph"), python::arg("overwrite")));
+
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)

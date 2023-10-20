@@ -152,6 +152,9 @@ void CDPLPythonChem::exportReactionFunctions()
     python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("rxn"));
     python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("rxn"));
 
+    python::def("calcBasicProperties", &Chem::calcBasicProperties,
+                (python::arg("rxn"), python::arg("overwrite")));
+
     EXPORT_REACTION_FUNCS_COPY_REF_CW(MatchExpression, expr)
     EXPORT_REACTION_FUNCS_COPY_REF_CW(ComponentGroups, comp_groups)
     EXPORT_REACTION_FUNCS_COPY_REF_CW(AtomMapping, mapping)
