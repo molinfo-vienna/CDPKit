@@ -130,6 +130,7 @@ set(chem_MOD_SRCS
     FragmentGeneratorExport.cpp
     RECAPFragmentGeneratorExport.cpp
     BRICSFragmentGeneratorExport.cpp
+    BemisMurckoAnalyzerExport.cpp
     ResonanceStructureGeneratorExport.cpp
     ChEMBLStandardizerExport.cpp
     ProtonationStateStandardizerExport.cpp

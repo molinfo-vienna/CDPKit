@@ -138,6 +138,7 @@ namespace CDPLPythonChem
     void exportFragmentGenerator();
     void exportRECAPFragmentGenerator();
     void exportBRICSFragmentGenerator();
+    void exportBemisMurckoAnalyzer();
 
     void exportMoleculeReader();
     void exportMolecularGraphWriter();

@@ -286,6 +286,7 @@
 #include "CDPL/Chem/BRICSRuleID.hpp"
 #include "CDPL/Chem/BRICSAtomLabel.hpp"
 #include "CDPL/Chem/BRICSFragmentGenerator.hpp"
+#include "CDPL/Chem/BemisMurckoAnalyzer.hpp"
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/SpatialEntityAlignment.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
