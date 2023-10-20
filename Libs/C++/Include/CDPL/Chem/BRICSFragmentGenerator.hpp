@@ -42,9 +42,9 @@ namespace CDPL
     {
 
         /**
-     * \brief BRICSFragmentGenerator.
-     * \see [\ref BRICS]
-     */
+         * \brief BRICSFragmentGenerator.
+         * \see [\ref BRICS]
+         */
         class CDPL_CHEM_API BRICSFragmentGenerator : public FragmentGenerator
         {
 
@@ -52,8 +52,8 @@ namespace CDPL
             typedef std::shared_ptr<BRICSFragmentGenerator> SharedPointer;
 
             /**
-         * \brief Constructs the \c %BRICSFragmentGenerator instance.
-         */
+             * \brief Constructs the \c %BRICSFragmentGenerator instance.
+             */
             BRICSFragmentGenerator();
         };
     } // namespace Chem
