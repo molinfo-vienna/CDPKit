@@ -706,6 +706,13 @@ def calcCIPPriorities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param molgraph 
 # \param overwrite 
 #
+def calcBasicProperties(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+#
 def setAtomSymbolsFromTypes(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##

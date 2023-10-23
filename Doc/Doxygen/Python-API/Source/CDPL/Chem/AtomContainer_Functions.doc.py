@@ -66,9 +66,10 @@ def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, appen
 # \param mask 
 # \param type 
 # \param reset 
+# \param strict 
 # \return 
 #
-def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset: bool = True) -> int: pass
+def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset: bool = True, strict: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -153,6 +154,32 @@ def transformConformations(cntnr: AtomContainer, mtx: Math.Matrix4D) -> None: pa
 # \return 
 #
 def getNumConformations(cntnr: AtomContainer) -> int: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ref_atoms 
+# \param ref_conf 
+# \return 
+#
+def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf: Math.Vector3DArray) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ref_atoms 
+# \param ref_conf_idx 
+# \return 
+#
+def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf_idx: int = 0) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ref_conf_idx 
+# \return 
+#
+def alignConformations(cntnr: AtomContainer, ref_conf_idx: int = 0) -> bool: pass
 
 ##
 # \brief 

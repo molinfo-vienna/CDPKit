@@ -236,7 +236,7 @@ class Reaction(Base.PropertyContainer):
     # \param func 
     #
     @staticmethod
-    def registerCopyPostprocessingFunction(func: object) -> None: pass
+    def registerCopyPostprocessingFunction(func: VoidMoleculeMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief 

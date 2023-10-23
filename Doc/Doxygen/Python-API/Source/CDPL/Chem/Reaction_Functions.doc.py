@@ -386,6 +386,13 @@ def setMDLExternalRegistryNumber(rxn: Reaction, reg_no: str) -> None: pass
 ##
 # \brief 
 # \param rxn 
+# \param overwrite 
+#
+def calcBasicProperties(rxn: Reaction, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param rxn 
 #
 def clearMDLUserInitials(rxn: Reaction) -> None: pass
 
