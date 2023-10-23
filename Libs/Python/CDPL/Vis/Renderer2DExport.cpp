@@ -111,32 +111,32 @@ void CDPLPythonVis::exportRenderer2D()
     python::class_<Renderer2DWrapper, boost::noncopyable>("Renderer2D", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Renderer2D>())    
-        .def("saveState", python::pure_virtual(&CDPL::Vis::Renderer2D::saveState), python::arg("self"))
-        .def("restoreState", python::pure_virtual(&CDPL::Vis::Renderer2D::restoreState), python::arg("self"))
-        .def("setTransform", python::pure_virtual(&CDPL::Vis::Renderer2D::setTransform), 
+        .def("saveState", python::pure_virtual(&Vis::Renderer2D::saveState), python::arg("self"))
+        .def("restoreState", python::pure_virtual(&Vis::Renderer2D::restoreState), python::arg("self"))
+        .def("setTransform", python::pure_virtual(&Vis::Renderer2D::setTransform), 
              (python::arg("self"), python::arg("xform")))
-        .def("transform", python::pure_virtual(&CDPL::Vis::Renderer2D::transform), 
+        .def("transform", python::pure_virtual(&Vis::Renderer2D::transform), 
              (python::arg("self"), python::arg("xform")))
-        .def("setPen", python::pure_virtual(&CDPL::Vis::Renderer2D::setPen), 
+        .def("setPen", python::pure_virtual(&Vis::Renderer2D::setPen), 
              (python::arg("self"), python::arg("pen")))
-        .def("setBrush", python::pure_virtual(&CDPL::Vis::Renderer2D::setBrush), 
+        .def("setBrush", python::pure_virtual(&Vis::Renderer2D::setBrush), 
              (python::arg("self"), python::arg("brush")))
-        .def("setFont", python::pure_virtual(&CDPL::Vis::Renderer2D::setFont), 
+        .def("setFont", python::pure_virtual(&Vis::Renderer2D::setFont), 
              (python::arg("self"), python::arg("font")))
-        .def("drawRectangle", python::pure_virtual(&CDPL::Vis::Renderer2D::drawRectangle), 
+        .def("drawRectangle", python::pure_virtual(&Vis::Renderer2D::drawRectangle), 
              (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
-        .def("drawEllipse", python::pure_virtual(&CDPL::Vis::Renderer2D::drawEllipse), 
+        .def("drawEllipse", python::pure_virtual(&Vis::Renderer2D::drawEllipse), 
              (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
-        .def("drawPolygon", python::pure_virtual(&CDPL::Vis::Renderer2D::drawPolygon), 
+        .def("drawPolygon", python::pure_virtual(&Vis::Renderer2D::drawPolygon), 
              (python::arg("self"), python::arg("points")))
-        .def("drawLine", python::pure_virtual(&CDPL::Vis::Renderer2D::drawLine), 
+        .def("drawLine", python::pure_virtual(&Vis::Renderer2D::drawLine), 
              (python::arg("self"), python::arg("x1"), python::arg("y1"), python::arg("x2"), python::arg("y2")))
-        .def("drawPolyline", python::pure_virtual(&CDPL::Vis::Renderer2D::drawPolyline), 
+        .def("drawPolyline", python::pure_virtual(&Vis::Renderer2D::drawPolyline), 
              (python::arg("self"), python::arg("points")))
-        .def("drawLineSegments", python::pure_virtual(&CDPL::Vis::Renderer2D::drawLineSegments), 
+        .def("drawLineSegments", python::pure_virtual(&Vis::Renderer2D::drawLineSegments), 
              (python::arg("self"), python::arg("points")))
-        .def("drawPoint", python::pure_virtual(&CDPL::Vis::Renderer2D::drawPoint), 
+        .def("drawPoint", python::pure_virtual(&Vis::Renderer2D::drawPoint), 
              (python::arg("self"), python::arg("x"), python::arg("y")))
-        .def("drawText", python::pure_virtual(&CDPL::Vis::Renderer2D::drawText), 
+        .def("drawText", python::pure_virtual(&Vis::Renderer2D::drawText), 
              (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("txt")));
 }
