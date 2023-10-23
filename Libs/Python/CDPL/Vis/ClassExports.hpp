@@ -40,6 +40,8 @@ namespace CDPLPythonVis
     void exportLine2D();
     void exportRectangle2D();
     void exportPointArray2D();
+    void exportPath2D();
+    void exportPath2DConverter();
     void exportColorTable();
     void exportGraphicsPrimitive2D();
     void exportView2D();

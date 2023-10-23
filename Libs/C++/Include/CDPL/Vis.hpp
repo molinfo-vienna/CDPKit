@@ -64,6 +64,8 @@
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Line2D.hpp"
 #include "CDPL/Vis/PointArray2D.hpp"
+#include "CDPL/Vis/Path2D.hpp"
+#include "CDPL/Vis/Path2DConverter.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
 #include "CDPL/Vis/AtomColorTable.hpp"
 #include "CDPL/Vis/GraphicsPrimitive2D.hpp"

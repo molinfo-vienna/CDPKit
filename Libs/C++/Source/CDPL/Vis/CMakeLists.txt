@@ -58,6 +58,7 @@ set(cdpl-vis_LIB_SRCS
     Rectangle2D.cpp
     Line2D.cpp
     PointArray2D.cpp
+    Path2D.cpp
     EllipsePrimitive2D.cpp
     LinePrimitive2D.cpp
     PolygonPrimitive2D.cpp

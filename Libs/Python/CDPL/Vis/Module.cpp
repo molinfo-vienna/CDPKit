@@ -45,6 +45,8 @@ BOOST_PYTHON_MODULE(_vis)
     exportLine2D();
     exportRectangle2D();
     exportPointArray2D();
+    exportPath2D();
+    exportPath2DConverter();
     exportColorTable();
     exportGraphicsPrimitive2D();
     exportView2D();

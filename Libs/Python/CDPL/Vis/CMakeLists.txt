@@ -40,6 +40,8 @@ set(vis_MOD_SRCS
     Line2DExport.cpp
     Rectangle2DExport.cpp
     PointArray2DExport.cpp
+    Path2DExport.cpp
+    Path2DConverterExport.cpp
     ColorTableExport.cpp
     AtomColorTableExport.cpp
     GraphicsPrimitive2DExport.cpp
