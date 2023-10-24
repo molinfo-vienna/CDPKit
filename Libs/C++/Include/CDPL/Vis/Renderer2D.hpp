@@ -45,6 +45,7 @@ namespace CDPL
         class Pen;
         class Brush;
         class Font;
+        class Path2D;
 
         /**
          * \brief An interface that provides methods for low level 2D drawing operations.
@@ -56,7 +57,11 @@ namespace CDPL
          *  - drawLineSegments() for drawing a set of disjoint line segments
          *  - drawPolygon() for drawing polygons
          *  - drawRectangle() for drawing axis aligned rectangles
+         *  - drawPath() for drawing arbitrary shapes
          *  - and drawText() for drawing text
+         *
+         * Drawing operations can be clipped to arbitrary shapes defined by a Vis::Path2D object. A new clip region is set
+         * by calling the method setClipPath() and disabled by calling clearClipPath().
          *
          * Coordinates of points that define the geometry of graphical primitives are normally directly mapped to the coordinate
          * system of the drawing device (e.g. an off-screen image buffer). This 1:1 mapping can be changed by applying
@@ -225,6 +230,17 @@ namespace CDPL
             virtual void drawEllipse(double x, double y, double width, double height) = 0;
 
             /**
+             * \brief Draws the given path.
+             *
+             * The path is filled as specified by the current brush and the outline will be drawn as specified by
+             * the current pen.
+             *
+             * \param path The path to draw.
+             * \see setPen(), setBrush()
+             */
+            virtual void drawPath(const Path2D& path) = 0;
+
+            /**
              * \brief Draws the specified text at the position <em>(x, y)</em>.
              *
              * The text color is specified by the current pen. The font has to be specified
@@ -236,6 +252,21 @@ namespace CDPL
              * \see setPen(), setFont()
              */
             virtual void drawText(double x, double y, const std::string& txt) = 0;
+
+            /*
+             * \brief Enables clipping and establishes a new clip region.
+             *
+             * The set clip region will affect all drawing operations by effectively masking out any changes to the 
+             * drawing surface that are outside of the specified region.
+             *
+             * \param path The path specifying the shape of the clip region.
+             */
+            virtual void setClipPath(const Path2D& path) = 0;
+
+            /**
+             * \brief Disables clipping.
+             */
+            virtual void clearClipPath() = 0;
         };
     } // namespace Vis
 } // namespace CDPL

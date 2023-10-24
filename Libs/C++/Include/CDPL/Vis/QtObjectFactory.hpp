@@ -36,6 +36,7 @@ class QFont;
 class QBrush;
 class QPen;
 class QColor;
+class QPainterPath;
 
 
 namespace CDPL
@@ -48,6 +49,7 @@ namespace CDPL
         class Color;
         class Pen;
         class Brush;
+        class Path2D;
 
         /**
          * \brief Provides methods for the creation of \c QFont, \c QColor, \c QPen and \c QBrush objects
@@ -86,6 +88,14 @@ namespace CDPL
              * \return A \c QBrush object equivalent to \a brush.
              */
             static QBrush createQBrush(const Brush& brush);
+
+            /**
+             * \brief Creates a \c QPainterPath object that corresponds to the specified path.
+             * \param path The path object.
+             * \param qt_path The QPainterPath object to create.
+             * \return The argument \a qt_path.
+             */
+            static QPainterPath& createQPainterPath(const Path2D& path, QPainterPath& qt_path);
 
           private:
             QtObjectFactory() {}

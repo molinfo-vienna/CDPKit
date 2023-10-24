@@ -37,6 +37,7 @@
 
 class QPainter;
 class QPolygonF;
+class QPainterPath;
 
 
 namespace CDPL
@@ -85,6 +86,10 @@ namespace CDPL
             void drawPoint(double x, double y);
             void drawText(double x, double y, const std::string& txt);
             void drawEllipse(double x, double y, double width, double height);
+            void drawPath(const Path2D& path);
+
+            void setClipPath(const Path2D& path);
+            void clearClipPath();
 
           private:
             QtRenderer2D(const QtRenderer2D&);
@@ -93,8 +98,9 @@ namespace CDPL
 
             void convertToQPolygon(const Math::Vector2DArray&);
 
-            QPainter&                qPainter;
-            std::unique_ptr<QPolygonF> qPolygon;
+            QPainter&                     qPainter;
+            std::unique_ptr<QPolygonF>    qPolygon;
+            std::unique_ptr<QPainterPath> qPainterPath;
         };
     } // namespace Vis
 } // namespace CDPL

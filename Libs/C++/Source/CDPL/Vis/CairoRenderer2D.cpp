@@ -32,7 +32,12 @@
 #include "CDPL/Vis/PointArray2D.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/CairoPointer.hpp"
+#include "CDPL/Vis/Path2D.hpp"
+#include "CDPL/Vis/Path2DConverter.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+
+
+using namespace CDPL;
 
 
 namespace
@@ -146,6 +151,55 @@ namespace
     cairo_surface_t* leftDiagPattern  = cairo_image_surface_create_for_data(leftDiagPatternData, CAIRO_FORMAT_A8, 4, 4, 4); 
     cairo_surface_t* rightDiagPattern = cairo_image_surface_create_for_data(rightDiagPatternData, CAIRO_FORMAT_A8, 4, 4, 4); 
     cairo_surface_t* diagCrossPattern = cairo_image_surface_create_for_data(diagCrossPatternData, CAIRO_FORMAT_A8, 8, 8, 8); 
+
+    struct ToCairoPathConverter : public Vis::Path2DConverter
+    {
+
+        ToCairoPathConverter(const Vis::Path2D& path, cairo_t* ctxt): cairoCtxt(ctxt) {
+            cairo_new_path(ctxt);
+            cairo_set_fill_rule(ctxt, path.getFillRule() == Vis::Path2D::WINDING ? CAIRO_FILL_RULE_WINDING : CAIRO_FILL_RULE_EVEN_ODD);
+
+            path.convert(*this);
+        }
+        
+        void moveTo(double x, double y) {
+            cairo_move_to(cairoCtxt, x, y);
+        }
+ 
+        void arcTo(double cx, double cy, double rx, double ry, double start_ang, double sweep) {
+            start_ang *= M_PI / 180.0;
+            sweep *= M_PI / 180.0;
+
+            if (rx == ry) {
+                if (sweep >= 0.0)
+                    cairo_arc(cairoCtxt, cx, cy, rx, start_ang, start_ang + sweep);
+                else
+                    cairo_arc_negative(cairoCtxt, cx, cy, rx, start_ang, start_ang + sweep);
+                return;
+            }
+
+            cairo_save(cairoCtxt);
+            cairo_translate(cairoCtxt, cx, cy);
+            cairo_scale(cairoCtxt, rx, ry);
+
+            if (sweep >= 0.0)
+                cairo_arc(cairoCtxt, 0.0, 0.0, 1.0, start_ang, start_ang + sweep);
+            else
+                cairo_arc_negative(cairoCtxt, 0.0, 0.0, 1.0, start_ang, start_ang + sweep);
+
+            cairo_restore(cairoCtxt);
+        }
+
+        void lineTo(double x, double y) {
+            cairo_line_to(cairoCtxt, x, y);
+        }
+
+        void closePath() {
+            cairo_close_path(cairoCtxt);
+        }
+
+        cairo_t* cairoCtxt;
+    };
 }
 
 
@@ -155,7 +209,7 @@ using namespace CDPL;
 Vis::CairoRenderer2D::CairoRenderer2D(const CairoPointer<cairo_t>& ctxt_ptr): cairoContext(ctxt_ptr) 
 {
     if (!ctxt_ptr)
-        throw Base::NullPointerException("CairoRenderer2D: NULL cairo context pointer");
+        throw Base::NullPointerException("CairoRenderer2D: cairo context pointer is null");
 
     penStack.push_back(Pen());
     brushStack.push_back(Brush());
@@ -356,10 +410,37 @@ void Vis::CairoRenderer2D::drawEllipse(double x, double y, double width, double 
     cairo_scale(cairoContext.get(), 1.0, height / width);
     cairo_arc(cairoContext.get(), 0.0, 0.0, width * 0.5, 0.0, 2 * M_PI);
 
+    cairo_restore(cairoContext.get());
+
+    fillPath();
+    strokePath();
+}
+
+void Vis::CairoRenderer2D::drawPath(const Path2D& path)
+{
+    cairo_fill_rule_t prev_fill_rule = cairo_get_fill_rule(cairoContext.get());
+
+    ToCairoPathConverter(path, cairoContext.get());
+
     fillPath();
     strokePath();
 
-    cairo_restore(cairoContext.get());
+    cairo_set_fill_rule(cairoContext.get(), prev_fill_rule);
+}
+
+void Vis::CairoRenderer2D::setClipPath(const Path2D& path)
+{
+    cairo_fill_rule_t prev_fill_rule = cairo_get_fill_rule(cairoContext.get());
+
+    ToCairoPathConverter(path, cairoContext.get());
+
+    cairo_clip(cairoContext.get());
+    cairo_set_fill_rule(cairoContext.get(), prev_fill_rule);
+}
+
+void Vis::CairoRenderer2D::clearClipPath()
+{
+    cairo_reset_clip(cairoContext.get());
 }
 
 void Vis::CairoRenderer2D::fillPath() const

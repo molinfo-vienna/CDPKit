@@ -87,6 +87,10 @@ namespace CDPL
             void drawPoint(double x, double y);
             void drawText(double x, double y, const std::string& txt);
             void drawEllipse(double x, double y, double width, double height);
+            void drawPath(const Path2D& path);
+
+            void setClipPath(const Path2D& path);
+            void clearClipPath();
 
           private:
             void fillPath() const;

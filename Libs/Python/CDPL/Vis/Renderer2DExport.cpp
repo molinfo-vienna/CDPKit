@@ -28,6 +28,7 @@
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Path2D.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -99,6 +100,18 @@ namespace
         void drawEllipse(double x, double y, double w, double h) {
             this->get_override("drawEllipse")(x, y, w, h);
         }
+
+        void drawPath(const CDPL::Vis::Path2D& path) {
+            this->get_override("drawPath")(boost::ref(path));
+        }
+
+        void setClipPath(const CDPL::Vis::Path2D& path) {
+            this->get_override("setClipPath")(boost::ref(path));
+        }
+
+        void clearClipPath() {
+            this->get_override("clearClipPath")();
+        }
     };
 }
 
@@ -138,5 +151,11 @@ void CDPLPythonVis::exportRenderer2D()
         .def("drawPoint", python::pure_virtual(&Vis::Renderer2D::drawPoint), 
              (python::arg("self"), python::arg("x"), python::arg("y")))
         .def("drawText", python::pure_virtual(&Vis::Renderer2D::drawText), 
-             (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("txt")));
+             (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("txt")))
+        .def("drawPath", python::pure_virtual(&Vis::Renderer2D::drawPath), 
+             (python::arg("self"), python::arg("path")))
+        .def("setClipPath", python::pure_virtual(&Vis::Renderer2D::setClipPath), 
+             (python::arg("self"), python::arg("path")))
+        .def("clearClipPath", python::pure_virtual(&Vis::Renderer2D::clearClipPath), 
+             python::arg("self"));
 }

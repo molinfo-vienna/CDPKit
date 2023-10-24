@@ -28,6 +28,7 @@
 #include <QRectF>
 #include <QString>
 #include <QTransform>
+#include <QPainterPath>
 
 #include "CDPL/Vis/QtRenderer2D.hpp"
 #include "CDPL/Vis/QtObjectFactory.hpp"
@@ -124,6 +125,27 @@ void Vis::QtRenderer2D::drawText(double x, double y, const std::string& txt)
 void Vis::QtRenderer2D::drawEllipse(double x, double y, double width, double height)
 {
     qPainter.drawEllipse(QPointF(x, y), width * 0.5, height * 0.5);
+}
+
+void Vis::QtRenderer2D::drawPath(const Path2D& path)
+{
+    if (!qPainterPath)
+        qPainterPath.reset(new QPainterPath());
+
+    qPainter.drawPath(QtObjectFactory::createQPainterPath(path, *qPainterPath));
+}
+
+void Vis::QtRenderer2D::setClipPath(const Path2D& path)
+{
+    if (!qPainterPath)
+        qPainterPath.reset(new QPainterPath());
+
+    qPainter.setClipPath(QtObjectFactory::createQPainterPath(path, *qPainterPath));
+}
+
+void Vis::QtRenderer2D::clearClipPath()
+{
+    qPainter.setClipping(false);
 }
 
 void Vis::QtRenderer2D::convertToQPolygon(const Math::Vector2DArray& points)

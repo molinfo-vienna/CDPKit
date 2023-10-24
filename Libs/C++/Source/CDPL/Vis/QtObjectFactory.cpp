@@ -27,16 +27,54 @@
 #include <QPen>
 #include <QBrush>
 #include <QString>
+#include <QPainterPath>
 
 #include "CDPL/Vis/QtObjectFactory.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Path2D.hpp"
+#include "CDPL/Vis/Path2DConverter.hpp"
 
 
 using namespace CDPL;
 
+
+namespace
+{
+
+    struct ToQPainterPathConverter : public Vis::Path2DConverter
+    {
+
+        ToQPainterPathConverter(const Vis::Path2D& path, QPainterPath& qt_path): qPainterPath(qt_path) {
+            if (qt_path.elementCount() > 0)
+                QPainterPath().swap(qt_path); // workaround for wissing clear() method in Qt versions before 5.13
+
+            qt_path.setFillRule(path.getFillRule() == Vis::Path2D::WINDING ? Qt::WindingFill : Qt::OddEvenFill);
+
+            path.convert(*this);
+        }
+        
+        void moveTo(double x, double y) {
+            qPainterPath.moveTo(x, y);
+        }
+ 
+        void arcTo(double cx, double cy, double rx, double ry, double start_ang, double sweep) {
+            qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, start_ang, sweep);
+        }
+
+        void lineTo(double x, double y) {
+            qPainterPath.lineTo(x, y);
+        }
+
+        void closePath() {
+            qPainterPath.closeSubpath();
+        }
+
+        QPainterPath& qPainterPath;
+    };
+}
 
 QFont Vis::QtObjectFactory::createQFont(const Font& font)
 {
@@ -210,4 +248,11 @@ QBrush Vis::QtObjectFactory::createQBrush(const Brush& brush)
     }
 
     return QBrush(createQColor(brush.getColor()), style);
+}
+
+QPainterPath& Vis::QtObjectFactory::createQPainterPath(const Path2D& path, QPainterPath& qt_path)
+{
+    ToQPainterPathConverter(path, qt_path);
+
+    return qt_path;
 }
