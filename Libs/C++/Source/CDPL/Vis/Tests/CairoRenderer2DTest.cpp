@@ -35,6 +35,7 @@
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/PointArray2D.hpp"
+#include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
 
 
@@ -475,5 +476,94 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
     }
 
     BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoRenderer2DTest_8.png") == CAIRO_STATUS_SUCCESS);
+
+//-----
+
+    surf_ptr = CairoPointer<cairo_surface_t>(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 600, 480));
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    ctxt_ptr = CairoPointer<cairo_t>(cairo_create(surf_ptr.get()));
+
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer = CairoRenderer2D(ctxt_ptr);
+
+    Path2D path;
+
+    path.moveTo(0, -20);
+    path.lineTo(50, -20);
+    path.arcTo(50, 0, 20, 20, -90, 180);
+    path.lineTo(0, 20);
+    path.arcTo(0, 0, 15, 20, 90, -180);
+    path.closePath();
+    
+    y = 45.0;
+
+    for (std::size_t i = 0; i < 7; i++, y += 65.0) {
+        double x = 10.0;
+
+        for (std::size_t j = 0; j < 6; j++, x += 100.0) {
+            renderer.setPen(test_pens[i * 6 + j]);
+            renderer.setBrush(test_brushes[(i * 6 + j) % 15]);
+
+            renderer.saveState();
+            renderer.setTransform({ { 1.0, 0.0, x }, { 0.0, 1.0, y }, { 0.0, 0.0, 1.0 } });
+            renderer.drawPath(path);
+            renderer.restoreState();
+
+            BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+            BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+        }
+    }
+
+    BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoRenderer2DTest_9.png") == CAIRO_STATUS_SUCCESS);
+
+//-----
+
+    surf_ptr = CairoPointer<cairo_surface_t>(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 600, 480));
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    ctxt_ptr = CairoPointer<cairo_t>(cairo_create(surf_ptr.get()));
+
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer = CairoRenderer2D(ctxt_ptr);
+
+    Path2D clp_path;
+
+    clp_path.moveTo(450, 240);
+    clp_path.arcTo(300, 240, 150, 90, 0, 360);
+    clp_path.closePath();
+
+    renderer.setPen(Color::BLACK);
+    renderer.drawPath(clp_path);
+    
+    y = 45.0;
+
+    for (std::size_t i = 0; i < 7; i++, y += 65.0) {
+        double x = 10.0;
+
+        for (std::size_t j = 0; j < 6; j++, x += 100.0) {
+            if ((i * 7 + j) % 2 == 0)
+                renderer.setClipPath(clp_path);
+            else
+                renderer.clearClipPath();
+            
+            renderer.setPen(test_pens[i * 6 + j]);
+            renderer.setBrush(test_brushes[(i * 6 + j) % 15]);
+
+            renderer.saveState();
+            renderer.setTransform({ { 1.0, 0.0, x }, { 0.0, 1.0, y }, { 0.0, 0.0, 1.0 } });
+            renderer.drawPath(path);
+            renderer.restoreState();
+
+            BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+            BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+        }
+    }
+
+    BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoRenderer2DTest_10.png") == CAIRO_STATUS_SUCCESS);
 }
 

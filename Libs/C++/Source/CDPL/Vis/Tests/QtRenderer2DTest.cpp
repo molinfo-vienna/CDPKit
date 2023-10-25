@@ -34,6 +34,7 @@
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/PointArray2D.hpp"
+#include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
 
 
@@ -432,5 +433,81 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
     view8.end();
 
     BOOST_CHECK(image8.save("QtRenderer2DTest_8.png", "PNG"));
+
+//-----
+
+    QImage image9(600, 480, QImage::Format_ARGB32);
+    QPainter view9(&image9);
+
+    view9.fillRect(0, 0, 600, 480, Qt::gray);
+
+    QtRenderer2D renderer9(view9);
+    Path2D path;
+
+    path.moveTo(0, -20);
+    path.lineTo(50, -20);
+    path.arcTo(50, 0, 20, 20, -90, 180);
+    path.lineTo(0, 20);
+    path.arcTo(0, 0, 15, 20, 90, -180);
+    path.closePath();
+    
+    y = 45.0;
+
+    for (std::size_t i = 0; i < 7; i++, y += 65.0) {
+        double x = 10.0;
+
+        for (std::size_t j = 0; j < 6; j++, x += 100.0) {
+            renderer9.setPen(test_pens[i * 6 + j]);
+            renderer9.setBrush(test_brushes[(i * 6 + j) % 15]);
+
+            renderer9.saveState();
+            renderer9.setTransform({ { 1.0, 0.0, x }, { 0.0, 1.0, y }, { 0.0, 0.0, 1.0 } });
+            renderer9.drawPath(path);
+            renderer9.restoreState();
+
+        }
+    }
+
+    BOOST_CHECK(image9.save("QtRenderer2DTest_9.png", "PNG"));
+
+//-----
+
+    QImage image10(600, 480, QImage::Format_ARGB32);
+    QPainter view10(&image10);
+
+    view10.fillRect(0, 0, 600, 480, Qt::gray);
+
+    QtRenderer2D renderer10(view10);
+    Path2D clp_path;
+
+    clp_path.moveTo(450, 240);
+    clp_path.arcTo(300, 240, 150, 90, 0, 360);
+    clp_path.closePath();
+
+    renderer10.setPen(Color::BLACK);
+    renderer10.drawPath(clp_path);
+    
+    y = 45.0;
+
+    for (std::size_t i = 0; i < 7; i++, y += 65.0) {
+        double x = 10.0;
+
+        for (std::size_t j = 0; j < 6; j++, x += 100.0) {
+            if ((i * 7 + j) % 2 == 0)
+                renderer10.setClipPath(clp_path);
+            else
+                renderer10.clearClipPath();
+            
+            renderer10.setPen(test_pens[i * 6 + j]);
+            renderer10.setBrush(test_brushes[(i * 6 + j) % 15]);
+
+            renderer10.saveState();
+            renderer10.setTransform({ { 1.0, 0.0, x }, { 0.0, 1.0, y }, { 0.0, 0.0, 1.0 } });
+            renderer10.drawPath(path);
+            renderer10.restoreState();
+        }
+    }
+
+    BOOST_CHECK(image10.save("QtRenderer2DTest_10.png", "PNG"));
 }
 
