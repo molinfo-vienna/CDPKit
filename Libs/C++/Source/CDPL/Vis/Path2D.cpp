@@ -139,6 +139,32 @@ void Vis::Path2D::closePath()
     elements.push_back({Element::CLOSE_PATH});
 }
 
+void Vis::Path2D::addEllipse(double x, double y, double width, double height)
+{
+    moveTo(x + width * 0.5, y);
+    arcTo(x, y, width * 0.5, height * 0.5, 0.0, 360.0);
+    closePath();
+}
+
+void Vis::Path2D::addEllipse(const Math::Vector2D& pos, double width, double height)
+{
+    addEllipse(pos(0), pos(1), width, height);
+}
+
+void Vis::Path2D::addRectangle(double x, double y, double width, double height)
+{
+    moveTo(x, y);
+    lineTo(x + width, y);
+    lineTo(x + width, y + height);
+    lineTo(y, y + height);
+    closePath();
+}
+
+void Vis::Path2D::addRectangle(const Math::Vector2D& pos, double width, double height)
+{
+    addRectangle(pos(0), pos(1), width, height);
+}
+
 void Vis::Path2D::convert(Path2DConverter& conv) const
 {
     for (const auto& elem : elements) {

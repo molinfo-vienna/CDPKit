@@ -99,6 +99,14 @@ namespace CDPL
 
             void closePath();
 
+            void addEllipse(double x, double y, double width, double height);
+
+            void addEllipse(const Math::Vector2D& pos, double width, double height);
+
+            void addRectangle(double x, double y, double width, double height);
+
+            void addRectangle(const Math::Vector2D& pos, double width, double height);
+
             void convert(Path2DConverter& conv) const;
             
             bool operator==(const Path2D& path) const;

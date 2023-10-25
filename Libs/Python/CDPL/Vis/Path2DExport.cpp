@@ -87,6 +87,14 @@ void CDPLPythonVis::exportPath2D()
              (python::arg("self"), python::arg("pos")))
         .def("closePath", &Vis::Path2D::closePath, python::arg("self"))
         .def("convert", &Vis::Path2D::convert, (python::arg("self"), python::arg("conv")))
+        .def("addEllipse", static_cast<void (Vis::Path2D::*)(double, double, double, double)>(&Vis::Path2D::addEllipse),
+             (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
+        .def("addEllipse", static_cast<void (Vis::Path2D::*)(const Math::Vector2D&, double, double)>(&Vis::Path2D::addEllipse),
+             (python::arg("self"), python::arg("pos"), python::arg("width"), python::arg("height")))
+        .def("addRectangle", static_cast<void (Vis::Path2D::*)(double, double, double, double)>(&Vis::Path2D::addRectangle),
+             (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
+        .def("addRectangle", static_cast<void (Vis::Path2D::*)(const Math::Vector2D&, double, double)>(&Vis::Path2D::addRectangle),
+             (python::arg("self"), python::arg("pos"), python::arg("width"), python::arg("height")))
         .def("__iadd__", &Vis::Path2D::operator+=, (python::arg("self"), python::arg("path")),
              python::return_self<>())
         .def("__eq__", &Vis::Path2D::operator==, (python::arg("self"), python::arg("path")))
