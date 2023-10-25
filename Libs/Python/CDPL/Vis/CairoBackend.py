@@ -87,7 +87,55 @@ joinStyleMap = { CDPL.Vis.Pen.MITER_JOIN : cairo.LINE_JOIN_MITER,
                  CDPL.Vis.Pen.BEVEL_JOIN : cairo.LINE_JOIN_BEVEL,
                  CDPL.Vis.Pen.ROUND_JOIN : cairo.LINE_JOIN_ROUND }
 
+class ToCairoPathConverter(CDPL.Vis.Path2DConverter):
 
+    def __init__(self, path, cairo_ctxt):
+        CDPL.Vis.Path2DConverter.__init__(self)
+        self.__cairoContext = cairo_ctxt
+        
+        cairo_ctxt.new_path()
+
+        if path.getFillRule() == Vis.Path2D.WINDING:
+            fill_rule = cairo.CAIRO_FILL_RULE_WINDING
+        else:
+            fill_rule = cairo.CAIRO_FILL_RULE_EVEN_ODD
+            
+        cairo_ctxt.set_fill_rule(fill_rule)
+        path.convert(self)
+        
+    def moveTo(self, x, y):
+        self.__cairoContext.move_to(x, y)
+ 
+    def arcTo(self, cx, cy, rx, ry, start_ang, sweep):
+        start_ang *= M_PI / 180.0
+        sweep *= M_PI / 180.0
+
+        if rx == ry:
+            if sweep >= 0.0:
+                self.__cairoContext.arc(cx, cy, rx, start_ang, start_ang + sweep)
+            else:
+                self.__cairoContext.arc_negative(cx, cy, rx, start_ang, start_ang + sweep)
+            return
+
+        self.__cairoContext.save()
+        self.__cairoContext.translate(cx, cy)
+        self.__cairoContext.scale(rx, ry)
+
+        if sweep >= 0.0:
+            self.__cairoContext.arc(0.0, 0.0, 1.0, start_ang, start_ang + sweep)
+        else:
+            self.__cairoContext.arc_negative(0.0, 0.0, 1.0, start_ang, start_ang + sweep)
+
+        self.__cairoContext.restore()
+
+
+    def lineTo(self, x, y):
+        self.__cairoContext.line_to(x, y)
+
+    def closePath(self):
+        self.__cairoContext.close_path()
+
+    
 class CairoFontMetrics(CDPL.Vis.FontMetrics):
 
     def __init__(self, cairo_ctxt):
@@ -271,18 +319,16 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
     def drawEllipse(self, x, y, width, height):
         "drawEllipse(CairoRenderer2D self, float x, float y, float width, float height) -> None :"
-        self.__cairoContext.save()
-
         self.__cairoContext.new_path()
 
-        self.__cairoContext.translate(x, y);
-        self.__cairoContext.scale(1.0, height / width);
+        self.__cairoContext.save()
+        self.__cairoContext.translate(x, y)
+        self.__cairoContext.scale(1.0, height / width)
         self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * 3.141593)
-
-        self.__fillPath();
-        self.__strokePath();
-
         self.__cairoContext.restore()
+        
+        self.__fillPath()
+        self.__strokePath()
 
     def drawText(self, x, y, txt):
         "drawText(CairoRenderer2D self, float x, float y, str txt) -> None :"
@@ -306,6 +352,30 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
         self.__cairoContext.set_source_rgba(color.red, color.green, color.blue, color.alpha)
         self.__cairoContext.move_to(x, y)
         self.__cairoContext.show_text(txt)
+        
+    def drawPath(self, path):
+        "drawPath(CairoRenderer2D self, Vis.Path2D path) -> None :"
+        prev_fill_rule = self.__cairoContext.get_fill_rule()
+
+        ToCairoPathConverter(path, self.__cairoContext)
+
+        self.__fillPath()
+        self.__strokePath()
+
+        self.__cairoContext.set_fill_rule(prev_fill_rule)
+
+    def setClipPath(self, path):
+        "setClipPath(CairoRenderer2D self, Vis.Path2D path) -> None :"
+        prev_fill_rule = self.__cairoContext.get_fill_rule()
+
+        ToCairoPathConverter(path, self.__cairoContext)
+
+        self.__cairoContext.clip()
+        self.__cairoContext.set_fill_rule(prev_fill_rule)
+
+    def clearClipPath(self):
+        "clearClipPath(CairoRenderer2D self) -> None :"
+        self.__cairoContext.reset_clip()
 
     def __fillPath(self):
         brush = self.__brushStack[-1]

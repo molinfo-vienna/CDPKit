@@ -64,6 +64,35 @@ brushStyleMap = { CDPL.Vis.Brush.SOLID_PATTERN      : QtCore.Qt.SolidPattern,
                   CDPL.Vis.Brush.DIAG_CROSS_PATTERN : QtCore.Qt.DiagCrossPattern,
                   CDPL.Vis.Brush.NO_PATTERN         : QtCore.Qt.NoBrush }
 
+class ToQPainterPathConverter(CDPL.Vis.Path2DConverter):
+
+    def __init__(self, path, qt_path):
+        CDPL.Vis.Path2DConverter.__init__(self)
+        self.__qPainterPath = qt_path
+        
+        if qt_path.elementCount() > 0:
+            QtGui.QPainterPath().swap(qt_path)
+
+        if path.getFillRule() == Vis.Path2D.WINDING:
+            fill_rule = QtCore.Qt.WindingFill
+        else:
+            fill_rule = QtCore.Qt.OddEvenFill
+            
+        qt_path.setFillRule(fill_rule)
+        path.convert(self)
+
+    def moveTo(self, x, y):
+        self.__qPainterPath.moveTo(x, y)
+
+    def arcTo(self, cx, cy, rx, ry, start_ang, sweep):
+        self.__qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, start_ang, sweep)
+
+    def lineTo(self, x, y):
+        self.__qPainterPath.lineTo(x, y)
+
+    def closePath(self):
+        self.__qPainterPath.closeSubpath()
+
 
 class QtObjectFactory(object):
 
@@ -113,7 +142,7 @@ class QtObjectFactory(object):
         except KeyError:
             join_style = QtCore.QtGui.RoundJoin
 
-        qt_pen = QtGui.QPen(QtObjectFactory.createQColor(pen.color));
+        qt_pen = QtGui.QPen(QtObjectFactory.createQColor(pen.color))
 
         qt_pen.setStyle(pen_style)
         qt_pen.setCapStyle(cap_style)
@@ -131,10 +160,17 @@ class QtObjectFactory(object):
 
         return QtGui.QBrush(QtObjectFactory.createQColor(brush.color), brush_style)
 
-    createQFont  = staticmethod(createQFont)
-    createQColor = staticmethod(createQColor)
-    createQPen   = staticmethod(createQPen)
-    createQBrush = staticmethod(createQBrush);
+    def createQPainterPath(path, qt_path):
+        "createQPainterPath(Vis.Path2D path, PyQt5.QtGui.QPainterPath qt_path) -> PyQt5.QtGui.QPainterPath :"
+        ToQPainterPathConverter(path, qt_path)
+
+        return qt_path
+    
+    createQFont        = staticmethod(createQFont)
+    createQColor       = staticmethod(createQColor)
+    createQPen         = staticmethod(createQPen)
+    createQBrush       = staticmethod(createQBrush)
+    createQPainterPath = staticmethod(createQPainterPath)
 
 
 class QtFontMetrics(CDPL.Vis.FontMetrics):
@@ -183,6 +219,7 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
         "__init__(QtRenderer2D self, PyQt5.QtGui.QPainter painter) -> None :"
         CDPL.Vis.Renderer2D.__init__(self)
         self.__qPainter = painter
+        self.__qPainterPath = QtGui.QPainterPath()
 
     def saveState(self):
         "saveState(QtRenderer2D self) -> None :"
@@ -247,6 +284,18 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
     def drawText(self, x, y, txt):
         "drawText(QtRenderer2D self, float x, float y, str txt) -> None :"
         self.__qPainter.drawText(QtGui.QPointF(x, y), txt)
+
+    def drawPath(self, path):
+        "drawPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        self.__qPainter.drawPath(QtObjectFactory.createQPainterPath(path, self.__qPainterPath))
+
+    def setClipPath(self, path):
+        "setClipPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        self.__qPainter.setClipPath(QtObjectFactory.createQPainterPath(path, self.__qPainterPath))
+        
+    def clearClipPath(self):
+        "clearClipPath(QtRenderer2D self) -> None :"
+        self.__qPainter.setClipping(False)
 
     def __convertToQPolygon(self, points):
         if not hasattr(self.__qPolygon):
