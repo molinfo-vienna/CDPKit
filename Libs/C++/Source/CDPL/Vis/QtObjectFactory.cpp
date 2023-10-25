@@ -61,7 +61,7 @@ namespace
         }
  
         void arcTo(double cx, double cy, double rx, double ry, double start_ang, double sweep) {
-            qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, start_ang, sweep);
+            qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, -start_ang, -sweep);
         }
 
         void lineTo(double x, double y) {
