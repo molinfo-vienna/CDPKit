@@ -259,4 +259,8 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2 = path1;
 
     BOOST_CHECK(path2 == path1);
+
+    path2.closePath();
+    
+    BOOST_CHECK(path2 != path1);
 }
