@@ -36,6 +36,7 @@ set(test-suite_SRCS
     PointArray2DTest.cpp
     Line2DTest.cpp
     Rectangle2DTest.cpp
+    Path2DTest.cpp
     StructureView2DTest.cpp
     ReactionView2DTest.cpp
     LinePrimitive2DTest.cpp
