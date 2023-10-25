@@ -34,7 +34,7 @@ def gen3DStructure(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -
     # generate the 3D structure
     status = struct_gen.generate(mol)             
     
-    # if sucessful, store the generated conformer ensemble as
+    # if successful, store the generated conformer ensemble as
     # per atom 3D coordinates arrays (= the way conformers are represented in CDPKit)
     if status == ConfGen.ReturnCode.SUCCESS:
         struct_gen.setCoordinates(mol)                

@@ -35,7 +35,7 @@ def genConfEnsemble(mol: Chem.Molecule, conf_gen: ConfGen.ConformerGenerator) ->
     status = conf_gen.generate(mol)             
     num_confs = conf_gen.getNumConformers()
     
-    # if sucessful, store the generated conformer ensemble as
+    # if successful, store the generated conformer ensemble as
     # per atom 3D coordinates arrays (= the way conformers are represented in CDPKit)
     if status == ConfGen.ReturnCode.SUCCESS or status == ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
         conf_gen.setConformers(mol)                
