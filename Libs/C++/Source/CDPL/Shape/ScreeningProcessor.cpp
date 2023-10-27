@@ -90,7 +90,8 @@ void Shape::ScreeningProcessor::clearQuerySet()
 void Shape::ScreeningProcessor::addQuery(const Chem::MolecularGraph& molgraph)
 {
     applyShapeGenSettings(true);
-
+    applyAlignmentSettings();
+    
     alignment.addReferenceShapes(shapeGen.generate(molgraph), true);
     queryList.push_back(&molgraph);
 }
