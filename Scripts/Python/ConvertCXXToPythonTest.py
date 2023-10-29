@@ -22,21 +22,19 @@
 ##
 
 
-from __future__ import print_function 
-
 import sys
 import re
+import math
 
 
 def cxxToPythonCode():
-    
     if len(sys.argv) < 3:
         print('Usage:', sys.argv[0], '[input file] [output file]', file=sys.stderr)
         sys.exit(2)
 
-    output = list();
+    output = list()
 
-    for line in file(sys.argv[1], 'r'):
+    for line in open(sys.argv[1], 'r'):
         if re.match('#include "CDPL/Base/Exceptions\.hpp"', line):
             continue
 
@@ -79,7 +77,6 @@ def cxxToPythonCode():
             output.append('    def runTest(self):\n')
             output.append('        """Testing ' + match.group(1) + '"""\n')
             continue
-        
 
         line = re.sub('^/\*', '##', line)
         line = re.sub('^\s\*/', '##', line)
@@ -114,33 +111,31 @@ def cxxToPythonCode():
         line = re.sub('true', 'True', line)
         line = re.sub('"', "'", line)
 
-
         match = re.search('BOOST_CHECK_THROW\((.+),\s+(.+)\)\s*$', line)
 
         if match:
             line = '    ' + 'self.assertRaises(' + match.group(2) + ', ' + match.group(1) + ')\n'
 
-
-        abs_to_places = { '0.00000001' : '7', '0.0000001' : '6', '0.000001' : '5', 
-                          '0.00001' : '4', '0.0001' : '3', '0.001' : '2', '0.01' : '1', '0.1' : '0' }
-
+        def percent_to_places(percent):
+            return str(round(-math.log(float(percent) / 100.0, 10)))
+   
         match = re.search('BOOST_CHECK_SMALL\((.+),\s+([0-9\.]+)\)\s*$', line)
 
         if match:
-            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', 0.0, ' + 
-            abs_to_places[match.group(2)] + ')\n'
+            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', 0.0, ' +\
+            percent_to_places(match.group(2)) + ')\n'
 
         match = re.search('BOOST_CHECK_CLOSE\((.+),\s+(.+),\s+([0-9\.]+)\)\s*$', line)
 
         if match:
-            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', ' + match.group(2) +
-            ', ' + abs_to_places[match.group(3)] + ')\n'
+            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', ' + match.group(2) +\
+            ', ' + percent_to_places(match.group(3)) + ')\n'
 
         
         match = re.search('^\s+(\w+)\s+=\s+(.+)\s*$', line)
 
         if match:
-            line = '    ' + match.group(1) + '.copy(' + match.group(2) + ')\n'
+            line = '    ' + match.group(1) + '.assign(' + match.group(2) + ')\n'
 
         match = re.search('^\s+([\w\.<>]+)\s+(\w+)\((.*)\)\s*$', line)
 
@@ -166,7 +161,7 @@ def cxxToPythonCode():
 
         output.append(line)
 
-    file(sys.argv[2], 'w+').writelines(output)
+    open(sys.argv[2], 'w+').writelines(output)
 
 
 if __name__ == '__main__':
