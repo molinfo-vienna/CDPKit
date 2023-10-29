@@ -81,16 +81,6 @@ void Vis::QtFontMetrics::getBounds(const std::string& str, Rectangle2D& bounds) 
     if (str.size() == 1)
         return getBounds(str[0], bounds);
 
-    // Qt4 has some problems with the determination of the right string bounding box height! 
-
-    /*
-      QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
-
-      bounds.setBounds(str_bounds.left(), str_bounds.top(), str_bounds.right(), str_bounds.bottom());
-    */
-
-    // This is the (slower) workaround:
-
     QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
 
     bounds.setMin(str_bounds.left(), 0.0);

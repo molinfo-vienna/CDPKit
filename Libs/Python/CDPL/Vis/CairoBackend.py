@@ -28,7 +28,7 @@ import array
 import cairo
 import math
 
-import CDPL.Vis
+import CDPL.Vis as Vis
 
 
 __all__ = [ 'CairoFontMetrics', 'CairoRenderer2D' ]
@@ -65,40 +65,40 @@ leftDiagPattern  = cairo.ImageSurface.create_for_data(leftDiagPatternData,  cair
 rightDiagPattern = cairo.ImageSurface.create_for_data(rightDiagPatternData, cairo.FORMAT_A8, 4, 4, 4) 
 diagCrossPattern = cairo.ImageSurface.create_for_data(diagCrossPatternData, cairo.FORMAT_A8, 8, 8, 8)
 
-fillPatternMap = { CDPL.Vis.Brush.DENSE1_PATTERN     : dense1Pattern,
-                   CDPL.Vis.Brush.DENSE2_PATTERN     : dense2Pattern,
-                   CDPL.Vis.Brush.DENSE3_PATTERN     : dense3Pattern,
-                   CDPL.Vis.Brush.DENSE4_PATTERN     : dense4Pattern,
-                   CDPL.Vis.Brush.DENSE5_PATTERN     : dense5Pattern,
-                   CDPL.Vis.Brush.DENSE6_PATTERN     : dense6Pattern,
-                   CDPL.Vis.Brush.DENSE7_PATTERN     : dense7Pattern,
-                   CDPL.Vis.Brush.H_PATTERN          : horPattern,
-                   CDPL.Vis.Brush.V_PATTERN          : verPattern,
-                   CDPL.Vis.Brush.CROSS_PATTERN      : crossPattern,
-                   CDPL.Vis.Brush.LEFT_DIAG_PATTERN  : leftDiagPattern,
-                   CDPL.Vis.Brush.RIGHT_DIAG_PATTERN : rightDiagPattern,
-                   CDPL.Vis.Brush.DIAG_CROSS_PATTERN : diagCrossPattern }
+fillPatternMap = { Vis.Brush.DENSE1_PATTERN     : dense1Pattern,
+                   Vis.Brush.DENSE2_PATTERN     : dense2Pattern,
+                   Vis.Brush.DENSE3_PATTERN     : dense3Pattern,
+                   Vis.Brush.DENSE4_PATTERN     : dense4Pattern,
+                   Vis.Brush.DENSE5_PATTERN     : dense5Pattern,
+                   Vis.Brush.DENSE6_PATTERN     : dense6Pattern,
+                   Vis.Brush.DENSE7_PATTERN     : dense7Pattern,
+                   Vis.Brush.H_PATTERN          : horPattern,
+                   Vis.Brush.V_PATTERN          : verPattern,
+                   Vis.Brush.CROSS_PATTERN      : crossPattern,
+                   Vis.Brush.LEFT_DIAG_PATTERN  : leftDiagPattern,
+                   Vis.Brush.RIGHT_DIAG_PATTERN : rightDiagPattern,
+                   Vis.Brush.DIAG_CROSS_PATTERN : diagCrossPattern }
 
-capStyleMap = { CDPL.Vis.Pen.FLAT_CAP   : cairo.LINE_CAP_BUTT,
-                CDPL.Vis.Pen.SQUARE_CAP : cairo.LINE_CAP_SQUARE,
-                CDPL.Vis.Pen.ROUND_CAP  : cairo.LINE_CAP_ROUND } 
+capStyleMap = { Vis.Pen.FLAT_CAP   : cairo.LINE_CAP_BUTT,
+                Vis.Pen.SQUARE_CAP : cairo.LINE_CAP_SQUARE,
+                Vis.Pen.ROUND_CAP  : cairo.LINE_CAP_ROUND } 
 
-joinStyleMap = { CDPL.Vis.Pen.MITER_JOIN : cairo.LINE_JOIN_MITER,
-                 CDPL.Vis.Pen.BEVEL_JOIN : cairo.LINE_JOIN_BEVEL,
-                 CDPL.Vis.Pen.ROUND_JOIN : cairo.LINE_JOIN_ROUND }
+joinStyleMap = { Vis.Pen.MITER_JOIN : cairo.LINE_JOIN_MITER,
+                 Vis.Pen.BEVEL_JOIN : cairo.LINE_JOIN_BEVEL,
+                 Vis.Pen.ROUND_JOIN : cairo.LINE_JOIN_ROUND }
 
-class ToCairoPathConverter(CDPL.Vis.Path2DConverter):
+class ToCairoPathConverter(Vis.Path2DConverter):
 
     def __init__(self, path, cairo_ctxt):
-        CDPL.Vis.Path2DConverter.__init__(self)
+        Vis.Path2DConverter.__init__(self)
         self.__cairoContext = cairo_ctxt
         
         cairo_ctxt.new_path()
 
         if path.getFillRule() == Vis.Path2D.WINDING:
-            fill_rule = cairo.CAIRO_FILL_RULE_WINDING
+            fill_rule = cairo.FILL_RULE_WINDING
         else:
-            fill_rule = cairo.CAIRO_FILL_RULE_EVEN_ODD
+            fill_rule = cairo.FILL_RULE_EVEN_ODD
             
         cairo_ctxt.set_fill_rule(fill_rule)
         path.convert(self)
@@ -107,8 +107,8 @@ class ToCairoPathConverter(CDPL.Vis.Path2DConverter):
         self.__cairoContext.move_to(x, y)
  
     def arcTo(self, cx, cy, rx, ry, start_ang, sweep):
-        start_ang *= M_PI / 180.0
-        sweep *= M_PI / 180.0
+        start_ang *= math.pi / 180.0
+        sweep *= math.pi / 180.0
 
         if rx == ry:
             if sweep >= 0.0:
@@ -136,11 +136,11 @@ class ToCairoPathConverter(CDPL.Vis.Path2DConverter):
         self.__cairoContext.close_path()
 
     
-class CairoFontMetrics(CDPL.Vis.FontMetrics):
+class CairoFontMetrics(Vis.FontMetrics):
 
     def __init__(self, cairo_ctxt):
         "__init__(CairoFontMetrics self, cairo.Context cairo_ctxt) -> None :"
-        CDPL.Vis.FontMetrics.__init__(self)
+        Vis.FontMetrics.__init__(self)
         self.__cairoContext = cairo_ctxt
 
     def setFont(self, font):
@@ -189,15 +189,15 @@ class CairoFontMetrics(CDPL.Vis.FontMetrics):
                          text_extents[3] + text_extents[1])
 
 
-class CairoRenderer2D(CDPL.Vis.Renderer2D):
+class CairoRenderer2D(Vis.Renderer2D):
 
     def __init__(self, cairo_ctxt):
         "__init__(CairoRenderer2D self, cairo.Context cairo_ctxt) -> None :"
-        CDPL.Vis.Renderer2D.__init__(self)
+        Vis.Renderer2D.__init__(self)
         self.__cairoContext = cairo_ctxt
-        self.__penStack = [ CDPL.Vis.Pen() ]
-        self.__brushStack = [ CDPL.Vis.Brush() ]
-        self.__fontStack = [ CDPL.Vis.Font() ]
+        self.__penStack = [ Vis.Pen() ]
+        self.__brushStack = [ Vis.Brush() ]
+        self.__fontStack = [ Vis.Font() ]
 
     def saveState(self):
         "saveState(CairoRenderer2D self) -> None :"
@@ -232,14 +232,23 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
     def setPen(self, pen):
         "setPen(CairoRenderer2D self, Vis.Pen pen) -> None :"
+        if isinstance(pen, Vis.Color):
+            pen = Vis.Pen(pen)
+        
         self.__penStack[-1] = pen
 
     def setBrush(self, brush):
         "setBrush(CairoRenderer2D self, Vis.Brush brush) -> None :"
+        if isinstance(brush, Vis.Color):
+            brush = Vis.Brush(brush)
+  
         self.__brushStack[-1] = brush
 
     def setFont(self, font):
         "setFont(CairoRenderer2D self, Vis.Font font) -> None :"
+        if isinstance(font, str):
+            font = Vis.Font(font)
+        
         self.__fontStack[-1] = font
 
     def drawRectangle(self, x, y, width, height):
@@ -296,9 +305,9 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
         "drawLineSegments(CairoRenderer2D self, Math.Vector2DArray points) -> None :"
         self.__cairoContext.new_path()
 
-        for i in range(0, len(points) / 2):
-            point1 = points[i * 2]
-            point2 = points[i * 2 + 1]
+        for i in range(0, len(points), 2):
+            point1 = points[i]
+            point2 = points[i + 1]
 
             self.__cairoContext.move_to(point1[0], point1[1])
             self.__cairoContext.line_to(point2[0], point2[1])
@@ -380,7 +389,7 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
     def __fillPath(self):
         brush = self.__brushStack[-1]
 
-        if brush.style == CDPL.Vis.Brush.NO_PATTERN:
+        if brush.style == Vis.Brush.NO_PATTERN:
             return
 
         color = brush.color
@@ -401,7 +410,7 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
         src_ctxt.set_source_rgba(color.red, color.green, color.blue, color.alpha)
         src_ctxt.mask_surface(pattern, 0.0, 0.0)
 
-        src_pattern = cairo.Pattern(src_surf)
+        src_pattern = cairo.SurfacePattern(src_surf)
         src_pattern.set_extend(cairo.EXTEND_REPEAT)
 
         self.__cairoContext.set_source(src_pattern)
@@ -416,20 +425,20 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
         else:
             line_style = pen.lineStyle
             
-            if line_style == CDPL.Vis.Pen.NO_LINE:
+            if line_style == Vis.Pen.NO_LINE:
                 return
     
-            elif line_style == CDPL.Vis.Pen.DASH_LINE:
+            elif line_style == Vis.Pen.DASH_LINE:
                 self.__cairoContext.set_dash([ 5.0 * line_width ], 0)
 
-            elif line_style == CDPL.Vis.Pen.DOT_LINE:
+            elif line_style == Vis.Pen.DOT_LINE:
                 self.__cairoContext.set_dash([ line_width, line_width * 1.5 ], 0)
 
-            elif line_style == CDPL.Vis.Pen.DASH_DOT_LINE:
+            elif line_style == Vis.Pen.DASH_DOT_LINE:
                 self.__cairoContext.set_dash([ line_width * 5.0, line_width * 1.5,
                                                line_width, line_width * 1.5 ], 0)
 
-            elif line_style == CDPL.Vis.Pen.DASH_DOT_DOT_LINE:
+            elif line_style == Vis.Pen.DASH_DOT_DOT_LINE:
                 self.__cairoContext.set_dash([ line_width * 5.0, line_width * 1.5,
                                                line_width, line_width * 1.5,
                                                line_width, line_width * 1.5 ], 0)

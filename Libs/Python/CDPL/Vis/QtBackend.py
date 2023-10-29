@@ -27,47 +27,47 @@ from __future__ import absolute_import
 import PyQt5.QtCore as QtCore
 import PyQt5.QtGui as QtGui
 
-import CDPL.Vis
+import CDPL.Vis as Vis
 
 
 __all__ = [ 'QtFontMetrics', 'QtRenderer2D', 'QtObjectFactory' ]
 
 
-lineStyleMap = { CDPL.Vis.Pen.DASH_LINE         : QtCore.Qt.DashLine,
-                 CDPL.Vis.Pen.DOT_LINE          : QtCore.Qt.DotLine,
-                 CDPL.Vis.Pen.DASH_DOT_LINE     : QtCore.Qt.DashDotLine,
-                 CDPL.Vis.Pen.DASH_DOT_DOT_LINE : QtCore.Qt.DashDotDotLine,
-                 CDPL.Vis.Pen.SOLID_LINE        : QtCore.Qt.SolidLine,
-                 CDPL.Vis.Pen.NO_LINE           : QtCore.Qt.NoPen }
+lineStyleMap = { Vis.Pen.DASH_LINE         : QtCore.Qt.DashLine,
+                 Vis.Pen.DOT_LINE          : QtCore.Qt.DotLine,
+                 Vis.Pen.DASH_DOT_LINE     : QtCore.Qt.DashDotLine,
+                 Vis.Pen.DASH_DOT_DOT_LINE : QtCore.Qt.DashDotDotLine,
+                 Vis.Pen.SOLID_LINE        : QtCore.Qt.SolidLine,
+                 Vis.Pen.NO_LINE           : QtCore.Qt.NoPen }
 
-capStyleMap = { CDPL.Vis.Pen.FLAT_CAP   : QtCore.Qt.FlatCap,
-                CDPL.Vis.Pen.SQUARE_CAP : QtCore.Qt.SquareCap,
-                CDPL.Vis.Pen.ROUND_CAP  : QtCore.Qt.RoundCap } 
+capStyleMap = { Vis.Pen.FLAT_CAP   : QtCore.Qt.FlatCap,
+                Vis.Pen.SQUARE_CAP : QtCore.Qt.SquareCap,
+                Vis.Pen.ROUND_CAP  : QtCore.Qt.RoundCap } 
 
-joinStyleMap = { CDPL.Vis.Pen.MITER_JOIN : QtCore.Qt.MiterJoin,
-                 CDPL.Vis.Pen.BEVEL_JOIN : QtCore.Qt.BevelJoin,
-                 CDPL.Vis.Pen.ROUND_JOIN : QtCore.Qt.RoundJoin }
+joinStyleMap = { Vis.Pen.MITER_JOIN : QtCore.Qt.MiterJoin,
+                 Vis.Pen.BEVEL_JOIN : QtCore.Qt.BevelJoin,
+                 Vis.Pen.ROUND_JOIN : QtCore.Qt.RoundJoin }
 
-brushStyleMap = { CDPL.Vis.Brush.SOLID_PATTERN      : QtCore.Qt.SolidPattern, 
-                  CDPL.Vis.Brush.DENSE1_PATTERN     : QtCore.Qt.Dense1Pattern, 
-                  CDPL.Vis.Brush.DENSE2_PATTERN     : QtCore.Qt.Dense2Pattern, 
-                  CDPL.Vis.Brush.DENSE3_PATTERN     : QtCore.Qt.Dense3Pattern, 
-                  CDPL.Vis.Brush.DENSE4_PATTERN     : QtCore.Qt.Dense4Pattern,
-                  CDPL.Vis.Brush.DENSE5_PATTERN     : QtCore.Qt.Dense5Pattern,
-                  CDPL.Vis.Brush.DENSE6_PATTERN     : QtCore.Qt.Dense6Pattern,
-                  CDPL.Vis.Brush.DENSE7_PATTERN     : QtCore.Qt.Dense7Pattern,
-                  CDPL.Vis.Brush.H_PATTERN          : QtCore.Qt.HorPattern,
-                  CDPL.Vis.Brush.V_PATTERN          : QtCore.Qt.VerPattern,
-                  CDPL.Vis.Brush.CROSS_PATTERN      : QtCore.Qt.CrossPattern,
-                  CDPL.Vis.Brush.LEFT_DIAG_PATTERN  : QtCore.Qt.BDiagPattern,
-                  CDPL.Vis.Brush.RIGHT_DIAG_PATTERN : QtCore.Qt.FDiagPattern,
-                  CDPL.Vis.Brush.DIAG_CROSS_PATTERN : QtCore.Qt.DiagCrossPattern,
-                  CDPL.Vis.Brush.NO_PATTERN         : QtCore.Qt.NoBrush }
+brushStyleMap = { Vis.Brush.SOLID_PATTERN      : QtCore.Qt.SolidPattern, 
+                  Vis.Brush.DENSE1_PATTERN     : QtCore.Qt.Dense1Pattern, 
+                  Vis.Brush.DENSE2_PATTERN     : QtCore.Qt.Dense2Pattern, 
+                  Vis.Brush.DENSE3_PATTERN     : QtCore.Qt.Dense3Pattern, 
+                  Vis.Brush.DENSE4_PATTERN     : QtCore.Qt.Dense4Pattern,
+                  Vis.Brush.DENSE5_PATTERN     : QtCore.Qt.Dense5Pattern,
+                  Vis.Brush.DENSE6_PATTERN     : QtCore.Qt.Dense6Pattern,
+                  Vis.Brush.DENSE7_PATTERN     : QtCore.Qt.Dense7Pattern,
+                  Vis.Brush.H_PATTERN          : QtCore.Qt.HorPattern,
+                  Vis.Brush.V_PATTERN          : QtCore.Qt.VerPattern,
+                  Vis.Brush.CROSS_PATTERN      : QtCore.Qt.CrossPattern,
+                  Vis.Brush.LEFT_DIAG_PATTERN  : QtCore.Qt.BDiagPattern,
+                  Vis.Brush.RIGHT_DIAG_PATTERN : QtCore.Qt.FDiagPattern,
+                  Vis.Brush.DIAG_CROSS_PATTERN : QtCore.Qt.DiagCrossPattern,
+                  Vis.Brush.NO_PATTERN         : QtCore.Qt.NoBrush }
 
-class ToQPainterPathConverter(CDPL.Vis.Path2DConverter):
+class ToQPainterPathConverter(Vis.Path2DConverter):
 
     def __init__(self, path, qt_path):
-        CDPL.Vis.Path2DConverter.__init__(self)
+        Vis.Path2DConverter.__init__(self)
         self.__qPainterPath = qt_path
         
         if qt_path.elementCount() > 0:
@@ -85,7 +85,7 @@ class ToQPainterPathConverter(CDPL.Vis.Path2DConverter):
         self.__qPainterPath.moveTo(x, y)
 
     def arcTo(self, cx, cy, rx, ry, start_ang, sweep):
-        self.__qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, start_ang, sweep)
+        self.__qPainterPath.arcTo(cx - rx, cy - ry, 2.0 * rx, 2.0 * ry, -start_ang, -sweep)
 
     def lineTo(self, x, y):
         self.__qPainterPath.lineTo(x, y)
@@ -98,6 +98,9 @@ class QtObjectFactory(object):
 
     def createQFont(font):
         "createQFont(Vis.Font font) -> PyQt5.QtGui.QFont :"
+        if isinstance(font, str):
+            font = Vis.Font(font)
+        
         qt_font = QtGui.QFont(font.family)
 
         if (font.size <= 1.0):
@@ -127,6 +130,9 @@ class QtObjectFactory(object):
 
     def createQPen(pen):
         "createQPen(Vis.Pen pen) -> PyQt5.QtGui.QPen :"
+        if isinstance(pen, Vis.Color):
+            pen = Vis.Pen(pen)
+        
         try:
             pen_style = lineStyleMap[pen.lineStyle]
         except KeyError:
@@ -153,6 +159,9 @@ class QtObjectFactory(object):
 
     def createQBrush(brush):
         "createQBrush(Vis.Brush brush) -> PyQt5.QtGui.QBrush :"
+        if isinstance(brush, Vis.Color):
+            brush = Vis.Brush(brush)
+            
         try:
             brush_style = brushStyleMap[brush.style]
         except KeyError:
@@ -173,11 +182,11 @@ class QtObjectFactory(object):
     createQPainterPath = staticmethod(createQPainterPath)
 
 
-class QtFontMetrics(CDPL.Vis.FontMetrics):
+class QtFontMetrics(Vis.FontMetrics):
 
     def __init__(self, paint_dev = None):
         "__init__(QtFontMetrics self, PyQt5.QtGui.QPaintDevice paint_dev) -> None :"
-        CDPL.Vis.FontMetrics.__init__(self)
+        Vis.FontMetrics.__init__(self)
 
         self.__qPaintDevice = paint_dev
         self.__qFontMetrics = QtGui.QFontMetricsF(QtGui.QFont(), paint_dev)
@@ -208,19 +217,32 @@ class QtFontMetrics(CDPL.Vis.FontMetrics):
 
     def getBounds(self, string, bounds):
         "getBounds(QtFontMetrics self, str string, Vis.Rectangle2D bounds) -> float :"
+        if len(string) == 1:
+            ch_bounds = self.__qFontMetrics.boundingRectChar(string)
+            bounds.setBounds(ch_bounds.left(), ch_bounds.top(), ch_bounds.right(), ch_bounds.bottom())            
+            return
+
         str_bounds = self.__qFontMetrics.boundingRect(string)
+            
+        bounds.setMin(str_bounds.left(), 0.0);
+        bounds.setMax(str_bounds.right(), 0.0);
 
-        bounds.setBounds(str_bounds.left(), str_bounds.top(), str_bounds.right(), str_bounds.bottom())
+        for c in string:
+            str_bounds = self.__qFontMetrics.boundingRectChar(c)
 
-    
-class QtRenderer2D(CDPL.Vis.Renderer2D):
+            bounds.addPoint(bounds.getMin()[0], str_bounds.top());
+            bounds.addPoint(bounds.getMax()[0], str_bounds.bottom());
+
+
+class QtRenderer2D(Vis.Renderer2D):
 
     def __init__(self, painter):
         "__init__(QtRenderer2D self, PyQt5.QtGui.QPainter painter) -> None :"
-        CDPL.Vis.Renderer2D.__init__(self)
+        Vis.Renderer2D.__init__(self)
         self.__qPainter = painter
-        self.__qPainterPath = QtGui.QPainterPath()
-
+        self.__qPainterPath = None
+        self.__qPolygon = None
+        
     def saveState(self):
         "saveState(QtRenderer2D self) -> None :"
         self.__qPainter.save()
@@ -255,7 +277,7 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
     
     def drawRectangle(self, x, y, width, height):
         "drawRectangle(QtRenderer2D self, float x, float y, float width, float height) -> None :"
-        self.__qPainter.drawRect(QtGui.QRectF(x, y, width, height))
+        self.__qPainter.drawRect(QtCore.QRectF(x, y, width, height))
     
     def drawPolygon(self, points):
         "drawPolygon(QtRenderer2D self, Math.Vector2DArray points) -> None :"
@@ -263,7 +285,7 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
             
     def drawLine(self, x1, y1, x2, y2):
         "drawLine(QtRenderer2D self, float x1, float y1, float x2, float y2) -> None :"
-        self.__qPainter.drawLine(QtGui.QPointF(x1, y1), QtGui.QPointF(x2, y2))
+        self.__qPainter.drawLine(QtCore.QPointF(x1, y1), QtCore.QPointF(x2, y2))
     
     def drawPolyline(self, points):
         "drawPolyline(QtRenderer2D self, Math.Vector2DArray points) -> None :"
@@ -271,26 +293,36 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
     
     def drawLineSegments(self, points):
         "drawLineSegments(QtRenderer2D self, Math.Vector2DArray points) -> None :"
-        self.__qPainter.drawLines(self.__convertToQPolygon(points))
+        for i in range(0, len(points), 2):
+            point1 = points[i]
+            point2 = points[i + 1]
+            
+            self.__qPainter.drawLine(point1[0], point1[1], point2[0], point2[1])
     
     def drawPoint(self, x, y):
         "drawPoint(QtRenderer2D self, float x, float y) -> None :"
-        self.__qPainter.drawPoint(QtGui.QPointF(x, y))
+        self.__qPainter.drawPoint(QtCore.QPointF(x, y))
         
     def drawEllipse(self, x, y, width, height):
         "drawEllipse(QtRenderer2D self, float x, float y, float width, float height) -> None :"
-        self.__qPainter.drawEllipse(QtGui.QPointF(x, y), width * 0.5, height * 0.5)
+        self.__qPainter.drawEllipse(QtCore.QPointF(x, y), width * 0.5, height * 0.5)
 
     def drawText(self, x, y, txt):
         "drawText(QtRenderer2D self, float x, float y, str txt) -> None :"
-        self.__qPainter.drawText(QtGui.QPointF(x, y), txt)
+        self.__qPainter.drawText(QtCore.QPointF(x, y), txt)
 
     def drawPath(self, path):
         "drawPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        if self.__qPainterPath == None:
+            self.__qPainterPath = QtGui.QPainterPath()
+
         self.__qPainter.drawPath(QtObjectFactory.createQPainterPath(path, self.__qPainterPath))
 
     def setClipPath(self, path):
         "setClipPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        if self.__qPainterPath == None:
+            self.__qPainterPath = QtGui.QPainterPath()
+            
         self.__qPainter.setClipPath(QtObjectFactory.createQPainterPath(path, self.__qPainterPath))
         
     def clearClipPath(self):
@@ -298,12 +330,12 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
         self.__qPainter.setClipping(False)
 
     def __convertToQPolygon(self, points):
-        if not hasattr(self.__qPolygon):
-            self.__qPolgyon = QtGui.QPolygonF()
+        if self.__qPolygon == None:
+            self.__qPolygon = QtGui.QPolygonF()
 
         self.__qPolygon.clear()
 
         for point in points:
-            self.__qPolygon.append(QtGui.QPointF(point[0], point[1]))
+            self.__qPolygon.append(QtCore.QPointF(point[0], point[1]))
 
         return self.__qPolygon
