@@ -468,6 +468,8 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
         }
     }
 
+    view9.end();
+        
     BOOST_CHECK(image9.save("QtRenderer2DTest_9.png", "PNG"));
 
 //-----
@@ -508,6 +510,7 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
         }
     }
 
+    view10.end();
+        
     BOOST_CHECK(image10.save("QtRenderer2DTest_10.png", "PNG"));
 }
-

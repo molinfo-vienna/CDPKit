@@ -566,4 +566,3 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
 
     BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoRenderer2DTest_10.png") == CAIRO_STATUS_SUCCESS);
 }
-

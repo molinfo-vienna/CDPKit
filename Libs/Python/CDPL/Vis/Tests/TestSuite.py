@@ -29,5 +29,10 @@ import sys
 test_suite = unittest.TestSuite()
 
 test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("ImportTest"))
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("QtRenderer2DTest"))
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("QtFontMetricsTest"))
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("QtObjectFactoryTest"))
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("CairoRenderer2DTest"))
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("CairoFontMetricsTest"))
 
 sys.exit(not unittest.TextTestRunner(verbosity=2).run(test_suite).wasSuccessful())
