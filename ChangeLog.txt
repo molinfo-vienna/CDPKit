@@ -1,5 +1,7 @@
 master:
 
+ - Fixed a bug in the 'shapescreen' tool that lead to the calculation of erroneous similarity scores
+   in the 'score-only' screening mode
  - New class for the extraction of Bemis-Murcko scaffolds
  - New functions for conformer alignment
  - Function overload resolution order fixes in the CDPL.Math Python package
