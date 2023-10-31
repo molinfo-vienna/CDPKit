@@ -65,6 +65,8 @@ set(cdpl-vis_LIB_SRCS
     PolylinePrimitive2D.cpp
     LineSegmentListPrimitive2D.cpp
     PointListPrimitive2D.cpp
+    PathPrimitive2D.cpp
+    ClipPathPrimitive2D.cpp
     TextLabelPrimitive2D.cpp
    )
 

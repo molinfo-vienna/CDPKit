@@ -75,7 +75,9 @@
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
 #include "CDPL/Vis/EllipsePrimitive2D.hpp"
+#include "CDPL/Vis/PathPrimitive2D.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
+#include "CDPL/Vis/ClipPathPrimitive2D.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

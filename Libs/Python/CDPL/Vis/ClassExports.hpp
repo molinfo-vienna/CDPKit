@@ -55,6 +55,8 @@ namespace CDPLPythonVis
     void exportPointListPrimitive2D();
     void exportTextLabelPrimitive2D();
     void exportEllipsePrimitive2D();
+    void exportPathPrimitive2D();
+    void exportClipPathPrimitive2D();
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

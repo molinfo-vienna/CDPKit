@@ -46,6 +46,8 @@ set(test-suite_SRCS
     PointListPrimitive2DTest.cpp
     TextLabelPrimitive2DTest.cpp
     EllipsePrimitive2DTest.cpp
+    PathPrimitive2DTest.cpp
+    ClipPathPrimitive2DTest.cpp
     DataFormatTest.cpp
     Utilities.cpp
    )

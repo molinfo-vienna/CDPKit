@@ -60,7 +60,9 @@ BOOST_PYTHON_MODULE(_vis)
     exportPointListPrimitive2D();
     exportTextLabelPrimitive2D();
     exportEllipsePrimitive2D();
-
+    exportPathPrimitive2D();
+    exportClipPathPrimitive2D();
+    
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
     exportPNGMolecularGraphWriter();

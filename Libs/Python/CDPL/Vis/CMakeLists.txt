@@ -56,6 +56,8 @@ set(vis_MOD_SRCS
     PointListPrimitive2DExport.cpp
     TextLabelPrimitive2DExport.cpp
     EllipsePrimitive2DExport.cpp
+    PathPrimitive2DExport.cpp
+    ClipPathPrimitive2DExport.cpp
 
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp
