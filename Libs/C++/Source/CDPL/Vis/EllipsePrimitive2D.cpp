@@ -99,5 +99,7 @@ void Vis::EllipsePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) co
 {
     bounds.setBounds(position(0) - width * 0.5, position(1) - height * 0.5, 
                      position(0) + width * 0.5, position(1) + height * 0.5);
-    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+
+    if (pen.getLineStyle() != Pen::NO_LINE)
+        bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

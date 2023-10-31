@@ -60,5 +60,7 @@ void Vis::LinePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
     bounds.addPoint(getBegin());
     bounds.addPoint(getEnd());
-    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    
+    if (pen.getLineStyle() != Pen::NO_LINE)
+        bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

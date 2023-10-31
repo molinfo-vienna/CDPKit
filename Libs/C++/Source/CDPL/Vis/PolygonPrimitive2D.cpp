@@ -68,5 +68,7 @@ Vis::GraphicsPrimitive2D::SharedPointer Vis::PolygonPrimitive2D::clone() const
 void Vis::PolygonPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
     PointArray2D::getBounds(bounds);
-    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+
+    if (pen.getLineStyle() != Pen::NO_LINE)
+        bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }
