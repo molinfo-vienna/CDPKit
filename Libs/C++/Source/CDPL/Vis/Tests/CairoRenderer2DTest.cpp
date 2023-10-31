@@ -516,7 +516,7 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
             BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
         }
     }
-
+    
     BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoRenderer2DTest_9.png") == CAIRO_STATUS_SUCCESS);
 
 //-----

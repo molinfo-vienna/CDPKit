@@ -42,9 +42,10 @@ BOOST_AUTO_TEST_CASE(QtFontMetricsTest)
     using namespace CDPL;
     using namespace Vis;
 
-    int argc = 0;
-    char* argv[] = {};
-
+    int argc = 1;
+    char arg[] = "QtFontMetricsTest";
+    char* argv[] = { arg };
+    
     QApplication app(argc, argv);
 
     QImage image(800, 400, QImage::Format_ARGB32);

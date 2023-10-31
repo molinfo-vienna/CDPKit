@@ -210,9 +210,6 @@ BOOST_AUTO_TEST_CASE(EllipsePrimitive2DTest)
 
     BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "EllipsePrimitive2DTest.png") == CAIRO_STATUS_SUCCESS);
 
-//    BOOST_MESSAGE(cairo_status_to_string(cairo_surface_status(surf_ptr.get())));
-//    BOOST_MESSAGE(cairo_status_to_string(cairo_status(ctxt_ptr.get())));
-
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
 

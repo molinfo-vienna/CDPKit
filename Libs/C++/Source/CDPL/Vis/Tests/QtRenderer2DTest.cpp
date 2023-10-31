@@ -116,8 +116,9 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
 
 //-----
 
-    int argc = 0;
-    char* argv[] = {};
+    int argc = 1;
+    char arg[] = "QtRenderer2DTest";
+    char* argv[] = { arg };
 
     QApplication app(argc, argv);
 
