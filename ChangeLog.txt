@@ -1,8 +1,9 @@
 master:
 
+ - New 2D drawing primitives (Vis::Path2D and Vis::PathPrimitive2D) and support for clipping operations
  - Fixed a bug in the 'shapescreen' tool that lead to the calculation of erroneous similarity scores
    in the 'score-only' screening mode
- - New class for the extraction of Bemis-Murcko scaffolds
+ - New class (Chem::BemisMurckoAnalyzer) for the extraction of Bemis-Murcko scaffolds
  - New functions for conformer alignment
  - Function overload resolution order fixes in the CDPL.Math Python package
  - Fixed the throwing of exceptions when the env. variable LC_ALL has not been initialized
@@ -16,11 +17,11 @@ master:
  - CDPL API cleanup
  - When deep copying Chem::Reaction or Chem::Molecule instances, values of properties referencing atoms and/or bonds (e.g. stereodescriptors, SSSR)
    now get automatically translated to values referencing the corresponding atoms/bonds of the copying target
- - GRAIL(X)DescriptorCalculator now only considers heavy atoms for the calculation of
+ - GRAIL::GRAIL(X)DescriptorCalculator now only considers heavy atoms for the calculation of
    environment HBA/HBD occupation scores which do not represent a complementary feature type
- - New class GRAILDescriptorCalculator now calculates a shorter descriptor (35 elements) with
+ - New class GRAIL::GRAILDescriptorCalculator now calculates a shorter descriptor (35 elements) with
    not further subdivided H-bond donor/acceptor feature types
- - Old class GRAILDescriptorCalculator renamed into GRAILXDescriptorCalculator
+ - Old class GRAIL::GRAILDescriptorCalculator renamed into GRAILXDescriptorCalculator
 
 v1.0.2:
 
