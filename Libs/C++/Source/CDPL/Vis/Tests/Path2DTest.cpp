@@ -22,14 +22,16 @@
  */
 
 
+#include <cmath>
 #include <string>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Vis/Path2DConverter.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
-#include <iostream>
+
 namespace
 {
 
@@ -70,9 +72,9 @@ namespace
     const std::string PATH_STRING_PART2 =
         "MT 2.000000 3.000000\n"
         "MT 3.000000 4.000000\n"
-        "MT 2.384492 5.000000\n"
+        "MT 7.197851 5.000000\n"
         "AT 4.000000 5.000000 3.200000 0.000000 2.100000 -3.200000\n"
-        "MT 3.551926 7.860789\n"
+        "MT 4.000000 8.200000\n"
         "AT 4.000000 5.000000 1.000000 3.200000 90.000000 3.200000\n"
         "AT 4.000000 5.000000 3.200000 0.000000 2.100000 -3.200000\n"
         "AT 4.000000 5.000000 1.000000 3.200000 90.000000 3.200000\n"
@@ -95,7 +97,7 @@ namespace
         "LT 2.800000 15.000000\n"
         "LT 5.000000 15.000000\n"
         "CP\n";
-
+ 
     const std::string PATH_STRING = PATH_STRING_PART1 + PATH_STRING_PART2;
 }
 
@@ -129,12 +131,23 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
 
 //--------
 
+    BOOST_CHECK(!path1.hasDrawingElements());
+
     path1.moveTo(2.0, 3.0);
 
     BOOST_CHECK(!path1.isEmpty());
+    BOOST_CHECK(!path1.hasDrawingElements());
     
     path1.moveTo({ 3.0, 4.0 });
+
+    BOOST_CHECK(!path1.isEmpty());
+    BOOST_CHECK(!path1.hasDrawingElements());
+   
     path1.arc(4.0, 5.0, 3.2, 0.0, 2.1, -3.2);
+
+    BOOST_CHECK(!path1.isEmpty());
+    BOOST_CHECK(path1.hasDrawingElements());
+     
     path1.arc({ 4.0, 5.0 }, 1.0, 3.2, 90.0, 3.2);
     path1.arcTo(4.0, 5.0, 3.2, 0.0, 2.1, -3.2);
     path1.arcTo({ 4.0, 5.0 }, 1.0, 3.2, 90.0, 3.2);
@@ -154,7 +167,7 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     TestPathConverter path_conv;
     
     path_conv.convert(path1);
-
+    
     BOOST_CHECK(path_conv.pathString == PATH_STRING);
 
 //--------
@@ -178,7 +191,8 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2 = path1;
 
     BOOST_CHECK(!path2.isEmpty());
-
+    BOOST_CHECK(path2.hasDrawingElements());
+ 
     path_conv.convert(path2);
 
     BOOST_CHECK(path_conv.pathString == PATH_STRING);
@@ -188,6 +202,7 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2.clear();
     
     BOOST_CHECK(path2.isEmpty());
+    BOOST_CHECK(!path2.hasDrawingElements());
     
     path_conv.convert(path2);
 
@@ -200,7 +215,8 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2 += Path2D();
 
     BOOST_CHECK(path2.isEmpty());
-
+    BOOST_CHECK(!path2.hasDrawingElements());
+    
     path_conv.convert(path2);
 
     BOOST_CHECK(path_conv.pathString == "FRW\n");
@@ -208,7 +224,8 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2 += path1;
 
     BOOST_CHECK(!path2.isEmpty());
-
+    BOOST_CHECK(path2.hasDrawingElements());
+    
     path_conv.convert(path2);
 
     BOOST_CHECK(path_conv.pathString == PATH_STRING);
@@ -263,4 +280,118 @@ BOOST_AUTO_TEST_CASE(Path2DTest)
     path2.closePath();
     
     BOOST_CHECK(path2 != path1);
+
+//--------
+
+    struct TestArc
+    {
+
+        void checkBounds(const Rectangle2D& bounds) const {
+            BOOST_CHECK_CLOSE(this->bounds[0], bounds.getMin()(0), 0.0001);
+            BOOST_CHECK_CLOSE(this->bounds[1], bounds.getMin()(1), 0.0001);
+            BOOST_CHECK_CLOSE(this->bounds[2], bounds.getMax()(0), 0.0001);
+            BOOST_CHECK_CLOSE(this->bounds[3], bounds.getMax()(1), 0.0001);
+            
+        }
+        
+        double arcSpec[6];
+        double bounds[4];
+
+    } test_arcs[] = {
+        {{0.0, 0.0, 10.0, 20.0, 10.0, 70.0},
+         {std::cos(80.0 / 180.0 * M_PI) * 10.0, std::sin(10.0 / 180.0 * M_PI) * 20.0,
+          std::cos(10.0 / 180.0 * M_PI) * 10.0, std::sin(80.0 / 180.0 * M_PI) * 20.0}},
+        {{0.0, 0.0, 10.0, 20.0, 10.0, 90.0},
+         {std::cos(100.0 / 180.0 * M_PI) * 10.0, std::sin(10.0 / 180.0 * M_PI) * 20.0,
+          std::cos(10.0 / 180.0 * M_PI) * 10.0, 20.0}                                },
+        {{0.0, 0.0, 10.0, 20.0, 80.0, -70.0},
+         {std::cos(80.0 / 180.0 * M_PI) * 10.0, std::sin(10.0 / 180.0 * M_PI) * 20.0,
+          std::cos(10.0 / 180.0 * M_PI) * 10.0, std::sin(80.0 / 180.0 * M_PI) * 20.0}},
+        {{0.0, 0.0, 10.0, 20.0, 100.0, -90.0},
+         {std::cos(100.0 / 180.0 * M_PI) * 10.0, std::sin(10.0 / 180.0 * M_PI) * 20.0,
+          std::cos(10.0 / 180.0 * M_PI) * 10.0, 20.0}                                },
+        {{10.0, 10.0, 20.0, 10.0, 10.0, 350},
+         {-10.0, 0.0, 30.0, 20.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, 10.0, -360},
+         {-10.0, 0.0, 30.0, 20.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, -1000.0, -360},
+         {-10.0, 0.0, 30.0, 20.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, -1000.0, -460},
+         {-10.0, 0.0, 30.0, 20.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, 0.0, 180.0},
+         {-10.0, 10.0, 30.0, 20.0}                                                   },
+        {{10.0, 10.0, 20.0, 10.0, 90.0, 180.0},
+         {-10.0, 0.0, 10.0, 20.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, 180.0, 180.0},
+         {-10.0, 0.0, 30.0, 10.0}                                                    },
+        {{10.0, 10.0, 20.0, 10.0, 270.0, 180.0},
+         {10.0, 0.0, 30.0, 20.0}                                                     }
+    };
+
+    Rectangle2D bounds;
+    
+    for (std::size_t i = 0; i < sizeof(test_arcs) / sizeof(TestArc); i++) {
+        path1.clear();
+        path1.arc(test_arcs[i].arcSpec[0], test_arcs[i].arcSpec[1], test_arcs[i].arcSpec[2],
+                  test_arcs[i].arcSpec[3], test_arcs[i].arcSpec[4], test_arcs[i].arcSpec[5]);
+        path1.getBounds(bounds);
+
+        test_arcs[i].checkBounds(bounds);
+
+        (path2 = path1).getBounds(bounds);
+
+        test_arcs[i].checkBounds(bounds);
+
+        Path2D(path2).getBounds(bounds);
+
+        test_arcs[i].checkBounds(bounds);
+    }
+
+//--------
+
+    path1.clear();
+    path1.getBounds(bounds);
+
+    BOOST_CHECK(!bounds.isDefined());
+
+    path1.closePath();
+
+    BOOST_CHECK(!bounds.isDefined());
+
+    path1.moveTo(-20.0, 3.33);
+
+    BOOST_CHECK(!bounds.isDefined());
+
+    path1.moveTo(20.0, -13.33);
+
+    BOOST_CHECK(!bounds.isDefined());
+
+    path1.closePath();
+
+    BOOST_CHECK(!bounds.isDefined());
+
+//--------
+
+    struct TestLine
+    {
+
+        double lineSpec[2];
+        double bounds[4];
+
+    } test_lines[] = {
+        {{20.0, -13.33}, {20.0, -13.33, 20.0, -13.33}},
+        {{0.0, -20.0},   {0.0, -20.0, 20.0, -13.33}  },
+        {{0.0, 20.0},    {0.0, -20.0, 20.0, 20.0}    },
+        {{50.0, 10.0},   {0.0, -20.0, 50.0, 20.0}    }
+    };
+
+    for (std::size_t i = 0; i < sizeof(test_lines) / sizeof(TestLine); i++) {
+        path1.lineTo(test_lines[i].lineSpec[0], test_lines[i].lineSpec[1]);
+        path1.getBounds(bounds);
+
+        BOOST_CHECK_CLOSE(test_lines[i].bounds[0], bounds.getMin()(0), 0.0001);
+        BOOST_CHECK_CLOSE(test_lines[i].bounds[1], bounds.getMin()(1), 0.0001);
+        BOOST_CHECK_CLOSE(test_lines[i].bounds[2], bounds.getMax()(0), 0.0001);
+        BOOST_CHECK_CLOSE(test_lines[i].bounds[3], bounds.getMax()(1), 0.0001);
+    }
 }
