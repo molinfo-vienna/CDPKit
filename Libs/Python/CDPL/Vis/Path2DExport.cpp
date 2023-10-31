@@ -26,6 +26,7 @@
 
 #include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Vis/Path2DConverter.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -62,6 +63,7 @@ void CDPLPythonVis::exportPath2D()
         .def("assign", &Vis::Path2D::operator=, (python::arg("self"), python::arg("path")),
              python::return_self<>())
         .def("isEmpty", &Vis::Path2D::isEmpty, python::arg("self"))
+        .def("hasDrawingElements", &Vis::Path2D::hasDrawingElements, python::arg("self"))
         .def("clear", &Vis::Path2D::clear, python::arg("self"))
         .def("setFillRule", &Vis::Path2D::setFillRule, (python::arg("self"), python::arg("rule")))
         .def("getFillRule", &Vis::Path2D::getFillRule, python::arg("self"))
@@ -86,6 +88,7 @@ void CDPLPythonVis::exportPath2D()
         .def("lineTo", static_cast<void (Vis::Path2D::*)(const Math::Vector2D&)>(&Vis::Path2D::lineTo),
              (python::arg("self"), python::arg("pos")))
         .def("closePath", &Vis::Path2D::closePath, python::arg("self"))
+        .def("getBounds", &Vis::Path2D::getBounds, (python::arg("self"), python::arg("bounds")))
         .def("convert", &Vis::Path2D::convert, (python::arg("self"), python::arg("conv")))
         .def("addEllipse", static_cast<void (Vis::Path2D::*)(double, double, double, double)>(&Vis::Path2D::addEllipse),
              (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
@@ -101,5 +104,6 @@ void CDPLPythonVis::exportPath2D()
         .def("__ne__", &Vis::Path2D::operator!=, (python::arg("self"), python::arg("path")))
         .def("__bool__", &isNonEmpty, python::arg("self"))
         .add_property("empty", &Vis::Path2D::isEmpty)
+        .add_property("hasDrawingElem", &Vis::Path2D::hasDrawingElements)
         .add_property("fillRule", &Vis::Path2D::getFillRule, &Vis::Path2D::setFillRule);
 }
