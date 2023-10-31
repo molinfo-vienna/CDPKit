@@ -42,6 +42,7 @@ namespace CDPL
     {
 
         class Path2DConverter;
+        class Rectangle2D;
         
         /**
          * \brief Specifies a Path in 2D space constructed from arcs and lines.
@@ -75,6 +76,8 @@ namespace CDPL
 
             bool isEmpty() const;
 
+            bool hasDrawingElements() const;
+
             void clear();
 
             void setFillRule(FillRule rule);
@@ -107,6 +110,8 @@ namespace CDPL
 
             void addRectangle(const Math::Vector2D& pos, double width, double height);
 
+            void getBounds(Rectangle2D& bounds) const;
+            
             void convert(Path2DConverter& conv) const;
             
             bool operator==(const Path2D& path) const;
