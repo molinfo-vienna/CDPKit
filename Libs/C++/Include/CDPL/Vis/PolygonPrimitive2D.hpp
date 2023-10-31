@@ -66,7 +66,7 @@ namespace CDPL
 
             /**
              * \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
-             * \param pen The pen defining the color, width, line style, cap style and join style of the polygon's outline.
+             * \param pen The pen defining the color, width, line style, cap style and join style of the polygon outline.
              */
             void setPen(const Pen& pen);
 
