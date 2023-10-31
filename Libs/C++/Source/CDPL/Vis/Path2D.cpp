@@ -24,10 +24,14 @@
 
 #include "StaticInit.hpp"
 
+#include <cstddef>
 #include <cmath>
+#include <utility>
 
 #include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Vis/Path2DConverter.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL;
@@ -50,7 +54,7 @@ struct Vis::Path2D::Element
         if (command != elem.command)
             return false;
 
-        for (unsigned int i = 0; i < sizeof(data) / sizeof(double); i++)
+        for (std::size_t i = 0; i < sizeof(data) / sizeof(double); i++)
             if (data[i] != elem.data[i])
                 return false;
 
@@ -75,6 +79,22 @@ Vis::Path2D::~Path2D() {}
 bool Vis::Path2D::isEmpty() const
 {
     return elements.empty();
+}
+
+bool Vis::Path2D::hasDrawingElements() const
+{
+    for (const auto& elem : elements)
+        switch (elem.command) {
+
+            case Element::LINE_TO:
+            case Element::ARC_TO:
+                return true;
+                
+            default:
+                continue;
+        }
+
+    return false;
 }
 
 void Vis::Path2D::clear()
@@ -105,7 +125,7 @@ void Vis::Path2D::moveTo(const Math::Vector2D& pos)
             
 void Vis::Path2D::arc(double cx, double cy, double rx, double ry, double start_ang, double sweep)
 {
-    moveTo(std::cos(start_ang) * rx + cx, std::sin(start_ang) * ry + cy);
+    moveTo(std::cos(start_ang / 180.0 * M_PI) * rx + cx, std::sin(start_ang / 180.0 * M_PI) * ry + cy);
     arcTo(cx, cy, rx, ry, start_ang, sweep);
 }
 
@@ -163,6 +183,82 @@ void Vis::Path2D::addRectangle(double x, double y, double width, double height)
 void Vis::Path2D::addRectangle(const Math::Vector2D& pos, double width, double height)
 {
     addRectangle(pos(0), pos(1), width, height);
+}
+
+void Vis::Path2D::getBounds(Rectangle2D& bounds) const
+{
+    bounds.reset();
+
+    double start_x = 0.0, start_y = 0.0;
+    bool start_pos_added = false;
+    
+    for (const auto& elem : elements) {
+        switch (elem.command) {
+
+            case Element::LINE_TO:
+                if (!start_pos_added) {
+                    bounds.addPoint(start_x, start_y);
+                    start_pos_added = true;
+                }
+
+                bounds.addPoint(elem.data[0], elem.data[1]);
+                continue;
+                
+            case Element::ARC_TO: {
+                if (!start_pos_added) {
+                    bounds.addPoint(start_x, start_y);
+                    start_pos_added = true;
+                }
+
+                double cx = elem.data[0];
+                double cy = elem.data[1];
+                double rx = elem.data[2];
+                double ry = elem.data[3];
+                double start_ang = elem.data[4] / 180.0 * M_PI;
+                double sweep = elem.data[5] / 180.0 * M_PI;
+                double end_ang = start_ang + sweep;
+
+                if (sweep < 0.0)
+                    std::swap(start_ang, end_ang);
+                
+                bounds.addPoint(cx + std::cos(start_ang) * rx, cy + std::sin(start_ang) * ry);
+                bounds.addPoint(cx + std::cos(end_ang) * rx, cy + std::sin(end_ang) * ry);
+
+                if (start_ang < 0.0) {
+                    double offs = std::ceil(-start_ang / (2.0 * M_PI)) * 2.0 * M_PI;
+
+                    start_ang += offs;
+                    end_ang += offs;
+                }
+
+                std::size_t start_quad = std::floor(start_ang / (M_PI * 0.5));
+                std::size_t end_quad = std::floor(end_ang / (M_PI * 0.5));
+
+                if ((end_quad - start_quad) > 4)
+                    end_quad = start_quad + 4;
+
+                double limits[4][2] = {
+                    { cx,      cy + ry },
+                    { cx - rx, cy      },
+                    { cx,      cy - ry },
+                    { cx + rx, cy      }
+                };
+
+                for ( ; start_quad < end_quad; start_quad++)
+                    bounds.addPoint(limits[start_quad % 4][0], limits[start_quad % 4][1]);
+                
+                continue;
+            }
+                
+            case Element::MOVE_TO:
+                start_x = elem.data[0];
+                start_y = elem.data[1];
+                start_pos_added = false;
+
+            default:
+                continue;
+        }
+    }
 }
 
 void Vis::Path2D::convert(Path2DConverter& conv) const
