@@ -20,81 +20,26 @@
 #
 
 ##
-# \brief 
-#
-BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
+# \brief A graphics primitive representing a clipping region in 2D space.
+# 
+# 1.1
+# 
+class ClipPathPrimitive2D(Path2D, GraphicsPrimitive2D):
 
-##
-# \brief 
-#
-BUILD_TIME = 202310311335
+    ##
+    # \brief Constructs an undefined path primitive.
+    # 
+    def __init__() -> None: pass
 
-##
-# \brief 
-#
-COMPILER_ID = 'GNU'
+    ##
+    # \brief Initializes a copy of the \e %ClipPathPrimitive2D instance \a prim.
+    # \param prim The \e %ClipPathPrimitive2D instance to copy.
+    # 
+    def __init__(prim: ClipPathPrimitive2D) -> None: pass
 
-##
-# \brief 
-#
-COMPILER_VERSION = '8.5.0'
-
-##
-# \brief 
-#
-HAVE_CAIRO = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PDF_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PNG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PS_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_SVG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_NUMPY = True
-
-##
-# \brief 
-#
-HAVE_QT = True
-
-##
-# \brief 
-#
-VERSION = 10100
-
-##
-# \brief 
-#
-VERSION_MAJOR = 1
-
-##
-# \brief 
-#
-VERSION_MINOR = 1
-
-##
-# \brief 
-#
-VERSION_PATCH = 0
-
-##
-# \brief 
-#
-VERSION_STRING = '1.1.0'
+    ##
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ClipPathPrimitive2D instance \a prim.
+    # \param prim The \e %ClipPathPrimitive2D instance to copy.
+    # \return \a self
+    # 
+    def assign(prim: ClipPathPrimitive2D) -> ClipPathPrimitive2D: pass

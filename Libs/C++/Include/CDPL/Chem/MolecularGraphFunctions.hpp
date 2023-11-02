@@ -513,6 +513,9 @@ namespace CDPL
 
         CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
 
+        /**
+         * \since 1.1
+         */
         CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
         
     } // namespace Chem

@@ -44,6 +44,7 @@ namespace CDPL
 
         /**
          * \brief A graphics primitive representing a clipping region in 2D space.
+         * \since 1.1
          */
         class CDPL_VIS_API ClipPathPrimitive2D : public Path2D,
                                                  public GraphicsPrimitive2D

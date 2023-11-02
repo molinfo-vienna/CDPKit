@@ -189,3 +189,25 @@ class QtRenderer2D(Vis.Renderer2D):
     # \see setPen(), setFont()
     # 
     def drawText(x: float, y: float, txt: str) -> None: pass
+
+    ##
+    # \brief Draws the given path.
+    # 
+    # The path is filled as specified by the current brush and the outline will be drawn as specified by the current pen.
+    # 
+    # \param path The path to draw.
+    # 
+    # \see setPen(), setBrush()
+    # 
+    def drawPath(path: Vis.Path2D) -> None: pass
+
+    ##
+    # \brief 
+    # \param path 
+    #
+    def setClipPath(path: Vis.Path2D) -> None: pass
+
+    ##
+    # \brief Disables clipping.
+    # 
+    def clearClipPath() -> None: pass

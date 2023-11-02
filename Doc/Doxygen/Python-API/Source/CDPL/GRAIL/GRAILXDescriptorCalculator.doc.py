@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief GRAILXDescriptorCalculator.
+# 
+# \see [\ref GRAIL]
+# 
 class GRAILXDescriptorCalculator(Boost.Python.instance):
 
     ##

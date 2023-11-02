@@ -228,6 +228,9 @@ namespace CDPL
 
         CDPL_CHEM_API void initSubstructureSearchTarget(Reaction& rxn, bool overwrite);
 
+        /**
+         * \since 1.1
+         */
         CDPL_CHEM_API void calcBasicProperties(Reaction& rxn, bool overwrite);
         
     } // namespace Chem

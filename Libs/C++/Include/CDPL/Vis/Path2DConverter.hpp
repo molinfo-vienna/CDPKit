@@ -39,8 +39,10 @@ namespace CDPL
     {
 
         /**
-         * \brief Common interface of classes that implement the conversion of Vis::Path2D objects into
+         * \brief Provides an interface for classes that implement the conversion of Vis::Path2D objects into
          *        rendering backend specific path descriptions or drawing operations.
+         * \see Vis::Renderer2D
+         * \since 1.1
          */
         class CDPL_VIS_API Path2DConverter
         {
@@ -51,12 +53,34 @@ namespace CDPL
              */
             virtual ~Path2DConverter() {}
 
+            /**
+             * \brief Called when a Vis::Path2D element created by a Vis::Path2D::moveTo() call is encountered.
+             * \param x The x-coordinate of the newly set current position.
+             * \param y The y-coordinate of the newly set current position.
+             */
             virtual void moveTo(double x, double y) = 0;
- 
+
+            /**
+             * \brief Called when a Vis::Path2D element created by a Vis::Path2D::arcTo() call is encountered.
+             * \param cx        The x-coordinate of the ellipse center.
+             * \param cy        The y-coordinate of the ellipse center.
+             * \param rx        The x-radius of the ellipse.
+             * \param ry        The y-radius of the ellipse.
+             * \param start_ang The start angle of the arg in degrees.
+             * \param sweep     The length of the arg in degrees.
+             */
             virtual void arcTo(double cx, double cy, double rx, double ry, double start_ang, double sweep) = 0;
 
+            /**
+             * \brief Called when a Vis::Path2D element created by a Vis::Path2D::lineTo() call is encountered.
+             * \param x Specifies the x-coordinate of the line's end point.
+             * \param y Specifies the y-coordinate of the line's end point. 
+             */
             virtual void lineTo(double x, double y) = 0;
 
+            /**
+             * \brief Called when a Vis::Path2D element created by a Vis::Path2D::closePath() call is encountered.
+             */
             virtual void closePath() = 0;
         };
     } // namespace Vis

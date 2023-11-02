@@ -65,3 +65,14 @@ class QtObjectFactory(builtins.object):
     # 
     @staticmethod
     def createQBrush(brush: Vis.Brush) -> PyQt5.QtGui.QBrush: pass
+
+    ##
+    # \brief Creates a <tt>QPainterPath</tt> object that corresponds to the specified path.
+    # 
+    # \param path The path object.
+    # \param qt_path The QPainterPath object to create.
+    # 
+    # \return The argument <em>qt_path</em>.
+    # 
+    @staticmethod
+    def createQPainterPath(path: Vis.Path2D, qt_path: PyQt5.QtGui.QPainterPath) -> PyQt5.QtGui.QPainterPath: pass

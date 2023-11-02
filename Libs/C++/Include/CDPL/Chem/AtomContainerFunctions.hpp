@@ -79,10 +79,19 @@ namespace CDPL
 
         CDPL_CHEM_API void transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 
+        /*
+         * \since 1.1
+         */
         CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_conf);
 
+        /*
+         * \since 1.1
+         */
         CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, std::size_t ref_conf_idx = 0);
 
+        /*
+         * \since 1.1
+         */
         CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, std::size_t ref_conf_idx = 0);
         
 

@@ -20,39 +20,41 @@
 #
 
 ##
-# \brief A graphics primitive representing a polygon.
+# \brief A graphics primitive representing an arbitrary path in 2D space.
 # 
-class PolygonPrimitive2D(PointArray2D, GraphicsPrimitive2D):
+# 1.1
+# 
+class PathPrimitive2D(Path2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Constructs an undefined polygon primitive.
+    # \brief Constructs an undefined path primitive.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PolygonPrimitive2D instance \a prim.
-    # \param prim The \e %PolygonPrimitive2D instance to copy.
+    # \brief Initializes a copy of the \e %PathPrimitive2D instance \a prim.
+    # \param prim The \e %PathPrimitive2D instance to copy.
     # 
-    def __init__(prim: PolygonPrimitive2D) -> None: pass
+    def __init__(prim: PathPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PolygonPrimitive2D instance \a prim.
-    # \param prim The \e %PolygonPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PathPrimitive2D instance \a prim.
+    # \param prim The \e %PathPrimitive2D instance to copy.
     # \return \a self
     # 
-    def assign(prim: PolygonPrimitive2D) -> PolygonPrimitive2D: pass
+    def assign(prim: PathPrimitive2D) -> PathPrimitive2D: pass
 
     ##
-    # \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # \brief Sets the pen defining the color, width, line style, cap style and join style of the path outline.
     # 
-    # \param pen The pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # \param pen The pen defining the color, width, line style, cap style and join style of the path outline.
     # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief Returns the pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # \brief Returns the pen defining the color, width, line style, cap style and join style of the path outline.
     # 
-    # \return The pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # \return The pen defining the color, width, line style, cap style and join style of the path outline.
     # 
     def getPen() -> Pen: pass
 

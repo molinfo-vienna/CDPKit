@@ -46,6 +46,7 @@ namespace CDPL
 
         /**
          * \brief A graphics primitive representing an arbitrary path in 2D space.
+         * \since 1.1
          */
         class CDPL_VIS_API PathPrimitive2D : public Path2D,
                                              public GraphicsPrimitive2D

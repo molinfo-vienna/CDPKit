@@ -20,8 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides an interface for classes that implement the conversion of Vis.Path2D objects into rendering backend specific path descriptions or drawing operations.
+# 
+# \see Vis.Renderer2D 
+# 
+# 1.1
+# 
 class Path2DConverter(Boost.Python.instance):
 
     ##
@@ -42,33 +46,36 @@ class Path2DConverter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param x 
-    # \param y 
-    #
+    # \brief Called when a Vis.Path2D element created by a Vis.Path2D.moveTo() call is encountered.
+    # 
+    # \param x The x-coordinate of the newly set current position.
+    # \param y The y-coordinate of the newly set current position.
+    # 
     def moveTo(x: float, y: float) -> None: pass
 
     ##
-    # \brief 
-    # \param cx 
-    # \param cy 
-    # \param rx 
-    # \param ry 
-    # \param start_ang 
-    # \param sweep 
-    #
+    # \brief Called when a Vis.Path2D element created by a Vis.Path2D.arcTo() call is encountered.
+    # 
+    # \param cx The x-coordinate of the ellipse center.
+    # \param cy The y-coordinate of the ellipse center.
+    # \param rx The x-radius of the ellipse.
+    # \param ry The y-radius of the ellipse.
+    # \param start_ang The start angle of the arg in degrees.
+    # \param sweep The length of the arg in degrees.
+    # 
     def arcTo(cx: float, cy: float, rx: float, ry: float, start_ang: float, sweep: float) -> None: pass
 
     ##
-    # \brief 
-    # \param x 
-    # \param y 
-    #
+    # \brief Called when a Vis.Path2D element created by a Vis.Path2D.lineTo() call is encountered.
+    # 
+    # \param x Specifies the x-coordinate of the line's end point.
+    # \param y Specifies the y-coordinate of the line's end point.
+    # 
     def lineTo(x: float, y: float) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Called when a Vis.Path2D element created by a Vis.Path2D.closePath() call is encountered.
+    # 
     def closePath() -> None: pass
 
     objectID = property(getObjectID)

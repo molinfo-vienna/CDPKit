@@ -45,6 +45,7 @@ namespace CDPL
         /**
          * \brief BemisMurckoAnalyzer.
          * \see [\ref BEMU]
+         * \since 1.1
          */
         class CDPL_CHEM_API BemisMurckoAnalyzer
         {

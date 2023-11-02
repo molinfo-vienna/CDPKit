@@ -20,8 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief BemisMurckoAnalyzer.
+# 
+# \see [\ref BEMU] 
+# 
+# 1.1
+# 
 class BemisMurckoAnalyzer(Boost.Python.instance):
 
     ##
