@@ -43,7 +43,7 @@
 #  define CDPL_UTIL_ARRAY_CHECK_INDEX(idx, allow_end)
 # else // !CDPL_UTIL_ARRAY_CHECKS_DISABLE
 #  define CDPL_UTIL_ARRAY_CHECK_INDEX(idx, allow_end) checkIndex(idx, allow_end)
-# endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0
+# endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE
 #endif // !CDPL_UTIL_ARRAY_CHECK_INDEX
 
 #ifndef CDPL_UTIL_ARRAY_CHECK_ITER

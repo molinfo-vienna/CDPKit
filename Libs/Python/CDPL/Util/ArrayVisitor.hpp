@@ -32,7 +32,7 @@
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 
-#if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
+#ifndef CDPL_UTIL_ARRAY_CHECKS_DISABLE
 # define CHECK_ARRAY_INDEX(a, i, end_ok)
 #else
 # define CHECK_ARRAY_INDEX(a, i, end_ok)                                \
