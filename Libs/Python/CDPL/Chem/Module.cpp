@@ -140,6 +140,7 @@ BOOST_PYTHON_MODULE(_chem)
     exportBRICSFragmentGenerator();
     exportBemisMurckoAnalyzer();
     exportResonanceStructureGenerator();
+    exportStereoisomerGenerator();
     exportChEMBLStandardizer();
     exportProtonationStateStandardizer();
     

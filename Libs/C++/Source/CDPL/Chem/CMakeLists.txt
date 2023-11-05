@@ -147,6 +147,7 @@ set(cdpl-chem_LIB_SRCS
     GenericHydrogen13ShiftTautomerization.cpp  
     GenericHydrogen15ShiftTautomerization.cpp  
     ResonanceStructureGenerator.cpp
+    StereoisomerGenerator.cpp
     ChEMBLStandardizer.cpp
     ProtonationStateStandardizer.cpp
     

@@ -132,6 +132,7 @@ namespace CDPLPythonChem
     void exportGenericHydrogen13ShiftTautomerization();
     void exportGenericHydrogen15ShiftTautomerization();
     void exportResonanceStructureGenerator();
+    void exportStereoisomerGenerator();
     void exportChEMBLStandardizer();
     void exportProtonationStateStandardizer();
 

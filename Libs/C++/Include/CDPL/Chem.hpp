@@ -277,6 +277,7 @@
 #include "CDPL/Chem/GenericHydrogen13ShiftTautomerization.hpp"
 #include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"
+#include "CDPL/Chem/StereoisomerGenerator.hpp"
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
 #include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 #include "CDPL/Chem/FragmentGenerator.hpp"

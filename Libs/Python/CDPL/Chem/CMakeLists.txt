@@ -132,6 +132,7 @@ set(chem_MOD_SRCS
     BRICSFragmentGeneratorExport.cpp
     BemisMurckoAnalyzerExport.cpp
     ResonanceStructureGeneratorExport.cpp
+    StereoisomerGeneratorExport.cpp
     ChEMBLStandardizerExport.cpp
     ProtonationStateStandardizerExport.cpp
     
