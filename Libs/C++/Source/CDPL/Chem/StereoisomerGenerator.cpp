@@ -80,19 +80,19 @@ bool Chem::StereoisomerGenerator::specifiedCentersEnumerated() const
     return enumSpecifiedCtrs;
 }
 
-void Chem::StereoisomerGenerator::excludeBridgeheads(bool excl)
+void Chem::StereoisomerGenerator::excludeBridgeheadAtoms(bool exclude)
 {
-    exclBridgeheads = excl;
+    exclBridgeheads = exclude;
 }
 
-bool Chem::StereoisomerGenerator::bridgeheadsExcluded() const
+bool Chem::StereoisomerGenerator::bridgeheadAtomsExcluded() const
 {
     return exclBridgeheads;
 }
 
-void Chem::StereoisomerGenerator::excludeNitrogens(bool excl)
+void Chem::StereoisomerGenerator::excludeNitrogens(bool exclude)
 {
-    exclNitrogens = excl;
+    exclNitrogens = exclude;
 }
 
 bool Chem::StereoisomerGenerator::nitrogensExcluded() const

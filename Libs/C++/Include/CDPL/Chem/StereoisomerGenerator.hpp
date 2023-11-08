@@ -79,11 +79,11 @@ namespace CDPL
 
             bool specifiedCentersEnumerated() const;
 
-            void excludeBridgeheads(bool excl);
+            void excludeBridgeheadAtoms(bool exclude);
 
-            bool bridgeheadsExcluded() const;
+            bool bridgeheadAtomsExcluded() const;
 
-            void excludeNitrogens(bool excl);
+            void excludeNitrogens(bool exclude);
 
             bool nitrogensExcluded() const;
 
