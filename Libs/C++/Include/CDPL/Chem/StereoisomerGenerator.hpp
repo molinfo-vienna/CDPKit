@@ -34,6 +34,8 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
+#include "CDPL/Chem/BondPredicate.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -57,6 +59,34 @@ namespace CDPL
 
             typedef Util::Array<StereoDescriptor> StereoDescriptorArray;
 
+            void setAtomPredicate(const AtomPredicate& pred);
+            
+            const AtomPredicate& getAtomPredicate() const;
+
+            void setBondPredicate(const BondPredicate& pred);
+            
+            const BondPredicate& getBondPredicate() const;
+
+            void enumerateAtomCenters(bool enumerate);
+
+            bool atomCentersEnumerated() const;
+
+            void enumerateBondCenters(bool enumerate);
+
+            bool bondCentersEnumerated() const;
+
+            void enumerateSpecifiedCenters(bool enumerate);
+
+            bool specifiedCentersEnumerated() const;
+
+            void excludeBridgeheads(bool excl);
+
+            bool bridgeheadsExcluded() const;
+
+            void excludeNitrogens(bool excl);
+
+            bool nitrogensExcluded() const;
+
             void setup(const MolecularGraph& molgraph);
 
             bool generate();
@@ -66,6 +96,13 @@ namespace CDPL
             const StereoDescriptorArray& getBondDescriptors();
             
           private:
+            AtomPredicate         atomPred;
+            BondPredicate         bondPred;
+            bool                  enumAtomCtrs{true};
+            bool                  enumBondCtrs{true};
+            bool                  enumSpecifiedCtrs{false};
+            bool                  exclBridgeheads{true};
+            bool                  exclNitrogens{true};
             StereoDescriptorArray atomDescrs;
             StereoDescriptorArray bondDescrs;
         };

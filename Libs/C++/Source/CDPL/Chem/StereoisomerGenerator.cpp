@@ -30,12 +30,84 @@
 using namespace CDPL;
 
 
+void Chem::StereoisomerGenerator::setAtomPredicate(const AtomPredicate& pred)
+{
+    atomPred = pred;
+}
+
+const Chem::AtomPredicate& Chem::StereoisomerGenerator::getAtomPredicate() const
+{
+    return atomPred;
+}
+
+void Chem::StereoisomerGenerator::setBondPredicate(const BondPredicate& pred)
+{
+    bondPred = pred;
+}
+
+const Chem::BondPredicate& Chem::StereoisomerGenerator::getBondPredicate() const
+{
+    return bondPred;
+}
+
+void Chem::StereoisomerGenerator::enumerateAtomCenters(bool enumerate)
+{
+    enumAtomCtrs = enumerate;
+}
+
+bool Chem::StereoisomerGenerator::atomCentersEnumerated() const
+{
+    return enumAtomCtrs;
+}
+
+void Chem::StereoisomerGenerator::enumerateBondCenters(bool enumerate)
+{
+    enumBondCtrs = enumerate;
+}
+
+bool Chem::StereoisomerGenerator::bondCentersEnumerated() const
+{
+    return enumBondCtrs;
+}
+
+void Chem::StereoisomerGenerator::enumerateSpecifiedCenters(bool enumerate)
+{
+    enumSpecifiedCtrs = enumerate;
+}
+
+bool Chem::StereoisomerGenerator::specifiedCentersEnumerated() const
+{
+    return enumSpecifiedCtrs;
+}
+
+void Chem::StereoisomerGenerator::excludeBridgeheads(bool excl)
+{
+    exclBridgeheads = excl;
+}
+
+bool Chem::StereoisomerGenerator::bridgeheadsExcluded() const
+{
+    return exclBridgeheads;
+}
+
+void Chem::StereoisomerGenerator::excludeNitrogens(bool excl)
+{
+    exclNitrogens = excl;
+}
+
+bool Chem::StereoisomerGenerator::nitrogensExcluded() const
+{
+    return exclNitrogens;
+}
+
 void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
 {
+    // TODO
 }
 
 bool Chem::StereoisomerGenerator::generate()
 {
+    // TODO
     return false;
 }
 
