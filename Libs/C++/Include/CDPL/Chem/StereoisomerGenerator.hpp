@@ -31,6 +31,7 @@
 
 #include <memory>
 #include <vector>
+#include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
@@ -46,6 +47,7 @@ namespace CDPL
     {
 
         class MolecularGraph;
+        class BondContainer;
         
         /**
          * \brief StereoisomerGenerator.
@@ -78,6 +80,10 @@ namespace CDPL
             void enumerateSpecifiedCenters(bool enumerate);
 
             bool specifiedCentersEnumerated() const;
+  
+            void enumerateSymmetricCenters(bool enumerate);
+
+            bool symmetricCentersEnumerated() const;
 
             void excludeBridgeheadAtoms(bool exclude);
 
@@ -86,6 +92,14 @@ namespace CDPL
             void excludeNitrogens(bool exclude);
 
             bool nitrogensExcluded() const;
+
+            void excludeRingBonds(bool exclude);
+
+            bool ringBondsExcluded() const;
+
+            void setMinRingSize(std::size_t min_size);
+
+            std::size_t getMinRingSize() const;
 
             void setup(const MolecularGraph& molgraph);
 
@@ -96,15 +110,29 @@ namespace CDPL
             const StereoDescriptorArray& getBondDescriptors();
             
           private:
+            typedef std::vector<std::size_t> IndexList;
+
+            bool isExcluded(const Atom& atom, const MolecularGraph& molgraph, bool has_config);
+            bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const;
+
+            bool isBridgehead(const Atom& atom, const MolecularGraph& molgraph);
+            bool haveCommonBond(const BondContainer& r1, const BondContainer& r2) const;
+
             AtomPredicate         atomPred;
             BondPredicate         bondPred;
             bool                  enumAtomCtrs{true};
             bool                  enumBondCtrs{true};
             bool                  enumSpecifiedCtrs{false};
+            bool                  enumSymmetricCtrs{false};
             bool                  exclBridgeheads{true};
             bool                  exclNitrogens{true};
+            bool                  exclRingBonds{true};
+            std::size_t           minRingSize{10};
             StereoDescriptorArray atomDescrs;
+            IndexList             atomCtrs;
             StereoDescriptorArray bondDescrs;
+            IndexList             bondCtrs;
+            IndexList             atomRingSet;
         };
     } // namespace Chem
 } // namespace CDPL
