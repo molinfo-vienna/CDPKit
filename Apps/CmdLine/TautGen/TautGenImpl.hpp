@@ -131,6 +131,7 @@ namespace TautGen
         bool               sulfenicAcid;
         bool               genericH13Shift;
         bool               genericH15Shift;
+        bool               titleSuffix;
         std::size_t        numThreads;
         std::size_t        maxNumTautomers;
         Mode               mode;

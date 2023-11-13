@@ -6,7 +6,7 @@ Performs tautomer generation/standardization for a set of input molecules.
 Synopsis
 --------
 
-  :program:`tautgen` [-hVvptsdz] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
+  :program:`tautgen` [-hVvptsdzS] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
 
 Mandatory options
 -----------------
@@ -126,6 +126,10 @@ Other options
 
     Maximum number of output tautomers for each molecule (default: 0, must be >= 0, 
     0 disables limit).
+
+  -S [ --title-suffix ] [=arg(=1)]
+
+    Append tautomer number to the title of output molecules (default: false, since V1.1).
 
   --keto-enol [=arg(=1)]
 

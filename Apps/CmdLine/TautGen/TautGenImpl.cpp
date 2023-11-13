@@ -334,7 +334,11 @@ private:
 
         perceiveComponents(molgraph, false);
         setAtomSymbolsFromTypes(molgraph, false);
-        setName(molgraph, getName(molecule));
+
+        if (parent->mode != STANDARDIZE && parent->titleSuffix)
+            setName(molgraph, getName(molecule) + '_' + std::to_string(numGenMolTauts));
+        else
+            setName(molgraph, getName(molecule));
 
         parent->writeMolecule(molgraph);
     }
@@ -357,7 +361,7 @@ TautGenImpl::TautGenImpl():
     regardStereo(true), regardIsotopes(true), neutralize(false), ketoEnol(true), 
     imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
     lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
-    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(true),
+    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(true), titleSuffix(false),
     numThreads(0), maxNumTautomers(0), mode(Mode::TOPOLOGICALLY_UNIQUE), 
     inputFormat(), outputFormat(), outputWriter(), numOutTautomers(0)
 {
@@ -407,7 +411,8 @@ TautGenImpl::TautGenImpl():
               value<bool>(&genericH13Shift)->implicit_value(true));
     addOption("generic-h15-shift", "Enable generic hydrogen 1 <-> 5 shift tautomerization (default: true).", 
               value<bool>(&genericH15Shift)->implicit_value(true));
-
+    addOption("title-suffix,S", "Append tautomer number to the title of output molecules (default: false, since V1.1).", 
+              value<bool>(&titleSuffix)->implicit_value(true));
     addOptionLongDescriptions();
 }
 
@@ -774,6 +779,7 @@ void TautGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Isotope Aware:                     " + std::string(regardIsotopes ? "Yes" : "No"));
     printMessage(VERBOSE, " Neutralize Charges:                " + std::string(neutralize ? "Yes" : "No"));
     printMessage(VERBOSE, " Max. Num. Tautomers:               " + std::to_string(maxNumTautomers));
+    printMessage(VERBOSE, " Append Taut. No. to Mol. Title:    " + std::string(titleSuffix ? "Yes" : "No"));
     printMessage(VERBOSE, " Keto-Enol Tautomerization:         " + std::string(ketoEnol ? "Yes" : "No"));
     printMessage(VERBOSE, " Imine-Enamine Tautomerization:     " + std::string(imineEnamine ? "Yes" : "No"));
     printMessage(VERBOSE, " Nitroso-Oxime Tautomerization:     " + std::string(nitrosoOxime ? "Yes" : "No"));
