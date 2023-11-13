@@ -1246,7 +1246,7 @@ void ConfGenImpl::initOutputWriters()
     setSMILESRecordFormatParameter(*outputWriter, "SN");
 
     if (confIndexSuffix)
-        setConfIndexNameSuffixPatternParameter(*outputWriter," %I%");
+        setConfIndexNameSuffixPatternParameter(*outputWriter,"_%I%");
 
     if (!failedFile.empty()) {
         try {
