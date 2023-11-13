@@ -32,6 +32,7 @@
 #include <memory>
 #include <vector>
 #include <cstddef>
+#include <utility>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
@@ -110,13 +111,14 @@ namespace CDPL
             const StereoDescriptorArray& getBondDescriptors();
             
           private:
-            typedef std::vector<std::size_t> IndexList;
-
             bool isExcluded(const Atom& atom, const MolecularGraph& molgraph, bool has_config);
             bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const;
 
             bool isBridgehead(const Atom& atom, const MolecularGraph& molgraph);
-            bool haveCommonBond(const BondContainer& r1, const BondContainer& r2) const;
+            bool haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const;
+
+            typedef std::vector<std::pair<bool, std::size_t> > StereoCenterIDList;
+            typedef std::vector<std::size_t> IndexList;
 
             AtomPredicate         atomPred;
             BondPredicate         bondPred;
@@ -129,9 +131,8 @@ namespace CDPL
             bool                  exclRingBonds{true};
             std::size_t           minRingSize{10};
             StereoDescriptorArray atomDescrs;
-            IndexList             atomCtrs;
             StereoDescriptorArray bondDescrs;
-            IndexList             bondCtrs;
+            StereoCenterIDList    procCtrs;
             IndexList             atomRingSet;
         };
     } // namespace Chem
