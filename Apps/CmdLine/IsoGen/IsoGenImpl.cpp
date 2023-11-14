@@ -110,6 +110,7 @@ private:
             setAromaticityFlags(molecule, false);
             calcAtomStereoDescriptors(molecule, false);
             calcBondStereoDescriptors(molecule, false);
+            calcCIPPriorities(molecule, false);
             perceiveComponents(molecule, false);
             setAtomSymbolsFromTypes(molecule, false);
 
@@ -138,7 +139,9 @@ private:
 
 
 IsoGenImpl::IsoGenImpl(): 
-    maxNumIsomers(0), inputFormat(), outputFormat(), titleSuffix(false), outputWriter(), numProcMols(0), numOutIsomers(0)
+    maxNumIsomers(0), inputFormat(), outputFormat(), enumAtomConfig(true), enumBondConfig(true),
+    incSpecCtrs(false), incSymCtrs(false), incNitrogens(false), incBridgeheads(false), incRingBonds(false), 
+    minRingSize(8), titleSuffix(false), outputWriter(), numProcMols(0), numOutIsomers(0)
 {
     using namespace std::placeholders;
     
@@ -150,8 +153,24 @@ IsoGenImpl::IsoGenImpl():
               value<std::string>()->notifier(std::bind(&IsoGenImpl::setInputFormat, this, _1)));
     addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier(std::bind(&IsoGenImpl::setOutputFormat, this, _1)));
-    addOption("max-num-isomers,n", "Maximum number of output stereoisomers for each molecule (default: 0, must be >= 0, 0 disables limit).",
+    addOption("max-num-isomers,m", "Maximum number of output stereoisomers per molecule (default: 0, must be >= 0, 0 disables limit).",
               value<std::size_t>(&maxNumIsomers));
+    addOption("enum-atom-cfg,a", "Enumerate configurations of atom stereocenters (default: true).",
+              value<bool>(&enumAtomConfig)->implicit_value(true));
+    addOption("enum-bond-cfg,b", "Enumerate configurations of bond stereocenters (default: true).",
+              value<bool>(&enumBondConfig)->implicit_value(true));
+    addOption("inc-spec-ctrs,s", "Do not retain configurations of specified stereocenters (default: false).",
+              value<bool>(&incSpecCtrs)->implicit_value(true));
+    addOption("inc-sym-ctrs,x", "Enumerate configurations of atom/bonds with topologically symmetric ligands (default: false).",
+              value<bool>(&incSymCtrs)->implicit_value(true));
+    addOption("inc-nitrogens,n", "Enumerate configurations of nitrogen stereocenters (default: false).",
+              value<bool>(&incNitrogens)->implicit_value(true));
+    addOption("inc-bh-atoms,g", "Enumerate configurations of bridgehead atom/bonds (default: false).",
+              value<bool>(&incBridgeheads)->implicit_value(true));
+    addOption("inc-ring-bonds,r", "Enumerate configurations of bonds in rings (default: false).",
+              value<bool>(&incRingBonds)->implicit_value(true));
+    addOption("min-ring-size,R", "Minimum size of rings below which configurations of member bonds are not altered (only effective if -r is true; default: 8).",
+              value<std::size_t>(&minRingSize));
     addOption("title-suffix,S", "Append stereoisomer number to the title of output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
     addOptionLongDescriptions();

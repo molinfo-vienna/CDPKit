@@ -101,6 +101,14 @@ namespace IsoGen
         std::size_t        maxNumIsomers;
         std::string        inputFormat;
         std::string        outputFormat;
+        bool               enumAtomConfig;
+        bool               enumBondConfig;
+        bool               incSpecCtrs;
+        bool               incSymCtrs;
+        bool               incNitrogens;
+        bool               incBridgeheads;
+        bool               incRingBonds;
+        std::size_t        minRingSize;
         bool               titleSuffix;
         CompMoleculeReader inputReader;
         MoleculeWriterPtr  outputWriter;
