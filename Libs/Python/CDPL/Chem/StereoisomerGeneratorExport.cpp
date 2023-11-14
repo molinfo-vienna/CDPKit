@@ -85,33 +85,33 @@ void CDPLPythonChem::exportStereoisomerGenerator()
              (python::arg("self"), python::arg("pred")))
         .def("getBondPredicate", &Chem::StereoisomerGenerator::getBondPredicate,
              python::arg("self"), python::return_internal_reference<>())
-        .def("enumerateAtomCenters", &Chem::StereoisomerGenerator::enumerateAtomCenters,
+        .def("enumerateAtomConfig", &Chem::StereoisomerGenerator::enumerateAtomConfig,
              (python::arg("self"), python::arg("enumerate")))
-        .def("atomCentersEnumerated", &Chem::StereoisomerGenerator::atomCentersEnumerated,
+        .def("atomConfigEnumerated", &Chem::StereoisomerGenerator::atomConfigEnumerated,
              python::arg("self"))
-        .def("enumerateBondCenters", &Chem::StereoisomerGenerator::enumerateBondCenters,
+        .def("enumerateBondConfig", &Chem::StereoisomerGenerator::enumerateBondConfig,
              (python::arg("self"), python::arg("enumerate")))
-        .def("bondCentersEnumerated", &Chem::StereoisomerGenerator::bondCentersEnumerated,
+        .def("bondConfigEnumerated", &Chem::StereoisomerGenerator::bondConfigEnumerated,
              python::arg("self"))
-        .def("enumerateSpecifiedCenters", &Chem::StereoisomerGenerator::enumerateSpecifiedCenters,
-             (python::arg("self"), python::arg("enumerate")))
-        .def("specifiedCentersEnumerated", &Chem::StereoisomerGenerator::specifiedCentersEnumerated,
+        .def("includeSpecifiedCenters", &Chem::StereoisomerGenerator::includeSpecifiedCenters,
+             (python::arg("self"), python::arg("include")))
+        .def("specifiedCentersIncluded", &Chem::StereoisomerGenerator::specifiedCentersIncluded,
              python::arg("self"))
-        .def("enumerateSymmetricCenters", &Chem::StereoisomerGenerator::enumerateSymmetricCenters,
-             (python::arg("self"), python::arg("enumerate")))
-        .def("symmetricCentersEnumerated", &Chem::StereoisomerGenerator::symmetricCentersEnumerated,
+        .def("includeSymmetricCenters", &Chem::StereoisomerGenerator::includeSymmetricCenters,
+             (python::arg("self"), python::arg("include")))
+        .def("symmetricCentersIncluded", &Chem::StereoisomerGenerator::symmetricCentersIncluded,
              python::arg("self"))
-        .def("excludeBridgeheadAtoms", &Chem::StereoisomerGenerator::excludeBridgeheadAtoms,
-             (python::arg("self"), python::arg("exclude")))
-        .def("bridgeheadAtomsExcluded", &Chem::StereoisomerGenerator::bridgeheadAtomsExcluded,
+        .def("includeBridgeheadAtoms", &Chem::StereoisomerGenerator::includeBridgeheadAtoms,
+             (python::arg("self"), python::arg("include")))
+        .def("bridgeheadAtomsIncluded", &Chem::StereoisomerGenerator::bridgeheadAtomsIncluded,
              python::arg("self"))
-        .def("excludeNitrogens", &Chem::StereoisomerGenerator::excludeNitrogens,
-             (python::arg("self"), python::arg("exclude")))
-        .def("nitrogensExcluded", &Chem::StereoisomerGenerator::nitrogensExcluded,
+        .def("includeNitrogens", &Chem::StereoisomerGenerator::includeNitrogens,
+             (python::arg("self"), python::arg("include")))
+        .def("nitrogensIncluded", &Chem::StereoisomerGenerator::nitrogensIncluded,
              python::arg("self"))
-        .def("excludeRingBonds", &Chem::StereoisomerGenerator::excludeRingBonds,
-             (python::arg("self"), python::arg("exclude")))
-        .def("ringBondsExcluded", &Chem::StereoisomerGenerator::ringBondsExcluded,
+        .def("includeRingBonds", &Chem::StereoisomerGenerator::includeRingBonds,
+             (python::arg("self"), python::arg("include")))
+        .def("ringBondsIncluded", &Chem::StereoisomerGenerator::ringBondsIncluded,
              python::arg("self"))
         .def("setMinRingSize", &Chem::StereoisomerGenerator::setMinRingSize,
              (python::arg("self"), python::arg("min_size")))
@@ -130,20 +130,20 @@ void CDPLPythonChem::exportStereoisomerGenerator()
         .add_property("bondPredicate", python::make_function(&Chem::StereoisomerGenerator::getBondPredicate,
                                                              python::return_internal_reference<>()),
                       &Chem::StereoisomerGenerator::setBondPredicate)
-        .add_property("enumAtomCenters", &Chem::StereoisomerGenerator::atomCentersEnumerated,
-             &Chem::StereoisomerGenerator::enumerateAtomCenters)
-        .add_property("enumBondCenters", &Chem::StereoisomerGenerator::bondCentersEnumerated,
-             &Chem::StereoisomerGenerator::enumerateBondCenters)
-        .add_property("enumSpecifiedCenters", &Chem::StereoisomerGenerator::specifiedCentersEnumerated,
-             &Chem::StereoisomerGenerator::enumerateSpecifiedCenters)
-        .add_property("enumSymmetricCenters", &Chem::StereoisomerGenerator::symmetricCentersEnumerated,
-             &Chem::StereoisomerGenerator::enumerateSymmetricCenters)
-        .add_property("exclBridgeheadAtoms", &Chem::StereoisomerGenerator::bridgeheadAtomsExcluded,
-             &Chem::StereoisomerGenerator::excludeBridgeheadAtoms)
-        .add_property("exclNitrogens", &Chem::StereoisomerGenerator::nitrogensExcluded,
-             &Chem::StereoisomerGenerator::excludeNitrogens)
-        .add_property("exclRingBonds", &Chem::StereoisomerGenerator::ringBondsExcluded,
-             &Chem::StereoisomerGenerator::excludeRingBonds)
+        .add_property("enumAtomConfig", &Chem::StereoisomerGenerator::atomConfigEnumerated,
+             &Chem::StereoisomerGenerator::enumerateAtomConfig)
+        .add_property("enumBondConfig", &Chem::StereoisomerGenerator::bondConfigEnumerated,
+             &Chem::StereoisomerGenerator::enumerateBondConfig)
+        .add_property("incSpecifiedCenters", &Chem::StereoisomerGenerator::specifiedCentersIncluded,
+             &Chem::StereoisomerGenerator::includeSpecifiedCenters)
+        .add_property("incSymmetricCenters", &Chem::StereoisomerGenerator::symmetricCentersIncluded,
+             &Chem::StereoisomerGenerator::includeSymmetricCenters)
+        .add_property("incBridgeheadAtoms", &Chem::StereoisomerGenerator::bridgeheadAtomsIncluded,
+             &Chem::StereoisomerGenerator::includeBridgeheadAtoms)
+        .add_property("incNitrogens", &Chem::StereoisomerGenerator::nitrogensIncluded,
+             &Chem::StereoisomerGenerator::includeNitrogens)
+        .add_property("incRingBonds", &Chem::StereoisomerGenerator::ringBondsIncluded,
+             &Chem::StereoisomerGenerator::includeRingBonds)
         .add_property("minRingSize", &Chem::StereoisomerGenerator::getMinRingSize,
              &Chem::StereoisomerGenerator::setMinRingSize)
         .add_property("atomDescriptors", python::make_function(&Chem::StereoisomerGenerator::getAtomDescriptors,

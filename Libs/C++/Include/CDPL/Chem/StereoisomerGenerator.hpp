@@ -70,33 +70,33 @@ namespace CDPL
             
             const BondPredicate& getBondPredicate() const;
 
-            void enumerateAtomCenters(bool enumerate);
+            void enumerateAtomConfig(bool enumerate);
 
-            bool atomCentersEnumerated() const;
+            bool atomConfigEnumerated() const;
 
-            void enumerateBondCenters(bool enumerate);
+            void enumerateBondConfig(bool enumerate);
 
-            bool bondCentersEnumerated() const;
+            bool bondConfigEnumerated() const;
 
-            void enumerateSpecifiedCenters(bool enumerate);
+            void includeSpecifiedCenters(bool include);
 
-            bool specifiedCentersEnumerated() const;
+            bool specifiedCentersIncluded() const;
   
-            void enumerateSymmetricCenters(bool enumerate);
+            void includeSymmetricCenters(bool include);
 
-            bool symmetricCentersEnumerated() const;
+            bool symmetricCentersIncluded() const;
 
-            void excludeBridgeheadAtoms(bool exclude);
+            void includeBridgeheadAtoms(bool include);
 
-            bool bridgeheadAtomsExcluded() const;
+            bool bridgeheadAtomsIncluded() const;
 
-            void excludeNitrogens(bool exclude);
+            void includeNitrogens(bool include);
 
-            bool nitrogensExcluded() const;
+            bool nitrogensIncluded() const;
 
-            void excludeRingBonds(bool exclude);
+            void includeRingBonds(bool include);
 
-            bool ringBondsExcluded() const;
+            bool ringBondsIncluded() const;
 
             void setMinRingSize(std::size_t min_size);
 
@@ -122,14 +122,14 @@ namespace CDPL
 
             AtomPredicate         atomPred;
             BondPredicate         bondPred;
-            bool                  enumAtomCtrs{true};
-            bool                  enumBondCtrs{true};
-            bool                  enumSpecifiedCtrs{false};
-            bool                  enumSymmetricCtrs{false};
-            bool                  exclBridgeheads{true};
-            bool                  exclNitrogens{true};
-            bool                  exclRingBonds{true};
-            std::size_t           minRingSize{10};
+            bool                  enumAtomConfig{true};
+            bool                  enumBondConfig{true};
+            bool                  incSpecifiedCtrs{false};
+            bool                  incSymmetricCtrs{false};
+            bool                  incBridgeheads{false};
+            bool                  incNitrogens{false};
+            bool                  incRingBonds{false};
+            std::size_t           minRingSize{8};
             StereoDescriptorArray atomDescrs;
             StereoDescriptorArray bondDescrs;
             StereoCenterIDList    procCtrs;

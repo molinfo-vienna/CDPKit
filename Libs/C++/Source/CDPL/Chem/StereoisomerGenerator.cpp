@@ -61,74 +61,74 @@ const Chem::BondPredicate& Chem::StereoisomerGenerator::getBondPredicate() const
     return bondPred;
 }
 
-void Chem::StereoisomerGenerator::enumerateAtomCenters(bool enumerate)
+void Chem::StereoisomerGenerator::enumerateAtomConfig(bool enumerate)
 {
-    enumAtomCtrs = enumerate;
+    enumAtomConfig = enumerate;
 }
 
-bool Chem::StereoisomerGenerator::atomCentersEnumerated() const
+bool Chem::StereoisomerGenerator::atomConfigEnumerated() const
 {
-    return enumAtomCtrs;
+    return enumAtomConfig;
 }
 
-void Chem::StereoisomerGenerator::enumerateBondCenters(bool enumerate)
+void Chem::StereoisomerGenerator::enumerateBondConfig(bool enumerate)
 {
-    enumBondCtrs = enumerate;
+    enumBondConfig = enumerate;
 }
 
-bool Chem::StereoisomerGenerator::bondCentersEnumerated() const
+bool Chem::StereoisomerGenerator::bondConfigEnumerated() const
 {
-    return enumBondCtrs;
+    return enumBondConfig;
 }
 
-void Chem::StereoisomerGenerator::enumerateSpecifiedCenters(bool enumerate)
+void Chem::StereoisomerGenerator::includeSpecifiedCenters(bool include)
 {
-    enumSpecifiedCtrs = enumerate;
+    incSpecifiedCtrs = include;
 }
 
-bool Chem::StereoisomerGenerator::specifiedCentersEnumerated() const
+bool Chem::StereoisomerGenerator::specifiedCentersIncluded() const
 {
-    return enumSpecifiedCtrs;
+    return incSpecifiedCtrs;
 }
 
-void Chem::StereoisomerGenerator::enumerateSymmetricCenters(bool enumerate)
+void Chem::StereoisomerGenerator::includeSymmetricCenters(bool include)
 {
-    enumSymmetricCtrs = enumerate;
+    incSymmetricCtrs = include;
 }
 
-bool Chem::StereoisomerGenerator::symmetricCentersEnumerated() const
+bool Chem::StereoisomerGenerator::symmetricCentersIncluded() const
 {
-    return enumSymmetricCtrs;
+    return incSymmetricCtrs;
 }
 
-void Chem::StereoisomerGenerator::excludeBridgeheadAtoms(bool exclude)
+void Chem::StereoisomerGenerator::includeBridgeheadAtoms(bool include)
 {
-    exclBridgeheads = exclude;
+    incBridgeheads = include;
 }
 
-bool Chem::StereoisomerGenerator::bridgeheadAtomsExcluded() const
+bool Chem::StereoisomerGenerator::bridgeheadAtomsIncluded() const
 {
-    return exclBridgeheads;
+    return incBridgeheads;
 }
 
-void Chem::StereoisomerGenerator::excludeNitrogens(bool exclude)
+void Chem::StereoisomerGenerator::includeNitrogens(bool include)
 {
-    exclNitrogens = exclude;
+    incNitrogens = include;
 }
 
-bool Chem::StereoisomerGenerator::nitrogensExcluded() const
+bool Chem::StereoisomerGenerator::nitrogensIncluded() const
 {
-    return exclNitrogens;
+    return incNitrogens;
 }
 
-void Chem::StereoisomerGenerator::excludeRingBonds(bool exclude)
+void Chem::StereoisomerGenerator::includeRingBonds(bool include)
 {
-    exclRingBonds = exclude;
+    incRingBonds = include;
 }
 
-bool Chem::StereoisomerGenerator::ringBondsExcluded() const
+bool Chem::StereoisomerGenerator::ringBondsIncluded() const
 {
-    return exclRingBonds;
+    return incRingBonds;
 }
 
 void Chem::StereoisomerGenerator::setMinRingSize(std::size_t min_size)
@@ -153,7 +153,7 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
 
         atomDescrs.addElement(descr);
 
-        if (!enumAtomCtrs)
+        if (!enumAtomConfig)
             continue;
         
         switch (descr.getConfiguration()) {
@@ -183,7 +183,7 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
 
         bondDescrs.addElement(descr);
 
-        if (!enumBondCtrs)
+        if (!enumBondConfig)
             continue;
     
         switch (descr.getConfiguration()) {
@@ -253,16 +253,16 @@ bool Chem::StereoisomerGenerator::isExcluded(const Atom& atom, const MolecularGr
     if (atomPred)
         return !atomPred(atom);
 
-    if (has_config && !enumSpecifiedCtrs)
+    if (has_config && !incSpecifiedCtrs)
         return true;
 
-    if (exclNitrogens && getType(atom) == AtomType::N)
+    if (!incNitrogens && getType(atom) == AtomType::N)
         return true;
 
-    if (exclBridgeheads && isBridgehead(atom, molgraph))
+    if (!incBridgeheads && isBridgehead(atom, molgraph))
         return true;
 
-    if (!enumSymmetricCtrs && !isStereoCenter(atom, molgraph, true, false))
+    if (!incSymmetricCtrs && !isStereoCenter(atom, molgraph, true, false))
         return true;
 
     return false;
@@ -273,18 +273,18 @@ bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGr
     if (bondPred)
         return !bondPred(bond);
 
-    if (has_config && !enumSpecifiedCtrs)
+    if (has_config && !incSpecifiedCtrs)
         return true;
 
     if (getRingFlag(bond)) {
-        if (exclRingBonds)
+        if (!incRingBonds)
             return true;
 
         if (minRingSize > 0 && getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph)) < minRingSize)
             return true;
     }
 
-    if (!enumSymmetricCtrs && !isStereoCenter(bond, molgraph, true, 0))
+    if (!incSymmetricCtrs && !isStereoCenter(bond, molgraph, true, 0))
         return true;
 
     return false;
