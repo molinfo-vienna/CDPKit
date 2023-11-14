@@ -411,7 +411,7 @@ TautGenImpl::TautGenImpl():
               value<bool>(&genericH13Shift)->implicit_value(true));
     addOption("generic-h15-shift", "Enable generic hydrogen 1 <-> 5 shift tautomerization (default: true).", 
               value<bool>(&genericH15Shift)->implicit_value(true));
-    addOption("title-suffix,S", "Append tautomer number to the title of output molecules (default: false, since V1.1).", 
+    addOption("title-suffix,S", "Append tautomer number to the title of output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
     addOptionLongDescriptions();
 }
