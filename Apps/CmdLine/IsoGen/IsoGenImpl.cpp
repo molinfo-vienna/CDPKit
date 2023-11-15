@@ -92,8 +92,15 @@ private:
     void init() {
         using namespace CDPL;
         using namespace Chem;
-
-        // TODO apply settings
+        
+        isoGen.enumerateAtomConfig(parent->enumAtomConfig);
+        isoGen.enumerateBondConfig(parent->enumBondConfig);
+        isoGen.includeSpecifiedCenters(parent->incSpecCtrs);
+        isoGen.includeSymmetricCenters(parent->incSymCtrs);
+        isoGen.includeBridgeheadAtoms(parent->incBridgeheads);
+        isoGen.includeNitrogens(parent->incNitrogens);
+        isoGen.includeRingBonds(parent->incRingBonds);
+        isoGen.setMinRingSize(parent->minRingSize);
     }
 
     bool processNextMolecule() {
@@ -101,6 +108,8 @@ private:
 
         if (!rec_idx)
             return false;
+
+        std::string orig_mol_name = getName(molecule);
 
         try {
             calcImplicitHydrogenCounts(molecule, false);
@@ -114,19 +123,30 @@ private:
             perceiveComponents(molecule, false);
             setAtomSymbolsFromTypes(molecule, false);
 
-            // TODO
+            isoGen.setup(molecule);
 
-            parent->writeMolecule(molecule);
+            std::size_t gen_iso_cnt = 0;
+
+            for ( ; parent->numOutIsomers == 0 || gen_iso_cnt < parent->numOutIsomers; gen_iso_cnt++) {
+                if (parent->titleSuffix)
+                    setName(molecule, orig_mol_name + '_' + std::to_string(gen_iso_cnt));
+
+                parent->writeMolecule(molecule);
+                parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": " +
+                                 std::to_string(gen_iso_cnt) + (gen_iso_cnt == 1 ? " stereoisomer" : " stereoisomers"));
+                isoGen.generate();
+            }
 
             parent->numProcMols++;
-            
+            parent->numOutIsomers += gen_iso_cnt;
+
             return true;
 
         } catch (const std::exception& e) {
-            parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+            parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": " + e.what());
 
         } catch (...) {
-            parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+            parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name));
         }
 
         return false;
@@ -159,7 +179,7 @@ IsoGenImpl::IsoGenImpl():
               value<bool>(&enumAtomConfig)->implicit_value(true));
     addOption("enum-bond-cfg,b", "Enumerate configurations of bond stereocenters (default: true).",
               value<bool>(&enumBondConfig)->implicit_value(true));
-    addOption("inc-spec-ctrs,s", "Do not retain configurations of specified stereocenters (default: false).",
+    addOption("inc-spec-ctrs,s", "Enumerate configurations of specified stereocenters (default: false).",
               value<bool>(&incSpecCtrs)->implicit_value(true));
     addOption("inc-sym-ctrs,x", "Enumerate configurations of atom/bonds with topologically symmetric ligands (default: false).",
               value<bool>(&incSymCtrs)->implicit_value(true));
@@ -169,9 +189,9 @@ IsoGenImpl::IsoGenImpl():
               value<bool>(&incBridgeheads)->implicit_value(true));
     addOption("inc-ring-bonds,r", "Enumerate configurations of bonds in rings (default: false).",
               value<bool>(&incRingBonds)->implicit_value(true));
-    addOption("min-ring-size,R", "Minimum size of rings below which configurations of member bonds are not altered (only effective if -r is true; default: 8).",
+    addOption("min-ring-size,R", "Minimum size of rings below which configurations of member bonds are not altered (only effective if option -r is true; default: 8).",
               value<std::size_t>(&minRingSize));
-    addOption("title-suffix,S", "Append stereoisomer number to the title of output molecules (default: false).", 
+    addOption("title-suffix,S", "Append stereoisomer number to the title of the output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
     addOptionLongDescriptions();
 }
@@ -193,8 +213,8 @@ void IsoGenImpl::addOptionLongDescriptions()
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
-    for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append("\n - ").append(*it);
+    for (const auto& fmt : formats)
+        formats_str.append("\n - ").append(fmt);
 
     addOptionLongDescription("input-format", 
                              "Allows to explicitly specify the format of the input file(s) by providing one of the supported "
@@ -214,8 +234,8 @@ void IsoGenImpl::addOptionLongDescriptions()
 
     CmdLineLib::getSupportedOutputFormats<CDPL::Chem::MolecularGraph>(std::back_inserter(formats));
 
-    for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append("\n - ").append(*it);
+    for (const auto& fmt : formats)
+        formats_str.append("\n - ").append(fmt);
 
     addOptionLongDescription("output-format", 
                              "Allows to explicitly specify the output format by providing one of the supported "
@@ -345,7 +365,7 @@ std::size_t IsoGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Generating Steroisomers...   ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating Steroisomers...     ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
             
             return inputReader.getRecordIndex();
 
@@ -398,7 +418,7 @@ void IsoGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Input File(s):                         " + inputFiles[0]);
     
     for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
-        printMessage(VERBOSE, std::string(36, ' ') + *it);
+        printMessage(VERBOSE, std::string(40, ' ') + *it);
 
     printMessage(VERBOSE, " Output File:                           " + outputFile);
     printMessage(VERBOSE, " Input File Format:                     " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
@@ -477,10 +497,10 @@ void IsoGenImpl::initOutputWriter()
     setMultiConfExportParameter(*outputWriter, false);
 }
 
-std::string IsoGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+std::string IsoGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const std::string& mol_name)
 {
-    if (!getName(mol).empty())
-        return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
+    if (!mol_name.empty())
+        return ('\'' + mol_name + "' (" + createMoleculeIdentifier(rec_idx) + ')');
 
     return createMoleculeIdentifier(rec_idx);
 }

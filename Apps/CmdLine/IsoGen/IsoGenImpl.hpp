@@ -83,7 +83,7 @@ namespace IsoGen
         void initInputReader();
         void initOutputWriter();
 
-        std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
+        std::string createMoleculeIdentifier(std::size_t rec_idx, const std::string& mol_name);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
         void addOptionLongDescriptions();

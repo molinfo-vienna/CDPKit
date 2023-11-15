@@ -112,7 +112,7 @@ namespace CDPL
             
           private:
             bool isExcluded(const Atom& atom, const MolecularGraph& molgraph, bool has_config);
-            bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const;
+            bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config);
 
             bool isBridgehead(const Atom& atom, const MolecularGraph& molgraph);
             bool haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const;

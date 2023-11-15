@@ -268,7 +268,7 @@ bool Chem::StereoisomerGenerator::isExcluded(const Atom& atom, const MolecularGr
     return false;
 }
 
-bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const
+bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config)
 {
     if (bondPred)
         return !bondPred(bond);
@@ -281,6 +281,9 @@ bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGr
             return true;
 
         if (minRingSize > 0 && getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph)) < minRingSize)
+            return true;
+
+        if (!incBridgeheads && (isBridgehead(bond.getBegin(), molgraph) || isBridgehead(bond.getEnd(), molgraph)))
             return true;
     }
 
