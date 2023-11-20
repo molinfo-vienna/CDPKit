@@ -118,26 +118,35 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
     calcCIPPriorities(mol, false);
 
-    perceiveAtomStereoCenters(mol, false, true, false);
-    perceiveBondStereoCenters(mol, false);
+    perceiveAtomStereoCenters(mol, false, true);
+    perceiveBondStereoCenters(mol, false, true);
 
     for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
 
-        if (!getStereoCenterFlag(atom)) 
-            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
-        
-        else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-                 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
-            setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+        if (hasStereoDescriptor(atom))
+            continue;
 
+        if (!getStereoCenterFlag(atom) || isInvertibleNitrogen(atom, mol) || isAmideNitrogen(atom, mol, false, false)) {
+            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+            continue;
+        }
+        
+        setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
     }
 
     for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
         Bond& bond = *it;
 
-        if (getStereoCenterFlag(bond) && (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF))
-            setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
+        if (hasStereoDescriptor(bond))
+            continue;
+
+        if (!getStereoCenterFlag(bond)) {
+            setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
+            continue;
+        }
+        
+        setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
     }
 
     setAtomSymbolsFromTypes(mol, false);

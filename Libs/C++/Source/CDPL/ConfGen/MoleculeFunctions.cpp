@@ -98,12 +98,19 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
     for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
 
-        if (!isStereoCenter(atom, mol, true, false)) 
-            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+        if (hasStereoDescriptor(atom)) {
+            if (added_hs)
+                setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
+            
+            continue;
+        }
         
-        else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-                 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
-            setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+        if (!isStereoCenter(atom, mol, true) || isInvertibleNitrogen(atom, mol) || isAmideNitrogen(atom, mol, false, false)) {
+            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+            continue;
+        }
+        
+        setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
     }
 
     std::unique_ptr<SubstituentBulkinessCalculator> blks_calc;
@@ -111,34 +118,47 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
     for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
         Bond& bond = *it;
 
+        if (hasStereoDescriptor(bond)) {
+            if (added_hs)
+                setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 0));
+            continue;
+        }
+        
         if (!isStereoCenter(bond, mol, true)) 
             setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
         
-        else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == BondConfiguration::UNDEF) {
+        else {
             StereoDescriptor descr = calcStereoDescriptor(bond, mol, 1);
 
-            if (descr.getConfiguration() != BondConfiguration::UNDEF )
-                setStereoDescriptor(bond, descr);
+            switch (descr.getConfiguration()) {
 
-            else {
-                if (!blks_calc.get()) {
-                    blks_calc.reset(new SubstituentBulkinessCalculator());
-                    blks_calc->calculate(mol);
-                }
-
-                const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
-
-                if (!ref_atom1)
+                case BondConfiguration::E:
+                case BondConfiguration::Z:
+                case BondConfiguration::NONE:
+                    setStereoDescriptor(bond, descr);
                     continue;
 
-                const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
-
-                if (!ref_atom2)
-                    continue;
-
-                setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::TRANS, *ref_atom1, bond.getBegin(), 
-                                                           bond.getEnd(), *ref_atom2));
+                default:
+                    break;
             }
+
+            if (!blks_calc.get()) {
+                blks_calc.reset(new SubstituentBulkinessCalculator());
+                blks_calc->calculate(mol);
+            }
+
+            const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
+
+            if (!ref_atom1)
+                continue;
+
+            const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
+
+            if (!ref_atom2)
+                continue;
+
+            setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::TRANS, *ref_atom1, bond.getBegin(),
+                                                       bond.getEnd(), *ref_atom2));
         }
     }
 
