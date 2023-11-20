@@ -1,12 +1,14 @@
 master:
 
+ - New command line application 'isogen' for the enumeration of R/S and E/Z stereoisomers of molecules
+ - New class (Chem::StereoisomerGenerator) for the exhaustive enumeration of R/S and E/Z stereoisomers
  - New 2D drawing primitives (Vis::Path2D and Vis::PathPrimitive2D) and support for clipping operations
  - Fixed a bug in the 'shapescreen' tool that lead to the calculation of erroneous similarity scores
    in the 'score-only' screening mode
  - New class (Chem::BemisMurckoAnalyzer) for the extraction of Bemis-Murcko scaffolds
  - New functions for conformer alignment
  - Function overload resolution order fixes in the CDPL.Math Python package
- - Fixed the throwing of exceptions when the env. variable LC_ALL has not been initialized
+ - Prevented the throwing of exceptions when the env. variable LC_ALL has not been initialized
  - Python exports of Util::Map and Util::MultiMap do not provide the properties 'keys', 'values', and 'entries' anymore.
    They were replaced by the corresponding methods keys(), values() and items()
  - MolProp::getAtomCount() function has been extended by a 'strict' argument which, if set to 'false', instructs
