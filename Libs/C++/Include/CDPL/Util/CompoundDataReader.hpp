@@ -192,6 +192,9 @@ CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj, bool overwrite)
 {
     state = false;
 
+    if (recordIdx >= numRecords)
+        return *this;
+   
     std::size_t idx    = recordIdx;
     ReaderType* reader = getReaderForRecordIndex(idx);
 
@@ -244,7 +247,7 @@ std::size_t CDPL::Util::CompoundDataReader<DataType>::getRecordIndex() const
 template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::setRecordIndex(std::size_t idx)
 {
-    if (idx >= numRecords)
+    if (idx > numRecords)
         throw Base::IndexError("CompoundDataReader: record index out of bounds");
 
     recordIdx = idx;

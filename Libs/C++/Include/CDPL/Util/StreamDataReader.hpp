@@ -172,11 +172,15 @@ void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::setRecordIndex(std::siz
 {
     scanDataStream();
 
-    if (idx >= recordPositions.size())
+    if (idx > recordPositions.size())
         throw Base::IndexError("StreamDataReader: record index out of bounds");
 
     input.clear();
-    input.seekg(recordPositions[idx]);
+    
+    if (idx == recordPositions.size())
+        input.seekg(0, std::ios_base::end);
+    else
+        input.seekg(recordPositions[idx]);
 
     recordIndex = idx;
 }
