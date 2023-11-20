@@ -39,6 +39,7 @@
 #include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Chem/BondPredicate.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -90,9 +91,9 @@ namespace CDPL
 
             bool bridgeheadAtomsIncluded() const;
 
-            void includeNitrogens(bool include);
+            void includeInvertibleNitrogens(bool include);
 
-            bool nitrogensIncluded() const;
+            bool invertibleNitrogensIncluded() const;
 
             void includeRingBonds(bool include);
 
@@ -111,13 +112,18 @@ namespace CDPL
             const StereoDescriptorArray& getBondDescriptors();
             
           private:
-            bool isExcluded(const Atom& atom, const MolecularGraph& molgraph, bool has_config);
-            bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config);
+            typedef std::pair<bool, std::size_t> StereoCenterID;
 
-            bool isBridgehead(const Atom& atom, const MolecularGraph& molgraph);
+            bool isExcluded(const Atom& atom, const MolecularGraph& molgraph, bool has_config);
+            bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const;
+
+            void findBridgeheadAtoms(const MolecularGraph& molgraph);
+            bool isSpiroCenter(const Atom& atom, const MolecularGraph& molgraph);
             bool haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const;
 
-            typedef std::vector<std::pair<bool, std::size_t> > StereoCenterIDList;
+            void flipConfiguration(const StereoCenterID& ctr_id);
+
+            typedef std::vector<StereoCenterID> StereoCenterIDList;
             typedef std::vector<std::size_t> IndexList;
 
             AtomPredicate         atomPred;
@@ -127,12 +133,14 @@ namespace CDPL
             bool                  incSpecifiedCtrs{false};
             bool                  incSymmetricCtrs{false};
             bool                  incBridgeheads{false};
-            bool                  incNitrogens{false};
+            bool                  incInvNitrogens{false};
             bool                  incRingBonds{false};
             std::size_t           minRingSize{8};
             StereoDescriptorArray atomDescrs;
             StereoDescriptorArray bondDescrs;
             StereoCenterIDList    procCtrs;
+            Util::BitSet          flipStates;
+            Util::BitSet          bhAtoms;
             IndexList             atomRingSet;
         };
     } // namespace Chem

@@ -31,7 +31,6 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -111,14 +110,14 @@ bool Chem::StereoisomerGenerator::bridgeheadAtomsIncluded() const
     return incBridgeheads;
 }
 
-void Chem::StereoisomerGenerator::includeNitrogens(bool include)
+void Chem::StereoisomerGenerator::includeInvertibleNitrogens(bool include)
 {
-    incNitrogens = include;
+    incInvNitrogens = include;
 }
 
-bool Chem::StereoisomerGenerator::nitrogensIncluded() const
+bool Chem::StereoisomerGenerator::invertibleNitrogensIncluded() const
 {
-    return incNitrogens;
+    return incInvNitrogens;
 }
 
 void Chem::StereoisomerGenerator::includeRingBonds(bool include)
@@ -147,6 +146,9 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
     bondDescrs.clear();
     procCtrs.clear();
 
+    if (!incBridgeheads)
+        findBridgeheadAtoms(molgraph);
+    
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& atom = molgraph.getAtom(i);
         const StereoDescriptor& descr = getStereoDescriptor(atom);
@@ -165,15 +167,19 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
                 break;
 
             case AtomConfiguration::UNDEF:
+                if (descr.getNumReferenceAtoms() < 3)
+                    continue;
+ 
             case AtomConfiguration::EITHER:
-                if (!isExcluded(atom, molgraph, false))
+                if (!isExcluded(atom, molgraph, false)) {
+                    atomDescrs.getLastElement().setConfiguration(AtomConfiguration::R);
                     break;
-
+                }
+                
             default:
                 continue;
         }
 
-        atomDescrs.getLastElement().setConfiguration(AtomConfiguration::R);
         procCtrs.emplace_back(true, i);
     }
 
@@ -194,47 +200,43 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
                     continue;
                 break;
 
-            case BondConfiguration::UNDEF:
+            case AtomConfiguration::UNDEF:
+                if (descr.getNumReferenceAtoms() != 4)
+                    continue;
+ 
             case BondConfiguration::EITHER:
-                if (!isExcluded(bond, molgraph, false))
+                if (!isExcluded(bond, molgraph, false)) {
+                    bondDescrs.getLastElement().setConfiguration(BondConfiguration::E);
                     break;
-
+                }
+                
             default:
                 continue;
         }
 
-        bondDescrs.getLastElement().setConfiguration(BondConfiguration::E);
         procCtrs.emplace_back(false, i);
     }
 
+    flipStates.resize(procCtrs.size());
+    flipStates.reset();
+    
     std::shuffle(procCtrs.begin(), procCtrs.end(), std::mt19937());
 }
 
 bool Chem::StereoisomerGenerator::generate()
 {
-    for (const auto& ctr_id : procCtrs) {
-        if (ctr_id.first) {
-            StereoDescriptor& descr = atomDescrs[ctr_id.second];
-
-            if (descr.getConfiguration() == AtomConfiguration::R) {
-                descr.setConfiguration(AtomConfiguration::S);
-                return true;
-            }
-
-            descr.setConfiguration(AtomConfiguration::R);
-            
-        } else {
-            StereoDescriptor& descr = bondDescrs[ctr_id.second];
-
-            if (descr.getConfiguration() == BondConfiguration::E) {
-                descr.setConfiguration(BondConfiguration::Z);
-                return true;
-            }
-
-            descr.setConfiguration(BondConfiguration::E);
+    for (std::size_t i = 0, num_ctrs = procCtrs.size(); i < num_ctrs; i++) {
+        flipConfiguration(procCtrs[i]);
+        
+        if (flipStates.test(i)) {
+            flipStates.reset(i);
+            continue;
         }
+
+        flipStates.set(i);
+        return true;
     }
-    
+
     return false;
 }
 
@@ -255,25 +257,28 @@ bool Chem::StereoisomerGenerator::isExcluded(const Atom& atom, const MolecularGr
 
     if (has_config && !incSpecifiedCtrs)
         return true;
-
-    if (!incNitrogens && getType(atom) == AtomType::N)
+  
+    if (!isStereoCenter(atom, molgraph, !incSymmetricCtrs))
         return true;
 
-    if (!incBridgeheads && isBridgehead(atom, molgraph))
+    if (!incInvNitrogens && Internal::isInvertibleNitrogen(atom, molgraph))
         return true;
 
-    if (!incSymmetricCtrs && !isStereoCenter(atom, molgraph, true, false))
+    if (!incBridgeheads && bhAtoms.test(molgraph.getAtomIndex(atom)))
         return true;
 
     return false;
 }
 
-bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config)
+bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const
 {
     if (bondPred)
         return !bondPred(bond);
 
     if (has_config && !incSpecifiedCtrs)
+        return true;
+
+    if (!isStereoCenter(bond, molgraph, !incSymmetricCtrs, 0))
         return true;
 
     if (getRingFlag(bond)) {
@@ -282,32 +287,71 @@ bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGr
 
         if (minRingSize > 0 && getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph)) < minRingSize)
             return true;
-
-        if (!incBridgeheads && (isBridgehead(bond.getBegin(), molgraph) || isBridgehead(bond.getEnd(), molgraph)))
-            return true;
     }
-
-    if (!incSymmetricCtrs && !isStereoCenter(bond, molgraph, true, 0))
-        return true;
 
     return false;
 }
 
-bool Chem::StereoisomerGenerator::isBridgehead(const Atom& atom, const MolecularGraph& molgraph)
+void Chem::StereoisomerGenerator::findBridgeheadAtoms(const MolecularGraph& molgraph)
 {
-    if (!getRingFlag(atom))
-        return false;
+    bhAtoms.resize(molgraph.getNumAtoms());
+    bhAtoms.reset();
+
+    for (const auto& atom : molgraph.getAtoms()) {
+        if (!getRingFlag(atom))
+            continue;
+
+        std::size_t ring_bnd_cnt = Internal::getRingBondCount(atom, molgraph);
+
+        if (ring_bnd_cnt <= 2)
+            continue;
+
+        if ((ring_bnd_cnt % 2) == 0 && isSpiroCenter(atom, molgraph))
+            continue;
+        
+        bhAtoms.set(molgraph.getAtomIndex(atom));
+    }
+
+    // remove all preliminary bridgehead atoms that are members of simple ring fusion bonds
     
-    std::size_t ring_bnd_cnt = Internal::getRingBondCount(atom, molgraph);
+    const FragmentList& sssr = *getSSSR(molgraph);
+    std::size_t num_rings = sssr.getSize();
+    
+    for (Util::BitSet::size_type i = bhAtoms.find_first(); i != Util::BitSet::npos; i = bhAtoms.find_next(i)) {
+        const Atom& atom = molgraph.getAtom(i);
+     
+        atomRingSet.clear();
 
-    if (ring_bnd_cnt <= 2)
-        return false;
+        for (std::size_t j = 0; j < num_rings; j++)
+            if (sssr[j].containsAtom(atom))
+                atomRingSet.push_back(j);
 
-    if (ring_bnd_cnt % 2)
-        return true;
+        bool is_bh_atom = false;
+        
+        for (Util::BitSet::size_type j = bhAtoms.find_first(); j != Util::BitSet::npos; j = bhAtoms.find_next(j)) {
+            if (i == j)
+                continue;
+            
+            const Atom& other_atom = molgraph.getAtom(j);
+            std::size_t shrd_ring_cnt = 0;
 
-    // check for spiro center
+            for (std::size_t k : atomRingSet)
+                if (sssr[k].containsAtom(other_atom))
+                    shrd_ring_cnt++;
 
+            if (shrd_ring_cnt >= 2 && !atom.findBondToAtom(other_atom)) {
+                is_bh_atom = true;
+                break;
+            }
+        }
+
+        if (!is_bh_atom)
+            bhAtoms.reset(i);
+    }
+}
+
+bool Chem::StereoisomerGenerator::isSpiroCenter(const Atom& atom, const MolecularGraph& molgraph)
+{
     const FragmentList& sssr = *getSSSR(molgraph);
 
     atomRingSet.clear();
@@ -319,9 +363,9 @@ bool Chem::StereoisomerGenerator::isBridgehead(const Atom& atom, const Molecular
     for (std::size_t i = 0, num_rings = atomRingSet.size(); i < num_rings; i++)
         for (std::size_t j = i + 1; j < num_rings; j++)
             if (haveCommonBond(sssr[i], sssr[j]))
-                return true;
+                return false;
 
-    return false;
+    return true;
 }
 
 bool Chem::StereoisomerGenerator::haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const
@@ -331,4 +375,18 @@ bool Chem::StereoisomerGenerator::haveCommonBond(const BondContainer& ring1, con
             return true;
 
     return false;
+}
+
+void Chem::StereoisomerGenerator::flipConfiguration(const StereoCenterID& ctr_id)
+{
+    if (ctr_id.first) {
+        StereoDescriptor& descr = atomDescrs[ctr_id.second];
+
+        descr.setConfiguration(descr.getConfiguration() == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
+
+    } else {
+        StereoDescriptor& descr = bondDescrs[ctr_id.second];
+
+        descr.setConfiguration(descr.getConfiguration() == BondConfiguration::E ? BondConfiguration::Z : BondConfiguration::E);
+    }
 }

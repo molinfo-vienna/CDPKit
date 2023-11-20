@@ -105,9 +105,9 @@ void CDPLPythonChem::exportStereoisomerGenerator()
              (python::arg("self"), python::arg("include")))
         .def("bridgeheadAtomsIncluded", &Chem::StereoisomerGenerator::bridgeheadAtomsIncluded,
              python::arg("self"))
-        .def("includeNitrogens", &Chem::StereoisomerGenerator::includeNitrogens,
+        .def("includeInvertibleNitrogens", &Chem::StereoisomerGenerator::includeInvertibleNitrogens,
              (python::arg("self"), python::arg("include")))
-        .def("nitrogensIncluded", &Chem::StereoisomerGenerator::nitrogensIncluded,
+        .def("invertibleNitrogensIncluded", &Chem::StereoisomerGenerator::invertibleNitrogensIncluded,
              python::arg("self"))
         .def("includeRingBonds", &Chem::StereoisomerGenerator::includeRingBonds,
              (python::arg("self"), python::arg("include")))
@@ -140,8 +140,8 @@ void CDPLPythonChem::exportStereoisomerGenerator()
              &Chem::StereoisomerGenerator::includeSymmetricCenters)
         .add_property("incBridgeheadAtoms", &Chem::StereoisomerGenerator::bridgeheadAtomsIncluded,
              &Chem::StereoisomerGenerator::includeBridgeheadAtoms)
-        .add_property("incNitrogens", &Chem::StereoisomerGenerator::nitrogensIncluded,
-             &Chem::StereoisomerGenerator::includeNitrogens)
+        .add_property("incInvNitrogens", &Chem::StereoisomerGenerator::invertibleNitrogensIncluded,
+             &Chem::StereoisomerGenerator::includeInvertibleNitrogens)
         .add_property("incRingBonds", &Chem::StereoisomerGenerator::ringBondsIncluded,
              &Chem::StereoisomerGenerator::includeRingBonds)
         .add_property("minRingSize", &Chem::StereoisomerGenerator::getMinRingSize,
