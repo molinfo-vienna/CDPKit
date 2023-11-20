@@ -73,7 +73,7 @@ public:
         if (StructGenImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)...   ", offset + scale * progress);
     }
 
 private:
@@ -633,9 +633,9 @@ int StructGenImpl::process()
 
     if (progressEnabled()) {
         initProgress();
-        printMessage(INFO, "Processing Input Molecules...", true, true);
+        printMessage(INFO, "Generating 3D Structures...", true, true);
     } else
-        printMessage(INFO, "Processing Input Molecules...");
+        printMessage(INFO, "Generating 3D Structures...");
 
     if (numThreads > 0)
         processMultiThreaded();
@@ -806,7 +806,7 @@ std::size_t StructGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating 3D Structures... ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 

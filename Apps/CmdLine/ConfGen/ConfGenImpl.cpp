@@ -73,7 +73,7 @@ public:
         if (termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)... ", offset + scale * progress);
     }
 
 private:
@@ -797,9 +797,9 @@ int ConfGenImpl::process()
 
     if (progressEnabled()) {
         initProgress();
-        printMessage(INFO, "Processing Input Molecules...", true, true);
+        printMessage(INFO, "Generating Conformers...", true, true);
     } else
-        printMessage(INFO, "Processing Input Molecules...");
+        printMessage(INFO, "Generating Conformers...");
 
     if (numThreads > 0)
         processMultiThreaded();
@@ -978,7 +978,7 @@ std::size_t ConfGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Generating Conformers...       ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating Conformers...  ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 

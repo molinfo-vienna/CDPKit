@@ -77,7 +77,7 @@ public:
         if (TautGenImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)... ", offset + scale * progress);
     }
 
 private:
@@ -526,9 +526,9 @@ int TautGenImpl::process()
 
     if (progressEnabled()) {
         initProgress();
-        printMessage(INFO, "Processing Input Molecules...", true, true);
+        printMessage(INFO, "Generating Tautomers...", true, true);
     } else
-        printMessage(INFO, "Processing Input Molecules...");
+        printMessage(INFO, "Generating Tautomers...");
 
     if (numThreads > 0)
         processMultiThreaded();
@@ -693,7 +693,7 @@ std::size_t TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Generating Tautomers...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating Tautomers...   ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 

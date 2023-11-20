@@ -65,7 +65,7 @@ public:
         if (PSDCreateImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)...       ", offset + scale * progress);
     }
 
 private:
@@ -84,7 +84,7 @@ struct PSDCreateImpl::MergeDBsProgressCallback
         if (PSDCreateImpl::termSignalCaught())
             return false;
 
-        parent->printProgress("Merging Temporary Databases... ", offset + scale * progress);
+        parent->printProgress("Merging Temporary Databases...  ", offset + scale * progress);
         return true;
     }
 
@@ -493,9 +493,9 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
             std::string msg;
 
             if (numThreads == 0)
-                msg = "Creating Database...           ";
+                msg = "Creating Database...            ";
             else
-                msg = "Creating Temporary Databases...";
+                msg = "Creating Temporary Databases... ";
 
             printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 

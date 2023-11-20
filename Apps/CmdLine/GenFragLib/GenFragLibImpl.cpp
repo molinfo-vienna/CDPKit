@@ -70,7 +70,7 @@ public:
         if (GenFragLibImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)... ", offset + scale * progress);
     }
 
 private:
@@ -503,9 +503,9 @@ int GenFragLibImpl::process()
 
         if (progressEnabled()) {
             initProgress();
-            printMessage(INFO, "Processing Input Molecules...", true, true);
+            printMessage(INFO, "Generating Fragments...", true, true);
         } else
-            printMessage(INFO, "Processing Input Molecules...");
+            printMessage(INFO, "Generating Fragments...");
 
         if (numThreads > 0)
             processMultiThreaded();
@@ -783,7 +783,7 @@ std::size_t GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating Fragments...   ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 
