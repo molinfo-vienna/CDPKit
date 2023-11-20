@@ -18,7 +18,8 @@ Shape-based screening                          :doc:`shapescreen`
 3D structure generation                        :doc:`structgen`
 Conformer ensemble generation                  :doc:`confgen`, :doc:`genfraglib`
 Tautomer generation and standardization        :doc:`tautgen`
-Chemical Structure/Reaction data inspection    :doc:`ChOX <chox>`
+Stereoisomer enumeration                       :doc:`isogen`
+Chemical structure/reaction data inspection    :doc:`ChOX <chox>`
 =============================================  =========================
 
 .. toctree::
@@ -33,4 +34,5 @@ Chemical Structure/Reaction data inspection    :doc:`ChOX <chox>`
    confgen
    genfraglib
    tautgen
+   isogen
    chox
