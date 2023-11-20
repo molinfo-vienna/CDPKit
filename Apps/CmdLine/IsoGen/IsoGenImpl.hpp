@@ -105,9 +105,11 @@ namespace IsoGen
         bool               enumBondConfig;
         bool               incSpecCtrs;
         bool               incSymCtrs;
-        bool               incNitrogens;
+        bool               incInvNitrogens;
         bool               incBridgeheads;
         bool               incRingBonds;
+        bool               use2DCoords;
+        bool               use3DCoords;
         std::size_t        minRingSize;
         bool               titleSuffix;
         CompMoleculeReader inputReader;

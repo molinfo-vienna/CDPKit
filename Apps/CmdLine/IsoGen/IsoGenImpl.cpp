@@ -32,7 +32,13 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/StereoisomerGenerator.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -57,7 +63,7 @@ public:
         if (IsoGenImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)...  ", offset + scale * progress);
     }
 
   private:
@@ -98,12 +104,36 @@ private:
         isoGen.includeSpecifiedCenters(parent->incSpecCtrs);
         isoGen.includeSymmetricCenters(parent->incSymCtrs);
         isoGen.includeBridgeheadAtoms(parent->incBridgeheads);
-        isoGen.includeNitrogens(parent->incNitrogens);
+        isoGen.includeInvertibleNitrogens(parent->incInvNitrogens);
         isoGen.includeRingBonds(parent->incRingBonds);
         isoGen.setMinRingSize(parent->minRingSize);
     }
 
+    void perceiveUnspecConfigs(std::size_t dim)
+    {
+        using namespace CDPL;
+        using namespace Chem;
+        
+        for (auto& atom: molecule.getAtoms())
+            switch (getStereoDescriptor(atom).getConfiguration()) {
+
+                case AtomConfiguration::EITHER:
+                case AtomConfiguration::UNDEF:
+                    setStereoDescriptor(atom, calcStereoDescriptor(atom, molecule, dim));
+            }
+        
+        for (auto& bond: molecule.getBonds())
+             switch (getStereoDescriptor(bond).getConfiguration()) {
+
+                case BondConfiguration::EITHER:
+                case BondConfiguration::UNDEF:
+                    setStereoDescriptor(bond, calcStereoDescriptor(bond, molecule, dim, std::min(std::size_t(8), parent->minRingSize)));
+             }
+    }
+    
     bool processNextMolecule() {
+        using namespace CDPL;
+        
         std::size_t rec_idx = parent->readNextMolecule(molecule);
 
         if (!rec_idx)
@@ -117,8 +147,16 @@ private:
             perceiveHybridizationStates(molecule, false);
             perceiveSSSR(molecule, false);
             setAromaticityFlags(molecule, false);
-            calcAtomStereoDescriptors(molecule, false);
-            calcBondStereoDescriptors(molecule, false);
+
+            calcAtomStereoDescriptors(molecule, false, 0);
+            calcBondStereoDescriptors(molecule, false, 0, std::min(std::size_t(8), parent->minRingSize));
+          
+            if (parent->use2DCoords && hasCoordinates(molecule, 2))
+                perceiveUnspecConfigs(2);
+
+            if (parent->use3DCoords && hasCoordinates(molecule, 3))
+                perceiveUnspecConfigs(3);
+
             calcCIPPriorities(molecule, false);
             perceiveComponents(molecule, false);
             setAtomSymbolsFromTypes(molecule, false);
@@ -127,19 +165,28 @@ private:
 
             std::size_t gen_iso_cnt = 0;
 
-            for ( ; parent->numOutIsomers == 0 || gen_iso_cnt < parent->numOutIsomers; gen_iso_cnt++) {
+            for ( ; parent->maxNumIsomers == 0 || gen_iso_cnt < parent->maxNumIsomers; ) {
+                Util::forEachPair(molecule.getAtomsBegin(), molecule.getAtomsEnd(),
+                                  isoGen.getAtomDescriptors().getElementsBegin(),
+                                  static_cast<void (*)(Chem::Atom&, const Chem::StereoDescriptor&)>(&Chem::setStereoDescriptor));
+                Util::forEachPair(molecule.getBondsBegin(), molecule.getBondsEnd(),
+                                  isoGen.getBondDescriptors().getElementsBegin(),
+                                  static_cast<void (*)(Chem::Bond&, const Chem::StereoDescriptor&)>(&Chem::setStereoDescriptor));
+                
                 if (parent->titleSuffix)
-                    setName(molecule, orig_mol_name + '_' + std::to_string(gen_iso_cnt));
+                    setName(molecule, orig_mol_name + '_' + std::to_string(gen_iso_cnt + 1));
 
                 parent->writeMolecule(molecule);
-                parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": " +
-                                 std::to_string(gen_iso_cnt) + (gen_iso_cnt == 1 ? " stereoisomer" : " stereoisomers"));
-                isoGen.generate();
+                gen_iso_cnt++;
+                
+                if (!isoGen.generate())
+                    break;
             }
 
+            parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": " +
+                                 std::to_string(gen_iso_cnt) + (gen_iso_cnt == 1 ? " stereoisomer" : " stereoisomers"));
             parent->numProcMols++;
-            parent->numOutIsomers += gen_iso_cnt;
-
+            
             return true;
 
         } catch (const std::exception& e) {
@@ -160,8 +207,9 @@ private:
 
 IsoGenImpl::IsoGenImpl(): 
     maxNumIsomers(0), inputFormat(), outputFormat(), enumAtomConfig(true), enumBondConfig(true),
-    incSpecCtrs(false), incSymCtrs(false), incNitrogens(false), incBridgeheads(false), incRingBonds(false), 
-    minRingSize(8), titleSuffix(false), outputWriter(), numProcMols(0), numOutIsomers(0)
+    incSpecCtrs(false), incSymCtrs(false), incInvNitrogens(false), incBridgeheads(false), incRingBonds(false), 
+    use2DCoords(true), use3DCoords(false), minRingSize(8), titleSuffix(false), outputWriter(), numProcMols(0),
+    numOutIsomers(0)
 {
     using namespace std::placeholders;
     
@@ -179,18 +227,25 @@ IsoGenImpl::IsoGenImpl():
               value<bool>(&enumAtomConfig)->implicit_value(true));
     addOption("enum-bond-cfg,b", "Enumerate configurations of bond stereocenters (default: true).",
               value<bool>(&enumBondConfig)->implicit_value(true));
-    addOption("inc-spec-ctrs,s", "Enumerate configurations of specified stereocenters (default: false).",
+    addOption("inc-spec-ctrs,s", "Include specified atom/bond stereocenters (default: false).",
               value<bool>(&incSpecCtrs)->implicit_value(true));
-    addOption("inc-sym-ctrs,x", "Enumerate configurations of atom/bonds with topologically symmetric ligands (default: false).",
+    addOption("inc-sym-ctrs,x", "Include atom/bond stereocenters with topological symmetry (default: false).",
               value<bool>(&incSymCtrs)->implicit_value(true));
-    addOption("inc-nitrogens,n", "Enumerate configurations of nitrogen stereocenters (default: false).",
-              value<bool>(&incNitrogens)->implicit_value(true));
-    addOption("inc-bh-atoms,g", "Enumerate configurations of bridgehead atom/bonds (default: false).",
+    addOption("inc-inv-nitrogens,n", "Include invertible nitrogen stereocenters (default: false).",
+              value<bool>(&incInvNitrogens)->implicit_value(true));
+    addOption("inc-bh-atoms,g", "Include bridgehead atom stereocenters (default: false).",
               value<bool>(&incBridgeheads)->implicit_value(true));
-    addOption("inc-ring-bonds,r", "Enumerate configurations of bonds in rings (default: false).",
+    addOption("inc-ring-bonds,r", "Include ring bond stereocenters (default: false).",
               value<bool>(&incRingBonds)->implicit_value(true));
-    addOption("min-ring-size,R", "Minimum size of rings below which configurations of member bonds are not altered (only effective if option -r is true; default: 8).",
+    addOption("min-ring-size,R", "Minimum size of rings below which the configuration of member bonds shall not be altered "
+              "(only effective if option -r is true; default: 8).",
               value<std::size_t>(&minRingSize));
+     addOption("use-2d-coords,u", "If present, use atom 2D coordinates and stereo bonds to perceive the configuration "
+              "of otherwise unspecified stereocenters (default: true).",
+              value<bool>(&use2DCoords)->implicit_value(true));
+    addOption("use-3d-coords,y", "If present, use atom 3D coordinates to perceive the configuration of otherwise "
+              "unspecified stereocenters (default: false).",
+              value<bool>(&use3DCoords)->implicit_value(true));
     addOption("title-suffix,S", "Append stereoisomer number to the title of the output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
     addOptionLongDescriptions();
@@ -203,7 +258,7 @@ const char* IsoGenImpl::getProgName() const
 
 const char* IsoGenImpl::getProgAboutText() const
 {
-    return "Performs stereoisomer generation for a set of input molecules.";
+    return "Performs stereoisomer enumeration for a set of input molecules.";
 }
 
 void IsoGenImpl::addOptionLongDescriptions()
@@ -289,9 +344,9 @@ int IsoGenImpl::process()
 
     if (progressEnabled()) {
         initProgress();
-        printMessage(INFO, "Processing Input Molecules...", true, true);
+        printMessage(INFO, "Generating Steroisomers...", true, true);
     } else
-        printMessage(INFO, "Processing Input Molecules...");
+        printMessage(INFO, "Generating Steroisomers...");
 
     genIsomers();
 
@@ -365,7 +420,7 @@ std::size_t IsoGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
                 continue;
             }
 
-            printProgress("Generating Steroisomers...     ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress("Generating Steroisomers... ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
             
             return inputReader.getRecordIndex();
 
@@ -424,6 +479,16 @@ void IsoGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Input File Format:                     " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Output File Format:                    " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Max. Num. Stereoisomers:               " + std::to_string(maxNumIsomers));
+    printMessage(VERBOSE, " Enum. atom configurations:             " + std::string(enumAtomConfig ? "Yes" : "No"));
+    printMessage(VERBOSE, " Enum. bond configurations:             " + std::string(enumBondConfig ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include specified stereocenters:       " + std::string(incSpecCtrs ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include stereocenters with top. sym.   " + std::string(incSymCtrs ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include invertible nitrogens:          " + std::string(incInvNitrogens ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include bridgehead atoms:              " + std::string(incBridgeheads ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include. ring bonds:                   " + std::string(incRingBonds ? "Yes" : "No"));
+    printMessage(VERBOSE, " Min. ring size for bond stereocenters: " + std::to_string(minRingSize));
+    printMessage(VERBOSE, " Perceive config. from 2D structure:    " + std::string(use2DCoords ? "Yes" : "No"));
+    printMessage(VERBOSE, " Perceive config. from 3D structure:    " + std::string(use3DCoords ? "Yes" : "No"));
     printMessage(VERBOSE, " Append Stereoisomer No. to Mol. Title: " + std::string(titleSuffix ? "Yes" : "No"));
     printMessage(VERBOSE, "");
 }
