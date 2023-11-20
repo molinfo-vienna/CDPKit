@@ -28,6 +28,7 @@
 
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Internal/Permutation.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 
@@ -141,15 +142,15 @@ bool Chem::StereoDescriptor::isValid(const Bond& bond) const
     if (numRefAtoms < 4)
         return false;
 
-    if (refAtoms[1]->findBondToAtom(*refAtoms[2]) != &bond) 
+    if (&bond.getBegin() == refAtoms[1]) {
+         if (&bond.getEnd() != refAtoms[2])
+             return false;
+    } else if (&bond.getBegin() == refAtoms[2]) {
+        if (&bond.getEnd() != refAtoms[1])
+             return false;
+    } else
         return false;
-
-    if (refAtoms[0] == refAtoms[2])
-        return false;
-
-    if (refAtoms[3] == refAtoms[1])
-        return false;
-
+    
     if (!refAtoms[1]->findBondToAtom(*refAtoms[0]))
         return false;
 
