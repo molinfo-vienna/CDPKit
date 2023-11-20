@@ -445,9 +445,9 @@ namespace CDPL
         CDPL_CHEM_API void kekulizeBonds(MolecularGraph& molgraph);
 
         CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite,
-                                                     bool check_cip_sym = true, bool check_acyclic_subst_sym_only = false);
+                                                     bool check_asym = true);
 
-        CDPL_CHEM_API void perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym = true,
+        CDPL_CHEM_API void perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym = true,
                                                      std::size_t min_ring_size = 8);
 
         CDPL_CHEM_API void calcMDLParities(MolecularGraph& molgraph, bool overwrite);
