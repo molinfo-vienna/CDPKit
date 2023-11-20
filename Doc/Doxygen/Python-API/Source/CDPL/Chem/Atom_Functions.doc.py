@@ -804,11 +804,10 @@ def setMorganNumber(atom: Atom, num: int) -> None: pass
 # \brief 
 # \param atom 
 # \param molgraph 
-# \param check_cip_sym 
-# \param check_acyclic_subst_sym_only 
+# \param check_asym 
 # \return 
 #
-def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_cip_sym: bool = True, check_acyclic_subst_sym_only: bool = False) -> bool: pass
+def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True) -> bool: pass
 
 ##
 # \brief 

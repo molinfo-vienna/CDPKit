@@ -32,7 +32,7 @@
 # 
 # Elements added to a <tt>Path2D</tt> object cannot inspected directly. For path analysis and rendering the method convert() is available which calls element type specific methods on a provided instance of a class implementing the Vis.Path2DConverter interface.
 # 
-# 1.1
+# \since 1.1
 # 
 class Path2D(Boost.Python.instance):
 

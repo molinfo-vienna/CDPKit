@@ -22,7 +22,7 @@
 ##
 # \brief A graphics primitive representing an arbitrary path in 2D space.
 # 
-# 1.1
+# \since 1.1
 # 
 class PathPrimitive2D(Path2D, GraphicsPrimitive2D):
 

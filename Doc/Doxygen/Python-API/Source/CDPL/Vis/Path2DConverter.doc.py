@@ -24,7 +24,7 @@
 # 
 # \see Vis.Renderer2D 
 # 
-# 1.1
+# \since 1.1
 # 
 class Path2DConverter(Boost.Python.instance):
 

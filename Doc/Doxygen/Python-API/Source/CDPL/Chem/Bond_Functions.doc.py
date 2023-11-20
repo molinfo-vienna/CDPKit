@@ -353,11 +353,11 @@ def setOrder(bond: Bond, order: int) -> None: pass
 # \brief 
 # \param bond 
 # \param molgraph 
-# \param check_cip_sym 
+# \param check_asym 
 # \param min_ring_size 
 # \return 
 #
-def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_cip_sym: bool = True, min_ring_size: int = 8) -> bool: pass
+def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_asym: bool = True, min_ring_size: int = 8) -> bool: pass
 
 ##
 # \brief 

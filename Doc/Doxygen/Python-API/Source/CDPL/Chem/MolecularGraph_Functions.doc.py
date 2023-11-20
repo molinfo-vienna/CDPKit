@@ -989,19 +989,18 @@ def perceiveBondOrders(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \brief 
 # \param molgraph 
 # \param overwrite 
-# \param check_cip_sym 
+# \param check_asym 
 # \param min_ring_size 
 #
-def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_cip_sym: bool = True, min_ring_size: int = 8) -> None: pass
+def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, min_ring_size: int = 8) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
-# \param check_cip_sym 
-# \param check_acyclic_subst_sym_only 
+# \param check_asym 
 #
-def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_cip_sym: bool = True, check_acyclic_subst_sym_only: bool = False) -> None: pass
+def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True) -> None: pass
 
 ##
 # \brief 

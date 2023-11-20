@@ -22,7 +22,7 @@
 ##
 # \brief A graphics primitive representing a clipping region in 2D space.
 # 
-# 1.1
+# \since 1.1
 # 
 class ClipPathPrimitive2D(Path2D, GraphicsPrimitive2D):
 
