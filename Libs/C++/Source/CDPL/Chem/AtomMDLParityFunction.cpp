@@ -54,9 +54,6 @@ unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgrap
     if (getHybridizationState(atom) != HybridizationState::SP3)
         return MDLParity::NONE;
 
-    if (getAromaticityFlag(atom))
-        return MDLParity::NONE;
-
     if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
         return MDLParity::NONE;
 
@@ -91,30 +88,36 @@ unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgrap
         ordered_nbrs[3] = ordinary_h_nbr;
     }
 
-    std::sort(ordered_nbrs, ordered_nbrs + i,
-              std::bind(std::less<std::size_t>(),
-                        std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-                                  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-                        std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-                                  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
-
     const StereoDescriptor stereo_desc = getStereoDescriptor(atom);
-    unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2]) :
-                                stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2], *ordered_nbrs[3]));
-
-    if (perm_parity != 1 && perm_parity != 2)
-        return MDLParity::UNDEF;
-
+  
     switch (stereo_desc.getConfiguration()) {
 
         case AtomConfiguration::R:
-            return (perm_parity == 2 ? MDLParity::ODD : MDLParity::EVEN);
+        case AtomConfiguration::S: {
+            std::sort(ordered_nbrs, ordered_nbrs + i,
+                      std::bind(std::less<std::size_t>(),
+                                std::bind(&MolecularGraph::getAtomIndex, &molgraph,
+                                          std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)),
+                                std::bind(&MolecularGraph::getAtomIndex, &molgraph,
+                                          std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
-        case AtomConfiguration::S:
+            unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2]) :
+                                                         stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2], *ordered_nbrs[3]));
+
+            if (perm_parity != 1 && perm_parity != 2)
+                return MDLParity::UNDEF;
+            
+            if (stereo_desc.getConfiguration() == AtomConfiguration::R)
+                return (perm_parity == 2 ? MDLParity::ODD : MDLParity::EVEN);
+
             return (perm_parity == 2 ? MDLParity::EVEN : MDLParity::ODD);
+        }
 
         case AtomConfiguration::EITHER:
             return MDLParity::EITHER;
+
+        case AtomConfiguration::NONE:
+            return MDLParity::NONE;
 
         default:
             return MDLParity::UNDEF;

@@ -221,7 +221,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
         const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
         unsigned int config = stereo_desc.getConfiguration();
 
-        if ((config == AtomConfiguration::R || config == AtomConfiguration::S) && stereo_desc.isValid(atom)) {
+        if ((config == AtomConfiguration::R || config == AtomConfiguration::S)) {
             unsigned int perm_parity = (num_bonds == 3 ? 
                                         stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first) :
                                         stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first, *ligands[3].first));
@@ -231,13 +231,12 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 
             if (perm_parity == 2)
                 return makeStereoDescriptor(config, atom, molgraph);
-        } 
 
-        if (config == AtomConfiguration::EITHER || config == AtomConfiguration::NONE)
+        } else if (config == AtomConfiguration::EITHER || config == AtomConfiguration::NONE)
             return makeStereoDescriptor(config, atom, molgraph);
 
         if (dim == 0)
-            return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
+            return makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph);
     }
 
     if (num_bonds == 3) 
@@ -254,7 +253,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
                                    atom4_coords - atom3_coords); 
 
             return (vol > 0.0 ? makeStereoDescriptor(AtomConfiguration::S, atom, molgraph) : vol < 0.0 ? 
-                    makeStereoDescriptor(AtomConfiguration::R, atom, molgraph) : makeStereoDescriptor(AtomConfiguration::EITHER, atom, molgraph));
+                    makeStereoDescriptor(AtomConfiguration::R, atom, molgraph) : makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph));
     
         } catch (const Base::ItemNotFound& e) {
             if (dim == 3)
@@ -311,7 +310,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
             throw e;
     }
 
-    return makeStereoDescriptor(AtomConfiguration::EITHER, atom, molgraph);
+    return makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph);
 }
 
 unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, 
@@ -336,7 +335,7 @@ unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph&
     if (vol < 0.0)
         return AtomConfiguration::R;
 
-    return AtomConfiguration::EITHER;
+    return AtomConfiguration::UNDEF;
 }
 
 Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph)
@@ -370,7 +369,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom,
 
         if (Internal::isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
             if (ordinary_h_nbr) 
-                return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
+                return makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph);
 
             ordinary_h_nbr = &nbr_atom;
             continue;
@@ -381,7 +380,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom,
 
     if (ordinary_h_nbr) {
         if (i != 3) // sanity check
-            return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
+            return makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph);
 
         ordered_nbrs[3] = ordinary_h_nbr;
     }

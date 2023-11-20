@@ -145,16 +145,15 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 
         if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
             return false;
-
-        if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
-            return StereoDescriptor(BondConfiguration::NONE);
     }
 
-    std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
+    if (min_ring_size > 0) {
+        std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
 
-    if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
-        return makeStereoDescriptor(BondConfiguration::NONE, bond, molgraph);
-
+        if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
+            return makeStereoDescriptor(BondConfiguration::NONE, bond, molgraph);
+    }
+    
     bool has_either_bond = false;
 
     if (dim != 3 && dim != 0) {
@@ -234,7 +233,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
             return StereoDescriptor(config, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 
         if (dim == 0)
-            return StereoDescriptor(BondConfiguration::NONE, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
+            return StereoDescriptor(BondConfiguration::UNDEF, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
     }
 
     if (dim != 2) {
@@ -249,7 +248,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 
             return (tmp < 0.0 ? StereoDescriptor(BondConfiguration::CIS, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]) : 
                     tmp > 0.0 ? StereoDescriptor(BondConfiguration::TRANS, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]) :
-                    StereoDescriptor(BondConfiguration::EITHER, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]));    
+                    StereoDescriptor(BondConfiguration::UNDEF, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]));    
 
         } catch (const Base::ItemNotFound& e) {
             if (dim == 3)
@@ -273,14 +272,14 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 
         return (tmp > 0.0 ? StereoDescriptor(BondConfiguration::TRANS, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]) :
                 tmp < 0.0 ? StereoDescriptor(BondConfiguration::CIS, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]) :
-                StereoDescriptor(BondConfiguration::EITHER, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]));  
+                StereoDescriptor(BondConfiguration::UNDEF, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]));  
 
     } catch (const Base::ItemNotFound& e) {
         if (dim == 2)
             throw e;
     }
 
-    return StereoDescriptor(BondConfiguration::EITHER, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
+    return StereoDescriptor(BondConfiguration::UNDEF, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 }
 
 unsigned int Chem::calcBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
@@ -304,5 +303,5 @@ unsigned int Chem::calcBondConfiguration(const Bond& bond, const MolecularGraph&
     if (tmp < 0.0)
         return BondConfiguration::CIS;
 
-    return BondConfiguration::EITHER;
+    return BondConfiguration::UNDEF;
 }

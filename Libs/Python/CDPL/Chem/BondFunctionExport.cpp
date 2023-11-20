@@ -149,7 +149,7 @@ void CDPLPythonChem::exportBondFunctions()
                 (python::arg("bond"), python::arg("frag_list"), python::arg("size")));
 
     python::def("isStereoCenter", &isStereoCenterWrapper4, 
-                (python::arg("bond"), python::arg("molgraph"), python::arg("check_cip_sym") = true, python::arg("min_ring_size") = 8));
+                (python::arg("bond"), python::arg("molgraph"), python::arg("check_asym") = true, python::arg("min_ring_size") = 8));
     python::def("calcBondConfiguration", &calcBondConfigurationWrapper4,
                 (python::arg("bond"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 

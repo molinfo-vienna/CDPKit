@@ -66,7 +66,10 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
 
     if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
         return AtomConfiguration::NONE;
-
+    
+    if (Internal::isPlanarNitrogen(atom, molgraph))
+        return AtomConfiguration::NONE;
+    
     const Atom* nbr_atoms[4];
     num_bonds = getConnectedAtoms(atom, molgraph, &nbr_atoms[0]);
 
@@ -87,23 +90,26 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
         return AtomConfiguration::NONE;
 
     const StereoDescriptor stereo_desc = getStereoDescriptor(atom);
-    unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
-                                stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
-
-    if (perm_parity != 1 && perm_parity != 2)
-        return AtomConfiguration::UNDEF;
-
+ 
     switch (stereo_desc.getConfiguration()) {
 
-        case AtomConfiguration::S:
-            return (perm_parity == 2 ? AtomConfiguration::S : AtomConfiguration::R);
-    
         case AtomConfiguration::R:
-            return (perm_parity == 2 ? AtomConfiguration::R : AtomConfiguration::S);
+        case AtomConfiguration::S: {
+            unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
+                                        stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
 
+            if (perm_parity != 1 && perm_parity != 2)
+                return AtomConfiguration::UNDEF;
+    
+            if (stereo_desc.getConfiguration() == AtomConfiguration::R)
+                return (perm_parity == 2 ? AtomConfiguration::R : AtomConfiguration::S);
+
+            return (perm_parity == 2 ? AtomConfiguration::S : AtomConfiguration::R);
+        }
+            
         case AtomConfiguration::EITHER:
             return AtomConfiguration::EITHER;
-
+            
         default:
             return AtomConfiguration::UNDEF;
     }

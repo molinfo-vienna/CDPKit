@@ -889,20 +889,15 @@ void Chem::MOL2DataReader::extractStereoAtoms(MolecularGraph& molgraph)
     setAromaticityFlags(molgraph, false);
     calcCIPPriorities(molgraph, false);
 
-    perceiveAtomStereoCenters(molgraph, false, true, false);
+    perceiveAtomStereoCenters(molgraph, false, true);
 
     for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
 
-        if (!getStereoCenterFlag(atom)) {
-            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+        if (!getStereoCenterFlag(atom))
             continue;
-        } 
         
-        if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-            !Internal::isInvertibleNitrogen(atom, molgraph) && !Internal::isAmideNitrogen(atom, molgraph, false, false) &&
-            !Internal::isPlanarNitrogen(atom, molgraph)) { 
-
+        if (!Internal::isInvertibleNitrogen(atom, molgraph) && !Internal::isAmideNitrogen(atom, molgraph, false, false)) { 
             StereoDescriptor descr = calcStereoDescriptor(atom, molgraph, 3);
 
             setStereoDescriptor(atom, descr);

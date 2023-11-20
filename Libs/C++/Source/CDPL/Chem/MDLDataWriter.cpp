@@ -364,7 +364,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
     else {
         std::string mol_name_with_suffix(mol_name);
-        std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", std::to_string(conf_idx));
+        std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", std::to_string(conf_idx + 1));
 
         if (suffix != confIdxSuffixPattern) 
             mol_name_with_suffix.append(suffix);

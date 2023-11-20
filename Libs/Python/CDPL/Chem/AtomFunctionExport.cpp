@@ -142,8 +142,8 @@ namespace
     MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
     MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER3(std::size_t, getTopologicalDistance, CDPL::Chem::Atom&, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-
-    MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
+    MAKE_FUNCTION_WRAPPER3(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool);
+    
     MAKE_FUNCTION_WRAPPER4(unsigned int, calcAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
     MAKE_FUNCTION_WRAPPER4(void, markReachableAtoms, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Util::BitSet&, bool);
 
@@ -269,10 +269,9 @@ void CDPLPythonChem::exportAtomFunctions()
     python::def("getContainingFragments", &getContainingFragmentsWrapper3,
                 (python::arg("atom"), python::arg("frag_list"), python::arg("cont_frag_list")),
                 python::with_custodian_and_ward<3, 2>());
-
-    python::def("isStereoCenter", &isStereoCenterWrapper4, 
-                (python::arg("atom"), python::arg("molgraph"), python::arg("check_cip_sym") = true, 
-                 python::arg("check_acyclic_subst_sym_only") = false));
+    python::def("isStereoCenter", &isStereoCenterWrapper3, 
+                (python::arg("atom"), python::arg("molgraph"), python::arg("check_asym") = true));
+    
     python::def("calcAtomConfiguration", &calcAtomConfigurationWrapper4,
                 (python::arg("atom"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
     python::def("markReachableAtoms", &markReachableAtomsWrapper4,

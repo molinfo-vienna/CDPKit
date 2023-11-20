@@ -136,10 +136,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveBondOrders", &Chem::perceiveBondOrders, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true, 
-                 python::arg("check_acyclic_subst_sym_only") = false));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true));
     python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true, python::arg("min_ring_size") = 8));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true, python::arg("min_ring_size") = 8));
     python::def("calcMDLParities", &Chem::calcMDLParities,
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcAtomStereoDescriptors", &Chem::calcAtomStereoDescriptors,

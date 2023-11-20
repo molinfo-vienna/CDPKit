@@ -131,7 +131,7 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
 
         case BondConfiguration::EITHER:
             return BondConfiguration::EITHER;
-
+            
         default:
             return BondConfiguration::UNDEF;
     }

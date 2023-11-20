@@ -110,7 +110,7 @@ void Chem::BondStereoFlagCalculator::init(const MolecularGraph& molgraph, Util::
         const Atom& atom = *it;
         std::size_t num_bonds = atom.getNumBonds();
 
-        if (num_bonds < 3 || num_bonds > 4 || (hasStereoCenterFlag(atom) && !getStereoCenterFlag(atom))) {
+        if (num_bonds < 3 || num_bonds > 4) { // quick check
             stereoAtomTable.push_back(StereoAtomInfo::SharedPointer());
             continue;
         }
@@ -118,8 +118,7 @@ void Chem::BondStereoFlagCalculator::init(const MolecularGraph& molgraph, Util::
         const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
         unsigned int config = stereo_desc.getConfiguration();
 
-        if (config != AtomConfiguration::EITHER && config != AtomConfiguration::R && 
-            config != AtomConfiguration::S) {
+        if (config == AtomConfiguration::NONE || stereo_desc.getNumReferenceAtoms() < 3) {
             stereoAtomTable.push_back(StereoAtomInfo::SharedPointer());
             continue;
         }
@@ -148,26 +147,23 @@ void Chem::BondStereoFlagCalculator::init(const MolecularGraph& molgraph, Util::
             continue;
         }
 
-        unsigned int perm_parity = (num_bonds == 3 ? 
-                                    stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
-                                    stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
-    
+        unsigned int perm_parity = 0;
+
+        if (config == AtomConfiguration::R || config == AtomConfiguration::S)
+            perm_parity = (num_bonds == 3 ? 
+                           stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
+                           stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
+        
         StereoAtomInfo::SharedPointer info_ptr;
 
         if (perm_parity == 1) 
             info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config == AtomConfiguration::R ? AtomConfiguration::S : 
-                                              config == AtomConfiguration::S ? AtomConfiguration::R : AtomConfiguration::EITHER, 
-                                              num_bonds, nbr_atoms, nbr_bonds));
+                                              AtomConfiguration::R, num_bonds, nbr_atoms, nbr_bonds));
         else if (perm_parity == 2) 
             info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
 
-        else if (config == AtomConfiguration::EITHER) 
-            info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
-
-        else {
-            stereoAtomTable.push_back(StereoAtomInfo::SharedPointer());
-            continue;
-        }
+        else
+            info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, AtomConfiguration::EITHER, num_bonds, nbr_atoms, nbr_bonds));
 
         stereoAtomTable.push_back(info_ptr);
         stereoAtomList.push_back(info_ptr.get());
@@ -259,9 +255,6 @@ void Chem::BondStereoFlagCalculator::assignFlagsForEitherDoubleBonds(Util::UIArr
         if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
             continue;
 
-        if (hasStereoCenterFlag(bond) && !getStereoCenterFlag(bond))
-            continue;
-
         const StereoDescriptor& stereo_desc = calcStereoDescriptor(bond, *molGraph, 0);
         unsigned int config = stereo_desc.getConfiguration();
 
@@ -269,7 +262,7 @@ void Chem::BondStereoFlagCalculator::assignFlagsForEitherDoubleBonds(Util::UIArr
             stereoDBAtomMask.set(molGraph->getAtomIndex(bond.getBegin()));
             stereoDBAtomMask.set(molGraph->getAtomIndex(bond.getEnd()));
 
-        } else if (config == BondConfiguration::EITHER)
+        } else if (config != BondConfiguration::NONE && stereo_desc.getNumReferenceAtoms() == 4)
             eitherBondList.push_back(&bond);
     }
 
