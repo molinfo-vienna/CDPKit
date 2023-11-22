@@ -48,5 +48,7 @@ void CDPLPythonChem::exportBondConfigurations()
         .def_readonly("TRANS", &Chem::BondConfiguration::TRANS)
         .def_readonly("Z", &Chem::BondConfiguration::Z)
         .def_readonly("CIS", &Chem::BondConfiguration::CIS)
-        .def_readonly("EITHER", &Chem::BondConfiguration::EITHER);
+        .def_readonly("EITHER", &Chem::BondConfiguration::EITHER)
+        .def_readonly("seqCIS", &Chem::BondConfiguration::seqCIS)
+        .def_readonly("seqTRANS", &Chem::BondConfiguration::seqTRANS);
 }

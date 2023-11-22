@@ -54,29 +54,40 @@ namespace CDPL
             const unsigned int NONE = 0x1;
 
             /**
-             * \brief Specifies that the bond has \e E configuration.
+             * \brief Specifies that the bond has <em>E (or trans)</em> configuration.
              */
             const unsigned int E = 0x2;
 
             /**
-             * \brief Specifies that the bond has \e TRANS configuration.
+             * \brief Specifies that the bond has <em>trans (or E)</em> configuration.
              */
             const unsigned int TRANS = E;
 
             /**
-             * \brief Specifies that the bond has \e Z configuration.
+             * \brief Specifies that the bond has <em>Z (or cis)</em> configuration.
              */
             const unsigned int Z = 0x4;
 
             /**
-             * \brief Specifies that the bond has \e CIS configuration.
+             * \brief Specifies that the bond has <em>cis (or Z)</em> configuration.
              */
             const unsigned int CIS = Z;
 
             /**
-             * \brief Specifies that the bond meets all requirements but has no defined configuration.
+             * \brief Specifies that the bond is a stereogenic center but has no defined configuration.
              */
             const unsigned int EITHER = 0x8;
+            
+            /**
+             * \brief Specifies that the bond has \e seqTrans configuration.
+             */
+            const unsigned int seqTRANS = 16;
+            
+            /**
+             * \brief Specifies that the bond has \e seqCis configuration.
+             */
+            const unsigned int seqCIS = 17;
+          
         } // namespace BondConfiguration
     } // namespace Chem
 } // namespace CDPL
