@@ -703,15 +703,6 @@ def calcCIPConfiguration(atom: Atom, molgraph: MolecularGraph) -> int: pass
 ##
 # \brief 
 # \param atom 
-# \param molgraph 
-# \param cip_pri_func 
-# \return 
-#
-def calcCIPConfiguration(atom: Atom, molgraph: MolecularGraph, cip_pri_func: SizeTypeAtomFunctor) -> int: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clearCIPConfiguration(atom: Atom) -> None: pass
 
@@ -744,7 +735,7 @@ def setCIPConfiguration(atom: Atom, config: int) -> None: pass
 # \param coords 
 # \return 
 #
-def calcAtomConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
+def calcConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
 ##
 # \brief 
@@ -805,9 +796,13 @@ def setMorganNumber(atom: Atom, num: int) -> None: pass
 # \param atom 
 # \param molgraph 
 # \param check_asym 
+# \param check_inv_n 
+# \param check_quart_n 
+# \param check_plan_n 
+# \param check_amide_n 
 # \return 
 #
-def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True) -> bool: pass
+def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True) -> bool: pass
 
 ##
 # \brief 

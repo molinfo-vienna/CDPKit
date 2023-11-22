@@ -252,15 +252,6 @@ def calcCIPConfiguration(bond: Bond, molgraph: MolecularGraph) -> int: pass
 ##
 # \brief 
 # \param bond 
-# \param molgraph 
-# \param cip_pri_func 
-# \return 
-#
-def calcCIPConfiguration(bond: Bond, molgraph: MolecularGraph, cip_pri_func: SizeTypeAtomFunctor) -> int: pass
-
-##
-# \brief 
-# \param bond 
 #
 def clearCIPConfiguration(bond: Bond) -> None: pass
 
@@ -293,7 +284,7 @@ def setCIPConfiguration(bond: Bond, config: int) -> None: pass
 # \param coords 
 # \return 
 #
-def calcBondConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
+def calcConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
 ##
 # \brief 
@@ -354,21 +345,21 @@ def setOrder(bond: Bond, order: int) -> None: pass
 # \param bond 
 # \param molgraph 
 # \param check_asym 
+# \param check_term_n 
+# \param check_order 
 # \param min_ring_size 
 # \return 
 #
-def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_asym: bool = True, min_ring_size: int = 8) -> bool: pass
+def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_asym: bool = True, check_term_n: bool = True, check_order: bool = True, min_ring_size: int = 8) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 # \param molgraph 
 # \param dim 
-# \param min_ring_size 
-# \param check_order 
 # \return 
 #
-def calcStereoDescriptor(bond: Bond, molgraph: MolecularGraph, dim: int = 1, min_ring_size: int = 8, check_order: bool = True) -> StereoDescriptor: pass
+def calcStereoDescriptor(bond: Bond, molgraph: MolecularGraph, dim: int = 1) -> StereoDescriptor: pass
 
 ##
 # \brief 

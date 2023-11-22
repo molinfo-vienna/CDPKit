@@ -990,34 +990,41 @@ def perceiveBondOrders(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param molgraph 
 # \param overwrite 
 # \param check_asym 
+# \param check_term_n 
+# \param check_order 
 # \param min_ring_size 
 #
-def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, min_ring_size: int = 8) -> None: pass
+def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_term_n: bool = True, check_order: bool = True, min_ring_size: int = 8) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
 # \param check_asym 
+# \param check_inv_n 
+# \param check_quart_n 
+# \param check_plan_n 
+# \param check_amide_n 
 #
-def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True) -> None: pass
+def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
 # \param dim 
-# \param min_ring_size 
+# \param check_stc_flag 
 #
-def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, min_ring_size: int = 8) -> None: pass
+def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, check_stc_flag: bool = True) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
 # \param dim 
+# \param check_stc_flag 
 #
-def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1) -> None: pass
+def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: int = 1, check_stc_flag: bool = True) -> None: pass
 
 ##
 # \brief 
