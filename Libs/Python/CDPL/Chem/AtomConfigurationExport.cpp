@@ -46,5 +46,14 @@ void CDPLPythonChem::exportAtomConfigurations()
         .def_readonly("NONE", &Chem::AtomConfiguration::NONE)
         .def_readonly("R", &Chem::AtomConfiguration::R)
         .def_readonly("S", &Chem::AtomConfiguration::S)
-        .def_readonly("EITHER", &Chem::AtomConfiguration::EITHER);
+        .def_readonly("EITHER", &Chem::AtomConfiguration::EITHER)
+        .def_readonly("r", &Chem::AtomConfiguration::r)
+        .def_readonly("s", &Chem::AtomConfiguration::s)
+        .def_readonly("M", &Chem::AtomConfiguration::M)
+        .def_readonly("P", &Chem::AtomConfiguration::P)
+        .def_readonly("m", &Chem::AtomConfiguration::m)
+        .def_readonly("p", &Chem::AtomConfiguration::p)
+        .def_readonly("SP", &Chem::AtomConfiguration::SP)
+        .def_readonly("TB", &Chem::AtomConfiguration::TB)
+        .def_readonly("OH", &Chem::AtomConfiguration::OH);
 }

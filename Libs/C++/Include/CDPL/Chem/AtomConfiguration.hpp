@@ -45,28 +45,74 @@ namespace CDPL
             /**
              * \brief Specifies that the configuration of the atom is undefined.
              */
-            const unsigned int UNDEF = 0;
+            const unsigned int UNDEF  = 0;
 
             /**
              * \brief Specifies that the atom is not a stereogenic center and thus cannot be assigned a 
              *        configuration.
              */
-            const unsigned int NONE = 0x1;
+            const unsigned int NONE   = 0x1;
 
             /**
              * \brief Specifies that the atom has \e R configuration.
              */
-            const unsigned int R = 0x2;
+            const unsigned int R      = 0x2;
 
             /**
              * \brief Specifies that the atom has \e S configuration.
              */
-            const unsigned int S = 0x4;
+            const unsigned int S      = 0x4;
 
             /**
              * \brief Specifies that the atom is a stereogenic center but has no defined configuration.
              */
             const unsigned int EITHER = 0x8;
+
+            /**
+             * \brief Specifies that the atom has \e r configuration.
+             */
+            const unsigned int r      = 16;
+
+            /**
+             * \brief Specifies that the atom has \e s configuration.
+             */
+            const unsigned int s      = 17;
+
+            /**
+             * \brief Specifies that the atom has \e P configuration.
+             */
+            const unsigned int P      = 18;
+
+            /**
+             * \brief Specifies that the atom has \e M configuration.
+             */
+            const unsigned int M      = 19;
+
+            /**
+             * \brief Specifies that the atom has \e p configuration.
+             */
+            const unsigned int p      = 20;
+
+            /**
+             * \brief Specifies that the atom has \e m configuration.
+             */
+            const unsigned int m      = 21;
+
+            /**
+             * \brief Specifies that the geometry of the ligand arrangement is <em>square planar</em>.
+             */
+            const unsigned int SP     = 22;
+
+            /**
+             * \brief Specifies that the geometry of the ligand arrangement is <em>trigonal bipyramidal</em>.
+             */
+            const unsigned int TB     = SP + 4;
+
+            /**
+             * \brief Specifies that the geometry of the ligand arrangement is <em>octahedral</em>.
+             */
+            const unsigned int OH     = TB + 21;
+            
         } // namespace AtomConfiguration
     } // namespace Chem
 } // namespace CDPL
