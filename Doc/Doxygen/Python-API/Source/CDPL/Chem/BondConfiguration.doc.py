@@ -35,26 +35,36 @@ class BondConfiguration(Boost.Python.instance):
     NONE = 1
 
     ##
-    # \brief Specifies that the bond has <em>E</em> configuration.
+    # \brief Specifies that the bond has <em>E (or trans)</em> configuration.
     # 
     E = 2
 
     ##
-    # \brief Specifies that the bond has <em>TRANS</em> configuration.
+    # \brief Specifies that the bond has <em>trans (or E)</em> configuration.
     # 
     TRANS = 2
 
     ##
-    # \brief Specifies that the bond has <em>Z</em> configuration.
+    # \brief Specifies that the bond has <em>Z (or cis)</em> configuration.
     # 
     Z = 4
 
     ##
-    # \brief Specifies that the bond has <em>CIS</em> configuration.
+    # \brief Specifies that the bond has <em>cis (or Z)</em> configuration.
     # 
     CIS = 4
 
     ##
-    # \brief Specifies that the bond meets all requirements but has no defined configuration.
+    # \brief Specifies that the bond is a stereogenic center but has no defined configuration.
     # 
     EITHER = 8
+
+    ##
+    # \brief Specifies that the bond has <em>seqCis</em> configuration.
+    # 
+    seqCIS = 17
+
+    ##
+    # \brief Specifies that the bond has <em>seqTrans</em> configuration.
+    # 
+    seqTRANS = 16

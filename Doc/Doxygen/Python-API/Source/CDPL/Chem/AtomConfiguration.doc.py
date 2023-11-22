@@ -48,3 +48,48 @@ class AtomConfiguration(Boost.Python.instance):
     # \brief Specifies that the atom is a stereogenic center but has no defined configuration.
     # 
     EITHER = 8
+
+    ##
+    # \brief Specifies that the atom has <em>r</em> configuration.
+    # 
+    r = 16
+
+    ##
+    # \brief Specifies that the atom has <em>s</em> configuration.
+    # 
+    s = 17
+
+    ##
+    # \brief Specifies that the atom has <em>M</em> configuration.
+    # 
+    M = 19
+
+    ##
+    # \brief Specifies that the atom has <em>P</em> configuration.
+    # 
+    P = 18
+
+    ##
+    # \brief Specifies that the atom has <em>m</em> configuration.
+    # 
+    m = 21
+
+    ##
+    # \brief Specifies that the atom has <em>p</em> configuration.
+    # 
+    p = 20
+
+    ##
+    # \brief Specifies that the geometry of the ligand arrangement is <em>square planar</em>.
+    # 
+    SP = 22
+
+    ##
+    # \brief Specifies that the geometry of the ligand arrangement is <em>trigonal bipyramidal</em>.
+    # 
+    TB = 26
+
+    ##
+    # \brief Specifies that the geometry of the ligand arrangement is <em>octahedral</em>.
+    # 
+    OH = 47
