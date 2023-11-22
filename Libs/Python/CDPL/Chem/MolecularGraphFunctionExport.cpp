@@ -136,17 +136,22 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveBondOrders", &Chem::perceiveBondOrders, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true,
+                 python::arg("check_inv_n") = true, python::arg("check_quart_n") = true, python::arg("check_plan_n") = true,
+                 python::arg("check_amide_n") = true));
     python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true, python::arg("min_ring_size") = 8));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true,
+                 python::arg("check_term_n") = true, python::arg("check_order") = true, python::arg("min_ring_size") = 8));
     python::def("calcMDLParities", &Chem::calcMDLParities,
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcAtomStereoDescriptors", &Chem::calcAtomStereoDescriptors,
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("dim") = 1));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("dim") = 1,
+                 python::arg("check_stc_flag") = true));
     python::def("calcAtomStereoDescriptorsFromMDLParities", &Chem::calcAtomStereoDescriptorsFromMDLParities,
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcBondStereoDescriptors", &Chem::calcBondStereoDescriptors,
-                (python::arg("molgraph"), python::arg("overwrite"), python::arg("dim") = 1, python::arg("min_ring_size") = 8));
+                (python::arg("molgraph"), python::arg("overwrite"), python::arg("dim") = 1,
+                 python::arg("check_stc_flag") = true));
     python::def("calcAtomCIPConfigurations", &Chem::calcAtomCIPConfigurations, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcBondCIPConfigurations", &Chem::calcBondCIPConfigurations,
@@ -164,7 +169,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveSybylAtomTypes", &Chem::perceiveSybylAtomTypes, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("containsMolecularGraph", &Chem::containsMolecularGraph, 
-                (python::arg("molgraph"), python::arg("sub_molgraph"), python::arg("atoms") = true, python::arg("bonds") = true));
+                (python::arg("molgraph"), python::arg("sub_molgraph"), python::arg("atoms") = true,
+                 python::arg("bonds") = true));
     python::def("getContainingFragments", &Chem::getContainingFragments, 
                 (python::arg("molgraph"), python::arg("frag_list"), python::arg("cont_frag_list"), 
                  python::arg("append") = false, python::arg("atoms") = true, python::arg("bonds") = true));

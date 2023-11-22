@@ -313,8 +313,8 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
     return makeStereoDescriptor(AtomConfiguration::UNDEF, atom, molgraph);
 }
 
-unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, 
-                                         const StereoDescriptor& descr, const Math::Vector3DArray& coords) 
+unsigned int Chem::calcConfiguration(const Atom& atom, const MolecularGraph& molgraph, 
+                                     const StereoDescriptor& descr, const Math::Vector3DArray& coords) 
 {
     std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 

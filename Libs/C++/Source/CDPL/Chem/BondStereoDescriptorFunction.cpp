@@ -27,7 +27,6 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -125,13 +124,8 @@ namespace
 }
 
 
-Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim, std::size_t min_ring_size, bool check_order)
+Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim)
 {
-    if (check_order) {
-        if (getOrder(bond) != 2 || getAromaticityFlag(bond))
-            return StereoDescriptor(BondConfiguration::NONE);
-    }
-
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
     for (std::size_t i = 0; i < 2; i++) {
@@ -147,13 +141,6 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
             return false;
     }
 
-    if (min_ring_size > 0) {
-        std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
-
-        if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
-            return makeStereoDescriptor(BondConfiguration::NONE, bond, molgraph);
-    }
-    
     bool has_either_bond = false;
 
     if (dim != 3 && dim != 0) {
@@ -282,7 +269,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
     return StereoDescriptor(BondConfiguration::UNDEF, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 }
 
-unsigned int Chem::calcBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
+unsigned int Chem::calcConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
 {
     std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 

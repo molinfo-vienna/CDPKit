@@ -631,10 +631,6 @@ void ConfGen::FragmentAssemblerImpl::fixChainAtomConfigurations(bool have_inv_n,
             continue;
 
         const Atom& atom = frag.getAtom(i);
-                
-        if (!isStereoCenter(atom, frag, false))
-            continue;
-
         const StereoDescriptor& descr = getStereoDescriptor(atom);
         unsigned int config = descr.getConfiguration();
 
@@ -658,7 +654,7 @@ void ConfGen::FragmentAssemblerImpl::fixChainAtomConfigurations(bool have_inv_n,
         if (!descr_valid)
             continue;
 
-        if (calcAtomConfiguration(atom, parent_molgraph, descr, coords) == config) 
+        if (calcConfiguration(atom, parent_molgraph, descr, coords) == config) 
             continue;
 
         const Atom* nbr_atoms[4];
@@ -696,10 +692,6 @@ void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(const Chem::Frag
 
     for (Fragment::ConstBondIterator it = frag.getBondsBegin(), end = frag.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
-
-        if (!isStereoCenter(bond, frag, false, 0))
-            continue;
-
         const StereoDescriptor& descr = getStereoDescriptor(bond);
         unsigned int config = descr.getConfiguration();
 
@@ -722,7 +714,7 @@ void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(const Chem::Frag
         if (!descr_valid) 
             continue;
 
-        if (calcBondConfiguration(bond, parent_molgraph, descr, coords) == config)
+        if (calcConfiguration(bond, parent_molgraph, descr, coords) == config)
             continue;
 
         invertConfiguration(bond, frag, node);
@@ -1081,15 +1073,16 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 
     const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
 
-    if (isStereoCenter(*bond, parent_molgraph, false, 0)) {
-        // torsion setup for stereo double bonds
+    if (getOrder(*bond) == 2) {
+        // torsion setup for potential stereo double bonds
 
         const StereoDescriptor& descr = getStereoDescriptor(*bond);
-        const Atom* const* ref_atoms = descr.getReferenceAtoms();
         unsigned int config = descr.getConfiguration();
-        bool descr_valid = true;
 
         if ((config == BondConfiguration::CIS || config == BondConfiguration::TRANS) && descr.isValid(*bond)) {
+            const Atom* const* ref_atoms = descr.getReferenceAtoms();
+            bool descr_valid = true;
+            
             for (std::size_t i = 0; i < 4; i++) {
                 if (!node->containsAtom(*ref_atoms[i])) {
                     descr_valid = false;

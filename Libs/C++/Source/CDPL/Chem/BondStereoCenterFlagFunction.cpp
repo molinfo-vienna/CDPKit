@@ -38,12 +38,10 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_asym, std::size_t min_ring_size)
+bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_asym,
+                          bool check_term_n, bool check_order, std::size_t min_ring_size)
 {
-    if (getOrder(bond) != 2)
-        return false;
-
-    if (getAromaticityFlag(bond))
+    if (check_order && (getOrder(bond) != 2 || getAromaticityFlag(bond)))
         return false;
 
     if (min_ring_size > 0) {
@@ -67,6 +65,9 @@ bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool
         if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
             return false;
 
+        if (check_term_n && getType(*bond_atoms[i]) == AtomType::N && Internal::getHeavyAtomCount(*bond_atoms[i], molgraph) < 2)
+            return false;
+        
         if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
             return false;
 

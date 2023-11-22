@@ -42,11 +42,6 @@ using namespace CDPL;
 
 unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph)
 {
-    return calcCIPConfiguration(bond, molgraph, &getCIPPriority);
-}
-
-unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func)
-{
     if (getOrder(bond) != 2)
         return BondConfiguration::NONE;
 
@@ -95,8 +90,8 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
                 cip_ref_atoms[i] = nbr_atom;
             
             else {
-                std::size_t pri1 = cip_pri_func(*cip_ref_atoms[i]);
-                std::size_t pri2 = cip_pri_func(*nbr_atom);
+                std::size_t pri1 = getCIPPriority(*cip_ref_atoms[i]);
+                std::size_t pri2 = getCIPPriority(*nbr_atom);
 
                 if (pri1 == pri2)
                     return BondConfiguration::NONE;

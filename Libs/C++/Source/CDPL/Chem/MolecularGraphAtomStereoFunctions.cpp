@@ -27,13 +27,16 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym)
+void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym,
+                                     bool check_inv_n, bool check_quart_n, bool check_plan_n,
+                                     bool check_amide_n)
 {
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -43,7 +46,8 @@ void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, b
         if (!overwrite && hasStereoCenterFlag(atom))
             continue;
 
-        setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_asym));
+        setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_asym, check_inv_n, check_quart_n,
+                                                 check_plan_n, check_amide_n));
     }
 }
 
@@ -61,7 +65,7 @@ void Chem::calcMDLParities(MolecularGraph& molgraph, bool overwrite)
     }
 }
 
-void Chem::calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim)
+void Chem::calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim, bool check_stc_flag)
 {
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -71,7 +75,10 @@ void Chem::calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, s
         if (!overwrite && hasStereoDescriptor(atom))
             continue;
 
-        setStereoDescriptor(atom, calcStereoDescriptor(atom, molgraph, dim));
+        if (!check_stc_flag || getStereoCenterFlag(atom))
+            setStereoDescriptor(atom, calcStereoDescriptor(atom, molgraph, dim));
+        else
+            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
     }
 }
 

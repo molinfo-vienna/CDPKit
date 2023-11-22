@@ -2,8 +2,8 @@ Nc1cnc(cn1)c1ccc(C2CCC2)c(Oc2cc(N)nc(Cc3ccccc3)n2)c1F
 N1C(/C(C(c2ccc(cc12)C)=O)=N\Nc2c(cccc2)Cl)=O
 C([C@H]1[C@@](C1)(C(N(CC)CC)=O)c1ccccc1)N
 C([C@H]1[C@@](C1)(C(N(CC)CC)=O)c1ccccc1)N
-C(C[N@]([C@@H](c1ccccc1)C)C)=C=CC
-C(C[N@]([C@@H](c1ccccc1)C)C)=C=CC
+C(CN([C@@H](c1ccccc1)C)C)=C=CC
+C(CN([C@@H](c1ccccc1)C)C)=C=CC
 [N](c1ccc(NC(=O)CC[C@@H](C(=O)O)N)cc1)(=O)=O
 c12ccc(cc2nc([nH]1)[S@@](Cc1ncc(c(c1C)OC)C)=O)OC
 c1(cccc(c1Nc1ccccc1CC(=O)OCCNC(=O)[C@H]1O[C@H]([C@@H]([C@H]([C@@H]1O[C@@H]1O[C@@H]([C@H]([C@@H]([C@H]1NC(=O)C)O)O)CO)O)O)O[C@H]1[C@@H]([C@H](O[C@H]([C@@H]1NC(=O)C)O[C@@H]1[C@H](O[C@H]([C@@H]([C@H]1O)O)O)C([O-])=O)CO)O)Cl)Cl.[Na+]

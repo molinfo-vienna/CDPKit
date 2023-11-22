@@ -258,10 +258,7 @@ bool Chem::StereoisomerGenerator::isExcluded(const Atom& atom, const MolecularGr
     if (has_config && !incSpecifiedCtrs)
         return true;
   
-    if (!isStereoCenter(atom, molgraph, !incSymmetricCtrs))
-        return true;
-
-    if (!incInvNitrogens && Internal::isInvertibleNitrogen(atom, molgraph))
+    if (!isStereoCenter(atom, molgraph, !incSymmetricCtrs, !incInvNitrogens, !incInvNitrogens))
         return true;
 
     if (!incBridgeheads && bhAtoms.test(molgraph.getAtomIndex(atom)))
@@ -278,16 +275,11 @@ bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGr
     if (has_config && !incSpecifiedCtrs)
         return true;
 
-    if (!isStereoCenter(bond, molgraph, !incSymmetricCtrs, 0))
+    if (!incRingBonds && getRingFlag(bond))
         return true;
-
-    if (getRingFlag(bond)) {
-        if (!incRingBonds)
-            return true;
-
-        if (minRingSize > 0 && getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph)) < minRingSize)
-            return true;
-    }
+        
+    if (!isStereoCenter(bond, molgraph, !incSymmetricCtrs, true, true, minRingSize))
+        return true;
 
     return false;
 }

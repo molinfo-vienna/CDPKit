@@ -136,6 +136,9 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
     std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), &Chem::clear3DCoordinatesArray);
     
     perceiveSSSR(molecule, true);
+
+    perceiveAtomStereoCenters(molecule, false, false);
+    perceiveBondStereoCenters(molecule, false, false);
     calcAtomStereoDescriptors(molecule, true, 3);
     calcBondStereoDescriptors(molecule, true, 3);
 

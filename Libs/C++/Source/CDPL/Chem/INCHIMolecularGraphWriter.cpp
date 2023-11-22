@@ -34,6 +34,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -490,7 +491,8 @@ void Chem::INCHIMolecularGraphWriter::setup0DAtomStereoInfo(const MolecularGraph
 
 void Chem::INCHIMolecularGraphWriter::setup0DBondStereoInfo(const MolecularGraph& molgraph)
 {
-    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+     const FragmentList& sssr = *getSSSR(molgraph);
+     MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
     for (MolecularGraph::ConstBondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
         const Bond& bond = *b_it;
@@ -500,9 +502,9 @@ void Chem::INCHIMolecularGraphWriter::setup0DBondStereoInfo(const MolecularGraph
         StereoDescriptor stereo_desc(0);
 
         if (order == 2) {
-            stereo_desc = calcStereoDescriptor(bond, molgraph, 0, 8);
+            stereo_desc = calcStereoDescriptor(bond, molgraph, 0);
         
-        } else if (order == 1 && getRingFlag(bond)) {
+        } else if (order == 1 && getRingFlag(bond) && getSizeOfSmallestContainingFragment(bond, sssr) >= 8) {
             const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
             bool skip = false;
 
@@ -542,7 +544,7 @@ void Chem::INCHIMolecularGraphWriter::setup0DBondStereoInfo(const MolecularGraph
             if (skip)
                 continue;
 
-            stereo_desc = calcStereoDescriptor(bond, molgraph, 1, 8, false);
+            stereo_desc = calcStereoDescriptor(bond, molgraph, 1);
         
         } else
             continue;
@@ -564,6 +566,9 @@ void Chem::INCHIMolecularGraphWriter::setup0DBondStereoInfo(const MolecularGraph
                 inchi_stereo.parity = INCHI_PARITY_UNKNOWN;
                 break;
 
+            case BondConfiguration::UNDEF:
+                continue;
+                
             case BondConfiguration::NONE:
                 inchi_stereo.parity = INCHI_PARITY_NONE;
                 break;

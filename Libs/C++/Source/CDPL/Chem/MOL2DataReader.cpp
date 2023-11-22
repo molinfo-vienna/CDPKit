@@ -47,7 +47,6 @@
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
-#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "MOL2DataReader.hpp"
 #include "MOL2FormatData.hpp"
@@ -869,7 +868,7 @@ bool Chem::MOL2DataReader::readNextConformer(std::istream& is, const MolecularGr
     for (StereoAtomList::const_iterator it = stereoAtoms.begin(), end = stereoAtoms.end(); it != end; ++it) {
         const Atom& atom = **it;
         const StereoDescriptor& descr = getStereoDescriptor(atom);
-        unsigned int calc_config = calcAtomConfiguration(atom, molgraph, descr, confCoords);
+        unsigned int calc_config = calcConfiguration(atom, molgraph, descr, confCoords);
 
         if (calc_config != descr.getConfiguration()) 
             return false;
@@ -889,16 +888,13 @@ void Chem::MOL2DataReader::extractStereoAtoms(MolecularGraph& molgraph)
     setAromaticityFlags(molgraph, false);
     calcCIPPriorities(molgraph, false);
 
-    perceiveAtomStereoCenters(molgraph, false, true);
+    perceiveAtomStereoCenters(molgraph, false);
 
     for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
 
-        if (!getStereoCenterFlag(atom))
-            continue;
-        
-        if (!Internal::isInvertibleNitrogen(atom, molgraph) && !Internal::isAmideNitrogen(atom, molgraph, false, false)) { 
-            StereoDescriptor descr = calcStereoDescriptor(atom, molgraph, 3);
+        if (getStereoCenterFlag(atom)) {
+             StereoDescriptor descr = calcStereoDescriptor(atom, molgraph, 3);
 
             setStereoDescriptor(atom, descr);
 

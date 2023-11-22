@@ -27,13 +27,15 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym, std::size_t min_ring_size)
+void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym,
+                                     bool check_if_term, bool check_order, std::size_t min_ring_size)
 {
     MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
@@ -43,12 +45,13 @@ void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, b
         if (!overwrite && hasStereoCenterFlag(bond))
             continue;
 
-        setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, check_cip_sym, min_ring_size));
+        setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, check_cip_sym,
+                                                 check_if_term, check_order, min_ring_size));
     }
 }
 
 void Chem::calcBondStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim, 
-                                     std::size_t min_ring_size)
+                                     bool check_stc_flag)
 {
     MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
@@ -58,7 +61,10 @@ void Chem::calcBondStereoDescriptors(MolecularGraph& molgraph, bool overwrite, s
         if (!overwrite && hasStereoDescriptor(bond))
             continue;
 
-        setStereoDescriptor(bond, calcStereoDescriptor(bond, molgraph, dim, min_ring_size));
+        if (!check_stc_flag || getStereoCenterFlag(bond))
+            setStereoDescriptor(bond, calcStereoDescriptor(bond, molgraph, dim));
+        else
+            setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
     }
 }
 

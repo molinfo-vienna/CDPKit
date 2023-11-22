@@ -35,7 +35,6 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
-#include "CDPL/Chem/AtomPriorityFunction.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -105,8 +104,6 @@ namespace CDPL
 
         CDPL_CHEM_API unsigned int calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph);
 
-        CDPL_CHEM_API unsigned int calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func);
-
 
         CDPL_CHEM_API const StereoDescriptor& getStereoDescriptor(const Bond& bond);
 
@@ -116,11 +113,10 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasStereoDescriptor(const Bond& bond);
 
-        CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim = 1,
-                                                            std::size_t min_ring_size = 8, bool check_order = true);
+        CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim = 1);
 
-        CDPL_CHEM_API unsigned int calcBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr,
-                                                         const Math::Vector3DArray& coords);
+        CDPL_CHEM_API unsigned int calcConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr,
+                                                     const Math::Vector3DArray& coords);
 
 
         CDPL_CHEM_API bool getStereoCenterFlag(const Bond& bond);
@@ -131,7 +127,8 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasStereoCenterFlag(const Bond& bond);
 
-        CDPL_CHEM_API bool isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_asym = true, std::size_t min_ring_size = 8);
+        CDPL_CHEM_API bool isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_asym = true,
+                                          bool check_term_n = true, bool check_order = true, std::size_t min_ring_size = 8);
 
 
         CDPL_CHEM_API unsigned int getDirection(const Bond& bond);

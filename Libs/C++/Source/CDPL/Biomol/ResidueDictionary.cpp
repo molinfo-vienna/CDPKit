@@ -159,6 +159,8 @@ namespace
         calcImplicitHydrogenCounts(*mol_ptr, false);
         perceiveHybridizationStates(*mol_ptr, false);
         setAromaticityFlags(*mol_ptr, false);
+        perceiveAtomStereoCenters(*mol_ptr, false, false);
+        perceiveBondStereoCenters(*mol_ptr, false, false);
         calcAtomStereoDescriptors(*mol_ptr, false, 3);
         calcBondStereoDescriptors(*mol_ptr, false, 3);
 

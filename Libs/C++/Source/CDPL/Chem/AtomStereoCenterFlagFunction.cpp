@@ -37,7 +37,9 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_asym)
+bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_asym,
+                          bool check_inv_n, bool check_quart_n, bool check_plan_n,
+                          bool check_amide_n)
 {
     if (getAromaticityFlag(atom))
         return false;
@@ -50,15 +52,34 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
     if (num_bonds < 3 || num_bonds > 4)
         return false;
 
-    if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+    std::size_t impl_h_cnt = getImplicitHydrogenCount(atom);
+    
+    if ((num_bonds + impl_h_cnt) > 4)
         return false;
 
     if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
         return false;
 
-    if (Internal::isPlanarNitrogen(atom, molgraph))
-        return false;
+    if (getType(atom) == AtomType::N) {
+        if (check_quart_n && Internal::getRingBondCount(atom, molgraph) < 3) {
+            if (num_bonds == 3) {
+                if (impl_h_cnt > 0)
+                    return false;
+                
+            } else if (Internal::getAtomCount(atom, molgraph, AtomType::H) > 0)
+                return false;
+        }
+        
+        if (check_inv_n && Internal::isInvertibleNitrogen(atom, molgraph))
+            return false;
 
+        if (check_plan_n && Internal::isPlanarNitrogen(atom, molgraph))
+            return false;
+
+        if (check_amide_n && Internal::isAmideNitrogen(atom, molgraph))
+            return false;
+    }
+    
     if (!check_asym)
         return true;
 

@@ -53,6 +53,8 @@ void Chem::initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite)
 void Chem::initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite)
 {
     calcBasicProperties(molgraph, overwrite);
+    perceiveAtomStereoCenters(molgraph, overwrite, false);
+    perceiveBondStereoCenters(molgraph, overwrite, false);
     calcAtomStereoDescriptors(molgraph, overwrite);
     calcBondStereoDescriptors(molgraph, overwrite);
 }

@@ -242,7 +242,9 @@ private:
                 calcImplicitHydrogenCounts(molecule, false);
         
                 initMolecule(molecule, false);
-                
+
+                perceiveAtomStereoCenters(molecule, false, false);
+                perceiveBondStereoCenters(molecule, false, false);
                 calcAtomStereoDescriptors(molecule, false);
                 calcBondStereoDescriptors(molecule, false);
             }

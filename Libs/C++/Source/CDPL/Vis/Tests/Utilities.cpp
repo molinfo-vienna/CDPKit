@@ -134,7 +134,9 @@ void Vis::initMolecule(Chem::Molecule& mol)
     perceiveHybridizationStates(mol, false);
 
     setAromaticityFlags(mol, false);
-
+    
+    perceiveAtomStereoCenters(mol, false, false);
+    perceiveBondStereoCenters(mol, false, false);
     calcAtomStereoDescriptors(mol, false);
     calcBondStereoDescriptors(mol, false);
 

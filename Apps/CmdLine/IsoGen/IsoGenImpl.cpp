@@ -127,7 +127,7 @@ private:
 
                 case BondConfiguration::EITHER:
                 case BondConfiguration::UNDEF:
-                    setStereoDescriptor(bond, calcStereoDescriptor(bond, molecule, dim, std::min(std::size_t(8), parent->minRingSize)));
+                    setStereoDescriptor(bond, calcStereoDescriptor(bond, molecule, dim));
              }
     }
     
@@ -148,8 +148,12 @@ private:
             perceiveSSSR(molecule, false);
             setAromaticityFlags(molecule, false);
 
+            perceiveAtomStereoCenters(molecule, false, false, !parent->incInvNitrogens,
+                                      !parent->incInvNitrogens);
+            perceiveBondStereoCenters(molecule, false, false, true, true,
+                                      std::min(std::size_t(8), parent->minRingSize));
             calcAtomStereoDescriptors(molecule, false, 0);
-            calcBondStereoDescriptors(molecule, false, 0, std::min(std::size_t(8), parent->minRingSize));
+            calcBondStereoDescriptors(molecule, false, 0);
           
             if (parent->use2DCoords && hasCoordinates(molecule, 2))
                 perceiveUnspecConfigs(2);

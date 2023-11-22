@@ -37,8 +37,10 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_co
     ecfp_gen = Descr.CircularFingerprintGenerator()    # create ECFP generator instance
 
     if inc_config:
-        ecfp_gen.includeChirality(True)                # allow atom chirality to have an impact on the ECFP generation
-        Chem.calcAtomStereoDescriptors(mol, False)     # calculate atom stereo descriptors and set corresponding property for all atoms
+        ecfp_gen.includeChirality(True)                  # allow atom chirality to have an impact on the ECFP generation
+        Chem.calcCIPPriorities(mol, False)               # calculate atom symmetry classes for chiral atom perception and set corresponding property for all atoms
+        Chem.perceiveAtomStereoCenters(mol, False, True) # perceive chiral atoms and set corresponding property for all atoms
+        Chem.calcAtomStereoDescriptors(mol, False)       # calculate atom stereo descriptors and set corresponding property for all atoms
 
     if inc_hs:        
         ecfp_gen.includeHydrogens(True)                # include explicit hydrogens in the ECFP generation

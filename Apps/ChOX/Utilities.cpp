@@ -32,19 +32,11 @@
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Chem/AtomConfiguration.hpp"
-#include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 
 #include "Utilities.hpp"
@@ -105,7 +97,6 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
 {
     using namespace CDPL;
     using namespace Chem;
-    using namespace MolProp;
 
     perceiveComponents(mol, false);
     perceiveComponentGroups(mol, false);
@@ -118,36 +109,10 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
     calcCIPPriorities(mol, false);
 
-    perceiveAtomStereoCenters(mol, false, true);
-    perceiveBondStereoCenters(mol, false, true);
-
-    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-        Atom& atom = *it;
-
-        if (hasStereoDescriptor(atom))
-            continue;
-
-        if (!getStereoCenterFlag(atom) || isInvertibleNitrogen(atom, mol) || isAmideNitrogen(atom, mol, false, false)) {
-            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
-            continue;
-        }
-        
-        setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
-    }
-
-    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
-        Bond& bond = *it;
-
-        if (hasStereoDescriptor(bond))
-            continue;
-
-        if (!getStereoCenterFlag(bond)) {
-            setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
-            continue;
-        }
-        
-        setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
-    }
+    perceiveAtomStereoCenters(mol, false);
+    perceiveBondStereoCenters(mol, false);
+    calcAtomStereoDescriptors(mol, false);
+    calcBondStereoDescriptors(mol, false);
 
     setAtomSymbolsFromTypes(mol, false);
 

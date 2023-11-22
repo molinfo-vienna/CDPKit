@@ -694,7 +694,7 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
         if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
             continue;
 
-        unsigned int calc_config = calcAtomConfiguration(atom, molgraph, descr, confCoords);
+        unsigned int calc_config = calcConfiguration(atom, molgraph, descr, confCoords);
 
         if (calc_config != descr.getConfiguration()) 
             return false;

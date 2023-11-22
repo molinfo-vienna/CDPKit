@@ -164,7 +164,7 @@ bool ConfGen::DGStructureGenerator::checkAtomConfigurations(Math::Vector3DArray&
 
         const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-        if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration()) 
+        if (calcConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration()) 
             return false;
     }
 
@@ -178,7 +178,7 @@ bool ConfGen::DGStructureGenerator::checkBondConfigurations(Math::Vector3DArray&
 
         const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-        if (calcBondConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
+        if (calcConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
             return false;
     }
 

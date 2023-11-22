@@ -444,20 +444,21 @@ namespace CDPL
 
         CDPL_CHEM_API void kekulizeBonds(MolecularGraph& molgraph);
 
-        CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite,
-                                                     bool check_asym = true);
+        CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym = true,
+                                                     bool check_inv_n = true, bool check_quart_n = true, bool check_plan_n = true,
+                                                     bool check_amide_n = true);
 
         CDPL_CHEM_API void perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym = true,
-                                                     std::size_t min_ring_size = 8);
+                                                     bool check_term_n = true, bool check_order = true, std::size_t min_ring_size = 8);
 
         CDPL_CHEM_API void calcMDLParities(MolecularGraph& molgraph, bool overwrite);
 
-        CDPL_CHEM_API void calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim = 1);
+        CDPL_CHEM_API void calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim = 1, bool check_stc_flag = true);
 
         CDPL_CHEM_API void calcAtomStereoDescriptorsFromMDLParities(MolecularGraph& molgraph, bool overwrite);
 
         CDPL_CHEM_API void calcBondStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim = 1,
-                                                     std::size_t min_ring_size = 8);
+                                                     bool check_stc_flag = true);
 
         CDPL_CHEM_API void calcAtomCIPConfigurations(MolecularGraph& molgraph, bool overwrite);
 

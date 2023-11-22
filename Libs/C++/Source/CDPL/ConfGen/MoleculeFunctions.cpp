@@ -37,7 +37,6 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/MolProp/AtomFunctions.hpp"
 
 #include "SubstituentBulkinessCalculator.hpp"
 
@@ -84,7 +83,6 @@ namespace
 void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 {
     using namespace Chem;
-    using namespace MolProp;
 
     bool added_hs = makeHydrogenComplete(mol, true);
 
@@ -105,7 +103,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
             continue;
         }
         
-        if (!isStereoCenter(atom, mol, true) || isInvertibleNitrogen(atom, mol) || isAmideNitrogen(atom, mol, false, false)) {
+        if (!isStereoCenter(atom, mol, true, true, false)) {
             setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
             continue;
         }
@@ -124,7 +122,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
             continue;
         }
         
-        if (!isStereoCenter(bond, mol, true)) 
+        if (!isStereoCenter(bond, mol, true, false)) 
             setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
         
         else {

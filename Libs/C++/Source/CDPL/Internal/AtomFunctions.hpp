@@ -67,7 +67,7 @@ namespace CDPL
         inline bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline bool isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
                                        unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
-        inline bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+        inline bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = true);
         inline bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only);
