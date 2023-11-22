@@ -1295,7 +1295,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
                         ", num. top. sym. mappings: " + std::to_string(confSelector.getNumSymmetryMappings()) + ")...\n");
         
         logCallback("Selected " +  std::to_string(outputConfs.size()) + " conformer(s)\n");
-        logCallback("Warning: max. number of top. symmetry mappings exceeded\n");
+
+        if (too_much_sym)
+            logCallback("Warning: max. number of top. symmetry mappings exceeded\n");
     }
 
     if (too_much_sym)
