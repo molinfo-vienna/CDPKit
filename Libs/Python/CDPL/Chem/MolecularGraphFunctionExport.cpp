@@ -268,7 +268,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("calcHashCode", &Chem::calcHashCode,
                 (python::arg("molgraph"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
                  python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
-                 python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
+                 python::arg("ord_h_deplete") = true));
 
     python::def("canonicalize", static_cast<void (*)(Chem::MolecularGraph& molgraph, bool, bool, bool, bool)>(&Chem::canonicalize), 
                 (python::arg("molgraph"), python::arg("atoms") = true, python::arg("atom_nbrs") = true, 

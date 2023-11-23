@@ -82,19 +82,6 @@ namespace
     MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, ComponentGroups)
     MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Chem::AtomMapping::SharedPointer&, AtomMapping)
 
-    MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Reaction&)
-    MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Reaction&)
-
-    MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxAtomMappingID, CDPL::Chem::Reaction&)
-    MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxComponentGroupID, CDPL::Chem::Reaction&)
-
-    MAKE_FUNCTION_WRAPPER1(CDPL::Chem::MatchExpression<CDPL::Chem::Reaction>::SharedPointer, generateMatchExpression, CDPL::Chem::Reaction&)
-    MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveComponentGroups, CDPL::Chem::Reaction&)
-    MAKE_FUNCTION_WRAPPER1(CDPL::Chem::AtomMapping::SharedPointer, perceiveAtomMapping, CDPL::Chem::Reaction&)
-
-    MAKE_FUNCTION_WRAPPER6(std::uint64_t, calcHashCode, CDPL::Chem::Reaction&,
-                           unsigned int, unsigned int, unsigned int, bool, bool)
-
     boost::python::object generateSMILESWrapper(CDPL::Chem::Reaction& rxn, bool canonical, bool ord_h_deplete,
                                                 unsigned int atom_flags, unsigned int bond_flags)
     {
@@ -120,17 +107,17 @@ void CDPLPythonChem::exportReactionFunctions()
     python::def("initSubstructureSearchQuery", &Chem::initSubstructureSearchQuery, (python::arg("rxn"), python::arg("overwrite")));
     python::def("initSubstructureSearchTarget", &Chem::initSubstructureSearchTarget, (python::arg("rxn"), python::arg("overwrite")));
     
-    python::def("getMatchConstraints", &getMatchConstraintsWrapper1, python::arg("rxn"), 
+    python::def("getMatchConstraints", &Chem::getMatchConstraints, python::arg("rxn"), 
                 python::return_value_policy<python::copy_const_reference, python::with_custodian_and_ward_postcall<0, 1> >());
-    python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("rxn"));
+    python::def("hasMatchConstraints", &Chem::hasMatchConstraints, python::arg("rxn"));
     python::def("setMatchConstraints", &Chem::setMatchConstraints, (python::arg("rxn"), python::arg("constr")));
     python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("rxn"));
 
-    python::def("generateMatchExpression", &generateMatchExpressionWrapper1,
+    python::def("generateMatchExpression", static_cast<Chem::MatchExpression<Chem::Reaction>::SharedPointer (*)(const Chem::Reaction&)>(&Chem::generateMatchExpression),
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveAtomMapping", &perceiveAtomMappingWrapper1,
+    python::def("perceiveAtomMapping", static_cast<Chem::AtomMapping::SharedPointer (*)(const Chem::Reaction&)>(&Chem::perceiveAtomMapping),
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveComponentGroups", &perceiveComponentGroupsWrapper1,
+    python::def("perceiveComponentGroups", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::Reaction&)>(&Chem::perceiveComponentGroups),
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
 
     python::def("generateMatchExpression", static_cast<Chem::MatchExpression<Chem::Reaction>::SharedPointer (*)(Chem::Reaction&, bool)>(&Chem::generateMatchExpression),
@@ -144,13 +131,13 @@ void CDPLPythonChem::exportReactionFunctions()
                                                            python::arg("ord_h_deplete") = true, python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT, 
                                                            python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT));
 
-    python::def("calcHashCode", &calcHashCodeWrapper6, (python::arg("rxn"), python::arg("role_mask") = Chem::ReactionRole::ALL, 
-                                                        python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
-                                                        python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
-                                                        python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
+    python::def("calcHashCode", &Chem::calcHashCode, (python::arg("rxn"), python::arg("role_mask") = Chem::ReactionRole::ALL, 
+                                                      python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
+                                                      python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
+                                                      python::arg("ord_h_deplete") = true));
 
-    python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("rxn"));
-    python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("rxn"));
+    python::def("getMaxComponentGroupID", &Chem::getMaxComponentGroupID, python::arg("rxn"));
+    python::def("getMaxAtomMappingID", &Chem::getMaxAtomMappingID, python::arg("rxn"));
 
     python::def("calcBasicProperties", &Chem::calcBasicProperties,
                 (python::arg("rxn"), python::arg("overwrite")));

@@ -118,7 +118,7 @@ namespace CDPL
         CDPL_CHEM_API std::uint64_t calcHashCode(const Reaction& rxn, unsigned int role_mask = ReactionRole::ALL,
                                                  unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
                                                  unsigned int bond_flags = BondPropertyFlag::DEFAULT,
-                                                 bool global_stereo = true, bool ord_h_deplete = true);
+                                                 bool ord_h_deplete = true);
 
 
         CDPL_CHEM_API const std::string& getMDLUserInitials(const Reaction& rxn);

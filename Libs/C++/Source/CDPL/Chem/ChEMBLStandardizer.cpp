@@ -91,7 +91,6 @@ namespace
 
         HashCodeCalculator hash_calc;
 
-        hash_calc.includeGlobalStereoFeatures(false);
         hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
         hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 
@@ -198,7 +197,6 @@ Chem::ChEMBLStandardizer::ChEMBLStandardizer()
 {
     substructSearch.uniqueMappingsOnly(true);
 
-    hashCodeCalc.includeGlobalStereoFeatures(false);
     hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 
@@ -206,7 +204,6 @@ Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardi
 {
     substructSearch.uniqueMappingsOnly(true);
 
-    hashCodeCalc.includeGlobalStereoFeatures(false);
     hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 

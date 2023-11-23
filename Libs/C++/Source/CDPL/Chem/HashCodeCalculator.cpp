@@ -52,28 +52,34 @@ namespace
 {
 
     const std::size_t ATOM_CONFIG_R_IDX           = 0;
-    const std::size_t ATOM_CONFIG_S_IDX           = ATOM_CONFIG_R_IDX + 1;
-    const std::size_t ATOM_H_COUNT_IDX            = ATOM_CONFIG_S_IDX + 1;
-    const std::size_t ATOM_H_COUNT_RANGE          = 10;
+    const std::size_t ATOM_CONFIG_S_IDX           = 1;
+    const std::size_t ATOM_CONFIG_M_IDX           = 2;
+    const std::size_t ATOM_CONFIG_P_IDX           = 3;
+    const std::size_t ATOM_CONFIG_r_IDX           = 4;
+    const std::size_t ATOM_CONFIG_s_IDX           = 5;
+    const std::size_t ATOM_CONFIG_m_IDX           = 6;
+    const std::size_t ATOM_CONFIG_p_IDX           = 7;
+    const std::size_t ATOM_H_COUNT_IDX            = ATOM_CONFIG_p_IDX + 1;
+    const std::size_t ATOM_H_COUNT_RANGE          = 5;
     const std::size_t ATOM_NEG_CHARGE_IDX         = ATOM_H_COUNT_IDX + ATOM_H_COUNT_RANGE;
-    const std::size_t ATOM_NEG_CHARGE_RANGE       = 10;
+    const std::size_t ATOM_NEG_CHARGE_RANGE       = 4;
     const std::size_t ATOM_POS_CHARGE_IDX         = ATOM_NEG_CHARGE_IDX + ATOM_NEG_CHARGE_RANGE;
-    const std::size_t ATOM_POS_CHARGE_RANGE       = 10;
+    const std::size_t ATOM_POS_CHARGE_RANGE       = 4;
     const std::size_t ATOM_GLOBAL_STEREO_REF_IDX  = ATOM_POS_CHARGE_IDX + ATOM_POS_CHARGE_RANGE;
     const std::size_t ATOM_TYPE_IDX               = ATOM_GLOBAL_STEREO_REF_IDX + 1;
     const std::size_t ATOM_TYPE_RANGE             = Chem::AtomType::MAX_ATOMIC_NO + 1;
     const std::size_t ATOM_ISOTOPE_IDX            = ATOM_TYPE_IDX + ATOM_TYPE_RANGE;
-    const std::size_t ATOM_ISOTOPE_RANGE          = 300;
-    const std::size_t ATOM_GLOBAL_STEREO_FLAG_IDX = ATOM_ISOTOPE_IDX + ATOM_ISOTOPE_RANGE;
-    const std::size_t ATOM_AROMATICITY_IDX        = ATOM_GLOBAL_STEREO_FLAG_IDX + 1;
+    const std::size_t ATOM_ISOTOPE_RANGE          = 200;
+    const std::size_t ATOM_AROMATICITY_IDX        = ATOM_ISOTOPE_IDX + ATOM_ISOTOPE_RANGE;
 
     const std::size_t BOND_AROM_FLAG_IDX          = 0;
     const std::size_t BOND_RING_FLAG_IDX          = BOND_AROM_FLAG_IDX + 1;
     const std::size_t BOND_CONFIG_E_IDX           = BOND_RING_FLAG_IDX + 1;
     const std::size_t BOND_CONFIG_Z_IDX           = BOND_CONFIG_E_IDX + 1;
-    const std::size_t BOND_ORDER_IDX              = BOND_CONFIG_Z_IDX + 1;
+    const std::size_t BOND_CONFIG_seqCIS_IDX      = BOND_CONFIG_Z_IDX + 1;
+    const std::size_t BOND_CONFIG_seqTRANS_IDX    = BOND_CONFIG_seqCIS_IDX + 1;
+    const std::size_t BOND_ORDER_IDX              = BOND_CONFIG_seqTRANS_IDX + 1;
     const std::size_t BOND_ORDER_RANGE            = 4;
-    const std::size_t BOND_GLOBAL_STEREO_FLAG_IDX = BOND_ORDER_IDX + BOND_ORDER_RANGE;
 
     const std::size_t NUM_ATOM_HASH_ITERATIONS    = 32;
     const std::size_t NUM_BOND_HASH_ITERATIONS    = 32;
@@ -115,10 +121,10 @@ std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const
         seed *= getAtomChargeHashSeed(atom);
 
     if (flags & AtomPropertyFlag::CIP_CONFIGURATION)
-          seed *= getAtomConfigHashSeed(atom);
+        seed *= getAtomConfigHashSeed(atom);
 
     if (flags & AtomPropertyFlag::AROMATICITY)
-          seed *= getAtomAromaticityHashSeed(atom);
+        seed *= getAtomAromaticityHashSeed(atom);
 
     return seed;
 }
@@ -167,6 +173,24 @@ std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHas
 
         case AtomConfiguration::S: 
             return boost::math::prime(ATOM_CONFIG_S_IDX);
+
+        case AtomConfiguration::M: 
+            return boost::math::prime(ATOM_CONFIG_R_IDX);
+
+        case AtomConfiguration::P: 
+            return boost::math::prime(ATOM_CONFIG_S_IDX);
+
+        case AtomConfiguration::r: 
+            return boost::math::prime(ATOM_CONFIG_r_IDX);
+
+        case AtomConfiguration::s: 
+            return boost::math::prime(ATOM_CONFIG_s_IDX);
+
+        case AtomConfiguration::m: 
+            return boost::math::prime(ATOM_CONFIG_m_IDX);
+
+        case AtomConfiguration::p: 
+            return boost::math::prime(ATOM_CONFIG_p_IDX);
 
         default: 
             return 1;
@@ -221,6 +245,12 @@ std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHas
         case BondConfiguration::Z:
             return boost::math::prime(BOND_CONFIG_Z_IDX);
 
+        case BondConfiguration::seqCIS:
+            return boost::math::prime(BOND_CONFIG_seqCIS_IDX);
+
+        case BondConfiguration::seqTRANS:
+            return boost::math::prime(BOND_CONFIG_seqTRANS_IDX);
+
         default:
             return 1;
     }
@@ -229,36 +259,22 @@ std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHas
 //-----
 
 Chem::HashCodeCalculator::HashCodeCalculator():
-    atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor()),
-    incGlobalStereoFeatures(true) 
+    atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor())
 {
     std::fill(shaHashCode, shaHashCode + sizeof(shaHashCode), 0);
 }
 
 Chem::HashCodeCalculator::HashCodeCalculator(const MolecularGraph& molgraph):
-    atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor()),
-    incGlobalStereoFeatures(true)
+    atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor())
 {
     std::fill(shaHashCode, shaHashCode + sizeof(shaHashCode), 0);
 
     calculate(molgraph);
 }
 
-void Chem::HashCodeCalculator::includeGlobalStereoFeatures(bool include)
-{
-    incGlobalStereoFeatures = include;
-}
-
-bool Chem::HashCodeCalculator::globalStereoFeaturesIncluded() const
-{
-    return incGlobalStereoFeatures;
-}
-
 std::uint64_t Chem::HashCodeCalculator::calculate(const MolecularGraph& molgraph)
 {
     init(molgraph);
-
-    perceiveGlobalStereoFeatures();
 
     calcAtomHashCodes();
     calcBondHashCodes();
@@ -325,13 +341,6 @@ void Chem::HashCodeCalculator::init(const MolecularGraph& molgraph)
 
 void Chem::HashCodeCalculator::calcAtomHashCodes()
 {
-    if (incGlobalStereoFeatures) {
-        IndexList::const_iterator global_stereo_atoms_end = globalStereoAtoms.end();
-
-        for (IndexList::const_iterator it = globalStereoAtoms.begin(); it != global_stereo_atoms_end; ++it)
-            atomHashCodes[*it] *= boost::math::prime(ATOM_GLOBAL_STEREO_FLAG_IDX);
-    }
-
     MolecularGraph::ConstAtomIterator atoms_beg = molGraph->getAtomsBegin();
     MolecularGraph::ConstAtomIterator atoms_end = molGraph->getAtomsEnd();
     
@@ -340,7 +349,7 @@ void Chem::HashCodeCalculator::calcAtomHashCodes()
     if (tmpHashCodes1.size() < num_atoms)
         tmpHashCodes1.resize(num_atoms);
 
-    for (std::size_t i = 0; i < NUM_ATOM_HASH_ITERATIONS; i++) {
+    for (std::size_t i = 0, num_iter = std::min(num_atoms, NUM_ATOM_HASH_ITERATIONS); i < num_iter; i++) {
         for (MolecularGraph::ConstAtomIterator it1 = atoms_beg; it1 != atoms_end; ++it1) {
             const Atom& atom = *it1;
             std::size_t atom_idx = molGraph->getAtomIndex(atom);
@@ -378,19 +387,6 @@ void Chem::HashCodeCalculator::calcAtomHashCodes()
 
 void Chem::HashCodeCalculator::calcBondHashCodes()
 {
-    if (incGlobalStereoFeatures) {
-        IndexList::const_iterator global_stereo_bonds_end = globalStereoBonds.end();
-
-        for (IndexList::const_iterator it = globalStereoBonds.begin(); it != global_stereo_bonds_end; ++it)
-            bondHashCodes[*it] *= boost::math::prime(BOND_GLOBAL_STEREO_FLAG_IDX);
-
-        IndexList::const_iterator ref_atoms_end = globalStereoReferenceAtoms.end();
-        IndexList::const_iterator a_it = globalStereoReferenceAtoms.begin();
-
-        for (IndexList::const_iterator b_it = globalStereoReferenceBonds.begin(); a_it != ref_atoms_end; ++a_it, ++b_it) 
-            bondHashCodes[*b_it] += atomHashCodes[*a_it];
-    }
-
     MolecularGraph::ConstBondIterator bonds_beg = molGraph->getBondsBegin();
     MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
 
@@ -411,7 +407,7 @@ void Chem::HashCodeCalculator::calcBondHashCodes()
     if (tmpHashCodes1.size() < num_bonds)
         tmpHashCodes1.resize(num_bonds);
 
-    for (std::size_t i = 0; i < NUM_BOND_HASH_ITERATIONS; i++) {
+    for (std::size_t i = 0, num_iter = std::min(num_bonds, NUM_BOND_HASH_ITERATIONS); i < num_iter; i++) {
         for (MolecularGraph::ConstBondIterator it1 = bonds_beg; it1 != bonds_end; ++it1) {
             const Bond& bond = *it1;
 
@@ -461,225 +457,6 @@ void Chem::HashCodeCalculator::calcBondHashCodes()
 
         bondHashCodes.swap(tmpHashCodes1);
     }
-}
-
-void Chem::HashCodeCalculator::perceiveGlobalStereoFeatures()
-{
-    globalStereoAtoms.clear();
-    globalStereoReferenceAtoms.clear();
-
-    globalStereoBonds.clear();
-    globalStereoReferenceBonds.clear();
-
-    if (!incGlobalStereoFeatures)
-        return;
-
-    perceiveGlobalStereoReferenceAtoms();
-    perceiveGlobalStereoReferenceBonds();
-}
-
-void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceAtoms()
-{
-    std::for_each(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(),
-                  std::bind(&HashCodeCalculator::perceiveGlobalStereoReferenceAtom, this, std::placeholders::_1));
-}
-
-void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceAtom(const Atom& atom)
-{
-    std::size_t num_bonds = atom.getNumBonds();
-
-    if (num_bonds < 3 || num_bonds > 4)
-        return;
-
-    const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
-
-    if (stereo_desc.getNumReferenceAtoms() < 3)
-        return;
-
-    unsigned int config = stereo_desc.getConfiguration();
-
-    switch (config) {
-
-        case AtomConfiguration::R:
-        case AtomConfiguration::S:
-            break;
-
-        default:
-            return;
-    }
-
-    Ligand ligands[4];
-
-    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-    num_bonds = 0;
-
-    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-        const Atom& nbr_atom = *a_it;
-        const Bond& nbr_bond = *b_it;
-
-        if (!molGraph->containsAtom(nbr_atom) || !molGraph->containsBond(nbr_bond))
-            continue;
-
-        ligands[num_bonds++] = Ligand(&nbr_atom, &nbr_bond);
-    }
-
-    if (num_bonds < 3)
-        return;
-
-    std::sort(ligands, ligands + num_bonds, AtomCIPPGreaterCmpFunc());
-
-    std::size_t cip_priorities[4];
-
-    for (std::size_t i = 0; i < num_bonds; i++)
-        cip_priorities[i] = getCIPPriority(*ligands[i].first);
-
-    std::size_t eq_range_idx = 0;
-
-    if (cip_priorities[0] == cip_priorities[1]) {
-        if (cip_priorities[1] == cip_priorities[2] || 
-            (num_bonds == 4 && cip_priorities[2] == cip_priorities[3]))
-            return; 
-
-    } else if (cip_priorities[1] == cip_priorities[2]) {
-        if (num_bonds == 4 && cip_priorities[2] == cip_priorities[3])
-            return; 
-
-        eq_range_idx = 1;
-
-    } else if (num_bonds == 4 && cip_priorities[2] == cip_priorities[3])
-        eq_range_idx = 2;
-
-    else
-        return;
- 
-    unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first) :
-                                stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first, *ligands[3].first));
-    int sign = 0;
-
-    if (perm_parity == 2) 
-        sign = (config == AtomConfiguration::R ? 1 : -1);
-
-    else if (perm_parity == 1) {
-        config = (config == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R); 
-        sign = (config == AtomConfiguration::R ? -1 : 1);
-
-    } else 
-        return;
-
-    const Ligand& ref_ligand = (sign > 0 ? ligands[eq_range_idx] : ligands[eq_range_idx + 1]);
-
-    globalStereoAtoms.push_back(molGraph->getAtomIndex(atom));
-    globalStereoReferenceAtoms.push_back(molGraph->getAtomIndex(*ref_ligand.first));
-    globalStereoReferenceBonds.push_back(molGraph->getBondIndex(*ref_ligand.second));
-}
-
-void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceBonds()
-{ 
-    MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
-
-    for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(); it != bonds_end; ++it) {
-        const Bond& bond = *it;
-
-        if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
-            continue;
-
-        perceiveGlobalStereoReferenceBond(bond);
-    }
-}
-
-void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceBond(const Bond& bond)
-{ 
-    const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
-
-    if (!stereo_desc.isValid(bond))
-        return;
-
-    unsigned int config = stereo_desc.getConfiguration();
-
-    if (config != BondConfiguration::CIS && config != BondConfiguration::TRANS)
-        return;
-
-    const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
-
-    const Atom* ligand_atoms[2][2] = { { 0, 0 }, { 0, 0 } };
-    const Bond* ligand_bonds[2][2] = { { 0, 0 }, { 0, 0 } };
-
-    bool eq_ligand_atoms[2] = { false, false };
-
-    for (std::size_t i = 0; i < 2; i++) {
-        Atom::ConstAtomIterator atoms_end = sto_ref_atoms[i + 1]->getAtomsEnd();
-        Atom::ConstBondIterator b_it = sto_ref_atoms[i + 1]->getBondsBegin();
-
-        for (Atom::ConstAtomIterator a_it = sto_ref_atoms[i + 1]->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-            const Bond* ligand_bond = &*b_it;
-
-            if (ligand_bond == &bond)
-                continue;
-
-            const Atom* ligand_atom = &*a_it;
-
-            if (!molGraph->containsAtom(*ligand_atom) || !molGraph->containsBond(*ligand_bond))
-                continue;
-
-            if (!ligand_atoms[i][0]) {
-                ligand_atoms[i][0] = ligand_atom;
-                ligand_bonds[i][0] = ligand_bond;
-
-            } else {
-                std::size_t pri1 = getCIPPriority(*ligand_atoms[i][0]);
-                std::size_t pri2 = getCIPPriority(*ligand_atom);
-
-                if (pri1 >= pri2) {
-                    ligand_atoms[i][1] = ligand_atom;
-                    ligand_bonds[i][1] = ligand_bond;
-                    eq_ligand_atoms[i] |= (pri1 == pri2);
-
-                } else {
-                    ligand_atoms[i][1] = ligand_atoms[i][0];
-                    ligand_atoms[i][0] = ligand_atom;
-                    ligand_bonds[i][1] = ligand_bonds[i][0];
-                    ligand_bonds[i][0] = ligand_bond;
-                }
-            }
-        }
-    }
-
-    if (eq_ligand_atoms[0] == eq_ligand_atoms[1])
-        return;
-
-    int sign = 0;
-
-    switch (config) {
-                
-        case BondConfiguration::CIS:
-            sign = ((ligand_atoms[0][0] == sto_ref_atoms[0]) ^ (ligand_atoms[1][0] == sto_ref_atoms[3]) ? 1 : -1);
-            break;
-
-        case BondConfiguration::TRANS:
-            sign = ((ligand_atoms[0][0] == sto_ref_atoms[0]) ^ (ligand_atoms[1][0] == sto_ref_atoms[3]) ? -1 : 1);
-            break;
-
-        default:
-            return;
-    }
-
-    const Atom* ref_atom;
-    const Bond* ref_bond;
-
-    if (eq_ligand_atoms[0]) {
-        ref_atom = (sign > 0 ? ligand_atoms[0][0] : ligand_atoms[0][1]);   
-        ref_bond = (sign > 0 ? ligand_bonds[0][0] : ligand_bonds[0][1]);   
-
-    } else {
-        ref_atom = (sign > 0 ? ligand_atoms[1][0] : ligand_atoms[1][1]);   
-        ref_bond = (sign > 0 ? ligand_bonds[1][0] : ligand_bonds[1][1]);   
-    }
-
-    globalStereoBonds.push_back(molGraph->getBondIndex(bond));
-    globalStereoReferenceAtoms.push_back(molGraph->getAtomIndex(*ref_atom));
-    globalStereoReferenceBonds.push_back(molGraph->getBondIndex(*ref_bond));
 }
 
 void Chem::HashCodeCalculator::calcSHAHashCode()

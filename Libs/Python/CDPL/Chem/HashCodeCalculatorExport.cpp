@@ -64,16 +64,11 @@ void CDPLPythonChem::exportHashCodeCalculator()
              (python::arg("self"), python::arg("func")))
         .def("setBondHashSeedFunction", &Chem::HashCodeCalculator::setBondHashSeedFunction,
              (python::arg("self"), python::arg("func")))
-        .def("includeGlobalStereoFeatures", &Chem::HashCodeCalculator::includeGlobalStereoFeatures, 
-             (python::arg("self"), python::arg("include")))
-        .def("globalStereoFeaturesIncluded", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded, python::arg("self"))
         .def("calculate", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
         .def("getResult", &Chem::HashCodeCalculator::getResult, python::arg("self"))
         .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)
         .def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)
         .add_property("result", &Chem::HashCodeCalculator::getResult)
-        .add_property("globalStereoFeatures", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded,
-                      &Chem::HashCodeCalculator::includeGlobalStereoFeatures)
         .def("__call__", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")));
 
     python::class_<Chem::HashCodeCalculator::DefAtomHashSeedFunctor>("DefAtomHashSeedFunctor", python::no_init)

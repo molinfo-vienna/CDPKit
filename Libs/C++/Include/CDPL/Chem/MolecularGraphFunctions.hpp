@@ -190,8 +190,7 @@ namespace CDPL
         CDPL_CHEM_API bool hasHashCode(const MolecularGraph& molgraph);
 
         CDPL_CHEM_API std::uint64_t calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
-                                                 unsigned int bond_flags = BondPropertyFlag::DEFAULT,
-                                                 bool global_stereo = true, bool ord_h_deplete = true);
+                                                 unsigned int bond_flags = BondPropertyFlag::DEFAULT, bool ord_h_deplete = true);
 
 
         CDPL_CHEM_API void extractReactionCenter(const MolecularGraph& molgraph, Fragment& rxn_center);

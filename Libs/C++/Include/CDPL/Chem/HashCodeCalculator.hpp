@@ -213,28 +213,6 @@ namespace CDPL
             void setBondHashSeedFunction(const BondHashSeedFunction& func);
 
             /**
-             * \brief Allows to specify whether or not global stereochemical features shall have an influence on
-             *        the calculated hash codes.
-             *
-             * When global stereochemical features are considered, the hash code of a molecular
-             * graph will not only depend on basic atom and bond properties but also on additional stereochemical characteristics
-             * like the relative spatial arrangement of substituents. The mutual spatial arrangement of substituents may be the only
-             * feature that allows the differentiation of stereoisomers with a plane of symmetry. Diastereoisomers like
-             * <em>cis-1,4-Cyclohexanediol</em> and <em>trans-1,4-Cyclohexanediol</em> are typical examples for such corner cases.
-             *
-             * \param include If \c true, global stereochemical features will be considered and get ignored otherwise.
-             * \note By default, global stereochemical features are included in the hash code calculation.
-             */
-            void includeGlobalStereoFeatures(bool include);
-
-            /**
-             * \brief Tells whether or not global stereochemical features influence the calculated hash codes.
-             * \return \c true if global stereochemical features of a molecular graph are considered, and \c false otherwise.
-             * \see includeGlobalStereoFeatures()
-             */
-            bool globalStereoFeaturesIncluded() const;
-
-            /**
              * \brief Calculates the hash code of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to calculate the hash code.
              * \return The hash code of the molecular graph \a molgraph.
@@ -258,14 +236,6 @@ namespace CDPL
             void calcBondHashCodes();
             void calcSHAHashCode();
 
-            void perceiveGlobalStereoFeatures();
-
-            void perceiveGlobalStereoReferenceAtoms();
-            void perceiveGlobalStereoReferenceAtom(const Atom&);
-
-            void perceiveGlobalStereoReferenceBonds();
-            void perceiveGlobalStereoReferenceBond(const Bond&);
-
             typedef std::vector<std::uint64_t> UInt64Array;
             typedef std::vector<std::size_t>   IndexList;
 
@@ -277,11 +247,6 @@ namespace CDPL
             UInt64Array           tmpHashCodes1;
             UInt64Array           tmpHashCodes2;
             UInt64Array           shaInput;
-            IndexList             globalStereoAtoms;
-            IndexList             globalStereoBonds;
-            IndexList             globalStereoReferenceAtoms;
-            IndexList             globalStereoReferenceBonds;
-            bool                  incGlobalStereoFeatures;
             std::uint8_t          shaHashCode[20];
         };
     } // namespace Chem
