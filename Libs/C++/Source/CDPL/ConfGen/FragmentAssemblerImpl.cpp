@@ -1071,8 +1071,6 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
         return;
     }
 
-    const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
-
     if (getOrder(*bond) == 2) {
         // torsion setup for potential stereo double bonds
 
