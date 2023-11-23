@@ -108,7 +108,7 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 {
     const std::size_t ATOMIC_NO_PRIME_TAB_IDX = 0;
     const std::size_t ISO_PRIME_TAB_IDX = ATOMIC_NO_PRIME_TAB_IDX + AtomType::MAX_TYPE + 1; 
-    const std::size_t CHARGE_PRIME_TAB_IDX = ISO_PRIME_TAB_IDX + 3 * AtomType::MAX_TYPE; 
+    const std::size_t CHARGE_PRIME_TAB_IDX = ISO_PRIME_TAB_IDX + 2 * AtomType::MAX_TYPE; 
     const std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
     const std::size_t CONFIG_PRIME_TAB_IDX = AROMATICITY_PRIME_TAB_IDX + 1; 
 
@@ -175,6 +175,27 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
                 case AtomConfiguration::S:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 1);
+ 
+                case AtomConfiguration::r:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 2);
+                    break;
+
+                case AtomConfiguration::s:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 3);
+       
+                case AtomConfiguration::M:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 4);
+                    break;
+
+                case AtomConfiguration::P:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 5);
+ 
+                case AtomConfiguration::m:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 6);
+                    break;
+
+                case AtomConfiguration::p:
+                    init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 7);
 
                 default:
                     break;
@@ -219,13 +240,22 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
             switch (getCIPConfiguration(bond)) {
 
                 case BondConfiguration::CIS:
-                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 2));
-                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 2));
+                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 8));
+                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 8));
                     break;
 
                 case BondConfiguration::TRANS:
-                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 3));
-                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 3));
+                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 9));
+                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 9));
+
+                case BondConfiguration::seqCIS:
+                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 10));
+                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 10));
+                    break;
+
+                case BondConfiguration::seqTRANS:
+                    atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 11));
+                    atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 11));
 
                 default:
                     break;
