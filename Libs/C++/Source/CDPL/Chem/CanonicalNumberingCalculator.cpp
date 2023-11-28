@@ -204,24 +204,7 @@ void Chem::CanonicalNumberingCalculator::init(const MolecularGraph& molgraph, Ut
 
         if (bond_label == 0 && (bondPropertyFlags & BondPropertyFlag::ORDER))
             bond_label = getOrder(bond) + 2;
-    
-        if ((bondPropertyFlags & BondPropertyFlag::CONFIGURATION) && hasCIPConfiguration(bond)) {
-            bond_label *= 3;
-
-            switch (getCIPConfiguration(bond)) {
-
-                case BondConfiguration::E:
-                    bond_label += 1;
-                    break;
-
-                case BondConfiguration::Z:
-                    bond_label += 2;
-
-                default:
-                    break;
-            }
-        }
-    
+        
         Edge* edge1 = allocEdge(this, &bond, bond_label, atom_node2, edge_id);
         Edge* edge2 = allocEdge(this, &bond, bond_label, atom_node1, edge_id++);
 
