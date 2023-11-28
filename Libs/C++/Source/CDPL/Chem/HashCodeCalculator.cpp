@@ -36,9 +36,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomConfiguration.hpp"
-#include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/CIPDescriptor.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Internal/SHA1.hpp"
@@ -76,9 +74,9 @@ namespace
     const std::size_t BOND_RING_FLAG_IDX          = BOND_AROM_FLAG_IDX + 1;
     const std::size_t BOND_CONFIG_E_IDX           = BOND_RING_FLAG_IDX + 1;
     const std::size_t BOND_CONFIG_Z_IDX           = BOND_CONFIG_E_IDX + 1;
-    const std::size_t BOND_CONFIG_seqCIS_IDX      = BOND_CONFIG_Z_IDX + 1;
-    const std::size_t BOND_CONFIG_seqTRANS_IDX    = BOND_CONFIG_seqCIS_IDX + 1;
-    const std::size_t BOND_ORDER_IDX              = BOND_CONFIG_seqTRANS_IDX + 1;
+    const std::size_t BOND_CONFIG_SEQCIS_IDX      = BOND_CONFIG_Z_IDX + 1;
+    const std::size_t BOND_CONFIG_SEQTRANS_IDX    = BOND_CONFIG_SEQCIS_IDX + 1;
+    const std::size_t BOND_ORDER_IDX              = BOND_CONFIG_SEQTRANS_IDX + 1;
     const std::size_t BOND_ORDER_RANGE            = 4;
 
     const std::size_t NUM_ATOM_HASH_ITERATIONS    = 32;
@@ -168,28 +166,28 @@ std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHas
 
     switch (config) {
 
-        case AtomConfiguration::R: 
+        case CIPDescriptor::R: 
             return boost::math::prime(ATOM_CONFIG_R_IDX);
 
-        case AtomConfiguration::S: 
+        case CIPDescriptor::S: 
             return boost::math::prime(ATOM_CONFIG_S_IDX);
 
-        case AtomConfiguration::M: 
+        case CIPDescriptor::M: 
             return boost::math::prime(ATOM_CONFIG_R_IDX);
 
-        case AtomConfiguration::P: 
+        case CIPDescriptor::P: 
             return boost::math::prime(ATOM_CONFIG_S_IDX);
 
-        case AtomConfiguration::r: 
+        case CIPDescriptor::r: 
             return boost::math::prime(ATOM_CONFIG_r_IDX);
 
-        case AtomConfiguration::s: 
+        case CIPDescriptor::s: 
             return boost::math::prime(ATOM_CONFIG_s_IDX);
 
-        case AtomConfiguration::m: 
+        case CIPDescriptor::m: 
             return boost::math::prime(ATOM_CONFIG_m_IDX);
 
-        case AtomConfiguration::p: 
+        case CIPDescriptor::p: 
             return boost::math::prime(ATOM_CONFIG_p_IDX);
 
         default: 
@@ -239,17 +237,17 @@ std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHas
 
     switch (config) {
 
-        case BondConfiguration::E:
+        case CIPDescriptor::E:
             return boost::math::prime(BOND_CONFIG_E_IDX);
 
-        case BondConfiguration::Z:
+        case CIPDescriptor::Z:
             return boost::math::prime(BOND_CONFIG_Z_IDX);
 
-        case BondConfiguration::seqCIS:
-            return boost::math::prime(BOND_CONFIG_seqCIS_IDX);
+        case CIPDescriptor::seqCis:
+            return boost::math::prime(BOND_CONFIG_SEQCIS_IDX);
 
-        case BondConfiguration::seqTRANS:
-            return boost::math::prime(BOND_CONFIG_seqTRANS_IDX);
+        case CIPDescriptor::seqTrans:
+            return boost::math::prime(BOND_CONFIG_SEQTRANS_IDX);
 
         default:
             return 1;

@@ -36,8 +36,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomConfiguration.hpp"
-#include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/Chem/CIPDescriptor.hpp"
 
 
 namespace
@@ -169,32 +168,32 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
             switch (getCIPConfiguration(atom)) {
                     
-                case AtomConfiguration::R:
+                case CIPDescriptor::R:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX);
                     break;
 
-                case AtomConfiguration::S:
+                case CIPDescriptor::S:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 1);
  
-                case AtomConfiguration::r:
+                case CIPDescriptor::r:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 2);
                     break;
 
-                case AtomConfiguration::s:
+                case CIPDescriptor::s:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 3);
        
-                case AtomConfiguration::M:
+                case CIPDescriptor::M:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 4);
                     break;
 
-                case AtomConfiguration::P:
+                case CIPDescriptor::P:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 5);
  
-                case AtomConfiguration::m:
+                case CIPDescriptor::m:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 6);
                     break;
 
-                case AtomConfiguration::p:
+                case CIPDescriptor::p:
                     init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 7);
 
                 default:
@@ -239,21 +238,21 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
             switch (getCIPConfiguration(bond)) {
 
-                case BondConfiguration::CIS:
+                case CIPDescriptor::Z:
                     atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 8));
                     atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 8));
                     break;
 
-                case BondConfiguration::TRANS:
+                case CIPDescriptor::E:
                     atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 9));
                     atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 9));
 
-                case BondConfiguration::seqCIS:
+                case CIPDescriptor::seqCis:
                     atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 10));
                     atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 10));
                     break;
 
-                case BondConfiguration::seqTRANS:
+                case CIPDescriptor::seqTrans:
                     atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 11));
                     atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 11));
 

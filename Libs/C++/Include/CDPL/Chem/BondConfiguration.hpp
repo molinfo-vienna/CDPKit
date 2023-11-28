@@ -37,56 +37,35 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
+         * \brief Provides constants that are used to specify the <em>cis/trans</em> configuration of bonds.
          */
         namespace BondConfiguration
         {
 
             /**
-             * \brief Specifies that the configuration of the bond is undefined.
+             * \brief Specifies that the configuration of the bond is completely undefined.
              */
             const unsigned int UNDEF = 0;
 
             /**
-             * \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric)
-             *        to be assigned a configuration.
+             * \brief Specifies that a bond does not meet the requirements to be assigned a configuration.
              */
             const unsigned int NONE = 0x1;
 
             /**
-             * \brief Specifies that the bond has <em>E (or trans)</em> configuration.
+             * \brief Specifies that the bond has <em>trans</em> configuration.
              */
-            const unsigned int E = 0x2;
+            const unsigned int TRANS = 0x2;
 
             /**
-             * \brief Specifies that the bond has <em>trans (or E)</em> configuration.
+             * \brief Specifies that the bond has <em>cis</em> configuration.
              */
-            const unsigned int TRANS = E;
+            const unsigned int CIS = 0x4;
 
             /**
-             * \brief Specifies that the bond has <em>Z (or cis)</em> configuration.
-             */
-            const unsigned int Z = 0x4;
-
-            /**
-             * \brief Specifies that the bond has <em>cis (or Z)</em> configuration.
-             */
-            const unsigned int CIS = Z;
-
-            /**
-             * \brief Specifies that the bond is a stereogenic center but has no defined configuration.
+             * \brief Specifies that the bond meets the requirements but has no defined configuration.
              */
             const unsigned int EITHER = 0x8;
-            
-            /**
-             * \brief Specifies that the bond has \e seqTrans configuration.
-             */
-            const unsigned int seqTRANS = 16;
-            
-            /**
-             * \brief Specifies that the bond has \e seqCis configuration.
-             */
-            const unsigned int seqCIS = 17;
           
         } // namespace BondConfiguration
     } // namespace Chem

@@ -35,6 +35,7 @@ namespace CDPLPythonChem
     void exportAtomTypes();
     void exportAtomConfigurations();
     void exportBondConfigurations();
+    void exportCIPDescriptors();
     void exportBondStereoFlags();
     void exportHybridizationStates();
     void exportReactionCenterStates();

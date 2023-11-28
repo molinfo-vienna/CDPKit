@@ -165,9 +165,17 @@ set(cdpl-chem_LIB_SRCS
     ConnectedSubstructureSet.cpp
     ComponentSet.cpp
     PiElectronSystemList.cpp
+
+    CIPConfigurationLabeller.cpp
+    CIPConfigurationLabellerImpl.cpp
+    #CIPStereoCenter.cpp
+    #CIPSp2BondCenter.cpp
+    #CIPTetrahedralCenter.cpp
+    #CIPSorter.cpp
+    #CIPSequenceRule.cpp
     
-    MorganNumberingCalculator.cpp
     CIPPriorityCalculator.cpp
+    MorganNumberingCalculator.cpp
     CanonicalNumberingCalculator.cpp
     Atom2DCoordinatesCalculator.cpp
     Hydrogen3DCoordinatesCalculator.cpp

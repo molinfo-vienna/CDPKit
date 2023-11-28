@@ -43,13 +43,12 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies that the configuration of the atom is undefined.
+             * \brief Specifies that the configuration of the atom is completely undefined.
              */
             const unsigned int UNDEF  = 0;
 
             /**
-             * \brief Specifies that the atom is not a stereogenic center and thus cannot be assigned a 
-             *        configuration.
+             * \brief Specifies that the atom does not meet the requirements to be assigned a configuration.
              */
             const unsigned int NONE   = 0x1;
 
@@ -64,44 +63,14 @@ namespace CDPL
             const unsigned int S      = 0x4;
 
             /**
-             * \brief Specifies that the atom is a stereogenic center but has no defined configuration.
+             * \brief Specifies that the atom meets the requirements but has no defined configuration.
              */
             const unsigned int EITHER = 0x8;
 
             /**
-             * \brief Specifies that the atom has \e r configuration.
-             */
-            const unsigned int r      = 16;
-
-            /**
-             * \brief Specifies that the atom has \e s configuration.
-             */
-            const unsigned int s      = 17;
-
-            /**
-             * \brief Specifies that the atom has \e P configuration.
-             */
-            const unsigned int P      = 18;
-
-            /**
-             * \brief Specifies that the atom has \e M configuration.
-             */
-            const unsigned int M      = 19;
-
-            /**
-             * \brief Specifies that the atom has \e p configuration.
-             */
-            const unsigned int p      = 20;
-
-            /**
-             * \brief Specifies that the atom has \e m configuration.
-             */
-            const unsigned int m      = 21;
-
-            /**
              * \brief Specifies that the geometry of the ligand arrangement is <em>square planar</em>.
              */
-            const unsigned int SP     = 22;
+            const unsigned int SP     = 16;
 
             /**
              * \brief Specifies that the geometry of the ligand arrangement is <em>trigonal bipyramidal</em>.

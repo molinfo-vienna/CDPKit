@@ -117,8 +117,8 @@ void Chem::BondDirectionCalculator::init(const MolecularGraph& molgraph, Util::U
 
         switch (config) {
 
-            case BondConfiguration::E:
-            case BondConfiguration::Z:
+            case BondConfiguration::TRANS:
+            case BondConfiguration::CIS:
                 if (!stereo_desc.isValid(bond))
                     config = BondConfiguration::EITHER;
 

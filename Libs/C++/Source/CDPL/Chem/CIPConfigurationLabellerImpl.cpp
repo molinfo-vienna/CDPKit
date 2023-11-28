@@ -1,5 +1,5 @@
 /* 
- * AtomConfigurationExport.cpp 
+ * CIPConfigurationLabellerImpl.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,33 +21,42 @@
  * Boston, MA 02111-1307, USA.
  */
 
-
-#include <boost/python.hpp>
+ 
+#include "StaticInit.hpp"
 
 #include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 
-#include "NamespaceExports.hpp"
+#include "CIPConfigurationLabellerImpl.hpp"
 
 
-namespace 
+using namespace CDPL;
+
+
+Chem::CIPConfigurationLabellerImpl::CIPConfigurationLabellerImpl() // TODO
+{}
+
+Chem::CIPConfigurationLabellerImpl::CIPConfigurationLabellerImpl(const CIPConfigurationLabellerImpl& labeller) // TODO
+{}
+            
+void Chem::CIPConfigurationLabellerImpl::setup(const MolecularGraph& molgraph)
 {
-
-    struct AtomConfiguration {};
+    // TODO
 }
 
-
-void CDPLPythonChem::exportAtomConfigurations()
+unsigned int Chem::CIPConfigurationLabellerImpl::getLabel(const Atom& atom)
 {
-    using namespace boost;
-    using namespace CDPL;
+    // TODO
+    return AtomConfiguration::UNDEF;
+}
 
-    python::class_<AtomConfiguration, boost::noncopyable>("AtomConfiguration", python::no_init)
-        .def_readonly("UNDEF", &Chem::AtomConfiguration::UNDEF)
-        .def_readonly("NONE", &Chem::AtomConfiguration::NONE)
-        .def_readonly("R", &Chem::AtomConfiguration::R)
-        .def_readonly("S", &Chem::AtomConfiguration::S)
-        .def_readonly("EITHER", &Chem::AtomConfiguration::EITHER)
-        .def_readonly("SP", &Chem::AtomConfiguration::SP)
-        .def_readonly("TB", &Chem::AtomConfiguration::TB)
-        .def_readonly("OH", &Chem::AtomConfiguration::OH);
+unsigned int Chem::CIPConfigurationLabellerImpl::getLabel(const Bond& bond)
+{
+
+    return BondConfiguration::UNDEF;
+}
+            
+void Chem::CIPConfigurationLabellerImpl::copy(const CIPConfigurationLabellerImpl& labeller)
+{
+    // TODO
 }

@@ -44,11 +44,7 @@ void CDPLPythonChem::exportBondConfigurations()
     python::class_<BondConfiguration, boost::noncopyable>("BondConfiguration", python::no_init)
         .def_readonly("UNDEF", &Chem::BondConfiguration::UNDEF)
         .def_readonly("NONE", &Chem::BondConfiguration::NONE)
-        .def_readonly("E", &Chem::BondConfiguration::E)
         .def_readonly("TRANS", &Chem::BondConfiguration::TRANS)
-        .def_readonly("Z", &Chem::BondConfiguration::Z)
         .def_readonly("CIS", &Chem::BondConfiguration::CIS)
-        .def_readonly("EITHER", &Chem::BondConfiguration::EITHER)
-        .def_readonly("seqCIS", &Chem::BondConfiguration::seqCIS)
-        .def_readonly("seqTRANS", &Chem::BondConfiguration::seqTRANS);
+        .def_readonly("EITHER", &Chem::BondConfiguration::EITHER);
 }

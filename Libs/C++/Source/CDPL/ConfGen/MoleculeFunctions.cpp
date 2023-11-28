@@ -130,8 +130,8 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 
             switch (descr.getConfiguration()) {
 
-                case BondConfiguration::E:
-                case BondConfiguration::Z:
+                case BondConfiguration::TRANS:
+                case BondConfiguration::CIS:
                 case BondConfiguration::NONE:
                     setStereoDescriptor(bond, descr);
                     continue;

@@ -101,7 +101,8 @@ set(chem_MOD_SRCS
     Hydrogen3DCoordinatesCalculatorExport.cpp 
     MorganNumberingCalculatorExport.cpp 
     CanonicalNumberingCalculatorExport.cpp 
-    CIPPriorityCalculatorExport.cpp 
+    CIPPriorityCalculatorExport.cpp
+    CIPConfigurationLabellerExport.cpp 
     BondStereoFlagCalculatorExport.cpp 
     BondDirectionCalculatorExport.cpp 
     BondOrderCalculatorExport.cpp 
@@ -224,7 +225,8 @@ set(chem_MOD_SRCS
     ReactionRoleExport.cpp 
     AtomTypeExport.cpp 
     AtomConfigurationExport.cpp 
-    BondConfigurationExport.cpp 
+    BondConfigurationExport.cpp
+    CIPDescriptorExport.cpp 
     BondStereoFlagExport.cpp 
     HybridizationStateExport.cpp 
     ReactionCenterStatusExport.cpp 

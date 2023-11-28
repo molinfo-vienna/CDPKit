@@ -98,22 +98,22 @@ Cairo 2D Graphics Library homepage: http://www.cairographics.org/
 <tr>
 <td valign="top">\anchor CATA<i>[CATA]</i></td>
 <td valign="top">
-J. Greene et al., Chemical Function Queries for 3D Database Search, 
+J. Greene <i>et al.</i>, Chemical Function Queries for 3D Database Search, 
 <i>J. Chem. Inf. Comput. Sci.</i> <b>1994</b>, 34, 1297-1308
 </td>
 </tr>
 
 <tr>
-<td valign="top">\anchor CTFILE<i>[CTFILE]</i></td>
+<td valign="top">\anchor CIPJM<i>[CIPJM]</i></td>
 <td valign="top">
-MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/public/ctfile/ctfile.jsp
+J. Mayfield <i>et al.</i>, Perception and labelling of stereogenic centres in chemical structures: https://github.com/SiMolecule/centres
 </td>
 </tr>
 <tr><td></td>
 <td valign="top">
-A. Dalby <i>et al.</i>,
-Description of several chemical structure file formats used by computer programs developed at Molecular Design Limited,
-<i>J. Chem. Inf. Comput. Sci.</i> <b>1992</b>, 32, 244-255
+R. M. Hanson <i>et al.</i>,
+Algorithmic Analysis of Cahn–Ingold–Prelog Rules of Stereochemistry: Proposals for Revised Rules and a Guide for Machine Implementation,
+<i>J. Chem. Inf. Model.</i> <b>2018</b>, 58, 9, 1755–1765
 </td>
 </tr>
 
@@ -134,6 +134,20 @@ An open source chemical structure curation pipeline using RDKit,
 </tr>
 
 <tr>
+<td valign="top">\anchor CTFILE<i>[CTFILE]</i></td>
+<td valign="top">
+MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/public/ctfile/ctfile.jsp
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+A. Dalby <i>et al.</i>,
+Description of several chemical structure file formats used by computer programs developed at Molecular Design Limited,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1992</b>, 32, 244-255
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor DTPFP<i>[DTPFP]</i></td>
 <td valign="top">
 Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
@@ -150,7 +164,7 @@ Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/
 <tr>
 <td valign="top">\anchor GRAIL<i>[GRAIL]</i></td>
 <td valign="top">
-D. A. Schuetz et al., GRAIL: GRids of phArmacophore Interaction fieLds, 
+D. A. Schuetz <i>et al.</i>, GRAIL: GRids of phArmacophore Interaction fieLds, 
 <i>J. Chem. Theory Comput.</i> <b>2018</b>, 11, 4958-4970
 </td>
 </tr>

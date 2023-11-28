@@ -311,8 +311,8 @@ namespace
             configuration = stereo_descr.getConfiguration();
         }    
     
-        configuration &= (BondConfiguration::NONE | BondConfiguration::Z |
-                          BondConfiguration::E | BondConfiguration::EITHER);
+        configuration &= (BondConfiguration::NONE | BondConfiguration::CIS |
+                          BondConfiguration::TRANS | BondConfiguration::EITHER);
 
         if (configuration == 0)
             return;
@@ -328,10 +328,10 @@ namespace
         if ((configuration & BondConfiguration::EITHER) != 0)
             geom_expr_str.append(EITHER_CONFIGURATION_SYMBOL);
 
-        if ((configuration & BondConfiguration::Z) != 0)
+        if ((configuration & BondConfiguration::CIS) != 0)
             geom_expr_str.append(CIS_CONFIGURATION_SYMBOL);
 
-        if ((configuration & BondConfiguration::E) != 0)
+        if ((configuration & BondConfiguration::TRANS) != 0)
             geom_expr_str.append(TRANS_CONFIGURATION_SYMBOL);
     }
 

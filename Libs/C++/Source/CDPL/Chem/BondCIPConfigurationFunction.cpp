@@ -32,6 +32,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/Chem/CIPDescriptor.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
@@ -105,7 +106,7 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
     const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 
     if (!stereo_desc.isValid(bond))
-        return BondConfiguration::UNDEF;
+        return CIPDescriptor::UNDEF;
 
     const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
 
@@ -116,19 +117,19 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
 
     switch (bond_config) {
 
-        case BondConfiguration::Z:
+        case BondConfiguration::CIS:
             return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ?
-                    BondConfiguration::E : BondConfiguration::Z);
+                    CIPDescriptor::E : CIPDescriptor::Z);
 
-        case BondConfiguration::E:
+        case BondConfiguration::TRANS:
             return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ? 
-                    BondConfiguration::Z : BondConfiguration::E);
+                    CIPDescriptor::Z : CIPDescriptor::E);
 
         case BondConfiguration::EITHER:
-            return BondConfiguration::EITHER;
+            return CIPDescriptor::NS;
             
         default:
-            return BondConfiguration::UNDEF;
+            return CIPDescriptor::UNDEF;
     }
 }
     

@@ -194,19 +194,19 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
     
         switch (descr.getConfiguration()) {
 
-            case BondConfiguration::E:
-            case BondConfiguration::Z:
+            case BondConfiguration::CIS:
+            case BondConfiguration::TRANS:
                 if (isExcluded(bond, molgraph, true))
                     continue;
                 break;
 
-            case AtomConfiguration::UNDEF:
+            case BondConfiguration::UNDEF:
                 if (descr.getNumReferenceAtoms() != 4)
                     continue;
  
             case BondConfiguration::EITHER:
                 if (!isExcluded(bond, molgraph, false)) {
-                    bondDescrs.getLastElement().setConfiguration(BondConfiguration::E);
+                    bondDescrs.getLastElement().setConfiguration(BondConfiguration::TRANS);
                     break;
                 }
                 
@@ -379,6 +379,6 @@ void Chem::StereoisomerGenerator::flipConfiguration(const StereoCenterID& ctr_id
     } else {
         StereoDescriptor& descr = bondDescrs[ctr_id.second];
 
-        descr.setConfiguration(descr.getConfiguration() == BondConfiguration::E ? BondConfiguration::Z : BondConfiguration::E);
+        descr.setConfiguration(descr.getConfiguration() == BondConfiguration::TRANS ? BondConfiguration::CIS : BondConfiguration::TRANS);
     }
 }
