@@ -115,12 +115,12 @@ namespace CDPL
 
             unsigned int getFragmentConformers();
 
-            bool         copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag,
-                                              FragmentTreeNode* node);
-            bool         fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag,
-                                                            FragmentTreeNode* node);
-            bool         fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag,
-                                                          FragmentTreeNode* node);
+            bool copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag,
+                                      FragmentTreeNode* node);
+            bool fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag,
+                                                    FragmentTreeNode* node);
+            bool fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag,
+                                                  FragmentTreeNode* node);
             unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag,
                                                     FragmentTreeNode* node);
 
@@ -168,7 +168,7 @@ namespace CDPL
             typedef std::pair<std::size_t, std::size_t>         IndexPair;
             typedef std::vector<IndexPair>                      IndexPairList;
             typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
-            typedef std::unique_ptr<MMFF94BondLengthTable>        BondLengthTablePtr;
+            typedef std::unique_ptr<MMFF94BondLengthTable>      BondLengthTablePtr;
 
             ConformerDataCache             confDataCache;
             FragmentAssemblerSettings      settings;

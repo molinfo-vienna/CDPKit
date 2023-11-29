@@ -339,7 +339,7 @@ void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment&
 }
 
 void ConfGen::FragmentAssemblerImpl::buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
-                                                                           const FragmentTreeNode* frag_node)
+                                                                        const FragmentTreeNode* frag_node)
 {
     const FragmentTreeNode::IndexArray& atom_inds = frag_node->getAtomIndices();
     const CanonicalFragment::AtomMapping& entry_atom_map = canonFrag.getAtomMapping();
