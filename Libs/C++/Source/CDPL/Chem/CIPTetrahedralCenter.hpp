@@ -132,7 +132,7 @@ namespace CDPL
           private:
             unsigned int label(CIPDigraph::Node& node, CIPSequenceRule& comp);
  
-            CIPDigraph::Node::EdgeList edges;
+            CIPDigraph::EdgeList edges;
         }
     } // namespace Chem
 } // namespace CDPL

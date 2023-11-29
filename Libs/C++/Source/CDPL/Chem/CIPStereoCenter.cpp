@@ -51,28 +51,19 @@
 
 
 #include "CDPL/Chem/CIPDescriptor.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "CIPStereoCenter.hpp"
 
 
 using namespace CDPL;
 
-           
-Chem::CIPDigraph& Chem::CIPStereoCenter::getDigraph() const
-{
-    if (!digraph)
-        throw Base::OperationFailed("CIPStereoCenter: CIPDigraph has not been set");
-                
-    return *digraph;
-}
 
 unsigned int Chem::CIPStereoCenter::label(CIPDigraph::Node& node, CIPDigraph& digraph, CIPSequenceRule& comp)
 {
     return CIPDescriptor::UNDEF;
 }
 
-Chem::CIPDigraph::Edge* Chem::CIPStereoCenter::findInternalEdge(const CIPDigraph::Node::EdgeList& edges, const Atom* f1, const Atom* f2)
+Chem::CIPDigraph::Edge* Chem::CIPStereoCenter::findInternalEdge(const CIPDigraph::EdgeList& edges, const Atom* f1, const Atom* f2)
 {
     for (auto edge : edges) {
         if (edge->getBeg().isDuplicate() || edge->getEnd().isDuplicate())
@@ -99,7 +90,7 @@ bool Chem::CIPStereoCenter::isInternalEdge(const CIPDigraph::Edge& edge, const A
     return false;
 }
 
-void Chem::CIPStereoCenter::removeInternalEdges(CIPDigraph::Node::EdgeList& edges, const Atom* f1, const Atom* f2)
+void Chem::CIPStereoCenter::removeInternalEdges(CIPDigraph::EdgeList& edges, const Atom* f1, const Atom* f2)
 {
     edges.erase(
         std::remove_if(edges.begin(), edges.end(),
@@ -107,7 +98,7 @@ void Chem::CIPStereoCenter::removeInternalEdges(CIPDigraph::Node::EdgeList& edge
         edges.end());
 }
 
-void Chem::CIPStereoCenter::removeDuplicatedEdges(CIPDigraph::Node::EdgeList& edges)
+void Chem::CIPStereoCenter::removeDuplicatedEdges(CIPDigraph::EdgeList& edges)
 {
     edges.erase(
         std::remove_if(edges.begin(), edges.end(),

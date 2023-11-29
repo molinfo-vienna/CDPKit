@@ -87,8 +87,8 @@ int Chem::CIPSequenceRule::recursiveCompare(CIPDigraph::Edge& a, CIPDigraph::Edg
         CIPDigraph::Edge* curr_b = edgeQueue2.front(); edgeQueue2.pop_front();
         CIPDigraph::Node& a_node = curr_a->getEnd();
         CIPDigraph::Node& b_node = curr_b->getEnd();
-        CIPDigraph::Node::EdgeList& as = a_node.getEdges();
-        CIPDigraph::Node::EdgeList& bs = b_node.getEdges();
+        CIPDigraph::EdgeList& as = a_node.getEdges();
+        CIPDigraph::EdgeList& bs = b_node.getEdges();
 
         // shallow sort first
         if (sort(a_node, as, false).wasWildcardFound())

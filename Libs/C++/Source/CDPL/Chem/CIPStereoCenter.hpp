@@ -124,7 +124,10 @@ namespace CDPL
                 this->digraph = &digraph;
             }
 
-            CIPDigraph& getDigraph() const;
+            CIPDigraph& getDigraph() const
+            {
+                return *digraph;
+            }
 
             virtual unsigned int label(CIPSequenceRule& comp) = 0;
 
@@ -231,13 +234,13 @@ namespace CDPL
             }
 
           protected:
-            static CIPDigraph::Edge* findInternalEdge(const CIPDigraph::Node::EdgeList& edges, const Atom* f1, const Atom* f2);
+            static CIPDigraph::Edge* findInternalEdge(const CIPDigraph::EdgeList& edges, const Atom* f1, const Atom* f2);
 
             static bool isInternalEdge(const CIPDigraph::Edge& edge, const Atom* f1, const Atom* f2);
 
-            static void removeInternalEdges(CIPDigraph::Node::EdgeList& edges, const Atom* f1, const Atom* f2);
+            static void removeInternalEdges(CIPDigraph::EdgeList& edges, const Atom* f1, const Atom* f2);
         
-            static void removeDuplicatedEdges(CIPDigraph::Node::EdgeList& edges);
+            static void removeDuplicatedEdges(CIPDigraph::EdgeList& edges);
 
           private:
             const Atom*  focusAtoms[2];

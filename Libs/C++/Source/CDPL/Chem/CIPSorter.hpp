@@ -100,18 +100,18 @@ namespace CDPL
                 return numRules;
             }
 
-            CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::Node::EdgeList& edges) const
+            CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges) const
             {
                 return prioritise(node, edges, true);
             }
 
-            CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::Node::EdgeList& edges, bool deep) const;
+            CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges, bool deep) const;
          
             int compareLigands(const CIPDigraph::Node& node, CIPDigraph::Edge& a, CIPDigraph::Edge& b, bool deep) const;
             
-            void getGroups(const CIPDigraph::Node::EdgeList& edges, GroupList& groups) const;
+            void getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups) const;
 
-            std::size_t getNumGroups(const CIPDigraph::Node::EdgeList& edges) const;
+            std::size_t getNumGroups(const CIPDigraph::EdgeList& edges) const;
 
           private:
             CIPSequenceRule* const* rules;

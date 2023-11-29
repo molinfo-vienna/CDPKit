@@ -129,12 +129,12 @@ namespace CDPL
                 return sorter;
             }
 
-            CIPSortingResult sort(const CIPDigraph::Node& node, CIPDigraph::Node::EdgeList& edges, bool deep)
+            CIPSortingResult sort(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges, bool deep)
             {
                 return sorter.prioritise(node, edges, deep);
             }
 
-            CIPSortingResult sort(const CIPDigraph::Node& node, CIPDigraph::Node::EdgeList& edges)
+            CIPSortingResult sort(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges)
             {
                 return sort(node, edges, true);
             }

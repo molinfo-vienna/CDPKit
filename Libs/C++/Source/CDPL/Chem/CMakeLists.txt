@@ -168,6 +168,7 @@ set(cdpl-chem_LIB_SRCS
 
     CIPConfigurationLabeller.cpp
     CIPConfigurationLabellerImpl.cpp
+    #CIPDigraph
     #CIPStereoCenter.cpp
     #CIPSp2BondCenter.cpp
     #CIPTetrahedralCenter.cpp

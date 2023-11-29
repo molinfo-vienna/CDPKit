@@ -59,7 +59,7 @@
 using namespace CDPL;
 
 
-Chem::CIPSortingResult Chem::CIPSorter::prioritise(const CIPDigraph::Node& node, CIPDigraph::Node::EdgeList& edges, bool deep) const
+Chem::CIPSortingResult Chem::CIPSorter::prioritise(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges, bool deep) const
 {
     bool unique = true;
     bool found_wc = false;
@@ -113,7 +113,7 @@ int Chem::CIPSorter::compareLigands(const CIPDigraph::Node& node, CIPDigraph::Ed
     return 0;
 }
 
-void Chem::CIPSorter::getGroups(const CIPDigraph::Node::EdgeList& edges, GroupList& groups) const
+void Chem::CIPSorter::getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups) const
 {
     // would be nice to have this integrated whilst sorting - may provide a small speed increase
     // but as most of our lists are small we take use ugly sort then group approach
@@ -129,7 +129,7 @@ void Chem::CIPSorter::getGroups(const CIPDigraph::Node::EdgeList& edges, GroupLi
     }
 }
 
-std::size_t Chem::CIPSorter::getNumGroups(const CIPDigraph::Node::EdgeList& edges) const
+std::size_t Chem::CIPSorter::getNumGroups(const CIPDigraph::EdgeList& edges) const
 {
     // would be nice to have this integrated whilst sorting - may provide a small speed increase
     // but as most of our lists are small we take use ugly sort then group approach
