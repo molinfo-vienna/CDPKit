@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <new>
 #include <memory>
+#include <functional>
 
 
 namespace CDPL
