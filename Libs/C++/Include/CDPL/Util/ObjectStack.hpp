@@ -34,9 +34,6 @@
 #include <algorithm>
 #include <new>
 #include <memory>
-#include <functional>
-
-#include "CDPL/Util/Dereferencer.hpp"
 
 
 namespace CDPL
@@ -134,8 +131,7 @@ namespace CDPL
             {
                 if (cleanFunc)
                     std::for_each(allocObjects.begin(), allocObjects.begin() + freeIndex,
-                                  std::bind(cleanFunc, std::bind(Util::Dereferencer<SharedObjectPointer, ObjectType&>(),
-                                                                 std::placeholders::_1)));
+                                  [this](const SharedObjectPointer& ptr) { cleanFunc(*ptr); });
                 freeIndex = 0;
 
                 if (maxSize > 0 && allocObjects.size() > maxSize)
