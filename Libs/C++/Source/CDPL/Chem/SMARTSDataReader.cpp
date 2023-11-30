@@ -54,6 +54,7 @@
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "SMARTSDataReader.hpp"
 #include "SMARTSData.hpp"
@@ -321,6 +322,8 @@ void Chem::SMARTSDataReader::parseSMARTS(Molecule& mol, const Atom* prev_atom)
             return;
 
         default:
+            if (Internal::IsWhitespace()(c))
+                return;
             break;
     }
 

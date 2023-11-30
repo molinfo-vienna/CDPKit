@@ -362,6 +362,9 @@ void Chem::SMILESDataReader::parseSMILES(Molecule& mol, Atom* prev_atom)
             return;
 
         default:
+            if (Internal::IsWhitespace()(c))
+                return;
+            
             break;
     }
 
