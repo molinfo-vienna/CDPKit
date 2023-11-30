@@ -56,7 +56,8 @@ bool Chem::generateSMILES(const MolecularGraph& molgraph, std::string& smiles, b
     setSMILESWriteRingBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
     setSMILESWriteAromaticBondsParameter(smi_writer, bond_flags & BondPropertyFlag::AROMATICITY);
     setSMILESWriteKekuleFormParameter(smi_writer, bond_flags & BondPropertyFlag::ORDER);
-
+    setSMILESRecordFormatParameter(smi_writer, "S");
+    
     bool result = !(!smi_writer.write(molgraph));
 
     smiles = oss.str();
