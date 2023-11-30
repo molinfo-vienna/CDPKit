@@ -573,7 +573,8 @@ bool Chem::ChEMBLStandardizer::removeExplicitHydrogens(Molecule& mol) const
     setRingFlags(mol, false);
     perceiveHybridizationStates(mol, false);
     setAromaticityFlags(mol, false);
-    perceiveAtomStereoCenters(mol, false, false);
+    calcCIPPriorities(mol, false);
+    perceiveAtomStereoCenters(mol, false, true);
     calcAtomStereoDescriptors(mol, false);
     
     bool changes = false;

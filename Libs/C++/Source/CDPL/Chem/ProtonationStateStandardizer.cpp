@@ -802,6 +802,8 @@ bool Chem::ProtonationStateStandardizer::isRemovableHydrogen(const Atom& atom) c
         case BondStereoFlag::REVERSE_UP:
         case BondStereoFlag::DOWN:
         case BondStereoFlag::REVERSE_DOWN:
+        case BondStereoFlag::EITHER:
+        case BondStereoFlag::REVERSE_EITHER:
             if (con_atom.getNumBonds() == 3 || con_atom.getNumBonds() == 4)
                 return false;
 

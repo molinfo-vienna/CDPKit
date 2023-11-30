@@ -228,13 +228,13 @@ void Chem::BondStereoFlagCalculator::assignStereoFlags(Util::UIArray& flags)
             switch (stereo_flag) {
 
                 case BondStereoFlag::UP:
-                    flags[bond_idx] = BondStereoFlag::REVERSE_UP;
-                    //flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
+                    //flags[bond_idx] = BondStereoFlag::REVERSE_UP;
+                    flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
                     break;
 
                 case BondStereoFlag::DOWN:
-                    flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
-                    //flags[bond_idx] = BondStereoFlag::REVERSE_UP;
+                    //flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
+                    flags[bond_idx] = BondStereoFlag::REVERSE_UP;
                     break;
 
                 case BondStereoFlag::EITHER:
@@ -568,8 +568,8 @@ void Chem::BondStereoFlagCalculator::StereoAtomInfo::findBestBondOrder(const Uti
             ordered_ligs[i].second |= 2;
     }
 
-    std::sort(ordered_ligs, ordered_ligs + numBonds, 
-              std::bind(std::less<unsigned int>(), std::bind(&LigandTypeDescr::second, _1), std::bind(&LigandTypeDescr::second, _2)));
+    std::sort(ordered_ligs, ordered_ligs + numBonds,
+              [](const LigandTypeDescr& d1, const LigandTypeDescr& d2) -> bool { return (d1.second < d2.second); });
 
     for (std::size_t i = 0; i < numBonds; i++)
         orderedLigands[i] = ligands[ordered_ligs[i].first];
@@ -586,7 +586,7 @@ bool Chem::BondStereoFlagCalculator::StereoAtomInfo::configMatches(const Util::U
 
     for (std::size_t i = 0; i < numBonds; i++) {
         switch (stereo_flags[ligands[i].second]) {
-
+/*
             case BondStereoFlag::UP:
                 z_signs[i] = 1;
                 continue;
@@ -594,7 +594,7 @@ bool Chem::BondStereoFlagCalculator::StereoAtomInfo::configMatches(const Util::U
             case BondStereoFlag::DOWN:
                 z_signs[i] = -1;
                 continue;
-/*
+*/
             case BondStereoFlag::UP:
                 z_signs[i] = (bondEndFlags[i] ? 1 : -1);
                 continue;
@@ -602,7 +602,7 @@ bool Chem::BondStereoFlagCalculator::StereoAtomInfo::configMatches(const Util::U
             case BondStereoFlag::DOWN:
                 z_signs[i] = (bondEndFlags[i] ? -1 : 1);
                 continue;
-*/
+
             case BondStereoFlag::EITHER:
                 return (configuration == AtomConfiguration::EITHER);
 
