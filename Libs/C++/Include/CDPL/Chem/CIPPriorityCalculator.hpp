@@ -31,7 +31,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -55,8 +54,6 @@ namespace CDPL
         {
 
           public:
-            typedef std::function<std::size_t(const Atom&)> ImplicitHydrogenCountFunction;
-
             /**
              * \brief Constructs the \c %CIPPriorityCalculator instance.
              */
@@ -71,10 +68,6 @@ namespace CDPL
              *         (i.e. the \e CIP priority of an atom is accessible via its index).
              */
             CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
-
-            void setImplicitHydrogenCountFunction(const ImplicitHydrogenCountFunction& func);
-
-            const ImplicitHydrogenCountFunction& getImplicitHydrogenCountFunction();
 
             /**
              * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
@@ -142,10 +135,9 @@ namespace CDPL
 
             typedef Util::ObjectStack<AtomNode> NodeCache;
 
-            NodeCache                     nodeCache;
-            NodeList                      expAtomNodes;
-            NodeList                      atomNodes;
-            ImplicitHydrogenCountFunction implHCountFunc;
+            NodeCache nodeCache;
+            NodeList  expAtomNodes;
+            NodeList  atomNodes;
         };
     } // namespace Chem
 } // namespace CDPL

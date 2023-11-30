@@ -46,24 +46,13 @@ using namespace CDPL;
 
 
 Chem::CIPPriorityCalculator::CIPPriorityCalculator(): 
-    nodeCache(MAX_NODE_CACHE_SIZE), implHCountFunc(&getImplicitHydrogenCount)
+    nodeCache(MAX_NODE_CACHE_SIZE)
 {}
 
 Chem::CIPPriorityCalculator::CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities):
-    nodeCache(MAX_NODE_CACHE_SIZE), implHCountFunc(&getImplicitHydrogenCount)
+    nodeCache(MAX_NODE_CACHE_SIZE)
 {
     calculate(molgraph, priorities);
-}
-
-void Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction(const ImplicitHydrogenCountFunction& func)
-{
-    implHCountFunc = func;
-}
-
-const Chem::CIPPriorityCalculator::ImplicitHydrogenCountFunction& 
-Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction()
-{
-    return implHCountFunc;
 }
 
 void Chem::CIPPriorityCalculator::calculate(const MolecularGraph& molgraph, Util::STArray& priorities)
@@ -94,7 +83,7 @@ void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STA
 
         std::size_t atom_type = getType(atom) % 1024;
         std::size_t isotope = getIsotope(atom) % 1024;
-        std::size_t impl_h_count = implHCountFunc(atom);
+        std::size_t impl_h_count = getImplicitHydrogenCount(atom);
 
         AtomNode* atom_node = allocNode(atom_type * 1024 + isotope);
 
