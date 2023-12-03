@@ -23,32 +23,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Copyright (c) 2020 John Mayfield
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
 /**
  * \file
  * \brief Definition of the class CDPL::Chem::CIPDigraph.
@@ -66,6 +40,8 @@
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 
+#include "CIPMancude.hpp"
+
 
 namespace CDPL
 {
@@ -76,11 +52,11 @@ namespace CDPL
         class MolGraph;
         class Atom;
         class Bond;
-        
+
         class CIPDigraph
         {
 
-        public:
+          public:
             class Node;
             class Edge;
 
@@ -90,15 +66,15 @@ namespace CDPL
             class Edge
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<Edge> SharedPointer;
 
                 Edge();
 
-                void set(Node& beg, const Bond* bond, Node& end);
+                void init(Node& beg, const Bond* bond, Node& end);
 
-                Node& getOther(const Node& node) const ;
- 
+                Node& getOther(const Node& node) const;
+
                 Node& getBeg() const
                 {
                     return *beg;
@@ -136,12 +112,12 @@ namespace CDPL
 
                 bool isEnd(const Node& node) const
                 {
-                    return node.equals(end);
+                    return (&node == end);
                 }
 
-            private:
-                const Bond*  bond;
+              private:
                 Node*        beg;
+                const Bond*  bond;
                 Node*        end;
                 unsigned int auxDescr;
             };
@@ -149,9 +125,9 @@ namespace CDPL
             class Node
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<Node> SharedPointer;
-       
+
                 /**
                  * Flag indicates whether the node has been expanded.
                  */
@@ -162,13 +138,13 @@ namespace CDPL
                  * at a ring closure.
                  */
                 static constexpr unsigned int RING_DUPLICATE = 0x2;
-                
+
                 /**
                  * Flag indicates whether the node was duplicated
                  * at a bond with order &gt; 1.
                  */
                 static constexpr unsigned int BOND_DUPLICATE = 0x4;
-                
+
                 /**
                  * Mask to check if a node is duplicated.
                  */
@@ -181,10 +157,17 @@ namespace CDPL
                 static constexpr unsigned int IMPL_HYDROGEN = 0x8;
 
                 Node();
-   
-                void set(CIPDigraph& g, const Util::BitSet& vis_mask, std::size_t atom_idx, const Atom* atom, 
-                         unsigned int atomic_no, unsigned short atomic_no_den, std::size_t root_dist, unsigned int flags);
- 
+
+                void init(CIPDigraph& dg, std::size_t num_atoms, std::size_t atom_idx, const Atom* atom,
+                          unsigned int atomic_no);
+
+                void init(const Node& parent, CIPDigraph& dg, const Util::BitSet& vis_mask, std::size_t atom_idx, const Atom* atom,
+                          unsigned int atomic_no_num, unsigned short atomic_no_den, std::size_t root_dist,
+                          unsigned int flags);
+
+                void init(const Node& parent, CIPDigraph& dg, const Atom* atom, unsigned int atomic_no_num, unsigned short atomic_no_den,
+                          std::size_t root_dist, unsigned int flags);
+
                 CIPDigraph& getDigraph() const
                 {
                     return *digraph;
@@ -205,9 +188,9 @@ namespace CDPL
                     return atom;
                 }
 
-                unsigned int getAtomicNo() const
+                unsigned int getAtomicNoNumerator() const
                 {
-                    return atomicnumNum;
+                    return atomicNoNum;
                 }
 
                 unsigned short getAtomicNoDenominator() const
@@ -225,15 +208,20 @@ namespace CDPL
                     auxDescr = descr;
                 }
 
+                const Util::BitSet& getVisAtomMask() const
+                {
+                    return visAtoms;
+                }
+
                 EdgeList& getEdges();
- 
-                void getEdges(EdgeList& res, const Atom* end);
 
-                void getEdges(EdgeList& res, const Edge* excl);
+                void getEdges(EdgeList& edges, const Atom* end);
 
-                void getOutEdges(EdgeList& res);
+                void getEdges(EdgeList& edges, const Edge* excl = 0);
 
-                void getNonTerminalOutEdges(EdgeList& res);
+                void getOutEdges(EdgeList& edges);
+
+                void getNonTerminalOutEdges(EdgeList& edges);
 
                 bool isSet(unsigned int mask) const
                 {
@@ -247,7 +235,7 @@ namespace CDPL
 
                 bool isTerminal() const
                 {
-                    return (visAtoms.empty() || ((flags & EXPANDED) && edges.size() == 1));
+                    return (visAtoms.empty() || ((flags & EXPANDED) && edges.size() <= 1));
                 }
 
                 bool isExpanded() const
@@ -255,22 +243,28 @@ namespace CDPL
                     return (flags & EXPANDED);
                 }
 
-            private:
+                const Node* getParent() const
+                {
+                    return parent;
+                }
+
+              private:
                 CIPDigraph*    digraph;
                 const Atom*    atom;
                 std::size_t    rootDist;
-                unsigned int   atomicNo;
+                unsigned int   atomicNoNum;
                 unsigned short atomicNoDen;
                 unsigned int   auxDescr;
                 unsigned int   flags;
                 Util::BitSet   visAtoms;
                 EdgeList       edges;
+                const Node*    parent;
             };
 
             CIPDigraph();
 
             ~CIPDigraph();
-            
+
             void setMolecularGraph(const MolecularGraph& molgraph);
 
             const MolecularGraph& getMolecularGraph() const
@@ -278,7 +272,7 @@ namespace CDPL
                 return *molGraph;
             }
 
-            Node* init(const Atom& atom);
+            Node& init(const Atom& atom);
 
             std::size_t getNumNodes() const
             {
@@ -294,26 +288,24 @@ namespace CDPL
             {
                 return (!tmpRoot ? root : tmpRoot);
             }
- 
+
             /**
              * Sets the root node of this digraph by flipping all the
              * 'up' edges to be 'down'.
              *
              * @param new_root the new root
              */
-            void changeRoot(Node* new_root);
+            void changeRoot(Node& new_root);
 
-            void getNodes(const Atom& atom, NodeList& res);
-  
+            void getNodes(const Atom& atom, NodeList& nodes);
+
             void expandAll();
 
-            void expand(Node* beg);
- 
             /**
              * Used exclusively for Rule 6, we set one atom as the reference.
              * @param ref reference atom
              */
-            void setRule6Ref(const Atom* ref) 
+            void setRule6Ref(const Atom* ref)
             {
                 rule6Ref = ref;
             }
@@ -326,12 +318,20 @@ namespace CDPL
                 return rule6Ref;
             }
 
-        private:
-            Node* newChild(const Node& parent, std::size_t atom_idx, const Atom* atom);
-            Node* newTerminalChild(const Node& parent, std::size_t idx, const Atom* atom, unsigned int flags);
+          private:
+            void expand(Node& beg);
 
+            const Node& traceBack(const Node& start, const Atom* atom) const;
+    
+            Node& newNode(const Node& parent, std::size_t atom_idx, const Atom* atom);
+            Node& newTerminalNode(const Node& parent, const Atom* atom, unsigned int flags, std::size_t root_dist,
+                                  const CIPMancude::Fraction* atomic_no_fract);
+            
             void addEdge(Node& beg, const Bond* bond, Node& end);
 
+            Node* allocNode();
+            
+            typedef std::deque<Node*>       NodeQueue;
             typedef Util::ObjectStack<Node> NodeCache;
             typedef Util::ObjectStack<Edge> EdgeCache;
 
@@ -342,7 +342,10 @@ namespace CDPL
             Node*                 tmpRoot;
             std::size_t           numNodes;
             const Atom*           rule6Ref;
-        }
+            NodeQueue             nodeQueue;
+            EdgeList              edgeList;
+            CIPMancude            mancude;
+        };
     } // namespace Chem
 } // namespace CDPL
 

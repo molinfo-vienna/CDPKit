@@ -168,12 +168,13 @@ set(cdpl-chem_LIB_SRCS
 
     CIPConfigurationLabeller.cpp
     CIPConfigurationLabellerImpl.cpp
-    #CIPDigraph
-    #CIPStereoCenter.cpp
-    #CIPSp2BondCenter.cpp
-    #CIPTetrahedralCenter.cpp
-    #CIPSorter.cpp
-    #CIPSequenceRule.cpp
+    CIPDigraph.cpp
+    CIPMancude.cpp
+    CIPStereoCenter.cpp
+    CIPSp2BondCenter.cpp
+    CIPTetrahedralCenter.cpp
+    CIPSorter.cpp
+    CIPSequenceRule.cpp
     
     CIPPriorityCalculator.cpp
     MorganNumberingCalculator.cpp

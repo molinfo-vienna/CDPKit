@@ -23,32 +23,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Copyright (c) 2020 John Mayfield
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
 /**
  * \file
  * \brief Definition of the class CDPL::Chem::CIPStereoCenter.
@@ -58,6 +32,7 @@
 #define CDPL_CHEM_CIPSTEREOCENTER_HPP
 
 #include <initializer_list>
+#include <algorithm>
 #include <cstddef>
 #include <memory>
 
@@ -79,13 +54,18 @@ namespace CDPL
           public:
             typedef std::unique_ptr<CIPStereoCenter> UniquePointer;
             
-            CIPStereoCenter(std::initializer_list<const Atom*> foci, std::initializer_list<const Atom*> carriers, unsigned int cfg):
-                focusAtoms(foci), numFocusAtoms(foci.size()), carrierAtoms(carriers), numCarrierAtoms(carriers.size()), config(cfg), digraph(0)
-            {}
+            CIPStereoCenter(CIPDigraph& digraph, std::initializer_list<const Atom*> foci, std::initializer_list<const Atom*> carriers, unsigned int cfg):
+                numFocusAtoms(foci.size()), numCarrierAtoms(carriers.size()), config(cfg), digraph(&digraph)
+            {
+                std::copy(foci.begin(), foci.end(), focusAtoms);
+                std::copy(carriers.begin(), carriers.end(), carrierAtoms);
+            }
 
-            CIPStereoCenter(const Atom* focus, std::initializer_list<const Atom*> carriers, unsigned int cfg):
-                focusAtoms({focus}), numFocusAtoms(1), carrierAtoms(carriers), numCarrierAtoms(carriers.size()), config(cfg), digraph(0)
-            {}
+            CIPStereoCenter(CIPDigraph& digraph, const Atom* focus, std::initializer_list<const Atom*> carriers, unsigned int cfg):
+                focusAtoms{focus}, numFocusAtoms(1), numCarrierAtoms(carriers.size()), config(cfg), digraph(&digraph)
+            {
+                std::copy(carriers.begin(), carriers.end(), carrierAtoms);
+            }
 
             virtual ~CIPStereoCenter() {}
 
@@ -117,11 +97,6 @@ namespace CDPL
             std::size_t getNumCarrierAtoms() const
             {
                 return numCarrierAtoms;
-            }
-
-            void setDigraph(CIPDigraph& digraph)
-            {
-                this->digraph = &digraph;
             }
 
             CIPDigraph& getDigraph() const
@@ -249,7 +224,7 @@ namespace CDPL
             std::size_t  numCarrierAtoms;
             unsigned int config;
             CIPDigraph*  digraph;
-        }
+        };
     } // namespace Chem
 } // namespace CDPL
 

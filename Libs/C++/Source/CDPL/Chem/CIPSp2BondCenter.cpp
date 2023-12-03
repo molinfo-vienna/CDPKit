@@ -23,32 +23,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/*
- * Copyright (c) 2020 John Mayfield
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
 
 #include <utility>
 #include <algorithm>
@@ -64,7 +38,7 @@ using namespace CDPL;
 
 unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
 {
-    const Atom* const* foci = getFoci();
+    const Atom* const* foci = getFocusAtoms();
     const Atom* focus1 = foci[0];
     const Atom* focus2 = foci[1];
 
@@ -72,9 +46,9 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
     CIPDigraph::Node* root1 = digraph.getRoot();
                 
     if (!root1)
-        root1 = digraph.init(focus1);
+        root1 = &digraph.init(*focus1);
     else
-        digraph.changeRoot(root1);
+        digraph.changeRoot(*root1);
 
     const CIPDigraph::Edge* internal = findInternalEdge(root1->getEdges(), focus1, focus2);
 
@@ -88,21 +62,18 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
     if (!sort_res1.isUnique())
         return CIPDescriptor::NONE;
 
-    CIPDigraph::Node* root2 = internal->getOther(*root1);
-
-    if (!root2)
-        return CIPDescriptor::UNDEF;
+    CIPDigraph::Node& root2 = internal->getOther(*root1);
                     
     digraph.changeRoot(root2);
                 
-    root2->getEdges(edges2, internal);
+    root2.getEdges(edges2, internal);
 
-    CIPSortingResult sort_res2 = comp.sort(*root2, edges2);
+    CIPSortingResult sort_res2 = comp.sort(root2, edges2);
                 
     if (!sort_res2.isUnique())
         return CIPDescriptor::NONE;
 
-    const Atom* const* carriers = getCarriers();
+    const Atom* const* carriers = getCarrierAtoms();
     unsigned int config = getConfig();
 
     // swap
@@ -130,7 +101,7 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
 
 unsigned int Chem::CIPSp2BondCenter::label(CIPDigraph::Node& root1, CIPDigraph& digraph, CIPSequenceRule& comp)
 {
-    const Atom* const* foci = getFoci();
+    const Atom* const* foci = getFocusAtoms();
     const Atom* focus1 = foci[0];
     const Atom* focus2 = foci[1];
 
@@ -139,21 +110,18 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPDigraph::Node& root1, CIPDigraph& 
     if (!internal)
         return CIPDescriptor::UNDEF;
                 
-    CIPDigraph::Node* root2 = internal->getOther(root1);
-
-    if (!root2)
-        return CIPDescriptor::UNDEF;
+    CIPDigraph::Node& root2 = internal->getOther(root1);
              
     root1.getEdges(edges1, internal);
-    root2->getEdges(edges2, internal);
+    root2.getEdges(edges2, internal);
               
-    const Atom* carriers[2] = { getCarriers()[0], getCarriers()[1] };
+    const Atom* carriers[2] = { getCarrierAtoms()[0], getCarrierAtoms()[1] };
     unsigned int config = getConfig();
 
     if (root1.getAtom() == focus2)
         std::swap(carriers[1], carriers[0]);
 
-    digraph.changeRoot(&root1);
+    digraph.changeRoot(root1);
                 
     CIPSortingResult sort_res1 = comp.sort(root1, edges1);
                 
