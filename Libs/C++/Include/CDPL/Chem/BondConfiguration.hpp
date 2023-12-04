@@ -45,22 +45,22 @@ namespace CDPL
             /**
              * \brief Specifies that the configuration of the bond is completely undefined.
              */
-            const unsigned int UNDEF = 0;
+            const unsigned int UNDEF  = 0;
 
             /**
              * \brief Specifies that a bond does not meet the requirements to be assigned a configuration.
              */
-            const unsigned int NONE = 0x1;
+            const unsigned int NONE   = 0x1;
 
             /**
              * \brief Specifies that the bond has <em>trans</em> configuration.
              */
-            const unsigned int TRANS = 0x2;
+            const unsigned int TRANS  = 0x2;
 
             /**
              * \brief Specifies that the bond has <em>cis</em> configuration.
              */
-            const unsigned int CIS = 0x4;
+            const unsigned int CIS    = 0x4;
 
             /**
              * \brief Specifies that the bond meets the requirements but has no defined configuration.
