@@ -1127,15 +1127,17 @@ const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTors
     if (torRuleMatcher.findMatches(bond, molgraph, false)) 
         return &torRuleMatcher.getMatch(0); 
 
-    torRuleMatcher.setTorsionLibrary(TorsionLibrary::get());
+    if (getOrder(bond) == 1) {
+        torRuleMatcher.setTorsionLibrary(TorsionLibrary::get());
 
-    if (torRuleMatcher.findMatches(bond, molgraph, false)) 
-        return &torRuleMatcher.getMatch(0); 
+        if (torRuleMatcher.findMatches(bond, molgraph, false)) 
+            return &torRuleMatcher.getMatch(0); 
 
-    torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
+        torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
-    if (torRuleMatcher.findMatches(bond, molgraph, false)) 
-        return &torRuleMatcher.getMatch(0); 
+        if (torRuleMatcher.findMatches(bond, molgraph, false)) 
+            return &torRuleMatcher.getMatch(0); 
+    }
 
     return 0;
 }
