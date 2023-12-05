@@ -1856,6 +1856,8 @@
 	  <angle value="-135.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
           <angle value="50.0" tolerance1="30.00" tolerance2="0.00" score="3.5"/>
           <angle value="-50.0" tolerance1="30.00" tolerance2="0.00" score="3.5"/>
+          <angle value="90.0" tolerance1="0.00" tolerance2="0.00" score="3.5"/>
+          <angle value="-90.0" tolerance1="0.00" tolerance2="0.00" score="3.5"/>
         </torsions>
       </rule>
       <rule pattern="[CX3H2:1]=[CX3:2]!@[CX3:3]=[C:4]">
