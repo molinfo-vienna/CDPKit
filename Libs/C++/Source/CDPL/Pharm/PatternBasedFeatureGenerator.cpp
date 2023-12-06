@@ -109,7 +109,7 @@ void Pharm::PatternBasedFeatureGenerator::generate(const Chem:: MolecularGraph& 
             const AtomBondMapping& mapping = *m_it;
 
             if (!atom_mask)
-                atom_mask = bitSetCache.getRaw();
+                atom_mask = bitSetCache.get();
 
             createMatchedAtomMask(mapping.getAtomMapping(), *atom_mask, true);
 
@@ -317,7 +317,7 @@ void Pharm::PatternBasedFeatureGenerator::getExcludeMatches()
         for (SubstructureSearch::ConstMappingIterator m_it = x_ptn.subSearch->getMappingsBegin(), 
                  m_end = x_ptn.subSearch->getMappingsEnd(); m_it != m_end; ++m_it) {
 
-            Util::BitSet* atom_mask = bitSetCache.getRaw();
+            Util::BitSet* atom_mask = bitSetCache.get();
             const AtomMapping& atom_mapping = m_it->getAtomMapping();
 
             createMatchedAtomMask(atom_mapping, *atom_mask, true);

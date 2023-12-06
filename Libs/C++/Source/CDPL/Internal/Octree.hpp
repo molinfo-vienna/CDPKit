@@ -390,7 +390,7 @@ namespace CDPL
                                                                                                                 ScalarT extent, std::size_t start_idx,
                                                                                                                 std::size_t end_idx, std::size_t size)
         {
-            Octant* octant = octantCache.getRaw();
+            Octant* octant = octantCache.get();
 
             for (std::size_t i = 0; i < 8; i++)
                 octant->child[i] = 0;

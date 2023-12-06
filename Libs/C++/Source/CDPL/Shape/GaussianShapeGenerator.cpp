@@ -42,16 +42,9 @@
 using namespace CDPL;
 
 
-namespace
-{
-
-    const std::size_t MAX_SHAPE_CACHE_SIZE = 500;
-}
-
-
 Shape::GaussianShapeGenerator::GaussianShapeGenerator():
-    shapeCache(MAX_SHAPE_CACHE_SIZE), defPharmGen(), pharmGen(&defPharmGen), genMolShape(true),
-    genPharmShape(true), incHydrogens(false), multiConf(true), atomRadius(-1.0), atomHardness(2.7), 
+    defPharmGen(), pharmGen(&defPharmGen), genMolShape(true), genPharmShape(true),
+    incHydrogens(false), multiConf(true), atomRadius(-1.0), atomHardness(2.7), 
     ftrRadius(-1.0), ftrHardness(5.0)
 {}
 
@@ -158,7 +151,6 @@ Pharm::DefaultPharmacophoreGenerator& Shape::GaussianShapeGenerator::getDefaultP
 const Shape::GaussianShapeSet& Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
     shapes.clear();
-    shapeCache.putAll();
     
     if (!genMolShape && !genPharmShape)
         return shapes;
@@ -166,7 +158,7 @@ const Shape::GaussianShapeSet& Shape::GaussianShapeGenerator::generate(const Che
     std::size_t num_confs = (multiConf ? getNumConformations(molgraph) : 0);
 
     if (num_confs == 0) {
-        GaussianShape::SharedPointer shape_ptr = shapeCache.get();
+        GaussianShape::SharedPointer shape_ptr(new GaussianShape());
 
         createShape(molgraph, Chem::Atom3DCoordinatesFunctor(), *shape_ptr);
         shapes.addElement(shape_ptr);
@@ -178,13 +170,13 @@ const Shape::GaussianShapeSet& Shape::GaussianShapeGenerator::generate(const Che
 
     for (std::size_t i = 0; i < num_confs; i++) {
         if (i == 0) {
-            tmplt_shape_ptr = shapeCache.get();
+            tmplt_shape_ptr.reset(new GaussianShape());
 
             createShape(molgraph, Chem::AtomConformer3DCoordinatesFunctor(i), *tmplt_shape_ptr);
             shapes.addElement(tmplt_shape_ptr);
 
         } else {
-            GaussianShape::SharedPointer shape_ptr = shapeCache.get();
+            GaussianShape::SharedPointer shape_ptr(new GaussianShape());
 
             *shape_ptr = *tmplt_shape_ptr;
 

@@ -45,8 +45,8 @@
 namespace
 {
 
-    const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE           = 1000;
-    const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 2000;
+    const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE           = 100;
+    const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 250;
     const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
     const std::size_t ABORT_CALLBACK_ALIGNMENT_COUNT       = 10;
     const std::size_t ABORT_CALLBACK_SYM_MAPPING_COUNT     = 1;
@@ -272,7 +272,7 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
     if (!isValidSymMapping(mapping))
         return false;
 
-    IndexArray* idx_mapping = idxArrayCache.getRaw();
+    IndexArray* idx_mapping = idxArrayCache.get();
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
     idx_mapping->clear();

@@ -1131,7 +1131,7 @@ void Vis::ReactionView2D::freeGraphicsPrimitives()
 
 Vis::StructureView2D* Vis::ReactionView2D::allocComponentView(const Chem::Molecule& comp)
 {
-    StructureView2D* view = compViewCache.getRaw();
+    StructureView2D* view = compViewCache.get();
 
     setAlignmentParameter(*view, Alignment::CENTER);
     setSizeAdjustmentParameter(*view, SizeAdjustment::BEST_FIT);
@@ -1145,7 +1145,7 @@ Vis::StructureView2D* Vis::ReactionView2D::allocComponentView(const Chem::Molecu
 
 Vis::PolygonPrimitive2D* Vis::ReactionView2D::allocPolygonPrimitive()
 {
-    PolygonPrimitive2D* prim = polygonCache.getRaw();
+    PolygonPrimitive2D* prim = polygonCache.get();
 
     prim->clear();
 
@@ -1154,7 +1154,7 @@ Vis::PolygonPrimitive2D* Vis::ReactionView2D::allocPolygonPrimitive()
 
 Vis::LineSegmentListPrimitive2D* Vis::ReactionView2D::allocLineSegListPrimitive()
 {
-    LineSegmentListPrimitive2D* prim = lineSegListCache.getRaw();
+    LineSegmentListPrimitive2D* prim = lineSegListCache.get();
 
     prim->clear();
 

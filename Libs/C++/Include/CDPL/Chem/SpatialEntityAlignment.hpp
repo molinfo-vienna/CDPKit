@@ -619,7 +619,7 @@ template <typename T>
 CDPL::Util::STPairArray*
 CDPL::Chem::SpatialEntityAlignment<T>::allocTopMapping()
 {
-    return topMappingCache.getRaw();
+    return topMappingCache.get();
 }
 
 #endif // CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP

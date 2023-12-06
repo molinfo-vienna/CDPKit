@@ -131,10 +131,8 @@ namespace
 
 
 Chem::SMARTSDataWriter::SMARTSDataWriter(const Base::DataIOBase& io_base): 
-    ioBase(io_base), nodeCache(std::bind(&SMARTSDataWriter::createNode, this),
-                               NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
-    edgeCache(std::bind(&SMARTSDataWriter::createEdge, this),
-              EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
+    ioBase(io_base), nodeCache(std::bind(&SMARTSDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
+    edgeCache(std::bind(&SMARTSDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
 {}
 
 bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)
@@ -446,7 +444,7 @@ Chem::SMARTSDataWriter::DFSTreeEdge* Chem::SMARTSDataWriter::createEdge()
 
 Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::allocNode()
 {
-    DFSTreeNode* node = nodeCache.getRaw();
+    DFSTreeNode* node = nodeCache.get();
 
     node->clear();
     componentNodes.push_back(node);
@@ -456,7 +454,7 @@ Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::allocNode()
 
 Chem::SMARTSDataWriter::DFSTreeEdge* Chem::SMARTSDataWriter::allocEdge()
 {
-    return edgeCache.getRaw();
+    return edgeCache.get();
 }
 
 void Chem::SMARTSDataWriter::writeSMARTS(std::ostream& os, const MolecularGraph& molgraph)

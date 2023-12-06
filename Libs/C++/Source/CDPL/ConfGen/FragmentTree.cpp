@@ -46,12 +46,12 @@ using namespace CDPL;
 
 ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
     confDataCache(max_conf_data_cache_size),
-    nodeCache(std::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
+    nodeCache(std::bind(&FragmentTree::createTreeNode, this), MAX_TREE_NODE_CACHE_SIZE), 
     molGraph(0)
 {
     nodeCache.setCleanupFunction(std::bind(&FragmentTreeNode::clearConformers, std::placeholders::_1));
 
-    rootNode = nodeCache.getRaw();
+    rootNode = nodeCache.get();
 }
 
 ConfGen::FragmentTree::~FragmentTree() {}
@@ -241,7 +241,7 @@ ConfGen::ConformerData::SharedPointer ConfGen::FragmentTree::allocConformerData(
 
 ConfGen::FragmentTreeNode* ConfGen::FragmentTree::allocTreeNode()
 {
-    FragmentTreeNode* node = nodeCache.getRaw();
+    FragmentTreeNode* node = nodeCache.get();
 
     node->setParent(0);
     node->clearConformers();

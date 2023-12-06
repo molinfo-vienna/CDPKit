@@ -598,7 +598,7 @@ bool Shape::GaussianShapeAlignment::getResultIndex(const ResultID& res_id, std::
 
 Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::allocShapeFunction(const GaussianShape& shape)
 {
-    GaussianShapeFunction* func = shapeFuncCache.getRaw();
+    GaussianShapeFunction* func = shapeFuncCache.get();
 
     func->setMaxOrder(algdShapeFunc.getMaxOrder());
     func->setDistanceCutoff(algdShapeFunc.getDistanceCutoff());

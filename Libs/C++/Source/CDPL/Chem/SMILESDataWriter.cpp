@@ -84,10 +84,8 @@ using namespace CDPL;
 
 
 Chem::SMILESDataWriter::SMILESDataWriter(const Base::DataIOBase& io_base): 
-    ioBase(io_base), nodeCache(std::bind(&SMILESDataWriter::createNode, this),
-                               NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
-    edgeCache(std::bind(&SMILESDataWriter::createEdge, this),
-              EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
+    ioBase(io_base), nodeCache(std::bind(&SMILESDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
+    edgeCache(std::bind(&SMILESDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
 {}
 
 Chem::SMILESDataWriter::~SMILESDataWriter() {}
@@ -808,7 +806,7 @@ Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::createEdge()
 
 Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::allocNode()
 {
-    DFSTreeNode* node = nodeCache.getRaw();
+    DFSTreeNode* node = nodeCache.get();
 
     node->clear();
     componentNodes.push_back(node);
@@ -818,7 +816,7 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::allocNode()
 
 Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::allocEdge()
 {
-    return edgeCache.getRaw();
+    return edgeCache.get();
 }
 
 void Chem::SMILESDataWriter::freeNodes()

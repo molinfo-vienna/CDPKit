@@ -90,14 +90,14 @@ namespace CDPL
             RMSDConformerSelector& operator=(const RMSDConformerSelector&);
 
             void buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask);
-            void setupSymMappingValidationData(const Util::BitSet&        stable_config_atom_mask,
+            void setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
                                                const Math::Vector3DArray& conf_coords);
 
             bool processSymMapping(const Chem::MolecularGraph&  molgraph,
                                    const Chem::AtomBondMapping& mapping);
             bool isValidSymMapping(const Chem::AtomBondMapping& mapping) const;
 
-            VectorArrayPtr buildCoordsArrayForMapping(const IndexArray&          mapping,
+            VectorArrayPtr buildCoordsArrayForMapping(const IndexArray& mapping,
                                                       const Math::Vector3DArray& conf_coords);
 
             typedef std::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;

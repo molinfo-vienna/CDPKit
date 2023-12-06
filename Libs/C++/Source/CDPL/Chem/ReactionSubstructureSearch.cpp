@@ -690,7 +690,7 @@ void Chem::ReactionSubstructureSearch::freeAtomBondMappings()
 
 Chem::AtomBondMapping* Chem::ReactionSubstructureSearch::createAtomBondMapping()
 {
-    AtomBondMapping* mapping = mappingCache.getRaw();
+    AtomBondMapping* mapping = mappingCache.get();
     AtomMapping& atom_mapping = mapping->getAtomMapping();
     BondMapping& bond_mapping = mapping->getBondMapping();
 

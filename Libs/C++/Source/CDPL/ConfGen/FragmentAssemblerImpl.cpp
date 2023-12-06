@@ -92,8 +92,8 @@ namespace
         return (entry1.getScore() < entry2.getScore());
     } 
 
-    const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 5000;
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE      = 5000;
+    const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 500;
+    const std::size_t MAX_CONF_DATA_CACHE_SIZE      = 500;
 
     const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE     = 15.0 / 180.0 * M_PI;
 }
@@ -219,8 +219,6 @@ void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_mol
     std::call_once(initAssemblerTorLibFlag, &initAssemblerTorLib);
 
     fragConfGen.getSettings() = settings.getFragmentBuildSettings();
-
-    confDataCache.putAll();
 
     invertibleNMask.resize(parent_molgraph.getNumAtoms());
     invertibleNMask.reset();
@@ -369,10 +367,8 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 
             initCanonicalFragment(frag, node);
 
-            if (!fragConfGen.generateConformerFromInputCoordinates(canonFrag)) { 
-                confDataCache.put();
+            if (!fragConfGen.generateConformerFromInputCoordinates(canonFrag)) 
                 return false;
-            };
 
             Math::Vector3DArray::StorageType& entry_coords_data = fragConfGen.getConformer(0).getData();
 

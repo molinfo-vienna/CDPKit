@@ -51,6 +51,7 @@ namespace CDPL
          * free objects a new object instance will be created on the fly. Allocated objects are returned as
          * smart pointers which keep track of all current references to the object. If the reference count
          * drops to zero at some point, the object is automatically returned to the pool it was allocated from.
+         *
          * \e Warning: Due to this automatic return of unused objects it is necessary that all objects have returned
          * to their source pool before the pool instance gets destroyed!!!!
          */

@@ -836,7 +836,7 @@ bool Chem::Atom2DCoordinatesCalculator::layoutChildNodes(std::size_t depth)
 
 Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::allocEdge(const Atom* spiro_ctr, LGNode* n1, LGNode* n2)
 {
-    LGEdge* edge_ptr = edgeCache.getRaw();
+    LGEdge* edge_ptr = edgeCache.get();
 
     edge_ptr->init(molGraph, spiro_ctr, n1, n2);
 
@@ -847,7 +847,7 @@ Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::al
 
 Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::allocEdge(const Bond* bond, LGNode* n1, LGNode* n2)
 {
-    LGEdge* edge_ptr = edgeCache.getRaw();
+    LGEdge* edge_ptr = edgeCache.get();
 
     edge_ptr->init(molGraph, bond, n1, n2);
 
@@ -858,7 +858,7 @@ Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::al
 
 Chem::Atom2DCoordinatesCalculator::RingInfo* Chem::Atom2DCoordinatesCalculator::allocRingInfo(const Fragment& ring)
 {
-    RingInfo* ring_info_ptr = ringInfoCache.getRaw();
+    RingInfo* ring_info_ptr = ringInfoCache.get();
 
     ring_info_ptr->init(molGraph, ring, numAtoms, numBonds);
     
@@ -870,7 +870,7 @@ Chem::Atom2DCoordinatesCalculator::RingInfo* Chem::Atom2DCoordinatesCalculator::
 Chem::Atom2DCoordinatesCalculator::RingSysNode* 
 Chem::Atom2DCoordinatesCalculator::allocRingSysNode(const RingInfo* ring_info, Math::Vector2DArray& coords)
 {
-    RingSysNode* node_ptr = ringSysNodeCache.getRaw();
+    RingSysNode* node_ptr = ringSysNodeCache.get();
 
     node_ptr->init(molGraph, ring_info, coords, procAtomList, procBondList);
     
@@ -881,7 +881,7 @@ Chem::Atom2DCoordinatesCalculator::allocRingSysNode(const RingInfo* ring_info, M
 
 Chem::Atom2DCoordinatesCalculator::AtomNode* Chem::Atom2DCoordinatesCalculator::allocAtomNode(const Atom* atom, Math::Vector2DArray& coords)
 {
-    AtomNode* node_ptr = atomNodeCache.getRaw();
+    AtomNode* node_ptr = atomNodeCache.get();
 
     node_ptr->init(molGraph, atom, atomPriorityTable[molGraph->getAtomIndex(*atom)],
                    coords, procAtomList, procBondList);

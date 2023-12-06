@@ -136,7 +136,7 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
     volume = 0.0;
     
     for (std::size_t i = 0; i < numElements; i++) {
-        GaussianProduct* prod = prodCache.getRaw();
+        GaussianProduct* prod = prodCache.get();
 
         prod->init(shape.getElement(i));
         prod->setIndex(i);
@@ -149,7 +149,7 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
     if (maxOrder == 1)
         return;
 
-    currProduct = prodCache.getRaw();
+    currProduct = prodCache.get();
     currProduct->clearFactors();
     
     for (std::size_t i = 0; i < numElements; i++)
@@ -178,7 +178,7 @@ void Shape::GaussianProductList::generateProducts(std::size_t elem_idx)
     std::size_t num_fact = currProduct->getNumFactors();
     
     if (num_fact > 1) {
-        GaussianProduct* new_prod = prodCache.getRaw();
+        GaussianProduct* new_prod = prodCache.get();
 
         new_prod->copyFactors(*currProduct); 
         new_prod->init();
@@ -233,7 +233,7 @@ void Shape::GaussianProductList::copy(const GaussianProductList& prod_list)
     
     for (ProductList::const_iterator it = prod_list.products.begin(), end = prod_list.products.end(); it != end; ++it) {
         const GaussianProduct* prod = *it;
-        GaussianProduct* prod_copy = prodCache.getRaw();
+        GaussianProduct* prod_copy = prodCache.get();
 
         products.push_back(prod_copy);
                 

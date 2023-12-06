@@ -41,7 +41,7 @@
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
-#include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
@@ -163,7 +163,7 @@ namespace CDPL
 
             unsigned int invokeCallbacks() const;
 
-            typedef Util::ObjectStack<ConformerData>            ConformerDataCache;
+            typedef Util::ObjectPool<ConformerData>             ConformerDataCache;
             typedef std::vector<const Chem::Bond*>              BondList;
             typedef std::pair<std::size_t, std::size_t>         IndexPair;
             typedef std::vector<IndexPair>                      IndexPairList;

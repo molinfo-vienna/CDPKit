@@ -82,9 +82,9 @@ namespace
         }
     }
 
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 15000;
+    const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 1000;
     const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
-    const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 50000;
+    const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 2000;
     const double      COMP_CONFORMER_SPACING                 = 4.0;
     const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
     const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
@@ -1017,7 +1017,7 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
                                              comb_energy > (torFragConfCombData.front()->energy + settings.getEnergyWindow() * FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR)))
             return;
 
-        ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
+        ConfCombinationData* frag_conf_comb = confCombDataCache.get();
 
         frag_conf_comb->energy = comb_energy;
         frag_conf_comb->confIndices = currConfComb;

@@ -592,7 +592,7 @@ void Chem::CanonicalNumberingCalculator::restoreState()
 Chem::CanonicalNumberingCalculator::AtomNode* 
 Chem::CanonicalNumberingCalculator::allocNode(Calculator* calculator, const Atom* atom, std::uint64_t label, std::size_t id)
 {
-    AtomNode* node = nodeCache.getRaw();
+    AtomNode* node = nodeCache.get();
 
     node->init(calculator, atom, label, id);
 
@@ -603,7 +603,7 @@ Chem::CanonicalNumberingCalculator::Edge*
 Chem::CanonicalNumberingCalculator::allocEdge(const Calculator* calculator, const Bond* bond, std::uint64_t label,
                                              AtomNode* nbr_node, std::size_t id)
 {
-    Edge* edge = edgeCache.getRaw();
+    Edge* edge = edgeCache.get();
 
     edge->init(calculator, bond, label, nbr_node, id);
 

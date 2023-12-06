@@ -355,7 +355,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 
 Chem::SymmetryClassCalculator::AtomNode* Chem::SymmetryClassCalculator::allocNode(std::uint64_t class_id)
 {
-    AtomNode* node = nodeCache.getRaw();
+    AtomNode* node = nodeCache.get();
 
     node->clear();
     node->setSymClassID(class_id);

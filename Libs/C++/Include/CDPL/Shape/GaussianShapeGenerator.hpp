@@ -36,7 +36,6 @@
 #include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
-#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL
@@ -113,9 +112,6 @@ namespace CDPL
             template <typename CoordsFunc>
             void createShape(const CoordsFunc& coords_func, GaussianShape& shape) const;
 
-            typedef Util::ObjectStack<GaussianShape> ShapeCache;
-
-            ShapeCache                           shapeCache;
             Pharm::DefaultPharmacophoreGenerator defPharmGen;
             Pharm::PharmacophoreGenerator*       pharmGen;
             bool                                 genMolShape;

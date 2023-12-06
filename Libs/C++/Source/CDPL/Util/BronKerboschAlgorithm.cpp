@@ -41,7 +41,7 @@ Util::BronKerboschAlgorithm::BronKerboschAlgorithm(const BronKerboschAlgorithm& 
     adjMatrix(bka.adjMatrix), nodeDegrees(bka.nodeDegrees)
 {
     for (StateStack::const_iterator it = bka.states.begin(), end = bka.states.end(); it != end; ++it) {
-        State* state = stateCache.getRaw();
+        State* state = stateCache.get();
 
         *state = **it;
         states.push_back(state);
@@ -57,7 +57,7 @@ Util::BronKerboschAlgorithm& Util::BronKerboschAlgorithm::operator=(const BronKe
     stateCache.putAll();
 
     for (StateStack::const_iterator it = bka.states.begin(), end = bka.states.end(); it != end; ++it) {
-        State* state = stateCache.getRaw();
+        State* state = stateCache.get();
 
         *state = **it;
         states.push_back(state);
@@ -81,7 +81,7 @@ void Util::BronKerboschAlgorithm::init(const BitSetArray& adj_mtx)
     stateCache.putAll();
 
     std::size_t num_nodes = adj_mtx.getSize();
-    State* init_state = stateCache.getRaw();
+    State* init_state = stateCache.get();
 
     init_state->curr.resize(num_nodes);
     init_state->curr.reset();
@@ -127,7 +127,7 @@ bool Util::BronKerboschAlgorithm::nextClique(BitSet& clique)
             if ((*adjMatrix)[state->u].test(state->v))
                 continue;
         
-            State* new_state = stateCache.getRaw();
+            State* new_state = stateCache.get();
 
             *new_state = *state;
             new_state->curr.set(state->v);

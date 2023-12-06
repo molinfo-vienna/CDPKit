@@ -617,7 +617,7 @@ void Chem::MaxCommonAtomSubstructureSearch::clearMappings()
 
 Chem::AtomBondMapping* Chem::MaxCommonAtomSubstructureSearch::createAtomBondMapping()
 {
-    AtomBondMapping* mapping = mappingCache.getRaw();
+    AtomBondMapping* mapping = mappingCache.get();
     AtomMapping& atom_mapping = mapping->getAtomMapping();
     BondMapping& bond_mapping = mapping->getBondMapping();
 
@@ -647,7 +647,7 @@ void Chem::MaxCommonAtomSubstructureSearch::freeAtomBondMapping()
 
 Chem::MaxCommonAtomSubstructureSearch::AGNode* Chem::MaxCommonAtomSubstructureSearch::allocAGNode(const Atom* query_atom, const Atom* assoc_atom)
 {
-    AGNode* node = nodeCache.getRaw();
+    AGNode* node = nodeCache.get();
 
     node->setQueryAtom(query_atom);
     node->setAssocAtom(assoc_atom);
@@ -659,7 +659,7 @@ Chem::MaxCommonAtomSubstructureSearch::AGNode* Chem::MaxCommonAtomSubstructureSe
 
 Chem::MaxCommonAtomSubstructureSearch::AGEdge* Chem::MaxCommonAtomSubstructureSearch::allocAGEdge(const Bond* query_bond, const Bond* assoc_bond)
 {
-    AGEdge* edge = edgeCache.getRaw();
+    AGEdge* edge = edgeCache.get();
 
     edge->setQueryBond(query_bond);
     edge->setAssocBond(assoc_bond);

@@ -142,7 +142,7 @@ bool Chem::PatternBasedTautomerizationRule::setup(MolecularGraph& parent_molgrap
             continue;
 
         for (SubstructureSearch::ConstMappingIterator m_it = subsearch->getMappingsBegin(), m_end = subsearch->getMappingsEnd(); m_it != m_end; ++m_it) {
-            Util::BitSet* bond_mask = bitSetCache.getRaw();
+            Util::BitSet* bond_mask = bitSetCache.get();
 
             bond_mask->resize(num_parent_bonds);
 

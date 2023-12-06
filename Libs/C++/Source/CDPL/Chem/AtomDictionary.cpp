@@ -1108,8 +1108,8 @@ double Chem::AtomDictionary::getAtomicWeight(unsigned int type, std::size_t iso)
     if (iso == 0)
         return entry.getAverageWeight();
 
-    const Entry::IsotopeMassMap&              iso_masses = entry.getIsotopeMasses();
-    Entry::IsotopeMassMap::ConstEntryIterator it         = iso_masses.getEntry(iso);
+    const auto& iso_masses = entry.getIsotopeMasses();
+    auto it = iso_masses.getEntry(iso);
 
     if (it != iso_masses.getEntriesEnd())
         return it->second;

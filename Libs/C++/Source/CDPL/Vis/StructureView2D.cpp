@@ -3084,7 +3084,7 @@ void Vis::StructureView2D::freeGraphicsPrimitives()
 
 Vis::LinePrimitive2D* Vis::StructureView2D::allocLinePrimitive(bool set_pen)
 {
-    LinePrimitive2D* prim = lineCache.getRaw();
+    LinePrimitive2D* prim = lineCache.get();
 
     if (set_pen)
         prim->setPen(activePen);
@@ -3094,7 +3094,7 @@ Vis::LinePrimitive2D* Vis::StructureView2D::allocLinePrimitive(bool set_pen)
 
 Vis::PolylinePrimitive2D* Vis::StructureView2D::allocPolylinePrimitive()
 {
-    PolylinePrimitive2D* prim = polylineCache.getRaw();
+    PolylinePrimitive2D* prim = polylineCache.get();
 
     prim->clear();
     prim->setPen(activePen);
@@ -3104,7 +3104,7 @@ Vis::PolylinePrimitive2D* Vis::StructureView2D::allocPolylinePrimitive()
 
 Vis::PolygonPrimitive2D* Vis::StructureView2D::allocPolygonPrimitive()
 {
-    PolygonPrimitive2D* prim = polygonCache.getRaw();
+    PolygonPrimitive2D* prim = polygonCache.get();
 
     prim->clear();
     prim->setPen(activePen);
@@ -3115,7 +3115,7 @@ Vis::PolygonPrimitive2D* Vis::StructureView2D::allocPolygonPrimitive()
 
 Vis::LineSegmentListPrimitive2D* Vis::StructureView2D::allocLineSegListPrimitive()
 {
-    LineSegmentListPrimitive2D* prim = lineSegListCache.getRaw();
+    LineSegmentListPrimitive2D* prim = lineSegListCache.get();
 
     prim->clear();
     prim->setPen(activePen);
@@ -3125,7 +3125,7 @@ Vis::LineSegmentListPrimitive2D* Vis::StructureView2D::allocLineSegListPrimitive
 
 Vis::PointListPrimitive2D* Vis::StructureView2D::allocPointListPrimitive()
 {
-    PointListPrimitive2D* prim = pointListCache.getRaw();
+    PointListPrimitive2D* prim = pointListCache.get();
 
     prim->clear();
 
@@ -3134,7 +3134,7 @@ Vis::PointListPrimitive2D* Vis::StructureView2D::allocPointListPrimitive()
 
 Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
 {
-    TextLabelPrimitive2D* prim = textLabelCache.getRaw();
+    TextLabelPrimitive2D* prim = textLabelCache.get();
 
     prim->setPen(activePen.getColor());
 
