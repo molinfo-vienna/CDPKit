@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRule1a.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,23 +23,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
- */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#include "CIPRule1a.hpp"
 
 
-namespace CDPL
+using namespace CDPL;
+
+
+int Chem::CIPRule1a::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-
-    namespace Chem
-    {
-
+    unsigned int anum = a.getEnd().getAtomicNoNumerator();
+    unsigned short aden = a.getEnd().getAtomicNoDenominator();
+    unsigned int bnum = b.getEnd().getAtomicNoNumerator();
+    unsigned short bden = b.getEnd().getAtomicNoDenominator();
     
-    } // namespace Chem
-} // namespace CDPL
+    if (anum == 0 || bnum == 0)
+        return CIPSequenceRule::COMP_TO_WILDCARD;
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+    if (aden == 1 && bden == 1)
+        return (anum < bnum ? -1 : anum > bnum ? 1 : 0);
+
+    double fr_anum = double(anum) / aden;
+    double fr_bnum = double(bnum) / bden;
+
+    return (fr_anum < fr_bnum ? -1 : fr_anum > fr_bnum ? 1 : 0);
+}

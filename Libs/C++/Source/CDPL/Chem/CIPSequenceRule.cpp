@@ -38,12 +38,12 @@ unsigned int Chem::CIPSequenceRule::getBondLabel(const CIPDigraph::Edge& edge) c
     const Bond* bond = edge.getBond();
                 
     if (!bond)
-        return CIPDescriptor::UNDEF;
+        return CIPDescriptor::NONE;
                 
     return edge.getAuxDescriptor();
 }
 
-int Chem::CIPSequenceRule::recursiveCompare(CIPDigraph::Edge& a, CIPDigraph::Edge& b)
+int Chem::CIPSequenceRule::recursiveCompare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
     int cmp = compare(a, b);
                 
@@ -60,10 +60,10 @@ int Chem::CIPSequenceRule::recursiveCompare(CIPDigraph::Edge& a, CIPDigraph::Edg
         CIPSequenceRule* rule;
     };
     
-    EdgeQueue& edge_queue1 = *edgeQueueCache.getRaw();
+    EdgeQueue& edge_queue1 = *edgeQueueCache.get();
     Sentinel sentinel1{this};
 
-    EdgeQueue& edge_queue2 = *edgeQueueCache.getRaw();
+    EdgeQueue& edge_queue2 = *edgeQueueCache.get();
     Sentinel sentinel2{this};
     
     edge_queue1.clear();
@@ -73,8 +73,8 @@ int Chem::CIPSequenceRule::recursiveCompare(CIPDigraph::Edge& a, CIPDigraph::Edg
     edge_queue2.push_back(&b);
 
     while (!edge_queue1.empty() && !edge_queue2.empty()) {
-        CIPDigraph::Edge* curr_a = edge_queue1.front(); edge_queue1.pop_front();
-        CIPDigraph::Edge* curr_b = edge_queue2.front(); edge_queue2.pop_front();
+        const CIPDigraph::Edge* curr_a = edge_queue1.front(); edge_queue1.pop_front();
+        const CIPDigraph::Edge* curr_b = edge_queue2.front(); edge_queue2.pop_front();
         CIPDigraph::Node& a_node = curr_a->getEnd();
         CIPDigraph::Node& b_node = curr_b->getEnd();
         CIPDigraph::EdgeList& as = a_node.getEdges();

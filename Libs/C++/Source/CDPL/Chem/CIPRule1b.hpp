@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRule1b.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
+ * \brief Definition of the class CDPL::Chem::CIPRule1b.
  */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#ifndef CDPL_CHEM_CIPRULE1B_HPP
+#define CDPL_CHEM_CIPRULE1B_HPP
+
+#include "CIPSequenceRule.hpp"
+#include "CIPDigraph.hpp"
 
 
 namespace CDPL
@@ -38,8 +41,21 @@ namespace CDPL
     namespace Chem
     {
 
-    
+        /**
+         * CIPSequence Rule 1b
+         *
+         * <i>"A duplicate atom node whose corresponding nonduplicated atom
+         * node is the root or is closer to the root ranks higher than
+         * a duplicate atom node whose corresponding nonduplicated atom
+         * node is farther from the root."</i>
+         */
+        class CIPRule1b : public CIPSequenceRule
+        {
+
+          public:
+            int compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b);
+        };
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#endif // CDPL_CHEM_CIPRULE1B_HPP

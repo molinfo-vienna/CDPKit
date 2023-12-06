@@ -67,7 +67,7 @@ Chem::CIPSortingResult Chem::CIPSorter::prioritise(const CIPDigraph::Node& node,
     return CIPSortingResult(unique, found_wc, num_pseudo_asym == 1);
 }
 
-int Chem::CIPSorter::compareLigands(const CIPDigraph::Node& node, CIPDigraph::Edge& a, CIPDigraph::Edge& b, bool deep) const
+int Chem::CIPSorter::compareLigands(const CIPDigraph::Node& node, const CIPDigraph::Edge& a, const CIPDigraph::Edge& b, bool deep) const
 {
     // ensure 'up' edges are moved to the front
     if (!a.isBeg(node) && b.isBeg(node))

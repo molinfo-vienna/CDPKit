@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRule2.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,23 +23,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
- */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
+
+#include "CIPRule2.hpp"
 
 
-namespace CDPL
+using namespace CDPL;
+
+
+int Chem::CIPRule2::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
+    const Atom* atom_a = a.getEnd().getAtom();
+    const Atom* atom_b = b.getEnd().getAtom();
 
-    namespace Chem
-    {
+    std::size_t atom_a_iso = (a.getEnd().isDuplicate() ? 0 : atom_a ? getIsotope(*atom_a) : 0);
+    std::size_t atom_b_iso = (b.getEnd().isDuplicate() ? 0 : atom_b ? getIsotope(*atom_b) : 0);
 
+    if (atom_a_iso == 0 && atom_b_iso == 0)
+      return 0;
     
-    } // namespace Chem
-} // namespace CDPL
+    unsigned int atomic_no_a = (atom_a ? getType(*atom_a) : AtomType::H);
+    unsigned int atomic_no_b = (atom_b ? getType(*atom_b) : AtomType::H);
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+    double atom_a_wt = AtomDictionary::getAtomicWeight(atomic_no_a, atom_a_iso);
+    double atom_b_wt = AtomDictionary::getAtomicWeight(atomic_no_b, atom_b_iso);
+
+    return (atom_a_wt > atom_b_wt ? 1 : atom_a_wt < atom_b_wt ? -1 : 0);
+}

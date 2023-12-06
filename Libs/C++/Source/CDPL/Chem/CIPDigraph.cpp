@@ -41,8 +41,8 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t MAX_EDGE_CACHE_SIZE = 10000;
-    const std::size_t MAX_NODE_CACHE_SIZE = 10000;
+    const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
+    const std::size_t MAX_NODE_CACHE_SIZE = 1000;
 } // namespace
 
 
@@ -277,7 +277,7 @@ Chem::CIPDigraph::Node& Chem::CIPDigraph::newTerminalNode(const Node& parent, co
 
 void Chem::CIPDigraph::addEdge(Node& beg, const Bond* bond, Node& end)
 {
-    Edge& e = *edgeCache.getRaw();
+    Edge& e = *edgeCache.get();
 
     e.init(beg, bond, end);
 
@@ -289,7 +289,7 @@ Chem::CIPDigraph::Node* Chem::CIPDigraph::allocNode()
 {
     numNodes++;
     
-    return nodeCache.getRaw();
+    return nodeCache.get();
 }
 
 

@@ -81,7 +81,7 @@ namespace CDPL
 
             CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges, bool deep) const;
          
-            int compareLigands(const CIPDigraph::Node& node, CIPDigraph::Edge& a, CIPDigraph::Edge& b, bool deep) const;
+            int compareLigands(const CIPDigraph::Node& node, const CIPDigraph::Edge& a, const CIPDigraph::Edge& b, bool deep) const;
             
             void getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups) const;
 

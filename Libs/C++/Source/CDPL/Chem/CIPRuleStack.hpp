@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRuleStack.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,15 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
+ * \brief Definition of the class CDPL::Chem::CIPRuleStack.
  */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#ifndef CDPL_CHEM_CIPRULESTACK_HPP
+#define CDPL_CHEM_CIPRULESTACK_HPP
+
+#include <boost/ptr_container/ptr_vector.hpp>
+
+#include "CIPSequenceRule.hpp"
 
 
 namespace CDPL
@@ -38,8 +42,30 @@ namespace CDPL
     namespace Chem
     {
 
-    
+        class CIPRuleStack : public CIPSequenceRule
+        {
+
+          public:
+            CIPRuleStack();
+
+            void enableFullStack(bool full_stack);
+
+            std::size_t getNumSubRules() const
+            {
+                return (fullStack ? std::size_t(rules.size()) : std::size_t(3));
+            }
+
+            int compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b);
+
+            int getComparison(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b, bool deep);
+
+          private:
+            typedef boost::ptr_vector<CIPSequenceRule> RuleStack;
+
+            RuleStack rules;
+            bool      fullStack;
+        };
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#endif // CDPL_CHEM_CIPRULESTACK_HPP

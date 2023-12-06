@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRule6.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
+ * \brief Definition of the class CDPL::Chem::CIPRule6.
  */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#ifndef CDPL_CHEM_CIPRULE6_HPP
+#define CDPL_CHEM_CIPRULE6_HPP
+
+#include "CIPSequenceRule.hpp"
+#include "CIPDigraph.hpp"
 
 
 namespace CDPL
@@ -38,8 +41,22 @@ namespace CDPL
     namespace Chem
     {
 
-    
+        /**
+         * CIP Sequence Rule 6 (proposed)
+         */
+        class CIPRule6 : public CIPSequenceRule
+        {
+
+          public:
+            bool isPseudoAsymmetric() const
+            {
+                // comes after Rule 5 so must be true
+                return true; 
+            }
+            
+            int compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b);
+        };
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#endif // CDPL_CHEM_CIPRULE6_HPP

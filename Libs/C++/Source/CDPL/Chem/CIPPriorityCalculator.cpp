@@ -159,7 +159,7 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
 
 Chem::CIPPriorityCalculator::AtomNode* Chem::CIPPriorityCalculator::allocNode(std::size_t p)
 {
-    AtomNode* node = nodeCache.getRaw();
+    AtomNode* node = nodeCache.get();
 
     node->clear();
     node->setPriority(p);

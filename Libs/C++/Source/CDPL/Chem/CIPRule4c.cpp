@@ -1,5 +1,5 @@
 /* 
- * CIPImplTemplate.hpp 
+ * CIPRule4c.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,23 +23,44 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of the class CDPL::Chem::CIPImplTemplate.
- */
 
-#ifndef CDPL_CHEM_CIPIMPLTEMPLATE_HPP
-#define CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+#include "CDPL/Chem/CIPDescriptor.hpp"
+
+#include "CIPRule4c.hpp"
 
 
-namespace CDPL
+using namespace CDPL;
+
+
+int Chem::CIPRule4c::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
+    unsigned int ord_a = ordinal(getBondLabel(a));
+    unsigned int ord_b = ordinal(getBondLabel(b));
 
-    namespace Chem
-    {
+    int cmp = (ord_a > ord_b ? 1 : ord_a < ord_b ? -1 : 0);
 
+    if (cmp != 0)
+        return cmp;
     
-    } // namespace Chem
-} // namespace CDPL
+    ord_a = ordinal(a.getEnd().getAuxDescriptor());
+    ord_b = ordinal(b.getEnd().getAuxDescriptor());
 
-#endif // CDPL_CHEM_CIPIMPLTEMPLATE_HPP
+    return (ord_a > ord_b ? 1 : ord_a < ord_b ? -1 : 0);
+}
+
+unsigned int Chem::CIPRule4c::ordinal(unsigned int descr)
+{
+    switch (descr) {
+
+        case CIPDescriptor::m:
+        case CIPDescriptor::r:
+            return 2;
+
+        case CIPDescriptor::s:
+        case CIPDescriptor::p:
+            return 1;
+
+        default:
+            return 0;
+    }
+}

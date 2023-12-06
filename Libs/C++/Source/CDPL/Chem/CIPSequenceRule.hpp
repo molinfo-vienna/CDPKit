@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_CIPSEQUENCERULE_HPP
 #define CDPL_CHEM_CIPSEQUENCERULE_HPP
 
+#include <cstddef>
 #include <deque>
 
 #include "CDPL/Util/ObjectStack.hpp"
@@ -69,9 +70,11 @@ namespace CDPL
 
             CIPSequenceRule(): edgeQueueCache(100), sorter(this) {}
 
+            virtual ~CIPSequenceRule() {}
+            
             unsigned int getBondLabel(const CIPDigraph::Edge& edge) const;
 
-            virtual int getNumSubRules() const
+            virtual std::size_t getNumSubRules() const
             {
                 return 1;
             }
@@ -81,16 +84,16 @@ namespace CDPL
                 return false;
             }
 
-            virtual int compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b) const = 0;
+            virtual int compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b) = 0;
             
-            int recursiveCompare(CIPDigraph::Edge& a, CIPDigraph::Edge& b);
+            int recursiveCompare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b);
 
-            int getComparison(CIPDigraph::Edge& a, CIPDigraph::Edge& b)
+            int getComparison(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
             {
                 return getComparison(a, b, true);
             }
 
-            int getComparison(CIPDigraph::Edge& a, CIPDigraph::Edge& b, bool deep)
+            virtual int getComparison(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b, bool deep)
             {
                 return (deep ? recursiveCompare(a, b) : compare(a, b));
             }
@@ -119,8 +122,8 @@ namespace CDPL
             static bool areUpEdges(const CIPDigraph::Node& a_node, const CIPDigraph::Node& b_node,
                                    const CIPDigraph::Edge& a_edge, const CIPDigraph::Edge& b_edge);
 
-            typedef std::deque<CIPDigraph::Edge*> EdgeQueue;
-            typedef Util::ObjectStack<EdgeQueue>  EdgeQueueCache;
+            typedef std::deque<const CIPDigraph::Edge*> EdgeQueue;
+            typedef Util::ObjectStack<EdgeQueue>        EdgeQueueCache;
 
             EdgeQueueCache edgeQueueCache;
             CIPSorter      sorter;

@@ -175,6 +175,16 @@ set(cdpl-chem_LIB_SRCS
     CIPTetrahedralCenter.cpp
     CIPSorter.cpp
     CIPSequenceRule.cpp
+    CIPRule1a.cpp
+    CIPRule1b.cpp
+    CIPRule2.cpp
+    CIPRule3.cpp
+    CIPRule4a.cpp
+    #CIPRule4a.cpp
+    CIPRule4c.cpp
+    #CIPRule5.cpp
+    CIPRule6.cpp
+    CIPRuleStack.cpp
     
     CIPPriorityCalculator.cpp
     MorganNumberingCalculator.cpp
