@@ -388,7 +388,11 @@ add_custom_target(uninstall
 
 include_directories("${CDPL_INCLUDE_DIR}" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}" "${Boost_INCLUDE_DIR}")
 
-
+if(NOT PYPI_PACKAGE_BUILD)
+  install(FILES ChangeLog.txt DESTINATION "." COMPONENT Documentation)
+  install(FILES COPYING DESTINATION "." COMPONENT CDPLSharedLibraries)
+endif(NOT PYPI_PACKAGE_BUILD)
+    
 # CPack related setup
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME_WITH_VERSION}")
 set(CPACK_PACKAGE_VENDOR "Thomas Seidel/University of Vienna")
