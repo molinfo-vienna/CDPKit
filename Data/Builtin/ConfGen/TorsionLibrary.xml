@@ -3303,11 +3303,16 @@
           <torsions>
             <angle value="0.0" tolerance1="40.00" tolerance2="90.00" score="14.42"/>
             <angle value="180.0" tolerance1="40.00" tolerance2="90.00" score="13.98"/>
+            <!-- added -->
+            <angle value="60.0" tolerance1="0.00" tolerance2="0.00" score="0"/>
+            <angle value="120.0" tolerance1="0.00" tolerance2="0.00" score="0"/>
+            <angle value="-60.0" tolerance1="0.00" tolerance2="0.00" score="0"/>
+            <angle value="-120.0" tolerance1="0.00" tolerance2="0.00" score="0"/>
           </torsions>
         </rule>
         <rule pattern="[cH0:1][c:2]([cH0])!@[CX3!r:3]=[NX2!r:4]">
           <torsions>
-            <angle value="0.0" tolerance1="40.00" tolerance2="60.00" score="16.53"/>
+            <angle value="0.0" tolerance1="40.00" tolerance2="60.00" score="16.53"/>          
             <angle value="180.0" tolerance1="40.00" tolerance2="60.00" score="17.16"/>
           </torsions>
         </rule>
