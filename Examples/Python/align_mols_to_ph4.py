@@ -43,7 +43,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='out_file',
                         required=True,
                         metavar='<file>',
-                        help='Aligned molecule output file (*.pml, *.cdf)')
+                        help='Aligned molecule output file')
     parser.add_argument('-n',
                         dest='num_out_almnts',
                         required=False,
