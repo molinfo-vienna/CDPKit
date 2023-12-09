@@ -92,7 +92,7 @@ set(cdpl-confgen_LIB_SRCS
 
     FragmentConformerCache.cpp
 
-    SubstituentBulkinessCalculator.cpp
+    ExtendedConnectivityCalculator.cpp
     MMFF94BondLengthTable.cpp
 
     ForceFieldInteractionMask.cpp
