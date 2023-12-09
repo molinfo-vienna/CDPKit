@@ -52,6 +52,7 @@
 #include "TorsionDriverImpl.hpp"
 #include "FragmentAssemblerImpl.hpp"
 #include "ForceFieldInteractionMask.hpp"
+#include "ExtendedConnectivityCalculator.hpp"
 
 
 namespace CDPL
@@ -157,9 +158,7 @@ namespace CDPL
 
             static bool compareConfCombinationEnergy(const ConfCombinationData* comb1,
                                                      const ConfCombinationData* comb2);
-            static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1,
-                                                 const FragmentConfDataPtr& conf_data2);
-
+         
             void orderConformersByEnergy(ConformerDataArray& confs) const;
 
             unsigned int invokeCallbacks() const;
@@ -175,6 +174,7 @@ namespace CDPL
                 Chem::Fragment::SharedPointer fragment;
                 ConformerDataArray            conformers;
                 std::size_t                   lastConfIdx;
+                std::size_t                   centrality;
                 bool                          haveInputCoords;
 
                 void clear()
@@ -217,6 +217,7 @@ namespace CDPL
             TorsionDriverImpl                     torDriver;
             FragmentAssemblerImpl                 fragAssembler;
             DGStructureGenerator                  dgStructureGen;
+            ExtendedConnectivityCalculator        atomECCalc;
             MMFF94Parameterizer                   mmff94Parameterizer;
             MMFF94InteractionData                 mmff94Data;
             ForceFieldInteractionMask             mmff94InteractionMask;

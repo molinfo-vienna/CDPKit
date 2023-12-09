@@ -800,6 +800,32 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
         torFragConfData.push_back(frag_conf_data);
     }
 
+    if (torFragConfData.size() > 2) {
+        atomECCalc.calculate(*molGraph);
+
+        for (auto& frag_data : torFragConfData) {
+            std::size_t total_atom_ec = 0;
+            std::size_t num_hvy_atoms = 0;
+            
+            for (const auto& atom : frag_data->fragment->getAtoms()) {
+                std::size_t ec = atomECCalc[molGraph->getAtomIndex(atom)];
+
+                if (ec <= 1)
+                    continue;
+                
+               total_atom_ec += ec;
+               num_hvy_atoms++;
+            }
+            
+            frag_data->centrality = total_atom_ec / num_hvy_atoms;
+        }
+
+        std::sort(torFragConfData.begin(), torFragConfData.end(),
+                  [](const FragmentConfDataPtr& frag_data1, const FragmentConfDataPtr& frag_data2) -> bool {
+                      return (frag_data1->centrality > frag_data2->centrality);
+                  });
+    }
+    
     if (logCallback)
         logCallback("Structure decomposed into " + std::to_string(torFragConfData.size()) + " torsion fragment(s)\n");
 }
@@ -982,8 +1008,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
             logCallback("Generated " + std::to_string(frag_conf_data.lastConfIdx) + " torsion fragment conformer(s)\n");
     }
 
-    std::sort(torFragConfData.begin(), torFragConfData.end(), &compareFragmentConfCount);
-
     return ReturnCode::SUCCESS;
 }
             
@@ -1047,9 +1071,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
     
     fragments.clear();
 
-    for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it) 
+    for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it)
         fragments.addElement((*it)->fragment);
-
+    
     torDriver.getSettings().sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
     torDriver.setup(fragments, *molGraph, torDriveBonds.begin(), torDriveBonds.end());
     torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
@@ -1334,12 +1358,6 @@ bool ConfGen::ConformerGeneratorImpl::compareConfCombinationEnergy(const ConfCom
                                                                    const ConfCombinationData* comb2)
 {
     return (comb1->energy < comb2->energy);
-}
-
-bool ConfGen::ConformerGeneratorImpl::compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
-                                                               const FragmentConfDataPtr& conf_data2)
-{
-    return (conf_data1->conformers.size() < conf_data2->conformers.size());
 }
 
 void ConfGen::ConformerGeneratorImpl::orderConformersByEnergy(ConformerDataArray& confs) const
