@@ -38,7 +38,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
-#include "SubstituentBulkinessCalculator.hpp"
+#include "ExtendedConnectivityCalculator.hpp"
 
 
 using namespace CDPL; 
@@ -48,12 +48,12 @@ namespace
 {
 
     const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
-                                                       const ConfGen::SubstituentBulkinessCalculator& subst_blks)
+                                                       const ConfGen::ExtendedConnectivityCalculator& ec_calc)
     {
         using namespace Chem;
 
         const Atom* bkst_subst = 0;
-        std::size_t bkst_subst_bks = 0;
+        std::size_t bkst_subst_ec = 0;
         std::size_t bond_cnt = 0;
 
         for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), atoms_end = atom.getAtomsEnd(); a_it != atoms_end; ++a_it) {
@@ -65,13 +65,13 @@ namespace
             if (++bond_cnt > 2)
                 return 0;
 
-            std::size_t nbr_bks = subst_blks[nbr_atom.getIndex()];
+            std::size_t nbr_ec = ec_calc[nbr_atom.getIndex()];
 
-            if (!bkst_subst || nbr_bks > bkst_subst_bks) {
+            if (!bkst_subst || nbr_ec > bkst_subst_ec) {
                 bkst_subst = &nbr_atom;
-                bkst_subst_bks = nbr_bks;
+                bkst_subst_ec = nbr_ec;
 
-            } else if (bkst_subst_bks == nbr_bks)
+            } else if (bkst_subst_ec == nbr_ec)
                 return 0;
         }
 
@@ -111,7 +111,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
         setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
     }
 
-    std::unique_ptr<SubstituentBulkinessCalculator> blks_calc;
+    std::unique_ptr<ExtendedConnectivityCalculator> ec_calc;
 
     for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
         Bond& bond = *it;
@@ -140,17 +140,17 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
                     break;
             }
 
-            if (!blks_calc.get()) {
-                blks_calc.reset(new SubstituentBulkinessCalculator());
-                blks_calc->calculate(mol);
+            if (!ec_calc.get()) {
+                ec_calc.reset(new ExtendedConnectivityCalculator());
+                ec_calc->calculate(mol);
             }
 
-            const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
+            const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *ec_calc);
 
             if (!ref_atom1)
                 continue;
 
-            const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
+            const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *ec_calc);
 
             if (!ref_atom2)
                 continue;
