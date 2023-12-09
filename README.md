@@ -96,8 +96,9 @@ Option 1: Installation of the latest stable CDPKit release deposited on [PyPI](h
 $ pip install cdpkit
 ```
 
-This will download the CDPKit sources and perform an on-the-fly compilation and installation of the Python bindings.
-For a succesfull build the following requirements and dependencies apply:
+If available for your platform and Python version, this command will directly install a pre-built binary package (wheel file)
+of the CDPL Python bindings. If suitable binaries cannot be provided, the source code package gets downloaded and an on-the-fly
+build is attempted. For a succesfull build the following requirements and dependencies apply:
 
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
