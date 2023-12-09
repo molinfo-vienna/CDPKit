@@ -1,5 +1,5 @@
 /* 
- * SubstituentBulkinessCalculator.hpp
+ * ExtendedConnectivityCalculator.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,11 +23,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::SubstituentBulkinessCalculator.
+ * \brief Definition of the class CDPL::ConfGen::ExtendedConnectivityCalculator.
  */
 
-#ifndef CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP
-#define CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP
+#ifndef CDPL_CONFGEN_EXTENDEDCONNECTIVITYCALCULATOR_HPP
+#define CDPL_CONFGEN_EXTENDEDCONNECTIVITYCALCULATOR_HPP
 
 #include <cstddef>
 #include <vector>
@@ -47,7 +47,7 @@ namespace CDPL
     namespace ConfGen
     {
 
-        class SubstituentBulkinessCalculator
+        class ExtendedConnectivityCalculator
         {
 
           public:
@@ -68,4 +68,4 @@ namespace CDPL
     } // namespace ConfGen
 } // namespace CDPL
 
-#endif // CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP
+#endif // CDPL_CONFGEN_EXTENDEDCONNECTIVITYCALCULATOR_HPP

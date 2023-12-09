@@ -1,5 +1,5 @@
 /* 
- * SubstituentBulkinessCalculator.cpp
+ * ExtendedConnectivityCalculator.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,13 +31,13 @@
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
-#include "SubstituentBulkinessCalculator.hpp"
+#include "ExtendedConnectivityCalculator.hpp"
 
 
 using namespace CDPL;
 
 
-void ConfGen::SubstituentBulkinessCalculator::calculate(const Chem::MolecularGraph& molgraph)
+void ConfGen::ExtendedConnectivityCalculator::calculate(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
 
