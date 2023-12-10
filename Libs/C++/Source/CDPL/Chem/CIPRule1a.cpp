@@ -24,27 +24,40 @@
  */
 
 
+#include "CDPL/Chem/AtomType.hpp"
+
 #include "CIPRule1a.hpp"
 
 
 using namespace CDPL;
 
 
+namespace
+{
+
+    bool isChemElement(unsigned int atom_type)
+    {
+        return (atom_type >= Chem::AtomType::H && atom_type <= Chem::AtomType::MAX_ATOMIC_NO);
+    }
+}
+
+    
 int Chem::CIPRule1a::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-    unsigned int anum = a.getEnd().getAtomicNoNumerator();
-    unsigned short aden = a.getEnd().getAtomicNoDenominator();
-    unsigned int bnum = b.getEnd().getAtomicNoNumerator();
-    unsigned short bden = b.getEnd().getAtomicNoDenominator();
-    
-    if (anum == 0 || bnum == 0)
+    unsigned int atomic_no_num_a = a.getEnd().getAtomicNoNumerator();
+    unsigned short atomic_no_den_a = a.getEnd().getAtomicNoDenominator();
+
+    if (atomic_no_den_a == 1 && !isChemElement(atomic_no_num_a))
         return CIPSequenceRule::COMP_TO_WILDCARD;
 
-    if (aden == 1 && bden == 1)
-        return (anum < bnum ? -1 : anum > bnum ? 1 : 0);
+    unsigned int atomic_no_num_b = b.getEnd().getAtomicNoNumerator();
+    unsigned short atomic_no_den_b = b.getEnd().getAtomicNoDenominator();
 
-    double fr_anum = double(anum) / aden;
-    double fr_bnum = double(bnum) / bden;
+    if (atomic_no_den_b == 1 && !isChemElement(atomic_no_num_b))
+        return CIPSequenceRule::COMP_TO_WILDCARD;
+    
+    double fr_atomic_no_a = double(atomic_no_num_a) / atomic_no_den_a;
+    double fr_atomic_no_b = double(atomic_no_num_b) / atomic_no_den_b;
 
-    return (fr_anum < fr_bnum ? -1 : fr_anum > fr_bnum ? 1 : 0);
+    return (fr_atomic_no_a < fr_atomic_no_b ? -1 : fr_atomic_no_a > fr_atomic_no_b ? 1 : 0);
 }

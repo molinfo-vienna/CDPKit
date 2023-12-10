@@ -55,16 +55,6 @@ Chem::CIPDigraph::~CIPDigraph() {}
 
 void Chem::CIPDigraph::setMolecularGraph(const MolecularGraph& molgraph)
 {
-    if (molGraph) {
-        root     = 0;
-        tmpRoot  = 0;
-        numNodes = 0;
-        rule6Ref = 0;
-
-        nodeCache.putAll();
-        edgeCache.putAll();
-    }
-
     molGraph = &molgraph;
 
     mancude.setMolecularGraph(molgraph);
@@ -72,17 +62,20 @@ void Chem::CIPDigraph::setMolecularGraph(const MolecularGraph& molgraph)
 
 Chem::CIPDigraph::Node& Chem::CIPDigraph::init(const Atom& atom)
 {
+    root = allocNode();
+    root->init(*this, molGraph->getNumAtoms(), molGraph->getAtomIndex(atom), &atom, getType(atom));
+
+    return *root;
+}
+
+void Chem::CIPDigraph::clear()
+{
     tmpRoot  = 0;
     numNodes = 0;
     rule6Ref = 0;
 
     nodeCache.putAll();
     edgeCache.putAll();
-
-    root = allocNode();
-    root->init(*this, molGraph->getNumAtoms(), molGraph->getAtomIndex(atom), &atom, getType(atom));
-
-    return *root;
 }
 
 void Chem::CIPDigraph::getNodes(const Atom& atom, NodeList& nodes)
@@ -229,7 +222,7 @@ void Chem::CIPDigraph::expand(Node& beg)
     }
 
     // create implicit hydrogen nodes
-    for (std::size_t i = 0, h_cnt = getImplicitHydrogenCount(*atom); i < h_cnt; i++)
+    for (std::size_t i = 0, h_cnt = calcImplicitHydrogenCount(*atom, *molGraph); i < h_cnt; i++)
         addEdge(beg, 0, newTerminalNode(beg, 0, Node::IMPL_HYDROGEN, beg.getDistance() + 1, 0));
 }
 

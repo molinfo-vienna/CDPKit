@@ -118,8 +118,6 @@ namespace CDPL
              * \brief Specifies that the stereocenter has \e p configuration.
              */
             const unsigned int p        = 14;
-
-            
         } // namespace CIPDescriptor
     } // namespace Chem
 } // namespace CDPL

@@ -272,6 +272,8 @@ namespace CDPL
                 return *molGraph;
             }
 
+            void clear();
+            
             Node& init(const Atom& atom);
 
             std::size_t getNumNodes() const

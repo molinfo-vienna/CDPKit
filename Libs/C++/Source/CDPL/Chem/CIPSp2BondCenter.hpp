@@ -79,7 +79,8 @@ namespace CDPL
           public:
             static constexpr unsigned int OPPOSITE = 0x1;
             static constexpr unsigned int TOGETHER = 0x2;
-
+            static constexpr unsigned int UNSPEC   = 0x4;
+            
             CIPSp2BondCenter(CIPDigraph& digraph, std::initializer_list<const Atom*> foci, std::initializer_list<const Atom*> carriers, int cfg):
                 CIPStereoCenter(digraph, foci, carriers, cfg)
             {}

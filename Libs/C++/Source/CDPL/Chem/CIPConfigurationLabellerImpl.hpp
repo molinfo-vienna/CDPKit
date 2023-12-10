@@ -29,6 +29,11 @@
 #ifndef CDPL_CHEM_CIPCONFIGURATIONLABELLERIMPL_HPP
 #define CDPL_CHEM_CIPCONFIGURATIONLABELLERIMPL_HPP
 
+#include <unordered_map>
+#include <memory>
+
+#include "CIPDigraph.hpp"
+
 
 namespace CDPL
 {
@@ -39,6 +44,8 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
+        class AtomContainer;;
+        class CIPStereoCenter;
         
         class CIPConfigurationLabellerImpl
         {
@@ -47,6 +54,8 @@ namespace CDPL
             CIPConfigurationLabellerImpl();
 
             CIPConfigurationLabellerImpl(const CIPConfigurationLabellerImpl& labeller);
+
+            ~CIPConfigurationLabellerImpl();
             
             void setup(const MolecularGraph& molgraph);
 
@@ -57,7 +66,15 @@ namespace CDPL
             void copy(const CIPConfigurationLabellerImpl& labeller);
             
           private:
-       
+            void extractAtomCenters();
+            void extractBondCenters();
+            
+            typedef std::unique_ptr<CIPStereoCenter> StereoCenterPtr;
+            typedef std::unordered_map<const AtomContainer*, StereoCenterPtr> StereoCenterMap;
+
+            const MolecularGraph* molGraph;
+            CIPDigraph            digraph;
+            StereoCenterMap       stereoCenters;
         };
     } // namespace Chem
 } // namespace CDPL

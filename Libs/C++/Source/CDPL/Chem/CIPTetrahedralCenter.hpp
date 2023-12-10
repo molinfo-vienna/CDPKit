@@ -92,8 +92,9 @@ namespace CDPL
         {
 
           public:
-            static constexpr unsigned int LEFT  = 0x1;
-            static constexpr unsigned int RIGHT = 0x2;
+            static constexpr unsigned int LEFT   = 0x1;
+            static constexpr unsigned int RIGHT  = 0x2;
+            static constexpr unsigned int UNSPEC = 0x4;
 
             CIPTetrahedralCenter(CIPDigraph& digraph, const Atom* focus, std::initializer_list<const Atom*> carriers, unsigned int cfg):
                 CIPStereoCenter(digraph, focus, carriers, cfg)
