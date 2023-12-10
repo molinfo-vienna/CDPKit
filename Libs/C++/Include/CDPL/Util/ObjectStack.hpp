@@ -31,8 +31,6 @@
 
 #include <cstddef>
 #include <algorithm>
-#include <new>
-#include <memory>
 
 #include <boost/ptr_container/ptr_vector.hpp>
 
