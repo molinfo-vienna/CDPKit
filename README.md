@@ -97,15 +97,15 @@ $ pip install cdpkit
 ```
 
 If available for your platform and Python version, this command will directly install a pre-built binary package (wheel file)
-of the CDPL Python bindings. If suitable binaries cannot be provided, the source code package gets downloaded and an on-the-fly
-build is attempted. For a succesfull build the following requirements and dependencies apply:
+of the CDPL Python bindings. If a matching binary package cannot be found, the source code package will be downloaded and an on-the-fly
+build is attempted. For a successful build the following requirements and dependencies apply:
 
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - cairo-devel (V >= 1.14, optional)
 
-Option 2: Installation of the current development version by specifying the GitHub repository URL:
+Option 2: Build and installation of the current development version by specifying the GitHub repository URL:
 
 ```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
@@ -166,8 +166,6 @@ CDPKit offers a vast range of functionality beyond the basic usage example shown
 To learn more about CDPKit and explore its features in detail, refer to the official documentation and additional resources:
 
 - **CDPKit Documentation**: Visit the [CDPKit documentation](https://cdpkit.org) for comprehensive information, tutorials, and examples.
-
-- **CDPKit GitHub Repository**: Check out the [CDPKit GitHub repository](https://github.com/molinfo-vienna/CDPKit) for source code, issue tracking, and community support.
 
 - **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/v1.0.0/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
