@@ -1,7 +1,8 @@
 master:
 
- - Reduced the memory footprint of the Conforge command line tool
-   occurring with multi-threaded execution
+ - Support for the XYZ file format 
+ - Systematic conformer sampling speed optimizations
+ - Significant reduction of the long-term memory consumption during conformer generation
  - Refinement of torsion library entries for conformer generation
  - Fixed a bug that may lead to the generation of conformers with wrong geometries at exocyclic double bonds
  - Refactoring of stereochemistry related code
