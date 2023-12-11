@@ -87,5 +87,8 @@ void CDPLPythonChem::exportControlParameters()
         .def_readonly("MOL2_CALC_FORMAL_CHARGES", &Chem::ControlParameter::MOL2_CALC_FORMAL_CHARGES)
         .def_readonly("MOL2_CHARGE_TYPE", &Chem::ControlParameter::MOL2_CHARGE_TYPE)
         .def_readonly("MOL2_OUTPUT_SUBSTRUCTURES", &Chem::ControlParameter::MOL2_OUTPUT_SUBSTRUCTURES)
-        .def_readonly("MOL2_MOLECULE_TYPE", &Chem::ControlParameter::MOL2_MOLECULE_TYPE);
+        .def_readonly("MOL2_MOLECULE_TYPE", &Chem::ControlParameter::MOL2_MOLECULE_TYPE)
+        .def_readonly("XYZ_PERCEIVE_CONNECTIVITY", &Chem::ControlParameter::XYZ_PERCEIVE_CONNECTIVITY)
+        .def_readonly("XYZ_PERCEIVE_BOND_ORDERS", &Chem::ControlParameter::XYZ_PERCEIVE_BOND_ORDERS)
+        .def_readonly("XYZ_CALC_FORMAL_CHARGES", &Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES);
 }

@@ -452,6 +452,34 @@ namespace CDPL
         CDPL_CHEM_API bool hasMOL2OutputSubstructuresParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_CHEM_API bool getXYZPerceiveConnectivityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setXYZPerceiveConnectivityParameter(Base::ControlParameterContainer& cntnr, bool perceive);
+
+        CDPL_CHEM_API bool hasXYZPerceiveConnectivityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearXYZPerceiveConnectivityParameter(Base::ControlParameterContainer& cntnr);
+
+ 
+        CDPL_CHEM_API bool getXYZPerceiveBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setXYZPerceiveBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool perceive);
+
+        CDPL_CHEM_API bool hasXYZPerceiveBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearXYZPerceiveBondOrdersParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_CHEM_API bool getXYZCalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setXYZCalcFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
+
+        CDPL_CHEM_API bool hasXYZCalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearXYZCalcFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
     } // namespace Chem
 } // namespace CDPL
 

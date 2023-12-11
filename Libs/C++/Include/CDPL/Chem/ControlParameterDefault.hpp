@@ -251,6 +251,13 @@ namespace CDPL
             extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
+
+            extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;
+
+            extern CDPL_CHEM_API const bool XYZ_PERCEIVE_BOND_ORDERS;
+
+            extern CDPL_CHEM_API const bool XYZ_CALC_FORMAL_CHARGES;
+
         } // namespace ControlParameterDefault
     } // namespace Chem
 } // namespace CDPL

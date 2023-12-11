@@ -51,6 +51,7 @@ namespace
 
 bool Chem::XYZDataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph)
 {
+/*
     init(os);
 
     std::size_t num_confs = (multiConfExport ? getNumConformations(molgraph) : 0);
@@ -66,6 +67,8 @@ bool Chem::XYZDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
         if (writeConfEnergyComment && hasConformerEnergies(molgraph))
             conf_energies = getConformerEnergies(molgraph);
 
+        confCoordinates.resize(molgraph.getNumAtoms());
+
         for (std::size_t i = 0; i < num_confs; i++) {
             getConformation(molgraph, i, confCoordinates, false);
 
@@ -75,7 +78,7 @@ bool Chem::XYZDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
                 writeRecord(os, molgraph);
         }
     }
-
+*/
     return os.good();
 }
 

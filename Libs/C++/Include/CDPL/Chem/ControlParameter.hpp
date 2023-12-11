@@ -475,6 +475,13 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 
             extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_SUBSTRUCTURES;
+
+            extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_CONNECTIVITY;
+
+            extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_BOND_ORDERS;
+
+            extern CDPL_CHEM_API const Base::LookupKey XYZ_CALC_FORMAL_CHARGES;
+
         } // namespace ControlParameter
     } // namespace Chem
 } // namespace CDPL
