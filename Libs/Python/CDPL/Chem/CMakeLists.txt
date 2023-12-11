@@ -174,6 +174,8 @@ set(chem_MOD_SRCS
     SMARTSReactionOutputHandlerExport.cpp 
     MOL2MoleculeInputHandlerExport.cpp 
     MOL2MolecularGraphOutputHandlerExport.cpp 
+    XYZMoleculeInputHandlerExport.cpp 
+    XYZMolecularGraphOutputHandlerExport.cpp 
 
     MoleculeReaderExport.cpp 
     MolecularGraphWriterExport.cpp 
@@ -207,6 +209,8 @@ set(chem_MOD_SRCS
     RDFReactionWriterExport.cpp 
     MOL2MoleculeReaderExport.cpp 
     MOL2MolecularGraphWriterExport.cpp
+    XYZMoleculeReaderExport.cpp 
+    XYZMolecularGraphWriterExport.cpp
     
     MolecularGraphPropertyExport.cpp 
     Entity3DPropertyExport.cpp 

@@ -1,5 +1,5 @@
 /* 
- * ReactionPropertyDefaultExport.cpp 
+ * XYZMoleculeInputHandlerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,28 +24,27 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/ReactionPropertyDefault.hpp"
+#include "CDPL/Chem/XYZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/XYZGZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/XYZBZ2MoleculeInputHandler.hpp"
 
-#include "NamespaceExports.hpp"
-
-
-namespace 
-{
-
-    struct ReactionPropertyDefault {};
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportReactionPropertyDefaults()
+void CDPLPythonChem::exportXYZMoleculeInputHandler()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<ReactionPropertyDefault, boost::noncopyable>("ReactionPropertyDefault", python::no_init)
-        .def_readonly("NAME", &Chem::ReactionPropertyDefault::NAME)
-        .def_readonly("COMMENT", &Chem::ReactionPropertyDefault::COMMENT)
-        .def_readonly("MATCH_CONSTRAINTS", &Chem::ReactionPropertyDefault::MATCH_CONSTRAINTS)
-        .def_readonly("MDL_RXN_FILE_VERSION", &Chem::ReactionPropertyDefault::MDL_RXN_FILE_VERSION)
-        .def_readonly("MDL_PROGRAM_NAME", &Chem::ReactionPropertyDefault::MDL_PROGRAM_NAME)
-        .def_readonly("MDL_USER_INITIALS", &Chem::ReactionPropertyDefault::MDL_USER_INITIALS);
+    python::class_<Chem::XYZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("XYZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
+
+    python::class_<Chem::XYZGZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("XYZGZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
+
+    python::class_<Chem::XYZBZ2MoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("XYZBZ2MoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

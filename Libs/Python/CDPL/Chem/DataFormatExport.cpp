@@ -62,5 +62,8 @@ void CDPLPythonChem::exportDataFormats()
         .def_readonly("INCHI", &Chem::DataFormat::INCHI)
         .def_readonly("MOL2", &Chem::DataFormat::MOL2)
         .def_readonly("MOL2_GZ", &Chem::DataFormat::MOL2_GZ)
-        .def_readonly("MOL2_BZ2", &Chem::DataFormat::MOL2_BZ2);
+        .def_readonly("MOL2_BZ2", &Chem::DataFormat::MOL2_BZ2)
+        .def_readonly("XYZ", &Chem::DataFormat::XYZ)
+        .def_readonly("XYZ_GZ", &Chem::DataFormat::XYZ_GZ)
+        .def_readonly("XYZ_BZ2", &Chem::DataFormat::XYZ_BZ2);
 }

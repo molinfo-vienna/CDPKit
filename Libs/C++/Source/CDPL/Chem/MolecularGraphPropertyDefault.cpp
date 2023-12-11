@@ -40,10 +40,10 @@ namespace CDPL
         {
 
             const std::string NAME                                     = "";
+            const std::string COMMENT                                  = "";
             const double STOICHIOMETRIC_NUMBER                         = 1.0;
             const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
             const unsigned int MDL_CTAB_VERSION                        = MDLDataFormatVersion::UNDEF;
-            const std::string MDL_COMMENT                              = "";
             const std::string MDL_PROGRAM_NAME                         = "CDPL";
             const std::string MDL_USER_INITIALS                        = "";
             const std::size_t MDL_DIMENSIONALITY                       = 0;

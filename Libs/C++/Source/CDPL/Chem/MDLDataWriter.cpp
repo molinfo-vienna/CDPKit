@@ -387,10 +387,10 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
     std::time_t ts;
     
-    if (getMDLUpdateTimestampParameter(ioBase) || !hasMDLTimestamp(molgraph))
+    if (getMDLUpdateTimestampParameter(ioBase) || !hasTimestamp(molgraph))
         ts = std::time(0);
     else
-        ts = getMDLTimestamp(molgraph);
+        ts = getTimestamp(molgraph);
 
     writeMDLTimestamp<2>(os, ts);
 
@@ -428,7 +428,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
         writeMDLEOL(os);
 
     } else 
-        writeMDLLine(os, getMDLComment(molgraph), "MDLDataWriter: error while writing comment line to molfile header block", 
+        writeMDLLine(os, getComment(molgraph), "MDLDataWriter: error while writing comment line to molfile header block", 
                      checkLineLength, trimLines, truncateLines);
 }
 
@@ -1754,10 +1754,10 @@ void Chem::MDLDataWriter::writeRXNHeaderBlock(std::ostream& os, const Reaction& 
 
     std::time_t ts;
     
-    if (getMDLUpdateTimestampParameter(ioBase) || !hasMDLTimestamp(rxn))
+    if (getMDLUpdateTimestampParameter(ioBase) || !hasTimestamp(rxn))
         ts = std::time(0);
     else
-        ts = getMDLTimestamp(rxn);
+        ts = getTimestamp(rxn);
 
     writeMDLTimestamp<4>(os, ts);
 
@@ -1772,7 +1772,7 @@ void Chem::MDLDataWriter::writeRXNHeaderBlock(std::ostream& os, const Reaction& 
 
     // Header line 4
 
-    const std::string& comment = getMDLComment(rxn);
+    const std::string& comment = getComment(rxn);
 
     writeMDLLine(os, comment, "MDLDataWriter: error while writing comment line to rxn-file header block", 
                  checkLineLength, trimLines, truncateLines);

@@ -1,5 +1,5 @@
 /* 
- * ReactionPropertyDefault.cpp 
+ * XYZBZ2MoleculeInputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,11 +21,17 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Chem::XYZBZ2MoleculeInputHandler.
+ */
 
-#include "StaticInit.hpp"
+#ifndef CDPL_CHEM_XYZBZ2MOLECULEINPUTHANDLER_HPP
+#define CDPL_CHEM_XYZBZ2MOLECULEINPUTHANDLER_HPP
 
-#include "CDPL/Chem/ReactionPropertyDefault.hpp"
-#include "CDPL/Chem/MDLDataFormatVersion.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/XYZBZ2MoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL
@@ -34,17 +40,11 @@ namespace CDPL
     namespace Chem
     {
 
-        namespace ReactionPropertyDefault
-        {
+        /**
+         * \brief A handler for the input of bzip2-compressed molecule data in the <em>XYZ</em> format.
+         */
+        typedef Util::DefaultDataInputHandler<XYZBZ2MoleculeReader, DataFormat::XYZ_BZ2> XYZBZ2MoleculeInputHandler;
+    } // namespace Chem
+} // namespace CDPL
 
-            const std::string NAME                                     = "";
-            const std::string COMMENT                                  = "";
-            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-            const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
-            const std::string MDL_PROGRAM_NAME                         = "CDPL";
-            const std::string MDL_USER_INITIALS                        = "";
-        }
-
-        void initReactionPropertyDefaults() {}
-    }
-}
+#endif // CDPL_CHEM_XYZBZ2MOLECULEINPUTHANDLER_HPP

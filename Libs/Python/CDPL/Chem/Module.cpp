@@ -177,6 +177,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportCDFReactionWriter();
     exportMOL2MoleculeReader();
     exportMOL2MolecularGraphWriter();
+    exportXYZMoleculeReader();
+    exportXYZMolecularGraphWriter();
   
     exportMoleculeIOManager();
     exportMolecularGraphIOManager();
@@ -216,6 +218,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportSMARTSReactionOutputHandler();
     exportMOL2MoleculeInputHandler();
     exportMOL2MolecularGraphOutputHandler();
+    exportXYZMoleculeInputHandler();
+    exportXYZMolecularGraphOutputHandler();
 
     exportMolecularGraphProperties();
     exportEntity3DProperties();

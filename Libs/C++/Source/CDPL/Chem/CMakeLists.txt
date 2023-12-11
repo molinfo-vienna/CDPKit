@@ -122,6 +122,10 @@ set(cdpl-chem_LIB_SRCS
     MOL2DataWriter.cpp
     MOL2MoleculeReader.cpp
     MOL2MolecularGraphWriter.cpp
+    XYZDataReader.cpp
+    XYZDataWriter.cpp
+    XYZMoleculeReader.cpp
+    XYZMolecularGraphWriter.cpp
   
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp

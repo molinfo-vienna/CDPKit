@@ -1,5 +1,5 @@
 /* 
- * ReactionPropertyDefault.cpp 
+ * XYZMolecularGraphWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,27 +24,44 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/ReactionPropertyDefault.hpp"
-#include "CDPL/Chem/MDLDataFormatVersion.hpp"
+#include <ostream>
+
+#include "CDPL/Chem/XYZMolecularGraphWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+
+#include "XYZDataWriter.hpp"
 
 
-namespace CDPL
+using namespace CDPL;
+
+
+Chem::XYZMolecularGraphWriter::XYZMolecularGraphWriter(std::ostream& os): 
+    output(os), state(os.good()), writer(new XYZDataWriter(*this)) {}
+
+Chem::XYZMolecularGraphWriter::~XYZMolecularGraphWriter() {}
+
+Base::DataWriter<Chem::MolecularGraph>& Chem::XYZMolecularGraphWriter::write(const MolecularGraph& molgraph)
 {
+    state = false;
 
-    namespace Chem
-    {
+    try {
+        state = writer->writeMolecularGraph(output, molgraph);
 
-        namespace ReactionPropertyDefault
-        {
-
-            const std::string NAME                                     = "";
-            const std::string COMMENT                                  = "";
-            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-            const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
-            const std::string MDL_PROGRAM_NAME                         = "CDPL";
-            const std::string MDL_USER_INITIALS                        = "";
-        }
-
-        void initReactionPropertyDefaults() {}
+    } catch (const std::exception& e) {
+        throw Base::IOError("XYZMolecularGraphWriter: " + std::string(e.what()));
     }
+
+    invokeIOCallbacks(1.0);
+
+    return *this;
+}
+
+Chem::XYZMolecularGraphWriter::operator const void*() const
+{
+    return (state ? this : 0);
+}
+
+bool Chem::XYZMolecularGraphWriter::operator!() const
+{
+    return !state;
 }

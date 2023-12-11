@@ -63,6 +63,24 @@ namespace CDPL
         CDPL_CHEM_API bool hasName(const Reaction& rxn);
 
 
+        CDPL_CHEM_API std::time_t getTimestamp(const Reaction& rxn);
+
+        CDPL_CHEM_API void setTimestamp(Reaction& rxn, std::time_t time);
+
+        CDPL_CHEM_API void clearTimestamp(Reaction& rxn);
+
+        CDPL_CHEM_API bool hasTimestamp(const Reaction& rxn);
+
+
+        CDPL_CHEM_API const std::string& getComment(const Reaction& rxn);
+
+        CDPL_CHEM_API void setComment(Reaction& rxn, const std::string& comment);
+
+        CDPL_CHEM_API void clearComment(Reaction& rxn);
+
+        CDPL_CHEM_API bool hasComment(const Reaction& rxn);
+
+
         CDPL_CHEM_API const MatchExpression<Reaction>::SharedPointer& getMatchExpression(const Reaction& rxn);
 
         CDPL_CHEM_API void setMatchExpression(Reaction& rxn, const MatchExpression<Reaction>::SharedPointer& expr);
@@ -139,15 +157,6 @@ namespace CDPL
         CDPL_CHEM_API bool hasMDLProgramName(const Reaction& rxn);
 
 
-        CDPL_CHEM_API std::time_t getMDLTimestamp(const Reaction& rxn);
-
-        CDPL_CHEM_API void setMDLTimestamp(Reaction& rxn, std::time_t time);
-
-        CDPL_CHEM_API void clearMDLTimestamp(Reaction& rxn);
-
-        CDPL_CHEM_API bool hasMDLTimestamp(const Reaction& rxn);
-
-
         CDPL_CHEM_API std::size_t getMDLRegistryNumber(const Reaction& rxn);
 
         CDPL_CHEM_API void setMDLRegistryNumber(Reaction& rxn, std::size_t reg_no);
@@ -155,15 +164,6 @@ namespace CDPL
         CDPL_CHEM_API void clearMDLRegistryNumber(Reaction& rxn);
 
         CDPL_CHEM_API bool hasMDLRegistryNumber(const Reaction& rxn);
-
-
-        CDPL_CHEM_API const std::string& getMDLComment(const Reaction& rxn);
-
-        CDPL_CHEM_API void setMDLComment(Reaction& rxn, const std::string& comment);
-
-        CDPL_CHEM_API void clearMDLComment(Reaction& rxn);
-
-        CDPL_CHEM_API bool hasMDLComment(const Reaction& rxn);
 
 
         CDPL_CHEM_API const StringDataBlock::SharedPointer& getReactionData(const Reaction& rxn);

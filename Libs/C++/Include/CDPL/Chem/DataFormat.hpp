@@ -151,6 +151,22 @@ namespace CDPL
              * \brief Provides meta-information about the bzip2-compressed <em>Sybyl MOL2</em> format.
              */
             extern CDPL_CHEM_API const Base::DataFormat MOL2_BZ2;
+
+            /**
+             * \brief Provides meta-information about the <em>XYZ</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat XYZ;
+
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>XYZ</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat XYZ_GZ;
+
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>XYZ</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat XYZ_BZ2;
+
         } // namespace DataFormat
     } // namespace Chem
 } // namespace CDPL

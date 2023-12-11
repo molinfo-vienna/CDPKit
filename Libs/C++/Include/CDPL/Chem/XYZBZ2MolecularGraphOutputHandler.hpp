@@ -1,5 +1,5 @@
 /* 
- * ReactionPropertyDefault.cpp 
+ * XYZBZ2MolecularGraphOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,11 +21,17 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Chem::XYZBZ2MolecularGraphOutputHandler.
+ */
 
-#include "StaticInit.hpp"
+#ifndef CDPL_CHEM_XYZBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP
+#define CDPL_CHEM_XYZBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/ReactionPropertyDefault.hpp"
-#include "CDPL/Chem/MDLDataFormatVersion.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/XYZBZ2MolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL
@@ -34,17 +40,11 @@ namespace CDPL
     namespace Chem
     {
 
-        namespace ReactionPropertyDefault
-        {
+        /**
+         * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>XYZ</em> format.
+         */
+        typedef Util::DefaultDataOutputHandler<XYZBZ2MolecularGraphWriter, DataFormat::XYZ_BZ2> XYZBZ2MolecularGraphOutputHandler;
+    } // namespace Chem
+} // namespace CDPL
 
-            const std::string NAME                                     = "";
-            const std::string COMMENT                                  = "";
-            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-            const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
-            const std::string MDL_PROGRAM_NAME                         = "CDPL";
-            const std::string MDL_USER_INITIALS                        = "";
-        }
-
-        void initReactionPropertyDefaults() {}
-    }
-}
+#endif // CDPL_CHEM_XYZBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

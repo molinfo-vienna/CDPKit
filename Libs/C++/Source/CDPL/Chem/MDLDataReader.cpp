@@ -724,7 +724,7 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
     std::time_t ts = readMDLTimestamp<2>(is, strictErrorChecking);
     
       if (ts != -1)
-        setMDLTimestamp(mol, ts);
+        setTimestamp(mol, ts);
 
     readMDLString(is, 2, tmpString, true, "MDLDataReader: error while reading dimension code from molfile header block");
     
@@ -758,7 +758,7 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
 
     readMDLLine(is, line, "MDLDataReader: error while reading comment line from molfile header block", 
                 trimLines, checkLineLength);
-    setMDLComment(mol, line);
+    setComment(mol, line);
 }
 
 void Chem::MDLDataReader::skipMOLHeaderBlock(std::istream& is)
@@ -2135,7 +2135,7 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
     std::time_t ts = readMDLTimestamp<4>(is, strictErrorChecking);
     
       if (ts != -1)
-        setMDLTimestamp(rxn, ts);
+        setTimestamp(rxn, ts);
 
     std::size_t reg_no = readMDLNumber<std::size_t, 7>(is, "MDLDataReader: error while reading registry number from rxn-file header block ", 
                                                        strictErrorChecking, ~std::size_t(0), ~std::size_t(0));
@@ -2148,7 +2148,7 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
 
     readMDLLine(is, line, "MDLDataReader: error while reading comment line from rxn-file header block", 
                 trimLines, checkLineLength);
-    setMDLComment(rxn, line);
+    setComment(rxn, line);
 }
 
 void Chem::MDLDataReader::skipRXNHeaderBlock(std::istream& is)

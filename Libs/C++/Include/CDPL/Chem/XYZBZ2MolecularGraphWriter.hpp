@@ -1,5 +1,5 @@
 /* 
- * ReactionPropertyDefault.cpp 
+ * XYZBZ2MolecularGraphWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,11 +21,16 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Chem::XYZBZ2MolecularGraphWriter.
+ */
 
-#include "StaticInit.hpp"
+#ifndef CDPL_CHEM_XYZBZ2MOLECULARGRAPHWRITER_HPP
+#define CDPL_CHEM_XYZBZ2MOLECULARGRAPHWRITER_HPP
 
-#include "CDPL/Chem/ReactionPropertyDefault.hpp"
-#include "CDPL/Chem/MDLDataFormatVersion.hpp"
+#include "CDPL/Chem/XYZMolecularGraphWriter.hpp"
+#include "CDPL/Util/CompressedDataWriter.hpp"
 
 
 namespace CDPL
@@ -34,17 +39,8 @@ namespace CDPL
     namespace Chem
     {
 
-        namespace ReactionPropertyDefault
-        {
-
-            const std::string NAME                                     = "";
-            const std::string COMMENT                                  = "";
-            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-            const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
-            const std::string MDL_PROGRAM_NAME                         = "CDPL";
-            const std::string MDL_USER_INITIALS                        = "";
-        }
-
-        void initReactionPropertyDefaults() {}
+        typedef Util::CompressedDataWriter<XYZMolecularGraphWriter, Util::BZip2OStream> XYZBZ2MolecularGraphWriter;
     }
-}
+} // namespace CDPL
+
+#endif // CDPL_CHEM_XYZBZ2MOLECULARGRAPHWRITER_HPP

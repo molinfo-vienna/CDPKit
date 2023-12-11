@@ -65,6 +65,24 @@ namespace CDPL
         CDPL_CHEM_API bool hasName(const MolecularGraph& molgraph);
 
 
+        CDPL_CHEM_API std::time_t getTimestamp(const MolecularGraph& molgraph);
+
+        CDPL_CHEM_API void setTimestamp(MolecularGraph& molgraph, std::time_t time);
+
+        CDPL_CHEM_API void clearTimestamp(MolecularGraph& molgraph);
+
+        CDPL_CHEM_API bool hasTimestamp(const MolecularGraph& molgraph);
+
+
+        CDPL_CHEM_API const std::string& getComment(const MolecularGraph& molgraph);
+
+        CDPL_CHEM_API void setComment(MolecularGraph& molgraph, const std::string& comment);
+
+        CDPL_CHEM_API void clearComment(MolecularGraph& molgraph);
+
+        CDPL_CHEM_API bool hasComment(const MolecularGraph& molgraph);
+
+
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const MolecularGraph& molgraph);
 
         CDPL_CHEM_API void setMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr);
@@ -223,15 +241,6 @@ namespace CDPL
         CDPL_CHEM_API bool hasMDLProgramName(const MolecularGraph& molgraph);
 
 
-        CDPL_CHEM_API std::time_t getMDLTimestamp(const MolecularGraph& molgraph);
-
-        CDPL_CHEM_API void setMDLTimestamp(MolecularGraph& molgraph, std::time_t time);
-
-        CDPL_CHEM_API void clearMDLTimestamp(MolecularGraph& molgraph);
-
-        CDPL_CHEM_API bool hasMDLTimestamp(const MolecularGraph& molgraph);
-
-
         CDPL_CHEM_API std::size_t getMDLRegistryNumber(const MolecularGraph& molgraph);
 
         CDPL_CHEM_API void setMDLRegistryNumber(MolecularGraph& molgraph, std::size_t reg_no);
@@ -239,15 +248,6 @@ namespace CDPL
         CDPL_CHEM_API void clearMDLRegistryNumber(MolecularGraph& molgraph);
 
         CDPL_CHEM_API bool hasMDLRegistryNumber(const MolecularGraph& molgraph);
-
-
-        CDPL_CHEM_API const std::string& getMDLComment(const MolecularGraph& molgraph);
-
-        CDPL_CHEM_API void setMDLComment(MolecularGraph& molgraph, const std::string& comment);
-
-        CDPL_CHEM_API void clearMDLComment(MolecularGraph& molgraph);
-
-        CDPL_CHEM_API bool hasMDLComment(const MolecularGraph& molgraph);
 
 
         CDPL_CHEM_API unsigned int getMDLCTABVersion(const MolecularGraph& molgraph);
