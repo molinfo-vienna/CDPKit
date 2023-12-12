@@ -231,7 +231,7 @@ void Chem::BondOrderCalculator::calculate(const MolecularGraph& molgraph, Util::
 
     if (undefBonds.empty())
         return;
-
+  
     calcFreeAtomValences(orders);
     perceiveAtomGeometries(orders);
     assignBondOrders(orders);
@@ -354,11 +354,11 @@ void Chem::BondOrderCalculator::calcFreeAtomValences(Util::STArray& orders)
 
         if (atom_type == AtomType::C)
             charge = std::min(charge, -charge);
-
+        
         const Util::STArray* valence_states;
 
         if (AtomDictionary::getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && Internal::getExplicitBondCount(atom, *molGraph) >= 4)
-             valence_states = &chalcogenideValStatesBCGE4;            
+            valence_states = &chalcogenideValStatesBCGE4;            
         else
             valence_states = &AtomDictionary::getValenceStates(atom_type);        
 
@@ -414,6 +414,7 @@ void Chem::BondOrderCalculator::assignBondOrders(Util::STArray& orders)
     markPlanarPiBonds(orders);
     assignConjPiSystemBondOrders(orders);
     assignRemainingBondOrders(orders);
+    fixNitroGroups(orders);
 }
 
 void Chem::BondOrderCalculator::assignTetrahedralAtomBondOrders(Util::STArray& orders)
@@ -459,7 +460,7 @@ void Chem::BondOrderCalculator::assignFunctionalGroupBondOrders(Util::STArray& o
         
         if (!substructSearch->findMappings(*molGraph))
             continue;
-
+        
         std::size_t num_mappings = substructSearch->getNumMappings();
 
         procMappingMask.resize(num_mappings);
@@ -637,10 +638,6 @@ void Chem::BondOrderCalculator::assignConjPiSystemBondOrders(Util::STArray& orde
 
         getUndefBondFragment(bond->getBegin(), false, 
                              std::bind(&BondOrderCalculator::isPlanarPiBond, this, std::placeholders::_1));
-
-        if (fragBondList.size() < 3)
-            continue;
-        
         bond_graph.clear();
 
         BondList::iterator undef_bonds_beg = fragBondList.begin();
@@ -851,6 +848,63 @@ void Chem::BondOrderCalculator::assignRemainingBondOrders(Util::STArray& orders)
             if (best_order != 2)
                 order = 1;
         }
+    }
+}
+
+void Chem::BondOrderCalculator::fixNitroGroups(Util::STArray& orders)
+{
+    for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+
+        if (hasFormalCharge(atom))
+            continue;
+
+        if (getType(atom) != AtomType::N)
+            continue;
+
+        const Bond* o_bond = 0;
+        std::size_t num_o_bonds = 0;
+        std::size_t num_bonds = 0;
+        auto a_it = atom.getAtomsBegin();
+
+        for (auto b_it = atom.getBondsBegin(), bonds_end = atom.getBondsEnd(); b_it != bonds_end; ++b_it, ++a_it) {
+            const Bond& bond = *b_it;
+            const Atom& nbr_atom = *a_it;
+            
+            if (!molGraph->containsBond(bond) || !molGraph->containsAtom(nbr_atom))
+                continue;
+
+            if (++num_bonds > 3) {
+                num_o_bonds = 0;
+                break;
+            }
+
+            if (getType(nbr_atom) != AtomType::O)
+                continue;
+
+            if (++num_o_bonds > 3) {
+                o_bond = 0;
+                break;
+            }
+            
+            if (orders[molGraph->getBondIndex(bond)] != 1) {
+                o_bond = 0;
+                break;
+            }
+            
+            if (getFormalCharge(nbr_atom) != 0)
+                continue;
+
+            if (atomGeometries[molGraph->getAtomIndex(nbr_atom)] != TERMINAL)
+                continue;
+
+            o_bond = &bond;
+        }
+
+        if (!o_bond)
+            continue;
+
+        orders[molGraph->getBondIndex(*o_bond)] = 2;
     }
 }
 
@@ -1104,7 +1158,7 @@ void Chem::BondOrderCalculator::postprocessGeometry(const Atom& atom, Util::STAr
                 continue;
         }
     }
-
+    
     geom = (geom == TRIG_PLANAR ? TETRAHEDRAL : TRIG_PLANAR);
 }
 
@@ -1153,8 +1207,8 @@ Chem::BondOrderCalculator::Geometry Chem::BondOrderCalculator::perceiveInitialGe
 
             if (avg_angle > 115.0)
                 return TRIG_PLANAR;
-
-            return TETRAHEDRAL;
+            
+             return TETRAHEDRAL;
         }
 
         case 4: {
