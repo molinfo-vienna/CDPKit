@@ -72,6 +72,10 @@ Settings::Settings(QObject* parent): QObject(parent)
     readerControlParams[Chem::DataFormat::SDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::SDF.getName()]);
     readerControlParams[Chem::DataFormat::RDF_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::RDF.getName()]);
     readerControlParams[Chem::DataFormat::RDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::RDF.getName()]);
+    readerControlParams[Chem::DataFormat::MOL2_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::MOL2.getName()]);
+    readerControlParams[Chem::DataFormat::MOL2_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::MOL2.getName()]);
+    readerControlParams[Chem::DataFormat::XYZ_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::XYZ.getName()]);
+    readerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::XYZ.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
 
@@ -83,6 +87,10 @@ Settings::Settings(QObject* parent): QObject(parent)
     writerControlParams[Chem::DataFormat::SDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::SDF.getName()]);
     writerControlParams[Chem::DataFormat::RDF_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::RDF.getName()]);
     writerControlParams[Chem::DataFormat::RDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::RDF.getName()]);
+    writerControlParams[Chem::DataFormat::MOL2_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::MOL2.getName()]);
+    writerControlParams[Chem::DataFormat::MOL2_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::MOL2.getName()]);
+    writerControlParams[Chem::DataFormat::XYZ_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::XYZ.getName()]);
+    writerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::XYZ.getName()]);
     writerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
     writerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
 
@@ -407,6 +415,31 @@ void Settings::load()
     readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MOL2_OUTPUT_STRICT_ERROR_CHECKING);
     readParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES);
     readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::MOL2_OUTPUT_MULTI_CONF_EXPORT);
+
+    settings.endGroup();
+
+    // ------
+
+    settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::XYZ.getName()));
+
+    SettingsContainer& xyz_rparams = readerControlParams[Chem::DataFormat::XYZ.getName()];
+
+    xyz_rparams.setParent(this);
+
+    readParameter<bool>(xyz_rparams, settings, Chem::ControlParameter::MULTI_CONF_IMPORT, ControlParameterDefault::XYZ_INPUT_MULTI_CONF_IMPORT);
+
+    settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::XYZ.getName()));
+
+    SettingsContainer& xyz_wparams = writerControlParams[Chem::DataFormat::XYZ.getName()];
+
+    xyz_wparams.setParent(this);
+
+    readParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::XYZ_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::XYZ_OUTPUT_MULTI_CONF_EXPORT);
 
     settings.endGroup();
 
@@ -929,6 +962,27 @@ void Settings::save() const
     writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
     writeParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
     writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
+
+    settings.endGroup();
+
+    // ------
+    
+    settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::XYZ.getName()));
+
+    const SettingsContainer& xyz_rparams = getReaderControlParameters(Chem::DataFormat::XYZ.getName());
+
+    writeParameter<bool>(xyz_rparams, settings, Chem::ControlParameter::MULTI_CONF_IMPORT);
+
+    settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::XYZ.getName()));
+
+    const SettingsContainer& xyz_wparams = getWriterControlParameters(Chem::DataFormat::XYZ.getName());
+
+    writeParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
     settings.endGroup();
 
@@ -1536,4 +1590,3 @@ void Settings::readParameter(SettingsContainer& params, QSettings& settings,
         params.setParameter(key, def_value);
     }
 }
-

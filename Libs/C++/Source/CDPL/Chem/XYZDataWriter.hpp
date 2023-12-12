@@ -64,6 +64,7 @@ namespace CDPL
             const Base::DataIOBase& ioBase;
             bool                    multiConfExport;
             bool                    writeConfEnergyComment;
+            bool                    commentIsName;
             Math::Vector3DArray     confCoordinates;
         };
     } // namespace Chem

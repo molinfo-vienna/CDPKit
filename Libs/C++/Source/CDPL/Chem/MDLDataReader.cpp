@@ -447,10 +447,7 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 {
     using namespace MDL::MOLFile;
     using namespace MDL::MOLFile::CTab;
-
-    if (!stereoAtoms.empty() || save_coords)
-        confCoords.resize(molgraph.getNumAtoms());
-
+  
     readMDLLine(is, line, "MDLDataReader: error while reading molecule name from molfile header block", 
                 trimLines, checkLineLength);
 
@@ -459,7 +456,7 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 
     skipMDLLines(is, 2, "MDLDataReader: error while skipping molfile header block");
 
-    atomCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of atoms from counts-line"); 
+    atomCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of atoms from counts-line");
     bondCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of bonds from counts-line"); 
 
     skipMDLChars(is, 27, "MDLDataReader: error while reading counts-line");
@@ -496,6 +493,9 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 
         atomIndexMap.clear();
 
+        if (!stereoAtoms.empty() || save_coords)
+            confCoords.resize(molgraph.getNumAtoms());
+    
         readV3000BlockBegin(is, AtomBlock::BLOCK_TYPE_KEY);
 
         for (std::size_t i = 0; i < atomCount; i++) {
@@ -541,7 +541,6 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
         }
 
         readV3000BlockEnd(is, AtomBlock::BLOCK_TYPE_KEY);
-
         readV3000BlockBegin(is, BondBlock::BLOCK_TYPE_KEY);
 
         for (std::size_t i = 0; i < bondCount; i++) {
@@ -621,6 +620,9 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
         if (molgraph.getNumBonds() != bondCount)
             return false;
 
+        if (!stereoAtoms.empty() || save_coords)
+            confCoords.resize(molgraph.getNumAtoms());
+    
         for (std::size_t i = 0; i < atomCount; i++) {
             if (!stereoAtoms.empty() || save_coords) {
                 Math::Vector3D& coords = confCoords[i];

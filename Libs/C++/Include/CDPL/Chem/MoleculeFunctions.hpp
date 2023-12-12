@@ -33,6 +33,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
 namespace CDPL
@@ -72,6 +73,11 @@ namespace CDPL
          * \return \c false if \a mol was not altered, \c true otherwise.
          */
         CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
+
+        CDPL_CHEM_API void connectAtoms(Molecule& mol, double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
+
+        CDPL_CHEM_API void connectAtoms(Molecule& mol, const Atom3DCoordinatesFunction& coords_func,
+                                        double dist_tol = 0.3, std::size_t atom_idx_offs = 0);
 
         CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 

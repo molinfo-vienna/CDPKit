@@ -31,7 +31,9 @@
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/BondOrderCalculator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
 namespace CDPL
@@ -58,24 +60,32 @@ namespace CDPL
             bool hasMoreData(std::istream&) const;
 
           private:
+            void init(std::istream&);
+             
+            bool addConformer(std::istream&, MolecularGraph&);
+            bool readNextConformer(std::istream&, const MolecularGraph&, bool);
+
             void readAtomCount(std::istream&);
             void readComment(std::istream&, MolecularGraph&);
             void readAtoms(std::istream&, Molecule&);
 
-            bool addConformer(std::istream&, MolecularGraph&);
-            bool readNextConformer(std::istream&, const MolecularGraph&, bool);
-
-            void init(std::istream&);
-
+            void postProcess(Molecule&);
+           
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             bool                    multiConfImport;
+            bool                    commentIsName;
+            bool                    pcvConnectivity;
+            bool                    pcvBondOrders;
+            bool                    calcFormCharges;
             std::size_t             atomCount;
             std::string             tmpString;
-            Fragment::SharedPointer confTargetFragment;
+            Fragment::SharedPointer tmpFragment;
             Molecule::SharedPointer confTargetMolecule;
             Molecule::SharedPointer confTestMolecule;
             Math::Vector3DArray     confCoords;
+            BondOrderCalculator     bondOrderCalc;
+            Util::STArray           bondOrders;
         };
     } // namespace Chem
 } // namespace CDPL

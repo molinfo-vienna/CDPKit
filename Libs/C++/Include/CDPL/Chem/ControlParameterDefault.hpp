@@ -252,6 +252,8 @@ namespace CDPL
 
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 
+            extern CDPL_CHEM_API const bool XYZ_COMMENT_IS_NAME;
+            
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;
 
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_BOND_ORDERS;

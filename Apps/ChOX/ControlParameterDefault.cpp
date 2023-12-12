@@ -133,6 +133,11 @@ namespace ChOX
         const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES   = false;
         const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT           = true;
 
+        const bool                                 XYZ_INPUT_MULTI_CONF_IMPORT             = true;
+
+        const bool                                 XYZ_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 XYZ_OUTPUT_MULTI_CONF_EXPORT            = true;
+
         const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING         = false;
         const bool                                 MOL_INPUT_IGNORE_PARITY                 = true;
         const bool                                 MOL_INPUT_TRIM_STRINGS                  = true;

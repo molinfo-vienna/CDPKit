@@ -39,6 +39,12 @@ void CDPLPythonChem::exportMoleculeFunctions()
     python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
                 (python::arg("mol"), python::arg("flags"), python::arg("corr_impl_h_count") = true));
     python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
+
+    python::def("connectAtoms", static_cast<void (*)(Chem::Molecule&, const Chem::Atom3DCoordinatesFunction&, double, std::size_t)>(&Chem::connectAtoms),
+                (python::arg("mol"), python::arg("coords_func"), python::arg("dist_tol") = 0.3, python::arg("atom_idx_offs") = 0));
+    python::def("connectAtoms", static_cast<void (*)(Chem::Molecule&, double, std::size_t)>(&Chem::connectAtoms),
+                (python::arg("mol"), python::arg("dist_tol") = 0.3, python::arg("atom_idx_offs") = 0));
+
     python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
     python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
 }

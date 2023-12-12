@@ -43,8 +43,7 @@ class QSettings;
 namespace ChOX
 {
 
-    class Settings : public QObject,
-                     public SettingsContainer
+    class Settings : public QObject, public SettingsContainer
     {
 
         Q_OBJECT

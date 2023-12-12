@@ -134,7 +134,8 @@ namespace CDPL
             void assignFunctionalGroupBondOrders(Util::STArray& orders);
             void assignConjPiSystemBondOrders(Util::STArray& orders);
             void assignRemainingBondOrders(Util::STArray& orders);
-
+            void fixNitroGroups(Util::STArray& orders);
+            
             void assignFragBondOrders(std::size_t depth, Util::STArray& orders);
 
             double calcHybridizationMatchScore();

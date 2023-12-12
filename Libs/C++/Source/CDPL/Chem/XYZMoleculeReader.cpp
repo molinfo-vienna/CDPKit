@@ -66,5 +66,5 @@ bool Chem::XYZMoleculeReader::skipData(std::istream& is)
 
 bool Chem::XYZMoleculeReader::moreData(std::istream& is)
 {
-    return (*reader).hasMoreData(is);
+    return reader->hasMoreData(is);
 }

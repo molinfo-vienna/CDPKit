@@ -45,13 +45,13 @@ using namespace CDPL;
 namespace
 {
 
-    const char END_OF_LINE = '\n';
+    const char        END_OF_LINE  = '\n';
+    const std::string UNDEF_SYMBOL = "*";
 }
 
 
 bool Chem::XYZDataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph)
 {
-/*
     init(os);
 
     std::size_t num_confs = (multiConfExport ? getNumConformations(molgraph) : 0);
@@ -78,7 +78,7 @@ bool Chem::XYZDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
                 writeRecord(os, molgraph);
         }
     }
-*/
+
     return os.good();
 }
 
@@ -88,7 +88,8 @@ void Chem::XYZDataWriter::init(std::ostream& os)
 
     multiConfExport        = getMultiConfExportParameter(ioBase);
     writeConfEnergyComment = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
-
+    commentIsName          = getXYZCommentIsNameParameter(ioBase);
+    
     os << std::fixed << std::showpoint;
 }
 
@@ -103,7 +104,7 @@ void Chem::XYZDataWriter::writeRecord(std::ostream& os, const AtomContainer& cnt
 void Chem::XYZDataWriter::writeRecord(std::ostream& os, const MolecularGraph& molgraph)
 {
      os << molgraph.getNumAtoms() << END_OF_LINE;
-     os << getComment(molgraph) << END_OF_LINE;
+     os << (commentIsName ? getName(molgraph) : getComment(molgraph)) << END_OF_LINE;
 
      writeAtomList(os, molgraph);
 }
@@ -113,8 +114,9 @@ void Chem::XYZDataWriter::writeAtomList(std::ostream& os, const AtomContainer& c
     for (std::size_t i = 0, num_atoms = cntnr.getNumAtoms(); i < num_atoms; i++) {
         const Atom& atom = cntnr.getAtom(i);
         const Math::Vector3D& coords = (multiConfExport ? confCoordinates[i] : get3DCoordinates(atom));
-
-        os << (hasSymbol(atom) ? getSymbol(atom) : getSymbolForType(atom)) << ' ';
+        const std::string& symbol = (hasSymbol(atom) ? getSymbol(atom) : getSymbolForType(atom));
+        
+        os << (!symbol.empty() ? symbol : UNDEF_SYMBOL) << ' ';
         os << coords[0] << ' ' << coords[1] << ' ' << coords[2] << END_OF_LINE;
     }
 }

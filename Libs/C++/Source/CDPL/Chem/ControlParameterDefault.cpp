@@ -92,6 +92,7 @@ namespace CDPL
             const unsigned int MOL2_MOLECULE_TYPE                                           = MOL2MoleculeType::SMALL;
             const bool MOL2_OUTPUT_SUBSTRUCTURES                                            = true;
 
+            const bool XYZ_COMMENT_IS_NAME                                                  = true;
             const bool XYZ_PERCEIVE_CONNECTIVITY                                            = true;
             const bool XYZ_PERCEIVE_BOND_ORDERS                                             = true;
             const bool XYZ_CALC_FORMAL_CHARGES                                              = true;

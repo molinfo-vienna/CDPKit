@@ -313,6 +313,7 @@ set(cdpl-chem_LIB_SRCS
     
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeRemoveAtomsFunctions.cpp
+    MoleculeConnectAtomsFunctions.cpp
 
     FragmentHydrogenManipulationFunctions.cpp
     FragmentRemoveAtomsFunctions.cpp

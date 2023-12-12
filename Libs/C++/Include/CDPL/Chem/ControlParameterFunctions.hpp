@@ -454,6 +454,15 @@ namespace CDPL
         CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
 
 
+        CDPL_CHEM_API bool getXYZCommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setXYZCommentIsNameParameter(Base::ControlParameterContainer& cntnr, bool is_name);
+
+        CDPL_CHEM_API bool hasXYZCommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearXYZCommentIsNameParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_CHEM_API bool getXYZPerceiveConnectivityParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_CHEM_API void setXYZPerceiveConnectivityParameter(Base::ControlParameterContainer& cntnr, bool perceive);

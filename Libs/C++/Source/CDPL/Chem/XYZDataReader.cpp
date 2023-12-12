@@ -31,14 +31,18 @@
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "XYZDataReader.hpp"
@@ -62,7 +66,8 @@ bool Chem::XYZDataReader::readMolecule(std::istream& is, Molecule& mol)
     readAtomCount(is);
     readComment(is, mol);
     readAtoms(is, mol);
-
+    postProcess(mol);
+    
     if (multiConfImport) {
         MolecularGraph* tgt_molgraph;
 
@@ -70,17 +75,17 @@ bool Chem::XYZDataReader::readMolecule(std::istream& is, Molecule& mol)
             tgt_molgraph = &mol;
 
         } else {
-            if (!confTargetFragment)
-                confTargetFragment.reset(new Fragment());
+            if (!tmpFragment)
+                tmpFragment.reset(new Fragment());
             else
-                confTargetFragment->clear();
+                tmpFragment->clear();
 
-            tgt_molgraph = confTargetFragment.get();
+            tgt_molgraph = tmpFragment.get();
 
-            std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
-            std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, confTargetFragment.get(), _1));
+            std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, tmpFragment.get(), _1));
+            std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, tmpFragment.get(), _1));
             
-            confTargetFragment->copyProperties(mol);
+            tmpFragment->copyProperties(mol);
         }
 
         MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
@@ -120,7 +125,8 @@ bool Chem::XYZDataReader::readMolecule(std::istream& is, Molecule& mol)
             readAtomCount(is);
             readComment(is, *confTestMolecule);
             readAtoms(is, *confTestMolecule);
-
+            postProcess(*confTestMolecule);
+            
             if (!mc_input_proc->addConformation(*tgt_molgraph, *confTestMolecule)) {
                 is.seekg(last_spos);
                 return true;
@@ -168,6 +174,8 @@ bool Chem::XYZDataReader::skipMolecule(std::istream& is)
         return true;
     }
 
+    postProcess(*confTargetMolecule);
+
     if (!mc_input_proc->init(*confTargetMolecule))
         return true;
 
@@ -181,7 +189,8 @@ bool Chem::XYZDataReader::skipMolecule(std::istream& is)
         readAtomCount(is);
         readComment(is, *confTestMolecule);
         readAtoms(is, *confTestMolecule);
-
+        postProcess(*confTestMolecule);
+        
         if (!mc_input_proc->isConformation(*confTargetMolecule, *confTestMolecule)) {
             is.seekg(last_spos);
             return true;
@@ -200,7 +209,17 @@ void Chem::XYZDataReader::init(std::istream& is)
 {
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase); 
     multiConfImport     = getMultiConfImportParameter(ioBase);
+    commentIsName       = getXYZCommentIsNameParameter(ioBase);
+    pcvConnectivity     = getXYZPerceiveConnectivityParameter(ioBase);
+    pcvBondOrders       = getXYZPerceiveBondOrdersParameter(ioBase);
+    calcFormCharges     = getXYZCalcFormalChargesParameter(ioBase);
 
+    if (calcFormCharges)
+        pcvBondOrders = true;
+
+    if (pcvBondOrders)
+        pcvConnectivity = true;
+    
     is.imbue(std::locale::classic());
 }
 
@@ -215,15 +234,19 @@ bool Chem::XYZDataReader::addConformer(std::istream& is, MolecularGraph& molgrap
 
 bool Chem::XYZDataReader::readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords)
 {
-    if (save_coords)
-        confCoords.resize(molgraph.getNumAtoms());
-
     readAtomCount(is);
 
     if (molgraph.getNumAtoms() != atomCount)
         return false;
 
-    Internal::skipLines(is, 1, "XYZDataReader: error while skipping comment line");
+    if (commentIsName) {
+        if (Internal::readLine(is, tmpString, "XYZDataReader: error while reading comment line", true) != getName(molgraph))
+            return false;
+    } else
+        Internal::skipLines(is, 1, "XYZDataReader: error while skipping comment line");
+
+    if (save_coords)
+        confCoords.resize(molgraph.getNumAtoms());
 
     for (std::size_t i = 0; i < atomCount; i++) {
         if (!(is >> tmpString))
@@ -261,12 +284,17 @@ void Chem::XYZDataReader::readAtomCount(std::istream& is)
 
 void Chem::XYZDataReader::readComment(std::istream& is, MolecularGraph& molgraph)
 {
-    setComment(molgraph, Internal::readLine(is, tmpString, "XYZDataReader: error while reading comment line", true));
+    Internal::readLine(is, tmpString, "XYZDataReader: error while reading comment line", true);
+
+    if (commentIsName)
+        setName(molgraph, tmpString);
+    else
+        setComment(molgraph, tmpString);
 }
 
 void Chem::XYZDataReader::readAtoms(std::istream& is, Molecule& mol)
 {
-    Math::Vector3D coords;
+    confCoords.resize(pcvConnectivity ? atomCount : 1);
 
     for (std::size_t i = 0; i < atomCount; i++) {
         if (!(is >> tmpString))
@@ -275,7 +303,10 @@ void Chem::XYZDataReader::readAtoms(std::istream& is, Molecule& mol)
         Atom& atom = mol.addAtom();
 
         setSymbol(atom, tmpString);
+        setType(atom, AtomDictionary::getType(tmpString));
 
+        Math::Vector3D& coords = confCoords.getData()[pcvConnectivity ? i : std::size_t(0)];  
+        
         if (!(is >> coords(0)))
             throw Base::IOError("XYZDataReader: error while reading atom x coordinate");
 
@@ -288,5 +319,66 @@ void Chem::XYZDataReader::readAtoms(std::istream& is, Molecule& mol)
         set3DCoordinates(atom, coords);
 
         Internal::skipLines(is, 1, "XYZDataReader: error while reading atom line");
+    }
+}
+
+void Chem::XYZDataReader::postProcess(Molecule& mol)
+{
+    std::size_t atom_idx_offs = mol.getNumAtoms() - atomCount;
+    std::size_t bond_idx_offs = mol.getNumBonds();
+    
+    if (pcvConnectivity)
+        connectAtoms(mol,
+                     [this, &mol, atom_idx_offs](const Atom& atom) -> const Math::Vector3D&
+                         { return this->confCoords.getData()[mol.getAtomIndex(atom) - atom_idx_offs]; },
+                     0.3, atom_idx_offs);
+
+    if (!pcvBondOrders && !calcFormCharges)
+        return;
+    
+    if (atom_idx_offs == 0) {
+        if (pcvBondOrders) {
+            setRingFlags(mol, true);
+            perceiveSSSR(mol, true);
+            
+            bondOrderCalc.calculate(mol, bondOrders);
+
+            Util::forEachPair(mol.getBondsBegin(), mol.getBondsEnd(), bondOrders.getElementsBegin(), &setOrder);
+        }
+
+        if (calcFormCharges) {
+            for (auto& atom : mol.getAtoms())
+                setImplicitHydrogenCount(atom, 0);
+
+            calcFormalCharges(mol, true);
+        }
+        
+        return;
+    }
+
+    if (!tmpFragment)
+        tmpFragment.reset(new Fragment());
+    else
+        tmpFragment->clear();
+
+    using namespace std::placeholders;
+
+    std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, tmpFragment.get(), _1));
+    std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, tmpFragment.get(), _1));
+    
+    if (pcvBondOrders) {
+        setRingFlags(*tmpFragment, true);
+        perceiveSSSR(*tmpFragment, true);
+
+        bondOrderCalc.calculate(*tmpFragment, bondOrders);
+        
+        Util::forEachPair(tmpFragment->getBondsBegin(), tmpFragment->getBondsEnd(), bondOrders.getElementsBegin(), &setOrder);
+    }
+
+    if (calcFormCharges) {
+        for (auto& atom : tmpFragment->getAtoms())
+            setImplicitHydrogenCount(atom, 0);
+        
+        calcFormalCharges(*tmpFragment, true);
     }
 }
