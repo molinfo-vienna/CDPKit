@@ -27,29 +27,29 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    HYDROPHOBICITY = CDPL.Base.LookupKey(id=140, name='HYDROPHOBICITY')
+    HYDROPHOBICITY = CDPL.Base.LookupKey(id=144, name='HYDROPHOBICITY')
 
     ##
     # \brief 
     #
-    PEOE_SIGMA_CHARGE = CDPL.Base.LookupKey(id=141, name='PEOE_SIGMA_CHARGE')
+    PEOE_SIGMA_CHARGE = CDPL.Base.LookupKey(id=145, name='PEOE_SIGMA_CHARGE')
 
     ##
     # \brief 
     #
-    PEOE_SIGMA_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=142, name='PEOE_SIGMA_ELECTRONEGATIVITY')
+    PEOE_SIGMA_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=146, name='PEOE_SIGMA_ELECTRONEGATIVITY')
 
     ##
     # \brief 
     #
-    MHMO_PI_CHARGE = CDPL.Base.LookupKey(id=143, name='MHMO_PI_CHARGE')
+    MHMO_PI_CHARGE = CDPL.Base.LookupKey(id=147, name='MHMO_PI_CHARGE')
 
     ##
     # \brief 
     #
-    H_BOND_DONOR_TYPE = CDPL.Base.LookupKey(id=144, name='H_BOND_DONOR_TYPE')
+    H_BOND_DONOR_TYPE = CDPL.Base.LookupKey(id=148, name='H_BOND_DONOR_TYPE')
 
     ##
     # \brief 
     #
-    H_BOND_ACCEPTOR_TYPE = CDPL.Base.LookupKey(id=145, name='H_BOND_ACCEPTOR_TYPE')
+    H_BOND_ACCEPTOR_TYPE = CDPL.Base.LookupKey(id=149, name='H_BOND_ACCEPTOR_TYPE')

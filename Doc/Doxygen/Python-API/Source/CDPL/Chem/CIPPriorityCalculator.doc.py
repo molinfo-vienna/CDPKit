@@ -52,18 +52,6 @@ class CIPPriorityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
-    def setImplicitHydrogenCountFunction(func: SizeTypeAtomFunctor) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getImplicitHydrogenCountFunction() -> SizeTypeAtomFunctor: pass
-
-    ##
     # \brief Calculates the topological <em>CIP</em> priorities of the atoms in the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
@@ -72,5 +60,3 @@ class CIPPriorityCalculator(Boost.Python.instance):
     def calculate(molgraph: MolecularGraph, priorities: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)
-
-    implHydrogenCountFunc = property(getImplicitHydrogenCountFunction, setImplicitHydrogenCountFunction)

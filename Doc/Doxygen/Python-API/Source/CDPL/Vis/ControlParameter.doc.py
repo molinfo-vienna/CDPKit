@@ -31,7 +31,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
-    ALIGNMENT = CDPL.Base.LookupKey(id=208, name='ALIGNMENT')
+    ALIGNMENT = CDPL.Base.LookupKey(id=212, name='ALIGNMENT')
 
     ##
     # \brief Specifies the color of atom labels.
@@ -40,7 +40,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_COLOR or Vis.AtomProperty.COLOR.
     # 
-    ATOM_COLOR = CDPL.Base.LookupKey(id=231, name='ATOM_COLOR')
+    ATOM_COLOR = CDPL.Base.LookupKey(id=235, name='ATOM_COLOR')
 
     ##
     # \brief Specifies a lookup table for the atom type dependent coloring of atom labels.
@@ -49,7 +49,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.ColorTable.SharedPointer \note The color table will only be considered if the property Vis.AtomProperty.COLOR has not been set for the atom to visualize. A color table specified by Vis.MolecularGraphProperty.ATOM_COLOR_TABLE takes precedence over the table specified by <tt>ATOM_COLOR_TABLE</tt>.
     # 
-    ATOM_COLOR_TABLE = CDPL.Base.LookupKey(id=232, name='ATOM_COLOR_TABLE')
+    ATOM_COLOR_TABLE = CDPL.Base.LookupKey(id=236, name='ATOM_COLOR_TABLE')
 
     ##
     # \brief Specifies the size of radical electron dots.
@@ -58,7 +58,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a dot size has been specified by Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE or Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
     # 
-    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=239, name='RADICAL_ELECTRON_DOT_SIZE')
+    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=243, name='RADICAL_ELECTRON_DOT_SIZE')
 
     ##
     # \brief Specifies the font for atom element and query match expression labels.
@@ -67,7 +67,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_FONT or Vis.AtomProperty.LABEL_FONT.
     # 
-    ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=234, name='ATOM_LABEL_FONT')
+    ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=238, name='ATOM_LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around atom labels.
@@ -76,7 +76,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN or Vis.AtomProperty.LABEL_MARGIN.
     # 
-    ATOM_LABEL_MARGIN = CDPL.Base.LookupKey(id=238, name='ATOM_LABEL_MARGIN')
+    ATOM_LABEL_MARGIN = CDPL.Base.LookupKey(id=242, name='ATOM_LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of atom element and query match expression labels.
@@ -85,7 +85,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE.
     # 
-    ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=235, name='ATOM_LABEL_SIZE')
+    ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=239, name='ATOM_LABEL_SIZE')
 
     ##
     # \brief Specifies the font for text labels that show the value of various atomic properties.
@@ -94,7 +94,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT or Vis.AtomProperty.SECONDARY_LABEL_FONT.
     # 
-    SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=236, name='SECONDARY_ATOM_LABEL_FONT')
+    SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=240, name='SECONDARY_ATOM_LABEL_FONT')
 
     ##
     # \brief Specifies the size of text labels that show the value of various atomic properties.
@@ -103,7 +103,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE or Vis.AtomProperty.SECONDARY_LABEL_SIZE.
     # 
-    SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=237, name='SECONDARY_ATOM_LABEL_SIZE')
+    SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=241, name='SECONDARY_ATOM_LABEL_SIZE')
 
     ##
     # \brief Specifies the color with which the drawing area is erased before rendering any graphical primitives.
@@ -112,7 +112,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color
     # 
-    BACKGROUND_COLOR = CDPL.Base.LookupKey(id=210, name='BACKGROUND_COLOR')
+    BACKGROUND_COLOR = CDPL.Base.LookupKey(id=214, name='BACKGROUND_COLOR')
 
     ##
     # \brief Specifies the color of bonds.
@@ -121,7 +121,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_COLOR or Vis.BondProperty.COLOR.
     # 
-    BOND_COLOR = CDPL.Base.LookupKey(id=250, name='BOND_COLOR')
+    BOND_COLOR = CDPL.Base.LookupKey(id=254, name='BOND_COLOR')
 
     ##
     # \brief Specifies the font for bond labels.
@@ -130,7 +130,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_FONT or Vis.BondProperty.LABEL_FONT.
     # 
-    BOND_LABEL_FONT = CDPL.Base.LookupKey(id=259, name='BOND_LABEL_FONT')
+    BOND_LABEL_FONT = CDPL.Base.LookupKey(id=263, name='BOND_LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around bond labels.
@@ -139,7 +139,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a margin has been specified by Vis.MolecularGraphProperty.BOND_LABEL_MARGIN or Vis.BondProperty.LABEL_MARGIN.
     # 
-    BOND_LABEL_MARGIN = CDPL.Base.LookupKey(id=261, name='BOND_LABEL_MARGIN')
+    BOND_LABEL_MARGIN = CDPL.Base.LookupKey(id=265, name='BOND_LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of bond labels.
@@ -148,7 +148,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE.
     # 
-    BOND_LABEL_SIZE = CDPL.Base.LookupKey(id=260, name='BOND_LABEL_SIZE')
+    BOND_LABEL_SIZE = CDPL.Base.LookupKey(id=264, name='BOND_LABEL_SIZE')
 
     ##
     # \brief Specifies the desired average bond length for the visualization of chemical structures.
@@ -157,7 +157,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    BOND_LENGTH = CDPL.Base.LookupKey(id=249, name='BOND_LENGTH')
+    BOND_LENGTH = CDPL.Base.LookupKey(id=253, name='BOND_LENGTH')
 
     ##
     # \brief Specifies the distance between the lines of double and triple bonds.
@@ -166,7 +166,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line spacing has been specified by Vis.MolecularGraphProperty.BOND_LINE_SAPCING or Vis.BondProperty.LINE_SPACING.
     # 
-    BOND_LINE_SPACING = CDPL.Base.LookupKey(id=252, name='BOND_LINE_SPACING')
+    BOND_LINE_SPACING = CDPL.Base.LookupKey(id=256, name='BOND_LINE_SPACING')
 
     ##
     # \brief Specifies the width of bond lines.
@@ -175,7 +175,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.BOND_LINE_WIDTH or Vis.BondProperty.LINE_WIDTH.
     # 
-    BOND_LINE_WIDTH = CDPL.Base.LookupKey(id=251, name='BOND_LINE_WIDTH')
+    BOND_LINE_WIDTH = CDPL.Base.LookupKey(id=255, name='BOND_LINE_WIDTH')
 
     ##
     # \brief Specifies the length of the lines in reaction center marks.
@@ -186,7 +186,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=255, name='REACTION_CENTER_LINE_LENGTH')
+    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=259, name='REACTION_CENTER_LINE_LENGTH')
 
     ##
     # \brief Specifies the distance between the lines in reaction center marks.
@@ -197,7 +197,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=256, name='REACTION_CENTER_LINE_SPACING')
+    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=260, name='REACTION_CENTER_LINE_SPACING')
 
     ##
     # \brief Specifies the distance between the hashes of down stereo bonds.
@@ -206,7 +206,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a hash spacing has been specified by Vis.MolecularGraphProperty.STEREO_BOND_HASH_SPACING or Vis.BondProperty.STEREO_BOND_HASH_SPACING.
     # 
-    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=254, name='STEREO_BOND_HASH_SPACING')
+    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=258, name='STEREO_BOND_HASH_SPACING')
 
     ##
     # \brief Specifies the width of wedge-shaped stereo bonds.
@@ -215,7 +215,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a wedge width has been specified by Vis.MolecularGraphProperty.STEREO_BOND_WEDGE_WIDTH or Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH.
     # 
-    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=253, name='STEREO_BOND_WEDGE_WIDTH')
+    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=257, name='STEREO_BOND_WEDGE_WIDTH')
 
     ##
     # \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each line end.
@@ -226,7 +226,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=257, name='DOUBLE_BOND_TRIM_LENGTH')
+    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=261, name='DOUBLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief Specifies the vertical alignment of reaction agents relative to the reaction arrow.
@@ -235,7 +235,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
     # 
-    REACTION_AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=221, name='REACTION_AGENT_ALIGNMENT')
+    REACTION_AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=225, name='REACTION_AGENT_ALIGNMENT')
 
     ##
     # \brief Specifies the reaction agent layout style.
@@ -244,7 +244,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
     # 
-    REACTION_AGENT_LAYOUT = CDPL.Base.LookupKey(id=222, name='REACTION_AGENT_LAYOUT')
+    REACTION_AGENT_LAYOUT = CDPL.Base.LookupKey(id=226, name='REACTION_AGENT_LAYOUT')
 
     ##
     # \brief Specifies the reaction agent layout direction.
@@ -253,7 +253,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
     # 
-    REACTION_AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=223, name='REACTION_AGENT_LAYOUT_DIRECTION')
+    REACTION_AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=227, name='REACTION_AGENT_LAYOUT_DIRECTION')
 
     ##
     # \brief Specifies the color of reaction arrows.
@@ -262,7 +262,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_COLOR.
     # 
-    REACTION_ARROW_COLOR = CDPL.Base.LookupKey(id=212, name='REACTION_ARROW_COLOR')
+    REACTION_ARROW_COLOR = CDPL.Base.LookupKey(id=216, name='REACTION_ARROW_COLOR')
 
     ##
     # \brief Specifies the head length of reaction arrows.
@@ -271,7 +271,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_LENGTH.
     # 
-    REACTION_ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=214, name='REACTION_ARROW_HEAD_LENGTH')
+    REACTION_ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=218, name='REACTION_ARROW_HEAD_LENGTH')
 
     ##
     # \brief Specifies the head width of reaction arrows.
@@ -280,7 +280,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_HEAD_WIDTH.
     # 
-    REACTION_ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=215, name='REACTION_ARROW_HEAD_WIDTH')
+    REACTION_ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=219, name='REACTION_ARROW_HEAD_WIDTH')
 
     ##
     # \brief Specifies the length of reaction arrows.
@@ -289,7 +289,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LENGTH.
     # 
-    REACTION_ARROW_LENGTH = CDPL.Base.LookupKey(id=213, name='REACTION_ARROW_LENGTH')
+    REACTION_ARROW_LENGTH = CDPL.Base.LookupKey(id=217, name='REACTION_ARROW_LENGTH')
 
     ##
     # \brief Specifies the width of reaction arrow outlines.
@@ -298,7 +298,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LINE_WIDTH.
     # 
-    REACTION_ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=217, name='REACTION_ARROW_LINE_WIDTH')
+    REACTION_ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=221, name='REACTION_ARROW_LINE_WIDTH')
 
     ##
     # \brief Specifies the shaft width of reaction arrows.
@@ -307,7 +307,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_SHAFT_WIDTH.
     # 
-    REACTION_ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=216, name='REACTION_ARROW_SHAFT_WIDTH')
+    REACTION_ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=220, name='REACTION_ARROW_SHAFT_WIDTH')
 
     ##
     # \brief Specifies the style of reaction arrows.
@@ -316,7 +316,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
     # 
-    REACTION_ARROW_STYLE = CDPL.Base.LookupKey(id=211, name='REACTION_ARROW_STYLE')
+    REACTION_ARROW_STYLE = CDPL.Base.LookupKey(id=215, name='REACTION_ARROW_STYLE')
 
     ##
     # \brief Specifies the layout style of reaction products and reactants.
@@ -325,7 +325,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
     # 
-    REACTION_COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=218, name='REACTION_COMPONENT_LAYOUT')
+    REACTION_COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=222, name='REACTION_COMPONENT_LAYOUT')
 
     ##
     # \brief Specifies the layout direction of reaction products and reactants.
@@ -334,7 +334,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
     # 
-    REACTION_COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=219, name='REACTION_COMPONENT_LAYOUT_DIRECTION')
+    REACTION_COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=223, name='REACTION_COMPONENT_LAYOUT_DIRECTION')
 
     ##
     # \brief Specifies the amount of free space that is added horizontally and vertically to the bounds of a reaction component.
@@ -343,7 +343,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_MARGIN.
     # 
-    REACTION_COMPONENT_MARGIN = CDPL.Base.LookupKey(id=220, name='REACTION_COMPONENT_MARGIN')
+    REACTION_COMPONENT_MARGIN = CDPL.Base.LookupKey(id=224, name='REACTION_COMPONENT_MARGIN')
 
     ##
     # \brief Specifies the color of reaction component '+' signs.
@@ -352,7 +352,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_COLOR.
     # 
-    REACTION_PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=224, name='REACTION_PLUS_SIGN_COLOR')
+    REACTION_PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=228, name='REACTION_PLUS_SIGN_COLOR')
 
     ##
     # \brief Specifies the line width of reaction component '+' signs.
@@ -361,7 +361,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_LINE_WIDTH.
     # 
-    REACTION_PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=226, name='REACTION_PLUS_SIGN_LINE_WIDTH')
+    REACTION_PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=230, name='REACTION_PLUS_SIGN_LINE_WIDTH')
 
     ##
     # \brief Specifies the size of reaction component '+' signs.
@@ -370,7 +370,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.PLUS_SIGN_SIZE.
     # 
-    REACTION_PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=225, name='REACTION_PLUS_SIGN_SIZE')
+    REACTION_PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=229, name='REACTION_PLUS_SIGN_SIZE')
 
     ##
     # \brief Specifies whether or not to show the reactants of a reaction.
@@ -379,7 +379,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_REACTANTS.
     # 
-    SHOW_REACTION_REACTANTS = CDPL.Base.LookupKey(id=227, name='SHOW_REACTION_REACTANTS')
+    SHOW_REACTION_REACTANTS = CDPL.Base.LookupKey(id=231, name='SHOW_REACTION_REACTANTS')
 
     ##
     # \brief Specifies whether or not to show the agents of a reaction.
@@ -388,7 +388,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_AGENTS.
     # 
-    SHOW_REACTION_AGENTS = CDPL.Base.LookupKey(id=228, name='SHOW_REACTION_AGENTS')
+    SHOW_REACTION_AGENTS = CDPL.Base.LookupKey(id=232, name='SHOW_REACTION_AGENTS')
 
     ##
     # \brief Specifies whether or not to show the products of a reaction.
@@ -397,7 +397,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.SHOW_PRODUCTS.
     # 
-    SHOW_REACTION_PRODUCTS = CDPL.Base.LookupKey(id=229, name='SHOW_REACTION_PRODUCTS')
+    SHOW_REACTION_PRODUCTS = CDPL.Base.LookupKey(id=233, name='SHOW_REACTION_PRODUCTS')
 
     ##
     # \brief Specifies whether or not to show the formal charge of atoms.
@@ -406,7 +406,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero formal charge. A formal charge of zero is never shown.
     # 
-    SHOW_CHARGES = CDPL.Base.LookupKey(id=242, name='SHOW_CHARGES')
+    SHOW_CHARGES = CDPL.Base.LookupKey(id=246, name='SHOW_CHARGES')
 
     ##
     # \brief Specifies whether or not to show the implicit hydrogen count of connected atoms.
@@ -415,7 +415,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has no effect for isolated atoms (i.e. that have no bonds to other visible atoms). The hydrogen count of unbound atoms is always shown.
     # 
-    SHOW_HYDROGEN_COUNTS = CDPL.Base.LookupKey(id=244, name='SHOW_HYDROGEN_COUNTS')
+    SHOW_HYDROGEN_COUNTS = CDPL.Base.LookupKey(id=248, name='SHOW_HYDROGEN_COUNTS')
 
     ##
     # \brief Specifies whether or not to show the isotopic mass of atoms.
@@ -424,7 +424,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for atoms with a non-zero isotopic mass. An istopic mass of zero is never shown.
     # 
-    SHOW_ISOTOPES = CDPL.Base.LookupKey(id=243, name='SHOW_ISOTOPES')
+    SHOW_ISOTOPES = CDPL.Base.LookupKey(id=247, name='SHOW_ISOTOPES')
 
     ##
     # \brief Specifies whether or not to show the implicit hydrogen count of connected non-carbon atoms.
@@ -433,7 +433,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has no effect if Vis.ControlParameter.SHOW_HYDROGEN_COUNTS is set to <tt>True</tt> or if an atom has no bonds to other visible atoms.
     # 
-    SHOW_NON_CARBON_HYDROGEN_COUNTS = CDPL.Base.LookupKey(id=245, name='SHOW_NON_CARBON_HYDROGEN_COUNTS')
+    SHOW_NON_CARBON_HYDROGEN_COUNTS = CDPL.Base.LookupKey(id=249, name='SHOW_NON_CARBON_HYDROGEN_COUNTS')
 
     ##
     # \brief Specifies whether or not to show query atom match expressions.
@@ -442,7 +442,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_ATOM_QUERY_INFOS = CDPL.Base.LookupKey(id=246, name='SHOW_ATOM_QUERY_INFOS')
+    SHOW_ATOM_QUERY_INFOS = CDPL.Base.LookupKey(id=250, name='SHOW_ATOM_QUERY_INFOS')
 
     ##
     # \brief Specifies whether or not to draw radical electron dots.
@@ -451,7 +451,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_RADICAL_ELECTRONS = CDPL.Base.LookupKey(id=248, name='SHOW_RADICAL_ELECTRONS')
+    SHOW_RADICAL_ELECTRONS = CDPL.Base.LookupKey(id=252, name='SHOW_RADICAL_ELECTRONS')
 
     ##
     # \brief Specifies whether or not to show reaction atom-atom mapping numbers.
@@ -460,7 +460,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_ATOM_REACTION_INFOS = CDPL.Base.LookupKey(id=247, name='SHOW_ATOM_REACTION_INFOS')
+    SHOW_ATOM_REACTION_INFOS = CDPL.Base.LookupKey(id=251, name='SHOW_ATOM_REACTION_INFOS')
 
     ##
     # \brief Specifies whether or not to show query bond match expressions.
@@ -469,7 +469,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_BOND_QUERY_INFOS = CDPL.Base.LookupKey(id=263, name='SHOW_BOND_QUERY_INFOS')
+    SHOW_BOND_QUERY_INFOS = CDPL.Base.LookupKey(id=267, name='SHOW_BOND_QUERY_INFOS')
 
     ##
     # \brief Specifies whether or not to draw reaction center marks.
@@ -485,7 +485,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_BOND_REACTION_INFOS = CDPL.Base.LookupKey(id=262, name='SHOW_BOND_REACTION_INFOS')
+    SHOW_BOND_REACTION_INFOS = CDPL.Base.LookupKey(id=266, name='SHOW_BOND_REACTION_INFOS')
 
     ##
     # \brief Specifies whether or not to draw stereo bonds.
@@ -504,7 +504,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_STEREO_BONDS = CDPL.Base.LookupKey(id=264, name='SHOW_STEREO_BONDS')
+    SHOW_STEREO_BONDS = CDPL.Base.LookupKey(id=268, name='SHOW_STEREO_BONDS')
 
     ##
     # \brief Specifies whether or not to show the element label of carbon atoms.
@@ -513,7 +513,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The control-parameter setting has only an effect for normal carbon atoms with bonds to other visible atoms. Element labels of isolated carbons and carbons with a visible formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or with visible radical electron dots (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) are always shown.
     # 
-    SHOW_CARBONS = CDPL.Base.LookupKey(id=241, name='SHOW_CARBONS')
+    SHOW_CARBONS = CDPL.Base.LookupKey(id=245, name='SHOW_CARBONS')
 
     ##
     # \brief Specifies whether or not to show explicit hydrogen atoms.
@@ -522,7 +522,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note This setting has only an effect for standard explicit hydrogen atoms which are bound to at least one heavy atom. Explicit hydrogens whose formal charge (Vis.ControlParameter.SHOW_CHARGES), isotopic mass (see Vis.ControlParameter.SHOW_ISOTOPES), query expression label (see Vis.ControlParameter.SHOW_ATOM_QUERY_INFOS), atom-atom mapping number (see Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS) or radical electron cloud (see Vis.ControlParameter.SHOW_RADICAL_ELECTRONS) is visible, are always drawn.
     # 
-    SHOW_EXPLICIT_HYDROGENS = CDPL.Base.LookupKey(id=240, name='SHOW_EXPLICIT_HYDROGENS')
+    SHOW_EXPLICIT_HYDROGENS = CDPL.Base.LookupKey(id=244, name='SHOW_EXPLICIT_HYDROGENS')
 
     ##
     # \brief Specifies how to adjust the size of a 2D depiction relative to the available viewport area.
@@ -531,7 +531,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
-    SIZE_ADJUSTMENT = CDPL.Base.LookupKey(id=207, name='SIZE_ADJUSTMENT')
+    SIZE_ADJUSTMENT = CDPL.Base.LookupKey(id=211, name='SIZE_ADJUSTMENT')
 
     ##
     # \brief Specifies the amount by which the non-central lines of triple bonds have to be trimmed at each line end.
@@ -540,7 +540,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a trim length has been specified by Vis.MolecularGraphProperty.TRIPLE_BOND_TRIM_LENGTH or Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH.
     # 
-    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=258, name='TRIPLE_BOND_TRIM_LENGTH')
+    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=262, name='TRIPLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief Specifies whether or not to use calculated atom coordinates for the visualization of chemical structures.
@@ -549,7 +549,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    USE_CALCULATED_ATOM_COORDINATES = CDPL.Base.LookupKey(id=233, name='USE_CALCULATED_ATOM_COORDINATES')
+    USE_CALCULATED_ATOM_COORDINATES = CDPL.Base.LookupKey(id=237, name='USE_CALCULATED_ATOM_COORDINATES')
 
     ##
     # \brief Specifies a rectangular viewport area which constrains the location and size of 2D depictions.
@@ -558,4 +558,4 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Rectangle2D
     # 
-    VIEWPORT = CDPL.Base.LookupKey(id=206, name='VIEWPORT')
+    VIEWPORT = CDPL.Base.LookupKey(id=210, name='VIEWPORT')

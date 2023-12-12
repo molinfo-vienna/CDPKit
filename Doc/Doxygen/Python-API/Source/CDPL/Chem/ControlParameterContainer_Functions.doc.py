@@ -104,6 +104,33 @@ def setMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterCon
 # \brief 
 # \param cntnr 
 #
+def clearXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param is_name 
+#
+def setXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearSMILESWriteIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -725,6 +752,33 @@ def setMOL2CalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, cal
 # \brief 
 # \param cntnr 
 #
+def clearXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param calc 
+#
+def setXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -963,6 +1017,33 @@ def getINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer) -> str
 # \param opts 
 #
 def setINCHIOutputOptionsParameter(cntnr: Base.ControlParameterContainer, opts: str) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param perceive 
+#
+def setXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
 # \brief 
@@ -1233,3 +1314,30 @@ def getMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: 
 # \param ignore 
 #
 def setMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param perceive 
+#
+def setXYZPerceiveConnectivityParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass

@@ -31,7 +31,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.COLOR.
     # 
-    ATOM_COLOR = CDPL.Base.LookupKey(id=167, name='ATOM_COLOR')
+    ATOM_COLOR = CDPL.Base.LookupKey(id=171, name='ATOM_COLOR')
 
     ##
     # \brief Specifies a lookup table for the atom type dependent coloring of atom labels.
@@ -40,7 +40,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.ColorTable.SharedPointer \note The color table will only be considered if the Chem.Atom property Vis.AtomProperty.COLOR has not been set.
     # 
-    ATOM_COLOR_TABLE = CDPL.Base.LookupKey(id=166, name='ATOM_COLOR_TABLE')
+    ATOM_COLOR_TABLE = CDPL.Base.LookupKey(id=170, name='ATOM_COLOR_TABLE')
 
     ##
     # \brief Specifies the size of radical electron dots.
@@ -49,7 +49,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE.
     # 
-    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=173, name='RADICAL_ELECTRON_DOT_SIZE')
+    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=177, name='RADICAL_ELECTRON_DOT_SIZE')
 
     ##
     # \brief Specifies the font for atom element and query match expression labels.
@@ -58,7 +58,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_FONT.
     # 
-    ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=168, name='ATOM_LABEL_FONT')
+    ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=172, name='ATOM_LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around atom labels.
@@ -67,7 +67,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_MARGIN.
     # 
-    ATOM_LABEL_MARGIN = CDPL.Base.LookupKey(id=172, name='ATOM_LABEL_MARGIN')
+    ATOM_LABEL_MARGIN = CDPL.Base.LookupKey(id=176, name='ATOM_LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of atom element and query match expression labels.
@@ -76,7 +76,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.LABEL_SIZE.
     # 
-    ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=169, name='ATOM_LABEL_SIZE')
+    ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=173, name='ATOM_LABEL_SIZE')
 
     ##
     # \brief Specifies the font for text labels that show the value of various atomic properties.
@@ -85,7 +85,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_FONT.
     # 
-    SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=170, name='SECONDARY_ATOM_LABEL_FONT')
+    SECONDARY_ATOM_LABEL_FONT = CDPL.Base.LookupKey(id=174, name='SECONDARY_ATOM_LABEL_FONT')
 
     ##
     # \brief Specifies the size of text labels that show the value of various atomic properties.
@@ -94,7 +94,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.SECONDARY_LABEL_SIZE.
     # 
-    SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=171, name='SECONDARY_ATOM_LABEL_SIZE')
+    SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey(id=175, name='SECONDARY_ATOM_LABEL_SIZE')
 
     ##
     # \brief Specifies the color of bonds.
@@ -103,7 +103,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.COLOR.
     # 
-    BOND_COLOR = CDPL.Base.LookupKey(id=174, name='BOND_COLOR')
+    BOND_COLOR = CDPL.Base.LookupKey(id=178, name='BOND_COLOR')
 
     ##
     # \brief Specifies the font for bond labels.
@@ -112,7 +112,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_FONT.
     # 
-    BOND_LABEL_FONT = CDPL.Base.LookupKey(id=183, name='BOND_LABEL_FONT')
+    BOND_LABEL_FONT = CDPL.Base.LookupKey(id=187, name='BOND_LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around bond labels.
@@ -121,7 +121,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_MARGIN.
     # 
-    BOND_LABEL_MARGIN = CDPL.Base.LookupKey(id=185, name='BOND_LABEL_MARGIN')
+    BOND_LABEL_MARGIN = CDPL.Base.LookupKey(id=189, name='BOND_LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of bond labels.
@@ -130,7 +130,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LABEL_SIZE.
     # 
-    BOND_LABEL_SIZE = CDPL.Base.LookupKey(id=184, name='BOND_LABEL_SIZE')
+    BOND_LABEL_SIZE = CDPL.Base.LookupKey(id=188, name='BOND_LABEL_SIZE')
 
     ##
     # \brief Specifies the distance between the lines of double and triple bonds.
@@ -139,7 +139,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_SPACING. <br>
     # 
-    BOND_LINE_SPACING = CDPL.Base.LookupKey(id=176, name='BOND_LINE_SPACING')
+    BOND_LINE_SPACING = CDPL.Base.LookupKey(id=180, name='BOND_LINE_SPACING')
 
     ##
     # \brief Specifies the width of bond lines.
@@ -148,7 +148,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.LINE_WIDTH.
     # 
-    BOND_LINE_WIDTH = CDPL.Base.LookupKey(id=175, name='BOND_LINE_WIDTH')
+    BOND_LINE_WIDTH = CDPL.Base.LookupKey(id=179, name='BOND_LINE_WIDTH')
 
     ##
     # \brief Specifies the length of the lines in reaction center marks.
@@ -160,7 +160,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=179, name='REACTION_CENTER_LINE_LENGTH')
+    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=183, name='REACTION_CENTER_LINE_LENGTH')
 
     ##
     # \brief Specifies the distance between the lines in reaction center marks.
@@ -172,7 +172,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=180, name='REACTION_CENTER_LINE_SPACING')
+    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=184, name='REACTION_CENTER_LINE_SPACING')
 
     ##
     # \brief Specifies the distance between the hashes of down stereo bonds.
@@ -181,7 +181,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_HASH_SPACING. <br>
     # 
-    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=178, name='STEREO_BOND_HASH_SPACING')
+    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=182, name='STEREO_BOND_HASH_SPACING')
 
     ##
     # \brief Specifies the width of wedge-shaped stereo bonds.
@@ -190,7 +190,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.STEREO_BOND_WEDGE_WIDTH. <br>
     # 
-    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=177, name='STEREO_BOND_WEDGE_WIDTH')
+    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=181, name='STEREO_BOND_WEDGE_WIDTH')
 
     ##
     # \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each line end.
@@ -199,7 +199,7 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.DOUBLE_BOND_TRIM_LENGTH. <br>
     # 
-    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=181, name='DOUBLE_BOND_TRIM_LENGTH')
+    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=185, name='DOUBLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief Specifies the amount by which the non-central lines of triple bonds have to be trimmed at each line end.
@@ -208,4 +208,4 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH. <br>
     # 
-    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=182, name='TRIPLE_BOND_TRIM_LENGTH')
+    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=186, name='TRIPLE_BOND_TRIM_LENGTH')

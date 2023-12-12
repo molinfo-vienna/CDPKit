@@ -62,6 +62,23 @@ def removeAtomsIf(mol: Molecule, pred: AtomPredicate) -> None: pass
 ##
 # \brief 
 # \param mol 
+# \param coords_func 
+# \param dist_tol 
+# \param atom_idx_offs 
+#
+def connectAtoms(mol: Molecule, coords_func: Atom3DCoordinatesFunction, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
+
+##
+# \brief 
+# \param mol 
+# \param dist_tol 
+# \param atom_idx_offs 
+#
+def connectAtoms(mol: Molecule, dist_tol: float = 0.3, atom_idx_offs: int = 0) -> None: pass
+
+##
+# \brief 
+# \param mol 
 # \param pred 
 #
 def removeAtomsIfNot(mol: Molecule, pred: AtomPredicate) -> None: pass

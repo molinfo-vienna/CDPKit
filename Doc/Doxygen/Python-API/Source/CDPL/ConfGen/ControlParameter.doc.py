@@ -31,4 +31,4 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=331, name='STRICT_ERROR_CHECKING')
+    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=335, name='STRICT_ERROR_CHECKING')

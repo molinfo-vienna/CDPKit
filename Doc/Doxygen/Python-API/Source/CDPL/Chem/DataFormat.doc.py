@@ -123,3 +123,18 @@ class DataFormat(Boost.Python.instance):
     # \brief Provides meta-information about the bzip2-compressed <em>Sybyl MOL2</em> format.
     # 
     MOL2_BZ2 = CDPL.Base.DataFormat(name='MOL2_BZ2', descr='BZip2-Compressed Tripos Sybyl MOL2 File', mime_type'', file_exts=['mol2.bz2'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the <em>XYZ</em> format.
+    # 
+    XYZ = CDPL.Base.DataFormat(name='XYZ', descr='Atomic Coordinates XYZ File', mime_type'', file_exts=['xyz'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the gzip-compressed <em>XYZ</em> format.
+    # 
+    XYZ_GZ = CDPL.Base.DataFormat(name='XYZ_GZ', descr='GZip-Compressed Atomic Coordinates XYZ File', mime_type'', file_exts=['xyz.gz'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the bzip2-compressed <em>XYZ</em> format.
+    # 
+    XYZ_BZ2 = CDPL.Base.DataFormat(name='XYZ_BZ2', descr='BZip2-Compressed Atomic Coordinates XYZ File', mime_type'', file_exts=['xyz.bz2'], multi_rec=True)

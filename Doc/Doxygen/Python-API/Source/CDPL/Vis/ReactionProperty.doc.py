@@ -31,7 +31,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=199, name='AGENT_ALIGNMENT')
+    AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=203, name='AGENT_ALIGNMENT')
 
     ##
     # \brief Specifies the style of the reaction agent layout.
@@ -40,7 +40,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    AGENT_LAYOUT = CDPL.Base.LookupKey(id=200, name='AGENT_LAYOUT')
+    AGENT_LAYOUT = CDPL.Base.LookupKey(id=204, name='AGENT_LAYOUT')
 
     ##
     # \brief Specifies the direction of the reaction agent layout.
@@ -49,7 +49,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=201, name='AGENT_LAYOUT_DIRECTION')
+    AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=205, name='AGENT_LAYOUT_DIRECTION')
 
     ##
     # \brief Specifies the color of the reaction arrow.
@@ -58,7 +58,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color
     # 
-    ARROW_COLOR = CDPL.Base.LookupKey(id=187, name='ARROW_COLOR')
+    ARROW_COLOR = CDPL.Base.LookupKey(id=191, name='ARROW_COLOR')
 
     ##
     # \brief Specifies the head length of the reaction arrow.
@@ -67,7 +67,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=189, name='ARROW_HEAD_LENGTH')
+    ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=193, name='ARROW_HEAD_LENGTH')
 
     ##
     # \brief Specifies the head width of the reaction arrow.
@@ -76,7 +76,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=190, name='ARROW_HEAD_WIDTH')
+    ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=194, name='ARROW_HEAD_WIDTH')
 
     ##
     # \brief Specifies the length of the reaction arrow.
@@ -85,7 +85,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    ARROW_LENGTH = CDPL.Base.LookupKey(id=188, name='ARROW_LENGTH')
+    ARROW_LENGTH = CDPL.Base.LookupKey(id=192, name='ARROW_LENGTH')
 
     ##
     # \brief Specifies the line width of the reaction arrow outline.
@@ -94,7 +94,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=192, name='ARROW_LINE_WIDTH')
+    ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=196, name='ARROW_LINE_WIDTH')
 
     ##
     # \brief Specifies the shaft width of the reaction arrow.
@@ -103,7 +103,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=191, name='ARROW_SHAFT_WIDTH')
+    ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=195, name='ARROW_SHAFT_WIDTH')
 
     ##
     # \brief Specifies the style of the reaction arrow.
@@ -112,7 +112,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    ARROW_STYLE = CDPL.Base.LookupKey(id=186, name='ARROW_STYLE')
+    ARROW_STYLE = CDPL.Base.LookupKey(id=190, name='ARROW_STYLE')
 
     ##
     # \brief Specifies the style of the reaction product and reactant layout.
@@ -121,7 +121,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=193, name='COMPONENT_LAYOUT')
+    COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=197, name='COMPONENT_LAYOUT')
 
     ##
     # \brief Specifies the direction of the reaction product and reactant layout.
@@ -130,7 +130,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=194, name='COMPONENT_LAYOUT_DIRECTION')
+    COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=198, name='COMPONENT_LAYOUT_DIRECTION')
 
     ##
     # \brief Specifies the amount of free space that is added horizontally and vertically to the bounds of a reaction component.
@@ -139,7 +139,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    COMPONENT_MARGIN = CDPL.Base.LookupKey(id=195, name='COMPONENT_MARGIN')
+    COMPONENT_MARGIN = CDPL.Base.LookupKey(id=199, name='COMPONENT_MARGIN')
 
     ##
     # \brief Specifies whether or not to show the reactants of the reaction.
@@ -148,7 +148,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_REACTANTS = CDPL.Base.LookupKey(id=196, name='SHOW_REACTANTS')
+    SHOW_REACTANTS = CDPL.Base.LookupKey(id=200, name='SHOW_REACTANTS')
 
     ##
     # \brief Specifies whether or not to show the agents of the reaction.
@@ -157,7 +157,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_AGENTS = CDPL.Base.LookupKey(id=197, name='SHOW_AGENTS')
+    SHOW_AGENTS = CDPL.Base.LookupKey(id=201, name='SHOW_AGENTS')
 
     ##
     # \brief Specifies whether or not to show the products of the reaction.
@@ -166,7 +166,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_PRODUCTS = CDPL.Base.LookupKey(id=198, name='SHOW_PRODUCTS')
+    SHOW_PRODUCTS = CDPL.Base.LookupKey(id=202, name='SHOW_PRODUCTS')
 
     ##
     # \brief Specifies the color of the '+' signs between the components of the reaction.
@@ -175,7 +175,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color
     # 
-    PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=202, name='PLUS_SIGN_COLOR')
+    PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=206, name='PLUS_SIGN_COLOR')
 
     ##
     # \brief Specifies the line width of the '+' signs between the components of the reaction.
@@ -184,7 +184,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=204, name='PLUS_SIGN_LINE_WIDTH')
+    PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=208, name='PLUS_SIGN_LINE_WIDTH')
 
     ##
     # \brief Specifies the size of the '+' signs between the components of the reaction.
@@ -193,7 +193,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=203, name='PLUS_SIGN_SIZE')
+    PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=207, name='PLUS_SIGN_SIZE')
 
     ##
     # \brief Specifies whether or not to draw '+' signs between the components of the reaction.
@@ -202,4 +202,4 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SHOW_PLUS_SIGNS = CDPL.Base.LookupKey(id=205, name='SHOW_PLUS_SIGNS')
+    SHOW_PLUS_SIGNS = CDPL.Base.LookupKey(id=209, name='SHOW_PLUS_SIGNS')

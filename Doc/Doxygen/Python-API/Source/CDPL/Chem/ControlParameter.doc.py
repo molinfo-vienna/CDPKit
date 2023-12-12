@@ -380,3 +380,23 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey(id=138, name='MOL2_MOLECULE_TYPE')
+
+    ##
+    # \brief 
+    #
+    COMMENT_IS_NAME = CDPL.Base.LookupKey(id=140, name='XYZ_COMMENT_IS_NAME')
+
+    ##
+    # \brief 
+    #
+    XYZ_PERCEIVE_CONNECTIVITY = CDPL.Base.LookupKey(id=141, name='XYZ_PERCEIVE_CONNECTIVITY')
+
+    ##
+    # \brief 
+    #
+    XYZ_PERCEIVE_BOND_ORDERS = CDPL.Base.LookupKey(id=142, name='XYZ_PERCEIVE_BOND_ORDERS')
+
+    ##
+    # \brief 
+    #
+    XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey(id=143, name='XYZ_CALC_FORMAL_CHARGES')

@@ -127,7 +127,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief Default setting (= <tt>"S"</tt>) for the control-parameter Chem.ControlParameter.SMILES_RECORD_FORMAT.
     # 
-    SMILES_RECORD_FORMAT = 'S'
+    SMILES_RECORD_FORMAT = 'SN'
 
     ##
     # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_CANONICAL_FORM.
@@ -248,3 +248,23 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief 
     #
     MOL2_OUTPUT_SUBSTRUCTURES = True
+
+    ##
+    # \brief 
+    #
+    COMMENT_IS_NAME = True
+
+    ##
+    # \brief 
+    #
+    XYZ_PERCEIVE_CONNECTIVITY = True
+
+    ##
+    # \brief 
+    #
+    XYZ_PERCEIVE_BOND_ORDERS = True
+
+    ##
+    # \brief 
+    #
+    XYZ_CALC_FORMAL_CHARGES = True

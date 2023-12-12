@@ -32,52 +32,52 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=81, name='MATCH_EXPRESSION')
+    COMMENT = CDPL.Base.LookupKey(id=81, name='COMMENT')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=82, name='MATCH_CONSTRAINTS')
+    TIMESTAMP = CDPL.Base.LookupKey(id=82, name='TIMESTAMP')
 
     ##
     # \brief 
     #
-    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=83, name='COMPONENT_GROUPS')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=83, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    ATOM_MAPPING = CDPL.Base.LookupKey(id=84, name='ATOM_MAPPING')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=84, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    REACTION_DATA = CDPL.Base.LookupKey(id=85, name='REACTION_DATA')
+    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=85, name='COMPONENT_GROUPS')
 
     ##
     # \brief 
     #
-    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=86, name='MDL_USER_INITIALS')
+    ATOM_MAPPING = CDPL.Base.LookupKey(id=86, name='ATOM_MAPPING')
 
     ##
     # \brief 
     #
-    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=87, name='MDL_PROGRAM_NAME')
+    REACTION_DATA = CDPL.Base.LookupKey(id=87, name='REACTION_DATA')
 
     ##
     # \brief 
     #
-    MDL_TIMESTAMP = CDPL.Base.LookupKey(id=88, name='MDL_TIMESTAMP')
+    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=88, name='MDL_USER_INITIALS')
 
     ##
     # \brief 
     #
-    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=89, name='MDL_REGISTRY_NUMBER')
+    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=89, name='MDL_PROGRAM_NAME')
 
     ##
     # \brief 
     #
-    MDL_COMMENT = CDPL.Base.LookupKey(id=90, name='MDL_COMMENT')
+    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=90, name='MDL_REGISTRY_NUMBER')
 
     ##
     # \brief 

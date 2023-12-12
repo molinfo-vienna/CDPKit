@@ -27,4 +27,4 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MMFF94_TYPE_INDEX = CDPL.Base.LookupKey(id=329, name='MMFF94_TYPE_INDEX')
+    MMFF94_TYPE_INDEX = CDPL.Base.LookupKey(id=333, name='MMFF94_TYPE_INDEX')

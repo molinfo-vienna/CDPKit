@@ -31,9 +31,9 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=323, name='STRICT_ERROR_CHECKING')
+    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=327, name='STRICT_ERROR_CHECKING')
 
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=324, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
+    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=328, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')

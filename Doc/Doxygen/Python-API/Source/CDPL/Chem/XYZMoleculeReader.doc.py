@@ -20,11 +20,13 @@
 #
 
 ##
-# \brief Provides keys for built-in Grid.AttributedGrid properties.
-# 
-class AttributedGridProperty(Boost.Python.instance):
+# \brief 
+#
+class XYZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief 
-    #
-    NAME = CDPL.Base.LookupKey(id=326, name='NAME')
+    # \brief Constructs a <tt>XYZMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
+    def __init__(is: Base.IStream) -> None: pass

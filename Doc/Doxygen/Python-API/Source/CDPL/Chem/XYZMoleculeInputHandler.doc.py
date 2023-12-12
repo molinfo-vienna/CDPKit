@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Provides keys for built-in Grid.AttributedGrid properties.
+# \brief A handler for the input of molecule data in the <em>XYZ</em> format.
 # 
-class AttributedGridProperty(Boost.Python.instance):
+class XYZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief 
-    #
-    NAME = CDPL.Base.LookupKey(id=326, name='NAME')
+    # \brief Initializes the \e %XYZMoleculeInputHandler instance.
+    # 
+    def __init__() -> None: pass

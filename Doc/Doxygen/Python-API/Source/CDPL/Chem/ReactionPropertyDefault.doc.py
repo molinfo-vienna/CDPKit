@@ -32,17 +32,17 @@ class ReactionPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
+    COMMENT = ''
+
+    ##
+    # \brief 
+    #
     MATCH_CONSTRAINTS = MatchConstraintList()
 
     ##
     # \brief 
     #
     MDL_RXN_FILE_VERSION = 0
-
-    ##
-    # \brief 
-    #
-    MDL_COMMENT = ''
 
     ##
     # \brief 

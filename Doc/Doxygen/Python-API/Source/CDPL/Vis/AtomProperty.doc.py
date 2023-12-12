@@ -31,7 +31,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color
     # 
-    COLOR = CDPL.Base.LookupKey(id=147, name='COLOR')
+    COLOR = CDPL.Base.LookupKey(id=151, name='COLOR')
 
     ##
     # \brief Specifies the size of radical electron dots.
@@ -40,7 +40,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=153, name='RADICAL_ELECTRON_DOT_SIZE')
+    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=157, name='RADICAL_ELECTRON_DOT_SIZE')
 
     ##
     # \brief Specifies the font for atom element and query match expression labels.
@@ -49,7 +49,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font
     # 
-    LABEL_FONT = CDPL.Base.LookupKey(id=148, name='LABEL_FONT')
+    LABEL_FONT = CDPL.Base.LookupKey(id=152, name='LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around atom labels.
@@ -58,7 +58,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LABEL_MARGIN = CDPL.Base.LookupKey(id=152, name='LABEL_MARGIN')
+    LABEL_MARGIN = CDPL.Base.LookupKey(id=156, name='LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of atom element and query match expression labels.
@@ -67,7 +67,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LABEL_SIZE = CDPL.Base.LookupKey(id=149, name='LABEL_SIZE')
+    LABEL_SIZE = CDPL.Base.LookupKey(id=153, name='LABEL_SIZE')
 
     ##
     # \brief Specifies the font for text labels that show the value of various atomic properties.
@@ -76,7 +76,7 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font
     # 
-    SECONDARY_LABEL_FONT = CDPL.Base.LookupKey(id=150, name='SECONDARY_LABEL_FONT')
+    SECONDARY_LABEL_FONT = CDPL.Base.LookupKey(id=154, name='SECONDARY_LABEL_FONT')
 
     ##
     # \brief Specifies the size of text labels that show the value of various atomic properties.
@@ -85,4 +85,4 @@ class AtomProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    SECONDARY_LABEL_SIZE = CDPL.Base.LookupKey(id=151, name='SECONDARY_LABEL_SIZE')
+    SECONDARY_LABEL_SIZE = CDPL.Base.LookupKey(id=155, name='SECONDARY_LABEL_SIZE')

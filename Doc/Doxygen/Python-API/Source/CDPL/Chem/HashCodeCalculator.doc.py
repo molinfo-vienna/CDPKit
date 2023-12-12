@@ -133,26 +133,6 @@ class HashCodeCalculator(Boost.Python.instance):
     def setBondHashSeedFunction(func: UInt64BondFunctor) -> None: pass
 
     ##
-    # \brief Allows to specify whether or not global stereochemical features shall have an influence on the calculated hash codes.
-    # 
-    # When global stereochemical features are considered, the hash code of a molecular graph will not only depend on basic atom and bond properties but also on additional stereochemical characteristics like the relative spatial arrangement of substituents. The mutual spatial arrangement of substituents may be the only feature that allows the differentiation of stereoisomers with a plane of symmetry. Diastereoisomers like <em>cis-1,4-Cyclohexanediol</em> and <em>trans-1,4-Cyclohexanediol</em> are typical examples for such corner cases.
-    # 
-    # \param include If <tt>True</tt>, global stereochemical features will be considered and get ignored otherwise.
-    # 
-    # \note By default, global stereochemical features are included in the hash code calculation.
-    # 
-    def includeGlobalStereoFeatures(include: bool) -> None: pass
-
-    ##
-    # \brief Tells whether or not global stereochemical features influence the calculated hash codes.
-    # 
-    # \return <tt>True</tt> if global stereochemical features of a molecular graph are considered, and <tt>False</tt> otherwise. 
-    # 
-    # \see includeGlobalStereoFeatures()
-    # 
-    def globalStereoFeaturesIncluded() -> bool: pass
-
-    ##
     # \brief Calculates the hash code of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to calculate the hash code.
@@ -178,5 +158,3 @@ class HashCodeCalculator(Boost.Python.instance):
     objectID = property(getObjectID)
 
     result = property(getResult)
-
-    globalStereoFeatures = property(globalStereoFeaturesIncluded, includeGlobalStereoFeatures)

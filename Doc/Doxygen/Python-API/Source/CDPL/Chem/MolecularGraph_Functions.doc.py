@@ -167,11 +167,10 @@ def setStructureData(molgraph: MolecularGraph, data: StringDataBlock) -> None: p
 # \param molgraph 
 # \param atom_flags 
 # \param bond_flags 
-# \param global_stereo 
 # \param ord_h_deplete 
 # \return 
 #
-def calcHashCode(molgraph: MolecularGraph, atom_flags: int = 2147483648, bond_flags: int = 2147483648, global_stereo: bool = True, ord_h_deplete: bool = True) -> int: pass
+def calcHashCode(molgraph: MolecularGraph, atom_flags: int = 2147483648, bond_flags: int = 2147483648, ord_h_deplete: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -556,28 +555,28 @@ def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: Math.Vector
 # \brief 
 # \param molgraph 
 #
-def clearMDLTimestamp(molgraph: MolecularGraph) -> None: pass
+def clearTimestamp(molgraph: MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def hasMDLTimestamp(molgraph: MolecularGraph) -> bool: pass
+def hasTimestamp(molgraph: MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getMDLTimestamp(molgraph: MolecularGraph) -> int: pass
+def getTimestamp(molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param time 
 #
-def setMDLTimestamp(molgraph: MolecularGraph, time: int) -> None: pass
+def setTimestamp(molgraph: MolecularGraph, time: int) -> None: pass
 
 ##
 # \brief 
@@ -1204,28 +1203,28 @@ def translateFragment(src_molgraph: MolecularGraph, src_frag: Fragment, tgt_molg
 # \brief 
 # \param molgraph 
 #
-def clearMDLComment(molgraph: MolecularGraph) -> None: pass
+def clearComment(molgraph: MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def hasMDLComment(molgraph: MolecularGraph) -> bool: pass
+def hasComment(molgraph: MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getMDLComment(molgraph: MolecularGraph) -> str: pass
+def getComment(molgraph: MolecularGraph) -> str: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param comment 
 #
-def setMDLComment(molgraph: MolecularGraph, comment: str) -> None: pass
+def setComment(molgraph: MolecularGraph, comment: str) -> None: pass
 
 ##
 # \brief 

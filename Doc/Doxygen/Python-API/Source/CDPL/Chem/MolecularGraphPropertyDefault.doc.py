@@ -32,6 +32,11 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
+    COMMENT = ''
+
+    ##
+    # \brief 
+    #
     STOICHIOMETRIC_NUMBER = 1.0
 
     ##
@@ -43,11 +48,6 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     MDL_CTAB_VERSION = 0
-
-    ##
-    # \brief 
-    #
-    MDL_COMMENT = ''
 
     ##
     # \brief 

@@ -20,51 +20,31 @@
 #
 
 ##
-# \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
+# \brief Provides constants that are used to specify the <em>cis/trans</em> configuration of bonds.
 # 
 class BondConfiguration(Boost.Python.instance):
 
     ##
-    # \brief Specifies that the configuration of the bond is undefined.
+    # \brief Specifies that the configuration of the bond is completely undefined.
     # 
     UNDEF = 0
 
     ##
-    # \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric) to be assigned a configuration.
+    # \brief Specifies that a bond does not meet the requirements to be assigned a configuration.
     # 
     NONE = 1
 
     ##
-    # \brief Specifies that the bond has <em>E (or trans)</em> configuration.
-    # 
-    E = 2
-
-    ##
-    # \brief Specifies that the bond has <em>trans (or E)</em> configuration.
+    # \brief Specifies that the bond has <em>trans</em> configuration.
     # 
     TRANS = 2
 
     ##
-    # \brief Specifies that the bond has <em>Z (or cis)</em> configuration.
-    # 
-    Z = 4
-
-    ##
-    # \brief Specifies that the bond has <em>cis (or Z)</em> configuration.
+    # \brief Specifies that the bond has <em>cis</em> configuration.
     # 
     CIS = 4
 
     ##
-    # \brief Specifies that the bond is a stereogenic center but has no defined configuration.
+    # \brief Specifies that the bond meets the requirements but has no defined configuration.
     # 
     EITHER = 8
-
-    ##
-    # \brief Specifies that the bond has <em>seqCis</em> configuration.
-    # 
-    seqCIS = 17
-
-    ##
-    # \brief Specifies that the bond has <em>seqTrans</em> configuration.
-    # 
-    seqTRANS = 16

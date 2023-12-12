@@ -104,11 +104,10 @@ def setMDLMoleculeRecord(rxn: Reaction, mol_rec: Molecule) -> None: pass
 # \param role_mask 
 # \param atom_flags 
 # \param bond_flags 
-# \param global_stereo 
 # \param ord_h_deplete 
 # \return 
 #
-def calcHashCode(rxn: Reaction, role_mask: int = 7, atom_flags: int = 2147483648, bond_flags: int = 2147483648, global_stereo: bool = True, ord_h_deplete: bool = True) -> int: pass
+def calcHashCode(rxn: Reaction, role_mask: int = 7, atom_flags: int = 2147483648, bond_flags: int = 2147483648, ord_h_deplete: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -279,28 +278,28 @@ def setMatchExpression(rxn: Reaction, expr: ReactionMatchExpression) -> None: pa
 # \brief 
 # \param rxn 
 #
-def clearMDLTimestamp(rxn: Reaction) -> None: pass
+def clearTimestamp(rxn: Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def hasMDLTimestamp(rxn: Reaction) -> bool: pass
+def hasTimestamp(rxn: Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getMDLTimestamp(rxn: Reaction) -> int: pass
+def getTimestamp(rxn: Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param time 
 #
-def setMDLTimestamp(rxn: Reaction, time: int) -> None: pass
+def setTimestamp(rxn: Reaction, time: int) -> None: pass
 
 ##
 # \brief 
@@ -528,28 +527,28 @@ def initSubstructureSearchTarget(rxn: Reaction, overwrite: bool) -> None: pass
 # \brief 
 # \param rxn 
 #
-def clearMDLComment(rxn: Reaction) -> None: pass
+def clearComment(rxn: Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def hasMDLComment(rxn: Reaction) -> bool: pass
+def hasComment(rxn: Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getMDLComment(rxn: Reaction) -> str: pass
+def getComment(rxn: Reaction) -> str: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param comment 
 #
-def setMDLComment(rxn: Reaction, comment: str) -> None: pass
+def setComment(rxn: Reaction, comment: str) -> None: pass
 
 ##
 # \brief 

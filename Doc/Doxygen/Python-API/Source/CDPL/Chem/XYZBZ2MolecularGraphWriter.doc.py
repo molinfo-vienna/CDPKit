@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief Provides keys for built-in Grid.AttributedGrid properties.
-# 
-class AttributedGridProperty(Boost.Python.instance):
+# \brief 
+#
+class XYZBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief 
-    #
-    NAME = CDPL.Base.LookupKey(id=326, name='NAME')
+    # \brief Initializes the \e %XYZBZ2MolecularGraphWriter instance.
+    # \param ios 
+    # 
+    def __init__(ios: Base.IOStream) -> None: pass
