@@ -1072,8 +1072,8 @@ void ConfGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
     printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
     printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
-    printMessage(VERBOSE, " Max. Num. Output Conformers:         " + std::to_string(settings.getMaxNumOutputConformers()));
-
+    printMessage(VERBOSE, " Max. Num. Output Conformers:         " + (settings.getMaxNumOutputConformers() == 0 ? std::string("No Limit") : 
+                                                                      std::to_string(settings.getMaxNumOutputConformers())));
     if (settings.getMinRMSD() > 0.0)
         printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.2f") % settings.getMinRMSD()).str());
     else
