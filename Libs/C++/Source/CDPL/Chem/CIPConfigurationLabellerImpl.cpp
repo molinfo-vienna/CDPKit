@@ -67,14 +67,12 @@ void Chem::CIPConfigurationLabellerImpl::setup(const MolecularGraph& molgraph)
 
 unsigned int Chem::CIPConfigurationLabellerImpl::getLabel(const Atom& atom)
 {
-    // TODO
-    return CIPDescriptor::NONE;
+    return getLabelGeneric(atom);
 }
 
 unsigned int Chem::CIPConfigurationLabellerImpl::getLabel(const Bond& bond)
 {
-    // TODO
-    return CIPDescriptor::NONE;
+    return getLabelGeneric(bond);
 }
             
 void Chem::CIPConfigurationLabellerImpl::copy(const CIPConfigurationLabellerImpl& labeller)
@@ -90,26 +88,52 @@ void Chem::CIPConfigurationLabellerImpl::copy(const CIPConfigurationLabellerImpl
     setup(*labeller.molGraph);
 }
 
+unsigned int Chem::CIPConfigurationLabellerImpl::getLabelGeneric(const AtomContainer& cntnr)
+{
+    // TODO
+    return CIPDescriptor::NONE;
+}
+
 void Chem::CIPConfigurationLabellerImpl::extractAtomCenters()
 {
     for (const auto& atom : molGraph->getAtoms()) {
         StereoDescriptor descr = calcStereoDescriptor(atom, *molGraph, 0);
+        std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 
-        if (descr.getNumReferenceAtoms() < 3)
+        if (num_ref_atoms < 3)
             continue;
-/*        
+        
         const Atom* const* ref_atoms = descr.getReferenceAtoms();
         unsigned int config = descr.getConfiguration();
 
         switch (config) {
 
-         
+            case AtomConfiguration::R:
+                config = CIPTetrahedralCenter::LEFT;
+                break;
+    
+            case AtomConfiguration::S:
+                config = CIPTetrahedralCenter::RIGHT;
+                break;
+                
             default:
                 config = CIPTetrahedralCenter::UNSPEC;
         }
 
+        StereoCenterPtr ctr_ptr;
+
+        if (num_ref_atoms == 4)
+            ctr_ptr.reset(new CIPTetrahedralCenter(digraph,
+                                                   &atom,
+                                                   { ref_atoms[3], ref_atoms[0], ref_atoms[1], ref_atoms[2] },
+                                                   config));
+        else
+            ctr_ptr.reset(new CIPTetrahedralCenter(digraph,
+                                                   &atom,
+                                                   { &atom, ref_atoms[0], ref_atoms[1], ref_atoms[2] },
+                                                   config));
+
         stereoCenters.emplace(&atom, std::move(ctr_ptr));
-*/
     }
 }
 
