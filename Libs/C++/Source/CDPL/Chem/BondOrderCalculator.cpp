@@ -901,7 +901,7 @@ void Chem::BondOrderCalculator::fixNitroGroups(Util::STArray& orders)
             o_bond = &bond;
         }
 
-        if (!o_bond)
+        if (!o_bond || num_o_bonds < 2)
             continue;
 
         orders[molGraph->getBondIndex(*o_bond)] = 2;
