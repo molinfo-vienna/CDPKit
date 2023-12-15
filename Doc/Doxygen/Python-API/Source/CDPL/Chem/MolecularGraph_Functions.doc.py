@@ -929,15 +929,6 @@ def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None
 ##
 # \brief 
 # \param molgraph 
-# \param overwrite 
-# \param ring_bonds 
-# \param min_ring_size 
-#
-def calcBondDirections(molgraph: MolecularGraph, overwrite: bool, ring_bonds: bool = True, min_ring_size: int = 8) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
 # \return 
 #
 def perceiveComponentGroups(molgraph: MolecularGraph) -> FragmentList: pass
