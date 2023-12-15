@@ -49,6 +49,7 @@
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/BondDirection.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -56,7 +57,7 @@
 #include "SMILESDataReader.hpp"
 #include "SMILESData.hpp"
 
-#include <iostream>
+
 using namespace CDPL;
 
 
@@ -64,6 +65,22 @@ namespace
 {
 
     const Chem::SMILESDataReader::STArray NO_BONDS;
+
+    char flipBondDirection(char dir) {
+        switch (dir) {
+
+            case Chem::SMILES::BondSymbol::UP_DIR_FLAG:
+                return Chem::SMILES::BondSymbol::DOWN_DIR_FLAG;
+
+            case Chem::SMILES::BondSymbol::DOWN_DIR_FLAG:
+                return Chem::SMILES::BondSymbol::UP_DIR_FLAG;
+
+            default:
+                break;
+        }
+
+        return 0;
+    }
 }
 
 
@@ -491,6 +508,8 @@ bool Chem::SMILESDataReader::parseBondParameters(BondParameters& bond_params)
 void Chem::SMILESDataReader::createBond(Molecule& mol, Atom* atom1, Atom* atom2,
                                         const BondParameters& bond_params, std::size_t lex_bond_no)
 {
+    using namespace SMILES;
+
     assert(atom1 != 0 && atom2 != 0);
 
     std::size_t atom1_idx = mol.getAtomIndex(*atom1);
@@ -513,6 +532,19 @@ void Chem::SMILESDataReader::createBond(Molecule& mol, Atom* atom1, Atom* atom2,
             setOrder(bond, std::max(bond_params.order, std::size_t(1)));
     }
 
+    switch (bond_params.direction) {
+
+        case BondSymbol::UP_DIR_FLAG:
+            setDirection(bond, BondDirection::UP);
+            break;
+
+        case BondSymbol::DOWN_DIR_FLAG:
+            setDirection(bond, BondDirection::DOWN);
+
+        default:
+            break;
+    }
+    
     setBondDirection(bond_idx, bond_params.direction);
     setBondTableEntry(lex_bond_no, &bond);
 }
@@ -1092,8 +1124,15 @@ void Chem::SMILESDataReader::setBondStereoDescriptors(Molecule& mol) const
                     geom_ref_atoms[i] = &nbr_atom;
                     nbr_bond_dirs[i][0] = getBondDirection(mol.getBondIndex(nbr_bond));
 
-                } else
-                    nbr_bond_dirs[i][1] = getBondDirection(mol.getBondIndex(nbr_bond));        
+                    if (&nbr_atom != &nbr_bond.getEnd())
+                        nbr_bond_dirs[i][0] = flipBondDirection(nbr_bond_dirs[i][0]);
+                    
+                } else {
+                    nbr_bond_dirs[i][1] = getBondDirection(mol.getBondIndex(nbr_bond));
+
+                    if (&nbr_atom != &nbr_bond.getEnd())
+                        nbr_bond_dirs[i][1] = flipBondDirection(nbr_bond_dirs[i][1]);
+                }
             }
 
             if (!geom_ref_atoms[i]) {
@@ -1121,7 +1160,7 @@ void Chem::SMILESDataReader::setBondStereoDescriptors(Molecule& mol) const
         if (skip)
             continue;
     
-        setStereoDescriptor(bond, StereoDescriptor((nbr_bond_dirs[0][0] == nbr_bond_dirs[1][0] ? BondConfiguration::TRANS : BondConfiguration::CIS),
+        setStereoDescriptor(bond, StereoDescriptor((nbr_bond_dirs[0][0] == nbr_bond_dirs[1][0] ? BondConfiguration::CIS : BondConfiguration::TRANS),
                                                    *geom_ref_atoms[0], bond.getBegin(), bond.getEnd(), *geom_ref_atoms[1]));
     }
 }
@@ -1136,19 +1175,27 @@ void Chem::SMILESDataReader::BondParameters::combineWith(const BondParameters& p
         return;
     }
 
-    if (!params.explicitBond)
+    if (!params.explicitBond) {
+        direction = flipBondDirection(direction);
         return;
-
-    if (direction == 0)
-        direction = params.direction;
-
-    else if (params.direction != 0 && direction != params.direction) {
-        if (strict_error_checks)
-            throw Base::IOError("SMILESDataReader: conflicting multiple bond direction specifications");
-
-        direction = 0;
     }
+    
+    if (direction != 0 && params.direction != 0) {
+        if (direction == params.direction) {
+            if (strict_error_checks)
+                throw Base::IOError("SMILESDataReader: conflicting ring closure bond direction specifications");
 
+            direction = 0;
+
+        } else
+            direction = params.direction;
+    
+    } else if (direction != 0 && params.direction == 0)
+          direction = flipBondDirection(direction);
+
+    else if (direction == 0 && params.direction != 0)
+        direction = params.direction;
+    
     if (order == 0)
         order = params.order;
 

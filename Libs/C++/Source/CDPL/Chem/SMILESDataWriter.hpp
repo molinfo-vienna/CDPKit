@@ -53,7 +53,6 @@ namespace CDPL
         class Atom;
         class Bond;
         class CanonicalNumberingCalculator;
-        class BondDirectionCalculator;
 
         class SMILESDataWriter
         {
@@ -91,6 +90,14 @@ namespace CDPL
             DFSTreeNode* createRootNode(const MolecularGraph&);
 
             void distRingClosureNumbers();
+            
+            void distBondDirections(const MolecularGraph& molgraph);
+            void distBondDirections(DFSTreeEdge* edge);
+            
+            void collectStereoBondEdges(DFSTreeNode* node, const MolecularGraph& molgraph);
+            
+            DFSTreeEdge* getBondStereoRefEdge(DFSTreeNode* node, const DFSTreeEdge* excl_edge);
+
             void generateSMILES(std::ostream&) const;
 
             std::size_t getRingClosureNumber();
@@ -149,27 +156,49 @@ namespace CDPL
 
                 DFSTreeEdge(SMILESDataWriter&);
 
-                void        setBond(const Bond*);
+                void clear();
+                
+                void setBond(const Bond*);
                 const Bond* getBond() const;
 
                 void setMolGraph(const MolecularGraph*);
 
                 void setNodes(DFSTreeNode*, DFSTreeNode*);
 
-                const DFSTreeNode* getBegin() const;
-                const DFSTreeNode* getEnd() const;
+                DFSTreeNode* getBegin() const;
+                DFSTreeNode* getEnd() const;
 
-                void        setRingClosureNumber(std::size_t);
+                DFSTreeNode* getOtherNode(const DFSTreeNode* node) const;
+                
+                void setRingClosureNumber(std::size_t);
                 std::size_t getRingClosureNumber() const;
 
-                void writeBondSymbol(std::ostream&) const;
+                void setDirection(const DFSTreeNode* node, int level);
+                char getDirection() const;
 
+                int getLevel(const DFSTreeNode* node) const;
+
+                void setConfiguration(unsigned int config);
+                unsigned int getConfiguration() const;
+
+                void setConfigRefAtoms(const Atom* ref1, const Atom* ref2);
+                const Atom* const* getConfigRefAtoms() const;
+                
+                void setVisited(bool vis);
+                bool wasVisited() const;
+                
+                void writeBondSymbol(std::ostream&) const;
+                
               private:
                 SMILESDataWriter&     writer;
                 const MolecularGraph* molGraph;
                 const Bond*           bond;
                 DFSTreeNode*          nodes[2];
                 std::size_t           ringClosureNumber;
+                char                  direction;
+                unsigned int          config;
+                const Atom*           configRefAtoms[2];
+                bool                  visited;
             };
 
             class DFSTreeNode
@@ -187,25 +216,39 @@ namespace CDPL
 
                 const Atom* getAtom() const;
 
-                void        setLexicalOrder(std::size_t);
+                void setLexicalOrder(std::size_t);
                 std::size_t getLexicalOrder() const;
 
-                void               setParentEdge(DFSTreeEdge*);
-                const DFSTreeEdge* getParentEdge() const;
+                void  setParentEdge(DFSTreeEdge*);
+                DFSTreeEdge* getParentEdge() const;
 
                 void addChildEdge(DFSTreeEdge*);
                 void addRingClosureInEdge(DFSTreeEdge*);
                 void addRingClosureOutEdge(DFSTreeEdge*);
 
+                EdgeIterator getChildEdgesBegin();
+                EdgeIterator getChildEdgesEnd();
+                
                 EdgeIterator getRingClosureInEdgesBegin();
                 EdgeIterator getRingClosureInEdgesEnd();
 
                 EdgeIterator getRingClosureOutEdgesBegin();
                 EdgeIterator getRingClosureOutEdgesEnd();
 
+                EdgeIterator begin();
+                EdgeIterator end();
+
+                void hasDirEdge(bool has);
+                bool hasDirEdge() const;
+                
+                void setStereoBondEdge(DFSTreeEdge* edge);
+                DFSTreeEdge* getStereoBondEdge() const;
+                
                 void generateSMILES(std::ostream&) const;
 
               private:
+                void collectEdges();
+                
                 void writeAtomString(std::ostream&) const;
                 void writeRingClosures(std::ostream&) const;
                 void writeChildNodes(std::ostream&) const;
@@ -227,18 +270,20 @@ namespace CDPL
                 EdgeList              childEdges;
                 EdgeList              ringClosureInEdges;
                 EdgeList              ringClosureOutEdges;
+                EdgeList              edges;
                 std::size_t           lexicalOrder;
+                bool                  dirEdge;
+                DFSTreeEdge*          stereoBondEdge;
             };
 
-            typedef std::unique_ptr<BondDirectionCalculator>      BondDirCalculatorPtr;
             typedef std::unique_ptr<CanonicalNumberingCalculator> CanonNumberingCalculatorPtr;
             typedef std::unique_ptr<Fragment>                     FragmentPtr;
-            typedef std::vector<const Atom*>                    AtomList;
-            typedef std::vector<DFSTreeNode*>                   NodeList;
-            typedef std::vector<std::size_t>                    RingClosureNumberStack;
-            typedef std::vector<std::string>                    CanonSMILESList;
-            typedef Util::ObjectStack<DFSTreeNode>              NodeCache;
-            typedef Util::ObjectStack<DFSTreeEdge>              EdgeCache;
+            typedef std::vector<const Atom*>                      AtomList;
+            typedef std::vector<DFSTreeNode*>                     NodeList;
+            typedef std::vector<std::size_t>                      RingClosureNumberStack;
+            typedef std::vector<std::string>                      CanonSMILESList;
+            typedef Util::ObjectStack<DFSTreeNode>                NodeCache;
+            typedef Util::ObjectStack<DFSTreeEdge>                EdgeCache;
 
             const Base::DataIOBase&     ioBase;
             NodeCache                   nodeCache;
@@ -248,11 +293,10 @@ namespace CDPL
             AtomList                    canonAtomList;
             FragmentPtr                 hDepleteMolGraph;
             FragmentPtr                 canonMolGraph;
-            BondDirCalculatorPtr        bondDirCalculator;
             CanonNumberingCalculatorPtr canonNumberingCalculator;
             CanonSMILESList             canonSMILESStrings;
             Util::STArray               canonNumbering;
-            Util::UIArray               bondDirections;
+            EdgeList                    stereoBondEdges;
             CtrlParameters              ctrlParameters;
             RingClosureNumberStack      ringClosureNumberStack;
             std::size_t                 highestRingClosureNumber;

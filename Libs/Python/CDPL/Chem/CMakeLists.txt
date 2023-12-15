@@ -104,7 +104,6 @@ set(chem_MOD_SRCS
     CIPPriorityCalculatorExport.cpp
     CIPConfigurationLabellerExport.cpp 
     BondStereoFlagCalculatorExport.cpp 
-    BondDirectionCalculatorExport.cpp 
     BondOrderCalculatorExport.cpp 
     KekuleStructureCalculatorExport.cpp 
     HashCodeCalculatorExport.cpp 

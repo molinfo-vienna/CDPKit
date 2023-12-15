@@ -196,7 +196,6 @@ set(cdpl-chem_LIB_SRCS
     Atom2DCoordinatesCalculator.cpp
     Hydrogen3DCoordinatesCalculator.cpp
     BondStereoFlagCalculator.cpp
-    BondDirectionCalculator.cpp
     BondOrderCalculator.cpp
     KekuleStructureCalculator.cpp
     HashCodeCalculator.cpp
@@ -275,7 +274,6 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphINCHIFunctions.cpp
     MolecularGraphHashCodeFunction.cpp
     MolecularGraphBond2DStereoFlagsFunction.cpp 
-    MolecularGraphBondDirectionsFunction.cpp 
     MolecularGraphCIPPrioritiesFunction.cpp 
     MolecularGraphSymmetryClassesFunction.cpp 
     MolecularGraphCanonicalNumberingFunction.cpp 

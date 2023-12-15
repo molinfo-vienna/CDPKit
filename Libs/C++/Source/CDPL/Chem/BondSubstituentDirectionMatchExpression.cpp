@@ -41,6 +41,49 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+    unsigned int getBondDirForLevel(int level, const Chem::Bond* bond, const Chem::Atom* level_atom)
+    {
+        using namespace Chem;
+        
+        if (!bond)
+            return BondDirection::NONE;
+
+        switch (level) {
+
+            case 1:
+                return (&bond->getEnd() == level_atom ? BondDirection::UP : BondDirection::DOWN);
+                
+            case -1:
+                return (&bond->getEnd() == level_atom ? BondDirection::DOWN : BondDirection::UP);
+            
+            default:
+                return BondDirection::NONE; 
+        }
+    }
+
+    unsigned int flipBondDir(unsigned int dir)
+    {
+        using namespace Chem;
+        
+
+        switch (dir) {
+
+            case BondDirection::UP:
+                return BondDirection::DOWN;
+
+            case BondDirection::DOWN:
+                return BondDirection::UP;
+            
+            default:
+                return BondDirection::NONE; 
+        }
+    }
+}
+
+
 bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
                                                                const Bond& target_bond, const MolecularGraph& target_molgraph,
                                                                const AtomBondMapping& mapping, const Base::Any& aux_data) const
@@ -145,20 +188,17 @@ bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query
         target_config_ref_bonds[1] = mpd_query_bond_atoms[1]->findBondToAtom(*target_config_ref_atoms[1]);
         
         if (target_config_ref_bonds[0] != 0 && target_config_ref_bonds[1] != 0) {
-            unsigned int target_nbr_bond_dirs[2][2] = { { BondDirection::UP, BondDirection::DOWN } };
-
-            if (target_config == BondConfiguration::CIS) {
-                target_nbr_bond_dirs[1][0] = BondDirection::DOWN; 
-                target_nbr_bond_dirs[1][1] = BondDirection::UP; 
-
-            } else {
-                target_nbr_bond_dirs[1][0] = BondDirection::UP; 
-                target_nbr_bond_dirs[1][1] = BondDirection::DOWN; 
-            }
-
             if ((mpd_query_nbr_bonds[0][0] == target_config_ref_bonds[0]) ^ (mpd_query_nbr_bonds[1][0] == target_config_ref_bonds[1]))
-                std::swap(target_nbr_bond_dirs[1][0], target_nbr_bond_dirs[1][1]);
+                target_config = (target_config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
 
+            unsigned int target_nbr_bond_dirs[2][2];
+
+            target_nbr_bond_dirs[0][0] = getBondDirForLevel(-1, mpd_query_nbr_bonds[0][0], mpd_query_bond_atoms[0]);
+            target_nbr_bond_dirs[0][1] = getBondDirForLevel(1, mpd_query_nbr_bonds[0][1], mpd_query_bond_atoms[0]);
+
+            target_nbr_bond_dirs[1][0] = getBondDirForLevel(target_config == BondConfiguration::CIS ? -1 : 1, mpd_query_nbr_bonds[1][0], mpd_query_bond_atoms[1]);
+            target_nbr_bond_dirs[1][1] = getBondDirForLevel(target_config == BondConfiguration::CIS ? 1 : -1, mpd_query_nbr_bonds[1][1], mpd_query_bond_atoms[1]);
+            
             for (bool first_check = true; true; first_check = false) {
                 bool had_mismatch = false;
 
@@ -175,8 +215,9 @@ bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query
                 if (!first_check)
                     return false;
 
-                std::swap(target_nbr_bond_dirs[0][0], target_nbr_bond_dirs[0][1]);
-                std::swap(target_nbr_bond_dirs[1][0], target_nbr_bond_dirs[1][1]);
+                for (std::size_t i = 0; i < 2; i++)
+                    for (std::size_t j = 0; j < 2; j++)
+                        target_nbr_bond_dirs[i][j] = flipBondDir(target_nbr_bond_dirs[i][j]);
             }
 
             return false;
@@ -184,12 +225,12 @@ bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query
     }
 
     //    if (target_config == BondConfiguration::EITHER) {
-    const Base::Any unspec_dir(BondDirection::UNSPECIFIED);
+    static const Base::Any no_dir(BondDirection::NONE);
 
     for (std::size_t i = 0; i < 2; i++) 
         for (std::size_t j = 0; j < 2 && query_nbr_bonds[i][j]; j++) 
             if (mpd_query_nbr_bonds[i][j] && !(*query_nbr_bond_exprs[i][j])(*query_nbr_bonds[i][j], query_molgraph, *mpd_query_nbr_bonds[i][j],
-                                                                            target_molgraph, mapping, unspec_dir))
+                                                                            target_molgraph, mapping, no_dir))
                 return false;
     //    }
 

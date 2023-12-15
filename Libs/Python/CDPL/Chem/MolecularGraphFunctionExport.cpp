@@ -112,9 +112,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("undef_only") = true));
     python::def("calcBond2DStereoFlags", &Chem::calcBond2DStereoFlags, 
                 (python::arg("molgraph"), python::arg("overwrite")));
-    python::def("calcBondDirections", &Chem::calcBondDirections,
-                (python::arg("molgraph"), python::arg("overwrite"), 
-                 python::arg("ring_bonds") = true, python::arg("min_ring_size") = 8));
     python::def("calcCIPPriorities", &Chem::calcCIPPriorities,
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("perceiveSymmetryClasses", &Chem::perceiveSymmetryClasses, 

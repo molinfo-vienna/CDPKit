@@ -110,7 +110,6 @@ namespace CDPLPythonChem
     void exportBondStereoFlagCalculator();
     void exportBondOrderCalculator();
     void exportKekuleStructureCalculator();
-    void exportBondDirectionCalculator();
     void exportHashCodeCalculator();
     void exportSymmetryClassCalculator();
     void exportSurfaceAtomExtractor();

@@ -267,7 +267,6 @@
 #include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/BondStereoFlagCalculator.hpp"
-#include "CDPL/Chem/BondDirectionCalculator.hpp"
 #include "CDPL/Chem/BondOrderCalculator.hpp"
 #include "CDPL/Chem/KekuleStructureCalculator.hpp"
 #include "CDPL/Chem/SymmetryClassCalculator.hpp"

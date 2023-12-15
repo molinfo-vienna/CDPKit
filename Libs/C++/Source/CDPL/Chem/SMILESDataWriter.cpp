@@ -43,7 +43,6 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
-#include "CDPL/Chem/BondDirection.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
@@ -51,7 +50,6 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/Chem/BondDirectionCalculator.hpp"
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
@@ -75,6 +73,24 @@ namespace
         }
     };
 
+    int getBondConfigPriority(unsigned int config)
+    {
+        using namespace CDPL::Chem;
+        
+        switch (config) {
+
+            case BondConfiguration::NONE:
+                return 1;
+
+            case BondConfiguration::CIS:
+            case BondConfiguration::TRANS:
+                return 2;
+
+            default:
+                return 0;
+        }
+    }
+    
     const std::size_t MAX_NODE_CACHE_SIZE = 1000;
     const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
 }
@@ -276,14 +292,6 @@ void Chem::SMILESDataWriter::writeCanonSMILES(std::ostream& os, const Reaction& 
 
 void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const MolecularGraph& molgraph)
 {
-    if (ctrlParameters.writeBondStereo) {
-        if (!bondDirCalculator.get())
-            bondDirCalculator.reset(new BondDirectionCalculator());
-
-        bondDirCalculator->includeRingBonds(ctrlParameters.writeRingBondStereo);
-        bondDirCalculator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
-    }
-
     bool first_comp = true;
     FragmentList& components = *getComponents(molgraph);
     FragmentList::ElementIterator comps_end = components.getElementsEnd();
@@ -300,11 +308,6 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
             buildHDepleteMolGraph(comp);
             output_molgraph = hDepleteMolGraph.get();
         } 
-        
-        if (ctrlParameters.writeBondStereo) {
-            perceiveSSSR(*output_molgraph, false);
-            bondDirCalculator->calculate(*output_molgraph, bondDirections);
-        }
 
         if (!first_comp)
             os << SMILES::COMPONENT_SEPARATOR;
@@ -316,6 +319,7 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 
         buildNonCanonDFSTree(*output_molgraph);
         distRingClosureNumbers();
+        distBondDirections(molgraph);
         generateSMILES(os);
 
         first_comp = false;
@@ -333,14 +337,6 @@ void Chem::SMILESDataWriter::writeCanonSMILES(std::ostream& os, const MolecularG
 
 void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& molgraph)
 {
-    if (ctrlParameters.writeBondStereo) {
-        if (!bondDirCalculator.get())
-            bondDirCalculator.reset(new BondDirectionCalculator());
-
-        bondDirCalculator->includeRingBonds(ctrlParameters.writeRingBondStereo);
-        bondDirCalculator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
-    }
-
     unsigned int atom_prop_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT;
     unsigned int bond_prop_flags = BondPropertyFlag::ORDER;
 
@@ -380,11 +376,6 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 
         } else 
             buildCanonMolGraph(comp);
-        
-        if (ctrlParameters.writeBondStereo) {
-            perceiveSSSR(*canonMolGraph, true);
-            bondDirCalculator->calculate(*canonMolGraph, bondDirections);
-        }
 
         freeNodes();
         freeEdges();
@@ -393,6 +384,7 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 
         buildCanonDFSTree(*canonMolGraph);
         distRingClosureNumbers();
+        distBondDirections(molgraph);
         generateSMILES(oss);
 
         canonSMILESStrings.push_back(oss.str());
@@ -705,7 +697,7 @@ void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, D
         edge->setBond(bond);
         edge->setMolGraph(&molgraph);
         edge->setNodes(node, nbr_node);
-
+        
         node->addChildEdge(edge);
 
         buildCanonDFSTree(molgraph, nbr_node);
@@ -768,6 +760,184 @@ void Chem::SMILESDataWriter::distRingClosureNumbers()
     }
 }
 
+void Chem::SMILESDataWriter::collectStereoBondEdges(DFSTreeNode* node, const MolecularGraph& molgraph)
+{
+    for (auto* edge : *node) {
+        if (edge->wasVisited())
+            continue;
+
+        edge->setVisited(true);
+        
+        const Bond& bond = *edge->getBond();
+
+        if (!hasStereoDescriptor(bond)) {
+            if (isStereoCenter(bond, molgraph, false, true, true, 0)) {
+                edge->setConfiguration(BondConfiguration::EITHER);
+                edge->getBegin()->setStereoBondEdge(edge);
+                edge->getEnd()->setStereoBondEdge(edge);
+            }
+            
+            continue;
+        }
+        
+        const StereoDescriptor& descr = getStereoDescriptor(bond);
+        unsigned int config = descr.getConfiguration();
+
+        if (config == BondConfiguration::NONE)
+            continue;
+
+        edge->setConfiguration(BondConfiguration::EITHER);
+        edge->getBegin()->setStereoBondEdge(edge);
+        edge->getEnd()->setStereoBondEdge(edge);
+            
+        if ((config != BondConfiguration::CIS && config != BondConfiguration::TRANS) || !descr.isValid(bond))
+            continue;
+        
+        if (getRingFlag(bond)) {
+            if (!ctrlParameters.writeRingBondStereo)
+                continue;
+
+            if (ctrlParameters.minStereoBondRingSize > 0 &&
+                (getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph)) < ctrlParameters.minStereoBondRingSize))
+                continue;
+        }
+
+        edge->setConfiguration(config);
+        
+        const Atom* const* descr_ref_atoms = descr.getReferenceAtoms();
+
+        if (descr_ref_atoms[1] == edge->getBegin()->getAtom() && descr_ref_atoms[2] == edge->getEnd()->getAtom())
+            edge->setConfigRefAtoms(descr_ref_atoms[0], descr_ref_atoms[3]);
+        else if (descr_ref_atoms[1] == edge->getEnd()->getAtom() && descr_ref_atoms[2] == edge->getBegin()->getAtom())
+            edge->setConfigRefAtoms(descr_ref_atoms[3], descr_ref_atoms[0]);
+        else
+            continue;
+        
+        stereoBondEdges.push_back(edge);
+    }
+}
+
+void Chem::SMILESDataWriter::distBondDirections(const MolecularGraph& molgraph)
+{
+    if (!ctrlParameters.writeBondStereo)
+        return;
+    
+    stereoBondEdges.clear();
+
+    for (auto* node : componentNodes)
+        collectStereoBondEdges(node, molgraph);
+
+    for (auto* node : componentNodes)
+        for (auto* edge : *node) 
+            edge->setVisited(false);
+    
+    for (auto* edge : stereoBondEdges)
+        distBondDirections(edge);
+}
+
+void Chem::SMILESDataWriter::distBondDirections(DFSTreeEdge* edge)
+{
+    if (edge->wasVisited())
+        return;
+    
+    edge->setVisited(true);
+
+    if (edge->getConfiguration() == BondConfiguration::EITHER)
+        return;
+
+    DFSTreeEdge* ref_edge1 = getBondStereoRefEdge(edge->getBegin(), edge);
+    DFSTreeEdge* ref_edge2 = getBondStereoRefEdge(edge->getEnd(), edge);
+
+    if (ref_edge1 && ref_edge2) {
+        const Atom* const* config_ref_atoms = edge->getConfigRefAtoms();
+        unsigned int       config           = edge->getConfiguration();
+        const DFSTreeNode* ref_nodes[2]     = {ref_edge1->getOtherNode(edge->getBegin()), ref_edge2->getOtherNode(edge->getEnd())};
+
+        if ((ref_nodes[0]->getAtom() == config_ref_atoms[0]) ^ (ref_nodes[1]->getAtom() == config_ref_atoms[1]))
+            config = (config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
+
+        int ref_node1_level = ref_edge1->getLevel(ref_nodes[0]);
+        int ref_node2_level = ref_edge2->getLevel(ref_nodes[1]);
+
+        if (ref_node1_level == 0 && ref_node2_level == 0) {
+            ref_edge1->setDirection(ref_nodes[0], 1);
+            ref_edge2->setDirection(ref_nodes[1], config == BondConfiguration::CIS ? 1 : -1);
+
+        } else if (ref_node1_level != 0 && ref_node2_level == 0)
+            ref_edge2->setDirection(ref_nodes[1], config == BondConfiguration::CIS ? ref_node1_level : -ref_node1_level);
+
+        else if (ref_node1_level == 0 && ref_node2_level != 0)
+            ref_edge1->setDirection(ref_nodes[0], config == BondConfiguration::CIS ? ref_node2_level : -ref_node2_level);
+
+        else {
+            // already defined
+        }
+    }
+
+    for (std::size_t i = 0; i < 2; i++) {
+        DFSTreeNode* node = (i == 0 ? edge->getBegin() : edge->getEnd());
+
+        for (auto* edge : *node) {
+            if (edge->wasVisited())
+                continue;
+
+            edge->setVisited(true);
+
+            DFSTreeNode* nbr_node = edge->getOtherNode(node);
+
+            if (nbr_node->getStereoBondEdge())
+                distBondDirections(nbr_node->getStereoBondEdge());
+        }
+    }
+}
+
+Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::getBondStereoRefEdge(DFSTreeNode* node, const DFSTreeEdge* excl_edge)
+{
+    DFSTreeEdge* ref_edge = 0;
+    int ref_nbr_cfg_pri = 0;
+        
+    for (auto* edge : *node) {
+        if (edge == excl_edge)
+            continue;
+        
+        const Bond& bond = *edge->getBond();
+
+        if (getOrder(bond) != 1)
+            continue;
+        
+        if (edge->getDirection() != 0)
+            return edge;
+
+        int nbr_cfg_pri = getBondConfigPriority(edge->getOtherNode(node)->getStereoBondEdge() ?
+                                                edge->getOtherNode(node)->getStereoBondEdge()->getConfiguration() :
+                                                BondConfiguration::NONE);
+
+        if (!ref_edge || nbr_cfg_pri > ref_nbr_cfg_pri) {
+            ref_edge = edge;
+            ref_nbr_cfg_pri = nbr_cfg_pri;
+        }
+    }
+
+    if (!ref_edge)
+        return 0;
+    
+    if (ref_edge->getDirection() == 0) {
+        DFSTreeNode* ref_node = ref_edge->getOtherNode(node);
+
+        if (ref_node->hasDirEdge()) {
+             for (auto* edge : *ref_node) {
+                 if (edge->getDirection() == 0)
+                     continue;
+
+                 ref_edge->setDirection(node, -edge->getLevel(edge->getOtherNode(ref_node)));
+                 break;
+             }
+        }
+    }
+    
+    return ref_edge;
+}
+
 void Chem::SMILESDataWriter::generateSMILES(std::ostream& os) const
 {
     componentNodes.front()->generateSMILES(os);
@@ -816,7 +986,11 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::allocNode()
 
 Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::allocEdge()
 {
-    return edgeCache.get();
+    DFSTreeEdge* edge = edgeCache.get();
+
+    edge->clear();
+    
+    return edge;
 }
 
 void Chem::SMILESDataWriter::freeNodes()
@@ -851,6 +1025,11 @@ void Chem::SMILESDataWriter::DFSTreeNode::clear()
     childEdges.clear();
     ringClosureInEdges.clear();
     ringClosureOutEdges.clear();
+    edges.clear();
+    
+    parentEdge = 0;
+    dirEdge = false;
+    stereoBondEdge = 0;
 }
                 
 void Chem::SMILESDataWriter::DFSTreeNode::setAtom(const Atom* atm)
@@ -883,7 +1062,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::setParentEdge(DFSTreeEdge* edge)
     parentEdge = edge;
 }
 
-const Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::DFSTreeNode::getParentEdge() const
+Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::DFSTreeNode::getParentEdge() const
 {
     return parentEdge;
 }
@@ -901,6 +1080,16 @@ void Chem::SMILESDataWriter::DFSTreeNode::addRingClosureInEdge(DFSTreeEdge* edge
 void Chem::SMILESDataWriter::DFSTreeNode::addRingClosureOutEdge(DFSTreeEdge* edge)
 {
     ringClosureOutEdges.push_back(edge);
+}
+
+Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::getChildEdgesBegin()
+{
+    return childEdges.begin();
+}
+
+Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::getChildEdgesEnd()
+{
+    return childEdges.end();
 }
 
 Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::getRingClosureInEdgesBegin()
@@ -921,6 +1110,53 @@ Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::getRin
 Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::getRingClosureOutEdgesEnd()
 {
     return ringClosureOutEdges.end();
+}
+
+Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::begin()
+{
+    collectEdges();
+    
+    return edges.begin();
+}
+
+Chem::SMILESDataWriter::EdgeIterator Chem::SMILESDataWriter::DFSTreeNode::end()
+{
+    collectEdges();
+    
+    return edges.end();
+}
+
+void Chem::SMILESDataWriter::DFSTreeNode::hasDirEdge(bool has)
+{
+    dirEdge = has;
+}
+
+bool Chem::SMILESDataWriter::DFSTreeNode::hasDirEdge() const
+{
+    return dirEdge;
+}
+                
+void Chem::SMILESDataWriter::DFSTreeNode::setStereoBondEdge(DFSTreeEdge* edge)
+{
+    stereoBondEdge = edge;
+}
+
+Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::DFSTreeNode::getStereoBondEdge() const
+{
+    return stereoBondEdge;
+}
+                
+void Chem::SMILESDataWriter::DFSTreeNode::collectEdges()
+{
+    if (!edges.empty())
+        return;
+
+    if (parentEdge)
+        edges.push_back(parentEdge);
+
+    edges.insert(edges.end(), childEdges.begin(), childEdges.end());
+    edges.insert(edges.end(), ringClosureOutEdges.begin(), ringClosureOutEdges.end());
+    edges.insert(edges.end(), ringClosureInEdges.begin(), ringClosureInEdges.end());
 }
 
 void Chem::SMILESDataWriter::DFSTreeNode::generateSMILES(std::ostream& os) const
@@ -1228,16 +1464,26 @@ void Chem::SMILESDataWriter::DFSTreeEdge::setNodes(DFSTreeNode* begin, DFSTreeNo
     nodes[1] = end;
 }
 
-const Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::DFSTreeEdge::getBegin() const
+Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::DFSTreeEdge::getBegin() const
 {
     return nodes[0];
 }
 
-const Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::DFSTreeEdge::getEnd() const
+Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::DFSTreeEdge::getEnd() const
 {
     return nodes[1];
 }
 
+Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::DFSTreeEdge::getOtherNode(const DFSTreeNode* node) const
+{
+    if (nodes[0] == node)
+        return nodes[1];
+
+    assert(nodes[1] == node);
+
+    return nodes[0];
+}
+         
 void Chem::SMILESDataWriter::DFSTreeEdge::setRingClosureNumber(std::size_t closure_no)
 {
     ringClosureNumber = closure_no;
@@ -1248,25 +1494,99 @@ std::size_t Chem::SMILESDataWriter::DFSTreeEdge::getRingClosureNumber() const
     return ringClosureNumber;
 }
 
+void Chem::SMILESDataWriter::DFSTreeEdge::setDirection(const DFSTreeNode* node, int level)
+{
+    switch (level) {
+
+        case 1:
+            direction = (node == nodes[1] ? SMILES::BondSymbol::UP_DIR_FLAG : SMILES::BondSymbol::DOWN_DIR_FLAG);
+            break;
+
+        case -1:
+            direction = (node == nodes[1] ? SMILES::BondSymbol::DOWN_DIR_FLAG : SMILES::BondSymbol::UP_DIR_FLAG);
+            break;
+
+        default:
+            direction = 0;
+            return;
+    }
+
+    nodes[0]->hasDirEdge(true);
+    nodes[1]->hasDirEdge(true);
+}
+
+char Chem::SMILESDataWriter::DFSTreeEdge::getDirection() const
+{
+    return direction;
+}
+
+int Chem::SMILESDataWriter::DFSTreeEdge::getLevel(const DFSTreeNode* node) const
+{
+    if (direction == 0)
+        return 0;
+
+    switch (direction) {
+
+        case SMILES::BondSymbol::UP_DIR_FLAG:
+            return (node == nodes[1] ? 1 : -1);
+
+        case SMILES::BondSymbol::DOWN_DIR_FLAG:
+            return (node == nodes[1] ? -1 : 1);
+
+        default:
+            break;
+    }
+    
+    return 0;
+}
+
+void  Chem::SMILESDataWriter::DFSTreeEdge::clear()
+{
+    direction         = 0;
+    config            = BondConfiguration::NONE;
+    configRefAtoms[0] = 0;
+    configRefAtoms[1] = 0;
+    visited           = false;
+}
+
+void Chem::SMILESDataWriter::DFSTreeEdge::setConfiguration(unsigned int config)
+{
+    this->config = config;
+}
+
+unsigned int Chem::SMILESDataWriter::DFSTreeEdge::getConfiguration() const
+{
+    return config;
+}
+
+void Chem::SMILESDataWriter::DFSTreeEdge::setConfigRefAtoms(const Atom* ref1, const Atom* ref2)
+{
+    configRefAtoms[0] = ref1;
+    configRefAtoms[1] = ref2;
+}
+
+const Chem::Atom* const* Chem::SMILESDataWriter::DFSTreeEdge::getConfigRefAtoms() const
+{
+    return configRefAtoms;
+}
+
+void Chem::SMILESDataWriter::DFSTreeEdge::setVisited(bool vis)
+{
+    visited = vis;
+}
+
+bool Chem::SMILESDataWriter::DFSTreeEdge::wasVisited() const
+{
+    return visited;
+}
+
 void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) const
 {
     std::size_t order = getOrder(*bond);
 
-    if (writer.ctrlParameters.writeBondStereo && order == 1) {
-        
-        switch (writer.bondDirections[molGraph->getBondIndex(*bond)]) {
-
-            case BondDirection::UP:
-                os << SMILES::BondSymbol::UP_DIR_FLAG;
-                return;
-
-            case BondDirection::DOWN:
-                os << SMILES::BondSymbol::DOWN_DIR_FLAG;
-                return;
-
-            default:
-                break;
-        }
+    if (writer.ctrlParameters.writeBondStereo && order == 1 && direction != 0) {
+        os << direction;
+        return;
     }
 
     if (!writer.ctrlParameters.writeKekuleForm && getAromaticityFlag(*bond)) {

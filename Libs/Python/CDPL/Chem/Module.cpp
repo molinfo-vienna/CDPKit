@@ -111,7 +111,6 @@ BOOST_PYTHON_MODULE(_chem)
     exportAtom2DCoordinatesCalculator();
     exportHydrogen3DCoordinatesCalculator();
     exportBondStereoFlagCalculator();
-    exportBondDirectionCalculator();
     exportBondOrderCalculator();
     exportKekuleStructureCalculator();
     exportHashCodeCalculator();

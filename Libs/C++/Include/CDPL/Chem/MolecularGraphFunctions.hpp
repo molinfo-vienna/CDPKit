@@ -418,9 +418,6 @@ namespace CDPL
 
         CDPL_CHEM_API void calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
 
-        CDPL_CHEM_API void calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true,
-                                              std::size_t min_ring_size = 8);
-
         CDPL_CHEM_API void calcCIPPriorities(MolecularGraph& molgraph, bool overwrite);
 
         CDPL_CHEM_API void perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
