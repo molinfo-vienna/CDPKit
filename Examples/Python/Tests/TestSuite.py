@@ -133,11 +133,11 @@ if __name__ == '__main__':
 
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
-    errors |= checkScriptFileOutput('tor_drive', outputFilePath('test.mol2'),
-                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.mol2'), '-a', '-q', '-n', '20', '-f', 'c1cccc2c1C(C)OC2' ])
-    errors |= checkScriptFileOutput('gen_confs', outputFilePath('test.mol2'),
-                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
-    errors |= checkScriptFileOutput('gen_3d_structs', outputFilePath('test.mol2'),
-                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2') ])
+    errors |= checkScriptFileOutput('tor_drive', outputFilePath('tor_drive.mol2'),
+                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('tor_drive.mol2'), '-a', '-q', '-n', '20', '-f', 'c1cccc2c1C(C)OC2' ])
+    errors |= checkScriptFileOutput('gen_confs', outputFilePath('gen_confs.mol2'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_confs.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
+    errors |= checkScriptFileOutput('gen_3d_structs', outputFilePath('gen_3d_structs.mol2'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_3d_structs.mol2') ])
     
     sys.exit(errors)
