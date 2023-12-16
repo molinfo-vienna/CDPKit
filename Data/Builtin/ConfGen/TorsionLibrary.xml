@@ -2792,7 +2792,9 @@
 	    <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="1.55"/>
 	    <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="2.13"/>
 	    <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
-	    <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
+	    <angle value="-120.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
+            <angle value="100.0" tolerance1="40.00" tolerance2="40.00" score="4.28"/>
+            <angle value="-100.0" tolerance1="40.00" tolerance2="40.00" score="4.28"/>
           </torsions>
         </rule>
         <rule pattern="[a:1][c:2]!@[CX4H1:3][a:4]">
