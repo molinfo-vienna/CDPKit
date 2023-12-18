@@ -73,7 +73,8 @@ set(test-suite_SRCS
     ANDMatchExpressionListTest.cpp
     ORMatchExpressionListTest.cpp
     NOTMatchExpressionTest.cpp
-
+    SMARTSSubstructureSearchTest.cpp
+    
     #HashCodeCalculatorTest.cpp 
     
     CompleteRingSetTest.cpp 
