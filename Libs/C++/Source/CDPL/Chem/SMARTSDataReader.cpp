@@ -643,7 +643,7 @@ bool Chem::SMARTSDataReader::parseBondExpressionPrimitive(MatchConstraintList& c
         case BondExpression::DOWN_DIR_FLAG:
             constr_list.addElement(BondMatchConstraint::DIRECTION,
                                    MatchConstraint::EQUAL,
-                                   (has_not_pfx ? BondDirection::DOWN : BondDirection::UP) | 
+                                   (has_not_pfx ? BondDirection::UP : BondDirection::DOWN) | 
                                    (hasUnspecStereoSuffix() ? BondDirection::UNSPECIFIED : static_cast<unsigned int>(0)));
             return true;
 
