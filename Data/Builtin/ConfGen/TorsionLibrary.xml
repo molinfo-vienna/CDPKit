@@ -2789,6 +2789,10 @@
 	    <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
 	    <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
 	    <!-- added -->
+            <angle value="80.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
+	    <angle value="-80.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
+            <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
+	    <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
 	    <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="1.55"/>
 	    <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="2.13"/>
 	    <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="4.28"/>
