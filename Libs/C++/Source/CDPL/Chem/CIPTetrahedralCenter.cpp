@@ -61,10 +61,10 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
 
     // something not right!?! bad creation
     if (edges.size() < 3)
-        return CIPDescriptor::NONE;
+        return CIPDescriptor::UNDEF;
 
     if (edges.size() > 4)
-        return CIPDescriptor::NONE;
+        return CIPDescriptor::UNDEF;
 
     CIPSortingResult sort_res = comp.sort(node, edges);
                 
@@ -75,7 +75,7 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
                 
     if (!is_unique && edges.size() == 4) {
         if (comp.getNumSubRules() == 3)
-            return CIPDescriptor::UNDEF;
+            return CIPDescriptor::NONE;
                     
         std::size_t num_grps = comp.getSorter().getNumGroups(edges);
                     
@@ -145,13 +145,14 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
             return CIPDescriptor::s;
                    
         return CIPDescriptor::S;
+    }
 
-    } else if (config == RIGHT) {
+    if (config == RIGHT) {
         if (sort_res.isPseudoAsymmetric())
             return CIPDescriptor::r;
 
         return CIPDescriptor::R;
     }
 
-    return CIPDescriptor::UNDEF;
+    return CIPDescriptor::NS;
 }

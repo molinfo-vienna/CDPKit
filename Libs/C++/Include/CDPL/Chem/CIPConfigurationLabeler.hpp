@@ -1,5 +1,5 @@
 /* 
- * CIPConfigurationLabellerImpl.hpp 
+ * CIPConfigurationLabeler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,16 +23,15 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPConfigurationLabellerImpl.
+ * \brief Definition of the class CDPL::Chem::CIPConfigurationLabeler.
  */
 
-#ifndef CDPL_CHEM_CIPCONFIGURATIONLABELLERIMPL_HPP
-#define CDPL_CHEM_CIPCONFIGURATIONLABELLERIMPL_HPP
+#ifndef CDPL_CHEM_CIPCONFIGURATIONLABELER_HPP
+#define CDPL_CHEM_CIPCONFIGURATIONLABELER_HPP
 
-#include <unordered_map>
 #include <memory>
 
-#include "CIPDigraph.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
 
 
 namespace CDPL
@@ -44,18 +43,26 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-        class AtomContainer;
-        class CIPStereoCenter;
+        class CIPConfigurationLabelerImpl;
         
-        class CIPConfigurationLabellerImpl
+        /**
+         * \brief CIPConfigurationLabeler.
+         *
+         * Code is largely based on a Java implementation of the CIP sequence rules by John Mayfield [\ref CIPJM].
+         */
+        class CDPL_CHEM_API CIPConfigurationLabeler
         {
 
           public:
-            CIPConfigurationLabellerImpl();
+            typedef std::shared_ptr<CIPConfigurationLabeler> SharedPointer;
+            
+            CIPConfigurationLabeler();
 
-            CIPConfigurationLabellerImpl(const CIPConfigurationLabellerImpl& labeller);
+            CIPConfigurationLabeler(const MolecularGraph& molgraph);
 
-            ~CIPConfigurationLabellerImpl();
+            CIPConfigurationLabeler(const CIPConfigurationLabeler& labeler);
+
+            ~CIPConfigurationLabeler();
             
             void setup(const MolecularGraph& molgraph);
 
@@ -63,22 +70,14 @@ namespace CDPL
 
             unsigned int getLabel(const Bond& bond);
             
-            void copy(const CIPConfigurationLabellerImpl& labeller);
+            CIPConfigurationLabeler& operator=(const CIPConfigurationLabeler& labeler);
             
           private:
-            unsigned int getLabelGeneric(const AtomContainer& cntnr);
+            typedef std::unique_ptr<CIPConfigurationLabelerImpl> ImplementationPointer;
 
-            void extractAtomCenters();
-            void extractBondCenters();
-            
-            typedef std::unique_ptr<CIPStereoCenter> StereoCenterPtr;
-            typedef std::unordered_map<const AtomContainer*, StereoCenterPtr> StereoCenterMap;
-
-            const MolecularGraph* molGraph;
-            CIPDigraph            digraph;
-            StereoCenterMap       stereoCenters;
+            ImplementationPointer impl;
         };
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_CIPCONFIGURATIONLABELLERIMPL_HPP
+#endif // CDPL_CHEM_CIPCONFIGURATIONLABELER_HPP

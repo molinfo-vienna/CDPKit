@@ -1,5 +1,5 @@
 /* 
- * CIPConfigurationLabeller.cpp 
+ * CIPConfigurationLabeler.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,51 +24,51 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/CIPConfigurationLabeller.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 
-#include "CIPConfigurationLabellerImpl.hpp"
+#include "CIPConfigurationLabelerImpl.hpp"
 
 
 using namespace CDPL;
 
 
-Chem::CIPConfigurationLabeller::CIPConfigurationLabeller():
-    impl(new CIPConfigurationLabellerImpl())
+Chem::CIPConfigurationLabeler::CIPConfigurationLabeler():
+    impl(new CIPConfigurationLabelerImpl())
 {}
 
-Chem::CIPConfigurationLabeller::CIPConfigurationLabeller(const MolecularGraph& molgraph):
-    impl(new CIPConfigurationLabellerImpl())
+Chem::CIPConfigurationLabeler::CIPConfigurationLabeler(const MolecularGraph& molgraph):
+    impl(new CIPConfigurationLabelerImpl())
 {
     setup(molgraph);
 }
 
-Chem::CIPConfigurationLabeller::CIPConfigurationLabeller(const CIPConfigurationLabeller& labeller):
-    impl(new CIPConfigurationLabellerImpl(*labeller.impl))
+Chem::CIPConfigurationLabeler::CIPConfigurationLabeler(const CIPConfigurationLabeler& labeler):
+    impl(new CIPConfigurationLabelerImpl(*labeler.impl))
 {}
 
-Chem::CIPConfigurationLabeller::~CIPConfigurationLabeller() {}
+Chem::CIPConfigurationLabeler::~CIPConfigurationLabeler() {}
          
-void Chem::CIPConfigurationLabeller::setup(const MolecularGraph& molgraph)
+void Chem::CIPConfigurationLabeler::setup(const MolecularGraph& molgraph)
 {
     impl->setup(molgraph);
 }
 
-unsigned int Chem::CIPConfigurationLabeller::getLabel(const Atom& atom)
+unsigned int Chem::CIPConfigurationLabeler::getLabel(const Atom& atom)
 {
     return impl->getLabel(atom);
 }
 
-unsigned int Chem::CIPConfigurationLabeller::getLabel(const Bond& bond)
+unsigned int Chem::CIPConfigurationLabeler::getLabel(const Bond& bond)
 {
     return impl->getLabel(bond);
 }
             
-Chem::CIPConfigurationLabeller& Chem::CIPConfigurationLabeller::operator=(const CIPConfigurationLabeller& labeller)
+Chem::CIPConfigurationLabeler& Chem::CIPConfigurationLabeler::operator=(const CIPConfigurationLabeler& labeler)
 {
-    if (this == &labeller)
+    if (this == &labeler)
         return *this;
 
-    impl->copy(*labeller.impl);
+    impl->copy(*labeler.impl);
 
     return *this;
 }

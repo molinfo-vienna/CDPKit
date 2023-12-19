@@ -88,15 +88,16 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
             return CIPDescriptor::seqCis;
 
         return CIPDescriptor::Z;
-                    
-    } else if (config == OPPOSITE) {
+    }
+
+    if (config == OPPOSITE) {
         if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
             return CIPDescriptor::seqTrans;
 
         return CIPDescriptor::E;
     }
 
-    return CIPDescriptor::UNDEF;
+    return CIPDescriptor::NS;
 }
 
 unsigned int Chem::CIPSp2BondCenter::label(CIPDigraph::Node& root1, CIPDigraph& digraph, CIPSequenceRule& comp)

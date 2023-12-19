@@ -104,7 +104,7 @@ namespace CDPLPythonChem
     void exportMorganNumberingCalculator();
     void exportCanonicalNumberingCalculator();
     void exportCIPPriorityCalculator();
-    void exportCIPConfigurationLabeller();
+    void exportCIPConfigurationLabeler();
     void exportAtom2DCoordinatesCalculator();
     void exportHydrogen3DCoordinatesCalculator();
     void exportBondStereoFlagCalculator();

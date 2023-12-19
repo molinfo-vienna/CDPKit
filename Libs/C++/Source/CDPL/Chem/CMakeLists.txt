@@ -170,8 +170,8 @@ set(cdpl-chem_LIB_SRCS
     ComponentSet.cpp
     PiElectronSystemList.cpp
 
-    CIPConfigurationLabeller.cpp
-    CIPConfigurationLabellerImpl.cpp
+    CIPConfigurationLabeler.cpp
+    CIPConfigurationLabelerImpl.cpp
     CIPDigraph.cpp
     CIPMancude.cpp
     CIPStereoCenter.cpp

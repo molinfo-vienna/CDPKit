@@ -107,7 +107,7 @@ BOOST_PYTHON_MODULE(_chem)
     exportMorganNumberingCalculator();
     exportCanonicalNumberingCalculator();
     exportCIPPriorityCalculator();
-    exportCIPConfigurationLabeller();
+    exportCIPConfigurationLabeler();
     exportAtom2DCoordinatesCalculator();
     exportHydrogen3DCoordinatesCalculator();
     exportBondStereoFlagCalculator();

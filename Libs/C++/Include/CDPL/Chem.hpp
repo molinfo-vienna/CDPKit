@@ -261,7 +261,7 @@
 #include "CDPL/Chem/Reactor.hpp"
 #include "CDPL/Chem/MorganNumberingCalculator.hpp"
 #include "CDPL/Chem/CIPPriorityCalculator.hpp"
-#include "CDPL/Chem/CIPConfigurationLabeller.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"

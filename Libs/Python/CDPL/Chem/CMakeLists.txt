@@ -102,7 +102,7 @@ set(chem_MOD_SRCS
     MorganNumberingCalculatorExport.cpp 
     CanonicalNumberingCalculatorExport.cpp 
     CIPPriorityCalculatorExport.cpp
-    CIPConfigurationLabellerExport.cpp 
+    CIPConfigurationLabelerExport.cpp 
     BondStereoFlagCalculatorExport.cpp 
     BondOrderCalculatorExport.cpp 
     KekuleStructureCalculatorExport.cpp 

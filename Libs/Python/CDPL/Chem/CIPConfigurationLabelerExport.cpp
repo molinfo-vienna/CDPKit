@@ -1,5 +1,5 @@
 /* 
- * CIPConfigurationLabellerExport.cpp 
+ * CIPConfigurationLabelerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,7 +24,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/CIPConfigurationLabeller.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -37,32 +37,32 @@
 namespace
 {
 
-    unsigned int getAtomLabel(CDPL::Chem::CIPConfigurationLabeller& labeller, CDPL::Chem::Atom& atom)
+    unsigned int getAtomLabel(CDPL::Chem::CIPConfigurationLabeler& labeler, CDPL::Chem::Atom& atom)
     {
-        return labeller.getLabel(atom);
+        return labeler.getLabel(atom);
     }
 
-    unsigned int getBondLabel(CDPL::Chem::CIPConfigurationLabeller& labeller, CDPL::Chem::Bond& bond)
+    unsigned int getBondLabel(CDPL::Chem::CIPConfigurationLabeler& labeler, CDPL::Chem::Bond& bond)
     {
-        return labeller.getLabel(bond);
+        return labeler.getLabel(bond);
     }
 }
 
 
-void CDPLPythonChem::exportCIPConfigurationLabeller()
+void CDPLPythonChem::exportCIPConfigurationLabeler()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::CIPConfigurationLabeller, Chem::CIPConfigurationLabeller::SharedPointer,
-                   boost::noncopyable>("CIPConfigurationLabeller", python::no_init)
+    python::class_<Chem::CIPConfigurationLabeler, Chem::CIPConfigurationLabeler::SharedPointer,
+                   boost::noncopyable>("CIPConfigurationLabeler", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&>(python::arg("molgraph"))[python::with_custodian_and_ward<1, 2>()])
-        .def(python::init<const Chem::CIPConfigurationLabeller&>(python::arg("labeller"))[python::with_custodian_and_ward<1, 2>()])
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CIPConfigurationLabeller>())
-        .def("assign", &Chem::CIPConfigurationLabeller::operator=, 
-             (python::arg("self"), python::arg("labeller")), python::return_self<python::with_custodian_and_ward<1, 2> >())
-        .def("setup", &Chem::CIPConfigurationLabeller::setup, 
+        .def(python::init<const Chem::CIPConfigurationLabeler&>(python::arg("labeler"))[python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CIPConfigurationLabeler>())
+        .def("assign", &Chem::CIPConfigurationLabeler::operator=, 
+             (python::arg("self"), python::arg("labeler")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("setup", &Chem::CIPConfigurationLabeler::setup, 
              (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
         .def("getLabel", &getAtomLabel, (python::arg("self"), python::arg("atom")))
         .def("getLabel", &getBondLabel, (python::arg("self"), python::arg("bond")));
