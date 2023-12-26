@@ -695,14 +695,6 @@ def setMatchExpression(atom: Atom, expr: AtomMatchExpression) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \param molgraph 
-# \return 
-#
-def calcCIPConfiguration(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clearCIPConfiguration(atom: Atom) -> None: pass
 

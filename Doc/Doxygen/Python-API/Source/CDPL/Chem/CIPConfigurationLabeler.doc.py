@@ -20,22 +20,22 @@
 #
 
 ##
-# \brief CIPConfigurationLabeller.
+# \brief CIPConfigurationLabeler.
 # 
 # Code is largely based on a Java implementation of the CIP sequence rules by John Mayfield [\ref CIPJM].
 # 
-class CIPConfigurationLabeller(Boost.Python.instance):
+class CIPConfigurationLabeler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %CIPConfigurationLabeller instance.
+    # \brief Initializes the \e %CIPConfigurationLabeler instance.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %CIPConfigurationLabeller instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CIPConfigurationLabeller instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %CIPConfigurationLabeler instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CIPConfigurationLabeler instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -44,11 +44,11 @@ class CIPConfigurationLabeller(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CIPConfigurationLabeller instance \a labeller.
-    # \param labeller The \e %CIPConfigurationLabeller instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %CIPConfigurationLabeler instance \a labeler.
+    # \param labeler The \e %CIPConfigurationLabeler instance to copy.
     # \return \a self
     # 
-    def assign(labeller: CIPConfigurationLabeller) -> CIPConfigurationLabeller: pass
+    def assign(labeler: CIPConfigurationLabeler) -> CIPConfigurationLabeler: pass
 
     ##
     # \brief 

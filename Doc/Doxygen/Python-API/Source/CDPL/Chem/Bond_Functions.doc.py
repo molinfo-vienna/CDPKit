@@ -244,14 +244,6 @@ def setMatchExpression(bond: Bond, expr: BondMatchExpression) -> None: pass
 ##
 # \brief 
 # \param bond 
-# \param molgraph 
-# \return 
-#
-def calcCIPConfiguration(bond: Bond, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param bond 
 #
 def clearCIPConfiguration(bond: Bond) -> None: pass
 
