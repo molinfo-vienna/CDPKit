@@ -72,6 +72,7 @@ namespace
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 1, 0, 4 ), Chem::HybridizationState::SP2  ),
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 0, 0, 2 ), Chem::HybridizationState::SP3  ),
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 1, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Sb, 5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
     HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  1, 0, 0, 6 ), Chem::HybridizationState::SP3  ),
