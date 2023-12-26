@@ -29,6 +29,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 
 
 using namespace CDPL; 
@@ -98,6 +99,7 @@ void Chem::calcAtomStereoDescriptorsFromMDLParities(MolecularGraph& molgraph, bo
 
 void Chem::calcAtomCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
 {
+    CIPConfigurationLabeler::SharedPointer cip_labeler;
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
     for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
@@ -106,6 +108,9 @@ void Chem::calcAtomCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasCIPConfiguration(atom))
             continue;
 
-        setCIPConfiguration(atom, calcCIPConfiguration(atom, molgraph));
+        if (!cip_labeler)
+            cip_labeler.reset(new CIPConfigurationLabeler(molgraph));
+  
+        setCIPConfiguration(atom, cip_labeler->getLabel(atom));
     }
 }

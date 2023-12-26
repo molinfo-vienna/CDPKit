@@ -488,7 +488,6 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
         if (mode == TOPOLOGICALLY_UNIQUE) {
             perceiveSSSR(*mol, true);
             setAromaticityFlags(*mol, true);
-            calcCIPPriorities(*mol, true);
             calcAtomCIPConfigurations(*mol, true);
             calcBondCIPConfigurations(*mol, true);
         }

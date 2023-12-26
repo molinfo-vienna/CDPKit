@@ -29,6 +29,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 
 
 using namespace CDPL; 
@@ -70,6 +71,7 @@ void Chem::calcBondStereoDescriptors(MolecularGraph& molgraph, bool overwrite, s
 
 void Chem::calcBondCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
 {
+    CIPConfigurationLabeler::SharedPointer cip_labeler;
     MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
     for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
@@ -78,6 +80,9 @@ void Chem::calcBondCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasCIPConfiguration(bond))
             continue;
 
-        setCIPConfiguration(bond, calcCIPConfiguration(bond, molgraph));
+        if (!cip_labeler)
+            cip_labeler.reset(new CIPConfigurationLabeler(molgraph));
+          
+        setCIPConfiguration(bond, cip_labeler->getLabel(bond));
     }
 }

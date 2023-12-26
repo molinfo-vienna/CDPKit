@@ -230,7 +230,6 @@ set(cdpl-chem_LIB_SRCS
     AtomImplicitHydrogenCountFunction.cpp
     AtomConformerCoordinatesFunction.cpp
     AtomStereoDescriptorFunctions.cpp
-    AtomCIPConfigurationFunction.cpp
     AtomMDLParityFunction.cpp
     AtomStereoCenterFlagFunction.cpp
     AtomMatchExpressionStringFunction.cpp
@@ -244,7 +243,6 @@ set(cdpl-chem_LIB_SRCS
     BondFragmentMembershipFunctions.cpp
     BondStereoCenterFlagFunction.cpp
     BondStereoDescriptorFunction.cpp
-    BondCIPConfigurationFunction.cpp
     BondMatchExpressionStringFunction.cpp
     BondMatchExpressionFunction.cpp
     BondSybylTypePerception.cpp

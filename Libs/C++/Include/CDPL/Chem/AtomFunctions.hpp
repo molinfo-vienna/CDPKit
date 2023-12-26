@@ -240,8 +240,6 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasCIPConfiguration(const Atom& atom);
 
-        CDPL_CHEM_API unsigned int calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph);
-
 
         CDPL_CHEM_API const StereoDescriptor& getStereoDescriptor(const Atom& atom);
 

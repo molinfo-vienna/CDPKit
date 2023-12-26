@@ -98,7 +98,6 @@ namespace
     MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, generateMatchExpression, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
-    MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
     MAKE_FUNCTION_WRAPPER3(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
@@ -134,8 +133,6 @@ void CDPLPythonChem::exportBondFunctions()
                 (python::arg("bond"), python::arg("molgraph")),
                 python::with_custodian_and_ward_postcall<0, 1>());
 
-    python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper2, 
-                (python::arg("bond"), python::arg("molgraph")));
     python::def("perceiveSybylType", &perceiveSybylTypeWrapper2,
                 (python::arg("bond"), python::arg("molgraph")));
 
