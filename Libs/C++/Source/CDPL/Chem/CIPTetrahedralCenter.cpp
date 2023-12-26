@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,25 +37,25 @@ using namespace CDPL;
 
 unsigned int Chem::CIPTetrahedralCenter::label(CIPSequenceRule& comp)
 {
-    CIPDigraph& digraph = getDigraph();
-    CIPDigraph::Node* root = digraph.getRoot();
+    auto& digraph = getDigraph();
+    auto root = digraph.getRoot();
                 
     if (!root)
-        return label(digraph.init(*getFocus()), comp);
+        root = &digraph.init(*getFocus());
+    else
+        digraph.changeRoot(*root);
 
-    digraph.changeRoot(*root);
-
-    return label(*root, comp);
-}
-
-unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPDigraph& digraph, CIPSequenceRule& comp)
-{
-    digraph.changeRoot(node);
-                
-    return label(node, comp);
+    return doLabel(*root, comp);
 }
 
 unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequenceRule& comp)
+{
+    getDigraph().changeRoot(node);
+                
+    return doLabel(node, comp);
+}
+
+unsigned int Chem::CIPTetrahedralCenter::doLabel(CIPDigraph::Node& node, CIPSequenceRule& comp)
 {
     node.getEdges(edges);
 
@@ -66,18 +66,18 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
     if (edges.size() > 4)
         return CIPDescriptor::UNDEF;
 
-    CIPSortingResult sort_res = comp.sort(node, edges);
+    auto sort_res = comp.sort(node, edges);
                 
     if (sort_res.wasWildcardFound())
         return CIPDescriptor::NS;
 
     bool is_unique = sort_res.isUnique();
-                
+
     if (!is_unique && edges.size() == 4) {
         if (comp.getNumSubRules() == 3)
             return CIPDescriptor::NONE;
-                    
-        std::size_t num_grps = comp.getSorter().getNumGroups(edges);
+
+        auto num_grps = comp.getSorter().getNumGroups(edges);
                     
         if (num_grps == 2) {
             // a a' b b' and a a' a'' b
@@ -112,7 +112,7 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
 
         if (!sort_res.isUnique())
             return CIPDescriptor::NONE;
-                    
+
     } else if (!is_unique)
         return CIPDescriptor::NONE;
 
@@ -130,15 +130,18 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
     if (idx < 4)
         ordered[idx] = getFocus();
 
-    unsigned int parity = parity4(ordered, getCarrierAtoms());
+    auto parity = parity4(ordered, getCarrierAtoms());
 
     if (parity == 0)
         return CIPDescriptor::UNDEF;
 
-    unsigned int config = getConfig();
-                
+    auto config = getConfig();
+
+    if (config == UNSPEC)
+        return CIPDescriptor::NS;
+    
     if (parity == 1)
-        config ^= 0x3;
+        config ^= (LEFT | RIGHT);
 
     if (config == LEFT) {
         if (sort_res.isPseudoAsymmetric())
@@ -147,12 +150,8 @@ unsigned int Chem::CIPTetrahedralCenter::label(CIPDigraph::Node& node, CIPSequen
         return CIPDescriptor::S;
     }
 
-    if (config == RIGHT) {
-        if (sort_res.isPseudoAsymmetric())
-            return CIPDescriptor::r;
+    if (sort_res.isPseudoAsymmetric())
+        return CIPDescriptor::r;
 
-        return CIPDescriptor::R;
-    }
-
-    return CIPDescriptor::NS;
+    return CIPDescriptor::R;
 }

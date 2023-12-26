@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,50 +38,54 @@ using namespace CDPL;
 
 unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
 {
-    const Atom* const* foci = getFocusAtoms();
-    const Atom* focus1 = foci[0];
-    const Atom* focus2 = foci[1];
+    auto foci = getFocusAtoms();
+    auto focus1 = foci[0];
+    auto focus2 = foci[1];
 
-    CIPDigraph& digraph = getDigraph();
-    CIPDigraph::Node* root1 = digraph.getRoot();
+    auto& digraph = getDigraph();
+    auto root1 = digraph.getRoot();
                 
     if (!root1)
         root1 = &digraph.init(*focus1);
     else
         digraph.changeRoot(*root1);
 
-    const CIPDigraph::Edge* internal = findInternalEdge(root1->getEdges(), focus1, focus2);
+    auto internal = findInternalEdge(root1->getEdges(), focus1, focus2);
 
     if (!internal)
         return CIPDescriptor::UNDEF;
                     
     root1->getEdges(edges1, internal);
 
-    CIPSortingResult sort_res1 = comp.sort(*root1, edges1);
+    auto sort_res1 = comp.sort(*root1, edges1);
 
     if (!sort_res1.isUnique())
         return CIPDescriptor::NONE;
 
-    CIPDigraph::Node& root2 = internal->getOther(*root1);
+    auto& root2 = internal->getOther(*root1);
                     
     digraph.changeRoot(root2);
                 
     root2.getEdges(edges2, internal);
 
-    CIPSortingResult sort_res2 = comp.sort(root2, edges2);
+    auto sort_res2 = comp.sort(root2, edges2);
                 
     if (!sort_res2.isUnique())
         return CIPDescriptor::NONE;
 
-    const Atom* const* carriers = getCarrierAtoms();
-    unsigned int config = getConfig();
+    auto config = getConfig();
 
+    if (config == UNSPEC)
+        return CIPDescriptor::NS;
+
+    auto carriers = getCarrierAtoms();
+    
     // swap
     if (edges1.size() > 1 && carriers[0] == edges1[1]->getEnd().getAtom())
-        config ^= 0x3;
+        config ^= (OPPOSITE | TOGETHER);
     // swap
     if (edges2.size() > 1 && carriers[1] == edges2[1]->getEnd().getAtom())
-        config ^= 0x3;
+        config ^= (OPPOSITE | TOGETHER);
 
     if (config == TOGETHER) {
         if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
@@ -90,72 +94,73 @@ unsigned int Chem::CIPSp2BondCenter::label(CIPSequenceRule& comp)
         return CIPDescriptor::Z;
     }
 
-    if (config == OPPOSITE) {
-        if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
-            return CIPDescriptor::seqTrans;
+    if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
+        return CIPDescriptor::seqTrans;
 
-        return CIPDescriptor::E;
-    }
-
-    return CIPDescriptor::NS;
+    return CIPDescriptor::E;
 }
 
-unsigned int Chem::CIPSp2BondCenter::label(CIPDigraph::Node& root1, CIPDigraph& digraph, CIPSequenceRule& comp)
+unsigned int Chem::CIPSp2BondCenter::label(CIPDigraph::Node& root1, CIPSequenceRule& comp)
 {
-    const Atom* const* foci = getFocusAtoms();
-    const Atom* focus1 = foci[0];
-    const Atom* focus2 = foci[1];
+    auto foci = getFocusAtoms();
+    auto focus1 = foci[0];
+    auto focus2 = foci[1];
 
-    const CIPDigraph::Edge* internal = findInternalEdge(root1.getEdges(), focus1, focus2);
+    auto internal = findInternalEdge(root1.getEdges(), focus1, focus2);
 
     if (!internal)
         return CIPDescriptor::UNDEF;
                 
-    CIPDigraph::Node& root2 = internal->getOther(root1);
+    auto& root2 = internal->getOther(root1);
              
     root1.getEdges(edges1, internal);
     root2.getEdges(edges2, internal);
-              
+
+    removeInternalEdges(edges1, focus1, focus2);
+    removeInternalEdges(edges2, focus1, focus2);
+    
     const Atom* carriers[2] = { getCarrierAtoms()[0], getCarrierAtoms()[1] };
-    unsigned int config = getConfig();
+    auto config = getConfig();
 
     if (root1.getAtom() == focus2)
         std::swap(carriers[1], carriers[0]);
 
+    auto& digraph = getDigraph();
+    
     digraph.changeRoot(root1);
                 
-    CIPSortingResult sort_res1 = comp.sort(root1, edges1);
+    auto sort_res1 = comp.sort(root1, edges1);
                 
     if (!sort_res1.isUnique())
         return CIPDescriptor::NONE;
                 
     // swap
-    if (edges1.size() > 1 && carriers[0] == edges1[1]->getEnd().getAtom())
-        config ^= 0x3;
+    if (edges1.size() > 1 && carriers[0] == edges1[1]->getEnd().getAtom() && config != UNSPEC)
+        config ^= (OPPOSITE | TOGETHER);
                 
     digraph.changeRoot(root2);
 
-    CIPSortingResult sort_res2 = comp.sort(root2, edges2);
+    auto sort_res2 = comp.sort(root2, edges2);
                 
     if (!sort_res2.isUnique())
         return CIPDescriptor::NONE;
-                
+
+    if (config == UNSPEC)
+        return CIPDescriptor::NS;
+                    
     // swap
     if (edges2.size() > 1 && carriers[1] == edges2[1]->getEnd().getAtom())
-        config ^= 0x3;
+        config ^= (OPPOSITE | TOGETHER);
 
     if (config == TOGETHER) {
         if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
             return CIPDescriptor::seqCis;
 
         return CIPDescriptor::Z;
-
-    } else if (config == OPPOSITE) {
-        if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
-            return CIPDescriptor::seqTrans;
-
-        return CIPDescriptor::E;
     }
-                
-    return CIPDescriptor::UNDEF;
+
+    if (sort_res1.isPseudoAsymmetric() != sort_res2.isPseudoAsymmetric())
+        return CIPDescriptor::seqTrans;
+
+    return CIPDescriptor::E;
 }

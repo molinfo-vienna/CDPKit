@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,14 +32,14 @@ using namespace CDPL;
 
 int Chem::CIPRule6::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-    const CIPDigraph& digraph = a.getBeg().getDigraph();
-    const Atom* ref = digraph.getRule6Ref();
+    auto& digraph = a.getBeg().getDigraph();
+    auto ref = digraph.getRule6Ref();
 
     if (!ref)
       return 0;
 
-    const Atom* a_atom = a.getEnd().getAtom();
-    const Atom* b_atom = b.getEnd().getAtom();
+    auto a_atom = a.getEnd().getAtom();
+    auto b_atom = b.getEnd().getAtom();
 
     // note: we had to go through rule 5 (pseudoasymmetric) to get here
     // so the return type is -2/+2

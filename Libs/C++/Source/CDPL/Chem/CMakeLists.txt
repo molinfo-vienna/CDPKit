@@ -184,10 +184,11 @@ set(cdpl-chem_LIB_SRCS
     CIPRule2.cpp
     CIPRule3.cpp
     CIPRule4a.cpp
-    #CIPRule4a.cpp
+    CIPRule4b.cpp
     CIPRule4c.cpp
-    #CIPRule5.cpp
+    CIPRule5.cpp
     CIPRule6.cpp
+    CIPPairList.cpp
     CIPRuleStack.cpp
     
     CIPPriorityCalculator.cpp

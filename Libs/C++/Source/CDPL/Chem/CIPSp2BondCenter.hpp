@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -87,7 +87,7 @@ namespace CDPL
 
             unsigned int label(CIPSequenceRule& comp);
   
-            unsigned int label(CIPDigraph::Node& root1, CIPDigraph& digraph, CIPSequenceRule& comp);
+            unsigned int label(CIPDigraph::Node& root1, CIPSequenceRule& comp);
 
           private:
             CIPDigraph::EdgeList edges1;

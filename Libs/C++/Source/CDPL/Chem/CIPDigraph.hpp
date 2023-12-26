@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,7 +32,7 @@
 #define CDPL_CHEM_CIPDIGRAPH_HPP
 
 #include <cstddef>
-#include <queue>
+#include <deque>
 #include <vector>
 #include <memory>
 #include <utility>
@@ -272,15 +272,10 @@ namespace CDPL
                 return *molGraph;
             }
 
-            void clear();
-            
             Node& init(const Atom& atom);
 
-            std::size_t getNumNodes() const
-            {
-                return numNodes;
-            }
-
+            void reset();
+            
             Node* getRoot() const
             {
                 return root;
@@ -330,8 +325,6 @@ namespace CDPL
                                   const CIPMancude::Fraction* atomic_no_fract);
             
             void addEdge(Node& beg, const Bond* bond, Node& end);
-
-            Node* allocNode();
             
             typedef std::deque<Node*>       NodeQueue;
             typedef Util::ObjectStack<Node> NodeCache;
@@ -342,7 +335,6 @@ namespace CDPL
             const MolecularGraph* molGraph;
             Node*                 root;
             Node*                 tmpRoot;
-            std::size_t           numNodes;
             const Atom*           rule6Ref;
             NodeQueue             nodeQueue;
             EdgeList              edgeList;

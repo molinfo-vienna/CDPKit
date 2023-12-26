@@ -25,6 +25,8 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/CIPConfigurationLabeler.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 
 #include "CIPConfigurationLabelerImpl.hpp"
 

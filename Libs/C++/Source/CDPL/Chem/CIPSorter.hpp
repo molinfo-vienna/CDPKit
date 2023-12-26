@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -54,14 +54,10 @@ namespace CDPL
         {
 
           public:
-            typedef std::vector<std::vector<const CIPDigraph::Edge*> > GroupList;
-          
-            CIPSorter(CIPSequenceRule* rule):
-                rules(&rule), numRules(1), rule(rule)
-            {}
-
+            typedef std::vector<CIPDigraph::EdgeList*> GroupList;
+        
             CIPSorter(CIPSequenceRule* const* rules, std::size_t num_rules):
-                rules(rules), numRules(1), rule(0)
+                rules(rules), numRules(num_rules)
             {}
 
             CIPSequenceRule* const* getRules() const
@@ -82,15 +78,33 @@ namespace CDPL
             CIPSortingResult prioritise(const CIPDigraph::Node& node, CIPDigraph::EdgeList& edges, bool deep) const;
          
             int compareLigands(const CIPDigraph::Node& node, const CIPDigraph::Edge& a, const CIPDigraph::Edge& b, bool deep) const;
-            
-            void getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups) const;
+
+            template <typename T>
+            std::size_t getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups, const T& new_grp) const
+            {
+                // would be nice to have this integrated whilst sorting - may provide a small speed increase
+                // but as most of our lists are small we take use ugly sort then group approach
+                CIPDigraph::Edge* prev     = 0;
+                std::size_t       num_grps = 0;
+
+                for (auto edge : edges) {
+                    if (!prev || compareLigands(prev->getBeg(), *prev, *edge, true) != 0) {
+                        groups.push_back(new_grp());
+                        num_grps++;
+                    }
+
+                    prev = edge;
+                    groups.back()->push_back(edge);
+                }
+
+                return num_grps;
+            }
 
             std::size_t getNumGroups(const CIPDigraph::EdgeList& edges) const;
 
           private:
             CIPSequenceRule* const* rules;
             std::size_t             numRules;
-            CIPSequenceRule*        rule;
         };
     } // namespace Chem
 } // namespace CDPL

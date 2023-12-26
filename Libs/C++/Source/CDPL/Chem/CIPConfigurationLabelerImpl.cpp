@@ -66,68 +66,56 @@ void Chem::CIPConfigurationLabelerImpl::setup(const MolecularGraph& molgraph)
     extractAtomCenters();
     extractBondCenters();
 }
-
-unsigned int Chem::CIPConfigurationLabelerImpl::getLabel(const Atom& atom)
+   
+unsigned int Chem::CIPConfigurationLabelerImpl::getLabel(const AtomContainer& cntnr)
 {
-    return getLabelGeneric(atom);
+    auto it = stereoCenters.find(&cntnr);
+
+    if (it == stereoCenters.end())
+        return CIPDescriptor::NONE;
+
+    rules.enableFullStack(false);
+    digraph.reset();
+    
+    auto& ctr = *it->second;
+    auto label = ctr.label(rules);
+
+    if (label != CIPDescriptor::NONE)
+        return label;
+    
+    rules.enableFullStack(true);
+    
+    setAuxLabels(ctr);
+
+    return ctr.label(rules);
 }
 
-unsigned int Chem::CIPConfigurationLabelerImpl::getLabel(const Bond& bond)
-{
-    return getLabelGeneric(bond);
-}
-            
 void Chem::CIPConfigurationLabelerImpl::copy(const CIPConfigurationLabelerImpl& labeler)
 {
     if (!labeler.molGraph) {
         molGraph = 0;
-        
         stereoCenters.clear();
-        digraph.clear();
         return;
     }
 
     setup(*labeler.molGraph);
 }
 
-unsigned int Chem::CIPConfigurationLabelerImpl::getLabelGeneric(const AtomContainer& cntnr)
-{
-    auto it = stereoCenters.find(&cntnr);
-
-    if (it == stereoCenters.end())
-        return CIPDescriptor::NONE;
-    
-    rules.enableFullStack(false);
-    digraph.clear();
-    
-    CIPStereoCenter& ctr = *it->second;
-    unsigned int label = ctr.label(rules);
-
-    if (label != CIPDescriptor::NONE)
-        return label;
-
-    setAuxLabels(ctr);
-    
-    rules.enableFullStack(true);
-
-    return ctr.label(rules);
-}
-
 void Chem::CIPConfigurationLabelerImpl::setAuxLabels(const CIPStereoCenter& ctr)
 {
     auxStereoCenters.clear();
 
-    for (const auto& entry : stereoCenters) {
-        CIPStereoCenter* curr_ctr = entry.second.get();
+    for (auto& entry : stereoCenters) {
+        auto curr_ctr = entry.second.get();
 
         if (curr_ctr == &ctr)
             continue;
 
-        const Atom* const* foci = curr_ctr->getFocusAtoms();
+        auto foci = curr_ctr->getFocusAtoms();
 
         digraph.getNodes(*foci[0], nodes);
         
-        for (auto* node : nodes) {
+        for (auto node : nodes) {
              if (node->isDuplicate())
                  continue;
 
@@ -136,12 +124,12 @@ void Chem::CIPConfigurationLabelerImpl::setAuxLabels(const CIPStereoCenter& ctr)
              if (curr_ctr->getNumFocusAtoms() == 2) {
                  node->getEdges(edges, foci[1]);
                  
-                 for (const auto* edge : edges) {
+                 for (auto edge : edges) {
                      if (edge->getOther(*node).getDistance() < node->getDistance())
                          low = &edge->getOther(*node);
                  }
              }
-             
+
              auxStereoCenters.emplace_back(low, curr_ctr);
         }
     }
@@ -153,37 +141,36 @@ void Chem::CIPConfigurationLabelerImpl::setAuxLabels(const CIPStereoCenter& ctr)
 
     auxStereoDescrs.clear();
     
-    std::size_t prev_root_dist = std::numeric_limits<std::size_t>::max();
+    auto prev_root_dist = std::numeric_limits<std::size_t>::max();
     
-    for (const auto& entry : auxStereoCenters) {
-        CIPDigraph::Node* node = entry.first;
+    for (auto& entry : auxStereoCenters) {
+        auto node = entry.first;
 
         if (node->getDistance() < prev_root_dist) {
-            for (const auto& entry : auxStereoDescrs)
+            for (auto& entry : auxStereoDescrs)
                 entry.first->setAuxDescriptor(entry.second);
 
             prev_root_dist = node->getDistance();
             auxStereoDescrs.clear();
         }
         
-        auxStereoDescrs.emplace_back(node, entry.second->label(*node, digraph, rules));
+        auxStereoDescrs.emplace_back(node, entry.second->label(*node, rules));
     }
 
-    for (const auto& entry : auxStereoDescrs)
+    for (auto& entry : auxStereoDescrs)
         entry.first->setAuxDescriptor(entry.second);
 }
 
 void Chem::CIPConfigurationLabelerImpl::extractAtomCenters()
 {
-    for (const auto& atom : molGraph->getAtoms()) {
-        StereoDescriptor descr = calcStereoDescriptor(atom, *molGraph, 0);
-        std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+    for (auto& atom : molGraph->getAtoms()) {
+        auto descr = calcStereoDescriptor(atom, *molGraph, 0);
+        auto num_ref_atoms = descr.getNumReferenceAtoms();
 
         if (num_ref_atoms < 3)
             continue;
-        
-        const Atom* const* ref_atoms = descr.getReferenceAtoms();
-        unsigned int config = descr.getConfiguration();
+
+        auto config = descr.getConfiguration();
 
         switch (config) {
 
@@ -194,11 +181,15 @@ void Chem::CIPConfigurationLabelerImpl::extractAtomCenters()
             case AtomConfiguration::S:
                 config = CIPTetrahedralCenter::RIGHT;
                 break;
+
+            case AtomConfiguration::NONE:
+                continue;
                 
             default:
                 config = CIPTetrahedralCenter::UNSPEC;
         }
 
+        auto ref_atoms = descr.getReferenceAtoms();
         StereoCenterPtr ctr_ptr;
 
         if (num_ref_atoms == 4)
@@ -218,14 +209,13 @@ void Chem::CIPConfigurationLabelerImpl::extractAtomCenters()
 
 void Chem::CIPConfigurationLabelerImpl::extractBondCenters()
 {
-    for (const auto& bond : molGraph->getBonds()) {
-        StereoDescriptor descr = calcStereoDescriptor(bond, *molGraph, 0);
+    for (auto& bond : molGraph->getBonds()) {
+        auto descr = calcStereoDescriptor(bond, *molGraph, 0);
 
         if (descr.getNumReferenceAtoms() != 4)
             continue;
 
-        const Atom* const* ref_atoms = descr.getReferenceAtoms();
-        unsigned int config = descr.getConfiguration();
+        auto config = descr.getConfiguration();
 
         switch (config) {
 
@@ -237,9 +227,14 @@ void Chem::CIPConfigurationLabelerImpl::extractBondCenters()
                 config = CIPSp2BondCenter::OPPOSITE;
                 break;
 
+            case BondConfiguration::NONE:
+                continue;
+                
             default:
                 config = CIPSp2BondCenter::UNSPEC;
         }
+
+        auto ref_atoms = descr.getReferenceAtoms();
         
         StereoCenterPtr ctr_ptr(new CIPSp2BondCenter(digraph,
                                                      { ref_atoms[1], ref_atoms[2] },

@@ -1,5 +1,5 @@
 /* 
- * CIPSortingResult.hpp 
+ * CIPPairList.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPSortingResult.
+ * \brief Definition of the class CDPL::Chem::CIPPairList.
  */
 
-#ifndef CDPL_CHEM_CIPSORTINGRESULT_HPP
-#define CDPL_CHEM_CIPSORTINGRESULT_HPP
+#ifndef CDPL_CHEM_CIPPAIRLIST_HPP
+#define CDPL_CHEM_CIPPAIRLIST_HPP
+
+#include <vector>
 
 
 namespace CDPL
@@ -39,42 +41,44 @@ namespace CDPL
     {
 
         /**
-         * Holds some properties that are determined when sorting/prioritising ligands.
+         * Implementation of a descriptor list that allows descriptors to be added and
+         * ignored. 
          */
-        class CIPSortingResult
+        class CIPPairList
         {
- 
+
           public:
-            CIPSortingResult(bool unique, bool found_wc, bool pseudo_asym):
-                unique(unique), foundWildcard(found_wc), pseudoAsym(pseudo_asym)
-            {}
+            typedef std::vector<unsigned int> DescriptorList;
+
+            CIPPairList() {}
+            
+            CIPPairList(unsigned int ref);
+
+            unsigned int getRefDescriptor() const;
+            
+            /**
+             * Adds a descriptor to the descriptor list. 
+             *
+             * If the provided descriptor is present in the ignore set the descriptor will not be added.
+             *
+             * @param descriptor the descriptor to add.
+             * @return whether the descriptor was added to the list
+             */
+            bool add(unsigned int descriptor);
 
             /**
-             * Indicates whether the ligands were unique (i.e. could be ordered)
-             *
-             * @return whether the ligands were unique.
+             * Clear the descriptor list and resets the pair value. 
              */
-            bool isUnique() const
-            {
-                return unique;
-            }
+            void clear();
+          
+            int compareTo(const CIPPairList& that) const;
 
-            bool isPseudoAsymmetric() const
-            {
-                return pseudoAsym;
-            }
-
-            bool wasWildcardFound() const
-            {
-                return foundWildcard;
-            }
-
+            static unsigned int ref(unsigned int descriptor);
+            
           private:
-            bool unique;
-            bool foundWildcard;
-            bool pseudoAsym;
+            DescriptorList descriptors;
         };
     } // namespace Chem
 } // namespace CDPL
 
-#endif // CDPL_CHEM_CIPSORTINGRESULT_HPP
+#endif // CDPL_CHEM_CIPPAIRLIST_HPP

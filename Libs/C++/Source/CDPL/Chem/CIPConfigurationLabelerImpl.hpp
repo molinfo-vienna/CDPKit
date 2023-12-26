@@ -45,8 +45,6 @@ namespace CDPL
     {
 
         class MolecularGraph;
-        class Atom;
-        class Bond;
         class AtomContainer;
         class CIPStereoCenter;
         
@@ -62,15 +60,11 @@ namespace CDPL
             
             void setup(const MolecularGraph& molgraph);
 
-            unsigned int getLabel(const Atom& atom);
-
-            unsigned int getLabel(const Bond& bond);
+            unsigned int getLabel(const AtomContainer& cntnr);
             
             void copy(const CIPConfigurationLabelerImpl& labeler);
             
           private:
-            unsigned int getLabelGeneric(const AtomContainer& cntnr);
-
             void setAuxLabels(const CIPStereoCenter& ctr);
             
             void extractAtomCenters();

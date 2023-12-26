@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -84,22 +84,6 @@ int Chem::CIPSorter::compareLigands(const CIPDigraph::Node& node, const CIPDigra
     }
 
     return 0;
-}
-
-void Chem::CIPSorter::getGroups(const CIPDigraph::EdgeList& edges, GroupList& groups) const
-{
-    // would be nice to have this integrated whilst sorting - may provide a small speed increase
-    // but as most of our lists are small we take use ugly sort then group approach
-    groups.clear();
-    CIPDigraph::Edge* prev = 0;
-
-    for (auto edge : edges) {
-        if (!prev || compareLigands(prev->getBeg(), *prev, *edge, true) != 0)
-            groups.resize(groups.size() + 1);
-
-        prev = edge;
-        groups.back().push_back(edge);
-    }
 }
 
 std::size_t Chem::CIPSorter::getNumGroups(const CIPDigraph::EdgeList& edges) const

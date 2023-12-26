@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -30,9 +30,9 @@
 #include "CIPRule2.hpp"
 #include "CIPRule3.hpp"
 #include "CIPRule4a.hpp"
-//#include "CIPRule4b.hpp"
+#include "CIPRule4b.hpp"
 #include "CIPRule4c.hpp"
-//#include "CIPRule5.hpp"
+#include "CIPRule5.hpp"
 #include "CIPRule6.hpp"
 
 
@@ -47,9 +47,9 @@ Chem::CIPRuleStack::CIPRuleStack():
     rules.push_back(new CIPRule2());
     rules.push_back(new CIPRule3());
     rules.push_back(new CIPRule4a());
-    //rules.push_back(new CIPRule4b());
+    rules.push_back(new CIPRule4b());
     rules.push_back(new CIPRule4c());
-    //rules.push_back(new CIPRule5());
+    rules.push_back(new CIPRule5());
     rules.push_back(new CIPRule6());
 
     for (std::size_t i = 0, num_rules = rules.size(); i < num_rules; i++)

@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -33,9 +33,15 @@
 using namespace CDPL;
 
 
+Chem::CIPSequenceRule::CIPSequenceRule():
+    edgeQueueCache(100), sorter(0, 0)
+{
+    edgeQueueCache.setInitFunction([](EdgeQueue& eq) { eq.clear(); });
+}
+
 unsigned int Chem::CIPSequenceRule::getBondLabel(const CIPDigraph::Edge& edge) const
 {
-    const Bond* bond = edge.getBond();
+    auto bond = edge.getBond();
                 
     if (!bond)
         return CIPDescriptor::NONE;
@@ -50,35 +56,32 @@ int Chem::CIPSequenceRule::recursiveCompare(const CIPDigraph::Edge& a, const CIP
     if (cmp != 0)
         return cmp;
 
-    struct Sentinel
+    struct EdgeQueueDealloc
     {
         
-        ~Sentinel() {
+        ~EdgeQueueDealloc() {
             rule->edgeQueueCache.put();
         }
         
         CIPSequenceRule* rule;
     };
     
-    EdgeQueue& edge_queue1 = *edgeQueueCache.get();
-    Sentinel sentinel1{this};
+    auto& edge_queue1 = *edgeQueueCache.get();
+    EdgeQueueDealloc dealloc1{this};
 
-    EdgeQueue& edge_queue2 = *edgeQueueCache.get();
-    Sentinel sentinel2{this};
+    auto& edge_queue2 = *edgeQueueCache.get();
+    EdgeQueueDealloc dealloc2{this};
     
-    edge_queue1.clear();
     edge_queue1.push_back(&a);
-
-    edge_queue2.clear();
     edge_queue2.push_back(&b);
 
     while (!edge_queue1.empty() && !edge_queue2.empty()) {
-        const CIPDigraph::Edge* curr_a = edge_queue1.front(); edge_queue1.pop_front();
-        const CIPDigraph::Edge* curr_b = edge_queue2.front(); edge_queue2.pop_front();
-        CIPDigraph::Node& a_node = curr_a->getEnd();
-        CIPDigraph::Node& b_node = curr_b->getEnd();
-        CIPDigraph::EdgeList& as = a_node.getEdges();
-        CIPDigraph::EdgeList& bs = b_node.getEdges();
+        auto curr_a = edge_queue1.front(); edge_queue1.pop_front();
+        auto curr_b = edge_queue2.front(); edge_queue2.pop_front();
+        auto& a_node = curr_a->getEnd();
+        auto& b_node = curr_b->getEnd();
+        auto& as = a_node.getEdges();
+        auto& bs = b_node.getEdges();
 
         // shallow sort first
         if (sort(a_node, as, false).wasWildcardFound())
@@ -90,8 +93,8 @@ int Chem::CIPSequenceRule::recursiveCompare(const CIPDigraph::Edge& a, const CIP
         int size_diff = (as.size() < bs.size() ? -1 : as.size() > bs.size() ? 1 : 0);
 
         for (auto a_it = as.begin(), b_it = bs.begin(); a_it != as.end() && b_it != bs.end(); ++a_it, ++b_it) {
-            CIPDigraph::Edge* a_edge = *a_it;
-            CIPDigraph::Edge* b_edge = *b_it;
+            auto a_edge = *a_it;
+            auto b_edge = *b_it;
 
             if (areUpEdges(a_node, b_node, *a_edge, *b_edge))
                 continue;

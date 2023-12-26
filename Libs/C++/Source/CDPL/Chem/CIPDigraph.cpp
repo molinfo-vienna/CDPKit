@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ namespace
 
 Chem::CIPDigraph::CIPDigraph():
     nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE),
-    root(0), tmpRoot(0), numNodes(0), rule6Ref(0)
+    root(0), tmpRoot(0), rule6Ref(0)
 {}
 
 Chem::CIPDigraph::~CIPDigraph() {}
@@ -62,27 +62,28 @@ void Chem::CIPDigraph::setMolecularGraph(const MolecularGraph& molgraph)
 
 Chem::CIPDigraph::Node& Chem::CIPDigraph::init(const Atom& atom)
 {
-    root = allocNode();
+    tmpRoot  = 0;
+    rule6Ref = 0;
+
+    nodeCache.putAll();
+    edgeCache.putAll();
+    
+    root = nodeCache.get();
     root->init(*this, molGraph->getNumAtoms(), molGraph->getAtomIndex(atom), &atom, getType(atom));
 
     return *root;
 }
 
-void Chem::CIPDigraph::clear()
+void Chem::CIPDigraph::reset()
 {
-    tmpRoot  = 0;
-    numNodes = 0;
-    rule6Ref = 0;
-
-    nodeCache.putAll();
-    edgeCache.putAll();
+    root = 0;
 }
 
 void Chem::CIPDigraph::getNodes(const Atom& atom, NodeList& nodes)
 {
     nodes.clear();
 
-    Node* root = getCurrRoot();
+    auto root = getCurrRoot();
 
     if (!root)
         return;
@@ -91,7 +92,7 @@ void Chem::CIPDigraph::getNodes(const Atom& atom, NodeList& nodes)
     nodeQueue.push_back(root);
     
     while (!nodeQueue.empty()) {
-        Node* node = nodeQueue.front(); nodeQueue.pop_front();
+        auto node = nodeQueue.front(); nodeQueue.pop_front();
         
         if (&atom == node->getAtom())
             nodes.push_back(node);
@@ -114,7 +115,7 @@ void Chem::CIPDigraph::expandAll()
     nodeQueue.push_back(root);
     
     while (!nodeQueue.empty()) {
-        Node* node = nodeQueue.front(); nodeQueue.pop_front();
+        auto node = nodeQueue.front(); nodeQueue.pop_front();
 
         for (auto e : node->getEdges()) {
             if (!e->isBeg(*node))
@@ -134,7 +135,7 @@ void Chem::CIPDigraph::changeRoot(Node& new_root)
     nodeQueue.push_back(&new_root);
 
     while (!nodeQueue.empty()) {
-        Node* node = nodeQueue.front(); nodeQueue.pop_front();
+        auto node = nodeQueue.front(); nodeQueue.pop_front();
 
         for (auto e : node->getEdges()) {
             if (e->isEnd(*node)) {
@@ -152,29 +153,29 @@ void Chem::CIPDigraph::changeRoot(Node& new_root)
 
 void Chem::CIPDigraph::expand(Node& beg)
 {
-    const Atom* atom = beg.getAtom();
-    const EdgeList& edges = beg.getEdges();
-    const Bond* prev = (edges.size() > 0 && !edges[0]->isBeg(beg) ? edges[0]->getBond() : nullptr);
+    auto atom = beg.getAtom();
+    auto& edges = beg.getEdges();
+    auto prev = (edges.size() > 0 && !edges[0]->isBeg(beg) ? edges[0]->getBond() : nullptr);
 
-    long charge = getFormalCharge(*atom);
+    auto charge = getFormalCharge(*atom);
     const CIPMancude::Fraction* atomic_no_fract = 0;
     
     // create 'explicit' nodes
     auto b_it = atom->getBondsBegin();
     
-    for (auto a_it = atom->getAtomsBegin(), a_end = atom->getAtomsEnd(); a_it != a_end; ++ a_it, ++b_it) {
-        const Atom& nbr = *a_it;
+    for (auto a_it = atom->getAtomsBegin(), a_end = atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+        auto& nbr = *a_it;
 
         if (!molGraph->containsAtom(nbr))
             continue;
 
-        const Bond& bond = *b_it;
+        auto& bond = *b_it;
 
         if (!molGraph->containsBond(bond))
             continue;
         
-        std::size_t nbr_idx = molGraph->getAtomIndex(nbr);
-        std::size_t bond_order = getOrder(bond);
+        auto nbr_idx = molGraph->getAtomIndex(nbr);
+        auto bond_order = getOrder(bond);
 
         if (!beg.getVisAtomMask().test(nbr_idx)) {
             addEdge(beg, &bond, newNode(beg, nbr_idx, &nbr));
@@ -204,7 +205,7 @@ void Chem::CIPDigraph::expand(Node& beg)
             }
             
         } else { // ring closures
-            std::size_t root_dist = traceBack(beg, &nbr).getDistance();
+            auto root_dist = traceBack(beg, &nbr).getDistance();
             
             addEdge(beg, &bond, newTerminalNode(beg, &nbr, Node::RING_DUPLICATE, root_dist, atomic_no_fract));
 
@@ -228,7 +229,7 @@ void Chem::CIPDigraph::expand(Node& beg)
 
 const Chem::CIPDigraph::Node& Chem::CIPDigraph::traceBack(const Node& start, const Atom* atom) const
 {
-    for (const Node* node = &start; node; node = node->getParent())
+    for (auto node = &start; node; node = node->getParent())
         if (node->getAtom() == atom)
             return *node;
 
@@ -237,7 +238,7 @@ const Chem::CIPDigraph::Node& Chem::CIPDigraph::traceBack(const Node& start, con
     
 Chem::CIPDigraph::Node& Chem::CIPDigraph::newNode(const Node& parent, std::size_t atom_idx, const Atom* atom)
 {
-    Node* node = allocNode();
+    auto node = nodeCache.get();
 
     node->init(parent, *this, parent.getVisAtomMask(), atom_idx, atom, getType(*atom), 1, parent.getDistance() + 1, 0);
     
@@ -247,7 +248,7 @@ Chem::CIPDigraph::Node& Chem::CIPDigraph::newNode(const Node& parent, std::size_
 Chem::CIPDigraph::Node& Chem::CIPDigraph::newTerminalNode(const Node& parent, const Atom* atom, unsigned int flags, std::size_t root_dist,
                                                           const CIPMancude::Fraction* atomic_no_fract)
 {
-    Node* node = allocNode();
+    auto node = nodeCache.get();
 
     if (!atom) {
         node->init(parent, *this, atom, 1, 1, root_dist, flags);
@@ -270,19 +271,12 @@ Chem::CIPDigraph::Node& Chem::CIPDigraph::newTerminalNode(const Node& parent, co
 
 void Chem::CIPDigraph::addEdge(Node& beg, const Bond* bond, Node& end)
 {
-    Edge& e = *edgeCache.get();
+    auto& e = *edgeCache.get();
 
     e.init(beg, bond, end);
 
     beg.add(e);
     end.add(e);
-}
-
-Chem::CIPDigraph::Node* Chem::CIPDigraph::allocNode()
-{
-    numNodes++;
-    
-    return nodeCache.get();
 }
 
 

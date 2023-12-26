@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,17 +36,17 @@ using namespace CDPL;
 
 int Chem::CIPRule2::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-    const Atom* atom_a = a.getEnd().getAtom();
-    const Atom* atom_b = b.getEnd().getAtom();
+    auto atom_a = a.getEnd().getAtom();
+    auto atom_b = b.getEnd().getAtom();
 
-    std::size_t atom_a_iso = (a.getEnd().isDuplicate() ? 0 : atom_a ? getIsotope(*atom_a) : 0);
-    std::size_t atom_b_iso = (b.getEnd().isDuplicate() ? 0 : atom_b ? getIsotope(*atom_b) : 0);
+    auto atom_a_iso = (a.getEnd().isDuplicate() ? 0 : atom_a ? getIsotope(*atom_a) : 0);
+    auto atom_b_iso = (b.getEnd().isDuplicate() ? 0 : atom_b ? getIsotope(*atom_b) : 0);
 
     if (atom_a_iso == 0 && atom_b_iso == 0)
       return 0;
     
-    unsigned int atomic_no_a = (atom_a ? getType(*atom_a) : AtomType::H);
-    unsigned int atomic_no_b = (atom_b ? getType(*atom_b) : AtomType::H);
+    auto atomic_no_a = (atom_a ? getType(*atom_a) : AtomType::H);
+    auto atomic_no_b = (atom_b ? getType(*atom_b) : AtomType::H);
 
     double atom_a_wt = AtomDictionary::getAtomicWeight(atomic_no_a, atom_a_iso);
     double atom_b_wt = AtomDictionary::getAtomicWeight(atomic_no_b, atom_b_iso);

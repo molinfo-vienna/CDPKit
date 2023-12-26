@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -56,15 +56,15 @@ const Chem::CIPMancude::Fraction& Chem::CIPMancude::operator[](const Atom& atom)
 bool Chem::CIPMancude::seedTypes()
 {
     bool result = false;
-    std::size_t num_atoms = molGraph->getNumAtoms();
+    auto num_atoms = molGraph->getNumAtoms();
 
     types.resize(num_atoms, Other);
     
     for (std::size_t i = 0; i < num_atoms; i++) {
         types[i] = Other;
 
-        const Atom& atom = molGraph->getAtom(i);
-        std::size_t btypes = getImplicitHydrogenCount(atom);
+        auto& atom = molGraph->getAtom(i);
+        auto btypes = getImplicitHydrogenCount(atom);
         bool in_ring = false;
         auto a_it = atom.getAtomsBegin();
         
@@ -149,13 +149,13 @@ bool Chem::CIPMancude::seedTypes()
 
 void Chem::CIPMancude::relaxTypes()
 {
-    std::size_t num_atoms = molGraph->getNumAtoms();
+    auto num_atoms = molGraph->getNumAtoms();
 
     counts.assign(num_atoms, 0);
     atomQueue.clear();
 
     for (std::size_t i = 0; i < num_atoms; i++) {
-        const Atom& atom = molGraph->getAtom(i);
+        auto& atom = molGraph->getAtom(i);
         auto b_it = atom.getBondsBegin();
         
         for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
@@ -176,8 +176,8 @@ void Chem::CIPMancude::relaxTypes()
     }
     
     while (!atomQueue.empty()) {
-        const Atom* atom = atomQueue.front(); atomQueue.pop_front();
-        std::size_t aidx = molGraph->getAtomIndex(*atom);
+        auto atom = atomQueue.front(); atomQueue.pop_front();
+        auto aidx = molGraph->getAtomIndex(*atom);
 
         if (types[aidx] != Other) {
             types[aidx] = Other;
@@ -188,7 +188,7 @@ void Chem::CIPMancude::relaxTypes()
                 if (!molGraph->containsBond(*b_it))
                     continue;
 
-                const Atom& nbr = *a_it;
+                auto& nbr = *a_it;
             
                 if (!molGraph->containsAtom(nbr))
                     continue;
@@ -207,12 +207,12 @@ void Chem::CIPMancude::visitPart(std::size_t part, const Atom* atom)
         auto a_it = atom->getAtomsBegin();
         
         for (auto b_it = atom->getBondsBegin(), b_end = atom->getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-            const Atom& nbr = *a_it;
+            auto& nbr = *a_it;
             
             if (!molGraph->containsAtom(nbr))
                 continue;
 
-            const Bond& bond = *b_it;
+            auto& bond = *b_it;
 
             if (!molGraph->containsBond(bond))
                 continue;
@@ -220,7 +220,7 @@ void Chem::CIPMancude::visitPart(std::size_t part, const Atom* atom)
             if (!getRingFlag(bond))
                 continue;
            
-            std::size_t aidx = molGraph->getAtomIndex(nbr);
+            auto aidx = molGraph->getAtomIndex(nbr);
             
             if (parts[aidx] == 0 && types[aidx] != Other) {
                 parts[aidx] = part;
@@ -242,7 +242,7 @@ std::size_t Chem::CIPMancude::visitParts()
     std::size_t num_parts = 0;
 
     for (std::size_t i = 0, num_atoms = molGraph->getNumAtoms(); i < num_atoms; i++) {
-        const Atom& atom = molGraph->getAtom(i);
+        auto& atom = molGraph->getAtom(i);
 
         if (parts[i] == 0 && types[i] != Other) {
             parts[i] = ++num_parts;
@@ -256,7 +256,7 @@ std::size_t Chem::CIPMancude::visitParts()
 
 void Chem::CIPMancude::calcFracAtomicNos()
 {
-    std::size_t num_atoms = molGraph->getNumAtoms();
+    auto num_atoms = molGraph->getNumAtoms();
     
     fractions.resize(num_atoms);
 
@@ -272,7 +272,7 @@ void Chem::CIPMancude::calcFracAtomicNos()
 
     parts.assign(num_atoms, 0);
 
-    std::size_t num_parts = visitParts();
+    auto num_parts = visitParts();
 
     resParts.assign(num_parts, 0);
 
@@ -283,7 +283,7 @@ void Chem::CIPMancude::calcFracAtomicNos()
             if (parts[i] == 0)
                 continue;
 
-            const Atom& atom = molGraph->getAtom(i);
+            auto& atom = molGraph->getAtom(i);
 
             if (types[i] == Cv3D3Minus || types[i] == Nv2D2Minus) {
                 std::size_t j = 0;
@@ -305,7 +305,7 @@ void Chem::CIPMancude::calcFracAtomicNos()
                 if (!molGraph->containsBond(*b_it))
                     continue;
 
-                const Atom& nbr = *a_it;
+                auto& nbr = *a_it;
 
                 if (!molGraph->containsAtom(nbr))
                     continue;
@@ -321,7 +321,7 @@ void Chem::CIPMancude::calcFracAtomicNos()
     if (num_res > 0) {
         for (std::size_t j = 0; j < num_res; j++) {
             Fraction frac(0, 0);
-            std::size_t part = resParts[j];
+            auto part = resParts[j];
 
             counts.clear();
             
@@ -330,21 +330,21 @@ void Chem::CIPMancude::calcFracAtomicNos()
                     counts.push_back(i);
                     frac.second++;
 
-                    const Atom& atom = molGraph->getAtom(i);
+                    auto& atom = molGraph->getAtom(i);
                     auto b_it = atom.getBondsBegin();
 
                     for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-                        const Bond& bond = *b_it;
+                        auto& bond = *b_it;
                         
                         if (!molGraph->containsBond(bond))
                             continue;
 
-                        const Atom& nbr = *a_it;
+                        auto& nbr = *a_it;
 
                         if (!molGraph->containsAtom(nbr))
                             continue;
                     
-                        std::size_t order = getOrder(bond);
+                        auto order = getOrder(bond);
 
                         if (order > 1 && parts[molGraph->getAtomIndex(nbr)] == part)
                             frac.first += (order - 1) * getType(nbr);
@@ -352,7 +352,7 @@ void Chem::CIPMancude::calcFracAtomicNos()
                 }
             }
 
-            for (std::size_t i : counts)
+            for (auto i : counts)
                 fractions[i] = frac;
         }
     }

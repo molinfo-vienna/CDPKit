@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -44,14 +44,14 @@ namespace
     
 int Chem::CIPRule1a::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-    unsigned int atomic_no_num_a = a.getEnd().getAtomicNoNumerator();
-    unsigned short atomic_no_den_a = a.getEnd().getAtomicNoDenominator();
+    auto atomic_no_num_a = a.getEnd().getAtomicNoNumerator();
+    auto atomic_no_den_a = a.getEnd().getAtomicNoDenominator();
 
     if (atomic_no_den_a == 1 && !isChemElement(atomic_no_num_a))
         return CIPSequenceRule::COMP_TO_WILDCARD;
 
-    unsigned int atomic_no_num_b = b.getEnd().getAtomicNoNumerator();
-    unsigned short atomic_no_den_b = b.getEnd().getAtomicNoDenominator();
+    auto atomic_no_num_b = b.getEnd().getAtomicNoNumerator();
+    auto atomic_no_den_b = b.getEnd().getAtomicNoDenominator();
 
     if (atomic_no_den_b == 1 && !isChemElement(atomic_no_num_b))
         return CIPSequenceRule::COMP_TO_WILDCARD;

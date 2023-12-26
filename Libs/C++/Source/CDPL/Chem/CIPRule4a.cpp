@@ -5,7 +5,7 @@
  *
  * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
- * The code in this file is a C++11 port of Java code written by John Mayfield
+ * Code based on a Java implementation of the CIP sequence rules by John Mayfield
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,8 +34,8 @@ using namespace CDPL;
 
 int Chem::CIPRule4a::compare(const CIPDigraph::Edge& a, const CIPDigraph::Edge& b)
 {
-    unsigned int ord_a = ordinal(getBondLabel(a));
-    unsigned int ord_b = ordinal(getBondLabel(b));
+    auto ord_a = ordinal(getBondLabel(a));
+    auto ord_b = ordinal(getBondLabel(b));
 
     int cmp = (ord_a > ord_b ? 1 : ord_a < ord_b ? -1 : 0);
 
