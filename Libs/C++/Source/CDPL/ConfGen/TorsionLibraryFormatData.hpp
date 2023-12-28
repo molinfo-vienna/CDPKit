@@ -37,13 +37,18 @@ namespace CDPL
         namespace TorsionLibraryFormatData
         {
 
-            const std::string LIBRARY_TAG    = "library";
-            const std::string CATEGORY_TAG   = "category";
-            const std::string RULE_TAG       = "rule";
-            const std::string ANGLE_LIST_TAG = "torsions";
-            const std::string ANGLE_TAG      = "angle";
-            const std::string NOTE_TAG       = "note";
-
+            const std::string LIBRARY_TAG            = "library";
+            const std::string CATEGORY_TAG           = "category";
+            const std::string RULE_TAG               = "rule";
+            const std::string ANGLE_LIST_TAG         = "torsions";
+            const std::string ANGLE_TAG              = "angle";
+            const std::string NOTE_TAG               = "note";
+            const std::string HISTOGRAM_TAG          = "histogram";
+            const std::string HISTOGRAM2_TAG         = "histogram2";
+            const std::string HISTOGRAM_SHIFTED_TAG  = "histogram_shifted";
+            const std::string HISTOGRAM2_SHIFTED_TAG = "histogram2_shifted";
+            const std::string BIN_TAG                = "bin";
+            
             const std::string CATEGORY_NAME_ATTR       = "name";
             const std::string CATEGORY_PATTERN_ATTR    = "pattern";
             const std::string CATEGORY_ATOM_TYPE1_ATTR = "atomType1";
