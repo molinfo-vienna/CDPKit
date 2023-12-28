@@ -467,12 +467,15 @@ const char* ConfGenImpl::getProgAboutText() const
            "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
            "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
            "References:\n"
-           " -  Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
-           "    Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
-           "    A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
-           " -  Guba, W., Meyder, A., Rarey, M., and Hert, J. (2015). Torsion Library Reloaded:\n"
-           "    A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
-           "    Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.";
+           " - Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
+           "   Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
+           "   A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
+           " - Guba, W., Meyder, A., Rarey, M., Hert, J. (2015). Torsion Library Reloaded:\n"
+           "   A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
+           "   Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.\n"
+           " - Penner, P., Guba, W., Schmidt, R., Meyder, A., Stahl, M., Rarey, M. (2022).\n"
+           "   The Torsion Library: Semi-automated Improvement of Torsion Rules with\n"
+           "   SMARTScompare. Journal of Chemical Information and Modeling, 62(7):1644–53.";
 }
 
 void ConfGenImpl::addOptionLongDescriptions()
