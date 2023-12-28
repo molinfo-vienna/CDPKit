@@ -31,6 +31,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -250,28 +251,32 @@ bool ConfGen::TorsionRuleMatcher::matchesCategory(const TorsionCategory& cat, co
 {
     using namespace Chem;
 
-    if (cat.getMatchPattern()) {
-        const MolecularGraph& ptn = *cat.getMatchPattern();
+    if (cat.getBondAtom1Type() != AtomType::UNKNOWN && cat.getBondAtom2Type() != AtomType::UNKNOWN) {
+        unsigned int atom1_type = getType(bond.getBegin());
+        unsigned int atom2_type = getType(bond.getEnd());
 
-        if (ptn.getNumBonds() > 0) {
-            std::size_t ctr_bond_idx = getCentralBondIndex(ptn);
-
-            if (ctr_bond_idx == ptn.getNumBonds())
-                ctr_bond_idx = 0;
-
-            subSearch.clearBondMappingConstraints();
-            subSearch.addBondMappingConstraint(ctr_bond_idx, molgraph.getBondIndex(bond));
-            subSearch.setQuery(ptn);
-        
-            return subSearch.mappingExists(molgraph);
-        }
+        return ((atomTypesMatch(cat.getBondAtom1Type(), atom1_type) && atomTypesMatch(cat.getBondAtom2Type(), atom2_type)) ||
+                (atomTypesMatch(cat.getBondAtom1Type(), atom2_type) && atomTypesMatch(cat.getBondAtom2Type(), atom1_type)));
     }
+  
+    if (!cat.getMatchPattern())
+        return false;
 
-    unsigned int atom1_type = getType(bond.getBegin());
-    unsigned int atom2_type = getType(bond.getEnd());
+    const MolecularGraph& ptn = *cat.getMatchPattern();
 
-    return ((atomTypesMatch(cat.getBondAtom1Type(), atom1_type) && atomTypesMatch(cat.getBondAtom2Type(), atom2_type)) ||
-             (atomTypesMatch(cat.getBondAtom1Type(), atom2_type) && atomTypesMatch(cat.getBondAtom2Type(), atom1_type)));
+    if (ptn.getNumBonds() == 0)
+        return false;
+    
+    std::size_t ctr_bond_idx = getCentralBondIndex(ptn);
+
+    if (ctr_bond_idx == ptn.getNumBonds())
+        return false;
+
+    subSearch.clearBondMappingConstraints();
+    subSearch.addBondMappingConstraint(ctr_bond_idx, molgraph.getBondIndex(bond));
+    subSearch.setQuery(ptn);
+        
+    return subSearch.mappingExists(molgraph);
 }
 
 std::size_t ConfGen::TorsionRuleMatcher::getCentralBondIndex(const Chem::MolecularGraph& ptn) const
