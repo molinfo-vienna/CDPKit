@@ -34,14 +34,15 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "TorsionDriverImpl.hpp"
-#include "FragmentTreeNode.hpp"
 #include "FallbackTorsionLibrary.hpp"
 #include "UtilityFunctions.hpp"
 
@@ -72,32 +73,33 @@ namespace
     {
         symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3);
 
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3);
 
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2);
 
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2);
 
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2);
-          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2);
 
         symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360);
         symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360);
     };
 
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE   = 1000;
-    const double      MIN_TORSION_ANGLE_DISTANCE = 30.0;
+    const std::size_t MAX_CONF_DATA_CACHE_SIZE    = 1000;
+    const double      MIN_TORSION_ANGLE_TOLERANCE = 30.0;
+    const double      DUP_TORSION_ANGLE_THRESHOLD = 10.0;
 
     bool hasAngleWithinDistance(double angle, const ConfGen::FragmentTreeNode::DoubleArray& angles, double dist)
     {
@@ -118,7 +120,7 @@ ConfGen::TorsionDriverImpl::TorsionDriverImpl():
     torLibs.push_back(TorsionLibrary::get());
 
     torRuleMatcher.findUniqueMappingsOnly(true);
-    torRuleMatcher.findAllRuleMappings(false);
+    torRuleMatcher.findAllRuleMappings(true);
     torRuleMatcher.stopAtFirstMatchingRule(true);
 
     subSearch.uniqueMappingsOnly(true);
@@ -425,9 +427,7 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 
         if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
             node->setTorsionReferenceAtoms(0, 0);
-
-    } else if (node->getNumTorsionAngles() > 1)
-        node->removeDuplicateTorsionAngles();
+    } 
 
     if (logCallback) {
         logCallback(" Symmetry: C" + std::to_string(rot_sym) + '\n');
@@ -465,31 +465,95 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
         match = &torRuleMatcher.getMatch(0);
     }
 
-    double ident_rot = 360.0 / rot_sym;
+    bool mult_matches1 = false;
+    bool mult_matches2 = false;
+    
+    auto match_atoms = match->getAtoms();
+
+    for (std::size_t i = 0, num_matches = torRuleMatcher.getNumMatches(); i < num_matches; i++) {
+        auto other_match_atoms = torRuleMatcher.getMatch(i).getAtoms();
+
+        if (match_atoms[1] == other_match_atoms[1]) {
+            mult_matches1 |= (match_atoms[0] != other_match_atoms[0]);
+            mult_matches2 |= (match_atoms[3] != other_match_atoms[3]);
+            continue;
+        }
+
+        if (match_atoms[1] == other_match_atoms[2]) {
+            mult_matches1 |= (match_atoms[0] != other_match_atoms[3]);
+            mult_matches2 |= (match_atoms[3] != other_match_atoms[0]);
+        }
+    }
+
+    double angle_offs1 = (mult_matches1 ? getAngleOffset(*match_atoms[1]) : 0.0);
+    double angle_offs2 = (mult_matches2 ? getAngleOffset(*match_atoms[2]) : 0.0);
+    
     const TorsionRule& rule = match->getRule();
 
+    workingAngles.clear();
+    
     for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
-        node->addTorsionAngle(std::fmod(normalizeAngle(it->getAngle()), ident_rot));
-
+        workingAngles.push_back(normalizeAngle(it->getAngle()));
+    
     if (settings.sampleAngleToleranceRanges()) {
         for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
             double tol = it->getTolerance1();
 
-            if (tol >= MIN_TORSION_ANGLE_DISTANCE) {
-                double angle = std::fmod(normalizeAngle(it->getAngle() + tol), ident_rot);
+            if (tol < MIN_TORSION_ANGLE_TOLERANCE)
+                continue;
 
-                if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
-                    node->addTorsionAngle(angle);
-
-                angle = std::fmod(normalizeAngle(it->getAngle() - tol), ident_rot);
-
-                if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
-                    node->addTorsionAngle(angle);
-            }
+            addOffsetAngles(it->getAngle(), tol);
         }
     }
 
-    return match; 
+    if (angle_offs1 != 0.0)
+        for (std::size_t i = 0, num_angles = workingAngles.size(); i < num_angles; i++)
+            addOffsetAngles(workingAngles[i], angle_offs1);
+
+    if (angle_offs2 != 0.0)
+        for (std::size_t i = 0, num_angles = workingAngles.size(); i < num_angles; i++)
+            addOffsetAngles(workingAngles[i], angle_offs2);
+
+    double ident_rot = 360.0 / rot_sym;
+    
+    for (auto angle : workingAngles)
+        node->addTorsionAngle(std::fmod(angle, ident_rot));
+
+    node->removeDuplicateTorsionAngles();
+
+    return match;
+}
+
+void ConfGen::TorsionDriverImpl::addOffsetAngles(double angle, double offs)
+{
+    double tmp = normalizeAngle(angle + offs);
+
+    if (!hasAngleWithinDistance(tmp, workingAngles, DUP_TORSION_ANGLE_THRESHOLD))
+        workingAngles.push_back(tmp);
+
+    tmp = normalizeAngle(angle - offs);
+
+    if (!hasAngleWithinDistance(tmp, workingAngles, DUP_TORSION_ANGLE_THRESHOLD))
+        workingAngles.push_back(tmp);
+}
+
+double ConfGen::TorsionDriverImpl::getAngleOffset(const Chem::Atom& atom) const
+{
+    using namespace Chem;
+
+    switch (getHybridizationState(atom)) {
+
+        case HybridizationState::SP3:
+            if (getAromaticityFlag(atom) || Internal::isPlanarNitrogen(atom, *fragTree.getMolecularGraph()))
+                return 180.0;
+            
+            return 120.0;
+
+        case HybridizationState::SP2:
+            return 180.0;
+    }
+    
+    return 0.0;
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& bond)

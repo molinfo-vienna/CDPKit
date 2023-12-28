@@ -43,6 +43,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
+#include "FragmentTreeNode.hpp"
 #include "ForceFieldInteractionMask.hpp"
 
 
@@ -138,6 +139,9 @@ namespace CDPL
 
             const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym);
 
+            void addOffsetAngles(double angle, double offs);
+            double getAngleOffset(const Chem::Atom& atom) const;
+            
             std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 
             const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
@@ -145,8 +149,9 @@ namespace CDPL
 
             typedef std::unique_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
             typedef std::unique_ptr<ForceField::MMFF94InteractionData>          MMFF94InteractionDataPtr;
-            typedef std::vector<const Chem::Bond*>                            BondList;
-            typedef std::vector<TorsionLibrary::SharedPointer>                TorsionLibraryList;
+            typedef std::vector<const Chem::Bond*>                              BondList;
+            typedef std::vector<TorsionLibrary::SharedPointer>                  TorsionLibraryList;
+            typedef ConfGen::FragmentTreeNode::DoubleArray                      AngleList;
 
             TorsionDriverSettings      settings;
             TorsionLibraryList         torLibs;
@@ -160,6 +165,7 @@ namespace CDPL
             BondList                   rotBonds;
             ForceFieldInteractionMask  mmff94InteractionMask;
             LogMessageCallbackFunction logCallback;
+            AngleList                  workingAngles;
         };
     } // namespace ConfGen
 } // namespace CDPL
