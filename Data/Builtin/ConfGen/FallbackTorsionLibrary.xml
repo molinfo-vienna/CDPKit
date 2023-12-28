@@ -1,5 +1,21 @@
 <library name="FallbackTorsionLibrary">
   <category name="GG" atomType1="*" atomType2="*">
+    <rule pattern="[aX2:1][a:2]!@[CX4H3:3][#1:4]">
+      <torsions>
+        <angle value="0.0" tolerance1="30.00" tolerance2="30.00" score="0.0"/>
+      </torsions>
+    </rule>
+    <rule pattern="[aH1:1][a:2]!@[CX4H3:3][#1:4]">
+      <torsions>
+        <angle value="0.0" tolerance1="30.00" tolerance2="30.00" score="0.0"/>
+      </torsions>
+    </rule>
+    <rule pattern="[aX3H0:1][a:2]([aX3H0])!@[CX4H3:3][#1:4]">
+      <torsions>
+        <angle value="90.0" tolerance1="30.00" tolerance2="30.00" score="0.0"/>
+        <angle value="-90.0" tolerance1="30.00" tolerance2="30.00" score="0.0"/>
+      </torsions>
+    </rule>
     <rule pattern="[*,#1:1]~[CX4:2]-[n:3]~[*,#1:4]">
       <torsions>
         <angle value="0.0" tolerance1="30.00" tolerance2="30.00" score="3.07"/>
