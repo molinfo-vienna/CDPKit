@@ -31,6 +31,10 @@
      <angle score="28" tolerance1="20" tolerance2="30" value="180" />
      <angle score="2.67" tolerance1="20" tolerance2="40" value="-60" />
      <angle score="2.33" tolerance1="20" tolerance2="40" value="60" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="5.92"/>
+     <angle value="120.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
+     <angle value="-120.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
     </torsions>
     <histogram>
      <bin count="74" />
@@ -348,6 +352,8 @@
      <angle score="28.58" tolerance1="20" tolerance2="40" value="180" />
      <angle score="3.4" tolerance1="20" tolerance2="30" value="110" />
      <angle score="2.35" tolerance1="20" tolerance2="30" value="-110" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="16.56"/>
     </torsions>
     <histogram>
      <bin count="199" />
@@ -1000,6 +1006,9 @@
      <angle score="15.96" tolerance1="10" tolerance2="20" value="180" />
      <angle score="6.54" tolerance1="20" tolerance2="30" value="-60" />
      <angle score="3.66" tolerance1="20" tolerance2="30" value="60" />
+     <!-- added -->
+     <angle value="120.0" tolerance1="20.00" tolerance2="25.00" score="3.7"/>
+     <angle value="-120.0" tolerance1="20.00" tolerance2="30.00" score="3.7"/>
     </torsions>
     <histogram>
      <bin count="221" />
@@ -3071,6 +3080,9 @@
      <torsions>
       <angle score="8.109999999999999" tolerance1="70" tolerance2="120" value="0" />
       <angle score="0.24" tolerance1="10" tolerance2="30" value="180" />
+      <!-- added -->
+      <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="1.28"/>
+      <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="1.28"/>
      </torsions>
      <histogram>
       <bin count="5" />
@@ -3390,6 +3402,9 @@
      <torsions>
       <angle score="14.69" tolerance1="20" tolerance2="30" value="120" />
       <angle score="13.88" tolerance1="20" tolerance2="30" value="-120" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="9.42"/>
+      <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.25"/>
      </torsions>
      <histogram>
       <bin count="1" />
@@ -4027,6 +4042,9 @@
       <angle score="4.27" tolerance1="30" tolerance2="40" value="40" />
       <angle score="3.7" tolerance1="30" tolerance2="55.00000000000001" value="140" />
       <angle score="1.94" tolerance1="30" tolerance2="40" value="-40" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="0.00" tolerance2="0.00" score="3.5"/>
+      <angle value="1800.0" tolerance1="0.00" tolerance2="0.00" score="3.5"/>
      </torsions>
      <histogram>
       <bin count="15" />
@@ -4186,6 +4204,8 @@
       <angle score="11.88" tolerance1="20" tolerance2="50" value="0" />
       <angle score="9.529999999999999" tolerance1="30" tolerance2="50" value="-120" />
       <angle score="5.23" tolerance1="30" tolerance2="50" value="120" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="4.14"/>
      </torsions>
      <histogram>
       <bin count="22" />
@@ -4347,6 +4367,8 @@
       <angle score="1.95" tolerance1="20" tolerance2="30" value="0" />
       <angle score="1.44" tolerance1="20" tolerance2="30" value="-60" />
       <angle score="1.06" tolerance1="20" tolerance2="30" value="60" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="1.18"/> 
      </torsions>
      <histogram>
       <bin count="10" />
@@ -4665,6 +4687,8 @@
       <angle score="10.52" tolerance1="40" tolerance2="60" value="120" />
       <angle score="10.16" tolerance1="40" tolerance2="60" value="-120" />
       <angle score="4.96" tolerance1="20" tolerance2="40" value="0" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="10.03"/>
      </torsions>
      <histogram>
       <bin count="6" />
@@ -4824,6 +4848,8 @@
       <angle score="9.41" tolerance1="30" tolerance2="40" value="120" />
       <angle score="8.880000000000001" tolerance1="30" tolerance2="40" value="-120" />
       <angle score="5.100000000000001" tolerance1="15" tolerance2="20" value="0" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="13.02"/>
      </torsions>
      <histogram>
       <bin count="83" />
@@ -5617,6 +5643,10 @@
       <angle score="6.67" tolerance1="30" tolerance2="40" value="140" />
       <angle score="6.62" tolerance1="50" tolerance2="80" value="0" />
       <angle score="4.54" tolerance1="30" tolerance2="40" value="-140" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="7.12"/>
+      <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="7.12"/>
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="3.53"/>
      </torsions>
      <histogram>
       <bin count="289" />
@@ -5933,6 +5963,11 @@
      <torsions>
       <angle score="7.24" tolerance1="60" tolerance2="90" value="0" />
       <angle score="3.23" tolerance1="60" tolerance2="90" value="180" />
+      <!-- added -->
+      <angle value="30.0" tolerance1="20.00" tolerance2="0.00" score="3.9"/>
+      <angle value="-30.0" tolerance1="20.00" tolerance2="0.00" score="3.9"/>
+      <angle value="150.0" tolerance1="20.00" tolerance2="0.00" score="3.61"/>
+      <angle value="-150.0" tolerance1="20.00" tolerance2="0.00" score="3.61"/>
      </torsions>
      <histogram>
       <bin count="585" />
@@ -6728,6 +6763,10 @@
       <angle score="5.86" tolerance1="60" tolerance2="60" value="0" />
       <angle score="3.91" tolerance1="60" tolerance2="60" value="120" />
       <angle score="3.18" tolerance1="60" tolerance2="60" value="-120" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
+      <angle value="60.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
+      <angle value="-60.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
      </torsions>
      <histogram>
       <bin count="696" />
@@ -6887,6 +6926,9 @@
       <angle score="6.52" tolerance1="47.5" tolerance2="47.5" value="0" />
       <angle score="3.46" tolerance1="50" tolerance2="62.5" value="110" />
       <angle score="2.75" tolerance1="50" tolerance2="55.00000000000001" value="-110" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="30.00" tolerance2="0.0" score="3.95"/>
+      <angle value="0.0" tolerance1="30.00" tolerance2="0.0" score="3.95"/>
      </torsions>
      <histogram>
       <bin count="2033" />
@@ -7525,6 +7567,8 @@
       <angle score="7.25" tolerance1="40" tolerance2="60" value="180" />
       <angle score="7.19" tolerance1="30" tolerance2="60" value="-60" />
       <angle score="5.32" tolerance1="30" tolerance2="60" value="60" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="1.45"/>
      </torsions>
      <histogram>
       <bin count="1593" />
@@ -10970,6 +11014,11 @@
      <angle score="5.600000000000001" tolerance1="20" tolerance2="45" value="0" />
      <angle score="4.31" tolerance1="40" tolerance2="45" value="-90" />
      <angle score="3.19" tolerance1="40" tolerance2="45" value="90" />
+     <!-- added -->
+     <angle value="45.0" tolerance1="20.00" tolerance2="0.00" score="5.81"/>
+     <angle value="-45.0" tolerance1="20.00" tolerance2="0.00" score="5.81"/>
+     <angle value="135.0" tolerance1="20.00" tolerance2="0.00" score="11.24"/>
+     <angle value="-135.0" tolerance1="20.00" tolerance2="0.00" score="11.24"/>
     </torsions>
     <histogram>
      <bin count="3" />
@@ -11130,6 +11179,9 @@
      <angle score="6.02" tolerance1="20" tolerance2="40" value="40" />
      <angle score="5.81" tolerance1="20" tolerance2="40" value="140" />
      <angle score="4.86" tolerance1="20" tolerance2="40" value="-140" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="2.40"/>
+     <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.22"/>
     </torsions>
     <histogram>
      <bin count="165" />
@@ -11448,6 +11500,11 @@
     <torsions>
      <angle score="19.07" tolerance1="30" tolerance2="50" value="0" />
      <angle score="7.51" tolerance1="30" tolerance2="40" value="180" />
+     <!-- added -->
+     <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     <angle value="140.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     <angle value="-140.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
     </torsions>
     <histogram>
      <bin count="756" />
@@ -12086,6 +12143,11 @@
      <angle score="3.22" tolerance1="50" tolerance2="75" value="90" />
      <angle score="2.97" tolerance1="10" tolerance2="15" value="180" />
      <angle score="1.96" tolerance1="10" tolerance2="10" value="0" />
+     <!-- added -->
+     <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="9.62"/>
+     <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="9.62"/>
+     <angle value="130.0" tolerance1="20.00" tolerance2="0.00" score="4.81"/>
+     <angle value="-130.0" tolerance1="20.00" tolerance2="0.00" score="4.81"/>
     </torsions>
     <histogram>
      <bin count="1738" />
@@ -13371,6 +13433,8 @@
      <torsions>
       <angle score="12.31" tolerance1="20" tolerance2="40" value="-80" />
       <angle score="11.08" tolerance1="20" tolerance2="40" value="80" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="40.00" score="11.36"/>
      </torsions>
      <histogram>
       <bin count="18" />
@@ -14641,6 +14705,8 @@
       <angle score="5.13" tolerance1="30" tolerance2="50" value="-130" />
       <angle score="4.87" tolerance1="20" tolerance2="20" value="-60" />
       <angle score="3.85" tolerance1="20" tolerance2="20" value="60" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="5.49"/>
      </torsions>
      <histogram>
       <bin count="26" />
@@ -15288,6 +15354,8 @@
       <angle score="3.2" tolerance1="40" tolerance2="40" value="120" />
       <angle score="3.03" tolerance1="40" tolerance2="40" value="40" />
       <angle score="2.44" tolerance1="20" tolerance2="20" value="180" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="1.27"/>
      </torsions>
      <histogram>
       <bin count="368" />
@@ -15608,6 +15676,11 @@
      <torsions>
       <angle score="5.37" tolerance1="50" tolerance2="90" value="180" />
       <angle score="4.68" tolerance1="50" tolerance2="90" value="0" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="4.41"/>
+      <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="4.41"/>
+      <angle value="140.0" tolerance1="20.00" tolerance2="0.00" score="5.88"/>
+      <angle value="-140.0" tolerance1="20.00" tolerance2="0.00" score="5.88"/>
      </torsions>
      <histogram>
       <bin count="1839" />
@@ -15934,6 +16007,9 @@
      <torsions>
       <angle score="5.21" tolerance1="40" tolerance2="90" value="90" />
       <angle score="4.76" tolerance1="40" tolerance2="90" value="-90" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.20"/>
+      <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="1.77"/>
      </torsions>
      <histogram>
       <bin count="314" />
@@ -16092,6 +16168,9 @@
      <torsions>
       <angle score="7.81" tolerance1="30" tolerance2="50" value="90" />
       <angle score="7.65" tolerance1="30" tolerance2="50" value="-90" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="1.80"/>
+      <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="1.80"/>
      </torsions>
      <histogram>
       <bin count="49" />
@@ -16568,6 +16647,9 @@
      <torsions>
       <angle score="6.48" tolerance1="40" tolerance2="90" value="90" />
       <angle score="6.24" tolerance1="40" tolerance2="90" value="-90" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.46"/>
+      <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="2.39"/>
      </torsions>
      <histogram>
       <bin count="2379" />
@@ -17448,6 +17530,13 @@
      <torsions>
       <angle score="3.48" tolerance1="60" tolerance2="60" value="180" />
       <angle score="3.26" tolerance1="120" tolerance2="120" value="0" />
+      <!-- added -->
+      <angle value="30.0" tolerance1="30.00" tolerance2="0.00" score="6.44"/>	    
+      <angle value="-30.0" tolerance1="30.00" tolerance2="0.00" score="6.44"/>	    
+      <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="4.17"/>	    
+      <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="4.17"/>	    
+      <angle value="150.0" tolerance1="30.00" tolerance2="0.00" score="6.44"/>	    
+      <angle value="-150.0" tolerance1="30.00" tolerance2="0.00" score="6.44"/>	    
      </torsions>
      <histogram>
       <bin count="66" />
@@ -17606,6 +17695,13 @@
      <torsions>
       <angle score="4.14" tolerance1="30" tolerance2="50" value="180" />
       <angle score="4.07" tolerance1="30" tolerance2="50" value="0" />
+      <!-- added -->
+      <angle value="30.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	    
+      <angle value="-30.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	    
+      <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	    
+      <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	    
+      <angle value="150.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	    
+      <angle value="-150.0" tolerance1="30.00" tolerance2="0.00" score="4.55"/>	     
      </torsions>
      <histogram>
       <bin count="80" />
@@ -17764,6 +17860,9 @@
      <torsions>
       <angle score="4.69" tolerance1="60" tolerance2="60" value="180" />
       <angle score="4.41" tolerance1="120" tolerance2="120" value="0" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="1.28"/>	    
+      <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="1.28"/>	    
      </torsions>
      <histogram>
       <bin count="188" />
@@ -19474,7 +19573,10 @@
     </rule>
     <rule pattern="[$([c]([NH1,NH2])):1][c:2]!@[CX3:3]([!O])=[O:4]">
      <torsions>
-      <angle score="24.85" tolerance1="30" tolerance2="50" value="0" />
+       <angle score="24.85" tolerance1="30" tolerance2="50" value="0" />
+       <!-- added -->
+       <angle value="30.00" tolerance1="20.00" tolerance2="0.00" score="6.68" />
+       <angle value="-30.00" tolerance1="20.00" tolerance2="0.00" score="6.68" /> 
      </torsions>
      <histogram>
       <bin count="9" />
@@ -20906,7 +21008,9 @@
     </rule>
     <rule pattern="[s:1][c:2]!@[CX3:3]([NX3H1])=[O:4]">
      <torsions>
-      <angle score="22.12" tolerance1="20" tolerance2="30" value="0" />
+       <angle score="22.12" tolerance1="20" tolerance2="30" value="0" />
+       <!-- added -->
+       <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.29"/>
      </torsions>
      <histogram>
       <bin count="6" />
@@ -21698,6 +21802,9 @@
      <torsions>
       <angle score="12.8" tolerance1="60" tolerance2="90" value="180" />
       <angle score="3.8" tolerance1="60" tolerance2="90" value="0" />
+      <!-- added -->
+      <angle value="50.0" tolerance1="30.00" tolerance2="0.00" score="10.31"/>
+      <angle value="-50.0" tolerance1="30.00" tolerance2="0.00" score="10.31"/>
      </torsions>
      <histogram>
       <bin count="304" />
@@ -23546,6 +23653,9 @@
      <torsions>
       <angle score="10" tolerance1="30" tolerance2="50" value="0" />
       <angle score="1.67" tolerance1="30" tolerance2="50" value="180" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="20" tolerance2="0.0" score="12.50"/>
+      <angle value="-40.0" tolerance1="20" tolerance2="0.0" score="12.50"/>
      </torsions>
      <histogram>
       <bin count="6" />
@@ -24503,6 +24613,9 @@
      <torsions>
       <angle score="17.52" tolerance1="30" tolerance2="90" value="0" />
       <angle score="8.950000000000001" tolerance1="20" tolerance2="90" value="180" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="4.16"/>
+      <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="4.16"/>
      </torsions>
      <histogram>
       <bin count="812" />
@@ -26732,6 +26845,11 @@
      <torsions>
       <angle score="3.86" tolerance1="45" tolerance2="90" value="0" />
       <angle score="3.55" tolerance1="45" tolerance2="90" value="180" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="140.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="-140.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
      </torsions>
      <histogram>
       <bin count="46" />
@@ -26890,6 +27008,11 @@
      <torsions>
       <angle score="11.33" tolerance1="30" tolerance2="90" value="0" />
       <angle score="11.22" tolerance1="30" tolerance2="90" value="180" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="140.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
+      <angle value="-140.0" tolerance1="30.00" tolerance2="0.00" score="4.25"/>
      </torsions>
      <histogram>
       <bin count="4027" />
@@ -27923,7 +28046,11 @@
    </rule>
    <rule pattern="[$(C=O):1][O:2]!@[CH1:3][#1:4]">
     <torsions>
-     <angle score="9.050000000000001" tolerance1="50" tolerance2="60" value="0" />
+      <angle score="9.050000000000001" tolerance1="50" tolerance2="60" value="0" />
+      <!-- added -->
+      <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="8.34"/>
+      <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="8.34"/>
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="3.35"/>
     </torsions>
     <histogram>
      <bin count="8" />
@@ -29039,6 +29166,11 @@
     <torsions>
      <angle score="9.93" tolerance1="30" tolerance2="35" value="90" />
      <angle score="8.99" tolerance1="30" tolerance2="35" value="-90" />
+     <!-- added -->
+     <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="5.10"/>
+     <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="5.10"/>
+     <angle value="130.0" tolerance1="20.00" tolerance2="0.00" score="5.29"/>
+     <angle value="-130.0" tolerance1="20.00" tolerance2="0.00" score="5.29"/>
     </torsions>
     <histogram>
      <bin count="2" />
@@ -29279,6 +29411,9 @@
     <torsions>
      <angle score="17.79" tolerance1="20" tolerance2="30" value="-90" />
      <angle score="13.09" tolerance1="20" tolerance2="30" value="90" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="10.00" tolerance2="30.00" score="5.0"/>
+     <angle value="180.0" tolerance1="10.00" tolerance2="30.00" score="5.0"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -29522,6 +29657,9 @@
      <angle score="8.58" tolerance1="45" tolerance2="45" value="0" />
      <angle score="3.88" tolerance1="45" tolerance2="45" value="-90" />
      <angle score="2.55" tolerance1="45" tolerance2="45" value="90" />
+     <!-- added -->
+     <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -30080,6 +30218,9 @@
      <angle score="0.24" tolerance1="20" tolerance2="20" value="-20" />
      <angle score="0.1" tolerance1="20" tolerance2="30" value="-160" />
      <angle score="0.05" tolerance1="20" tolerance2="20" value="20" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="20.00" tolerance2="0.00" score="34.21"/>
+     <angle value="-90.0" tolerance1="20.00" tolerance2="0.00" score="34.21"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -30238,6 +30379,12 @@
     <torsions>
      <angle score="5.61" tolerance1="50" tolerance2="60" value="120" />
      <angle score="3.87" tolerance1="50" tolerance2="60" value="-120" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="5.47"/>
+     <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="5.47"/>
+     <angle value="150.0" tolerance1="10.00" tolerance2="0.00" score="8.59"/>
+     <angle value="-150.0" tolerance1="10.00" tolerance2="0.00" score="8.59"/>
+     <angle value="180.0" tolerance1="10.00" tolerance2="0.00" score="12.5"/>
     </torsions>
     <histogram>
      <bin count="136" />
@@ -30396,6 +30543,9 @@
     <torsions>
      <angle score="5.07" tolerance1="60" tolerance2="90" value="-90" />
      <angle score="4.86" tolerance1="60" tolerance2="90" value="90" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.79"/>
+     <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="3.05"/>
     </torsions>
     <histogram>
      <bin count="198" />
@@ -30554,6 +30704,9 @@
     <torsions>
      <angle score="15.65" tolerance1="20" tolerance2="30" value="-90" />
      <angle score="14.29" tolerance1="20" tolerance2="30" value="90" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.54"/>
+     <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="3.39"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -30801,6 +30954,9 @@
      <angle score="8.66" tolerance1="30" tolerance2="40" value="90" />
      <angle score="3.22" tolerance1="30" tolerance2="50" value="180" />
      <angle score="3.09" tolerance1="30" tolerance2="50" value="0" />
+     <!-- added -->
+     <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="3.08"/>
+     <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="3.08"/>
     </torsions>
     <histogram>
      <bin count="26" />
@@ -30959,6 +31115,9 @@
     <torsions>
      <angle score="11.94" tolerance1="30" tolerance2="40" value="0" />
      <angle score="9.75" tolerance1="30" tolerance2="40" value="180" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="4.42"/>
+     <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="4.42"/>
     </torsions>
     <histogram>
      <bin count="82" />
@@ -31273,7 +31432,9 @@
    </rule>
    <rule pattern="[cH0:1][c:2]([nX2])!@[O:3][C:4]">
     <torsions>
-     <angle score="47.27" tolerance1="10" tolerance2="20" value="180" />
+      <angle score="47.27" tolerance1="10" tolerance2="20" value="180" />
+      <!-- added -->
+      <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.45"/>
     </torsions>
     <histogram>
      <bin count="301" />
@@ -31432,6 +31593,11 @@
     <torsions>
      <angle score="24.78" tolerance1="10" tolerance2="20" value="180" />
      <angle score="23.58" tolerance1="10" tolerance2="20" value="0" />
+     <!-- added -->
+     <angle value="30.0" tolerance1="20.00" tolerance2="0.00" score="3.12"/>
+     <angle value="-30.0" tolerance1="20.00" tolerance2="0.00" score="3.12"/>
+     <angle value="150.0" tolerance1="20.00" tolerance2="0.00" score="3.75"/>
+     <angle value="-150.0" tolerance1="20.00" tolerance2="0.00" score="3.75"/>
     </torsions>
     <histogram>
      <bin count="158" />
@@ -32773,6 +32939,9 @@
     <torsions>
      <angle score="19.79" tolerance1="20" tolerance2="25" value="180" />
      <angle score="19.65" tolerance1="20" tolerance2="25" value="0" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="20.00" tolerance2="0.00" score="1.16"/>
+     <angle value="-90.0" tolerance1="20.00" tolerance2="0.00" score="1.16"/>
     </torsions>
     <histogram>
      <bin count="10541" />
@@ -37250,6 +37419,9 @@
     <torsions>
      <angle score="12.48" tolerance1="30" tolerance2="50" value="90" />
      <angle score="11.53" tolerance1="30" tolerance2="50" value="-90" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="1.76"/>
+     <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="1.76"/>
     </torsions>
     <histogram>
      <bin count="29" />
@@ -37567,6 +37739,9 @@
     <torsions>
      <angle score="9.050000000000001" tolerance1="40" tolerance2="50" value="90" />
      <angle score="6.890000000000001" tolerance1="40" tolerance2="50" value="-90" />
+     <!-- addedd -->
+     <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="1.86"/>
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.17"/>
     </torsions>
     <histogram>
      <bin count="10" />
@@ -38680,6 +38855,9 @@
     <torsions>
      <angle score="11.58" tolerance1="40" tolerance2="50" value="90" />
      <angle score="10.77" tolerance1="40" tolerance2="50" value="-90" />
+     <!-- added -->
+     <angle value="140.0" tolerance1="20.00" tolerance2="0.00" score="4.34"/>
+     <angle value="-140.0" tolerance1="20.00" tolerance2="0.00" score="4.34"/>
     </torsions>
     <histogram>
      <bin count="7" />
@@ -38840,6 +39018,10 @@
      <angle score="3.41" tolerance1="20" tolerance2="40" value="-60" />
      <angle score="3.3" tolerance1="10" tolerance2="40" value="140" />
      <angle score="2.31" tolerance1="10" tolerance2="40" value="-140" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="20.00" tolerance2="0.00" score="4.06"/>
+     <angle value="-90.0" tolerance1="20.00" tolerance2="0.00" score="4.06"/>
+     <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="3.90"/>
     </torsions>
     <histogram>
      <bin count="10" />
@@ -38998,6 +39180,9 @@
     <torsions>
      <angle score="17.61" tolerance1="10" tolerance2="20" value="-90" />
      <angle score="12.5" tolerance1="10" tolerance2="20" value="90" />
+     <!-- added -->
+     <angle value="150.0" tolerance1="20.00" tolerance2="0.00" score="5.88"/>
+     <angle value="-150.0" tolerance1="20.00" tolerance2="0.00" score="5.88"/>
     </torsions>
     <histogram>
      <bin count="3" />
@@ -39156,6 +39341,8 @@
     <torsions>
      <angle score="4.7" tolerance1="50" tolerance2="50" value="130" />
      <angle score="4.55" tolerance1="50" tolerance2="50" value="-130" />
+     <!-- added -->
+     <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="19.09"/>
     </torsions>
     <histogram>
      <bin count="23" />
@@ -44391,9 +44578,12 @@
     </histogram2_shifted>
    </rule>
    <rule pattern="[$(C=O):1][NX3H1:2]!@[CX4H1:3][#1:4]">
-    <torsions>
-     <angle score="8.98" tolerance1="60" tolerance2="80" value="0" />
-    </torsions>
+     <torsions>
+       <angle score="8.98" tolerance1="60" tolerance2="80" value="0" />
+       <!-- added -->
+       <angle value="30.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+       <angle value="-30.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     </torsions>
     <histogram>
      <bin count="56" />
      <bin count="32" />
@@ -45028,10 +45218,12 @@
   </category>
   <category name="Aromatic Amides" pattern="[$(C=O):1][NX3:2]!@[c:3]">
    <rule pattern="[$([C](=O)([$([NX3H1]),$([NX3H2])])[NX3H1]):1][NX3H1:2]!@[c:3]([nH1])[nH0:4]">
-    <torsions>
-     <angle score="40" tolerance1="20" tolerance2="25" value="180" />
-    </torsions>
-    <histogram>
+     <torsions>
+       <angle score="40" tolerance1="20" tolerance2="25" value="180" />
+       <!-- added -->
+       <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+     </torsions>
+     <histogram>
      <bin count="9" />
      <bin count="6" />
      <bin count="2" />
@@ -45983,6 +46175,9 @@
     <torsions>
      <angle score="37.08" tolerance1="10" tolerance2="30" value="180" />
      <angle score="4.49" tolerance1="20" tolerance2="40" value="0" />
+     <!-- added -->
+     <angle value="90.0" tolerance1="20.00" tolerance2="0.00" score="9.09"/>
+     <angle value="-90.0" tolerance1="20.00" tolerance2="0.00" score="9.09"/>
     </torsions>
     <histogram>
      <bin count="31" />
@@ -46934,6 +47129,9 @@
      <angle score="22.04" tolerance1="20" tolerance2="20" value="0" />
      <angle score="10.75" tolerance1="20" tolerance2="20" value="-40" />
      <angle score="6.45" tolerance1="20" tolerance2="20" value="40" />
+     <!-- added -->
+     <angle value="110.0" tolerance1="20.00" tolerance2="0.00" score="3.85"/>
+     <angle value="-110.0" tolerance1="20.00" tolerance2="0.00" score="3.85"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -47090,7 +47288,9 @@
    </rule>
    <rule pattern="[$(C=O):1][NX3H1:2]!@[c:3]([cH0]F)[cH:4]">
     <torsions>
-     <angle score="15.13" tolerance1="30" tolerance2="50" value="0" />
+      <angle score="15.13" tolerance1="30" tolerance2="50" value="0" />
+      <!-- added -->
+      <angle value="120.0" tolerance1="20.00" tolerance2="0.00" score="4.21"/>
     </torsions>
     <histogram>
      <bin count="0" />
@@ -49725,7 +49925,9 @@
    </rule>
    <rule pattern="[O:1]=[CX3:2]([$([NX3H1]C)])!@[NX3H1:3][!#1:4]">
     <torsions>
-     <angle score="34.53" tolerance1="20" tolerance2="30" value="0" />
+      <angle score="34.53" tolerance1="20" tolerance2="30" value="0" />
+      <!-- added -->
+      <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.11"/>
     </torsions>
     <histogram>
      <bin count="239" />
@@ -51868,8 +52070,10 @@
     </histogram2_shifted>
    </rule>
    <rule pattern="[cH0:1][c:2]([cH,nX2H0])!@[NX3H1:3][CX4:4]">
-    <torsions>
-     <angle score="36.89" tolerance1="10" tolerance2="30" value="180" />
+     <torsions>
+       <angle score="36.89" tolerance1="10" tolerance2="30" value="180" />
+       <!-- added -->
+       <angle value="0.0" tolerance1="10.00" tolerance2="0.00" score="14.81"/>
     </torsions>
     <histogram>
      <bin count="590" />
@@ -52029,6 +52233,10 @@
      <angle score="6.16" tolerance1="30" tolerance2="60" value="-60" />
      <angle score="4.75" tolerance1="30" tolerance2="60" value="180" />
      <angle score="2.58" tolerance1="30" tolerance2="60" value="60" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.60"/>
+     <angle value="120.0" tolerance1="30.00" tolerance2="60.00" score="3.27"/>
+     <angle value="-120.0" tolerance1="30.00" tolerance2="60.00" score="3.27"/>
     </torsions>
     <histogram>
      <bin count="211" />
@@ -52187,6 +52395,9 @@
     <torsions>
      <angle score="8.130000000000001" tolerance1="30" tolerance2="90" value="-90" />
      <angle score="7.47" tolerance1="30" tolerance2="90" value="90" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="3.12"/>
+     <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="3.3"/>
     </torsions>
     <histogram>
      <bin count="55" />
@@ -52664,6 +52875,10 @@
      <angle score="10.87" tolerance1="50" tolerance2="60" value="0" />
      <angle score="2.2" tolerance1="30" tolerance2="40" value="-100" />
      <angle score="2.06" tolerance1="30" tolerance2="40" value="100" />
+     <!-- added -->
+     <angle value="60.0" tolerance1="0.00" tolerance2="0.00" score="0.0"/>
+     <angle value="-60.0" tolerance1="0.00" tolerance2="0.00" score="0.0"/>
+     <angle value="180.0" tolerance1="0.00" tolerance2="0.00" score="0.0"/>
     </torsions>
     <histogram>
      <bin count="1" />
@@ -55771,6 +55986,11 @@
     <torsions>
      <angle score="13.04" tolerance1="30" tolerance2="50" value="90" />
      <angle score="11.24" tolerance1="30" tolerance2="50" value="-90" />
+     <!-- added -->
+     <angle value="-60.0" tolerance1="30.00" tolerance2="50.00" score="13.33"/>
+     <angle value="60.0" tolerance1="30.00" tolerance2="50.00" score="13.21"/>
+     <angle value="-120.0" tolerance1="30.00" tolerance2="50.00" score="13.33"/>
+     <angle value="120.0" tolerance1="30.00" tolerance2="50.00" score="13.21"/>
     </torsions>
     <histogram>
      <bin count="46" />
@@ -58407,7 +58627,11 @@
   </rule>
   <rule pattern="[c:1][$(S(=O)=O):2]!@[#7X3v3+0:3]">
    <torsions>
-    <angle score="31.56" tolerance1="20" tolerance2="25" value="180" />
+     <angle score="31.56" tolerance1="20" tolerance2="25" value="180" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
+     <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
+     <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
    </torsions>
    <histogram>
     <bin count="2457" />
@@ -58567,6 +58791,8 @@
     <angle score="31.03" tolerance1="20" tolerance2="30" value="180" />
     <angle score="1.31" tolerance1="20" tolerance2="30" value="40" />
     <angle score="0.71" tolerance1="20" tolerance2="30" value="-40" />
+    <!-- added -->
+    <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
    </torsions>
    <histogram>
     <bin count="2731" />
@@ -59053,6 +59279,8 @@
    <torsions>
     <angle score="7.600000000000001" tolerance1="30" tolerance2="40" value="90" />
     <angle score="3.46" tolerance1="30" tolerance2="40" value="-90" />
+    <!-- added -->
+    <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="6.00"/>
    </torsions>
    <histogram>
     <bin count="32" />
@@ -61039,6 +61267,9 @@
    <torsions>
     <angle score="11.62" tolerance1="30" tolerance2="90" value="180" />
     <angle score="11.45" tolerance1="30" tolerance2="90" value="0" />
+    <!-- added -->
+    <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="3.44"/>
+    <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="3.44"/>
    </torsions>
    <histogram>
     <bin count="849" />
@@ -63154,6 +63385,11 @@
    <torsions>
     <angle score="9.640000000000001" tolerance1="20" tolerance2="90" value="180" />
     <angle score="9.130000000000001" tolerance1="20" tolerance2="90" value="0" />
+    <!-- added -->
+    <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="1.98"/>
+    <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="1.98"/>
+    <angle value="140.0" tolerance1="30.00" tolerance2="0.00" score="2.09"/>
+    <angle value="-140.0" tolerance1="30.00" tolerance2="0.00" score="2.09"/>
    </torsions>
    <histogram>
     <bin count="2341" />
@@ -66170,6 +66406,11 @@
     <angle score="5.37" tolerance1="30" tolerance2="45" value="0" />
     <angle score="3.46" tolerance1="30" tolerance2="45" value="90" />
     <angle score="3.2" tolerance1="30" tolerance2="45" value="-90" />
+    <!-- added -->
+    <angle value="-60.0" tolerance1="30.00" tolerance2="30.00" score="6.84"/>
+    <angle value="60.0" tolerance1="30.00" tolerance2="30.00" score="6.84"/>
+    <angle value="-120.0" tolerance1="30.00" tolerance2="30.00" score="6.56"/>
+    <angle value="120.0" tolerance1="30.00" tolerance2="30.00" score="6.56"/>
    </torsions>
    <histogram>
     <bin count="621" />
@@ -66488,6 +66729,11 @@
     <angle score="6.36" tolerance1="40" tolerance2="60" value="-90" />
     <angle score="1.69" tolerance1="10" tolerance2="20" value="0" />
     <angle score="1.52" tolerance1="10" tolerance2="20" value="180" />
+    <!-- added -->
+    <angle value="-60.0" tolerance1="30.00" tolerance2="30.00" score="5.71"/>
+    <angle value="60.0" tolerance1="30.00" tolerance2="30.00" score="5.71"/>
+    <angle value="-120.0" tolerance1="30.00" tolerance2="30.00" score="5.36"/>
+    <angle value="120.0" tolerance1="30.00" tolerance2="30.00" score="5.36"/>
    </torsions>
    <histogram>
     <bin count="24" />
@@ -66644,7 +66890,11 @@
   </rule>
   <rule pattern="[*:1]~[NX2:2]!@[NX2:3]~[*:4]">
    <torsions>
-    <angle score="42.71" tolerance1="40" tolerance2="60" value="180" />
+     <angle score="42.71" tolerance1="40" tolerance2="60" value="180" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="12.00"/>
+     <angle value="150.0" tolerance1="20.00" tolerance2="0.00" score="12.00"/>
+     <angle value="-150.0" tolerance1="20.00" tolerance2="0.00" score="12.00"/>
    </torsions>
    <histogram>
     <bin count="336" />
@@ -67228,6 +67478,9 @@
    <torsions>
     <angle score="20.94" tolerance1="20" tolerance2="30" value="90" />
     <angle score="20.31" tolerance1="20" tolerance2="30" value="-90" />
+    <!-- added -->
+    <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="11.63"/>
+    <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="11.63"/>
    </torsions>
    <histogram>
     <bin count="1" />
@@ -67570,6 +67823,11 @@
     <angle score="2.95" tolerance1="30" tolerance2="45" value="90" />
     <angle score="1.59" tolerance1="30" tolerance2="45" value="-90" />
     <angle score="1.49" tolerance1="30" tolerance2="45" value="0" />
+    <!-- added -->
+    <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="7.39"/>
+    <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="7.39"/>
+    <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="7.39"/>
+    <angle value="-120.0" tolerance1="30.00" tolerance2="0.00" score="7.39"/>
    </torsions>
    <histogram>
     <bin count="6341" />
@@ -73690,6 +73948,11 @@
     <torsions>
      <angle score="5.57" tolerance1="45" tolerance2="90" value="180" />
      <angle score="5.33" tolerance1="45" tolerance2="90" value="0" />
+     <!-- added -->
+     <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="0.00"/>
+     <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="0.00"/>
+     <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="0.00"/>
+     <angle value="-120.0" tolerance1="30.00" tolerance2="0.00" score="0.00"/>
     </torsions>
     <histogram>
      <bin count="11875" />
