@@ -405,7 +405,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 {
     using namespace Chem;
 
-    for (FragmentLibraryList::const_iterator it = fragLibs.begin(), end = fragLibs.end(); it != end; ++it) {
+    for (FragmentLibraryList::const_reverse_iterator it = fragLibs.rbegin(), end = fragLibs.rend(); it != end; ++it) {
         const FragmentLibraryEntry::SharedPointer& entry_ptr = (*it)->getEntry(canonFrag.getHashCode());
 
         if (!entry_ptr)
