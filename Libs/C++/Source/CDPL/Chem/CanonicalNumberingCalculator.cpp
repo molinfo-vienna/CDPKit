@@ -164,23 +164,6 @@ void Chem::CanonicalNumberingCalculator::init(const MolecularGraph& molgraph, Ut
         if (atomPropertyFlags & AtomPropertyFlag::AROMATICITY)
             atom_label = atom_label * 2 + getAromaticityFlag(atom);
 
-        if ((atomPropertyFlags & AtomPropertyFlag::CONFIGURATION) && hasCIPConfiguration(atom)) {
-            atom_label *= 3;
-
-            switch (getCIPConfiguration(atom)) {
-
-                case AtomConfiguration::R:
-                    atom_label += 1;
-                    break;
-
-                case AtomConfiguration::S:
-                    atom_label += 2;
-
-                default:
-                    break;
-            }
-        }
-
         allocNodes.push_back(allocNode(this, &atom, atom_label, allocNodes.size()));
     }
 
