@@ -41,6 +41,9 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
+#include "CDPL/Chem/CIPConfigurationLabeler.hpp"
+#include "CDPL/Chem/AromaticSubstructure.hpp"
+#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
 
@@ -130,6 +133,10 @@ namespace CDPL
 
             std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
 
+            void perceiveSSSR(MolecularGraph& molgraph);
+            void setAromaticityFlags(MolecularGraph& molgraph);
+            void calcCIPConfigurations(MolecularGraph& molgraph);
+            
             typedef std::array<std::size_t, 3>                      BondDescriptor;
             typedef std::vector<MoleculePtr>                        MoleculeList;
             typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
@@ -139,21 +146,24 @@ namespace CDPL
             typedef std::array<std::size_t, 6>                      StereoCenter;
             typedef std::vector<StereoCenter>                       StereoCenterList;
 
-            MoleculeCache       molCache;
-            CallbackFunction    callbackFunc;
-            Mode                mode;
-            bool                regStereo;
-            bool                regIsotopes;
-            CustomSetupFunction customSetupFunc;
-            TautRuleList        tautRules;
-            MoleculeList        currGeneration;
-            MoleculeList        nextGeneration;
-            StereoCenterList    atomStereoCenters;
-            StereoCenterList    bondStereoCenters;
-            HashCodeSet         tautHashCodes;
-            HashCodeCalculator  hashCalculator;
-            BondDescrArray      tautomerBonds;
-            SizeTArray          shaInput;
+            MoleculeCache              molCache;
+            CallbackFunction           callbackFunc;
+            Mode                       mode;
+            bool                       regStereo;
+            bool                       regIsotopes;
+            CustomSetupFunction        customSetupFunc;
+            TautRuleList               tautRules;
+            MoleculeList               currGeneration;
+            MoleculeList               nextGeneration;
+            StereoCenterList           atomStereoCenters;
+            StereoCenterList           bondStereoCenters;
+            HashCodeSet                tautHashCodes;
+            HashCodeCalculator         hashCalculator;
+            SmallestSetOfSmallestRings sssr;
+            AromaticSubstructure       aromSubstruct;
+            CIPConfigurationLabeler    cipLabeler;
+            BondDescrArray             tautomerBonds;
+            SizeTArray                 shaInput;
         };
     } // namespace Chem
 } // namespace CDPL

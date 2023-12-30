@@ -29,10 +29,14 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 using namespace CDPL;
@@ -61,14 +65,12 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::init(MolecularGraph& tgt_molg
 
         if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
             perceiveAtomStereoCenters(tgt_molgraph, true);
-            calcAtomStereoDescriptors(tgt_molgraph, true); 
-            calcAtomCIPConfigurations(tgt_molgraph, true);
+            calcAtomStereoDescriptors(tgt_molgraph, false); 
         }
 
         if (bondFlags & BondPropertyFlag::CONFIGURATION) {
             perceiveBondStereoCenters(tgt_molgraph, true);
-            calcBondStereoDescriptors(tgt_molgraph, true); 
-            calcBondCIPConfigurations(tgt_molgraph, true);
+            calcBondStereoDescriptors(tgt_molgraph, false); 
         }
     }
 
@@ -99,28 +101,6 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
     if (!hasCoordinates(conf_molgraph, 3))
         return false;
 
-    if ((atomFlags & AtomPropertyFlag::CONFIGURATION) || (bondFlags & BondPropertyFlag::CONFIGURATION)) {
-        perceiveComponents(conf_molgraph, true);
-        perceiveSSSR(conf_molgraph, true);
-        setRingFlags(conf_molgraph, true);
-        calcImplicitHydrogenCounts(conf_molgraph, true);
-        perceiveHybridizationStates(conf_molgraph, true);
-        setAromaticityFlags(conf_molgraph, true);
-        calcCIPPriorities(conf_molgraph, true);
-    
-        if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
-            perceiveAtomStereoCenters(conf_molgraph, true);
-            calcAtomStereoDescriptors(conf_molgraph, true); 
-            calcAtomCIPConfigurations(conf_molgraph, true);
-        }
-
-        if (bondFlags & BondPropertyFlag::CONFIGURATION) {
-            perceiveBondStereoCenters(conf_molgraph, true);
-            calcBondStereoDescriptors(conf_molgraph, true);
-            calcBondCIPConfigurations(conf_molgraph, true);
-        } 
-    }
-
     if (atomFlags) {
         for (MolecularGraph::ConstAtomIterator tgt_it = tgt_molgraph.getAtomsBegin(), 
                  conf_it = conf_molgraph.getAtomsBegin(), tgt_end = tgt_molgraph.getAtomsEnd();
@@ -136,10 +116,6 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
                 return false;
 
             if ((atomFlags & AtomPropertyFlag::ISOTOPE) && getIsotope(tgt_atom) != getIsotope(conf_atom))
-                return false;
-
-            if ((atomFlags & AtomPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_atom) &&
-                (getCIPConfiguration(tgt_atom) != getCIPConfiguration(conf_atom)))
                 return false;
         }
     }
@@ -159,12 +135,40 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
 
         if ((bondFlags & BondPropertyFlag::ORDER) && getOrder(tgt_bond) != getOrder(conf_bond))
             return false;
-        
-        if ((bondFlags & BondPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_bond) && 
-            (getCIPConfiguration(tgt_bond) != getCIPConfiguration(conf_bond)))
-            return false;
     }
 
+    if ((atomFlags & AtomPropertyFlag::CONFIGURATION) || (bondFlags & BondPropertyFlag::CONFIGURATION)) {
+        Math::Vector3DArray coords;
+        
+        get3DCoordinates(conf_molgraph, coords);
+
+        if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
+            for (auto& atom : tgt_molgraph.getAtoms()) {
+                auto& descr = getStereoDescriptor(atom);
+                auto config = descr.getConfiguration();
+                
+                if (config != AtomConfiguration::R && config != AtomConfiguration::S)
+                    continue;
+
+                if (calcConfiguration(atom, tgt_molgraph, descr, coords) != config)
+                    return false;
+            }
+        }
+
+        if (bondFlags & BondPropertyFlag::CONFIGURATION) {
+            for (auto& bond : tgt_molgraph.getBonds()) {
+                auto& descr = getStereoDescriptor(bond);
+                auto config = descr.getConfiguration();
+                
+                if (config != BondConfiguration::CIS && config != BondConfiguration::TRANS)
+                    continue;
+
+                if (calcConfiguration(bond, tgt_molgraph, descr, coords) != config)
+                    return false;
+            }
+        }
+    }
+    
     return true;
 }
 

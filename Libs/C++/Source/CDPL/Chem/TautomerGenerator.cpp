@@ -34,7 +34,6 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/MoleculeFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
@@ -266,9 +265,7 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
     }
 
     calcImplicitHydrogenCounts(*mol_copy, true);
-    makeHydrogenComplete(*mol_copy);
-
-    std::for_each(mol_copy->getAtomsBegin(), mol_copy->getAtomsEnd(), std::bind(&setImplicitHydrogenCount, std::placeholders::_1, 0));
+    makeHydrogenComplete(*mol_copy, true);
 
     return mol_copy;
 }
@@ -486,10 +483,9 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
         }
 
         if (mode == TOPOLOGICALLY_UNIQUE) {
-            perceiveSSSR(*mol, true);
-            setAromaticityFlags(*mol, true);
-            calcAtomCIPConfigurations(*mol, true);
-            calcBondCIPConfigurations(*mol, true);
+            perceiveSSSR(*mol);
+            setAromaticityFlags(*mol);
+            calcCIPConfigurations(*mol);
         }
     }
 
@@ -563,4 +559,39 @@ std::uint64_t Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule&
         hash_code = hash_code ^ (std::uint64_t(sha_hash[i]) << ((i % 8) * 8));
 
     return hash_code;
+}
+
+void Chem::TautomerGenerator::perceiveSSSR(MolecularGraph& molgraph)
+{
+    sssr.perceive(molgraph);
+
+    FragmentList::SharedPointer sssr_ptr(new FragmentList());
+
+    sssr_ptr->swap(sssr);
+
+    setSSSR(molgraph, sssr_ptr);
+}
+
+void Chem::TautomerGenerator::setAromaticityFlags(MolecularGraph& molgraph)
+{
+    using namespace std::placeholders;
+   
+    aromSubstruct.perceive(molgraph);
+
+    for (auto& atom : molgraph.getAtoms())
+        setAromaticityFlag(atom, aromSubstruct.containsAtom(atom));
+
+    for (auto& bond : molgraph.getBonds())
+        setAromaticityFlag(bond, aromSubstruct.containsBond(bond));
+}
+
+void Chem::TautomerGenerator::calcCIPConfigurations(MolecularGraph& molgraph)
+{
+    cipLabeler.setup(molgraph);
+
+    for (auto& atom : molgraph.getAtoms())
+        setCIPConfiguration(atom, cipLabeler.getLabel(atom));
+
+    for (auto& bond : molgraph.getBonds())
+        setCIPConfiguration(bond, cipLabeler.getLabel(bond));
 }
