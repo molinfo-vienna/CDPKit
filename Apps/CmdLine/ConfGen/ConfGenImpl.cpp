@@ -463,7 +463,7 @@ const char* ConfGenImpl::getProgAboutText() const
            "Langer, High-Quality Conformer Generation with CONFORGE: Algorithm and Performance\n"
            "Assessment, Journal of Chemical Information and Modeling 2023, 63(17), 5549-5570\n"
            "DOI: 10.1021/acs.jcim.3c00563\n\n"
-           "Built-in torsion rules are based on the torsion library jointly developed by the\n"
+           "Built-in torsion rules are based on the torsion library V3.0 developed by the\n"
            "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
            "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
            "References:\n"

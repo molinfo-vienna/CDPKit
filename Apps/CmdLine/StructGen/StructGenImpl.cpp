@@ -390,7 +390,7 @@ const char* StructGenImpl::getProgName() const
 const char* StructGenImpl::getProgAboutText() const
 {
     return "Performs 3D structure generation for a set of input molecules.\n\n"
-        "Built-in torsion rules are based on the torsion library jointly developed by the\n"
+        "Built-in torsion rules are based on the torsion library V3.0 developed by the\n"
         "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
         "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
         "References:\n"
