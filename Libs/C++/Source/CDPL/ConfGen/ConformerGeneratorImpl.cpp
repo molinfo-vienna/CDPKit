@@ -1285,34 +1285,42 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
     }
 
     bool too_much_sym = false;
+    std::size_t num_avail_confs = workingConfs.size();
+    std::size_t conf_idx_inc = (max_num_confs == 0 ? std::size_t(1) : std::size_t(std::ceil(double(num_avail_confs) / max_num_confs)));
+    bool exit = false;
     
-    for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); 
-         it != end && (max_num_confs == 0 || outputConfs.size() < max_num_confs); ++it) {
+    for (std::size_t i = 0; i < conf_idx_inc && !exit; i++) {
+        for (std::size_t j = i; j < num_avail_confs && !exit; j += conf_idx_inc) {
+            const ConformerData::SharedPointer& conf_data = workingConfs[j];
 
-        const ConformerData::SharedPointer& conf_data = *it;
+            if (conf_data->getEnergy() > max_energy)
+                break;
+            
+            if (perf_rmsd_check) {
+                bool selected = confSelector.selected(*conf_data);
+                unsigned int ret_code = invokeCallbacks();
 
-        if (conf_data->getEnergy() > max_energy)
-            break;
+                if (ret_code != ReturnCode::SUCCESS) {
+                    outputConfs.clear();
+                    return ret_code;
+                }
 
-        if (perf_rmsd_check) {
-            bool selected = confSelector.selected(*conf_data);
-            unsigned int ret_code = invokeCallbacks();
+                if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
+                    too_much_sym = true;
 
-            if (ret_code != ReturnCode::SUCCESS) {
-                outputConfs.clear();
-                return ret_code;
-            }
+                if (selected)
+                    outputConfs.push_back(conf_data);
 
-            if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
-                too_much_sym = true;
-                
-            if (selected)
+            } else
                 outputConfs.push_back(conf_data);
 
-        } else
-            outputConfs.push_back(conf_data);
+            exit = (max_num_confs > 0 && outputConfs.size() >= max_num_confs);
+        }
     }
 
+    if (conf_idx_inc > 1)
+        orderConformersByEnergy(outputConfs); 
+    
     if (logCallback) {
         if (perf_rmsd_check)
             logCallback("Performing RMSD-based output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
