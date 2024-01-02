@@ -58409,569 +58409,6 @@
   </category>
  </category>
  <category atomType1="S" atomType2="N" name="SN" pattern="[#16:2]!@[#7:3]">
-  <rule pattern="[!#1:1][$(S(=O)=O):2]!@[#7X3v3+0:3]@[Cr3]">
-   <torsions>
-    <angle score="13.64" tolerance1="20" tolerance2="40" value="-50" />
-    <angle score="8.59" tolerance1="20" tolerance2="40" value="50" />
-    <angle score="2.02" tolerance1="10" tolerance2="20" value="180" />
-   </torsions>
-   <histogram>
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="7" />
-    <bin count="15" />
-    <bin count="27" />
-    <bin count="19" />
-    <bin count="19" />
-    <bin count="8" />
-    <bin count="2" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="0" />
-    <bin count="12" />
-    <bin count="17" />
-    <bin count="24" />
-    <bin count="27" />
-    <bin count="5" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="4" />
-   </histogram>
-   <histogram_shifted>
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="8" />
-    <bin count="30" />
-    <bin count="18" />
-    <bin count="21" />
-    <bin count="11" />
-    <bin count="6" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="5" />
-    <bin count="15" />
-    <bin count="20" />
-    <bin count="33" />
-    <bin count="12" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="4" />
-    <bin count="6" />
-   </histogram_shifted>
-  </rule>
-  <rule pattern="[C:1][$(S(=O)=O):2]!@[#7X3v3+0:3]">
-   <torsions>
-    <angle score="26.22" tolerance1="20" tolerance2="30" value="180" />
-    <angle score="4.05" tolerance1="20" tolerance2="30" value="0" />
-   </torsions>
-   <histogram>
-    <bin count="225" />
-    <bin count="60" />
-    <bin count="10" />
-    <bin count="2" />
-    <bin count="3" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="2" />
-    <bin count="7" />
-    <bin count="9" />
-    <bin count="18" />
-    <bin count="29" />
-    <bin count="30" />
-    <bin count="24" />
-    <bin count="26" />
-    <bin count="17" />
-    <bin count="4" />
-    <bin count="3" />
-    <bin count="6" />
-    <bin count="5" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="8" />
-    <bin count="51" />
-    <bin count="194" />
-   </histogram>
-   <histogram_shifted>
-    <bin count="128" />
-    <bin count="26" />
-    <bin count="2" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="6" />
-    <bin count="4" />
-    <bin count="11" />
-    <bin count="32" />
-    <bin count="22" />
-    <bin count="30" />
-    <bin count="27" />
-    <bin count="23" />
-    <bin count="8" />
-    <bin count="4" />
-    <bin count="5" />
-    <bin count="5" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="20" />
-    <bin count="108" />
-    <bin count="264" />
-   </histogram_shifted>
-   <histogram2>
-    <bin count="2" />
-    <bin count="5" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="3" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-   </histogram2>
-   <histogram2_shifted>
-    <bin count="3" />
-    <bin count="4" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-   </histogram2_shifted>
-  </rule>
-  <rule pattern="[c:1][$(S(=O)=O):2]!@[#7X3v3+0:3]">
-   <torsions>
-     <angle score="31.56" tolerance1="20" tolerance2="25" value="180" />
-     <!-- added -->
-     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
-     <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
-     <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
-   </torsions>
-   <histogram>
-    <bin count="2457" />
-    <bin count="799" />
-    <bin count="127" />
-    <bin count="19" />
-    <bin count="3" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="7" />
-    <bin count="20" />
-    <bin count="53" />
-    <bin count="51" />
-    <bin count="111" />
-    <bin count="111" />
-    <bin count="67" />
-    <bin count="40" />
-    <bin count="36" />
-    <bin count="66" />
-    <bin count="96" />
-    <bin count="99" />
-    <bin count="53" />
-    <bin count="59" />
-    <bin count="28" />
-    <bin count="6" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="8" />
-    <bin count="119" />
-    <bin count="689" />
-    <bin count="2366" />
-   </histogram>
-   <histogram_shifted>
-    <bin count="1566" />
-    <bin count="353" />
-    <bin count="52" />
-    <bin count="4" />
-    <bin count="3" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="10" />
-    <bin count="44" />
-    <bin count="43" />
-    <bin count="80" />
-    <bin count="125" />
-    <bin count="86" />
-    <bin count="49" />
-    <bin count="37" />
-    <bin count="43" />
-    <bin count="89" />
-    <bin count="112" />
-    <bin count="66" />
-    <bin count="56" />
-    <bin count="48" />
-    <bin count="12" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="36" />
-    <bin count="324" />
-    <bin count="1408" />
-    <bin count="2842" />
-   </histogram_shifted>
-   <histogram2>
-    <bin count="15" />
-    <bin count="20" />
-    <bin count="10" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="3" />
-    <bin count="2" />
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="6" />
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="4" />
-    <bin count="7" />
-   </histogram2>
-   <histogram2_shifted>
-    <bin count="17" />
-    <bin count="20" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="4" />
-    <bin count="2" />
-    <bin count="2" />
-    <bin count="2" />
-    <bin count="4" />
-    <bin count="7" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="4" />
-    <bin count="14" />
-   </histogram2_shifted>
-  </rule>
-  <rule pattern="[!#1:1][$(S(=O)=O):2]!@[#7X3v3+0:3]">
-   <torsions>
-    <angle score="31.03" tolerance1="20" tolerance2="30" value="180" />
-    <angle score="1.31" tolerance1="20" tolerance2="30" value="40" />
-    <angle score="0.71" tolerance1="20" tolerance2="30" value="-40" />
-    <!-- added -->
-    <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
-   </torsions>
-   <histogram>
-    <bin count="2731" />
-    <bin count="873" />
-    <bin count="141" />
-    <bin count="21" />
-    <bin count="6" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="8" />
-    <bin count="24" />
-    <bin count="57" />
-    <bin count="60" />
-    <bin count="125" />
-    <bin count="134" />
-    <bin count="97" />
-    <bin count="70" />
-    <bin count="61" />
-    <bin count="94" />
-    <bin count="117" />
-    <bin count="110" />
-    <bin count="60" />
-    <bin count="66" />
-    <bin count="33" />
-    <bin count="6" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="5" />
-    <bin count="9" />
-    <bin count="137" />
-    <bin count="752" />
-    <bin count="2611" />
-   </histogram>
-   <histogram_shifted>
-    <bin count="1715" />
-    <bin count="392" />
-    <bin count="55" />
-    <bin count="7" />
-    <bin count="4" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="4" />
-    <bin count="12" />
-    <bin count="48" />
-    <bin count="51" />
-    <bin count="89" />
-    <bin count="137" />
-    <bin count="124" />
-    <bin count="71" />
-    <bin count="68" />
-    <bin count="71" />
-    <bin count="115" />
-    <bin count="123" />
-    <bin count="79" />
-    <bin count="62" />
-    <bin count="54" />
-    <bin count="14" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="5" />
-    <bin count="39" />
-    <bin count="356" />
-    <bin count="1543" />
-    <bin count="3170" />
-   </histogram_shifted>
-   <histogram2>
-    <bin count="18" />
-    <bin count="27" />
-    <bin count="11" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="4" />
-    <bin count="4" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="3" />
-    <bin count="4" />
-    <bin count="1" />
-    <bin count="3" />
-    <bin count="2" />
-    <bin count="4" />
-    <bin count="5" />
-    <bin count="7" />
-    <bin count="5" />
-    <bin count="2" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="3" />
-    <bin count="5" />
-    <bin count="9" />
-   </histogram2>
-   <histogram2_shifted>
-    <bin count="22" />
-    <bin count="25" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="5" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="4" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="1" />
-    <bin count="4" />
-    <bin count="2" />
-    <bin count="4" />
-    <bin count="2" />
-    <bin count="2" />
-    <bin count="3" />
-    <bin count="7" />
-    <bin count="9" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="0" />
-    <bin count="1" />
-    <bin count="1" />
-    <bin count="2" />
-    <bin count="3" />
-    <bin count="4" />
-    <bin count="17" />
-   </histogram2_shifted>
-  </rule>
   <rule pattern="[!#1:1][$(S(=O)=O):2]!@[nX3:3]([aH1])[aH1:4]">
    <torsions>
     <angle score="20.25" tolerance1="25" tolerance2="35" value="-80" />
@@ -60962,6 +60399,569 @@
     <bin count="1" />
     <bin count="0" />
     <bin count="0" />
+   </histogram2_shifted>
+  </rule>
+    <rule pattern="[!#1:1][$(S(=O)=O):2]!@[X3v3+0:3]@[Cr3]">
+   <torsions>
+    <angle score="13.64" tolerance1="20" tolerance2="40" value="-50" />
+    <angle score="8.59" tolerance1="20" tolerance2="40" value="50" />
+    <angle score="2.02" tolerance1="10" tolerance2="20" value="180" />
+   </torsions>
+   <histogram>
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="7" />
+    <bin count="15" />
+    <bin count="27" />
+    <bin count="19" />
+    <bin count="19" />
+    <bin count="8" />
+    <bin count="2" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="0" />
+    <bin count="12" />
+    <bin count="17" />
+    <bin count="24" />
+    <bin count="27" />
+    <bin count="5" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="4" />
+   </histogram>
+   <histogram_shifted>
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="8" />
+    <bin count="30" />
+    <bin count="18" />
+    <bin count="21" />
+    <bin count="11" />
+    <bin count="6" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="5" />
+    <bin count="15" />
+    <bin count="20" />
+    <bin count="33" />
+    <bin count="12" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="4" />
+    <bin count="6" />
+   </histogram_shifted>
+  </rule>
+  <rule pattern="[C:1][$(S(=O)=O):2]!@[X3v3+0:3]">
+   <torsions>
+    <angle score="26.22" tolerance1="20" tolerance2="30" value="180" />
+    <angle score="4.05" tolerance1="20" tolerance2="30" value="0" />
+   </torsions>
+   <histogram>
+    <bin count="225" />
+    <bin count="60" />
+    <bin count="10" />
+    <bin count="2" />
+    <bin count="3" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="2" />
+    <bin count="7" />
+    <bin count="9" />
+    <bin count="18" />
+    <bin count="29" />
+    <bin count="30" />
+    <bin count="24" />
+    <bin count="26" />
+    <bin count="17" />
+    <bin count="4" />
+    <bin count="3" />
+    <bin count="6" />
+    <bin count="5" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="8" />
+    <bin count="51" />
+    <bin count="194" />
+   </histogram>
+   <histogram_shifted>
+    <bin count="128" />
+    <bin count="26" />
+    <bin count="2" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="6" />
+    <bin count="4" />
+    <bin count="11" />
+    <bin count="32" />
+    <bin count="22" />
+    <bin count="30" />
+    <bin count="27" />
+    <bin count="23" />
+    <bin count="8" />
+    <bin count="4" />
+    <bin count="5" />
+    <bin count="5" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="20" />
+    <bin count="108" />
+    <bin count="264" />
+   </histogram_shifted>
+   <histogram2>
+    <bin count="2" />
+    <bin count="5" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="3" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+   </histogram2>
+   <histogram2_shifted>
+    <bin count="3" />
+    <bin count="4" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+   </histogram2_shifted>
+  </rule>
+  <rule pattern="[c:1][$(S(=O)=O):2]!@[X3v3+0:3]">
+   <torsions>
+     <angle score="31.56" tolerance1="20" tolerance2="25" value="180" />
+     <!-- added -->
+     <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
+     <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
+     <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
+   </torsions>
+   <histogram>
+    <bin count="2457" />
+    <bin count="799" />
+    <bin count="127" />
+    <bin count="19" />
+    <bin count="3" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="7" />
+    <bin count="20" />
+    <bin count="53" />
+    <bin count="51" />
+    <bin count="111" />
+    <bin count="111" />
+    <bin count="67" />
+    <bin count="40" />
+    <bin count="36" />
+    <bin count="66" />
+    <bin count="96" />
+    <bin count="99" />
+    <bin count="53" />
+    <bin count="59" />
+    <bin count="28" />
+    <bin count="6" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="8" />
+    <bin count="119" />
+    <bin count="689" />
+    <bin count="2366" />
+   </histogram>
+   <histogram_shifted>
+    <bin count="1566" />
+    <bin count="353" />
+    <bin count="52" />
+    <bin count="4" />
+    <bin count="3" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="10" />
+    <bin count="44" />
+    <bin count="43" />
+    <bin count="80" />
+    <bin count="125" />
+    <bin count="86" />
+    <bin count="49" />
+    <bin count="37" />
+    <bin count="43" />
+    <bin count="89" />
+    <bin count="112" />
+    <bin count="66" />
+    <bin count="56" />
+    <bin count="48" />
+    <bin count="12" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="36" />
+    <bin count="324" />
+    <bin count="1408" />
+    <bin count="2842" />
+   </histogram_shifted>
+   <histogram2>
+    <bin count="15" />
+    <bin count="20" />
+    <bin count="10" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="3" />
+    <bin count="2" />
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="6" />
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="4" />
+    <bin count="7" />
+   </histogram2>
+   <histogram2_shifted>
+    <bin count="17" />
+    <bin count="20" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="4" />
+    <bin count="2" />
+    <bin count="2" />
+    <bin count="2" />
+    <bin count="4" />
+    <bin count="7" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="4" />
+    <bin count="14" />
+   </histogram2_shifted>
+  </rule>
+  <rule pattern="[!#1:1][$(S(=O)=O):2]!@[X3v3+0:3]">
+   <torsions>
+    <angle score="31.03" tolerance1="20" tolerance2="30" value="180" />
+    <angle score="1.31" tolerance1="20" tolerance2="30" value="40" />
+    <angle score="0.71" tolerance1="20" tolerance2="30" value="-40" />
+    <!-- added -->
+    <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
+   </torsions>
+   <histogram>
+    <bin count="2731" />
+    <bin count="873" />
+    <bin count="141" />
+    <bin count="21" />
+    <bin count="6" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="8" />
+    <bin count="24" />
+    <bin count="57" />
+    <bin count="60" />
+    <bin count="125" />
+    <bin count="134" />
+    <bin count="97" />
+    <bin count="70" />
+    <bin count="61" />
+    <bin count="94" />
+    <bin count="117" />
+    <bin count="110" />
+    <bin count="60" />
+    <bin count="66" />
+    <bin count="33" />
+    <bin count="6" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="5" />
+    <bin count="9" />
+    <bin count="137" />
+    <bin count="752" />
+    <bin count="2611" />
+   </histogram>
+   <histogram_shifted>
+    <bin count="1715" />
+    <bin count="392" />
+    <bin count="55" />
+    <bin count="7" />
+    <bin count="4" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="4" />
+    <bin count="12" />
+    <bin count="48" />
+    <bin count="51" />
+    <bin count="89" />
+    <bin count="137" />
+    <bin count="124" />
+    <bin count="71" />
+    <bin count="68" />
+    <bin count="71" />
+    <bin count="115" />
+    <bin count="123" />
+    <bin count="79" />
+    <bin count="62" />
+    <bin count="54" />
+    <bin count="14" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="5" />
+    <bin count="39" />
+    <bin count="356" />
+    <bin count="1543" />
+    <bin count="3170" />
+   </histogram_shifted>
+   <histogram2>
+    <bin count="18" />
+    <bin count="27" />
+    <bin count="11" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="4" />
+    <bin count="4" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="3" />
+    <bin count="4" />
+    <bin count="1" />
+    <bin count="3" />
+    <bin count="2" />
+    <bin count="4" />
+    <bin count="5" />
+    <bin count="7" />
+    <bin count="5" />
+    <bin count="2" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="3" />
+    <bin count="5" />
+    <bin count="9" />
+   </histogram2>
+   <histogram2_shifted>
+    <bin count="22" />
+    <bin count="25" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="5" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="4" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="1" />
+    <bin count="4" />
+    <bin count="2" />
+    <bin count="4" />
+    <bin count="2" />
+    <bin count="2" />
+    <bin count="3" />
+    <bin count="7" />
+    <bin count="9" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="0" />
+    <bin count="1" />
+    <bin count="1" />
+    <bin count="2" />
+    <bin count="3" />
+    <bin count="4" />
+    <bin count="17" />
    </histogram2_shifted>
   </rule>
  </category>
