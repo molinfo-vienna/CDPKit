@@ -1269,7 +1269,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
     orderConformersByEnergy(workingConfs); 
 
     double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
-    std::size_t max_num_confs = settings.getMaxNumOutputConformers();
+    std::size_t max_ens_size = settings.getMaxNumOutputConformers();
 
     if (settings.includeInputCoordinates()) {
         ConformerData::SharedPointer ipt_coords = getInputCoordinates();
@@ -1286,17 +1286,15 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 
     bool too_much_sym = false;
     std::size_t num_avail_confs = workingConfs.size();
-    std::size_t conf_idx_inc = (max_num_confs == 0 ? std::size_t(1) :
-                                std::max(std::size_t(std::floor(double(num_avail_confs) / max_num_confs)), std::size_t(1)));
-    bool exit = false;
-    
-    for (std::size_t i = 0; i < conf_idx_inc && !exit; i++) {
-        for (std::size_t j = i; j < num_avail_confs && !exit; j += conf_idx_inc) {
-            const ConformerData::SharedPointer& conf_data = workingConfs[j];
+    std::size_t conf_idx_inc = (max_ens_size == 0 ? std::size_t(1) : std::size_t(std::ceil(double(num_avail_confs) / max_ens_size)));
+
+    if (conf_idx_inc <= 1) {
+        for (std::size_t i = 0; i < num_avail_confs; i++) {
+            const ConformerData::SharedPointer& conf_data = workingConfs[i];
 
             if (conf_data->getEnergy() > max_energy)
                 break;
-            
+
             if (perf_rmsd_check) {
                 bool selected = confSelector.selected(*conf_data);
                 unsigned int ret_code = invokeCallbacks();
@@ -1309,16 +1307,60 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
                 if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
                     too_much_sym = true;
 
-                if (selected)
+                if (!selected)
+                    continue;
+            }
+
+            outputConfs.push_back(conf_data);
+        }
+        
+   } else {
+        conf_idx_inc = std::min(std::size_t(25), conf_idx_inc);
+        
+        outConfCandInds.clear();
+
+        for (std::size_t i = 0; i < num_avail_confs; i += conf_idx_inc)
+            outConfCandInds.push_back(i);
+
+        while (true) {
+            std::size_t last_ens_size = outputConfs.size();
+
+            for (std::size_t i = 0, num_sets = outConfCandInds.size(); i < num_sets && outputConfs.size() < max_ens_size; i++) {
+                for (std::size_t& j = outConfCandInds[i], end_idx = std::min((i + 1) * conf_idx_inc, num_avail_confs); j < end_idx; j++) {
+                    const ConformerData::SharedPointer& conf_data = workingConfs[j];
+
+                    if (conf_data->getEnergy() > max_energy) {
+                        i = num_sets;
+                        break;
+                    }
+
+                    if (perf_rmsd_check) {
+                        bool selected = confSelector.selected(*conf_data);
+                        unsigned int ret_code = invokeCallbacks();
+
+                        if (ret_code != ReturnCode::SUCCESS) {
+                            outputConfs.clear();
+                            return ret_code;
+                        }
+
+                        if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
+                            too_much_sym = true;
+
+                        if (!selected)
+                            continue;
+                    }
+
                     outputConfs.push_back(conf_data);
+                    j++;
+                    break;
+                }
+            }
 
-            } else
-                outputConfs.push_back(conf_data);
-
-            exit = (max_num_confs > 0 && outputConfs.size() >= max_num_confs);
+            if (last_ens_size == outputConfs.size())
+                break;
         }
     }
-
+    
     if (conf_idx_inc > 1)
         orderConformersByEnergy(outputConfs); 
     

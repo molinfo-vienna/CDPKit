@@ -236,6 +236,7 @@ namespace CDPL
             ConfCombinationDataList               torFragConfCombData;
             UIntArray                             currConfComb;
             UIntArray                             parentAtomInds;
+            UIntArray                             outConfCandInds;
             Math::Vector3DArray::StorageType      energyGradient;
             bool                                  inStochasticMode;
         };
