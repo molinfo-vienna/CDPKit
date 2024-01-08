@@ -27,149 +27,149 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    NAME = CDPL.Base.LookupKey(id=50, name='NAME')
+    NAME = CDPL.Base.LookupKey('NAME')
 
     ##
     # \brief 
     #
-    COMMENT = CDPL.Base.LookupKey(id=52, name='COMMENT')
+    COMMENT = CDPL.Base.LookupKey('COMMENT')
 
     ##
     # \brief 
     #
-    TIMESTAMP = CDPL.Base.LookupKey(id=51, name='TIMESTAMP')
+    TIMESTAMP = CDPL.Base.LookupKey('TIMESTAMP')
 
     ##
     # \brief 
     #
-    COMPONENTS = CDPL.Base.LookupKey(id=53, name='COMPONENTS')
+    COMPONENTS = CDPL.Base.LookupKey('COMPONENTS')
 
     ##
     # \brief 
     #
-    RINGS = CDPL.Base.LookupKey(id=54, name='RINGS')
+    RINGS = CDPL.Base.LookupKey('RINGS')
 
     ##
     # \brief 
     #
-    SSSR = CDPL.Base.LookupKey(id=55, name='SSSR')
+    SSSR = CDPL.Base.LookupKey('SSSR')
 
     ##
     # \brief 
     #
-    CYCLIC_SUBSTRUCTURE = CDPL.Base.LookupKey(id=56, name='CYCLIC_SUBSTRUCTURE')
+    CYCLIC_SUBSTRUCTURE = CDPL.Base.LookupKey('CYCLIC_SUBSTRUCTURE')
 
     ##
     # \brief 
     #
-    AROMATIC_SUBSTRUCTURE = CDPL.Base.LookupKey(id=57, name='AROMATIC_SUBSTRUCTURE')
+    AROMATIC_SUBSTRUCTURE = CDPL.Base.LookupKey('AROMATIC_SUBSTRUCTURE')
 
     ##
     # \brief 
     #
-    PI_ELECTRON_SYSTEMS = CDPL.Base.LookupKey(id=58, name='PI_ELECTRON_SYSTEMS')
+    PI_ELECTRON_SYSTEMS = CDPL.Base.LookupKey('PI_ELECTRON_SYSTEMS')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=59, name='MATCH_CONSTRAINTS')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey('MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=60, name='MATCH_EXPRESSION')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey('MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=61, name='COMPONENT_GROUPS')
+    COMPONENT_GROUPS = CDPL.Base.LookupKey('COMPONENT_GROUPS')
 
     ##
     # \brief 
     #
-    TOPOLOGICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=62, name='TOPOLOGICAL_DISTANCE_MATRIX')
+    TOPOLOGICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey('TOPOLOGICAL_DISTANCE_MATRIX')
 
     ##
     # \brief 
     #
-    GEOMETRICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=63, name='GEOMETRICAL_DISTANCE_MATRIX')
+    GEOMETRICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey('GEOMETRICAL_DISTANCE_MATRIX')
 
     ##
     # \brief 
     #
-    STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey(id=64, name='STOICHIOMETRIC_NUMBER')
+    STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey('STOICHIOMETRIC_NUMBER')
 
     ##
     # \brief 
     #
-    CONFORMATION_INDEX = CDPL.Base.LookupKey(id=65, name='CONFORMATION_INDEX')
+    CONFORMATION_INDEX = CDPL.Base.LookupKey('CONFORMATION_INDEX')
 
     ##
     # \brief 
     #
-    CONFORMER_ENERGIES = CDPL.Base.LookupKey(id=66, name='CONFORMER_ENERGIES')
+    CONFORMER_ENERGIES = CDPL.Base.LookupKey('CONFORMER_ENERGIES')
 
     ##
     # \brief 
     #
-    STRUCTURE_DATA = CDPL.Base.LookupKey(id=67, name='STRUCTURE_DATA')
+    STRUCTURE_DATA = CDPL.Base.LookupKey('STRUCTURE_DATA')
 
     ##
     # \brief 
     #
-    HASH_CODE = CDPL.Base.LookupKey(id=68, name='HASH_CODE')
+    HASH_CODE = CDPL.Base.LookupKey('HASH_CODE')
 
     ##
     # \brief 
     #
-    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=69, name='MDL_USER_INITIALS')
+    MDL_USER_INITIALS = CDPL.Base.LookupKey('MDL_USER_INITIALS')
 
     ##
     # \brief 
     #
-    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=70, name='MDL_PROGRAM_NAME')
+    MDL_PROGRAM_NAME = CDPL.Base.LookupKey('MDL_PROGRAM_NAME')
 
     ##
     # \brief 
     #
-    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=75, name='MDL_REGISTRY_NUMBER')
+    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey('MDL_REGISTRY_NUMBER')
 
     ##
     # \brief 
     #
-    MDL_CTAB_VERSION = CDPL.Base.LookupKey(id=77, name='MDL_CTAB_VERSION')
+    MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
 
     ##
     # \brief 
     #
-    MDL_DIMENSIONALITY = CDPL.Base.LookupKey(id=71, name='MDL_DIMENSIONALITY')
+    MDL_DIMENSIONALITY = CDPL.Base.LookupKey('MDL_DIMENSIONALITY')
 
     ##
     # \brief 
     #
-    MDL_SCALING_FACTOR1 = CDPL.Base.LookupKey(id=72, name='MDL_SCALING_FACTOR1')
+    MDL_SCALING_FACTOR1 = CDPL.Base.LookupKey('MDL_SCALING_FACTOR1')
 
     ##
     # \brief 
     #
-    MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey(id=73, name='MDL_SCALING_FACTOR2')
+    MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey('MDL_SCALING_FACTOR2')
 
     ##
     # \brief 
     #
-    MDL_ENERGY = CDPL.Base.LookupKey(id=74, name='MDL_ENERGY')
+    MDL_ENERGY = CDPL.Base.LookupKey('MDL_ENERGY')
 
     ##
     # \brief 
     #
-    MDL_CHIRAL_FLAG = CDPL.Base.LookupKey(id=76, name='MDL_CHIRAL_FLAG')
+    MDL_CHIRAL_FLAG = CDPL.Base.LookupKey('MDL_CHIRAL_FLAG')
 
     ##
     # \brief 
     #
-    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey(id=78, name='MOL2_CHARGE_TYPE')
+    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
     # \brief 
     #
-    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey(id=79, name='MOL2_MOLECULE_TYPE')
+    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey('MOL2_MOLECULE_TYPE')

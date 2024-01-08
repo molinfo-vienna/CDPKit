@@ -58,3 +58,13 @@ class AtomPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    CONFIGURATION_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)

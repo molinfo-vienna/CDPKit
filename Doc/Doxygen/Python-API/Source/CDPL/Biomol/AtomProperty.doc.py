@@ -27,69 +27,69 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    RESIDUE_ATOM_NAME = CDPL.Base.LookupKey(id=269, name='RESIDUE_ATOM_NAME')
+    RESIDUE_ATOM_NAME = CDPL.Base.LookupKey('RESIDUE_ATOM_NAME')
 
     ##
     # \brief 
     #
-    RESIDUE_ALT_ATOM_NAME = CDPL.Base.LookupKey(id=270, name='RESIDUE_ALT_ATOM_NAME')
+    RESIDUE_ALT_ATOM_NAME = CDPL.Base.LookupKey('RESIDUE_ALT_ATOM_NAME')
 
     ##
     # \brief 
     #
-    RESIDUE_LEAVING_ATOM_FLAG = CDPL.Base.LookupKey(id=271, name='RESIDUE_LEAVING_ATOM_FLAG')
+    RESIDUE_LEAVING_ATOM_FLAG = CDPL.Base.LookupKey('RESIDUE_LEAVING_ATOM_FLAG')
 
     ##
     # \brief 
     #
-    RESIDUE_LINKING_ATOM_FLAG = CDPL.Base.LookupKey(id=272, name='RESIDUE_LINKING_ATOM_FLAG')
+    RESIDUE_LINKING_ATOM_FLAG = CDPL.Base.LookupKey('RESIDUE_LINKING_ATOM_FLAG')
 
     ##
     # \brief 
     #
-    RESIDUE_CODE = CDPL.Base.LookupKey(id=273, name='RESIDUE_CODE')
+    RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
 
     ##
     # \brief 
     #
-    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey(id=274, name='RESIDUE_SEQUENCE_NUMBER')
+    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
 
     ##
     # \brief 
     #
-    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey(id=275, name='RESIDUE_INSERTION_CODE')
+    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
 
     ##
     # \brief 
     #
-    HETERO_ATOM_FLAG = CDPL.Base.LookupKey(id=276, name='HETERO_ATOM_FLAG')
+    HETERO_ATOM_FLAG = CDPL.Base.LookupKey('HETERO_ATOM_FLAG')
 
     ##
     # \brief 
     #
-    CHAIN_ID = CDPL.Base.LookupKey(id=277, name='CHAIN_ID')
+    CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
 
     ##
     # \brief 
     #
-    ALT_LOCATION_ID = CDPL.Base.LookupKey(id=278, name='ALT_LOCATION_ID')
+    ALT_LOCATION_ID = CDPL.Base.LookupKey('ALT_LOCATION_ID')
 
     ##
     # \brief 
     #
-    MODEL_NUMBER = CDPL.Base.LookupKey(id=279, name='MODEL_NUMBER')
+    MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
 
     ##
     # \brief 
     #
-    SERIAL_NUMBER = CDPL.Base.LookupKey(id=280, name='SERIAL_NUMBER')
+    SERIAL_NUMBER = CDPL.Base.LookupKey('SERIAL_NUMBER')
 
     ##
     # \brief 
     #
-    OCCUPANCY = CDPL.Base.LookupKey(id=281, name='OCCUPANCY')
+    OCCUPANCY = CDPL.Base.LookupKey('OCCUPANCY')
 
     ##
     # \brief 
     #
-    B_FACTOR = CDPL.Base.LookupKey(id=282, name='B_FACTOR')
+    B_FACTOR = CDPL.Base.LookupKey('B_FACTOR')

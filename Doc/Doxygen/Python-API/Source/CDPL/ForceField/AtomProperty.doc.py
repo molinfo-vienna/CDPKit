@@ -27,14 +27,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MMFF94_SYMBOLIC_TYPE = CDPL.Base.LookupKey(id=329, name='MMFF94_SYMBOLIC_TYPE')
+    MMFF94_SYMBOLIC_TYPE = CDPL.Base.LookupKey('MMFF94_SYMBOLIC_TYPE')
 
     ##
     # \brief 
     #
-    MMFF94_NUMERIC_TYPE = CDPL.Base.LookupKey(id=330, name='MMFF94_NUMERIC_TYPE')
+    MMFF94_NUMERIC_TYPE = CDPL.Base.LookupKey('MMFF94_NUMERIC_TYPE')
 
     ##
     # \brief 
     #
-    MMFF94_CHARGE = CDPL.Base.LookupKey(id=331, name='MMFF94_CHARGE')
+    MMFF94_CHARGE = CDPL.Base.LookupKey('MMFF94_CHARGE')

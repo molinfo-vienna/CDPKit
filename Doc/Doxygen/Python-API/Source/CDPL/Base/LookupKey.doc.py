@@ -29,7 +29,7 @@ class LookupKey(Boost.Python.instance):
     ##
     # \brief Used to denote an invalid, unused or unspecified key.
     # 
-    NONE = LookupKey(id=0, name='NONE')
+    NONE = LookupKey('NONE')
 
     ##
     # \brief Initializes a copy of the \e %LookupKey instance \a key.

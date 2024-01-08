@@ -31,7 +31,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>std::size_t</tt>
     # 
-    COORDINATES_DIMENSION = CDPL.Base.LookupKey(id=98, name='COORDINATES_DIMENSION')
+    COORDINATES_DIMENSION = CDPL.Base.LookupKey('COORDINATES_DIMENSION')
 
     ##
     # \brief Specifies whether the calculation of a molecular property has to be performed for the ordinary hydrogen deplete input structure.
@@ -40,7 +40,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \see Chem.AtomProperty.IS_ORDINARY_H for the definition of ordinary hydrogens. <br>
     # 
-    ORDINARY_HYDROGEN_DEPLETE = CDPL.Base.LookupKey(id=97, name='ORDINARY_HYDROGEN_DEPLETE')
+    ORDINARY_HYDROGEN_DEPLETE = CDPL.Base.LookupKey('ORDINARY_HYDROGEN_DEPLETE')
 
     ##
     # \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
@@ -49,7 +49,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=95, name='STRICT_ERROR_CHECKING')
+    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
     # \brief Specifies whether unsupported reverse stereo bonds shall be converted to regular stereo bonds by swapping bond start and end atoms.
@@ -60,7 +60,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    BOND_MEMBER_SWAP_STEREO_FIX = CDPL.Base.LookupKey(id=99, name='BOND_MEMBER_SWAP_STEREO_FIX')
+    BOND_MEMBER_SWAP_STEREO_FIX = CDPL.Base.LookupKey('BOND_MEMBER_SWAP_STEREO_FIX')
 
     ##
     # \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data in a <em>MDL</em> [\ref CTFILE] format.
@@ -69,7 +69,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    CHECK_LINE_LENGTH = CDPL.Base.LookupKey(id=100, name='CHECK_LINE_LENGTH')
+    CHECK_LINE_LENGTH = CDPL.Base.LookupKey('CHECK_LINE_LENGTH')
 
     ##
     # \brief Specifies the separator for <em>SMILES</em>, <em>SMARTS</em>, <em>JME</em> and <em>InChI</em> output data records [\ref SMILES, \ref SMARTS, \ref JME, \ref INCHI].
@@ -78,7 +78,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>std::string</tt>
     # 
-    RECORD_SEPARATOR = CDPL.Base.LookupKey(id=96, name='RECORD_SEPARATOR')
+    RECORD_SEPARATOR = CDPL.Base.LookupKey('RECORD_SEPARATOR')
 
     ##
     # \brief Specifies for the output of data in <em>JME</em> format [\ref JME] whether the components of a molecular graph shall be written separately or all together as a single <em>JME</em> component.
@@ -87,7 +87,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    JME_SEPARATE_COMPONENTS = CDPL.Base.LookupKey(id=112, name='JME_SEPARATE_COMPONENTS')
+    JME_SEPARATE_COMPONENTS = CDPL.Base.LookupKey('JME_SEPARATE_COMPONENTS')
 
     ##
     # \brief Specifies the desired version of the connection table data format for the output of molecular graphs in <em>MDL SD-</em> or <em>Mol-File</em> format [\ref CTFILE].
@@ -100,7 +100,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    MDL_CTAB_VERSION = CDPL.Base.LookupKey(id=101, name='MDL_CTAB_VERSION')
+    MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
 
     ##
     # \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -109,7 +109,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    MDL_IGNORE_PARITY = CDPL.Base.LookupKey(id=102, name='MDL_IGNORE_PARITY')
+    MDL_IGNORE_PARITY = CDPL.Base.LookupKey('MDL_IGNORE_PARITY')
 
     ##
     # \brief Specifies the desired data format version for the output of reactions in <em>MDL Rxn-</em> or <em>RD-File</em> format [\ref CTFILE].
@@ -122,7 +122,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
-    MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey(id=108, name='MDL_RXN_FILE_VERSION')
+    MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey('MDL_RXN_FILE_VERSION')
 
     ##
     # \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -131,7 +131,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    MDL_TRIM_LINES = CDPL.Base.LookupKey(id=105, name='MDL_TRIM_LINES')
+    MDL_TRIM_LINES = CDPL.Base.LookupKey('MDL_TRIM_LINES')
 
     ##
     # \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -140,7 +140,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    MDL_TRIM_STRINGS = CDPL.Base.LookupKey(id=104, name='MDL_TRIM_STRINGS')
+    MDL_TRIM_STRINGS = CDPL.Base.LookupKey('MDL_TRIM_STRINGS')
 
     ##
     # \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -149,7 +149,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting has only an effect if the control-parameter Chem.ControlParameter.IGNORE_LINE_LENGTH_LIMIT is <tt>False</tt>.
     # 
-    MDL_TRUNCATE_LINES = CDPL.Base.LookupKey(id=107, name='MDL_TRUNCATE_LINES')
+    MDL_TRUNCATE_LINES = CDPL.Base.LookupKey('MDL_TRUNCATE_LINES')
 
     ##
     # \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -158,7 +158,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    MDL_TRUNCATE_STRINGS = CDPL.Base.LookupKey(id=106, name='MDL_TRUNCATE_STRINGS')
+    MDL_TRUNCATE_STRINGS = CDPL.Base.LookupKey('MDL_TRUNCATE_STRINGS')
 
     ##
     # \brief Specifies whether to update the timestamp of <em>Mol-</em> and <em>Rxn-File</em> header blocks when writing data in a <em>MDL CTFile</em> based format [\ref CTFILE].
@@ -167,22 +167,22 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    MDL_UPDATE_TIMESTAMP = CDPL.Base.LookupKey(id=103, name='MDL_UPDATE_TIMESTAMP')
+    MDL_UPDATE_TIMESTAMP = CDPL.Base.LookupKey('MDL_UPDATE_TIMESTAMP')
 
     ##
     # \brief 
     #
-    MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD = CDPL.Base.LookupKey(id=109, name='MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD')
+    MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD')
 
     ##
     # \brief 
     #
-    MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY = CDPL.Base.LookupKey(id=110, name='MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY')
+    MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY = CDPL.Base.LookupKey('MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY')
 
     ##
     # \brief 
     #
-    MDL_CONF_ENERGY_SD_TAG = CDPL.Base.LookupKey(id=111, name='MDL_CONF_ENERGY_SD_TAG')
+    MDL_CONF_ENERGY_SD_TAG = CDPL.Base.LookupKey('MDL_CONF_ENERGY_SD_TAG')
 
     ##
     # \brief Specifies the format of <em>SMILES</em> molecular graph or reaction data records [\ref SMILES].
@@ -195,14 +195,14 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>std::string</tt>
     # 
-    SMILES_RECORD_FORMAT = CDPL.Base.LookupKey(id=113, name='SMILES_RECORD_FORMAT')
+    SMILES_RECORD_FORMAT = CDPL.Base.LookupKey('SMILES_RECORD_FORMAT')
 
     ##
     # \brief Specifies the minimum ring size that is required for the specification of ring double bond geometries in generated <em>SMILES</em> strings [\ref SMILES].
     # 
     # <b>Value Type:</b> <tt>std::size_t</tt> \see Chem.ControlParameter.SMILES_WRITE_RING_BOND_STEREO
     # 
-    SMILES_MIN_STEREO_BOND_RING_SIZE = CDPL.Base.LookupKey(id=125, name='SMILES_MIN_STEREO_BOND_RING_SIZE')
+    SMILES_MIN_STEREO_BOND_RING_SIZE = CDPL.Base.LookupKey('SMILES_MIN_STEREO_BOND_RING_SIZE')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] where all atom symbols are enclosed in brackets.
@@ -211,7 +211,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_NO_ORGANIC_SUBSET = CDPL.Base.LookupKey(id=124, name='SMILES_NO_ORGANIC_SUBSET')
+    SMILES_NO_ORGANIC_SUBSET = CDPL.Base.LookupKey('SMILES_NO_ORGANIC_SUBSET')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with explicit aromatic bond specifications.
@@ -220,7 +220,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_WRITE_KEKULE_FORM is set to <tt>False</tt>.
     # 
-    SMILES_WRITE_AROMATIC_BONDS = CDPL.Base.LookupKey(id=123, name='SMILES_WRITE_AROMATIC_BONDS')
+    SMILES_WRITE_AROMATIC_BONDS = CDPL.Base.LookupKey('SMILES_WRITE_AROMATIC_BONDS')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with isotopic mass specifications.
@@ -229,7 +229,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_ISOTOPE = CDPL.Base.LookupKey(id=116, name='SMILES_WRITE_ISOTOPE')
+    SMILES_WRITE_ISOTOPE = CDPL.Base.LookupKey('SMILES_WRITE_ISOTOPE')
 
     ##
     # \brief Specifies whether to generate molecule <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
@@ -238,7 +238,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_MOL_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=121, name='SMILES_MOL_WRITE_ATOM_MAPPING_ID')
+    SMILES_MOL_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_MOL_WRITE_ATOM_MAPPING_ID')
 
     ##
     # \brief Specifies whether to generate reaction <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
@@ -247,7 +247,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_RXN_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=120, name='SMILES_RXN_WRITE_ATOM_MAPPING_ID')
+    SMILES_RXN_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_RXN_WRITE_ATOM_MAPPING_ID')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with atom parity specifications.
@@ -256,7 +256,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_ATOM_STEREO = CDPL.Base.LookupKey(id=117, name='SMILES_WRITE_ATOM_STEREO')
+    SMILES_WRITE_ATOM_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_ATOM_STEREO')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] that include directional bonds for the definition of double bond geometries.
@@ -265,7 +265,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_BOND_STEREO = CDPL.Base.LookupKey(id=118, name='SMILES_WRITE_BOND_STEREO')
+    SMILES_WRITE_BOND_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_BOND_STEREO')
 
     ##
     # \brief Specifies whether to generate canonical <em>SMILES</em> strings [\ref SMILES].
@@ -274,7 +274,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_CANONICAL_FORM = CDPL.Base.LookupKey(id=114, name='SMILES_WRITE_CANONICAL_FORM')
+    SMILES_WRITE_CANONICAL_FORM = CDPL.Base.LookupKey('SMILES_WRITE_CANONICAL_FORM')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with kekulized aromatic rings.
@@ -283,7 +283,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_KEKULE_FORM = CDPL.Base.LookupKey(id=115, name='SMILES_WRITE_KEKULE_FORM')
+    SMILES_WRITE_KEKULE_FORM = CDPL.Base.LookupKey('SMILES_WRITE_KEKULE_FORM')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] that also include directional bonds for the definition of ring double bond geometries.
@@ -292,7 +292,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_WRITE_BOND_STEREO is set to <tt>True</tt>.
     # 
-    SMILES_WRITE_RING_BOND_STEREO = CDPL.Base.LookupKey(id=119, name='SMILES_WRITE_RING_BOND_STEREO')
+    SMILES_WRITE_RING_BOND_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_RING_BOND_STEREO')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with explicit single bond specifications.
@@ -301,7 +301,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>bool</tt>
     # 
-    SMILES_WRITE_SINGLE_BONDS = CDPL.Base.LookupKey(id=122, name='SMILES_WRITE_SINGLE_BONDS')
+    SMILES_WRITE_SINGLE_BONDS = CDPL.Base.LookupKey('SMILES_WRITE_SINGLE_BONDS')
 
     ##
     # \brief Specifies options for the input of <em>InChI</em> strings [\ref INCHI].
@@ -310,7 +310,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>std::string</tt>
     # 
-    INCHI_INPUT_OPTIONS = CDPL.Base.LookupKey(id=126, name='INCHI_INPUT_OPTIONS')
+    INCHI_INPUT_OPTIONS = CDPL.Base.LookupKey('INCHI_INPUT_OPTIONS')
 
     ##
     # \brief Specifies options for the output of <em>InChI</em> strings [\ref INCHI].
@@ -319,84 +319,84 @@ class ControlParameter(Boost.Python.instance):
     # 
     # <b>Value Type:</b> <tt>std::string</tt>
     # 
-    INCHI_OUTPUT_OPTIONS = CDPL.Base.LookupKey(id=127, name='INCHI_OUTPUT_OPTIONS')
+    INCHI_OUTPUT_OPTIONS = CDPL.Base.LookupKey('INCHI_OUTPUT_OPTIONS')
 
     ##
     # \brief Specifies whether to check for and import multi-conformer molecules. <b>Value Type:</b> <tt>bool</tt>.
     # 
-    MULTI_CONF_IMPORT = CDPL.Base.LookupKey(id=128, name='MULTI_CONF_IMPORT')
+    MULTI_CONF_IMPORT = CDPL.Base.LookupKey('MULTI_CONF_IMPORT')
 
     ##
     # \brief Specifies whether to write all molecule conformations on output. <b>Value Type:</b> <tt>bool</tt>.
     # 
-    MULTI_CONF_EXPORT = CDPL.Base.LookupKey(id=129, name='MULTI_CONF_EXPORT')
+    MULTI_CONF_EXPORT = CDPL.Base.LookupKey('MULTI_CONF_EXPORT')
 
     ##
     # \brief Specifies an instance of Chem.MultiConfMoleculeInputProcessor that implements the logic of multi-conformer molecule detection and conformational data processing. <b>Value Type:</b> <tt>Chem.MultiConfMoleculeInputProcessor.SharedPointer</tt>.
     # 
-    MULTI_CONF_INPUT_PROCESSOR = CDPL.Base.LookupKey(id=130, name='MULTI_CONF_INPUT_PROCESSOR')
+    MULTI_CONF_INPUT_PROCESSOR = CDPL.Base.LookupKey('MULTI_CONF_INPUT_PROCESSOR')
 
     ##
     # \brief 
     #
-    OUTPUT_CONF_ENERGY_AS_COMMENT = CDPL.Base.LookupKey(id=131, name='OUTPUT_CONF_ENERGY_AS_COMMENT')
+    OUTPUT_CONF_ENERGY_AS_COMMENT = CDPL.Base.LookupKey('OUTPUT_CONF_ENERGY_AS_COMMENT')
 
     ##
     # \brief 
     #
-    CONF_INDEX_NAME_SUFFIX_PATTERN = CDPL.Base.LookupKey(id=132, name='CONF_INDEX_NAME_SUFFIX_PATTERN')
+    CONF_INDEX_NAME_SUFFIX_PATTERN = CDPL.Base.LookupKey('CONF_INDEX_NAME_SUFFIX_PATTERN')
 
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=133, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
+    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_WRITE_SINGLE_PRECISION_FLOATS')
 
     ##
     # \brief 
     #
-    MOL2_ENABLE_EXTENDED_ATOM_TYPES = CDPL.Base.LookupKey(id=134, name='MOL2_ENABLE_EXTENDED_ATOM_TYPES')
+    MOL2_ENABLE_EXTENDED_ATOM_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_EXTENDED_ATOM_TYPES')
 
     ##
     # \brief 
     #
-    MOL2_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey(id=135, name='MOL2_ENABLE_AROMATIC_BOND_TYPES')
+    MOL2_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('MOL2_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
     # \brief 
     #
-    MOL2_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey(id=136, name='MOL2_CALC_FORMAL_CHARGES')
+    MOL2_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_CALC_FORMAL_CHARGES')
 
     ##
     # \brief 
     #
-    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey(id=137, name='MOL2_CHARGE_TYPE')
+    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey('MOL2_CHARGE_TYPE')
 
     ##
     # \brief 
     #
-    MOL2_OUTPUT_SUBSTRUCTURES = CDPL.Base.LookupKey(id=139, name='MOL2_OUTPUT_SUBSTRUCTURES')
+    MOL2_OUTPUT_SUBSTRUCTURES = CDPL.Base.LookupKey('MOL2_OUTPUT_SUBSTRUCTURES')
 
     ##
     # \brief 
     #
-    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey(id=138, name='MOL2_MOLECULE_TYPE')
+    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey('MOL2_MOLECULE_TYPE')
 
     ##
     # \brief 
     #
-    COMMENT_IS_NAME = CDPL.Base.LookupKey(id=140, name='XYZ_COMMENT_IS_NAME')
+    COMMENT_IS_NAME = CDPL.Base.LookupKey('XYZ_COMMENT_IS_NAME')
 
     ##
     # \brief 
     #
-    XYZ_PERCEIVE_CONNECTIVITY = CDPL.Base.LookupKey(id=141, name='XYZ_PERCEIVE_CONNECTIVITY')
+    XYZ_PERCEIVE_CONNECTIVITY = CDPL.Base.LookupKey('XYZ_PERCEIVE_CONNECTIVITY')
 
     ##
     # \brief 
     #
-    XYZ_PERCEIVE_BOND_ORDERS = CDPL.Base.LookupKey(id=142, name='XYZ_PERCEIVE_BOND_ORDERS')
+    XYZ_PERCEIVE_BOND_ORDERS = CDPL.Base.LookupKey('XYZ_PERCEIVE_BOND_ORDERS')
 
     ##
     # \brief 
     #
-    XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey(id=143, name='XYZ_CALC_FORMAL_CHARGES')
+    XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('XYZ_CALC_FORMAL_CHARGES')

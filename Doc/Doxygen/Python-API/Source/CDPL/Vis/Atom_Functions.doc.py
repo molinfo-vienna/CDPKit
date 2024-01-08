@@ -23,6 +23,33 @@
 # \brief 
 # \param atom 
 #
+def clearConfigurationLabelSize(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasConfigurationLabelSize(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getConfigurationLabelSize(atom: Chem.Atom) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param atom 
+# \param size 
+#
+def setConfigurationLabelSize(atom: Chem.Atom, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearLabelSize(atom: Chem.Atom) -> None: pass
 
 ##
@@ -153,6 +180,33 @@ def getColor(atom: Chem.Atom) -> Color: pass
 # \param color 
 #
 def setColor(atom: Chem.Atom, color: Color) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearConfigurationLabelFont(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasConfigurationLabelFont(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getConfigurationLabelFont(atom: Chem.Atom) -> Font: pass
+
+##
+# \brief 
+# \param atom 
+# \param font 
+#
+def setConfigurationLabelFont(atom: Chem.Atom, font: Font) -> None: pass
 
 ##
 # \brief 

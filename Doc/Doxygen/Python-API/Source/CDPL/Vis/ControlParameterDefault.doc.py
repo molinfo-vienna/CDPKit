@@ -308,3 +308,33 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_STEREO_BONDS.
     # 
     SHOW_STEREO_BONDS = True
+
+    ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS.
+    # 
+    SHOW_ATOM_CONFIGURATION_LABELS = False
+
+    ##
+    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
+    # 
+    ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+
+    ##
+    # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
+    # 
+    ATOM_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS.
+    # 
+    SHOW_BOND_CONFIGURATION_LABELS = False
+
+    ##
+    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
+    # 
+    BOND_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+
+    ##
+    # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE.
+    # 
+    BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)

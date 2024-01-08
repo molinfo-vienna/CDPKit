@@ -44,8 +44,10 @@ class Font(Boost.Python.instance):
     # 
     # \param family The font family name.
     # \param size The font size.
+    # \param bold <tt>True</tt> if text should be rendered bold, and <tt>False</tt> otherwise.
+    # \param italic <tt>True</tt> if text should be rendered italicized, and <tt>False</tt> otherwise.
     # 
-    def __init__(family: str, size: float = 12.0) -> None: pass
+    def __init__(family: str, size: float = 12.0, bold: bool = False, italic: bool = False) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

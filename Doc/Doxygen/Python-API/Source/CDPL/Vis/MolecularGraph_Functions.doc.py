@@ -131,6 +131,60 @@ def setSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecifica
 # \brief 
 # \param molgraph 
 #
+def clearBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param size 
+#
+def setBondConfigurationLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param size 
+#
+def setAtomConfigurationLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -558,3 +612,57 @@ def getSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 # \param font 
 #
 def setSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param font 
+#
+def setBondConfigurationLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param font 
+#
+def setAtomConfigurationLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass

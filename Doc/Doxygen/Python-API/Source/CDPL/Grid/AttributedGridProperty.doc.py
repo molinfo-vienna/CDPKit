@@ -27,4 +27,4 @@ class AttributedGridProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    NAME = CDPL.Base.LookupKey(id=326, name='NAME')
+    NAME = CDPL.Base.LookupKey('NAME')

@@ -123,3 +123,23 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     BOND_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    ATOM_CONFIGURATION_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    ATOM_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    BOND_CONFIGURATION_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)

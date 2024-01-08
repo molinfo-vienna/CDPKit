@@ -31,7 +31,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Color
     # 
-    COLOR = CDPL.Base.LookupKey(id=158, name='COLOR')
+    COLOR = CDPL.Base.LookupKey('COLOR')
 
     ##
     # \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each line end.
@@ -40,7 +40,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=165, name='DOUBLE_BOND_TRIM_LENGTH')
+    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('DOUBLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief Specifies the font for bond labels.
@@ -49,7 +49,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.Font
     # 
-    LABEL_FONT = CDPL.Base.LookupKey(id=167, name='LABEL_FONT')
+    LABEL_FONT = CDPL.Base.LookupKey('LABEL_FONT')
 
     ##
     # \brief Specifies the margin of free space around bond labels.
@@ -58,7 +58,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LABEL_MARGIN = CDPL.Base.LookupKey(id=169, name='LABEL_MARGIN')
+    LABEL_MARGIN = CDPL.Base.LookupKey('LABEL_MARGIN')
 
     ##
     # \brief Specifies the size of bond labels.
@@ -67,7 +67,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LABEL_SIZE = CDPL.Base.LookupKey(id=168, name='LABEL_SIZE')
+    LABEL_SIZE = CDPL.Base.LookupKey('LABEL_SIZE')
 
     ##
     # \brief Specifies the distance between the lines of double and triple bonds.
@@ -76,7 +76,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LINE_SPACING = CDPL.Base.LookupKey(id=160, name='LINE_SPACING')
+    LINE_SPACING = CDPL.Base.LookupKey('LINE_SPACING')
 
     ##
     # \brief Specifies the width of bond lines.
@@ -85,7 +85,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    LINE_WIDTH = CDPL.Base.LookupKey(id=159, name='LINE_WIDTH')
+    LINE_WIDTH = CDPL.Base.LookupKey('LINE_WIDTH')
 
     ##
     # \brief Specifies the length of the lines in reaction center marks.
@@ -94,7 +94,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=163, name='REACTION_CENTER_LINE_LENGTH')
+    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey('REACTION_CENTER_LINE_LENGTH')
 
     ##
     # \brief Specifies the distance between the lines in reaction center marks.
@@ -103,7 +103,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \see Vis.ControlParameter.SHOW_BOND_REACTION_INFOS
     # 
-    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=164, name='REACTION_CENTER_LINE_SPACING')
+    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey('REACTION_CENTER_LINE_SPACING')
 
     ##
     # \brief Specifies the amount by which the non-central lines of triple bonds have to be trimmed at each line end.
@@ -112,7 +112,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=166, name='TRIPLE_BOND_TRIM_LENGTH')
+    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey('TRIPLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief Specifies the distance between the hashes of down stereo bonds.
@@ -121,7 +121,7 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=162, name='STEREO_BOND_HASH_SPACING')
+    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey('STEREO_BOND_HASH_SPACING')
 
     ##
     # \brief Specifies the width of wedge-shaped stereo bonds.
@@ -130,4 +130,22 @@ class BondProperty(Boost.Python.instance):
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
-    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=161, name='STEREO_BOND_WEDGE_WIDTH')
+    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey('STEREO_BOND_WEDGE_WIDTH')
+
+    ##
+    # \brief Specifies the font used for bond configuration descriptor text labels.
+    # 
+    # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT.
+    # 
+    # <b>Value Type:</b> Vis.Font
+    # 
+    CONFIGURATION_LABEL_FONT = CDPL.Base.LookupKey('CONFIGURATION_LABEL_FONT')
+
+    ##
+    # \brief Specifies the size of bond configuration descriptor text labels.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification
+    # 
+    CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('CONFIGURATION_LABEL_SIZE')

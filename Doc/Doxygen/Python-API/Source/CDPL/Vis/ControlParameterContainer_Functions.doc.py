@@ -158,6 +158,60 @@ def setSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, si
 # \brief 
 # \param cntnr 
 #
+def clearBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param size 
+#
+def setBondConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param size 
+#
+def setAtomConfigurationLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -995,6 +1049,60 @@ def setUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContain
 # \brief 
 # \param cntnr 
 #
+def clearShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param show 
+#
+def setShowBondConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param show 
+#
+def setShowAtomConfigurationLabelsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1503,6 +1611,60 @@ def getSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) ->
 # \param font 
 #
 def setSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param font 
+#
+def setBondConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param font 
+#
+def setAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
 
 ##
 # \brief 

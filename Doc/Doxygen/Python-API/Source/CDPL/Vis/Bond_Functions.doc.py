@@ -23,6 +23,33 @@
 # \brief 
 # \param bond 
 #
+def clearConfigurationLabelSize(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasConfigurationLabelSize(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getConfigurationLabelSize(bond: Chem.Bond) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param bond 
+# \param size 
+#
+def setConfigurationLabelSize(bond: Chem.Bond, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
 def clearLabelSize(bond: Chem.Bond) -> None: pass
 
 ##
@@ -315,6 +342,33 @@ def getColor(bond: Chem.Bond) -> Color: pass
 # \param color 
 #
 def setColor(bond: Chem.Bond, color: Color) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
+def clearConfigurationLabelFont(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasConfigurationLabelFont(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getConfigurationLabelFont(bond: Chem.Bond) -> Font: pass
+
+##
+# \brief 
+# \param bond 
+# \param font 
+#
+def setConfigurationLabelFont(bond: Chem.Bond, font: Font) -> None: pass
 
 ##
 # \brief 
