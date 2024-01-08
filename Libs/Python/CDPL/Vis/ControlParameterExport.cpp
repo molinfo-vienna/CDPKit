@@ -99,5 +99,11 @@ void CDPLPythonVis::exportControlParameters()
         .def_readonly("SIZE_ADJUSTMENT", &Vis::ControlParameter::SIZE_ADJUSTMENT)
         .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::ControlParameter::TRIPLE_BOND_TRIM_LENGTH)
         .def_readonly("USE_CALCULATED_ATOM_COORDINATES", &Vis::ControlParameter::USE_CALCULATED_ATOM_COORDINATES)
-        .def_readonly("VIEWPORT", &Vis::ControlParameter::VIEWPORT);
+        .def_readonly("VIEWPORT", &Vis::ControlParameter::VIEWPORT)
+        .def_readonly("SHOW_ATOM_CONFIGURATION_LABELS", &Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_FONT", &Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("SHOW_BOND_CONFIGURATION_LABELS", &Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS)
+        .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT)
+        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE);
 }

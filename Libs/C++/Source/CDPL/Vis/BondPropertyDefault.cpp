@@ -36,7 +36,7 @@ namespace CDPL
         namespace BondPropertyDefault
         {
 
-            const Color COLOR                                    = Color(0, 0, 0);
+            const Color             COLOR                        = Color(0, 0, 0);
             const SizeSpecification LINE_WIDTH                   = SizeSpecification(1.0, false, false, true);
             const SizeSpecification LINE_SPACING                 = SizeSpecification(0.15, true, true, true);
             const SizeSpecification STEREO_BOND_WEDGE_WIDTH      = SizeSpecification(0.15, true, true, true);
@@ -45,9 +45,11 @@ namespace CDPL
             const SizeSpecification REACTION_CENTER_LINE_SPACING = SizeSpecification(0.1, true, true, true);
             const SizeSpecification DOUBLE_BOND_TRIM_LENGTH      = SizeSpecification(0.1, true, true, true);
             const SizeSpecification TRIPLE_BOND_TRIM_LENGTH      = SizeSpecification(0.1, true, true, true);
-            const Font LABEL_FONT                                = Font();
+            const Font              LABEL_FONT                   = Font();
             const SizeSpecification LABEL_SIZE                   = SizeSpecification(8.0, false, false, true);
             const SizeSpecification LABEL_MARGIN                 = SizeSpecification(2.0, false, false, true);
+            const Font              CONFIGURATION_LABEL_FONT            = Font();
+            const SizeSpecification CONFIGURATION_LABEL_SIZE            = SizeSpecification(8.0, false, false, true);
         }
 
         void initBondPropertyDefaults() {}

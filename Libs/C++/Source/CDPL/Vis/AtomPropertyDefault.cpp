@@ -36,13 +36,15 @@ namespace CDPL
         namespace AtomPropertyDefault
         {
 
-            const Color COLOR                                 = Color(0, 0, 0);
-            const Font LABEL_FONT                             = Font();
+            const Color             COLOR                     = Color(0, 0, 0);
+            const Font              LABEL_FONT                = Font();
             const SizeSpecification LABEL_SIZE                = SizeSpecification(10.0, false, false, true);
-            const Font SECONDARY_LABEL_FONT                   = Font();
+            const Font              SECONDARY_LABEL_FONT      = Font();
             const SizeSpecification SECONDARY_LABEL_SIZE      = SizeSpecification(6.0, false, false, true);
             const SizeSpecification LABEL_MARGIN              = SizeSpecification(2.0, false, false, true);
             const SizeSpecification RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(1.0, false, false, true);
+            const Font              CONFIGURATION_LABEL_FONT         = Font();
+            const SizeSpecification CONFIGURATION_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
         }
 
         void initAtomPropertyDefaults() {}

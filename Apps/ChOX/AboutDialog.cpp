@@ -35,8 +35,7 @@ namespace
 
     const char* ABOUT_TEXT =
         "<h2 align=center><b>- ChOX -</b></h2>"
-        "<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
-        "<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
+        "<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer - Visualization and Manipulation of Chemical Datasets</b></h2>"
         "<p align=center>&copy; 2003 Thomas Seidel (thomas.seidel@univie.ac.at)</p>"
         "<p align=justify>This program is free software; you can redistribute it and/or modify it under "
         "the terms<br>of the GNU Lesser General Public License as published by the Free Software "

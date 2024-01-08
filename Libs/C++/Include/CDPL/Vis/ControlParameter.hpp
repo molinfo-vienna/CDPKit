@@ -450,6 +450,36 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey SECONDARY_ATOM_LABEL_SIZE;
 
             /**
+             * \brief Specifies the font used for atom configuration descriptor text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT and
+             * Vis::AtomProperty::CONFIGURATION_LABEL_FONT are not set, the default setting Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT
+             * will be used.
+             *
+             * \valuetype Vis::Font
+             * \note The control-parameter setting is ignored if a font has been specified by 
+             *       Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT or Vis::AtomProperty::CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of atom configuration descriptor text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::ATOM_LABEL_SIZE, Vis::MolecularGraphProperty::ATOM_LABEL_SIZE or Vis::AtomProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. If the control-parameter is left unspecified and the properties 
+             * Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE and Vis::AtomProperty::CONFIGURATION_LABEL_SIZE are not set, the default
+             * setting Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE will be used.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a size has been specified by 
+             *       Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE or Vis::AtomProperty::ATOM_CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
+
+            /**
              * \brief Specifies the margin of free space around atom labels.
              *
              * The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by
@@ -589,6 +619,16 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_RADICAL_ELECTRONS;
+            
+            /**
+             * \brief Specifies whether or not to show atom configuration descriptor labels.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS will be used.
+             *
+             * \valuetype \c bool
+             */
+            extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_CONFIGURATION_LABELS;
 
             /**
              * \brief Specifies the desired average bond length for the visualization of chemical structures.
@@ -771,7 +811,37 @@ namespace CDPL
              *       Vis::BondProperty::LABEL_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_SIZE;
-
+      
+            /**
+             * \brief Specifies the font used for bond configuration descriptor text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT and
+             * Vis::BondProperty::CONFIGURATION_LABEL_FONT are not set, the default setting Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT
+             * will be used.
+             *
+             * \valuetype Vis::Font
+             * \note The control-parameter setting is ignored if a font has been specified by 
+             *       Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT or Vis::BondProperty::CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of bond configuration descriptor text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::BOND_LABEL_SIZE, Vis::MolecularGraphProperty::BOND_LABEL_SIZE or Vis::BondProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. If the control-parameter is left unspecified and the properties 
+             * Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE and Vis::BondProperty::CONFIGURATION_LABEL_SIZE are not set, the default
+             * setting Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE will be used.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a size has been specified by 
+             *       Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE or Vis::BondProperty::CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
+            
             /**
              * \brief Specifies the margin of free space around bond labels.
              *
@@ -844,6 +914,16 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_STEREO_BONDS;
+
+            /**
+             * \brief Specifies whether or not to show bond configuration descriptor labels.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS will be used.
+             *
+             * \valuetype \c bool
+             */
+            extern CDPL_VIS_API const Base::LookupKey SHOW_BOND_CONFIGURATION_LABELS;
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

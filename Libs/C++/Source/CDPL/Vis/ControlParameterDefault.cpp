@@ -89,24 +89,30 @@ namespace CDPL
             const bool                      SHOW_ATOM_QUERY_INFOS                = true;
             const bool                      SHOW_ATOM_REACTION_INFOS             = true;
             const bool                      SHOW_RADICAL_ELECTRONS               = true;
+            const bool                      SHOW_ATOM_CONFIGURATION_LABELS       = false;
+            const Font                      ATOM_CONFIGURATION_LABEL_FONT        = Font("", 8.0, false, true);
+            const SizeSpecification         ATOM_CONFIGURATION_LABEL_SIZE        = SizeSpecification(8.0, false, false, true);
 
-            const Color                     BOND_COLOR                           = Color(0, 0, 0);
-            const SizeSpecification         BOND_LENGTH                          = SizeSpecification(30.0);
-            const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.0, false, false, true);
-            const SizeSpecification         BOND_LINE_SPACING                    = SizeSpecification(0.15, true, true, true);
-            const SizeSpecification         STEREO_BOND_WEDGE_WIDTH              = SizeSpecification(0.15, true, true, true);
-            const SizeSpecification         STEREO_BOND_HASH_SPACING             = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification         REACTION_CENTER_LINE_LENGTH          = SizeSpecification(0.4, true, true, true);
-            const SizeSpecification         REACTION_CENTER_LINE_SPACING         = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification         DOUBLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification         TRIPLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
-            const Font                      BOND_LABEL_FONT                      = Font();
-            const SizeSpecification         BOND_LABEL_SIZE                      = SizeSpecification(8.0, false, false, true);
-            const SizeSpecification         BOND_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
-            const bool                      SHOW_BOND_REACTION_INFOS             = true;
-            const bool                      SHOW_BOND_QUERY_INFOS                = true;
-            const bool                      SHOW_STEREO_BONDS                    = true;
-        }
+            const Color             BOND_COLOR                     = Color(0, 0, 0);
+            const SizeSpecification BOND_LENGTH                    = SizeSpecification(30.0);
+            const SizeSpecification BOND_LINE_WIDTH                = SizeSpecification(1.0, false, false, true);
+            const SizeSpecification BOND_LINE_SPACING              = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification STEREO_BOND_WEDGE_WIDTH        = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification STEREO_BOND_HASH_SPACING       = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification REACTION_CENTER_LINE_LENGTH    = SizeSpecification(0.4, true, true, true);
+            const SizeSpecification REACTION_CENTER_LINE_SPACING   = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification DOUBLE_BOND_TRIM_LENGTH        = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification TRIPLE_BOND_TRIM_LENGTH        = SizeSpecification(0.1, true, true, true);
+            const Font              BOND_LABEL_FONT                = Font();
+            const SizeSpecification BOND_LABEL_SIZE                = SizeSpecification(8.0, false, false, true);
+            const SizeSpecification BOND_LABEL_MARGIN              = SizeSpecification(2.0, false, false, true);
+            const bool              SHOW_BOND_REACTION_INFOS       = true;
+            const bool              SHOW_BOND_QUERY_INFOS          = true;
+            const bool              SHOW_STEREO_BONDS              = true;
+            const bool              SHOW_BOND_CONFIGURATION_LABELS = false;
+            const Font              BOND_CONFIGURATION_LABEL_FONT  = Font("", 8.0, false, true);
+            const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
+        } // namespace ControlParameterDefault
 
         void initControlParameterDefaults() {}
     }

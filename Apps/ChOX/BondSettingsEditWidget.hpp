@@ -68,7 +68,9 @@ namespace ChOX
         Settings&                    settings;
         CDPL::Vis::Color             color;
         CDPL::Vis::Font              labelFont;
+        CDPL::Vis::Font              configLabelFont;
         CDPL::Vis::SizeSpecification labelSize;
+        CDPL::Vis::SizeSpecification configLabelSize;
         CDPL::Vis::SizeSpecification labelMargin;
         CDPL::Vis::SizeSpecification bondLength;
         CDPL::Vis::SizeSpecification bondLineWidth;
@@ -82,6 +84,7 @@ namespace ChOX
         QCheckBox*                   showQueryInfosCheckBox;
         QCheckBox*                   showReactionInfosCheckBox;
         QCheckBox*                   showBondStereoCheckBox;
+        QCheckBox*                   showBondConfigLabelsCheckBox;
         bool                         haveChanges;
     };
 } // namespace ChOX

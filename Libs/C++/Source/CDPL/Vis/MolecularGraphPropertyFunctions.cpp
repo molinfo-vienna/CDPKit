@@ -30,29 +30,29 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
-    TYPE Vis::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
-    {                                                                    \
-        return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)                        \
+    TYPE Vis::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)                          \
+    {                                                                                         \
+        return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME,         \
                                                    MolecularGraphPropertyDefault::PROP_NAME); \
-    }                                                                    \
-                                                                        \
-    void Vis::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg) \
-    {                                                                    \
-        molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);    \
-    }                                                                    \
-                                                                        \
-    bool Vis::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
-    {                                                                    \
-        return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
-    }                                                                    \
-                                                                        \
-    void Vis::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)        \
-    {                                                                    \
-        molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);        \
+    }                                                                                         \
+                                                                                              \
+    void Vis::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg)                      \
+    {                                                                                         \
+        molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);                         \
+    }                                                                                         \
+                                                                                              \
+    bool Vis::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)                          \
+    {                                                                                         \
+        return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME);                     \
+    }                                                                                         \
+                                                                                              \
+    void Vis::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)                              \
+    {                                                                                         \
+        molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);                           \
     }
 
 
@@ -64,6 +64,8 @@ MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(SECONDARY_ATOM_LABEL_FONT, const Vis::Font&, Se
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(SECONDARY_ATOM_LABEL_SIZE, const Vis::SizeSpecification&, SecondaryAtomLabelSize)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(ATOM_LABEL_MARGIN, const Vis::SizeSpecification&, AtomLabelMargin)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(RADICAL_ELECTRON_DOT_SIZE, const Vis::SizeSpecification&, RadicalElectronDotSize)
+MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(ATOM_CONFIGURATION_LABEL_FONT, const Vis::Font&, AtomConfigurationLabelFont)
+MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(ATOM_CONFIGURATION_LABEL_SIZE, const Vis::SizeSpecification&, AtomConfigurationLabelSize)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_COLOR, const Vis::Color&, BondColor)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_LINE_WIDTH, const Vis::SizeSpecification&, BondLineWidth)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_LINE_SPACING, const Vis::SizeSpecification&, BondLineSpacing)
@@ -76,3 +78,5 @@ MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(TRIPLE_BOND_TRIM_LENGTH, const Vis::SizeSpecifi
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_LABEL_FONT, const Vis::Font&, BondLabelFont)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_LABEL_SIZE, const Vis::SizeSpecification&, BondLabelSize)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_LABEL_MARGIN, const Vis::SizeSpecification&, BondLabelMargin)
+MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_CONFIGURATION_LABEL_FONT, const Vis::Font&, BondConfigurationLabelFont)
+MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(BOND_CONFIGURATION_LABEL_SIZE, const Vis::SizeSpecification&, BondConfigurationLabelSize)

@@ -56,6 +56,8 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification         SECONDARY_ATOM_LABEL_SIZE;
             extern CDPL_VIS_API const SizeSpecification         ATOM_LABEL_MARGIN;
             extern CDPL_VIS_API const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE;
+            extern CDPL_VIS_API const Font                      ATOM_CONFIGURATION_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification         ATOM_CONFIGURATION_LABEL_SIZE;
             extern CDPL_VIS_API const Color                     BOND_COLOR;
             extern CDPL_VIS_API const SizeSpecification         BOND_LINE_WIDTH;
             extern CDPL_VIS_API const SizeSpecification         BOND_LINE_SPACING;
@@ -68,6 +70,8 @@ namespace CDPL
             extern CDPL_VIS_API const Font                      BOND_LABEL_FONT;
             extern CDPL_VIS_API const SizeSpecification         BOND_LABEL_SIZE;
             extern CDPL_VIS_API const SizeSpecification         BOND_LABEL_MARGIN;
+            extern CDPL_VIS_API const Font                      BOND_CONFIGURATION_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification         BOND_CONFIGURATION_LABEL_SIZE;
         } // namespace MolecularGraphPropertyDefault
     } // namespace Vis
 } // namespace CDPL

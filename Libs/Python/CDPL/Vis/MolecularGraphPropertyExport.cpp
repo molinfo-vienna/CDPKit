@@ -62,5 +62,9 @@ void CDPLPythonVis::exportMolecularGraphProperties()
         .def_readonly("STEREO_BOND_HASH_SPACING", &Vis::MolecularGraphProperty::STEREO_BOND_HASH_SPACING)
         .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::MolecularGraphProperty::STEREO_BOND_WEDGE_WIDTH)
         .def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphProperty::DOUBLE_BOND_TRIM_LENGTH)
-        .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphProperty::TRIPLE_BOND_TRIM_LENGTH);
+        .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphProperty::TRIPLE_BOND_TRIM_LENGTH)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_FONT", &Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT)
+        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE);
 }

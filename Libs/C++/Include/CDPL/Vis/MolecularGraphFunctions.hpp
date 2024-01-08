@@ -121,6 +121,24 @@ namespace CDPL
         CDPL_VIS_API void clearRadicalElectronDotSize(Chem::MolecularGraph& molgraph);
 
 
+        CDPL_VIS_API const Font& getAtomConfigurationLabelFont(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomConfigurationLabelFont(Chem::MolecularGraph& molgraph, const Font& font);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelFont(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelFont(Chem::MolecularGraph& molgraph);
+
+
+        CDPL_VIS_API const SizeSpecification& getAtomConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomConfigurationLabelSize(Chem::MolecularGraph& molgraph, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelSize(Chem::MolecularGraph& molgraph);
+
+        
         CDPL_VIS_API const Color& getBondColor(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void setBondColor(Chem::MolecularGraph& molgraph, const Color& color);
@@ -227,6 +245,24 @@ namespace CDPL
         CDPL_VIS_API bool hasBondLabelMargin(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void clearBondLabelMargin(Chem::MolecularGraph& molgraph);
+
+
+        CDPL_VIS_API const Font& getBondConfigurationLabelFont(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondConfigurationLabelFont(Chem::MolecularGraph& molgraph, const Font& font);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelFont(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondConfigurationLabelFont(Chem::MolecularGraph& molgraph);
+
+
+        CDPL_VIS_API const SizeSpecification& getBondConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondConfigurationLabelSize(Chem::MolecularGraph& molgraph, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondConfigurationLabelSize(Chem::MolecularGraph& molgraph);
     } // namespace Vis
 } // namespace CDPL
 

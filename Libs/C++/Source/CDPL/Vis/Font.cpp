@@ -34,8 +34,8 @@ Vis::Font::Font():
     family(), size(12.0), bold(false), italic(false), underlined(false), 
     overlined(false), strikedOut(false), fixedPitch(false) {}
 
-Vis::Font::Font(const std::string& family, double size):
-    family(family), size(size < 0.0 ? 0.0 : size), bold(false), italic(false), underlined(false), 
+Vis::Font::Font(const std::string& family, double size, bool bold, bool italic):
+    family(family), size(size < 0.0 ? 0.0 : size), bold(bold), italic(italic), underlined(false), 
     overlined(false), strikedOut(false), fixedPitch(false) {}
 
 void Vis::Font::setFamily(const std::string& family)

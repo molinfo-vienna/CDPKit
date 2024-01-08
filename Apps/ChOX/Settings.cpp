@@ -222,6 +222,9 @@ void Settings::load()
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_QUERY_INFOS, Vis::ControlParameterDefault::SHOW_ATOM_QUERY_INFOS);
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_REACTION_INFOS, Vis::ControlParameterDefault::SHOW_ATOM_REACTION_INFOS);
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_RADICAL_ELECTRONS, Vis::ControlParameterDefault::SHOW_RADICAL_ELECTRONS);
+    readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, Vis::ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS);
+    readSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE);
+    readFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT);
 
     settings.endGroup();
 
@@ -243,6 +246,9 @@ void Settings::load()
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_REACTION_INFOS, Vis::ControlParameterDefault::SHOW_BOND_REACTION_INFOS);
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_QUERY_INFOS, Vis::ControlParameterDefault::SHOW_BOND_QUERY_INFOS);
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_STEREO_BONDS, Vis::ControlParameterDefault::SHOW_STEREO_BONDS);
+    readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS, Vis::ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS);
+    readSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE);
+    readFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT);
 
     settings.endGroup();
 
@@ -789,7 +795,10 @@ void Settings::save() const
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_QUERY_INFOS);
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_REACTION_INFOS);
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_RADICAL_ELECTRONS);
-
+    writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS);
+    writeSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE);
+    writeFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT);
+    
     settings.endGroup();
 
     settings.beginGroup("Bonds");
@@ -810,7 +819,10 @@ void Settings::save() const
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_REACTION_INFOS);
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_QUERY_INFOS);
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_STEREO_BONDS);
-
+    writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS);
+    writeSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE);
+    writeFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT);
+ 
     settings.endGroup();
 
     settings.beginGroup("Printing");

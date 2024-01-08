@@ -206,6 +206,16 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification SECONDARY_ATOM_LABEL_SIZE;
 
             /**
+             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Font ATOM_CONFIGURATION_LABEL_FONT;
+
+            /**
+             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const SizeSpecification ATOM_CONFIGURATION_LABEL_SIZE;
+
+            /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_MARGIN;
@@ -260,6 +270,11 @@ namespace CDPL
              */
             extern CDPL_VIS_API const bool SHOW_RADICAL_ELECTRONS;
 
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS.
+             */
+            extern CDPL_VIS_API const bool SHOW_ATOM_CONFIGURATION_LABELS;
+             
             /**
              * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_COLOR.
              */
@@ -321,6 +336,16 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_SIZE;
 
             /**
+             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Font BOND_CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE;
+            
+            /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
@@ -339,6 +364,11 @@ namespace CDPL
              * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_STEREO_BONDS.
              */
             extern CDPL_VIS_API const bool SHOW_STEREO_BONDS;
+
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS.
+             */
+            extern CDPL_VIS_API const bool SHOW_BOND_CONFIGURATION_LABELS;
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL

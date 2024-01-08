@@ -40,26 +40,26 @@ namespace CDPL
         namespace ReactionPropertyDefault
         {
 
-            const unsigned int ARROW_STYLE                = ArrowStyle::REACTION_SOLID;
-            const Color ARROW_COLOR                       = Color(0, 0, 0);
-            const SizeSpecification ARROW_LENGTH          = SizeSpecification(35.0, true, true, true);
-            const SizeSpecification ARROW_HEAD_LENGTH     = SizeSpecification(8.0, false, true, true);
-            const SizeSpecification ARROW_HEAD_WIDTH      = SizeSpecification(5.0, false, true, true);
-            const SizeSpecification ARROW_SHAFT_WIDTH     = SizeSpecification(0.0, false, true, true);
-            const SizeSpecification ARROW_LINE_WIDTH      = SizeSpecification(1.0, false, true, true);
-            const unsigned int COMPONENT_LAYOUT           = LayoutStyle::PACKED;
-            const unsigned int COMPONENT_LAYOUT_DIRECTION = LayoutDirection::HORIZONTAL;
-            const SizeSpecification COMPONENT_MARGIN      = SizeSpecification(5.0, false, true, true);
-            const bool SHOW_REACTANTS                     = true;
-            const bool SHOW_AGENTS                        = true;
-            const bool SHOW_PRODUCTS                      = true;
-            const unsigned int AGENT_ALIGNMENT            = Alignment::V_CENTER;
-            const unsigned int AGENT_LAYOUT               = LayoutStyle::LINEAR;
-            const unsigned int AGENT_LAYOUT_DIRECTION     = LayoutDirection::HORIZONTAL;
-            const Color PLUS_SIGN_COLOR                   = Color(0, 0, 0);
-            const SizeSpecification PLUS_SIGN_SIZE        = SizeSpecification(10.0, false, true, true);
-            const SizeSpecification PLUS_SIGN_LINE_WIDTH  = SizeSpecification(3.0, false, true, true);
-            const bool SHOW_PLUS_SIGNS                    = true;
+            const unsigned int      ARROW_STYLE                = ArrowStyle::REACTION_SOLID;
+            const Color             ARROW_COLOR                = Color(0, 0, 0);
+            const SizeSpecification ARROW_LENGTH               = SizeSpecification(35.0, true, true, true);
+            const SizeSpecification ARROW_HEAD_LENGTH          = SizeSpecification(8.0, false, true, true);
+            const SizeSpecification ARROW_HEAD_WIDTH           = SizeSpecification(5.0, false, true, true);
+            const SizeSpecification ARROW_SHAFT_WIDTH          = SizeSpecification(0.0, false, true, true);
+            const SizeSpecification ARROW_LINE_WIDTH           = SizeSpecification(1.0, false, true, true);
+            const unsigned int      COMPONENT_LAYOUT           = LayoutStyle::PACKED;
+            const unsigned int      COMPONENT_LAYOUT_DIRECTION = LayoutDirection::HORIZONTAL;
+            const SizeSpecification COMPONENT_MARGIN           = SizeSpecification(5.0, false, true, true);
+            const bool              SHOW_REACTANTS             = true;
+            const bool              SHOW_AGENTS                = true;
+            const bool              SHOW_PRODUCTS              = true;
+            const unsigned int      AGENT_ALIGNMENT            = Alignment::V_CENTER;
+            const unsigned int      AGENT_LAYOUT               = LayoutStyle::LINEAR;
+            const unsigned int      AGENT_LAYOUT_DIRECTION     = LayoutDirection::HORIZONTAL;
+            const Color             PLUS_SIGN_COLOR            = Color(0, 0, 0);
+            const SizeSpecification PLUS_SIGN_SIZE             = SizeSpecification(10.0, false, true, true);
+            const SizeSpecification PLUS_SIGN_LINE_WIDTH       = SizeSpecification(3.0, false, true, true);
+            const bool              SHOW_PLUS_SIGNS            = true;
         }
 
         void initReactionPropertyDefaults() {}

@@ -58,10 +58,12 @@ void AtomGeneralSettingsEditWidget::apply()
 
     setAtomLabelFontParameter(settings, labelFont);
     setSecondaryAtomLabelFontParameter(settings, secondaryLabelFont);
-
+    setAtomConfigurationLabelFontParameter(settings, configLabelFont);
+    
     setAtomLabelSizeParameter(settings, labelSize);
     setSecondaryAtomLabelSizeParameter(settings, secondaryLabelSize);
-
+    setAtomConfigurationLabelSizeParameter(settings, configLabelSize);
+    
     setAtomLabelMarginParameter(settings, labelMargin);
     setRadicalElectronDotSizeParameter(settings, electronDotSize);
 
@@ -74,6 +76,7 @@ void AtomGeneralSettingsEditWidget::apply()
     setShowAtomQueryInfosParameter(settings, showQueryInfosCheckBox->isChecked());
     setShowAtomReactionInfosParameter(settings, showReactionInfosCheckBox->isChecked());
     setShowRadicalElectronsParameter(settings, showRadicalElectronsCheckBox->isChecked());
+    setShowAtomConfigurationLabelsParameter(settings, showConfigLabelsCheckBox->isChecked());
     setUseCalculatedAtomCoordinatesParameter(settings, useCalcAtomCoordsCheckBox->isChecked());
 }
 
@@ -86,10 +89,12 @@ void AtomGeneralSettingsEditWidget::reset()
 
     labelFont = getAtomLabelFontParameter(settings);
     secondaryLabelFont = getSecondaryAtomLabelFontParameter(settings);
-
+    configLabelFont = getAtomConfigurationLabelFontParameter(settings);
+    
     labelSize = getAtomLabelSizeParameter(settings);
     secondaryLabelSize = getSecondaryAtomLabelSizeParameter(settings);
-
+    configLabelSize = getAtomConfigurationLabelSizeParameter(settings);
+    
     labelMargin = getAtomLabelMarginParameter(settings);
     electronDotSize = getRadicalElectronDotSizeParameter(settings);
 
@@ -102,6 +107,7 @@ void AtomGeneralSettingsEditWidget::reset()
     showQueryInfosCheckBox->setChecked(getShowAtomQueryInfosParameter(settings));
     showReactionInfosCheckBox->setChecked(getShowAtomReactionInfosParameter(settings));
     showRadicalElectronsCheckBox->setChecked(getShowRadicalElectronsParameter(settings));
+    showConfigLabelsCheckBox->setChecked(getShowAtomConfigurationLabelsParameter(settings));
     useCalcAtomCoordsCheckBox->setChecked(getUseCalculatedAtomCoordinatesParameter(settings));
 
     blockSignals(false);
@@ -119,10 +125,12 @@ void AtomGeneralSettingsEditWidget::setDefaults()
 
     labelFont = ATOM_LABEL_FONT;
     secondaryLabelFont = SECONDARY_ATOM_LABEL_FONT;
-
+    configLabelFont = ATOM_CONFIGURATION_LABEL_FONT;
+    
     labelSize = ATOM_LABEL_SIZE;
     secondaryLabelSize = SECONDARY_ATOM_LABEL_SIZE;
-
+    configLabelSize = ATOM_CONFIGURATION_LABEL_SIZE;
+    
     labelMargin = ATOM_LABEL_MARGIN;
     electronDotSize = RADICAL_ELECTRON_DOT_SIZE;
 
@@ -135,6 +143,7 @@ void AtomGeneralSettingsEditWidget::setDefaults()
     showQueryInfosCheckBox->setChecked(SHOW_ATOM_QUERY_INFOS);
     showReactionInfosCheckBox->setChecked(SHOW_ATOM_REACTION_INFOS);
     showRadicalElectronsCheckBox->setChecked(SHOW_RADICAL_ELECTRONS);
+    showConfigLabelsCheckBox->setChecked(SHOW_ATOM_CONFIGURATION_LABELS);
     useCalcAtomCoordsCheckBox->setChecked(USE_CALCULATED_ATOM_COORDINATES);
 
     haveChanges = true;
@@ -184,6 +193,13 @@ void AtomGeneralSettingsEditWidget::init()
     grid_layout->addWidget(showChargesCheckBox, 0, 1);
 
     connect(showChargesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    showConfigLabelsCheckBox = new QCheckBox(tr("&CIP Configuration Labels"), group_box);
+    grid_layout->addWidget(showConfigLabelsCheckBox, 0, 2);
+
+    connect(showConfigLabelsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
@@ -278,6 +294,22 @@ void AtomGeneralSettingsEditWidget::init()
     font_edit_widget = new FontEditWidget(group_box, secondaryLabelFont, secondaryLabelSize, &labelSize, true);
 
     grid_layout->addWidget(font_edit_widget, 1, 1);
+
+    label->setBuddy(font_edit_widget);
+
+    connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
+
+    connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
+
+// +++
+
+    label = new QLabel(tr("C&IP Config. Label Font:"), group_box);
+
+    grid_layout->addWidget(label, 2, 0);
+
+    font_edit_widget = new FontEditWidget(group_box, configLabelFont, configLabelSize, &labelSize, true);
+
+    grid_layout->addWidget(font_edit_widget, 2, 1);
 
     label->setBuddy(font_edit_widget);
 

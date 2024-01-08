@@ -34,29 +34,29 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)        \
-    TYPE Vis::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
-                                                 ControlParameterDefault::PARAM_NAME); \
-    }                                                                    \
-                                                                        \
+#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)                         \
+    TYPE Vis::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                      \
+        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,             \
+                                                 ControlParameterDefault::PARAM_NAME);     \
+    }                                                                                      \
+                                                                                           \
     void Vis::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
-    {                                                                    \
-        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);            \
-    }                                                                    \
-                                                                        \
-    bool Vis::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);        \
-    }                                                                    \
-                                                                        \
-    void Vis::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        cntnr.removeParameter(ControlParameter::PARAM_NAME);            \
+    {                                                                                      \
+        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                             \
+    }                                                                                      \
+                                                                                           \
+    bool Vis::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                      \
+        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);                         \
+    }                                                                                      \
+                                                                                           \
+    void Vis::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)         \
+    {                                                                                      \
+        cntnr.removeParameter(ControlParameter::PARAM_NAME);                               \
     }
 
 
@@ -104,6 +104,9 @@ MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_NON_CARBON_HYDROGEN_COUNTS, bool, ShowNonCarbo
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_ATOM_QUERY_INFOS, bool, ShowAtomQueryInfos)
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_ATOM_REACTION_INFOS, bool, ShowAtomReactionInfos)
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_RADICAL_ELECTRONS, bool, ShowRadicalElectrons)
+MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_ATOM_CONFIGURATION_LABELS, bool, ShowAtomConfigurationLabels)
+MAKE_CONTROL_PARAM_FUNCTIONS(ATOM_CONFIGURATION_LABEL_SIZE, const Vis::SizeSpecification&, AtomConfigurationLabelSize)
+MAKE_CONTROL_PARAM_FUNCTIONS(ATOM_CONFIGURATION_LABEL_FONT, const Vis::Font&, AtomConfigurationLabelFont)
 
 MAKE_CONTROL_PARAM_FUNCTIONS(BOND_LENGTH, const Vis::SizeSpecification&, BondLength)
 MAKE_CONTROL_PARAM_FUNCTIONS(BOND_COLOR, const Vis::Color&, BondColor)
@@ -121,3 +124,6 @@ MAKE_CONTROL_PARAM_FUNCTIONS(BOND_LABEL_MARGIN, const Vis::SizeSpecification&, B
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_BOND_REACTION_INFOS, bool, ShowBondReactionInfos)
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_BOND_QUERY_INFOS, bool, ShowBondQueryInfos)
 MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_STEREO_BONDS, bool, ShowStereoBonds)
+MAKE_CONTROL_PARAM_FUNCTIONS(SHOW_BOND_CONFIGURATION_LABELS, bool, ShowBondConfigurationLabels)
+MAKE_CONTROL_PARAM_FUNCTIONS(BOND_CONFIGURATION_LABEL_SIZE, const Vis::SizeSpecification&, BondConfigurationLabelSize)
+MAKE_CONTROL_PARAM_FUNCTIONS(BOND_CONFIGURATION_LABEL_FONT, const Vis::Font&, BondConfigurationLabelFont)

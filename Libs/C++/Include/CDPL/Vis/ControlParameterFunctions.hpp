@@ -428,6 +428,33 @@ namespace CDPL
         CDPL_VIS_API void clearShowRadicalElectronsParameter(Base::ControlParameterContainer& cntnr);
 
 
+        CDPL_VIS_API bool getShowAtomConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setShowAtomConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr, bool show);
+
+        CDPL_VIS_API bool hasShowAtomConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearShowAtomConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_VIS_API const SizeSpecification& getAtomConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setAtomConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_VIS_API const Font& getAtomConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setAtomConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr, const Font& font);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_VIS_API const SizeSpecification& getBondLengthParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void setBondLengthParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& length);
@@ -570,6 +597,34 @@ namespace CDPL
         CDPL_VIS_API bool hasShowStereoBondsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearShowStereoBondsParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_VIS_API bool getShowBondConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setShowBondConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr, bool show);
+
+        CDPL_VIS_API bool hasShowBondConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearShowBondConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr);
+
+        
+        CDPL_VIS_API const SizeSpecification& getBondConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBondConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr);
+
+        
+        CDPL_VIS_API const Font& getBondConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBondConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr, const Font& font);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
+
     } // namespace Vis
 } // namespace CDPL
 

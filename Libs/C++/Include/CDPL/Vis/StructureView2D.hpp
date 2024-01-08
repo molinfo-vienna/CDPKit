@@ -142,6 +142,14 @@ namespace CDPL
          *   <td>Specifies the size of text labels that show the value of various atomic properties</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom confiiguration labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::ATOM_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around atom labels</td>
          *  </tr>
@@ -184,6 +192,10 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_RADICAL_ELECTRONS</td>
          *   <td>Specifies whether or not to draw radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS</td>
+         *   <td>Specifies whether or not to show atom confiuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::BOND_LENGTH</td>
@@ -234,6 +246,14 @@ namespace CDPL
          *   <td>Specifies the size of bond labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond confiiguration labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
          *  </tr>
@@ -248,6 +268,10 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_STEREO_BONDS</td>
          *   <td>Specifies whether or not to draw stereo bonds</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS</td>
+         *   <td>Specifies whether or not to show bond confiuration labels</td>
          *  </tr>
          * </table>
          *
@@ -282,6 +306,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::SECONDARY_ATOM_LABEL_SIZE</td>
          *   <td>Specifies the size of text labels that show the value of various atomic properties</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::ATOM_LABEL_MARGIN</td>
@@ -336,6 +368,14 @@ namespace CDPL
          *   <td>Specifies the size of bond labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
          *  </tr>
@@ -358,6 +398,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::AtomProperty::LABEL_SIZE</td>
          *   <td>Specifies the size of atom element and query match expression labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of atom configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::AtomProperty::SECONDARY_LABEL_FONT</td>
@@ -426,6 +474,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::BondProperty::LABEL_SIZE</td>
          *   <td>Specifies the size of bond labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_FONT</td>
+         *   <td>Specifies the font for bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_SIZE</td>
+         *   <td>Specifies the size of bond configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::BondProperty::LABEL_MARGIN</td>
@@ -517,12 +573,14 @@ namespace CDPL
             void   createAtomChargeLabelPrimitive(const Chem::Atom&, long, std::size_t, Rectangle2D&);
             void   createAtomHCountLabelPrimitives(const Chem::Atom&, std::size_t, double, Rectangle2D&);
             void   createAtomMappingLabelPrimitive(const Chem::Atom&, std::size_t, const Rectangle2D&);
+            void   createAtomConfigLabelPrimitive(const Chem::Atom&, char);
 
             void createBondPrimitives();
 
             void   createBondLabelPrimitives(const Chem::Bond&, const Line2D&, int);
             double createBondRxnInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int);
             void   createBondQueryInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int, double);
+            void   createBondConfigLabelPrimitive(const Chem::Bond&, const Line2D&, int);
 
             void createUndefOrderBondPrimitives(const Chem::Bond&, const Line2D&);
             void createSingleBondPrimitives(const Chem::Bond&, const Line2D&);
@@ -589,25 +647,32 @@ namespace CDPL
             double getWedgeWidth(const Chem::Bond&) const;
             double getHashSpacing(const Chem::Bond&) const;
             double getLabelSize(const Chem::Bond&) const;
+            double getConfigLabelSize(const Chem::Bond&) const;
 
             const Color&             getColor(const Chem::Bond&) const;
             const Font&              getLabelFont(const Chem::Bond&) const;
+            const Font&              getConfigLabelFont(const Chem::Bond&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Bond&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Bond&) const;
-
+            const SizeSpecification& getConfigLabelSizeSpec(const Chem::Bond&) const;
+            
             void setupLabelMargin(const Chem::Bond&);
             void setupPen(const Chem::Bond&);
             void setupLabelFont(const Chem::Bond&);
+            void setupConfigLabelFont(const Chem::Bond&);
 
             double getLabelSize(const Chem::Atom&) const;
             double getSecondaryLabelSize(const Chem::Atom&) const;
+            double getConfigLabelSize(const Chem::Atom&) const;
             double getElectronDotSize(const Chem::Atom&) const;
 
             const Color&             getColor(const Chem::Atom&) const;
             const Font&              getLabelFont(const Chem::Atom&) const;
             const Font&              getSecondaryLabelFont(const Chem::Atom&) const;
+            const Font&              getConfigLabelFont(const Chem::Atom&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getSecondaryLabelSizeSpec(const Chem::Atom&) const;
+            const SizeSpecification& getConfigLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Atom&) const;
             const SizeSpecification& getElectronDotSizeSpec(const Chem::Atom&) const;
 
@@ -615,6 +680,7 @@ namespace CDPL
             void setupPen(const Chem::Atom&);
             void setupLabelFont(const Chem::Atom&);
             void setupSecondaryLabelFont(const Chem::Atom&);
+            void setupConfigLabelFont(const Chem::Atom&);
 
             double calcOutputSize(const Chem::Bond&, const SizeSpecification&) const;
             double calcOutputSize(const Chem::Atom&, const SizeSpecification&) const;
@@ -670,6 +736,7 @@ namespace CDPL
             Pen                          activePen;
             Font                         activeLabelFont;
             Font                         activeSecondaryLabelFont;
+            Font                         activeConfigLabelFont;
             double                       activeLabelMargin;
             bool                         reactionContext;
             bool                         hasAtomCoords;

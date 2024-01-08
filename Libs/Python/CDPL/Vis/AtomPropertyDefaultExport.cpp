@@ -48,5 +48,7 @@ void CDPLPythonVis::exportAtomPropertyDefaults()
         .def_readonly("SECONDARY_LABEL_FONT", &Vis::AtomPropertyDefault::SECONDARY_LABEL_FONT)
         .def_readonly("SECONDARY_LABEL_SIZE", &Vis::AtomPropertyDefault::SECONDARY_LABEL_SIZE)
         .def_readonly("LABEL_MARGIN", &Vis::AtomPropertyDefault::LABEL_MARGIN)
-        .def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::AtomPropertyDefault::RADICAL_ELECTRON_DOT_SIZE);
+        .def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::AtomPropertyDefault::RADICAL_ELECTRON_DOT_SIZE)
+        .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_FONT)
+        .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_SIZE);
 }

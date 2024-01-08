@@ -134,6 +134,30 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
+
+            /**
+             * \brief Specifies the font used for atom configuration descriptor text labels.
+             *
+             * The font specified by this property takes precedence over the fonts specified by Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT
+             * and Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT.
+             *
+             * \valuetype Vis::Font
+             */
+            extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of atom configuration descriptor text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::ATOM_LABEL_SIZE, Vis::MolecularGraphProperty::ATOM_LABEL_SIZE or Vis::AtomProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE and Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE. 
+             *
+             * \valuetype Vis::SizeSpecification
+             */
+            extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_SIZE;
         } // namespace AtomProperty
     } // namespace Vis
 } // namespace CDPL

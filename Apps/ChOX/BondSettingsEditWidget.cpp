@@ -60,9 +60,12 @@ void BondSettingsEditWidget::apply()
     using namespace Vis;
 
     setBondLabelFontParameter(settings, labelFont);
+    setBondConfigurationLabelFontParameter(settings, configLabelFont);
+
     setBondLabelSizeParameter(settings, labelSize);
     setBondLabelMarginParameter(settings, labelMargin);
-
+    setBondConfigurationLabelSizeParameter(settings, configLabelSize);
+    
     setBondColorParameter(settings, color);
 
     setBondLengthParameter(settings, bondLength);
@@ -79,6 +82,7 @@ void BondSettingsEditWidget::apply()
     setShowBondQueryInfosParameter(settings, showQueryInfosCheckBox->isChecked());
     setShowBondReactionInfosParameter(settings, showReactionInfosCheckBox->isChecked());
     setShowStereoBondsParameter(settings, showBondStereoCheckBox->isChecked());
+    setShowBondConfigurationLabelsParameter(settings, showBondConfigLabelsCheckBox->isChecked());
 }
 
 void BondSettingsEditWidget::reset()
@@ -89,9 +93,12 @@ void BondSettingsEditWidget::reset()
     blockSignals(true);
 
     labelFont = getBondLabelFontParameter(settings);
+    configLabelFont = getBondConfigurationLabelFontParameter(settings);
+
     labelSize = getBondLabelSizeParameter(settings);
     labelMargin = getBondLabelMarginParameter(settings);
-
+    configLabelSize = getBondConfigurationLabelSizeParameter(settings);
+    
     color = getBondColorParameter(settings);
 
     bondLength = getBondLengthParameter(settings);
@@ -107,6 +114,7 @@ void BondSettingsEditWidget::reset()
     showQueryInfosCheckBox->setChecked(getShowBondQueryInfosParameter(settings));
     showReactionInfosCheckBox->setChecked(getShowBondReactionInfosParameter(settings));
     showBondStereoCheckBox->setChecked(getShowStereoBondsParameter(settings));
+    showBondConfigLabelsCheckBox->setChecked(getShowBondConfigurationLabelsParameter(settings));
 
     blockSignals(false);
 
@@ -122,9 +130,12 @@ void BondSettingsEditWidget::setDefaults()
     using namespace ControlParameterDefault;
 
     labelFont = BOND_LABEL_FONT;
+    configLabelFont = BOND_CONFIGURATION_LABEL_FONT;
+
     labelSize = BOND_LABEL_SIZE;
     labelMargin = BOND_LABEL_MARGIN;
-
+    configLabelSize = BOND_CONFIGURATION_LABEL_SIZE;
+    
     color = BOND_COLOR;
 
     bondLength = BOND_LENGTH;
@@ -140,6 +151,7 @@ void BondSettingsEditWidget::setDefaults()
     showQueryInfosCheckBox->setChecked(SHOW_BOND_QUERY_INFOS);
     showReactionInfosCheckBox->setChecked(SHOW_BOND_REACTION_INFOS);
     showBondStereoCheckBox->setChecked(SHOW_STEREO_BONDS);
+    showBondConfigLabelsCheckBox->setChecked(SHOW_BOND_CONFIGURATION_LABELS);
 
     haveChanges = true;
 
@@ -168,28 +180,35 @@ void BondSettingsEditWidget::init()
 // --------
 
     QGroupBox* group_box = new QGroupBox(tr("Show"), this);
-    QHBoxLayout* h_box_layout = new QHBoxLayout(group_box);
+    QGridLayout* grid_layout = new QGridLayout(group_box);
 
 // +++
 
     showQueryInfosCheckBox = new QCheckBox(tr("&Query Information"), group_box);
-    h_box_layout->addWidget(showQueryInfosCheckBox);
+    grid_layout->addWidget(showQueryInfosCheckBox, 0, 0);
 
     connect(showQueryInfosCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
     showReactionInfosCheckBox = new QCheckBox(tr("Reaction-Center &Marks"), group_box);
-    h_box_layout->addWidget(showReactionInfosCheckBox);
+    grid_layout->addWidget(showReactionInfosCheckBox, 0, 1);
 
     connect(showReactionInfosCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
     showBondStereoCheckBox = new QCheckBox(tr("Bond &Stereo"), group_box);
-    h_box_layout->addWidget(showBondStereoCheckBox);
+    grid_layout->addWidget(showBondStereoCheckBox, 1, 0);
 
     connect(showBondStereoCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    showBondConfigLabelsCheckBox = new QCheckBox(tr("CIP &Configuration Labels"), group_box);
+    grid_layout->addWidget(showBondConfigLabelsCheckBox, 1, 1);
+
+    connect(showBondConfigLabelsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
@@ -199,38 +218,55 @@ void BondSettingsEditWidget::init()
 
 // --------
 
-    QFrame* frame = new QFrame(this);
-
-    frame->setFrameStyle(QFrame::StyledPanel);
-
-    h_box_layout = new QHBoxLayout(frame);
+    group_box = new QGroupBox(tr("Label Fonts"), this);
+    
+    grid_layout = new QGridLayout(group_box);
 
 // +++
 
-    FontEditWidget* font_edit_widget = new FontEditWidget(frame, labelFont, labelSize, 0, false);
-
-    QLabel* font_label = new QLabel(tr("Label &Font:"), frame);
+    FontEditWidget* font_edit_widget = new FontEditWidget(group_box, labelFont, labelSize, 0, false);
+    
+    QLabel* font_label = new QLabel(tr("Label &Font:"), group_box);
 
     font_label->setBuddy(font_edit_widget);
 
-    h_box_layout->addWidget(font_label);
+    grid_layout->addWidget(font_label, 0, 0);
 
     connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
     connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
 
 // +++
 
-    h_box_layout->addWidget(font_edit_widget);
+    grid_layout->addWidget(font_edit_widget, 0, 1);
 
-    main_layout->addWidget(frame);
+// +++
+
+    font_edit_widget = new FontEditWidget(group_box, configLabelFont, configLabelSize, 0, false);
+
+    font_label = new QLabel(tr("CI&P Config. Label Font:"), group_box);
+
+    font_label->setBuddy(font_edit_widget);
+
+    grid_layout->addWidget(font_label, 1, 0);
+
+    connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
+    connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
+
+// +++
+
+    grid_layout->addWidget(font_edit_widget, 1, 1);
+
+// +++
+    
+    main_layout->addWidget(group_box);
 
 // --------
 
-    frame = new QFrame(this);
+    QFrame* frame = new QFrame(this);
 
     frame->setFrameStyle(QFrame::StyledPanel);
 
-    h_box_layout = new QHBoxLayout(frame);
+    QHBoxLayout* h_box_layout = new QHBoxLayout(frame);
 
 // +++
 
@@ -257,7 +293,7 @@ void BondSettingsEditWidget::init()
 
     group_box = new QGroupBox(tr("Metrics"), this);
 
-    QGridLayout* grid_layout = new QGridLayout(group_box);
+    grid_layout = new QGridLayout(group_box);
 
 // +++
 

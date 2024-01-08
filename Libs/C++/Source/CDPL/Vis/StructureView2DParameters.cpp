@@ -48,8 +48,10 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     atomColor(ControlParameterDefault::ATOM_COLOR),
     atomLabelFont(ControlParameterDefault::ATOM_LABEL_FONT),
     secondaryAtomLabelFont(ControlParameterDefault::SECONDARY_ATOM_LABEL_FONT),
+    atomConfigLabelFont(ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT),
     atomLabelSize(ControlParameterDefault::ATOM_LABEL_SIZE),
     secondaryAtomLabelSize(ControlParameterDefault::SECONDARY_ATOM_LABEL_SIZE),
+    atomConfigLabelSize(ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE),
     atomLabelMargin(ControlParameterDefault::ATOM_LABEL_MARGIN),
     radicalElectronDotSize(ControlParameterDefault::RADICAL_ELECTRON_DOT_SIZE),
     showCarbonsFlag(ControlParameterDefault::SHOW_CARBONS),
@@ -61,9 +63,12 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     showAtomReactionInfosFlag(ControlParameterDefault::SHOW_ATOM_REACTION_INFOS),
     showAtomQueryInfosFlag(ControlParameterDefault::SHOW_ATOM_QUERY_INFOS),
     showRadicalElectronsFlag(ControlParameterDefault::SHOW_RADICAL_ELECTRONS),
+    showAtomConfigLabelsFlag(ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS),
     bondColor(ControlParameterDefault::BOND_COLOR),
     bondLabelFont(ControlParameterDefault::BOND_LABEL_FONT),
+    bondConfigLabelFont(ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT),
     bondLabelSize(ControlParameterDefault::BOND_LABEL_SIZE),
+    bondConfigLabelSize(ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE),
     bondLabelMargin(ControlParameterDefault::BOND_LABEL_MARGIN),
     bondLineWidth(ControlParameterDefault::BOND_LINE_WIDTH),
     bondLineSpacing(ControlParameterDefault::BOND_LINE_SPACING),
@@ -76,6 +81,7 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     showBondReactionInfosFlag(ControlParameterDefault::SHOW_BOND_REACTION_INFOS),
     showBondQueryInfosFlag(ControlParameterDefault::SHOW_BOND_QUERY_INFOS),
     showStereoBondsFlag(ControlParameterDefault::SHOW_STEREO_BONDS),
+    showBondConfigLabelsFlag(ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS),
     coordinatesChangedFlag(true),
     explicitHVisibilityChangedFlag(true),
     propertyVisibilityChangedFlag(true),
@@ -149,6 +155,11 @@ const Vis::Font& Vis::StructureView2DParameters::getSecondaryAtomLabelFont() con
     return secondaryAtomLabelFont;
 }
 
+const Vis::Font& Vis::StructureView2DParameters::getAtomConfigLabelFont() const
+{
+    return atomConfigLabelFont;
+}
+
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomLabelSize() const
 {
     return atomLabelSize;
@@ -157,6 +168,11 @@ const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomLabelSize()
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getSecondaryAtomLabelSize() const
 {
     return secondaryAtomLabelSize;
+}
+
+const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomConfigLabelSize() const
+{
+    return atomConfigLabelSize;
 }
 
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomLabelMargin() const
@@ -214,6 +230,11 @@ bool Vis::StructureView2DParameters::showRadicalElectrons() const
     return showRadicalElectronsFlag;
 }
 
+bool Vis::StructureView2DParameters::showAtomConfigLabels() const
+{
+    return showAtomConfigLabelsFlag;
+}
+
 const Vis::Color& Vis::StructureView2DParameters::getBondColor() const
 {
     return bondColor;
@@ -224,9 +245,19 @@ const Vis::Font& Vis::StructureView2DParameters::getBondLabelFont() const
     return bondLabelFont;
 }
 
+const Vis::Font& Vis::StructureView2DParameters::getBondConfigLabelFont() const
+{
+    return bondConfigLabelFont;
+}
+
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getBondLabelSize() const
 {
     return bondLabelSize;
+}
+
+const Vis::SizeSpecification& Vis::StructureView2DParameters::getBondConfigLabelSize() const
+{
+    return bondConfigLabelSize;
 }
 
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getBondLabelMargin() const
@@ -287,6 +318,11 @@ bool Vis::StructureView2DParameters::showBondQueryInfos() const
 bool Vis::StructureView2DParameters::showStereoBonds() const
 {
     return showStereoBondsFlag;
+}
+
+bool Vis::StructureView2DParameters::showBondConfigLabels() const
+{
+    return showBondConfigLabelsFlag;
 }
 
 bool Vis::StructureView2DParameters::coordinatesChanged() const
@@ -357,6 +393,8 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::ATOM_LABEL_SIZE, view.getParameter(ControlParameter::ATOM_LABEL_SIZE));
     parameterChanged(ControlParameter::SECONDARY_ATOM_LABEL_FONT, view.getParameter(ControlParameter::SECONDARY_ATOM_LABEL_FONT));
     parameterChanged(ControlParameter::SECONDARY_ATOM_LABEL_SIZE, view.getParameter(ControlParameter::SECONDARY_ATOM_LABEL_SIZE));
+    parameterChanged(ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, view.getParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_FONT));
+    parameterChanged(ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, view.getParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE));
     parameterChanged(ControlParameter::ATOM_LABEL_MARGIN, view.getParameter(ControlParameter::ATOM_LABEL_MARGIN));
     parameterChanged(ControlParameter::RADICAL_ELECTRON_DOT_SIZE, view.getParameter(ControlParameter::RADICAL_ELECTRON_DOT_SIZE));
     parameterChanged(ControlParameter::SHOW_CARBONS, view.getParameter(ControlParameter::SHOW_CARBONS));
@@ -368,6 +406,7 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::SHOW_ATOM_QUERY_INFOS, view.getParameter(ControlParameter::SHOW_ATOM_QUERY_INFOS));
     parameterChanged(ControlParameter::SHOW_ATOM_REACTION_INFOS, view.getParameter(ControlParameter::SHOW_ATOM_REACTION_INFOS));
     parameterChanged(ControlParameter::SHOW_RADICAL_ELECTRONS, view.getParameter(ControlParameter::SHOW_RADICAL_ELECTRONS));
+    parameterChanged(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, view.getParameter(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS));
 
     parameterChanged(ControlParameter::BOND_COLOR, view.getParameter(ControlParameter::BOND_COLOR));
     parameterChanged(ControlParameter::BOND_LINE_WIDTH, view.getParameter(ControlParameter::BOND_LINE_WIDTH));
@@ -380,10 +419,13 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::TRIPLE_BOND_TRIM_LENGTH, view.getParameter(ControlParameter::TRIPLE_BOND_TRIM_LENGTH));
     parameterChanged(ControlParameter::BOND_LABEL_FONT, view.getParameter(ControlParameter::BOND_LABEL_FONT));
     parameterChanged(ControlParameter::BOND_LABEL_SIZE, view.getParameter(ControlParameter::BOND_LABEL_SIZE));
+    parameterChanged(ControlParameter::BOND_CONFIGURATION_LABEL_FONT, view.getParameter(ControlParameter::BOND_CONFIGURATION_LABEL_FONT));
+    parameterChanged(ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, view.getParameter(ControlParameter::BOND_CONFIGURATION_LABEL_SIZE));
     parameterChanged(ControlParameter::BOND_LABEL_MARGIN, view.getParameter(ControlParameter::BOND_LABEL_MARGIN));
     parameterChanged(ControlParameter::SHOW_BOND_REACTION_INFOS, view.getParameter(ControlParameter::SHOW_BOND_REACTION_INFOS));
     parameterChanged(ControlParameter::SHOW_BOND_QUERY_INFOS, view.getParameter(ControlParameter::SHOW_BOND_QUERY_INFOS));
     parameterChanged(ControlParameter::SHOW_STEREO_BONDS, view.getParameter(ControlParameter::SHOW_STEREO_BONDS));
+    parameterChanged(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS, view.getParameter(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS));
 }
 
 void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Any val)
@@ -457,6 +499,16 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
+    if (key == ControlParameter::ATOM_CONFIGURATION_LABEL_FONT) {
+        setAtomConfigLabelFont(val.isEmpty() ? ATOM_CONFIGURATION_LABEL_FONT : val.getData<Font>());
+        return;
+    }
+
+    if (key == ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE) {
+        setAtomConfigLabelSize(val.isEmpty() ? ATOM_CONFIGURATION_LABEL_SIZE : val.getData<SizeSpecification>());
+        return;
+    }
+    
     if (key == ControlParameter::ATOM_LABEL_MARGIN) {
         setAtomLabelMargin(val.isEmpty() ? ATOM_LABEL_MARGIN : val.getData<SizeSpecification>());
         return;
@@ -509,6 +561,11 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
 
     if (key == ControlParameter::SHOW_RADICAL_ELECTRONS) {
         showRadicalElectrons(val.isEmpty() ? SHOW_RADICAL_ELECTRONS : val.getData<bool>());
+        return;
+    }
+
+    if (key == ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS) {
+        showAtomConfigLabels(val.isEmpty() ? SHOW_ATOM_CONFIGURATION_LABELS : val.getData<bool>());
         return;
     }
 
@@ -567,6 +624,16 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
+    if (key == ControlParameter::BOND_CONFIGURATION_LABEL_FONT) {
+        setBondConfigLabelFont(val.isEmpty() ? BOND_CONFIGURATION_LABEL_FONT : val.getData<Font>());
+        return;
+    }
+
+    if (key == ControlParameter::BOND_CONFIGURATION_LABEL_SIZE) {
+        setBondConfigLabelSize(val.isEmpty() ? BOND_CONFIGURATION_LABEL_SIZE : val.getData<SizeSpecification>());
+        return;
+    }
+
     if (key == ControlParameter::BOND_LABEL_MARGIN) {
         setBondLabelMargin(val.isEmpty() ? BOND_LABEL_MARGIN : val.getData<SizeSpecification>());
         return;
@@ -582,8 +649,13 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
-    if (key == ControlParameter::SHOW_STEREO_BONDS)
+    if (key == ControlParameter::SHOW_STEREO_BONDS) {
         showStereoBonds(val.isEmpty() ? SHOW_STEREO_BONDS : val.getData<bool>());
+        return;
+    }
+    
+    if (key == ControlParameter::SHOW_BOND_CONFIGURATION_LABELS)
+        showBondConfigLabels(val.isEmpty() ? SHOW_BOND_CONFIGURATION_LABELS : val.getData<bool>());
 }
 
 void Vis::StructureView2DParameters::parameterRemoved(const Base::LookupKey& key)
@@ -671,6 +743,14 @@ void Vis::StructureView2DParameters::setSecondaryAtomLabelFont(const Font& font)
     }
 }
 
+void Vis::StructureView2DParameters::setAtomConfigLabelFont(const Font& font)
+{
+    if (atomConfigLabelFont != font) {
+        atomConfigLabelFont = font;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
 void Vis::StructureView2DParameters::setAtomLabelSize(const SizeSpecification& size)
 {
     if (atomLabelSize != size) {
@@ -683,6 +763,14 @@ void Vis::StructureView2DParameters::setSecondaryAtomLabelSize(const SizeSpecifi
 {
     if (secondaryAtomLabelSize != size) {
         secondaryAtomLabelSize = size;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setAtomConfigLabelSize(const SizeSpecification& size)
+{
+    if (atomConfigLabelSize != size) {
+        atomConfigLabelSize = size;
         graphicsAttributeChangedFlag = true;
     }
 }
@@ -775,6 +863,14 @@ void Vis::StructureView2DParameters::showRadicalElectrons(bool show)
     }
 }
 
+void Vis::StructureView2DParameters::showAtomConfigLabels(bool show)
+{
+    if (showAtomConfigLabelsFlag != show) {
+        showAtomConfigLabelsFlag = show;
+        propertyVisibilityChangedFlag = true;
+    }
+}
+
 void Vis::StructureView2DParameters::setBondColor(const Color& color)
 {
     if (bondColor != color) {
@@ -795,6 +891,22 @@ void Vis::StructureView2DParameters::setBondLabelSize(const SizeSpecification& s
 {
     if (bondLabelSize != size) {
         bondLabelSize = size;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setBondConfigLabelFont(const Font& font)
+{
+    if (bondConfigLabelFont != font) {
+        bondConfigLabelFont = font;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setBondConfigLabelSize(const SizeSpecification& size)
+{
+    if (bondConfigLabelSize != size) {
+        bondConfigLabelSize = size;
         graphicsAttributeChangedFlag = true;
     }
 }
@@ -891,6 +1003,14 @@ void Vis::StructureView2DParameters::showStereoBonds(bool show)
 {
     if (showStereoBondsFlag != show) {
         showStereoBondsFlag = show;
+        propertyVisibilityChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::showBondConfigLabels(bool show)
+{
+    if (showBondConfigLabelsFlag != show) {
+        showBondConfigLabelsFlag = show;
         propertyVisibilityChangedFlag = true;
     }
 }

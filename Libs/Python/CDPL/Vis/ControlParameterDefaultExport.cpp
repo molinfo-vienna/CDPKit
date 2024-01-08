@@ -102,5 +102,11 @@ void CDPLPythonVis::exportControlParameterDefaults()
         .def_readonly("BOND_LABEL_MARGIN", &Vis::ControlParameterDefault::BOND_LABEL_MARGIN)
         .def_readonly("SHOW_BOND_REACTION_INFOS", &Vis::ControlParameterDefault::SHOW_BOND_REACTION_INFOS)
         .def_readonly("SHOW_BOND_QUERY_INFOS", &Vis::ControlParameterDefault::SHOW_BOND_QUERY_INFOS)
-        .def_readonly("SHOW_STEREO_BONDS", &Vis::ControlParameterDefault::SHOW_STEREO_BONDS);
+        .def_readonly("SHOW_STEREO_BONDS", &Vis::ControlParameterDefault::SHOW_STEREO_BONDS)
+        .def_readonly("SHOW_ATOM_CONFIGURATION_LABELS", &Vis::ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_FONT", &Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("SHOW_BOND_CONFIGURATION_LABELS", &Vis::ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS)
+        .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT)
+        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE);
 }

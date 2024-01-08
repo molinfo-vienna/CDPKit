@@ -32,12 +32,21 @@
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/CIPDescriptor.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Vis/Alignment.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "Utilities.hpp"
 
@@ -107,12 +116,38 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
     calcImplicitHydrogenCounts(mol, false);
     perceiveHybridizationStates(mol, false);
     setAromaticityFlags(mol, false);
-    calcCIPPriorities(mol, false);
 
-    perceiveAtomStereoCenters(mol, false);
-    perceiveBondStereoCenters(mol, false);
+    perceiveAtomStereoCenters(mol, false, false);
+    perceiveBondStereoCenters(mol, false, false);
+
+    Util::BitSet def_atom_sto_ctrs(mol.getNumAtoms());
+    
+    for (auto& atom : mol.getAtoms())
+        if (hasStereoDescriptor(atom))
+            def_atom_sto_ctrs.set(atom.getIndex());
+
     calcAtomStereoDescriptors(mol, false);
     calcBondStereoDescriptors(mol, false);
+    calcAtomCIPConfigurations(mol, false);
+    calcBondCIPConfigurations(mol, false);
+
+    for (auto& atom : mol.getAtoms()) {
+        if (def_atom_sto_ctrs.test(atom.getIndex()))
+            continue;
+
+        switch (getCIPConfiguration(atom)) {
+
+            case CIPDescriptor::UNDEF:
+            case CIPDescriptor::NONE:
+            case CIPDescriptor::NS: {
+                auto& descr = getStereoDescriptor(atom);
+
+                if (descr.getConfiguration() == AtomConfiguration::R ||
+                    descr.getConfiguration() == AtomConfiguration::S)
+                    clearStereoDescriptor(atom);
+            }
+        }
+    }
 
     setAtomSymbolsFromTypes(mol, false);
 

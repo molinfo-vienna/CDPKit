@@ -40,7 +40,7 @@ namespace
     {
         std::ostringstream oss;
 
-        oss << "CDPL.Base.LookupKey(id=" << key.getID() << ", name='" << key.getName() << "')";
+        oss << "CDPL.Base.LookupKey('" << key.getName() << "')";
 
         return oss.str();
     }

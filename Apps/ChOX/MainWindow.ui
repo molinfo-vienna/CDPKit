@@ -98,6 +98,7 @@
      <addaction name="viewShowAtomQueryInfosAction"/>
      <addaction name="viewShowAtomReactionInfosAction"/>
      <addaction name="viewShowRadicalElectronsAction"/>
+     <addaction name="viewShowAtomConfigLabelsAction"/>
     </widget>
     <widget class="QMenu" name="viewRowsMenu">
      <property name="title">
@@ -113,6 +114,7 @@
      <addaction name="viewShowBondQueryInfosAction"/>
      <addaction name="viewShowBondReactionInfosAction"/>
      <addaction name="viewShowBondStereoAction"/>
+     <addaction name="viewShowBondConfigLabelsAction"/>
     </widget>
     <widget class="QMenu" name="viewReactionMenu">
      <property name="title">
@@ -721,6 +723,20 @@
     <string>Show Unpaired Electrons</string>
    </property>
   </action>
+  <action name="viewShowAtomConfigLabelsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show CI&amp;P Configuration Labels</string>
+   </property>
+   <property name="iconText">
+    <string>Show CIP Configuration Labels</string>
+   </property>
+  </action>
   <action name="viewShowBondQueryInfosAction">
    <property name="checkable">
     <bool>true</bool>
@@ -761,6 +777,20 @@
    </property>
    <property name="iconText">
     <string>Show Bond Stereo</string>
+   </property>
+  </action>
+  <action name="viewShowBondConfigLabelsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;CIP Configuration Labels</string>
+   </property>
+   <property name="iconText">
+    <string>Show CIP Configuration Labels</string>
    </property>
   </action>
   <action name="editSettingsAction">
@@ -1954,6 +1984,22 @@
    </hints>
   </connection>
   <connection>
+   <sender>viewShowBondConfigLabelsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewBondSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>viewShowCarbonsAction</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
@@ -2051,6 +2097,22 @@
   </connection>
   <connection>
    <sender>viewShowRadicalElectronsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowAtomConfigLabelsAction</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
    <slot>viewAtomSettingsChanged(bool)</slot>

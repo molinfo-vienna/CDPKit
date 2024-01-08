@@ -270,5 +270,5 @@ void SettingsEditDialog::init()
 
     scroll_area->setWidget(categoryEditWidgetStack);
     scroll_area->setMinimumWidth(categoryEditWidgetStack->width() + 20);
-    scroll_area->setMinimumHeight(600);
+    scroll_area->setMinimumHeight(850);
 }

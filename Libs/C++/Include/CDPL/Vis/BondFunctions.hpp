@@ -154,6 +154,24 @@ namespace CDPL
         CDPL_VIS_API bool hasLabelMargin(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearLabelMargin(Chem::Bond& bond);
+
+
+        CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setConfigurationLabelFont(Chem::Bond& bond, const Font& font);
+
+        CDPL_VIS_API bool hasConfigurationLabelFont(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearConfigurationLabelFont(Chem::Bond& bond);
+
+
+        CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setConfigurationLabelSize(Chem::Bond& bond, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasConfigurationLabelSize(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearConfigurationLabelSize(Chem::Bond& bond);
     } // namespace Vis
 } // namespace CDPL
 

@@ -106,7 +106,10 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowAtomQueryInfos)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowAtomReactionInfos)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowRadicalElectrons)
-
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowAtomConfigurationLabels)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, AtomConfigurationLabelFont)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, AtomConfigurationLabelSize)
+    
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondLength)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BondColor)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondLineWidth)
@@ -123,6 +126,9 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowBondReactionInfos)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowBondQueryInfos)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowStereoBonds)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowBondConfigurationLabels)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, BondConfigurationLabelFont)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondConfigurationLabelSize)
 }
 
 
@@ -175,7 +181,10 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowAtomQueryInfos, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowAtomReactionInfos, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowRadicalElectrons, show)
-
+    EXPORT_CONTROL_PARAM_FUNCS(ShowAtomConfigurationLabels, show)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelFont, font)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelSize, size)
+        
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondLength, length)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondColor, color)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondLineWidth, width)
@@ -192,4 +201,7 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowBondReactionInfos, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowBondQueryInfos, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowStereoBonds, show)
+    EXPORT_CONTROL_PARAM_FUNCS(ShowBondConfigurationLabels, show)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelFont, font)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelSize, size) 
 }

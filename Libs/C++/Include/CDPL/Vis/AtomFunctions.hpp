@@ -109,6 +109,24 @@ namespace CDPL
         CDPL_VIS_API bool hasRadicalElectronDotSize(const Chem::Atom& atom);
 
         CDPL_VIS_API void clearRadicalElectronDotSize(Chem::Atom& atom);
+
+
+        CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setConfigurationLabelFont(Chem::Atom& atom, const Font& font);
+
+        CDPL_VIS_API bool hasConfigurationLabelFont(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearConfigurationLabelFont(Chem::Atom& atom);
+
+
+        CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setConfigurationLabelSize(Chem::Atom& atom, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasConfigurationLabelSize(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearConfigurationLabelSize(Chem::Atom& atom);
     } // namespace Vis
 } // namespace CDPL
 

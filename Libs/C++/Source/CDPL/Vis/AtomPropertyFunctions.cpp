@@ -30,29 +30,29 @@
 #include "CDPL/Chem/Atom.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_ATOM_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)        \
-    TYPE Vis::get##FUNC_SUFFIX(const Chem::Atom& atom)                    \
-    {                                                                    \
-        return atom.getPropertyOrDefault<TYPE>(AtomProperty::PROP_NAME,    \
-                                               AtomPropertyDefault::PROP_NAME);    \
-    }                                                                    \
-                                                                        \
-    void Vis::set##FUNC_SUFFIX(Chem::Atom& atom, TYPE arg)                \
-    {                                                                    \
-        atom.setProperty(AtomProperty::PROP_NAME, arg);                    \
-    }                                                                    \
-                                                                        \
-    bool Vis::has##FUNC_SUFFIX(const Chem::Atom& atom)                    \
-    {                                                                    \
-        return atom.isPropertySet(AtomProperty::PROP_NAME);                \
-    }                                                                    \
-                                                                        \
-    void Vis::clear##FUNC_SUFFIX(Chem::Atom& atom)                        \
-    {                                                                    \
-        atom.removeProperty(AtomProperty::PROP_NAME);                    \
+#define MAKE_ATOM_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)              \
+    TYPE Vis::get##FUNC_SUFFIX(const Chem::Atom& atom)                          \
+    {                                                                           \
+        return atom.getPropertyOrDefault<TYPE>(AtomProperty::PROP_NAME,         \
+                                               AtomPropertyDefault::PROP_NAME); \
+    }                                                                           \
+                                                                                \
+    void Vis::set##FUNC_SUFFIX(Chem::Atom& atom, TYPE arg)                      \
+    {                                                                           \
+        atom.setProperty(AtomProperty::PROP_NAME, arg);                         \
+    }                                                                           \
+                                                                                \
+    bool Vis::has##FUNC_SUFFIX(const Chem::Atom& atom)                          \
+    {                                                                           \
+        return atom.isPropertySet(AtomProperty::PROP_NAME);                     \
+    }                                                                           \
+                                                                                \
+    void Vis::clear##FUNC_SUFFIX(Chem::Atom& atom)                              \
+    {                                                                           \
+        atom.removeProperty(AtomProperty::PROP_NAME);                           \
     }
 
 
@@ -63,3 +63,5 @@ MAKE_ATOM_PROPERTY_FUNCTIONS(SECONDARY_LABEL_FONT, const Vis::Font&, SecondaryLa
 MAKE_ATOM_PROPERTY_FUNCTIONS(SECONDARY_LABEL_SIZE, const Vis::SizeSpecification&, SecondaryLabelSize)
 MAKE_ATOM_PROPERTY_FUNCTIONS(LABEL_MARGIN, const Vis::SizeSpecification&, LabelMargin)
 MAKE_ATOM_PROPERTY_FUNCTIONS(RADICAL_ELECTRON_DOT_SIZE, const Vis::SizeSpecification&, RadicalElectronDotSize)
+MAKE_ATOM_PROPERTY_FUNCTIONS(CONFIGURATION_LABEL_FONT, const Vis::Font&, ConfigurationLabelFont)
+MAKE_ATOM_PROPERTY_FUNCTIONS(CONFIGURATION_LABEL_SIZE, const Vis::SizeSpecification&, ConfigurationLabelSize)

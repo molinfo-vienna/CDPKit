@@ -152,6 +152,32 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
 
             /**
+             * \brief Specifies the font used for atom configuration descriptor text labels.
+             *
+             * The specified font takes precedence over the
+             * font specified by the parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT. 
+             *
+             * \valuetype Vis::Font
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of atom configuration descriptor text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::ATOM_LABEL_SIZE, Vis::MolecularGraphProperty::ATOM_LABEL_SIZE or Vis::AtomProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
+
+            /**
              * \brief Specifies the color of bonds.
              *
              * The specified color takes precedence over the color specified by the parameter Vis::ControlParameter::BOND_COLOR. 
@@ -306,6 +332,32 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::LABEL_MARGIN.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_MARGIN;
+
+            /**
+             * \brief Specifies the font used for bond configuration descriptor text labels.
+             *
+             * The specified font takes precedence over the
+             * font specified by the parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT. 
+             *
+             * \valuetype Vis::Font
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CONFIGURATION_LABEL_FONT.
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of bond configuration descriptor text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::BOND_LABEL_SIZE, Vis::MolecularGraphProperty::BOND_LABEL_SIZE or Vis::BondProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CONFIGURATION_LABEL_SIZE.
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
         } // namespace MolecularGraphProperty
     } // namespace Vis
 } // namespace CDPL

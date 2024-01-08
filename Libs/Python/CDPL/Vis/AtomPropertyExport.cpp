@@ -49,5 +49,7 @@ void CDPLPythonVis::exportAtomProperties()
         .def_readonly("LABEL_MARGIN", &Vis::AtomProperty::LABEL_MARGIN)
         .def_readonly("LABEL_SIZE", &Vis::AtomProperty::LABEL_SIZE)
         .def_readonly("SECONDARY_LABEL_FONT", &Vis::AtomProperty::SECONDARY_LABEL_FONT)
-        .def_readonly("SECONDARY_LABEL_SIZE", &Vis::AtomProperty::SECONDARY_LABEL_SIZE);
+        .def_readonly("SECONDARY_LABEL_SIZE", &Vis::AtomProperty::SECONDARY_LABEL_SIZE)
+        .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::AtomProperty::CONFIGURATION_LABEL_FONT)
+        .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::AtomProperty::CONFIGURATION_LABEL_SIZE);
 }

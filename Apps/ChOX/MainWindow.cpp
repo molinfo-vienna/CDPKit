@@ -1130,6 +1130,14 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
 
         return;
     }
+    
+    if (key == ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS) {
+        uiMainWindow.viewShowAtomConfigLabelsAction->blockSignals(true);
+        uiMainWindow.viewShowAtomConfigLabelsAction->setChecked(getShowAtomConfigurationLabelsParameter(*settings));
+        uiMainWindow.viewShowAtomConfigLabelsAction->blockSignals(false);
+
+        return;
+    }
  
     if (key == ControlParameter::SHOW_BOND_REACTION_INFOS) {
         uiMainWindow.viewShowBondReactionInfosAction->blockSignals(true);
@@ -1151,6 +1159,14 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
         uiMainWindow.viewShowBondStereoAction->blockSignals(true);
         uiMainWindow.viewShowBondStereoAction->setChecked(getShowStereoBondsParameter(*settings));
         uiMainWindow.viewShowBondStereoAction->blockSignals(false);
+
+        return;
+    }
+
+    if (key == ControlParameter::SHOW_BOND_CONFIGURATION_LABELS) {
+        uiMainWindow.viewShowBondConfigLabelsAction->blockSignals(true);
+        uiMainWindow.viewShowBondConfigLabelsAction->setChecked(getShowBondConfigurationLabelsParameter(*settings));
+        uiMainWindow.viewShowBondConfigLabelsAction->blockSignals(false);
     }
 }
 
@@ -1324,6 +1340,9 @@ void ChOX::MainWindow::viewBondSettingsChanged(bool checked)
 
     else if (source == uiMainWindow.viewShowBondStereoAction) 
         setShowStereoBondsParameter(*settings, checked);
+
+    else if (source == uiMainWindow.viewShowBondConfigLabelsAction) 
+        setShowBondConfigurationLabelsParameter(*settings, checked);
 }
 
 void ChOX::MainWindow::viewAtomSettingsChanged(bool checked)
@@ -1359,4 +1378,7 @@ void ChOX::MainWindow::viewAtomSettingsChanged(bool checked)
 
     else if (source == uiMainWindow.viewShowRadicalElectronsAction)
         setShowRadicalElectronsParameter(*settings, checked);
+
+    else if (source == uiMainWindow.viewShowAtomConfigLabelsAction)
+        setShowAtomConfigurationLabelsParameter(*settings, checked);
 }

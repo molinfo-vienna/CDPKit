@@ -67,6 +67,8 @@ namespace
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Font&, LabelFont)
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelSize)
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelMargin)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Font&, ConfigurationLabelFont)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ConfigurationLabelSize)
 }
 
 
@@ -87,4 +89,6 @@ void CDPLPythonVis::exportBondFunctions()
     EXPORT_BOND_FUNCS_INT_REF(LabelFont, font)
     EXPORT_BOND_FUNCS_INT_REF(LabelSize, size)
     EXPORT_BOND_FUNCS_INT_REF(LabelMargin, margin)
+    EXPORT_BOND_FUNCS_INT_REF(ConfigurationLabelFont, font)
+    EXPORT_BOND_FUNCS_INT_REF(ConfigurationLabelSize, size) 
 }

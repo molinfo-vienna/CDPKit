@@ -69,9 +69,11 @@ namespace ChOX
         Settings&                    settings;
         CDPL::Vis::Font              labelFont;
         CDPL::Vis::Font              secondaryLabelFont;
+        CDPL::Vis::Font              configLabelFont;
         CDPL::Vis::SizeSpecification labelSize;
         CDPL::Vis::SizeSpecification secondaryLabelSize;
         CDPL::Vis::SizeSpecification labelMargin;
+        CDPL::Vis::SizeSpecification configLabelSize;
         CDPL::Vis::SizeSpecification electronDotSize;
         QCheckBox*                   showCarbonsCheckBox;
         QCheckBox*                   showChargesCheckBox;
@@ -82,6 +84,7 @@ namespace ChOX
         QCheckBox*                   showQueryInfosCheckBox;
         QCheckBox*                   showReactionInfosCheckBox;
         QCheckBox*                   showRadicalElectronsCheckBox;
+        QCheckBox*                   showConfigLabelsCheckBox;
         QCheckBox*                   useCalcAtomCoordsCheckBox;
         bool                         haveChanges;
     };

@@ -54,5 +54,7 @@ void CDPLPythonVis::exportBondProperties()
         .def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::BondProperty::REACTION_CENTER_LINE_SPACING)
         .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::BondProperty::TRIPLE_BOND_TRIM_LENGTH)
         .def_readonly("STEREO_BOND_HASH_SPACING", &Vis::BondProperty::STEREO_BOND_HASH_SPACING)
-        .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondProperty::STEREO_BOND_WEDGE_WIDTH);
+        .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondProperty::STEREO_BOND_WEDGE_WIDTH)
+        .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::BondProperty::CONFIGURATION_LABEL_FONT)
+        .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::BondProperty::CONFIGURATION_LABEL_SIZE);
 }

@@ -58,6 +58,8 @@ namespace CDPL
             extern CDPL_VIS_API const Font              LABEL_FONT;
             extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
             extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
+            extern CDPL_VIS_API const Font              CONFIGURATION_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification CONFIGURATION_LABEL_SIZE;
         } // namespace BondPropertyDefault
     } // namespace Vis
 } // namespace CDPL
