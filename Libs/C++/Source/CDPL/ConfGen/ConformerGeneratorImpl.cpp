@@ -1286,7 +1286,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 
     bool too_much_sym = false;
     std::size_t num_avail_confs = workingConfs.size();
-    std::size_t conf_idx_inc = (max_ens_size == 0 ? std::size_t(1) : std::size_t(std::ceil(double(num_avail_confs) / max_ens_size)));
+    std::size_t conf_idx_inc = (inStochasticMode || max_ens_size == 0 ?
+                                std::size_t(1) : std::size_t(std::ceil(double(num_avail_confs) / max_ens_size)));
 
     if (conf_idx_inc <= 1) {
         for (std::size_t i = 0; i < num_avail_confs; i++) {
