@@ -61,7 +61,7 @@ Related software
 
 Examples of software projects using CDPKit functionality:
 
-- `FAME.AL: Site-of-metabolism prediction with active learning <https://github.com/molinfo-vienna/FAME.AL>`_
+- `FAME.AL: Site-of-metabolism prediction with active learning <https://github.com/molinfo-vienna/FAME.AL>`_ :cite:`doi:10.1021/acs.jcim.3c01588`
 - `Python scripts for the generation of GRAIL datasets <https://github.com/molinfo-vienna/GRAIL-Scripts>`_ :cite:`doi:10.1021/acs.jctc.8b00495`
 - `Scripts implementing the Common Hits Approach (CHA) <https://github.com/molinfo-vienna/commonHitsApproach>`_ :cite:`doi:10.1021/acs.jcim.6b00674`
 - `Workflow scripts for the generation of receptor-based pharmacophore models (apo2ph4) <https://github.com/molinfo-vienna/apo2ph4>`_ :cite:`ph15091122`
@@ -79,6 +79,7 @@ Published scientific work that relies on CDPKit functionality:
    :list: bullet
    :filter: False
 
+   doi:10.1021/acs.jcim.3c01588
    doi:10.1021/acs.jcim.3c00563
    molecules26206185
    doi:10.1021/acs.jcim.2c00814
