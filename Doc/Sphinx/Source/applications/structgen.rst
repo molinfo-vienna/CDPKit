@@ -146,7 +146,7 @@ Other options
   -D [ --dielectric-const ] arg
 
     Dielectric constant used for the calculation of electrostatic interaction energies 
-    (default: 80.0000).
+    (default: 80.0).
 
   -E [ --dist-exponent ] arg
 
@@ -166,7 +166,7 @@ Other options
   -P [ --ref-tol ] arg
 
     Energy tolerance at which force field structure refinement stops (only effective 
-    in DG-based structure generation, default: 0.0010, must be >= 0, 0 results in refinement 
+    in DG-based structure generation, default: 0.001, must be >= 0, 0 results in refinement 
     until convergence).
 
   -w [ --max-ref-iter ] arg

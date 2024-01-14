@@ -94,7 +94,7 @@ Other options
   -r [ --rmsd ] arg
 
     Minimum RMSD of two small ring system conformations to be considered dissimilar 
-    (default: 0.1000, must be >= 0).
+    (default: 0.1, must be >= 0).
 
   -T [ --timeout ] arg
 
@@ -108,7 +108,7 @@ Other options
 
   -e [ --e-window ] arg
 
-    Output energy window for small ring system conformers (default: 8.000000, must be 
+    Energy window for small ring system conformers (default: 8.0, must be 
     >= 0).
 
   -g [ --small-rsys-sampling-factor ] arg
