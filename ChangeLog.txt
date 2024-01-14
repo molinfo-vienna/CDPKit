@@ -1,5 +1,7 @@
 master:
 
+ - For conformer generation rotatable bond count dependent values can now be specified for min. RMSD, energy window and
+   max. ensemble size
  - The output conformer ensemble compilation process now strives for higher energetic diversity among the picked conformers which, on average,
    leads to higher accuracy in the reproduction of experimental structures
  - Update of the torsion library used for systematic conformer generation
