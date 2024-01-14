@@ -62,6 +62,8 @@ namespace ConfGen
         ConfGenImpl();
 
       private:
+        typedef std::vector<std::string> StringList;
+
         const char* getProgName() const;
         const char* getProgAboutText() const;
 
@@ -80,16 +82,17 @@ namespace ConfGen
         void setSystematicSearchForceFieldType(const std::string& type_str);
         void setStochasticSearchForceFieldType(const std::string& type_str);
         void setBuildForceFieldType(const std::string& type_str);
-        void setRMSD(double rmsd);
-        void setEnergyWindow(double ewin);
+        void setRMSD(const StringList& args);
+        void setEnergyWindow(const StringList& args);
         void setNitrogenEnumMode(const std::string& mode_str);
         void setEnumRings(bool enumerate);
         void setSampleHetAtomHydrogens(bool sample);
         void setSampleAngleTolRanges(bool sample);
         void setIncludeInput(bool include);
         void setGenerateFromScratch(bool from_scratch);
-        void setMaxNumConfs(std::size_t max_confs);
+        void setMaxNumConfs(const StringList& args);
         void setMaxPoolSize(std::size_t max_confs);
+        void setMaxRotBondCount(long max_count);
         void setInputFormat(const std::string& file_ext);
         void setOutputFormat(const std::string& file_ext);
         void setFailedOutputFormat(const std::string& file_ext);
@@ -131,10 +134,12 @@ namespace ConfGen
 
         void addOptionLongDescriptions();
 
+        template <typename T>
+        static std::string toString(const StringList& list, const T& def_val);
+        
         class InputScanProgressCallback;
         class ConformerGenerationWorker;
 
-        typedef std::vector<std::string>                             StringList;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
         typedef CDPL::Internal::Timer                                Timer;
@@ -148,13 +153,15 @@ namespace ConfGen
         std::string                failedFile;
         std::size_t                numThreads;
         ConformerGeneratorSettings settings;
+        StringList                 maxNumConfsOptArgs;
+        StringList                 minRMSDOptArgs;
+        StringList                 eWindowOptArgs;
         std::string                confGenPreset;
         std::string                fragBuildPreset;
         bool                       canonicalize;
         bool                       energySDEntry;
         bool                       energyComment;
         bool                       confIndexSuffix;
-        long                       maxNumRotorBonds;
         std::string                torsionLibName;
         TorsionLibraryPtr          torsionLib;
         bool                       replaceBuiltinTorLib;

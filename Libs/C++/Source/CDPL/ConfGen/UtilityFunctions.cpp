@@ -102,6 +102,9 @@ std::string ConfGen::returnCodeToString(unsigned int ret_code)
         case ReturnCode::TOO_MUCH_SYMMETRY:
             return "TOO_MUCH_SYMMETRY";
 
+        case ReturnCode::MAX_ROT_BOND_COUNT_EXCEEDED:
+            return "MAX_ROT_BOND_COUNT_EXCEEDED";
+
         default:
             break;
     }

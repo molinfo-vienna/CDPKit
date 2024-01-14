@@ -318,15 +318,15 @@ GenFragLibImpl::GenFragLibImpl():
     addOption("preset,F", "Fragment conformer generation preset to use (FAST, THROUGH, default: THOROUGH).", 
               value<std::string>()->notifier(std::bind(&GenFragLibImpl::applyPreset, this, _1)));
     addOption("rmsd,r", "Minimum RMSD of two small ring system conformations to be considered dissimilar (default: " + 
-              (boost::format("%.4f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
+              (boost::format("%.2f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
               value<double>()->notifier(std::bind(&GenFragLibImpl::setRMSD, this, _1)));
     addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
               std::to_string(settings.getMacrocycleSettings().getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
               value<std::size_t>()->notifier(std::bind(&GenFragLibImpl::setTimeout, this, _1)));
     addOption("max-lib-size,n", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
               value<std::size_t>(&maxLibSize));
-    addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
-              std::to_string(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
+    addOption("e-window,e", "Energy window for small ring system conformers (default: " + 
+              (boost::format("%.1f") % settings.getSmallRingSystemSettings().getEnergyWindow()).str() + ", must be >= 0).",
               value<double>()->notifier(std::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
     addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
               std::to_string(settings.getSmallRingSystemSamplingFactor()) + ", must be > 1).",
@@ -337,10 +337,10 @@ GenFragLibImpl::GenFragLibImpl():
     addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
               value<bool>()->implicit_value(true)->notifier(std::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
     addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
+              (boost::format("%.1f") % settings.getDielectricConstant()).str() + ").", 
               value<double>()->notifier(std::bind(&GenFragLibImpl::setDielectricConst, this, _1)));
     addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
+              (boost::format("%.1f") % settings.getDistanceExponent()).str() + ").", 
               value<double>()->notifier(std::bind(&GenFragLibImpl::setDistExponent, this, _1)));
     addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
               value<bool>()->implicit_value(true)->notifier(std::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));

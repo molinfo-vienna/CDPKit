@@ -67,6 +67,8 @@ namespace CDPL
             const int CONF_GEN_FAILED = 11;
 
             const int TOO_MUCH_SYMMETRY = 12;
+
+            const int MAX_ROT_BOND_COUNT_EXCEEDED = 13;
         } // namespace ReturnCode
     } // namespace ConfGen
 } // namespace CDPL

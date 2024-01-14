@@ -37,7 +37,7 @@ using namespace CDPL;
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
     samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(true), 
     enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-    fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
+    fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), maxRotorBondCount(-1), timeout(60 * 60 * 1000), 
     forceFieldTypeSys(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S_RTOR), strictParam(true), 
     dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
     distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
@@ -125,6 +125,24 @@ double ConfGen::ConformerGeneratorSettings::getEnergyWindow() const
     return eWindow;
 }
 
+double ConfGen::ConformerGeneratorSettings::getEnergyWindow(std::size_t num_rot_bonds) const
+{
+    if (eWindowRanges.empty())
+        return eWindow;
+
+    return getValueForCount(eWindowRanges, num_rot_bonds);
+}
+
+void ConfGen::ConformerGeneratorSettings::clearEnergyWindowRanges()
+{
+    eWindowRanges.clear();
+}
+
+void ConfGen::ConformerGeneratorSettings::addEnergyWindowRange(std::size_t num_rot_bonds, double win_size)
+{
+    eWindowRanges.emplace_back(num_rot_bonds, win_size);
+}
+            
 void ConfGen::ConformerGeneratorSettings::setMaxPoolSize(std::size_t max_size)
 {
     maxPoolSize = max_size;
@@ -133,6 +151,16 @@ void ConfGen::ConformerGeneratorSettings::setMaxPoolSize(std::size_t max_size)
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxPoolSize() const
 {
     return maxPoolSize;
+}
+
+void ConfGen::ConformerGeneratorSettings::setMaxRotatableBondCount(long max_count)
+{
+    maxRotorBondCount = max_count;
+}
+
+long ConfGen::ConformerGeneratorSettings::getMaxRotatableBondCount() const
+{
+    return maxRotorBondCount;
 }
 
 void ConfGen::ConformerGeneratorSettings::setTimeout(std::size_t mil_secs)
@@ -205,6 +233,24 @@ std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers() con
     return maxNumOutputConfs;
 }
 
+std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers(std::size_t num_rot_bonds) const
+{
+    if (maxNumOutputConfRanges.empty())
+        return maxNumOutputConfs;
+
+    return getValueForCount(maxNumOutputConfRanges, num_rot_bonds);
+}
+
+void ConfGen::ConformerGeneratorSettings::clearMaxNumOutputConformersRanges()
+{
+    maxNumOutputConfRanges.clear();
+}
+
+void ConfGen::ConformerGeneratorSettings::addMaxNumOutputConformersRange(std::size_t num_rot_bonds, std::size_t max_num)
+{
+    maxNumOutputConfRanges.emplace_back(num_rot_bonds, max_num);
+}
+
 void ConfGen::ConformerGeneratorSettings::setMinRMSD(double min_rmsd)
 {
     minRMSD = min_rmsd;
@@ -213,6 +259,24 @@ void ConfGen::ConformerGeneratorSettings::setMinRMSD(double min_rmsd)
 double ConfGen::ConformerGeneratorSettings::getMinRMSD() const
 {
     return minRMSD;
+}
+
+double ConfGen::ConformerGeneratorSettings::getMinRMSD(std::size_t num_rot_bonds) const
+{
+    if (minRMSDRanges.empty())
+        return minRMSD;
+
+    return getValueForCount(minRMSDRanges, num_rot_bonds);
+}
+
+void ConfGen::ConformerGeneratorSettings::clearMinRMSDRanges()
+{
+    minRMSDRanges.clear();
+}
+
+void ConfGen::ConformerGeneratorSettings::addMinRMSDRange(std::size_t num_rot_bonds, double min_rmsd)
+{
+    minRMSDRanges.emplace_back(num_rot_bonds, min_rmsd);
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
@@ -273,4 +337,24 @@ ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings() const
 {
     return fragBuildSettings;
+}
+
+template <typename A>
+typename A::value_type::second_type ConfGen::ConformerGeneratorSettings::getValueForCount(const A& array, std::size_t num_rot_bonds)
+{
+    const typename A::value_type* best_match = 0;
+    const typename A::value_type* max_rbc_entry = 0;
+
+    for (auto& entry : array) {
+        if (num_rot_bonds <= entry.first && (!best_match || entry.first < best_match->first))
+            best_match = &entry;
+
+        if (!max_rbc_entry || entry.first > max_rbc_entry->first)
+            max_rbc_entry = &entry;
+    }
+
+    if (best_match)
+        return best_match->second;
+
+    return max_rbc_entry->second;
 }

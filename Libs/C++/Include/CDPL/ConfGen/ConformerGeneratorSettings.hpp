@@ -30,6 +30,8 @@
 #define CDPL_CONFGEN_CONFORMERGENERATORSETTINGS_HPP
 
 #include <cstddef>
+#include <vector>
+#include <utility>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
@@ -89,9 +91,19 @@ namespace CDPL
 
             double getEnergyWindow() const;
 
+            double getEnergyWindow(std::size_t num_rot_bonds) const;
+
+            void clearEnergyWindowRanges();
+
+            void addEnergyWindowRange(std::size_t num_rot_bonds, double win_size);
+            
             void setMaxPoolSize(std::size_t max_size);
 
             std::size_t getMaxPoolSize() const;
+
+            void setMaxRotatableBondCount(long max_count);
+
+            long getMaxRotatableBondCount() const;
 
             void setTimeout(std::size_t mil_secs);
 
@@ -121,10 +133,22 @@ namespace CDPL
 
             std::size_t getMaxNumOutputConformers() const;
 
+            std::size_t getMaxNumOutputConformers(std::size_t num_rot_bonds) const;
+
+            void clearMaxNumOutputConformersRanges();
+
+            void addMaxNumOutputConformersRange(std::size_t num_rot_bonds, std::size_t max_num);
+            
             void setMinRMSD(double min_rmsd);
 
             double getMinRMSD() const;
 
+            double getMinRMSD(std::size_t num_rot_bonds) const;
+
+            void clearMinRMSDRanges();
+
+            void addMinRMSDRange(std::size_t num_rot_bonds, double min_rmsd);
+            
             void setMaxNumRefinementIterations(std::size_t max_iter);
 
             std::size_t getMaxNumRefinementIterations() const;
@@ -150,6 +174,14 @@ namespace CDPL
             const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
           private:
+            typedef std::pair<std::size_t, std::size_t> STPair;
+            typedef std::pair<std::size_t, double>      STDoublePair;
+            typedef std::vector<STPair>                 STPairArray;
+            typedef std::vector<STDoublePair>           STDoublePairArray;
+
+            template <typename A>
+            static typename A::value_type::second_type getValueForCount(const A& array, std::size_t num_rot_bonds);
+            
             unsigned int                       samplingMode;
             bool                               sampleHetAtomHs;
             bool                               sampleTolRanges;
@@ -158,7 +190,9 @@ namespace CDPL
             bool                               fromScratch;
             bool                               incInputCoords;
             double                             eWindow;
+            STDoublePairArray                  eWindowRanges;
             std::size_t                        maxPoolSize;
+            long                               maxRotorBondCount;
             std::size_t                        timeout;
             unsigned int                       forceFieldTypeSys;
             unsigned int                       forceFieldTypeStoch;
@@ -166,7 +200,9 @@ namespace CDPL
             double                             dielectricConst;
             double                             distExponent;
             std::size_t                        maxNumOutputConfs;
+            STPairArray                        maxNumOutputConfRanges;
             double                             minRMSD;
+            STDoublePairArray                  minRMSDRanges;
             std::size_t                        maxNumRefIters;
             double                             refTolerance;
             std::size_t                        maxNumSampledConfs;

@@ -76,11 +76,23 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
              python::arg("self"))
         .def("setEnergyWindow", &ConfGen::ConformerGeneratorSettings::setEnergyWindow, 
              (python::arg("self"), python::arg("win_size")))
-        .def("getEnergyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow, 
+        .def("getEnergyWindow", static_cast<double (ConfGen::ConformerGeneratorSettings::*)() const>(
+                 &ConfGen::ConformerGeneratorSettings::getEnergyWindow), 
              python::arg("self"))
+        .def("getEnergyWindow", static_cast<double (ConfGen::ConformerGeneratorSettings::*)(std::size_t) const>(
+                 &ConfGen::ConformerGeneratorSettings::getEnergyWindow),
+             (python::arg("self"), python::arg("num_rot_bonds")))
+        .def("clearEnergyWindowRanges", &ConfGen::ConformerGeneratorSettings::clearEnergyWindowRanges, 
+             python::arg("self"))
+        .def("addEnergyWindowRange", &ConfGen::ConformerGeneratorSettings::addEnergyWindowRange, 
+             (python::arg("self"), python::arg("num_rot_bonds"), python::arg("win_size")))
         .def("setMaxPoolSize", &ConfGen::ConformerGeneratorSettings::setMaxPoolSize, 
              (python::arg("self"), python::arg("max_size")))
         .def("getMaxPoolSize", &ConfGen::ConformerGeneratorSettings::getMaxPoolSize, 
+             python::arg("self"))
+        .def("setMaxRotatableBondCount", &ConfGen::ConformerGeneratorSettings::setMaxRotatableBondCount, 
+             (python::arg("self"), python::arg("max_count")))
+        .def("getMaxRotatableBondCount", &ConfGen::ConformerGeneratorSettings::getMaxRotatableBondCount, 
              python::arg("self"))
         .def("setTimeout", &ConfGen::ConformerGeneratorSettings::setTimeout, 
              (python::arg("self"), python::arg("mil_secs")))
@@ -108,12 +120,29 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
              python::arg("self"))
         .def("setMaxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers, 
              (python::arg("self"), python::arg("max_num")))
-        .def("getMaxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers, 
+        .def("getMaxNumOutputConformers", static_cast<std::size_t (ConfGen::ConformerGeneratorSettings::*)() const>(
+                 &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers), 
              python::arg("self"))
+        .def("getMaxNumOutputConformers", static_cast<std::size_t (ConfGen::ConformerGeneratorSettings::*)(std::size_t) const>(
+                 &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers),
+             (python::arg("self"), python::arg("num_rot_bonds")))
+        .def("clearMaxNumOutputConformersRanges", &ConfGen::ConformerGeneratorSettings::clearMaxNumOutputConformersRanges, 
+             python::arg("self"))
+        .def("addMaxNumOutputConformersRange", &ConfGen::ConformerGeneratorSettings::addMaxNumOutputConformersRange, 
+             (python::arg("self"), python::arg("num_rot_bonds"), python::arg("max_num")))
         .def("setMinRMSD", &ConfGen::ConformerGeneratorSettings::setMinRMSD, 
              (python::arg("self"), python::arg("min_rmsd")))
-        .def("getMinRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
+        .def("getMinRMSD", static_cast<double (ConfGen::ConformerGeneratorSettings::*)() const>(
+                 &ConfGen::ConformerGeneratorSettings::getMinRMSD), 
              python::arg("self"))
+        .def("getMinRMSD", static_cast<double (ConfGen::ConformerGeneratorSettings::*)(std::size_t) const>(
+                 &ConfGen::ConformerGeneratorSettings::getMinRMSD),
+             (python::arg("self"), python::arg("num_rot_bonds")))
+        .def("clearMinRMSDRanges", &ConfGen::ConformerGeneratorSettings::clearMinRMSDRanges, 
+             python::arg("self"))
+        .def("addMinRMSDRange", &ConfGen::ConformerGeneratorSettings::addMinRMSDRange, 
+             (python::arg("self"), python::arg("num_rot_bonds"), python::arg("min_rmsd")))
+        
         .def("setMaxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations, 
              (python::arg("self"), python::arg("max_num")))
         .def("getMaxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
@@ -159,10 +188,13 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
                       SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch))
         .add_property("includeInputCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates),
                       SetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates))
-        .add_property("energyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow,
+        .add_property("energyWindow", static_cast<double (ConfGen::ConformerGeneratorSettings::*)() const>(
+                          &ConfGen::ConformerGeneratorSettings::getEnergyWindow),
                       &ConfGen::ConformerGeneratorSettings::setEnergyWindow)
         .add_property("maxPoolSize", &ConfGen::ConformerGeneratorSettings::getMaxPoolSize,
                       &ConfGen::ConformerGeneratorSettings::setMaxPoolSize)
+        .add_property("maxRotatableBondCount", &ConfGen::ConformerGeneratorSettings::getMaxRotatableBondCount,
+                      &ConfGen::ConformerGeneratorSettings::setMaxRotatableBondCount)
         .add_property("timeout", &ConfGen::ConformerGeneratorSettings::getTimeout,
                       &ConfGen::ConformerGeneratorSettings::setTimeout)
         .add_property("forceFieldTypeSystematic", &ConfGen::ConformerGeneratorSettings::getForceFieldTypeSystematic, 
@@ -175,9 +207,11 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
                       &ConfGen::ConformerGeneratorSettings::setDielectricConstant)
         .add_property("distanceExponent", &ConfGen::ConformerGeneratorSettings::getDistanceExponent, 
                       &ConfGen::ConformerGeneratorSettings::setDistanceExponent)
-        .add_property("maxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers, 
+        .add_property("maxNumOutputConformers", static_cast<std::size_t (ConfGen::ConformerGeneratorSettings::*)() const>(
+                          &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers), 
                       &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers)
-        .add_property("minRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
+        .add_property("minRMSD", static_cast<double (ConfGen::ConformerGeneratorSettings::*)() const>(
+                          &ConfGen::ConformerGeneratorSettings::getMinRMSD), 
                       &ConfGen::ConformerGeneratorSettings::setMinRMSD)
         .add_property("maxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
                       &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations)

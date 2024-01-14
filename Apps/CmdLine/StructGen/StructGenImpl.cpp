@@ -339,10 +339,10 @@ StructGenImpl::StructGenImpl():
     addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
               value<bool>()->implicit_value(true)->notifier(std::bind(&StructGenImpl::setStrictParameterization, this, _1)));
     addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
+              (boost::format("%.1f") % settings.getDielectricConstant()).str() + ").", 
               value<double>()->notifier(std::bind(&StructGenImpl::setDielectricConst, this, _1)));
     addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
+              (boost::format("%.1f") % settings.getDistanceExponent()).str() + ").", 
               value<double>()->notifier(std::bind(&StructGenImpl::setDistExponent, this, _1)));
     addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
               std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",

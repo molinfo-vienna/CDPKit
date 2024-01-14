@@ -134,6 +134,8 @@ namespace CDPL
 
             void init(const Chem::MolecularGraph& molgraph, bool start_timer);
 
+            unsigned int perceiveRotBonds();
+            
             bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
             ConformerData::SharedPointer getInputCoordinates();
@@ -231,6 +233,9 @@ namespace CDPL
             Util::BitSet                          coreAtomMask;
             Util::BitSet                          invertibleNMask;
             Util::BitSet                          fixedAtomConfigMask;
+            Util::BitSet                          rotBondMask;
+            std::size_t                           numRotBonds;
+            double                                eWindow;
             FragmentConfDataList                  compConfData;
             FragmentConfDataList                  torFragConfData;
             ConfCombinationDataList               torFragConfCombData;

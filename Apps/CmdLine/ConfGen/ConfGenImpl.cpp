@@ -41,7 +41,6 @@
 #include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
-#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
@@ -160,24 +159,22 @@ private:
 
             prepareForConformerGeneration(molecule, parent->canonicalize);
             
-            if (checkRotorBondCount(rec_idx)) {
-                unsigned int ret_code = confGen.generate(molecule);
+            unsigned int ret_code = confGen.generate(molecule);
 
-                switch (ret_code) {
+            switch (ret_code) {
 
-                    case ReturnCode::ABORTED:
-                        return false;
+                case ReturnCode::ABORTED:
+                    return false;
 
-                    case ReturnCode::SUCCESS:
-                    case ReturnCode::TOO_MUCH_SYMMETRY:
-                        outputConformers(rec_idx, ret_code);
-                        break;
+                case ReturnCode::SUCCESS:
+                case ReturnCode::TOO_MUCH_SYMMETRY:
+                    outputConformers(rec_idx, ret_code);
+                    break;
 
-                    default:
-                        handleError(rec_idx, ret_code);
-                }
+                default:
+                    handleError(rec_idx, ret_code);
             }
-
+        
             std::string log_rec = logRecordStream.str();
 
             if (!log_rec.empty()) 
@@ -195,29 +192,6 @@ private:
             parent->setErrorMessage("unexpected exception while processing molecule " + 
                                     parent->createMoleculeIdentifier(rec_idx, molecule));
         }
-
-        return false;
-    }
-
-    bool checkRotorBondCount(std::size_t rec_idx) {
-        using namespace CDPL::ConfGen;
-
-        if (parent->maxNumRotorBonds < 0)
-            return true;
-
-        if (getRotatableBondCount(molecule, confGen.getSettings().sampleHeteroAtomHydrogens()) <= std::size_t(parent->maxNumRotorBonds))
-            return true;
-
-        if (verbLevel >= DEBUG) 
-            logRecordStream << "Maximum allowed rotatable bond count exceeded!" << std::endl;
-
-        else if (verbLevel >= ERROR) 
-            logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": maximum allowed rotatable bound count exceeded" << std::endl; 
-
-        numFailedMols++;
-
-        if (parent->failedOutputWriter)
-            parent->writeMolecule(origMolecule, true);
 
         return false;
     }
@@ -298,6 +272,10 @@ private:
                 err_msg = "time limit exceeded";
                 break;
 
+            case ReturnCode::MAX_ROT_BOND_COUNT_EXCEEDED:
+                err_msg = "max. allowed rotatable bond count exceeded";
+                break;
+
             default:
                 err_msg = "unspecified error: " + std::to_string(ret_code);
                 break;
@@ -317,23 +295,23 @@ private:
         return false;
     }
 
-    ConfGenImpl*                         parent;
-    CDPL::ConfGen::ConformerGenerator    confGen;
-    CDPL::Chem::BasicMolecule            molecule;
-    CDPL::Chem::Fragment                 origMolecule;
-    std::stringstream                    logRecordStream;
-    VerbosityLevel                       verbLevel;
-    CDPL::Internal::Timer                timer;
-    std::size_t                          numProcMols;
-    std::size_t                          numFailedMols;
-    std::size_t                          numGenConfs;
+    ConfGenImpl*                      parent;
+    CDPL::ConfGen::ConformerGenerator confGen;
+    CDPL::Chem::BasicMolecule         molecule;
+    CDPL::Chem::Fragment              origMolecule;
+    std::stringstream                 logRecordStream;
+    VerbosityLevel                    verbLevel;
+    CDPL::Internal::Timer             timer;
+    std::size_t                       numProcMols;
+    std::size_t                       numFailedMols;
+    std::size_t                       numGenConfs;
 };
 
 
 ConfGenImpl::ConfGenImpl(): 
     numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
     confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"), canonicalize(false), energySDEntry(false), 
-    energyComment(false), confIndexSuffix(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
+    energyComment(false), confIndexSuffix(false), torsionLib(), fragmentLib(),
     inputFormat(), outputFormat(), outputWriter(), failedOutputFormat(), failedOutputWriter()
 {
     using namespace std::placeholders;
@@ -353,15 +331,30 @@ ConfGenImpl::ConfGenImpl():
               value<std::string>()->notifier(std::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
     addOption("mode,m", "Conformer sampling mode (AUTO, STOCHASTIC, SYSTEMATIC, default: " + getSamplingModeString() + ").", 
               value<std::string>()->notifier(std::bind(&ConfGenImpl::setSamplingMode, this, _1)));
-    addOption("e-window,e", "Output energy window for generated conformers (default: " + 
-              std::to_string(settings.getEnergyWindow()) + ", must be >= 0).",
-              value<double>()->notifier(std::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
-    addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
-              (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0, 0 disables RMSD checking).",
-              value<double>()->notifier(std::bind(&ConfGenImpl::setRMSD, this, _1)));
-    addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule (default: " + 
-              std::to_string(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
-              value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
+    addOption("e-window,e", "Energy window for generated conformers. The energy window may be specified "
+              "as a single constant value or as a list of pairs RBC1 EW1 RBC2 EW2... where RBC denotes a rotatable bond "
+              "count and EW the energy window that applies if the rotatable bond count of the processed molecule is <= RBC (the "
+              "EW value associated with the lowest RBC that fulfills the latter condition takes precedence). "
+              "If the rotatable bond count of the processed molecule is outside any defined range then the EW value "
+              "associated with the highest RBC will be used. "
+              "(default: " + (boost::format("%.1f") % settings.getEnergyWindow()).str() + ", e-window values must be >= 0).",
+              value<StringList>()->multitoken()->notifier(std::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
+    addOption("rmsd,r", "Minimum RMSD for output conformer selection. The RMSD may be specified "
+              "as a single constant value or as a list of pairs RBC1 RMSD1 RBC2 RMSD2... where RBC denotes a rotatable bond "
+              "count and RMSD is the value that applies if the rotatable bond count of the processed molecule is <= RBC (the "
+              "RMSD value associated with the lowest RBC that fulfills the latter condition takes precedence). "
+              "If the rotatable bond count of the processed molecule is outside any defined range then the RMSD value "
+              "associated with the highest RBC will be used. "
+              "(default: " + (boost::format("%.1f") % settings.getMinRMSD()).str() + ", RMSD values must be >= 0, 0 disables RMSD checking).",
+              value<StringList>()->multitoken()->notifier(std::bind(&ConfGenImpl::setRMSD, this, _1)));
+    addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule. The max. number of output conformers may be specified "
+              "as a single constant value or as a list of pairs RBC1 MC1 RBC2 MC2... where RBC denotes a rotatable bond "
+              "count and MC the max. conformer count setting that applies if the rotatable bond count of the processed molecule is <= RBC (the "
+              "MC value associated with the lowest RBC that fulfills the latter condition takes precedence). "
+              "If the rotatable bond count of the processed molecule is outside any defined range then the MC value "
+              "associated with the highest RBC will be used. "
+              "(default: " + std::to_string(settings.getMaxNumOutputConformers()) + ", count values must be >= 0, 0 disables limit).",
+              value<StringList>()->multitoken()->notifier(std::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
     addOption("nitrogen-enum-mode,N", "Invertible nitrogen enumeration mode (NONE, ALL, UNSPECIFIED, default: " + 
               getNitrogenEnumModeString() + ").", value<std::string>()->notifier(std::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
     addOption("enum-rings,R", "Enumerate ring conformers (only effective in systematic sampling mode, default: true).", 
@@ -386,17 +379,17 @@ ConfGenImpl::ConfGenImpl():
     addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
               value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
     addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
+              (boost::format("%.1f") % settings.getDielectricConstant()).str() + ").", 
               value<double>()->notifier(std::bind(&ConfGenImpl::setDielectricConst, this, _1)));
     addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
-              (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
+              (boost::format("%.1f") % settings.getDistanceExponent()).str() + ").", 
               value<double>()->notifier(std::bind(&ConfGenImpl::setDistExponent, this, _1)));
     addOption("timeout,T", "Time in seconds after which molecule conformer generation will be stopped (default: " + 
               std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
               value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setTimeout, this, _1)));
     addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
-              std::to_string(maxNumRotorBonds) + ", negative values disable limit).", 
-              value<long>(&maxNumRotorBonds));
+              std::to_string(settings.getMaxRotatableBondCount()) + ", negative values disable limit).", 
+              value<long>()->notifier(std::bind(&ConfGenImpl::setMaxRotBondCount, this, _1)));
     addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling mode, default: " +
               std::to_string(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
               value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
@@ -610,6 +603,11 @@ void ConfGenImpl::setMaxPoolSize(std::size_t max_confs)
     settings.setMaxPoolSize(max_confs);
 }
 
+void ConfGenImpl::setMaxRotBondCount(long max_count)
+{
+    settings.setMaxRotatableBondCount(max_count);
+}
+
 void ConfGenImpl::setConvergenceCheckCycleSize(std::size_t size)
 {
     if (size == 0)
@@ -660,25 +658,112 @@ void ConfGenImpl::setBuildForceFieldType(const std::string& type_str)
     settings.getFragmentBuildSettings().setForceFieldType(stringToForceFieldType(type_str, "build-force-field"));
 }
 
-void ConfGenImpl::setRMSD(double rmsd)
+void ConfGenImpl::setRMSD(const StringList& args)
 {
-    if (rmsd < 0)
+    minRMSDOptArgs = args;
+    
+    if (args.size() == 1) {
+        try {
+            double rmsd = std::stod(args.front());
+
+            if (rmsd < 0)
+                throwValidationError("rmsd");
+
+            settings.setMinRMSD(rmsd);
+            
+        } catch (const std::exception&) {
+            throwValidationError("rmsd");
+        }
+        
+        return;
+    }
+
+    if (args.empty() || (args.size() % 2) != 0)
         throwValidationError("rmsd");
 
-    settings.setMinRMSD(rmsd);
+    for (std::size_t i = 0; i < args.size(); ) {
+        try {
+            std::size_t rot_bond_cnt = std::stoul(args[i++]);
+            double rmsd = std::stod(args[i++]);
+
+            if (rmsd < 0)
+                throwValidationError("rmsd");
+
+            settings.addMinRMSDRange(rot_bond_cnt, rmsd);
+            
+        } catch (const std::exception&) {
+            throwValidationError("rmsd");
+        }
+    }
 }
 
-void ConfGenImpl::setEnergyWindow(double ewin)
+void ConfGenImpl::setEnergyWindow(const StringList& args)
 {
-    if (ewin < 0)
+    eWindowOptArgs = args;
+    
+    if (args.size() == 1) {
+         try {
+            double ewin = std::stod(args.front());
+            
+            if (ewin < 0)
+                throwValidationError("e-window");
+
+            settings.setEnergyWindow(ewin);
+
+         } catch (const std::exception&) {
+            throwValidationError("rmsd");
+         }
+         
+        return;
+    }
+
+    if (args.empty() || (args.size() % 2) != 0)
         throwValidationError("e-window");
 
-    settings.setEnergyWindow(ewin);
+    for (std::size_t i = 0; i < args.size(); ) {
+        try {
+            std::size_t rot_bond_cnt = std::stoul(args[i++]);
+            double ewin = std::stod(args[i++]);
+
+            if (ewin < 0)
+                throwValidationError("e-window");
+
+            settings.addEnergyWindowRange(rot_bond_cnt, ewin);
+
+        } catch (const std::exception&) {
+            throwValidationError("e-window");
+        }
+    }
 }
 
-void ConfGenImpl::setMaxNumConfs(std::size_t max_confs)
+void ConfGenImpl::setMaxNumConfs(const StringList& args)
 {
-    settings.setMaxNumOutputConformers( max_confs);
+    maxNumConfsOptArgs = args;
+
+    if (args.size() == 1) {
+        try {
+            settings.setMaxNumOutputConformers(std::stoul(args.front()));
+
+        } catch (const std::exception&) {
+            throwValidationError("max-num-out-confs");
+        }
+        
+        return;
+    }
+
+    if (args.empty() || (args.size() % 2) != 0)
+        throwValidationError("max-num-out-confs");
+
+    for (std::size_t i = 0; i < args.size(); ) {
+        try {
+            std::size_t rot_bond_cnt = std::stoul(args[i++]);
+
+            settings.addMaxNumOutputConformersRange(rot_bond_cnt, std::stoul(args[i++]));
+
+        } catch (const std::exception&) {
+            throwValidationError("max-num-out-confs");
+        }
+    }
 }
 
 void ConfGenImpl::setNitrogenEnumMode(const std::string& mode_str)
@@ -900,7 +985,6 @@ void ConfGenImpl::processMultiThreaded()
     }
 
     printStatistics(num_proc_mols, num_failed_mols, num_gen_confs);
-
 }
 
 void ConfGenImpl::setErrorMessage(const std::string& msg)
@@ -1075,14 +1159,14 @@ void ConfGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
     printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
     printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
-    printMessage(VERBOSE, " Max. Num. Output Conformers:         " + (settings.getMaxNumOutputConformers() == 0 ? std::string("No Limit") : 
-                                                                      std::to_string(settings.getMaxNumOutputConformers())));
-    if (settings.getMinRMSD() > 0.0)
-        printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.2f") % settings.getMinRMSD()).str());
-    else
+    printMessage(VERBOSE, " Max. Num. Output Conformers:         " + (maxNumConfsOptArgs.size() == 1 && settings.getMaxNumOutputConformers() == 0 ? std::string("No Limit") : 
+                                                                      toString(maxNumConfsOptArgs, settings.getMaxNumOutputConformers())));
+    if (minRMSDOptArgs.size() == 1 && settings.getMinRMSD() == 0.0)
         printMessage(VERBOSE, " Min. RMSD:                           RMSD Checking disabled");
+    else
+        printMessage(VERBOSE, " Min. RMSD:                           " + toString(minRMSDOptArgs, settings.getMinRMSD()));
 
-    printMessage(VERBOSE, " Energy Window:                       " + (boost::format("%.1f") % settings.getEnergyWindow()).str());
+    printMessage(VERBOSE, " Energy Window:                       " + toString(eWindowOptArgs, settings.getEnergyWindow()));
     printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
     printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));
     printMessage(VERBOSE, " Sample Hetero Atom Hydrogens:        " + std::string(settings.sampleHeteroAtomHydrogens() ? "Yes" : "No"));
@@ -1102,7 +1186,8 @@ void ConfGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Refinement Energy Tolerance:         " + (boost::format("%.4f") % settings.getRefinementTolerance()).str());
     printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + std::to_string(settings.getMaxNumRefinementIterations()));
     printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getTimeout() / 1000) + "s");
-    printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (maxNumRotorBonds < 0 ? std::string("No Limit") : std::to_string(maxNumRotorBonds)));
+    printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (settings.getMaxRotatableBondCount() < 0 ? std::string("No Limit") :
+                                                                      std::to_string(settings.getMaxRotatableBondCount())));
     printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
@@ -1312,4 +1397,22 @@ std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDP
 std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
     return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
+}
+
+template <typename T>
+std::string ConfGenImpl::toString(const StringList& list, const T& def_val)
+{
+    if (list.empty())
+        return (boost::format("%.1f") % def_val).str();
+    
+    std::string str;
+    
+    for (auto& e : list) {
+        if (!str.empty())
+            str.push_back(' ');
+        
+        str += e;
+    }
+
+    return str;
 }
