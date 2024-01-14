@@ -88,3 +88,8 @@ class ReturnCode(Boost.Python.instance):
     # \brief 
     #
     TOO_MUCH_SYMMETRY = 12
+
+    ##
+    # \brief 
+    #
+    MAX_ROT_BOND_COUNT_EXCEEDED = 13

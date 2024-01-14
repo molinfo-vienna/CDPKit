@@ -187,6 +187,25 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param num_rot_bonds 
+    # \return 
+    #
+    def getEnergyWindow(num_rot_bonds: int) -> float: pass
+
+    ##
+    # \brief 
+    #
+    def clearEnergyWindowRanges() -> None: pass
+
+    ##
+    # \brief 
+    # \param num_rot_bonds 
+    # \param win_size 
+    #
+    def addEnergyWindowRange(num_rot_bonds: int, win_size: float) -> None: pass
+
+    ##
+    # \brief 
     # \param max_size 
     #
     def setMaxPoolSize(max_size: int) -> None: pass
@@ -196,6 +215,18 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # \return 
     #
     def getMaxPoolSize() -> int: pass
+
+    ##
+    # \brief 
+    # \param max_count 
+    #
+    def setMaxRotatableBondCount(max_count: int) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getMaxRotatableBondCount() -> int: pass
 
     ##
     # \brief 
@@ -283,6 +314,25 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param num_rot_bonds 
+    # \return 
+    #
+    def getMaxNumOutputConformers(num_rot_bonds: int) -> int: pass
+
+    ##
+    # \brief 
+    #
+    def clearMaxNumOutputConformersRanges() -> None: pass
+
+    ##
+    # \brief 
+    # \param num_rot_bonds 
+    # \param max_num 
+    #
+    def addMaxNumOutputConformersRange(num_rot_bonds: int, max_num: int) -> None: pass
+
+    ##
+    # \brief 
     # \param min_rmsd 
     #
     def setMinRMSD(min_rmsd: float) -> None: pass
@@ -292,6 +342,25 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     # \return 
     #
     def getMinRMSD() -> float: pass
+
+    ##
+    # \brief 
+    # \param num_rot_bonds 
+    # \return 
+    #
+    def getMinRMSD(num_rot_bonds: int) -> float: pass
+
+    ##
+    # \brief 
+    #
+    def clearMinRMSDRanges() -> None: pass
+
+    ##
+    # \brief 
+    # \param num_rot_bonds 
+    # \param min_rmsd 
+    #
+    def addMinRMSDRange(num_rot_bonds: int, min_rmsd: float) -> None: pass
 
     ##
     # \brief 
@@ -378,6 +447,8 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     energyWindow = property(getEnergyWindow, setEnergyWindow)
 
     maxPoolSize = property(getMaxPoolSize, setMaxPoolSize)
+
+    maxRotatableBondCount = property(getMaxRotatableBondCount, setMaxRotatableBondCount)
 
     timeout = property(getTimeout, setTimeout)
 
