@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * ElasticPotentialDataExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,20 +22,24 @@
  */
 
 
-#ifndef CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/ForceField/ElasticPotentialData.hpp"
+
+#include "Util/ArrayVisitor.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonForceField
+void CDPLPythonForceField::exportElasticPotentialData()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-    void exportUtilityFunctions();
-    void exportMMFF94EnergyFunctions();
-    void exportMMFF94GradientFunctions();
-    void exportElasticPotentialFunctions();
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-} // namespace CDPLPythonForceField
-
-#endif // CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
+    python::class_<ForceField::ElasticPotentialData, ForceField::ElasticPotentialData::SharedPointer>("ElasticPotentialData", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::ElasticPotentialData&>((python::arg("self"), python::arg("data"))))
+        .def(CDPLPythonUtil::ArrayVisitor<ForceField::ElasticPotentialData, 
+             python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+             python::default_call_policies>());
+}

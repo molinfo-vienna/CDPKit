@@ -600,6 +600,28 @@ namespace CDPL
 
                 return v;
             }
+            
+            template <typename ValueType, typename Iter, typename CoordsArray, typename FuncType>
+            ValueType accumInteractionEnergies(Iter& beg, const Iter& end, const CoordsArray& coords, const FuncType& func)
+            {
+                ValueType e = ValueType();
+
+                for (; beg != end; ++beg)
+                    e += func(*beg, coords);
+
+                return e;
+            }
+
+            template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector, typename FuncType>
+            ValueType calcInteractionGradient(Iter& beg, const Iter& end, const CoordsArray& coords, GradVector& grad, const FuncType& func)
+            {
+                ValueType e = ValueType();
+
+                for (; beg != end; ++beg)
+                    e += func(*beg, coords, grad);
+
+                return e;
+            }
         } // namespace Detail
     } // namespace ForceField
 } // namespace CDPL

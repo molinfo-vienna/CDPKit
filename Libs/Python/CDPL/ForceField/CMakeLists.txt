@@ -39,7 +39,7 @@ set(forcefield_MOD_SRCS
 
     UFFAtomTypeExport.cpp
     UFFAtomTypePropertyTableExport.cpp
-
+ 
     MMFF94ParameterSetExport.cpp
 
     MMFF94AromaticSSSRSubsetExport.cpp
@@ -94,9 +94,13 @@ set(forcefield_MOD_SRCS
     MMFF94TorsionParameterTableExport.cpp
     MMFF94VanDerWaalsParameterTableExport.cpp
 
+    ElasticPotentialExport.cpp
+    ElasticPotentialDataExport.cpp
+   
     UtilityFunctionExport.cpp 
     MMFF94EnergyFunctionExport.cpp 
-    MMFF94GradientFunctionExport.cpp 
+    MMFF94GradientFunctionExport.cpp
+    ElasticPotentialFunctionExport.cpp
     AtomFunctionExport.cpp 
     BondFunctionExport.cpp 
     MolecularGraphFunctionExport.cpp 

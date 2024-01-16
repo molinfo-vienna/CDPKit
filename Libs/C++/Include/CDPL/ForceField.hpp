@@ -93,5 +93,8 @@
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsParameterTable.hpp"
+#include "CDPL/ForceField/ElasticPotential.hpp"
+#include "CDPL/ForceField/ElasticPotentialData.hpp"
+#include "CDPL/ForceField/ElasticPotentialFunctions.hpp"
 
 #endif // CDPL_FORCEFIELD_HPP

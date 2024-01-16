@@ -30,7 +30,7 @@ namespace CDPLPythonForceField
 {
 
     void exportUFFAtomTypePropertyTable();
-
+  
     void exportMMFF94AromaticSSSRSubset();
     void exportMMFF94AtomTyper();
     void exportMMFF94BondTyper();
@@ -83,6 +83,9 @@ namespace CDPLPythonForceField
     void exportMMFF94TorsionParameterTable();
     void exportMMFF94VanDerWaalsParameterTable();
 
+    void exportElasticPotential();
+    void exportElasticPotentialData();
+  
     void exportFunctionWrappers();
 } // namespace CDPLPythonForceField
 

@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * ElasticPotentialData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,21 +21,26 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::ForceField::ElasticPotentialData.
+ */
 
-#ifndef CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_FORCEFIELD_ELASTICPOTENTIALDATA_HPP
+#define CDPL_FORCEFIELD_ELASTICPOTENTIALDATA_HPP
+
+#include "CDPL/ForceField/ElasticPotential.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
-namespace CDPLPythonForceField
+namespace CDPL
 {
 
-    void exportUtilityFunctions();
-    void exportMMFF94EnergyFunctions();
-    void exportMMFF94GradientFunctions();
-    void exportElasticPotentialFunctions();
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-} // namespace CDPLPythonForceField
+    namespace ForceField
+    {
 
-#endif // CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP
+        typedef Util::Array<ElasticPotential> ElasticPotentialData;
+    }
+} // namespace CDPL
+
+#endif // CDPL_FORCEFIELD_ELASTICPOTENTIALDATA_HPP

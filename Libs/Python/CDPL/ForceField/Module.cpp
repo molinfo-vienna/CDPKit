@@ -99,9 +99,13 @@ BOOST_PYTHON_MODULE(_forcefield)
     exportMMFF94TorsionParameterTable();
     exportMMFF94VanDerWaalsParameterTable();
 
+    exportElasticPotential();
+    exportElasticPotentialData();
+
     exportUtilityFunctions();
     exportMMFF94EnergyFunctions();
     exportMMFF94GradientFunctions();
+    exportElasticPotentialFunctions();
     exportAtomFunctions();
     exportBondFunctions();
     exportMolecularGraphFunctions();

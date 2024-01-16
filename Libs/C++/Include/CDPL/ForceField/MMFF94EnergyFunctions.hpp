@@ -497,36 +497,12 @@ namespace CDPL
 // Implementation
 // \cond DOC_IMPL_DETAILS
 
-namespace CDPL
-{
-
-    namespace ForceField
-    {
-
-        namespace Detail
-        {
-
-            template <typename ValueType, typename Iter, typename CoordsArray, typename FuncType>
-            ValueType accumMMFF94InteractionEnergies(Iter& beg, const Iter& end, const CoordsArray& coords, const FuncType& func)
-            {
-                ValueType e = ValueType();
-
-                for (; beg != end; ++beg)
-                    e += func(*beg, coords);
-
-                return e;
-            }
-        } // namespace Detail
-    } // namespace ForceField
-} // namespace CDPL
-
-
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94BondStretchingInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94BondStretchingEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94BondStretchingInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94BondStretchingEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -561,9 +537,9 @@ ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(const ValueType& r_ij
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94AngleBendingInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94AngleBendingEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94AngleBendingInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94AngleBendingEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -607,9 +583,9 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_a
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94StretchBendInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94StretchBendEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94StretchBendInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94StretchBendEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -660,9 +636,9 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_at
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94OutOfPlaneBendingEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94OutOfPlaneBendingEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -697,9 +673,9 @@ ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& t
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94TorsionInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94TorsionEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94TorsionInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94TorsionEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -726,7 +702,7 @@ ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94ElectrostaticInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94ElectrostaticEnergy<ValueType, CoordsArray>));
 }
@@ -764,9 +740,9 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const ValueType& r_ij,
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
-                                                             static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&)>(
-                                                                 &calcMMFF94VanDerWaalsEnergy<ValueType, CoordsArray>));
+    return Detail::accumInteractionEnergies<ValueType>(beg, end, coords,
+                                                       static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&)>(
+                                                           &calcMMFF94VanDerWaalsEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
