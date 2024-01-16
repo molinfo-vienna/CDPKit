@@ -50,7 +50,7 @@ namespace CDPL
         /**
          * \brief Calculates the energy \f$ E_{ij} \f$ of an elastic potential applied on a pair of atoms \e i-j.
          * 
-         * \f$ E_{ij} = \frac{k_{ij}}{2} \: \Delta r_{ij}^2 \f$
+         * \f$ E_{ij} = k_{ij} \: \Delta r_{ij}^2 \f$
          *
          * where<br>
          * \f$ k_{ij} \f$ = the force constant of the elastic potential.<br>
@@ -78,13 +78,13 @@ namespace CDPL
          * 
          * Energy function:<br>
          *
-         * \f$ E_{ij} = \frac{k_{ij}}{2} \: \Delta r_{ij}^2 \f$
+         * \f$ E_{ij} = k_{ij} \: \Delta r_{ij}^2 \f$
          *
          * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
          *
          * \f$ \frac{\partial E_{ij}}{\partial \vec{p_x}} = \frac{\partial E_{ij}}{\partial \Delta r_{ij}} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$<br>
          *
-         * \f$ \frac{\partial E_{ij}}{\partial \Delta r_{ij}} = \Delta r_{ij} \: k_{ij} \f$<br>
+         * \f$ \frac{\partial E_{ij}}{\partial \Delta r_{ij}} = 2 \: \Delta r_{ij} \: k_{ij} \f$<br>
          *
          * for the calculation of the partial derivatives \f$ \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
          *
@@ -133,9 +133,8 @@ template <typename ValueType, typename CoordsVec>
 ValueType CDPL::ForceField::calcElasticPotentialEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
                                                        const ValueType& force_const, const ValueType& ref_length)
 {
-    ValueType dr_ij   = calcDistance<ValueType>(atom1_pos, atom2_pos) - ref_length;
-    ValueType dr_ij_2 = dr_ij * dr_ij;
-    ValueType e       = ValueType(10.5) * force_const * dr_ij_2;
+    ValueType dr_ij = calcDistance<ValueType>(atom1_pos, atom2_pos) - ref_length;
+    ValueType e = force_const * dr_ij * dr_ij;
 
     return e;
 }
@@ -164,12 +163,12 @@ ValueType CDPL::ForceField::calcElasticPotentialGradient(const CoordsVec& atom1_
     ValueType dist_atom2_grad[3];
 
     ValueType dr_ij = calcDistanceDerivatives<ValueType>(atom1_pos, atom2_pos, dist_atom1_grad, dist_atom2_grad) - ref_length;
-    ValueType grad_fact = force_const * dr_ij;
+    ValueType grad_fact = ValueType(2) * force_const * dr_ij;
     
     Detail::scaleAddVector(dist_atom1_grad, grad_fact, atom1_grad);
     Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);
 
-    ValueType e = ValueType(0.5) * grad_fact * dr_ij;
+    ValueType e = force_const * dr_ij * dr_ij;
 
     return e;
 }

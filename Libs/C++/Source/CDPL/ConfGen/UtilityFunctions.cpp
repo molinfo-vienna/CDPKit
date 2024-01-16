@@ -29,9 +29,9 @@
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
-#include "CDPL/Chem/BondContainer.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/ForceField/UtilityFunctions.hpp"
 
 #include "UtilityFunctions.hpp"
 
@@ -179,4 +179,33 @@ double ConfGen::getAbsoluteAngleDistance(double angle1, double angle2)
         return std::min(angle2 - angle1, angle1 + 360.0 - angle2);
 
     return std::min(angle1 - angle2, angle2 + 360.0 - angle1);
+}
+
+void ConfGen::generatePairwiseElasticPotentials(const Chem::AtomContainer& atoms, const Chem::MolecularGraph& molgraph,
+                                                const Math::Vector3DArray& coords, ForceField::ElasticPotentialData& potentials,
+                                                double k)
+{
+    potentials.clear();
+
+    for (std::size_t i = 0, num_atoms = atoms.getNumAtoms(); i < num_atoms; i++) {
+        auto& atom1 = atoms.getAtom(i);
+
+        if (!molgraph.containsAtom(atom1))
+            continue;
+        
+        auto atom1_idx = molgraph.getAtomIndex(atom1);
+        auto atom1_pos = coords[atom1_idx].getData();
+           
+        for (auto j = i + 1; j < num_atoms; j++) {
+            auto& atom2 = atoms.getAtom(j);
+
+            if (!molgraph.containsAtom(atom2))
+                continue;
+
+            auto atom2_idx = molgraph.getAtomIndex(atom2);
+            auto dist = ForceField::calcDistance<double>(atom1_pos, coords[atom2_idx].getData());
+
+            potentials.addElement({atom1_idx, atom2_idx, k, dist});
+        }   
+    }
 }

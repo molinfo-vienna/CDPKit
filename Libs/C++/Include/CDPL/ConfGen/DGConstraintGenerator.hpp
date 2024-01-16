@@ -37,6 +37,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -54,6 +55,7 @@ namespace CDPL
     {
 
         class FragmentList;
+        class AtomContainer;
         class MolecularGraph;
         class Atom;
         class Bond;
@@ -100,6 +102,8 @@ namespace CDPL
             ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
             ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
 
+            void addFixedSubstructureConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
+                                                 Util::DG3DCoordinatesGenerator& coords_gen);
             void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
             void addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
             void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);

@@ -32,6 +32,8 @@
 #include <string>
 #include <cstddef>
 
+#include "CDPL/ForceField/ElasticPotentialData.hpp"
+
 
 namespace CDPL
 {
@@ -41,6 +43,7 @@ namespace CDPL
 
         class MolecularGraph;
         class BondContainer;
+        class AtomContainer;
         class FragmentList;
     } // namespace Chem
 
@@ -63,6 +66,10 @@ namespace CDPL
 
         double getAbsoluteAngleDistance(double angle1, double angle2);
 
+        void generatePairwiseElasticPotentials(const Chem::AtomContainer& atoms, const Chem::MolecularGraph& molgraph,
+                                               const Math::Vector3DArray& coords, ForceField::ElasticPotentialData& potentials,
+                                               double k);
+        
         template <typename InteractionData>
         void extractFragmentMMFF94InteractionParams2(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
                                                      const Util::BitSet& tgt_atom_mask)

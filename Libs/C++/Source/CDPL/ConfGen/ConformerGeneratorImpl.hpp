@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
+#include "CDPL/Chem/ComponentSet.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
@@ -93,7 +94,9 @@ namespace CDPL
 
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-            unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
+            unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only,
+                                  const Chem::MolecularGraph* fixed_substr = 0,
+                                  const Math::Vector3DArray* fixed_substr_coords = 0);
 
             void setConformers(Chem::MolecularGraph& molgraph) const;
 
@@ -138,6 +141,11 @@ namespace CDPL
             
             bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
+            double calcEnergy(const Math::Vector3DArray::StorageType& coords);
+            double calcGradient(const Math::Vector3DArray::StorageType& coords,
+                                Math::Vector3DArray::StorageType& grad);
+            
+            ConformerData::SharedPointer getFixedSubstructInputCoordinates();
             ConformerData::SharedPointer getInputCoordinates();
 
             void splitIntoTorsionFragments();
@@ -207,7 +215,11 @@ namespace CDPL
             FragmentConfDataCache                 fragConfDataCache;
             ConfCombinationDataCache              confCombDataCache;
             ConformerGeneratorSettings            settings;
+            const Chem::MolecularGraph*           parentMolGraph;
             const Chem::MolecularGraph*           molGraph;
+            Chem::ComponentSet                    fixedSubstructComps;
+            const Chem::MolecularGraph*           fixedSubstruct;
+            const Math::Vector3DArray*            fixedSubstructCoords;
             ConformerDataArray                    workingConfs;
             ConformerDataArray                    tmpWorkingConfs;
             ConformerDataArray                    outputConfs;

@@ -37,12 +37,17 @@
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
 #include "CDPL/Util/DGCoordinatesGenerator.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
 {
 
+    namespace Chem
+    {
+
+        class FragmentList;
+    }
+    
     namespace ConfGen
     {
 
@@ -60,6 +65,10 @@ namespace CDPL
 
             void setup(const Chem::MolecularGraph& molgraph);
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
+            void setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_atom_frags,
+                       const Math::Vector3DArray& fixed_atom_coords);
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data,
+                       const Chem::FragmentList& fixed_atom_frags, const Math::Vector3DArray& fixed_atom_coords);
 
             bool generate(Math::Vector3DArray& coords);
 
@@ -72,7 +81,8 @@ namespace CDPL
             const DGConstraintGenerator& getConstraintGenerator() const;
 
           private:
-            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data,
+                       const Chem::FragmentList* fixed_atom_fragss, const Math::Vector3DArray* fixed_atom_coords);
 
             typedef boost::random::mt11213b RandNumEngine;
 

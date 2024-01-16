@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 
@@ -62,12 +63,24 @@ const Util::BitSet& ConfGen::DGStructureGenerator::getExcludedHydrogenMask() con
 void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
                                           const ForceField::MMFF94InteractionData& ia_data)
 {
-    setup(molgraph, &ia_data);
+    setup(molgraph, &ia_data, 0, 0);
 }
 
 void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph) 
 {
-    setup(molgraph, 0);
+    setup(molgraph, 0, 0, 0);
+}
+
+void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data,
+                                          const Chem::FragmentList& fixed_atom_frags, const Math::Vector3DArray& fixed_atom_coords)
+{
+    setup(molgraph, &ia_data, &fixed_atom_frags, &fixed_atom_coords);
+}
+
+void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_atom_frags,
+                                          const Math::Vector3DArray& fixed_atom_coords) 
+{
+    setup(molgraph, 0, &fixed_atom_frags, &fixed_atom_coords);
 }
 
 std::size_t ConfGen::DGStructureGenerator::getNumAtomStereoCenters() const
@@ -117,8 +130,8 @@ bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
     return true;
 }
 
-void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
-                                          const ForceField::MMFF94InteractionData* ia_data)
+void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data,
+                                          const Chem::FragmentList* fixed_atom_frags, const Math::Vector3DArray* fixed_atom_coords)
 {
     molGraph = &molgraph;
     dgConstraintsGen.getSettings() = settings;
@@ -132,6 +145,10 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
     phase1CoordsGen.clearVolumeConstraints();
     phase1CoordsGen.setRandomSeed(170375);
 
+    if (fixed_atom_frags)
+        for (auto& frag : *fixed_atom_frags)
+            dgConstraintsGen.addFixedSubstructureConstraints(frag, *fixed_atom_coords, phase1CoordsGen);
+    
     dgConstraintsGen.addBondLengthConstraints(phase1CoordsGen);
     dgConstraintsGen.addBondAngleConstraints(phase1CoordsGen);
     dgConstraintsGen.addBondConfigurationConstraints(phase1CoordsGen);

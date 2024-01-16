@@ -50,6 +50,7 @@
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
+#include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -241,6 +242,41 @@ void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& mol
 
     assignBondLengths(ia_data);
     assignBondAngles(ia_data);
+}
+
+void ConfGen::DGConstraintGenerator::addFixedSubstructureConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
+                                                                     Util::DG3DCoordinatesGenerator& coords_gen)
+{
+    bool excl_hs = settings.excludeHydrogens();
+
+    for (std::size_t i = 0, num_atoms = atoms.getNumAtoms(); i < num_atoms; i++) {
+        auto& atom1 = atoms.getAtom(i);
+
+        if (!molGraph->containsAtom(atom1))
+            continue;
+        
+        auto atom1_idx = molGraph->getAtomIndex(atom1);
+        auto atom1_pos = coords[atom1_idx].getData();
+
+        if (excl_hs)
+            hAtomMask.reset(atom1_idx);
+           
+        for (auto j = i + 1; j < num_atoms; j++) {
+            auto& atom2 = atoms.getAtom(j);
+
+            if (!molGraph->containsAtom(atom2))
+                continue;
+
+            auto atom2_idx = molGraph->getAtomIndex(atom2);
+
+            if (atomPairProcessed(atom1_idx, atom2_idx))
+                continue;
+
+            auto dist = ForceField::calcDistance<double>(atom1_pos, coords[atom2_idx].getData());
+
+            coords_gen.addDistanceConstraint(atom1_idx, atom2_idx, dist, dist);
+        }   
+    }
 }
 
 void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
