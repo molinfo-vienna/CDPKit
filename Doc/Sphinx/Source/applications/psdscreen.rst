@@ -18,7 +18,7 @@ Mandatory options
   -q [ --query ] arg
 
     Specifies the file containing one or more pharmacophore(s) that shall be used as 
-    a queryfor the database search.
+    a query for the database search.
     
     Supported Input Formats:
      - Native CDPL-Format (.cdf)
@@ -142,6 +142,10 @@ Other options
 
     Number of parallel execution threads (default: no multithreading, implicit value: 
     4 threads, must be >= 0, 0 disables multithreading).
+
+  -u [ --unique-hits ] [=arg(=1)]
+
+    Report molecules matching multiple query pharmacophores only once  (default: false).
 
   -O [ --output-format ] arg
 
