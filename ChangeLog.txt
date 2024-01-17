@@ -5,6 +5,8 @@ master:
  - The output conformer ensemble compilation process now strives for higher energetic diversity among the picked conformers which, on average,
    leads to higher accuracy in the reproduction of experimental structures
  - Update of the torsion library used for systematic conformer generation
+ - The pharmacophore screening application 'psdscreen' provides a new option '--unique-hits'
+   which enforces that a database molecule matched by multiple query pharmacophores is saved only once to the output hit list
  - Fix for a bug in the SMARTS-pattern parser that lead to the storage of wrong bond directions
  - Bond direction specifications (up/down) in SMILES and SMARTS string are now correctly interpreted
  - Support for the XYZ file format 
