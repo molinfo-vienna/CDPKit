@@ -30,6 +30,7 @@
 #include <string>
 #include <mutex>
 #include <memory>
+#include <unordered_set>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreReader.hpp"
@@ -113,7 +114,8 @@ namespace PSDScreen
         typedef std::vector<double>                                     WorkerProgressArray;
         typedef CDPL::Pharm::PharmacophoreReader::SharedPointer         PharmReaderPtr;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer         MoleculeWriterPtr;
-
+        typedef std::unordered_set<std::size_t>                         MoleculeIDSet;
+        
         std::string         queryPharmFile;
         std::string         screeningDB;
         std::string         hitOutputFile;
@@ -126,6 +128,7 @@ namespace PSDScreen
         bool                outputDBName;
         bool                outputPharmName;
         bool                outputPharmIndex;
+        bool                uniqueHits;
         std::size_t         numThreads;
         std::size_t         startMolIndex;
         std::size_t         endMolIndex;
@@ -136,6 +139,7 @@ namespace PSDScreen
         MoleculeWriterPtr   hitMolWriter;
         PharmReaderPtr      queryPharmReader;
         HitCollectorPtr     hitCollector;
+        MoleculeIDSet       hitMolIDs;
         std::mutex          mutex;
         std::mutex          collHitMutex;
         std::string         errorMessage;

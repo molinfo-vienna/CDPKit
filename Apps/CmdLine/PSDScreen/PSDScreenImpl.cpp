@@ -31,6 +31,7 @@
 #include <thread>
 #include <chrono>
 #include <functional>
+#include <cmath>
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
@@ -141,6 +142,9 @@ struct PSDScreenImpl::ScreeningWorker
     }
 
     bool reportProgress(std::size_t i, std::size_t max_val) {
+        if (max_val == 0)
+            return parent->printProgress(workerIndex, 1.0);
+        
         double progress = double(i) / max_val;
 
         return parent->printProgress(workerIndex, (queryIndex + progress) / parent->numQueryPharms);
@@ -166,7 +170,7 @@ PSDScreenImpl::PSDScreenImpl():
     
     addOption("database,d", "Screening database file.", 
               value<std::string>(&screeningDB)->required());
-    addOption("query,q", "Query pharmacophore file(s).", 
+    addOption("query,q", "Query pharmacophore(s).", 
               value<std::string>(&queryPharmFile)->required());
     addOption("output,o", "Hit output file.", 
               value<std::string>(&hitOutputFile)->required());
@@ -207,7 +211,9 @@ PSDScreenImpl::PSDScreenImpl():
               value<std::string>()->notifier(std::bind(&PSDScreenImpl::setHitOutputFormat, this, _1)));
     addOption("query-format,Q", "Query pharmacophore input file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier(std::bind(&PSDScreenImpl::setQueryInputFormat, this, _1)));
-
+    addOption("unique-hits,u", "Report molecules matched by multiple query pharmacophores only once (default: false).", 
+              value<bool>(&uniqueHits)->implicit_value(true));
+  
     addOptionLongDescriptions();
 }
 
@@ -232,7 +238,7 @@ void PSDScreenImpl::addOptionLongDescriptions()
         pharm_formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("query", 
-                             "Specifies the file containing one or more pharmacophore(s) that shall be used as a query"
+                             "Specifies the file containing one or more pharmacophore(s) that shall be used as a query "
                              "for the database search.\n\n" + pharm_formats_str);
 
     addOptionLongDescription("query-format", 
@@ -361,15 +367,20 @@ void PSDScreenImpl::processMultiThreaded()
     try {
         std::size_t num_mols_per_thread = (endMolIndex - startMolIndex) / numThreads;
 
-        for (std::size_t i = 0, start_mol_idx = startMolIndex; i < numThreads; i++, start_mol_idx += num_mols_per_thread) {
+        if ((endMolIndex - startMolIndex) % numThreads != 0)
+            num_mols_per_thread++;
+        
+        for (std::size_t i = 0, start_mol_idx = startMolIndex; i < numThreads && start_mol_idx < endMolIndex; i++, start_mol_idx += num_mols_per_thread) {
             if (termSignalCaught())
                 break;
 
-            thread_grp.emplace_back(ScreeningWorker(this, i, start_mol_idx, 
-                                                    i == numThreads - 1 ? endMolIndex : 
-                                                    start_mol_idx + num_mols_per_thread));
+            thread_grp.emplace_back(ScreeningWorker(this, i, start_mol_idx, std::min(start_mol_idx + num_mols_per_thread, endMolIndex)));
         }
 
+        std::lock_guard<std::mutex> lock(mutex);
+
+        workerProgArray.resize(thread_grp.size());
+        
     } catch (const std::exception& e) {
         setErrorMessage(std::string("error while creating worker-threads: ") + e.what());
 
@@ -412,13 +423,18 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
         if (maxNumHits > 0 && numHits >= maxNumHits)
             return false;
 
-        numHits++;
-
         printMessage(VERBOSE, "Found matching molecule '" + getName(hit.getHitMolecule()) + 
                      "' - DB: '" + hit.getHitProvider().getDBAccessor().getDatabaseName() + 
                      "', Mol. Index: " + std::to_string(hit.getHitMoleculeIndex()) + 
                      ", Conf. Index: " + std::to_string(hit.getHitConformationIndex()) +
                      ", Score: " + std::to_string(score));
+
+        if (uniqueHits && !hitMolIDs.insert(hit.getHitMoleculeIndex()).second) {
+            printMessage(VERBOSE, "  Molecule was already reported as a hit and unique hits have been requested -> hit ignored");
+            return true;
+        }
+        
+        numHits++;
 
         return (*hitCollector)(hit, score);
 
@@ -482,7 +498,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
 {
     try {
         workerProgArray[worker_idx] = progress;
-
+        
         double total_prog = std::accumulate(workerProgArray.begin(), workerProgArray.end(), 0.0) / workerProgArray.size();
         int new_prog_val = total_prog * 1000;
 
@@ -490,7 +506,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
             return true;
 
         lastProgValue = new_prog_val;
-
+        
         std::string prog_prefix = "Screening Database (" + std::to_string(numHits) + 
             " Hit" + (numHits != 1 ? "s" : "") + ")...";
 
@@ -598,6 +614,7 @@ void PSDScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Output DB-Name Property:      " + std::string(outputDBName ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Pharm. Name Property:  " + std::string(outputPharmName ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Pharm. Index Property: " + std::string(outputPharmIndex ? "Yes" : "No"));
+    printMessage(VERBOSE, " Unique Hits:                  " + std::string(uniqueHits ? "Yes" : "No"));
     printMessage(VERBOSE, " Multithreading:               " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)

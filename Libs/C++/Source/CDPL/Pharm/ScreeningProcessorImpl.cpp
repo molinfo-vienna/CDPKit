@@ -169,6 +169,9 @@ std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& quer
     std::size_t num_pharm_entries = pharmIndices.size();
 
     for (std::size_t i = 0; i <= num_pharm_entries; i++) {
+        if (progressCallback && !progressCallback(i, num_pharm_entries))
+            return numHits;
+
         if (reportMode == ScreeningProcessor::BEST_MATCHING_CONF && !std::isnan(bestConfAlmntScore) &&
             (i == num_pharm_entries || pharmIndices[i].second != bestConfAlmntMolIdx)) {
             
@@ -177,9 +180,6 @@ std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& quer
                            bestConfAlmntScore))
                 return numHits;
         }
-
-        if (progressCallback && !progressCallback(i, num_pharm_entries))
-            return numHits;
 
         if (i == num_pharm_entries)
             continue;
@@ -200,6 +200,9 @@ std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& quer
         if (!performAlignment(pharm_idx, mol_idx))
             return numHits;
     }
+
+    if (num_pharm_entries == 0 && progressCallback)
+        progressCallback(num_pharm_entries, num_pharm_entries);
 
     return numHits;
 }
