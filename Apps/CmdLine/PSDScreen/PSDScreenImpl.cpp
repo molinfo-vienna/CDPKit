@@ -366,15 +366,25 @@ void PSDScreenImpl::processMultiThreaded()
 
     try {
         std::size_t num_mols_per_thread = (endMolIndex - startMolIndex) / numThreads;
-
-        if ((endMolIndex - startMolIndex) % numThreads != 0)
-            num_mols_per_thread++;
+        std::size_t num_rem_mols = (endMolIndex - startMolIndex) % numThreads;
         
-        for (std::size_t i = 0, start_mol_idx = startMolIndex; i < numThreads && start_mol_idx < endMolIndex; i++, start_mol_idx += num_mols_per_thread) {
+        for (std::size_t i = 0, start_mol_idx = startMolIndex; i < numThreads; i++) {
             if (termSignalCaught())
                 break;
 
-            thread_grp.emplace_back(ScreeningWorker(this, i, start_mol_idx, std::min(start_mol_idx + num_mols_per_thread, endMolIndex)));
+            std::size_t chunk_size = num_mols_per_thread;
+
+            if (num_rem_mols > 0) {
+                chunk_size++;
+                num_rem_mols--;
+            }
+            
+            if (chunk_size == 0)
+                break;
+            
+            thread_grp.emplace_back(ScreeningWorker(this, i, start_mol_idx, start_mol_idx + chunk_size));
+
+            start_mol_idx += chunk_size;
         }
 
         std::lock_guard<std::mutex> lock(mutex);
