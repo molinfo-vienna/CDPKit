@@ -113,7 +113,7 @@ Other options
   -t [ --num-threads ] [=arg(=4)]
 
     Number of parallel execution threads (default: no multithreading, implicit value: 
-    4 threads, must be >= 0, 0 disables multithreading).
+    number of CPUs, must be >= 0, 0 disables multithreading).
 
   -C [ --conf-gen-preset ] arg
 

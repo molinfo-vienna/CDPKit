@@ -191,7 +191,7 @@ Mandatory for a successful build is the availability of the `Sphinx <https://www
 plus the listed extensions (see `Build requirements`_). Furthermore, for generating CDPL C++ and Python API-documentation (optional),
 the program `Doxygen <https://www.doxygen.nl>`_ has to be installed.
 
-.. note::
+.. hint::
 
    Sphinx and its extensions can be installed via the Python package installer :program:`pip`.
 

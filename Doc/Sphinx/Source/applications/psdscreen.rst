@@ -82,17 +82,17 @@ Other options
 
   -m [ --mode ] arg
 
-    Molecule conformation matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: 
+    Molecule conformer matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: 
     FIRST-MATCH).
 
   -s [ --start-index ] arg (=0)
 
-    Screening range start molecule index (zero-based!, default: 0).
+    Screening start molecule index (zero-based, default: 0).
 
   -e [ --end-index ] arg (=0)
 
-    Screening range end molecule index (zero-based and not included in screening!, default: 
-    one after last molecule).
+    Screening end molecule index (zero-based and not included in the 
+    screening run, default: number of molecules in the database).
 
   -n [ --max-num-hits ] arg (=0)
 
@@ -100,7 +100,7 @@ Other options
 
   -M [ --max-omitted ] arg (=0)
 
-    Maximum number of allowed unmatched features.
+    Allowed maximum number of unmatched features.
 
   -x [ --check-xvols ] [=arg(=1)]
 
@@ -141,7 +141,7 @@ Other options
   -t [ --num-threads ] [=arg(=4)]
 
     Number of parallel execution threads (default: no multithreading, implicit value: 
-    4 threads, must be >= 0, 0 disables multithreading).
+    number of CPUs, must be >= 0, 0 disables multithreading).
 
   -u [ --unique-hits ] [=arg(=1)]
 
