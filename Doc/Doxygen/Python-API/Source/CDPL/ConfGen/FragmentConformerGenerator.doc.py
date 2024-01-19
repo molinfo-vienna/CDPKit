@@ -87,10 +87,29 @@ class FragmentConformerGenerator(Boost.Python.instance):
     ##
     # \brief 
     # \param molgraph 
+    # \param fixed_substr 
+    # \param fixed_substr_coords 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
     # \param frag_type 
     # \return 
     #
     def generate(molgraph: Chem.MolecularGraph, frag_type: int) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \param frag_type 
+    # \param fixed_substr 
+    # \param fixed_substr_coords 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, frag_type: int, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
     # \brief 

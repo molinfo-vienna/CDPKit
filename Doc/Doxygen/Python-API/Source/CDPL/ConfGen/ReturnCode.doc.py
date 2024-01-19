@@ -93,3 +93,8 @@ class ReturnCode(Boost.Python.instance):
     # \brief 
     #
     MAX_ROT_BOND_COUNT_EXCEEDED = 13
+
+    ##
+    # \brief 
+    #
+    NO_FIXED_SUBSTRUCT_COORDS = 14

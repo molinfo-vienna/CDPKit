@@ -47,13 +47,13 @@ namespace CDPLPythonForceField
     void exportMMFF94VanDerWaalsInteraction();
     void exportMMFF94ElectrostaticInteraction();
 
-    void exportMMFF94BondStretchingInteractionData();
-    void exportMMFF94AngleBendingInteractionData();
-    void exportMMFF94StretchBendInteractionData();
-    void exportMMFF94OutOfPlaneBendingInteractionData();
-    void exportMMFF94TorsionInteractionData();
-    void exportMMFF94VanDerWaalsInteractionData();
-    void exportMMFF94ElectrostaticInteractionData();
+    void exportMMFF94BondStretchingInteractionList();
+    void exportMMFF94AngleBendingInteractionList();
+    void exportMMFF94StretchBendInteractionList();
+    void exportMMFF94OutOfPlaneBendingInteractionList();
+    void exportMMFF94TorsionInteractionList();
+    void exportMMFF94VanDerWaalsInteractionList();
+    void exportMMFF94ElectrostaticInteractionList();
     void exportMMFF94InteractionData();
 
     void exportMMFF94BondStretchingInteractionParameterizer();
@@ -84,7 +84,7 @@ namespace CDPLPythonForceField
     void exportMMFF94VanDerWaalsParameterTable();
 
     void exportElasticPotential();
-    void exportElasticPotentialData();
+    void exportElasticPotentialList();
   
     void exportFunctionWrappers();
 } // namespace CDPLPythonForceField

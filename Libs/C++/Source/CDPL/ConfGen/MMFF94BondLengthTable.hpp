@@ -34,7 +34,7 @@
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
 #include "CDPL/Util/Array.hpp"
 
@@ -68,7 +68,7 @@ namespace CDPL
             ForceField::MMFF94BondStretchingInteractionParameterizer bondStretchingParameterizer;
             ForceField::MMFF94AromaticSSSRSubset::SharedPointer      aromRings;
             Chem::FragmentList::SharedPointer                        usedAromRings;
-            ForceField::MMFF94BondStretchingInteractionData          bondStretchingParams;
+            ForceField::MMFF94BondStretchingInteractionList          bondStretchingParams;
             Util::UIArray                                            numAtomTypes;
             Util::SArray                                             symAtomTypes;
             Util::UIArray                                            bondTypeIndices;

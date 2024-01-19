@@ -32,7 +32,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
@@ -60,7 +60,7 @@ namespace CDPL
             MMFF94VanDerWaalsInteractionParameterizer();
 
             MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph&       molgraph,
-                                                      MMFF94VanDerWaalsInteractionData& ia_data,
+                                                      MMFF94VanDerWaalsInteractionList& ia_list,
                                                       bool                              strict);
 
             void setFilterFunction(const InteractionFilterFunction2& func);
@@ -71,7 +71,7 @@ namespace CDPL
 
             void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& ia_list, bool strict);
 
           private:
             InteractionFilterFunction2                     filterFunc;

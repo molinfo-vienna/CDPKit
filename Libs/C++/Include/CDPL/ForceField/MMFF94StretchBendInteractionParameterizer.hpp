@@ -37,9 +37,9 @@
 #include <boost/functional/hash.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94StretchBendInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendParameterTable.hpp"
@@ -68,8 +68,8 @@ namespace CDPL
 
             MMFF94StretchBendInteractionParameterizer();
 
-            MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data,
-                                                      const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
+            MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_ia_list,
+                                                      const MMFF94AngleBendingInteractionList& ab_ia_list, MMFF94StretchBendInteractionList& ia_list,
                                                       bool strict);
 
             void setFilterFunction(const InteractionFilterFunction3& func);
@@ -82,11 +82,11 @@ namespace CDPL
 
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data,
-                              const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_ia_list,
+                              const MMFF94AngleBendingInteractionList& ab_ia_list, MMFF94StretchBendInteractionList& ia_list, bool strict);
 
           private:
-            void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data);
+            void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionList& bs_ia_list);
 
             void getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int& bond_type_idx, double& ref_length) const;
 

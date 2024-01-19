@@ -84,7 +84,7 @@ double ConfGen::MMFF94BondLengthTable::get(std::size_t atom1_idx, std::size_t at
 {
     using namespace ForceField;
 
-    for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bondStretchingParams.getElementsBegin(), 
+    for (MMFF94BondStretchingInteractionList::ConstElementIterator it = bondStretchingParams.getElementsBegin(), 
              end = bondStretchingParams.getElementsEnd(); it != end; ++it) { 
 
         const MMFF94BondStretchingInteraction& params = *it;

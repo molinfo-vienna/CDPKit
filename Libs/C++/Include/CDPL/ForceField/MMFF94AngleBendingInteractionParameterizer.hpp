@@ -34,7 +34,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
@@ -68,7 +68,7 @@ namespace CDPL
             MMFF94AngleBendingInteractionParameterizer();
 
             MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph&        molgraph,
-                                                       MMFF94AngleBendingInteractionData& ia_data,
+                                                       MMFF94AngleBendingInteractionList& ia_list,
                                                        bool                               strict);
 
             void setFilterFunction(const InteractionFilterFunction3& func);
@@ -89,7 +89,7 @@ namespace CDPL
 
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionList& ia_list, bool strict);
 
           private:
             void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom,

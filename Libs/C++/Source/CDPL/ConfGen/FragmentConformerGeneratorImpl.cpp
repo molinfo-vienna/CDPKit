@@ -134,7 +134,9 @@ const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentConformerGeneratorIm
     return logCallback;
 }
 
-unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
+unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type,
+                                                               const Chem::MolecularGraph* fixed_substr,
+                                                               const Math::Vector3DArray* fixed_substr_coords) 
 {
     init(molgraph);
 

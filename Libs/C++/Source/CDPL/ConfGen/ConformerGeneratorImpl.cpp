@@ -42,6 +42,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
+#include "CDPL/ForceField/ElasticPotentialFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
 
 #include "ConformerGeneratorImpl.hpp"
@@ -92,6 +93,7 @@ namespace
     const std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 131072;
     const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
     const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
+    const double      ELASTIC_POTENTIAL_FORCE_CONST          = 1000.0;
 }
 
 
@@ -209,33 +211,47 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 
     } else {
         compConfData.clear();
-
+        fixedSubstructFrags.clear();
+        
         fixedSubstruct = fixed_substr;
         fixedSubstructCoords = fixed_substr_coords;
         parentMolGraph = &molgraph;
+
+        ConformerData::SharedPointer input_coords;
         
-        if (fixed_substr)
-            fixedSubstructComps.perceive(*fixed_substr);
-        else
-            fixedSubstructComps.clear();
-        
-        if (comps.getSize() == 1) {
+        if (fixed_substr) {
             if (logCallback)
-                logCallback("Found 1 molecular graph component\n");
+                logCallback("Performing " + std::string(struct_gen_only ? "structure" : "conformer") + " generation with fixed substructure\n");
 
-            ret_code = generateConformers(molgraph, struct_gen_only, true);
+            if (!fixed_substr_coords) {
+                input_coords = getInputCoordinatesForFixedSubstruct();
 
-            if (ret_code == ReturnCode::SUCCESS) {
-                bool have_ipt_coords = false;
-                
-                ret_code = selectOutputConformers(struct_gen_only, have_ipt_coords);
-
-                if ((ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::TOO_MUCH_SYMMETRY) && have_ipt_coords)
-                    orderConformersByEnergy(outputConfs);
+                if (!input_coords)
+                    ret_code = ReturnCode::NO_FIXED_SUBSTRUCT_COORDS;
+                else
+                    fixedSubstructCoords = input_coords.get();
             }
+        }
+        
+        if (ret_code == ReturnCode::SUCCESS) {
+            if (comps.getSize() == 1) {
+                if (logCallback)
+                    logCallback("Found 1 molecular graph component\n");
 
-        } else
-            ret_code = generateConformers(molgraph, comps, struct_gen_only);
+                ret_code = generateConformers(molgraph, struct_gen_only, true);
+
+                if (ret_code == ReturnCode::SUCCESS) {
+                    bool have_ipt_coords = false;
+
+                    ret_code = selectOutputConformers(struct_gen_only, have_ipt_coords);
+
+                    if ((ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::TOO_MUCH_SYMMETRY) && have_ipt_coords)
+                        orderConformersByEnergy(outputConfs);
+                }
+
+            } else
+                ret_code = generateConformers(molgraph, comps, struct_gen_only);
+        }
     }
 
     if (logCallback) {
@@ -287,8 +303,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
     bool have_full_ipt_coords = true;
     bool too_much_sym = false;
     
-    ConformerData::SharedPointer fixed_substr_comp_coords;
-    const Math::Vector3DArray* fixed_substr_parent_coords = fixedSubstructCoords;
+    ConformerData::SharedPointer fixed_substr_coords;
+    const Math::Vector3DArray* saved_fixed_substr_coords = fixedSubstructCoords;
         
     for (std::size_t i = 0, num_comps = comps.getSize(); i < num_comps; i++) {
         const Fragment::SharedPointer& comp = comps.getBase()[i];
@@ -299,19 +315,19 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
         if (logCallback)
             logCallback("Generating conformers for component " + std::to_string(i) + "...\n");
 
-        if (fixedSubstruct && fixed_substr_parent_coords) {
-            if (!fixed_substr_comp_coords) {
-                fixed_substr_comp_coords = confDataCache.get();
-                fixedSubstructCoords = fixed_substr_comp_coords.get();
+        if (fixedSubstruct) {
+            if (!fixed_substr_coords) {
+                fixed_substr_coords = confDataCache.get();
+                fixedSubstructCoords = fixed_substr_coords.get();
             }
             
-            fixed_substr_comp_coords->resize(comp->getNumAtoms());
+            fixed_substr_coords->resize(comp->getNumAtoms());
 
             for (auto& atom : fixedSubstruct->getAtoms()) {
                 if (!comp->containsAtom(atom) || !parentMolGraph->containsAtom(atom))
                     continue;
 
-                (*fixed_substr_comp_coords)[comp->getAtomIndex(atom)] = (*fixed_substr_parent_coords)[parentMolGraph->getAtomIndex(atom)];
+                (*fixed_substr_coords)[comp->getAtomIndex(atom)] = (*saved_fixed_substr_coords)[parentMolGraph->getAtomIndex(atom)];
             }
         }
         
@@ -337,7 +353,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
         compConfData.push_back(comp_conf_data);
     }
 
-    fixedSubstructCoords = fixed_substr_parent_coords;
+    fixedSubstructCoords = saved_fixed_substr_coords;
         
     combineComponentConformers(molgraph, have_full_ipt_coords);
 
@@ -536,7 +552,19 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 {
     std::size_t num_atoms = molGraph->getNumAtoms();
 
-    dgStructureGen.setup(*molGraph, mmff94Data);
+    elasticPotentials.clear();
+    
+    if (fixedSubstruct) {
+        if (fixedSubstructFrags.isEmpty())
+            fixedSubstructFrags.perceive(*fixedSubstruct);
+
+        dgStructureGen.setup(*molGraph, mmff94Data, fixedSubstructFrags, *fixedSubstructCoords);
+
+        for (auto& frag : fixedSubstructFrags)
+            generatePairwiseElasticPotentials(frag, *molGraph, *fixedSubstructCoords, elasticPotentials,
+                                              ELASTIC_POTENTIAL_FORCE_CONST);
+    } else
+        dgStructureGen.setup(*molGraph, mmff94Data);
 
     coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
     coreAtomMask.flip();
@@ -706,7 +734,7 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph,
     workingConfs.clear();
     tmpWorkingConfs.clear();
     outputConfs.clear();
-
+    
     invertibleNMask.resize(molgraph.getNumAtoms());
     invertibleNMask.reset();
 
@@ -727,7 +755,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::perceiveRotBonds()
     for (std::size_t i = 0; i < num_bonds; i++) {
         auto& bond = molGraph->getBond(i);
 
-        if (fixedSubstruct && fixedSubstruct->containsBond(bond))
+        if (fixedSubstruct && fixedSubstruct->containsBond(bond) &&
+            MolProp::getExplicitBondCount(bond.getBegin(), *fixedSubstruct) > 1 &&
+            MolProp::getExplicitBondCount(bond.getEnd(), *fixedSubstruct) > 1)
             continue;
         
         if (!isRotatableBond(bond, *molGraph, sample_het_hs))
@@ -772,34 +802,47 @@ bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(Conforme
             break;
     }
 
-    conf_data.setEnergy(energy);
+    if (!elasticPotentials.isEmpty())
+        conf_data.setEnergy(mmff94GradientCalc(conf_coords_data));
+    else
+        conf_data.setEnergy(energy);
 
     return true;
 }
 
 double ConfGen::ConformerGeneratorImpl::calcEnergy(const Math::Vector3DArray::StorageType& coords)
 {
-    return mmff94GradientCalc(coords);
+    if (elasticPotentials.isEmpty())
+        return mmff94GradientCalc(coords);
+                
+    return (mmff94GradientCalc(coords) +
+            ForceField::calcElasticPotentialEnergy<double>(elasticPotentials.getElementsBegin(),
+                                                           elasticPotentials.getElementsEnd(), coords));
 }
 
 double ConfGen::ConformerGeneratorImpl::calcGradient(const Math::Vector3DArray::StorageType& coords, Math::Vector3DArray::StorageType& grad)
 {
-    return mmff94GradientCalc(coords, grad);
+     if (elasticPotentials.isEmpty())
+         return mmff94GradientCalc(coords, grad);
+
+     return (mmff94GradientCalc(coords, grad) +
+            ForceField::calcElasticPotentialGradient<double>(elasticPotentials.getElementsBegin(),
+                                                             elasticPotentials.getElementsEnd(), coords, grad));
 }
     
-ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getFixedSubstructInputCoordinates()
+ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputCoordinatesForFixedSubstruct()
 {
     using namespace Chem;
 
     ConformerData::SharedPointer ipt_coords = confDataCache.get();
     Math::Vector3DArray::StorageType& ipt_coords_data = ipt_coords->getData();
 
-    ipt_coords->resize(molGraph->getNumAtoms());
+    ipt_coords->resize(parentMolGraph->getNumAtoms());
 
     for (auto& atom : fixedSubstruct->getAtoms()) {
         try {
             if (molGraph->containsAtom(atom))
-                ipt_coords_data[molGraph->getAtomIndex(atom)] = get3DCoordinates(atom);
+                ipt_coords_data[parentMolGraph->getAtomIndex(atom)] = get3DCoordinates(atom);
 
         } catch (const Base::ItemNotFound&) {
             return ConformerData::SharedPointer();
@@ -821,7 +864,8 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 
     coreAtomMask.resize(num_atoms);
     coreAtomMask.set();
-
+    elasticPotentials.clear();
+    
     bool coords_compl = true;
 
     for (std::size_t i = 0; i < num_atoms; i++) {
@@ -878,14 +922,11 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
 
     for (std::size_t i = 0; i < num_bonds; i++) {
         const Bond& bond = molGraph->getBond(i);
-
-        if (fixedSubstruct && fixedSubstruct->containsBond(bond))
-            continue;
-    
-        if (!isFragmentLinkBond(bond, *molGraph))
-            continue;
-
+ 
         if (!rotBondMask.test(i))
+            continue;
+
+        if (!isFragmentLinkBond(bond, *molGraph))
             continue;
 
         tmpBitSet.set(i);
@@ -976,7 +1017,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
         if (logCallback)
             logCallback("Generating conformers for torsion fragment " + getSMILES(frag) + "...\n");
 
-        unsigned int ret_code = fragAssembler.assemble(frag, *molGraph);
+        unsigned int ret_code = fragAssembler.assemble(frag, *molGraph, fixedSubstruct, fixedSubstructCoords);
 
         if (ret_code != ReturnCode::SUCCESS) 
             return ret_code;
@@ -1498,10 +1539,10 @@ double ConfGen::ConformerGeneratorImpl::getMMFF94BondLength(std::size_t atom1_id
 {
     using namespace ForceField;
 
-    const MMFF94BondStretchingInteractionData& bs_ia_data = mmff94Data.getBondStretchingInteractions();
+    const MMFF94BondStretchingInteractionList& bs_ia_list = mmff94Data.getBondStretchingInteractions();
 
-    for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_ia_data.getElementsBegin(), 
-             end = bs_ia_data.getElementsEnd(); it != end; ++it) { 
+    for (MMFF94BondStretchingInteractionList::ConstElementIterator it = bs_ia_list.getElementsBegin(), 
+             end = bs_ia_list.getElementsEnd(); it != end; ++it) { 
 
         const MMFF94BondStretchingInteraction& params = *it;
 

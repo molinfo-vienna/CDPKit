@@ -60,7 +60,13 @@ void CDPLPythonConfGen::exportFragmentAssembler()
              (python::arg("self"), python::arg("func")))
         .def("getLogMessageCallback", &ConfGen::FragmentAssembler::getLogMessageCallback, 
              python::arg("self"), python::return_internal_reference<>())
-        .def("assemble", &ConfGen::FragmentAssembler::assemble, (python::arg("self"), python::arg("molgraph")))
+        .def("assemble", static_cast<unsigned int (ConfGen::FragmentAssembler::*)(const Chem::MolecularGraph&)>
+             (&ConfGen::FragmentAssembler::assemble),
+             (python::arg("self"), python::arg("molgraph")))
+        .def("assemble", static_cast<unsigned int (ConfGen::FragmentAssembler::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Math::Vector3DArray&)>
+             (&ConfGen::FragmentAssembler::assemble),
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr"), python::arg("fixed_substr_coords")))
         .def("getNumConformers", &ConfGen::FragmentAssembler::getNumConformers, python::arg("self"))
         .def("getConformer", 
              static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getConformer),

@@ -48,12 +48,12 @@ namespace
 
 
 ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                                             MMFF94OutOfPlaneBendingInteractionData& ia_data,
+                                                                                                             MMFF94OutOfPlaneBendingInteractionList& ia_list,
                                                                                                              bool strict):
     filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94OutOfPlaneBendingParameterTable::get(true)),
     typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer():
@@ -87,14 +87,14 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypePro
     typePropTable = table;
 }
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data,
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionList& ia_list,
                                                                                bool strict)
 {
     using namespace Chem;
 
     typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& ctr_atom = molgraph.getAtom(i);
@@ -139,9 +139,9 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
         for (std::size_t j = 0; j < 3; j++)
             nbr_atom_idcs[j] = molgraph.getAtomIndex(*nbrAtoms[j]);
         
-        ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[0], i, nbr_atom_idcs[1], nbr_atom_idcs[2], force_const));
-        ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[2], i, nbr_atom_idcs[0], nbr_atom_idcs[1], force_const));
-        ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[1], i, nbr_atom_idcs[2], nbr_atom_idcs[0], force_const));
+        ia_list.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[0], i, nbr_atom_idcs[1], nbr_atom_idcs[2], force_const));
+        ia_list.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[2], i, nbr_atom_idcs[0], nbr_atom_idcs[1], force_const));
+        ia_list.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[1], i, nbr_atom_idcs[2], nbr_atom_idcs[0], force_const));
     } 
 }
 

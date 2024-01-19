@@ -92,7 +92,9 @@ namespace CDPL
             const BondLengthFunction& getBondLengthFunction() const;
 
             unsigned int assemble(const Chem::MolecularGraph& molgraph,
-                                  const Chem::MolecularGraph& parent_molgraph);
+                                  const Chem::MolecularGraph& parent_molgraph,
+                                  const Chem::MolecularGraph* fixed_substr,
+                                  const Math::Vector3DArray* fixed_substr_coords);
 
             std::size_t getNumConformers() const;
 

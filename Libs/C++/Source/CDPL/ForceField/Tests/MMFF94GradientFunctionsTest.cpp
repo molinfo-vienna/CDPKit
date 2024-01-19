@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94BondStretchingInteractionParameterizer parameterizer;
-    ForceField::MMFF94BondStretchingInteractionData found_ia_data;
+    ForceField::MMFF94BondStretchingInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_atom1_grad;
@@ -90,15 +90,15 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
         const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-        parameterizer.parameterize(mol, found_ia_data, true);
+        parameterizer.parameterize(mol, found_ia_list, true);
     
         coords.clear();
         get3DCoordinates(mol, coords);
 
         grad.resize(coords.getSize());
 
-        for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-            const ForceField::MMFF94BondStretchingInteraction& iaction = found_ia_data[i];
+        for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+            const ForceField::MMFF94BondStretchingInteraction& iaction = found_ia_list[i];
 
             grad[iaction.getAtom1Index()].clear();
             grad[iaction.getAtom2Index()].clear();
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94AngleBendingInteractionParameterizer parameterizer;
-    ForceField::MMFF94AngleBendingInteractionData found_ia_data;
+    ForceField::MMFF94AngleBendingInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_term_atom1_grad;
@@ -149,15 +149,15 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
         const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
     
-        parameterizer.parameterize(mol, found_ia_data, true);
+        parameterizer.parameterize(mol, found_ia_list, true);
 
         coords.clear();
         get3DCoordinates(mol, coords);
 
         grad.resize(coords.getSize());
 
-        for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-            const ForceField::MMFF94AngleBendingInteraction& iaction = found_ia_data[i];
+        for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+            const ForceField::MMFF94AngleBendingInteraction& iaction = found_ia_list[i];
 
             grad[iaction.getTerminalAtom1Index()].clear();
             grad[iaction.getTerminalAtom2Index()].clear();
@@ -207,9 +207,9 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendGradientFunctionTest)
     ForceField::MMFF94AngleBendingInteractionParameterizer ab_parameterizer;
     ForceField::MMFF94BondStretchingInteractionParameterizer bs_parameterizer;
     ForceField::MMFF94StretchBendInteractionParameterizer sb_parameterizer;
-    ForceField::MMFF94StretchBendInteractionData found_ia_data;
-    ForceField::MMFF94AngleBendingInteractionData ab_ia_data;
-    ForceField::MMFF94BondStretchingInteractionData bs_ia_data;
+    ForceField::MMFF94StretchBendInteractionList found_ia_list;
+    ForceField::MMFF94AngleBendingInteractionList ab_ia_list;
+    ForceField::MMFF94BondStretchingInteractionList bs_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_term_atom1_grad;
@@ -219,17 +219,17 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
         const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-        bs_parameterizer.parameterize(mol, bs_ia_data, true);
-        ab_parameterizer.parameterize(mol, ab_ia_data, true);
-        sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data, true);
+        bs_parameterizer.parameterize(mol, bs_ia_list, true);
+        ab_parameterizer.parameterize(mol, ab_ia_list, true);
+        sb_parameterizer.parameterize(mol, bs_ia_list, ab_ia_list, found_ia_list, true);
 
         coords.clear();
         get3DCoordinates(mol, coords);
 
         grad.resize(coords.getSize());
 
-        for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-            const ForceField::MMFF94StretchBendInteraction& iaction = found_ia_data[i];
+        for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+            const ForceField::MMFF94StretchBendInteraction& iaction = found_ia_list[i];
 
             grad[iaction.getTerminalAtom1Index()].clear();
             grad[iaction.getTerminalAtom2Index()].clear();
@@ -277,7 +277,7 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer parameterizer;
-    ForceField::MMFF94OutOfPlaneBendingInteractionData found_ia_data;
+    ForceField::MMFF94OutOfPlaneBendingInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_term_atom1_grad;
@@ -293,15 +293,15 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingGradientFunctionTest)
         for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
             const Chem::Molecule& mol = *mols[mol_idx];
 
-            parameterizer.parameterize(mol, found_ia_data, true);
+            parameterizer.parameterize(mol, found_ia_list, true);
 
             coords.clear();
             get3DCoordinates(mol, coords);
 
             grad.resize(coords.getSize());
 
-            for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-                const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_data[i];
+            for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+                const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_list[i];
 
                 grad[iaction.getTerminalAtom1Index()].clear();
                 grad[iaction.getTerminalAtom2Index()].clear();
@@ -357,7 +357,7 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94TorsionInteractionParameterizer parameterizer;
-    ForceField::MMFF94TorsionInteractionData found_ia_data;
+    ForceField::MMFF94TorsionInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_term_atom1_grad;
@@ -373,15 +373,15 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionGradientFunctionTest)
         for (std::size_t mol_idx = 0; mol_idx <    mols.size(); mol_idx++) {
             const Chem::Molecule& mol =    *mols[mol_idx];
 
-            parameterizer.parameterize(mol, found_ia_data, true);
+            parameterizer.parameterize(mol, found_ia_list, true);
 
             coords.clear();
             get3DCoordinates(mol, coords);
 
             grad.resize(coords.getSize());
 
-            for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-                const ForceField::MMFF94TorsionInteraction& iaction = found_ia_data[i];
+            for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+                const ForceField::MMFF94TorsionInteraction& iaction = found_ia_list[i];
 
                 grad[iaction.getTerminalAtom1Index()].clear();
                 grad[iaction.getTerminalAtom2Index()].clear();
@@ -437,7 +437,7 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94VanDerWaalsInteractionParameterizer parameterizer;
-    ForceField::MMFF94VanDerWaalsInteractionData found_ia_data;
+    ForceField::MMFF94VanDerWaalsInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_atom1_grad;
@@ -446,15 +446,15 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
         const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-        parameterizer.parameterize(mol, found_ia_data, true);
+        parameterizer.parameterize(mol, found_ia_list, true);
 
         coords.clear();
         get3DCoordinates(mol, coords);
 
         grad.resize(coords.getSize());
 
-        for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-            const ForceField::MMFF94VanDerWaalsInteraction& iaction = found_ia_data[i];
+        for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+            const ForceField::MMFF94VanDerWaalsInteraction& iaction = found_ia_list[i];
 
             grad[iaction.getAtom1Index()].clear();
             grad[iaction.getAtom2Index()].clear();
@@ -495,7 +495,7 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticGradientFunctionTest)
     using namespace Testing;
 
     ForceField::MMFF94ElectrostaticInteractionParameterizer parameterizer;
-    ForceField::MMFF94ElectrostaticInteractionData found_ia_data;
+    ForceField::MMFF94ElectrostaticInteractionList found_ia_list;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_atom1_grad;
@@ -506,15 +506,15 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticGradientFunctionTest)
 
         ForceField::calcMMFF94AtomCharges(mol, true, false);
 
-        parameterizer.parameterize(mol, found_ia_data, true);
+        parameterizer.parameterize(mol, found_ia_list, true);
 
         coords.clear();
         get3DCoordinates(mol, coords);
         
         grad.resize(coords.getSize());
 
-        for (std::size_t i = 0; i < found_ia_data.size(); i++) {
-            const ForceField::MMFF94ElectrostaticInteraction& iaction = found_ia_data[i];
+        for (std::size_t i = 0; i < found_ia_list.size(); i++) {
+            const ForceField::MMFF94ElectrostaticInteraction& iaction = found_ia_list[i];
 
             grad[iaction.getAtom1Index()].clear();
             grad[iaction.getAtom2Index()].clear();

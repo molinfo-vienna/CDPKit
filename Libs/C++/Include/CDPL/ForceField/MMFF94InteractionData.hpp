@@ -32,13 +32,13 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94StretchBendInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
 
 
 namespace CDPL
@@ -53,46 +53,46 @@ namespace CDPL
           public:
             typedef std::shared_ptr<MMFF94InteractionData> SharedPointer;
 
-            const MMFF94BondStretchingInteractionData& getBondStretchingInteractions() const;
+            const MMFF94BondStretchingInteractionList& getBondStretchingInteractions() const;
 
-            MMFF94BondStretchingInteractionData& getBondStretchingInteractions();
+            MMFF94BondStretchingInteractionList& getBondStretchingInteractions();
 
-            const MMFF94AngleBendingInteractionData& getAngleBendingInteractions() const;
+            const MMFF94AngleBendingInteractionList& getAngleBendingInteractions() const;
 
-            MMFF94AngleBendingInteractionData& getAngleBendingInteractions();
+            MMFF94AngleBendingInteractionList& getAngleBendingInteractions();
 
-            const MMFF94StretchBendInteractionData& getStretchBendInteractions() const;
+            const MMFF94StretchBendInteractionList& getStretchBendInteractions() const;
 
-            MMFF94StretchBendInteractionData& getStretchBendInteractions();
+            MMFF94StretchBendInteractionList& getStretchBendInteractions();
 
-            const MMFF94OutOfPlaneBendingInteractionData& getOutOfPlaneBendingInteractions() const;
+            const MMFF94OutOfPlaneBendingInteractionList& getOutOfPlaneBendingInteractions() const;
 
-            MMFF94OutOfPlaneBendingInteractionData& getOutOfPlaneBendingInteractions();
+            MMFF94OutOfPlaneBendingInteractionList& getOutOfPlaneBendingInteractions();
 
-            const MMFF94TorsionInteractionData& getTorsionInteractions() const;
+            const MMFF94TorsionInteractionList& getTorsionInteractions() const;
 
-            MMFF94TorsionInteractionData& getTorsionInteractions();
+            MMFF94TorsionInteractionList& getTorsionInteractions();
 
-            const MMFF94ElectrostaticInteractionData& getElectrostaticInteractions() const;
+            const MMFF94ElectrostaticInteractionList& getElectrostaticInteractions() const;
 
-            MMFF94ElectrostaticInteractionData& getElectrostaticInteractions();
+            MMFF94ElectrostaticInteractionList& getElectrostaticInteractions();
 
-            const MMFF94VanDerWaalsInteractionData& getVanDerWaalsInteractions() const;
+            const MMFF94VanDerWaalsInteractionList& getVanDerWaalsInteractions() const;
 
-            MMFF94VanDerWaalsInteractionData& getVanDerWaalsInteractions();
+            MMFF94VanDerWaalsInteractionList& getVanDerWaalsInteractions();
 
             void clear();
 
             void swap(MMFF94InteractionData& ia_data);
 
           private:
-            MMFF94BondStretchingInteractionData    bondStretchingData;
-            MMFF94AngleBendingInteractionData      angleBendingData;
-            MMFF94StretchBendInteractionData       stretchBendData;
-            MMFF94OutOfPlaneBendingInteractionData outOfPlaneData;
-            MMFF94TorsionInteractionData           torsionData;
-            MMFF94ElectrostaticInteractionData     electrostaticData;
-            MMFF94VanDerWaalsInteractionData       vanDerWaalsData;
+            MMFF94BondStretchingInteractionList    bondStretchingData;
+            MMFF94AngleBendingInteractionList      angleBendingData;
+            MMFF94StretchBendInteractionList       stretchBendData;
+            MMFF94OutOfPlaneBendingInteractionList outOfPlaneData;
+            MMFF94TorsionInteractionList           torsionData;
+            MMFF94ElectrostaticInteractionList     electrostaticData;
+            MMFF94VanDerWaalsInteractionList       vanDerWaalsData;
         };
     } // namespace ForceField
 } // namespace CDPL

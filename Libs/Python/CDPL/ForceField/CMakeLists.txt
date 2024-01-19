@@ -58,13 +58,13 @@ set(forcefield_MOD_SRCS
     MMFF94VanDerWaalsInteractionExport.cpp
     MMFF94ElectrostaticInteractionExport.cpp
 
-    MMFF94BondStretchingInteractionDataExport.cpp
-    MMFF94AngleBendingInteractionDataExport.cpp
-    MMFF94StretchBendInteractionDataExport.cpp
-    MMFF94OutOfPlaneBendingInteractionDataExport.cpp
-    MMFF94TorsionInteractionDataExport.cpp
-    MMFF94VanDerWaalsInteractionDataExport.cpp
-    MMFF94ElectrostaticInteractionDataExport.cpp
+    MMFF94BondStretchingInteractionListExport.cpp
+    MMFF94AngleBendingInteractionListExport.cpp
+    MMFF94StretchBendInteractionListExport.cpp
+    MMFF94OutOfPlaneBendingInteractionListExport.cpp
+    MMFF94TorsionInteractionListExport.cpp
+    MMFF94VanDerWaalsInteractionListExport.cpp
+    MMFF94ElectrostaticInteractionListExport.cpp
     MMFF94InteractionDataExport.cpp
 
     MMFF94BondStretchingInteractionParameterizerExport.cpp
@@ -95,7 +95,7 @@ set(forcefield_MOD_SRCS
     MMFF94VanDerWaalsParameterTableExport.cpp
 
     ElasticPotentialExport.cpp
-    ElasticPotentialDataExport.cpp
+    ElasticPotentialListExport.cpp
    
     UtilityFunctionExport.cpp 
     MMFF94EnergyFunctionExport.cpp 

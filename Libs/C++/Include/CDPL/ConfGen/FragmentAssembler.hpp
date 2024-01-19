@@ -89,6 +89,9 @@ namespace CDPL
 
             unsigned int assemble(const Chem::MolecularGraph& molgraph);
 
+            unsigned int assemble(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                  const Math::Vector3DArray& fixed_substr_coords);
+
             std::size_t getNumConformers() const;
 
             const ConformerData& getConformer(std::size_t idx) const;

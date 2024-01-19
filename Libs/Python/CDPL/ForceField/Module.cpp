@@ -63,13 +63,13 @@ BOOST_PYTHON_MODULE(_forcefield)
     exportMMFF94VanDerWaalsInteraction();
     exportMMFF94ElectrostaticInteraction();
 
-    exportMMFF94BondStretchingInteractionData();
-    exportMMFF94AngleBendingInteractionData();
-    exportMMFF94StretchBendInteractionData();
-    exportMMFF94OutOfPlaneBendingInteractionData();
-    exportMMFF94TorsionInteractionData();
-    exportMMFF94VanDerWaalsInteractionData();
-    exportMMFF94ElectrostaticInteractionData();
+    exportMMFF94BondStretchingInteractionList();
+    exportMMFF94AngleBendingInteractionList();
+    exportMMFF94StretchBendInteractionList();
+    exportMMFF94OutOfPlaneBendingInteractionList();
+    exportMMFF94TorsionInteractionList();
+    exportMMFF94VanDerWaalsInteractionList();
+    exportMMFF94ElectrostaticInteractionList();
     exportMMFF94InteractionData();
 
     exportMMFF94BondStretchingInteractionParameterizer();
@@ -100,7 +100,7 @@ BOOST_PYTHON_MODULE(_forcefield)
     exportMMFF94VanDerWaalsParameterTable();
 
     exportElasticPotential();
-    exportElasticPotentialData();
+    exportElasticPotentialList();
 
     exportUtilityFunctions();
     exportMMFF94EnergyFunctions();

@@ -103,12 +103,12 @@ namespace
 
 
 ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                                   MMFF94AngleBendingInteractionData& ia_data,
+                                                                                                   MMFF94AngleBendingInteractionList& ia_list,
                                                                                                    bool strict):
     filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), paramTable(MMFF94AngleBendingParameterTable::get()),
     typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer():
@@ -168,11 +168,11 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTyp
 }
 
 void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-                                                                          MMFF94AngleBendingInteractionData& ia_data, bool strict)
+                                                                          MMFF94AngleBendingInteractionList& ia_list, bool strict)
 {
     using namespace Chem;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& ctr_atom = molgraph.getAtom(i);
@@ -210,7 +210,7 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const 
                                   term_atom1_bnd, *nbrBonds[k], angle_type_idx, linear, force_const, ref_angle, strict);
                 }
 
-                ia_data.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
+                ia_list.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
                                                                  angle_type_idx, linear, force_const, ref_angle));
             }
         }

@@ -65,10 +65,10 @@ namespace CDPL
 
             void setup(const Chem::MolecularGraph& molgraph);
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
-            void setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_atom_frags,
-                       const Math::Vector3DArray& fixed_atom_coords);
+            void setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_substr_frags,
+                       const Math::Vector3DArray& fixed_substr_coords);
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data,
-                       const Chem::FragmentList& fixed_atom_frags, const Math::Vector3DArray& fixed_atom_coords);
+                       const Chem::FragmentList& fixed_substr_frags, const Math::Vector3DArray& fixed_substr_coords);
 
             bool generate(Math::Vector3DArray& coords);
 
@@ -82,11 +82,14 @@ namespace CDPL
 
           private:
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data,
-                       const Chem::FragmentList* fixed_atom_fragss, const Math::Vector3DArray* fixed_atom_coords);
+                       const Chem::FragmentList* fixed_substr_frags, const Math::Vector3DArray* fixed_substr_coords);
 
             typedef boost::random::mt11213b RandNumEngine;
 
             const Chem::MolecularGraph*    molGraph;
+            const Chem::FragmentList*      fixedSubstructFrags;
+            const Math::Vector3DArray*     fixedSubstructCoords;
+            Math::Vector3DArray            fixedSubstructFragCtrs;
             DGConstraintGenerator          dgConstraintsGen;
             Util::DG3DCoordinatesGenerator phase1CoordsGen;
             Util::DG3DCoordinatesGenerator phase2CoordsGen;

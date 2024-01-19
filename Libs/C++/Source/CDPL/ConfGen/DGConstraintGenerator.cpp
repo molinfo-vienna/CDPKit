@@ -46,9 +46,9 @@
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -638,9 +638,9 @@ void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94I
     bool excl_hs = settings.excludeHydrogens();
 
     if (ia_data) {
-        const MMFF94BondStretchingInteractionData& bs_data = ia_data->getBondStretchingInteractions();
+        const MMFF94BondStretchingInteractionList& bs_list = ia_data->getBondStretchingInteractions();
     
-        for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsEnd(); it != end; ++it) {
+        for (MMFF94BondStretchingInteractionList::ConstElementIterator it = bs_list.getElementsBegin(), end = bs_list.getElementsEnd(); it != end; ++it) {
             const MMFF94BondStretchingInteraction& iactn = *it;
 
             std::size_t atom1_idx = iactn.getAtom1Index();
@@ -700,9 +700,9 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
     bool excl_hs = settings.excludeHydrogens();
 
     if (ia_data) {
-        const MMFF94AngleBendingInteractionData& bs_data = ia_data->getAngleBendingInteractions();
+        const MMFF94AngleBendingInteractionList& bs_list = ia_data->getAngleBendingInteractions();
     
-        for (MMFF94AngleBendingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsEnd(); it != end; ++it) {
+        for (MMFF94AngleBendingInteractionList::ConstElementIterator it = bs_list.getElementsBegin(), end = bs_list.getElementsEnd(); it != end; ++it) {
             const MMFF94AngleBendingInteraction& iactn = *it;
 
             std::size_t term_atom1_idx = iactn.getTerminalAtom1Index();

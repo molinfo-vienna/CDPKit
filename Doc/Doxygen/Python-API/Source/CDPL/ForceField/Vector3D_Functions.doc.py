@@ -549,6 +549,39 @@ def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_
 def calcMMFF94BondStretchingGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
+# \brief Calculates the elastic potential energy gradient \f$ \nabla E_{ij} \f$ for a pair of atoms <em>i-j</em>.
+# 
+# Energy function:<br>
+# 
+# \f$ E_{ij} = k_{ij} \: \Delta r_{ij}^2 \f$
+# 
+# The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+# 
+# \f$ \frac{\partial E_{ij}}{\partial \vec{p_x}} = \frac{\partial E_{ij}}{\partial \Delta r_{ij}} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$<br>
+# 
+# \f$ \frac{\partial E_{ij}}{\partial \Delta r_{ij}} = 2 \: \Delta r_{ij} \: k_{ij} \f$<br>
+# 
+# for the calculation of the partial derivatives \f$ \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
+# 
+# where<br>
+#  \f$ k_{ij} \f$ = the force constant of the elastic potential.<br>
+#  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{ij}^0 \f$, the difference between actual and reference distance of the atoms <em>i</em> and <em>j</em>.<br>
+#  \f$ \vec{p_x} \f$ = coordinates of the atoms <em>i</em> and <em>j</em>.<br>
+# 
+# \param atom1_pos The position \f$ \vec{p_i} \f$ of atom <em>i</em>.
+# \param atom2_pos The position \f$ \vec{p_j} \f$ of atom <em>j</em>.
+# \param atom1_grad The output variable storing the accumulated energy gradient contributions for atom <em>i</em>.
+# \param atom2_grad The output variable storing the accumulated energy gradient contributions for atom <em>j</em>.
+# \param force_const The force constant \f$ k_{ij} \f$.
+# \param ref_length The reference distance \f$ r_{ij}^0 \f$.
+# 
+# \return The calculated elastic potential energy \f$ E_{ij} \f$. 
+# 
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# 
+def calcElasticPotentialGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
+
+##
 # \brief Calculates the torsion interaction energy gradient \f$ \nabla ET_{ijkl} \f$ for the central bond <em>j-k</em> and the connected bonds <em>i-j</em> and <em>k-l</em>.
 # 
 # Energy function:<br>
@@ -829,6 +862,24 @@ def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_po
 # \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
 # 
 def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
+
+##
+# \brief Calculates the energy \f$ E_{ij} \f$ of an elastic potential applied on a pair of atoms <em>i-j</em>.
+# 
+# \f$ E_{ij} = k_{ij} \: \Delta r_{ij}^2 \f$
+# 
+# where<br>
+#  \f$ k_{ij} \f$ = the force constant of the elastic potential.<br>
+#  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{ij}^0 \f$, the difference between actual and reference distance of the atoms <em>i</em> and <em>j</em>.<br>
+# 
+# \param atom1_pos The position of atom <em>i</em>.
+# \param atom2_pos The position of atom <em>j</em>.
+# \param force_const The force constant \f$ k_{ij} \f$.
+# \param ref_length The reference distance \f$ r_{ij}^0 \f$.
+# 
+# \return The calculated elastic potential energy \f$ E_{ij} \f$.
+# 
+def calcElasticPotentialEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
 # \brief Calculates the torsion interaction energy \f$ ET_{ijkl} \f$ for the central bond <em>j-k</em> and the connected bonds <em>i-j</em> and <em>k-l</em>.

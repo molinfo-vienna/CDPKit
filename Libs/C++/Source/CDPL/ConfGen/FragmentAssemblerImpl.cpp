@@ -199,7 +199,9 @@ const Util::BitSet& ConfGen::FragmentAssemblerImpl::getInvertibleNitrogenMask() 
 }
 
 unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph, 
-                                                      const Chem::MolecularGraph& parent_molgraph)
+                                                      const Chem::MolecularGraph& parent_molgraph,
+                                                      const Chem::MolecularGraph* fixed_substr,
+                                                      const Math::Vector3DArray* fixed_substr_coords)
 {
     init(parent_molgraph);
     buildFragmentTree(molgraph, parent_molgraph);
@@ -496,7 +498,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 {
     canonFrag.perceiveSSSR();
 
-    unsigned int ret_code = fragConfGen.generate(canonFrag, frag_type);
+    unsigned int ret_code = fragConfGen.generate(canonFrag, frag_type, 0, 0);
 
     if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
         return ret_code;

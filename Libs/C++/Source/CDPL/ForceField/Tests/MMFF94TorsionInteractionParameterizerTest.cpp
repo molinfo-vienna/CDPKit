@@ -44,9 +44,9 @@ namespace
         using namespace CDPL;
         using namespace Testing;
 
-        OptimolLogReader::TorsionInteractionData ia_data;
+        OptimolLogReader::TorsionInteractionList ia_list;
         ForceField::MMFF94TorsionInteractionParameterizer parameterizer;
-        ForceField::MMFF94TorsionInteractionData found_ia_data;
+        ForceField::MMFF94TorsionInteractionList found_ia_list;
 
         parameterizer.setTorsionParameterTable(ForceField::MMFF94TorsionParameterTable::get(stat));
 
@@ -54,68 +54,68 @@ namespace
             const Chem::Molecule& mol =    *mols[mol_idx];
             const std::string& mol_name = getName(mol);
 
-            BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, ia_data));
+            BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, ia_list));
 
-            parameterizer.parameterize(mol, found_ia_data, true);
+            parameterizer.parameterize(mol, found_ia_list, true);
 
-            BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-                                found_ia_data.getSize() << " != " << ia_data.size());
+            BOOST_CHECK_MESSAGE(found_ia_list.getSize() == ia_list.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+                                found_ia_list.getSize() << " != " << ia_list.size());
 
-            for (std::size_t i = 0; i < ia_data.size(); i++) {
+            for (std::size_t i = 0; i < ia_list.size(); i++) {
                 bool iaction_found = false;
-                std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-                std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+                std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_list[i].termAtom1Name);
+                std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_list[i].termAtom2Name);
 
-                for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-                    const ForceField::MMFF94TorsionInteraction& iaction = found_ia_data[j];
+                for (std::size_t j = 0; j < found_ia_list.getSize(); j++) {
+                    const ForceField::MMFF94TorsionInteraction& iaction = found_ia_list[j];
 
-                    if (!((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getCenterAtom1Index() == ia_data[i].ctrAtom1Idx && 
-                         iaction.getCenterAtom2Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-                        (iaction.getTerminalAtom2Index() == term_atom1_idx && iaction.getCenterAtom2Index() == ia_data[i].ctrAtom1Idx && 
-                         iaction.getCenterAtom1Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom1Index() == term_atom2_idx)))
+                    if (!((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getCenterAtom1Index() == ia_list[i].ctrAtom1Idx && 
+                         iaction.getCenterAtom2Index() == ia_list[i].ctrAtom2Idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+                        (iaction.getTerminalAtom2Index() == term_atom1_idx && iaction.getCenterAtom2Index() == ia_list[i].ctrAtom1Idx && 
+                         iaction.getCenterAtom1Index() == ia_list[i].ctrAtom2Idx && iaction.getTerminalAtom1Index() == term_atom2_idx)))
                         continue;
 
-                    BOOST_CHECK_MESSAGE(iaction.getTorsionTypeIndex() == ia_data[i].ffClass, 
+                    BOOST_CHECK_MESSAGE(iaction.getTorsionTypeIndex() == ia_list[i].ffClass, 
                                         "Torsion type index mismatch for torsion interaction #" << term_atom1_idx << "(" << 
-                                        ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-                                        ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-                                        " (" << mol_name << "): " << iaction.getTorsionTypeIndex() << " != " << ia_data[i].ffClass);
+                                        ia_list[i].termAtom1Name << ")-#" << ia_list[i].ctrAtom1Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom1Idx)) << ")-#" << ia_list[i].ctrAtom2Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+                                        ia_list[i].termAtom2Name << ") of molecule #" << mol_idx << 
+                                        " (" << mol_name << "): " << iaction.getTorsionTypeIndex() << " != " << ia_list[i].ffClass);
 
-                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter1() - ia_data[i].torParams[0]) < 0.0005, 
+                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter1() - ia_list[i].torParams[0]) < 0.0005, 
                                         "Torsion parameter V1 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
-                                        ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-                                        ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-                                        " (" << mol_name << "): " << iaction.getTorsionParameter1() << " != " << ia_data[i].torParams[0]);
+                                        ia_list[i].termAtom1Name << ")-#" << ia_list[i].ctrAtom1Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom1Idx)) << ")-#" << ia_list[i].ctrAtom2Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+                                        ia_list[i].termAtom2Name << ") of molecule #" << mol_idx << 
+                                        " (" << mol_name << "): " << iaction.getTorsionParameter1() << " != " << ia_list[i].torParams[0]);
     
-                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter2() - ia_data[i].torParams[1]) < 0.0005, 
+                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter2() - ia_list[i].torParams[1]) < 0.0005, 
                                         "Torsion parameter V2 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
-                                        ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-                                        ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-                                        " (" << mol_name << "): " << iaction.getTorsionParameter2() << " != " << ia_data[i].torParams[1]);
+                                        ia_list[i].termAtom1Name << ")-#" << ia_list[i].ctrAtom1Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom1Idx)) << ")-#" << ia_list[i].ctrAtom2Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+                                        ia_list[i].termAtom2Name << ") of molecule #" << mol_idx << 
+                                        " (" << mol_name << "): " << iaction.getTorsionParameter2() << " != " << ia_list[i].torParams[1]);
     
-                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter3() - ia_data[i].torParams[2]) < 0.0005, 
+                    BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter3() - ia_list[i].torParams[2]) < 0.0005, 
                                         "Torsion parameter V3 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
-                                        ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-                                        getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-                                        ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-                                        " (" << mol_name << "): " << iaction.getTorsionParameter3() << " != " << ia_data[i].torParams[2]);
+                                        ia_list[i].termAtom1Name << ")-#" << ia_list[i].ctrAtom1Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom1Idx)) << ")-#" << ia_list[i].ctrAtom2Idx << "(" << 
+                                        getMOL2Name(mol.getAtom(ia_list[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+                                        ia_list[i].termAtom2Name << ") of molecule #" << mol_idx << 
+                                        " (" << mol_name << "): " << iaction.getTorsionParameter3() << " != " << ia_list[i].torParams[2]);
 
                     iaction_found = true;
                     break;
                 }
         
                 BOOST_CHECK_MESSAGE(iaction_found, "Torsion interaction #" << term_atom1_idx << "(" << 
-                                    ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-                                    getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-                                    getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-                                    ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
+                                    ia_list[i].termAtom1Name << ")-#" << ia_list[i].ctrAtom1Idx << "(" << 
+                                    getMOL2Name(mol.getAtom(ia_list[i].ctrAtom1Idx)) << ")-#" << ia_list[i].ctrAtom2Idx << "(" << 
+                                    getMOL2Name(mol.getAtom(ia_list[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+                                    ia_list[i].termAtom2Name << ") of molecule #" << mol_idx << 
                                     " (" << mol_name << ") has not been found");
             }
         }

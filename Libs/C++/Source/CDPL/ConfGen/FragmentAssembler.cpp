@@ -94,9 +94,15 @@ const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentAssembler::getLogMes
 
 unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph)
 {
-    return impl->assemble(molgraph, molgraph);
+    return impl->assemble(molgraph, molgraph, 0, 0);
 }
         
+unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                                  const Math::Vector3DArray& fixed_substr_coords)
+{
+    return impl->assemble(molgraph, molgraph, &fixed_substr, &fixed_substr_coords);
+}
+
 std::size_t ConfGen::FragmentAssembler::getNumConformers() const
 {
     return impl->getNumConformers();

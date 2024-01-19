@@ -41,10 +41,10 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionParameterizer()
                    ForceField::MMFF94StretchBendInteractionParameterizer::SharedPointer>("MMFF94StretchBendInteractionParameterizer", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ForceField::MMFF94StretchBendInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-        .def(python::init<const Chem::MolecularGraph&, const ForceField::MMFF94BondStretchingInteractionData&, 
-             const ForceField::MMFF94AngleBendingInteractionData&, ForceField::MMFF94StretchBendInteractionData&, bool>(
-                 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), 
-                  python::arg("ia_data"), python::arg("strict"))))
+        .def(python::init<const Chem::MolecularGraph&, const ForceField::MMFF94BondStretchingInteractionList&, 
+             const ForceField::MMFF94AngleBendingInteractionList&, ForceField::MMFF94StretchBendInteractionList&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_list"), python::arg("ab_ia_list"), 
+                  python::arg("ia_list"), python::arg("strict"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94StretchBendInteractionParameterizer>())    
         .def("setFilterFunction", &ForceField::MMFF94StretchBendInteractionParameterizer::setFilterFunction, 
              (python::arg("self"), python::arg("func"))) 
@@ -59,6 +59,6 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionParameterizer()
         .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94StretchBendInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94StretchBendInteractionParameterizer::parameterize, 
-             (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), 
-              python::arg("ia_data"), python::arg("strict")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_list"), python::arg("ab_ia_list"), 
+              python::arg("ia_list"), python::arg("strict")));
 }

@@ -44,8 +44,6 @@ void CDPLPythonConfGen::exportConformerGenerator()
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGenerator>())
 //        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::ConformerGenerator>(), 
 //             (python::arg("self"), python::arg("gen")), python::return_self<>())
-        .def("generate", &ConfGen::ConformerGenerator::generate, 
-             (python::arg("self"), python::arg("molgraph")))
         .def("getSettings", 
              static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
              (&ConfGen::ConformerGenerator::getSettings), 
@@ -70,7 +68,16 @@ void CDPLPythonConfGen::exportConformerGenerator()
              (python::arg("self"), python::arg("func")))
         .def("getLogMessageCallback", &ConfGen::ConformerGenerator::getLogMessageCallback, 
              python::arg("self"), python::return_internal_reference<>())
-        .def("generate", &ConfGen::ConformerGenerator::generate, (python::arg("self"), python::arg("molgraph")))
+        .def("generate", static_cast<unsigned int (ConfGen::ConformerGenerator::*)
+             (const Chem::MolecularGraph&)>(&ConfGen::ConformerGenerator::generate),
+             (python::arg("self"), python::arg("molgraph")))
+        .def("generate", static_cast<unsigned int (ConfGen::ConformerGenerator::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&ConfGen::ConformerGenerator::generate),
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr")))
+        .def("generate", static_cast<unsigned int (ConfGen::ConformerGenerator::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Math::Vector3DArray&)>
+             (&ConfGen::ConformerGenerator::generate),
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr"), python::arg("fixed_substr_coords")))
         .def("setConformers", &ConfGen::ConformerGenerator::setConformers,
              (python::arg("self"), python::arg("molgraph")))
         .def("getNumConformers", &ConfGen::ConformerGenerator::getNumConformers, python::arg("self"))

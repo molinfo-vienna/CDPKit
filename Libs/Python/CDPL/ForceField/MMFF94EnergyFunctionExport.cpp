@@ -25,13 +25,13 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ForceField/MMFF94EnergyFunctions.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94StretchBendInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -41,9 +41,9 @@
 namespace
 {
 
-    double calcMMFF94BondStretchingEnergy1(const CDPL::ForceField::MMFF94BondStretchingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94BondStretchingEnergy1(const CDPL::ForceField::MMFF94BondStretchingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94BondStretchingEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94BondStretchingEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94BondStretchingEnergy2(const CDPL::ForceField::MMFF94BondStretchingInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -63,9 +63,9 @@ namespace
     }
 
 
-    double calcMMFF94AngleBendingEnergy1(const CDPL::ForceField::MMFF94AngleBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94AngleBendingEnergy1(const CDPL::ForceField::MMFF94AngleBendingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94AngleBendingEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94AngleBendingEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94AngleBendingEnergy2(const CDPL::ForceField::MMFF94AngleBendingInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -86,9 +86,9 @@ namespace
     }
 
 
-    double calcMMFF94StretchBendEnergy1(const CDPL::ForceField::MMFF94StretchBendInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94StretchBendEnergy1(const CDPL::ForceField::MMFF94StretchBendInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94StretchBendEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94StretchBendEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94StretchBendEnergy2(const CDPL::ForceField::MMFF94StretchBendInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -113,9 +113,9 @@ namespace
     }
 
 
-    double calcMMFF94OutOfPlaneBendingEnergy1(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94OutOfPlaneBendingEnergy1(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94OutOfPlaneBendingEnergy2(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -138,9 +138,9 @@ namespace
     }
 
 
-    double calcMMFF94TorsionEnergy1(const CDPL::ForceField::MMFF94TorsionInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94TorsionEnergy1(const CDPL::ForceField::MMFF94TorsionInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94TorsionEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94TorsionEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94TorsionEnergy2(const CDPL::ForceField::MMFF94TorsionInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -156,9 +156,9 @@ namespace
                                                                  tor_param1, tor_param2, tor_param3);
     }
 
-    double calcMMFF94ElectrostaticEnergy1(const CDPL::ForceField::MMFF94ElectrostaticInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94ElectrostaticEnergy1(const CDPL::ForceField::MMFF94ElectrostaticInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94ElectrostaticEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94ElectrostaticEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94ElectrostaticEnergy2(const CDPL::ForceField::MMFF94ElectrostaticInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -179,9 +179,9 @@ namespace
     }
 
 
-    double calcMMFF94VanDerWaalsEnergy1(const CDPL::ForceField::MMFF94VanDerWaalsInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
+    double calcMMFF94VanDerWaalsEnergy1(const CDPL::ForceField::MMFF94VanDerWaalsInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords);
     }
 
     double calcMMFF94VanDerWaalsEnergy2(const CDPL::ForceField::MMFF94VanDerWaalsInteraction& iaction, const CDPL::Math::Vector3DArray& coords)
@@ -208,7 +208,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
     using namespace CDPL;
 
     python::def("calcMMFF94BondStretchingEnergy", &calcMMFF94BondStretchingEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94BondStretchingEnergy", &calcMMFF94BondStretchingEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94BondStretchingEnergy", &calcMMFF94BondStretchingEnergy3,
@@ -217,7 +217,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                 (python::arg("r_ij"), python::arg("force_const"), python::arg("ref_length")));
 
     python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy3,
@@ -229,7 +229,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                  python::arg("ref_angle")));
 
     python::def("calcMMFF94StretchBendEnergy", &calcMMFF94StretchBendEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94StretchBendEnergy", &calcMMFF94StretchBendEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94StretchBendEnergy", &calcMMFF94StretchBendEnergy3,
@@ -242,7 +242,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                  python::arg("ref_angle"), python::arg("ref_length1"),  python::arg("ref_length2")));
 
     python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy3,
@@ -253,7 +253,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                  python::arg("oop_atom_pos"), python::arg("r_jl"), python::arg("force_const")));
 
     python::def("calcMMFF94TorsionEnergy", &calcMMFF94TorsionEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94TorsionEnergy", &calcMMFF94TorsionEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94TorsionEnergy", &calcMMFF94TorsionEnergy3,
@@ -262,7 +262,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                  python::arg("tor_param3")));
 
     python::def("calcMMFF94ElectrostaticEnergy", &calcMMFF94ElectrostaticEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94ElectrostaticEnergy", &calcMMFF94ElectrostaticEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94ElectrostaticEnergy", &calcMMFF94ElectrostaticEnergy3,
@@ -274,7 +274,7 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
                  python::arg("scale_fact"), python::arg("de_const"), python::arg("dist_expo")));
 
     python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy1,
-                (python::arg("ia_data"), python::arg("coords")));
+                (python::arg("ia_list"), python::arg("coords")));
     python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy2,
                 (python::arg("iaction"), python::arg("coords")));
     python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy3,

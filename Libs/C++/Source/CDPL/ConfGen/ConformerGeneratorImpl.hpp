@@ -44,6 +44,7 @@
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
+#include "CDPL/ForceField/ElasticPotentialList.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
@@ -95,8 +96,8 @@ namespace CDPL
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
             unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only,
-                                  const Chem::MolecularGraph* fixed_substr = 0,
-                                  const Math::Vector3DArray* fixed_substr_coords = 0);
+                                  const Chem::MolecularGraph* fixed_substr,
+                                  const Math::Vector3DArray* fixed_substr_coords);
 
             void setConformers(Chem::MolecularGraph& molgraph) const;
 
@@ -145,7 +146,7 @@ namespace CDPL
             double calcGradient(const Math::Vector3DArray::StorageType& coords,
                                 Math::Vector3DArray::StorageType& grad);
             
-            ConformerData::SharedPointer getFixedSubstructInputCoordinates();
+            ConformerData::SharedPointer getInputCoordinatesForFixedSubstruct();
             ConformerData::SharedPointer getInputCoordinates();
 
             void splitIntoTorsionFragments();
@@ -207,6 +208,7 @@ namespace CDPL
             typedef ForceField::MMFF94InteractionData                             MMFF94InteractionData;
             typedef ForceField::MMFF94InteractionParameterizer                    MMFF94Parameterizer;
             typedef ForceField::MMFF94GradientCalculator<double>                  MMFF94GradientCalculator;
+            typedef ForceField::ElasticPotentialList                              ElasticPotentialList;
             typedef std::vector<const Chem::Bond*>                                BondList;
             typedef std::vector<ConfCombinationData*>                             ConfCombinationDataList;
             typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer;
@@ -217,7 +219,7 @@ namespace CDPL
             ConformerGeneratorSettings            settings;
             const Chem::MolecularGraph*           parentMolGraph;
             const Chem::MolecularGraph*           molGraph;
-            Chem::ComponentSet                    fixedSubstructComps;
+            Chem::ComponentSet                    fixedSubstructFrags;
             const Chem::MolecularGraph*           fixedSubstruct;
             const Math::Vector3DArray*            fixedSubstructCoords;
             ConformerDataArray                    workingConfs;
@@ -236,6 +238,7 @@ namespace CDPL
             MMFF94InteractionData                 mmff94Data;
             ForceFieldInteractionMask             mmff94InteractionMask;
             MMFF94GradientCalculator              mmff94GradientCalc;
+            ElasticPotentialList                  elasticPotentials;
             BFGSMinimizer                         energyMinimizer;
             Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
             BondList                              torDriveBonds;

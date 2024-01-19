@@ -43,13 +43,6 @@ class ConformerGenerator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param molgraph 
-    # \return 
-    #
-    def generate(molgraph: Chem.MolecularGraph) -> int: pass
-
-    ##
-    # \brief 
     # \return 
     #
     def getSettings() -> ConformerGeneratorSettings: pass
@@ -111,6 +104,30 @@ class ConformerGenerator(Boost.Python.instance):
     # \return 
     #
     def getLogMessageCallback() -> LogMessageCallbackFunction: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \param fixed_substr 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \param fixed_substr 
+    # \param fixed_substr_coords 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
 
     ##
     # \brief 

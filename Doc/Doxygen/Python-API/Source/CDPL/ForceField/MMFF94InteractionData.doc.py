@@ -44,43 +44,43 @@ class MMFF94InteractionData(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getBondStretchingInteractions() -> MMFF94BondStretchingInteractionData: pass
+    def getBondStretchingInteractions() -> MMFF94BondStretchingInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionData: pass
+    def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getStretchBendInteractions() -> MMFF94StretchBendInteractionData: pass
+    def getStretchBendInteractions() -> MMFF94StretchBendInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getOutOfPlaneBendingInteractions() -> MMFF94OutOfPlaneBendingInteractionData: pass
+    def getOutOfPlaneBendingInteractions() -> MMFF94OutOfPlaneBendingInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getTorsionInteractions() -> MMFF94TorsionInteractionData: pass
+    def getTorsionInteractions() -> MMFF94TorsionInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getElectrostaticInteractions() -> MMFF94ElectrostaticInteractionData: pass
+    def getElectrostaticInteractions() -> MMFF94ElectrostaticInteractionList: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionData: pass
+    def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionList: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionData instance \a ia_data.

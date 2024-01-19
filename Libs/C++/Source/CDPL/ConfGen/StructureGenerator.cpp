@@ -118,6 +118,23 @@ const ConfGen::LogMessageCallbackFunction& ConfGen::StructureGenerator::getLogMe
 
 unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
+    return generate(molgraph, 0, 0);
+}
+
+unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr)
+{
+    return generate(molgraph, &fixed_substr, 0);
+}
+
+unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                                   const Math::Vector3DArray& fixed_substr_coords)
+{
+    return generate(molgraph, &fixed_substr, &fixed_substr_coords);
+}
+
+unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph* fixed_substr,
+                                                   const Math::Vector3DArray* fixed_substr_coords)
+{
     ConformerGeneratorSettings& cg_settings = impl->getSettings();
 
     cg_settings.getFragmentBuildSettings() = settings.getFragmentBuildSettings();
@@ -149,7 +166,7 @@ unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& m
             cg_settings.setSamplingMode(ConformerSamplingMode::AUTO);
     }
 
-    unsigned int ret_code = impl->generate(molgraph, true);
+    unsigned int ret_code = impl->generate(molgraph, true, fixed_substr, fixed_substr_coords);
 
     if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::TIMEOUT)
         return ret_code;

@@ -25,7 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ForceField/ElasticPotentialFunctions.hpp"
-#include "CDPL/ForceField/ElasticPotentialData.hpp"
+#include "CDPL/ForceField/ElasticPotentialList.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -35,9 +35,9 @@
 namespace
 {
 
-    double calcElasticPotentialEnergy1(const CDPL::ForceField::ElasticPotentialData& data, const CDPL::Math::Vector3DArray& coords)
+    double calcElasticPotentialEnergy1(const CDPL::ForceField::ElasticPotentialList& list, const CDPL::Math::Vector3DArray& coords)
     {
-        return CDPL::ForceField::calcElasticPotentialEnergy<double>(data.getElementsBegin(), data.getElementsEnd(), coords);
+        return CDPL::ForceField::calcElasticPotentialEnergy<double>(list.getElementsBegin(), list.getElementsEnd(), coords);
     }
 
     double calcElasticPotentialEnergy2(const CDPL::ForceField::ElasticPotential& pot, const CDPL::Math::Vector3DArray& coords)
@@ -51,10 +51,10 @@ namespace
         return CDPL::ForceField::calcElasticPotentialEnergy<double>(atom1_pos, atom2_pos, force_const, ref_length);
     }
     
-    double calcElasticPotentialGradient1(const CDPL::ForceField::ElasticPotentialData& data, const CDPL::Math::Vector3DArray& coords, 
+    double calcElasticPotentialGradient1(const CDPL::ForceField::ElasticPotentialList& list, const CDPL::Math::Vector3DArray& coords, 
                                              CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcElasticPotentialGradient<double>(data.getElementsBegin(), data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcElasticPotentialGradient<double>(list.getElementsBegin(), list.getElementsEnd(), coords, grad);
     }
 
     double calcElasticPotentialGradient2(const CDPL::ForceField::ElasticPotential& pot, const CDPL::Math::Vector3DArray& coords, 
@@ -78,13 +78,13 @@ void CDPLPythonForceField::exportElasticPotentialFunctions()
     using namespace CDPL;
 
     python::def("calcElasticPotentialEnergy", &calcElasticPotentialEnergy1,
-                (python::arg("data"), python::arg("coords")));
+                (python::arg("list"), python::arg("coords")));
     python::def("calcElasticPotentialEnergy", &calcElasticPotentialEnergy2,
                 (python::arg("pot"), python::arg("coords")));
     python::def("calcElasticPotentialEnergy", &calcElasticPotentialEnergy3,
                 (python::arg("atom1_pos"), python::arg("atom2_pos"), python::arg("force_const"), python::arg("ref_length")));
     python::def("calcElasticPotentialGradient", &calcElasticPotentialGradient1,
-                (python::arg("data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("list"), python::arg("coords"), python::arg("grad")));
     python::def("calcElasticPotentialGradient", &calcElasticPotentialGradient2,
                 (python::arg("pot"), python::arg("coords"), python::arg("grad")));
     python::def("calcElasticPotentialGradient", &calcElasticPotentialGradient3,

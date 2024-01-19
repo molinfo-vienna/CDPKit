@@ -40,9 +40,10 @@
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
+#include "CDPL/ForceField/ElasticPotentialList.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
-#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/ComponentSet.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -80,7 +81,9 @@ namespace CDPL
 
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-            unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
+            unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type,
+                                  const Chem::MolecularGraph* fixed_substr,
+                                  const Math::Vector3DArray* fixed_substr_coords);
 
             void setConformers(Chem::MolecularGraph& molgraph) const;
 

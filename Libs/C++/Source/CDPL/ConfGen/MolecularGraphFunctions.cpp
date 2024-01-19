@@ -142,7 +142,7 @@ unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
         const Bond& bond = *it;
 
         if (getRingFlag(bond)) {
-            if (getOrder(bond) != 1 || getAromaticityFlag(bond))
+            if (getOrder(bond) > 1 || getAromaticityFlag(bond))
                 has_rigid_ring_bonds = true;
             else
                 return FragmentType::FLEXIBLE_RING_SYSTEM;

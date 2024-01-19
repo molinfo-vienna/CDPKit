@@ -81,19 +81,32 @@ const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentConformerGenerator::
     return impl->getLogMessageCallback();
 }
 
-unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph) 
-{
-    return generate(molgraph, perceiveFragmentType(molgraph));
-}
-
 void ConfGen::FragmentConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const
 {
     impl->setConformers(molgraph);
 }
 
+unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph) 
+{
+    return generate(molgraph, perceiveFragmentType(molgraph));
+}
+
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
 {
-    return impl->generate(molgraph, frag_type);
+    return impl->generate(molgraph, frag_type, 0, 0);
+}
+
+unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                                           const Math::Vector3DArray& fixed_substr_coords)
+{
+    return generate(molgraph, perceiveFragmentType(molgraph), fixed_substr, fixed_substr_coords);
+}
+
+unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type,
+                                                           const Chem::MolecularGraph& fixed_substr,
+                                                           const Math::Vector3DArray& fixed_substr_coords)
+{
+     return impl->generate(molgraph, frag_type, &fixed_substr, &fixed_substr_coords);
 }
 
 std::size_t ConfGen::FragmentConformerGenerator::getNumConformers() const

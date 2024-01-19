@@ -57,13 +57,26 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
         .def("getLogMessageCallback", &ConfGen::FragmentConformerGenerator::getLogMessageCallback, 
              python::arg("self"), python::return_internal_reference<>())
         .def("generate", 
-             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&)>
+             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*)
+             (const Chem::MolecularGraph&)>
              (&ConfGen::FragmentConformerGenerator::generate), 
              (python::arg("self"), python::arg("molgraph")))
         .def("generate", 
-             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&, unsigned int)>
+             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Math::Vector3DArray&)>
+             (&ConfGen::FragmentConformerGenerator::generate), 
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr"), python::arg("fixed_substr_coords")))
+        .def("generate", 
+             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*)
+             (const Chem::MolecularGraph&, unsigned int)>
              (&ConfGen::FragmentConformerGenerator::generate), 
              (python::arg("self"), python::arg("molgraph"), python::arg("frag_type")))
+        .def("generate", 
+             static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*)
+             (const Chem::MolecularGraph&, unsigned int, const Chem::MolecularGraph&, const Math::Vector3DArray&)>
+             (&ConfGen::FragmentConformerGenerator::generate), 
+             (python::arg("self"), python::arg("molgraph"), python::arg("frag_type"), python::arg("fixed_substr"),
+              python::arg("fixed_substr_coords")))
         .def("setConformers", &ConfGen::FragmentConformerGenerator::setConformers,
              (python::arg("self"), python::arg("molgraph")))
         .def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))

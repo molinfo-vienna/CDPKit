@@ -30,72 +30,72 @@
 using namespace CDPL; 
 
 
-const ForceField::MMFF94BondStretchingInteractionData& ForceField::MMFF94InteractionData::getBondStretchingInteractions() const
+const ForceField::MMFF94BondStretchingInteractionList& ForceField::MMFF94InteractionData::getBondStretchingInteractions() const
 {
     return bondStretchingData;
 }
 
-ForceField::MMFF94BondStretchingInteractionData& ForceField::MMFF94InteractionData::getBondStretchingInteractions()
+ForceField::MMFF94BondStretchingInteractionList& ForceField::MMFF94InteractionData::getBondStretchingInteractions()
 {
     return bondStretchingData;
 }
 
-const ForceField::MMFF94AngleBendingInteractionData& ForceField::MMFF94InteractionData::getAngleBendingInteractions() const
+const ForceField::MMFF94AngleBendingInteractionList& ForceField::MMFF94InteractionData::getAngleBendingInteractions() const
 {
     return angleBendingData;
 }
 
-ForceField::MMFF94AngleBendingInteractionData& ForceField::MMFF94InteractionData::getAngleBendingInteractions()
+ForceField::MMFF94AngleBendingInteractionList& ForceField::MMFF94InteractionData::getAngleBendingInteractions()
 {
     return angleBendingData;
 }
 
-const ForceField::MMFF94StretchBendInteractionData& ForceField::MMFF94InteractionData::getStretchBendInteractions() const
+const ForceField::MMFF94StretchBendInteractionList& ForceField::MMFF94InteractionData::getStretchBendInteractions() const
 {
     return stretchBendData;
 }
 
-ForceField::MMFF94StretchBendInteractionData& ForceField::MMFF94InteractionData::getStretchBendInteractions()
+ForceField::MMFF94StretchBendInteractionList& ForceField::MMFF94InteractionData::getStretchBendInteractions()
 {
     return stretchBendData;
 }
 
-const ForceField::MMFF94OutOfPlaneBendingInteractionData& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions() const
+const ForceField::MMFF94OutOfPlaneBendingInteractionList& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions() const
 {
     return outOfPlaneData;
 }
 
-ForceField::MMFF94OutOfPlaneBendingInteractionData& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions()
+ForceField::MMFF94OutOfPlaneBendingInteractionList& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions()
 {
     return outOfPlaneData;
 }
 
-const ForceField::MMFF94TorsionInteractionData& ForceField::MMFF94InteractionData::getTorsionInteractions() const
+const ForceField::MMFF94TorsionInteractionList& ForceField::MMFF94InteractionData::getTorsionInteractions() const
 {
     return torsionData;
 }
 
-ForceField::MMFF94TorsionInteractionData& ForceField::MMFF94InteractionData::getTorsionInteractions()
+ForceField::MMFF94TorsionInteractionList& ForceField::MMFF94InteractionData::getTorsionInteractions()
 {
     return torsionData;
 }
 
-const ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions() const
+const ForceField::MMFF94ElectrostaticInteractionList& ForceField::MMFF94InteractionData::getElectrostaticInteractions() const
 {
     return electrostaticData;
 }
 
-ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions()
+ForceField::MMFF94ElectrostaticInteractionList& ForceField::MMFF94InteractionData::getElectrostaticInteractions()
 {
     return electrostaticData;
 }
 
-const ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions() const
+const ForceField::MMFF94VanDerWaalsInteractionList& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions() const
 {
     return vanDerWaalsData;
 }
 
-ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions()
+ForceField::MMFF94VanDerWaalsInteractionList& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions()
 {
     return vanDerWaalsData;
 }

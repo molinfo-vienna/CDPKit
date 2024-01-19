@@ -32,7 +32,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
@@ -63,7 +63,7 @@ namespace CDPL
             MMFF94ElectrostaticInteractionParameterizer();
 
             MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph&         molgraph,
-                                                        MMFF94ElectrostaticInteractionData& ia_data,
+                                                        MMFF94ElectrostaticInteractionList& ia_list,
                                                         bool                                strict);
 
             void setFilterFunction(const InteractionFilterFunction2& func);
@@ -76,7 +76,7 @@ namespace CDPL
 
             void setDistanceExponent(double dist_expo);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionList& ia_list, bool strict);
 
           private:
             InteractionFilterFunction2      filterFunc;

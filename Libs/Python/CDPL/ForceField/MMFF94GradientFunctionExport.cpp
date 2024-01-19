@@ -25,13 +25,13 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94StretchBendInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -41,10 +41,10 @@
 namespace
 {
 
-    double calcMMFF94BondStretchingGradient1(const CDPL::ForceField::MMFF94BondStretchingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94BondStretchingGradient1(const CDPL::ForceField::MMFF94BondStretchingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                              CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94BondStretchingGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94BondStretchingGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94BondStretchingGradient2(const CDPL::ForceField::MMFF94BondStretchingInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -60,10 +60,10 @@ namespace
         return CDPL::ForceField::calcMMFF94BondStretchingGradient(atom1_pos, atom2_pos, atom1_grad, atom2_grad, force_const, ref_length);
     }
 
-    double calcMMFF94AngleBendingGradient1(const CDPL::ForceField::MMFF94AngleBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94AngleBendingGradient1(const CDPL::ForceField::MMFF94AngleBendingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                            CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94AngleBendingGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94AngleBendingGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94AngleBendingGradient2(const CDPL::ForceField::MMFF94AngleBendingInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -82,10 +82,10 @@ namespace
                                                                 linear, force_const, ref_angle);
     }
 
-    double calcMMFF94StretchBendGradient1(const CDPL::ForceField::MMFF94StretchBendInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94StretchBendGradient1(const CDPL::ForceField::MMFF94StretchBendInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                           CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94StretchBendGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94StretchBendGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94StretchBendGradient2(const CDPL::ForceField::MMFF94StretchBendInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -105,10 +105,10 @@ namespace
                                                                ref_angle, ref_length1, ref_length2);
     }
 
-    double calcMMFF94OutOfPlaneBendingGradient1(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94OutOfPlaneBendingGradient1(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                                 CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94OutOfPlaneBendingGradient2(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -128,10 +128,10 @@ namespace
                                                                      force_const);
     }
 
-    double calcMMFF94TorsionGradient1(const CDPL::ForceField::MMFF94TorsionInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94TorsionGradient1(const CDPL::ForceField::MMFF94TorsionInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                       CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94TorsionGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94TorsionGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94TorsionGradient2(const CDPL::ForceField::MMFF94TorsionInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -151,10 +151,10 @@ namespace
                                                            tor_param1, tor_param2, tor_param3);
     }
 
-    double calcMMFF94ElectrostaticGradient1(const CDPL::ForceField::MMFF94ElectrostaticInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94ElectrostaticGradient1(const CDPL::ForceField::MMFF94ElectrostaticInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                             CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94ElectrostaticGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94ElectrostaticGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94ElectrostaticGradient2(const CDPL::ForceField::MMFF94ElectrostaticInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -171,10 +171,10 @@ namespace
                                                                  de_const, dist_expo);
     }
 
-    double calcMMFF94VanDerWaalsGradient1(const CDPL::ForceField::MMFF94VanDerWaalsInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords, 
+    double calcMMFF94VanDerWaalsGradient1(const CDPL::ForceField::MMFF94VanDerWaalsInteractionList& ia_list, const CDPL::Math::Vector3DArray& coords, 
                                           CDPL::Math::Vector3DArray& grad)
     {
-        return CDPL::ForceField::calcMMFF94VanDerWaalsGradient<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords, grad);
+        return CDPL::ForceField::calcMMFF94VanDerWaalsGradient<double>(ia_list.getElementsBegin(), ia_list.getElementsEnd(), coords, grad);
     }
 
     double calcMMFF94VanDerWaalsGradient2(const CDPL::ForceField::MMFF94VanDerWaalsInteraction& iaction, const CDPL::Math::Vector3DArray& coords, 
@@ -198,7 +198,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
     using namespace CDPL;
 
     python::def("calcMMFF94BondStretchingGradient", &calcMMFF94BondStretchingGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94BondStretchingGradient", &calcMMFF94BondStretchingGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94BondStretchingGradient", &calcMMFF94BondStretchingGradient3,
@@ -207,7 +207,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("force_const"), python::arg("ref_length")));
 
     python::def("calcMMFF94AngleBendingGradient", &calcMMFF94AngleBendingGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94AngleBendingGradient", &calcMMFF94AngleBendingGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94AngleBendingGradient", &calcMMFF94AngleBendingGradient3,
@@ -216,7 +216,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("linear"), python::arg("force_const"), python::arg("ref_angle")));
 
     python::def("calcMMFF94StretchBendGradient", &calcMMFF94StretchBendGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94StretchBendGradient", &calcMMFF94StretchBendGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94StretchBendGradient", &calcMMFF94StretchBendGradient3,
@@ -226,7 +226,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("ref_length1"),  python::arg("ref_length2")));
 
     python::def("calcMMFF94OutOfPlaneBendingGradient", &calcMMFF94OutOfPlaneBendingGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94OutOfPlaneBendingGradient", &calcMMFF94OutOfPlaneBendingGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94OutOfPlaneBendingGradient", &calcMMFF94OutOfPlaneBendingGradient3,
@@ -235,7 +235,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("term_atom2_grad"), python::arg("oop_atom_grad"), python::arg("force_const")));
 
     python::def("calcMMFF94TorsionGradient", &calcMMFF94TorsionGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94TorsionGradient", &calcMMFF94TorsionGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94TorsionGradient", &calcMMFF94TorsionGradient3,
@@ -245,7 +245,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("tor_param2"), python::arg("tor_param3")));
 
     python::def("calcMMFF94ElectrostaticGradient", &calcMMFF94ElectrostaticGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94ElectrostaticGradient", &calcMMFF94ElectrostaticGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94ElectrostaticGradient", &calcMMFF94ElectrostaticGradient3,
@@ -255,7 +255,7 @@ void CDPLPythonForceField::exportMMFF94GradientFunctions()
                  python::arg("dist_expo")));
 
     python::def("calcMMFF94VanDerWaalsGradient", &calcMMFF94VanDerWaalsGradient1,
-                (python::arg("ia_data"), python::arg("coords"), python::arg("grad")));
+                (python::arg("ia_list"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94VanDerWaalsGradient", &calcMMFF94VanDerWaalsGradient2,
                 (python::arg("iaction"), python::arg("coords"), python::arg("grad")));
     python::def("calcMMFF94VanDerWaalsGradient", &calcMMFF94VanDerWaalsGradient3,

@@ -217,38 +217,38 @@ void ForceField::MMFF94InteractionParameterizer::setParameterSet(unsigned int pa
     torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(param_set));
 }
 
-void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
+void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_list,
                                                               unsigned int ia_types, bool strict)
 {
     setup(molgraph, ia_types, strict);
 
     if ((ia_types & InteractionType::BOND_STRETCHING) || (ia_types & InteractionType::STRETCH_BEND))
-        bondStretchingParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions(), strict);
+        bondStretchingParameterizer.parameterize(molgraph, ia_list.getBondStretchingInteractions(), strict);
 
     if ((ia_types & InteractionType::ANGLE_BENDING) || (ia_types & InteractionType::STRETCH_BEND))
-        angleBendingParameterizer.parameterize(molgraph, ia_data.getAngleBendingInteractions(), strict);
+        angleBendingParameterizer.parameterize(molgraph, ia_list.getAngleBendingInteractions(), strict);
 
     if (ia_types & InteractionType::STRETCH_BEND)
-        stretchBendParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions(), 
-                                              ia_data.getAngleBendingInteractions(), ia_data.getStretchBendInteractions(), strict);
+        stretchBendParameterizer.parameterize(molgraph, ia_list.getBondStretchingInteractions(), 
+                                              ia_list.getAngleBendingInteractions(), ia_list.getStretchBendInteractions(), strict);
 
     if (!(ia_types & InteractionType::BOND_STRETCHING))
-        ia_data.getBondStretchingInteractions().clear();
+        ia_list.getBondStretchingInteractions().clear();
 
     if (!(ia_types & InteractionType::ANGLE_BENDING))
-        ia_data.getAngleBendingInteractions().clear();
+        ia_list.getAngleBendingInteractions().clear();
 
     if (ia_types & InteractionType::OUT_OF_PLANE_BENDING)
-        outOfPlaneParameterizer.parameterize(molgraph, ia_data.getOutOfPlaneBendingInteractions(), strict);
+        outOfPlaneParameterizer.parameterize(molgraph, ia_list.getOutOfPlaneBendingInteractions(), strict);
 
     if (ia_types & InteractionType::TORSION)
-        torsionParameterizer.parameterize(molgraph, ia_data.getTorsionInteractions(), strict);
+        torsionParameterizer.parameterize(molgraph, ia_list.getTorsionInteractions(), strict);
 
     if (ia_types & InteractionType::ELECTROSTATIC)
-        electrostaticParameterizer.parameterize(molgraph, ia_data.getElectrostaticInteractions(), strict);
+        electrostaticParameterizer.parameterize(molgraph, ia_list.getElectrostaticInteractions(), strict);
 
     if (ia_types & InteractionType::VAN_DER_WAALS)
-        vanDerWaalsParameterizer.parameterize(molgraph, ia_data.getVanDerWaalsInteractions(), strict);
+        vanDerWaalsParameterizer.parameterize(molgraph, ia_list.getVanDerWaalsInteractions(), strict);
 }
 
 ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParameterizer::operator=(const MMFF94InteractionParameterizer& parameterizer)

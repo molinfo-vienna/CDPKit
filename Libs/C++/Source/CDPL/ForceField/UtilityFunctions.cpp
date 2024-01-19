@@ -34,7 +34,7 @@ using namespace CDPL;
 void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94InteractionData& filtered_ia_data, 
                                     const Util::BitSet& inc_atom_mask)
 {
-    for (MMFF94BondStretchingInteractionData::ConstElementIterator it = ia_data.getBondStretchingInteractions().getElementsBegin(),
+    for (MMFF94BondStretchingInteractionList::ConstElementIterator it = ia_data.getBondStretchingInteractions().getElementsBegin(),
              end = ia_data.getBondStretchingInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94BondStretchingInteraction& iactn = *it;
 
@@ -47,7 +47,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getBondStretchingInteractions().addElement(iactn);
     }
 
-    for (MMFF94VanDerWaalsInteractionData::ConstElementIterator it = ia_data.getVanDerWaalsInteractions().getElementsBegin(),
+    for (MMFF94VanDerWaalsInteractionList::ConstElementIterator it = ia_data.getVanDerWaalsInteractions().getElementsBegin(),
              end = ia_data.getVanDerWaalsInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94VanDerWaalsInteraction& iactn = *it;
 
@@ -60,7 +60,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getVanDerWaalsInteractions().addElement(iactn);
     }
 
-    for (MMFF94ElectrostaticInteractionData::ConstElementIterator it = ia_data.getElectrostaticInteractions().getElementsBegin(),
+    for (MMFF94ElectrostaticInteractionList::ConstElementIterator it = ia_data.getElectrostaticInteractions().getElementsBegin(),
              end = ia_data.getElectrostaticInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94ElectrostaticInteraction& iactn = *it;
 
@@ -73,7 +73,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getElectrostaticInteractions().addElement(iactn);
     }
 
-    for (MMFF94AngleBendingInteractionData::ConstElementIterator it = ia_data.getAngleBendingInteractions().getElementsBegin(),
+    for (MMFF94AngleBendingInteractionList::ConstElementIterator it = ia_data.getAngleBendingInteractions().getElementsBegin(),
              end = ia_data.getAngleBendingInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94AngleBendingInteraction& iactn = *it;
 
@@ -89,7 +89,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getAngleBendingInteractions().addElement(iactn);
     }
 
-    for (MMFF94StretchBendInteractionData::ConstElementIterator it = ia_data.getStretchBendInteractions().getElementsBegin(),
+    for (MMFF94StretchBendInteractionList::ConstElementIterator it = ia_data.getStretchBendInteractions().getElementsBegin(),
              end = ia_data.getStretchBendInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94StretchBendInteraction& iactn = *it;
 
@@ -105,7 +105,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getStretchBendInteractions().addElement(iactn);
     }
 
-    for (MMFF94OutOfPlaneBendingInteractionData::ConstElementIterator it = ia_data.getOutOfPlaneBendingInteractions().getElementsBegin(),
+    for (MMFF94OutOfPlaneBendingInteractionList::ConstElementIterator it = ia_data.getOutOfPlaneBendingInteractions().getElementsBegin(),
              end = ia_data.getOutOfPlaneBendingInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94OutOfPlaneBendingInteraction& iactn = *it;
 
@@ -124,7 +124,7 @@ void ForceField::filterInteractions(const MMFF94InteractionData& ia_data, MMFF94
         filtered_ia_data.getOutOfPlaneBendingInteractions().addElement(iactn);
     }
 
-    for (MMFF94TorsionInteractionData::ConstElementIterator it = ia_data.getTorsionInteractions().getElementsBegin(),
+    for (MMFF94TorsionInteractionList::ConstElementIterator it = ia_data.getTorsionInteractions().getElementsBegin(),
              end = ia_data.getTorsionInteractions().getElementsEnd(); it != end; ++it) {
         const MMFF94TorsionInteraction& iactn = *it;
 

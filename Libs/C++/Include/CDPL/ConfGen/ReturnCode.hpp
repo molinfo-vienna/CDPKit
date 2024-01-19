@@ -42,33 +42,35 @@ namespace CDPL
         namespace ReturnCode
         {
 
-            const int SUCCESS = 0;
+            const int SUCCESS                        = 0;
 
-            const int UNINITIALIZED = 1;
+            const int UNINITIALIZED                  = 1;
 
-            const int TIMEOUT = 2;
+            const int TIMEOUT                        = 2;
 
-            const int ABORTED = 3;
+            const int ABORTED                        = 3;
 
-            const int FORCEFIELD_SETUP_FAILED = 4;
+            const int FORCEFIELD_SETUP_FAILED        = 4;
 
             const int FORCEFIELD_MINIMIZATION_FAILED = 5;
 
-            const int FRAGMENT_LIBRARY_NOT_SET = 6;
+            const int FRAGMENT_LIBRARY_NOT_SET       = 6;
 
-            const int FRAGMENT_CONF_GEN_FAILED = 7;
+            const int FRAGMENT_CONF_GEN_FAILED       = 7;
 
-            const int FRAGMENT_CONF_GEN_TIMEOUT = 8;
+            const int FRAGMENT_CONF_GEN_TIMEOUT      = 8;
 
-            const int FRAGMENT_ALREADY_PROCESSED = 9;
+            const int FRAGMENT_ALREADY_PROCESSED     = 9;
 
-            const int TORSION_DRIVING_FAILED = 10;
+            const int TORSION_DRIVING_FAILED         = 10;
 
-            const int CONF_GEN_FAILED = 11;
+            const int CONF_GEN_FAILED                = 11;
 
-            const int TOO_MUCH_SYMMETRY = 12;
+            const int TOO_MUCH_SYMMETRY              = 12;
 
-            const int MAX_ROT_BOND_COUNT_EXCEEDED = 13;
+            const int MAX_ROT_BOND_COUNT_EXCEEDED    = 13;
+
+            const int NO_FIXED_SUBSTRUCT_COORDS      = 14;
         } // namespace ReturnCode
     } // namespace ConfGen
 } // namespace CDPL

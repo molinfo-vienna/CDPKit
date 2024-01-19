@@ -102,13 +102,13 @@ namespace
 
 
 ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                         MMFF94TorsionInteractionData& ia_data,
+                                                                                         MMFF94TorsionInteractionList& ia_list,
                                                                                          bool strict):
     filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), 
     aromRingSetFunc(&getMMFF94AromaticRings), paramTable(MMFF94TorsionParameterTable::get(true)),
     typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer():
@@ -153,11 +153,11 @@ void ForceField::MMFF94TorsionInteractionParameterizer::setParameterAtomTypeMap(
 }
 
 void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-                                                                     MMFF94TorsionInteractionData& ia_data, bool strict)
+                                                                     MMFF94TorsionInteractionList& ia_list, bool strict)
 {
     using namespace Chem;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& ctr_bond = *it;
@@ -277,7 +277,7 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
                         continue;
                 }
 
-                ia_data.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
+                ia_list.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
                                                             tor_param1, tor_param2, tor_param3));
             }
         }

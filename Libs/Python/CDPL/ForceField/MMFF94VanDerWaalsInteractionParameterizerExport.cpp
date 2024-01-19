@@ -41,8 +41,8 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionParameterizer()
                    ForceField::MMFF94VanDerWaalsInteractionParameterizer::SharedPointer>("MMFF94VanDerWaalsInteractionParameterizer", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ForceField::MMFF94VanDerWaalsInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94VanDerWaalsInteractionData&, bool>(
-                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94VanDerWaalsInteractionList&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94VanDerWaalsInteractionParameterizer>())    
         .def("setFilterFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setFilterFunction, 
              (python::arg("self"), python::arg("func"))) 
@@ -55,5 +55,5 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionParameterizer()
         .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94VanDerWaalsInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize, 
-             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict")));
 }

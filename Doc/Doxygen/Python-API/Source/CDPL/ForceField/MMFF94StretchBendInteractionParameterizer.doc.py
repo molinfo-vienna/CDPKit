@@ -38,12 +38,12 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
     # \param molgraph 
-    # \param bs_ia_data 
-    # \param ab_ia_data 
-    # \param ia_data 
+    # \param bs_ia_list 
+    # \param ab_ia_list 
+    # \param ia_list 
     # \param strict 
     # 
-    def __init__(molgraph: Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, bs_ia_list: MMFF94BondStretchingInteractionList, ab_ia_list: MMFF94AngleBendingInteractionList, ia_list: MMFF94StretchBendInteractionList, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -97,11 +97,11 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief 
     # \param molgraph 
-    # \param bs_ia_data 
-    # \param ab_ia_data 
-    # \param ia_data 
+    # \param bs_ia_list 
+    # \param ab_ia_list 
+    # \param ia_list 
     # \param strict 
     #
-    def parameterize(molgraph: Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: Chem.MolecularGraph, bs_ia_list: MMFF94BondStretchingInteractionList, ab_ia_list: MMFF94AngleBendingInteractionList, ia_list: MMFF94StretchBendInteractionList, strict: bool) -> None: pass
 
     objectID = property(getObjectID)

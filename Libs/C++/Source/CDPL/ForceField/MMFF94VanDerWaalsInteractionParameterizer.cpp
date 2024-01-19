@@ -42,12 +42,12 @@ namespace
 
 
 ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                                 MMFF94VanDerWaalsInteractionData& ia_data, 
+                                                                                                 MMFF94VanDerWaalsInteractionList& ia_list, 
                                                                                                  bool strict):
     filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
     paramTable(MMFF94VanDerWaalsParameterTable::get())
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer() :
@@ -76,13 +76,13 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParame
 }
 
 void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-                                                                         MMFF94VanDerWaalsInteractionData& ia_data, bool strict)
+                                                                         MMFF94VanDerWaalsInteractionList& ia_list, bool strict)
 {
     using namespace Chem;
 
     typedef MMFF94VanDerWaalsParameterTable::Entry ParamEntry;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& atom1 = molgraph.getAtom(i);
@@ -124,7 +124,7 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
                 throw ParameterizationFailed("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
                                              std::to_string(j));
 
-            ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, param_entry1->getAtomicPolarizability(), param_entry1->getEffectiveElectronNumber(),
+            ia_list.addElement(MMFF94VanDerWaalsInteraction(i, j, param_entry1->getAtomicPolarizability(), param_entry1->getEffectiveElectronNumber(),
                                                             param_entry1->getFactorA(), param_entry1->getFactorG(), param_entry1->getHDonorAcceptorType(),
                                                             param_entry2->getAtomicPolarizability(), param_entry2->getEffectiveElectronNumber(),
                                                             param_entry2->getFactorA(), param_entry2->getFactorG(), param_entry2->getHDonorAcceptorType(),

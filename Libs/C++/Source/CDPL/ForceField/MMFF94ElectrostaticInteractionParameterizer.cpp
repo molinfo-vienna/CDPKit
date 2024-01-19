@@ -39,12 +39,12 @@ constexpr double ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELEC
 
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                                     MMFF94ElectrostaticInteractionData& ia_data,
+                                                                                                     MMFF94ElectrostaticInteractionList& ia_list,
                                                                                                      bool strict):
     filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
     deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT)
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer():
@@ -78,11 +78,11 @@ void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponen
 } 
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-                                                                           MMFF94ElectrostaticInteractionData& ia_data, bool strict)
+                                                                           MMFF94ElectrostaticInteractionList& ia_list, bool strict)
 {
     using namespace Chem;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& atom1 = molgraph.getAtom(i);
@@ -102,7 +102,7 @@ void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const
             if (filterFunc && !filterFunc(atom1, atom2))
                 continue;
     
-            ia_data.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
+            ia_list.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
         }
     }
 }

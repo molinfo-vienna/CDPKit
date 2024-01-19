@@ -43,13 +43,13 @@ namespace
 }
 
 
-ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-                                                                                                 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
+ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_ia_list, 
+                                                                                                 const MMFF94AngleBendingInteractionList& ab_ia_list, MMFF94StretchBendInteractionList& ia_list,
                                                                                                  bool strict):
     filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94StretchBendParameterTable::get()), 
     defParamTable(MMFF94DefaultStretchBendParameterTable::get()), typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-    parameterize(molgraph, bs_ia_data, ab_ia_data, ia_data, strict);
+    parameterize(molgraph, bs_ia_list, ab_ia_list, ia_list, strict);
 }
 
 ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer() :
@@ -82,16 +82,16 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::setAtomTypePropertyT
     typePropTable = table;
 }
 
-void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-                                                                         const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, 
+void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_ia_list, 
+                                                                         const MMFF94AngleBendingInteractionList& ab_ia_list, MMFF94StretchBendInteractionList& ia_list, 
                                                                          bool strict)
 {
     using namespace Chem;
 
-    ia_data.clear();
-    initBondStretchingParamLookupTable(bs_ia_data);
+    ia_list.clear();
+    initBondStretchingParamLookupTable(bs_ia_list);
 
-    for (MMFF94AngleBendingInteractionData::ConstElementIterator it = ab_ia_data.getElementsBegin(), end = ab_ia_data.getElementsEnd(); it != end; ++it) {
+    for (MMFF94AngleBendingInteractionList::ConstElementIterator it = ab_ia_list.getElementsBegin(), end = ab_ia_list.getElementsEnd(); it != end; ++it) {
         const MMFF94AngleBendingInteraction& ab_int = *it;
 
         if (ab_int.isLinearAngle())
@@ -135,16 +135,16 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const C
         }
 
         if (ijk_force_const != 0.0 || kji_force_const != 0.0)
-            ia_data.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
+            ia_list.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
                                                             ref_length1, ref_length2, ijk_force_const, kji_force_const));
     }
 }
     
-void ForceField::MMFF94StretchBendInteractionParameterizer::initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data)
+void ForceField::MMFF94StretchBendInteractionParameterizer::initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionList& bs_ia_list)
 {
     bsParamTable.clear();
 
-    for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_ia_data.getElementsBegin(), end = bs_ia_data.getElementsEnd(); it != end; ++it) {
+    for (MMFF94BondStretchingInteractionList::ConstElementIterator it = bs_ia_list.getElementsBegin(), end = bs_ia_list.getElementsEnd(); it != end; ++it) {
         const MMFF94BondStretchingInteraction& bs_int = *it;
         std::size_t atom1_idx = bs_int.getAtom1Index();
         std::size_t atom2_idx = bs_int.getAtom2Index();

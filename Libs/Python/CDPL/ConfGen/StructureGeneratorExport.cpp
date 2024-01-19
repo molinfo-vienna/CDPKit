@@ -68,8 +68,16 @@ void CDPLPythonConfGen::exportStructureGenerator()
              (python::arg("self"), python::arg("func")))
         .def("getLogMessageCallback", &ConfGen::StructureGenerator::getLogMessageCallback, 
              python::arg("self"), python::return_internal_reference<>())
-        .def("generate", &ConfGen::StructureGenerator::generate,
+        .def("generate", static_cast<unsigned int (ConfGen::StructureGenerator::*)
+             (const Chem::MolecularGraph&)>(&ConfGen::StructureGenerator::generate),
              (python::arg("self"), python::arg("molgraph")))
+        .def("generate", static_cast<unsigned int (ConfGen::StructureGenerator::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&ConfGen::StructureGenerator::generate),
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr")))
+        .def("generate", static_cast<unsigned int (ConfGen::StructureGenerator::*)
+             (const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Math::Vector3DArray&)>
+             (&ConfGen::StructureGenerator::generate),
+             (python::arg("self"), python::arg("molgraph"), python::arg("fixed_substr"), python::arg("fixed_substr_coords")))
         .def("setCoordinates", &ConfGen::StructureGenerator::setCoordinates,
              (python::arg("self"), python::arg("molgraph")))
         .def("getCoordinates", &ConfGen::StructureGenerator::getCoordinates,

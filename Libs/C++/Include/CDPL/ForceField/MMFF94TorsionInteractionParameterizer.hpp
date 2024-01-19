@@ -33,7 +33,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
@@ -64,7 +64,7 @@ namespace CDPL
             MMFF94TorsionInteractionParameterizer();
 
             MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph&   molgraph,
-                                                  MMFF94TorsionInteractionData& ia_data,
+                                                  MMFF94TorsionInteractionList& ia_list,
                                                   bool                          strict);
 
             void setFilterFunction(const InteractionFilterFunction4& func);
@@ -81,7 +81,7 @@ namespace CDPL
 
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionList& ia_list, bool strict);
 
           private:
             typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;

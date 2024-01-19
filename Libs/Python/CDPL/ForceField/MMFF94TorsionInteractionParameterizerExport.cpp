@@ -41,8 +41,8 @@ void CDPLPythonForceField::exportMMFF94TorsionInteractionParameterizer()
                    ForceField::MMFF94TorsionInteractionParameterizer::SharedPointer>("MMFF94TorsionInteractionParameterizer", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ForceField::MMFF94TorsionInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94TorsionInteractionData&, bool>(
-                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94TorsionInteractionList&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94TorsionInteractionParameterizer>())    
         .def("setFilterFunction", &ForceField::MMFF94TorsionInteractionParameterizer::setFilterFunction, 
              (python::arg("self"), python::arg("func"))) 
@@ -61,5 +61,5 @@ void CDPLPythonForceField::exportMMFF94TorsionInteractionParameterizer()
         .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94TorsionInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94TorsionInteractionParameterizer::parameterize, 
-             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict")));
 }

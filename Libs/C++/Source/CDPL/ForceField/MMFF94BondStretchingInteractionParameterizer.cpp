@@ -174,13 +174,13 @@ namespace
 
 
 ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                                                                       MMFF94BondStretchingInteractionData& ia_data,
+                                                                                                       MMFF94BondStretchingInteractionList& ia_list,
                                                                                                        bool strict):
     filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), aromRingSetFunc(&getMMFF94AromaticRings),
     paramTable(MMFF94BondStretchingParameterTable::get()), ruleParamTable(MMFF94BondStretchingRuleParameterTable::get()),
     typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-    parameterize(molgraph, ia_data, strict);
+    parameterize(molgraph, ia_list, strict);
 }
 
 ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer():
@@ -225,11 +225,11 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypeProper
 }
 
 void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-                                                                            MMFF94BondStretchingInteractionData& ia_data, bool strict)
+                                                                            MMFF94BondStretchingInteractionList& ia_list, bool strict)
 {
     using namespace Chem;
 
-    ia_data.clear();
+    ia_list.clear();
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
@@ -260,7 +260,7 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(cons
             getParameters(molgraph, bond, bond_type_idx, FALLBACK_ATOM_TYPE, FALLBACK_ATOM_TYPE, force_const, ref_length);
         }
 
-        ia_data.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
+        ia_list.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
                                                            bond_type_idx, force_const, ref_length));
     }
 }

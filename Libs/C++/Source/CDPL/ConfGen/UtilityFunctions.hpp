@@ -32,7 +32,7 @@
 #include <string>
 #include <cstddef>
 
-#include "CDPL/ForceField/ElasticPotentialData.hpp"
+#include "CDPL/ForceField/ElasticPotentialList.hpp"
 
 
 namespace CDPL
@@ -67,103 +67,103 @@ namespace CDPL
         double getAbsoluteAngleDistance(double angle1, double angle2);
 
         void generatePairwiseElasticPotentials(const Chem::AtomContainer& atoms, const Chem::MolecularGraph& molgraph,
-                                               const Math::Vector3DArray& coords, ForceField::ElasticPotentialData& potentials,
+                                               const Math::Vector3DArray& coords, ForceField::ElasticPotentialList& potentials,
                                                double k);
         
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams2(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams2(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      const Util::BitSet& tgt_atom_mask)
         {
-            for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
-                const typename InteractionData::ElementType& params = *it;
+            for (typename InteractionList::ConstElementIterator it = src_ia_list.getElementsBegin(), end = src_ia_list.getElementsEnd(); it != end; ++it) {
+                const typename InteractionList::ElementType& params = *it;
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                 }
             }
         }
 
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams2(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams2(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
         {
             for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-                const typename InteractionData::ElementType& params = src_ia_data[i];
+                const typename InteractionList::ElementType& params = src_ia_list[i];
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                     free_ia_mask.reset(i);
                 }
             }
         }
 
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams3(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      const Util::BitSet& tgt_atom_mask)
         {
-            for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
-                const typename InteractionData::ElementType& params = *it;
+            for (typename InteractionList::ConstElementIterator it = src_ia_list.getElementsBegin(), end = src_ia_list.getElementsEnd(); it != end; ++it) {
+                const typename InteractionList::ElementType& params = *it;
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                 }
             }
         }
 
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams3(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
         {
             for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-                const typename InteractionData::ElementType& params = src_ia_data[i];
+                const typename InteractionList::ElementType& params = src_ia_list[i];
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                     free_ia_mask.reset(i);
                 }
             }
         }
 
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams4(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams4(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      const Util::BitSet& tgt_atom_mask)
         {
-            for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
-                const typename InteractionData::ElementType& params = *it;
+            for (typename InteractionList::ConstElementIterator it = src_ia_list.getElementsBegin(), end = src_ia_list.getElementsEnd(); it != end; ++it) {
+                const typename InteractionList::ElementType& params = *it;
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index()) &&
                     tgt_atom_mask.test(params.getAtom4Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                 }
             }
         }
 
-        template <typename InteractionData>
-        void extractFragmentMMFF94InteractionParams4(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+        template <typename InteractionList>
+        void extractFragmentMMFF94InteractionParams4(const InteractionList& src_ia_list, InteractionList& tgt_ia_list,
                                                      Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
         {
             for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-                const typename InteractionData::ElementType& params = src_ia_data[i];
+                const typename InteractionList::ElementType& params = src_ia_list[i];
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index()) &&
                     tgt_atom_mask.test(params.getAtom4Index())) {
 
-                    tgt_ia_data.addElement(params);
+                    tgt_ia_list.addElement(params);
                     free_ia_mask.reset(i);
                 }
             }

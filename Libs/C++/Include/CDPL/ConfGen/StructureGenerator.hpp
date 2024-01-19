@@ -88,6 +88,11 @@ namespace CDPL
 
             unsigned int generate(const Chem::MolecularGraph& molgraph);
 
+            unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr);
+
+            unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                  const Math::Vector3DArray& fixed_substr_coords);
+
             void setCoordinates(Chem::MolecularGraph& molgraph) const;
 
             const ConformerData& getCoordinates() const;
@@ -96,6 +101,9 @@ namespace CDPL
             StructureGenerator(const StructureGenerator&);
 
             StructureGenerator& operator=(const StructureGenerator&);
+
+            unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph* fixed_substr,
+                                  const Math::Vector3DArray* fixed_substr_coords);
 
             typedef std::unique_ptr<ConformerGeneratorImpl> ImplementationPointer;
 

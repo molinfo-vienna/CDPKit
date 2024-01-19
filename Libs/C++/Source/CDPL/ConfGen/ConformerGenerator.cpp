@@ -103,7 +103,18 @@ const ConfGen::LogMessageCallbackFunction& ConfGen::ConformerGenerator::getLogMe
 
 unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
-    return impl->generate(molgraph, false);
+    return impl->generate(molgraph, false, 0, 0);
+}
+
+unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr)
+{
+    return impl->generate(molgraph, false, &fixed_substr, 0);
+}
+
+unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
+                                                   const Math::Vector3DArray& fixed_substr_coords)
+{
+    return impl->generate(molgraph, false, &fixed_substr, &fixed_substr_coords);
 }
 
 void ConfGen::ConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const

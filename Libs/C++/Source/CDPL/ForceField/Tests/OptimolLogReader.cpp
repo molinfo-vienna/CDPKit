@@ -188,7 +188,7 @@ bool OptimolLogReader::getFormalAtomCharges(const std::string& mol_name, AtomCha
     return true;
 }
 
-bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionData& ia_data)
+bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -201,7 +201,7 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
     if (!readLine(line))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (line.find("TOTAL BOND STRAIN ENERGY") != std::string::npos)
         return true;
@@ -258,13 +258,13 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
         if (!(iss >> iaction.forceConst))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;
 }
 
-bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionData& ia_data)
+bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -277,7 +277,7 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
     if (!readLine(line))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (line.find("TOTAL ANGLE STRAIN ENERGY") != std::string::npos)
         return true;
@@ -332,13 +332,13 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
         if (!(iss >> iaction.forceConst))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;
 }
 
-bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data)
+bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -351,7 +351,7 @@ bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, S
     if (!readLine(line))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (line.find("TOTAL STRETCH-BEND STRAIN ENERGY") != std::string::npos)
         return true;
@@ -400,13 +400,13 @@ bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, S
         if (!(iss >> iaction.forceConst))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;
 }
 
-bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data)
+bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -419,7 +419,7 @@ bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_n
     if (!readLine(line))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (line.find("TOTAL OUT-OF-PLANE STRAIN ENERGY") != std::string::npos)
         return true;
@@ -465,13 +465,13 @@ bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_n
         if (!(iss >> iaction.forceConst))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;
 }
 
-bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data)
+bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, TorsionInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -484,7 +484,7 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
     if (!readLine(line))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (line.find("OPTIMOL-ANALYZE>  # b-intra") != std::string::npos)
         return true;
@@ -547,13 +547,13 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
         if (!(iss >> iaction.torParams[2]))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;
 }
 
-bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, VanDerWaalsInteractionData& ia_data)
+bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, VanDerWaalsInteractionList& ia_list)
 {
     if (!seekToRecord(mol_name))
         return false;
@@ -572,7 +572,7 @@ bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, V
     if (!skipLines(2))
         return false;
 
-    ia_data.clear();
+    ia_list.clear();
 
     if (!readLine(line))
         return false;
@@ -614,7 +614,7 @@ bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, V
         if (!(iss >> iaction.energy))
             break;
 
-        ia_data.push_back(iaction);
+        ia_list.push_back(iaction);
     }
 
     return true;    

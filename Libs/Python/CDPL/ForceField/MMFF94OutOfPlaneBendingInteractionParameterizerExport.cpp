@@ -41,8 +41,8 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingInteractionParameterizer
                    ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::SharedPointer>("MMFF94OutOfPlaneBendingInteractionParameterizer", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94OutOfPlaneBendingInteractionData&, bool>(
-                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94OutOfPlaneBendingInteractionList&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer>())    
         .def("setFilterFunction", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setFilterFunction, 
              (python::arg("self"), python::arg("func"))) 
@@ -57,5 +57,5 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingInteractionParameterizer
         .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize, 
-             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_list"), python::arg("strict")));
 }

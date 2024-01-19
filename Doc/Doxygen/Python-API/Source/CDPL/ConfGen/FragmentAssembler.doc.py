@@ -103,6 +103,15 @@ class FragmentAssembler(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param molgraph 
+    # \param fixed_substr 
+    # \param fixed_substr_coords 
+    # \return 
+    #
+    def assemble(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
+
+    ##
+    # \brief 
     # \return 
     #
     def getNumConformers() -> int: pass

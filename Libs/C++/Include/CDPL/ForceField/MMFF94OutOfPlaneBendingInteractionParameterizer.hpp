@@ -33,7 +33,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingParameterTable.hpp"
@@ -63,7 +63,7 @@ namespace CDPL
             MMFF94OutOfPlaneBendingInteractionParameterizer();
 
             MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph&             molgraph,
-                                                            MMFF94OutOfPlaneBendingInteractionData& ia_data,
+                                                            MMFF94OutOfPlaneBendingInteractionList& ia_list,
                                                             bool                                    strict);
 
             void setFilterFunction(const InteractionFilterFunction4& func);
@@ -76,7 +76,7 @@ namespace CDPL
 
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionList& ia_list, bool strict);
 
           private:
             typedef std::vector<const Chem::Atom*> AtomList;

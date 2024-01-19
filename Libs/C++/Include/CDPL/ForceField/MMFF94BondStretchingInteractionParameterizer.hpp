@@ -32,7 +32,7 @@
 #include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
@@ -62,7 +62,7 @@ namespace CDPL
             MMFF94BondStretchingInteractionParameterizer();
 
             MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph&          molgraph,
-                                                         MMFF94BondStretchingInteractionData& ia_data,
+                                                         MMFF94BondStretchingInteractionList& ia_list,
                                                          bool                                 strict);
 
             void setFilterFunction(const InteractionFilterFunction2& func);
@@ -79,7 +79,7 @@ namespace CDPL
 
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& ia_list, bool strict);
 
             void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond,
                                unsigned int& bond_type_idx, double& force_const, double& ref_length, bool strict) const;

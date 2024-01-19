@@ -271,6 +271,10 @@ private:
                 err_msg = "time limit exceeded";
                 break;
 
+            case ReturnCode::NO_FIXED_SUBSTRUCT_COORDS:
+                err_msg = "missing input atom 3D coordinates for fixed substructure";
+                break;
+                
             default:
                 err_msg = "unspecified error: " + std::to_string(ret_code);
                 break;

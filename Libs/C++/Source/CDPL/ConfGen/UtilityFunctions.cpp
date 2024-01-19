@@ -105,6 +105,9 @@ std::string ConfGen::returnCodeToString(unsigned int ret_code)
         case ReturnCode::MAX_ROT_BOND_COUNT_EXCEEDED:
             return "MAX_ROT_BOND_COUNT_EXCEEDED";
 
+        case ReturnCode::NO_FIXED_SUBSTRUCT_COORDS:
+            return "NO_FIXED_SUBSTRUCT_COORDS";
+
         default:
             break;
     }
@@ -182,11 +185,9 @@ double ConfGen::getAbsoluteAngleDistance(double angle1, double angle2)
 }
 
 void ConfGen::generatePairwiseElasticPotentials(const Chem::AtomContainer& atoms, const Chem::MolecularGraph& molgraph,
-                                                const Math::Vector3DArray& coords, ForceField::ElasticPotentialData& potentials,
+                                                const Math::Vector3DArray& coords, ForceField::ElasticPotentialList& potentials,
                                                 double k)
 {
-    potentials.clear();
-
     for (std::size_t i = 0, num_atoms = atoms.getNumAtoms(); i < num_atoms; i++) {
         auto& atom1 = atoms.getAtom(i);
 

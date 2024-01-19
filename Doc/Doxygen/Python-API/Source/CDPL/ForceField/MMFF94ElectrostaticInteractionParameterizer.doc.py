@@ -53,10 +53,10 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
     # \param molgraph 
-    # \param ia_data 
+    # \param ia_list 
     # \param strict 
     # 
-    def __init__(molgraph: Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, ia_list: MMFF94ElectrostaticInteractionList, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -110,9 +110,9 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief 
     # \param molgraph 
-    # \param ia_data 
+    # \param ia_list 
     # \param strict 
     #
-    def parameterize(molgraph: Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: Chem.MolecularGraph, ia_list: MMFF94ElectrostaticInteractionList, strict: bool) -> None: pass
 
     objectID = property(getObjectID)

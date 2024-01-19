@@ -56,5 +56,6 @@ void CDPLPythonConfGen::exportReturnCodes()
         .def_readonly("CONF_GEN_FAILED", &ConfGen::ReturnCode::CONF_GEN_FAILED)
         .def_readonly("TOO_MUCH_SYMMETRY", &ConfGen::ReturnCode::TOO_MUCH_SYMMETRY)
         .def_readonly("MAX_ROT_BOND_COUNT_EXCEEDED", &ConfGen::ReturnCode::MAX_ROT_BOND_COUNT_EXCEEDED)
+        .def_readonly("NO_FIXED_SUBSTRUCT_COORDS", &ConfGen::ReturnCode::NO_FIXED_SUBSTRUCT_COORDS)
         ;
 }

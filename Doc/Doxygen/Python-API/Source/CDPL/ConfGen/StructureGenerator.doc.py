@@ -115,6 +115,23 @@ class StructureGenerator(Boost.Python.instance):
     ##
     # \brief 
     # \param molgraph 
+    # \param fixed_substr 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \param fixed_substr 
+    # \param fixed_substr_coords 
+    # \return 
+    #
+    def generate(molgraph: Chem.MolecularGraph, fixed_substr: Chem.MolecularGraph, fixed_substr_coords: Math.Vector3DArray) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
     #
     def setCoordinates(molgraph: Chem.MolecularGraph) -> None: pass
 
