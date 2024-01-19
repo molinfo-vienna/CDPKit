@@ -174,20 +174,20 @@ PSDScreenImpl::PSDScreenImpl():
               value<std::string>(&queryPharmFile)->required());
     addOption("output,o", "Hit output file.", 
               value<std::string>(&hitOutputFile)->required());
-    addOption("mode,m", "Molecule conformation matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: FIRST-MATCH).", 
+    addOption("mode,m", "Molecule conformer matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: FIRST-MATCH).", 
               value<std::string>()->notifier(std::bind(&PSDScreenImpl::setMatchingMode, this, _1)));
-    addOption("start-index,s", "Screening range start molecule index (zero-based!, default: 0).", 
+    addOption("start-index,s", "Screening start molecule index (zero-based, default: 0).", 
               value<std::size_t>(&startMolIndex)->default_value(0));
-    addOption("end-index,e", "Screening range end molecule index (zero-based and not included"
-              " in screening!, default: one after last molecule).", 
+    addOption("end-index,e", "Screening end molecule index (zero-based and not included"
+              " in the screening run, default: number of molecules in the database).", 
               value<std::size_t>(&endMolIndex)->default_value(0));
     addOption("max-num-hits,n", "Maxmimum number of hits to report (default: no limit).", 
               value<std::size_t>(&maxNumHits)->default_value(0));
-    addOption("max-omitted,M", "Maximum number of allowed unmatched features.", 
+    addOption("max-omitted,M", "Allowed maximum number of unmatched features.", 
               value<std::size_t>(&maxOmittedFtrs)->default_value(0));
     addOption("check-xvols,x", "Check for exclusion volume clashes (default: true).", 
               value<bool>(&checkXVols)->implicit_value(true));
-    addOption("align-hits,a", "Align matching conformations to pharmacophore for output (default: true).", 
+    addOption("align-hits,a", "Output hit molecules aligned to the matched pharmacophore (default: true).", 
               value<bool>(&alignConfs)->implicit_value(true));
     addOption("best-alignments,b", "Seek best alignments with highest score (default: false).", 
               value<bool>(&bestAlignments)->implicit_value(true));
