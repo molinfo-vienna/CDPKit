@@ -134,6 +134,40 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
+    # \brief Clears all previously defined atom mapping constraints.
+    # 
+    # \see addAtomMappingConstraint()
+    # 
+    def clearAtomMappingConstraints() -> None: pass
+
+    ##
+    # \brief Adds a constraint on the allowed atom mappings.
+    # 
+    # By default, an atom can be mapped to any valid other atom. When this method gets called for a particular atom pair (specified by <em>atom1_idx</em> and <em>atom2_idx</em>), a future search will report only those solutions which feature the specified mapping of the two atoms. Multiple calls to addAtomMappingConstraint() for a particular atom enlarges the set of valid mapping solutions.
+    # 
+    # \param atom1_idx The index of the first atom.
+    # \param atom2_idx The index of the second atom.
+    # 
+    def addAtomMappingConstraint(atom1_idx: int, atom2_idx: int) -> None: pass
+
+    ##
+    # \brief Clears all previously defined bond mapping constraints.
+    # 
+    # \see addBondMappingConstraint()
+    # 
+    def clearBondMappingConstraints() -> None: pass
+
+    ##
+    # \brief Adds a constraint on the allowed bond mappings.
+    # 
+    # By default, an bond can be mapped to any valid other bond. When this method gets called for a particular bond pair (specified by <em>bond1_idx</em> and <em>bond2_idx</em>), a future search will report only those solutions which feature the specified mapping of the two bonds. Multiple calls to addBondMappingConstraint() for a particular bond enlarges the set of valid mapping solutions.
+    # 
+    # \param bond1_idx The index of the first bond.
+    # \param bond2_idx The index of the second bond.
+    # 
+    def addBondMappingConstraint(bond1_idx: int, bond2_idx: int) -> None: pass
+
+    ##
     # \brief 
     # \param func 
     #
