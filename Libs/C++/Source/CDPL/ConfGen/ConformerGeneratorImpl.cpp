@@ -756,6 +756,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::perceiveRotBonds()
         auto& bond = molGraph->getBond(i);
 
         if (fixedSubstruct && fixedSubstruct->containsBond(bond) &&
+            fixedSubstruct->containsAtom(bond.getBegin()) &&
+            fixedSubstruct->containsAtom(bond.getEnd()) && 
             MolProp::getExplicitBondCount(bond.getBegin(), *fixedSubstruct) > 1 &&
             MolProp::getExplicitBondCount(bond.getEnd(), *fixedSubstruct) > 1)
             continue;

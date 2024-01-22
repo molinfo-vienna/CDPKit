@@ -60,6 +60,12 @@ void CDPLPythonChem::exportAutomorphismGroupSearch()
         .def("getMaxNumMappings", &Chem::AutomorphismGroupSearch::getMaxNumMappings, python::arg("self"))
         .def("setMaxNumMappings", &Chem::AutomorphismGroupSearch::setMaxNumMappings, 
              (python::arg("self"), python::arg("max_num_mappings")))
+        .def("clearAtomMappingConstraints", &Chem::AutomorphismGroupSearch::clearAtomMappingConstraints, python::arg("self"))
+        .def("addAtomMappingConstraint", &Chem::AutomorphismGroupSearch::addAtomMappingConstraint, 
+             (python::arg("self"), python::arg("atom1_idx"), python::arg("atom2_idx")))
+        .def("clearBondMappingConstraints", &Chem::AutomorphismGroupSearch::clearBondMappingConstraints, python::arg("self"))
+        .def("addBondMappingConstraint", &Chem::AutomorphismGroupSearch::addBondMappingConstraint, 
+             (python::arg("self"), python::arg("bond1_idx"), python::arg("bond2_idx")))
         .def("setFoundMappingCallback", &Chem::AutomorphismGroupSearch::setFoundMappingCallback,
              (python::arg("self"), python::arg("func")))
         .def("getFoundMappingCallback", &Chem::AutomorphismGroupSearch::getFoundMappingCallback,

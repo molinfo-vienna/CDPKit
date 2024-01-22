@@ -263,7 +263,7 @@ namespace CDPL
              * By default, an atom of the query structure is free to match any suitable target structure atom. When this method gets
              * called for a particular query/target atom pair (specified by \a query_atom_idx and \a target_atom_idx), future substructure
              * searches will find only those subgraph mapping solutions (if any) where the given query atom maps to the specified
-             * target structure atom. Multiple calls to addMappingConstraint() for the same query atom have an additive effect and allow
+             * target structure atom. Multiple calls to addAtomMappingConstraint() for the same query atom have an additive effect and allow
              * to restrict the valid query atom mappings not only to a single but also a larger set of target structure
              * atoms.
              *
@@ -284,7 +284,7 @@ namespace CDPL
              * By default, a bond of the query structure is free to match any suitable target structure bond. When this method gets
              * called for a particular query/target bond pair (specified by \a query_bond_idx and \a target_bond_idx), future substructure
              * searches will find only those subgraph mapping solutions (if any) where the given query bond maps to the specified
-             * target structure bond. Multiple calls to addMappingConstraint() for the same query bond have an additive effect and allow
+             * target structure bond. Multiple calls to addBondMappingConstraint() for the same query bond have an additive effect and allow
              * to restrict the valid query bond mappings not only to a single but also a larger set of target structure
              * bonds.
              *

@@ -43,8 +43,10 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
+#include "CDPL/ForceField/ElasticPotentialFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
 
@@ -67,12 +69,14 @@ namespace
     const std::size_t MAX_CONF_DATA_CACHE_SIZE            = 500;
     const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS        = 10;
     const std::size_t MAX_NUM_SYM_MAPPINGS                = 64;
+    const double      ELASTIC_POTENTIAL_FORCE_CONST       = 1000.0;
 }
 
 
 ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl(): 
     confDataCache(MAX_CONF_DATA_CACHE_SIZE),
-    energyMinimizer(std::ref(mmff94GradientCalc), std::ref(mmff94GradientCalc)),
+    energyMinimizer(std::bind(&FragmentConformerGeneratorImpl::calcEnergy, this, std::placeholders::_1),
+                    std::bind(&FragmentConformerGeneratorImpl::calcGradient, this, std::placeholders::_1, std::placeholders::_2)),
     settings(FragmentConformerGeneratorSettings::DEFAULT)
 {
     using namespace Chem;
@@ -151,19 +155,27 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
             ret_code = ReturnCode::FORCEFIELD_SETUP_FAILED;
 
         else {
-            switch (frag_type) {
+            fixedSubstruct = fixed_substr;
+            fixedSubstructCoords = fixed_substr_coords;
 
-                case FragmentType::FLEXIBLE_RING_SYSTEM:
-                    ret_code = generateFlexibleRingConformers();
-                    break;
-    
-                case FragmentType::CHAIN:
-                    ret_code = generateChainConformer();
-                    break;
+            if (fixed_substr)
+                processFixedSubstructure();
 
-                default:
-                    ret_code = generateRigidRingConformer();
-                    break;
+            if (outputConfs.empty()) {
+                switch (frag_type) {
+
+                    case FragmentType::FLEXIBLE_RING_SYSTEM:
+                        ret_code = generateFlexibleRingConformers();
+                        break;
+
+                    case FragmentType::CHAIN:
+                        ret_code = generateChainConformer();
+                        break;
+
+                    default:
+                        ret_code = generateRigidRingConformer();
+                        break;
+                }
             }
         }
     }
@@ -233,6 +245,89 @@ void ConfGen::FragmentConformerGeneratorImpl::init(const Chem::MolecularGraph& m
     outputConfs.clear();
     workingConfs.clear();
     ringAtomCoords.clear();
+    fixedSubstructFrags.clear();
+    elasticPotentials.clear();
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::processFixedSubstructure()
+{
+    using namespace Chem;
+
+    if (!fixedSubstructCoords) { // sanity check
+        fixedSubstruct = 0;
+        return;
+    }
+    
+    bool have_fss_bonds = false;
+    bool hvy_skel_cov_by_fss = true;
+    
+    for (auto& bond : molGraph->getBonds()) {
+        bool in_fss = (fixedSubstruct->containsBond(bond) && fixedSubstruct->containsAtom(bond.getBegin()) &&
+                       fixedSubstruct->containsAtom(bond.getEnd()));
+
+        have_fss_bonds |= in_fss;
+        
+        if (MolProp::isHydrogenBond(bond))
+            continue;
+
+        hvy_skel_cov_by_fss &= in_fss;
+    }
+
+    if (!have_fss_bonds) {
+        fixedSubstruct = 0;
+        return;
+    }
+
+    if (!hvy_skel_cov_by_fss)
+        return;
+    
+    auto coords = allocConformerData();
+
+    coords->resize(numAtoms);
+
+    coreAtomMask.resize(numAtoms);
+    coreAtomMask.set();
+
+    auto& coords_data = coords->getData();
+    bool coords_compl = true;
+
+    for (std::size_t i = 0; i < numAtoms; i++) {
+        auto& atom = molGraph->getAtom(i);
+
+        if (fixedSubstruct->containsAtom(atom))
+            coords_data[i] = (*fixedSubstructCoords)[i];
+
+        else {
+            if (getType(atom) != AtomType::H)
+                return;
+            
+            coreAtomMask.reset(i);
+            coords_compl = false;
+        }
+    } 
+
+    if (!coords_compl) {
+        hCoordsCalc.setup(*molGraph);
+        mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
+
+        if (logCallback)
+            logCallback("Fragment heavy atoms completely covered by the specified fixed substructure, generating missing hydrogen coordinates\n");
+
+        if (!generateHydrogenCoordsAndMinimize(*coords)) {
+            if (logCallback)
+                logCallback("Generation of hydrogen coordinates failed!\n");
+
+            return;
+        }
+
+    } else {
+        if (logCallback)
+            logCallback("Fragment atoms completely covered by the specified fixed substructure, using provided atom cooordinates\n");
+
+        coords->setEnergy(mmff94GradientCalc(coords_data));
+    }
+
+    outputConfs.push_back(coords);
 }
 
 bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordinates(ConformerDataArray& conf_array)
@@ -321,7 +416,16 @@ void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration(boo
     dgStructureGen.getSettings().regardAtomConfiguration(reg_stereo);
     dgStructureGen.getSettings().regardBondConfiguration(reg_stereo);
 
-    dgStructureGen.setup(*molGraph, mmff94Data);
+    if (fixedSubstruct) {
+        fixedSubstructFrags.perceive(*fixedSubstruct);
+
+        dgStructureGen.setup(*molGraph, mmff94Data, fixedSubstructFrags, *fixedSubstructCoords);
+
+        for (auto& frag : fixedSubstructFrags)
+            generatePairwiseElasticPotentials(frag, *molGraph, *fixedSubstructCoords, elasticPotentials,
+                                              ELASTIC_POTENTIAL_FORCE_CONST);
+    } else
+        dgStructureGen.setup(*molGraph, mmff94Data);
 
     coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
     coreAtomMask.flip();
@@ -333,7 +437,7 @@ void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration(boo
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRigidRingConformer()
 {
-    if (!settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
+    if (fixedSubstruct || !settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
         if (logCallback)
             logCallback("Generating rigid ring system coordinates...\n");
 
@@ -358,13 +462,13 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRigidRingConformer
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 {
-    if (settings.preserveInputBondingGeometries() && generateConformerFromInputCoordinates(outputConfs))
+    if (!fixedSubstruct && settings.preserveInputBondingGeometries() && generateConformerFromInputCoordinates(outputConfs))
         return invokeCallbacks();
 
     if (logCallback)
         logCallback("Generating chain conformers...\n");
 
-    setupRandomConformerGeneration(false);
+    setupRandomConformerGeneration(fixedSubstruct);
     dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
 
     const FragmentConformerGeneratorSettings::FragmentSettings& chain_settings = settings.getChainSettings();
@@ -424,7 +528,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConformers()
 {
-    if (settings.preserveInputBondingGeometries())
+    if (!fixedSubstruct && settings.preserveInputBondingGeometries())
         generateConformerFromInputCoordinates(outputConfs);
 
     if (logCallback)
@@ -529,8 +633,10 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
             outputConfs.push_back(conf_data);
             
         addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
-        addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
 
+        if (!fixedSubstruct)
+            addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
+        
         if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
             return ret_code;
 
@@ -562,7 +668,8 @@ void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappedConformers(const 
             outputConfs.push_back(mpd_conf_data);
         }
 
-        addMirroredConformer(*mpd_conf_data, rmsd, max_num_out_confs);
+        if (!fixedSubstruct)
+            addMirroredConformer(*mpd_conf_data, rmsd, max_num_out_confs);
     }
 }
 
@@ -619,12 +726,35 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(
         if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
             break;
     }
-
-    conf_data.setEnergy(energy);
+    
+    if (!elasticPotentials.isEmpty())
+        conf_data.setEnergy(mmff94GradientCalc(conf_coords_data));
+    else
+        conf_data.setEnergy(energy);
 
     return true;
 }
 
+double ConfGen::FragmentConformerGeneratorImpl::calcEnergy(const Math::Vector3DArray::StorageType& coords)
+{
+    if (elasticPotentials.isEmpty())
+        return mmff94GradientCalc(coords);
+                
+    return (mmff94GradientCalc(coords) +
+            ForceField::calcElasticPotentialEnergy<double>(elasticPotentials.getElementsBegin(),
+                                                           elasticPotentials.getElementsEnd(), coords));
+}
+
+double ConfGen::FragmentConformerGeneratorImpl::calcGradient(const Math::Vector3DArray::StorageType& coords, Math::Vector3DArray::StorageType& grad)
+{
+     if (elasticPotentials.isEmpty())
+         return mmff94GradientCalc(coords, grad);
+
+     return (mmff94GradientCalc(coords, grad) +
+            ForceField::calcElasticPotentialGradient<double>(elasticPotentials.getElementsBegin(),
+                                                             elasticPotentials.getElementsEnd(), coords, grad));
+}
+    
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(ConformerData& conf_data)
 {
     for (std::size_t i = 0; i < MAX_NUM_STRUCTURE_GEN_TRIALS; i++) {
@@ -720,12 +850,20 @@ void ConfGen::FragmentConformerGeneratorImpl::getSymmetryMappings()
     using namespace Chem;
 
     symMappingSearchMolGraph.clear();
-
-    for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
-        const Bond& bond = *it;
-
-        if (coreAtomMask.test(molGraph->getAtomIndex(bond.getBegin())) && coreAtomMask.test(molGraph->getAtomIndex(bond.getEnd())))
+    symMappingSearch.clearBondMappingConstraints();
+    
+    for (auto& bond : molGraph->getBonds()) {
+        if (coreAtomMask.test(molGraph->getAtomIndex(bond.getBegin())) && coreAtomMask.test(molGraph->getAtomIndex(bond.getEnd()))) {
             symMappingSearchMolGraph.addBond(bond);
+
+            if (fixedSubstruct && fixedSubstruct->containsBond(bond) && fixedSubstruct->containsAtom(bond.getBegin()) &&
+                fixedSubstruct->containsAtom(bond.getEnd())) {
+
+                std::size_t bond_idx = molGraph->getBondIndex(bond);
+
+                symMappingSearch.addBondMappingConstraint(bond_idx, bond_idx);
+            }
+        }
     }
 
     symMappingSearch.findMappings(symMappingSearchMolGraph);
@@ -733,16 +871,14 @@ void ConfGen::FragmentConformerGeneratorImpl::getSymmetryMappings()
 
     std::size_t mapping_offs = 0;
 
-    for (AutomorphismGroupSearch::ConstMappingIterator it = symMappingSearch.getMappingsBegin(), 
-             end = symMappingSearch.getMappingsEnd(); it != end; ++it) {
-
-        const AtomMapping& am = it->getAtomMapping();
-        AtomMapping::ConstEntryIterator am_end = am.getEntriesEnd();
+    for (auto it  = symMappingSearch.getMappingsBegin(), end = symMappingSearch.getMappingsEnd(); it != end; ++it) {
+        auto& am = it->getAtomMapping();
+        auto am_end = am.getEntriesEnd();
         bool keep_mapping = false;
 
-        for (AtomMapping::ConstEntryIterator am_it = am.getEntriesBegin(); am_it != am_end; ++am_it) {
-            const Atom& first_atom = *am_it->first;
-            const Atom& second_atom = *am_it->second;
+        for (auto& entry : am) {
+            auto& first_atom = *entry.first;
+            auto& second_atom = *entry.second;
 
             symMappings[mapping_offs + molGraph->getAtomIndex(first_atom)] = molGraph->getAtomIndex(second_atom);
 
@@ -760,7 +896,7 @@ void ConfGen::FragmentConformerGeneratorImpl::getSymmetryMappings()
             bool bad_mapping = false;
 
             for (std::size_t i = 0; i < nbrHydrogens1.size(); ) {
-                AtomMapping::ConstEntryIterator am_it2 = am.getEntry(nbrHydrogens1[i]);
+                auto am_it2 = am.getEntry(nbrHydrogens1[i]);
 
                 if (am_it2 == am_end) {
                     i++;

@@ -112,6 +112,13 @@ namespace CDPL
 
             void init(const Chem::MolecularGraph& parent_molgraph);
 
+            bool processFixedSubstruct(const Chem::MolecularGraph& molgraph,
+                                       const Chem::MolecularGraph& parent_molgraph,
+                                       const Chem::MolecularGraph* fixed_substr,
+                                       const Math::Vector3DArray* fixed_substr_coords);
+
+            std::size_t getNumFixedSubstructBonds(const Chem::MolecularGraph& frag) const;
+
             void buildFragmentTree(const Chem::MolecularGraph& molgraph,
                                    const Chem::MolecularGraph& parent_molgraph);
 
@@ -129,7 +136,7 @@ namespace CDPL
             bool setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag,
                                    FragmentTreeNode* node, const ConformerDataArray& confs);
 
-            void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node);
+            void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool modify);
 
             void buildCanonicalFragmentAtomIndexMap(const Chem::Fragment&   frag,
                                                     const FragmentTreeNode* frag_node);
@@ -144,7 +151,7 @@ namespace CDPL
 
             void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
 
-            void enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+            bool enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
 
             void invertConfiguration(const Chem::Atom& ctr_atom, const Chem::Atom& fixed_atom1, const Chem::Atom& fixed_atom2,
                                      const Chem::Atom& inv_atom, const Chem::Fragment& frag, FragmentTreeNode* node, bool inplace);
@@ -174,6 +181,8 @@ namespace CDPL
 
             ConformerDataCache             confDataCache;
             FragmentAssemblerSettings      settings;
+            const Chem::MolecularGraph*    fixedSubstruct;
+            const Math::Vector3DArray*     fixedSubstructCoords;
             FragmentLibraryList            fragLibs;
             CallbackFunction               abortCallback;
             CallbackFunction               timeoutCallback;
@@ -186,6 +195,8 @@ namespace CDPL
             FragmentConformerGeneratorImpl fragConfGen;
             CanonicalFragment              canonFrag;
             IndexPairList                  canonFragAtomIdxMap;
+            Chem::Fragment                 fixedCanonFragSubstruct;
+            Math::Vector3DArray            fixedCanonFragSubstructCoords;
             BondLengthTablePtr             bondLengthTable;
             Util::BitSet                   invertibleNMask;
             Util::BitSet                   invertedNMask;

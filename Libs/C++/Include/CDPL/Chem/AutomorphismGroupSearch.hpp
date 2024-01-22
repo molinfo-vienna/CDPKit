@@ -204,6 +204,46 @@ namespace CDPL
              */
             std::size_t getMaxNumMappings() const;
 
+            /**
+             * \brief Adds a constraint on the allowed atom mappings.
+             *
+             * By default, an atom can be mapped to any valid other atom. When this method gets
+             * called for a particular atom pair (specified by \a atom1_idx and \a atom2_idx), a future 
+             * search will report only those solutions which feature the specified mapping of the two atoms.
+             * Multiple calls to addAtomMappingConstraint() for a particular atom enlarges the set of valid
+             * mapping solutions.
+             *
+             * \param atom1_idx The index of the first atom.
+             * \param atom2_idx The index of the second atom.
+             */
+            void addAtomMappingConstraint(std::size_t atom1_idx, std::size_t atom2_idx);
+
+            /**
+             * \brief Clears all previously defined atom mapping constraints.
+             * \see addAtomMappingConstraint()
+             */
+            void clearAtomMappingConstraints();
+
+            /**
+             * \brief Adds a constraint on the allowed bond mappings.
+             *
+             * By default, an bond can be mapped to any valid other bond. When this method gets
+             * called for a particular bond pair (specified by \a bond1_idx and \a bond2_idx), a future 
+             * search will report only those solutions which feature the specified mapping of the two bonds.
+             * Multiple calls to addBondMappingConstraint() for a particular bond enlarges the set of valid
+             * mapping solutions.
+             *
+             * \param bond1_idx The index of the first bond.
+             * \param bond2_idx The index of the second bond.
+             */
+            void addBondMappingConstraint(std::size_t bond1_idx, std::size_t bond2_idx);
+
+            /**
+             * \brief Clears all previously defined bond mapping constraints.
+             * \see addBondMappingConstraint()
+             */
+            void clearBondMappingConstraints();
+            
             void setFoundMappingCallback(const MappingCallbackFunction& func);
 
             const MappingCallbackFunction& getFoundMappingCallback() const;

@@ -204,6 +204,10 @@ unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph
                                                       const Math::Vector3DArray* fixed_substr_coords)
 {
     init(parent_molgraph);
+
+    if (processFixedSubstruct(molgraph, parent_molgraph, fixed_substr, fixed_substr_coords))
+        return ReturnCode::SUCCESS;
+    
     buildFragmentTree(molgraph, parent_molgraph);
 
     unsigned int ret_code = getFragmentConformers();
@@ -226,6 +230,57 @@ void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_mol
     invertibleNMask.reset();
 }
 
+bool ConfGen::FragmentAssemblerImpl::processFixedSubstruct(const Chem::MolecularGraph& molgraph,
+                                                           const Chem::MolecularGraph& parent_molgraph,
+                                                           const Chem::MolecularGraph* fixed_substr,
+                                                           const Math::Vector3DArray* fixed_substr_coords)
+{
+    fixedSubstruct = fixed_substr;
+    fixedSubstructCoords = fixed_substr_coords;
+
+    if (!fixed_substr)
+        return false;
+
+    if (!fixed_substr_coords) { // sanity check
+        fixedSubstruct = 0;
+        return false;
+    }
+    
+    std::size_t fss_bond_cnt = getNumFixedSubstructBonds(molgraph);
+    
+    if (fss_bond_cnt == molgraph.getNumBonds()) {
+        fragTree.getRoot()->clearConformers();
+
+        ConformerData::SharedPointer conf = confDataCache.get();
+
+        *conf = *fixed_substr_coords;
+        conf->setEnergy(0.0);
+        
+        fragTree.getRoot()->addConformer(conf);
+        return true;
+    }
+  
+    if (fss_bond_cnt == 0)
+        fixedSubstruct = 0;
+
+    return false;
+}
+
+std::size_t ConfGen::FragmentAssemblerImpl::getNumFixedSubstructBonds(const Chem::MolecularGraph& frag) const
+{
+    if (!fixedSubstruct)
+        return 0;
+    
+    std::size_t count = 0;
+    
+    for (auto& bond : frag.getBonds())
+        if (fixedSubstruct->containsBond(bond) && fixedSubstruct->containsAtom(bond.getBegin()) &&
+            fixedSubstruct->containsAtom(bond.getEnd()))
+            count++;
+
+    return count;
+}
+
 void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGraph& molgraph, 
                                                        const Chem::MolecularGraph& parent_molgraph)
 {
@@ -240,6 +295,13 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
     for (std::size_t i = 0; i < num_bonds; i++) {
         const Bond& bond = molgraph.getBond(i);
 
+        if (fixedSubstruct && fixedSubstruct->containsBond(bond) &&
+            fixedSubstruct->containsAtom(bond.getBegin()) &&
+            fixedSubstruct->containsAtom(bond.getEnd()) && 
+            MolProp::getExplicitBondCount(bond.getBegin(), *fixedSubstruct) > 1 &&
+            MolProp::getExplicitBondCount(bond.getEnd(), *fixedSubstruct) > 1)
+            continue;
+        
         if (!isFragmentLinkBond(bond, molgraph))
             continue;
 
@@ -284,23 +346,63 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 
         canonFrag.clear();
 
-        if (logCallback) {
-            initCanonicalFragment(frag, frag_node);
+        std::size_t fss_bond_cnt = getNumFixedSubstructBonds(frag);
+    
+        if (fixedSubstruct && fss_bond_cnt == frag.getNumBonds()) {
+            if (logCallback) {
+                initCanonicalFragment(frag, frag_node, false);
 
-            canonFrag.perceiveSSSR();
-            perceiveComponents(canonFrag, true);
+                canonFrag.perceiveSSSR();
+                perceiveComponents(canonFrag, true);
 
-            logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
-            logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
-            logCallback(" Hash Code: " + std::to_string(canonFrag.getHashCode()) + "\n");
-        }
+                logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
+                logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
+                logCallback(" Hash Code: " + std::to_string(canonFrag.getHashCode()) + "\n");
+                logCallback(" Coordinates source: fixed substructure\n");
+            }
 
-        if (!(!settings.generateCoordinatesFromScratch() && 
-              (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) && 
-              copyInputCoordinates(frag_type, frag, frag_node))) {
+            ConformerData::SharedPointer conf = allocConformerData();
 
-            initCanonicalFragment(frag, frag_node);
+            *conf = *fixedSubstructCoords;
+        
+            frag_node->addConformer(conf);
 
+        } else if (fixedSubstruct && fss_bond_cnt > 0) {
+            initCanonicalFragment(frag, frag_node, false);
+
+            if (logCallback) {
+                canonFrag.perceiveSSSR();
+                perceiveComponents(canonFrag, true);
+
+                logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
+                logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
+                logCallback(" Hash Code: " + std::to_string(canonFrag.getHashCode()) + "\n");
+            }
+            
+            unsigned int ret_code = generateFragmentConformers(frag_type, frag, frag_node);
+
+            if (ret_code != ReturnCode::SUCCESS) {
+                if (logCallback)
+                    logCallback(" Coordinates generation failed!\n");
+
+                return ret_code;
+            }
+                
+        } else if (!(!settings.generateCoordinatesFromScratch() &&
+                     (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) &&
+                     copyInputCoordinates(frag_type, frag, frag_node))) {
+
+            initCanonicalFragment(frag, frag_node, true);
+
+            if (logCallback) {
+                canonFrag.perceiveSSSR();
+                perceiveComponents(canonFrag, true);
+
+                logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
+                logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
+                logCallback(" Hash Code: " + std::to_string(canonFrag.getHashCode()) + "\n");
+            }
+     
             if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node) && !fetchConformersFromFragmentCache(frag_type, frag, frag_node)) {
                 unsigned int ret_code = generateFragmentConformers(frag_type, frag, frag_node);
 
@@ -329,13 +431,14 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
     return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node) 
+void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool modify) 
 {
-    if (canonFrag.getNumAtoms() == 0) {
-        canonFrag.create(frag, *fragTree.getMolecularGraph());
+    if (canonFrag.getNumAtoms() != 0)
+        return;
+        
+    canonFrag.create(frag, *fragTree.getMolecularGraph(), modify);
 
-        buildCanonicalFragmentAtomIndexMap(frag, frag_node);
-    }
+    buildCanonicalFragmentAtomIndexMap(frag, frag_node);
 }
 
 void ConfGen::FragmentAssemblerImpl::buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
@@ -367,7 +470,7 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
         } catch (const Base::ItemNotFound& e) { 
             // see if at least heavy atom coordinates are available and then generate missing hydrogens
 
-            initCanonicalFragment(frag, node);
+            initCanonicalFragment(frag, node, true);
 
             if (!fragConfGen.generateConformerFromInputCoordinates(canonFrag)) 
                 return false;
@@ -496,17 +599,44 @@ bool ConfGen::FragmentAssemblerImpl::setNodeConformers(unsigned int frag_type, c
 unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
                                                                         FragmentTreeNode* node)
 {
+    fixedCanonFragSubstruct.clear();
+
+    if (fixedSubstruct) {
+        auto& atom_mpg = canonFrag.getAtomMapping();
+        
+        for (auto& bond : frag.getBonds()) {
+            if (!fixedSubstruct->containsBond(bond) || !fixedSubstruct->containsAtom(bond.getBegin()) ||
+                !fixedSubstruct->containsAtom(bond.getEnd()))
+                continue;
+
+            auto canon_atom1 = atom_mpg[frag.getAtomIndex(bond.getBegin())];
+            auto canon_atom2 = atom_mpg[frag.getAtomIndex(bond.getEnd())];
+            auto canon_bond = canon_atom1->findBondToAtom(*canon_atom2);
+
+            if (canon_bond)
+                fixedCanonFragSubstruct.addBond(*canon_bond);
+        }
+
+        if (fixedCanonFragSubstruct.getNumBonds() > 0) {
+            fixedCanonFragSubstructCoords.resize(canonFrag.getNumAtoms());
+
+            for (auto& idx_mapping : canonFragAtomIdxMap)
+                fixedCanonFragSubstructCoords[idx_mapping.first] = (*fixedSubstructCoords)[idx_mapping.second];
+        }
+    }
+    
     canonFrag.perceiveSSSR();
 
-    unsigned int ret_code = fragConfGen.generate(canonFrag, frag_type, 0, 0);
+    auto ret_code = fragConfGen.generate(canonFrag, frag_type, fixedCanonFragSubstruct.getNumBonds() == 0 ?
+                                         nullptr : &fixedCanonFragSubstruct, &fixedCanonFragSubstructCoords);
 
     if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
         return ret_code;
 
-    std::size_t num_confs = fragConfGen.getNumConformers();
+    auto num_confs = fragConfGen.getNumConformers();
 
     if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
-        double lowest_e = fragConfGen.getConformer(0).getEnergy();
+        auto lowest_e = fragConfGen.getConformer(0).getEnergy();
 
         for (std::size_t i = 1; i < num_confs; i++) {
             if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
@@ -517,34 +647,42 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
     }
 
     for (std::size_t i = 0; i < num_confs; i++) {
-        ConformerData::SharedPointer conf_data = allocConformerData();
-        Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
-        const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
+        auto conf_data = allocConformerData();
+        auto& conf_coords_data = conf_data->getData();
+        auto& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
 
-        for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
-            const IndexPair& idx_mapping = *it;
-
+        for (auto& idx_mapping : canonFragAtomIdxMap)
             conf_coords_data[idx_mapping.second] = gen_conf_coords_data[idx_mapping.first];
-        }
 
         node->addConformer(conf_data);
     }
 
-    std::lock_guard<std::mutex> cache_lock(FragmentConformerCache::getMutex());
+    if (fixedCanonFragSubstruct.getNumBonds() > 0) {
+        if (enumRingFragmentNitrogens(frag, node))
+            enumChainFragmentNitrogens(frag, node);
+        
+    } else {
+        {
+            std::lock_guard<std::mutex> cache_lock(FragmentConformerCache::getMutex());
 
-    FragmentConformerCache::addEntry(canonFrag.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
+            FragmentConformerCache::addEntry(canonFrag.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
+        }
+        
+        fixBondLengths(frag, node);
 
-    fixBondLengths(frag, node);
-
-    if (frag_type == FragmentType::CHAIN)
-        postprocChainFragment(true, frag, node);
-
-    else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
-        enumRingFragmentNitrogens(frag, node);
-
-    if (logCallback)
-        logCallback(" Coordinates source: generated\n");
-
+        if (frag_type == FragmentType::CHAIN)
+            postprocChainFragment(true, frag, node);
+        else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
+            enumRingFragmentNitrogens(frag, node);
+    }
+    
+    if (logCallback) {
+        if (fixedCanonFragSubstruct.getNumBonds() == 0)
+            logCallback(" Coordinates source: generated\n");
+        else
+            logCallback(" Coordinates source: fixed substructure/generated\n");
+    }
+    
     return ReturnCode::SUCCESS;
 }
 
@@ -727,34 +865,50 @@ void ConfGen::FragmentAssemblerImpl::enumChainFragmentNitrogens(const Chem::Frag
 
     for (Util::BitSet::size_type i = invertedNMask.find_first(); i != Util::BitSet::npos; i = invertedNMask.find_next(i)) {
         const Atom& atom = parent_molgraph.getAtom(i);
+
+        if (getRingFlag(atom))
+            continue;
+        
         const Atom* nbr_atoms[3];
         const Atom** nbr_atoms_it = nbr_atoms;
-
+        const Atom* non_fixed_nbr = 0;
+        
         Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
         for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
             const Atom& nbr_atom = *a_it;
             const Bond& bond = *b_it;
-
+            
             if (!frag.containsAtom(nbr_atom) || !frag.containsBond(bond))
                 continue;
-
+            
             *nbr_atoms_it++ = &nbr_atom;
+            
+            if (fixedSubstruct && fixedSubstruct->containsBond(bond) && fixedSubstruct->containsAtom(bond.getBegin()) &&
+                fixedSubstruct->containsAtom(bond.getEnd()))
+                continue;
+
+            non_fixed_nbr = &nbr_atom;
         }
 
         if (nbr_atoms_it != &nbr_atoms[3]) // sanity check
             continue;
 
-        invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], frag, node, false);
+        if (non_fixed_nbr == nbr_atoms[2])
+            invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], frag, node, false);
+        else if (non_fixed_nbr == nbr_atoms[1])
+            invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[2], *nbr_atoms[1], frag, node, false);
+        else if (non_fixed_nbr == nbr_atoms[0])
+            invertConfiguration(atom, *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[0], frag, node, false);
     }
 }
 
-void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node)
+bool ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node)
 {
     using namespace Chem;
 
     if (getInvertibleNitrogens(frag, node) == 0) 
-        return;
+        return false;
 
     const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
 
@@ -788,6 +942,8 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 
         invertConfiguration(atom, *ring_nbr1, *ring_nbr2, *subst_nbr, frag, node, false);
     }
+
+    return true;
 }
 
 void ConfGen::FragmentAssemblerImpl::invertConfiguration(const Chem::Atom& ctr_atom, const Chem::Atom& fixed_atom1, const Chem::Atom& fixed_atom2, 
@@ -964,6 +1120,8 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 
         std::size_t h_bond_count = 0;
         std::size_t ring_bond_count = 0;
+        std::size_t fixed_bond_count = 0;
+        std::size_t fixed_ring_bond_count = 0;
         std::size_t nbr_atom_indices[3];
         std::size_t j = 0;
 
@@ -981,10 +1139,22 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
                 break;
             }
 
-            if (getOrder(bond) != 1)
+            bool ring_bond = getRingFlag(bond);
+            
+            if (ring_bond && ++ring_bond_count > 2)
                 break;
+   
+            if (fixedSubstruct && fixedSubstruct->containsBond(bond) && fixedSubstruct->containsAtom(bond.getBegin()) &&
+                fixedSubstruct->containsAtom(bond.getEnd())) {
 
-            if (getRingFlag(bond) && ++ring_bond_count > 2)
+                if (++fixed_bond_count > 2)
+                    break;
+
+                if (ring_bond)
+                    fixed_ring_bond_count++;
+            }
+                
+            if (getOrder(bond) != 1)
                 break;
 
             if (getType(nbr_atom) == AtomType::H && (++h_bond_count > 1))
@@ -996,6 +1166,9 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
         if (j != 3)
             continue;
 
+        if (fixed_ring_bond_count != 0 && fixed_bond_count != fixed_ring_bond_count)
+            continue;
+        
         double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords_data[nbr_atom_indices[0]].getData(), coords_data[parent_atom_idx].getData(),
                                                                    coords_data[nbr_atom_indices[1]].getData(), coords_data[nbr_atom_indices[2]].getData());
 

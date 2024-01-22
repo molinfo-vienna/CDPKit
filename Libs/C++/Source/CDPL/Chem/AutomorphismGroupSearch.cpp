@@ -170,6 +170,26 @@ std::size_t Chem::AutomorphismGroupSearch::getMaxNumMappings() const
     return substructSearch.getMaxNumMappings();
 }
 
+void Chem::AutomorphismGroupSearch::addAtomMappingConstraint(std::size_t atom1_idx, std::size_t atom2_idx)
+{
+    substructSearch.addAtomMappingConstraint(atom1_idx, atom2_idx);
+}    
+
+void Chem::AutomorphismGroupSearch::clearAtomMappingConstraints()
+{
+    substructSearch.clearAtomMappingConstraints();
+}
+
+void Chem::AutomorphismGroupSearch::addBondMappingConstraint(std::size_t bond1_idx, std::size_t bond2_idx)
+{
+    substructSearch.addBondMappingConstraint(bond1_idx, bond2_idx);
+}
+
+void Chem::AutomorphismGroupSearch::clearBondMappingConstraints()
+{
+    substructSearch.clearBondMappingConstraints();
+}
+
 void Chem::AutomorphismGroupSearch::setFoundMappingCallback(const MappingCallbackFunction& func)
 {
     mappingCallbackFunc = func;

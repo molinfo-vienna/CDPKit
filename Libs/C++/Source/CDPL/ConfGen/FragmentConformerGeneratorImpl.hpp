@@ -107,6 +107,8 @@ namespace CDPL
 
             void init(const Chem::MolecularGraph& molgraph);
 
+            void processFixedSubstructure();
+            
             bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
 
             bool setupForceField();
@@ -115,6 +117,10 @@ namespace CDPL
 
             bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
+            double calcEnergy(const Math::Vector3DArray::StorageType& coords);
+            double calcGradient(const Math::Vector3DArray::StorageType& coords,
+                                Math::Vector3DArray::StorageType& grad);
+            
             unsigned int generateChainConformer();
             unsigned int generateRigidRingConformer();
             unsigned int generateFlexibleRingConformers();
@@ -146,25 +152,30 @@ namespace CDPL
             typedef ForceField::MMFF94GradientCalculator<double>                  MMFF94GradientCalculator;
             typedef ForceField::MMFF94InteractionParameterizer                    MMFF94InteractionParameterizer;
             typedef ForceField::MMFF94InteractionData                             MMFF94InteractionData;
+            typedef ForceField::ElasticPotentialList                              ElasticPotentialList;
             typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer;
             typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray>     AlignmentCalculator;
             typedef std::vector<std::size_t>                                      IndexList;
-
+            
             ConformerDataCache                    confDataCache;
             CallbackFunction                      abortCallback;
             CallbackFunction                      timeoutCallback;
             LogMessageCallbackFunction            logCallback;
             Internal::Timer                       timer;
             const Chem::MolecularGraph*           molGraph;
+            const Chem::MolecularGraph*           fixedSubstruct;
+            const Math::Vector3DArray*            fixedSubstructCoords;
             std::size_t                           numAtoms;
             MMFF94InteractionParameterizer        mmff94Parameterizer;
             MMFF94InteractionData                 mmff94Data;
             MMFF94GradientCalculator              mmff94GradientCalc;
             BFGSMinimizer                         energyMinimizer;
+            ElasticPotentialList                  elasticPotentials;
             DGStructureGenerator                  dgStructureGen;
             Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
             Chem::AutomorphismGroupSearch         symMappingSearch;
             AlignmentCalculator                   alignmentCalc;
+            Chem::ComponentSet                    fixedSubstructFrags;
             Math::Vector3DArray::StorageType      energyGradient;
             IndexList                             ringAtomIndices;
             IndexList                             symMappings;
