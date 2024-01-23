@@ -43,7 +43,7 @@ void CDPLPythonChem::exportMaxCommonBondSubstructureSearch()
     bool (Chem::MaxCommonBondSubstructureSearch::*uniqueMappingsOnlyGetFunc)() const = &Chem::MaxCommonBondSubstructureSearch::uniqueMappingsOnly;
     void (Chem::MaxCommonBondSubstructureSearch::*uniqueMappingsOnlySetFunc)(bool) = &Chem::MaxCommonBondSubstructureSearch::uniqueMappingsOnly;
 
-    python::class_<Chem::MaxCommonBondSubstructureSearch, 
+    python::class_<Chem::MaxCommonBondSubstructureSearch, Chem::MaxCommonBondSubstructureSearch::SharedPointer, 
         boost::noncopyable>("MaxCommonBondSubstructureSearch", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))

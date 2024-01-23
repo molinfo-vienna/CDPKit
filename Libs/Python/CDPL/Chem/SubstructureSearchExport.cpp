@@ -43,7 +43,8 @@ void CDPLPythonChem::exportSubstructureSearch()
     bool (Chem::SubstructureSearch::*uniqueMappingsOnlyGetFunc)() const = &Chem::SubstructureSearch::uniqueMappingsOnly;
     void (Chem::SubstructureSearch::*uniqueMappingsOnlySetFunc)(bool) = &Chem::SubstructureSearch::uniqueMappingsOnly;
 
-    python::class_<Chem::SubstructureSearch, boost::noncopyable>("SubstructureSearch", python::no_init)
+    python::class_<Chem::SubstructureSearch, Chem::SubstructureSearch::SharedPointer,
+                   boost::noncopyable>("SubstructureSearch", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
              [python::with_custodian_and_ward<1, 2>()])

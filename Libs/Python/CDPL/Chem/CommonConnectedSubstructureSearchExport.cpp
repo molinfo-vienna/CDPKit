@@ -43,7 +43,8 @@ void CDPLPythonChem::exportCommonConnectedSubstructureSearch()
     bool (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlyGetFunc)() const = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
     void (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlySetFunc)(bool) = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
 
-    python::class_<Chem::CommonConnectedSubstructureSearch, boost::noncopyable>("CommonConnectedSubstructureSearch", python::no_init)
+    python::class_<Chem::CommonConnectedSubstructureSearch, Chem::CommonConnectedSubstructureSearch::SharedPointer,
+                   boost::noncopyable>("CommonConnectedSubstructureSearch", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
              [python::with_custodian_and_ward<1, 2>()])

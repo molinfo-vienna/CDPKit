@@ -38,7 +38,15 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -57,6 +65,39 @@
 
 
 using namespace ConfGen;
+
+
+namespace
+{
+
+    class DefaultAtomMatchExpression :
+        public CDPL::Chem::MatchExpression<CDPL::Chem::Atom, CDPL::Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const CDPL::Chem::Atom& query_atom, const CDPL::Chem::MolecularGraph&,
+                        const CDPL::Chem::Atom& target_atom, const CDPL::Chem::MolecularGraph&,
+                        const CDPL::Base::Any&) const
+        {
+            return CDPL::Chem::atomTypesMatch(getType(query_atom), getType(target_atom));
+        }
+    };
+
+    class DefaultBondMatchExpression :
+        public CDPL::Chem::MatchExpression<CDPL::Chem::Bond, CDPL::Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const CDPL::Chem::Bond& query_bond, const CDPL::Chem::MolecularGraph&,
+                        const CDPL::Chem::Bond& target_bond, const CDPL::Chem::MolecularGraph&,
+                        const CDPL::Base::Any&) const
+        {
+            return (getOrder(query_bond) == getOrder(target_bond) ||
+                    (getAromaticityFlag(query_bond) && getAromaticityFlag(target_bond)));
+        }
+    };
+
+} // namespace
 
 
 class ConfGenImpl::InputScanProgressCallback
@@ -89,6 +130,7 @@ public:
     ConformerGenerationWorker(ConfGenImpl* parent):
         parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0),
         numFailedMols(0), numGenConfs(0) {
+        
         using namespace std::placeholders;
         
         confGen.setAbortCallback(std::bind(&ConformerGenerationWorker::abort, this));
@@ -109,6 +151,22 @@ public:
                 confGen.clearFragmentLibraries();
 
             confGen.addFragmentLibrary(parent->fragmentLib);
+        }
+
+        if (parent->fixedSubstruct) {
+            if (parent->fixedSubstructUseMCSS){
+                maxCommonSubSearch.reset(new CDPL::Chem::CommonConnectedSubstructureSearch(*parent->fixedSubstruct));
+
+                if (parent->fixedSubstructMCSSMinNumAtoms > 0)
+                    maxCommonSubSearch->setMinSubstructureSize(parent->fixedSubstructMCSSMinNumAtoms);
+
+                maxCommonSubSearch->uniqueMappingsOnly(false);
+
+            } else {
+                subSearch.reset(new CDPL::Chem::SubstructureSearch(*parent->fixedSubstruct));
+
+                subSearch->uniqueMappingsOnly(false);
+            }
         }
     }
 
@@ -299,10 +357,15 @@ private:
         return false;
     }
 
+    typedef CDPL::Chem::SubstructureSearch::SharedPointer                SubstructureSearchPtr;
+    typedef CDPL::Chem::CommonConnectedSubstructureSearch::SharedPointer MCSubstructureSearchPtr;
+
     ConfGenImpl*                      parent;
     CDPL::ConfGen::ConformerGenerator confGen;
     CDPL::Chem::BasicMolecule         molecule;
     CDPL::Chem::Fragment              origMolecule;
+    SubstructureSearchPtr             subSearch;
+    MCSubstructureSearchPtr           maxCommonSubSearch;
     std::stringstream                 logRecordStream;
     VerbosityLevel                    verbLevel;
     CDPL::Internal::Timer             timer;
@@ -443,6 +506,19 @@ ConfGenImpl::ConfGenImpl():
               value<std::string>()->notifier(std::bind(&ConfGenImpl::setOutputFormat, this, _1)));
     addOption("failed-format,F", "Failed molecule output file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier(std::bind(&ConfGenImpl::setFailedOutputFormat, this, _1)));
+    addOption("fixed-substr,j", "Fixed substructure data file.",
+              value<std::string>(&fixedSubstructFile));
+    addOption("fixed-substr-ptn,J", "Fixed substructure SMARTS pattern.",
+              value<std::string>(&fixedSubstructPtn));
+    addOption("fixed-substr-mcss,U", "Use maximum common substructure search (MCSS) to find matches of the specified fixed substructure in "
+              "the input molecule (default: false, using reqular substructure searching).", 
+              value<bool>(&fixedSubstructUseMCSS)->implicit_value(true));
+    addOption("fixed-substr-mcss-min-atoms,p", "The minimum number of atoms that have to be matched when using maximum common substructure search (MCSS) "
+              "to find matches of the specified fixed substructure in the input molecule (default: 2).", 
+              value<std::size_t>(&fixedSubstructMCSSMinNumAtoms));
+    addOption("fixed-substr-max-matches,Q", "The maximum number of considered matches of the specified fixed substructure in the "
+              "input molecule (default: 1, 0 disables limit).", 
+              value<std::size_t>(&fixedSubstructMaxNumMatches));
 
     addOptionLongDescriptions();
 }
@@ -887,6 +963,16 @@ int ConfGenImpl::process()
 
     loadFragmentLibrary();
 
+    if (termSignalCaught())
+        return EXIT_FAILURE;
+  
+    procFixedSubstructData();
+
+    if (haveErrorMessage()) {
+        printMessage(ERROR, "Error: " + errorMessage); 
+        return EXIT_FAILURE;
+    }
+       
     if (progressEnabled()) {
         initProgress();
         printMessage(INFO, "Generating Conformers...", true, true);
@@ -1136,6 +1222,112 @@ void ConfGenImpl::checkInputFiles() const
 
     if (!fragmentLibName.empty() && !Util::fileExists(fragmentLibName))
         throw Base::IOError("fragment library file '" + fragmentLibName + "' does not exist");
+    
+    if (!fixedSubstructFile.empty() && !Util::fileExists(fixedSubstructFile))
+        throw Base::IOError("fixed substructure data file '" + fixedSubstructFile + "' does not exist");
+}
+
+void ConfGenImpl::procFixedSubstructData()
+{
+    using namespace CDPL;
+    using namespace Chem;
+
+    bool have_ipt_coords = false;
+    
+    if (!fixedSubstructFile.empty()) {
+        printMessage(INFO, "Reading Fixed Substructure Data File'" + fixedSubstructFile + "'...");
+
+        MoleculeReader::SharedPointer reader_ptr;
+
+        try {
+            reader_ptr.reset(new MoleculeReader(fixedSubstructFile));
+
+        } catch (const Base::IOError& e) {
+            throw Base::IOError("no input handler found for file '" + fixedSubstructFile + '\'');
+        }
+
+        setMultiConfImportParameter(*reader_ptr, false);
+        
+        Molecule::SharedPointer mol_ptr(new BasicMolecule());
+
+        if (!reader_ptr->read(*mol_ptr)) {
+            setErrorMessage("reading fixed substructure molecule failed");
+            return;
+        }
+        
+        have_ipt_coords = hasCoordinates(*mol_ptr, 3);
+            
+        printMessage(INFO, " - Found " + std::to_string(mol_ptr->getNumAtoms()) + " atoms and " +
+                     std::to_string(mol_ptr->getNumBonds()) + " bonds");
+        printMessage(INFO, " - Atom 3D coordinates available: " +
+                      std::string(have_ipt_coords ? "Yes" : "No (-> using coordinates provided by input molecule(s))"));
+        printMessage(INFO, "");
+
+        calcBasicProperties(*mol_ptr, false);
+        calcAtomStereoDescriptors(*mol_ptr, true, 1, false);
+        calcBondStereoDescriptors(*mol_ptr, true, 1, false);
+
+        if (fixedSubstructPtn.empty()) {
+            static const DefaultAtomMatchExpression::SharedPointer DEF_ATOM_MATCH_EXPR(new DefaultAtomMatchExpression());
+            static const DefaultBondMatchExpression::SharedPointer DEF_BOND_MATCH_EXPR(new DefaultBondMatchExpression());
+
+            for (auto& atom : mol_ptr->getAtoms())
+                if (!hasMatchExpression(atom))
+                    setMatchExpression(atom, DEF_ATOM_MATCH_EXPR);
+
+            for (auto& bond : mol_ptr->getBonds())
+                if (!hasMatchExpression(bond))
+                    setMatchExpression(bond, DEF_BOND_MATCH_EXPR);
+        }
+        
+        fixedSubstruct = mol_ptr;
+    }
+
+    if (!fixedSubstructPtn.empty()) {
+        printMessage(INFO, "Reading Fixed Substructure SMARTS Pattern...");
+
+        std::istringstream ptn_iss(fixedSubstructPtn);
+        SMARTSMoleculeReader reader(ptn_iss);
+        Molecule::SharedPointer ptn_ptr(new BasicMolecule());
+
+        if (!reader.read(*ptn_ptr)) {
+            setErrorMessage("reading fixed substructure SMARTS pattern failed");
+            return;
+        }
+        
+        initSubstructureSearchQuery(*ptn_ptr, false);
+      
+        if (!fixedSubstruct || !have_ipt_coords) {
+            fixedSubstruct = ptn_ptr;
+            return;
+        }
+
+        SubstructureSearch sub_srch(*ptn_ptr);
+
+        sub_srch.setMaxNumMappings(1);
+
+        if (!sub_srch.findMappings(*fixedSubstruct)) {
+           setErrorMessage("could not find a fixed substructure SMARTS pattern match");
+           return;
+        }
+
+        for (auto& mpg : sub_srch.getMapping(0).getAtomMapping()) {
+            set3DCoordinates(const_cast<Atom&>(*mpg.first), get3DCoordinates(*mpg.second));
+            setType(const_cast<Atom&>(*mpg.first), getType(*mpg.second));
+            setFormalCharge(const_cast<Atom&>(*mpg.first), getType(*mpg.second));
+        }
+
+        for (auto& mpg : sub_srch.getMapping(0).getBondMapping())
+            setOrder(const_cast<Bond&>(*mpg.first), getOrder(*mpg.second));
+
+        calcImplicitHydrogenCounts(*ptn_ptr, true);
+        perceiveHybridizationStates(*ptn_ptr, true);
+        setAromaticityFlags(*ptn_ptr, true);
+        calcAtomStereoDescriptors(*ptn_ptr, true, 3, false);
+        calcBondStereoDescriptors(*ptn_ptr, true, 3, false);
+
+        fixedSubstruct = ptn_ptr;
+    }
 }
 
 void ConfGenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)

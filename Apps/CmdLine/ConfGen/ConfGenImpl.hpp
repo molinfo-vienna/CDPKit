@@ -32,6 +32,7 @@
 
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Chem/MolecularGraphWriter.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
@@ -120,6 +121,7 @@ namespace ConfGen
         void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs);
 
         void checkInputFiles() const;
+        void procFixedSubstructData();
         void printOptionSummary();
         void loadTorsionLibrary();
         void loadFragmentLibrary();
@@ -142,6 +144,7 @@ namespace ConfGen
 
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
+        typedef CDPL::Chem::Molecule::SharedPointer                  MoleculePtr;
         typedef CDPL::Internal::Timer                                Timer;
         typedef CDPL::ConfGen::ConformerGeneratorSettings            ConformerGeneratorSettings;
         typedef CDPL::ConfGen::FragmentConformerGeneratorSettings    FragmentConformerGeneratorSettings;
@@ -168,6 +171,12 @@ namespace ConfGen
         std::string                fragmentLibName;
         FragmentLibraryPtr         fragmentLib;
         bool                       replaceBuiltinFragLib;
+        std::string                fixedSubstructFile;
+        std::string                fixedSubstructPtn;
+        bool                       fixedSubstructUseMCSS;
+        std::size_t                fixedSubstructMCSSMinNumAtoms;
+        std::size_t                fixedSubstructMaxNumMatches;
+        MoleculePtr                fixedSubstruct;
         std::string                inputFormat;
         CompMoleculeReader         inputReader;
         std::string                outputFormat;
