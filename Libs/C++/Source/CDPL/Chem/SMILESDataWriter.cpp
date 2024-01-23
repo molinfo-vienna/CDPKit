@@ -110,17 +110,25 @@ bool Chem::SMILESDataWriter::writeReaction(std::ostream& os, const Reaction& rxn
 {
     init(os, true);
 
-    if (ctrlParameters.recordFormat == "NS") 
-        os << getName(rxn) << ' ';
-
+    if (ctrlParameters.recordFormat == "NS") {
+        auto& name = getName(rxn);
+        
+        if (!name.empty())
+            os << name << ' ';
+    }
+    
     if (ctrlParameters.canonicalize)
         writeCanonSMILES(os, rxn);
     else
         writeNonCanonSMILES(os, rxn);
 
-    if (ctrlParameters.recordFormat == "SN") 
-        os << ' ' << getName(rxn);
-
+    if (ctrlParameters.recordFormat == "SN") {
+        auto& name = getName(rxn);
+        
+        if (!name.empty())
+            os << ' ' << name;
+    }
+    
     return os.good();
 }
 
@@ -128,17 +136,25 @@ bool Chem::SMILESDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
 {
     init(os, false);
 
-    if (ctrlParameters.recordFormat == "NS") 
-        os << getName(molgraph) << ' ';
+    if (ctrlParameters.recordFormat == "NS") {
+        auto& name = getName(molgraph);
+        
+        if (!name.empty())
+            os << name << ' ';
+    }
     
     if (ctrlParameters.canonicalize)
         writeCanonSMILES(os, molgraph);
     else
         writeNonCanonSMILES(os, molgraph);
 
-    if (ctrlParameters.recordFormat == "SN") 
-        os << ' ' << getName(molgraph);
-
+    if (ctrlParameters.recordFormat == "SN") {
+         auto& name = getName(molgraph);
+        
+        if (!name.empty())
+            os << ' ' << name;
+    }
+    
     return os.good();
 }
 
