@@ -1443,7 +1443,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
                                 std::size_t(1) : std::size_t(std::ceil(double(num_avail_confs) / max_ens_size)));
 
     if (conf_idx_inc <= 1) {
-        for (std::size_t i = 0; i < num_avail_confs; i++) {
+        for (std::size_t i = 0; i < num_avail_confs && (max_ens_size == 0 || outputConfs.size() < max_ens_size); i++) {
             const ConformerData::SharedPointer& conf_data = workingConfs[i];
 
             if (conf_data->getEnergy() > max_energy)
