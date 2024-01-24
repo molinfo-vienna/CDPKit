@@ -49,6 +49,7 @@ namespace CDPL
          * \brief CIPConfigurationLabeler.
          *
          * Code is largely based on a Java implementation of the CIP sequence rules by John Mayfield [\ref CIPJM].
+         * \since 1.1
          */
         class CDPL_CHEM_API CIPConfigurationLabeler
         {

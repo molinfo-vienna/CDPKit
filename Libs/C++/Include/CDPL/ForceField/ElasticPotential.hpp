@@ -40,6 +40,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /*
+         * \since 1.1
+         */
         class CDPL_FORCEFIELD_API ElasticPotential
         {
 

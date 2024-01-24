@@ -85,9 +85,15 @@ namespace CDPL
 
             unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
+            /*
+             * \since 1.1
+             */
             unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
                                   const Math::Vector3DArray& fixed_substr_coords);
 
+            /*
+             * \since 1.1
+             */
             unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type,
                                   const Chem::MolecularGraph& fixed_substr,
                                   const Math::Vector3DArray& fixed_substr_coords);

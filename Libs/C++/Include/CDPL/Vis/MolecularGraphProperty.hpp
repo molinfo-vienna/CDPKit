@@ -159,6 +159,7 @@ namespace CDPL
              *
              * \valuetype Vis::Font
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_FONT;
             
@@ -174,6 +175,7 @@ namespace CDPL
              *
              * \valuetype Vis::SizeSpecification
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
 
@@ -341,6 +343,7 @@ namespace CDPL
              *
              * \valuetype Vis::Font
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_FONT;
             
@@ -356,6 +359,7 @@ namespace CDPL
              *
              * \valuetype Vis::SizeSpecification
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
         } // namespace MolecularGraphProperty

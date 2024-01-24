@@ -41,9 +41,15 @@ namespace CDPL
     namespace ForceField
     {
 
+        /*
+         * \since 1.1
+         */
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcElasticPotentialEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
+        /*
+         * \since 1.1
+         */
         template <typename ValueType, typename CoordsArray>
         ValueType calcElasticPotentialEnergy(const ElasticPotential& pot, const CoordsArray& coords);
 
@@ -62,14 +68,21 @@ namespace CDPL
          * \param force_const The force constant \f$ k_{ij} \f$.
          * \param ref_length The reference distance \f$ r_{ij}^0 \f$.
          * \return The calculated elastic potential energy \f$ E_{ij} \f$.
+         * \since 1.1
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcElasticPotentialEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
                                              const ValueType& force_const, const ValueType& ref_length);
 
+        /*
+         * \since 1.1
+         */
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcElasticPotentialGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
+        /*
+         * \since 1.1
+         */
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcElasticPotentialGradient(const ElasticPotential& pot, const CoordsArray& coords, GradVector& grad);
 
@@ -103,6 +116,7 @@ namespace CDPL
          * \return The calculated elastic potential energy \f$ E_{ij} \f$.
          * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
          *       corresponding output variable!
+         * \since 1.1
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
         ValueType calcElasticPotentialGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,

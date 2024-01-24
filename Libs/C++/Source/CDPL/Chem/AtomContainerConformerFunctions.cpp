@@ -187,6 +187,15 @@ bool Chem::alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atom
 
     return alignConformations(cntnr, ref_atoms, ref_conf);
 }
+
+bool Chem::alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms)
+{
+    Math::Vector3DArray coords;
+
+    get3DCoordinates(cntnr, coords, static_cast<const Math::Vector3D&(*)(const Entity3D&)>(&get3DCoordinates));
+
+    return alignConformations(cntnr, ref_atoms, coords);
+}
    
 bool Chem::alignConformations(AtomContainer& cntnr, std::size_t ref_conf_idx)
 {

@@ -207,11 +207,13 @@ namespace CDPL
 
             /**
              * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Font ATOM_CONFIGURATION_LABEL_FONT;
 
             /**
              * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_CONFIGURATION_LABEL_SIZE;
 
@@ -272,6 +274,7 @@ namespace CDPL
 
             /**
              * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS.
+             * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_CONFIGURATION_LABELS;
              
@@ -337,11 +340,13 @@ namespace CDPL
 
             /**
              * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Font BOND_CONFIGURATION_LABEL_FONT;
             
             /**
              * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE;
             
@@ -367,6 +372,7 @@ namespace CDPL
 
             /**
              * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS.
+             * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_BOND_CONFIGURATION_LABELS;
         } // namespace ControlParameterDefault

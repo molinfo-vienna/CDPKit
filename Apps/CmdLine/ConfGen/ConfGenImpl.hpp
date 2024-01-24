@@ -174,9 +174,11 @@ namespace ConfGen
         std::string                fixedSubstructFile;
         std::string                fixedSubstructPtn;
         bool                       fixedSubstructUseMCSS;
+        bool                       fixedSubstructAlign;
         std::size_t                fixedSubstructMCSSMinNumAtoms;
         std::size_t                fixedSubstructMaxNumMatches;
         MoleculePtr                fixedSubstruct;
+        bool                       haveFixedSubstruct3DCoords;
         std::string                inputFormat;
         CompMoleculeReader         inputReader;
         std::string                outputFormat;

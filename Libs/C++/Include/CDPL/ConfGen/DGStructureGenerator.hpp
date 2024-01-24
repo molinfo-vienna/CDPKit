@@ -64,9 +64,18 @@ namespace CDPL
             const Util::BitSet& getExcludedHydrogenMask() const;
 
             void setup(const Chem::MolecularGraph& molgraph);
+
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
+
+            /*
+             * \since 1.1
+             */
             void setup(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& fixed_substr_frags,
                        const Math::Vector3DArray& fixed_substr_coords);
+
+            /*
+             * \since 1.1
+             */
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data,
                        const Chem::FragmentList& fixed_substr_frags, const Math::Vector3DArray& fixed_substr_coords);
 

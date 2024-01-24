@@ -85,7 +85,9 @@ void CDPLPythonChem::exportAtomContainerFunctions()
     python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&, const Math::Vector3DArray&)>(&Chem::alignConformations),
                 (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_conf")));
     python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&, std::size_t)>(&Chem::alignConformations),
-                (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_conf_idx") = 0));
+                (python::arg("cntnr"), python::arg("ref_atoms"), python::arg("ref_conf_idx")));
+    python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, const Util::BitSet&)>(&Chem::alignConformations),
+                (python::arg("cntnr"), python::arg("ref_atoms")));
     python::def("alignConformations", static_cast<bool (*)(Chem::AtomContainer&, std::size_t)>(&Chem::alignConformations),
                 (python::arg("cntnr"), python::arg("ref_conf_idx") = 0));
    

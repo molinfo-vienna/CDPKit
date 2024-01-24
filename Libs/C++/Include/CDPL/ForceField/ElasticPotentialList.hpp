@@ -39,6 +39,9 @@ namespace CDPL
     namespace ForceField
     {
 
+        /*
+         * \since 1.1
+         */
         typedef Util::Array<ElasticPotential> ElasticPotentialList;
     }
 } // namespace CDPL

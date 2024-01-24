@@ -91,18 +91,33 @@ namespace CDPL
 
             double getEnergyWindow() const;
 
+            /*
+             * \since 1.1
+             */
             double getEnergyWindow(std::size_t num_rot_bonds) const;
 
+            /*
+             * \since 1.1
+             */
             void clearEnergyWindowRanges();
 
+            /*
+             * \since 1.1
+             */
             void addEnergyWindowRange(std::size_t num_rot_bonds, double win_size);
             
             void setMaxPoolSize(std::size_t max_size);
 
             std::size_t getMaxPoolSize() const;
 
+            /*
+             * \since 1.1
+             */
             void setMaxRotatableBondCount(long max_count);
 
+            /*
+             * \since 1.1
+             */
             long getMaxRotatableBondCount() const;
 
             void setTimeout(std::size_t mil_secs);
@@ -133,20 +148,38 @@ namespace CDPL
 
             std::size_t getMaxNumOutputConformers() const;
 
+            /*
+             * \since 1.1
+             */
             std::size_t getMaxNumOutputConformers(std::size_t num_rot_bonds) const;
 
+            /*
+             * \since 1.1
+             */
             void clearMaxNumOutputConformersRanges();
 
+            /*
+             * \since 1.1
+             */
             void addMaxNumOutputConformersRange(std::size_t num_rot_bonds, std::size_t max_num);
             
             void setMinRMSD(double min_rmsd);
 
             double getMinRMSD() const;
 
+            /*
+             * \since 1.1
+             */
             double getMinRMSD(std::size_t num_rot_bonds) const;
 
+            /*
+             * \since 1.1
+             */
             void clearMinRMSDRanges();
 
+            /*
+             * \since 1.1
+             */
             void addMinRMSDRange(std::size_t num_rot_bonds, double min_rmsd);
             
             void setMaxNumRefinementIterations(std::size_t max_iter);

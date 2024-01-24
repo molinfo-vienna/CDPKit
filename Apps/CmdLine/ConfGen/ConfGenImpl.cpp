@@ -275,6 +275,10 @@ private:
 
         confGen.setConformers(molecule);
 
+        if (fixedSubstruct.getNumAtoms() > 0 && parent->fixedSubstructAlign) {
+            // TODO
+        }
+
         parent->writeMolecule(molecule, false);
 
         numGenConfs += num_confs;
@@ -366,6 +370,9 @@ private:
     CDPL::Chem::Fragment              origMolecule;
     SubstructureSearchPtr             subSearch;
     MCSubstructureSearchPtr           maxCommonSubSearch;
+    CDPL::Chem::Fragment              fixedSubstruct;
+    CDPL::Math::Vector3DArray         fixedSubstructCoords;
+    CDPL::Util::BitSet                fixedSubstructAlignAtoms;
     std::stringstream                 logRecordStream;
     VerbosityLevel                    verbLevel;
     CDPL::Internal::Timer             timer;
@@ -378,8 +385,9 @@ private:
 ConfGenImpl::ConfGenImpl(): 
     numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
     confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"), canonicalize(false), energySDEntry(false), 
-    energyComment(false), confIndexSuffix(false), torsionLib(), fragmentLib(),
-    inputFormat(), outputFormat(), outputWriter(), failedOutputFormat(), failedOutputWriter()
+    energyComment(false), confIndexSuffix(false), torsionLib(), fragmentLib(), fixedSubstructUseMCSS(false),
+    fixedSubstructAlign(false), fixedSubstructMCSSMinNumAtoms(2), fixedSubstructMaxNumMatches(0),
+    haveFixedSubstruct3DCoords(false), inputFormat(), outputFormat(), outputWriter(), failedOutputFormat(), failedOutputWriter()
 {
     using namespace std::placeholders;
     
@@ -513,6 +521,9 @@ ConfGenImpl::ConfGenImpl():
     addOption("fixed-substr-mcss,U", "Use maximum common substructure search (MCSS) to find matches of the specified fixed substructure in "
               "the input molecule (default: false, using reqular substructure searching).", 
               value<bool>(&fixedSubstructUseMCSS)->implicit_value(true));
+    addOption("fixed-substr-align,a", "Align conformers on the specified fixed substructure in "
+              "the input molecule (default: false).", 
+              value<bool>(&fixedSubstructAlign)->implicit_value(true));
     addOption("fixed-substr-mcss-min-atoms,p", "The minimum number of atoms that have to be matched when using maximum common substructure search (MCSS) "
               "to find matches of the specified fixed substructure in the input molecule (default: 2).", 
               value<std::size_t>(&fixedSubstructMCSSMinNumAtoms));
@@ -1232,8 +1243,6 @@ void ConfGenImpl::procFixedSubstructData()
     using namespace CDPL;
     using namespace Chem;
 
-    bool have_ipt_coords = false;
-    
     if (!fixedSubstructFile.empty()) {
         printMessage(INFO, "Reading Fixed Substructure Data File'" + fixedSubstructFile + "'...");
 
@@ -1255,12 +1264,12 @@ void ConfGenImpl::procFixedSubstructData()
             return;
         }
         
-        have_ipt_coords = hasCoordinates(*mol_ptr, 3);
+        haveFixedSubstruct3DCoords = hasCoordinates(*mol_ptr, 3);
             
         printMessage(INFO, " - Found " + std::to_string(mol_ptr->getNumAtoms()) + " atoms and " +
                      std::to_string(mol_ptr->getNumBonds()) + " bonds");
         printMessage(INFO, " - Atom 3D coordinates available: " +
-                      std::string(have_ipt_coords ? "Yes" : "No (-> using coordinates provided by input molecule(s))"));
+                      std::string(haveFixedSubstruct3DCoords ? "Yes" : "No (-> using coordinates provided by input molecule(s))"));
         printMessage(INFO, "");
 
         calcBasicProperties(*mol_ptr, false);
@@ -1294,10 +1303,13 @@ void ConfGenImpl::procFixedSubstructData()
             setErrorMessage("reading fixed substructure SMARTS pattern failed");
             return;
         }
-        
+
+        printMessage(INFO, " - Found " + std::to_string(ptn_ptr->getNumAtoms()) + " atom and " +
+                     std::to_string(ptn_ptr->getNumBonds()) + " bond expressions");
+
         initSubstructureSearchQuery(*ptn_ptr, false);
       
-        if (!fixedSubstruct || !have_ipt_coords) {
+        if (!fixedSubstruct || !haveFixedSubstruct3DCoords) {
             fixedSubstruct = ptn_ptr;
             return;
         }
@@ -1393,6 +1405,13 @@ void ConfGenImpl::printOptionSummary()
                                                                       replaceBuiltinTorLib   ? torsionLibName : torsionLibName + " + Built-in"));
     printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") :
                                                                       replaceBuiltinFragLib   ? fragmentLibName : fragmentLibName + " + Built-in"));
+    printMessage(VERBOSE, " Fixed Substructure (FSS) Mol. File:  " + (fixedSubstructFile.empty() ? std::string("None") : fixedSubstructFile));
+    printMessage(VERBOSE, " FSS SMARTS pattern:                  " + (fixedSubstructPtn.empty() ? std::string("None") : fixedSubstructPtn));
+    printMessage(VERBOSE, " Use MCSS for FSS Matching:           " + std::string(fixedSubstructUseMCSS ? "Yes" : "No"));
+    printMessage(VERBOSE, " Align Conformers. on FSS:            " + std::string(fixedSubstructAlign ? "Yes" : "No"));
+    printMessage(VERBOSE, " Min. Num. Matching FSS Atoms (MCSS): " + std::to_string(fixedSubstructMCSSMinNumAtoms));
+    printMessage(VERBOSE, " Max. Num. Considered FSS Matches:    " + (fixedSubstructMaxNumMatches == 0 ? std::string("No Limit") :
+                                                                      std::to_string(fixedSubstructMaxNumMatches)));
     printMessage(VERBOSE, " Input File Format:                   " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Output File Format:                  " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Failed Molecule File Format:         " + (!failedOutputFormat.empty() ? failedOutputFormat : std::string("Auto-detect")));

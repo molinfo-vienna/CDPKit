@@ -102,6 +102,9 @@ namespace CDPL
             ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
             ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
 
+            /*
+             * \since 1.1
+             */
             void addFixedSubstructureConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
                                                  Util::DG3DCoordinatesGenerator& coords_gen);
             void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);

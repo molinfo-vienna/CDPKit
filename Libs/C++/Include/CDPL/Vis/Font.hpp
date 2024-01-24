@@ -68,6 +68,7 @@ namespace CDPL
              * \param size The font size.
              * \param bold \c true if text should be rendered bold, and \c false otherwise.
              * \param italic \c true if text should be rendered italicized, and \c false otherwise.
+             * \since 1.1
              */
             Font(const std::string& family, double size = 12.0, bool bold = false, bool italic = false);
 

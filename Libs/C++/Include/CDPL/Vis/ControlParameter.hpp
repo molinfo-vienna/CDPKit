@@ -459,6 +459,7 @@ namespace CDPL
              * \valuetype Vis::Font
              * \note The control-parameter setting is ignored if a font has been specified by 
              *       Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT or Vis::AtomProperty::CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_FONT;
             
@@ -476,6 +477,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              * \note The control-parameter setting is ignored if a size has been specified by 
              *       Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE or Vis::AtomProperty::ATOM_CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
 
@@ -627,6 +629,7 @@ namespace CDPL
              * Vis::ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS will be used.
              *
              * \valuetype \c bool
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_CONFIGURATION_LABELS;
 
@@ -822,6 +825,7 @@ namespace CDPL
              * \valuetype Vis::Font
              * \note The control-parameter setting is ignored if a font has been specified by 
              *       Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT or Vis::BondProperty::CONFIGURATION_LABEL_FONT.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_FONT;
             
@@ -839,6 +843,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              * \note The control-parameter setting is ignored if a size has been specified by 
              *       Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE or Vis::BondProperty::CONFIGURATION_LABEL_SIZE.
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
             
@@ -922,6 +927,7 @@ namespace CDPL
              * Vis::ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS will be used.
              *
              * \valuetype \c bool
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_BOND_CONFIGURATION_LABELS;
         } // namespace ControlParameter

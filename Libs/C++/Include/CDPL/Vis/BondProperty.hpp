@@ -210,6 +210,7 @@ namespace CDPL
              * and Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT.
              *
              * \valuetype Vis::Font
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_FONT;
             
@@ -224,6 +225,7 @@ namespace CDPL
              * Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE and Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE. 
              *
              * \valuetype Vis::SizeSpecification
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_SIZE;
         } // namespace BondProperty

@@ -89,6 +89,9 @@ namespace CDPL
 
             unsigned int assemble(const Chem::MolecularGraph& molgraph);
 
+            /*
+             * \since 1.1
+             */
             unsigned int assemble(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
                                   const Math::Vector3DArray& fixed_substr_coords);
 

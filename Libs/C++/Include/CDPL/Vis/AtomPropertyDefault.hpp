@@ -54,7 +54,15 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification SECONDARY_LABEL_SIZE;
             extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
+
+            /*
+             * \since 1.1
+             */
             extern CDPL_VIS_API const Font              CONFIGURATION_LABEL_FONT;
+
+            /*
+             * \since 1.1
+             */
             extern CDPL_VIS_API const SizeSpecification CONFIGURATION_LABEL_SIZE;
         } // namespace AtomPropertyDefault
     } // namespace Vis

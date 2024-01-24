@@ -142,6 +142,7 @@ namespace CDPL
              * and Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT.
              *
              * \valuetype Vis::Font
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_FONT;
             
@@ -156,6 +157,7 @@ namespace CDPL
              * Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE and Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE. 
              *
              * \valuetype Vis::SizeSpecification
+             * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_SIZE;
         } // namespace AtomProperty
