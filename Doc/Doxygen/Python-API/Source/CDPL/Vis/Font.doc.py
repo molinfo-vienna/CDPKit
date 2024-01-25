@@ -47,6 +47,8 @@ class Font(Boost.Python.instance):
     # \param bold <tt>True</tt> if text should be rendered bold, and <tt>False</tt> otherwise.
     # \param italic <tt>True</tt> if text should be rendered italicized, and <tt>False</tt> otherwise.
     # 
+    # \since 1.1
+    # 
     def __init__(family: str, size: float = 12.0, bold: bool = False, italic: bool = False) -> None: pass
 
     ##

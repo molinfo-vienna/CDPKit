@@ -22,6 +22,8 @@
 ##
 # \brief Provides constants for the specification of stereogenic atom/bond configurations determined by the CIP sequence rules.
 # 
+# \since 1.1
+# 
 class CIPDescriptor(Boost.Python.instance):
 
     ##

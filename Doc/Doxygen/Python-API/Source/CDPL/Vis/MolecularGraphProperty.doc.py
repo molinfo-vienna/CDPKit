@@ -215,7 +215,9 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_FONT.
+    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_FONT. 
+    # 
+    # \since 1.1
     # 
     ATOM_CONFIGURATION_LABEL_FONT = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_FONT')
 
@@ -224,7 +226,9 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_SIZE.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_SIZE. 
+    # 
+    # \since 1.1
     # 
     ATOM_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_SIZE')
 
@@ -233,7 +237,9 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
     # 
-    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_FONT.
+    # <b>Value Type:</b> Vis.Font \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_FONT. 
+    # 
+    # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_FONT = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_FONT')
 
@@ -242,6 +248,8 @@ class MolecularGraphProperty(Boost.Python.instance):
     # 
     # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE.
     # 
-    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_SIZE.
+    # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_SIZE. 
+    # 
+    # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_SIZE')

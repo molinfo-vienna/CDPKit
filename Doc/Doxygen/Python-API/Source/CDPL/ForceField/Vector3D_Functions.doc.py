@@ -577,7 +577,9 @@ def calcMMFF94BondStretchingGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.V
 # 
 # \return The calculated elastic potential energy \f$ E_{ij} \f$. 
 # 
-# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
+# \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable! 
+# 
+# \since 1.1
 # 
 def calcElasticPotentialGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
@@ -877,7 +879,9 @@ def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vec
 # \param force_const The force constant \f$ k_{ij} \f$.
 # \param ref_length The reference distance \f$ r_{ij}^0 \f$.
 # 
-# \return The calculated elastic potential energy \f$ E_{ij} \f$.
+# \return The calculated elastic potential energy \f$ E_{ij} \f$. 
+# 
+# \since 1.1
 # 
 def calcElasticPotentialEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 

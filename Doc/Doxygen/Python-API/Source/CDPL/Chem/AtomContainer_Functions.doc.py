@@ -171,7 +171,7 @@ def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf: M
 # \param ref_conf_idx 
 # \return 
 #
-def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf_idx: int = 0) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf_idx: int) -> bool: pass
 
 ##
 # \brief 
@@ -179,7 +179,7 @@ def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf_id
 # \param ref_conf_idx 
 # \return 
 #
-def alignConformations(cntnr: AtomContainer, ref_conf_idx: int = 0) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_conf_idx: int) -> bool: pass
 
 ##
 # \brief 
