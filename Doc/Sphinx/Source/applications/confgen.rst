@@ -127,7 +127,7 @@ Other options
   -e [ --e-window ] arg
 
     Energy window for generated conformers. The energy window may be specified as a
-    single constant value or as a list of pairs RBC1 EW1 RBC2 EW2... where RBC
+    single constant value or (since V1.1) as a list of pairs RBC1 EW1 RBC2 EW2... where RBC
     denotes a rotatable bond count and EW the energy window that applies if the 
     rotatable bond count of the processed molecule is <= RBC (the EW value 
     associated with the lowest RBC that fulfills the latter condition takes 
@@ -138,7 +138,7 @@ Other options
   -r [ --rmsd ] arg
 
     Minimum RMSD for output conformer selection. The RMSD may be specified as
-    a single constant value or as a list of pairs RBC1 RMSD1 RBC2 RMSD2... where 
+    a single constant value or (since V1.1) as a list of pairs RBC1 RMSD1 RBC2 RMSD2... where 
     RBC denotes a rotatable bond count and RMSD is the value that applies if the 
     rotatable bond count of the processed molecule is <= RBC (the RMSD value 
     associated with the lowest RBC that fulfills the latter condition takes 
@@ -150,7 +150,7 @@ Other options
   -n [ --max-num-out-confs ] arg
 
     Maximum number of output conformers per molecule. The max. number of output 
-    conformers may be specified as a single constant value or as a list of pairs 
+    conformers may be specified as a single constant value or (since V1.1) as a list of pairs 
     RBC1 MC1 RBC2 MC2... where RBC denotes a rotatable bond count and MC the max. 
     number of conformers that applies if the rotatable bond count of the 
     processed molecule is <= RBC (the MC value associated with the lowest RBC 

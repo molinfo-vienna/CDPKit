@@ -131,7 +131,7 @@ Other options
 
   -S [ --title-suffix ] [=arg(=1)]
 
-    Append tautomer number to the title of the output molecules (default: false; since V1.1).
+    Append tautomer number to the title of the output molecules (default: false); since V1.1
 
   --keto-enol [=arg(=1)]
 
