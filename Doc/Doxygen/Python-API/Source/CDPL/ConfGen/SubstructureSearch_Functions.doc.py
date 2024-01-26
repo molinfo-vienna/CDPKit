@@ -21,80 +21,11 @@
 
 ##
 # \brief 
+# \param sub_search 
+# \param max_num_matches 
+# \param molgraph 
+# \param fixed_substr 
+# \param fixed_substr_coords 
+# \return 
 #
-BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
-
-##
-# \brief 
-#
-BUILD_TIME = 202401261132
-
-##
-# \brief 
-#
-COMPILER_ID = 'GNU'
-
-##
-# \brief 
-#
-COMPILER_VERSION = '8.5.0'
-
-##
-# \brief 
-#
-HAVE_CAIRO = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PDF_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PNG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PS_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_SVG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_NUMPY = True
-
-##
-# \brief 
-#
-HAVE_QT = True
-
-##
-# \brief 
-#
-VERSION = 10100
-
-##
-# \brief 
-#
-VERSION_MAJOR = 1
-
-##
-# \brief 
-#
-VERSION_MINOR = 1
-
-##
-# \brief 
-#
-VERSION_PATCH = 0
-
-##
-# \brief 
-#
-VERSION_STRING = '1.1.0'
+def setupFixedSubstructureData(sub_search: Chem.SubstructureSearch, max_num_matches: int, molgraph: Chem.MolecularGraph, fixed_substr: Chem.Fragment, fixed_substr_coords: Math.Vector3DArray = 0) -> int: pass

@@ -159,27 +159,35 @@ def getNumConformations(cntnr: AtomContainer) -> int: pass
 # \brief 
 # \param cntnr 
 # \param ref_atoms 
-# \param ref_conf 
+# \param ref_coords 
 # \return 
 #
-def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf: Math.Vector3DArray) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param ref_atoms 
-# \param ref_conf_idx 
+# \param ref_coords 
 # \return 
 #
-def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet, ref_conf_idx: int) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer, ref_coords: Math.Vector3DArray) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param ref_conf_idx 
+# \param ref_atoms 
 # \return 
 #
-def alignConformations(cntnr: AtomContainer, ref_conf_idx: int) -> bool: pass
+def alignConformations(cntnr: AtomContainer, ref_atoms: Util.BitSet) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ref_atoms 
+# \return 
+#
+def alignConformations(cntnr: AtomContainer, ref_atoms: AtomContainer) -> bool: pass
 
 ##
 # \brief 
