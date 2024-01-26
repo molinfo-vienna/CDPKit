@@ -82,23 +82,24 @@ namespace CDPL
         /*
          * \since 1.1
          */
-        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_conf);
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, const Math::Vector3DArray& ref_coords);
 
         /*
          * \since 1.1
          */
-        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms, std::size_t ref_conf_idx);
-
-        /*
-         * \since 1.1
-         */
-        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, std::size_t ref_conf_idx = 0);
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const AtomContainer& ref_atoms, const Math::Vector3DArray& ref_coords);
 
         /*
          * \since 1.1
          */
         CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atoms);
 
+        /*
+         * \since 1.1
+         */
+        CDPL_CHEM_API bool alignConformations(AtomContainer& cntnr, const AtomContainer& ref_atoms);
+
+        
         CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
 
         CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);

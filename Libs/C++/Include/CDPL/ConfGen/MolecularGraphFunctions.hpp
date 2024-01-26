@@ -43,6 +43,9 @@ namespace CDPL
     {
 
         class MolecularGraph;
+        class Fragment;
+        class SubstructureSearch;
+        class CommonConnectedSubstructureSearch;
     }
 
     namespace ForceField
@@ -73,6 +76,20 @@ namespace CDPL
                                                                      bool strict, double estat_de_const, double estat_dist_expo);
 
         CDPL_CONFGEN_API void setConformers(Chem::MolecularGraph& molgraph, const ConformerDataArray& conf_array);
+
+        /**
+         * \since 1.1
+         */
+        CDPL_CONFGEN_API std::size_t setupFixedSubstructureData(const Chem::SubstructureSearch& sub_search, std::size_t max_num_matches,
+                                                                Chem::MolecularGraph& molgraph, Chem::Fragment& fixed_substr,
+                                                                Math::Vector3DArray* fixed_substr_coords);
+       /**
+         * \since 1.1
+         */
+        CDPL_CONFGEN_API std::size_t setupFixedSubstructureData(const Chem::CommonConnectedSubstructureSearch& sub_search,
+                                                                std::size_t max_num_matches, Chem::MolecularGraph& molgraph,
+                                                                Chem::Fragment& fixed_substr, Math::Vector3DArray* fixed_substr_coords);
+
     } // namespace ConfGen
 } // namespace CDPL
 

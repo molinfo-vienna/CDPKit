@@ -491,6 +491,10 @@ void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DC
 
             for (std::size_t j = 0, num_nbrs2 = atomIndexList2.size(); j < num_nbrs2; j++) {
                 std::size_t nbr_atom2_idx = atomIndexList2[j];
+
+                if (atomPairProcessed(nbr_atom1_idx, nbr_atom2_idx))
+                    continue;
+                
                 double nbr_bond2_angle = getBondAngle(nbr_atom2_idx, atom2_idx, atom1_idx);
                 
                 if (nbr_bond2_angle <= 0.0)

@@ -25,7 +25,9 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 
@@ -51,4 +53,14 @@ void CDPLPythonConfGen::exportMolecularGraphFunctions()
     python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
                 (python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type"), 
                  python::arg("strict"), python::arg("estat_de_const"), python::arg("estat_dist_expo")));
+    python::def("setupFixedSubstructureData", static_cast<std::size_t (*)(const Chem::SubstructureSearch&, std::size_t,
+                                                                          Chem::MolecularGraph&, Chem::Fragment&,
+                                                                          Math::Vector3DArray*)>(&ConfGen::setupFixedSubstructureData),
+                (python::arg("sub_search"), python::arg("max_num_matches"), python::arg("molgraph"), python::arg("fixed_substr"),
+                 python::arg("fixed_substr_coords") = 0));
+    python::def("setupFixedSubstructureData", static_cast<std::size_t (*)(const Chem::CommonConnectedSubstructureSearch&, std::size_t,
+                                                                          Chem::MolecularGraph&, Chem::Fragment&,
+                                                                          Math::Vector3DArray*)>(&ConfGen::setupFixedSubstructureData),
+                (python::arg("sub_search"), python::arg("max_num_matches"), python::arg("molgraph"), python::arg("fixed_substr"),
+                 python::arg("fixed_substr_coords") = 0));
 }

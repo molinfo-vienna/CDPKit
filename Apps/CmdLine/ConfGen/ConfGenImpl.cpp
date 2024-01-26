@@ -47,8 +47,10 @@
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
+#include "CDPL/Chem/ComponentSet.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
@@ -70,7 +72,7 @@ using namespace ConfGen;
 namespace
 {
 
-    class DefaultAtomMatchExpression :
+    class DefAtomMatchExpression :
         public CDPL::Chem::MatchExpression<CDPL::Chem::Atom, CDPL::Chem::MolecularGraph>
     {
 
@@ -83,7 +85,7 @@ namespace
         }
     };
 
-    class DefaultBondMatchExpression :
+    class DefBondMatchExpression :
         public CDPL::Chem::MatchExpression<CDPL::Chem::Bond, CDPL::Chem::MolecularGraph>
     {
 
@@ -96,7 +98,6 @@ namespace
                     (getAromaticityFlag(query_bond) && getAromaticityFlag(target_bond)));
         }
     };
-
 } // namespace
 
 
@@ -216,9 +217,20 @@ private:
                 origMolecule = molecule;
 
             prepareForConformerGeneration(molecule, parent->canonicalize);
-            
-            unsigned int ret_code = confGen.generate(molecule);
 
+            unsigned int ret_code = ReturnCode::SUCCESS;
+     
+            if (parent->fixedSubstruct) {
+                if (!getFixedSubstructMatches())
+                    handleError(rec_idx, ret_code, true);
+                else if (parent->haveFixedSubstruct3DCoords)
+                    ret_code = confGen.generate(molecule, fixedSubstruct, fixedSubstructCoords);
+                else
+                    ret_code = confGen.generate(molecule, fixedSubstruct);
+                
+            } else
+                ret_code = confGen.generate(molecule);
+        
             switch (ret_code) {
 
                 case ReturnCode::ABORTED:
@@ -230,7 +242,7 @@ private:
                     break;
 
                 default:
-                    handleError(rec_idx, ret_code);
+                    handleError(rec_idx, ret_code, false);
             }
         
             std::string log_rec = logRecordStream.str();
@@ -254,6 +266,34 @@ private:
         return false;
     }
 
+    std::size_t getFixedSubstructMatches() {
+        using namespace CDPL::ConfGen;
+
+        std::size_t num_matches = 0;
+
+        if (parent->fixedSubstructUseMCSS) {
+            if (!maxCommonSubSearch->findMaxMappings(molecule))
+                return 0;
+
+            num_matches = setupFixedSubstructureData(*maxCommonSubSearch, parent->fixedSubstructMaxNumMatches, molecule,
+                                                     fixedSubstruct, parent->haveFixedSubstruct3DCoords ? &fixedSubstructCoords : nullptr);
+        } else {
+            if (!subSearch->findMappings(molecule))
+                return 0;
+
+            num_matches = setupFixedSubstructureData(*subSearch, parent->fixedSubstructMaxNumMatches, molecule,
+                                                     fixedSubstruct, parent->haveFixedSubstruct3DCoords ? &fixedSubstructCoords : nullptr);
+        }
+        
+        if (verbLevel >= DEBUG && num_matches > 0) {
+             logRecordStream << "Considering " << std::to_string(num_matches) << " fixed substructure match(es)" << std::endl;
+             logRecordStream << "Fixed substructure comprises " << std::to_string(fixedSubstruct.getNumAtoms()) << " atom(s) and "
+                             << std::to_string(fixedSubstruct.getNumBonds()) << " bond(s)" << std::endl;
+        }
+
+        return num_matches;
+    }
+
     void outputConformers(std::size_t rec_idx, unsigned int ret_code) {
         using namespace CDPL::ConfGen;
 
@@ -262,29 +302,30 @@ private:
         std::size_t num_confs = confGen.getNumConformers();
 
         if (verbLevel == VERBOSE) {
-            logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << 
-                num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format<3>() << 's' << std::endl;
+            logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": "
+                            << num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format<3>() << 's' << std::endl;
 
             if (ret_code == ReturnCode::TOO_MUCH_SYMMETRY)
-                logRecordStream << "Warning: not all top. symmetry mappings could be considered, output ensemble may contain confs. violating the specified RMSD threshold" << std::endl;
+                logRecordStream << "Warning: not all top. symmetry mappings could be considered, output ensemble may contain confs. "
+                                << "violating the specified RMSD threshold" << std::endl;
 
         } else if (verbLevel == ERROR && ret_code == ReturnCode::TOO_MUCH_SYMMETRY) {
-            logRecordStream << "Molecule " <<  parent->createMoleculeIdentifier(rec_idx, molecule) << ": " <<
-                "not all top. symmetry mappings could be considered, output ensemble may contain confs. violating the specified RMSD threshold" << std::endl;
+            logRecordStream << "Molecule " <<  parent->createMoleculeIdentifier(rec_idx, molecule)
+                            << ": not all top. symmetry mappings could be considered, output ensemble may contain confs. violating the specified "
+                            << "RMSD threshold" << std::endl;
         }
 
         confGen.setConformers(molecule);
 
-        if (fixedSubstruct.getNumAtoms() > 0 && parent->fixedSubstructAlign) {
-            // TODO
-        }
+        if (fixedSubstruct.getNumAtoms() > 0 && parent->fixedSubstructAlign)
+            alignOnFixedSubstruct();
 
         parent->writeMolecule(molecule, false);
 
         numGenConfs += num_confs;
     }
 
-    void handleError(std::size_t rec_idx, unsigned int ret_code) {
+    void handleError(std::size_t rec_idx, unsigned int ret_code, bool no_fixed_substr_match) {
         using namespace CDPL::ConfGen;
 
         numFailedMols++;
@@ -307,9 +348,19 @@ private:
         if (verbLevel < ERROR)
             return;
 
-        if (verbLevel >= DEBUG)
-            return;
+        if (verbLevel >= DEBUG) {
+            if (no_fixed_substr_match)
+                logRecordStream << "Error: could not find any fixed substructure matches" << std::endl; 
 
+            return;
+        }
+
+        if (no_fixed_substr_match) {
+            logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": "
+                            << "could not find any fixed substructure matches" << std::endl;
+            return;
+        }
+        
         std::string err_msg;
 
         switch (ret_code) {
@@ -350,6 +401,29 @@ private:
         logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << err_msg << std::endl; 
     }
 
+    void alignOnFixedSubstruct() {
+        using namespace CDPL;
+        
+        fixedSubstructComps.perceive(fixedSubstruct);
+
+        const Chem::Fragment* largest_comp = 0;
+        
+        for (auto& comp : fixedSubstructComps)
+            if (!largest_comp || comp.getNumBonds() > largest_comp->getNumBonds())
+                largest_comp = &comp;
+
+        if (!largest_comp)
+            return;
+
+        if (verbLevel >= DEBUG)
+            logRecordStream << "Aligning conformers on " << std::to_string(largest_comp->getNumAtoms()) << " fixed substructure atom(s)" << std::endl;
+        
+        if (parent->haveFixedSubstruct3DCoords)
+            alignConformations(molecule, *largest_comp, fixedSubstructCoords);
+        else
+            alignConformations(molecule, *largest_comp);
+    }
+    
     void appendToLogRecord(const std::string& msg) {
         logRecordStream << msg;
     }
@@ -372,7 +446,7 @@ private:
     MCSubstructureSearchPtr           maxCommonSubSearch;
     CDPL::Chem::Fragment              fixedSubstruct;
     CDPL::Math::Vector3DArray         fixedSubstructCoords;
-    CDPL::Util::BitSet                fixedSubstructAlignAtoms;
+    CDPL::Chem::ComponentSet          fixedSubstructComps;
     std::stringstream                 logRecordStream;
     VerbosityLevel                    verbLevel;
     CDPL::Internal::Timer             timer;
@@ -518,17 +592,15 @@ ConfGenImpl::ConfGenImpl():
               value<std::string>(&fixedSubstructFile));
     addOption("fixed-substr-ptn,J", "Fixed substructure SMARTS pattern.",
               value<std::string>(&fixedSubstructPtn));
-    addOption("fixed-substr-mcss,U", "Use maximum common substructure search (MCSS) to find matches of the specified fixed substructure in "
-              "the input molecule (default: false, using reqular substructure searching).", 
+    addOption("fixed-substr-mcss,U", "Use maximum common substructure search (MCSS) to find fixed substructure matches in "
+              "the input molecules (default: false, using reqular substructure searching).", 
               value<bool>(&fixedSubstructUseMCSS)->implicit_value(true));
-    addOption("fixed-substr-align,a", "Align conformers on the specified fixed substructure in "
-              "the input molecule (default: false).", 
+    addOption("fixed-substr-align,a", "Align conformers on fixed substructure atoms (default: false).", 
               value<bool>(&fixedSubstructAlign)->implicit_value(true));
-    addOption("fixed-substr-mcss-min-atoms,p", "The minimum number of atoms that have to be matched when using maximum common substructure search (MCSS) "
-              "to find matches of the specified fixed substructure in the input molecule (default: 2).", 
+    addOption("fixed-substr-min-atoms,p", "The minimum number of atoms that have to be matched when using maximum common substructure search (MCSS) "
+              "to find fixed substructure matches (default: 2).", 
               value<std::size_t>(&fixedSubstructMCSSMinNumAtoms));
-    addOption("fixed-substr-max-matches,Q", "The maximum number of considered matches of the specified fixed substructure in the "
-              "input molecule (default: 1, 0 disables limit).", 
+    addOption("fixed-substr-max-matches,Q", "The maximum number of considered fixed substructure matches (default: 1, 0 disables limit).", 
               value<std::size_t>(&fixedSubstructMaxNumMatches));
 
     addOptionLongDescriptions();
@@ -1264,12 +1336,17 @@ void ConfGenImpl::procFixedSubstructData()
             return;
         }
         
+        if (mol_ptr->getNumAtoms() == 0) {
+            setErrorMessage("empty fixed substructure molecule");
+            return;
+        }
+        
         haveFixedSubstruct3DCoords = hasCoordinates(*mol_ptr, 3);
             
-        printMessage(INFO, " - Found " + std::to_string(mol_ptr->getNumAtoms()) + " atoms and " +
-                     std::to_string(mol_ptr->getNumBonds()) + " bonds");
+        printMessage(INFO, " - Found " + std::to_string(mol_ptr->getNumAtoms()) + " atom(s) and " +
+                     std::to_string(mol_ptr->getNumBonds()) + " bond(s)");
         printMessage(INFO, " - Atom 3D coordinates available: " +
-                      std::string(haveFixedSubstruct3DCoords ? "Yes" : "No (-> using coordinates provided by input molecule(s))"));
+                      std::string(haveFixedSubstruct3DCoords ? "Yes" : "No (-> using 3D coordinates provided by input molecule(s))"));
         printMessage(INFO, "");
 
         calcBasicProperties(*mol_ptr, false);
@@ -1277,8 +1354,8 @@ void ConfGenImpl::procFixedSubstructData()
         calcBondStereoDescriptors(*mol_ptr, true, 1, false);
 
         if (fixedSubstructPtn.empty()) {
-            static const DefaultAtomMatchExpression::SharedPointer DEF_ATOM_MATCH_EXPR(new DefaultAtomMatchExpression());
-            static const DefaultBondMatchExpression::SharedPointer DEF_BOND_MATCH_EXPR(new DefaultBondMatchExpression());
+            static const DefAtomMatchExpression::SharedPointer DEF_ATOM_MATCH_EXPR(new DefAtomMatchExpression());
+            static const DefBondMatchExpression::SharedPointer DEF_BOND_MATCH_EXPR(new DefBondMatchExpression());
 
             for (auto& atom : mol_ptr->getAtoms())
                 if (!hasMatchExpression(atom))
@@ -1304,8 +1381,13 @@ void ConfGenImpl::procFixedSubstructData()
             return;
         }
 
+        if (ptn_ptr->getNumAtoms() == 0) {
+            setErrorMessage("empty fixed substructure SMARTS pattern");
+            return;
+        }
+        
         printMessage(INFO, " - Found " + std::to_string(ptn_ptr->getNumAtoms()) + " atom and " +
-                     std::to_string(ptn_ptr->getNumBonds()) + " bond expressions");
+                     std::to_string(ptn_ptr->getNumBonds()) + " bond expression(s)");
 
         initSubstructureSearchQuery(*ptn_ptr, false);
       
