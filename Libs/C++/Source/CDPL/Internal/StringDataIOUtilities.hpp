@@ -52,7 +52,7 @@ namespace CDPL
         void skipChars(std::istream& is, std::size_t count, const char* err_msg = "Error", char eol_char = '\n');
 
         inline 
-        void skipLines(std::istream& is, std::size_t count = 1, const char* err_msg = "Error", char eol_char = '\n');
+        void skipLines(std::istream& is, std::size_t count = 1, const char* err_msg = "Error", char eol_char = '\n', bool allow_eof = false);
 
         inline 
         std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false,

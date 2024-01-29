@@ -115,11 +115,14 @@ bool CDPL::Internal::readToString(std::istream& is, const std::string& str, std:
     return false;
 } 
 
-void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
+void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char, bool allow_eof)
 {
     for (std::size_t i = 0; i < count && is.good(); i++)
         is.ignore(std::numeric_limits<std::streamsize>::max(), std::istream::traits_type::to_int_type(eol_char));
 
+    if (allow_eof && is.rdstate() == std::istream::eofbit)
+        return;
+    
     checkStreamState(is, err_msg);
 }
         
