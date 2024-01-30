@@ -431,12 +431,12 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
     return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool modify) 
+void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool strip_aro_subst) 
 {
     if (canonFrag.getNumAtoms() != 0)
         return;
         
-    canonFrag.create(frag, *fragTree.getMolecularGraph(), modify);
+    canonFrag.create(frag, *fragTree.getMolecularGraph(), true, strip_aro_subst);
 
     buildCanonicalFragmentAtomIndexMap(frag, frag_node);
 }

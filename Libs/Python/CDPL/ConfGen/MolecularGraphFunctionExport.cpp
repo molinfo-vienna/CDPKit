@@ -63,4 +63,8 @@ void CDPLPythonConfGen::exportMolecularGraphFunctions()
                                                                           Math::Vector3DArray*)>(&ConfGen::setupFixedSubstructureData),
                 (python::arg("sub_search"), python::arg("max_num_matches"), python::arg("molgraph"), python::arg("fixed_substr"),
                  python::arg("fixed_substr_coords") = 0));
+    python::def("initFixedSubstructureTemplate", &ConfGen::initFixedSubstructureTemplate,
+                (python::arg("molgraph"), python::arg("init_match_expr")));
+    python::def("initFixedSubstructurePattern", &ConfGen::initFixedSubstructurePattern,
+                (python::arg("molgraph"), python::arg("tmplt")));
 }

@@ -29,6 +29,7 @@
 #include <vector>
 
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -203,7 +204,7 @@ bool Chem::alignConformations(AtomContainer& cntnr, const Util::BitSet& ref_atom
 {
     Math::Vector3DArray coords;
 
-    get3DCoordinates(cntnr, coords, static_cast<const Math::Vector3D&(*)(const Entity3D&)>(&get3DCoordinates));
+    get3DCoordinates(cntnr, coords);
 
     return alignConformations(cntnr, ref_atoms, coords);
 }
@@ -212,7 +213,7 @@ bool Chem::alignConformations(AtomContainer& cntnr, const AtomContainer& ref_ato
 {
     Math::Vector3DArray coords;
 
-    get3DCoordinates(cntnr, coords, static_cast<const Math::Vector3D&(*)(const Entity3D&)>(&get3DCoordinates));
+    get3DCoordinates(cntnr, coords);
 
     return alignConformations(cntnr, ref_atoms, coords);
 }

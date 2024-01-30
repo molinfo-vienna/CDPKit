@@ -32,6 +32,7 @@
 
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Chem/MolecularGraphWriter.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
@@ -106,6 +107,7 @@ namespace StructGen
         void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols);
 
         void checkInputFiles() const;
+        void procFixedSubstructData();
         void printOptionSummary();
         void loadTorsionLibrary();
         void loadFragmentLibrary();
@@ -125,6 +127,7 @@ namespace StructGen
         typedef std::vector<std::string>                             StringList;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
+        typedef CDPL::Chem::Molecule::SharedPointer                  MoleculePtr;
         typedef CDPL::Internal::Timer                                Timer;
         typedef CDPL::ConfGen::StructureGeneratorSettings            StructureGeneratorSettings;
         typedef CDPL::ConfGen::FragmentConformerGeneratorSettings    FragmentConformerGeneratorSettings;
@@ -146,6 +149,14 @@ namespace StructGen
         std::string                fragmentLibName;
         FragmentLibraryPtr         fragmentLib;
         bool                       replaceBuiltinFragLib;
+        std::string                fixedSubstructFile;
+        std::string                fixedSubstructPtn;
+        bool                       fixedSubstructUseMCSS;
+        bool                       fixedSubstructAlign;
+        bool                       fixedSubstructDelH;
+        std::size_t                fixedSubstructMCSSMinNumAtoms;
+        std::size_t                fixedSubstructMaxNumMatches;
+        MoleculePtr                fixedSubstruct;
         std::string                inputFormat;
         CompMoleculeReader         inputReader;
         std::string                outputFormat;

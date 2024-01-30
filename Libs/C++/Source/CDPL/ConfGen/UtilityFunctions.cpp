@@ -31,6 +31,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 
 #include "UtilityFunctions.hpp"
@@ -138,27 +139,36 @@ std::string ConfGen::getSMILES(const Chem::MolecularGraph& molgraph)
     return "";
 }
 
-std::size_t ConfGen::getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr)
+bool ConfGen::isFixed(const Chem::Bond& bond, const Chem::MolecularGraph* fixed_substr)
+{
+    return (fixed_substr && fixed_substr->containsBond(bond) &&
+            fixed_substr->containsAtom(bond.getBegin()) &&
+            fixed_substr->containsAtom(bond.getEnd()) && 
+            MolProp::getExplicitBondCount(bond.getBegin(), *fixed_substr) > 1 &&
+            MolProp::getExplicitBondCount(bond.getEnd(), *fixed_substr) > 1);
+}
+
+std::size_t ConfGen::getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr, const Chem::MolecularGraph* fixed_substr)
 {
     using namespace Chem;
 
     std::size_t count = 0;
 
-    for (BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-        if (getOrder(*it) == 1 && !getAromaticityFlag(*it))
+    for (auto& bond : cntnr.getBonds())
+        if (!isFixed(bond, fixed_substr) && getOrder(bond) == 1 && !getAromaticityFlag(bond))
             count++;
 
     return count;
 }
 
-std::size_t ConfGen::getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags)
+std::size_t ConfGen::getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags, const Chem::MolecularGraph* fixed_substr)
 {
     using namespace Chem;
 
     std::size_t max_count = 0;
 
-    for (FragmentList::ConstElementIterator it =  frags.getElementsBegin(), end = frags.getElementsEnd(); it != end; ++it)
-        max_count = std::max(max_count, getNonAromaticSingleBondCount(*it));
+    for (auto& ring : frags)
+        max_count = std::max(max_count, getNonAromaticSingleBondCount(ring, fixed_substr));
 
     return max_count;
 }

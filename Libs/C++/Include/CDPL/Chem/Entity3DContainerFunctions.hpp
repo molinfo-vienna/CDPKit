@@ -52,7 +52,12 @@ namespace CDPL
 
         CDPL_CHEM_API void transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx);
 
+        /*
+         * \since 1.1
+         */
+        CDPL_CHEM_API bool align3DCoordinates(Entity3DContainer& cntnr, const Entity3DContainer& ref_entities, const Math::Vector3DArray& ref_coords);
 
+        
         CDPL_CHEM_API bool calcCentroid(const Entity3DContainer& cntnr, Math::Vector3D& ctr);
 
         CDPL_CHEM_API void calcBoundingBox(const Entity3DContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, bool reset = true);

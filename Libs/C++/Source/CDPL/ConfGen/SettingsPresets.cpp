@@ -68,7 +68,7 @@ namespace
             FragmentConformerGeneratorSettings::FragmentSettings* chain_settings = &FRAG_CONF_GEN_FAST.getChainSettings();
 
             chain_settings->setMaxNumSampledConformers(50);
-            chain_settings->setMinNumSampledConformers(10);
+            chain_settings->setMinNumSampledConformers(5);
             chain_settings->setMaxNumOutputConformers(1);
             chain_settings->setTimeout(400 * 1000);
             chain_settings->setEnergyWindow(8.0);

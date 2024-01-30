@@ -91,12 +91,15 @@ void CDPLPythonConfGen::exportCanonicalFragment()
 
     cl
         .def(python::init<>(python::arg("self")))
-        .def(python::init<const Chem::MolecularGraph&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"), python::arg("parent"))))
+        .def(python::init<const Chem::MolecularGraph&, const Chem::MolecularGraph&>(
+            (python::arg("self"), python::arg("molgraph"), python::arg("parent"))))
         .def(python::init<const ConfGen::CanonicalFragment&>((python::arg("self"), python::arg("frag"))))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::CanonicalFragment>())    
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::CanonicalFragment>())
         .def("assign", &ConfGen::CanonicalFragment::operator=, (python::arg("self"), python::arg("frag")),
              python::return_self<>())
-        .def("create", &ConfGen::CanonicalFragment::create, (python::arg("self"), python::arg("molgraph"), python::arg("parent"), python::arg("modify") = true))
+        .def("create", &ConfGen::CanonicalFragment::create,
+             (python::arg("self"), python::arg("molgraph"), python::arg("parent"),
+              python::arg("modify") = true, python::arg("strip_aro_subst") = true))
         .def("getHashCode", &ConfGen::CanonicalFragment::getHashCode, python::arg("self"))
         .def("clear", &ConfGen::CanonicalFragment::clear, python::arg("self"))
         .def("getAtomMapping", &getAtomMapping, python::arg("self"), python::with_custodian_and_ward_postcall<0, 1>())

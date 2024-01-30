@@ -719,7 +719,7 @@ bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
             break;
     }
 
-    return (inStochasticMode = (getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph)) >
+    return (inStochasticMode = (getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph), fixedSubstruct) >
                                 settings.getMacrocycleRotorBondCountThreshold()));
 }
 
@@ -755,14 +755,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::perceiveRotBonds()
     for (std::size_t i = 0; i < num_bonds; i++) {
         auto& bond = molGraph->getBond(i);
 
-        if (fixedSubstruct && fixedSubstruct->containsBond(bond) &&
-            fixedSubstruct->containsAtom(bond.getBegin()) &&
-            fixedSubstruct->containsAtom(bond.getEnd()) && 
-            MolProp::getExplicitBondCount(bond.getBegin(), *fixedSubstruct) > 1 &&
-            MolProp::getExplicitBondCount(bond.getEnd(), *fixedSubstruct) > 1)
-            continue;
-        
-        if (!isRotatableBond(bond, *molGraph, sample_het_hs))
+        if (isFixed(bond, fixedSubstruct) || !isRotatableBond(bond, *molGraph, sample_het_hs))
             continue;
 
         rotBondMask.set(i);

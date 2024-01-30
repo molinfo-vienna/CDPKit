@@ -105,7 +105,7 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
     maxNumRefIters(0), refStopGrad(0.1), mcRotorBondCountThresh(10), srSamplingFactor(6) 
 {
     chainSettings.setMaxNumSampledConformers(100);
-    chainSettings.setMinNumSampledConformers(20);
+    chainSettings.setMinNumSampledConformers(5);
     chainSettings.setTimeout(400 * 1000);
     chainSettings.setEnergyWindow(2.0);
     chainSettings.setMaxNumOutputConformers(1);

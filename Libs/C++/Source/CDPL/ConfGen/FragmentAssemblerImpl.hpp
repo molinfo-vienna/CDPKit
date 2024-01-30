@@ -136,7 +136,7 @@ namespace CDPL
             bool setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag,
                                    FragmentTreeNode* node, const ConformerDataArray& confs);
 
-            void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool modify);
+            void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node, bool strip_aro_subst);
 
             void buildCanonicalFragmentAtomIndexMap(const Chem::Fragment&   frag,
                                                     const FragmentTreeNode* frag_node);

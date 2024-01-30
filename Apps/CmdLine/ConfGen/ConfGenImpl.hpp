@@ -175,6 +175,7 @@ namespace ConfGen
         std::string                fixedSubstructPtn;
         bool                       fixedSubstructUseMCSS;
         bool                       fixedSubstructAlign;
+        bool                       fixedSubstructDelH;
         std::size_t                fixedSubstructMCSSMinNumAtoms;
         std::size_t                fixedSubstructMaxNumMatches;
         MoleculePtr                fixedSubstruct;

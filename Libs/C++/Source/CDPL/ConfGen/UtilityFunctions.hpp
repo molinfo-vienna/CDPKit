@@ -58,9 +58,11 @@ namespace CDPL
 
         std::string getSMILES(const Chem::MolecularGraph& molgraph);
 
-        std::size_t getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr);
+        bool isFixed(const Chem::Bond& bond, const Chem::MolecularGraph* fixed_substr);
+        
+        std::size_t getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr, const Chem::MolecularGraph* fixed_substr);
 
-        std::size_t getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags);
+        std::size_t getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags, const Chem::MolecularGraph* fixed_substr);
 
         double normalizeAngle(double angle);
 

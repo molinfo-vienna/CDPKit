@@ -550,11 +550,21 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
             logCallback("Used settings: macrocycle\n");
 
     } else {
-        rsys_settings = &settings.getSmallRingSystemSettings();
         num_conf_samples = calcNumSmallRingSystemConfSamples();
 
-        if (logCallback)
-            logCallback("Used settings: small ring system\n");
+        if (num_conf_samples == 0) {
+            num_conf_samples = calcNumChainConfSamples();
+            rsys_settings = &settings.getChainSettings();
+
+            if (logCallback)
+                logCallback("Used settings: chain\n");
+              
+        } else {
+            rsys_settings = &settings.getSmallRingSystemSettings();
+            
+            if (logCallback)
+                logCallback("Used settings: small ring system\n");
+        }
     }
 
     num_conf_samples = std::max(rsys_settings->getMinNumSampledConformers(), 
@@ -961,8 +971,8 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumChainConfSamples() c
 
     std::size_t count = 0;
 
-    for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) 
-        if (isRotatableBond(*it, *molGraph, false))
+    for (auto& bond : molGraph->getBonds()) 
+        if (!isFixed(bond, fixedSubstruct) && isRotatableBond(bond, *molGraph, false))
             count++;
 
     return std::pow(3, count);
@@ -973,17 +983,16 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfS
     using namespace Chem;
 
     std::size_t rot_bond_sum = 0;
-    const FragmentList& sssr = *getSSSR(*molGraph);
 
-    for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) 
-        rot_bond_sum += getNonAromaticSingleBondCount(*it);
+    for (auto& ring : *getSSSR(*molGraph)) 
+        rot_bond_sum += getNonAromaticSingleBondCount(ring, fixedSubstruct);
 
     return (rot_bond_sum * settings.getSmallRingSystemSamplingFactor());
 }
 
 std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumMacrocyclicRingSystemConfSamples() const
 {
-    std::size_t max_rot_bnd_cnt = getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph));
+    std::size_t max_rot_bnd_cnt = getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph), fixedSubstruct);
 
     if (max_rot_bnd_cnt <= settings.getMacrocycleRotorBondCountThreshold())
         return 0;

@@ -24,11 +24,15 @@
 
 #include "StaticInit.hpp"
 
+#include <cstddef>
+#include <unordered_map>
+
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
+#include "CDPL/Math/KabschAlgorithm.hpp"
 
 
 using namespace CDPL; 
@@ -73,4 +77,40 @@ void Chem::transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D
 
         set3DCoordinates(ent, tmp3);
     }
+}
+
+bool Chem::align3DCoordinates(Entity3DContainer& cntnr, const Entity3DContainer& ref_entities, const Math::Vector3DArray& ref_coords)
+{
+    std::size_t num_ref_entities = ref_entities.getNumEntities();
+    
+    if (num_ref_entities == 0)
+        return false;
+
+    std::unordered_map<const Entity3D*, std::size_t> entity_to_idx;
+
+    for (std::size_t i = 0, num_entities = cntnr.getNumEntities(); i < num_entities; i++)
+        entity_to_idx.emplace(&cntnr.getEntity(i), i);
+    
+    Math::DMatrix ref_coords_mtx(3, num_ref_entities);
+    Math::DMatrix algnd_coords_mtx(3, num_ref_entities);
+    
+    for (std::size_t i = 0; i < num_ref_entities; i++) {
+        auto& ref_entity = ref_entities.getEntity(i);
+        auto it = entity_to_idx.find(&ref_entity);
+
+        if (it == entity_to_idx.end())
+            return false;
+        
+        column(ref_coords_mtx, i) = ref_coords[it->second];
+        column(algnd_coords_mtx, i) = get3DCoordinates(ref_entity);
+    }
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+     
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    transform3DCoordinates(cntnr, kabsch_algo.getTransform());
+
+    return true;
 }

@@ -261,10 +261,10 @@ ConfGen::CanonicalFragment& ConfGen::CanonicalFragment::operator=(const Canonica
     return *this;
 }
     
-void ConfGen::CanonicalFragment::create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify)
+void ConfGen::CanonicalFragment::create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify, bool strip_aro_subst)
 {
     clear();
-    copyAtoms(molgraph, parent, modify);
+    copyAtoms(molgraph, parent, modify, strip_aro_subst);
 
     bool flex_ring_sys = copyBonds(molgraph);
 
@@ -294,7 +294,7 @@ void ConfGen::CanonicalFragment::perceiveSSSR()
     setSSSR(*this, sssr);
 }
 
-void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify)
+void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify, bool strip_aro_subst)
 {
     using namespace Chem;
     using namespace MolProp;
@@ -329,7 +329,7 @@ void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph,
 
         atomMapping.push_back(&new_atom);
 
-        if (modify && exp_atom_count == 1 && have_arom_ring_nbr) {
+        if (modify && strip_aro_subst && exp_atom_count == 1 && have_arom_ring_nbr) {
             setType(new_atom, AtomType::H);
             setAromaticityFlag(new_atom, false);
             setRingFlag(new_atom, false);

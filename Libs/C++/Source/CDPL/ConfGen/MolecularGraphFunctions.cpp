@@ -39,6 +39,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -100,40 +101,49 @@ namespace
         return 0;
     }
     
-    std::size_t calcFixedSubstructMatchScore(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mpg,
-                                             bool regard_config)
+    double calcFixedSubstructMatchScore(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mpg,
+                                        bool regard_config)
     {
         using namespace Chem;
 
         auto& bond_mpg = mpg.getBondMapping();
         
         if (bond_mpg.getSize() == 0)
-            return 0;
+            return 0.0;
        
-        std::size_t score = bond_mpg.getSize() * (molgraph.getNumAtoms() + molgraph.getNumBonds());
-
-        if (!regard_config)
-            return score;
+        double score = bond_mpg.getSize() * (molgraph.getNumAtoms() + molgraph.getNumBonds()) * 2.0;
         
         auto& atom_mpg = mpg.getAtomMapping();
 
         for (auto& ap : atom_mpg) {
+            if (getHybridizationState(*ap.first) == getHybridizationState(*ap.second))
+                score += 0.3;
+
+            if (getRingFlag(*ap.first) == getRingFlag(*ap.second))
+                score += 0.3;
+
+            if (getAromaticityFlag(*ap.first) == getAromaticityFlag(*ap.second))
+                score += 0.3;
+            
+            if (!regard_config)
+                continue;
+              
             auto& atom2_sto_descr = getStereoDescriptor(*ap.second);
             
             if (atom2_sto_descr.getNumReferenceAtoms() < 3) {
-                score++;
+                score += 1.0;
                 continue;
             }
             
             auto atom2_config = atom2_sto_descr.getConfiguration();
 
             if (atom2_config != AtomConfiguration::R && atom2_config != AtomConfiguration::S) {
-                score++;
+                score += 1.0;
                 continue;
             }
 
             if (getNumMappedBonds(*ap.first, bond_mpg) <= 2) {
-                score++;
+                score += 1.0;
                 continue;
             }
             
@@ -180,26 +190,35 @@ namespace
                 continue;
 
             if (atom1_config == atom2_config)
-                score++;
+                score += 1.0;
         }
 
         for (auto& bp : bond_mpg) {
+            if (getRingFlag(*bp.first) == getRingFlag(*bp.second))
+                score += 0.5;
+
+            if (getAromaticityFlag(*bp.first) == getAromaticityFlag(*bp.second))
+                score += 0.5;
+            
+            if (!regard_config)
+                continue;
+            
             auto& bond2_sto_descr = getStereoDescriptor(*bp.second);
             
             if (bond2_sto_descr.getNumReferenceAtoms() != 4) {
-                score++;
+                score += 1.0;
                 continue;
             }
             
             auto bond2_config = bond2_sto_descr.getConfiguration();
 
             if (bond2_config != BondConfiguration::CIS && bond2_config != BondConfiguration::TRANS) {
-                score++;
+                score += 1.0;
                 continue;
             }
 
             if (getNumMappedBonds(bp.first->getBegin(), bond_mpg) < 2 || getNumMappedBonds(bp.first->getEnd(), bond_mpg) < 2) {
-                score++;
+                score += 1.0;
                 continue;
             }
             
@@ -236,7 +255,7 @@ namespace
                 bond2_config = (bond2_config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
 
             if (bond1_config == bond2_config)
-                score++;
+                score += 1.0;
         }
         
         return score;
@@ -369,7 +388,7 @@ namespace
         if (fixed_substr_coords)
             fixed_substr_coords->resize(molgraph.getNumAtoms());
 
-        typedef std::pair<std::size_t, std::size_t> ScoreIndexPair;
+        typedef std::pair<double, std::size_t> ScoreIndexPair;
 
         std::vector<ScoreIndexPair> ranked_matches;
          
@@ -393,6 +412,34 @@ namespace
 
         return num_matches;
     }
+
+    
+    class DefAtomMatchExpression :
+        public Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const Chem::Atom& query_atom, const Chem::MolecularGraph&,
+                        const Chem::Atom& target_atom, const Chem::MolecularGraph&,
+                        const Base::Any&) const
+        {
+            return Chem::atomTypesMatch(getType(query_atom), getType(target_atom));
+        }
+    };
+
+    class DefBondMatchExpression :
+        public Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const Chem::Bond& query_bond, const Chem::MolecularGraph&,
+                        const Chem::Bond& target_bond, const Chem::MolecularGraph&,
+                        const Base::Any&) const
+        {
+            return (getOrder(query_bond) == getOrder(target_bond) ||
+                    getAromaticityFlag(query_bond) || getAromaticityFlag(target_bond));
+        }
+    };
 }
 
 
@@ -624,4 +671,65 @@ std::size_t ConfGen::setupFixedSubstructureData(const Chem::CommonConnectedSubst
                                                 Chem::Fragment& fixed_substr, Math::Vector3DArray* fixed_substr_coords)
 {
     return setupFixedSubstructData(sub_search, max_num_matches, molgraph, fixed_substr, fixed_substr_coords);
+}
+
+void ConfGen::initFixedSubstructureTemplate(Chem::MolecularGraph& molgraph, bool init_match_expr)
+{
+    using namespace Chem;
+    
+    calcBasicProperties(molgraph, false);
+    calcAtomStereoDescriptors(molgraph, true, 1, false);
+    calcBondStereoDescriptors(molgraph, true, 1, false);
+
+    if (init_match_expr) {
+        typedef MatchExpression<MolecularGraph> MolGraphMatchExpression;
+
+        static const DefAtomMatchExpression::SharedPointer  DEF_ATOM_MATCH_EXPR(new DefAtomMatchExpression());
+        static const DefBondMatchExpression::SharedPointer  DEF_BOND_MATCH_EXPR(new DefBondMatchExpression());
+        static const MolGraphMatchExpression::SharedPointer DEF_MOLGRAPH_MATCH_EXPR(new MolGraphMatchExpression());
+
+        for (auto& atom : molgraph.getAtoms())
+            if (!hasMatchExpression(atom))
+                setMatchExpression(atom, DEF_ATOM_MATCH_EXPR);
+
+        for (auto& bond : molgraph.getBonds())
+            if (!hasMatchExpression(bond))
+                setMatchExpression(bond, DEF_BOND_MATCH_EXPR);
+
+        setMatchExpression(molgraph, DEF_MOLGRAPH_MATCH_EXPR);
+    }
+}
+
+bool ConfGen::initFixedSubstructurePattern(Chem::MolecularGraph& molgraph, const Chem::MolecularGraph* tmplt)
+{
+    using namespace Chem;
+    
+    initSubstructureSearchQuery(molgraph, false);
+
+    if (!tmplt)
+        return true;
+
+    SubstructureSearch sub_srch(molgraph);
+
+    sub_srch.setMaxNumMappings(1);
+
+    if (!sub_srch.findMappings(*tmplt))
+        return false;
+
+    for (auto& mpg : sub_srch.getMapping(0).getAtomMapping()) {
+        set3DCoordinates(const_cast<Atom&>(*mpg.first), get3DCoordinates(*mpg.second));
+        setType(const_cast<Atom&>(*mpg.first), getType(*mpg.second));
+        setFormalCharge(const_cast<Atom&>(*mpg.first), getType(*mpg.second));
+    }
+
+    for (auto& mpg : sub_srch.getMapping(0).getBondMapping())
+        setOrder(const_cast<Bond&>(*mpg.first), getOrder(*mpg.second));
+
+    calcImplicitHydrogenCounts(molgraph, true);
+    perceiveHybridizationStates(molgraph, true);
+    setAromaticityFlags(molgraph, true);
+    calcAtomStereoDescriptors(molgraph, true, 3, false);
+    calcBondStereoDescriptors(molgraph, true, 3, false);
+
+    return true;
 }

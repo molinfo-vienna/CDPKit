@@ -134,14 +134,16 @@ namespace CDPL
 
             CanonicalFragment& operator=(const CanonicalFragment& frag);
 
-            void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify = true);
+            void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent,
+                        bool modify = true, bool strip_aro_subst = true);
 
             const AtomMapping& getAtomMapping() const;
 
             void perceiveSSSR();
 
           private:
-            void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify);
+            void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent,
+                           bool modify, bool strip_aro_subst);
             bool copyBonds(const Chem::MolecularGraph& molgraph);
 
             void fixStereoDescriptors(const Chem::MolecularGraph& molgraph, bool clear_stereo);

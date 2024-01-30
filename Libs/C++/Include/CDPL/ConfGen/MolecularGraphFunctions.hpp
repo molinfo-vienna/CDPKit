@@ -89,6 +89,15 @@ namespace CDPL
         CDPL_CONFGEN_API std::size_t setupFixedSubstructureData(const Chem::CommonConnectedSubstructureSearch& sub_search,
                                                                 std::size_t max_num_matches, Chem::MolecularGraph& molgraph,
                                                                 Chem::Fragment& fixed_substr, Math::Vector3DArray* fixed_substr_coords);
+        /**
+         * \since 1.1
+         */
+        CDPL_CONFGEN_API void initFixedSubstructureTemplate(Chem::MolecularGraph& molgraph, bool init_match_expr);
+
+        /**
+         * \since 1.1
+         */
+        CDPL_CONFGEN_API bool initFixedSubstructurePattern(Chem::MolecularGraph& molgraph, const Chem::MolecularGraph* tmplt);
 
     } // namespace ConfGen
 } // namespace CDPL
