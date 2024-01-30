@@ -85,8 +85,9 @@ class CanonicalFragment(Chem.MolecularGraph):
     # \param molgraph 
     # \param parent 
     # \param modify 
+    # \param strip_aro_subst 
     #
-    def create(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph, modify: bool = True) -> None: pass
+    def create(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph, modify: bool = True, strip_aro_subst: bool = True) -> None: pass
 
     ##
     # \brief 

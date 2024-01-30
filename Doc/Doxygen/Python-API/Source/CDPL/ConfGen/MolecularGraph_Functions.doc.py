@@ -29,6 +29,13 @@ def perceiveFragmentType(molgraph: Chem.MolecularGraph) -> int: pass
 ##
 # \brief 
 # \param molgraph 
+# \param init_match_expr 
+#
+def initFixedSubstructureTemplate(molgraph: Chem.MolecularGraph, init_match_expr: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
 # \param bond_mask 
 # \param het_h_rotors 
 # \param reset 
@@ -55,6 +62,14 @@ def createRotatableBondMask(molgraph: Chem.MolecularGraph, excl_bond_mask: Util.
 # \return 
 #
 def createFragmentLinkBondMask(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSet, reset: bool = True) -> int: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param tmplt 
+# \return 
+#
+def initFixedSubstructurePattern(molgraph: Chem.MolecularGraph, tmplt: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 

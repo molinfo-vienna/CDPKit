@@ -37,6 +37,15 @@ def transform3DCoordinates(cntnr: Entity3DContainer, mtx: Math.Matrix4D) -> None
 ##
 # \brief 
 # \param cntnr 
+# \param ref_entities 
+# \param ref_coords 
+# \return 
+#
+def align3DCoordinates(cntnr: Entity3DContainer, ref_entities: Entity3DContainer, ref_coords: Math.Vector3DArray) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
 # \param coords 
 # \param append 
 #
