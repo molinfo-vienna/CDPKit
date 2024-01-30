@@ -470,6 +470,15 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
     while (true) {
         try {
+            std::string msg;
+
+            if (numThreads == 0)
+                msg = "Creating Database...            ";
+            else
+                msg = "Creating Temporary Databases... ";
+            
+            printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+
             if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
                 return 0;
 
@@ -489,15 +498,6 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                     sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().string());
                 }
             }
-
-            std::string msg;
-
-            if (numThreads == 0)
-                msg = "Creating Database...            ";
-            else
-                msg = "Creating Temporary Databases... ";
-
-            printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 

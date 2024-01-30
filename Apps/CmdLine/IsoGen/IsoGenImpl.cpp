@@ -414,6 +414,8 @@ std::size_t IsoGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 
     while (true) {
         try {
+            printProgress("Generating Steroisomers... ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+
             if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
                 return 0;
 
@@ -423,8 +425,6 @@ std::size_t IsoGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
                 inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
                 continue;
             }
-
-            printProgress("Generating Steroisomers... ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
             
             return inputReader.getRecordIndex();
 

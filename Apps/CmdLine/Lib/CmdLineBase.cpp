@@ -306,9 +306,7 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
         return;
 
     progress = std::min(1.0, progress);
-
-    if (progress <= 0.0) 
-        return;
+    progress = std::max(0.0, progress);
     
     long curr_prog_value = progress * 10000;
 
@@ -326,11 +324,14 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
               << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
               << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
 
-    std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
+    if (progress > 0.0) {
+        std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
-    std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) 
-              << std::setw(10) << "\r";
+        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << std::setw(10) << "\r";
 
+    } else
+        std::cerr << " ETA: \u221E" << "\r";
+    
     inProgressLine = true;
     inNewLine = false;
 }

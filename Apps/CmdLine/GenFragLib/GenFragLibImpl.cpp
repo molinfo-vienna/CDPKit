@@ -773,6 +773,8 @@ std::size_t GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
     while (true) {
         try {
+            printProgress("Generating Fragments...   ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+
             if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
                 return 0;
 
@@ -782,8 +784,6 @@ std::size_t GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
                 continue;
             }
-
-            printProgress("Generating Fragments...   ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
             return inputReader.getRecordIndex();
 
