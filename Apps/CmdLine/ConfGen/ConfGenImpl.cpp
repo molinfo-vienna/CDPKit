@@ -361,7 +361,7 @@ private:
                 break;
 
             case ReturnCode::NO_FIXED_SUBSTRUCT_COORDS:
-                err_msg = "missing input atom 3D coordinates for fixed substructure";
+                err_msg = "missing atom 3D coordinates for fixed substructure";
                 break;
 
             default:
@@ -1324,7 +1324,7 @@ void ConfGenImpl::procFixedSubstructData()
         printMessage(INFO, " - Found " + std::to_string(mol_ptr->getNumAtoms()) + " atom(s) and " +
                      std::to_string(mol_ptr->getNumBonds()) + " bond(s)");
         printMessage(INFO, " - Atom 3D coordinates available: " +
-                     std::string(haveFixedSubstruct3DCoords ? "Yes" : "No (-> using 3D coordinates provided by input molecule(s))"));
+                     std::string(haveFixedSubstruct3DCoords ? "Yes" : "No (using 3D coordinates provided by input molecule(s))"));
         printMessage(INFO, "");
                                                
         fixedSubstruct = mol_ptr;

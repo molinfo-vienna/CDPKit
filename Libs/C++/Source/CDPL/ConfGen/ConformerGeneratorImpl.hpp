@@ -146,7 +146,7 @@ namespace CDPL
             double calcGradient(const Math::Vector3DArray::StorageType& coords,
                                 Math::Vector3DArray::StorageType& grad);
             
-            ConformerData::SharedPointer getInputCoordinatesForFixedSubstruct();
+            ConformerData::SharedPointer getInputCoordinatesForFixedSubstruct(const Chem::MolecularGraph& molgraph);
             ConformerData::SharedPointer getInputCoordinates();
 
             void splitIntoTorsionFragments();
@@ -217,7 +217,6 @@ namespace CDPL
             FragmentConfDataCache                 fragConfDataCache;
             ConfCombinationDataCache              confCombDataCache;
             ConformerGeneratorSettings            settings;
-            const Chem::MolecularGraph*           parentMolGraph;
             const Chem::MolecularGraph*           molGraph;
             Chem::ComponentSet                    fixedSubstructFrags;
             const Chem::MolecularGraph*           fixedSubstruct;

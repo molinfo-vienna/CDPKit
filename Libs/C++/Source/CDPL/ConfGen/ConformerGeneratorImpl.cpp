@@ -215,7 +215,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
         
         fixedSubstruct = fixed_substr;
         fixedSubstructCoords = fixed_substr_coords;
-        parentMolGraph = &molgraph;
 
         ConformerData::SharedPointer input_coords;
         
@@ -224,7 +223,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
                 logCallback("Performing " + std::string(struct_gen_only ? "structure" : "conformer") + " generation with fixed substructure\n");
 
             if (!fixed_substr_coords) {
-                input_coords = getInputCoordinatesForFixedSubstruct();
+                input_coords = getInputCoordinatesForFixedSubstruct(molgraph);
 
                 if (!input_coords)
                     ret_code = ReturnCode::NO_FIXED_SUBSTRUCT_COORDS;
@@ -324,10 +323,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
             fixed_substr_coords->resize(comp->getNumAtoms());
 
             for (auto& atom : fixedSubstruct->getAtoms()) {
-                if (!comp->containsAtom(atom) || !parentMolGraph->containsAtom(atom))
+                if (!comp->containsAtom(atom) || !molgraph.containsAtom(atom))
                     continue;
 
-                (*fixed_substr_coords)[comp->getAtomIndex(atom)] = (*saved_fixed_substr_coords)[parentMolGraph->getAtomIndex(atom)];
+                (*fixed_substr_coords)[comp->getAtomIndex(atom)] = (*saved_fixed_substr_coords)[molgraph.getAtomIndex(atom)];
             }
         }
         
@@ -825,19 +824,19 @@ double ConfGen::ConformerGeneratorImpl::calcGradient(const Math::Vector3DArray::
                                                              elasticPotentials.getElementsEnd(), coords, grad));
 }
     
-ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputCoordinatesForFixedSubstruct()
+ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputCoordinatesForFixedSubstruct(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
 
     ConformerData::SharedPointer ipt_coords = confDataCache.get();
     Math::Vector3DArray::StorageType& ipt_coords_data = ipt_coords->getData();
 
-    ipt_coords->resize(parentMolGraph->getNumAtoms());
+    ipt_coords->resize(molgraph.getNumAtoms());
 
     for (auto& atom : fixedSubstruct->getAtoms()) {
         try {
-            if (molGraph->containsAtom(atom))
-                ipt_coords_data[parentMolGraph->getAtomIndex(atom)] = get3DCoordinates(atom);
+            if (molgraph.containsAtom(atom))
+                ipt_coords_data[molgraph.getAtomIndex(atom)] = get3DCoordinates(atom);
 
         } catch (const Base::ItemNotFound&) {
             return ConformerData::SharedPointer();
