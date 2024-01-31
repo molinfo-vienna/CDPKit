@@ -12,5 +12,6 @@ Welcome to the CDPKit Documentation Pages
    cdpl_python_cookbook/index
    cdpl_api_doc/index
    release_notes
+   acknowledgements
    bibliography
    genindex
