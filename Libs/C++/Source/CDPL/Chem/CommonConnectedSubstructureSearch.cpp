@@ -387,7 +387,7 @@ bool Chem::CommonConnectedSubstructureSearch::mapAtoms()
             return mappingFound();
 
         for (std::size_t num_free_atoms = numQueryAtoms, i = 0; i < numQueryAtoms; i++, num_free_atoms--) {
-            if (num_free_atoms < minSubstructureSize || num_free_atoms < currMaxSubstructureSize) 
+            if (num_free_atoms < minSubstructureSize || (maxMappingsOnly && num_free_atoms < currMaxSubstructureSize))
                 return true;
 
             hiddenQueryAtomMask.set(i);
