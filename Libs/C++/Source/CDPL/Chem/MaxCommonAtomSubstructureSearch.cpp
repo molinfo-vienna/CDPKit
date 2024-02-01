@@ -70,26 +70,25 @@ Chem::MaxCommonAtomSubstructureSearch::~MaxCommonAtomSubstructureSearch() {}
 
 bool Chem::MaxCommonAtomSubstructureSearch::mappingExists(const MolecularGraph& target)
 {
-    clearMappings();
-
     if (!init(target))
         return false;
 
     saveMappings = false;
+
+    clearMappings();
 
     return findAssocGraphCliques(0);
 }
 
 bool Chem::MaxCommonAtomSubstructureSearch::findAllMappings(const MolecularGraph& target)
 {
-    clearMappings();
-
     if (!init(target))
         return false;
 
     saveMappings = true;
     maxBondMappingsOnly = false;
 
+    clearMappings();
     findAssocGraphCliques(0);
 
     return !foundMappings.empty();
@@ -97,14 +96,13 @@ bool Chem::MaxCommonAtomSubstructureSearch::findAllMappings(const MolecularGraph
 
 bool Chem::MaxCommonAtomSubstructureSearch::findMaxBondMappings(const MolecularGraph& target)
 {
-    clearMappings();
-
     if (!init(target))
         return false;
 
     saveMappings = true;
     maxBondMappingsOnly = true;
 
+    clearMappings();
     findAssocGraphCliques(0);
 
     return !foundMappings.empty();
@@ -633,8 +631,10 @@ Chem::AtomBondMapping* Chem::MaxCommonAtomSubstructureSearch::createAtomBondMapp
 
     for (AGraphEdgeList::const_iterator it = cliqueEdges.begin(); it != clq_edges_end; ++it) {
         const AGEdge* edge = *it;
-
-        bond_mapping.insertEntry(edge->getQueryBond(), edge->getAssocBond());
+        const Bond* query_bond = edge->getQueryBond();
+        
+        if (bond_mapping.getEntry(query_bond) == bond_mapping.getEntriesEnd())
+            bond_mapping.insertEntry(query_bond, edge->getAssocBond());
     }
 
     return mapping;

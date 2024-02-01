@@ -71,25 +71,24 @@ Chem::MaxCommonBondSubstructureSearch::~MaxCommonBondSubstructureSearch() {}
 
 bool Chem::MaxCommonBondSubstructureSearch::mappingExists(const MolecularGraph& target)
 {
-    clearMappings();
-
     if (!init(target))
         return false;
 
     saveMappings = false;
 
+    clearMappings();
+    
     return findAssocGraphCliques(0);
 }
 
 bool Chem::MaxCommonBondSubstructureSearch::findMappings(const MolecularGraph& target)
 {
-    clearMappings();
-
     if (!init(target))
         return false;
-
+    
     saveMappings = true;
 
+    clearMappings();
     findAssocGraphCliques(0);
 
     return !foundMappings.empty();
@@ -714,7 +713,8 @@ Chem::AtomBondMapping* Chem::MaxCommonBondSubstructureSearch::createAtomBondMapp
         if (init_query_atom_mask)
             mappingMask.setQueryAtomBit(query->getAtomIndex(*query_atom));
 
-        atom_mapping.insertEntry(query_atom, edge->getAssocAtom());
+        if (atom_mapping.getEntry(query_atom) == atom_mapping.getEntriesEnd())
+            atom_mapping.insertEntry(query_atom, edge->getAssocAtom());
     }
 
     AGraphNodeList::const_iterator clq_nodes_end = cliqueNodes.end();
