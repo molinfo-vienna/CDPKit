@@ -43,7 +43,6 @@
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/CIPConfigurationLabeler.hpp"
 #include "CDPL/Chem/AromaticSubstructure.hpp"
-#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
 
@@ -108,6 +107,16 @@ namespace CDPL
 
             bool isotopesRegarded() const;
 
+            /**
+             * \since 1.1
+             */
+            void removeResonanceDuplicates(bool remove);
+
+            /**
+             * \since 1.1
+             */
+            bool resonanceDuplicatesRemoved() const;
+            
             void setCustomSetupFunction(const CustomSetupFunction& func);
 
             /**
@@ -129,11 +138,12 @@ namespace CDPL
             void extractAtomStereoCenters(const MolecularGraph& molgraph);
             void extractBondStereoCenters(const MolecularGraph& molgraph);
 
-            bool addNewTautomer(const MoleculePtr& mol);
+            bool addNewTautomer(const MoleculePtr& mol_ptr);
+            bool outputTautomer(const MoleculePtr& mol_ptr);
 
-            std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
+            std::uint64_t calcConTabHashCode(const MolecularGraph& molgraph, bool arom_bonds);
 
-            void perceiveSSSR(MolecularGraph& molgraph);
+            void generateSSSR(MolecularGraph& molgraph);
             void setAromaticityFlags(MolecularGraph& molgraph);
             void calcCIPConfigurations(MolecularGraph& molgraph);
             
@@ -151,19 +161,21 @@ namespace CDPL
             Mode                       mode;
             bool                       regStereo;
             bool                       regIsotopes;
+            bool                       remResDuplicates;
             CustomSetupFunction        customSetupFunc;
             TautRuleList               tautRules;
             MoleculeList               currGeneration;
             MoleculeList               nextGeneration;
             StereoCenterList           atomStereoCenters;
             StereoCenterList           bondStereoCenters;
-            HashCodeSet                tautHashCodes;
+            HashCodeSet                intermTautHashCodes;
+            HashCodeSet                outputTautHashCodes;
             HashCodeCalculator         hashCalculator;
-            SmallestSetOfSmallestRings sssr;
             AromaticSubstructure       aromSubstruct;
             CIPConfigurationLabeler    cipLabeler;
             BondDescrArray             tautomerBonds;
             SizeTArray                 shaInput;
+            const MolecularGraph*      molGraph;
         };
     } // namespace Chem
 } // namespace CDPL

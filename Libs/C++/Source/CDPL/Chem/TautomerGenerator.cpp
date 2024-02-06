@@ -56,14 +56,15 @@ using namespace CDPL;
 
 Chem::TautomerGenerator::TautomerGenerator():
     molCache(MAX_MOLECULE_CACHE_SIZE),
-    mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true)
+    mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true), remResDuplicates(true)
 {
     molCache.setCleanupFunction(&BasicMolecule::clear);
 }
 
 Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):
     molCache(MAX_MOLECULE_CACHE_SIZE),
-    callbackFunc(gen.callbackFunc), mode(gen.mode), regStereo(gen.regStereo), regIsotopes(gen.regIsotopes)
+    callbackFunc(gen.callbackFunc), mode(gen.mode), regStereo(gen.regStereo),
+    regIsotopes(gen.regIsotopes), remResDuplicates(gen.remResDuplicates)
 {
     molCache.setCleanupFunction(&BasicMolecule::clear);
 
@@ -79,6 +80,7 @@ Chem::TautomerGenerator& Chem::TautomerGenerator::operator=(const TautomerGenera
     mode = gen.mode;
     regStereo = gen.regStereo;
     regIsotopes = gen.regIsotopes;
+    remResDuplicates = gen.remResDuplicates;
 
     tautRules.clear();
 
@@ -154,6 +156,16 @@ bool Chem::TautomerGenerator::isotopesRegarded() const
     return regIsotopes;
 }
 
+void Chem::TautomerGenerator::removeResonanceDuplicates(bool remove)
+{
+    remResDuplicates = remove;
+}
+
+bool Chem::TautomerGenerator::resonanceDuplicatesRemoved() const
+{
+    return remResDuplicates;
+}
+
 void Chem::TautomerGenerator::setCustomSetupFunction(const CustomSetupFunction& func)
 {
     customSetupFunc = func;
@@ -190,9 +202,9 @@ void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
                         if (!addNewTautomer(tautomer)) 
                             continue;
 
-                        if (!callbackFunc(*tautomer))
+                        if (!outputTautomer(tautomer))
                             return;
-
+                     
                     } else
                         break;
                 }
@@ -203,7 +215,10 @@ void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
 
 bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 {
-    tautHashCodes.clear();
+    molGraph = &molgraph;
+    
+    intermTautHashCodes.clear();
+    outputTautHashCodes.clear();
     currGeneration.clear();
     nextGeneration.clear();
 
@@ -214,7 +229,7 @@ bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 
     addNewTautomer(mol);
 
-    return callbackFunc(*mol);
+    return outputTautomer(mol);
 }
 
 void Chem::TautomerGenerator::initHashCalculator()
@@ -225,6 +240,9 @@ void Chem::TautomerGenerator::initHashCalculator()
     if (regIsotopes) 
         atom_flags |= AtomPropertyFlag::ISOTOPE;
 
+    if (remResDuplicates)
+        bond_flags |= BondPropertyFlag::AROMATICITY;
+    
     if (regStereo) {
         atom_flags |= AtomPropertyFlag::CIP_CONFIGURATION;
         bond_flags |= BondPropertyFlag::CIP_CONFIGURATION;
@@ -246,14 +264,11 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
         setFormalCharge(atom_copy, getFormalCharge(atom));
         setUnpairedElectronCount(atom_copy, getUnpairedElectronCount(atom));
 
+        if (hasRingFlag(atom))
+            setRingFlag(atom_copy, getRingFlag(atom));
+  
         if (regIsotopes)
             setIsotope(atom_copy, getIsotope(atom));
-
-        if (has3DCoordinates(atom))
-            set3DCoordinates(atom_copy, get3DCoordinates(atom));
-
-        if (has2DCoordinates(atom))
-            set2DCoordinates(atom_copy, get2DCoordinates(atom));
     }
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
@@ -261,7 +276,9 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
         Bond& bond_copy = mol_copy->addBond(molgraph.getAtomIndex(bond.getBegin()), molgraph.getAtomIndex(bond.getEnd()));
 
         setOrder(bond_copy, getOrder(bond));
-        set2DStereoFlag(bond_copy, get2DStereoFlag(bond));
+
+        if (hasRingFlag(bond))
+            setRingFlag(bond_copy, getRingFlag(bond));
     }
 
     calcImplicitHydrogenCounts(*mol_copy, true);
@@ -444,21 +461,21 @@ void Chem::TautomerGenerator::extractBondStereoCenters(const MolecularGraph& mol
     }
 }
 
-bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
+bool Chem::TautomerGenerator::outputTautomer(const MoleculePtr& mol_ptr)
 {
     if (regStereo) {
-        perceiveHybridizationStates(*mol, true);
+        perceiveHybridizationStates(*mol_ptr, true);
 
         for (StereoCenterList::const_iterator it = atomStereoCenters.begin(), end = atomStereoCenters.end(); it != end; ++it) {
             const StereoCenter& sto_ctr = *it;
 
-            Atom& atom = mol->getAtom(sto_ctr[0]);
+            Atom& atom = mol_ptr->getAtom(sto_ctr[0]);
 
             if (getHybridizationState(atom) != HybridizationState::SP3)
                 continue;
 
-            StereoDescriptor descr = (sto_ctr[4] == sto_ctr[5] ? StereoDescriptor(sto_ctr[1], mol->getAtom(sto_ctr[2]), mol->getAtom(sto_ctr[3]), mol->getAtom(sto_ctr[4])) :
-                                      StereoDescriptor(sto_ctr[1], mol->getAtom(sto_ctr[2]), mol->getAtom(sto_ctr[3]), mol->getAtom(sto_ctr[4]), mol->getAtom(sto_ctr[5])));
+            StereoDescriptor descr = (sto_ctr[4] == sto_ctr[5] ? StereoDescriptor(sto_ctr[1], mol_ptr->getAtom(sto_ctr[2]), mol_ptr->getAtom(sto_ctr[3]), mol_ptr->getAtom(sto_ctr[4])) :
+                                      StereoDescriptor(sto_ctr[1], mol_ptr->getAtom(sto_ctr[2]), mol_ptr->getAtom(sto_ctr[3]), mol_ptr->getAtom(sto_ctr[4]), mol_ptr->getAtom(sto_ctr[5])));
 
             if (descr.isValid(atom))
                 setStereoDescriptor(atom, descr);
@@ -466,8 +483,8 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
 
         for (StereoCenterList::const_iterator it = bondStereoCenters.begin(), end = bondStereoCenters.end(); it != end; ++it) {
             const StereoCenter& sto_ctr = *it;
-            Atom& atom1 = mol->getAtom(sto_ctr[2]);
-            Atom& atom2 = mol->getAtom(sto_ctr[3]);
+            Atom& atom1 = mol_ptr->getAtom(sto_ctr[2]);
+            Atom& atom2 = mol_ptr->getAtom(sto_ctr[3]);
             Bond* bond = atom1.findBondToAtom(atom2);
 
             if (!bond)
@@ -476,47 +493,66 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
             if (getOrder(*bond) != 2)
                 continue;
 
-            StereoDescriptor descr = StereoDescriptor(sto_ctr[0], mol->getAtom(sto_ctr[1]), atom1, atom2, mol->getAtom(sto_ctr[4]));
+            StereoDescriptor descr = StereoDescriptor(sto_ctr[0], mol_ptr->getAtom(sto_ctr[1]), atom1, atom2, mol_ptr->getAtom(sto_ctr[4]));
 
             if (descr.isValid(*bond)) 
                 setStereoDescriptor(*bond, descr);
         }
-
-        if (mode == TOPOLOGICALLY_UNIQUE) {
-            perceiveSSSR(*mol);
-            setAromaticityFlags(*mol);
-            calcCIPConfigurations(*mol);
-        }
     }
 
-    std::uint64_t hash = calcTautomerHashCode(*mol);
+    if (regStereo && mode == TOPOLOGICALLY_UNIQUE) {
+        setRingFlags(*mol_ptr, false);
+        generateSSSR(*mol_ptr);
+        setAromaticityFlags(*mol_ptr);
+        calcCIPConfigurations(*mol_ptr);
 
-    if (tautHashCodes.insert(hash).second) {
+    } else if (remResDuplicates) {
+        if (!regStereo)
+            perceiveHybridizationStates(*mol_ptr, true);
+
+        setRingFlags(*mol_ptr, false);
+        generateSSSR(*mol_ptr);
+        setAromaticityFlags(*mol_ptr);
+    }
+        
+    if (mode != TOPOLOGICALLY_UNIQUE && !remResDuplicates)
+        return callbackFunc(*mol_ptr);
+    
+    std::uint64_t hash = (mode == TOPOLOGICALLY_UNIQUE ? hashCalculator.calculate(*mol_ptr) : calcConTabHashCode(*mol_ptr, true));
+
+    if (!outputTautHashCodes.insert(hash).second)
+        return true;
+   
+    return callbackFunc(*mol_ptr);
+}
+
+bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol_ptr)
+{
+    std::uint64_t hash = calcConTabHashCode(*mol_ptr, false);
+
+    if (intermTautHashCodes.insert(hash).second) {
         if (customSetupFunc)
-            customSetupFunc(*mol);
+            customSetupFunc(*mol_ptr);
 
-        nextGeneration.push_back(mol);
+        nextGeneration.push_back(mol_ptr);
         return true;
     }
 
     return false;
 }
 
-std::uint64_t Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& tautomer)
+std::uint64_t Chem::TautomerGenerator::calcConTabHashCode(const MolecularGraph& molgraph, bool aro_bonds)
 {
-    if (mode == TOPOLOGICALLY_UNIQUE)
-        return hashCalculator.calculate(tautomer);
-
     BondDescriptor bond_desc;
 
     tautomerBonds.clear();
 
-    for (BasicMolecule::ConstBondIterator it = tautomer.getBondsBegin(), end = tautomer.getBondsEnd(); it != end; ++it) {
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
 
-        if (mode == GEOMETRICALLY_UNIQUE) {
+        if (mode != EXHAUSTIVE) {
             if (regIsotopes) {
-                if (Internal::isOrdinaryHydrogen(bond.getBegin(), tautomer) || Internal::isOrdinaryHydrogen(bond.getEnd(), tautomer)) 
+                if (Internal::isOrdinaryHydrogen(bond.getBegin(), molgraph) || Internal::isOrdinaryHydrogen(bond.getEnd(), molgraph)) 
                     continue;
             } else if (Internal::isHydrogenBond(bond)) 
                 continue;
@@ -530,7 +566,7 @@ std::uint64_t Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule&
 
         bond_desc[0] = atom1_idx;
         bond_desc[1] = atom2_idx;
-        bond_desc[2] = getOrder(bond);
+        bond_desc[2] = (aro_bonds && getAromaticityFlag(bond) ? 4 : getOrder(bond));
 
         tautomerBonds.push_back(bond_desc);
     }
@@ -561,13 +597,29 @@ std::uint64_t Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule&
     return hash_code;
 }
 
-void Chem::TautomerGenerator::perceiveSSSR(MolecularGraph& molgraph)
+void Chem::TautomerGenerator::generateSSSR(MolecularGraph& molgraph)
 {
-    sssr.perceive(molgraph);
+    if (hasSSSR(molgraph))
+        return;
+    
+    if (!hasSSSR(*molGraph)) {
+        perceiveSSSR(molgraph, false);
+        return;
+    }
 
     FragmentList::SharedPointer sssr_ptr(new FragmentList());
 
-    sssr_ptr->swap(sssr);
+    for (auto& ring : *getSSSR(*molGraph)) {
+        Fragment::SharedPointer new_ring(new Fragment());
+
+        for (auto& atom : ring.getAtoms())
+            new_ring->addAtom(molgraph.getAtom(molGraph->getAtomIndex(atom)));
+
+        for (std::size_t i = 0, num_atoms = new_ring->getNumAtoms(); i < num_atoms; i++)
+            new_ring->addBond(new_ring->getAtom(i).getBondToAtom(new_ring->getAtom((i + 1) % num_atoms)));
+        
+        sssr_ptr->addElement(new_ring);
+    }
 
     setSSSR(molgraph, sssr_ptr);
 }
