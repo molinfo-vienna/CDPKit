@@ -1,27 +1,48 @@
-master:
-
- - For conformer generation rotatable bond count dependent values can now be specified for min. RMSD, energy window and
-   max. ensemble size
+V1.1.0:
+ - The tool 'tautgen' provides two new tautomer generation modes BEST_SCORING and BEST_SCORING_UNIQUE
+   (the new default mode) for generating only the chemically most reasonable tautomers
+ - New getter/setter method pair in class Chem::TautomerGenerator that allows to suppress the output of generated tautomers
+   which represent just a different resonance structure of a previously reported tautomeric form
+ - Overhaul of the tautomer generation code for increased efficiency and flexibility
+ - Documentation updates and corrections
+ - Versatile new Python example script for database preparation
+ - New Python example script demonstrating how the torsion driving functionality can be used for conformer sampling
+ - Fixed bugs in classes Chem::MaxCommonAtomSubstructureSearch and Chem::MaxCommonBondSubstructureSearch that led to a
+   loss of expected matches
+ - The visual molecule and reaction data inspection tool 'ChOX' now allows to display atom and bond configuration labels
+ - The 2D molecule structure rendering code (implemented by class Vis::StructureView2D) now
+   allows to display atom and bond configuration labels
+ - Full implementation of the CIP sequence rule stack for the correct labeling of atom and bond stereocenters
+ - New 3D structure generator feature that allows to enforce a particular 3D structure for defined parts of the input molecules
+ - New conformer generator feature that allows to specify substructures of the input molecules that
+   shall adopt a particular conformation which is then kept 'fixed' during conformer generation
+ - Renamed all ForceField::MMFF94XXXInteractionData data structures into ForceField::MMFF94XXXInteractionList
+   (XXX = force field interaction type)
+ - New class ForceField::ElasticPotential plus elastic potential energy and gradient calculation functions
+ - Conformer generator settings now allow to specify rotatable bond count dependent values for RMSD threshold, energy window and
+   max. output ensemble size
  - The output conformer ensemble compilation process now strives for higher energetic diversity among the picked conformers which, on average,
    leads to higher accuracy in the reproduction of experimental structures
  - Update of the torsion library used for systematic conformer generation
  - The pharmacophore screening application 'psdscreen' provides a new option '--unique-hits'
    which enforces that a database molecule matched by multiple query pharmacophores is saved only once to the output hit list
- - Fix for a bug in the SMARTS-pattern parser that lead to the storage of wrong bond directions
- - Bond direction specifications (up/down) in SMILES and SMARTS string are now correctly interpreted
- - Support for the XYZ file format 
+ - Fix for a bug in the SMARTS parser that lead to the storage of wrong bond directions
+ - Bond direction specifications (up/down) in SMILES and SMARTS strings are now correctly interpreted
+ - Support for reading/writing molecular structures in XYZ format 
  - Systematic conformer sampling speed optimizations
- - Significant reduction of the long-term memory consumption during conformer generation
+ - Reduction of the memory footprint of the conformer generation procedure which could become unacceptably large
+   under some circumstances
  - Fixed a bug that may lead to the generation of conformers with wrong geometries at exocyclic double bonds
  - Refactoring of stereochemistry related code
  - New command line application 'isogen' for the enumeration of R/S and E/Z stereoisomers of molecules
  - New class (Chem::StereoisomerGenerator) for the exhaustive enumeration of R/S and E/Z stereoisomers
  - New 2D drawing primitives (Vis::Path2D and Vis::PathPrimitive2D) and support for clipping operations
+   (class Vis::ClipPathPrimitive2D)
  - Fixed a bug in the 'shapescreen' tool that lead to the calculation of erroneous similarity scores
-   in the 'score-only' screening mode
+   when option '--score-only' was specified
  - Fix for a minor bug that affected the indentation of SD-file property entries
  - New class (Chem::BemisMurckoAnalyzer) for the extraction of Bemis-Murcko scaffolds
- - New functions for conformer alignment
+ - New CDPL::Chem functions for the alignment of conformers
  - Function overload resolution order fixes in the CDPL.Math Python package
  - Prevented the throwing of exceptions when the env. variable LC_ALL has not been initialized
  - Python exports of Util::Map and Util::MultiMap do not provide the properties 'keys', 'values', and 'entries' anymore.
@@ -34,23 +55,23 @@ master:
  - CDPL API cleanup
  - When deep copying Chem::Reaction or Chem::Molecule instances, values of properties referencing atoms and/or bonds (e.g. stereodescriptors, SSSR)
    now get automatically translated to values referencing the corresponding atoms/bonds of the copying target
- - GRAIL::GRAIL(X)DescriptorCalculator now only considers heavy atoms for the calculation of
-   environment HBA/HBD occupation scores which do not represent a complementary feature type
- - New class GRAIL::GRAILDescriptorCalculator now calculates a shorter descriptor (35 elements) with
+ - The calculation of GRAIL descriptors (classes GRAIL::GRAIL(X)DescriptorCalculator) now only considers heavy atoms which do not represent
+   a complementary feature type in the calculation of environment HBA/HBD occupation scores 
+ - Class GRAIL::GRAILDescriptorCalculator now calculates a shorter descriptor (35 elements) with
    not further subdivided H-bond donor/acceptor feature types
- - Old class GRAIL::GRAILDescriptorCalculator renamed into GRAILXDescriptorCalculator
+ - Class GRAIL::GRAILDescriptorCalculator renamed into GRAILXDescriptorCalculator
 
-v1.0.2:
+V1.0.2:
 
  - Manylinux2014 wheel files now support Python3.11
- - Added support for building CDPL Python bindings wheel files on Windows
+ - Added support for building CDPL Python bindings wheel files under Windows
  - Build system cleanup
  
-v1.0.1:
+V1.0.1:
 
  - Added support for building manylinux2014 compliant CDPL Python bindings wheel files
  - Documentation updates
 
-v1.0.0:
+V1.0.0:
 
  - Initial release
