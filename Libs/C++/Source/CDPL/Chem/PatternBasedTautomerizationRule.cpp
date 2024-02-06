@@ -45,7 +45,7 @@ namespace
 using namespace CDPL;
 
 
-Chem::PatternBasedTautomerizationRule::    PatternBasedTautomerizationRule(unsigned int rule_id): 
+Chem::PatternBasedTautomerizationRule::PatternBasedTautomerizationRule(unsigned int rule_id): 
     ruleID(rule_id), parentMolGraph(0), currPatternIdx(0), currMappingIdx(0), bitSetCache(MAX_BITSET_CACHE_SIZE)
 {}
 
@@ -189,8 +189,6 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
                 return false;
     }
 
-    tautomer.clear();
-
     for (MolecularGraph::ConstAtomIterator it = parentMolGraph->getAtomsBegin(), end = parentMolGraph->getAtomsEnd(); it != end; ++it) {
         const Atom& atom = *it;
 
@@ -202,11 +200,8 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
         setIsotope(atom_copy, getIsotope(atom));
         setImplicitHydrogenCount(atom_copy, 0);
 
-        if (has3DCoordinates(atom))
-            set3DCoordinates(atom_copy, get3DCoordinates(atom));
-
-        if (has2DCoordinates(atom))
-            set2DCoordinates(atom_copy, get2DCoordinates(atom));
+        if (hasRingFlag(atom))
+            setRingFlag(atom_copy, getRingFlag(atom));
     }
 
     for (MolecularGraph::ConstBondIterator it = parentMolGraph->getBondsBegin(), end = parentMolGraph->getBondsEnd(); it != end; ++it) {
@@ -214,7 +209,9 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
         Bond& bond_copy = tautomer.addBond(parentMolGraph->getAtomIndex(bond.getBegin()), parentMolGraph->getAtomIndex(bond.getEnd()));
 
         setOrder(bond_copy, getOrder(bond));
-        set2DStereoFlag(bond_copy, get2DStereoFlag(bond));
+
+        if (hasRingFlag(bond))
+            setRingFlag(bond_copy, getRingFlag(bond));
     }
 
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
