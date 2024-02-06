@@ -28,6 +28,7 @@
 #include <cstdint>
 #include <chrono>
 #include <functional>
+#include <unordered_set>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -52,6 +53,7 @@
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -92,17 +94,14 @@ class TautGenImpl::TautGenerationWorker
 
 public:
     TautGenerationWorker(TautGenImpl* parent):
-        parent(parent), numProcMols(0),    numGenTauts(0), numGenMolTauts(0) {
-
-        if (parent->mode != STANDARDIZE)
-            return;
+        molCache(100), parent(parent), numProcMols(0), numGenTauts(0) {
 
         using namespace CDPL;
         using namespace Chem;
         
         unsigned int atom_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE;
         unsigned int bond_flags = BondPropertyFlag::ORDER;
-
+   
         if (parent->regardIsotopes) 
             atom_flags |= AtomPropertyFlag::ISOTOPE;
 
@@ -145,23 +144,22 @@ private:
         
         switch (parent->mode) {
 
-            case GEOMETRICALLY_UNIQUE:
-                tautGen.setMode(TautomerGenerator::GEOMETRICALLY_UNIQUE);
-                break;
-
-            case EXHAUSTIVE:
-                tautGen.setMode(TautomerGenerator::EXHAUSTIVE);
-                break;
-
-            default:
+            case ALL_UNIQUE:
                 tautGen.setMode(TautomerGenerator::TOPOLOGICALLY_UNIQUE);
+                break;
+
+            case STANDARDIZE:
+                tautGen.removeResonanceDuplicates(false);
+                
+            default:
+                tautGen.setMode(TautomerGenerator::GEOMETRICALLY_UNIQUE);
         }
 
         tautGen.setCallbackFunction(std::bind(&TautGenerationWorker::tautomerGenerated, this, _1));
         tautGen.regardIsotopes(parent->regardIsotopes);
         tautGen.regardStereochemistry(parent->regardStereo);
         tautGen.setCustomSetupFunction(std::bind(&setRingFlags, _1, false));
-
+   
         PatternBasedTautomerizationRule::SharedPointer h13_shift(new GenericHydrogen13ShiftTautomerization());
         PatternBasedTautomerizationRule::SharedPointer h15_shift(new GenericHydrogen15ShiftTautomerization());
         PatternBasedTautomerizationRule::SharedPointer keto_enol(new KetoEnolTautomerization());
@@ -240,7 +238,7 @@ private:
             if (parent->regardStereo) {
                 calcImplicitHydrogenCounts(molecule, false);
         
-                initMolecule(molecule, false);
+                initMolecule(molecule);
 
                 perceiveAtomStereoCenters(molecule, false, false);
                 perceiveBondStereoCenters(molecule, false, false);
@@ -249,19 +247,25 @@ private:
             }
 
             numGenMolTauts = 0;
-            tautScore = -1.0;
+            numWrittenMolTauts = 0;
+            
+            if (parent->mode == STANDARDIZE || parent->mode == BEST_SCORING || parent->mode == BEST_SCORING_UNIQUE) {
+                bestScore = -1.0;
+                
+                bestTautomers.clear();
+                hashCodes.clear();
+                molCache.putAll();
+            }
 
             tautGen.generate(molecule);
 
-            if (parent->mode == STANDARDIZE && numGenMolTauts > 0) {
-                perceiveComponents(stdTautomer, true);
-                perceiveSSSR(stdTautomer, true);
-
-                outputMolecule(stdTautomer, tautScore, hashCode);
-            }
+            if ((parent->mode == STANDARDIZE || parent->mode == BEST_SCORING || parent->mode == BEST_SCORING_UNIQUE) && !bestTautomers.empty())
+                for (std::size_t i = 0, num_tauts = bestTautomers.size(); i < num_tauts; i++)
+                    outputMolecule(*bestTautomers[i], bestScore, i + 1);
 
             parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " +
-                                 std::to_string(numGenMolTauts) + (numGenMolTauts == 1 ? " tautomer" : " tautomers"));
+                                 std::to_string(numGenMolTauts) + (numGenMolTauts == 1 ? " tautomer" : " tautomers") +
+                                 " generated, " + std::to_string(numWrittenMolTauts) + " written");
             numProcMols++;
 
             return true;
@@ -286,75 +290,123 @@ private:
         numGenTauts++;
         numGenMolTauts++;
 
-        initMolecule(taut, false);
-
-        if (parent->regardStereo) {
-            calcCIPPriorities(taut, false);
-            calcAtomCIPConfigurations(taut, false);
-            calcBondCIPConfigurations(taut, false);
-        }
+        initMolecule(taut);
 
         double score = tautScoreCalc(taut);
 
-        if (parent->mode != STANDARDIZE) {
-            outputMolecule(taut, score, hashCalc.calculate(taut));
+        if (parent->mode == ALL || parent->mode == ALL_UNIQUE) {
+            outputMolecule(taut, score, numGenMolTauts);
 
-        } else if (score >= tautScore) {
-            std::uint64_t hash = hashCalc.calculate(taut);
+            return (parent->maxNumTautomers == 0 || numGenMolTauts < parent->maxNumTautomers);
+        }
+        
+        if (score >= bestScore) {
+            if (parent->mode == STANDARDIZE) {
+                if (parent->regardStereo) {
+                    calcAtomCIPConfigurations(taut, false);
+                    calcBondCIPConfigurations(taut, false);
+                }
 
-            if (score > tautScore || hash > hashCode) {
-                stdTautomer = taut;
-                tautScore = score;
-                hashCode = hash;
+                std::uint64_t hash = hashCalc.calculate(taut);
+                
+                if (score > bestScore || hash > hashCode) {
+                    if (bestTautomers.empty())
+                        bestTautomers.push_back(molCache.get());
+
+                    *bestTautomers.front() = taut;
+                    hashCode = hash;
+                }
+                
+            } else if (score > bestScore) {
+                if (parent->mode == BEST_SCORING_UNIQUE) {
+                    if (parent->regardStereo) {
+                        calcAtomCIPConfigurations(taut, false);
+                        calcBondCIPConfigurations(taut, false);
+                    }
+
+                    hashCodes.clear();
+                    hashCodes.insert(hashCalc.calculate(taut));
+                }
+
+                bestTautomers.clear();
+                molCache.putAll();
+
+                bestTautomers.push_back(&(*molCache.get() = taut));
+
+            } else {
+                if (parent->mode == BEST_SCORING_UNIQUE) {
+                    if (parent->regardStereo) {
+                        calcAtomCIPConfigurations(taut, false);
+                        calcBondCIPConfigurations(taut, false);
+                    }
+
+                    std::uint64_t hash = hashCalc.calculate(taut);
+
+                    if (hashCodes.insert(hash).second)
+                        bestTautomers.push_back(&(*molCache.get() = taut));
+
+                } else
+                    bestTautomers.push_back(&(*molCache.get() = taut));
             }
+            
+            bestScore = score;
         }
 
-        return (parent->maxNumTautomers == 0 || numGenMolTauts < parent->maxNumTautomers);
+        return true;
     }
 
-    void initMolecule(CDPL::Chem::MolecularGraph& molgraph, bool overwrite) const {
+    void initMolecule(CDPL::Chem::MolecularGraph& molgraph) const {
         using namespace CDPL;
         using namespace Chem;
 
-        setRingFlags(molgraph, overwrite);
-        perceiveHybridizationStates(molgraph, overwrite);
-        perceiveSSSR(molgraph, overwrite);
-        setAromaticityFlags(molgraph, overwrite);
+        setRingFlags(molgraph, false);
+        perceiveHybridizationStates(molgraph, false);
+        perceiveSSSR(molgraph, false);
+        setAromaticityFlags(molgraph, false);
     }
 
-    void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, std::uint64_t hash) {
+    void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, std::size_t idx) {
         using namespace CDPL;
         using namespace Chem;
 
-        StringDataBlock::SharedPointer sd(new StringDataBlock());
+        StringDataBlock::SharedPointer sd(hasStructureData(molecule) ?
+                                          new StringDataBlock(*getStructureData(molecule)) :
+                                          new StringDataBlock());
 
         sd->addEntry("<Tautomer Score>", std::to_string(score));
-        sd->addEntry("<Tautomer ID>", std::to_string(hash));
 
         setStructureData(molgraph, sd);
-
         perceiveComponents(molgraph, false);
         setAtomSymbolsFromTypes(molgraph, false);
 
-        if (parent->mode != STANDARDIZE && parent->titleSuffix)
-            setName(molgraph, getName(molecule) + '_' + std::to_string(numGenMolTauts));
+        if (parent->titleSuffix)
+            setName(molgraph, getName(molecule) + '_' + std::to_string(idx));
         else
             setName(molgraph, getName(molecule));
 
         parent->writeMolecule(molgraph);
+
+        numWrittenMolTauts++;
     }
 
+    typedef CDPL::Util::ObjectStack<CDPL::Chem::BasicMolecule> MoleculeCache;
+    typedef std::vector<CDPL::Chem::Molecule*> MoleculeList;
+    typedef std::unordered_set<std::uint64_t> HashCodeSet;
+    
+    MoleculeCache                  molCache;
     TautGenImpl*                   parent;
     CDPL::Chem::TautomerGenerator  tautGen;
     CDPL::Chem::TautomerScore      tautScoreCalc;
     CDPL::Chem::HashCodeCalculator hashCalc;
     CDPL::Chem::BasicMolecule      molecule;
-    CDPL::Chem::BasicMolecule      stdTautomer;
-    double                         tautScore;
+    MoleculeList                   bestTautomers;
+    double                         bestScore;
     std::uint64_t                  hashCode;
+    HashCodeSet                    hashCodes;
     std::size_t                    numProcMols;
     std::size_t                    numGenTauts;
     std::size_t                    numGenMolTauts;
+    std::size_t                    numWrittenMolTauts;
 };
 
 
@@ -362,8 +414,8 @@ TautGenImpl::TautGenImpl():
     regardStereo(true), regardIsotopes(true), neutralize(false), ketoEnol(true), 
     imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
     lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
-    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(true), titleSuffix(false),
-    numThreads(0), maxNumTautomers(0), mode(Mode::TOPOLOGICALLY_UNIQUE), 
+    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(false), titleSuffix(false),
+    numThreads(0), maxNumTautomers(0), mode(Mode::BEST_SCORING_UNIQUE), 
     inputFormat(), outputFormat(), outputWriter(), numOutTautomers(0)
 {
     using namespace std::placeholders;
@@ -372,7 +424,8 @@ TautGenImpl::TautGenImpl():
               value<StringList>(&inputFiles)->multitoken()->required());
     addOption("output,o", "Tautomers output file.", 
               value<std::string>(&outputFile)->required());
-    addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
+    addOption("mode,m", "Tautomer generation mode (STANDARDIZE, BEST_SCORING, BEST_SCORING_UNIQUE, ALL_UNIQUE, "
+              "ALL default: BEST_SCORING_UNIQUE).", 
               value<std::string>()->notifier(std::bind(&TautGenImpl::setMode, this, _1)));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
               std::to_string(std::thread::hardware_concurrency()) + 
@@ -410,7 +463,7 @@ TautGenImpl::TautGenImpl():
               value<bool>(&sulfenicAcid)->implicit_value(true));
     addOption("generic-h13-shift", "Enable generic hydrogen 1 <-> 3 shift tautomerization (default: true).", 
               value<bool>(&genericH13Shift)->implicit_value(true));
-    addOption("generic-h15-shift", "Enable generic hydrogen 1 <-> 5 shift tautomerization (default: true).", 
+    addOption("generic-h15-shift", "Enable generic hydrogen 1 <-> 5 shift tautomerization (default: false).", 
               value<bool>(&genericH15Shift)->implicit_value(true));
     addOption("title-suffix,S", "Append tautomer number to the title of the output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
@@ -479,12 +532,14 @@ void TautGenImpl::setMode(const std::string& mode_str)
     
     if (Internal::isEqualCI(mode_str, "STANDARDIZE"))
         mode = Mode::STANDARDIZE;
-    else if (Internal::isEqualCI(mode_str, "TOP_UNIQUE"))
-        mode = Mode::TOPOLOGICALLY_UNIQUE;
-    else if (Internal::isEqualCI(mode_str, "GEO_UNIQUE"))
-        mode = Mode::GEOMETRICALLY_UNIQUE;
-    else if (Internal::isEqualCI(mode_str, "EXHAUSTIVE"))
-        mode = Mode::EXHAUSTIVE;
+    else if (Internal::isEqualCI(mode_str, "BEST_SCORING"))
+        mode = Mode::BEST_SCORING;
+    else if (Internal::isEqualCI(mode_str, "BEST_SCORING_UNIQUE"))
+        mode = Mode::BEST_SCORING_UNIQUE;
+    else if (Internal::isEqualCI(mode_str, "ALL_UNIQUE"))
+        mode = Mode::ALL_UNIQUE;
+    else if (Internal::isEqualCI(mode_str, "ALL"))
+        mode = Mode::ALL_UNIQUE;
     else
         throwValidationError("mode");
 }
@@ -871,14 +926,17 @@ std::string TautGenImpl::getModeString() const
     if (mode == STANDARDIZE)
         return "STANDADIZE";
 
-    if (mode == TOPOLOGICALLY_UNIQUE)
-        return "TOP_UNIQUE";
+    if (mode == BEST_SCORING)
+        return "BEST_SCORING";
 
-    if (mode == GEOMETRICALLY_UNIQUE)
-        return "GEO_UNIQUE";
+    if (mode == BEST_SCORING_UNIQUE)
+        return "BEST_SCORING_UNIQUE";
 
-    if (mode == EXHAUSTIVE)
-        return "EXHAUSTIVE";
+    if (mode == ALL_UNIQUE)
+        return "ALL_UNIQUE";
+
+    if (mode == ALL)
+        return "ALL";
     
     return "UNKNOWN";
 }

@@ -64,9 +64,10 @@ namespace TautGen
         {
 
             STANDARDIZE,
-            TOPOLOGICALLY_UNIQUE,
-            GEOMETRICALLY_UNIQUE,
-            EXHAUSTIVE
+            BEST_SCORING,
+            BEST_SCORING_UNIQUE,
+            ALL_UNIQUE,
+            ALL,
         };
 
         const char* getProgName() const;
