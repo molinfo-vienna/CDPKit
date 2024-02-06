@@ -326,8 +326,10 @@ Other options
     of the file (because missing, misleading or not supported).
 
 
-Changes in V1.1
----------------
+.. _confgen_notes_v1_1:
+
+Notes on release V1.1
+---------------------
 
 Accuracy improvements
 ~~~~~~~~~~~~~~~~~~~~~

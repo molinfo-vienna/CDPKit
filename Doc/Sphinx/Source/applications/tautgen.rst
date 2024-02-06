@@ -89,8 +89,8 @@ Other options
 
   -m [ --mode ] arg
 
-    Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: 
-    TOP_UNIQUE).
+    Tautomer generation mode (STANDARDIZE, BEST_SCORING (since V1.1), BEST_SCORING_UNIQUE (since V1.1), ALL, ALL_UNIQUE, default: 
+    BEST_SCORING_UNIQUE)
 
   -t [ --num-threads ] [=arg(=4)]
 
@@ -175,4 +175,4 @@ Other options
 
   --generic-h15-shift [=arg(=1)]
 
-    Enable generic hydrogen 1 <-> 5 shift tautomerization (default: true).
+    Enable generic hydrogen 1 <-> 5 shift tautomerization (default: false).

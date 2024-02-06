@@ -187,7 +187,7 @@ Build of HTML documentation
 This step is optional and needs to be carried out only if a build of offline CDPKit documentation pages
 is required or desired. If the documentation should be installed together with the built binaries then this step must be
 executed *before* carrying out the installation procedure (see next section).
-Mandatory for a successful build is the availability of the `Sphinx <https://www.sphinx-doc.org/en/master/>`_ documentation generator
+Mandatory for a successful build is the availability of the `Sphinx <https://www.sphinx-doc.org/en/master>`_ documentation generator
 plus the listed extensions (see `Build requirements`_). Furthermore, for generating CDPL C++ and Python API-documentation (optional),
 the program `Doxygen <https://www.doxygen.nl>`_ has to be installed.
 
