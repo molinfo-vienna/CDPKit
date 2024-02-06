@@ -142,6 +142,18 @@ class TautomerGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param remove 
+    #
+    def removeResonanceDuplicates(remove: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def resonanceDuplicatesRemoved() -> bool: pass
+
+    ##
+    # \brief 
     # \param func 
     #
     def setCustomSetupFunction(func: VoidMolecularGraphFunctor) -> None: pass
@@ -169,5 +181,10 @@ class TautomerGenerator(Boost.Python.instance):
     regStereo = property(stereochemistryRegarded, regardStereochemistry)
 
     regIsotopes = property(isotopesRegarded, regardIsotopes)
+
+    ##
+    # \brief FIXME!
+    #
+    remResonanceDuplicates = property(getRemResonanceDuplicates, setRemResonanceDuplicates)
 
     numTautomerizationRules = property(getNumTautomerizationRules)
