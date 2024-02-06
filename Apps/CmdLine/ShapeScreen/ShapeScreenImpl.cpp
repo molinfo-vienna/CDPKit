@@ -161,7 +161,7 @@ ShapeScreenImpl::ShapeScreenImpl():
               "poses get scored as they are (default: false).",
               value<bool>(&scoringOnly)->implicit_value(true));
     addOption("opt-overlay,a", "Specifies whether or not to perform an overlay optimization of the generated starting poses "
-              "(only in effect if option 'score-only' is false, default: true).",
+              "(only in effect if option '--score-only' is false, default: true).",
               value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::performOverlayOptimization, this, _1)));
     addOption("thorough-overlay-opt,z", "Specifies whether or not to perform a thorough overlay optimization of the generated starting poses "
               "(note: the screening time will increase significantly, default: false).",
