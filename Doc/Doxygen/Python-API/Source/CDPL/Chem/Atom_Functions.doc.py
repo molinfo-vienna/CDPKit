@@ -792,9 +792,10 @@ def setMorganNumber(atom: Atom, num: int) -> None: pass
 # \param check_quart_n 
 # \param check_plan_n 
 # \param check_amide_n 
+# \param check_res_ctrs 
 # \return 
 #
-def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True) -> bool: pass
+def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True, check_res_ctrs: bool = True) -> bool: pass
 
 ##
 # \brief 

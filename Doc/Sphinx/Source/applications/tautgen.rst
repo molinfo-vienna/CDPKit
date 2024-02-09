@@ -89,8 +89,8 @@ Other options
 
   -m [ --mode ] arg
 
-    Tautomer generation mode (STANDARDIZE, BEST_SCORING (since V1.1), BEST_SCORING_UNIQUE (since V1.1), ALL, ALL_UNIQUE, default: 
-    BEST_SCORING_UNIQUE)
+    Tautomer generation mode (STANDARDIZE, BEST_SCORING [since V1.1], BEST_SCORING_UNIQUE [since V1.1],
+    ALL [since V1.1], ALL_UNIQUE [since V1.1], default: BEST_SCORING_UNIQUE [since V1.1])
 
   -t [ --num-threads ] [=arg(=4)]
 
@@ -131,7 +131,7 @@ Other options
 
   -S [ --title-suffix ] [=arg(=1)]
 
-    Append tautomer number to the title of the output molecules (default: false); since V1.1
+    Append tautomer number to the title of the output molecules (default: false). [since V1.1]
 
   --keto-enol [=arg(=1)]
 
@@ -175,4 +175,4 @@ Other options
 
   --generic-h15-shift [=arg(=1)]
 
-    Enable generic hydrogen 1 <-> 5 shift tautomerization (default: false).
+    Enable generic hydrogen 1 <-> 5 shift tautomerization (default: false [since V1.1]).

@@ -1,9 +1,9 @@
 Generating Protonation States at Physiological pH
 =================================================
 
-.. literalinclude:: /examples/prot_phys_cond.py
+.. literalinclude:: /downloads/prot_phys_cond.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/prot_phys_cond.py>`
+:download:`Download source file</downloads/prot_phys_cond.py>`

@@ -995,8 +995,9 @@ def perceiveBondStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_a
 # \param check_quart_n 
 # \param check_plan_n 
 # \param check_amide_n 
+# \param check_res_ctrs 
 #
-def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True) -> None: pass
+def perceiveAtomStereoCenters(molgraph: MolecularGraph, overwrite: bool, check_asym: bool = True, check_inv_n: bool = True, check_quart_n: bool = True, check_plan_n: bool = True, check_amide_n: bool = True, check_res_ctrs: bool = True) -> None: pass
 
 ##
 # \brief 

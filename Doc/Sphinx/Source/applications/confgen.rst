@@ -127,7 +127,7 @@ Other options
   -e [ --e-window ] arg
 
     Energy window for generated conformers. The energy window may be specified as a
-    single constant value or (since V1.1) as a list of pairs RBC1 EW1 RBC2 EW2... where RBC
+    single constant value or [since V1.1] as a list of pairs RBC1 EW1 RBC2 EW2... where RBC
     denotes a rotatable bond count and EW the energy window that applies if the 
     rotatable bond count of the processed molecule is <= RBC (the EW value 
     associated with the lowest RBC that fulfills the latter condition takes 
@@ -138,7 +138,7 @@ Other options
   -r [ --rmsd ] arg
 
     Minimum RMSD for output conformer selection. The RMSD may be specified as
-    a single constant value or (since V1.1) as a list of pairs RBC1 RMSD1 RBC2 RMSD2... where 
+    a single constant value or [since V1.1] as a list of pairs RBC1 RMSD1 RBC2 RMSD2... where 
     RBC denotes a rotatable bond count and RMSD is the value that applies if the 
     rotatable bond count of the processed molecule is <= RBC (the RMSD value 
     associated with the lowest RBC that fulfills the latter condition takes 
@@ -150,7 +150,7 @@ Other options
   -n [ --max-num-out-confs ] arg
 
     Maximum number of output conformers per molecule. The max. number of output 
-    conformers may be specified as a single constant value or (since V1.1) as a list of pairs 
+    conformers may be specified as a single constant value or [since V1.1] as a list of pairs 
     RBC1 MC1 RBC2 MC2... where RBC denotes a rotatable bond count and MC the max. 
     number of conformers that applies if the rotatable bond count of the 
     processed molecule is <= RBC (the MC value associated with the lowest RBC 
@@ -325,20 +325,73 @@ Other options
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file (because missing, misleading or not supported).
 
+  -j [ --fixed-substr ] arg
+
+    Fixed substructure template molecule file. The given molecule can serve as 
+    source for fixed substructure atom 3D coordinates and also as query for 
+    finding fixed substructure matches in the processed input molecules if a 
+    SMARTS pattern has not been specified by option *--fixed-substr-ptn*. If the 
+    template molecule file does not provide atom 3D coordinates then the 
+    coordinates of matched input molecule atoms will be used (if 3D coordinates 
+    are not provided either way an error will be reported). [since V1.1]
+    
+  -J [ --fixed-substr-ptn ] arg
+
+    SMARTS pattern for finding fixed substructure matches in the processed 
+    input molecules. If a template molecule file has been specified by option 
+    *--fixed-substr* then matching atoms of that molecule will serve as primary source for 
+    fixed atom 3D coordinates. Otherwise, the coordinates of matched input 
+    molecule atoms will be used (if 3D coordinates are not provided either way
+    an error will be reported). [since V1.1]
+    
+  -U [ --fixed-substr-mcss ] [=arg(=1)]
+
+    Use maximum common substructure search to find fixed substructure matches 
+    (default: false, using reqular substructure searching). [since V1.1]
+    
+  -a [ --fixed-substr-align ] [=arg(=1)]
+
+    Align generated conformers on fixed substructure input atom positions (default: false). [since V1.1]
+
+  -p [ --fixed-substr-min-atoms ] arg
+
+    The minimum required number of matched atoms when using maximum common 
+    substructure searching to find fixed substructure matches (default: 2). [since V1.1]
+    
+  -Q [ --fixed-substr-max-matches ] arg
+
+    The maximum number of considered fixed substructure matches (default: 1, 0 disables limit). [since V1.1]
+    
+  -^ [ --fixed-substr-ignore-h ] [=arg(=1)]
+
+    Ignore hydrogens that are present in the specified fixed substructure 
+    template molecule file (default: false). [since V1.1]
 
 .. _confgen_notes_v1_1:
 
 Notes on release V1.1
 ---------------------
 
-Accuracy improvements
-~~~~~~~~~~~~~~~~~~~~~
+Improvements
+~~~~~~~~~~~~
 
-.. table:: **Table 1**. Conformer Generator Performance Comparison for the Platinum Diverse Dataset
+For systematic conformer sampling :program:`confgen V1.1` uses a new torsion library that was derived
+from the torsion library V3.0 developed at the University of Hamburg, Center for Bioinformatics :cite:`doi:10.1021/acs.jcim.2c00043`.
+The new torsion library offers significant improvements over its predecessor which originate in corrections
+of torsion library entry matching orders and a higher number of analyzed high quality X-ray structures.
+Furthermore, the output conformer picking procedure has been refined and now results in not only structurally but also
+energetically more diverse conformer ensembles.
+Together these changes increase the average accuracy in the reproduction of experimental structure considerably (at the cost of slightly larger
+output ensembles and higher processing times for some settings). In order to quantify the accuracy improvements the *Platinum Diverse Dataset* benchmarks
+described in :cite:`doi:10.1021/acs.jcim.3c00563` were re-run and the obtained results put in comparison with the ones published for
+**CONFORGE V1.0**. The following tables show that the achieved accuracy improvements can be significant, especially when :program:`confgen`
+is run with default settings:
+
+.. table:: **Table 1**. Conformer Generation Performance Comparison for the Platinum Diverse Dataset
            
            +------------------------------------+---------------------------------------------------+---------------------------------------------------+
            | 	                                |   Maximum ensemble size 50                        |   Maximum ensemble size 250                       |
-           |           Generator [a]_           +------------+------------+------------+------------+------------+------------+------------+------------+
+           |           Generator [1]_           +------------+------------+------------+------------+------------+------------+------------+------------+
            |           	                        |   mean     |   median   |   min      |   max      |   mean     |   median   |   min      |   max      |
            +====================================+============+============+============+============+============+============+============+============+
            |                                                   **RMSD (Å)**                                                                             |                      
@@ -351,7 +404,7 @@ Accuracy improvements
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            | *CONFORGE Systematic Default V1.1* | 0.63       | 0.52       | 0.03       | 3.70       | 0.56       | 0.48       | 0.03       | 3.70       |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
-           | Others [b]_                        | 0.67       | 0.51       | **0.02**   | 3.26       | 0.57       | 0.46       | **0.02**   | 2.93       |
+           | Others                             | 0.67       | 0.51       | **0.02**   | 3.26       | 0.57       | 0.46       | **0.02**   | 2.93       |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            |                                                   **Ensemble Size**                                                                        |                      
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
@@ -363,7 +416,7 @@ Accuracy improvements
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            | *CONFORGE Systematic Default V1.1* | 31         | 37         | \-         | \-         | 92         | 38         | \-         | \-         |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
-           | Others [b]_                        | **21**     | **19**     | \-         | \-         | **71**     | 32         | \-         | \-         |
+           | Others                             | **21**     | **19**     | \-         | \-         | **71**     | 32         | \-         | \-         |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            |                                                   **Processing Time**                                                                      |                      
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
@@ -375,14 +428,14 @@ Accuracy improvements
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            | *CONFORGE Systematic Default V1.1* | **0.09**   | **0.01**   | 0.00       | **10.72**  | 0.26       | 0.02       | 0.00       | **14.74**  |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
-           | Others [b]_                        | 0.53       | 0.17       | 0.00       | 30.98      | 0.65       | 0.27       | 0.00       | 31.13      |
+           | Others                             | 0.53       | 0.17       | 0.00       | 30.98      | 0.65       | 0.27       | 0.00       | 31.13      |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
 
 
 .. table:: **Table 2**. Total Program Execution Times and Molecule Processing Failures recorded for the Platinum Diverse Dataset
 
            +------------------------------------+-------------------------------+-------------------------------+
-           | 	      Generator [a]_            |   Maximum ensemble size 50    |   Maximum ensemble size 250   |
+           | 	      Generator [1]_            |   Maximum ensemble size 50    |   Maximum ensemble size 250   |
            +====================================+===============================+===============================+
            | CONFORGE Systematic Best V1.0      | 00:08:56                      | 00:20:06                      |
            +------------------------------------+-------------------------------+-------------------------------+
@@ -392,7 +445,7 @@ Accuracy improvements
            +------------------------------------+-------------------------------+-------------------------------+
            | *CONFORGE Systematic Default V1.1* | **00:05:02**                  | 00:15:07                      |
            +------------------------------------+-------------------------------+-------------------------------+
-           | Others [b]_                        | 00:26:07                      | 00:33:44                      |
+           | Others                             | 00:26:07                      | 00:33:44                      |
            +------------------------------------+-------------------------------+-------------------------------+
 
 
@@ -400,7 +453,7 @@ Accuracy improvements
    
            +------------------------------------+---------------------------------------------------+---------------------------------------------------+
            | 	                                |   Maximum ensemble size 50                        |   Maximum ensemble size 250                       |
-           |             Generator [a]_         +------------+------------+------------+------------+------------+------------+------------+------------+
+           |             Generator [1]_         +------------+------------+------------+------------+------------+------------+------------+------------+
            |           	                        |   0.5      |   1.0      |   1.5      |   2.0      |    0.5     |   1.0      |   1.5      |   2.0      |
            +====================================+============+============+============+============+============+============+============+============+
            | CONFORGE Systematic Best V1.0      | **51.6**   | 79.2       | 90.6       | 96.4       | 59.7       | 86.8       | 95.2       | 98.4       |
@@ -411,11 +464,78 @@ Accuracy improvements
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
            | *CONFORGE Systematic Default V1.1* | 48.0       | **83.4**   | **95.4**   | **99.2**   | 52.2       | 89.0       | **97.8**   | **99.8**   |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
-           | Others [b]_                        | 49         | 80.8       | 93.2       | 98.4       | 56         | 87         | 96.5       | 99.4       |
+           | Others                             | 49         | 80.8       | 93.2       | 98.4       | 56         | 87         | 96.5       | 99.4       |
            +------------------------------------+------------+------------+------------+------------+------------+------------+------------+------------+
 
-.. [a] Values for CONFORGE V1.0 variants were taken from the corresponding table in :cite:`doi:10.1021/acs.jcim.3c00563`.
-       
-.. [b] Cells of 'Others' rows show the value obtained for one of the competing generators (including Omega) that performed best in the correponding category.
-       Values were taken from :cite:`doi:10.1021/acs.jcim.3c00563`.
+.. [1] Values for CONFORGE V1.0 variants were taken from the corresponding tables published in :cite:`doi:10.1021/acs.jcim.3c00563`.
+       Cells of 'Others' rows show the value obtained for one of the competing generators (including Omega) that performed best in the correponding category.
+       Values were taken from the corresponding tables published in :cite:`doi:10.1021/acs.jcim.3c00563`.
 
+New features
+~~~~~~~~~~~~
+
+.. rubric:: Energy window, RMSD and max. output ensemble size as a function of rotatable bond count
+
+It is now possible to specífy multiple values for energy window (option *--e-window*), RMSD threshold (option *--rmsd*) and max. output ensemble
+size (option *--max-num-out_confs*) settings where the value in effect depends on the rotatable bond count of the currently processed input molecule.
+Rotatable bond count dependent settings are specified as a list of pairs *RBC1 SV1 RBC2 SV2...* where RBC denotes the rotatable bond count and SV the
+value that applies if the  rotatable bond count of the processed molecule is *<= RBC*. The settings value associated with the lowest RBC that fulfills
+the latter condition takes precedence. If the rotatable bond count of the processed molecule is outside any defined range then the settings value
+associated with the highest RBC will be used.
+
+**Example:** *5 50 10 100 12 200*
+
+Here, a rotatable bond count of *6* would lead to the selection of the value *100*. Rotatable bond counts <= *5* result in the value *50* and any bond counts > *10* in
+the selection of the value *200*.
+   
+.. rubric:: Support for 'fixed' substructures
+
+Starting with version 1.1 :program:`confgen` supports the specification of input molecule substructures that shall be kept 'fixed' during the
+conformer generation process. Fixed substructure atom 3D coordinates can be supplied via a template molecule file (option *--fixed-substr*) or are
+taken from the processed input molecules. For a maximum of flexibility SMARTS patterns can be specified (*--fixed-substr-ptn* option) that allow
+for a more accurate description of the substructures to keep rigid. Available algorithms for finding matches between the input molecules
+and the specified substructure are standard substructure searching (the default) and maximum common substructure searching (MCSS, enabled by option
+*--fixed-substr-mcss*). Further options control the number of considered fixed substructure matches (option *--fixed-substr-max-matches*), the minimum
+matched substructure size (if MCSS is enabled, option *--fixed-substr-min-atoms*) and whether the generated conformers shall be aligned on
+fixed substructure input atom positions (option *--fixed-substr-align*, by default conformers are not aligned!).
+
+**Example:**
+
+Generation of a conformer ensemble for :download:`Erythromycin </downloads/erythromycin.smi>` where the maximum common substructure with
+:download:`Telithromycin </downloads/1p9x_B_TEL.sdf>` is kept rigid using fixed substructure atom 3D coordinates of the bound-state Telithromycin
+conformation found in complex `1P9X <https://www.rcsb.org/structure/1P9X>`_.
+
+.. figure:: /graphics/erythromycin.svg
+   :scale: 7%
+   :align: center
+   :alt: Erythromycin
+
+   Erythromycin
+
+..
+
+.. figure:: /graphics/telithromycin.png
+   :scale: 25%
+   :align: center
+   :alt: Bound-state conformation of Telithromycin extracted from `1P9X <https://www.rcsb.org/structure/1P9X>`_
+
+   Bound-state conformation of Telithromycin extracted from 1P9X
+
+..
+
+Executing
+
+.. code-block:: shell
+
+   $ confgen -i erythromycin.smi -o tel_ery_confs.sdf -n 50 -j 1p9x_B_TEL.sdf -a -U
+
+will generate the following conformer ensemble:
+
+.. figure:: /graphics/tel_ery_confs.png
+   :scale: 25%
+   :align: center
+   :alt: Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin 
+
+   Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin (green)
+
+..

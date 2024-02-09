@@ -1,9 +1,9 @@
 Extended Connectivity Fingerprints (ECFPs)
 ==========================================
 
-.. literalinclude:: /examples/gen_ecfp.py
+.. literalinclude:: /downloads/gen_ecfp.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/gen_ecfp.py>`
+:download:`Download source file</downloads/gen_ecfp.py>`

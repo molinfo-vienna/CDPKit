@@ -1,9 +1,9 @@
 Single Low-energy 3D Structures
 ===============================
 
-.. literalinclude:: /examples/gen_3d_structs.py
+.. literalinclude:: /downloads/gen_3d_structs.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/gen_3d_structs.py>`
+:download:`Download source file</downloads/gen_3d_structs.py>`

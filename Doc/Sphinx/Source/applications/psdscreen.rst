@@ -145,7 +145,7 @@ Other options
 
   -u [ --unique-hits ] [=arg(=1)]
 
-    Report molecules matching multiple query pharmacophores only once (default: false); since V1.1
+    Report molecules matching multiple query pharmacophores only once (default: false) [since V1.1]
 
   -O [ --output-format ] arg
 

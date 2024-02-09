@@ -61,7 +61,7 @@ if(SPHINX_FOUND)
 
   file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
     "file(GLOB SOURCE_FILES \"${CDPKIT_EXAMPLES_DIR}/C++/*.cpp\" \"${CDPKIT_EXAMPLES_DIR}/Python/*.py\")\n"
-    "file(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/examples\")")
+    "file(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/downloads\")")
 
   add_custom_target(copy-sphinx-example-files 
     ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"

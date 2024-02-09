@@ -229,3 +229,45 @@ Other options
     file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file (because missing, misleading or not supported).
+
+  -j [ --fixed-substr ] arg
+
+    Fixed substructure template molecule file. The given molecule can serve as 
+    source for fixed substructure atom 3D coordinates and also as query for 
+    finding fixed substructure matches in the processed input molecules if a 
+    SMARTS pattern has not been specified by option *--fixed-substr-ptn*. If the 
+    template molecule file does not provide atom 3D coordinates then the 
+    coordinates of matched input molecule atoms will be used (if 3D coordinates 
+    are not provided either way an error will be reported). [since V1.1]
+
+  -J [ --fixed-substr-ptn ] arg
+
+    SMARTS pattern for finding fixed substructure matches in the processed 
+    input molecules. If a template molecule file has been specified by option 
+    *--fixed-substr* then matching atoms of that molecule will serve as primary source for 
+    fixed atom 3D coordinates. Otherwise, the coordinates of matched input 
+    molecule atoms will be used (if 3D coordinates are not provided either way
+    an error will be reported). [since V1.1]
+    
+  -U [ --fixed-substr-mcss ] [=arg(=1)]
+
+    Use maximum common substructure search to find fixed substructure matches 
+    (default: false, using reqular substructure searching). [since V1.1]
+    
+  -a [ --fixed-substr-align ] [=arg(=1)]
+
+    Align generated 3D structure on fixed substructure input atom positions (default: false). [since V1.1]
+
+  -p [ --fixed-substr-min-atoms ] arg
+
+    The minimum required number of matched atoms when using maximum common 
+    substructure searching to find fixed substructure matches (default: 2). [since V1.1]
+    
+  -Q [ --fixed-substr-max-matches ] arg
+
+    The maximum number of considered fixed substructure matches (default: 1, 0 disables limit). [since V1.1]
+    
+  -^ [ --fixed-substr-ignore-h ] [=arg(=1)]
+
+    Ignore hydrogens that are present in the specified fixed substructure 
+    template molecule file (default: false). [since V1.1]

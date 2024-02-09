@@ -103,9 +103,9 @@ be written to the specified output file.
    
 **Code**
 
-.. literalinclude:: /examples/clean_mol_db.py
+.. literalinclude:: /downloads/clean_mol_db.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/clean_mol_db.py>`
+:download:`Download source file</downloads/clean_mol_db.py>`

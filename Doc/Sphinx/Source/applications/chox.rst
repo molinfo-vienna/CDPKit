@@ -13,8 +13,8 @@ the contents of chemical structure and reaction data files.
 - Allows the selection of individual entries for export or printing
 - A wide panel of supported input and output file formats
             
-.. figure:: /graphics/ChOX_screenshot.png
-   :scale: 40 %
+.. figure:: /graphics/chox_screenshot.png
+   :scale: 40%
    :alt: ChOX Screenshot
          
    :program:`ChOX` displaying the contents of an SD-file.

@@ -126,8 +126,8 @@ Other options
 
   -n [ --max-hits ] arg
 
-    Maximum number of found hits at which the search will terminate (overrides the 'best-
-    hits' option, default: 0 - no limit).
+    Maximum number of found hits at which the search will terminate (overrides the *--best-
+    hits* option, default: 0 - no limit).
 
   -x [ --cutoff ] arg
 
@@ -137,7 +137,7 @@ Other options
   -X [ --shape-tanimoto-cutoff ] arg
 
     Shape tanimoto score cutoff that will be used for hit identifiaction in addition 
-    to the value specified by the 'cutoff' option (default: 0.0 - no cutoff).
+    to the value specified by the *--cutoff* option (default: 0.0 - no cutoff).
 
   -M [ --merge-hits ] [=arg(=1)]
 
@@ -157,7 +157,7 @@ Other options
   -a [ --opt-overlay ] [=arg(=1)]
 
     Specifies whether or not to perform an overlay optimization of the generated starting 
-    poses (only in effect if option 'score-only' is false, default: true).
+    poses (only in effect if option *--score-only* is false, default: true).
 
   -z [ --thorough-overlay-opt ] [=arg(=1)]
 

@@ -1,9 +1,9 @@
 Torsion Driving
 ===============
 
-.. literalinclude:: /examples/tor_drive.py
+.. literalinclude:: /downloads/tor_drive.py
    :language: python
    :linenos:
    :lines: 21-
 
-:download:`Download source file</examples/tor_drive.py>`
+:download:`Download source file</downloads/tor_drive.py>`
