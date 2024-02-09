@@ -135,7 +135,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
                 (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true,
                  python::arg("check_inv_n") = true, python::arg("check_quart_n") = true, python::arg("check_plan_n") = true,
-                 python::arg("check_amide_n") = true));
+                 python::arg("check_amide_n") = true, python::arg("check_res_ctrs") = true));
     python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,
                 (python::arg("molgraph"), python::arg("overwrite"), python::arg("check_asym") = true,
                  python::arg("check_term_n") = true, python::arg("check_order") = true, python::arg("min_ring_size") = 8));

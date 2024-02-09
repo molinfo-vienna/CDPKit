@@ -39,7 +39,7 @@ using namespace CDPL;
 
 bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_asym,
                           bool check_inv_n, bool check_quart_n, bool check_plan_n,
-                          bool check_amide_n)
+                          bool check_amide_n, bool check_res_ctrs)
 {
     if (getAromaticityFlag(atom))
         return false;
@@ -77,6 +77,46 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
             return false;
 
         if (check_amide_n && Internal::isAmideNitrogen(atom, molgraph))
+            return false;
+    }
+
+    if (check_res_ctrs) {
+        Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+        std::size_t num_term_het_dbds = 0;
+        std::size_t num_term_het_sbds = 0;
+
+        for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+            if (!molgraph.containsAtom(*a_it) || !molgraph.containsBond(*b_it))
+                continue;
+
+            switch (getType(*a_it)) {
+
+                case AtomType::O:
+                case AtomType::S:
+                case AtomType::N:
+                    break;
+
+                default:
+                    continue;
+            }
+
+            if (Internal::getHeavyAtomCount(*a_it, molgraph) != 1)
+                continue;
+
+            switch (getOrder(*b_it)) {
+
+                case 1:
+                    num_term_het_sbds++;
+                    continue;
+
+                case 2:
+                    num_term_het_dbds++;
+            }
+        }
+
+        if (num_term_het_dbds >= 1 && num_term_het_sbds >= 1)
             return false;
     }
     

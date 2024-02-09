@@ -442,7 +442,7 @@ namespace CDPL
 
         CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym = true,
                                                      bool check_inv_n = true, bool check_quart_n = true, bool check_plan_n = true,
-                                                     bool check_amide_n = true);
+                                                     bool check_amide_n = true, bool check_res_ctrs = true);
 
         CDPL_CHEM_API void perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_asym = true,
                                                      bool check_term_n = true, bool check_order = true, std::size_t min_ring_size = 8);

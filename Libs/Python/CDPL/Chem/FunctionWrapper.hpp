@@ -67,4 +67,10 @@
      return CDPL::Chem::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6, arg7);                                                                  \
  }
 
+#define MAKE_FUNCTION_WRAPPER8(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE, ARG5_TYPE, ARG6_TYPE, ARG7_TYPE, ARG8_TYPE)                   \
+ RET_TYPE FUNC_NAME##Wrapper8(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4, ARG5_TYPE arg5, ARG6_TYPE arg6, ARG7_TYPE arg7, ARG8_TYPE arg8) \
+ {                                                                                                                                                            \
+     return CDPL::Chem::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);                                                                            \
+ }
+
 #endif // CDPL_PYTHON_CHEM_FUNCTIONWRAPPER_HPP

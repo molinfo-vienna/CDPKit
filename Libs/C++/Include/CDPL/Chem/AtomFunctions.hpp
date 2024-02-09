@@ -267,7 +267,7 @@ namespace CDPL
 
         CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_asym = true,
                                           bool check_inv_n = true, bool check_quart_n = true, bool check_plan_n = true,
-                                          bool check_amide_n = true);
+                                          bool check_amide_n = true, bool check_res_ctrs = true);
 
 
         CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);

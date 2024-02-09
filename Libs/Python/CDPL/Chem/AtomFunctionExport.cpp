@@ -146,7 +146,7 @@ namespace
 
     MAKE_FUNCTION_WRAPPER5(std::size_t, getEnvironment, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, CDPL::Chem::Fragment&, bool);
 
-    MAKE_FUNCTION_WRAPPER7(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool, bool, bool, bool);
+    MAKE_FUNCTION_WRAPPER8(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool, bool, bool, bool, bool);
 
    
     std::string generateMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
@@ -265,10 +265,10 @@ void CDPLPythonChem::exportAtomFunctions()
     python::def("getContainingFragments", &getContainingFragmentsWrapper3,
                 (python::arg("atom"), python::arg("frag_list"), python::arg("cont_frag_list")),
                 python::with_custodian_and_ward<3, 2>());
-    python::def("isStereoCenter", &isStereoCenterWrapper7, 
+    python::def("isStereoCenter", &isStereoCenterWrapper8, 
                 (python::arg("atom"), python::arg("molgraph"), python::arg("check_asym") = true,
                  python::arg("check_inv_n") = true, python::arg("check_quart_n") = true, python::arg("check_plan_n") = true,
-                 python::arg("check_amide_n") = true));
+                 python::arg("check_amide_n") = true, python::arg("check_res_ctrs") = true));
     
     python::def("calcConfiguration", &calcConfigurationWrapper4,
                 (python::arg("atom"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
