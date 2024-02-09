@@ -145,11 +145,11 @@ ShapeScreenImpl::ShapeScreenImpl():
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
               value<std::size_t>(&numBestHits));
-    addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the 'best-hits' option, default: 0 - no limit).",
+    addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the --best-hits option, default: 0 - no limit).",
               value<std::size_t>(&maxNumHits));
     addOption("cutoff,x", "Score cutoff value which determines whether a database molecule is considered as a hit (default: 0.0 - no cutoff).",
               value<double>()->notifier(std::bind(&ShapeScreenImpl::setScoreCutoff, this, _1)));
-    addOption("shape-tanimoto-cutoff,X", "Shape tanimoto score cutoff that will be used for hit identifiaction in addition to the value specified by the 'cutoff' "
+    addOption("shape-tanimoto-cutoff,X", "Shape tanimoto score cutoff that will be used for hit identifiaction in addition to the value specified by the --cutoff "
               "option (default: 0.0 - no cutoff).",
               value<double>(&shapeScoreCutoff));
     addOption("merge-hits,M", "If true, identified hits are merged into a single, combined hit list. "
@@ -161,7 +161,7 @@ ShapeScreenImpl::ShapeScreenImpl():
               "poses get scored as they are (default: false).",
               value<bool>(&scoringOnly)->implicit_value(true));
     addOption("opt-overlay,a", "Specifies whether or not to perform an overlay optimization of the generated starting poses "
-              "(only in effect if option '--score-only' is false, default: true).",
+              "(only in effect if option --score-only is false, default: true).",
               value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::performOverlayOptimization, this, _1)));
     addOption("thorough-overlay-opt,z", "Specifies whether or not to perform a thorough overlay optimization of the generated starting poses "
               "(note: the screening time will increase significantly, default: false).",

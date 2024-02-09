@@ -559,21 +559,29 @@ ConfGenImpl::ConfGenImpl():
               value<std::string>()->notifier(std::bind(&ConfGenImpl::setOutputFormat, this, _1)));
     addOption("failed-format,F", "Failed molecule output file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier(std::bind(&ConfGenImpl::setFailedOutputFormat, this, _1)));
-    addOption("fixed-substr,j", "Fixed substructure template molecule file.",
+    addOption("fixed-substr,j", "Fixed substructure template molecule file. The given molecule can serve as source for fixed substructure "
+              "atom 3D coordinates and also as query for finding fixed substructure matches in the processed input molecules if a SMARTS "
+              "pattern has not been specified by option --fixed-substr-ptn. If the template molecule file does not provide "
+              "atom 3D coordinates then the coordinates of matched input molecule atoms will be used (if 3D coordinates are not provided either "
+              "way an error will be reported).",
               value<std::string>(&fixedSubstructFile));
-    addOption("fixed-substr-ptn,J", "Fixed substructure SMARTS pattern.",
+    addOption("fixed-substr-ptn,J", "SMARTS pattern for finding fixed substructure matches in the processed input molecules. If a template "
+              "molecule file has been specified by option --fixed-substr then matching atoms of that molecule will serve "
+              "as primary source for fixed atom 3D coordinates. Otherwise, the coordinates of matched input molecule atoms "
+              "will be used (if 3D coordinates are not provided either way an error will be reported).",
               value<std::string>(&fixedSubstructPtn));
-    addOption("fixed-substr-mcss,U", "Use maximum common substructure search to find fixed substructure matches in "
-              "the input molecules (default: false, using reqular substructure searching).", 
+    addOption("fixed-substr-mcss,U", "Use maximum common substructure search to find fixed substructure matches "
+              "(default: false, using reqular substructure searching).", 
               value<bool>(&fixedSubstructUseMCSS)->implicit_value(true));
-    addOption("fixed-substr-align,a", "Align conformers on fixed substructure atoms (default: false).", 
+    addOption("fixed-substr-align,a", "Align generated conformers on fixed substructure input atom positions (default: false).", 
               value<bool>(&fixedSubstructAlign)->implicit_value(true));
-    addOption("fixed-substr-min-atoms,p", "The minimum number of mapped atoms when using maximum common substructure search "
+    addOption("fixed-substr-min-atoms,p", "The minimum required number of matched atoms when using maximum common substructure searching "
               "to find fixed substructure matches (default: 2).", 
               value<std::size_t>(&fixedSubstructMCSSMinNumAtoms));
     addOption("fixed-substr-max-matches,Q", "The maximum number of considered fixed substructure matches (default: 1, 0 disables limit).", 
               value<std::size_t>(&fixedSubstructMaxNumMatches));
-    addOption("fixed-substr-ignore-h,^", "Ignore hydrogens in fixed substructure input (default: false).", 
+    addOption("fixed-substr-ignore-h,^", "Ignore hydrogens that are present in the specified fixed substructure template "
+              "molecule file (default: false).", 
               value<bool>(&fixedSubstructDelH)->implicit_value(true));
     
     addOptionLongDescriptions();
