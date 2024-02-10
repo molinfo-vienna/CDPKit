@@ -379,7 +379,7 @@ For systematic conformer sampling :program:`confgen V1.1` uses a new torsion lib
 from the torsion library V3.0 developed at the University of Hamburg, Center for Bioinformatics :cite:`doi:10.1021/acs.jcim.2c00043`.
 The new torsion library offers significant improvements over its predecessor which originate in corrections
 of torsion library entry matching orders and a higher number of analyzed high quality X-ray structures.
-Furthermore, the output conformer picking procedure has been refined and now results in not only structurally but also
+Furthermore, the output conformer picking procedure has been refined and now results in not only structurally, but also
 energetically more diverse conformer ensembles.
 Together these changes increase the average accuracy in the reproduction of experimental structure considerably (at the cost of slightly larger
 output ensembles and higher processing times for some settings). In order to quantify the accuracy improvements the *Platinum Diverse Dataset* benchmarks
@@ -477,7 +477,8 @@ New features
 .. rubric:: Energy window, RMSD and max. output ensemble size as a function of rotatable bond count
 
 It is now possible to specífy multiple values for energy window (option *--e-window*), RMSD threshold (option *--rmsd*) and max. output ensemble
-size (option *--max-num-out_confs*) settings where the value in effect depends on the rotatable bond count of the currently processed input molecule.
+size (option *--max-num-out_confs*). Which of the specified values takes effect depends on the rotatable bond count of the
+currently processed input molecule.
 Rotatable bond count dependent settings are specified as a list of pairs *RBC1 SV1 RBC2 SV2...* where RBC denotes the rotatable bond count and SV the
 value that applies if the  rotatable bond count of the processed molecule is *<= RBC*. The settings value associated with the lowest RBC that fulfills
 the latter condition takes precedence. If the rotatable bond count of the processed molecule is outside any defined range then the settings value
@@ -485,13 +486,13 @@ associated with the highest RBC will be used.
 
 **Example:** *5 50 10 100 12 200*
 
-Here, a rotatable bond count of *6* would lead to the selection of the value *100*. Rotatable bond counts <= *5* result in the value *50* and any bond counts > *10* in
-the selection of the value *200*.
+In this example a rotatable bond count of *6* leads to the selection of the value *100*. Rotatable bond counts <= *5* result in the value *50* and any rot. bond count > *10*
+in the value *200*.
    
 .. rubric:: Support for 'fixed' substructures
 
-Starting with version 1.1 :program:`confgen` supports the specification of input molecule substructures that shall be kept 'fixed' during the
-conformer generation process. Fixed substructure atom 3D coordinates can be supplied via a template molecule file (option *--fixed-substr*) or are
+Starting with version 1.1 :program:`confgen` supports the specification of substructures that have to be kept 'fixed' during
+conformer generation. Fixed substructure atom 3D coordinates can be supplied via a template molecule file (option *--fixed-substr*) or are
 taken from the processed input molecules. For a maximum of flexibility SMARTS patterns can be specified (*--fixed-substr-ptn* option) that allow
 for a more accurate description of the substructures to keep rigid. Available algorithms for finding matches between the input molecules
 and the specified substructure are standard substructure searching (the default) and maximum common substructure searching (MCSS, enabled by option
@@ -502,40 +503,35 @@ fixed substructure input atom positions (option *--fixed-substr-align*, by defau
 **Example:**
 
 Generation of a conformer ensemble for :download:`Erythromycin </downloads/erythromycin.smi>` where the maximum common substructure with
-:download:`Telithromycin </downloads/1p9x_B_TEL.sdf>` is kept rigid using fixed substructure atom 3D coordinates of the bound-state Telithromycin
-conformation found in complex `1P9X <https://www.rcsb.org/structure/1P9X>`_.
+:download:`Telithromycin </downloads/1p9x_B_TEL.sdf>` is kept rigid and atom 3D coordinates of the bound-state Telithromycin
+conformation in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_ define the fixed atom positions.
 
-.. figure:: /graphics/erythromycin.svg
-   :scale: 7%
-   :align: center
-   :alt: Erythromycin
 
-   Erythromycin
+.. list-table::
+   :width: 100%
 
-..
-
-.. figure:: /graphics/telithromycin.png
-   :scale: 25%
-   :align: center
-   :alt: Bound-state conformation of Telithromycin extracted from `1P9X <https://www.rcsb.org/structure/1P9X>`_
-
-   Bound-state conformation of Telithromycin extracted from 1P9X
-
-..
+   * - Erythromycin:
+     - Bound-state conformation of Telithromycin in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
+   * - .. image:: /graphics/erythromycin.svg
+           :scale: 7%
+           :align: center
+           :alt: Erythromycin
+     - .. image:: /graphics/telithromycin.png
+           :scale: 26%
+           :align: center
+           :alt: Bound-state conformation of Telithromycin in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
 
 Executing
 
 .. code-block:: shell
-
-   $ confgen -i erythromycin.smi -o tel_ery_confs.sdf -n 50 -j 1p9x_B_TEL.sdf -a -U
+           
+   $ confgen -i erythromycin.smi -o tel_ery_confs.sdf -m stochastic -n 50 -j 1p9x_B_TEL.sdf -a -U
 
 will generate the following conformer ensemble:
 
 .. figure:: /graphics/tel_ery_confs.png
-   :scale: 25%
+   :width: 45%
    :align: center
-   :alt: Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin 
+   :alt: Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin (shown for reference in green)
 
-   Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin (green)
-
-..
+   Conformations of Erythromycin generated with a fixed substructure derived from Telithromycin (shown for reference in green)
