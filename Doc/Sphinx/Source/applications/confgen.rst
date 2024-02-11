@@ -503,15 +503,15 @@ fixed substructure input atom positions (option *--fixed-substr-align*, by defau
 **Example:**
 
 Generation of a conformer ensemble for :download:`Erythromycin </downloads/erythromycin.smi>` where the maximum common substructure with
-:download:`Telithromycin </downloads/1p9x_B_TEL.sdf>` is kept rigid and atom 3D coordinates of the bound-state Telithromycin
-conformation in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_ define the fixed atom positions.
+:download:`Telithromycin </downloads/1p9x_B_TEL.sdf>` is kept rigid and atom 3D coordinates taken from the active conformation of Telithromycin
+in complex `1P9X <https://www.rcsb.org/structure/1P9X>`_ are used as fixed atom positions.
 
 
 .. list-table::
    :width: 100%
 
    * - Erythromycin:
-     - Bound-state conformation of Telithromycin in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
+     - Bound-state conformation of Telithromycin in complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
    * - .. image:: /graphics/erythromycin.svg
            :scale: 7%
            :align: center
@@ -519,7 +519,7 @@ conformation in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_ define
      - .. image:: /graphics/telithromycin.png
            :scale: 26%
            :align: center
-           :alt: Bound-state conformation of Telithromycin in the complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
+           :alt: Bound-state conformation of Telithromycin in complex `1P9X <https://www.rcsb.org/structure/1P9X>`_:
 
 Executing
 
