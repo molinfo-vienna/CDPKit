@@ -494,7 +494,7 @@ in the value *200*.
 Starting with version 1.1 :program:`confgen` supports the specification of substructures that have to be kept 'fixed' during
 conformer generation. Fixed substructure atom 3D coordinates can be supplied via a template molecule file (option *--fixed-substr*) or are
 taken from the processed input molecules. For a maximum of flexibility SMARTS patterns can be specified (*--fixed-substr-ptn* option) that allow
-for a more accurate description of the substructures to keep rigid. Available algorithms for finding matches between the input molecules
+for a detailed and accurate description of the substructures to keep fixed. Available algorithms for finding matches between the input molecules
 and the specified substructure are standard substructure searching (the default) and maximum common substructure searching (MCSS, enabled by option
 *--fixed-substr-mcss*). Further options control the number of considered fixed substructure matches (option *--fixed-substr-max-matches*), the minimum
 matched substructure size (if MCSS is enabled, option *--fixed-substr-min-atoms*) and whether the generated conformers shall be aligned on
