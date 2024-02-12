@@ -119,7 +119,7 @@ if(MSVC)
       ${cdpl-confgen_LIB_SRCS}
       DLLMain.cpp
       "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc"
-      "${CMAKE_CURRENT_BINARY_DIR}/TorsiontLibraryData.rc")
+      "${CMAKE_CURRENT_BINARY_DIR}/TorsionLibraryData.rc")
 endif()
   
 link_libraries(${Boost_IOSTREAMS_LIBRARY})
