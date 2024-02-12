@@ -67,7 +67,7 @@ void ConfGen::TorsionLibrary::save(std::ostream& os) const
 
 void ConfGen::TorsionLibrary::loadDefaults()
 {
-    TorsionLibraryDataReader().read(TorsionLibraryData::get().first, *this);
+    TorsionLibraryDataReader().read(TorsionLibraryData::get(), *this);
 }
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)

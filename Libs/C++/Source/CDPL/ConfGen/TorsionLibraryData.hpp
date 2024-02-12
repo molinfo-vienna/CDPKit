@@ -25,9 +25,6 @@
 #ifndef CDPL_CONFGEN_TORSIONLIBRARYDATA_HPP
 #define CDPL_CONFGEN_TORSIONLIBRARYDATA_HPP
 
-#include <cstddef>
-#include <utility>
-
 
 namespace CDPL
 {
@@ -38,7 +35,7 @@ namespace CDPL
         namespace TorsionLibraryData
         {
 
-            std::pair<const char*, std::size_t> get();
+            const char* get();
 
         } // namespace TorsionLibraryData
     } // namespace ConfGen

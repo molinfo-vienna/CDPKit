@@ -49,12 +49,12 @@ namespace CDPL
                 #include "TorsionLibrary.xml.str"
                 ;
 
-            std::pair<const char*, std::size_t> get()
+            const char* get()
             {
-                return std::make_pair(BUILTIN_TOR_LIB_DATA, sizeof(BUILTIN_TOR_LIB_DATA) - 1);
+                return BUILTIN_TOR_LIB_DATA;
             }
 #else
-            std::pair<const char*, std::size_t> get()
+            const char* get()
             {
                 HRSRC res = FindResource(DLLMain::hInstance_DLL, "TOR_LIB_DATA", RT_RCDATA);
 
@@ -66,11 +66,7 @@ namespace CDPL
                 if (!res_handle)
                     throw Base::IOError("TorsionLibraryData: could not load builtin torsion library data");
 
-                const char* res_data = static_cast<const char*>(LockResource(res_handle));
-
-                DWORD res_data_len = SizeofResource(DLLMain::hInstance_DLL, res);
-
-                return std::make_pair(res_data, res_data_len);
+                return static_cast<const char*>(LockResource(res_handle));
             }
 
 #endif // !_MSC_VER
