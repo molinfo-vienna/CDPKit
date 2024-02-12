@@ -32,8 +32,6 @@
 #include <cstddef>
 #include <cmath>
 
-#include "CDPL/ForceField/APIPrefix.hpp"
-
 
 namespace CDPL
 {
@@ -41,7 +39,7 @@ namespace CDPL
     namespace ForceField
     {
 
-        class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteraction
+        class MMFF94VanDerWaalsInteraction
         {
 
           public:

@@ -31,8 +31,6 @@
 
 #include <cstddef>
 
-#include "CDPL/ForceField/APIPrefix.hpp"
-
 
 namespace CDPL
 {
@@ -43,7 +41,7 @@ namespace CDPL
         /*
          * \since 1.1
          */
-        class CDPL_FORCEFIELD_API ElasticPotential
+        class ElasticPotential
         {
 
           public:

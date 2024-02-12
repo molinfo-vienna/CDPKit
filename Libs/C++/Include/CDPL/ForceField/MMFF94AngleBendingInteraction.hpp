@@ -31,8 +31,6 @@
 
 #include <cstddef>
 
-#include "CDPL/ForceField/APIPrefix.hpp"
-
 
 namespace CDPL
 {
@@ -40,7 +38,7 @@ namespace CDPL
     namespace ForceField
     {
 
-        class CDPL_FORCEFIELD_API MMFF94AngleBendingInteraction
+        class MMFF94AngleBendingInteraction
         {
 
           public:
