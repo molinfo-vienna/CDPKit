@@ -31,6 +31,7 @@
 
 #include "TorsionLibraryDataReader.hpp"
 #include "TorsionLibraryDataWriter.hpp"
+#include "TorsionLibraryData.hpp"
 
 
 using namespace CDPL;
@@ -38,14 +39,7 @@ using namespace CDPL;
 
 namespace
 {
-    // clang-format off
 
-    const char* BUILTIN_TOR_LIB_DATA =
-        #include "TorsionLibrary.xml.str"
-        ;
-
-    // clang-format on
-    
     ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
 
     std::once_flag initBuiltinTorLibFlag;
@@ -73,7 +67,7 @@ void ConfGen::TorsionLibrary::save(std::ostream& os) const
 
 void ConfGen::TorsionLibrary::loadDefaults()
 {
-    TorsionLibraryDataReader().read(BUILTIN_TOR_LIB_DATA, *this);
+    TorsionLibraryDataReader().read(TorsionLibraryData::get().first, *this);
 }
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)

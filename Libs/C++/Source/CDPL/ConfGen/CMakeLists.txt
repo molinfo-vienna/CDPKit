@@ -24,14 +24,14 @@
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 set(DATA_FILES
-    TorsionLibrary.xml
     FallbackTorsionLibrary.xml
    )
 
 if(MSVC)
   configure_file(FragmentLibraryData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc" @ONLY)
+  configure_file(TorsionLibraryData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/TorsionLibraryData.rc" @ONLY)
 else()
-  set(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl)
+  set(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl TorsionLibrary.xml)
 endif()
     
 foreach(DATA_FILE ${DATA_FILES})
@@ -61,6 +61,7 @@ set(cdpl-confgen_LIB_SRCS
     FragmentLibrary.cpp
     FragmentLibraryData.cpp
     TorsionLibrary.cpp
+    TorsionLibraryData.cpp
     TorsionRule.cpp
     TorsionCategory.cpp
     TorsionRuleMatch.cpp
@@ -114,7 +115,11 @@ set(cdpl-confgen_LIB_SRCS
    )
 
 if(MSVC)
-  set(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc")
+  set(cdpl-confgen_LIB_SRCS
+      ${cdpl-confgen_LIB_SRCS}
+      DLLMain.cpp
+      "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc"
+      "${CMAKE_CURRENT_BINARY_DIR}/TorsiontLibraryData.rc")
 endif()
   
 link_libraries(${Boost_IOSTREAMS_LIBRARY})

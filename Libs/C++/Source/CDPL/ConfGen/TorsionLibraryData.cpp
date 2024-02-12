@@ -1,5 +1,5 @@
 /* 
- * FragmentLibraryData.cpp 
+ * TorsionLibraryData.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "FragmentLibraryData.hpp"
+#include "TorsionLibraryData.hpp"
 
 #ifdef _MSC_VER
 # include "DLLMain.hpp"
@@ -39,32 +39,32 @@ namespace CDPL
     namespace ConfGen
     {
 
-        namespace FragmentLibraryData
+        namespace TorsionLibraryData
         {
             // clang-format off
 
 #ifndef _MSC_VER
 
-            const char BUILTIN_FRAG_LIB_DATA[] =
-                #include "FragmentLibrary.cfl.str"
+            const char BUILTIN_TOR_LIB_DATA[] =
+                #include "TorsionLibrary.xml.str"
                 ;
 
             std::pair<const char*, std::size_t> get()
             {
-                return std::make_pair(BUILTIN_FRAG_LIB_DATA, sizeof(BUILTIN_FRAG_LIB_DATA) - 1);
+                return std::make_pair(BUILTIN_TOR_LIB_DATA, sizeof(BUILTIN_TOR_LIB_DATA) - 1);
             }
 #else
             std::pair<const char*, std::size_t> get()
             {
-                HRSRC res = FindResource(DLLMain::hInstance_DLL, "FRAG_LIB_DATA", RT_RCDATA);
+                HRSRC res = FindResource(DLLMain::hInstance_DLL, "TOR_LIB_DATA", RT_RCDATA);
 
                 if (!res)
-                    throw Base::IOError("FragmentLibraryData: could not find builtin fragment library data resource record");
+                    throw Base::IOError("TorsionLibraryData: could not find builtin torsion library data resource record");
 
                 HGLOBAL res_handle = LoadResource(DLLMain::hInstance_DLL, res);
 
                 if (!res_handle)
-                    throw Base::IOError("FragmentLibraryData: could not load builtin fragment library data");
+                    throw Base::IOError("TorsionLibraryData: could not load builtin torsion library data");
 
                 const char* res_data = static_cast<const char*>(LockResource(res_handle));
 
@@ -76,6 +76,6 @@ namespace CDPL
 #endif // !_MSC_VER
 
             // clang-format on
-        } // namespace FragmentLibraryData
+        } // namespace TorsionLibraryData
     } // namespace ConfGen
 } // namespace CDPL
