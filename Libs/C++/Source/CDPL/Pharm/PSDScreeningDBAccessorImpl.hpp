@@ -115,9 +115,9 @@ namespace CDPL
             MolIDConfIdxPairArray      pharmIdxToMolIDConfIdxMap;
             MolIDConfIdxToPharmIdxMap  molIDConfIdxToPharmIdxMap;
             Internal::ByteBuffer       byteBuffer;
+            Base::ControlParameterList controlParams;
             CDFPharmacophoreDataReader pharmReader;
             Chem::CDFDataReader        molReader;
-            Base::ControlParameterList controlParams;
         };
     } // namespace Pharm
 } // namespace CDPL
