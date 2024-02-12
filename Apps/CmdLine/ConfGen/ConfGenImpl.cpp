@@ -587,6 +587,8 @@ ConfGenImpl::ConfGenImpl():
     addOptionLongDescriptions();
 }
 
+ConfGenImpl::~ConfGenImpl() {}
+
 const char* ConfGenImpl::getProgName() const
 {
     return "CONFORGE";

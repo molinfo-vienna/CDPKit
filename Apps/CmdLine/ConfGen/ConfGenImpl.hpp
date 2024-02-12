@@ -62,6 +62,8 @@ namespace ConfGen
       public:
         ConfGenImpl();
 
+        ~ConfGenImpl();
+      
       private:
         typedef std::vector<std::string> StringList;
 

@@ -62,6 +62,8 @@ namespace StructGen
       public:
         StructGenImpl();
 
+        ~StructGenImpl();
+      
       private:
         const char* getProgName() const;
         const char* getProgAboutText() const;

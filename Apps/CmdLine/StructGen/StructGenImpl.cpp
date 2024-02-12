@@ -512,6 +512,8 @@ StructGenImpl::StructGenImpl():
     addOptionLongDescriptions();
 }
 
+StructGenImpl::~StructGenImpl() {}
+
 const char* StructGenImpl::getProgName() const
 {
     return "StructGen";
