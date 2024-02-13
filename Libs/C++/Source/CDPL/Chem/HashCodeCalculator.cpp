@@ -173,10 +173,10 @@ std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHas
             return boost::math::prime(ATOM_CONFIG_S_IDX);
 
         case CIPDescriptor::M: 
-            return boost::math::prime(ATOM_CONFIG_R_IDX);
+            return boost::math::prime(ATOM_CONFIG_M_IDX);
 
         case CIPDescriptor::P: 
-            return boost::math::prime(ATOM_CONFIG_S_IDX);
+            return boost::math::prime(ATOM_CONFIG_P_IDX);
 
         case CIPDescriptor::r: 
             return boost::math::prime(ATOM_CONFIG_r_IDX);
