@@ -411,6 +411,17 @@ set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME_WITH_VERSION}")
 set(CPACK_SOURCE_GENERATOR "TGZ")
 set(CPACK_SOURCE_IGNORE_FILES "/[.]git/;.*#$;.*~$;cscope.*")
 
+set(CPACK_COMPONENTS_ALL 
+  Documentation
+  Examples
+  CDPLSharedLibraries
+  CDPLImportLibraries
+  CDPLStaticLibraries
+  CDPLHeaderFiles
+  CDPLPythonModules
+  Applications 
+)
+  
 if(WIN32)
   set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Applications")
   set(CPACK_COMPONENT_CDPLSTATICLIBRARIES_DISPLAY_NAME "Static Libraries")
@@ -434,17 +445,6 @@ if(WIN32)
   set(CPACK_COMPONENT_CDPLIMPORTLIBRARIES_DISPLAY_NAME "DLL Import Libraries")
   set(CPACK_COMPONENT_CDPLIMPORTLIBRARIES_GROUP CXXDevelopment)
 
-  set(CPACK_COMPONENTS_ALL 
-    Documentation
-    Examples
-    CDPLSharedLibraries
-    CDPLImportLibraries
-    CDPLStaticLibraries
-    CDPLHeaderFiles
-    CDPLPythonModules
-    Applications 
-    )
-  
   set(CPACK_GENERATOR "NSIS")
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME_WITH_VERSION}-Win-${CMAKE_CXX_COMPILER_ID}-${CMAKE_SYSTEM_PROCESSOR}")
   set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "${PROJECT_NAME}")
