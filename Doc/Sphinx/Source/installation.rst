@@ -52,14 +52,14 @@ Installation from source
 Build requirements
 ^^^^^^^^^^^^^^^^^^
 
-Compilation of the CDPKit sources requires a properly set up build environment. This includes a C++ compiler toolchain that supports the C++11 standard,
+Compilation of the CDPKit sources requires a properly set up build environment. This includes a C++ compiler toolchain that supports the C++17 standard,
 the `CMake <https://cmake.org/>`_ makefile generator, and the development version of several software libraries. The following table provides a complete
 list of the CDPKit build requirements and dependencies:
 
 =============================  =============  ================================================================================
 Build requirement              Version        Comment
 =============================  =============  ================================================================================
-C++11 compliant compiler [#]_  \-             mandatory
+C++17 compliant compiler [#]_  \-             mandatory
 cmake                          3.17+          mandatory
 Python interpreter             3.6+           mandatory
 boost-devel                    1.63+          mandatory
@@ -279,7 +279,7 @@ here. However, since a full-featured CDPKit build is not required the list of re
 =============================  =============  ================================================================================
 Build requirement              Version        Comment
 =============================  =============  ================================================================================
-C++11 compliant compiler       \-             mandatory
+C++17 compliant compiler       \-             mandatory
 Python interpreter             3.6+           mandatory, implicitly fulfilled
 boost-devel                    1.63+          mandatory
 boost-python3-devel            1.63+          mandatary

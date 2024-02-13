@@ -34,7 +34,7 @@ More elaborate installation instructions can be found [here](https://cdpkit.org/
 #### Installation from source
 
 Build requirements and dependencies:
-- C++11 compliant compiler (mandatory)
+- C++17 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel V3.x (optional) and Python V3.x interpreter (mandatory)
@@ -100,7 +100,7 @@ If available for your platform and Python version, this command will directly in
 of the CDPL Python bindings. If a matching binary package cannot be found, the source code package will be downloaded and an on-the-fly
 build is attempted. For a successful build the following requirements and dependencies apply:
 
-- C++11 compliant compiler (mandatory)
+- C++17 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - cairo-devel (V >= 1.14, optional)
