@@ -115,7 +115,7 @@ Vis::Path2D::FillRule Vis::Path2D::getFillRule() const
 
 void Vis::Path2D::moveTo(double x, double y)
 {
-    elements.push_back({Element::MOVE_TO, x, y});
+    elements.push_back({Element::MOVE_TO, {x, y}});
 }
 
 void Vis::Path2D::moveTo(const Math::Vector2D& pos)
@@ -136,7 +136,7 @@ void Vis::Path2D::arc(const Math::Vector2D& ctr, double rx, double ry, double st
 
 void Vis::Path2D::arcTo(double cx, double cy, double rx, double ry, double start_ang, double sweep)
 {
-    elements.push_back({Element::ARC_TO, cx, cy, rx, ry, start_ang, sweep});
+    elements.push_back({Element::ARC_TO, {cx, cy, rx, ry, start_ang, sweep}});
 }
 
 void Vis::Path2D::arcTo(const Math::Vector2D& ctr, double rx, double ry, double start_ang, double sweep)
@@ -146,7 +146,7 @@ void Vis::Path2D::arcTo(const Math::Vector2D& ctr, double rx, double ry, double 
 
 void Vis::Path2D::lineTo(double x, double y)
 {
-    elements.push_back({Element::LINE_TO, x, y});
+    elements.push_back({Element::LINE_TO, {x, y}});
 }
 
 void Vis::Path2D::lineTo(const Math::Vector2D& pos)
