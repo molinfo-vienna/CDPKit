@@ -1,4 +1,4 @@
-set(BINARY_FILE "${CMAKE_INSTALL_PREFIX}/@CDPKIT_LIBRARY_INSTALL_DIR@/libcdpl-vis-qt.dylib...")
+set(BINARY_FILE "${CMAKE_INSTALL_PREFIX}/@CDPKIT_LIBRARY_INSTALL_DIR@/libcdpl-vis-qt.dylib")
 
 message(" -- Signing ${BINARY_FILE}")
 
