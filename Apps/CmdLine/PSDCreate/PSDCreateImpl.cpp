@@ -29,7 +29,13 @@
 #include <chrono>
 #include <functional>
 
-#include <boost/filesystem.hpp>
+#ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
+# include <filesystem>
+# define FILESYSTEM_NS std::filesystem
+#else
+# include <boost/filesystem.hpp>
+# define FILESYSTEM_NS boost::filesystem
+#endif
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -174,7 +180,7 @@ PSDCreateImpl::PSDCreateImpl():
               value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
     addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier(std::bind(&PSDCreateImpl::setInputFormat, this, _1)));
-    addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().string() + "')", 
+    addOption("tmp-file-dir,T", "Temporary file directory (default: '" + FILESYSTEM_NS::temp_directory_path().string() + "')", 
               value<std::string>()->notifier(std::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
     addOption("add-src-file-prop,s", "Add a source-file property to output molecules (default: false).", 
               value<bool>(&addSourceFileProp)->implicit_value(true));
@@ -243,9 +249,9 @@ void PSDCreateImpl::setInputFormat(const std::string& file_ext)
 
 void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 {
-    namespace bfs = boost::filesystem;
+    namespace fsns = FILESYSTEM_NS;
 
-    if (!bfs::exists(dir_path) || !bfs::is_directory(dir_path))
+    if (!fsns::exists(dir_path) || !fsns::is_directory(dir_path))
         throwValidationError("tmp-file-dir");
 
 #ifdef _WIN32
@@ -495,7 +501,7 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
                 if (reader_id != 0) {
                     CDPL::Chem::StringDataBlock::SharedPointer sd_ptr = getStructureData(mol);
 
-                    sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().string());
+                    sd_ptr->addEntry("<Source File>", FILESYSTEM_NS::path(inputFiles[reader_id - 1]).filename().string());
                 }
             }
 

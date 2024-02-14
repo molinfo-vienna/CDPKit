@@ -42,7 +42,13 @@ configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 target_link_libraries(psdcreate cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
-  cdpl-pharm-shared ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} Threads::Threads)
+  cdpl-pharm-shared Threads::Threads)
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  target_link_libraries(psdcreate PRIVATE std::filesystem)
+else()
+  target_link_libraries(psdcreate ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+endif(CXX_FILESYSTEM_HAVE_FS)
 
 install(TARGETS psdcreate DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
