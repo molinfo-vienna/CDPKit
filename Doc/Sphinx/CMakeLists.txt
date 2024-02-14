@@ -41,14 +41,25 @@ if(SPHINX_FOUND)
   set(SPHINX_PROC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/ProcSource")
   set(SPHINX_BUILD_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
-  add_custom_target(sphinx-doc
-    ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
-    COMMAND "${PYTHON_EXECUTABLE}" "${SPHINX_EXECUTABLE}"
-    -q -a -n -E -b html
-    -c "${SPHINX_BUILD_SOURCE_DIR}"
-    "${SPHINX_BUILD_SOURCE_DIR}"
-    "${CMAKE_CURRENT_BINARY_DIR}/html"
-    COMMENT "-- Running Sphinx...")
+  if(WIN32)
+    add_custom_target(sphinx-doc
+      ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
+      COMMAND "${PYTHON_EXECUTABLE}" "${SPHINX_EXECUTABLE}"
+      -q -a -n -E -b html
+      -c "${SPHINX_BUILD_SOURCE_DIR}"
+      "${SPHINX_BUILD_SOURCE_DIR}"
+      "${CMAKE_CURRENT_BINARY_DIR}/html"
+      COMMENT "-- Running Sphinx...")
+  else()
+    add_custom_target(sphinx-doc
+      ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
+      COMMAND "${SPHINX_EXECUTABLE}"
+      -q -a -n -E -b html
+      -c "${SPHINX_BUILD_SOURCE_DIR}"
+      "${SPHINX_BUILD_SOURCE_DIR}"
+      "${CMAKE_CURRENT_BINARY_DIR}/html"
+      COMMENT "-- Running Sphinx...")
+  endif(WIN32)
 
   file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
     "file(COPY \"${SPHINX_SOURCE_DIR}\" DESTINATION \"${CMAKE_CURRENT_BINARY_DIR}\" PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)\n"
