@@ -1,3 +1,10 @@
+Master:
+
+ - Maximum considered Python version in Manylinux2014-based wheel builds is now 3.12
+ - Rewrote code that uses the boost filesystem library to use c++17 equivalents (conditional, only if properly implemented
+   by the compiler)
+ - Increased minimum C++ standard that has to be supported by the compiler to C++17
+
 V1.1.0:
  - The tool 'tautgen' provides two new tautomer generation modes BEST_SCORING and BEST_SCORING_UNIQUE
    (the new default mode) for generating only the chemically most reasonable tautomers
