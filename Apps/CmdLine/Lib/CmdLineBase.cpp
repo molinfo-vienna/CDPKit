@@ -33,9 +33,16 @@
 #include <chrono>
 #include <functional>
 
+#ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
+# include <filesystem>
+# define FILESYSTEM_NS std::filesystem
+#else
+# include <boost/filesystem.hpp>
+# define FILESYSTEM_NS boost::filesystem
+#endif
+
 #include <boost/program_options/parsers.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/tokenizer.hpp>
 
@@ -159,7 +166,7 @@ int CmdLineBase::run(int argc, char* argv[])
 
     } catch (const std::exception& e) {
         std::cerr << "Error while processing command line: " << e.what() << std::endl;
-        std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().string()
+        std::cerr << "Try '" << FILESYSTEM_NS::path(argv[0]).filename().string()
                   <<  " -h' for more information." << std::endl;
         return EXIT_FAILURE;
     }
@@ -513,7 +520,7 @@ void CmdLineBase::printUsage(const char* bin_path) const
     namespace po = boost::program_options;
 
     std::cerr << "Usage: " << std::endl;
-    std::cerr << "  " << boost::filesystem::path(bin_path).filename().string();
+    std::cerr << "  " << FILESYSTEM_NS::path(bin_path).filename().string();
 
     const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
 

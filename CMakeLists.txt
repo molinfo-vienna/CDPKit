@@ -208,15 +208,29 @@ if(NOT Threads_FOUND)
   message("!! Warning: Multi-threading support not available -> commandline applications won't be built.")
 endif(NOT Threads_FOUND)
 
+find_package(Filesystem COMPONENTS Final)
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAVE_CXX17_FILESYSTEM_SUPPORT")
+endif(CXX_FILESYSTEM_HAVE_FS)
+
 set(Boost_USE_MULTITHREAD ON)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_ADDITIONAL_VERSIONS "1.74.0" "1.75.0" "1.76.0" "1.77.0" "1.78.0" "1.79.0" "1.80.0" "1.82.0" "1.83.0" "1.84.0")
 
 if(PYPI_PACKAGE_BUILD)
-  find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system)
+  if(CXX_FILESYSTEM_HAVE_FS)
+    find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams)
+  else()
+    find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system)
+  endif(CXX_FILESYSTEM_HAVE_FS)
 else()
-  find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework)
-  
+  if(CXX_FILESYSTEM_HAVE_FS)
+    find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams OPTIONAL_COMPONENTS program_options unit_test_framework)
+  else()
+    find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework)
+  endif(CXX_FILESYSTEM_HAVE_FS)
+
   if(NOT Boost_PROGRAM_OPTIONS_FOUND)
     message("!! Warning: Boost program_options library not found -> commandline applications won't be built.")
   endif(NOT Boost_PROGRAM_OPTIONS_FOUND)
