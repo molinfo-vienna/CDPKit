@@ -36,7 +36,7 @@ set_target_properties(cmdline-static PROPERTIES
 target_link_libraries(cmdline-static ${Boost_PROGRAM_OPTIONS_LIBRARY})
 
 if(CXX_FILESYSTEM_HAVE_FS)
-  target_link_libraries(cmdline-static PRIVATE std::filesystem)
+  target_link_libraries(cmdline-static std::filesystem)
 else()
   target_link_libraries(cmdline-static ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 endif(CXX_FILESYSTEM_HAVE_FS)

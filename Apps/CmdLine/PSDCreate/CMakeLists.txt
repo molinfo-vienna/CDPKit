@@ -45,7 +45,7 @@ target_link_libraries(psdcreate cmdline-static cdpl-util-shared cdpl-base-shared
   cdpl-pharm-shared Threads::Threads)
 
 if(CXX_FILESYSTEM_HAVE_FS)
-  target_link_libraries(psdcreate PRIVATE std::filesystem)
+  target_link_libraries(psdcreate std::filesystem)
 else()
   target_link_libraries(psdcreate ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 endif(CXX_FILESYSTEM_HAVE_FS)
