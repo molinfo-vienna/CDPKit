@@ -26,9 +26,18 @@
 # include <stdlib.h>
 #endif
 
-#include <boost/filesystem.hpp>
+# include <random>
+
+#ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
+# include <filesystem>
+# define FILESYSTEM_NS std::filesystem
+#else
+# include <boost/filesystem.hpp>
+# define FILESYSTEM_NS boost::filesystem
+#endif
 
 #include "CDPL/Util/FileFunctions.hpp"
+
 
 #if defined(unix) || defined(__unix__) || defined(__unix)
 namespace
@@ -43,41 +52,62 @@ namespace
 }
 #endif
 
+namespace
+{
+
+    std::string generateRandomName(const std::string& ptn)
+    {
+        static const char characters[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+        static std::random_device rand_dev;
+
+        std::mt19937 rand_gen(rand_dev());
+        std::uniform_int_distribution<int> rand_dist(0, sizeof(characters) - 2);        
+        std::string name;
+        
+        for (char c : ptn)
+            if (c == '%')
+                name.push_back(characters[rand_dist(rand_gen)]);
+            else
+                name.push_back(c);
+        
+        return name;
+    }
+}
+
 
 using namespace CDPL;
 
 
 std::string Util::genCheckedTempFilePath(const std::string& dir, const std::string& ptn)
 {
-    namespace bfs = boost::filesystem;
+    namespace fsns = FILESYSTEM_NS;
 
-    bfs::path prefix(dir);
+    fsns::path prefix(dir);
 
     if (prefix.empty())
-        prefix = bfs::temp_directory_path();
+        prefix = fsns::temp_directory_path();
 
     while (true) {
-        bfs::path tmp_file_path = prefix;
+        fsns::path tmp_file_path = prefix;
 
-        tmp_file_path /= bfs::unique_path(ptn);
+        tmp_file_path /= generateRandomName(ptn);
 
-        if (!bfs::exists(tmp_file_path))
+        if (!fsns::exists(tmp_file_path))
             return tmp_file_path.string();
     }
 }
 
 bool Util::checkIfSameFile(const std::string& path1, const std::string& path2) 
 {
-    namespace bfs = boost::filesystem;
+    namespace fsns = FILESYSTEM_NS;
 
-    if (bfs::exists(path1) && bfs::exists(path2))
-        return bfs::equivalent(path1, path2);
+    if (fsns::exists(path1) && fsns::exists(path2))
+        return fsns::equivalent(path1, path2);
 
-    return (bfs::absolute(path1) == bfs::absolute(path2));
+    return (fsns::absolute(path1) == fsns::absolute(path2));
 }
 
 bool Util::fileExists(const std::string& path) 
 {
-    return boost::filesystem::exists(path);
+    return FILESYSTEM_NS::exists(path);
 }
-

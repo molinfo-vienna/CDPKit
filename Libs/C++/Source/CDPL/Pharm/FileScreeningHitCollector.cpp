@@ -27,7 +27,13 @@
 #include <string>
 #include <algorithm>
 
-#include <boost/filesystem.hpp>
+#ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
+# include <filesystem>
+# define FILESYSTEM_NS std::filesystem
+#else
+# include <boost/filesystem.hpp>
+# define FILESYSTEM_NS boost::filesystem
+#endif
 
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
@@ -155,7 +161,7 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 
     if (optDBName)
         struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
-                             boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
+                             FILESYSTEM_NS::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
 
     if (optMolIndex) {
         struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 

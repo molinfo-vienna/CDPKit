@@ -22,7 +22,13 @@
  */
 
 
-#include <boost/filesystem.hpp>
+#ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
+# include <filesystem>
+# define FILESYSTEM_NS std::filesystem
+#else
+# include <boost/filesystem.hpp>
+# define FILESYSTEM_NS boost::filesystem
+#endif
 
 #include "CDPL/Util/FileRemover.hpp"
 
@@ -32,7 +38,9 @@ using namespace CDPL;
 
 Util::FileRemover::~FileRemover()
 {
-    try { removeFile(); } catch (...) {}
+    try {
+        removeFile();
+    } catch (...) {}
 }
 
 const std::string& Util::FileRemover::getPath() const
@@ -54,7 +62,7 @@ void Util::FileRemover::release()
 Util::FileRemover& Util::FileRemover::operator=(FileRemover& rhs)
 {
     if (this == &rhs)
-    return *this;
+        return *this;
 
     removeFile();
     path.swap(rhs.path);
@@ -65,7 +73,7 @@ Util::FileRemover& Util::FileRemover::operator=(FileRemover& rhs)
 void Util::FileRemover::removeFile()
 {
     if (!path.empty()) {
-    boost::filesystem::remove(path);
-    path.clear();
+        FILESYSTEM_NS::remove(path);
+        path.clear();
     }
 }

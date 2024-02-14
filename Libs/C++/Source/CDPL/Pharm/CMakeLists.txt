@@ -135,7 +135,13 @@ set(cdpl-pharm_LIB_SRCS
     QueryTwoPointPharmacophore.cpp
    )
  
-link_libraries(${Boost_IOSTREAMS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+link_libraries(${Boost_IOSTREAMS_LIBRARY})
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  link_libraries(std::filesystem)
+else()
+  link_libraries(${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+endif(CXX_FILESYSTEM_HAVE_FS)
 
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:sqlite3> $<TARGET_OBJECTS:cdpl-internal>)

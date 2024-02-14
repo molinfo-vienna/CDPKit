@@ -29,7 +29,13 @@ set(cdpl-util_LIB_SRCS
     FileFunctions.cpp
    )
 
-link_libraries(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+link_libraries(${Boost_IOSTREAMS_LIBRARY})
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  link_libraries(std::filesystem)
+else()
+  link_libraries(${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+endif(CXX_FILESYSTEM_HAVE_FS)
 
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
