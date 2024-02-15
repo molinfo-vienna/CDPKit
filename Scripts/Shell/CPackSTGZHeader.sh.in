@@ -44,7 +44,7 @@ cpack_echo_exit()
 # Display version
 cpack_version()
 {
-  echo "@CPACK_PACKAGE_NAME@ Installer Version: @CPACK_PACKAGE_VERSION@, Copyright (c) @CPACK_PACKAGE_VENDOR@"
+  echo "@CPACK_PACKAGE_NAME@ Installer Version: @CPACK_PACKAGE_VERSION@, Copyright (C) @CPACK_PACKAGE_VENDOR@"
 }
 
 # Helper function to fix windows paths.
@@ -158,6 +158,8 @@ sed -i '/^Icon=/d' "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
 
 echo "Exec=${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox" >> "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
 echo "Icon=${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.png" >> "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
+
+chown $(id -u).$(id -g) -R "${toplevel}"
 
 echo "Unpacking finished successfully"
 echo ""
