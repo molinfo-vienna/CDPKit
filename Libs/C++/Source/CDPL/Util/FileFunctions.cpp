@@ -26,7 +26,8 @@
 # include <stdlib.h>
 #endif
 
-# include <random>
+#include <random>
+#include <mutex>
 
 #ifdef HAVE_CXX17_FILESYSTEM_SUPPORT
 # include <filesystem>
@@ -55,18 +56,27 @@ namespace
 namespace
 {
 
+    std::random_device::result_type getRandomSeed()
+    {
+        static std::random_device rand_dev;
+        static std::mutex rand_dev_mtx;
+
+        std::lock_guard<std::mutex> lock(rand_dev_mtx);
+        
+        return rand_dev();
+    }
+    
     std::string generateRandomName(const std::string& ptn)
     {
-        static const char characters[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-        static std::random_device rand_dev;
+        static const char alphabet[] = "0123456789abcdefghijklmnopqrstuvwxyz";
 
-        std::mt19937 rand_gen(rand_dev());
-        std::uniform_int_distribution<int> rand_dist(0, sizeof(characters) - 2);        
+        std::mt19937 rand_gen(getRandomSeed());
+        std::uniform_int_distribution<std::size_t> rand_dist(0, sizeof(alphabet) - 2);        
         std::string name;
         
         for (char c : ptn)
             if (c == '%')
-                name.push_back(characters[rand_dist(rand_gen)]);
+                name.push_back(alphabet[rand_dist(rand_gen)]);
             else
                 name.push_back(c);
         
@@ -82,13 +92,8 @@ std::string Util::genCheckedTempFilePath(const std::string& dir, const std::stri
 {
     namespace fsns = FILESYSTEM_NS;
 
-    fsns::path prefix(dir);
-
-    if (prefix.empty())
-        prefix = fsns::temp_directory_path();
-
     while (true) {
-        fsns::path tmp_file_path = prefix;
+        fsns::path tmp_file_path = (dir.empty() ? fsns::temp_directory_path() : fsns::path(dir)) / generateRandomName(ptn);
 
         tmp_file_path /= generateRandomName(ptn);
 
