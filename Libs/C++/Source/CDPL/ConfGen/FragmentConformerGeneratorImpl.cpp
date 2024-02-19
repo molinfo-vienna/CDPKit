@@ -69,7 +69,7 @@ namespace
     const std::size_t MAX_CONF_DATA_CACHE_SIZE            = 500;
     const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS        = 10;
     const std::size_t MAX_NUM_SYM_MAPPINGS                = 64;
-    const double      ELASTIC_POTENTIAL_FORCE_CONST       = 100.0;
+    const double      ELASTIC_POTENTIAL_FORCE_CONST       = 500.0;
 }
 
 
@@ -736,7 +736,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(
         if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
             break;
     }
-    
+
     if (!elasticPotentials.isEmpty())
         conf_data.setEnergy(mmff94GradientCalc(conf_coords_data));
     else

@@ -93,7 +93,7 @@ namespace
     const std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 131072;
     const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
     const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
-    const double      ELASTIC_POTENTIAL_FORCE_CONST          = 100.0;
+    const double      ELASTIC_POTENTIAL_FORCE_CONST          = 500.0;
 }
 
 

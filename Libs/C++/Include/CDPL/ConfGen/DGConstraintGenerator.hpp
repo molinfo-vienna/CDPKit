@@ -121,6 +121,10 @@ namespace CDPL
           private:
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
+            void addFixedSubstructVolConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
+                                                 Util::DG3DCoordinatesGenerator& coords_gen, std::size_t* ref_atom_inds,
+                                                 std::size_t& num_vol_constr, std::size_t level);
+
             void init(const Chem::MolecularGraph& molgraph);
 
             void assignBondLengths(const ForceField::MMFF94InteractionData* ia_data);

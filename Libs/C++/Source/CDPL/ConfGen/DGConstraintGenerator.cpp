@@ -277,6 +277,66 @@ void ConfGen::DGConstraintGenerator::addFixedSubstructureConstraints(const Chem:
             coords_gen.addDistanceConstraint(atom1_idx, atom2_idx, dist, dist);
         }   
     }
+
+    if (atoms.getNumAtoms() <= 3)
+        return;
+
+    std::size_t ref_atom_inds[4];
+    std::size_t num_vol_constr = 0;
+
+    addFixedSubstructVolConstraints(atoms, coords, coords_gen, ref_atom_inds, num_vol_constr, 0);
+}
+
+void ConfGen::DGConstraintGenerator::addFixedSubstructVolConstraints(const Chem::AtomContainer& atoms, const Math::Vector3DArray& coords,
+                                                                     Util::DG3DCoordinatesGenerator& coords_gen, std::size_t* ref_atom_inds,
+                                                                     std::size_t& num_vol_constr, std::size_t level)
+{
+    constexpr std::size_t MAX_NUM_VOL_CONSTRS = 5;
+    constexpr double MIN_VOLUME = 0.5;
+    
+    if (level == 4) {
+        std::size_t i = molGraph->getAtomIndex(atoms.getAtom(ref_atom_inds[0]));
+        std::size_t j = molGraph->getAtomIndex(atoms.getAtom(ref_atom_inds[1]));
+        std::size_t k = molGraph->getAtomIndex(atoms.getAtom(ref_atom_inds[2]));
+        std::size_t l = molGraph->getAtomIndex(atoms.getAtom(ref_atom_inds[3]));
+        
+        Math::Vector3D v_41 = coords[i] - coords[l];
+        Math::Vector3D v_42 = coords[j] - coords[l];
+        Math::Vector3D v_43 = coords[k] - coords[l];
+
+        double vol = (v_41[0] * (v_42[1] * v_43[2] - v_42[2] * v_43[1]) - v_41[1] * (v_42[0] * v_43[2] - v_42[2] * v_43[0]) + v_41[2] * (v_42[0] * v_43[1] - v_42[1] * v_43[0])) / 6;
+
+        if (std::abs(vol) < MIN_VOLUME)
+            return;
+
+        double min_vol = vol - vol * 0.1;
+        double max_vol = vol + vol * 0.1;
+
+        if (min_vol > max_vol)
+            std::swap(min_vol, max_vol);
+        
+        coords_gen.addVolumeConstraint(i, j, k, l, min_vol, max_vol);
+        num_vol_constr++;
+        
+        return;
+    }
+
+    for (std::size_t i = (level == 0 || level == 3 ? 0 : ref_atom_inds[level - 1] + 1), num_atoms = atoms.getNumAtoms(); i < num_atoms; i++) {
+        auto& atom = atoms.getAtom(i);
+
+        if (!molGraph->containsAtom(atom))
+            continue;
+        
+        if (level == 3 && (i == ref_atom_inds[0] || i == ref_atom_inds[1] || i == ref_atom_inds[2]))
+            continue;
+
+        ref_atom_inds[level] = i;
+        
+        addFixedSubstructVolConstraints(atoms, coords, coords_gen, ref_atom_inds, num_vol_constr, level + 1);
+
+        if (num_vol_constr >= MAX_NUM_VOL_CONSTRS)
+            return;
+    }
 }
 
 void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
