@@ -5,7 +5,7 @@ Master:
  - The command line tools 'structgen' and 'confgen' erroneously used the already reserved letter 'p' as shortcut for
    the option --fixed-substr-min-atoms. The new shotcut is '~'.
  - Maximum considered Python version in Manylinux2014-based wheel builds is now 3.12
- - Rewrote code that uses the boost filesystem library to use c++17 equivalents (conditional, only if properly implemented
+ - Rewrote code that uses the boost filesystem library to use C++17 equivalents (conditional, only if properly implemented
    by the compiler)
  - Increased minimum C++ standard that has to be supported by the compiler to C++17
 
