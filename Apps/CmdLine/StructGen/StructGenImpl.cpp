@@ -500,7 +500,7 @@ StructGenImpl::StructGenImpl():
               value<bool>(&fixedSubstructUseMCSS)->implicit_value(true));
     addOption("fixed-substr-align,a", "Align generated 3D structure on fixed substructure input atom positions (default: false).", 
               value<bool>(&fixedSubstructAlign)->implicit_value(true));
-    addOption("fixed-substr-min-atoms,p", "The minimum required number of matched atoms when using maximum common substructure searching "
+    addOption("fixed-substr-min-atoms,~", "The minimum required number of matched atoms when using maximum common substructure searching "
               "to find fixed substructure matches (default: 2).", 
               value<std::size_t>(&fixedSubstructMCSSMinNumAtoms));
     addOption("fixed-substr-max-matches,Q", "The maximum number of considered fixed substructure matches (default: 1, 0 disables limit).", 
