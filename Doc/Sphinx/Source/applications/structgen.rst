@@ -10,7 +10,8 @@ faster than a diverse conformer ensemble).
 Synopsis
 --------
    
-  :program:`structgen` [-hVvptASszU] [-c arg] [-l arg] [-f arg] [-m arg] [-d arg] [-q arg] [-D arg] [-E arg] [-T arg] [-Z arg] [-P arg] [-w arg] [-k arg] [-K arg] [-B arg] [-g arg] [-G arg] [-I arg] [-O arg] [-F arg] -i arg [arg]... -o arg
+  :program:`structgen` [-hVvptASszxUa^] [-c arg] [-l arg] [-f arg] [-m arg] [-d arg] [-q arg] [-D arg] [-E arg] [-T arg] [-Z arg] [-P arg] [-w arg] [-k arg] [-K arg] [-B arg] [-g arg] [-G arg] [-I arg] [-O arg] [-F arg] [-j arg] [-J arg] [-~ arg] [-Q arg] -i arg [arg]... -o arg
+
 
 Mandatory options
 -----------------
@@ -258,7 +259,7 @@ Other options
 
     Align generated 3D structure on fixed substructure input atom positions (default: false). [since V1.1]
 
-  -p [ --fixed-substr-min-atoms ] arg
+  -~ [ --fixed-substr-min-atoms ] arg
 
     The minimum required number of matched atoms when using maximum common 
     substructure searching to find fixed substructure matches (default: 2). [since V1.1]

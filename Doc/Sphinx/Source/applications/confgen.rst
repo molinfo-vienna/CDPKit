@@ -12,7 +12,8 @@ University of Hamburg, Center for Bioinformatics, Hamburg, Germany and F. Hoffma
 Synopsis
 --------
 
-  :program:`confgen` [-hVvptRHAuSszYMW] [-c arg] [-l arg] [-f arg] [-C arg] [-m arg] [-e arg] [-r arg] [-n arg] [-N arg] [-d arg] [-q arg] [-D arg] [-E arg] [-T arg] [-X arg] [-L arg] [-x arg] [-y arg] [-Z arg] [-P arg] [-w arg] [-k arg] [-K arg] [-B arg] [-b arg] [-g arg] [-G arg] [-I arg] [-O arg] [-F arg] -i arg [arg]... -o arg
+  :program:`confgen` [-hVvptRHAuSszYMWUa^] [-c arg] [-l arg] [-f arg] [-C arg] [-m arg] [-e arg [arg]...] [-r arg [arg]...] [-n arg [arg]...] [-N arg] [-d arg] [-q arg] [-D arg] [-E arg] [-T arg] [-X arg] [-L arg] [-x arg] [-y arg] [-Z arg] [-P arg] [-w arg] [-k arg] [-K arg] [-B arg] [-b arg] [-g arg] [-G arg] [-I arg] [-O arg] [-F arg] [-j arg] [-J arg] [-~ arg] [-Q arg] -i arg [arg]... -o arg
+
 
 Mandatory options
 -----------------
@@ -353,7 +354,7 @@ Other options
 
     Align generated conformers on fixed substructure input atom positions (default: false). [since V1.1]
 
-  -p [ --fixed-substr-min-atoms ] arg
+  -~ [ --fixed-substr-min-atoms ] arg
 
     The minimum required number of matched atoms when using maximum common 
     substructure searching to find fixed substructure matches (default: 2). [since V1.1]
