@@ -539,7 +539,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
         const Atom* atom1 = &bond->getBegin();
         const Atom* atom2 = &bond->getEnd();
 
-        if (atom1 == atom2) // satity check
+        if (atom1 == atom2) // sanity check
             continue;
 
         std::size_t atom1_idx = molGraph->getAtomIndex(*atom1);

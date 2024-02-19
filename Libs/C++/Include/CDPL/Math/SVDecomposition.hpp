@@ -1,7 +1,7 @@
 /* 
  * SVDecomposition.hpp 
  *
- * Copyright (C) 2010-2012 Thomas Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
