@@ -32,8 +32,6 @@
 #include <limits>
 #include <cassert>
 
-#include <boost/random/linear_congruential.hpp>
-
 #include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -45,6 +43,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -111,20 +110,22 @@ namespace
             return 1;
     }
 
-    const double      DEF_BOND_LENGTH               = 25.0;
-    const double      H_BOND_LENGTH                 = DEF_BOND_LENGTH * 0.7;
-    const double      BOND_LENGTH_DELTA             = DEF_BOND_LENGTH * 0.26;
-    const double      ANGLE_BENDING_DELTA           = 20.0 * M_PI / 180.0;
-    const double      ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.3;
-    const double      ATOM_BOND_COLLISION_TEST_DIST = DEF_BOND_LENGTH * 0.2;
-    const double      COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
-    const double      COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;
-    const std::size_t BACKTRACKING_LIMIT            = 200;
+    constexpr double DEF_BOND_LENGTH               = 25.0;
+    constexpr double H_BOND_LENGTH                 = DEF_BOND_LENGTH * 0.7;
+    constexpr double BOND_LENGTH_DELTA             = DEF_BOND_LENGTH * 0.3;
+    constexpr double ANGLE_BENDING_DELTA           = 15.0 * M_PI / 180.0;
+    constexpr double ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.3;
+    constexpr double ATOM_BOND_COLLISION_TEST_DIST = DEF_BOND_LENGTH * 0.3;
+    constexpr double COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
+    constexpr double COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;
+    constexpr std::size_t BACKTRACKING_LIMIT       = 400;
+    constexpr std::size_t DG_MC_MIN_RING_SIZE      = 12;
+    constexpr std::size_t DG_BS_MIN_RING_SIZE      = 8;
 
-    const std::size_t MAX_EDGE_CACHE_SIZE          = 5000;
-    const std::size_t MAX_ATOM_NODE_CACHE_SIZE     = 5000;
-    const std::size_t MAX_RING_SYS_NODE_CACHE_SIZE = 100;
-    const std::size_t MAX_RING_INFO_CACHE_SIZE     = 200;
+    constexpr std::size_t MAX_EDGE_CACHE_SIZE          = 5000;
+    constexpr std::size_t MAX_ATOM_NODE_CACHE_SIZE     = 5000;
+    constexpr std::size_t MAX_RING_SYS_NODE_CACHE_SIZE = 100;
+    constexpr std::size_t MAX_RING_INFO_CACHE_SIZE     = 200;
 }
 
 
@@ -1236,6 +1237,12 @@ bool Chem::Atom2DCoordinatesCalculator::LGNode::testAtomBondCollision(std::size_
 }
 
 // - RingSysNode -
+Chem::Atom2DCoordinatesCalculator::RingSysNode::RingSysNode()
+{
+    dgCoordsGenerator.setNumCycles(100);
+    dgCoordsGenerator.setLearningRateDecrement(0.99 / 100);
+    dgCoordsGenerator.setCycleStepCountFactor(10.0);
+}
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::init(const MolecularGraph* molgraph, 
                                                           const RingInfo* ring_info, 
@@ -1269,7 +1276,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::init(const MolecularGraph* 
 
     ringList.push_back(ring_info);
     ringLayoutQueue.push_back(ring_info);
-
+    
     const Fragment& ring_frag = ring_info->getFragment();
 
     std::transform(ring_frag.getBondsBegin(), ring_frag.getBondsEnd(), std::back_inserter(bondList),
@@ -2113,13 +2120,233 @@ bool Chem::Atom2DCoordinatesCalculator::RingSysNode::getNextRingSegment(const Ri
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::refineLayout()
 {
-    if (ringList.size() == 1)
+    if (ringList.size() == 1) {
+        performDistGeomLayout();
         return;
-
+    }
+    
     initSpringLayoutParams();
     performSpringLayout();
+    performDistGeomLayout();
 }
 
+void Chem::Atom2DCoordinatesCalculator::RingSysNode::performDistGeomLayout()
+{
+    bool need_dg = false;
+    
+    for (auto ri : ringList) { // TODO: BOND GEOM
+        if (ri->getSize() >= DG_MC_MIN_RING_SIZE) {
+            need_dg = true;
+            break;
+        }
+
+        if (ri->getSize() < DG_BS_MIN_RING_SIZE)
+            continue;
+
+        for (auto& bond : ri->getFragment().getBonds()) {
+            const StereoDescriptor& descr = getStereoDescriptor(bond);
+
+            switch (descr.getConfiguration()) {
+
+                case BondConfiguration::CIS:
+                case BondConfiguration::TRANS:
+                    break;
+
+                default:
+                    continue;
+            }
+            
+            if (!descr.isValid(bond))
+                continue;
+
+            need_dg = true;
+            break;
+        }
+
+        if (need_dg)
+            break;
+    }
+    
+    if (!need_dg)
+        return;
+
+    std::sort(ringList.begin(), ringList.end(), [](const RingInfo* ri1, const RingInfo* ri2) -> bool {
+                                                    return (ri1->getSize() < ri2->getSize()); });  
+    setDistConstraints.clear();
+    dgCoordsGenerator.clearDistanceConstraints();
+    
+    for (auto ri : ringList) {
+        auto rsize = ri->getSize();
+        auto& frag = ri->getFragment();
+        bool has_trans_bond = false;
+        
+        if (ri->getSize() >= DG_BS_MIN_RING_SIZE) {
+            for (auto& bond : ri->getFragment().getBonds()) {
+                const StereoDescriptor& descr = getStereoDescriptor(bond);
+                auto config = descr.getConfiguration();
+                
+                switch (config) {
+
+                    case BondConfiguration::CIS:
+                    case BondConfiguration::TRANS:
+                        break;
+
+                    default:
+                        continue;
+                }
+
+                if (!descr.isValid(bond))
+                    continue;
+
+                auto ref_atoms = descr.getReferenceAtoms();
+                const Atom* ring_nbrs[2] = { 0 };
+
+                for (std::size_t i = 0; i < 2; i++) {
+                    auto excl_nbr = (i == 0 ? ref_atoms[2] : ref_atoms[1]);
+
+                    for (auto& atom : ref_atoms[1 + i]->getAtoms()) {
+                        if (&atom == excl_nbr)
+                            continue;
+
+                        if (frag.containsAtom(atom)) {
+                            ring_nbrs[i] = &atom;
+                            break;
+                        }
+                    }
+                }
+
+                if (!ring_nbrs[0] || !ring_nbrs[1])
+                    continue;
+
+                if ((ring_nbrs[0] == ref_atoms[0]) ^ (ring_nbrs[1] == ref_atoms[3]))
+                    config = (config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
+
+                auto ref_atom1_idx = molGraph->getAtomIndex(*ring_nbrs[0]);
+                auto ref_atom2_idx = molGraph->getAtomIndex(*ring_nbrs[1]);
+
+                constexpr double BOND_ANGLE = M_PI / 180.0 * 120.0;
+                constexpr double ATOM_13_DIST = std::sin(BOND_ANGLE * 0.5) * DEF_BOND_LENGTH * 2.0;
+                constexpr double CIS_ATOM_DIST = DEF_BOND_LENGTH * (1.0 - 2.0 * std::cos(BOND_ANGLE));
+                constexpr double TRANS_ATOM_DIST = std::sqrt(CIS_ATOM_DIST * CIS_ATOM_DIST + DEF_BOND_LENGTH * DEF_BOND_LENGTH *
+                                                             4.0 * std::sin(BOND_ANGLE) * std::sin(BOND_ANGLE)); 
+
+                auto ctr_atom1_idx = molGraph->getAtomIndex(*ref_atoms[1]);
+                auto ctr_atom2_idx = molGraph->getAtomIndex(*ref_atoms[2]);
+                
+                dgCoordsGenerator.addDistanceConstraint(ref_atom1_idx, ctr_atom2_idx, ATOM_13_DIST, ATOM_13_DIST);
+                dgCoordsGenerator.addDistanceConstraint(ref_atom2_idx, ctr_atom1_idx, ATOM_13_DIST, ATOM_13_DIST);
+
+                double ref_atom_dist = (config == BondConfiguration::CIS ? CIS_ATOM_DIST : TRANS_ATOM_DIST);
+                
+                for (std::size_t i = 0; i < 10; i++)
+                    dgCoordsGenerator.addDistanceConstraint(ref_atom1_idx, ref_atom2_idx, ref_atom_dist, ref_atom_dist);
+       
+                setDistConstraints.emplace(std::min(ref_atom1_idx, ref_atom2_idx), std::max(ref_atom1_idx, ref_atom2_idx));
+                setDistConstraints.emplace(std::min(ref_atom1_idx, ctr_atom2_idx), std::max(ref_atom1_idx, ctr_atom2_idx));
+                setDistConstraints.emplace(std::min(ref_atom2_idx, ctr_atom1_idx), std::max(ref_atom2_idx, ctr_atom1_idx));
+
+                if (config == BondConfiguration::TRANS)
+                    has_trans_bond = true;
+            }
+        }
+
+        if (rsize < DG_MC_MIN_RING_SIZE && has_trans_bond)
+            continue;
+        
+        double bond_angle = (rsize >= DG_MC_MIN_RING_SIZE ? M_PI / 180.0 * 120.0 : ((rsize - 2) * M_PI) / rsize);
+        double dist_13 = std::sin(bond_angle * 0.5) * DEF_BOND_LENGTH * 2.0;
+
+        for (std::size_t i = 0; i < rsize; i++) {
+            auto& atom = frag.getAtom(i);
+            auto atom1_idx = molGraph->getAtomIndex(atom);
+            auto atom2_idx = molGraph->getAtomIndex(frag.getAtom((i + 2) % rsize));
+
+            DistConstraintKey key(std::min(atom1_idx, atom2_idx), std::max(atom1_idx, atom2_idx));
+
+            if (setDistConstraints.find(key) == setDistConstraints.end()) {
+                setDistConstraints.insert(key);
+                dgCoordsGenerator.addDistanceConstraint(atom1_idx, atom2_idx, dist_13, dist_13);
+            }
+            
+            if (rsize < DG_MC_MIN_RING_SIZE)
+                continue;
+
+            auto exp_bnd_cnt = Internal::getExplicitBondCount(atom, *molGraph);
+
+            if (exp_bnd_cnt < 3)
+                continue;
+            
+            const Atom* exo_nbr = 0;
+            std::size_t num_ring_nbrs = 0;
+            std::size_t rings_nbrs[2];
+            auto b_it = atom.getBondsBegin();
+                
+            for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+                auto& nbr_atom = *a_it;
+                
+                if (!molGraph->containsAtom(nbr_atom))
+                    continue;
+ 
+                if (!molGraph->containsBond(*b_it))
+                    continue;
+     
+                if (frag.containsAtom(nbr_atom)) {
+                    rings_nbrs[num_ring_nbrs++] = molGraph->getAtomIndex(nbr_atom);
+                    continue;
+                }
+
+                if (exp_bnd_cnt > 3 || (getImplicitHydrogenCount(nbr_atom) != 0 && Chem::getType(nbr_atom) != AtomType::C) ||
+                    Internal::getExplicitBondCount(nbr_atom, *molGraph) > 1)
+                    exo_nbr = &nbr_atom;
+            }
+
+            if (!exo_nbr || num_ring_nbrs != 2)
+                continue;
+
+            auto exo_nbr_idx = molGraph->getAtomIndex(*exo_nbr);
+
+            localCoords[exo_nbr_idx] = localCoords[atom1_idx] * 2 - localCoords[rings_nbrs[0]] * 0.5 - localCoords[rings_nbrs[1]] * 0.5;
+
+            key = DistConstraintKey(std::min(exo_nbr_idx, rings_nbrs[0]), std::max(exo_nbr_idx, rings_nbrs[0]));
+
+            if (setDistConstraints.find(key) == setDistConstraints.end()) {
+                dgCoordsGenerator.addDistanceConstraint(exo_nbr_idx, rings_nbrs[0], dist_13, 2 * DEF_BOND_LENGTH);
+                setDistConstraints.insert(key);
+            }
+
+            key = DistConstraintKey(std::min(exo_nbr_idx, rings_nbrs[1]), std::max(exo_nbr_idx, rings_nbrs[1]));
+
+            if (setDistConstraints.find(key) == setDistConstraints.end()) {
+                dgCoordsGenerator.addDistanceConstraint(exo_nbr_idx, rings_nbrs[1], dist_13, 2 * DEF_BOND_LENGTH);
+                setDistConstraints.insert(key);
+            }
+            
+            dgCoordsGenerator.addDistanceConstraint(exo_nbr_idx, atom1_idx, DEF_BOND_LENGTH, DEF_BOND_LENGTH);
+        }
+    }
+
+    for (auto bond : bondList)
+        dgCoordsGenerator.addDistanceConstraint(molGraph->getAtomIndex(bond->getBegin()),
+                                                molGraph->getAtomIndex(bond->getEnd()),
+                                                DEF_BOND_LENGTH, DEF_BOND_LENGTH);
+
+    for (std::size_t i = 0, num_atoms = atomList.size(); i < num_atoms; i++) {
+        auto atom1_idx = atomList[i];
+
+        for (std::size_t j = i + 1; j < num_atoms; j++) {
+            auto atom2_idx = atomList[j];
+
+            if (setDistConstraints.find(DistConstraintKey(std::min(atom1_idx, atom2_idx), std::max(atom1_idx, atom2_idx))) !=
+                setDistConstraints.end())
+                continue;
+
+            dgCoordsGenerator.addDistanceConstraint(atom1_idx, atom2_idx, DEF_BOND_LENGTH, 0.5 * DEF_BOND_LENGTH * bondList.size());
+        }
+    }
+
+    dgCoordsGenerator.generate(molGraph->getNumAtoms(), localCoords);
+}
+                
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::initSpringLayoutParams()
 {
     const double SPRING_CONSTANT                 = 100.0 * DEF_BOND_LENGTH;
@@ -2258,7 +2485,6 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::initSpringLayoutParams()
 /*
  *  Kamada-Kawai Spring-Layout (based on the boost graph library implementation)
  */
-
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::performSpringLayout()
 {
     const std::size_t MAX_NUM_OUTER_ITERATIONS = 2000;
@@ -2952,8 +3178,8 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsD3()
             case NODE_TYPE_PATTERN_D3(RING_SYS, CHAIN_ATOM, CHAIN_ATOM):
             case NODE_TYPE_PATTERN_D3(END_ATOM, CHAIN_ATOM, CHAIN_ATOM):
                 childChainDirections[0] = chainDirection;
-            childChainDirections[1] = INVERT(chainDirection);
-            return;
+                childChainDirections[1] = INVERT(chainDirection);
+                return;
 
             default:
                 childChainDirections[0] = INVERT(chainDirection);

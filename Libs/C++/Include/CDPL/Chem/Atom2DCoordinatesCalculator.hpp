@@ -36,11 +36,14 @@
 #include <map>
 #include <utility>
 
+#include <boost/unordered_set.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 
 
 namespace CDPL
@@ -100,7 +103,7 @@ namespace CDPL
                 const Util::BitSet& getBondMask() const;
 
                 double getPriority() const;
-                void   setPriority(double);
+                void setPriority(double);
 
                 std::size_t getSize() const;
 
@@ -246,6 +249,8 @@ namespace CDPL
             {
 
               public:
+                RingSysNode();
+                
                 void init(const MolecularGraph*, const RingInfo*, Math::Vector2DArray&,
                           AtomIndexList&, BondList&);
 
@@ -304,6 +309,8 @@ namespace CDPL
                 void initSpringLayoutParams();
                 void performSpringLayout();
 
+                void performDistGeomLayout();
+                
                 Math::Vector2D computePartialDerivatives(std::size_t) const;
                 Math::Vector2D computePartialDerivative(std::size_t, std::size_t) const;
 
@@ -318,6 +325,9 @@ namespace CDPL
                 double calcCongestionFactor(const Math::Vector2D&) const;
                 double calcCongestionFactor(const Math::Vector2D&, const Util::BitSet&) const;
 
+                typedef Util::DGCoordinatesGenerator<2, double>       DGCoordsGenerator;
+                typedef std::pair<std::size_t, std::size_t>           DistConstraintKey;
+                typedef boost::unordered_set<DistConstraintKey>       DistConstraintKeySet;
                 typedef std::vector<const RingInfo*>                  RingInfoList;
                 typedef std::list<const RingInfo*>                    RingLayoutQueue;
                 typedef std::map<const Atom*, EdgeList>               EdgeListMap;
@@ -361,6 +371,8 @@ namespace CDPL
                 EnergyDerivativeTable   layoutEnergyDerivatives;
                 Math::DMatrix           layoutAtomDistances;
                 Math::DMatrix           layoutSpringStrengths;
+                DGCoordsGenerator       dgCoordsGenerator;
+                DistConstraintKeySet    setDistConstraints;
             };
 
             class AtomNode : public LGNode

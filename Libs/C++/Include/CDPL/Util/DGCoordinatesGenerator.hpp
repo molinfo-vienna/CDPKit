@@ -583,7 +583,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
         return;
 
     std::size_t num_steps = std::size_t((num_dist_constrs + num_vol_constrs) * cycleStepCountFactor);
-    ValueType   lambda    = startLearningRate;
+    ValueType lambda    = startLearningRate;
 
     if (num_dist_constrs > 0 && num_vol_constrs > 0) {
         boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_dist_constrs + num_vol_constrs - 1);
