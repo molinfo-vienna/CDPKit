@@ -310,7 +310,13 @@ namespace CDPL
                 void performSpringLayout();
 
                 void performDistGeomLayout();
-                
+                bool needDistGeomLayout() const;
+                bool addBondStereoDGConstraints(const RingInfo* ring_info);
+                void addBondAngleDGConstraints(const RingInfo* ring_info);
+                void addDefaultDGConstraints();
+
+                const Chem::Atom* getExoBondAtom(const RingInfo* ring_info, const Atom& atom, std::size_t rings_nbrs[2]) const;
+
                 Math::Vector2D computePartialDerivatives(std::size_t) const;
                 Math::Vector2D computePartialDerivative(std::size_t, std::size_t) const;
 
