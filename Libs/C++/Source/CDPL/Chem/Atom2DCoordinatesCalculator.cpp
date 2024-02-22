@@ -2231,13 +2231,13 @@ const Chem::Atom* Chem::Atom2DCoordinatesCalculator::RingSysNode::getExoBondAtom
 
 bool Chem::Atom2DCoordinatesCalculator::RingSysNode::addBondStereoDGConstraints(const RingInfo* ring_info)
 {
-    constexpr double MC_BOND_ANGLE = M_PI / 180.0 * 120.0;
-    constexpr double MC_ATOM_13_DIST = std::sin(MC_BOND_ANGLE * 0.5) * DEF_BOND_LENGTH * 2.0;
-    constexpr double MC_CIS_ATOM_DIST = DEF_BOND_LENGTH * (1.0 - 2.0 * std::cos(MC_BOND_ANGLE));
-    constexpr double MC_TRANS_ATOM_DIST = std::sqrt(MC_CIS_ATOM_DIST * MC_CIS_ATOM_DIST + DEF_BOND_LENGTH * DEF_BOND_LENGTH *
-                                                    4.0 * std::sin(MC_BOND_ANGLE) * std::sin(MC_BOND_ANGLE)); 
-    bool has_trans_bond = false;
-    
+    constexpr double    MC_BOND_ANGLE      = M_PI / 180.0 * 120.0;
+    static const double MC_ATOM_13_DIST    = std::sin(MC_BOND_ANGLE * 0.5) * DEF_BOND_LENGTH * 2.0;
+    static const double MC_CIS_ATOM_DIST   = DEF_BOND_LENGTH * (1.0 - 2.0 * std::cos(MC_BOND_ANGLE));
+    static const double MC_TRANS_ATOM_DIST = std::sqrt(MC_CIS_ATOM_DIST * MC_CIS_ATOM_DIST + DEF_BOND_LENGTH * DEF_BOND_LENGTH *
+                                                       4.0 * std::sin(MC_BOND_ANGLE) * std::sin(MC_BOND_ANGLE));
+    bool has_trans_bond     = false;
+
     auto& frag = ring_info->getFragment();
     
     for (auto& bond : ring_info->getFragment().getBonds()) {
@@ -2356,9 +2356,26 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::addBondAngleDGConstraints(c
             dgCoordsGenerator.addDistanceConstraint(atom1_idx, atom2_idx, dist_13, dist_13);
         }
             
-        if (rsize < DG_MC_MIN_RING_SIZE)
+        if (rsize < DG_MC_MIN_RING_SIZE) {
+            /*
+            double angle = M_PI / rsize;
+            double r = DEF_BOND_LENGTH * 0.5 / std::sin(angle);
+
+            for (std::size_t j = 3; j < rsize / 2; j++) {
+                double dist_ij = r * std::sin(j * angle) * 2.0;
+                auto atomj_idx = molGraph->getAtomIndex(frag.getAtom((i + j) % rsize));
+
+                DistConstraintKey key_ij(std::min(atom1_idx, atomj_idx), std::max(atom1_idx, atomj_idx));
+
+                if (setDistConstraints.find(key_ij) == setDistConstraints.end()) {
+                    setDistConstraints.insert(key_ij);
+                    dgCoordsGenerator.addDistanceConstraint(atom1_idx, atomj_idx, dist_ij * 0.0, dist_ij * 1.1);
+                }
+            }
+            */
             continue;
-           
+        }
+        
         std::size_t rings_nbrs[2];
         const Atom* exo_nbr = getExoBondAtom(ring_info, atom, rings_nbrs);
 
