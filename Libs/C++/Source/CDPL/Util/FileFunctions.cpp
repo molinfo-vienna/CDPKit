@@ -95,8 +95,6 @@ std::string Util::genCheckedTempFilePath(const std::string& dir, const std::stri
     while (true) {
         fsns::path tmp_file_path = (dir.empty() ? fsns::temp_directory_path() : fsns::path(dir)) / generateRandomName(ptn);
 
-        tmp_file_path /= generateRandomName(ptn);
-
         if (!fsns::exists(tmp_file_path))
             return tmp_file_path.string();
     }
