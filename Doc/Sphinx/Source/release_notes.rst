@@ -3,10 +3,27 @@
 Release Notes
 =============
 
-Release V1.1.0
+Release V1.1.1
 --------------
 
-Changes since V1.0.0:
+.. rubric:: Improvements
+            
+- Significantly improved the generation of 2D coordinates for macrocyclic structures
+
+.. rubric:: Bug Fixes
+
+- Fixed an issue with the generatinon of conformers under application of a fixed substructure template where the generated
+  conformers sometimes displayed the mirror image of the specified 3D template structure
+- The command line tools :doc:`structgen </applications/structgen>` and :doc:`confgen </applications/confgen>` erroneously
+  used the already reserved letter **p** as shortcut for the option *--fixed-substr-min-atoms*. The new shortcut is **~**
+   
+.. rubric:: Miscellaneous Changes 
+
+- Rewrote code that uses the boost filesystem library to use C++17 equivalents
+- Compiling CDPKit now requires a compiler with C++17 support
+
+Release V1.1.0
+--------------
 
 .. rubric:: New Functionality and Features
 
