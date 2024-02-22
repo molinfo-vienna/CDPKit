@@ -1,13 +1,14 @@
-Master:
+V1.1.1:
 
- - Fixed an issue with the generatinon of conformers using a fixed substructure template where the generated
-   conformers sometimes exhibited the mirror image of the specified template structure.
+ - Significantly improved the generation of 2D coordinates for macrocyclic structures
+ - Fixed an issue with the generatinon of conformers under application of a fixed substructure template where the generated
+   conformers sometimes displayed the mirror image of the specified 3D template structure
  - The command line tools 'structgen' and 'confgen' erroneously used the already reserved letter 'p' as shortcut for
-   the option --fixed-substr-min-atoms. The new shotcut is '~'.
- - Maximum considered Python version in Manylinux2014-based wheel builds is now 3.12
- - Rewrote code that uses the boost filesystem library to use C++17 equivalents (conditional, only if properly implemented
-   by the compiler)
- - Increased minimum C++ standard that has to be supported by the compiler to C++17
+   the option --fixed-substr-min-atoms. The new shortcut is '~'
+ - Support for Python version 3.12 in Manylinux2014-based wheel builds
+ - Rewrote code that uses the boost filesystem library to use C++17 equivalents (conditional, only if a proper std::filesystem
+   implementation is available)
+ - Compiling CDPKit now requires a compiler with C++17 support
 
 V1.1.0:
  - The tool 'tautgen' provides two new tautomer generation modes BEST_SCORING and BEST_SCORING_UNIQUE
