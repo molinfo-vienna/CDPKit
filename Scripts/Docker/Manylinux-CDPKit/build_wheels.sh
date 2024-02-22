@@ -29,7 +29,7 @@ git pull
 
 rm -rf dist
 
-for PY_VERS in 3.6 3.7 3.8 3.9 3.10 3.11
+for PY_VERS in 3.6 3.7 3.8 3.9 3.10 3.11 3.12
 do
     PY_VERS_NO_DOT="$(echo $PY_VERS | tr -d .)"
 
