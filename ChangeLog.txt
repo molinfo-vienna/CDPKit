@@ -1,11 +1,11 @@
 V1.1.1:
 
  - Significantly improved the generation of 2D coordinates for macrocyclic structures
- - Fixed an issue with the generatinon of conformers under application of a fixed substructure template where the generated
+ - Fixed an issue with the generation of conformers under application of a fixed substructure template where the generated
    conformers sometimes displayed the mirror image of the specified 3D template structure
  - The command line tools 'structgen' and 'confgen' erroneously used the already reserved letter 'p' as shortcut for
-   the option --fixed-substr-min-atoms. The new shortcut is '~'
- - Support for Python version 3.12 in Manylinux2014-based wheel builds
+   the option '--fixed-substr-min-atoms'. The new shortcut is '~'
+ - Support for Python version 3.12 in Manylinux2014-based pip package builds
  - Rewrote code that uses the boost filesystem library to use C++17 equivalents (conditional, only if a proper std::filesystem
    implementation is available)
  - Compiling CDPKit now requires a compiler with C++17 support
