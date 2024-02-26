@@ -29,7 +29,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
 on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) installation after building CDPKit from source and
 iii) using the `pip` package manager (installs CDPL Python bindings only).
-More elaborate installation instructions can be found [here](https://cdpkit.org/v1.0.0/installation.html).
+More elaborate installation instructions can be found [here](https://cdpkit.org/v1.1.1/installation.html).
 
 #### Installation from source
 
@@ -167,7 +167,7 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit Documentation**: Visit the [CDPKit documentation](https://cdpkit.org) for comprehensive information, tutorials, and examples.
 
-- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/v1.0.0/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
+- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/v1.1.1/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
 - **CDPKit Conformer Generator**: Have a look at the [CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563) paper for detailed information about the integrated high-quality conformer generator.
 
