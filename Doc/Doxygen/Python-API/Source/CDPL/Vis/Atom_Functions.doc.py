@@ -158,6 +158,33 @@ def setLabelMargin(atom: Chem.Atom, margin: SizeSpecification) -> None: pass
 # \brief 
 # \param atom 
 #
+def clearConfigurationLabelColor(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasConfigurationLabelColor(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getConfigurationLabelColor(atom: Chem.Atom) -> Color: pass
+
+##
+# \brief 
+# \param atom 
+# \param color 
+#
+def setConfigurationLabelColor(atom: Chem.Atom, color: Color) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearColor(atom: Chem.Atom) -> None: pass
 
 ##

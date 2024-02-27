@@ -320,6 +320,33 @@ def setLabelMargin(bond: Chem.Bond, margin: SizeSpecification) -> None: pass
 # \brief 
 # \param bond 
 #
+def clearConfigurationLabelColor(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasConfigurationLabelColor(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getConfigurationLabelColor(bond: Chem.Bond) -> Color: pass
+
+##
+# \brief 
+# \param bond 
+# \param color 
+#
+def setConfigurationLabelColor(bond: Chem.Bond, color: Color) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
 def clearColor(bond: Chem.Bond) -> None: pass
 
 ##

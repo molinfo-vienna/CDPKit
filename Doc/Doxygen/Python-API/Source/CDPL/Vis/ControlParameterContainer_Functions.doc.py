@@ -860,6 +860,60 @@ def setBackgroundColorParameter(cntnr: Base.ControlParameterContainer, color: Co
 # \brief 
 # \param cntnr 
 #
+def clearBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param color 
+#
+def setBondConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param color 
+#
+def setAtomConfigurationLabelColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearAtomColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##

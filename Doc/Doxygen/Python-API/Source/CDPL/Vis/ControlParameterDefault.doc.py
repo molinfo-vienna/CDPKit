@@ -331,6 +331,13 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
 
     ##
+    # \brief Default setting (= <tt>Color.BLACK</tt>) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR.
+    # 
+    # \since 1.2
+    # 
+    ATOM_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
     # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS.
     # 
     # \since 1.1
@@ -350,3 +357,10 @@ class ControlParameterDefault(Boost.Python.instance):
     # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief Default setting (= <tt>Color.BLACK</tt>) for the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR.
+    # 
+    # \since 1.2
+    # 
+    BOND_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)

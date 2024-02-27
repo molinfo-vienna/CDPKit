@@ -119,7 +119,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_COLOR and Vis.BondProperty.COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_COLOR will be used.
     # 
-    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_COLOR or Vis.BondProperty.COLOR.
+    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_COLOR or Vis.BondProperty.COLOR.
     # 
     BOND_COLOR = CDPL.Base.LookupKey('BOND_COLOR')
 
@@ -592,6 +592,17 @@ class ControlParameter(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_SIZE')
 
     ##
+    # \brief Specifies the color of atom configuration descriptor text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR and Vis.AtomProperty.CONFIGURATION_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.ATOM_CONFIGURATION_LABEL_COLOR will be used.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_COLOR')
+
+    ##
     # \brief Specifies whether or not to show bond configuration descriptor labels.
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CONFIGURATION_LABELS will be used.
@@ -621,3 +632,14 @@ class ControlParameter(Boost.Python.instance):
     # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color of bond configuration descriptor text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR and Vis.BondProperty.CONFIGURATION_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_CONFIGURATION_LABEL_COLOR will be used.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # 
+    # \since 1.2
+    # 
+    BOND_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_COLOR')

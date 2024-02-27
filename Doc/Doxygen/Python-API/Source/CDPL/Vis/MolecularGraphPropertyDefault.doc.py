@@ -137,9 +137,19 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
+    ATOM_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
     BOND_CONFIGURATION_LABEL_FONT = Font()
 
     ##
     # \brief 
     #
     BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    BOND_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)

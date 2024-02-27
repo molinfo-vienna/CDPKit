@@ -149,3 +149,12 @@ class BondProperty(Boost.Python.instance):
     # <b>Value Type:</b> Vis.SizeSpecification \since 1.1
     # 
     CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('CONFIGURATION_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color used for bond configuration descriptor text labels.
+    # 
+    # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR and Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR.
+    # 
+    # <b>Value Type:</b> Vis.Color \since 1.2
+    # 
+    CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('CONFIGURATION_LABEL_COLOR')

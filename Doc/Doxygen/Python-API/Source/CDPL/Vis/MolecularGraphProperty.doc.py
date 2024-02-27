@@ -233,6 +233,17 @@ class MolecularGraphProperty(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_SIZE')
 
     ##
+    # \brief Specifies the color used for atom configuration descriptor text labels.
+    # 
+    # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.CONFIGURATION_LABEL_COLOR. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_COLOR')
+
+    ##
     # \brief Specifies the font used for bond configuration descriptor text labels.
     # 
     # The specified font takes precedence over the font specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
@@ -253,3 +264,14 @@ class MolecularGraphProperty(Boost.Python.instance):
     # \since 1.1
     # 
     BOND_CONFIGURATION_LABEL_SIZE = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color used for bond configuration descriptor text labels.
+    # 
+    # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The setting is overridden by the Chem.Bond property Vis.BondProperty.CONFIGURATION_LABEL_COLOR. 
+    # 
+    # \since 1.2
+    # 
+    BOND_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_COLOR')

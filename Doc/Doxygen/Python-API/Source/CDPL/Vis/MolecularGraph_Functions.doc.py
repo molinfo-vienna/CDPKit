@@ -509,6 +509,60 @@ def setBondColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 # \brief 
 # \param molgraph 
 #
+def clearBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param color 
+#
+def setBondConfigurationLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param color 
+#
+def setAtomConfigurationLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearAtomColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
