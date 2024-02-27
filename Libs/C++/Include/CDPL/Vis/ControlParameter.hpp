@@ -482,6 +482,19 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
 
             /**
+             * \brief Specifies the color of atom configuration descriptor text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR and
+             * Vis::AtomProperty::CONFIGURATION_LABEL_COLOR are not set, the default setting Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR will be used. 
+             *
+             * \valuetype Vis::Color
+             * \note The control-parameter setting is ignored if a color has been specified by Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR or 
+             *       Vis::BondProperty::COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_COLOR;
+            
+            /**
              * \brief Specifies the margin of free space around atom labels.
              *
              * The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by
@@ -652,7 +665,7 @@ namespace CDPL
              * Vis::BondProperty::COLOR are not set, the default setting Vis::ControlParameterDefault::BOND_COLOR will be used. 
              *
              * \valuetype Vis::Color
-             * \note The control-parameter setting is ignored if a font has been specified by Vis::MolecularGraphProperty::BOND_COLOR or 
+             * \note The control-parameter setting is ignored if a color has been specified by Vis::MolecularGraphProperty::BOND_COLOR or 
              *       Vis::BondProperty::COLOR.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_COLOR;
@@ -846,6 +859,19 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color of bond configuration descriptor text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR and
+             * Vis::BondProperty::CONFIGURATION_LABEL_COLOR are not set, the default setting Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_COLOR will be used. 
+             *
+             * \valuetype Vis::Color
+             * \note The control-parameter setting is ignored if a color has been specified by Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR or 
+             *       Vis::BondProperty::COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_COLOR;
             
             /**
              * \brief Specifies the margin of free space around bond labels.

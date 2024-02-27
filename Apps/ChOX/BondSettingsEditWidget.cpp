@@ -67,7 +67,8 @@ void BondSettingsEditWidget::apply()
     setBondConfigurationLabelSizeParameter(settings, configLabelSize);
     
     setBondColorParameter(settings, color);
-
+    setBondConfigurationLabelColorParameter(settings, configLabelColor);
+    
     setBondLengthParameter(settings, bondLength);
 
     setBondLineWidthParameter(settings, bondLineWidth);
@@ -100,7 +101,8 @@ void BondSettingsEditWidget::reset()
     configLabelSize = getBondConfigurationLabelSizeParameter(settings);
     
     color = getBondColorParameter(settings);
-
+    configLabelColor = getBondConfigurationLabelColorParameter(settings);
+    
     bondLength = getBondLengthParameter(settings);
     bondLineWidth = getBondLineWidthParameter(settings);
     bondLineSpacing = getBondLineSpacingParameter(settings);
@@ -137,7 +139,8 @@ void BondSettingsEditWidget::setDefaults()
     configLabelSize = BOND_CONFIGURATION_LABEL_SIZE;
     
     color = BOND_COLOR;
-
+    configLabelColor = BOND_CONFIGURATION_LABEL_COLOR;
+    
     bondLength = BOND_LENGTH;
     bondLineWidth = BOND_LINE_WIDTH;
     bondLineSpacing = BOND_LINE_SPACING;
@@ -218,43 +221,34 @@ void BondSettingsEditWidget::init()
 
 // --------
 
-    group_box = new QGroupBox(tr("Label Fonts"), this);
-    
+    group_box = new QGroupBox(tr("Fonts"), this);
     grid_layout = new QGridLayout(group_box);
 
 // +++
 
     FontEditWidget* font_edit_widget = new FontEditWidget(group_box, labelFont, labelSize, 0, false);
-    
     QLabel* font_label = new QLabel(tr("Label &Font:"), group_box);
 
     font_label->setBuddy(font_edit_widget);
 
     grid_layout->addWidget(font_label, 0, 0);
-
+    grid_layout->addWidget(font_edit_widget, 0, 1);
+    
     connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
     connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
 
 // +++
 
-    grid_layout->addWidget(font_edit_widget, 0, 1);
-
-// +++
-
     font_edit_widget = new FontEditWidget(group_box, configLabelFont, configLabelSize, 0, false);
-
     font_label = new QLabel(tr("CI&P Config. Label Font:"), group_box);
 
     font_label->setBuddy(font_edit_widget);
 
     grid_layout->addWidget(font_label, 1, 0);
-
+    grid_layout->addWidget(font_edit_widget, 1, 1);
+    
     connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
     connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
-
-// +++
-
-    grid_layout->addWidget(font_edit_widget, 1, 1);
 
 // +++
     
@@ -262,37 +256,46 @@ void BondSettingsEditWidget::init()
 
 // --------
 
-    QFrame* frame = new QFrame(this);
-
-    frame->setFrameStyle(QFrame::StyledPanel);
-
-    QHBoxLayout* h_box_layout = new QHBoxLayout(frame);
+    group_box = new QGroupBox(tr("Colors"), this);
+    grid_layout = new QGridLayout(group_box);
 
 // +++
 
-    ColorEditWidget* color_edit_widget = new ColorEditWidget(frame, color);
-
-    QLabel* label = new QLabel(tr("Co&lor:"), frame);
+    ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, color);
+    QLabel* label = new QLabel(tr("Co&lor:"), group_box);
 
     label->setBuddy(color_edit_widget);
 
     label->setMinimumWidth(font_label->sizeHint().width());
 
-    h_box_layout->addWidget(label);
+    grid_layout->addWidget(label, 0, 0);
+    grid_layout->addWidget(color_edit_widget, 0, 1);
 
     connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
     connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
 
 // +++
 
-    h_box_layout->addWidget(color_edit_widget);
+    color_edit_widget = new ColorEditWidget(group_box, configLabelColor);
+    label = new QLabel(tr("C&IP Config. Label Color:"), group_box);
 
-    main_layout->addWidget(frame);
+    label->setBuddy(color_edit_widget);
+
+    label->setMinimumWidth(font_label->sizeHint().width());
+
+    grid_layout->addWidget(label, 1, 0);
+    grid_layout->addWidget(color_edit_widget, 1, 1);
+
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+
+// +++
+
+    main_layout->addWidget(group_box);
 
 // --------
 
     group_box = new QGroupBox(tr("Metrics"), this);
-
     grid_layout = new QGridLayout(group_box);
 
 // +++

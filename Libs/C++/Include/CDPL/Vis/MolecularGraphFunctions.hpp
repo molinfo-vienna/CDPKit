@@ -130,6 +130,15 @@ namespace CDPL
         CDPL_VIS_API void clearAtomConfigurationLabelFont(Chem::MolecularGraph& molgraph);
 
 
+        CDPL_VIS_API const Color& getAtomConfigurationLabelColor(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomConfigurationLabelColor(Chem::MolecularGraph& molgraph, const Color& color);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelColor(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelColor(Chem::MolecularGraph& molgraph);
+
+
         CDPL_VIS_API const SizeSpecification& getAtomConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void setAtomConfigurationLabelSize(Chem::MolecularGraph& molgraph, const SizeSpecification& size);
@@ -263,6 +272,16 @@ namespace CDPL
         CDPL_VIS_API bool hasBondConfigurationLabelSize(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void clearBondConfigurationLabelSize(Chem::MolecularGraph& molgraph);
+
+
+        CDPL_VIS_API const Color& getBondConfigurationLabelColor(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondConfigurationLabelColor(Chem::MolecularGraph& molgraph, const Color& color);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelColor(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondConfigurationLabelColor(Chem::MolecularGraph& molgraph);
+
     } // namespace Vis
 } // namespace CDPL
 

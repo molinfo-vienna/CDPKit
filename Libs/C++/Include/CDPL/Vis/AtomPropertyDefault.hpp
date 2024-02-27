@@ -64,6 +64,12 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification CONFIGURATION_LABEL_SIZE;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color             CONFIGURATION_LABEL_COLOR;
+
         } // namespace AtomPropertyDefault
     } // namespace Vis
 } // namespace CDPL

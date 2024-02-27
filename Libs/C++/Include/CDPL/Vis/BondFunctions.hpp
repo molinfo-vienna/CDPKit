@@ -172,6 +172,16 @@ namespace CDPL
         CDPL_VIS_API bool hasConfigurationLabelSize(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Bond& bond);
+        
+
+        CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setConfigurationLabelColor(Chem::Bond& bond, const Color& color);
+
+        CDPL_VIS_API bool hasConfigurationLabelColor(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearConfigurationLabelColor(Chem::Bond& bond);
+
     } // namespace Vis
 } // namespace CDPL
 

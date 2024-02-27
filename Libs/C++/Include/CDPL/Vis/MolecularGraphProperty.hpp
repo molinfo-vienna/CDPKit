@@ -180,6 +180,18 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_SIZE;
 
             /**
+             * \brief Specifies the color used for atom configuration descriptor text labels.
+             *
+             * The specified color takes precedence over the
+             * color specified by the parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR. 
+             *
+             * \valuetype Vis::Color
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CONFIGURATION_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_COLOR;
+  
+            /**
              * \brief Specifies the color of bonds.
              *
              * The specified color takes precedence over the color specified by the parameter Vis::ControlParameter::BOND_COLOR. 
@@ -362,6 +374,18 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color used for bond configuration descriptor text labels.
+             *
+             * The specified color takes precedence over the
+             * color specified by the parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR. 
+             *
+             * \valuetype Vis::Color
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CONFIGURATION_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_COLOR;
         } // namespace MolecularGraphProperty
     } // namespace Vis
 } // namespace CDPL

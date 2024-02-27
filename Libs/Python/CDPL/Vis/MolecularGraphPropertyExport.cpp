@@ -65,6 +65,8 @@ void CDPLPythonVis::exportMolecularGraphProperties()
         .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphProperty::TRIPLE_BOND_TRIM_LENGTH)
         .def_readonly("ATOM_CONFIGURATION_LABEL_FONT", &Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT)
         .def_readonly("ATOM_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_COLOR", &Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR)
         .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT)
-        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE);
+        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("BOND_CONFIGURATION_LABEL_COLOR", &Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR);
 }

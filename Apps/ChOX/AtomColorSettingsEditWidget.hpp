@@ -66,6 +66,7 @@ namespace ChOX
         Settings&             settings;
         CDPL::Vis::ColorTable atomColors;
         CDPL::Vis::Color      defaultColor;
+        CDPL::Vis::Color      configLabelColor;
         QCheckBox*            enableColorTabCheckBox;
         QWidget*              colorTabWidget;
         bool                  haveChanges;

@@ -386,12 +386,8 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
         }
 
         if (config_label) {
-            if (aam_id == 0) {
+            if (aam_id == 0)
                 setupLabelMargin(atom);
-                setupPen(atom);
-            }
-            
-            setupConfigLabelFont(atom);
             
             createAtomConfigLabelPrimitive(atom, config_label);
         }
@@ -898,7 +894,9 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
     const double SIN_45 = std::sin(M_PI / 4);
     const double SIN_30 = std::sin(M_PI / 6);
     const double SIN_60 = std::sin(M_PI / 3);
-    
+
+    setupConfigLabelFont(atom);
+     
     fontMetrics->setFont(activeConfigLabelFont);
 
     std::string label_str{config_label};
@@ -967,7 +965,9 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
             lowest_cong_fact = cong_fact;
         }
     }
-  
+     
+    activePen.setColor(getConfigLabelColor(atom));
+            
     CREATE_ATOM_LABEL(activeConfigLabelFont, label_str, label_pos, label_brect);
 }
 
@@ -992,8 +992,6 @@ void Vis::StructureView2D::createBondPrimitives()
 
         if (!clipLineAgainstAtomBounds(ctr_line, bond))
             continue;
-
-        setupPen(bond);
 
         int asym_shift_dir = 0;
         std::size_t order = getBondOrder(bond);
@@ -1108,6 +1106,8 @@ double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& b
 
     label_pos -= brect_ctr;
 
+    activePen.setColor(getColor(bond));
+    
     TextLabelPrimitive2D* label;
 
     CREATE_BOND_LABEL(rxn_info, label_pos, label_brect);
@@ -1131,6 +1131,8 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
     Rectangle2D& total_brect = bondLabelBounds[bond_idx];
     TextLabelPrimitive2D* label;
 
+    activePen.setColor(getColor(bond));
+    
     if (!total_brect.isDefined()) {
         setupLabelMargin(bond);
         setupLabelFont(bond);
@@ -1231,6 +1233,8 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     Rectangle2D label_brect;
     TextLabelPrimitive2D* label;
     
+    activePen.setColor(getConfigLabelColor(bond));
+
     setupConfigLabelFont(bond);
 
     fontMetrics->setFont(activeLabelFont);
@@ -1306,6 +1310,8 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
 
 void Vis::StructureView2D::createUndefOrderBondPrimitives(const Chem::Bond& bond, const Line2D& ctr_line)
 {
+    setupPen(bond);
+    
     LinePrimitive2D* line = allocLinePrimitive(false);
 
     line->setPoints(ctr_line.getBegin(), ctr_line.getEnd());
@@ -1316,6 +1322,8 @@ void Vis::StructureView2D::createUndefOrderBondPrimitives(const Chem::Bond& bond
 
 void Vis::StructureView2D::createSingleBondPrimitives(const Chem::Bond& bond, const Line2D& ctr_line)
 {
+    setupPen(bond);
+    
     if (!parameters->showStereoBonds()) {
         createPlainSingleBondPrimitives(bond, ctr_line);
         return;
@@ -1847,6 +1855,8 @@ void Vis::StructureView2D::createDoubleBondPrimitives(const Chem::Bond& bond, co
         either_stereo = (stereo == BondStereoFlag::EITHER || stereo == BondStereoFlag::REVERSE_EITHER);
     }
 
+    setupPen(bond);
+    
     if (asym_shift_dir == 0) 
         createSymDoubleBondPrimitives(bond, either_stereo, ctr_line);
     else
@@ -1981,6 +1991,8 @@ void Vis::StructureView2D::createAsymDoubleBondPrimitives(const Chem::Bond& bond
 
 void Vis::StructureView2D::createTripleBondPrimitives(const Chem::Bond& bond, const Line2D& ctr_line)
 {
+    setupPen(bond);
+    
     Math::Vector2D line_shift;
     ctr_line.getCCWPerpDirection(line_shift);
 
@@ -3092,6 +3104,17 @@ const Vis::Font& Vis::StructureView2D::getConfigLabelFont(const Chem::Bond& bond
     return parameters->getBondConfigLabelFont();
 }
 
+const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Bond& bond) const
+{
+    if (hasConfigurationLabelColor(bond))
+        return getConfigurationLabelColor(bond);
+
+    if (hasBondConfigurationLabelColor(*structure))
+        return getBondConfigurationLabelColor(*structure);
+
+    return parameters->getBondConfigLabelColor();
+}
+
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelSizeSpec(const Chem::Bond& bond) const
 {
     if (hasLabelSize(bond))
@@ -3190,6 +3213,17 @@ const Vis::Color& Vis::StructureView2D::getColor(const Chem::Atom& atom) const
         return def_color;
 
     return parameters->getAtomColorTable()->getValue(getType(atom), def_color);
+}
+
+const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Atom& atom) const
+{
+    if (hasConfigurationLabelColor(atom))
+        return getConfigurationLabelColor(atom);
+
+    if (hasAtomConfigurationLabelColor(*structure))
+        return getAtomConfigurationLabelColor(*structure);
+
+    return parameters->getAtomConfigLabelColor();
 }
 
 const Vis::Font& Vis::StructureView2D::getLabelFont(const Chem::Atom& atom) const

@@ -266,7 +266,7 @@ void AtomGeneralSettingsEditWidget::init()
 
 // ---------
 
-    group_box = new QGroupBox(tr("Label Fonts"), this);
+    group_box = new QGroupBox(tr("Fonts"), this);
     grid_layout = new QGridLayout(group_box);
 
 // +++

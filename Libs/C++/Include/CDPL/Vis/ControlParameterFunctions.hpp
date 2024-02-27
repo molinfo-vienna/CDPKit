@@ -454,6 +454,15 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
 
+
+        CDPL_VIS_API const Color& getAtomConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setAtomConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr, const Color& color);
+
+        CDPL_VIS_API bool hasAtomConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr);
+
         
         CDPL_VIS_API const SizeSpecification& getBondLengthParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -624,6 +633,15 @@ namespace CDPL
         CDPL_VIS_API bool hasBondConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearBondConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_VIS_API const Color& getBondConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBondConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr, const Color& color);
+
+        CDPL_VIS_API bool hasBondConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
     } // namespace Vis
 } // namespace CDPL

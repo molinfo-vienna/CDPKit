@@ -225,6 +225,7 @@ void Settings::load()
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, Vis::ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS);
     readSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE);
     readFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT);
+    readColorParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR);
 
     settings.endGroup();
 
@@ -249,6 +250,7 @@ void Settings::load()
     readParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS, Vis::ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS);
     readSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE);
     readFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT);
+    readColorParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_COLOR);
 
     settings.endGroup();
 
@@ -798,6 +800,7 @@ void Settings::save() const
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS);
     writeSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE);
     writeFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT);
+    writeColorParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR);
     
     settings.endGroup();
 
@@ -822,6 +825,7 @@ void Settings::save() const
     writeParameter<bool>(*this, settings, Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS);
     writeSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE);
     writeFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT);
+    writeColorParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR);
  
     settings.endGroup();
 

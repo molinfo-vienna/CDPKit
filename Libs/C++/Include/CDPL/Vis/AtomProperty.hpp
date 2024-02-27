@@ -160,6 +160,17 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color used for atom configuration descriptor text labels.
+             *
+             * The color specified by this property takes precedence over the colors specified by Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR
+             * and Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR.
+             *
+             * \valuetype Vis::Color
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey CONFIGURATION_LABEL_COLOR;
         } // namespace AtomProperty
     } // namespace Vis
 } // namespace CDPL

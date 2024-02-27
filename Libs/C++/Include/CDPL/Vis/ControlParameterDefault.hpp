@@ -218,6 +218,12 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification ATOM_CONFIGURATION_LABEL_SIZE;
 
             /**
+             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color ATOM_CONFIGURATION_LABEL_COLOR;
+ 
+            /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_MARGIN;
@@ -349,6 +355,12 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE;
+
+            /**
+             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color BOND_CONFIGURATION_LABEL_COLOR;
             
             /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LABEL_MARGIN.

@@ -109,6 +109,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowAtomConfigurationLabels)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, AtomConfigurationLabelFont)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, AtomConfigurationLabelSize)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, AtomConfigurationLabelColor)
     
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondLength)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BondColor)
@@ -129,6 +130,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowBondConfigurationLabels)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, BondConfigurationLabelFont)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondConfigurationLabelSize)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BondConfigurationLabelColor)
 }
 
 
@@ -184,6 +186,7 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowAtomConfigurationLabels, show)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelSize, size)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelColor, color)
         
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondLength, length)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondColor, color)
@@ -203,5 +206,6 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowStereoBonds, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowBondConfigurationLabels, show)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelFont, font)
-    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelSize, size) 
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelSize, size)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelColor, color)
 }

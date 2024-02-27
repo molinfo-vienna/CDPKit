@@ -64,6 +64,7 @@ namespace
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, RadicalElectronDotSize)
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, ConfigurationLabelFont)
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ConfigurationLabelSize)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, ConfigurationLabelColor)
 }
 
 
@@ -81,4 +82,5 @@ void CDPLPythonVis::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_INT_REF(RadicalElectronDotSize, size)
     EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelFont, font)
     EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelSize, size)
+    EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelColor, color)
 }

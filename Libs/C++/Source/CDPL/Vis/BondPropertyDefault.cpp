@@ -48,9 +48,10 @@ namespace CDPL
             const Font              LABEL_FONT                   = Font();
             const SizeSpecification LABEL_SIZE                   = SizeSpecification(8.0, false, false, true);
             const SizeSpecification LABEL_MARGIN                 = SizeSpecification(2.0, false, false, true);
-            const Font              CONFIGURATION_LABEL_FONT            = Font();
-            const SizeSpecification CONFIGURATION_LABEL_SIZE            = SizeSpecification(8.0, false, false, true);
-        }
+            const Font              CONFIGURATION_LABEL_FONT     = Font();
+            const SizeSpecification CONFIGURATION_LABEL_SIZE     = SizeSpecification(8.0, false, false, true);
+            const Color             CONFIGURATION_LABEL_COLOR    = Color(0, 0, 0);
+        } // namespace BondPropertyDefault
 
         void initBondPropertyDefaults() {}
     }

@@ -147,7 +147,11 @@ namespace CDPL
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE</td>
-         *   <td>Specifies the size of atom confiiguration labels</td>
+         *   <td>Specifies the size of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::ATOM_LABEL_MARGIN</td>
@@ -251,7 +255,11 @@ namespace CDPL
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE</td>
-         *   <td>Specifies the size of bond confiiguration labels</td>
+         *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::BOND_LABEL_MARGIN</td>
@@ -316,6 +324,10 @@ namespace CDPL
          *   <td>Specifies the size of atom configuration labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::ATOM_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around atom labels</td>
          *  </tr>
@@ -375,6 +387,9 @@ namespace CDPL
          *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE</td>
          *   <td>Specifies the size of bond configuration labels</td>
          *  </tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
+         *  </tr>
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
@@ -406,6 +421,10 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_SIZE</td>
          *   <td>Specifies the size of atom configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of atom configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::AtomProperty::SECONDARY_LABEL_FONT</td>
@@ -482,6 +501,10 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::BondProperty::CONFIGURATION_LABEL_SIZE</td>
          *   <td>Specifies the size of bond configuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::CONFIGURATION_LABEL_COLOR</td>
+         *   <td>Specifies the color of bond configuration labels</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::BondProperty::LABEL_MARGIN</td>
@@ -652,6 +675,7 @@ namespace CDPL
             const Color&             getColor(const Chem::Bond&) const;
             const Font&              getLabelFont(const Chem::Bond&) const;
             const Font&              getConfigLabelFont(const Chem::Bond&) const;
+            const Color&             getConfigLabelColor(const Chem::Bond&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Bond&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Bond&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Bond&) const;
@@ -670,6 +694,7 @@ namespace CDPL
             const Font&              getLabelFont(const Chem::Atom&) const;
             const Font&              getSecondaryLabelFont(const Chem::Atom&) const;
             const Font&              getConfigLabelFont(const Chem::Atom&) const;
+            const Color&             getConfigLabelColor(const Chem::Atom&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getSecondaryLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Atom&) const;

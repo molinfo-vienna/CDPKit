@@ -103,7 +103,9 @@ void CDPLPythonVis::exportControlParameters()
         .def_readonly("SHOW_ATOM_CONFIGURATION_LABELS", &Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS)
         .def_readonly("ATOM_CONFIGURATION_LABEL_FONT", &Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT)
         .def_readonly("ATOM_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("ATOM_CONFIGURATION_LABEL_COLOR", &Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR)
         .def_readonly("SHOW_BOND_CONFIGURATION_LABELS", &Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS)
         .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT)
-        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE);
+        .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE)
+        .def_readonly("BOND_CONFIGURATION_LABEL_COLOR", &Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR);
 }

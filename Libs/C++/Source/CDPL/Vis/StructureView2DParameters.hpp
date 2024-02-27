@@ -71,6 +71,7 @@ namespace CDPL
             const Font&              getAtomLabelFont() const;
             const Font&              getSecondaryAtomLabelFont() const;
             const Font&              getAtomConfigLabelFont() const;
+            const Color&             getAtomConfigLabelColor() const;
             const SizeSpecification& getAtomLabelSize() const;
             const SizeSpecification& getSecondaryAtomLabelSize() const;
             const SizeSpecification& getAtomConfigLabelSize() const;
@@ -91,6 +92,7 @@ namespace CDPL
             const Color&             getBondColor() const;
             const Font&              getBondLabelFont() const;
             const Font&              getBondConfigLabelFont() const;
+            const Color&             getBondConfigLabelColor() const;
             const SizeSpecification& getBondLabelSize() const;
             const SizeSpecification& getBondConfigLabelSize() const;
             const SizeSpecification& getBondLabelMargin() const;
@@ -140,6 +142,7 @@ namespace CDPL
             void setAtomLabelFont(const Font&);
             void setSecondaryAtomLabelFont(const Font&);
             void setAtomConfigLabelFont(const Font&);
+            void setAtomConfigLabelColor(const Color&);
             void setAtomLabelSize(const SizeSpecification&);
             void setSecondaryAtomLabelSize(const SizeSpecification&);
             void setAtomConfigLabelSize(const SizeSpecification&);
@@ -160,6 +163,7 @@ namespace CDPL
             void setBondColor(const Color&);
             void setBondLabelFont(const Font&);
             void setBondConfigLabelFont(const Font&);
+            void setBondConfigLabelColor(const Color&);
             void setBondLabelSize(const SizeSpecification&);
             void setBondConfigLabelSize(const SizeSpecification&);
             void setBondLabelMargin(const SizeSpecification&);
@@ -190,6 +194,7 @@ namespace CDPL
             Font                      atomLabelFont;
             Font                      secondaryAtomLabelFont;
             Font                      atomConfigLabelFont;
+            Color                     atomConfigLabelColor;
             SizeSpecification         atomLabelSize;
             SizeSpecification         secondaryAtomLabelSize;
             SizeSpecification         atomConfigLabelSize;
@@ -208,6 +213,7 @@ namespace CDPL
             Color                     bondColor;
             Font                      bondLabelFont;
             Font                      bondConfigLabelFont;
+            Color                     bondConfigLabelColor;
             SizeSpecification         bondLabelSize;
             SizeSpecification         bondConfigLabelSize;
             SizeSpecification         bondLabelMargin;

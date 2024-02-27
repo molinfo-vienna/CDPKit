@@ -49,6 +49,7 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     atomLabelFont(ControlParameterDefault::ATOM_LABEL_FONT),
     secondaryAtomLabelFont(ControlParameterDefault::SECONDARY_ATOM_LABEL_FONT),
     atomConfigLabelFont(ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT),
+    atomConfigLabelColor(ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR),
     atomLabelSize(ControlParameterDefault::ATOM_LABEL_SIZE),
     secondaryAtomLabelSize(ControlParameterDefault::SECONDARY_ATOM_LABEL_SIZE),
     atomConfigLabelSize(ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE),
@@ -67,6 +68,7 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     bondColor(ControlParameterDefault::BOND_COLOR),
     bondLabelFont(ControlParameterDefault::BOND_LABEL_FONT),
     bondConfigLabelFont(ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT),
+    bondConfigLabelColor(ControlParameterDefault::BOND_CONFIGURATION_LABEL_COLOR),
     bondLabelSize(ControlParameterDefault::BOND_LABEL_SIZE),
     bondConfigLabelSize(ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE),
     bondLabelMargin(ControlParameterDefault::BOND_LABEL_MARGIN),
@@ -160,6 +162,11 @@ const Vis::Font& Vis::StructureView2DParameters::getAtomConfigLabelFont() const
     return atomConfigLabelFont;
 }
 
+const Vis::Color& Vis::StructureView2DParameters::getAtomConfigLabelColor() const
+{
+    return atomConfigLabelColor;
+}
+
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomLabelSize() const
 {
     return atomLabelSize;
@@ -248,6 +255,11 @@ const Vis::Font& Vis::StructureView2DParameters::getBondLabelFont() const
 const Vis::Font& Vis::StructureView2DParameters::getBondConfigLabelFont() const
 {
     return bondConfigLabelFont;
+}
+
+const Vis::Color& Vis::StructureView2DParameters::getBondConfigLabelColor() const
+{
+    return bondConfigLabelColor;
 }
 
 const Vis::SizeSpecification& Vis::StructureView2DParameters::getBondLabelSize() const
@@ -394,6 +406,7 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::SECONDARY_ATOM_LABEL_FONT, view.getParameter(ControlParameter::SECONDARY_ATOM_LABEL_FONT));
     parameterChanged(ControlParameter::SECONDARY_ATOM_LABEL_SIZE, view.getParameter(ControlParameter::SECONDARY_ATOM_LABEL_SIZE));
     parameterChanged(ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, view.getParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_FONT));
+    parameterChanged(ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR, view.getParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR));
     parameterChanged(ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, view.getParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE));
     parameterChanged(ControlParameter::ATOM_LABEL_MARGIN, view.getParameter(ControlParameter::ATOM_LABEL_MARGIN));
     parameterChanged(ControlParameter::RADICAL_ELECTRON_DOT_SIZE, view.getParameter(ControlParameter::RADICAL_ELECTRON_DOT_SIZE));
@@ -420,6 +433,7 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::BOND_LABEL_FONT, view.getParameter(ControlParameter::BOND_LABEL_FONT));
     parameterChanged(ControlParameter::BOND_LABEL_SIZE, view.getParameter(ControlParameter::BOND_LABEL_SIZE));
     parameterChanged(ControlParameter::BOND_CONFIGURATION_LABEL_FONT, view.getParameter(ControlParameter::BOND_CONFIGURATION_LABEL_FONT));
+    parameterChanged(ControlParameter::BOND_CONFIGURATION_LABEL_COLOR, view.getParameter(ControlParameter::BOND_CONFIGURATION_LABEL_COLOR));
     parameterChanged(ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, view.getParameter(ControlParameter::BOND_CONFIGURATION_LABEL_SIZE));
     parameterChanged(ControlParameter::BOND_LABEL_MARGIN, view.getParameter(ControlParameter::BOND_LABEL_MARGIN));
     parameterChanged(ControlParameter::SHOW_BOND_REACTION_INFOS, view.getParameter(ControlParameter::SHOW_BOND_REACTION_INFOS));
@@ -501,6 +515,11 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
 
     if (key == ControlParameter::ATOM_CONFIGURATION_LABEL_FONT) {
         setAtomConfigLabelFont(val.isEmpty() ? ATOM_CONFIGURATION_LABEL_FONT : val.getData<Font>());
+        return;
+    }
+
+    if (key == ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR) {
+        setAtomConfigLabelColor(val.isEmpty() ? ATOM_CONFIGURATION_LABEL_COLOR : val.getData<Color>());
         return;
     }
 
@@ -629,6 +648,11 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
+    if (key == ControlParameter::BOND_CONFIGURATION_LABEL_COLOR) {
+        setBondConfigLabelColor(val.isEmpty() ? BOND_CONFIGURATION_LABEL_COLOR : val.getData<Color>());
+        return;
+    }
+
     if (key == ControlParameter::BOND_CONFIGURATION_LABEL_SIZE) {
         setBondConfigLabelSize(val.isEmpty() ? BOND_CONFIGURATION_LABEL_SIZE : val.getData<SizeSpecification>());
         return;
@@ -747,6 +771,14 @@ void Vis::StructureView2DParameters::setAtomConfigLabelFont(const Font& font)
 {
     if (atomConfigLabelFont != font) {
         atomConfigLabelFont = font;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setAtomConfigLabelColor(const Color& color)
+{
+    if (atomConfigLabelColor != color) {
+        atomConfigLabelColor = color;
         graphicsAttributeChangedFlag = true;
     }
 }
@@ -899,6 +931,14 @@ void Vis::StructureView2DParameters::setBondConfigLabelFont(const Font& font)
 {
     if (bondConfigLabelFont != font) {
         bondConfigLabelFont = font;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setBondConfigLabelColor(const Color& color)
+{
+    if (bondConfigLabelColor != color) {
+        bondConfigLabelColor = color;
         graphicsAttributeChangedFlag = true;
     }
 }

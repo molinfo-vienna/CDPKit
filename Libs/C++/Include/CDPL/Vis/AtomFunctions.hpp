@@ -127,6 +127,16 @@ namespace CDPL
         CDPL_VIS_API bool hasConfigurationLabelSize(const Chem::Atom& atom);
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Atom& atom);
+
+
+        CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setConfigurationLabelColor(Chem::Atom& atom, const Color& color);
+
+        CDPL_VIS_API bool hasConfigurationLabelColor(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearConfigurationLabelColor(Chem::Atom& atom);
+
     } // namespace Vis
 } // namespace CDPL
 

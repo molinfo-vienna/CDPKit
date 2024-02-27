@@ -25,7 +25,6 @@
 #include <cstddef>
 
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QGridLayout>
 #include <QLabel>
 #include <QGroupBox>
@@ -113,6 +112,7 @@ void AtomColorSettingsEditWidget::apply()
     Vis::ColorTable::SharedPointer color_tab_ptr(new Vis::ColorTable(atomColors));
 
     Vis::setAtomColorParameter(settings, defaultColor);
+    Vis::setAtomConfigurationLabelColorParameter(settings, configLabelColor);
     ChOX::setAtomColorTableParameter(settings, color_tab_ptr);
     setUseAtomColorTableParameter(settings, enableColorTabCheckBox->isChecked());
 
@@ -130,6 +130,7 @@ void AtomColorSettingsEditWidget::reset()
 
     atomColors = *getAtomColorTableParameter(settings);
     defaultColor = Vis::getAtomColorParameter(settings);
+    configLabelColor = Vis::getAtomConfigurationLabelColorParameter(settings);
 
     enableColorTabCheckBox->setChecked(getUseAtomColorTableParameter(settings));
     colorTabWidget->setEnabled(enableColorTabCheckBox->isChecked());
@@ -147,6 +148,7 @@ void AtomColorSettingsEditWidget::setDefaults()
     
     atomColors = *ControlParameterDefault::ATOM_COLOR_TABLE;
     defaultColor = Vis::ControlParameterDefault::ATOM_COLOR;
+    configLabelColor = Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR;
 
     enableColorTabCheckBox->setChecked(ControlParameterDefault::USE_ATOM_COLOR_TABLE);
     colorTabWidget->setEnabled(enableColorTabCheckBox->isChecked());
@@ -181,23 +183,38 @@ void AtomColorSettingsEditWidget::init()
 
     frame->setFrameStyle(QFrame::StyledPanel);
 
-    QHBoxLayout* h_box_layout = new QHBoxLayout(frame);
+    QGridLayout* grid_layout = new QGridLayout(frame);
 
 // +++
 
     ColorEditWidget* color_edit_widget = new ColorEditWidget(frame, defaultColor);
-
     QLabel* label = new QLabel(tr("De&fault Color:"), frame);
 
     label->setBuddy(color_edit_widget);
 
-    h_box_layout->addWidget(label);
+    grid_layout->addWidget(label, 0, 0);
     
     setFocusProxy(color_edit_widget);
 
-    h_box_layout->addWidget(color_edit_widget);
+    grid_layout->addWidget(color_edit_widget, 0, 1);
 
     connect(color_edit_widget, SIGNAL(colorChanged()), this, SIGNAL(updateGUI()));
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+
+// +++
+
+    color_edit_widget = new ColorEditWidget(frame, configLabelColor);
+    label = new QLabel(tr("&CIP Config. Label Color:"), frame);
+
+    label->setBuddy(color_edit_widget);
+
+    grid_layout->addWidget(label, 1, 0);
+    
+    setFocusProxy(color_edit_widget);
+
+    grid_layout->addWidget(color_edit_widget, 1, 1);
+
     connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
     connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
 
@@ -218,7 +235,7 @@ void AtomColorSettingsEditWidget::init()
 
 // +++
 
-    QGridLayout* grid_layout = new QGridLayout(colorTabWidget);
+    grid_layout = new QGridLayout(colorTabWidget);
 
     grid_layout->setSpacing(1);
     grid_layout->setMargin(0);
