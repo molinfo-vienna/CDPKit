@@ -65,6 +65,10 @@ namespace
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, ConfigurationLabelFont)
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ConfigurationLabelSize)
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, ConfigurationLabelColor)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, CustomLabelFont)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, CustomLabelSize)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, CustomLabelColor)
+    MAKE_ATOM_FUNC_WRAPPERS(const std::string&, CustomLabel)
 }
 
 
@@ -83,4 +87,8 @@ void CDPLPythonVis::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelFont, font)
     EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelSize, size)
     EXPORT_ATOM_FUNCS_INT_REF(ConfigurationLabelColor, color)
+    EXPORT_ATOM_FUNCS_INT_REF(CustomLabelFont, font)
+    EXPORT_ATOM_FUNCS_INT_REF(CustomLabelSize, size)
+    EXPORT_ATOM_FUNCS_INT_REF(CustomLabelColor, color)
+    EXPORT_ATOM_FUNCS_INT_REF(CustomLabel, text)
 }

@@ -67,5 +67,12 @@ void CDPLPythonVis::exportMolecularGraphPropertyDefaults()
         .def_readonly("ATOM_CONFIGURATION_LABEL_COLOR", &Vis::MolecularGraphPropertyDefault::ATOM_CONFIGURATION_LABEL_COLOR)
         .def_readonly("BOND_CONFIGURATION_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::BOND_CONFIGURATION_LABEL_FONT)
         .def_readonly("BOND_CONFIGURATION_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::BOND_CONFIGURATION_LABEL_SIZE)
-        .def_readonly("BOND_CONFIGURATION_LABEL_COLOR", &Vis::MolecularGraphPropertyDefault::BOND_CONFIGURATION_LABEL_COLOR);
+        .def_readonly("BOND_CONFIGURATION_LABEL_COLOR", &Vis::MolecularGraphPropertyDefault::BOND_CONFIGURATION_LABEL_COLOR)
+        .def_readonly("ATOM_CUSTOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::ATOM_CUSTOM_LABEL_FONT)
+        .def_readonly("ATOM_CUSTOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::ATOM_CUSTOM_LABEL_SIZE)
+        .def_readonly("ATOM_CUSTOM_LABEL_COLOR", &Vis::MolecularGraphPropertyDefault::ATOM_CUSTOM_LABEL_COLOR)
+        .def_readonly("BOND_CUSTOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::BOND_CUSTOM_LABEL_FONT)
+        .def_readonly("BOND_CUSTOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::BOND_CUSTOM_LABEL_SIZE)
+        .def_readonly("BOND_CUSTOM_LABEL_COLOR", &Vis::MolecularGraphPropertyDefault::BOND_CUSTOM_LABEL_COLOR)
+        ;
 }

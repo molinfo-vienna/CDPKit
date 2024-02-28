@@ -493,6 +493,51 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_COLOR;
+        
+            /**
+             * \brief Specifies the font used for atom custom text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_FONT and
+             * Vis::AtomProperty::CUSTOM_LABEL_FONT are not set, the default setting Vis::ControlParameterDefault::ATOM_CUSTOM_LABEL_FONT
+             * will be used.
+             *
+             * \valuetype Vis::Font
+             * \note The control-parameter setting is ignored if a font has been specified by 
+             *       Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_FONT or Vis::AtomProperty::CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_FONT;
+
+            /**
+             * \brief Specifies the size of atom custom text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::ATOM_LABEL_SIZE, Vis::MolecularGraphProperty::ATOM_LABEL_SIZE or Vis::AtomProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. If the control-parameter is left unspecified and the properties 
+             * Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_SIZE and Vis::AtomProperty::CUSTOM_LABEL_SIZE are not set, the default
+             * setting Vis::ControlParameterDefault::ATOM_CUSTOM_LABEL_SIZE will be used.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a size has been specified by 
+             *       Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_SIZE or Vis::AtomProperty::ATOM_CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color of atom custom text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_COLOR and
+             * Vis::AtomProperty::CUSTOM_LABEL_COLOR are not set, the default setting Vis::ControlParameterDefault::ATOM_CUSTOM_LABEL_COLOR will be used. 
+             *
+             * \valuetype Vis::Color
+             * \note The control-parameter setting is ignored if a color has been specified by Vis::MolecularGraphProperty::ATOM_CUSTOM_LABEL_COLOR or 
+             *       Vis::BondProperty::COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_COLOR;
             
             /**
              * \brief Specifies the margin of free space around atom labels.
@@ -645,6 +690,17 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_CONFIGURATION_LABELS;
+
+            /**
+             * \brief Specifies whether or not to show atom custom text labels.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::SHOW_ATOM_CUSTOM_LABELS will be used.
+             *
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_CUSTOM_LABELS;
 
             /**
              * \brief Specifies the desired average bond length for the visualization of chemical structures.
@@ -872,6 +928,51 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_COLOR;
+                
+            /**
+             * \brief Specifies the font used for bond custom text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_FONT and
+             * Vis::BondProperty::CUSTOM_LABEL_FONT are not set, the default setting Vis::ControlParameterDefault::BOND_CUSTOM_LABEL_FONT
+             * will be used.
+             *
+             * \valuetype Vis::Font
+             * \note The control-parameter setting is ignored if a font has been specified by 
+             *       Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_FONT or Vis::BondProperty::CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of bond custom text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::BOND_LABEL_SIZE, Vis::MolecularGraphProperty::BOND_LABEL_SIZE or Vis::BondProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. If the control-parameter is left unspecified and the properties 
+             * Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE and Vis::BondProperty::CUSTOM_LABEL_SIZE are not set, the default
+             * setting Vis::ControlParameterDefault::BOND_CUSTOM_LABEL_SIZE will be used.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a size has been specified by 
+             *       Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE or Vis::BondProperty::CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color of bond custom text labels.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR and
+             * Vis::BondProperty::CUSTOM_LABEL_COLOR are not set, the default setting Vis::ControlParameterDefault::BOND_CUSTOM_LABEL_COLOR will be used. 
+             *
+             * \valuetype Vis::Color
+             * \note The control-parameter setting is ignored if a color has been specified by Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR or 
+             *       Vis::BondProperty::COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_COLOR;
             
             /**
              * \brief Specifies the margin of free space around bond labels.
@@ -956,6 +1057,17 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_BOND_CONFIGURATION_LABELS;
+
+            /**
+             * \brief Specifies whether or not to show bond custom text labels.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::SHOW_BOND_CUSTOM_LABELS will be used.
+             *
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey SHOW_BOND_CUSTOM_LABELS;
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

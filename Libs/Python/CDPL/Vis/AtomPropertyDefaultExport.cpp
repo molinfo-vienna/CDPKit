@@ -51,5 +51,10 @@ void CDPLPythonVis::exportAtomPropertyDefaults()
         .def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::AtomPropertyDefault::RADICAL_ELECTRON_DOT_SIZE)
         .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_FONT)
         .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_SIZE)
-        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_COLOR);
+        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::AtomPropertyDefault::CONFIGURATION_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL_FONT", &Vis::AtomPropertyDefault::CUSTOM_LABEL_FONT)
+        .def_readonly("CUSTOM_LABEL_SIZE", &Vis::AtomPropertyDefault::CUSTOM_LABEL_SIZE)
+        .def_readonly("CUSTOM_LABEL_COLOR", &Vis::AtomPropertyDefault::CUSTOM_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL", &Vis::AtomPropertyDefault::CUSTOM_LABEL)
+        ;
 }

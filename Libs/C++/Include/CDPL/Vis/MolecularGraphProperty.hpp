@@ -190,6 +190,46 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CONFIGURATION_LABEL_COLOR;
+
+            /**
+             * \brief Specifies the font used for custom text labels.
+             *
+             * The specified font takes precedence over the
+             * font specified by the parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT. 
+             *
+             * \valuetype Vis::Font
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of custom text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::ATOM_LABEL_SIZE, Vis::MolecularGraphProperty::ATOM_LABEL_SIZE or Vis::AtomProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::ATOM_CUSTOM_LABEL_SIZE. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color used for custom text labels.
+             *
+             * The specified color takes precedence over the
+             * color specified by the parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_COLOR. 
+             *
+             * \valuetype Vis::Color
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::CUSTOM_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_COLOR;
   
             /**
              * \brief Specifies the color of bonds.
@@ -386,6 +426,47 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CONFIGURATION_LABEL_COLOR;
+
+            /**
+             * \brief Specifies the font used for custom text labels.
+             *
+             * The specified font takes precedence over the
+             * font specified by the parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT. 
+             *
+             * \valuetype Vis::Font
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_FONT;
+            
+            /**
+             * \brief Specifies the size of custom text labels.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the primary label size given by
+             * Vis::ControlParameter::BOND_LABEL_SIZE, Vis::MolecularGraphProperty::BOND_LABEL_SIZE or Vis::BondProperty::LABEL_SIZE.
+             * If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during 
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Specifies the color used for custom text labels.
+             *
+             * The specified color takes precedence over the
+             * color specified by the parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR. 
+             *
+             * \valuetype Vis::Color
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::CUSTOM_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_COLOR;
+
         } // namespace MolecularGraphProperty
     } // namespace Vis
 } // namespace CDPL

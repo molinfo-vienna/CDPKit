@@ -29,6 +29,8 @@
 #ifndef CDPL_VIS_ATOMFUNCTIONS_HPP
 #define CDPL_VIS_ATOMFUNCTIONS_HPP
 
+#include <string>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
@@ -110,7 +112,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearRadicalElectronDotSize(Chem::Atom& atom);
 
-
+        /*
+         * \since 1.1
+         */
         CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Atom& atom);
 
         CDPL_VIS_API void setConfigurationLabelFont(Chem::Atom& atom, const Font& font);
@@ -119,7 +123,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelFont(Chem::Atom& atom);
 
-
+        /*
+         * \since 1.1
+         */
         CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Atom& atom);
 
         CDPL_VIS_API void setConfigurationLabelSize(Chem::Atom& atom, const SizeSpecification& size);
@@ -128,7 +134,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Atom& atom);
 
-
+        /*
+         * \since 1.2
+         */
         CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Atom& atom);
 
         CDPL_VIS_API void setConfigurationLabelColor(Chem::Atom& atom, const Color& color);
@@ -136,6 +144,50 @@ namespace CDPL
         CDPL_VIS_API bool hasConfigurationLabelColor(const Chem::Atom& atom);
 
         CDPL_VIS_API void clearConfigurationLabelColor(Chem::Atom& atom);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Font& getCustomLabelFont(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setCustomLabelFont(Chem::Atom& atom, const Font& font);
+
+        CDPL_VIS_API bool hasCustomLabelFont(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearCustomLabelFont(Chem::Atom& atom);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getCustomLabelSize(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setCustomLabelSize(Chem::Atom& atom, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasCustomLabelSize(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearCustomLabelSize(Chem::Atom& atom);
+        
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Color& getCustomLabelColor(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setCustomLabelColor(Chem::Atom& atom, const Color& color);
+
+        CDPL_VIS_API bool hasCustomLabelColor(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearCustomLabelColor(Chem::Atom& atom);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const std::string& getCustomLabel(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setCustomLabel(Chem::Atom& atom, const std::string& text);
+
+        CDPL_VIS_API bool hasCustomLabel(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearCustomLabel(Chem::Atom& atom);
 
     } // namespace Vis
 } // namespace CDPL

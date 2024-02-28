@@ -29,6 +29,8 @@
 #ifndef CDPL_VIS_BONDFUNCTIONS_HPP
 #define CDPL_VIS_BONDFUNCTIONS_HPP
 
+#include <string>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
@@ -155,7 +157,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearLabelMargin(Chem::Bond& bond);
 
-
+        /*
+         * \since 1.1
+         */
         CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Bond& bond);
 
         CDPL_VIS_API void setConfigurationLabelFont(Chem::Bond& bond, const Font& font);
@@ -164,7 +168,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelFont(Chem::Bond& bond);
 
-
+        /*
+         * \since 1.1
+         */
         CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Bond& bond);
 
         CDPL_VIS_API void setConfigurationLabelSize(Chem::Bond& bond, const SizeSpecification& size);
@@ -173,7 +179,9 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Bond& bond);
         
-
+        /*
+         * \since 1.2
+         */
         CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Bond& bond);
 
         CDPL_VIS_API void setConfigurationLabelColor(Chem::Bond& bond, const Color& color);
@@ -181,6 +189,50 @@ namespace CDPL
         CDPL_VIS_API bool hasConfigurationLabelColor(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearConfigurationLabelColor(Chem::Bond& bond);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Font& getCustomLabelFont(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setCustomLabelFont(Chem::Bond& bond, const Font& font);
+
+        CDPL_VIS_API bool hasCustomLabelFont(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearCustomLabelFont(Chem::Bond& bond);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getCustomLabelSize(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setCustomLabelSize(Chem::Bond& bond, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasCustomLabelSize(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearCustomLabelSize(Chem::Bond& bond);
+        
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Color& getCustomLabelColor(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setCustomLabelColor(Chem::Bond& bond, const Color& color);
+
+        CDPL_VIS_API bool hasCustomLabelColor(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearCustomLabelColor(Chem::Bond& bond);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const std::string& getCustomLabel(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setCustomLabel(Chem::Bond& bond, const std::string& text);
+
+        CDPL_VIS_API bool hasCustomLabel(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearCustomLabel(Chem::Bond& bond);
 
     } // namespace Vis
 } // namespace CDPL

@@ -57,5 +57,10 @@ void CDPLPythonVis::exportBondProperties()
         .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondProperty::STEREO_BOND_WEDGE_WIDTH)
         .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::BondProperty::CONFIGURATION_LABEL_FONT)
         .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::BondProperty::CONFIGURATION_LABEL_SIZE)
-        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::BondProperty::CONFIGURATION_LABEL_COLOR);
+        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::BondProperty::CONFIGURATION_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL_FONT", &Vis::BondProperty::CUSTOM_LABEL_FONT)
+        .def_readonly("CUSTOM_LABEL_SIZE", &Vis::BondProperty::CUSTOM_LABEL_SIZE)
+        .def_readonly("CUSTOM_LABEL_COLOR", &Vis::BondProperty::CUSTOM_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL", &Vis::BondProperty::CUSTOM_LABEL)
+        ;
 }

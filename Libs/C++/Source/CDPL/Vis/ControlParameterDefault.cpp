@@ -90,9 +90,13 @@ namespace CDPL
             const bool                      SHOW_ATOM_REACTION_INFOS             = true;
             const bool                      SHOW_RADICAL_ELECTRONS               = true;
             const bool                      SHOW_ATOM_CONFIGURATION_LABELS       = false;
+            const bool                      SHOW_ATOM_CUSTOM_LABELS              = true;
             const Font                      ATOM_CONFIGURATION_LABEL_FONT        = Font("", 8.0, false, true);
             const SizeSpecification         ATOM_CONFIGURATION_LABEL_SIZE        = SizeSpecification(8.0, false, false, true);
             const Color                     ATOM_CONFIGURATION_LABEL_COLOR       = Color(0, 0, 0);
+            const Font                      ATOM_CUSTOM_LABEL_FONT               = Font("", 8.0, false, true);
+            const SizeSpecification         ATOM_CUSTOM_LABEL_SIZE               = SizeSpecification(8.0, false, false, true);
+            const Color                     ATOM_CUSTOM_LABEL_COLOR              = Color(0, 0, 0);
 
             const Color             BOND_COLOR                     = Color(0, 0, 0);
             const SizeSpecification BOND_LENGTH                    = SizeSpecification(30.0);
@@ -111,9 +115,14 @@ namespace CDPL
             const bool              SHOW_BOND_QUERY_INFOS          = true;
             const bool              SHOW_STEREO_BONDS              = true;
             const bool              SHOW_BOND_CONFIGURATION_LABELS = false;
+            const bool              SHOW_BOND_CUSTOM_LABELS        = true;
             const Font              BOND_CONFIGURATION_LABEL_FONT  = Font("", 8.0, false, true);
             const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
             const Color             BOND_CONFIGURATION_LABEL_COLOR = Color(0, 0, 0);
+            const Font              BOND_CUSTOM_LABEL_FONT         = Font("", 8.0, false, true);
+            const SizeSpecification BOND_CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
+            const Color             BOND_CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
+
         } // namespace ControlParameterDefault
 
         void initControlParameterDefaults() {}

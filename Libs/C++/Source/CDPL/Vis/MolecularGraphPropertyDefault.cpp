@@ -47,6 +47,9 @@ namespace CDPL
             const Font                      ATOM_CONFIGURATION_LABEL_FONT  = Font();
             const SizeSpecification         ATOM_CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
             const Color                     ATOM_CONFIGURATION_LABEL_COLOR = Color(0, 0, 0);
+            const Font                      ATOM_CUSTOM_LABEL_FONT         = Font();
+            const SizeSpecification         ATOM_CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
+            const Color                     ATOM_CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
             const Color                     BOND_COLOR                     = Color(0, 0, 0);
             const SizeSpecification         BOND_LINE_WIDTH                = SizeSpecification(1.0, false, false, true);
             const SizeSpecification         BOND_LINE_SPACING              = SizeSpecification(0.15, true, true, true);
@@ -62,6 +65,9 @@ namespace CDPL
             const Font                      BOND_CONFIGURATION_LABEL_FONT  = Font();
             const SizeSpecification         BOND_CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
             const Color                     BOND_CONFIGURATION_LABEL_COLOR = Color(0, 0, 0);
+            const Font                      BOND_CUSTOM_LABEL_FONT         = Font();
+            const SizeSpecification         BOND_CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
+            const Color                     BOND_CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
         } // namespace MolecularGraphPropertyDefault
 
         void initMolecularGraphPropertyDefaults() {}

@@ -46,6 +46,11 @@ namespace CDPL
             const Font              CONFIGURATION_LABEL_FONT  = Font();
             const SizeSpecification CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
             const Color             CONFIGURATION_LABEL_COLOR = Color(0, 0, 0);
+            const Font              CUSTOM_LABEL_FONT         = Font();
+            const SizeSpecification CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
+            const Color             CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
+            const std::string       CUSTOM_LABEL              = "";
+
         } // namespace AtomPropertyDefault
 
         void initAtomPropertyDefaults() {}

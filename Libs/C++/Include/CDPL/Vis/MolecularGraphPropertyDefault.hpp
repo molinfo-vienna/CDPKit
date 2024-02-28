@@ -71,6 +71,21 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Color                     ATOM_CONFIGURATION_LABEL_COLOR;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font                      ATOM_CUSTOM_LABEL_FONT;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification         ATOM_CUSTOM_LABEL_SIZE;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color                     ATOM_CUSTOM_LABEL_COLOR;
             
             extern CDPL_VIS_API const Color                     BOND_COLOR;
             extern CDPL_VIS_API const SizeSpecification         BOND_LINE_WIDTH;
@@ -99,6 +114,21 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Color                     BOND_CONFIGURATION_LABEL_COLOR;
+ 
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font                      BOND_CUSTOM_LABEL_FONT;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification         BOND_CUSTOM_LABEL_SIZE;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color                     BOND_CUSTOM_LABEL_COLOR;
             
         } // namespace MolecularGraphPropertyDefault
     } // namespace Vis

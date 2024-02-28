@@ -29,6 +29,8 @@
 #ifndef CDPL_VIS_BONDPROPERTYDEFAULT_HPP
 #define CDPL_VIS_BONDPROPERTYDEFAULT_HPP
 
+#include <string>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
@@ -73,6 +75,26 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Color             CONFIGURATION_LABEL_COLOR;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font              CUSTOM_LABEL_FONT;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification CUSTOM_LABEL_SIZE;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color             CUSTOM_LABEL_COLOR;
+
+            /*
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const std::string       CUSTOM_LABEL;
 
         } // namespace BondPropertyDefault
     } // namespace Vis

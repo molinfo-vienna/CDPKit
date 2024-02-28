@@ -224,6 +224,24 @@ namespace CDPL
             extern CDPL_VIS_API const Color ATOM_CONFIGURATION_LABEL_COLOR;
  
             /**
+             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font ATOM_CUSTOM_LABEL_FONT;
+
+            /**
+             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification ATOM_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color ATOM_CUSTOM_LABEL_COLOR;
+
+            /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_MARGIN;
@@ -283,6 +301,12 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_ATOM_CONFIGURATION_LABELS;
+  
+           /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_ATOM_CUSTOM_LABELS.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool SHOW_ATOM_CUSTOM_LABELS;
              
             /**
              * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_COLOR.
@@ -363,6 +387,24 @@ namespace CDPL
             extern CDPL_VIS_API const Color BOND_CONFIGURATION_LABEL_COLOR;
             
             /**
+             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font BOND_CUSTOM_LABEL_FONT;
+            
+            /**
+             * \brief Default setting (= \c %SizeSpecification(8.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification BOND_CUSTOM_LABEL_SIZE;
+
+            /**
+             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color BOND_CUSTOM_LABEL_COLOR;
+
+            /**
              * \brief Default setting (= \c %SizeSpecification(2.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LABEL_MARGIN.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
@@ -387,6 +429,13 @@ namespace CDPL
              * \since 1.1
              */
             extern CDPL_VIS_API const bool SHOW_BOND_CONFIGURATION_LABELS;
+
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_BOND_CUSTOM_LABELS.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool SHOW_BOND_CUSTOM_LABELS;
+
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL

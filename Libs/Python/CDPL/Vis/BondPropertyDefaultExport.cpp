@@ -56,5 +56,10 @@ void CDPLPythonVis::exportBondPropertyDefaults()
         .def_readonly("LABEL_MARGIN", &Vis::BondPropertyDefault::LABEL_MARGIN)
         .def_readonly("CONFIGURATION_LABEL_FONT", &Vis::BondPropertyDefault::CONFIGURATION_LABEL_FONT)
         .def_readonly("CONFIGURATION_LABEL_SIZE", &Vis::BondPropertyDefault::CONFIGURATION_LABEL_SIZE)
-        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::BondPropertyDefault::CONFIGURATION_LABEL_COLOR);
+        .def_readonly("CONFIGURATION_LABEL_COLOR", &Vis::BondPropertyDefault::CONFIGURATION_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL_FONT", &Vis::BondPropertyDefault::CUSTOM_LABEL_FONT)
+        .def_readonly("CUSTOM_LABEL_SIZE", &Vis::BondPropertyDefault::CUSTOM_LABEL_SIZE)
+        .def_readonly("CUSTOM_LABEL_COLOR", &Vis::BondPropertyDefault::CUSTOM_LABEL_COLOR)
+        .def_readonly("CUSTOM_LABEL", &Vis::BondPropertyDefault::CUSTOM_LABEL)
+        ;
 }
