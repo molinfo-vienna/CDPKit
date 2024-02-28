@@ -19,7 +19,7 @@ Release V1.1.1
    
 .. rubric:: Miscellaneous Changes 
 
-- Rewrote code that uses the boost filesystem library to C++17 equivalents
+- Rewrote code that uses the boost filesystem library to use C++17 equivalents
 - Compiling CDPKit now requires a compiler with C++17 support
 
 Release V1.1.0
