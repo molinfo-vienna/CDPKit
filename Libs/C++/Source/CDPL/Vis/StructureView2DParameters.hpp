@@ -68,13 +68,16 @@ namespace CDPL
             bool useCalculatedAtomCoords() const;
 
             const Color&             getAtomColor() const;
+            const Color&             getAtomConfigLabelColor() const;
+            const Color&             getAtomCustomLabelColor() const;
             const Font&              getAtomLabelFont() const;
             const Font&              getSecondaryAtomLabelFont() const;
             const Font&              getAtomConfigLabelFont() const;
-            const Color&             getAtomConfigLabelColor() const;
+            const Font&              getAtomCustomLabelFont() const;
             const SizeSpecification& getAtomLabelSize() const;
             const SizeSpecification& getSecondaryAtomLabelSize() const;
             const SizeSpecification& getAtomConfigLabelSize() const;
+            const SizeSpecification& getAtomCustomLabelSize() const;
             const SizeSpecification& getAtomLabelMargin() const;
             const SizeSpecification& getRadicalElectronDotSize() const;
 
@@ -88,13 +91,17 @@ namespace CDPL
             bool showAtomQueryInfos() const;
             bool showRadicalElectrons() const;
             bool showAtomConfigLabels() const;
+            bool showAtomCustomLabels() const;
             
             const Color&             getBondColor() const;
+            const Color&             getBondConfigLabelColor() const;
+            const Color&             getBondCustomLabelColor() const;
             const Font&              getBondLabelFont() const;
             const Font&              getBondConfigLabelFont() const;
-            const Color&             getBondConfigLabelColor() const;
+            const Font&              getBondCustomLabelFont() const;
             const SizeSpecification& getBondLabelSize() const;
             const SizeSpecification& getBondConfigLabelSize() const;
+            const SizeSpecification& getBondCustomLabelSize() const;
             const SizeSpecification& getBondLabelMargin() const;
             const SizeSpecification& getBondLineWidth() const;
             const SizeSpecification& getBondLineSpacing() const;
@@ -109,6 +116,7 @@ namespace CDPL
             bool showBondQueryInfos() const;
             bool showStereoBonds() const;
             bool showBondConfigLabels() const;
+            bool showBondCustomLabels() const;
 
             bool coordinatesChanged() const;
             bool explicitHVisibilityChanged() const;
@@ -140,12 +148,15 @@ namespace CDPL
 
             void setAtomColor(const Color&);
             void setAtomLabelFont(const Font&);
-            void setSecondaryAtomLabelFont(const Font&);
-            void setAtomConfigLabelFont(const Font&);
-            void setAtomConfigLabelColor(const Color&);
             void setAtomLabelSize(const SizeSpecification&);
+            void setSecondaryAtomLabelFont(const Font&);
             void setSecondaryAtomLabelSize(const SizeSpecification&);
+            void setAtomConfigLabelFont(const Font&);
             void setAtomConfigLabelSize(const SizeSpecification&);
+            void setAtomConfigLabelColor(const Color&);
+            void setAtomCustomLabelFont(const Font&);
+            void setAtomCustomLabelSize(const SizeSpecification&);
+            void setAtomCustomLabelColor(const Color&);
             void setAtomLabelMargin(const SizeSpecification&);
             void setRadicalElectronDotSize(const SizeSpecification&);
             
@@ -159,13 +170,17 @@ namespace CDPL
             void showAtomQueryInfos(bool);
             void showRadicalElectrons(bool);
             void showAtomConfigLabels(bool);
+            void showAtomCustomLabels(bool);
 
             void setBondColor(const Color&);
             void setBondLabelFont(const Font&);
-            void setBondConfigLabelFont(const Font&);
-            void setBondConfigLabelColor(const Color&);
             void setBondLabelSize(const SizeSpecification&);
+            void setBondConfigLabelFont(const Font&);
             void setBondConfigLabelSize(const SizeSpecification&);
+            void setBondConfigLabelColor(const Color&);
+            void setBondCustomLabelFont(const Font&);
+            void setBondCustomLabelSize(const SizeSpecification&);
+            void setBondCustomLabelColor(const Color&);
             void setBondLabelMargin(const SizeSpecification&);
             void setBondLineWidth(const SizeSpecification&);
             void setBondLineSpacing(const SizeSpecification&);
@@ -180,6 +195,7 @@ namespace CDPL
             void showBondQueryInfos(bool);
             void showStereoBonds(bool);
             void showBondConfigLabels(bool);
+            void showBondCustomLabels(bool);
 
             const View2D&             view;
             Rectangle2D               viewport;
@@ -194,10 +210,13 @@ namespace CDPL
             Font                      atomLabelFont;
             Font                      secondaryAtomLabelFont;
             Font                      atomConfigLabelFont;
+            Font                      atomCustomLabelFont;
             Color                     atomConfigLabelColor;
+            Color                     atomCustomLabelColor;
             SizeSpecification         atomLabelSize;
             SizeSpecification         secondaryAtomLabelSize;
             SizeSpecification         atomConfigLabelSize;
+            SizeSpecification         atomCustomLabelSize;
             SizeSpecification         atomLabelMargin;
             SizeSpecification         radicalElectronDotSize;
             bool                      showCarbonsFlag;
@@ -210,12 +229,16 @@ namespace CDPL
             bool                      showAtomQueryInfosFlag;
             bool                      showRadicalElectronsFlag;
             bool                      showAtomConfigLabelsFlag;
+            bool                      showAtomCustomLabelsFlag;
             Color                     bondColor;
             Font                      bondLabelFont;
             Font                      bondConfigLabelFont;
+            Font                      bondCustomLabelFont;
             Color                     bondConfigLabelColor;
+            Color                     bondCustomLabelColor;
             SizeSpecification         bondLabelSize;
             SizeSpecification         bondConfigLabelSize;
+            SizeSpecification         bondCustomLabelSize;
             SizeSpecification         bondLabelMargin;
             SizeSpecification         bondLineWidth;
             SizeSpecification         bondLineSpacing;
@@ -229,6 +252,7 @@ namespace CDPL
             bool                      showBondQueryInfosFlag;
             bool                      showStereoBondsFlag;
             bool                      showBondConfigLabelsFlag;
+            bool                      showBondCustomLabelsFlag;
             bool                      coordinatesChangedFlag;
             bool                      explicitHVisibilityChangedFlag;
             bool                      propertyVisibilityChangedFlag;
