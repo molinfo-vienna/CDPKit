@@ -131,6 +131,60 @@ def setSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecifica
 # \brief 
 # \param molgraph 
 #
+def clearBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondCustomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param size 
+#
+def setBondCustomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomCustomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param size 
+#
+def setAtomCustomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearBondConfigurationLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -509,6 +563,60 @@ def setBondColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 # \brief 
 # \param molgraph 
 #
+def clearBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondCustomLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param color 
+#
+def setBondCustomLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomCustomLabelColor(molgraph: Chem.MolecularGraph) -> Color: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param color 
+#
+def setAtomCustomLabelColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearBondConfigurationLabelColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -666,6 +774,60 @@ def getSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 # \param font 
 #
 def setSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondCustomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param font 
+#
+def setBondCustomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomCustomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param font 
+#
+def setAtomCustomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
 # \brief 

@@ -113,3 +113,37 @@ class AtomProperty(Boost.Python.instance):
     # <b>Value Type:</b> Vis.Color \since 1.2
     # 
     CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('CONFIGURATION_LABEL_COLOR')
+
+    ##
+    # \brief Specifies the font used for custom text labels.
+    # 
+    # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT and Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT.
+    # 
+    # <b>Value Type:</b> Vis.Font \since 1.2
+    # 
+    CUSTOM_LABEL_FONT = CDPL.Base.LookupKey('CUSTOM_LABEL_FONT')
+
+    ##
+    # \brief Specifies the size of custom text labels.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE and Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # 
+    CUSTOM_LABEL_SIZE = CDPL.Base.LookupKey('CUSTOM_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color used for custom text labels.
+    # 
+    # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR and Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR.
+    # 
+    # <b>Value Type:</b> Vis.Color \since 1.2
+    # 
+    CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('CUSTOM_LABEL_COLOR')
+
+    ##
+    # \brief Specifies the custom label text. <b>Value Type:</b> std::string.
+    # 
+    # \since 1.2
+    # 
+    CUSTOM_LABEL = CDPL.Base.LookupKey('CUSTOM_LABEL')

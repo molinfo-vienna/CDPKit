@@ -153,3 +153,33 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     BOND_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
+    ATOM_CUSTOM_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    ATOM_CUSTOM_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    ATOM_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
+    BOND_CUSTOM_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    BOND_CUSTOM_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    BOND_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)

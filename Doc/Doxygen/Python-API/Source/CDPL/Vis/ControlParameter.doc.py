@@ -570,6 +570,15 @@ class ControlParameter(Boost.Python.instance):
     SHOW_ATOM_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CONFIGURATION_LABELS')
 
     ##
+    # \brief Specifies whether or not to show atom custom text labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CUSTOM_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    SHOW_ATOM_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CUSTOM_LABELS')
+
+    ##
     # \brief Specifies the font used for atom configuration descriptor text labels.
     # 
     # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT and Vis.AtomProperty.CONFIGURATION_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.ATOM_CONFIGURATION_LABEL_FONT will be used.
@@ -603,6 +612,39 @@ class ControlParameter(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_COLOR')
 
     ##
+    # \brief Specifies the font used for atom custom text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT and Vis.AtomProperty.CUSTOM_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_FONT will be used.
+    # 
+    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT or Vis.AtomProperty.CUSTOM_LABEL_FONT. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_CUSTOM_LABEL_FONT = CDPL.Base.LookupKey('ATOM_CUSTOM_LABEL_FONT')
+
+    ##
+    # \brief Specifies the size of atom custom text labels.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.ATOM_LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.AtomProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE and Vis.AtomProperty.CUSTOM_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_SIZE will be used.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE or Vis.AtomProperty.ATOM_CUSTOM_LABEL_SIZE. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_CUSTOM_LABEL_SIZE = CDPL.Base.LookupKey('ATOM_CUSTOM_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color of atom custom text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR and Vis.AtomProperty.CUSTOM_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.ATOM_CUSTOM_LABEL_COLOR will be used.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CUSTOM_LABEL_COLOR')
+
+    ##
     # \brief Specifies whether or not to show bond configuration descriptor labels.
     # 
     # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CONFIGURATION_LABELS will be used.
@@ -610,6 +652,15 @@ class ControlParameter(Boost.Python.instance):
     # <b>Value Type:</b> <tt>bool</tt> \since 1.1
     # 
     SHOW_BOND_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CONFIGURATION_LABELS')
+
+    ##
+    # \brief Specifies whether or not to show bond custom text labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CUSTOM_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    SHOW_BOND_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CUSTOM_LABELS')
 
     ##
     # \brief Specifies the font used for bond configuration descriptor text labels.
@@ -643,3 +694,36 @@ class ControlParameter(Boost.Python.instance):
     # \since 1.2
     # 
     BOND_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CONFIGURATION_LABEL_COLOR')
+
+    ##
+    # \brief Specifies the font used for bond custom text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT and Vis.BondProperty.CUSTOM_LABEL_FONT are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_FONT will be used.
+    # 
+    # <b>Value Type:</b> Vis.Font \note The control-parameter setting is ignored if a font has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT or Vis.BondProperty.CUSTOM_LABEL_FONT. 
+    # 
+    # \since 1.2
+    # 
+    BOND_CUSTOM_LABEL_FONT = CDPL.Base.LookupKey('BOND_CUSTOM_LABEL_FONT')
+
+    ##
+    # \brief Specifies the size of bond custom text labels.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.ControlParameter.BOND_LABEL_SIZE, Vis.MolecularGraphProperty.BOND_LABEL_SIZE or Vis.BondProperty.LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE and Vis.BondProperty.CUSTOM_LABEL_SIZE are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_SIZE will be used.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE or Vis.BondProperty.CUSTOM_LABEL_SIZE. 
+    # 
+    # \since 1.2
+    # 
+    BOND_CUSTOM_LABEL_SIZE = CDPL.Base.LookupKey('BOND_CUSTOM_LABEL_SIZE')
+
+    ##
+    # \brief Specifies the color of bond custom text labels.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR and Vis.BondProperty.CUSTOM_LABEL_COLOR are not set, the default setting Vis.ControlParameterDefault.BOND_CUSTOM_LABEL_COLOR will be used.
+    # 
+    # <b>Value Type:</b> Vis.Color \note The control-parameter setting is ignored if a color has been specified by Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR or Vis.BondProperty.COLOR. 
+    # 
+    # \since 1.2
+    # 
+    BOND_CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CUSTOM_LABEL_COLOR')

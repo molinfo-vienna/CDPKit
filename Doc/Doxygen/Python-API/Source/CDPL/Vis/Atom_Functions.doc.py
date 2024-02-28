@@ -23,6 +23,33 @@
 # \brief 
 # \param atom 
 #
+def clearCustomLabelSize(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasCustomLabelSize(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getCustomLabelSize(atom: Chem.Atom) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param atom 
+# \param size 
+#
+def setCustomLabelSize(atom: Chem.Atom, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearConfigurationLabelSize(atom: Chem.Atom) -> None: pass
 
 ##
@@ -131,6 +158,33 @@ def setRadicalElectronDotSize(atom: Chem.Atom, size: SizeSpecification) -> None:
 # \brief 
 # \param atom 
 #
+def clearCustomLabel(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasCustomLabel(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getCustomLabel(atom: Chem.Atom) -> object: pass
+
+##
+# \brief 
+# \param atom 
+# \param text 
+#
+def setCustomLabel(atom: Chem.Atom, text: str) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearLabelMargin(atom: Chem.Atom) -> None: pass
 
 ##
@@ -153,6 +207,33 @@ def getLabelMargin(atom: Chem.Atom) -> SizeSpecification: pass
 # \param margin 
 #
 def setLabelMargin(atom: Chem.Atom, margin: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearCustomLabelColor(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasCustomLabelColor(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getCustomLabelColor(atom: Chem.Atom) -> Color: pass
+
+##
+# \brief 
+# \param atom 
+# \param color 
+#
+def setCustomLabelColor(atom: Chem.Atom, color: Color) -> None: pass
 
 ##
 # \brief 
@@ -207,6 +288,33 @@ def getColor(atom: Chem.Atom) -> Color: pass
 # \param color 
 #
 def setColor(atom: Chem.Atom, color: Color) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearCustomLabelFont(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasCustomLabelFont(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getCustomLabelFont(atom: Chem.Atom) -> Font: pass
+
+##
+# \brief 
+# \param atom 
+# \param font 
+#
+def setCustomLabelFont(atom: Chem.Atom, font: Font) -> None: pass
 
 ##
 # \brief 

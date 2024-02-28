@@ -73,3 +73,23 @@ class AtomPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
+    CUSTOM_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    CUSTOM_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
+    CUSTOM_LABEL = ''

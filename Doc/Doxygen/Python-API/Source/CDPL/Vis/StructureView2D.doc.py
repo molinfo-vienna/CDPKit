@@ -44,6 +44,9 @@
 #  <tr><td>Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT</td><td>Specifies the font for atom configuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of atom configuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of atom configuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT</td><td>Specifies the font for atom custom labels</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE</td><td>Specifies the size of atom custom labels</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_LABEL_MARGIN</td><td>Specifies the margin of free space around atom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS</td><td>Specifies whether or not to show explicit hydrogen atoms</td></tr>
@@ -56,6 +59,7 @@
 #  <tr><td>Vis.ControlParameter.SHOW_ATOM_REACTION_INFOS</td><td>Specifies whether or not to show reaction atom-atom mapping numbers</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_RADICAL_ELECTRONS</td><td>Specifies whether or not to draw radical electron dots</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS</td><td>Specifies whether or not to show atom confiuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS</td><td>Specifies whether or not to show atom confiuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LENGTH</td><td>Specifies the desired average bond length</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_COLOR</td><td>Specifies the color of bonds</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LINE_WIDTH</td><td>Specifies the width of bond lines</td></tr>
@@ -71,11 +75,15 @@
 #  <tr><td>Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT</td><td>Specifies the font for bond configuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of bond configuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of bond configuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_REACTION_INFOS</td><td>Specifies whether or not to draw reaction center marks</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_QUERY_INFOS</td><td>Specifies whether or not to show query bond match expressions</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_STEREO_BONDS</td><td>Specifies whether or not to draw stereo bonds</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS</td><td>Specifies whether or not to show bond confiuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS</td><td>Specifies whether or not to show bond confiuration labels</td></tr>
 # </table>
 # 
 # Default values for most of the control-parameters are defined in namespace Vis.ControlParameterDefault.
@@ -93,6 +101,9 @@
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_FONT</td><td>Specifies the font for atom configuration labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of atom configuration labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of atom configuration labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_FONT</td><td>Specifies the font for atom custom labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_SIZE</td><td>Specifies the size of atom custom labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN</td><td>Specifies the margin of free space around atom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_COLOR</td><td>Specifies the color of bonds</td></tr>
@@ -108,6 +119,8 @@
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_SIZE</td><td>Specifies the size of bond labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT</td><td>Specifies the font for bond configuration labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of bond configuration labels</td><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of bond configuration labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
 # </table>
 # 
@@ -118,12 +131,15 @@
 #  <tr><td>Vis.AtomProperty.COLOR</td><td>Specifies the color of text labels</td></tr>
 #  <tr><td>Vis.AtomProperty.LABEL_FONT</td><td>Specifies the font for atom element and query match expression labels</td></tr>
 #  <tr><td>Vis.AtomProperty.LABEL_SIZE</td><td>Specifies the size of atom element and query match expression labels</td></tr>
-#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_FONT</td><td>Specifies the font for atom configuration labels</td></tr>
-#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of atom configuration labels</td></tr>
-#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of atom configuration labels</td></tr>
 #  <tr><td>Vis.AtomProperty.SECONDARY_LABEL_FONT</td><td>Specifies the font for text labels that show the value of various atomic properties</td></tr>
 #  <tr><td>Vis.AtomProperty.SECONDARY_LABEL_SIZE</td><td>Specifies the size of text labels that show the value of various atomic properties</td></tr>
 #  <tr><td>Vis.AtomProperty.LABEL_MARGIN</td><td>Specifies the margin of free space around atom labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_FONT</td><td>Specifies the font for atom configuration labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of atom configuration labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of atom configuration labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CUSTOM_LABEL_FONT</td><td>Specifies the font for atom custom labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CUSTOM_LABEL_SIZE</td><td>Specifies the size of atom custom labels</td></tr>
+#  <tr><td>Vis.AtomProperty.CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
 # </table>
 # 
@@ -142,10 +158,13 @@
 #  <tr><td>Vis.BondProperty.TRIPLE_BOND_TRIM_LENGTH</td><td>Specifies the amount by which the non-central lines of triple bonds have to be trimmed at each line end</td></tr>
 #  <tr><td>Vis.BondProperty.LABEL_FONT</td><td>Specifies the font for bond labels</td></tr>
 #  <tr><td>Vis.BondProperty.LABEL_SIZE</td><td>Specifies the size of bond labels</td></tr>
+#  <tr><td>Vis.BondProperty.LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
 #  <tr><td>Vis.BondProperty.CONFIGURATION_LABEL_FONT</td><td>Specifies the font for bond configuration labels</td></tr>
 #  <tr><td>Vis.BondProperty.CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of bond configuration labels</td></tr>
 #  <tr><td>Vis.BondProperty.CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of bond configuration labels</td></tr>
-#  <tr><td>Vis.BondProperty.LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
+#  <tr><td>Vis.BondProperty.CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
+#  <tr><td>Vis.BondProperty.CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td></tr>
+#  <tr><td>Vis.BondProperty.CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 # </table>
 # 
 class StructureView2D(View2D):

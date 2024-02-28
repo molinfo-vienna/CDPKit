@@ -23,6 +23,33 @@
 # \brief 
 # \param bond 
 #
+def clearCustomLabelSize(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasCustomLabelSize(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getCustomLabelSize(bond: Chem.Bond) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param bond 
+# \param size 
+#
+def setCustomLabelSize(bond: Chem.Bond, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
 def clearConfigurationLabelSize(bond: Chem.Bond) -> None: pass
 
 ##
@@ -293,6 +320,33 @@ def setTripleBondTrimLength(bond: Chem.Bond, length: SizeSpecification) -> None:
 # \brief 
 # \param bond 
 #
+def clearCustomLabel(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasCustomLabel(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getCustomLabel(bond: Chem.Bond) -> object: pass
+
+##
+# \brief 
+# \param bond 
+# \param text 
+#
+def setCustomLabel(bond: Chem.Bond, text: str) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
 def clearLabelMargin(bond: Chem.Bond) -> None: pass
 
 ##
@@ -315,6 +369,33 @@ def getLabelMargin(bond: Chem.Bond) -> SizeSpecification: pass
 # \param margin 
 #
 def setLabelMargin(bond: Chem.Bond, margin: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
+def clearCustomLabelColor(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasCustomLabelColor(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getCustomLabelColor(bond: Chem.Bond) -> Color: pass
+
+##
+# \brief 
+# \param bond 
+# \param color 
+#
+def setCustomLabelColor(bond: Chem.Bond, color: Color) -> None: pass
 
 ##
 # \brief 
@@ -369,6 +450,33 @@ def getColor(bond: Chem.Bond) -> Color: pass
 # \param color 
 #
 def setColor(bond: Chem.Bond, color: Color) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
+def clearCustomLabelFont(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasCustomLabelFont(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getCustomLabelFont(bond: Chem.Bond) -> Font: pass
+
+##
+# \brief 
+# \param bond 
+# \param font 
+#
+def setCustomLabelFont(bond: Chem.Bond, font: Font) -> None: pass
 
 ##
 # \brief 
