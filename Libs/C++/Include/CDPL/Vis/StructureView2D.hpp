@@ -51,6 +51,7 @@
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -676,6 +677,7 @@ namespace CDPL
             void   createAtomHCountLabelPrimitives(const Chem::Atom&, std::size_t, double, Rectangle2D&);
             void   createAtomMappingLabelPrimitive(const Chem::Atom&, std::size_t, const Rectangle2D&);
             void   createAtomConfigLabelPrimitive(const Chem::Atom&, char);
+            void   createAtomCustomLabelPrimitive(const Chem::Atom&, const std::string&, bool);
 
             void createBondPrimitives();
 
@@ -683,6 +685,7 @@ namespace CDPL
             double createBondRxnInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int);
             void   createBondQueryInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int, double);
             void   createBondConfigLabelPrimitive(const Chem::Bond&, const Line2D&, int);
+            void   createBondCustomLabelPrimitive(const Chem::Bond&, const Line2D&, int, bool);
 
             void createUndefOrderBondPrimitives(const Chem::Bond&, const Line2D&);
             void createSingleBondPrimitives(const Chem::Bond&, const Line2D&);
@@ -750,33 +753,42 @@ namespace CDPL
             double getHashSpacing(const Chem::Bond&) const;
             double getLabelSize(const Chem::Bond&) const;
             double getConfigLabelSize(const Chem::Bond&) const;
+            double getCustomLabelSize(const Chem::Bond&) const;
 
             const Color&             getColor(const Chem::Bond&) const;
+            const Color&             getConfigLabelColor(const Chem::Bond&) const;
+            const Color&             getCustomLabelColor(const Chem::Bond&) const;
             const Font&              getLabelFont(const Chem::Bond&) const;
             const Font&              getConfigLabelFont(const Chem::Bond&) const;
-            const Color&             getConfigLabelColor(const Chem::Bond&) const;
+            const Font&              getCustomLabelFont(const Chem::Bond&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Bond&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Bond&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Bond&) const;
+            const SizeSpecification& getCustomLabelSizeSpec(const Chem::Bond&) const;
             
             void setupLabelMargin(const Chem::Bond&);
             void setupPen(const Chem::Bond&);
             void setupLabelFont(const Chem::Bond&);
             void setupConfigLabelFont(const Chem::Bond&);
+            void setupCustomLabelFont(const Chem::Bond&);
 
             double getLabelSize(const Chem::Atom&) const;
             double getSecondaryLabelSize(const Chem::Atom&) const;
             double getConfigLabelSize(const Chem::Atom&) const;
+            double getCustomLabelSize(const Chem::Atom&) const;
             double getElectronDotSize(const Chem::Atom&) const;
 
             const Color&             getColor(const Chem::Atom&) const;
+            const Color&             getConfigLabelColor(const Chem::Atom&) const;
+            const Color&             getCustomLabelColor(const Chem::Atom&) const;
             const Font&              getLabelFont(const Chem::Atom&) const;
             const Font&              getSecondaryLabelFont(const Chem::Atom&) const;
             const Font&              getConfigLabelFont(const Chem::Atom&) const;
-            const Color&             getConfigLabelColor(const Chem::Atom&) const;
+            const Font&              getCustomLabelFont(const Chem::Atom&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getSecondaryLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Atom&) const;
+            const SizeSpecification& getCustomLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Atom&) const;
             const SizeSpecification& getElectronDotSizeSpec(const Chem::Atom&) const;
 
@@ -785,6 +797,7 @@ namespace CDPL
             void setupLabelFont(const Chem::Atom&);
             void setupSecondaryLabelFont(const Chem::Atom&);
             void setupConfigLabelFont(const Chem::Atom&);
+            void setupCustomLabelFont(const Chem::Atom&);
 
             double calcOutputSize(const Chem::Bond&, const SizeSpecification&) const;
             double calcOutputSize(const Chem::Atom&, const SizeSpecification&) const;
@@ -829,6 +842,7 @@ namespace CDPL
             BondLineTable                outputBondLines;
             RectangleListTable           atomLabelBounds;
             RectangleList                bondLabelBounds;
+            Util::BitSet                 atomWithSymbolMask;
             GraphicsPrimitiveList        drawList;
             double                       avgInputBondLength;
             double                       stdBondLengthScalingFactor;
@@ -840,7 +854,6 @@ namespace CDPL
             Pen                          activePen;
             Font                         activeLabelFont;
             Font                         activeSecondaryLabelFont;
-            Font                         activeConfigLabelFont;
             double                       activeLabelMargin;
             bool                         reactionContext;
             bool                         hasAtomCoords;

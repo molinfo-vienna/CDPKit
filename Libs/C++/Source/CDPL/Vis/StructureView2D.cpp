@@ -75,6 +75,10 @@ namespace
     const double MIN_BOND_ANGLE                   = M_PI * 30.0 / 180.0;
     const double MAX_BOND_ANGLE                   = M_PI * 150.0 / 180.0;
 
+    const double SIN_45                           = std::sin(M_PI / 4);
+    const double SIN_30                           = std::sin(M_PI / 6);
+    const double SIN_60                           = std::sin(M_PI / 3);
+
     const char RADICAL_ELECTRON_SYMBOL            = '.';
 
     const char LEFT_AAM_ID_LABEL_DELIMEITER       = '<';
@@ -276,8 +280,8 @@ void Vis::StructureView2D::init()
     } else if (parameters->alignmentChanged())
         calcViewTransforms();
 
-    structureChanged      = false;
-    fontMetricsChanged    = false;
+    structureChanged   = false;
+    fontMetricsChanged = false;
 
     parameters->clearChangeFlags();
 }
@@ -319,6 +323,9 @@ void Vis::StructureView2D::initTextLabelBounds()
     std::for_each(atomLabelBounds.begin(), atomLabelBounds.begin() + num_atoms,
                   std::bind(&RectangleList::clear, _1));
 
+    atomWithSymbolMask.resize(num_atoms);
+    atomWithSymbolMask.reset();
+    
     std::size_t num_bonds = structure->getNumBonds();
 
     if (num_bonds > bondLabelBounds.size())
@@ -364,7 +371,8 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
     long charge = (parameters->showCharges() ? getFormalCharge(atom) : 0);
     std::string qry_info_str = (parameters->showAtomQueryInfos() ? hasMatchExpressionString(atom) ? getMatchExpressionString(atom) : "" : "");
     char config_label = (parameters->showAtomConfigLabels() ? getConfigLabel(getCIPConfiguration(atom)) : char(0));
-
+    const std::string& custom_label = (parameters->showAtomCustomLabels() ? getCustomLabel(atom) : std::string());
+    
     if (!qry_info_str.empty()) {
         qry_info_str.insert(0, 1, LEFT_QUERY_INFO_DELIMITER);
         qry_info_str.push_back(RIGHT_QUERY_INFO_DELIMITER);
@@ -376,21 +384,24 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
 
     if (MolProp::getExplicitBondCount(atom, *structure) != 0 && isotope == 0 && charge == 0 && h_count == 0 && 
         rad_elec_count == 0 && qry_info_str.empty() && !parameters->showCarbons() && symbol == "C") {
-   
+
+        setupLabelMargin(atom);
+    
         if (aam_id > 0) {
-            setupLabelMargin(atom);
             setupPen(atom);
             setupSecondaryLabelFont(atom);
 
             createAtomMappingLabelPrimitive(atom, aam_id, total_brect);
         }
 
-        if (config_label) {
-            if (aam_id == 0)
-                setupLabelMargin(atom);
-            
+        if (config_label)
             createAtomConfigLabelPrimitive(atom, config_label);
-        }
+
+        if (!custom_label.empty())
+            createAtomCustomLabelPrimitive(atom, custom_label, aam_id > 0);
+
+        if (aam_id > 0)
+            atomWithSymbolMask.set(structure->getAtomIndex(atom));
         
         return;
     }
@@ -402,9 +413,6 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
     if (isotope > 0 || h_count > 1 || aam_id > 0 || charge != 0 || rad_elec_count > 8)
         setupSecondaryLabelFont(atom);
 
-    if (config_label)
-        setupConfigLabelFont(atom);
-    
     double baseline = 0.0;
 
     if (symbol.empty() && !qry_info_str.empty())
@@ -430,8 +438,13 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
     if (aam_id > 0)
         createAtomMappingLabelPrimitive(atom, aam_id, total_brect);
 
-    if (config_label)
+    if (config_label) 
         createAtomConfigLabelPrimitive(atom, config_label);
+
+    if (!custom_label.empty()) 
+        createAtomCustomLabelPrimitive(atom, custom_label, true);
+    
+    atomWithSymbolMask.set(structure->getAtomIndex(atom));
 }
 
 double Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom& atom, const std::string& qry_info_str, 
@@ -516,7 +529,7 @@ void Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom& a
     left_brect.translate(left_pos);
     
     Math::Vector2D label_pos = (calcCongestionFactor(left_brect, atom) < calcCongestionFactor(right_brect, atom) ? 
-                          left_pos : right_pos);
+                                left_pos : right_pos);
 
     TextLabelPrimitive2D* label;
 
@@ -864,10 +877,10 @@ void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& ato
     }
 
     Math::Vector2D test_pos[4] = {
-        {atom_pos(0) - brect_ctr(0),                        total_brect.getMin()(1) - label_brect.getMax()(1)},
-        {total_brect.getMin()(0) - label_brect.getMax()(0), atom_pos(1) - brect_ctr(1)                       },
-        {atom_pos(0) - brect_ctr(0),                        total_brect.getMax()(1) - label_brect.getMin()(1)},
-        {total_brect.getMax()(0) - label_brect.getMin()(0), atom_pos(1) - brect_ctr(1)                       }
+        { atom_pos(0) - brect_ctr(0),                        total_brect.getMin()(1) - label_brect.getMax()(1) },
+        { total_brect.getMin()(0) - label_brect.getMax()(0), atom_pos(1) - brect_ctr(1)                        },
+        { atom_pos(0) - brect_ctr(0),                        total_brect.getMax()(1) - label_brect.getMin()(1) },
+        { total_brect.getMax()(0) - label_brect.getMin()(0), atom_pos(1) - brect_ctr(1)                        }
     };
 
     Math::Vector2D label_pos;
@@ -891,19 +904,6 @@ void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& ato
 
 void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom, char config_label)
 {
-    const double SIN_45 = std::sin(M_PI / 4);
-    const double SIN_30 = std::sin(M_PI / 6);
-    const double SIN_60 = std::sin(M_PI / 3);
-
-    setupConfigLabelFont(atom);
-     
-    fontMetrics->setFont(activeConfigLabelFont);
-
-    std::string label_str{config_label};
-    Rectangle2D label_brect;
-
-    fontMetrics->getBounds(label_str, label_brect);
-
     std::size_t atom_idx = structure->getAtomIndex(atom);
     const Math::Vector2D& atom_pos = outputAtomCoords[atom_idx];
     TextLabelPrimitive2D* label;
@@ -911,12 +911,12 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
     
     if (atomLabelBounds[atom_idx].empty()) {
         Rectangle2D ref_brect;
-        
-        fontMetrics->setFont(activeLabelFont);
-        fontMetrics->getBounds("C", ref_brect);
 
-        ref_brect.addMargin(activeLabelMargin, activeLabelMargin);
-        
+        setupLabelFont(atom);
+
+        fontMetrics->setFont(activeLabelFont);
+        fontMetrics->getBounds('C', ref_brect);
+    
         bs_radius = length(ref_brect.getMax() - ref_brect.getMin()) * 0.5;
     
     } else {
@@ -924,6 +924,14 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
 
         bs_radius = length(ref_brect.getMax() - ref_brect.getMin()) * 0.5;
     }
+
+    setupConfigLabelFont(atom);
+     
+    fontMetrics->setFont(activeLabelFont);
+
+    Rectangle2D label_brect;
+
+    fontMetrics->getBounds(config_label, label_brect);
 
     bs_radius += length(label_brect.getMax() - label_brect.getMin()) * 0.5;
 
@@ -967,8 +975,88 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
     }
      
     activePen.setColor(getConfigLabelColor(atom));
+
+    CREATE_ATOM_LABEL(activeLabelFont, std::string{config_label}, label_pos, label_brect);
+}
+
+void Vis::StructureView2D::createAtomCustomLabelPrimitive(const Chem::Atom& atom, const std::string& label_str, bool have_ctr_sym)
+{
+    std::size_t atom_idx = structure->getAtomIndex(atom);
+    const Math::Vector2D& atom_pos = outputAtomCoords[atom_idx];
+    TextLabelPrimitive2D* label;
+    Rectangle2D ref_brect;
+    
+    if (!have_ctr_sym) {
+        setupLabelFont(atom);
+               
+        fontMetrics->setFont(activeLabelFont);
+        fontMetrics->getBounds('C', ref_brect);
+
+        auto w = ref_brect.getWidth();
+        auto h = ref_brect.getHeight();
+
+        ref_brect.setBounds(atom_pos(0) - w * 0.5, atom_pos(1) - h * 0.5,
+                            atom_pos(0) + w * 0.5, atom_pos(1) + h * 0.5);
+        
+    } else
+        ref_brect = atomLabelBounds[atom_idx].front();
+
+    setupCustomLabelFont(atom);
+     
+    fontMetrics->setFont(activeLabelFont);
+
+    Rectangle2D label_brect;
+
+    fontMetrics->getBounds(label_str, label_brect);
+
+    Math::Vector2D brect_ctr;
+
+    label_brect.getCenter(brect_ctr);
+
+    Math::Vector2D test_pos1[] = {
+        { ref_brect.getMin()(0), ref_brect.getMin()(1) },
+        { atom_pos(0),           ref_brect.getMin()(1) },
+        { ref_brect.getMax()(0), ref_brect.getMin()(1) },
+        { ref_brect.getMax()(0), atom_pos(1)           },
+        { ref_brect.getMax()(0), ref_brect.getMax()(1) },
+        { atom_pos(0),           ref_brect.getMax()(1) },
+        { ref_brect.getMin()(0), ref_brect.getMax()(1) },
+        { ref_brect.getMin()(0), atom_pos(1)           }
+    };
+
+    Math::Vector2D test_pos2[] = {
+        { label_brect.getMin()(0), label_brect.getMin()(1) },
+        { brect_ctr(0),            label_brect.getMin()(1) },
+        { label_brect.getMax()(0), label_brect.getMin()(1) },
+        { label_brect.getMax()(0), brect_ctr(1)            },
+        { label_brect.getMax()(0), label_brect.getMax()(1) },
+        { brect_ctr(0),            label_brect.getMax()(1) },
+        { label_brect.getMin()(0), label_brect.getMax()(1) },
+        { label_brect.getMin()(0), brect_ctr(1)            }
+    };
+
+    Math::Vector2D label_pos;
+    double lowest_cong_fact = 0.0;
+
+    for (std::size_t i = 0; i < 8; i++) {
+        for (std::size_t j = 0; j < 8; j++) {
+            Math::Vector2D transl(test_pos1[i]- test_pos2[j]);
+            Rectangle2D test_brect(label_brect);
             
-    CREATE_ATOM_LABEL(activeConfigLabelFont, label_str, label_pos, label_brect);
+            test_brect.translate(transl);
+
+            double cong_fact = calcCongestionFactor(test_brect, atom);
+
+            if ((i == 0 && j == 0) || cong_fact < lowest_cong_fact) {
+                label_pos = transl;
+                lowest_cong_fact = cong_fact;
+            }
+        }
+    }
+ 
+    activePen.setColor(getCustomLabelColor(atom));
+ 
+    CREATE_ATOM_LABEL(activeLabelFont, label_str, label_pos, label_brect);
 }
 
 void Vis::StructureView2D::createBondPrimitives()
@@ -976,7 +1064,7 @@ void Vis::StructureView2D::createBondPrimitives()
     using namespace Chem;
 
     bool with_bond_labels = (fontMetrics && (parameters->showBondQueryInfos() || parameters->showBondReactionInfos() ||
-                                             parameters->showBondConfigLabels())); 
+                                             parameters->showBondConfigLabels() || parameters->showBondCustomLabels())); 
 
     Line2D ctr_line;
 
@@ -1056,8 +1144,13 @@ void Vis::StructureView2D::createBondLabelPrimitives(const Chem::Bond& bond, con
     if (parameters->showBondQueryInfos())
         createBondQueryInfoLabelPrimitive(bond, ctr_line, asym_shift_dir, baseline);
 
+    bool have_ctr_label = bondLabelBounds[structure->getBondIndex(bond)].isDefined();
+    
     if (parameters->showBondConfigLabels())
         createBondConfigLabelPrimitive(bond, ctr_line, asym_shift_dir);
+    
+    if (parameters->showBondCustomLabels())
+        createBondCustomLabelPrimitive(bond, ctr_line, asym_shift_dir, have_ctr_label);
 }
 
 double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
@@ -1086,7 +1179,6 @@ double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& b
     fontMetrics->setFont(activeLabelFont);
 
     std::size_t bond_idx = structure->getBondIndex(bond);
-
     Rectangle2D& label_brect = bondLabelBounds[bond_idx];
 
     fontMetrics->getBounds(rxn_info, label_brect);
@@ -1229,7 +1321,6 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     if (!config_label)
         return;
 
-    std::string label_str{config_label};
     Rectangle2D label_brect;
     TextLabelPrimitive2D* label;
     
@@ -1238,7 +1329,7 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     setupConfigLabelFont(bond);
 
     fontMetrics->setFont(activeLabelFont);
-    fontMetrics->getBounds(label_str, label_brect);
+    fontMetrics->getBounds(config_label, label_brect);
 
     Math::Vector2D brect_ctr;
 
@@ -1246,30 +1337,30 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     
     std::size_t bond_idx = structure->getBondIndex(bond);
     Rectangle2D& total_brect = bondLabelBounds[bond_idx];
-    
+
     if (!total_brect.isDefined()) {
         setupLabelMargin(bond);
 
         Math::Vector2D bond_ctr_pos;
         ctr_line.getCenter(bond_ctr_pos);
 
-        Math::Vector2D perp_line_dir;
-        ctr_line.getCCWPerpDirection(perp_line_dir);
+        Math::Vector2D perp_transl;
+        ctr_line.getCCWPerpDirection(perp_transl);
 
         double line_spacing = getLineSpacing(bond);
         
         if (asym_shift_dir != 0)
-            bond_ctr_pos -= perp_line_dir * line_spacing * 0.5 * asym_shift_dir;
+            bond_ctr_pos -= perp_transl * line_spacing * 0.5 * asym_shift_dir;
 
-        perp_line_dir *= length(label_brect.getMax() - label_brect.getMin()) * 0.5 + line_spacing + activeLabelMargin;
+        perp_transl *= length(label_brect.getMax() - label_brect.getMin()) * 0.5 + line_spacing + activeLabelMargin;
 
-        Math::Vector2D label_pos = bond_ctr_pos + perp_line_dir - brect_ctr;
+        Math::Vector2D label_pos = bond_ctr_pos + perp_transl - brect_ctr;
         Rectangle2D test_brect = label_brect;
 
         test_brect.translate(label_pos);
     
         double cong_fact = calcCongestionFactor(test_brect, bond);
-        Math::Vector2D test_pos = bond_ctr_pos - perp_line_dir - brect_ctr;
+        Math::Vector2D test_pos = bond_ctr_pos - perp_transl - brect_ctr;
 
         test_brect = label_brect;
 
@@ -1278,10 +1369,123 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
         if (calcCongestionFactor(test_brect, bond) < cong_fact)
             label_pos = test_pos;
 
-        CREATE_BOND_LABEL(label_str, label_pos, total_brect);
+        CREATE_BOND_LABEL(std::string{config_label}, label_pos, total_brect);
         return;
     }
 
+    double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
+    Math::Vector2D right_pos;
+    Math::Vector2D left_pos;
+
+    right_pos(0) = total_brect.getMax()(0) - label_brect.getMin()(0);
+    right_pos(1) = y_pos;
+
+    left_pos(0) = total_brect.getMin()(0) - label_brect.getMax()(0);
+    left_pos(1) = y_pos;
+
+    Rectangle2D left_brect = label_brect;
+    Rectangle2D right_brect = label_brect;
+
+    right_brect.translate(right_pos);
+    left_brect.translate(left_pos);
+    
+    if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
+        CREATE_BOND_LABEL(std::string{config_label}, left_pos, label_brect);
+        total_brect.addRectangle(label_brect);
+
+    } else {
+        CREATE_BOND_LABEL(std::string{config_label}, right_pos, label_brect);
+        total_brect.addRectangle(label_brect);
+    }
+}
+
+void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, 
+                                                          int asym_shift_dir, bool have_ctr_label)
+{
+    const std::string& label_str = getCustomLabel(bond);
+
+    if (label_str.empty())
+        return;
+
+    Rectangle2D label_brect;
+    TextLabelPrimitive2D* label;
+    
+    activePen.setColor(getCustomLabelColor(bond));
+
+    setupCustomLabelFont(bond);
+
+    fontMetrics->setFont(activeLabelFont);
+    fontMetrics->getBounds(label_str, label_brect);
+
+    Math::Vector2D brect_ctr;
+
+    label_brect.getCenter(brect_ctr);
+
+    std::size_t bond_idx = structure->getBondIndex(bond);
+    Rectangle2D& total_brect = bondLabelBounds[bond_idx];
+    
+    if (!have_ctr_label) {
+        if (!total_brect.isDefined())
+            setupLabelMargin(bond);
+
+        Math::Vector2D bond_ctr_pos;
+        ctr_line.getCenter(bond_ctr_pos);
+
+        Math::Vector2D perp_transl;
+        ctr_line.getCCWPerpDirection(perp_transl);
+
+        double line_spacing = getLineSpacing(bond);
+        
+        if (asym_shift_dir != 0)
+            bond_ctr_pos -= perp_transl * line_spacing * 0.5 * asym_shift_dir;
+
+        perp_transl *= line_spacing * 1.5 + activeLabelMargin;
+
+        Math::Vector2D test_pos1[] = {
+            { bond_ctr_pos(0) + perp_transl(0), bond_ctr_pos(1) + perp_transl(1) },
+            { bond_ctr_pos(0) - perp_transl(0), bond_ctr_pos(1) - perp_transl(1) }
+        };
+
+        Math::Vector2D test_pos2[] = {
+            { label_brect.getMin()(0), label_brect.getMin()(1) },
+            { brect_ctr(0),            label_brect.getMin()(1) },
+            { label_brect.getMax()(0), label_brect.getMin()(1) },
+            { label_brect.getMax()(0), brect_ctr(1)            },
+            { label_brect.getMax()(0), label_brect.getMax()(1) },
+            { brect_ctr(0),            label_brect.getMax()(1) },
+            { label_brect.getMin()(0), label_brect.getMax()(1) },
+            { label_brect.getMin()(0), brect_ctr(1)            }
+        };
+
+        Math::Vector2D label_pos;
+        double lowest_cong_fact = 0.0;
+
+        for (std::size_t i = 0; i < 2; i++) {
+            for (std::size_t j = 0; j < 8; j++) {
+                Math::Vector2D transl(test_pos1[i] - test_pos2[j]);
+                Rectangle2D test_brect(label_brect);
+
+                test_brect.translate(transl);
+
+                double cong_fact = calcCongestionFactor(test_brect, bond);
+
+                if ((i == 0 && j == 0) || cong_fact < lowest_cong_fact) {
+                    label_pos = transl;
+                    lowest_cong_fact = cong_fact;
+                }
+            }
+        }
+
+        CREATE_BOND_LABEL(label_str, label_pos, label_brect);
+
+        if (total_brect.isDefined())
+            total_brect.addRectangle(label_brect);
+        else
+            total_brect = label_brect;
+
+        return;
+    }
+   
     double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
     Math::Vector2D right_pos;
     Math::Vector2D left_pos;
@@ -1382,7 +1586,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
     Line2D wedge_side2(ctr_line.getBegin() - start_wedge_crnr_vec, ctr_line.getEnd() - end_wedge_crnr_vec);
 
     std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
-    bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
+    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
 
     if (!atom1_visible) {
         extendUpBondWedgeSides(bond, bond.getBegin(), wedge_side1, wedge_side2, true, reverse_up);
@@ -1396,7 +1600,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
     }
 
     std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
-    bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
+    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
 
     if (!atom2_visible) {
         extendUpBondWedgeSides(bond, bond.getEnd(), wedge_side1, wedge_side2, false, reverse_up);
@@ -1885,8 +2089,8 @@ void Vis::StructureView2D::createSymDoubleBondPrimitives(const Chem::Bond& bond,
     std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
     std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
 
-    bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
-    bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
+    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
+    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
 
     bool draw_line1 = true;
 
@@ -1945,8 +2149,8 @@ void Vis::StructureView2D::createAsymDoubleBondPrimitives(const Chem::Bond& bond
     std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
     std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
-    bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
-    bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
+    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
+    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
 
     double trim_len = getDoubleBondTrimLength(bond);
 
@@ -2012,8 +2216,8 @@ void Vis::StructureView2D::createTripleBondPrimitives(const Chem::Bond& bond, co
     std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
     std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
-    bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
-    bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
+    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
+    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
 
     double trim_len = getTripleBondTrimLength(bond);
 
@@ -2359,21 +2563,13 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
     Math::Vector2D diff;
     Math::Vector2D brect_ctr;
     Math::Vector2D tmp;
-
+    
     brect.getCenter(brect_ctr);
 
-    std::size_t i = 0;
-    MolecularGraph::ConstAtomIterator atoms_end = structure->getAtomsEnd();
-
-    for (MolecularGraph::ConstAtomIterator a_it = structure->getAtomsBegin(); a_it != atoms_end; ++a_it, i++) {
-        const Atom& atom = *a_it;
-
-        if (&atom == &cntnr)
-            continue;
-
+    for (std::size_t i = 0, num_atoms = structure->getNumAtoms(); i < num_atoms; i++) {
         diff = outputAtomCoords[i] - brect_ctr;
         congestion_fact += 1.0 / innerProd(diff, diff);
-
+        
         const RectangleList& atom_label_brects = atomLabelBounds[i];
         RectangleList::const_iterator brects_end = atom_label_brects.end();
 
@@ -2390,22 +2586,18 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
         }
     }
 
-    i = 0;
-    MolecularGraph::ConstBondIterator bonds_end = structure->getBondsEnd();
+    for (std::size_t i = 0, num_bonds = structure->getNumBonds(); i < num_bonds; i++) {
+        const Bond& bond = structure->getBond(i);
+   
+        if (&bond != &cntnr) {
+            if (!structure->containsAtom(bond.getBegin()) || !structure->containsAtom(bond.getEnd()))
+                continue;
 
-    for (MolecularGraph::ConstBondIterator b_it = structure->getBondsBegin(); b_it != bonds_end; ++b_it, i++) {
-        const Bond& bond = *b_it;
+            outputBondLines[i].getCenter(diff);
 
-        if (&bond == &cntnr)
-            continue;
-
-        if (!structure->containsAtom(bond.getBegin()) || !structure->containsAtom(bond.getEnd()))
-            continue;
-
-        outputBondLines[i].getCenter(diff);
-
-        diff -= brect_ctr;
-        congestion_fact += 1.0 / innerProd(diff, diff);
+            diff -= brect_ctr;
+            congestion_fact += 1.0 / innerProd(diff, diff);
+        }
 
         const Rectangle2D& label_brect = bondLabelBounds[i];
 
@@ -3071,6 +3263,11 @@ double Vis::StructureView2D::getConfigLabelSize(const Chem::Bond& bond) const
     return calcOutputSize(getConfigLabelSizeSpec(bond));
 }
 
+double Vis::StructureView2D::getCustomLabelSize(const Chem::Bond& bond) const
+{
+    return calcOutputSize(getCustomLabelSizeSpec(bond));
+}
+
 const Vis::Color& Vis::StructureView2D::getColor(const Chem::Bond& bond) const
 {
     if (hasColor(bond))
@@ -3104,6 +3301,17 @@ const Vis::Font& Vis::StructureView2D::getConfigLabelFont(const Chem::Bond& bond
     return parameters->getBondConfigLabelFont();
 }
 
+const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Bond& bond) const
+{
+    if (hasCustomLabelFont(bond))
+        return getCustomLabelFont(bond);
+
+    if (hasBondCustomLabelFont(*structure))
+        return getBondCustomLabelFont(*structure);
+
+    return parameters->getBondCustomLabelFont();
+}
+
 const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Bond& bond) const
 {
     if (hasConfigurationLabelColor(bond))
@@ -3113,6 +3321,17 @@ const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Bond& bo
         return getBondConfigurationLabelColor(*structure);
 
     return parameters->getBondConfigLabelColor();
+}
+
+const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Bond& bond) const
+{
+    if (hasCustomLabelColor(bond))
+        return getCustomLabelColor(bond);
+
+    if (hasBondCustomLabelColor(*structure))
+        return getBondCustomLabelColor(*structure);
+
+    return parameters->getBondCustomLabelColor();
 }
 
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelSizeSpec(const Chem::Bond& bond) const
@@ -3135,6 +3354,17 @@ const Vis::SizeSpecification& Vis::StructureView2D::getConfigLabelSizeSpec(const
         return getBondConfigurationLabelSize(*structure);
 
     return parameters->getBondConfigLabelSize();
+}
+
+const Vis::SizeSpecification& Vis::StructureView2D::getCustomLabelSizeSpec(const Chem::Bond& bond) const
+{
+    if (hasCustomLabelSize(bond))
+        return Vis::getCustomLabelSize(bond);
+
+    if (hasBondCustomLabelSize(*structure))
+        return getBondCustomLabelSize(*structure);
+
+    return parameters->getBondCustomLabelSize();
 }
 
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelMarginSpec(const Chem::Bond& bond) const
@@ -3177,6 +3407,12 @@ void Vis::StructureView2D::setupConfigLabelFont(const Chem::Bond& bond)
     activeLabelFont.setSize(getConfigLabelSize(bond));
 }
 
+void Vis::StructureView2D::setupCustomLabelFont(const Chem::Bond& bond)
+{
+    activeLabelFont = getCustomLabelFont(bond);
+    activeLabelFont.setSize(getCustomLabelSize(bond));
+}
+
 //--------
 
 double Vis::StructureView2D::getLabelSize(const Chem::Atom& atom) const
@@ -3192,6 +3428,11 @@ double Vis::StructureView2D::getSecondaryLabelSize(const Chem::Atom& atom) const
 double Vis::StructureView2D::getConfigLabelSize(const Chem::Atom& atom) const
 {
     return calcOutputSize(getConfigLabelSizeSpec(atom));
+}
+
+double Vis::StructureView2D::getCustomLabelSize(const Chem::Atom& atom) const
+{
+    return calcOutputSize(getCustomLabelSizeSpec(atom));
 }
 
 double Vis::StructureView2D::getElectronDotSize(const Chem::Atom& atom) const
@@ -3224,6 +3465,17 @@ const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Atom& at
         return getAtomConfigurationLabelColor(*structure);
 
     return parameters->getAtomConfigLabelColor();
+}
+
+const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Atom& atom) const
+{
+    if (hasCustomLabelColor(atom))
+        return getCustomLabelColor(atom);
+
+    if (hasAtomCustomLabelColor(*structure))
+        return getAtomCustomLabelColor(*structure);
+
+    return parameters->getAtomCustomLabelColor();
 }
 
 const Vis::Font& Vis::StructureView2D::getLabelFont(const Chem::Atom& atom) const
@@ -3259,6 +3511,17 @@ const Vis::Font& Vis::StructureView2D::getConfigLabelFont(const Chem::Atom& atom
     return parameters->getAtomConfigLabelFont();
 }
 
+const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Atom& atom) const
+{
+    if (hasCustomLabelFont(atom))
+        return getCustomLabelFont(atom);
+
+    if (hasAtomCustomLabelFont(*structure))
+        return getAtomCustomLabelFont(*structure);
+
+    return parameters->getAtomCustomLabelFont();
+}
+
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelSizeSpec(const Chem::Atom& atom) const
 {
     if (hasLabelSize(atom))
@@ -3290,6 +3553,17 @@ const Vis::SizeSpecification& Vis::StructureView2D::getConfigLabelSizeSpec(const
         return getAtomConfigurationLabelSize(*structure);
 
     return parameters->getAtomConfigLabelSize();
+}
+
+const Vis::SizeSpecification& Vis::StructureView2D::getCustomLabelSizeSpec(const Chem::Atom& atom) const
+{
+    if (hasCustomLabelSize(atom))
+        return Vis::getCustomLabelSize(atom);
+
+    if (hasAtomCustomLabelSize(*structure))
+        return getAtomCustomLabelSize(*structure);
+
+    return parameters->getAtomCustomLabelSize();
 }
 
 const Vis::SizeSpecification& Vis::StructureView2D::getElectronDotSizeSpec(const Chem::Atom& atom) const
@@ -3338,8 +3612,14 @@ void Vis::StructureView2D::setupSecondaryLabelFont(const Chem::Atom& atom)
 
 void Vis::StructureView2D::setupConfigLabelFont(const Chem::Atom& atom)
 {
-    activeConfigLabelFont = getConfigLabelFont(atom);
-    activeConfigLabelFont.setSize(getConfigLabelSize(atom));
+    activeLabelFont = getConfigLabelFont(atom);
+    activeLabelFont.setSize(getConfigLabelSize(atom));
+}
+
+void Vis::StructureView2D::setupCustomLabelFont(const Chem::Atom& atom)
+{
+    activeLabelFont = getCustomLabelFont(atom);
+    activeLabelFont.setSize(getCustomLabelSize(atom));
 }
 
 double Vis::StructureView2D::calcOutputSize(const Chem::Bond& bond, const SizeSpecification& size_spec) const

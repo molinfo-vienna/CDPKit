@@ -224,7 +224,7 @@ namespace CDPL
             extern CDPL_VIS_API const Color ATOM_CONFIGURATION_LABEL_COLOR;
  
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT.
+             * \brief Default setting (= \c %Font("", 8.0, false, false)) for the control-parameter Vis::ControlParameter::ATOM_CUSTOM_LABEL_FONT.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font ATOM_CUSTOM_LABEL_FONT;
@@ -387,7 +387,7 @@ namespace CDPL
             extern CDPL_VIS_API const Color BOND_CONFIGURATION_LABEL_COLOR;
             
             /**
-             * \brief Default setting (= \c %Font("", 8.0, false, true)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT.
+             * \brief Default setting (= \c %Font("", 8.0, false, false)) for the control-parameter Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT.
              * \since 1.2
              */
             extern CDPL_VIS_API const Font BOND_CUSTOM_LABEL_FONT;

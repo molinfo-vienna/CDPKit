@@ -91,10 +91,10 @@ namespace CDPL
             const bool                      SHOW_RADICAL_ELECTRONS               = true;
             const bool                      SHOW_ATOM_CONFIGURATION_LABELS       = false;
             const bool                      SHOW_ATOM_CUSTOM_LABELS              = true;
-            const Font                      ATOM_CONFIGURATION_LABEL_FONT        = Font("", 8.0, false, true);
+            const Font                      ATOM_CONFIGURATION_LABEL_FONT        = Font("", 8.0, false, false);
             const SizeSpecification         ATOM_CONFIGURATION_LABEL_SIZE        = SizeSpecification(8.0, false, false, true);
             const Color                     ATOM_CONFIGURATION_LABEL_COLOR       = Color(0, 0, 0);
-            const Font                      ATOM_CUSTOM_LABEL_FONT               = Font("", 8.0, false, true);
+            const Font                      ATOM_CUSTOM_LABEL_FONT               = Font("", 8.0, false, false);
             const SizeSpecification         ATOM_CUSTOM_LABEL_SIZE               = SizeSpecification(8.0, false, false, true);
             const Color                     ATOM_CUSTOM_LABEL_COLOR              = Color(0, 0, 0);
 
@@ -119,7 +119,7 @@ namespace CDPL
             const Font              BOND_CONFIGURATION_LABEL_FONT  = Font("", 8.0, false, true);
             const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE  = SizeSpecification(8.0, false, false, true);
             const Color             BOND_CONFIGURATION_LABEL_COLOR = Color(0, 0, 0);
-            const Font              BOND_CUSTOM_LABEL_FONT         = Font("", 8.0, false, true);
+            const Font              BOND_CUSTOM_LABEL_FONT         = Font("", 8.0, false, false);
             const SizeSpecification BOND_CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
             const Color             BOND_CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
 
