@@ -450,6 +450,17 @@ namespace CDPL
         CDPL_VIS_API void clearShowAtomCustomLabelsParameter(Base::ControlParameterContainer& cntnr);
 
         /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getEnableAtomHighlightingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setEnableAtomHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enabel);
+
+        CDPL_VIS_API bool hasEnableAtomHighlightingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearEnableAtomHighlightingParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
          * \since 1.1
          */
         CDPL_VIS_API const SizeSpecification& getAtomConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -680,6 +691,17 @@ namespace CDPL
         CDPL_VIS_API bool hasShowBondCustomLabelsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearShowBondCustomLabelsParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getEnableBondHighlightingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setEnableBondHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enabel);
+
+        CDPL_VIS_API bool hasEnableBondHighlightingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearEnableBondHighlightingParameter(Base::ControlParameterContainer& cntnr);
 
         /*
          * \since 1.1

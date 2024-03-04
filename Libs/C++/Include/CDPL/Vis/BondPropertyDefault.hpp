@@ -96,6 +96,11 @@ namespace CDPL
              */
             extern CDPL_VIS_API const std::string       CUSTOM_LABEL;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool               HIGHLIGHTED_FLAG;
+
         } // namespace BondPropertyDefault
     } // namespace Vis
 } // namespace CDPL

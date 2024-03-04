@@ -574,6 +574,50 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
 
             /**
+             * \brief Specifies the minimum size of atom highlighting areas.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by
+             * Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH.
+             * If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the diameter will follow the size change of the chemical structure during
+             * viewport size adjustment. If the control-parameter is left unspecified and the property
+             * Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting 
+             * Vis::ControlParameterDefault::ATOM_HIGHLIGHT_AREA_SIZE will be used. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a size has been specified by Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_SIZE;
+
+            /**
+             * \brief Specifies the brush to use for filling atom highlighting areas.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH and
+             * Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis::ControlParameterDefault::ATOM_HIGHLIGHT_AREA_BRUSH will be used. 
+             *
+             * \valuetype Vis::Brush
+             * \note The control-parameter setting is ignored if a brush has been specified by
+             *       Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH or Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_BRUSH;
+   
+            /**
+             * \brief Specifies the pen to use for drawing atom highlighting area outlines.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN and
+             * Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis::ControlParameterDefault::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN
+             * will be used. 
+             *
+             * \valuetype Vis::Pen
+             * \note The control-parameter setting is ignored if a pen has been specified by
+             *       Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN or Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
+
+            /**
              * \brief Specifies whether or not to show explicit hydrogen atoms.
              *
              * If the control-parameter is left unspecified, the default setting Vis::ControlParameterDefault::SHOW_EXPLICIT_HYDROGENS
@@ -701,6 +745,17 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_CUSTOM_LABELS;
+
+            /**
+             * \brief Specifies whether or not to enable atom highlighting.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::ENABLE_ATOM_HIGHLIGHTING will be used.
+             *
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ENABLE_ATOM_HIGHLIGHTING;
 
             /**
              * \brief Specifies the desired average bond length for the visualization of chemical structures.
@@ -992,6 +1047,63 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_MARGIN;
 
             /**
+             * \brief Specifies the width of bond highlighting areas.
+             *
+             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * is enabled, the width will follow the size change of the chemical structure during bond length normalization. 
+             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
+             * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH
+             * is not set, the default setting Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_WIDTH will be used. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a width has been specified by Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_WIDTH;
+
+            /**
+             * \brief Specifies the brush to use for filling bond highlighting areas.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_BRUSH and
+             * Vis::BondProperty::HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_BRUSH will be used. 
+             *
+             * \valuetype Vis::Brush
+             * \note The control-parameter setting is ignored if a brush has been specified by
+             *       Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_BRUSH or Vis::BondProperty::HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_BRUSH;
+   
+            /**
+             * \brief Specifies the pen to use for drawing bond highlighting area outlines.
+             *
+             * If the control-parameter is left unspecified and the properties Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN and
+             * Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_OUTLINE_PEN will be used. 
+             *
+             * \valuetype Vis::Pen
+             * \note The control-parameter setting is ignored if a pen has been specified by
+             *       Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_PEN or Vis::BondProperty::HIGHLIGHT_AREA_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
+
+            /**
+             * \brief Specifies the line width for drawing atom or bond highlighting area outlines.
+             *
+             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
+             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
+             * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH
+             * is not set, the default setting Vis::ControlParameterDefault::HIGHLIGHT_AREA_OUTLINE_WIDTH will be used. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a line width has been specified by 
+             *       Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_WIDTH;
+
+            /**
              * \brief Specifies whether or not to draw reaction center marks.
              *
              * If the control-parameter value is set to \c true and a bond is part of a reaction center, the bond will be decorated with
@@ -1068,6 +1180,18 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_BOND_CUSTOM_LABELS;
+
+           /**
+             * \brief Specifies whether or not to enable bond highlighting.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::ENABLE_BOND_HIGHLIGHTING will be used.
+             *
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ENABLE_BOND_HIGHLIGHTING;
+       
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

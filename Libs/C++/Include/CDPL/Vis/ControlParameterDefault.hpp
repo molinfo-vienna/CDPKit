@@ -309,6 +309,12 @@ namespace CDPL
             extern CDPL_VIS_API const bool SHOW_ATOM_CUSTOM_LABELS;
              
             /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ENABLE_ATOM_HIGHLIGHTING.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool ENABLE_ATOM_HIGHLIGHTING;
+
+            /**
              * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_COLOR.
              */
             extern CDPL_VIS_API const Color BOND_COLOR;
@@ -435,6 +441,12 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const bool SHOW_BOND_CUSTOM_LABELS;
+
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ENABLE_BOND_HIGHLIGHTING.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool ENABLE_BOND_HIGHLIGHTING;
 
         } // namespace ControlParameterDefault
     } // namespace Vis

@@ -188,6 +188,17 @@ namespace CDPL
         CDPL_VIS_API bool hasCustomLabel(const Chem::Atom& atom);
 
         CDPL_VIS_API void clearCustomLabel(Chem::Atom& atom);
+ 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getHighlightedFlag(const Chem::Atom& atom);
+
+        CDPL_VIS_API void setHighlightedFlag(Chem::Atom& atom, bool highlighted);
+
+        CDPL_VIS_API bool hasHighlightedFlag(const Chem::Atom& atom);
+
+        CDPL_VIS_API void clearHighlightedFlag(Chem::Atom& atom);
 
     } // namespace Vis
 } // namespace CDPL

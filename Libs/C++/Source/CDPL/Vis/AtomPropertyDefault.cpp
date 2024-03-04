@@ -50,6 +50,7 @@ namespace CDPL
             const SizeSpecification CUSTOM_LABEL_SIZE         = SizeSpecification(8.0, false, false, true);
             const Color             CUSTOM_LABEL_COLOR        = Color(0, 0, 0);
             const std::string       CUSTOM_LABEL              = "";
+            const bool              HIGHLIGHTED_FLAG          = false;
 
         } // namespace AtomPropertyDefault
 

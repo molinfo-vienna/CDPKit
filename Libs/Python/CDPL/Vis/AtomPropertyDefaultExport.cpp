@@ -56,5 +56,6 @@ void CDPLPythonVis::exportAtomPropertyDefaults()
         .def_readonly("CUSTOM_LABEL_SIZE", &Vis::AtomPropertyDefault::CUSTOM_LABEL_SIZE)
         .def_readonly("CUSTOM_LABEL_COLOR", &Vis::AtomPropertyDefault::CUSTOM_LABEL_COLOR)
         .def_readonly("CUSTOM_LABEL", &Vis::AtomPropertyDefault::CUSTOM_LABEL)
+        .def_readonly("HIGHLIGHTED_FLAG", &Vis::AtomPropertyDefault::HIGHLIGHTED_FLAG)
         ;
 }

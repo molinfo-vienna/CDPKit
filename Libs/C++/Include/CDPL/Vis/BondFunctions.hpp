@@ -234,6 +234,18 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabel(Chem::Bond& bond);
 
+    
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getHighlightedFlag(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setHighlightedFlag(Chem::Bond& bond, bool highlighted);
+
+        CDPL_VIS_API bool hasHighlightedFlag(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearHighlightedFlag(Chem::Bond& bond);
+
     } // namespace Vis
 } // namespace CDPL
 

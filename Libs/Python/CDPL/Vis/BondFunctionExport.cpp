@@ -51,6 +51,12 @@ python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));
 python::def("clear"#FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("bond"));                             \
 python::def("set"#FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME))); 
 
+#define EXPORT_BOND_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
+python::def("clear"#FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("bond"));                             \
+python::def("set"#FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME))); 
+
 
 namespace
 {
@@ -74,6 +80,7 @@ namespace
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, CustomLabelSize)
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Color&, CustomLabelColor)
     MAKE_BOND_FUNC_WRAPPERS(const std::string&, CustomLabel)
+    MAKE_BOND_FUNC_WRAPPERS(bool, HighlightedFlag)
 }
 
 
@@ -101,4 +108,5 @@ void CDPLPythonVis::exportBondFunctions()
     EXPORT_BOND_FUNCS_INT_REF(CustomLabelSize, size)
     EXPORT_BOND_FUNCS_INT_REF(CustomLabelColor, color)
     EXPORT_BOND_FUNCS_INT_REF(CustomLabel, text)
+    EXPORT_BOND_FUNCS(HighlightedFlag, highlighted)
 }

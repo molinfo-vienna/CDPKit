@@ -57,6 +57,7 @@ namespace CDPL
             CDPL_DEFINE_LOOKUP_KEY(CUSTOM_LABEL_SIZE);
             CDPL_DEFINE_LOOKUP_KEY(CUSTOM_LABEL_COLOR);
             CDPL_DEFINE_LOOKUP_KEY(CUSTOM_LABEL);
+            CDPL_DEFINE_LOOKUP_KEY(HIGHLIGHTED_FLAG);
         }
 
         void initBondProperties() {}

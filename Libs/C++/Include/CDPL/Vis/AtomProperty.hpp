@@ -216,6 +216,13 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Base::LookupKey CUSTOM_LABEL;
 
+            /**
+             * \brief Specifies whether or not the atom is highlighted.
+             * \valuetype bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHTED_FLAG;
+
         } // namespace AtomProperty
     } // namespace Vis
 } // namespace CDPL
