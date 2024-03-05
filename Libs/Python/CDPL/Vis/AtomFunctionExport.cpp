@@ -28,6 +28,8 @@
 #include "CDPL/Vis/AtomFunctions.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 #include "FunctionExports.hpp"
@@ -76,6 +78,8 @@ namespace
     MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, CustomLabelColor)
     MAKE_ATOM_FUNC_WRAPPERS(const std::string&, CustomLabel)
     MAKE_ATOM_FUNC_WRAPPERS(bool, HighlightedFlag)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Brush&, HighlightAreaBrush)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, HighlightAreaOutlinePen)
 }
 
 
@@ -99,4 +103,6 @@ void CDPLPythonVis::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_INT_REF(CustomLabelColor, color)
     EXPORT_ATOM_FUNCS_INT_REF(CustomLabel, text)
     EXPORT_ATOM_FUNCS(HighlightedFlag, highlighted)
+    EXPORT_ATOM_FUNCS_INT_REF(HighlightAreaBrush, brush)
+    EXPORT_ATOM_FUNCS_INT_REF(HighlightAreaOutlinePen, pen)
 }

@@ -29,6 +29,8 @@
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 #include "FunctionExports.hpp"
@@ -115,6 +117,11 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, AtomCustomLabelFont)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, AtomCustomLabelSize)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, AtomCustomLabelColor)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, AtomHighlightAreaSize)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Brush&, AtomHighlightAreaBrush)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, AtomHighlightAreaOutlinePen)
+    
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, HighlightAreaOutlineWidth)
     
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondLength)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BondColor)
@@ -141,6 +148,10 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, BondCustomLabelFont)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondCustomLabelSize)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BondCustomLabelColor)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, BondHighlightAreaWidth)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Brush&, BondHighlightAreaBrush)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, BondHighlightAreaOutlinePen)
+
 }
 
 
@@ -195,12 +206,18 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowRadicalElectrons, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowAtomConfigurationLabels, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowAtomCustomLabels, show)
+    EXPORT_CONTROL_PARAM_FUNCS(EnableAtomHighlighting, enable)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelSize, size)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomConfigurationLabelColor, color)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomCustomLabelFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomCustomLabelSize, size)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomCustomLabelColor, color)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaSize, size)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaBrush, brush)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaOutlinePen, pen)
+
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(HighlightAreaOutlineWidth, width)
         
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondLength, length)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondColor, color)
@@ -220,10 +237,14 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(ShowStereoBonds, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowBondConfigurationLabels, show)
     EXPORT_CONTROL_PARAM_FUNCS(ShowBondCustomLabels, show)
+    EXPORT_CONTROL_PARAM_FUNCS(EnableBondHighlighting, enable)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelSize, size)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondConfigurationLabelColor, color)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondCustomLabelFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondCustomLabelSize, size)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondCustomLabelColor, color)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaWidth, width)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaBrush, brush)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaOutlinePen, pen)
 }

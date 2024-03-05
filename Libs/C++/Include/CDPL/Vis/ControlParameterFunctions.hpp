@@ -49,6 +49,8 @@ namespace CDPL
         class SizeSpecification;
         class Font;
         class Color;
+        class Pen;
+        class Brush;
 
         CDPL_VIS_API const Rectangle2D& getViewportParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -346,7 +348,40 @@ namespace CDPL
 
         CDPL_VIS_API void clearRadicalElectronDotSizeParameter(Base::ControlParameterContainer& cntnr);
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getAtomHighlightAreaSizeParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_VIS_API void setAtomHighlightAreaSizeParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaSizeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomHighlightAreaSizeParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Brush& getAtomHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setAtomHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr, const Brush& brush);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getAtomHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setAtomHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr, const Pen& pen);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearAtomHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_VIS_API bool getShowExplicitHydrogensParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void setShowExplicitHydrogensParameter(Base::ControlParameterContainer& cntnr, bool show);
@@ -454,7 +489,7 @@ namespace CDPL
          */
         CDPL_VIS_API bool getEnableAtomHighlightingParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_VIS_API void setEnableAtomHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enabel);
+        CDPL_VIS_API void setEnableAtomHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enale);
 
         CDPL_VIS_API bool hasEnableAtomHighlightingParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -526,7 +561,18 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomCustomLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getHighlightAreaOutlineWidthParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_VIS_API void setHighlightAreaOutlineWidthParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& width);
+
+        CDPL_VIS_API bool hasHighlightAreaOutlineWidthParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearHighlightAreaOutlineWidthParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_VIS_API const SizeSpecification& getBondLengthParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void setBondLengthParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& length);
@@ -643,7 +689,40 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondLabelMarginParameter(Base::ControlParameterContainer& cntnr);
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getBondHighlightAreaWidthParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_VIS_API void setBondHighlightAreaWidthParameter(Base::ControlParameterContainer& cntnr, const SizeSpecification& width);
+
+        CDPL_VIS_API bool hasBondHighlightAreaWidthParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondHighlightAreaWidthParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Brush& getBondHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBondHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr, const Brush& brush);
+
+        CDPL_VIS_API bool hasBondHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getBondHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBondHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr, const Pen& pen);
+
+        CDPL_VIS_API bool hasBondHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBondHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_VIS_API bool getShowBondReactionInfosParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void setShowBondReactionInfosParameter(Base::ControlParameterContainer& cntnr, bool show);
@@ -697,7 +776,7 @@ namespace CDPL
          */
         CDPL_VIS_API bool getEnableBondHighlightingParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_VIS_API void setEnableBondHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enabel);
+        CDPL_VIS_API void setEnableBondHighlightingParameter(Base::ControlParameterContainer& cntnr, bool enable);
 
         CDPL_VIS_API bool hasEnableBondHighlightingParameter(const Base::ControlParameterContainer& cntnr);
 

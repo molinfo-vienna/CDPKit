@@ -223,6 +223,20 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Base::LookupKey HIGHLIGHTED_FLAG;
 
+            /**
+             * \brief Specifies the brush to use for filling atom highlighting areas.
+             * \valuetype Vis::Brush
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_BRUSH;
+   
+            /**
+             * \brief Specifies the pen to use for drawing atom highlighting area outlines.
+             * \valuetype Vis::Pen
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_PEN;
+            
         } // namespace AtomProperty
     } // namespace Vis
 } // namespace CDPL

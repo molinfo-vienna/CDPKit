@@ -62,5 +62,7 @@ void CDPLPythonVis::exportBondPropertyDefaults()
         .def_readonly("CUSTOM_LABEL_COLOR", &Vis::BondPropertyDefault::CUSTOM_LABEL_COLOR)
         .def_readonly("CUSTOM_LABEL", &Vis::BondPropertyDefault::CUSTOM_LABEL)
         .def_readonly("HIGHLIGHTED_FLAG", &Vis::BondPropertyDefault::HIGHLIGHTED_FLAG)
+        .def_readonly("HIGHLIGHT_AREA_BRUSH", &Vis::BondPropertyDefault::HIGHLIGHT_AREA_BRUSH)
+        .def_readonly("HIGHLIGHT_AREA_OUTLINE_PEN", &Vis::BondPropertyDefault::HIGHLIGHT_AREA_OUTLINE_PEN)
         ;
 }

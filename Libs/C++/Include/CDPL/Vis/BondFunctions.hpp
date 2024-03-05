@@ -48,6 +48,8 @@ namespace CDPL
 
         class Color;
         class Font;
+        class Brush;
+        class Pen;
         class SizeSpecification;
 
         CDPL_VIS_API const Color& getColor(const Chem::Bond& bond);
@@ -233,7 +235,6 @@ namespace CDPL
         CDPL_VIS_API bool hasCustomLabel(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearCustomLabel(Chem::Bond& bond);
-
     
         /*
          * \since 1.2
@@ -245,6 +246,28 @@ namespace CDPL
         CDPL_VIS_API bool hasHighlightedFlag(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearHighlightedFlag(Chem::Bond& bond);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Brush& getHighlightAreaBrush(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setHighlightAreaBrush(Chem::Bond& bond, const Brush& brush);
+
+        CDPL_VIS_API bool hasHighlightAreaBrush(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearHighlightAreaBrush(Chem::Bond& bond);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getHighlightAreaOutlinePen(const Chem::Bond& bond);
+
+        CDPL_VIS_API void setHighlightAreaOutlinePen(Chem::Bond& bond, const Pen& pen);
+
+        CDPL_VIS_API bool hasHighlightAreaOutlinePen(const Chem::Bond& bond);
+
+        CDPL_VIS_API void clearHighlightAreaOutlinePen(Chem::Bond& bond);
 
     } // namespace Vis
 } // namespace CDPL

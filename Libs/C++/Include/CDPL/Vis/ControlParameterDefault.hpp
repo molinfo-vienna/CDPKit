@@ -31,6 +31,8 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 
 
 namespace CDPL
@@ -252,6 +254,24 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 
             /**
+             * \brief Default setting (= \c %SizeSpecification(14.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification ATOM_HIGHLIGHT_AREA_SIZE;
+
+            /**
+             * \brief Default setting (= \c %Brush(Color(0.8, 0.8, 1.0)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Brush ATOM_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \brief Default setting (= \c %Pen(Pen::NO_LINE) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
+
+            /**
              * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_CARBONS.
              */
             extern CDPL_VIS_API const bool SHOW_CARBONS;
@@ -314,6 +334,12 @@ namespace CDPL
              */
             extern CDPL_VIS_API const bool ENABLE_ATOM_HIGHLIGHTING;
 
+            /**
+             * \brief Default setting (= \c %SizeSpecification(1.0, false, false, true)) for the control-parameter Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification HIGHLIGHT_AREA_OUTLINE_WIDTH;
+       
             /**
              * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::BOND_COLOR.
              */
@@ -415,6 +441,24 @@ namespace CDPL
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
 
+            /**
+             * \brief Default setting (= \c %SizeSpecification(10.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH;
+
+            /**
+             * \brief Default setting (= \c %Brush(Color(0.8, 0.8, 1.0)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Brush BOND_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \brief Default setting (= \c %Pen(Pen::NO_LINE) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
+     
             /**
              * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_BOND_REACTION_INFOS.
              */

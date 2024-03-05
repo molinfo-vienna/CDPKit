@@ -34,6 +34,8 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 namespace CDPL
@@ -99,8 +101,18 @@ namespace CDPL
             /**
              * \since 1.2
              */
-            extern CDPL_VIS_API const bool               HIGHLIGHTED_FLAG;
+            extern CDPL_VIS_API const bool              HIGHLIGHTED_FLAG;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Brush             HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen               HIGHLIGHT_AREA_OUTLINE_PEN;
+            
         } // namespace BondPropertyDefault
     } // namespace Vis
 } // namespace CDPL

@@ -758,6 +758,22 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ENABLE_ATOM_HIGHLIGHTING;
 
             /**
+             * \brief Specifies the line width for drawing atom or bond highlighting area outlines.
+             *
+             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
+             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
+             * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH
+             * is not set, the default setting Vis::ControlParameterDefault::HIGHLIGHT_AREA_OUTLINE_WIDTH will be used. 
+             *
+             * \valuetype Vis::SizeSpecification
+             * \note The control-parameter setting is ignored if a line width has been specified by 
+             *       Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_WIDTH;
+
+            /**
              * \brief Specifies the desired average bond length for the visualization of chemical structures.
              *
              * The bond length has to be specified as an absolute value. The input- and output-scaling settings are ignored and have no
@@ -1082,26 +1098,10 @@ namespace CDPL
              *
              * \valuetype Vis::Pen
              * \note The control-parameter setting is ignored if a pen has been specified by
-             *       Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_PEN or Vis::BondProperty::HIGHLIGHT_AREA_PEN.
+             *       Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN or Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
-
-            /**
-             * \brief Specifies the line width for drawing atom or bond highlighting area outlines.
-             *
-             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
-             * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
-             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
-             * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH
-             * is not set, the default setting Vis::ControlParameterDefault::HIGHLIGHT_AREA_OUTLINE_WIDTH will be used. 
-             *
-             * \valuetype Vis::SizeSpecification
-             * \note The control-parameter setting is ignored if a line width has been specified by 
-             *       Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH.
-             * \since 1.2
-             */
-            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_WIDTH;
 
             /**
              * \brief Specifies whether or not to draw reaction center marks.

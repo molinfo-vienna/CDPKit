@@ -28,6 +28,8 @@
 #include "CDPL/Vis/BondFunctions.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 #include "FunctionExports.hpp"
@@ -81,6 +83,8 @@ namespace
     MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Color&, CustomLabelColor)
     MAKE_BOND_FUNC_WRAPPERS(const std::string&, CustomLabel)
     MAKE_BOND_FUNC_WRAPPERS(bool, HighlightedFlag)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Brush&, HighlightAreaBrush)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Pen&, HighlightAreaOutlinePen)
 }
 
 
@@ -109,4 +113,6 @@ void CDPLPythonVis::exportBondFunctions()
     EXPORT_BOND_FUNCS_INT_REF(CustomLabelColor, color)
     EXPORT_BOND_FUNCS_INT_REF(CustomLabel, text)
     EXPORT_BOND_FUNCS(HighlightedFlag, highlighted)
+    EXPORT_BOND_FUNCS_INT_REF(HighlightAreaBrush, brush)
+    EXPORT_BOND_FUNCS_INT_REF(HighlightAreaOutlinePen, pen) 
 }
