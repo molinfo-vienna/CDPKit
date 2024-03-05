@@ -106,6 +106,39 @@ class ControlParameter(Boost.Python.instance):
     SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_SIZE')
 
     ##
+    # \brief Specifies the minimum size of atom highlighting areas.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_SIZE will be used.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_SIZE = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_SIZE')
+
+    ##
+    # \brief Specifies the brush to use for filling atom highlighting areas.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH and Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_BRUSH will be used.
+    # 
+    # <b>Value Type:</b> Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH or Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_BRUSH')
+
+    ##
+    # \brief Specifies the pen to use for drawing atom highlighting area outlines.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN and Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN will be used.
+    # 
+    # <b>Value Type:</b> Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_OUTLINE_PEN')
+
+    ##
     # \brief Specifies the color with which the drawing area is erased before rendering any graphical primitives.
     # 
     # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render. If the control-parameter is left unspecified or Vis.Color.TRANSPARENT, the drawing area won't be erased.
@@ -525,6 +558,60 @@ class ControlParameter(Boost.Python.instance):
     SHOW_EXPLICIT_HYDROGENS = CDPL.Base.LookupKey('SHOW_EXPLICIT_HYDROGENS')
 
     ##
+    # \brief Specifies whether or not to show bond configuration descriptor labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CONFIGURATION_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # 
+    SHOW_BOND_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CONFIGURATION_LABELS')
+
+    ##
+    # \brief Specifies whether or not to show bond custom text labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CUSTOM_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    SHOW_BOND_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CUSTOM_LABELS')
+
+    ##
+    # \brief Specifies whether or not to show atom configuration descriptor labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CONFIGURATION_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # 
+    SHOW_ATOM_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CONFIGURATION_LABELS')
+
+    ##
+    # \brief Specifies whether or not to show atom custom text labels.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CUSTOM_LABELS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    SHOW_ATOM_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CUSTOM_LABELS')
+
+    ##
+    # \brief Specifies whether or not to enable atom highlighting.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.ENABLE_ATOM_HIGHLIGHTING will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    ENABLE_ATOM_HIGHLIGHTING = CDPL.Base.LookupKey('ENABLE_ATOM_HIGHLIGHTING')
+
+    ##
+    # \brief Specifies whether or not to enable bond highlighting.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.ENABLE_BOND_HIGHLIGHTING will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # 
+    ENABLE_BOND_HIGHLIGHTING = CDPL.Base.LookupKey('ENABLE_BOND_HIGHLIGHTING')
+
+    ##
     # \brief Specifies how to adjust the size of a 2D depiction relative to the available viewport area.
     # 
     # Supported adjustment policies are defined in namespace Vis.SizeAdjustment. If <tt>SIZE_ADJUSTMENT</tt> is left unspecified, the default size adjustment setting Vis.ControlParameterDefault.SIZE_ADJUSTMENT will be used.
@@ -561,22 +648,15 @@ class ControlParameter(Boost.Python.instance):
     VIEWPORT = CDPL.Base.LookupKey('VIEWPORT')
 
     ##
-    # \brief Specifies whether or not to show atom configuration descriptor labels.
+    # \brief Specifies the line width for drawing atom or bond highlighting area outlines.
     # 
-    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CONFIGURATION_LABELS will be used.
+    # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.HIGHLIGHT_AREA_OUTLINE_WIDTH will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH. 
     # 
-    SHOW_ATOM_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CONFIGURATION_LABELS')
-
-    ##
-    # \brief Specifies whether or not to show atom custom text labels.
+    # \since 1.2
     # 
-    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_ATOM_CUSTOM_LABELS will be used.
-    # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
-    # 
-    SHOW_ATOM_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_ATOM_CUSTOM_LABELS')
+    HIGHLIGHT_AREA_OUTLINE_WIDTH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_OUTLINE_WIDTH')
 
     ##
     # \brief Specifies the font used for atom configuration descriptor text labels.
@@ -645,22 +725,37 @@ class ControlParameter(Boost.Python.instance):
     ATOM_CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CUSTOM_LABEL_COLOR')
 
     ##
-    # \brief Specifies whether or not to show bond configuration descriptor labels.
+    # \brief Specifies the width of bond highlighting areas.
     # 
-    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CONFIGURATION_LABELS will be used.
+    # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH is not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_WIDTH will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.1
+    # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a width has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. 
     # 
-    SHOW_BOND_CONFIGURATION_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CONFIGURATION_LABELS')
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_WIDTH = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_WIDTH')
 
     ##
-    # \brief Specifies whether or not to show bond custom text labels.
+    # \brief Specifies the brush to use for filling bond highlighting areas.
     # 
-    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_BOND_CUSTOM_LABELS will be used.
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH and Vis.BondProperty.HIGHLIGHT_AREA_BRUSH are not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_BRUSH will be used.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
+    # <b>Value Type:</b> Vis.Brush \note The control-parameter setting is ignored if a brush has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH or Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
     # 
-    SHOW_BOND_CUSTOM_LABELS = CDPL.Base.LookupKey('SHOW_BOND_CUSTOM_LABELS')
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_BRUSH')
+
+    ##
+    # \brief Specifies the pen to use for drawing bond highlighting area outlines.
+    # 
+    # If the control-parameter is left unspecified and the properties Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN and Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN are not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_OUTLINE_PEN will be used.
+    # 
+    # <b>Value Type:</b> Vis.Pen \note The control-parameter setting is ignored if a pen has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN or Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_OUTLINE_PEN')
 
     ##
     # \brief Specifies the font used for bond configuration descriptor text labels.

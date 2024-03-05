@@ -118,3 +118,18 @@ class BondPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     CUSTOM_LABEL = ''
+
+    ##
+    # \brief 
+    #
+    HIGHLIGHTED_FLAG = False
+
+    ##
+    # \brief 
+    #
+    HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+
+    ##
+    # \brief 
+    #
+    HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_

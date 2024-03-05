@@ -192,3 +192,24 @@ class BondProperty(Boost.Python.instance):
     # \since 1.2
     # 
     CUSTOM_LABEL = CDPL.Base.LookupKey('CUSTOM_LABEL')
+
+    ##
+    # \brief Specifies whether or not the bond is highlighted. <b>Value Type:</b> bool.
+    # 
+    # \since 1.2
+    # 
+    HIGHLIGHTED_FLAG = CDPL.Base.LookupKey('HIGHLIGHTED_FLAG')
+
+    ##
+    # \brief Specifies the brush to use for filling atom highlighting areas. <b>Value Type:</b> Vis.Brush.
+    # 
+    # \since 1.2
+    # 
+    HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_BRUSH')
+
+    ##
+    # \brief Specifies the pen to use for drawing atom highlighting area outlines. <b>Value Type:</b> Vis.Pen.
+    # 
+    # \since 1.2
+    # 
+    HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('HIGHLIGHT_AREA_OUTLINE_PEN')

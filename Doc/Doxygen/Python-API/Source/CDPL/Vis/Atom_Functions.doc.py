@@ -158,6 +158,60 @@ def setRadicalElectronDotSize(atom: Chem.Atom, size: SizeSpecification) -> None:
 # \brief 
 # \param atom 
 #
+def clearHighlightedFlag(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasHighlightedFlag(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHighlightedFlag(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \param highlighted 
+#
+def setHighlightedFlag(atom: Chem.Atom, highlighted: bool) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearHighlightAreaBrush(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasHighlightAreaBrush(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHighlightAreaBrush(atom: Chem.Atom) -> Brush: pass
+
+##
+# \brief 
+# \param atom 
+# \param brush 
+#
+def setHighlightAreaBrush(atom: Chem.Atom, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearCustomLabel(atom: Chem.Atom) -> None: pass
 
 ##
@@ -180,6 +234,33 @@ def getCustomLabel(atom: Chem.Atom) -> object: pass
 # \param text 
 #
 def setCustomLabel(atom: Chem.Atom, text: str) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearHighlightAreaOutlinePen(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasHighlightAreaOutlinePen(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHighlightAreaOutlinePen(atom: Chem.Atom) -> Pen: pass
+
+##
+# \brief 
+# \param atom 
+# \param pen 
+#
+def setHighlightAreaOutlinePen(atom: Chem.Atom, pen: Pen) -> None: pass
 
 ##
 # \brief 

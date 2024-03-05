@@ -104,6 +104,33 @@ def setLabelSize(bond: Chem.Bond, size: SizeSpecification) -> None: pass
 # \brief 
 # \param bond 
 #
+def clearHighlightedFlag(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasHighlightedFlag(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getHighlightedFlag(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \param highlighted 
+#
+def setHighlightedFlag(bond: Chem.Bond, highlighted: bool) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
 def clearLineSpacing(bond: Chem.Bond) -> None: pass
 
 ##
@@ -180,6 +207,33 @@ def getStereoBondHashSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 # \param spacing 
 #
 def setStereoBondHashSpacing(bond: Chem.Bond, spacing: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
+def clearHighlightAreaBrush(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasHighlightAreaBrush(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getHighlightAreaBrush(bond: Chem.Bond) -> Brush: pass
+
+##
+# \brief 
+# \param bond 
+# \param brush 
+#
+def setHighlightAreaBrush(bond: Chem.Bond, brush: Brush) -> None: pass
 
 ##
 # \brief 
@@ -342,6 +396,33 @@ def getCustomLabel(bond: Chem.Bond) -> object: pass
 # \param text 
 #
 def setCustomLabel(bond: Chem.Bond, text: str) -> None: pass
+
+##
+# \brief 
+# \param bond 
+#
+def clearHighlightAreaOutlinePen(bond: Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasHighlightAreaOutlinePen(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getHighlightAreaOutlinePen(bond: Chem.Bond) -> Pen: pass
+
+##
+# \brief 
+# \param bond 
+# \param pen 
+#
+def setHighlightAreaOutlinePen(bond: Chem.Bond, pen: Pen) -> None: pass
 
 ##
 # \brief 

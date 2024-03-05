@@ -150,6 +150,13 @@ class ControlParameterDefault(Boost.Python.instance):
     USE_CALCULATED_ATOM_COORDINATES = False
 
     ##
+    # \brief Default setting (= <tt>SizeSpecification</tt>(1.0, False, False, True)) for the control-parameter Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH.
+    # 
+    # \since 1.2
+    # 
+    HIGHLIGHT_AREA_OUTLINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
     # \brief Default setting (= <tt>Color.BLACK</tt>) for the control-parameter Vis.ControlParameter.ATOM_COLOR.
     # 
     ATOM_COLOR = Color(r=0, g=0, b=0)
@@ -178,6 +185,27 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief Default setting (= <tt>SizeSpecification</tt>(2.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_LABEL_MARGIN.
     # 
     ATOM_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief Default setting (= <tt>SizeSpecification</tt>(14.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=14, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief Default setting (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+
+    ##
+    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(1.0, False, False, True)) for the control-parameter Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE.
@@ -228,6 +256,63 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_RADICAL_ELECTRONS.
     # 
     SHOW_RADICAL_ELECTRONS = True
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_REACTION_INFOS.
+    # 
+    SHOW_BOND_REACTION_INFOS = True
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_QUERY_INFOS.
+    # 
+    SHOW_BOND_QUERY_INFOS = True
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_STEREO_BONDS.
+    # 
+    SHOW_STEREO_BONDS = True
+
+    ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS.
+    # 
+    # \since 1.1
+    # 
+    SHOW_ATOM_CONFIGURATION_LABELS = False
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS.
+    # 
+    # \since 1.2
+    # 
+    SHOW_ATOM_CUSTOM_LABELS = True
+
+    ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS.
+    # 
+    # \since 1.1
+    # 
+    SHOW_BOND_CONFIGURATION_LABELS = False
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS.
+    # 
+    # \since 1.2
+    # 
+    SHOW_BOND_CUSTOM_LABELS = True
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING.
+    # 
+    # \since 1.2
+    # 
+    ENABLE_ATOM_HIGHLIGHTING = True
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING.
+    # 
+    # \since 1.2
+    # 
+    ENABLE_BOND_HIGHLIGHTING = True
 
     ##
     # \brief Default setting (= <tt>Color.BLACK</tt>) for the control-parameter Vis.ControlParameter.BOND_COLOR.
@@ -295,40 +380,11 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_REACTION_INFOS.
-    # 
-    SHOW_BOND_REACTION_INFOS = True
-
-    ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_QUERY_INFOS.
-    # 
-    SHOW_BOND_QUERY_INFOS = True
-
-    ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_STEREO_BONDS.
-    # 
-    SHOW_STEREO_BONDS = True
-
-    ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS.
-    # 
-    # \since 1.1
-    # 
-    SHOW_ATOM_CONFIGURATION_LABELS = False
-
-    ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS.
-    # 
-    # \since 1.2
-    # 
-    SHOW_ATOM_CUSTOM_LABELS = True
-
-    ##
     # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_FONT.
     # 
     # \since 1.1
     # 
-    ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+    ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.
@@ -345,11 +401,11 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT.
+    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, False)) for the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_FONT.
     # 
     # \since 1.2
     # 
-    ATOM_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+    ATOM_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CUSTOM_LABEL_SIZE.
@@ -364,20 +420,6 @@ class ControlParameterDefault(Boost.Python.instance):
     # \since 1.2
     # 
     ATOM_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
-
-    ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS.
-    # 
-    # \since 1.1
-    # 
-    SHOW_BOND_CONFIGURATION_LABELS = False
-
-    ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS.
-    # 
-    # \since 1.2
-    # 
-    SHOW_BOND_CUSTOM_LABELS = True
 
     ##
     # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.BOND_CONFIGURATION_LABEL_FONT.
@@ -401,11 +443,11 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, True)) for the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT.
+    # \brief Default setting (= <tt>Font</tt>("", 8.0, False, False)) for the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_FONT.
     # 
     # \since 1.2
     # 
-    BOND_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+    BOND_CUSTOM_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE.
@@ -420,3 +462,24 @@ class ControlParameterDefault(Boost.Python.instance):
     # \since 1.2
     # 
     BOND_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief Default setting (= <tt>SizeSpecification</tt>(10.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief Default setting (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+
+    ##
+    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_

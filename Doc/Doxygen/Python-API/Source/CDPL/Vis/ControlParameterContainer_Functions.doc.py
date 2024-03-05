@@ -77,6 +77,33 @@ def setReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer, style:
 # \brief 
 # \param cntnr 
 #
+def clearAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param size 
+#
+def setAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -401,6 +428,141 @@ def setStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer, spa
 # \brief 
 # \param cntnr 
 #
+def clearEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param enable 
+#
+def setEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param enable 
+#
+def setEnableAtomHighlightingParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> Brush: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param brush 
+#
+def setBondHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) -> Brush: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param brush 
+#
+def setAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param width 
+#
+def setBondHighlightAreaWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -531,6 +693,33 @@ def getReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) ->
 # \param width 
 #
 def setReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param width 
+#
+def setHighlightAreaOutlineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
@@ -720,6 +909,60 @@ def getReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> Si
 # \param length 
 #
 def setReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> Pen: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param pen 
+#
+def setBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer, pen: Pen) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> Pen: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param pen 
+#
+def setAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer, pen: Pen) -> None: pass
 
 ##
 # \brief 
