@@ -32,6 +32,8 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
 
@@ -87,6 +89,26 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Color                     ATOM_CUSTOM_LABEL_COLOR;
             
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification         ATOM_HIGHLIGHT_AREA_SIZE;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Brush                     ATOM_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen                       ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification         HIGHLIGHT_AREA_OUTLINE_WIDTH;
+       
             extern CDPL_VIS_API const Color                     BOND_COLOR;
             extern CDPL_VIS_API const SizeSpecification         BOND_LINE_WIDTH;
             extern CDPL_VIS_API const SizeSpecification         BOND_LINE_SPACING;
@@ -129,6 +151,21 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Color                     BOND_CUSTOM_LABEL_COLOR;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const SizeSpecification         BOND_HIGHLIGHT_AREA_WIDTH;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Brush                     BOND_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen                       BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
             
         } // namespace MolecularGraphPropertyDefault
     } // namespace Vis

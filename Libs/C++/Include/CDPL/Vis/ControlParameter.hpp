@@ -579,7 +579,7 @@ namespace CDPL
              * The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by
              * Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH.
              * If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length
-             * normalization. If output-scaling is enabled, the diameter will follow the size change of the chemical structure during
+             * normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during
              * viewport size adjustment. If the control-parameter is left unspecified and the property
              * Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting 
              * Vis::ControlParameterDefault::ATOM_HIGHLIGHT_AREA_SIZE will be used. 

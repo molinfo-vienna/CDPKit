@@ -47,6 +47,8 @@ namespace CDPL
 
         class Color;
         class Font;
+        class Pen;
+        class Brush;
         class SizeSpecification;
 
         CDPL_VIS_API const ColorTable::SharedPointer& getAtomColorTable(const Chem::MolecularGraph& molgraph);
@@ -186,6 +188,50 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomCustomLabelColor(Chem::MolecularGraph& molgraph);
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getAtomHighlightAreaSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomHighlightAreaSize(Chem::MolecularGraph& molgraph, const SizeSpecification& size);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaSize(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomHighlightAreaSize(Chem::MolecularGraph& molgraph);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Brush& getAtomHighlightAreaBrush(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomHighlightAreaBrush(Chem::MolecularGraph& molgraph, const Brush& brush);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaBrush(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomHighlightAreaBrush(Chem::MolecularGraph& molgraph);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getAtomHighlightAreaOutlinePen(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setAtomHighlightAreaOutlinePen(Chem::MolecularGraph& molgraph, const Pen& pen);
+
+        CDPL_VIS_API bool hasAtomHighlightAreaOutlinePen(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearAtomHighlightAreaOutlinePen(Chem::MolecularGraph& molgraph);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getHighlightAreaOutlineWidth(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setHighlightAreaOutlineWidth(Chem::MolecularGraph& molgraph, const SizeSpecification& width);
+
+        CDPL_VIS_API bool hasHighlightAreaOutlineWidth(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearHighlightAreaOutlineWidth(Chem::MolecularGraph& molgraph);
+
         
         CDPL_VIS_API const Color& getBondColor(const Chem::MolecularGraph& molgraph);
 
@@ -293,6 +339,38 @@ namespace CDPL
         CDPL_VIS_API bool hasBondLabelMargin(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void clearBondLabelMargin(Chem::MolecularGraph& molgraph);
+             /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const SizeSpecification& getBondHighlightAreaWidth(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondHighlightAreaWidth(Chem::MolecularGraph& molgraph, const SizeSpecification& width);
+
+        CDPL_VIS_API bool hasBondHighlightAreaWidth(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondHighlightAreaWidth(Chem::MolecularGraph& molgraph);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Brush& getBondHighlightAreaBrush(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondHighlightAreaBrush(Chem::MolecularGraph& molgraph, const Brush& brush);
+
+        CDPL_VIS_API bool hasBondHighlightAreaBrush(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondHighlightAreaBrush(Chem::MolecularGraph& molgraph);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getBondHighlightAreaOutlinePen(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void setBondHighlightAreaOutlinePen(Chem::MolecularGraph& molgraph, const Pen& pen);
+
+        CDPL_VIS_API bool hasBondHighlightAreaOutlinePen(const Chem::MolecularGraph& molgraph);
+
+        CDPL_VIS_API void clearBondHighlightAreaOutlinePen(Chem::MolecularGraph& molgraph);
         
         /*
          * \since 1.1

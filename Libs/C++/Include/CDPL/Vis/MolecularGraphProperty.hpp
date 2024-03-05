@@ -150,7 +150,44 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
+            
+            /**
+             * \brief Specifies the minimum size of atom highlighting areas.
+             *
+             * The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by
+             * Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH.
+             * If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length
+             * normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during
+             * viewport size adjustment. The specified size takes precedence over the size specified by the parameter 
+             * Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_SIZE;
 
+            /**
+             * \brief Specifies the brush to use for filling atom highlighting areas.
+             *
+             * The specified brush takes precedence over the brush specified by the parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH.
+             *
+             * \valuetype Vis::Brush
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \brief Specifies the pen to use for drawing atom highlighting area outlines.
+             *
+             * The specified pen takes precedence over the pen specified by the parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+             *
+             * \valuetype Vis::Pen
+             * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
+            
             /**
              * \brief Specifies the font used for atom configuration descriptor text labels.
              *
@@ -230,7 +267,20 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_CUSTOM_LABEL_COLOR;
-  
+
+            /**
+             * \brief Specifies the line width for drawing atom or bond highlighting area outlines.
+             *
+             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
+             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
+             * The specified line width takes precedence over the width specified by the parameter Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey HIGHLIGHT_AREA_OUTLINE_WIDTH;
+            
             /**
              * \brief Specifies the color of bonds.
              *
@@ -467,6 +517,41 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_CUSTOM_LABEL_COLOR;
 
+            /**
+             * \brief Specifies the width of bond highlighting areas.
+             *
+             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * is enabled, the width will follow the size change of the chemical structure during bond length normalization. 
+             * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
+             * The specified width takes precedence over the width specified by the parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
+             *
+             * \valuetype Vis::SizeSpecification
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_WIDTH;
+
+            /**
+             * \brief Specifies the brush to use for filling bond highlighting areas.
+             *
+             * The specified brush takes precedence over the brush specified by the parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH.
+             *
+             * \valuetype Vis::Brush
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::HIGHLIGHT_AREA_BRUSH.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_BRUSH;
+
+            /**
+             * \brief Specifies the pen to use for drawing bond highlighting area outlines.
+             *
+             * The specified pen takes precedence over the pen specified by the parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+             *
+             * \valuetype Vis::Pen
+             * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BOND_HIGHLIGHT_AREA_OUTLINE_PEN;
+            
         } // namespace MolecularGraphProperty
     } // namespace Vis
 } // namespace CDPL
