@@ -28,6 +28,8 @@
 #include "CDPL/Vis/MolecularGraphFunctions.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 #include "FunctionExports.hpp"
@@ -67,6 +69,12 @@ void CDPLPythonVis::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_INT_REF(SecondaryAtomLabelSize, size)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(AtomLabelMargin, margin)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(RadicalElectronDotSize, size)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(AtomHighlightAreaSize, size)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(AtomHighlightAreaBrush, brush)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(AtomHighlightAreaOutlinePen, pen)
+
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(HighlightAreaOutlineWidth, width)
+
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondColor, color)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondLineWidth, width)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondLineSpacing, spacing)
@@ -85,4 +93,7 @@ void CDPLPythonVis::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondCustomLabelFont, font)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondCustomLabelSize, size)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondCustomLabelColor, color)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaWidth, width)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaBrush, brush)
+    EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaOutlinePen, pen)
 }
