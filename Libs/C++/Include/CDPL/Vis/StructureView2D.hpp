@@ -42,6 +42,7 @@
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Pen.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/LinePrimitive2D.hpp"
 #include "CDPL/Vis/PolylinePrimitive2D.hpp"
@@ -49,9 +50,10 @@
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
+#include "CDPL/Vis/PathPrimitive2D.hpp"
+#include "CDPL/Vis/ClipPathPrimitive2D.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -175,6 +177,18 @@ namespace CDPL
          *   <td>Specifies the size of radical electron dots</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE</td>
+         *   <td>Specifies the minimum size of atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing atom highlighting area outlines</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::SHOW_EXPLICIT_HYDROGENS</td>
          *   <td>Specifies whether or not to show explicit hydrogen atoms</td>
          *  </tr>
@@ -217,6 +231,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_ATOM_CUSTOM_LABELS</td>
          *   <td>Specifies whether or not to show atom confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ENABLE_ATOM_HIGHLIGHTING</td>
+         *   <td>Specifies whether or not to enable the highlighting of atoms</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH</td>
+         *   <td>Specifies the line width for drawing atom or bond highlighting area outlines</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::ControlParameter::BOND_LENGTH</td>
@@ -295,6 +317,18 @@ namespace CDPL
          *   <td>Specifies the margin of free space around bond labels</td>
          *  </tr>
          *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH</td>
+         *   <td>Specifies the width of bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing bond highlighting area outlines</td>
+         *  </tr>
+         *  <tr>
          *   <td>Vis::ControlParameter::SHOW_BOND_REACTION_INFOS</td>
          *   <td>Specifies whether or not to draw reaction center marks</td>
          *  </tr>
@@ -313,6 +347,10 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::ControlParameter::SHOW_BOND_CUSTOM_LABELS</td>
          *   <td>Specifies whether or not to show bond confiuration labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::ControlParameter::ENABLE_BOND_HIGHLIGHTING</td>
+         *   <td>Specifies whether or not to enable the highlighting of bonds</td>
          *  </tr>
          * </table>
          *
@@ -379,6 +417,22 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::RADICAL_ELECTRON_DOT_SIZE</td>
          *   <td>Specifies the size of radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_SIZE</td>
+         *   <td>Specifies the minimum size of atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling atom highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing atom highlighting area outlines</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH</td>
+         *   <td>Specifies the line width for drawing atom or bond highlighting area outlines</td>
          *  </tr>
          *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_COLOR</td>
@@ -450,6 +504,18 @@ namespace CDPL
          *   <td>Vis::MolecularGraphProperty::BOND_LABEL_MARGIN</td>
          *   <td>Specifies the margin of free space around bond labels</td>
          *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH</td>
+         *   <td>Specifies the width of bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling bond highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing bond highlighting area outlines</td>
+         *  </tr>
          * </table>
          *
          * Supported Chem::Atom properties:
@@ -509,6 +575,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::AtomProperty::RADICAL_ELECTRON_DOT_SIZE</td>
          *   <td>Specifies the size of radical electron dots</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing highlighting area outlines</td>
          *  </tr>
          * </table>
          *
@@ -589,6 +663,14 @@ namespace CDPL
          *  <tr>
          *   <td>Vis::BondProperty::CUSTOM_LABEL_COLOR</td>
          *   <td>Specifies the color of bond custom labels</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::HIGHLIGHT_AREA_BRUSH</td>
+         *   <td>Specifies the brush to use for filling highlighting areas</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN</td>
+         *   <td>Specifies the pen to use for drawing highlighting area outlines</td>
          *  </tr>
          * </table>
          */
@@ -813,17 +895,22 @@ namespace CDPL
             LineSegmentListPrimitive2D* allocLineSegListPrimitive();
             PointListPrimitive2D*       allocPointListPrimitive();
             TextLabelPrimitive2D*       allocTextLabelPrimitive();
+            PathPrimitive2D*            allocPathPrimitive();
+            ClipPathPrimitive2D*        allocClipPathPrimitive();
 
             typedef std::vector<const GraphicsPrimitive2D*>       GraphicsPrimitiveList;
             typedef std::vector<Rectangle2D>                      RectangleList;
             typedef std::vector<RectangleList>                    RectangleListTable;
             typedef std::vector<Line2D>                           BondLineTable;
+            typedef std::vector<std::size_t>                      UIntArray;
             typedef Util::ObjectStack<LinePrimitive2D>            LinePrimitiveCache;
             typedef Util::ObjectStack<PolylinePrimitive2D>        PolylinePrimitiveCache;
             typedef Util::ObjectStack<PolygonPrimitive2D>         PolygonPrimitiveCache;
             typedef Util::ObjectStack<LineSegmentListPrimitive2D> LineSegListPrimitiveCache;
             typedef Util::ObjectStack<PointListPrimitive2D>       PointListPrimitiveCache;
             typedef Util::ObjectStack<TextLabelPrimitive2D>       TextLabelPrimitiveCache;
+            typedef Util::ObjectStack<PathPrimitive2D>            PathPrimitiveCache;
+            typedef Util::ObjectStack<ClipPathPrimitive2D>        ClipPathPrimitiveCache;
 
             typedef std::unique_ptr<StructureView2DParameters> StructureView2DParametersPtr;
             typedef std::unique_ptr<Chem::Fragment>            FragmentPtr;
@@ -842,7 +929,7 @@ namespace CDPL
             BondLineTable                outputBondLines;
             RectangleListTable           atomLabelBounds;
             RectangleList                bondLabelBounds;
-            Util::BitSet                 atomWithSymbolMask;
+            UIntArray                    atomCoreLabelCounts;
             GraphicsPrimitiveList        drawList;
             double                       avgInputBondLength;
             double                       stdBondLengthScalingFactor;
@@ -851,6 +938,7 @@ namespace CDPL
             Math::Vector2D               viewTranslations[2];
             bool                         structureChanged;
             bool                         fontMetricsChanged;
+            Brush                        activeBrush;
             Pen                          activePen;
             Font                         activeLabelFont;
             Font                         activeSecondaryLabelFont;
@@ -863,6 +951,8 @@ namespace CDPL
             LineSegListPrimitiveCache    lineSegListCache;
             PointListPrimitiveCache      pointListCache;
             TextLabelPrimitiveCache      textLabelCache;
+            PathPrimitiveCache           pathCache;
+            ClipPathPrimitiveCache       clipPathCache;
         };
     } // namespace Vis
 } // namespace CDPL

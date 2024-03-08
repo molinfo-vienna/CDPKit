@@ -97,6 +97,8 @@ namespace
     const std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 1000;
     const std::size_t MAX_POINT_LIST_CACHE_SIZE    = 1000;
     const std::size_t MAX_TEXT_LABEL_CACHE_SIZE    = 1000;
+    const std::size_t MAX_PATH_CACHE_SIZE          = 300;
+    const std::size_t MAX_CLIP_PATH_CACHE_SIZE     = 300;
 
     char getConfigLabel(unsigned int config)
     {
@@ -154,7 +156,8 @@ Vis::StructureView2D::StructureView2D(const Chem::MolecularGraph* molgraph):
     reactionContext(false), hasAtomCoords(false), lineCache(MAX_LINE_CACHE_SIZE),
     polylineCache(MAX_POLYLINE_CACHE_SIZE), polygonCache(MAX_POLYGON_CACHE_SIZE),
     lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE), pointListCache(MAX_POINT_LIST_CACHE_SIZE),
-    textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE)
+    textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE), pathCache(MAX_PATH_CACHE_SIZE),
+    clipPathCache(MAX_CLIP_PATH_CACHE_SIZE)
 {
     setStructure(molgraph);
 }
@@ -164,7 +167,8 @@ Vis::StructureView2D::StructureView2D(bool):
     structureChanged(true), fontMetricsChanged(true), reactionContext(true), 
     hasAtomCoords(false), lineCache(MAX_LINE_CACHE_SIZE), polylineCache(MAX_POLYLINE_CACHE_SIZE),
     polygonCache(MAX_POLYGON_CACHE_SIZE), lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE), 
-    pointListCache(MAX_POINT_LIST_CACHE_SIZE), textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE) 
+    pointListCache(MAX_POINT_LIST_CACHE_SIZE), textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE),
+    pathCache(MAX_PATH_CACHE_SIZE), clipPathCache(MAX_CLIP_PATH_CACHE_SIZE) 
 {}
 
 Vis::StructureView2D::~StructureView2D() {}
@@ -323,8 +327,7 @@ void Vis::StructureView2D::initTextLabelBounds()
     std::for_each(atomLabelBounds.begin(), atomLabelBounds.begin() + num_atoms,
                   std::bind(&RectangleList::clear, _1));
 
-    atomWithSymbolMask.resize(num_atoms);
-    atomWithSymbolMask.reset();
+    atomCoreLabelCounts.assign(num_atoms, 0);
     
     std::size_t num_bonds = structure->getNumBonds();
 
@@ -394,15 +397,15 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
             createAtomMappingLabelPrimitive(atom, aam_id, total_brect);
         }
 
+        if (aam_id > 0)
+            atomCoreLabelCounts[structure->getAtomIndex(atom)] = 1;
+        
         if (config_label)
             createAtomConfigLabelPrimitive(atom, config_label);
 
         if (!custom_label.empty())
             createAtomCustomLabelPrimitive(atom, custom_label, aam_id > 0);
 
-        if (aam_id > 0)
-            atomWithSymbolMask.set(structure->getAtomIndex(atom));
-        
         return;
     }
 
@@ -438,13 +441,13 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
     if (aam_id > 0)
         createAtomMappingLabelPrimitive(atom, aam_id, total_brect);
 
+    atomCoreLabelCounts[structure->getAtomIndex(atom)] = atomLabelBounds[structure->getAtomIndex(atom)].size();
+    
     if (config_label) 
         createAtomConfigLabelPrimitive(atom, config_label);
 
     if (!custom_label.empty()) 
         createAtomCustomLabelPrimitive(atom, custom_label, true);
-    
-    atomWithSymbolMask.set(structure->getAtomIndex(atom));
 }
 
 double Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom& atom, const std::string& qry_info_str, 
@@ -1586,7 +1589,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
     Line2D wedge_side2(ctr_line.getBegin() - start_wedge_crnr_vec, ctr_line.getEnd() - end_wedge_crnr_vec);
 
     std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
-    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
+    bool atom1_visible = atomCoreLabelCounts[atom1_idx];
 
     if (!atom1_visible) {
         extendUpBondWedgeSides(bond, bond.getBegin(), wedge_side1, wedge_side2, true, reverse_up);
@@ -1600,7 +1603,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
     }
 
     std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
-    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
+    bool atom2_visible = atomCoreLabelCounts[atom2_idx];
 
     if (!atom2_visible) {
         extendUpBondWedgeSides(bond, bond.getEnd(), wedge_side1, wedge_side2, false, reverse_up);
@@ -2089,8 +2092,8 @@ void Vis::StructureView2D::createSymDoubleBondPrimitives(const Chem::Bond& bond,
     std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
     std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
 
-    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
-    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
+    bool atom1_visible = atomCoreLabelCounts[atom1_idx];
+    bool atom2_visible = atomCoreLabelCounts[atom2_idx];
 
     bool draw_line1 = true;
 
@@ -2149,8 +2152,8 @@ void Vis::StructureView2D::createAsymDoubleBondPrimitives(const Chem::Bond& bond
     std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
     std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
-    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
-    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
+    bool atom1_visible = atomCoreLabelCounts[atom1_idx];
+    bool atom2_visible = atomCoreLabelCounts[atom2_idx];
 
     double trim_len = getDoubleBondTrimLength(bond);
 
@@ -2216,8 +2219,8 @@ void Vis::StructureView2D::createTripleBondPrimitives(const Chem::Bond& bond, co
     std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
     std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
-    bool atom1_visible = atomWithSymbolMask.test(atom1_idx);
-    bool atom2_visible = atomWithSymbolMask.test(atom2_idx);
+    bool atom1_visible = atomCoreLabelCounts[atom1_idx];
+    bool atom2_visible = atomCoreLabelCounts[atom2_idx];
 
     double trim_len = getTripleBondTrimLength(bond);
 
@@ -2423,7 +2426,7 @@ bool Vis::StructureView2D::clipLineAgainstAtomBounds(Line2D& line, const Chem::B
 bool Vis::StructureView2D::clipLineAgainstAtomBounds(Line2D& line, std::size_t atom_idx, bool pt1) const
 {
     const RectangleList& atom_label_brects = atomLabelBounds[atom_idx];
-    RectangleList::const_iterator brects_end = atom_label_brects.end();
+    RectangleList::const_iterator brects_end = atom_label_brects.begin() + atomCoreLabelCounts[atom_idx];
     
     for (RectangleList::const_iterator it = atom_label_brects.begin(); it != brects_end; ++it) {
         const Rectangle2D& brect = *it;
@@ -3725,6 +3728,26 @@ Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
     TextLabelPrimitive2D* prim = textLabelCache.get();
 
     prim->setPen(activePen.getColor());
+
+    return prim;
+}
+
+Vis::PathPrimitive2D* Vis::StructureView2D::allocPathPrimitive()
+{
+    auto prim = pathCache.get();
+
+    prim->clear();
+    prim->setPen(activePen);
+    prim->setBrush(activeBrush);
+
+    return prim;
+}
+
+Vis::ClipPathPrimitive2D* Vis::StructureView2D::allocClipPathPrimitive()
+{
+    auto prim = clipPathCache.get();
+
+    prim->clear();
 
     return prim;
 }

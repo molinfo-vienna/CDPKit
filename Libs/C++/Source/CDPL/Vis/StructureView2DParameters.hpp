@@ -29,6 +29,8 @@
 #include "CDPL/Vis/ColorTable.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 
@@ -80,7 +82,10 @@ namespace CDPL
             const SizeSpecification& getAtomCustomLabelSize() const;
             const SizeSpecification& getAtomLabelMargin() const;
             const SizeSpecification& getRadicalElectronDotSize() const;
-
+            const SizeSpecification& getAtomHighlightAreaSize() const;
+            const Brush&             getAtomHighlightAreaBrush() const;
+            const Pen&               getAtomHighlightAreaPen() const;
+            
             bool showCarbons() const;
             bool showIsotopes() const;
             bool showCharges() const;
@@ -92,6 +97,9 @@ namespace CDPL
             bool showRadicalElectrons() const;
             bool showAtomConfigLabels() const;
             bool showAtomCustomLabels() const;
+            bool enableAtomHighlighting() const;
+
+            const SizeSpecification& getHighlightAreaOutlineWidth() const;
             
             const Color&             getBondColor() const;
             const Color&             getBondConfigLabelColor() const;
@@ -111,13 +119,17 @@ namespace CDPL
             const SizeSpecification& getReactionCenterLineSpacing() const;
             const SizeSpecification& getDoubleBondTrimLength() const;
             const SizeSpecification& getTripleBondTrimLength() const;
-
+            const SizeSpecification& getBondHighlightAreaWidth() const;
+            const Brush&             getBondHighlightAreaBrush() const;
+            const Pen&               getBondHighlightAreaPen() const;
+     
             bool showBondReactionInfos() const;
             bool showBondQueryInfos() const;
             bool showStereoBonds() const;
             bool showBondConfigLabels() const;
             bool showBondCustomLabels() const;
-
+            bool enableBondHighlighting() const;
+            
             bool coordinatesChanged() const;
             bool explicitHVisibilityChanged() const;
             bool propertyVisibilityChanged() const;
@@ -159,6 +171,9 @@ namespace CDPL
             void setAtomCustomLabelColor(const Color&);
             void setAtomLabelMargin(const SizeSpecification&);
             void setRadicalElectronDotSize(const SizeSpecification&);
+            void setAtomHighlightAreaSize(const SizeSpecification&);
+            void setAtomHighlightAreaBrush(const Brush&);
+            void setAtomHighlightAreaPen(const Pen&);
             
             void showCarbons(bool);
             void showIsotopes(bool);
@@ -171,7 +186,10 @@ namespace CDPL
             void showRadicalElectrons(bool);
             void showAtomConfigLabels(bool);
             void showAtomCustomLabels(bool);
-
+            void enableAtomHighlighting(bool);
+            
+            void setHighlightAreaOutlineWidth(const SizeSpecification&);
+            
             void setBondColor(const Color&);
             void setBondLabelFont(const Font&);
             void setBondLabelSize(const SizeSpecification&);
@@ -190,12 +208,16 @@ namespace CDPL
             void setReactionCenterLineSpacing(const SizeSpecification&);
             void setDoubleBondTrimLength(const SizeSpecification&);
             void setTripleBondTrimLength(const SizeSpecification&);
-
+            void setBondHighlightAreaWidth(const SizeSpecification&);
+            void setBondHighlightAreaBrush(const Brush&);
+            void setBondHighlightAreaPen(const Pen&);
+        
             void showBondReactionInfos(bool);
             void showBondQueryInfos(bool);
             void showStereoBonds(bool);
             void showBondConfigLabels(bool);
             void showBondCustomLabels(bool);
+            void enableBondHighlighting(bool);
 
             const View2D&             view;
             Rectangle2D               viewport;
@@ -219,6 +241,9 @@ namespace CDPL
             SizeSpecification         atomCustomLabelSize;
             SizeSpecification         atomLabelMargin;
             SizeSpecification         radicalElectronDotSize;
+            SizeSpecification         atomHighlightAreaSize;
+            Brush                     atomHighlightAreaBrush;
+            Pen                       atomHighlightAreaPen;
             bool                      showCarbonsFlag;
             bool                      showChargesFlag;
             bool                      showIsotopesFlag;
@@ -230,6 +255,8 @@ namespace CDPL
             bool                      showRadicalElectronsFlag;
             bool                      showAtomConfigLabelsFlag;
             bool                      showAtomCustomLabelsFlag;
+            bool                      enableAtomHighlightingFlag;
+            SizeSpecification         highlightAreaOutlineWidth;
             Color                     bondColor;
             Font                      bondLabelFont;
             Font                      bondConfigLabelFont;
@@ -248,11 +275,15 @@ namespace CDPL
             SizeSpecification         reactionCenterLineSpacing;
             SizeSpecification         doubleBondTrimLength;
             SizeSpecification         tripleBondTrimLength;
+            SizeSpecification         bondHighlightAreaWidth;
+            Brush                     bondHighlightAreaBrush;
+            Pen                       bondHighlightAreaPen;
             bool                      showBondReactionInfosFlag;
             bool                      showBondQueryInfosFlag;
             bool                      showStereoBondsFlag;
             bool                      showBondConfigLabelsFlag;
             bool                      showBondCustomLabelsFlag;
+            bool                      enableBondHighlightingFlag;
             bool                      coordinatesChangedFlag;
             bool                      explicitHVisibilityChangedFlag;
             bool                      propertyVisibilityChangedFlag;

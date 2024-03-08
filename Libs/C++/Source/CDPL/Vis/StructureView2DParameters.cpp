@@ -58,6 +58,9 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     atomCustomLabelSize(ControlParameterDefault::ATOM_CUSTOM_LABEL_SIZE),
     atomLabelMargin(ControlParameterDefault::ATOM_LABEL_MARGIN),
     radicalElectronDotSize(ControlParameterDefault::RADICAL_ELECTRON_DOT_SIZE),
+    atomHighlightAreaSize(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_SIZE),
+    atomHighlightAreaBrush(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_BRUSH),
+    atomHighlightAreaPen(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN),
     showCarbonsFlag(ControlParameterDefault::SHOW_CARBONS),
     showChargesFlag(ControlParameterDefault::SHOW_CHARGES),
     showIsotopesFlag(ControlParameterDefault::SHOW_ISOTOPES),
@@ -69,6 +72,8 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     showRadicalElectronsFlag(ControlParameterDefault::SHOW_RADICAL_ELECTRONS),
     showAtomConfigLabelsFlag(ControlParameterDefault::SHOW_ATOM_CONFIGURATION_LABELS),
     showAtomCustomLabelsFlag(ControlParameterDefault::SHOW_ATOM_CUSTOM_LABELS),
+    enableAtomHighlightingFlag(ControlParameterDefault::ENABLE_ATOM_HIGHLIGHTING),
+    highlightAreaOutlineWidth(ControlParameterDefault::HIGHLIGHT_AREA_OUTLINE_WIDTH),
     bondColor(ControlParameterDefault::BOND_COLOR),
     bondLabelFont(ControlParameterDefault::BOND_LABEL_FONT),
     bondConfigLabelFont(ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT),
@@ -87,11 +92,15 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     reactionCenterLineSpacing(ControlParameterDefault::REACTION_CENTER_LINE_SPACING),
     doubleBondTrimLength(ControlParameterDefault::DOUBLE_BOND_TRIM_LENGTH),
     tripleBondTrimLength(ControlParameterDefault::TRIPLE_BOND_TRIM_LENGTH),
+    bondHighlightAreaWidth(ControlParameterDefault::BOND_HIGHLIGHT_AREA_WIDTH),
+    bondHighlightAreaBrush(ControlParameterDefault::BOND_HIGHLIGHT_AREA_BRUSH),
+    bondHighlightAreaPen(ControlParameterDefault::BOND_HIGHLIGHT_AREA_OUTLINE_PEN),
     showBondReactionInfosFlag(ControlParameterDefault::SHOW_BOND_REACTION_INFOS),
     showBondQueryInfosFlag(ControlParameterDefault::SHOW_BOND_QUERY_INFOS),
     showStereoBondsFlag(ControlParameterDefault::SHOW_STEREO_BONDS),
     showBondConfigLabelsFlag(ControlParameterDefault::SHOW_BOND_CONFIGURATION_LABELS),
     showBondCustomLabelsFlag(ControlParameterDefault::SHOW_BOND_CUSTOM_LABELS),
+    enableBondHighlightingFlag(ControlParameterDefault::ENABLE_BOND_HIGHLIGHTING),
     coordinatesChangedFlag(true),
     explicitHVisibilityChangedFlag(true),
     propertyVisibilityChangedFlag(true),
@@ -215,6 +224,21 @@ const Vis::SizeSpecification& Vis::StructureView2DParameters::getRadicalElectron
     return radicalElectronDotSize;
 }
 
+const Vis::SizeSpecification& Vis::StructureView2DParameters::getAtomHighlightAreaSize() const
+{
+    return atomHighlightAreaSize;
+}
+
+const Vis::Brush& Vis::StructureView2DParameters::getAtomHighlightAreaBrush() const
+{
+    return atomHighlightAreaBrush;
+}
+
+const Vis::Pen& Vis::StructureView2DParameters::getAtomHighlightAreaPen() const
+{
+    return atomHighlightAreaPen;
+}
+
 bool Vis::StructureView2DParameters::showCarbons() const
 {
     return showCarbonsFlag;
@@ -268,6 +292,16 @@ bool Vis::StructureView2DParameters::showAtomConfigLabels() const
 bool Vis::StructureView2DParameters::showAtomCustomLabels() const
 {
     return showAtomCustomLabelsFlag;
+}
+
+bool Vis::StructureView2DParameters::enableAtomHighlighting() const
+{
+    return enableAtomHighlightingFlag;
+}
+
+const Vis::SizeSpecification& Vis::StructureView2DParameters::getHighlightAreaOutlineWidth() const
+{
+    return highlightAreaOutlineWidth;
 }
 
 const Vis::Color& Vis::StructureView2DParameters::getBondColor() const
@@ -360,6 +394,21 @@ const Vis::SizeSpecification& Vis::StructureView2DParameters::getTripleBondTrimL
     return tripleBondTrimLength;
 }
 
+const Vis::SizeSpecification& Vis::StructureView2DParameters::getBondHighlightAreaWidth() const
+{
+    return bondHighlightAreaWidth;
+}
+
+const Vis::Brush& Vis::StructureView2DParameters::getBondHighlightAreaBrush() const
+{
+    return bondHighlightAreaBrush;
+}
+
+const Vis::Pen& Vis::StructureView2DParameters::getBondHighlightAreaPen() const
+{
+    return bondHighlightAreaPen;
+}
+
 bool Vis::StructureView2DParameters::showBondReactionInfos() const
 {
     return showBondReactionInfosFlag;
@@ -383,6 +432,11 @@ bool Vis::StructureView2DParameters::showBondConfigLabels() const
 bool Vis::StructureView2DParameters::showBondCustomLabels() const
 {
     return showBondCustomLabelsFlag;
+}
+
+bool Vis::StructureView2DParameters::enableBondHighlighting() const
+{
+    return enableBondHighlightingFlag;
 }
 
 bool Vis::StructureView2DParameters::coordinatesChanged() const
@@ -461,6 +515,9 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::ATOM_CUSTOM_LABEL_SIZE, view.getParameter(ControlParameter::ATOM_CUSTOM_LABEL_SIZE));
     parameterChanged(ControlParameter::ATOM_LABEL_MARGIN, view.getParameter(ControlParameter::ATOM_LABEL_MARGIN));
     parameterChanged(ControlParameter::RADICAL_ELECTRON_DOT_SIZE, view.getParameter(ControlParameter::RADICAL_ELECTRON_DOT_SIZE));
+    parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE));
+    parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH));
+    parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN));
     parameterChanged(ControlParameter::SHOW_CARBONS, view.getParameter(ControlParameter::SHOW_CARBONS));
     parameterChanged(ControlParameter::SHOW_CHARGES, view.getParameter(ControlParameter::SHOW_CHARGES));
     parameterChanged(ControlParameter::SHOW_ISOTOPES, view.getParameter(ControlParameter::SHOW_ISOTOPES));
@@ -472,7 +529,10 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::SHOW_RADICAL_ELECTRONS, view.getParameter(ControlParameter::SHOW_RADICAL_ELECTRONS));
     parameterChanged(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, view.getParameter(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS));
     parameterChanged(ControlParameter::SHOW_ATOM_CUSTOM_LABELS, view.getParameter(ControlParameter::SHOW_ATOM_CUSTOM_LABELS));
+    parameterChanged(ControlParameter::ENABLE_ATOM_HIGHLIGHTING, view.getParameter(ControlParameter::ENABLE_ATOM_HIGHLIGHTING));
 
+    parameterChanged(ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH, view.getParameter(ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH));
+    
     parameterChanged(ControlParameter::BOND_COLOR, view.getParameter(ControlParameter::BOND_COLOR));
     parameterChanged(ControlParameter::BOND_LINE_WIDTH, view.getParameter(ControlParameter::BOND_LINE_WIDTH));
     parameterChanged(ControlParameter::BOND_LINE_SPACING, view.getParameter(ControlParameter::BOND_LINE_SPACING));
@@ -491,11 +551,15 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::BOND_CUSTOM_LABEL_COLOR, view.getParameter(ControlParameter::BOND_CUSTOM_LABEL_COLOR));
     parameterChanged(ControlParameter::BOND_CUSTOM_LABEL_SIZE, view.getParameter(ControlParameter::BOND_CUSTOM_LABEL_SIZE));
     parameterChanged(ControlParameter::BOND_LABEL_MARGIN, view.getParameter(ControlParameter::BOND_LABEL_MARGIN));
+    parameterChanged(ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH, view.getParameter(ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH));
+    parameterChanged(ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH, view.getParameter(ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH));
+    parameterChanged(ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN, view.getParameter(ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN));
     parameterChanged(ControlParameter::SHOW_BOND_REACTION_INFOS, view.getParameter(ControlParameter::SHOW_BOND_REACTION_INFOS));
     parameterChanged(ControlParameter::SHOW_BOND_QUERY_INFOS, view.getParameter(ControlParameter::SHOW_BOND_QUERY_INFOS));
     parameterChanged(ControlParameter::SHOW_STEREO_BONDS, view.getParameter(ControlParameter::SHOW_STEREO_BONDS));
     parameterChanged(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS, view.getParameter(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS));
     parameterChanged(ControlParameter::SHOW_BOND_CUSTOM_LABELS, view.getParameter(ControlParameter::SHOW_BOND_CUSTOM_LABELS));
+    parameterChanged(ControlParameter::ENABLE_BOND_HIGHLIGHTING, view.getParameter(ControlParameter::ENABLE_BOND_HIGHLIGHTING));
 }
 
 void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Any val)
@@ -609,6 +673,21 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
+    if (key == ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE) {
+        setAtomHighlightAreaSize(val.isEmpty() ? ATOM_HIGHLIGHT_AREA_SIZE : val.getData<SizeSpecification>());
+        return;
+    }
+
+    if (key == ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH) {
+        setAtomHighlightAreaBrush(val.isEmpty() ? ATOM_HIGHLIGHT_AREA_BRUSH : val.getData<Brush>());
+        return;
+    }
+
+    if (key == ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN) {
+        setAtomHighlightAreaPen(val.isEmpty() ? ATOM_HIGHLIGHT_AREA_OUTLINE_PEN : val.getData<Pen>());
+        return;
+    }
+
     if (key == ControlParameter::SHOW_CARBONS) {
         showCarbons(val.isEmpty() ? SHOW_CARBONS : val.getData<bool>());
         return;
@@ -661,6 +740,16 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
 
     if (key == ControlParameter::SHOW_ATOM_CUSTOM_LABELS) {
         showAtomCustomLabels(val.isEmpty() ? SHOW_ATOM_CUSTOM_LABELS : val.getData<bool>());
+        return;
+    }
+
+    if (key == ControlParameter::ENABLE_ATOM_HIGHLIGHTING) {
+        enableAtomHighlighting(val.isEmpty() ? ENABLE_ATOM_HIGHLIGHTING : val.getData<bool>());
+        return;
+    }
+
+    if (key == ControlParameter::HIGHLIGHT_AREA_OUTLINE_WIDTH) {
+        setHighlightAreaOutlineWidth(val.isEmpty() ? HIGHLIGHT_AREA_OUTLINE_WIDTH : val.getData<SizeSpecification>());
         return;
     }
 
@@ -754,6 +843,21 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
 
+    if (key == ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH) {
+        setBondHighlightAreaWidth(val.isEmpty() ? BOND_HIGHLIGHT_AREA_WIDTH : val.getData<SizeSpecification>());
+        return;
+    }
+
+    if (key == ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH) {
+        setBondHighlightAreaBrush(val.isEmpty() ? BOND_HIGHLIGHT_AREA_BRUSH : val.getData<Brush>());
+        return;
+    }
+
+    if (key == ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN) {
+        setBondHighlightAreaPen(val.isEmpty() ? BOND_HIGHLIGHT_AREA_OUTLINE_PEN : val.getData<Pen>());
+        return;
+    }
+    
     if (key == ControlParameter::SHOW_BOND_REACTION_INFOS) {
         showBondReactionInfos(val.isEmpty() ? SHOW_BOND_REACTION_INFOS : val.getData<bool>());
         return;
@@ -774,8 +878,13 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
         return;
     }
     
-    if (key == ControlParameter::SHOW_BOND_CUSTOM_LABELS)
+    if (key == ControlParameter::SHOW_BOND_CUSTOM_LABELS) {
         showBondCustomLabels(val.isEmpty() ? SHOW_BOND_CUSTOM_LABELS : val.getData<bool>());
+        return;
+    }
+    
+    if (key == ControlParameter::ENABLE_BOND_HIGHLIGHTING)
+        enableBondHighlighting(val.isEmpty() ? ENABLE_BOND_HIGHLIGHTING : val.getData<bool>());
 }
 
 void Vis::StructureView2DParameters::parameterRemoved(const Base::LookupKey& key)
@@ -943,6 +1052,30 @@ void Vis::StructureView2DParameters::setRadicalElectronDotSize(const SizeSpecifi
     }
 }
 
+void Vis::StructureView2DParameters::setAtomHighlightAreaSize(const SizeSpecification& size)
+{
+    if (atomHighlightAreaSize != size) {
+        atomHighlightAreaSize = size;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setAtomHighlightAreaBrush(const Brush& brush)
+{
+    if (atomHighlightAreaBrush != brush) {
+        atomHighlightAreaBrush = brush;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setAtomHighlightAreaPen(const Pen& pen)
+{
+    if (atomHighlightAreaPen != pen) {
+        atomHighlightAreaPen = pen;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
 void Vis::StructureView2DParameters::showCarbons(bool show)
 {
     if (showCarbonsFlag != show) {
@@ -1028,6 +1161,22 @@ void Vis::StructureView2DParameters::showAtomCustomLabels(bool show)
     if (showAtomCustomLabelsFlag != show) {
         showAtomCustomLabelsFlag = show;
         propertyVisibilityChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::enableAtomHighlighting(bool enable)
+{
+    if (enableAtomHighlightingFlag != enable) {
+        enableAtomHighlightingFlag = enable;
+        propertyVisibilityChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setHighlightAreaOutlineWidth(const SizeSpecification& width)
+{
+    if (highlightAreaOutlineWidth != width) {
+        highlightAreaOutlineWidth = width;
+        graphicsAttributeChangedFlag = true;
     }
 }
 
@@ -1175,6 +1324,30 @@ void Vis::StructureView2DParameters::setTripleBondTrimLength(const SizeSpecifica
     }
 }
 
+void Vis::StructureView2DParameters::setBondHighlightAreaWidth(const SizeSpecification& width)
+{
+    if (bondHighlightAreaWidth != width) {
+        bondHighlightAreaWidth = width;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setBondHighlightAreaBrush(const Brush& brush)
+{
+    if (bondHighlightAreaBrush != brush) {
+        bondHighlightAreaBrush = brush;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::setBondHighlightAreaPen(const Pen& pen)
+{
+    if (bondHighlightAreaPen != pen) {
+        bondHighlightAreaPen = pen;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
 void Vis::StructureView2DParameters::showBondReactionInfos(bool show)
 {
     if (showBondReactionInfosFlag != show) {
@@ -1211,6 +1384,14 @@ void Vis::StructureView2DParameters::showBondCustomLabels(bool show)
 {
     if (showBondCustomLabelsFlag != show) {
         showBondCustomLabelsFlag = show;
+        propertyVisibilityChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::enableBondHighlighting(bool enable)
+{
+    if (enableBondHighlightingFlag != enable) {
+        enableBondHighlightingFlag = enable;
         propertyVisibilityChangedFlag = true;
     }
 }

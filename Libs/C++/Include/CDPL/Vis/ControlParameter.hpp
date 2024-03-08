@@ -758,7 +758,7 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ENABLE_ATOM_HIGHLIGHTING;
 
             /**
-             * \brief Specifies the line width for drawing atom or bond highlighting area outlines.
+             * \brief Specifies the line width for drawing atom and bond highlighting area outlines.
              *
              * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
              * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
