@@ -49,6 +49,9 @@
 #  <tr><td>Vis.ControlParameter.ATOM_CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.ATOM_LABEL_MARGIN</td><td>Specifies the margin of free space around atom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE</td><td>Specifies the minimum size of atom highlighting areas</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling atom highlighting areas</td></tr>
+#  <tr><td>Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing atom highlighting area outlines</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_EXPLICIT_HYDROGENS</td><td>Specifies whether or not to show explicit hydrogen atoms</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_CARBONS</td><td>Specifies whether or not to show the element label of carbon atoms</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_CHARGES</td><td>Specifies whether or not to show the formal charge of atoms</td></tr>
@@ -60,6 +63,8 @@
 #  <tr><td>Vis.ControlParameter.SHOW_RADICAL_ELECTRONS</td><td>Specifies whether or not to draw radical electron dots</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_ATOM_CONFIGURATION_LABELS</td><td>Specifies whether or not to show atom confiuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_ATOM_CUSTOM_LABELS</td><td>Specifies whether or not to show atom confiuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.ENABLE_ATOM_HIGHLIGHTING</td><td>Specifies whether or not to enable the highlighting of atoms</td></tr>
+#  <tr><td>Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH</td><td>Specifies the line width for drawing atom or bond highlighting area outlines</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LENGTH</td><td>Specifies the desired average bond length</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_COLOR</td><td>Specifies the color of bonds</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LINE_WIDTH</td><td>Specifies the width of bond lines</td></tr>
@@ -79,11 +84,15 @@
 #  <tr><td>Vis.ControlParameter.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 #  <tr><td>Vis.ControlParameter.BOND_LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH</td><td>Specifies the width of bond highlighting areas</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling bond highlighting areas</td></tr>
+#  <tr><td>Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing bond highlighting area outlines</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_REACTION_INFOS</td><td>Specifies whether or not to draw reaction center marks</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_QUERY_INFOS</td><td>Specifies whether or not to show query bond match expressions</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_STEREO_BONDS</td><td>Specifies whether or not to draw stereo bonds</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_CONFIGURATION_LABELS</td><td>Specifies whether or not to show bond confiuration labels</td></tr>
 #  <tr><td>Vis.ControlParameter.SHOW_BOND_CUSTOM_LABELS</td><td>Specifies whether or not to show bond confiuration labels</td></tr>
+#  <tr><td>Vis.ControlParameter.ENABLE_BOND_HIGHLIGHTING</td><td>Specifies whether or not to enable the highlighting of bonds</td></tr>
 # </table>
 # 
 # Default values for most of the control-parameters are defined in namespace Vis.ControlParameterDefault.
@@ -106,6 +115,10 @@
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN</td><td>Specifies the margin of free space around atom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE</td><td>Specifies the minimum size of atom highlighting areas</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling atom highlighting areas</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing atom highlighting area outlines</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH</td><td>Specifies the line width for drawing atom or bond highlighting area outlines</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_COLOR</td><td>Specifies the color of bonds</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LINE_WIDTH</td><td>Specifies the width of bond lines</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LINE_SPACING</td><td>Specifies the distance between the lines of double and triple bonds</td></tr>
@@ -122,6 +135,9 @@
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH</td><td>Specifies the width of bond highlighting areas</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling bond highlighting areas</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing bond highlighting area outlines</td></tr>
 # </table>
 # 
 # Supported Chem.Atom properties:
@@ -141,6 +157,8 @@
 #  <tr><td>Vis.AtomProperty.CUSTOM_LABEL_SIZE</td><td>Specifies the size of atom custom labels</td></tr>
 #  <tr><td>Vis.AtomProperty.CUSTOM_LABEL_COLOR</td><td>Specifies the color of atom custom labels</td></tr>
 #  <tr><td>Vis.AtomProperty.RADICAL_ELECTRON_DOT_SIZE</td><td>Specifies the size of radical electron dots</td></tr>
+#  <tr><td>Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling highlighting areas</td></tr>
+#  <tr><td>Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing highlighting area outlines</td></tr>
 # </table>
 # 
 # Supported Chem.Bond properties:
@@ -165,6 +183,8 @@
 #  <tr><td>Vis.BondProperty.CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
 #  <tr><td>Vis.BondProperty.CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td></tr>
 #  <tr><td>Vis.BondProperty.CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
+#  <tr><td>Vis.BondProperty.HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling highlighting areas</td></tr>
+#  <tr><td>Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN</td><td>Specifies the pen to use for drawing highlighting area outlines</td></tr>
 # </table>
 # 
 class StructureView2D(View2D):

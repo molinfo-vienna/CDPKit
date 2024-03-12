@@ -27,17 +27,27 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    ATOM_COLOR_TABLE = ColorTable()
-
-    ##
-    # \brief 
-    #
     ATOM_COLOR = Color(r=0, g=0, b=0)
 
     ##
     # \brief 
     #
+    ATOM_COLOR_TABLE = ColorTable()
+
+    ##
+    # \brief 
+    #
+    RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
     ATOM_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    ATOM_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -57,12 +67,22 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    ATOM_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
+    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=14, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
     #
-    RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+    ATOM_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+
+    ##
+    # \brief 
+    #
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
+
+    ##
+    # \brief 
+    #
+    HIGHLIGHT_AREA_OUTLINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -72,7 +92,17 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    BOND_LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+    BOND_LABEL_FONT = Font()
+
+    ##
+    # \brief 
+    #
+    BOND_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    BOND_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -82,12 +112,7 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    STEREO_BOND_WEDGE_WIDTH = SizeSpecification(value=0.15, relative=True, in_scaling=True, out_scaling=True)
-
-    ##
-    # \brief 
-    #
-    STEREO_BOND_HASH_SPACING = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
+    BOND_LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -102,27 +127,22 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
+    STEREO_BOND_HASH_SPACING = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    STEREO_BOND_WEDGE_WIDTH = SizeSpecification(value=0.15, relative=True, in_scaling=True, out_scaling=True)
+
+    ##
+    # \brief 
+    #
     DOUBLE_BOND_TRIM_LENGTH = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
 
     ##
     # \brief 
     #
     TRIPLE_BOND_TRIM_LENGTH = SizeSpecification(value=0.1, relative=True, in_scaling=True, out_scaling=True)
-
-    ##
-    # \brief 
-    #
-    BOND_LABEL_FONT = Font()
-
-    ##
-    # \brief 
-    #
-    BOND_LABEL_SIZE = SizeSpecification(value=8, relative=False, in_scaling=False, out_scaling=True)
-
-    ##
-    # \brief 
-    #
-    BOND_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -138,6 +158,21 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     ATOM_CONFIGURATION_LABEL_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief 
+    #
+    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
+
+    ##
+    # \brief 
+    #
+    BOND_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+
+    ##
+    # \brief 
+    #
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
 
     ##
     # \brief 

@@ -50,6 +50,33 @@ def setAtomColorTable(molgraph: Chem.MolecularGraph, colors: ColorTable) -> None
 # \brief 
 # \param molgraph 
 #
+def clearAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomHighlightAreaSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param size 
+#
+def setAtomHighlightAreaSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearBondLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -347,6 +374,87 @@ def setStereoBondHashSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecifi
 # \brief 
 # \param molgraph 
 #
+def clearBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> Brush: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param brush 
+#
+def setBondHighlightAreaBrush(molgraph: Chem.MolecularGraph, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph) -> Brush: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param brush 
+#
+def setAtomHighlightAreaBrush(molgraph: Chem.MolecularGraph, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondHighlightAreaWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param width 
+#
+def setBondHighlightAreaWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -396,6 +504,33 @@ def getBondLineWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 # \param width 
 #
 def setBondLineWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param width 
+#
+def setHighlightAreaOutlineWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
@@ -477,6 +612,60 @@ def getTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification:
 # \param length 
 #
 def setTripleBondTrimLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> Pen: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param pen 
+#
+def setBondHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph, pen: Pen) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph) -> Pen: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param pen 
+#
+def setAtomHighlightAreaOutlinePen(molgraph: Chem.MolecularGraph, pen: Pen) -> None: pass
 
 ##
 # \brief 

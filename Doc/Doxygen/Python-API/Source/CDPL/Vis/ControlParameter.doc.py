@@ -108,7 +108,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the minimum size of atom highlighting areas.
     # 
-    # The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_SIZE will be used.
+    # The size has to be specified as an absolute value. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE is not set, the default setting Vis.ControlParameterDefault.ATOM_HIGHLIGHT_AREA_SIZE will be used.
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a size has been specified by Vis.MolecularGraphProperty.ATOM_HIGHLIGHT_AREA_SIZE. 
     # 
@@ -648,9 +648,9 @@ class ControlParameter(Boost.Python.instance):
     VIEWPORT = CDPL.Base.LookupKey('VIEWPORT')
 
     ##
-    # \brief Specifies the line width for drawing atom or bond highlighting area outlines.
+    # \brief Specifies the line width for drawing atom and bond highlighting area outlines.
     # 
-    # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.HIGHLIGHT_AREA_OUTLINE_WIDTH will be used.
+    # The width has to be specified as an absolute value. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH is not set, the default setting Vis.ControlParameterDefault.HIGHLIGHT_AREA_OUTLINE_WIDTH will be used.
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a line width has been specified by Vis.MolecularGraphProperty.HIGHLIGHT_AREA_OUTLINE_WIDTH. 
     # 
@@ -727,7 +727,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the width of bond highlighting areas.
     # 
-    # The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH is not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_WIDTH will be used.
+    # The width has to be specified as an absolute value. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. If the control-parameter is left unspecified and the property Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH is not set, the default setting Vis.ControlParameterDefault.BOND_HIGHLIGHT_AREA_WIDTH will be used.
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The control-parameter setting is ignored if a width has been specified by Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH. 
     # 

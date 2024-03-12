@@ -97,6 +97,46 @@ class MolecularGraphProperty(Boost.Python.instance):
     SECONDARY_ATOM_LABEL_SIZE = CDPL.Base.LookupKey('SECONDARY_ATOM_LABEL_SIZE')
 
     ##
+    # \brief Specifies the minimum size of atom highlighting areas.
+    # 
+    # The size has to be specified as an absolute value. If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during viewport size adjustment. The specified size takes precedence over the size specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_SIZE = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_SIZE')
+
+    ##
+    # \brief Specifies the brush to use for filling atom highlighting areas.
+    # 
+    # The specified brush takes precedence over the brush specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
+    # 
+    # <b>Value Type:</b> Vis.Brush \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_BRUSH. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_BRUSH')
+
+    ##
+    # \brief Specifies the pen to use for drawing atom highlighting area outlines.
+    # 
+    # The specified pen takes precedence over the pen specified by the parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # 
+    # <b>Value Type:</b> Vis.Pen \note The setting is overridden by the Chem.Atom property Vis.AtomProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # 
+    # \since 1.2
+    # 
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_OUTLINE_PEN')
+
+    ##
+    # \brief Specifies the line width for drawing atom and bond highlighting area outlines.
+    # 
+    # The width has to be specified as an absolute value. If input-scaling is enabled, the line width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified line width takes precedence over the width specified by the parameter Vis.ControlParameter.HIGHLIGHT_AREA_OUTLINE_WIDTH.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # 
+    HIGHLIGHT_AREA_OUTLINE_WIDTH = CDPL.Base.LookupKey('HIGHLIGHT_AREA_OUTLINE_WIDTH')
+
+    ##
     # \brief Specifies the color of bonds.
     # 
     # The specified color takes precedence over the color specified by the parameter Vis.ControlParameter.BOND_COLOR.
@@ -242,6 +282,37 @@ class MolecularGraphProperty(Boost.Python.instance):
     # \since 1.2
     # 
     ATOM_CONFIGURATION_LABEL_COLOR = CDPL.Base.LookupKey('ATOM_CONFIGURATION_LABEL_COLOR')
+
+    ##
+    # \brief Specifies the width of bond highlighting areas.
+    # 
+    # The width has to be specified as an absolute value. If input-scaling is enabled, the width will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment. The specified width takes precedence over the width specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_WIDTH = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_WIDTH')
+
+    ##
+    # \brief Specifies the brush to use for filling bond highlighting areas.
+    # 
+    # The specified brush takes precedence over the brush specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
+    # 
+    # <b>Value Type:</b> Vis.Brush \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_BRUSH. 
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_BRUSH = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_BRUSH')
+
+    ##
+    # \brief Specifies the pen to use for drawing bond highlighting area outlines.
+    # 
+    # The specified pen takes precedence over the pen specified by the parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # 
+    # <b>Value Type:</b> Vis.Pen \note The setting is overridden by the Chem.Bond property Vis.BondProperty.HIGHLIGHT_AREA_OUTLINE_PEN. 
+    # 
+    # \since 1.2
+    # 
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('BOND_HIGHLIGHT_AREA_OUTLINE_PEN')
 
     ##
     # \brief Specifies the font used for bond configuration descriptor text labels.
