@@ -114,11 +114,11 @@ namespace
     constexpr double H_BOND_LENGTH                 = DEF_BOND_LENGTH * 0.7;
     constexpr double BOND_LENGTH_DELTA             = DEF_BOND_LENGTH * 0.3;
     constexpr double ANGLE_BENDING_DELTA           = 15.0 * M_PI / 180.0;
-    constexpr double ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.3;
+    constexpr double ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.5;
     constexpr double ATOM_BOND_COLLISION_TEST_DIST = DEF_BOND_LENGTH * 0.3;
     constexpr double COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
     constexpr double COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;
-    constexpr std::size_t BACKTRACKING_LIMIT       = 400;
+    constexpr std::size_t BACKTRACKING_LIMIT       = 200;
     constexpr std::size_t DG_MC_MIN_RING_SIZE      = 12;
     constexpr std::size_t DG_BS_MIN_RING_SIZE      = 8;
 

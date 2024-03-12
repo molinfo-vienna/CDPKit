@@ -251,7 +251,7 @@ void Vis::StructureView2D::init()
         || parameters->coordinatesChanged()) {
 
         prepareStructureData();
-        initInputAtomPosTable();
+        initInputAtomPosArray();
     }
 
     if (structureChanged || parameters->coordinatesChanged() || parameters->explicitHVisibilityChanged() 
@@ -270,14 +270,15 @@ void Vis::StructureView2D::init()
         calcViewportAdjustmentScalingFactor();
         calcOutputAtomCoords();
 
-        initOutputBondLineTable();
+        initOutputBondLineArray();
         initTextLabelBounds();
 
         freeGraphicsPrimitives();
 
         createAtomPrimitives();
         createBondPrimitives();
-
+        createHighlightingPrimitives();
+        
         calcOutputStructureBounds();
         calcViewTransforms();
 
@@ -311,8 +312,14 @@ void Vis::StructureView2D::renderGraphicsPrimitives(Renderer2D& renderer) const
 
     renderer.transform(xform);
 
-    std::for_each(drawList.rbegin(), drawList.rend(), 
-                  std::bind(&GraphicsPrimitive2D::render, std::placeholders::_1, std::ref(renderer)));
+    for (auto prim : drawListLayer1)
+        prim->render(renderer);
+
+    for (auto prim : drawListLayer2)
+        prim->render(renderer);
+
+    for (auto prim : drawListLayer3)
+        prim->render(renderer);
 }
 
 void Vis::StructureView2D::initTextLabelBounds()
@@ -325,7 +332,7 @@ void Vis::StructureView2D::initTextLabelBounds()
         atomLabelBounds.resize(num_atoms);
 
     std::for_each(atomLabelBounds.begin(), atomLabelBounds.begin() + num_atoms,
-                  std::bind(&RectangleList::clear, _1));
+                  [](auto& l) { l.clear(); });
 
     atomCoreLabelCounts.assign(num_atoms, 0);
     
@@ -335,7 +342,25 @@ void Vis::StructureView2D::initTextLabelBounds()
         bondLabelBounds.resize(num_bonds);
 
     std::for_each(bondLabelBounds.begin(), bondLabelBounds.begin() + num_bonds,
-                  std::bind(&Rectangle2D::reset, _1));
+                  [](auto& l) { l.clear(); });
+
+    ctrLabeledBonds.resize(num_bonds);
+    ctrLabeledBonds.reset();
+}
+
+void Vis::StructureView2D::createHighlightingPrimitives()
+{
+    // TODO
+}
+
+void Vis::StructureView2D::createAtomHighlightingPrimitives()
+{
+    // TODO
+}
+
+void Vis::StructureView2D::createBondHighlightingPrimitives()
+{
+    // TODO
 }
 
 void Vis::StructureView2D::createAtomPrimitives()
@@ -345,23 +370,21 @@ void Vis::StructureView2D::createAtomPrimitives()
     if (!fontMetrics)
         return;
 
-    std::for_each(structure->getAtomsBegin(), structure->getAtomsEnd(),
-                  std::bind(static_cast<void (StructureView2D::*)(const Chem::Atom&)>
-                            (&StructureView2D::createAtomPrimitives), this, std::placeholders::_1));
+    for (auto& atom : structure->getAtoms())
+        createAtomPrimitives(atom);
 }
 
-#define CREATE_ATOM_LABEL(font, text, pos, label_brect)          \
-    label = allocTextLabelPrimitive();                           \
-                                                                 \
-    label->setFont(font);                                        \
-    label->setText(text);                                        \
-    label->setPosition(pos);                                     \
-                                                                 \
-    drawList.push_back(label);                                   \
-                                                                 \
-    label_brect.translate(pos);                                  \
-    label_brect.addMargin(activeLabelMargin, activeLabelMargin); \
-                                                                 \
+#define CREATE_ATOM_LABEL(font, text, pos, label_brect, draw_list) \
+    label = allocTextLabelPrimitive(font);                         \
+                                                                   \
+    label->setText(text);                                          \
+    label->setPosition(pos);                                       \
+                                                                   \
+    draw_list.push_back(label);                                    \
+                                                                   \
+    label_brect.translate(pos);                                    \
+    label_brect.addMargin(activeLabelMargin, activeLabelMargin);   \
+                                                                   \
     atomLabelBounds[atom_idx].push_back(label_brect)
 
 void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
@@ -501,7 +524,7 @@ double Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom&
 
     TextLabelPrimitive2D* label;
 
-    CREATE_ATOM_LABEL(activeLabelFont, qry_info_str, label_pos, total_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, qry_info_str, label_pos, total_brect, drawListLayer2);
 
     return label_pos(1);
 }
@@ -536,7 +559,7 @@ void Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom& a
 
     TextLabelPrimitive2D* label;
 
-    CREATE_ATOM_LABEL(activeLabelFont, qry_info_str, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, qry_info_str, label_pos, label_brect, drawListLayer2);
 
     total_brect.addRectangle(label_brect);
 }
@@ -559,7 +582,7 @@ double Vis::StructureView2D::createAtomSymbolLabelPrimitive(const Chem::Atom& at
 
     TextLabelPrimitive2D* label;
 
-    CREATE_ATOM_LABEL(activeLabelFont, symbol, label_pos, total_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, symbol, label_pos, total_brect, drawListLayer2);
 
     return label_pos(1);
 }
@@ -584,7 +607,7 @@ void Vis::StructureView2D::createAtomIsotopeLabelPrimitive(const Chem::Atom& ato
 
     TextLabelPrimitive2D* label;
 
-    CREATE_ATOM_LABEL(activeSecondaryLabelFont, iso_str, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeSecondaryLabelFont, iso_str, label_pos, label_brect, drawListLayer2);
 
     total_brect.addRectangle(label_brect);
 }
@@ -629,7 +652,7 @@ void Vis::StructureView2D::createAtomChargeLabelPrimitive(const Chem::Atom& atom
 
     TextLabelPrimitive2D* label;
 
-    CREATE_ATOM_LABEL(activeSecondaryLabelFont, charge_str, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeSecondaryLabelFont, charge_str, label_pos, label_brect, drawListLayer2);
 
     total_brect.addRectangle(label_brect);
 }
@@ -721,14 +744,14 @@ void Vis::StructureView2D::createAtomHCountLabelPrimitives(const Chem::Atom& ato
 
     TextLabelPrimitive2D* label;
     
-    CREATE_ATOM_LABEL(activeLabelFont, "H", label_pos, h_label_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, "H", label_pos, h_label_brect, drawListLayer2);
 
     total_brect.addRectangle(h_label_brect);
 
     if (h_count > 1) {
         label_pos += count_label_shift;
 
-        CREATE_ATOM_LABEL(activeSecondaryLabelFont, h_count_str, label_pos, count_label_brect);
+        CREATE_ATOM_LABEL(activeSecondaryLabelFont, h_count_str, label_pos, count_label_brect, drawListLayer2);
 
         total_brect.addRectangle(count_label_brect);
     }
@@ -742,21 +765,21 @@ void Vis::StructureView2D::createAtomHCountLabelPrimitives(const Chem::Atom& ato
     atomLabelBounds[atom_idx].push_back(point_brect);  \
     total_brect.addRectangle(point_brect)
  
-#define CREATE_DOUBLE_POINT(idx)                                                                                 \
-    point_brect.translate(point_pos);                                                                            \
-                                                                                                                 \
-    points->addElement(point_pos);                                                                               \
-                                                                                                                 \
-    atomLabelBounds[atom_idx].push_back(point_brect);                                                            \
-    total_brect.addRectangle(point_brect);                                                                       \
-                                                                                                                 \
-    point_pos(idx) += 2.0 * dbl_point_ctr_offs;                                                                  \
-                                                                                                                 \
-    points->addElement(point_pos);                                                                               \
-                                                                                                                 \
+#define CREATE_DOUBLE_POINT(idx)                                                                                            \
+    point_brect.translate(point_pos);                                                                                       \
+                                                                                                                            \
+    points->addElement(point_pos);                                                                                          \
+                                                                                                                            \
+    atomLabelBounds[atom_idx].push_back(point_brect);                                                                       \
+    total_brect.addRectangle(point_brect);                                                                                  \
+                                                                                                                            \
+    point_pos(idx) += 2.0 * dbl_point_ctr_offs;                                                                             \
+                                                                                                                            \
+    points->addElement(point_pos);                                                                                          \
+                                                                                                                            \
     point_brect.translate(Math::vec(idx == 0 ? 2.0 * dbl_point_ctr_offs : 0.0, idx == 0 ? 0.0 : 2.0 * dbl_point_ctr_offs)); \
-                                                                                                                 \
-    atomLabelBounds[atom_idx].push_back(point_brect);                                                            \
+                                                                                                                            \
+    atomLabelBounds[atom_idx].push_back(point_brect);                                                                       \
     total_brect.addRectangle(point_brect)
 
 void Vis::StructureView2D::createRadicalElectronPrimitives(const Chem::Atom& atom, std::size_t elec_count, Rectangle2D& total_brect)
@@ -847,7 +870,7 @@ void Vis::StructureView2D::createRadicalElectronPrimitives(const Chem::Atom& ato
 
     points->setPen(Pen(activePen.getColor(), point_diam));
 
-    drawList.push_back(points);
+    drawListLayer2.push_back(points);
 }
 
 void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& atom, std::size_t aam_id, 
@@ -875,7 +898,7 @@ void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& ato
     if (atomLabelBounds[atom_idx].empty()) {
         Math::Vector2D label_pos = atom_pos - brect_ctr;
     
-        CREATE_ATOM_LABEL(activeSecondaryLabelFont, id_str, label_pos, label_brect);
+        CREATE_ATOM_LABEL(activeSecondaryLabelFont, id_str, label_pos, label_brect, drawListLayer2);
         return;
     }
 
@@ -902,7 +925,7 @@ void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& ato
         }
     }
     
-    CREATE_ATOM_LABEL(activeSecondaryLabelFont, id_str, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeSecondaryLabelFont, id_str, label_pos, label_brect, drawListLayer2);
 }
 
 void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom, char config_label)
@@ -979,7 +1002,8 @@ void Vis::StructureView2D::createAtomConfigLabelPrimitive(const Chem::Atom& atom
      
     activePen.setColor(getConfigLabelColor(atom));
 
-    CREATE_ATOM_LABEL(activeLabelFont, std::string{config_label}, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, std::string{config_label}, label_pos, label_brect,
+                      drawListLayer3);
 }
 
 void Vis::StructureView2D::createAtomCustomLabelPrimitive(const Chem::Atom& atom, const std::string& label_str, bool have_ctr_sym)
@@ -1059,7 +1083,7 @@ void Vis::StructureView2D::createAtomCustomLabelPrimitive(const Chem::Atom& atom
  
     activePen.setColor(getCustomLabelColor(atom));
  
-    CREATE_ATOM_LABEL(activeLabelFont, label_str, label_pos, label_brect);
+    CREATE_ATOM_LABEL(activeLabelFont, label_str, label_pos, label_brect, drawListLayer3);
 }
 
 void Vis::StructureView2D::createBondPrimitives()
@@ -1068,14 +1092,9 @@ void Vis::StructureView2D::createBondPrimitives()
 
     bool with_bond_labels = (fontMetrics && (parameters->showBondQueryInfos() || parameters->showBondReactionInfos() ||
                                              parameters->showBondConfigLabels() || parameters->showBondCustomLabels())); 
-
     Line2D ctr_line;
 
-    MolecularGraph::ConstBondIterator bonds_end = structure->getBondsEnd();
-
-    for (MolecularGraph::ConstBondIterator it = structure->getBondsBegin(); it != bonds_end; ++it) {
-        const Bond& bond = *it;
-
+    for (auto& bond : structure->getBonds()) {
         if (!structure->containsAtom(bond.getBegin()) || !structure->containsAtom(bond.getEnd()))
             continue;
 
@@ -1125,17 +1144,16 @@ void Vis::StructureView2D::createBondPrimitives()
     }
 }
 
-#define CREATE_BOND_LABEL(text, pos, brect)            \
-    label = allocTextLabelPrimitive();                 \
-                                                       \
-    label->setFont(activeLabelFont);                   \
-    label->setText(text);                              \
-    label->setPosition(pos);                           \
-                                                       \
-    drawList.push_back(label);                         \
-                                                       \
-    brect.translate(pos);                              \
-    brect.addMargin(activeLabelMargin, activeLabelMargin)
+#define CREATE_BOND_LABEL(text, pos, label_brect, draw_list)   \
+    label = allocTextLabelPrimitive(activeLabelFont);          \
+                                                               \
+    label->setText(text);                                      \
+    label->setPosition(pos);                                   \
+                                                               \
+    draw_list.push_back(label);                                \
+                                                               \
+    label_brect.translate(pos);                                \
+    label_brect.addMargin(activeLabelMargin, activeLabelMargin)
 
 void Vis::StructureView2D::createBondLabelPrimitives(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
 {
@@ -1147,13 +1165,15 @@ void Vis::StructureView2D::createBondLabelPrimitives(const Chem::Bond& bond, con
     if (parameters->showBondQueryInfos())
         createBondQueryInfoLabelPrimitive(bond, ctr_line, asym_shift_dir, baseline);
 
-    bool have_ctr_label = bondLabelBounds[structure->getBondIndex(bond)].isDefined();
+    auto bond_idx = structure->getBondIndex(bond);
+    
+    ctrLabeledBonds.set(bond_idx, !bondLabelBounds[bond_idx].empty());
     
     if (parameters->showBondConfigLabels())
         createBondConfigLabelPrimitive(bond, ctr_line, asym_shift_dir);
     
     if (parameters->showBondCustomLabels())
-        createBondCustomLabelPrimitive(bond, ctr_line, asym_shift_dir, have_ctr_label);
+        createBondCustomLabelPrimitive(bond, ctr_line, asym_shift_dir);
 }
 
 double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
@@ -1181,8 +1201,7 @@ double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& b
 
     fontMetrics->setFont(activeLabelFont);
 
-    std::size_t bond_idx = structure->getBondIndex(bond);
-    Rectangle2D& label_brect = bondLabelBounds[bond_idx];
+    Rectangle2D label_brect;
 
     fontMetrics->getBounds(rxn_info, label_brect);
 
@@ -1205,8 +1224,10 @@ double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& b
     
     TextLabelPrimitive2D* label;
 
-    CREATE_BOND_LABEL(rxn_info, label_pos, label_brect);
+    CREATE_BOND_LABEL(rxn_info, label_pos, label_brect, drawListLayer2);
 
+    bondLabelBounds[structure->getBondIndex(bond)].push_back(label_brect);
+    
     return label_pos(1);
 }
 
@@ -1222,13 +1243,13 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
     qry_info_str.push_back(RIGHT_QUERY_INFO_DELIMITER);
 
     std::size_t bond_idx = structure->getBondIndex(bond);
-
-    Rectangle2D& total_brect = bondLabelBounds[bond_idx];
     TextLabelPrimitive2D* label;
 
     activePen.setColor(getColor(bond));
     
-    if (!total_brect.isDefined()) {
+    if (bondLabelBounds[bond_idx].empty()) {
+        Rectangle2D label_brect;
+        
         setupLabelMargin(bond);
         setupLabelFont(bond);
 
@@ -1244,14 +1265,14 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
             bond_ctr_pos -= perp_line_dir * getLineSpacing(bond) * 0.5 * asym_shift_dir; 
         }
 
-        fontMetrics->getBounds(qry_info_str, total_brect);
+        fontMetrics->getBounds(qry_info_str, label_brect);
 
         Math::Vector2D brect_ctr;
-        total_brect.getCenter(brect_ctr);
+        label_brect.getCenter(brect_ctr);
 
         Math::Vector2D label_pos = bond_ctr_pos - brect_ctr;
 
-        Rectangle2D test_brect = total_brect;
+        Rectangle2D test_brect = label_brect;
         test_brect.translate(label_pos);
     
         double lowest_cong_fact = calcCongestionFactor(test_brect, bond);
@@ -1266,7 +1287,7 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
         test_pos(0) = bond_ctr_pos(0) - brect_ctr(0);
         test_pos(1) = label_pos(1);
 
-        test_brect = total_brect;
+        test_brect = label_brect;
         test_brect.translate(test_pos);
 
         double cong_fact = calcCongestionFactor(test_brect, bond);
@@ -1276,19 +1297,24 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
             lowest_cong_fact = cong_fact;
         }
     
-        test_pos(0) = bond_ctr_pos(0) - total_brect.getMax()(0) + fontMetrics->getWidth(*qry_info_str.rbegin()) * 0.5;
+        test_pos(0) = bond_ctr_pos(0) - label_brect.getMax()(0) + fontMetrics->getWidth(*qry_info_str.rbegin()) * 0.5;
 
-        test_brect = total_brect;
+        test_brect = label_brect;
         test_brect.translate(test_pos);
 
         if (calcCongestionFactor(test_brect, bond) < lowest_cong_fact)
             label_pos = test_pos;
 
-        CREATE_BOND_LABEL(qry_info_str, label_pos, total_brect);
+        CREATE_BOND_LABEL(qry_info_str, label_pos, label_brect, drawListLayer2);
+        
+        bondLabelBounds[bond_idx].push_back(label_brect);
+        
         return;
     }
 
+    Rectangle2D& total_brect = bondLabelBounds[bond_idx].front();
     Rectangle2D label_brect;
+    
     fontMetrics->getBounds(qry_info_str, label_brect);
 
     Math::Vector2D right_pos;
@@ -1307,13 +1333,13 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
     left_brect.translate(left_pos);
     
     if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
-        CREATE_BOND_LABEL(qry_info_str, left_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(qry_info_str, left_pos, label_brect, drawListLayer2);
 
     } else {
-        CREATE_BOND_LABEL(qry_info_str, right_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(qry_info_str, right_pos, label_brect, drawListLayer2);
     }
+
+    total_brect.addRectangle(label_brect);
 }
 
 void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, 
@@ -1339,9 +1365,8 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     label_brect.getCenter(brect_ctr);
     
     std::size_t bond_idx = structure->getBondIndex(bond);
-    Rectangle2D& total_brect = bondLabelBounds[bond_idx];
 
-    if (!total_brect.isDefined()) {
+    if (bondLabelBounds[bond_idx].empty()) {
         setupLabelMargin(bond);
 
         Math::Vector2D bond_ctr_pos;
@@ -1372,9 +1397,14 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
         if (calcCongestionFactor(test_brect, bond) < cong_fact)
             label_pos = test_pos;
 
-        CREATE_BOND_LABEL(std::string{config_label}, label_pos, total_brect);
+        CREATE_BOND_LABEL(std::string{config_label}, label_pos, label_brect, drawListLayer3);
+
+        bondLabelBounds[bond_idx].push_back(label_brect);
+        
         return;
     }
+
+    Rectangle2D& total_brect = bondLabelBounds[bond_idx].front();
 
     double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
     Math::Vector2D right_pos;
@@ -1393,17 +1423,16 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
     left_brect.translate(left_pos);
     
     if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
-        CREATE_BOND_LABEL(std::string{config_label}, left_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(std::string{config_label}, left_pos, label_brect, drawListLayer3);
 
     } else {
-        CREATE_BOND_LABEL(std::string{config_label}, right_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(std::string{config_label}, right_pos, label_brect, drawListLayer3);
     }
+
+    total_brect.addRectangle(label_brect);
 }
 
-void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, 
-                                                          int asym_shift_dir, bool have_ctr_label)
+void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
 {
     const std::string& label_str = getCustomLabel(bond);
 
@@ -1425,12 +1454,8 @@ void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond
     label_brect.getCenter(brect_ctr);
 
     std::size_t bond_idx = structure->getBondIndex(bond);
-    Rectangle2D& total_brect = bondLabelBounds[bond_idx];
     
-    if (!have_ctr_label) {
-        if (!total_brect.isDefined())
-            setupLabelMargin(bond);
-
+    if (!ctrLabeledBonds.test(bond_idx)) {
         Math::Vector2D bond_ctr_pos;
         ctr_line.getCenter(bond_ctr_pos);
 
@@ -1479,16 +1504,15 @@ void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond
             }
         }
 
-        CREATE_BOND_LABEL(label_str, label_pos, label_brect);
+        CREATE_BOND_LABEL(label_str, label_pos, label_brect, drawListLayer3);
 
-        if (total_brect.isDefined())
-            total_brect.addRectangle(label_brect);
-        else
-            total_brect = label_brect;
-
+        bondLabelBounds[bond_idx].push_back(label_brect);
+   
         return;
     }
-   
+
+    Rectangle2D& total_brect = bondLabelBounds[bond_idx].front();
+
     double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
     Math::Vector2D right_pos;
     Math::Vector2D left_pos;
@@ -1506,13 +1530,13 @@ void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond
     left_brect.translate(left_pos);
     
     if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
-        CREATE_BOND_LABEL(label_str, left_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(label_str, left_pos, label_brect, drawListLayer3);
 
     } else {
-        CREATE_BOND_LABEL(label_str, right_pos, label_brect);
-        total_brect.addRectangle(label_brect);
+        CREATE_BOND_LABEL(label_str, right_pos, label_brect, drawListLayer3);
     }
+
+    total_brect.addRectangle(label_brect);
 }
 
 void Vis::StructureView2D::createUndefOrderBondPrimitives(const Chem::Bond& bond, const Line2D& ctr_line)
@@ -1618,9 +1642,8 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
 
     std::size_t bond_idx = structure->getBondIndex(bond);
 
-    const Rectangle2D& label_brect = bondLabelBounds[bond_idx];
-
-    if (label_brect.isDefined()) {
+    if (ctrLabeledBonds.test(bond_idx)) {
+        const Rectangle2D& label_brect = bondLabelBounds[bond_idx].front();
         Line2D clipped_ctr_line = ctr_line;
         Math::Vector2D inters_pt;
 
@@ -1666,7 +1689,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
 
                     wedge->addElement(inters_pt);
 
-                    drawList.push_back(wedge);
+                    drawListLayer2.push_back(wedge);
 
                     atom2_visible = true;
                 }
@@ -1716,7 +1739,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
     wedge->addElement(wedge_side2.getEnd());
     wedge->addElement(wedge_side2.getBegin());
 
-    drawList.push_back(wedge);
+    drawListLayer2.push_back(wedge);
 }
 
 void Vis::StructureView2D::extendUpBondWedgeSides(const Chem::Bond& bond, const Chem::Atom& atom, Line2D& wedge_side1, 
@@ -1918,12 +1941,10 @@ void Vis::StructureView2D::createDownSingleBondPrimitives(const Chem::Bond& bond
     double hash_len = start_wedge_width;
 
     LineSegmentListPrimitive2D* hashes = allocLineSegListPrimitive();
-
     std::size_t bond_idx = structure->getBondIndex(bond);
 
-    const Rectangle2D& label_brect = bondLabelBounds[bond_idx];
-
-    if (label_brect.isDefined()) {
+    if (ctrLabeledBonds.test(bond_idx)) {
+        const Rectangle2D& label_brect = bondLabelBounds[bond_idx].front();
         Math::Vector2D hash_pt1;
         Math::Vector2D hash_pt2;
 
@@ -1953,7 +1974,7 @@ void Vis::StructureView2D::createDownSingleBondPrimitives(const Chem::Bond& bond
         }
     }
 
-    drawList.push_back(hashes);
+    drawListLayer2.push_back(hashes);
 }
 
 void Vis::StructureView2D::createEitherSingleBondPrimitives(const Chem::Bond& bond, const Line2D& ctr_line, bool reverse_either)
@@ -1985,13 +2006,12 @@ void Vis::StructureView2D::createEitherSingleBondPrimitives(const Chem::Bond& bo
 
     line_chain->addElement(hash_pos);
 
-    drawList.push_back(line_chain);
+    drawListLayer2.push_back(line_chain);
 
     std::size_t bond_idx = structure->getBondIndex(bond);
 
-    const Rectangle2D& label_brect = bondLabelBounds[bond_idx];
-
-    if (label_brect.isDefined()) {
+    if (ctrLabeledBonds.test(bond_idx)) {
+        const Rectangle2D& label_brect = bondLabelBounds[bond_idx].front();
         std::size_t i;
 
         for (i = 0; i < num_hashes; i++, hash_len += hash_len_inc, hash_pos += hash_pos_shift) {
@@ -2017,7 +2037,7 @@ void Vis::StructureView2D::createEitherSingleBondPrimitives(const Chem::Bond& bo
 
         line_chain->addElement(hash_pos - hash_pos_shift);
 
-        drawList.push_back(line_chain);
+        drawListLayer2.push_back(line_chain);
 
         for ( ; i < num_hashes; i++, hash_len += hash_len_inc, hash_pos += hash_pos_shift) {
             hash_pos_perp_shift = perp_bond_dir * hash_len;
@@ -2515,13 +2535,12 @@ void Vis::StructureView2D::clipLineAgainstNeighborBonds(Line2D& line, const Chem
 
 void Vis::StructureView2D::clipLineAgainstBondLabel(LinePrimitive2D* line, std::size_t bond_idx)
 {
-    const Rectangle2D& label_brect = bondLabelBounds[bond_idx];
-
-    if (!label_brect.isDefined()) {
-        drawList.push_back(line);
+    if (!ctrLabeledBonds.test(bond_idx)) {
+        drawListLayer2.push_back(line);
         return;
     }
 
+    const Rectangle2D& label_brect = bondLabelBounds[bond_idx].front();
     bool pt1_visible = !label_brect.containsPoint(line->getBegin());
     bool pt2_visible = !label_brect.containsPoint(line->getEnd());
 
@@ -2530,7 +2549,7 @@ void Vis::StructureView2D::clipLineAgainstBondLabel(LinePrimitive2D* line, std::
             Math::Vector2D saved_pt2 = line->getEnd();
 
             if (!line->clipEndAgainstRectangle(label_brect)) {
-                drawList.push_back(line);
+                drawListLayer2.push_back(line);
 
             } else {
                 LinePrimitive2D* line2 = allocLinePrimitive();
@@ -2540,20 +2559,20 @@ void Vis::StructureView2D::clipLineAgainstBondLabel(LinePrimitive2D* line, std::
                 line2->setEnd(saved_pt2);
                 line2->clipBeginAgainstRectangle(label_brect);
 
-                drawList.push_back(line);
-                drawList.push_back(line2);
+                drawListLayer2.push_back(line);
+                drawListLayer2.push_back(line2);
             }
 
         } else {
             line->clipEndAgainstRectangle(label_brect);
 
-            drawList.push_back(line);
+            drawListLayer2.push_back(line);
         }
 
     } else if (pt2_visible) {
         line->clipBeginAgainstRectangle(label_brect);
 
-        drawList.push_back(line);
+        drawListLayer2.push_back(line);
     }
 }
 
@@ -2572,13 +2591,8 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
     for (std::size_t i = 0, num_atoms = structure->getNumAtoms(); i < num_atoms; i++) {
         diff = outputAtomCoords[i] - brect_ctr;
         congestion_fact += 1.0 / innerProd(diff, diff);
-        
-        const RectangleList& atom_label_brects = atomLabelBounds[i];
-        RectangleList::const_iterator brects_end = atom_label_brects.end();
-
-        for (RectangleList::const_iterator br_it = atom_label_brects.begin(); br_it != brects_end; ++br_it) {
-            const Rectangle2D& label_brect = *br_it;
-
+   
+        for (auto & label_brect : atomLabelBounds[i]) {
             if (brect.intersectsRectangle(label_brect))
                 congestion_fact += 1000.0;
             
@@ -2602,18 +2616,15 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
             congestion_fact += 1.0 / innerProd(diff, diff);
         }
 
-        const Rectangle2D& label_brect = bondLabelBounds[i];
-
-        if (!label_brect.isDefined())
-            continue;
-
-        if (brect.intersectsRectangle(label_brect))
-            congestion_fact += 1000.0;
+        for (auto & label_brect : bondLabelBounds[i]) {
+            if (brect.intersectsRectangle(label_brect))
+                congestion_fact += 1000.0;
             
-        label_brect.getCenter(diff);
+            label_brect.getCenter(diff);
 
-        diff -= brect_ctr;
-        congestion_fact += 1.0 / innerProd(diff, diff);
+            diff -= brect_ctr;
+            congestion_fact += 1.0 / innerProd(diff, diff);
+        }
     }
 
     return congestion_fact;
@@ -2830,7 +2841,7 @@ void Vis::StructureView2D::prepareStructureData()
     }
 }
 
-void Vis::StructureView2D::initInputAtomPosTable()
+void Vis::StructureView2D::initInputAtomPosArray()
 {
     if (!parameters->useCalculatedAtomCoords() && hasAtomCoords) {
         inputAtomCoords.clear();
@@ -3074,14 +3085,10 @@ void Vis::StructureView2D::calcOutputStructureBounds()
 
     std::size_t num_bonds = structure->getNumBonds();
 
-    for (std::size_t i = 0; i < num_bonds; i++) {
-        const Rectangle2D& label_brect = bondLabelBounds[i];
+    for (std::size_t i = 0; i < num_bonds; i++)
+        std::for_each(bondLabelBounds[i].begin(), bondLabelBounds[i].end(),
+                      std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
 
-        if (!label_brect.isDefined())
-            continue;
-
-        outputStructureBounds.addRectangle(label_brect);
-    }
 }
 
 void Vis::StructureView2D::calcOutputAtomCoords()
@@ -3101,7 +3108,7 @@ void Vis::StructureView2D::calcOutputAtomCoords()
     }
 }
 
-void Vis::StructureView2D::initOutputBondLineTable()
+void Vis::StructureView2D::initOutputBondLineArray()
 {
     using namespace Chem;
 
@@ -3263,12 +3270,12 @@ double Vis::StructureView2D::getLabelSize(const Chem::Bond& bond) const
 
 double Vis::StructureView2D::getConfigLabelSize(const Chem::Bond& bond) const
 {
-    return calcOutputSize(getConfigLabelSizeSpec(bond));
+    return calcOutputSize(bond, getConfigLabelSizeSpec(bond), true);
 }
 
 double Vis::StructureView2D::getCustomLabelSize(const Chem::Bond& bond) const
 {
-    return calcOutputSize(getCustomLabelSizeSpec(bond));
+    return calcOutputSize(bond, getCustomLabelSizeSpec(bond), true);
 }
 
 const Vis::Color& Vis::StructureView2D::getColor(const Chem::Bond& bond) const
@@ -3335,6 +3342,28 @@ const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Bond& bo
         return getBondCustomLabelColor(*structure);
 
     return parameters->getBondCustomLabelColor();
+}
+
+const Vis::Brush& Vis::StructureView2D::getHighlightAreaBrush(const Chem::Bond& bond) const
+{
+    if (hasHighlightAreaBrush(bond))
+        return getHighlightAreaBrush(bond);
+
+    if (hasBondHighlightAreaBrush(*structure))
+        return getBondHighlightAreaBrush(*structure);
+
+    return parameters->getBondHighlightAreaBrush(); 
+}
+
+const Vis::Pen& Vis::StructureView2D::getHighlightAreaPen(const Chem::Bond& bond) const
+{
+    if (hasHighlightAreaOutlinePen(bond))
+        return getHighlightAreaOutlinePen(bond);
+
+    if (hasBondHighlightAreaOutlinePen(*structure))
+        return getBondHighlightAreaOutlinePen(*structure);
+
+    return parameters->getBondHighlightAreaPen(); 
 }
 
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelSizeSpec(const Chem::Bond& bond) const
@@ -3430,12 +3459,12 @@ double Vis::StructureView2D::getSecondaryLabelSize(const Chem::Atom& atom) const
 
 double Vis::StructureView2D::getConfigLabelSize(const Chem::Atom& atom) const
 {
-    return calcOutputSize(getConfigLabelSizeSpec(atom));
+    return calcOutputSize(atom, getConfigLabelSizeSpec(atom));
 }
 
 double Vis::StructureView2D::getCustomLabelSize(const Chem::Atom& atom) const
 {
-    return calcOutputSize(getCustomLabelSizeSpec(atom));
+    return calcOutputSize(atom, getCustomLabelSizeSpec(atom));
 }
 
 double Vis::StructureView2D::getElectronDotSize(const Chem::Atom& atom) const
@@ -3523,6 +3552,28 @@ const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Atom& atom
         return getAtomCustomLabelFont(*structure);
 
     return parameters->getAtomCustomLabelFont();
+}
+
+const Vis::Brush& Vis::StructureView2D::getHighlightAreaBrush(const Chem::Atom& atom) const
+{
+    if (hasHighlightAreaBrush(atom))
+        return getHighlightAreaBrush(atom);
+
+    if (hasAtomHighlightAreaBrush(*structure))
+        return getAtomHighlightAreaBrush(*structure);
+
+    return parameters->getAtomHighlightAreaBrush(); 
+}
+
+const Vis::Pen& Vis::StructureView2D::getHighlightAreaPen(const Chem::Atom& atom) const
+{
+    if (hasHighlightAreaOutlinePen(atom))
+        return getHighlightAreaOutlinePen(atom);
+
+    if (hasAtomHighlightAreaOutlinePen(*structure))
+        return getAtomHighlightAreaOutlinePen(*structure);
+
+    return parameters->getAtomHighlightAreaPen(); 
 }
 
 const Vis::SizeSpecification& Vis::StructureView2D::getLabelSizeSpec(const Chem::Atom& atom) const
@@ -3625,11 +3676,53 @@ void Vis::StructureView2D::setupCustomLabelFont(const Chem::Atom& atom)
     activeLabelFont.setSize(getCustomLabelSize(atom));
 }
 
-double Vis::StructureView2D::calcOutputSize(const Chem::Bond& bond, const SizeSpecification& size_spec) const
+const Vis::SizeSpecification& Vis::StructureView2D::getAtomHighlightAreaSizeSpec() const
+{
+    if (hasAtomHighlightAreaSize(*structure))
+        return Vis::getAtomHighlightAreaSize(*structure);
+
+    return parameters->getAtomHighlightAreaSize();
+}
+
+const Vis::SizeSpecification& Vis::StructureView2D::getBondHighlightAreaWidthSpec() const
+{
+    if (hasBondHighlightAreaWidth(*structure))
+        return Vis::getBondHighlightAreaWidth(*structure);
+
+    return parameters->getBondHighlightAreaWidth();
+}
+
+const Vis::SizeSpecification& Vis::StructureView2D::getHighlightAreaOutlineWidthSpec() const
+{
+    if (hasHighlightAreaOutlineWidth(*structure))
+        return Vis::getHighlightAreaOutlineWidth(*structure);
+
+    return parameters->getHighlightAreaOutlineWidth();
+}
+
+double Vis::StructureView2D::getAtomHighlightAreaSize() const
+{
+    return calcOutputSize(getAtomHighlightAreaSizeSpec());
+}
+
+double Vis::StructureView2D::getBondHighlightAreaWidth() const
+{
+    return calcOutputSize(getBondHighlightAreaWidthSpec());
+}
+
+double Vis::StructureView2D::getHighlightAreaOutlineWidth() const
+{
+    return calcOutputSize(getHighlightAreaOutlineWidthSpec());
+}
+
+double Vis::StructureView2D::calcOutputSize(const Chem::Bond& bond, const SizeSpecification& size_spec, bool ref_is_label_size) const
 {    
     if (!size_spec.isRelative())
         return calcOutputSize(size_spec);
 
+    if (ref_is_label_size)
+        return calcOutputSize(size_spec.getValue() * getLabelSize(bond), size_spec);
+    
     return calcOutputSize(size_spec.getValue() * calcInputBondLength(bond), size_spec);
 }
 
@@ -3669,8 +3762,12 @@ void Vis::StructureView2D::freeGraphicsPrimitives()
     lineSegListCache.putAll();
     pointListCache.putAll();
     textLabelCache.putAll();
+    pathCache.putAll();
+    clipPathCache.putAll();
 
-    drawList.clear();
+    drawListLayer1.clear();
+    drawListLayer2.clear();
+    drawListLayer3.clear();
 }
 
 Vis::LinePrimitive2D* Vis::StructureView2D::allocLinePrimitive(bool set_pen)
@@ -3719,26 +3816,27 @@ Vis::PointListPrimitive2D* Vis::StructureView2D::allocPointListPrimitive()
     PointListPrimitive2D* prim = pointListCache.get();
 
     prim->clear();
-
+    
     return prim;
 }
 
-Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
+Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive(const Font& font)
 {
     TextLabelPrimitive2D* prim = textLabelCache.get();
 
+    prim->setFont(font);
     prim->setPen(activePen.getColor());
 
     return prim;
 }
 
-Vis::PathPrimitive2D* Vis::StructureView2D::allocPathPrimitive()
+Vis::PathPrimitive2D* Vis::StructureView2D::allocPathPrimitive(const Brush& brush, const Pen& pen)
 {
     auto prim = pathCache.get();
 
     prim->clear();
-    prim->setPen(activePen);
-    prim->setBrush(activeBrush);
+    prim->setPen(pen);
+    prim->setBrush(brush);
 
     return prim;
 }

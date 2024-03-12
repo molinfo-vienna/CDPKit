@@ -53,6 +53,7 @@
 #include "CDPL/Vis/PathPrimitive2D.hpp"
 #include "CDPL/Vis/ClipPathPrimitive2D.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 
 
@@ -748,7 +749,13 @@ namespace CDPL
 
             void initTextLabelBounds();
 
-            void   createAtomPrimitives();
+            void createAtomPrimitives();
+            void createBondPrimitives();
+
+            void createHighlightingPrimitives();
+            void createAtomHighlightingPrimitives();
+            void createBondHighlightingPrimitives();
+            
             void   createAtomPrimitives(const Chem::Atom&);
             double createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, Rectangle2D&);
             void   createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, double, Rectangle2D&);
@@ -761,13 +768,11 @@ namespace CDPL
             void   createAtomConfigLabelPrimitive(const Chem::Atom&, char);
             void   createAtomCustomLabelPrimitive(const Chem::Atom&, const std::string&, bool);
 
-            void createBondPrimitives();
-
             void   createBondLabelPrimitives(const Chem::Bond&, const Line2D&, int);
             double createBondRxnInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int);
             void   createBondQueryInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int, double);
             void   createBondConfigLabelPrimitive(const Chem::Bond&, const Line2D&, int);
-            void   createBondCustomLabelPrimitive(const Chem::Bond&, const Line2D&, int, bool);
+            void   createBondCustomLabelPrimitive(const Chem::Bond&, const Line2D&, int);
 
             void createUndefOrderBondPrimitives(const Chem::Bond&, const Line2D&);
             void createSingleBondPrimitives(const Chem::Bond&, const Line2D&);
@@ -785,7 +790,7 @@ namespace CDPL
             void createTripleBondPrimitives(const Chem::Bond&, const Line2D&);
 
             void createBondRxnCenterPrimitives(const Chem::Bond&, const Line2D&, int);
-
+            
             int getBondAsymmetryShiftDirection(const Chem::Bond&) const;
 
             bool trimLine(Line2D&, double, bool) const;
@@ -805,7 +810,7 @@ namespace CDPL
             double calcInputBondLength(const Chem::Bond&) const;
 
             void prepareStructureData();
-            void initInputAtomPosTable();
+            void initInputAtomPosArray();
 
             void calcViewTransforms();
 
@@ -818,7 +823,7 @@ namespace CDPL
             void calcOutputStructureBounds();
             void calcOutputAtomCoords();
 
-            void initOutputBondLineTable();
+            void initOutputBondLineArray();
 
             unsigned int getBondStereoFlag(const Chem::Bond&, const Chem::MolecularGraph&) const;
             std::size_t  getBondOrder(const Chem::Bond& bond) const;
@@ -843,6 +848,8 @@ namespace CDPL
             const Font&              getLabelFont(const Chem::Bond&) const;
             const Font&              getConfigLabelFont(const Chem::Bond&) const;
             const Font&              getCustomLabelFont(const Chem::Bond&) const;
+            const Brush&             getHighlightAreaBrush(const Chem::Bond&) const;
+            const Pen&               getHighlightAreaPen(const Chem::Bond&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Bond&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Bond&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Bond&) const;
@@ -853,7 +860,7 @@ namespace CDPL
             void setupLabelFont(const Chem::Bond&);
             void setupConfigLabelFont(const Chem::Bond&);
             void setupCustomLabelFont(const Chem::Bond&);
-
+     
             double getLabelSize(const Chem::Atom&) const;
             double getSecondaryLabelSize(const Chem::Atom&) const;
             double getConfigLabelSize(const Chem::Atom&) const;
@@ -867,6 +874,8 @@ namespace CDPL
             const Font&              getSecondaryLabelFont(const Chem::Atom&) const;
             const Font&              getConfigLabelFont(const Chem::Atom&) const;
             const Font&              getCustomLabelFont(const Chem::Atom&) const;
+            const Brush&             getHighlightAreaBrush(const Chem::Atom&) const;
+            const Pen&               getHighlightAreaPen(const Chem::Atom&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getSecondaryLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getConfigLabelSizeSpec(const Chem::Atom&) const;
@@ -880,8 +889,16 @@ namespace CDPL
             void setupSecondaryLabelFont(const Chem::Atom&);
             void setupConfigLabelFont(const Chem::Atom&);
             void setupCustomLabelFont(const Chem::Atom&);
+ 
+            const SizeSpecification& getAtomHighlightAreaSizeSpec() const;
+            const SizeSpecification& getBondHighlightAreaWidthSpec() const;
+            const SizeSpecification& getHighlightAreaOutlineWidthSpec() const;
 
-            double calcOutputSize(const Chem::Bond&, const SizeSpecification&) const;
+            double getAtomHighlightAreaSize() const;
+            double getBondHighlightAreaWidth() const;
+            double getHighlightAreaOutlineWidth() const;
+
+            double calcOutputSize(const Chem::Bond&, const SizeSpecification&, bool = false) const;
             double calcOutputSize(const Chem::Atom&, const SizeSpecification&) const;
 
             double calcOutputSize(const SizeSpecification&) const;
@@ -894,14 +911,14 @@ namespace CDPL
             PolygonPrimitive2D*         allocPolygonPrimitive();
             LineSegmentListPrimitive2D* allocLineSegListPrimitive();
             PointListPrimitive2D*       allocPointListPrimitive();
-            TextLabelPrimitive2D*       allocTextLabelPrimitive();
-            PathPrimitive2D*            allocPathPrimitive();
+            TextLabelPrimitive2D*       allocTextLabelPrimitive(const Font&);
+            PathPrimitive2D*            allocPathPrimitive(const Brush&, const Pen&);
             ClipPathPrimitive2D*        allocClipPathPrimitive();
 
             typedef std::vector<const GraphicsPrimitive2D*>       GraphicsPrimitiveList;
             typedef std::vector<Rectangle2D>                      RectangleList;
-            typedef std::vector<RectangleList>                    RectangleListTable;
-            typedef std::vector<Line2D>                           BondLineTable;
+            typedef std::vector<RectangleList>                    RectangleListArray;
+            typedef std::vector<Line2D>                           BondLineArray;
             typedef std::vector<std::size_t>                      UIntArray;
             typedef Util::ObjectStack<LinePrimitive2D>            LinePrimitiveCache;
             typedef Util::ObjectStack<PolylinePrimitive2D>        PolylinePrimitiveCache;
@@ -926,11 +943,14 @@ namespace CDPL
             Math::Vector2DArray          calcInputAtomCoords;
             Math::Vector2DArray          inputAtomCoords;
             Math::Vector2DArray          outputAtomCoords;
-            BondLineTable                outputBondLines;
-            RectangleListTable           atomLabelBounds;
-            RectangleList                bondLabelBounds;
+            BondLineArray                outputBondLines;
+            RectangleListArray           atomLabelBounds;
+            RectangleListArray           bondLabelBounds;
             UIntArray                    atomCoreLabelCounts;
-            GraphicsPrimitiveList        drawList;
+            Util::BitSet                 ctrLabeledBonds;
+            GraphicsPrimitiveList        drawListLayer1;
+            GraphicsPrimitiveList        drawListLayer2;
+            GraphicsPrimitiveList        drawListLayer3;
             double                       avgInputBondLength;
             double                       stdBondLengthScalingFactor;
             double                       viewportAdjustmentScalingFactor;
@@ -938,7 +958,6 @@ namespace CDPL
             Math::Vector2D               viewTranslations[2];
             bool                         structureChanged;
             bool                         fontMetricsChanged;
-            Brush                        activeBrush;
             Pen                          activePen;
             Font                         activeLabelFont;
             Font                         activeSecondaryLabelFont;

@@ -576,8 +576,7 @@ namespace CDPL
             /**
              * \brief Specifies the minimum size of atom highlighting areas.
              *
-             * The size can either be specified as an absolute value or as a scaling factor for the bond highlighting area width given by
-             * Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH or MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH.
+             * The size has to be specified as an absolute value. 
              * If input-scaling is enabled, the size will follow the size change of the chemical structure during bond length
              * normalization. If output-scaling is enabled, the size will follow the size change of the chemical structure during
              * viewport size adjustment. If the control-parameter is left unspecified and the property
@@ -760,7 +759,7 @@ namespace CDPL
             /**
              * \brief Specifies the line width for drawing atom and bond highlighting area outlines.
              *
-             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * The width has to be specified as an absolute value. If input-scaling 
              * is enabled, the line width will follow the size change of the chemical structure during bond length normalization. 
              * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
              * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::HIGHLIGHT_AREA_OUTLINE_WIDTH
@@ -1065,7 +1064,7 @@ namespace CDPL
             /**
              * \brief Specifies the width of bond highlighting areas.
              *
-             * The width can either be specified as an absolute value or as a scaling factor for the bond length. If input-scaling 
+             * The width has to be specified as an absolute value. If input-scaling 
              * is enabled, the width will follow the size change of the chemical structure during bond length normalization. 
              * If output-scaling is enabled, the width grows/shrinks with the size of the chemical structure during viewport size adjustment.
              * If the control-parameter is left unspecified and the property Vis::MolecularGraphProperty::BOND_HIGHLIGHT_AREA_WIDTH
