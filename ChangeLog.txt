@@ -1,5 +1,6 @@
 master:
 
+ - Fixed several errors in Python example scripts
  - Support for fully customizable atom and bond labels in 2D structure depictions
 
 V1.1.1:
