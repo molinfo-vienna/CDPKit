@@ -27,7 +27,7 @@ import CDPL.MolProp as MolProp
     
 # performs a (optional) standardization of the argument molecule and then checks whether
 # it fulfills certain user-defined criteria for inclusion/exclusion
-def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> (Chem.MolecularGraph, str):
+def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     chgs_mod = False
 
     if args.min_charges:
@@ -175,7 +175,7 @@ def checkMaxAtomCounts(elem_histo: MolProp.ElementHistogram, atom_counts: dict) 
 
 # converts a comma separated list of chem. element/generic type symbols into a list of the
 # corresponding numeric atom types defined in Chem.AtomType
-def parseElementList(elem_list: str) -> [int]:
+def parseElementList(elem_list: str) -> list:
     if not elem_list:
         return []
     
@@ -198,7 +198,7 @@ def parseElementList(elem_list: str) -> [int]:
 
 # converts a comma separated list of chem. element (or generic type) symbol/count pairs (sep. by colon) into a dictionary
 # mapping the corresponding numeric atom types (defined in Chem.AtomType) to an integer number
-def parseElementCountList(elem_count_list: str) -> [int]:
+def parseElementCountList(elem_count_list: str) -> dict:
     if not elem_count_list:
         return {}
     

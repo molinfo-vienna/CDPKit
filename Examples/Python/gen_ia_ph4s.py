@@ -75,8 +75,8 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
                  Biomol.DataFormat.PDB,
                  Biomol.DataFormat.MMTF ]
                         
-    if reader.getDataFormat() not in sup_fmts:   # check if the format is supported by this script 
-        sys.exit('Error: receptor input file format \'%s\' not supported' % name_and_ext[1])
+    if reader.getDataFormat() not in sup_fmts:   # check if the format is supported by this script
+        sys.exit('Error: receptor input file format not supported')
 
     rec_mol = Chem.BasicMolecule()    # create an instance of the default implementation of the
                                       # Chem.Molecule interface that will store the receptor struct.
@@ -171,7 +171,7 @@ def main() -> None:
                 
                 try:
                     if not ph4_writer.write(ia_ph4): # output pharmacophore
-                        sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))
+                        sys.exit('Error: writing interaction pharmacophore of molecule %s failed' % mol_id)
 
                 except Exception as e:               # handle exception raised in case of severe write errors
                     sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))

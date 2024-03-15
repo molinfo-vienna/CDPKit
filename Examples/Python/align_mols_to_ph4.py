@@ -189,7 +189,7 @@ def main() -> None:
                 else:                                    # otherwise create and set new structure data
                     struct_data = Chem.StringDataBlock()
 
-                    Chem.setStructureData(mol, strut)
+                    Chem.setStructureData(mol, struct_data)
 
                 # add alignment score entry to struct. data
                 struct_data.addEntry('<PharmFitScore>', '') 
