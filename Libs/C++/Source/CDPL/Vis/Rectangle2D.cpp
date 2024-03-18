@@ -82,6 +82,9 @@ void Vis::Rectangle2D::addMargin(double width, double height)
 
 void Vis::Rectangle2D::addRectangle(const Rectangle2D& rect)
 {
+    if (!rect.isDefined())
+        return;
+    
     addPoint(rect.min);
     addPoint(rect.max);
 }
