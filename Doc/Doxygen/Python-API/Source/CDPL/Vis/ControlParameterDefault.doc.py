@@ -187,11 +187,11 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_LABEL_MARGIN = SizeSpecification(value=2, relative=False, in_scaling=False, out_scaling=True)
 
     ##
-    # \brief Default setting (= <tt>SizeSpecification</tt>(14.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
+    # \brief Default setting (= <tt>SizeSpecification</tt>(16.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_SIZE.
     # 
     # \since 1.2
     # 
-    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=14, relative=False, in_scaling=False, out_scaling=True)
+    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=16, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief Default setting (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_BRUSH.
@@ -201,7 +201,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
 
     ##
-    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # \brief Default setting (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 
@@ -464,11 +464,11 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_CUSTOM_LABEL_COLOR = Color(r=0, g=0, b=0)
 
     ##
-    # \brief Default setting (= <tt>SizeSpecification</tt>(10.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
+    # \brief Default setting (= <tt>SizeSpecification</tt>(12.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_WIDTH.
     # 
     # \since 1.2
     # 
-    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
+    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=12, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief Default setting (= <tt>Brush</tt>(Color(0.8, 0.8, 1.0)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_BRUSH.
@@ -478,7 +478,7 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
 
     ##
-    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+    # \brief Default setting (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 

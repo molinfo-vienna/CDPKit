@@ -67,7 +67,7 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=14, relative=False, in_scaling=False, out_scaling=True)
+    ATOM_HIGHLIGHT_AREA_SIZE = SizeSpecification(value=16, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
@@ -162,7 +162,7 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=10, relative=False, in_scaling=False, out_scaling=True)
+    BOND_HIGHLIGHT_AREA_WIDTH = SizeSpecification(value=12, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
