@@ -313,6 +313,9 @@ class QtRenderer2D(Vis.Renderer2D):
 
     def drawPath(self, path):
         "drawPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        if path.isEmpty():
+            return
+        
         if self.__qPainterPath == None:
             self.__qPainterPath = QtGui.QPainterPath()
 
@@ -320,6 +323,9 @@ class QtRenderer2D(Vis.Renderer2D):
 
     def setClipPath(self, path):
         "setClipPath(QtRenderer2D self, Vis.Path2D path) -> None :"
+        if path.isEmpty():
+            return
+
         if self.__qPainterPath == None:
             self.__qPainterPath = QtGui.QPainterPath()
             

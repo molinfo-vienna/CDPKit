@@ -82,9 +82,9 @@ namespace CDPL
             const SizeSpecification         SECONDARY_ATOM_LABEL_SIZE            = SizeSpecification(6.0, false, false, true);
             const SizeSpecification         ATOM_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
             const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE            = SizeSpecification(1.0, false, false, true);
-            const SizeSpecification         ATOM_HIGHLIGHT_AREA_SIZE             = SizeSpecification(14.0, false, false, true);
+            const SizeSpecification         ATOM_HIGHLIGHT_AREA_SIZE             = SizeSpecification(16.0, false, false, true);
             const Brush                     ATOM_HIGHLIGHT_AREA_BRUSH            = Brush(Color(0.8, 0.8, 1.0));
-            const Pen                       ATOM_HIGHLIGHT_AREA_OUTLINE_PEN      = Pen(Pen::NO_LINE);
+            const Pen                       ATOM_HIGHLIGHT_AREA_OUTLINE_PEN      = Pen(Color(0.6, 0.6, 0.75));
             const bool                      SHOW_CARBONS                         = false;
             const bool                      SHOW_EXPLICIT_HYDROGENS              = false;
             const bool                      SHOW_CHARGES                         = true;
@@ -119,9 +119,9 @@ namespace CDPL
             const Font              BOND_LABEL_FONT                 = Font();
             const SizeSpecification BOND_LABEL_SIZE                 = SizeSpecification(8.0, false, false, true);
             const SizeSpecification BOND_LABEL_MARGIN               = SizeSpecification(2.0, false, false, true);
-            const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH       = SizeSpecification(10.0, false, false, true);
+            const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH       = SizeSpecification(12.0, false, false, true);
             const Brush             BOND_HIGHLIGHT_AREA_BRUSH       = Brush(Color(0.8, 0.8, 1.0));
-            const Pen               BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Pen::NO_LINE);
+            const Pen               BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color(0.6, 0.6, 0.75));
             const bool              SHOW_BOND_REACTION_INFOS        = true;
             const bool              SHOW_BOND_QUERY_INFOS           = true;
             const bool              SHOW_STEREO_BONDS               = true;

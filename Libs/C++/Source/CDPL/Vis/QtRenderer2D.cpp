@@ -30,6 +30,7 @@
 #include <QTransform>
 #include <QPainterPath>
 
+#include "CDPL/Vis/Path2D.hpp"
 #include "CDPL/Vis/QtRenderer2D.hpp"
 #include "CDPL/Vis/QtObjectFactory.hpp"
 
@@ -129,6 +130,9 @@ void Vis::QtRenderer2D::drawEllipse(double x, double y, double width, double hei
 
 void Vis::QtRenderer2D::drawPath(const Path2D& path)
 {
+    if (path.isEmpty())
+        return;
+    
     if (!qPainterPath)
         qPainterPath.reset(new QPainterPath());
 
@@ -137,6 +141,9 @@ void Vis::QtRenderer2D::drawPath(const Path2D& path)
 
 void Vis::QtRenderer2D::setClipPath(const Path2D& path)
 {
+    if (path.isEmpty())
+        return;
+    
     if (!qPainterPath)
         qPainterPath.reset(new QPainterPath());
 

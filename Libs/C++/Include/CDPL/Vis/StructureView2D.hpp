@@ -33,7 +33,7 @@
 #include <memory>
 #include <string>
 #include <cstddef>
-#include <memory>
+#include <utility>
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/View2D.hpp"
@@ -753,8 +753,12 @@ namespace CDPL
             void createBondPrimitives();
 
             void createHighlightingPrimitives();
-            void createAtomHighlightingPrimitives();
-            void createBondHighlightingPrimitives();
+
+            void createAtomHighlightingPrimitives(double, double, double);
+            void createAtomHighlightingPrimitives(const Chem::Atom&, double, double, double);
+
+            void createBondHighlightingPrimitives(double, double, double);
+            void createBondHighlightingPrimitives(const Chem::Bond&, double, double, double);
             
             void   createAtomPrimitives(const Chem::Atom&);
             double createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, Rectangle2D&);
@@ -920,6 +924,10 @@ namespace CDPL
             typedef std::vector<RectangleList>                    RectangleListArray;
             typedef std::vector<Line2D>                           BondLineArray;
             typedef std::vector<std::size_t>                      UIntArray;
+            typedef std::pair<std::size_t, double>                UIntDoublePair;
+            typedef std::vector<UIntDoublePair>                   UIntDoublePairList;
+            typedef std::vector<UIntDoublePairList>               UIntDoublePairListArray;
+            typedef std::vector<double>                           DoubleArray;
             typedef Util::ObjectStack<LinePrimitive2D>            LinePrimitiveCache;
             typedef Util::ObjectStack<PolylinePrimitive2D>        PolylinePrimitiveCache;
             typedef Util::ObjectStack<PolygonPrimitive2D>         PolygonPrimitiveCache;
@@ -928,9 +936,8 @@ namespace CDPL
             typedef Util::ObjectStack<TextLabelPrimitive2D>       TextLabelPrimitiveCache;
             typedef Util::ObjectStack<PathPrimitive2D>            PathPrimitiveCache;
             typedef Util::ObjectStack<ClipPathPrimitive2D>        ClipPathPrimitiveCache;
-
-            typedef std::unique_ptr<StructureView2DParameters> StructureView2DParametersPtr;
-            typedef std::unique_ptr<Chem::Fragment>            FragmentPtr;
+            typedef std::unique_ptr<StructureView2DParameters>    StructureView2DParametersPtr;
+            typedef std::unique_ptr<Chem::Fragment>               FragmentPtr;
 
             StructureView2DParametersPtr parameters;
             const Chem::MolecularGraph*  structure;
@@ -948,6 +955,8 @@ namespace CDPL
             RectangleListArray           bondLabelBounds;
             UIntArray                    atomCoreLabelCounts;
             Util::BitSet                 ctrLabeledBonds;
+            UIntDoublePairListArray      highlightedBondLists;
+            DoubleArray                  atomHighlightAreaRadii;
             GraphicsPrimitiveList        drawListLayer1;
             GraphicsPrimitiveList        drawListLayer2;
             GraphicsPrimitiveList        drawListLayer3;

@@ -350,17 +350,291 @@ void Vis::StructureView2D::initTextLabelBounds()
 
 void Vis::StructureView2D::createHighlightingPrimitives()
 {
-    // TODO
+    auto atom_hltg = parameters->enableAtomHighlighting();
+    auto bond_hltg = parameters->enableBondHighlighting();
+
+    if (!atom_hltg && !bond_hltg)
+        return;
+
+    auto num_atoms = structure->getNumAtoms();
+
+    if (highlightedBondLists.size() < num_atoms)
+        highlightedBondLists.resize(num_atoms);
+    
+    std::for_each(highlightedBondLists.begin(), highlightedBondLists.begin() + num_atoms,
+                  [](auto& l) { l.clear(); });
+
+    atomHighlightAreaRadii.assign(num_atoms, 0.0);
+    
+    bool have_hltd_bonds = false;
+    
+    if (bond_hltg) {
+        Math::Vector2D bond_dir;
+        
+        for (std::size_t i = 0, num_bonds = structure->getNumBonds(); i < num_bonds; i++) {
+            auto& bond = structure->getBond(i);
+            
+            if (!structure->containsAtom(bond.getBegin()) || !structure->containsAtom(bond.getEnd()))
+                continue;
+
+            if (!getHighlightedFlag(bond))
+                continue;
+
+            outputBondLines[i].getDirection(bond_dir);
+           
+            auto angle1 = std::fmod(std::atan2(bond_dir(1), bond_dir(0)) * 180.0 / M_PI + 360.0, 360.0);
+            auto angle2 = std::fmod(angle1 + 180.0, 360.0);
+
+            highlightedBondLists[structure->getAtomIndex(bond.getBegin())].emplace_back(i, angle1);
+            highlightedBondLists[structure->getAtomIndex(bond.getEnd())].emplace_back(i, angle2);
+            
+            have_hltd_bonds = true;
+        }
+
+        for (auto it = highlightedBondLists.begin(), end = highlightedBondLists.begin() + num_atoms; it != end; ++it)
+            if (it->size() > 1)
+                std::sort(it->begin(), it->end(), [](auto& p1, auto& p2) { return (p1.second < p2.second); });
+    }
+    
+    auto ol_width = getHighlightAreaOutlineWidth();
+    auto bond_area_width = getBondHighlightAreaWidth();
+    auto atom_area_size = getAtomHighlightAreaSize();
+    
+    if (atom_hltg)
+        createAtomHighlightingPrimitives(ol_width, atom_area_size, bond_area_width);
+
+    if (have_hltd_bonds)
+        createBondHighlightingPrimitives(ol_width, atom_area_size, bond_area_width);
 }
 
-void Vis::StructureView2D::createAtomHighlightingPrimitives()
+void Vis::StructureView2D::createAtomHighlightingPrimitives(double ol_width, double atom_area_size, double bond_area_width)
 {
-    // TODO
+    for (auto& atom : structure->getAtoms())
+         if (getHighlightedFlag(atom))
+            createAtomHighlightingPrimitives(atom, ol_width, atom_area_size, bond_area_width);
 }
 
-void Vis::StructureView2D::createBondHighlightingPrimitives()
+void Vis::StructureView2D::createAtomHighlightingPrimitives(const Chem::Atom& atom, double ol_width, double atom_area_size, double bond_area_width)
 {
-    // TODO
+    auto& pen = getHighlightAreaPen(atom);
+    auto atom_idx = structure->getAtomIndex(atom);
+    auto& atom_pos = outputAtomCoords[atom_idx];
+    auto& inc_bonds = highlightedBondLists[atom_idx];
+    
+    if (pen.getLineStyle() != Pen::NO_LINE) {
+        if (!inc_bonds.empty() && atom_area_size <= bond_area_width) // outline not visible
+            activePen.setLineStyle(Pen::NO_LINE);
+
+        else {
+            activePen = getHighlightAreaPen(atom);
+            activePen.setWidth(ol_width);
+        }
+    }
+
+    if (atomCoreLabelCounts[atom_idx]) {
+        setupLabelMargin(atom);
+        
+        auto& label_brect = atomLabelBounds[atom_idx][0];
+        
+        double bbox_pts[4][2] = {
+            { label_brect.getMin()(0), label_brect.getMin()(1) },
+            { label_brect.getMax()(0), label_brect.getMin()(1) },
+            { label_brect.getMax()(0), label_brect.getMax()(1) },
+            { label_brect.getMin()(0), label_brect.getMax()(1) }
+        };
+
+        double bs_rad = 0.0;
+
+        for (std::size_t i = 0; i < 4; i++) {
+            auto dx = std::abs(bbox_pts[i][0] - atom_pos(0)) - activeLabelMargin;
+            auto dy = std::abs(bbox_pts[i][1] - atom_pos(1)) - activeLabelMargin;
+            auto dist = std::sqrt(dx * dx + dy * dy) + ol_width * 0.5;
+    
+            bs_rad = std::max(bs_rad, dist);
+        }
+        
+        atom_area_size = std::max(bs_rad * 2.0, atom_area_size);
+    }
+
+    atomHighlightAreaRadii[atom_idx] = atom_area_size * 0.5;
+    
+    if (inc_bonds.empty() || pen.getLineStyle() == Pen::NO_LINE || activePen.getLineStyle() == Pen::NO_LINE) {
+        auto prim = allocPathPrimitive(getHighlightAreaBrush(atom), pen.getLineStyle() != Pen::NO_LINE ? activePen : pen);
+
+        prim->addEllipse(atom_pos, atom_area_size, atom_area_size);
+
+        drawListLayer1.push_back(prim);
+        return;
+    }
+
+    auto prim = allocPathPrimitive(getHighlightAreaBrush(atom), Pen(Pen::NO_LINE));
+
+    prim->addEllipse(atom_pos, atom_area_size, atom_area_size);
+
+    drawListLayer1.push_back(prim);
+
+    auto angle_offs = std::asin(bond_area_width / atom_area_size) * 180.0 / M_PI;
+
+    prim = allocPathPrimitive(Brush(Brush::NO_PATTERN), activePen);
+
+    if (inc_bonds.size() == 1) 
+        prim->arc(atom_pos, atom_area_size * 0.5, atom_area_size * 0.5,
+                  inc_bonds[0].second + angle_offs, 360.0 - 2.0 * angle_offs);
+
+    else {
+        for (std::size_t i = 0, num_inc_bonds = inc_bonds.size(); i < num_inc_bonds; i++) {
+            auto ang = inc_bonds[i].second;
+            auto next_ang = inc_bonds[(i + 1) % num_inc_bonds].second;
+
+            if (next_ang <= ang)
+                next_ang += 360.0;
+
+            auto arc_sweep = (next_ang - ang) - 2.0 * angle_offs;
+            
+            if (arc_sweep <= 0.0)
+                continue;
+
+            prim->arc(atom_pos, atom_area_size * 0.5, atom_area_size * 0.5, ang + angle_offs, arc_sweep);
+        }
+    }
+
+    if (!prim->isEmpty())
+        drawListLayer1.push_back(prim);
+    else
+        pathCache.put();
+}
+
+void Vis::StructureView2D::createBondHighlightingPrimitives(double ol_width, double atom_area_size, double bond_area_width)
+{
+    for (auto& bond : structure->getBonds()) {
+        if (!structure->containsAtom(bond.getBegin()) || !structure->containsAtom(bond.getEnd()))
+            continue;
+
+        if (!getHighlightedFlag(bond))
+            continue;
+
+        createBondHighlightingPrimitives(bond, ol_width, atom_area_size, bond_area_width);
+    }
+}
+
+void Vis::StructureView2D::createBondHighlightingPrimitives(const Chem::Bond& bond, double ol_width, double atom_area_size, double bond_area_width)
+{
+    auto bond_idx = structure->getBondIndex(bond);
+    auto atom1_idx = structure->getAtomIndex(bond.getBegin());
+    auto& inc_bonds1 = highlightedBondLists[atom1_idx];
+    auto inc_bonds1_idx = inc_bonds1.size();
+    
+    for (auto& e : inc_bonds1)
+        if (e.first == bond_idx) {
+            inc_bonds1_idx = &e - &inc_bonds1[0];
+            break;
+        }
+
+    if (inc_bonds1_idx >= inc_bonds1.size()) // sanity check
+        return;
+    
+    auto atom2_idx = structure->getAtomIndex(bond.getEnd());
+    auto& inc_bonds2 = highlightedBondLists[atom2_idx];    
+    auto inc_bonds2_idx = inc_bonds2.size();
+    
+    for (auto& e : inc_bonds2)
+        if (e.first == bond_idx) {
+            inc_bonds2_idx = &e - &inc_bonds2[0];
+            break;
+        }
+
+    if (inc_bonds2_idx >= inc_bonds2.size()) // sanity check
+        return;
+    
+    auto& pen = getHighlightAreaPen(bond);
+    
+    if (pen.getLineStyle() != Pen::NO_LINE) {
+        activePen = getHighlightAreaPen(bond);
+        activePen.setWidth(ol_width);
+    }
+
+    auto bond_ang = inc_bonds1[inc_bonds1_idx].second;
+    auto& bond_line = outputBondLines[bond_idx];
+    auto& atom1_pos = outputAtomCoords[atom1_idx];
+    auto& atom2_pos = outputAtomCoords[atom2_idx];
+
+    Math::Vector2D perp_offs;
+    bond_line.getCCWPerpDirection(perp_offs);
+
+    perp_offs *= bond_area_width * 0.5;
+    
+    auto prim = allocPathPrimitive(getHighlightAreaBrush(bond), pen.getLineStyle() != Pen::NO_LINE ? activePen : pen);
+
+    prim->moveTo(atom1_pos + perp_offs);
+    prim->lineTo(atom2_pos + perp_offs);
+    prim->arcTo(atom2_pos, bond_area_width * 0.5, bond_area_width * 0.5, bond_ang + 90.0, -180.0);
+    prim->lineTo(atom1_pos - perp_offs);
+    prim->arcTo(atom1_pos, bond_area_width * 0.5, bond_area_width * 0.5, bond_ang - 90.0, -180.0);
+    prim->closePath();
+
+    if (atomHighlightAreaRadii[atom1_idx] <= 0.0 && atomHighlightAreaRadii[atom2_idx] <= 0.0 &&
+        inc_bonds1.size() == 1 && inc_bonds2.size() == 1) {
+
+        drawListLayer1.push_back(prim);
+        return;
+    }
+
+    perp_offs *= (ol_width + bond_area_width) / bond_area_width;
+
+    Math::Vector2D dir_offs;
+    bond_line.getDirection(dir_offs);
+
+    dir_offs *= (ol_width + bond_area_width) * 0.5;
+
+    auto clip_path = allocClipPathPrimitive();
+
+    clip_path->moveTo(atom1_pos - dir_offs + perp_offs);
+    clip_path->lineTo(atom2_pos + dir_offs + perp_offs);
+    clip_path->lineTo(atom2_pos + dir_offs - perp_offs);
+    clip_path->lineTo(atom1_pos - dir_offs - perp_offs);
+    clip_path->closePath();
+    
+    auto bond_len = bond_line.getLength();
+
+    for (std::size_t i = 0; i < 2; i++) {
+        auto atom_hl_rad = atomHighlightAreaRadii[i == 0 ? atom1_idx : atom2_idx];
+        auto& atom_pos = (i == 0 ? atom1_pos : atom2_pos);
+        auto& inc_bonds = (i == 0 ? inc_bonds1 : inc_bonds2);
+        auto inc_bonds_idx = (i == 0 ? inc_bonds1_idx : inc_bonds2_idx);
+        
+        if (inc_bonds.size() > 1) {
+            auto bond_ang = inc_bonds[inc_bonds_idx].second;
+            auto prev_bond_ang = inc_bonds[(inc_bonds_idx + inc_bonds.size() - 1) % inc_bonds.size()].second;
+            auto next_bond_ang = inc_bonds[(inc_bonds_idx + 1) % inc_bonds.size()].second;
+
+            if (next_bond_ang < bond_ang)
+                next_bond_ang += 360.0;
+
+            if (prev_bond_ang > bond_ang)
+                prev_bond_ang -= 360.0;
+
+            auto mid_ang1 = (bond_ang + next_bond_ang) * 0.5;
+            auto mid_ang2 = (bond_ang + prev_bond_ang) * 0.5;
+
+            clip_path->arc(atom_pos, bond_len, bond_len, mid_ang1, 360.0 - mid_ang1 + mid_ang2);
+
+            if (atom_hl_rad > 0.0) {
+                clip_path->lineTo(atom_pos(0) + atom_hl_rad * std::cos(mid_ang2 / 180.0 * M_PI),
+                                  atom_pos(1) + atom_hl_rad * std::sin(mid_ang2 / 180.0 * M_PI));
+                clip_path->arcTo(atom_pos, atom_hl_rad, atom_hl_rad, 360.0 + mid_ang2, mid_ang1 - mid_ang2);
+
+            } else
+                clip_path->lineTo(atom_pos);
+            
+            clip_path->closePath();
+
+        } else if (atom_hl_rad > 0.0)
+            clip_path->addEllipse(atom_pos, atom_hl_rad * 2, atom_hl_rad * 2);
+    }
+
+    drawListLayer1.push_back(clip_path);
+    drawListLayer1.push_back(prim);
+    drawListLayer1.push_back(allocClipPathPrimitive());
 }
 
 void Vis::StructureView2D::createAtomPrimitives()
@@ -479,7 +753,6 @@ double Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom&
     fontMetrics->setFont(activeLabelFont);
 
     std::size_t atom_idx = structure->getAtomIndex(atom);
-
     const Math::Vector2D& atom_pos = outputAtomCoords[atom_idx];
 
     fontMetrics->getBounds(qry_info_str, total_brect);
@@ -525,7 +798,7 @@ double Vis::StructureView2D::createAtomQueryInfoLabelPrimitive(const Chem::Atom&
     TextLabelPrimitive2D* label;
 
     CREATE_ATOM_LABEL(activeLabelFont, qry_info_str, label_pos, total_brect, drawListLayer2);
-
+    
     return label_pos(1);
 }
 
@@ -570,20 +843,16 @@ double Vis::StructureView2D::createAtomSymbolLabelPrimitive(const Chem::Atom& at
     fontMetrics->setFont(activeLabelFont);
     fontMetrics->getBounds(symbol, total_brect);
 
-    Rectangle2D first_char_brect;
-    fontMetrics->getBounds(symbol[0], first_char_brect);
-
     Math::Vector2D brect_ctr;
-    first_char_brect.getCenter(brect_ctr);
+    total_brect.getCenter(brect_ctr);
 
     std::size_t atom_idx = structure->getAtomIndex(atom);
-
     Math::Vector2D label_pos = outputAtomCoords[atom_idx] - brect_ctr;
 
     TextLabelPrimitive2D* label;
 
     CREATE_ATOM_LABEL(activeLabelFont, symbol, label_pos, total_brect, drawListLayer2);
-
+    
     return label_pos(1);
 }
 
@@ -2592,7 +2861,7 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
         diff = outputAtomCoords[i] - brect_ctr;
         congestion_fact += 1.0 / innerProd(diff, diff);
    
-        for (auto & label_brect : atomLabelBounds[i]) {
+        for (auto& label_brect : atomLabelBounds[i]) {
             if (brect.intersectsRectangle(label_brect))
                 congestion_fact += 1000.0;
             
@@ -2616,7 +2885,7 @@ double Vis::StructureView2D::calcCongestionFactor(const Rectangle2D& brect, cons
             congestion_fact += 1.0 / innerProd(diff, diff);
         }
 
-        for (auto & label_brect : bondLabelBounds[i]) {
+        for (auto& label_brect : bondLabelBounds[i]) {
             if (brect.intersectsRectangle(label_brect))
                 congestion_fact += 1000.0;
             
@@ -3089,6 +3358,13 @@ void Vis::StructureView2D::calcOutputStructureBounds()
         std::for_each(bondLabelBounds[i].begin(), bondLabelBounds[i].end(),
                       std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
 
+    Rectangle2D prim_brect;
+
+    for (auto prim : drawListLayer1) {
+        prim->getBounds(prim_brect, 0);
+
+        outputStructureBounds.addRectangle(prim_brect);
+    }
 }
 
 void Vis::StructureView2D::calcOutputAtomCoords()

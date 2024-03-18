@@ -416,6 +416,9 @@ void Vis::CairoRenderer2D::drawEllipse(double x, double y, double width, double 
 
 void Vis::CairoRenderer2D::drawPath(const Path2D& path)
 {
+    if (path.isEmpty())
+        return;
+    
     cairo_fill_rule_t prev_fill_rule = cairo_get_fill_rule(cairoContext.get());
 
     ToCairoPathConverter(path, cairoContext.get());
@@ -428,6 +431,9 @@ void Vis::CairoRenderer2D::drawPath(const Path2D& path)
 
 void Vis::CairoRenderer2D::setClipPath(const Path2D& path)
 {
+    if (path.isEmpty())
+        return;
+
     cairo_fill_rule_t prev_fill_rule = cairo_get_fill_rule(cairoContext.get());
 
     ToCairoPathConverter(path, cairoContext.get());

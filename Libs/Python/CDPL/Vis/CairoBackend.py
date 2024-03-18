@@ -364,6 +364,9 @@ class CairoRenderer2D(Vis.Renderer2D):
         
     def drawPath(self, path):
         "drawPath(CairoRenderer2D self, Vis.Path2D path) -> None :"
+        if path.isEmpty():
+            return
+
         prev_fill_rule = self.__cairoContext.get_fill_rule()
 
         ToCairoPathConverter(path, self.__cairoContext)
@@ -375,6 +378,9 @@ class CairoRenderer2D(Vis.Renderer2D):
 
     def setClipPath(self, path):
         "setClipPath(CairoRenderer2D self, Vis.Path2D path) -> None :"
+        if path.isEmpty():
+            return
+
         prev_fill_rule = self.__cairoContext.get_fill_rule()
 
         ToCairoPathConverter(path, self.__cairoContext)

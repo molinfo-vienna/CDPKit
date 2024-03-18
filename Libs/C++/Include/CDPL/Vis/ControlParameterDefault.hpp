@@ -254,7 +254,7 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(14.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
+             * \brief Default setting (= \c %SizeSpecification(16.0, false, false, true)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification ATOM_HIGHLIGHT_AREA_SIZE;
@@ -266,7 +266,7 @@ namespace CDPL
             extern CDPL_VIS_API const Brush ATOM_HIGHLIGHT_AREA_BRUSH;
 
             /**
-             * \brief Default setting (= \c %Pen(Pen::NO_LINE) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \brief Default setting (= \c %Pen(Color(0.6, 0.6, 0.75)) for the control-parameter Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
@@ -442,7 +442,7 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(10.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
+             * \brief Default setting (= \c %SizeSpecification(12.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_WIDTH.
              * \since 1.2
              */
             extern CDPL_VIS_API const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH;
@@ -454,7 +454,7 @@ namespace CDPL
             extern CDPL_VIS_API const Brush BOND_HIGHLIGHT_AREA_BRUSH;
 
             /**
-             * \brief Default setting (= \c %Pen(Pen::NO_LINE) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
+             * \brief Default setting (= \c %Pen(Color(0.6, 0.6, 0.75)) for the control-parameter Vis::ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
              * \since 1.2
              */
             extern CDPL_VIS_API const Pen BOND_HIGHLIGHT_AREA_OUTLINE_PEN;

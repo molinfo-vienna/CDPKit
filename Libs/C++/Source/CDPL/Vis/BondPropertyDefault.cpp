@@ -57,7 +57,7 @@ namespace CDPL
             const std::string       CUSTOM_LABEL                 = "";
             const bool              HIGHLIGHTED_FLAG             = false;
             const Brush             HIGHLIGHT_AREA_BRUSH         = Brush(Color(0.8, 0.8, 1.0));
-            const Pen               HIGHLIGHT_AREA_OUTLINE_PEN   = Pen(Pen::NO_LINE);
+            const Pen               HIGHLIGHT_AREA_OUTLINE_PEN   = Pen(Color(0.6, 0.6, 0.75));
 
         } // namespace BondPropertyDefault
 

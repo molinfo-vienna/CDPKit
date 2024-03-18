@@ -362,4 +362,3 @@ bool Vis::Line2D::operator!=(const Line2D& line) const
 {
     return !operator==(line);
 }
-
