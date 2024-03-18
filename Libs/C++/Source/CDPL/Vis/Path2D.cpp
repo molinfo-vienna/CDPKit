@@ -176,7 +176,7 @@ void Vis::Path2D::addRectangle(double x, double y, double width, double height)
     moveTo(x, y);
     lineTo(x + width, y);
     lineTo(x + width, y + height);
-    lineTo(y, y + height);
+    lineTo(x, y + height);
     closePath();
 }
 
