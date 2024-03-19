@@ -380,6 +380,17 @@ namespace CDPL
         CDPL_VIS_API bool hasAtomHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearAtomHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr);
+    
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getBreakAtomHighlightAreaOutlineParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setBreakAtomHighlightAreaOutlineParameter(Base::ControlParameterContainer& cntnr, bool brk);
+
+        CDPL_VIS_API bool hasBreakAtomHighlightAreaOutlineParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearBreakAtomHighlightAreaOutlineParameter(Base::ControlParameterContainer& cntnr);
 
         
         CDPL_VIS_API bool getShowExplicitHydrogensParameter(const Base::ControlParameterContainer& cntnr);

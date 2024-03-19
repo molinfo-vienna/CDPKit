@@ -85,7 +85,8 @@ namespace CDPL
             const SizeSpecification& getAtomHighlightAreaSize() const;
             const Brush&             getAtomHighlightAreaBrush() const;
             const Pen&               getAtomHighlightAreaPen() const;
-            
+            bool                     breakAtomHighlightAreaOutline() const;
+
             bool showCarbons() const;
             bool showIsotopes() const;
             bool showCharges() const;
@@ -174,6 +175,7 @@ namespace CDPL
             void setAtomHighlightAreaSize(const SizeSpecification&);
             void setAtomHighlightAreaBrush(const Brush&);
             void setAtomHighlightAreaPen(const Pen&);
+            void breakAtomHighlightAreaOutline(bool);
             
             void showCarbons(bool);
             void showIsotopes(bool);
@@ -244,6 +246,7 @@ namespace CDPL
             SizeSpecification         atomHighlightAreaSize;
             Brush                     atomHighlightAreaBrush;
             Pen                       atomHighlightAreaPen;
+            bool                      breakAtomHighltAreaOutline;
             bool                      showCarbonsFlag;
             bool                      showChargesFlag;
             bool                      showIsotopesFlag;

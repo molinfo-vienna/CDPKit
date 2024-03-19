@@ -85,6 +85,7 @@ namespace CDPL
             const SizeSpecification         ATOM_HIGHLIGHT_AREA_SIZE             = SizeSpecification(16.0, false, false, true);
             const Brush                     ATOM_HIGHLIGHT_AREA_BRUSH            = Brush(Color(0.8, 0.8, 1.0));
             const Pen                       ATOM_HIGHLIGHT_AREA_OUTLINE_PEN      = Pen(Color(0.6, 0.6, 0.75));
+            const bool                      BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE    = false;
             const bool                      SHOW_CARBONS                         = false;
             const bool                      SHOW_EXPLICIT_HYDROGENS              = false;
             const bool                      SHOW_CHARGES                         = true;

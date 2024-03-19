@@ -615,6 +615,17 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
+   
+            /**
+             * \brief Specifies whether or not the drawing of atom highlighting area outlines shall be suspended at incident highlighted bonds.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE will be used.
+             *
+             * \valuetype bool
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE;
 
             /**
              * \brief Specifies whether or not to show explicit hydrogen atoms.

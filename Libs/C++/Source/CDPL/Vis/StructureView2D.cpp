@@ -312,6 +312,9 @@ void Vis::StructureView2D::renderGraphicsPrimitives(Renderer2D& renderer) const
 
     renderer.transform(xform);
 
+    for (auto prim : drawListLayer0)
+        prim->render(renderer);
+
     for (auto prim : drawListLayer1)
         prim->render(renderer);
 
@@ -332,7 +335,7 @@ void Vis::StructureView2D::initTextLabelBounds()
         atomLabelBounds.resize(num_atoms);
 
     std::for_each(atomLabelBounds.begin(), atomLabelBounds.begin() + num_atoms,
-                  [](auto& l) { l.clear(); });
+                  [](RectangleList& l) { l.clear(); });
 
     atomCoreLabelCounts.assign(num_atoms, 0);
     
@@ -342,7 +345,7 @@ void Vis::StructureView2D::initTextLabelBounds()
         bondLabelBounds.resize(num_bonds);
 
     std::for_each(bondLabelBounds.begin(), bondLabelBounds.begin() + num_bonds,
-                  [](auto& l) { l.clear(); });
+                  [](RectangleList& l) { l.clear(); });
 
     ctrLabeledBonds.resize(num_bonds);
     ctrLabeledBonds.reset();
@@ -362,7 +365,7 @@ void Vis::StructureView2D::createHighlightingPrimitives()
         highlightedBondLists.resize(num_atoms);
     
     std::for_each(highlightedBondLists.begin(), highlightedBondLists.begin() + num_atoms,
-                  [](auto& l) { l.clear(); });
+                  [](UIntDoublePairList& l) { l.clear(); });
 
     atomHighlightAreaRadii.assign(num_atoms, 0.0);
     
@@ -393,7 +396,8 @@ void Vis::StructureView2D::createHighlightingPrimitives()
 
         for (auto it = highlightedBondLists.begin(), end = highlightedBondLists.begin() + num_atoms; it != end; ++it)
             if (it->size() > 1)
-                std::sort(it->begin(), it->end(), [](auto& p1, auto& p2) { return (p1.second < p2.second); });
+                std::sort(it->begin(), it->end(), [](const UIntDoublePair& p1, const UIntDoublePair& p2) { 
+                        return (p1.second < p2.second); });
     }
     
     auto ol_width = getHighlightAreaOutlineWidth();
@@ -411,7 +415,7 @@ void Vis::StructureView2D::createAtomHighlightingPrimitives(double ol_width, dou
 {
     for (auto& atom : structure->getAtoms())
          if (getHighlightedFlag(atom))
-            createAtomHighlightingPrimitives(atom, ol_width, atom_area_size, bond_area_width);
+             createAtomHighlightingPrimitives(atom, ol_width, atom_area_size, bond_area_width);
 }
 
 void Vis::StructureView2D::createAtomHighlightingPrimitives(const Chem::Atom& atom, double ol_width, double atom_area_size, double bond_area_width)
@@ -458,7 +462,9 @@ void Vis::StructureView2D::createAtomHighlightingPrimitives(const Chem::Atom& at
 
     atomHighlightAreaRadii[atom_idx] = atom_area_size * 0.5;
     
-    if (inc_bonds.empty() || pen.getLineStyle() == Pen::NO_LINE || activePen.getLineStyle() == Pen::NO_LINE) {
+    if (!parameters->breakAtomHighlightAreaOutline() || inc_bonds.empty() || pen.getLineStyle() == Pen::NO_LINE ||
+        activePen.getLineStyle() == Pen::NO_LINE) {
+        
         auto prim = allocPathPrimitive(getHighlightAreaBrush(atom), pen.getLineStyle() != Pen::NO_LINE ? activePen : pen);
 
         prim->addEllipse(atom_pos, atom_area_size, atom_area_size);
@@ -575,16 +581,16 @@ void Vis::StructureView2D::createBondHighlightingPrimitives(const Chem::Bond& bo
     if (atomHighlightAreaRadii[atom1_idx] <= 0.0 && atomHighlightAreaRadii[atom2_idx] <= 0.0 &&
         inc_bonds1.size() == 1 && inc_bonds2.size() == 1) {
 
-        drawListLayer1.push_back(prim);
+        drawListLayer0.push_back(prim);
         return;
     }
 
-    perp_offs *= (ol_width + bond_area_width) / bond_area_width;
+    perp_offs *= (ol_width * 1.1 + bond_area_width) / bond_area_width;
 
     Math::Vector2D dir_offs;
     bond_line.getDirection(dir_offs);
 
-    dir_offs *= (ol_width + bond_area_width) * 0.5;
+    dir_offs *= (ol_width * 1.1 + bond_area_width) * 0.5;
 
     auto clip_path = allocClipPathPrimitive();
 
@@ -632,9 +638,9 @@ void Vis::StructureView2D::createBondHighlightingPrimitives(const Chem::Bond& bo
             clip_path->addEllipse(atom_pos, atom_hl_rad * 2, atom_hl_rad * 2);
     }
 
-    drawListLayer1.push_back(clip_path);
-    drawListLayer1.push_back(prim);
-    drawListLayer1.push_back(allocClipPathPrimitive());
+    drawListLayer0.push_back(clip_path);
+    drawListLayer0.push_back(prim);
+    drawListLayer0.push_back(allocClipPathPrimitive());
 }
 
 void Vis::StructureView2D::createAtomPrimitives()
@@ -3360,6 +3366,12 @@ void Vis::StructureView2D::calcOutputStructureBounds()
 
     Rectangle2D prim_brect;
 
+    for (auto prim : drawListLayer0) {
+        prim->getBounds(prim_brect, 0);
+
+        outputStructureBounds.addRectangle(prim_brect);
+    }
+
     for (auto prim : drawListLayer1) {
         prim->getBounds(prim_brect, 0);
 
@@ -4041,6 +4053,7 @@ void Vis::StructureView2D::freeGraphicsPrimitives()
     pathCache.putAll();
     clipPathCache.putAll();
 
+    drawListLayer0.clear();
     drawListLayer1.clear();
     drawListLayer2.clear();
     drawListLayer3.clear();

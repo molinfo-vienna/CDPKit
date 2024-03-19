@@ -957,6 +957,7 @@ namespace CDPL
             Util::BitSet                 ctrLabeledBonds;
             UIntDoublePairListArray      highlightedBondLists;
             DoubleArray                  atomHighlightAreaRadii;
+            GraphicsPrimitiveList        drawListLayer0;
             GraphicsPrimitiveList        drawListLayer1;
             GraphicsPrimitiveList        drawListLayer2;
             GraphicsPrimitiveList        drawListLayer3;

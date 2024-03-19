@@ -272,6 +272,12 @@ namespace CDPL
             extern CDPL_VIS_API const Pen ATOM_HIGHLIGHT_AREA_OUTLINE_PEN;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const bool BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE;
+
+            /**
              * \brief Default setting (= \c false) for the control-parameter Vis::ControlParameter::SHOW_CARBONS.
              */
             extern CDPL_VIS_API const bool SHOW_CARBONS;

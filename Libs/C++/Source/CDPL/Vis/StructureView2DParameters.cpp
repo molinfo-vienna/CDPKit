@@ -61,6 +61,7 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     atomHighlightAreaSize(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_SIZE),
     atomHighlightAreaBrush(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_BRUSH),
     atomHighlightAreaPen(ControlParameterDefault::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN),
+    breakAtomHighltAreaOutline(ControlParameterDefault::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE),
     showCarbonsFlag(ControlParameterDefault::SHOW_CARBONS),
     showChargesFlag(ControlParameterDefault::SHOW_CHARGES),
     showIsotopesFlag(ControlParameterDefault::SHOW_ISOTOPES),
@@ -237,6 +238,11 @@ const Vis::Brush& Vis::StructureView2DParameters::getAtomHighlightAreaBrush() co
 const Vis::Pen& Vis::StructureView2DParameters::getAtomHighlightAreaPen() const
 {
     return atomHighlightAreaPen;
+}
+
+bool Vis::StructureView2DParameters::breakAtomHighlightAreaOutline() const
+{
+    return breakAtomHighltAreaOutline;
 }
 
 bool Vis::StructureView2DParameters::showCarbons() const
@@ -518,6 +524,7 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_SIZE));
     parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH));
     parameterChanged(ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN, view.getParameter(ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN));
+    parameterChanged(ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE, view.getParameter(ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE));
     parameterChanged(ControlParameter::SHOW_CARBONS, view.getParameter(ControlParameter::SHOW_CARBONS));
     parameterChanged(ControlParameter::SHOW_CHARGES, view.getParameter(ControlParameter::SHOW_CHARGES));
     parameterChanged(ControlParameter::SHOW_ISOTOPES, view.getParameter(ControlParameter::SHOW_ISOTOPES));
@@ -685,6 +692,11 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
 
     if (key == ControlParameter::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN) {
         setAtomHighlightAreaPen(val.isEmpty() ? ATOM_HIGHLIGHT_AREA_OUTLINE_PEN : val.getData<Pen>());
+        return;
+    }
+
+    if (key == ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE) {
+        breakAtomHighlightAreaOutline(val.isEmpty() ? BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE : val.getData<bool>());
         return;
     }
 
@@ -1072,6 +1084,14 @@ void Vis::StructureView2DParameters::setAtomHighlightAreaPen(const Pen& pen)
 {
     if (atomHighlightAreaPen != pen) {
         atomHighlightAreaPen = pen;
+        graphicsAttributeChangedFlag = true;
+    }
+}
+
+void Vis::StructureView2DParameters::breakAtomHighlightAreaOutline(bool brk)
+{
+    if (breakAtomHighltAreaOutline != brk) {
+        breakAtomHighltAreaOutline = brk;
         graphicsAttributeChangedFlag = true;
     }
 }

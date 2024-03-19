@@ -120,6 +120,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, AtomHighlightAreaSize)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Brush&, AtomHighlightAreaBrush)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, AtomHighlightAreaOutlinePen)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, BreakAtomHighlightAreaOutline)
     
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, HighlightAreaOutlineWidth)
     
@@ -216,6 +217,7 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaSize, size)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaBrush, brush)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(AtomHighlightAreaOutlinePen, pen)
+    EXPORT_CONTROL_PARAM_FUNCS(BreakAtomHighlightAreaOutline, brk)
 
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(HighlightAreaOutlineWidth, width)
         
