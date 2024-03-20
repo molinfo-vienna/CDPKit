@@ -208,6 +208,13 @@ class ControlParameterDefault(Boost.Python.instance):
     ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
 
     ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE.
+    # 
+    # \since 1.2
+    # 
+    BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = False
+
+    ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(1.0, False, False, True)) for the control-parameter Vis.ControlParameter.RADICAL_ELECTRON_DOT_SIZE.
     # 
     RADICAL_ELECTRON_DOT_SIZE = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
@@ -384,7 +391,7 @@ class ControlParameterDefault(Boost.Python.instance):
     # 
     # \since 1.1
     # 
-    ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+    ATOM_CONFIGURATION_LABEL_FONT = Font(family='', size=8, bold=False, italic=True, ulined=False, olined=False, strkdout=False, fxdpitch=False)
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(8.0, False, False, True)) for the control-parameter Vis.ControlParameter.ATOM_CONFIGURATION_LABEL_SIZE.

@@ -139,6 +139,15 @@ class ControlParameter(Boost.Python.instance):
     ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = CDPL.Base.LookupKey('ATOM_HIGHLIGHT_AREA_OUTLINE_PEN')
 
     ##
+    # \brief Specifies whether or not the drawing of atom highlighting area outlines shall be suspended at incident highlighted bonds.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE will be used.
+    # 
+    # <b>Value Type:</b> bool \since 1.2
+    # 
+    BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = CDPL.Base.LookupKey('BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE')
+
+    ##
     # \brief Specifies the color with which the drawing area is erased before rendering any graphical primitives.
     # 
     # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render. If the control-parameter is left unspecified or Vis.Color.TRANSPARENT, the drawing area won't be erased.

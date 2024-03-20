@@ -77,6 +77,33 @@ def setReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer, style:
 # \brief 
 # \param cntnr 
 #
+def clearBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param brk 
+#
+def setBreakAtomHighlightAreaOutlineParameter(cntnr: Base.ControlParameterContainer, brk: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearAtomHighlightAreaSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
