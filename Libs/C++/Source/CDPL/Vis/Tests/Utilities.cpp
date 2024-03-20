@@ -136,10 +136,12 @@ void Vis::initMolecule(Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
     
     perceiveAtomStereoCenters(mol, false, false);
-    perceiveBondStereoCenters(mol, false, false);
+    perceiveBondStereoCenters(mol, false, false, true, true, 0);
     calcAtomStereoDescriptors(mol, false);
     calcBondStereoDescriptors(mol, false);
-
+    calcAtomCIPConfigurations(mol, false);
+    calcBondCIPConfigurations(mol, false);
+    
     generateMatchExpressionStrings(mol, false);
 }
 

@@ -45,6 +45,7 @@
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/AtomProperty.hpp"
 #include "CDPL/Vis/AtomFunctions.hpp"
+#include "CDPL/Vis/BondFunctions.hpp"
 #include "CDPL/Vis/BondProperty.hpp"
 #include "CDPL/Vis/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -1279,8 +1280,456 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
 
     dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::SHOW_BOND_QUERY_INFOS = false");
 
+//----
+
+    view.clearParameters();
+
+    view.setParameter(ControlParameter::SIZE_ADJUSTMENT, SizeAdjustment::BEST_FIT);
+    view.setParameter(ControlParameter::VIEWPORT, Rectangle2D(50.0, 50.0, 450.0, 450.0));
+    
+    std::ifstream is2(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestMolData.jme").c_str());
+
+    BOOST_CHECK(is2);
+    BOOST_CHECK(JMEMoleculeReader(is2).read(mol));
+
+    initMolecule(mol);
+
+    view.setStructure(&mol);
+    
+    for (auto& atom : mol.getAtoms())
+        setHighlightedFlag(atom, true);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "Parameters cleared; Structure renewed; Atoms highlighted; ControlParameter::VIEWPORT = (50.0, 50.0, 450.0, 450.0); ControlParameter::SIZE_ADJUSTMENT = BEST_FIT");
+
+//----
+
+    for (auto& bond : mol.getBonds())
+        setHighlightedFlag(bond, true);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "Bonds highlighted");
+
+//----
+
+    view.setParameter(ControlParameter::ENABLE_ATOM_HIGHLIGHTING, false);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ENABLE_ATOM_HIGHLIGHTING = false");
+
+//----
+
+    view.setParameter(ControlParameter::ENABLE_BOND_HIGHLIGHTING, false);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ENABLE_BOND_HIGHLIGHTING = false");
+
+//----
+
+    view.setParameter(ControlParameter::ENABLE_BOND_HIGHLIGHTING, true);
+    view.setParameter(ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Pen::NO_LINE));
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ENABLE_BOND_HIGHLIGHTING = true; ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Pen::NO_LINE)");
+
+//----
+
+    mol.getBond(0).setProperty(Vis::BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Color::RED, 1.1, Pen::DASH_LINE));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "Bond (0) BondProperty::HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color::RED, 1.1, Pen::DASH_LINE)");
+
+//----
+
+    mol.getBond(1).setProperty(Vis::BondProperty::HIGHLIGHT_AREA_BRUSH, Brush(Color::GREEN));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "Bond (1) BondProperty::HIGHLIGHT_AREA_BRUSH = Brush(Color::GREEN)");
+
+//----
+
+    view.removeParameter(ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN);
+    mol.setProperty(MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Color::CYAN));
+    
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_HIGHLIGHT_AREA_OUTLINE_PEN = default; MolecularGraphProperty::BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color::CYAN)");
+
+//----
+
+    view.removeParameter(ControlParameter::ENABLE_ATOM_HIGHLIGHTING);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ENABLE_ATOM_HIGHLIGHTING = default");
+
+//----
+
+    mol.getAtom(2).setProperty(Vis::AtomProperty::HIGHLIGHT_AREA_BRUSH, Brush(Color(1.0, 0.9, 0.9)));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "Atom (2) AtomProperty::HIGHLIGHT_AREA_BRUSH = Brush(Color(1.0, 0.9, 0.9))");
+
+
+//----
+
+    mol.getAtom(4).setProperty(Vis::AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Color(0.0, 0.9, 0.9)));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "Atom (4) AtomProperty::HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color(0.0, 0.9, 0.9))");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Pen::NO_LINE));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Pen::NO_LINE)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH, Brush(Color(0.9, 1.0, 0.9)));
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_BRUSH = Brush(Color(0.9, 1.0, 0.9))");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN, Pen(Color::BLUE));
+    view.setParameter(ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE, true);
+
+    view.setStructure(&mol);
+  
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color::BLUE); ControlParameter::BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = true");
+    
+//----
+
+    view.setParameter(ControlParameter::ENABLE_ATOM_HIGHLIGHTING, false);
+    view.setParameter(ControlParameter::ENABLE_BOND_HIGHLIGHTING, false);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ENABLE_ATOM_HIGHLIGHTING = false; ControlParameter::ENABLE_BOND_HIGHLIGHTING = false");
+
+//----
+
+    view.setParameter(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, true);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS = true");
+
+//----
+
+    view.setParameter(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS, true);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::SHOW_BOND_CONFIGURATION_LABELS = true");
+
+//----
+
+    view.setParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, SizeSpecification(5.0, false, false, true));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE = SizeSpecification(5.0, false, false, true)");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, SizeSpecification(5.0, false, false, true));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(5.0, false, false, true)");
+
+//----
+
+    view.setParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR, Color::MAGENTA);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR = Color::MAGENTA");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CONFIGURATION_LABEL_COLOR, Color::BLUE);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CONFIGURATION_LABEL_COLOR = Color::BLUE");
+
+//----
+
+    view.setParameter(ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, Font("", 0.0, true, false));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CONFIGURATION_LABEL_FONT = Font(\"\", 0.0, true, false)");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CONFIGURATION_LABEL_FONT, Font("", 1.0, false, false));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CONFIGURATION_LABEL_FONT = Font(\"\", 1.0, false, false)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE, SizeSpecification(10.0, false, false, true));
+
+    view.setStructure(&mol);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_SIZE = SizeSpecification(10.0, false, false, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE, SizeSpecification(10.0, false, false, true));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE = SizeSpecification(5.0, false, false, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR, Color::GREEN);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_COLOR = Color::GREEN");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR, Color::RED);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR = Color::RED");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT, Font("", 2.0, true, true));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CONFIGURATION_LABEL_FONT = Font(\"\", 2.0, true, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT, Font("", 3.0, true, false));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CONFIGURATION_LABEL_FONT = Font(\"\", 3.0, true, false)");
+
+//----
+
+    for (auto& a: mol.getAtoms())
+        a.setProperty(Vis::AtomProperty::CONFIGURATION_LABEL_SIZE, SizeSpecification(8.0, false, false, true));
+
+    view.setStructure(&mol);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "AtomProperty::CONFIGURATION_LABEL_SIZE = SizeSpecification(8.0, false, false, true)");
+
+//----
+
+    for (auto& b: mol.getBonds())
+        b.setProperty(Vis::BondProperty::CONFIGURATION_LABEL_SIZE, SizeSpecification(8.0, false, false, true));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "BondProperty::CONFIGURATION_LABEL_SIZE = SizeSpecification(8.0, false, false, true)");
+
+//----
+
+    for (auto& a: mol.getAtoms())
+        a.setProperty(Vis::AtomProperty::CONFIGURATION_LABEL_COLOR, Color::BLUE);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "AtomProperty::CONFIGURATION_LABEL_COLOR = Color::BLUE");
+
+//----
+
+    for (auto& b: mol.getBonds())
+        b.setProperty(Vis::BondProperty::CONFIGURATION_LABEL_COLOR, Color::GRAY);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "BondProperty::CONFIGURATION_LABEL_COLOR = Color::GRAY");
+    
+//----
+
+    for (auto& a: mol.getAtoms())
+        a.setProperty(Vis::AtomProperty::CONFIGURATION_LABEL_FONT, Font("", 12.0, false, false));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "AtomProperty::CONFIGURATION_LABEL_FONT, Font("", 12.0, false, false)");
+
+//----
+
+    for (auto& b: mol.getBonds())
+        b.setProperty(Vis::BondProperty::CONFIGURATION_LABEL_FONT, Font("", 5.0, true, true));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "BondProperty::CONFIGURATION_LABEL_FONT = Font("", 5.0, true, true)");
+
+//----
+
+    for (auto& a: mol.getAtoms())
+        a.setProperty(Vis::AtomProperty::CUSTOM_LABEL, 'a' + std::to_string(a.getIndex()));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "Atoms labeled");
+
+//----
+
+    for (auto& b: mol.getBonds())
+        b.setProperty(Vis::BondProperty::CUSTOM_LABEL, 'b' + std::to_string(b.getIndex()));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "Bonds labeled");
+
+//----
+
+    view.setParameter(ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS, false);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS = false");
+
+//----
+
+    view.removeParameter(ControlParameter::SHOW_BOND_CONFIGURATION_LABELS);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::SHOW_BOND_CONFIGURATION_LABELS = default");
+
+//#############
+
+    mol.getBond(5).setProperty(Chem::BondProperty::MATCH_EXPRESSION_STRING, std::string("="));
+    view.setParameter(ControlParameter::ATOM_CUSTOM_LABEL_SIZE, SizeSpecification(5.0, false, false, true));
+    
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CUSTOM_LABEL_SIZE = SizeSpecification(5.0, false, false, true); Bond (5) BondProperty::MATCH_EXPRESSION_STRING = \"=\"");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CUSTOM_LABEL_SIZE, SizeSpecification(5.0, false, false, true));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CUSTOM_LABEL_SIZE = SizeSpecification(5.0, false, false, true)");
+
+//----
+
+    view.setParameter(ControlParameter::ATOM_CUSTOM_LABEL_COLOR, Color::MAGENTA);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CUSTOM_LABEL_COLOR = Color::MAGENTA");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CUSTOM_LABEL_COLOR, Color::BLUE);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CUSTOM_LABEL_COLOR = Color::BLUE");
+
+//----
+
+    view.setParameter(ControlParameter::ATOM_CUSTOM_LABEL_FONT, Font("", 0.0, true, false));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::ATOM_CUSTOM_LABEL_FONT = Font(\"\", 0.0, true, false)");
+
+//----
+
+    view.setParameter(ControlParameter::BOND_CUSTOM_LABEL_FONT, Font("", 1.0, true, false));
+
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BOND_CUSTOM_LABEL_FONT = Font(\"\", 1.0, true, false)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CUSTOM_LABEL_SIZE, SizeSpecification(10.0, false, false, true));
+
+    view.setStructure(&mol);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CUSTOM_LABEL_SIZE = SizeSpecification(10.0, false, false, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE, SizeSpecification(10.0, false, false, true));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE = SizeSpecification(10.0, false, false, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CUSTOM_LABEL_COLOR, Color::GREEN);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CUSTOM_LABEL_COLOR = Color::GREEN");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR, Color::RED);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR = Color::RED");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::ATOM_CUSTOM_LABEL_FONT, Font("", 2.0, true, true));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_CUSTOM_LABEL_FONT = Font(\"\", 2.0, true, true)");
+
+//----
+
+    mol.setProperty(MolecularGraphProperty::BOND_CUSTOM_LABEL_FONT, Font("", 3.0, false, false));
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::BOND_CUSTOM_LABEL_FONT = Font(\"\", 3.0, false, false)");
+
+//----
+
+    for (std::size_t i = 0; i < mol.getNumAtoms() / 2; i++)
+        mol.getAtom(i).setProperty(Vis::AtomProperty::CUSTOM_LABEL_SIZE, SizeSpecification(8.0, false, false, true));
+    
+    view.setStructure(&mol);
+    
+    dumpImage(view, "StructureView2DTest_", img_id, "Atom (0..#A/2) AtomProperty::CUSTOM_LABEL_SIZE = SizeSpecification(8.0, false, false, true)");
+
+//----
+
+    for (std::size_t i = 0; i < mol.getNumBonds() / 2; i++)
+        mol.getBond(i).setProperty(Vis::BondProperty::CUSTOM_LABEL_SIZE, SizeSpecification(8.0, false, false, true));
+    
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "Bond (0..#B/2) BondProperty::CUSTOM_LABEL_SIZE = SizeSpecification(8.0, false, false, true)");
+
+//----
+
+    for (std::size_t i = 0; i < mol.getNumAtoms() / 2; i++)
+        mol.getAtom(i).setProperty(Vis::AtomProperty::CUSTOM_LABEL_COLOR, Color::BLUE);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "Atom (0..#A/2) AtomProperty::CUSTOM_LABEL_COLOR = Color::BLUE");
+
+//----
+
+    for (std::size_t i = 0; i < mol.getNumBonds() / 2; i++)
+        mol.getBond(i).setProperty(Vis::BondProperty::CUSTOM_LABEL_COLOR, Color::GRAY);
+
+    view.setStructure(&mol);
+
+    dumpImage(view, "StructureView2DTest_", img_id, "Bond (0..#B/2) BondProperty::CUSTOM_LABEL_COLOR = Color::GRAY");
+    
+//----
+
+    for (std::size_t i = 0; i < mol.getNumAtoms() / 2; i++)
+        mol.getAtom(i).setProperty(Vis::AtomProperty::CUSTOM_LABEL_FONT, Font("", 12.0, false, false));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "Atom (0..#A/2) AtomProperty::CUSTOM_LABEL_FONT, Font("", 12.0, false, false)");
+
+//----
+
+    for (std::size_t i = 0; i < mol.getNumBonds() / 2; i++)
+        mol.getBond(i).setProperty(Vis::BondProperty::CUSTOM_LABEL_FONT, Font("", 5.0, true, true));
+
+    view.setStructure(&mol);
+ 
+    dumpImage(view, "StructureView2DTest_", img_id, "Bond (0..#B/2) BondProperty::CUSTOM_LABEL_FONT = Font("", 5.0, true, true)");
+    
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
-
 }
-
