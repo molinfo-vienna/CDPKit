@@ -1439,16 +1439,16 @@ void Vis::StructureView2D::createBondLabelPrimitives(const Chem::Bond& bond, con
 
     if (parameters->showBondQueryInfos())
         createBondQueryInfoLabelPrimitive(bond, ctr_line, asym_shift_dir, baseline);
-
+  
+    if (parameters->showBondCustomLabels())
+        createBondCustomLabelPrimitive(bond, ctr_line, asym_shift_dir);
+    
     auto bond_idx = structure->getBondIndex(bond);
     
     ctrLabeledBonds.set(bond_idx, !bondLabelBounds[bond_idx].empty());
-    
+  
     if (parameters->showBondConfigLabels())
         createBondConfigLabelPrimitive(bond, ctr_line, asym_shift_dir);
-    
-    if (parameters->showBondCustomLabels())
-        createBondCustomLabelPrimitive(bond, ctr_line, asym_shift_dir);
 }
 
 double Vis::StructureView2D::createBondRxnInfoLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
@@ -1617,6 +1617,119 @@ void Vis::StructureView2D::createBondQueryInfoLabelPrimitive(const Chem::Bond& b
     total_brect.addRectangle(label_brect);
 }
 
+void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
+{
+    const std::string& label_str = getCustomLabel(bond);
+
+    if (label_str.empty())
+        return;
+
+    TextLabelPrimitive2D* label;
+    std::size_t bond_idx = structure->getBondIndex(bond);
+    
+    activePen.setColor(getCustomLabelColor(bond));
+
+    setupCustomLabelFont(bond);
+
+    fontMetrics->setFont(activeLabelFont);
+    
+    if (bondLabelBounds[bond_idx].empty()) {
+        Rectangle2D label_brect;
+        
+        setupLabelMargin(bond);
+
+        Math::Vector2D bond_ctr_pos;
+        ctr_line.getCenter(bond_ctr_pos);
+
+        if (asym_shift_dir != 0) {
+            Math::Vector2D perp_line_dir;
+            ctr_line.getCCWPerpDirection(perp_line_dir);
+
+            bond_ctr_pos -= perp_line_dir * getLineSpacing(bond) * 0.5 * asym_shift_dir; 
+        }
+
+        fontMetrics->getBounds(label_str, label_brect);
+
+        Math::Vector2D brect_ctr;
+        label_brect.getCenter(brect_ctr);
+
+        Math::Vector2D label_pos = bond_ctr_pos - brect_ctr;
+
+        Rectangle2D test_brect = label_brect;
+        test_brect.translate(label_pos);
+    
+        double lowest_cong_fact = calcCongestionFactor(test_brect, bond);
+
+        Rectangle2D first_char_brect;
+        fontMetrics->getBounds(label_str[0], first_char_brect);
+
+        first_char_brect.getCenter(brect_ctr);
+
+        Math::Vector2D test_pos;
+
+        test_pos(0) = bond_ctr_pos(0) - brect_ctr(0);
+        test_pos(1) = label_pos(1);
+
+        test_brect = label_brect;
+        test_brect.translate(test_pos);
+
+        double cong_fact = calcCongestionFactor(test_brect, bond);
+
+        if (cong_fact < lowest_cong_fact) {
+            label_pos = test_pos;
+            lowest_cong_fact = cong_fact;
+        }
+    
+        test_pos(0) = bond_ctr_pos(0) - label_brect.getMax()(0) + fontMetrics->getWidth(*label_str.rbegin()) * 0.5;
+
+        test_brect = label_brect;
+        test_brect.translate(test_pos);
+
+        if (calcCongestionFactor(test_brect, bond) < lowest_cong_fact)
+            label_pos = test_pos;
+
+        CREATE_BOND_LABEL(label_str, label_pos, label_brect, drawListLayer2);
+        
+        bondLabelBounds[bond_idx].push_back(label_brect);
+
+        return;
+    }
+
+    Rectangle2D& total_brect = bondLabelBounds[bond_idx].front();
+    Rectangle2D label_brect;
+    
+    fontMetrics->getBounds(label_str, label_brect);
+
+    Math::Vector2D brect_ctr;
+
+    label_brect.getCenter(brect_ctr);
+    
+    double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
+    Math::Vector2D right_pos;
+    Math::Vector2D left_pos;
+
+    right_pos(0) = total_brect.getMax()(0) - label_brect.getMin()(0);
+    right_pos(1) = y_pos;
+
+    left_pos(0) = total_brect.getMin()(0) - label_brect.getMax()(0);
+    left_pos(1) = y_pos;
+
+    Rectangle2D left_brect = label_brect;
+    Rectangle2D right_brect = label_brect;
+
+    right_brect.translate(right_pos);
+    left_brect.translate(left_pos);
+    
+    if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
+        CREATE_BOND_LABEL(label_str, left_pos, label_brect, drawListLayer2);
+
+    } else {
+        CREATE_BOND_LABEL(label_str, right_pos, label_brect, drawListLayer2);
+    }
+
+    total_brect.addRectangle(label_brect);
+}
+
 void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, 
                                                           int asym_shift_dir)
 {
@@ -1702,113 +1815,6 @@ void Vis::StructureView2D::createBondConfigLabelPrimitive(const Chem::Bond& bond
 
     } else {
         CREATE_BOND_LABEL(std::string{config_label}, right_pos, label_brect, drawListLayer3);
-    }
-
-    total_brect.addRectangle(label_brect);
-}
-
-void Vis::StructureView2D::createBondCustomLabelPrimitive(const Chem::Bond& bond, const Line2D& ctr_line, int asym_shift_dir)
-{
-    const std::string& label_str = getCustomLabel(bond);
-
-    if (label_str.empty())
-        return;
-
-    Rectangle2D label_brect;
-    TextLabelPrimitive2D* label;
-    
-    activePen.setColor(getCustomLabelColor(bond));
-
-    setupCustomLabelFont(bond);
-
-    fontMetrics->setFont(activeLabelFont);
-    fontMetrics->getBounds(label_str, label_brect);
-
-    Math::Vector2D brect_ctr;
-
-    label_brect.getCenter(brect_ctr);
-
-    std::size_t bond_idx = structure->getBondIndex(bond);
-    
-    if (!ctrLabeledBonds.test(bond_idx)) {
-        Math::Vector2D bond_ctr_pos;
-        ctr_line.getCenter(bond_ctr_pos);
-
-        Math::Vector2D perp_transl;
-        ctr_line.getCCWPerpDirection(perp_transl);
-
-        double line_spacing = getLineSpacing(bond);
-        
-        if (asym_shift_dir != 0)
-            bond_ctr_pos -= perp_transl * line_spacing * 0.5 * asym_shift_dir;
-
-        perp_transl *= line_spacing * 1.5 + activeLabelMargin;
-
-        Math::Vector2D test_pos1[] = {
-            { bond_ctr_pos(0) + perp_transl(0), bond_ctr_pos(1) + perp_transl(1) },
-            { bond_ctr_pos(0) - perp_transl(0), bond_ctr_pos(1) - perp_transl(1) }
-        };
-
-        Math::Vector2D test_pos2[] = {
-            { label_brect.getMin()(0), label_brect.getMin()(1) },
-            { brect_ctr(0),            label_brect.getMin()(1) },
-            { label_brect.getMax()(0), label_brect.getMin()(1) },
-            { label_brect.getMax()(0), brect_ctr(1)            },
-            { label_brect.getMax()(0), label_brect.getMax()(1) },
-            { brect_ctr(0),            label_brect.getMax()(1) },
-            { label_brect.getMin()(0), label_brect.getMax()(1) },
-            { label_brect.getMin()(0), brect_ctr(1)            }
-        };
-
-        Math::Vector2D label_pos;
-        double lowest_cong_fact = 0.0;
-
-        for (std::size_t i = 0; i < 2; i++) {
-            for (std::size_t j = 0; j < 8; j++) {
-                Math::Vector2D transl(test_pos1[i] - test_pos2[j]);
-                Rectangle2D test_brect(label_brect);
-
-                test_brect.translate(transl);
-
-                double cong_fact = calcCongestionFactor(test_brect, bond);
-
-                if ((i == 0 && j == 0) || cong_fact < lowest_cong_fact) {
-                    label_pos = transl;
-                    lowest_cong_fact = cong_fact;
-                }
-            }
-        }
-
-        CREATE_BOND_LABEL(label_str, label_pos, label_brect, drawListLayer3);
-
-        bondLabelBounds[bond_idx].push_back(label_brect);
-   
-        return;
-    }
-
-    Rectangle2D& total_brect = bondLabelBounds[bond_idx].front();
-
-    double y_pos = (total_brect.getMin()(1) + total_brect.getMax()(1)) * 0.5 - brect_ctr(1);
-    Math::Vector2D right_pos;
-    Math::Vector2D left_pos;
-
-    right_pos(0) = total_brect.getMax()(0) - label_brect.getMin()(0);
-    right_pos(1) = y_pos;
-
-    left_pos(0) = total_brect.getMin()(0) - label_brect.getMax()(0);
-    left_pos(1) = y_pos;
-
-    Rectangle2D left_brect = label_brect;
-    Rectangle2D right_brect = label_brect;
-
-    right_brect.translate(right_pos);
-    left_brect.translate(left_pos);
-    
-    if (calcCongestionFactor(left_brect, bond) < calcCongestionFactor(right_brect, bond)) {
-        CREATE_BOND_LABEL(label_str, left_pos, label_brect, drawListLayer3);
-
-    } else {
-        CREATE_BOND_LABEL(label_str, right_pos, label_brect, drawListLayer3);
     }
 
     total_brect.addRectangle(label_brect);
@@ -3602,7 +3608,7 @@ const Vis::Font& Vis::StructureView2D::getConfigLabelFont(const Chem::Bond& bond
 const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Bond& bond) const
 {
     if (hasCustomLabelFont(bond))
-        return getCustomLabelFont(bond);
+        return Vis::getCustomLabelFont(bond);
 
     if (hasBondCustomLabelFont(*structure))
         return getBondCustomLabelFont(*structure);
@@ -3624,7 +3630,7 @@ const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Bond& bo
 const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Bond& bond) const
 {
     if (hasCustomLabelColor(bond))
-        return getCustomLabelColor(bond);
+        return Vis::getCustomLabelColor(bond);
 
     if (hasBondCustomLabelColor(*structure))
         return getBondCustomLabelColor(*structure);
@@ -3635,7 +3641,7 @@ const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Bond& bo
 const Vis::Brush& Vis::StructureView2D::getHighlightAreaBrush(const Chem::Bond& bond) const
 {
     if (hasHighlightAreaBrush(bond))
-        return getHighlightAreaBrush(bond);
+        return Vis::getHighlightAreaBrush(bond);
 
     if (hasBondHighlightAreaBrush(*structure))
         return getBondHighlightAreaBrush(*structure);
@@ -3790,7 +3796,7 @@ const Vis::Color& Vis::StructureView2D::getConfigLabelColor(const Chem::Atom& at
 const Vis::Color& Vis::StructureView2D::getCustomLabelColor(const Chem::Atom& atom) const
 {
     if (hasCustomLabelColor(atom))
-        return getCustomLabelColor(atom);
+        return Vis::getCustomLabelColor(atom);
 
     if (hasAtomCustomLabelColor(*structure))
         return getAtomCustomLabelColor(*structure);
@@ -3834,7 +3840,7 @@ const Vis::Font& Vis::StructureView2D::getConfigLabelFont(const Chem::Atom& atom
 const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Atom& atom) const
 {
     if (hasCustomLabelFont(atom))
-        return getCustomLabelFont(atom);
+        return Vis::getCustomLabelFont(atom);
 
     if (hasAtomCustomLabelFont(*structure))
         return getAtomCustomLabelFont(*structure);
@@ -3845,7 +3851,7 @@ const Vis::Font& Vis::StructureView2D::getCustomLabelFont(const Chem::Atom& atom
 const Vis::Brush& Vis::StructureView2D::getHighlightAreaBrush(const Chem::Atom& atom) const
 {
     if (hasHighlightAreaBrush(atom))
-        return getHighlightAreaBrush(atom);
+        return Vis::getHighlightAreaBrush(atom);
 
     if (hasAtomHighlightAreaBrush(*structure))
         return getAtomHighlightAreaBrush(*structure);
@@ -3856,7 +3862,7 @@ const Vis::Brush& Vis::StructureView2D::getHighlightAreaBrush(const Chem::Atom& 
 const Vis::Pen& Vis::StructureView2D::getHighlightAreaPen(const Chem::Atom& atom) const
 {
     if (hasHighlightAreaOutlinePen(atom))
-        return getHighlightAreaOutlinePen(atom);
+        return Vis::getHighlightAreaOutlinePen(atom);
 
     if (hasAtomHighlightAreaOutlinePen(*structure))
         return getAtomHighlightAreaOutlinePen(*structure);
