@@ -41,6 +41,35 @@ def gen3DStructure(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -
         
     # return status code
     return status
+        
+def parseArgs() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules.')
+
+    parser.add_argument('-i',
+                        dest='in_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Molecule input file')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Conformer ensemble output file')
+    parser.add_argument('-t',
+                        dest='max_time',
+                        required=False,
+                        metavar='<int>',
+                        type=int,
+                        default=3600,
+                        help='Max. allowed molecule processing time (default: 3600 sec)')
+    parser.add_argument('-q',
+                        dest='quiet',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Disable progress output (default: false)')
+    
+    return parser.parse_args()
 
 def main() -> None:
     args = parseArgs()
@@ -119,35 +148,6 @@ def main() -> None:
 
     writer.close()
     sys.exit(0)
-        
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules.')
-
-    parser.add_argument('-i',
-                        dest='in_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Molecule input file')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Conformer ensemble output file')
-    parser.add_argument('-t',
-                        dest='max_time',
-                        required=False,
-                        metavar='<int>',
-                        type=int,
-                        default=3600,
-                        help='Max. allowed molecule processing time (default: 3600 sec)')
-    parser.add_argument('-q',
-                        dest='quiet',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Disable progress output (default: false)')
-    
-    return parser.parse_args()
 
 if __name__ == '__main__':
     main()

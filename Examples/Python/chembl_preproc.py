@@ -20,7 +20,6 @@
 
 import sys
 import argparse
-import distutils.util
 
 import CDPL.Chem as Chem
 
@@ -39,51 +38,6 @@ def standardize(chembl_proc: Chem.ChEMBLStandardizer, in_mol: Chem.Molecule, out
         change_flags |= chembl_proc.getParent(out_mol)     # extract parent structure (in-place) and add information
                                                            # about the carried out modifcations
     return change_flags
-
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Performs molecule standardization as done by the ChEMBL structure curation pipeline')
-
-    parser.add_argument('-i',
-                        dest='in_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Input molecule file')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Output molecule file')
-    parser.add_argument('-v',
-                        dest='verb_level',
-                        required=False,
-                        metavar='<0|1|2>',
-                        choices=range(0, 3),
-                        default=1,
-                        help='Verbosity level (default: 1; 0 -> no console output, 1 -> verbose, 2 -> extra verbose)',
-                        type=int)
-    parser.add_argument('-p',
-                        dest='extract_parent',
-                        required=False,
-                        metavar='<true|false>',
-                        type=lambda x:bool(distutils.util.strtobool(x)),
-                        default=True,
-                        help='Extract parent structure (default: true)')
-    parser.add_argument('-d',
-                        dest='drop_excluded',
-                        required=False,
-                        metavar='<true|false>',
-                        type=lambda x:bool(distutils.util.strtobool(x)),
-                        default=False,
-                        help='Drop structures that fulfill the exclusion criterions (default: false)')
-    parser.add_argument('-x',
-                        dest='proc_excluded',
-                        required=False,
-                        metavar='<true|false>',
-                        type=lambda x:bool(distutils.util.strtobool(x)),
-                        default=True,
-                        help='Standardize structures that fulfill the exclusion criterions (default: true)')
-
-    return parser.parse_args()
 
 def getListOfChangesString(change_flags: Chem.ChEMBLStandardizer.ChangeFlags) -> str:
     changes = '   Carried out modifications:'
@@ -150,6 +104,56 @@ def getLogMessage(change_flags: Chem.ChEMBLStandardizer.ChangeFlags, args: argpa
             
     return ('- Molecule %s: forwarded unchanged' % mol_id)
 
+def parseArgs() -> argparse.Namespace:
+    def strtobool(value: str) -> bool:
+        value = value.lower()
+        if value in ("y", "yes", "on", "1", "true", "t"):
+            return True
+        return False
+    
+    parser = argparse.ArgumentParser(description='Performs molecule standardization as done by the ChEMBL structure curation pipeline')
+
+    parser.add_argument('-i',
+                        dest='in_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Input molecule file')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Output molecule file')
+    parser.add_argument('-v',
+                        dest='verb_level',
+                        required=False,
+                        metavar='<0|1|2>',
+                        choices=range(0, 3),
+                        default=1,
+                        help='Verbosity level (default: 1; 0 -> no console output, 1 -> verbose, 2 -> extra verbose)',
+                        type=int)
+    parser.add_argument('-p',
+                        dest='extract_parent',
+                        required=False,
+                        metavar='<true|false>',
+                        type=lambda x:bool(strtobool(x)),
+                        default=True,
+                        help='Extract parent structure (default: true)')
+    parser.add_argument('-d',
+                        dest='drop_excluded',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Drop structures that fulfill the exclusion criterions (default: false)')
+    parser.add_argument('-x',
+                        dest='proc_excluded',
+                        required=False,
+                        metavar='<true|false>',
+                        type=lambda x:bool(strtobool(x)),
+                        default=True,
+                        help='Standardize structures that fulfill the exclusion criterions (default: true)')
+
+    return parser.parse_args()
+
 def main() -> None:
     args = parseArgs() # process command line arguments
 
@@ -206,7 +210,7 @@ def main() -> None:
                               
                     # write output molecule
                     if not writer.write(out_mol):
-                        sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
+                        sys.exit('Error: writing molecule %s failed' % mol_id)
 
                 except Exception as e: # handle exception raised in case of severe write errors
                     sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))

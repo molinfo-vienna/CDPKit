@@ -25,6 +25,40 @@ import CDPL.Chem as Chem
 import CDPL.Pharm as Pharm
 import CDPL.Math as Math
 
+
+# reads and returns the specified alignment reference pharmacophore
+def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
+    # create pharmacophore reader instance
+    reader = Pharm.PharmacophoreReader(filename)
+
+    # create an instance of the default implementation of the Pharm.Pharmacophore interface
+    ph4 = Pharm.BasicPharmacophore()
+
+    try:
+        if not reader.read(ph4): # read reference pharmacophore
+            sys.exit('Error: reading reference pharmacophore failed')
+                
+    except Exception as e: # handle exception raised in case of severe read errors
+        sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
+
+    return ph4
+
+# generates and returns the pharmacophore of the specified molecule
+def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
+    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
+        
+    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
+    ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
+
+    ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
+
+    return ph4
+
+# remove feature orientation informations and set the feature geometry to Pharm.FeatureGeometry.SPHERE
+def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
+    for ftr in ph4:
+        Pharm.clearOrientation(ftr)
+        Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
     
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Aligns a set of input molecules onto a given reference pharmacophore.')
@@ -78,40 +112,6 @@ def parseArgs() -> argparse.Namespace:
                         help='Ignore feature orientations, feature position matching only (default: false)')
 
     return parser.parse_args()
-
-# reads and returns the specified alignment reference pharmacophore
-def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
-    # create pharmacophore reader instance
-    reader = Pharm.PharmacophoreReader(filename)
-
-    # create an instance of the default implementation of the Pharm.Pharmacophore interface
-    ph4 = Pharm.BasicPharmacophore()
-
-    try:
-        if not reader.read(ph4): # read reference pharmacophore
-            sys.exit('Error: reading reference pharmacophore failed')
-                
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
-
-    return ph4
-
-# generates and returns the pharmacophore of the specified molecule
-def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
-    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
-        
-    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
-    ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
-
-    ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
-
-    return ph4
-
-# remove feature orientation informations and set the feature geometry to Pharm.FeatureGeometry.SPHERE
-def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
-    for ftr in ph4:
-        Pharm.clearOrientation(ftr)
-        Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
 
 def main() -> None:
     args = parseArgs()
@@ -222,7 +222,7 @@ def main() -> None:
                     
                     try:
                         if not mol_writer.write(mol): # output the alignment pose of the molecule
-                            sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+                            sys.exit('Error: writing alignment pose of molecule %s failed' % mol_id)
 
                     except Exception as e: # handle exception raised in case of severe write errors
                         sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))

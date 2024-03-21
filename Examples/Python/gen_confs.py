@@ -44,6 +44,56 @@ def genConfEnsemble(mol: Chem.Molecule, conf_gen: ConfGen.ConformerGenerator) ->
         
     # return status code and the number of generated conformers
     return (status, num_confs)
+        
+def parseArgs() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules.')
+
+    parser.add_argument('-i',
+                        dest='in_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Molecule input file')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Conformer ensemble output file')
+    parser.add_argument('-e',
+                        dest='e_window',
+                        required=False,
+                        metavar='<float>',
+                        type=float,
+                        default=20.0,
+                        help='Output conformer energy window (default: 20.0)')
+    parser.add_argument('-r',
+                        dest='min_rmsd',
+                        required=False,
+                        metavar='<float>',
+                        type=float,
+                        default=0.5,
+                        help='Output conformer RMSD threshold (default: 0.5)')
+    parser.add_argument('-t',
+                        dest='max_time',
+                        required=False,
+                        metavar='<int>',
+                        type=int,
+                        default=3600,
+                        help='Max. allowed molecule processing time (default: 3600 sec)')
+    parser.add_argument('-n',
+                        dest='max_confs',
+                        required=False,
+                        metavar='<int>',
+                        type=int,
+                        default=100,
+                        help='Max. output ensemble size (default: 100)')
+    parser.add_argument('-q',
+                        dest='quiet',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Disable progress output (default: false)')
+    
+    return parser.parse_args()
 
 def main() -> None:
     args = parseArgs()
@@ -126,56 +176,6 @@ def main() -> None:
 
     writer.close()
     sys.exit(0)
-        
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules.')
-
-    parser.add_argument('-i',
-                        dest='in_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Molecule input file')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Conformer ensemble output file')
-    parser.add_argument('-e',
-                        dest='e_window',
-                        required=False,
-                        metavar='<float>',
-                        type=float,
-                        default=20.0,
-                        help='Output conformer energy window (default: 20.0)')
-    parser.add_argument('-r',
-                        dest='min_rmsd',
-                        required=False,
-                        metavar='<float>',
-                        type=float,
-                        default=0.5,
-                        help='Output conformer RMSD threshold (default: 0.5)')
-    parser.add_argument('-t',
-                        dest='max_time',
-                        required=False,
-                        metavar='<int>',
-                        type=int,
-                        default=3600,
-                        help='Max. allowed molecule processing time (default: 3600 sec)')
-    parser.add_argument('-n',
-                        dest='max_confs',
-                        required=False,
-                        metavar='<int>',
-                        type=int,
-                        default=100,
-                        help='Max. output ensemble size (default: 100)')
-    parser.add_argument('-q',
-                        dest='quiet',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Disable progress output (default: false)')
-    
-    return parser.parse_args()
 
 if __name__ == '__main__':
     main()

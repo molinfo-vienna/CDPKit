@@ -26,45 +26,6 @@ import CDPL.Biomol as Biomol
 import CDPL.Pharm as Pharm
 import CDPL.MolProp as MolProp
 
-    
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates pharmacophores describing the interactions between a given receptor structure and a set of ligand molecules.')
-
-    parser.add_argument('-r',
-                        dest='receptor_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Receptor structure input file (*.mol2, *.pdb, *.mmtf)')
-    parser.add_argument('-l',
-                        dest='ligands_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Ligand structure input file (*.sdf, *.mol2, *.cdf)')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Pharmacophore output file (*.pml, *.cdf)')
-    parser.add_argument('-s',
-                        dest='strip_res_list',
-                        required=False,
-                        metavar='<three-letter code(s)>',
-                        nargs='+',
-                        help='Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)')
-    parser.add_argument('-q',
-                        dest='quiet',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Disable progress output (default: false)')
-    parser.add_argument('-x',
-                        dest='gen_x_vols',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Generate exclusion volumes (default: false)')
-
-    return parser.parse_args()
 
 # reads and preprocesses the specified receptor structure
 def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
@@ -129,6 +90,45 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         sys.exit('Error: processing of receptor structure failed: ' + str(e))            
 
     return rec_mol
+   
+def parseArgs() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Generates pharmacophores describing the interactions between a given receptor structure and a set of ligand molecules.')
+
+    parser.add_argument('-r',
+                        dest='receptor_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Receptor structure input file (*.mol2, *.pdb, *.mmtf)')
+    parser.add_argument('-l',
+                        dest='ligands_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Ligand structure input file (*.sdf, *.mol2, *.cdf)')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Pharmacophore output file (*.pml, *.cdf)')
+    parser.add_argument('-s',
+                        dest='strip_res_list',
+                        required=False,
+                        metavar='<three-letter code(s)>',
+                        nargs='+',
+                        help='Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)')
+    parser.add_argument('-q',
+                        dest='quiet',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Disable progress output (default: false)')
+    parser.add_argument('-x',
+                        dest='gen_x_vols',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Generate exclusion volumes (default: false)')
+
+    return parser.parse_args()
 
 def main() -> None:
     args = parseArgs()
