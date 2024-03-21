@@ -98,6 +98,9 @@ if __name__ == '__main__':
     
     errors |= checkScriptOutput('seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('extract_atom_envs', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptFileOutput('gen_mol_frags', outputFilePath('gen_mol_frags.smi'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_mol_frags.smi'),
+                                      '-r', 'bRics', '-b', '-m', '-x' ])
     errors |= checkScriptOutput('sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('clean_mol_db', outputFilePath('clean_mol_db.smi'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf.gz'), '-o', outputFilePath('clean_mol_db.smi'),

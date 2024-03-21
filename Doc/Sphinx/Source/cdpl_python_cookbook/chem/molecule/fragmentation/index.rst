@@ -5,3 +5,4 @@ Fragmentation and Extraction of Substructures
    :maxdepth: 2
 
    atom_env_extraction
+   rule_based_frag
