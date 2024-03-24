@@ -126,5 +126,18 @@ BOOST_AUTO_TEST_CASE(PNGMolecularGraphWriterTest)
 
     BOOST_CHECK(os);
     BOOST_CHECK(writer.write(mol));
+
+//-----
+
+    writer.removeParameter(ControlParameter::VIEWPORT);
+    writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::WHITE);
+    writer.setParameter(ControlParameter::OUTPUT_SCALING_FACTOR, 4.0);
+
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_7.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(mol));
 }
 

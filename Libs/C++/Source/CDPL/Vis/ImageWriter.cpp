@@ -34,6 +34,7 @@
 #include "CDPL/Vis/CairoPointer.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
+#include "CDPL/Math/AffineTransform.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 
 
@@ -91,7 +92,10 @@ cairo_surface_t* Vis::ImageWriter::renderImage(View2D& view) const
         || cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS) 
         return 0;
 
-    CairoPointer<cairo_surface_t> render_surf(createCairoSurface(brect.getWidth(), brect.getHeight()));
+    auto scaling_fact = getOutputScalingFactorParameter(ioBase);
+    
+    CairoPointer<cairo_surface_t> render_surf(createCairoSurface(brect.getWidth() * scaling_fact,
+                                                                 brect.getHeight() * scaling_fact));
     CairoPointer<cairo_t> render_ctxt(cairo_create(render_surf.get()));
 
     if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS 
@@ -99,12 +103,9 @@ cairo_surface_t* Vis::ImageWriter::renderImage(View2D& view) const
         return 0;
 
     CairoRenderer2D renderer(render_ctxt);  
-    Math::Matrix3D transform = Math::IdentityMatrix<double>(3, 3);
 
-    transform(0, 2) = -brect.getMin()(0);
-    transform(1, 2) = -brect.getMin()(1);
-
-    renderer.transform(transform);
+    renderer.transform(Math::DScalingMatrix(3, scaling_fact, scaling_fact, 1.0) *
+                       Math::DTranslationMatrix(3, -brect.getMin()(0), -brect.getMin()(1), 1.0));
 
     view.render(renderer);
 

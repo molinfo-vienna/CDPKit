@@ -42,8 +42,8 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
     stdBondLength(ControlParameterDefault::BOND_LENGTH.getValue()),
     sizeAdjustment(ControlParameterDefault::SIZE_ADJUSTMENT),
     alignment(ControlParameterDefault::ALIGNMENT),
-    eraseBackgroundFlag(false),
-    backgroundColor(Color::WHITE),
+    eraseBackgroundFlag(ControlParameterDefault::ERASE_BACKGROUND),
+    backgroundColor(ControlParameterDefault::BACKGROUND_COLOR),
     useCalcAtomCoordsFlag(ControlParameterDefault::USE_CALCULATED_ATOM_COORDINATES),
     atomColor(ControlParameterDefault::ATOM_COLOR),
     atomLabelFont(ControlParameterDefault::ATOM_LABEL_FONT),
@@ -504,6 +504,7 @@ void Vis::StructureView2DParameters::parentChanged()
     parameterChanged(ControlParameter::BOND_LENGTH, view.getParameter(ControlParameter::BOND_LENGTH));
     parameterChanged(ControlParameter::ALIGNMENT, view.getParameter(ControlParameter::ALIGNMENT));
 
+    parameterChanged(ControlParameter::ERASE_BACKGROUND, view.getParameter(ControlParameter::ERASE_BACKGROUND));
     parameterChanged(ControlParameter::BACKGROUND_COLOR, view.getParameter(ControlParameter::BACKGROUND_COLOR));
     parameterChanged(ControlParameter::ATOM_COLOR_TABLE, view.getParameter(ControlParameter::ATOM_COLOR_TABLE));
     parameterChanged(ControlParameter::USE_CALCULATED_ATOM_COORDINATES, view.getParameter(ControlParameter::USE_CALCULATED_ATOM_COORDINATES));
@@ -594,14 +595,12 @@ void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key
     }
 
     if (key == ControlParameter::BACKGROUND_COLOR) {
-        if (val.isEmpty())
-            eraseBackground(false);
+        setBackgroundColor(val.isEmpty() ? BACKGROUND_COLOR : val.getData<Color>());
+        return;
+    }
 
-        else {
-            eraseBackground(true);
-            setBackgroundColor(val.getData<Color>());
-        }
-
+    if (key == ControlParameter::ERASE_BACKGROUND) {
+        eraseBackground(val.isEmpty() ? ERASE_BACKGROUND : val.getData<bool>());
         return;
     }
 
@@ -938,12 +937,18 @@ void Vis::StructureView2DParameters::setSizeAdjustment(unsigned int adjustment)
 
 void Vis::StructureView2DParameters::eraseBackground(bool erase)
 {
-    eraseBackgroundFlag = erase;
+    if (eraseBackgroundFlag != erase) {
+        eraseBackgroundFlag = erase;
+        graphicsAttributeChangedFlag = true;
+    }
 }
 
 void Vis::StructureView2DParameters::setBackgroundColor(const Color& color)
 {
-    backgroundColor = color;
+    if (backgroundColor != color) {
+        backgroundColor = color;
+        graphicsAttributeChangedFlag = true;
+    }
 }
 
 void Vis::StructureView2DParameters::setAtomColorTable(const ColorTable::SharedPointer& table_ptr)

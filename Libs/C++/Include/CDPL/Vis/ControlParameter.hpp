@@ -51,6 +51,17 @@ namespace CDPL
         {
 
             /**
+             * \brief Specifies a factor for the scaling of logical to drawing surface coordinates.
+             *
+             * A factor higher than \e 1.0 (the default) makes only sense for rendering to pixel-based surfaces (e.g. a Cairo [\ref CAIRO] image surface).
+             * For example, a scaling factor of \e 4.0 causes a logical pixel (a square with side length \e 1.0) being mapped to \e 16 drawing surface pixels.
+             * Thus, the higher the scaling factor the higher will be the resolution and size of pixel-based output images.
+             *
+             * \valuetype double
+             */
+            extern CDPL_VIS_API const Base::LookupKey OUTPUT_SCALING_FACTOR;
+            
+            /**
              * \brief Specifies a rectangular viewport area which constrains the location and size of 2D depictions.
              *
              * The way the size and location of
@@ -89,16 +100,28 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ALIGNMENT;
 
             /**
-             * \brief Specifies the color with which the drawing area is erased before rendering any graphical primitives.
+             * \brief Specifies the color with which the drawing area gets erased before rendering any graphical primitives.
              *
              * The area which gets ereased is either the
              * viewport area specified by Vis::ControlParameter::VIEWPORT, or if Vis::ControlParameter::VIEWPORT is not defined, the
-             * total bounds of the graphical objects to render. If the control-parameter is left unspecified or Vis::Color::TRANSPARENT, the drawing
-             * area won't be erased.
+             * total bounds of the graphical objects to render. 
              *
+             * \see Vis::ControlParameter::ERASE_BACKGROUND
              * \valuetype Vis::Color
              */
             extern CDPL_VIS_API const Base::LookupKey BACKGROUND_COLOR;
+
+            /**
+             * \brief Specifies whether the drawing area shall be erased before rendering any graphical primitives.
+             *
+             * The area which gets ereased is either the
+             * viewport area specified by Vis::ControlParameter::VIEWPORT, or if Vis::ControlParameter::VIEWPORT is not defined, the
+             * total bounds of the graphical objects to render.
+             *
+             * \see Vis::ControlParameter::BACKGROUND_COLOR
+             * \valuetype bool
+             */
+            extern CDPL_VIS_API const Base::LookupKey ERASE_BACKGROUND;
 
             /**
              * \brief Specifies the style of reaction arrows.

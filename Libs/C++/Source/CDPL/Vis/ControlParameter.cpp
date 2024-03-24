@@ -38,6 +38,8 @@ namespace CDPL
         namespace ControlParameter
         {
 
+            CDPL_DEFINE_LOOKUP_KEY(OUTPUT_SCALING_FACTOR);
+            
             CDPL_DEFINE_LOOKUP_KEY(VIEWPORT);
             CDPL_DEFINE_LOOKUP_KEY(SIZE_ADJUSTMENT);
             CDPL_DEFINE_LOOKUP_KEY(ALIGNMENT);

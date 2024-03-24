@@ -47,10 +47,13 @@ namespace CDPL
         namespace ControlParameterDefault
         {
 
+            const double                    OUTPUT_SCALING_FACTOR                = 1.0;
+            
             const Rectangle2D               VIEWPORT                             = Rectangle2D();
             const unsigned int              SIZE_ADJUSTMENT                      = SizeAdjustment::IF_REQUIRED;
             const unsigned int              ALIGNMENT                            = Alignment::CENTER;
-            const Color                     BACKGROUND_COLOR                     = Color(0, 0, 0, 0);
+            const Color                     BACKGROUND_COLOR                     = Color(1.0, 1.0, 1.0);
+            const bool                      ERASE_BACKGROUND                     = true;
 
             const unsigned int              REACTION_ARROW_STYLE                 = ArrowStyle::REACTION_SOLID;
             const Color                     REACTION_ARROW_COLOR                 = Color(0, 0, 0);
@@ -105,36 +108,36 @@ namespace CDPL
             const SizeSpecification         ATOM_CUSTOM_LABEL_SIZE               = SizeSpecification(8.0, false, false, true);
             const Color                     ATOM_CUSTOM_LABEL_COLOR              = Color(0, 0, 0);
 
-            const SizeSpecification HIGHLIGHT_AREA_OUTLINE_WIDTH    = SizeSpecification(1.0, false, false, true);
-            
-            const Color             BOND_COLOR                      = Color(0, 0, 0);
-            const SizeSpecification BOND_LENGTH                     = SizeSpecification(30.0);
-            const SizeSpecification BOND_LINE_WIDTH                 = SizeSpecification(1.0, false, false, true);
-            const SizeSpecification BOND_LINE_SPACING               = SizeSpecification(0.15, true, true, true);
-            const SizeSpecification STEREO_BOND_WEDGE_WIDTH         = SizeSpecification(0.15, true, true, true);
-            const SizeSpecification STEREO_BOND_HASH_SPACING        = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification REACTION_CENTER_LINE_LENGTH     = SizeSpecification(0.4, true, true, true);
-            const SizeSpecification REACTION_CENTER_LINE_SPACING    = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification DOUBLE_BOND_TRIM_LENGTH         = SizeSpecification(0.1, true, true, true);
-            const SizeSpecification TRIPLE_BOND_TRIM_LENGTH         = SizeSpecification(0.1, true, true, true);
-            const Font              BOND_LABEL_FONT                 = Font();
-            const SizeSpecification BOND_LABEL_SIZE                 = SizeSpecification(8.0, false, false, true);
-            const SizeSpecification BOND_LABEL_MARGIN               = SizeSpecification(2.0, false, false, true);
-            const SizeSpecification BOND_HIGHLIGHT_AREA_WIDTH       = SizeSpecification(12.0, false, false, true);
-            const Brush             BOND_HIGHLIGHT_AREA_BRUSH       = Brush(Color(0.8, 0.8, 1.0));
-            const Pen               BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(Color(0.6, 0.6, 0.75));
-            const bool              SHOW_BOND_REACTION_INFOS        = true;
-            const bool              SHOW_BOND_QUERY_INFOS           = true;
-            const bool              SHOW_STEREO_BONDS               = true;
-            const bool              SHOW_BOND_CONFIGURATION_LABELS  = false;
-            const bool              SHOW_BOND_CUSTOM_LABELS         = true;
-            const bool              ENABLE_BOND_HIGHLIGHTING        = true;
-            const Font              BOND_CONFIGURATION_LABEL_FONT   = Font("", 8.0, false, true);
-            const SizeSpecification BOND_CONFIGURATION_LABEL_SIZE   = SizeSpecification(8.0, false, false, true);
-            const Color             BOND_CONFIGURATION_LABEL_COLOR  = Color(0, 0, 0);
-            const Font              BOND_CUSTOM_LABEL_FONT          = Font("", 8.0, false, false);
-            const SizeSpecification BOND_CUSTOM_LABEL_SIZE          = SizeSpecification(8.0, false, false, true);
-            const Color             BOND_CUSTOM_LABEL_COLOR         = Color(0, 0, 0);
+            const SizeSpecification         HIGHLIGHT_AREA_OUTLINE_WIDTH         = SizeSpecification(1.0, false, false, true);
+
+            const Color                     BOND_COLOR                           = Color(0, 0, 0);
+            const SizeSpecification         BOND_LENGTH                          = SizeSpecification(30.0);
+            const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.0, false, false, true);
+            const SizeSpecification         BOND_LINE_SPACING                    = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification         STEREO_BOND_WEDGE_WIDTH              = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification         STEREO_BOND_HASH_SPACING             = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         REACTION_CENTER_LINE_LENGTH          = SizeSpecification(0.4, true, true, true);
+            const SizeSpecification         REACTION_CENTER_LINE_SPACING         = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         DOUBLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         TRIPLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
+            const Font                      BOND_LABEL_FONT                      = Font();
+            const SizeSpecification         BOND_LABEL_SIZE                      = SizeSpecification(8.0, false, false, true);
+            const SizeSpecification         BOND_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
+            const SizeSpecification         BOND_HIGHLIGHT_AREA_WIDTH            = SizeSpecification(12.0, false, false, true);
+            const Brush                     BOND_HIGHLIGHT_AREA_BRUSH            = Brush(Color(0.8, 0.8, 1.0));
+            const Pen                       BOND_HIGHLIGHT_AREA_OUTLINE_PEN      = Pen(Color(0.6, 0.6, 0.75));
+            const bool                      SHOW_BOND_REACTION_INFOS             = true;
+            const bool                      SHOW_BOND_QUERY_INFOS                = true;
+            const bool                      SHOW_STEREO_BONDS                    = true;
+            const bool                      SHOW_BOND_CONFIGURATION_LABELS       = false;
+            const bool                      SHOW_BOND_CUSTOM_LABELS              = true;
+            const bool                      ENABLE_BOND_HIGHLIGHTING             = true;
+            const Font                      BOND_CONFIGURATION_LABEL_FONT        = Font("", 8.0, false, true);
+            const SizeSpecification         BOND_CONFIGURATION_LABEL_SIZE        = SizeSpecification(8.0, false, false, true);
+            const Color                     BOND_CONFIGURATION_LABEL_COLOR       = Color(0, 0, 0);
+            const Font                      BOND_CUSTOM_LABEL_FONT               = Font("", 8.0, false, false);
+            const SizeSpecification         BOND_CUSTOM_LABEL_SIZE               = SizeSpecification(8.0, false, false, true);
+            const Color                     BOND_CUSTOM_LABEL_COLOR              = Color(0, 0, 0);
 
         } // namespace ControlParameterDefault
 

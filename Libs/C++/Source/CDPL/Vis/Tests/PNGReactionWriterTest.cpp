@@ -127,5 +127,18 @@ BOOST_AUTO_TEST_CASE(PNGReactionWriterTest)
 
     BOOST_CHECK(os);
     BOOST_CHECK(writer.write(rxn));
+
+//-----
+
+    writer.removeParameter(ControlParameter::VIEWPORT);
+    writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::WHITE);
+    writer.setParameter(ControlParameter::OUTPUT_SCALING_FACTOR, 4.0);
+
+    os.close();
+    os.open("PNGReactionWriterTest_7.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(rxn));
 }
 

@@ -53,6 +53,11 @@ namespace CDPL
         {
 
             /**
+             * \brief Default setting (= \c 1.0) for the control-parameter Vis::ControlParameter::OUTPUT_SCALING_FACTOR.
+             */
+            extern CDPL_VIS_API const double OUTPUT_SCALING_FACTOR;
+
+            /**
              * \brief Default setting (= \c %Rectangle2D()) for the control-parameter Vis::ControlParameter::VIEWPORT.
              */
             extern CDPL_VIS_API const Rectangle2D VIEWPORT;
@@ -68,9 +73,14 @@ namespace CDPL
             extern CDPL_VIS_API const unsigned int ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %Color::TRANSPARENT) for the control-parameter Vis::ControlParameter::BACKGROUND_COLOR.
+             * \brief Default setting (= \c %Color::WHITE) for the control-parameter Vis::ControlParameter::BACKGROUND_COLOR.
              */
             extern CDPL_VIS_API const Color BACKGROUND_COLOR;
+
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ERASE_BACKGROUND.
+             */
+            extern CDPL_VIS_API const bool ERASE_BACKGROUND;
 
             /**
              * \brief Default setting (= \c %ArrowStyle::REACTION_SOLID) for the control-parameter Vis::ControlParameter::REACTION_ARROW_STYLE.

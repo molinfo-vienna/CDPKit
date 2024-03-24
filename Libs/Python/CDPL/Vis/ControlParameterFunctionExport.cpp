@@ -64,10 +64,13 @@ python::def("set"#FUNC_INFIX"Parameter", &Vis::set##FUNC_INFIX##Parameter, (pyth
 namespace
 {
 
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(double, OutputScalingFactor)
+    
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Rectangle2D&, Viewport)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, SizeAdjustment)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, Alignment)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, BackgroundColor)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, EraseBackground)
 
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, ReactionArrowStyle)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, ReactionArrowColor)
@@ -161,10 +164,13 @@ void CDPLPythonVis::exportControlParameterFunctions()
     using namespace boost;
     using namespace CDPL;
 
+    EXPORT_CONTROL_PARAM_FUNCS(OutputScalingFactor, factor)
+        
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(Viewport, viewport)
     EXPORT_CONTROL_PARAM_FUNCS(SizeAdjustment, adjustment)
     EXPORT_CONTROL_PARAM_FUNCS(Alignment, alignment)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BackgroundColor, color)
+    EXPORT_CONTROL_PARAM_FUNCS(EraseBackground, erase)
 
     EXPORT_CONTROL_PARAM_FUNCS(ReactionArrowStyle, style)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(ReactionArrowColor, color)

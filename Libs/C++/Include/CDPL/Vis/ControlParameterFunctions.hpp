@@ -52,6 +52,18 @@ namespace CDPL
         class Pen;
         class Brush;
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API double getOutputScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setOutputScalingFactorParameter(Base::ControlParameterContainer& cntnr, double factor);
+
+        CDPL_VIS_API bool hasOutputScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearOutputScalingFactorParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_VIS_API const Rectangle2D& getViewportParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void setViewportParameter(Base::ControlParameterContainer& cntnr, const Rectangle2D& viewport);
@@ -86,6 +98,17 @@ namespace CDPL
         CDPL_VIS_API bool hasBackgroundColorParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearBackgroundColorParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API bool getEraseBackgroundParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setEraseBackgroundParameter(Base::ControlParameterContainer& cntnr, bool erase);
+
+        CDPL_VIS_API bool hasEraseBackgroundParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearEraseBackgroundParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_VIS_API unsigned int getReactionArrowStyleParameter(const Base::ControlParameterContainer& cntnr);
