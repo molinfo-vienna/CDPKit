@@ -217,9 +217,6 @@ void DataSetWriter::writeRecords(const std::string& def_format)
                 if (!dataSet.isRecordSelected(i))
                     continue;
 
-                if (getImgOutputEraseBackgroundParameter(params))
-                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
-
                 const DataRecord& data_record = dataSet.getRecord(i);
 
                 data_record.accept(record_writer);
@@ -254,9 +251,6 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
                 writer_ptr->setParent(&params);
 
-                if (getImgOutputEraseBackgroundParameter(params))
-                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
-
                 const DataRecord& data_record = dataSet.getRecord(i);
 
                 data_record.accept(record_writer);
@@ -285,9 +279,6 @@ void DataSetWriter::writeRecords(const std::string& def_format)
             RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
             
             writer_ptr->setParent(&params);
-
-            if (getImgOutputEraseBackgroundParameter(params))
-                setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
 
             for (int i = 0; i < dataSet.getSize(); i++) {
                 if (progress_dlg.wasCanceled()) {
@@ -326,9 +317,6 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
                 writer_ptr->setParent(&params);
     
-                if (getImgOutputEraseBackgroundParameter(params))
-                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
-
                 const DataRecord& data_record = dataSet.getRecord(i);
 
                 data_record.accept(record_writer);

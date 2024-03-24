@@ -83,9 +83,6 @@ namespace ChOX
 
         extern const CDPL::Base::LookupKey WRITE_SINGLE_RECORD_FILES;
 
-        extern const CDPL::Base::LookupKey IMG_OUTPUT_ERASE_BACKGROUND;
-        extern const CDPL::Base::LookupKey IMG_OUTPUT_BACKGROUND_COLOR;
-
         extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
         extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;
     } // namespace ControlParameter

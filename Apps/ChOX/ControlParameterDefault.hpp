@@ -241,8 +241,6 @@ namespace ChOX
         extern const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES;
         extern const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE;
 
-        extern const bool             IMG_OUTPUT_ERASE_BACKGROUND;
-        extern const CDPL::Vis::Color IMG_OUTPUT_BACKGROUND_COLOR;
     } // namespace ControlParameterDefault
 } // namespace ChOX
 

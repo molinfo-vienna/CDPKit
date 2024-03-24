@@ -701,8 +701,9 @@ void Settings::load()
 
     img_params.setParent(this);
 
-    readParameter<bool>(img_params, settings, ControlParameter::IMG_OUTPUT_ERASE_BACKGROUND, ControlParameterDefault::IMG_OUTPUT_ERASE_BACKGROUND);
-    readColorParameter(img_params, settings, ControlParameter::IMG_OUTPUT_BACKGROUND_COLOR, ControlParameterDefault::IMG_OUTPUT_BACKGROUND_COLOR);
+    readParameter<double>(img_params, settings, Vis::ControlParameter::OUTPUT_SCALING_FACTOR, Vis::ControlParameterDefault::OUTPUT_SCALING_FACTOR);
+    readParameter<bool>(img_params, settings, Vis::ControlParameter::ERASE_BACKGROUND, Vis::ControlParameterDefault::ERASE_BACKGROUND);
+    readColorParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_COLOR, Vis::ControlParameterDefault::BACKGROUND_COLOR);
 
     settings.endGroup();
 
@@ -1219,8 +1220,9 @@ void Settings::save() const
 
     const SettingsContainer& img_params = getWriterControlParameters("img");
 
-    writeParameter<bool>(img_params, settings, ControlParameter::IMG_OUTPUT_ERASE_BACKGROUND);
-    writeColorParameter(img_params, settings, ControlParameter::IMG_OUTPUT_BACKGROUND_COLOR);
+    writeParameter<double>(img_params, settings, Vis::ControlParameter::OUTPUT_SCALING_FACTOR);
+    writeParameter<bool>(img_params, settings, Vis::ControlParameter::ERASE_BACKGROUND);
+    writeColorParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_COLOR);
 
     settings.endGroup();
 }

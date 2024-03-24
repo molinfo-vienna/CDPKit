@@ -266,8 +266,5 @@ namespace ChOX
         const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
         const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
         const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
-
-        const bool                                 IMG_OUTPUT_ERASE_BACKGROUND             = false;
-        const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color(1.0, 1.0, 1.0);
     }
 }

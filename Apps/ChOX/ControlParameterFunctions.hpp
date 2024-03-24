@@ -145,12 +145,6 @@ namespace ChOX
     bool getWriteSingleRecordFilesParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void setWriteSingleRecordFilesParameter(CDPL::Base::ControlParameterContainer& cntnr, bool write);
 
-    bool getImgOutputEraseBackgroundParameter(const CDPL::Base::ControlParameterContainer& cntnr);
-    void setImgOutputEraseBackgroundParameter(CDPL::Base::ControlParameterContainer& cntnr, bool erase);
-
-    const CDPL::Vis::Color& getImgOutputBackgroundColorParameter(const CDPL::Base::ControlParameterContainer& cntnr);
-    void                    setImgOutputBackgroundColorParameter(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Vis::Color& color);
-
     bool getUseAtomColorTableParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void setUseAtomColorTableParameter(CDPL::Base::ControlParameterContainer& cntnr, bool use);
 

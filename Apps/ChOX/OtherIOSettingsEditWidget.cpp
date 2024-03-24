@@ -32,6 +32,7 @@
 
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
+#include "CDPL/Vis/ControlParameterDefault.hpp"
 
 #include "OtherIOSettingsEditWidget.hpp"
 #include "ColorEditWidget.hpp"
@@ -59,6 +60,7 @@ void OtherIOSettingsEditWidget::apply()
 {
     using namespace CDPL;
     using namespace Chem;
+    using namespace Vis;
 
     SettingsContainer& jme_rparams = settings.getReaderControlParameters("JME");
 
@@ -92,16 +94,17 @@ void OtherIOSettingsEditWidget::apply()
     setWriteSingleRecordFilesParameter(smarts_wparams, !smartsOptConcatenateRecordsCheckBox->isChecked());
     setRecordSeparatorParameter(smarts_wparams, smartsOptRecordSeparator);
 
-    SettingsContainer& img_params = settings.getWriterControlParameters("IMG");
+    SettingsContainer& img_params = settings.getWriterControlParameters("img");
 
-    setImgOutputEraseBackgroundParameter(img_params, imgOptEraseBackgroundCheckBox->isChecked());
-    setImgOutputBackgroundColorParameter(img_params, imgOptBackgroundColor);
+    setEraseBackgroundParameter(img_params, imgOptEraseBackgroundCheckBox->isChecked());
+    setBackgroundColorParameter(img_params, imgOptBackgroundColor);
 }
 
 void OtherIOSettingsEditWidget::reset()
 {
     using namespace CDPL;
     using namespace Chem;
+    using namespace Vis;
 
     blockSignals(true);
 
@@ -137,10 +140,10 @@ void OtherIOSettingsEditWidget::reset()
     smartsOptConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(smarts_wparams)); 
     smartsOptRecordSeparator = getRecordSeparatorParameter(smarts_wparams); 
 
-    const SettingsContainer& img_params = settings.getWriterControlParameters("IMG");
+    const SettingsContainer& img_params = settings.getWriterControlParameters("img");
 
-    imgOptEraseBackgroundCheckBox->setChecked(getImgOutputEraseBackgroundParameter(img_params)); 
-    imgOptBackgroundColor = getImgOutputBackgroundColorParameter(img_params); 
+    imgOptEraseBackgroundCheckBox->setChecked(getEraseBackgroundParameter(img_params)); 
+    imgOptBackgroundColor = getBackgroundColorParameter(img_params); 
 
     blockSignals(false);
 
@@ -175,8 +178,8 @@ void OtherIOSettingsEditWidget::setDefaults()
     smartsOptConcatenateRecordsCheckBox->setChecked(!SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES);
     smartsOptRecordSeparator = SMARTS_OUTPUT_RECORD_SEPARATOR;
 
-    imgOptEraseBackgroundCheckBox->setChecked(IMG_OUTPUT_ERASE_BACKGROUND);
-    imgOptBackgroundColor = IMG_OUTPUT_BACKGROUND_COLOR;
+    imgOptEraseBackgroundCheckBox->setChecked(CDPL::Vis::ControlParameterDefault::ERASE_BACKGROUND);
+    imgOptBackgroundColor = CDPL::Vis::ControlParameterDefault::BACKGROUND_COLOR;
 
     haveChanges = true;
 
