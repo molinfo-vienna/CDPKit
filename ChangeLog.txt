@@ -1,7 +1,13 @@
 master:
 
+ - Support for setting the image output scaling factor in the program 'ChOX'
+ - New control-parameter Vis::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
+   depictions saved in pixel-based output formats
+ - Fixed an issue in program 'ChOX' where the background color setting of 2D structure/reaction depictions was ignored on
+   file output 
+ - Support for atom and bond highlighting in 2D structure/reaction depictions
  - Fixed several errors in Python example scripts
- - Support for fully customizable atom and bond labels in 2D structure depictions
+ - Support for fully customizable atom and bond labels in 2D structure/reaction depictions
 
 V1.1.1:
 
