@@ -32,12 +32,14 @@
 
 class QCheckBox;
 class QLineEdit;
+class QDoubleSpinBox;
 
 
 namespace ChOX
 {
 
     class Settings;
+    class ColorEditWidget;
 
     class OtherIOSettingsEditWidget : public SettingsEditWidget
     {
@@ -81,9 +83,10 @@ namespace ChOX
         QCheckBox*       inchiOptConcatenateRecordsCheckBox;
         QLineEdit*       inchiOptOptionsLineEdit;
         std::string      inchiOptRecordSeparator;
+        QDoubleSpinBox*  imgOptOutputScalingFactorSpinBox;
         QCheckBox*       imgOptEraseBackgroundCheckBox;
         CDPL::Vis::Color imgOptBackgroundColor;
-        QWidget*         imgBackgroundColorWidget;
+        ColorEditWidget* imgBackgroundColorWidget;
         bool             haveChanges;
     };
 } // namespace ChOX

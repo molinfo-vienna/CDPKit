@@ -29,6 +29,7 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QDoubleSpinBox>
 
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
@@ -98,6 +99,7 @@ void OtherIOSettingsEditWidget::apply()
 
     setEraseBackgroundParameter(img_params, imgOptEraseBackgroundCheckBox->isChecked());
     setBackgroundColorParameter(img_params, imgOptBackgroundColor);
+    setOutputScalingFactorParameter(img_params, imgOptOutputScalingFactorSpinBox->value());
 }
 
 void OtherIOSettingsEditWidget::reset()
@@ -144,6 +146,7 @@ void OtherIOSettingsEditWidget::reset()
 
     imgOptEraseBackgroundCheckBox->setChecked(getEraseBackgroundParameter(img_params)); 
     imgOptBackgroundColor = getBackgroundColorParameter(img_params); 
+    imgOptOutputScalingFactorSpinBox->setValue(getOutputScalingFactorParameter(img_params)); 
 
     blockSignals(false);
 
@@ -180,6 +183,7 @@ void OtherIOSettingsEditWidget::setDefaults()
 
     imgOptEraseBackgroundCheckBox->setChecked(CDPL::Vis::ControlParameterDefault::ERASE_BACKGROUND);
     imgOptBackgroundColor = CDPL::Vis::ControlParameterDefault::BACKGROUND_COLOR;
+    imgOptOutputScalingFactorSpinBox->setValue(CDPL::Vis::ControlParameterDefault::OUTPUT_SCALING_FACTOR); 
 
     haveChanges = true;
 
@@ -301,7 +305,7 @@ void OtherIOSettingsEditWidget::init()
 
 // +++
 
-    inchiIptStrictErrorCheckingCheckBox = new QCheckBox(tr("Perform strict Error Checking"), group_box);
+    inchiIptStrictErrorCheckingCheckBox = new QCheckBox(tr("Perform strict Error Checki&ng"), group_box);
 
     v_box_layout->addWidget(inchiIptStrictErrorCheckingCheckBox);
     v_box_layout->addStretch();
@@ -347,7 +351,7 @@ void OtherIOSettingsEditWidget::init()
 
 // +++
 
-    inchiOptStrictErrorCheckingCheckBox = new QCheckBox(tr("Perform strict Error Checking"), group_box);
+    inchiOptStrictErrorCheckingCheckBox = new QCheckBox(tr("Perform strict &Error Checking"), group_box);
 
     v_box_layout->addWidget(inchiOptStrictErrorCheckingCheckBox);
 
@@ -355,7 +359,7 @@ void OtherIOSettingsEditWidget::init()
 
 // +++
 
-    inchiOptConcatenateRecordsCheckBox = new QCheckBox(tr("Concatenate Records to a single File"), group_box);
+    inchiOptConcatenateRecordsCheckBox = new QCheckBox(tr("Concatenate Records to a sin&gle File"), group_box);
 
     v_box_layout->addWidget(inchiOptConcatenateRecordsCheckBox);
 
@@ -505,25 +509,39 @@ void OtherIOSettingsEditWidget::init()
 
 // +++
 
-    imgBackgroundColorWidget = new QWidget(group_box);
+    grid_layout = new QGridLayout();
 
-    v_box_layout->addWidget(imgBackgroundColorWidget);
+    v_box_layout->addLayout(grid_layout);
 
-    h_box_layout = new QHBoxLayout(imgBackgroundColorWidget);
-    h_box_layout->setMargin(0);
+    label = new QLabel(tr("Background Color:"), group_box);
 
-    label = new QLabel(tr("Back&ground Color:"), imgBackgroundColorWidget);
+    grid_layout->addWidget(label, 0, 0);
 
-    h_box_layout->addWidget(label);
+    imgBackgroundColorWidget = new ColorEditWidget(group_box, imgOptBackgroundColor);
 
-    ColorEditWidget* color_edit_widget = new ColorEditWidget(imgBackgroundColorWidget, imgOptBackgroundColor);
+    label->setBuddy(imgBackgroundColorWidget);
 
-    label->setBuddy(color_edit_widget);
+    grid_layout->addWidget(imgBackgroundColorWidget, 0, 1);
 
-    h_box_layout->addWidget(color_edit_widget);
+    connect(imgBackgroundColorWidget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), imgBackgroundColorWidget, SLOT(updateGUI()));
 
-    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
-    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+// +++
+
+    label = new QLabel(tr("Sca&ling Factor:"), group_box);
+
+    grid_layout->addWidget(label, 1, 0);
+
+    imgOptOutputScalingFactorSpinBox = new QDoubleSpinBox(group_box);
+
+    imgOptOutputScalingFactorSpinBox->setMinimumWidth(80);
+    imgOptOutputScalingFactorSpinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    label->setBuddy(imgOptOutputScalingFactorSpinBox);
+
+    grid_layout->addWidget(imgOptOutputScalingFactorSpinBox, 1, 1);
+
+    connect(imgOptOutputScalingFactorSpinBox, SIGNAL(valueChanged(double)), this, SLOT(handleSettingsChange()));
 
 // +++
 
