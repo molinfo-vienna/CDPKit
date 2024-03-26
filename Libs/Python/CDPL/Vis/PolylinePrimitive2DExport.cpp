@@ -36,8 +36,8 @@ void CDPLPythonVis::exportPolylinePrimitive2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::PolylinePrimitive2D, 
-        python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolylinePrimitive2D", python::no_init)
+    python::class_<Vis::PolylinePrimitive2D, Vis::PolylinePrimitive2D::SharedPointer,
+                   python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolylinePrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::PolylinePrimitive2D&>((python::arg("self"), python::arg("prim"))))
         .def("assign", CDPLPythonBase::copyAssOp<Vis::PolylinePrimitive2D>(),

@@ -36,7 +36,7 @@ void CDPLPythonVis::exportPointListPrimitive2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::PointListPrimitive2D, 
+    python::class_<Vis::PointListPrimitive2D, Vis::PointListPrimitive2D::SharedPointer, 
         python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PointListPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::PointListPrimitive2D&>((python::arg("self"), python::arg("prim"))))

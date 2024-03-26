@@ -36,7 +36,7 @@ void CDPLPythonVis::exportReactionView2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::ReactionView2D, 
+    python::class_<Vis::ReactionView2D, Vis::ReactionView2D::SharedPointer, 
         python::bases<Vis::View2D>, boost::noncopyable>("ReactionView2D", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::Reaction*>((python::arg("self"), python::arg("rxn")))[python::with_custodian_and_ward<1, 2>()])

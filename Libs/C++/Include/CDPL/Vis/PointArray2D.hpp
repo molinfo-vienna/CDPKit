@@ -29,6 +29,8 @@
 #ifndef CDPL_VIS_POINTARRAY2D_HPP
 #define CDPL_VIS_POINTARRAY2D_HPP
 
+#include <memory>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -48,6 +50,11 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PointArray2D instances.
+             */
+            typedef std::shared_ptr<PointArray2D> SharedPointer;
+
             /**
              * \brief Translates all points by \a vec.
              * \param vec The translation vector.

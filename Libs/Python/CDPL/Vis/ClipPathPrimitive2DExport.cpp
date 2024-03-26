@@ -36,7 +36,7 @@ void CDPLPythonVis::exportClipPathPrimitive2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::ClipPathPrimitive2D,
+    python::class_<Vis::ClipPathPrimitive2D, Vis::ClipPathPrimitive2D::SharedPointer,
                    python::bases<Vis::Path2D, Vis::GraphicsPrimitive2D> >("ClipPathPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Vis::ClipPathPrimitive2D&>((python::arg("self"), python::arg("prim"))))

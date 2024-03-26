@@ -35,7 +35,8 @@ void CDPLPythonVis::exportPointArray2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::PointArray2D, python::bases<Math::Vector2DArray> >("PointArray2D", python::no_init)
+    python::class_<Vis::PointArray2D, Vis::PointArray2D::SharedPointer,
+                   python::bases<Math::Vector2DArray> >("PointArray2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::PointArray2D&>((python::arg("self"), python::arg("array"))))
         .def("translate", &Vis::PointArray2D::translate, (python::arg("self"), python::arg("vec")))

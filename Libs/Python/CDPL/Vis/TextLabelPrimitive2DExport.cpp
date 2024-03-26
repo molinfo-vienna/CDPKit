@@ -39,14 +39,14 @@ void CDPLPythonVis::exportTextLabelPrimitive2D()
     void (Vis::TextLabelPrimitive2D::*setPositionFunc1)(const Math::Vector2D&) = &Vis::TextLabelPrimitive2D::setPosition;
     void (Vis::TextLabelPrimitive2D::*setPositionFunc2)(double, double) = &Vis::TextLabelPrimitive2D::setPosition;
 
-    python::class_<Vis::TextLabelPrimitive2D, 
+    python::class_<Vis::TextLabelPrimitive2D, Vis::TextLabelPrimitive2D::SharedPointer,
         python::bases<Vis::GraphicsPrimitive2D> >("TextLabelPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::TextLabelPrimitive2D&>((python::arg("self"), python::arg("prim"))))
         .def("assign", CDPLPythonBase::copyAssOp<Vis::TextLabelPrimitive2D>(),
              (python::arg("self"), python::arg("prim")), 
              python::return_self<>())
-        .def("setText", &Vis::TextLabelPrimitive2D::setText, (python::arg("self"), python::arg("txt")))
+        .def("setText", &Vis::TextLabelPrimitive2D::setText, (python::arg("self"), python::arg("text")))
         .def("getText", &Vis::TextLabelPrimitive2D::getText, python::arg("self"), 
              python::return_value_policy<python::copy_const_reference>())
         .def("setPosition", setPositionFunc1, (python::arg("self"), python::arg("pos")))

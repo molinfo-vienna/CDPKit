@@ -36,7 +36,7 @@ void CDPLPythonVis::exportLineSegmentListPrimitive2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::LineSegmentListPrimitive2D, 
+    python::class_<Vis::LineSegmentListPrimitive2D, Vis::LineSegmentListPrimitive2D::SharedPointer,
         python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("LineSegmentListPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::LineSegmentListPrimitive2D&>((python::arg("self"), python::arg("prim"))))

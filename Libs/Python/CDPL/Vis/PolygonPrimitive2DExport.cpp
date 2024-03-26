@@ -36,7 +36,7 @@ void CDPLPythonVis::exportPolygonPrimitive2D()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::PolygonPrimitive2D, 
+    python::class_<Vis::PolygonPrimitive2D, Vis::PolygonPrimitive2D::SharedPointer,
         python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolygonPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::PolygonPrimitive2D&>((python::arg("self"), python::arg("prim"))))
