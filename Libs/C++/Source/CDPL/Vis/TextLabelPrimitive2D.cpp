@@ -28,7 +28,6 @@
 #include "CDPL/Vis/Renderer2D.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
-#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL;
@@ -44,9 +43,9 @@ void Vis::TextLabelPrimitive2D::render(Renderer2D& renderer) const
     renderer.drawText(position(0), position(1), text);
 }
 
-void Vis::TextLabelPrimitive2D::setText(const std::string& txt)
+void Vis::TextLabelPrimitive2D::setText(const std::string& text)
 {
-    text = txt;
+    this->text = text;
 }
 
 const std::string& Vis::TextLabelPrimitive2D::getText() const
