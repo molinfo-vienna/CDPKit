@@ -24,19 +24,16 @@
 
 from __future__ import absolute_import
 
-try:
-    import exceptions
-except ImportError:
-    import builtins as exceptions
+import builtins
 
 from . import _base
 
 
-class Exception(exceptions.Exception):
+class Exception(builtins.Exception):
 
     def __init__(self, msg = ''):
         "__init__(Exception self, str msg='') -> None :"
-        exceptions.Exception.__init__(self, msg)
+        builtins.Exception.__init__(self, msg)
         self.message = msg
 
     def what(self):
@@ -48,7 +45,7 @@ class Exception(exceptions.Exception):
         return self.message
 
 
-class ValueError(Exception, exceptions.ValueError):
+class ValueError(Exception, builtins.ValueError):
     pass
 
 
@@ -64,7 +61,7 @@ class SizeError(ValueError):
     pass
 
 
-class IndexError(RangeError, exceptions.IndexError):
+class IndexError(RangeError, builtins.IndexError):
     pass
 
 
@@ -84,7 +81,7 @@ class CalculationFailed(OperationFailed):
     pass
 
 
-class IOError(OperationFailed, exceptions.IOError):
+class IOError(OperationFailed, builtins.IOError):
     pass
 
 
