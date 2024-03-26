@@ -21,7 +21,7 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 set(cdpl-vis_LIB_SRCS
     AtomProperty.cpp
@@ -68,6 +68,7 @@ set(cdpl-vis_LIB_SRCS
     PathPrimitive2D.cpp
     ClipPathPrimitive2D.cpp
     TextLabelPrimitive2D.cpp
+    TextBlockPrimitive2D.cpp
    )
 
 if(CAIRO_FOUND)

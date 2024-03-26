@@ -55,6 +55,7 @@ set(vis_MOD_SRCS
     LineSegmentListPrimitive2DExport.cpp
     PointListPrimitive2DExport.cpp
     TextLabelPrimitive2DExport.cpp
+    TextBlockPrimitive2DExport.cpp
     EllipsePrimitive2DExport.cpp
     PathPrimitive2DExport.cpp
     ClipPathPrimitive2DExport.cpp

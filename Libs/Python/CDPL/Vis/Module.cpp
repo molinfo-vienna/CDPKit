@@ -59,6 +59,7 @@ BOOST_PYTHON_MODULE(_vis)
     exportLineSegmentListPrimitive2D();
     exportPointListPrimitive2D();
     exportTextLabelPrimitive2D();
+    exportTextBlockPrimitive2D();
     exportEllipsePrimitive2D();
     exportPathPrimitive2D();
     exportClipPathPrimitive2D();

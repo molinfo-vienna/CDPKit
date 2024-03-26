@@ -54,6 +54,7 @@ namespace CDPLPythonVis
     void exportLineSegmentListPrimitive2D();
     void exportPointListPrimitive2D();
     void exportTextLabelPrimitive2D();
+    void exportTextBlockPrimitive2D();
     void exportEllipsePrimitive2D();
     void exportPathPrimitive2D();
     void exportClipPathPrimitive2D();
