@@ -186,13 +186,13 @@ void ConfGen::TorsionLibraryDataReader::processAngleList(const XMLNode* ang_list
         if (!score_attr)
             throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + ANGLE_SCORE_ATTR + "' attribute");
 
-        rule.addAngle(Internal::parseNumber<double>(value_attr->value(), value_attr->value() + std::strlen(value_attr->value()), 
+        rule.addAngle(Internal::parseNumber<double>(value_attr->value(), value_attr->value() + value_attr->value_size(), 
                                                     "TorsionLibraryDataReader: error while parsing torsion angle value"),
-                      Internal::parseNumber<double>(tol1_attr->value(), tol1_attr->value() + std::strlen(tol1_attr->value()), 
+                      Internal::parseNumber<double>(tol1_attr->value(), tol1_attr->value() + tol1_attr->value_size(), 
                                                     "TorsionLibraryDataReader: error while parsing torsion angle tolerance 1"),
-                      Internal::parseNumber<double>(tol2_attr->value(), tol2_attr->value() + std::strlen(tol2_attr->value()), 
+                      Internal::parseNumber<double>(tol2_attr->value(), tol2_attr->value() + tol2_attr->value_size(), 
                                                     "TorsionLibraryDataReader: error while parsing torsion angle tolerance 1"),
-                      Internal::parseNumber<double>(score_attr->value(), score_attr->value() + std::strlen(score_attr->value()), 
+                      Internal::parseNumber<double>(score_attr->value(), score_attr->value() + score_attr->value_size(), 
                                                     "TorsionLibraryDataReader: error while parsing torsion angle score"));
     }
 }

@@ -24,7 +24,6 @@
 
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <unordered_map>
 
 #include <boost/algorithm/string.hpp>
@@ -351,19 +350,19 @@ bool Pharm::PMLDataReader::getPosition(const XMLNode* ftr_node, const std::strin
     const XMLAttribute* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
 
     if (attr)
-        vec[0] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+        vec[0] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector x-ccordinate");
 
     attr = vec_node->first_attribute(PML::COORDS_Y_ATTRIBUTE.c_str());
 
     if (attr)
-        vec[1] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+        vec[1] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector y-ccordinate");
 
     attr = vec_node->first_attribute(PML::COORDS_Z_ATTRIBUTE.c_str());
 
     if (attr)
-        vec[2] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+        vec[2] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector z-ccordinate");
 
     return true;
@@ -381,7 +380,7 @@ bool Pharm::PMLDataReader::getTolerance(const XMLNode* ftr_node, const std::stri
     if (!attr)
         return false;
 
-    tol = Internal::parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+    tol = Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                         "PMLDataReader: error while parsing feature tolerance");
 
     return true;
