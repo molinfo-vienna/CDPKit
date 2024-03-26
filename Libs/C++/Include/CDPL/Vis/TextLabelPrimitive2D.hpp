@@ -67,7 +67,7 @@ namespace CDPL
              * \brief Sets the text of the label.
              * \param txt The text of the label.
              */
-            void setText(const std::string& txt);
+            void setText(const std::string& text);
 
             /**
              * \brief Returns the text of the label.
