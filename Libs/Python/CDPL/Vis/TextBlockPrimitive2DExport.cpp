@@ -25,6 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
+#include "CDPL/Vis/FontMetrics.hpp"
 
 #include "Base/CopyAssOp.hpp"
 
@@ -61,6 +62,9 @@ void CDPLPythonVis::exportTextBlockPrimitive2D()
              python::return_internal_reference<1>())
         .def("setAlignment", &Vis::TextBlockPrimitive2D::setAlignment, (python::arg("self"), python::arg("alignment")))
         .def("getAlignment", &Vis::TextBlockPrimitive2D::getAlignment, python::arg("self"))
+        .def("setLineSpacing", &Vis::TextBlockPrimitive2D::setLineSpacing, (python::arg("self"), python::arg("spacing")))
+        .def("getLineSpacing", &Vis::TextBlockPrimitive2D::getLineSpacing, python::arg("self"))
+        .def("layout", &Vis::TextBlockPrimitive2D::layout, (python::arg("self"), python::arg("font_metrics")))
         .add_property("text", python::make_function(&Vis::TextBlockPrimitive2D::getText, 
                                                    python::return_value_policy<python::copy_const_reference>()),
                       &Vis::TextBlockPrimitive2D::setText)
@@ -73,5 +77,6 @@ void CDPLPythonVis::exportTextBlockPrimitive2D()
         .add_property("font", python::make_function(&Vis::TextBlockPrimitive2D::getFont, 
                                                    python::return_internal_reference<1>()),
                       &Vis::TextBlockPrimitive2D::setFont)
-        .add_property("alignment", &Vis::TextBlockPrimitive2D::getAlignment, &Vis::TextBlockPrimitive2D::setAlignment);
+        .add_property("alignment", &Vis::TextBlockPrimitive2D::getAlignment, &Vis::TextBlockPrimitive2D::setAlignment)
+        .add_property("lineSpacing", &Vis::TextBlockPrimitive2D::getLineSpacing, &Vis::TextBlockPrimitive2D::setLineSpacing);
 }

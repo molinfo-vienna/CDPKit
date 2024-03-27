@@ -31,12 +31,14 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 #include <cstddef>
 #include <memory>
 
 #include "CDPL/Vis/GraphicsPrimitive2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -135,7 +137,7 @@ namespace CDPL
             const Font& getFont() const;
 
             /**
-             * \brief Sets the value defining the horizontal text alignment.
+             * \brief Specifies the way lines should be horizontally aligned.
              *
              * Possible values are defined in namespace Vis::Alignment.
              * 
@@ -144,7 +146,7 @@ namespace CDPL
             void setAlignment(unsigned int alignment);
 
             /**
-             * \brief Returns the set value defining the horizontal text alignment.
+             * \brief Returns the active horizontal text alignment specification.
              *
              * Possible values are defined in namespace Vis::Alignment.
              * 
@@ -152,6 +154,24 @@ namespace CDPL
              */
             unsigned int getAlignment() const;
             
+            /**
+             * \brief Sets the line spacing value.
+             *
+             * The final base line spacing is the product of the specified line spacing and the font height
+             * returned by the method FontMetrics::getHeight() for the set font.
+             *
+             * \param spacing The desired line spacing.
+             */
+            void setLineSpacing(double spacing);
+
+            /**
+             * \brief Returns the active line spacing value.
+             * \return The line spacing value.
+             */
+            double getLineSpacing() const;
+
+            void layout(FontMetrics& font_metrics);
+
             GraphicsPrimitive2D::SharedPointer clone() const;
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
@@ -169,36 +189,42 @@ namespace CDPL
                 bool superscripted{false};
             };
 
+            typedef std::pair<Color, bool> ColorSpec;
+
             struct TextFragment
             {
 
-                TextFragment(const char* text, const Style& style, const Color& color, std::size_t line):
+                TextFragment(const char* text, const Style& style, const ColorSpec& color, std::size_t line):
                     text(text), style(style), color(color), line(line) {}
 
-                std::string text;
-                Style       style;
-                Color       color;
-                std::size_t line;
+                std::string  text;
+                Style        style;
+                ColorSpec    color;
+                std::size_t  line;
+                double       xPos;
+                double       yPos;
+                Rectangle2D  bBox;
             };
 
             typedef rapidxml::xml_node<char>  XMLNode;
-            typedef std::vector<Color>        ColorStack;
+            typedef std::vector<ColorSpec>    ColorStack;
             typedef std::vector<Style>        StyleStack;
             typedef std::vector<TextFragment> TextFragmentList;
 
             void processText(const std::string& text);
             void processNode(XMLNode* node);
-    
-            Vis::Color getColor(XMLNode* node) const;
-            
+            void getColor(XMLNode* node);
+            void applyStyle(Font& font, double font_size, const Style& style) const;
+
             Pen              pen;
             Font             font;
             Math::Vector2D   position;
             std::string      text;
             unsigned int     alignment;
+            double           lineSpacing;
             ColorStack       colorStack;
             StyleStack       styleStack;
-            Color            currColor;
+            ColorSpec        currColor;
             Style            currStyle;
             std::size_t      currLine;
             TextFragmentList textFragments;
