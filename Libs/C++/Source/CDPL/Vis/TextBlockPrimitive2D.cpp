@@ -42,9 +42,6 @@ using namespace CDPL;
 namespace
 {
 
-    typedef rapidxml::xml_document<char>  XMLDocument;
-    typedef rapidxml::xml_attribute<char> XMLAttribute;
-
     const std::string LINE_BREAK_TAG  = "br";
     const std::string BOLD_TAG        = "b";
     const std::string ITALIC_TAG      = "i";
@@ -59,7 +56,7 @@ namespace
     const char*       COLOR_B_ATTR    = "b";
     const char*       COLOR_A_ATTR    = "a";
 
-    constexpr double  SUB_SUPER_SCRIPT_FONT_SIZE_FACTOR = 0.5; 
+    constexpr double  SUB_SUPER_SCRIPT_FONT_SIZE_FACTOR = 0.6; 
 }
 
 
@@ -78,7 +75,7 @@ void Vis::TextBlockPrimitive2D::render(Renderer2D& renderer) const
     for (auto& tf : textFragments) {
         applyStyle(font, font_size, tf.style);
 
-        renderer.setPen(tf.color.second ? pen : tf.color.first);
+        renderer.setPen(tf.defColor ? pen : tf.color);
         renderer.setFont(font);
         renderer.drawText(tf.xPos + position(0), tf.yPos + position(1), tf.text);
     }
@@ -169,14 +166,16 @@ void Vis::TextBlockPrimitive2D::layout(FontMetrics& font_metrics)
     auto font_asc = font_metrics.getAscent();
     auto font_desc = font_metrics.getDescent();
     auto font = this->font;
-   
-    std::vector<double> line_widths(currLine + 1, 0.0);
-
+    auto max_line_width = 0.0;
+ 
+    std::vector<double> x_offsets(currLine + 1, 0.0);
+    std::vector<Rectangle2D> line_bounds(currLine + 1);
+    Rectangle2D tf_bounds;
+    
     for (auto& tf : textFragments) {
         applyStyle(font, font_size, tf.style);
 
         font_metrics.setFont(font);
-        font_metrics.getBounds(tf.text, tf.bBox);
 
         auto y_offs = 0.0;
 
@@ -187,25 +186,22 @@ void Vis::TextBlockPrimitive2D::layout(FontMetrics& font_metrics)
             y_offs = font_desc - font_metrics.getDescent();
 
         tf.yPos = tf.line * line_spacing + font_asc + y_offs;
-        tf.xPos = line_widths[tf.line];
+        tf.xPos = x_offsets[tf.line];
 
-        line_widths[tf.line] += font_metrics.getWidth(tf.text);
+        font_metrics.getBounds(tf.text, tf_bounds);
+        tf_bounds.translate({tf.xPos, tf.yPos});
+
+        line_bounds[tf.line].addRectangle(tf_bounds);
+        x_offsets[tf.line] += font_metrics.getWidth(tf.text);
+
+        max_line_width = std::max(max_line_width, line_bounds[tf.line].getWidth());
     }
 
-    auto hor_shift_fact = (alignment == Alignment::H_CENTER ? 0.5 : alignment == Alignment::RIGHT ? 1.0 : 0.0);
-    auto max_width = *std::max_element(line_widths.begin(), line_widths.end());
-
-    if (hor_shift_fact > 0.0)
-        for (auto& tf : textFragments)
-            tf.xPos += (max_width - line_widths[tf.line]) * hor_shift_fact;
-
-    auto min_x = max_width;
-
+    auto almnt = (alignment & Alignment::H_ALIGNMENT_MASK);
+    auto hor_shift_fact = (almnt == Alignment::H_CENTER ? 0.5 : almnt == Alignment::RIGHT ? 1.0 : 0.0);
+  
     for (auto& tf : textFragments)
-        min_x = std::min(min_x, tf.xPos + tf.bBox.getMin()(0));
-
-    for (auto& tf : textFragments)
-        tf.xPos -= min_x;
+        tf.xPos += (max_line_width - line_bounds[tf.line].getWidth()) * hor_shift_fact - line_bounds[tf.line].getMin()(0);
  }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::TextBlockPrimitive2D::clone() const
@@ -227,11 +223,12 @@ void Vis::TextBlockPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* font
     auto font_asc = font_metrics->getAscent();
     auto font_desc = font_metrics->getDescent();
     auto font = this->font;
-    Rectangle2D text_bounds;
-   
-    std::vector<double> line_widths(currLine + 1, 0.0);
+    auto max_line_width = 0.0;
+    
+    std::vector<double> x_offsets(currLine + 1, 0.0);
     std::vector<Rectangle2D> line_bounds(currLine + 1);
-
+    Rectangle2D tf_bounds;
+    
     for (auto& tf : textFragments) {
         applyStyle(font, font_size, tf.style);
 
@@ -246,32 +243,20 @@ void Vis::TextBlockPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* font
             y_offs = font_desc - font_metrics->getDescent();
 
         auto y_pos = tf.line * line_spacing + font_asc + y_offs;
-        auto x_pos = line_widths[tf.line];
+        auto x_pos = x_offsets[tf.line];
 
-        font_metrics->getBounds(tf.text, text_bounds);
+        font_metrics->getBounds(tf.text, tf_bounds);
 
-        text_bounds.translate({x_pos, y_pos});
+        tf_bounds.translate({x_pos, y_pos});
 
-        line_bounds[tf.line].addRectangle(text_bounds);
-        line_widths[tf.line] += font_metrics->getWidth(tf.text);
+        line_bounds[tf.line].addRectangle(tf_bounds);
+        x_offsets[tf.line] += font_metrics->getWidth(tf.text);
+        
+        max_line_width = std::max(max_line_width, line_bounds[tf.line].getWidth());
     }
 
-    auto hor_shift_fact = (alignment == Alignment::H_CENTER ? 0.5 : alignment == Alignment::RIGHT ? 1.0 : 0.0);
-    auto max_width = *std::max_element(line_widths.begin(), line_widths.end());
-    auto min_x = 0.0;
-    auto max_x = 0.0;
-
-    for (std::size_t i = 0; i < line_bounds.size(); i++) {
-        if (!line_bounds[i].isDefined())
-            continue;
-
-        auto d_x = (max_width - line_widths[i]) * hor_shift_fact;
-
-        min_x = std::min(min_x, line_bounds[i].getMin()(0) + d_x);
-        max_x = std::max(max_x, line_bounds[i].getMax()(0) + d_x);
-    }
-
-    bounds.setBounds(position(0), position(1), position(0) + max_x - min_x, position(1) + (currLine + 1) * line_spacing);
+    bounds.setBounds(position(0), position(1), position(0) + max_line_width, position(1) +
+                     currLine * line_spacing + font_asc + font_desc);
 }
 
 void Vis::TextBlockPrimitive2D::processText(const std::string& text)
@@ -280,12 +265,11 @@ void Vis::TextBlockPrimitive2D::processText(const std::string& text)
     styleStack.clear();
     textFragments.clear();
 
-    currColor.second = true;
     currStyle = Style();
     currLine = 0;
     
     auto tmp_text("<doc>" + text + "</doc>");
-    XMLDocument xml_doc;
+    rapidxml::xml_document<char> xml_doc;
 
     xml_doc.parse<0>(&tmp_text[0]);
 
@@ -297,12 +281,12 @@ void Vis::TextBlockPrimitive2D::processNode(XMLNode* node)
     for (node = node->first_node(); node; node = node->next_sibling()) {
         switch (node->type()) {
 
-            case rapidxml::node_data:
-            case rapidxml::node_cdata:
-                textFragments.emplace_back(node->value(), currStyle, currColor, currLine);
+            case rapidxml::node_type::node_data:
+            case rapidxml::node_type::node_cdata:
+                textFragments.emplace_back(node->value(), currStyle, currColor, colorStack.empty(), currLine);
                 continue;
 
-            case rapidxml::node_element: {
+            case rapidxml::node_type::node_element: {
                 auto node_name = node->name();
 
                 if (node_name == LINE_BREAK_TAG) {
@@ -377,32 +361,23 @@ void Vis::TextBlockPrimitive2D::processNode(XMLNode* node)
 
 void Vis::TextBlockPrimitive2D::getColor(XMLNode* node)
 {
-    currColor.first.setRGBA(0.0, 0.0, 0.0, 1.0);
-    currColor.second = true;
-    
-    if (auto attr = node->first_attribute(COLOR_R_ATTR)) {
-        currColor.first.setRed(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
-                                                             "TextBlockPrimitive2D: error while parsing red color component"));
-        currColor.second = false;
-    }
-    
-    if (auto attr = node->first_attribute(COLOR_G_ATTR)) {
-        currColor.first.setGreen(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
-                                                               "TextBlockPrimitive2D: error while parsing green color component"));
-        currColor.second = false;
-    }
-   
-    if (auto attr = node->first_attribute(COLOR_B_ATTR)) {
-        currColor.first.setBlue(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
-                                                              "TextBlockPrimitive2D: error while parsing blue color component"));
-        currColor.second = false;
-    }
-   
-    if (auto attr = node->first_attribute(COLOR_A_ATTR)) {
-        currColor.first.setAlpha(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
-                                                               "TextBlockPrimitive2D: error while parsing alpha color component"));
-        currColor.second = false;
-    }
+    currColor.setRGBA(0.0, 0.0, 0.0, 1.0);
+
+    if (auto attr = node->first_attribute(COLOR_R_ATTR))
+        currColor.setRed(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
+                                                       "TextBlockPrimitive2D: error while parsing red color component"));
+
+    if (auto attr = node->first_attribute(COLOR_G_ATTR))
+        currColor.setGreen(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
+                                                         "TextBlockPrimitive2D: error while parsing green color component"));
+
+    if (auto attr = node->first_attribute(COLOR_B_ATTR))
+        currColor.setBlue(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
+                                                        "TextBlockPrimitive2D: error while parsing blue color component"));
+
+    if (auto attr = node->first_attribute(COLOR_A_ATTR))
+        currColor.setAlpha(Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(),
+                                                         "TextBlockPrimitive2D: error while parsing alpha color component"));
 }
 
 void Vis::TextBlockPrimitive2D::applyStyle(Font& font, double font_size, const Style& style) const

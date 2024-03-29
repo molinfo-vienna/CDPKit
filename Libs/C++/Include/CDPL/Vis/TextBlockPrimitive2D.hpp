@@ -31,14 +31,12 @@
 
 #include <string>
 #include <vector>
-#include <utility>
 #include <cstddef>
 #include <memory>
 
 #include "CDPL/Vis/GraphicsPrimitive2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Font.hpp"
-#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -189,25 +187,23 @@ namespace CDPL
                 bool superscripted{false};
             };
 
-            typedef std::pair<Color, bool> ColorSpec;
-
             struct TextFragment
             {
 
-                TextFragment(const char* text, const Style& style, const ColorSpec& color, std::size_t line):
-                    text(text), style(style), color(color), line(line) {}
+                TextFragment(const char* text, const Style& style, const Color& color, bool def_color, std::size_t line):
+                    text(text), style(style), color(color), defColor(def_color), line(line) {}
 
                 std::string  text;
                 Style        style;
-                ColorSpec    color;
+                Color        color;
+                bool         defColor;
                 std::size_t  line;
                 double       xPos;
                 double       yPos;
-                Rectangle2D  bBox;
             };
 
             typedef rapidxml::xml_node<char>  XMLNode;
-            typedef std::vector<ColorSpec>    ColorStack;
+            typedef std::vector<Color>        ColorStack;
             typedef std::vector<Style>        StyleStack;
             typedef std::vector<TextFragment> TextFragmentList;
 
@@ -224,7 +220,7 @@ namespace CDPL
             double           lineSpacing;
             ColorStack       colorStack;
             StyleStack       styleStack;
-            ColorSpec        currColor;
+            Color            currColor;
             Style            currStyle;
             std::size_t      currLine;
             TextFragmentList textFragments;
