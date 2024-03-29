@@ -385,19 +385,76 @@ void Vis::CairoRenderer2D::drawPoint(double x, double y)
 
 void Vis::CairoRenderer2D::drawText(double x, double y, const std::string& txt)
 {
-    cairo_select_font_face(cairoContext.get(), fontStack.back().getFamily().c_str(), 
-                           fontStack.back().isItalic() ? CAIRO_FONT_SLANT_ITALIC : CAIRO_FONT_SLANT_NORMAL,
-                           fontStack.back().isBold() ? CAIRO_FONT_WEIGHT_BOLD : CAIRO_FONT_WEIGHT_NORMAL);
+    auto& font = fontStack.back();
+    
+    cairo_select_font_face(cairoContext.get(), font.getFamily().c_str(), 
+                           font.isItalic() ? CAIRO_FONT_SLANT_ITALIC : CAIRO_FONT_SLANT_NORMAL,
+                           font.isBold() ? CAIRO_FONT_WEIGHT_BOLD : CAIRO_FONT_WEIGHT_NORMAL);
+    cairo_set_font_size(cairoContext.get(), font.getSize());
 
-    cairo_set_font_size(cairoContext.get(), fontStack.back().getSize());
-
-    const Color& color = penStack.back().getColor();
+    auto& color = penStack.back().getColor();
 
     cairo_set_source_rgba(cairoContext.get(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-
     cairo_move_to(cairoContext.get(), x, y);
-
     cairo_show_text(cairoContext.get(), txt.c_str());
+
+    if (!font.isUnderlined() && !font.isOverlined() && !font.isStrikedOut())
+        return;
+
+    cairo_set_line_cap(cairoContext.get(), CAIRO_LINE_CAP_BUTT);
+    cairo_set_dash(cairoContext.get(), 0, 0, 0);
+    
+    cairo_text_extents_t text_extents;
+
+    cairo_text_extents(cairoContext.get(), txt.c_str(), &text_extents);
+    
+    auto x_adv = text_extents.x_advance;
+    
+    if (font.isStrikedOut()) {
+        cairo_text_extents(cairoContext.get(), "x", &text_extents);
+
+        auto y_pos = y + text_extents.y_bearing * 0.5;
+
+        cairo_new_path(cairoContext.get());
+        
+        cairo_move_to(cairoContext.get(), x, y_pos);
+        cairo_line_to(cairoContext.get(), x + x_adv, y_pos);
+
+        cairo_set_line_width(cairoContext.get(), font.getSize() * 0.05);
+        cairo_stroke(cairoContext.get());
+    }
+
+    if (!font.isUnderlined() && !font.isOverlined())
+        return;
+    
+    cairo_font_extents_t font_extents;
+
+    cairo_font_extents(cairoContext.get(), &font_extents);
+
+    if (font.isOverlined()) {
+        auto line_width = 0.05 * font.getSize();
+        auto y_pos = y - font_extents.ascent + line_width * 0.5;
+    
+        cairo_new_path(cairoContext.get());
+        
+        cairo_move_to(cairoContext.get(), x, y_pos);
+        cairo_line_to(cairoContext.get(), x + x_adv, y_pos);
+
+        cairo_set_line_width(cairoContext.get(), line_width);
+        cairo_stroke(cairoContext.get());
+    }
+
+    if (font.isUnderlined()) {
+        auto y_pos = y + font_extents.descent * 0.5;
+    
+        cairo_new_path(cairoContext.get());
+        
+        cairo_move_to(cairoContext.get(), x, y_pos);
+        cairo_line_to(cairoContext.get(), x + x_adv, y_pos);
+
+        cairo_set_line_width(cairoContext.get(), 0.075 * font.getSize());
+        cairo_stroke(cairoContext.get());
+    }
 }
 
 void Vis::CairoRenderer2D::drawEllipse(double x, double y, double width, double height)
