@@ -23,6 +23,33 @@
 # \brief 
 # \param cntnr 
 #
+def clearEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param erase 
+#
+def setEraseBackgroundParameter(cntnr: Base.ControlParameterContainer, erase: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1368,6 +1395,33 @@ def getReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> Col
 # \param color 
 #
 def setReactionArrowColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> float: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param factor 
+#
+def setOutputScalingFactorParameter(cntnr: Base.ControlParameterContainer, factor: float) -> None: pass
 
 ##
 # \brief 

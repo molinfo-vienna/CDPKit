@@ -25,6 +25,11 @@
 class ControlParameterDefault(Boost.Python.instance):
 
     ##
+    # \brief Default setting (= <tt>1.0</tt>) for the control-parameter Vis.ControlParameter.OUTPUT_SCALING_FACTOR.
+    # 
+    OUTPUT_SCALING_FACTOR = 1.0
+
+    ##
     # \brief Default setting (= <tt>Rectangle2D</tt>()) for the control-parameter Vis.ControlParameter.VIEWPORT.
     # 
     VIEWPORT = Rectangle2D()
@@ -40,9 +45,14 @@ class ControlParameterDefault(Boost.Python.instance):
     ALIGNMENT = 15
 
     ##
-    # \brief Default setting (= <tt>Color.TRANSPARENT</tt>) for the control-parameter Vis.ControlParameter.BACKGROUND_COLOR.
+    # \brief Default setting (= <tt>Color.WHITE</tt>) for the control-parameter Vis.ControlParameter.BACKGROUND_COLOR.
     # 
-    BACKGROUND_COLOR = Color()
+    BACKGROUND_COLOR = Color(r=1, g=1, b=1)
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.ERASE_BACKGROUND.
+    # 
+    ERASE_BACKGROUND = True
 
     ##
     # \brief Default setting (= <tt>ArrowStyle.REACTION_SOLID</tt>) for the control-parameter Vis.ControlParameter.REACTION_ARROW_STYLE.

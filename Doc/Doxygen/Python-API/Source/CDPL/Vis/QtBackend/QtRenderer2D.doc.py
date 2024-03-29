@@ -211,3 +211,8 @@ class QtRenderer2D(Vis.Renderer2D):
     # \brief Disables clipping.
     # 
     def clearClipPath() -> None: pass
+
+    ##
+    # \brief FIXME!
+    #
+    def _convertToQPolygon(QtRenderer2D self): -> None: pass

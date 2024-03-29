@@ -25,6 +25,15 @@
 class ControlParameter(Boost.Python.instance):
 
     ##
+    # \brief Specifies a factor for the scaling of logical to drawing surface coordinates.
+    # 
+    # A factor higher than <em>1.0</em> (the default) makes only sense for rendering to pixel-based surfaces (e.g. a Cairo [\ref CAIRO] image surface). For example, a scaling factor of <em>4.0</em> causes a logical pixel (a square with side length <em>1.0</em>) being mapped to <em>16</em> drawing surface pixels. Thus, the higher the scaling factor the higher will be the resolution and size of pixel-based output images.
+    # 
+    # <b>Value Type:</b> double
+    # 
+    OUTPUT_SCALING_FACTOR = CDPL.Base.LookupKey('OUTPUT_SCALING_FACTOR')
+
+    ##
     # \brief Specifies the alignment of a 2D depiction within the viewport area.
     # 
     # The alignment is specified by a combination of the flags defined in namespace Vis.Alignment. If <tt>ALIGNMENT</tt> is left unspecified, the default alignment setting Vis.ControlParameterDefault.ALIGNMENT will be used.
@@ -148,13 +157,22 @@ class ControlParameter(Boost.Python.instance):
     BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = CDPL.Base.LookupKey('BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE')
 
     ##
-    # \brief Specifies the color with which the drawing area is erased before rendering any graphical primitives.
+    # \brief Specifies the color with which the drawing area gets erased before rendering any graphical primitives.
     # 
-    # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render. If the control-parameter is left unspecified or Vis.Color.TRANSPARENT, the drawing area won't be erased.
+    # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render.
     # 
-    # <b>Value Type:</b> Vis.Color
+    # \see Vis.ControlParameter.ERASE_BACKGROUND <b>Value Type:</b> Vis.Color
     # 
     BACKGROUND_COLOR = CDPL.Base.LookupKey('BACKGROUND_COLOR')
+
+    ##
+    # \brief Specifies whether the drawing area shall be erased before rendering any graphical primitives.
+    # 
+    # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render.
+    # 
+    # \see Vis.ControlParameter.BACKGROUND_COLOR <b>Value Type:</b> bool
+    # 
+    ERASE_BACKGROUND = CDPL.Base.LookupKey('ERASE_BACKGROUND')
 
     ##
     # \brief Specifies the color of bonds.
