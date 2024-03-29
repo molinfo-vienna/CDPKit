@@ -30,6 +30,7 @@
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 using namespace CDPL;
@@ -108,6 +109,14 @@ void Vis::CairoFontMetrics::getBounds(const std::string& str, Rectangle2D& bound
     bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
                      text_extents.width + text_extents.x_bearing, 
                      text_extents.height + text_extents.y_bearing);
+
+    if (!str.empty()) {
+        if (Internal::IsWhitespace()(str[0]))
+            bounds.addPoint(0.0, 0.0);
+
+        if (Internal::IsWhitespace()(str.back()))
+            bounds.addPoint(text_extents.x_advance, 0.0);
+    }
 } 
 
 void Vis::CairoFontMetrics::getBounds(char ch, Rectangle2D& bounds) const
@@ -118,6 +127,11 @@ void Vis::CairoFontMetrics::getBounds(char ch, Rectangle2D& bounds) const
 
     cairo_text_extents(cairoContext.get(), str, &text_extents);
 
+    if (Internal::IsWhitespace()(ch)) {
+       bounds.setBounds(0.0, 0.0, text_extents.x_advance, 0.0);
+       return;
+    }
+    
     bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
                      text_extents.width + text_extents.x_bearing, 
                      text_extents.height + text_extents.y_bearing);

@@ -31,6 +31,7 @@
 #include "CDPL/Vis/QtObjectFactory.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 using namespace CDPL;
@@ -86,18 +87,32 @@ void Vis::QtFontMetrics::getBounds(const std::string& str, Rectangle2D& bounds) 
     bounds.setMin(str_bounds.left(), 0.0);
     bounds.setMax(str_bounds.right(), 0.0);
 
-    std::string::const_iterator str_end = str.end();
-
-    for (std::string::const_iterator it = str.begin(); it != str_end; ++it) {
-        str_bounds = qFontMetrics->boundingRect(*it);
+    for (char c : str) {
+        str_bounds = qFontMetrics->boundingRect(c);
 
         bounds.addPoint(bounds.getMin()[0], str_bounds.top());
         bounds.addPoint(bounds.getMax()[0], str_bounds.bottom());
+    }
+
+    if (!str.empty()) {
+        if (Internal::IsWhitespace()(str.back()))
+            bounds.addPoint(getWidth(str), 0.0);
+        
+        for (char c : str)
+            if (!Internal::IsWhitespace()(c))
+                return;
+
+        bounds.addPoint(0.0, 0.0);
     }
 } 
 
 void Vis::QtFontMetrics::getBounds(char ch, Rectangle2D& bounds) const
 {
+    if (Internal::IsWhitespace()(ch)) {
+        bounds.setBounds(0.0, 0.0, getWidth(ch), 0.0);
+        return;
+    }
+    
     QRectF ch_bounds = qFontMetrics->boundingRect(ch);
 
     bounds.setBounds(ch_bounds.left(), ch_bounds.top(), ch_bounds.right(), ch_bounds.bottom());
