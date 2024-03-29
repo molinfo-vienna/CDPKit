@@ -123,7 +123,7 @@ bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
         return false;
     }
 
-    pharmDocument.parse<0>(&pharmData[0]);
+    pharmDocument.parse<rapidxml::parse_trim_whitespace>(&pharmData[0]);
     
     const XMLNode* pharm_node = pharmDocument.first_node(PML::PHARMACOPHORE_TAG.c_str());
 

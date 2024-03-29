@@ -82,7 +82,7 @@ void ConfGen::TorsionLibraryDataReader::processData(char* data, TorsionLibrary& 
 {
     using namespace TorsionLibraryFormatData;
 
-    torLibDocument.parse<0>(data);
+    torLibDocument.parse<rapidxml::parse_trim_whitespace>(data);
 
     const XMLNode* lib_node = torLibDocument.first_node(LIBRARY_TAG.c_str());
 
