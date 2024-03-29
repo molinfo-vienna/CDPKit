@@ -1,5 +1,13 @@
 master:
 
+ - New unit test cases and updates
+ - Vis::CairoRenderer2D now supports the rendering of overlined, underlined and striked-out text
+ - Fixed an issue with the calculation of text bounds by Vis::CairoFontMetrics and Vis::QtFontMetrics
+   that lead to too small bounding boxes in the presence of leading and/or trailing whitespace
+ - Updated the internally used 'rapidxml' XML-parser library to the lastest version and fixed an issue with
+   whitespace-only data elements that were missing in the generated DOM-trees
+ - New 2D graphics primitive Vis::TextBlockPrimitive2D for the rendering of multi-line text blocks supporting
+   several options for the styling of individual text fragments
  - Support for setting the image output scaling factor in the program 'ChOX'
  - New control-parameter Vis::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
    depictions saved in pixel-based output formats
