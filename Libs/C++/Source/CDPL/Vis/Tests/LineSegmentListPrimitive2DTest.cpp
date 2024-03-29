@@ -201,6 +201,4 @@ BOOST_AUTO_TEST_CASE(LineSegmentListPrimitive2DTest)
 
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
-
 }
-

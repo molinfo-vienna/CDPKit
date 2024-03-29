@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(CairoFontMetricsTest)
     font = Font("Courier", 35.0);
     font.setItalic(true);
 
-    text = "Courier; 35; italic";
+    text = "  Courier; 35; italic  ";
 
     renderer.setPen(Color::BLUE);
     renderer.setFont(font);

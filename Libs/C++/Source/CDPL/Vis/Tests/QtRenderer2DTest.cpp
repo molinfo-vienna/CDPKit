@@ -326,7 +326,8 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
     Font f("Helvetica", 20.0);
 
     f.setItalic(true);
-
+    f.setStrikedOut(true);
+    
     renderer6.setPen(Pen(Color::BLUE));
     renderer6.setFont(f);
 
@@ -334,6 +335,8 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
 
     f.setItalic(false);
     f.setBold(true);
+    f.setStrikedOut(false);
+    f.setUnderlined(true);
     f.setFamily("Courier");
     f.setSize(40.0);
 
@@ -343,6 +346,8 @@ BOOST_AUTO_TEST_CASE(QtRenderer2DTest)
     renderer6.drawText(40.0, 90.0, "The Quick Brown Fox...");
 
     f.setItalic(true);
+    f.setUnderlined(false);
+    f.setOverlined(true);
     f.setFamily("Serif");
     f.setSize(60.0);
 

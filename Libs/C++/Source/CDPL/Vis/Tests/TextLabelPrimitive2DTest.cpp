@@ -38,6 +38,7 @@
 
 # include "CDPL/Vis/CairoPointer.hpp"
 # include "CDPL/Vis/CairoRenderer2D.hpp"
+# include "CDPL/Vis/CairoFontMetrics.hpp"
 
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
@@ -47,20 +48,24 @@ namespace
 {
 
 #ifdef HAVE_CAIRO     
-
-    void renderBBox(const CDPL::Vis::TextLabelPrimitive2D& tlp, CDPL::Vis::CairoRenderer2D& renderer)
+# ifdef HAVE_CAIRO_PNG_SUPPORT
+    
+    void renderBBox(const CDPL::Vis::TextLabelPrimitive2D& tlp, CDPL::Vis::CairoRenderer2D& renderer,
+                    CDPL::Vis::CairoFontMetrics& font_metrics)
     {
         using namespace CDPL;
         using namespace Vis;
 
         Rectangle2D bbox;
-        tlp.getBounds(bbox, 0);
+        
+        tlp.getBounds(bbox, &font_metrics);
 
         renderer.setPen(Color::RED);
         renderer.setBrush(Brush());
         renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
     }
 
+# endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO 
 
     void checkClone(const CDPL::Vis::TextLabelPrimitive2D& prim)
@@ -157,7 +162,8 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
     BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
     CairoRenderer2D renderer(ctxt_ptr);
-
+    CairoFontMetrics font_metrics(ctxt_ptr);
+    
     tlp.setText("The Quick Brown Fox...");
     tlp.setPosition(10.0, 15.0);
     tlp.setPen(Color::GREEN);
@@ -165,7 +171,7 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
     tlp.render(renderer);
 
-    renderBBox(tlp, renderer);
+    renderBBox(tlp, renderer, font_metrics);
 
     checkClone(tlp);
 
@@ -173,12 +179,12 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
     BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
     tlp.setPosition(20.0, 35.0);
-    tlp.setPen(Pen(Color::RED, Pen::NO_LINE));
+    tlp.setPen(Pen(Color::RED, 1.0, Pen::NO_LINE));
     tlp.setFont(Font("Times", 15.0));
 
     tlp.render(renderer);
 
-    renderBBox(tlp, renderer);
+    renderBBox(tlp, renderer, font_metrics);
 
     checkClone(tlp);
 
@@ -195,7 +201,7 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
     tlp.render(renderer);
 
-    renderBBox(tlp, renderer);
+    renderBBox(tlp, renderer, font_metrics);
 
     checkClone(tlp);
 
@@ -213,7 +219,7 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
     tlp.render(renderer);
 
-    renderBBox(tlp, renderer);
+    renderBBox(tlp, renderer, font_metrics);
 
     checkClone(tlp);
 
@@ -230,7 +236,7 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
     tlp.render(renderer);
 
-    renderBBox(tlp, renderer);
+    renderBBox(tlp, renderer, font_metrics);
 
     checkClone(tlp);
 
@@ -241,6 +247,4 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
-
 }
-

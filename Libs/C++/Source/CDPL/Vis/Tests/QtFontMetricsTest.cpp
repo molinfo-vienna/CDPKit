@@ -48,17 +48,17 @@ BOOST_AUTO_TEST_CASE(QtFontMetricsTest)
     
     QApplication app(argc, argv);
 
-    QImage image(800, 400, QImage::Format_ARGB32);
+    QImage image(850, 400, QImage::Format_ARGB32);
     QPainter view(&image);
 
-    view.fillRect(0, 0, 800, 400, Qt::gray);
+    view.fillRect(0, 0, 850, 400, Qt::gray);
 
     QtRenderer2D renderer(view);
     QtFontMetrics fm(&image);
 
     Rectangle2D bounds;
 
-    view.fillRect(0, 0, 800, 400, Qt::white);
+    view.fillRect(0, 0, 850, 400, Qt::white);
 
 //-----
 
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(QtFontMetricsTest)
     font = Font("Courier", 35.0);
     font.setItalic(true);
 
-    text = "Courier; 35; italic";
+    text = "  Courier; 35; italic  ";
 
     renderer.setPen(Color::BLUE);
     renderer.setFont(font);
@@ -204,12 +204,12 @@ BOOST_AUTO_TEST_CASE(QtFontMetricsTest)
 
     bounds.translate(Math::vec(10.0, y));
 
-    renderer.setPen(Color::GREEN);
-    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
-
     renderer.setPen(Color::YELLOW);
     renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
 
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+ 
     renderer.setPen(Color::MAGENTA);
     renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
 

@@ -335,7 +335,8 @@ class TestCase(unittest.TestCase):
         f = Font('Helvetica', 20.0)
     
         f.setItalic(True)
-    
+        f.setStrikedOut(True)
+        
         renderer6.setPen(Pen(Color.BLUE))
         renderer6.setFont(f)
     
@@ -343,6 +344,8 @@ class TestCase(unittest.TestCase):
     
         f.setItalic(False)
         f.setBold(True)
+        f.setStrikedOut(False)
+        f.setUnderlined(True)
         f.setFamily('Courier')
         f.setSize(40.0)
     
@@ -352,6 +355,8 @@ class TestCase(unittest.TestCase):
         renderer6.drawText(40.0, 90.0, 'The Quick Brown Fox...')
     
         f.setItalic(True)
+        f.setUnderlined(False)
+        f.setOverlined(True)
         f.setFamily('Serif')
         f.setSize(60.0)
     

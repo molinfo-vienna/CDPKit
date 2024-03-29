@@ -350,7 +350,8 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
     Font f("Helvetica", 20.0);
 
     f.setItalic(true);
-
+    f.setStrikedOut(true);
+    
     renderer.setPen(Pen(Color::BLUE));
     renderer.setFont(f);
 
@@ -361,6 +362,8 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
 
     f.setItalic(false);
     f.setBold(true);
+    f.setStrikedOut(false);
+    f.setUnderlined(true);
     f.setFamily("Courier");
     f.setSize(40.0);
 
@@ -373,6 +376,8 @@ BOOST_AUTO_TEST_CASE(CairoRenderer2DTest)
     BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
     f.setItalic(true);
+    f.setUnderlined(false);
+    f.setOverlined(true);
     f.setFamily("Serif");
     f.setSize(60.0);
 

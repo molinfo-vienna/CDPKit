@@ -47,17 +47,17 @@ class TestCase(unittest.TestCase):
         """Testing QtFontMetrics"""
     
         app = QApplication(sys.argv)
-        image = QImage(800, 400, QImage.Format_ARGB32)
+        image = QImage(850, 400, QImage.Format_ARGB32)
         view = QPainter(image)
 
-        view.fillRect(0, 0, 800, 400, Qt.gray)
+        view.fillRect(0, 0, 850, 400, Qt.gray)
     
         renderer = QtRenderer2D(view)
         fm = QtFontMetrics(image)
     
         bounds = Rectangle2D()
     
-        view.fillRect(0, 0, 800, 400, Qt.white)
+        view.fillRect(0, 0, 850, 400, Qt.white)
     
         #-----
     
@@ -191,7 +191,7 @@ class TestCase(unittest.TestCase):
         font.assign(Font('Courier', 35.0))
         font.setItalic(True)
     
-        text = 'Courier; 35; italic'
+        text = '  Courier; 35; italic  '
     
         renderer.setPen(Color.BLUE)
         renderer.setFont(font)
