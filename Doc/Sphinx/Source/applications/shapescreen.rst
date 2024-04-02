@@ -3,8 +3,8 @@ shapescreen
 
 Performs a fast Gaussian shape-based similarity screening of molecule databases.
 
-Synaopsis
----------
+Synopsis
+--------
 
   :program:`shapescreen` [-hVvpMPyazuWSACENGFBYt] [-c arg] [-l arg] [-o arg] [-r arg] [-m arg] [-s arg] [-b arg] [-n arg] [-x arg] [-X arg] [-g arg] [-f arg] [-R arg] [-T arg] [-Q arg] [-D arg] [-O arg] -q arg -d arg
 
