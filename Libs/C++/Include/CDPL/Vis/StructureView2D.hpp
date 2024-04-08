@@ -78,7 +78,6 @@ namespace CDPL
     namespace Vis
     {
 
-        class FontMetrics;
         class StructureView2DParameters;
 
         /**
@@ -730,11 +729,7 @@ namespace CDPL
             void getModelBounds(Rectangle2D& bounds);
 
           private:
-            class CustomGraphicsData;
             friend class ReactionView2D;
-
-            typedef std::shared_ptr<CustomGraphicsData> CustomGraphicsDataPtr;
-            typedef std::vector<CustomGraphicsDataPtr>  CustomGraphicsDataList;
 
             StructureView2D(const StructureView2D&);
             StructureView2D(bool);

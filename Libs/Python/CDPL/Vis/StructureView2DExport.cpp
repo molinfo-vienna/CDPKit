@@ -26,8 +26,7 @@
 
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
-#include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "ClassExports.hpp"
 

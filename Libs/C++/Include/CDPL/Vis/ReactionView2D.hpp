@@ -60,7 +60,6 @@ namespace CDPL
     {
 
         class ReactionView2DParameters;
-        class FontMetrics;
 
         /**
          * \brief Implements the 2D visualization of chemical reactions.
