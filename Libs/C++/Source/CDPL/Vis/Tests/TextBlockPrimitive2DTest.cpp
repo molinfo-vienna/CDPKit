@@ -118,9 +118,9 @@ namespace
 #endif // HAVE_CAIRO 
 
     const std::string STYLED_TEXT =
-        "   <b>Water</b> is an <i>inorganic</> compound with the chemical formula <i>H<sub><color b='1.0'>2</></>O</>. "
+        "   <b>Wa\rter</b>\tis an <i>inorganic</> compound with the chemical formula <i>H<sub><color b='1.0'>2</></>O</>. "
         "<i>It</>    is a <color r='1' a='0.5'>transparent,<br/>tasteless</>, odorless,<sup>[c]</sup> <s>and nearly colorless</s> chemical substance, "
-        "and it is the main constituent of Earth's hydrosphere<br></br>   and the fluids of all <u>known</> <b><i>living</i></> organisms<br/>"
+        "and it is the main constituent of Earth's hydrosphere<br></br>   and the fluids of all <u>known</> <b><i>living</i></> organisms\n"
         " (in which it acts as a solvent<sup>[19]</>). It is vital for all known <u><s><b><o><i>forms</></></></></> of <color g='1'>life, <color b='1'>despite</> not</><br/>"
         "providing food energy or organic micronutrients. Its chemical formula, <b>H<sub>2</>O</>, indicates that each of its molecules contains (5 ws follow)     <br/>"
         " one <i><color r='0.7'>oxygen</></i> and two <color r='0.5' g='0.5' b='0.5'><i>hydrogen</></color> atoms, connected by covalent bonds. <br/>"
@@ -256,7 +256,7 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     tbp.setFont(Font());
     tbp.setAlignment(Alignment::LEFT);
     tbp.setLineSpacing(1.25);
-    tbp.setText("<br/>  f=Font(), c=BLACK, ls=1.25, a=LEFT, p=(10.0, 10.0)<br/><br/>" + STYLED_TEXT);
+    tbp.setText("\n>  f=Font(), c=BLACK, ls=1.25, a=LEFT, p=(10.0, 10.0)\n\r\n" + STYLED_TEXT);
 
     renderPrimitive(tbp, img_id);
 
@@ -265,14 +265,14 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     tbp.setFont(Font("Times", 12.0));
     tbp.setLineSpacing(1.0);
     tbp.setAlignment(Alignment::RIGHT);
-    tbp.setText("<br/>  f=('Times', 12.0), p=(GRAY, NO_LINE), ls=1.0, a=RIGHT, p=(20.0, 35.0)<br/><br/>" + STYLED_TEXT);
+    tbp.setText("\n>  f=('Times', 12.0), p=(GRAY, NO_LINE), ls=1.0, a=RIGHT, p=(20.0, 35.0)<br/>\n" + STYLED_TEXT);
     
     renderPrimitive(tbp, img_id);
 
     tbp.setPosition(20.0, 20.0);
     tbp.setFont(Font("Courier", 10.0, true));
     tbp.setAlignment(Alignment::CENTER);
-    tbp.setText("<br/>  f=('Courier', 10.0, true), p=(GRAY, NO_LINE), ls=1.0, a=CENTER, p=(20.0, 20.0)<br/><br/>" + STYLED_TEXT);
+    tbp.setText("\n>  f=('Courier', 10.0, true), p=(GRAY, NO_LINE), ls=1.0, a=CENTER, p=(20.0, 20.0)\n<br/>" + STYLED_TEXT);
     
     renderPrimitive(tbp, img_id);
     renderPrimitive(static_cast<TextBlockPrimitive2D&>(*tbp.clone()), img_id);

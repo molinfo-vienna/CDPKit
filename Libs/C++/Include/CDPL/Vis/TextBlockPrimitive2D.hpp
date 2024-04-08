@@ -190,8 +190,11 @@ namespace CDPL
             struct TextFragment
             {
 
-                TextFragment(const char* text, const Style& style, const Color& color, bool def_color, std::size_t line):
-                    text(text), style(style), color(color), defColor(def_color), line(line) {}
+                TextFragment(std::string& text, const Style& style, const Color& color, bool def_color, std::size_t line):
+                    style(style), color(color), defColor(def_color), line(line)
+                {
+                    this->text.swap(text);
+                }
 
                 std::string  text;
                 Style        style;

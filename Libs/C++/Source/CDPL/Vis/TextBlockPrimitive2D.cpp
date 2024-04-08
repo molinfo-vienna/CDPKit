@@ -25,6 +25,8 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <cctype>
+#include <locale>
 
 #include "RapidXML/rapidxml.hpp"
 
@@ -282,9 +284,38 @@ void Vis::TextBlockPrimitive2D::processNode(XMLNode* node)
         switch (node->type()) {
 
             case rapidxml::node_type::node_data:
-            case rapidxml::node_type::node_cdata:
-                textFragments.emplace_back(node->value(), currStyle, currColor, colorStack.empty(), currLine);
+            case rapidxml::node_type::node_cdata: {
+                std::string text_frag;
+                auto node_value = node->value();
+                
+                for (std::size_t i = 0, str_len = node->value_size(); i < str_len; i++) {
+                    switch (auto c = node_value[i]) {
+
+                        case '\n':
+                            if (!text_frag.empty())
+                                textFragments.emplace_back(text_frag, currStyle, currColor, colorStack.empty(), currLine);
+
+                            currLine++;
+                            continue;
+
+                        case ' ':
+                        case '\t':
+                            text_frag.push_back(' ');
+                            continue;
+                            
+                        default:
+                            if (std::isspace(c, std::locale::classic()))
+                                continue;
+                                
+                            text_frag.push_back(c);
+                    }
+                }
+
+                if (!text_frag.empty())
+                    textFragments.emplace_back(text_frag, currStyle, currColor, colorStack.empty(), currLine);
+
                 continue;
+            }
 
             case rapidxml::node_type::node_element: {
                 auto node_name = node->name();
