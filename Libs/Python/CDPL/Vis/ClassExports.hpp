@@ -48,6 +48,7 @@ namespace CDPLPythonVis
     void exportRenderer2D();
     void exportStructureView2D();
     void exportReactionView2D();
+    void exportStructureGridView2D();
     void exportLinePrimitive2D();
     void exportPolygonPrimitive2D();
     void exportPolylinePrimitive2D();

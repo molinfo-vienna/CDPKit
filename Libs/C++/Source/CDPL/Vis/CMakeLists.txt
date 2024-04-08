@@ -46,6 +46,7 @@ set(cdpl-vis_LIB_SRCS
 
     StructureView2D.cpp
     ReactionView2D.cpp
+    StructureGridView2D.cpp
     StructureView2DParameters.cpp
     ReactionView2DParameters.cpp
     SizeSpecification.cpp

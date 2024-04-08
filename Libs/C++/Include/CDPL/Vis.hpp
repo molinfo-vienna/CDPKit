@@ -57,6 +57,7 @@
 #include "CDPL/Vis/Renderer2D.hpp"
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/ReactionView2D.hpp"
+#include "CDPL/Vis/StructureGridView2D.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"

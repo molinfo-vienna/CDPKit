@@ -53,6 +53,7 @@ BOOST_PYTHON_MODULE(_vis)
     exportRenderer2D();
     exportStructureView2D();
     exportReactionView2D();
+    exportStructureGridView2D();
     exportLinePrimitive2D();
     exportPolygonPrimitive2D();
     exportPolylinePrimitive2D();

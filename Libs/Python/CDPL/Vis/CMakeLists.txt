@@ -49,6 +49,7 @@ set(vis_MOD_SRCS
     Renderer2DExport.cpp
     StructureView2DExport.cpp
     ReactionView2DExport.cpp
+    StructureGridView2DExport.cpp
     LinePrimitive2DExport.cpp
     PolygonPrimitive2DExport.cpp
     PolylinePrimitive2DExport.cpp
