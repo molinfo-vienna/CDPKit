@@ -94,11 +94,16 @@ namespace CDPL
                  */
                 typedef std::shared_ptr<Cell> SharedPointer;
 
+                void setStructure(const Chem::MolecularGraph& molgraph);
+
+                const Chem::MolecularGraph& getStructure() const;
+                
+                void clear(bool structure = true, bool text = true);
+
               private:
                 friend class StructureGridView2D;
                 
                 Cell();
-
                 ~Cell();
 
                 StructureView2D     structView;
@@ -131,7 +136,15 @@ namespace CDPL
             Cell& operator()(std::size_t row, std::size_t col);
 
             const Cell& operator()(std::size_t row, std::size_t col) const;
-            
+ 
+            void resize(std::size_t num_rows, std::size_t num_cols);
+
+            void clear(bool resize = true, bool structure = true, bool text = true);
+
+            std::size_t getNumRows() const;
+
+            std::size_t getNumColumns() const;
+
           private:
             typedef Util::ObjectPool<Cell>         CellCache;
             typedef CellCache::SharedObjectPointer CellPointer;
@@ -140,6 +153,7 @@ namespace CDPL
                 
             static Cell* newCell();
             static void deleteCell(Cell* cell);
+            static void cleanupCell(Cell& cell);
 
             typedef std::pair<std::size_t, std::size_t>               CellID;
             typedef boost::unordered_map<CellID, Cell::SharedPointer> CellMap;
@@ -147,6 +161,8 @@ namespace CDPL
             CellCache    cellCache;
             FontMetrics* fontMetrics;
             CellMap      cells;
+            std::size_t  numRows;
+            std::size_t  numColumns;
         };
     } // namespace Vis
 } // namespace CDPL

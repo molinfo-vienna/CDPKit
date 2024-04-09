@@ -42,10 +42,7 @@ namespace
     {
         using namespace boost;
 
-        auto row = python::extract<std::size_t>(indices[0]);
-        auto col = python::extract<std::size_t>(indices[1]);
-
-        return grid_view(row, col);
+        return grid_view(python::extract<std::size_t>(indices[0]), python::extract<std::size_t>(indices[1]));
     }
 }
 
@@ -59,17 +56,34 @@ void CDPLPythonVis::exportStructureGridView2D()
                                          python::bases<Vis::View2D>, boost::noncopyable>("StructureGridView2D", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def("getFontMetrics", &Vis::StructureGridView2D::getFontMetrics, python::arg("self"),
-             python::return_internal_reference<1>())
+             python::return_internal_reference<>())
         .def("__call__", &getCell, (python::arg("self"), python::arg("row"), python::arg("col")),
              python::return_internal_reference<>())
         .def("__getitem__", &getCellByTuple, (python::arg("self"), python::arg("row_and_col")),
              python::return_internal_reference<>())
+        .def("resize", &Vis::StructureGridView2D::resize, 
+             (python::arg("self"), python::arg("num_rows"), python::arg("num_cols")))
+        .def("clear", &Vis::StructureGridView2D::clear, 
+             (python::arg("self"), python::arg("resize") = true, python::arg("structure") = true, python::arg("text") = true))
+        .def("getNumRows", &Vis::StructureGridView2D::getNumRows, python::arg("self"))
+        .def("getNumColumns", &Vis::StructureGridView2D::getNumColumns, python::arg("self"))
+        .add_property("numRows", &Vis::StructureGridView2D::getNumRows)
+        .add_property("numColumns", &Vis::StructureGridView2D::getNumColumns)
         .add_property("fontMetrics", python::make_function(&Vis::StructureGridView2D::getFontMetrics,
-                                                           python::return_internal_reference<1>()),
+                                                           python::return_internal_reference<>()),
                       python::make_function(&Vis::StructureGridView2D::setFontMetrics,     
-                                            python::with_custodian_and_ward<1, 2>()));
+                                            python::with_custodian_and_ward<1, 2>()))
+        ;
 
     python::class_<Vis::StructureGridView2D::Cell, Vis::StructureGridView2D::Cell::SharedPointer,
                    boost::noncopyable>("Cell", python::no_init)
+        .def("clear", &Vis::StructureGridView2D::clear, 
+             (python::arg("self"), python::arg("structure") = true, python::arg("text") = true))
+        .def("setStructure", &Vis::StructureGridView2D::Cell::setStructure, (python::arg("self"), python::arg("molgraph")))
+        .def("getStructure", &Vis::StructureGridView2D::Cell::getStructure, python::arg("self"), 
+             python::return_internal_reference<>())
+        .add_property("structure", 
+                      python::make_function(&Vis::StructureGridView2D::Cell::getStructure, python::return_internal_reference<>()),
+                      &Vis::StructureGridView2D::Cell::setStructure)
         ;
 }

@@ -24,6 +24,8 @@
 
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
 #include "CDPL/Vis/StructureGridView2D.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -41,8 +43,10 @@ namespace
 
 Vis::StructureGridView2D::StructureGridView2D(): 
     cellCache(&StructureGridView2D::newCell, &StructureGridView2D::deleteCell, MAX_CELL_CACHE_SIZE),
-    fontMetrics(0)
-{}
+    fontMetrics(0), numRows(0), numColumns(0)
+{
+    cellCache.setCleanupFunction(&StructureGridView2D::cleanupCell);
+}
 
 Vis::StructureGridView2D::~StructureGridView2D()
 {}
@@ -73,6 +77,9 @@ Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::operator()(std::size_t
     if (!cell)
         cell = allocCell();
 
+    numRows = std::max(numRows, row + 1);
+    numColumns = std::max(numColumns, col + 1);
+
     return *cell;
 }
 
@@ -85,16 +92,52 @@ const Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::operator()(std::
     
     return *it->second;
 }
+ 
+void Vis::StructureGridView2D::resize(std::size_t num_rows, std::size_t num_cols)
+{
+    numRows = num_rows;
+    numColumns = num_cols;
+
+    for (auto it = cells.begin(), end = cells.end(); it != end; )
+        if (it->first.first >= num_rows || it->first.second >= num_cols)
+            it = cells.erase(it);
+        else
+            ++it;
+}
+
+void Vis::StructureGridView2D::clear(bool resize, bool structure, bool text)
+{
+    if (resize) {
+        cells.clear();
+        
+        numRows = 0;
+        numColumns = 0;
+        return;
+    }
+
+    for (auto& ce : cells)
+        ce.second->clear(structure, text);
+}
+
+std::size_t Vis::StructureGridView2D::getNumRows() const
+{
+    return numRows;
+}
+
+std::size_t Vis::StructureGridView2D::getNumColumns() const
+{
+    return numColumns;
+}
 
 Vis::StructureGridView2D::CellPointer Vis::StructureGridView2D::allocCell()
 {
     CellPointer cell_ptr = cellCache.get();
 
-// TODO
-    
+    cell_ptr->setParent(this);
+ 
     return cell_ptr;
 }
-    
+ 
 Vis::StructureGridView2D::Cell* Vis::StructureGridView2D::newCell()
 {
     return new Cell();
@@ -104,11 +147,41 @@ void Vis::StructureGridView2D::deleteCell(Cell* cell)
 {
     delete cell;
 }
+   
+void Vis::StructureGridView2D::cleanupCell(Cell& cell)
+{
+    cell.molecule.clear();
+    cell.setParent(nullptr);
+}
 
 // -- Cell --
 
-Vis::StructureGridView2D::Cell::Cell()
-{}
+Vis::StructureGridView2D::Cell::Cell() 
+{
+    structView.setParent(this);
+}
 
 Vis::StructureGridView2D::Cell::~Cell()
 {}
+
+void Vis::StructureGridView2D::Cell::setStructure(const Chem::MolecularGraph& molgraph)
+{
+    molecule = molgraph;
+
+    structView.setStructure(&molecule);
+}
+
+const Chem::MolecularGraph& Vis::StructureGridView2D::Cell::getStructure() const
+{
+    return molecule;
+}
+
+void Vis::StructureGridView2D::Cell::clear(bool structure, bool text)
+{
+    if (structure) {
+        molecule.clear();
+        structView.setStructure(nullptr);
+    }
+
+    // TODO
+}
