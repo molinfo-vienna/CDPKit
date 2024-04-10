@@ -100,28 +100,15 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ALIGNMENT;
 
             /**
-             * \brief Specifies the color with which the drawing area gets erased before rendering any graphical primitives.
+             * \brief Specifies the brush with which the drawing area gets erased before rendering any graphical primitives.
              *
              * The area which gets ereased is either the
              * viewport area specified by Vis::ControlParameter::VIEWPORT, or if Vis::ControlParameter::VIEWPORT is not defined, the
              * total bounds of the graphical objects to render. 
              *
-             * \see Vis::ControlParameter::ERASE_BACKGROUND
-             * \valuetype Vis::Color
+             * \valuetype Vis::Brush
              */
-            extern CDPL_VIS_API const Base::LookupKey BACKGROUND_COLOR;
-
-            /**
-             * \brief Specifies whether the drawing area shall be erased before rendering any graphical primitives.
-             *
-             * The area which gets ereased is either the
-             * viewport area specified by Vis::ControlParameter::VIEWPORT, or if Vis::ControlParameter::VIEWPORT is not defined, the
-             * total bounds of the graphical objects to render.
-             *
-             * \see Vis::ControlParameter::BACKGROUND_COLOR
-             * \valuetype bool
-             */
-            extern CDPL_VIS_API const Base::LookupKey ERASE_BACKGROUND;
+            extern CDPL_VIS_API const Base::LookupKey BACKGROUND_BRUSH;
 
             /**
              * \brief Specifies the style of reaction arrows.

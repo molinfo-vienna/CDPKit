@@ -85,6 +85,7 @@ namespace ChOX
 
         extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
         extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;
+        
     } // namespace ControlParameter
 } // namespace ChOX
 

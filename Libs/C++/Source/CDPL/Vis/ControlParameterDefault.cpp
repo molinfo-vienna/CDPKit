@@ -52,8 +52,7 @@ namespace CDPL
             const Rectangle2D               VIEWPORT                             = Rectangle2D();
             const unsigned int              SIZE_ADJUSTMENT                      = SizeAdjustment::IF_REQUIRED;
             const unsigned int              ALIGNMENT                            = Alignment::CENTER;
-            const Color                     BACKGROUND_COLOR                     = Color(1.0, 1.0, 1.0);
-            const bool                      ERASE_BACKGROUND                     = true;
+            const Brush                     BACKGROUND_BRUSH                     = Brush(Color(1.0, 1.0, 1.0));
 
             const unsigned int              REACTION_ARROW_STYLE                 = ArrowStyle::REACTION_SOLID;
             const Color                     REACTION_ARROW_COLOR                 = Color(0, 0, 0);

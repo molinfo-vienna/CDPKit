@@ -31,6 +31,7 @@
 #include "CDPL/Vis/PDFMolecularGraphWriter.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Color.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/AtomProperty.hpp"
@@ -117,7 +118,7 @@ BOOST_AUTO_TEST_CASE(PDFMolecularGraphWriterTest)
 //-----
 
     writer.removeParameter(ControlParameter::VIEWPORT);
-    writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::LIGHT_GRAY);
+    writer.setParameter(ControlParameter::BACKGROUND_BRUSH, Brush(Color::LIGHT_GRAY));
     writer.setParameter(ControlParameter::BOND_LENGTH, SizeSpecification(50.0));
 
     os.close();

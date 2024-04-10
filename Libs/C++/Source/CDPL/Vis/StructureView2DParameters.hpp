@@ -62,8 +62,7 @@ namespace CDPL
             double             getStdBondLength() const;
             unsigned int       getSizeAdjustment() const;
 
-            bool         eraseBackground() const;
-            const Color& getBackgroundColor() const;
+            const Brush& getBackgroundBrush() const;
 
             const ColorTable::SharedPointer& getAtomColorTable() const;
 
@@ -152,8 +151,7 @@ namespace CDPL
             void setStdBondLength(double);
             void setSizeAdjustment(unsigned int);
 
-            void eraseBackground(bool);
-            void setBackgroundColor(const Color&);
+            void setBackgroundBrush(const Brush&);
 
             void setAtomColorTable(const ColorTable::SharedPointer&);
 
@@ -226,8 +224,7 @@ namespace CDPL
             double                    stdBondLength;
             unsigned int              sizeAdjustment;
             unsigned int              alignment;
-            bool                      eraseBackgroundFlag;
-            Color                     backgroundColor;
+            Brush                     backgroundBrush;
             bool                      useCalcAtomCoordsFlag;
             ColorTable::SharedPointer atomColorTable;
             Color                     atomColor;

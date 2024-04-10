@@ -90,25 +90,16 @@ namespace CDPL
 
         CDPL_VIS_API void clearAlignmentParameter(Base::ControlParameterContainer& cntnr);
 
-
-        CDPL_VIS_API const Color& getBackgroundColorParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_VIS_API void setBackgroundColorParameter(Base::ControlParameterContainer& cntnr, const Color& color);
-
-        CDPL_VIS_API bool hasBackgroundColorParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_VIS_API void clearBackgroundColorParameter(Base::ControlParameterContainer& cntnr);
-
         /*
          * \since 1.2
          */
-        CDPL_VIS_API bool getEraseBackgroundParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_VIS_API const Brush& getBackgroundBrushParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_VIS_API void setEraseBackgroundParameter(Base::ControlParameterContainer& cntnr, bool erase);
+        CDPL_VIS_API void setBackgroundBrushParameter(Base::ControlParameterContainer& cntnr, const Brush& brush);
 
-        CDPL_VIS_API bool hasEraseBackgroundParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_VIS_API bool hasBackgroundBrushParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_VIS_API void clearEraseBackgroundParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_VIS_API void clearBackgroundBrushParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_VIS_API unsigned int getReactionArrowStyleParameter(const Base::ControlParameterContainer& cntnr);

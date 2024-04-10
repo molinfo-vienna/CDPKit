@@ -210,11 +210,11 @@ void Vis::ReactionView2D::init()
 
 void Vis::ReactionView2D::paintBackground(Renderer2D& renderer) const
 {
-    if (!parameters->eraseBackground())
+    if (parameters->getBackgroundBrush().getStyle() == Brush::NO_PATTERN)
         return;
 
     renderer.setPen(Pen::NO_LINE);
-    renderer.setBrush(parameters->getBackgroundColor());
+    renderer.setBrush(parameters->getBackgroundBrush());
 
     Rectangle2D rect = (parameters->getViewport().isDefined() ? parameters->getViewport() : totalReactionBounds);
 

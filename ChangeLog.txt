@@ -1,6 +1,8 @@
 master:
 
- - New unit test cases and updates
+ - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
+   specify a background fill pattern (see Vis::Brush) for 2D structure renderings
+ - New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
  - Vis::CairoRenderer2D now supports the rendering of overlined, underlined and striked-out text
  - Fixed an issue with the calculation of text bounds by Vis::CairoFontMetrics and Vis::QtFontMetrics
    that lead to too small bounding boxes in the presence of leading and/or trailing whitespace

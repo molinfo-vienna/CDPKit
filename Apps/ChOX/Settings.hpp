@@ -68,6 +68,7 @@ namespace ChOX
         void writeLineStyleParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
         void writeFontParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
         void writeColorParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeBrushParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
         void writeSizeSpecParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
         void writeAtomColorTableParam(QSettings&) const;
@@ -82,6 +83,7 @@ namespace ChOX
         void readLineStyleParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Pen::LineStyle&);
         void readFontParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Font&);
         void readColorParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Color&);
+        void readBrushParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Brush&);
         void readSizeSpecParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::SizeSpecification&);
 
         void readAtomColorTableParam(QSettings&);

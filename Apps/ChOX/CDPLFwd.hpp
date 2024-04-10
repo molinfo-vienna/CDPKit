@@ -56,6 +56,8 @@ namespace CDPL
         class Renderer2D;
         class Font;
         class Color;
+        class Pen;
+        class Brush;
         class SizeSpecification;
         class QtFontMetrics;
     } // namespace Vis

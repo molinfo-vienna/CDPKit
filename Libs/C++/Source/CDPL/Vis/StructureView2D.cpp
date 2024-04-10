@@ -293,11 +293,11 @@ void Vis::StructureView2D::init()
 
 void Vis::StructureView2D::paintBackground(Renderer2D& renderer) const
 {
-    if (reactionContext || !parameters->eraseBackground())
+    if (reactionContext || (parameters->getBackgroundBrush().getStyle() == Brush::NO_PATTERN))
         return;
 
     renderer.setPen(Pen::NO_LINE);
-    renderer.setBrush(parameters->getBackgroundColor());
+    renderer.setBrush(parameters->getBackgroundBrush());
 
     Rectangle2D rect = (parameters->getViewport().isDefined() ? parameters->getViewport() : outputStructureBounds);
 

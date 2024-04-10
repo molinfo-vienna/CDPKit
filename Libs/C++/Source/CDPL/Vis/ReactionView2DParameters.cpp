@@ -41,8 +41,7 @@ Vis::ReactionView2DParameters::ReactionView2DParameters(View2D& view):
     viewport(ControlParameterDefault::VIEWPORT),
     sizeAdjustment(ControlParameterDefault::SIZE_ADJUSTMENT),
     alignment(ControlParameterDefault::ALIGNMENT),
-    backgroundColor(Color::WHITE),
-    eraseBackgroundFlag(false),
+    backgroundBrush(ControlParameterDefault::BACKGROUND_BRUSH),
     arrowStyle(ControlParameterDefault::REACTION_ARROW_STYLE),
     arrowColor(ControlParameterDefault::REACTION_ARROW_COLOR),
     arrowLength(ControlParameterDefault::REACTION_ARROW_LENGTH),
@@ -96,14 +95,9 @@ unsigned int Vis::ReactionView2DParameters::getSizeAdjustment() const
     return sizeAdjustment;
 }
 
-bool Vis::ReactionView2DParameters::eraseBackground() const
+const Vis::Brush& Vis::ReactionView2DParameters::getBackgroundBrush() const
 {
-    return eraseBackgroundFlag;
-}
-
-const Vis::Color& Vis::ReactionView2DParameters::getBackgroundColor() const
-{
-    return backgroundColor;
+    return backgroundBrush;
 }
 
 unsigned int Vis::ReactionView2DParameters::getArrowStyle() const
@@ -276,7 +270,7 @@ void Vis::ReactionView2DParameters::parentChanged()
     parameterChanged(ControlParameter::SIZE_ADJUSTMENT, view.getParameter(ControlParameter::SIZE_ADJUSTMENT));
     parameterChanged(ControlParameter::ALIGNMENT, view.getParameter(ControlParameter::ALIGNMENT));
 
-    parameterChanged(ControlParameter::BACKGROUND_COLOR, view.getParameter(ControlParameter::BACKGROUND_COLOR));
+    parameterChanged(ControlParameter::BACKGROUND_BRUSH, view.getParameter(ControlParameter::BACKGROUND_BRUSH));
 
     parameterChanged(ControlParameter::REACTION_ARROW_STYLE, view.getParameter(ControlParameter::REACTION_ARROW_STYLE));
     parameterChanged(ControlParameter::REACTION_ARROW_COLOR, view.getParameter(ControlParameter::REACTION_ARROW_COLOR));
@@ -325,15 +319,8 @@ void Vis::ReactionView2DParameters::parameterChanged(const Base::LookupKey& key,
         return;
     }
 
-    if (key == ControlParameter::BACKGROUND_COLOR) {
-        if (val.isEmpty())
-            eraseBackground(false);
-
-        else {
-            eraseBackground(true);
-            setBackgroundColor(val.getData<Color>());
-        }
-
+    if (key == ControlParameter::BACKGROUND_BRUSH) {
+        setBackgroundBrush(val.getData<Brush>());
         return;
     }
 
@@ -492,16 +479,9 @@ void Vis::ReactionView2DParameters::setSizeAdjustment(unsigned int adjustment)
     }
 }
 
-void Vis::ReactionView2DParameters::eraseBackground(bool erase)
+void Vis::ReactionView2DParameters::setBackgroundBrush(const Brush& brush)
 {
-    if (eraseBackgroundFlag != erase)
-        eraseBackgroundFlag = erase;
-}
-
-void Vis::ReactionView2DParameters::setBackgroundColor(const Color& color)
-{
-    if (color != backgroundColor)
-        backgroundColor = color;
+    backgroundBrush = brush;
 }
 
 void Vis::ReactionView2DParameters::setArrowStyle(unsigned int style)

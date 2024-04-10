@@ -27,6 +27,7 @@
 
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Color.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
@@ -58,8 +59,7 @@ namespace CDPL
             unsigned int       getAlignment() const;
             unsigned int       getSizeAdjustment() const;
 
-            bool         eraseBackground() const;
-            const Color& getBackgroundColor() const;
+            const Brush& getBackgroundBrush() const;
 
             unsigned int             getArrowStyle() const;
             const Color&             getArrowColor() const;
@@ -108,8 +108,7 @@ namespace CDPL
             void setAlignment(unsigned int);
             void setSizeAdjustment(unsigned int);
 
-            void eraseBackground(bool);
-            void setBackgroundColor(const Color&);
+            void setBackgroundBrush(const Brush&);
 
             void setArrowStyle(unsigned int);
             void setArrowColor(const Color&);
@@ -140,8 +139,7 @@ namespace CDPL
             Rectangle2D       viewport;
             unsigned int      sizeAdjustment;
             unsigned int      alignment;
-            Color             backgroundColor;
-            bool              eraseBackgroundFlag;
+            Brush             backgroundBrush;
             unsigned int      arrowStyle;
             Color             arrowColor;
             SizeSpecification arrowLength;

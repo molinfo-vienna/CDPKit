@@ -34,6 +34,7 @@
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
+#include "CDPL/Vis/Brush.hpp"
 
 #include "OtherIOSettingsEditWidget.hpp"
 #include "ColorEditWidget.hpp"
@@ -97,8 +98,10 @@ void OtherIOSettingsEditWidget::apply()
 
     SettingsContainer& img_params = settings.getWriterControlParameters("img");
 
-    setEraseBackgroundParameter(img_params, imgOptEraseBackgroundCheckBox->isChecked());
-    setBackgroundColorParameter(img_params, imgOptBackgroundColor);
+    setBackgroundBrushParameter(img_params, Brush(imgOptBackgroundColor,
+                                                  imgOptEraseBackgroundCheckBox->isChecked() ?
+                                                  Brush::SOLID_PATTERN : Brush::NO_PATTERN));
+
     setOutputScalingFactorParameter(img_params, imgOptOutputScalingFactorSpinBox->value());
 }
 
@@ -144,8 +147,8 @@ void OtherIOSettingsEditWidget::reset()
 
     const SettingsContainer& img_params = settings.getWriterControlParameters("img");
 
-    imgOptEraseBackgroundCheckBox->setChecked(getEraseBackgroundParameter(img_params)); 
-    imgOptBackgroundColor = getBackgroundColorParameter(img_params); 
+    imgOptEraseBackgroundCheckBox->setChecked(getBackgroundBrushParameter(img_params).getStyle() != Brush::NO_PATTERN);
+    imgOptBackgroundColor = getBackgroundBrushParameter(img_params).getColor(); 
     imgOptOutputScalingFactorSpinBox->setValue(getOutputScalingFactorParameter(img_params)); 
 
     blockSignals(false);
@@ -181,8 +184,8 @@ void OtherIOSettingsEditWidget::setDefaults()
     smartsOptConcatenateRecordsCheckBox->setChecked(!SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES);
     smartsOptRecordSeparator = SMARTS_OUTPUT_RECORD_SEPARATOR;
 
-    imgOptEraseBackgroundCheckBox->setChecked(CDPL::Vis::ControlParameterDefault::ERASE_BACKGROUND);
-    imgOptBackgroundColor = CDPL::Vis::ControlParameterDefault::BACKGROUND_COLOR;
+    imgOptEraseBackgroundCheckBox->setChecked(CDPL::Vis::ControlParameterDefault::BACKGROUND_BRUSH.getStyle() != CDPL::Vis::Brush::NO_PATTERN);
+    imgOptBackgroundColor = CDPL::Vis::ControlParameterDefault::BACKGROUND_BRUSH.getColor();
     imgOptOutputScalingFactorSpinBox->setValue(CDPL::Vis::ControlParameterDefault::OUTPUT_SCALING_FACTOR); 
 
     haveChanges = true;

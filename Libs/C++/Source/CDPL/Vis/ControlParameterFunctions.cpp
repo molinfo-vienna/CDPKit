@@ -29,6 +29,8 @@
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
@@ -65,8 +67,7 @@ MAKE_CONTROL_PARAM_FUNCTIONS(OUTPUT_SCALING_FACTOR, double, OutputScalingFactor)
 MAKE_CONTROL_PARAM_FUNCTIONS(VIEWPORT, const Vis::Rectangle2D&, Viewport)
 MAKE_CONTROL_PARAM_FUNCTIONS(SIZE_ADJUSTMENT, unsigned int, SizeAdjustment)
 MAKE_CONTROL_PARAM_FUNCTIONS(ALIGNMENT, unsigned int, Alignment)
-MAKE_CONTROL_PARAM_FUNCTIONS(BACKGROUND_COLOR, const Vis::Color&, BackgroundColor)
-MAKE_CONTROL_PARAM_FUNCTIONS(ERASE_BACKGROUND, bool, EraseBackground)
+MAKE_CONTROL_PARAM_FUNCTIONS(BACKGROUND_BRUSH, const Vis::Brush&, BackgroundBrush)
 
 MAKE_CONTROL_PARAM_FUNCTIONS(REACTION_ARROW_STYLE, unsigned int, ReactionArrowStyle)
 MAKE_CONTROL_PARAM_FUNCTIONS(REACTION_ARROW_COLOR, const Vis::Color&, ReactionArrowColor)

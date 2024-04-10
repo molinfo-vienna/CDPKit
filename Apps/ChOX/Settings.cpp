@@ -45,6 +45,7 @@
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Color.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
 
@@ -702,8 +703,7 @@ void Settings::load()
     img_params.setParent(this);
 
     readParameter<double>(img_params, settings, Vis::ControlParameter::OUTPUT_SCALING_FACTOR, Vis::ControlParameterDefault::OUTPUT_SCALING_FACTOR);
-    readParameter<bool>(img_params, settings, Vis::ControlParameter::ERASE_BACKGROUND, Vis::ControlParameterDefault::ERASE_BACKGROUND);
-    readColorParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_COLOR, Vis::ControlParameterDefault::BACKGROUND_COLOR);
+    readBrushParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_BRUSH, Vis::ControlParameterDefault::BACKGROUND_BRUSH);
 
     settings.endGroup();
 
@@ -1221,8 +1221,7 @@ void Settings::save() const
     const SettingsContainer& img_params = getWriterControlParameters("img");
 
     writeParameter<double>(img_params, settings, Vis::ControlParameter::OUTPUT_SCALING_FACTOR);
-    writeParameter<bool>(img_params, settings, Vis::ControlParameter::ERASE_BACKGROUND);
-    writeColorParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_COLOR);
+    writeBrushParameter(img_params, settings, Vis::ControlParameter::BACKGROUND_BRUSH);
 
     settings.endGroup();
 }
@@ -1288,6 +1287,102 @@ void Settings::writeColorParameter(const SettingsContainer& params, QSettings& s
     settings.setValue(name + "/green", color.getGreen());
     settings.setValue(name + "/blue", color.getBlue());
     settings.setValue(name + "/alpha", color.getAlpha());
+}
+
+void Settings::writeBrushParameter(const SettingsContainer& params, QSettings& settings, 
+                                   const CDPL::Base::LookupKey& key) const
+{
+    using namespace CDPL;
+    using namespace Vis;
+    
+    Base::Any val = params.getParameter(key);
+
+    QString name = QString::fromStdString(key.getName());
+
+    if (val.isEmpty()) {
+        settings.remove(name + "/red");
+        settings.remove(name + "/green");
+        settings.remove(name + "/blue");
+        settings.remove(name + "/alpha");
+        settings.remove(name + "/style");
+        return;
+    }
+
+    const Brush& brush = val.getData<Brush>();
+
+    settings.setValue(name + "/red", brush.getColor().getRed());
+    settings.setValue(name + "/green", brush.getColor().getGreen());
+    settings.setValue(name + "/blue", brush.getColor().getBlue());
+    settings.setValue(name + "/alpha", brush.getColor().getAlpha());
+
+    int style = 0;
+    
+    switch (brush.getStyle()) {
+
+        case Brush::NO_PATTERN:
+            style = 1;
+            break;
+
+        case Brush::SOLID_PATTERN:
+            style = 2;
+            break;
+
+        case Brush::DENSE1_PATTERN:
+            style = 3;
+            break;
+
+        case Brush::DENSE2_PATTERN:
+            style = 4;
+            break;
+
+        case Brush::DENSE3_PATTERN:
+            style = 5;
+            break;
+
+        case Brush::DENSE4_PATTERN:
+            style = 6;
+            break;
+
+        case Brush::DENSE5_PATTERN:
+            style = 7;
+            break;
+
+        case Brush::DENSE6_PATTERN:
+            style = 8;
+            break;
+
+        case Brush::DENSE7_PATTERN:
+            style = 9;
+            break;
+
+        case Brush::H_PATTERN:
+            style = 10;
+            break;
+
+        case Brush::V_PATTERN:
+            style = 11;
+            break;
+
+        case Brush::CROSS_PATTERN:
+            style = 12;
+            break;
+
+        case Brush::LEFT_DIAG_PATTERN:
+            style = 13;
+            break;
+
+        case Brush::RIGHT_DIAG_PATTERN:
+            style = 14;
+            break;
+
+        case Brush::DIAG_CROSS_PATTERN:
+            style = 15;
+
+        default:
+            break;
+    }
+
+    settings.setValue(name + "/style", style);
 }
 
 void Settings::writeSizeSpecParameter(const SettingsContainer& params, QSettings& settings, 
@@ -1471,6 +1566,91 @@ void Settings::readColorParameter(SettingsContainer& params, QSettings& settings
     color.setAlpha(settings.value(name + "/alpha", def_color.getAlpha()).toDouble());
 
     params.setParameter(key, color);
+}
+
+void Settings::readBrushParameter(SettingsContainer& params, QSettings& settings, 
+                                  const CDPL::Base::LookupKey& key, const CDPL::Vis::Brush& def_brush)
+{
+    using namespace CDPL;
+    using namespace Vis;
+
+    QString name = QString::fromStdString(key.getName());
+
+    Color color; 
+
+    color.setRed(settings.value(name + "/red", def_brush.getColor().getRed()).toDouble());
+    color.setGreen(settings.value(name + "/green", def_brush.getColor().getGreen()).toDouble());
+    color.setBlue(settings.value(name + "/blue", def_brush.getColor().getBlue()).toDouble());
+    color.setAlpha(settings.value(name + "/alpha", def_brush.getColor().getAlpha()).toDouble());
+
+    auto style = def_brush.getStyle();
+
+    switch (settings.value(name + "/style", 0).toInt()) {
+
+        case 1:
+            style = Brush::NO_PATTERN;
+            break;
+
+        case 2:
+            style = Brush::SOLID_PATTERN;
+            break;
+
+        case 3:
+            style = Brush::DENSE1_PATTERN;
+            break;
+
+        case 4:
+            style = Brush::DENSE2_PATTERN;
+            break;
+
+        case 5:
+            style = Brush::DENSE3_PATTERN;
+            break;
+
+        case 6:
+            style = Brush::DENSE4_PATTERN;
+            break;
+
+        case 7:
+            style = Brush::DENSE5_PATTERN;
+            break;
+
+        case 8:
+            style = Brush::DENSE6_PATTERN;
+            break;
+
+        case 9:
+            style = Brush::DENSE7_PATTERN;
+            break;
+
+        case 10:
+            style = Brush::H_PATTERN;
+            break;
+
+        case 11:
+            style = Brush::V_PATTERN;
+            break;
+
+        case 12:
+            style = Brush::CROSS_PATTERN;
+            break;
+
+        case 13:
+            style = Brush::LEFT_DIAG_PATTERN;
+            break;
+
+        case 14:
+            style = Brush::RIGHT_DIAG_PATTERN;
+            break;
+
+        case 15:
+            style = Brush::DIAG_CROSS_PATTERN;
+
+        default:
+            break;
+    }
+
+    params.setParameter(key, Brush(color, style));
 }
                     
 void Settings::readSizeSpecParameter(SettingsContainer& params, QSettings& settings, 

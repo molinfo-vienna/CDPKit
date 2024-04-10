@@ -101,9 +101,9 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
 
 //----
 
-    view.setParameter(ControlParameter::BACKGROUND_COLOR, Color::WHITE);
+    view.setParameter(ControlParameter::BACKGROUND_BRUSH, Brush(Color(0.9, 0.9, 0.9)));
 
-    dumpImage(view, "StructureView2DTest_", img_id, "Structure = 0; FontMetrics = 0; ControlParameter::BACKGROUND_COLOR set");
+    dumpImage(view, "StructureView2DTest_", img_id, "Structure = 0; FontMetrics = 0; ControlParameter::BACKGROUND_BRUSH Brush(Color(0.9, 0.9, 0.9))");
 
 //----
 
@@ -254,9 +254,9 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
 
 //----
 
-    view.removeParameter(ControlParameter::BACKGROUND_COLOR);
+    view.removeParameter(ControlParameter::BACKGROUND_BRUSH);
 
-    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BACKGROUND_COLOR = removed");
+    dumpImage(view, "StructureView2DTest_", img_id, "ControlParameter::BACKGROUND_BRUSH = removed");
 
 //----
 

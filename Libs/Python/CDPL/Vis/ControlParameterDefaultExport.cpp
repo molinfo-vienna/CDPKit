@@ -26,6 +26,8 @@
 
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/Color.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
@@ -50,8 +52,7 @@ void CDPLPythonVis::exportControlParameterDefaults()
         .def_readonly("VIEWPORT", &Vis::ControlParameterDefault::VIEWPORT)
         .def_readonly("SIZE_ADJUSTMENT", &Vis::ControlParameterDefault::SIZE_ADJUSTMENT)
         .def_readonly("ALIGNMENT", &Vis::ControlParameterDefault::ALIGNMENT)
-        .def_readonly("BACKGROUND_COLOR", &Vis::ControlParameterDefault::BACKGROUND_COLOR)
-        .def_readonly("ERASE_BACKGROUND", &Vis::ControlParameterDefault::ERASE_BACKGROUND)
+        .def_readonly("BACKGROUND_BRUSH", &Vis::ControlParameterDefault::BACKGROUND_BRUSH)
         .def_readonly("REACTION_ARROW_STYLE", &Vis::ControlParameterDefault::REACTION_ARROW_STYLE)
         .def_readonly("REACTION_ARROW_COLOR", &Vis::ControlParameterDefault::REACTION_ARROW_COLOR)
         .def_readonly("REACTION_ARROW_LENGTH", &Vis::ControlParameterDefault::REACTION_ARROW_LENGTH)

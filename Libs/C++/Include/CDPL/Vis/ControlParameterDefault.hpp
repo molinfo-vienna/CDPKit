@@ -31,8 +31,6 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
-#include "CDPL/Vis/Brush.hpp"
-#include "CDPL/Vis/Pen.hpp"
 
 
 namespace CDPL
@@ -45,7 +43,9 @@ namespace CDPL
         class Font;
         class SizeSpecification;
         class Rectangle2D;
-
+        class Pen;
+        class Brush;
+        
         /**
          * \brief Provides default values for built-in control-parameters.
          */
@@ -73,9 +73,9 @@ namespace CDPL
             extern CDPL_VIS_API const unsigned int ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %Color::WHITE) for the control-parameter Vis::ControlParameter::BACKGROUND_COLOR.
+             * \brief Default setting (= \c %Brush(Color::WHITE)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
              */
-            extern CDPL_VIS_API const Color BACKGROUND_COLOR;
+            extern CDPL_VIS_API const Brush BACKGROUND_BRUSH;
 
             /**
              * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ERASE_BACKGROUND.
