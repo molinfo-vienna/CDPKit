@@ -61,12 +61,18 @@ void CDPLPythonVis::exportStructureGridView2D()
              python::return_internal_reference<>())
         .def("__getitem__", &getCellByTuple, (python::arg("self"), python::arg("row_and_col")),
              python::return_internal_reference<>())
+        .def("setCellSize", &Vis::StructureGridView2D::setCellSize, 
+             (python::arg("self"), python::arg("width"), python::arg("height")))
+        .def("getCellWidth", &Vis::StructureGridView2D::getCellWidth, python::arg("self"))
+        .def("getCellHeight", &Vis::StructureGridView2D::getCellHeight, python::arg("self"))
         .def("resize", &Vis::StructureGridView2D::resize, 
              (python::arg("self"), python::arg("num_rows"), python::arg("num_cols")))
-        .def("clear", &Vis::StructureGridView2D::clear, 
-             (python::arg("self"), python::arg("resize") = true, python::arg("structure") = true, python::arg("text") = true))
         .def("getNumRows", &Vis::StructureGridView2D::getNumRows, python::arg("self"))
         .def("getNumColumns", &Vis::StructureGridView2D::getNumColumns, python::arg("self"))
+        .def("clear", &Vis::StructureGridView2D::clear, 
+             (python::arg("self"), python::arg("resize") = true, python::arg("structure") = true, python::arg("text") = true))
+        .add_property("cellWidth", &Vis::StructureGridView2D::getCellWidth)
+        .add_property("cellHeight", &Vis::StructureGridView2D::getCellHeight)
         .add_property("numRows", &Vis::StructureGridView2D::getNumRows)
         .add_property("numColumns", &Vis::StructureGridView2D::getNumColumns)
         .add_property("fontMetrics", python::make_function(&Vis::StructureGridView2D::getFontMetrics,

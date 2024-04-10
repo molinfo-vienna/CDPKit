@@ -71,9 +71,6 @@ DataRecordPainter::DataRecordPainter(CDPL::Vis::QtFontMetrics& fm, QPainter& pai
     painter(painter), settings(settings), renderer(painter), fontMetrics(fm)
 {
     record.accept(*this);
-
-    if (dataView)
-        setBackgroundBrushParameter(*dataView, CDPL::Vis::Brush(CDPL::Vis::Brush::NO_PATTERN));
 }
 
 DataRecordPainter::~DataRecordPainter() {}

@@ -52,7 +52,7 @@ namespace CDPL
             const Rectangle2D               VIEWPORT                             = Rectangle2D();
             const unsigned int              SIZE_ADJUSTMENT                      = SizeAdjustment::IF_REQUIRED;
             const unsigned int              ALIGNMENT                            = Alignment::CENTER;
-            const Brush                     BACKGROUND_BRUSH                     = Brush(Color(1.0, 1.0, 1.0));
+            const Brush                     BACKGROUND_BRUSH                     = Brush(Brush::NO_PATTERN);
 
             const unsigned int              REACTION_ARROW_STYLE                 = ArrowStyle::REACTION_SOLID;
             const Color                     REACTION_ARROW_COLOR                 = Color(0, 0, 0);
@@ -137,6 +137,14 @@ namespace CDPL
             const Font                      BOND_CUSTOM_LABEL_FONT               = Font("", 8.0, false, false);
             const SizeSpecification         BOND_CUSTOM_LABEL_SIZE               = SizeSpecification(8.0, false, false, true);
             const Color                     BOND_CUSTOM_LABEL_COLOR              = Color(0, 0, 0);
+
+            const Pen                       GRID_VIEW_BORDER_PEN                 = Pen(Pen::NO_LINE);
+            const Pen                       GRID_VIEW_ROW_SEPARATOR_PEN          = Pen(Pen::NO_LINE);
+            const Pen                       GRID_VIEW_COLUMN_SEPARATOR_PEN       = Pen(Pen::NO_LINE);
+            const double                    GRID_VIEW_MARGIN                     = 0.0;
+            const double                    GRID_VIEW_CELL_PADDING               = 5.0;
+            const Font                      GRID_VIEW_TEXT_FONT                  = Font("", 10.0);
+            const Color                     GRID_VIEW_TEXT_COLOR                 = Color(0, 0, 0);
 
         } // namespace ControlParameterDefault
 

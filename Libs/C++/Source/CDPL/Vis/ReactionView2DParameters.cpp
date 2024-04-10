@@ -320,7 +320,7 @@ void Vis::ReactionView2DParameters::parameterChanged(const Base::LookupKey& key,
     }
 
     if (key == ControlParameter::BACKGROUND_BRUSH) {
-        setBackgroundBrush(val.getData<Brush>());
+        setBackgroundBrush(val.isEmpty() ? BACKGROUND_BRUSH : val.getData<Brush>());
         return;
     }
 

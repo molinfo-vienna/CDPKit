@@ -132,5 +132,12 @@ void CDPLPythonVis::exportControlParameterDefaults()
         .def_readonly("BOND_HIGHLIGHT_AREA_WIDTH", &Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_WIDTH)
         .def_readonly("BOND_HIGHLIGHT_AREA_BRUSH", &Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_BRUSH)
         .def_readonly("BOND_HIGHLIGHT_AREA_OUTLINE_PEN", &Vis::ControlParameterDefault::BOND_HIGHLIGHT_AREA_OUTLINE_PEN)
+        .def_readonly("GRID_VIEW_BORDER_PEN", &Vis::ControlParameterDefault::GRID_VIEW_BORDER_PEN)
+        .def_readonly("GRID_VIEW_ROW_SEPARATOR_PEN", &Vis::ControlParameterDefault::GRID_VIEW_ROW_SEPARATOR_PEN)
+        .def_readonly("GRID_VIEW_COLUMN_SEPARATOR_PEN", &Vis::ControlParameterDefault::GRID_VIEW_COLUMN_SEPARATOR_PEN)
+        .def_readonly("GRID_VIEW_MARGIN", &Vis::ControlParameterDefault::GRID_VIEW_MARGIN)
+        .def_readonly("GRID_VIEW_CELL_PADDING", &Vis::ControlParameterDefault::GRID_VIEW_CELL_PADDING)
+        .def_readonly("GRID_VIEW_TEXT_FONT", &Vis::ControlParameterDefault::GRID_VIEW_TEXT_FONT)
+        .def_readonly("GRID_VIEW_TEXT_COLOR", &Vis::ControlParameterDefault::GRID_VIEW_TEXT_COLOR)
         ;
 }

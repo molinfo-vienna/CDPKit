@@ -127,5 +127,12 @@ void CDPLPythonVis::exportControlParameters()
         .def_readonly("BOND_CUSTOM_LABEL_FONT", &Vis::ControlParameter::BOND_CUSTOM_LABEL_FONT)
         .def_readonly("BOND_CUSTOM_LABEL_SIZE", &Vis::ControlParameter::BOND_CUSTOM_LABEL_SIZE)
         .def_readonly("BOND_CUSTOM_LABEL_COLOR", &Vis::ControlParameter::BOND_CUSTOM_LABEL_COLOR)
+        .def_readonly("GRID_VIEW_BORDER_PEN", &Vis::ControlParameter::GRID_VIEW_BORDER_PEN)
+        .def_readonly("GRID_VIEW_ROW_SEPARATOR_PEN", &Vis::ControlParameter::GRID_VIEW_ROW_SEPARATOR_PEN)
+        .def_readonly("GRID_VIEW_COLUMN_SEPARATOR_PEN", &Vis::ControlParameter::GRID_VIEW_COLUMN_SEPARATOR_PEN)
+        .def_readonly("GRID_VIEW_MARGIN", &Vis::ControlParameter::GRID_VIEW_MARGIN)
+        .def_readonly("GRID_VIEW_CELL_PADDING", &Vis::ControlParameter::GRID_VIEW_CELL_PADDING)
+        .def_readonly("GRID_VIEW_TEXT_FONT", &Vis::ControlParameter::GRID_VIEW_TEXT_FONT)
+        .def_readonly("GRID_VIEW_TEXT_COLOR", &Vis::ControlParameter::GRID_VIEW_TEXT_COLOR)
         ;
 }

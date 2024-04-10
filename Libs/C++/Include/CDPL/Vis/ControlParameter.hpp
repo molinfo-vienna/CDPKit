@@ -1211,7 +1211,49 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey ENABLE_BOND_HIGHLIGHTING;
-       
+
+            /**
+             * \valuetype Vis::Pen
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_BORDER_PEN;
+
+            /**
+             * \valuetype Vis::Pen
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_ROW_SEPARATOR_PEN;
+
+            /**
+             * \valuetype Vis::Pen
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_COLUMN_SEPARATOR_PEN;
+
+            /**
+             * \valuetype \c double
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_MARGIN;
+   
+            /**
+             * \valuetype \c double
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_CELL_PADDING;
+            
+            /**
+             * \valuetype Vis::Font
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_TEXT_FONT;
+
+            /**
+             * \valuetype Vis::Color
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_TEXT_COLOR;
+            
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

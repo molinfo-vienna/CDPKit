@@ -37,6 +37,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/StructureView2D.hpp"
+#include "CDPL/Vis/TextBlockPrimitive2D.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
@@ -75,11 +76,16 @@ namespace CDPL
          * </table>
          *
          * Default values for most of the control-parameters are defined in namespace Vis::ControlParameterDefault.
+         *
+         * \since 1.2
          */
         class CDPL_VIS_API StructureGridView2D : public View2D
         {
 
           public:
+            static constexpr double DEF_CELL_WIDTH  = 150.0;
+            static constexpr double DEF_CELL_HEIGHT = 150.0;
+            
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StructureGridView2D instances.
              */
@@ -106,8 +112,23 @@ namespace CDPL
                 Cell();
                 ~Cell();
 
-                StructureView2D     structView;
-                Chem::BasicMolecule molecule;
+                void setFontMetrics(FontMetrics* font_metrics);
+
+                void setSize(double width, double height);
+                
+                void parameterChanged(const Base::LookupKey& key, const Base::Any& value);
+                void parameterRemoved(const Base::LookupKey& key);
+                void parentChanged();
+                
+                void layout();
+
+                StructureView2D      structView;
+                TextBlockPrimitive2D textBlocks[3][3];
+                Chem::BasicMolecule  molecule;
+                FontMetrics*         fontMetrics;
+                double               width;
+                double               height;
+                bool                 layoutValid;
             };
             
             /**
@@ -136,15 +157,21 @@ namespace CDPL
             Cell& operator()(std::size_t row, std::size_t col);
 
             const Cell& operator()(std::size_t row, std::size_t col) const;
- 
-            void resize(std::size_t num_rows, std::size_t num_cols);
 
-            void clear(bool resize = true, bool structure = true, bool text = true);
+            void setCellSize(double width, double height);
+
+            double getCellWidth() const;
+
+            double getCellHeight() const;
+            
+            void resize(std::size_t num_rows, std::size_t num_cols);
 
             std::size_t getNumRows() const;
 
             std::size_t getNumColumns() const;
 
+            void clear(bool resize = true, bool structure = true, bool text = true);
+            
           private:
             typedef Util::ObjectPool<Cell>         CellCache;
             typedef CellCache::SharedObjectPointer CellPointer;
@@ -161,6 +188,8 @@ namespace CDPL
             CellCache    cellCache;
             FontMetrics* fontMetrics;
             CellMap      cells;
+            double       cellWidth;
+            double       cellHeight;
             std::size_t  numRows;
             std::size_t  numColumns;
         };

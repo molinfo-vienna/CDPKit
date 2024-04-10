@@ -73,14 +73,9 @@ namespace CDPL
             extern CDPL_VIS_API const unsigned int ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %Brush(Color::WHITE)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
+             * \brief Default setting (= \c %Brush(Brush::NO_PATTERN)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
              */
             extern CDPL_VIS_API const Brush BACKGROUND_BRUSH;
-
-            /**
-             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::ERASE_BACKGROUND.
-             */
-            extern CDPL_VIS_API const bool ERASE_BACKGROUND;
 
             /**
              * \brief Default setting (= \c %ArrowStyle::REACTION_SOLID) for the control-parameter Vis::ControlParameter::REACTION_ARROW_STYLE.
@@ -508,6 +503,48 @@ namespace CDPL
              */
             extern CDPL_VIS_API const bool ENABLE_BOND_HIGHLIGHTING;
 
+            /**
+             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_BORDER_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen GRID_VIEW_BORDER_PEN;
+
+            /**
+             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_ROW_SEPARATOR_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen GRID_VIEW_ROW_SEPARATOR_PEN;
+
+            /**
+             * \brief Default setting (= \c %Pen(Pen::NO_LINE)) for the control-parameter Vis::ControlParameter::GRID_VIEW_COLUMN_SEPARATOR_PEN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Pen GRID_VIEW_COLUMN_SEPARATOR_PEN;
+
+            /**
+             * \brief Default setting (= \c 0.0) for the control-parameter Vis::ControlParameter::GRID_VIEW_MARGIN.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const double GRID_VIEW_MARGIN;
+   
+            /**
+             * \brief Default setting (= \c 5.0) for the control-parameter Vis::ControlParameter::GRID_VIEW_CELL_PADDING.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const double GRID_VIEW_CELL_PADDING;
+            
+            /**
+             * \brief Default setting (= \c %Font("", 10.0)) for the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_FONT.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Font GRID_VIEW_TEXT_FONT;
+
+            /**
+             * \brief Default setting (= \c %Color::BLACK) for the control-parameter Vis::ControlParameter::GRID_VIEW_TEXT_COLOR.
+             * \since 1.2
+             */
+            extern CDPL_VIS_API const Color GRID_VIEW_TEXT_COLOR;
+            
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL
