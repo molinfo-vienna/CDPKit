@@ -33,6 +33,7 @@
 #include <utility>
 #include <cstddef>
 #include <iosfwd>
+#include <iterator>
 
 #include <boost/unordered_map.hpp>
 
