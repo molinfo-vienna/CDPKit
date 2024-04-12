@@ -227,8 +227,21 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
 
     checkClone(tbp);
 
+    tbp.clearText();
+
+    BOOST_CHECK(tbp.getText() == "");
+    BOOST_CHECK(tbp.getPosition()(0) == 10.2 && tbp.getPosition()(1) == -2.3);
+    BOOST_CHECK(tbp.getPen() == Pen(Color::GREEN));
+    BOOST_CHECK(tbp.getFont() == Font("Times", 13.3));
+    BOOST_CHECK(tbp.getAlignment() == Alignment::H_CENTER);
+    BOOST_CHECK(tbp.getLineSpacing() == 1.5);
+
+    checkClone(tbp);
+
 //-----
 
+    tbp.setText("Test Text");
+        
     BOOST_CHECK_THROW(tbp.setText("<adsf>X</>"), Base::ValueError);
     BOOST_CHECK(tbp.getText() == "Test Text");
 
@@ -266,15 +279,26 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     tbp.setLineSpacing(1.0);
     tbp.setAlignment(Alignment::RIGHT);
     tbp.setText("\n>  f=('Times', 12.0), p=(GRAY, NO_LINE), ls=1.0, a=RIGHT, p=(20.0, 35.0)<br/>\n" + STYLED_TEXT);
+
+    renderPrimitive(tbp, img_id);
+
+    tbp.setPosition(20.0, 35.0);
+    tbp.setPen(Pen(Color::GRAY, 1.0, Pen::NO_LINE));
+    tbp.setFont(Font("Times", 12.0, true));
+    tbp.setLineSpacing(1.0);
+    tbp.setAlignment(Alignment::RIGHT);
+    tbp.setText("\n>  f=('Times', 12.0, true), p=(GRAY, NO_LINE), ls=1.0, a=RIGHT, p=(20.0, 35.0)<br/>\n" + STYLED_TEXT);
     
     renderPrimitive(tbp, img_id);
 
     tbp.setPosition(20.0, 20.0);
-    tbp.setFont(Font("Courier", 10.0, true));
+    tbp.setFont(Font("Courier", 10.0, false, true));
     tbp.setAlignment(Alignment::CENTER);
-    tbp.setText("\n>  f=('Courier', 10.0, true), p=(GRAY, NO_LINE), ls=1.0, a=CENTER, p=(20.0, 20.0)\n<br/>" + STYLED_TEXT);
+    tbp.setLineSpacing(0.8);
+    tbp.setText("\n>  f=('Courier', 10.0, false, true), p=(GRAY, NO_LINE), ls=0.8, a=CENTER, p=(20.0, 20.0)\n<br/>" + STYLED_TEXT);
     
     renderPrimitive(tbp, img_id);
+    
     renderPrimitive(static_cast<TextBlockPrimitive2D&>(*tbp.clone()), img_id);
 
 //-----
@@ -323,6 +347,18 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     tbp.getBounds(bounds, &font_metrics);
 
     BOOST_CHECK(bounds.isDefined());
+
+    tbp.clearText();
+
+    BOOST_CHECK(tbp.getText() == "");
+
+    tbp.getBounds(bounds, &font_metrics);
+
+    BOOST_CHECK(!bounds.isDefined());
+
+    tbp.getBounds(bounds, 0);
+
+    BOOST_CHECK(!bounds.isDefined());
     
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO

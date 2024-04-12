@@ -79,6 +79,11 @@ namespace CDPL
             void setText(const std::string& text);
 
             /**
+             * \brief Clears the block's text content.
+             */
+            void clearText();
+
+            /**
              * \brief Returns the block's text content.
              * \return The text content of the block.
              */
@@ -190,7 +195,8 @@ namespace CDPL
             struct TextFragment
             {
 
-                TextFragment(std::string& text, const Style& style, const Color& color, bool def_color, std::size_t line):
+                TextFragment(std::string& text, const Style& style, const Color& color,
+                             bool def_color, std::size_t line):
                     style(style), color(color), defColor(def_color), line(line)
                 {
                     this->text.swap(text);
@@ -213,7 +219,7 @@ namespace CDPL
             void processText(const std::string& text);
             void processNode(XMLNode* node);
             void getColor(XMLNode* node);
-            void applyStyle(Font& font, double font_size, const Style& style) const;
+            void applyStyle(Font& font, const Style& style) const;
 
             Pen              pen;
             Font             font;
