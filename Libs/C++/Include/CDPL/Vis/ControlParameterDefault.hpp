@@ -73,7 +73,7 @@ namespace CDPL
             extern CDPL_VIS_API const unsigned int ALIGNMENT;
 
             /**
-             * \brief Default setting (= \c %Brush(Brush::NO_PATTERN)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
+             * \brief Default setting (= \c %Brush(Color::WHITE, Brush::NO_PATTERN)) for the control-parameter Vis::ControlParameter::BACKGROUND_BRUSH.
              */
             extern CDPL_VIS_API const Brush BACKGROUND_BRUSH;
 

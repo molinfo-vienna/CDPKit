@@ -873,6 +873,83 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondCustomLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getGridViewBorderPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewBorderPenParameter(Base::ControlParameterContainer& cntnr, const Pen& pen);
+
+        CDPL_VIS_API bool hasGridViewBorderPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewBorderPenParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getGridViewRowSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewRowSeparatorPenParameter(Base::ControlParameterContainer& cntnr, const Pen& pen);
+
+        CDPL_VIS_API bool hasGridViewRowSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewRowSeparatorPenParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Pen& getGridViewColumnSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewColumnSeparatorPenParameter(Base::ControlParameterContainer& cntnr, const Pen& pen);
+
+        CDPL_VIS_API bool hasGridViewColumnSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewColumnSeparatorPenParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API double getGridViewMarginParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewMarginParameter(Base::ControlParameterContainer& cntnr, double margin);
+
+        CDPL_VIS_API bool hasGridViewMarginParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewMarginParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API double getGridViewCellPaddingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewCellPaddingParameter(Base::ControlParameterContainer& cntnr, double padding);
+
+        CDPL_VIS_API bool hasGridViewCellPaddingParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewCellPaddingParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Font& getGridViewTextFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewTextFontParameter(Base::ControlParameterContainer& cntnr, const Font& font);
+
+        CDPL_VIS_API bool hasGridViewTextFontParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewTextFontParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.2
+         */
+        CDPL_VIS_API const Color& getGridViewTextColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setGridViewTextColorParameter(Base::ControlParameterContainer& cntnr, const Color& color);
+
+        CDPL_VIS_API bool hasGridViewTextColorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearGridViewTextColorParameter(Base::ControlParameterContainer& cntnr);
+        
     } // namespace Vis
 } // namespace CDPL
 

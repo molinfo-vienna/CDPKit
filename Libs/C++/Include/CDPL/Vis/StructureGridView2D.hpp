@@ -32,12 +32,15 @@
 #include <memory>
 #include <utility>
 #include <cstddef>
+#include <iosfwd>
 
 #include <boost/unordered_map.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
+#include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
@@ -45,6 +48,12 @@
 namespace CDPL
 {
 
+    namespace Base
+    {
+
+        class DataFormat;
+    }
+    
     namespace Vis
     {
 
@@ -100,18 +109,36 @@ namespace CDPL
                  */
                 typedef std::shared_ptr<Cell> SharedPointer;
 
+                Cell(const Cell&) = delete;
+                                
                 void setStructure(const Chem::MolecularGraph& molgraph);
 
                 const Chem::MolecularGraph& getStructure() const;
-                
-                void clear(bool structure = true, bool text = true);
 
+                void clearStructure();
+
+                bool hasStructure() const;
+
+                void setText(const std::string& text, unsigned int pos, unsigned int line_almnt = Alignment::NONE);
+
+                const std::string& getText(unsigned int pos) const;
+
+                void clearText(unsigned int pos);
+
+                void clearText();
+
+                bool hasText() const;
+
+                bool hasText(unsigned int pos) const;
+                
+                Cell& operator=(const Cell& cell);
+                
               private:
                 friend class StructureGridView2D;
                 
                 Cell();
                 ~Cell();
-
+                
                 void setFontMetrics(FontMetrics* font_metrics);
 
                 void setSize(double width, double height);
@@ -122,13 +149,17 @@ namespace CDPL
                 
                 void layout();
 
+                static std::size_t posToArrayIndex(unsigned int pos);
+                    
                 StructureView2D      structView;
-                TextBlockPrimitive2D textBlocks[3][3];
+                TextBlockPrimitive2D textBlocks[9];
                 Chem::BasicMolecule  molecule;
                 FontMetrics*         fontMetrics;
                 double               width;
                 double               height;
                 bool                 layoutValid;
+                bool                 fontChanged;
+                bool                 colorChanged;
             };
             
             /**
@@ -138,12 +169,32 @@ namespace CDPL
             StructureGridView2D();
 
             /**
+             * \brief Constructs a copy of the \c %StructureGridView2D instance \a grid_view.
+             * \param grid_view The \c %StructureGridView2D instance to copy;
+             */
+            StructureGridView2D(const StructureGridView2D& grid_view);
+            
+            /**
              * \brief Destructor.
              */
             ~StructureGridView2D();
 
             void render(Renderer2D& renderer);
 
+#ifdef HAVE_CAIRO
+
+            bool write(const std::string& file_name);
+
+            bool write(const std::string& file_name, const std::string& fmt);
+
+            bool write(const std::string& file_name, const Base::DataFormat& fmt);
+
+            bool write(std::ostream& os, const std::string& fmt);
+
+            bool write(std::ostream& os, const Base::DataFormat& fmt);
+
+#endif // HAVE_CAIRO
+            
             void setFontMetrics(FontMetrics* font_metrics);
 
             /**
@@ -170,12 +221,18 @@ namespace CDPL
 
             std::size_t getNumColumns() const;
 
-            void clear(bool resize = true, bool structure = true, bool text = true);
+            void clearStructures();
+
+            void clearTextBlocks();
+
+            StructureGridView2D& operator=(const StructureGridView2D& grid_view);
             
           private:
             typedef Util::ObjectPool<Cell>         CellCache;
             typedef CellCache::SharedObjectPointer CellPointer;
 
+            void copy(const StructureGridView2D& grid_view);
+            
             CellPointer allocCell();
                 
             static Cell* newCell();

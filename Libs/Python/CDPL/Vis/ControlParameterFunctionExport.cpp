@@ -155,6 +155,13 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Brush&, BondHighlightAreaBrush)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, BondHighlightAreaOutlinePen)
 
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, GridViewBorderPen)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, GridViewRowSeparatorPen)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Pen&, GridViewColumnSeparatorPen)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(double, GridViewMargin)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(double, GridViewCellPadding)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, GridViewTextFont)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, GridViewTextColor)
 }
 
 
@@ -253,4 +260,12 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaWidth, width)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaBrush, brush)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(BondHighlightAreaOutlinePen, pen)
+
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewBorderPen, pen)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewRowSeparatorPen, pen)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewColumnSeparatorPen, pen)
+    EXPORT_CONTROL_PARAM_FUNCS(GridViewMargin, margin)
+    EXPORT_CONTROL_PARAM_FUNCS(GridViewCellPadding, padding)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewTextFont, font)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewTextColor, color)
 }
