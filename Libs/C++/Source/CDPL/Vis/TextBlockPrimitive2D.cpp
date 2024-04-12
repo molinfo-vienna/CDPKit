@@ -72,10 +72,9 @@ void Vis::TextBlockPrimitive2D::render(Renderer2D& renderer) const
         return;
 
     auto font = this->font;
-    auto font_size = font.getSize();
     
     for (auto& tf : textFragments) {
-        applyStyle(font, font_size, tf.style);
+        applyStyle(font, tf.style);
 
         renderer.setPen(tf.defColor ? pen : tf.color);
         renderer.setFont(font);
@@ -93,6 +92,12 @@ void Vis::TextBlockPrimitive2D::setText(const std::string& text)
     } catch (const rapidxml::parse_error& e) {
         throw Base::ValueError("TextBlockPrimitive2D: text processing failed: " + std::string(e.what()));
     }
+}
+
+void Vis::TextBlockPrimitive2D::clearText()
+{
+    text.clear();
+    textFragments.clear();
 }
 
 const std::string& Vis::TextBlockPrimitive2D::getText() const
@@ -164,7 +169,6 @@ void Vis::TextBlockPrimitive2D::layout(FontMetrics& font_metrics)
     font_metrics.setFont(this->font);
 
     auto line_spacing = lineSpacing * font_metrics.getHeight();
-    auto font_size = font.getSize();
     auto font_asc = font_metrics.getAscent();
     auto font_desc = font_metrics.getDescent();
     auto font = this->font;
@@ -175,7 +179,7 @@ void Vis::TextBlockPrimitive2D::layout(FontMetrics& font_metrics)
     Rectangle2D tf_bounds;
     
     for (auto& tf : textFragments) {
-        applyStyle(font, font_size, tf.style);
+        applyStyle(font, tf.style);
 
         font_metrics.setFont(font);
 
@@ -221,7 +225,6 @@ void Vis::TextBlockPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* font
     font_metrics->setFont(this->font);
 
     auto line_spacing = lineSpacing * font_metrics->getHeight();
-    auto font_size = font.getSize();
     auto font_asc = font_metrics->getAscent();
     auto font_desc = font_metrics->getDescent();
     auto font = this->font;
@@ -232,7 +235,7 @@ void Vis::TextBlockPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* font
     Rectangle2D tf_bounds;
     
     for (auto& tf : textFragments) {
-        applyStyle(font, font_size, tf.style);
+        applyStyle(font, tf.style);
 
         font_metrics->setFont(font);
 
@@ -411,16 +414,16 @@ void Vis::TextBlockPrimitive2D::getColor(XMLNode* node)
                                                          "TextBlockPrimitive2D: error while parsing alpha color component"));
 }
 
-void Vis::TextBlockPrimitive2D::applyStyle(Font& font, double font_size, const Style& style) const
+void Vis::TextBlockPrimitive2D::applyStyle(Font& font, const Style& style) const
 {
-    font.setBold(style.bold);
-    font.setItalic(style.italic);
-    font.setUnderlined(style.underlined);
-    font.setOverlined(style.overlined);
-    font.setStrikedOut(style.strikedOut);
+    font.setBold(this->font.isBold() || style.bold);
+    font.setItalic(this->font.isItalic() || style.italic);
+    font.setUnderlined(this->font.isUnderlined() || style.underlined);
+    font.setOverlined(this->font.isOverlined() || style.overlined);
+    font.setStrikedOut(this->font.isStrikedOut() || style.strikedOut);
 
     if (style.subscripted || style.superscripted)
-        font.setSize(font_size * SUB_SUPER_SCRIPT_FONT_SIZE_FACTOR);
+        font.setSize(this->font.getSize() * SUB_SUPER_SCRIPT_FONT_SIZE_FACTOR);
     else
-        font.setSize(font_size);
+        font.setSize(this->font.getSize());
 }
