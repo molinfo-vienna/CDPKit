@@ -22,6 +22,9 @@
  */
 
 
+#include <sstream>
+#include <iomanip>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Pen.hpp"
@@ -30,6 +33,118 @@
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+    const char* toString(CDPL::Vis::Pen::LineStyle style)
+    {
+        using namespace CDPL;
+        
+        switch (style) {
+
+            case Vis::Pen::NO_LINE:
+                return "NO_LINE";
+
+            case Vis::Pen::SOLID_LINE:
+                return "SOLID_LINE";
+
+            case Vis::Pen::DASH_LINE:
+                return "DASH_LINE";
+
+            case Vis::Pen::DOT_LINE:
+                return "DOT_LINE";
+
+            case Vis::Pen::DASH_DOT_LINE:
+                return "DASH_DOT_LINE";
+                
+            case Vis::Pen::DASH_DOT_DOT_LINE:
+                return "DASH_DOT_DOT_LINE";
+
+            default:
+                return "?";
+        }
+    }
+
+    const char* toString(CDPL::Vis::Pen::CapStyle style)
+    {
+        using namespace CDPL;
+        
+        switch (style) {
+
+            case Vis::Pen::FLAT_CAP:
+                return "FLAT_CAP";
+
+            case Vis::Pen::SQUARE_CAP:
+                return "SQUARE_CAP";
+
+            case Vis::Pen::ROUND_CAP:
+                return "ROUND_CAP";
+
+            default:
+                return "?";
+        }
+    }
+
+    const char* toString(CDPL::Vis::Pen::JoinStyle style)
+    {
+        using namespace CDPL;
+        
+        switch (style) {
+
+            case Vis::Pen::MITER_JOIN:
+                return "MITER_JOIN";
+
+            case Vis::Pen::BEVEL_JOIN:
+                return "BEVEL_JOIN";
+
+            case Vis::Pen::ROUND_JOIN:
+                return "ROUND_JOIN";
+                
+            default:
+                return "?";
+        }
+    }
+    
+    std::string toString(const CDPL::Vis::Color& col)
+    {
+        std::ostringstream oss;
+
+        oss << "Color(";
+        
+        if (col == CDPL::Vis::Color())
+            oss << ')';
+        
+        else {
+            oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
+
+            if (col.getAlpha() != 1.0)
+                oss << ", a=" << col.getAlpha();
+
+            oss << ')';
+        }
+        
+        return oss.str();
+    }
+
+    std::string penToString(const CDPL::Vis::Pen& pen)
+    {
+        std::ostringstream oss;
+
+        oss << "CDPL.Vis.Pen(";
+        
+        if (pen == CDPL::Vis::Pen())
+            oss << ')';
+        
+        else {
+            oss << "color=" << toString(pen.getColor()) << ", width=" << pen.getWidth() << ", line_style=" << toString(pen.getLineStyle())
+                << ", cap_style=" << toString(pen.getCapStyle()) << ", join_style=" << toString(pen.getJoinStyle()) << ')';
+        }
+        
+        return oss.str();
+    }
+}
 
 
 void CDPLPythonVis::exportPen()
@@ -83,6 +198,7 @@ void CDPLPythonVis::exportPen()
         .def("setLineStyle", &Vis::Pen::setLineStyle, (python::arg("self"), python::arg("line_style")))    
         .def("getWidth", &Vis::Pen::getWidth, python::arg("self"))    
         .def("setWidth", &Vis::Pen::setWidth, (python::arg("self"), python::arg("width")))
+        .def("__str__", &penToString, python::arg("self"))
         .def("__eq__", &Vis::Pen::operator==, (python::arg("self"), python::arg("pen")))
         .def("__ne__", &Vis::Pen::operator!=, (python::arg("self"), python::arg("pen")))
         .add_property("capStyle", &Vis::Pen::getCapStyle, &Vis::Pen::setCapStyle)

@@ -22,6 +22,10 @@
  */
 
 
+
+#include <sstream>
+#include <iomanip>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Brush.hpp"
@@ -30,6 +34,104 @@
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+    const char* toString(CDPL::Vis::Brush::Style style)
+    {
+        using namespace CDPL;
+        
+        switch (style) {
+
+            case Vis::Brush::NO_PATTERN:
+              return "NO_PATTERN";
+
+            case Vis::Brush::SOLID_PATTERN:
+                return "SOLID_PATTERN";
+
+            case Vis::Brush::DENSE1_PATTERN:
+                return "DENSE1_PATTERN";
+
+            case Vis::Brush::DENSE2_PATTERN:
+                return "DENSE2_PATTERN";
+
+            case Vis::Brush::DENSE3_PATTERN:
+                return "DENSE3_PATTERN";
+
+            case Vis::Brush::DENSE4_PATTERN:
+                return "DENSE4_PATTERN";
+
+            case Vis::Brush::DENSE5_PATTERN:
+                return "DENSE5_PATTERN";
+
+            case Vis::Brush::DENSE6_PATTERN:
+                return "DENSE6_PATTERN";
+
+            case Vis::Brush::DENSE7_PATTERN:
+                return "DENSE7_PATTERN";
+
+            case Vis::Brush::H_PATTERN:
+                return "H_PATTERN";
+
+            case Vis::Brush::V_PATTERN:
+                return "V_PATTERN";
+
+            case Vis::Brush::CROSS_PATTERN:
+                return "CROSS_PATTERN";
+
+            case Vis::Brush::LEFT_DIAG_PATTERN:
+                return "LEFT_DIAG_PATTERN";
+
+            case Vis::Brush::RIGHT_DIAG_PATTERN:
+                return "RIGHT_DIAG_PATTERN";
+
+            case Vis::Brush::DIAG_CROSS_PATTERN:
+                return "DIAG_CROSS_PATTERN";
+                
+            default:
+                return "?";
+        }
+    }
+    
+    std::string toString(const CDPL::Vis::Color& col)
+    {
+        std::ostringstream oss;
+
+        oss << "Color(";
+        
+        if (col == CDPL::Vis::Color())
+            oss << ')';
+        
+        else {
+            oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
+
+            if (col.getAlpha() != 1.0)
+                oss << ", a=" << col.getAlpha();
+
+            oss << ')';
+        }
+        
+        return oss.str();
+    }
+
+    std::string brushToString(const CDPL::Vis::Brush& brush)
+    {
+        std::ostringstream oss;
+
+        oss << "CDPL.Vis.Brush(";
+        
+        if (brush == CDPL::Vis::Brush())
+            oss << ')';
+        
+        else {
+            oss << "color=" << toString(brush.getColor()) << ", style=" << toString(brush.getStyle()) << ')';
+        }
+        
+        return oss.str();
+    }
+}
 
 
 void CDPLPythonVis::exportBrush()
@@ -71,6 +173,7 @@ void CDPLPythonVis::exportBrush()
         .def("setColor", &Vis::Brush::setColor, (python::arg("self"), python::arg("color")))
         .def("getStyle", &Vis::Brush::getStyle, python::arg("self"))    
         .def("setStyle", &Vis::Brush::setStyle, (python::arg("self"), python::arg("style")))
+        .def("__str__", &brushToString, python::arg("self"))
         .def("__eq__", &Vis::Brush::operator==, (python::arg("self"), python::arg("brush")))
         .def("__ne__", &Vis::Brush::operator!=, (python::arg("self"), python::arg("brush")))
         .add_property("color", python::make_function(&Vis::Brush::getColor, python::return_internal_reference<1>()),
