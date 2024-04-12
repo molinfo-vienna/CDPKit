@@ -45,14 +45,9 @@ class ControlParameterDefault(Boost.Python.instance):
     ALIGNMENT = 15
 
     ##
-    # \brief Default setting (= <tt>Color.WHITE</tt>) for the control-parameter Vis.ControlParameter.BACKGROUND_COLOR.
+    # \brief Default setting (= <tt>Brush</tt>(Color.WHITE, Brush.NO_PATTERN)) for the control-parameter Vis.ControlParameter.BACKGROUND_BRUSH.
     # 
-    BACKGROUND_COLOR = Color(r=1, g=1, b=1)
-
-    ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.ERASE_BACKGROUND.
-    # 
-    ERASE_BACKGROUND = True
+    BACKGROUND_BRUSH = Brush(color=Color(r=1, g=1, b=1), style=NO_PATTERN)
 
     ##
     # \brief Default setting (= <tt>ArrowStyle.REACTION_SOLID</tt>) for the control-parameter Vis.ControlParameter.REACTION_ARROW_STYLE.
@@ -208,14 +203,14 @@ class ControlParameterDefault(Boost.Python.instance):
     # 
     # \since 1.2
     # 
-    ATOM_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+    ATOM_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
     # \brief Default setting (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) for the control-parameter Vis.ControlParameter.ATOM_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 
-    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
     # \brief Default setting (= <tt>False</tt>) for the control-parameter Vis.ControlParameter.BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE.
@@ -492,11 +487,60 @@ class ControlParameterDefault(Boost.Python.instance):
     # 
     # \since 1.2
     # 
-    BOND_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+    BOND_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
     # \brief Default setting (= <tt>Pen</tt>(Color(0.6, 0.6, 0.75)) for the control-parameter Vis.ControlParameter.BOND_HIGHLIGHT_AREA_OUTLINE_PEN.
     # 
     # \since 1.2
     # 
-    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
+
+    ##
+    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE)) for the control-parameter Vis.ControlParameter.GRID_VIEW_BORDER_PEN.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_BORDER_PEN = Pen(color=Color(), width=1, line_style=NO_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
+
+    ##
+    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE)) for the control-parameter Vis.ControlParameter.GRID_VIEW_ROW_SEPARATOR_PEN.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_ROW_SEPARATOR_PEN = Pen(color=Color(), width=1, line_style=NO_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
+
+    ##
+    # \brief Default setting (= <tt>Pen</tt>(Pen.NO_LINE)) for the control-parameter Vis.ControlParameter.GRID_VIEW_COLUMN_SEPARATOR_PEN.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_COLUMN_SEPARATOR_PEN = Pen(color=Color(), width=1, line_style=NO_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
+
+    ##
+    # \brief Default setting (= <tt>0.0</tt>) for the control-parameter Vis.ControlParameter.GRID_VIEW_MARGIN.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_MARGIN = 0.0
+
+    ##
+    # \brief Default setting (= <tt>5.0</tt>) for the control-parameter Vis.ControlParameter.GRID_VIEW_CELL_PADDING.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_CELL_PADDING = 5.0
+
+    ##
+    # \brief Default setting (= <tt>Font</tt>("", 10.0)) for the control-parameter Vis.ControlParameter.GRID_VIEW_TEXT_FONT.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_TEXT_FONT = Font(family='', size=10, bold=False, italic=False, ulined=False, olined=False, strkdout=False, fxdpitch=False)
+
+    ##
+    # \brief Default setting (= <tt>Color.BLACK</tt>) for the control-parameter Vis.ControlParameter.GRID_VIEW_TEXT_COLOR.
+    # 
+    # \since 1.2
+    # 
+    GRID_VIEW_TEXT_COLOR = Color(r=0, g=0, b=0)

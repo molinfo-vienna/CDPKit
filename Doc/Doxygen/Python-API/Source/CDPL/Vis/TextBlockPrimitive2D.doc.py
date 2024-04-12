@@ -50,6 +50,11 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def setText(text: str) -> None: pass
 
     ##
+    # \brief Clears the block's text content.
+    # 
+    def clearText() -> None: pass
+
+    ##
     # \brief Returns the block's text content.
     # 
     # \return The text content of the block.

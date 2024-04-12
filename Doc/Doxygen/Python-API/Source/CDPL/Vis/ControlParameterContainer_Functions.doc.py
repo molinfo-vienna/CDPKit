@@ -23,33 +23,6 @@
 # \brief 
 # \param cntnr 
 #
-def clearEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getEraseBackgroundParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param erase 
-#
-def setEraseBackgroundParameter(cntnr: Base.ControlParameterContainer, erase: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
 def clearAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -482,6 +455,33 @@ def setStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer, spa
 # \brief 
 # \param cntnr 
 #
+def clearGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer) -> float: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param padding 
+#
+def setGridViewCellPaddingParameter(cntnr: Base.ControlParameterContainer, padding: float) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearEnableBondHighlightingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -585,6 +585,33 @@ def getAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer) ->
 # \param brush 
 #
 def setAtomHighlightAreaBrushParameter(cntnr: Base.ControlParameterContainer, brush: Brush) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearBackgroundBrushParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasBackgroundBrushParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBackgroundBrushParameter(cntnr: Base.ControlParameterContainer) -> Brush: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param brush 
+#
+def setBackgroundBrushParameter(cntnr: Base.ControlParameterContainer, brush: Brush) -> None: pass
 
 ##
 # \brief 
@@ -1022,6 +1049,87 @@ def setAtomHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContaine
 # \brief 
 # \param cntnr 
 #
+def clearGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer) -> Pen: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param pen 
+#
+def setGridViewBorderPenParameter(cntnr: Base.ControlParameterContainer, pen: Pen) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> Pen: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param pen 
+#
+def setGridViewColumnSeparatorPenParameter(cntnr: Base.ControlParameterContainer, pen: Pen) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer) -> Pen: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param pen 
+#
+def setGridViewRowSeparatorPenParameter(cntnr: Base.ControlParameterContainer, pen: Pen) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1103,6 +1211,33 @@ def setReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer, m
 # \brief 
 # \param cntnr 
 #
+def clearGridViewMarginParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewMarginParameter(cntnr: Base.ControlParameterContainer) -> float: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param margin 
+#
+def setGridViewMarginParameter(cntnr: Base.ControlParameterContainer, margin: float) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1179,33 +1314,6 @@ def getBondColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 # \param color 
 #
 def setBondColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
-def clearBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param color 
-#
-def setBackgroundColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
@@ -1368,6 +1476,33 @@ def getReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -> 
 # \param color 
 #
 def setReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearGridViewTextColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewTextColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewTextColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param color 
+#
+def setGridViewTextColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
@@ -2259,6 +2394,33 @@ def getAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer
 # \param font 
 #
 def setAtomConfigurationLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearGridViewTextFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasGridViewTextFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getGridViewTextFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param font 
+#
+def setGridViewTextFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
 
 ##
 # \brief 

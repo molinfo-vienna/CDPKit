@@ -157,22 +157,13 @@ class ControlParameter(Boost.Python.instance):
     BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE = CDPL.Base.LookupKey('BREAK_ATOM_HIGHLIGHT_AREA_OUTLINE')
 
     ##
-    # \brief Specifies the color with which the drawing area gets erased before rendering any graphical primitives.
+    # \brief Specifies the brush with which the drawing area gets erased before rendering any graphical primitives.
     # 
     # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render.
     # 
-    # \see Vis.ControlParameter.ERASE_BACKGROUND <b>Value Type:</b> Vis.Color
+    # <b>Value Type:</b> Vis.Brush
     # 
-    BACKGROUND_COLOR = CDPL.Base.LookupKey('BACKGROUND_COLOR')
-
-    ##
-    # \brief Specifies whether the drawing area shall be erased before rendering any graphical primitives.
-    # 
-    # The area which gets ereased is either the viewport area specified by Vis.ControlParameter.VIEWPORT, or if Vis.ControlParameter.VIEWPORT is not defined, the total bounds of the graphical objects to render.
-    # 
-    # \see Vis.ControlParameter.BACKGROUND_COLOR <b>Value Type:</b> bool
-    # 
-    ERASE_BACKGROUND = CDPL.Base.LookupKey('ERASE_BACKGROUND')
+    BACKGROUND_BRUSH = CDPL.Base.LookupKey('BACKGROUND_BRUSH')
 
     ##
     # \brief Specifies the color of bonds.
@@ -849,3 +840,38 @@ class ControlParameter(Boost.Python.instance):
     # \since 1.2
     # 
     BOND_CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CUSTOM_LABEL_COLOR')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_BORDER_PEN = CDPL.Base.LookupKey('GRID_VIEW_BORDER_PEN')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_ROW_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_ROW_SEPARATOR_PEN')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_COLUMN_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_COLUMN_SEPARATOR_PEN')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_MARGIN = CDPL.Base.LookupKey('GRID_VIEW_MARGIN')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_CELL_PADDING = CDPL.Base.LookupKey('GRID_VIEW_CELL_PADDING')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_TEXT_FONT = CDPL.Base.LookupKey('GRID_VIEW_TEXT_FONT')
+
+    ##
+    # \brief 
+    #
+    GRID_VIEW_TEXT_COLOR = CDPL.Base.LookupKey('GRID_VIEW_TEXT_COLOR')

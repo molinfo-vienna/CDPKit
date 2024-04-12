@@ -72,12 +72,12 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    ATOM_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+    ATOM_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
     # \brief 
     #
-    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
+    ATOM_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
     # \brief 
@@ -167,12 +167,12 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    BOND_HIGHLIGHT_AREA_BRUSH = _HIDDEN_VALUE_
+    BOND_HIGHLIGHT_AREA_BRUSH = Brush(color=Color(r=0.8, g=0.8, b=1), style=SOLID_PATTERN)
 
     ##
     # \brief 
     #
-    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = _HIDDEN_VALUE_
+    BOND_HIGHLIGHT_AREA_OUTLINE_PEN = Pen(color=Color(r=0.6, g=0.6, b=0.75), width=1, line_style=SOLID_LINE, cap_style=ROUND_CAP, join_style=ROUND_JOIN)
 
     ##
     # \brief 

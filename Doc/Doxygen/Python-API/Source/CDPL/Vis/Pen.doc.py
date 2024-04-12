@@ -224,6 +224,12 @@ class Pen(Boost.Python.instance):
     def setWidth(width: float) -> None: pass
 
     ##
+    # \brief Returns a string representation of the \e %Pen instance.
+    # \return The generated string representation.
+    # 
+    def __str__() -> str: pass
+
+    ##
     # \brief Equality comparison operator.
     # 
     # \param pen The other <tt>Pen</tt> object to be compared with.

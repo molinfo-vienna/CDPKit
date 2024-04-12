@@ -180,6 +180,12 @@ class Brush(Boost.Python.instance):
     def setStyle(style: Style) -> None: pass
 
     ##
+    # \brief Returns a string representation of the \e %Brush instance.
+    # \return The generated string representation.
+    # 
+    def __str__() -> str: pass
+
+    ##
     # \brief Equality comparison operator.
     # 
     # \param brush The other <tt>Brush</tt> object to be compared with.
