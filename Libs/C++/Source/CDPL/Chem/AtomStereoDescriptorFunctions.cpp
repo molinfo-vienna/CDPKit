@@ -68,10 +68,8 @@ namespace
             Atom& tgt_atom = tgt_mol.getAtom(i);
             const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
 
-            if (!stereo_desc.isValid(atom)) {
-                clearStereoDescriptor(tgt_atom);
+            if (stereo_desc.getNumReferenceAtoms() == 0)
                 continue;
-            }
 
             const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
 

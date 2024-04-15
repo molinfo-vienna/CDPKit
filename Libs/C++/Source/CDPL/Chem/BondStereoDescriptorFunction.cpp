@@ -66,10 +66,8 @@ namespace
             Bond& tgt_bond = tgt_mol.getBond(i);
             const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 
-            if (!stereo_desc.isValid(bond)) {
-                clearStereoDescriptor(tgt_bond);
+            if (stereo_desc.getNumReferenceAtoms() == 0)
                 continue;
-            }
 
             const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
 
