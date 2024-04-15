@@ -51,6 +51,7 @@ void CDPLPythonVis::exportTextBlockPrimitive2D()
         .def("clearText", &Vis::TextBlockPrimitive2D::clearText, python::arg("self"))
         .def("getText", &Vis::TextBlockPrimitive2D::getText, python::arg("self"), 
              python::return_value_policy<python::copy_const_reference>())
+        .def("hasText", &Vis::TextBlockPrimitive2D::hasText, python::arg("self"))
         .def("setPosition", setPositionFunc1, (python::arg("self"), python::arg("pos")))
         .def("setPosition", setPositionFunc2, (python::arg("self"), python::arg("x"), python::arg("y")))
         .def("getPosition", &Vis::TextBlockPrimitive2D::getPosition, python::arg("self"), 

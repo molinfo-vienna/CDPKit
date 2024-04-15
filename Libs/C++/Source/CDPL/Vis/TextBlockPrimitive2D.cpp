@@ -105,6 +105,11 @@ const std::string& Vis::TextBlockPrimitive2D::getText() const
     return text;
 }
 
+bool Vis::TextBlockPrimitive2D::hasText() const
+{
+    return !textFragments.empty();
+}
+
 void Vis::TextBlockPrimitive2D::setPosition(const Math::Vector2D& pos)
 {
     position = pos;

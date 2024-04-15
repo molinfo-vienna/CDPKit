@@ -153,9 +153,22 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     BOOST_CHECK(tbp.getFont() == Font());
     BOOST_CHECK(tbp.getAlignment() == Alignment::LEFT);
     BOOST_CHECK(tbp.getLineSpacing() == 1.0);
-
+    BOOST_CHECK(!tbp.hasText());
+    
     checkClone(tbp);
 
+    tbp.setText("<i></i>\n\r<br/>");
+
+    BOOST_CHECK(tbp.getText() == "<i></i>\n\r<br/>");
+    BOOST_CHECK(tbp.getPosition()(0) == 0.0 && tbp.getPosition()(1) == 0.0);
+    BOOST_CHECK(tbp.getPen() == Pen(Color::GREEN));
+    BOOST_CHECK(tbp.getFont() == Font());
+    BOOST_CHECK(tbp.getAlignment() == Alignment::LEFT);
+    BOOST_CHECK(tbp.getLineSpacing() == 1.0);
+    BOOST_CHECK(!tbp.hasText());
+    
+    checkClone(tbp);
+    
     tbp.setText("Test Text");
 
     BOOST_CHECK(tbp.getText() == "Test Text");
@@ -164,7 +177,8 @@ BOOST_AUTO_TEST_CASE(TextBlockPrimitive2DTest)
     BOOST_CHECK(tbp.getFont() == Font());
     BOOST_CHECK(tbp.getAlignment() == Alignment::LEFT);
     BOOST_CHECK(tbp.getLineSpacing() == 1.0);
-
+    BOOST_CHECK(tbp.hasText());
+    
     checkClone(tbp);
 
     tbp.setFont(Font("Times", 13.3));
