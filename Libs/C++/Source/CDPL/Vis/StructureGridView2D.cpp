@@ -26,16 +26,38 @@
 
 #include <algorithm>
 #include <functional>
+#include <fstream>
+
+#include "CDPL/Vis/StructureGridView2D.hpp"
+#include "CDPL/Vis/ControlParameter.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/ControlParameterFunctions.hpp"
+#include "CDPL/Vis/Pen.hpp"
+#include "CDPL/Vis/Brush.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
+#include "CDPL/Vis/Renderer2D.hpp"
+#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/AffineTransform.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Base/DataIOManager.hpp"
+#include "CDPL/Base/DataOutputHandler.hpp"
 
 #ifdef HAVE_CAIRO
 # include <cairo.h>
+# ifdef HAVE_CAIRO_SVG_SUPPORT
+#  include <cairo-svg.h>
+# endif
+# ifdef HAVE_CAIRO_PS_SUPPORT
+#  include <cairo-ps.h>
+# endif
+# ifdef HAVE_CAIRO_PDF_SUPPORT
+#  include <cairo-pdf.h>
+# endif
+# include "CDPL/Vis/CairoRenderer2D.hpp"
+# include "CDPL/Vis/CairoFontMetrics.hpp"
+# include "CDPL/Vis/CairoPointer.hpp"
+# include "CDPL/Vis/StreamWriteFunc.hpp"
 #endif // HAVE_CAIRO
-
-#include "CDPL/Vis/StructureGridView2D.hpp"
-#include "CDPL/Vis/Rectangle2D.hpp"
-#include "CDPL/Vis/ControlParameter.hpp"
-#include "CDPL/Vis/ControlParameterFunctions.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
@@ -66,39 +88,178 @@ Vis::StructureGridView2D::~StructureGridView2D()
 
 void Vis::StructureGridView2D::render(Renderer2D& renderer)
 {
-    // TODO
+    renderer.saveState();
+    
+    Math::Vector2D grid_pos;
+
+    getGridPosition(grid_pos);
+    
+    auto& bg_brush = getBackgroundBrushParameter(*this);
+    
+    if (bg_brush.getStyle() != Brush::NO_PATTERN) {
+        renderer.setBrush(bg_brush);
+        renderer.setPen(Pen::NO_LINE);
+        renderer.drawRectangle(0, 0, grid_pos(0) * 2.0 + numColumns * cellWidth,
+                               grid_pos(1) * 2.0 + numRows * cellHeight);
+    }
+
+    auto& col_sep_pen = getGridViewColumnSeparatorPenParameter(*this);
+
+    if (col_sep_pen.getLineStyle() != Pen::NO_LINE) {
+        renderer.setPen(col_sep_pen);
+
+        for (std::size_t i = 1; i < numColumns; i++)
+            renderer.drawLine(i * cellWidth + grid_pos(0), grid_pos(1),
+                              i * cellWidth + grid_pos(0), grid_pos(1) + numRows * cellHeight);
+    }
+
+    auto& row_sep_pen = getGridViewRowSeparatorPenParameter(*this);
+
+    if (row_sep_pen.getLineStyle() != Pen::NO_LINE) {
+        renderer.setPen(row_sep_pen);
+
+        for (std::size_t i = 1; i < numRows; i++)
+            renderer.drawLine(grid_pos(0), i * cellHeight + grid_pos(1),
+                              grid_pos(0) + numColumns * cellWidth, i * cellHeight + grid_pos(1));
+    }
+    
+    auto& border_pen = getGridViewBorderPenParameter(*this);
+
+    if (border_pen.getLineStyle() != Pen::NO_LINE) {
+        renderer.setBrush(Brush::NO_PATTERN);
+        renderer.setPen(border_pen);
+        renderer.drawRectangle(grid_pos(0), grid_pos(1), numColumns * cellWidth,
+                               numRows * cellHeight);
+    }
+
+    Math::Matrix3D trans(Math::IdentityMatrix<double>(3, 3));
+    
+    for (auto& ce : cells) {
+        ce.second->layout();
+
+        trans(0, 2) = grid_pos(0) + ce.first.second * cellWidth;
+        trans(1, 2) = grid_pos(1) + ce.first.first * cellHeight;
+        
+        renderer.saveState();
+        renderer.transform(trans);
+
+        ce.second->render(renderer);
+
+        renderer.restoreState();
+    }
+
+    renderer.restoreState();
 }
 
 #ifdef HAVE_CAIRO
 
 bool Vis::StructureGridView2D::write(const std::string& file_name)
 {
-    // TODO
-    return false;
+    Base::DataIOManager<Chem::MolecularGraph>::OutputHandlerPointer handler;
+    
+    for (auto i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
+        handler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_name.substr(++i));
+
+        if (handler)
+            break;
+    }
+
+    if (!handler)
+        throw Base::IOError("StructureGridView2D: could not deduce image output format from '" + file_name + "'");
+
+    return write(file_name, handler->getDataFormat());
 }
 
 bool Vis::StructureGridView2D::write(const std::string& file_name, const std::string& fmt)
 {
-    // TODO
-    return false;
+    auto handler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(fmt);
+
+    if (!handler)
+        throw Base::IOError("StructureGridView2D: invalid/unsupported image output format '" + fmt + "'");
+
+    return write(file_name, handler->getDataFormat());
 }
 
 bool Vis::StructureGridView2D::write(const std::string& file_name, const Base::DataFormat& fmt)
 {
-    // TODO
-    return false;
+    std::ofstream os(file_name.c_str(), std::ios_base::out |
+                     std::ios_base::trunc | std::ios_base::binary);
+
+    return write(os, fmt);
 }
 
 bool Vis::StructureGridView2D::write(std::ostream& os, const std::string& fmt)
 {
-    // TODO
-    return false;
+    auto handler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(fmt);
+
+    if (!handler)
+        throw Base::IOError("StructureGridView2D: invalid/unsupported image output format '" + fmt + "'");
+
+    return write(os, handler->getDataFormat());
 }
 
 bool Vis::StructureGridView2D::write(std::ostream& os, const Base::DataFormat& fmt)
 {
-    // TODO
-    return false;
+    if (!os.good())
+        return false;
+
+    Rectangle2D grid_bbox;
+    auto scaling_fact = getOutputScalingFactorParameter(*this);
+    
+    getModelBounds(grid_bbox);
+
+    auto render_surf_width = grid_bbox.getWidth() * scaling_fact;
+    auto render_surf_height = grid_bbox.getHeight() * scaling_fact;
+    
+    CairoPointer<cairo_surface_t> render_surf;
+    
+    if (fmt == DataFormat::PNG) {
+#ifdef HAVE_CAIRO_PNG_SUPPORT
+        render_surf.reset(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, std::ceil(render_surf_width), std::ceil(render_surf_height)));
+#endif
+    } else if (fmt ==  DataFormat::SVG) {
+#ifdef HAVE_CAIRO_SVG_SUPPORT
+        render_surf.reset(cairo_svg_surface_create_for_stream(&streamWriteFunc, &os, render_surf_width, render_surf_height));
+#endif
+    } else if (fmt == DataFormat::PDF) {
+#ifdef HAVE_CAIRO_PDF_SUPPORT
+        render_surf.reset(cairo_pdf_surface_create_for_stream(&streamWriteFunc, &os, render_surf_width, render_surf_height));
+#endif
+    } else if (fmt == DataFormat::PS) {
+#ifdef HAVE_CAIRO_PS_SUPPORT
+        render_surf.reset(cairo_ps_surface_create_for_stream(&streamWriteFunc, &os, render_surf_width, render_surf_height));
+#endif
+    }
+
+    if (!render_surf)
+        throw Base::IOError("StructureGridView2D: image output format '" + fmt.getName() + "' not supported");
+    
+    CairoPointer<cairo_t> render_ctxt(cairo_create(render_surf.get()));
+
+    if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS ||
+        cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS) 
+        return false;
+   
+    CairoRenderer2D renderer(render_ctxt);
+    CairoFontMetrics font_metrics(render_ctxt);
+
+    renderer.transform(Math::DScalingMatrix(3, scaling_fact, scaling_fact, 1.0));
+    
+    setFontMetrics(&font_metrics);
+    render(renderer);
+
+    cairo_show_page(render_ctxt.get());
+
+    if (fmt == DataFormat::PNG)
+        cairo_surface_write_to_png_stream(render_surf.get(), &streamWriteFunc, &os);
+    
+    if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS ||
+        cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS)
+        return false;
+  
+    os.flush();
+    
+    return os.good();
 }
 
 #endif // HAVE_CAIRO
@@ -118,8 +279,12 @@ Vis::FontMetrics* Vis::StructureGridView2D::getFontMetrics() const
 
 void Vis::StructureGridView2D::getModelBounds(Rectangle2D& bounds)
 {
-    bounds.reset();
-    // TODO
+    Math::Vector2D grid_pos;
+
+    getGridPosition(grid_pos);
+
+    bounds.setBounds(0.0, 0.0, grid_pos(0) * 2.0 + numColumns * cellWidth,
+                     grid_pos(1) * 2.0 + numRows * cellHeight);
 }
 
 Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::operator()(std::size_t row, std::size_t col)
@@ -137,10 +302,12 @@ Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::operator()(std::size_t
 
 const Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::operator()(std::size_t row, std::size_t col) const
 {
+    static Cell DUMMY_CELL;
+    
     auto it = cells.find({row, col});
 
     if (it == cells.end())
-        throw Base::ItemNotFound("StructureGridView2D: data for requested cell not available");
+        return DUMMY_CELL;
     
     return *it->second;
 }
@@ -235,6 +402,31 @@ void Vis::StructureGridView2D::copy(const StructureGridView2D& grid_view)
     }
 }
 
+void Vis::StructureGridView2D::getGridPosition(Math::Vector2D& pos)
+{
+    pos.clear();
+
+    auto& border_pen = getGridViewBorderPenParameter(*this);
+
+    if (border_pen.getLineStyle() != Pen::NO_LINE)
+        pos.clear(border_pen.getWidth() * 0.5);
+
+    auto& col_sep_pen = getGridViewColumnSeparatorPenParameter(*this);
+
+    if (col_sep_pen.getLineStyle() != Pen::NO_LINE && col_sep_pen.getCapStyle() != Pen::FLAT_CAP)
+        pos(1) = std::max(pos(1), col_sep_pen.getWidth() * 0.5);
+
+    auto& row_sep_pen = getGridViewRowSeparatorPenParameter(*this);
+
+    if (row_sep_pen.getLineStyle() != Pen::NO_LINE && row_sep_pen.getCapStyle() != Pen::FLAT_CAP)
+        pos(0) = std::max(pos(0), row_sep_pen.getWidth() * 0.5);
+
+    auto margin = getGridViewMarginParameter(*this);
+
+    pos(0) += margin;
+    pos(1) += margin;
+}
+
 Vis::StructureGridView2D::CellPointer Vis::StructureGridView2D::allocCell()
 {
     CellPointer cell_ptr = cellCache.get();
@@ -267,11 +459,12 @@ void Vis::StructureGridView2D::cleanupCell(Cell& cell)
 // -- Cell --
 
 Vis::StructureGridView2D::Cell::Cell():
-    fontMetrics(nullptr), width(0.0), height(0.0), layoutValid(false),
-    fontChanged(true), colorChanged(true)
+    fontMetrics(nullptr), width(0.0), height(0.0), layoutValid(false)
 {
-    structView.setParent(this);
+    setBackgroundBrushParameter(structView, Brush::NO_PATTERN);
 
+    structView.setParent(this);
+    
     using namespace std::placeholders;
  
     registerParameterRemovedCallback(std::bind(&Cell::parameterRemoved, this, _1));
@@ -343,7 +536,7 @@ void Vis::StructureGridView2D::Cell::clearText()
 bool Vis::StructureGridView2D::Cell::hasText() const
 {
     for (auto& tb : textBlocks)
-        if (!tb.getText().empty())
+        if (tb.hasText())
             return true;
 
     return false;
@@ -351,7 +544,7 @@ bool Vis::StructureGridView2D::Cell::hasText() const
 
 bool Vis::StructureGridView2D::Cell::hasText(unsigned int pos) const
 {
-    return !textBlocks[posToArrayIndex(pos)].getText().empty();
+    return textBlocks[posToArrayIndex(pos)].hasText();
 }
                 
 Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::Cell::operator=(const Cell& cell)
@@ -366,17 +559,18 @@ Vis::StructureGridView2D::Cell& Vis::StructureGridView2D::Cell::operator=(const 
     else
         clearStructure();
 
-    std::copy(cell.textBlocks, cell.textBlocks + std::size(cell.textBlocks), textBlocks);
+    for (std::size_t i = 0; i < 9; i++)
+        textBlocks[i].setText(cell.textBlocks[i].getText());
 
     layoutValid  = false;
-    fontChanged  = true;
-    colorChanged = true;
-
+ 
     return *this;
 }
 
 void Vis::StructureGridView2D::Cell::setFontMetrics(FontMetrics* font_metrics)
 {
+    structView.setFontMetrics(font_metrics);
+
     fontMetrics = font_metrics;
     layoutValid = false;
 }
@@ -393,18 +587,28 @@ void Vis::StructureGridView2D::Cell::setSize(double width, double height)
 
 void Vis::StructureGridView2D::Cell::parameterChanged(const Base::LookupKey& key, const Base::Any& value)
 {
-    if (key == ControlParameter::GRID_VIEW_TEXT_FONT) {
-        fontChanged = true;
+    using namespace ControlParameter;
+    
+    if (key == GRID_VIEW_TEXT_FONT) {
+        auto& font = getGridViewTextFontParameter(*this);
+
+        for (auto& tb : textBlocks)
+            tb.setFont(font);
+        
         layoutValid = false;
         return;
     }
 
-    if (key == ControlParameter::GRID_VIEW_TEXT_COLOR) {
-        colorChanged = true;
+    if (key == GRID_VIEW_TEXT_COLOR) {
+        auto& color = getGridViewTextColorParameter(*this);
+
+        for (auto& tb : textBlocks)
+            tb.setPen(color);
+        
         return;
     }
 
-    if (key == ControlParameter::GRID_VIEW_CELL_PADDING)
+    if (key == GRID_VIEW_CELL_PADDING)
         layoutValid = false;
 }
 
@@ -415,15 +619,126 @@ void Vis::StructureGridView2D::Cell::parameterRemoved(const Base::LookupKey& key
 
 void Vis::StructureGridView2D::Cell::parentChanged()
 {
-    fontChanged = true;
-    colorChanged = true;
-    layoutValid = false;
+    using namespace ControlParameter;
+    
+    parameterChanged(GRID_VIEW_TEXT_FONT, Base::Any());
+    parameterChanged(GRID_VIEW_TEXT_COLOR, Base::Any());
+    parameterChanged(GRID_VIEW_CELL_PADDING, Base::Any());
 }
                 
 void Vis::StructureGridView2D::Cell::layout()
 {
-    // TODO
+    if (layoutValid)
+        return;
+
+    auto padding = getGridViewCellPaddingParameter(*this);
+
+    double max_top_tb_h = 0.0;
+    double max_btm_tb_h = 0.0;
+    Rectangle2D bbox;
+    
+    auto idx = posToArrayIndex(Alignment::TOP | Alignment::LEFT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].setPosition({ padding, padding });
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+
+        max_top_tb_h = bbox.getHeight();
+    }
+
+    idx = posToArrayIndex(Alignment::TOP | Alignment::H_CENTER);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ 0.5 * (width - bbox.getWidth()), padding });
+
+        max_top_tb_h = std::max(max_top_tb_h, bbox.getHeight());
+    }
+
+    idx = posToArrayIndex(Alignment::TOP | Alignment::RIGHT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ width - padding - bbox.getWidth(), padding });
+
+        max_top_tb_h = std::max(max_top_tb_h, bbox.getHeight());
+    }
+//
+    idx = posToArrayIndex(Alignment::V_CENTER | Alignment::LEFT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ padding, 0.5 * (height - bbox.getHeight()) });
+    }
+
+    idx = posToArrayIndex(Alignment::V_CENTER | Alignment::H_CENTER);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ 0.5 * (width - bbox.getWidth()), 0.5 * (height - bbox.getHeight()) });
+    }
+
+    idx = posToArrayIndex(Alignment::V_CENTER | Alignment::RIGHT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ width - padding - bbox.getWidth(), 0.5 * (height - bbox.getHeight()) });
+
+    }
+//
+    idx = posToArrayIndex(Alignment::BOTTOM | Alignment::LEFT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ padding, height - padding - bbox.getHeight()});
+
+        max_btm_tb_h = bbox.getHeight();
+    }
+
+    idx = posToArrayIndex(Alignment::BOTTOM | Alignment::H_CENTER);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ 0.5 * (width - bbox.getWidth()), height - padding - bbox.getHeight() });
+
+        max_btm_tb_h = std::max(max_btm_tb_h, bbox.getHeight());
+    }
+
+    idx = posToArrayIndex(Alignment::BOTTOM | Alignment::RIGHT);
+
+    if (textBlocks[idx].hasText()) {
+        textBlocks[idx].layout(*fontMetrics);
+        textBlocks[idx].getBounds(bbox, fontMetrics);
+        textBlocks[idx].setPosition({ width - padding - bbox.getWidth(), height - padding - bbox.getHeight() });
+
+        max_btm_tb_h = std::max(max_btm_tb_h, bbox.getHeight());
+    }
+
+    bbox.setBounds(padding, padding + max_top_tb_h, width - padding, height - padding - max_btm_tb_h);
+
+    setViewportParameter(structView, bbox);
+    
     layoutValid = true;
+}
+
+void Vis::StructureGridView2D::Cell::render(Renderer2D& renderer)
+{
+    layout();
+    
+    for (auto& tb : textBlocks)
+        if (tb.hasText())
+            tb.render(renderer);
+
+    if (hasStructure())
+        structView.render(renderer);
 }
 
 std::size_t Vis::StructureGridView2D::Cell::posToArrayIndex(unsigned int pos)

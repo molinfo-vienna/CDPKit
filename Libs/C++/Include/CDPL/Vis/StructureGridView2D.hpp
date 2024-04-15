@@ -43,6 +43,7 @@
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
 
@@ -149,6 +150,7 @@ namespace CDPL
                 void parentChanged();
                 
                 void layout();
+                void render(Renderer2D& renderer);
 
                 static std::size_t posToArrayIndex(unsigned int pos);
                     
@@ -159,8 +161,6 @@ namespace CDPL
                 double               width;
                 double               height;
                 bool                 layoutValid;
-                bool                 fontChanged;
-                bool                 colorChanged;
             };
             
             /**
@@ -233,6 +233,8 @@ namespace CDPL
             typedef CellCache::SharedObjectPointer CellPointer;
 
             void copy(const StructureGridView2D& grid_view);
+
+            void getGridPosition(Math::Vector2D& pos);
             
             CellPointer allocCell();
                 

@@ -90,6 +90,12 @@ namespace CDPL
             const std::string& getText() const;
 
             /**
+             * \brief Tells whether the text block has any renderable text.
+             * \return \true if there is renderable text and \c false otherwise.
+             */
+            bool hasText() const;
+
+            /**
              * \brief Sets the position of the text block in 2D space.
              *
              * The position specifies the upper-left corner of the text block's bounding box.

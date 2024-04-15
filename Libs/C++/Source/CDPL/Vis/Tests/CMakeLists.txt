@@ -39,6 +39,7 @@ set(test-suite_SRCS
     Path2DTest.cpp
     StructureView2DTest.cpp
     ReactionView2DTest.cpp
+    StructureGridView2DTest.cpp
     LinePrimitive2DTest.cpp
     PolygonPrimitive2DTest.cpp
     PolylinePrimitive2DTest.cpp
