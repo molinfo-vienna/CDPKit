@@ -44,15 +44,19 @@
 
 #ifdef HAVE_CAIRO
 # include <cairo.h>
+
 # ifdef HAVE_CAIRO_SVG_SUPPORT
 #  include <cairo-svg.h>
 # endif
+
 # ifdef HAVE_CAIRO_PS_SUPPORT
 #  include <cairo-ps.h>
 # endif
+
 # ifdef HAVE_CAIRO_PDF_SUPPORT
 #  include <cairo-pdf.h>
 # endif
+
 # include "CDPL/Vis/CairoRenderer2D.hpp"
 # include "CDPL/Vis/CairoFontMetrics.hpp"
 # include "CDPL/Vis/CairoPointer.hpp"
@@ -365,10 +369,10 @@ void Vis::StructureGridView2D::clearStructures()
         ce.second->clearStructure();
 }
 
-void Vis::StructureGridView2D::clearTextBlocks()
+void Vis::StructureGridView2D::clearAllText()
 {
     for (auto& ce : cells)
-        ce.second->clearText();
+        ce.second->clearAllText();
 }
 
 Vis::StructureGridView2D& Vis::StructureGridView2D::operator=(const StructureGridView2D& grid_view)
@@ -500,13 +504,11 @@ bool Vis::StructureGridView2D::Cell::hasStructure() const
 
 void Vis::StructureGridView2D::Cell::setText(const std::string& text, unsigned int pos, unsigned int line_almnt)
 {
-    if (!(line_almnt & Alignment::H_ALIGNMENT_MASK)) {
+    line_almnt = (line_almnt & Alignment::H_ALIGNMENT_MASK);
+    
+    if (line_almnt != Alignment::LEFT && line_almnt != Alignment::H_CENTER && line_almnt != Alignment::RIGHT)
         line_almnt = (pos & Alignment::H_ALIGNMENT_MASK);
-
-        if (!line_almnt)
-            line_almnt = Alignment::H_CENTER;
-    }
-
+    
     auto idx = posToArrayIndex(pos);
     
     textBlocks[idx].setText(text);
@@ -525,7 +527,7 @@ void Vis::StructureGridView2D::Cell::clearText(unsigned int pos)
     layoutValid = false;
 }
 
-void Vis::StructureGridView2D::Cell::clearText()
+void Vis::StructureGridView2D::Cell::clearAllText()
 {
     for (auto& tb : textBlocks)
         tb.clearText();
@@ -533,7 +535,7 @@ void Vis::StructureGridView2D::Cell::clearText()
     layoutValid = false;
 }
 
-bool Vis::StructureGridView2D::Cell::hasText() const
+bool Vis::StructureGridView2D::Cell::hasAnyText() const
 {
     for (auto& tb : textBlocks)
         if (tb.hasText())
@@ -743,8 +745,8 @@ void Vis::StructureGridView2D::Cell::render(Renderer2D& renderer)
 
 std::size_t Vis::StructureGridView2D::Cell::posToArrayIndex(unsigned int pos)
 {
-    std::size_t row = 1;
-    std::size_t col = 1;
+    std::size_t row = 0;
+    std::size_t col = 0;
     
     switch (pos & Alignment::V_ALIGNMENT_MASK) {
 
@@ -752,8 +754,16 @@ std::size_t Vis::StructureGridView2D::Cell::posToArrayIndex(unsigned int pos)
             row = 0;
             break;
 
+        case Alignment::V_CENTER:
+            row = 1;
+            break;
+
         case Alignment::BOTTOM:
             row = 2;
+            break;
+
+        default:
+            throw Base::ValueError("StructureGridView2D::Cell: invalid vertical text block position");
     }
 
     switch (pos & Alignment::H_ALIGNMENT_MASK) {
@@ -762,8 +772,16 @@ std::size_t Vis::StructureGridView2D::Cell::posToArrayIndex(unsigned int pos)
             col = 0;
             break;
 
+        case Alignment::H_CENTER:
+            col = 1;
+            break;
+            
         case Alignment::RIGHT:
             col = 2;
+            break;
+
+        default:
+            throw Base::ValueError("StructureGridView2D::Cell: invalid vhorizontal text block position");
     }
 
     return (row * 3 + col);

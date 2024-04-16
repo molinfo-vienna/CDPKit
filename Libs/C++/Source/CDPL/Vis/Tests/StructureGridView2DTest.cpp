@@ -35,11 +35,12 @@
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/AtomColorTable.hpp"
+#include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-
-#include "Utilities.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #ifdef HAVE_CAIRO 
 # ifdef HAVE_CAIRO_PNG_SUPPORT
@@ -61,29 +62,73 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
     using namespace Chem;
 
     StructureGridView2D view;
-
-// TODO
-    
-#ifdef HAVE_CAIRO 
-# ifdef HAVE_CAIRO_PNG_SUPPORT
-
     BasicMolecule mol;
-    MoleculeReader mol_reader(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/1ke7_ligands.sdf");
+    MoleculeReader mol_reader(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/ChEMBLStandardizerTestData.sdf");
 
-    for (std::size_t i = 0; i < 3; i++)
+    for (std::size_t i = 0; i < 3; i++) {
         for (std::size_t j = 0; j < 3; j++) {
             BOOST_CHECK(mol_reader.read(mol));
 
             initSubstructureSearchTarget(mol, false);
-
+            calcTopologicalDistanceMatrix(mol, false);
+            
             view(i, j).setStructure(mol);
+            view(i, j).setText("#" + std::to_string(i * 3 + j + 1));
         }
+    }
+
+    Vis::setAtomColorTableParameter(view(1, 1), ColorTable::SharedPointer(new ColorTable(AtomColorTable::ELEMENT_COLORS_2D)));
+    Vis::setGridViewTextFontParameter(view(2, 2), Font("Serif", 12.0, true));
+    Vis::setGridViewTextColorParameter(view(0, 0), Color::RED);
+    Vis::setBackgroundBrushParameter(view, Brush(Color::GRAY, Brush::DIAG_CROSS_PATTERN));
     
+// TODO
+    
+#ifdef HAVE_CAIRO
+# ifdef HAVE_CAIRO_PNG_SUPPORT
     BOOST_CHECK(view.write("StructureGridView2DTest_1.png"));
-    BOOST_CHECK(view.write("StructureGridView2DTest_1.pdf"));
-    BOOST_CHECK(view.write("StructureGridView2DTest_1.ps"));
-    BOOST_CHECK(view.write("StructureGridView2DTest_1.svg"));
-      
+# endif
+
+# ifdef HAVE_CAIRO_PDF_SUPPORT
+    BOOST_CHECK(view.write("StructureGridView2DTest_1.pdf", "pDf"));
+# endif
+
+# ifdef HAVE_CAIRO_PS_SUPPORT
+    BOOST_CHECK(view.write("StructureGridView2DTest_1.ps", DataFormat::PS));
+# endif
+
+# ifdef HAVE_CAIRO_SVG_SUPPORT
+    std::ofstream ofs1("StructureGridView2DTest_1.svg");
+
+    BOOST_CHECK(view.write(ofs1, "Svg"));
+# endif
+
+# ifdef HAVE_CAIRO_PNG_SUPPORT
+
+    view.resize(4, 4);
+
+    BOOST_CHECK(view.write("StructureGridView2DTest_2_resize_4x4.png"));
+
+//---
+
+    view(0, 3).setText("LEFT | TOP", Alignment::LEFT | Alignment::TOP);
+    view(1, 3).setText("H_CENTER | TOP", Alignment::H_CENTER | Alignment::TOP);
+    view(2, 3).setText("RIGHT | TOP", Alignment::RIGHT | Alignment::TOP);
+    view(0, 3).setText("LEFT | V_CENTER", Alignment::LEFT | Alignment::V_CENTER);
+    view(1, 3).setText("H_CENTER | V_CENTER", Alignment::H_CENTER | Alignment::V_CENTER);
+    view(2, 3).setText("RIGHT | V_CENTER", Alignment::RIGHT | Alignment::V_CENTER);
+    view(0, 3).setText("LEFT | BOTTOM", Alignment::LEFT | Alignment::BOTTOM);
+    view(1, 3).setText("H_CENTER | BOTTOM", Alignment::H_CENTER | Alignment::BOTTOM);
+    view(2, 3).setText("RIGHT | BOTTOM", Alignment::RIGHT | Alignment::BOTTOM);
+
+    BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::RIGHT), Base::ValueError);
+    BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::TOP), Base::ValueError);
+    BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::NONE), Base::ValueError);
+
+    std::ofstream ofs2("StructureGridView2DTest_3_all_pos_text.png");
+     
+    BOOST_CHECK(view.write(ofs2, DataFormat::PNG));
+    
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
 }

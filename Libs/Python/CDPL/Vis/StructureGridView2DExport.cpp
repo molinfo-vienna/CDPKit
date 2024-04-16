@@ -95,9 +95,11 @@ void CDPLPythonVis::exportStructureGridView2D()
         .def("getNumRows", &Vis::StructureGridView2D::getNumRows, python::arg("self"))
         .def("getNumColumns", &Vis::StructureGridView2D::getNumColumns, python::arg("self"))
         .def("clearStructures", &Vis::StructureGridView2D::clearStructures, python::arg("self"))
-        .def("clearTextBlocks", &Vis::StructureGridView2D::clearTextBlocks, python::arg("self"))
+        .def("clearAllText", &Vis::StructureGridView2D::clearAllText, python::arg("self"))
         .def("assign", &Vis::StructureGridView2D::operator=, (python::arg("self"), python::arg("grid_view")),
              python::return_self<>())
+        .def_readonly("DEF_CELL_WIDTH", Vis::StructureGridView2D::DEF_CELL_WIDTH)
+        .def_readonly("DEF_CELL_HEIGHT", Vis::StructureGridView2D::DEF_CELL_HEIGHT)
         .add_property("cellWidth", &Vis::StructureGridView2D::getCellWidth)
         .add_property("cellHeight", &Vis::StructureGridView2D::getCellHeight)
         .add_property("numRows", &Vis::StructureGridView2D::getNumRows)
@@ -115,19 +117,23 @@ void CDPLPythonVis::exportStructureGridView2D()
         .def("clearStructure", &Vis::StructureGridView2D::Cell::clearStructure, python::arg("self"))
         .def("hashStructure", &Vis::StructureGridView2D::Cell::hasStructure, python::arg("self"))
         .def("setText", &Vis::StructureGridView2D::Cell::setText,
-             (python::arg("self"), python::arg("pos"), python::arg("line_almnt") = Vis::Alignment::NONE))
+             (python::arg("self"), python::arg("pos") = Vis::StructureGridView2D::Cell::DEF_TEXT_POSITION,
+             python::arg("line_almnt") = Vis::Alignment::NONE))
         .def("getText", &Vis::StructureGridView2D::Cell::getText,
-             (python::arg("self"), python::arg("pos")), python::return_internal_reference<>())
-        .def("clearText", static_cast<void (Vis::StructureGridView2D::Cell::*)(unsigned int)>(&Vis::StructureGridView2D::Cell::clearText),
-             (python::arg("self"), python::arg("pos")))
-        .def("clearText", static_cast<void (Vis::StructureGridView2D::Cell::*)()>(&Vis::StructureGridView2D::Cell::clearText),
+             (python::arg("self"), python::arg("pos") = Vis::StructureGridView2D::Cell::DEF_TEXT_POSITION),
+             python::return_internal_reference<>())
+        .def("clearText", &Vis::StructureGridView2D::Cell::clearText,
+             (python::arg("self"), python::arg("pos") = Vis::StructureGridView2D::Cell::DEF_TEXT_POSITION))
+        .def("clearAllText", &Vis::StructureGridView2D::Cell::clearAllText,
              python::arg("self"))
-        .def("hasText", static_cast<bool (Vis::StructureGridView2D::Cell::*)() const>(&Vis::StructureGridView2D::Cell::hasText),
+        .def("hasAnyText", &Vis::StructureGridView2D::Cell::hasAnyText,
              python::arg("self"))
-        .def("hasText", static_cast<bool (Vis::StructureGridView2D::Cell::*)(unsigned int) const>(&Vis::StructureGridView2D::Cell::hasText),
+        .def("hasText", &Vis::StructureGridView2D::Cell::hasText,
              (python::arg("self"), python::arg("pos")))
         .def("assign", &copyCell, (python::arg("self"), python::arg("cell")), python::return_self<>())
+        .def_readonly("DEF_TEXT_POSITION", Vis::StructureGridView2D::Cell::DEF_TEXT_POSITION)
         .add_property("structure", 
-                      python::make_function(&Vis::StructureGridView2D::Cell::getStructure, python::return_internal_reference<>()),
+                      python::make_function(&Vis::StructureGridView2D::Cell::getStructure,
+                                            python::return_internal_reference<>()),
                       &Vis::StructureGridView2D::Cell::setStructure);
 }

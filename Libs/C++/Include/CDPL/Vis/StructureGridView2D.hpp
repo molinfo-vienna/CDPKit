@@ -94,8 +94,8 @@ namespace CDPL
         {
 
           public:
-            static constexpr double DEF_CELL_WIDTH  = 150.0;
-            static constexpr double DEF_CELL_HEIGHT = 150.0;
+            static constexpr double DEF_CELL_WIDTH  = 250.0;
+            static constexpr double DEF_CELL_HEIGHT = 250.0;
             
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StructureGridView2D instances.
@@ -111,6 +111,8 @@ namespace CDPL
                  */
                 typedef std::shared_ptr<Cell> SharedPointer;
 
+                static constexpr unsigned int DEF_TEXT_POSITION = Alignment::BOTTOM | Alignment::H_CENTER;
+                
                 Cell(const Cell&) = delete;
                                 
                 void setStructure(const Chem::MolecularGraph& molgraph);
@@ -121,17 +123,18 @@ namespace CDPL
 
                 bool hasStructure() const;
 
-                void setText(const std::string& text, unsigned int pos, unsigned int line_almnt = Alignment::NONE);
+                void setText(const std::string& text, unsigned int pos = DEF_TEXT_POSITION,
+                             unsigned int line_almnt = Alignment::NONE);
 
-                const std::string& getText(unsigned int pos) const;
+                const std::string& getText(unsigned int pos = DEF_TEXT_POSITION) const;
 
-                void clearText(unsigned int pos);
+                void clearText(unsigned int pos = DEF_TEXT_POSITION);
 
-                void clearText();
+                bool hasText(unsigned int pos = DEF_TEXT_POSITION) const;
+                
+                void clearAllText();
 
-                bool hasText() const;
-
-                bool hasText(unsigned int pos) const;
+                bool hasAnyText() const;
                 
                 Cell& operator=(const Cell& cell);
                 
@@ -224,7 +227,7 @@ namespace CDPL
 
             void clearStructures();
 
-            void clearTextBlocks();
+            void clearAllText();
 
             StructureGridView2D& operator=(const StructureGridView2D& grid_view);
             
