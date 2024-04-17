@@ -74,6 +74,12 @@ namespace
 }
 
 
+constexpr double Vis::StructureGridView2D::DEF_CELL_WIDTH;
+constexpr double Vis::StructureGridView2D::DEF_CELL_HEIGHT;
+
+constexpr unsigned int Vis::StructureGridView2D::Cell::DEF_TEXT_POSITION;
+
+
 Vis::StructureGridView2D::StructureGridView2D(): 
     cellCache(&StructureGridView2D::newCell, &StructureGridView2D::deleteCell, MAX_CELL_CACHE_SIZE),
     fontMetrics(0), cellWidth(DEF_CELL_WIDTH), cellHeight(DEF_CELL_HEIGHT), numRows(0), numColumns(0)

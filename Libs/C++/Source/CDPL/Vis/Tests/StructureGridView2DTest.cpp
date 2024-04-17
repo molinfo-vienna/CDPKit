@@ -72,8 +72,18 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
             initSubstructureSearchTarget(mol, false);
             calcTopologicalDistanceMatrix(mol, false);
             
+            BOOST_CHECK(!view(i, j).hasStructure());
+
             view(i, j).setStructure(mol);
+
+            BOOST_CHECK(view(i, j).hasStructure());
+            BOOST_CHECK(!view(i, j).hasText());
+            BOOST_CHECK(!view(i, j).hasAnyText());
+
             view(i, j).setText("#" + std::to_string(i * 3 + j + 1));
+
+            BOOST_CHECK(view(i, j).hasText());
+            BOOST_CHECK(view(i, j).hasAnyText());
         }
     }
 
@@ -81,9 +91,16 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
     Vis::setGridViewTextFontParameter(view(2, 2), Font("Serif", 12.0, true));
     Vis::setGridViewTextColorParameter(view(0, 0), Color::RED);
     Vis::setBackgroundBrushParameter(view, Brush(Color::GRAY, Brush::DIAG_CROSS_PATTERN));
+
+//---
+
+    BOOST_CHECK(view.getCellWidth() == StructureGridView2D::DEF_CELL_WIDTH);
+    BOOST_CHECK(view.getCellHeight() == StructureGridView2D::DEF_CELL_HEIGHT);
+    BOOST_CHECK(view.getNumRows() == 3);
+    BOOST_CHECK(view.getNumColumns() == 3);
     
-// TODO
-    
+//---
+
 #ifdef HAVE_CAIRO
 # ifdef HAVE_CAIRO_PNG_SUPPORT
     BOOST_CHECK(view.write("StructureGridView2DTest_1.png"));
@@ -98,7 +115,7 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
 # endif
 
 # ifdef HAVE_CAIRO_SVG_SUPPORT
-    std::ofstream ofs1("StructureGridView2DTest_1.svg");
+    std::ofstream ofs1("StructureGridView2DTest_1.svg", std::ostream::out | std::ostream::trunc);
 
     BOOST_CHECK(view.write(ofs1, "Svg"));
 # endif
@@ -107,28 +124,120 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
 
     view.resize(4, 4);
 
+    BOOST_CHECK(view.getNumRows() == 4);
+    BOOST_CHECK(view.getNumColumns() == 4);
+    BOOST_CHECK(!view(3, 3).hasStructure());
+    BOOST_CHECK(!view(3, 3).hasAnyText());
+
     BOOST_CHECK(view.write("StructureGridView2DTest_2_resize_4x4.png"));
 
 //---
 
-    view(0, 3).setText("LEFT | TOP", Alignment::LEFT | Alignment::TOP);
-    view(1, 3).setText("H_CENTER | TOP", Alignment::H_CENTER | Alignment::TOP);
-    view(2, 3).setText("RIGHT | TOP", Alignment::RIGHT | Alignment::TOP);
-    view(0, 3).setText("LEFT | V_CENTER", Alignment::LEFT | Alignment::V_CENTER);
-    view(1, 3).setText("H_CENTER | V_CENTER", Alignment::H_CENTER | Alignment::V_CENTER);
-    view(2, 3).setText("RIGHT | V_CENTER", Alignment::RIGHT | Alignment::V_CENTER);
-    view(0, 3).setText("LEFT | BOTTOM", Alignment::LEFT | Alignment::BOTTOM);
-    view(1, 3).setText("H_CENTER | BOTTOM", Alignment::H_CENTER | Alignment::BOTTOM);
+    view(0, 3).setText("<b>LEFT | TOP</i>", Alignment::LEFT | Alignment::TOP);
+
+    BOOST_CHECK(view(0, 3).hasAnyText());
+    BOOST_CHECK(!view(0, 3).hasText());
+    BOOST_CHECK(!view(0, 3).hasText(Alignment::H_CENTER | Alignment::TOP));
+    BOOST_CHECK(view(0, 3).hasText(Alignment::LEFT | Alignment::TOP));
+    BOOST_CHECK(!view(0, 3).hasStructure());
+    
+    view(1, 3).setText("<i>H_CENTER | TOP</i>", Alignment::H_CENTER | Alignment::TOP);
+    view(2, 3).setText("<u>RIGHT | TOP</u>", Alignment::RIGHT | Alignment::TOP);
+    view(0, 3).setText("LEFT | <sup>V</>_<color g='1'>CENTER</>", Alignment::LEFT | Alignment::V_CENTER);
+    view(1, 3).setText("<o>H_CENTER</> | V_CENTER", Alignment::H_CENTER | Alignment::V_CENTER);
+    view(2, 3).setText("<s>RIGHT |</> V_CENTER", Alignment::RIGHT | Alignment::V_CENTER);
+    view(0, 3).setText("LEFT | B<sub>O</>TTOM", Alignment::LEFT | Alignment::BOTTOM);
+    view(1, 3).setText("<color b='1'>H_CENTER | BOTTOM</>", Alignment::H_CENTER | Alignment::BOTTOM);
+
+    BOOST_CHECK(view(1, 3).hasAnyText());
+    BOOST_CHECK(view(1, 3).hasText());
+    BOOST_CHECK(view(1, 3).hasText(Alignment::H_CENTER | Alignment::BOTTOM));
+    BOOST_CHECK(!view(1, 3).hasText(Alignment::LEFT | Alignment::TOP));
+    BOOST_CHECK(!view(1, 3).hasStructure());
+
     view(2, 3).setText("RIGHT | BOTTOM", Alignment::RIGHT | Alignment::BOTTOM);
 
     BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::RIGHT), Base::ValueError);
     BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::TOP), Base::ValueError);
-    BOOST_CHECK_THROW(view(2, 3).setText("", Alignment::NONE), Base::ValueError);
+    BOOST_CHECK_THROW(view(2, 3).setText("<dsf>", Alignment::NONE), Base::ValueError);
 
-    std::ofstream ofs2("StructureGridView2DTest_3_all_pos_text.png");
+    std::ofstream ofs2("StructureGridView2DTest_3_added_text.png", std::ostream::out | std::ostream::binary | std::ostream::trunc);
      
     BOOST_CHECK(view.write(ofs2, DataFormat::PNG));
     
+//---
+
+    BOOST_CHECK(view(2, 0).hasStructure());
+
+    view(2, 0).clearStructure();
+
+    BOOST_CHECK(!view(2, 0).hasStructure());
+
+    BOOST_CHECK(view.write("StructureGridView2DTest_4_clear_struct@2_0.png"));
+
+//---
+
+    BOOST_CHECK(view(2, 0).hasText());
+    BOOST_CHECK(view(2, 0).hasAnyText());
+
+    view(2, 0).clearText();
+
+    BOOST_CHECK(!view(2, 0).hasText());
+    BOOST_CHECK(!view(2, 0).hasAnyText());
+
+    BOOST_CHECK(view.write("StructureGridView2DTest_5_clear_def_pos_text@2_0.png"));
+
+//---
+
+    BOOST_CHECK(!view(2, 3).hasText());
+    BOOST_CHECK(view(2, 3).hasText(Alignment::RIGHT | Alignment::V_CENTER));
+    BOOST_CHECK(view(2, 3).hasAnyText());
+
+    view(2, 3).clearText();
+
+    BOOST_CHECK(!view(2, 3).hasText());
+    BOOST_CHECK(view(2, 3).hasText(Alignment::RIGHT | Alignment::V_CENTER));
+    BOOST_CHECK(view(2, 3).hasAnyText());
+
+    view(2, 3).clearText(Alignment::RIGHT | Alignment::V_CENTER);
+
+    BOOST_CHECK(!view(2, 3).hasText());
+    BOOST_CHECK(!view(2, 3).hasText(Alignment::RIGHT | Alignment::V_CENTER));
+    BOOST_CHECK(view(2, 3).hasAnyText());
+
+    BOOST_CHECK(view.write("StructureGridView2DTest_6_clear_R_VC_text@2_3.png"));
+
+//---
+
+    BOOST_CHECK(!view(2, 3).hasText());
+    BOOST_CHECK(view(2, 3).hasText(Alignment::RIGHT | Alignment::TOP));
+    BOOST_CHECK(view(2, 3).hasAnyText());
+
+    view(2, 3).clearAllText();
+
+    BOOST_CHECK(!view(2, 3).hasText(Alignment::RIGHT | Alignment::TOP));
+    BOOST_CHECK(!view(2, 3).hasAnyText());
+
+    BOOST_CHECK(view.write("StructureGridView2DTest_7_clear_all_text@2_3.png"));
+
+//---
+
+    Rectangle2D bbox;
+
+    view.getModelBounds(bbox);
+
+    BOOST_CHECK(bbox.getWidth() == 4 * StructureGridView2D::DEF_CELL_WIDTH);
+    BOOST_CHECK(bbox.getHeight() == 4 * StructureGridView2D::DEF_CELL_HEIGHT);
+
+    setGridViewBorderPenParameter(view, Pen(Color::BLUE, 2.0));
+                
+    BOOST_CHECK(view.write("StructureGridView2DTest_8_border_pen.png"));
+
+    view.getModelBounds(bbox);
+
+    BOOST_CHECK(bbox.getWidth() == 4 * StructureGridView2D::DEF_CELL_WIDTH + 2.0);
+    BOOST_CHECK(bbox.getHeight() == 4 * StructureGridView2D::DEF_CELL_HEIGHT + 2.0);
+
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
 }
