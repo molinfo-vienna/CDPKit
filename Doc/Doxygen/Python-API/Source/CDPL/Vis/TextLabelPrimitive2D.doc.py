@@ -45,7 +45,7 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Sets the text of the label.
     # 
-    # \param txt The text of the label.
+    # \param text The text of the label.
     # 
     def setText(text: str) -> None: pass
 

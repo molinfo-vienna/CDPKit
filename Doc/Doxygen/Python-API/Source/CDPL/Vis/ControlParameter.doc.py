@@ -842,36 +842,64 @@ class ControlParameter(Boost.Python.instance):
     BOND_CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('BOND_CUSTOM_LABEL_COLOR')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the pen Vis.StructureGridView2D uses for drawing a rectangle enclosing all cells of the grid.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_BORDER_PEN will be used.
+    # 
+    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # 
     GRID_VIEW_BORDER_PEN = CDPL.Base.LookupKey('GRID_VIEW_BORDER_PEN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the pen Vis.StructureGridView2D uses for drawing lines separating the grid rows.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_ROW_SEPARATOR_PEN will be used.
+    # 
+    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # 
     GRID_VIEW_ROW_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_ROW_SEPARATOR_PEN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the pen Vis.StructureGridView2D uses for drawing lines separating the grid columns.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_COLUMN_SEPARATOR_PEN will be used.
+    # 
+    # <b>Value Type:</b> Vis.Pen \since 1.2
+    # 
     GRID_VIEW_COLUMN_SEPARATOR_PEN = CDPL.Base.LookupKey('GRID_VIEW_COLUMN_SEPARATOR_PEN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the amount of free space Vis.StructureGridView2D adds around the grid borderline.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_MARGIN will be used.
+    # 
+    # <b>Value Type:</b> <tt>double</tt> \since 1.2
+    # 
     GRID_VIEW_MARGIN = CDPL.Base.LookupKey('GRID_VIEW_MARGIN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the amount of free space Vis.StructureGridView2D adds around the content of the grid cells.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_CELL_PADDING will be used.
+    # 
+    # <b>Value Type:</b> <tt>double</tt> \since 1.2
+    # 
     GRID_VIEW_CELL_PADDING = CDPL.Base.LookupKey('GRID_VIEW_CELL_PADDING')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the font used by Vis.StructureGridView2D for grid cell text blocks.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_TEXT_FONT will be used.
+    # 
+    # <b>Value Type:</b> Vis.Font \since 1.2
+    # 
     GRID_VIEW_TEXT_FONT = CDPL.Base.LookupKey('GRID_VIEW_TEXT_FONT')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default color used by Vis.StructureGridView2D for grid cell text blocks.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.GRID_VIEW_TEXT_COLOR will be used.
+    # 
+    # <b>Value Type:</b> Vis.Color \since 1.2
+    # 
     GRID_VIEW_TEXT_COLOR = CDPL.Base.LookupKey('GRID_VIEW_TEXT_COLOR')

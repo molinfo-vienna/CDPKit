@@ -62,6 +62,13 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def getText() -> str: pass
 
     ##
+    # \brief Tells whether the text block has any renderable text.
+    # 
+    # \return <tt>True</tt> if there is renderable text and <tt>False</tt> otherwise.
+    # 
+    def hasText() -> bool: pass
+
+    ##
     # \brief Sets the position of the text block in 2D space.
     # 
     # The position specifies the upper-left corner of the text block's bounding box.

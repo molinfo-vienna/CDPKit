@@ -91,7 +91,7 @@ namespace CDPL
 
             /**
              * \brief Tells whether the text block has any renderable text.
-             * \return \true if there is renderable text and \c false otherwise.
+             * \return \c true if there is renderable text and \c false otherwise.
              */
             bool hasText() const;
 

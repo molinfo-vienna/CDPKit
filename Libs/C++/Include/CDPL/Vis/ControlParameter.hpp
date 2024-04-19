@@ -1213,42 +1213,77 @@ namespace CDPL
             extern CDPL_VIS_API const Base::LookupKey ENABLE_BOND_HIGHLIGHTING;
 
             /**
+             * \brief Specifies the pen Vis::StructureGridView2D uses for drawing a rectangle enclosing all cells of the grid.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_BORDER_PEN will be used.
+             *
              * \valuetype Vis::Pen
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_BORDER_PEN;
 
             /**
+             * \brief Specifies the pen Vis::StructureGridView2D uses for drawing lines separating the grid rows.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_ROW_SEPARATOR_PEN will be used.
+             *
              * \valuetype Vis::Pen
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_ROW_SEPARATOR_PEN;
 
             /**
+             * \brief Specifies the pen Vis::StructureGridView2D uses for drawing lines separating the grid columns.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_COLUMN_SEPARATOR_PEN will be used.
+             *
              * \valuetype Vis::Pen
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_COLUMN_SEPARATOR_PEN;
 
             /**
+             * \brief Specifies the amount of free space Vis::StructureGridView2D adds around the grid borderline.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_MARGIN will be used.
+             *
              * \valuetype \c double
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_MARGIN;
    
             /**
+             * \brief Specifies the amount of free space Vis::StructureGridView2D adds around the content of the grid cells.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_CELL_PADDING will be used.
+             *
              * \valuetype \c double
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_CELL_PADDING;
             
             /**
+             * \brief Specifies the font used by Vis::StructureGridView2D for grid cell text blocks.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_TEXT_FONT will be used.
+             *
              * \valuetype Vis::Font
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_TEXT_FONT;
 
             /**
+             * \brief Specifies the default color used by Vis::StructureGridView2D for grid cell text blocks.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::GRID_VIEW_TEXT_COLOR will be used.
+             *
              * \valuetype Vis::Color
              * \since 1.2
              */
