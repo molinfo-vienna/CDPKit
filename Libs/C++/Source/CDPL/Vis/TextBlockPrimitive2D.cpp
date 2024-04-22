@@ -35,6 +35,7 @@
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
 #include "CDPL/Vis/Alignment.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 
