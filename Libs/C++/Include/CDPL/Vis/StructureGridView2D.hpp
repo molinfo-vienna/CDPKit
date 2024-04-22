@@ -163,7 +163,7 @@ namespace CDPL
                 /**
                  * \brief Specifies the molecular structure that shall be displayed in this cell.
                  *
-                 * The cell will store a deep-copy of the specified Chem::MolecularGraph instance which can then be safely
+                 * The cell will store a deep copy of the specified Chem::MolecularGraph instance which can then be safely
                  * modified or destroyed after the method call.
                  *
                  * \param molgraph A Chem::MolecularGraph instance specifying the molecular structure to display.
