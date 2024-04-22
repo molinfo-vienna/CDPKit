@@ -49,38 +49,38 @@ using namespace CDPL;
 namespace 
 {
 
-    const std::size_t ATOM_CONFIG_R_IDX           = 0;
-    const std::size_t ATOM_CONFIG_S_IDX           = 1;
-    const std::size_t ATOM_CONFIG_M_IDX           = 2;
-    const std::size_t ATOM_CONFIG_P_IDX           = 3;
-    const std::size_t ATOM_CONFIG_r_IDX           = 4;
-    const std::size_t ATOM_CONFIG_s_IDX           = 5;
-    const std::size_t ATOM_CONFIG_m_IDX           = 6;
-    const std::size_t ATOM_CONFIG_p_IDX           = 7;
-    const std::size_t ATOM_H_COUNT_IDX            = ATOM_CONFIG_p_IDX + 1;
-    const std::size_t ATOM_H_COUNT_RANGE          = 5;
-    const std::size_t ATOM_NEG_CHARGE_IDX         = ATOM_H_COUNT_IDX + ATOM_H_COUNT_RANGE;
-    const std::size_t ATOM_NEG_CHARGE_RANGE       = 4;
-    const std::size_t ATOM_POS_CHARGE_IDX         = ATOM_NEG_CHARGE_IDX + ATOM_NEG_CHARGE_RANGE;
-    const std::size_t ATOM_POS_CHARGE_RANGE       = 4;
-    const std::size_t ATOM_GLOBAL_STEREO_REF_IDX  = ATOM_POS_CHARGE_IDX + ATOM_POS_CHARGE_RANGE;
-    const std::size_t ATOM_TYPE_IDX               = ATOM_GLOBAL_STEREO_REF_IDX + 1;
-    const std::size_t ATOM_TYPE_RANGE             = Chem::AtomType::MAX_ATOMIC_NO + 1;
-    const std::size_t ATOM_ISOTOPE_IDX            = ATOM_TYPE_IDX + ATOM_TYPE_RANGE;
-    const std::size_t ATOM_ISOTOPE_RANGE          = 200;
-    const std::size_t ATOM_AROMATICITY_IDX        = ATOM_ISOTOPE_IDX + ATOM_ISOTOPE_RANGE;
+    constexpr std::size_t ATOM_CONFIG_R_IDX           = 0;
+    constexpr std::size_t ATOM_CONFIG_S_IDX           = 1;
+    constexpr std::size_t ATOM_CONFIG_M_IDX           = 2;
+    constexpr std::size_t ATOM_CONFIG_P_IDX           = 3;
+    constexpr std::size_t ATOM_CONFIG_r_IDX           = 4;
+    constexpr std::size_t ATOM_CONFIG_s_IDX           = 5;
+    constexpr std::size_t ATOM_CONFIG_m_IDX           = 6;
+    constexpr std::size_t ATOM_CONFIG_p_IDX           = 7;
+    constexpr std::size_t ATOM_H_COUNT_IDX            = ATOM_CONFIG_p_IDX + 1;
+    constexpr std::size_t ATOM_H_COUNT_RANGE          = 5;
+    constexpr std::size_t ATOM_NEG_CHARGE_IDX         = ATOM_H_COUNT_IDX + ATOM_H_COUNT_RANGE;
+    constexpr std::size_t ATOM_NEG_CHARGE_RANGE       = 4;
+    constexpr std::size_t ATOM_POS_CHARGE_IDX         = ATOM_NEG_CHARGE_IDX + ATOM_NEG_CHARGE_RANGE;
+    constexpr std::size_t ATOM_POS_CHARGE_RANGE       = 4;
+    constexpr std::size_t ATOM_GLOBAL_STEREO_REF_IDX  = ATOM_POS_CHARGE_IDX + ATOM_POS_CHARGE_RANGE;
+    constexpr std::size_t ATOM_TYPE_IDX               = ATOM_GLOBAL_STEREO_REF_IDX + 1;
+    constexpr std::size_t ATOM_TYPE_RANGE             = Chem::AtomType::MAX_ATOMIC_NO + 1;
+    constexpr std::size_t ATOM_ISOTOPE_IDX            = ATOM_TYPE_IDX + ATOM_TYPE_RANGE;
+    constexpr std::size_t ATOM_ISOTOPE_RANGE          = 200;
+    constexpr std::size_t ATOM_AROMATICITY_IDX        = ATOM_ISOTOPE_IDX + ATOM_ISOTOPE_RANGE;
 
-    const std::size_t BOND_AROM_FLAG_IDX          = 0;
-    const std::size_t BOND_RING_FLAG_IDX          = BOND_AROM_FLAG_IDX + 1;
-    const std::size_t BOND_CONFIG_E_IDX           = BOND_RING_FLAG_IDX + 1;
-    const std::size_t BOND_CONFIG_Z_IDX           = BOND_CONFIG_E_IDX + 1;
-    const std::size_t BOND_CONFIG_SEQCIS_IDX      = BOND_CONFIG_Z_IDX + 1;
-    const std::size_t BOND_CONFIG_SEQTRANS_IDX    = BOND_CONFIG_SEQCIS_IDX + 1;
-    const std::size_t BOND_ORDER_IDX              = BOND_CONFIG_SEQTRANS_IDX + 1;
-    const std::size_t BOND_ORDER_RANGE            = 4;
+    constexpr std::size_t BOND_AROM_FLAG_IDX          = 0;
+    constexpr std::size_t BOND_RING_FLAG_IDX          = BOND_AROM_FLAG_IDX + 1;
+    constexpr std::size_t BOND_CONFIG_E_IDX           = BOND_RING_FLAG_IDX + 1;
+    constexpr std::size_t BOND_CONFIG_Z_IDX           = BOND_CONFIG_E_IDX + 1;
+    constexpr std::size_t BOND_CONFIG_SEQCIS_IDX      = BOND_CONFIG_Z_IDX + 1;
+    constexpr std::size_t BOND_CONFIG_SEQTRANS_IDX    = BOND_CONFIG_SEQCIS_IDX + 1;
+    constexpr std::size_t BOND_ORDER_IDX              = BOND_CONFIG_SEQTRANS_IDX + 1;
+    constexpr std::size_t BOND_ORDER_RANGE            = 4;
 
-    const std::size_t NUM_ATOM_HASH_ITERATIONS    = 32;
-    const std::size_t NUM_BOND_HASH_ITERATIONS    = 32;
+    constexpr std::size_t NUM_ATOM_HASH_ITERATIONS    = 32;
+    constexpr std::size_t NUM_BOND_HASH_ITERATIONS    = 32;
 
     typedef std::pair<const Chem::Atom*, const Chem::Bond*> Ligand;
 

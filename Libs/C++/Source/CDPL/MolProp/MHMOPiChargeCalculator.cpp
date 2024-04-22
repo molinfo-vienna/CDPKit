@@ -132,10 +132,10 @@ namespace
 
     } init;
 
-    const double ENERGY_LEVEL_COMP_TOL = 0.01;
-    const double SIGMA_CORR_REF        = 7.325405621223034;
-    const double SIGMA_FACTOR          = 0.029;
-    const double HYPER_CONJ_FACTOR     = 0.58;
+    constexpr double ENERGY_LEVEL_COMP_TOL = 0.01;
+    constexpr double SIGMA_CORR_REF        = 7.325405621223034;
+    constexpr double SIGMA_FACTOR          = 0.029;
+    constexpr double HYPER_CONJ_FACTOR     = 0.58;
 }
 
 

@@ -60,7 +60,7 @@ namespace
         return false;
     }
 
-    const unsigned int FALLBACK_ATOM_TYPE = 1;
+    constexpr unsigned int FALLBACK_ATOM_TYPE = 1;
 }
 
 

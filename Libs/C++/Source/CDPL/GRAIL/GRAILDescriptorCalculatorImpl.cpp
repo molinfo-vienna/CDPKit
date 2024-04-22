@@ -55,12 +55,12 @@ using namespace CDPL;
 namespace
 {
 
-    const double HYDROPHOBICIY_THRESHOLD         = 0.15;
-    const double FEATURE_DISTANCE_CUTOFF         = 10.0;
-    const double ESTAT_DISTANCE_CUTOFF           = 20.0;
-    const double DIELECTRIC_CONST                = 1.0;
-    const double VDW_DISTANCE_CUTOFF             = 10.0;
-    const double VDW_POLAR_H_DIST_SCALING_FACTOR = 0.5;
+    constexpr double HYDROPHOBICIY_THRESHOLD         = 0.15;
+    constexpr double FEATURE_DISTANCE_CUTOFF         = 10.0;
+    constexpr double ESTAT_DISTANCE_CUTOFF           = 20.0;
+    constexpr double DIELECTRIC_CONST                = 1.0;
+    constexpr double VDW_DISTANCE_CUTOFF             = 10.0;
+    constexpr double VDW_POLAR_H_DIST_SCALING_FACTOR = 0.5;
 }
 
 

@@ -43,7 +43,7 @@
 namespace
 {
 
-    const std::size_t MAX_BIT_SET_CACHE_SIZE = 500;
+    constexpr std::size_t MAX_BIT_SET_CACHE_SIZE = 500;
 }
 
 

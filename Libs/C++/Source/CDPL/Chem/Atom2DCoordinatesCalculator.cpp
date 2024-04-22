@@ -1089,7 +1089,7 @@ std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisionsForAto
                                                                                  const AtomIndexList& proc_atoms, 
                                                                                  const Math::Vector2DArray& coords)
 {
-    const double SQRD_TEST_DIST = ATOM_COLLISION_TEST_DIST * ATOM_COLLISION_TEST_DIST;
+    constexpr double SQRD_TEST_DIST = ATOM_COLLISION_TEST_DIST * ATOM_COLLISION_TEST_DIST;
 
     const Math::Vector2D& atom_pos = coords[atom_idx];
     Math::Vector2D pos_diff;
@@ -1205,7 +1205,7 @@ std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisionsForBon
 bool Chem::Atom2DCoordinatesCalculator::LGNode::testAtomBondCollision(std::size_t atom_idx, const Bond* bond, 
                                                                      const Math::Vector2DArray& coords)
 {
-    const double SQRD_TEST_DIST = ATOM_BOND_COLLISION_TEST_DIST * ATOM_BOND_COLLISION_TEST_DIST;
+    constexpr double SQRD_TEST_DIST = ATOM_BOND_COLLISION_TEST_DIST * ATOM_BOND_COLLISION_TEST_DIST;
 
     std::size_t atom1_idx = molGraph->getAtomIndex(bond->getBegin());
 
@@ -2572,8 +2572,8 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::initSpringLayoutParams()
  */
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::performSpringLayout()
 {
-    const std::size_t MAX_NUM_OUTER_ITERATIONS = 2000;
-    const std::size_t MAX_NUM_INNER_ITERATIONS = 500;
+    constexpr std::size_t MAX_NUM_OUTER_ITERATIONS = 2000;
+    constexpr std::size_t MAX_NUM_INNER_ITERATIONS = 500;
 
     AtomIndexList::const_iterator atoms_beg = atomList.begin();
     AtomIndexList::const_iterator atoms_end = atomList.end();
@@ -2747,7 +2747,7 @@ Math::Vector2D Chem::Atom2DCoordinatesCalculator::RingSysNode::computePartialDer
 bool Chem::Atom2DCoordinatesCalculator::RingSysNode::layoutFinished(bool global, double delta_p, double& last_energy, 
                                                                    double& last_local_energy) const
 {
-    const double TOLERANCE = 0.0001;
+    constexpr double TOLERANCE = 0.0001;
 
     if (global) {
         if (last_energy == std::numeric_limits<double>::max()) {

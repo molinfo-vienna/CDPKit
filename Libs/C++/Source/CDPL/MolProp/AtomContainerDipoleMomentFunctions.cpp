@@ -39,7 +39,7 @@ bool MolProp::calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Ato
 {
     using namespace Chem;
     
-    const double UNIT_CONV_FACTOR = 4.8032066;
+    constexpr double UNIT_CONV_FACTOR = 4.8032066;
     Math::Vector3D mass_ctr;
 
     if (!calcCenterOfMass(cntnr, coords_func, mass_ctr))

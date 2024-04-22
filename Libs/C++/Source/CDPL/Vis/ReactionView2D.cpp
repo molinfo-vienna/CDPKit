@@ -51,9 +51,9 @@
 namespace
 {
 
-    const std::size_t MAX_COMP_VIEW_CACHE_SIZE     = 100;
-    const std::size_t MAX_POLYGON_CACHE_SIZE       = 100;
-    const std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 100;
+    constexpr std::size_t MAX_COMP_VIEW_CACHE_SIZE     = 100;
+    constexpr std::size_t MAX_POLYGON_CACHE_SIZE       = 100;
+    constexpr std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 100;
 }
 
 

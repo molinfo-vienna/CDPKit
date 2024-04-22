@@ -38,7 +38,7 @@
 namespace
 {
 
-    const std::size_t MAX_SUBSTRUCT_DESCR_CACHE_SIZE = 5000;
+    constexpr std::size_t MAX_SUBSTRUCT_DESCR_CACHE_SIZE = 5000;
 }
 
 

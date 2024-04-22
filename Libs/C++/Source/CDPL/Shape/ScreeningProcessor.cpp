@@ -37,7 +37,7 @@ using namespace CDPL;
 namespace
 {
 
-    const double CARBON_RADIUS = 1.7;
+    constexpr double CARBON_RADIUS = 1.7;
 }
 
 

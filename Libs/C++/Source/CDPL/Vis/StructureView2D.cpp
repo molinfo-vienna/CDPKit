@@ -69,36 +69,36 @@ using namespace CDPL;
 namespace
 {
 
-    const double WEDGE_TAIL_HEAD_WIDTH_RATIO      = 0.15;
-    const double H_COUNT_HOR_ALIGNMENT_PREFERENCE = 0.5;
+    constexpr double WEDGE_TAIL_HEAD_WIDTH_RATIO      = 0.15;
+    constexpr double H_COUNT_HOR_ALIGNMENT_PREFERENCE = 0.5;
 
-    const double MIN_BOND_ANGLE                   = M_PI * 30.0 / 180.0;
-    const double MAX_BOND_ANGLE                   = M_PI * 150.0 / 180.0;
+    constexpr double MIN_BOND_ANGLE                   = M_PI * 30.0 / 180.0;
+    constexpr double MAX_BOND_ANGLE                   = M_PI * 150.0 / 180.0;
 
     const double SIN_45                           = std::sin(M_PI / 4);
     const double SIN_30                           = std::sin(M_PI / 6);
     const double SIN_60                           = std::sin(M_PI / 3);
 
-    const char RADICAL_ELECTRON_SYMBOL            = '.';
+    constexpr char RADICAL_ELECTRON_SYMBOL            = '.';
 
-    const char LEFT_AAM_ID_LABEL_DELIMEITER       = '<';
-    const char RIGHT_AAM_ID_LABEL_DELIMEITER      = '>';
+    constexpr char LEFT_AAM_ID_LABEL_DELIMEITER       = '<';
+    constexpr char RIGHT_AAM_ID_LABEL_DELIMEITER      = '>';
 
-    const char LEFT_QUERY_INFO_DELIMITER          = '[';
-    const char RIGHT_QUERY_INFO_DELIMITER         = ']';
+    constexpr char LEFT_QUERY_INFO_DELIMITER          = '[';
+    constexpr char RIGHT_QUERY_INFO_DELIMITER         = ']';
 
-    const char BOND_IS_REACTION_CENTER_SYMBOL     = '#';
-    const char BOND_NOT_A_REACTION_CENTER_SYMBOL  = 'X';
-    const char DEFAULT_ATOM_SYMBOL                = '?';
+    constexpr char BOND_IS_REACTION_CENTER_SYMBOL     = '#';
+    constexpr char BOND_NOT_A_REACTION_CENTER_SYMBOL  = 'X';
+    constexpr char DEFAULT_ATOM_SYMBOL                = '?';
 
-    const std::size_t MAX_LINE_CACHE_SIZE          = 5000;
-    const std::size_t MAX_POLYLINE_CACHE_SIZE      = 1000;
-    const std::size_t MAX_POLYGON_CACHE_SIZE       = 1000;
-    const std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 1000;
-    const std::size_t MAX_POINT_LIST_CACHE_SIZE    = 1000;
-    const std::size_t MAX_TEXT_LABEL_CACHE_SIZE    = 1000;
-    const std::size_t MAX_PATH_CACHE_SIZE          = 300;
-    const std::size_t MAX_CLIP_PATH_CACHE_SIZE     = 300;
+    constexpr std::size_t MAX_LINE_CACHE_SIZE          = 5000;
+    constexpr std::size_t MAX_POLYLINE_CACHE_SIZE      = 1000;
+    constexpr std::size_t MAX_POLYGON_CACHE_SIZE       = 1000;
+    constexpr std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 1000;
+    constexpr std::size_t MAX_POINT_LIST_CACHE_SIZE    = 1000;
+    constexpr std::size_t MAX_TEXT_LABEL_CACHE_SIZE    = 1000;
+    constexpr std::size_t MAX_PATH_CACHE_SIZE          = 300;
+    constexpr std::size_t MAX_CLIP_PATH_CACHE_SIZE     = 300;
 
     char getConfigLabel(unsigned int config)
     {

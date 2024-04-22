@@ -54,8 +54,8 @@ using namespace CDPL;
 namespace
 {
 
-    const double NAN_SCORE         = std::numeric_limits<double>::quiet_NaN();
-    const double VDW_RADIUS_FACTOR = 0.5;
+    constexpr double NAN_SCORE         = std::numeric_limits<double>::quiet_NaN();
+    constexpr double VDW_RADIUS_FACTOR = 0.5;
 
     struct FeatureTolCmpFunc
     {

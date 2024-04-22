@@ -41,7 +41,7 @@ using namespace CDPL;
 namespace
 {
 
-    const double DEF_LP_TO_AXIS_ANGLE = 65.0;
+    constexpr double DEF_LP_TO_AXIS_ANGLE = 65.0;
 }
 
 

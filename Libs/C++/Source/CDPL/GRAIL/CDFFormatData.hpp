@@ -43,18 +43,18 @@ namespace CDPL
 
             typedef std::uint32_t UIntType;
 
-            const std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
-            const std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
+            constexpr std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
+            constexpr std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
 
-            const std::uint8_t CURR_FORMAT_VERSION = 1;
+            constexpr std::uint8_t CURR_FORMAT_VERSION = 1;
 
             namespace AttributedGridProperty
             {
 
-                const unsigned int PROPERTY_HANDLER_ID = 1;
+                constexpr unsigned int PROPERTY_HANDLER_ID = 1;
 
-                const unsigned int FEATURE_TYPE        = 1;
-                const unsigned int TARGET_FEATURE_TYPE = 2;
+                constexpr unsigned int FEATURE_TYPE        = 1;
+                constexpr unsigned int TARGET_FEATURE_TYPE = 2;
             } // namespace AttributedGridProperty
         } // namespace CDF
     } // namespace GRAIL

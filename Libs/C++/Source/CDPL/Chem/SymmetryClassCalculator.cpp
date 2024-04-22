@@ -42,7 +42,7 @@
 namespace
 {
 
-    const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+    constexpr std::size_t MAX_NODE_CACHE_SIZE = 1000;
 }
 
 
@@ -105,11 +105,11 @@ void Chem::SymmetryClassCalculator::calculate(const MolecularGraph& molgraph, Ut
 
 void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::STArray& class_ids)
 {
-    const std::size_t ATOMIC_NO_PRIME_TAB_IDX = 0;
-    const std::size_t ISO_PRIME_TAB_IDX = ATOMIC_NO_PRIME_TAB_IDX + AtomType::MAX_TYPE + 1; 
-    const std::size_t CHARGE_PRIME_TAB_IDX = ISO_PRIME_TAB_IDX + 2 * AtomType::MAX_TYPE; 
-    const std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
-    const std::size_t CONFIG_PRIME_TAB_IDX = AROMATICITY_PRIME_TAB_IDX + 1; 
+    constexpr std::size_t ATOMIC_NO_PRIME_TAB_IDX = 0;
+    constexpr std::size_t ISO_PRIME_TAB_IDX = ATOMIC_NO_PRIME_TAB_IDX + AtomType::MAX_TYPE + 1; 
+    constexpr std::size_t CHARGE_PRIME_TAB_IDX = ISO_PRIME_TAB_IDX + 2 * AtomType::MAX_TYPE; 
+    constexpr std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
+    constexpr std::size_t CONFIG_PRIME_TAB_IDX = AROMATICITY_PRIME_TAB_IDX + 1; 
 
     const std::uint64_t IMPL_H_INIT_SYM_CLASS_ID = 1 
         * (atomPropertyFlags & AtomPropertyFlag::TYPE ? boost::math::prime(ATOMIC_NO_PRIME_TAB_IDX + 1) : 1)

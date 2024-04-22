@@ -45,17 +45,17 @@ namespace CDPL
             /**
              * \brief Specifies that the objects have no special layout.
              */
-            const unsigned int NONE = 0;
+            constexpr unsigned int NONE = 0;
 
             /**
              * \brief Specifies that the objects have to be arranged along a line.
              */
-            const unsigned int LINEAR = 1;
+            constexpr unsigned int LINEAR = 1;
 
             /**
              * \brief Specifies that the objects have to be arranged in multiple rows within a rectangle.
              */
-            const unsigned int PACKED = 2;
+            constexpr unsigned int PACKED = 2;
         } // namespace LayoutStyle
     } // namespace Vis
 } // namespace CDPL

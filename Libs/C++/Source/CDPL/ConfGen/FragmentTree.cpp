@@ -37,7 +37,7 @@
 namespace
 {
 
-    const std::size_t MAX_TREE_NODE_CACHE_SIZE  = 200;
+    constexpr std::size_t MAX_TREE_NODE_CACHE_SIZE  = 200;
 }
 
 

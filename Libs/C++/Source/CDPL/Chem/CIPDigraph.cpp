@@ -41,8 +41,8 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
-    const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+    constexpr std::size_t MAX_EDGE_CACHE_SIZE = 1000;
+    constexpr std::size_t MAX_NODE_CACHE_SIZE = 1000;
 } // namespace
 
 

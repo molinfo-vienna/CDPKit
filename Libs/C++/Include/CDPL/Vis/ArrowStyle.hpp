@@ -46,17 +46,17 @@ namespace CDPL
             /**
              * \brief Specifies that no reaction arrow shall be drawn.
              */
-            const unsigned int NONE = 0;
+            constexpr unsigned int NONE = 0;
 
             /**
              * \brief Specifies a solid reaction arrow (interior will be filled).
              */
-            const unsigned int REACTION_SOLID = 1;
+            constexpr unsigned int REACTION_SOLID = 1;
 
             /**
              * \brief Specifies a hollow reaction arrow (interior will be not filled).
              */
-            const unsigned int REACTION_HOLLOW = 2;
+            constexpr unsigned int REACTION_HOLLOW = 2;
         } // namespace ArrowStyle
     } // namespace Vis
 } // namespace CDPL

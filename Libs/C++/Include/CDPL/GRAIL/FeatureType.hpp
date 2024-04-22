@@ -47,31 +47,31 @@ namespace CDPL
 
             using namespace Pharm::FeatureType;
 
-            const unsigned int H_BOND_DONOR_N       = MAX_TYPE + 1;
-            const unsigned int H_BOND_DONOR_N3      = MAX_TYPE + 2;
-            const unsigned int H_BOND_DONOR_N2      = MAX_TYPE + 3;
-            const unsigned int H_BOND_DONOR_Nar     = MAX_TYPE + 4;
-            const unsigned int H_BOND_DONOR_Nam     = MAX_TYPE + 5;
-            const unsigned int H_BOND_DONOR_Npl3    = MAX_TYPE + 6;
-            const unsigned int H_BOND_DONOR_N4      = MAX_TYPE + 7;
-            const unsigned int H_BOND_DONOR_O       = MAX_TYPE + 8;
-            const unsigned int H_BOND_DONOR_O3      = MAX_TYPE + 9;
-            const unsigned int H_BOND_DONOR_S       = MAX_TYPE + 10;
-            const unsigned int H_BOND_DONOR_S3      = MAX_TYPE + 11;
-            const unsigned int H_BOND_ACCEPTOR_N    = MAX_TYPE + 12;
-            const unsigned int H_BOND_ACCEPTOR_N3   = MAX_TYPE + 13;
-            const unsigned int H_BOND_ACCEPTOR_N2   = MAX_TYPE + 14;
-            const unsigned int H_BOND_ACCEPTOR_N1   = MAX_TYPE + 15;
-            const unsigned int H_BOND_ACCEPTOR_Nar  = MAX_TYPE + 16;
-            const unsigned int H_BOND_ACCEPTOR_Npl3 = MAX_TYPE + 17;
-            const unsigned int H_BOND_ACCEPTOR_O    = MAX_TYPE + 18;
-            const unsigned int H_BOND_ACCEPTOR_O3   = MAX_TYPE + 19;
-            const unsigned int H_BOND_ACCEPTOR_O2   = MAX_TYPE + 20;
-            const unsigned int H_BOND_ACCEPTOR_Oco2 = MAX_TYPE + 21;
-            const unsigned int H_BOND_ACCEPTOR_S    = MAX_TYPE + 22;
-            const unsigned int H_BOND_ACCEPTOR_S3   = MAX_TYPE + 23;
-            const unsigned int H_BOND_ACCEPTOR_S2   = MAX_TYPE + 24;
-            const unsigned int MAX_EXT_TYPE         = H_BOND_ACCEPTOR_S2;
+            constexpr unsigned int H_BOND_DONOR_N       = MAX_TYPE + 1;
+            constexpr unsigned int H_BOND_DONOR_N3      = MAX_TYPE + 2;
+            constexpr unsigned int H_BOND_DONOR_N2      = MAX_TYPE + 3;
+            constexpr unsigned int H_BOND_DONOR_Nar     = MAX_TYPE + 4;
+            constexpr unsigned int H_BOND_DONOR_Nam     = MAX_TYPE + 5;
+            constexpr unsigned int H_BOND_DONOR_Npl3    = MAX_TYPE + 6;
+            constexpr unsigned int H_BOND_DONOR_N4      = MAX_TYPE + 7;
+            constexpr unsigned int H_BOND_DONOR_O       = MAX_TYPE + 8;
+            constexpr unsigned int H_BOND_DONOR_O3      = MAX_TYPE + 9;
+            constexpr unsigned int H_BOND_DONOR_S       = MAX_TYPE + 10;
+            constexpr unsigned int H_BOND_DONOR_S3      = MAX_TYPE + 11;
+            constexpr unsigned int H_BOND_ACCEPTOR_N    = MAX_TYPE + 12;
+            constexpr unsigned int H_BOND_ACCEPTOR_N3   = MAX_TYPE + 13;
+            constexpr unsigned int H_BOND_ACCEPTOR_N2   = MAX_TYPE + 14;
+            constexpr unsigned int H_BOND_ACCEPTOR_N1   = MAX_TYPE + 15;
+            constexpr unsigned int H_BOND_ACCEPTOR_Nar  = MAX_TYPE + 16;
+            constexpr unsigned int H_BOND_ACCEPTOR_Npl3 = MAX_TYPE + 17;
+            constexpr unsigned int H_BOND_ACCEPTOR_O    = MAX_TYPE + 18;
+            constexpr unsigned int H_BOND_ACCEPTOR_O3   = MAX_TYPE + 19;
+            constexpr unsigned int H_BOND_ACCEPTOR_O2   = MAX_TYPE + 20;
+            constexpr unsigned int H_BOND_ACCEPTOR_Oco2 = MAX_TYPE + 21;
+            constexpr unsigned int H_BOND_ACCEPTOR_S    = MAX_TYPE + 22;
+            constexpr unsigned int H_BOND_ACCEPTOR_S3   = MAX_TYPE + 23;
+            constexpr unsigned int H_BOND_ACCEPTOR_S2   = MAX_TYPE + 24;
+            constexpr unsigned int MAX_EXT_TYPE         = H_BOND_ACCEPTOR_S2;
         } // namespace FeatureType
     } // namespace GRAIL
 } // namespace CDPL

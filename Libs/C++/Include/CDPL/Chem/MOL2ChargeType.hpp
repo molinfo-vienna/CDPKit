@@ -42,19 +42,19 @@ namespace CDPL
         namespace MOL2ChargeType
         {
 
-            const unsigned int UNKNOWN    = 0;
-            const unsigned int NO_CHARGES = 1;
-            const unsigned int DEL_RE     = 2;
-            const unsigned int GASTEIGER  = 3;
-            const unsigned int GAST_HUCK  = 4;
-            const unsigned int HUCKEL     = 5;
-            const unsigned int PULLMAN    = 6;
-            const unsigned int GAUSS80    = 7;
-            const unsigned int AMPAC      = 8;
-            const unsigned int MULLIKEN   = 9;
-            const unsigned int DICT       = 10;
-            const unsigned int MMFF94     = 11;
-            const unsigned int USER       = 12;
+            constexpr unsigned int UNKNOWN    = 0;
+            constexpr unsigned int NO_CHARGES = 1;
+            constexpr unsigned int DEL_RE     = 2;
+            constexpr unsigned int GASTEIGER  = 3;
+            constexpr unsigned int GAST_HUCK  = 4;
+            constexpr unsigned int HUCKEL     = 5;
+            constexpr unsigned int PULLMAN    = 6;
+            constexpr unsigned int GAUSS80    = 7;
+            constexpr unsigned int AMPAC      = 8;
+            constexpr unsigned int MULLIKEN   = 9;
+            constexpr unsigned int DICT       = 10;
+            constexpr unsigned int MMFF94     = 11;
+            constexpr unsigned int USER       = 12;
         } // namespace MOL2ChargeType
     } // namespace Chem
 } // namespace CDPL

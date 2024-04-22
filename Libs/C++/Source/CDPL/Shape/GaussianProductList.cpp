@@ -39,7 +39,7 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t MAX_PRODUCT_CACHE_SIZE = 100000;
+    constexpr std::size_t MAX_PRODUCT_CACHE_SIZE = 100000;
 }
 
 

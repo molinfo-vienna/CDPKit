@@ -50,13 +50,13 @@ namespace CDPL
                 std::uint64_t recordDataLength;
             };
 
-            const std::size_t   HEADER_SIZE = 14;
-            const std::uint32_t FORMAT_ID   = 0x4c504443;
+            constexpr std::size_t   HEADER_SIZE = 14;
+            constexpr std::uint32_t FORMAT_ID   = 0x4c504443;
 
-            const std::size_t  NUM_PROP_VALUE_LENGTH_BITS = 3;
-            const PropertySpec PROP_VALUE_LENGTH_MASK     = 0x7;
+            constexpr std::size_t  NUM_PROP_VALUE_LENGTH_BITS = 3;
+            constexpr PropertySpec PROP_VALUE_LENGTH_MASK     = 0x7;
 
-            const unsigned int PROP_LIST_END = 0;
+            constexpr unsigned int PROP_LIST_END = 0;
         } // namespace CDF
     } // namespace Internal
 } // namespace CDPL

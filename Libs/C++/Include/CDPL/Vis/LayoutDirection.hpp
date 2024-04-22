@@ -45,12 +45,12 @@ namespace CDPL
             /**
              * \brief Specifies a horizontal layout (parallel to the x-axis).
              */
-            const unsigned int HORIZONTAL = 0;
+            constexpr unsigned int HORIZONTAL = 0;
 
             /**
              * \brief Specifies a vertical layout (parallel to the y-axis).
              */
-            const unsigned int VERTICAL = 1;
+            constexpr unsigned int VERTICAL = 1;
         } // namespace LayoutDirection
     } // namespace Vis
 } // namespace CDPL

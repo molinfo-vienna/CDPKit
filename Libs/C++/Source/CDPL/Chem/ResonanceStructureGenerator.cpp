@@ -47,8 +47,8 @@
 namespace
 {
 
-    const std::size_t MAX_RES_STRUCT_DATA_CACHE_SIZE = 2000;
-    const std::size_t MIN_SP1_RING_SIZE              = 7;
+    constexpr std::size_t MAX_RES_STRUCT_DATA_CACHE_SIZE = 2000;
+    constexpr std::size_t MIN_SP1_RING_SIZE              = 7;
 }
 
 

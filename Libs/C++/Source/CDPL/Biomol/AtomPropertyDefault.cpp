@@ -36,12 +36,12 @@ namespace CDPL
         namespace AtomPropertyDefault
         {
 
-            const std::size_t MODEL_NUMBER        = 0;
-            const double B_FACTOR                 = 0.0;
-            const double OCCUPANCY                = 1.0;
-            const bool RESIDUE_LEAVING_ATOM_FLAG  = false;
-            const bool RESIDUE_LINKING_ATOM_FLAG  = false;
-            const char RESIDUE_INSERTION_CODE     = ' ';
+            constexpr std::size_t MODEL_NUMBER        = 0;
+            constexpr double B_FACTOR                 = 0.0;
+            constexpr double OCCUPANCY                = 1.0;
+            constexpr bool RESIDUE_LEAVING_ATOM_FLAG  = false;
+            constexpr bool RESIDUE_LINKING_ATOM_FLAG  = false;
+            constexpr char RESIDUE_INSERTION_CODE     = ' ';
         }
 
         void initAtomPropertyDefaults() {}

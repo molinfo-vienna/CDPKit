@@ -51,7 +51,7 @@
 namespace 
 {
 
-    const std::size_t MAX_NUM_ATOMS        = 1024;
+    constexpr std::size_t MAX_NUM_ATOMS = 1024;
 
     class INCHIOutputManager
     {

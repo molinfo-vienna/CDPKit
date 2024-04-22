@@ -43,23 +43,23 @@ namespace CDPL
         namespace BRICSAtomLabel
         {
 
-            const unsigned int NONE = 0;
-            const unsigned int L1   = 1;
-            const unsigned int L2   = 2;
-            const unsigned int L3   = 3;
-            const unsigned int L4   = 4;
-            const unsigned int L5   = 5;
-            const unsigned int L6   = 6;
-            const unsigned int L7   = 7;
-            const unsigned int L8   = 8;
-            const unsigned int L9   = 9;
-            const unsigned int L10  = 10;
-            const unsigned int L11  = 11;
-            const unsigned int L12  = 12;
-            const unsigned int L13  = 13;
-            const unsigned int L14  = 14;
-            const unsigned int L15  = 15;
-            const unsigned int L16  = 16;
+            constexpr unsigned int NONE = 0;
+            constexpr unsigned int L1   = 1;
+            constexpr unsigned int L2   = 2;
+            constexpr unsigned int L3   = 3;
+            constexpr unsigned int L4   = 4;
+            constexpr unsigned int L5   = 5;
+            constexpr unsigned int L6   = 6;
+            constexpr unsigned int L7   = 7;
+            constexpr unsigned int L8   = 8;
+            constexpr unsigned int L9   = 9;
+            constexpr unsigned int L10  = 10;
+            constexpr unsigned int L11  = 11;
+            constexpr unsigned int L12  = 12;
+            constexpr unsigned int L13  = 13;
+            constexpr unsigned int L14  = 14;
+            constexpr unsigned int L15  = 15;
+            constexpr unsigned int L16  = 16;
         } // namespace BRICSAtomLabel
     } // namespace Chem
 } // namespace CDPL

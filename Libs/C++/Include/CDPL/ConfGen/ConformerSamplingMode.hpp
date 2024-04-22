@@ -42,9 +42,9 @@ namespace CDPL
         namespace ConformerSamplingMode
         {
 
-            const unsigned int AUTO       = 0;
-            const unsigned int SYSTEMATIC = 1;
-            const unsigned int STOCHASTIC = 2;
+            constexpr unsigned int AUTO       = 0;
+            constexpr unsigned int SYSTEMATIC = 1;
+            constexpr unsigned int STOCHASTIC = 2;
         } // namespace ConformerSamplingMode
     } // namespace ConfGen
 } // namespace CDPL

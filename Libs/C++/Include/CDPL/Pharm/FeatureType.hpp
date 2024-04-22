@@ -42,27 +42,27 @@ namespace CDPL
         namespace FeatureType
         {
 
-            const unsigned int UNKNOWN = 0;
+            constexpr unsigned int UNKNOWN = 0;
 
-            const unsigned int HYDROPHOBIC = 1;
+            constexpr unsigned int HYDROPHOBIC = 1;
 
-            const unsigned int AROMATIC = 2;
+            constexpr unsigned int AROMATIC = 2;
 
-            const unsigned int NEGATIVE_IONIZABLE = 3;
+            constexpr unsigned int NEGATIVE_IONIZABLE = 3;
 
-            const unsigned int POSITIVE_IONIZABLE = 4;
+            constexpr unsigned int POSITIVE_IONIZABLE = 4;
 
-            const unsigned int H_BOND_DONOR = 5;
+            constexpr unsigned int H_BOND_DONOR = 5;
 
-            const unsigned int H_BOND_ACCEPTOR = 6;
+            constexpr unsigned int H_BOND_ACCEPTOR = 6;
 
-            const unsigned int HALOGEN_BOND_DONOR = 7;
+            constexpr unsigned int HALOGEN_BOND_DONOR = 7;
 
-            const unsigned int HALOGEN_BOND_ACCEPTOR = 8;
+            constexpr unsigned int HALOGEN_BOND_ACCEPTOR = 8;
 
-            const unsigned int EXCLUSION_VOLUME = 9;
+            constexpr unsigned int EXCLUSION_VOLUME = 9;
 
-            const unsigned int MAX_TYPE = EXCLUSION_VOLUME;
+            constexpr unsigned int MAX_TYPE = EXCLUSION_VOLUME;
         } // namespace FeatureType
     } // namespace Pharm
 } // namespace CDPL

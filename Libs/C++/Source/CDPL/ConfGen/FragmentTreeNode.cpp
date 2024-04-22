@@ -59,9 +59,9 @@ namespace
         return (conf_data1->getEnergy() < conf_data2->getEnergy());
     } 
 
-    const double CONFORMER_LINEUP_SPACING       = 4.0;
+    constexpr double CONFORMER_LINEUP_SPACING       = 4.0;
     const double MAX_TORSION_REF_BOND_ANGLE_COS = std::cos(2.5 / 180.0 * M_PI);
-    const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
+    constexpr double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
 }
 
 

@@ -70,7 +70,7 @@ namespace
         Math::vec(SQRT_3 * 0.5, 0.5, 0.0)
     };
 
-    const std::size_t trigonalBipyramidalCoordPerms[] = {
+    constexpr std::size_t trigonalBipyramidalCoordPerms[] = {
         0, 3, 6, 8,
 
         0, 1, 2, 3, 4, 
@@ -92,11 +92,9 @@ namespace
         Math::vec(-INV_SQRT_3, -INV_SQRT_3, INV_SQRT_3)
     };
 
-    const std::size_t tetrahedralCoordPerms[] = {
+    constexpr std::size_t tetrahedralCoordPerms[] = {
         0, 1, 2, 
-
         0, 1, 2, 3,
-
         0, 1, 2, 3
     };
 
@@ -107,7 +105,7 @@ namespace
         Math::vec(-1.0, 0.0, 0.0)
     };
 
-    const std::size_t squarePlanarCoordPerms[] = {
+    constexpr std::size_t squarePlanarCoordPerms[] = {
         0, 2, 3, 
 
         0, 1, 2, 3,
@@ -125,7 +123,7 @@ namespace
         Math::vec(0.0, 0.0, -1.0)
     };
 
-    const std::size_t octahedralCoordPerms[] = {
+    constexpr std::size_t octahedralCoordPerms[] = {
         0, 2, 4, 6, 7,
 
         0, 1, 2, 3, 4, 5,
@@ -150,7 +148,7 @@ namespace
         Math::vec(0.0, 0.0, -1.0)
     };
 
-    const std::size_t pentagonalBipyramidalCoordPerms[] = {
+    constexpr std::size_t pentagonalBipyramidalCoordPerms[] = {
         0, 4, 9, 14, 18, 20,
 
         0, 1, 2, 3, 4, 5, 6,
@@ -179,8 +177,8 @@ namespace
         0, 1, 2, 3, 5, 6, 4
     };
 
-    const std::size_t MAX_TEMPLATE_SIZE   = 7;
-    const std::size_t MAX_SVD_ITERATIONS = 100;
+    constexpr std::size_t MAX_TEMPLATE_SIZE   = 7;
+    constexpr std::size_t MAX_SVD_ITERATIONS = 100;
 }
 
 

@@ -37,7 +37,7 @@
 namespace
 {
 
-    const std::size_t MAX_COMPONENT_CACHE_SIZE = 100;
+    constexpr std::size_t MAX_COMPONENT_CACHE_SIZE = 100;
 }
 
 

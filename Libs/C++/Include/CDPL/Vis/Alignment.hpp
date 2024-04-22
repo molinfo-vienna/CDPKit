@@ -49,52 +49,52 @@ namespace CDPL
             /**
              * \brief Specifies that an object has no special alignment.
              */
-            const unsigned int NONE = 0;
+            constexpr unsigned int NONE = 0;
 
             /**
              * \brief Specifies an alignment to the left.
              */
-            const unsigned int LEFT = 0x1;
+            constexpr unsigned int LEFT = 0x1;
 
             /**
              * \brief Specifies an alignment to the right.
              */
-            const unsigned int RIGHT = 0x2;
+            constexpr unsigned int RIGHT = 0x2;
 
             /**
              * \brief Specifies that an object has to be centered horizontally.
              */
-            const unsigned int H_CENTER = LEFT | RIGHT;
+            constexpr unsigned int H_CENTER = LEFT | RIGHT;
 
             /**
              * \brief A bitmask for all horizontal alignment flags.
              */
-            const unsigned int H_ALIGNMENT_MASK = H_CENTER;
+            constexpr unsigned int H_ALIGNMENT_MASK = H_CENTER;
 
             /**
              * \brief Specifies an alignment to the top.
              */
-            const unsigned int TOP = 0x4;
+            constexpr unsigned int TOP = 0x4;
 
             /**
              * \brief Specifies an alignment to the bottom.
              */
-            const unsigned int BOTTOM = 0x8;
+            constexpr unsigned int BOTTOM = 0x8;
 
             /**
              * \brief Specifies that an object has to be centered vertically.
              */
-            const unsigned int V_CENTER = TOP | BOTTOM;
+            constexpr unsigned int V_CENTER = TOP | BOTTOM;
 
             /**
              * \brief A bitmask for all vertical alignment flags.
              */
-            const unsigned int V_ALIGNMENT_MASK = V_CENTER;
+            constexpr unsigned int V_ALIGNMENT_MASK = V_CENTER;
 
             /**
              * \brief Specifies that an object has to be centered horizontally and vertically.
              */
-            const unsigned int CENTER = H_CENTER | V_CENTER;
+            constexpr unsigned int CENTER = H_CENTER | V_CENTER;
         } // namespace Alignment
     } // namespace Vis
 } // namespace CDPL

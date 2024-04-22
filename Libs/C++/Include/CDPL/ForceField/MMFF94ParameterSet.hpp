@@ -42,11 +42,11 @@ namespace CDPL
         namespace MMFF94ParameterSet
         {
 
-            const unsigned int DYNAMIC          = 0;
-            const unsigned int STATIC           = 1;
-            const unsigned int STATIC_XOOP      = 2;
-            const unsigned int STATIC_RTOR      = 3;
-            const unsigned int STATIC_RTOR_XOOP = 4;
+            constexpr unsigned int DYNAMIC          = 0;
+            constexpr unsigned int STATIC           = 1;
+            constexpr unsigned int STATIC_XOOP      = 2;
+            constexpr unsigned int STATIC_RTOR      = 3;
+            constexpr unsigned int STATIC_RTOR_XOOP = 4;
         } // namespace MMFF94ParameterSet
     } // namespace ForceField
 } // namespace CDPL

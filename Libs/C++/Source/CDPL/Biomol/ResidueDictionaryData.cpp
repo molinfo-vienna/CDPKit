@@ -95,7 +95,7 @@ namespace CDPL
 
             #include "ResidueDictionaryEntries.hpp"
 
-            const std::size_t NUM_RESIDUE_ENTRIES = sizeof(RESIDUE_DATA) / sizeof(ResidueDataEntry);
+            constexpr std::size_t NUM_RESIDUE_ENTRIES = sizeof(RESIDUE_DATA) / sizeof(ResidueDataEntry);
 
             // clang-format on
         } // namespace ResidueDictionaryData

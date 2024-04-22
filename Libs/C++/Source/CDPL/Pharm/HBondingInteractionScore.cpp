@@ -41,8 +41,8 @@ using namespace CDPL;
 namespace
 {
 
-    const double DEF_DONOR_TO_H_DIST = 1.05;
-    const double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
+    constexpr double DEF_DONOR_TO_H_DIST      = 1.05;
+    constexpr double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
 }
 
 

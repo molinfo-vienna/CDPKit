@@ -97,9 +97,9 @@ namespace
         symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360);
     };
 
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE    = 1000;
-    const double      MIN_TORSION_ANGLE_TOLERANCE = 30.0;
-    const double      DUP_TORSION_ANGLE_THRESHOLD = 10.0;
+    constexpr std::size_t MAX_CONF_DATA_CACHE_SIZE    = 1000;
+    constexpr double      MIN_TORSION_ANGLE_TOLERANCE = 30.0;
+    constexpr double      DUP_TORSION_ANGLE_THRESHOLD = 10.0;
 
     bool hasAngleWithinDistance(double angle, const ConfGen::FragmentTreeNode::DoubleArray& angles, double dist)
     {

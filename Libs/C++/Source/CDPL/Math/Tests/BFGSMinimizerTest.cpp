@@ -44,7 +44,7 @@ namespace
         VectorType  solution;
         std::string name;
 
-        static const std::size_t maxNumIter = 20;
+        static constexpr std::size_t maxNumIter = 20;
 
         Rosenbrock(): x(2), g(2), solution(2), name("Rosenbrock") {
             solution(0) = 1.0;
@@ -98,7 +98,7 @@ namespace
         VectorType  solution;
         std::string name;
 
-        static const std::size_t maxNumIter = 20;
+        static constexpr std::size_t maxNumIter = 20;
 
         Roth(): x(2), g(2), solution(2), name("Roth") {
             solution(0) = 5.0;
@@ -156,7 +156,7 @@ namespace
         VectorType  solution;
         std::string name;
 
-        static const std::size_t maxNumIter = 500;
+        static constexpr std::size_t maxNumIter = 500;
 
         Wood(): x(), g(), solution(), name("Wood") {
             x.resize(2);

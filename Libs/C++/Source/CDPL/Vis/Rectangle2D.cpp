@@ -184,7 +184,7 @@ double Vis::Rectangle2D::getArea() const
 
 void Vis::Rectangle2D::reset()
 {
-    const double dbl_max = std::numeric_limits<double>::max();
+    constexpr double dbl_max = std::numeric_limits<double>::max();
 
     min(0) = dbl_max;
     min(1) = dbl_max;

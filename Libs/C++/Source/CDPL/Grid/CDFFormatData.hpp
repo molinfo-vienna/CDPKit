@@ -44,17 +44,17 @@ namespace CDPL
             typedef std::uint32_t UIntType;
             typedef std::uint8_t  BoolType;
 
-            const std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
-            const std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
+            constexpr std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
+            constexpr std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
 
-            const std::uint8_t CURR_FORMAT_VERSION = 1;
+            constexpr std::uint8_t CURR_FORMAT_VERSION = 1;
 
-            const unsigned int EXTENDED_PROP_LIST = 31;
+            constexpr unsigned int EXTENDED_PROP_LIST = 31;
 
             namespace AttributedGridProperty
             {
 
-                const unsigned int NAME = 1;
+                constexpr unsigned int NAME = 1;
             }
         } // namespace CDF
     } // namespace Grid

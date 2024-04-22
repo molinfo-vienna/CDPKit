@@ -103,10 +103,10 @@ namespace
         return (res1.getScore() >= res2.getScore());
     }
 
-    const double RADIUS_SCALING_FACTOR                     = 1.4;
-    const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
-    const double BFGS_MINIMIZER_STEP_SIZE                  = 0.1;
-    const double BFGS_MINIMIZER_TOLERANCE                  = 0.5;
+    constexpr double RADIUS_SCALING_FACTOR                     = 1.4;
+    constexpr double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
+    constexpr double BFGS_MINIMIZER_STEP_SIZE                  = 0.1;
+    constexpr double BFGS_MINIMIZER_TOLERANCE                  = 0.5;
 }
 
 

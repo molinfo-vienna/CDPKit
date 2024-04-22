@@ -38,16 +38,16 @@ namespace CDPL
         namespace FeaturePropertyDefault
         {
 
-            const bool OPTIONAL_FLAG             = false;
-            const bool DISABLED_FLAG             = false;
+            constexpr bool OPTIONAL_FLAG             = false;
+            constexpr bool DISABLED_FLAG             = false;
 
-            const double LENGTH                  = 1.0;
-            const double TOLERANCE               = 1.0;
-            const double WEIGHT                  = 1.0;
-            const double HYDROPHOBICITY          = 0.0;
+            constexpr double LENGTH                  = 1.0;
+            constexpr double TOLERANCE               = 1.0;
+            constexpr double WEIGHT                  = 1.0;
+            constexpr double HYDROPHOBICITY          = 0.0;
 
-            const unsigned int TYPE              = FeatureType::UNKNOWN;
-            const unsigned int GEOMETRY          = FeatureGeometry::UNDEF;
+            constexpr unsigned int TYPE              = FeatureType::UNKNOWN;
+            constexpr unsigned int GEOMETRY          = FeatureGeometry::UNDEF;
         }
 
         void initFeaturePropertyDefaults() {}

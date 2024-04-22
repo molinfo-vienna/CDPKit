@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(RotationMatrixTest)
 
     // ---------
 
-    const double deg_97 = 97.0 * M_PI / 180.0;
+    constexpr double deg_97 = 97.0 * M_PI / 180.0;
 
     double rot_x_97_data[3][3] = { 
         { 1.0, 0.0, 0.0 },
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(RotationMatrixTest)
 
     // ---------
 
-    const double deg_295 = 295.0 * M_PI / 180.0;
+    constexpr double deg_295 = 295.0 * M_PI / 180.0;
 
     double rot_y_295_data[3][3] = { 
         { std::cos(deg_295), 0.0, std::sin(deg_295) },
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_CASE(RotationMatrixTest)
 
     // ---------
 
-    const double deg_m130 = -130.0 * M_PI / 180.0;
+    constexpr double deg_m130 = -130.0 * M_PI / 180.0;
 
     double rot_z_m130_data[3][3] = { 
         { std::cos(deg_m130), -std::sin(deg_m130), 0.0 },

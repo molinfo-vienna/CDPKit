@@ -39,21 +39,21 @@ namespace CDPL
         namespace ResidueType
         {
 
-            const unsigned int UNKNOWN                  = 0;
-            const unsigned int OTHER                    = 1;
-            const unsigned int NON_POLYMER              = 2;
-            const unsigned int PEPTIDE_CARBOXY_TERMINUS = 3;
-            const unsigned int PEPTIDE_AMINO_TERMINUS   = 4;
-            const unsigned int PEPTIDE_LINKING          = 5;
-            const unsigned int BETA_PEPTIDE_LINKING     = 6;
-            const unsigned int GAMMA_PEPTIDE_LINKING    = 7;
-            const unsigned int PEPTIDE_LIKE             = 8;
-            const unsigned int RNA_HYDROXY_TERMINUS     = 9;
-            const unsigned int DNA_HYDROXY_TERMINUS     = 10;
-            const unsigned int RNA_LINKING              = 11;
-            const unsigned int DNA_LINKING              = 12;
-            const unsigned int SACCHARIDE_LINKING       = 13;
-            const unsigned int SACCHARIDE               = 14;
+            constexpr unsigned int UNKNOWN                  = 0;
+            constexpr unsigned int OTHER                    = 1;
+            constexpr unsigned int NON_POLYMER              = 2;
+            constexpr unsigned int PEPTIDE_CARBOXY_TERMINUS = 3;
+            constexpr unsigned int PEPTIDE_AMINO_TERMINUS   = 4;
+            constexpr unsigned int PEPTIDE_LINKING          = 5;
+            constexpr unsigned int BETA_PEPTIDE_LINKING     = 6;
+            constexpr unsigned int GAMMA_PEPTIDE_LINKING    = 7;
+            constexpr unsigned int PEPTIDE_LIKE             = 8;
+            constexpr unsigned int RNA_HYDROXY_TERMINUS     = 9;
+            constexpr unsigned int DNA_HYDROXY_TERMINUS     = 10;
+            constexpr unsigned int RNA_LINKING              = 11;
+            constexpr unsigned int DNA_LINKING              = 12;
+            constexpr unsigned int SACCHARIDE_LINKING       = 13;
+            constexpr unsigned int SACCHARIDE               = 14;
         } // namespace ResidueType
     } // namespace Biomol
 } // namespace CDPL

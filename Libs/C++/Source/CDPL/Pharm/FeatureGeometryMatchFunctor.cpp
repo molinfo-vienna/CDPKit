@@ -40,9 +40,9 @@ using namespace CDPL;
 namespace
 {
     
-    const Math::Matrix4D ID_XFORM         = Math::IdentityMatrix<double>(4, 4);
-    const double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
-    const double DEF_LP_TO_AXIS_ANGLE     = 65.0;
+    const Math::Matrix4D ID_XFORM             = Math::IdentityMatrix<double>(4, 4);
+    constexpr double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
+    constexpr double DEF_LP_TO_AXIS_ANGLE     = 65.0;
 }
 
 

@@ -44,17 +44,17 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t LOGP_OFFSET_INDEX           = 0;
-    const std::size_t HYDROPHOBIC_C_INDEX         = 91;
-    const std::size_t INTERNAL_H_BOND_INDEX       = 92;
-    const std::size_t HALOGEN_13_PAIR_INDEX       = 93;
-    const std::size_t AROMATIC_N_14_PAIR_INDEX    = 94;
-    const std::size_t ORTHO_SP3_O_PAIR_INDEX      = 95;
-    const std::size_t PARA_DONOR_PAIR_INDEX       = 96;
-    const std::size_t SP2_O_15_PAIR_INDEX         = 97;
-    const std::size_t ALPHA_AMINO_ACID_INDEX      = 98;
-    const std::size_t SALICYLIC_ACID_INDEX        = 99;
-    const std::size_t P_AMINO_SULFONIC_ACID_INDEX = 100;
+    constexpr std::size_t LOGP_OFFSET_INDEX           = 0;
+    constexpr std::size_t HYDROPHOBIC_C_INDEX         = 91;
+    constexpr std::size_t INTERNAL_H_BOND_INDEX       = 92;
+    constexpr std::size_t HALOGEN_13_PAIR_INDEX       = 93;
+    constexpr std::size_t AROMATIC_N_14_PAIR_INDEX    = 94;
+    constexpr std::size_t ORTHO_SP3_O_PAIR_INDEX      = 95;
+    constexpr std::size_t PARA_DONOR_PAIR_INDEX       = 96;
+    constexpr std::size_t SP2_O_15_PAIR_INDEX         = 97;
+    constexpr std::size_t ALPHA_AMINO_ACID_INDEX      = 98;
+    constexpr std::size_t SALICYLIC_ACID_INDEX        = 99;
+    constexpr std::size_t P_AMINO_SULFONIC_ACID_INDEX = 100;
 
     const std::string INTERNAL_H_BOND_SMARTS1      = "[N,O;!H0]-[R]~[R]-,=[O]";
     const std::string INTERNAL_H_BOND_SMARTS2      = "[N,O;!H0]-[R]~*~[!R]-,=[O]";
@@ -219,7 +219,7 @@ namespace
         atomTyperPatterns.push_back(Chem::parseSMARTS("[*;u,a]-[I:90]")); // (π=1)
     }
 
-    const double REGRESSION_COEFFS[] = {
+    constexpr double REGRESSION_COEFFS[] = {
         0.137510724896,
         0.50247901934,
         0.211887964842,

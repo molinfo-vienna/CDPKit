@@ -42,7 +42,7 @@
 namespace
 {
     
-    const std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
+    constexpr std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
 }
 
 

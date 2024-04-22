@@ -47,78 +47,78 @@ namespace CDPL
             /**
              * \brief Specifies that the configuration of the stereocenter (if any) is completely undefined.
              */
-            const unsigned int UNDEF    = 0;
+            constexpr unsigned int UNDEF    = 0;
 
             /**
              * \brief Specifies that the atom/bond is not a stereogenic center and thus cannot be assigned a 
              *        configuration.
              */ 
-            const unsigned int NONE     = 1;
+            constexpr unsigned int NONE     = 1;
 
             /**
              * \brief Specifies that the atom/bond is a stereogenic center but has no specified configuration.
              */
-            const unsigned int NS       = 2;
+            constexpr unsigned int NS       = 2;
 
             /**
              * \brief Specifies that the stereocenter has \e R configuration.
              */
-            const unsigned int R        = 3;
+            constexpr unsigned int R        = 3;
 
             /**
              * \brief Specifies that the stereocenter has \e S configuration.
              */
-            const unsigned int S        = 4;
+            constexpr unsigned int S        = 4;
 
             /**
              * \brief Specifies that the stereocenter has \e r configuration.
              */
-            const unsigned int r        = 5;
+            constexpr unsigned int r        = 5;
 
             /**
              * \brief Specifies that the stereocenter has \e s configuration.
              */
-            const unsigned int s        = 6;
+            constexpr unsigned int s        = 6;
 
             /**
              * \brief Specifies that the stereocenter has \e seqTrans configuration.
              */
-            const unsigned int seqTrans = 7;
+            constexpr unsigned int seqTrans = 7;
             
             /**
              * \brief Specifies that the stereocenter has \e seqCis configuration.
              */
-            const unsigned int seqCis   = 8;
+            constexpr unsigned int seqCis   = 8;
 
             /**
              * \brief Specifies that the stereocenter has \e E configuration.
              */
-            const unsigned int E        = 9;
+            constexpr unsigned int E        = 9;
             
             /**
              * \brief Specifies that the stereocenter has \e Z configuration.
              */
-            const unsigned int Z        = 10;
+            constexpr unsigned int Z        = 10;
             
             /**
              * \brief Specifies that the stereocenter has \e M configuration.
              */
-            const unsigned int M        = 11;
+            constexpr unsigned int M        = 11;
             
             /**
              * \brief Specifies that the stereocenter has \e P configuration.
              */
-            const unsigned int P        = 12;
+            constexpr unsigned int P        = 12;
 
             /**
              * \brief Specifies that the stereocenter has \e m configuration.
              */
-            const unsigned int m        = 13;
+            constexpr unsigned int m        = 13;
 
             /**
              * \brief Specifies that the stereocenter has \e p configuration.
              */
-            const unsigned int p        = 14;
+            constexpr unsigned int p        = 14;
         } // namespace CIPDescriptor
     } // namespace Chem
 } // namespace CDPL

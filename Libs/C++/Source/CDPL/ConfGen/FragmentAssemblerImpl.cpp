@@ -92,10 +92,10 @@ namespace
         return (entry1.getScore() < entry2.getScore());
     } 
 
-    const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 500;
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE      = 500;
+    constexpr std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 500;
+    constexpr std::size_t MAX_CONF_DATA_CACHE_SIZE      = 500;
 
-    const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE     = 15.0 / 180.0 * M_PI;
+    constexpr double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE     = 15.0 / 180.0 * M_PI;
 }
 
 

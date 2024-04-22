@@ -49,7 +49,7 @@
 using namespace CDPL;
 
 
-const std::size_t Internal::SHA1::HASH_SIZE;
+constexpr std::size_t Internal::SHA1::HASH_SIZE;
 
 
 Internal::SHA1::SHA1()
@@ -72,7 +72,7 @@ void Internal::SHA1::reset()
             
 void Internal::SHA1::processMessageBlock()
 {
-    static const std::uint32_t K[] = {   // Constants defined in SHA-1   
+    static constexpr std::uint32_t K[] = {   // Constants defined in SHA-1   
         0x5A827999,
         0x6ED9EBA1,
         0x8F1BBCDC,

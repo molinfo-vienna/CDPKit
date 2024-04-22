@@ -83,17 +83,17 @@ namespace
         }
     }
 
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 1000;
-    const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
-    const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 2000;
-    const double      COMP_CONFORMER_SPACING                 = 4.0;
-    const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
-    const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
-    const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
-    const std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 131072;
-    const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
-    const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
-    const double      ELASTIC_POTENTIAL_FORCE_CONST          = 500.0;
+    constexpr std::size_t MAX_CONF_DATA_CACHE_SIZE               = 1000;
+    constexpr std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
+    constexpr std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 2000;
+    constexpr double      COMP_CONFORMER_SPACING                 = 4.0;
+    constexpr std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
+    constexpr std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
+    constexpr std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
+    constexpr std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 131072;
+    constexpr double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
+    constexpr double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
+    constexpr double      ELASTIC_POTENTIAL_FORCE_CONST          = 500.0;
 }
 
 

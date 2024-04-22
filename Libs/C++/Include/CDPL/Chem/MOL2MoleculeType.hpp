@@ -42,12 +42,12 @@ namespace CDPL
         namespace MOL2MoleculeType
         {
 
-            const unsigned int UNKNOWN      = 0;
-            const unsigned int SMALL        = 1;
-            const unsigned int BIOPOLYMER   = 2;
-            const unsigned int PROTEIN      = 3;
-            const unsigned int NUCLEIC_ACID = 4;
-            const unsigned int SACCHARIDE   = 5;
+            constexpr unsigned int UNKNOWN      = 0;
+            constexpr unsigned int SMALL        = 1;
+            constexpr unsigned int BIOPOLYMER   = 2;
+            constexpr unsigned int PROTEIN      = 3;
+            constexpr unsigned int NUCLEIC_ACID = 4;
+            constexpr unsigned int SACCHARIDE   = 5;
         } // namespace MOL2MoleculeType
     } // namespace Chem
 } // namespace CDPL

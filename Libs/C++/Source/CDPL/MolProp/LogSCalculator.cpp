@@ -160,11 +160,11 @@ namespace
         atomTypePatterns.push_back(parseSMARTS("[I:76]c"));
     }
 
-    const std::size_t LOGS_OFFSET_INDEX    = 0;
-    const std::size_t HYDROPHOBIC_C_INDEX  = 77;
-    const std::size_t SQUARED_MW_INDEX     = 78;
+    constexpr std::size_t LOGS_OFFSET_INDEX    = 0;
+    constexpr std::size_t HYDROPHOBIC_C_INDEX  = 77;
+    constexpr std::size_t SQUARED_MW_INDEX     = 78;
 
-    const double REGRESSION_COEFFS[] = {
+    constexpr double REGRESSION_COEFFS[] = {
           -0.332777159212,
         0.377662987239,
         0.116285697171,

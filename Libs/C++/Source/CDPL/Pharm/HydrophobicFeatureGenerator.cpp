@@ -49,7 +49,7 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t RING_SIZE_LIMIT = 7;
+    constexpr std::size_t RING_SIZE_LIMIT = 7;
 }
 
 

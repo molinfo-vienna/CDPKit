@@ -37,7 +37,7 @@
 namespace
 {
 
-    const std::size_t MAX_MESSAGE_CACHE_SIZE = 100000;
+    constexpr std::size_t MAX_MESSAGE_CACHE_SIZE = 100000;
 }
 
 

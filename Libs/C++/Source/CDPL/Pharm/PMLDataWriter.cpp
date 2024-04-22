@@ -49,8 +49,8 @@ using namespace CDPL;
 namespace
 {
 
-    const double PLANE_FEATURE_SECOND_TOL_FACTOR  = 0.5;
-    const double VECTOR_FEATURE_TARGET_TOL_FACTOR = 1.5;
+    constexpr double PLANE_FEATURE_SECOND_TOL_FACTOR  = 0.5;
+    constexpr double VECTOR_FEATURE_TARGET_TOL_FACTOR = 1.5;
     const std::string NOT_FOUND;
 
     typedef std::map<unsigned int, std::string> FeatureTypeToNameMap;

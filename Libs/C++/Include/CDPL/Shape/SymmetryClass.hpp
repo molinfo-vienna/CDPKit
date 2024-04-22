@@ -40,15 +40,15 @@ namespace CDPL
         {
 
 
-            const unsigned int UNDEF = 0;
+            constexpr unsigned int UNDEF = 0;
 
-            const unsigned int ASYMMETRIC = 1;
+            constexpr unsigned int ASYMMETRIC = 1;
 
-            const unsigned int OBLATE = 2;
+            constexpr unsigned int OBLATE = 2;
 
-            const unsigned int PROLATE = 3;
+            constexpr unsigned int PROLATE = 3;
 
-            const unsigned int SPHERICAL = 4;
+            constexpr unsigned int SPHERICAL = 4;
         } // namespace SymmetryClass
     } // namespace Shape
 } // namespace CDPL

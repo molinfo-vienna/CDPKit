@@ -157,7 +157,7 @@ namespace
         TARTRATE_PATTERN = Chem::parseSMARTS("[O;v1,v2H1]C(=O)[Cv4H1:1]([O;v1,v2H1])[Cv4H1:2]([O;v1,v2H1])C(=O)[O;v1,v2H1]");
     }
     
-    const unsigned int EXCLUDE_ATOM_TYPES[] = {
+    constexpr unsigned int EXCLUDE_ATOM_TYPES[] = {
         Chem::AtomType::Sc, Chem::AtomType::Ti, Chem::AtomType::V, Chem::AtomType::Cr,
         Chem::AtomType::Mn, Chem::AtomType::Fe, Chem::AtomType::Co, Chem::AtomType::Ni,
         Chem::AtomType::Cu, Chem::AtomType::Ga, Chem::AtomType::Y, Chem::AtomType::Zr,
@@ -778,7 +778,7 @@ bool Chem::ChEMBLStandardizer::removeTartrateStereochemistry(Molecule& mol)
     
 bool Chem::ChEMBLStandardizer::cleanup2DStructure(Molecule& mol)
 {
-    const double MAX_LINEARITY_DEV = 0.017;
+    constexpr double MAX_LINEARITY_DEV = 0.017;
     
     if (!hasCoordinates(mol, 2))
         return false;

@@ -42,13 +42,13 @@ namespace CDPL
         namespace FeatureGeometry
         {
 
-            const unsigned int UNDEF = 0;
+            constexpr unsigned int UNDEF = 0;
 
-            const unsigned int SPHERE = 1;
+            constexpr unsigned int SPHERE = 1;
 
-            const unsigned int VECTOR = 2;
+            constexpr unsigned int VECTOR = 2;
 
-            const unsigned int PLANE = 3;
+            constexpr unsigned int PLANE = 3;
         } // namespace FeatureGeometry
     } // namespace Pharm
 } // namespace CDPL

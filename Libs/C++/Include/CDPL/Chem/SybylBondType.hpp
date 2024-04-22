@@ -45,42 +45,42 @@ namespace CDPL
             /**
              * \brief Specifies an unknown bond (cannot be determined from the parameter tables).
              */
-            const unsigned int UNKNOWN = 0;
+            constexpr unsigned int UNKNOWN = 0;
 
             /**
              * \brief Specifies a single bond.
              */
-            const unsigned int SINGLE = 1;
+            constexpr unsigned int SINGLE = 1;
 
             /**
              * \brief Specifies a double bond.
              */
-            const unsigned int DOUBLE = 2;
+            constexpr unsigned int DOUBLE = 2;
 
             /**
              * \brief Specifies a triple bond.
              */
-            const unsigned int TRIPLE = 3;
+            constexpr unsigned int TRIPLE = 3;
 
             /**
              * \brief Specifies an aromatic bond.
              */
-            const unsigned int AROMATIC = 4;
+            constexpr unsigned int AROMATIC = 4;
 
             /**
              * \brief Specifies an amide bond.
              */
-            const unsigned int AMIDE = 5;
+            constexpr unsigned int AMIDE = 5;
 
             /**
              * \brief Specifies a dummy bond.
              */
-            const unsigned int DUMMY = 6;
+            constexpr unsigned int DUMMY = 6;
 
             /**
              * \brief Specifies a pseudo bond.
              */
-            const unsigned int NOT_CONNECTED = 7;
+            constexpr unsigned int NOT_CONNECTED = 7;
         } // namespace SybylBondType
     } // namespace Chem
 } // namespace CDPL

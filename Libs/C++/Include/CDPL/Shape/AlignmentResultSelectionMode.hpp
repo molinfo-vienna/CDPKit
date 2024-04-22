@@ -39,11 +39,11 @@ namespace CDPL
         namespace AlignmentResultSelectionMode
         {
 
-            const unsigned int ALL                        = 0;
-            const unsigned int BEST_PER_SHAPE_COMBINATION = 1;
-            const unsigned int BEST_PER_REFERENCE_SHAPE   = 2;
-            const unsigned int BEST_PER_REFERENCE_SET     = 3;
-            const unsigned int BEST_OVERALL               = 4;
+            constexpr unsigned int ALL                        = 0;
+            constexpr unsigned int BEST_PER_SHAPE_COMBINATION = 1;
+            constexpr unsigned int BEST_PER_REFERENCE_SHAPE   = 2;
+            constexpr unsigned int BEST_PER_REFERENCE_SET     = 3;
+            constexpr unsigned int BEST_OVERALL               = 4;
         } // namespace AlignmentResultSelectionMode
     } // namespace Shape
 } // namespace CDPL

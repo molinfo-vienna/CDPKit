@@ -42,7 +42,7 @@ using namespace CDPL;
 namespace
 {
 
-    const double  HYDROGEN_ENEGATIVITY_P1 = 20.02;
+    constexpr double  HYDROGEN_ENEGATIVITY_P1 = 20.02;
 }
 
 

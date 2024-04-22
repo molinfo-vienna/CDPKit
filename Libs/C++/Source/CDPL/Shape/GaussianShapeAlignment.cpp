@@ -46,7 +46,7 @@ namespace
         return *func->getShape();
     }
 
-    const std::size_t MAX_SHAPE_FUNC_CACHE_SIZE = 200;
+    constexpr std::size_t MAX_SHAPE_FUNC_CACHE_SIZE = 200;
 }
 
 

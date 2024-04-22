@@ -43,9 +43,9 @@ namespace CDPL
         namespace FragmentType
         {
 
-            const unsigned int CHAIN                = 0;
-            const unsigned int FLEXIBLE_RING_SYSTEM = 1;
-            const unsigned int RIGID_RING_SYSTEM    = 2;
+            constexpr unsigned int CHAIN                = 0;
+            constexpr unsigned int FLEXIBLE_RING_SYSTEM = 1;
+            constexpr unsigned int RIGID_RING_SYSTEM    = 2;
         } // namespace FragmentType
     } // namespace ConfGen
 } // namespace CDPL

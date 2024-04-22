@@ -42,9 +42,9 @@ namespace CDPL
         namespace StructureGenerationMode
         {
 
-            const unsigned int AUTO              = 0;
-            const unsigned int FRAGMENT          = 1;
-            const unsigned int DISTANCE_GEOMETRY = 2;
+            constexpr unsigned int AUTO              = 0;
+            constexpr unsigned int FRAGMENT          = 1;
+            constexpr unsigned int DISTANCE_GEOMETRY = 2;
         } // namespace StructureGenerationMode
     } // namespace ConfGen
 } // namespace CDPL

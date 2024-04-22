@@ -55,7 +55,7 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t DATA_BLOCK_SIZE = 1024 * 64;
+    constexpr std::size_t DATA_BLOCK_SIZE = 1024 * 64;
 }
 
 

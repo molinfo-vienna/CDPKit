@@ -36,7 +36,7 @@
 namespace
 {
 
-    const std::size_t MAX_EDGE_CACHE_SIZE = 100000;
+    constexpr std::size_t MAX_EDGE_CACHE_SIZE = 100000;
 }
 
 

@@ -231,7 +231,7 @@ void CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::calculate(Iter beg, Iter
         vec[i] = 0.0;
 
     Math::Vector3D tmp;
-    const double   max_radius = startRadius + (numSteps + 1) * radiusIncrement;
+    const double max_radius = startRadius + (numSteps + 1) * radiusIncrement;
 
     for (std::size_t i = 0; i < numEntities; i++) {
         for (std::size_t j = i; j < numEntities; j++) {

@@ -38,8 +38,8 @@ using namespace CDPL;
 namespace
 {
 
-    const double REF_BOND_ORDER  = 1.66;
-    const double REF_ENEGATIVITY = 7.41;
+    constexpr double REF_BOND_ORDER  = 1.66;
+    constexpr double REF_ENEGATIVITY = 7.41;
 
     double calcInductiveEffect(std::size_t atom_idx, const Chem::MolecularGraph& molgraph, std::size_t num_bonds,
                                std::size_t path_len, Util::BitSet& vis_atoms, double damping_fact)

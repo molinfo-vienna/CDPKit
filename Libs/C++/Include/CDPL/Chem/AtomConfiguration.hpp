@@ -45,42 +45,42 @@ namespace CDPL
             /**
              * \brief Specifies that the configuration of the atom is completely undefined.
              */
-            const unsigned int UNDEF  = 0;
+            constexpr unsigned int UNDEF  = 0;
 
             /**
              * \brief Specifies that the atom does not meet the requirements to be assigned a configuration.
              */
-            const unsigned int NONE   = 0x1;
+            constexpr unsigned int NONE   = 0x1;
 
             /**
              * \brief Specifies that the atom has \e R configuration.
              */
-            const unsigned int R      = 0x2;
+            constexpr unsigned int R      = 0x2;
 
             /**
              * \brief Specifies that the atom has \e S configuration.
              */
-            const unsigned int S      = 0x4;
+            constexpr unsigned int S      = 0x4;
 
             /**
              * \brief Specifies that the atom meets the requirements but has no defined configuration.
              */
-            const unsigned int EITHER = 0x8;
+            constexpr unsigned int EITHER = 0x8;
 
             /**
              * \brief Specifies that the geometry of the ligand arrangement is <em>square planar</em>.
              */
-            const unsigned int SP     = 16;
+            constexpr unsigned int SP     = 16;
 
             /**
              * \brief Specifies that the geometry of the ligand arrangement is <em>trigonal bipyramidal</em>.
              */
-            const unsigned int TB     = SP + 4;
+            constexpr unsigned int TB     = SP + 4;
 
             /**
              * \brief Specifies that the geometry of the ligand arrangement is <em>octahedral</em>.
              */
-            const unsigned int OH     = TB + 21;
+            constexpr unsigned int OH     = TB + 21;
             
         } // namespace AtomConfiguration
     } // namespace Chem

@@ -40,7 +40,7 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t MAX_NUM_UNIQUE_RING_SYSTEMS = 50000;
+    constexpr std::size_t MAX_NUM_UNIQUE_RING_SYSTEMS = 50000;
 }
 
 

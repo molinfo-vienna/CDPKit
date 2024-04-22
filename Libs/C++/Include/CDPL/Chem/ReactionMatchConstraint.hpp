@@ -43,16 +43,16 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies a constraint which requires the target reaction to fulfill additional contraints
+             * \brief Specifies a constraint which requires the target reaction to fulfill additional constraints
              *        specified by a Chem::MatchConstraintList object.
              */
-            const unsigned int CONSTRAINT_LIST = 0;
+            constexpr unsigned int CONSTRAINT_LIST = 0;
 
             /**
              * \brief Specifies a constraint which requires the target reaction to match the reactant to product
              *        atom mapping of the query reaction.
              */
-            const unsigned int ATOM_MAPPING = 1;
+            constexpr unsigned int ATOM_MAPPING = 1;
 
             /**
              * \brief Specifies a constraint which requires the target reaction to match any component level groupings
@@ -64,7 +64,7 @@ namespace CDPL
              * <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that
              * enclose those components of the query which have to be part of the same target reaction component.
              */
-            const unsigned int COMPONENT_GROUPING = 2;
+            constexpr unsigned int COMPONENT_GROUPING = 2;
         } // namespace ReactionMatchConstraint
     } // namespace Chem
 } // namespace CDPL

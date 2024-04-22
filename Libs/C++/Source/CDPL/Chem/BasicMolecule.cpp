@@ -36,8 +36,8 @@
 namespace
 {
 
-    const std::size_t MAX_ATOM_CACHE_SIZE = 50000;
-    const std::size_t MAX_BOND_CACHE_SIZE = 50000;
+    constexpr std::size_t MAX_ATOM_CACHE_SIZE = 50000;
+    constexpr std::size_t MAX_BOND_CACHE_SIZE = 50000;
 }
 
 

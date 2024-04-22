@@ -49,622 +49,622 @@ namespace CDPL
             /**
              * \brief Specifies an atom with an unknown or undefined atom type.
              */
-            const unsigned int UNKNOWN = 0;
+            constexpr unsigned int UNKNOWN = 0;
 
             /**
              * \brief Specifies \e Hydrogen.
              */
-            const unsigned int H = 1;
+            constexpr unsigned int H = 1;
 
             /**
              * \brief Specifies <em>Hydrogen (Deuterium)</em>.
              */
-            const unsigned int D = 1;
+            constexpr unsigned int D = 1;
 
             /**
              * \brief Specifies <em>Hydrogen (Tritium)</em>.
              */
-            const unsigned int T = 1;
+            constexpr unsigned int T = 1;
 
             /**
              * \brief Specifies \e Helium.
              */
-            const unsigned int He = 2;
+            constexpr unsigned int He = 2;
 
             /**
              * \brief Specifies \e Lithium.
              */
-            const unsigned int Li = 3;
+            constexpr unsigned int Li = 3;
 
             /**
              * \brief Specifies \e Beryllium.
              */
-            const unsigned int Be = 4;
+            constexpr unsigned int Be = 4;
 
             /**
              * \brief Specifies \e Boron.
              */
-            const unsigned int B = 5;
+            constexpr unsigned int B = 5;
 
             /**
              * \brief Specifies \e Carbon.
              */
-            const unsigned int C = 6;
+            constexpr unsigned int C = 6;
 
             /**
              * \brief Specifies \e Nitrogen.
              */
-            const unsigned int N = 7;
+            constexpr unsigned int N = 7;
 
             /**
              * \brief Specifies \e Oxygen.
              */
-            const unsigned int O = 8;
+            constexpr unsigned int O = 8;
 
             /**
              * \brief Specifies \e Fluorine.
              */
-            const unsigned int F = 9;
+            constexpr unsigned int F = 9;
 
             /**
              * \brief Specifies \e Neon.
              */
-            const unsigned int Ne = 10;
+            constexpr unsigned int Ne = 10;
 
             /**
              * \brief Specifies \e Sodium.
              */
-            const unsigned int Na = 11;
+            constexpr unsigned int Na = 11;
 
             /**
              * \brief Specifies \e Magnesium.
              */
-            const unsigned int Mg = 12;
+            constexpr unsigned int Mg = 12;
 
             /**
              * \brief Specifies \e Aluminium.
              */
-            const unsigned int Al = 13;
+            constexpr unsigned int Al = 13;
 
             /**
              * \brief Specifies \e Silicon.
              */
-            const unsigned int Si = 14;
+            constexpr unsigned int Si = 14;
 
             /**
              * \brief Specifies \e Phosphorus.
              */
-            const unsigned int P = 15;
+            constexpr unsigned int P = 15;
 
             /**
              * \brief Specifies \e Sulfur.
              */
-            const unsigned int S = 16;
+            constexpr unsigned int S = 16;
 
             /**
              * \brief Specifies \e Chlorine.
              */
-            const unsigned int Cl = 17;
+            constexpr unsigned int Cl = 17;
 
             /**
              * \brief Specifies \e Argon.
              */
-            const unsigned int Ar = 18;
+            constexpr unsigned int Ar = 18;
 
             /**
              * \brief Specifies \e Potassium.
              */
-            const unsigned int K = 19;
+            constexpr unsigned int K = 19;
 
             /**
              * \brief Specifies \e Calcium.
              */
-            const unsigned int Ca = 20;
+            constexpr unsigned int Ca = 20;
 
             /**
              * \brief Specifies \e Scandium.
              */
-            const unsigned int Sc = 21;
+            constexpr unsigned int Sc = 21;
 
             /**
              * \brief Specifies \e Titanium.
              */
-            const unsigned int Ti = 22;
+            constexpr unsigned int Ti = 22;
 
             /**
              * \brief Specifies \e Vanadium.
              */
-            const unsigned int V = 23;
+            constexpr unsigned int V = 23;
 
             /**
              * \brief Specifies \e Chromium.
              */
-            const unsigned int Cr = 24;
+            constexpr unsigned int Cr = 24;
 
             /**
              * \brief Specifies \e Manganese.
              */
-            const unsigned int Mn = 25;
+            constexpr unsigned int Mn = 25;
 
             /**
              * \brief Specifies \e Iron.
              */
-            const unsigned int Fe = 26;
+            constexpr unsigned int Fe = 26;
 
             /**
              * \brief Specifies \e Cobalt.
              */
-            const unsigned int Co = 27;
+            constexpr unsigned int Co = 27;
 
             /**
              * \brief Specifies \e Nickel.
              */
-            const unsigned int Ni = 28;
+            constexpr unsigned int Ni = 28;
 
             /**
              * \brief Specifies \e Copper.
              */
-            const unsigned int Cu = 29;
+            constexpr unsigned int Cu = 29;
 
             /**
              * \brief Specifies \e Zinc.
              */
-            const unsigned int Zn = 30;
+            constexpr unsigned int Zn = 30;
 
             /**
              * \brief Specifies \e Gallium.
              */
-            const unsigned int Ga = 31;
+            constexpr unsigned int Ga = 31;
 
             /**
              * \brief Specifies \e Germanium.
              */
-            const unsigned int Ge = 32;
+            constexpr unsigned int Ge = 32;
 
             /**
              * \brief Specifies \e Arsenic.
              */
-            const unsigned int As = 33;
+            constexpr unsigned int As = 33;
 
             /**
              * \brief Specifies \e Selenium.
              */
-            const unsigned int Se = 34;
+            constexpr unsigned int Se = 34;
 
             /**
              * \brief Specifies \e Bromine.
              */
-            const unsigned int Br = 35;
+            constexpr unsigned int Br = 35;
 
             /**
              * \brief Specifies \e Krypton.
              */
-            const unsigned int Kr = 36;
+            constexpr unsigned int Kr = 36;
 
             /**
              * \brief Specifies \e Rubidium.
              */
-            const unsigned int Rb = 37;
+            constexpr unsigned int Rb = 37;
 
             /**
              * \brief Specifies \e Strontium.
              */
-            const unsigned int Sr = 38;
+            constexpr unsigned int Sr = 38;
 
             /**
              * \brief Specifies \e Yttrium.
              */
-            const unsigned int Y = 39;
+            constexpr unsigned int Y = 39;
 
             /**
              * \brief Specifies \e Zirconium.
              */
-            const unsigned int Zr = 40;
+            constexpr unsigned int Zr = 40;
 
             /**
              * \brief Specifies \e Niobium.
              */
-            const unsigned int Nb = 41;
+            constexpr unsigned int Nb = 41;
 
             /**
              * \brief Specifies \e Molybdenum.
              */
-            const unsigned int Mo = 42;
+            constexpr unsigned int Mo = 42;
 
             /**
              * \brief Specifies \e Technetium.
              */
-            const unsigned int Tc = 43;
+            constexpr unsigned int Tc = 43;
 
             /**
              * \brief Specifies \e Ruthenium.
              */
-            const unsigned int Ru = 44;
+            constexpr unsigned int Ru = 44;
 
             /**
              * \brief Specifies \e Rhodium.
              */
-            const unsigned int Rh = 45;
+            constexpr unsigned int Rh = 45;
 
             /**
              * \brief Specifies \e Palladium.
              */
-            const unsigned int Pd = 46;
+            constexpr unsigned int Pd = 46;
 
             /**
              * \brief Specifies \e Silver.
              */
-            const unsigned int Ag = 47;
+            constexpr unsigned int Ag = 47;
 
             /**
              * \brief Specifies \e Cadmium.
              */
-            const unsigned int Cd = 48;
+            constexpr unsigned int Cd = 48;
 
             /**
              * \brief Specifies \e Indium.
              */
-            const unsigned int In = 49;
+            constexpr unsigned int In = 49;
 
             /**
              * \brief Specifies \e Tin.
              */
-            const unsigned int Sn = 50;
+            constexpr unsigned int Sn = 50;
 
             /**
              * \brief Specifies \e Antimony.
              */
-            const unsigned int Sb = 51;
+            constexpr unsigned int Sb = 51;
 
             /**
              * \brief Specifies \e Tellurium.
              */
-            const unsigned int Te = 52;
+            constexpr unsigned int Te = 52;
 
             /**
              * \brief Specifies \e Iodine.
              */
-            const unsigned int I = 53;
+            constexpr unsigned int I = 53;
 
             /**
              * \brief Specifies \e Xenon.
              */
-            const unsigned int Xe = 54;
+            constexpr unsigned int Xe = 54;
 
             /**
              * \brief Specifies \e Caesium.
              */
-            const unsigned int Cs = 55;
+            constexpr unsigned int Cs = 55;
 
             /**
              * \brief Specifies \e Barium.
              */
-            const unsigned int Ba = 56;
+            constexpr unsigned int Ba = 56;
 
             /**
              * \brief Specifies \e Lanthanum.
              */
-            const unsigned int La = 57;
+            constexpr unsigned int La = 57;
 
             /**
              * \brief Specifies \e Cerium.
              */
-            const unsigned int Ce = 58;
+            constexpr unsigned int Ce = 58;
 
             /**
              * \brief Specifies \e Praseodymium.
              */
-            const unsigned int Pr = 59;
+            constexpr unsigned int Pr = 59;
 
             /**
              * \brief Specifies \e Neodymium.
              */
-            const unsigned int Nd = 60;
+            constexpr unsigned int Nd = 60;
 
             /**
              * \brief Specifies \e Promethium.
              */
-            const unsigned int Pm = 61;
+            constexpr unsigned int Pm = 61;
 
             /**
              * \brief Specifies \e Samarium.
              */
-            const unsigned int Sm = 62;
+            constexpr unsigned int Sm = 62;
 
             /**
              * \brief Specifies \e Europium.
              */
-            const unsigned int Eu = 63;
+            constexpr unsigned int Eu = 63;
 
             /**
              * \brief Specifies \e Gadolinium.
              */
-            const unsigned int Gd = 64;
+            constexpr unsigned int Gd = 64;
 
             /**
              * \brief Specifies \e Terbium.
              */
-            const unsigned int Tb = 65;
+            constexpr unsigned int Tb = 65;
 
             /**
              * \brief Specifies \e Dysprosium.
              */
-            const unsigned int Dy = 66;
+            constexpr unsigned int Dy = 66;
 
             /**
              * \brief Specifies \e Holmium.
              */
-            const unsigned int Ho = 67;
+            constexpr unsigned int Ho = 67;
 
             /**
              * \brief Specifies \e Erbium.
              */
-            const unsigned int Er = 68;
+            constexpr unsigned int Er = 68;
 
             /**
              * \brief Specifies \e Thulium.
              */
-            const unsigned int Tm = 69;
+            constexpr unsigned int Tm = 69;
 
             /**
              * \brief Specifies \e Ytterbium.
              */
-            const unsigned int Yb = 70;
+            constexpr unsigned int Yb = 70;
 
             /**
              * \brief Specifies \e Lutetium.
              */
-            const unsigned int Lu = 71;
+            constexpr unsigned int Lu = 71;
 
             /**
              * \brief Specifies \e Hafnium.
              */
-            const unsigned int Hf = 72;
+            constexpr unsigned int Hf = 72;
 
             /**
              * \brief Specifies \e Tantalum.
              */
-            const unsigned int Ta = 73;
+            constexpr unsigned int Ta = 73;
 
             /**
              * \brief Specifies \e Tungsten.
              */
-            const unsigned int W = 74;
+            constexpr unsigned int W = 74;
 
             /**
              * \brief Specifies \e Rhenium.
              */
-            const unsigned int Re = 75;
+            constexpr unsigned int Re = 75;
 
             /**
              * \brief Specifies \e Osmium.
              */
-            const unsigned int Os = 76;
+            constexpr unsigned int Os = 76;
 
             /**
              * \brief Specifies \e Iridium.
              */
-            const unsigned int Ir = 77;
+            constexpr unsigned int Ir = 77;
 
             /**
              * \brief Specifies \e Platinum.
              */
-            const unsigned int Pt = 78;
+            constexpr unsigned int Pt = 78;
 
             /**
              * \brief Specifies \e Gold.
              */
-            const unsigned int Au = 79;
+            constexpr unsigned int Au = 79;
 
             /**
              * \brief Specifies \e Mercury.
              */
-            const unsigned int Hg = 80;
+            constexpr unsigned int Hg = 80;
 
             /**
              * \brief Specifies \e Thallium.
              */
-            const unsigned int Tl = 81;
+            constexpr unsigned int Tl = 81;
 
             /**
              * \brief Specifies \e Lead.
              */
-            const unsigned int Pb = 82;
+            constexpr unsigned int Pb = 82;
 
             /**
              * \brief Specifies \e Bismuth.
              */
-            const unsigned int Bi = 83;
+            constexpr unsigned int Bi = 83;
 
             /**
              * \brief Specifies \e Polonium.
              */
-            const unsigned int Po = 84;
+            constexpr unsigned int Po = 84;
 
             /**
              * \brief Specifies \e Astatine.
              */
-            const unsigned int At = 85;
+            constexpr unsigned int At = 85;
 
             /**
              * \brief Specifies \e Radon.
              */
-            const unsigned int Rn = 86;
+            constexpr unsigned int Rn = 86;
 
             /**
              * \brief Specifies \e Francium.
              */
-            const unsigned int Fr = 87;
+            constexpr unsigned int Fr = 87;
 
             /**
              * \brief Specifies \e Radium.
              */
-            const unsigned int Ra = 88;
+            constexpr unsigned int Ra = 88;
 
             /**
              * \brief Specifies \e Actinium.
              */
-            const unsigned int Ac = 89;
+            constexpr unsigned int Ac = 89;
 
             /**
              * \brief Specifies \e Thorium.
              */
-            const unsigned int Th = 90;
+            constexpr unsigned int Th = 90;
 
             /**
              * \brief Specifies \e Protactinium.
              */
-            const unsigned int Pa = 91;
+            constexpr unsigned int Pa = 91;
 
             /**
              * \brief Specifies \e Uranium.
              */
-            const unsigned int U = 92;
+            constexpr unsigned int U = 92;
 
             /**
              * \brief Specifies \e Neptunium.
              */
-            const unsigned int Np = 93;
+            constexpr unsigned int Np = 93;
 
             /**
              * \brief Specifies \e Plutonium.
              */
-            const unsigned int Pu = 94;
+            constexpr unsigned int Pu = 94;
 
             /**
              * \brief Specifies \e Americium.
              */
-            const unsigned int Am = 95;
+            constexpr unsigned int Am = 95;
 
             /**
              * \brief Specifies \e Curium.
              */
-            const unsigned int Cm = 96;
+            constexpr unsigned int Cm = 96;
 
             /**
              * \brief Specifies \e Berkelium.
              */
-            const unsigned int Bk = 97;
+            constexpr unsigned int Bk = 97;
 
             /**
              * \brief Specifies \e Californium.
              */
-            const unsigned int Cf = 98;
+            constexpr unsigned int Cf = 98;
 
             /**
              * \brief Specifies \e Einsteinium.
              */
-            const unsigned int Es = 99;
+            constexpr unsigned int Es = 99;
 
             /**
              * \brief Specifies \e Fermium.
              */
-            const unsigned int Fm = 100;
+            constexpr unsigned int Fm = 100;
 
             /**
              * \brief Specifies \e Mendelevium.
              */
-            const unsigned int Md = 101;
+            constexpr unsigned int Md = 101;
 
             /**
              * \brief Specifies \e Nobelium.
              */
-            const unsigned int No = 102;
+            constexpr unsigned int No = 102;
 
             /**
              * \brief Specifies \e Lawrencium.
              */
-            const unsigned int Lr = 103;
+            constexpr unsigned int Lr = 103;
 
             /**
              * \brief Specifies \e Rutherfordium.
              */
-            const unsigned int Rf = 104;
+            constexpr unsigned int Rf = 104;
 
             /**
              * \brief Specifies \e Dubnium.
              */
-            const unsigned int Db = 105;
+            constexpr unsigned int Db = 105;
 
             /**
              * \brief Specifies \e Seaborgium.
              */
-            const unsigned int Sg = 106;
+            constexpr unsigned int Sg = 106;
 
             /**
              * \brief Specifies \e Bohrium.
              */
-            const unsigned int Bh = 107;
+            constexpr unsigned int Bh = 107;
 
             /**
              * \brief Specifies \e Hassium.
              */
-            const unsigned int Hs = 108;
+            constexpr unsigned int Hs = 108;
 
             /**
              * \brief Specifies \e Meitnerium.
              */
-            const unsigned int Mt = 109;
+            constexpr unsigned int Mt = 109;
 
             /**
              * \brief Marks the end of the supported chemical elements.
              */
-            const unsigned int MAX_ATOMIC_NO = Mt;
+            constexpr unsigned int MAX_ATOMIC_NO = Mt;
 
             /**
              * \brief A generic type that covers any element except hydrogen.
              */
-            const unsigned int A = MAX_ATOMIC_NO + 1;
+            constexpr unsigned int A = MAX_ATOMIC_NO + 1;
 
             /**
              * \brief A generic type that covers any element.
              */
-            const unsigned int AH = MAX_ATOMIC_NO + 2;
+            constexpr unsigned int AH = MAX_ATOMIC_NO + 2;
 
             /**
              * \brief A generic type that covers any element except hydrogen and carbon.
              */
-            const unsigned int Q = MAX_ATOMIC_NO + 3;
+            constexpr unsigned int Q = MAX_ATOMIC_NO + 3;
 
             /**
              * \brief A generic type that covers any element except carbon.
              */
-            const unsigned int QH = MAX_ATOMIC_NO + 4;
+            constexpr unsigned int QH = MAX_ATOMIC_NO + 4;
 
             /**
              * \brief A generic type that covers any element that is a metal.
              */
-            const unsigned int M = MAX_ATOMIC_NO + 5;
+            constexpr unsigned int M = MAX_ATOMIC_NO + 5;
 
             /**
              * \brief A generic type that covers hydrogen and any element that is a metal.
              */
-            const unsigned int MH = MAX_ATOMIC_NO + 6;
+            constexpr unsigned int MH = MAX_ATOMIC_NO + 6;
 
             /**
              * \brief A generic type that covers any element that is a halogen.
              */
-            const unsigned int X = MAX_ATOMIC_NO + 7;
+            constexpr unsigned int X = MAX_ATOMIC_NO + 7;
 
             /**
              * \brief A generic type that covers hydrogen and any element that is a halogen.
              */
-            const unsigned int XH = MAX_ATOMIC_NO + 8;
+            constexpr unsigned int XH = MAX_ATOMIC_NO + 8;
 
             /**
              * \brief A generic type that covers any element (equivalent to AtomType::AH).
              */
-            const unsigned int ANY = MAX_ATOMIC_NO + 9;
+            constexpr unsigned int ANY = MAX_ATOMIC_NO + 9;
 
             /**
              * \brief A generic type for heteroatoms (N, O, S or P).
              */
-            const unsigned int HET = MAX_ATOMIC_NO + 10;
+            constexpr unsigned int HET = MAX_ATOMIC_NO + 10;
 
             /**
              * \brief Marks the end of all supported atom types.
              */
-            const unsigned int MAX_TYPE = HET;
+            constexpr unsigned int MAX_TYPE = HET;
         } // namespace AtomType
     } // namespace Chem
 } // namespace CDPL

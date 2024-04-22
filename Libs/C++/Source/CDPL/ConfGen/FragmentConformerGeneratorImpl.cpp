@@ -66,10 +66,10 @@ namespace
         return (conf_data1->getEnergy() < conf_data2->getEnergy());
     } 
 
-    const std::size_t MAX_CONF_DATA_CACHE_SIZE            = 500;
-    const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS        = 10;
-    const std::size_t MAX_NUM_SYM_MAPPINGS                = 64;
-    const double      ELASTIC_POTENTIAL_FORCE_CONST       = 500.0;
+    constexpr std::size_t MAX_CONF_DATA_CACHE_SIZE            = 500;
+    constexpr std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS        = 10;
+    constexpr std::size_t MAX_NUM_SYM_MAPPINGS                = 64;
+    constexpr double      ELASTIC_POTENTIAL_FORCE_CONST       = 500.0;
 }
 
 

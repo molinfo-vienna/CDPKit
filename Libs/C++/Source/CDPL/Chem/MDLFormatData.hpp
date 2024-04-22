@@ -38,15 +38,15 @@ namespace CDPL
         namespace MDL
         {
 
-            const std::size_t MAX_LINE_LENGTH      = 80;
-            const std::size_t MAX_DATA_LINE_LENGTH = 200;
-            const char        END_OF_LINE          = '\n';
+            constexpr std::size_t MAX_LINE_LENGTH      = 80;
+            constexpr std::size_t MAX_DATA_LINE_LENGTH = 200;
+            constexpr char        END_OF_LINE          = '\n';
 
             namespace V3000
             {
 
                 const std::string LINE_PREFIX            = "M  V30 ";
-                const char        LINE_CONTINUATION_MARK = '-';
+                constexpr char        LINE_CONTINUATION_MARK = '-';
 
                 const std::string BLOCK_BEGIN_TAG = "BEGIN";
                 const std::string BLOCK_END_TAG   = "END";
@@ -54,10 +54,10 @@ namespace CDPL
                 const std::string DATA_END_TAG     = "M  END";
                 const std::string DATA_END_TAG_ALT = "M END";
 
-                const char KEYWORD_VALUE_SEPARATOR = '=';
-                const char STRING_QUOTE_CHAR       = '"';
-                const char VALUE_LIST_START_DELIM  = '(';
-                const char VALUE_LIST_END_DELIM    = ')';
+                constexpr char KEYWORD_VALUE_SEPARATOR = '=';
+                constexpr char STRING_QUOTE_CHAR       = '"';
+                constexpr char VALUE_LIST_START_DELIM  = '(';
+                constexpr char VALUE_LIST_END_DELIM    = ')';
             } // namespace V3000
 
             namespace MOLFile
@@ -76,8 +76,8 @@ namespace CDPL
                 namespace CountsLine
                 {
 
-                    const unsigned int CHIRAL_FLAG_OFF = 0;
-                    const unsigned int CHIRAL_FLAG_ON  = 1;
+                    constexpr unsigned int CHIRAL_FLAG_OFF = 0;
+                    constexpr unsigned int CHIRAL_FLAG_ON  = 1;
 
                     const std::string V2000_TAG = "V2000";
                     const std::string V3000_TAG = "V3000";
@@ -92,81 +92,81 @@ namespace CDPL
                         namespace AtomBlock
                         {
 
-                            const int MAX_MASS_DIFF = 4;
-                            const int MIN_MASS_DIFF = -3;
+                            constexpr int MAX_MASS_DIFF = 4;
+                            constexpr int MIN_MASS_DIFF = -3;
 
-                            const unsigned int CHARGE_0        = 0;
-                            const unsigned int CHARGE_P1       = 3;
-                            const unsigned int CHARGE_P2       = 2;
-                            const unsigned int CHARGE_P3       = 1;
-                            const unsigned int CHARGE_M1       = 5;
-                            const unsigned int CHARGE_M2       = 6;
-                            const unsigned int CHARGE_M3       = 7;
-                            const unsigned int DOUBLET_RADICAL = 4;
+                            constexpr unsigned int CHARGE_0        = 0;
+                            constexpr unsigned int CHARGE_P1       = 3;
+                            constexpr unsigned int CHARGE_P2       = 2;
+                            constexpr unsigned int CHARGE_P3       = 1;
+                            constexpr unsigned int CHARGE_M1       = 5;
+                            constexpr unsigned int CHARGE_M2       = 6;
+                            constexpr unsigned int CHARGE_M3       = 7;
+                            constexpr unsigned int DOUBLET_RADICAL = 4;
 
-                            const unsigned int STEREO_PARITY_NONE   = 0;
-                            const unsigned int STEREO_PARITY_ODD    = 1;
-                            const unsigned int STEREO_PARITY_EVEN   = 2;
-                            const unsigned int STEREO_PARITY_EITHER = 3;
+                            constexpr unsigned int STEREO_PARITY_NONE   = 0;
+                            constexpr unsigned int STEREO_PARITY_ODD    = 1;
+                            constexpr unsigned int STEREO_PARITY_EVEN   = 2;
+                            constexpr unsigned int STEREO_PARITY_EITHER = 3;
 
-                            const unsigned int HYDROGEN_COUNT_UNDEF = 0;
-                            const unsigned int HYDROGEN_COUNT_E0    = 1;
-                            const unsigned int HYDROGEN_COUNT_GE1   = 2;
-                            const unsigned int HYDROGEN_COUNT_GE2   = 3;
-                            const unsigned int HYDROGEN_COUNT_GE3   = 4;
-                            const unsigned int HYDROGEN_COUNT_GE4   = 5;
+                            constexpr unsigned int HYDROGEN_COUNT_UNDEF = 0;
+                            constexpr unsigned int HYDROGEN_COUNT_E0    = 1;
+                            constexpr unsigned int HYDROGEN_COUNT_GE1   = 2;
+                            constexpr unsigned int HYDROGEN_COUNT_GE2   = 3;
+                            constexpr unsigned int HYDROGEN_COUNT_GE3   = 4;
+                            constexpr unsigned int HYDROGEN_COUNT_GE4   = 5;
 
-                            const unsigned int DB_STEREO_IGNORE = 0;
-                            const unsigned int DB_STEREO_MATCH  = 1;
+                            constexpr unsigned int DB_STEREO_IGNORE = 0;
+                            constexpr unsigned int DB_STEREO_MATCH  = 1;
 
-                            const unsigned int VALENCE_UNDEF = 0;
-                            const unsigned int VALENCE_MAX   = 14;
-                            const unsigned int VALENCE_ZERO  = 15;
+                            constexpr unsigned int VALENCE_UNDEF = 0;
+                            constexpr unsigned int VALENCE_MAX   = 14;
+                            constexpr unsigned int VALENCE_ZERO  = 15;
 
-                            const std::size_t RXN_MAPPING_NO_UNDEF = 0;
+                            constexpr std::size_t RXN_MAPPING_NO_UNDEF = 0;
 
-                            const unsigned int RXN_INV_RET_UNDEF     = 0;
-                            const unsigned int RXN_INV_RET_INVERSION = 1;
-                            const unsigned int RXN_INV_RET_RETENTION = 2;
+                            constexpr unsigned int RXN_INV_RET_UNDEF     = 0;
+                            constexpr unsigned int RXN_INV_RET_INVERSION = 1;
+                            constexpr unsigned int RXN_INV_RET_RETENTION = 2;
 
-                            const unsigned int RXN_CHANGE_UNDEF = 0;
-                            const unsigned int RXN_CHANGE_EXACT = 1;
+                            constexpr unsigned int RXN_CHANGE_UNDEF = 0;
+                            constexpr unsigned int RXN_CHANGE_EXACT = 1;
                         } // namespace AtomBlock
 
                         namespace BondBlock
                         {
 
-                            const unsigned int TYPE_SINGLE          = 1;
-                            const unsigned int TYPE_DOUBLE          = 2;
-                            const unsigned int TYPE_TRIPLE          = 3;
-                            const unsigned int TYPE_AROMATIC        = 4;
-                            const unsigned int TYPE_SINGLE_DOUBLE   = 5;
-                            const unsigned int TYPE_SINGLE_AROMATIC = 6;
-                            const unsigned int TYPE_DOUBLE_AROMATIC = 7;
-                            const unsigned int TYPE_ANY             = 8;
+                            constexpr unsigned int TYPE_SINGLE          = 1;
+                            constexpr unsigned int TYPE_DOUBLE          = 2;
+                            constexpr unsigned int TYPE_TRIPLE          = 3;
+                            constexpr unsigned int TYPE_AROMATIC        = 4;
+                            constexpr unsigned int TYPE_SINGLE_DOUBLE   = 5;
+                            constexpr unsigned int TYPE_SINGLE_AROMATIC = 6;
+                            constexpr unsigned int TYPE_DOUBLE_AROMATIC = 7;
+                            constexpr unsigned int TYPE_ANY             = 8;
 
-                            const unsigned int STEREO_NONE      = 0;
-                            const unsigned int STEREO_UP        = 1;
-                            const unsigned int STEREO_DOWN      = 6;
-                            const unsigned int STEREO_EITHER    = 4;
-                            const unsigned int STEREO_EITHER_DB = 3;
+                            constexpr unsigned int STEREO_NONE      = 0;
+                            constexpr unsigned int STEREO_UP        = 1;
+                            constexpr unsigned int STEREO_DOWN      = 6;
+                            constexpr unsigned int STEREO_EITHER    = 4;
+                            constexpr unsigned int STEREO_EITHER_DB = 3;
 
-                            const unsigned int TOPOLOGY_EITHER = 0;
-                            const unsigned int TOPOLOGY_RING   = 1;
-                            const unsigned int TOPOLOGY_CHAIN  = 2;
+                            constexpr unsigned int TOPOLOGY_EITHER = 0;
+                            constexpr unsigned int TOPOLOGY_RING   = 1;
+                            constexpr unsigned int TOPOLOGY_CHAIN  = 2;
 
-                            const int RXN_STATUS_UNMARKED     = 0;
-                            const int RXN_STATUS_NO_CENTER    = -1;
-                            const int RXN_STATUS_IS_CENTER    = 1;
-                            const int RXN_STATUS_NO_CHANGE    = 2;
-                            const int RXN_STATUS_MADE_BROKEN  = 4;
-                            const int RXN_STATUS_ORDER_CHANGE = 8;
+                            constexpr int RXN_STATUS_UNMARKED     = 0;
+                            constexpr int RXN_STATUS_NO_CENTER    = -1;
+                            constexpr int RXN_STATUS_IS_CENTER    = 1;
+                            constexpr int RXN_STATUS_NO_CHANGE    = 2;
+                            constexpr int RXN_STATUS_MADE_BROKEN  = 4;
+                            constexpr int RXN_STATUS_ORDER_CHANGE = 8;
                         } // namespace BondBlock
 
                         namespace AListBlock
                         {
 
-                            const std::size_t MAX_ENTRIES = 5;
+                            constexpr std::size_t MAX_ENTRIES = 5;
 
                             const std::string NORMAL_LIST_FLAG = "F";
                             const std::string NOT_LIST_FLAG    = "T";
@@ -189,41 +189,41 @@ namespace CDPL
                             const std::string REGISTRY_NO_PREFIX        = "M  REG";
                             const std::string LINE_PREFIX               = "M  ";
 
-                            const std::size_t MAX_CHARGE_ENTRIES             = 8;
-                            const std::size_t MAX_RADICAL_ENTRIES            = 8;
-                            const std::size_t MAX_ISOTOPE_ENTRIES            = 8;
-                            const std::size_t MAX_RING_BOND_COUNT_ENTRIES    = 8;
-                            const std::size_t MAX_SUBSTITUTION_COUNT_ENTRIES = 8;
-                            const std::size_t MAX_UNSATURATION_ENTRIES       = 8;
-                            const std::size_t MAX_ATOM_LIST_ENTRIES          = 16;
+                            constexpr std::size_t MAX_CHARGE_ENTRIES             = 8;
+                            constexpr std::size_t MAX_RADICAL_ENTRIES            = 8;
+                            constexpr std::size_t MAX_ISOTOPE_ENTRIES            = 8;
+                            constexpr std::size_t MAX_RING_BOND_COUNT_ENTRIES    = 8;
+                            constexpr std::size_t MAX_SUBSTITUTION_COUNT_ENTRIES = 8;
+                            constexpr std::size_t MAX_UNSATURATION_ENTRIES       = 8;
+                            constexpr std::size_t MAX_ATOM_LIST_ENTRIES          = 16;
 
-                            const int MIN_CHARGE = -15;
-                            const int MAX_CHARGE = 15;
+                            constexpr int MIN_CHARGE = -15;
+                            constexpr int MAX_CHARGE = 15;
 
-                            const unsigned int NO_RADICAL      = 0;
-                            const unsigned int SINGLET_RADICAL = 1;
-                            const unsigned int DOUBLET_RADICAL = 2;
-                            const unsigned int TRIPLET_RADICAL = 3;
+                            constexpr unsigned int NO_RADICAL      = 0;
+                            constexpr unsigned int SINGLET_RADICAL = 1;
+                            constexpr unsigned int DOUBLET_RADICAL = 2;
+                            constexpr unsigned int TRIPLET_RADICAL = 3;
 
-                            const int RING_BOND_COUNT_UNDEF = 0;
-                            const int RING_BOND_COUNT_E0    = -1;
-                            const int RING_BOND_COUNT_DRAWN = -2;
-                            const int RING_BOND_COUNT_E2    = 2;
-                            const int RING_BOND_COUNT_E3    = 3;
-                            const int RING_BOND_COUNT_GE4   = 4;
+                            constexpr int RING_BOND_COUNT_UNDEF = 0;
+                            constexpr int RING_BOND_COUNT_E0    = -1;
+                            constexpr int RING_BOND_COUNT_DRAWN = -2;
+                            constexpr int RING_BOND_COUNT_E2    = 2;
+                            constexpr int RING_BOND_COUNT_E3    = 3;
+                            constexpr int RING_BOND_COUNT_GE4   = 4;
 
-                            const int SUBSTITUTION_COUNT_UNDEF = 0;
-                            const int SUBSTITUTION_COUNT_E0    = -1;
-                            const int SUBSTITUTION_COUNT_DRAWN = -2;
-                            const int SUBSTITUTION_COUNT_E1    = 1;
-                            const int SUBSTITUTION_COUNT_E2    = 2;
-                            const int SUBSTITUTION_COUNT_E3    = 3;
-                            const int SUBSTITUTION_COUNT_E4    = 4;
-                            const int SUBSTITUTION_COUNT_E5    = 5;
-                            const int SUBSTITUTION_COUNT_GE6   = 6;
+                            constexpr int SUBSTITUTION_COUNT_UNDEF = 0;
+                            constexpr int SUBSTITUTION_COUNT_E0    = -1;
+                            constexpr int SUBSTITUTION_COUNT_DRAWN = -2;
+                            constexpr int SUBSTITUTION_COUNT_E1    = 1;
+                            constexpr int SUBSTITUTION_COUNT_E2    = 2;
+                            constexpr int SUBSTITUTION_COUNT_E3    = 3;
+                            constexpr int SUBSTITUTION_COUNT_E4    = 4;
+                            constexpr int SUBSTITUTION_COUNT_E5    = 5;
+                            constexpr int SUBSTITUTION_COUNT_GE6   = 6;
 
-                            const unsigned int UNSATURATION_UNDEF = 0;
-                            const unsigned int UNSATURATION_ON    = 1;
+                            constexpr unsigned int UNSATURATION_UNDEF = 0;
+                            constexpr unsigned int UNSATURATION_ON    = 1;
 
                             const std::string NORMAL_ATOM_LIST_FLAG = "F";
                             const std::string NOT_ATOM_LIST_FLAG    = "T";
@@ -242,8 +242,8 @@ namespace CDPL
 
                             const std::string REGISTRY_NO_KEYWORD = "REGNO";
 
-                            const unsigned int CHIRAL_FLAG_OFF = 0;
-                            const unsigned int CHIRAL_FLAG_ON  = 1;
+                            constexpr unsigned int CHIRAL_FLAG_OFF = 0;
+                            constexpr unsigned int CHIRAL_FLAG_ON  = 1;
                         } // namespace CountsLine
 
                         namespace AtomBlock
@@ -269,60 +269,60 @@ namespace CDPL
 
                             const std::string NOT_ATOM_LIST_TAG = "NOT";
 
-                            const char ATOM_LIST_START_DELIMITER = '[';
-                            const char ATOM_LIST_END_DELIMITER   = ']';
-                            const char ATOM_LIST_SEPARATOR       = ',';
+                            constexpr char ATOM_LIST_START_DELIMITER = '[';
+                            constexpr char ATOM_LIST_END_DELIMITER   = ']';
+                            constexpr char ATOM_LIST_SEPARATOR       = ',';
 
-                            const int MIN_CHARGE = -15;
-                            const int MAX_CHARGE = 15;
+                            constexpr int MIN_CHARGE = -15;
+                            constexpr int MAX_CHARGE = 15;
 
-                            const unsigned int NO_RADICAL      = 0;
-                            const unsigned int SINGLET_RADICAL = 1;
-                            const unsigned int DOUBLET_RADICAL = 2;
-                            const unsigned int TRIPLET_RADICAL = 3;
+                            constexpr unsigned int NO_RADICAL      = 0;
+                            constexpr unsigned int SINGLET_RADICAL = 1;
+                            constexpr unsigned int DOUBLET_RADICAL = 2;
+                            constexpr unsigned int TRIPLET_RADICAL = 3;
 
-                            const unsigned int STEREO_PARITY_NONE   = 0;
-                            const unsigned int STEREO_PARITY_ODD    = 1;
-                            const unsigned int STEREO_PARITY_EVEN   = 2;
-                            const unsigned int STEREO_PARITY_EITHER = 3;
+                            constexpr unsigned int STEREO_PARITY_NONE   = 0;
+                            constexpr unsigned int STEREO_PARITY_ODD    = 1;
+                            constexpr unsigned int STEREO_PARITY_EVEN   = 2;
+                            constexpr unsigned int STEREO_PARITY_EITHER = 3;
 
-                            const int VALENCE_UNDEF = 0;
-                            const int VALENCE_ZERO  = -1;
+                            constexpr int VALENCE_UNDEF = 0;
+                            constexpr int VALENCE_ZERO  = -1;
 
-                            const int HYDROGEN_COUNT_UNDEF = 0;
-                            const int HYDROGEN_COUNT_E0    = -1;
-                            const int HYDROGEN_COUNT_GE1   = 1;
-                            const int HYDROGEN_COUNT_GE2   = 2;
-                            const int HYDROGEN_COUNT_GE3   = 3;
-                            const int HYDROGEN_COUNT_GE4   = 4;
+                            constexpr int HYDROGEN_COUNT_UNDEF = 0;
+                            constexpr int HYDROGEN_COUNT_E0    = -1;
+                            constexpr int HYDROGEN_COUNT_GE1   = 1;
+                            constexpr int HYDROGEN_COUNT_GE2   = 2;
+                            constexpr int HYDROGEN_COUNT_GE3   = 3;
+                            constexpr int HYDROGEN_COUNT_GE4   = 4;
 
-                            const unsigned int DB_STEREO_IGNORE = 0;
-                            const unsigned int DB_STEREO_MATCH  = 1;
+                            constexpr unsigned int DB_STEREO_IGNORE = 0;
+                            constexpr unsigned int DB_STEREO_MATCH  = 1;
 
-                            const unsigned int RXN_INV_RET_UNDEF     = 0;
-                            const unsigned int RXN_INV_RET_INVERSION = 1;
-                            const unsigned int RXN_INV_RET_RETENTION = 2;
+                            constexpr unsigned int RXN_INV_RET_UNDEF     = 0;
+                            constexpr unsigned int RXN_INV_RET_INVERSION = 1;
+                            constexpr unsigned int RXN_INV_RET_RETENTION = 2;
 
-                            const unsigned int RXN_CHANGE_UNDEF = 0;
-                            const unsigned int RXN_CHANGE_EXACT = 1;
+                            constexpr unsigned int RXN_CHANGE_UNDEF = 0;
+                            constexpr unsigned int RXN_CHANGE_EXACT = 1;
 
-                            const int SUBSTITUTION_COUNT_UNDEF = 0;
-                            const int SUBSTITUTION_COUNT_E0    = -1;
-                            const int SUBSTITUTION_COUNT_E1    = 1;
-                            const int SUBSTITUTION_COUNT_E2    = 2;
-                            const int SUBSTITUTION_COUNT_E3    = 3;
-                            const int SUBSTITUTION_COUNT_E4    = 4;
-                            const int SUBSTITUTION_COUNT_E5    = 5;
-                            const int SUBSTITUTION_COUNT_GE6   = 6;
+                            constexpr int SUBSTITUTION_COUNT_UNDEF = 0;
+                            constexpr int SUBSTITUTION_COUNT_E0    = -1;
+                            constexpr int SUBSTITUTION_COUNT_E1    = 1;
+                            constexpr int SUBSTITUTION_COUNT_E2    = 2;
+                            constexpr int SUBSTITUTION_COUNT_E3    = 3;
+                            constexpr int SUBSTITUTION_COUNT_E4    = 4;
+                            constexpr int SUBSTITUTION_COUNT_E5    = 5;
+                            constexpr int SUBSTITUTION_COUNT_GE6   = 6;
 
-                            const unsigned int UNSATURATION_UNDEF = 0;
-                            const unsigned int UNSATURATION_ON    = 1;
+                            constexpr unsigned int UNSATURATION_UNDEF = 0;
+                            constexpr unsigned int UNSATURATION_ON    = 1;
 
-                            const int RING_BOND_COUNT_UNDEF = 0;
-                            const int RING_BOND_COUNT_E0    = -1;
-                            const int RING_BOND_COUNT_E2    = 2;
-                            const int RING_BOND_COUNT_E3    = 3;
-                            const int RING_BOND_COUNT_GE4   = 4;
+                            constexpr int RING_BOND_COUNT_UNDEF = 0;
+                            constexpr int RING_BOND_COUNT_E0    = -1;
+                            constexpr int RING_BOND_COUNT_E2    = 2;
+                            constexpr int RING_BOND_COUNT_E3    = 3;
+                            constexpr int RING_BOND_COUNT_GE4   = 4;
                         } // namespace AtomBlock
 
                         namespace BondBlock
@@ -335,33 +335,33 @@ namespace CDPL
                             const std::string STEREO_BOX_KEYWORD        = "STBOX";
                             const std::string RXN_CENTER_STATUS_KEYWORD = "RXCTR";
 
-                            const unsigned int TYPE_SINGLE          = 1;
-                            const unsigned int TYPE_DOUBLE          = 2;
-                            const unsigned int TYPE_TRIPLE          = 3;
-                            const unsigned int TYPE_AROMATIC        = 4;
-                            const unsigned int TYPE_SINGLE_DOUBLE   = 5;
-                            const unsigned int TYPE_SINGLE_AROMATIC = 6;
-                            const unsigned int TYPE_DOUBLE_AROMATIC = 7;
-                            const unsigned int TYPE_ANY             = 8;
+                            constexpr unsigned int TYPE_SINGLE          = 1;
+                            constexpr unsigned int TYPE_DOUBLE          = 2;
+                            constexpr unsigned int TYPE_TRIPLE          = 3;
+                            constexpr unsigned int TYPE_AROMATIC        = 4;
+                            constexpr unsigned int TYPE_SINGLE_DOUBLE   = 5;
+                            constexpr unsigned int TYPE_SINGLE_AROMATIC = 6;
+                            constexpr unsigned int TYPE_DOUBLE_AROMATIC = 7;
+                            constexpr unsigned int TYPE_ANY             = 8;
 
-                            const unsigned int STEREO_NONE   = 0;
-                            const unsigned int STEREO_UP     = 1;
-                            const unsigned int STEREO_EITHER = 2;
-                            const unsigned int STEREO_DOWN   = 3;
+                            constexpr unsigned int STEREO_NONE   = 0;
+                            constexpr unsigned int STEREO_UP     = 1;
+                            constexpr unsigned int STEREO_EITHER = 2;
+                            constexpr unsigned int STEREO_DOWN   = 3;
 
-                            const unsigned int TOPOLOGY_EITHER = 0;
-                            const unsigned int TOPOLOGY_RING   = 1;
-                            const unsigned int TOPOLOGY_CHAIN  = 2;
+                            constexpr unsigned int TOPOLOGY_EITHER = 0;
+                            constexpr unsigned int TOPOLOGY_RING   = 1;
+                            constexpr unsigned int TOPOLOGY_CHAIN  = 2;
 
-                            const unsigned int DB_STEREO_IGNORE = 0;
-                            const unsigned int DB_STEREO_MATCH  = 1;
+                            constexpr unsigned int DB_STEREO_IGNORE = 0;
+                            constexpr unsigned int DB_STEREO_MATCH  = 1;
 
-                            const int RXN_STATUS_UNMARKED     = 0;
-                            const int RXN_STATUS_NO_CENTER    = -1;
-                            const int RXN_STATUS_IS_CENTER    = 1;
-                            const int RXN_STATUS_NO_CHANGE    = 2;
-                            const int RXN_STATUS_MADE_BROKEN  = 4;
-                            const int RXN_STATUS_ORDER_CHANGE = 8;
+                            constexpr int RXN_STATUS_UNMARKED     = 0;
+                            constexpr int RXN_STATUS_NO_CENTER    = -1;
+                            constexpr int RXN_STATUS_IS_CENTER    = 1;
+                            constexpr int RXN_STATUS_NO_CHANGE    = 2;
+                            constexpr int RXN_STATUS_MADE_BROKEN  = 4;
+                            constexpr int RXN_STATUS_ORDER_CHANGE = 8;
                         } // namespace BondBlock
                     } // namespace V3000
                 } // namespace CTab
@@ -395,7 +395,7 @@ namespace CDPL
             namespace RDFile
             {
 
-                const char RD_FILE_KEYWORD_PREFIX = '$';
+                constexpr char RD_FILE_KEYWORD_PREFIX = '$';
 
                 const std::string RD_FILE_IDENTIFIER    = "$RDFILE";
                 const std::string RD_FILE_VERSION_STAMP = "1";

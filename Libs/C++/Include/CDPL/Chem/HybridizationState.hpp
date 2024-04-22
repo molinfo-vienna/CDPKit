@@ -45,57 +45,57 @@ namespace CDPL
             /**
              * \brief Specifies an unknown hybridization state.
              */
-            const unsigned int UNKNOWN = 0;
+            constexpr unsigned int UNKNOWN = 0;
 
             /**
              * \brief Specifies the hybridization state \e sp.
              */
-            const unsigned int SP = 1;
+            constexpr unsigned int SP = 1;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>1</sup>.
              */
-            const unsigned int SP1 = SP;
+            constexpr unsigned int SP1 = SP;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>2</sup>.
              */
-            const unsigned int SP2 = 2;
+            constexpr unsigned int SP2 = 2;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>3</sup>.
              */
-            const unsigned int SP3 = 3;
+            constexpr unsigned int SP3 = 3;
 
             /**
              * \brief Specifies the hybridization \e dp.
              */
-            const unsigned int DP = 4;
+            constexpr unsigned int DP = 4;
 
             /**
              * \brief Specifies the hybridization state \e sd<sup>3</sup>.
              */
-            const unsigned int SD3 = 5;
+            constexpr unsigned int SD3 = 5;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>2</sup>d.
              */
-            const unsigned int SP2D = 6;
+            constexpr unsigned int SP2D = 6;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>3</sup>d.
              */
-            const unsigned int SP3D = 7;
+            constexpr unsigned int SP3D = 7;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>3</sup>d<sup>2</sup>.
              */
-            const unsigned int SP3D2 = 8;
+            constexpr unsigned int SP3D2 = 8;
 
             /**
              * \brief Specifies the hybridization state \e sp<sup>3</sup>d<sup>3</sup>.
              */
-            const unsigned int SP3D3 = 9;
+            constexpr unsigned int SP3D3 = 9;
         } // namespace HybridizationState
     } // namespace Chem
 } // namespace CDPL

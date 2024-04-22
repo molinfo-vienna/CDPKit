@@ -46,17 +46,17 @@ namespace CDPL
             /**
              * \brief Specifies that the data format version is undefined.
              */
-            const unsigned int UNDEF = 0;
+            constexpr unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies the PDB format version \e V2.
              */
-            const unsigned int V2 = 2;
+            constexpr unsigned int V2 = 2;
 
             /**
              * \brief Specifies the PDB format version \e V3.
              */
-            const unsigned int V3 = 3;
+            constexpr unsigned int V3 = 3;
         } // namespace PDBFormatVersion
     } // namespace Biomol
 } // namespace CDPL

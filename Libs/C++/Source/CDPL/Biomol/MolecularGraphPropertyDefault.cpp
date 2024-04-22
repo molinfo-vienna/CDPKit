@@ -36,8 +36,8 @@ namespace CDPL
         namespace MolecularGraphPropertyDefault
         {
 
-            const std::size_t MODEL_NUMBER     = 0;
-            const char RESIDUE_INSERTION_CODE  = ' ';    
+            constexpr std::size_t MODEL_NUMBER     = 0;
+            constexpr char RESIDUE_INSERTION_CODE  = ' ';    
         }
 
         void initMolecularGraphPropertyDefaults() {}

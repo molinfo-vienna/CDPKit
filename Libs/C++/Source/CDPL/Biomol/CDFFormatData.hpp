@@ -46,31 +46,31 @@ namespace CDPL
             namespace AtomProperty
             {
 
-                const unsigned int PROPERTY_HANDLER_ID = 1;
+                constexpr unsigned int PROPERTY_HANDLER_ID = 1;
 
-                const unsigned int RESIDUE_ATOM_NAME         = 1;
-                const unsigned int RESIDUE_ALT_ATOM_NAME     = 2;
-                const unsigned int RESIDUE_LEAVING_ATOM_FLAG = 3;
-                const unsigned int RESIDUE_LINKING_ATOM_FLAG = 4;
-                const unsigned int RESIDUE_CODE              = 5;
-                const unsigned int RESIDUE_SEQUENCE_NUMBER   = 6;
-                const unsigned int RESIDUE_INSERTION_CODE    = 7;
-                const unsigned int HETERO_ATOM_FLAG          = 8;
-                const unsigned int CHAIN_ID                  = 9;
-                const unsigned int MODEL_NUMBER              = 10;
-                const unsigned int SERIAL_NUMBER             = 11;
+                constexpr unsigned int RESIDUE_ATOM_NAME         = 1;
+                constexpr unsigned int RESIDUE_ALT_ATOM_NAME     = 2;
+                constexpr unsigned int RESIDUE_LEAVING_ATOM_FLAG = 3;
+                constexpr unsigned int RESIDUE_LINKING_ATOM_FLAG = 4;
+                constexpr unsigned int RESIDUE_CODE              = 5;
+                constexpr unsigned int RESIDUE_SEQUENCE_NUMBER   = 6;
+                constexpr unsigned int RESIDUE_INSERTION_CODE    = 7;
+                constexpr unsigned int HETERO_ATOM_FLAG          = 8;
+                constexpr unsigned int CHAIN_ID                  = 9;
+                constexpr unsigned int MODEL_NUMBER              = 10;
+                constexpr unsigned int SERIAL_NUMBER             = 11;
             } // namespace AtomProperty
 
             namespace MolecularGraphProperty
             {
 
-                const unsigned int PROPERTY_HANDLER_ID = 1;
+                constexpr unsigned int PROPERTY_HANDLER_ID = 1;
 
-                const unsigned int RESIDUE_CODE            = 1;
-                const unsigned int RESIDUE_SEQUENCE_NUMBER = 2;
-                const unsigned int RESIDUE_INSERTION_CODE  = 3;
-                const unsigned int CHAIN_ID                = 4;
-                const unsigned int MODEL_NUMBER            = 5;
+                constexpr unsigned int RESIDUE_CODE            = 1;
+                constexpr unsigned int RESIDUE_SEQUENCE_NUMBER = 2;
+                constexpr unsigned int RESIDUE_INSERTION_CODE  = 3;
+                constexpr unsigned int CHAIN_ID                = 4;
+                constexpr unsigned int MODEL_NUMBER            = 5;
             } // namespace MolecularGraphProperty
         } // namespace CDF
     } // namespace Biomol

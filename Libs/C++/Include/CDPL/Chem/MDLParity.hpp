@@ -45,27 +45,27 @@ namespace CDPL
             /**
              * \brief Specifies that the parity of the atom is undefined.
              */
-            const unsigned int UNDEF = 0;
+            constexpr unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies that the atom is not a stereogenic center and thus has no defined parity.
              */
-            const unsigned int NONE = 0x1;
+            constexpr unsigned int NONE = 0x1;
 
             /**
              * \brief Specifies that the atom has an \e odd parity.
              */
-            const unsigned int ODD = 0x2;
+            constexpr unsigned int ODD = 0x2;
 
             /**
              * \brief Specifies that the atom has an \e even parity.
              */
-            const unsigned int EVEN = 0x4;
+            constexpr unsigned int EVEN = 0x4;
 
             /**
              * \brief Specifies that the atom is a stereogenic center but has no defined parity.
              */
-            const unsigned int EITHER = 0x8;
+            constexpr unsigned int EITHER = 0x8;
         } // namespace MDLParity
     } // namespace Chem
 } // namespace CDPL

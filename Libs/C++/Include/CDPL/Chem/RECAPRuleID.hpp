@@ -43,18 +43,18 @@ namespace CDPL
         namespace RECAPRuleID
         {
 
-            const unsigned int NONE                   = 0;
-            const unsigned int AMIDE                  = 1;
-            const unsigned int ESTER                  = 2;
-            const unsigned int AMINE                  = 3;
-            const unsigned int UREA                   = 4;
-            const unsigned int ETHER                  = 5;
-            const unsigned int OLEFIN                 = 6;
-            const unsigned int QUARTERNARY_N          = 7;
-            const unsigned int AROMATIC_N_ALIPHATIC_C = 8;
-            const unsigned int LACTAM_N_ALIPHATIC_C   = 9;
-            const unsigned int AROMATIC_C_AROMATIC_C  = 10;
-            const unsigned int SULFONAMIDE            = 11;
+            constexpr unsigned int NONE                   = 0;
+            constexpr unsigned int AMIDE                  = 1;
+            constexpr unsigned int ESTER                  = 2;
+            constexpr unsigned int AMINE                  = 3;
+            constexpr unsigned int UREA                   = 4;
+            constexpr unsigned int ETHER                  = 5;
+            constexpr unsigned int OLEFIN                 = 6;
+            constexpr unsigned int QUARTERNARY_N          = 7;
+            constexpr unsigned int AROMATIC_N_ALIPHATIC_C = 8;
+            constexpr unsigned int LACTAM_N_ALIPHATIC_C   = 9;
+            constexpr unsigned int AROMATIC_C_AROMATIC_C  = 10;
+            constexpr unsigned int SULFONAMIDE            = 11;
         } // namespace RECAPRuleID
     } // namespace Chem
 } // namespace CDPL
