@@ -59,7 +59,7 @@ namespace CDPL
         {
 
           public:
-            static const std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */
+            static constexpr std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */
 
             /**
              * \brief Default constructor. 
