@@ -25,7 +25,7 @@
 class AtomMatchConstraint(Boost.Python.instance):
 
     ##
-    # \brief Specifies a constraint which requires the target atom to fulfill additional contraints specified by a Chem.MatchConstraintList object.
+    # \brief Specifies a constraint which requires the target atom to fulfill additional constraints specified by a Chem.MatchConstraintList object.
     # 
     CONSTRAINT_LIST = 0
 

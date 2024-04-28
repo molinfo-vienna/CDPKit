@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief A graphics primitive representing a block of styled text that comprises multiple lines.
+# \brief A graphics primitive representing a block of styled text.
+# 
+# Class <tt>TextBlockPrimitive2D</tt> is smiliar to Vis.TextLabelPrimitive2D but way more versatile. <tt>TextBlockPrimitive2D</tt> can store/render text that spans multiple lines with configurable line spacing (see setLineSpacing()) and alignment (see setAlignment()), and supports changing text color and various attributes like font weight and slant for individual text portions. Furthermore, text fragments can be rendered sub/super-scripted, under- and overlined as well as striked out. This is achieved by using an XML-based syntax where a portion of text to be rendered in a particular style is enclosed in specific start and end tags. More information on the syntax, the supported styling tags and their meaning can be found in the documentation of the method setText().
 # 
 class TextBlockPrimitive2D(GraphicsPrimitive2D):
 
@@ -45,7 +47,26 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Specifies the block's text content.
     # 
+    # Color, font attributes and style of individual text fragments can be controlled by enclosing the concerned piece of text in specific XML tags. The following tags are supported:
+    # 
+    # <table>
+    #  <tr><th>Tag</th><th>Effect/Description</th></tr>
+    #  <tr><td><br/></td><td>Line break</td></tr>
+    #  <tr><td><b></td><td>Boldfaced text</td></tr>
+    #  <tr><td><i></td><td>Italicized text</td></tr>
+    #  <tr><td><o></td><td>Overlined text</td></tr>
+    #  <tr><td><u></td><td>Underlined text</td></tr>
+    #  <tr><td><s></td><td>Striked-out text</td></tr>
+    #  <tr><td><sub></td><td>Subscripted text</td></tr>
+    #  <tr><td><sup></td><td>Superscripted text</td></tr>
+    #  <tr><td><color></td><td>Text color; supports the attributes <em>r</em>, <em>g</em>, <em>b</em> and <em>a</em> with a value in the range [0.0, 1.0]; default component values are <em>r=0</em>, <em>b=0</em>, <em>g=0</em> and <em>a=1</em></td></tr>
+    # </table>
+    # 
+    # Newline characters <tt>\n</tt> are regarded and interpreted as such. Tab characters <tt>\t</tt> are replaced by a single whitespace character. Any other special characters are deleted. The supported tags listed above are all optional. Plain ASCII text will thus be rendered using the set font (see setFont()) and color (see setPen()).
+    # 
     # \param text The text content of the block.
+    # 
+    # \throw Base.ValueError if XML parsing of the specified text failed.
     # 
     def setText(text: str) -> None: pass
 
@@ -62,9 +83,9 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def getText() -> str: pass
 
     ##
-    # \brief Tells whether the text block has any renderable text.
+    # \brief Tells whether the text block has any visible text (includes whitespace).
     # 
-    # \return <tt>True</tt> if there is renderable text and <tt>False</tt> otherwise.
+    # \return <tt>True</tt> if there is any visible text and <tt>False</tt> otherwise.
     # 
     def hasText() -> bool: pass
 
@@ -115,6 +136,8 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     # 
     # \param font The font used for text rendering.
     # 
+    # \note Calling this method invalidates the current layout (see layout()).
+    # 
     def setFont(font: Font) -> None: pass
 
     ##
@@ -127,7 +150,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Specifies the way lines should be horizontally aligned.
     # 
-    # Possible values are defined in namespace Vis.Alignment.
+    # Possible horizontal alignment values are defined in namespace Vis.Alignment.
     # 
     # \param alignment The horizontal text alignment specification.
     # 
@@ -136,7 +159,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Returns the active horizontal text alignment specification.
     # 
-    # Possible values are defined in namespace Vis.Alignment.
+    # Possible horizontal alignment values are defined in namespace Vis.Alignment.
     # 
     # \return The current horizontal text alignment specification.
     # 
@@ -145,7 +168,7 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Sets the line spacing value.
     # 
-    # The final base line spacing is the product of the specified line spacing and the font height returned by the method FontMetrics.getHeight() for the set font.
+    # The final base line spacing is the product of the specified line spacing and the font height returned by the method Vis.FontMetrics.getHeight() for the set font.
     # 
     # \param spacing The desired line spacing.
     # 
@@ -159,9 +182,12 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def getLineSpacing() -> float: pass
 
     ##
-    # \brief 
-    # \param font_metrics 
-    #
+    # \brief Performs a layout of the text for the currently specified font using the provided Vis.FontMetrics instance <em>font_metrics</em>.
+    # 
+    # \param font_metrics An instance of a class implementing the Vis.FontMetrics interface.
+    # 
+    # \note This method must be called before the text is rendered by calling the method render(). The methods setText() or setFont() invalidate the text layout.
+    # 
     def layout(font_metrics: FontMetrics) -> None: pass
 
     text = property(getText, setText)
