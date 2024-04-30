@@ -1,5 +1,6 @@
 master:
 
+ - Fixed a problem in Chem::BRICSFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments
  - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
    specify a background fill pattern (see Vis::Brush) for 2D structure renderings
  - New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
