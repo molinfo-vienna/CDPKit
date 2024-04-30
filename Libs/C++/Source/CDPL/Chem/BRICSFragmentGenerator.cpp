@@ -49,10 +49,13 @@ namespace
     Chem::Molecule::SharedPointer L3_L14_Pattern;
     Chem::Molecule::SharedPointer L3_L15_Pattern;
     Chem::Molecule::SharedPointer L3_L16_Pattern;
-    Chem::Molecule::SharedPointer L4_L5_Pattern;
+    Chem::Molecule::SharedPointer L4_L5_1_Pattern;
+    Chem::Molecule::SharedPointer L4_L5_2_Pattern;
     Chem::Molecule::SharedPointer L4_L11_Pattern;
-    Chem::Molecule::SharedPointer L5_L13_Pattern;
-    Chem::Molecule::SharedPointer L5_L15_Pattern;
+    Chem::Molecule::SharedPointer L5_L13_1_Pattern;
+    Chem::Molecule::SharedPointer L5_L13_2_Pattern;
+    Chem::Molecule::SharedPointer L5_L15_1_Pattern;
+    Chem::Molecule::SharedPointer L5_L15_2_Pattern;
     Chem::Molecule::SharedPointer L6_L13_Pattern;
     Chem::Molecule::SharedPointer L6_L14_Pattern;
     Chem::Molecule::SharedPointer L6_L15_Pattern;
@@ -103,25 +106,28 @@ namespace
     {
         using namespace Chem;
 
-        L1_L2_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L2) + "](-[*])(=O)-!@[N^3:" + str(BRICSAtomLabel::L1) + "](-[*])-[*,#1]");
+        L1_L2_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L2) + "](-[*])(=O)-!@[N^3:" + str(BRICSAtomLabel::L1) + "]-[*]");
         L1_L3_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L3) + "](-[*])(=O)-!@[O:" + str(BRICSAtomLabel::L1) + "]-[*]");
         L1_L10_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L10) + "](-[*])(=O)-!@[N:" + str(BRICSAtomLabel::L1) + "](-@[C]=O)-@[#6,#7,#8,#16]");
 
-        L2_L12_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L12) + "](-[*])(-[*,#1])-!@[S:" + str(BRICSAtomLabel::L2) + "](=O)(=O)-[*]");
-        L2_L14_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L14) + "](-[*])(-[*,#1])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c,n,o,s]):[n,o,s]");
-        L2_L16_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L16) + "](-[*])(-[*,#1])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c]):[c]");
+        L2_L12_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L12) + "](-[*])-!@[S:" + str(BRICSAtomLabel::L2) + "](=O)(=O)-[*]");
+        L2_L14_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L14) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c,n,o,s]):[n,o,s]");
+        L2_L16_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L16) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c]):[c]");
 
-        L3_L4_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L4) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L3) + "](-[*])-[*,#1]");
+        L3_L4_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L4) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L3) + "]-[*]");
         L3_L13_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L13) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L3) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
         L3_L14_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L14) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L3) + "](:[c,n,o,s]):[n,o,s]");
         L3_L15_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L15) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L3) + "](-@[C])-@[C]");
         L3_L16_Pattern = parseSMARTS("[O:" + str(BRICSAtomLabel::L16) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L3) + "](:[c]):[c]");
 
-        L4_L5_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L5) + "](-[*])(-[*,#1])-!@[N^3:" + str(BRICSAtomLabel::L4) + "](-[*;!$([*]=[*])])-[*,#1;!$([*]=[*])]");
-        L4_L11_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L11) + "](-[*])(-[*,#1])-!@[SX2:" + str(BRICSAtomLabel::L4) + "]-[*]");
+        L4_L5_1_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L5) + "](-[*])-!@[N^3H1:" + str(BRICSAtomLabel::L4) + "]-[*;!$([*]=[*])]");
+        L4_L5_2_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L5) + "](-[*])-!@[N^3H0:" + str(BRICSAtomLabel::L4) + "](-[*;!$([*]=[*])])-[*;!$([*]=[*])]");
+        L4_L11_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L11) + "](-[*])-!@[SX2:" + str(BRICSAtomLabel::L4) + "]-[*]");
 
-        L5_L13_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L13) + "](-[*;!$([*]=[*])])(-[*,#1;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
-        L5_L15_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L15) + "](-[*;!$([*]=[*])])(-[*,#1;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[C])-@[C]");
+        L5_L13_1_Pattern = parseSMARTS("[N^3H1:" + str(BRICSAtomLabel::L13) + "](-[*;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
+        L5_L13_2_Pattern = parseSMARTS("[N^3H0:" + str(BRICSAtomLabel::L13) + "](-[*;!$([*]=[*])])(-[*;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
+        L5_L15_1_Pattern = parseSMARTS("[N^3H1:" + str(BRICSAtomLabel::L15) + "](-[*;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[C])-@[C]");
+        L5_L15_2_Pattern = parseSMARTS("[N^3H0:" + str(BRICSAtomLabel::L15) + "](-[*;!$([*]=[*])])(-[*;!$([*]=[*])])-!@[C:" + str(BRICSAtomLabel::L5) + "](-@[C])-@[C]");
 
         L6_L13_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L13) + "](-[*])(=O)-!@[C:" + str(BRICSAtomLabel::L6) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
         L6_L14_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L14) + "](-[*])(=O)-!@[c:" + str(BRICSAtomLabel::L6) + "](:[c,n,o,s]):[n,o,s]");
@@ -130,12 +136,12 @@ namespace
 
         L7_L7_Pattern = parseSMARTS("[CX3:" + str(BRICSAtomLabel::L7) + "](-[#6])(-[#6,#1])=!@[CX3:" + str(BRICSAtomLabel::L7) + "](-[#6])-[#6,#1]");
 
-        L8_L9_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L9) + "](-[*])(-[*,#1])-!@[n:" + str(BRICSAtomLabel::L8) + "](:[c,n,o,s]):[c,n,o,s]");
-        L8_L10_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L10) + "](-[*])(-[*,#1])-!@[N:" + str(BRICSAtomLabel::L8) + "](-@[C]=O)-@[#6,#7,#9,#16]");
-        L8_L13_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L13) + "](-[*])(-[*,#1])-!@[C:" + str(BRICSAtomLabel::L8) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
-        L8_L14_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L14) + "](-[*])(-[*,#1])-!@[c:" + str(BRICSAtomLabel::L8) + "](:[c,n,o,s]):[n,o,s]");
-        L8_L15_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L15) + "](-[*])(-[*,#1])-!@[C:" + str(BRICSAtomLabel::L8) + "](-@[C])-@[C]");
-        L8_L16_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L16) + "](-[*])(-[*,#1])-!@[c:" + str(BRICSAtomLabel::L8) + "](:[c]):[c]");
+        L8_L9_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L9) + "](-[*])-!@[n:" + str(BRICSAtomLabel::L8) + "](:[c,n,o,s]):[c,n,o,s]");
+        L8_L10_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L10) + "](-[*])-!@[N:" + str(BRICSAtomLabel::L8) + "](-@[C]=O)-@[#6,#7,#9,#16]");
+        L8_L13_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L13) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L8) + "](-@[#6,#7,#8,#16])-@[#7,#8,#16]");
+        L8_L14_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L14) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L8) + "](:[c,n,o,s]):[n,o,s]");
+        L8_L15_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L15) + "](-[*])-!@[C:" + str(BRICSAtomLabel::L8) + "](-@[C])-@[C]");
+        L8_L16_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L16) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L8) + "](:[c]):[c]");
 
         L9_L15_Pattern = parseSMARTS("[n:" + str(BRICSAtomLabel::L15) + "](:[c,n,o,s])(:[c,n,o,s])-!@[C:" + str(BRICSAtomLabel::L9) + "](-@[C])-@[C]");
         L9_L16_Pattern = parseSMARTS("[n:" + str(BRICSAtomLabel::L16) + "](:[c,n,o,s])(:[c,n,o,s])-!@[c:" + str(BRICSAtomLabel::L9) + "](:[c]):[c]");
@@ -188,10 +194,13 @@ Chem::BRICSFragmentGenerator::BRICSFragmentGenerator(): FragmentGenerator()
     addFragmentationRule(L3_L14_Pattern, BRICSRuleID::L3_L14);
     addFragmentationRule(L3_L15_Pattern, BRICSRuleID::L3_L15);
     addFragmentationRule(L3_L16_Pattern, BRICSRuleID::L3_L16);
-    addFragmentationRule(L4_L5_Pattern, BRICSRuleID::L4_L5);
+    addFragmentationRule(L4_L5_1_Pattern, BRICSRuleID::L4_L5);
+    addFragmentationRule(L4_L5_2_Pattern, BRICSRuleID::L4_L5);
     addFragmentationRule(L4_L11_Pattern, BRICSRuleID::L4_L11);
-    addFragmentationRule(L5_L13_Pattern, BRICSRuleID::L5_L13);
-    addFragmentationRule(L5_L15_Pattern, BRICSRuleID::L5_L15);
+    addFragmentationRule(L5_L13_1_Pattern, BRICSRuleID::L5_L13);
+    addFragmentationRule(L5_L13_2_Pattern, BRICSRuleID::L5_L13);
+    addFragmentationRule(L5_L15_1_Pattern, BRICSRuleID::L5_L15);
+    addFragmentationRule(L5_L15_2_Pattern, BRICSRuleID::L5_L15);
     addFragmentationRule(L6_L13_Pattern, BRICSRuleID::L6_L13);
     addFragmentationRule(L6_L14_Pattern, BRICSRuleID::L6_L14);
     addFragmentationRule(L6_L15_Pattern, BRICSRuleID::L6_L15);
