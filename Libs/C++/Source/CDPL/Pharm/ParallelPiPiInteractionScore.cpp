@@ -41,9 +41,9 @@
 using namespace CDPL;
 
 
-constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE ;
-constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE ;
-constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE ;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE;
 constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE;
 
 

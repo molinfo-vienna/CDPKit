@@ -111,7 +111,7 @@ namespace CDPL
 
             const Color                     BOND_COLOR                           = Color(0, 0, 0);
             const SizeSpecification         BOND_LENGTH                          = SizeSpecification(30.0);
-            const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.0, false, false, true);
+            const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.5, false, false, true);
             const SizeSpecification         BOND_LINE_SPACING                    = SizeSpecification(0.15, true, true, true);
             const SizeSpecification         STEREO_BOND_WEDGE_WIDTH              = SizeSpecification(0.15, true, true, true);
             const SizeSpecification         STEREO_BOND_HASH_SPACING             = SizeSpecification(0.1, true, true, true);

@@ -362,7 +362,7 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification BOND_LENGTH;
 
             /**
-             * \brief Default setting (= \c %SizeSpecification(1.0, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LINE_WIDTH.
+             * \brief Default setting (= \c %SizeSpecification(1.5, false, false, true)) for the control-parameter Vis::ControlParameter::BOND_LINE_WIDTH.
              */
             extern CDPL_VIS_API const SizeSpecification BOND_LINE_WIDTH;
 
