@@ -38,7 +38,6 @@
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-
 namespace CDPL
 {
 
@@ -409,7 +408,11 @@ namespace CDPL
             void setCoordinatesTransform(const T1& xform)
             {
                 this->xform = xform;
+#ifdef CDPL_MATH_CHECKS_DISABLE
+                GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform);
+#else
                 CDPL_MATH_CHECK(GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform), "Inversion of transformation failed", Base::CalculationFailed);
+#endif // CDPL_MATH_CHECKS_DISABLE
             }
 
             RegularSpatialGrid& operator=(const RegularSpatialGrid& usg)
