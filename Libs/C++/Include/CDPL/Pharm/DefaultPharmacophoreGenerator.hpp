@@ -54,20 +54,20 @@ namespace CDPL
             enum Configuration
             {
 
-                /**
-               * \brief If set, ionic features are only generated for explicitely charged atoms/groups.
-               */
+               /**
+                * \brief If set, ionic features are only generated for explicitely charged atoms/groups.
+                */
                 PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
 
-                /**
-               * \brief If set, the HBD feature representation will always be a defined vector
-               *        from the hydrogen donor heavy atom to the hydrogen atom.
-               */
+               /**
+                * \brief If set, the HBD feature representation will always be a defined vector
+                *        from the hydrogen donor heavy atom to the hydrogen atom.
+                */
                 STATIC_H_DONORS = 0x2,
 
-                /**
-               * \brief Default configuration.
-               */
+               /**
+                * \brief Default configuration.
+                */
                 DEFAULT_CONFIG = 0
             };
 

@@ -92,7 +92,7 @@ GRAIL::BuriednessGridCalculator& GRAIL::BuriednessGridCalculator::operator=(cons
 
 void GRAIL::BuriednessGridCalculator::calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
-     atomCoords.clear();
+    atomCoords.clear();
     get3DCoordinates(atoms, atomCoords, buriednessScore.getAtom3DCoordinatesFunction());
 
     if (!octree)
