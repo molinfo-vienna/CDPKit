@@ -337,9 +337,9 @@ class ControlParameterDefault(Boost.Python.instance):
     BOND_LENGTH = SizeSpecification(value=30, relative=False, in_scaling=False, out_scaling=False)
 
     ##
-    # \brief Default setting (= <tt>SizeSpecification</tt>(1.0, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_LINE_WIDTH.
+    # \brief Default setting (= <tt>SizeSpecification</tt>(1.5, False, False, True)) for the control-parameter Vis.ControlParameter.BOND_LINE_WIDTH.
     # 
-    BOND_LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+    BOND_LINE_WIDTH = SizeSpecification(value=1.5, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief Default setting (= <tt>SizeSpecification</tt>(0.15, True, True, True)) for the control-parameter Vis.ControlParameter.BOND_LINE_SPACING.

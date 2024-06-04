@@ -32,7 +32,7 @@ class BondPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+    LINE_WIDTH = SizeSpecification(value=1.5, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 

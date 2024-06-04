@@ -112,7 +112,7 @@ class MolecularGraphPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    BOND_LINE_WIDTH = SizeSpecification(value=1, relative=False, in_scaling=False, out_scaling=True)
+    BOND_LINE_WIDTH = SizeSpecification(value=1.5, relative=False, in_scaling=False, out_scaling=True)
 
     ##
     # \brief 
