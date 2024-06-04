@@ -607,9 +607,29 @@ namespace CDPL
             constexpr unsigned int Mt = 109;
 
             /**
+             * \brief Specifies \e Darmstadtium.
+             */
+            constexpr unsigned int Ds = 110;
+
+            /**
+             * \brief Specifies \e Roentgenium.
+             */
+            constexpr unsigned int Rg = 111;
+
+            /**
+             * \brief Specifies \e Copernicium.
+             */
+            constexpr unsigned int Cn = 112;
+
+            /**
+             * \brief Specifies \e Nihonium.
+             */
+            constexpr unsigned int Nh = 112;
+
+            /**
              * \brief Marks the end of the supported chemical elements.
              */
-            constexpr unsigned int MAX_ATOMIC_NO = Mt;
+            constexpr unsigned int MAX_ATOMIC_NO = Nh;
 
             /**
              * \brief A generic type that covers any element except hydrogen.
