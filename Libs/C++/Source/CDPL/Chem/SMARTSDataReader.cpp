@@ -1073,9 +1073,23 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
             return addAtomTypeConstraint(AtomType::A, false, has_not_pfx, constr_list);
 
         case AtomExpression::EXPLICIT_DEGREE_PREFIX:
-            if (getChar(c, false) && c == 'y')
-                return addAtomTypeConstraint(AtomType::Dy, false, has_not_pfx, constr_list);
+            getChar(c, false);
+                
+            switch (c) {
 
+                case 'y':
+                    return addAtomTypeConstraint(AtomType::Dy, false, has_not_pfx, constr_list);
+
+                case 's':
+                    return addAtomTypeConstraint(AtomType::Ds, false, has_not_pfx, constr_list);
+
+                case 'b':
+                    return addAtomTypeConstraint(AtomType::Db, false, has_not_pfx, constr_list);
+
+                default:
+                    break;
+            }
+            
             ungetChar();
 
             return addExplicitDegreeConstraint(has_not_pfx, constr_list);
@@ -1085,7 +1099,7 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
             switch (c) {
 
-                case'e':
+                case 'e':
                     return addAtomTypeConstraint(AtomType::He, false, has_not_pfx, constr_list);
 
                 case 'f':
@@ -1096,6 +1110,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'o':
                     return addAtomTypeConstraint(AtomType::Ho, false, has_not_pfx, constr_list);
+
+                case 's':
+                    return addAtomTypeConstraint(AtomType::Hs, false, has_not_pfx, constr_list);
 
                 default:
                     break;
@@ -1127,6 +1144,12 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'u':
                     return addAtomTypeConstraint(AtomType::Ru, false, has_not_pfx, constr_list);
+
+                case 'g':
+                    return addAtomTypeConstraint(AtomType::Rg, false, has_not_pfx, constr_list);
+
+                case 'f':
+                    return addAtomTypeConstraint(AtomType::Rf, false, has_not_pfx, constr_list);
 
                 default:
                     break;
@@ -1163,6 +1186,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'r':
                     return addAtomTypeConstraint(AtomType::Br, false, has_not_pfx, constr_list);
+
+                case 'h':
+                    return addAtomTypeConstraint(AtomType::Bh, false, has_not_pfx, constr_list);
 
                 default:
                     break;
@@ -1206,6 +1232,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'u':
                     return addAtomTypeConstraint(AtomType::Cu, false, has_not_pfx, constr_list);
+
+                case 'n':
+                    return addAtomTypeConstraint(AtomType::Cn, false, has_not_pfx, constr_list);
         
                 default:
                     break;
@@ -1344,6 +1373,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
                 case 'o':
                     return addAtomTypeConstraint(AtomType::Mo, false, has_not_pfx, constr_list);
 
+                case 't':
+                    return addAtomTypeConstraint(AtomType::Mt, false, has_not_pfx, constr_list);
+
                 default:
                     break;
             }
@@ -1375,6 +1407,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'p':
                     return addAtomTypeConstraint(AtomType::Np, false, has_not_pfx, constr_list);
+
+                case 'h':
+                    return addAtomTypeConstraint(AtomType::Nh, false, has_not_pfx, constr_list);
 
                 default:
                     break;
@@ -1454,6 +1489,9 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 
                 case 'r':
                     return addAtomTypeConstraint(AtomType::Sr, false, has_not_pfx, constr_list);
+
+                case 'g':
+                    return addAtomTypeConstraint(AtomType::Sg, false, has_not_pfx, constr_list);
 
                 default:
                     break;
