@@ -43,6 +43,7 @@
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
 #include "CDPL/Descr/MACCSFingerprintGenerator.hpp"
+#include "CDPL/Descr/PubChemFingerprintGenerator.hpp"
 #include "CDPL/Descr/BurdenMatrixGenerator.hpp"
 #include "CDPL/Descr/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Descr/MolecularComplexityCalculator.hpp"

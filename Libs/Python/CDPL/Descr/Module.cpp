@@ -51,6 +51,7 @@ BOOST_PYTHON_MODULE(_descr)
     exportPathFingerprintGenerator();
     exportCircularFingerprintGenerator();
     exportMACCSFingerprintGenerator();
+    exportPubChemFingerprintGenerator();
     
     exportEntity3DContainerFunctions();
     exportAtomContainerFunctions();

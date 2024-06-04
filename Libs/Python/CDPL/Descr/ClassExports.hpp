@@ -41,6 +41,7 @@ namespace CDPLPythonDescr
     void exportPathFingerprintGenerator();
     void exportCircularFingerprintGenerator();
     void exportMACCSFingerprintGenerator();
+    void exportPubChemFingerprintGenerator();
     void exportFeatureRDFCodeCalculator();
     void exportPharmacophoreRDFDescriptorCalculator();
     void exportFeatureAutoCorrelation3DVectorCalculator();

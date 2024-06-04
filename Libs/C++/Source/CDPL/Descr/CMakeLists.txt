@@ -30,7 +30,8 @@ set(cdpl-descr_LIB_SRCS
 
     CircularFingerprintGenerator.cpp 
     PathFingerprintGenerator.cpp
-    MACCSFingerprintGenerator.cpp 
+    MACCSFingerprintGenerator.cpp
+    PubChemFingerprintGenerator.cpp 
 
     AtomRDFCodeCalculator.cpp
     MoleculeRDFDescriptorCalculator.cpp

@@ -323,6 +323,13 @@ ISBN 0-521-43108-5, http://www.nr.com/
 </tr>
 
 <tr>
+<td valign="top">\anchor PCDS<i>[PCDS]</i></td>
+<td valign="top">
+\c PubChem Data Specification: https://pubchem.ncbi.nlm.nih.gov/docs/data-specification
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor PDB<i>[PDB]</i></td>
 <td valign="top">
 PDB File-Format Specification website: http://www.wwpdb.org/docs.html
