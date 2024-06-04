@@ -29,7 +29,8 @@ set(cdpl-descr_LIB_SRCS
     MolecularComplexityCalculator.cpp
 
     CircularFingerprintGenerator.cpp 
-    PathFingerprintGenerator.cpp 
+    PathFingerprintGenerator.cpp
+    MACCSFingerprintGenerator.cpp 
 
     AtomRDFCodeCalculator.cpp
     MoleculeRDFDescriptorCalculator.cpp

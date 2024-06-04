@@ -46,6 +46,7 @@ set(descr_MOD_SRCS
     
     PathFingerprintGeneratorExport.cpp 
     CircularFingerprintGeneratorExport.cpp
+    MACCSFingerprintGeneratorExport.cpp
 
     FeatureRDFCodeCalculatorExport.cpp 
     PharmacophoreRDFDescriptorCalculatorExport.cpp
