@@ -83,7 +83,7 @@ namespace
     typedef std::vector<Chem::MolecularGraph::SharedPointer> AtomTyperPatternList;
 
     AtomTyperPatternList atomTyperPatterns;
-    std::once_flag initAtomTyperPatternsFlag;
+    std::once_flag       initAtomTyperPatternsFlag;
 
     void initAtomTyperPatterns()
     {
