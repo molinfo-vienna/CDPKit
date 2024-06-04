@@ -1,5 +1,8 @@
 master:
 
+ - Fixed missing support for certain chemical element symbols in class Chem::SMARTSMoleculeReader
+ - Extended the set of supported chemical elements to atomic number 114
+ - New class Descr::MACCSFingerprintGenerator for the generation of 166 bit MACCS key fingerprints
  - Fixed a bug in Math::RegularSpatialGrid causing erroneous transformations of world to grid-local coordinates
  - Fixed a problem in Chem::BRICSFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments
  - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
