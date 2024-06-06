@@ -2020,8 +2020,16 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
     StringDataBlockEntry data_entry;
 
     while (true) {
-        readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
+        try {
+            readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
 
+        } catch (const Base::IOError&) {
+            if (is.eof() && (line == SDFile::RECORD_DELIMITER))
+                break;
+
+            throw;
+        }
+        
         if (line.empty()) {
             if (strictErrorChecking)
                 throw Base::IOError("MDLDataReader: too many empty lines in structure data block");
@@ -2071,13 +2079,21 @@ void Chem::MDLDataReader::skipSDFData(std::istream& is)
     using namespace MDL;
 
     while (true) {
-        readMDLLine(is, line, "MDLDataReader: error while skipping structure data header");
+        try {
+            readMDLLine(is, line, "MDLDataReader: error while skipping structure data header");
+
+        } catch (const Base::IOError&) {
+            if (is.eof() && (line == SDFile::RECORD_DELIMITER))
+                break;
+
+            throw;
+        }
 
         if (line.empty()) 
             continue;
         
         if (line == SDFile::RECORD_DELIMITER)
-               break;
+            break;
         
         if (line.find(SDFile::DATA_HEADER_PREFIX) != 0) 
             continue;
