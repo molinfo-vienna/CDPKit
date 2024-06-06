@@ -110,7 +110,7 @@ namespace
         L1_L3_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L3) + "](-[*])(=O)-!@[O:" + str(BRICSAtomLabel::L1) + "]-[*]");
         L1_L10_Pattern = parseSMARTS("[C:" + str(BRICSAtomLabel::L10) + "](-[*])(=O)-!@[N:" + str(BRICSAtomLabel::L1) + "](-@[C]=O)-@[#6,#7,#8,#16]");
 
-        L2_L12_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L12) + "](-[*])-!@[S:" + str(BRICSAtomLabel::L2) + "](=O)(=O)-[*]");
+        L2_L12_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L12) + "](-[*])-!@[S:" + str(BRICSAtomLabel::L2) + "](~[OX1])(~[OX1])-[*]");
         L2_L14_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L14) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c,n,o,s]):[n,o,s]");
         L2_L16_Pattern = parseSMARTS("[N^3:" + str(BRICSAtomLabel::L16) + "](-[*])-!@[c:" + str(BRICSAtomLabel::L2) + "](:[c]):[c]");
 
