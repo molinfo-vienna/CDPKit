@@ -592,9 +592,13 @@ void Chem::MOL2DataReader::readSubstructSection(std::istream& is, Molecule& mol)
     if (molSubstructCount == 0)
         return;
 
-    if (!skipInputToRTI(is, MOL2::SUBSTRUCTURE_RTI, true))
-        throw Base::IOError("MOL2DataReader: error while looking for substructure section: unexpected end of input");
+    if (!skipInputToRTI(is, MOL2::SUBSTRUCTURE_RTI, true)) {
+        if (strictErrorChecking)
+            throw Base::IOError("MOL2DataReader: expected substructure section not found");
 
+        return;
+    }
+    
     std::string name;
     std::string subtype;
     std::string chain;
@@ -957,9 +961,15 @@ bool Chem::MOL2DataReader::skipInputToRTI(std::istream& is, const std::string& r
     for (std::istream::pos_type last_spos = is.tellg(); readInputLine(is); last_spos = is.tellg()) {
         Internal::trimString(inputLine, false, true);
 
-        if (inputLine != rti)
+        if (inputLine != rti) {
+            if (inputLine == MOL2::MOLECULE_RTI) {
+                is.seekg(last_spos);
+                return false;
+            }
+            
             continue;
-
+        }
+        
         if (!skip_rti)
             is.seekg(last_spos);
 
