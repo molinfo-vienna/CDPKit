@@ -624,7 +624,7 @@ namespace CDPL
             /**
              * \brief Specifies \e Nihonium.
              */
-            constexpr unsigned int Nh = 112;
+            constexpr unsigned int Nh = 113;
 
             /**
              * \brief Marks the end of the supported chemical elements.
