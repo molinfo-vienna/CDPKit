@@ -42,43 +42,37 @@ namespace CDPL
     namespace Chem
     {
 
-        class MolecularGraph;
-
         /**
-     * \brief Implements the extraction of the aromatic rings in the SSSR of a molecular graph.
-     */
+         * \brief Implements the extraction of the aromatic rings in the SSSR of a molecular graph.
+         */
         class CDPL_CHEM_API AromaticSSSRSubset : public FragmentList
         {
 
           public:
             /**    
-         * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSSSRSubset instances.
-         */
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSSSRSubset instances.
+             */
             typedef std::shared_ptr<AromaticSSSRSubset> SharedPointer;
 
             /**
-         * \brief Constructs an empty \c %AromaticSSSRSubset instance.
-         */
+             * \brief Constructs an empty \c %AromaticSSSRSubset instance.
+             */
             AromaticSSSRSubset() {}
 
             /**
-         * \brief Construct a \c %AromaticSSSRSubset instance that contains all aromatic rings of the
-         *        SSSR of the molecular graph \a molgraph.
-         * \param molgraph The molecular graph for which to extract the aromatic rings.
-         */
+             * \brief Construct a \c %AromaticSSSRSubset instance that contains all aromatic rings of the
+             *        SSSR of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the aromatic rings.
+             */
             AromaticSSSRSubset(const MolecularGraph& molgraph);
 
             /**
-         * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
-         * \param molgraph The molecular graph for which to extract the aromatic rings.
-         */
+             * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the aromatic rings.
+             */
             void extract(const MolecularGraph& molgraph);
 
           private:
-            AromaticSSSRSubset(const AromaticSSSRSubset&);
-
-            AromaticSSSRSubset& operator=(const AromaticSSSRSubset&);
-
             void init(const MolecularGraph&);
             void findAromaticRings();
 
