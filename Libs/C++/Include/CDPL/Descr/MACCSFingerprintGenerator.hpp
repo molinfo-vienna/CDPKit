@@ -29,6 +29,8 @@
 #ifndef CDPL_DESCR_MACCSFINGERPRINTGENERATOR_HPP
 #define CDPL_DESCR_MACCSFINGERPRINTGENERATOR_HPP
 
+#include <cstddef>
+
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
@@ -49,7 +51,8 @@ namespace CDPL
         {
 
           public:
-         
+            static constexpr std::size_t NUM_BITS = 166;
+            
             /**
              * \brief Constructs the \c %MACCSFingerprintGenerator instance.
              */

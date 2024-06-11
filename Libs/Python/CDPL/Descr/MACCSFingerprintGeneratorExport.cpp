@@ -46,5 +46,6 @@ void CDPLPythonDescr::exportMACCSFingerprintGenerator()
         .def("assign", &Descr::MACCSFingerprintGenerator::operator=, 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("generate", &Descr::MACCSFingerprintGenerator::generate,
-             (python::arg("self"), python::arg("molgraph"), python::arg("fp")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
+        .def_readonly("NUM_BITS", Descr::MACCSFingerprintGenerator::NUM_BITS);
 }
