@@ -25,11 +25,9 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-
 
 
 using namespace CDPL;
