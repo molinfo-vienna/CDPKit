@@ -247,6 +247,7 @@
 #include "CDPL/Chem/AromaticRingSet.hpp"
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
+#include "CDPL/Chem/ExtendedSSSR.hpp"
 #include "CDPL/Chem/AromaticSubstructure.hpp"
 #include "CDPL/Chem/CyclicSubstructure.hpp"
 #include "CDPL/Chem/ConnectedSubstructureSet.hpp"

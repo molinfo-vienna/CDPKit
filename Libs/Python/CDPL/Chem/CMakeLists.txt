@@ -90,7 +90,8 @@ set(chem_MOD_SRCS
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 
     AromaticSSSRSubsetExport.cpp 
-    SmallestSetOfSmallestRingsExport.cpp 
+    SmallestSetOfSmallestRingsExport.cpp
+    ExtendedSSSRExport.cpp 
     AromaticSubstructureExport.cpp 
     CyclicSubstructureExport.cpp 
     ConnectedSubstructureSetExport.cpp 

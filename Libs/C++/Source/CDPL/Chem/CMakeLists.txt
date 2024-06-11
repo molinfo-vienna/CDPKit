@@ -164,6 +164,7 @@ set(cdpl-chem_LIB_SRCS
     AromaticRingSet.cpp
     AromaticSSSRSubset.cpp
     SmallestSetOfSmallestRings.cpp
+    ExtendedSSSR.cpp
     AromaticSubstructure.cpp
     CyclicSubstructure.cpp
     ConnectedSubstructureSet.cpp

@@ -78,7 +78,8 @@ set(test-suite_SRCS
     #HashCodeCalculatorTest.cpp 
     
     CompleteRingSetTest.cpp 
-    SmallestSetOfSmallestRingsTest.cpp 
+    SmallestSetOfSmallestRingsTest.cpp
+    ExtendedSSSRTest.cpp
     ConnectedSubstructureSetTest.cpp 
     ComponentSetTest.cpp 
 

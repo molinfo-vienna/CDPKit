@@ -95,6 +95,7 @@ namespace CDPLPythonChem
     void exportAromaticRingSet();
     void exportAromaticSSSRSubset();
     void exportSmallestSetOfSmallestRings();
+    void exportExtendedSSSR();
     void exportAromaticSubstructure();
     void exportCyclicSubstructure();
     void exportConnectedSubstructureSet();

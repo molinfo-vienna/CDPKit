@@ -98,6 +98,7 @@ BOOST_PYTHON_MODULE(_chem)
     exportAromaticRingSet();
     exportAromaticSSSRSubset();
     exportSmallestSetOfSmallestRings();
+    exportExtendedSSSR();
     exportAromaticSubstructure();
     exportCyclicSubstructure();
     exportConnectedSubstructureSet();
