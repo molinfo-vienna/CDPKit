@@ -27,6 +27,8 @@
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -38,8 +40,12 @@ void CDPLPythonChem::exportAromaticSSSRSubset()
     python::class_<Chem::AromaticSSSRSubset, Chem::AromaticSSSRSubset::SharedPointer,
                    python::bases<Chem::FragmentList>, boost::noncopyable>("AromaticSSSRSubset", python::no_init)
         .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::AromaticSSSRSubset&>((python::arg("self"), python::arg("arom_sssr")))
+             [python::with_custodian_and_ward<1, 2>()])
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
              [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::AromaticSSSRSubset>(),
+             (python::arg("self"), python::arg("arom_sssr")), python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("extract", &Chem::AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
              python::with_custodian_and_ward<1, 2>());
 }
