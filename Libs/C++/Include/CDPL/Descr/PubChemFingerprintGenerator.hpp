@@ -29,8 +29,13 @@
 #ifndef CDPL_DESCR_PUBCHEMFINGERPRINTGENERATOR_HPP
 #define CDPL_DESCR_PUBCHEMFINGERPRINTGENERATOR_HPP
 
+#include <cstddef>
+#include <unordered_set>
+
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/ExtendedSSSR.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -48,7 +53,8 @@ namespace CDPL
         {
 
           public:
-         
+            static constexpr std::size_t NUM_BITS = 881;
+            
             /**
              * \brief Constructs the \c %PubChemFingerprintGenerator instance.
              */
@@ -77,7 +83,19 @@ namespace CDPL
             }
 
           private:
+            void setElementCountBits(const Chem::MolecularGraph& molgraph, Util::BitSet& fp) const;
+            void setRingCountBits(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+            void setAtomPairBits(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+            void setAtomEnvPatternBits(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+            void setSubstructPatternBits(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+
+            typedef std::unordered_set<std::size_t> AtomTypePairSet;
+            
             Chem::SubstructureSearch subSearch;
+            Chem::ExtendedSSSR       esssr;
+            Util::BitSet             aromBondMask;
+            AtomTypePairSet          foundAtomPairs;
+            Chem::Fragment           atomEnv;
         };
     } // namespace Descr
 } // namespace CDPL

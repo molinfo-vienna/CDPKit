@@ -46,5 +46,6 @@ void CDPLPythonDescr::exportPubChemFingerprintGenerator()
         .def("assign", &Descr::PubChemFingerprintGenerator::operator=, 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("generate", &Descr::PubChemFingerprintGenerator::generate,
-             (python::arg("self"), python::arg("molgraph"), python::arg("fp")));
+             (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
+        .def_readonly("NUM_BITS", Descr::PubChemFingerprintGenerator::NUM_BITS);
 }
