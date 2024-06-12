@@ -42,6 +42,8 @@ void CDPLPythonBiomol::exportAtomPropertyFlags()
     using namespace CDPL;
 
     python::class_<AtomPropertyFlag, boost::noncopyable>("AtomPropertyFlag", python::no_init)
+        .def_readonly("NONE", &Biomol::AtomPropertyFlag::NONE)
+        .def_readonly("DEFAULT", &Biomol::AtomPropertyFlag::DEFAULT)
         .def_readonly("RESIDUE_CODE", &Biomol::AtomPropertyFlag::RESIDUE_CODE)
         .def_readonly("RESIDUE_SEQ_NO", &Biomol::AtomPropertyFlag::RESIDUE_SEQ_NO)
         .def_readonly("RESIDUE_INS_CODE", &Biomol::AtomPropertyFlag::RESIDUE_INS_CODE)
