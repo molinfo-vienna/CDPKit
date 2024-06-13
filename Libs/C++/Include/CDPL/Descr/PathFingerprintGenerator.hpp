@@ -238,19 +238,6 @@ namespace CDPL
             std::size_t getMaxPathLength() const;
 
             /**
-             * \brief Allows to specify the desired fingerprint size.
-             * \param num_bits The desired fingerprint size in number of bits.
-             * \note By default, the generated fingerprints are \e 1024 bits wide.
-             */
-            void setNumBits(std::size_t num_bits);
-
-            /**
-             * \brief Returns the size of the generated fingerprints.
-             * \return The fingerprint size in number of bits.
-             */
-            std::size_t getNumBits() const;
-
-            /**
              * \brief Generates the fingerprint of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to generate the fingerprint.
              * \param fp The generated fingerprint.
@@ -262,13 +249,12 @@ namespace CDPL
 
             void growPath(const Chem::Atom&, Util::BitSet&);
 
-            std::size_t calcBitIndex();
+            std::size_t calcBitIndex(const Util::BitSet&);
 
             typedef std::vector<std::size_t>   IndexList;
             typedef std::vector<std::uint64_t> UInt64Array;
 
             const Chem::MolecularGraph* molGraph;
-            std::size_t                 numBits;
             std::size_t                 minPathLength;
             std::size_t                 maxPathLength;
             AtomDescriptorFunction      atomDescriptorFunc;
