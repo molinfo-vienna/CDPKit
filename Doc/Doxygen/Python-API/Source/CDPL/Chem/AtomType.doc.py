@@ -34,32 +34,32 @@ class AtomType(Boost.Python.instance):
     ##
     # \brief Marks the end of the supported chemical elements.
     # 
-    MAX_ATOMIC_NO = 112
+    MAX_ATOMIC_NO = 113
 
     ##
     # \brief Marks the end of all supported atom types.
     # 
-    MAX_TYPE = 122
+    MAX_TYPE = 123
 
     ##
     # \brief A generic type that covers any element except hydrogen.
     # 
-    A = 113
+    A = 114
 
     ##
     # \brief A generic type that covers any element.
     # 
-    AH = 114
+    AH = 115
 
     ##
     # \brief A generic type that covers any element (equivalent to AtomType.AH).
     # 
-    ANY = 121
+    ANY = 122
 
     ##
     # \brief A generic type for heteroatoms (N, O, S or P).
     # 
-    HET = 122
+    HET = 123
 
     ##
     # \brief Specifies <em>Actinium</em>.
@@ -172,6 +172,11 @@ class AtomType(Boost.Python.instance):
     Cm = 96
 
     ##
+    # \brief Specifies <em>Copernicium</em>.
+    # 
+    Cn = 112
+
+    ##
     # \brief Specifies <em>Cobalt</em>.
     # 
     Co = 27
@@ -200,6 +205,11 @@ class AtomType(Boost.Python.instance):
     # \brief Specifies <em>Dubnium</em>.
     # 
     Db = 105
+
+    ##
+    # \brief Specifies <em>Darmstadtium</em>.
+    # 
+    Ds = 110
 
     ##
     # \brief Specifies <em>Dysprosium</em>.
@@ -334,12 +344,12 @@ class AtomType(Boost.Python.instance):
     ##
     # \brief A generic type that covers any element that is a metal.
     # 
-    M = 117
+    M = 118
 
     ##
     # \brief A generic type that covers hydrogen and any element that is a metal.
     # 
-    MH = 118
+    MH = 119
 
     ##
     # \brief Specifies <em>Mendelevium</em>.
@@ -390,6 +400,11 @@ class AtomType(Boost.Python.instance):
     # \brief Specifies <em>Neon</em>.
     # 
     Ne = 10
+
+    ##
+    # \brief Specifies <em>Nihonium</em>.
+    # 
+    Nh = 113
 
     ##
     # \brief Specifies <em>Nickel</em>.
@@ -464,12 +479,12 @@ class AtomType(Boost.Python.instance):
     ##
     # \brief A generic type that covers any element except hydrogen and carbon.
     # 
-    Q = 115
+    Q = 116
 
     ##
     # \brief A generic type that covers any element except carbon.
     # 
-    QH = 116
+    QH = 117
 
     ##
     # \brief Specifies <em>Radium</em>.
@@ -490,6 +505,11 @@ class AtomType(Boost.Python.instance):
     # \brief Specifies <em>Rutherfordium</em>.
     # 
     Rf = 104
+
+    ##
+    # \brief Specifies <em>Roentgenium</em>.
+    # 
+    Rg = 111
 
     ##
     # \brief Specifies <em>Rhodium</em>.
@@ -614,12 +634,12 @@ class AtomType(Boost.Python.instance):
     ##
     # \brief A generic type that covers any element that is a halogen.
     # 
-    X = 119
+    X = 120
 
     ##
     # \brief A generic type that covers hydrogen and any element that is a halogen.
     # 
-    XH = 120
+    XH = 121
 
     ##
     # \brief Specifies <em>Xenon</em>.

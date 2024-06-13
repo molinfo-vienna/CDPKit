@@ -25,6 +25,16 @@
 class AtomPropertyFlag(Boost.Python.instance):
 
     ##
+    # \brief Represents an empty set of atom properties.
+    # 
+    NONE = 0
+
+    ##
+    # \brief Represents the default set of atom properties.
+    # 
+    DEFAULT = 2147483648
+
+    ##
     # \brief 
     #
     RESIDUE_CODE = 1024

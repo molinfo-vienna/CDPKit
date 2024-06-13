@@ -172,15 +172,6 @@ class PathFingerprintGenerator(Boost.Python.instance):
     def setMaxPathLength(max_length: int) -> None: pass
 
     ##
-    # \brief Allows to specify the desired fingerprint size.
-    # 
-    # \param num_bits The desired fingerprint size in number of bits.
-    # 
-    # \note By default, the generated fingerprints are <em>1024</em> bits wide.
-    # 
-    def setNumBits(num_bits: int) -> None: pass
-
-    ##
     # \brief Returns the minimum length a path must have to contribute to the generated fingerprint.
     # 
     # \return The minimum path length in number of bonds. 
@@ -199,13 +190,6 @@ class PathFingerprintGenerator(Boost.Python.instance):
     def getMaxPathLength() -> int: pass
 
     ##
-    # \brief Returns the size of the generated fingerprints.
-    # 
-    # \return The fingerprint size in number of bits.
-    # 
-    def getNumBits() -> int: pass
-
-    ##
     # \brief Generates the fingerprint of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to generate the fingerprint.
@@ -218,5 +202,3 @@ class PathFingerprintGenerator(Boost.Python.instance):
     minPathLength = property(getMinPathLength, setMinPathLength)
 
     maxPathLength = property(getMaxPathLength, setMaxPathLength)
-
-    numBits = property(getNumBits, setNumBits)
