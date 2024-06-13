@@ -108,11 +108,11 @@ std::uint64_t Descr::PathFingerprintGenerator::DefBondDescriptorFunctor::operato
 //-----
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator():
-    molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5),
+    molGraph(0), minPathLength(0), maxPathLength(5),
     atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
-    molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5), 
+    molGraph(0), minPathLength(0), maxPathLength(5), 
     atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
 {
     generate(molgraph, fp);
@@ -128,11 +128,6 @@ void Descr::PathFingerprintGenerator::setMaxPathLength(std::size_t max_length)
     maxPathLength = max_length;
 }
 
-void Descr::PathFingerprintGenerator::setNumBits(std::size_t num_bits)
-{
-    numBits = num_bits;
-}
-
 std::size_t Descr::PathFingerprintGenerator::getMinPathLength() const
 {
     return minPathLength;
@@ -141,11 +136,6 @@ std::size_t Descr::PathFingerprintGenerator::getMinPathLength() const
 std::size_t Descr::PathFingerprintGenerator::getMaxPathLength() const
 {
     return maxPathLength;
-}
-
-std::size_t Descr::PathFingerprintGenerator::getNumBits() const
-{
-    return numBits;
 }
 
 void Descr::PathFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
@@ -167,9 +157,7 @@ void Descr::PathFingerprintGenerator::calcFingerprint(const Chem::MolecularGraph
 {
     using namespace Chem;
 
-    fp.resize(numBits);
-
-    if (numBits == 0)
+    if (fp.size() == 0)
         return;
 
     fp.reset();
@@ -232,7 +220,7 @@ void Descr::PathFingerprintGenerator::growPath(const Chem::Atom& atom, Util::Bit
     std::size_t bond_path_len = bondPath.size();
 
     if (bond_path_len >= minPathLength)
-        fp.set(calcBitIndex());
+        fp.set(calcBitIndex(fp));
 
     if (bond_path_len < maxPathLength) {
         Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
@@ -260,7 +248,7 @@ void Descr::PathFingerprintGenerator::growPath(const Chem::Atom& atom, Util::Bit
     atomPath.pop_back();
 }
 
-std::size_t Descr::PathFingerprintGenerator::calcBitIndex()
+std::size_t Descr::PathFingerprintGenerator::calcBitIndex(const Util::BitSet& fp)
 {
     std::size_t atom_path_len = atomPath.size();
     std::size_t bond_path_len = bondPath.size();
@@ -284,5 +272,5 @@ std::size_t Descr::PathFingerprintGenerator::calcBitIndex()
 
     randGenerator.seed(rand_seed);
 
-    return std::size_t((double(randGenerator()) / randGenerator.max()) * (numBits - 1));
+    return std::size_t((double(randGenerator()) / randGenerator.max()) * (fp.size() - 1));
 }

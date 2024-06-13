@@ -73,19 +73,14 @@ void CDPLPythonDescr::exportPathFingerprintGenerator()
              (python::arg("self"), python::arg("min_length")))
         .def("setMaxPathLength", &Descr::PathFingerprintGenerator::setMaxPathLength, 
              (python::arg("self"), python::arg("max_length")))
-        .def("setNumBits", &Descr::PathFingerprintGenerator::setNumBits, 
-             (python::arg("self"), python::arg("num_bits")))
         .def("getMinPathLength", &Descr::PathFingerprintGenerator::getMinPathLength, python::arg("self"))
         .def("getMaxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength, python::arg("self"))
-        .def("getNumBits", &Descr::PathFingerprintGenerator::getNumBits, python::arg("self"))
         .def("generate", &Descr::PathFingerprintGenerator::generate,
              (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
         .add_property("minPathLength", &Descr::PathFingerprintGenerator::getMinPathLength,
                       &Descr::PathFingerprintGenerator::setMinPathLength)
         .add_property("maxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength,
                       &Descr::PathFingerprintGenerator::setMaxPathLength)
-        .add_property("numBits", &Descr::PathFingerprintGenerator::getNumBits,
-                      &Descr::PathFingerprintGenerator::setNumBits)
         .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
         .def_readonly("DEF_BOND_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
 
