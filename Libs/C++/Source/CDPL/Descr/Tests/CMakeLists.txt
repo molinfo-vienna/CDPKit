@@ -27,6 +27,7 @@ set(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     SimilarityFunctionsTest.cpp
+    PubChemFingerprintGeneratorTest.cpp
    )
 
 set(CMAKE_BUILD_TYPE "Debug")
