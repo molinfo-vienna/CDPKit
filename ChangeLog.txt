@@ -1,5 +1,9 @@
 master:
 
+ - Removed methods setNumBits() and getNumBits() in class Descr::PathFingerprintGenerator (fp-length now
+   implicitly given by the size of the bitset provided as argument to method generate())
+ - New class Descr::PubChemFingerprintGenerator for the generation of 881 bit PubChem fingerprints
+ - New class Chem::ExtendedSSSR fro the perception extended smallest sets of smallest rings
  - The SDF reader now also accepts input data that do not end with a newline character
  - Made MOL2 reader implementation more tolerant regarding missing sections
  - Fixed missing support for certain chemical element symbols in class Chem::SMARTSMoleculeReader
