@@ -38,7 +38,7 @@ namespace
     struct TestDataEntry
     {
 
-        std::string              smiles;
+        const char*              smiles;
         std::vector<std::size_t> ringSizes;
     };
 
