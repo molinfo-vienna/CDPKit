@@ -46,6 +46,10 @@ set(cdpl-descr_LIB_SRCS
     PharmacophoreRDFDescriptorCalculator.cpp
     PharmacophoreAutoCorr3DDescriptorCalculator.cpp
 
+    NPointPharmacophoreFingerprintGenerator.cpp
+    NPoint2DPharmacophoreFingerprintGenerator.cpp
+    NPoint3DPharmacophoreFingerprintGenerator.cpp
+    
     Entity3DContainerGeomDiameterAndRadiusFunctions.cpp
 
     AtomContainerGeomDiameterAndRadiusFunctions.cpp

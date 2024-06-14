@@ -52,5 +52,8 @@
 #include "CDPL/Descr/FeatureRDFCodeCalculator.hpp"
 #include "CDPL/Descr/MoleculeRDFDescriptorCalculator.hpp"
 #include "CDPL/Descr/PharmacophoreRDFDescriptorCalculator.hpp"
+#include "CDPL/Descr/NPointPharmacophoreFingerprintGenerator.hpp"
+#include "CDPL/Descr/NPoint2DPharmacophoreFingerprintGenerator.hpp"
+#include "CDPL/Descr/NPoint3DPharmacophoreFingerprintGenerator.hpp"
 
 #endif // CDPL_DESCR_HPP

@@ -48,6 +48,10 @@ BOOST_PYTHON_MODULE(_descr)
     exportFeatureAutoCorrelation3DVectorCalculator();
     exportPharmacophoreAutoCorr3DDescriptorCalculator();
 
+    exportNPointPharmacophoreFingerprintGenerator();
+    exportNPoint2DPharmacophoreFingerprintGenerator();
+    exportNPoint3DPharmacophoreFingerprintGenerator();
+    
     exportPathFingerprintGenerator();
     exportCircularFingerprintGenerator();
     exportMACCSFingerprintGenerator();

@@ -54,6 +54,10 @@ set(descr_MOD_SRCS
     FeatureAutoCorrelation3DVectorCalculatorExport.cpp 
     PharmacophoreAutoCorr3DDescriptorCalculatorExport.cpp
 
+    NPointPharmacophoreFingerprintGeneratorExport.cpp
+    NPoint2DPharmacophoreFingerprintGeneratorExport.cpp
+    NPoint3DPharmacophoreFingerprintGeneratorExport.cpp
+
     Entity3DContainerFunctionExport.cpp
     AtomContainerFunctionExport.cpp 
     MolecularGraphFunctionExport.cpp 

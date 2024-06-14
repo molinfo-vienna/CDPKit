@@ -46,6 +46,9 @@ namespace CDPLPythonDescr
     void exportPharmacophoreRDFDescriptorCalculator();
     void exportFeatureAutoCorrelation3DVectorCalculator();
     void exportPharmacophoreAutoCorr3DDescriptorCalculator();
+    void exportNPointPharmacophoreFingerprintGenerator();
+    void exportNPoint2DPharmacophoreFingerprintGenerator();
+    void exportNPoint3DPharmacophoreFingerprintGenerator();
 } // namespace CDPLPythonDescr
 
 #endif // CDPL_PYTHON_DESCR_CLASSEXPORTS_HPP
