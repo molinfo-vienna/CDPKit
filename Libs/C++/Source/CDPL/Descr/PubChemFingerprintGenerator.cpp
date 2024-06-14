@@ -1029,15 +1029,13 @@ Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator()
     subSearch.uniqueMappingsOnly(true);
 }
 
-Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator(const PubChemFingerprintGenerator& gen)
-{
-    subSearch.uniqueMappingsOnly(true);
-}
+Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator(const PubChemFingerprintGenerator& gen):
+    PubChemFingerprintGenerator()
+{}
 
-Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
+Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
+    PubChemFingerprintGenerator()
 {
-    subSearch.uniqueMappingsOnly(true);
-    
     generate(molgraph, fp);
 }
 

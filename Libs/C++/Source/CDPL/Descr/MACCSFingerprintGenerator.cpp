@@ -229,15 +229,13 @@ Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator()
     subSearch.uniqueMappingsOnly(true);
 }
 
-Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator(const MACCSFingerprintGenerator& gen)
-{
-    subSearch.uniqueMappingsOnly(true);
-}
+Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator(const MACCSFingerprintGenerator& gen):
+    MACCSFingerprintGenerator()
+{}
 
-Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
+Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
+    MACCSFingerprintGenerator()
 {
-    subSearch.uniqueMappingsOnly(true);
-    
     generate(molgraph, fp);
 }
 
