@@ -37,7 +37,7 @@ void CDPLPythonDescr::exportPubChemFingerprintGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::scope scope = python::class_<Descr::PubChemFingerprintGenerator>("PubChemFingerprintGenerator", python::no_init)
+    python::class_<Descr::PubChemFingerprintGenerator>("PubChemFingerprintGenerator", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&, Util::BitSet&>(
                  (python::arg("self"), python::arg("molgraph"), python::arg("fp"))))
