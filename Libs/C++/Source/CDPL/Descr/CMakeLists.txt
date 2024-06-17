@@ -75,7 +75,7 @@ if(NOT PYPI_PACKAGE_BUILD)
     COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK")
 
   target_link_libraries(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static
-    cdpl-math-static cdpl-util-static cdpl-base-static)
+    cdpl-math-static cdpl-util-static cdpl-base-static $<TARGET_OBJECTS:cdpl-internal>)
 
   install(TARGETS cdpl-descr-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
@@ -84,7 +84,7 @@ endif(NOT PYPI_PACKAGE_BUILD)
 add_library(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS})
 
 target_link_libraries(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared
-  cdpl-math-shared cdpl-util-shared)
+  cdpl-math-shared cdpl-util-shared $<TARGET_OBJECTS:cdpl-internal>)
 
 set_target_properties(cdpl-descr-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-descr

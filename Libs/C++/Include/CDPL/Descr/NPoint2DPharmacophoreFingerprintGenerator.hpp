@@ -33,6 +33,7 @@
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Descr/NPointPharmacophoreFingerprintGenerator.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL
@@ -75,7 +76,10 @@ namespace CDPL
           private:
             double getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const;
 
-            FeatureDistanceType ftrDistType;
+            FeatureDistanceType         ftrDistType;
+            Math::ULMatrix              topDistMatrix;
+            const Math::ULMatrix*       activeTopDistMatrix;
+            const Chem::MolecularGraph* molGraph;
         };
     } // namespace Descr
 } // namespace CDPL

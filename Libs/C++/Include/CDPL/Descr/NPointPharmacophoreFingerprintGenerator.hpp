@@ -30,10 +30,13 @@
 #define CDPL_DESCR_NPOINTPHARMACOPHOREFINGERPRINTGENERATOR_HPP
 
 #include <cstddef>
+#include <vector>
+#include <utility>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
+#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -82,13 +85,32 @@ namespace CDPL
             void generate(const Pharm::FeatureContainer& cntnr, Util::BitSet& fp);
 
           private:
+            void init(const Pharm::FeatureContainer& cntnr);
+
+            void enumFeatureTuples(std::size_t curr_ftr_idx, const Pharm::FeatureContainer& cntnr, Util::BitSet& fp);
+
+            void emitFeatureTupleBit(Util::BitSet& fp);
+
+            void canonFeatureTupleData(std::size_t curr_ftr_idx);
+            
+            unsigned long getDistanceBinNumber(double dist) const;
+            
             virtual double getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const = 0;
 
+            typedef std::pair<unsigned int, std::size_t> FeatureID;
+            typedef std::vector<FeatureID>               FeatureTuple;
+            typedef std::vector<unsigned long>           FeatureTupleData;
+            
             std::size_t                          minFtrTupleSize;
             std::size_t                          maxFtrTupleSize;
             double                               binSize;
             Pharm::DefaultPharmacophoreGenerator pharmGen;
             Pharm::BasicPharmacophore            pharm;
+            Math::ULMatrix                       ftrDistMatrix;
+            FeatureTuple                         ftrTuple;
+            FeatureTuple                         tmpFtrTuple;
+            FeatureTupleData                     ftrTupleData;
+            FeatureTupleData                     tmpFtrTupleData;
         };
     } // namespace Descr
 } // namespace CDPL

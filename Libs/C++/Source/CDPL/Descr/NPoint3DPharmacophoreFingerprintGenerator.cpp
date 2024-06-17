@@ -25,6 +25,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Descr/NPoint3DPharmacophoreFingerprintGenerator.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
 using namespace CDPL;
@@ -42,5 +43,5 @@ Descr::NPoint3DPharmacophoreFingerprintGenerator::NPoint3DPharmacophoreFingerpri
 
 double Descr::NPoint3DPharmacophoreFingerprintGenerator::getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const
 {
-    return 0.0; // TODO
+    return length(get3DCoordinates(ftr1) - get3DCoordinates(ftr2));
 }

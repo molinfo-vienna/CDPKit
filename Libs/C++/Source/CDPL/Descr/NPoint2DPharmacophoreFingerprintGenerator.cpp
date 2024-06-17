@@ -24,7 +24,13 @@
 
 #include "StaticInit.hpp"
 
+#include <cmath>
+
 #include "CDPL/Descr/NPoint2DPharmacophoreFingerprintGenerator.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
@@ -57,10 +63,80 @@ Descr::NPoint2DPharmacophoreFingerprintGenerator::getFeatureDistanceType() const
 
 void Descr::NPoint2DPharmacophoreFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
 {
-    NPoint2DPharmacophoreFingerprintGenerator::generate(molgraph, fp); // TODO
+    molGraph = &molgraph;
+
+    if (hasTopologicalDistanceMatrix(molgraph))
+        activeTopDistMatrix = getTopologicalDistanceMatrix(molgraph).get();
+
+    else {
+        calcTopologicalDistanceMatrix(molgraph, topDistMatrix);
+
+        activeTopDistMatrix = &topDistMatrix;
+    }
+            
+    NPoint2DPharmacophoreFingerprintGenerator::generate(molgraph, fp);
 }
 
 double Descr::NPoint2DPharmacophoreFingerprintGenerator::getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const
 {
-    return 0.0; // TODO
+    auto& substr1 = *getSubstructure(ftr1);
+    auto& substr2 = *getSubstructure(ftr2);
+
+    switch (ftrDistType) {
+
+        case MIN_PATH_LENGTH: {
+            unsigned long dist = ~static_cast<unsigned long>(0);
+
+            for (auto& atom1 : substr1.getAtoms()) {
+                auto atom1_idx = molGraph->getAtomIndex(atom1);
+
+                for (auto& atom2 : substr2.getAtoms()) {
+                    auto atom2_idx = molGraph->getAtomIndex(atom2);
+
+                    dist = std::min(dist, (*activeTopDistMatrix)(atom1_idx, atom2_idx));
+                }
+            }
+
+            return dist;
+        }
+            
+        case MAX_PATH_LENGTH: {
+            unsigned long dist = 0;
+
+            for (auto& atom1 : substr1.getAtoms()) {
+                auto atom1_idx = molGraph->getAtomIndex(atom1);
+
+                for (auto& atom2 : substr2.getAtoms()) {
+                    auto atom2_idx = molGraph->getAtomIndex(atom2);
+
+                    dist = std::max(dist, (*activeTopDistMatrix)(atom1_idx, atom2_idx));
+                }
+            }
+
+            return dist;
+        }
+            
+        case AVG_PATH_LENGTH: {
+            double dist = 0.0;
+            std::size_t num_dist = 0;
+            
+            for (auto& atom1 : substr1.getAtoms()) {
+                auto atom1_idx = molGraph->getAtomIndex(atom1);
+
+                for (auto& atom2 : substr2.getAtoms()) {
+                    auto atom2_idx = molGraph->getAtomIndex(atom2);
+
+                    dist += (*activeTopDistMatrix)(atom1_idx, atom2_idx);
+                    num_dist++;
+                }
+            }
+
+            return (dist / num_dist);
+        }
+
+        default:
+            throw Base::OperationFailed("NPoint2DPharmacophoreFingerprintGenerator: invalid feature distance type");
+    }
+
+    return 0.0;
 }
