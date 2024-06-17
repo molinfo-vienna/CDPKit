@@ -94,7 +94,7 @@ void Descr::NPointPharmacophoreFingerprintGenerator::generate(const Pharm::Featu
     fp.reset();
     
     init(cntnr);
-    enumFeatureTuples(0, cntnr, fp);
+    enumFeatureTuples(0, fp);
 }
 
 Pharm::PharmacophoreGenerator& Descr::NPointPharmacophoreFingerprintGenerator::getPharmacophoreGenerator()
@@ -111,11 +111,13 @@ void Descr::NPointPharmacophoreFingerprintGenerator::init(const Pharm::FeatureCo
 {
     auto num_ftrs = cntnr.getNumFeatures();
 
+    ftrList.clear();
     ftrDistMatrix.resize(num_ftrs, num_ftrs, false);
-
+    
     for (std::size_t i = 0; i < num_ftrs; i++) {
         auto& ftr1 = cntnr.getFeature(i);
-        
+
+        ftrList.emplace_back(getType(ftr1), i);
         ftrDistMatrix(i, i) = getDistanceBinNumber(0);
         
         for (std::size_t j = i + 1; j < num_ftrs; j++) {
@@ -126,21 +128,24 @@ void Descr::NPointPharmacophoreFingerprintGenerator::init(const Pharm::FeatureCo
         }
     }
 
+    std::sort(ftrList.begin(), ftrList.end(), [](const FeatureID& ftr1, const FeatureID& ftr2) {
+                                                  return (ftr1.first < ftr2.first);
+                                              });
     ftrTuple.clear();
 }
 
-void Descr::NPointPharmacophoreFingerprintGenerator::enumFeatureTuples(std::size_t curr_ftr_idx, const Pharm::FeatureContainer& cntnr, Util::BitSet& fp)
+void Descr::NPointPharmacophoreFingerprintGenerator::enumFeatureTuples(std::size_t curr_ftr_idx, Util::BitSet& fp)
 {
     if (ftrTuple.size() >= maxFtrTupleSize)
         return;
      
-    for (auto i = curr_ftr_idx, num_ftrs = cntnr.getNumFeatures(); i < num_ftrs; i++) {
-        ftrTuple.emplace_back(getType(cntnr.getFeature(i)), i);
+    for (auto i = curr_ftr_idx, num_ftrs = ftrList.size(); i < num_ftrs; i++) {
+        ftrTuple.push_back(ftrList[i]);
 
         if (ftrTuple.size() >= minFtrTupleSize)
             emitFeatureTupleBit(fp);
 
-        enumFeatureTuples(i + 1, cntnr, fp);
+        enumFeatureTuples(i + 1, fp);
 
         ftrTuple.pop_back();
     }
@@ -149,19 +154,15 @@ void Descr::NPointPharmacophoreFingerprintGenerator::enumFeatureTuples(std::size
 void Descr::NPointPharmacophoreFingerprintGenerator::emitFeatureTupleBit(Util::BitSet& fp)
 {
     ftrTupleData.clear();
-    tmpFtrTuple = ftrTuple;
-
-    std::sort(tmpFtrTuple.begin(), tmpFtrTuple.end(),
-              [](const FeatureID& ftr1, const FeatureID& ftr2) {
-                  return (ftr1.first < ftr2.first);
-              });
         
-    switch (tmpFtrTuple.size()) {
-
-        case 2:
-            ftrTupleData.push_back(ftrDistMatrix(tmpFtrTuple[0].second, tmpFtrTuple[1].second));
+    switch (ftrTuple.size()) {
 
         case 0:
+            return;
+
+        case 2:
+            ftrTupleData.push_back(ftrDistMatrix(ftrTuple[0].second, ftrTuple[1].second));
+            
         case 1:
             break;
             
@@ -169,7 +170,7 @@ void Descr::NPointPharmacophoreFingerprintGenerator::emitFeatureTupleBit(Util::B
             canonFeatureTupleData(0);
     }
 
-    for (auto& ftr_id : tmpFtrTuple)
+    for (auto& ftr_id : ftrTuple)
         ftrTupleData.push_back(ftr_id.first);
 
     Internal::SHA1 sha;
@@ -188,14 +189,14 @@ void Descr::NPointPharmacophoreFingerprintGenerator::emitFeatureTupleBit(Util::B
 
 void Descr::NPointPharmacophoreFingerprintGenerator::canonFeatureTupleData(std::size_t curr_ftr_idx)
 {
-    auto num_ftrs = tmpFtrTuple.size();
+    auto tuple_size = ftrTuple.size();
     
-    if (curr_ftr_idx == num_ftrs) {
+    if (curr_ftr_idx == tuple_size) {
         tmpFtrTupleData.clear();
         
-        for (std::size_t i = 0; i < num_ftrs; i++)
-            for (std::size_t j = 0; j < num_ftrs; j++)
-                tmpFtrTupleData.push_back(ftrDistMatrix(tmpFtrTuple[i].second, tmpFtrTuple[j].second));
+        for (std::size_t i = 0; i < tuple_size; i++)
+            for (std::size_t j = i + 1; j < tuple_size; j++)
+                tmpFtrTupleData.push_back(ftrDistMatrix(ftrTuple[i].second, ftrTuple[j].second));
 
         if (std::lexicographical_compare(ftrTupleData.begin(), ftrTupleData.end(), tmpFtrTupleData.begin(), tmpFtrTupleData.end()))
             tmpFtrTupleData.swap(ftrTupleData);
@@ -205,14 +206,17 @@ void Descr::NPointPharmacophoreFingerprintGenerator::canonFeatureTupleData(std::
     
     auto eq_type_range_end = curr_ftr_idx + 1;
 
-    for ( ; eq_type_range_end < tmpFtrTuple.size() && (tmpFtrTuple[curr_ftr_idx].first == tmpFtrTuple[eq_type_range_end].first); eq_type_range_end++);
+    for ( ; eq_type_range_end < ftrTuple.size() && (ftrTuple[curr_ftr_idx].first == ftrTuple[eq_type_range_end].first); eq_type_range_end++);
 
-    canonFeatureTupleData(eq_type_range_end);
- 
-    for (std::size_t i = 0, num_perms = Math::factorial<std::size_t>(eq_type_range_end - curr_ftr_idx) - 1; i < num_perms; i++) {
-        Internal::nextPermutation(&tmpFtrTuple[curr_ftr_idx], &tmpFtrTuple[eq_type_range_end]);
-
+    if (eq_type_range_end == (curr_ftr_idx + 1)) {
         canonFeatureTupleData(eq_type_range_end);
+        return;
+    }
+    
+    for (std::size_t i = 0, num_perms = Math::factorial<std::size_t>(eq_type_range_end - curr_ftr_idx); i < num_perms; i++) {
+        canonFeatureTupleData(eq_type_range_end);
+
+        Internal::nextPermutation(&ftrTuple[curr_ftr_idx], &ftrTuple[eq_type_range_end]);
     }
 }
 

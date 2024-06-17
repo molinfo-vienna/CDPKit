@@ -87,7 +87,7 @@ namespace CDPL
           private:
             void init(const Pharm::FeatureContainer& cntnr);
 
-            void enumFeatureTuples(std::size_t curr_ftr_idx, const Pharm::FeatureContainer& cntnr, Util::BitSet& fp);
+            void enumFeatureTuples(std::size_t curr_ftr_idx, Util::BitSet& fp);
 
             void emitFeatureTupleBit(Util::BitSet& fp);
 
@@ -98,7 +98,7 @@ namespace CDPL
             virtual double getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const = 0;
 
             typedef std::pair<unsigned int, std::size_t> FeatureID;
-            typedef std::vector<FeatureID>               FeatureTuple;
+            typedef std::vector<FeatureID>               FeatureList;
             typedef std::vector<unsigned long>           FeatureTupleData;
             
             std::size_t                          minFtrTupleSize;
@@ -106,9 +106,9 @@ namespace CDPL
             double                               binSize;
             Pharm::DefaultPharmacophoreGenerator pharmGen;
             Pharm::BasicPharmacophore            pharm;
+            FeatureList                          ftrList;
             Math::ULMatrix                       ftrDistMatrix;
-            FeatureTuple                         ftrTuple;
-            FeatureTuple                         tmpFtrTuple;
+            FeatureList                          ftrTuple;
             FeatureTupleData                     ftrTupleData;
             FeatureTupleData                     tmpFtrTupleData;
         };
