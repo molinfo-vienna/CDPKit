@@ -1024,6 +1024,9 @@ namespace
 }
 
 
+constexpr std::size_t Descr::PubChemFingerprintGenerator::NUM_BITS;
+
+
 Descr::PubChemFingerprintGenerator::PubChemFingerprintGenerator()
 {
     subSearch.uniqueMappingsOnly(true);

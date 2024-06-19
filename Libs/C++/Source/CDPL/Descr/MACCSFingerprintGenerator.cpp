@@ -224,6 +224,9 @@ namespace
 }
 
 
+constexpr std::size_t Descr::MACCSFingerprintGenerator::NUM_BITS;
+
+
 Descr::MACCSFingerprintGenerator::MACCSFingerprintGenerator()
 {
     subSearch.uniqueMappingsOnly(true);
