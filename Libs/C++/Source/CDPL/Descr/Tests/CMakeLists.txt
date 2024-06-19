@@ -28,6 +28,8 @@ set(test-suite_SRCS
     ConvenienceHeaderTest.cpp
     SimilarityFunctionsTest.cpp
     PubChemFingerprintGeneratorTest.cpp
+    NPoint2DPharmacophoreFingerprintGeneratorTest.cpp
+    NPoint3DPharmacophoreFingerprintGeneratorTest.cpp
    )
 
 set(CMAKE_BUILD_TYPE "Debug")

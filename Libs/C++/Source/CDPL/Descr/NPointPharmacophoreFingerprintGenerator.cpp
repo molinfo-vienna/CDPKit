@@ -69,7 +69,7 @@ std::size_t Descr::NPointPharmacophoreFingerprintGenerator::getMaxFeatureTupleSi
 
 void Descr::NPointPharmacophoreFingerprintGenerator::setBinSize(double bin_size)
 {
-    binSize = binSize;
+    binSize = bin_size;
 }
 
 double Descr::NPointPharmacophoreFingerprintGenerator::getBinSize() const
@@ -222,5 +222,5 @@ void Descr::NPointPharmacophoreFingerprintGenerator::canonFeatureTupleData(std::
 
 inline unsigned long Descr::NPointPharmacophoreFingerprintGenerator::getDistanceBinNumber(double dist) const
 {
-    return std::floor(dist / binSize);
+    return std::round(dist / binSize);
 }

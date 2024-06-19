@@ -74,7 +74,7 @@ void Descr::NPoint2DPharmacophoreFingerprintGenerator::generate(const Chem::Mole
         activeTopDistMatrix = &topDistMatrix;
     }
             
-    NPoint2DPharmacophoreFingerprintGenerator::generate(molgraph, fp);
+    NPointPharmacophoreFingerprintGenerator::generate(molgraph, fp);
 }
 
 double Descr::NPoint2DPharmacophoreFingerprintGenerator::getDistance(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const
