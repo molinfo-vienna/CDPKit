@@ -28,6 +28,9 @@ if [[ $# -ne 2 ]]; then
     exit 2
 fi
 
+cd $2/..
+git pull
+
 cd $1
 make doc
 
