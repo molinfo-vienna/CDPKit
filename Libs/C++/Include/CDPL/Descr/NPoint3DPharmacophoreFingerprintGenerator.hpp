@@ -43,6 +43,7 @@ namespace CDPL
 
         /**
          * \brief NPoint3DPharmacophoreFingerprintGenerator.
+         * \since 1.2
          */
         class CDPL_DESCR_API NPoint3DPharmacophoreFingerprintGenerator : public NPointPharmacophoreFingerprintGenerator
         {
