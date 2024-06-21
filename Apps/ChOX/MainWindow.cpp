@@ -65,6 +65,7 @@
 #include "SettingsEditDialog.hpp"
 #include "AboutDialog.hpp"
 #include "RangeSelectionDialog.hpp"
+#include "SubstructHighlightingToolButton.hpp"
 
 #if QT_VERSION <= 0x040400
 #  define selectNameFilter selectFilter
@@ -104,9 +105,11 @@ void ChOX::MainWindow::init()
 
     setupContextMenu();
 
+    dataSetViewControl->addWidget(new SubstructHighlightingToolButton(dataSetViewControl, *settings));
+    
     addToolBar(dataSetViewControl);
     setCentralWidget(dataSetView);
-
+    
 //----
 
     viewInfoLabel = new QLabel(this);

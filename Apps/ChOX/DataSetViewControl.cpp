@@ -117,7 +117,7 @@ void DataSetViewControl::init()
 
     rowCountSpinBox->setMinimum(1);
     rowCountSpinBox->setValue(1);
-    rowCountSpinBox->setToolTip(tr("Set number of rows"));
+    rowCountSpinBox->setToolTip(tr("Set Number of Rows"));
 
     addWidget(rowCountSpinBox);
 
@@ -127,21 +127,21 @@ void DataSetViewControl::init()
 
     columnCountSpinBox->setMinimum(1);
     columnCountSpinBox->setValue(1);
-    columnCountSpinBox->setToolTip(tr("Set number of columns"));
+    columnCountSpinBox->setToolTip(tr("Set Number of Columns"));
 
     addWidget(columnCountSpinBox);
 
     prevPageButton = new QToolButton(this);
 
     prevPageButton->setIcon(QIcon(":/Icons/2leftarrow.png"));
-    prevPageButton->setToolTip(tr("Previous page"));
+    prevPageButton->setToolTip(tr("Previous Page"));
 
     addWidget(prevPageButton);
 
     prevLineButton = new QToolButton(this);
 
     prevLineButton->setIcon(QIcon(":/Icons/1leftarrow.png"));
-    prevLineButton->setToolTip(tr("Previous row"));
+    prevLineButton->setToolTip(tr("Previous Row"));
 
     addWidget(prevLineButton);
 
@@ -149,7 +149,7 @@ void DataSetViewControl::init()
     pageOffsetValidator = new QIntValidator(pageOffsetLineEdit);
 
     pageOffsetLineEdit->setValidator(pageOffsetValidator);
-    pageOffsetLineEdit->setToolTip(tr("Go to record"));
+    pageOffsetLineEdit->setToolTip(tr("Go to Record"));
     pageOffsetLineEdit->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, 
                                                   pageOffsetLineEdit->sizePolicy().verticalPolicy()));
 
@@ -158,7 +158,7 @@ void DataSetViewControl::init()
     nextLineButton = new QToolButton(this);
 
     nextLineButton->setIcon(QIcon(":/Icons/1rightarrow.png"));
-    nextLineButton->setToolTip(tr("Next row"));
+    nextLineButton->setToolTip(tr("Next Row"));
 
     addWidget(nextLineButton);
 

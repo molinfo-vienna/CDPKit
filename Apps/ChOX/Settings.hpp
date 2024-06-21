@@ -76,6 +76,7 @@ namespace ChOX
         void writeDBCreationModeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
         void writeStrParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeStrListParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
         template <typename T>
         void writeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
@@ -89,6 +90,8 @@ namespace ChOX
         void readAtomColorTableParam(QSettings&);
 
         void readDBCreationModeParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, CDPL::Pharm::ScreeningDBCreator::Mode) const;
+
+        void readStrListParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const QStringList&);
 
         template <typename T>
         void readParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const T&);

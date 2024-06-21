@@ -34,6 +34,9 @@
 #include "CDPLFwd.hpp"
 
 
+class QStringList;
+
+
 namespace ChOX
 {
 
@@ -150,6 +153,13 @@ namespace ChOX
 
     const CDPL::Vis::ColorTable::SharedPointer& getAtomColorTableParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void                                        setAtomColorTableParameter(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Vis::ColorTable::SharedPointer& colors);
+
+    const QStringList& getSubstructHighlightingPatternsParameter(const CDPL::Base::ControlParameterContainer& cntnr);
+    void               setSubstructHighlightingPatternsParameter(CDPL::Base::ControlParameterContainer& cntnr, const QStringList& patterns);
+
+    bool getSubstructHighlightingEnabledParameter(const CDPL::Base::ControlParameterContainer& cntnr);
+    void setSubstructHighlightingEnabledParameter(CDPL::Base::ControlParameterContainer& cntnr, bool enabled);
+    
 } // namespace ChOX
 
 #endif // CHOX_CONTROLPARAMETERFUNCTIONS_HPP

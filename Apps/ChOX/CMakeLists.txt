@@ -78,6 +78,9 @@ set(chox_SRCS
     AboutDialog.cpp
     PrintProgressDialog.cpp
     RangeSelectionDialog.cpp
+    SubstructHighlightingPatternsEditWidget.cpp
+    SubstructHighlightingPatternsEditAction.cpp
+    SubstructHighlightingToolButton.cpp
    )
 
 set(chox_UI_FILES MainWindow.ui)
@@ -129,7 +132,10 @@ set(chox_MOC_HDRS
     SettingsEditDialog.hpp
     AboutDialog.hpp
     PrintProgressDialog.hpp
-    RangeSelectionDialog.hpp 
+    RangeSelectionDialog.hpp
+    SubstructHighlightingPatternsEditWidget.hpp
+    SubstructHighlightingPatternsEditAction.hpp
+    SubstructHighlightingToolButton.hpp
    )
 
 qt5_wrap_ui(chox_SRCS ${chox_UI_FILES})

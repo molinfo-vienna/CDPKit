@@ -28,6 +28,8 @@
 #include <cstddef>
 #include <string>
 
+#include <QStringList>
+
 #include "CDPL/Vis/ColorTable.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
@@ -240,6 +242,9 @@ namespace ChOX
         extern const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS;
         extern const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES;
         extern const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE;
+
+        extern const QStringList SUBSTRUCT_HIGHLIGHTING_PATTERNS;
+        extern const bool        SUBSTRUCT_HIGHLIGHTING_ENABLED;
 
     } // namespace ControlParameterDefault
 } // namespace ChOX

@@ -169,6 +169,9 @@ void Settings::load()
     readParameter<unsigned int>(*this, settings, Vis::ControlParameter::SIZE_ADJUSTMENT, Vis::ControlParameterDefault::SIZE_ADJUSTMENT);
     readParameter<unsigned int>(*this, settings, Vis::ControlParameter::ALIGNMENT, Vis::ControlParameterDefault::ALIGNMENT);
 
+    readParameter<bool>(*this, settings, ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED, ControlParameterDefault::SUBSTRUCT_HIGHLIGHTING_ENABLED);
+    readStrListParameter(*this, settings, ControlParameter::SUBSTRUCT_HIGHLIGHTING_PATTERNS, ControlParameterDefault::SUBSTRUCT_HIGHLIGHTING_PATTERNS);
+
     settings.endGroup();
 
     settings.beginGroup("Reactions");
@@ -748,6 +751,9 @@ void Settings::save() const
 
     writeParameter<unsigned int>(*this, settings, Vis::ControlParameter::SIZE_ADJUSTMENT);
     writeParameter<unsigned int>(*this, settings, Vis::ControlParameter::ALIGNMENT);
+
+    writeParameter<bool>(*this, settings, ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED);
+    writeStrListParameter(*this, settings, ControlParameter::SUBSTRUCT_HIGHLIGHTING_PATTERNS);
 
     settings.endGroup();
 
@@ -1531,6 +1537,23 @@ void Settings::writeStrParameter(const SettingsContainer& params, QSettings& set
     settings.setValue(name, QString::fromStdString(val.template getData<std::string>()));
 }
 
+void Settings::writeStrListParameter(const SettingsContainer& params, QSettings& settings, 
+                                     const CDPL::Base::LookupKey& key) const
+{
+    using namespace CDPL;
+
+    Base::Any val = params.getParameter(key);
+
+    QString name = QString::fromStdString(key.getName());
+
+    if (val.isEmpty()) {
+        settings.remove(name);
+        return;
+    }
+
+    settings.setValue(name, val.template getData<QStringList>());
+}
+
 void Settings::readFontParameter(SettingsContainer& params, QSettings& settings, 
                                  const CDPL::Base::LookupKey& key, const CDPL::Vis::Font& def_font)
 {
@@ -1761,6 +1784,16 @@ void Settings::readDBCreationModeParameter(SettingsContainer& params, QSettings&
                                            const CDPL::Base::LookupKey& key, 
                                            CDPL::Pharm::ScreeningDBCreator::Mode def_value) const
 {
+}
+
+void Settings::readStrListParameter(SettingsContainer& params, QSettings& settings, 
+                                    const CDPL::Base::LookupKey& key, const QStringList& def_value)
+{
+    using namespace CDPL;
+
+    QString name = QString::fromStdString(key.getName());
+
+    params.setParameter(key, settings.value(name, def_value).toStringList());
 }
 
 template <typename T>
