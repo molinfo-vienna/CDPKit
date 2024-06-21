@@ -25,6 +25,7 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <random>
 
 #include <boost/test/auto_unit_test.hpp>
 
@@ -62,14 +63,15 @@ BOOST_AUTO_TEST_CASE(NPoint3DPharmacophoreFingerprintGeneratorTest)
 
     Pharm::BasicPharmacophore pharm;
     Pharm::FeatureSet ftr_set;    
-
+    std::mt19937 rng(750317);
+ 
     Pharm::DefaultPharmacophoreGenerator().generate(mol, pharm);
 
     std::vector<std::size_t> ftr_perm(pharm.getNumFeatures());
 
     std::iota(ftr_perm.begin(), ftr_perm.end(), 0);
 
-    for (std::size_t i = 0; i < 20; i++) {
+    for (std::size_t i = 0; i < 50; i++) {
         ftr_set.clear();
 
         for (auto i : ftr_perm)
@@ -79,7 +81,11 @@ BOOST_AUTO_TEST_CASE(NPoint3DPharmacophoreFingerprintGeneratorTest)
 
         BOOST_CHECK(gen_fp1 == gen_fp2);
 
-        std::next_permutation(ftr_perm.begin(), ftr_perm.end());
+        std::shuffle(ftr_perm.begin(), ftr_perm.end(), rng);
+
+        gen_fp2.reset();
+
+        BOOST_CHECK(gen_fp2.count() == 0);
     }
 
     //---
