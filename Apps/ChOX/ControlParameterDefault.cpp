@@ -23,6 +23,7 @@
 
 
 #include "CDPL/Vis/Color.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
@@ -267,7 +268,10 @@ namespace ChOX
         const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
         const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
 
-        extern const QStringList                   SUBSTRUCT_HIGHLIGHTING_PATTERNS          = QStringList();
-        extern const bool                          SUBSTRUCT_HIGHLIGHTING_ENABLED           = true;
+        const QStringList                           SUBSTRUCT_HIGHLIGHTING_PATTERNS          = QStringList();
+        const bool                                  SUBSTRUCT_HIGHLIGHTING_ENABLED           = true;
+
+        const CDPL::Vis::Brush                      ATOM_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(0.58, 0.87, 0.35));
+        const CDPL::Vis::Brush                      BOND_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(0.58, 0.87, 0.35));
     }
 }

@@ -109,6 +109,7 @@ namespace ChOX
         void cascadeWindows();
         void setWindowActive();
         void handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val);
+        void viewSubstructHighlightingChanged();
         void viewAlignmentChanged();
         void viewSizeAdjustmentChanged();
         void reactionArrowStyleChanged();

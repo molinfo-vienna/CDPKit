@@ -68,7 +68,6 @@ namespace ChOX
         QListWidget* ptnList;
         QPushButton* clearButton;
         QCheckBox*   hltgCheckBox;
-        QIcon        okIcon;
         QIcon        errorIcon;
     };
 } // namespace ChOX

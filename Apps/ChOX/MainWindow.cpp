@@ -61,6 +61,8 @@
 #include "MainWindowList.hpp"
 #include "InputFileFilterList.hpp"
 #include "OutputFileFilterList.hpp"
+#include "ControlParameter.hpp"
+#include "ControlParameterFunctions.hpp"
 #include "Settings.hpp"
 #include "SettingsEditDialog.hpp"
 #include "AboutDialog.hpp"
@@ -174,9 +176,11 @@ void ChOX::MainWindow::init()
 
     connect(page_view, SIGNAL(recordNoVisibilityChanged(bool)), uiMainWindow.viewShowRecordNumbersAction, SLOT(setChecked(bool)));
     connect(page_view, SIGNAL(gridVisibilityChanged(bool)), uiMainWindow.viewShowGridAction, SLOT(setChecked(bool)));
+    connect(page_view, SIGNAL(recordNameVisibilityChanged(bool)), uiMainWindow.viewShowRecordNamesAction, SLOT(setChecked(bool)));
 
     connect(uiMainWindow.viewShowGridAction, SIGNAL(toggled(bool)), page_view, SLOT(showGrid(bool)));
     connect(uiMainWindow.viewShowRecordNumbersAction, SIGNAL(toggled(bool)), page_view, SLOT(showRecordNumbers(bool)));
+    connect(uiMainWindow.viewShowRecordNamesAction, SIGNAL(toggled(bool)), page_view, SLOT(showRecordNames(bool)));
 
 // +++
 
@@ -995,106 +999,113 @@ void ChOX::MainWindow::handleAgentLayoutDirChange()
 void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val)
 {
     using namespace CDPL;
-    using namespace Vis;
 
-    if (key == ControlParameter::SIZE_ADJUSTMENT) {
+    if (key == ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED) {
+        uiMainWindow.viewSubstructHighlightingAction->blockSignals(true);
+        uiMainWindow.viewSubstructHighlightingAction->setChecked(getSubstructHighlightingEnabledParameter(*settings));
+        uiMainWindow.viewSubstructHighlightingAction->blockSignals(false);
+
+        return;
+    }
+    
+    if (key == Vis::ControlParameter::SIZE_ADJUSTMENT) {
         handleSizeAdjustmentChange();
         return;
     }
 
-    if (key == ControlParameter::ALIGNMENT) {
+    if (key == Vis::ControlParameter::ALIGNMENT) {
         handleAlignmentChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_ARROW_STYLE) {
+    if (key == Vis::ControlParameter::REACTION_ARROW_STYLE) {
         handleArrowStyleChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_COMPONENT_LAYOUT) {
+    if (key == Vis::ControlParameter::REACTION_COMPONENT_LAYOUT) {
         handleComponentLayoutChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_COMPONENT_LAYOUT_DIRECTION) {
+    if (key == Vis::ControlParameter::REACTION_COMPONENT_LAYOUT_DIRECTION) {
         handleComponentLayoutDirChange();
         return;
     }
 
-    if (key == ControlParameter::SHOW_REACTION_REACTANTS) {
+    if (key == Vis::ControlParameter::SHOW_REACTION_REACTANTS) {
         handleReactantVisibilityChange();
         return;
     }
 
-    if (key == ControlParameter::SHOW_REACTION_AGENTS) {
+    if (key == Vis::ControlParameter::SHOW_REACTION_AGENTS) {
         handleAgentVisibilityChange();
         return;
     }
 
-    if (key == ControlParameter::SHOW_REACTION_PRODUCTS) {
+    if (key == Vis::ControlParameter::SHOW_REACTION_PRODUCTS) {
         handleProductVisibilityChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_AGENT_ALIGNMENT) {
+    if (key == Vis::ControlParameter::REACTION_AGENT_ALIGNMENT) {
         handleAgentAlignmentChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_AGENT_LAYOUT) {
+    if (key == Vis::ControlParameter::REACTION_AGENT_LAYOUT) {
         handleAgentLayoutChange();
         return;
     }
 
-    if (key == ControlParameter::REACTION_AGENT_LAYOUT_DIRECTION) {
+    if (key == Vis::ControlParameter::REACTION_AGENT_LAYOUT_DIRECTION) {
         handleAgentLayoutDirChange();
         return;
     }
 
-    if (key == ControlParameter::SHOW_REACTION_PLUS_SIGNS) {
+    if (key == Vis::ControlParameter::SHOW_REACTION_PLUS_SIGNS) {
         uiMainWindow.viewShowReactionPlusSignsAction->blockSignals(true);
-        uiMainWindow.viewShowReactionPlusSignsAction->setChecked(getShowReactionPlusSignsParameter(*settings));
+        uiMainWindow.viewShowReactionPlusSignsAction->setChecked(Vis::getShowReactionPlusSignsParameter(*settings));
         uiMainWindow.viewShowReactionPlusSignsAction->blockSignals(false);
 
         return;
     }
 
-    if (key == ControlParameter::SHOW_CARBONS) {
+    if (key == Vis::ControlParameter::SHOW_CARBONS) {
         uiMainWindow.viewShowCarbonsAction->blockSignals(true);
-        uiMainWindow.viewShowCarbonsAction->setChecked(getShowCarbonsParameter(*settings));
+        uiMainWindow.viewShowCarbonsAction->setChecked(Vis::getShowCarbonsParameter(*settings));
         uiMainWindow.viewShowCarbonsAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_CHARGES) {
+    if (key == Vis::ControlParameter::SHOW_CHARGES) {
         uiMainWindow.viewShowChargesAction->blockSignals(true);
-        uiMainWindow.viewShowChargesAction->setChecked(getShowChargesParameter(*settings));
+        uiMainWindow.viewShowChargesAction->setChecked(Vis::getShowChargesParameter(*settings));
         uiMainWindow.viewShowChargesAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_ISOTOPES) {
+    if (key == Vis::ControlParameter::SHOW_ISOTOPES) {
         uiMainWindow.viewShowIsotopesAction->blockSignals(true);
-        uiMainWindow.viewShowIsotopesAction->setChecked(getShowIsotopesParameter(*settings));
+        uiMainWindow.viewShowIsotopesAction->setChecked(Vis::getShowIsotopesParameter(*settings));
         uiMainWindow.viewShowIsotopesAction->blockSignals(false);
 
         return;
     }    
  
-    if (key == ControlParameter::SHOW_EXPLICIT_HYDROGENS) {
+    if (key == Vis::ControlParameter::SHOW_EXPLICIT_HYDROGENS) {
         uiMainWindow.viewShowExplicitHsAction->blockSignals(true);
-        uiMainWindow.viewShowExplicitHsAction->setChecked(getShowExplicitHydrogensParameter(*settings));
+        uiMainWindow.viewShowExplicitHsAction->setChecked(Vis::getShowExplicitHydrogensParameter(*settings));
         uiMainWindow.viewShowExplicitHsAction->blockSignals(false);
 
         return;
     }
 
-    if (key == ControlParameter::SHOW_HYDROGEN_COUNTS) {
+    if (key == Vis::ControlParameter::SHOW_HYDROGEN_COUNTS) {
         uiMainWindow.viewShowHCountsAction->blockSignals(true);
-        uiMainWindow.viewShowHCountsAction->setChecked(getShowHydrogenCountsParameter(*settings));
+        uiMainWindow.viewShowHCountsAction->setChecked(Vis::getShowHydrogenCountsParameter(*settings));
         uiMainWindow.viewShowHCountsAction->blockSignals(false);
 
         uiMainWindow.viewShowNonCHCountsAction->setEnabled(!uiMainWindow.viewShowHCountsAction->isChecked());
@@ -1102,75 +1113,80 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
         return;
     }
  
-    if (key == ControlParameter::SHOW_NON_CARBON_HYDROGEN_COUNTS) {
+    if (key == Vis::ControlParameter::SHOW_NON_CARBON_HYDROGEN_COUNTS) {
         uiMainWindow.viewShowNonCHCountsAction->blockSignals(true);
-        uiMainWindow.viewShowNonCHCountsAction->setChecked(getShowNonCarbonHydrogenCountsParameter(*settings));
+        uiMainWindow.viewShowNonCHCountsAction->setChecked(Vis::getShowNonCarbonHydrogenCountsParameter(*settings));
         uiMainWindow.viewShowNonCHCountsAction->blockSignals(false);
 
         return;
     } 
     
-    if (key == ControlParameter::SHOW_ATOM_QUERY_INFOS) {
+    if (key == Vis::ControlParameter::SHOW_ATOM_QUERY_INFOS) {
         uiMainWindow.viewShowAtomQueryInfosAction->blockSignals(true);
-        uiMainWindow.viewShowAtomQueryInfosAction->setChecked(getShowAtomQueryInfosParameter(*settings));
+        uiMainWindow.viewShowAtomQueryInfosAction->setChecked(Vis::getShowAtomQueryInfosParameter(*settings));
         uiMainWindow.viewShowAtomQueryInfosAction->blockSignals(false);
 
         return;
     } 
     
-    if (key == ControlParameter::SHOW_ATOM_REACTION_INFOS) {
+    if (key == Vis::ControlParameter::SHOW_ATOM_REACTION_INFOS) {
         uiMainWindow.viewShowAtomReactionInfosAction->blockSignals(true);
-        uiMainWindow.viewShowAtomReactionInfosAction->setChecked(getShowAtomReactionInfosParameter(*settings));
+        uiMainWindow.viewShowAtomReactionInfosAction->setChecked(Vis::getShowAtomReactionInfosParameter(*settings));
         uiMainWindow.viewShowAtomReactionInfosAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_RADICAL_ELECTRONS) {
+    if (key == Vis::ControlParameter::SHOW_RADICAL_ELECTRONS) {
         uiMainWindow.viewShowRadicalElectronsAction->blockSignals(true);
-        uiMainWindow.viewShowRadicalElectronsAction->setChecked(getShowRadicalElectronsParameter(*settings));
+        uiMainWindow.viewShowRadicalElectronsAction->setChecked(Vis::getShowRadicalElectronsParameter(*settings));
         uiMainWindow.viewShowRadicalElectronsAction->blockSignals(false);
 
         return;
     }
     
-    if (key == ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS) {
+    if (key == Vis::ControlParameter::SHOW_ATOM_CONFIGURATION_LABELS) {
         uiMainWindow.viewShowAtomConfigLabelsAction->blockSignals(true);
-        uiMainWindow.viewShowAtomConfigLabelsAction->setChecked(getShowAtomConfigurationLabelsParameter(*settings));
+        uiMainWindow.viewShowAtomConfigLabelsAction->setChecked(Vis::getShowAtomConfigurationLabelsParameter(*settings));
         uiMainWindow.viewShowAtomConfigLabelsAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_BOND_REACTION_INFOS) {
+    if (key == Vis::ControlParameter::SHOW_BOND_REACTION_INFOS) {
         uiMainWindow.viewShowBondReactionInfosAction->blockSignals(true);
-        uiMainWindow.viewShowBondReactionInfosAction->setChecked(getShowBondReactionInfosParameter(*settings));
+        uiMainWindow.viewShowBondReactionInfosAction->setChecked(Vis::getShowBondReactionInfosParameter(*settings));
         uiMainWindow.viewShowBondReactionInfosAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_BOND_QUERY_INFOS) {
+    if (key == Vis::ControlParameter::SHOW_BOND_QUERY_INFOS) {
         uiMainWindow.viewShowBondQueryInfosAction->blockSignals(true);
-        uiMainWindow.viewShowBondQueryInfosAction->setChecked(getShowBondQueryInfosParameter(*settings));
+        uiMainWindow.viewShowBondQueryInfosAction->setChecked(Vis::getShowBondQueryInfosParameter(*settings));
         uiMainWindow.viewShowBondQueryInfosAction->blockSignals(false);
 
         return;
     }
  
-    if (key == ControlParameter::SHOW_STEREO_BONDS) {
+    if (key == Vis::ControlParameter::SHOW_STEREO_BONDS) {
         uiMainWindow.viewShowBondStereoAction->blockSignals(true);
-        uiMainWindow.viewShowBondStereoAction->setChecked(getShowStereoBondsParameter(*settings));
+        uiMainWindow.viewShowBondStereoAction->setChecked(Vis::getShowStereoBondsParameter(*settings));
         uiMainWindow.viewShowBondStereoAction->blockSignals(false);
 
         return;
     }
 
-    if (key == ControlParameter::SHOW_BOND_CONFIGURATION_LABELS) {
+    if (key == Vis::ControlParameter::SHOW_BOND_CONFIGURATION_LABELS) {
         uiMainWindow.viewShowBondConfigLabelsAction->blockSignals(true);
-        uiMainWindow.viewShowBondConfigLabelsAction->setChecked(getShowBondConfigurationLabelsParameter(*settings));
+        uiMainWindow.viewShowBondConfigLabelsAction->setChecked(Vis::getShowBondConfigurationLabelsParameter(*settings));
         uiMainWindow.viewShowBondConfigLabelsAction->blockSignals(false);
     }
+}
+
+void ChOX::MainWindow::viewSubstructHighlightingChanged()
+{
+    setSubstructHighlightingEnabledParameter(*settings, uiMainWindow.viewSubstructHighlightingAction->isChecked());
 }
 
 void ChOX::MainWindow::viewAlignmentChanged()

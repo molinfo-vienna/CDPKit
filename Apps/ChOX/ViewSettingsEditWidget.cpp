@@ -88,6 +88,7 @@ void ViewSettingsEditWidget::apply()
     setShowGridParameter(settings, showGridCheckBox->isChecked());
     setShowRecordNumbersParameter(settings, showRecordNumbersCheckBox->isChecked());
     setShowRecordNamesParameter(settings, showRecordNamesCheckBox->isChecked());
+    setSubstructHighlightingEnabledParameter(settings, showHighlightedSubstructsCheckBox->isChecked());
 }
 
 void ViewSettingsEditWidget::reset()
@@ -122,7 +123,8 @@ void ViewSettingsEditWidget::reset()
     showGridCheckBox->setChecked(getShowGridParameter(settings)); 
     showRecordNumbersCheckBox->setChecked(getShowRecordNumbersParameter(settings)); 
     showRecordNamesCheckBox->setChecked(getShowRecordNamesParameter(settings)); 
-
+    showHighlightedSubstructsCheckBox->setChecked(getSubstructHighlightingEnabledParameter(settings));
+    
     blockSignals(false);
 
     haveChanges = false;
@@ -159,7 +161,8 @@ void ViewSettingsEditWidget::setDefaults()
     showGridCheckBox->setChecked(ControlParameterDefault::SHOW_GRID);
     showRecordNumbersCheckBox->setChecked(ControlParameterDefault::SHOW_RECORD_NUMBERS);
     showRecordNamesCheckBox->setChecked(ControlParameterDefault::SHOW_RECORD_NAMES);
-
+    showHighlightedSubstructsCheckBox->setChecked(ControlParameterDefault::SUBSTRUCT_HIGHLIGHTING_ENABLED);
+    
     haveChanges = true;
 
     emit updateGUI();
@@ -187,11 +190,11 @@ void ViewSettingsEditWidget::init()
     // --------
 
     QGroupBox* group_box = new QGroupBox(tr("Show"), this);
-    QHBoxLayout* h_box_layout = new QHBoxLayout(group_box);
+    auto grid_layout = new QGridLayout(group_box);
 
     showGridCheckBox = new QCheckBox(tr("&Grid"), group_box);
 
-    h_box_layout->addWidget(showGridCheckBox);
+    grid_layout->addWidget(showGridCheckBox, 0, 0);
 
     connect(showGridCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
@@ -199,17 +202,25 @@ void ViewSettingsEditWidget::init()
 
     showRecordNumbersCheckBox = new QCheckBox(tr("Record &Numbers"), group_box);
 
-    h_box_layout->addWidget(showRecordNumbersCheckBox);
+    grid_layout->addWidget(showRecordNumbersCheckBox, 0, 1);
 
     connect(showRecordNumbersCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
     // +++
 
-    showRecordNamesCheckBox = new QCheckBox(tr("Record &Names"), group_box);
+    showRecordNamesCheckBox = new QCheckBox(tr("Record N&ames"), group_box);
 
-    h_box_layout->addWidget(showRecordNamesCheckBox);
+    grid_layout->addWidget(showRecordNamesCheckBox, 1, 0);
 
     connect(showRecordNamesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+    // +++
+
+    showHighlightedSubstructsCheckBox = new QCheckBox(tr("Highlighted &Substructures"), group_box);
+
+    grid_layout->addWidget(showHighlightedSubstructsCheckBox, 1, 1);
+
+    connect(showHighlightedSubstructsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
     main_layout->addWidget(group_box);
 
@@ -217,7 +228,7 @@ void ViewSettingsEditWidget::init()
 
     group_box = new QGroupBox(tr("Colors"), this);
 
-    QGridLayout* grid_layout = new QGridLayout(group_box);
+    grid_layout = new QGridLayout(group_box);
 
     // +++
 
@@ -295,7 +306,7 @@ void ViewSettingsEditWidget::init()
 
     // --------
 
-    h_box_layout = new QHBoxLayout();
+    auto h_box_layout = new QHBoxLayout();
     main_layout->addLayout(h_box_layout);
 
     // --------

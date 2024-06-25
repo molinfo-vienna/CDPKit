@@ -230,6 +230,7 @@ void Settings::load()
     readSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_SIZE);
     readFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_FONT);
     readColorParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR, Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR);
+    readBrushParameter(*this, settings, Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH, ControlParameterDefault::ATOM_HIGHLIGHT_AREA_BRUSH);
 
     settings.endGroup();
 
@@ -255,7 +256,8 @@ void Settings::load()
     readSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_SIZE);
     readFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_FONT);
     readColorParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR, Vis::ControlParameterDefault::BOND_CONFIGURATION_LABEL_COLOR);
-
+    readBrushParameter(*this, settings, Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH, ControlParameterDefault::BOND_HIGHLIGHT_AREA_BRUSH);
+    
     settings.endGroup();
 
     settings.beginGroup("Printing");
@@ -808,6 +810,7 @@ void Settings::save() const
     writeSizeSpecParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_SIZE);
     writeFontParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_FONT);
     writeColorParameter(*this, settings, Vis::ControlParameter::ATOM_CONFIGURATION_LABEL_COLOR);
+    writeBrushParameter(*this, settings, Vis::ControlParameter::ATOM_HIGHLIGHT_AREA_BRUSH);
     
     settings.endGroup();
 
@@ -833,7 +836,8 @@ void Settings::save() const
     writeSizeSpecParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_SIZE);
     writeFontParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_FONT);
     writeColorParameter(*this, settings, Vis::ControlParameter::BOND_CONFIGURATION_LABEL_COLOR);
- 
+    writeBrushParameter(*this, settings, Vis::ControlParameter::BOND_HIGHLIGHT_AREA_BRUSH);
+     
     settings.endGroup();
 
     settings.beginGroup("Printing");

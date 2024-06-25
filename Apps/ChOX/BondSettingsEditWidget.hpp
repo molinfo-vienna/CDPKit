@@ -68,6 +68,7 @@ namespace ChOX
         Settings&                    settings;
         CDPL::Vis::Color             color;
         CDPL::Vis::Color             configLabelColor;
+        CDPL::Vis::Color             highlightColor;
         CDPL::Vis::Font              labelFont;
         CDPL::Vis::Font              configLabelFont;
         CDPL::Vis::SizeSpecification labelSize;

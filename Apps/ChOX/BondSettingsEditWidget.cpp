@@ -32,12 +32,14 @@
 
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
+#include "CDPL/Vis/Brush.hpp"
 
 #include "BondSettingsEditWidget.hpp"
 #include "FontEditWidget.hpp"
 #include "ColorEditWidget.hpp"
 #include "SizeSpecEditWidget.hpp"
 #include "Settings.hpp"
+#include "ControlParameterDefault.hpp"
 
 
 using namespace ChOX;
@@ -68,7 +70,8 @@ void BondSettingsEditWidget::apply()
     
     setBondColorParameter(settings, color);
     setBondConfigurationLabelColorParameter(settings, configLabelColor);
-    
+    setBondHighlightAreaBrushParameter(settings, highlightColor);
+     
     setBondLengthParameter(settings, bondLength);
 
     setBondLineWidthParameter(settings, bondLineWidth);
@@ -102,6 +105,7 @@ void BondSettingsEditWidget::reset()
     
     color = getBondColorParameter(settings);
     configLabelColor = getBondConfigurationLabelColorParameter(settings);
+    highlightColor = getBondHighlightAreaBrushParameter(settings).getColor();
     
     bondLength = getBondLengthParameter(settings);
     bondLineWidth = getBondLineWidthParameter(settings);
@@ -128,8 +132,7 @@ void BondSettingsEditWidget::reset()
 void BondSettingsEditWidget::setDefaults()
 {
     using namespace CDPL;
-    using namespace Vis;
-    using namespace ControlParameterDefault;
+    using namespace Vis::ControlParameterDefault;
 
     labelFont = BOND_LABEL_FONT;
     configLabelFont = BOND_CONFIGURATION_LABEL_FONT;
@@ -140,6 +143,7 @@ void BondSettingsEditWidget::setDefaults()
     
     color = BOND_COLOR;
     configLabelColor = BOND_CONFIGURATION_LABEL_COLOR;
+    highlightColor = ChOX::ControlParameterDefault::BOND_HIGHLIGHT_AREA_BRUSH.getColor();
     
     bondLength = BOND_LENGTH;
     bondLineWidth = BOND_LINE_WIDTH;
@@ -288,6 +292,22 @@ void BondSettingsEditWidget::init()
 
     connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
     connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+
+// +++
+
+    color_edit_widget = new ColorEditWidget(group_box, highlightColor);
+    label = new QLabel(tr("&Highlight Area Color:"), group_box);
+
+    label->setBuddy(color_edit_widget);
+
+    grid_layout->addWidget(label, 2, 0);
+    
+    setFocusProxy(color_edit_widget);
+
+    grid_layout->addWidget(color_edit_widget, 2, 1);
+
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
 
 // +++
 

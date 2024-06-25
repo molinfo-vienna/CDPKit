@@ -22,6 +22,8 @@
  */
 
 
+#include <sstream>
+
 #include <QListWidget>
 #include <QLabel>
 #include <QPushButton>
@@ -30,7 +32,9 @@
 #include <QHBoxLayout>
 #include <QKeyEvent>
 
-#include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 
 #include "SubstructHighlightingPatternsEditWidget.hpp"
 #include "ControlParameterFunctions.hpp"
@@ -41,7 +45,7 @@ using namespace ChOX;
 
 
 SubstructHighlightingPatternsEditWidget::SubstructHighlightingPatternsEditWidget(QWidget* parent, Settings& settings):
-    QWidget(parent), settings(settings), okIcon(":/Icons/ok.svg"), errorIcon(":/Icons/error.svg")
+    QWidget(parent), settings(settings), errorIcon(":/Icons/error.svg")
 {
     init();
 }
@@ -111,7 +115,7 @@ void SubstructHighlightingPatternsEditWidget::commitChanges()
     QStringList patterns;
 
     for (int i = 0; i < ptnList->count(); i++)
-        patterns <<  ptnList->item(i)->text();
+        patterns << (ptnList->item(i)->checkState() == Qt::Checked ? "X" : "") << ptnList->item(i)->text();
 
     setSubstructHighlightingPatternsParameter(settings, patterns);
     setSubstructHighlightingEnabledParameter(settings, hltgCheckBox->isChecked());
@@ -123,25 +127,32 @@ void SubstructHighlightingPatternsEditWidget::addPattern()
 {
     auto item = new QListWidgetItem(ptnList);
 
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
-    clearButton->setEnabled(true);
+    item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+    item->setCheckState(Qt::Checked);
     
+    clearButton->setEnabled(true);
+
     ptnList->editItem(item);
 }
 
 void SubstructHighlightingPatternsEditWidget::validatePattern(QListWidgetItem* item)
 {
-    if (item->text().isEmpty()) {
-        item->setIcon(errorIcon);
-        item->setToolTip("Empty");
+    if (item->text().isEmpty())
         return;
-    }
     
     try {
-        if (!CDPL::Chem::parseSMARTS(item->text().toStdString(), false))
+        using namespace CDPL::Chem;
+
+        BasicMolecule mol;
+        std::istringstream iss(item->text().toStdString());
+        SMARTSMoleculeReader reader(iss);
+
+        setStrictErrorCheckingParameter(reader, true);
+        
+        if (!reader.read(mol))
             item->setIcon(errorIcon);
         else
-            item->setIcon(okIcon);
+            item->setIcon(QIcon());
 
         item->setToolTip("");
         
@@ -166,10 +177,13 @@ void SubstructHighlightingPatternsEditWidget::showEvent(QShowEvent* event)
 {
     ptnList->clear();
 
-    for (auto& ptn : getSubstructHighlightingPatternsParameter(settings)) {
-        auto item = new QListWidgetItem(ptn, ptnList);
+    auto& patterns = getSubstructHighlightingPatternsParameter(settings);
+    
+    for (qsizetype i = 0; i < (patterns.count() / 2); i++) {
+        auto item = new QListWidgetItem(patterns[i * 2 + 1], ptnList);
 
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+        item->setCheckState(patterns[i * 2] == "X" ? Qt::Checked : Qt::Unchecked);
     }
     
     hltgCheckBox->setChecked(getSubstructHighlightingEnabledParameter(settings));

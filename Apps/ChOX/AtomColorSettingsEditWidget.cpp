@@ -34,6 +34,7 @@
 
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
+#include "CDPL/Vis/Brush.hpp"
 
 #include "AtomColorSettingsEditWidget.hpp"
 #include "AtomColorButton.hpp"
@@ -113,6 +114,7 @@ void AtomColorSettingsEditWidget::apply()
 
     Vis::setAtomColorParameter(settings, defaultColor);
     Vis::setAtomConfigurationLabelColorParameter(settings, configLabelColor);
+    Vis::setAtomHighlightAreaBrushParameter(settings, highlightColor);
     ChOX::setAtomColorTableParameter(settings, color_tab_ptr);
     setUseAtomColorTableParameter(settings, enableColorTabCheckBox->isChecked());
 
@@ -131,6 +133,7 @@ void AtomColorSettingsEditWidget::reset()
     atomColors = *getAtomColorTableParameter(settings);
     defaultColor = Vis::getAtomColorParameter(settings);
     configLabelColor = Vis::getAtomConfigurationLabelColorParameter(settings);
+    highlightColor = Vis::getAtomHighlightAreaBrushParameter(settings).getColor();
 
     enableColorTabCheckBox->setChecked(getUseAtomColorTableParameter(settings));
     colorTabWidget->setEnabled(enableColorTabCheckBox->isChecked());
@@ -149,6 +152,7 @@ void AtomColorSettingsEditWidget::setDefaults()
     atomColors = *ControlParameterDefault::ATOM_COLOR_TABLE;
     defaultColor = Vis::ControlParameterDefault::ATOM_COLOR;
     configLabelColor = Vis::ControlParameterDefault::ATOM_CONFIGURATION_LABEL_COLOR;
+    highlightColor = ChOX::ControlParameterDefault::ATOM_HIGHLIGHT_AREA_BRUSH.getColor();
 
     enableColorTabCheckBox->setChecked(ControlParameterDefault::USE_ATOM_COLOR_TABLE);
     colorTabWidget->setEnabled(enableColorTabCheckBox->isChecked());
@@ -214,6 +218,22 @@ void AtomColorSettingsEditWidget::init()
     setFocusProxy(color_edit_widget);
 
     grid_layout->addWidget(color_edit_widget, 1, 1);
+
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+
+// +++
+
+    color_edit_widget = new ColorEditWidget(frame, highlightColor);
+    label = new QLabel(tr("&Highlight Area Color:"), frame);
+
+    label->setBuddy(color_edit_widget);
+
+    grid_layout->addWidget(label, 2, 0);
+    
+    setFocusProxy(color_edit_widget);
+
+    grid_layout->addWidget(color_edit_widget, 2, 1);
 
     connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
     connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));

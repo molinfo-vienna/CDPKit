@@ -183,6 +183,8 @@
     <addaction name="separator"/>
     <addaction name="viewShowGridAction"/>
     <addaction name="viewShowRecordNumbersAction"/>
+    <addaction name="viewShowRecordNamesAction"/>
+    <addaction name="viewSubstructHighlightingAction"/>
     <addaction name="separator"/>
     <addaction name="viewHorAlignmentMenu"/>
     <addaction name="viewVerAlignmentMenu"/>
@@ -509,6 +511,34 @@
    </property>
    <property name="iconText">
     <string>Show Record Numbers</string>
+   </property>
+  </action>
+  <action name="viewShowRecordNamesAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Record Name&amp;s</string>
+   </property>
+   <property name="iconText">
+    <string>Show Record Names</string>
+   </property>
+  </action>
+  <action name="viewSubstructHighlightingAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enable Substructure High&amp;lighting</string>
+   </property>
+   <property name="iconText">
+    <string>Enable Substructure Highlighting</string>
    </property>
   </action>
   <action name="viewReactionAction">
@@ -1476,6 +1506,22 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>cascadeWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewSubstructHighlightingAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewSubstructHighlightingChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
