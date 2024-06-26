@@ -280,7 +280,7 @@
   <action name="filePrintAction">
    <property name="icon">
     <iconset resource="Resources.qrc">
-     <normaloff>:/Icons/print.png</normaloff>:/Icons/print.png</iconset>
+     <normaloff>:/Icons/printer.png</normaloff>:/Icons/printer.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Print...</string>
