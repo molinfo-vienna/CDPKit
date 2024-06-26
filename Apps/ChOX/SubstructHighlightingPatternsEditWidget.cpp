@@ -179,7 +179,7 @@ void SubstructHighlightingPatternsEditWidget::showEvent(QShowEvent* event)
 
     auto& patterns = getSubstructHighlightingPatternsParameter(settings);
     
-    for (qsizetype i = 0; i < (patterns.count() / 2); i++) {
+    for (int i = 0; i < (patterns.count() / 2); i++) {
         auto item = new QListWidgetItem(patterns[i * 2 + 1], ptnList);
 
         item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
