@@ -326,7 +326,7 @@ void MOLFileIOSettingsEditWidget::init()
 
 // xxx
 
-    QLabel* label = new QLabel(tr("Molfile CTab-Version&:"), group_box);
+    QLabel* label = new QLabel(tr("Molfile CTab-Version:"), group_box);
 
     h_box_layout->addWidget(label, 1);
 

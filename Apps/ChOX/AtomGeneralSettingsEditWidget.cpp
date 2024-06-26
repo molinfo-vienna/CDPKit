@@ -271,7 +271,7 @@ void AtomGeneralSettingsEditWidget::init()
 
 // +++
 
-    QLabel* label = new QLabel(tr("&Primary Font:"), group_box);
+    QLabel* label = new QLabel(tr("Primary Font:"), group_box);
 
     grid_layout->addWidget(label, 0, 0);
 
@@ -287,7 +287,7 @@ void AtomGeneralSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Secondar&y Font:"), group_box);
+    label = new QLabel(tr("Secondary Font:"), group_box);
 
     grid_layout->addWidget(label, 1, 0);
 
@@ -303,7 +303,7 @@ void AtomGeneralSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("C&IP Config. Label Font:"), group_box);
+    label = new QLabel(tr("CIP Config. Label Font:"), group_box);
 
     grid_layout->addWidget(label, 2, 0);
 
@@ -326,7 +326,7 @@ void AtomGeneralSettingsEditWidget::init()
     group_box = new QGroupBox(tr("Metrics"), this);
     grid_layout = new QGridLayout(group_box);
 
-    label = new QLabel(tr("Label &Margin:"), group_box);
+    label = new QLabel(tr("Label Margin:"), group_box);
 
     SizeSpecEditWidget* size_edit_widget = new SizeSpecEditWidget(group_box, labelMargin, true, false);
 
@@ -340,7 +340,7 @@ void AtomGeneralSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Electron Dot Si&ze:"), group_box);
+    label = new QLabel(tr("Electron Dot Size:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, electronDotSize, true, false);
 

@@ -531,7 +531,7 @@ void OtherIOSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Sca&ling Factor:"), group_box);
+    label = new QLabel(tr("Scaling Factor:"), group_box);
 
     grid_layout->addWidget(label, 1, 0);
 

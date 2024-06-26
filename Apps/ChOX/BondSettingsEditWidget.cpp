@@ -231,7 +231,7 @@ void BondSettingsEditWidget::init()
 // +++
 
     FontEditWidget* font_edit_widget = new FontEditWidget(group_box, labelFont, labelSize, 0, false);
-    QLabel* font_label = new QLabel(tr("Label &Font:"), group_box);
+    QLabel* font_label = new QLabel(tr("Label Font:"), group_box);
 
     font_label->setBuddy(font_edit_widget);
 
@@ -244,7 +244,7 @@ void BondSettingsEditWidget::init()
 // +++
 
     font_edit_widget = new FontEditWidget(group_box, configLabelFont, configLabelSize, 0, false);
-    font_label = new QLabel(tr("CI&P Config. Label Font:"), group_box);
+    font_label = new QLabel(tr("CIP Config. Label Font:"), group_box);
 
     font_label->setBuddy(font_edit_widget);
 
@@ -266,7 +266,7 @@ void BondSettingsEditWidget::init()
 // +++
 
     ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, color);
-    QLabel* label = new QLabel(tr("Co&lor:"), group_box);
+    QLabel* label = new QLabel(tr("Color:"), group_box);
 
     label->setBuddy(color_edit_widget);
 
@@ -296,7 +296,7 @@ void BondSettingsEditWidget::init()
 // +++
 
     color_edit_widget = new ColorEditWidget(group_box, highlightColor);
-    label = new QLabel(tr("&Highlight Area Color:"), group_box);
+    label = new QLabel(tr("Highlight Area Color:"), group_box);
 
     label->setBuddy(color_edit_widget);
 
@@ -320,7 +320,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Standard Bond Le&ngth:"), group_box);
+    label = new QLabel(tr("Standard Bond Length:"), group_box);
 
     SizeSpecEditWidget* size_edit_widget = new SizeSpecEditWidget(group_box, bondLength, false, false, false);
 
@@ -334,7 +334,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Line &Thickness:"), group_box);
+    label = new QLabel(tr("Line Thickness:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, bondLineWidth, true, false);
 
@@ -348,7 +348,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Line S&pacing:"), group_box);
+    label = new QLabel(tr("Line Spacing:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, bondLineSpacing, true, false);
 
@@ -362,7 +362,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Reaction-Center Mar&k Length:"), group_box);
+    label = new QLabel(tr("Reaction-Center Mark Length:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, rxnCenterLineLength, true, false);
 
@@ -376,7 +376,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("Reaction-Center Mark Spacin&g:"), group_box);
+    label = new QLabel(tr("Reaction-Center Mark Spacing:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, rxnCenterLineSpacing, true, false);
 
@@ -390,7 +390,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("&Wedge Width:"), group_box);
+    label = new QLabel(tr("Wedge Width:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, wedgeWidth, true, false);
 
@@ -418,7 +418,7 @@ void BondSettingsEditWidget::init()
 
 // +++
 
-    label = new QLabel(tr("La&bel Margin:"), group_box);
+    label = new QLabel(tr("Label Margin:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, labelMargin, true, false);
 

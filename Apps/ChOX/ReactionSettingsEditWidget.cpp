@@ -247,7 +247,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    QLabel* label = new QLabel(tr("Arro&w Color:"), group_box);
+    QLabel* label = new QLabel(tr("Arrow Color:"), group_box);
 
     ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, arrowColor);
 
@@ -261,7 +261,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Plus Sig&n Color:"), group_box);
+    label = new QLabel(tr("Plus Sign Color:"), group_box);
 
     color_edit_widget = new ColorEditWidget(group_box, plusSignColor);
 
@@ -326,7 +326,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Plus Sign Si&ze:"), group_box);
+    label = new QLabel(tr("Plus Sign Size:"), group_box);
 
     SizeSpecEditWidget* size_edit_widget = new SizeSpecEditWidget(group_box, plusSignSize, false, false, false);    
 
@@ -340,7 +340,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Plus Sign &Line Thickness:"), group_box);
+    label = new QLabel(tr("Plus Sign Line Thickness:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, plusSignLineWidth, true, false, false);
 
@@ -354,7 +354,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Component &Margin:"), group_box);
+    label = new QLabel(tr("Component Margin:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, componentMargin, false, false, false);
 
@@ -368,7 +368,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Minimum Arrow Lengt&h:"), group_box);
+    label = new QLabel(tr("Minimum Arrow Length:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, arrowLength, false, false, false);
 
@@ -382,7 +382,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Arrow Head Lengt&h:"), group_box);
+    label = new QLabel(tr("Arrow Head Length:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, arrowHeadLength, true, false, false);
 
@@ -396,7 +396,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Arrow Head W&idth:"), group_box);
+    label = new QLabel(tr("Arrow Head Width:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, arrowHeadWidth, true, false, false);
 
@@ -410,7 +410,7 @@ void ReactionSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Arrow Sha&ft Width:"), group_box);
+    label = new QLabel(tr("Arrow Shaft Width:"), group_box);
 
     size_edit_widget = new SizeSpecEditWidget(group_box, arrowShaftWidth, true, false, false);
 

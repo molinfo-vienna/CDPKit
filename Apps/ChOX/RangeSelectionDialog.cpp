@@ -113,7 +113,7 @@ void RangeSelectionDialog::init()
 
 // ++++
 
-    label = new QLabel(tr("&From:"), this);
+    label = new QLabel(tr("From:"), this);
     
     grid_layout->addWidget(label, 0, 0);
 
@@ -132,7 +132,7 @@ void RangeSelectionDialog::init()
 
 // ++++
 
-    label = new QLabel(tr("&To:"), this);
+    label = new QLabel(tr("To:"), this);
     
     grid_layout->addWidget(label, 1, 0);
 

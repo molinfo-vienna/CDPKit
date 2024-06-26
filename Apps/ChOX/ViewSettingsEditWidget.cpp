@@ -232,7 +232,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    QLabel* label = new QLabel(tr("&Background Color:"), group_box);
+    QLabel* label = new QLabel(tr("Background Color:"), group_box);
 
     ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, backgroundColor);
 
@@ -246,7 +246,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("S&election Color:"), group_box);
+    label = new QLabel(tr("Selection Color:"), group_box);
 
     color_edit_widget = new ColorEditWidget(group_box, selectionColor);
 
@@ -260,7 +260,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Gr&id Color:"), group_box);
+    label = new QLabel(tr("Grid Color:"), group_box);
 
     color_edit_widget = new ColorEditWidget(group_box, gridColor);
 
@@ -274,7 +274,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Record N&umber Color:"), group_box);
+    label = new QLabel(tr("Record Number Color:"), group_box);
 
     color_edit_widget = new ColorEditWidget(group_box, recordNumberColor);
 
@@ -424,7 +424,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("&Horizontal:"), group_box);
+    label = new QLabel(tr("Horizontal:"), group_box);
 
     AlignmentEditWidget* alignment_edit_widget = new AlignmentEditWidget(group_box, recordNumberAlignment, true);
 
@@ -438,7 +438,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("&Vertical:"), group_box);
+    label = new QLabel(tr("Vertical:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, recordNumberAlignment, false, false);
 
@@ -496,7 +496,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Hori&zontal:"), group_box);
+    label = new QLabel(tr("Horizontal:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, recordAlignment, true);
 
@@ -510,7 +510,7 @@ void ViewSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Ver&tical:"), group_box);
+    label = new QLabel(tr("Vertical:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, recordAlignment, false);
 

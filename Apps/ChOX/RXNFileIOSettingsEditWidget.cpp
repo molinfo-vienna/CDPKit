@@ -322,7 +322,7 @@ void RXNFileIOSettingsEditWidget::init()
 
 // xxx
 
-    QLabel* label = new QLabel(tr("Component Molfile CTab-Version&:"), group_box);
+    QLabel* label = new QLabel(tr("Component Molfile CTab-Version:"), group_box);
 
     grid_layout->addWidget(label, 0, 0);
 
@@ -339,7 +339,7 @@ void RXNFileIOSettingsEditWidget::init()
 
 // xxx
 
-    label = new QLabel(tr("RXN-File Version&:"), group_box);
+    label = new QLabel(tr("RXN-File Version:"), group_box);
 
     grid_layout->addWidget(label, 1, 0);
 

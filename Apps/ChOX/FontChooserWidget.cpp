@@ -176,7 +176,7 @@ void FontChooserWidget::init(bool size_type_editable, bool policy_editable)
 
 // +++
 
-    QLabel* label = new QLabel(tr("&Font:"), this);
+    QLabel* label = new QLabel(tr("Font:"), this);
 
     v_box_layout->addWidget(label);
 
@@ -202,7 +202,7 @@ void FontChooserWidget::init(bool size_type_editable, bool policy_editable)
 
 // +++
 
-    label = new QLabel(tr("St&yle:"), this);
+    label = new QLabel(tr("Style:"), this);
 
     v_box_layout->addWidget(label);
 
@@ -223,7 +223,7 @@ void FontChooserWidget::init(bool size_type_editable, bool policy_editable)
 
 // +++
 
-    label = new QLabel(tr("&Size:"), this);
+    label = new QLabel(tr("Size:"), this);
 
     v_box_layout->addWidget(label);
 

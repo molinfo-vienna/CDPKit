@@ -198,7 +198,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    QLabel* label = new QLabel(tr("&Frame Color:"), group_box);
+    QLabel* label = new QLabel(tr("Frame Color:"), group_box);
 
     ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, frameColor);
 
@@ -212,7 +212,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Te&xt Color:"), group_box);
+    label = new QLabel(tr("Text Color:"), group_box);
 
     color_edit_widget = new ColorEditWidget(group_box, textLabelColor);
 
@@ -320,7 +320,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("&Horizontal:"), group_box);
+    label = new QLabel(tr("Horizontal:"), group_box);
 
     AlignmentEditWidget* alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, true);
 
@@ -334,7 +334,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("&Vertical:"), group_box);
+    label = new QLabel(tr("Vertical:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, false, false);
 
@@ -358,7 +358,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Hori&zontal:"), group_box);
+    label = new QLabel(tr("Horizontal:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, true);
 
@@ -372,7 +372,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Ver&tical:"), group_box);
+    label = new QLabel(tr("Vertical:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, false, false);
 
@@ -396,7 +396,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Horizo&ntal:"), group_box);
+    label = new QLabel(tr("Horizontal:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, true);
 
@@ -410,7 +410,7 @@ void PrintSettingsEditWidget::init()
 
     // +++
 
-    label = new QLabel(tr("Vertica&l:"), group_box);
+    label = new QLabel(tr("Vertical:"), group_box);
 
     alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, false, false);
 
