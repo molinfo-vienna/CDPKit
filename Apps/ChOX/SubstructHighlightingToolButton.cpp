@@ -43,9 +43,12 @@ void SubstructHighlightingToolButton::init(Settings& settings)
     setToolTip(tr("Edit Substructure Highlighting Patterns"));
     
     auto menu = new QMenu(this);
+    auto action = new SubstructHighlightingPatternsEditAction(menu, settings);
 
-    menu->addAction(new SubstructHighlightingPatternsEditAction(menu, settings));
+    menu->addAction(action);
     
+    connect(action, SIGNAL(triggered()), menu, SLOT(close()));
+
     setMenu(menu);
     setPopupMode(InstantPopup);
 }
