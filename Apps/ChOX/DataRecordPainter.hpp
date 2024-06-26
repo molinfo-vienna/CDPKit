@@ -39,6 +39,7 @@ namespace ChOX
 
     class DataRecord;
     class Settings;
+    class RecordDataVisitor;
 
     class DataRecordPainter : private DataRecordVisitor
     {
@@ -52,7 +53,19 @@ namespace ChOX
 
         void drawRecord(int rec_no, double vp_width, double vp_height);
 
+        void accept(RecordDataVisitor& visitor);
+
+        void update();
+
       private:
+        enum DataType
+        {
+
+            MOLECULE,
+            REACTION,
+            VOID
+        };
+
         void drawRecordNumber(int rec_no, double vp_width, double vp_height) const;
         void drawRecordName(double vp_width, double vp_height) const;
 
@@ -73,6 +86,7 @@ namespace ChOX
         CDPL::Vis::QtFontMetrics& fontMetrics;
         bool                      recordNosVisible;
         bool                      recordNamesVisible;
+        DataType                  dataType;
     };
 } // namespace ChOX
 

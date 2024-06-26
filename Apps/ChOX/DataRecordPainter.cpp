@@ -50,6 +50,7 @@
 
 #include "DataRecordPainter.hpp"
 #include "ConcreteDataRecord.hpp"
+#include "RecordDataVisitor.hpp"
 #include "Settings.hpp"
 #include "Utilities.hpp"
 #include "ControlParameterFunctions.hpp"
@@ -68,12 +69,59 @@ using namespace ChOX;
 
 DataRecordPainter::DataRecordPainter(CDPL::Vis::QtFontMetrics& fm, QPainter& painter, 
                                      const Settings& settings, const DataRecord& record):
-    painter(painter), settings(settings), renderer(painter), fontMetrics(fm)
+    painter(painter), settings(settings), renderer(painter), fontMetrics(fm), dataType(VOID)
 {
     record.accept(*this);
 }
 
 DataRecordPainter::~DataRecordPainter() {}
+
+void DataRecordPainter::accept(RecordDataVisitor& visitor)
+{
+    switch (dataType) {
+
+        case MOLECULE:
+            visitor.visit(static_cast<CDPL::Chem::Molecule&>(*data));
+            return;
+
+        case REACTION:
+            visitor.visit(static_cast<CDPL::Chem::Reaction&>(*data));
+
+        default:
+            return;
+    }
+}
+
+void DataRecordPainter::update()
+{
+    switch (dataType) {
+
+        case MOLECULE: {
+            auto& mol = static_cast<CDPL::Chem::Molecule&>(*data);
+
+            std::size_t num_confs = getNumConformations(mol);
+
+            if (num_confs > 0) 
+                recordName = QString::fromStdString(getName(mol) + " (" + std::to_string(num_confs) + " Confs.)");
+            else
+                recordName = QString::fromStdString(getName(mol));
+
+            static_cast<CDPL::Vis::StructureView2D&>(*dataView).setStructure(&mol);
+            return;
+        }
+
+        case REACTION: {
+            auto& rxn = static_cast<CDPL::Chem::Reaction&>(*data);
+                
+            recordName = QString::fromStdString(getName(rxn));
+
+            static_cast<CDPL::Vis::ReactionView2D&>(*dataView).setReaction(&rxn);
+        }
+
+        default:
+            return;
+    }
+}
 
 void DataRecordPainter::drawRecord(int rec_no, double vp_width, double vp_height)
 {
@@ -201,6 +249,7 @@ void DataRecordPainter::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rx
         dataView = rxn_view_ptr;
 
         recordName = QString::fromStdString(getName(*rxn_ptr));
+        dataType = REACTION;
 
     } catch (const Base::Exception&) {}
 }
@@ -221,11 +270,12 @@ void DataRecordPainter::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mo
         
         std::size_t num_confs = getNumConformations(*mol_ptr);
 
-        if (num_confs > 0) {
+        if (num_confs > 0)
             recordName = QString::fromStdString(getName(*mol_ptr) + " (" + std::to_string(num_confs) + " Confs.)");
-
-        } else
+        else
             recordName = QString::fromStdString(getName(*mol_ptr));
+
+        dataType = MOLECULE;
 
     } catch (const Base::Exception& e) {
         //std::cerr << e.what() << std::endl;

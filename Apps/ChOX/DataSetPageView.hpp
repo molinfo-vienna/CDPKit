@@ -44,6 +44,7 @@ namespace ChOX
 
     class DataSet;
     class Settings;
+    class RecordDataVisitor;
 
     class DataSetPageView : public QWidget
     {
@@ -63,10 +64,16 @@ namespace ChOX
 
         void setContextMenu(QMenu*);
 
+        void accept(RecordDataVisitor& visitor);
+        void accept(int rec_idx, RecordDataVisitor& visitor);
+
+        void updateRecordPainters();
+
       signals:
         void numRowsChanged(int);
         void numColumnsChanged(int);
         void pageOffsetChanged(int);
+        void recordBecameVisible(int);
 
         void gridVisibilityChanged(bool);
         void recordNoVisibilityChanged(bool);

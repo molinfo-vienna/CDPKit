@@ -68,6 +68,7 @@
 #include "AboutDialog.hpp"
 #include "RangeSelectionDialog.hpp"
 #include "SubstructHighlightingToolButton.hpp"
+#include "SubstructHighlightingProcessor.hpp"
 
 #if QT_VERSION <= 0x040400
 #  define selectNameFilter selectFilter
@@ -104,6 +105,8 @@ void ChOX::MainWindow::init()
     dataSet = new DataSet(this);
     dataSetView = new DataSetView(this, *settings, *dataSet);
     dataSetViewControl = new DataSetViewControl(this, *dataSetView);
+
+    new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
 
     setupContextMenu();
 

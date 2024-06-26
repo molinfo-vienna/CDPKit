@@ -57,6 +57,24 @@ DataSetPageView::DataSetPageView(QWidget* parent, Settings& settings, DataSet& d
 
 DataSetPageView::~DataSetPageView() {}
 
+void DataSetPageView::accept(RecordDataVisitor& visitor)
+{
+    for (auto& painter : dataRecordPainters)
+        painter->accept(visitor);
+}
+
+void DataSetPageView::accept(int rec_idx, RecordDataVisitor& visitor)
+{
+    if (rec_idx >= pageOffset && rec_idx < int(pageOffset + dataRecordPainters.size()))
+        dataRecordPainters[rec_idx - pageOffset]->accept(visitor);
+}
+
+void DataSetPageView::updateRecordPainters()
+{
+    for (auto& painter : dataRecordPainters)
+        painter->update();
+}
+
 void DataSetPageView::setNumRows(int num_rows)
 {
     if (num_rows != numRows) {
