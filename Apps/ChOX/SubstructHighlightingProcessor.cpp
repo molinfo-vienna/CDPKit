@@ -22,17 +22,93 @@
  */
 
 
+#include <exception>
+#include <sstream>
+
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Vis/AtomFunctions.hpp"
+#include "CDPL/Vis/BondFunctions.hpp"
+#include "CDPL/Vis/ControlParameterFunctions.hpp"
+#include "CDPL/Vis/Pen.hpp"
+
 #include "SubstructHighlightingProcessor.hpp"
 #include "Settings.hpp"
 #include "DataSetPageView.hpp"
+#include "ControlParameter.hpp"
+#include "ControlParameterFunctions.hpp"
 
 
 using namespace ChOX;
 
 
 SubstructHighlightingProcessor::SubstructHighlightingProcessor(DataSetPageView* page_view, Settings& settings):
-    QObject(page_view), pageView(page_view), settings(settings)
+    QObject(page_view), pageView(page_view), settings(settings), hltgEnabled(false)
+{
+    connect(page_view, SIGNAL(recordBecameVisible(int)), this, SLOT(handleRecordBecameVisible(int)));
+    connect(&settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)),
+            this, SLOT(handleControlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)));
+
+    using namespace CDPL::Vis;
+
+    setAtomHighlightAreaOutlinePenParameter(settings, Pen(Pen::NO_LINE));
+    setBondHighlightAreaOutlinePenParameter(settings, Pen(Pen::NO_LINE));
+}
+
+SubstructHighlightingProcessor::~SubstructHighlightingProcessor()
 {}
+
+void SubstructHighlightingProcessor::handleControlParamChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& value)
+{
+    if (key == ControlParameter::SUBSTRUCT_HIGHLIGHTING_PATTERNS) {
+        auto& patterns = getSubstructHighlightingPatternsParameter(settings);
+
+        queryPatterns.clear();
+        
+        for (int i = 0; i < (patterns.count() / 2); i++) {
+            if (patterns[i * 2] != "X")
+                continue;
+
+            try {
+                using namespace CDPL::Chem;
+
+                MoleculePtr mol_ptr(new BasicMolecule());
+                std::istringstream iss(patterns[i * 2 + 1].toStdString());
+                SMARTSMoleculeReader reader(iss);
+
+                setStrictErrorCheckingParameter(reader, true);
+
+                if (!reader.read(*mol_ptr))
+                    continue;
+
+                initSubstructureSearchQuery(*mol_ptr, false);
+                
+                queryPatterns.push_back(std::move(mol_ptr));
+
+            } catch (const std::exception& e) {
+                continue;
+            }
+        }
+        
+    } else if (key == ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED)
+        hltgEnabled = getSubstructHighlightingEnabledParameter(settings);
+
+    else
+        return;
+
+    pageView->accept(*this);
+    pageView->updateRecordPainters();
+}
+
+void SubstructHighlightingProcessor::handleRecordBecameVisible(int rec_idx)
+{
+    pageView->accept(rec_idx, *this);
+}
 
 void SubstructHighlightingProcessor::visit(CDPL::Chem::Reaction& rxn)
 {
@@ -40,4 +116,36 @@ void SubstructHighlightingProcessor::visit(CDPL::Chem::Reaction& rxn)
 
 void SubstructHighlightingProcessor::visit(CDPL::Chem::Molecule& mol)
 {
+    using namespace CDPL;
+    
+    for (auto& atom : mol.getAtoms())
+        Vis::setHighlightedFlag(atom, false);
+
+    for (auto& bond : mol.getBonds())
+        Vis::setHighlightedFlag(bond, false);
+
+    if (!hltgEnabled || queryPatterns.empty())
+        return;
+
+    if (!subSearch) {
+        subSearch.reset(new Chem::SubstructureSearch);
+        subSearch->uniqueMappingsOnly(true);
+    }
+    
+    initSubstructureSearchTarget(mol, false);
+
+    for (auto& ptn : queryPatterns) {
+        subSearch->setQuery(*ptn);
+
+        if (!subSearch->findMappings(mol))
+            continue;
+
+        for (auto& ab_mpg : *subSearch) {
+            for (auto& ap : ab_mpg.getAtomMapping())
+                Vis::setHighlightedFlag(mol.getAtom(ap.second->getIndex()), true);
+
+            for (auto& bp : ab_mpg.getBondMapping())
+                Vis::setHighlightedFlag(mol.getBond(bp.second->getIndex()), true);
+        }
+    }
 }

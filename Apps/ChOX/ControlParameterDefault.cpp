@@ -271,7 +271,7 @@ namespace ChOX
         const QStringList                           SUBSTRUCT_HIGHLIGHTING_PATTERNS          = QStringList();
         const bool                                  SUBSTRUCT_HIGHLIGHTING_ENABLED           = true;
 
-        const CDPL::Vis::Brush                      ATOM_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(0.58, 0.87, 0.35));
-        const CDPL::Vis::Brush                      BOND_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(0.58, 0.87, 0.35));
+        const CDPL::Vis::Brush                      ATOM_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(1.0, 0.666, 1.0));
+        const CDPL::Vis::Brush                      BOND_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(1.0, 0.666, 1.0));
     }
 }

@@ -23,6 +23,7 @@
 
 
 #include <sstream>
+#include <exception>
 
 #include <QListWidget>
 #include <QLabel>

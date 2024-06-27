@@ -73,6 +73,8 @@ void DataSetPageView::updateRecordPainters()
 {
     for (auto& painter : dataRecordPainters)
         painter->update();
+
+    update();
 }
 
 void DataSetPageView::setNumRows(int num_rows)
@@ -415,22 +417,29 @@ void DataSetPageView::updateDataRecordPainters(int old_page_offs)
 {
     int page_size = numColumns * numRows;
     int old_page_size = int(dataRecordPainters.size());
-
+    int new_records_start_idx = -1;
+    
     tmpDataRecordPainters.clear();
     tmpDataRecordPainters.reserve(DataRecordPainterList::size_type(page_size));
 
-    for (int i = pageOffset; i < pageOffset + page_size && i < dataSet.getSize(); i++) {
-        if (old_page_offs >= 0 && i >= old_page_offs && i < old_page_offs + old_page_size) {
+    for (int i = pageOffset; i < (pageOffset + page_size) && i < dataSet.getSize(); i++) {
+        if (old_page_offs >= 0 && i >= old_page_offs && i < (old_page_offs + old_page_size)) {
             tmpDataRecordPainters.push_back(dataRecordPainters[i - old_page_offs]);
             
         } else {
             DataRecordPainter::SharedPointer painter_ptr(new DataRecordPainter(fontMetrics, painter, settings, dataSet.getRecord(i)));
                     
             tmpDataRecordPainters.push_back(painter_ptr);
+
+            if (new_records_start_idx < 0)
+                new_records_start_idx = i;
         }
     }
 
     dataRecordPainters.swap(tmpDataRecordPainters);
+
+    for (int i = new_records_start_idx; i < (pageOffset + page_size); i++)
+        emit(recordBecameVisible(i));
 }
 
 int DataSetPageView::getRecordIndexAt(const QPoint& pos) const

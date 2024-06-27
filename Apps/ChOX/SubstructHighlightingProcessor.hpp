@@ -25,9 +25,24 @@
 #ifndef CHOX_SUBSTRUCTHIGHLIGHTINGPROCESSOR_HPP
 #define CHOX_SUBSTRUCTHIGHLIGHTINGPROCESSOR_HPP
 
+#include <vector>
+#include <memory>
+
 #include <QObject>
 
 #include "RecordDataVisitor.hpp"
+#include "CDPLFwd.hpp"
+
+
+namespace CDPL
+{
+
+    namespace Chem
+    {
+
+        class SubstructureSearch;
+    }
+}
 
 
 namespace ChOX
@@ -44,12 +59,29 @@ namespace ChOX
       public:
         SubstructHighlightingProcessor(DataSetPageView* page_view, Settings& settings);
 
+        SubstructHighlightingProcessor(const SubstructHighlightingProcessor&) = delete;
+
+        ~SubstructHighlightingProcessor();
+        
+        SubstructHighlightingProcessor& operator=(const SubstructHighlightingProcessor&) = delete;
+                                                                                      
+      private slots:
+        void handleControlParamChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& value);
+        void handleRecordBecameVisible(int rec_idx);
+        
       private:
         void visit(CDPL::Chem::Reaction& rxn);
         void visit(CDPL::Chem::Molecule& mol);
 
-        DataSetPageView* pageView;
-        Settings&        settings;
+        typedef std::unique_ptr<CDPL::Chem::SubstructureSearch> SubstructureSearchPtr;
+        typedef std::unique_ptr<CDPL::Chem::Molecule>           MoleculePtr;
+        typedef std::vector<MoleculePtr>                        MoleculePtrList;
+
+        DataSetPageView*      pageView;
+        Settings&             settings;
+        SubstructureSearchPtr subSearch;
+        MoleculePtrList       queryPatterns;
+        bool                  hltgEnabled;
     };
 } // namespace ChOX
 
