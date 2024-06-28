@@ -40,6 +40,7 @@ namespace ChOX
 
     class DataSet;
     class Settings;
+    class RecordDataVisitor;
 
     class DataSetPrinter : public QObject
     {
@@ -53,6 +54,8 @@ namespace ChOX
         void printPage(QPainter& painter, int page_no, int num_pages, int page_offs,
                        double width, double height, int num_rows, int num_cols);
 
+        void setRecordDataVisitor(RecordDataVisitor* visitor);
+        
       signals:
         void errorMessage(const QString&);
         void statusMessage(const QString&);
@@ -64,9 +67,10 @@ namespace ChOX
 
         typedef std::vector<int> RecordIndexList;
 
-        const DataSet&  dataSet;
-        const Settings& settings;
-        RecordIndexList recordList;
+        const DataSet&     dataSet;
+        const Settings&    settings;
+        RecordIndexList    recordList;
+        RecordDataVisitor* recDataVisitor;
     };
 } // namespace ChOX
 

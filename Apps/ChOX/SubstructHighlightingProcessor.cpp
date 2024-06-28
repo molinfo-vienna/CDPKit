@@ -27,6 +27,7 @@
 
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -112,9 +113,43 @@ void SubstructHighlightingProcessor::handleRecordBecameVisible(int rec_idx)
 
 void SubstructHighlightingProcessor::visit(CDPL::Chem::Reaction& rxn)
 {
+    using namespace CDPL;
+
+    for (auto& mol : rxn) {
+        clearHighlightFlags(mol);
+
+        if (!hltgEnabled || queryPatterns.empty())
+            continue;
+
+        initSubSearch();
+        initSubstructureSearchTarget(mol, false);
+
+        for (auto& ptn : queryPatterns) {
+            subSearch->setQuery(*ptn);
+
+            highlightMatchingSubstructures(mol);
+        }
+    }
 }
 
 void SubstructHighlightingProcessor::visit(CDPL::Chem::Molecule& mol)
+{
+    clearHighlightFlags(mol);
+    
+    if (!hltgEnabled || queryPatterns.empty())
+        return;
+
+    initSubSearch();
+    initSubstructureSearchTarget(mol, false);
+
+    for (auto& ptn : queryPatterns) {
+        subSearch->setQuery(*ptn);
+
+        highlightMatchingSubstructures(mol);
+    }
+}
+
+void SubstructHighlightingProcessor::clearHighlightFlags(CDPL::Chem::Molecule& mol) const
 {
     using namespace CDPL;
     
@@ -123,29 +158,28 @@ void SubstructHighlightingProcessor::visit(CDPL::Chem::Molecule& mol)
 
     for (auto& bond : mol.getBonds())
         Vis::setHighlightedFlag(bond, false);
+}
 
-    if (!hltgEnabled || queryPatterns.empty())
+void SubstructHighlightingProcessor::highlightMatchingSubstructures(CDPL::Chem::Molecule& mol) const
+{
+    using namespace CDPL;
+    
+    if (!subSearch->findMappings(mol))
         return;
 
+    for (auto& ab_mpg : *subSearch) {
+        for (auto& ap : ab_mpg.getAtomMapping())
+            Vis::setHighlightedFlag(mol.getAtom(ap.second->getIndex()), true);
+
+        for (auto& bp : ab_mpg.getBondMapping())
+            Vis::setHighlightedFlag(mol.getBond(bp.second->getIndex()), true);
+    }
+}
+
+void SubstructHighlightingProcessor::initSubSearch()
+{
     if (!subSearch) {
-        subSearch.reset(new Chem::SubstructureSearch);
+        subSearch.reset(new CDPL::Chem::SubstructureSearch);
         subSearch->uniqueMappingsOnly(true);
-    }
-    
-    initSubstructureSearchTarget(mol, false);
-
-    for (auto& ptn : queryPatterns) {
-        subSearch->setQuery(*ptn);
-
-        if (!subSearch->findMappings(mol))
-            continue;
-
-        for (auto& ab_mpg : *subSearch) {
-            for (auto& ap : ab_mpg.getAtomMapping())
-                Vis::setHighlightedFlag(mol.getAtom(ap.second->getIndex()), true);
-
-            for (auto& bp : ab_mpg.getBondMapping())
-                Vis::setHighlightedFlag(mol.getBond(bp.second->getIndex()), true);
-        }
-    }
+    } 
 }

@@ -1,5 +1,5 @@
 /* 
- * SubstructHighlightingToolButton.cpp 
+ * SubstructSearchUtilsToolBar.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,33 +22,28 @@
  */
 
 
-#include <QMenu>
+#ifndef CHOX_SUBSTRUCTSEARCHUTILSTOOLBAR_HPP
+#define CHOX_SUBSTRUCTSEARCHUTILSTOOLBAR_HPP
 
-#include "SubstructHighlightingToolButton.hpp"
-#include "SubstructHighlightingPatternsEditAction.hpp"
-
-
-using namespace ChOX;
+#include <QToolBar>
 
 
-SubstructHighlightingToolButton::SubstructHighlightingToolButton(QWidget* parent, Settings& settings):
-    QToolButton(parent)
+namespace ChOX
 {
-    init(settings);
-}
 
-void SubstructHighlightingToolButton::init(Settings& settings)
-{
-    setIcon(QIcon(":/Icons/sshighlighting.svg"));
-    setToolTip(tr("Edit Substructure Highlighting Patterns"));
+    class Settings;
     
-    auto menu = new QMenu(this);
-    auto action = new SubstructHighlightingPatternsEditAction(menu, settings);
+    class SubstructSearchUtilsToolBar : public QToolBar
+    {
 
-    menu->addAction(action);
-    
-    connect(action, SIGNAL(triggered()), menu, SLOT(close()));
+        Q_OBJECT
 
-    setMenu(menu);
-    setPopupMode(InstantPopup);
-}
+      public:
+        SubstructSearchUtilsToolBar(QWidget* parent, Settings& settings);
+
+      private:
+        void init(Settings& settings);
+    };
+} // namespace ChOX
+
+#endif // CHOX_SUBSTRUCTSEARCHUTILSTOOLBAR_HPP

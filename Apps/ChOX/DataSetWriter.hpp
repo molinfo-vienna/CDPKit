@@ -41,6 +41,7 @@ namespace ChOX
 
     class Settings;
     class DataSet;
+    class RecordDataVisitor;
 
     class DataSetWriter : public QObject,
                           private DataRecordVisitor
@@ -56,6 +57,8 @@ namespace ChOX
 
         void write();
 
+        void setRecordDataVisitor(RecordDataVisitor* visitor);
+        
       signals:
         void errorMessage(const QString&);
         void statusMessage(const QString&);
@@ -67,12 +70,13 @@ namespace ChOX
         template <typename T>
         void writeRecords(const std::string& def_format);
 
-        const DataSet&  dataSet;
-        QWidget*        parent;
-        QString         fileName;
-        QString         filter;
-        const Settings& settings;
-        bool            writeSelection;
+        const DataSet&     dataSet;
+        QWidget*           parent;
+        QString            fileName;
+        QString            filter;
+        const Settings&    settings;
+        bool               writeSelection;
+        RecordDataVisitor* recDataVisitor;
     };
 } // namespace ChOX
 

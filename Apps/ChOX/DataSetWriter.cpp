@@ -47,6 +47,7 @@
 #include "Settings.hpp"
 #include "Utilities.hpp"
 #include "ControlParameterFunctions.hpp"
+#include "RecordDataVisitor.hpp"
 
 
 using namespace ChOX;
@@ -65,7 +66,8 @@ namespace
     public:
         typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer WriterPointer;
 
-        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
+        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt, RecordDataVisitor* data_vis):
+            writerPointer(writer_ptr), format(fmt), dataVisitor(data_vis) {}
 
     private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {
@@ -74,6 +76,9 @@ namespace
 
                 prepareOutputData(*mol_ptr, format, *writerPointer);
 
+                if (dataVisitor)
+                    dataVisitor->visit(*mol_ptr);
+                
                 writerPointer->write(*mol_ptr);
 
             } catch (const CDPL::Base::Exception& e) {
@@ -83,8 +88,9 @@ namespace
 
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rxn_record) {}
 
-        WriterPointer writerPointer;
+        WriterPointer                 writerPointer;
         const CDPL::Base::DataFormat& format;
+        RecordDataVisitor*            dataVisitor;
     };
 
     template <>
@@ -94,7 +100,8 @@ namespace
     public:
         typedef CDPL::Base::DataWriter<CDPL::Chem::Reaction>::SharedPointer WriterPointer;
 
-        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
+        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt, RecordDataVisitor* data_vis):
+            writerPointer(writer_ptr), format(fmt), dataVisitor(data_vis) {}
 
     private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {}
@@ -105,6 +112,9 @@ namespace
 
                 prepareOutputData(*rxn_ptr, format, *writerPointer);
 
+                if (dataVisitor)
+                    dataVisitor->visit(*rxn_ptr);
+                
                 writerPointer->write(*rxn_ptr);
 
             } catch (const CDPL::Base::Exception& e) {
@@ -112,8 +122,9 @@ namespace
             }
         }
 
-        WriterPointer writerPointer;
+        WriterPointer                 writerPointer;
         const CDPL::Base::DataFormat& format;
+        RecordDataVisitor*            dataVisitor;
     };
 }
 
@@ -121,9 +132,11 @@ namespace
 DataSetWriter::DataSetWriter(const DataSet& data_set, QWidget* parent, const QString& file_name, 
                              const QString& filter, const Settings& settings, bool selection):
     QObject(), dataSet(data_set), parent(parent), fileName(file_name), filter(filter), settings(settings), 
-    writeSelection(selection) {}
+    writeSelection(selection), recDataVisitor(nullptr)
+{}
 
-DataSetWriter::~DataSetWriter() {}
+DataSetWriter::~DataSetWriter()
+{}
 
 void DataSetWriter::write()
 {
@@ -131,6 +144,11 @@ void DataSetWriter::write()
         return;
 
     dataSet.getRecord(0).accept(*this);
+}
+
+void DataSetWriter::setRecordDataVisitor(RecordDataVisitor* visitor)
+{
+    recDataVisitor = visitor;
 }
 
 void DataSetWriter::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&)
@@ -204,7 +222,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
             typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat(), recDataVisitor);
 
             writer_ptr->setParent(&params);
 
@@ -247,7 +265,8 @@ void DataSetWriter::writeRecords(const std::string& def_format)
                 QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
         
                 typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
-                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+                
+                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat(), recDataVisitor);
 
                 writer_ptr->setParent(&params);
 
@@ -276,7 +295,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
             emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
             typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat(), recDataVisitor);
             
             writer_ptr->setParent(&params);
 
@@ -313,7 +332,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
         
                 typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat(), recDataVisitor);
 
                 writer_ptr->setParent(&params);
     

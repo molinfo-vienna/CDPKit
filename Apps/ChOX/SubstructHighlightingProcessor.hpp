@@ -51,7 +51,7 @@ namespace ChOX
     class Settings;
     class DataSetPageView;
     
-    class SubstructHighlightingProcessor : public QObject, RecordDataVisitor
+    class SubstructHighlightingProcessor : public QObject, public RecordDataVisitor
     {
 
         Q_OBJECT
@@ -73,6 +73,11 @@ namespace ChOX
         void visit(CDPL::Chem::Reaction& rxn);
         void visit(CDPL::Chem::Molecule& mol);
 
+        void initSubSearch();
+
+        void clearHighlightFlags(CDPL::Chem::Molecule& mol) const;
+        void highlightMatchingSubstructures(CDPL::Chem::Molecule& mol) const;
+        
         typedef std::unique_ptr<CDPL::Chem::SubstructureSearch> SubstructureSearchPtr;
         typedef std::unique_ptr<CDPL::Chem::Molecule>           MoleculePtr;
         typedef std::vector<MoleculePtr>                        MoleculePtrList;

@@ -59,8 +59,13 @@ using namespace ChOX;
 
 
 DataSetPrinter::DataSetPrinter(const Settings& settings, const DataSet& data_set): 
-    QObject(), dataSet(data_set), settings(settings)
+    QObject(), dataSet(data_set), settings(settings), recDataVisitor(nullptr)
 {
+}
+
+void DataSetPrinter::setRecordDataVisitor(RecordDataVisitor* visitor)
+{
+    recDataVisitor = visitor;
 }
 
 void DataSetPrinter::print(QWidget* caller, QPrinter& printer)
@@ -181,6 +186,9 @@ void DataSetPrinter::printPage(QPainter& painter, int page_no, int num_pages, in
         for (int j = 0; j < num_cols && rec_idx_idx < int(recordList.size()); j++, rec_idx_idx++) {
             DataRecordPainter rec_painter(font_metrics, painter, settings, dataSet.getRecord(recordList.at(rec_idx_idx)));
 
+            if (recDataVisitor)
+                rec_painter.accept(*recDataVisitor);
+    
             page_painter.drawRecord(i, j, vp_width, vp_height, recordList.at(rec_idx_idx) + 1, rec_painter);
         }
     }

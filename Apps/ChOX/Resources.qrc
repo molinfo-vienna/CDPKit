@@ -20,6 +20,7 @@
         <file>Icons/settings.png</file>
         <file>Icons/undo.png</file>
         <file>Icons/sshighlighting.svg</file>
+        <file>Icons/subsearch.svg</file>
         <file>Icons/error.svg</file>        
     </qresource>
 </RCC>

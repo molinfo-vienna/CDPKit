@@ -67,7 +67,7 @@
 #include "SettingsEditDialog.hpp"
 #include "AboutDialog.hpp"
 #include "RangeSelectionDialog.hpp"
-#include "SubstructHighlightingToolButton.hpp"
+#include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingProcessor.hpp"
 
 #if QT_VERSION <= 0x040400
@@ -105,16 +105,14 @@ void ChOX::MainWindow::init()
     dataSet = new DataSet(this);
     dataSetView = new DataSetView(this, *settings, *dataSet);
     dataSetViewControl = new DataSetViewControl(this, *dataSetView);
+    substructHilightingProc = new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
+        
+    addToolBar(dataSetViewControl);
+    addToolBar(new SubstructSearchUtilsToolBar(this, *settings));
 
-    new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
-
+    setCentralWidget(dataSetView);
     setupContextMenu();
 
-    dataSetViewControl->addWidget(new SubstructHighlightingToolButton(dataSetViewControl, *settings));
-    
-    addToolBar(dataSetViewControl);
-    setCentralWidget(dataSetView);
-    
 //----
 
     viewInfoLabel = new QLabel(this);
@@ -350,6 +348,7 @@ void ChOX::MainWindow::fileSaveAs()
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
         connect(&data_writer, SIGNAL(statusMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
 
+        data_writer.setRecordDataVisitor(substructHilightingProc);
         data_writer.write();
     }
 }
@@ -368,6 +367,7 @@ void ChOX::MainWindow::fileSaveSelectionAs()
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
         connect(&data_writer, SIGNAL(statusMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
 
+        data_writer.setRecordDataVisitor(substructHilightingProc);
         data_writer.write();
     }
 }
@@ -414,6 +414,7 @@ void ChOX::MainWindow::filePrint()
     connect(&data_printer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
     connect(&data_printer, SIGNAL(statusMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
 
+    data_printer.setRecordDataVisitor(substructHilightingProc);
     data_printer.print(this, printer);
 }
 

@@ -39,34 +39,17 @@ class QMenu;
 class QActionGroup;
 class QAction;
 
+
 namespace ChOX
 {
-    class DataSetView;
-}
-namespace ChOX
-{
-    class DataSet;
-}
-namespace ChOX
-{
-    class DataSetViewControl;
-}
-namespace ChOX
-{
-    class Settings;
-}
-namespace ChOX
-{
-    class SettingsEditDialog;
-}
-namespace ChOX
-{
+    
     class RangeSelectionDialog;
-}
-
-
-namespace ChOX
-{
+    class DataSetView;
+    class DataSet;
+    class DataSetViewControl;
+    class Settings;
+    class SettingsEditDialog;
+    class SubstructHighlightingProcessor;
 
     class MainWindow : public QMainWindow
     {
@@ -145,20 +128,21 @@ namespace ChOX
         void handleAgentLayoutChange();
         void handleAgentLayoutDirChange();
 
-        QLabel*                     statusMessageLabel;
-        QLabel*                     viewInfoLabel;
-        QFileDialog*                fileOpenDialog;
-        QActionGroup*               windowListGroup;
-        QMenu*                      contextMenu;
-        QFileDialog*                fileSaveDialog;
-        ChOX::Settings*             settings;
-        ChOX::SettingsEditDialog*   settingsEditDialog;
-        ChOX::DataSetViewControl*   dataSetViewControl;
-        ChOX::DataSet*              dataSet;
-        ChOX::DataSetView*          dataSetView;
-        ChOX::RangeSelectionDialog* rangeSelectionDialog;
-        Ui::MainWindow              uiMainWindow;
-        std::vector<QAction*>       recentFilesMenuActions;
+        QLabel*                         statusMessageLabel;
+        QLabel*                         viewInfoLabel;
+        QFileDialog*                    fileOpenDialog;
+        QActionGroup*                   windowListGroup;
+        QMenu*                          contextMenu;
+        QFileDialog*                    fileSaveDialog;
+        Settings*                       settings;
+        SettingsEditDialog*             settingsEditDialog;
+        DataSetViewControl*             dataSetViewControl;
+        DataSet*                        dataSet;
+        DataSetView*                    dataSetView;
+        RangeSelectionDialog*           rangeSelectionDialog;
+        SubstructHighlightingProcessor* substructHilightingProc;
+        Ui::MainWindow                  uiMainWindow;
+        std::vector<QAction*>           recentFilesMenuActions;
     };
 } // namespace ChOX
 

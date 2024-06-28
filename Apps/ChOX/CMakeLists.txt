@@ -78,9 +78,9 @@ set(chox_SRCS
     AboutDialog.cpp
     PrintProgressDialog.cpp
     RangeSelectionDialog.cpp
+    SubstructSearchUtilsToolBar.cpp
     SubstructHighlightingPatternsEditWidget.cpp
     SubstructHighlightingPatternsEditAction.cpp
-    SubstructHighlightingToolButton.cpp
     SubstructHighlightingProcessor.cpp
    )
 
@@ -134,9 +134,9 @@ set(chox_MOC_HDRS
     AboutDialog.hpp
     PrintProgressDialog.hpp
     RangeSelectionDialog.hpp
+    SubstructSearchUtilsToolBar.hpp
     SubstructHighlightingPatternsEditWidget.hpp
     SubstructHighlightingPatternsEditAction.hpp
-    SubstructHighlightingToolButton.hpp
     SubstructHighlightingProcessor.hpp
    )
 
