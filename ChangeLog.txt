@@ -1,5 +1,8 @@
 master:
 
+ - New feature of the program 'ChOX' that allows to highlight substructures defined by SMARTS patterns
+ - New classes Descr::NPoint2DPharmacophoreFingerprintGenerator and Descr::NPoint3DPharmacophoreFingerprintGeneratorfor
+   for the generation of variably sized hashed 2D and 3D pharmacophore fingerprints
  - Removed methods setNumBits() and getNumBits() in class Descr::PathFingerprintGenerator (fp-length now
    implicitly given by the size of the bitset provided as argument to method generate())
  - New class Descr::PubChemFingerprintGenerator for the generation of 881 bit PubChem fingerprints
