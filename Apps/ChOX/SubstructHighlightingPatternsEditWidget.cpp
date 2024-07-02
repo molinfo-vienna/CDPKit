@@ -96,7 +96,7 @@ void SubstructHighlightingPatternsEditWidget::init()
 
     h_layout->addWidget(button);
 
-    connect(button, SIGNAL(clicked()), this, SLOT(commitChanges()));
+    connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
     
     button = new QPushButton(tr("Cancel"), this);
 
@@ -111,7 +111,7 @@ void SubstructHighlightingPatternsEditWidget::clearPatterns()
     clearButton->setEnabled(false);
 }
 
-void SubstructHighlightingPatternsEditWidget::commitChanges()
+void SubstructHighlightingPatternsEditWidget::acceptChanges()
 {
     QStringList patterns;
 

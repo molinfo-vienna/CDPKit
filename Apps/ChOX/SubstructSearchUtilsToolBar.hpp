@@ -32,6 +32,7 @@ namespace ChOX
 {
 
     class Settings;
+    class SubstructSearchQueryEditDialog;
     
     class SubstructSearchUtilsToolBar : public QToolBar
     {
@@ -41,8 +42,15 @@ namespace ChOX
       public:
         SubstructSearchUtilsToolBar(QWidget* parent, Settings& settings);
 
+      private slots:
+        void editSubSearchQuery();
+        void performSubSearch();
+        
       private:
-        void init(Settings& settings);
+        void init();
+
+        Settings&                       settings;
+        SubstructSearchQueryEditDialog* subSearchQueryDialog;
     };
 } // namespace ChOX
 

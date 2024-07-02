@@ -24,24 +24,28 @@
 
 #include <QMenu>
 #include <QToolButton>
+#include <QAction>
 
 #include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingPatternsEditAction.hpp"
+#include "SubstructSearchQueryEditDialog.hpp"
 
 
 using namespace ChOX;
 
 
 SubstructSearchUtilsToolBar::SubstructSearchUtilsToolBar(QWidget* parent, Settings& settings):
-    QToolBar(parent)
+    QToolBar(parent), settings(settings), subSearchQueryDialog(nullptr)
 {
-    init(settings);
+    init();
 }
 
-void SubstructSearchUtilsToolBar::init(Settings& settings)
+void SubstructSearchUtilsToolBar::init()
 {
     setObjectName("substructSearchUtilsToolBar");
     setWindowTitle(tr("Substructure Search Utilities Toolbar"));
+
+    //------
     
     auto button = new QToolButton(this);
     
@@ -49,7 +53,7 @@ void SubstructSearchUtilsToolBar::init(Settings& settings)
     button->setToolTip(tr("Edit Substructure Highlighting Patterns"));
     
     auto menu = new QMenu(this);
-    auto action = new SubstructHighlightingPatternsEditAction(menu, settings);
+    QAction* action = new SubstructHighlightingPatternsEditAction(menu, settings);
 
     menu->addAction(action);
     
@@ -60,18 +64,42 @@ void SubstructSearchUtilsToolBar::init(Settings& settings)
 
     addWidget(button);
 
-    //---
-/*
+    //------
+
+    menu = new QMenu(this);
+    action = new QAction(tr("Edit &Query..."), menu);
+
+    menu->addAction(action);
+
+    connect(action, SIGNAL(triggered()), this, SLOT(editSubSearchQuery()));
+
+    action = new QAction(tr("&Search..."), menu);
+
+    menu->addAction(action);
+
+    connect(action, SIGNAL(triggered()), this, SLOT(performSubSearch()));
+
+    //------
+    
     button = new QToolButton(this);
     
     button->setIcon(QIcon(":/Icons/subsearch.svg"));
     button->setToolTip(tr("Perform Substructure Search"));
-    
-    menu = new QMenu(this);
-
     button->setMenu(menu);
     button->setPopupMode(QToolButton::InstantPopup);
 
     addWidget(button);
-*/
+}
+
+void SubstructSearchUtilsToolBar::editSubSearchQuery()
+{
+    if (!subSearchQueryDialog)
+        subSearchQueryDialog = new SubstructSearchQueryEditDialog(this, settings);
+
+    subSearchQueryDialog->exec();
+}
+
+void SubstructSearchUtilsToolBar::performSubSearch()
+{
+    // TODO
 }

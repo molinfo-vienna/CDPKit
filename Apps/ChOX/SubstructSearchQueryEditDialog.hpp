@@ -1,5 +1,5 @@
 /* 
- * SubstructHighlightingPatternsEditWidget.hpp 
+ * SubstructSearchQueryEditDialog.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,54 +22,39 @@
  */
 
 
-#ifndef CHOX_SUBSTRUCTHIGHLIGHTINGPATTERNSEDITWIDGET_HPP
-#define CHOX_SUBSTRUCTHIGHLIGHTINGPATTERNSEDITWIDGET_HPP
+#ifndef CHOX_SUBSTRUCTSEARCHQUERYEDITDIALOG_HPP
+#define CHOX_SUBSTRUCTSEARCHQUERYEDITDIALOG_HPP
 
-#include <QWidget>
-#include <QIcon>
+#include <QDialog>
 
 
-class QListWidget;
 class QPushButton;
-class QCheckBox;
-class QCheckBox;
-class QListWidgetItem;
 
 
 namespace ChOX
 {
 
     class Settings;
-    
-    class SubstructHighlightingPatternsEditWidget : public QWidget
+
+    class SubstructSearchQueryEditDialog : public QDialog
     {
 
         Q_OBJECT
 
       public:
-        SubstructHighlightingPatternsEditWidget(QWidget* parent, Settings& settings);
+        SubstructSearchQueryEditDialog(QWidget*parent , Settings& settings, Qt::WindowFlags = 0);
 
-      signals:
-        void finished();  
-        
+        int exec();
+
       private slots:
-        void clearPatterns();
-        void addPattern();
         void acceptChanges();
-        void validatePattern(QListWidgetItem* item);
-        
+        void resetChanges();
+
       private:
         void init();
-        
-        void showEvent(QShowEvent* event);
-        void keyPressEvent(QKeyEvent *event);
 
-        Settings&    settings;
-        QListWidget* ptnList;
-        QPushButton* clearButton;
-        QCheckBox*   hltgCheckBox;
-        QIcon        errorIcon;
+        Settings& settings;
     };
 } // namespace ChOX
 
-#endif // CHOX_SUBSTRUCTHIGHLIGHTINGPATTERNSEDITWIDGET_HPP
+#endif // CHOX_SUBSTRUCTSEARCHQUERYEDITDIALOG_HPP

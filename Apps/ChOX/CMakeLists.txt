@@ -82,6 +82,7 @@ set(chox_SRCS
     SubstructHighlightingPatternsEditWidget.cpp
     SubstructHighlightingPatternsEditAction.cpp
     SubstructHighlightingProcessor.cpp
+    SubstructSearchQueryEditDialog.cpp
    )
 
 set(chox_UI_FILES MainWindow.ui)
@@ -138,6 +139,7 @@ set(chox_MOC_HDRS
     SubstructHighlightingPatternsEditWidget.hpp
     SubstructHighlightingPatternsEditAction.hpp
     SubstructHighlightingProcessor.hpp
+    SubstructSearchQueryEditDialog.hpp
    )
 
 qt5_wrap_ui(chox_SRCS ${chox_UI_FILES})
