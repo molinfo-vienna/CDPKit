@@ -81,7 +81,8 @@ namespace CDPLPythonChem
     void exportMaxCommonAtomSubstructureSearch();
     void exportMaxCommonBondSubstructureSearch();
     void exportAutomorphismGroupSearch();
-
+    void exportMultiSubstructureSearch();
+    
     void exportReactor();
 
     void exportAtom3DCoordinatesFunctor();

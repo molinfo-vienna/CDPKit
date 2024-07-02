@@ -81,7 +81,8 @@ set(chem_MOD_SRCS
     MaxCommonAtomSubstructureSearchExport.cpp 
     MaxCommonBondSubstructureSearchExport.cpp 
     AutomorphismGroupSearchExport.cpp 
-
+    MultiSubstructureSearchExport.cpp
+    
     ReactorExport.cpp 
   
     TopologicalEntityAlignmentExport.cpp    

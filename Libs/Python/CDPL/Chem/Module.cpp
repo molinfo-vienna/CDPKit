@@ -88,7 +88,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportMaxCommonAtomSubstructureSearch();
     exportMaxCommonBondSubstructureSearch();
     exportAutomorphismGroupSearch();
-
+    exportMultiSubstructureSearch();
+    
     exportReactor();
 
     exportTopologicalEntityAlignments();

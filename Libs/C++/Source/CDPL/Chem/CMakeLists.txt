@@ -133,6 +133,7 @@ set(cdpl-chem_LIB_SRCS
     MaxCommonAtomSubstructureSearch.cpp
     MaxCommonBondSubstructureSearch.cpp
     AutomorphismGroupSearch.cpp
+    MultiSubstructureSearch.cpp
     Reactor.cpp
 
     TautomerScore.cpp
