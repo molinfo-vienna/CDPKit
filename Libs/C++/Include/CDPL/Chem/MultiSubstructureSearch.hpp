@@ -43,9 +43,7 @@ namespace CDPL
 
     namespace Chem
     {
-
-        class MolecularGraph;
-    
+   
         /**
          * \brief MultiSubstructureSearch.
          * \since 1.2
@@ -68,16 +66,17 @@ namespace CDPL
              */
             ~MultiSubstructureSearch();
 
-            bool matches(const MolecularGraph& target);
+            bool matches(const MolecularGraph& molgraph);
 
-            template <typename Iter>
-            void setup(Iter substr_it, Iter substr_end, const std::string& expr = "")
-            {
-                substrArray.assign(substr_it, substr_end, substrArray.end());
-                setup(expr);
-            }
+            void addSubstructure(const MolecularGraph::SharedPointer& molgraph);
 
-            void validate(const std::string& expr, std::size_t max_substr_id);
+            std::size_t getNumSubstructures() const;
+
+            void clear();
+
+            void setup(const std::string& qry_expr = "");
+
+            std::string validate(const std::string& qry_expr, std::size_t max_substr_id);
             
           private:
             enum Token : int;
@@ -89,16 +88,18 @@ namespace CDPL
             MultiSubstructureSearch(const MultiSubstructureSearch&) = delete;
 
             MultiSubstructureSearch& operator=(const MultiSubstructureSearch&) = delete;
-
-            void setup(const std::string& expr);
             
             Token nextToken(const std::string& expr);
 
-            ExprTreeNodePtr parseExpression(const std::string& expr, std::size_t max_substr_id);
-            ExprTreeNodePtr parseTerm(const std::string& expr, std::size_t max_substr_id);
-            ExprTreeNodePtr parseFactor(const std::string& expr, std::size_t max_substr_id);
+            ExprTreeNodePtr parseExpression(const std::string& expr);
+            ExprTreeNodePtr parseTerm(const std::string& expr);
+            ExprTreeNodePtr parseFactor(const std::string& expr);
+   
+            void validateExpression(const std::string& expr, std::size_t max_substr_id);
+            void validateTerm(const std::string& expr, std::size_t max_substr_id);
+            void validateFactor(const std::string& expr, std::size_t max_substr_id);
 
-            MolGraphPtrArray substrArray;
+            MolGraphPtrArray substructures;
             std::size_t      nextTokenStart;
             Token            currToken;
             std::size_t      substrID;

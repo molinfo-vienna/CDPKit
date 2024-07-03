@@ -40,7 +40,11 @@ void CDPLPythonChem::exportMultiSubstructureSearch()
                    boost::noncopyable>("MultiSubstructureSearch", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MultiSubstructureSearch>())
+        .def("addSubstructure", &Chem::MultiSubstructureSearch::addSubstructure, (python::arg("self"), python::arg("molgraph")))
+        .def("getNumSubstructures", &Chem::MultiSubstructureSearch::getNumSubstructures, python::arg("self"))
+        .def("clear", &Chem::MultiSubstructureSearch::clear, python::arg("self"))
         .def("matches", &Chem::MultiSubstructureSearch::matches, (python::arg("self"), python::arg("target")))
+        .def("setup", &Chem::MultiSubstructureSearch::setup, (python::arg("self"), python::arg("expr") = ""))  
         .def("validate", &Chem::MultiSubstructureSearch::validate, (python::arg("self"), python::arg("expr"), python::arg("max_substr_id")))  
-        ;
+        .add_property("numSubstructures", &Chem::MultiSubstructureSearch::getNumSubstructures);
 }
