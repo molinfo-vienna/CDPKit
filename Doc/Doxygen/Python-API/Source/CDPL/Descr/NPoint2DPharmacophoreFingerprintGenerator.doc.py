@@ -22,6 +22,8 @@
 ##
 # \brief NPoint2DPharmacophoreFingerprintGenerator.
 # 
+# \since 1.2
+# 
 class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGenerator):
 
     ##

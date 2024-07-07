@@ -22,6 +22,8 @@
 ##
 # \brief NPointPharmacophoreFingerprintGenerator.
 # 
+# \since 1.2
+# 
 class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
 
     ##

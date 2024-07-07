@@ -22,6 +22,8 @@
 ##
 # \brief Generation of 166 bit MACCS key fingerprints.
 # 
+# \since 1.2 
+# 
 # \see [\ref MACCSK]
 # 
 class MACCSFingerprintGenerator(Boost.Python.instance):

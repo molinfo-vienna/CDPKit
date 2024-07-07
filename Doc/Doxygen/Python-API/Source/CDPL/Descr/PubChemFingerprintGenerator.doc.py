@@ -22,6 +22,8 @@
 ##
 # \brief Generation of 881 bit PubChem fingerprints.
 # 
+# \since 1.2 
+# 
 # \see [\ref PCDS]
 # 
 class PubChemFingerprintGenerator(Boost.Python.instance):
