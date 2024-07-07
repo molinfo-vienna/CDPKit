@@ -268,9 +268,11 @@ namespace ChOX
         const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
         const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
 
-        const QStringList                           SUBSTRUCT_HIGHLIGHTING_PATTERNS          = QStringList();
-        const bool                                  SUBSTRUCT_HIGHLIGHTING_ENABLED           = true;
+        const QStringList                           SUBSTRUCT_HIGHLIGHTING_PATTERNS        = QStringList();
+        const bool                                  SUBSTRUCT_HIGHLIGHTING_ENABLED         = true;
 
+        const QStringList                           SUBSTRUCT_SEARCH_QUERY                 = QStringList();
+        
         const CDPL::Vis::Brush                      ATOM_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(1.0, 0.666, 1.0));
         const CDPL::Vis::Brush                      BOND_HIGHLIGHT_AREA_BRUSH              = CDPL::Vis::Brush(CDPL::Vis::Color(1.0, 0.666, 1.0));
     }

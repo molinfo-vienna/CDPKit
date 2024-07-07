@@ -25,14 +25,20 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGroupBox>
-#include <QTableWidget>
 #include <QFrame>
 #include <QLineEdit>
 #include <QLabel>
 #include <QPushButton>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QHeaderView>
+
+#include "CDPL/Chem/MultiSubstructureSearch.hpp"
 
 #include "SubstructSearchQueryEditDialog.hpp"
+#include "ControlParameterFunctions.hpp"
 #include "Settings.hpp"
+#include "Utilities.hpp"
 
 
 using namespace ChOX;
@@ -46,18 +52,9 @@ SubstructSearchQueryEditDialog::SubstructSearchQueryEditDialog(QWidget* parent, 
 
 int SubstructSearchQueryEditDialog::exec()
 {
+    resetChanges();
+    
     return QDialog::exec();
-}
-
-void SubstructSearchQueryEditDialog::acceptChanges()
-{
-    // TODO
-    accept();
-}
-
-void SubstructSearchQueryEditDialog::resetChanges()
-{
-    // TODO
 }
 
 void SubstructSearchQueryEditDialog::init()
@@ -69,32 +66,57 @@ void SubstructSearchQueryEditDialog::init()
     // --------
 
     auto group_box = new QGroupBox(tr("Query Definition"), this);
-    auto v_box_layout = new QVBoxLayout(group_box);
     
     main_layout->addWidget(group_box);
 
     // +++
+
+    auto v_box_layout = new QVBoxLayout();
+
+    group_box->setLayout(v_box_layout);
     
-    auto table_widget = new QTableWidget(group_box);
+    substructList = new QTableWidget(group_box);
 
-    v_box_layout->addWidget(table_widget);
+    substructList->setColumnCount(1);
+    substructList->horizontalHeader()->setStretchLastSection(true);
+    substructList->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Substructure SMARTS")));
+    
+    v_box_layout->addWidget(substructList);
 
+    connect(substructList, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(validatePattern(QTableWidgetItem*)));
+   
     // +++
     
     auto h_box_layout = new QHBoxLayout(group_box);
 
     v_box_layout->addLayout(h_box_layout);
 
-    auto button = new QPushButton(tr("&Add Pattern"), group_box);
+    auto button = new QPushButton(tr("&Add"), group_box);
 
+    h_box_layout->addStretch();
     h_box_layout->addWidget(button);
 
+    connect(button, SIGNAL(clicked()), this, SLOT(addSubstructure()));
+   
     // +++
     
-    button = new QPushButton(tr("C&lear Patterns"), group_box);
+    button = new QPushButton(tr("R&emove"), group_box);
 
     h_box_layout->addWidget(button);
 
+    connect(button, SIGNAL(clicked()), this, SLOT(removeSubstructure()));
+  
+    // +++
+    
+    button = new QPushButton(tr("C&lear"), group_box);
+
+    h_box_layout->addWidget(button);
+    h_box_layout->addStretch();
+
+    connect(button, SIGNAL(clicked()), this, SLOT(clearSubstructures()));
+    connect(button, &QPushButton::clicked, button, [=]() { button->setDisabled(true); });
+    connect(this, SIGNAL(haveData(bool)), button, SLOT(setEnabled(bool)));
+ 
     // +++
     
     auto frame = new QFrame(group_box);
@@ -111,9 +133,15 @@ void SubstructSearchQueryEditDialog::init()
 
     // +++
 
-    auto line_edit = new QLineEdit(group_box);
+    exprLineEdit = new QLineEdit(group_box);
 
-    v_box_layout->addWidget(line_edit);
+    exprLineEdit->setClearButtonEnabled(true);
+    
+    v_box_layout->addWidget(exprLineEdit);
+
+    connect(exprLineEdit, SIGNAL(editingFinished()), this, SLOT(validateExpression()));
+
+    exprTextColor = exprLineEdit->palette().color(QPalette::Active, exprLineEdit->foregroundRole());
     
     // --------
     
@@ -125,26 +153,134 @@ void SubstructSearchQueryEditDialog::init()
 
     button = new QPushButton(tr("&Reset"), this);
 
-    connect(button, SIGNAL(clicked()), this, SLOT(resetChanges()));
-
     h_box_layout->addStretch();
     h_box_layout->addWidget(button);
+
+    connect(button, SIGNAL(clicked()), this, SLOT(resetChanges()));
 
     // +++
 
     button = new QPushButton(tr("&OK"), this);
 
     button->setDefault(true);
-    
-    connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
-
+  
     h_box_layout->addWidget(button);
+  
+    connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
 
     // +++
 
     button = new QPushButton(tr("&Cancel"), this);
-    
+  
+    h_box_layout->addWidget(button);
+      
     connect(button, SIGNAL(clicked()), this, SLOT(reject()));
 
-    h_box_layout->addWidget(button);
+    // +++
+
+    setMinimumWidth(450);
+    setMinimumHeight(450);
+}
+
+void SubstructSearchQueryEditDialog::acceptChanges()
+{
+    QStringList query;
+
+    for (int i = 0; i < substructList->rowCount(); i++)
+        query << substructList->item(i, 0)->text();
+
+    query << exprLineEdit->text();
+   
+    setSubstructSearchQueryParameter(settings, query);
+    accept();
+}
+
+void SubstructSearchQueryEditDialog::resetChanges()
+{
+    substructList->setRowCount(0);
+    
+    auto& query = getSubstructSearchQueryParameter(settings);
+    
+    for (int i = 0; i < int(query.count()) - 1; i++) {
+        auto item = new QTableWidgetItem(query[i]);
+
+        item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+        
+        cellTextBrush = item->foreground();
+
+        substructList->setRowCount(substructList->rowCount() + 1);
+        substructList->setItem(substructList->rowCount() - 1, 0, item);
+    }
+
+    if (query.count() > 0)
+        exprLineEdit->setText(query.back());
+    else
+        exprLineEdit->setText("");
+    
+    emit(haveData(substructList->rowCount() > 0));
+}
+
+void SubstructSearchQueryEditDialog::addSubstructure()
+{
+    substructList->setRowCount(substructList->rowCount() + 1);
+    
+    auto item = new QTableWidgetItem();
+
+    item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+
+    cellTextBrush = item->foreground();
+    
+    emit(haveData(true));
+
+    substructList->setItem(substructList->rowCount() - 1, 0, item);
+    substructList->editItem(item);
+
+    validateExpression();
+}
+
+void SubstructSearchQueryEditDialog::clearSubstructures()
+{
+    substructList->setRowCount(0);
+
+    emit(haveData(false));
+}
+
+void SubstructSearchQueryEditDialog::validatePattern(QTableWidgetItem* item)
+{
+    QString error = validateSMARTS(item->text());
+   
+    if (!error.isEmpty()) {
+        item->setForeground(Qt::red);
+        item->setToolTip(error);
+
+    } else {
+        item->setForeground(cellTextBrush);
+        item->setToolTip("");
+    }
+}
+
+void SubstructSearchQueryEditDialog::validateExpression()
+{
+    std::string error = CDPL::Chem::MultiSubstructureSearch().validate(exprLineEdit->text().toStdString(), substructList->rowCount());
+    auto palette = exprLineEdit->palette();
+    
+    if (!error.empty()) {
+        palette.setColor(QPalette::Active, exprLineEdit->foregroundRole(), Qt::red);
+        exprLineEdit->setToolTip(tr(error.c_str()));
+
+    } else {
+        palette.setColor(QPalette::Active, exprLineEdit->foregroundRole(), exprTextColor);
+        exprLineEdit->setToolTip("");
+    }
+
+    exprLineEdit->setPalette(palette);
+}
+
+void SubstructSearchQueryEditDialog::removeSubstructure()
+{
+    substructList->removeRow(substructList->currentRow());
+
+    validateExpression();
+    
+    emit(haveData(substructList->rowCount() > 0));
 }

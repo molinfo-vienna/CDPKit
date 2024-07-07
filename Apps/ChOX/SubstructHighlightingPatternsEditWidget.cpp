@@ -22,9 +22,6 @@
  */
 
 
-#include <sstream>
-#include <exception>
-
 #include <QListWidget>
 #include <QLabel>
 #include <QPushButton>
@@ -33,13 +30,10 @@
 #include <QHBoxLayout>
 #include <QKeyEvent>
 
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
-
 #include "SubstructHighlightingPatternsEditWidget.hpp"
 #include "ControlParameterFunctions.hpp"
 #include "Settings.hpp"
+#include "Utilities.hpp"
 
 
 using namespace ChOX;
@@ -83,11 +77,13 @@ void SubstructHighlightingPatternsEditWidget::init()
 
     connect(button, SIGNAL(clicked()), this, SLOT(addPattern()));
     
-    clearButton = new QPushButton(tr("Clear Patterns"), this);
+    button = new QPushButton(tr("Clear Patterns"), this);
 
-    connect(clearButton, SIGNAL(clicked()), this, SLOT(clearPatterns()));
+    connect(button, SIGNAL(clicked()), ptnList, SLOT(clear()));
+    connect(button, &QPushButton::clicked, button, [=]() { button->setDisabled(true); });
+    connect(this, SIGNAL(haveData(bool)), button, SLOT(setEnabled(bool)));
     
-    h_layout->addWidget(clearButton);
+    h_layout->addWidget(button);
     h_layout->addStretch();
 
     button = new QPushButton(tr("OK"), this);
@@ -103,12 +99,6 @@ void SubstructHighlightingPatternsEditWidget::init()
     h_layout->addWidget(button);
 
     connect(button, SIGNAL(clicked()), this, SIGNAL(finished()));
-}
-
-void SubstructHighlightingPatternsEditWidget::clearPatterns()
-{
-    ptnList->clear();
-    clearButton->setEnabled(false);
 }
 
 void SubstructHighlightingPatternsEditWidget::acceptChanges()
@@ -131,35 +121,22 @@ void SubstructHighlightingPatternsEditWidget::addPattern()
     item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
     item->setCheckState(Qt::Checked);
     
-    clearButton->setEnabled(true);
+    emit(haveData(true));
 
     ptnList->editItem(item);
 }
 
 void SubstructHighlightingPatternsEditWidget::validatePattern(QListWidgetItem* item)
 {
-    if (item->text().isEmpty())
-        return;
-    
-    try {
-        using namespace CDPL::Chem;
-
-        BasicMolecule mol;
-        std::istringstream iss(item->text().toStdString());
-        SMARTSMoleculeReader reader(iss);
-
-        setStrictErrorCheckingParameter(reader, true);
-        
-        if (!reader.read(mol))
-            item->setIcon(errorIcon);
-        else
-            item->setIcon(QIcon());
-
-        item->setToolTip("");
-        
-    } catch (const std::exception& e) {
+    QString error = validateSMARTS(item->text());
+   
+    if (!error.isEmpty()) {
         item->setIcon(errorIcon);
-        item->setToolTip(QString(e.what()).replace("SMARTSMoleculeReader: while reading record 0: SMARTSDataReader", "Error"));
+        item->setToolTip(error);
+
+    } else {
+        item->setIcon(QIcon());
+        item->setToolTip("");
     }
 }
 
@@ -167,7 +144,8 @@ void SubstructHighlightingPatternsEditWidget::keyPressEvent(QKeyEvent *event)
 {
     if ((event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace) && ptnList->count() > 0) {
         ptnList->model()->removeRow(ptnList->currentRow());
-        clearButton->setEnabled(ptnList->count());
+
+        emit(haveData(ptnList->count() > 0));
         return;
     }
     
@@ -188,7 +166,8 @@ void SubstructHighlightingPatternsEditWidget::showEvent(QShowEvent* event)
     }
     
     hltgCheckBox->setChecked(getSubstructHighlightingEnabledParameter(settings));
-    clearButton->setEnabled(ptnList->count());
+
+    emit(haveData(ptnList->count() > 0));
             
     QWidget::showEvent(event);
 }

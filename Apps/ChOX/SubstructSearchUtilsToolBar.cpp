@@ -75,6 +75,8 @@ void SubstructSearchUtilsToolBar::init()
 
     action = new QAction(tr("&Search..."), menu);
 
+    action->setEnabled(false); // TODO
+    
     menu->addAction(action);
 
     connect(action, SIGNAL(triggered()), this, SLOT(performSubSearch()));

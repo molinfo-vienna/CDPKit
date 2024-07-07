@@ -143,6 +143,8 @@ void Settings::load()
     for (IOControlParamMap::iterator it = writerControlParams.begin(), end = writerControlParams.end(); it != end; ++it)
         it->second.clearParameters();
 
+    readStrListParameter(*this, settings, ControlParameter::SUBSTRUCT_SEARCH_QUERY, ControlParameterDefault::SUBSTRUCT_SEARCH_QUERY);
+    
     settings.beginGroup("View");
 
     readColorParameter(*this, settings, ControlParameter::VIEW_BACKGROUND_COLOR, ControlParameterDefault::VIEW_BACKGROUND_COLOR);
@@ -728,6 +730,8 @@ void Settings::save() const
 
     using namespace CDPL;
 
+    writeStrListParameter(*this, settings, ControlParameter::SUBSTRUCT_SEARCH_QUERY);
+    
     settings.beginGroup("View");
 
     writeColorParameter(*this, settings, ControlParameter::VIEW_BACKGROUND_COLOR);

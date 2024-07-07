@@ -25,11 +25,12 @@
 #ifndef CHOX_UTILITIES_HPP
 #define CHOX_UTILITIES_HPP
 
+#include <QString>
+
 #include "CDPLFwd.hpp"
 
 
 class QPainter;
-class QString;
 
 
 namespace ChOX
@@ -45,6 +46,9 @@ namespace ChOX
                            const CDPL::Base::ControlParameterContainer& params);
     void prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt,
                            const CDPL::Base::ControlParameterContainer& params);
+
+    QString validateSMARTS(const QString& smarts);
+    
 } // namespace ChOX
 
 #endif // CHOX_UTILITIES_HPP

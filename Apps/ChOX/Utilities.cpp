@@ -24,14 +24,15 @@
 
 #include <algorithm>
 #include <functional>
+#include <sstream>
+#include <exception>
 
 #include <QPointF>
-#include <QString>
 #include <QPainter>
 
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/Reaction.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
@@ -45,6 +46,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -181,4 +183,28 @@ void ChOX::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFo
                   std::bind(static_cast<void (*)(Molecule&, const Base::DataFormat&,
                                                  const Base::ControlParameterContainer&)>
                             (&prepareOutputData), std::placeholders::_1, std::ref(opt_fmt), std::ref(params)));
+}
+
+QString ChOX::validateSMARTS(const QString& smarts)
+{
+    if (smarts.isEmpty())
+        return QString();
+
+    try {
+        using namespace CDPL::Chem;
+
+        BasicMolecule mol;
+        std::istringstream iss(smarts.toStdString());
+        SMARTSMoleculeReader reader(iss);
+
+        setStrictErrorCheckingParameter(reader, true);
+        
+        if (!reader.read(mol))
+            return "Unspecified error";
+
+        return QString();
+        
+    } catch (const std::exception& e) {
+        return QString(e.what()).replace("SMARTSMoleculeReader: while reading record 0: SMARTSDataReader", "Error");
+    }
 }

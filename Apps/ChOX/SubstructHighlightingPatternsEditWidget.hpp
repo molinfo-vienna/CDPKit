@@ -30,10 +30,8 @@
 
 
 class QListWidget;
-class QPushButton;
-class QCheckBox;
-class QCheckBox;
 class QListWidgetItem;
+class QCheckBox;
 
 
 namespace ChOX
@@ -51,9 +49,9 @@ namespace ChOX
 
       signals:
         void finished();  
-        
+        void haveData(bool);
+                           
       private slots:
-        void clearPatterns();
         void addPattern();
         void acceptChanges();
         void validatePattern(QListWidgetItem* item);
@@ -66,7 +64,6 @@ namespace ChOX
 
         Settings&    settings;
         QListWidget* ptnList;
-        QPushButton* clearButton;
         QCheckBox*   hltgCheckBox;
         QIcon        errorIcon;
     };

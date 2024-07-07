@@ -26,9 +26,13 @@
 #define CHOX_SUBSTRUCTSEARCHQUERYEDITDIALOG_HPP
 
 #include <QDialog>
+#include <QBrush>
 
 
 class QPushButton;
+class QTableWidget;
+class QTableWidgetItem;
+class QLineEdit;
 
 
 namespace ChOX
@@ -46,14 +50,27 @@ namespace ChOX
 
         int exec();
 
+      signals:
+        void haveData(bool);
+        void dataChanged(bool);
+                  
       private slots:
         void acceptChanges();
         void resetChanges();
-
+        void addSubstructure();
+        void removeSubstructure();
+        void clearSubstructures();
+        void validatePattern(QTableWidgetItem* item);
+        void validateExpression();
+        
       private:
         void init();
 
-        Settings& settings;
+        Settings&     settings;
+        QTableWidget* substructList;
+        QLineEdit*    exprLineEdit;
+        QBrush        cellTextBrush;
+        QColor        exprTextColor;
     };
 } // namespace ChOX
 

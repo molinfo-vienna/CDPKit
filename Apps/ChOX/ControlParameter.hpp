@@ -89,6 +89,8 @@ namespace ChOX
         extern const CDPL::Base::LookupKey SUBSTRUCT_HIGHLIGHTING_PATTERNS;
         extern const CDPL::Base::LookupKey SUBSTRUCT_HIGHLIGHTING_ENABLED;
 
+        extern const CDPL::Base::LookupKey SUBSTRUCT_SEARCH_QUERY;
+
     } // namespace ControlParameter
 } // namespace ChOX
 

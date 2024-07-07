@@ -159,6 +159,9 @@ namespace ChOX
 
     bool getSubstructHighlightingEnabledParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void setSubstructHighlightingEnabledParameter(CDPL::Base::ControlParameterContainer& cntnr, bool enabled);
+
+    const QStringList& getSubstructSearchQueryParameter(const CDPL::Base::ControlParameterContainer& cntnr);
+    void               setSubstructSearchQueryParameter(CDPL::Base::ControlParameterContainer& cntnr, const QStringList& query_def);
     
 } // namespace ChOX
 

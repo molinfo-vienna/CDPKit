@@ -247,6 +247,8 @@ namespace ChOX
         extern const QStringList SUBSTRUCT_HIGHLIGHTING_PATTERNS;
         extern const bool        SUBSTRUCT_HIGHLIGHTING_ENABLED;
 
+        extern const QStringList SUBSTRUCT_SEARCH_QUERY;
+        
         extern const CDPL::Vis::Brush ATOM_HIGHLIGHT_AREA_BRUSH;
         extern const CDPL::Vis::Brush BOND_HIGHLIGHT_AREA_BRUSH;
         
