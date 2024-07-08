@@ -52,17 +52,21 @@ namespace ChOX
 
       signals:
         void haveData(bool);
-        void dataChanged(bool);
+        void haveSelectedItems(bool);
                   
       private slots:
         void acceptChanges();
         void resetChanges();
+
         void addSubstructure();
-        void removeSubstructure();
+        void removeSubstructures();
         void clearSubstructures();
+
         void validatePattern(QTableWidgetItem* item);
         void validateExpression();
         
+        void checkIfItemsSelected();
+
       private:
         void init();
 

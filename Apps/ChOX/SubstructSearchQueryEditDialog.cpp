@@ -84,6 +84,7 @@ void SubstructSearchQueryEditDialog::init()
     v_box_layout->addWidget(substructList);
 
     connect(substructList, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(validatePattern(QTableWidgetItem*)));
+    connect(substructList, SIGNAL(itemSelectionChanged()), this, SLOT(checkIfItemsSelected()));
    
     // +++
     
@@ -104,8 +105,9 @@ void SubstructSearchQueryEditDialog::init()
 
     h_box_layout->addWidget(button);
 
-    connect(button, SIGNAL(clicked()), this, SLOT(removeSubstructure()));
-  
+    connect(button, SIGNAL(clicked()), this, SLOT(removeSubstructures()));
+    connect(this, SIGNAL(haveSelectedItems(bool)), button, SLOT(setEnabled(bool)));
+
     // +++
     
     button = new QPushButton(tr("C&lear"), group_box);
@@ -178,7 +180,7 @@ void SubstructSearchQueryEditDialog::init()
 
     // +++
 
-    setMinimumWidth(450);
+    setMinimumWidth(500);
     setMinimumHeight(450);
 }
 
@@ -218,6 +220,7 @@ void SubstructSearchQueryEditDialog::resetChanges()
         exprLineEdit->setText("");
     
     emit(haveData(substructList->rowCount() > 0));
+    emit(haveSelectedItems(false));
 }
 
 void SubstructSearchQueryEditDialog::addSubstructure()
@@ -243,6 +246,7 @@ void SubstructSearchQueryEditDialog::clearSubstructures()
     substructList->setRowCount(0);
 
     emit(haveData(false));
+    emit(haveSelectedItems(false));
 }
 
 void SubstructSearchQueryEditDialog::validatePattern(QTableWidgetItem* item)
@@ -276,11 +280,23 @@ void SubstructSearchQueryEditDialog::validateExpression()
     exprLineEdit->setPalette(palette);
 }
 
-void SubstructSearchQueryEditDialog::removeSubstructure()
+void SubstructSearchQueryEditDialog::removeSubstructures()
 {
-    substructList->removeRow(substructList->currentRow());
+    while (true) {
+        auto sel_items = substructList->selectedItems();
+
+        if (sel_items.count() > 0)
+            substructList->removeRow(sel_items.first()->row());
+        else
+            break;
+    }
 
     validateExpression();
     
     emit(haveData(substructList->rowCount() > 0));
+}
+
+void SubstructSearchQueryEditDialog::checkIfItemsSelected()
+{
+    emit(haveSelectedItems(substructList->selectedItems().count() > 0));
 }
