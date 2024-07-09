@@ -21,6 +21,8 @@
 # Boston, MA 02111-1307, USA.
 ##
 
+add_compile_definitions("BOOST_ALLOW_DEPRECATED_HEADERS")
+
 add_subdirectory(C++) 
 
 if(BUILD_PYTHON_MODULES)
