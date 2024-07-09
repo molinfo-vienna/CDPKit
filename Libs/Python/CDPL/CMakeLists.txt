@@ -32,7 +32,9 @@ endif()
 if(MSVC)
   add_compile_definitions("BOOST_PYTHON_NO_LIB")
 endif()
-  
+
+add_compile_definitions("BOOST_BIND_GLOBAL_PLACEHOLDERS")
+
 file(GLOB PYTHON_FILES "*.py")
 
 foreach(PYTHON_FILE ${PYTHON_FILES})
