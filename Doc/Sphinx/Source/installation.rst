@@ -73,6 +73,7 @@ sphinx-rtd-theme               1.0.0+         optional, required for generating 
 sphinx-inline-tabs             2021.4.11b8+   optional, required for generating CDPKit documentation pages
 sphinx-sitemap                 2.5.1+         optional, required for generating CDPKit documentation pages
 sphinxcontrib-bibtex           2.5.5+         optional, required for generating CDPKit documentation pages
+docs-versions-menu             0.5.2+         optional, required for generating CDPKit documentation pages
 Doxygen                        1.8.5+         optional, required for generating C++ and Python API documentation
 =============================  =============  ================================================================================
 
