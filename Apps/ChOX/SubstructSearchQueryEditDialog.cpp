@@ -71,10 +71,8 @@ void SubstructSearchQueryEditDialog::init()
 
     // +++
 
-    auto v_box_layout = new QVBoxLayout();
+    auto v_box_layout = new QVBoxLayout(group_box);
 
-    group_box->setLayout(v_box_layout);
-    
     substructList = new QTableWidget(group_box);
 
     substructList->setColumnCount(1);
@@ -88,7 +86,7 @@ void SubstructSearchQueryEditDialog::init()
    
     // +++
     
-    auto h_box_layout = new QHBoxLayout(group_box);
+    auto h_box_layout = new QHBoxLayout();
 
     v_box_layout->addLayout(h_box_layout);
 

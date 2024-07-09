@@ -73,13 +73,11 @@ void SubstructSearchUtilsToolBar::init()
 
     connect(action, SIGNAL(triggered()), this, SLOT(editSubSearchQuery()));
 
-    action = new QAction(tr("&Search..."), menu);
+    subSearchAction = new QAction(tr("&Search..."), menu);
 
-    action->setEnabled(false); // TODO
-    
-    menu->addAction(action);
+    menu->addAction(subSearchAction);
 
-    connect(action, SIGNAL(triggered()), this, SLOT(performSubSearch()));
+    connect(subSearchAction, SIGNAL(triggered()), this, SIGNAL(performSubstructSearch()));
 
     //------
     
@@ -101,7 +99,7 @@ void SubstructSearchUtilsToolBar::editSubSearchQuery()
     subSearchQueryDialog->exec();
 }
 
-void SubstructSearchUtilsToolBar::performSubSearch()
+void SubstructSearchUtilsToolBar::enableSubstructSearch(bool enable)
 {
-    // TODO
+    subSearchAction->setEnabled(enable);
 }

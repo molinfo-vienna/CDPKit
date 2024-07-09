@@ -69,12 +69,7 @@
 #include "RangeSelectionDialog.hpp"
 #include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingProcessor.hpp"
-
-#if QT_VERSION <= 0x040400
-#  define selectNameFilter selectFilter
-#  define selectedNameFilter selectedFilter
-#  define setNameFilters setFilters
-#endif // QT_VERSION <= 0x040400
+#include "SubstructSearchProcessor.hpp"
 
 
 ChOX::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
@@ -106,9 +101,16 @@ void ChOX::MainWindow::init()
     dataSetView = new DataSetView(this, *settings, *dataSet);
     dataSetViewControl = new DataSetViewControl(this, *dataSetView);
     substructHilightingProc = new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
-        
+    
     addToolBar(dataSetViewControl);
-    addToolBar(new SubstructSearchUtilsToolBar(this, *settings));
+
+    auto subsrch_proc = new SubstructSearchProcessor(this, *dataSet, *settings);
+    auto subsrch_tb = new SubstructSearchUtilsToolBar(this, *settings);
+
+    connect(subsrch_proc, SIGNAL(substructSearchEnabled(bool)), subsrch_tb, SLOT(enableSubstructSearch(bool)));
+    connect(subsrch_tb, SIGNAL(performSubstructSearch()), subsrch_proc, SLOT(performSubstructSearch()));
+                
+    addToolBar(subsrch_tb);
 
     setCentralWidget(dataSetView);
     setupContextMenu();

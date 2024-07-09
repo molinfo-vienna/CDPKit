@@ -42,15 +42,21 @@ namespace ChOX
       public:
         SubstructSearchUtilsToolBar(QWidget* parent, Settings& settings);
 
+      signals:
+        void performSubstructSearch();
+
+      public slots:
+        void enableSubstructSearch(bool enable);
+                
       private slots:
         void editSubSearchQuery();
-        void performSubSearch();
         
       private:
         void init();
 
         Settings&                       settings;
         SubstructSearchQueryEditDialog* subSearchQueryDialog;
+        QAction*                        subSearchAction;
     };
 } // namespace ChOX
 
