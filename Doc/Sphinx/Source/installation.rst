@@ -296,7 +296,7 @@ by adding the argument *--no-binary :all:*:
 
 .. code-block:: shell
 
-                $ pip install cpkit --no-binary :all:
+                $ pip install cdpkit --no-binary :all:
             
 .. rubric:: Option 2: Installation of the current development version by specifying the GitHub repository URL
 
