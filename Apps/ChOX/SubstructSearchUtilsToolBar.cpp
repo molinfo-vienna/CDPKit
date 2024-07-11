@@ -67,13 +67,13 @@ void SubstructSearchUtilsToolBar::init()
     //------
 
     menu = new QMenu(this);
-    action = new QAction(tr("Edit &Query..."), menu);
+    action = new QAction(QIcon(":/Icons/settings.png"), tr("Edit &Query..."), menu);
 
     menu->addAction(action);
 
     connect(action, SIGNAL(triggered()), this, SLOT(editSubSearchQuery()));
 
-    subSearchAction = new QAction(tr("&Search..."), menu);
+    subSearchAction = new QAction(QIcon(":/Icons/subsearch.svg"), tr("&Search..."), menu);
 
     menu->addAction(subSearchAction);
 

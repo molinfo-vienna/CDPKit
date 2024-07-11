@@ -81,14 +81,17 @@ namespace ChOX
       private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
-        
+
         typedef std::unique_ptr<CDPL::Chem::MultiSubstructureSearch> SubstructureSearchPtr;
+        typedef std::vector<int>                                     RecordIndexList;
 
         QWidget*              parent;
         DataSet&              dataSet;
         Settings&             settings;
         SubstructureSearchPtr subSearch;
         bool                  queryValid;
+        RecordIndexList       hitList;
+        bool                  foundHit;
     };
 } // namespace ChOX
 

@@ -25,23 +25,19 @@
 #include <exception>
 #include <sstream>
 
-#include <QWidget>
+#include <QProgressDialog>
 
 #include "CDPL/Chem/MultiSubstructureSearch.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
-#include "CDPL/Vis/AtomFunctions.hpp"
-#include "CDPL/Vis/BondFunctions.hpp"
-#include "CDPL/Vis/ControlParameterFunctions.hpp"
 
 #include "SubstructSearchProcessor.hpp"
 #include "Settings.hpp"
 #include "DataSet.hpp"
+#include "ConcreteDataRecord.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
 
@@ -124,15 +120,47 @@ void SubstructSearchProcessor::handelDataSetSizeChange(int size)
 
 void SubstructSearchProcessor::performSubstructSearch()
 {
+    if (!queryValid)
+        return;
+
+    hitList.clear();
+    
+    int num_records = dataSet.getSize();
+    QProgressDialog progress(tr("Searching for Matches ..."), tr("Stop Search"), 0, num_records, parent);
+
+    progress.setWindowModality(Qt::WindowModal);
+
+    for (int i = 0; i < num_records; i++) {
+        progress.setValue(i);
+
+        if (progress.wasCanceled())
+            break;
+
+        foundHit = false;
+        dataSet.getRecord(i).accept(*this);
+
+        if (foundHit) {
+            hitList.push_back(i);
+            progress.setLabelText(tr("Searching for Matches ... (") + QString::number(hitList.size()) + tr(" found)"));
+        }
+    }
+    
+    progress.setValue(num_records);
+    
     // TODO
 }
 
 void SubstructSearchProcessor::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& record)
 {
     // TODO
+    
+    foundHit = false;
 }
 
 void SubstructSearchProcessor::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& record)
 {
-    // TODO
+    auto mol_ptr = record.getData();
+    
+    if (subSearch->matches(*mol_ptr))
+        foundHit = true;
 }
