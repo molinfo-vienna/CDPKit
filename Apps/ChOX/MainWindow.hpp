@@ -26,6 +26,7 @@
 #define CHOX_MAINWINDOW_HPP
 
 #include <vector>
+#include <memory>
 
 #include <QMainWindow>
 
@@ -111,7 +112,10 @@ namespace ChOX
 
         void setupNewWindow(MainWindow* window);
 
+        void createFileOpenDialog();
         void setupFileOpenDialog(bool all_types);
+
+        void createFileSaveDialog();
         void setupFileSaveDialog();
 
         void closeEvent(QCloseEvent* e);
@@ -128,12 +132,14 @@ namespace ChOX
         void handleAgentLayoutChange();
         void handleAgentLayoutDirChange();
 
+        typedef std::shared_ptr<QFileDialog> QFileDialogPtr;
+        
         QLabel*                         statusMessageLabel;
         QLabel*                         viewInfoLabel;
-        QFileDialog*                    fileOpenDialog;
+        QFileDialogPtr                  fileOpenDialog;
         QActionGroup*                   windowListGroup;
         QMenu*                          contextMenu;
-        QFileDialog*                    fileSaveDialog;
+        QFileDialogPtr                  fileSaveDialog;
         Settings*                       settings;
         SettingsEditDialog*             settingsEditDialog;
         DataSetViewControl*             dataSetViewControl;

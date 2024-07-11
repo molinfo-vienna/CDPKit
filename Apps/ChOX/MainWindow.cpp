@@ -237,6 +237,15 @@ void ChOX::MainWindow::init()
 //----
 
     MainWindowList::instance().addWindow(this);
+
+    if (MainWindowList::instance().getNumWindows() == 1) {
+        createFileOpenDialog();
+        createFileSaveDialog();
+
+    } else {
+        fileOpenDialog = MainWindowList::instance().getWindow(0)->fileOpenDialog;
+        fileSaveDialog = MainWindowList::instance().getWindow(0)->fileSaveDialog;
+    }
 }
 
 void ChOX::MainWindow::setupContextMenu()
@@ -452,47 +461,48 @@ void ChOX::MainWindow::helpAbout()
 
     dlg->exec();
 }
+void ChOX::MainWindow::createFileOpenDialog()
+{
+    fileOpenDialog.reset(new QFileDialog(nullptr));
+
+    fileOpenDialog->setFileMode(QFileDialog::ExistingFiles);
+    fileOpenDialog->setAcceptMode(QFileDialog::AcceptOpen);
+    fileOpenDialog->setNameFilterDetailsVisible(true);
+    fileOpenDialog->setOptions(QFileDialog::DontUseNativeDialog);
+}
 
 void ChOX::MainWindow::setupFileOpenDialog(bool all_types)
 {
-    if (!fileOpenDialog) {
-        fileOpenDialog = new QFileDialog(this);
-
-        fileOpenDialog->setFileMode(QFileDialog::ExistingFiles);
-        fileOpenDialog->setAcceptMode(QFileDialog::AcceptOpen);
-        fileOpenDialog->setNameFilterDetailsVisible(true);
-        fileOpenDialog->setOptions(QFileDialog::DontUseNativeDialog);
-    }
-
     QString prev_filter = fileOpenDialog->selectedNameFilter();
 
     fileOpenDialog->setNameFilters(all_types ? InputFileFilterList() : InputFileFilterList(*dataSet));
     fileOpenDialog->selectNameFilter(prev_filter);
 }
 
+void ChOX::MainWindow::createFileSaveDialog()
+{
+    fileSaveDialog.reset(new QFileDialog(nullptr));
+
+    fileSaveDialog->setFileMode(QFileDialog::AnyFile);
+    fileSaveDialog->setAcceptMode(QFileDialog::AcceptSave);
+    fileSaveDialog->setConfirmOverwrite(true);
+    fileSaveDialog->setNameFilterDetailsVisible(true);
+    fileSaveDialog->setOptions(QFileDialog::DontUseNativeDialog);
+}
+
 void ChOX::MainWindow::setupFileSaveDialog()
 {
-    bool first_time = false;
-
-    if (!fileSaveDialog) {
-        fileSaveDialog = new QFileDialog(this);
-
-        fileSaveDialog->setFileMode(QFileDialog::AnyFile);
-        fileSaveDialog->setAcceptMode(QFileDialog::AcceptSave);
-        fileSaveDialog->setConfirmOverwrite(true);
-        fileSaveDialog->setNameFilterDetailsVisible(true);
-        fileSaveDialog->setOptions(QFileDialog::DontUseNativeDialog);
-
-        first_time = true;
-    }
-
     QString prev_filter = fileSaveDialog->selectedNameFilter();
+    QString prev_file;
 
+    if (!fileSaveDialog->selectedFiles().isEmpty())
+        prev_file = fileSaveDialog->selectedFiles().first();
+    
     fileSaveDialog->setNameFilters(OutputFileFilterList(*dataSet));
     fileSaveDialog->selectNameFilter(prev_filter);
-    
-    if (!first_time && !fileSaveDialog->selectedFiles().isEmpty())
-        fileSaveDialog->selectFile(fileSaveDialog->selectedFiles().first());
+   
+    if (!fileSaveDialog->selectedFiles().isEmpty())
+        fileSaveDialog->selectFile(prev_file);
 }
 
 void ChOX::MainWindow::handleNumColumnsChange(int num_cols)
