@@ -59,7 +59,7 @@ int SubstructSearchQueryEditDialog::exec()
 
 void SubstructSearchQueryEditDialog::init()
 {
-    setWindowTitle(tr("Substructure Query Settings"));
+    setWindowTitle(tr("ChOX - Substructure Query Settings"));
 
     auto main_layout = new QVBoxLayout(this);
     
@@ -153,9 +153,10 @@ void SubstructSearchQueryEditDialog::init()
 
     button = new QPushButton(tr("&Reset"), this);
 
-    h_box_layout->addStretch();
     h_box_layout->addWidget(button);
-
+    h_box_layout->addStretch();
+    h_box_layout->addSpacing(30);
+    
     connect(button, SIGNAL(clicked()), this, SLOT(resetChanges()));
 
     // +++
@@ -173,7 +174,7 @@ void SubstructSearchQueryEditDialog::init()
     button = new QPushButton(tr("&Cancel"), this);
   
     h_box_layout->addWidget(button);
-      
+
     connect(button, SIGNAL(clicked()), this, SLOT(reject()));
 
     // +++
