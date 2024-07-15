@@ -59,8 +59,6 @@
 #include "DataSetReader.hpp"
 #include "RecentFilesList.hpp"
 #include "MainWindowList.hpp"
-#include "InputFileFilterList.hpp"
-#include "OutputFileFilterList.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
 #include "Settings.hpp"
@@ -70,6 +68,7 @@
 #include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingProcessor.hpp"
 #include "SubstructSearchProcessor.hpp"
+#include "Utilities.hpp"
 
 
 ChOX::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
@@ -89,13 +88,20 @@ void ChOX::MainWindow::init()
 
     uiMainWindow.setupUi(this);
 
-    fileOpenDialog = 0;
-    fileSaveDialog = 0;
     rangeSelectionDialog = 0;
     settingsEditDialog = 0;
 
     windowListGroup = 0;
 
+    if (MainWindowList::instance().getNumWindows() == 0) {
+        createFileOpenDialog();
+        createFileSaveDialog();
+
+    } else {
+        fileOpenDialog = MainWindowList::instance().getWindow(0)->fileOpenDialog;
+        fileSaveDialog = MainWindowList::instance().getWindow(0)->fileSaveDialog;
+    }
+    
     settings = new Settings(this);
     dataSet = new DataSet(this);
     dataSetView = new DataSetView(this, *settings, *dataSet);
@@ -104,7 +110,7 @@ void ChOX::MainWindow::init()
     
     addToolBar(dataSetViewControl);
 
-    auto subsrch_proc = new SubstructSearchProcessor(this, *dataSet, *settings);
+    auto subsrch_proc = new SubstructSearchProcessor(this, *fileSaveDialog, *dataSet, *settings);
     auto subsrch_tb = new SubstructSearchUtilsToolBar(this, *settings);
 
     connect(subsrch_proc, SIGNAL(substructSearchEnabled(bool)), subsrch_tb, SLOT(enableSubstructSearch(bool)));
@@ -237,15 +243,6 @@ void ChOX::MainWindow::init()
 //----
 
     MainWindowList::instance().addWindow(this);
-
-    if (MainWindowList::instance().getNumWindows() == 1) {
-        createFileOpenDialog();
-        createFileSaveDialog();
-
-    } else {
-        fileOpenDialog = MainWindowList::instance().getWindow(0)->fileOpenDialog;
-        fileSaveDialog = MainWindowList::instance().getWindow(0)->fileSaveDialog;
-    }
 }
 
 void ChOX::MainWindow::setupContextMenu()
@@ -297,21 +294,18 @@ void ChOX::MainWindow::setupContextMenu()
 }
 
 void ChOX::MainWindow::destroy()
-{
-}
+{}
 
 void ChOX::MainWindow::fileNew()
 {
     ChOX::MainWindow* new_win = new ChOX::MainWindow(0, 0);
-
-    setupNewWindow(new_win);
 
     new_win->show();
 }
 
 void ChOX::MainWindow::fileOpen()
 {
-    setupFileOpenDialog(true);
+    setupFileOpenDialog(*fileOpenDialog, *dataSet, true);
 
     fileOpenDialog->setWindowTitle(tr("ChOX - Open File(s)"));
 
@@ -324,30 +318,13 @@ void ChOX::MainWindow::fileOpen()
 
             new_win->show();
             new_win->openFiles(fileOpenDialog->selectedFiles());
-
-            setupNewWindow(new_win);
         }
-    }
-}
-
-void ChOX::MainWindow::setupNewWindow(MainWindow* new_win)
-{
-    if (fileOpenDialog) {
-        new_win->setupFileOpenDialog(true);
-        new_win->fileOpenDialog->setDirectory(fileOpenDialog->directory());
-        new_win->fileOpenDialog->selectNameFilter(fileOpenDialog->selectedNameFilter());
-    }
-
-    if (fileSaveDialog) {
-        new_win->setupFileSaveDialog();
-        new_win->fileSaveDialog->setDirectory(fileSaveDialog->directory());
-        new_win->fileSaveDialog->selectNameFilter(fileSaveDialog->selectedNameFilter());
     }
 }
 
 void ChOX::MainWindow::fileSaveAs()
 {
-    setupFileSaveDialog();
+    setupFileSaveDialog(*fileSaveDialog, *dataSet);
 
     fileSaveDialog->setWindowTitle(tr("ChOX - Save Records As"));
 
@@ -366,7 +343,7 @@ void ChOX::MainWindow::fileSaveAs()
 
 void ChOX::MainWindow::fileSaveSelectionAs()
 {
-    setupFileSaveDialog();
+    setupFileSaveDialog(*fileSaveDialog, *dataSet);
 
     fileSaveDialog->setWindowTitle(tr("ChOX - Save Selected Records As"));
 
@@ -385,7 +362,7 @@ void ChOX::MainWindow::fileSaveSelectionAs()
 
 void ChOX::MainWindow::fileAppend()
 {
-    setupFileOpenDialog(false);
+    setupFileOpenDialog(*fileOpenDialog, *dataSet, false);
 
     fileOpenDialog->setWindowTitle(tr("ChOX - Append File(s)"));
 
@@ -471,14 +448,6 @@ void ChOX::MainWindow::createFileOpenDialog()
     fileOpenDialog->setOptions(QFileDialog::DontUseNativeDialog);
 }
 
-void ChOX::MainWindow::setupFileOpenDialog(bool all_types)
-{
-    QString prev_filter = fileOpenDialog->selectedNameFilter();
-
-    fileOpenDialog->setNameFilters(all_types ? InputFileFilterList() : InputFileFilterList(*dataSet));
-    fileOpenDialog->selectNameFilter(prev_filter);
-}
-
 void ChOX::MainWindow::createFileSaveDialog()
 {
     fileSaveDialog.reset(new QFileDialog(nullptr));
@@ -488,21 +457,6 @@ void ChOX::MainWindow::createFileSaveDialog()
     fileSaveDialog->setConfirmOverwrite(true);
     fileSaveDialog->setNameFilterDetailsVisible(true);
     fileSaveDialog->setOptions(QFileDialog::DontUseNativeDialog);
-}
-
-void ChOX::MainWindow::setupFileSaveDialog()
-{
-    QString prev_filter = fileSaveDialog->selectedNameFilter();
-    QString prev_file;
-
-    if (!fileSaveDialog->selectedFiles().isEmpty())
-        prev_file = fileSaveDialog->selectedFiles().first();
-    
-    fileSaveDialog->setNameFilters(OutputFileFilterList(*dataSet));
-    fileSaveDialog->selectNameFilter(prev_filter);
-   
-    if (!fileSaveDialog->selectedFiles().isEmpty())
-        fileSaveDialog->selectFile(prev_file);
 }
 
 void ChOX::MainWindow::handleNumColumnsChange(int num_cols)

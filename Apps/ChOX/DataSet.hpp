@@ -51,14 +51,15 @@ namespace ChOX
 
         int getSize() const;
 
-        const DataRecord& getRecord(int) const;
+        const DataRecord& getRecord(int index) const;
 
         const QStringList& getFileNames() const;
 
-        void setRecordSelected(int, bool = true);
-        void selectRecordRange(int, int, bool = true, bool = false);
-
-        bool isRecordSelected(int) const;
+        void setRecordSelected(int index, bool select = true);
+        void selectRecordRange(int start, int end, bool select = true, bool xor_selection = false);
+        void setRecordSelection(const CDPL::Util::BitSet& mask);
+        
+        bool isRecordSelected(int index) const;
 
         bool hasSelectedRecords() const;
         int  getNumSelectedRecords() const;
@@ -79,6 +80,10 @@ namespace ChOX
             emit fileListChanged();
         }
 
+        void appendRecords(const DataSet& other, const CDPL::Util::BitSet& mask);
+
+        void removeRecords(const CDPL::Util::BitSet& mask);
+        
       signals:
         void sizeChanged(int);
         void selectionStatusChanged(bool);

@@ -21,6 +21,9 @@
         <file>Icons/undo.png</file>
         <file>Icons/sshighlighting.svg</file>
         <file>Icons/subsearch.svg</file>
-        <file>Icons/error.svg</file>        
+        <file>Icons/search.svg</file>
+        <file>Icons/error.svg</file>
+        <file>Icons/success.svg</file>
+        <file>Icons/nosuccess.svg</file>        
     </qresource>
 </RCC>

@@ -22,17 +22,11 @@
  */
 
 
-#include <exception>
-#include <sstream>
-
 #include "CDPL/Chem/SubstructureSearch.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/AtomFunctions.hpp"
 #include "CDPL/Vis/BondFunctions.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
@@ -43,6 +37,7 @@
 #include "DataSetPageView.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
+#include "Utilities.hpp"
 
 
 using namespace ChOX;
@@ -75,25 +70,12 @@ void SubstructHighlightingProcessor::handleControlParamChanged(const CDPL::Base:
             if (patterns[i * 2] != "X")
                 continue;
 
-            try {
-                using namespace CDPL::Chem;
-
-                MoleculePtr mol_ptr(new BasicMolecule());
-                std::istringstream iss(patterns[i * 2 + 1].toStdString());
-                SMARTSMoleculeReader reader(iss);
-
-                setStrictErrorCheckingParameter(reader, true);
-
-                if (!reader.read(*mol_ptr))
-                    continue;
-
-                initSubstructureSearchQuery(*mol_ptr, false);
-                
-                queryPatterns.push_back(std::move(mol_ptr));
-
-            } catch (const std::exception& e) {
+            MoleculePtr mol_ptr = parseSMARTS(patterns[i * 2 + 1]);
+               
+            if (!mol_ptr)
                 continue;
-            }
+
+            queryPatterns.push_back(mol_ptr);
         }
         
     } else if (key == ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED)

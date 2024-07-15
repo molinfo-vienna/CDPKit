@@ -23,30 +23,31 @@
 
 
 #include <exception>
-#include <sstream>
 
 #include <QProgressDialog>
+#include <QFileDialog>
 
 #include "CDPL/Chem/MultiSubstructureSearch.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
 
 #include "SubstructSearchProcessor.hpp"
+#include "SubstructSearchResultDialog.hpp"
 #include "Settings.hpp"
 #include "DataSet.hpp"
+#include "DataSetWriter.hpp"
 #include "ConcreteDataRecord.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
+#include "Utilities.hpp"
 
 
 using namespace ChOX;
 
 
-SubstructSearchProcessor::SubstructSearchProcessor(QWidget* parent, DataSet& data_set, Settings& settings):
-    QObject(parent), parent(parent), dataSet(data_set), settings(settings), queryValid(false)
+SubstructSearchProcessor::SubstructSearchProcessor(QWidget* parent, QFileDialog& save_dlg, DataSet& data_set, Settings& settings):
+    QObject(parent), parent(parent), fileSaveDialog(save_dlg), dataSet(data_set), settings(settings),
+    queryValid(false), resultDialog(nullptr)
 {
     connect(&settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)),
             this, SLOT(handleControlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)));
@@ -79,26 +80,14 @@ void SubstructSearchProcessor::handleControlParamChanged(const CDPL::Base::Looku
         subSearch->clear();
 
     for (int i = 0; i < int(query.count()) - 1; i++) {
-        try {
-            Molecule::SharedPointer mol_ptr(new BasicMolecule());
-            std::istringstream iss(query[i].toStdString());
-            SMARTSMoleculeReader reader(iss);
+        Molecule::SharedPointer mol_ptr = parseSMARTS(query[i]);
 
-            setStrictErrorCheckingParameter(reader, true);
-
-            if (!reader.read(*mol_ptr)) {
-                queryValid = false;
-                break;
-            }
-            
-            initSubstructureSearchQuery(*mol_ptr, false);
-
-            subSearch->addSubstructure(mol_ptr);
-
-        } catch (const std::exception& e) {
+        if (!mol_ptr) {
             queryValid = false;
             break;
         }
+
+        subSearch->addSubstructure(mol_ptr);
     }
 
     if (queryValid) {
@@ -123,13 +112,15 @@ void SubstructSearchProcessor::performSubstructSearch()
     if (!queryValid)
         return;
 
-    hitList.clear();
-    
     int num_records = dataSet.getSize();
+    int num_matches = 0;
     QProgressDialog progress(tr("Searching for Matches ..."), tr("Stop Search"), 0, num_records, parent);
 
     progress.setWindowModality(Qt::WindowModal);
 
+    recordMatchMask.resize(num_records);
+    recordMatchMask.reset();
+    
     for (int i = 0; i < num_records; i++) {
         progress.setValue(i);
 
@@ -140,27 +131,112 @@ void SubstructSearchProcessor::performSubstructSearch()
         dataSet.getRecord(i).accept(*this);
 
         if (foundHit) {
-            hitList.push_back(i);
-            progress.setLabelText(tr("Searching for Matches ... (") + QString::number(hitList.size()) + tr(" found)"));
+            recordMatchMask.set(i);
+            num_matches++;
+            
+            progress.setLabelText(tr("Searching for Matches ... (") + QString::number(num_matches) + tr(" found)"));
         }
     }
     
     progress.setValue(num_records);
+
+    if (!resultDialog) {
+        resultDialog = new SubstructSearchResultDialog(parent);
+
+        connect(resultDialog, SIGNAL(saveMatchingRequested()), this, SLOT(saveMatches()));
+        connect(resultDialog, SIGNAL(saveNonMatchingRequested()), this, SLOT(saveNonMatches()));
+    }
     
-    // TODO
+    resultDialog->setup(num_matches);
+
+    if (resultDialog->exec() != QDialog::Accepted)
+        return;
+
+    switch (resultDialog->getViewAction()) {
+
+        case SubstructSearchResultDialog::SEL_MATCHING:
+            dataSet.setRecordSelection(recordMatchMask);
+            return;
+            
+        case SubstructSearchResultDialog::SEL_NON_MATCHING:
+            dataSet.setRecordSelection(~recordMatchMask);
+            return;
+            
+        case SubstructSearchResultDialog::DEL_MATCHING:
+            dataSet.removeRecords(recordMatchMask);
+            return;
+            
+        case SubstructSearchResultDialog::DEL_NON_MATCHING:
+            dataSet.removeRecords(~recordMatchMask);
+            
+        default:
+            return;
+    }
 }
 
 void SubstructSearchProcessor::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& record)
 {
-    // TODO
-    
-    foundHit = false;
+    auto rxn_ptr = record.getData();
+
+    for (auto& comp : *rxn_ptr) {
+        if (subSearch->matches(comp)) {
+            initSubstructureSearchTarget(comp, false);
+            foundHit = true;
+            break;
+        }
+    }
 }
 
 void SubstructSearchProcessor::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& record)
 {
     auto mol_ptr = record.getData();
+
+    initSubstructureSearchTarget(*mol_ptr, false);
     
     if (subSearch->matches(*mol_ptr))
         foundHit = true;
+}
+
+void SubstructSearchProcessor::saveMatches()
+{
+    DataSet matches(nullptr);
+  
+    matches.appendRecords(dataSet, recordMatchMask);
+
+    setupFileSaveDialog(fileSaveDialog, matches);
+
+    fileSaveDialog.setWindowTitle(tr("ChOX - Save Matching Records As"));
+
+    if (fileSaveDialog.exec() == QDialog::Accepted && !fileSaveDialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(matches, resultDialog, fileSaveDialog.selectedFiles().first(),
+                                  fileSaveDialog.selectedNameFilter(), settings, false);
+
+        connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showErrorMessage(const QString&)));
+        connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));
+        connect(&data_writer, SIGNAL(statusMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));
+
+        data_writer.write();
+    }
+}
+
+void SubstructSearchProcessor::saveNonMatches()
+{
+    DataSet non_matches(nullptr);
+
+    non_matches.appendRecords(dataSet, ~recordMatchMask);
+
+    setupFileSaveDialog(fileSaveDialog, non_matches);
+
+    fileSaveDialog.setWindowTitle(tr("ChOX - Save Non-Matching Records As"));
+
+    if (fileSaveDialog.exec() == QDialog::Accepted && !fileSaveDialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(non_matches, resultDialog, fileSaveDialog.selectedFiles().first(),
+                                  fileSaveDialog.selectedNameFilter(), settings, false);
+
+        connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showErrorMessage(const QString&)));
+        connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));
+        connect(&data_writer, SIGNAL(statusMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));
+
+        data_writer.write();
+    }
 }

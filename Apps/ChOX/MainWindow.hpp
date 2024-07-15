@@ -110,13 +110,8 @@ namespace ChOX
       private:
         void setupContextMenu();
 
-        void setupNewWindow(MainWindow* window);
-
         void createFileOpenDialog();
-        void setupFileOpenDialog(bool all_types);
-
         void createFileSaveDialog();
-        void setupFileSaveDialog();
 
         void closeEvent(QCloseEvent* e);
 

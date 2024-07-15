@@ -29,6 +29,8 @@
 
 #include <QPointF>
 #include <QPainter>
+#include <QFileDialog>
+#include <QFileInfo>
 
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/Reaction.hpp"
@@ -51,6 +53,8 @@
 #include "CDPL/Util/BitSet.hpp"
 
 #include "Utilities.hpp"
+#include "InputFileFilterList.hpp"
+#include "OutputFileFilterList.hpp"
 
 
 void ChOX::drawText(QPainter& painter, const QString& text, unsigned int alignment, 
@@ -207,4 +211,51 @@ QString ChOX::validateSMARTS(const QString& smarts)
     } catch (const std::exception& e) {
         return QString(e.what()).replace("SMARTSMoleculeReader: while reading record 0: SMARTSDataReader", "Error");
     }
+}
+
+CDPL::Chem::Molecule::SharedPointer ChOX::parseSMARTS(const QString& smarts)
+{
+    using namespace CDPL::Chem;
+
+    try {
+        Molecule::SharedPointer mol_ptr(new BasicMolecule());
+        std::istringstream iss(smarts.toStdString());
+        SMARTSMoleculeReader reader(iss);
+
+        setStrictErrorCheckingParameter(reader, true);
+
+        if (!reader.read(*mol_ptr))
+            return Molecule::SharedPointer();
+
+        initSubstructureSearchQuery(*mol_ptr, false);
+
+        return mol_ptr;
+
+
+    } catch (const std::exception& e) {
+        return Molecule::SharedPointer();
+    }
+}
+
+void ChOX::setupFileOpenDialog(QFileDialog& dialog, const DataSet& data_set, bool all_types)
+{
+    QString prev_filter = dialog.selectedNameFilter();
+
+    dialog.setNameFilters(all_types ? InputFileFilterList() : InputFileFilterList(data_set));
+    dialog.selectNameFilter(prev_filter);
+}
+
+void ChOX::setupFileSaveDialog(QFileDialog& dialog, const DataSet& data_set)
+{
+    QString prev_filter = dialog.selectedNameFilter();
+    QString prev_file;
+
+    if (!dialog.selectedFiles().isEmpty() && !QFileInfo(dialog.selectedFiles().first()).isDir())
+        prev_file = dialog.selectedFiles().first();
+    
+    dialog.setNameFilters(OutputFileFilterList(data_set));
+    dialog.selectNameFilter(prev_filter);
+   
+    if (!prev_file.isEmpty())
+        dialog.selectFile(prev_file);
 }

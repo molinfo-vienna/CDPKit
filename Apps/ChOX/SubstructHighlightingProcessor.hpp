@@ -79,7 +79,7 @@ namespace ChOX
         void highlightMatchingSubstructures(CDPL::Chem::Molecule& mol) const;
         
         typedef std::unique_ptr<CDPL::Chem::SubstructureSearch> SubstructureSearchPtr;
-        typedef std::unique_ptr<CDPL::Chem::Molecule>           MoleculePtr;
+        typedef std::shared_ptr<CDPL::Chem::Molecule>           MoleculePtr;
         typedef std::vector<MoleculePtr>                        MoleculePtrList;
 
         DataSetPageView*      pageView;

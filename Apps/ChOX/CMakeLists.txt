@@ -83,7 +83,7 @@ set(chox_SRCS
     SubstructHighlightingPatternsEditAction.cpp
     SubstructHighlightingProcessor.cpp
     SubstructSearchQueryEditDialog.cpp
-    SubstructSearchHitsActionDialog.cpp
+    SubstructSearchResultDialog.cpp
     SubstructSearchProcessor.cpp
    )
 
@@ -142,7 +142,7 @@ set(chox_MOC_HDRS
     SubstructHighlightingPatternsEditAction.hpp
     SubstructHighlightingProcessor.hpp
     SubstructSearchQueryEditDialog.hpp
-    SubstructSearchHitsActionDialog.hpp
+    SubstructSearchResultDialog.hpp
     SubstructSearchProcessor.hpp
    )
 

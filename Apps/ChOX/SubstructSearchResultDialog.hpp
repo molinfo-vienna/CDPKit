@@ -1,5 +1,5 @@
 /* 
- * SubstructSearchHitsActionDialog.hpp 
+ * SubstructSearchResultDialog.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,26 +22,54 @@
  */
 
 
-#ifndef CHOX_SUBSTRUCTSEARCHHITSACTIONDIALOG_HPP
-#define CHOX_SUBSTRUCTSEARCHHITSACTIONDIALOG_HPP
+#ifndef CHOX_SUBSTRUCTSEARCHRESULTDIALOG_HPP
+#define CHOX_SUBSTRUCTSEARCHRESULTDIALOG_HPP
 
 #include <QDialog>
+#include <QPixmap>
+
+
+class QLabel;
+class QButtonGroup;
 
 
 namespace ChOX
 {
 
-    class SubstructSearchHitsActionDialog : public QDialog
+    class SubstructSearchResultDialog : public QDialog
     {
 
         Q_OBJECT
 
       public:
-        SubstructSearchHitsActionDialog(QWidget* = 0, Qt::WindowFlags = 0);
+        enum ViewAction {
 
+            NONE = 0,
+            SEL_MATCHING,
+            SEL_NON_MATCHING,
+            DEL_MATCHING,
+            DEL_NON_MATCHING
+        };
+            
+        SubstructSearchResultDialog(QWidget* = 0, Qt::WindowFlags = 0);
+
+        void setup(int num_matches);
+
+        ViewAction getViewAction() const;
+
+      signals:
+        void saveMatchingRequested();
+        void saveNonMatchingRequested();
+        
       private:
         void init();
+
+        QLabel*       infoIconLabel;
+        QLabel*       infoTextLabel;
+        QButtonGroup* viewActionGroup;
+        QPixmap       haveMatchesIcon;
+        QPixmap       noMatchesIcon;
     };
 } // namespace ChOX
 
-#endif // CHOX_SUBSTRUCTSEARCHHITSACTIONDIALOG_HPP
+#endif // CHOX_SUBSTRUCTSEARCHRESULTDIALOG_HPP

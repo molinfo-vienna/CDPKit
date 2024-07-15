@@ -60,7 +60,9 @@ int SubstructSearchQueryEditDialog::exec()
 void SubstructSearchQueryEditDialog::init()
 {
     setWindowTitle(tr("ChOX - Substructure Query Settings"));
-
+    setMinimumWidth(500);
+    setMinimumHeight(450);
+    
     auto main_layout = new QVBoxLayout(this);
     
     // --------
@@ -136,6 +138,7 @@ void SubstructSearchQueryEditDialog::init()
     exprLineEdit = new QLineEdit(group_box);
 
     exprLineEdit->setClearButtonEnabled(true);
+    exprLineEdit->setPlaceholderText(tr("e.g. 3 & !(1 | 2), Default Expr. = 1|...|N"));
     
     v_box_layout->addWidget(exprLineEdit);
 
@@ -176,11 +179,6 @@ void SubstructSearchQueryEditDialog::init()
     h_box_layout->addWidget(button);
 
     connect(button, SIGNAL(clicked()), this, SLOT(reject()));
-
-    // +++
-
-    setMinimumWidth(500);
-    setMinimumHeight(450);
 }
 
 void SubstructSearchQueryEditDialog::acceptChanges()

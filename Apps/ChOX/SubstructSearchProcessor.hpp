@@ -25,16 +25,18 @@
 #ifndef CHOX_SUBSTRUCTSEARCHPROCESSOR_HPP
 #define CHOX_SUBSTRUCTSEARCHPROCESSOR_HPP
 
-#include <vector>
 #include <memory>
 
 #include <QObject>
+
+#include "CDPL/Util/BitSet.hpp"
 
 #include "DataRecordVisitor.hpp"
 #include "CDPLFwd.hpp"
 
 
 class QWidget;
+class QFileDialog;
 
 
 namespace CDPL
@@ -53,6 +55,7 @@ namespace ChOX
 
     class Settings;
     class DataSet;
+    class SubstructSearchResultDialog;
     
     class SubstructSearchProcessor : public QObject, public DataRecordVisitor
     {
@@ -60,7 +63,7 @@ namespace ChOX
         Q_OBJECT
 
       public:
-        SubstructSearchProcessor(QWidget* parent, DataSet& data_set, Settings& settings);
+        SubstructSearchProcessor(QWidget* parent, QFileDialog& save_dlg, DataSet& data_set, Settings& settings);
 
         SubstructSearchProcessor(const SubstructSearchProcessor&) = delete;
 
@@ -77,21 +80,24 @@ namespace ChOX
       private slots:
         void handleControlParamChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& value);
         void handelDataSetSizeChange(int size);
+        void saveMatches();
+        void saveNonMatches();
         
       private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
         typedef std::unique_ptr<CDPL::Chem::MultiSubstructureSearch> SubstructureSearchPtr;
-        typedef std::vector<int>                                     RecordIndexList;
 
-        QWidget*              parent;
-        DataSet&              dataSet;
-        Settings&             settings;
-        SubstructureSearchPtr subSearch;
-        bool                  queryValid;
-        RecordIndexList       hitList;
-        bool                  foundHit;
+        QWidget*                     parent;
+        QFileDialog&                 fileSaveDialog;
+        DataSet&                     dataSet;
+        Settings&                    settings;
+        SubstructureSearchPtr        subSearch;
+        bool                         queryValid;
+        CDPL::Util::BitSet           recordMatchMask;
+        bool                         foundHit;
+        SubstructSearchResultDialog* resultDialog;
     };
 } // namespace ChOX
 
