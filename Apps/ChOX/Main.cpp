@@ -29,6 +29,8 @@
 #include <QStringList>
 
 #include "MainWindow.hpp"
+#include "FileOpenDialog.hpp"
+#include "FileSaveDialog.hpp"
 
 
 namespace
@@ -55,13 +57,18 @@ namespace
 
 int main(int argc, char** argv)
 {
+    using namespace ChOX;
+    
     ChOXApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("CDPKit");
     QCoreApplication::setOrganizationDomain("cdpkit.org");
     QCoreApplication::setApplicationName("ChOX");
 
-    ChOX::MainWindow* main_win = new ChOX::MainWindow(0);
+    qAddPostRoutine(FileOpenDialog::free);
+    qAddPostRoutine(FileSaveDialog::free);
+    
+    MainWindow* main_win = new MainWindow(0);
 
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 

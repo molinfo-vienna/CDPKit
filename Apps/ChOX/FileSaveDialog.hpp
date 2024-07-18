@@ -1,5 +1,5 @@
 /* 
- * MainWindowList.hpp 
+ * FileSaveDialog.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,54 +22,26 @@
  */
 
 
-#ifndef CHOX_MAINWINDOWLIST_HPP
-#define CHOX_MAINWINDOWLIST_HPP
-
-#include <vector>
-
-#include <qobject.h>
+#ifndef CHOX_FILESAVEDIALOG_HPP
+#define CHOX_FILESAVEDIALOG_HPP
 
 
-namespace ChOX
-{
-    class MainWindow;
-}
+class QFileDialog;
 
 
 namespace ChOX
 {
 
-    class MainWindowList : public QObject
+    class DataSet;
+    
+    class FileSaveDialog
     {
 
-        Q_OBJECT
-
-        typedef std::vector<MainWindow*> WindowList;
-
       public:
-        typedef WindowList::const_iterator ConstIterator;
+        static QFileDialog& get(const DataSet& data_set);
 
-        static MainWindowList& get();
-
-        void addWindow(MainWindow*);
-
-        ConstIterator getBegin() const;
-        ConstIterator getEnd() const;
-
-        MainWindow* getWindow(int) const;
-
-        int getNumWindows() const;
-
-      private slots:
-        void removeWindow(QObject*);
-
-      private:
-        MainWindowList();
-
-        ~MainWindowList();
-
-        WindowList windows;
+        static void free();
     };
 } // namespace ChOX
 
-#endif // CHOX_MAINWINDOWLIST_HPP
+#endif // CHOX_FILESAVEDIALOG_HPP

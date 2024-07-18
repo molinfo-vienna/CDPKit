@@ -26,7 +26,6 @@
 #define CHOX_MAINWINDOW_HPP
 
 #include <vector>
-#include <memory>
 
 #include <QMainWindow>
 
@@ -35,7 +34,6 @@
 
 
 class QLabel;
-class QFileDialog;
 class QMenu;
 class QActionGroup;
 class QAction;
@@ -110,9 +108,6 @@ namespace ChOX
       private:
         void setupContextMenu();
 
-        void createFileOpenDialog();
-        void createFileSaveDialog();
-
         void closeEvent(QCloseEvent* e);
 
         void handleSizeAdjustmentChange();
@@ -127,14 +122,10 @@ namespace ChOX
         void handleAgentLayoutChange();
         void handleAgentLayoutDirChange();
 
-        typedef std::shared_ptr<QFileDialog> QFileDialogPtr;
-        
         QLabel*                         statusMessageLabel;
         QLabel*                         viewInfoLabel;
-        QFileDialogPtr                  fileOpenDialog;
         QActionGroup*                   windowListGroup;
         QMenu*                          contextMenu;
-        QFileDialogPtr                  fileSaveDialog;
         Settings*                       settings;
         SettingsEditDialog*             settingsEditDialog;
         DataSetViewControl*             dataSetViewControl;

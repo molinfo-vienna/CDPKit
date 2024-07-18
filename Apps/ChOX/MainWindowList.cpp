@@ -35,11 +35,11 @@ MainWindowList::MainWindowList() {}
 
 MainWindowList::~MainWindowList() {}
 
-MainWindowList& MainWindowList::instance()
+MainWindowList& MainWindowList::get()
 {
-    static MainWindowList inst;
+    static MainWindowList instance;
 
-    return inst;
+    return instance;
 }
 
 void MainWindowList::addWindow(MainWindow* win)

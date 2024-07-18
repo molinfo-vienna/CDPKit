@@ -33,13 +33,12 @@
 
 
 class QPainter;
-class QFileDialog;
 
 
 namespace ChOX
 {
 
-    class DataSet;
+
     
     void drawText(QPainter& painter, const QString& text, unsigned int alignment,
                   double width, double height, double margin);
@@ -54,10 +53,6 @@ namespace ChOX
 
     QString validateSMARTS(const QString& smarts);
     CDPL::Chem::Molecule::SharedPointer parseSMARTS(const QString& smarts);
-    
-    void setupFileOpenDialog(QFileDialog& dialog, const DataSet& data_set, bool all_types);
-    void setupFileSaveDialog(QFileDialog& dialog, const DataSet& data_set);
-    
 } // namespace ChOX
 
 #endif // CHOX_UTILITIES_HPP

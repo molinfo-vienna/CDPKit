@@ -36,7 +36,6 @@
 
 
 class QWidget;
-class QFileDialog;
 
 
 namespace CDPL
@@ -63,7 +62,7 @@ namespace ChOX
         Q_OBJECT
 
       public:
-        SubstructSearchProcessor(QWidget* parent, QFileDialog& save_dlg, DataSet& data_set, Settings& settings);
+        SubstructSearchProcessor(QWidget* parent, DataSet& data_set, Settings& settings);
 
         SubstructSearchProcessor(const SubstructSearchProcessor&) = delete;
 
@@ -90,7 +89,6 @@ namespace ChOX
         typedef std::unique_ptr<CDPL::Chem::MultiSubstructureSearch> SubstructureSearchPtr;
 
         QWidget*                     parent;
-        QFileDialog&                 fileSaveDialog;
         DataSet&                     dataSet;
         Settings&                    settings;
         SubstructureSearchPtr        subSearch;

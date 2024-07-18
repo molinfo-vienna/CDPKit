@@ -36,6 +36,7 @@
 #include "Settings.hpp"
 #include "DataSet.hpp"
 #include "DataSetWriter.hpp"
+#include "FileSaveDialog.hpp"
 #include "ConcreteDataRecord.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
@@ -45,8 +46,8 @@
 using namespace ChOX;
 
 
-SubstructSearchProcessor::SubstructSearchProcessor(QWidget* parent, QFileDialog& save_dlg, DataSet& data_set, Settings& settings):
-    QObject(parent), parent(parent), fileSaveDialog(save_dlg), dataSet(data_set), settings(settings),
+SubstructSearchProcessor::SubstructSearchProcessor(QWidget* parent, DataSet& data_set, Settings& settings):
+    QObject(parent), parent(parent), dataSet(data_set), settings(settings),
     queryValid(false), resultDialog(nullptr)
 {
     connect(&settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)),
@@ -203,13 +204,13 @@ void SubstructSearchProcessor::saveMatches()
   
     matches.appendRecords(dataSet, recordMatchMask);
 
-    setupFileSaveDialog(fileSaveDialog, matches);
+    auto& file_dialog = FileSaveDialog::get(matches);
 
-    fileSaveDialog.setWindowTitle(tr("ChOX - Save Matching Records As"));
+    file_dialog.setWindowTitle(tr("ChOX - Save Matching Records As"));
 
-    if (fileSaveDialog.exec() == QDialog::Accepted && !fileSaveDialog.selectedFiles().isEmpty()) {
-        DataSetWriter data_writer(matches, resultDialog, fileSaveDialog.selectedFiles().first(),
-                                  fileSaveDialog.selectedNameFilter(), settings, false);
+    if (file_dialog.exec() == QDialog::Accepted && !file_dialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(matches, resultDialog, file_dialog.selectedFiles().first(),
+                                  file_dialog.selectedNameFilter(), settings, false);
 
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showErrorMessage(const QString&)));
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));
@@ -225,13 +226,13 @@ void SubstructSearchProcessor::saveNonMatches()
 
     non_matches.appendRecords(dataSet, ~recordMatchMask);
 
-    setupFileSaveDialog(fileSaveDialog, non_matches);
+    auto& file_dialog = FileSaveDialog::get(non_matches);
 
-    fileSaveDialog.setWindowTitle(tr("ChOX - Save Non-Matching Records As"));
+    file_dialog.setWindowTitle(tr("ChOX - Save Non-Matching Records As"));
 
-    if (fileSaveDialog.exec() == QDialog::Accepted && !fileSaveDialog.selectedFiles().isEmpty()) {
-        DataSetWriter data_writer(non_matches, resultDialog, fileSaveDialog.selectedFiles().first(),
-                                  fileSaveDialog.selectedNameFilter(), settings, false);
+    if (file_dialog.exec() == QDialog::Accepted && !file_dialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(non_matches, resultDialog, file_dialog.selectedFiles().first(),
+                                  file_dialog.selectedNameFilter(), settings, false);
 
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showErrorMessage(const QString&)));
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), parent, SLOT(showStatusMessage(const QString&)));

@@ -59,6 +59,8 @@
 #include "DataSetReader.hpp"
 #include "RecentFilesList.hpp"
 #include "MainWindowList.hpp"
+#include "FileOpenDialog.hpp"
+#include "FileSaveDialog.hpp"
 #include "ControlParameter.hpp"
 #include "ControlParameterFunctions.hpp"
 #include "Settings.hpp"
@@ -68,7 +70,6 @@
 #include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingProcessor.hpp"
 #include "SubstructSearchProcessor.hpp"
-#include "Utilities.hpp"
 
 
 ChOX::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
@@ -90,17 +91,7 @@ void ChOX::MainWindow::init()
 
     rangeSelectionDialog = 0;
     settingsEditDialog = 0;
-
     windowListGroup = 0;
-
-    if (MainWindowList::instance().getNumWindows() == 0) {
-        createFileOpenDialog();
-        createFileSaveDialog();
-
-    } else {
-        fileOpenDialog = MainWindowList::instance().getWindow(0)->fileOpenDialog;
-        fileSaveDialog = MainWindowList::instance().getWindow(0)->fileSaveDialog;
-    }
     
     settings = new Settings(this);
     dataSet = new DataSet(this);
@@ -110,7 +101,7 @@ void ChOX::MainWindow::init()
     
     addToolBar(dataSetViewControl);
 
-    auto subsrch_proc = new SubstructSearchProcessor(this, *fileSaveDialog, *dataSet, *settings);
+    auto subsrch_proc = new SubstructSearchProcessor(this, *dataSet, *settings);
     auto subsrch_tb = new SubstructSearchUtilsToolBar(this, *settings);
 
     connect(subsrch_proc, SIGNAL(substructSearchEnabled(bool)), subsrch_tb, SLOT(enableSubstructSearch(bool)));
@@ -206,9 +197,9 @@ void ChOX::MainWindow::init()
 
 // +++
 
-    connect(uiMainWindow.clearRecentFilesAction, SIGNAL(triggered()), &RecentFilesList::instance(), SLOT(clear()));
+    connect(uiMainWindow.clearRecentFilesAction, SIGNAL(triggered()), &RecentFilesList::get(), SLOT(clear()));
     connect(uiMainWindow.recentFilesMenu, SIGNAL(triggered(QAction*)), this, SLOT(recentFileSelected(QAction*)));
-    connect(&RecentFilesList::instance(), SIGNAL(entriesChanged()), this, SLOT(setupRecentFilesMenu()));
+    connect(&RecentFilesList::get(), SIGNAL(entriesChanged()), this, SLOT(setupRecentFilesMenu()));
 
 // +++
 
@@ -242,7 +233,7 @@ void ChOX::MainWindow::init()
 
 //----
 
-    MainWindowList::instance().addWindow(this);
+    MainWindowList::get().addWindow(this);
 }
 
 void ChOX::MainWindow::setupContextMenu()
@@ -305,32 +296,32 @@ void ChOX::MainWindow::fileNew()
 
 void ChOX::MainWindow::fileOpen()
 {
-    setupFileOpenDialog(*fileOpenDialog, *dataSet, true);
+    auto& dialog = FileOpenDialog::get(*dataSet, true);
 
-    fileOpenDialog->setWindowTitle(tr("ChOX - Open File(s)"));
+    dialog.setWindowTitle(tr("ChOX - Open File(s)"));
 
-    if (fileOpenDialog->exec() == QDialog::Accepted) {
+    if (dialog.exec() == QDialog::Accepted) {
         if (dataSet->getFileNames().empty())
-            openFiles(fileOpenDialog->selectedFiles());
+            openFiles(dialog.selectedFiles());
 
         else {
             ChOX::MainWindow* new_win = new ChOX::MainWindow(0, 0);
 
             new_win->show();
-            new_win->openFiles(fileOpenDialog->selectedFiles());
+            new_win->openFiles(dialog.selectedFiles());
         }
     }
 }
 
 void ChOX::MainWindow::fileSaveAs()
 {
-    setupFileSaveDialog(*fileSaveDialog, *dataSet);
+    auto& dialog = FileSaveDialog::get(*dataSet);
 
-    fileSaveDialog->setWindowTitle(tr("ChOX - Save Records As"));
+    dialog.setWindowTitle(tr("ChOX - Save Records As"));
 
-    if (fileSaveDialog->exec() == QDialog::Accepted && !fileSaveDialog->selectedFiles().isEmpty()) {
-        DataSetWriter data_writer(*dataSet, this, fileSaveDialog->selectedFiles().first(),
-                                  fileSaveDialog->selectedNameFilter(), *settings, false);
+    if (dialog.exec() == QDialog::Accepted && !dialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(*dataSet, this, dialog.selectedFiles().first(),
+                                  dialog.selectedNameFilter(), *settings, false);
 
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showErrorMessage(const QString&)));
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
@@ -343,13 +334,13 @@ void ChOX::MainWindow::fileSaveAs()
 
 void ChOX::MainWindow::fileSaveSelectionAs()
 {
-    setupFileSaveDialog(*fileSaveDialog, *dataSet);
+    auto& dialog = FileSaveDialog::get(*dataSet);
 
-    fileSaveDialog->setWindowTitle(tr("ChOX - Save Selected Records As"));
+    dialog.setWindowTitle(tr("ChOX - Save Selected Records As"));
 
-    if (fileSaveDialog->exec() == QDialog::Accepted && !fileSaveDialog->selectedFiles().isEmpty()) {
-        DataSetWriter data_writer(*dataSet, this, fileSaveDialog->selectedFiles().first(),
-                                  fileSaveDialog->selectedNameFilter(), *settings, true);
+    if (dialog.exec() == QDialog::Accepted && !dialog.selectedFiles().isEmpty()) {
+        DataSetWriter data_writer(*dataSet, this, dialog.selectedFiles().first(),
+                                  dialog.selectedNameFilter(), *settings, true);
 
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showErrorMessage(const QString&)));
         connect(&data_writer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
@@ -362,12 +353,12 @@ void ChOX::MainWindow::fileSaveSelectionAs()
 
 void ChOX::MainWindow::fileAppend()
 {
-    setupFileOpenDialog(*fileOpenDialog, *dataSet, false);
+    auto& dialog = FileOpenDialog::get(*dataSet, false);
 
-    fileOpenDialog->setWindowTitle(tr("ChOX - Append File(s)"));
+    dialog.setWindowTitle(tr("ChOX - Append File(s)"));
 
-    if (fileOpenDialog->exec() == QDialog::Accepted) 
-        openFiles(fileOpenDialog->selectedFiles());
+    if (dialog.exec() == QDialog::Accepted) 
+        openFiles(dialog.selectedFiles());
 }
 
 bool ChOX::MainWindow::openFiles(const QStringList& file_names)
@@ -383,7 +374,7 @@ bool ChOX::MainWindow::openFiles(const QStringList& file_names)
         connect(&data_reader, SIGNAL(statusMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
 
         if (data_reader.read()) {
-            ChOX::RecentFilesList::instance().addEntry(*it);
+            ChOX::RecentFilesList::get().addEntry(*it);
             success = true;
         }
     }
@@ -437,26 +428,6 @@ void ChOX::MainWindow::helpAbout()
     QDialog* dlg = new ChOX::AboutDialog(this);
 
     dlg->exec();
-}
-void ChOX::MainWindow::createFileOpenDialog()
-{
-    fileOpenDialog.reset(new QFileDialog(nullptr));
-
-    fileOpenDialog->setFileMode(QFileDialog::ExistingFiles);
-    fileOpenDialog->setAcceptMode(QFileDialog::AcceptOpen);
-    fileOpenDialog->setNameFilterDetailsVisible(true);
-    fileOpenDialog->setOptions(QFileDialog::DontUseNativeDialog);
-}
-
-void ChOX::MainWindow::createFileSaveDialog()
-{
-    fileSaveDialog.reset(new QFileDialog(nullptr));
-
-    fileSaveDialog->setFileMode(QFileDialog::AnyFile);
-    fileSaveDialog->setAcceptMode(QFileDialog::AcceptSave);
-    fileSaveDialog->setConfirmOverwrite(true);
-    fileSaveDialog->setNameFilterDetailsVisible(true);
-    fileSaveDialog->setOptions(QFileDialog::DontUseNativeDialog);
 }
 
 void ChOX::MainWindow::handleNumColumnsChange(int num_cols)
@@ -568,7 +539,7 @@ void ChOX::MainWindow::setupRecentFilesMenu()
 
     recentFilesMenuActions.clear();
 
-    const QStringList& recent_files =  ChOX::RecentFilesList::instance().getEntries();
+    const QStringList& recent_files =  ChOX::RecentFilesList::get().getEntries();
 
     if (recent_files.empty()) {
         uiMainWindow.recentFilesMenu->setEnabled(false);
@@ -622,7 +593,7 @@ void ChOX::MainWindow::setupWindowMenu()
 
     windowListGroup = new QActionGroup(this);
 
-    const MainWindowList& win_list = MainWindowList::instance();
+    const MainWindowList& win_list = MainWindowList::get();
 
     MainWindowList::ConstIterator list_end = win_list.getEnd();
     int i = 1;
@@ -651,7 +622,7 @@ void ChOX::MainWindow::tileWindows()
 
     const QRect& avail_geom = QApplication::desktop()->availableGeometry();
 
-    int num_wins = MainWindowList::instance().getNumWindows();
+    int num_wins = MainWindowList::get().getNumWindows();
     int num_wins_per_col = int(rint(std::sqrt(double(num_wins))));
     int num_wins_per_row = int(std::ceil(double(num_wins) / num_wins_per_col));
 
@@ -662,7 +633,7 @@ void ChOX::MainWindow::tileWindows()
 
     for (int i = 0, win_idx = 0; i < num_wins_per_col && win_idx < num_wins; i++) {
         for (int j = 0; j < num_wins_per_row && win_idx < num_wins; j++, win_idx++) {
-            ChOX::MainWindow* win = MainWindowList::instance().getWindow(win_idx);
+            ChOX::MainWindow* win = MainWindowList::get().getWindow(win_idx);
 
             if (free_space > 0 && num_wins_per_row - j > 1) {
                 win->resize(2 * win_width - (win->frameSize().width() - win->size().width()), 
@@ -691,7 +662,7 @@ void ChOX::MainWindow::cascadeWindows()
 
     const QRect& avail_geom = QApplication::desktop()->availableGeometry();
 
-    const MainWindowList& win_list = MainWindowList::instance();
+    const MainWindowList& win_list = MainWindowList::get();
 
     int num_wins = win_list.getNumWindows();
     int xy_shift = frameSize().height() - height();

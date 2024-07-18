@@ -49,12 +49,12 @@
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Pharm/MoleculeFunctions.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 #include "Utilities.hpp"
-#include "InputFileFilterList.hpp"
-#include "OutputFileFilterList.hpp"
 
 
 void ChOX::drawText(QPainter& painter, const QString& text, unsigned int alignment, 
@@ -175,6 +175,9 @@ void ChOX::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFo
             calcBond2DStereoFlags(mol, true);
         }
     }
+
+    if (opt_fmt == Pharm::DataFormat::PSD)
+        Pharm::prepareForPharmacophoreGeneration(mol, true, false);
 }
 
 void ChOX::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
@@ -235,27 +238,4 @@ CDPL::Chem::Molecule::SharedPointer ChOX::parseSMARTS(const QString& smarts)
     } catch (const std::exception& e) {
         return Molecule::SharedPointer();
     }
-}
-
-void ChOX::setupFileOpenDialog(QFileDialog& dialog, const DataSet& data_set, bool all_types)
-{
-    QString prev_filter = dialog.selectedNameFilter();
-
-    dialog.setNameFilters(all_types ? InputFileFilterList() : InputFileFilterList(data_set));
-    dialog.selectNameFilter(prev_filter);
-}
-
-void ChOX::setupFileSaveDialog(QFileDialog& dialog, const DataSet& data_set)
-{
-    QString prev_filter = dialog.selectedNameFilter();
-    QString prev_file;
-
-    if (!dialog.selectedFiles().isEmpty() && !QFileInfo(dialog.selectedFiles().first()).isDir())
-        prev_file = dialog.selectedFiles().first();
-    
-    dialog.setNameFilters(OutputFileFilterList(data_set));
-    dialog.selectNameFilter(prev_filter);
-   
-    if (!prev_file.isEmpty())
-        dialog.selectFile(prev_file);
 }

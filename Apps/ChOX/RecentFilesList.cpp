@@ -44,11 +44,11 @@ RecentFilesList::~RecentFilesList()
     settings.setValue("/General/RecentFiles", fileNames);
 }
 
-RecentFilesList& RecentFilesList::instance()
+RecentFilesList& RecentFilesList::get()
 {
-    static RecentFilesList inst;
+    static RecentFilesList instance;
 
-    return inst;
+    return instance;
 }
 
 void RecentFilesList::clear()

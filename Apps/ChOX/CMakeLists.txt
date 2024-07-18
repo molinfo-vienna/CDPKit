@@ -36,6 +36,8 @@ set(chox_SRCS
     DataSetWriter.cpp
     DataSetReader.cpp
     RecentFilesList.cpp
+    FileOpenDialog.cpp
+    FileSaveDialog.cpp
     InputFileFilterList.cpp
     OutputFileFilterList.cpp
     MainWindowList.cpp

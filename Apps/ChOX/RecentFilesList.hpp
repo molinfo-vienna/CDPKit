@@ -38,7 +38,7 @@ namespace ChOX
         Q_OBJECT
 
       public:
-        static RecentFilesList& instance();
+        static RecentFilesList& get();
 
         void addEntry(const QString&);
 
