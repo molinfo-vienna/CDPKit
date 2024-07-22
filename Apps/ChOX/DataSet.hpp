@@ -53,6 +53,8 @@ namespace ChOX
 
         const DataRecord& getRecord(int index) const;
 
+        const DataRecord::SharedPointer& getRecordPointer(int index) const;
+
         const QStringList& getFileNames() const;
 
         void setRecordSelected(int index, bool select = true);
@@ -72,12 +74,55 @@ namespace ChOX
             workingState.records.insert(workingState.records.end(), begin, end);
             workingState.selectionMask.resize(workingState.records.size());
 
-            workingState.fileNames.append(file_name);
+            if (!file_name.isEmpty())
+                workingState.fileNames.append(file_name);
 
             commitNewState();
 
             emit sizeChanged(int(states[currStateIdx].records.size()));
-            emit fileListChanged();
+
+            if (!file_name.isEmpty())
+                emit fileListChanged();
+        }
+
+        template <typename InputIter>
+        void insertRecords(InputIter begin, InputIter end, int index, const QString& file_name)
+        {
+            workingState.records.clear();
+            
+            if (index > int(states[currStateIdx].records.size()))
+                index = states[currStateIdx].records.size();
+            else if (index < 0)
+                index = 0;
+            
+            workingState.records.insert(workingState.records.end(), states[currStateIdx].records.begin(), states[currStateIdx].records.begin() + index);
+            workingState.records.insert(workingState.records.end(), begin, end);
+            workingState.records.insert(workingState.records.end(), states[currStateIdx].records.begin() + index, states[currStateIdx].records.end());
+
+            workingState.selectionMask.resize(workingState.records.size());
+
+            int num_ins_records = workingState.records.size() - states[currStateIdx].records.size();
+            
+            for (int i = 0; i < index; i++)
+                workingState.selectionMask.set(i, states[currStateIdx].selectionMask.test(i));
+
+            for (int i = index, end = index + num_ins_records; i < end; i++)
+                workingState.selectionMask.set(i, false);
+     
+            for (int i = index; i < int(states[currStateIdx].records.size()); i++)
+                workingState.selectionMask.set(i + num_ins_records, states[currStateIdx].selectionMask.test(i));
+            
+            workingState.fileNames = states[currStateIdx].fileNames;
+            
+            if (!file_name.isEmpty())
+                workingState.fileNames.append(file_name);
+
+            commitNewState();
+
+            emit sizeChanged(int(states[currStateIdx].records.size()));
+
+            if (!file_name.isEmpty())
+                emit fileListChanged();
         }
 
         void appendRecords(const DataSet& other, const CDPL::Util::BitSet& mask);
@@ -94,14 +139,14 @@ namespace ChOX
 
       public slots:
         void clear();
-
+        void removeSelected();
+        
         void undo();
         void redo();
 
         void selectAll();
         void unselectAll();
         void invertSelection();
-        void removeSelected();
 
       private:
         typedef std::vector<DataRecord::SharedPointer> DataRecordList;

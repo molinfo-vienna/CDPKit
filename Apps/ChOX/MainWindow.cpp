@@ -70,6 +70,8 @@
 #include "SubstructSearchUtilsToolBar.hpp"
 #include "SubstructHighlightingProcessor.hpp"
 #include "SubstructSearchProcessor.hpp"
+#include "Clipboard.hpp"
+#include "ClipboardData.hpp"
 
 
 ChOX::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
@@ -86,7 +88,8 @@ ChOX::MainWindow::~MainWindow()
 void ChOX::MainWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
-
+    setAcceptDrops(true);
+    
     uiMainWindow.setupUi(this);
 
     rangeSelectionDialog = 0;
@@ -160,7 +163,7 @@ void ChOX::MainWindow::init()
 
     uiMainWindow.editUndoAction->setEnabled(false);
     uiMainWindow.editRedoAction->setEnabled(false);
-
+    
     connect(uiMainWindow.editUndoAction, SIGNAL(triggered()), dataSet, SLOT(undo()));
     connect(uiMainWindow.editRedoAction, SIGNAL(triggered()), dataSet, SLOT(redo()));
 
@@ -170,7 +173,17 @@ void ChOX::MainWindow::init()
     connect(uiMainWindow.editClearAction, SIGNAL(triggered()), dataSet, SLOT(clear()));
     connect(uiMainWindow.editSelectAllAction, SIGNAL(triggered()), dataSet, SLOT(selectAll()));
     connect(uiMainWindow.editInvertSelectionAction, SIGNAL(triggered()), dataSet, SLOT(invertSelection()));
-    connect(uiMainWindow.editRemoveSelectionAction, SIGNAL(triggered()), dataSet, SLOT(removeSelected()));
+    //connect(uiMainWindow.editRemoveSelectionAction, SIGNAL(triggered()), dataSet, SLOT(removeSelected()));
+    
+// +++
+    
+    connect(&Clipboard::get(), SIGNAL(dataAvailable(bool)), uiMainWindow.editPasteAction, SLOT(setEnabled(bool)));
+    
+    connect(uiMainWindow.editCutAction, SIGNAL(triggered()), this, SLOT(cutRecords()));
+    connect(uiMainWindow.editCopyAction, SIGNAL(triggered()), this, SLOT(copyRecords()));
+    connect(uiMainWindow.editPasteAction, SIGNAL(triggered()), this, SLOT(pasteRecords()));
+
+    uiMainWindow.editPasteAction->setEnabled(Clipboard::get().checkDataAvailability());
 
 // +++
 
@@ -245,11 +258,17 @@ void ChOX::MainWindow::setupContextMenu()
 
     contextMenu->addSeparator();
 
+    contextMenu->addAction(uiMainWindow.editCutAction);
+    contextMenu->addAction(uiMainWindow.editCopyAction);
+    contextMenu->addAction(uiMainWindow.editPasteAction);
+    //contextMenu->addAction(uiMainWindow.editRemoveSelectionAction);
+    contextMenu->addAction(uiMainWindow.editClearAction);
+
+    contextMenu->addSeparator();
+        
     contextMenu->addAction(uiMainWindow.editSelectAllAction);
     contextMenu->addAction(uiMainWindow.editSelectRangeAction);
     contextMenu->addAction(uiMainWindow.editInvertSelectionAction);
-    contextMenu->addAction(uiMainWindow.editRemoveSelectionAction);
-    contextMenu->addAction(uiMainWindow.editClearAction);
 
     contextMenu->addSeparator();
 
@@ -402,6 +421,23 @@ void ChOX::MainWindow::fileQuit()
     qApp->closeAllWindows();
 }
 
+void ChOX::MainWindow::pasteRecords()
+{
+    Clipboard::get().getData(this, *dataSet, dataSetView->getPageView().getPageOffset());
+}
+
+void ChOX::MainWindow::cutRecords()
+{
+    Clipboard::get().putSelectedData(*dataSet);
+
+    dataSet->removeSelected();
+}
+
+void ChOX::MainWindow::copyRecords()
+{
+    Clipboard::get().putSelectedData(*dataSet);
+}
+
 void ChOX::MainWindow::selectRecordRange()
 {
     if (!rangeSelectionDialog)
@@ -454,7 +490,9 @@ void ChOX::MainWindow::handleDataSetSizeChange(int new_size)
 
 void ChOX::MainWindow::handleSelectionStatusChange(bool selected)
 {
-    uiMainWindow.editRemoveSelectionAction->setEnabled(selected);
+    uiMainWindow.editCutAction->setEnabled(selected);
+    uiMainWindow.editCopyAction->setEnabled(selected);
+    //uiMainWindow.editRemoveSelectionAction->setEnabled(selected);
     uiMainWindow.fileSaveSelectionAsAction->setEnabled(selected);
 }
 
@@ -1341,4 +1379,17 @@ void ChOX::MainWindow::viewAtomSettingsChanged(bool checked)
 
     else if (source == uiMainWindow.viewShowAtomConfigLabelsAction)
         setShowAtomConfigurationLabelsParameter(*settings, checked);
+}
+
+void ChOX::MainWindow::dragEnterEvent(QDragEnterEvent* e)
+{
+    if (ClipboardData::canHandle(e->mimeData()))
+        e->acceptProposedAction();
+}
+
+void ChOX::MainWindow::dropEvent(QDropEvent* e)
+{
+    ClipboardData::extract(this, e->mimeData(), *dataSet, dataSetView->getPageView().getPageOffset());
+    
+    e->acceptProposedAction();
 }

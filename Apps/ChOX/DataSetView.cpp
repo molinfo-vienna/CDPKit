@@ -134,7 +134,7 @@ void DataSetView::adjustScrollBar(int)
     int num_cols = pageView->getNumColumns();
     int num_recs_per_page = num_cols * pageView->getNumRows();
 
-    if (num_recs_per_page <= num_recs) {
+    if (num_recs_per_page < num_recs) {
         scrollBar->setMaximum(num_recs - num_recs_per_page);
         scrollBar->setPageStep(num_recs_per_page);
         scrollBar->setSingleStep(num_cols);    

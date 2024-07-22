@@ -174,9 +174,8 @@ void ChOX::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFo
             calc2DCoordinates(mol, true);
             calcBond2DStereoFlags(mol, true);
         }
-    }
-
-    if (opt_fmt == Pharm::DataFormat::PSD)
+        
+    } else if (opt_fmt == Pharm::DataFormat::PSD)
         Pharm::prepareForPharmacophoreGeneration(mol, true, false);
 }
 

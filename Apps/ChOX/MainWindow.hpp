@@ -74,6 +74,9 @@ namespace ChOX
 
       private slots:
         void destroy();
+        void cutRecords();
+        void copyRecords();
+        void pasteRecords();
         void selectRecordRange();
         void editSettings();
         void handleNumColumnsChange(int num_cols);
@@ -109,6 +112,8 @@ namespace ChOX
         void setupContextMenu();
 
         void closeEvent(QCloseEvent* e);
+        void dragEnterEvent(QDragEnterEvent* e);
+        void dropEvent(QDropEvent* e);
 
         void handleSizeAdjustmentChange();
         void handleAlignmentChange();

@@ -87,6 +87,8 @@ set(chox_SRCS
     SubstructSearchQueryEditDialog.cpp
     SubstructSearchResultDialog.cpp
     SubstructSearchProcessor.cpp
+    Clipboard.cpp
+    ClipboardData.cpp
    )
 
 set(chox_UI_FILES MainWindow.ui)
@@ -146,6 +148,8 @@ set(chox_MOC_HDRS
     SubstructSearchQueryEditDialog.hpp
     SubstructSearchResultDialog.hpp
     SubstructSearchProcessor.hpp
+    Clipboard.hpp
+    ClipboardData.hpp
    )
 
 qt5_wrap_ui(chox_SRCS ${chox_UI_FILES})

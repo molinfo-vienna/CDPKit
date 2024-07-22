@@ -82,17 +82,19 @@ void DataSetViewControl::updateGUI(int)
 {
     int num_records = dataSetView.getDataSet().getSize();
     int page_offs = dataSetView.getPageView().getPageOffset();
+    int num_cols = dataSetView.getPageView().getNumColumns();
+    int num_recs_per_page = dataSetView.getPageView().getNumRows() * num_cols;
     
     if (num_records > 0) {
-        pageOffsetValidator->setRange(1, num_records);
+        pageOffsetValidator->setRange(1, num_records + 1);
         pageOffsetLineEdit->setText(QString().setNum(page_offs + 1));
         pageOffsetLineEdit->setEnabled(true);
 
         prevPageButton->setEnabled(page_offs > 0);
-        nextPageButton->setEnabled(page_offs < num_records - 1);
+        nextPageButton->setEnabled(page_offs < (num_records - num_recs_per_page));
 
         prevLineButton->setEnabled(page_offs > 0);
-        nextLineButton->setEnabled(page_offs < num_records - 1);
+        nextLineButton->setEnabled(page_offs < (num_records - num_cols));
 
     } else {
         pageOffsetLineEdit->setEnabled(false);

@@ -107,7 +107,7 @@ void DataSetPageView::setNumColumns(int num_cols)
 
 void DataSetPageView::setPageOffset(int page_offs)
 {
-    if (page_offs != pageOffset && page_offs < dataSet.getSize()) {
+    if (page_offs != pageOffset && page_offs <= dataSet.getSize()) {
         int old_page_offs = pageOffset;
 
         pageOffset = std::max(0, page_offs);
@@ -192,7 +192,7 @@ void DataSetPageView::toFirstRecord()
 
 void DataSetPageView::toLastRecord()
 {
-    setPageOffset(dataSet.getSize() - 1);
+    setPageOffset(dataSet.getSize());
 }
 
 void DataSetPageView::showGrid(bool show)

@@ -52,6 +52,11 @@ const DataRecord& DataSet::getRecord(int index) const
     return *states[currStateIdx].records.at(index);
 }
 
+const DataRecord::SharedPointer& DataSet::getRecordPointer(int index) const
+{
+    return states[currStateIdx].records.at(index);
+}
+
 const QStringList& DataSet::getFileNames() const
 {
     return states[currStateIdx].fileNames;
@@ -170,6 +175,22 @@ void DataSet::invertSelection()
     emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
 }
 
+void DataSet::clear()
+{
+    if (states[currStateIdx].records.empty())
+        return;
+
+    workingState.records.clear();
+    workingState.fileNames.clear();
+    workingState.selectionMask.clear();
+
+    commitNewState();
+
+    emit sizeChanged(0);
+    emit selectionStatusChanged(false);
+    emit fileListChanged();
+}
+
 void DataSet::removeSelected()
 {
     const DataSetState& curr_state = states[currStateIdx];
@@ -197,71 +218,6 @@ void DataSet::removeSelected()
 
     emit sizeChanged(int(states[currStateIdx].records.size()));
     emit selectionStatusChanged(false);
-}
-
-void DataSet::removeRecords(const CDPL::Util::BitSet& mask)
-{
-    auto& curr_state = states[currStateIdx];
-
-    workingState.records.clear();
-
-    workingState.selectionMask.resize(curr_state.selectionMask.size());
-    workingState.selectionMask.reset();
-
-    workingState.fileNames = curr_state.fileNames;
-
-    std::size_t num_records = curr_state.records.size();
-
-    for (std::size_t i = 0; i < num_records; i++) {
-        if (mask.test(i))
-            continue;
-
-        workingState.selectionMask.set(workingState.records.size(), curr_state.selectionMask.test(i));
-        workingState.records.push_back(curr_state.records[i]);
-    }
-
-    commitNewState();
-
-    emit sizeChanged(int(states[currStateIdx].records.size()));
-    emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
-}
-
-void DataSet::clear()
-{
-    if (states[currStateIdx].fileNames.empty())
-        return;
-
-    workingState.records.clear();
-    workingState.fileNames.clear();
-    workingState.selectionMask.clear();
-
-    commitNewState();
-
-    emit sizeChanged(0);
-    emit selectionStatusChanged(false);
-    emit fileListChanged();
-}
-
-void DataSet::appendRecords(const DataSet& other, const CDPL::Util::BitSet& mask)
-{
-    workingState = states[currStateIdx];
-
-    auto& other_records = other.states[other.currStateIdx].records;
-
-    for (std::size_t i = 0; i < other_records.size(); i++) {
-        if (!mask.test(i))
-            continue;
-
-        workingState.records.push_back(other_records[i]);
-    }
-    
-    workingState.selectionMask.resize(workingState.records.size());
-    workingState.fileNames.append(other.states[other.currStateIdx].fileNames);
-        
-    commitNewState();
-
-    emit sizeChanged(int(states[currStateIdx].records.size()));
-    emit fileListChanged();
 }
 
 void DataSet::undo()
@@ -313,4 +269,53 @@ void DataSet::DataSetState::swap(DataSetState& other)
     std::swap(fileNames, other.fileNames);
     std::swap(records, other.records);
     std::swap(selectionMask, other.selectionMask);
+}
+
+void DataSet::removeRecords(const CDPL::Util::BitSet& mask)
+{
+    auto& curr_state = states[currStateIdx];
+
+    workingState.records.clear();
+
+    workingState.selectionMask.resize(curr_state.selectionMask.size());
+    workingState.selectionMask.reset();
+
+    workingState.fileNames = curr_state.fileNames;
+
+    std::size_t num_records = curr_state.records.size();
+
+    for (std::size_t i = 0; i < num_records; i++) {
+        if (mask.test(i))
+            continue;
+
+        workingState.selectionMask.set(workingState.records.size(), curr_state.selectionMask.test(i));
+        workingState.records.push_back(curr_state.records[i]);
+    }
+
+    commitNewState();
+
+    emit sizeChanged(int(states[currStateIdx].records.size()));
+    emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+}
+
+void DataSet::appendRecords(const DataSet& other, const CDPL::Util::BitSet& mask)
+{
+    workingState = states[currStateIdx];
+
+    auto& other_records = other.states[other.currStateIdx].records;
+
+    for (std::size_t i = 0; i < other_records.size(); i++) {
+        if (!mask.test(i))
+            continue;
+
+        workingState.records.push_back(other_records[i]);
+    }
+    
+    workingState.selectionMask.resize(workingState.records.size());
+    workingState.fileNames.append(other.states[other.currStateIdx].fileNames);
+        
+    commitNewState();
+
+    emit sizeChanged(int(states[currStateIdx].records.size()));
+    emit fileListChanged();
 }

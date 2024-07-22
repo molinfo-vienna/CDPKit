@@ -202,12 +202,15 @@
     <addaction name="editUndoAction"/>
     <addaction name="editRedoAction"/>
     <addaction name="separator"/>
+    <addaction name="editCutAction"/>
+    <addaction name="editCopyAction"/>
+    <addaction name="editPasteAction"/>
+    <!--addaction name="editRemoveSelectionAction"/-->
+    <addaction name="editClearAction"/>
+    <addaction name="separator"/>
     <addaction name="editSelectAllAction"/>
     <addaction name="editSelectRangeAction"/>
     <addaction name="editInvertSelectionAction"/>
-    <addaction name="separator"/>
-    <addaction name="editRemoveSelectionAction"/>
-    <addaction name="editClearAction"/>
     <addaction name="separator"/>
     <addaction name="editAppendFilesAction"/>
     <addaction name="separator"/>
@@ -838,6 +841,51 @@
     <string>Edit Settings</string>
    </property>
   </action>
+  <action name="editCutAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/cut.png</normaloff>:/Icons/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Cut</string>
+   </property>
+   <property name="iconText">
+    <string>Cut Selected Records</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="editCopyAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/copy.png</normaloff>:/Icons/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>C&amp;opy</string>
+   </property>
+   <property name="iconText">
+    <string>Copy Selected Records</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="editPasteAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/paste.png</normaloff>:/Icons/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Paste</string>
+   </property>
+   <property name="iconText">
+    <string>Paste Records</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
   <action name="editSelectAllAction">
    <property name="text">
     <string>Select A&amp;ll</string>
@@ -860,7 +908,7 @@
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="editRemoveSelectionAction">
+  <!--action name="editRemoveSelectionAction">
    <property name="icon">
     <iconset resource="Resources.qrc">
      <normaloff>:/Icons/cut.png</normaloff>:/Icons/cut.png</iconset>
@@ -872,9 +920,9 @@
     <string>Remove Selected Records</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+X</string>
+    <string>Ctrl+D</string>
    </property>
-  </action>
+  </action-->
   <action name="editClearAction">
    <property name="icon">
     <iconset resource="Resources.qrc">
