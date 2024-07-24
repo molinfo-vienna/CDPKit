@@ -1,5 +1,11 @@
 master:
 
+ - Fixed a bug in program 'ChOX' that prevented the successful saving of data to PSD files
+ - Program 'ChOX' now uses the same file open/save dialog instance for all opened main windows 
+ - New class Chem::MultiSubstructureSearch for performing substructure matching with multiple query structures that
+   can be combined in the form of boolean expressions
+ - Program 'ChOX' now supports basic cut/copy/paste as well as drag and drop operations
+ - New feature of the program 'ChOX' that allows to perform substructure searching with logical combinations of SMARTS patterns
  - New feature of the program 'ChOX' that allows to highlight substructures defined by SMARTS patterns
  - New classes Descr::NPoint2DPharmacophoreFingerprintGenerator and Descr::NPoint3DPharmacophoreFingerprintGeneratorfor
    for the generation of variably sized hashed 2D and 3D pharmacophore fingerprints
