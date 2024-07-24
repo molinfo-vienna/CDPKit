@@ -57,18 +57,12 @@ bool ClipboardData::canHandle(const QMimeData* data)
     if (data->hasUrls() && !getChemDataFiles(data).isEmpty())
         return true;
 
-    for (auto it = Base::DataIOManager<Chem::Molecule>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Molecule>::getInputHandlersEnd();
-         it != end; ++it)
-        if (data->hasFormat((*it)->getDataFormat().getMimeType().c_str()))
-            return true;
-
-    for (auto it = Base::DataIOManager<Chem::Reaction>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Reaction>::getInputHandlersEnd();
-         it != end; ++it)
-        if (data->hasFormat((*it)->getDataFormat().getMimeType().c_str()))
-            return true;
+    if (canHandleMimeTypes<Chem::Molecule>(data) || canHandleMimeTypes<Chem::Reaction>(data))
+        return true;
 
     if (data->hasText())
-        return canHandle(data->text());
+        return (canProcessText<Chem::Molecule, Chem::BasicMolecule>(data) ||
+                canProcessText<Chem::Reaction, Chem::BasicReaction>(data));
     
     return false;
 }
@@ -96,54 +90,19 @@ void ClipboardData::extract(MainWindow* main_win, const QMimeData* data, DataSet
         }
     }
 
-    for (auto it = Base::DataIOManager<Chem::Molecule>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Molecule>::getInputHandlersEnd();
-         it != end; ++it) {
+    if (readMimeTypeData<Chem::Molecule, Chem::BasicMolecule>(data, data_set, insert_idx))
+        return;
 
-        QString mime_type((*it)->getDataFormat().getMimeType().c_str());
-        
-        if (!data->hasFormat(mime_type))
-            continue;
-
-        auto raw_data = data->data(mime_type);
-        std::string str_data(raw_data.data(), raw_data.length());
-        
-        if (extract<Chem::Molecule, Chem::BasicMolecule>(**it, str_data, data_set, insert_idx))
-            return;
-    }
-    
-    for (auto it = Base::DataIOManager<Chem::Reaction>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Reaction>::getInputHandlersEnd();
-         it != end; ++it) {
-
-        QString mime_type((*it)->getDataFormat().getMimeType().c_str());
-        
-        if (!data->hasFormat(mime_type))
-            continue;
-
-        auto raw_data = data->data(mime_type);
-        std::string str_data(raw_data.data(), raw_data.length());
-     
-        if (extract<Chem::Reaction, Chem::BasicReaction>(**it, str_data, data_set, insert_idx))
-            return;
-    }
+    if (readMimeTypeData<Chem::Reaction, Chem::BasicReaction>(data, data_set, insert_idx))
+        return;
 
     if (!data->hasText())
         return;
-     
-    auto text = data->text().toStdString();
 
-    for (auto it = Base::DataIOManager<Chem::Molecule>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Molecule>::getInputHandlersEnd();
-         it != end; ++it) {
+    if (readTextData<Chem::Molecule, Chem::BasicMolecule>(data, data_set, insert_idx))
+        return;
 
-        if (extract<Chem::Molecule, Chem::BasicMolecule>(**it, text, data_set, insert_idx))
-            return;
-    }
-
-    for (auto it = Base::DataIOManager<Chem::Reaction>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Reaction>::getInputHandlersEnd();
-         it != end; ++it) {
-
-        if (extract<Chem::Reaction, Chem::BasicReaction>(**it, text, data_set, insert_idx))
-            return;
-    }
+    readTextData<Chem::Reaction, Chem::BasicReaction>(data, data_set, insert_idx);
 }
 
 void ClipboardData::addRecord(const DataRecord::SharedPointer& record)
@@ -181,41 +140,38 @@ QStringList ClipboardData::getChemDataFiles(const QMimeData* data)
     return files;
 }
 
-bool ClipboardData::canHandle(const QString& text)
+template <typename DataType>
+bool ClipboardData::canHandleMimeTypes(const QMimeData* data)
 {
     using namespace CDPL;
     
-    Chem::BasicMolecule mol;
+    for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
+         it != end; ++it)
+
+        if (data->hasFormat((*it)->getDataFormat().getMimeType().c_str()))
+            return true;
+
+    return false;
+}
+
+template <typename DataType, typename StorageDataType>
+bool ClipboardData::canProcessText(const QMimeData* data)
+{
+    using namespace CDPL;
+
+    auto text = data->text().toStdString();
+    StorageDataType obj;
     
-    for (auto it = Base::DataIOManager<Chem::Molecule>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Molecule>::getInputHandlersEnd();
+    for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
          it != end; ++it) {
 
         try {
-            std::istringstream iss(text.toStdString(), std::ios_base::in | std::ios_base::binary);
+            std::istringstream iss(text, std::ios_base::in | std::ios_base::binary);
             auto reader = (*it)->createReader(iss);
 
             setStrictErrorCheckingParameter(*reader, true);
 
-            if (reader->read(mol))
-                return true;
-
-        } catch (std::exception& e) {
-            
-        }
-    }
-
-    Chem::BasicReaction rxn;
-    
-    for (auto it = Base::DataIOManager<Chem::Reaction>::getInputHandlersBegin(), end = Base::DataIOManager<Chem::Reaction>::getInputHandlersEnd();
-         it != end; ++it) {
-
-        try {
-            std::istringstream iss(text.toStdString(), std::ios_base::in | std::ios_base::binary); 
-            auto reader = (*it)->createReader(iss);
-
-            setStrictErrorCheckingParameter(*reader, true);
-
-            if (reader->read(rxn))
+            if (reader->read(obj))
                 return true;
 
         } catch (std::exception& e) {}
@@ -225,7 +181,47 @@ bool ClipboardData::canHandle(const QString& text)
 }
 
 template <typename DataType, typename StorageDataType>
-bool ClipboardData::extract(const CDPL::Base::DataInputHandler<DataType>& handler, const std::string& data, DataSet& data_set, int insert_idx)
+bool ClipboardData::readMimeTypeData(const QMimeData* data, DataSet& data_set, int insert_idx)
+{
+    using namespace CDPL;
+    
+    for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
+         it != end; ++it) {
+
+        QString mime_type((*it)->getDataFormat().getMimeType().c_str());
+        
+        if (!data->hasFormat(mime_type))
+            continue;
+
+        auto raw_data = data->data(mime_type);
+        std::string str_data(raw_data.data(), raw_data.length());
+        
+        if (readData<DataType, StorageDataType>(**it, str_data, data_set, insert_idx, false))
+            return true;
+    }
+
+    return false;
+}
+
+template <typename DataType, typename StorageDataType>
+bool ClipboardData::readTextData(const QMimeData* data, DataSet& data_set, int insert_idx)
+{
+    using namespace CDPL;
+
+    auto text = data->text().toStdString();
+ 
+    for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
+         it != end; ++it) {
+
+        if (readData<DataType, StorageDataType>(**it, text, data_set, insert_idx, true))
+            return true;
+    }
+
+    return false;
+}
+
+template <typename DataType, typename StorageDataType>
+bool ClipboardData::readData(const CDPL::Base::DataInputHandler<DataType>& handler, const std::string& data, DataSet& data_set, int insert_idx, bool strict)
 {
     using namespace CDPL;
 
@@ -239,6 +235,8 @@ bool ClipboardData::extract(const CDPL::Base::DataInputHandler<DataType>& handle
         std::istringstream iss(data, std::ios_base::in | std::ios_base::binary); 
 
         auto reader = handler.createReader(iss);
+
+        setStrictErrorCheckingParameter(*reader, strict);
 
         while (true) {
             RecordPtr rec_ptr(new RecordType());

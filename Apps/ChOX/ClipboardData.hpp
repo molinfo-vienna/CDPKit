@@ -50,18 +50,28 @@ namespace ChOX
         
         static bool canHandle(const QMimeData* data);
 
-        static void extract(MainWindow* main_win, const QMimeData* data, DataSet& data_set, int insert_idx = -1);
+        static void extract(MainWindow* main_win, const QMimeData* data, DataSet& data_set, int insert_idx);
         
         void addRecord(const DataRecord::SharedPointer& record);
         
       private:
         static QStringList getChemDataFiles(const QMimeData* data);
 
-        static bool canHandle(const QString& text);
+        template <typename DataType>
+        static bool canHandleMimeTypes(const QMimeData* data);
+        
+        template <typename DataType, typename StorageDataType>
+        static bool canProcessText(const QMimeData* data);
 
         template <typename DataType, typename StorageDataType>
-        static bool extract(const CDPL::Base::DataInputHandler<DataType>& handler,
-                            const std::string& data, DataSet& data_set, int insert_idx);
+        static bool readMimeTypeData(const QMimeData* data, DataSet& data_set, int insert_idx);
+
+        template <typename DataType, typename StorageDataType>
+        static bool readTextData(const QMimeData* data, DataSet& data_set, int insert_idx);
+        
+        template <typename DataType, typename StorageDataType>
+        static bool readData(const CDPL::Base::DataInputHandler<DataType>& handler,
+                             const std::string& data, DataSet& data_set, int insert_idx, bool strict);
         
         typedef std::vector<DataRecord::SharedPointer> DataRecordList;
 
