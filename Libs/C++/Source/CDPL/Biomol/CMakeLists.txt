@@ -60,6 +60,10 @@ set(cdpl-biomol_LIB_SRCS
     MMTFDataWriter.cpp
     MMTFMoleculeReader.cpp
     MMTFMolecularGraphWriter.cpp
+    MMCIFDataReader.cpp
+    MMCIFDataWriter.cpp
+    MMCIFMoleculeReader.cpp
+    MMCIFMolecularGraphWriter.cpp
     
     HierarchyViewNode.cpp
     HierarchyViewModel.cpp

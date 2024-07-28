@@ -37,11 +37,15 @@ namespace CDPLPythonBiomol
     void exportPDBMolecularGraphWriter();
     void exportMMTFMoleculeReader();
     void exportMMTFMolecularGraphWriter();
+    void exportMMCIFMoleculeReader();
+    void exportMMCIFMolecularGraphWriter();
 
     void exportPDBMoleculeInputHandler();
     void exportPDBMolecularGraphOutputHandler();
     void exportMMTFMoleculeInputHandler();
     void exportMMTFMolecularGraphOutputHandler();
+    void exportMMCIFMoleculeInputHandler();
+    void exportMMCIFMolecularGraphOutputHandler();
 
     void exportHierarchyViewNode();
     void exportHierarchyViewModel();

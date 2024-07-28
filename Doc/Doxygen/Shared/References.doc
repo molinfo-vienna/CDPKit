@@ -300,6 +300,22 @@ Friedrich Alexander University of Erlangen-Nuremberg, <b>1994</b>
 </tr>
 
 <tr>
+<td valign="top">\anchor MMCIF<i>[MMCIF]</i></td>
+<td valign="top">
+P. E. Bourne, H. M. Berman, B. McMahon, K. D. Watenpaugh, J. D. Westbrook, P. M. Fitzgerald,
+Macromolecular crystallographic information file, <i>Macromolecular Crystallography Part B. Methods in Enzymology</i>
+<b>1997</b>, Vol. 277, 571–590
+</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td valign="top">
+S. R. Hall, F. H. Allen, I. D. Brown, The Crystallographic Information File (CIF): a new standard archive file for crystallography,
+<i>Acta Crystallographica Section A</i> <b>1991</b>, 47, 655-685
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor MMTF<i>[MMTF]</i></td>
 <td valign="top">
 Macromolecular Transmission Format homepage: https://mmtf.rcsb.org

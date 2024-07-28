@@ -1,5 +1,5 @@
 /* 
- * DataFormatExport.cpp 
+ * MMCIFGZMolecularGraphOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,35 +21,30 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Biomol::MMCIFGZMolecularGraphOutputHandler.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_BIOMOL_MMCIFGZMOLECULARGRAPHOUTPUTHANDLER_HPP
+#define CDPL_BIOMOL_MMCIFGZMOLECULARGRAPHOUTPUTHANDLER_HPP
 
 #include "CDPL/Biomol/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Biomol/MMCIFGZMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
-#include "NamespaceExports.hpp"
 
-
-namespace 
+namespace CDPL
 {
 
-    struct DataFormat {};
-}
+    namespace Biomol
+    {
 
+        /**
+         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>MMCIF</em> format.
+         */
+        typedef Util::DefaultDataOutputHandler<MMCIFGZMolecularGraphWriter, DataFormat::MMCIF_GZ> MMCIFGZMolecularGraphOutputHandler;
+    } // namespace Biomol
+} // namespace CDPL
 
-void CDPLPythonBiomol::exportDataFormats()
-{
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-        .def_readonly("PDB", &Biomol::DataFormat::PDB)
-        .def_readonly("PDB_GZ", &Biomol::DataFormat::PDB_GZ)
-        .def_readonly("PDB_BZ2", &Biomol::DataFormat::PDB_BZ2)
-        .def_readonly("MMTF", &Biomol::DataFormat::MMTF)
-        .def_readonly("MMTF_GZ", &Biomol::DataFormat::MMTF_GZ)
-        .def_readonly("MMTF_BZ2", &Biomol::DataFormat::MMTF_BZ2)
-        .def_readonly("MMCIF", &Biomol::DataFormat::MMCIF)
-        .def_readonly("MMCIF_GZ", &Biomol::DataFormat::MMCIF_GZ)
-        .def_readonly("MMCIF_BZ2", &Biomol::DataFormat::MMCIF_BZ2);
-}
+#endif // CDPL_BIOMOL_MMCIFGZMOLECULARGRAPHOUTPUTHANDLER_HPP

@@ -42,11 +42,15 @@ BOOST_PYTHON_MODULE(_biomol)
     exportPDBMolecularGraphWriter();
     exportMMTFMoleculeReader();
     exportMMTFMolecularGraphWriter();
+    exportMMCIFMoleculeReader();
+    exportMMCIFMolecularGraphWriter();
     
     exportPDBMoleculeInputHandler();
     exportPDBMolecularGraphOutputHandler();
     exportMMTFMoleculeInputHandler();
     exportMMTFMolecularGraphOutputHandler();
+    exportMMCIFMoleculeInputHandler();
+    exportMMCIFMolecularGraphOutputHandler();
     
     exportHierarchyViewNode();
     exportHierarchyViewModel();

@@ -31,6 +31,8 @@
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMTFMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMCIFMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMCIFMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/CDFDataReader.hpp"
 #include "CDPL/Biomol/CDFDataWriter.hpp"
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
@@ -39,8 +41,12 @@
 #include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMTFGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMCIFGZMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMCIFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMTFBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMCIFBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMCIFBZ2MolecularGraphOutputHandler.hpp"
 
 
 namespace
@@ -53,6 +59,10 @@ namespace
     const char* mmtfFileExtensions[]    = { "mmtf" };
     const char* mmtfGzFileExtensions[]  = { "mmtf.gz" };
     const char* mmtfBz2FileExtensions[] = { "mmtf.bz2" };
+
+    const char* mmcifFileExtensions[]    = { "mmcif", "cif" };
+    const char* mmcifGzFileExtensions[]  = { "mmcif.gz", "cif.gz" };
+    const char* mmcifBz2FileExtensions[] = { "mmcif.bz2", "cif.bz2" };
 }
 
 
@@ -72,6 +82,13 @@ const Base::DataFormat Biomol::DataFormat::MMTF_GZ("MMTF_GZ", "GZip-Compressed M
                                                mmtfGzFileExtensions, mmtfGzFileExtensions + 1, false);
 const Base::DataFormat Biomol::DataFormat::MMTF_BZ2("MMTF_BZ2", "BZip2-Compressed Macromolecular Transmission Format", "chemical/x-mmtf", 
                                                mmtfBz2FileExtensions, mmtfBz2FileExtensions + 1, false);
+
+const Base::DataFormat Biomol::DataFormat::MMCIF("MMCIF", "Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+                                               mmcifFileExtensions, mmcifFileExtensions + 2, false);
+const Base::DataFormat Biomol::DataFormat::MMCIF_GZ("MMCIF_GZ", "GZip-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+                                               mmcifGzFileExtensions, mmcifGzFileExtensions + 2, false);
+const Base::DataFormat Biomol::DataFormat::MMCIF_BZ2("MMCIF_BZ2", "BZip2-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+                                               mmcifBz2FileExtensions, mmcifBz2FileExtensions + 2, false);
 
 
 namespace CDPL
@@ -101,6 +118,9 @@ namespace
 
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFMoleculeInputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFMolecularGraphOutputHandler()));
+
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMCIFMoleculeInputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFMolecularGraphOutputHandler()));
             
             Biomol::CDFDataReader::registerExternalPropertyHandlers();
             Biomol::CDFDataWriter::registerExternalPropertyHandlers();
@@ -111,11 +131,17 @@ namespace
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFGZMoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFBZ2MoleculeInputHandler()));
 
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMCIFGZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMCIFBZ2MoleculeInputHandler()));
+
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBGZMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBBZ2MolecularGraphOutputHandler()));
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFGZMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFBZ2MolecularGraphOutputHandler()));
+
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFGZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFBZ2MolecularGraphOutputHandler()));
         }
 
     } init;

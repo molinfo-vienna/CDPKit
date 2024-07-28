@@ -40,11 +40,15 @@ set(biomol_MOD_SRCS
     PDBMolecularGraphWriterExport.cpp
     MMTFMoleculeReaderExport.cpp
     MMTFMolecularGraphWriterExport.cpp
+    MMCIFMoleculeReaderExport.cpp
+    MMCIFMolecularGraphWriterExport.cpp
     
     PDBMoleculeInputHandlerExport.cpp
     PDBMolecularGraphOutputHandlerExport.cpp
     MMTFMoleculeInputHandlerExport.cpp
     MMTFMolecularGraphOutputHandlerExport.cpp
+    MMCIFMoleculeInputHandlerExport.cpp
+    MMCIFMolecularGraphOutputHandlerExport.cpp
     
     HierarchyViewNodeExport.cpp
     HierarchyViewModelExport.cpp
