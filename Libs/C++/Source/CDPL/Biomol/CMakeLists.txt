@@ -38,6 +38,7 @@ endif()
 
 set(cdpl-biomol_LIB_SRCS
     PDBData.cpp
+    MMCIFData.cpp
     ResidueDictionaryData.cpp
     ResidueDictionary.cpp
     ResidueList.cpp

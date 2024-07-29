@@ -30,6 +30,7 @@
 #define CDPL_BIOMOL_HPP
 
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/AtomProperty.hpp"
 #include "CDPL/Biomol/MolecularGraphProperty.hpp"
 #include "CDPL/Biomol/AtomPropertyDefault.hpp"

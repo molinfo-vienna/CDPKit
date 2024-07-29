@@ -41,8 +41,7 @@ bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol
 
     init(is);
 
-    // TODO
-    return true;
+    return false; // TODO
 }
 
 bool Biomol::MMCIFDataReader::skipMolecule(std::istream& is)
@@ -52,8 +51,7 @@ bool Biomol::MMCIFDataReader::skipMolecule(std::istream& is)
 
     init(is);
 
-    // TODO
-    return true;
+    return false; // TODO
 }
 
 bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is) const
