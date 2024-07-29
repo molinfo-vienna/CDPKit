@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
+         * \brief A data structure for the storage of imported PDB data records (see [\ref CTFILE]).
          */
         class CDPL_BIOMOL_API PDBData
         {
