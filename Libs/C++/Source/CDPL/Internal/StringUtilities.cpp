@@ -71,7 +71,7 @@ std::string Internal::trimStringCopy(const std::string& str, bool left, bool rig
     return str;
 }
 
-bool Internal::isEqualCI(const std::string& str1, const std::string& str2)
+bool Internal::isEqualCI(const std::string_view& str1, const std::string_view& str2)
 {
     if (str1.length() != str2.length())
         return false;

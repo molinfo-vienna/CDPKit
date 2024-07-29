@@ -26,6 +26,7 @@
 #define CDPL_INTERNAL_STRINGUTILITIES_HPP
 
 #include <string>
+#include <string_view>
 #include <locale>
 
 
@@ -61,7 +62,7 @@ namespace CDPL
 
         std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
 
-        bool isEqualCI(const std::string& str1, const std::string& str2);
+        bool isEqualCI(const std::string_view& str1, const std::string_view& str2);
         
     } // namespace Internal
 } // namespace CDPL
