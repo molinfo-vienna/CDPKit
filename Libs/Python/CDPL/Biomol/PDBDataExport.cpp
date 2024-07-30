@@ -143,7 +143,7 @@ void CDPLPythonBiomol::exportPDBData()
     
     pdb_data_class
         .def(python::init<>(python::arg("self")))    
-        .def(python::init<const Biomol::PDBData&>((python::arg("self"), python::arg("other"))))
+        .def(python::init<const Biomol::PDBData&>((python::arg("self"), python::arg("data"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Biomol::PDBData>())
         .def("getNumRecords", &Biomol::PDBData::getNumRecords, python::arg("self"))
         .def("isEmpty", &Biomol::PDBData::isEmpty, python::arg("self"))

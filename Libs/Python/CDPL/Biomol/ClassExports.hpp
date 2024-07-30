@@ -30,6 +30,7 @@ namespace CDPLPythonBiomol
 {
 
     void exportPDBData();
+    void exportMMCIFData();
     void exportResidueList();
     void exportResidueDictionary();
 

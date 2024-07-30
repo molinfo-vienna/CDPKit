@@ -31,7 +31,6 @@
 
 #include <cstddef>
 #include <string>
-#include <string_view>
 #include <vector>
 #include <memory>
 
@@ -57,7 +56,7 @@ namespace CDPL
             {
 
               public:
-                Category(const std::string_view& name):
+                Category(const std::string& name):
                     name(name) {}
 
                 const std::string& getName() const
@@ -83,27 +82,29 @@ namespace CDPL
 
             bool isEmpty() const;
             
-            bool hasCategory(const std::string_view& name) const;
+            bool hasCategory(const std::string& name) const;
             
             Category& getCategory(std::size_t index);
             
             const Category& getCategory(std::size_t index) const;
 
-            Category& getCategory(const std::string_view& name);
+            Category& getCategory(const std::string& name);
             
-            const Category& getCategory(const std::string_view& name) const;
+            const Category& getCategory(const std::string& name) const;
 
-            ConstCategoryIterator findCategory(const std::string_view& name) const;
+            ConstCategoryIterator findCategory(const std::string& name) const;
 
-            CategoryIterator findCategory(const std::string_view& name);
+            CategoryIterator findCategory(const std::string& name);
             
-            Category& addCategory(const std::string_view& name);
+            Category& addCategory(const std::string& name);
 
             void removeCategory(const CategoryIterator& it);
 
-            bool removeCategory(const std::string_view& name);
+            bool removeCategory(const std::string& name);
 
             void removeCategory(std::size_t index);
+
+            void swap(MMCIFData& data);
 
             ConstCategoryIterator getCategoriesBegin() const;
 

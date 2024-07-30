@@ -33,6 +33,7 @@ set(biomol_MOD_SRCS
     Module.cpp
 
     PDBDataExport.cpp
+    MMCIFDataExport.cpp
     ResidueListExport.cpp
     ResidueDictionaryExport.cpp
  

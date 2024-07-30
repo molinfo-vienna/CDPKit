@@ -48,20 +48,20 @@ bool Biomol::MMCIFData::isEmpty() const
 {
     return categories.empty();
 }
-            
-bool Biomol::MMCIFData::hasCategory(const std::string_view& name) const
+
+bool Biomol::MMCIFData::hasCategory(const std::string& name) const
 {
     return (findCategory(name) != categories.end());
 }
-            
+
 Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(std::size_t index)
 {
-   if (index >= categories.size())
+    if (index >= categories.size())
         throw Base::IndexError("Biomol::MMCIFData: category index out of bounds");
 
     return categories[index];
 }
-            
+
 const Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(std::size_t index) const
 {
     if (index >= categories.size())
@@ -70,7 +70,7 @@ const Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(std::size_t in
     return categories[index];
 }
 
-Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::string_view& name)
+Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::string& name)
 {
     auto it = findCategory(name);
 
@@ -80,7 +80,7 @@ Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::string_vi
     throw Base::ItemNotFound("Biomol::MMCIFData: category not found");
 }
             
-const Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::string_view& name) const
+const Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::string& name) const
 {
     auto it = findCategory(name);
 
@@ -90,17 +90,17 @@ const Biomol::MMCIFData::Category& Biomol::MMCIFData::getCategory(const std::str
     throw Base::ItemNotFound("Biomol::MMCIFData: category not found");
 }
 
-Biomol::MMCIFData::ConstCategoryIterator Biomol::MMCIFData::findCategory(const std::string_view& name) const
+Biomol::MMCIFData::ConstCategoryIterator Biomol::MMCIFData::findCategory(const std::string& name) const
 {
     return std::find_if(categories.begin(), categories.end(), [&](const Category& cat) { return Internal::isEqualCI(name, cat.getName()); });
 }
 
-Biomol::MMCIFData::CategoryIterator Biomol::MMCIFData::findCategory(const std::string_view& name)
+Biomol::MMCIFData::CategoryIterator Biomol::MMCIFData::findCategory(const std::string& name)
 {
     return std::find_if(categories.begin(), categories.end(), [&](const Category& cat) { return Internal::isEqualCI(name, cat.getName()); });
 }
 
-Biomol::MMCIFData::Category& Biomol::MMCIFData::addCategory(const std::string_view& name)
+Biomol::MMCIFData::Category& Biomol::MMCIFData::addCategory(const std::string& name)
 {
     auto it = findCategory(name);
 
@@ -120,7 +120,7 @@ void Biomol::MMCIFData::removeCategory(const CategoryIterator& it)
     categories.erase(it);
 }
 
-bool Biomol::MMCIFData::removeCategory(const std::string_view& name)
+bool Biomol::MMCIFData::removeCategory(const std::string& name)
 {
     auto it = findCategory(name);
 
@@ -138,6 +138,11 @@ void Biomol::MMCIFData::removeCategory(std::size_t index)
         throw Base::IndexError("Biomol::MMCIFData: category index out of bounds");
 
    categories.erase(categories.begin() + index);
+}
+
+void Biomol::MMCIFData::swap(MMCIFData& data)
+{
+    categories.swap(data.categories);
 }
 
 Biomol::MMCIFData::ConstCategoryIterator Biomol::MMCIFData::getCategoriesBegin() const
@@ -179,4 +184,3 @@ Biomol::MMCIFData::CategoryIterator Biomol::MMCIFData::end()
 {
     return categories.end();
 }
-

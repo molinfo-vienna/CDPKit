@@ -35,6 +35,7 @@ BOOST_PYTHON_MODULE(_biomol)
     using namespace CDPLPythonBiomol;
 
     exportPDBData();
+    exportMMCIFData();
     exportResidueList();
     exportResidueDictionary();
 
