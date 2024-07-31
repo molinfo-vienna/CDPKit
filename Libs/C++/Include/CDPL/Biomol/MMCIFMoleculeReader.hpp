@@ -49,6 +49,9 @@ namespace CDPL
 
         class MMCIFDataReader;
 
+        /**
+         * \since 1.2
+         */
         class CDPL_BIOMOL_API MMCIFMoleculeReader : public Util::StreamDataReader<Chem::Molecule, MMCIFMoleculeReader>
         {
 

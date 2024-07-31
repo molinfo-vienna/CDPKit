@@ -39,6 +39,9 @@ namespace CDPL
     namespace Biomol
     {
 
+        /**
+         * \since 1.2
+         */
         typedef Util::CompressedDataReader<MMCIFMoleculeReader, Util::GZipIStream> MMCIFGZMoleculeReader;
     }
 } // namespace CDPL

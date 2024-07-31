@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the input of gzip-compressed molecule data in the <em>MMCIF</em> format.
+         * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<MMCIFGZMoleculeReader, DataFormat::MMCIF_GZ> MMCIFGZMoleculeInputHandler;
     } // namespace Biomol

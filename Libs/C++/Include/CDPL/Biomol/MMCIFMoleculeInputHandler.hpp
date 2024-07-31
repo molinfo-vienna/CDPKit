@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the input of molecule data in the <em>MMCIF</em> format.
+         * \since 1.2
          */
         typedef Util::DefaultDataInputHandler<MMCIFMoleculeReader, DataFormat::MMCIF> MMCIFMoleculeInputHandler;
     } // namespace Biomol

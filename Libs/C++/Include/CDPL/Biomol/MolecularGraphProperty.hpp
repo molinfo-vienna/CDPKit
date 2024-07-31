@@ -56,7 +56,10 @@ namespace CDPL
 
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
+
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
+            extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_DATA;
+
         } // namespace MolecularGraphProperty
     } // namespace Biomol
 } // namespace CDPL

@@ -34,6 +34,7 @@
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ProcessingFlags.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
@@ -104,6 +105,17 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBData(Chem::MolecularGraph& molgraph);
 
         CDPL_BIOMOL_API bool hasPDBData(const Chem::MolecularGraph& molgraph);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API const MMCIFData::SharedPointer& getMMCIFData(const Chem::MolecularGraph& molgraph);
+
+        CDPL_BIOMOL_API void setMMCIFData(Chem::MolecularGraph& molgraph, const MMCIFData::SharedPointer& data);
+
+        CDPL_BIOMOL_API void clearMMCIFData(Chem::MolecularGraph& molgraph);
+
+        CDPL_BIOMOL_API bool hasMMCIFData(const Chem::MolecularGraph& molgraph);
 
 
         CDPL_BIOMOL_API void convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite);

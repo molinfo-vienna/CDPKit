@@ -48,5 +48,6 @@ void CDPLPythonBiomol::exportMolecularGraphProperties()
         .def_readonly("RESIDUE_INSERTION_CODE", &Biomol::MolecularGraphProperty::RESIDUE_INSERTION_CODE)
         .def_readonly("CHAIN_ID", &Biomol::MolecularGraphProperty::CHAIN_ID)
         .def_readonly("MODEL_NUMBER", &Biomol::MolecularGraphProperty::MODEL_NUMBER)
-        .def_readonly("PDB_DATA", &Biomol::MolecularGraphProperty::PDB_DATA);
+        .def_readonly("PDB_DATA", &Biomol::MolecularGraphProperty::PDB_DATA)
+        .def_readonly("MMCIF_DATA", &Biomol::MolecularGraphProperty::MMCIF_DATA);
 }

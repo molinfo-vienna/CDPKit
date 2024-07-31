@@ -56,6 +56,7 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_COPY_REF(ChainID, id)
     EXPORT_MOLGRAPH_FUNCS(ModelNumber, model_no)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF(PDBData, data)
+    EXPORT_MOLGRAPH_FUNCS_COPY_REF(MMCIFData, data)
 
     python::def("convertMOL2ToPDBResidueInfo", &Biomol::convertMOL2ToPDBResidueInfo, (python::arg("molgraph"), python::arg("override")));
     python::def("extractResidueSubstructures", &Biomol::extractResidueSubstructures,

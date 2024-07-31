@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the output of molecular graph data in the <em>MMCIF</em> format.
+         * \since 1.2
          */
         typedef Util::DefaultDataOutputHandler<MMCIFMolecularGraphWriter, DataFormat::MMCIF> MMCIFMolecularGraphOutputHandler;
     } // namespace Biomol

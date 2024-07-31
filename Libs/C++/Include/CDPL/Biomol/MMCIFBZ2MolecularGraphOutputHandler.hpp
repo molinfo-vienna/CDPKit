@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>MMCIF</em> format.
+         * \since 1.2
          */
         typedef Util::DefaultDataOutputHandler<MMCIFBZ2MolecularGraphWriter, DataFormat::MMCIF_BZ2> MMCIFBZ2MolecularGraphOutputHandler;
     } // namespace Biomol

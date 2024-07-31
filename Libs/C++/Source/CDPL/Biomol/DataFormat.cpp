@@ -84,11 +84,11 @@ const Base::DataFormat Biomol::DataFormat::MMTF_BZ2("MMTF_BZ2", "BZip2-Compresse
                                                mmtfBz2FileExtensions, mmtfBz2FileExtensions + 1, false);
 
 const Base::DataFormat Biomol::DataFormat::MMCIF("MMCIF", "Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
-                                               mmcifFileExtensions, mmcifFileExtensions + 2, false);
+                                               mmcifFileExtensions, mmcifFileExtensions + 2, true);
 const Base::DataFormat Biomol::DataFormat::MMCIF_GZ("MMCIF_GZ", "GZip-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
-                                               mmcifGzFileExtensions, mmcifGzFileExtensions + 2, false);
+                                               mmcifGzFileExtensions, mmcifGzFileExtensions + 2, true);
 const Base::DataFormat Biomol::DataFormat::MMCIF_BZ2("MMCIF_BZ2", "BZip2-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
-                                               mmcifBz2FileExtensions, mmcifBz2FileExtensions + 2, false);
+                                               mmcifBz2FileExtensions, mmcifBz2FileExtensions + 2, true);
 
 
 namespace CDPL

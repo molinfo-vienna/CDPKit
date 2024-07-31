@@ -50,6 +50,9 @@ namespace CDPL
 
         class MMCIFDataWriter;
 
+        /**
+         * \since 1.2
+         */
         class CDPL_BIOMOL_API MMCIFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
         {
 

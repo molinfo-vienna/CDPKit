@@ -38,7 +38,10 @@ namespace CDPL
 
     namespace Biomol
     {
-
+        
+        /**
+         * \since 1.2
+         */
         typedef Util::CompressedDataWriter<MMCIFMolecularGraphWriter, Util::BZip2OStream> MMCIFBZ2MolecularGraphWriter;
     }
 } // namespace CDPL

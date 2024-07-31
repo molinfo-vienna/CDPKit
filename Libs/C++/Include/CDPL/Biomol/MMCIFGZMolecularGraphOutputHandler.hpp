@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the output of gzip-compressed molecular graph data in the <em>MMCIF</em> format.
+         * \since 1.2
          */
         typedef Util::DefaultDataOutputHandler<MMCIFGZMolecularGraphWriter, DataFormat::MMCIF_GZ> MMCIFGZMolecularGraphOutputHandler;
     } // namespace Biomol

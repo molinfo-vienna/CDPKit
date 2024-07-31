@@ -43,7 +43,9 @@ namespace CDPL
 
             CDPL_DEFINE_LOOKUP_KEY(CHAIN_ID);
             CDPL_DEFINE_LOOKUP_KEY(MODEL_NUMBER);
+            
             CDPL_DEFINE_LOOKUP_KEY(PDB_DATA);
+            CDPL_DEFINE_LOOKUP_KEY(MMCIF_DATA);
         }
 
         void initMolecularGraphProperties() {}
