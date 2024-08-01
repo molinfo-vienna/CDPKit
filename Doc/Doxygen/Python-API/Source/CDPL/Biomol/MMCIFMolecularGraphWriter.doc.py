@@ -20,41 +20,13 @@
 #
 
 ##
-# \brief Provides keys for built-in Biomol.MolecularGraph properties.
-# 
-class MolecularGraphProperty(Boost.Python.instance):
+# \brief 
+#
+class MMCIFMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief 
-    #
-    RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
-
-    ##
-    # \brief 
-    #
-    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
-
-    ##
-    # \brief 
-    #
-    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
-
-    ##
-    # \brief 
-    #
-    CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
-
-    ##
-    # \brief 
-    #
-    MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
-
-    ##
-    # \brief 
-    #
-    PDB_DATA = CDPL.Base.LookupKey('PDB_DATA')
-
-    ##
-    # \brief 
-    #
-    MMCIF_DATA = CDPL.Base.LookupKey('MMCIF_DATA')
+    # \brief Constructs a <tt>MMCIFMolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
+    def __init__(os: Base.OStream) -> None: pass

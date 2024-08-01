@@ -42,14 +42,35 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
     # 
+    # \since 1.2
+    # 
     MMTF = CDPL.Base.DataFormat(name='MMTF', descr='Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the gzip-compressed <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
+    # 
+    # \since 1.2
     # 
     MMTF_GZ = CDPL.Base.DataFormat(name='MMTF_GZ', descr='GZip-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.gz'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
     # 
+    # \since 1.2
+    # 
     MMTF_BZ2 = CDPL.Base.DataFormat(name='MMTF_BZ2', descr='BZip2-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.bz2'], multi_rec=False)
+
+    ##
+    # \brief Provides meta-information about the <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
+    # 
+    MMCIF = CDPL.Base.DataFormat(name='MMCIF', descr='Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif', 'cif'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the gzip-compressed <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
+    # 
+    MMCIF_GZ = CDPL.Base.DataFormat(name='MMCIF_GZ', descr='GZip-Compressed Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif.gz', 'cif.gz'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
+    # 
+    MMCIF_BZ2 = CDPL.Base.DataFormat(name='MMCIF_BZ2', descr='BZip2-Compressed Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif.bz2', 'cif.bz2'], multi_rec=True)

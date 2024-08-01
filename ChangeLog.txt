@@ -1,5 +1,7 @@
 master:
 
+ - Removed function Biomol::convertMOL2ToPDBResidueInfo(): if possible, the conversion of MOL2 substructure to
+   PDB residue/sequence information is now carried out automatically
  - Fixed a bug in program 'ChOX' that prevented the successful saving of data to PSD files
  - Program 'ChOX' now uses the same file open/save dialog instance for all opened main windows 
  - New class Chem::MultiSubstructureSearch for performing substructure matching with multiple query structures that

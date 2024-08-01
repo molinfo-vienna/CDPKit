@@ -35,7 +35,7 @@ using namespace CDPL;
 
 
 Chem::MOL2MoleculeReader::MOL2MoleculeReader(std::istream& is): 
-    Util::StreamDataReader<Molecule, MOL2MoleculeReader>(is), reader(new MOL2DataReader(*this)) {}
+    Util::StreamDataReader<Molecule, MOL2MoleculeReader>(is), reader(MOL2DataReader::factoryFunction()(*this)) {}
 
 Chem::MOL2MoleculeReader::~MOL2MoleculeReader() {}
 

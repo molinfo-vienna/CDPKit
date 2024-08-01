@@ -57,6 +57,8 @@ set(cdpl-biomol_LIB_SRCS
     PDBMolecularGraphWriter.cpp
     CDFDataReader.cpp
     CDFDataWriter.cpp
+    MOL2DataReader.cpp
+    MOL2DataWriter.cpp
     MMTFDataReader.cpp
     MMTFDataWriter.cpp
     MMTFMoleculeReader.cpp

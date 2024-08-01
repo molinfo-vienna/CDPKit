@@ -90,8 +90,20 @@ namespace
     {
         str.erase(std::remove_if(str.begin(), str.end(), Internal::IsWhitespace()), str.end());
     }
+
+    Chem::MOL2DataWriter* newMOL2DataWriterInstance(const Base::DataIOBase& io_base)
+    {
+        return new Chem::MOL2DataWriter(io_base);
+    }
 }
 
+
+Chem::MOL2DataWriter::FactoryFunction& Chem::MOL2DataWriter::factoryFunction()
+{
+    static FactoryFunction factoryFunc(&newMOL2DataWriterInstance);
+
+    return factoryFunc;
+}
 
 bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph)
 {

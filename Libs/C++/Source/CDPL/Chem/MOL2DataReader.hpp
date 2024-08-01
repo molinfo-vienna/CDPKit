@@ -30,9 +30,11 @@
 #include <cstddef>
 #include <vector>
 #include <unordered_map>
+#include <functional>
 
 #include <boost/tokenizer.hpp>
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -50,17 +52,24 @@ namespace CDPL
     namespace Chem
     {
 
-        class MOL2DataReader
+        class CDPL_CHEM_API MOL2DataReader
         {
 
           public:
+            typedef std::function<MOL2DataReader*(const Base::DataIOBase& io_base)> FactoryFunction;
+            
             MOL2DataReader(const Base::DataIOBase& io_base):
                 ioBase(io_base), lineTokenizer(dataLine, boost::char_separator<char>(" \t")) {}
 
+            virtual ~MOL2DataReader() {}
+            
             bool hasMoreData(std::istream& is);
-            bool readMolecule(std::istream& is, Molecule& mol);
             bool skipMolecule(std::istream& is);
 
+            virtual bool readMolecule(std::istream& is, Molecule& mol);
+            
+            static FactoryFunction& factoryFunction();
+            
           private:
             void init(std::istream& is);
 

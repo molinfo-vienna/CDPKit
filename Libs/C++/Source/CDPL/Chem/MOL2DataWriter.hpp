@@ -30,7 +30,9 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <functional>
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 
@@ -50,15 +52,21 @@ namespace CDPL
         class Atom;
         class Bond;
 
-        class MOL2DataWriter
+        class CDPL_CHEM_API MOL2DataWriter
         {
 
           public:
+            typedef std::function<MOL2DataWriter*(const Base::DataIOBase& io_base)> FactoryFunction;
+            
             MOL2DataWriter(const Base::DataIOBase& io_base):
                 ioBase(io_base) {}
 
+            virtual ~MOL2DataWriter() {}
+            
             bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
 
+            static FactoryFunction& factoryFunction();
+            
           private:
             void init(std::ostream& os);
 

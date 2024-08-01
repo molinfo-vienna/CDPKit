@@ -1,5 +1,5 @@
 /* 
- * MOL2MolecularGraphWriter.cpp 
+ * MOL2DataWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,44 +24,23 @@
 
 #include "StaticInit.hpp"
 
-#include <ostream>
-
-#include "CDPL/Chem/MOL2MolecularGraphWriter.hpp"
-#include "CDPL/Base/Exceptions.hpp"
-
 #include "MOL2DataWriter.hpp"
 
 
 using namespace CDPL;
 
 
-Chem::MOL2MolecularGraphWriter::MOL2MolecularGraphWriter(std::ostream& os): 
-    output(os), state(os.good()), writer(MOL2DataWriter::factoryFunction()(*this)) {}
-
-Chem::MOL2MolecularGraphWriter::~MOL2MolecularGraphWriter() {}
-
-Base::DataWriter<Chem::MolecularGraph>& Chem::MOL2MolecularGraphWriter::write(const MolecularGraph& molgraph)
+namespace
 {
-    state = false;
 
-    try {
-        state = writer->writeMolecularGraph(output, molgraph);
-
-    } catch (const std::exception& e) {
-        throw Base::IOError("MOL2MolecularGraphWriter: " + std::string(e.what()));
+    Chem::MOL2DataWriter* newMOL2DataWriterInstance(const Base::DataIOBase& io_base)
+    {
+        return new Biomol::MOL2DataWriter(io_base);
     }
-
-    invokeIOCallbacks(1.0);
-
-    return *this;
 }
 
-Chem::MOL2MolecularGraphWriter::operator const void*() const
-{
-    return (state ? this : 0);
-}
 
-bool Chem::MOL2MolecularGraphWriter::operator!() const
+void Biomol::MOL2DataWriter::registerFactoryFunction()
 {
-    return !state;
+    Chem::MOL2DataWriter::factoryFunction() = &newMOL2DataWriterInstance;
 }

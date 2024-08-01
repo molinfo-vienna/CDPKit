@@ -34,7 +34,8 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
     
     sup_fmts = [ Chem.DataFormat.MOL2,
                  Biomol.DataFormat.PDB,
-                 Biomol.DataFormat.MMTF ]
+                 Biomol.DataFormat.MMTF,
+                 Biomol.DataFormat.MMCIF ]
                         
     if reader.getDataFormat() not in sup_fmts:   # check if the format is supported by this script
         sys.exit('Error: receptor input file format not supported')
@@ -51,10 +52,6 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
     # preprocess the receptor structure (removal of residues and
     # calculation of properties required by the pharm. generation procedure)
     try:
-        # if structure comes from an MOL2 file, convert MOL2 residue data into PDB-style data
-        if reader.getDataFormat() == Chem.DataFormat.MOL2: 
-            Biomol.convertMOL2ToPDBResidueInfo(rec_mol, True)
-
         rem_atoms = False
 
         # delete atoms belonging to residues that should be stripped
@@ -98,7 +95,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='receptor_file',
                         required=True,
                         metavar='<file>',
-                        help='Receptor structure input file (*.mol2, *.pdb, *.mmtf)')
+                        help='Receptor structure input file (*.mol2, *.pdb, *.mmtf, *.cif, *.mmcif)')
     parser.add_argument('-l',
                         dest='ligands_file',
                         required=True,

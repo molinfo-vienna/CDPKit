@@ -33,8 +33,6 @@
 #include "CDPL/Biomol/MMTFMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMCIFMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMCIFMolecularGraphOutputHandler.hpp"
-#include "CDPL/Biomol/CDFDataReader.hpp"
-#include "CDPL/Biomol/CDFDataWriter.hpp"
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
@@ -47,6 +45,10 @@
 #include "CDPL/Biomol/MMTFBZ2MolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMCIFBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMCIFBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/CDFDataReader.hpp"
+#include "CDPL/Biomol/CDFDataWriter.hpp"
+#include "CDPL/Biomol/MOL2DataReader.hpp"
+#include "CDPL/Biomol/MOL2DataWriter.hpp"
 
 
 namespace
@@ -122,9 +124,6 @@ namespace
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMCIFMoleculeInputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFMolecularGraphOutputHandler()));
             
-            Biomol::CDFDataReader::registerExternalPropertyHandlers();
-            Biomol::CDFDataWriter::registerExternalPropertyHandlers();
-
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBGZMoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBBZ2MoleculeInputHandler()));
 
@@ -142,6 +141,12 @@ namespace
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFGZMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMCIFBZ2MolecularGraphOutputHandler()));
+
+            Biomol::CDFDataReader::registerExternalPropertyHandlers();
+            Biomol::CDFDataWriter::registerExternalPropertyHandlers();
+
+            Biomol::MOL2DataReader::registerFactoryFunction();
+            Biomol::MOL2DataWriter::registerFactoryFunction();
         }
 
     } init;

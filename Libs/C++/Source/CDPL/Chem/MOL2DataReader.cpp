@@ -26,7 +26,6 @@
 
 #include <istream>
 #include <locale>
-#include <functional>
 
 #include <boost/algorithm/string.hpp>
 
@@ -103,8 +102,20 @@ namespace
         }
 
     } init;
+
+    Chem::MOL2DataReader* newMOL2DataReaderInstance(const Base::DataIOBase& io_base)
+    {
+        return new Chem::MOL2DataReader(io_base);
+    }
 }
 
+
+Chem::MOL2DataReader::FactoryFunction& Chem::MOL2DataReader::factoryFunction()
+{
+    static FactoryFunction factoryFunc(&newMOL2DataReaderInstance);
+
+    return factoryFunc;
+}
 
 bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 {

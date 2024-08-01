@@ -20,41 +20,12 @@
 #
 
 ##
-# \brief Provides keys for built-in Biomol.MolecularGraph properties.
-# 
-class MolecularGraphProperty(Boost.Python.instance):
+# \brief 
+#
+class MMCIFBZ2MoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief 
-    #
-    RESIDUE_CODE = CDPL.Base.LookupKey('RESIDUE_CODE')
-
-    ##
-    # \brief 
-    #
-    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey('RESIDUE_SEQUENCE_NUMBER')
-
-    ##
-    # \brief 
-    #
-    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey('RESIDUE_INSERTION_CODE')
-
-    ##
-    # \brief 
-    #
-    CHAIN_ID = CDPL.Base.LookupKey('CHAIN_ID')
-
-    ##
-    # \brief 
-    #
-    MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
-
-    ##
-    # \brief 
-    #
-    PDB_DATA = CDPL.Base.LookupKey('PDB_DATA')
-
-    ##
-    # \brief 
-    #
-    MMCIF_DATA = CDPL.Base.LookupKey('MMCIF_DATA')
+    # \brief Initializes the \e %MMCIFBZ2MoleculeReader instance.
+    # \param is 
+    # 
+    def __init__(is: Base.IStream) -> None: pass

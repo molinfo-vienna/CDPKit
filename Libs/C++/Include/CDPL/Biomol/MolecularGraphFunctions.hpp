@@ -118,8 +118,6 @@ namespace CDPL
         CDPL_BIOMOL_API bool hasMMCIFData(const Chem::MolecularGraph& molgraph);
 
 
-        CDPL_BIOMOL_API void convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite);
-
         CDPL_BIOMOL_API void extractResidueSubstructures(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph, Chem::Fragment& res_substructs,
                                                          bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT, bool append = false);
 

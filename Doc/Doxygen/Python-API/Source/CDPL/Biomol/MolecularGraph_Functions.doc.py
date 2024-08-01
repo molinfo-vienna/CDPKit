@@ -77,6 +77,33 @@ def setPDBData(molgraph: Chem.MolecularGraph, data: PDBData) -> None: pass
 # \brief 
 # \param molgraph 
 #
+def clearMMCIFData(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasMMCIFData(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getMMCIFData(molgraph: Chem.MolecularGraph) -> MMCIFData: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param data 
+#
+def setMMCIFData(molgraph: Chem.MolecularGraph, data: MMCIFData) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearResidueCode(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
@@ -134,13 +161,6 @@ def setResidueInsertionCode(molgraph: Chem.MolecularGraph, code: str) -> None: p
 # \param flags 
 #
 def setHydrogenResidueSequenceInfo(molgraph: Chem.MolecularGraph, overwrite: bool, flags: int = 2147483648) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param override 
-#
-def convertMOL2ToPDBResidueInfo(molgraph: Chem.MolecularGraph, override: bool) -> None: pass
 
 ##
 # \brief 

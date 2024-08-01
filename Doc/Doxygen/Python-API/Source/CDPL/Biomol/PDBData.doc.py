@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
+# \brief A data structure for the storage of imported PDB data records (see [\ref CTFILE]).
 # 
 class PDBData(Boost.Python.instance):
 
@@ -255,10 +255,10 @@ class PDBData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PDBData instance \a other.
-    # \param other The \e %PDBData instance to copy.
+    # \brief Initializes a copy of the \e %PDBData instance \a data.
+    # \param data The \e %PDBData instance to copy.
     # 
-    def __init__(other: PDBData) -> None: pass
+    def __init__(data: PDBData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

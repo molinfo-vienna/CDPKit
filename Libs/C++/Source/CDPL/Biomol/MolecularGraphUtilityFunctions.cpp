@@ -31,7 +31,6 @@
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
-#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -261,69 +260,4 @@ bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char
         return false;
 
     return true;
-}
-
-void Biomol::convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite)
-{
-    using namespace Chem;
-
-    if (overwrite) {
-        long atom_serial = 1;
-
-        for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-            Atom& atom = *it;
-
-            if (hasMOL2SubstructureName(atom)) {
-                const std::string& ss_name = getMOL2SubstructureName(atom);
-
-                setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
-                setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
-            }
-
-            if (hasMOL2SubstructureID(atom))
-                setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
-
-            if (hasMOL2SubstructureChain(atom))
-                setChainID(atom, getMOL2SubstructureChain(atom));
-
-            if (hasMOL2Name(atom))
-                setResidueAtomName(atom, getMOL2Name(atom));
-
-            setSerialNumber(atom, atom_serial++);
-        }
-
-        return;
-    }
-
-    bool have_atom_serials = true;
-
-    for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-        Atom& atom = *it;
-
-        if (hasMOL2SubstructureName(atom)) {
-            const std::string& ss_name = getMOL2SubstructureName(atom);
-
-            if (!hasResidueCode(atom))
-                setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
-
-            if (!hasHeteroAtomFlag(atom))
-                setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
-        }
-
-        if (!hasResidueSequenceNumber(atom) && hasMOL2SubstructureID(atom))
-            setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
-
-        if (!hasChainID(atom) && hasMOL2SubstructureChain(atom))
-            setChainID(atom, getMOL2SubstructureChain(atom));
-
-        if (!hasResidueAtomName(atom) && hasMOL2Name(atom))
-            setResidueAtomName(atom, getMOL2Name(atom));
-
-        if (!hasSerialNumber(atom))
-            have_atom_serials = false;
-    }
-
-    if (!have_atom_serials)
-        for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
-            setSerialNumber(molgraph.getAtom(i), i + 1);
 }
