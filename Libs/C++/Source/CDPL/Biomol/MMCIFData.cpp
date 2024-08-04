@@ -113,13 +113,24 @@ Biomol::MMCIFData::Category* Biomol::MMCIFData::findCategory(const std::string& 
     return &*it;
 }
 
+const Biomol::MMCIFData::Category& Biomol::MMCIFData::lastCategory() const
+{
+    if (categories.empty())
+        throw Base::OperationFailed("MMCIFData: no categories available");
+
+    return categories.back();
+}
+
+Biomol::MMCIFData::Category& Biomol::MMCIFData::lastCategory()
+{
+    if (categories.empty())
+        throw Base::OperationFailed("MMCIFData: no categories available");
+
+    return categories.back();
+}
+
 Biomol::MMCIFData::Category& Biomol::MMCIFData::addCategory(const std::string& name)
 {
-    auto it = getCategoryIter(name);
-
-    if (it != categories.end())
-        return *it;
-
     categories.emplace_back(name);
 
     return categories.back();
@@ -285,11 +296,6 @@ Biomol::MMCIFData::Item* Biomol::MMCIFData::Category::findItem(const std::string
 
 Biomol::MMCIFData::Item& Biomol::MMCIFData::Category::addItem(const std::string& name)
 {
-    auto it = getItemIter(name);
-
-    if (it != items.end())
-        return *it;
-
     items.emplace_back(name);
 
     return items.back();

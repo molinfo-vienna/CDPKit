@@ -202,6 +202,7 @@ namespace CDPL
 
             if (val_str.size() > field_size)
                 throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " + std::to_string(field_size) + " allowed characters");
+
             os << val_str;
         }
     } // namespace Internal

@@ -24,44 +24,350 @@
 
 #include "StaticInit.hpp"
 
-#include <istream>
 #include <locale>
+#include <cassert>
 
+#include "CDPL/Biomol/ControlParameterFunctions.hpp"
+#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "MMCIFDataReader.hpp"
+#include "MMCIFFormatData.hpp"
 
 
 using namespace CDPL;
 
 
-bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
+enum Biomol::MMCIFDataReader::Token : int
 {
-    if (!hasMoreData(is))
-        return false;
+    EOI = 0, PLAIN_STRING, QUOTED_STRING, MULTILINE_STRING
+};
 
+
+bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is)
+{
     init(is);
 
-    return false; // TODO
+    while (auto token = nextToken(is)) {
+        if (token == PLAIN_STRING && Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX)) {
+            putbackToken(is);
+            return true;
+        }            
+    }
+    
+    return false;
 }
 
 bool Biomol::MMCIFDataReader::skipMolecule(std::istream& is)
 {
-    if (!hasMoreData(is))
-        return false;
-
     init(is);
+    
+    while (auto token = nextToken(is)) {
+        if (token == PLAIN_STRING && Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX))
+            return true;
+    }
 
-    return false; // TODO
+    return false;
 }
 
-bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is) const
+bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 {
-    // TODO
-    return !std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof());
+    auto data = parseInput(is);
+
+    if (!data)
+        return false;
+    
+    setMMCIFData(mol, data);
+    
+    return true;
 }
 
 void Biomol::MMCIFDataReader::init(std::istream& is)
 {
-    // TODO
+    strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
+    newLine             = false;
+
     is.imbue(std::locale::classic());
+}
+
+Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istream& is)
+{
+    if (!hasMoreData(is))
+        return MMCIFData::SharedPointer();
+
+    if (!nextToken(is))
+        throw Base::IOError("MMCIFDataReader: unexpected end of input while reading data block identifier");
+
+    assert(tokenValue.length() >= MMCIF::DATA_BLOCK_ID_PREFIX.length());
+ 
+    MMCIFData::SharedPointer data(new MMCIFData(tokenValue.substr(MMCIF::DATA_BLOCK_ID_PREFIX.length())));
+    std::string cat_name, item_name;
+    
+    while (auto token = nextToken(is)) {
+        if (token != PLAIN_STRING) {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: invalid data name or keyword");
+        }
+        
+        assert(!tokenValue.empty());
+        
+        if (Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX)) {
+            putbackToken(is);
+            break;
+        }
+      
+        if (Internal::isEqualCI(tokenValue, MMCIF::LOOP_KEYWORD)) {
+            parseLoopSection(is, *data);
+            continue;
+        }
+
+        if (!extractCategoryandItemNames(cat_name, item_name, strictErrorChecking))
+            continue;
+
+        if (!nextToken(is))
+            throw Base::IOError("MMCIFDataReader: unexpected end of input while reading data value");
+
+        auto cat = (data->getNumCategories() == 0 ? nullptr : &data->lastCategory());
+
+        if (!cat || !Internal::isEqualCI(cat_name, cat->getName()) || (cat->getNumValueRows() > 1))
+            cat = &data->addCategory(cat_name);
+            
+        cat->addItem(item_name).addValue(tokenValue);
+    }
+
+    return data;
+}
+
+void Biomol::MMCIFDataReader::parseLoopSection(std::istream& is, MMCIFData& data)
+{
+    MMCIFData::Category* cat = nullptr;
+    std::string cat_name, item_name;
+    
+    while (true) {
+        auto token = nextToken(is);
+        
+        if (!token)
+            return;
+
+        assert(!tokenValue.empty());
+        
+        if (token != PLAIN_STRING) {
+            putbackToken(is);
+            break;
+        }
+
+        if (Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX) ||
+            Internal::isEqualCI(tokenValue, MMCIF::LOOP_KEYWORD)) {
+            putbackToken(is);
+            return;
+        }
+
+        if (!extractCategoryandItemNames(cat_name, item_name, false)) {
+            putbackToken(is);
+            break;
+        }
+
+        if (!cat)
+            cat = &data.addCategory(cat_name);
+        
+        else if (!Internal::isEqualCI(cat_name, cat->getName())) {
+            putbackToken(is);
+            break;
+        }
+                 
+        cat->addItem(item_name);
+    }
+
+    if (!cat)
+        return;
+
+    for (std::size_t i = 0, num_items = cat->getNumItems(); ; i++) {
+        auto item_idx = (i % num_items);
+        auto token = nextToken(is);
+
+        if (!token) {
+            if (item_idx != 0 && strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: unexpected end of input while reading " + MMCIF::LOOP_KEYWORD + " section data values");
+
+            return;
+        }
+
+        assert(!tokenValue.empty());
+ 
+        if (item_idx == 0 && token == PLAIN_STRING &&
+            (tokenValue[0] == MMCIF::DATA_NAME_PREFIX ||
+             Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX) ||
+             Internal::isEqualCI(tokenValue, MMCIF::LOOP_KEYWORD))) {
+
+            putbackToken(is);
+            return;
+        }
+
+        cat->getItem(item_idx).addValue(tokenValue);
+    }
+}
+
+bool Biomol::MMCIFDataReader::extractCategoryandItemNames(std::string& cat_name, std::string& item_name, bool strict) const
+{
+    if (tokenValue[0] != MMCIF::DATA_NAME_PREFIX) {
+        if (strict)
+            throw Base::IOError("MMCIFDataReader: invalid data name");
+
+        return false;
+    }
+
+    std::string::size_type cat_pfx_len = tokenValue.find(MMCIF::CATEGORY_NAME_SEPARATOR);
+
+    if (cat_pfx_len == std::string::npos) {
+        if (strict)
+            throw Base::IOError("MMCIFDataReader: data name without category prefix");
+
+        return false;
+    }
+
+    if (cat_pfx_len == (tokenValue.length() - 1)) {
+        if (strict)
+            throw Base::IOError("MMCIFDataReader: zero-length data item name");
+
+        return false;
+    }
+
+    cat_name.assign(tokenValue, 1, cat_pfx_len - 1);
+    item_name.assign(tokenValue, cat_pfx_len + 1);
+    
+    return true;
+}
+
+Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& is)
+{
+    enum State
+    {
+        START, PLAIN_STR, QUOT_STR_1, QUOT_STR_2, ML_STR, COMMENT
+    };
+
+    lastStreamPos = is.tellg();
+    tokenValue.clear();
+
+    State state = START;
+    
+    while (true) {
+        char c;
+
+        if (state != START && state != ML_STR)
+            newLine = false;
+      
+        if (!is.get(c) &&is.bad())
+            throw Base::IOError("MMCIFDataReader: stream read error");
+  
+        switch (state) {
+
+            case START:
+                if (is.eof())
+                    return EOI;
+
+                switch (c) {
+
+                    case MMCIF::END_OF_LINE:
+                        newLine = true;
+                        continue;
+                        
+                    case MMCIF::COMMENT_PREFIX:
+                        state = COMMENT;
+                        continue;
+
+                    case MMCIF::QUOTED_STRING_DELIMITER_1:
+                        state = QUOT_STR_1;
+                        continue;
+
+                    case MMCIF::QUOTED_STRING_DELIMITER_2:
+                        state = QUOT_STR_2;
+                        continue;
+
+                    case MMCIF::MULTILINE_STRING_DELIMITER:
+                        if (newLine) {
+                            newLine = false;
+                            state = ML_STR;
+                            continue;
+                        }
+                        
+                    default:
+                        if (std::isspace(c, std::locale::classic()))
+                            continue;
+
+                        tokenValue.push_back(c);
+                        state = PLAIN_STR;
+                        continue;
+                }
+
+            case COMMENT:
+                if (is.eof() || c == MMCIF::END_OF_LINE) {
+                    is.unget();
+                    state = START;
+                }
+
+                continue;
+                
+            case PLAIN_STR:
+                if (is.eof() || std::isspace(c, std::locale::classic()) ||  c == MMCIF::COMMENT_PREFIX) {
+                    is.unget();
+                    return PLAIN_STRING;
+                }
+
+                tokenValue.push_back(c);
+                continue;
+                
+            case QUOT_STR_1:
+                if (is.eof() || c == MMCIF::END_OF_LINE)
+                    throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
+                
+                if (c == MMCIF::QUOTED_STRING_DELIMITER_1)
+                    return QUOTED_STRING;
+
+                tokenValue.push_back(c);
+                continue;
+                
+            case QUOT_STR_2:
+                if (is.eof() || c == MMCIF::END_OF_LINE)
+                    throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
+                
+                if (c == MMCIF::QUOTED_STRING_DELIMITER_2)
+                    return QUOTED_STRING;
+
+                tokenValue.push_back(c);
+                continue;
+                
+            case ML_STR:
+                if (is.eof()) 
+                    throw Base::IOError("MMCIFDataReader: unexpected end of input while reading multi-line string");
+
+                if (c == MMCIF::MULTILINE_STRING_DELIMITER && newLine) {
+                    newLine = false;
+                    Internal::trimString(tokenValue, false, true);
+                    return MULTILINE_STRING;
+                }
+
+                if (c == MMCIF::END_OF_LINE)
+                    newLine = true;
+
+                else if (!std::isspace(c, std::locale::classic()))
+                    newLine = false;
+                
+                tokenValue.push_back(c);
+                continue;
+                
+            default:
+                throw Base::IOError("MMCIFDataReader: bad tokenizer state");
+        }
+    }
+}
+
+void Biomol::MMCIFDataReader::putbackToken(std::istream& is) const
+{
+    is.clear();
+
+    if (!is.seekg(lastStreamPos))
+        throw Base::IOError("MMCIFDataReader: setting stram input position failed");
 }

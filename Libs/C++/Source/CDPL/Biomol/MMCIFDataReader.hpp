@@ -25,7 +25,9 @@
 #ifndef CDPL_BIOMOL_MMCIFDATAREADER_HPP
 #define CDPL_BIOMOL_MMCIFDATAREADER_HPP
 
-#include <iosfwd>
+#include <istream>
+
+#include "CDPL/Biomol/MMCIFData.hpp"
 
 
 namespace CDPL
@@ -45,7 +47,7 @@ namespace CDPL
     
     namespace Biomol
     {
-        
+
         class MMCIFDataReader
         {
 
@@ -53,14 +55,30 @@ namespace CDPL
             MMCIFDataReader(const Base::DataIOBase& io_base):
                 ioBase(io_base) {}
 
-            bool readMolecule(std::istream&, Chem::Molecule&);
-            bool skipMolecule(std::istream&);
-            bool hasMoreData(std::istream&) const;
+            bool hasMoreData(std::istream& is);
+            bool skipMolecule(std::istream& is);
+            bool readMolecule(std::istream& is, Chem::Molecule&);
 
           private:
+            enum Token : int;
+
             void init(std::istream&);
-           
+            
+            MMCIFData::SharedPointer parseInput(std::istream& is);
+
+            void parseLoopSection(std::istream& is, MMCIFData& data);
+
+            bool extractCategoryandItemNames(std::string& cat_name, std::string& item_name, bool strict) const;
+  
+            Token nextToken(std::istream& is);
+
+            void putbackToken(std::istream& is) const;
+            
             const Base::DataIOBase& ioBase;
+            std::istream::pos_type  lastStreamPos;
+            std::string             tokenValue;
+            bool                    newLine;
+            bool                    strictErrorChecking;
         };
     } // namespace Biomol
 } // namespace CDPL

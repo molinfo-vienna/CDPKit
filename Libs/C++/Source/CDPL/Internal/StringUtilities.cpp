@@ -79,3 +79,12 @@ bool Internal::isEqualCI(const std::string_view& str1, const std::string_view& s
     return std::equal(str1.begin(), str1.end(), str2.begin(),
                       [](char c1, char c2) { return (std::tolower(c1, std::locale::classic()) == std::tolower(c2, std::locale::classic())); });
 }
+
+bool Internal::startsWithCI(const std::string_view& str, const std::string_view& query)
+{
+    if (str.length() < query.length())
+        return false;
+
+    return std::equal(query.begin(), query.end(), str.begin(),
+                      [](char c1, char c2) { return (std::tolower(c1, std::locale::classic()) == std::tolower(c2, std::locale::classic())); });
+}

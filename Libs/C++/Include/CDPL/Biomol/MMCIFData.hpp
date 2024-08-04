@@ -202,6 +202,10 @@ namespace CDPL
             const Category* findCategory(const std::string& name) const;
 
             Category* findCategory(const std::string& name);
+
+            const Category& lastCategory() const;
+
+            Category& lastCategory();
             
             Category& addCategory(const std::string& name);
 

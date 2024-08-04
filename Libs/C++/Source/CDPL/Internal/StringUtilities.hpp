@@ -63,6 +63,8 @@ namespace CDPL
         std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
 
         bool isEqualCI(const std::string_view& str1, const std::string_view& str2);
+
+        bool startsWithCI(const std::string_view& str, const std::string_view& query);
         
     } // namespace Internal
 } // namespace CDPL
