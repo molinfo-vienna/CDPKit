@@ -33,6 +33,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iosfwd>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 
@@ -241,6 +242,17 @@ namespace CDPL
             std::string  id;
             CategoryList categories;
         };
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API std::ostream& operator<<(std::ostream& os, const MMCIFData& data);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API std::ostream& operator<<(std::ostream& os, const MMCIFData::Category& cat);
+        
     } // namespace Biomol
 } // namespace CDPL
 

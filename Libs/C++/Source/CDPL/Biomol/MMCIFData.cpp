@@ -25,13 +25,120 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <ostream>
+#include <iomanip>
+#include <locale>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 
+#include "MMCIFFormatData.hpp"
+
 
 using namespace CDPL;
+
+
+namespace
+{
+
+    enum class StringOutputType
+    {
+        PLAIN,
+        QUOTED_1,
+        QUOTED_2,
+        MULTILINE
+    };
+
+    StringOutputType getOutputType(const std::string& str)
+    {
+        using namespace Biomol;
+
+        if (str.empty())
+            return StringOutputType::QUOTED_1;
+        
+        if (str.find('\n') != std::string::npos)
+            return StringOutputType::MULTILINE;
+
+        for (auto c : str)
+            if (std::isspace(c, std::locale::classic())) {
+                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_1) == std::string::npos)
+                    return StringOutputType::QUOTED_1;
+
+                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_2) == std::string::npos)
+                    return StringOutputType::QUOTED_2;
+
+                return StringOutputType::MULTILINE;
+            }
+
+        if (str[0] == MMCIF::DATA_NAME_PREFIX)
+            return StringOutputType::QUOTED_1;
+        
+        return StringOutputType::PLAIN;
+    }
+
+    std::size_t getMaxItemNameLength(const Biomol::MMCIFData::Category& cat)
+    {
+        std::string::size_type max_len = 0;
+
+        for (auto& item : cat)
+            max_len = std::max(max_len, item.getName().length());
+
+        return max_len;
+    }
+
+    std::size_t getMaxItemValueLength(const Biomol::MMCIFData::Item& item)
+    {
+        std::string::size_type max_len = 0;
+
+        for (auto& value : item) {
+            switch (getOutputType(value)) {
+
+                case StringOutputType::PLAIN:
+                    max_len = std::max(max_len, value.length());
+                    continue;
+
+                case StringOutputType::QUOTED_1:
+                case StringOutputType::QUOTED_2:
+                    max_len = std::max(max_len, value.length() + 2);
+
+                default:
+                    continue;
+            }
+        }
+
+        return max_len;
+    }
+
+    bool outputValue(std::ostream& os, const std::string& value, std::size_t width = 0)
+    {
+        using namespace Biomol;
+
+        switch (getOutputType(value)) {
+
+            case StringOutputType::PLAIN:
+                os << std::setw(width) << std::left << value;
+                return false;
+
+            case StringOutputType::QUOTED_1:
+                os << std::setw(width) << std::left << (MMCIF::QUOTED_STRING_DELIMITER_1 + value + MMCIF::QUOTED_STRING_DELIMITER_1);
+                return false;
+
+            case StringOutputType::QUOTED_2:
+                os << std::setw(width) << std::left << (MMCIF::QUOTED_STRING_DELIMITER_2 + value + MMCIF::QUOTED_STRING_DELIMITER_2);
+                return false;
+
+            default:
+                os << MMCIF::END_OF_LINE << MMCIF::MULTILINE_STRING_DELIMITER << value;
+
+                if (!value.empty() && value.back() != MMCIF::END_OF_LINE)
+                    os << MMCIF::END_OF_LINE;
+
+                os << MMCIF::MULTILINE_STRING_DELIMITER << MMCIF::END_OF_LINE;
+                return true;
+        }
+    }
+}
 
 
 Biomol::MMCIFData::MMCIFData(const std::string& id): id(id)
@@ -390,12 +497,12 @@ std::size_t Biomol::MMCIFData::Category::getNumValueRows() const
     if (items.empty())
         return 0;
     
-    std::size_t min_val_cnt = std::numeric_limits<std::size_t>::max();
+    std::size_t row_cnt = 0;
     
     for (auto& item : items)
-        min_val_cnt = std::min(min_val_cnt, item.getNumValues());
+        row_cnt = std::max(row_cnt, item.getNumValues());
 
-    return min_val_cnt;
+    return row_cnt;
 }
 
 
@@ -497,4 +604,63 @@ Biomol::MMCIFData::Item::ConstValueIterator Biomol::MMCIFData::Item::end() const
 Biomol::MMCIFData::Item::ValueIterator Biomol::MMCIFData::Item::end()
 {
     return values.end();
+}
+
+std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData& data)
+{
+
+    os << MMCIF::DATA_BLOCK_ID_PREFIX << data.getID() << MMCIF::END_OF_LINE << MMCIF::COMMENT_PREFIX << MMCIF::END_OF_LINE;
+
+    for (auto& cat : data)
+        os << cat << MMCIF::COMMENT_PREFIX << MMCIF::END_OF_LINE;
+
+    return os;
+}
+
+std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Category& cat)
+{
+    if (cat.getNumItems() == 0)
+        return os;
+  
+    auto num_rows = std::max(std::size_t(1), cat.getNumValueRows());
+
+    os << std::setfill(' ');
+    
+    if (num_rows == 1) {
+        auto max_name_len = getMaxItemNameLength(cat) + 3;
+
+        for (auto& item : cat) {
+            os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << std::setw(max_name_len) << std::left << item.getName();
+
+            if (!outputValue(os, item.getNumValues() != 0 ? item.getValue(0) : MMCIF:: MISSING_DATA_VALUE))
+                os << MMCIF::END_OF_LINE;
+        }
+
+        return os;
+    }
+
+    std::vector<std::size_t> field_widths;
+    
+    os << MMCIF::LOOP_KEYWORD << MMCIF::END_OF_LINE;
+
+    for (auto& item : cat) {
+        os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << item.getName() << MMCIF::END_OF_LINE;
+
+        field_widths.push_back(getMaxItemValueLength(item));
+    }
+
+    for (std::size_t i = 0, num_items = cat.getNumItems(); i < num_rows; i++) {
+        bool wrote_nl = false;
+
+        for (std::size_t j = 0; j < num_items; j++) {
+            auto& item = cat.getItem(j);
+            
+            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, field_widths[j] + (j == num_items - 1 ? 0 : 1));
+        }
+
+        if (!wrote_nl)
+            os << MMCIF::END_OF_LINE;
+    }
+    
+    return os;
 }

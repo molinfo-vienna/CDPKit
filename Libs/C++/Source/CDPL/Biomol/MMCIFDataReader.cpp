@@ -43,7 +43,10 @@ using namespace CDPL;
 
 enum Biomol::MMCIFDataReader::Token : int
 {
-    EOI = 0, PLAIN_STRING, QUOTED_STRING, MULTILINE_STRING
+    EOI = 0,
+    PLAIN_STRING,
+    QUOTED_STRING,
+    MULTILINE_STRING
 };
 
 
@@ -131,7 +134,7 @@ Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istrea
             throw Base::IOError("MMCIFDataReader: unexpected end of input while reading data value");
 
         auto cat = (data->getNumCategories() == 0 ? nullptr : &data->lastCategory());
-
+ 
         if (!cat || !Internal::isEqualCI(cat_name, cat->getName()) || (cat->getNumValueRows() > 1))
             cat = &data->addCategory(cat_name);
             
@@ -245,7 +248,12 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
 {
     enum State
     {
-        START, PLAIN_STR, QUOT_STR_1, QUOT_STR_2, ML_STR, COMMENT
+        START,
+        PLAIN_STR,
+        QUOT_STR_1,
+        QUOT_STR_2,
+        ML_STR,
+        COMMENT
     };
 
     lastStreamPos = is.tellg();
@@ -345,7 +353,6 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
 
                 if (c == MMCIF::MULTILINE_STRING_DELIMITER && newLine) {
                     newLine = false;
-                    Internal::trimString(tokenValue, false, true);
                     return MULTILINE_STRING;
                 }
 

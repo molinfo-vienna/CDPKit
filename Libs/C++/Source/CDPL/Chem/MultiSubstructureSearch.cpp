@@ -36,7 +36,14 @@ using namespace CDPL;
 
 enum Chem::MultiSubstructureSearch::Token : int
 {
-    EOI, AND, OR, XOR, NOT, LP, RP, SSID
+    EOI,
+    AND,
+    OR,
+    XOR,
+    NOT,
+    LP,
+    RP,
+    SSID
 };
 
 class Chem::MultiSubstructureSearch::ExprTreeNode

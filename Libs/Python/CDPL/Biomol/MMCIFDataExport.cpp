@@ -22,6 +22,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
@@ -43,6 +45,16 @@ namespace
     bool hasCategory(const CDPL::Biomol::MMCIFData& cif_data, const std::string& name)
     {
         return cif_data.findCategory(name);
+    }
+
+    template <typename T>
+    boost::python::object toString(const T& data)
+    {
+        std::ostringstream oss;
+
+        oss << data;
+
+        return boost::python::str(oss.str());
     }
 }
 
@@ -127,6 +139,7 @@ void CDPLPythonBiomol::exportMMCIFData()
         .def("__delitem__", static_cast<void (Biomol::MMCIFData::Category::*)(std::size_t)>(&Biomol::MMCIFData::Category::removeItem),
              (python::arg("self"), python::arg("index")))
         .def("__contains__", &hasItem, (python::arg("self"), python::arg("name")))
+        .def("__str__", &toString<Biomol::MMCIFData::Category>, python::arg("self"))
         .add_property("numValueRows", &Biomol::MMCIFData::Category::getNumValueRows)
         .add_property("numItems", &Biomol::MMCIFData::Category::getNumItems)
         .add_property("name", python::make_function(&Biomol::MMCIFData::Category::getName,
@@ -173,6 +186,7 @@ void CDPLPythonBiomol::exportMMCIFData()
         .def("__delitem__", static_cast<void (Biomol::MMCIFData::*)(std::size_t)>(&Biomol::MMCIFData::removeCategory),
              (python::arg("self"), python::arg("index")))
         .def("__contains__", &hasCategory, (python::arg("self"), python::arg("name")))
+        .def("__str__", &toString<Biomol::MMCIFData>, python::arg("self"))
         .add_property("numCategories", &Biomol::MMCIFData::getNumCategories)
         .add_property("id", python::make_function(&Biomol::MMCIFData::getID, python::return_value_policy<python::copy_const_reference>()),
                       &Biomol::MMCIFData::setID);
