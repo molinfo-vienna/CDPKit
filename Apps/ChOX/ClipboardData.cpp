@@ -36,6 +36,9 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/BasicReaction.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Biomol/ControlParameterFunctions.hpp"
+#include "CDPL/Pharm/ControlParameterFunctions.hpp"
+#include "CDPL/ConfGen/ControlParameterFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 
 
@@ -152,23 +155,36 @@ bool ClipboardData::canProcessText(const QMimeData* data)
 
     auto text = data->text().toStdString();
     StorageDataType obj;
-    
+
     for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
          it != end; ++it) {
-      
+
         try {
             std::istringstream iss(text, std::ios_base::in | std::ios_base::binary);
             auto reader = (*it)->createReader(iss);
 
-            setStrictErrorCheckingParameter(*reader, true);
+            Chem::setStrictErrorCheckingParameter(*reader, true);
+            Biomol::setStrictErrorCheckingParameter(*reader, true);
+            Pharm::setStrictErrorCheckingParameter(*reader, true);
+            ConfGen::setStrictErrorCheckingParameter(*reader, true);
 
             if (reader->read(obj))
-                return true;
+                return checkReadData(obj);
 
         } catch (std::exception& e) {}
     }
 
     return false;
+}
+
+bool ClipboardData::checkReadData(const CDPL::Chem::Molecule& mol)
+{
+    return (mol.getNumAtoms() > 0);
+}
+
+bool ClipboardData::checkReadData(const CDPL::Chem::Reaction& rxn)
+{
+    return (rxn.getNumComponents() > 0);
 }
 
 template <typename DataType, typename StorageDataType>
@@ -227,7 +243,10 @@ bool ClipboardData::readData(const CDPL::Base::DataInputHandler<DataType>& handl
 
         auto reader = handler.createReader(iss);
 
-        setStrictErrorCheckingParameter(*reader, strict);
+        Chem::setStrictErrorCheckingParameter(*reader, strict);
+        Biomol::setStrictErrorCheckingParameter(*reader, strict);
+        Pharm::setStrictErrorCheckingParameter(*reader, strict);
+        ConfGen::setStrictErrorCheckingParameter(*reader, strict);
 
         while (true) {
             RecordPtr rec_ptr(new RecordType());

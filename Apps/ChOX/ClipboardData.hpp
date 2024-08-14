@@ -32,6 +32,7 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 
 #include "DataRecord.hpp"
+#include "CDPLFwd.hpp"
 
 
 namespace ChOX
@@ -63,6 +64,9 @@ namespace ChOX
         template <typename DataType, typename StorageDataType>
         static bool canProcessText(const QMimeData* data);
 
+        static bool checkReadData(const CDPL::Chem::Molecule& mol);
+        static bool checkReadData(const CDPL::Chem::Reaction& rxn);
+        
         template <typename DataType, typename StorageDataType>
         static bool readMimeTypeData(const QMimeData* data, DataSet& data_set, int insert_idx);
 
