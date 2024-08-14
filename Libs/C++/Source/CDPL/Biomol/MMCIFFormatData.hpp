@@ -41,12 +41,15 @@ namespace CDPL
             constexpr char COMMENT_PREFIX             = '#';
             constexpr char QUOTED_STRING_DELIMITER_1  = '\'';
             constexpr char QUOTED_STRING_DELIMITER_2  = '"';
-            constexpr char MULTILINE_STRING_DELIMITER = ';';
+            constexpr char TEXT_FIELD_DELIMITER       = ';';
             constexpr char CATEGORY_NAME_SEPARATOR    = '.';
             constexpr char DATA_NAME_PREFIX           = '_';
 
             const std::string DATA_BLOCK_ID_PREFIX = "data_";
+            const std::string SAVE_FRAME_PREFIX    = "save_";
             const std::string LOOP_KEYWORD         = "loop_";
+            const std::string STOP_KEYWORD         = "stop_";
+            const std::string GLOBAL_KEYWORD       = "global_";
 
             const std::string UNDEFINED_DATA_VALUE = ".";
             const std::string MISSING_DATA_VALUE   = "?";

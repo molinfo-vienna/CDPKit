@@ -77,7 +77,6 @@ namespace CDPL
             const Base::DataIOBase& ioBase;
             std::istream::pos_type  lastStreamPos;
             std::string             tokenValue;
-            bool                    newLine;
             bool                    strictErrorChecking;
         };
     } // namespace Biomol

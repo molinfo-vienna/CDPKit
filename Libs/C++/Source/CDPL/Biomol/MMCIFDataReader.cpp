@@ -46,7 +46,7 @@ enum Biomol::MMCIFDataReader::Token : int
     EOI = 0,
     PLAIN_STRING,
     QUOTED_STRING,
-    MULTILINE_STRING
+    TEXT_FIELD
 };
 
 
@@ -60,7 +60,7 @@ bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is)
             return true;
         }            
     }
-    
+  
     return false;
 }
 
@@ -72,7 +72,7 @@ bool Biomol::MMCIFDataReader::skipMolecule(std::istream& is)
         if (token == PLAIN_STRING && Internal::startsWithCI(tokenValue, MMCIF::DATA_BLOCK_ID_PREFIX))
             return true;
     }
-
+    
     return false;
 }
 
@@ -91,7 +91,6 @@ bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol
 void Biomol::MMCIFDataReader::init(std::istream& is)
 {
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
-    newLine             = false;
 
     is.imbue(std::locale::classic());
 }
@@ -249,10 +248,13 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
     enum State
     {
         START,
+        EOL,
         PLAIN_STR,
-        QUOT_STR_1,
-        QUOT_STR_2,
-        ML_STR,
+        QUOTED_STR_1,
+        QUOTED_STR_1_END,
+        QUOTED_STR_2,
+        QUOTED_STR_2_END,
+        TXT_FIELD,
         COMMENT
     };
 
@@ -260,14 +262,11 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
     tokenValue.clear();
 
     State state = START;
-    
-    while (true) {
-        char c;
 
-        if (state != START && state != ML_STR)
-            newLine = false;
-      
-        if (!is.get(c) &&is.bad())
+    while (true) {
+        char c = 0;
+
+        if (!is.get(c) && is.bad())
             throw Base::IOError("MMCIFDataReader: stream read error");
   
         switch (state) {
@@ -279,7 +278,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 switch (c) {
 
                     case MMCIF::END_OF_LINE:
-                        newLine = true;
+                        state = EOL;
                         continue;
                         
                     case MMCIF::COMMENT_PREFIX:
@@ -287,19 +286,12 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                         continue;
 
                     case MMCIF::QUOTED_STRING_DELIMITER_1:
-                        state = QUOT_STR_1;
+                        state = QUOTED_STR_1;
                         continue;
 
                     case MMCIF::QUOTED_STRING_DELIMITER_2:
-                        state = QUOT_STR_2;
+                        state = QUOTED_STR_2;
                         continue;
-
-                    case MMCIF::MULTILINE_STRING_DELIMITER:
-                        if (newLine) {
-                            newLine = false;
-                            state = ML_STR;
-                            continue;
-                        }
                         
                     default:
                         if (std::isspace(c, std::locale::classic()))
@@ -310,6 +302,20 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                         continue;
                 }
 
+            case EOL:
+                if (is.eof())
+                    return EOI;
+                
+                if (c == MMCIF::TEXT_FIELD_DELIMITER)
+                    state = TXT_FIELD;
+
+                else {
+                    is.unget();
+                    state = START;
+                }
+
+                continue;
+                
             case COMMENT:
                 if (is.eof() || c == MMCIF::END_OF_LINE) {
                     is.unget();
@@ -319,7 +325,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                 
             case PLAIN_STR:
-                if (is.eof() || std::isspace(c, std::locale::classic()) ||  c == MMCIF::COMMENT_PREFIX) {
+                if (is.eof() || std::isspace(c, std::locale::classic())) {
                     is.unget();
                     return PLAIN_STRING;
                 }
@@ -327,41 +333,59 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 tokenValue.push_back(c);
                 continue;
                 
-            case QUOT_STR_1:
+            case QUOTED_STR_1:
                 if (is.eof() || c == MMCIF::END_OF_LINE)
                     throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
                 
                 if (c == MMCIF::QUOTED_STRING_DELIMITER_1)
-                    return QUOTED_STRING;
+                    state = QUOTED_STR_1_END;
+                else
+                    tokenValue.push_back(c);
 
-                tokenValue.push_back(c);
                 continue;
-                
-            case QUOT_STR_2:
+
+            case QUOTED_STR_1_END:
+                if (is.eof() || std::isspace(c, std::locale::classic())) {
+                    is.unget();
+                    return QUOTED_STRING;
+                }
+
+                tokenValue.push_back(MMCIF::QUOTED_STRING_DELIMITER_1);
+                tokenValue.push_back(c);
+                state = QUOTED_STR_1;
+                continue;
+                    
+            case QUOTED_STR_2:
                 if (is.eof() || c == MMCIF::END_OF_LINE)
                     throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
                 
                 if (c == MMCIF::QUOTED_STRING_DELIMITER_2)
-                    return QUOTED_STRING;
+                    state = QUOTED_STR_2_END;
+                else
+                    tokenValue.push_back(c);
 
-                tokenValue.push_back(c);
                 continue;
-                
-            case ML_STR:
-                if (is.eof()) 
-                    throw Base::IOError("MMCIFDataReader: unexpected end of input while reading multi-line string");
 
-                if (c == MMCIF::MULTILINE_STRING_DELIMITER && newLine) {
-                    newLine = false;
-                    return MULTILINE_STRING;
+            case QUOTED_STR_2_END:
+                if (is.eof() || std::isspace(c, std::locale::classic())) {
+                    is.unget();
+                    return QUOTED_STRING;
                 }
 
-                if (c == MMCIF::END_OF_LINE)
-                    newLine = true;
-
-                else if (!std::isspace(c, std::locale::classic()))
-                    newLine = false;
+                tokenValue.push_back(MMCIF::QUOTED_STRING_DELIMITER_2);
+                tokenValue.push_back(c);
+                state = QUOTED_STR_2;
+                continue;
                 
+            case TXT_FIELD:
+                if (is.eof()) 
+                    throw Base::IOError("MMCIFDataReader: unexpected end of input while reading text field");
+
+                if (c == MMCIF::TEXT_FIELD_DELIMITER && !tokenValue.empty() && tokenValue.back() == MMCIF::END_OF_LINE) {
+                    tokenValue.resize(tokenValue.length() - 1);
+                    return TEXT_FIELD;
+                }
+
                 tokenValue.push_back(c);
                 continue;
                 

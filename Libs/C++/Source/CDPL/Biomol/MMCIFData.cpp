@@ -47,9 +47,54 @@ namespace
         PLAIN,
         QUOTED_1,
         QUOTED_2,
-        MULTILINE
+        TEXT_FIELD
     };
 
+    bool containsCharFollowedByWS(char c, const std::string& str)
+    {
+        for (std::string::size_type i = str.find_first_of(c); i != std::string::npos; i = str.find_first_of(c, i)) {
+            if (i < (str.length() - 1) && std::isspace(str[i + 1]))
+                return true;
+        }
+
+        return false;
+    }
+
+    bool isOrdinaryChar(char c)
+    {
+        switch (c) {
+
+            case '!':
+            case '%':
+            case '&':
+            case '(':
+            case ')':
+            case '*':
+            case '+':
+            case ',':
+            case '-':
+            case '.':
+            case '/':
+            case ':':
+            case '<':
+            case '=':
+            case '>':
+            case '?':
+            case '@':
+            case '\\':
+            case '^':
+            case '`':
+            case '{':
+            case '|':
+            case '}':
+            case '~':
+                return true;
+
+            default:
+                return std::isalnum(c, std::locale::classic());
+        }
+    }
+    
     StringOutputType getOutputType(const std::string& str)
     {
         using namespace Biomol;
@@ -57,23 +102,38 @@ namespace
         if (str.empty())
             return StringOutputType::QUOTED_1;
         
-        if (str.find('\n') != std::string::npos)
-            return StringOutputType::MULTILINE;
+        if (str.find(MMCIF::END_OF_LINE) != std::string::npos)
+            return StringOutputType::TEXT_FIELD;
 
         for (auto c : str)
             if (std::isspace(c, std::locale::classic())) {
-                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_1) == std::string::npos)
+                if (!containsCharFollowedByWS(MMCIF::QUOTED_STRING_DELIMITER_1, str))
                     return StringOutputType::QUOTED_1;
 
-                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_2) == std::string::npos)
+                if (!containsCharFollowedByWS(MMCIF::QUOTED_STRING_DELIMITER_2, str))
                     return StringOutputType::QUOTED_2;
 
-                return StringOutputType::MULTILINE;
+                return StringOutputType::TEXT_FIELD;
             }
 
-        if (str[0] == MMCIF::DATA_NAME_PREFIX)
+        if (!isOrdinaryChar(str[0]))
             return StringOutputType::QUOTED_1;
-        
+
+        if (Internal::isEqualCI(str, MMCIF::LOOP_KEYWORD))
+            return StringOutputType::QUOTED_1;
+
+        if (Internal::isEqualCI(str, MMCIF::STOP_KEYWORD))
+            return StringOutputType::QUOTED_1;
+
+        if (Internal::isEqualCI(str, MMCIF::GLOBAL_KEYWORD))
+            return StringOutputType::QUOTED_1;
+
+        if (Internal::startsWithCI(str, MMCIF::DATA_BLOCK_ID_PREFIX))
+            return StringOutputType::QUOTED_1;
+
+        if (Internal::startsWithCI(str, MMCIF::SAVE_FRAME_PREFIX))
+            return StringOutputType::QUOTED_1;
+                
         return StringOutputType::PLAIN;
     }
 
@@ -129,12 +189,12 @@ namespace
                 return false;
 
             default:
-                os << MMCIF::END_OF_LINE << MMCIF::MULTILINE_STRING_DELIMITER << value;
+                os << MMCIF::END_OF_LINE << MMCIF::TEXT_FIELD_DELIMITER << value;
 
                 if (!value.empty() && value.back() != MMCIF::END_OF_LINE)
                     os << MMCIF::END_OF_LINE;
 
-                os << MMCIF::MULTILINE_STRING_DELIMITER << MMCIF::END_OF_LINE;
+                os << MMCIF::TEXT_FIELD_DELIMITER << MMCIF::END_OF_LINE;
                 return true;
         }
     }
@@ -655,7 +715,7 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
         for (std::size_t j = 0; j < num_items; j++) {
             auto& item = cat.getItem(j);
             
-            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, field_widths[j] + (j == num_items - 1 ? 0 : 1));
+            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, field_widths[j] + 1);
         }
 
         if (!wrote_nl)
