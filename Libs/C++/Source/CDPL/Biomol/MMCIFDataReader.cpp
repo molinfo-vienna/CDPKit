@@ -102,7 +102,7 @@ Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istrea
 
     if (!nextToken(is))
         throw Base::IOError("MMCIFDataReader: unexpected end of input while reading data block identifier");
-
+    
     assert(tokenValue.length() >= MMCIF::DATA_BLOCK_ID_PREFIX.length());
  
     MMCIFData::SharedPointer data(new MMCIFData(tokenValue.substr(MMCIF::DATA_BLOCK_ID_PREFIX.length())));
@@ -268,11 +268,11 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
 
         if (!is.get(c) && is.bad())
             throw Base::IOError("MMCIFDataReader: stream read error");
-  
+   
         switch (state) {
 
             case START:
-                if (is.eof())
+                if (!c)
                     return EOI;
 
                 switch (c) {
@@ -303,7 +303,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 }
 
             case EOL:
-                if (is.eof())
+                if (!c)
                     return EOI;
                 
                 if (c == MMCIF::TEXT_FIELD_DELIMITER)
@@ -317,7 +317,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                 
             case COMMENT:
-                if (is.eof() || c == MMCIF::END_OF_LINE) {
+                if (!c || c == MMCIF::END_OF_LINE) {
                     is.unget();
                     state = START;
                 }
@@ -325,7 +325,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                 
             case PLAIN_STR:
-                if (is.eof() || std::isspace(c, std::locale::classic())) {
+                if (!c || std::isspace(c, std::locale::classic())) {
                     is.unget();
                     return PLAIN_STRING;
                 }
@@ -334,7 +334,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                 
             case QUOTED_STR_1:
-                if (is.eof() || c == MMCIF::END_OF_LINE)
+                if (!c || c == MMCIF::END_OF_LINE)
                     throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
                 
                 if (c == MMCIF::QUOTED_STRING_DELIMITER_1)
@@ -345,7 +345,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
 
             case QUOTED_STR_1_END:
-                if (is.eof() || std::isspace(c, std::locale::classic())) {
+                if (!c || std::isspace(c, std::locale::classic())) {
                     is.unget();
                     return QUOTED_STRING;
                 }
@@ -356,7 +356,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                     
             case QUOTED_STR_2:
-                if (is.eof() || c == MMCIF::END_OF_LINE)
+                if (!c || c == MMCIF::END_OF_LINE)
                     throw Base::IOError("MMCIFDataReader: unexpected end of input while reading quoted string");
                 
                 if (c == MMCIF::QUOTED_STRING_DELIMITER_2)
@@ -367,7 +367,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
 
             case QUOTED_STR_2_END:
-                if (is.eof() || std::isspace(c, std::locale::classic())) {
+                if (!c || std::isspace(c, std::locale::classic())) {
                     is.unget();
                     return QUOTED_STRING;
                 }
@@ -378,7 +378,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
                 
             case TXT_FIELD:
-                if (is.eof()) 
+                if (!c) 
                     throw Base::IOError("MMCIFDataReader: unexpected end of input while reading text field");
 
                 if (c == MMCIF::TEXT_FIELD_DELIMITER && !tokenValue.empty() && tokenValue.back() == MMCIF::END_OF_LINE) {
