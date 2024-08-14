@@ -121,20 +121,11 @@ QStringList ClipboardData::getChemDataFiles(const QMimeData* data)
             continue;
 
         auto file_name = url.fileName().toStdString();
-        auto can_handle = false;
-        
-        for (auto i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
-            auto file_ext = file_name.substr(++i);
 
-            if (Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext) ||
-                Base::DataIOManager<Chem::Reaction>::getInputHandlerByFileExtension(file_ext)) {
-                can_handle = true;
-                break;
-            }
-        }
-
-        if (can_handle)
+        if (Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileName(file_name) ||
+            Base::DataIOManager<Chem::Reaction>::getInputHandlerByFileName(file_name)) {
             files.append(url.path());
+        }
     }
 
     return files;
@@ -164,7 +155,7 @@ bool ClipboardData::canProcessText(const QMimeData* data)
     
     for (auto it = Base::DataIOManager<DataType>::getInputHandlersBegin(), end = Base::DataIOManager<DataType>::getInputHandlersEnd();
          it != end; ++it) {
-
+      
         try {
             std::istringstream iss(text, std::ios_base::in | std::ios_base::binary);
             auto reader = (*it)->createReader(iss);

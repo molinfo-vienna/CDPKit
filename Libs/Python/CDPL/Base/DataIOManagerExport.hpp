@@ -62,6 +62,8 @@ namespace CDPLPythonBase
                 .staticmethod("getInputHandlerByName")
                 .def("getInputHandlerByFileExtension", &ManagerType::getInputHandlerByFileExtension, python::arg("file_ext"))
                 .staticmethod("getInputHandlerByFileExtension")
+                .def("getInputHandlerByFileName", &ManagerType::getInputHandlerByFileName, python::arg("file_name"))
+                .staticmethod("getInputHandlerByFileName")
                 .def("getInputHandlerByMimeType", &ManagerType::getInputHandlerByMimeType, python::arg("mime_type"))
                 .staticmethod("getInputHandlerByMimeType")
                 .def("unregisterInputHandler", static_cast<bool (*)(const Base::DataFormat&)>(&ManagerType::unregisterInputHandler),
@@ -89,6 +91,8 @@ namespace CDPLPythonBase
                 .staticmethod("getOutputHandlerByName")
                 .def("getOutputHandlerByFileExtension", &ManagerType::getOutputHandlerByFileExtension, python::arg("file_ext"))
                 .staticmethod("getOutputHandlerByFileExtension")
+                .def("getOutputHandlerByFileName", &ManagerType::getOutputHandlerByFileName, python::arg("file_name"))
+                .staticmethod("getOutputHandlerByFileName")
                 .def("getOutputHandlerByMimeType", &ManagerType::getOutputHandlerByMimeType, python::arg("mime_type"))
                 .staticmethod("getOutputHandlerByMimeType")
                 .def("unregisterOutputHandler", static_cast<bool (*)(const Base::DataFormat&)>(&ManagerType::unregisterOutputHandler),

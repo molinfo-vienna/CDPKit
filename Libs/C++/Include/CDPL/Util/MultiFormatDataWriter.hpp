@@ -100,19 +100,14 @@ namespace CDPL
 template <typename DataType>
 CDPL::Util::MultiFormatDataWriter<DataType>::MultiFormatDataWriter(const std::string& file_name, std::ios_base::openmode mode)
 {
-    for (std::string::size_type i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
-        const auto& handler = Base::DataIOManager<DataType>::getOutputHandlerByFileExtension(file_name.substr(++i));
 
-        if (!handler)
-            continue;
+    const auto& handler = Base::DataIOManager<DataType>::getOutputHandlerByFileName(file_name);
 
-        writerPtr = handler->createWriter(file_name, mode);
-        dataFormat = handler->getDataFormat();
-        break;
-    }
-
-    if (!writerPtr)
+    if (!handler)
         throw Base::IOError("MultiFormatDataWriter: could not deduce data format of '" + file_name + "'");
+
+    writerPtr = handler->createWriter(file_name, mode);
+    dataFormat = handler->getDataFormat();
 
     init();
 }

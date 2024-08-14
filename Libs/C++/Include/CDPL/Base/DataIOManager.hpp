@@ -283,6 +283,15 @@ namespace CDPL
             static InputHandlerPointer getInputHandlerByFileExtension(const std::string& file_ext);
 
             /**
+             * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format matching the extension of \a file_name.
+             * \param file_name Specifies the file name for which to search for a data format that matches its extension.
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format matching the extension of \a file_name, or \e null if
+             *         not available.
+             * \note The matching of the file extension is not case-sensitive.
+             */
+            static InputHandlerPointer getInputHandlerByFileName(const std::string& file_name);
+
+            /**
              * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
              *                  requested Base::DataInputHandler implementation instance.
@@ -319,6 +328,15 @@ namespace CDPL
              */
             static OutputHandlerPointer getOutputHandlerByFileExtension(const std::string& file_ext);
 
+            /**
+             * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format matching the extension of \a file_name.
+             * \param file_name Specifies the file name for which to search for a data format that matches its extension.
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format matching the extension of \a file_name, or \e null if
+             *         not available.
+             * \note The matching of the file extension is not case-sensitive.
+             */
+            static OutputHandlerPointer getOutputHandlerByFileName(const std::string& file_name);
+            
             /**
              * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
@@ -582,6 +600,26 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
 }
 
 template <typename T>
+typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByFileName(const std::string& file_name)
+{
+    auto& handlers = getInstance().inputHandlers;
+    std::string file_ext;
+
+    for (std::string::size_type i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
+        file_ext = file_name.substr(++i);
+
+        auto it = std::find_if(handlers.begin(), handlers.end(), [&](const InputHandlerPointer& handler) {
+            return handler->getDataFormat().matchesFileExtension(file_ext);
+        });
+
+        if (it != handlers.end())
+            return *it;
+    }
+
+    return InputHandlerPointer();
+}
+
+template <typename T>
 typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByName(const std::string& name)
 {
     const InputHandlerList& handlers = getInstance().inputHandlers;
@@ -638,6 +676,26 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
                                                                            std::bind(&DataOutputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                            std::ref(file_ext)));
     return (it == handlers.end() ? OutputHandlerPointer() : *it);
+}
+
+template <typename T>
+typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getOutputHandlerByFileName(const std::string& file_name)
+{
+    auto& handlers = getInstance().outputHandlers;
+    std::string file_ext;
+
+    for (std::string::size_type i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
+        file_ext = file_name.substr(++i);
+
+        auto it = std::find_if(handlers.begin(), handlers.end(), [&](const OutputHandlerPointer& handler) {
+            return handler->getDataFormat().matchesFileExtension(file_ext);
+        });
+
+        if (it != handlers.end())
+            return *it;
+    }
+
+    return OutputHandlerPointer();
 }
 
 template <typename T>

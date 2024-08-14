@@ -109,19 +109,13 @@ namespace CDPL
 template <typename DataType>
 CDPL::Util::MultiFormatDataReader<DataType>::MultiFormatDataReader(const std::string& file_name, std::ios_base::openmode mode)
 {
-    for (std::string::size_type i = file_name.find_first_of('.', 0); i != std::string::npos; i = file_name.find_first_of('.', i)) {
-        const auto& handler = Base::DataIOManager<DataType>::getInputHandlerByFileExtension(file_name.substr(++i));
+    const auto& handler = Base::DataIOManager<DataType>::getInputHandlerByFileName(file_name);
 
-        if (!handler)
-            continue;
-
-        readerPtr = handler->createReader(file_name, mode);
-        dataFormat = handler->getDataFormat();
-        break;
-    }
-
-    if (!readerPtr)
+    if (!handler)
         throw Base::IOError("MultiFormatDataReader: could not deduce data format of '" + file_name + "'");
+
+    readerPtr = handler->createReader(file_name, mode);
+    dataFormat = handler->getDataFormat();
 
     init();
 }
