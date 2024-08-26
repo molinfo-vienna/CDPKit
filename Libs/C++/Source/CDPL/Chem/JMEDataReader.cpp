@@ -57,6 +57,8 @@ using namespace CDPL;
 
 bool Chem::JMEDataReader::readReaction(std::istream& is, Reaction& rxn)
 {
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
     if (!hasMoreData(is))
         return false;
 
@@ -64,19 +66,20 @@ bool Chem::JMEDataReader::readReaction(std::istream& is, Reaction& rxn)
         
     atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
-    unsigned int rxn_role = ReactionRole::REACTANT;
+    auto rxn_role = ReactionRole::REACTANT;
     bool read_comp = false;
     bool seen_delim = false;
+    auto rdbuf = is.rdbuf();
 
     while (true) {
-        char c;
+        int tmp = rdbuf->sbumpc();
 
-        if (!is.get(c)) {
-            if (is.eof())
-                break;
-
-            throw Base::IOError("JMEDataReader: unspecified input error while reading reaction");
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            break;
         }
+
+        char c = std::istream::traits_type::to_char_type(tmp);
 
         if (std::isspace(c, is.getloc()))
             break;
@@ -111,7 +114,7 @@ bool Chem::JMEDataReader::readReaction(std::istream& is, Reaction& rxn)
                 break;
         }
 
-        is.putback(c);
+        rdbuf->sungetc();
 
         if (read_comp && !seen_delim) {
             if (strictErrorChecking)
@@ -134,24 +137,27 @@ bool Chem::JMEDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 bool Chem::JMEDataReader::skipReaction(std::istream& is)
 {
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
     if (!hasMoreData(is))
         return false;
 
     init();
         
-    unsigned int rxn_role = ReactionRole::REACTANT;
+    auto rxn_role = ReactionRole::REACTANT;
     bool read_comp = false;
     bool seen_delim = false;
-
+    auto rdbuf = is.rdbuf();
+    
     while (true) {
-        char c;
+        int tmp = rdbuf->sbumpc();
 
-        if (!is.get(c)) {
-            if (is.eof())
-                break;
-
-            throw Base::IOError("JMEDataReader: unspecified input error while skipping reaction data");
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            break;
         }
+
+        char c = std::istream::traits_type::to_char_type(tmp);
 
         if (std::isspace(c, is.getloc()))
             break;
@@ -186,7 +192,7 @@ bool Chem::JMEDataReader::skipReaction(std::istream& is)
                 break;
         }
 
-        is.putback(c);
+        rdbuf->sungetc();
 
         if (read_comp && !seen_delim) {
             if (strictErrorChecking)

@@ -105,8 +105,11 @@ namespace
         if (str.find(MMCIF::END_OF_LINE) != std::string::npos)
             return StringOutputType::TEXT_FIELD;
 
+        if (str.find('\r') != std::string::npos)
+            return StringOutputType::TEXT_FIELD;
+
         for (auto c : str)
-            if (std::isspace(c, std::locale::classic())) {
+            if (c == '[' || c == ']' || MMCIF::isSpace(c)) {
                 if (!containsCharFollowedByWS(MMCIF::QUOTED_STRING_DELIMITER_1, str))
                     return StringOutputType::QUOTED_1;
 
@@ -189,12 +192,8 @@ namespace
                 return false;
 
             default:
-                os << MMCIF::END_OF_LINE << MMCIF::TEXT_FIELD_DELIMITER << value;
-
-                if (!value.empty() && value.back() != MMCIF::END_OF_LINE)
-                    os << MMCIF::END_OF_LINE;
-
-                os << MMCIF::TEXT_FIELD_DELIMITER << MMCIF::END_OF_LINE;
+                os << MMCIF::END_OF_LINE << MMCIF::TEXT_FIELD_DELIMITER << value << MMCIF::END_OF_LINE
+                   << MMCIF::TEXT_FIELD_DELIMITER << MMCIF::END_OF_LINE;
                 return true;
         }
     }

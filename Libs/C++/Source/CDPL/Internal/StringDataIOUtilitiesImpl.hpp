@@ -36,9 +36,24 @@ void CDPL::Internal::checkStreamState(const std::istream& is, const char* err_ms
 
 void CDPL::Internal::skipChars(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
     char c = 0;
+    auto rdbuf = is.rdbuf();
     
-    for (std::size_t i = 0; i < count && is.get(c) && c != eol_char; i++);
+    for (std::size_t i = 0; i < count; i++) {
+        int tmp = rdbuf->sbumpc();
+
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            break;
+        }
+
+        c = std::istream::traits_type::to_char_type(tmp);
+
+        if (c == eol_char)
+            break;
+    }
 
     checkStreamState(is, err_msg);
 
@@ -48,23 +63,22 @@ void CDPL::Internal::skipChars(std::istream& is, std::size_t count, const char* 
 
 bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, const char* err_msg, bool pos_after)
 {
-    std::size_t str_len = str.length();
+    static constexpr int EOF_ = std::istream::traits_type::eof();
 
+    std::size_t str_len = str.length();
+    auto rdbuf = is.rdbuf();
+    
     while (true) {
         std::istream::pos_type last_spos = is.tellg();
         std::size_t i = 0;
 
         for ( ; i < str_len; i++) {
-            char c;
+            int tmp = rdbuf->sbumpc();
 
-            if (!is.get(c)) {
-                if (is.bad() || !is.eof())
-                    throw Base::IOError(std::string(err_msg) + ": stream read error");
-
+            if (std::istream::traits_type::eq_int_type(tmp, EOF_))
                 return false;
-            }
 
-            if (c != str[i]) {
+            if (std::istream::traits_type::to_char_type(tmp) != str[i]) {
                 is.seekg(last_spos + std::istream::pos_type(1));
                 break;
             }
@@ -83,17 +97,18 @@ bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, cons
 
 bool CDPL::Internal::readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg, bool inc_str)
 {
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
     std::size_t str_len = str.length();
-
+    auto rdbuf = is.rdbuf();
+    
     while (true) {
-        char c;
+        int tmp = rdbuf->sbumpc();
 
-        if (!is.get(c)) {
-            if (is.bad() || !is.eof())
-                throw Base::IOError(std::string(err_msg) + ": stream read error");
-            
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_))
             return false;
-        }
+
+        char c = std::istream::traits_type::to_char_type(tmp);
 
         data.push_back(c);
 
@@ -127,7 +142,7 @@ void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* 
 }
         
 std::string& CDPL::Internal::readLine(std::istream& is, std::string& line, const char* err_msg, bool trim, 
-                                bool check_ll, std::size_t max_llen, char eol_char)
+                                      bool check_ll, std::size_t max_llen, char eol_char)
 {
     std::getline(is, line, eol_char);
 
@@ -146,16 +161,31 @@ std::string& CDPL::Internal::readLine(std::istream& is, std::string& line, const
 }
 
 std::string& CDPL::Internal::readString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
-                                  const char* err_msg, bool trim, char eol_char)
+                                        const char* err_msg, bool trim, char eol_char)
 {
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
     if (clear)
         str.clear();
 
     char c = 0;
     std::size_t ws_erase_beg = 0;
     bool skip_ws = trim;
+    auto rdbuf = is.rdbuf();
+    
+    for (std::size_t i = 0; i < field_size; i++) {
+        int tmp = rdbuf->sbumpc();
 
-    for (std::size_t i = 0; i < field_size && is.get(c) && c != eol_char; i++) {
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            break;
+        }
+
+        c = std::istream::traits_type::to_char_type(tmp);
+
+        if (c == eol_char)
+            break;
+
         if (skip_ws && std::isspace(c, std::locale::classic()))
             continue;
 
@@ -179,7 +209,7 @@ std::string& CDPL::Internal::readString(std::istream& is, std::size_t field_size
 }
 
 void CDPL::Internal::writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
-                         bool check_llen, bool trim, bool trunc, std::size_t max_llen, char eol_char)
+                               bool check_llen, bool trim, bool trunc, std::size_t max_llen, char eol_char)
 {
     if (check_llen && line.size() > max_llen) {
         if (trim) {
@@ -210,7 +240,7 @@ void CDPL::Internal::writeLine(std::ostream& os, const std::string& line, const 
 }
 
 void CDPL::Internal::writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
-                           const char* err_msg, bool trim, bool trunc, bool align_right)
+                                 const char* err_msg, bool trim, bool trunc, bool align_right)
 {
     os << std::setw(field_size);
 

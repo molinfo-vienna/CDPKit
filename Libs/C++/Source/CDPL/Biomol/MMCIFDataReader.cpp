@@ -258,17 +258,27 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
         COMMENT
     };
 
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+    
     lastStreamPos = is.tellg();
     tokenValue.clear();
-
-    State state = START;
-
+    
+    auto state = START;
+    auto rdbuf = is.rdbuf();
+    
     while (true) {
-        char c = 0;
+        int tmp = rdbuf->sbumpc();
+        char c = (std::istream::traits_type::eq_int_type(tmp, EOF_) ? char(0) : std::istream::traits_type::to_char_type(tmp));
 
-        if (!is.get(c) && is.bad())
-            throw Base::IOError("MMCIFDataReader: stream read error");
-   
+        if (c == '\r') {
+            tmp = rdbuf->sgetc();
+
+            if (!std::istream::traits_type::eq_int_type(tmp, EOF_) && std::istream::traits_type::to_char_type(tmp) == MMCIF::END_OF_LINE)
+                rdbuf->sbumpc();
+
+            c = MMCIF::END_OF_LINE;
+        }
+
         switch (state) {
 
             case START:
@@ -294,7 +304,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                         continue;
                         
                     default:
-                        if (std::isspace(c, std::locale::classic()))
+                        if (MMCIF::isSpace(c))
                             continue;
 
                         tokenValue.push_back(c);
@@ -310,7 +320,7 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                     state = TXT_FIELD;
 
                 else {
-                    is.unget();
+                    rdbuf->sungetc();
                     state = START;
                 }
 
@@ -318,15 +328,19 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 
             case COMMENT:
                 if (!c || c == MMCIF::END_OF_LINE) {
-                    is.unget();
+                    if (c)
+                        rdbuf->sungetc();
+
                     state = START;
                 }
 
                 continue;
                 
             case PLAIN_STR:
-                if (!c || std::isspace(c, std::locale::classic())) {
-                    is.unget();
+                if (!c || MMCIF::isSpace(c)) {
+                    if (c)
+                        rdbuf->sungetc();
+
                     return PLAIN_STRING;
                 }
 
@@ -345,8 +359,10 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
 
             case QUOTED_STR_1_END:
-                if (!c || std::isspace(c, std::locale::classic())) {
-                    is.unget();
+                if (!c || MMCIF::isSpace(c)) {
+                    if (c)
+                        rdbuf->sungetc();
+
                     return QUOTED_STRING;
                 }
 
@@ -367,8 +383,10 @@ Biomol::MMCIFDataReader::Token Biomol::MMCIFDataReader::nextToken(std::istream& 
                 continue;
 
             case QUOTED_STR_2_END:
-                if (!c || std::isspace(c, std::locale::classic())) {
-                    is.unget();
+                if (!c || MMCIF::isSpace(c)) {
+                    if (c)
+                        rdbuf->sungetc();
+                    
                     return QUOTED_STRING;
                 }
 

@@ -115,11 +115,26 @@ namespace CDPL
         T readNumber(std::istream& is, const char* err_msg = "Error", bool throw_ex = true,
                      const T empty_def_val = T(0), const T err_def_val = T(0), char eol_char = '\n')
         {
+            static constexpr int EOF_ = std::istream::traits_type::eof();
+            
             char  buf[FieldSize + 1];
             char* buf_end_ptr = buf;
             char  c           = 0;
+            auto  rdbuf       = is.rdbuf();
 
-            for (std::size_t i = 0; i < FieldSize && is.get(c) && c != eol_char; i++) {
+            for (std::size_t i = 0; i < FieldSize; i++) {
+                int tmp = rdbuf->sbumpc();
+
+                if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+                    is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+                    break;
+                }
+                
+                c = std::istream::traits_type::to_char_type(tmp);
+
+                if (c == eol_char)
+                    break;
+                
                 if (std::isspace(c, std::locale::classic()))
                     continue;
 

@@ -53,6 +53,24 @@ namespace CDPL
 
             const std::string UNDEFINED_DATA_VALUE = ".";
             const std::string MISSING_DATA_VALUE   = "?";
+
+
+            inline bool isSpace(char c)
+            {
+
+                switch (c) {
+
+                    case ' ':
+                    case '\t':
+                    case '\r':
+                    case END_OF_LINE:
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+            
         } // namespace MMCIF
     } // namespace Biomol
 } // namespace CDPL
