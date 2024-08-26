@@ -30,6 +30,8 @@
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -82,7 +84,12 @@ bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol
 
     if (!data)
         return false;
-    
+
+    if (data->findCategory(MMCIF::Category::AtomSite::NAME))
+        readMacroMolecule(*data, mol);
+    else if (data->findCategory(MMCIF::Category::ChemComp::NAME))
+        readCompMolecules(*data, mol);
+        
     setMMCIFData(mol, data);
     
     return true;
@@ -93,6 +100,27 @@ void Biomol::MMCIFDataReader::init(std::istream& is)
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
 
     is.imbue(std::locale::classic());
+}
+
+void Biomol::MMCIFDataReader::readMacroMolecule(const MMCIFData& data, Chem::Molecule& mol)
+{
+}
+
+void Biomol::MMCIFDataReader::readCompMolecules(const MMCIFData& data, Chem::Molecule& mol)
+{
+    auto comp_atoms = data.findCategory(MMCIF::Category::ChemCompAtom::NAME);
+
+    if (!comp_atoms)
+        return;
+
+    auto num_atoms = comp_atoms->getNumValueRows();
+
+    if (num_atoms == 0)
+        return;
+
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        //auto& atom = mol.addAtom();
+    }
 }
 
 Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istream& is)
@@ -112,6 +140,8 @@ Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istrea
         if (token != PLAIN_STRING) {
             if (strictErrorChecking)
                 throw Base::IOError("MMCIFDataReader: invalid data name or keyword");
+
+            continue;
         }
         
         assert(!tokenValue.empty());

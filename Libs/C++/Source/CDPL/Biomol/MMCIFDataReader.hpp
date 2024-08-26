@@ -57,12 +57,15 @@ namespace CDPL
 
             bool hasMoreData(std::istream& is);
             bool skipMolecule(std::istream& is);
-            bool readMolecule(std::istream& is, Chem::Molecule&);
+            bool readMolecule(std::istream& is, Chem::Molecule& mol);
 
           private:
             enum Token : int;
 
             void init(std::istream&);
+
+            void readMacroMolecule(const MMCIFData& data, Chem::Molecule& mol);
+            void readCompMolecules(const MMCIFData& data, Chem::Molecule& mol);
             
             MMCIFData::SharedPointer parseInput(std::istream& is);
 
