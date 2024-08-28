@@ -26,12 +26,25 @@
 
 #include <locale>
 #include <cassert>
+#include <stdexcept>
+
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/CIPDescriptor.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -43,6 +56,116 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+    inline std::string getFQItemName(const Biomol::MMCIFData::Category* cat, const Biomol::MMCIFData::Item* item)
+    {
+        return ('_' + cat->getName() + '.' + item->getName());
+    }
+    
+    void throwFormatError(const Biomol::MMCIFData::Category* cat, const Biomol::MMCIFData::Item* item, std::size_t row_idx)
+    {
+        if (item->getNumValues() == 1)
+            throw Base::IOError("MMCIFDataReader: " + getFQItemName(cat, item) + ": invalid value format");
+        else
+            throw Base::IOError("MMCIFDataReader: " + getFQItemName(cat, item) +
+                                ": invalid value format at data row " + std::to_string(row_idx));
+    }
+
+    void throwRangeError(const Biomol::MMCIFData::Category* cat, const Biomol::MMCIFData::Item* item, std::size_t row_idx)
+    {
+        if (item->getNumValues() == 1)
+            throw Base::IOError("MMCIFDataReader: " + getFQItemName(cat, item) + ": value out of range");
+        else
+            throw Base::IOError("MMCIFDataReader: " + getFQItemName(cat, item) +
+                                ": value at data row " + std::to_string(row_idx) + " out of range");
+    }
+
+    inline void convert(const std::string& val_str, double& value, std::size_t& end_pos)
+    {
+        value = std::stod(val_str, &end_pos);
+    }
+
+    inline void convert(const std::string& val_str, std::size_t& value, std::size_t& end_pos)
+    {
+        value = std::stoul(val_str, &end_pos);
+    }
+
+    inline void convert(const std::string& val_str, long& value, std::size_t& end_pos)
+    {
+        value = std::stol(val_str, &end_pos);
+    }
+
+    inline void convert(const std::string& val_str, bool& value, std::size_t& end_pos)
+    {
+        using namespace Biomol;
+        
+        if (Internal::isEqualCI(val_str, MMCIF::TRUE_FLAG)) {
+            value = true;
+            end_pos = MMCIF::TRUE_FLAG.length();
+            
+        } else if (Internal::isEqualCI(val_str, MMCIF::FALSE_FLAG)) {
+            value = false;
+            end_pos = MMCIF::FALSE_FLAG.length();
+
+        } else
+            end_pos = std::string::npos;
+    }
+
+    inline bool valUndefOrMissing(const std::string& val_str)
+    {
+        using namespace Biomol;
+
+        return (val_str == MMCIF::UNDEFINED_DATA_VALUE || val_str == MMCIF::MISSING_DATA_VALUE);
+    }
+
+    inline const std::string* getValue(const Biomol::MMCIFData::Item* item, std::size_t row_idx)
+    {
+        if (!item)
+            return nullptr;
+
+        auto& val = item->getValue(row_idx);
+
+        if (valUndefOrMissing(val))
+            return nullptr;
+
+        return &val;
+    }
+    
+    template <typename T>
+    bool getValue(const Biomol::MMCIFData::Category* cat, const Biomol::MMCIFData::Item* item, std::size_t row_idx, T& value)
+    {
+        using namespace Biomol;
+
+        if (!item)
+            return false;
+        
+        auto& val_str = item->getValue(row_idx);
+
+        if (valUndefOrMissing(val_str))
+            return false;
+        
+        try {
+            std::size_t end_pos;
+
+            convert(val_str, value, end_pos);
+
+            if (end_pos != val_str.length())
+                throwFormatError(cat, item, row_idx);
+            
+        } catch (const std::invalid_argument& e) {
+            throwFormatError(cat, item, row_idx);
+
+        } catch (const std::out_of_range & e) {
+            throwRangeError(cat, item, row_idx);
+        }
+
+        return true;
+    }
+}
+
+
 enum Biomol::MMCIFDataReader::Token : int
 {
     EOI = 0,
@@ -50,6 +173,17 @@ enum Biomol::MMCIFDataReader::Token : int
     QUOTED_STRING,
     TEXT_FIELD
 };
+
+
+std::size_t Biomol::MMCIFDataReader::CompAtomIDHash::operator()(const CompAtomID& atom_id) const
+{
+    std::size_t h = 0;
+
+    boost::hash_combine(h, *atom_id.first);
+    boost::hash_combine(h, *atom_id.second);
+
+    return h;
+}
 
 
 bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is)
@@ -86,11 +220,14 @@ bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol
         return false;
 
     if (data->findCategory(MMCIF::Category::AtomSite::NAME))
-        readMacroMolecule(*data, mol);
+        readMacromolecule(*data, mol);
     else if (data->findCategory(MMCIF::Category::ChemComp::NAME))
-        readCompMolecules(*data, mol);
+        readChemComponents(*data, mol);
         
     setMMCIFData(mol, data);
+
+    if (!hasName(mol))
+        setName(mol, data->getID());
     
     return true;
 }
@@ -102,12 +239,20 @@ void Biomol::MMCIFDataReader::init(std::istream& is)
     is.imbue(std::locale::classic());
 }
 
-void Biomol::MMCIFDataReader::readMacroMolecule(const MMCIFData& data, Chem::Molecule& mol)
+void Biomol::MMCIFDataReader::readMacromolecule(const MMCIFData& data, Chem::Molecule& mol)
 {
 }
 
-void Biomol::MMCIFDataReader::readCompMolecules(const MMCIFData& data, Chem::Molecule& mol)
+void Biomol::MMCIFDataReader::readChemComponents(const MMCIFData& data, Chem::Molecule& mol)
 {
+    readComponentAtoms(data, mol);
+    readComponentBonds(data, mol);
+}
+
+void Biomol::MMCIFDataReader::readComponentAtoms(const MMCIFData& data, Chem::Molecule& mol)
+{
+    compAtomLookupMap.clear();
+    
     auto comp_atoms = data.findCategory(MMCIF::Category::ChemCompAtom::NAME);
 
     if (!comp_atoms)
@@ -118,8 +263,212 @@ void Biomol::MMCIFDataReader::readCompMolecules(const MMCIFData& data, Chem::Mol
     if (num_atoms == 0)
         return;
 
+    auto comp_ids = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::COMP_ID);
+    auto ids = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::ATOM_ID);
+    auto alt_ids = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::ALT_ATOM_ID);
+    auto type_syms = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::TYPE_SYMBOL);
+    auto coords_x = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::COORDS_X);
+    auto coords_y = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::COORDS_Y);
+    auto coords_z = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::COORDS_Z);
+    auto ideal_coords_x = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_IDEAL_COORDS_X);
+    auto ideal_coords_y = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_IDEAL_COORDS_Y);
+    auto ideal_coords_z = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_IDEAL_COORDS_Z);
+    auto leaving_flags = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_LEAVING_ATOM_FLAG);
+    auto arom_flags = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_AROM_FLAG);
+    auto form_charges = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::CHARGE);
+    auto sto_configs = comp_atoms->findItem(MMCIF::Category::ChemCompAtom::Item::PDBX_STEREO_CONFIG);
+
+    long int_val = 0;
+    bool bool_val = 0;
+    Math::Vector3D coords;
+    Math::Vector3D ideal_coords;
+    
     for (std::size_t i = 0; i < num_atoms; i++) {
-        //auto& atom = mol.addAtom();
+        auto& atom = mol.addAtom();
+        auto* comp_id = getValue(comp_ids, i);
+        
+        if (comp_id)
+            setResidueCode(atom, *comp_id);
+        
+        if (auto* id = getValue(ids, i)) {
+            setResidueAtomName(atom, *id);
+
+            if (comp_id)
+                compAtomLookupMap.emplace(CompAtomID{comp_id, id}, mol.getNumAtoms() - 1);
+        }
+
+        if (auto* alt_id = getValue(alt_ids, i))
+            setResidueAltAtomName(atom, *alt_id);
+
+        if (auto* type_sym = getValue(type_syms, i)) {
+            auto atom_type = Chem::AtomDictionary::getType(*type_sym);
+
+            if (atom_type == Chem::AtomType::UNKNOWN) {
+                if (strictErrorChecking)
+                    throw Base::IOError("MMCIFDataReader: " + getFQItemName(comp_atoms, type_syms) +
+                                        ": unknown atom type symbol '" + *type_sym +
+                                        (num_atoms > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+
+                setSymbol(atom, *type_sym);
+                
+            } else
+                setSymbol(atom, Chem::AtomDictionary::getSymbol(atom_type));
+
+            setType(atom, atom_type);
+        }
+
+        if (getValue(comp_atoms, form_charges, i, int_val))
+            setFormalCharge(atom, int_val);
+
+        if (getValue(comp_atoms, arom_flags, i, bool_val))
+            setAromaticityFlag(atom, bool_val);
+
+        if (getValue(comp_atoms, leaving_flags, i, bool_val))
+            setResidueLeavingAtomFlag(atom, bool_val);
+
+        bool have_coords = getValue(comp_atoms, coords_x, i, coords[0]) &&
+                           getValue(comp_atoms, coords_y, i, coords[1]) &&
+                           getValue(comp_atoms, coords_z, i, coords[2]);
+        bool have_ideal_coords = getValue(comp_atoms, ideal_coords_x, i, ideal_coords[0]) &&
+                                 getValue(comp_atoms, ideal_coords_y, i, ideal_coords[1]) &&
+                                 getValue(comp_atoms, ideal_coords_z, i, ideal_coords[2]);
+
+        if (have_coords && have_ideal_coords) {
+            Math::Vector3DArray::SharedPointer coords_array_ptr(new Math::Vector3DArray());
+
+            coords_array_ptr->addElement(coords);
+            coords_array_ptr->addElement(ideal_coords);
+
+            set3DCoordinatesArray(atom, coords_array_ptr);
+            set3DCoordinates(atom, coords);
+            
+        } else if (have_coords) {
+            set3DCoordinates(atom, coords);
+            
+        } else if (have_ideal_coords) {
+            set3DCoordinates(atom, ideal_coords);
+        }
+
+        if (auto* sto_config = getValue(sto_configs, i)) {
+            if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompAtom::StereoConfig::R))
+                setCIPConfiguration(atom, Chem::CIPDescriptor::R);
+
+            else if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompAtom::StereoConfig::S))
+                setCIPConfiguration(atom, Chem::CIPDescriptor::S);
+
+            else if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompAtom::StereoConfig::NONE))
+                setCIPConfiguration(atom, Chem::CIPDescriptor::NONE);
+
+            else if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(comp_atoms, sto_configs) +
+                                    ": unknown atom stereo configuration '" + *sto_config +
+                                    (num_atoms > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+        }
+    }
+}
+
+void Biomol::MMCIFDataReader::readComponentBonds(const MMCIFData& data, Chem::Molecule& mol)
+{
+    auto comp_bonds = data.findCategory(MMCIF::Category::ChemCompBond::NAME);
+
+    if (!comp_bonds)
+        return;
+
+    auto num_bonds = comp_bonds->getNumValueRows();
+
+    if (num_bonds == 0)
+        return;
+
+    auto comp_ids = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::COMP_ID);
+    auto atom_ids_1 = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::ATOM_ID_1);
+    auto atom_ids_2 = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::ATOM_ID_2);
+    auto orders = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::ORDER);
+    auto arom_flags = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::PDBX_AROM_FLAG);
+    auto sto_configs = comp_bonds->findItem(MMCIF::Category::ChemCompBond::Item::PDBX_STEREO_CONFIG);
+    
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        auto* comp_id = getValue(comp_ids, i);
+        
+        if (!comp_id)
+            continue;
+
+        auto* atom_id_1 = getValue(atom_ids_1, i);
+
+        if (!atom_id_1)
+            continue;
+
+        auto* atom_id_2 = getValue(atom_ids_2, i);
+
+        if (!atom_id_2)
+            continue;
+
+        auto it1 = compAtomLookupMap.find({comp_id, atom_id_1});
+
+        if (it1 == compAtomLookupMap.end()) {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_1 + "' specified in _" + comp_bonds->getName() +
+                                    (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+
+            continue;
+        }
+
+        auto it2 = compAtomLookupMap.find({comp_id, atom_id_2});
+
+        if (it2 == compAtomLookupMap.end()) {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_2 + "' specified in _" + comp_bonds->getName() +
+                                    (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+
+            continue;
+        }
+
+        auto& bond = mol.addBond(it1->second, it2->second);
+
+        bool arom_flag = false;
+        
+        if (getValue(comp_bonds, arom_flags, i, arom_flag))
+            setAromaticityFlag(bond, arom_flag);
+
+        if (auto* sto_config = getValue(sto_configs, i)) {
+            if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompBond::StereoConfig::E))
+                setCIPConfiguration(bond, Chem::CIPDescriptor::E);
+
+            else if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompBond::StereoConfig::Z))
+                setCIPConfiguration(bond, Chem::CIPDescriptor::Z);
+
+            else if (Internal::isEqualCI(*sto_config, MMCIF::Category::ChemCompBond::StereoConfig::NONE))
+                setCIPConfiguration(bond, Chem::CIPDescriptor::NONE);
+
+            else if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(comp_bonds, sto_configs) +
+                                    ": invalid bond stereo configuration specification '" + *sto_config +
+                                    (num_bonds > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+        }
+
+        if (auto* order = getValue(orders, i)) {
+            if (Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::SINGLE))
+                setOrder(bond, 1);
+            
+            else if (Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::DOUBLE))
+                setOrder(bond, 2);
+            
+            else if (Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::TRIPLE))
+                setOrder(bond, 3);
+            
+            else if (strictErrorChecking &&
+                     !Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::AROMATIC) &&
+                     !Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::DELOCALIZED) &&
+                     !Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::PI) &&
+                     !Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::POLYMERIC) &&
+                     !Internal::isEqualCI(*order, MMCIF::Category::ChemCompBond::Order::QUADRUPLE)) {
+
+                         throw Base::IOError("MMCIFDataReader: " + getFQItemName(comp_bonds, sto_configs) +
+                                             ": invalid bond order specification '" + *order +
+                                             (num_bonds > 1 ? "' at data row " + std::to_string(i) : std::string("'"))); 
+            }
+
+        } else
+            setOrder(bond, 1);
     }
 }
 

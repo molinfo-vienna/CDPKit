@@ -26,6 +26,7 @@
 #define CDPL_BIOMOL_MMCIFDATAREADER_HPP
 
 #include <istream>
+#include <unordered_map>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 
@@ -64,8 +65,11 @@ namespace CDPL
 
             void init(std::istream&);
 
-            void readMacroMolecule(const MMCIFData& data, Chem::Molecule& mol);
-            void readCompMolecules(const MMCIFData& data, Chem::Molecule& mol);
+            void readMacromolecule(const MMCIFData& data, Chem::Molecule& mol);
+
+            void readChemComponents(const MMCIFData& data, Chem::Molecule& mol);
+            void readComponentAtoms(const MMCIFData& data, Chem::Molecule& mol);
+            void readComponentBonds(const MMCIFData& data, Chem::Molecule& mol);
             
             MMCIFData::SharedPointer parseInput(std::istream& is);
 
@@ -76,11 +80,31 @@ namespace CDPL
             Token nextToken(std::istream& is);
 
             void putbackToken(std::istream& is) const;
+
+            typedef std::pair<const std::string*, const std::string*> CompAtomID;
+
+            struct CompAtomIDHash
+            {
+
+                std::size_t operator()(const CompAtomID& atom_id) const;
+            };
+
+            struct CompAtomIDCmpFunc
+            {
+
+                bool operator()(const CompAtomID& atom_id1, const CompAtomID& atom_id2) const
+                {
+                    return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
+                }
+            };
+
+            typedef std::unordered_map<CompAtomID, std::size_t, CompAtomIDHash, CompAtomIDCmpFunc> CompAtomLookupMap;
             
             const Base::DataIOBase& ioBase;
             std::istream::pos_type  lastStreamPos;
             std::string             tokenValue;
             bool                    strictErrorChecking;
+            CompAtomLookupMap       compAtomLookupMap;
         };
     } // namespace Biomol
 } // namespace CDPL

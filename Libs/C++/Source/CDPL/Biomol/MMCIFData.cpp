@@ -110,6 +110,12 @@ namespace
 
         for (auto c : str)
             if (c == '[' || c == ']' || MMCIF::isSpace(c)) {
+                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_1) == std::string::npos)
+                    return StringOutputType::QUOTED_1;
+
+                if (str.find(MMCIF::QUOTED_STRING_DELIMITER_2) == std::string::npos)
+                    return StringOutputType::QUOTED_2;
+                
                 if (!containsCharFollowedByWS(MMCIF::QUOTED_STRING_DELIMITER_1, str))
                     return StringOutputType::QUOTED_1;
 
@@ -119,24 +125,25 @@ namespace
                 return StringOutputType::TEXT_FIELD;
             }
 
-        if (!isOrdinaryChar(str[0]))
-            return StringOutputType::QUOTED_1;
+        if (!isOrdinaryChar(str[0]) ||
+            Internal::isEqualCI(str, MMCIF::LOOP_KEYWORD) ||
+            Internal::isEqualCI(str, MMCIF::STOP_KEYWORD) ||
+            Internal::isEqualCI(str, MMCIF::GLOBAL_KEYWORD) ||
+            Internal::startsWithCI(str, MMCIF::DATA_BLOCK_ID_PREFIX) ||
+            Internal::startsWithCI(str, MMCIF::SAVE_FRAME_PREFIX)) {
 
-        if (Internal::isEqualCI(str, MMCIF::LOOP_KEYWORD))
-            return StringOutputType::QUOTED_1;
+            if (str.find(MMCIF::QUOTED_STRING_DELIMITER_1) == std::string::npos)
+                return StringOutputType::QUOTED_1;
+            
+            return StringOutputType::QUOTED_2;
+        }
 
-        if (Internal::isEqualCI(str, MMCIF::STOP_KEYWORD))
-            return StringOutputType::QUOTED_1;
+        if (str.find_first_of(MMCIF::QUOTED_STRING_DELIMITER_1, 1) != std::string::npos)
+            return StringOutputType::QUOTED_2;
 
-        if (Internal::isEqualCI(str, MMCIF::GLOBAL_KEYWORD))
+        if (str.find_first_of(MMCIF::QUOTED_STRING_DELIMITER_2, 1) != std::string::npos)
             return StringOutputType::QUOTED_1;
-
-        if (Internal::startsWithCI(str, MMCIF::DATA_BLOCK_ID_PREFIX))
-            return StringOutputType::QUOTED_1;
-
-        if (Internal::startsWithCI(str, MMCIF::SAVE_FRAME_PREFIX))
-            return StringOutputType::QUOTED_1;
-                
+             
         return StringOutputType::PLAIN;
     }
 
