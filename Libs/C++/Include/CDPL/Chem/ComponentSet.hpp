@@ -68,11 +68,12 @@ namespace CDPL
             /**
              * \brief Replaces the current set of components by the components of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the components.
+             * \param min_atom_idx The min. index of atoms to be considered for component perception (since 1.2).
              */
-            void perceive(const MolecularGraph& molgraph);
+            void perceive(const MolecularGraph& molgraph, std::size_t min_atom_idx = 0);
 
           private:
-            void visitAtom(const Atom&, Fragment&);
+            void visitAtom(const Atom& atom, Fragment& frag, std::size_t min_atom_idx);
 
             const char* getClassName() const
             {

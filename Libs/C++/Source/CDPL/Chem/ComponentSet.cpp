@@ -38,11 +38,11 @@ Chem::ComponentSet::ComponentSet(const MolecularGraph& molgraph)
     perceive(molgraph);
 }
 
-void Chem::ComponentSet::perceive(const MolecularGraph& molgraph)
+void Chem::ComponentSet::perceive(const MolecularGraph& molgraph, std::size_t min_atom_idx)
 {
     clear();
 
-    if (molgraph.getNumAtoms() == 0)
+    if (min_atom_idx >= molgraph.getNumAtoms())
         return;
 
     visAtomMask.resize(molgraph.getNumAtoms());
@@ -50,10 +50,10 @@ void Chem::ComponentSet::perceive(const MolecularGraph& molgraph)
 
     molGraph = &molgraph;
 
-    std::size_t i = 0;
+    std::size_t i = min_atom_idx;
     MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++)
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin() + min_atom_idx; it != atoms_end; ++it, i++)
         if (!visAtomMask.test(i)) {
             Fragment::SharedPointer comp_ptr(new Fragment());
 
@@ -61,13 +61,13 @@ void Chem::ComponentSet::perceive(const MolecularGraph& molgraph)
 
             comp_ptr->addAtom(atom);
 
-            visitAtom(atom, *comp_ptr);
+            visitAtom(atom, *comp_ptr, min_atom_idx);
             
             addElement(comp_ptr);
         }
 }
 
-void Chem::ComponentSet::visitAtom(const Atom& atom, Fragment& comp)
+void Chem::ComponentSet::visitAtom(const Atom& atom, Fragment& comp, std::size_t min_atom_idx)
 {
     visAtomMask.set(molGraph->getAtomIndex(atom));
 
@@ -85,10 +85,13 @@ void Chem::ComponentSet::visitAtom(const Atom& atom, Fragment& comp)
         if (!molGraph->containsAtom(nbr_atom))
             continue;
 
+        if (molGraph->getAtomIndex(nbr_atom) < min_atom_idx)
+            continue;
+        
         if (!comp.containsBond(bond))
             comp.addBond(bond);
 
         if (!visAtomMask.test(molGraph->getAtomIndex(nbr_atom))) 
-            visitAtom(nbr_atom, comp);
+            visitAtom(nbr_atom, comp, min_atom_idx);
     }
 }
