@@ -62,13 +62,14 @@ namespace CDPL
             /**
              * \brief Constructs a \c %ComponentSet instance that contains the componenents of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the components.
+             * \param min_atom_idx The min. index of atoms in \a molgraph to be considered for component perception (since 1.2).
              */
-            ComponentSet(const MolecularGraph& molgraph);
+            ComponentSet(const MolecularGraph& molgraph, std::size_t min_atom_idx = 0);
 
             /**
              * \brief Replaces the current set of components by the components of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the components.
-             * \param min_atom_idx The min. index of atoms to be considered for component perception (since 1.2).
+             * \param min_atom_idx The min. index of atoms in \a molgraph to be considered for component perception (since 1.2).
              */
             void perceive(const MolecularGraph& molgraph, std::size_t min_atom_idx = 0);
 
