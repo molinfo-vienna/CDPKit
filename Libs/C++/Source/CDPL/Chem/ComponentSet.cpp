@@ -33,9 +33,9 @@
 using namespace CDPL;
 
 
-Chem::ComponentSet::ComponentSet(const MolecularGraph& molgraph)
+Chem::ComponentSet::ComponentSet(const MolecularGraph& molgraph, std::size_t min_atom_idx)
 {
-    perceive(molgraph);
+    perceive(molgraph, min_atom_idx);
 }
 
 void Chem::ComponentSet::perceive(const MolecularGraph& molgraph, std::size_t min_atom_idx)
