@@ -22,7 +22,11 @@
  */
 
 
+#include <mutex>
+
 #include <boost/python.hpp>
+
+#include "CDPL/Base/Exceptions.hpp"
 
 #define ENABLE_IMPORT_ARRAY_FUNCTION
 
@@ -32,13 +36,7 @@
 namespace
 {
 
-
-    PyObject* importArrayWrapper()
-    {
-        import_array();
-
-        Py_RETURN_NONE;
-    }
+    bool numPyImported = false;
 
     void* checkNDArrayObject(PyObject* obj) 
     {
@@ -48,8 +46,19 @@ namespace
         return 0;
     }
 
-    bool MODULE_IMPORTED = false;
-}
+    void importNumPy()
+    {
+        if (_import_array() < 0) {
+            PyErr_Print();
+            return;
+        }
+        
+        boost::python::converter::registry::insert(&checkNDArrayObject, boost::python::type_id<PyArrayObject>());
+        numPyImported = true;
+    }
+
+    std::once_flag initOnceFlag;
+} // namespace
 
 
 namespace CDPLPythonMath
@@ -58,32 +67,12 @@ namespace CDPLPythonMath
     namespace NumPy
     {
 
-        bool init() 
+        void import()
         {
-            if (MODULE_IMPORTED)
-                return true;
+            std::call_once(initOnceFlag, &importNumPy);
 
-            if (PyErr_Occurred())
-                return false;
-
-            PyObject* r = importArrayWrapper();
-
-            if (!r) {
-                PyErr_Clear();
-                return false;
-            }
-
-            Py_DECREF(r);
-
-            boost::python::converter::registry::insert(&checkNDArrayObject, boost::python::type_id<PyArrayObject>());
-            MODULE_IMPORTED = true;
-
-            return true;
-        }
-
-        bool available()
-        {
-            return MODULE_IMPORTED;
+            if (!numPyImported)
+                throw CDPL::Base::OperationFailed("CDPL.Math: import of NumPy module failed");
         }
 
         PyArrayObject* castToNDArray(PyObject* obj) 

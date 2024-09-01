@@ -134,19 +134,19 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            if (NumPy::available()) {
-                npy_intp       shape[] = {npy_intp(grd.getSize1()), npy_intp(grd.getSize2()), npy_intp(grd.getSize3())};
-                PyObject*      py_obj  = PyArray_SimpleNew(3, shape, NumPy::DataTypeNum<typename GridType::ValueType>::Value);
-                PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);
+            NumPy::import();
 
-                if (array) {
-                    for (std::size_t i = 0, size1 = grd.getSize1(), size2 = grd.getSize2(), size3 = grd.getSize3(); i < size1; i++)
-                        for (std::size_t j = 0; j < size2; j++)
-                            for (std::size_t k = 0; k < size3; k++)
-                                *static_cast<typename GridType::ValueType*>(PyArray_GETPTR3(array, i, j, k)) = grd(i, j, k);
+            npy_intp       shape[] = {npy_intp(grd.getSize1()), npy_intp(grd.getSize2()), npy_intp(grd.getSize3())};
+            PyObject*      py_obj  = PyArray_SimpleNew(3, shape, NumPy::DataTypeNum<typename GridType::ValueType>::Value);
+            PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);
 
-                    return python::object(python::handle<>(py_obj));
-                }
+            if (array) {
+                for (std::size_t i = 0, size1 = grd.getSize1(), size2 = grd.getSize2(), size3 = grd.getSize3(); i < size1; i++)
+                    for (std::size_t j = 0; j < size2; j++)
+                        for (std::size_t k = 0; k < size3; k++)
+                            *static_cast<typename GridType::ValueType*>(PyArray_GETPTR3(array, i, j, k)) = grd(i, j, k);
+
+                return python::object(python::handle<>(py_obj));
             }
 
             return python::object();

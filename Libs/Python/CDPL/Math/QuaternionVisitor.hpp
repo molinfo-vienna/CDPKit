@@ -98,22 +98,22 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            if (NumPy::available()) {
-                npy_intp  shape[] = {4};
-                PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
+            NumPy::import();
 
-                if (array) {
-                    typename QuaternionType::ValueType* data = static_cast<typename QuaternionType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+            npy_intp  shape[] = {4};
+            PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
 
-                    data[0] = quat.getC1();
-                    data[1] = quat.getC2();
-                    data[2] = quat.getC3();
-                    data[3] = quat.getC4();
+            if (array) {
+                typename QuaternionType::ValueType* data = static_cast<typename QuaternionType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
 
-                    return python::object(python::handle<>(array));
-                }
+                data[0] = quat.getC1();
+                data[1] = quat.getC2();
+                data[2] = quat.getC3();
+                data[3] = quat.getC4();
+
+                return python::object(python::handle<>(array));
             }
-
+            
             return python::object();
         }
 #endif

@@ -69,8 +69,7 @@ namespace
             using namespace boost;
             using namespace CDPLPythonMath;
 
-            if (!NumPy::available())
-                python::object();            
+            NumPy::import();
 
             typedef typename ArrayType::ValueType::ValueType ValueType;
 

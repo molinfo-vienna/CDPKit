@@ -142,9 +142,7 @@ namespace CDPLPythonMath
         struct DataTypeNum<unsigned int> : public UIntDataTypeNum<sizeof(unsigned int)>
         {};
 
-
-        bool init();
-        bool available();
+        void import();
 
         PyArrayObject* castToNDArray(PyObject* obj);
 

@@ -110,18 +110,18 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            if (NumPy::available()) {
-                npy_intp       shape[] = {npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2())};
-                PyObject*      py_obj  = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
-                PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);
+            NumPy::import();
 
-                if (array) {
-                    for (std::size_t i = 0, size1 = mtx.getSize1(), size2 = mtx.getSize2(); i < size1; i++)
-                        for (std::size_t j = 0; j < size2; j++)
-                            *static_cast<typename MatrixType::ValueType*>(PyArray_GETPTR2(array, i, j)) = mtx(i, j);
+            npy_intp       shape[] = {npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2())};
+            PyObject*      py_obj  = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
+            PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);
 
-                    return python::object(python::handle<>(py_obj));
-                }
+            if (array) {
+                for (std::size_t i = 0, size1 = mtx.getSize1(), size2 = mtx.getSize2(); i < size1; i++)
+                    for (std::size_t j = 0; j < size2; j++)
+                        *static_cast<typename MatrixType::ValueType*>(PyArray_GETPTR2(array, i, j)) = mtx(i, j);
+
+                return python::object(python::handle<>(py_obj));
             }
 
             return python::object();

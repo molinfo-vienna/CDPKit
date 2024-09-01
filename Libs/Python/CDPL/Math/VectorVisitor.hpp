@@ -107,18 +107,18 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            if (NumPy::available()) {
-                npy_intp  shape[] = {npy_intp(vec.getSize())};
-                PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
+            NumPy::import();
+            
+            npy_intp  shape[] = {npy_intp(vec.getSize())};
+            PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
 
-                if (array) {
-                    typename VectorType::ValueType* data = static_cast<typename VectorType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+            if (array) {
+                typename VectorType::ValueType* data = static_cast<typename VectorType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
 
-                    for (std::size_t i = 0, size = vec.getSize(); i < size; i++, data++)
-                        *data = vec[i];
+                for (std::size_t i = 0, size = vec.getSize(); i < size; i++, data++)
+                    *data = vec[i];
 
-                    return python::object(python::handle<>(array));
-                }
+                return python::object(python::handle<>(array));
             }
 
             return python::object();
