@@ -85,6 +85,7 @@ setup(
     packages=['CDPL'],
     package_dir={'': 'Libs/Python'},
     python_requires='>=3.6',
+    install_requires=['numpy>=1.17'],
     cmake_args=['-DPYPI_PACKAGE_BUILD:BOOL=ON', '-DCMAKE_BUILD_TYPE:STRING=Release', '-Wno-dev'],
     cmake_process_manifest_hook=postproc_manifest,
 )
