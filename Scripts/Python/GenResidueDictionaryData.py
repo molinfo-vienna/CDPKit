@@ -25,11 +25,9 @@
 from __future__ import print_function 
 
 import sys
-import string
 
-from CDPL.Chem import *
-from CDPL.Biomol import *
-from CDPL.Base import *
+import CDPL.Chem as Chem
+import CDPL.Biomol as Biomol
 
 
 def genResidueDictionaryData():
@@ -44,7 +42,9 @@ def genResidueDictionaryData():
                       'd-peptide nh3 amino terminus' : 'PEPTIDE_AMINO_TERMINUS', \
                       'l-peptide nh3 amino terminus' : 'PEPTIDE_AMINO_TERMINUS', \
                       'rna oh 3 prime terminus' : 'RNA_HYDROXY_TERMINUS', \
+                      'rna oh 5 prime terminus' : 'RNA_HYDROXY_TERMINUS', \
                       'dna oh 3 prime terminus' : 'DNA_HYDROXY_TERMINUS', \
+                      'dna oh 5 prime terminus' : 'DNA_HYDROXY_TERMINUS', \
                       'peptide linking' : 'PEPTIDE_LINKING', \
                       'l-peptide linking' : 'PEPTIDE_LINKING', \
                       'd-peptide linking' : 'PEPTIDE_LINKING', \
@@ -59,6 +59,10 @@ def genResidueDictionaryData():
                       'l-dna linking' : 'DNA_LINKING', \
                       'l-saccharide 1,4 and 1,4 linking' : 'SACCHARIDE_LINKING', \
                       'd-saccharide 1,4 and 1,4 linking' : 'SACCHARIDE_LINKING', \
+                      'l-saccharide, alpha linking' : 'SACCHARIDE_LINKING', \
+                      'l-saccharide, beta linking' : 'SACCHARIDE_LINKING', \
+                      'd-saccharide, alpha linking' : 'SACCHARIDE_LINKING', \
+                      'd-saccharide, beta linking' : 'SACCHARIDE_LINKING', \
                       'l-saccharide' : 'SACCHARIDE', \
                       'd-saccharide' : 'SACCHARIDE', \
                       'saccharide' : 'SACCHARIDE' \
@@ -67,386 +71,97 @@ def genResidueDictionaryData():
     output = list()
 
     output.append('// clang-format off\nconst ResidueDataEntry RESIDUE_DATA[] = {\n')
-  
-    cif_file = file(sys.argv[1], 'r')
 
-    struct_os = FileIOStream(sys.argv[3], 'wb');
-    struct_wtr = CDFMolecularGraphWriter(struct_os)
-    struct = BasicMolecule()
-    struct_idx = 0
+    comp_reader = Biomol.FileMMCIFMoleculeReader(sys.argv[1])
+    comp_writer = Chem.FileCDFMolecularGraphWriter(sys.argv[3])
+    comp = Chem.BasicMolecule()
+    comp_idx = 0
 
-    while True:
-        line = skipToLine('data_', cif_file)
-
-        if not line:
-            break
-
-        code = line[5:8].strip()
-
-        print('Processing entry ' + code + ' ...', file=sys.stderr)
+    while comp_reader.read(comp):
+        comp_name = Chem.getName(comp)
         
-        ##########
+        Chem.clearComponents(comp)
+        Chem.clearName(comp)
+        
+        for atom in comp.atoms:
+            if Chem.getFormalCharge(atom) == 0:
+                Chem.clearFormalCharge(atom)
 
-        line = skipToLine('_chem_comp.name', cif_file)
+            Chem.clear3DCoordinates(atom)
+            Chem.clear3DCoordinatesArray(atom)
+            Chem.clearCIPConfiguration(atom)
+            Chem.clearAromaticityFlag(atom)
 
-        if not line:
-            break
+            if Chem.getType(atom) != Chem.AtomType.UNKNOWN:
+                Chem.clearSymbol(atom)
 
-        comp_name = line[len('_chem_comp.name'):].strip().strip('"')
-   
-        ##########
+            Biomol.clearResidueCode(atom)
 
-        line = skipToLine('_chem_comp.type', cif_file)
+        for bond in comp.bonds:
+            Chem.clearCIPConfiguration(bond)
+            Chem.clearAromaticityFlag(bond)
 
-        if not line:
-            break
+        cif_data = Biomol.getMMCIFData(comp)
 
-        comp_type = line[len('_chem_comp.type'):].strip().strip('"').lower()
+        print('Processing dictionary entry ' + cif_data.id + ' ...', file=sys.stderr)
 
-        if comp_type not in comp_type_map:
-            print('Unsupported component type: ' + comp_type, file=sys.stderr)
-            comp_type = 'OTHER'
+        cif_comp_data = cif_data.findCategory('chem_comp')
+
+        if not cif_comp_data:
+            print(' !! Skipping entry because category _chem_comp could not be found'  , file=sys.stderr)
+
+        rel_status = cif_comp_data.findItem('pdbx_release_status')
+
+        if rel_status:
+            rel_status = rel_status.getValue(0)
         else:
-            comp_type = comp_type_map[comp_type]
-
-        ##########
-
-        line = skipToLine('_chem_comp.pdbx_release_status', cif_file)
-
-        if not line:
-            break
-
-        rel_status = line[len('_chem_comp.pdbx_release_status'):].strip()
+            print(' !! Skipping entry because release status is unknown'  , file=sys.stderr)
+            continue
 
         if rel_status != 'REL' and rel_status != 'OBS':
-            print('Skipping record because relase status != REL or OBS'  , file=sys.stderr)
+            print(' !! Skipping entry because release status != REL or OBS'  , file=sys.stderr)
             continue
 
         obsolete = 'false'
      
         if rel_status == 'OBS':
             obsolete = 'true'
-
-        ##########
-
-        line = skipToLine('_chem_comp.pdbx_replaced_by', cif_file)
-
-        if not line:
-            break
-
-        replaced_by_code = line[len('_chem_comp.pdbx_replaced_by'):].strip().strip('"').replace(' ', '').replace('?', '')
-
-        line = skipToLine('_chem_comp.pdbx_replaces', cif_file)
-
-        if not line:
-            break
-
-        replaces_code = line[len('_chem_comp.pdbx_replaces'):].strip().strip('"').replace(' ', '').replace('?', '')
-
-        ##########
-
-        line = skipToLine('_chem_comp.three_letter_code', cif_file)
-
-        if not line:
-            break
-
-        code = line[len('_chem_comp.three_letter_code'):].strip()
- 
-        line = skipToLine('#', cif_file)
-
-        if not line:
-            break
-
-        ########## ATOMS
-
-        struct.clear()
-
-        setName(struct, code)
-
-        atom_count = 0
-        bond_count = 0
-        name_to_index = {}
-
-        line = cif_file.readline()
-
-        if not line:
-            break
-
-        line = line.strip()
-        loop_entry = line.startswith('loop_')
-
-        if loop_entry:
-            line = cif_file.readline()
-
-            if not line:
-                break
-
-            line = line.strip()
-
-        have_atoms = line.startswith('_chem_comp_atom.')
-
-        if have_atoms:
-            if not loop_entry:
-                #print('Found single atom entry: ' + code, file=sys.stderr)
-
-                line = skipToLine('_chem_comp_atom.atom_id', cif_file)
-
-                if not line:
-                    break
-
-                atom_id = line[len('_chem_comp_atom.atom_id'):].strip()
-
-                line = cif_file.readline()
-
-                if not line:
-                    break
-
-                alt_atom_id = line[len('_chem_comp_atom.alt_atom_id'):].strip()
-
-                line = cif_file.readline()
-
-                if not line:
-                    break
-
-                symbol = line[len('_chem_comp_atom.type_symbol'):].strip().capitalize()
-
-                line = cif_file.readline()
-
-                if not line:
-                    break
-
-                charge = line[len('_chem_comp_atom.charge'):].strip()
-
-                line = skipToLine('_chem_comp_atom.pdbx_leaving_atom_flag', cif_file)
-
-                if not line:
-                    break
-
-                lvg_atom = line[len('_chem_comp_atom.pdbx_leaving_atom_flag'):].strip()
-
-                if charge == '?':
-                    charge = '0'
-
-                atom = struct.addAtom()
-
-                setSymbol(atom, symbol)
-
-                if atom_id.startswith('"') and atom_id.endswith('"'):
-                    atomid = atomid[1:-1]
-
-                setResidueAtomName(atom, atom_id)
-
-                if alt_atom_id.startswith('"') and alt_atom_id.endswith('"'):
-                    alt_atomid = alt_atomid[1:-1]
-
-                setResidueAltAtomName(atom, alt_atom_id)
-
-                if charge != '0':
-                    setFormalCharge(atom, int(charge))
-
-                set3DCoordinates(atom, (0.0, 0.0, 0.0))
-
-                if lvg_atom == 'Y':
-                    setResidueLeavingAtomFlag(atom, True)
-
-                line = skipToLine('#', cif_file)
-
-                if not line:
-                    break
-
-            else:       # MULTIPLE ATOMS
-                line = skipToLine('_chem_comp_atom.pdbx_ordinal', cif_file)
-
-                if not line:
-                    break
-
-                while True:
-                    line = cif_file.readline()
-
-                    if not line:
-                        break
-
-                    if line.startswith('#'):
-                        break
-
-                    if line.find('"N ') != -1:
-                        line = line.replace('"N ', '"N@')
-
-                    if line.find('"O ') != -1:
-                        line = line.replace('"O ', '"O@')
-
-                    if line.find('"H ') != -1:
-                        line = line.replace('"H ', '"H@')
-
-                    if line.find('"HN ') != -1:
-                        line = line.replace('"HN ', '"HN@')
-
-                    if line.find('"C ') != -1:
-                        line = line.replace('"C ', '"C@')
-
-                    if line.find('"1H ') != -1:
-                        line = line.replace('"1H ', '"1H@')
-
-                    if line.find('"2H ') != -1:
-                        line = line.replace('"2H ', '"2H@')
-
-                    if line.find('"3H ') != -1:
-                        line = line.replace('"3H ', '"3H@')
-
-                    fields = line.split();
-                    charge = fields[4]
-
-                    if charge == '?':
-                        charge = '0'
-
-                    symbol = fields[3].capitalize()
-
-                    x = fields[12].replace('?', '0')
-                    y = fields[13].replace('?', '0')
-                    z = fields[14].replace('?', '0')
-
-                    atom = struct.addAtom()
-
-                    setSymbol(atom, symbol)
-
-                    name_to_index[fields[1]] = atom_count
-
-                    if fields[1].startswith('"') and fields[1].endswith('"'):
-                        fields[1] = fields[1][1:-1]
-
-                    setResidueAtomName(atom, fields[1])
-
-                    if fields[2].startswith('"') and fields[2].endswith('"'):
-                        fields[2] = fields[2][1:-1]
-
-                    setResidueAltAtomName(atom, fields[2].replace('@', ' '))
-                  
-                    if charge != '0':
-                        setFormalCharge(atom, int(charge))
-
-                    set3DCoordinates(atom, (float(x), float(y), float(z)))
-
-                    if fields[7] == 'Y':
-                        setResidueLeavingAtomFlag(atom, True)
-
-                    atom_count += 1
-
-                if not line:
-                    break
-
-            ########## BONDS
-   
-            line = cif_file.readline()
-
-            if not line:
-                break
-
-            line = line.strip()
-            loop_entry = line.startswith('loop_')
-
-            if loop_entry:
-                line = cif_file.readline()
-
-                if not line:
-                    break
-
-                line = line.strip()
-
-            have_bonds = line.startswith('_chem_comp_bond.')
-
-            if have_bonds:
-                if not loop_entry: # SINGLE BOND
-                    #print('Found single bond entry: ' + code, file=sys.stderr)
-
-                    line = skipToLine('_chem_comp_bond.atom_id_1', cif_file)
-
-                    if not line:
-                        break
-
-                    atom_id_1 = line[len('_chem_comp_bond.atom_id_1'):].strip()
-
-                    line = cif_file.readline()
-
-                    if not line:
-                        break
-
-                    atom_id_2 = line[len('_chem_comp_bond.atom_id_2'):].strip()
-
-                    line = cif_file.readline()
-
-                    if not line:
-                        break
-
-                    value_order = line[len('_chem_comp_bond.value_order'):].strip()
-
-                    order = '1'
-
-                    if value_order == 'DOUB':
-                        order = '2'
-                    elif value_order == 'TRIP':
-                        order = '3'
-                    elif value_order != 'SING':
-                        print('found bond with order ' + value_order, file=sys.stderr)
-
-                    bond = struct.addBond(name_to_index[atom_id_1], name_to_index[atom_id_2])
-
-                    setOrder(bond, int(order))
-
-                    bond_count = 1
-
-                else: # MULTIPLE BONDS
-                    line = skipToLine('_chem_comp_bond.pdbx_ordinal', cif_file)
-
-                    if not line:
-                        break
-
-                    while True:
-                        line = cif_file.readline()
-
-                        if not line:
-                            break
-
-                        if line.startswith('#'):
-                            break
-
-                        fields = line.split()
-
-                        atom1_idx = name_to_index[fields[1]]
-                        atom2_idx = name_to_index[fields[2]]
-
-                        order = '1'
-
-                        if fields[3] == 'DOUB':
-                            order = '2'
-                        elif fields[3] == 'TRIP':
-                            order = '3'
-                        elif fields[3] != 'SING':
-                            print('found bond with order ' + fields[3], file=sys.stderr)
-
-                        bond = struct.addBond(atom1_idx, atom2_idx)
-
-                        setOrder(bond, int(order))
-
-                        bond_count += 1
-
-                    if not line:
-                        break
-
-        #if not have_atoms:
-        #    print('Entry with NO atoms: ' + code, file=sys.stderr)
-
-        #if not have_bonds:
-        #    print('Entry with NO bonds: ' + code, file=sys.stderr)
-
-        comp_name = comp_name.replace('"', '\\"')
-
-        setAtomTypesFromSymbols(struct, True)
-
-        struct_wtr.write(struct)
-
-        output.append('    { "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
-
-        struct_idx += 1
+            
+        comp_type = cif_comp_data.findItem('type')
+
+        if comp_type:
+            comp_type = comp_type.getValue(0).lower()
+
+            if comp_type not in comp_type_map:
+                print(' !! Unsupported component type: ' + comp_type, file=sys.stderr)
+                comp_type = 'OTHER'
+            else:
+                comp_type = comp_type_map[comp_type]
+        else:
+            print(' ! Warning: entry lacking component type', file=sys.stderr)
+            comp_type = OTHER
+            
+        replaced_by_code = cif_comp_data.findItem('pdbx_replaced_by')
+
+        if replaced_by_code:
+            replaced_by_code = replaced_by_code.getValue(0)
+        else:
+            replaced_by_code = ''
+            
+        replaces_code = cif_comp_data.findItem('pdbx_replaces')
+
+        if replaces_code:
+            replaces_code = replaces_code.getValue(0)
+        else:
+            replaces_code = ''
+            
+        code = cif_data.id
+        
+        comp_writer.write(comp)
+
+        output.append('    { "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(comp_idx) + ' },\n')
+
+        comp_idx += 1
 
         #break ###### 
 
@@ -454,21 +169,7 @@ def genResidueDictionaryData():
 
     open(sys.argv[2], 'w').writelines(output);
   
-    struct_os.flush()
-    struct_os.close()
-
-
-def skipToLine(prefix, in_file):
-    while True: 
-        line = in_file.readline()
-
-        if not line:
-            return line
-
-        if not line.startswith(prefix):
-            continue
-
-        return line    
+    comp_writer.close()
 
 
 if __name__ == '__main__':
