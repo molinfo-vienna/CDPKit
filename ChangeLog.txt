@@ -1,7 +1,6 @@
 master:
 
- - The maximum supported NumPy version gets now specified in pyproject.toml in order to circumvent version issues after the installation
-   of CDPL Python bindings via pip 
+ - CDPL Python bindings now support NumPy V>=2.0
  - Removed function Biomol::convertMOL2ToPDBResidueInfo(): if possible, the conversion of MOL2 substructure to
    PDB residue/sequence information is now carried out automatically
  - Fixed a bug in program 'ChOX' that prevented the successful saving of data to PSD files
