@@ -253,7 +253,9 @@ void Biomol::MMCIFDataReader::readChemComponents(const MMCIFData& data, Chem::Mo
     auto prev_num_atoms = mol.getNumAtoms();
     
     readComponentAtoms(data, mol);
-    readComponentBonds(data, mol);
+
+    if (readComponentBonds(data, mol))
+        kekulizeBonds(mol);
 
     if (!hasComponents(mol))
         prev_num_atoms = 0;
@@ -314,22 +316,20 @@ void Biomol::MMCIFDataReader::readChemComponents(const MMCIFData& data, Chem::Mo
         old_comps_ptr->insertElements(old_comps_ptr->Chem::FragmentList::BaseType::end(),
                                       comps_ptr->Chem::FragmentList::BaseType::begin(),
                                       comps_ptr->Chem::FragmentList::BaseType::end());
-        comps_ptr = old_comps_ptr;
-
     } else
         setComponents(mol, comps_ptr);
     
-    if (comps_ptr->getSize() == 1) {
-        auto& comp = comps_ptr->getElement(0);
-        
-        if (!hasResidueCode(mol) && hasResidueCode(comp))
-            setResidueCode(mol, getResidueCode(comp));
+    if (prev_num_atoms == 0 && num_comps == 1) {
+        if (!hasResidueCode(mol))
+            if (auto res_code = getValue(comp_ids, 0))
+                setResidueCode(mol, *res_code);
 
-        if (!hasName(mol) && hasName(comp))
-            setName(mol, getName(comp));
+        if (!hasName(mol))
+            if (auto name = getValue(comp_names, 0))
+                setName(mol, *name);
     }
-
-    if (!hasName(mol))
+    
+    if (prev_num_atoms == 0 && !hasName(mol))
         setName(mol, data.getID());
 }
 
@@ -451,19 +451,19 @@ void Biomol::MMCIFDataReader::readComponentAtoms(const MMCIFData& data, Chem::Mo
     }
 }
 
-void Biomol::MMCIFDataReader::readComponentBonds(const MMCIFData& data, Chem::Molecule& mol)
+bool Biomol::MMCIFDataReader::readComponentBonds(const MMCIFData& data, Chem::Molecule& mol)
 {
     using namespace MMCIF;
     
     auto comp_bonds = data.findCategory(ChemCompBond::NAME);
 
     if (!comp_bonds)
-        return;
+        return false;
 
     auto num_bonds = comp_bonds->getNumValueRows();
 
     if (num_bonds == 0)
-        return;
+        return false;
 
     auto comp_ids = comp_bonds->findItem(ChemCompBond::Item::COMP_ID);
     auto atom_ids_1 = comp_bonds->findItem(ChemCompBond::Item::ATOM_ID_1);
@@ -471,6 +471,7 @@ void Biomol::MMCIFDataReader::readComponentBonds(const MMCIFData& data, Chem::Mo
     auto orders = comp_bonds->findItem(ChemCompBond::Item::ORDER);
     auto arom_flags = comp_bonds->findItem(ChemCompBond::Item::PDBX_AROM_FLAG);
     auto sto_configs = comp_bonds->findItem(ChemCompBond::Item::PDBX_STEREO_CONFIG);
+    auto undef_bond_orders = false;
     
     for (std::size_t i = 0; i < num_bonds; i++) {
         auto* comp_id = getValue(comp_ids, i);
@@ -536,22 +537,27 @@ void Biomol::MMCIFDataReader::readComponentBonds(const MMCIFData& data, Chem::Mo
             
             else if (Internal::isEqualCI(*order, ChemCompBond::Order::TRIPLE))
                 setOrder(bond, 3);
-            
-            else if (strictErrorChecking &&
+
+            else {
+                if (strictErrorChecking &&
                      !Internal::isEqualCI(*order, ChemCompBond::Order::AROMATIC) &&
                      !Internal::isEqualCI(*order, ChemCompBond::Order::DELOCALIZED) &&
                      !Internal::isEqualCI(*order, ChemCompBond::Order::PI) &&
                      !Internal::isEqualCI(*order, ChemCompBond::Order::POLYMERIC) &&
-                     !Internal::isEqualCI(*order, ChemCompBond::Order::QUADRUPLE)) {
+                     !Internal::isEqualCI(*order, ChemCompBond::Order::QUADRUPLE))
 
                          throw Base::IOError("MMCIFDataReader: " + getFQItemName(comp_bonds, sto_configs) +
                                              ": invalid bond order specification '" + *order +
-                                             (num_bonds > 1 ? "' at data row " + std::to_string(i) : std::string("'"))); 
+                                             (num_bonds > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+
+                undef_bond_orders = true;
             }
 
         } else
             setOrder(bond, 1);
     }
+
+    return undef_bond_orders;
 }
 
 Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istream& is)

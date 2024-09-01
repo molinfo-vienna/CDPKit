@@ -69,7 +69,7 @@ namespace CDPL
 
             void readChemComponents(const MMCIFData& data, Chem::Molecule& mol);
             void readComponentAtoms(const MMCIFData& data, Chem::Molecule& mol);
-            void readComponentBonds(const MMCIFData& data, Chem::Molecule& mol);
+            bool readComponentBonds(const MMCIFData& data, Chem::Molecule& mol);
             
             MMCIFData::SharedPointer parseInput(std::istream& is);
 
