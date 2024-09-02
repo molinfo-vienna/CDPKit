@@ -78,7 +78,7 @@ def genResidueDictionaryData():
     comp_idx = 0
 
     while comp_reader.read(comp):
-        comp_name = Chem.getName(comp)
+        comp_name = Chem.getName(comp).replace('\n', '').replace('"', '\\"')
         
         Chem.clearComponents(comp)
         Chem.clearName(comp)
@@ -97,29 +97,32 @@ def genResidueDictionaryData():
 
             Biomol.clearResidueCode(atom)
 
+            if not Biomol.getResidueLeavingAtomFlag(atom):
+                Biomol.clearResidueLeavingAtomFlag(atom)
+
         for bond in comp.bonds:
             Chem.clearCIPConfiguration(bond)
             Chem.clearAromaticityFlag(bond)
 
         cif_data = Biomol.getMMCIFData(comp)
 
-        print('Processing dictionary entry ' + cif_data.id + ' ...', file=sys.stderr)
+        #print('Processing dictionary entry ' + cif_data.id + ' ...', file=sys.stderr)
 
         cif_comp_data = cif_data.findCategory('chem_comp')
 
         if not cif_comp_data:
-            print(' !! Skipping entry because category _chem_comp could not be found'  , file=sys.stderr)
+            print(f'!! Skipping entry {cif_data.id} because category _chem_comp could not be found'  , file=sys.stderr)
 
         rel_status = cif_comp_data.findItem('pdbx_release_status')
 
         if rel_status:
-            rel_status = rel_status.getValue(0)
+            rel_status = rel_status.getValue(0).replace('?', '').replace('.', '')
         else:
-            print(' !! Skipping entry because release status is unknown'  , file=sys.stderr)
+            print(f'!! Skipping entry {cif_data.id} because release status is unknown'  , file=sys.stderr)
             continue
 
         if rel_status != 'REL' and rel_status != 'OBS':
-            print(' !! Skipping entry because release status != REL or OBS'  , file=sys.stderr)
+            print(f'!! Skipping entry {cif_data.id} because release status != REL or OBS'  , file=sys.stderr)
             continue
 
         obsolete = 'false'
@@ -130,28 +133,28 @@ def genResidueDictionaryData():
         comp_type = cif_comp_data.findItem('type')
 
         if comp_type:
-            comp_type = comp_type.getValue(0).lower()
+            comp_type = comp_type.getValue(0).lower().replace('?', '').replace('.', '')
 
             if comp_type not in comp_type_map:
-                print(' !! Unsupported component type: ' + comp_type, file=sys.stderr)
+                print(f'!! Entry {cif_data.id} has unsupported component type: ' + comp_type, file=sys.stderr)
                 comp_type = 'OTHER'
             else:
                 comp_type = comp_type_map[comp_type]
         else:
-            print(' ! Warning: entry lacking component type', file=sys.stderr)
-            comp_type = OTHER
+            print(f'! Entry {cif_data.id} lacking component type', file=sys.stderr)
+            comp_type = 'OTHER'
             
         replaced_by_code = cif_comp_data.findItem('pdbx_replaced_by')
 
         if replaced_by_code:
-            replaced_by_code = replaced_by_code.getValue(0)
+            replaced_by_code = replaced_by_code.getValue(0).replace('?', '').replace('.', '')
         else:
             replaced_by_code = ''
             
         replaces_code = cif_comp_data.findItem('pdbx_replaces')
 
         if replaces_code:
-            replaces_code = replaces_code.getValue(0)
+            replaces_code = replaces_code.getValue(0).replace('?', '').replace('.', '')
         else:
             replaces_code = ''
             
@@ -163,14 +166,13 @@ def genResidueDictionaryData():
 
         comp_idx += 1
 
-        #break ###### 
-
     output.append('};\n// clang-format on\n')
 
     open(sys.argv[2], 'w').writelines(output);
   
     comp_writer.close()
 
+    print(f'Generated residue dictionary comprising {comp_idx} entries', file=sys.stderr)
 
 if __name__ == '__main__':
     genResidueDictionaryData()
