@@ -1,5 +1,8 @@
 master:
 
+ - Updated embedded SQLite3 database to version 3.46.1
+ - Updated embedded InChI library to version 1.07.1
+ - Updated PDB residue dictionary, now covering 43441 chemical components
  - CDPL Python bindings now support NumPy V>=2.0
  - Removed function Biomol::convertMOL2ToPDBResidueInfo(): if possible, the conversion of MOL2 substructure to
    PDB residue/sequence information is now carried out automatically
