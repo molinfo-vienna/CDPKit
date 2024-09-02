@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,24 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
+*/
 
 
 #include <stdio.h>
@@ -63,6 +70,7 @@
 #include "ichicomn.h"
 #include "ichimake.h"
 #include "ichister.h"
+#include "bcf_s.h"
 /* */
 #ifdef INCHI_LIB
 #include "ichi_lib.h"
@@ -213,9 +221,9 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
 
     COMP_ATOM_DATA *composite_norm_data = genctl->composite_norm_data[iINChI];
     INP_ATOM_DATA2 *all_inp_norm_data = NULL;
-    memset( composite_norm_data + TAUT_NON, 0, sizeof( composite_norm_data[0] ) );
-    memset( composite_norm_data + TAUT_YES, 0, sizeof( composite_norm_data[0] ) );
-    memset( composite_norm_data + TAUT_INI, 0, sizeof( composite_norm_data[0] ) );
+    memset( composite_norm_data + TAUT_NON, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( composite_norm_data + TAUT_YES, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( composite_norm_data + TAUT_INI, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     inchi_ios_init( prb_file, INCHI_IOS_TYPE_FILE, NULL );
 
@@ -331,12 +339,47 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
     /* allocate pINChI[iINChI] and pINChI_Aux2[iINChI] -- arrays of pointers to INChI and INChI_Aux */
     /* assign values to sd->num_components[]                                                  */
 
-    MYREALLOC2( PINChI2, PINChI_Aux2, pINChI2[iINChI], pINChI_Aux2[iINChI], sd->num_components[iINChI], cur_prep_inp_data->num_components, k );
+    /* djb-rwth: MYREALLOC2( PINChI2, PINChI_Aux2, pINChI2[iINChI], pINChI_Aux2[iINChI], sd->num_components[iINChI], cur_prep_inp_data->num_components, k ) has been replaced and the whole block rewritten to address memory leaks and reading from freed memory locations */
+    do 
+    { 
+        if( (sd->num_components[iINChI]) <= (cur_prep_inp_data->num_components) ) 
+        {
+            PINChI2* newPTR1 = (PINChI2 *)inchi_calloc( (long long)cur_prep_inp_data->num_components + 1, sizeof(PINChI2) );
+            PINChI_Aux2* newPTR2 = (PINChI_Aux2*)inchi_calloc( (long long)cur_prep_inp_data->num_components + 1, sizeof(PINChI_Aux2) );
+            if ( newPTR1 && newPTR2 )
+            { 
+                if (pINChI2[iINChI] && sd->num_components[iINChI] > 0)
+                    memcpy( newPTR1, pINChI2[iINChI], (sd->num_components[iINChI]) * sizeof(PINChI2) );
+                if (pINChI_Aux2[iINChI] && sd->num_components[iINChI] > 0)
+                    memcpy( newPTR2, pINChI_Aux2[iINChI], (sd->num_components[iINChI]) * sizeof(PINChI_Aux2) );
+                if (pINChI2[iINChI]) 
+                    inchi_free(pINChI2[iINChI]);
+                if (pINChI_Aux2[iINChI])
+                    inchi_free(pINChI_Aux2[iINChI]);
+                pINChI2[iINChI] = newPTR1;
+                pINChI_Aux2[iINChI] = newPTR2;
+                sd->num_components[iINChI] = cur_prep_inp_data->num_components;
+                k  = 0;
+            } 
+            else 
+            {        
+                inchi_free(newPTR1); 
+                inchi_free(newPTR2); 
+                k = 1;
+            }             
+        } 
+        else 
+        { 
+            k = 0; 
+        }
+    } while (0);
+
     if (k)
     {
         AddErrorMessage( sd->pStrErrStruct, "Cannot allocate output data. Terminating" );
         sd->nStructReadError = 99;
         sd->nErrorType = _IS_FATAL;
+        inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
         goto exit_function;
     }
 
@@ -350,7 +393,8 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
     genctl->InpNormTautData[iINChI] = (INP_ATOM_DATA *) inchi_calloc( sd->num_components[iINChI], sizeof( INP_ATOM_DATA ) );
     genctl->InpCurAtData[iINChI] = (INP_ATOM_DATA *) inchi_calloc( sd->num_components[iINChI], sizeof( INP_ATOM_DATA ) );
     genctl->cti[iINChI] = (COMPONENT_TREAT_INFO *) inchi_calloc( sd->num_components[iINChI], sizeof( COMPONENT_TREAT_INFO ) );
-    memset( genctl->cti[iINChI], 0, sd->num_components[iINChI] * sizeof( COMPONENT_TREAT_INFO ) );
+    if (genctl->cti[iINChI]) /* djb-rwth: fixing a NULL pointer dereference */
+        memset( genctl->cti[iINChI], 0, sd->num_components[iINChI] * sizeof( COMPONENT_TREAT_INFO ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* Second normalization step - component by component */
 
@@ -359,14 +403,17 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
 
         if (ip->msec_MaxTime)
         {
-            InchiTimeGet( &ulTStart );
+            InchiTimeGet(&ulTStart);
         }
 
-        inp_cur_data = &( genctl->InpCurAtData[iINChI][i] );
+        if (genctl->InpCurAtData[iINChI]) /* djb-rwth: fixing a NULL pointer dereference */
+        {
+            inp_cur_data = &(genctl->InpCurAtData[iINChI][i]);
 
-        /*  a) allocate memory and extract current component */
-        nRet = GetOneComponent( ic, sd, ip, log_file, out_file, inp_cur_data,
-                                cur_prep_inp_data, i, num_inp );
+            /*  a) allocate memory and extract current component */
+            nRet = GetOneComponent(ic, sd, ip, log_file, out_file, inp_cur_data,
+                cur_prep_inp_data, i, num_inp);
+        }
 
         if (ip->msec_MaxTime)
         {
@@ -384,9 +431,9 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
         /*  c) Create the component's INChI ( copies ip->bTautFlags into sd->bTautFlags)*/
 
         inp_norm_data[TAUT_NON] = &( genctl->InpNormAtData[iINChI][i] );
-        memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) );
+        memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         inp_norm_data[TAUT_YES] = &( genctl->InpNormTautData[iINChI][i] );
-        memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) );
+        memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
         nRet = NormOneComponentINChI( pCG, ic, genctl, iINChI, i );
 
@@ -398,7 +445,7 @@ int NormOneStructureINChI( CANON_GLOBALS *pCG,
                 if (inp_norm_data[j]->bExists)
                 {
                     all_inp_norm_data[i][j] = *inp_norm_data[j];
-                    memset( inp_norm_data[j], 0, sizeof( *inp_norm_data[0] ) );
+                    memset( inp_norm_data[j], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                 }
             }
         }
@@ -665,13 +712,13 @@ int NormOneComponentINChI( CANON_GLOBALS *pCG,
     /*  allocate memory for non-tautimeric (k=0) and tautomeric (k=1) results */
     for (k = 0; k < TAUT_NUM; k++)
     {
-        int nAllocMode = ( k == TAUT_YES ? REQ_MODE_TAUT : 0 ) |
+        int nAllocMode = ( k == TAUT_YES ? REQ_MODE_TAUT : 0 ) || /* djb-rwth: bitwise operator | changed with logical operator ||*/
             ( bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE |
                 TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ) ?
                 ( ip->nMode & REQ_MODE_ISO ) : 0;
 
-        if (k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC ) ||
-             k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT ))
+        if (inp_cur_data && ((k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC )) ||
+             (k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT )))) /* djb-rwth: addressing LLVM warnings; fixing a NULL pointer dereference */
         {
             /*  alloc INChI and INChI_Aux */
             cur_INChI[k] = Alloc_INChI( inp_cur_data->at, inp_cur_data->num_at, &inp_cur_data->num_bonds,
@@ -736,112 +783,115 @@ int NormOneComponentINChI( CANON_GLOBALS *pCG,
         cti->vABParityUnknown = AB_PARITY_UNKN;
     }
 
-    num_at = Normalization_step( pCG, ic,
-                                 cur_INChI, cur_INChI_Aux,
-                                 inp_cur_data->at, inp_norm_data, inp_cur_data->num_at,
-                                 pulTEnd, &bTautFlags, &bTautFlagsDone, cti );
-
-    SetConnectedComponentNumber( inp_cur_data->at, inp_cur_data->num_at, i + 1 ); /*  normalization alters structure component number */
-
-    for (k = 0; k < TAUT_NUM; k++)
+    if (inp_cur_data) /* djb-rwth: fixing a NULL pointer dereference */
     {
-        if (cur_INChI_Aux[k] && cur_INChI_Aux[k]->nNumberOfAtoms > 0)
+        num_at = Normalization_step(pCG, ic,
+            cur_INChI, cur_INChI_Aux,
+            inp_cur_data->at, inp_norm_data, inp_cur_data->num_at,
+            pulTEnd, &bTautFlags, &bTautFlagsDone, cti);
+
+        SetConnectedComponentNumber(inp_cur_data->at, inp_cur_data->num_at, i + 1); /*  normalization alters structure component number */
+
+        for (k = 0; k < TAUT_NUM; k++)
         {
-            pncFlags->bNormalizationFlags[iINChI][k] |= cur_INChI_Aux[k]->bNormalizationFlags;
-            pncFlags->bTautFlags[iINChI][k] |= cur_INChI_Aux[k]->bTautFlags;
-            pncFlags->bTautFlagsDone[iINChI][k] |= cur_INChI_Aux[k]->bTautFlagsDone;
-            pncFlags->nCanonFlags[iINChI][k] |= cur_INChI_Aux[k]->nCanonFlags;
-        }
-    }
-
-    /*  Detect errors */
-    if (num_at < 0)
-    {
-        sd->nErrorCode = num_at;
-    }
-    else if (num_at == 0)
-    {
-        sd->nErrorCode = -1;
-    }
-    else if (cur_INChI[TAUT_NON] && cur_INChI[TAUT_NON]->nErrorCode)
-    {
-        /*  non-tautomeric error */
-        sd->nErrorCode = cur_INChI[TAUT_NON]->nErrorCode;
-    }
-    else if (cur_INChI[TAUT_YES] && cur_INChI[TAUT_YES]->nErrorCode)
-    {
-        /*  tautomeric error */
-        sd->nErrorCode = cur_INChI[TAUT_YES]->nErrorCode;
-    }
-
-    /*  detect and store stereo warnings */
-    if (!sd->nErrorCode)
-    {
-        GetProcessingWarningsOneComponentInChI( cur_INChI,
-                                                inp_norm_data,
-                                                sd,
-                                                0 /*bNoWarnings */ );
-    }
-
-    lElapsedTime = InchiTimeElapsed( ic, &ulTStart );
-    if (ip->msec_MaxTime)
-    {
-        ip->msec_LeftTime -= lElapsedTime;
-    }
-
-    sd->ulStructTime += lElapsedTime;
-#ifndef TARGET_API_LIB
-    /*  Display the results */
-    if (ip->bDisplay)
-        eat_keyboard_input( );
-#endif
-    /*  a) No matter what happened save the allocated INChI pointers */
-    /*  save the INChI of the current component */
-
-    InchiTimeGet( &ulTStart );
-    for (k = 0; k < TAUT_NUM; k++)
-    {
-        pINChI[i][k] = cur_INChI[k];
-        pINChI_Aux[i][k] = cur_INChI_Aux[k];
-
-        cur_INChI[k] = NULL;
-        cur_INChI_Aux[k] = NULL;
-    }
-
-    /*  b) Count one component structure and/or INChI results only if there was no error */
-    /*     Set inp_norm_data[j]->num_removed_H = number of removed explicit H           */
-
-    if (!sd->nErrorCode)
-    {
-
-        /*  find where the current processed structure is located */
-        int cur_is_in_non_taut = ( pINChI[i][TAUT_NON] && pINChI[i][TAUT_NON]->nNumberOfAtoms > 0 );
-        int cur_is_in_taut = ( pINChI[i][TAUT_YES] && pINChI[i][TAUT_YES]->nNumberOfAtoms > 0 );
-        int cur_is_non_taut = cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer ||
-            cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer;
-        int cur_is_taut = cur_is_in_taut && 0 < pINChI[i][TAUT_YES]->lenTautomer;
-
-        if (cur_is_non_taut + cur_is_taut)
-        {
-            /*  count tautomeric and non-tautomeric components of the structures */
-            int j1 = cur_is_in_non_taut ? TAUT_NON : TAUT_YES;
-            int j2 = cur_is_in_taut ? TAUT_YES : TAUT_NON;
-            int j;
-            sd->num_non_taut[iINChI] += cur_is_non_taut;
-            sd->num_taut[iINChI] += cur_is_taut;
-            for (j = j1; j <= j2; j++)
+            if (cur_INChI_Aux[k] && cur_INChI_Aux[k]->nNumberOfAtoms > 0)
             {
-                int bIsotopic = ( pINChI[i][j]->nNumberOfIsotopicAtoms ||
-                                 pINChI[i][j]->nNumberOfIsotopicTGroups ||
-                                 pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1 );
-                if (j == TAUT_YES)
+                pncFlags->bNormalizationFlags[iINChI][k] |= cur_INChI_Aux[k]->bNormalizationFlags;
+                pncFlags->bTautFlags[iINChI][k] |= cur_INChI_Aux[k]->bTautFlags;
+                pncFlags->bTautFlagsDone[iINChI][k] |= cur_INChI_Aux[k]->bTautFlagsDone;
+                pncFlags->nCanonFlags[iINChI][k] |= cur_INChI_Aux[k]->nCanonFlags;
+            }
+        }
+
+        /*  Detect errors */
+        if (num_at < 0)
+        {
+            sd->nErrorCode = num_at;
+        }
+        else if (num_at == 0)
+        {
+            sd->nErrorCode = -1;
+        }
+        else if (cur_INChI[TAUT_NON] && cur_INChI[TAUT_NON]->nErrorCode)
+        {
+            /*  non-tautomeric error */
+            sd->nErrorCode = cur_INChI[TAUT_NON]->nErrorCode;
+        }
+        else if (cur_INChI[TAUT_YES] && cur_INChI[TAUT_YES]->nErrorCode)
+        {
+            /*  tautomeric error */
+            sd->nErrorCode = cur_INChI[TAUT_YES]->nErrorCode;
+        }
+
+        /*  detect and store stereo warnings */
+        if (!sd->nErrorCode)
+        {
+            GetProcessingWarningsOneComponentInChI( cur_INChI,
+                                                    inp_norm_data,
+                                                    sd,
+                                                    0 /*bNoWarnings */ );
+        }
+
+        lElapsedTime = InchiTimeElapsed( ic, &ulTStart );
+        if (ip->msec_MaxTime)
+        {
+            ip->msec_LeftTime -= lElapsedTime;
+        }
+
+        sd->ulStructTime += lElapsedTime;
+    #ifndef TARGET_API_LIB
+        /*  Display the results */
+        if (ip->bDisplay)
+            eat_keyboard_input();
+    #endif
+        /*  a) No matter what happened save the allocated INChI pointers */
+        /*  save the INChI of the current component */
+
+        InchiTimeGet(&ulTStart);
+        for (k = 0; k < TAUT_NUM; k++)
+        {
+            pINChI[i][k] = cur_INChI[k];
+            pINChI_Aux[i][k] = cur_INChI_Aux[k];
+
+            cur_INChI[k] = NULL;
+            cur_INChI_Aux[k] = NULL;
+        }
+
+        /*  b) Count one component structure and/or INChI results only if there was no error */
+        /*     Set inp_norm_data[j]->num_removed_H = number of removed explicit H           */
+
+        if (!sd->nErrorCode)
+        {
+
+            /*  find where the current processed structure is located */
+            int cur_is_in_non_taut = (pINChI[i][TAUT_NON] && pINChI[i][TAUT_NON]->nNumberOfAtoms > 0);
+            int cur_is_in_taut = (pINChI[i][TAUT_YES] && pINChI[i][TAUT_YES]->nNumberOfAtoms > 0);
+            int cur_is_non_taut = (cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer) ||
+                (cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer); /* djb-rwth: addressing LLVM warnings */
+            int cur_is_taut = cur_is_in_taut && 0 < pINChI[i][TAUT_YES]->lenTautomer;
+
+            if (cur_is_non_taut + cur_is_taut)
+            {
+                /*  count tautomeric and non-tautomeric components of the structures */
+                int j1 = cur_is_in_non_taut ? TAUT_NON : TAUT_YES;
+                int j2 = cur_is_in_taut ? TAUT_YES : TAUT_NON;
+                int j;
+                sd->num_non_taut[iINChI] += cur_is_non_taut;
+                sd->num_taut[iINChI] += cur_is_taut;
+                for (j = j1; j <= j2; j++)
                 {
-                    bIsotopic |= ( 0 < pINChI_Aux[i][j]->nNumRemovedIsotopicH[0] +
-                                      pINChI_Aux[i][j]->nNumRemovedIsotopicH[1] +
-                                      pINChI_Aux[i][j]->nNumRemovedIsotopicH[2] );
+                    int bIsotopic = (pINChI[i][j]->nNumberOfIsotopicAtoms ||
+                        pINChI[i][j]->nNumberOfIsotopicTGroups ||
+                        (pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1)); /* djb-rwth: addressing LLVM warning */
+                    if (j == TAUT_YES && pINChI_Aux[i][j]) /* djb-rwth: fixing a NULL pointer dereference */
+                    {
+                        bIsotopic |= (0 < pINChI_Aux[i][j]->nNumRemovedIsotopicH[0] +
+                            pINChI_Aux[i][j]->nNumRemovedIsotopicH[1] +
+                            pINChI_Aux[i][j]->nNumRemovedIsotopicH[2]);
+                    }
+                    inp_norm_data[j]->bExists = 1; /*  j=0: non-taut exists, j=1: taut exists */
+                    inp_norm_data[j]->bHasIsotopicLayer = bIsotopic;
                 }
-                inp_norm_data[j]->bExists = 1; /*  j=0: non-taut exists, j=1: taut exists */
-                inp_norm_data[j]->bHasIsotopicLayer = bIsotopic;
             }
         }
     }
@@ -1031,8 +1081,8 @@ int CanonOneComponentINChI( CANON_GLOBALS *pCG,
         /*  find where the current processed structure is located */
         int cur_is_in_non_taut = ( pINChI[i][TAUT_NON] && pINChI[i][TAUT_NON]->nNumberOfAtoms > 0 );
         int cur_is_in_taut = ( pINChI[i][TAUT_YES] && pINChI[i][TAUT_YES]->nNumberOfAtoms > 0 );
-        int cur_is_non_taut = cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer ||
-            cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer;
+        int cur_is_non_taut = (cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer) ||
+            (cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer); /* djb-rwth: addressing LLVM warnings */
         int cur_is_taut = cur_is_in_taut && 0 < pINChI[i][TAUT_YES]->lenTautomer;
 
         if (cur_is_non_taut + cur_is_taut)
@@ -1047,8 +1097,8 @@ int CanonOneComponentINChI( CANON_GLOBALS *pCG,
             {
                 int bIsotopic = ( pINChI[i][j]->nNumberOfIsotopicAtoms ||
                                  pINChI[i][j]->nNumberOfIsotopicTGroups ||
-                                 pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1 );
-                if (j == TAUT_YES)
+                                 (pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1) ); /* djb-rwth: addressing LLVM warning */
+                if (j == TAUT_YES && pINChI_Aux[i][j]) /* djb-rwth: fixing a NULL pointer dereference */
                 {
                     bIsotopic |= ( 0 < pINChI_Aux[i][j]->nNumRemovedIsotopicH[0] +
                                       pINChI_Aux[i][j]->nNumRemovedIsotopicH[1] +
@@ -1127,12 +1177,13 @@ int  Normalization_step( CANON_GLOBALS *pCG,
 
     /* Init: internal structs */
 
-    memset( z->s, 0, sizeof( z->s ) );
+    memset( z->s, 0, sizeof( z->s ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    if (pBCN) memset( pBCN, 0, sizeof( pBCN[0] ) );
+    if (pBCN) 
+        memset( pBCN, 0, sizeof( pBCN[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    memset( t_group_info, 0, sizeof( *t_group_info ) );
-    memset( t_group_info_orig, 0, sizeof( *t_group_info_orig ) );
+    memset( t_group_info, 0, sizeof( *t_group_info ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( t_group_info_orig, 0, sizeof( *t_group_info_orig ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* Allocate: at[] */
 
@@ -1154,7 +1205,7 @@ int  Normalization_step( CANON_GLOBALS *pCG,
         }
     }
 
-    if (!out_norm_data[TAUT_NON]->at && !out_norm_data[TAUT_YES]->at || !inp_at || ret)
+    if ((!out_norm_data[TAUT_NON]->at && !out_norm_data[TAUT_YES]->at) || !inp_at || ret) /* djb-rwth: addressing LLVM warning */
     {
         ret = -1;
         goto exit_function;
@@ -1167,7 +1218,6 @@ int  Normalization_step( CANON_GLOBALS *pCG,
     /* copy the input structure to be normalized to the buffer for the normalization data */
 
     memcpy( z->out_at, inp_at, num_inp_at * sizeof( z->out_at[0] ) );
-
 
     /*  tautomeric groups setting */
 
@@ -1462,15 +1512,15 @@ int  Normalization_step( CANON_GLOBALS *pCG,
     {
         /* 2008-03-21 DT */
         z->bHasIsotopicAtoms = z->bHasIsotopicAtoms ||
-            z->s[TAUT_YES].nLenLinearCTTautomer > 0 && t_group_info &&
-            ( 0 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[0] ||
-             1 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[1] ||
-             2 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[2] );
+            (z->s[TAUT_YES].nLenLinearCTTautomer > 0 && t_group_info &&
+            ( (0 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[0]) ||
+             (1 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[1]) ||
+             (2 < NUM_H_ISOTOPES && t_group_info->tni.nNumRemovedProtonsIsotopic[2]) )); /* djb-rwth: addressing LLVM warnings */
     }
     /* */
     z->bHasIsotopicAtoms = z->bHasIsotopicAtoms ||
-        z->s[TAUT_YES].nLenIsotopicEndpoints > 1 && t_group_info &&
-        ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) );
+        (z->s[TAUT_YES].nLenIsotopicEndpoints > 1 && t_group_info &&
+        ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) )); /* djb-rwth: addressing LLVM warning */
 
 
     /* Set mode */
@@ -1601,8 +1651,8 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
             {
                 t_group_info->nIsotopicEndpointAtomNumber[0] = inchi_min( 1, t_group_info->nIsotopicEndpointAtomNumber[0] );
             }
-            memset( t_group_info->num_iso_H, 0, sizeof( t_group_info->num_iso_H ) );
-            memset( t_group_info->tni.nNumRemovedProtonsIsotopic, 0, sizeof( t_group_info->tni.nNumRemovedProtonsIsotopic ) );
+            memset( t_group_info->num_iso_H, 0, sizeof( t_group_info->num_iso_H ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( t_group_info->tni.nNumRemovedProtonsIsotopic, 0, sizeof( t_group_info->tni.nNumRemovedProtonsIsotopic ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             t_group_info->bTautFlagsDone &= ~( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE );
         }
 
@@ -1658,7 +1708,7 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
     for (i = z->n2; i >= z->n1 && !RETURNED_ERROR( ret ); i--)
     {
 
-        memset( pCS, 0, sizeof( *pCS ) );
+        memset( pCS, 0, sizeof( *pCS ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
         switch (i)
         {
@@ -1686,10 +1736,10 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
                     z->nMode |= ( z->nUserMode & REQ_MODE_SB_IGN_ALL_UU ) ? CMODE_SB_IGN_ALL_UU : 0;
                 }
 
-                if (ret = AllocateCS( pCS, z->num_atoms, z->num_atoms, z->s[TAUT_NON].nLenCT, z->s[TAUT_NON].nLenCTAtOnly,
+                if ((ret = AllocateCS( pCS, z->num_atoms, z->num_atoms, z->s[TAUT_NON].nLenCT, z->s[TAUT_NON].nLenCTAtOnly,
                     z->s[TAUT_NON].nLenLinearCTStereoDble, z->s[TAUT_NON].nMaxNumStereoBonds,
                     z->s[TAUT_NON].nLenLinearCTStereoCarb, z->s[TAUT_NON].nMaxNumStereoAtoms,
-                    0, 0, z->s[TAUT_NON].nLenIsotopic, z->nMode, pBCN ))
+                    0, 0, z->s[TAUT_NON].nLenIsotopic, z->nMode, pBCN ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -1721,11 +1771,11 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
                     z->nMode |= ( z->nUserMode & REQ_MODE_SB_IGN_ALL_UU ) ? CMODE_SB_IGN_ALL_UU : 0;
                 }
 
-                if (ret = AllocateCS( pCS, z->num_atoms, z->num_at_tg, z->s[TAUT_YES].nLenCT, z->s[TAUT_YES].nLenCTAtOnly,
+                if ((ret = AllocateCS( pCS, z->num_atoms, z->num_at_tg, z->s[TAUT_YES].nLenCT, z->s[TAUT_YES].nLenCTAtOnly,
                     z->s[TAUT_YES].nLenLinearCTStereoDble, z->s[TAUT_YES].nMaxNumStereoBonds,
                     z->s[TAUT_YES].nLenLinearCTStereoCarb, z->s[TAUT_YES].nMaxNumStereoAtoms,
                     z->s[TAUT_YES].nLenLinearCTTautomer, z->s[TAUT_YES].nLenLinearCTIsotopicTautomer,
-                    z->s[TAUT_YES].nLenIsotopic, z->nMode, pBCN ))
+                    z->s[TAUT_YES].nLenIsotopic, z->nMode, pBCN ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -1784,7 +1834,7 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
             pCS->pBCN = pBCN;
             ret = Canon_INChI( ic, z->num_atoms,
                                i ? z->num_at_tg : z->num_atoms,
-                               z->at[i], pCS, pCG, z->nMode, i );
+                               z->at[i], pCS, pCG, z->nMode, i ); /* djb-rwth: ui_rr */
         }
         else
         {
@@ -1860,7 +1910,7 @@ int  Canonicalization_step( CANON_GLOBALS *pCG,
                                                        i,
                                                        pStrErrStruct );
 
-                if (ret2)
+                if (ret2 && pINChI_Aux && pINChI) /* djb-rwth: fixing a NULL pointer dereference */
                 {
                     pINChI->nErrorCode = ret2;
                     pINChI_Aux->nErrorCode = ret2;
@@ -1918,13 +1968,13 @@ int CreateCompositeNormAtom( COMP_ATOM_DATA *composite_norm_data,
                              INP_ATOM_DATA2 *all_inp_norm_data,
                              int num_components )
 {
-    int i, j, jj, k, n, m, tot_num_at, tot_num_H, cur_num_at, cur_num_H, nNumRemovedProtons;
+    int i, j, jj, k, n, m, tot_num_at, tot_num_H, cur_num_at, cur_num_H; /* djb-rwth: removing redundant variables */
     int num_comp[TAUT_NUM + 1], num_taut[TAUT_NUM + 1], num_del[TAUT_NUM + 1], num_at[TAUT_NUM + 1], num_inp_at[TAUT_NUM + 1];
     int ret = 0, indicator = 1;
     inp_ATOM *at, *at_from;
-    memset( num_comp, 0, sizeof( num_comp ) );
-    memset( num_taut, 0, sizeof( num_taut ) );
-    memset( num_del, 0, sizeof( num_taut ) );
+    memset( num_comp, 0, sizeof( num_comp ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( num_taut, 0, sizeof( num_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( num_del, 0, sizeof( num_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     /* count taut and non-taut components */
     for (j = 0; j < TAUT_NUM; j++)
     {
@@ -1951,9 +2001,9 @@ int CreateCompositeNormAtom( COMP_ATOM_DATA *composite_norm_data,
         {
             if (all_inp_norm_data[i][j].bExists &&
                 ( all_inp_norm_data[i][j].bDeleted ||
-                    all_inp_norm_data[i][j].bTautomeric &&
+                    (all_inp_norm_data[i][j].bTautomeric &&
                     all_inp_norm_data[i][j].at_fixed_bonds &&
-                    all_inp_norm_data[i][j].bTautPreprocessed ))
+                    all_inp_norm_data[i][j].bTautPreprocessed) )) /* djb-rwth: addressing LLVM warnings */
             {
                 num_comp[TAUT_INI] ++;
             }
@@ -2050,8 +2100,8 @@ int CreateCompositeNormAtom( COMP_ATOM_DATA *composite_norm_data,
                     }
                     continue;
                 }
-                nNumRemovedProtons = 0;
-                k = TAUT_NUM;
+                /* djb-rwth: removing redundant code */
+                k = TAUT_NUM; /* djb-rwth: ignoring LLVM warning: value used */
                 /* find k = the normaized structure index */
                 if (jj == TAUT_INI)
                 {
@@ -2121,8 +2171,7 @@ int CreateCompositeNormAtom( COMP_ATOM_DATA *composite_norm_data,
                 if (cur_num_H)
                 {
                     at = composite_norm_data[jj].at + num_at[jj] + tot_num_H; /* points to the 1st destination atom */
-                    memcpy( at, at_from + cur_num_at,
-                            sizeof( composite_norm_data[0].at[0] ) * cur_num_H );
+                    memcpy( at, at_from + cur_num_at, sizeof( composite_norm_data[0].at[0] ) * cur_num_H );
                     /* shift neighbors of explicit H atoms */
                     for (n = 0; n < cur_num_H; n++, at++)
                     {
@@ -2182,7 +2231,7 @@ int CreateCompAtomData( COMP_ATOM_DATA *inp_at_data,
     FreeCompAtomData( inp_at_data );
     if (( inp_at_data->at = CreateInpAtom( num_atoms ) ) &&
         ( num_components <= 1 || bIntermediateTaut ||
-        ( inp_at_data->nOffsetAtAndH = (AT_NUMB*) inchi_calloc( sizeof( inp_at_data->nOffsetAtAndH[0] ), 2 * ( num_components + 1 ) ) ) ))
+        ( inp_at_data->nOffsetAtAndH = (AT_NUMB*) inchi_calloc( sizeof( inp_at_data->nOffsetAtAndH[0] ), 2 * ( (long long)num_components + 1 ) ) ) )) /* djb-rwth: cast operator added */
     {
 
         inp_at_data->num_at = num_atoms;
@@ -2241,8 +2290,8 @@ int FillOutINChIReducedWarn( INChI *pINChI,
     {
         nErrorCode |= WARN_FAILED_ISOTOPIC_STEREO;
     }
-    pCanonRankAtoms = (AT_NUMB *) inchi_calloc( num_at_tg + 1, sizeof( pCanonRankAtoms[0] ) );
-    pSortOrd = (AT_NUMB *) inchi_calloc( num_at_tg + 1, sizeof( pSortOrd[0] ) ); /*  must have more than num_atoms */
+    pCanonRankAtoms = (AT_NUMB *) inchi_calloc( (long long)num_at_tg + 1, sizeof( pCanonRankAtoms[0] ) ); /* djb-rwth: cast operator added */
+    pSortOrd = (AT_NUMB *) inchi_calloc( (long long)num_at_tg + 1, sizeof( pSortOrd[0] ) ); /*  must have more than num_atoms */ /* djb-rwth: cast operator added */
 
     if (!pCanonRankAtoms || !pSortOrd)
     {
@@ -2290,10 +2339,10 @@ int FillOutINChIReducedWarn( INChI *pINChI,
     /* abs or rel stereo may establish one of two canonical numberings */
     if (( pCS->nLenLinearCTStereoCarb > 0 || pCS->nLenLinearCTStereoDble > 0 ) &&
           pCS->nLenCanonOrdStereo > 0 &&
-          ( pCS->LinearCTStereoCarb && pCS->LinearCTStereoCarbInv ||
-              pCS->LinearCTStereoDble && pCS->LinearCTStereoDbleInv ) &&
-          pCS->nCanonOrdStereo    && pCS->nCanonOrdStereoInv
-       )
+          ( (pCS->LinearCTStereoCarb && pCS->LinearCTStereoCarbInv) ||
+              (pCS->LinearCTStereoDble && pCS->LinearCTStereoDbleInv) ) &&
+          pCS->nCanonOrdStereo && pCS->nCanonOrdStereoInv
+       ) /* djb-rwth: addressing LLVM warnings */
     {
 
         pCanonRank = pCanonRankAtoms;
@@ -2359,9 +2408,9 @@ int FillOutINChIReducedWarn( INChI *pINChI,
             switch_ptrs( &pCanonRank, &pCanonRankInv );
             switch_ptrs( &pCanonOrd, &pCanonOrdInv );
             /* save inverted stereo ranks & order because it represents the smallest (relative) */
-            memcpy( pCanonRank, pCanonRankInv, num_at_tg * sizeof( pCanonRank[0] ) );
+            memcpy(pCanonRank, pCanonRankInv, num_at_tg * sizeof(pCanonRank[0]));
             /* change pCS->nCanonOrdStereo[] to inverted: */
-            memcpy( pCanonOrd, pCanonOrdInv, num_at_tg * sizeof( pCanonOrd[0] ) );
+            memcpy(pCanonOrd, pCanonOrdInv, num_at_tg * sizeof(pCanonOrd[0]));
         }
         pCanonRankInv = NULL;
         pCanonOrdInv = NULL;
@@ -2395,25 +2444,28 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         /* charges, radicals, valences */
         for (i = 0; i < num_atoms; i++)
         {
-            ii = pCanonOrd[i];
-            if (norm_at[ii].valence || norm_at[ii].num_H)
+            if (pCanonOrd) /* djb-rwth: fixing a NULL pointer dereference */
             {
-                pINChI_Aux->OrigInfo[i].cCharge = norm_at[ii].charge;
-                pINChI_Aux->OrigInfo[i].cRadical = ( norm_at[ii].radical == RADICAL_SINGLET ) ? 0 :
-                    ( norm_at[ii].radical == RADICAL_DOUBLET ) ? 1 :
-                    ( norm_at[ii].radical == RADICAL_TRIPLET ) ? 2 :
-                    norm_at[ii].radical ? 3 : 0;
-                pINChI_Aux->OrigInfo[i].cUnusualValence =
-                    get_unusual_el_valence( norm_at[ii].el_number, norm_at[ii].charge, norm_at[ii].radical,
-                                            norm_at[ii].chem_bonds_valence, norm_at[ii].num_H, norm_at[ii].valence );
-            }
-            else
-            {
-                     /* charge of a single atom component is in the INChI; valence = 0 is standard */
-                pINChI_Aux->OrigInfo[i].cRadical = ( norm_at[ii].radical == RADICAL_SINGLET ) ? 0 :
-                    ( norm_at[ii].radical == RADICAL_DOUBLET ) ? 1 :
-                    ( norm_at[ii].radical == RADICAL_TRIPLET ) ? 2 :
-                    norm_at[ii].radical ? 3 : 0;
+                ii = pCanonOrd[i];
+                if (norm_at[ii].valence || norm_at[ii].num_H)
+                {
+                    pINChI_Aux->OrigInfo[i].cCharge = norm_at[ii].charge;
+                    pINChI_Aux->OrigInfo[i].cRadical = (norm_at[ii].radical == RADICAL_SINGLET) ? 0 :
+                        (norm_at[ii].radical == RADICAL_DOUBLET) ? 1 :
+                        (norm_at[ii].radical == RADICAL_TRIPLET) ? 2 :
+                        norm_at[ii].radical ? 3 : 0;
+                    pINChI_Aux->OrigInfo[i].cUnusualValence =
+                        get_unusual_el_valence(norm_at[ii].el_number, norm_at[ii].charge, norm_at[ii].radical,
+                            norm_at[ii].chem_bonds_valence, norm_at[ii].num_H, norm_at[ii].valence);
+                }
+                else
+                {
+                    /* charge of a single atom component is in the INChI; valence = 0 is standard */
+                    pINChI_Aux->OrigInfo[i].cRadical = (norm_at[ii].radical == RADICAL_SINGLET) ? 0 :
+                        (norm_at[ii].radical == RADICAL_DOUBLET) ? 1 :
+                        (norm_at[ii].radical == RADICAL_TRIPLET) ? 2 :
+                        norm_at[ii].radical ? 3 : 0;
+                }
             }
         }
     }
@@ -2497,9 +2549,9 @@ int FillOutINChIReducedWarn( INChI *pINChI,
             /*  NumAt+INCHI_T_NUM_MOVABLE (group length excluding this number) */
             pINChI->nTautomer[len++] = t_group->nNumEndpoints + INCHI_T_NUM_MOVABLE;
             /*  Num(H), Num(-) */
-            for (j = 0; j < INCHI_T_NUM_MOVABLE && j < T_NUM_NO_ISOTOPIC; j++)
+            for (j = 0; j < INCHI_T_NUM_MOVABLE; j++) /* djb-rwth: removing redundant code */
                 pINChI->nTautomer[len++] = t_group->num[j];
-            for (j = T_NUM_NO_ISOTOPIC; j < INCHI_T_NUM_MOVABLE; j++)
+            for (j = T_NUM_NO_ISOTOPIC; j < INCHI_T_NUM_MOVABLE; j++) /* djb-rwth: redundant code as the loop is never executed -- discussion required */ /* djb-rwth: ui_rr */
                 pINChI->nTautomer[len++] = 0; /* should not happen */
             /* tautomeric group endpoint canonical numbers, pre-sorted in ascending order */
             for (j = (int) t_group->nFirstEndpointAtNoPos,
@@ -2516,9 +2568,9 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         pINChI->lenTautomer = 0;
         pINChI_Aux->nNumberOfTGroups = 0;
         if (t_group_info && ( ( t_group_info->tni.bNormalizationFlags & FLAG_NORM_CONSIDER_TAUT ) ||
-            t_group_info->nNumIsotopicEndpoints > 1 &&
-            ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ) )
-           )
+            (t_group_info->nNumIsotopicEndpoints > 1 &&
+            ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) )) )
+           ) /* djb-rwth: addressing LLVM warning */
         {
             /* only protons (re)moved or added */
             pINChI->lenTautomer = 1;
@@ -2598,7 +2650,7 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         goto exit_function;
     }
 
-    if (nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->Stereo, nUserMode ))
+    if ((nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->Stereo, nUserMode ))) /* djb-rwth: addressing LLVM warning */
     {
         pINChI->nFlags |= ( nStereoUnmarkMode & REQ_MODE_SC_IGN_ALL_UU ) ? INCHI_FLAG_SC_IGN_ALL_UU : 0;
         pINChI->nFlags |= ( nStereoUnmarkMode & REQ_MODE_SB_IGN_ALL_UU ) ? INCHI_FLAG_SB_IGN_ALL_UU : 0;
@@ -2625,10 +2677,10 @@ int FillOutINChIReducedWarn( INChI *pINChI,
 
     if (( pCS->nLenLinearCTIsotopicStereoCarb > 0 || pCS->nLenLinearCTIsotopicStereoDble > 0 ) &&
           pCS->nLenCanonOrdIsotopicStereo > 0 &&
-          ( pCS->LinearCTIsotopicStereoCarb && pCS->LinearCTIsotopicStereoCarbInv ||
-              pCS->LinearCTIsotopicStereoDble && pCS->LinearCTIsotopicStereoDbleInv ) &&
+          ( (pCS->LinearCTIsotopicStereoCarb && pCS->LinearCTIsotopicStereoCarbInv) ||
+              (pCS->LinearCTIsotopicStereoDble && pCS->LinearCTIsotopicStereoDbleInv) ) &&
           pCS->nCanonOrdIsotopicStereo    && pCS->nCanonOrdIsotopicStereoInv
-          )
+          ) /* djb-rwth: addressing LLVM warnings */
     {
         /* found isotopic stereo */
         pCanonRank = pCanonRankAtoms;
@@ -2690,8 +2742,8 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         {
             switch_ptrs( &pCanonRank, &pCanonRankInv );
             switch_ptrs( &pCanonOrd, &pCanonOrdInv );
-            memcpy( pCanonRank, pCanonRankInv, num_at_tg * sizeof( pCanonRank[0] ) );
-            memcpy( pCanonOrd, pCanonOrdInv, num_at_tg * sizeof( pCanonOrd[0] ) );
+            memcpy(pCanonRank, pCanonRankInv, num_at_tg * sizeof(pCanonRank[0]));
+            memcpy(pCanonOrd, pCanonOrdInv, num_at_tg * sizeof(pCanonOrd[0]));
         }
         pCanonRankInv = NULL;
         pCanonOrdInv = NULL;
@@ -2793,7 +2845,7 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         pINChI->nPossibleLocationsOfIsotopicH[0] = (AT_NUMB) j; /* length including the 0th element */
     }
 
-    if (nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->StereoIsotopic, nUserMode ))
+    if ((nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->StereoIsotopic, nUserMode ))) /* djb-rwth: addressing LLVM warning */
     {
         pINChI->nFlags |= ( nStereoUnmarkMode & REQ_MODE_SC_IGN_ALL_UU ) ? INCHI_FLAG_SC_IGN_ALL_ISO_UU : 0;
         pINChI->nFlags |= ( nStereoUnmarkMode & REQ_MODE_SB_IGN_ALL_UU ) ? INCHI_FLAG_SC_IGN_ALL_ISO_UU : 0;
@@ -2816,7 +2868,7 @@ int FillOutINChIReducedWarn( INChI *pINChI,
         ( pCS->nLenLinearCTIsotopic || pCS->nLenLinearCTIsotopicTautomer ) &&
           t_group_info && t_group_info->num_t_groups > 0)
     {
-        n = t_group_info->num_t_groups;
+        n = t_group_info->num_t_groups; /* djb-rwth: ignoring LLVM warning: value used */
         pCanonOrdTaut = pCS->nLenCanonOrdIsotopicStereoTaut > 0 ?
             ( n = pCS->nLenCanonOrdIsotopicStereoTaut, pCS->nCanonOrdIsotopicStereoTaut ) :
             pCS->nLenCanonOrdIsotopicTaut > 0 ?

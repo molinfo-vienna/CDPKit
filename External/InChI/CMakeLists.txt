@@ -29,9 +29,11 @@ if(NOT WIN32)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 endif()
 
-if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-comment -Wno-parentheses -Wno-unused-value -Wno-pointer-bool-conversion -Wno-unsequenced -Wno-constant-logical-operand")
-endif()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -ansi -O2 -c -fno-strict-aliasing")
+
+#if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
+#  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-comment -Wno-parentheses -Wno-unused-value -Wno-pointer-bool-conversion -Wno-unsequenced -Wno-constant-logical-operand")
+#endif()
 
 add_library(inchi OBJECT ${inchi_LIB_SRCS})
 set_target_properties(inchi PROPERTIES COMPILE_DEFINITIONS "TARGET_API_LIB")

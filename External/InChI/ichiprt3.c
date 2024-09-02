@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,25 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
-
+*/
 
 #include <string.h>
 
@@ -39,6 +45,7 @@
 #include "ichimake.h"
 #include "ichi_io.h"
 
+#include "bcf_s.h"
 
 /*
 
@@ -430,7 +437,7 @@ int str_Charge2( INCHI_SORT       *pINChISort,
     int          i, ii, ii2, nUsedLength0;
     INCHI_SORT   *is, *is2, *is0, *is20;
     INChI        *pINChI, *pINChI_Prev, *pINChI_Taut, *pINChI_Taut_Prev;
-    int         nTotalCharge, nTotalCharge_Prev, nTotalCharge_Taut, nTotalCharge_Taut_Prev;
+    int         nTotalCharge, nTotalCharge_Prev, nTotalCharge_Taut; /* djb-rwth: removing redundant variables */
     int          mult, eq2prev, eq2taut, eq2tautPrev, bNext;
     const char  *pPrevEquStr, *pCurrEquStr;
     int         multPrevEquStr;
@@ -443,7 +450,7 @@ int str_Charge2( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -481,7 +488,7 @@ int str_Charge2( INCHI_SORT       *pINChISort,
                 {
                     MakeDelim( sCompDelim, strbuf, bOverflow );
                 }
-                if (nTotalCharge_Prev = pINChI_Prev->nTotalCharge)
+                if ((nTotalCharge_Prev = pINChI_Prev->nTotalCharge)) /* djb-rwth: addressing LLVM warning */
                 {
                     MakeMult( mult + 1, "*", strbuf, 0, bOverflow );
                     inchi_strbuf_printf( strbuf, "%+d", nTotalCharge_Prev );
@@ -575,7 +582,7 @@ int str_Charge2( INCHI_SORT       *pINChISort,
                     }
                     if (pINChI_Prev && pINChI_Prev->nNumberOfAtoms)
                     {
-                        if (nTotalCharge_Prev = pINChI_Prev->nTotalCharge)
+                        if ((nTotalCharge_Prev = pINChI_Prev->nTotalCharge)) /* djb-rwth: addressing LLVM warning */
                         {
                             /* pINChI_Prev exists and has charge info */
                             MakeMult( mult + 1, "*", strbuf, 0, bOverflow );
@@ -585,24 +592,9 @@ int str_Charge2( INCHI_SORT       *pINChISort,
                     }
                     else
                     {
-                        if (bSecondNonTautPass && pINChI_Taut_Prev && pINChI_Taut_Prev->nNumberOfAtoms && !pINChI_Taut_Prev->bDeleted)
-                        {
-                            if (nTotalCharge_Taut_Prev = pINChI_Taut_Prev->nTotalCharge)
-                            {
-                                /* since pINChI_Prev does not exist, pINChI_Taut_Prev is non-tautomeric */
-                                /* and it has charge info. This info has already been printed in the main section */
-                                /*
-                                tot_len += MakeDelim( sIdenticalValues, strbuf, bOverflow);
-                                */
-                                ; /* pINChI_Taut_Prev sp3 info was output in the main stereo section */
-                            }
-                            else
-                            {
-                                ; /* pINChI_Taut_Prev exists and has not sp3 info */
-                            }
-                        }
+                        /* djb-rwth: removing redundant code */
 #if ( bRELEASE_VERSION != 1 && defined(_DEBUG) )
-                        else
+                        if (!(bSecondNonTautPass && pINChI_Taut_Prev && pINChI_Taut_Prev->nNumberOfAtoms && !pINChI_Taut_Prev->bDeleted))
                         {
                             int stop = 1;   /* <BRKPT> */
                         }
@@ -758,7 +750,7 @@ int str_Sp2( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -990,7 +982,7 @@ int str_Sp3( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -1261,7 +1253,7 @@ int str_IsoAtoms( INCHI_SORT *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -1499,7 +1491,7 @@ int str_IsoSp2( INCHI_SORT       *pINChISort,
     INCHI_SORT   *is, *is2, *is0, *is20;
     INChI        *pINChI, *pINChI_Prev, *pINChI_Taut, *pINChI_Taut_Prev;
     INChI_Stereo *Stereo, *Stereo_Prev, *Stereo_Taut, *Stereo_Taut_Prev;
-    int          mult, eq2prev, eq2taut, eq2tautPrev, bNext;
+    int          mult, eq2prev, eq2taut, eq2tautPrev = 1, bNext; /* djb-rwth: initialisation required to avoid garbage values */
     const char  *pPrevEquStr, *pCurrEquStr;
     int         multPrevEquStr;
     pINChI_Taut = NULL;
@@ -1511,8 +1503,7 @@ int str_IsoSp2( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
-    eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
+    /* djb-rwth: removing redundant code */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
     nUsedLength0 = strbuf->nUsedLength;
@@ -1802,7 +1793,7 @@ int str_IsoSp3( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -2139,7 +2130,7 @@ int str_AuxEqu( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Aux_Prev (previous pINChI_Aux) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -2320,7 +2311,7 @@ int str_AuxEqu( INCHI_SORT       *pINChISort,
 
 /****************************************************************************
   Produce tetrahedral stereo inversion substring of AuxInfo.
-/****************************************************************************/
+****************************************************************************/
 int str_AuxInvSp3( INCHI_SORT       *pINChISort,
                    INCHI_SORT       *pINChISort2,
                    INCHI_IOS_STRING *strbuf,
@@ -2351,7 +2342,7 @@ int str_AuxInvSp3( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -2604,7 +2595,7 @@ int str_AuxInvSp3Numb( CANON_GLOBALS    *pCG,
     int          i, ii, ii2, nUsedLength0;
     INCHI_SORT   *is, *is0 /*, *is2*/;
     INChI        *pINChI, *pINChI_Taut;
-    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Prev, *pINChI_Aux_Taut;
+    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Taut; /* djb-rwth: removing redundant variables */
     INChI_Stereo *Stereo, *Stereo_Taut;
     int          eq2taut, bNext;
     const char  *pPrevEquStr, *pCurrEquStr;
@@ -2617,12 +2608,12 @@ int str_AuxInvSp3Numb( CANON_GLOBALS    *pCG,
     pINChI_Taut = NULL;
     pINChI_Aux = NULL;
     pINChI_Aux_Taut = NULL;
-    pINChI_Aux_Prev = NULL;
+    /* djb-rwth: removing redundant code */
     bNext = 0;
     is = NULL;
     is0 = pINChISort;
     /*is2         = bSecondNonTautPass? pINChISort2 : NULL;*/
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
     nUsedLength0 = strbuf->nUsedLength;
@@ -2763,7 +2754,7 @@ int str_AuxInvSp3Numb( CANON_GLOBALS    *pCG,
         }
         MakeEqStr( pPrevEquStr, multPrevEquStr, strbuf, bOverflow );
         pPrevEquStr = NULL;
-        multPrevEquStr = 0;
+        /* djb-rwth: removing redundant code */
     }
 
     return ( strbuf->nUsedLength - nUsedLength0 );
@@ -2788,8 +2779,8 @@ int str_AuxIsoNumb( CANON_GLOBALS    *pCG,
 {
     int          i, ii, ii2, nUsedLength0;
     INCHI_SORT   *is, *is0 /*, *is2*/;
-    INChI        *pINChI, *pINChI_Taut;
-    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Prev, *pINChI_Aux_Taut;
+    /* djb-rwth: removing redundant variables */
+    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Taut; /* djb-rwth: removing redundant variables */
     int          eq2taut, bNext;
     const char  *pPrevEquStr, *pCurrEquStr;
     int         multPrevEquStr;
@@ -2797,16 +2788,15 @@ int str_AuxIsoNumb( CANON_GLOBALS    *pCG,
     * specificity of numbering: there is no previous *
     * component because no repetition is possible    *
     **************************************************/
-    pINChI = NULL;  /* not used here, for debug only */
-    pINChI_Taut = NULL;  /* not used here, for debug only */
+    /* djb-rwth: removing redundant code */
     pINChI_Aux = NULL;
     pINChI_Aux_Taut = NULL;
-    pINChI_Aux_Prev = NULL;
+    /* djb-rwth: removing redundant code */
     bNext = 0;
     is = NULL;
     is0 = pINChISort;
     /*is2         = bSecondNonTautPass? pINChISort2 : NULL;*/
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
     nUsedLength0 = strbuf->nUsedLength;
@@ -2959,7 +2949,7 @@ int str_AuxIsoNumb( CANON_GLOBALS    *pCG,
         }
         MakeEqStr( pPrevEquStr, multPrevEquStr, strbuf, bOverflow );
         pPrevEquStr = NULL;
-        multPrevEquStr = 0;
+        /* djb-rwth: removing redundant code */
     }
 
     return ( strbuf->nUsedLength - nUsedLength0 );
@@ -2996,7 +2986,7 @@ int str_AuxIsoEqu( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero only on the 2nd (non-taut) pass */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Aux_Prev (previous pINChI_Aux) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -3250,7 +3240,7 @@ int str_AuxInvIsoSp3( INCHI_SORT       *pINChISort,
     is2 = NULL;
     is0 = pINChISort;
     is20 = bSecondNonTautPass ? pINChISort2 : NULL;
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Prev (previous pINChI) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
@@ -3370,7 +3360,7 @@ int str_AuxInvIsoSp3( INCHI_SORT       *pINChISort,
             if (!bSecondNonTautPass && bOmitRepetitions && pINChI &&
                 ( pINChI->nNumberOfIsotopicAtoms > 0 ||
                   pINChI->nNumberOfIsotopicTGroups > 0 ||
-                  pINChI->nPossibleLocationsOfIsotopicH && pINChI->nPossibleLocationsOfIsotopicH[0] > 1 ))
+                  (pINChI->nPossibleLocationsOfIsotopicH && pINChI->nPossibleLocationsOfIsotopicH[0] > 1) )) /* djb-rwth: addressing LLVM warning */
             {
                 /* compare tautomeric isotopic stereo-inverted to:
                 *    a) tautomeric stereo-inverted
@@ -3596,7 +3586,7 @@ int str_AuxInvIsoSp3Numb( CANON_GLOBALS    *pCG,
     int          i, ii, ii2, nUsedLength0;
     INCHI_SORT   *is, *is0 /*, *is2*/;
     INChI        *pINChI, *pINChI_Taut;
-    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Prev, *pINChI_Aux_Taut;
+    INChI_Aux    *pINChI_Aux, *pINChI_Aux_Taut; /* djb-rwth: removing redundant variables */
     INChI_Stereo *Stereo, *Stereo_Taut;
     int          eq2taut, bNext;
     const char  *pPrevEquStr, *pCurrEquStr;
@@ -3609,13 +3599,13 @@ int str_AuxInvIsoSp3Numb( CANON_GLOBALS    *pCG,
     pINChI_Taut = NULL;
     pINChI_Aux = NULL;
     pINChI_Aux_Taut = NULL;
-    pINChI_Aux_Prev = NULL;
+    /* djb-rwth: removing redundant code */
     bNext = 0;
     is = NULL;
     /* is2         = NULL;*/
     is0 = pINChISort;
     /* is20        = bSecondNonTautPass? pINChISort2 : NULL;*/
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
     nUsedLength0 = strbuf->nUsedLength;
@@ -3739,8 +3729,8 @@ int str_AuxInvIsoSp3Numb( CANON_GLOBALS    *pCG,
                 /* b) compare isotopic tautomeric inverted stereo numbering to tautomeric inverted stereo numbering */
                 if (!eq2taut)
                 {
-                    eq2taut = ( Stereo_Taut = pINChI->Stereo ) && Stereo->nCompInv2Abs &&
-                        Eql_INChI_Aux_Num( pINChI_Aux, EQL_NUM_INV | EQL_NUM_ISO, pINChI_Aux, EQL_NUM_INV );
+                    eq2taut = pINChI->Stereo && Stereo->nCompInv2Abs &&
+                        Eql_INChI_Aux_Num( pINChI_Aux, EQL_NUM_INV | EQL_NUM_ISO, pINChI_Aux, EQL_NUM_INV ); /* djb-rwth: removing redundant code */
                     /* stereo-inv   isotopic numbering  (taut) =  taut stereo-inv numbering */
                     eq2taut = eq2taut ? ( iiSTEREO_INV | iitISO | iiNUMB | iiEq2INV ) : 0;
                 }
@@ -3813,7 +3803,7 @@ int str_AuxInvIsoSp3Numb( CANON_GLOBALS    *pCG,
         }
         MakeEqStr( pPrevEquStr, multPrevEquStr, strbuf, bOverflow );
         pPrevEquStr = NULL;
-        multPrevEquStr = 0;
+        /* djb-rwth: removing redundant code */
     }
 
     return ( strbuf->nUsedLength - nUsedLength0 );
@@ -3845,7 +3835,7 @@ int str_AuxNumb( CANON_GLOBALS    *pCG,
     int         multPrevEquStr;
     bNext = 0;
     /*is2         = bSecondNonTautPass? pINChISort2 : NULL;*/
-    eq2taut = 0; /* may be non-zero if another layer of the current component = current layer */
+    /* djb-rwth: removing redundant code */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;
     is = NULL;
@@ -3950,7 +3940,7 @@ int str_AuxNumb( CANON_GLOBALS    *pCG,
         }
         MakeEqStr( pPrevEquStr, multPrevEquStr, strbuf, bOverflow );
         pPrevEquStr = NULL;
-        multPrevEquStr = 0;
+        /* djb-rwth: removing redundant code */
     }
 
     return ( strbuf->nUsedLength - nUsedLength0 );
@@ -4111,9 +4101,13 @@ int bin_AuxTautTrans( INCHI_SORT *pINChISort,
     AT_NUMB     *nTrans_n = NULL;
     AT_NUMB     *nTrans_s = NULL;
 
-    ret = 0;
+    /* djb-rwth: removing redundant code */
     is0 = pINChISort;
     is20 = pINChISort2;
+
+    /* djb-rwth: rewritten to avoid memory leaks */
+    nTrans_n = (AT_NUMB*)inchi_calloc((long long)num_components + 1, sizeof(nTrans_n[0])); 
+    nTrans_s = (AT_NUMB*)inchi_calloc((long long)num_components + 1, sizeof(nTrans_s[0])); 
 
     /* Pass 1: save new non-taut numbering */
 
@@ -4129,9 +4123,7 @@ int bin_AuxTautTrans( INCHI_SORT *pINChISort,
             /* different components save equal new ord. numbers: */
             is->ord_number != is2->ord_number)
         {
-            if (( nTrans_n && nTrans_s ) ||
-                ( nTrans_n = (AT_NUMB *) inchi_calloc( num_components + 1, sizeof( nTrans_n[0] ) ) ) &&
-                ( nTrans_s = (AT_NUMB *) inchi_calloc( num_components + 1, sizeof( nTrans_s[0] ) ) ))
+            if ( nTrans_n && nTrans_s ) /* djb-rwth: rewritten to avoid memory leaks */
             {
                 /* new ordering number for original non-tautomeric component number is->ord_number */
                 nTrans_n[is->ord_number] = /*nTrans_t[is2->ord_number] =*/ i + 1;
@@ -4166,19 +4158,15 @@ int bin_AuxTautTrans( INCHI_SORT *pINChISort,
         *pTrans_s = nTrans_s;
         ret = 1;
     }
+    /* djb-rwth: rewritten to avoid memory leaks */
     else
     {
-        if (nTrans_n)
-        {
-            inchi_free( nTrans_n );
-            ret = -1;
-        }
-        if (nTrans_s)
-        {
-            inchi_free( nTrans_s );
-            ret = -1;
-        }
+        ret = -1;
     }
+
+    /* djb-rwth: rewritten to avoid memory leaks */
+    inchi_free( nTrans_n );
+    inchi_free( nTrans_s );
 
     return ret;
 }
@@ -4257,7 +4245,7 @@ int str_AuxIsoTgroupEqu( INCHI_SORT       *pINChISort,
     bNext = 0;
     is = NULL;
     is0 = pINChISort;
-    eq2taut = 0; /* equal to non-isotopic equivalence */
+    /* djb-rwth: removing redundant code */
     eq2tautPrev = 1; /* pINChI_Aux_Prev (previous pINChI_Aux) does not exist */
     pPrevEquStr = NULL; /*, *pCurrEquStr;*/
     multPrevEquStr = 0;

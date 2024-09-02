@@ -1,36 +1,42 @@
 /*
-* International Chemical Identifier (InChI)
-* Version 1
-* Software version 1.06
-* December 15, 2020
+ * International Chemical Identifier (InChI)
+ * Version 1
+ * Software version 1.07
+ * April 30, 2024
+ *
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
 *
 * The InChI library and programs are free software developed under the
-* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
-* Originally developed at NIST.
-* Modifications and additions by IUPAC and the InChI Trust.
-* Some portions of code were developed/changed by external contributors
-* (either contractor or volunteer) which are listed in the file
-* 'External-contributors' included in this distribution.
-*
-* IUPAC/InChI-Trust Licence No.1.0 for the
-* International Chemical Identifier (InChI)
-* Copyright (C) IUPAC and InChI Trust
-*
-* This library is free software; you can redistribute it and/or modify it
-* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
-* or any later version.
-*
-* Please note that this library is distributed WITHOUT ANY WARRANTIES
-* whatsoever, whether expressed or implied.
-* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
-*
-* You should have received a copy of the IUPAC/InChI Trust InChI
-* Licence No. 1.0 with this library; if not, please e-mail:
-*
-* info@inchi-trust.org
-*
+ * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+ * Originally developed at NIST.
+ * Modifications and additions by IUPAC and the InChI Trust.
+ * Some portions of code were developed/changed by external contributors
+ * (either contractor or volunteer) which are listed in the file
+ * 'External-contributors' included in this distribution.
+ *
+ * info@inchi-trust.org
+ *
 */
-
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -46,7 +52,7 @@
 #include "util.h"
 #include "ichi_io.h"
 
-
+#include "bcf_s.h"
 
 /*
     Molfile V3000 related procedures
@@ -74,10 +80,13 @@ int MolfileV3000Init( MOL_FMT_CTAB* ctab,
     {
         ctab->v3000->atom_index_orig = (int *)inchi_calloc(ctab->n_atoms, sizeof(int));
         ctab->v3000->atom_index_fin = (int *)inchi_calloc(ctab->n_atoms, sizeof(int));
-        for (i = 0; i < ctab->n_atoms; i++) /* protective */
+        if (ctab->v3000->atom_index_orig && ctab->v3000->atom_index_fin) /* djb-rwth: fixing a NULL pointer dereference */
         {
-            ctab->v3000->atom_index_orig[i] = -1;
-            ctab->v3000->atom_index_fin[i]  = -1;
+            for (i = 0; i < ctab->n_atoms; i++) /* protective */
+            {
+                ctab->v3000->atom_index_orig[i] = -1;
+                ctab->v3000->atom_index_fin[i] = -1;
+            }
         }
     }
     else
@@ -231,7 +240,7 @@ char* inchi_fgetsLf_V3000( char* line, INCHI_IOSTREAM* inp_stream )
     }
 
     p += 7;
-    len = normalize_string( p );
+    len = normalize_string( p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
     return  p;
 }
@@ -263,7 +272,7 @@ int MolfileV3000ReadField( void* data,
     double ddata = 0.0;
     char *p_end;
 
-    memset( field, 0, max_field_len );
+    memset( field, 0, max_field_len ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     nread = read_upto_delim( line_ptr, field, max_field_len, " \t\n\v\f\r" );
 
@@ -415,7 +424,7 @@ int MolfileV3000ReadKeyword( char* key,
     const int max_field_len = sizeof( field );
 
 
-    memset( field, 0, max_field_len );
+    memset( field, 0, max_field_len ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     nread = read_upto_delim( line_ptr, field, max_field_len, "= \t\n\v\f\r" );
 
@@ -448,7 +457,7 @@ int MolfileV3000ReadCTABBeginAndCountsLine( MOL_FMT_CTAB* ctab,
                                             char *pStrErr )
 {
     char field[MOL_FMT_V3000_MAXFIELDLEN];
-    int   err = 0, len;
+    int   err = 0, len; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     int failed = 0;
 
     int nc;
@@ -456,6 +465,8 @@ int MolfileV3000ReadCTABBeginAndCountsLine( MOL_FMT_CTAB* ctab,
     INCHI_IOSTREAM tmpin;
     INCHI_IOS_STRING *pin = &tmpin.s;
     inchi_ios_init( &tmpin, INCHI_IOS_TYPE_STRING, NULL );
+
+    field[0] = '\0'; /* djb-rwth: adding zero termination */
 
     /* Check for proper start */
 
@@ -505,7 +516,7 @@ int MolfileV3000ReadCTABBeginAndCountsLine( MOL_FMT_CTAB* ctab,
     remove_one_lf( line );
 
     /* Parse counts line */
-    len = MolfileV3000ReadField( field, MOL_FMT_STRING_DATA, &p );
+    len = MolfileV3000ReadField( field, MOL_FMT_STRING_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     if (strcmp( field, "COUNTS" ))
     {
         TREAT_ERR_AND_FIN( err, 1, err_fin, "Cannot read V3000 counts line" );
@@ -691,7 +702,7 @@ int MolfileV3000ReadCollections( MOL_FMT_CTAB* ctab,
             break;
         }
 
-        nread = read_upto_delim( &p, field, max_field_len, "1234567890 \t\n\v\f\r" );
+        nread = read_upto_delim( &p, field, max_field_len, "1234567890 \t\n\v\f\r" ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
         if (!strcmp( field, "/STEABS" ))
         {
             n_coll = 1;
@@ -729,7 +740,7 @@ int MolfileV3000ReadCollections( MOL_FMT_CTAB* ctab,
             /* currently skip non-stereo collections */
         {
             /* consume atoms= */
-            if (( len = MolfileV3000ReadKeyword( field, &p ) > 0 ))
+            if (( len = MolfileV3000ReadKeyword( field, &p ) > 0 )) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             {
                 if (!strcmp( field, "ATOMS" ))
                 {
@@ -858,7 +869,7 @@ int MolfileV3000ReadAtomsBlock( MOL_FMT_CTAB* ctab,
                                 char *pStrErr )
 {
     int i;
-    static const S_SHORT charge_val[] = { 0, 3, 2, 1, 'R', -1, -2, -3 };
+    /* djb-rwth: removing redundant variables */
     char field[MOL_FMT_V3000_MAXFIELDLEN];
     int nc, failed = 0;
     char *p = NULL, *line = NULL;
@@ -930,6 +941,8 @@ int MolfileV3000ReadAtomsBlock( MOL_FMT_CTAB* ctab,
             char symbol[6]; /* TODO: treat possibly long V3000 atom names */
             double fx = 0.0, fy = 0.0, fz = 0.0;
 
+            symbol[0] = '\0'; /* djb-rwth: adding zero termination */
+
             /* Read positional parameters */
             failed = 0;
 
@@ -978,8 +991,8 @@ int MolfileV3000ReadAtomsBlock( MOL_FMT_CTAB* ctab,
             if (ctab->coords)
             {
                 char szcoords[40];
-                sprintf( szcoords, "%10g%10g%10g", fx, fy, fz );
-                strcpy( ctab->coords[i], szcoords );
+                sprintf(szcoords, "%10g%10g%10g", fx, fy, fz);
+                strcpy(ctab->coords[i], szcoords);
             }
 
             if (!strcmp( symbol, "*" ))
@@ -1006,7 +1019,7 @@ int MolfileV3000ReadAtomsBlock( MOL_FMT_CTAB* ctab,
             ctab->atoms[ii].fz = fz;
 
             /* Read key-val pairs if any */
-            while (p && ( len = MolfileV3000ReadKeyword( field, &p ) ) > 0)
+            while (p && ( len = MolfileV3000ReadKeyword( field, &p ) ) > 0) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             {
 
                 int itmp;
@@ -1289,7 +1302,7 @@ int MolfileV3000ReadBondsBlock( MOL_FMT_CTAB* ctab,
             short int atnum1 = -1, atnum2 = -1;
             char bond_type = 0, stereo = 0;
             int failed = 0;
-            int has_non_existent_atom = 0;
+            /* djb-rwth: removing redundant variables */
 
             n_orig_at = ctab->v3000->n_non_star_atoms + ctab->v3000->n_star_atoms;
 
@@ -1323,10 +1336,7 @@ int MolfileV3000ReadBondsBlock( MOL_FMT_CTAB* ctab,
             {
                 failed = 1;
             }
-            else if (atnum1 < 0 || atnum2 < 0)
-            {
-                has_non_existent_atom = 1;
-            }
+            /* djb-rwth: removing redundant code */
 
             if (failed)
             {
@@ -1347,7 +1357,7 @@ int MolfileV3000ReadBondsBlock( MOL_FMT_CTAB* ctab,
 
             /* TODO: treat new bond types  9 10 */
             /* read key-val pairs if any */
-            while (p && ( len = MolfileV3000ReadKeyword( field, &p ) ) > 0)
+            while (p && ( len = MolfileV3000ReadKeyword( field, &p ) ) > 0) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             {
 
                 int itmp;
@@ -1695,15 +1705,15 @@ int MolfileV3000ReadHapticBond( MOL_FMT_CTAB* ctab,
 
     *num_list = NULL;
 
-    memset( field, 0, max_field_len );
+    memset( field, 0, max_field_len ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    nread = read_upto_delim( line_ptr, field, max_field_len, "1234567890 \t\n\v\f\r" );
+    nread = read_upto_delim( line_ptr, field, max_field_len, "1234567890 \t\n\v\f\r" ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     if (strcmp( field, "(" ))
     {
         return -1;
     }
 
-    nread = read_upto_delim( line_ptr, field, max_field_len, " \t\n\v\f\r" );
+    nread = read_upto_delim( line_ptr, field, max_field_len, " \t\n\v\f\r" ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
     nnum = strtol( field, &p_end, 10 );
 
@@ -1716,7 +1726,7 @@ int MolfileV3000ReadHapticBond( MOL_FMT_CTAB* ctab,
         return -1;
     }
 
-    *num_list = (int *) inchi_calloc( nnum + 3, sizeof( int ) );
+    *num_list = (int *) inchi_calloc( (long long)nnum + 3, sizeof( int ) ); /* djb-rwth: cast operator added */
 
     if (!*num_list)
     {
@@ -1782,9 +1792,9 @@ int MolfileV3000ReadStereoCollection( MOL_FMT_CTAB* ctab,
 
     *num_list = NULL;
 
-    memset( field, 0, max_field_len );
+    memset( field, 0, max_field_len ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    nread = read_upto_delim( line_ptr, field, max_field_len, "1234567890 \t\n\v\f\r" );
+    nread = read_upto_delim( line_ptr, field, max_field_len, "1234567890 \t\n\v\f\r" ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     if (strcmp( field, "(" ))
     {
         return -1;
@@ -1803,7 +1813,7 @@ int MolfileV3000ReadStereoCollection( MOL_FMT_CTAB* ctab,
         return -1;
     }
 
-    *num_list = (int *) inchi_calloc( nnum + 3, sizeof( int ) );
+    *num_list = (int *) inchi_calloc( (long long)nnum + 3, sizeof( int ) ); /* djb-rwth: cast operator added */
 
     if (!*num_list)
     {
@@ -1862,7 +1872,7 @@ int get_V3000_input_line_to_strbuf( INCHI_IOS_STRING *buf,
             return -1;
         }
 
-        memmove( (void*) ( buf->pStr + old_used ), (void*) ( buf->pStr + old_used + 7 ), buf->nUsedLength - old_used + 1 );
+        memmove((void*)(buf->pStr + old_used), (void*)(buf->pStr + old_used + 7), (long long)buf->nUsedLength - (long long)old_used + 1); /* djb-rwth: cast operators added */
         buf->nUsedLength -= 7;
 
         if (buf->pStr[buf->nUsedLength - 1] != '-')

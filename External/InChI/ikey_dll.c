@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,24 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
+*/
 
 
 /*
@@ -46,7 +53,6 @@
 #endif
 #endif
 
-
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -57,6 +63,9 @@
 #include "mode.h"
 #include "inchi_api.h"
 #include "util.h"
+
+#include "bcf_s.h"
+int sminor_size; /* djb-rwth: required for fixing oss-fuzz issue #66746 */
 
 /*    Local options */
 
@@ -227,6 +236,7 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
         ret = INCHIKEY_NOT_ENOUGH_MEMORY; goto fin;
     }
     sminor = (char*) inchi_calloc( 2 * slen + 2, sizeof( char ) ); /* we may double the length ... */
+    sminor_size = 2 * slen + 2;
     if (NULL == sminor)
     {
         ret = INCHIKEY_NOT_ENOUGH_MEMORY; goto fin;
@@ -301,7 +311,7 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
 
 
     /* Trim 'InChI=1[S]/' */
-    memcpy( smajor, str + pos_slash1 + 1, ncp * sizeof( str[0] ) );
+    memcpy(smajor, str + pos_slash1 + 1, ncp * sizeof(str[0]));
     smajor[ncp] = '\0';
 
 
@@ -309,7 +319,7 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
     if (jproto)
     {
         /* 2009-01-07 fix bug/typo: assigned incorrect length to the protonation segment of
-        /* source string ( was sproto[ncp]='\0'; should be sproto[lenproto]='\0'; )  */
+           source string ( was sproto[ncp]='\0'; should be sproto[lenproto]='\0'; )  */
         int lenproto = j - (int) jproto;
         if (lenproto < 3)
         {
@@ -318,7 +328,7 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
             goto fin;
         }
 
-        memcpy( sproto, str + pos_slash1 + ncp + 1, lenproto * sizeof( str[0] ) );
+        memcpy(sproto, str + pos_slash1 + ncp + 1, lenproto * sizeof(str[0]));   
         sproto[lenproto] = '\0';
 
         nprotons = strtol( sproto + 2, NULL, 10 );
@@ -358,7 +368,7 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
     if (j != slen + 1)    /* check that something exists at right.*/
     {
         ncp = slen - j;
-        memcpy( sminor, str + j, ( ncp ) * sizeof( str[0] ) );
+        memcpy(sminor, str + j, (ncp) * sizeof(str[0]));
         sminor[ncp] = '\0';
     }
     else
@@ -384,11 +394,11 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
 
     sha2_csum( (unsigned char *) smajor, (int) strlen( smajor ), digest_major );
 
-    sprintf( tmp, "%-.3s%-.3s%-.3s%-.3s%-.2s",
-             base26_triplet_1( digest_major ), base26_triplet_2( digest_major ),
-             base26_triplet_3( digest_major ), base26_triplet_4( digest_major ),
-             base26_dublet_for_bits_56_to_64( digest_major ) );
-    strcat( szINCHIKey, tmp );
+    sprintf(tmp, "%-.3s%-.3s%-.3s%-.3s%-.2s",
+        base26_triplet_1(digest_major), base26_triplet_2(digest_major),
+        base26_triplet_3(digest_major), base26_triplet_4(digest_major),
+        base26_dublet_for_bits_56_to_64(digest_major));
+    strcat(szINCHIKey, tmp);
 #if (INCHIKEY_DEBUG>1)
     fprint_digest( stderr, "Major hash, full SHA-256", digest_major );
 #endif
@@ -402,8 +412,8 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
     slen = strlen( sminor );
     if (( slen > 0 ) && ( slen < 255 ))
     {
-        strcpy( stmp, sminor );
-        strcpy( sminor + slen, stmp );
+        strcpy(stmp, sminor);
+        strcpy(sminor + slen, stmp);
     }
 
     sha2_csum( (unsigned char *) sminor, (int) strlen( sminor ), digest_minor );
@@ -412,13 +422,12 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
     fprint_digest( stderr, "Minor hash, full SHA-256", digest_minor );
 #endif
 
-    strcat( szINCHIKey, "-" );
-    sprintf( tmp, "%-.3s%-.3s%-.2s",
-             base26_triplet_1( digest_minor ),
-             base26_triplet_2( digest_minor ),
-             base26_dublet_for_bits_28_to_36( digest_minor ) );
-    strcat( szINCHIKey, tmp );
-
+    strcat(szINCHIKey, "-");
+    sprintf(tmp, "%-.3s%-.3s%-.2s",
+        base26_triplet_1(digest_minor),
+        base26_triplet_2(digest_minor),
+        base26_dublet_for_bits_28_to_36(digest_minor));
+    strcat(szINCHIKey, tmp);
     /* Append a standard/non-standard flag */
     slen = strlen( szINCHIKey );
     if (is_stdinchi == 1)
@@ -469,6 +478,8 @@ int INCHI_DECL GetINCHIKeyFromINCHI( const char* szINCHISource,
 
 
 fin:
+    /* djb-rwth: fixing oss-fuzz issue #66746 */
+    /*
     if (NULL != str)
     {
         inchi_free( str );
@@ -480,6 +491,7 @@ fin:
     if (NULL != sminor)
     {
         inchi_free( sminor );
+        sminor = NULL;
     }
     if (NULL != stmp)
     {
@@ -489,6 +501,7 @@ fin:
     {
         inchi_free( sproto );
     }
+    */
     if (( ret == INCHIKEY_OK ) && ( ret1 != INCHIKEY_OK ))
     {
         ret = ret1;

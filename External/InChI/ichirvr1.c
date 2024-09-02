@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,25 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
-
+*/
 
 #include <stdlib.h>
 #include <string.h>
@@ -46,7 +52,11 @@
 #include "ichirvrs.h"
 #include "ichicant.h"
 #include "ichi_io.h"
+/* djb-rwth: these two headers have to be included as well */
+#include "ichimain.h"
+#include "inpdef.h"
 
+#include "bcf_s.h"
 
 /**************************************************************************************************
 
@@ -512,10 +522,10 @@ void clear_t_group_info( T_GROUP_INFO *ti )
         int       nNumEndpoints = ti->nNumEndpoints;
         AT_NUMB   *nIsotopicEndpointAtomNumber = ti->nIsotopicEndpointAtomNumber;
         int       nNumIsotopicEndpoints = ti->nNumIsotopicEndpoints;
-        memset( ti, 0, sizeof( *ti ) );
+        memset( ti, 0, sizeof( *ti ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         if (t_group)
         {
-            memset( t_group, 0, sizeof( t_group[0] )*max_num_t_groups );
+            memset( t_group, 0, sizeof( t_group[0] )*max_num_t_groups ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         else
         {
@@ -523,7 +533,7 @@ void clear_t_group_info( T_GROUP_INFO *ti )
         }
         if (tGroupNumber)
         {
-            memset( tGroupNumber, 0, sizeof( tGroupNumber[0] )*num_t_groups );
+            memset( tGroupNumber, 0, sizeof( tGroupNumber[0] )*num_t_groups ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         else
         {
@@ -531,7 +541,7 @@ void clear_t_group_info( T_GROUP_INFO *ti )
         }
         if (nEndpointAtomNumber)
         {
-            memset( nEndpointAtomNumber, 0, sizeof( nEndpointAtomNumber[0] )*nNumEndpoints );
+            memset( nEndpointAtomNumber, 0, sizeof( nEndpointAtomNumber[0] )*nNumEndpoints ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         else
         {
@@ -539,7 +549,7 @@ void clear_t_group_info( T_GROUP_INFO *ti )
         }
         if (nIsotopicEndpointAtomNumber)
         {
-            memset( nIsotopicEndpointAtomNumber, 0, sizeof( nIsotopicEndpointAtomNumber[0] )*nNumIsotopicEndpoints );
+            memset( nIsotopicEndpointAtomNumber, 0, sizeof( nIsotopicEndpointAtomNumber[0] )*nNumIsotopicEndpoints ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         else
         {
@@ -567,10 +577,9 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
                             AT_NUMB *endpoint,
                             INChI *pInChI )
 {
-    int ret, i, j, k, itg, num_atoms, len_tg, bIso, num_t_groups;
+    int ret, i, j, k, itg, num_atoms, len_tg, num_t_groups; /* djb-rwth: removing redundant variables */
     AT_NUMB   *tGroupNumber = NULL;
-    AT_NUMB   *tSymmRank = NULL;
-    AT_NUMB   *tiSymmRank = NULL;
+    /* djb-rwth: removing redundant variables */
     AT_NUMB   *tiGroupNumber = NULL;
 
     ret = 0;
@@ -580,7 +589,7 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
          pInChI->nTautomer && pInChI->nTautomer[0] > 0)
     {
         num_atoms = pInChI->nNumberOfAtoms;
-        bIso = pInChI->IsotopicAtom && pInChI->nNumberOfIsotopicAtoms;
+        /* djb-rwth: removing redundant code */
         num_t_groups = pInChI->nTautomer[0];
         len_tg = pInChI->lenTautomer - T_GROUP_HDR_LEN*pInChI->nTautomer[0] - 1; /* number of endpoints */
 
@@ -590,7 +599,7 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
             ti->max_num_t_groups = num_atoms / 2 + 1;
             if (ti->t_group)
                 inchi_free( ti->t_group );
-            ti->t_group = (T_GROUP *) inchi_calloc( ti->max_num_t_groups, sizeof( ti->t_group[0] ) );
+            ti->t_group = (T_GROUP *) inchi_calloc( (long long)ti->max_num_t_groups + 1, sizeof( ti->t_group[0] ) ); /* djb-rwth: correcting 0 bytes allocation */
         }
 
         /* allocation ti->tGroupNumber */
@@ -599,7 +608,7 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
             ti->num_t_groups = num_t_groups;
             if (ti->tGroupNumber)
                 inchi_free( ti->tGroupNumber );
-            ti->tGroupNumber = (AT_NUMB *) inchi_calloc( ( ti->num_t_groups + 1 )*TGSO_TOTAL_LEN, sizeof( ti->tGroupNumber[0] ) );
+            ti->tGroupNumber = (AT_NUMB *) inchi_calloc( ( (long long)ti->num_t_groups + 1 )*TGSO_TOTAL_LEN, sizeof( ti->tGroupNumber[0] ) ); /* djb-rwth: cast operator added */
         }
 
         /* allocation ti->tGroupNumber */
@@ -608,7 +617,7 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
             ti->nNumEndpoints = len_tg;
             if (ti->nEndpointAtomNumber)
                 inchi_free( ti->nEndpointAtomNumber );
-            ti->nEndpointAtomNumber = (AT_NUMB *) inchi_calloc( len_tg + 1, sizeof( ti->nEndpointAtomNumber[0] ) );
+            ti->nEndpointAtomNumber = (AT_NUMB *) inchi_calloc( (long long)len_tg + 1, sizeof( ti->nEndpointAtomNumber[0] ) ); /* djb-rwth: cast operator added */
         }
 
         /* check */
@@ -619,9 +628,8 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
         }
 
         tGroupNumber = ti->tGroupNumber;
-        tSymmRank = tGroupNumber + TGSO_SYMM_RANK   * ti->num_t_groups;  /*  equivalence; cannot restore */
-        tiSymmRank = tGroupNumber + TGSO_SYMM_IRANK  * ti->num_t_groups;
-        tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER * ti->num_t_groups;
+        /* djb-rwth: removing redundant code */
+        tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER * (long long)ti->num_t_groups; /* djb-rwth: cast operator added */
 
 
         INCHI_HEAPCHK
@@ -629,7 +637,8 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
             j = 1; /* index in pInChI->nTautomer[] */
         i = 0; /* index in ti->nEndpointAtomNumber[] */
 
-        for (itg = 0; itg < pInChI->nTautomer[0]; itg++)
+        /* djb-rwth: fixing oss-fuzz issues #67681, #67641 */
+        for (itg = 0; itg < pInChI->nTautomer[0] && itg <= ti->max_num_t_groups; itg++)
         {
             len_tg = pInChI->nTautomer[j]; /* t-group length not including pInChI->nTautomer[j] */
             ti->t_group[itg].num[0] = pInChI->nTautomer[j + 1] + pInChI->nTautomer[j + 2]; /* num mobile H & (-) */
@@ -642,9 +651,9 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
             ti->t_group[itg].nNumEndpoints = len_tg;
             ti->t_group[itg].nFirstEndpointAtNoPos = i;
 
-            for (; 0 < len_tg--; j++, i++)
+            while (len_tg > 0)
             {
-                k = ti->nEndpointAtomNumber[i] = pInChI->nTautomer[j] - 1;
+                k = ti->nEndpointAtomNumber[i] = pInChI->nTautomer[j] - 1; /* djb-rwth: buffer overrun avoided implicitly in loop condition */
 #if ( FIX_GAF_2019_1==1 )
                 if (k<0 || k>num_atoms)
                 {
@@ -660,6 +669,9 @@ int GetTgroupInfoFromInChI( T_GROUP_INFO *ti,
                 {
                     endpoint[k] = itg + 1;
                 }
+                len_tg--;
+                j++;
+                i++;
             }
         }
 
@@ -688,7 +700,7 @@ int FillOutpStructEndpointFromInChI( INChI *pInChI, AT_NUMB **pEndpoint )
         return RI_ERR_ALLOC;
     }
 
-    memset( endpoint, 0, num_at * sizeof( endpoint[0] ) );
+    memset( endpoint, 0, num_at * sizeof( endpoint[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     if (pInChI->lenTautomer <= 1 || !pInChI->nTautomer)
     {
         goto exit_function;
@@ -723,11 +735,11 @@ int cmp_charge_val( const void *a1, const void *a2, void *p )
     const CHARGE_VAL *p2 = (const CHARGE_VAL *) a2;
     int    diff;
 
-    if (diff = (int) p1->nValence - (int) p2->nValence)  /* smaller valence first */
+    if ((diff = (int) p1->nValence - (int) p2->nValence))  /* smaller valence first */ /* djb-rwth: addressing LLVM warning */
         return diff;
-    if (diff = abs( (int) p1->nCharge ) - abs( (int) p2->nCharge )) /* smaller abs charge first */
+    if ((diff = abs( (int) p1->nCharge ) - abs( (int) p2->nCharge ))) /* smaller abs charge first */ /* djb-rwth: addressing LLVM warning */
         return diff;
-    if (diff = (int) p2->nCharge - (int) p1->nCharge) /* (+) first, (-) second */
+    if ((diff = (int) p2->nCharge - (int) p1->nCharge)) /* (+) first, (-) second */ /* djb-rwth: addressing LLVM warning */
         return diff;
     return (int) p1->nValenceOrderingNumber - (int) p2->nValenceOrderingNumber;
 }
@@ -736,50 +748,41 @@ int cmp_charge_val( const void *a1, const void *a2, void *p )
 /************************************************************************************/
 int bMayBeACationInMobileHLayer( inp_ATOM *at, VAL_AT *pVA, int iat, int bMobileH )
 {
-    static const char szEl[] = "N;P;O;S;Se;Te;";
-    static const char cVal[] = { 4,4,3,3, 3, 3, 0 };
-    static char en[8];
-    static int  ne;
-    int ne2;
-    int    i, j, neigh;
-    char   *p;
+    int    j, neigh;
     if (!bMobileH || !at[iat].num_H)
     {
         return 1;
     }
-    if (!ne)
-    { /* one time initialization */
-        const char *b, *e;
-        int  len;
-        char elname[ATOM_EL_LEN];
-        ne2 = 0;
-        for (b = szEl; e = strchr( b, ';' ); b = e + 1)
-        {
-            len = (int) ( e - b );
-            memcpy( elname, b, len );
-            elname[len] = '\0';
-            en[ne2++] = get_periodic_table_number( elname );
-        }
-        en[ne2] = '\0';
-        ne = ne2;
+
+    /* cVal, cation valence */
+    U_CHAR cVal;
+    switch ( at[iat].el_number ) {
+        case EL_NUMBER_N: /* fallthrough */
+        case EL_NUMBER_P:
+            cVal = 4;
+            break;
+        case EL_NUMBER_O: /* fallthrough */
+        case EL_NUMBER_S:
+        case EL_NUMBER_SE:
+        case EL_NUMBER_TE:
+            cVal = 3;
+            break;
+        default:
+            return 1;    
     }
-    if (p = (char *) memchr( en, at[iat].el_number, ne ))
+
+    if (at[iat].valence + at[iat].num_H <= cVal)
     {
-        i = (int) ( p - en );
-        /* >B(-)< exception */
-        if (at[iat].valence + at[iat].num_H <= cVal[i])
+        for (j = 0; j < at[iat].valence; j++)
         {
-            for (j = 0; j < at[iat].valence; j++)
+            neigh = at[iat].neighbor[j];
+            if (at[neigh].valence == 4 && at[neigh].chem_bonds_valence == 4 && !at[neigh].num_H &&
+                    pVA[neigh].cNumValenceElectrons == 3 && pVA[neigh].cPeriodicRowNumber == 1)
             {
-                neigh = at[iat].neighbor[j];
-                if (at[neigh].valence == 4 && at[neigh].chem_bonds_valence == 4 && !at[neigh].num_H &&
-                     pVA[neigh].cNumValenceElectrons == 3 && pVA[neigh].cPeriodicRowNumber == 1)
-                {
-                    return 1;
-                }
+                return 1;
             }
-            return 0;
         }
+        return 0;
     }
     return 1;
 }
@@ -835,7 +838,7 @@ int clean_charge_val( struct tagCANON_GLOBALS *pCG, CHARGE_VAL *pChargeVal, int 
         {
             continue; /* not more than one triple and the rest - double bonds per atom */
         }
-        if (( bTautomeric || j && bFixedHTautomeric ) && pChargeVal[i].nCharge < 0)
+        if (( bTautomeric || (j && bFixedHTautomeric) ) && pChargeVal[i].nCharge < 0) /* djb-rwth: addressing LLVM warning */
         {
             continue; /* negative charge must be included in the tautomeric group */
         }
@@ -906,11 +909,11 @@ return value:
       0 => do not know what to do; leave the atom unchanged
       1 => success
 ****************************************************************************/
-int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
-                        inp_ATOM *atom, int iat, VAL_AT *pVArray,
-                        ICHICONST SRM *pSrm, int bMobileH, AT_NUMB *endpoint )
+int GetAtomRestoreInfo(struct tagCANON_GLOBALS* pCG,
+    inp_ATOM* atom, int iat, VAL_AT* pVArray,
+    ICHICONST SRM* pSrm, int bMobileH, AT_NUMB* endpoint)
 {
-/* #defines from util.c */
+    /* #defines from util.c */
 #define MIN_ATOM_CHARGE        (-2)
 #define MAX_ATOM_CHARGE         2
 #define NEUTRAL_STATE          (-MIN_ATOM_CHARGE)
@@ -923,16 +926,16 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
     int nFoundNeutralValenceExcess, nFoundNeutralValenceOrdNumber;
     int nLastFoundValenceOrdNumber, nLastFoundValenceState;
     int cn_bits, cn_bits_array[5], len_cn_bits_array;
-    inp_ATOM *at = atom + iat;
-    VAL_AT      *pVA = pVArray + iat;
+    inp_ATOM* at = atom + iat;
+    VAL_AT* pVA = pVArray + iat;
     int nPeriodicNum = at->el_number;
     int cur_chem_valence, cur_chem_valence_fixed, min_chem_valence, known_chem_valence;
     int metal_bonds_chem_valence, not_metal_bonds_chem_valence, alt_bonds_delta_valence, bonds_chem_valence, bond_type;
-    CHARGE_VAL  ChargeVal[NUM_ATOM_CHARGES*MAX_NUM_VALENCES];
+    CHARGE_VAL  ChargeVal[NUM_ATOM_CHARGES * MAX_NUM_VALENCES];
 
-    memset( ChargeVal, 0, sizeof( ChargeVal ) );
+    memset(ChargeVal, 0, sizeof(ChargeVal));
 
-    pVA->cDoNotAddH = if_skip_add_H( nPeriodicNum );  /* InChI never adds H to this atom */
+    pVA->cDoNotAddH = if_skip_add_H(nPeriodicNum);  /* InChI never adds H to this atom */
     /*pVA->cMetal     = is_el_a_metal( nPeriodicNum );*/ /* the atom is a metal */
 
     /* count bonds to metal atoms; metals have already been marked */
@@ -943,10 +946,10 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
         j = at->valence; /* all bonds to metal */
         for (i = k = j2 = k2 = 0; i < at->valence; i++)
         {
-            bond_type = ( at->bond_type[i] & BOND_TYPE_MASK );
+            bond_type = (at->bond_type[i] & BOND_TYPE_MASK);
             if (bond_type <= BOND_TYPE_TRIPLE)
             {
-                metal_bonds_chem_valence += inchi_max( BOND_TYPE_SINGLE, bond_type );
+                metal_bonds_chem_valence += inchi_max(BOND_TYPE_SINGLE, bond_type);
             }
             else
             {
@@ -959,13 +962,13 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
     {
         for (i = j = j2 = k = k2 = 0; i < at->valence; i++)
         {
-            bond_type = ( at->bond_type[i] & BOND_TYPE_MASK );
-            if (pVArray[(int) at->neighbor[i]].cMetal)
+            bond_type = (at->bond_type[i] & BOND_TYPE_MASK);
+            if (pVArray[(int)at->neighbor[i]].cMetal)
             {
                 j++;  /* number of bonds to metal atoms */
                 if (bond_type <= BOND_TYPE_TRIPLE)
                 {
-                    metal_bonds_chem_valence += inchi_max( BOND_TYPE_SINGLE, bond_type );
+                    metal_bonds_chem_valence += inchi_max(BOND_TYPE_SINGLE, bond_type);
                 }
                 else
                 {
@@ -978,7 +981,7 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
                 j2++;
                 if (bond_type <= BOND_TYPE_TRIPLE)
                 {
-                    not_metal_bonds_chem_valence += inchi_max( BOND_TYPE_SINGLE, bond_type );
+                    not_metal_bonds_chem_valence += inchi_max(BOND_TYPE_SINGLE, bond_type);
                 }
                 else
                 {
@@ -1020,15 +1023,15 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
     cur_chem_valence = bonds_chem_valence + alt_bonds_delta_valence + num_H; /* includes double & alternating bond contribution */
 
     /* number of non-bonding electrons in case of all single bonds */
-    num_non_bonding_electrons = (int) pVA->cNumValenceElectrons - min_chem_valence;
+    num_non_bonding_electrons = (int)pVA->cNumValenceElectrons - min_chem_valence;
     /* Octet rule: charge = bonds_valence + NumValenceElectrons - 8 */
-    charge = min_chem_valence + (int) pVA->cNumValenceElectrons - VALUE_OCTET; /* wrong */
+    charge = min_chem_valence + (int)pVA->cNumValenceElectrons - VALUE_OCTET; /* wrong */
 
     /* typical (ad hoc) minimal neutral valence */
-    known_chem_valence = ( pVA->cNumValenceElectrons > VALUE_OCTET / 2 ) ?
+    known_chem_valence = (pVA->cNumValenceElectrons > VALUE_OCTET / 2) ?
         VALUE_OCTET - pVA->cNumValenceElectrons :
         pVA->cNumValenceElectrons;
-/* excess of typical valence over all-single-bonds valence */
+    /* excess of typical valence over all-single-bonds valence */
     nOctetNeutralValenceExcess = known_chem_valence - min_chem_valence;
     /*  (NB=num.bonds, NV=neutral valence, NVX=neutral valence excess, LFVS=last found valence state, val.=valence)
 
@@ -1194,12 +1197,12 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
     {
         for (i = 0; i < MAX_NUM_VALENCES; i++)
         {
-            known_chem_valence = get_el_valence( nPeriodicNum, cur_charge, i );
+            known_chem_valence = get_el_valence(nPeriodicNum, cur_charge, i);
             if (cur_chem_valence_fixed > known_chem_valence || !known_chem_valence)
             {
                 continue; /* known valence < all-single-bonds valence */
             }
-            if (BOND_TYPE_TRIPLE + BOND_TYPE_DOUBLE * ( num_bonds - 1 ) + num_H < known_chem_valence)
+            if (BOND_TYPE_TRIPLE + BOND_TYPE_DOUBLE * (num_bonds - 1) + num_H < known_chem_valence)
             {
                 continue; /* not more than one triple and the rest - double bonds per atom */
             }
@@ -1222,7 +1225,7 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
                     nLastFoundValenceState = nNumStates;
                 }
                 else
-                    if (abs( ChargeVal[nLastFoundValenceState].nCharge ) >= abs( cur_charge ))
+                    if (abs(ChargeVal[nLastFoundValenceState].nCharge) >= abs(cur_charge))
                     {
                         /* accept smaller abs(charge); if abs(charges) are same, accept (+) */
                         nLastFoundValenceState = nNumStates;
@@ -1250,7 +1253,7 @@ int GetAtomRestoreInfo( struct tagCANON_GLOBALS *pCG,
     /*       Find an appropriate ChargeStruct index for the ChargeVal found            */
     /***********************************************************************************/
     cn_bits = 0;
-    memset( cn_bits_array, 0, sizeof( cn_bits_array ) );
+    memset( cn_bits_array, 0, sizeof( cn_bits_array ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     /***** set bits identifying a suitable ChargeStruct ******/
     for (i = len_cn_bits_array = 0; i < nNumSelectedStates && len_cn_bits_array < 4; i++)
     {
@@ -1498,15 +1501,15 @@ number of valence electrons = (type>1)? type-1: type
 /****************************************************************************/
 int ReallocTCGroups( ALL_TC_GROUPS *pTCGroups, int nAdd )
 {
-    TC_GROUP *pTCGroup = (TC_GROUP *) inchi_malloc( sizeof( pTCGroup[0] )*( pTCGroups->max_tc_groups + nAdd ) );
+    TC_GROUP *pTCGroup = (TC_GROUP *) inchi_malloc( sizeof( pTCGroup[0] )*( (long long)pTCGroups->max_tc_groups + nAdd ) ); /* djb-rwth: cast operator added */
 
     if (pTCGroup)
     {
         if (pTCGroups->num_tc_groups)
         {
-            memcpy( pTCGroup, pTCGroups->pTCG, sizeof( pTCGroup[0] )*pTCGroups->num_tc_groups );
+            memcpy(pTCGroup, pTCGroups->pTCG, sizeof(pTCGroup[0]) * pTCGroups->num_tc_groups);
         }
-        memset( pTCGroup + pTCGroups->max_tc_groups, 0, sizeof( pTCGroup[0] )*nAdd );
+        memset( pTCGroup + pTCGroups->max_tc_groups, 0, sizeof( pTCGroup[0] )*nAdd ); /* djb-rwth: memset_s C11/Annex K variant? */
         if (pTCGroups->pTCG)
         {
             inchi_free( pTCGroups->pTCG );
@@ -1708,7 +1711,7 @@ int BondFlowMaxcapMinorder( inp_ATOM *atom,
     }
 
     /* M=metal, A=non-metal atom, e=endpoint */
-    if (nStereo && pSrm->bFixStereoBonds || !nMetal || !pSrm->bMetalAddFlower)
+    if ((nStereo && pSrm->bFixStereoBonds) || !nMetal || !pSrm->bMetalAddFlower) /* djb-rwth: addressing LLVM warning */
     {
         /* atom-atom rules, no metal atoms involved (1: A-A, A-Ae, Ae-Ae) */
         nMinorder = BOND_TYPE_SINGLE;
@@ -1732,8 +1735,8 @@ int BondFlowMaxcapMinorder( inp_ATOM *atom,
         bNeedsFlower = ( 0 != pVA[iat].cMetal );
     }
     else
-        if (pVA[iat].cMetal && !at->endpoint && !pVA[neigh].cMetal && atom[neigh].endpoint ||
-             pVA[neigh].cMetal && !atom[neigh].endpoint && !pVA[iat].cMetal   && at->endpoint)
+        if ((pVA[iat].cMetal && !at->endpoint && !pVA[neigh].cMetal && atom[neigh].endpoint) ||
+             (pVA[neigh].cMetal && !atom[neigh].endpoint && !pVA[iat].cMetal && at->endpoint)) /* djb-rwth: addressing LLVM warnings */
         {
             /* M-ae */
             /* metal connected to a non-metal endpoint (3: M-Ae) */
@@ -1931,7 +1934,7 @@ repeat_for_metals:
             /* Important: unlike inp_ATOM, each edge e appears in pCN[*].e[*] only ONE time */
             int     len = cnList[j = pVA[i].cnListIndex - 1].len;
             int     bits = cnList[j].bits;
-            int     type, neigh_type, metal_group_number;
+            int     type, neigh_type; /* djb-rwth: removing redundant variables */
             pCN = cnList[j].pCN;
 
             /* first process all non-metals, after that -- all metals */
@@ -1939,7 +1942,7 @@ repeat_for_metals:
             {
                 continue;
             }
-            metal_group_number = 0;
+            /* djb-rwth: removing redundant code */
             for (j = 0; j < len; j++)
             {
                 type = pCN[j].v.type; /* ChargeStruct vertex type: atom is the first, c-groups are last */
@@ -2275,13 +2278,13 @@ only groups with number 0 are processed
  ****************************************************************/
 int nAddSuperCGroups( ALL_TC_GROUPS *pTCGroups )
 {
-    int i, k, n, n1, n2, n3, nNumTg = 0, ret = 0, nNumToConnect;
+    int i, k, n, n1, n2, n3, ret = 0, nNumToConnect; /* djb-rwth: removing redundant variables */
 
     for (i = 0; i < pTCGroups->num_tc_groups; i++)
     {
         if (pTCGroups->pTCG[i].type & BNS_VERT_TYPE_TGROUP)
         {
-            nNumTg++;
+            /* djb-rwth: removing redundant code */
             continue; /* t-group */
         }
         if (IS_BNS_VT_C_GR( pTCGroups->pTCG[i].type ) ||
@@ -2334,7 +2337,7 @@ int nAddSuperCGroups( ALL_TC_GROUPS *pTCGroups )
                     goto exit_function;
             }
 
-            if (pTCGroups->nGroup[k] >= 0 || pTCGroups->pTCG[i].ord_num && !IS_BNS_VT_M_GR( pTCGroups->pTCG[i].type ))
+            if (pTCGroups->nGroup[k] >= 0 || (pTCGroups->pTCG[i].ord_num && !IS_BNS_VT_M_GR( pTCGroups->pTCG[i].type ))) /* djb-rwth: addressing LLVM warning */
             {
                 ret = RI_ERR_PROGR;
                 goto exit_function;
@@ -2487,7 +2490,7 @@ int AddTGroups2TCGBnStruct( BN_STRUCT *pBNS,
         /* since t-group IDs may be not contiguous, clear all vertices that will be added.
            all-zeroes-vertex will be ignored by the BNS
         */
-        memset( pBNS->vert + num_vertices, 0, nMaxTGroupNumber * sizeof( pBNS->vert[0] ) );
+        memset( pBNS->vert + num_vertices, 0, nMaxTGroupNumber * sizeof( pBNS->vert[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
         /* initialize new fictitious vertices */
         vert_ficpoint_prev = pBNS->vert + num_vertices - 1;
@@ -2643,7 +2646,7 @@ int ConnectTwoVertices( BNS_VERTEX *p1, BNS_VERTEX *p2, BNS_EDGE *e, BN_STRUCT *
     /* clear the edge */
     if (bClearEdge)
     {
-        memset( e, 0, sizeof( *e ) );
+        memset( e, 0, sizeof( *e ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     }
     else
         if (e->neighbor1 || e->neighbor12)
@@ -2700,20 +2703,20 @@ int ConnectTwoVertices( BNS_VERTEX *p1, BNS_VERTEX *p2, BNS_EDGE *e, BN_STRUCT *
               fd |  D         |  c+D      |  c+D      |  D       |  f+D        |  D
        --------------------------------------------------------------------------------------
 ***********************************************************************************************************/
-int AddRadicalToMetal( int *tot_st_cap, int *tot_st_flow, ICHICONST SRM *pSrm, BN_STRUCT *pBNS, ALL_TC_GROUPS *pTCGroups )
+int AddRadicalToMetal(int* tot_st_cap, int* tot_st_flow, ICHICONST SRM* pSrm, BN_STRUCT* pBNS, ALL_TC_GROUPS* pTCGroups)
 {
     int iG0 = pTCGroups->nGroup[TCG_MeFlower0]; /* index in pTCGroups->pTCG[] */
     int iG1 = pTCGroups->nGroup[TCG_MeFlower1];
     int iG2 = pTCGroups->nGroup[TCG_MeFlower2];
     int iG3 = pTCGroups->nGroup[TCG_MeFlower3];
-    int n = ( iG0 >= 0 ) + ( iG1 >= 0 ) + ( iG2 >= 0 ) + ( iG3 >= 0 );
+    int n = (iG0 >= 0) + (iG1 >= 0) + (iG2 >= 0) + (iG3 >= 0);
     int vG0, vG1, vG2, vG3;  /* M-vertex number */
-    BNS_VERTEX *pG0 = NULL, *pG1 = NULL, *pG2 = NULL, *pG3 = NULL;
+    BNS_VERTEX* pG0 = NULL, * pG1 = NULL, * pG2 = NULL, * pG3 = NULL;
 
     if (pTCGroups->num_metal_atoms &&
-         pSrm->bMetalAddFlower      &&
-         *tot_st_cap % 2 &&
-         n == 4)
+        pSrm->bMetalAddFlower &&
+        *tot_st_cap % 2 &&
+        n == 4)
     {
         vG0 = pTCGroups->pTCG[iG0].nVertexNumber;
         vG1 = pTCGroups->pTCG[iG1].nVertexNumber;
@@ -2728,7 +2731,7 @@ int AddRadicalToMetal( int *tot_st_cap, int *tot_st_flow, ICHICONST SRM *pSrm, B
         /* add 1 unit to metal flower st_cap */
         pG3->st_edge.cap++;
         pG3->st_edge.cap0++;
-        ( *tot_st_cap )++;
+        (*tot_st_cap)++;
         return 1;
     }
 
@@ -2803,11 +2806,11 @@ int ConnectMetalFlower( int *pcur_num_vertices, int *pcur_num_edges,
 
     /* get new edges */
 
-    ea = pBNS->edge + ( ia = cur_num_edges++ );
-    eb = pBNS->edge + ( ib = cur_num_edges++ );
-    ed = pBNS->edge + ( id = cur_num_edges++ );
-    ex = pBNS->edge + ( ix = cur_num_edges++ );
-    ey = pBNS->edge + ( iy = cur_num_edges++ );
+    ea = pBNS->edge + (ia = cur_num_edges++);
+    eb = pBNS->edge + (ib = cur_num_edges++);
+    ed = pBNS->edge + (id = cur_num_edges++);
+    ex = pBNS->edge + (ix = cur_num_edges++);
+    ey = pBNS->edge + (iy = cur_num_edges++);
 
     /* connect vertices with edges */
     ret = ConnectTwoVertices( pG0, pG1, eb, pBNS, 1 );
@@ -3086,10 +3089,10 @@ int ConnectSuperCGroup( int nSuperCGroup, int nAddGroups[], int num_add,
         return 0;
     }
 
-    e0X = (BNS_EDGE   **) inchi_calloc( num_groups + 1, sizeof( e0X[0] ) );
-    pvX = (BNS_VERTEX **) inchi_calloc( num_groups + 1, sizeof( pvX[0] ) );
-    jX = (int         *) inchi_calloc( num_groups + 1, sizeof( jX[0] ) );
-    iX = (int         *) inchi_calloc( num_groups + 1, sizeof( iX[0] ) );
+    e0X = (BNS_EDGE   **) inchi_calloc( (long long)num_groups + 1, sizeof( e0X[0] ) ); /* djb-rwth: cast operator added */
+    pvX = (BNS_VERTEX **) inchi_calloc( (long long)num_groups + 1, sizeof( pvX[0] ) ); /* djb-rwth: cast operator added */
+    jX = (int         *) inchi_calloc( (long long)num_groups + 1, sizeof( jX[0] ) ); /* djb-rwth: cast operator added */
+    iX = (int         *) inchi_calloc( (long long)num_groups + 1, sizeof( iX[0] ) ); /* djb-rwth: cast operator added */
 
     if (!e0X || !pvX || !jX || !iX)
     {
@@ -3246,7 +3249,7 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct,
 int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
                             ALL_TC_GROUPS *pTCGroups, int nMaxAddEdges )
 {
-    int ret = 0, ret1, ret2, ret3, bNeedsFlower;
+    int ret = 0, ret1, ret2, ret3, bNeedsFlower; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     inp_ATOM *at = pStruct->at;
     int       num_atoms = pStruct->num_atoms;
     /*int       num_tg           = pTCGroups->num_tgroups;*/
@@ -3284,7 +3287,7 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
 
         nMaxCGroupNumber = num_cg;
         /* clear all vertices not used until now */
-        memset( pBNS->vert + num_vertices, 0, ( pBNS->max_vertices - num_vertices ) * sizeof( pBNS->vert[0] ) );
+        memset( pBNS->vert + num_vertices, 0, ( (long long)pBNS->max_vertices - num_vertices ) * sizeof( pBNS->vert[0] ) ); /* djb-rwth: cast operator added; memset_s C11/Annex K variant? */
         tot_st_cap = pBNS->tot_st_cap;
         tot_st_flow = pBNS->tot_st_flow;
 
@@ -3503,13 +3506,13 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
                         return BNS_BOND_ERR;
                     }
 
-                    j1 = (int) ( pv1 - pBNS->vert );
-                    j2 = (int) ( pv2 - pBNS->vert );
+                    j1 = (int)(pv1 - pBNS->vert);
+                    j2 = (int)(pv2 - pBNS->vert);
 
                     /* create a new edge connecting pv1 and pv2 */
                     edge = pBNS->edge + cur_num_edges;
-                    if (IS_BNS_VT_M_GR( pCN[i1].v.type ) && IS_BNS_VT_ATOM( pCN[i2].v.type ) ||
-                         IS_BNS_VT_M_GR( pCN[i2].v.type ) && IS_BNS_VT_ATOM( pCN[i1].v.type ))
+                    if ((IS_BNS_VT_M_GR( pCN[i1].v.type ) && IS_BNS_VT_ATOM( pCN[i2].v.type )) ||
+                         (IS_BNS_VT_M_GR( pCN[i2].v.type ) && IS_BNS_VT_ATOM( pCN[i1].v.type ))) /* djb-rwth: addressing LLVM warnings */
                     {
                         /* at[c_point] is a metal or is treated as a metal; connect it to M-group */
                         /* metal - M-group (i.e. Metal-Flower) edge */
@@ -3619,9 +3622,9 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
                 /* the edge flow <= min( incident atom st_caps) */
                 max_edge_flow = inchi_min( st_cap, st_cap2 );
                 /* bond order <= triple bond (flow=2) */
-                if (pSrm->bMetalAddFlower && !pSrm->nMetalMinBondOrder &&
-                    ( pVA[c_point].cMetal && pVA[c_point].cNumBondsToMetal ||
-                        pVA[c_neigh].cMetal && pVA[c_neigh].cNumBondsToMetal ))
+                if (((pSrm->bMetalAddFlower && !pSrm->nMetalMinBondOrder &&
+                    ( pVA[c_point].cMetal && pVA[c_point].cNumBondsToMetal)) ||
+                        (pVA[c_neigh].cMetal && pVA[c_neigh].cNumBondsToMetal) )) /* djb-rwth: addressing LLVM warnings */
                 {
                     max_edge_flow = inchi_min( max_edge_flow, MAX_BOND_EDGE_CAP + 1 );
                 }
@@ -3672,7 +3675,7 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
                                    &tot_st_cap,
                                    &tot_st_flow,
                                    pBNS,
-                                   pTCGroups );
+                                   pTCGroups ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
         /* (-) supergroup, Y-connection */
 
@@ -3689,7 +3692,7 @@ int AddCGroups2TCGBnStruct( BN_STRUCT *pBNS, StrFromINChI *pStruct, VAL_AT *pVA,
                                    &tot_st_cap,
                                    &tot_st_flow,
                                    pBNS,
-                                   pTCGroups );
+                                   pTCGroups ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
         /******** connect (+) and (-) ***************/
 
@@ -3916,10 +3919,10 @@ BN_STRUCT* AllocateAndInitTCGBnStruct( StrFromINChI *pStruct, VAL_AT *pVA,
     len_alt_path = max_vertices + iALTP_HDR_LEN + 1; /* may overflow if an edge is traversed in 2 directions */
     len_alt_path += inchi_max( max_vertices / 2, 16 ); /* to avoid the overflow */
 
-    if (!( pBNS = (BN_STRUCT   *) inchi_calloc( 1, sizeof( BN_STRUCT ) ) ) ||
-         !( pBNS->edge = (BNS_EDGE    *) inchi_calloc( max_edges, sizeof( BNS_EDGE ) ) ) ||
-         !( pBNS->vert = (BNS_VERTEX  *) inchi_calloc( max_vertices, sizeof( BNS_VERTEX ) ) ) ||
-         !( pBNS->iedge = (BNS_IEDGE   *) inchi_calloc( max_iedges, sizeof( BNS_IEDGE ) ) ))
+    if (!(pBNS = (BN_STRUCT*)inchi_calloc(1, sizeof(BN_STRUCT))) ||
+        !(pBNS->edge = (BNS_EDGE*)inchi_calloc(max_edges, sizeof(BNS_EDGE))) ||
+        !(pBNS->vert = (BNS_VERTEX*)inchi_calloc(max_vertices, sizeof(BNS_VERTEX))) ||
+        !(pBNS->iedge = (BNS_IEDGE*)inchi_calloc(max_iedges, sizeof(BNS_IEDGE))))
     {
         return DeAllocateBnStruct( pBNS );
     }
@@ -4335,7 +4338,7 @@ int EvaluateChargeChanges( BN_STRUCT *pBNS, VAL_AT *pVA, int *pnDeltaH, int *pnD
         vLast = ALTP_END_ATOM( pBNS->alt_path );
         v0 = v2 = NO_VERTEX;
 
-        memset( vf, 0, sizeof( vf ) );
+        memset( vf, 0, sizeof( vf ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         for (i = 0; i < (int) ( sizeof( vf ) / sizeof( vf[0] ) ); i++)
         {
             vf[i].v = NO_VERTEX; /* = -2 */
@@ -4359,7 +4362,7 @@ int EvaluateChargeChanges( BN_STRUCT *pBNS, VAL_AT *pVA, int *pnDeltaH, int *pnD
         nNumDeltaCharge = 0;
         nNumVisitedAtoms = 0;
 
-        for (i = 0; i < n; i++, delta = -delta, v0 = v1, v1 = v2)
+        for (i = 0; i < n; i++, delta = -delta, v0 = v1, v1 = v2) /* djb-rwth: removing redundant code */
         {
             ineigh1 = ALTP_THIS_ATOM_NEIGHBOR( pBNS->alt_path, i );  /* v1->v2 neighbor */
             /*ineigh2 = ALTP_NEXT_ATOM_NEIGHBOR(pBNS->alt_path, i);*/  /* v2->v1 neighbor */
@@ -4502,7 +4505,7 @@ int RunBnsTestOnce( BN_STRUCT *pBNS, BN_DATA *pBD, VAL_AT *pVA, Vertex *pvFirst,
                     int *pPathLen, int *pnDeltaH, int *pnDeltaCharge, int *pnNumVisitedAtoms )
 {
     int bChangeFlow = 0; /* do not change flow */
-    int delta, ret, ret2, pass;
+    int delta, ret, ret2, pass; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
     ReInitBnStructAltPaths( pBNS );
     pass = 0;
@@ -4517,7 +4520,7 @@ int RunBnsTestOnce( BN_STRUCT *pBNS, BN_DATA *pBD, VAL_AT *pVA, Vertex *pvFirst,
         *pPathLen = ALTP_PATH_LEN( pBNS->alt_path );
         *pvLast = ALTP_END_ATOM( pBNS->alt_path );
         pBNS->num_altp++;
-        ret2 = EvaluateChargeChanges( pBNS, pVA, pnDeltaH, pnDeltaCharge, pnNumVisitedAtoms );
+        ret2 = EvaluateChargeChanges( pBNS, pVA, pnDeltaH, pnDeltaCharge, pnNumVisitedAtoms ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     }
     else
     {
@@ -4574,27 +4577,28 @@ exit_function:
 
 
 /****************************************************************************/
+/* djb-rwth: this function is completely senseless -- discussion required */
 int comp_cc_cand( const void *a1, const void *a2 )
 {
     const CC_CAND *p1 = (const CC_CAND *) a1;
     const CC_CAND *p2 = (const CC_CAND *) a2;
     int            ret;
 
-    if (ret = (int) p2->cMetal - (int) p1->cMetal)
+    if ((ret = (int) p2->cMetal - (int) p1->cMetal)) /* djb-rwth: addressing LLVM warning */
         return ret; /* metal first */
-    if (ret = (int) p2->cNumBondsToMetal - (int) p1->cNumBondsToMetal)
+    if ((ret = (int) p2->cNumBondsToMetal - (int) p1->cNumBondsToMetal)) /* djb-rwth: addressing LLVM warning */
         return ret; /* connected to metal first */
-    if (ret = (int) p2->cPeriodicRowNumber - (int) p1->cPeriodicRowNumber)
+    if ((ret = (int) p2->cPeriodicRowNumber - (int) p1->cPeriodicRowNumber)) /* djb-rwth: addressing LLVM warning */
         return ret; /* heaviest first */
-    if (ret = (int) p2->num_bonds - (int) p1->num_bonds)
+    if ((ret = (int) p2->num_bonds - (int) p1->num_bonds)) /* djb-rwth: addressing LLVM warning */
         return ret; /* more bonds first */
-    if (ret = (int) p1->chem_valence - (int) p2->chem_valence)
+    if ((ret = (int) p1->chem_valence - (int) p2->chem_valence)) /* djb-rwth: addressing LLVM warning */
         return ret; /* less bond order first */
-    if (!p1->cNumValenceElectrons && p2->cNumValenceElectrons)
+    if ((!p1->cNumValenceElectrons && p2->cNumValenceElectrons)) /* djb-rwth: addressing LLVM warning */
         return -1; /* no valence electrons first */
-    if (!p2->cNumValenceElectrons && p1->cNumValenceElectrons)
+    if ((!p2->cNumValenceElectrons && p1->cNumValenceElectrons)) /* djb-rwth: addressing LLVM warning */
         return -1; /* no valence electrons first */
-    if ((int) p2->cNumValenceElectrons - (int) p1->cNumValenceElectrons)
+    if (((int) p2->cNumValenceElectrons - (int) p1->cNumValenceElectrons)) /* djb-rwth: addressing LLVM warning */
         return ret; /* more valence electrons first */
     ret = (int) p2->iat - (int) p1->iat; /* greater canon number first */
 
@@ -4691,7 +4695,7 @@ int AllocEdgeList( EDGE_LIST *pEdges, int nLen )
             }
             /* fall through */
         case EDGE_LIST_CLEAR:
-            memset( pEdges, 0, sizeof( *pEdges ) );
+            memset( pEdges, 0, sizeof( *pEdges ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             break;
         default:
             if (nLen > 0 && nLen != pEdges->num_alloc)
@@ -4706,7 +4710,7 @@ int AllocEdgeList( EDGE_LIST *pEdges, int nLen )
                 tmp_num = inchi_min( tmp_num, nLen );
                 if (tmp_edges && tmp_num > 0)
                 {
-                    memcpy( pEdges->pnEdges, tmp_edges, tmp_num * sizeof( pEdges->pnEdges[0] ) );
+                    memcpy(pEdges->pnEdges, tmp_edges, tmp_num * sizeof(pEdges->pnEdges[0]));
                     pEdges->num_edges = tmp_num;
                 }
                 else
@@ -4737,7 +4741,7 @@ int AddToEdgeList( EDGE_LIST *pEdges, int iedge, int nAddLen )
         {
             return RI_ERR_PROGR;
         }
-        if (ret = AllocEdgeList( pEdges, pEdges->num_alloc + nAddLen ))
+        if ((ret = AllocEdgeList( pEdges, pEdges->num_alloc + nAddLen ))) /* djb-rwth: addressing LLVM warning */
         {
             return ret;
         }
@@ -4756,7 +4760,7 @@ int RemoveFromEdgeListByIndex( EDGE_LIST *pEdges, int index )
     {
         if (len)
         {
-            memmove( pEdges->pnEdges + index, pEdges->pnEdges + index + 1, len * sizeof( pEdges->pnEdges[0] ) );
+            memmove(pEdges->pnEdges + index, pEdges->pnEdges + index + 1, len * sizeof(pEdges->pnEdges[0]));
         }
         pEdges->num_edges--;
         pEdges->pnEdges[pEdges->num_edges] = 0;
@@ -4792,7 +4796,7 @@ int RemoveFromEdgeListByValue( EDGE_LIST *pEdges, int iedge )
     {
         if (ie == pEdges->pnEdges[i])
         {
-            if (ret = RemoveFromEdgeListByIndex( pEdges, i ))
+            if ((ret = RemoveFromEdgeListByIndex( pEdges, i ))) /* djb-rwth: addressing LLVM warning */
             {
                 return ret;
             }
@@ -4825,7 +4829,7 @@ int AllocBfsQueue( BFS_Q *pQ, int num_at, int min_ring_size )
             }
             /* fall through */
         case BFS_Q_CLEAR:
-            memset( pQ, 0, sizeof( *pQ ) );
+            memset( pQ, 0, sizeof( *pQ ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             return 0;
 
         default:
@@ -5096,10 +5100,10 @@ int MakeOneInChIOutOfStrFromINChI2( struct tagCANON_GLOBALS *pCG,
     ip = &ip_loc;
     sd = &sd_loc;
 
-    memset( sd, 0, sizeof( *sd ) );
+    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* create structure out of BNS */
-    memcpy( at2, at, ( pStruct->num_atoms + pStruct->num_deleted_H ) * sizeof( at2[0] ) );
+    memcpy(at2, at, ((long long)pStruct->num_atoms + (long long)pStruct->num_deleted_H) * sizeof(at2[0])); /* djb-rwth: cast operator added */
     pStruct->at = at2;
     ret = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -5194,11 +5198,11 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
     inp_norm_data[TAUT_NON] = &InpNormAtData;
     inp_norm_data[TAUT_YES] = &InpNormTautData;
 
-    memset( inp_cur_data, 0, sizeof( *inp_cur_data ) );
-    memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) );
-    memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) );
+    memset( inp_cur_data, 0, sizeof( *inp_cur_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     ulStructTime = sd->ulStructTime;
-    memset( sd, 0, sizeof( *sd ) );
+    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* deallocate old results */
     free_t_group_info( &pStruct->One_ti );
@@ -5216,7 +5220,7 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
         cur_INChI_Aux[k] = NULL;
     }
 
-    memcpy( at3, at2, sizeof( at3[0] )*len_at );
+    memcpy(at3, at2, sizeof(at3[0]) * len_at);
 
     /* prepare the structure */
     IncrZeroBondsAndClearEndpts( at3, num_atoms, iComponent + 1 );
@@ -5248,7 +5252,7 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
 
     bTautFlagsDone &= ~( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE );
 
-    if (i = bNumHeterAtomHasIsotopicH( at3, num_atoms ))
+    if ((i = bNumHeterAtomHasIsotopicH( at3, num_atoms ))) /* djb-rwth: addressing LLVM warning */
     {
         if (i & 1)
         {
@@ -5260,7 +5264,7 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
         }
     }
 
-    memset( &ulMaxTime, 0, sizeof( ulMaxTime ) );
+    memset( &ulMaxTime, 0, sizeof( ulMaxTime ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /*  allocate memory for non-tautimeric (k=0) and tautomeric (k=1) results */
     for (k = 0; k < TAUT_NUM; k++)
@@ -5270,13 +5274,20 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
         {
             /* pStruct->bMobileH=0: k = 0, 1   => allow allocation of both Fixed-H and Mobile-H InChI
                pStruct->bMobileH=1: k = 1 only => allow allocation of only Mobile-H InChI              */
-            int nAllocMode = ( k == TAUT_YES ? REQ_MODE_TAUT : 0 ) |
-                ( bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE |
-                    TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ) ?
-                    ( ip->nMode & REQ_MODE_ISO ) : 0;
 
-            if (k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC ) ||
-                 k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT ))
+            /* djb-rwth: introducing variables for correct nAllocMode expression */
+            int nAM1 = 0, nAM2 = 0;
+
+            if (k == TAUT_YES)
+                nAM1 = REQ_MODE_TAUT;
+
+            if (bTautFlagsDone & (TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE))
+                nAM2 = ip->nMode & REQ_MODE_ISO;
+
+            int nAllocMode = nAM1 | nAM2; /* djb-rwth: original sequence of bit-wise operations had to be rewritten */
+
+            if ((k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC )) ||
+                 (k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT ))) /* djb-rwth: addressing LLVM warnings */
             {
                 /*  alloc INChI and INChI_Aux only if ip->nMode allows this */
                 cur_INChI[k] = Alloc_INChI( inp_cur_data->at, inp_cur_data->num_at, &inp_cur_data->num_bonds,
@@ -5347,7 +5358,7 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
 
     /* Fill out the output */
 
-    if (!ret)
+    if (!ret) /* djb-rwth: fixing a NULL pointer dereference */
     {
         int bMobileH = pStruct->bMobileH;
         if (bMobileH == TAUT_NON &&
@@ -5358,7 +5369,8 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
             bMobileH = TAUT_YES;
         }
 
-        pStruct->nChargeRevrs = cur_INChI[TAUT_YES]->nTotalCharge;
+        if (cur_INChI[1])
+            pStruct->nChargeRevrs = cur_INChI[TAUT_YES]->nTotalCharge; /* djb-rwth: fixing a NULL pointer dereference */
 
         pStruct->pOneINChI[0] = cur_INChI[bMobileH];
         pStruct->pOneINChI_Aux[0] = cur_INChI_Aux[bMobileH];
@@ -5397,8 +5409,8 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
 
         if (pStruct->pOne_norm_data[0])
         {
-            memcpy( pStruct->pOne_norm_data[0], inp_norm_data[bMobileH], sizeof( pStruct->pOne_norm_data[0][0] ) );
-            memset( inp_norm_data[bMobileH], 0, sizeof( *inp_norm_data[0] ) );
+            memcpy(pStruct->pOne_norm_data[0], inp_norm_data[bMobileH], sizeof(pStruct->pOne_norm_data[0][0]));
+            memset( inp_norm_data[bMobileH], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         else
         {
@@ -5415,8 +5427,8 @@ int MakeOneInChIOutOfStrFromINChI( struct tagCANON_GLOBALS *pCG,
             pStruct->pOne_norm_data[1] = (INP_ATOM_DATA *) inchi_malloc( sizeof( pStruct->pOne_norm_data[0][0] ) );
             if (pStruct->pOne_norm_data[1])
             {
-                memcpy( pStruct->pOne_norm_data[1], inp_norm_data[bMobileHalt], sizeof( pStruct->pOne_norm_data[0][0] ) );
-                memset( inp_norm_data[bMobileHalt], 0, sizeof( *inp_norm_data[0] ) );
+                memcpy(pStruct->pOne_norm_data[1], inp_norm_data[bMobileHalt], sizeof(pStruct->pOne_norm_data[0][0]));
+                memset( inp_norm_data[bMobileHalt], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             }
             else
             {
@@ -5487,9 +5499,9 @@ int ConnectDisconnectedH( inp_ATOM *at, int num_atoms, int num_deleted_H )
 
         /* insert links to explicit H before all other links in the connection list */
         n = at[k].valence;
-        memmove( at[k].neighbor + num_H, at[k].neighbor, sizeof( at[k].neighbor[0] ) * n );
-        memmove( at[k].bond_stereo + num_H, at[k].bond_stereo, sizeof( at[k].bond_stereo[0] ) * n );
-        memmove( at[k].bond_type + num_H, at[k].bond_type, sizeof( at[k].bond_type[0] ) * n );
+        memmove(at[k].neighbor + num_H, at[k].neighbor, sizeof(at[k].neighbor[0]) * n);
+        memmove(at[k].bond_stereo + num_H, at[k].bond_stereo, sizeof(at[k].bond_stereo[0]) * n);
+        memmove(at[k].bond_type + num_H, at[k].bond_type, sizeof(at[k].bond_type[0]) * n);
         for (n = 0; n < num_H; n++)
         {
             at[k].neighbor[n] = i + n;
@@ -5579,6 +5591,7 @@ int DisconnectedConnectedH( inp_ATOM *at, int num_atoms, int num_deleted_H )
 {
     int i, j, k, n, m, num_H, num_iso_H;
     int tot_atoms = num_atoms + num_deleted_H;
+    S_CHAR ctmp = '0';
 
     /* add implicit isotopic H to total implicit H */
     for (i = 0; i < num_atoms; i++)
@@ -5610,18 +5623,19 @@ int DisconnectedConnectedH( inp_ATOM *at, int num_atoms, int num_deleted_H )
         }
 
         /* remove bonds to explicit H located in front of all other bonds in the connection list */
-        n = ( at[k].valence -= num_H ); /* new number of bonds */
+        at[k].valence -= num_H; /* djb-rwth: use of cast operators avoided */
+        n = at[k].valence; /* new number of bonds */ 
         at[k].chem_bonds_valence -= num_H; /* new no-H valence */
         if (n)
         {
-            memmove( at[k].neighbor, at[k].neighbor + num_H, sizeof( at[k].neighbor[0] ) * n );
-            memmove( at[k].bond_stereo, at[k].bond_stereo + num_H, sizeof( at[k].bond_stereo[0] ) * n );
-            memmove( at[k].bond_type, at[k].bond_type + num_H, sizeof( at[k].bond_type[0] ) * n );
+            memmove(at[k].neighbor, at[k].neighbor + num_H, sizeof(at[k].neighbor[0]) * n);
+            memmove(at[k].bond_stereo, at[k].bond_stereo + num_H, sizeof(at[k].bond_stereo[0]) * n);
+            memmove(at[k].bond_type, at[k].bond_type + num_H, sizeof(at[k].bond_type[0]) * n);
         }
         /* clear the 'tails' */
-        memset( at[k].neighbor + n, 0, sizeof( at[k].neighbor[0] ) * num_H );
-        memset( at[k].bond_stereo + n, 0, sizeof( at[k].bond_stereo[0] ) * num_H );
-        memset( at[k].bond_type + n, 0, sizeof( at[k].bond_type[0] ) * num_H );
+        memset( at[k].neighbor + n, 0, sizeof( at[k].neighbor[0] ) * num_H ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( at[k].bond_stereo + n, 0, sizeof( at[k].bond_stereo[0] ) * num_H ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( at[k].bond_type + n, 0, sizeof( at[k].bond_type[0] ) * num_H ); /* djb-rwth: memset_s C11/Annex K variant? */
 
         for (m = 0; m < MAX_NUM_STEREO_BONDS && at[k].sb_parity[m]; m++)
         {
@@ -5676,9 +5690,16 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
 
     INCHI_IOS_STRING temp_string_container;
     INCHI_IOS_STRING *strbuf = &temp_string_container;
-    memset( strbuf, 0, sizeof( *strbuf ) );
+    memset( strbuf, 0, sizeof( *strbuf ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    if (0 >= inchi_strbuf_init( strbuf, INCHI_STRBUF_INITIAL_SIZE, INCHI_STRBUF_SIZE_INCREMENT ))
+    if (0 >= inchi_strbuf_init(strbuf, INCHI_STRBUF_INITIAL_SIZE, INCHI_STRBUF_SIZE_INCREMENT))
+    {
+        ret = RI_ERR_ALLOC;
+        goto exit_error;
+    }
+
+    /* djb-rwth: fixing oss-fuzz issue #70552 */
+    if (!ip_inp || !sd_inp || !pStruct)
     {
         ret = RI_ERR_ALLOC;
         goto exit_error;
@@ -5700,7 +5721,7 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
     }
     */
 
-    memset( sd, 0, sizeof( *sd ) );
+    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     sd->fPtrStart = -1;
     sd->fPtrEnd = -1;
 
@@ -5714,13 +5735,13 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
     }
     */
 
-    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) );
-    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) );
-    memset( pStruct->RevInChI.pINChI, 0, sizeof( pStruct->RevInChI.pINChI ) );
-    memset( pStruct->RevInChI.pINChI_Aux, 0, sizeof( pStruct->RevInChI.pINChI_Aux ) );
-    memset( szTitle, 0, sizeof( szTitle ) );
+    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( pStruct->RevInChI.pINChI, 0, sizeof( pStruct->RevInChI.pINChI ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( pStruct->RevInChI.pINChI_Aux, 0, sizeof( pStruct->RevInChI.pINChI_Aux ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( szTitle, 0, sizeof( szTitle ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
-    len = sizeof( orig_inp_data->at[0] )*( pStruct->num_atoms + pStruct->num_deleted_H );
+    len = sizeof( orig_inp_data->at[0] )*( (long long)pStruct->num_atoms + (long long)pStruct->num_deleted_H ); /* djb-rwth: cast operators added */
 
     orig_inp_data->at = (inp_ATOM *) inchi_malloc( len );
 
@@ -5761,7 +5782,11 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
             goto exit_error;
         }
 
-        memcpy( orig_inp_data->at, pStruct->at2, len );
+#if USE_BCF
+        memcpy_s( orig_inp_data->at, (long long)len, pStruct->at2, len ); /* djb-rwth: function replaced with its safe C11 variant */
+#else
+        memcpy(orig_inp_data->at, pStruct->at2, len);
+#endif
 
         ClearEndpts( orig_inp_data->at, pStruct->num_atoms );
 
@@ -5781,11 +5806,11 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
         goto exit_error;
     }
 
-    memset( sd->num_components, 0, sizeof( sd->num_components ) );
-    memset( sd->num_taut, 0, sizeof( sd->num_taut ) );
-    memset( sd->num_non_taut, 0, sizeof( sd->num_non_taut ) );
-    memset( sd->bTautFlagsDone, 0, sizeof( sd->bTautFlagsDone ) );
-    memset( sd->bTautFlags, 0, sizeof( sd->bTautFlags ) );
+    memset( sd->num_components, 0, sizeof( sd->num_components ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->num_taut, 0, sizeof( sd->num_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->num_non_taut, 0, sizeof( sd->num_non_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->bTautFlagsDone, 0, sizeof( sd->bTautFlagsDone ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->bTautFlags, 0, sizeof( sd->bTautFlags ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
 
     ret = ProcessOneStructure( ic, pCG, sd, ip, szTitle,
@@ -5799,9 +5824,8 @@ int MakeInChIOutOfStrFromINChI2( INCHI_CLOCK *ic,
                                num_inp, strbuf,
                                0 /* save_opt_bits */ );
 
-
-    memcpy( pStruct->RevInChI.num_components, sd->num_components, sizeof( pStruct->RevInChI.num_components ) );
-    memcpy( sd_inp->pStrErrStruct, sd->pStrErrStruct, sizeof( sd_inp->pStrErrStruct ) );
+    memcpy(pStruct->RevInChI.num_components, sd->num_components, sizeof(pStruct->RevInChI.num_components));
+    memcpy(sd_inp->pStrErrStruct, sd->pStrErrStruct, sizeof(sd_inp->pStrErrStruct));
     pStruct->RevInChI.nRetVal = ret;
 
     /* translate returned value */
@@ -5889,7 +5913,7 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
 
     INCHI_IOS_STRING temp_string_container;
     INCHI_IOS_STRING *strbuf = &temp_string_container;
-    memset( strbuf, 0, sizeof( *strbuf ) );
+    memset( strbuf, 0, sizeof( *strbuf ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     if (0 >= inchi_strbuf_init( strbuf, INCHI_STRBUF_INITIAL_SIZE, INCHI_STRBUF_SIZE_INCREMENT ))
     {
@@ -5913,7 +5937,7 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
     {
         if (bINChIOutputOptions & INCHI_OUT_PLAIN_TEXT)
         {
-            ip->bINChIOutputOptions = bINChIOutputOptions & ~INCHI_OUT_SDFILE_ONLY | INCHI_OUT_EMBED_REC;
+            ip->bINChIOutputOptions = (bINChIOutputOptions & ~INCHI_OUT_SDFILE_ONLY) | INCHI_OUT_EMBED_REC; /* djb-rwth: addressing LLVM warning */
         }
         else
         {
@@ -5941,7 +5965,7 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
         ip->nMode |= REQ_MODE_TAUT;
     }
 
-    memset( sd, 0, sizeof( *sd ) );
+    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     sd->fPtrStart = -1;
     sd->fPtrEnd = -1;
     /*
@@ -5953,10 +5977,10 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
         }
     }
     */
-    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) );
-    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) );
-    memset( RevInChI.pINChI, 0, sizeof( RevInChI.pINChI ) );
-    memset( RevInChI.pINChI_Aux, 0, sizeof( RevInChI.pINChI_Aux ) );
+    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( RevInChI.pINChI, 0, sizeof( RevInChI.pINChI ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( RevInChI.pINChI_Aux, 0, sizeof( RevInChI.pINChI_Aux ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     len = sizeof( orig_inp_data->at[0] ) * pOneInput->num_atoms;
     orig_inp_data->at = (inp_ATOM *) inchi_malloc( len );
@@ -5971,7 +5995,7 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
     if (orig_inp_data->at && orig_inp_data->szCoord)
     {
         int i, k;
-        memcpy( orig_inp_data->at, pOneInput->atom, len );
+        memcpy(orig_inp_data->at, pOneInput->atom, len);
         orig_inp_data->num_inp_atoms = pOneInput->num_atoms;
         ClearEndpts( orig_inp_data->at, orig_inp_data->num_inp_atoms );
         /* otherwise fails on CID=450438 */
@@ -5999,12 +6023,12 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
         goto exit_error;
     }
 
-    memset( sd->num_components, 0, sizeof( sd->num_components ) );
-    memset( sd->num_taut, 0, sizeof( sd->num_taut ) );
-    memset( sd->num_non_taut, 0, sizeof( sd->num_non_taut ) );
-    memset( sd->bTautFlagsDone, 0, sizeof( sd->bTautFlagsDone ) );
-    memset( sd->bTautFlags, 0, sizeof( sd->bTautFlags ) );
-    memset( szTitle, 0, sizeof( szTitle ) );
+    memset( sd->num_components, 0, sizeof( sd->num_components ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->num_taut, 0, sizeof( sd->num_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->num_non_taut, 0, sizeof( sd->num_non_taut ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->bTautFlagsDone, 0, sizeof( sd->bTautFlagsDone ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd->bTautFlags, 0, sizeof( sd->bTautFlags ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( szTitle, 0, sizeof( szTitle ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
 
 
@@ -6018,9 +6042,7 @@ int OutputInChIOutOfStrFromINChI( struct tagINCHI_CLOCK *ic,
                                orig_inp_data, prep_inp_data,
                                num_inp, strbuf, save_opt_bits );
 
-
-    memcpy( RevInChI.num_components, sd->num_components, sizeof( RevInChI.num_components ) );
-
+    memcpy(RevInChI.num_components, sd->num_components, sizeof(RevInChI.num_components));
     /*
     memcpy(sd_inp->pStrErrStruct, sd->pStrErrStruct, sizeof(sd_inp->pStrErrStruct) );
     */

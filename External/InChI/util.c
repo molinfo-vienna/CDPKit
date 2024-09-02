@@ -1,36 +1,42 @@
 /*
-* International Chemical Identifier (InChI)
-* Version 1
-* Software version 1.06
-* December 15, 2020
+ * International Chemical Identifier (InChI)
+ * Version 1
+ * Software version 1.07
+ * April 30, 2024
+ *
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
 *
 * The InChI library and programs are free software developed under the
-* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
-* Originally developed at NIST.
-* Modifications and additions by IUPAC and the InChI Trust.
-* Some portions of code were developed/changed by external contributors
-* (either contractor or volunteer) which are listed in the file
-* 'External-contributors' included in this distribution.
-*
-* IUPAC/InChI-Trust Licence No.1.0 for the
-* International Chemical Identifier (InChI)
-* Copyright (C) IUPAC and InChI Trust
-*
-* This library is free software; you can redistribute it and/or modify it
-* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
-* or any later version.
-*
-* Please note that this library is distributed WITHOUT ANY WARRANTIES
-* whatsoever, whether expressed or implied.
-* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
-*
-* You should have received a copy of the IUPAC/InChI Trust InChI
-* Licence No. 1.0 with this library; if not, please e-mail:
-*
-* info@inchi-trust.org
-*
+ * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+ * Originally developed at NIST.
+ * Modifications and additions by IUPAC and the InChI Trust.
+ * Some portions of code were developed/changed by external contributors
+ * (either contractor or volunteer) which are listed in the file
+ * 'External-contributors' included in this distribution.
+ *
+ * info@inchi-trust.org
+ *
 */
-
 
 #include <string.h>
 #include <stdlib.h>
@@ -43,10 +49,19 @@
 #include "ichicomp.h"    /* Needed for __isascii define */
 #endif
 
+/* djb-rwth: defining __isascii */
+#if defined(__isascii)
+#define is_ascii __isascii
+#elif defined(isascii)
+#define is_ascii isascii
+#else
+#define is_ascii(c)   ((unsigned)(c) < 0x80)
+#endif
+
 #include "util.h"
 #include "extr_ct.h"
 
-
+#include "bcf_s.h"
 
 #define MIN_ATOM_CHARGE        (-2)
 #define MAX_ATOM_CHARGE         2
@@ -283,13 +298,12 @@ int get_element_chemical_symbol( int nAtNum, char *szElement )
     if (0 <= nAtNum && nAtNum < nElDataLen)
     {
         /* valid element symbol found */
-        strcpy( szElement, ElData[nAtNum].szElName );
+        strcpy(szElement, ElData[nAtNum].szElName);
         return 0;
     }
 
     /* not found */
-    strcpy( szElement, "??" );
-
+    strcpy(szElement, "??");
     return -1;
 }
 
@@ -312,18 +326,18 @@ int get_element_or_pseudoelement_symbol( int nAtNum,
     if (0 <= nAtNum && nAtNum < nElDataLen)
     {
         /* valid element symbol found */
-        strcpy( szElement, ElData[nAtNum].szElName );
+        strcpy(szElement, ElData[nAtNum].szElName);
 
         if (!strcmp( szElement, "Zy" ))
         {
-            strcpy( szElement, "Zz" );
+            strcpy(szElement, "Zz");
         }
 
         return 0;
     }
 
     /* not found */
-    strcpy( szElement, "??" );
+    strcpy(szElement, "??");
 
     return -1;
 }
@@ -350,6 +364,20 @@ int el_number_in_internal_ref_table( const char* elname )
 int get_periodic_table_number( const char* elname )
 {
     int num;
+    /* the single letter (common) elements */
+    if (!elname[1]) {
+        switch (elname[0]) {
+            case 'H': return EL_NUMBER_H; break;
+            case 'B': return EL_NUMBER_B; break;
+            case 'C': return EL_NUMBER_C; break;
+            case 'N': return EL_NUMBER_N; break;
+            case 'O': return EL_NUMBER_O; break;
+            case 'P': return EL_NUMBER_P; break;
+            case 'S': return EL_NUMBER_S; break;
+            case 'F': return EL_NUMBER_F; break;
+            case 'I': return EL_NUMBER_I; break;
+        }
+    }
 
     num = el_number_in_internal_ref_table( elname );
 
@@ -464,7 +492,7 @@ int needed_unusual_el_valence( int nPeriodicNum,
                                int num_H, int
                                num_bonds )
 {
-    int chem_valence, num_H_expected;
+    int chem_valence, num_H_expected; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     char szElement[4];
 
     /*
@@ -484,8 +512,8 @@ int needed_unusual_el_valence( int nPeriodicNum,
     chem_valence = bonds_valence + num_H;
 
 #if ( (BUILD_WITH_ENG_OPTIONS==1) && (SDF_OUTPUT_HETERO_VALENCE==1) )
-    if (nPeriodicNum == 1 && chem_valence != 1 /* H */ || nPeriodicNum == 6 && chem_valence != 4 /* C */ ||
-         nPeriodicNum != 1 && nPeriodicNum != 6 || charge || radical)
+    if ((nPeriodicNum == 1 && chem_valence != 1) /* H */ || (nPeriodicNum == 6 && chem_valence != 4) /* C */ ||
+        (nPeriodicNum != 1 && nPeriodicNum != 6) || charge || radical) /* djb-rwth: addressing LLVM warning */
     {
         return chem_valence ? chem_valence : -1;
     }
@@ -641,12 +669,12 @@ int is_el_a_metal( int nPeriodicNum )
 int extract_charges_and_radicals( char *elname, int *pnRadical, int *pnCharge )
 {
     char *q, *r, *p;
-    int  nCharge = 0, nRad = 0, charge_len = 0, k, nVal, nSign, nLastSign = 1, len;
+    int  nCharge = 0, nRad = 0, charge_len = 0, k, nVal, nSign, nLastSign = 1; /* djb-rwth: removing redundant variables */
 
     p = elname;
 
     /*  extract radicals & charges */
-    while (q = strpbrk( p, "+-^" ))
+    while ((q = strpbrk(p, "+-^"))) /* djb-rwth: addressing LLVM warning */
     {
         switch (*q)
         {
@@ -657,7 +685,7 @@ int extract_charges_and_radicals( char *elname, int *pnRadical, int *pnCharge )
                     nVal += ( nLastSign = nSign );
                     charge_len++;
                 }
-                if (nSign = (int) strtol( q + k, &r, 10 ))
+                if ((nSign = (int)strtol(q + k, &r, 10))) /* djb-rwth: addressing LLVM warning */
                 {
                     /*  fixed 12-5-2001 */
                     nVal += nLastSign * ( nSign - 1 );
@@ -676,17 +704,17 @@ int extract_charges_and_radicals( char *elname, int *pnRadical, int *pnCharge )
                 }
                 break;
         }
-        memmove( q, q + charge_len, strlen( q + charge_len ) + 1 );
+        memmove(q, q + charge_len, strlen(q + charge_len) + 1);
     }
 
-    len = (int) strlen( p );
+    /* djb-rwth: removing redundant code */
 
     /*  radical */
     if (( q = strrchr( p, ':' ) ) && !q[1])
     {
         nRad = RADICAL_SINGLET;
         q[0] = '\0';
-        len--;
+        /* djb-rwth: removing redundant code */
     }
     else
     {
@@ -694,7 +722,7 @@ int extract_charges_and_radicals( char *elname, int *pnRadical, int *pnCharge )
         {
             nRad++;
             q[0] = '\0';
-            len--;
+            /* djb-rwth: removing redundant code */
         }
 
         nRad = nRad == 1 ? RADICAL_DOUBLET :
@@ -772,7 +800,7 @@ int extract_H_atoms( char *elname, S_CHAR num_iso_H[] )
 
             /*  remove the hydrogen atom from the string */
             len -= (int) ( q - elname ) - i;
-            memmove( elname + i, q, len + 1 );
+            memmove(elname + i, q, (long long)len + 1); /* djb-rwth: cast operator added */
             /*  c =  UCINT elname[i]; */
         }
         else
@@ -855,7 +883,7 @@ int get_num_H( const char* elname,
         /* add hydrogen atoms according to standard element valence */
         if (radical && radical != RADICAL_SINGLET)
         {
-            if (val = ElData[el_number].cValence[NEUTRAL_STATE + charge][0])
+            if ((val = ElData[el_number].cValence[NEUTRAL_STATE + charge][0])) /* djb-rwth: addressing LLVM warning */
             {
                 val -= ( radical == RADICAL_DOUBLET ) ? 1
                     : ( radical == RADICAL_SINGLET || radical == RADICAL_TRIPLET ) ? 2 : val;
@@ -1040,12 +1068,12 @@ int is_ilist_inside( int *ilist, int nlist, int *ilist2, int nlist2 )
 /****************************************************************************/
 int nBondsValToMetal( inp_ATOM* at, int iat )
 {
-    int i, neigh, bond_type, nVal2Metal = 0;
+    int i, bond_type, nVal2Metal = 0; /* djb-rwth: removing redundant variables */
     inp_ATOM* a = at + iat;
 
     for (i = 0; i < a->valence; i++)
     {
-        neigh = a->neighbor[i];
+        /* djb-rwth: removing redundant code */
 
         if (is_el_a_metal( at[(int) a->neighbor[i]].el_number ))
         {
@@ -1075,7 +1103,7 @@ int num_of_H( inp_ATOM *at, int iat )
 
     if (!el_number_H)
     {
-        el_number_H = get_periodic_table_number( "H" );
+        el_number_H = EL_NUMBER_H;
     }
 
     for (i = 0; i < a->valence; i++)
@@ -1087,12 +1115,39 @@ int num_of_H( inp_ATOM *at, int iat )
     return num_explicit_H + NUMH( at, iat );
 }
 
+/****************************************************************************/
+/* Get the element group of an element. The base element rather than the    */
+/* periodic group is used to aid readability.                               */
+/* - NitrogenGroup = 7 (EL_NUMBER_N)                                        */
+/* - OxygenGroup   = 8 (EL_NUMBER_O)                                        */
+/* - Cargbon       = 6 (EL_NUMBER_C)                                        */
+/****************************************************************************/
+U_CHAR ion_el_group( int el )
+{
+    switch ( el ) {
+        case EL_NUMBER_C: /* fallthrough */
+#if ( FIX_REM_ION_PAIRS_Si_BUG == 1 )        
+        case EL_NUMBER_SI:
+#endif        
+            return EL_NUMBER_C;
+        case EL_NUMBER_N: /* fallthrough */
+        case EL_NUMBER_P:
+        case EL_NUMBER_AS:
+        case EL_NUMBER_SB:
+            return EL_NUMBER_N;
+        case EL_NUMBER_O: /* fallthrough */
+        case EL_NUMBER_S:
+        case EL_NUMBER_SE:
+        case EL_NUMBER_TE:
+            return EL_NUMBER_O;
+        default:
+            return 0;
+    }
+}
 
 int has_other_ion_neigh( inp_ATOM *at,
                          int iat,
-                         int iat_ion_neigh,
-                         const char *el,
-                         int el_len )
+                         int iat_ion_neigh)
 {
     int charge = at[iat_ion_neigh].charge;
     int i, neigh;
@@ -1102,7 +1157,7 @@ int has_other_ion_neigh( inp_ATOM *at,
         neigh = at[iat].neighbor[i];
 
         if (neigh != iat_ion_neigh && at[neigh].charge == charge &&
-             NULL != memchr( el, at[neigh].el_number, el_len ))
+            ion_el_group( at[neigh].el_number ))
         {
             return 1;
         }
@@ -1117,8 +1172,7 @@ int has_other_ion_neigh( inp_ATOM *at,
     BFS r=2
 ****************************************************************************/
 int has_other_ion_in_sphere_2( inp_ATOM *at, int iat,
-                               int iat_ion_neigh,
-                               const char *el, int el_len )
+                               int iat_ion_neigh )
 {
 #define MAXQ 16
     AT_NUMB q[MAXQ];
@@ -1142,7 +1196,7 @@ int has_other_ion_in_sphere_2( inp_ATOM *at, int iat,
 
                 if (!at[neigh].cFlags &&
                      at[neigh].valence <= 3 &&
-                     NULL != memchr( el, at[neigh].el_number, el_len ))
+                     ion_el_group( at[neigh].el_number ))
                 {
                     q[lenq++] = neigh;
                     at[neigh].cFlags = 1;
@@ -1383,8 +1437,8 @@ int MakeRemovedProtonsString( int nNumRemovedProtons,
 
     if (nNumRemovedProtons)
     {
-        len = sprintf( szRemovedProtons, "Proton balance: %c %d H+",
-                        nNumRemovedProtons >= 0 ? '+' : '-', abs( nNumRemovedProtons ) );
+        len = sprintf(szRemovedProtons, "Proton balance: %c %d H+",
+            nNumRemovedProtons >= 0 ? '+' : '-', abs(nNumRemovedProtons));
     }
 
     if (bIsotopic && ( nNumRemovedProtonsIsotopic || nNumExchgIsotopicH ))
@@ -1398,15 +1452,15 @@ int MakeRemovedProtonsString( int nNumRemovedProtons,
 
             if (num)
             {
-                len += sprintf( szRemovedProtons + len, "%s %d^%dH",
-                                j ? ", " : "  [ removed ", num, i + 1 );
+                len += sprintf(szRemovedProtons + len, "%s %d^%dH",
+                    j ? ", " : "  [ removed ", num, i + 1);
                 j++;
             }
         }
 
         if (j)
         {
-            len += sprintf( szRemovedProtons + len, " ]" );
+            len += sprintf(szRemovedProtons + len, " ]");
             if (num_removed_iso_H)
             {
                 *num_removed_iso_H = j;
@@ -1426,31 +1480,15 @@ int MakeRemovedProtonsString( int nNumRemovedProtons,
 
 /****************************************************************************/
 int get_endpoint_valence( U_CHAR el_number )
-{
-    static U_CHAR el_numb[6];
-    static int len, len2;
-    int i;
-    int len3;
-    if (!len)
-    {
-        len3 = 0;
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "O" );
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "S" );
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "Se" );
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "Te" );
-        len2 = len3;
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "N" );
-        len = len3;
+{   
+    switch (el_number) {
+        case EL_NUMBER_O:  /* fallthrough */
+        case EL_NUMBER_S:  
+        case EL_NUMBER_SE: 
+        case EL_NUMBER_TE: return 2;
+        case EL_NUMBER_N:  return 3;
+        default: return 0;
     }
-    for (i = 0; i < len; i++)
-    {
-        if (el_numb[i] == el_number)
-        {
-            return i < len2 ? 2 : 3;
-        }
-    }
-
-    return 0;
 }
 
 
@@ -1460,29 +1498,11 @@ int get_endpoint_valence( U_CHAR el_number )
 /****************************************************************************/
 int get_endpoint_valence_KET( U_CHAR el_number )
 {
-    static U_CHAR el_numb[2];
-    static int len, len2;
-    int len3;
-    int i;
-
-    if (!len)
-    {
-        len3 = 0;
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "O" );
-        len2 = len3;
-        el_numb[len3++] = (U_CHAR) get_periodic_table_number( "C" );
-        len = len3;
+    switch (el_number) {
+        case EL_NUMBER_C: return 4;
+        case EL_NUMBER_O: return 2;
+        default: return 0;
     }
-
-    for (i = 0; i < len; i++)
-    {
-        if (el_numb[i] == el_number)
-        {
-            return i < len2 ? 2 : 4;
-        }
-    }
-
-    return 0;
 }
 #endif
 
@@ -1548,7 +1568,7 @@ int normalize_string( char* name )
         {
             if (n > 0)
             {
-                memmove( (void*) &name[i - n], (void*) &name[i], len - i + 1 );
+                memmove((void*)&name[i - n], (void*)&name[i], (long long)len - (long long)i + 1); /* djb-rwth: cast operators added */
                 i -= n;
                 len -= n;
             }
@@ -1578,7 +1598,7 @@ int dotify_non_printable_chars( char *line )
 
     if (line)
     {
-        for (i = 0; c = UCINT line[i]; i++)
+        for (i = 0; (c = UCINT line[i]); i++) /* djb-rwth: addressing LLVM warning */
         {
             /* assuming ASCII charset */
             if (c < ' ' || c >= 0x7F)
@@ -1712,7 +1732,7 @@ int mystrncpy( char *target, const char *source, unsigned maxlen )
         return 0;
     }
 
-    if (p = (const char*) memchr( source, 0, maxlen ))
+    if ((p = (const char*)memchr(source, 0, maxlen))) /* djb-rwth: addressing LLVM warning */
     {    /* maxlen does not include the found zero termination */
         len = (int) ( p - source );
     }
@@ -1723,10 +1743,10 @@ int mystrncpy( char *target, const char *source, unsigned maxlen )
 
     if (len)
     {
-        memmove( target, source, len );
+        memmove(target, source, len);
     }
 
-    memset( target + len, 0, maxlen - len ); /*  zero termination */
+    memset(target + len, 0, maxlen - len); /*  zero termination */ /* djb-rwth: memset_s C11/Annex K variant? */
 
     return 1;
 }
@@ -1741,13 +1761,17 @@ char* lrtrim( char *p, int* nLen )
 
     if (p && ( len = (int) strlen( p ) ))
     {
-        for (i = 0; i < len && __isascii( p[i] ) && isspace( p[i] ); i++)
+        for (i = 0; i < len && is_ascii( p[i] ) && isspace( p[i] ); i++)
         {
             ;
         }
         if (i)
-            (memmove) ( p, p + i, ( len -= i ) + 1 );
-        for (; 0 < len && __isascii( p[len - 1] ) && isspace( p[len - 1] ); len--)
+        {
+            len -= i; /* djb-rwth: variable has to be decreased before memmove */
+            (memmove)(p, p + i, ((long long)len + 1)); /* djb-rwth: now cast operator can be added */
+        }
+            
+        for (; 0 < len && is_ascii( p[len - 1] ) && isspace( p[len - 1] ); len--)
         {
             ;
         }
@@ -1791,9 +1815,10 @@ void extract_inchi_substring( char ** buf, const char *str, size_t slen )
 {
     size_t i;
     const char *p;
+    char* bufp;
     char pp;
 
-
+    bufp = *buf;
     *buf = NULL;
 
     if (str == NULL)
@@ -1838,8 +1863,9 @@ void extract_inchi_substring( char ** buf, const char *str, size_t slen )
     }
 
     *buf = (char*) inchi_calloc( i + 1, sizeof( char ) );
-    memcpy( *buf, p, i );
-    ( *buf )[i] = '\0';
+    memcpy(*buf, p, i);
+    if (*buf)
+        (*buf)[i] = '\0';
 
     return;
 }
@@ -1850,9 +1876,10 @@ void extract_auxinfo_substring( char ** buf, const char *str, size_t slen )
 {
     size_t i;
     const char *p;
+    char* bufp;
     char pp;
 
-
+    bufp = *buf;
     *buf = NULL;
 
     if (str == NULL)
@@ -1877,8 +1904,9 @@ void extract_auxinfo_substring( char ** buf, const char *str, size_t slen )
     }
 
     *buf = (char*) inchi_calloc( i + 1, sizeof( char ) );
-    memcpy( *buf, p, i );
-    ( *buf )[i] = '\0';
+    memcpy(*buf, p, i);
+    if (*buf)
+        (*buf)[i] = '\0';
 
     return;
 }
@@ -1967,7 +1995,7 @@ char *inchi__strdup( const char *string )
         p = (char *) inchi_malloc( length + 1 );
         if (p)
         {
-            strcpy( p, string );
+            strcpy(p, string);
         }
     }
 

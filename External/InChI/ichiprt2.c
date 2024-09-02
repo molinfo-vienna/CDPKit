@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,25 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
-
+*/
 
 #include <stdlib.h>
 #include <string.h>
@@ -42,6 +48,7 @@
 #include "ichimake.h"
 #include "ichi_io.h"
 
+#include "bcf_s.h"
 
  /****************************************************************************/
 int Eql_INChI_Stereo( INChI_Stereo  *s1,
@@ -203,14 +210,14 @@ int Eql_INChI_Isotopic( INChI *i1, INChI *i2 )
             && i1->nNumberOfIsotopicAtoms == i2->nNumberOfIsotopicAtoms
             && i1->nNumberOfIsotopicTGroups == i2->nNumberOfIsotopicTGroups
             && ( !i1->nNumberOfIsotopicAtoms ||
-                i1->IsotopicAtom && i2->IsotopicAtom &&
+                (i1->IsotopicAtom && i2->IsotopicAtom &&
                 !memcmp( i1->IsotopicAtom, i2->IsotopicAtom,
-                        i1->nNumberOfIsotopicAtoms * sizeof( i1->IsotopicAtom[0] ) ) )
+                        i1->nNumberOfIsotopicAtoms * sizeof( i1->IsotopicAtom[0] ) )) )
             && ( !i1->nNumberOfIsotopicTGroups ||
-                i1->IsotopicTGroup && i2->IsotopicTGroup &&
+                (i1->IsotopicTGroup && i2->IsotopicTGroup &&
                 !memcmp( i1->IsotopicTGroup, i2->IsotopicTGroup,
-                    i1->nNumberOfIsotopicTGroups * sizeof( i1->IsotopicAtom[0] ) )
-            );
+                    i1->nNumberOfIsotopicTGroups * sizeof( i1->IsotopicAtom[0] )) )
+            ); /* djb-rwth: addressing LLVM warnings */
 
     return eq;
 }
@@ -307,8 +314,8 @@ int Eql_INChI_Aux_Num( INChI_Aux *a1, int eql1, INChI_Aux *a2, int eql2 )
     {
         return 0;
     }
-    if (( eql1 & EQL_NUM_ISO ) && !a1->bIsIsotopic ||
-        ( eql2 & EQL_NUM_ISO ) && !a2->bIsIsotopic)
+    if ((( eql1 & EQL_NUM_ISO ) && !a1->bIsIsotopic) ||
+        (( eql2 & EQL_NUM_ISO ) && !a2->bIsIsotopic)) /* djb-rwth: addressing LLVM warnings */
     {
         return 0;
     }
@@ -446,8 +453,7 @@ int MakeMult( int mult,
 
     if (len + len_delim < ( int )sizeof( szValue ))
     {
-        strcpy( szValue + len, szTailingDelim );
-
+        strcpy(szValue + len, szTailingDelim);
         n = inchi_strbuf_printf( buf, "%s", szValue );
         if (-1 == n) *bOverflow |= 1;
         return n;
@@ -727,7 +733,7 @@ int MakeCtStringOld( AT_NUMB          *LinearCT,
         {
             bLessThanPrev = 0;
             if (!( nCtMode & CT_MODE_NO_ORPHANS ) || ( ( bLessThanPrev = LinearCT[i] < nMax ) ||
-                i + 1 < nLenCT && LinearCT[i + 1] < ( nMax = LinearCT[i] ) ))
+                (i + 1 < nLenCT && LinearCT[i + 1] < ( nMax = LinearCT[i] )) )) /* djb-rwth: addressing LLVM warning */
             {
                 nValue = LinearCT[i];
                 if (nCtMode & CT_MODE_ABC_NUMBERS)
@@ -826,7 +832,7 @@ int MakeHString( int              bAddDelim,
             {
                 bOutOfRange = 0;
                 tot_num_no_H = 0; /* number of atoms that have no H */
-                memset( nNumH, 0, curLenH * sizeof( nNumH[0] ) );
+                memset( nNumH, 0, curLenH * sizeof( nNumH[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                 for (i = 0; i < nLenCT; i++)
                 {
                     curNumH = LinearCT[i];
@@ -933,7 +939,7 @@ int MakeHString( int              bAddDelim,
                                 }
                                 else
                                 {
-                                    strcpy( szValue + len, pH );
+                                    strcpy(szValue + len, pH);
                                     len++;
                                 }
                             }
@@ -1017,7 +1023,7 @@ int MakeHString( int              bAddDelim,
                         }
                         else
                         {
-                            strcpy( szValue + len, pH );
+                            strcpy(szValue + len, pH); /* djb-rwth: GCC 14 false positive */
                             len++;
                         }
                     }
@@ -1202,7 +1208,7 @@ int MakeTautString( AT_NUMB          *LinearCT,
                                     len = 0;
                                     break;
                                 case 1:
-                                    strcpy( szValue, p );
+                                    strcpy(szValue, p);
                                     len = (int) strlen( szValue );
                                     break;
                                 default:
@@ -1241,7 +1247,7 @@ int MakeTautString( AT_NUMB          *LinearCT,
                                     /*  number of hydrogens */
                                     if (nValue == 1)
                                     {
-                                        strcpy( szValue, p );
+                                        strcpy(szValue, p);
                                         len = (int) strlen( szValue );
                                     }
                                     else
@@ -1417,7 +1423,7 @@ int MakeCRVString( ORIG_INFO        *OrigInfo,
                     switch (OrigInfo[k].cRadical)
                     {
                         case 1:
-                            szValue[len++] = 'd';
+                            szValue[len++] = 'd'; /* djb-rwth: GCC 14 false positive */
                             break;
                         case 2:
                             szValue[len++] = 't';
@@ -1481,7 +1487,7 @@ int MakeEquString( AT_NUMB          *LinearCT,
                    int              *bOverflow )
 {
     /*  produce output string; */
-    int nUsedLength0 = 0, nLen = 0, len, i, k, bAbcNumbers;
+    int nUsedLength0 = 0, nLen = 0, len, i, k, bAbcNumbers; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
     int bOvfl = *bOverflow;
     char szValue[2048];
     int  bNext = 0;
@@ -1517,11 +1523,11 @@ int MakeEquString( AT_NUMB          *LinearCT,
             /*  is at canon_number-1 position of each equivalent atom.  */
             if (bAbcNumbers)
             {
-                len = MakeAbcNumber( szValue, ( int )sizeof( szValue ), ( i == k && bNext ) ? ITEM_DELIMETER : NULL, i + 1 );
+                len = MakeAbcNumber( szValue, ( int )sizeof( szValue ), ( i == k && bNext ) ? ITEM_DELIMETER : NULL, i + 1 ); /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
             }
             else
             {
-                len = MakeDecNumber( szValue, ( int )sizeof( szValue ), ( i == k ) ? "(" : ITEM_DELIMETER, i + 1 );
+                len = MakeDecNumber( szValue, ( int )sizeof( szValue ), ( i == k ) ? "(" : ITEM_DELIMETER, i + 1 ); /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
             }
             inchi_strbuf_printf( strbuf, "%s", szValue );
             bNext++;
@@ -1671,7 +1677,7 @@ int MakeIsoAtomString( INChI_IsotopicAtom *IsotopicAtom,
                                 {
                                     if (( int )sizeof( szValue ) - tot_len > 1)
                                     {
-                                        strcpy( p, h[j - 2] );
+                                        strcpy(p, h[j - 2]);
                                         len = 1;
                                     }
                                     else
@@ -1725,7 +1731,7 @@ int MakeIsoTautString( INChI_IsotopicTGroup *IsotopicTGroup,
 {
     /*  produce output string; */
     int nUsedLength0 = 0, nLen = 0, len, tot_len, i, j, bOvfl = *bOverflow;
-    AT_NUMB nMax;
+    /* djb-rwth: removing redundant variables */
     char szValue[2048];
     char *p;
     int   nValue;
@@ -1736,7 +1742,7 @@ int MakeIsoTautString( INChI_IsotopicTGroup *IsotopicTGroup,
     nUsedLength0 = strbuf->nUsedLength;
 
     /*  add connection table string */
-    nMax = 0;
+    /* djb-rwth: removing redundant code */
     if (!bOvfl)
     {
         for (i = 0; i < nNumberOfIsotopicTGroups/* && nLen < nLen_szLinearCT*/; i++)
@@ -1798,7 +1804,7 @@ int MakeIsoTautString( INChI_IsotopicTGroup *IsotopicTGroup,
                             else
                                 if (( int )sizeof( szValue ) - tot_len > 1)
                                 {
-                                    strcpy( p, h[j - 1] );
+                                    strcpy(p, h[j - 1]);
                                     len = 1;
                                 }
                                 else
@@ -1845,7 +1851,7 @@ int MakeIsoHString( int              num_iso_H[],
 {
     /*  produce output string; */
     int nUsedLength0 = 0, nLen = 0, len, tot_len, j, bOvfl = *bOverflow;
-    AT_NUMB nMax;
+    /* djb-rwth: removing redundant variables */
     char szValue[2048];
     char *p;
     int   nValue;
@@ -1856,7 +1862,7 @@ int MakeIsoHString( int              num_iso_H[],
     nUsedLength0 = strbuf->nUsedLength;
 
     /*  add connection table string */
-    nMax = 0;
+    /* djb-rwth: removing redundant code */
     if (!bOvfl)
     {
         p = szValue;
@@ -1894,7 +1900,7 @@ int MakeIsoHString( int              num_iso_H[],
                     {
                         if (( int )sizeof( szValue ) - tot_len > 1)
                         {
-                            strcpy( p, h[j - 1] );
+                            strcpy(p, h[j - 1]);
                             len = 1;
                         }
                         else
@@ -2088,7 +2094,7 @@ int MakeAbcNumber( char      *szString,
     }
     for (q = p; nValue && --nStringLen; nValue /= ALPHA_BASE)
     {
-        if (nChar = nValue % ALPHA_BASE)
+        if ((nChar = nValue % ALPHA_BASE)) /* djb-rwth: addressing LLVM warning */
         {
             nChar = ALPHA_ONE + nChar - 1;
         }
@@ -2122,14 +2128,14 @@ long abctol( const char *szString, char **q )
 #define __MYTOLOWER(c) ( ((c) >= 'A') && ((c) <= 'Z') ? ((c) - 'A' + 'a') : (c) )
 
     long        val = 0;
-    long        sign = 1;
+    /* djb-rwth: removing redundant variables */
     const char *p = szString, *pp = szString;
     long treshold = ( LONG_MAX - 1 ) / ALPHA_BASE;
 
     if (*p == ALPHA_MINUS)
     {
         p++;
-        sign = -1;
+        /* djb-rwth: removing redundant code */
     }
     if (*p == ALPHA_ZERO)
     {
@@ -2161,7 +2167,7 @@ long abctol( const char *szString, char **q )
                     goto exit_function;
                 }
                 else
-                /* Software version 1.06 ^^^*/
+                /* Software version 1.07 ^^^*/
                     val *= ALPHA_BASE;  /* @1.06 fuzz testing caused overflow here! */
             }
             else
@@ -2237,7 +2243,7 @@ int MakeDecNumber( char        *szString,
     }
     while (szLeadingDelim && *szLeadingDelim && --nStringLen)
     {
-        *p++ = *szLeadingDelim++;
+        *p++ = *szLeadingDelim++; /* djb-rwth: GCC 14 false positive */
     }
     if (nStringLen < 2)
     {
@@ -2257,7 +2263,7 @@ int MakeDecNumber( char        *szString,
     }
     for (q = p; nValue && --nStringLen; nValue /= DECIMAL_BASE)
     {
-        if (nChar = nValue % DECIMAL_BASE)
+        if ((nChar = nValue % DECIMAL_BASE)) /* djb-rwth: addressing LLVM warning */
         {
             nChar = DECIMAL_ONE + nChar - 1;
         }

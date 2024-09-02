@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,24 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
+*/
 
 
 /*
@@ -37,7 +44,6 @@ Balanced Network Search
 
 Normalization related procedures
 */
-
 
 #include <stdlib.h>
 #include <string.h>
@@ -52,6 +58,10 @@ Normalization related procedures
 #include "ichister.h"
 #include "ichi_bns.h"
 
+#include "bcf_s.h"
+
+#include <string.h>
+#include "logging.h"                   /*(@nnuk : Nauman Ullah Khan) :: Needed for logging functionality*/
 
 #define BNS_MARK_ONLY_BLOCKS        1  /* 1 => find only blocks, do not search for ring systems */
 #define ALLOW_ONLY_SIMPLE_ALT_PATH  0  /* 0 => allow alt. path to contain same bond 2 times (in opposite directions) */
@@ -344,7 +354,9 @@ int bSetFlowToCheckOneBond( BN_STRUCT *pBNS, int iedge, int flow, BNS_FLOW_CHANG
 int bRestoreFlowAfterCheckOneBond( BN_STRUCT *pBNS, BNS_FLOW_CHANGES *fcd );
 int bSetBondsAfterCheckOneBond( BN_STRUCT *pBNS, BNS_FLOW_CHANGES *fcd, int nTestFlow, inp_ATOM *at, int num_atoms, int bChangeFlow );
 int BnsTestAndMarkAltBonds( BN_STRUCT *pBNS, BN_DATA *pBD, inp_ATOM *at, int num_atoms, BNS_FLOW_CHANGES *fcd, int bChangeFlow, int nBondTypeToTest );
-int bIsAltBond( int bond_type );
+/* 
+int bIsAltBond(int bond_type); -- djb-rwth: function definition not found 
+*/
 
 /* Fix bonds */
 int fix_special_bonds( BN_STRUCT *pBNS, inp_ATOM *at, int num_atoms, int edge_forbidden_mask );
@@ -366,7 +378,7 @@ static void remove_alt_bond_marks( inp_ATOM *at, int num_atoms );
 int bIsBnsEndpoint( BN_STRUCT *pBNS, int v );
 
 /* Protons removal, charge neutralization */
-int is_acidic_CO( inp_ATOM *atom, int at_no );
+/* int is_acidic_CO(inp_ATOM* atom, int at_no); */ /* djb-rwth: function definition not found*/
 int mark_at_type( inp_ATOM *atom, int num_atoms, int nAtTypeTotals[] );
 int GetAtomChargeType( inp_ATOM *atom, int at_no, int nAtTypeTotals[], int *pMask, int bSubtract );
 int AddChangedAtHChargeBNS( inp_ATOM *at, int num_atoms, int nAtTypeTotals[], S_CHAR *mark );
@@ -471,7 +483,7 @@ int SetAtomBondType( BNS_EDGE *edge,
                      int bChangeFlow )
 {
     int    flow1, flow2, tmp, ret = 0;
-    int   bond_mark, bond_type, new_bond_type;
+    int   bond_mark = 0, bond_type, new_bond_type; /* djb-rwth: addressing LLVM warning */
 
     if (!edge->pass || !bond_type21)
     {
@@ -520,7 +532,7 @@ int SetAtomBondType( BNS_EDGE *edge,
                 flow1 = flow2;
                 flow2 = tmp;
             }
-            bond_mark = 0;
+            /* djb-rwth: removing redundant code */
             switch (bond_type = ( *bond_type12 & BOND_TYPE_MASK ))
             {
                 case BOND_SINGLE:
@@ -567,11 +579,13 @@ int SetAtomBondType( BNS_EDGE *edge,
                         bond_mark = BOND_MARK_ALT12NS;
                     }
                     else
-                    {
-                        return BNS_BOND_ERR; /* error */
-                    }
-                    break;
-
+                        if (flow1 == 1 && flow2 == 2) {
+                            bond_mark = BOND_MARK_ALT23;
+                        }
+                        else {
+                            return BNS_BOND_ERR; /* error */
+                        }
+                        break;
                 default:
                     new_bond_type = bond_type;
                     bond_mark = ( *bond_type12 & BOND_MARK_MASK );
@@ -821,8 +835,8 @@ int EliminatePlusMinusChargeAmbiguity( BN_STRUCT *pBNS, int num_atoms )
             */
             v2 = edge->neighbor12 ^ v1;
             if (v1 < num_atoms &&
-                ( v0 >= num_atoms && ( pBNS->vert[v0].type & BNS_VERT_TYPE_C_GROUP ) ||
-                  v2 >= num_atoms && ( pBNS->vert[v2].type & BNS_VERT_TYPE_C_GROUP ) ))
+                ( (v0 >= num_atoms && ( pBNS->vert[v0].type & BNS_VERT_TYPE_C_GROUP )) ||
+                  (v2 >= num_atoms && ( pBNS->vert[v2].type & BNS_VERT_TYPE_C_GROUP ) ))) /* djb-rwth: addressing LLVM warning */
             {
                 int        cgPos = 0, cgNeg = 0;
                 int        neighPos = -1, neighNeg = -1;
@@ -893,8 +907,7 @@ int AddOrRemoveExplOrImplH( int nDelta,
     int i, iso, tot_num_iso_H,
         num_H,                  /* number of H before the removal, including explicit H  */
         nNum2Remove,            /* number of H to remove */
-        nNumRemovedExplicitH,
-        nNumExplicit2Implicit;
+        nNumRemovedExplicitH; /* djb-rwth: removing redundant variables */
     S_CHAR    num_iso_H[NUM_H_ISOTOPES];
     inp_ATOM *at_H;
 
@@ -924,8 +937,7 @@ int AddOrRemoveExplOrImplH( int nDelta,
     */
 
     at_H = at + num_atoms;
-    memcpy( num_iso_H, at[at_no].num_iso_H, sizeof( num_iso_H ) );
-
+    memcpy(num_iso_H, at[at_no].num_iso_H, sizeof(num_iso_H));
     /*  Remove all explicit H, otherwise a false stereo can occur.
     Example: remove H(+) from the following substructure:
 
@@ -938,18 +950,18 @@ int AddOrRemoveExplOrImplH( int nDelta,
     To avoid this effect all explicit H atoms must be removed
     */
 
-    nNumExplicit2Implicit = 0;
+    /* djb-rwth: removing redundant code */
     for (i = 0; i < nNumRemovedExplicitH; )
     {
         if (at_H[i].neighbor[0] == at_no)
         {
             int m, k, orig_no = at_H[i].orig_at_number;
             nNumRemovedExplicitH--;
-            nNumExplicit2Implicit++;
+            /* djb-rwth: removing redundant code */
             if (nNumRemovedExplicitH > i)
             {
                 inp_ATOM at_i = at_H[i];
-                memmove( at_H + i, at_H + i + 1, sizeof( at_H[0] )*( nNumRemovedExplicitH - i ) );
+                memmove(at_H + i, at_H + i + 1, sizeof(at_H[0]) * ((long long)nNumRemovedExplicitH - i)); /* djb-rwth: cast operator added */
                 at_H[nNumRemovedExplicitH] = at_i; /* save removed H (for debugging purposes?) */
             }
             /* Adjust 0D parities */
@@ -1032,7 +1044,7 @@ int AddOrRemoveExplOrImplH( int nDelta,
     if (nDelta + nNum2Remove < 0)
     {
         at[at_no].num_H = num_H;
-        memcpy( at[at_no].num_iso_H, num_iso_H, sizeof( at[0].num_iso_H ) );
+        memcpy(at[at_no].num_iso_H, num_iso_H, sizeof(at[0].num_iso_H));
         t_group_info->tni.nNumRemovedExplicitH = nNumRemovedExplicitH;
     }
 
@@ -1052,7 +1064,7 @@ int SubtractOrChangeAtHChargeBNS( BN_STRUCT *pBNS,
     int       pass, i, v0, v1, v2, ineigh1, /*ineigh2,*/ vLast, n, delta, ret, err = 0;
     BNS_EDGE *edge;
     int       nDeltaH, nDeltaCharge;
-    int       mask, type;
+    int       mask, type; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 
     for (pass = pBNS->num_altp - 1, ret = 0; 0 <= pass; pass--)
     {
@@ -1112,10 +1124,11 @@ int SubtractOrChangeAtHChargeBNS( BN_STRUCT *pBNS,
                         if (!mark[v1])
                         {
                             /* first time the atom has been encountered: subtract */
+                            /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 #if ( FIX_NORM_BUG_ADD_ION_PAIR == 1 )
-                            type = GetAtomChargeType( at, v1, nAtTypeTotals, &mask, 2 );
+                            type = GetAtomChargeType(at, v1, nAtTypeTotals, &mask, 2);
 #else
-                            type = GetAtomChargeType( at, v1, nAtTypeTotals, &mask, 1 );
+                            type = GetAtomChargeType(at, v1, nAtTypeTotals, &mask, 1);
 #endif
                             ret++; /* number of changed atoms */
                             mark[v1] ++;
@@ -1155,7 +1168,7 @@ int SetBondsFromBnStructFlow( BN_STRUCT *pBNS,
 {
     int       pass, i, v0, v1, v2, ineigh1, ineigh2, vLast, n, delta, ret, ret_val, err = 0;
     BNS_EDGE *edge;
-    int       bMovingRad = 0, bChangeFlowAdd;
+    int       bChangeFlowAdd; /* djb-rwth: removing redundant variables */
     int       bChangeFlow = ( bChangeFlow0 & ~BNS_EF_SET_NOSTEREO );
     /*
     bCheckMovingRad = (bChangeFlow & BNS_EF_ALTR_NS) == BNS_EF_ALTR_NS &&
@@ -1172,7 +1185,7 @@ int SetBondsFromBnStructFlow( BN_STRUCT *pBNS,
             ( pBNS->vert[v1].st_edge.cap0 > pBNS->vert[v1].st_edge.flow0 ||
               pBNS->vert[vLast].st_edge.cap0 > pBNS->vert[vLast].st_edge.flow0 ))
         {
-            bMovingRad++;
+            /* djb-rwth: removing redundant code */
             bChangeFlowAdd = BNS_EF_SET_NOSTEREO;
             ret |= 2;
         }
@@ -1320,7 +1333,7 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
                            int nEnd1,
                            int nEnd2 )
 {
-    int       pass, i, j, v1, v2, ineigh1, ineigh2, vLast, vFirst, n, delta, err = 0;
+    int       pass, i, j, v1, v2, ineigh1, ineigh2, vLast, vFirst, n, delta, err = 0; /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
     BNS_EDGE *edge;
     S_CHAR    cDelta[MAX_ALT_AATG_ARRAY_LEN];
     AT_NUMB   nVertex[MAX_ALT_AATG_ARRAY_LEN];
@@ -1349,7 +1362,7 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
         for (i = 0; i < n; i++, delta = -delta, v1 = v2)
         {
             ineigh1 = ALTP_THIS_ATOM_NEIGHBOR( pBNS->alt_path, i );  /* v1->v2 neighbor */
-            ineigh2 = ALTP_NEXT_ATOM_NEIGHBOR( pBNS->alt_path, i );  /* v2->v1 neighbor */
+            ineigh2 = ALTP_NEXT_ATOM_NEIGHBOR(pBNS->alt_path, i);  /* v2->v1 neighbor */ /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
             edge = pBNS->edge + pBNS->vert[v1].iedge[ineigh1];
             /* follow the BN Structure, not the inp_ATOM, to take care of swithching to
             t-groups, c-groups or other fictitious edges/vertices
@@ -1404,7 +1417,7 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
                 else
                 {
                     /* Special case when the testing 'dot' was placed on an atom (should be nEnd1 only) */
-                    if (0 <= v1 && v1 == nEnd1 || v1 == nEnd2 && 0 <= v2 && v2 < num_atoms)
+                    if ((0 <= v1 && v1 == nEnd1) || (v1 == nEnd2 && 0 <= v2 && v2 < num_atoms)) /* djb-rwth: addressing LLVM warning */
                     {
                         if (nLenDelta < MAX_ALT_AATG_ARRAY_LEN)
                         {
@@ -1415,7 +1428,7 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
                     }
                     else
                     {
-                        if (0 <= v2 && v2 == nEnd1 || v2 == nEnd2 && 0 <= v1 && v1 < num_atoms)
+                        if ((0 <= v2 && v2 == nEnd1) || (v2 == nEnd2 && 0 <= v1 && v1 < num_atoms)) /* djb-rwth: addressing LLVM warning */
                         {
                             if (nLenDelta < MAX_ALT_AATG_ARRAY_LEN)
                             {
@@ -1443,8 +1456,8 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
                 /* Ignore sequences (-1,+1) and (+1,-1) in cDelta[] because they  */
                 /* describe ordinary aug. paths of moving a single attachment     */
                 /* we are looking for aug. paths describing movement of 2 or more */
-                if (cDelta[j] > 0 && cDelta[i] > 0 ||
-                     cDelta[j] < 0 && cDelta[i] < 0)
+                if ((cDelta[j] > 0 && cDelta[i] > 0) ||
+                     (cDelta[j] < 0 && cDelta[i] < 0)) /* djb-rwth: addressing LLVM warning */
                 {
                     if (j == last_i)
                     {
@@ -1483,8 +1496,8 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
                 /* Ignore sequences (-1,+1) and (+1,-1) in cDelta[] because they  */
                 /* describe ordinary aug. paths of moving a single attachment     */
                 /* we are looking for aug. paths describing movement of 2 or more */
-                if (cDelta[j] > 0 && cDelta[i] > 0 ||
-                     cDelta[j] < 0 && cDelta[i] < 0)
+                if ((cDelta[j] > 0 && cDelta[i] > 0) ||
+                     (cDelta[j] < 0 && cDelta[i] < 0)) /* djb-rwth: addressing LLVM warning */
                 {
                     v1 = nVertex[i - 1];
                     if (!( pAATG->nMarkedAtom[v1] & AATG_MARK_IN_PATH ))
@@ -1510,7 +1523,7 @@ int MarkAtomsAtTautGroups( BN_STRUCT *pBNS,
 /****************************************************************************/
 int RestoreBnStructFlow( BN_STRUCT *pBNS, int bChangeFlow )
 {
-    int       pass, i, v1, v2, ineigh1, ineigh2, vLast, n, delta, ret, err = 0;
+    int       pass, i, v1, v2, ineigh1, ineigh2, vLast, n, delta, ret, err = 0; /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
     BNS_EDGE *edge;
 
     for (pass = pBNS->num_altp - 1, ret = 0; 0 <= pass; pass--)
@@ -1538,7 +1551,7 @@ int RestoreBnStructFlow( BN_STRUCT *pBNS, int bChangeFlow )
         for (i = 0; i < n; i++, delta = -delta, v1 = v2)
         {
             ineigh1 = ALTP_THIS_ATOM_NEIGHBOR( pBNS->alt_path, i );  /* v1->v2 neighbor */
-            ineigh2 = ALTP_NEXT_ATOM_NEIGHBOR( pBNS->alt_path, i );  /* v2->v1 neighbor */
+            ineigh2 = ALTP_NEXT_ATOM_NEIGHBOR(pBNS->alt_path, i);  /* v2->v1 neighbor */ /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
             edge = pBNS->edge + pBNS->vert[v1].iedge[ineigh1];
             v2 = edge->neighbor12 ^ v1;
             RestoreEdgeFlow( edge, delta, bChangeFlow );
@@ -1818,7 +1831,7 @@ int BnsTestAndMarkAltBonds( BN_STRUCT *pBNS,
 {
     int ret, iat, ineigh, neigh;
     int nMinFlow, nMaxFlow, nTestFlow, nCurFlow;
-    int iedge, bSuccess, bError, nDots, nChanges, bTestForNonStereoBond;
+    int iedge, bError, nDots, nChanges, bTestForNonStereoBond; /* djb-rwth: removing redundant variables */
 
     /* Normalize bonds and find tautomeric groups */
     bError = 0;
@@ -1868,7 +1881,7 @@ int BnsTestAndMarkAltBonds( BN_STRUCT *pBNS,
                 {
                     continue;
                 }
-                bSuccess = 0;
+                /* djb-rwth: removing redundant code */
                 nDots = bSetFlowToCheckOneBond( pBNS, iedge, nTestFlow, fcd );
 
                 if (IS_BNS_ERROR( nDots ))
@@ -1916,7 +1929,7 @@ int BnsTestAndMarkAltBonds( BN_STRUCT *pBNS,
                                             if (ret >= 0)
                                             {
                                                 nChanges += ( ret & 1 );
-                                                bSuccess = 1;
+                                                /* djb-rwth: removing redundant code */
                                             }
                                             else
                                             {
@@ -2161,7 +2174,6 @@ int CorrectFixing_NH_NH_Bonds( BN_STRUCT *pBNS, inp_ATOM *at, int num_atoms )
 }
 #endif
 
-
 /****************************************************************************
 Fixes bonds which were set by remove_ion_pairs( ... )
 ****************************************************************************/
@@ -2172,30 +2184,10 @@ int fix_special_bonds( BN_STRUCT *pBNS,
 {
     int num_changes = 0;
 
-    /*                           0 1 2  3  4 5 6  7  8  9                   8  9  */
-#if ( FIX_REM_ION_PAIRS_Si_BUG == 1 )
-    static const char    el[] = "N;P;As;Sb;O;S;Se;Te;C;Si;";  /* 8 elements + C, Si */
-#else
-    static const char    el[] = "N;P;As;Sb;O;S;Se;Te;C;Si";   /* 8 elements + C, Si */
-#endif
-    static char    en[12];  /* Same number: 8 elements  */
-    static int     ne = 0;  /* will be 8 and 10         */
-    int ne2;
-
-#define ELEM_N_FST  0
-#define ELEM_N_LEN  4
-#define ELEM_O_FST  4
-#define ELEM_O_LEN  4
-#define ELEM_S_FST  (ELEM_O_FST+1)
-#define ELEM_S_LEN  (ELEM_O_LEN-1)
-#define ELEM_C_FST  8
-#define ELEM_C_LEN  2
-
 #define MAX_NEIGH 6
 
-    int i, k, n1, n2, n3, n4, i1, i2, i3, i4, bond_type;
+    int i, k, n1, n2, n3, i1, i2, i3, i4, bond_type; /* djb-rwth: removing redundant variables */
     inp_ATOM *a;
-    char elname[ATOM_EL_LEN];
     int j[3], m[3], num_O, k_O, num_N, num_OH, num_OM, num_X, num_other, k_N;
 
     BNS_IEDGE iedge;
@@ -2204,24 +2196,6 @@ int fix_special_bonds( BN_STRUCT *pBNS,
 
     pBNS->edge_forbidden_mask |= edge_forbidden_mask;
 
-    if (!ne)
-    {
-        /* One time initialization */
-        const char *b, *e;
-        int  len;
-        ne2 = 0;
-        for (b = el; e = strchr( b, ';' ); b = e + 1)
-        {
-            len = (int) ( e - b );
-            memcpy( elname, b, len );
-            elname[len] = '\0';
-            en[ne2++] = get_periodic_table_number( elname );
-        }
-        en[ne2] = '\0';
-        en[ne2 + 1] = '\0';
-        ne = ne2;
-    }
-
     for (i = 0, a = at; i < num_atoms; i++, a++)
     {
 
@@ -2229,7 +2203,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
              2 <= a->chem_bonds_valence + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
              0 == num_of_H( at, i ) &&
              2 == nNoMetalBondsValence( at, i ) + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
-             NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ))
+             ion_el_group( at[i].el_number ) == EL_NUMBER_N )
         {
             /* Found N(V), no H */
             if (2 == nNoMetalNumBonds( at, i ))
@@ -2257,19 +2231,20 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 num_changes++;  /* added 11-15-2005 */
                                 /*                                                      i n3 */
                                 /* forbid single bond edge beyond the neighboring =N- as in #N=N- */
+                /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                 if (( at[i].bond_type[i1] & BOND_TYPE_MASK ) == BOND_TYPE_DOUBLE)
                 {
-                    i3 = i1;
+                    i3 = i1; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                     n3 = n1;
                 }
                 else
                 {
-                    i3 = i2;
+                    i3 = i2; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                     n3 = n2;
                 }
                 if (0 == NUMH( at, n3 ) && 2 == nNoMetalNumBonds( at, n3 ) &&
                      3 == nNoMetalBondsValence( at, n3 ) &&
-                     NULL != memchr( en + ELEM_N_FST, at[n3].el_number, ELEM_N_LEN ) &&
+                     ion_el_group( at[n3].el_number ) == EL_NUMBER_N &&
                      0 <= ( k = nNoMetalOtherNeighIndex( at, n3, i ) ))
                 {
                     /* found =N- ; forbid the edge*/
@@ -2296,14 +2271,14 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 for (k = 0; k < 3; k++)
                 {
                     n1 = m[k];
-                    i1 = j[k];
-                    if (NULL != memchr( en + ELEM_N_FST, at[n1].el_number, ELEM_N_LEN ))
+                    i1 = j[k]; /* djb-rwth: ignoring LLVM warning: variable used */
+                    if (ion_el_group( at[n1].el_number ) == EL_NUMBER_N)
                     {
                         k_N = k;
                         num_N++;
                     }
-                    else if (NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ) &&
-                              1 == nNoMetalNumBonds( at, n1 ))
+                    else if (ion_el_group( at[n1].el_number ) == EL_NUMBER_O &&
+                             1 == nNoMetalNumBonds( at, n1 ))
                     {
                         k_O = k;
                         num_O++;
@@ -2344,12 +2319,12 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 * if it is =N- then fix the double bond and the single bond beyond the neighbor
                 */
                 num_N = 0;
-                num_other = 0;
+                num_other = 0; /* djb-rwth: ignoring LLVM warning: variable used */
                 for (i1 = 0; i1 < at[i].valence; i1++)
                 {
                     if (BOND_TYPE_DOUBLE == ( at[i].bond_type[i1] & BOND_TYPE_MASK ) &&
                          !is_el_a_metal( at[n1 = (int) at[i].neighbor[i1]].el_number ) &&
-                         NULL != memchr( en + ELEM_N_FST, at[n1].el_number, ELEM_N_LEN ))
+                         ion_el_group( at[n1].el_number ) == EL_NUMBER_N)
                     {
                         num_N++;
                         n2 = n1;
@@ -2378,7 +2353,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                   2 <= a->chem_bonds_valence + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
                   0 == num_of_H( at, i ) &&
                   2 == nNoMetalBondsValence( at, i ) + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
-                  NULL != memchr( en + ELEM_S_FST, a->el_number, ELEM_S_LEN ) &&
+                  a->el_number != EL_NUMBER_O && ion_el_group( a->el_number ) == EL_NUMBER_O &&
                   3 == nNoMetalNumBonds( at, i ))
         {
             /* Found S(IV), no H, one double bond, total 3 bonds */
@@ -2415,7 +2390,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                     num_N++;
                     n2 = n1;
                     i2 = i1;
-                    if (NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ))
+                    if (ion_el_group( at[n1].el_number ) == EL_NUMBER_O)
                     {
                         num_O++;
                     }
@@ -2423,13 +2398,13 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 else if (BOND_TYPE_SINGLE == bond_type &&
                           1 == nNoMetalNumBonds( at, n1 ) &&
                           1 == nNoMetalBondsValence( at, n1 ) &&
-                          NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ))
+                          ion_el_group( at[n1].el_number ) == EL_NUMBER_O)
                 {
                     if (0 == at[n1].charge)
                     {
                         num_OH++;
                         n3 = n1;
-                        i3 = i1;
+                        i3 = i1; /* djb-rwth: ignoring LLVM warning: variable used */
                     }
                     else
                     {
@@ -2439,7 +2414,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 else
                 {
                     num_other++;
-                    n4 = n1;
+                    /* djb-rwth: removing redundant code */
                     i4 = i1;
                 }
             } /* for (i1 = */
@@ -2459,7 +2434,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 int    bFound = 0; /* flag */
                 int    bDoNotFixAnyBond = 0; /* flag */
                                              /* Avoid case N=S-NH or N=S-N(-); N = N, P, As, Sb */
-                if (NULL != memchr( en + ELEM_N_FST, at[n2].el_number, ELEM_N_LEN ))
+                if (ion_el_group( at[n2].el_number ) == EL_NUMBER_N)
                 {
                     U_CHAR el_number = at[n2].el_number;
                     for (i1 = 0; i1 < a->valence; i1++)
@@ -2470,7 +2445,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                             ( NUMH( at, n1 ) || -1 == at[n1].charge ) &&
                              el_number == at[n1].el_number)
                         {
-                            i3 = i1;
+                            i3 = i1; /* djb-rwth: ignoring LLVM warning: variable used */
                             n3 = n1;
                             bFound++;
                         }
@@ -2526,7 +2501,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                   4 <= a->chem_bonds_valence + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
                   0 == num_of_H( at, i ) &&
                   4 == nNoMetalBondsValence( at, i ) + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
-                  NULL != memchr( en + ELEM_S_FST, a->el_number, ELEM_S_LEN ) &&
+                  a->el_number != EL_NUMBER_O && ion_el_group( a->el_number ) == EL_NUMBER_O &&
                   4 == nNoMetalNumBonds( at, i ))
         {
             /* Found S(VI), no H, two double bonds or one triple bond */
@@ -2569,12 +2544,12 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                     num_N++;
                     if (( 0 == at[n1].charge
 #if ( S_VI_O_PLUS_METAL_FIX_BOND == 1 )
-                          || 1 == at[n1].charge && 2 == at[n1].valence
+                          || (1 == at[n1].charge && 2 == at[n1].valence) /* djb-rwth: addressing LLVM warning */
 #endif
                           ) &&
                          0 == at[n1].radical &&
                          0 == num_of_H( at, n1 ) &&
-                         NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ) &&
+                         ion_el_group( at[n1].el_number ) == EL_NUMBER_O &&
                          1 == nNoMetalNumBonds( at, n1 ))
                     {
                         num_O++;
@@ -2582,7 +2557,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 }
                 else if (BOND_TYPE_SINGLE == bond_type &&
                           1 == nNoMetalNumBonds( at, n1 ) &&
-                          NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ) &&
+                          ion_el_group( at[n1].el_number ) == EL_NUMBER_O &&
                           1 >= num_of_H( at, n1 ) &&
                           1 == ( ( 0 == at[n1].charge ) && 1 == num_of_H( at, n1 ) )
                           + ( ( -1 == at[n1].charge ) && 0 == num_of_H( at, n1 ) ))
@@ -2621,7 +2596,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                   6 <= a->chem_bonds_valence + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
                   0 == num_of_H( at, i ) &&
                   6 == nNoMetalBondsValence( at, i ) + NUMH( a, 0 ) - get_el_valence( a->el_number, 0, 0 ) &&
-                  NULL != memchr( en + ELEM_S_FST, a->el_number, ELEM_S_LEN ) &&
+                  a->el_number != EL_NUMBER_O && ion_el_group( a->el_number ) == EL_NUMBER_O &&
                   5 == nNoMetalNumBonds( at, i ))
         {
             /* Found S(VIII), no H, three double bonds or two triple bond */
@@ -2663,12 +2638,12 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                     num_N++;
                     if (( 0 == at[n1].charge
 #if ( S_VI_O_PLUS_METAL_FIX_BOND == 1 )
-                          || 1 == at[n1].charge && 2 == at[n1].valence
+                          || (1 == at[n1].charge && 2 == at[n1].valence) /* djb-rwth: addressing LLVM warning */
 #endif
                           )
                          && 0 == at[n1].radical &&
                          0 == num_of_H( at, n1 ) &&
-                         NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ) &&
+                         ion_el_group( at[n1].el_number ) == EL_NUMBER_O &&
                          1 == nNoMetalNumBonds( at, n1 ))
                     {
                         num_O++;
@@ -2676,7 +2651,7 @@ int fix_special_bonds( BN_STRUCT *pBNS,
                 }
                 else if (BOND_TYPE_SINGLE == bond_type &&
                           1 == nNoMetalNumBonds( at, n1 ) &&
-                          NULL != memchr( en + ELEM_O_FST, at[n1].el_number, ELEM_O_LEN ) &&
+                          ion_el_group( at[n1].el_number ) == EL_NUMBER_O &&
                           1 >= num_of_H( at, n1 ) &&
                           1 == ( ( 0 == at[n1].charge ) && 1 == num_of_H( at, n1 ) )
                           + ( ( -1 == at[n1].charge ) && 0 == num_of_H( at, n1 ) ))
@@ -2804,65 +2779,31 @@ int fix_explicitly_indicated_bonds( int nebend,
 /****************************************************************************/
 int is_Z_atom( U_CHAR el_number )
 {
-    typedef enum tag_Z_elnumber
+    switch ( el_number ) 
     {
-        el_C,
-        el_N,
-        el_P,
-        el_As,
-        el_Sb,
-        el_S,
-        el_Se,
-        el_Te,
-        el_Cl,
-        el_Br,
-        el_I,
-#if ( ALL_NONMETAL_Z == 1 )
-        el_B,
-        el_O,
-        el_Si,
-        el_Ge,
-        el_F,
-        el_At,
-#endif
-        el_len
-    } Z_ELNUMBER;
-
-    static U_CHAR el_numb[el_len];
-
-    /*
-    return is_el_a_metal( (int)el_number );
-    */
-
-    if (!el_numb[el_C])
-    {
-        el_numb[el_C] = (U_CHAR) get_periodic_table_number( "C" );
-        el_numb[el_N] = (U_CHAR) get_periodic_table_number( "N" );
-        el_numb[el_P] = (U_CHAR) get_periodic_table_number( "P" );
-        el_numb[el_As] = (U_CHAR) get_periodic_table_number( "As" );
-        el_numb[el_Sb] = (U_CHAR) get_periodic_table_number( "Sb" );
-        el_numb[el_S] = (U_CHAR) get_periodic_table_number( "S" );
-        el_numb[el_Se] = (U_CHAR) get_periodic_table_number( "Se" );
-        el_numb[el_Te] = (U_CHAR) get_periodic_table_number( "Te" );
-        el_numb[el_Cl] = (U_CHAR) get_periodic_table_number( "Cl" );
-        el_numb[el_Br] = (U_CHAR) get_periodic_table_number( "Br" );
-        el_numb[el_I] = (U_CHAR) get_periodic_table_number( "I" );
-#if ( ALL_NONMETAL_Z == 1 )
-        el_numb[el_B] = (U_CHAR) get_periodic_table_number( "B" );
-        el_numb[el_O] = (U_CHAR) get_periodic_table_number( "O" );
-        el_numb[el_Si] = (U_CHAR) get_periodic_table_number( "Si" );
-        el_numb[el_Ge] = (U_CHAR) get_periodic_table_number( "Ge" );
-        el_numb[el_F] = (U_CHAR) get_periodic_table_number( "F" );
-        el_numb[el_At] = (U_CHAR) get_periodic_table_number( "At" );
-#endif
+        case EL_NUMBER_C: /* fallthrough */
+        case EL_NUMBER_N:
+        case EL_NUMBER_P:
+        case EL_NUMBER_AS:
+        case EL_NUMBER_SB:
+        case EL_NUMBER_S:
+        case EL_NUMBER_SE:
+        case EL_NUMBER_TE:
+        case EL_NUMBER_CL:
+        case EL_NUMBER_BR:
+        case EL_NUMBER_I:
+#if ( ALL_NONMETAL_Z == 1 )        
+        case EL_NUMBER_B:
+        case EL_NUMBER_O:
+        case EL_NUMBER_SI:
+        case EL_NUMBER_GE:
+        case EL_NUMBER_F:
+        case EL_NUMBER_AT:
+#endif        
+            return 1;
+        default:
+            return 0;    
     }
-
-    if (memchr( el_numb, el_number, el_len ))
-    {
-        return 1;
-    }
-
-    return 0;
 }
 
 
@@ -2981,16 +2922,16 @@ int GetAtomChargeType( inp_ATOM *atom,
     }
 #if ( HAL_ACID_H_XCHG == 1 )
     /* halogen/chalcogen acid */
-    if (!at->valence && at->charge == 0 && 1 == at->num_H && !at->radical &&
+    if ((!at->valence && at->charge == 0 && 1 == at->num_H && !at->radical &&
         ( at->el_number == EL_NUMBER_F ||
           at->el_number == EL_NUMBER_CL ||
           at->el_number == EL_NUMBER_BR ||
-          at->el_number == EL_NUMBER_I ) ||
-         !at->valence && at->charge == 0 && 2 == at->num_H && !at->radical &&
+          at->el_number == EL_NUMBER_I )) ||
+         (!at->valence && at->charge == 0 && 2 == at->num_H && !at->radical &&
          ( at->el_number == EL_NUMBER_O ||
            at->el_number == EL_NUMBER_S ||
            at->el_number == EL_NUMBER_SE ||
-           at->el_number == EL_NUMBER_TE )
+           at->el_number == EL_NUMBER_TE )) /* djb-rwth: addressing LLVM warning */
          )
     {
         /* a halogen/chalcogen acid (#3) */
@@ -3201,7 +3142,7 @@ int GetAtomChargeType( inp_ATOM *atom,
                                 {
                                     if (atom[neigh].el_number == EL_NUMBER_N &&
                                          atom[neigh].valence == 2 &&
-                                         ( !atom[neigh].num_H || atom[neigh].num_H == 1 && atom[neigh].charge == 1 ))
+                                         ( !atom[neigh].num_H || (atom[neigh].num_H == 1 && atom[neigh].charge == 1) )) /* djb-rwth: addressing LLVM warning */
                                     {
                                         /* N or N(-) or NH(+) neighbor */
                                         type = ATT_NO; /* single bond only */
@@ -3493,6 +3434,7 @@ int SimpleRemoveHplusNPO( inp_ATOM *at,
     int i, mask, type, num_removed;
     for (i = 0, num_removed = 0; i < num_atoms; i++)
     {
+        /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
         if (( PR_SIMPLE_TYP & ( type = GetAtomChargeType( at, i, NULL, &mask, 0 ) ) ) &&
             ( PR_SIMPLE_MSK & mask ))
         {
@@ -3502,15 +3444,15 @@ int SimpleRemoveHplusNPO( inp_ATOM *at,
                 return -1;  /* program error */
             }
 #endif
-            type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
+            type = GetAtomChargeType(at, i, nAtTypeTotals, &mask, 1); /* subtract at[i] */ /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             at[i].charge = 0;
             AddOrRemoveExplOrImplH( -1, at, num_atoms, (AT_NUMB) i, t_group_info );
             /*at[i].num_H --;*/
             num_removed++;
 #if ( FIX_NORM_BUG_ADD_ION_PAIR == 1 )
-            type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 0 ); /* add changed at[i] */
+            type = GetAtomChargeType(at, i, nAtTypeTotals, &mask, 0); /* add changed at[i] */ /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 #else
-            type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* bug: subtract instead of add */
+            type = GetAtomChargeType(at, i, nAtTypeTotals, &mask, 1); /* bug: subtract instead of add */ /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
 #endif
                                                                         /*
                                                                         if ( nAtTypeTotals ) {
@@ -3692,7 +3634,7 @@ int CreateCGroupInBnStruct( inp_ATOM *at,
     }
 
     /* Clear the new vertex */
-    memset( pBNS->vert + num_vertices, 0, 1 * sizeof( pBNS->vert[0] ) );
+    memset( pBNS->vert + num_vertices, 0, 1 * sizeof( pBNS->vert[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* *old* Make sure the last t-group has the largest t-group ID:
     this is necessary to correctly add new edges and vertices for testing augmenting paths
@@ -3751,7 +3693,7 @@ int CreateCGroupInBnStruct( inp_ATOM *at,
              vert_ficpoint->num_adj_edges >= vert_ficpoint->max_adj_edges ||
              vertex_cpoint->num_adj_edges >= vertex_cpoint->max_adj_edges)
         {
-            ret = BNS_VERT_EDGE_OVFL;
+            /* djb-rwth: removing redundant code */
             break;
         }
         vertex_cpoint->type |= BNS_VERT_TYPE_C_POINT;
@@ -3798,7 +3740,7 @@ int CreateCGroupInBnStruct( inp_ATOM *at,
                                                       /* nCharge = +1: mark edge to c-point having no (+)-moveable charge with flow=1 */
                                                       /* nCharge = -1: mark edge to c-point having -1 moveable charge with flow=1 */
 
-        if (nCharge == 1 && at[c_point].charge != 1 || nCharge == -1 && at[c_point].charge == -1)
+        if ((nCharge == 1 && at[c_point].charge != 1) || (nCharge == -1 && at[c_point].charge == -1)) /* djb-rwth: addressing LLVM warning */
             /*if ( !CHARGED_CPOINT(at,c_point) )*/
         {
             /* Increment new edge flow, update st_edges of the adjacent vertices */
@@ -3906,7 +3848,7 @@ int CreateTGroupInBnStruct( inp_ATOM *at,
     /* Since t-group IDs may be not contiguous, clear all vertices that will be added.
     all-zeroes-vertex will be ignored by the BNS
     */
-    memset( pBNS->vert + num_vertices, 0, num_tg * sizeof( pBNS->vert[0] ) );
+    memset( pBNS->vert + num_vertices, 0, num_tg * sizeof( pBNS->vert[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* *old* Make sure the last t-group has the largest t-group ID:
     this is necessary to correctly add new edges and vertices for testing augmenting paths
@@ -3954,7 +3896,7 @@ int CreateTGroupInBnStruct( inp_ATOM *at,
              vert_ficpoint->num_adj_edges >= vert_ficpoint->max_adj_edges ||
              vert_endpoint->num_adj_edges >= vert_endpoint->max_adj_edges)
         {
-            ret = BNS_VERT_EDGE_OVFL;
+            /* djb-rwth: removing redundant code */
             break;
         }
 
@@ -3963,7 +3905,7 @@ int CreateTGroupInBnStruct( inp_ATOM *at,
         if (neutral_valence != 2 /* O, S, Se, Te */ &&
              neutral_valence != 3 /* N, P */)
         {
-            ret = BNS_PROGRAM_ERR; /* wrong endpoint neutral valence */
+            /* djb-rwth: removing redundant code */
             break;
         }
         edge_flow = at[endpoint].num_H;
@@ -4115,7 +4057,7 @@ int RemoveLastGroupFromBnStruct( inp_ATOM *at,
             return BNS_VERT_EDGE_OVFL;
         }
         vert_endpoint->num_adj_edges--;
-        memset( edge, 0, sizeof( *edge ) );
+        memset( edge, 0, sizeof( *edge ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         num_edges--;
         if (1 == is_t_group && endpoint < num_atoms)
         {
@@ -4126,7 +4068,7 @@ int RemoveLastGroupFromBnStruct( inp_ATOM *at,
             at->c_point = 0;
         }
     }
-    memset( vert_ficpoint, 0, sizeof( *vert_ficpoint ) );
+    memset( vert_ficpoint, 0, sizeof( *vert_ficpoint ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     num_vertices--;
 
     pBNS->num_edges = num_edges;
@@ -4228,13 +4170,14 @@ int SimpleRemoveAcidicProtons( inp_ATOM *at,
             {
                 if (num[j] && ( type & ArTypMask[2 * j] ) && ( mask && ArTypMask[2 * j + 1] ))
                 {
-                    type = GetAtomChargeType( at, i, pAATG->nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
+                    /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                    type = GetAtomChargeType(at, i, pAATG->nAtTypeTotals, &mask, 1); /* subtract at[i] */ 
                     num[j]  --;
                     at[i].charge--;
                     AddOrRemoveExplOrImplH( -1, at, num_atoms, (AT_NUMB) i, pAATG->t_group_info );
                     /*at[i].num_H  --;*/
                     num_removed++;
-                    type = GetAtomChargeType( at, i, pAATG->nAtTypeTotals, &mask, 0 ); /* add changed at[i] */ /* ! THIS CHANGES pAATG->nAtTypeTotals[ATTOT_TOT_CHARGE] */
+                    type = GetAtomChargeType(at, i, pAATG->nAtTypeTotals, &mask, 0); /* add changed at[i] */ /* ! THIS CHANGES pAATG->nAtTypeTotals[ATTOT_TOT_CHARGE] */ 
                     break;
                 }
             }
@@ -4351,13 +4294,14 @@ int SimpleAddAcidicProtons( inp_ATOM *at,
             {
                 if (num[j] && ( type & AaTypMask[2 * j] ) && ( mask && AaTypMask[2 * j + 1] ))
                 {
-                    type = GetAtomChargeType( at, i, pAATG->nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
+                    /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                    type = GetAtomChargeType(at, i, pAATG->nAtTypeTotals, &mask, 1); /* subtract at[i] */
                     num[j]  --;
                     at[i].charge++;
                     AddOrRemoveExplOrImplH( 1, at, num_atoms, (AT_NUMB) i, pAATG->t_group_info );
                     /*at[i].num_H  ++;*/
                     num_added++;
-                    type = GetAtomChargeType( at, i, pAATG->nAtTypeTotals, &mask, 0 ); /* add changed at[i] */
+                    type = GetAtomChargeType(at, i, pAATG->nAtTypeTotals, &mask, 0); /* add changed at[i] */
                     break;
                 }
             }
@@ -4416,7 +4360,7 @@ int HardRemoveAcidicProtons( CANON_GLOBALS *pCG,
     int tg_H_Acid = 0;
 
     int ret = 0, ret2;
-    int nDelta, nNumChanges = 0, nNumMoved2AcidH = 0, nNumNeutralized = 0, nPrevNumCharges;
+    int nDelta, nNumMoved2AcidH = 0, nNumNeutralized = 0, nPrevNumCharges; /* djb-rwth: removing redundant variables */
 
     int nPosCharges, nPosCharges2;
     int nNegCharges, nNegCharges2;
@@ -4481,7 +4425,7 @@ int HardRemoveAcidicProtons( CANON_GLOBALS *pCG,
             if (ret & 1)
             {
                 nDelta = ( ret & ~3 ) >> 2;
-                nNumChanges += ( 0 != ( ret & 2 ) );
+                /* djb-rwth: removing redundant code */
                 if (nDelta)
                 {
                     /* Radical pair has disappeared */
@@ -4514,7 +4458,7 @@ int HardRemoveAcidicProtons( CANON_GLOBALS *pCG,
                 if (ret & 1)
                 {
                     nDelta = ( ret & ~3 ) >> 2;
-                    nNumChanges += ( 0 != ( ret & 2 ) );
+                    /* djb-rwth: removing redundant code */
                     if (nDelta)
                     {
                         /* Radical pair has disappeared */
@@ -4620,7 +4564,7 @@ int HardAddAcidicProtons( CANON_GLOBALS *pCG,
     int tg_H = 0;
 
     int ret = 0, ret2;
-    int nDelta, nNumChanges = 0, nNumMoved2AcidMinus = 0, nNumNeutralized = 0, nPrevNumCharges;
+    int nDelta, nNumChanges = 0, nNumMoved2AcidMinus = 0, nNumNeutralized = 0, nPrevNumCharges; /* djb-rwth: removing redundant variables */
 
     int nPosCharges, nPosCharges2;
     int nNegCharges, nNegCharges2;
@@ -4683,7 +4627,7 @@ int HardAddAcidicProtons( CANON_GLOBALS *pCG,
             if (ret & 1)
             {
                 nDelta = ( ret & ~3 ) >> 2;
-                nNumChanges += ( 0 != ( ret & 2 ) );
+                nNumChanges += (0 != (ret & 2)); /* djb-rwth: ignoring LLVM warning: variable used */
                 if (nDelta)
                 {
                     /* Radical pair has disappeared */
@@ -4717,7 +4661,7 @@ int HardAddAcidicProtons( CANON_GLOBALS *pCG,
                 if (ret & 1)
                 {
                     nDelta = ( ret & ~3 ) >> 2;
-                    nNumChanges += ( 0 != ( ret & 2 ) );
+                    nNumChanges += (0 != (ret & 2)); /* djb-rwth: ignoring LLVM warning: variable used */
                     if (nDelta)
                     {
                         /* Radical pair has disappeared */
@@ -4838,7 +4782,7 @@ int HardRemoveHplusNP( CANON_GLOBALS *pCG,
     int nPrevRemovedProtons, nCurrRemovedProtons;
 #endif
     int ret = 0, ret2;
-    int nDelta, nNumChanges = 0, nNumRemovedProtons = 0, nNumNeutralized = 0, nPrevNumCharges;
+    int nDelta, nNumChanges = 0, nNumRemovedProtons = 0, nNumNeutralized = 0, nPrevNumCharges; /* djb-rwth: ignoring LLVM warning: variable used */
 
     int nPosCharges, nPosCharges2;
     int nNegCharges, nNegCharges2;
@@ -4951,7 +4895,7 @@ int HardRemoveHplusNP( CANON_GLOBALS *pCG,
             if (ret & 1)
             {
                 nDelta = ( ret & ~3 ) >> 2;
-                nNumChanges += ( 0 != ( ret & 2 ) );
+                nNumChanges += (0 != (ret & 2)); /* djb-rwth: ignoring LLVM warning: variable used */
                 if (nDelta)
                 {
                     /* radical pair has disappeared */
@@ -4993,7 +4937,7 @@ int HardRemoveHplusNP( CANON_GLOBALS *pCG,
                 if (ret & 1)
                 {
                     nDelta = ( ret & ~3 ) >> 2;
-                    nNumChanges += ( 0 != ( ret & 2 ) );
+                    nNumChanges += (0 != (ret & 2)); /* djb-rwth: ignoring LLVM warning: variable used */
                     if (nDelta)
                     {
                         /* Radical pair has disappeared */
@@ -5094,7 +5038,7 @@ int mark_at_type( inp_ATOM *atom, int num_atoms, int nAtTypeTotals[] )
 
     if (nAtTypeTotals)
     {
-        memset( nAtTypeTotals, 0, ATTOT_ARRAY_LEN * sizeof( nAtTypeTotals[0] ) );
+        memset( nAtTypeTotals, 0, ATTOT_ARRAY_LEN * sizeof( nAtTypeTotals[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     }
 
     for (i = 0; i < num_atoms; i++)
@@ -5142,8 +5086,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
     /* Prepare data structure */
     int num;
     int nNumCanceledCharges = 0;
-    int nNumHardRemovedProtons = 0;
-    int nNumHardRemovedAcidicProtons = 0;
+    /* djb-rwth: removing redundant variables */
     T_GROUP_INFO *t_group_info = pAATG->t_group_info;
     int ret = 0, bError = 0;
 
@@ -5156,7 +5099,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
     {
         inchi_free( pAATG->nMarkedAtom );
         qzfree( pAATG->nEndPoint );
-        memset( pAATG, 0, sizeof( *pAATG ) );
+        memset( pAATG, 0, sizeof( *pAATG ) ); /* djb-rwth: memset_s C11/Annex K variant? */
     }
 
     if (!pAATG->nMarkedAtom && ( pAATG->nMarkedAtom = (S_CHAR *) inchi_malloc( num_atoms * sizeof( pAATG->nMarkedAtom[0] ) ) ))
@@ -5168,7 +5111,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
     /* o TECHMAN-5.1. Remove protons from charged heteroatoms */
 
     /* (TECHMAN-5.1a) Simple remove of protons from N, P, and O,S,Se,Te */
-    if (num = pAATG->nAtTypeTotals[ATTOT_NUM_NP_Proton] + pAATG->nAtTypeTotals[ATTOT_NUM_OH_Plus])
+    if ((num = pAATG->nAtTypeTotals[ATTOT_NUM_NP_Proton] + pAATG->nAtTypeTotals[ATTOT_NUM_OH_Plus])) /* djb-rwth: addressing LLVM warning */
     {
         ret = SimpleRemoveHplusNPO( at, num_atoms, pAATG->nAtTypeTotals, t_group_info );
         if (ret != num)
@@ -5180,7 +5123,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
         t_group_info->tni.bNormalizationFlags |= ( ret > 0 ) ? FLAG_PROTON_NPO_SIMPLE_REMOVED : 0;
     }
 
-    if (( num = pAATG->nAtTypeTotals[ATTOT_NUM_NP_Plus] ) && bAllowHardRemove)
+    if (( num = pAATG->nAtTypeTotals[ATTOT_NUM_NP_Plus] ) && bAllowHardRemove) /* djb-rwth: ignoring LLVM warning: variable used */
     {
         /* [TECHMAN-5.1b] Hard removing more protons from cationic N; charges may be canceled */
         ret = HardRemoveHplusNP( pCG, at, num_atoms, 1, &nNumCanceledCharges, pAATG, pBNS, pBD );
@@ -5189,7 +5132,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
             bError = ret;
             goto exit_function;
         }
-        nNumHardRemovedProtons += ret;
+        /* djb-rwth: removing redundant code */
         /*t_group_info->nNumRemovedProtons  += ret;*/
         t_group_info->tni.bNormalizationFlags |= ( ret > 0 ) ? FLAG_PROTON_NP_HARD_REMOVED : 0;
     }
@@ -5229,7 +5172,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
                 }
                 /*t_group_info->nNumRemovedProtons  += ret;*/
                 t_group_info->tni.bNormalizationFlags |= (ret > 0) ? FLAG_PROTON_AC_HARD_REMOVED : 0;
-                nNumHardRemovedAcidicProtons += ret;
+                /* djb-rwth: removing redundant code */
             }
         }
 
@@ -5269,7 +5212,7 @@ int RemoveNPProtonsAndAcidCharges( CANON_GLOBALS *pCG,
                     }
                     /*t_group_info->nNumRemovedProtons  -= ret;*/
                     t_group_info->tni.bNormalizationFlags |= ( ret > 0 ) ? FLAG_PROTON_AC_HARD_ADDED : 0;
-                    nNumHardRemovedAcidicProtons -= ret;
+                    /* djb-rwth: removing redundant code */
                 }
             }
         }
@@ -5306,8 +5249,7 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
 {
     BN_STRUCT *pBNS = NULL;
     BN_DATA   *pBD = NULL;
-    int bError, nChanges, nTotChanges, taut_found, salt_found, taut_pass, salt_pass, salt_step, ret, ret2, num;
-    int  nOrigDelta, num_changed_bonds;
+    int bError, nChanges, taut_found, salt_found, salt_pass, salt_step, ret, ret2, num, num_changed_bonds; /* djb-rwth: removing redundant variables */
     int max_altp = BN_MAX_ALTP;
     int bChangeFlow = ( BNS_EF_CHNG_RSTR | BNS_EF_ALTR_BONDS );
     BNS_FLOW_CHANGES fcd[BNS_MAX_NUM_FLOW_CHANGES + 1];
@@ -5331,9 +5273,18 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
     nChanges = 0;
     bError = 0;
 
-    memset( c_group_info, 0, sizeof( *c_group_info ) );
-    memset( s_group_info, 0, sizeof( *s_group_info ) );
-    memset( pAATG, 0, sizeof( *pAATG ) );
+    memset( c_group_info, 0, sizeof( *c_group_info ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( s_group_info, 0, sizeof( *s_group_info ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( pAATG, 0, sizeof( *pAATG ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+
+    /*(@nnuk : Nauman Ullah Khan) :: Variable for checking (De)protonation status */
+    int at_prot;
+    LOG_NO_ARGS("\n############# Initial state before (De)Protonation (L5373:ichi_bns.c) ###############\n");
+    for (at_prot = 0; at_prot < num_atoms; at_prot++)
+    {
+        LOG_MULT_ARGS("Atom %d: Element: %s, Num_H: %d, Charge: %hhd, Radical: %d\n", at_prot, at[at_prot].elname, at[at_prot].num_H, at[at_prot].charge, at[at_prot].radical);
+    }
+    LOG_NO_ARGS("\n#####################################################################################\n");
 
 
 #ifdef FIX_AROM_RADICAL        /* Added 2011-05-09 IPl */
@@ -5406,7 +5357,7 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
         {
             inchi_free( t_group_info->tGroupNumber );
         }
-        t_group_info->tGroupNumber = (AT_NUMB *) inchi_calloc( 2 * num_atoms + 1, sizeof( t_group_info->tGroupNumber[0] ) );
+        t_group_info->tGroupNumber = (AT_NUMB *) inchi_calloc( 2 * (long long)num_atoms + 1, sizeof( t_group_info->tGroupNumber[0] ) ); /* djb-rwth: cast operator added */
         if (!t_group_info->tGroupNumber)
         {
             /*printf("BNS_OUT_OF_RAM-9\n");*/
@@ -5414,7 +5365,7 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
             goto exit_function;
         }
         num = t_group_info->tni.nNumRemovedExplicitH;
-        memset( &t_group_info->tni, 0, sizeof( t_group_info->tni ) );
+        memset( &t_group_info->tni, 0, sizeof( t_group_info->tni ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         t_group_info->tni.nNumRemovedExplicitH = num;
     }
 
@@ -5477,7 +5428,7 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
         pBNS->tot_st_flow += 2 * ret;
 
         /*return 0;*/ /* debug */
-        nOrigDelta = ret;
+        /* djb-rwth: removing redundant code */
 
         if (pBNS->tot_st_cap > pBNS->tot_st_flow)
         {
@@ -5543,7 +5494,7 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
                     /* Copy modified initial tautomeric structure for displaying
                     Warning: implicit H counts in at_fixed_bonds_out include explicit Hs */
 
-                    memcpy( at_fixed_bonds_out, at, nNumOrigTotAtoms * sizeof( at_fixed_bonds_out[0] ) );
+                    memcpy(at_fixed_bonds_out, at, nNumOrigTotAtoms * sizeof(at_fixed_bonds_out[0]));
 
                     /* -- will be done in FillOutInputInfAtom() --
                     RemoveExcessiveImplicitH( num_atoms, t_group_info->tni.nNumRemovedExplicitH, at_fixed_bonds_out );
@@ -5629,11 +5580,11 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
             bError = ret;
             goto exit_function;
         }
-        nChanges += ret;
+        /* djb-rwth: removing redundant code */
 
         /*********************** End of initial bonds normalization *************/
 
-        nTotChanges = 0;
+        /* djb-rwth: removing redundant code */
 
         /* Check for tautomerism */
         /* find new tautomer groups */
@@ -5649,14 +5600,14 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
 
         do
         {
-            nTotChanges += nChanges;
+            /* djb-rwth: removing redundant code */
             nChanges = 0;
-            taut_pass = 0;
+            /* djb-rwth: removing redundant code */
 
             /**************** Regular bond/H/(-)/positive charges tautomerism cycle begin **************/
             do
             {
-                taut_pass++;
+                /* djb-rwth: removing redundant code */
                 for (taut_found = 0;
                       0 < ( ret = MarkTautomerGroups( pCG, at, num_atoms,
                                                       t_group_info, c_group_info,
@@ -5963,10 +5914,19 @@ int mark_alt_bonds_and_taut_groups( struct tagINCHI_CLOCK   *ic,
         /*printf("BNS_OUT_OF_RAM-3\n");*/
     }
 
+    /*(@nnuk : Nauman Ullah Khan) */
+    LOG_NO_ARGS("\n################# Modified state after (De)Protonation (L6014:ichi_bns.c) ################\n");
+    for (at_prot = 0; at_prot < num_atoms; at_prot++)
+    {
+        LOG_MULT_ARGS("Atom %d: Element: %s, Num_H: %d, Charge: %hhd, Radical: %d\n", at_prot, at[at_prot].elname, at[at_prot].num_H, at[at_prot].charge, at[at_prot].radical);
+    }
+    LOG_NO_ARGS("\n##########################################################################################\n");
+
 exit_function:
 
-    pBNS = DeAllocateBnStruct( pBNS );
-    pBD = DeAllocateBnData( pBD );
+    /* djb-rwth: ignoring LLVM warning: variables used to store functions return values */
+    pBNS = DeAllocateBnStruct(pBNS);
+    pBD = DeAllocateBnData(pBD);
     /*#if ( MOVE_CHARGES == 1 )*/
     if (c_group_info)
     {
@@ -6014,7 +5974,7 @@ exit_function:
         }
         if (at_fixed_bonds_out)
         {
-            memcpy( at_fixed_bonds_out, at, num_atoms * sizeof( at_fixed_bonds_out[0] ) );
+            memcpy(at_fixed_bonds_out, at, num_atoms * sizeof(at_fixed_bonds_out[0]));
         }
         /*num_atoms --;*/
     }
@@ -6125,7 +6085,7 @@ int bSetBondsAfterCheckOneBond( BN_STRUCT *pBNS,
     /* Find the next to the last changed */
     if (bChangeFlow0 & BNS_EF_SET_NOSTEREO)
     {
-        for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++)
+        for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++) /* djb-rwth: ignoring LLVM warning: variable used */
         {
             iedge = fcd[ifcd].iedge;
             pEdge = pBNS->edge + iedge;
@@ -6160,7 +6120,7 @@ int bSetBondsAfterCheckOneBond( BN_STRUCT *pBNS,
     }
     else
     {
-        for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++)
+        for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++) /* djb-rwth: ignoring LLVM warning: variable used */
         {
             ;
         }
@@ -6217,7 +6177,7 @@ int bRestoreFlowAfterCheckOneBond( BN_STRUCT *pBNS, BNS_FLOW_CHANGES *fcd )
     BNS_EDGE *pEdge;
 
     /* Find the next to the last changed */
-    for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++)
+    for (ifcd = 0; NO_VERTEX != ( iedge = fcd[ifcd].iedge ); ifcd++) /* djb-rwth: ignoring LLVM warning: variable used */
     {
         ;
     }
@@ -6612,7 +6572,7 @@ int AddNewEdge( BNS_VERTEX *p1,
     }
 
     /* Clear the edge */
-    memset( e, 0, sizeof( *e ) );
+    memset( e, 0, sizeof( *e ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* Connect */
     e->neighbor1 = inchi_min( ip1, ip2 );
@@ -6879,7 +6839,7 @@ int bSetBnsToCheckAltPath( BN_STRUCT *pBNS,
             Vertex      v1Act, v2Act;
             Vertex      v;
 
-            memset( apc, 0, sizeof( *apc ) );
+            memset( apc, 0, sizeof( *apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             fcd[ifcd].iedge = NO_VERTEX;
             *nDots = 0;
 
@@ -7023,7 +6983,7 @@ int bSetBnsToCheckAltPath( BN_STRUCT *pBNS,
             Vertex      v1Act, v2Act;
             Vertex      v;
 
-            memset( apc, 0, sizeof( *apc ) );
+            memset( apc, 0, sizeof( *apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             fcd[ifcd].iedge = NO_VERTEX;
             *nDots = 0;
             /*
@@ -7209,7 +7169,7 @@ int bSetBnsToCheckAltPath( BN_STRUCT *pBNS,
                     /* so far in a charge group max edge flow = 1 2004-03-08 */
                     return BNS_CHK_ALTP_NO_ALTPATH;
                 }
-                memset( apc, 0, sizeof( *apc ) );
+                memset( apc, 0, sizeof( *apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                 fcd[ifcd].iedge = NO_VERTEX;
                 *nDots = 0;
                 iapc = 0;
@@ -7234,7 +7194,7 @@ int bSetBnsToCheckAltPath( BN_STRUCT *pBNS,
 #if ( NEUTRALIZE_ENDPOINTS == 1 ) /* { */
 
         *nDots = 0;
-        memset( apc, 0, sizeof( *apc ) );
+        memset( apc, 0, sizeof( *apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         fcd[ifcd].iedge = NO_VERTEX;
 
         if (type & BNS_VERT_TYPE_ENDPOINT)
@@ -7438,9 +7398,9 @@ int bRestoreBnsAfterCheckAltPath( BN_STRUCT *pBNS,
     Vertex      vOld;
     BNS_VERTEX *pOldVert;
     BNS_VERTEX *pNewVert;
-    int i, j, n, ret;
+    int i, j, n; /* djb-rwth: removing redundant variables */
 
-    ret = 0;
+    /* djb-rwth: removing redundant code */
 
     if (bChangeFlow & BNS_EF_UPD_H_CHARGE)
     {
@@ -7461,16 +7421,16 @@ int bRestoreBnsAfterCheckAltPath( BN_STRUCT *pBNS,
                     /* disconnect new edge from pOldVert */
                     pOldVert->iedge[--pOldVert->num_adj_edges] = 0;
                     /* clear the new edge */
-                    memset( pEdge, 0, sizeof( *pEdge ) );
+                    memset( pEdge, 0, sizeof( *pEdge ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                     /* and decrement the total number of edges */
                     pBNS->num_edges--;
                 }
                 /* Clear the new vertex */
-                memset( pNewVert, 0, sizeof( *pNewVert ) );
+                memset( pNewVert, 0, sizeof( *pNewVert ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                 /*  and decrement the total number of vertices
                 (new vertice ids are contiguous)            */
                 pBNS->num_vertices--;
-                ret++;
+                /* djb-rwth: removing redundant code */
             }
         }
 
@@ -7479,14 +7439,14 @@ int bRestoreBnsAfterCheckAltPath( BN_STRUCT *pBNS,
               0 <= i;
               i--)
         {
-            if (n = apc->bSetOldCapsVert[i])
+            if ((n = apc->bSetOldCapsVert[i])) /* djb-rwth: addressing LLVM warning */
             {
                 pOldVert = pBNS->vert + apc->vOldVert[i];
                 if (pOldVert->st_edge.flow <= apc->nOldCapsVert[i][0])
                 {
                     pOldVert->st_edge.cap = apc->nOldCapsVert[i][0];
                     n--;
-                    ret++;
+                    /* djb-rwth: removing redundant code */
                     for (j = 0; j < n && j < pOldVert->num_adj_edges; j++)
                     {
                         pEdge = pBNS->edge + pOldVert->iedge[j];
@@ -7501,12 +7461,12 @@ int bRestoreBnsAfterCheckAltPath( BN_STRUCT *pBNS,
         /* Restore changed caps of old vertices */
         for (i = sizeof( apc->bSetOldCapsVert ) / sizeof( apc->bSetOldCapsVert[0] ) - 1; 0 <= i; i--)
         {
-            if (n = apc->bSetOldCapsVert[i])
+            if ((n = apc->bSetOldCapsVert[i])) /* djb-rwth: addressing LLVM warning */
             {
                 pOldVert = pBNS->vert + apc->vOldVert[i];
                 pOldVert->st_edge.cap = apc->nOldCapsVert[i][0];
                 n--;
-                ret++;
+                /* djb-rwth: removing redundant code */
                 for (j = 0; j < n && j < pOldVert->num_adj_edges; j++)
                 {
                     pEdge = pBNS->edge + pOldVert->iedge[j];
@@ -7530,15 +7490,15 @@ int bRestoreBnsAfterCheckAltPath( BN_STRUCT *pBNS,
                     /* disconnect new edge from pOldVert */
                     pOldVert->iedge[--pOldVert->num_adj_edges] = 0;
                     /* clear the new edge */
-                    memset( pEdge, 0, sizeof( *pEdge ) );
+                    memset( pEdge, 0, sizeof( *pEdge ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                     /* and decrement the total number of edges */
                     pBNS->num_edges--;
                 }
                 /* Clear the new vertex */
-                memset( pNewVert, 0, sizeof( *pNewVert ) );
+                memset( pNewVert, 0, sizeof( *pNewVert ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                 /* and decrement the total number of vertices (new vertice ids are contiguous */
                 pBNS->num_vertices--;
-                ret++;
+                /* djb-rwth: removing redundant code */
             }
         }
     }
@@ -7888,7 +7848,7 @@ int RemoveRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, inp_ATOM *at )
             {
                 goto error_exit;
             }
-            memset( p2, 0, sizeof( *p2 ) );
+            memset( p2, 0, sizeof( *p2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             pBNS->num_vertices--;
         }
 
@@ -7898,7 +7858,7 @@ int RemoveRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, inp_ATOM *at )
             {
                 goto error_exit;
             }
-            memset( p1, 0, sizeof( *p1 ) );
+            memset( p1, 0, sizeof( *p1 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             pBNS->num_vertices--;
         }
 
@@ -7922,7 +7882,7 @@ int RemoveRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, inp_ATOM *at )
             }
             at[v1].radical = rad;
         }
-        memset( e, 0, sizeof( *e ) );
+        memset( e, 0, sizeof( *e ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         pBNS->num_edges--;
     }
     pBD->nNumRadEdges = 0;
@@ -8001,7 +7961,7 @@ error_exit:
 /****************************************************************************/
 int SetRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, BRS_MODE bRadSrchMode )
 {
-    int ret, i, j, k, num_new_edges, delta;
+    int ret, i, j, k, delta; /* djb-rwth: removing redundant variables */
     BNS_VERTEX *pRad, *pEndp;
     Vertex     wRad, vRad, vEndp, nNumRadicals;
     int        nDots = 0 /* added initialization, 2006-03 */, nNumEdges;
@@ -8023,7 +7983,7 @@ int SetRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, BRS_MODE bRadSrchMode )
     {
         /* Sort by radical locations */
         qsort( pBD->RadEndpoints, pBD->nNumRadEndpoints / 2, 2 * sizeof( pBD->RadEndpoints[0] ), cmp_rad_endpoints );
-        num_new_edges = 0;
+        /* djb-rwth: removing redundant code */
         nNumRadicals = 0;
 
         /* Create new vertices (type=BNS_VERT_TYPE_TEMP) and edges with flow=cap=1 */
@@ -8052,7 +8012,7 @@ int SetRadEndpoints( BN_STRUCT *pBNS, BN_DATA *pBD, BRS_MODE bRadSrchMode )
             pRad = pBNS->vert + vRad;
             pBD->RadEdges[pBD->nNumRadEdges++] = pRad->iedge[pRad->num_adj_edges - 1];
             /* Replace references to vertex wRad with vRad */
-            for (k = i, nNumEdges = 0; k < j; k += 2)
+            for (k = i, nNumEdges = 0; k < j; k += 2) /* djb-rwth: ignoring LLVM warning: variable used */
             {
                 pBD->RadEndpoints[k] = vRad;
             }
@@ -8099,7 +8059,7 @@ int SetRadEndpoints2( CANON_GLOBALS *pCG,
                       BN_DATA *pBD,
                       BRS_MODE bRadSrchMode )
 {
-    int ret = 0, i, j, k, n, num_new_edges, delta = 1;
+    int ret = 0, i, j, k, n, delta = 1; /* djb-rwth: removing redundant variables */
     BNS_VERTEX *pRad, *pEndp;
     Vertex     wRad, vRad, vEndp, nNumRadicals;
     Vertex     vRadList[MAX_NUM_RAD], vRadEqul[MAX_NUM_RAD];
@@ -8137,7 +8097,7 @@ int SetRadEndpoints2( CANON_GLOBALS *pCG,
         return BNS_CAP_FLOW_ERR; /* extra st_cap on non-atoms or program error */
     }
 
-    memset( &VertSet, 0, sizeof( VertSet ) );
+    memset( &VertSet, 0, sizeof( VertSet ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     /* Find reachable atoms by enabling each radical separately */
     for (j = 0; j < nNumRad; j++)
@@ -8291,7 +8251,7 @@ int SetRadEndpoints2( CANON_GLOBALS *pCG,
     if (!ret && pBD->nNumRadEndpoints >= 2)
     {
         /* Already sorted by radical locations */
-        num_new_edges = 0;
+        /* djb-rwth: removing redundant code */
         nNumRadicals = 0;
         /**************************************************************************
         * Create new vertices (type=BNS_VERT_TYPE_TEMP) and edges with flow=cap=1
@@ -8348,7 +8308,7 @@ int SetRadEndpoints2( CANON_GLOBALS *pCG,
             pRad = pBNS->vert + vRad;
             pBD->RadEdges[pBD->nNumRadEdges++] = pRad->iedge[pRad->num_adj_edges - 1];
             /* replace references to vertex wRad with vRad */
-            for (k = i, nNumEdges = 0; k < j; k += 2)
+            for (k = i, nNumEdges = 0; k < j; k += 2) /* djb-rwth: ignoring LLVM warning: variable used */
             {
                 pBD->RadEndpoints[k] = vRad;
             }
@@ -8461,6 +8421,92 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
                 return 0;
             }
             break;
+
+#if ( TAUT_PT_22_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_22_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_22_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_22_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif	
+
+#if ( TAUT_PT_16_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_16_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_16_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_16_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif
+
+#if ( TAUT_PT_06_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_06_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_06_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_06_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif
+
+#if ( TAUT_PT_39_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_39_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_39_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_39_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif		
+
+#if ( TAUT_PT_13_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_13_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_13_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_13_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif
+
+#if ( TAUT_PT_18_00 == 1 )	
+        case ALT_PATH_MODE_TAUTOM_PT_18_00:
+            /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
+            type = BNS_VERT_TYPE_ENDPOINT;
+            bChangeFlow = BNS_EF_CHNG_RSTR;
+            if (!at[nVertSingleBond].endpoint &&
+                (!nGetEndpointInfo_PT_18_00(at, nVertSingleBond, &eif) || !eif.cDonor))
+                return 0;
+            if (!at[nVertDoubleBond].endpoint &&
+                (!nGetEndpointInfo_PT_18_00(at, nVertDoubleBond, &eif) || !eif.cAcceptor))
+                return 0;
+            break;
+#endif	
+
+
 #if ( KETO_ENOL_TAUT == 1 )
         case ALT_PATH_MODE_TAUTOM_KET:
             /* Check for alt path allowing to move H and (-). Purpose: confirm possible tautomerism */
@@ -8507,7 +8553,7 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
             {
                 return 0;
             }
-            memset( &apc, 0, sizeof( apc ) );
+            memset( &apc, 0, sizeof( apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             break;
 
         case ALT_PATH_MODE_REM2H_CHG:
@@ -8526,7 +8572,7 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
             {
                 return 0;
             }
-            memset( &apc, 0, sizeof( apc ) );
+            memset( &apc, 0, sizeof( apc ) ); /* djb-rwth: memset_s C11/Annex K variant? */
             break;
 
         case ALT_PATH_MODE_ADD2H_CHG:
@@ -8588,7 +8634,7 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
         case BNS_CANT_SET_BOND:
             goto reinit_BNS;
         default:
-            ret_val = RemoveRadEndpoints( pBNS, pBD, NULL );
+            ret_val = RemoveRadEndpoints( pBNS, pBD, NULL ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             if (IS_BNS_ERROR( ret ))
             {
                 return ret;
@@ -8625,7 +8671,7 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
             {
                 if (pAATG->nAtTypeTotals && ( bChangeFlow & BNS_EF_UPD_H_CHARGE ))
                 {
-                    memset( pAATG->nMarkedAtom, 0, num_atoms * sizeof( pAATG->nMarkedAtom[0] ) );
+                    memset( pAATG->nMarkedAtom, 0, num_atoms * sizeof( pAATG->nMarkedAtom[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
                     /* Mark atoms that have charge or H changed, check their input types (that is, before changes),
                     and subtract their input charge/H from nAtTypeTotals */
                     SubtractOrChangeAtHChargeBNS( pBNS, at, num_atoms, pAATG->nAtTypeTotals, pAATG->nMarkedAtom, NULL, 1 );
@@ -8670,8 +8716,8 @@ int bExistsAltPath( CANON_GLOBALS *pCG,
                     }
                     else
                     {
-                        if (( ( ret & 1 ) || ( ret_val & 1 ) ) &&
-                            ( bChangeFlow & BNS_EF_ALTR_BONDS ) || ( bChangeFlow & BNS_EF_UPD_H_CHARGE ))
+                        if ((( ( ret & 1 ) || ( ret_val & 1 ) ) &&
+                            ( bChangeFlow & BNS_EF_ALTR_BONDS )) || ( bChangeFlow & BNS_EF_UPD_H_CHARGE )) /* djb-rwth: addressing LLVM warning */
                         {
                             /* Some bonds have been changed to alternating */
                             bSuccess = 3;
@@ -8740,7 +8786,7 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
     int    neigh, num_changed_bonds = 0;
     U_CHAR bond_type, bond_mark;
 
-    int i, j, k, n_edges, num_bonds, num_edges, f1, f2, edge_cap, edge_flow, st_cap, st_flow, flag_alt_bond;
+    int i, j, k, n_edges, num_bonds, num_edges, f1, f2, edge_cap, edge_flow, st_flow; /* djb-rwth: removing redundant variables */
     int tot_st_cap, tot_st_flow;
     int max_tg, max_edges, max_vertices, len_alt_path, max_iedges, num_altp;
 #if ( BNS_RAD_SEARCH == 1 )
@@ -8757,6 +8803,11 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
 
     for (i = 0, num_bonds = 0; i < num_atoms; i++)
     {
+        /*(@nnuk : Nauman Ullah Khan) */
+        LOG_NO_ARGS("\n################# (L8916:ichi_bns.c) ###################\n");
+        LOG_MULT_ARGS("Number of changed bonds (Start): %d\n", num_changed_bonds);
+        LOG_NO_ARGS("\n########################################################\n");
+
         num_bonds += at[i].valence;
 #if ( BNS_RAD_SEARCH == 1 )
         num_rad += ( at[i].radical == RADICAL_DOUBLET );
@@ -8852,9 +8903,9 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
     for (i = 0, n_edges = 0; i < num_atoms; i++)
     {
         vert = &pBNS->vert[i];
-        st_cap = 0;
+        /* djb-rwth: removing redundant code */
         st_flow = 0;
-        flag_alt_bond = 0;
+        /* djb-rwth: removing redundant code */
         for (j = 0; j < at[i].valence; j++)
         {
             neigh = at[i].neighbor[j];
@@ -8884,7 +8935,7 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
                 edge_flow = bond_type - 1;
                 if (edge_flow > MAX_BOND_EDGE_CAP)
                 {
-                    flag_alt_bond++;
+                    /* djb-rwth: removing redundant code */
                     edge_flow = 0;  /* BNS will determine flows (that is, bonds) */
                     edge_cap = AROM_BOND_EDGE_CAP;
                 }
@@ -8913,11 +8964,11 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
             {
                 /* This is the second time we encounter this bond. It was stored at */
                 int  iedge = pBNS->vert[neigh].iedge[k];
-                edge_cap = pBNS->edge[iedge].cap;
+                edge_cap = pBNS->edge[iedge].cap; /* djb-rwth: ignoring LLVM warning: variable used */
                 edge_flow = pBNS->edge[iedge].flow;
             }
             st_flow += edge_flow;
-            st_cap += edge_cap;
+            /* djb-rwth: removing redundant code */
         }
         vert->num_adj_edges = j;
         vert->st_edge.cap =
@@ -8932,6 +8983,14 @@ BN_STRUCT* AllocateAndInitBnStruct( inp_ATOM *at,
 
     pBNS->num_edges = n_edges;   /* number of edges */
     pBNS->num_added_edges = 0;
+
+    /*(@nnuk : Nauman Ullah Khan) */
+    LOG_NO_ARGS("\n################# (L9108:ichi_bns.c) ################\n");
+    for (i = 0, num_bonds = 0; i < num_atoms; i++) {
+
+        LOG_MULT_ARGS("Element : %s, Number of changed bonds (End): %d\n", at[i].elname, *pNum_changed_bonds);
+    }
+    LOG_NO_ARGS("\n#####################################################\n");
 
     pBNS->tot_st_cap = tot_st_cap;
     pBNS->tot_st_flow = tot_st_flow;
@@ -9176,7 +9235,7 @@ int AddTGroups2BnStruct( CANON_GLOBALS *pCG,
         /* Since t-group IDs may be not contiguous, clear all vertices that will be added.
         all-zeroes-vertex will be ignored by the BNS
         */
-        memset( pBNS->vert + num_vertices, 0, nMaxTGroupNumber * sizeof( pBNS->vert[0] ) );
+        memset( pBNS->vert + num_vertices, 0, nMaxTGroupNumber * sizeof( pBNS->vert[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         /* Make sure the last t-group has the largest t-group ID:
         this is necessary to correctly add new edges
         and vertices for testing augmenting paths            */
@@ -9234,6 +9293,24 @@ int AddTGroups2BnStruct( CANON_GLOBALS *pCG,
             }
             /* Obtain donor/acceptor info */
             if (!nGetEndpointInfo(at, endpoint, &eif)
+#if ( TAUT_PT_22_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_22_00) && nGetEndpointInfo_PT_22_00(at, endpoint, &eif))
+#endif
+#if ( TAUT_PT_16_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_16_00) && nGetEndpointInfo_PT_16_00(at, endpoint, &eif))
+#endif
+#if ( TAUT_PT_06_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_06_00) && nGetEndpointInfo_PT_06_00(at, endpoint, &eif))
+#endif
+#if ( TAUT_PT_39_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_39_00) && nGetEndpointInfo_PT_39_00(at, endpoint, &eif))
+#endif
+#if ( TAUT_PT_13_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_13_00) && nGetEndpointInfo_PT_13_00(at, endpoint, &eif))
+#endif
+#if ( TAUT_PT_18_00 == 1 )		 
+                && !((tgi->bTautFlags & TG_FLAG_PT_18_00) && nGetEndpointInfo_PT_18_00(at, endpoint, &eif))
+#endif		 
                 ) {
 #if ( KETO_ENOL_TAUT == 1 )
                 if (!( ( tgi->bTautFlags & TG_FLAG_KETO_ENOL_TAUT ) &&
@@ -9354,7 +9431,7 @@ int AddCGroups2BnStruct( CANON_GLOBALS *pCG,
         /* Since t-group IDs may be not contiguous, clear all vertices that will be added.
         all-zeroes-vertex will be ignored by the BNS
         */
-        memset( pBNS->vert + num_vertices, 0, nMaxCGroupNumber * sizeof( pBNS->vert[0] ) );
+        memset( pBNS->vert + num_vertices, 0, nMaxCGroupNumber * sizeof( pBNS->vert[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         /* Make sure the last t-group has the largest t-group ID:
         this is necessary to correctly add new edges and vertices for testing augmenting paths
         */
@@ -9617,7 +9694,7 @@ BN_DATA *AllocateAndInitBnData( int max_num_vertices )
         /* Initialize data */
         ClearAllBnDataEdges( pBD->SwitchEdge, NO_VERTEX, max_num_vertices );
         ClearAllBnDataVertices( pBD->BasePtr, NO_VERTEX, max_num_vertices );
-        memset( pBD->Tree, TREE_NOT_IN_M, max_num_vertices );
+        memset( pBD->Tree, TREE_NOT_IN_M, max_num_vertices ); /* djb-rwth: memset_s C11/Annex K variant? */
         pBD->QSize = -1;
         pBD->max_len_Pu_Pv = max_len_Pu_Pv;
         pBD->max_num_vertices = max_num_vertices;
@@ -10078,7 +10155,7 @@ z is SwitchEdge_Vert2(y) != y. Go backward from z to y
 ****************************************************************************/
 Vertex GetPrevVertex( BN_STRUCT* pBNS, Vertex y, Edge *SwitchEdge, EdgeIndex *iuv )
 {
-    Vertex w, z, x2, y2, n;
+    Vertex w, z, x2, y2; /* djb-rwth: removing redundant variables */
     EdgeIndex iwy;
 
     w = SwitchEdge_Vert1( y );
@@ -10091,7 +10168,7 @@ Vertex GetPrevVertex( BN_STRUCT* pBNS, Vertex y, Edge *SwitchEdge, EdgeIndex *iu
     }
     x2 = prim( y );
     y2 = prim( z );
-    n = 0;
+    /* djb-rwth: removing redundant code */
     while (y2 != NO_VERTEX)
     {
         w = SwitchEdge_Vert1( y2 );
@@ -10103,7 +10180,7 @@ Vertex GetPrevVertex( BN_STRUCT* pBNS, Vertex y, Edge *SwitchEdge, EdgeIndex *iu
             /*return z; */
             return ( y + z ) % 2 ? z : prim( z );
         }
-        n++;
+        /* djb-rwth: removing redundant code */
         /*
         #ifdef _DEBUG
         if ( n ) {
@@ -10231,7 +10308,7 @@ int bIgnoreVertexNonTACN_atom( BN_STRUCT* pBNS, Vertex u, Vertex v )
             {
                 continue; /* the atom has only single bonds or it is s or t, ignore it */
             }
-            if (w != u && ( ret = rescap( pBNS, v, w, ivw ) ) > 0)
+            if (w != u && ( ret = rescap( pBNS, v, w, ivw ) ) > 0) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             {
                 num_allowed++;
                 if (( u_is_taut ? ( ( pBNS->vert[w / 2 - 1].type & pBNS->type_CN ) == pBNS->type_CN ) :
@@ -10363,8 +10440,8 @@ int bIgnoreVertexNonTACN_group( BN_STRUCT* pBNS,
         return 0; /* should not happen */
     }
     /* check edge adjacency */
-    if (pBNS->edge[iuv].neighbor1 != ( u / 2 - 1 ) && pBNS->edge[iuv].neighbor1 != v / 2 - 1 ||
-        ( pBNS->edge[iuv].neighbor12 ^ ( u / 2 - 1 ) ) != ( v / 2 - 1 ))
+    if ((pBNS->edge[iuv].neighbor1 != ( u / 2 - 1 ) && pBNS->edge[iuv].neighbor1 != v / 2 - 1) ||
+        (( pBNS->edge[iuv].neighbor12 ^ ( u / 2 - 1 ) ) != ( v / 2 - 1 ))) /* djb-rwth: addressing LLVM warning */
     {
         return 0; /* !!! should not happen !!! */
     }
@@ -11058,7 +11135,7 @@ Vertex MakeBlossom( BN_STRUCT* pBNS,
     */
     Vertex w, z;
     int len_Pu, len_Pv;
-    int i, j;
+    int i, j, k;
     EdgeIndex izw;
 
     len_Pu = FindPathToVertex_s( b_u, SwitchEdge, BasePtr, Pu, max_len_Pu_Pv );
@@ -11095,9 +11172,9 @@ Vertex MakeBlossom( BN_STRUCT* pBNS,
     }
     /* w is the base of the new blossom */
     /* first follow the path Pu from w to b_u */
-    for (i = i - 1; i >= 0; i--)
+    for (k = i - 1; k >= 0; k--)
     {
-        z = Pu[i];  /* z is the base of the blossom */
+        z = Pu[k];  /* z is the base of the blossom */
         BasePtr[z] = w;
         BasePtr[prim( z )] = w; /* w is the new base of the blossom */
                                 /* z and z' may already be part of a blossom that is being
@@ -11116,9 +11193,9 @@ Vertex MakeBlossom( BN_STRUCT* pBNS,
         }
     }
     /* Now follow the path Pv */
-    for (j = j; j >= 0; j--)
+    for (k = j; k >= 0; k--) /* djb-rwth: converting for loop into while loop to avoid LLVM warning */
     {
-        z = Pv[j]; /* z is the base of the blossom */
+        z = Pv[k]; /* z is the base of the blossom */
         BasePtr[z] = w;
         BasePtr[prim( z )] = w; /* w is the new base of the blossom */
                                 /* z and z' may already be part of a blossom that is being
@@ -11384,7 +11461,7 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
     S_CHAR    *cNeighNumb = NULL;
     AT_NUMB    nDfs;
     AT_NUMB    nNumAtInRingSystem;
-    int        i, j, u, w, start, nNumRingSystems, nNumStartChildren;
+    int        i, j, u, w, start, nNumRingSystems; /* djb-rwth: removing redundant variables */
     BNS_VERTEX *at = pBNS->vert;
     BNS_EDGE   *bond = pBNS->edge;
     int        num_atoms = pBNS->num_atoms;
@@ -11399,8 +11476,8 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
     cNeighNumb = (S_CHAR  *) inchi_malloc( num_atoms * sizeof( cNeighNumb[0] ) );
 
     /* Check allocation */
-    if (!nStackAtom || !nRingStack || !nDfsNumber || !nLowNumber || !nBondStack && num_edges || !cNeighNumb
-         )
+    if (!nStackAtom || !nRingStack || !nDfsNumber || !nLowNumber || (!nBondStack && num_edges) || !cNeighNumb
+         ) /* djb-rwth: addressing LLVM warning */
     {
         nNumRingSystems = CT_OUT_OF_RAM;  /*  program error */ /*   <BRKPT> */
         goto exit_function;
@@ -11433,7 +11510,7 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
     *********************************************************/
 
     nNumRingSystems = 0;
-    memset( nDfsNumber, 0, num_atoms * sizeof( nDfsNumber[0] ) );
+    memset( nDfsNumber, 0, num_atoms * sizeof( nDfsNumber[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
 
     for (start = 0; start < num_atoms; start++)
     {
@@ -11456,13 +11533,13 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
         nTopStackAtom = -1;
         nTopRingStack = -1;
         nTopBondStack = -1;
-        memset( cNeighNumb, 0, num_atoms * sizeof( cNeighNumb[0] ) );
+        memset( cNeighNumb, 0, num_atoms * sizeof( cNeighNumb[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         /*  Push the start atom on the stack */
         nLowNumber[u] = nDfsNumber[u] = ++nDfs;
         nStackAtom[++nTopStackAtom] = (AT_NUMB) u;
         nRingStack[++nTopRingStack] = (AT_NUMB) u;
 
-        nNumStartChildren = 0;
+        /* djb-rwth: removing redundant code */
 
         do
         {
@@ -11477,21 +11554,21 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
                     continue;
                 }
                 u = (int) ( bond[at[i].iedge[j]].neighbor12 ^ i );
-                if (!nDfsNumber[u])
+                if (!nDfsNumber[u] && nBondStack) /* djb-rwth: fixing a NULL pointer dereference */
                 {
                     /* tree edge, 1st visit -- advance */
                     nStackAtom[++nTopStackAtom] = (AT_NUMB) u;
                     nRingStack[++nTopRingStack] = (AT_NUMB) u;
                     nBondStack[++nTopBondStack] = (AT_NUMB) w;
                     nLowNumber[u] = nDfsNumber[u] = ++nDfs;
-                    nNumStartChildren += ( i == start );
+                    /* djb-rwth: removing redundant code */
                 }
                 else
                 {
                     if (!nTopStackAtom || u != (int) nStackAtom[nTopStackAtom - 1])
                     { /*  may comment out ? */
                       /* back edge: u is not a predecessor of i */
-                        if (nDfsNumber[u] < nDfsNumber[i])
+                        if ((nDfsNumber[u] < nDfsNumber[i]) && nBondStack) /* djb-rwth: fixing a NULL pointer dereference */
                         {
                             /* Back edge, 1st visit: u is ancestor of i. Save and compare */
                             nBondStack[++nTopBondStack] = (AT_NUMB) w;
@@ -11535,8 +11612,8 @@ int MarkRingSystemsAltBns( BN_STRUCT* pBNS, int bUnknAltAsNoStereo )
                         w = nBondStack[nTopBondStack--];
                         bond[w].nBlockNumberAltBns = nNumRingSystems; /*  mark the bond */
                         bond[w].nNumAtInBlockAltBns = nNumAtInRingSystem;
-                        if (i == bond[w].neighbor1 && u == ( i ^ bond[w].neighbor12 ) ||
-                             u == bond[w].neighbor1 && i == ( u ^ bond[w].neighbor12 ))
+                        if ((i == bond[w].neighbor1 && u == ( i ^ bond[w].neighbor12 )) ||
+                             (u == bond[w].neighbor1 && i == ( u ^ bond[w].neighbor12 ))) /* djb-rwth: addressing LLVM warning */
                         {
                             break;
                         }
@@ -12044,13 +12121,14 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
             {
                 for (bSuccess = 0, j = 0; j < max_j_Aa; j++)
                 {
-                    if (bSuccess = ( type & AaTypMask[2 * j] ) && ( mask && AaTypMask[2 * j + 1] ))
+                    if ((bSuccess = ( type & AaTypMask[2 * j] ) && ( mask && AaTypMask[2 * j + 1] ))) /* djb-rwth: addressing LLVM warning */
                     {
                         break; /* the proton may be added to this atom */
                     }
                 }
                 if (bSuccess)
                 {
+                    /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                     type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
                     at[i].charge--;
                     at[i].num_H--;
@@ -12116,6 +12194,7 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
                     return RI_ERR_PROGR;
                 }
                 /* -NH has been found */
+                /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                 type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
                 type = GetAtomChargeType( at, endp2, nAtTypeTotals, &mask, 1 ); /* subtract at[endp2] */
 
@@ -12132,6 +12211,7 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
                 num_prot++;
                 nNumSuccess++;
 
+                /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                 type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 0 ); /* add at[i] */
                 type = GetAtomChargeType( at, endp2, nAtTypeTotals, &mask, 0 ); /* add at[endp2] */
             }
@@ -12159,14 +12239,15 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
             if (type)
             {
                 for (bSuccess = 0, j = 0; j < max_j_Ar; j++)
-                {
-                    if (bSuccess = ( type & ArTypMask[2 * j] ) && ( mask && ArTypMask[2 * j + 1] ))
+                {   
+                    if ((bSuccess = ( type & ArTypMask[2 * j] ) && ( mask && ArTypMask[2 * j + 1] ))) /* djb-rwth: addressing LLVM warning */
                     {
                         break;
                     }
                 }
                 if (bSuccess)
                 {
+                    /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                     type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
                     at[i].charge++;
                     at[i].num_H++;
@@ -12189,11 +12270,12 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
             at[i].num_H++;
             at[i].charge++;
             bSuccess = ( PR_SIMPLE_TYP & ( type = GetAtomChargeType( at, i, NULL, &mask, 0 ) ) ) &&
-                ( PR_SIMPLE_MSK & mask );
+                ( PR_SIMPLE_MSK & mask ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
             at[i].num_H--;  /* failed */
             at[i].charge--;
             if (bSuccess)
             {
+                /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                 type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
                 at[i].num_H++;
                 at[i].charge++;
@@ -12244,6 +12326,7 @@ int AddRemoveProtonsRestr( inp_ATOM *at,
             if (( type == ATT_ATOM_N ) && ( mask == ATBIT_NP_H ) && !at[i].charge &&
                  at[i].valence == at[i].chem_bonds_valence)
             {
+                /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
                 type = GetAtomChargeType( at, i, nAtTypeTotals, &mask, 1 ); /* subtract at[i] */
                 at[i].num_H--;
                 at[i].charge--;
@@ -12272,7 +12355,7 @@ int AddRemoveIsoProtonsRestr( inp_ATOM *at,
                               int num_tg )
 {
     int i, j, k, n, ret = 0;
-    int   nNumSuccess = 0, min_at, max_at, num_H, num_iso_H, num_expl_H, num_expl_iso_H;
+    int   nNumSuccess = 0, min_at, max_at, num_H, num_iso_H, num_expl_H, num_expl_iso_H; /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
     int   iCurIso; /* 0=> 1H, 1=> D, 2=> T */
     int   iCurMode, iCurMode1, iCurMode2; /* 0=> Not Endpoints, 1=> Endpoints */
 
@@ -12340,7 +12423,7 @@ int AddRemoveIsoProtonsRestr( inp_ATOM *at,
                 /* j is the atom number */
                 /* count implicit H */
                 num_H = at[j].num_H;
-                num_iso_H = NUM_ISO_H( at, j );
+                num_iso_H = NUM_ISO_H(at, j); /* djb-rwth: ignoring LLVM warning: possible presence of global variables */
 
                 while (num_H > 0 && num_protons_to_add[iCurIso] > 0)
                 {

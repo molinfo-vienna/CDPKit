@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,24 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
+*/
 
 
 /*
@@ -65,6 +72,7 @@
 #endif
 #include "readinch.h"
 
+#include "bcf_s.h"
 
 #ifdef TARGET_LIB_FOR_WINCHI
 
@@ -113,9 +121,9 @@ int SortAndPrintINChI( CANON_GLOBALS            *pCG,
                        unsigned char            save_opt_bits )
 {
     INCHI_SORT *pINChISort[INCHI_NUM][TAUT_NUM];
-    int j, i, k, k1, ret, ret2, iINChI, max_num_components;
+    int j, i, k, k1, ret, ret2, iINChI, max_num_components; /* djb-rwth: ignoring LLVM warning: variable used */
     int INCHI_basic_or_INCHI_reconnected;
-    INCHI_MODE nMode;
+    /* djb-rwth: removing redundant variables */
     int bDisconnectedCoord = ( 0 != ( bTautFlagsDone[0] & TG_FLAG_DISCONNECT_COORD_DONE ) );
     int bINChIOutputOptions0, bCurOption, bINChIOutputOptionsCur, bEmbedReconnected;
     static const char szAnnHdr[] = "InChI ANNOTATED CONTENTS";
@@ -145,11 +153,7 @@ int SortAndPrintINChI( CANON_GLOBALS            *pCG,
         }
     }
 
-    nMode = ip->nMode;
-    if (!( nMode & ( REQ_MODE_BASIC | REQ_MODE_TAUT ) ))
-    {
-        nMode |= ( REQ_MODE_BASIC | REQ_MODE_TAUT );
-    }
+    /* djb-rwth: removing redundant code */
 
     max_num_components = 0;
     for (j = 0; j < INCHI_NUM; j++)
@@ -290,7 +294,7 @@ int SortAndPrintINChI( CANON_GLOBALS            *pCG,
             {
 
                 if (pINChISort[j][k1][i].pINChI[TAUT_NON] &&
-                    !pINChISort[j][k1][i].pINChI[TAUT_YES])
+                    !pINChISort[j][k1][i].pINChI[TAUT_YES]) /* djb-rwth: ui_rr */
                 {
                     /* make sure Mobile-H is always present */
                     for (k = 0; k < TAUT_NUM; k++)
@@ -395,7 +399,7 @@ exit_function:
 
     for (j = 0; j < INCHI_NUM; j++)
     {
-        for (k1 = 0, i = 0; k1 < TAUT_NUM; k1++)
+        for (k1 = 0; k1 < TAUT_NUM; k1++) /* djb-rwth: removing redundant code */
         {
             if (pINChISort[j][k1])
             {
@@ -561,8 +565,8 @@ int SaveEquComponentsInfoAndSortOrder( int             iINChI,
             AT_NUMB nNumAtoms = (AT_NUMB) inp_data->num_inp_atoms;
 
             if (( prep_inp_data[iINChI].nSortedOrder =
-                (AT_NUMB *) inchi_calloc( num_components[iINChI] + 1,
-                    sizeof( prep_inp_data[0].nSortedOrder[0] ) ) ))
+                (AT_NUMB *) inchi_calloc( (long long)num_components[iINChI] + 1,
+                    sizeof( prep_inp_data[0].nSortedOrder[0] ) ) )) /* djb-rwth: cast operator added */
             {
                 inp_data->nNumEquSets = 0;
 
@@ -593,8 +597,8 @@ int SaveEquComponentsInfoAndSortOrder( int             iINChI,
                     {
                         if (inp_data->nEquLabels ||
                             ( inp_data->nEquLabels =
-                            (AT_NUMB *) inchi_calloc( inp_data->num_inp_atoms + 1,
-                                sizeof( inp_data->nEquLabels[0] ) ) ))
+                            (AT_NUMB *) inchi_calloc( (long long)inp_data->num_inp_atoms + 1,
+                                sizeof( inp_data->nEquLabels[0] ) ) )) /* djb-rwth: cast operator added */
                         {
                             nSet++;
                                 /* found i2-i1 equivalent components && */
@@ -780,16 +784,14 @@ int DisplayTheWholeCompositeStructure( struct tagCANON_GLOBALS  *pCG,
                 /*  added number of components, added another format */
                 /* for a single component case - DCh         */
                 int bMobileH = ( bDisplayTaut > 0 && nNumTautComponents );
-
-                sprintf( szTitle, "%s Structure #%ld%s%s.%s%s%s%s%s",
-                              j == TAUT_INI ? "Preprocessed" : "Result for", num_inp,
-                              bMobileH ? ", mobile H" :
-                              bDisplayTaut == 0 ? ", fixed H" : "",
-                              /*j? ", mobile H":", fixed H",*/
-                              k ? ", isotopic" : "",
-                              SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ),
-                              iINChI ? " (Reconnected)" : "" );
-
+                sprintf(szTitle, "%s Structure #%ld%s%s.%s%s%s%s%s",
+                    j == TAUT_INI ? "Preprocessed" : "Result for", num_inp,
+                    bMobileH ? ", mobile H" :
+                    bDisplayTaut == 0 ? ", fixed H" : "",
+                    /*j? ", mobile H":", fixed H",*/
+                    k ? ", isotopic" : "",
+                    SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue),
+                    iINChI ? " (Reconnected)" : "");
 #ifndef TARGET_LIB_FOR_WINCHI
                 /****** Display composite Result structure **************/
                 nNumIntermediateTaut += ( j == TAUT_INI );
@@ -812,7 +814,7 @@ int DisplayTheWholeCompositeStructure( struct tagCANON_GLOBALS  *pCG,
                                                    ip->nMode,
                                                    szTitle );
                 }
-                if (sd->bUserQuitComponentDisplay = ( err == ESC_KEY ))
+                if ((sd->bUserQuitComponentDisplay = ( err == ESC_KEY ))) /* djb-rwth: addressing LLVM warning */
                 {
                     break;
                 }
@@ -821,10 +823,10 @@ int DisplayTheWholeCompositeStructure( struct tagCANON_GLOBALS  *pCG,
                      inp_data->nEquLabels &&
                      inp_data->nNumEquSets &&
                      !sd->bUserQuitComponentDisplay &&
-                     ( ( j == bCompareTaut || bCompareTaut && j == TAUT_INI ) ||
-                         bCompareTaut && !composite_norm_data[bCompareTaut].bExists ) &&
-                         ( k == bCompareIsotopic || bCompareIsotopic && !composite_norm_data[j].bHasIsotopicLayer )
-                      )
+                     ( ( j == bCompareTaut || (bCompareTaut && j == TAUT_INI) ) ||
+                         (bCompareTaut && !composite_norm_data[bCompareTaut].bExists) ) &&
+                         ( k == bCompareIsotopic || (bCompareIsotopic && !composite_norm_data[j].bHasIsotopicLayer) ) /* djb-rwth: addressing LLVM warnings */
+                      ) /* djb-rwth: addressing LLVM warning */
                 {
                     AT_NUMB         nEquSet;
                     int             bDisplaySaved = ip->bDisplay;
@@ -834,14 +836,14 @@ int DisplayTheWholeCompositeStructure( struct tagCANON_GLOBALS  *pCG,
                                     nEquSet <= inp_data->nNumEquSets;
                                                                     nEquSet++)
                     {
-                        sprintf( szTitle, "Equ set %d of %d, %s Structure #%ld%s%s.%s%s%s%s%s",
-                                      nEquSet, inp_data->nNumEquSets,
-                                      j == TAUT_INI ? "Preprocessed" : "Result for",
-                                      num_inp,
-                                      ( bDisplayTaut > 0 && nNumTautComponents ) ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
-                                      /*j? ", mobile H":", fixed H",*/
-                                      k ? ", isotopic" : "",
-                                      SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ), iINChI ? " (Reconnected)" : "" );
+                        sprintf(szTitle, "Equ set %d of %d, %s Structure #%ld%s%s.%s%s%s%s%s",
+                            nEquSet, inp_data->nNumEquSets,
+                            j == TAUT_INI ? "Preprocessed" : "Result for",
+                            num_inp,
+                            (bDisplayTaut > 0 && nNumTautComponents) ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
+                            /*j? ", mobile H":", fixed H",*/
+                            k ? ", isotopic" : "",
+                            SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue), iINChI ? " (Reconnected)" : "");
                         ip->dp.nEquLabels = inp_data->nEquLabels;
                         ip->dp.nCurEquLabel = nEquSet;
                         ip->dp.nNumEquSets = inp_data->nNumEquSets;
@@ -860,7 +862,7 @@ int DisplayTheWholeCompositeStructure( struct tagCANON_GLOBALS  *pCG,
                         ip->dp.nNumEquSets = 0;
                         ip->bDisplay = bDisplaySaved; /* restore display option */
 
-                        if (sd->bUserQuitComponentDisplay = ( err == ESC_KEY ))
+                        if ((sd->bUserQuitComponentDisplay = ( err == ESC_KEY ))) /* djb-rwth: addressing LLVM warning */
                         {
                             break;
                         }
@@ -1020,9 +1022,9 @@ int DisplayTheWholeStructure( struct tagCANON_GLOBALS *pCG,
         : ( iINChI < 0 ) ? ""
         : ( iINChI == INCHI_BAS ) ? " (Preprocessed)"
         : ( iINChI == INCHI_REC ) ? " (Reconnected)"
-        : "";
+        : ""; /* djb-rwth: ignoring LLVM warning: variable used */
 
-    int err = 0;
+    int err = 0; /* djb-rwth: ignoring LLVM warning: variable used */
 
     /* Display the original structure */
 
@@ -1130,10 +1132,10 @@ int DisplayTheWholeStructure( struct tagCANON_GLOBALS *pCG,
             nComponent = k / 4;
             bPreprocessed = ( ( k / 2 ) % 2 );
 
-            sprintf( szTitle, "%s Structure #%ld.%s%s%s%s",
-                              bPreprocessed ? "Preprocessed" : bReconnected ? "Reconnected" : "Input",
-                              num_inp,
-                              SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ) );
+            sprintf(szTitle, "%s Structure #%ld.%s%s%s%s",
+                bPreprocessed ? "Preprocessed" : bReconnected ? "Reconnected" : "Input",
+                num_inp,
+                SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue));
 
 #ifdef TARGET_LIB_FOR_WINCHI
             if (DRAWDATA && DRAWDATA_EXISTS)
@@ -1180,7 +1182,7 @@ int DisplayTheWholeStructure( struct tagCANON_GLOBALS *pCG,
                 }
             }
 #else
-            if (!nComponent)
+            if (!nComponent && orig_inp_data) /* djb-rwth: fixing a NULL pointer dereference */
             {
                 /* keep track of saved INCHI_LIB data */
                 orig_inp_data->bSavedInINCHI_LIB[bReconnected] ++;

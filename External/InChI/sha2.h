@@ -1,42 +1,17 @@
-/**
- * \file sha2.h
- */
-
-
-
-
 /*
+ *
  * FIPS-180-2 compliant SHA-256 implementation
+ * Copyright (C) 2010 Paul Bakker.
+ * Originally written (2003-2006) by Christophe Devine.
  *
- * Copyright (C) Brainspark B.V.
+ * This code is free software; you can redistribute it and/or
+ * modify it, as a part of the International Chemical Identifier (InChI)
+ * software, under the terms of the MIT license
+ * https://opensource.org/license/mit
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI) Software version 1.04
- * Copyright (C) IUPAC and InChI Trust Limited
- *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust Limited
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please write to:
- *
- * Richard Kidd, InChI Trust,
- * c/o Cambridge Crystallographic Data Centre,
- * 12 Union Road, Cambridge, UK  CB2 1EZ
- *
- * or e-mail to richard@inchi-trust.org
- *
+ * Note that this licensing is only valid in combination with the InChI
+ * software package, for all other cases contact Paul Bakker.
  */
-
 
 /*
  *  The SHA-256 standard was published by NIST in 2002.

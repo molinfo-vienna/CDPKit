@@ -1,36 +1,42 @@
 /*
-* International Chemical Identifier (InChI)
-* Version 1
-* Software version 1.06
-* December 15, 2020
+ * International Chemical Identifier (InChI)
+ * Version 1
+ * Software version 1.07
+ * April 30, 2024
+ *
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
 *
 * The InChI library and programs are free software developed under the
-* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
-* Originally developed at NIST.
-* Modifications and additions by IUPAC and the InChI Trust.
-* Some portions of code were developed/changed by external contributors
-* (either contractor or volunteer) which are listed in the file
-* 'External-contributors' included in this distribution.
-*
-* IUPAC/InChI-Trust Licence No.1.0 for the
-* International Chemical Identifier (InChI)
-* Copyright (C) IUPAC and InChI Trust
-*
-* This library is free software; you can redistribute it and/or modify it
-* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
-* or any later version.
-*
-* Please note that this library is distributed WITHOUT ANY WARRANTIES
-* whatsoever, whether expressed or implied.
-* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
-*
-* You should have received a copy of the IUPAC/InChI Trust InChI
-* Licence No. 1.0 with this library; if not, please e-mail:
-*
-* info@inchi-trust.org
-*
+ * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+ * Originally developed at NIST.
+ * Modifications and additions by IUPAC and the InChI Trust.
+ * Some portions of code were developed/changed by external contributors
+ * (either contractor or volunteer) which are listed in the file
+ * 'External-contributors' included in this distribution.
+ *
+ * info@inchi-trust.org
+ *
 */
-
 
 #include <string.h>
 
@@ -44,6 +50,8 @@
 #include "ichicant.h"
 #include "ichirvrs.h"
 
+#include "bcf_s.h"
+
 #define INC_ADD_EDGE 64
 
 /****************************************************************************/
@@ -52,7 +60,7 @@ int GetPlusMinusVertex( BN_STRUCT *pBNS,
                         int bCheckForbiddenPlus,
                         int bCheckForbiddenMinus )
 {
-    int k, ePlusSuper, eMinusSuper, vPlusSuper, vMinusSuper, vPlusMinus1 = NO_VERTEX, vPlusMinus2 = NO_VERTEX;
+    int k, ePlusSuper, eMinusSuper, vPlusSuper, vPlusMinus1 = NO_VERTEX, vPlusMinus2 = NO_VERTEX; /* djb-rwth: removing redundant variables */
     BNS_EDGE *pEdge;
     if (( k = pTCGroups->nGroup[TCG_Plus] ) >= 0 &&
         ( ePlusSuper = pTCGroups->pTCG[k].nForwardEdge ) > 0 &&
@@ -64,14 +72,14 @@ int GetPlusMinusVertex( BN_STRUCT *pBNS,
     }
     if (( k = pTCGroups->nGroup[TCG_Minus] ) >= 0 &&
         ( eMinusSuper = pTCGroups->pTCG[k].nForwardEdge ) > 0 &&
-        ( vMinusSuper = pTCGroups->pTCG[k].nVertexNumber ) >= pBNS->num_atoms &&
+        ( pTCGroups->pTCG[k].nVertexNumber ) >= pBNS->num_atoms && /* djb-rwth: removing redundant code */
          !( ( pEdge = pBNS->edge + eMinusSuper )->forbidden && bCheckForbiddenMinus ))
     {
 
         vPlusMinus2 = pEdge->neighbor12 ^ eMinusSuper;
     }
-    if (bCheckForbiddenPlus  && NO_VERTEX == vPlusMinus1 ||
-         bCheckForbiddenMinus && NO_VERTEX == vPlusMinus2)
+    if ((bCheckForbiddenPlus && NO_VERTEX == vPlusMinus1) ||
+         (bCheckForbiddenMinus && NO_VERTEX == vPlusMinus2)) /* djb-rwth: addressing LLVM warnings */
     {
         return NO_VERTEX;
     }
@@ -155,7 +163,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
 {
     /*--------- process extra or missing Fixed-H on non-tautomeric atoms ------*/
     /* at2 should be the most recently restored atom, Fixed-H */
-    int i, j, k, iat, delta, tot_succes, cur_success, ret = 0;
+    int i, j, k, iat, delta, cur_success, ret = 0; /* djb-rwth: removing redundant variables/code */
     CMP2MHINCHI c2i;
     CMP2MHINCHI *pc2i = &c2i;
 
@@ -170,11 +178,11 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
     Vertex     vPathStart, vPathEnd;
     int        nPathLen, nDeltaH, nDeltaCharge, nNumVisitedAtoms;
 
-    int        nNumRunBNS = 0, forbidden_edge_mask_inv = ~forbidden_edge_mask;
+    int        forbidden_edge_mask_inv = ~forbidden_edge_mask; /* djb-rwth: removing redundant variables */
 
     INCHI_HEAPCHK
 
-        AllocEdgeList( &AllChargeEdges, EDGE_LIST_CLEAR );
+    AllocEdgeList( &AllChargeEdges, EDGE_LIST_CLEAR );
     AllocEdgeList( &CurrEdges, EDGE_LIST_CLEAR );
     AllocEdgeList( &NFlowerEdges, EDGE_LIST_CLEAR );
     AllocEdgeList( &CurrEdges2, EDGE_LIST_CLEAR );
@@ -183,7 +191,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
     AllocEdgeList( &FixedLargeRingStereoEdges, EDGE_LIST_CLEAR );
     AllocEdgeList( &TautEdges, EDGE_LIST_CLEAR );
 
-    tot_succes = 0;
+    /* djb-rwth: removing redundant code */
 
     if (!pInChI[0]->nNum_H_fixed && !pStruct->pOneINChI[0]->nNum_H_fixed)
     {
@@ -192,13 +200,13 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
     /* taut group edges */
     for (i = 0; i < pTCGroups->num_tgroups; i++)
     {
-        pv1 = pBNS->vert + ( v1 = pTCGroups->pTCG[i].nVertexNumber ); /* t-group vertex */
+        pv1 = pBNS->vert + ( v1 = pTCGroups->pTCG[i].nVertexNumber ); /* t-group vertex */ /* djb-rwth: ignoring LLVM warning: see comments below */
         for (j = 0; j < pv1->num_adj_edges; j++)
         {
             /* e, pe - tautomeric atom edge; pv2 - endpoint vertex */
             /* Note: pe, pv2, v1 are not used here; they are to show how to traverse t-group */
-            pv2 = pBNS->vert + ( pe = pBNS->edge + ( e = pv1->iedge[j] ) )->neighbor1;
-            if (ret = AddToEdgeList( &TautEdges, e, INC_ADD_EDGE ))
+            pv2 = pBNS->vert + ( pe = pBNS->edge + ( e = pv1->iedge[j] ) )->neighbor1; /* djb-rwth: ignoring LLVM warning: see comments above */
+            if ((ret = AddToEdgeList( &TautEdges, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
@@ -214,7 +222,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         }
         if (( e = pVA[i].nCPlusGroupEdge - 1 ) >= 0 && !pBNS->edge[e].forbidden)
         {
-            if (ret = AddToEdgeList( &AllChargeEdges, e, INC_ADD_EDGE ))
+            if ((ret = AddToEdgeList( &AllChargeEdges, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
@@ -226,18 +234,18 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
 
                 if (!pBNS->edge[j].forbidden && pBNS->edge[j].flow)
                 {
-                    if (ret = AddToEdgeList( &AllChargeEdges, j, INC_ADD_EDGE ))
+                    if ((ret = AddToEdgeList( &AllChargeEdges, j, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                     {
                         goto exit_function;
                     }
-                    if (ret = AddToEdgeList( &NFlowerEdges, j, INC_ADD_EDGE ))
+                    if ((ret = AddToEdgeList( &NFlowerEdges, j, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                     {
                         goto exit_function;
                     }
                 }
                 else
                 {
-                    if (ret = AddToEdgeList( &OtherNFlowerEdges, j, INC_ADD_EDGE ))
+                    if ((ret = AddToEdgeList( &OtherNFlowerEdges, j, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                     {
                         goto exit_function;
                     }
@@ -267,13 +275,13 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
 
     INCHI_HEAPCHK
 
-    if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+    if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
     {
         goto exit_function;
     }
 
     INCHI_HEAPCHK
-    if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+    if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
     {
         goto exit_function;
     }
@@ -301,7 +309,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         {
             goto exit_function;
         }
-        if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+        if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
         {
             goto exit_function;
         }
@@ -309,7 +317,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         {
             goto exit_function;  /* no fixed-H found */
         }
-        if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+        if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
         {
             goto exit_function;
         }
@@ -371,7 +379,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                         {
                             /* -N< */
                             iat_SB_N_III[num_SB_N_III++] = iat;
-                            if (ret = AddToEdgeList( &CurrEdges, e, INC_ADD_EDGE ))
+                            if ((ret = AddToEdgeList( &CurrEdges, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                             {
                                 goto exit_function;
                             }
@@ -414,19 +422,19 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                       &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
-                    vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 2)
+                if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
+                    (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 2) /* djb-rwth: addressing LLVM warnings */
                 {
                     /* Added (-)charge -N= and (+) to -N< => nDeltaCharge == 2 */
                     ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     if (ret > 0)
                     {
-                        nNumRunBNS++;
+                        /* djb-rwth: removing redundant code */
                         cur_success++; /* 01 */
 
                         /* eliminate (-) charge and add H */
                         pv1 = pBNS->vert + ( v1 = peMinus->neighbor1 );      /* atom */
-                        pv2 = pBNS->vert + ( v2 = peMinus->neighbor12 ^ v1 );/* (=) vertex */
+                        pv2 = pBNS->vert + ( v2 = peMinus->neighbor12 ^ v1 );/* (=) vertex */ /* djb-rwth: ignoring LLVM warning: consistency of the code */
                         /* effectively eliminate (-) edge by setting its cap=flow= 0 */
                         peMinus->cap--;
                         peMinus->flow--;
@@ -458,7 +466,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
 
             if (cur_success)
             {
-                tot_succes += cur_success;
+                /* djb-rwth: removing redundant code */
                 /* recalculate InChI from the structure */
                 /* recalculate InChI from the structure */
                 if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
@@ -466,11 +474,11 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 {
                     goto exit_function;
                 }
-                if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+                if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
-                if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+                if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -497,7 +505,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
           int num_SB_N_III = 0, num_DB_N_III = 0, k1, k2,
         */
         int itg, j1, j2, bAction = 0;
-        BNS_VERTEX *pTg, *pvEndp, *pvEndp2, *pvCent;
+        BNS_VERTEX *pTg, *pvEndp, *pvEndp2, *pvCent; /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
         Vertex     vEndp, vEndp2, vCent;
         BNS_EDGE   *peTg, *peTg2, *peCent1, *peCent2;
         EdgeIndex  eTg, eTg2;
@@ -512,7 +520,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
             pTg = pBNS->vert + pTCGroups->pTCG[itg].nVertexNumber;
             for (i = 0; i < pTg->num_adj_edges && !cur_success; i++)
             {
-                pvEndp = pBNS->vert + ( vEndp = ( peTg = pBNS->edge + ( eTg = pTg->iedge[i] ) )->neighbor1 );
+                pvEndp = pBNS->vert + ( vEndp = ( peTg = pBNS->edge + ( eTg = pTg->iedge[i] ) )->neighbor1 ); /* djb-rwth: ignoring LLVM warning: value used */
                 eTg2 = -1;
                 if (pVA[vEndp].cNumValenceElectrons == 6 && peTg->cap)
                 {
@@ -530,7 +538,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                         for (j2 = 0; j2 < at2[vCent].valence; j2++)
                         {
                             peCent2 = pBNS->edge + pvCent->iedge[j2];
-                            pvEndp2 = pBNS->vert + ( vEndp2 = peCent2->neighbor12 ^ vCent );
+                            pvEndp2 = pBNS->vert + ( vEndp2 = peCent2->neighbor12 ^ vCent ); /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
                             if (!peCent2->cap || peCent2->flow + peCent1->flow != 1 ||
                                  at2[vEndp2].endpoint != itg + 1 ||
                                  pVA[vEndp2].cNumValenceElectrons != 5 ||
@@ -600,7 +608,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                          peTg->flow && peTg->flow == peTg->cap)
                     {
                         /* endpoint -OH found; save the tautomeric group edge */
-                        if (ret = AddToEdgeList( &CurrEdges, eTg, INC_ADD_EDGE ))
+                        if ((ret = AddToEdgeList( &CurrEdges, eTg, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                         {
                             goto exit_function;
                         }
@@ -626,7 +634,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                                     for (j2 = 0; j2 < at2[vCent].valence; j2++)
                                     {
                                         peCent2 = pBNS->edge + pvCent->iedge[j2];
-                                        pvEndp2 = pBNS->vert + ( vEndp2 = peCent2->neighbor12 ^ vCent );
+                                        pvEndp2 = pBNS->vert + ( vEndp2 = peCent2->neighbor12 ^ vCent ); /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
                                         if (peCent2->flow || at2[vEndp2].endpoint != itg + 1 ||
                                              pVA[vEndp2].cNumValenceElectrons != 6 ||
                                              0 >= ( e = pVA[vEndp2].nTautGroupEdge - 1 ) ||
@@ -641,7 +649,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                                         /*          vCent    */
                                         /*********************/
                                         /* save this -OH taut edge */
-                                        if (ret = AddToEdgeList( &CurrEdges2, e, INC_ADD_EDGE ))
+                                        if ((ret = AddToEdgeList( &CurrEdges2, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                                         {
                                             goto exit_function;
                                         }
@@ -693,14 +701,14 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                       &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
-                    vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 2)
+                if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
+                    (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 2) /* djb-rwth: addressing LLVM warning */
                 {
                     /* Added (-)charge -N= and (+) to -N< => nDeltaCharge == 2 */
                     ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     if (ret > 0)
                     {
-                        nNumRunBNS++;
+                        /* djb-rwth: removing redundant code */
                         cur_success++; /* 03 */
                         /* replace -NH- with -N(-)- */
                         pTCGroups->pTCG[itg].tg_num_H--;
@@ -735,7 +743,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                     pTg = pBNS->vert + pTCGroups->pTCG[itg].nVertexNumber;
                     for (i = 0; i < pTg->num_adj_edges && !cur_success; i++)
                     {
-                        pvEndp2 = pBNS->vert + ( vEndp2 = ( peTg = pBNS->edge + pTg->iedge[i] )->neighbor1 );
+                        pvEndp2 = pBNS->vert + ( vEndp2 = ( peTg = pBNS->edge + pTg->iedge[i] )->neighbor1 ); /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
                         if (pVA[vEndp2].cNumValenceElectrons == 5 && pVA[vEndp2].cPeriodicRowNumber == 1 &&
                              at2[vEndp2].valence == at2[vEndp2].chem_bonds_valence &&
                              peTg->flow && peTg->flow == peTg->cap)
@@ -759,18 +767,18 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         }
         if (cur_success)
         {
-            tot_succes += cur_success;
+            /* djb-rwth: removing redundant code */
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
-            if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+            if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
@@ -816,11 +824,11 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 {
                     goto exit_function;
                 }
-                if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+                if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
-                if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+                if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -866,7 +874,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         /*                                                                           */
         /*---------------------------------------------------------------------------*/
         int itg;
-        BNS_VERTEX *pTg, *pvEndp;
+        BNS_VERTEX *pTg, *pvEndp; /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
         Vertex     vEndp, vTg;
         BNS_EDGE   *peTg;
         EdgeIndex  eTg;
@@ -885,7 +893,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                  0 <= ( e = pVA[iat].nCPlusGroupEdge - 1 ) && pBNS->edge[e].flow && !pBNS->edge[e].forbidden)
             {
 
-                if (ret = AddToEdgeList( &CurrEdges, e, INC_ADD_EDGE ))
+                if ((ret = AddToEdgeList( &CurrEdges, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -902,13 +910,13 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
             pTg = pBNS->vert + ( vTg = pTCGroups->pTCG[itg].nVertexNumber );
             for (i = 0; i < pTg->num_adj_edges; i++)
             {
-                pvEndp = pBNS->vert + ( vEndp = ( peTg = pBNS->edge + ( eTg = pTg->iedge[i] ) )->neighbor1 );
+                pvEndp = pBNS->vert + ( vEndp = ( peTg = pBNS->edge + ( eTg = pTg->iedge[i] ) )->neighbor1 ); /* djb-rwth: ignoring LLVM warning: variable used to store initialisation values */
                 if (at2[vEndp].charge || at2[vEndp].radical || peTg->cap - peTg->flow != 1)
                 {
                     continue;
                 }
                 /* t-group edges to -N= and =O */
-                if (ret = AddToEdgeList( &CurrEdges2, eTg, INC_ADD_EDGE ))
+                if ((ret = AddToEdgeList( &CurrEdges2, eTg, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_function;
                 }
@@ -946,15 +954,15 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
-                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 1)
+            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
+                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 1) /* djb-rwth: addressing LLVM warnings */
             {
                 /* Added (+)charge to -N< => nDeltaCharge == 1 */
                 /* Flow change on pe (-)charge edge (atom B-O(-)) is not known to RunBnsTestOnce()) */
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 if (ret > 0)
                 {
-                    nNumRunBNS++;
+                    /* djb-rwth: removing redundant code */
                     cur_success++; /* 01 */
                     /* update bookkeeping */
                     pTCGroups->total_charge += delta;
@@ -984,18 +992,18 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         }
         if (cur_success)
         {
-            tot_succes += cur_success;
+            /* djb-rwth: removing redundant code */
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
-            if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+            if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
@@ -1064,16 +1072,16 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
-                                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 1)
+                            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
+                                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 1) /* djb-rwth: addressing LLVM warning */
                             {
                                 /* Added (-)charge to unsaturated C => nDeltaCharge == 2 */
                                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                                 if (ret > 0)
                                 {
-                                    nNumRunBNS++;
+                                    /* djb-rwth: removing redundant code */
                                     cur_success++; /* 01 */
-                                    tot_succes += cur_success;
+                                    /* djb-rwth: removing redundant code */
                                 }
                             }
                             else
@@ -1098,11 +1106,11 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
             {
                 goto exit_function;
             }
-            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
-            if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+            if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
@@ -1166,7 +1174,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
 #define CHG_SET_O_FIXED        3
 #define CHG_SET_NUM            4
         EDGE_LIST ChangeableEdges[CHG_SET_NUM];
-        memset( ChangeableEdges, 0, sizeof( ChangeableEdges ) );
+        memset( ChangeableEdges, 0, sizeof( ChangeableEdges ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         /* equivalent to AllocEdgeList( &EdgeList, EDGE_LIST_CLEAR ); */
         /*
         S_CHAR   *nMobHInChI = pInChI[1] && pInChI[1]->nNum_H? pInChI[1]->nNum_H :
@@ -1237,7 +1245,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                     iat_DB_O[num_DB_O++] = iat;
                 }
                 /* save the =O (-)-edge to avoid interference */
-                if (ret = AddToEdgeList( &ChangeableEdges[CHG_SET_O_FIXED], e, INC_ADD_EDGE ))
+                if ((ret = AddToEdgeList( &ChangeableEdges[CHG_SET_O_FIXED], e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                 {
                     goto exit_case_07;
                 }
@@ -1256,7 +1264,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 {
                     if (pc2i->c2at[i].nValElectr == 6)
                     {
-                        if (ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_O], e, INC_ADD_EDGE ))
+                        if ((ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_O], e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                         {
                             goto exit_case_07;
                         }
@@ -1264,12 +1272,12 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                     else
                         if (pc2i->c2at[i].nValElectr == 5)
                         {
-                            if (ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_N], e, INC_ADD_EDGE ))
+                            if ((ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_N], e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                             {
                                 goto exit_case_07;
                             }
                         }
-                    if (ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_ALL], e, INC_ADD_EDGE ))
+                    if ((ret = AddToEdgeList( &ChangeableEdges[CHG_SET_WRONG_TAUT_ALL], e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
                     {
                         goto exit_case_07;
                     }
@@ -1282,7 +1290,7 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                 one_success = 0;
                 delta = 1;
                 iat = iat_DB_O[i];
-                peDB_O_Minus = pBNS->edge + ( pVA[iat].nCMinusGroupEdge - 1 );
+                peDB_O_Minus = pBNS->edge + ( (long long)pVA[iat].nCMinusGroupEdge - 1 ); /* djb-rwth: cast operator added */
                 pe = pBNS->edge + pBNS->vert[iat].iedge[0];
 
                 if (!pe->flow)
@@ -1313,15 +1321,15 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
                     ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                           &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                    if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
-                        vPathEnd == v2 && vPathStart == v1 ) &&
-                                      nDeltaCharge == nDeltaChargeExpected)
+                    if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
+                        (vPathEnd == v2 && vPathStart == v1) ) &&
+                                      nDeltaCharge == nDeltaChargeExpected) /* djb-rwth: addressing LLVM warnings */
                     {
                         /* Move (-) charge to =O and remove it an endpoint => nDeltaCharge == 0 */
                         ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                         if (ret > 0)
                         {
-                            nNumRunBNS++;
+                            /* djb-rwth: removing redundant code */
                             one_success++; /* 07 */
                         }
                     }
@@ -1350,18 +1358,18 @@ int FixMobileHRestoredStructure( CANON_GLOBALS *pCG,
         CurrEdges.num_edges = 0; /* clear current edge list */
         if (cur_success)
         {
-            tot_succes += cur_success;
+            /* djb-rwth: removing redundant code */
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
+            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }
-            if (ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))
+            if ((ret = FillOutCMP2MHINCHI( pStruct, pTCGroups, at2, pVA, pInChI, pc2i ))) /* djb-rwth: addressing LLVM warning */
             {
                 goto exit_function;
             }

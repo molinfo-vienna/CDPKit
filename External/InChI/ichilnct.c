@@ -1,10 +1,32 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.06
- * December 15, 2020
+ * Software version 1.07
+ * April 30, 2024
  *
- * The InChI library and programs are free software developed under the
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+*
+* The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -12,24 +34,9 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the
- * International Chemical Identifier (InChI)
- * Copyright (C) IUPAC and InChI Trust
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
- * or any later version.
- *
- * Please note that this library is distributed WITHOUT ANY WARRANTIES
- * whatsoever, whether expressed or implied.
- * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
- *
- * You should have received a copy of the IUPAC/InChI Trust InChI
- * Licence No. 1.0 with this library; if not, please e-mail:
- *
  * info@inchi-trust.org
  *
- */
+*/
 
 
 #include <stdio.h>
@@ -52,6 +59,7 @@
 #include "ichicomp.h"
 #include "ichi_io.h"
 #include "inchi_api.h"
+#include "bcf_s.h"
 
 #include "inchi_dll_b.h"
 
@@ -107,8 +115,8 @@ EXPIMP_TEMPLATE INCHI_API int INCHI_DECL Get_inchi_Input_FromAuxInfo( char *szIn
 /* clear output fields */
         inchi_Input *pInp = pInchiInp->pInp;
         char        *szOptions = pInp->szOptions;
-        memset( pInchiInp, 0, sizeof( *pInchiInp ) );
-        memset( pInp, 0, sizeof( *pInp ) );
+        memset( pInchiInp, 0, sizeof( *pInchiInp ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pInp, 0, sizeof( *pInp ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         pInp->szOptions = szOptions;
         pInchiInp->pInp = pInp;
     }
@@ -217,7 +225,7 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
     inchi_Stereo0D *stereo0D_old = NULL;
     int             nNumAtoms = 0, nNumStereo0D = 0;
     MOL_COORD      *szCoordNew = NULL;
-    MOL_COORD      *szCoordOld = NULL;
+    /* djb-rwth: removing redundant variables */
     int            i, j;
 
     if (pStrErr)
@@ -233,7 +241,7 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
 
         at_old = orig_at_data ? orig_at_data->atom : NULL; /*  save pointer to the previous allocation */
         stereo0D_old = orig_at_data ? orig_at_data->stereo0D : NULL;
-        szCoordOld = NULL;
+        /* djb-rwth: removing redundant code */
         num_inp_atoms_new =
             InchiToInchiAtom( inp_molfile, orig_at_data ? &stereo0D_new : NULL, &num_inp_0D_new,
                           bDoNotAddH, vABParityUnknown, nInputType,
@@ -267,13 +275,17 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
                         if (!at_old)
                         {
             /* the first structure */
-                            orig_at_data->atom = at_new;            at_new = NULL;
-                            orig_at_data->num_atoms = num_inp_atoms_new; num_inp_atoms_new = 0;
-                            orig_at_data->stereo0D = stereo0D_new;      stereo0D_new = NULL;
-                            orig_at_data->num_stereo0D = num_inp_0D_new;    num_inp_0D_new = 0;
+                            orig_at_data->atom = at_new;
+                            at_new = NULL;
+                            orig_at_data->num_atoms = num_inp_atoms_new;
+                            num_inp_atoms_new = 0; /* djb-rwth: ignoring LLVM warning: variable value used */
+                            orig_at_data->stereo0D = stereo0D_new;
+                            stereo0D_new = NULL;
+                            orig_at_data->num_stereo0D = num_inp_0D_new;
+                            num_inp_0D_new = 0;
                         }
                         else
-                            if (orig_at_data->atom = CreateInchiAtom( nNumAtoms ))
+                            if ((orig_at_data->atom = CreateInchiAtom( nNumAtoms ))) /* djb-rwth: addressing LLVM warning */
                             {
 /*  switch at_new <--> orig_at_data->at; */
                                 if (orig_at_data->num_atoms)
@@ -290,15 +302,14 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
                                 }
                                 FreeInchi_Atom( &at_old );
                                 /*  copy newly read structure */
-                                memcpy( orig_at_data->atom + orig_at_data->num_atoms,
-                                        at_new,
-                                        num_inp_atoms_new * sizeof( orig_at_data->atom[0] ) );
+                                if (at_new) /* djb-rwth: fixing a NULL pointer dereference */
+                                    memcpy(orig_at_data->atom + orig_at_data->num_atoms, at_new, num_inp_atoms_new * sizeof(orig_at_data->atom[0]));
                                 /*  copy newly read 0D stereo */
                                 if (num_inp_0D_new > 0 && stereo0D_new)
                                 {
-                                    if (orig_at_data->stereo0D = CreateInchi_Stereo0D( nNumStereo0D ))
+                                    if ((orig_at_data->stereo0D = CreateInchi_Stereo0D( nNumStereo0D ))) /* djb-rwth: addressing LLVM warning */
                                     {
-                                        memcpy( orig_at_data->stereo0D, stereo0D_old, orig_at_data->num_stereo0D * sizeof( orig_at_data->stereo0D[0] ) );
+                                        memcpy(orig_at_data->stereo0D, stereo0D_old, orig_at_data->num_stereo0D * sizeof(orig_at_data->stereo0D[0]));
                                         /*  adjust numbering in the newly read structure */
                                         for (i = 0; i < num_inp_0D_new; i++)
                                         {
@@ -312,9 +323,9 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
                                             }
                                         }
                                         FreeInchi_Stereo0D( &stereo0D_old );
-                                        memcpy( orig_at_data->stereo0D + orig_at_data->num_stereo0D,
-                                                stereo0D_new,
-                                                num_inp_0D_new * sizeof( orig_at_data->stereo0D[0] ) );
+                                        memcpy(orig_at_data->stereo0D + orig_at_data->num_stereo0D,
+                                            stereo0D_new,
+                                            num_inp_0D_new * sizeof(orig_at_data->stereo0D[0]));
                                     }
                                     else
                                     {
@@ -343,7 +354,7 @@ int InchiToInchi_Input( INCHI_IOSTREAM *inp_molfile,
                         nNumAtoms += num_inp_atoms_new;
                     }
         FreeInchi_Atom( &at_new );
-        num_inp_atoms_new = 0;
+        /* djb-rwth: removing redundant code */
         FreeInchi_Stereo0D( &stereo0D_new );
         num_inp_0D_new = 0;
     }

@@ -1,41 +1,49 @@
 /*
-* International Chemical Identifier (InChI)
-* Version 1
-* Software version 1.06
-* December 15, 2020
+ * International Chemical Identifier (InChI)
+ * Version 1
+ * Software version 1.07
+ * April 30, 2024
+ *
+ * MIT License
+ *
+ * Copyright (c) 2024 IUPAC and InChI Trust
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
 *
 * The InChI library and programs are free software developed under the
-* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
-* Originally developed at NIST.
-* Modifications and additions by IUPAC and the InChI Trust.
-* Some portions of code were developed/changed by external contributors
-* (either contractor or volunteer) which are listed in the file
-* 'External-contributors' included in this distribution.
-*
-* IUPAC/InChI-Trust Licence No.1.0 for the
-* International Chemical Identifier (InChI)
-* Copyright (C) IUPAC and InChI Trust
-*
-* This library is free software; you can redistribute it and/or modify it
-* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
-* or any later version.
-*
-* Please note that this library is distributed WITHOUT ANY WARRANTIES
-* whatsoever, whether expressed or implied.
-* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
-*
-* You should have received a copy of the IUPAC/InChI Trust InChI
-* Licence No. 1.0 with this library; if not, please e-mail:
-*
-* info@inchi-trust.org
-*
+ * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+ * Originally developed at NIST.
+ * Modifications and additions by IUPAC and the InChI Trust.
+ * Some portions of code were developed/changed by external contributors
+ * (either contractor or volunteer) which are listed in the file
+ * 'External-contributors' included in this distribution.
+ *
+ * info@inchi-trust.org
+ *
 */
-
 
 #include <string.h>
 
 #include "mode.h"
 #include "ichitaut.h"
+
+#include "bcf_s.h"
 
 /****************************************************************************/
 
@@ -209,9 +217,9 @@ int bIsCenterPointStrict( inp_ATOM *atom, int iat )
     if (atom[iat].valence == atom[iat].chem_bonds_valence)
     {
         int endpoint_valence = get_endpoint_valence( atom[iat].el_number );
-        if (endpoint_valence && ( endpoint_valence > atom[iat].valence && /* added a check for negative charge or H 3-31-03 */
-            ( atom[iat].num_H || atom[iat].charge == -1 ) ||
-            !atom[iat].charge && atom[iat].c_point ))
+        if (endpoint_valence && ( (endpoint_valence > atom[iat].valence && /* added a check for negative charge or H 3-31-03 */
+            ( atom[iat].num_H || atom[iat].charge == -1 )) ||
+            (!atom[iat].charge && atom[iat].c_point) )) /* djb-rwth: addressing LLVM warnings */
         {
             return 1; /*  may appear to be tautomeric or chargable
                           (this increases chem_bonds_valence), should be explored */
@@ -473,7 +481,7 @@ int DFS_FindTautInARing( struct tagCANON_GLOBALS *pCG,
     AT_RANK      nMinLenDfsPath;
     int          j, cur_at, nxt_at, prv_at;
     int          nLenDfsPath, nNumFound, ret;
-    AT_RANK      nRingSystem;
+    /* djb-rwth: removing redundant variables */
     int          nDoNotTouchAtom1 = -1, nDoNotTouchAtom2 = -1;
 
     nLenDfsPath = 0;
@@ -485,7 +493,7 @@ int DFS_FindTautInARing( struct tagCANON_GLOBALS *pCG,
     DfsPath[nLenDfsPath].bond_type = 0;
     DfsPath[nLenDfsPath].bond_pos = -1;
     nDfsPathPos[cur_at] = nLenDfsPath + 1;  /*  mark */
-    nRingSystem = atom[nStartAtom].nRingSystem;
+    /* djb-rwth: removing redundant code */
     nMinLenDfsPath = 0;
     if (nStartAtomNeighbor2 >= 0)
     {
@@ -631,7 +639,7 @@ int DFS_FindTautAltPath( struct tagCANON_GLOBALS *pCG,
     AT_RANK      nMinLenDfsPath;
     int          j, cur_at, nxt_at, prv_at;
     int          nLenDfsPath, nNumFound, ret;
-    AT_RANK      nRingSystem;
+    /* djb-rwth: removing redundant variables */
     int          nDoNotTouchAtom1 = -1, nDoNotTouchAtom2 = -1;
 
     nLenDfsPath = 0;
@@ -643,7 +651,7 @@ int DFS_FindTautAltPath( struct tagCANON_GLOBALS *pCG,
     DfsPath[nLenDfsPath].bond_type = 0;
     DfsPath[nLenDfsPath].bond_pos = -1;  /* initialize index of the bond to the next atom */
     nDfsPathPos[cur_at] = nLenDfsPath + 1;  /*  mark with distance + 1 */
-    nRingSystem = atom[nStartAtom].nRingSystem;
+    /* djb-rwth: removing redundant variables/code */
     nMinLenDfsPath = 0;  /* allow to restart from nStartAtom */
     if (nStartAtomNeighbor2 >= 0)
     {
@@ -690,8 +698,8 @@ int DFS_FindTautAltPath( struct tagCANON_GLOBALS *pCG,
             if (nxt_at == nDoNotTouchAtom1 || /* forbidden */
                 nxt_at == nDoNotTouchAtom2 || /* forbidden */
                 nDfsPathPos[nxt_at] || /* ring closure */
-                nLenDfsPath && nxt_at == (int) DfsPath[nLenDfsPath - 1].at_no /* step backwards */
-                )
+                (nLenDfsPath && nxt_at == (int) DfsPath[nLenDfsPath - 1].at_no) /* step backwards */
+                ) /* djb-rwth: addressing LLVM warning */
             {
                 ; /* ignore nxt_at */
             }
@@ -775,7 +783,7 @@ int are_alt_bonds( U_CHAR *bonds, int len )
     {
         return 0;
     }
-    next_bond = bonds[0] == BOND_SINGLE ? BOND_DOUBLE : bonds[0] == BOND_DOUBLE ? BOND_SINGLE : 0;
+    next_bond = bonds[0] == BOND_SINGLE ? BOND_DOUBLE : bonds[0] == BOND_DOUBLE ? BOND_SINGLE : 0; /* djb-rwth: removing redundant code; ignoring LLVM warning: possible presence of global variables */
     if (bonds[0] == BOND_TAUTOM)
     {
         bTautBondPresent = BOND_TAUTOM;
@@ -863,10 +871,10 @@ int AddBondsPos( inp_ATOM *atom,
     {
         for (i = 0; i < nNumBondPos; i++)
         {
-            if (BondPos[i].nAtomNumber == BondPosTmp[j].nAtomNumber &&
-                BondPos[i].neighbor_index == BondPosTmp[j].neighbor_index ||
-                BondPos[i].nAtomNumber == BondPosTmp[j + 1].nAtomNumber &&
-                BondPos[i].neighbor_index == BondPosTmp[j + 1].neighbor_index)
+            if ((BondPos[i].nAtomNumber == BondPosTmp[j].nAtomNumber &&
+                BondPos[i].neighbor_index == BondPosTmp[j].neighbor_index) ||
+                (BondPos[i].nAtomNumber == BondPosTmp[j + 1].nAtomNumber &&
+                BondPos[i].neighbor_index == BondPosTmp[j + 1].neighbor_index))  /* djb-rwth: addressing LLVM warnings */
             {
                 break; /*  bond has already been added */
             }
@@ -1019,7 +1027,7 @@ int Check7MembTautRing( struct tagCANON_GLOBALS *pCG,
         }
         else
         {
-            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) );
+            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         EndPointTmp[nNumEndPointTmp].nAtomNumber = endpoint;
         EndPointTmp[nNumEndPointTmp].nGroupNumber = atom[endpoint].endpoint;
@@ -1076,9 +1084,9 @@ int Check7MembTautRing( struct tagCANON_GLOBALS *pCG,
     /* j is a bond type of the last bond to o2_at, the first bond from o1_at is 2-j if j=1 or 2 */
 
     /* single bond at o2_at: it should have a mobile atom, o1_at should not */
-    if (j == BOND_SINGLE && ( !atom[o2_at].endpoint && !eif2.cDonor || !atom[o1_at].endpoint && !eif1.cAcceptor ) ||
+    if ((j == BOND_SINGLE && ( (!atom[o2_at].endpoint && !eif2.cDonor) || (!atom[o1_at].endpoint && !eif1.cAcceptor) )) ||
         /* double bond at o2_at: it should not have a mobile atom, o1_at should */
-        j == BOND_DOUBLE && ( !atom[o2_at].endpoint && !eif2.cAcceptor || !atom[o1_at].endpoint && !eif1.cDonor ))
+        (j == BOND_DOUBLE && ( (!atom[o2_at].endpoint && !eif2.cAcceptor) || (!atom[o1_at].endpoint && !eif1.cDonor) ))) /* djb-rwth: addressing LLVM warnings */
     {
         return 0; /* bond pattern does not fit */
     }
@@ -1088,7 +1096,7 @@ int Check7MembTautRing( struct tagCANON_GLOBALS *pCG,
 
     if (nNumBondPos >= 0 && nNumEndPoint >= 0)
     {
-        if (ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))
+        if ((ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))) /* djb-rwth: addressing LLVM warning */
         {
             *pnNumBondPos = nNumBondPos;
             *pnNumEndPoint = nNumEndPoint;
@@ -1130,7 +1138,7 @@ int Check7MembTautRing( struct tagCANON_GLOBALS *pCG,
 
 /****************************************************************************
   Check if a tautomeric 6-member ring has been found
-/****************************************************************************/
+*****************************************************************************/
 int Check6MembTautRing( struct tagCANON_GLOBALS *pCG,
                         inp_ATOM *atom,
                         DFS_PATH *DfsPath,
@@ -1149,7 +1157,7 @@ int Check6MembTautRing( struct tagCANON_GLOBALS *pCG,
                         int num_atoms )
 {
 #define PATH_LEN 4
-    int i, j, k, /*m,*/ nNumBondPos, nNumEndPoint;
+    int i, j, k, /*m,*/ nNumBondPos, nNumEndPoint, ept, eptn;
     int nNumEndPointTmp, nNumBondPosTmp, o_at = 0, ret;
     /* int num_taut_endpoints, num_H; */
     int middle_pos;
@@ -1174,9 +1182,12 @@ int Check6MembTautRing( struct tagCANON_GLOBALS *pCG,
 
     nNumBondPos = *pnNumBondPos;
     nNumEndPoint = *pnNumEndPoint;
-    nNumBondPosTmp = 0;
+    /* djb-rwth: removing redundant code */
     nNumEndPointTmp = 0;
     ret = 0;
+    for (ept = 0; ept < 2; ept++) /* djb-rwth: initialisation needed for num array */
+        for (eptn = 0; eptn < T_NUM_NO_ISOTOPIC + T_NUM_ISOTOPIC; eptn++)
+            EndPointTmp[ept].num[eptn] = 0;
 
     n_at = (int) DfsPath[0].at_no;   /*  -N= or -NH- atom */
     nxt_at = DfsPath[middle_pos = ( nLenDfsPath + 1 ) / 2].at_no;  /*  must have tautomeric neighbor -OH or =O or -NH2 or =NH */
@@ -1364,7 +1375,7 @@ int Check6MembTautRing( struct tagCANON_GLOBALS *pCG,
         }
         else
         { /* already an endpoint */ /* **now it is wrong:** no mobile atom/charge at this endpoint */
-            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) );
+            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         EndPointTmp[nNumEndPointTmp].nAtomNumber = endpoint;
         EndPointTmp[nNumEndPointTmp].nGroupNumber = atom[endpoint].endpoint;
@@ -1378,7 +1389,7 @@ int Check6MembTautRing( struct tagCANON_GLOBALS *pCG,
 
     if (nNumBondPos >= 0 && nNumEndPoint >= 0)
     {
-        if (ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))
+        if ((ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))) /* djb-rwth: addressing LLVM warning */
         {
             *pnNumBondPos = nNumBondPos;
             *pnNumEndPoint = nNumEndPoint;
@@ -1463,7 +1474,7 @@ int Check15TautPath( struct tagCANON_GLOBALS *pCG,
 
     nNumBondPos = *pnNumBondPos;
     nNumEndPoint = *pnNumEndPoint;
-    nNumBondPosTmp = 0;
+    /* djb-rwth: removing redundant code */
     nNumEndPointTmp = 0;
     ret = 0;
 
@@ -1605,7 +1616,7 @@ int Check15TautPath( struct tagCANON_GLOBALS *pCG,
         else
         {
             /* already an endpoint */ /* **now it is wrong:** no mobile atom/charge at this endpoint */
-            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) );
+            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         EndPointTmp[nNumEndPointTmp].nAtomNumber = endpoint;
         EndPointTmp[nNumEndPointTmp].nGroupNumber = atom[endpoint].endpoint;
@@ -1619,7 +1630,7 @@ int Check15TautPath( struct tagCANON_GLOBALS *pCG,
 
     if (nNumBondPos >= 0 && nNumEndPoint >= 0)
     {
-        if (ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))
+        if ((ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))) /* djb-rwth: addressing LLVM warning */
         {
             *pnNumBondPos = nNumBondPos;
             *pnNumEndPoint = nNumEndPoint;
@@ -1670,7 +1681,7 @@ int Check5MembTautRing( struct tagCANON_GLOBALS *pCG,
                         int num_atoms )
 {
 #define PATH_LEN 4
-    int i, j, /*m,*/ nMobile, nMobile1, nMobile2;
+    int i, j, /*m,*/ nMobile, nMobile1, nMobile2, ept, eptn;
     int num_taut_endpoints, nNumBondPos, nNumBondPosTmp, nNumEndPoint, nNumEndPointTmp, ret;
     int endpoint;
     int n1_at = (int) DfsPath[0].at_no;
@@ -1696,8 +1707,11 @@ int Check5MembTautRing( struct tagCANON_GLOBALS *pCG,
     nNumBondPos = *pnNumBondPos;
     nNumEndPoint = *pnNumEndPoint;
     nNumEndPointTmp = 0;
-    nNumBondPosTmp = 0;
+    /* djb-rwth: removing redundant code */
     ret = 0;
+    for (ept = 0; ept < 2; ept++) /* djb-rwth: initialisation needed for num array */
+        for (eptn = 0; eptn < T_NUM_NO_ISOTOPIC + T_NUM_ISOTOPIC; eptn++)
+            EndPointTmp[ept].num[eptn] = 0;
 
     if (!nGetEndpointInfo( atom, n1_at, &eif1 ) ||
         !nGetEndpointInfo( atom, n2_at, &eif2 ))
@@ -1756,7 +1770,7 @@ int Check5MembTautRing( struct tagCANON_GLOBALS *pCG,
         }
         else
         {
-            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) );
+            memset( EndPointTmp + nNumEndPointTmp, 0, sizeof( EndPointTmp[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
         }
         EndPointTmp[nNumEndPointTmp].nAtomNumber = endpoint;
         EndPointTmp[nNumEndPointTmp].nGroupNumber = atom[endpoint].endpoint;
@@ -1786,9 +1800,9 @@ int Check5MembTautRing( struct tagCANON_GLOBALS *pCG,
     /* i is a bond type of the last bond to at_n1, the first bond from at_n2 is 2-i if i=1 or 2 */
 
     /* single bond at n1_at: it should have a mobile atom, n2_at should not */
-    if (i == BOND_SINGLE && ( !atom[n1_at].endpoint && !eif1.cDonor || !atom[n2_at].endpoint && !eif2.cAcceptor ) ||
+    if ((i == BOND_SINGLE && ( (!atom[n1_at].endpoint && !eif1.cDonor) || (!atom[n2_at].endpoint && !eif2.cAcceptor) )) ||
         /* double bond at n1_at: it should not have a mobile atom, n2_at should */
-        i == BOND_DOUBLE && ( !atom[n1_at].endpoint && !eif1.cAcceptor || !atom[n2_at].endpoint && !eif2.cDonor ))
+        (i == BOND_DOUBLE && ( (!atom[n1_at].endpoint && !eif1.cAcceptor) || (!atom[n2_at].endpoint && !eif2.cDonor) ))) /* djb-rwth: addressing LLVM warnings */
     {
         return 0; /* bond pattern does not fit */
     }
@@ -1798,7 +1812,7 @@ int Check5MembTautRing( struct tagCANON_GLOBALS *pCG,
 
     if (nNumBondPos >= 0 && nNumEndPoint >= 0)
     {
-        if (ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))
+        if ((ret = ( nNumBondPos > *pnNumBondPos ) || ( nNumEndPoint > *pnNumEndPoint ))) /* djb-rwth: addressing LLVM warning */
         {
             *pnNumBondPos = nNumBondPos;
             *pnNumEndPoint = nNumEndPoint;
