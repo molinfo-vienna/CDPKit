@@ -70,7 +70,7 @@ namespace CDPL
 
             void buildMolecule(Chem::Molecule& mol);
 
-            void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
+            bool addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
 
             typedef std::vector<Chem::Atom*> AtomArray;
 

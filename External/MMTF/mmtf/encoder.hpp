@@ -14,9 +14,10 @@
 
 #include "structure_data.hpp"
 #include "errors.hpp"
-#include "object_encoders.hpp"
+#include "msgpack_encoders.hpp"
 #include "binary_encoder.hpp"
 #include <string>
+#include <fstream>
 
 namespace mmtf {
 
@@ -41,6 +42,7 @@ inline void encodeToFile(const StructureData& data,
  * @brief Encode an MMTF data structure into a stream.
  * @param[in] data          MMTF data structure to be stored
  * @param[in] stream        Stream to encode to
+ * @tparam Stream Any stream type compatible to std::ostream
  *
  * Other parameters and behavior are as in ::encodeToFile, but this enables you
  * to store the data to other types of storage.
@@ -83,8 +85,7 @@ template <typename Stream>
 inline void encodeToStream(const StructureData& data, Stream& stream,
     int32_t coord_divider, int32_t occupancy_b_factor_divider,
     int32_t chain_name_max_length) {
-  msgpack::zone _zone;
-  msgpack::pack(stream, encodeToMap(data, _zone, coord_divider,
+  msgpack::pack(stream, encodeToMap(data, data.msgpack_zone, coord_divider,
               occupancy_b_factor_divider, chain_name_max_length));
 }
 
@@ -92,7 +93,7 @@ inline std::map<std::string, msgpack::object>
 encodeToMap(const StructureData& data, msgpack::zone& m_zone,
     int32_t coord_divider, int32_t occupancy_b_factor_divider,
     int32_t chain_name_max_length) {
-  if (!data.hasConsistentData(false, chain_name_max_length)) {
+  if (!data.hasConsistentData(true, chain_name_max_length)) {
     throw mmtf::EncodeError("mmtf EncoderError, StructureData does not have Consistent data... exiting!");
   }
 
@@ -137,6 +138,11 @@ encodeToMap(const StructureData& data, msgpack::zone& m_zone,
   if (!mmtf::isDefaultValue(data.bondOrderList)) {
     data_map["bondOrderList"] =
       msgpack::object(mmtf::encodeInt8ToByte(data.bondOrderList), m_zone);
+  }
+  // std::vector<int8_t>
+  if (!mmtf::isDefaultValue(data.bondResonanceList)) {
+    data_map["bondResonanceList"] =
+      msgpack::object(mmtf::encodeRunLengthInt8(data.bondResonanceList), m_zone);
   }
   if (!mmtf::isDefaultValue(data.secStructList)) {
     data_map["secStructList"] =
@@ -198,6 +204,25 @@ encodeToMap(const StructureData& data, msgpack::zone& m_zone,
   // std::vector<std::vector<float>>
   if (!mmtf::isDefaultValue(data.ncsOperatorList)) {
     data_map["ncsOperatorList"] = msgpack::object(data.ncsOperatorList, m_zone);
+  }
+  // extraProperties
+  if (!mmtf::isDefaultValue(data.bondProperties)) {
+    data_map["bondProperties"] = msgpack::object(data.bondProperties, m_zone);
+  }
+  if (!mmtf::isDefaultValue(data.atomProperties)) {
+    data_map["atomProperties"] = msgpack::object(data.atomProperties, m_zone);
+  }
+  if (!mmtf::isDefaultValue(data.groupProperties)) {
+    data_map["groupProperties"] = msgpack::object(data.groupProperties, m_zone);
+  }
+  if (!mmtf::isDefaultValue(data.chainProperties)) {
+    data_map["chainProperties"] = msgpack::object(data.chainProperties, m_zone);
+  }
+  if (!mmtf::isDefaultValue(data.modelProperties)) {
+    data_map["modelProperties"] = msgpack::object(data.modelProperties, m_zone);
+  }
+  if (!mmtf::isDefaultValue(data.extraProperties)) {
+    data_map["extraProperties"] = msgpack::object(data.extraProperties, m_zone);
   }
   return data_map;
 }
