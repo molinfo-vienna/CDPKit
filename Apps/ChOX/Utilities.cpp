@@ -49,6 +49,7 @@
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/Pharm/MoleculeFunctions.hpp"
 #include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Vis/Alignment.hpp"
@@ -134,27 +135,30 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
 
     calcAtomStereoDescriptors(mol, false);
     calcBondStereoDescriptors(mol, false);
-    calcAtomCIPConfigurations(mol, false);
-    calcBondCIPConfigurations(mol, false);
 
-    for (auto& atom : mol.getAtoms()) {
-        if (def_atom_sto_ctrs.test(atom.getIndex()))
-            continue;
+    if (MolProp::getAtomCount(mol) < 300) {
+        calcAtomCIPConfigurations(mol, false);
+        calcBondCIPConfigurations(mol, false);
 
-        switch (getCIPConfiguration(atom)) {
+        for (auto& atom : mol.getAtoms()) {
+            if (def_atom_sto_ctrs.test(atom.getIndex()))
+                continue;
 
-            case CIPDescriptor::UNDEF:
-            case CIPDescriptor::NONE:
-            case CIPDescriptor::NS: {
-                auto& descr = getStereoDescriptor(atom);
+            switch (getCIPConfiguration(atom)) {
 
-                if (descr.getConfiguration() == AtomConfiguration::R ||
-                    descr.getConfiguration() == AtomConfiguration::S)
-                    clearStereoDescriptor(atom);
+                case CIPDescriptor::UNDEF:
+                case CIPDescriptor::NONE:
+                case CIPDescriptor::NS: {
+                    auto& descr = getStereoDescriptor(atom);
+
+                    if (descr.getConfiguration() == AtomConfiguration::R ||
+                        descr.getConfiguration() == AtomConfiguration::S)
+                        clearStereoDescriptor(atom);
+                }
             }
         }
     }
-
+    
     setAtomSymbolsFromTypes(mol, false);
 
     generateMatchExpressionStrings(mol, false);
