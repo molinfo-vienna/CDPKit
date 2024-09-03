@@ -116,5 +116,5 @@ docs_versions_menu_conf = {
     'github_project_url': 'https://github.com/molinfo-vienna/CDPKit'
 }
 
-html_baseurl = 'https://cdpkit.org/v@CDPKIT_VERSION@/'
+html_baseurl = 'https://cdpkit.org/master/'
 sitemap_url_scheme = "{link}"
