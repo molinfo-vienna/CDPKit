@@ -26,7 +26,9 @@
 #define CDPL_BIOMOL_MMCIFDATAREADER_HPP
 
 #include <istream>
+#include <vector>
 #include <unordered_map>
+#include <set>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 
@@ -67,9 +69,13 @@ namespace CDPL
 
             void readMacromolecule(const MMCIFData& data, Chem::Molecule& mol);
 
-            void readChemComponents(const MMCIFData& data, Chem::Molecule& mol);
-            void readComponentAtoms(const MMCIFData& data, Chem::Molecule& mol);
-            bool readComponentBonds(const MMCIFData& data, Chem::Molecule& mol);
+            void initChemCompDict(const MMCIFData& data);
+            void procChemCompAtoms(const MMCIFData& data);
+            void procChemCompBonds(const MMCIFData& data);
+       
+            void readChemComps(const MMCIFData& data, Chem::Molecule& mol);
+            void readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol);
+            bool readChemCompBonds(const MMCIFData& data, Chem::Molecule& mol);
             
             MMCIFData::SharedPointer parseInput(std::istream& is);
 
@@ -81,30 +87,82 @@ namespace CDPL
 
             void putbackToken(std::istream& is) const;
 
-            typedef std::pair<const std::string*, const std::string*> CompAtomID;
+            typedef std::pair<const std::string*, const std::string*> ChemCompAtomID;
 
-            struct CompAtomIDHash
+            struct ChemCompAtomIDHash
             {
 
-                std::size_t operator()(const CompAtomID& atom_id) const;
+                std::size_t operator()(const ChemCompAtomID& atom_id) const;
             };
 
-            struct CompAtomIDCmpFunc
+            struct ChemCompAtomIDCmpFunc
             {
 
-                bool operator()(const CompAtomID& atom_id1, const CompAtomID& atom_id2) const
+                bool operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const
                 {
                     return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
                 }
             };
 
-            typedef std::unordered_map<CompAtomID, std::size_t, CompAtomIDHash, CompAtomIDCmpFunc> CompAtomLookupMap;
-            
-            const Base::DataIOBase& ioBase;
-            std::istream::pos_type  lastStreamPos;
-            std::string             tokenValue;
-            bool                    strictErrorChecking;
-            CompAtomLookupMap       compAtomLookupMap;
+            struct ChemComp
+            {
+                
+                struct Atom
+                {
+
+                    Atom(const std::string* id, const std::string* alt_id, long form_charge, unsigned int type, bool leaving_flag):
+                        id(id), altId(alt_id), formCharge(form_charge), type(type), leavingFlag(leaving_flag)
+                    {}
+
+                    const std::string* id;
+                    const std::string* altId;
+                    long               formCharge;
+                    unsigned int       type;
+                    bool               leavingFlag;
+                };
+                
+                struct Bond
+                {
+
+                    Bond(std::size_t atom_1_idx, std::size_t atom_2_idx, std::size_t order):
+                        atom1Idx(atom_1_idx), atom2Idx(atom_2_idx), order(order)
+                    {}
+
+                    std::size_t atom1Idx;
+                    std::size_t atom2Idx;
+                    std::size_t order;
+                };
+
+                void clear()
+                {
+                    atoms.clear();
+                    bonds.clear();
+                    linkAtoms.clear();
+                }
+
+                typedef std::vector<Atom>     AtomList;
+                typedef std::vector<Bond>     BondList;
+                typedef std::set<std::size_t> LinkAtomSet;
+
+                AtomList    atoms;
+                BondList    bonds;
+                LinkAtomSet linkAtoms;
+            };
+
+            typedef std::unordered_map<ChemCompAtomID, std::size_t,
+                                       ChemCompAtomIDHash,
+                                       ChemCompAtomIDCmpFunc>    ChemCompAtomLookupMap;
+            typedef std::vector<ChemComp>                        ChemCompList;
+            typedef std::unordered_map<std::string, std::size_t> ChemCompDictionary;
+
+            const Base::DataIOBase&     ioBase;
+            std::istream::pos_type      lastStreamPos;
+            std::string                 tokenValue;
+            bool                        strictErrorChecking;
+            ChemCompAtomLookupMap       chemCompAtomLookupMap;
+            ChemCompList                chemCompList;
+            ChemCompDictionary          chemCompDict;
+            std::size_t                 chemCompCount;
         };
     } // namespace Biomol
 } // namespace CDPL
