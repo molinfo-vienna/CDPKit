@@ -26,6 +26,7 @@
 #include <cstddef>
 #include <iostream>
 #include <functional>
+#include <exception>
 
 #include <QFileInfo>
 #include <QDir>
@@ -35,7 +36,6 @@
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/BasicReaction.hpp"
@@ -200,7 +200,7 @@ bool DataSetReader::appendRecords(bool use_file_ext)
             if (!reader_ptr->read(data))
                 return false;
 
-        } catch (const Exception& e) {
+        } catch (const std::exception& e) {
             std::cerr << "Reader (using file ext.): " << e.what() << std::endl;
             return false;
         }
@@ -223,7 +223,7 @@ bool DataSetReader::appendRecords(bool use_file_ext)
                 if (reader_ptr->read(data))
                     found_reader = true;
 
-            } catch (const Exception& e) {
+            } catch (const std::exception& e) {
                 std::cerr << "Reader: " << e.what() << std::endl;
             }
         }
@@ -239,7 +239,7 @@ bool DataSetReader::appendRecords(bool use_file_ext)
     try {
         reader_ptr->getNumRecords();
 
-    } catch (const Exception& e) {
+    } catch (const std::exception& e) {
         emit errorMessage(QString(tr("File '%1' contains errors:\n") + e.what()).arg(file_info.fileName()));
     }
 

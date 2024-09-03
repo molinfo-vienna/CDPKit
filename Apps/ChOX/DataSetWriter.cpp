@@ -24,6 +24,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <exception>
 
 #include <QFileInfo>
 #include <QDir>
@@ -35,7 +36,6 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
@@ -81,7 +81,7 @@ namespace
                 
                 writerPointer->write(*mol_ptr);
 
-            } catch (const CDPL::Base::Exception& e) {
+            } catch (const std::exception& e) {
                 std::cerr << "Error while writing: " << e.what() << std::endl;
             }
         }
@@ -117,7 +117,7 @@ namespace
                 
                 writerPointer->write(*rxn_ptr);
 
-            } catch (const CDPL::Base::Exception& e) {
+            } catch (const std::exception& e) {
                  std::cerr << " while writing: " << e.what() << std::endl;
             }
         }
