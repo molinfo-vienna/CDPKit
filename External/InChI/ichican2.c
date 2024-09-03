@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,24 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 
 /* #define CHECK_WIN32_VC_HEAP */
@@ -53,8 +46,6 @@
 #include "ichicomn.h"
 #include "ichitime.h"
 
-#include "bcf_s.h"
-int na_global; /* djb-rwth: required for fixing oss-fuzz issue #69315 */
 
 #define MAX_CELLS    32766
 #define MAX_NODES    32766
@@ -76,7 +67,7 @@ int na_global; /* djb-rwth: required for fixing oss-fuzz issue #69315 */
 
 /*
 #define INCHI_CANON_USE_HASH
-*/ /* djb-rwth: constant has not been defined? */
+*/
 #ifdef INCHI_CANON_USE_HASH
 typedef unsigned long  U_INT_32;
 typedef unsigned char  U_INT_08;
@@ -731,7 +722,7 @@ int NodeSetCreate( struct tagCANON_GLOBALS *pCG,
     {
         return 0;
     }
-    pSet->bitword[0] = (bitWord*) inchi_calloc( (long long)len * (long long)L, sizeof( pSet->bitword[0][0] ) ); /* djb-rwth: cast operators added */
+    pSet->bitword[0] = (bitWord*) inchi_calloc( len*L, sizeof( pSet->bitword[0][0] ) );
     if (!pSet->bitword[0])
     {
         /* Cleanup */
@@ -779,7 +770,7 @@ int CTableCreate( ConTable *Ct, int n, CANON_DATA *pCD )
     int maxlenIsoHfixed = pCD->maxlen_iso_sort_key_Hfixed ? ( pCD->maxlen_iso_sort_key_Hfixed + 1 ) : 0;
 #endif
 
-    memset( Ct, 0, sizeof( Ct[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( Ct, 0, sizeof( Ct[0] ) );
 
     Ct->maxVert = n;
 
@@ -831,11 +822,8 @@ int CTableCreate( ConTable *Ct, int n, CANON_DATA *pCD )
 
     Ct->maxPos = n;
     Ct->lenPos = 0;
-    /* djb-rwth: fixing a NULL pointer dereferences */
-    if (Ct->nextAtRank)
-        Ct->nextAtRank[0] = 0;
-    if (Ct->nextCtblPos)
-        Ct->nextCtblPos[0] = 0;
+    Ct->nextAtRank[0] = 0;
+    Ct->nextCtblPos[0] = 0;
 
     if (Ct->Ctbl && Ct->nextCtblPos &&
         ( !maxlenNumH || Ct->NumH ) &&
@@ -896,7 +884,7 @@ void CTableFree( ConTable *Ct )
         }
 #endif
 
-        memset( Ct, 0, sizeof( Ct[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( Ct, 0, sizeof( Ct[0] ) );
     }
 }
 
@@ -1056,7 +1044,7 @@ void NodeSetFromVertices( CANON_GLOBALS *pCG, NodeSet *cur_nodes, int l, Node *v
     int      len = cur_nodes->len_set * sizeof( bitWord );
     int      i, j;
 
-    memset( Bits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( Bits, 0, len );
 
     for (i = 0; i < num_v; i++)
     {
@@ -1109,8 +1097,8 @@ void PartitionGetMcrAndFixSet( CANON_GLOBALS *pCG,
     bitWord *FixBits = Fix->bitword[l - 1];
     int     len = Mcr->len_set * sizeof( bitWord );
 
-    memset( McrBits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( FixBits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( McrBits, 0, len );
+    memset( FixBits, 0, len );
     for (i = 0, r = 1; i < n; i++, r++)
     {
         if (r == ( r1 = ( rank_mask_bit&p->Rank[j1 = (int) p->AtNumber[i]] ) ))
@@ -1146,7 +1134,7 @@ void NodeSetFromRadEndpoints( CANON_GLOBALS *pCG,
     int      len = cur_nodes->len_set * sizeof( bitWord );
     int      i, j;
 
-    memset( Bits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( Bits, 0, len );
 
     for (i = 1; i < num_v; i += 2)
     {
@@ -1446,8 +1434,8 @@ int PartitionSatisfiesLemma_2_25( Partition *p, int n )
 void PartitionCopy( Partition *To, Partition *From, int n )
 {
     int i;
-    memcpy(To->AtNumber, From->AtNumber, n * sizeof(To->AtNumber[0]));
-    memcpy(To->Rank, From->Rank, n * sizeof(To->AtNumber[0]));
+    memcpy( To->AtNumber, From->AtNumber, n * sizeof( To->AtNumber[0] ) );
+    memcpy( To->Rank, From->Rank, n * sizeof( To->AtNumber[0] ) );
 
     for (i = 0; i < n; i++)
     {
@@ -1511,7 +1499,7 @@ int PartitionColorVertex( CANON_GLOBALS *pCG,
 
     /* second, locate sv among all vertices that have same rank as v */
     s = n_max + 1; /* always greater than sv; this initialization is needed only to keep the compiler happy */
-    for (j = (int) rv - 1; 0 <= j && rv == ( p[1].Rank[(int) ( s = p[1].AtNumber[j] )] ) && s != sv; j--) /* djb-rwth: removing redundant code */
+    for (j = (int) rv - 1; 0 <= j && rv == ( r = p[1].Rank[(int) ( s = p[1].AtNumber[j] )] ) && s != sv; j--)
     {
         ;
     }
@@ -1648,7 +1636,7 @@ Node CellGetMinNode( Partition *p, Cell *W, Node v, CANON_DATA *pCD )
             {
                 /* vertex nCurAtNumb is not marked, find whether it fits the conditions */
                 uCurAuxRank = pCD->nAuxRank[nCurAtNumb];
-                if ((uCurAuxRank == uInpAuxRank && nCurAtNumb > nInpAtNumb) || uCurAuxRank > uInpAuxRank) /* djb-rwth: addressing LLVM warning */
+                if (uCurAuxRank == uInpAuxRank && nCurAtNumb > nInpAtNumb || uCurAuxRank > uInpAuxRank)
                 {
                     /* here vCur > vInp */
                     if (uCurAuxRank == uMinAuxRank && nCurAtNumb < nMinAtNumb)
@@ -1805,7 +1793,7 @@ void CtPartClear( ConTable *Ct, int k )
     len = Ct->lenCt - start;
     if (len > 0)
     {
-        memset( Ct->Ctbl + start, 0, ( (long long)Ct->lenCt - (long long)start ) * sizeof( Ct->Ctbl[0] ) ); /* djb-rwth: cast operators added; memset_s C11/Annex K variant? */
+        memset( Ct->Ctbl + start, 0, ( Ct->lenCt - start ) * sizeof( Ct->Ctbl[0] ) );
     }
     Ct->lenCt = start;
     Ct->lenPos = k;
@@ -1859,19 +1847,20 @@ void CtPartFill( Graph *G,
 
     int     startCtbl;
     int     startAtOrd;
-    AT_RANK r, rj, nn, j, rj_prev; /* djb-rwth: ignoring LLVM warning as the variable is used */
-    int     i, m, an_sao;
+    AT_RANK r, rj, nn, j, rj_prev;
+    int     i, m;
 
 #ifdef INCHI_CANON_USE_HASH
     CtHash  hash = 0;
 #endif
 
-    /* djb-rwth: removing redundant code */
+    static int count; /* for debug only */
+    count++;
 
     INCHI_HEAPCHK
 
     k--;
-    if (Ct && k) /* djb-rwth: fixing oss-fuzz issue #69612 */
+    if (k)
     {
         startCtbl = Ct->nextCtblPos[k - 1];
         startAtOrd = Ct->nextAtRank[k - 1] - 1;  /* here  p->Rank[p->AtNumber[r-1]] = r */
@@ -1883,20 +1872,14 @@ void CtPartFill( Graph *G,
     }
 
     /******* Well-defined (by fixed ranks) part of the connection table ************/
-    /* djb-rwth: fixing oss-fuzz issue #69612 */
-    if ((startAtOrd < 0) || (startAtOrd >= na_global))
-    {
-        return;
-    }
-    an_sao = (int)p->AtNumber[startAtOrd];
-    r = ( rank_mask_bit & p->Rank[an_sao] );
+    r = ( rank_mask_bit & p->Rank[(int) p->AtNumber[startAtOrd]] );
 
     for (i = startAtOrd; i < n_tg && r == ( rank_mask_bit&p->Rank[m = (int) p->AtNumber[i]] ); i++, r++)
     {
         Ct->Ctbl[startCtbl++] = r;
         insertions_sort_NeighList_AT_NUMBERS2( G[m], p->Rank, r );
         nn = G[m][0];   /* number of neighbors */
-        rj_prev = 0;    /* debug only */ /* djb-rwth: ignoring LLVM warning as the variable is used */
+        rj_prev = 0;    /* debug only */
 
 #ifdef INCHI_CANON_USE_HASH
         hash = add2crc32( hash, (AT_NUMB) ( r + n ) );
@@ -1918,7 +1901,7 @@ void CtPartFill( Graph *G,
             }
 #endif
 
-            rj_prev = rj; /* djb-rwth: ignoring LLVM warning as the variable is used */
+            rj_prev = rj;
         }
     }
 
@@ -2062,7 +2045,7 @@ void CtPartINCHI_CANON_INFINITY( ConTable *Ct, S_CHAR *cmp, int k )
         /*startAtOrd = Ct->nextAtRank[k-1]-1;*/  /* here  p->Rank[p->AtNumber[r-1]] = r */
         if (cmp)
         {
-            memset( cmp, 0, k * sizeof( cmp[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( cmp, 0, k * sizeof( cmp[0] ) );
         }
     }
     else
@@ -2120,7 +2103,7 @@ int CtPartCompare( ConTable *Ct1,
     int     startCt1, endCt1, startCt2, endCt2; /*endCt,*/
     int     startAt1, endAt1, startAt2, endAt2; /*endCt,*/
     int     midCt /* end of atoms only Ct */, midNumH = 0 /* end of atoms only NumH */, maxVert;
-    int     diff, i, k1, k2, lenNumH, /*mid_iso_sort_key,*/ midAt; /* djb-rwth: ignoring LLVM warning: variables used */
+    int     diff, i, k1, k2, lenNumH, len_iso_sort_key, /*mid_iso_sort_key,*/ midAt;
     int     nLayer = 0;
 
     k--;
@@ -2248,8 +2231,8 @@ int CtPartCompare( ConTable *Ct1,
         }
     }
 
-    k1 = Ct1->lenPos - 1; /* djb-rwth: ignoring LLVM warning: variable used */
-    k2 = Ct2->lenPos - 1; /* djb-rwth: ignoring LLVM warning: variable used */
+    k1 = Ct1->lenPos - 1;
+    k2 = Ct2->lenPos - 1;
 
 #if ( bRELEASE_VERSION != 1 && defined(_DEBUG) )
     if (k > k1 || k > k2)
@@ -2258,7 +2241,7 @@ int CtPartCompare( ConTable *Ct1,
     }
 #endif
 
-    diff = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+    diff = 0;
 
     if (k)
     {
@@ -2296,7 +2279,7 @@ int CtPartCompare( ConTable *Ct1,
 #endif
 
     /************************** lengths **************************************************/
-    if ((diff = -( startCt1 - startCt2 ))) /* djb-rwth: addressing LLVM warning */
+    if (diff = -( startCt1 - startCt2 ))
     {
         /* comparing two INCHI_CANON_INFINITY terminations */
         if (bOnlyCommon &&
@@ -2307,7 +2290,7 @@ int CtPartCompare( ConTable *Ct1,
         }
         if (bOnlyCommon)
         {
-            startCt1 = inchi_min( startCt1, startCt2 ); /* djb-rwth: removing redundant code */
+            startCt1 = startCt2 = inchi_min( startCt1, startCt2 );
             startAt1 = startAt2 = inchi_min( startAt1, startAt2 );
             if (Ct1->lenCt == Ct2->lenCt)
             {
@@ -2337,17 +2320,17 @@ int CtPartCompare( ConTable *Ct1,
     }
 
     lenNumH = Ct1->lenNumH;
-    /* djb-rwth: removing redundant code */
+    len_iso_sort_key = Ct1->len_iso_sort_key;
 
-    if ((diff = -( endCt1 - endCt2 ))) /* djb-rwth: addressing LLVM warning */
+    if (diff = -( endCt1 - endCt2 ))
     {
         /* negative sign reproduces results for NSC=28393 */
         if (bOnlyCommon)
         {
-            endCt1 = inchi_min( endCt1, endCt2 ); /* djb-rwth: removing redundant code */
+            endCt1 = endCt2 = inchi_min( endCt1, endCt2 );
             endAt1 = endAt2 = inchi_min( endAt1, endAt2 );
             lenNumH = inchi_min( Ct1->lenNumH, Ct2->lenNumH );
-            /* djb-rwth: removing redundant code */
+            len_iso_sort_key = inchi_min( Ct1->len_iso_sort_key, Ct1->len_iso_sort_key );
         }
         else
         {
@@ -2362,17 +2345,17 @@ int CtPartCompare( ConTable *Ct1,
                     /* remove INCHI_CANON_INFINITY termination of the shorter CT */
                     /* should never happen */
                     endAt2--;
-                    lenNumH = endAt1 = endAt2; /* djb-rwth: removing redundant code */
+                    len_iso_sort_key = lenNumH = endAt1 = endAt2;
                     endCt2--;
                     endCt1 = endCt2;
-                    diff = 0; /* djb-rwth: ignoring LLVM warning: value used? */
+                    diff = 0;
                 }
                 else if (endAt2 == Ct2->maxVert)
                 {
                     /* remove INCHI_CANON_INFINITY termination of CT */
-                    lenNumH = endAt1 = endAt2; /* djb-rwth: removing redundant code */
+                    len_iso_sort_key = lenNumH = endAt1 = endAt2;
                     endCt1 = endCt2;
-                    diff = 0; /* djb-rwth: ignoring LLVM warning: value used? */
+                    diff = 0;
                 }
                 else
                 {
@@ -2426,11 +2409,11 @@ int CtPartCompare( ConTable *Ct1,
     nLayer++;
 
     /*============= check limits for consistency  ==========*/
-    if ((diff = -( startAt1 - startAt2 ))) /* djb-rwth: addressing LLVM warning */
+    if (diff = -( startAt1 - startAt2 ))
     {
         goto done;   /* should not happen */
     }
-    if ((diff = -( endAt1 - endAt2 ))) /* djb-rwth: addressing LLVM warning */
+    if (diff = -( endAt1 - endAt2 ))
     {
         goto done;   /* should not happen */
     }
@@ -2614,22 +2597,22 @@ int CtFullCompare( ConTable *Ct1,
                    int bOnlyCommon,
                    int bSplitTautCompare )
 {
-    int     startCt1, endCt1, endCt2; /*endCt,*/
-    int     startAt1, endAt1, endAt2; /*endCt,*/
+    int     startCt1, endCt1, startCt2, endCt2; /*endCt,*/
+    int     startAt1, endAt1, startAt2, endAt2; /*endCt,*/
     int     midCt   /* end of atoms only in Ctbl */,
         midNumH = 0 /* end of atoms only NumH */,
-        midAt   /* end of atoms only */; /* djb-rwth: ignoring LLVM warning: variable used */
-    int     diff = 0, i, k1, k2, lenNumH1, lenNumH2, maxVert /* min num atoms */;
-    int     len_iso_sort_key1, len_iso_sort_key2 /*, mid_iso_sort_key*/;
+        midAt   /* end of atoms only */;
+    int     diff, i, k1, k2, lenNumH1, lenNumH2, lenNumH, maxVert /* min num atoms */;
+    int     len_iso_sort_key1, len_iso_sort_key2, len_iso_sort_key /*, mid_iso_sort_key*/;
     int     nLayer = 0;
 
     k1 = Ct1->lenPos - 1;
     k2 = Ct2->lenPos - 1;
 
-    /* djb-rwth: removing redundant code */
+    diff = 0;
 
-    startCt1 = 0; /* djb-rwth: removing redundant code */
-    startAt1 = 0; /* djb-rwth: removing redundant code */
+    startCt1 = startCt2 = 0;
+    startAt1 = startAt2 = 0;
 
     endCt1 = Ct1->nextCtblPos[k1];
     endCt2 = Ct2->nextCtblPos[k2];
@@ -2642,19 +2625,20 @@ int CtFullCompare( ConTable *Ct1,
     {
         endCt1 = inchi_min( endCt1, endCt2 );
         endCt1 = endCt2 = inchi_min( endCt1, Ct1->lenCt );
-        endAt1 = inchi_min( endAt1, endAt2 ); /* djb-rwth: removing redundant code */
+        endAt1 = endAt2 = inchi_min( endAt1, endAt2 );
 
-        if (Ct1->Ctbl[endCt1] == EMPTY_CT || Ct2->Ctbl[endCt1] == EMPTY_CT) /* djb-rwth: redundant conditions removed */
+        if (Ct1->Ctbl[endCt1] == EMPTY_CT || Ct1->Ctbl[endCt1] == 0 ||
+             Ct2->Ctbl[endCt1] == EMPTY_CT || Ct2->Ctbl[endCt1] == 0)
         {
             endCt1 = endCt2 = endCt1 - 1;
         }
-        /* djb-rwth: removing redundant code */
-        lenNumH1 =
-        lenNumH2 = inchi_min( Ct1->lenNumH, Ct2->lenNumH );
+        lenNumH =
+            lenNumH1 =
+            lenNumH2 = inchi_min( Ct1->lenNumH, Ct2->lenNumH );
 
-        /* djb-rwth: removing redundant code */
-        len_iso_sort_key1 =
-        len_iso_sort_key2 = inchi_min( Ct1->len_iso_sort_key, Ct1->len_iso_sort_key );
+        len_iso_sort_key =
+            len_iso_sort_key1 =
+            len_iso_sort_key2 = inchi_min( Ct1->len_iso_sort_key, Ct1->len_iso_sort_key );
     }
     else
     {
@@ -2668,14 +2652,14 @@ int CtFullCompare( ConTable *Ct1,
         }
         lenNumH1 = Ct1->lenNumH;
         lenNumH2 = Ct2->lenNumH;
-        /* djb-rwth: removing redundant code */
+        lenNumH = inchi_min( lenNumH1, lenNumH2 );
 
         len_iso_sort_key1 = Ct1->len_iso_sort_key;
         len_iso_sort_key2 = Ct2->len_iso_sort_key;
-        /* djb-rwth: removing redundant code */
+        len_iso_sort_key = inchi_min( len_iso_sort_key1, len_iso_sort_key2 );
     }
 
-    if ((diff = -( endCt1 - endCt2 ))) /* djb-rwth: addressing LLVM warning */
+    if (diff = -( endCt1 - endCt2 ))
     {
         /* negative sign reproduces results for NSC=28393 */
         goto done;
@@ -2688,12 +2672,12 @@ int CtFullCompare( ConTable *Ct1,
         {
             midCt = endCt1;
         }
-        midAt = inchi_min( maxVert, endAt1 ); /* djb-rwth: ignoring LLVM warning: variable used? */
+        midAt = inchi_min( maxVert, endAt1 );
     }
     else
     {
         midCt = endCt1;
-        midAt = endAt1; /* djb-rwth: ignoring LLVM warning: variable used? */
+        midAt = endAt1;
     }
 
 
@@ -2717,7 +2701,7 @@ int CtFullCompare( ConTable *Ct1,
     nLayer++;
     if (Ct1->NumH && Ct2->NumH)
     {
-        if ((diff = -( lenNumH1 - lenNumH2 ))) /* djb-rwth: addressing LLVM warning */
+        if (diff = -( lenNumH1 - lenNumH2 ))
         {
             /* negative sign reproduces results for NSC=28393 */
             goto done;
@@ -2797,7 +2781,7 @@ int CtFullCompare( ConTable *Ct1,
     nLayer++;
     if (Ct1->iso_sort_key && Ct2->iso_sort_key)
     {
-        if ((diff = -( len_iso_sort_key1 - len_iso_sort_key2 ))) /* djb-rwth: addressing LLVM warning */
+        if (diff = -( len_iso_sort_key1 - len_iso_sort_key2 ))
         {
             /* negative sign reproduces results for NSC=28393 */
             goto done;
@@ -2955,9 +2939,9 @@ void CtPartCopy( ConTable *Ct1 /* to */,
                  ConTable *Ct2 /* from */,
                  int k )
 {
-    int     startCt1, startCt2, endCt2;
-    int     len2, len2H, len2Hfixed = 0, len2iso_sort_key, len2iso_exchg_atnos, i;
-    int     startAt1, startAt2, endAt2; /*endCt,*/
+    int     startCt1, startCt2, endCt1, endCt2;
+    int     len2, len2H, len2Hfixed, len2iso_sort_key, len2iso_exchg_atnos, i;
+    int     startAt1, endAt1, startAt2, endAt2; /*endCt,*/
 
 #if ( USE_ISO_SORT_KEY_HFIXED == 1 )
     int     len2iso_sort_key_Hfixed;
@@ -2978,9 +2962,9 @@ void CtPartCopy( ConTable *Ct1 /* to */,
         startAt1 = startAt2 = 0;
     }
 
-    /* djb-rwth: removing redundant code */
+    endCt1 = Ct1->nextCtblPos[k];
     endCt2 = Ct2->nextCtblPos[k];
-    /* djb-rwth: removing redundant code */
+    endAt1 = (int) Ct1->nextAtRank[k] - 1;
     endAt2 = (int) Ct2->nextAtRank[k] - 1;
 
     len2 = endCt2 - startCt2;
@@ -3015,7 +2999,7 @@ void CtPartCopy( ConTable *Ct1 /* to */,
     }
 
     /* copy number of fixed H */
-    /* djb-rwth: removing redundant code */
+    len2Hfixed = 0;
     if (Ct1->NumHfixed && Ct2->NumHfixed)
     {
         len2Hfixed = endAt2 - startAt2;
@@ -3119,14 +3103,14 @@ void TranspositionGetMcrAndFixSetAndUnorderedPartition( CANON_GLOBALS *pCG,
                                                         int l,
                                                         UnorderedPartition *p )
 {
-    int i, j, k, mcr;
+    int i, j, k, mcr, num;
     AT_RANK next;
     bitWord *McrBits = McrSet->bitword[l - 1];
     bitWord *FixBits = FixSet->bitword[l - 1];
     int     len = McrSet->len_set * sizeof( bitWord );
 
-    memset( McrBits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( FixBits, 0, len ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( McrBits, 0, len );
+    memset( FixBits, 0, len );
     for (i = 0; i < n; i++)
     {
         p->equ2[i] = INCHI_CANON_INFINITY; /* for debug only */
@@ -3147,7 +3131,7 @@ void TranspositionGetMcrAndFixSetAndUnorderedPartition( CANON_GLOBALS *pCG,
         {
             gamma->nAtNumb[i] |= rank_mark_bit;
             mcr = inchi_min( j, i );
-            /* djb-rwth: removing redundant code */
+            num = 0;
             /* mark all nodes in the cycle to ignore later; find mcr */
             while (!( rank_mark_bit & ( next = gamma->nAtNumb[j] ) ))
             {
@@ -3157,7 +3141,7 @@ void TranspositionGetMcrAndFixSetAndUnorderedPartition( CANON_GLOBALS *pCG,
                 {
                     mcr = j;
                 }
-                /* djb-rwth: removing redundant code */
+                num++;
             }
             McrBits[mcr / pCG->m_num_bit] |= pCG->m_bBit[mcr % pCG->m_num_bit]; /* save mcr */
             /* fill out the unordered partition, the mcr first, other in the cycle after that */
@@ -3193,7 +3177,7 @@ void TranspositionGetMcrAndFixSetAndUnorderedPartition( CANON_GLOBALS *pCG,
 /****************************************************************************/
 int SetBitCreate( CANON_GLOBALS *pCG )
 {
-    bitWord b1 = 1, b2;
+    bitWord  b1, b2;
     AT_NUMB n1, n2;
 #ifdef INCHI_CANON_USE_HASH
     CtHash  h1, h2;
@@ -3206,7 +3190,7 @@ int SetBitCreate( CANON_GLOBALS *pCG )
         return 0; /* already created */
     }
 
-    /* djb-rwth: removing redundant code */
+    b1 = 1;
     pCG->m_num_bit = 1;
     for (b1 = 1, pCG->m_num_bit = 1; b1 < ( b2 = (bitWord) ( ( b1 << 1 )& BIT_WORD_MASK ) ); b1 = b2, pCG->m_num_bit++)
     {
@@ -3740,6 +3724,8 @@ int CanonGraph( INCHI_CLOCK *ic,
     int  bZetaEqRho = lab;
     int  bZetaIsomorph;
 
+    long lNumEqlZeta;
+
     /*const int L = MAX_SET_SIZE;*/
     int L_curr_max_set_size = MAX_SET_SIZE;
 
@@ -3848,9 +3834,9 @@ int CanonGraph( INCHI_CLOCK *ic,
     INCHI_HEAPCHK
 
 /*L1:*/
-    k = 1;
+k = 1;
     size = 1.0;
-    hz_rho = index = l = 0; /* djb-rwth: removing redundant code */
+    h_zeta = hz_rho = index = l = 0;
 
     if (!ok)
     {
@@ -3865,12 +3851,12 @@ int CanonGraph( INCHI_CLOCK *ic,
     pCC->lNumRejectedCT = 0;
     pCC->lNumEqualCT = 1;
     pCC->lNumTotCT = 0;
-    /* djb-rwth: removing redundant code */
+    lNumEqlZeta = 1;
 
     hzb_rho_fix = 1;
 
-    memset( kLeast_rho, 0, sizeof( kLeast_rho ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( kLeast_rho_fix, 0, sizeof( kLeast_rho_fix ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( kLeast_rho, 0, sizeof( kLeast_rho ) );
+    memset( kLeast_rho_fix, 0, sizeof( kLeast_rho_fix ) );
 
     if (PartitionIsDiscrete( &pi[k - 1], n_tg ))
     {
@@ -3879,7 +3865,7 @@ int CanonGraph( INCHI_CLOCK *ic,
         CtPartFill( G, pCD, &pi[k - 1], pzb_rho, 1, n, n_tg );
         CtPartINCHI_CANON_INFINITY( pzb_rho, qzb, 2 );
         pCC->lNumTotCT++;
-        /* djb-rwth: removing redundant code */
+        r = k;
         /* goto L18; */
         goto exit_function;
     }
@@ -3899,53 +3885,53 @@ int CanonGraph( INCHI_CLOCK *ic,
     INCHI_HEAPCHK
 
 /* L2: reach the first leaf and save it in zeta and rho */
-    while (k)
+while (k)
+{
+    /* the two next lines intentionally switched */
+    /* Create equitable partition in pi[k]  */
+    PartitionGetFirstCell( &pi[k - 1], W, k, n );
+    v[k - 1] = CellGetMinNode( &pi[k - 1], &W[k - 1], 0, pCD1 );
+    e[k - 1] = 0;
+    if (dig || !PartitionSatisfiesLemma_2_25( &pi[k - 1], n ))
     {
-        /* the two next lines intentionally switched */
-        /* Create equitable partition in pi[k]  */
-        PartitionGetFirstCell( &pi[k - 1], W, k, n );
-        v[k - 1] = CellGetMinNode( &pi[k - 1], &W[k - 1], 0, pCD1 ); /* djb-rwth: ui_rr? */
-        e[k - 1] = 0; /* djb-rwth: ui_rr? */
-        if (dig || !PartitionSatisfiesLemma_2_25( &pi[k - 1], n ))
-        {
-            t_Lemma = k + 1;
-        }
-        /* e[k-1] = 0; */
-        {
-            Node vv = v[k - 1];
-            if (0 > ( ret = PartitionColorVertex( pCG, G, &pi[k - 1], vv /*v[k-1]*/, n, n_tg, n_max, bDigraph, 0 ) ))
-            {
-                goto exit_error;
-            }
-        }
-        pCC->lNumBreakTies++;
-        k++;
-
-        CtPartFill( G, pCD, &pi[k - 1], &Lambda, k - 1, n, n_tg );
-
-        /* return -1; *//* debug only */
-        /* if(h_zeta==0)goto L5; L5: */
-        /* the first terminal node has not been reached yet */
-        /* search for the predefined numbering */
-        if (pzb_rho_fix && QZFIX_OK( qzb_rho_fix ))
-        {
-            qzb_rho_fix = CtPartCompare( &Lambda, pzb_rho_fix, qzb, kLeast_rho_fix, k - 1, 1, bSplitTautCompare );
-            if (QZFIX_OK( qzb_rho_fix ))
-            {
-                hzb_rho_fix = k;
-            }
-        }
-
-        if (lab && QZFIX_OK( qzb_rho_fix ))  /* DCh */
-            CtPartCopy( pzb_rho, &Lambda, k - 1 );
-        CtPartCopy( &zf_zeta, &Lambda, k - 1 );
-        /*goto L4; L4:*/
-        if (PartitionIsDiscrete( &pi[k - 1], n ))
-        {
-            break;  /* goto L7; */
-        }
-        /* goto L2; */
+        t_Lemma = k + 1;
     }
+    /* e[k-1] = 0; */
+    {
+        Node vv = v[k - 1];
+        if (0 > ( ret = PartitionColorVertex( pCG, G, &pi[k - 1], vv /*v[k-1]*/, n, n_tg, n_max, bDigraph, 0 ) ))
+        {
+            goto exit_error;
+        }
+    }
+    pCC->lNumBreakTies++;
+    k++;
+
+    CtPartFill( G, pCD, &pi[k - 1], &Lambda, k - 1, n, n_tg );
+
+    /* return -1; *//* debug only */
+    /* if(h_zeta==0)goto L5; L5: */
+    /* the first terminal node has not been reached yet */
+    /* search for the predefined numbering */
+    if (pzb_rho_fix && QZFIX_OK( qzb_rho_fix ))
+    {
+        qzb_rho_fix = CtPartCompare( &Lambda, pzb_rho_fix, qzb, kLeast_rho_fix, k - 1, 1, bSplitTautCompare );
+        if (QZFIX_OK( qzb_rho_fix ))
+        {
+            hzb_rho_fix = k;
+        }
+    }
+
+    if (lab && QZFIX_OK( qzb_rho_fix ))  /* DCh */
+        CtPartCopy( pzb_rho, &Lambda, k - 1 );
+    CtPartCopy( &zf_zeta, &Lambda, k - 1 );
+    /*goto L4; L4:*/
+    if (PartitionIsDiscrete( &pi[k - 1], n ))
+    {
+        break;  /* goto L7; */
+    }
+    /* goto L2; */
+}
 
     pCC->lNumTotCT++;
 
@@ -4051,7 +4037,7 @@ L2:
             {
                 int L_rho_fix_diff = abs( qzb_rho_fix ) - 1;
                 if (L_rho_fix_diff < L_rho_fix_prev ||
-                     (L_rho_fix_diff == (L_rho_fix_prev && kLeast_rho_fix[L_rho_fix_diff].i < I_rho_fix_prev))) /* djb-rwth: addressing LLVM warning */
+                     L_rho_fix_diff == L_rho_fix_prev && kLeast_rho_fix[L_rho_fix_diff].i < I_rho_fix_prev)
                 {
                     qzb_rho_fix = L_rho_fix_diff + 1; /* positive difference will be rejected */
                 }
@@ -4081,13 +4067,13 @@ L2:
         /* cur_qzb2 = CtPartCompare( &Lambda, pzb_rho, qzb, k-1 ); */ /* rho compare */
         if (hz_rho == k - 1 && !qzb_rho && bRhoIsDiscrete)
         {
-            int qzb_rho_temp = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+            int qzb_rho_temp = 0;
             qzb_rho = CtPartCompare( &Lambda, pzb_rho, qzb, kLeast_rho, k - 1, 0, bSplitTautCompare );
             /* old code */
             if (!qzb_rho && pzb_rho_fix_reached &&
                   nOneAdditionalLayer && 0 > kLeast_rho[nOneAdditionalLayer].k)
             {
-                qzb_rho_temp = -( nOneAdditionalLayer + 1 ); /* djb-rwth: ignoring LLVM warning: variable used */
+                qzb_rho_temp = -( nOneAdditionalLayer + 1 );
                 /* qzb_rho = -(nOneAdditionalLayer+1); *//* early rejection */
             }
             /* new code */
@@ -4099,7 +4085,7 @@ L2:
                 {
                     int L_rho_diff = abs( qzb_rho ) - 1;
                     if (L_rho_diff < L_rho_fix_prev ||
-                         (L_rho_diff == (L_rho_fix_prev && kLeast_rho[L_rho_diff].i < I_rho_fix_prev))) /* djb-rwth: addressing LLVM warning */
+                         L_rho_diff == L_rho_fix_prev && kLeast_rho[L_rho_diff].i < I_rho_fix_prev)
                     {
                         qzb_rho = -( L_rho_diff + 1 ); /* negative difference will be rejected */
                     }
@@ -4125,7 +4111,7 @@ L2:
                 }
             }
         }
-        if (qzb_rho > 0 || (!qzb_rho && !bRhoIsDiscrete)) /* djb-rwth: addressing LLVM warning */
+        if (qzb_rho > 0 || !qzb_rho && !bRhoIsDiscrete)
         {
             /* found better rho */
             if (!nNumLayers)
@@ -4201,11 +4187,11 @@ L7:
     }
     /*  here zeta^gamma == nu */
     /*  if ( G^gamma == G ) goto L10; */
-    if (0 == ( res = CtFullCompare( &Lambda, &zf_zeta, 0, bSplitTautCompare ) )) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    if (0 == ( res = CtFullCompare( &Lambda, &zf_zeta, 0, bSplitTautCompare ) ))
     {
         PartitionGetTransposition( &zeta, &pi[k - 1], n_tg, &gamma );
         bZetaIsomorph = 1; /* for testing only */
-        /* djb-rwth: removing redundant code */
+        lNumEqlZeta++;
         goto L10;
     }
     else
@@ -4224,14 +4210,14 @@ L7:
 
 L8: /* here nu is discrete: check rho for being a bettere leaf or isomorphism */
     /*if ( !lab || qzb_rho < 0 || !QZFIX_OK(qzb_rho_fix) )*/
-    if (!lab || (qzb_rho < 0 && ( !pzb_rho_fix || qzb_rho_fix > 0 ))) /* djb-rwth: addressing LLVM warning */
+    if (!lab || qzb_rho < 0 && ( !pzb_rho_fix || qzb_rho_fix > 0 ))
     {
         goto L6;
     }
-    if (pzb_rho_fix && kLeast_rho_fix && 0 == qzb_rho_fix) /* djb-rwth: addressing of array kLeast_rho_fix will always evaluate to true? */
+    if (pzb_rho_fix && kLeast_rho_fix && 0 == qzb_rho_fix)
     {
         /* check for the rejection condition: Lambda > zb_rho_fix */
-        if (kLeast_rho_fix) /* djb-rwth: addressing of array kLeast_rho_fix will always evaluate to true? */
+        if (kLeast_rho_fix)
         {
             int qzb_rho_fix_alt;
             qzb_rho_fix = CtFullCompareLayers( kLeast_rho_fix );
@@ -4280,7 +4266,7 @@ L8: /* here nu is discrete: check rho for being a bettere leaf or isomorphism */
     /* !!! we should never come here if G(nu) != G(rho): CtPartCompare must be enough !!! */
 
     /* if ( G(nu) > G(rho) ) goto L9; */
-    if (kLeast_rho) /* djb-rwth: addressing of array kLeast_rho will always evaluate to true? */
+    if (kLeast_rho)
     {
         int cur_qzb_alt;
         qzb_rho = CtFullCompareLayers( kLeast_rho );
@@ -4303,7 +4289,7 @@ L8: /* here nu is discrete: check rho for being a bettere leaf or isomorphism */
     if (0 < qzb_rho)
     {
         /* CtFullCompare( &Lambda, pzb_rho, 0, bSplitTautCompare ); */
-        /* djb-rwth: removing redundant code */
+        qzb_rho = 0;
         goto L9;
     }
     /* if ( G(nu) < G(rho) ) goto L6; */
@@ -4335,7 +4321,7 @@ L9:
     CtCompareLayersGetFirstDiff( kLeast_rho_fix, nOneAdditionalLayer,
                                  &L_rho_fix_prev, &I_rho_fix_prev,
                                  &k_rho_fix_prev );
-    memset( kLeast_rho, 0, sizeof( kLeast_rho ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( kLeast_rho, 0, sizeof( kLeast_rho ) );
     h_rho = hz_rho = k;
     CtPartINCHI_CANON_INFINITY( pzb_rho, qzb, k );
     pCC->lNumDecreasedCT++;
@@ -4392,8 +4378,8 @@ L12:
 
 L13:
 
-    if ((UserAction && USER_ACTION_QUIT == ( *UserAction )( )) ||
-         (ConsoleQuit && ( *ConsoleQuit )( ))) /* djb-rwth: addressing LLVM warning */
+    if (UserAction && USER_ACTION_QUIT == ( *UserAction )( ) ||
+         ConsoleQuit && ( *ConsoleQuit )( ))
     {
         ret = CT_USER_QUIT_ERR;
         goto exit_error;
@@ -4440,7 +4426,7 @@ L14:
     {
         index++;
     }
-    v[k - 1] = CellGetMinNode( &pi[k - 1], &W[k - 1], v[k - 1], pCD1 ); /* djb-rwth: ui_rr? */
+    v[k - 1] = CellGetMinNode( &pi[k - 1], &W[k - 1], v[k - 1], pCD1 );
 
     if (v[k - 1] == INCHI_CANON_INFINITY)
     {
@@ -4556,7 +4542,7 @@ exit_function:
     }
 
     /* SymmRank */
-    memset( nSymmRank, 0, n_tg * sizeof( nSymmRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( nSymmRank, 0, n_tg * sizeof( nSymmRank[0] ) );
     for (i = 0; i < n_tg; i++)
     {
         k = rho.AtNumber[i];
@@ -4573,16 +4559,13 @@ exit_function:
         nSymmRank[k] = nSymmRank[k2];
     }
     /* CanonRank, nAtomNumberCanon */
-    memcpy(nCanonRank, rho.Rank, n_tg * sizeof(nCanonRank[0]));
-    memcpy(nAtomNumberCanon, rho.AtNumber, n_tg * sizeof(nAtomNumberCanon[0]));
+    memcpy( nCanonRank, rho.Rank, n_tg * sizeof( nCanonRank[0] ) );
+    memcpy( nAtomNumberCanon, rho.AtNumber, n_tg * sizeof( nAtomNumberCanon[0] ) );
     /* LinearCT */
-    if (pzb_rho)
+    *nLenCt = pzb_rho->lenCt - 1;
+    if (pCt)
     {
-        *nLenCt = pzb_rho->lenCt - 1;
-    }
-    if (pCt && pzb_rho)
-    {
-        memcpy(pCt, pzb_rho->Ctbl, *nLenCt * sizeof(pCt[0]));
+        memcpy( pCt, pzb_rho->Ctbl, *nLenCt * sizeof( pCt[0] ) );
     }
     pCC->lNumTotCT = pCC->lNumDecreasedCT + pCC->lNumRejectedCT + pCC->lNumEqualCT;
     pCC->dGroupSize = size;
@@ -4601,7 +4584,7 @@ exit_function:
 exit_error:
     INCHI_HEAPCHK
 
-    UnorderedPartitionFree( &theta );
+        UnorderedPartitionFree( &theta );
     UnorderedPartitionFree( &theta_from_gamma );
     if (W)
     {
@@ -4672,22 +4655,15 @@ int SetInitialRanks2( int num_atoms,
     /* nNewRank[i]: non-decreading order; do not increment nCurrentRank */
     /*           if consecutive sorted atom invariants are identical */
 
-    /* djb-rwth: fixing oss-fuzz issue #69315 */
-    nNumDiffRanks = 1;
-    if ((num_atoms > 0) && (num_atoms <= na_global))
+    for (i = num_atoms - 1, nCurrentRank = nNewRank[nAtomNumber[i]] = (AT_RANK) num_atoms, nNumDiffRanks = 1; 0 < i; i--)
     {
-        nCurrentRank = (AT_RANK)num_atoms;
-        nNewRank[nAtomNumber[num_atoms - 1]] = nCurrentRank;
-        for (i = num_atoms - 1; i > 0; i--)
+        /* Note: CompAtomInvariants2Only() in following line implicitly reads pAtomInvariant2 pointed by pAtomInvariant2ForSort */
+        if (CompAtomInvariants2Only( &nAtomNumber[i - 1], &nAtomNumber[i], pCG ))
         {
-            /* Note: CompAtomInvariants2Only() in following line implicitly reads pAtomInvariant2 pointed by pAtomInvariant2ForSort */
-            if (CompAtomInvariants2Only(&nAtomNumber[i - 1], &nAtomNumber[i], pCG))
-            {
-                nNumDiffRanks++;
-                nCurrentRank = (AT_RANK)i;
-            }
-            nNewRank[nAtomNumber[i - 1]] = nCurrentRank;
+            nNumDiffRanks++;
+            nCurrentRank = (AT_RANK) i;
         }
+        nNewRank[nAtomNumber[i - 1]] = nCurrentRank;
     }
 
     return nNumDiffRanks;
@@ -4717,10 +4693,8 @@ void FillOutAtomInvariant2( sp_ATOM* at,
     int  nNumChemElements = 0;
     int  nNumHydrogenAtoms = 0;
     int  nNumCarbonAtoms = 0;
-    
-    ChemElements[0] = '\0'; /* djb-rwth: initialisation prevents empty string comparison */
-    memset( ChemElements, 0, sizeof( ChemElements ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( CurElement, 0, sizeof( CurElement ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( ChemElements, 0, sizeof( ChemElements ) );
+    memset( CurElement, 0, sizeof( CurElement ) );
     nNumChemElements = 0;
 
     if (num_at_tg > num_atoms && t_group_info)
@@ -4749,9 +4723,9 @@ void FillOutAtomInvariant2( sp_ATOM* at,
             {
                 CurElement[0] = at[i].elname[0];
                 CurElement[1] = at[i].elname[1] ? at[i].elname[1] : ' ';
-                if (!( pCurElem = strstr( ChemElements, CurElement ) )) /* djb-rwth: ignoring LLVM warning: variable used for function return value */
+                if (!( pCurElem = strstr( ChemElements, CurElement ) ))
                 {
-                    strcat(ChemElements, CurElement);
+                    strcat( ChemElements, CurElement );
                     nNumChemElements++;
                 }
             }
@@ -4764,7 +4738,7 @@ void FillOutAtomInvariant2( sp_ATOM* at,
         {
             if (nNumChemElements)
             {
-                memmove(ChemElements + ELEM_NAME_LEN, ChemElements, (long long)ELEM_NAME_LEN * (long long)nNumChemElements); /* djb-rwth: cast operators added */
+                memmove( ChemElements + ELEM_NAME_LEN, ChemElements, ELEM_NAME_LEN*nNumChemElements );
             }
             ChemElements[0] = 'C';
             ChemElements[1] = ' ';
@@ -4780,7 +4754,7 @@ void FillOutAtomInvariant2( sp_ATOM* at,
         /* general */
         for (i = 0; i < num_atoms; i++)
         {
-            memset( &pAtomInvariant[i], 0, sizeof( pAtomInvariant[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( &pAtomInvariant[i], 0, sizeof( pAtomInvariant[0] ) );
             CurElement[0] = at[i].elname[0];
             CurElement[1] = at[i].elname[1] ? at[i].elname[1] : ' ';
             pCurElem = strstr( ChemElements, CurElement );
@@ -4822,7 +4796,7 @@ void FillOutAtomInvariant2( sp_ATOM* at,
     else
     {
         /* fill tautomeric groups only */
-        memset( pAtomInvariant, 0, num_at_tg * sizeof( pAtomInvariant[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pAtomInvariant, 0, num_at_tg * sizeof( pAtomInvariant[0] ) );
     }
 
     /**************************************/
@@ -4832,7 +4806,7 @@ void FillOutAtomInvariant2( sp_ATOM* at,
     {
 
         k = i - num_atoms;
-        memset( &pAtomInvariant[i], 0, sizeof( pAtomInvariant[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( &pAtomInvariant[i], 0, sizeof( pAtomInvariant[0] ) );
         if (!t_group)
             continue;
         /* make sure ranks of t-groups are larger than that of any atom */
@@ -5139,7 +5113,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     AT_RANK *nCanonRankBase = NULL;
     AT_NUMB *nAtomNumberCanonBase = NULL;
     NUM_H   *numH = NULL;
-    int      lenNumH = num_atoms;
+    int      lenNumH;
     int      maxlenNumH = 0;
 
 #if ( USE_AUX_RANKING == 1 )
@@ -5162,9 +5136,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     AT_RANK *nCanonRankNoTautHIso = NULL;
     AT_NUMB *nAtomNumberCanonNoTautHIso = NULL;
     AT_ISO_SORT_KEY *iso_sort_key_NoTautH = NULL;
-    int              maxlen_iso_sort_key_NoTautH = 0;
-    int              len_iso_sort_key_NoTautH = 0;
-    int num_iso_NoTautH = 0, num_iso_NoAuxBase;
+    int              maxlen_iso_sort_key_NoTautH;
+    int              len_iso_sort_key_NoTautH;
+    int num_iso_NoTautH, num_iso_NoAuxBase;
 
     ConTable *Ct_BaseIso = NULL;
     AT_RANK *nSymmRankBaseIso = NULL;
@@ -5172,14 +5146,14 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     AT_NUMB *nAtomNumberCanonBaseIso = NULL;
 
     AT_ISO_SORT_KEY *iso_sort_keyBase = NULL;
-    int              maxlen_iso_sort_keyBase = 0;
-    int              len_iso_sort_keyBase = 0;
+    int              maxlen_iso_sort_keyBase;
+    int              len_iso_sort_keyBase;
 
     int              bUseIsoAuxBase[TAUT_NUM];
     S_CHAR          *iso_exchg_atnos = NULL;
-    int              len_iso_exchg_atnos = 0;
-    int              maxlen_iso_exchg_atnos = 0;
-    int num_iso_Base = 0;
+    int              len_iso_exchg_atnos;
+    int              maxlen_iso_exchg_atnos;
+    int num_iso_Base;
 
     AT_ISO_SORT_KEY  iso_sort_key;
 
@@ -5208,23 +5182,23 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     /* */
     int iflag;
 
-    memset( pCD, 0, sizeof( pCD ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( pCC, 0, sizeof( pCC[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( bUseIsoAuxBase, 0, sizeof( bUseIsoAuxBase ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( nCanonFlags, 0, sizeof( nCanonFlags ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( pCD, 0, sizeof( pCD ) );
+    memset( pCC, 0, sizeof( pCC[0] ) );
+    memset( bUseIsoAuxBase, 0, sizeof( bUseIsoAuxBase ) );
+    memset( nCanonFlags, 0, sizeof( nCanonFlags ) );
     NeighList[TAUT_NON] = NULL;
     NeighList[TAUT_YES] = NULL;
 
     /* select base structure, find whether it is tautomeric or not */
-    /* djb-rwth: addressing LLVM warning */
+
     if (at[TAUT_YES] && s[TAUT_YES].nLenCT &&
          t_group_info && ( s[TAUT_YES].nLenLinearCTTautomer > 0 && /* ordinary tautomerism */
-             ((t_group_info->t_group && t_group_info->num_t_groups > 0) ||
+             t_group_info->t_group && t_group_info->num_t_groups > 0 ||
              /* protons have been moved */
              ( t_group_info->tni.bNormalizationFlags & FLAG_NORM_CONSIDER_TAUT ) ||
              /* tautomerism due to possible isotopic proton exchange */
-             (t_group_info->nNumIsotopicEndpoints > 1 &&
-             ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ))) ))
+             t_group_info->nNumIsotopicEndpoints > 1 &&
+             ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ) ))
     {
         /* tautomeric: (1) has tautomeric atoms OR
                        (2) H-atoms have been rearranged due to proton addition/removal OR
@@ -5280,8 +5254,19 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         bTautIgnoreIsotopic = t_group_info->bIgnoreIsotopic;
         t_group_info->bIgnoreIsotopic = 1;
     }
+    lenNumH = num_atoms;
 
-    /* djb-rwth: removing redundant code */
+    /* isotopic canonicalization */
+    num_iso_NoTautH = 0;
+    len_iso_sort_key_NoTautH = 0;
+    maxlen_iso_sort_key_NoTautH = 0;
+    num_iso_Base = 0;
+    len_iso_sort_keyBase = 0;
+    maxlen_iso_sort_keyBase = 0;
+    len_iso_exchg_atnos = 0;
+    maxlen_iso_exchg_atnos = 0;
+    len_iso_exchg_atnos = 0;
+    maxlen_iso_exchg_atnos = 0;
 
 #if ( USE_ISO_SORT_KEY_HFIXED == 1 )
     num_iso_Hfixed =
@@ -5299,7 +5284,6 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     nRank = (AT_RANK *) inchi_calloc( num_max, sizeof( nRank[0] ) );
     nAtomNumber = (AT_NUMB *) inchi_calloc( num_max, sizeof( nAtomNumber[0] ) );
     nTempRank = (AT_RANK *) inchi_calloc( num_max, sizeof( nTempRank[0] ) );
-    na_global = num_max; /* djb-rwth: required for fixing oss-fuzz issue #69315 */
 
     if (!pAtomInvariant ||
          !nSymmRankNoH || !nCanonRankNoH || !nAtomNumberCanonNoH ||
@@ -5440,7 +5424,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     }
 
     /* update initial partitioning */
-    nNumCurrRanks = FixCanonEquivalenceInfo( pCG, num_atoms, nSymmRankNoH, nRank, nTempRank, nAtomNumber, &bChanged ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    nNumCurrRanks = FixCanonEquivalenceInfo( pCG, num_atoms, nSymmRankNoH, nRank, nTempRank, nAtomNumber, &bChanged );
 
     /* repartition if necessary */
     if (bChanged & 3)
@@ -5517,7 +5501,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
     pCD[iOther].nAuxRank = NULL;
 
     /* check whether we need NoTautH cononicalization */
-    memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) );
     for (i = 0; i < num_atoms; i++)
     {
         if (nTempRank[nSymmRankNoH[i] - 1] < i)
@@ -5542,7 +5526,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
 #if ( USE_AUX_RANKING == 1 )
         /* refine no-H partition according to not-a-taut-H distribution */
-        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
         for (i = 0; i < num_atoms; i++)
         {
             pAtomInvariantAux[i].val[0] = nSymmRankNoH[i];
@@ -5555,7 +5539,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         /* make equitable partition */
         nNumCurrRanks = DifferentiateRanks2( pCG, num_atoms, NeighList[TAUT_NON],
                                             nNumCurrRanks, nRankAux,
-                                            nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                            nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ );
 
         /* to accelerate do not call CanonGraph() to find really equivalent atoms */
         pCD[iOther].nAuxRank = nRankAux;
@@ -5606,10 +5590,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
         Ct_NoTautH = Ct_Temp;
         Ct_Temp = NULL;
-        /* djb-rwth: functions replaced with their safe C11 variants */
-        memcpy(nSymmRankNoTautH, nSymmRankNoH, num_atoms * sizeof(nSymmRankNoTautH[0]));
-        memcpy(nCanonRankNoTautH, nCanonRankNoH, num_atoms * sizeof(nCanonRankNoTautH[0]));
-        memcpy(nAtomNumberCanonNoTautH, nAtomNumberCanonNoH, num_atoms * sizeof(nAtomNumberCanonNoTautH[0]));
+        memcpy( nSymmRankNoTautH, nSymmRankNoH, num_atoms * sizeof( nSymmRankNoTautH[0] ) );
+        memcpy( nCanonRankNoTautH, nCanonRankNoH, num_atoms * sizeof( nCanonRankNoTautH[0] ) );
+        memcpy( nAtomNumberCanonNoTautH, nAtomNumberCanonNoH, num_atoms * sizeof( nAtomNumberCanonNoTautH[0] ) );
     }
 
     /* in case of non-tautomeric component this is the final result */
@@ -5693,7 +5676,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         if (num_iso_NoTautH)
         {
             /* check whether we need NoTautH cononicalization */
-            memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) );
             for (i = 0; i < num_atoms; i++)
             {
                 if (nTempRank[nSymmRankNoTautH[i] - 1] < i)
@@ -5722,7 +5705,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
 #if ( USE_AUX_RANKING == 1 )
             /* refine no-taut-H partition according to non-taut H isotopic distribution */
-            memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
             for (i = 0; i < num_atoms; i++)
             {
                 pAtomInvariantAux[i].val[0] = nSymmRankNoTautH[i];
@@ -5733,7 +5716,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
             /* make equitable */
             nNumCurrRanks = DifferentiateRanks2( pCG, num_atoms, NeighList[TAUT_NON],
                                                 nNumCurrRanks, nRankAux,
-                                                nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                                nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ );
             /* to accelerate do not call CanonGraph() to find really equivalent atoms */
             pCD[iOther].nAuxRank = nRankAux;
 #endif
@@ -5778,9 +5761,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
             }
             Ct_NoTautHIso = Ct_Temp;
             Ct_Temp = NULL;
-            memcpy(nSymmRankNoTautHIso, nSymmRankNoTautH, num_atoms * sizeof(nSymmRankNoTautHIso[0]));
-            memcpy(nCanonRankNoTautHIso, nCanonRankNoTautH, num_atoms * sizeof(nCanonRankNoTautHIso[0]));
-            memcpy(nAtomNumberCanonNoTautHIso, nAtomNumberCanonNoTautH, num_atoms * sizeof(nAtomNumberCanonNoTautHIso[0]));
+            memcpy( nSymmRankNoTautHIso, nSymmRankNoTautH, num_atoms * sizeof( nSymmRankNoTautHIso[0] ) );
+            memcpy( nCanonRankNoTautHIso, nCanonRankNoTautH, num_atoms * sizeof( nCanonRankNoTautHIso[0] ) );
+            memcpy( nAtomNumberCanonNoTautHIso, nAtomNumberCanonNoTautH, num_atoms * sizeof( nAtomNumberCanonNoTautHIso[0] ) );
         }
         /* in case of non-tautomeric component this is the final result */
         /* i = CtFullCompare( Ct_NoTautHIso, Ct_Temp, num_atoms, 0, 0 );*/
@@ -5879,33 +5862,26 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
            This should only split ranks of tautomeric groups */
         nNumCurrRanks = DifferentiateRanks4( pCG, num_at_tg, NeighList[TAUT_YES],
                                          nNumCurrRanks, pBCN->pRankStack[0], nTempRank /* temp array */,
-                                         pBCN->pRankStack[1], (AT_RANK) num_atoms, &lCount ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                         pBCN->pRankStack[1], (AT_RANK) num_atoms, &lCount );
 
 #if ( USE_AUX_RANKING == 1 )
         /* refine no-H partition according to non-taut H distribution */
-        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
         for (i = 0; i < num_atoms; i++)
         {
             pAtomInvariantAux[i].val[0] = nSymmRankNoTautH[i];
             pAtomInvariantAux[i].val[1] = numH[i]; /* additional differentiation */
         }
-        /*
-        * djb-rwth: original badly written loop
         for (j = i; i < num_at_tg; i++)
         {
             pAtomInvariantAux[i].val[0] = nRank[i];
-        }
-        */
-        for (j = i; j < num_at_tg; j++) /* djb-rwth: corrected loop */
-        {
-            pAtomInvariantAux[j].val[0] = nRank[j];
         }
         /* initial ranks for t-group(s) */
         nNumCurrRanks = SetInitialRanks2( num_at_tg, pAtomInvariantAux, nRankAux, nAtomNumberAux, pCG );
         /* make equitable, call digraph procedure */
         nNumCurrRanks = DifferentiateRanks4( pCG, num_at_tg, NeighList[TAUT_YES],
                                          nNumCurrRanks, nRankAux, nTempRank /* temp array */,
-                                         nAtomNumberAux, (AT_RANK) num_atoms, &lCount ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                         nAtomNumberAux, (AT_RANK) num_atoms, &lCount );
         /* to accelerate do not call CanonGraph() to find really equivalent atoms */
         pCD[iBase].nAuxRank = nRankAux;
 #endif
@@ -5924,9 +5900,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         /* Isotopic atoms and isotopic H atoms and isotopic tautomeric groups                 */
         /* get isotopic canonical numbering, connection table, and equivalence partition      */
         /**************************************************************************************/
-        if ((s[iBase].num_isotopic_atoms && !s[iBase].bIgnoreIsotopic) ||
-             (s[iBase].bHasIsotopicTautGroups && !bTautIgnoreIsotopic) ||
-             (bUseIsoAuxBase[iBase] && !bTautIgnoreIsotopic)) /* djb-rwth: addressing LLVM warning */
+        if (s[iBase].num_isotopic_atoms && !s[iBase].bIgnoreIsotopic ||
+             s[iBase].bHasIsotopicTautGroups && !bTautIgnoreIsotopic ||
+             bUseIsoAuxBase[iBase] && !bTautIgnoreIsotopic)
         {
 
             t_group_info->bIgnoreIsotopic = bTautIgnoreIsotopic;
@@ -5943,7 +5919,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
             iso_sort_keyBase = (AT_ISO_SORT_KEY *) inchi_calloc( maxlen_iso_sort_keyBase, sizeof( iso_sort_keyBase[0] ) );
             if (!nSymmRankBaseIso || !nCanonRankBaseIso || !nAtomNumberCanonBaseIso ||
                  !iso_sort_keyBase ||
-                 (maxlen_iso_exchg_atnos && !iso_exchg_atnos)) /* djb-rwth: addressing LLVM warning */
+                 maxlen_iso_exchg_atnos && !iso_exchg_atnos)
             {
                 goto exit_error_alloc;
             }
@@ -5956,7 +5932,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
             }
             for (i = 0; i < num_atoms; i++)
             {
-                if (at_base[i].endpoint || (iso_exchg_atnos && ( at_base[i].cFlags & AT_FLAG_ISO_H_POINT ))) /* djb-rwth: addressing LLVM warning */
+                if (at_base[i].endpoint || iso_exchg_atnos && ( at_base[i].cFlags & AT_FLAG_ISO_H_POINT ))
                 {
                     /* tautomeric or may have exchangeable isotopic H */
                     iso_sort_key = make_iso_sort_key( at_base[i].iso_atw_diff, 0, 0, 0 );
@@ -6019,7 +5995,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                 {
                     /* should not happen anymore */
                     m = i - num_atoms;
-                    if ((iso_sort_key = t_group_info->t_group[m].iWeight)) /* djb-rwth: addressing LLVM warning */
+                    if (iso_sort_key = t_group_info->t_group[m].iWeight)
                     {
                         /* old approach: each t-group has its own isotopic "weight" */
                         num_iso_Base++;
@@ -6098,7 +6074,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                 if (num_iso_NoTautH || num_iso_Base || num_iso_NoAuxBase)
                 {
                     /* check whether we need actual canonicalization */
-                    memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                    memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) );
                     for (i = 0; i < num_at_tg; i++)
                     {
                         if (nTempRank[nSymmRankBase[i] - 1] < i)
@@ -6130,7 +6106,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
 #if ( USE_AUX_RANKING == 1 )
                 /* refine no-taut-H partition according to non-taut H + t-groups isotopic distribution */
-                    memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                    memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
                     for (i = 0; i < num_at_tg; i++)
                     {
                         pAtomInvariantAux[i].val[0] = nSymmRankBase[i];
@@ -6142,7 +6118,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                     /* make equitable, not a digraph procedure */
                     nNumCurrRanks = DifferentiateRanks2( pCG, num_at_tg, NeighList[TAUT_YES],
                                                         nNumCurrRanks, nRankAux,
-                                                        nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means first use qsort */ ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                                        nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means first use qsort */ );
                     /* to accelerate do not call CanonGraph() to find really equivalent atoms */
                     pCD[iBase].nAuxRank = nRankAux;
 #endif
@@ -6207,9 +6183,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                     }
                     Ct_BaseIso = Ct_Temp;
                     Ct_Temp = NULL;
-                    memcpy(nSymmRankBaseIso, nSymmRankBase, num_at_tg * sizeof(nSymmRankBaseIso[0]));
-                    memcpy(nCanonRankBaseIso, nCanonRankBase, num_at_tg * sizeof(nCanonRankBaseIso[0]));
-                    memcpy(nAtomNumberCanonBaseIso, nAtomNumberCanonBase, num_at_tg * sizeof(nAtomNumberCanonBaseIso[0]));
+                    memcpy( nSymmRankBaseIso, nSymmRankBase, num_at_tg * sizeof( nSymmRankBaseIso[0] ) );
+                    memcpy( nCanonRankBaseIso, nCanonRankBase, num_at_tg * sizeof( nCanonRankBaseIso[0] ) );
+                    memcpy( nAtomNumberCanonBaseIso, nAtomNumberCanonBase, num_at_tg * sizeof( nAtomNumberCanonBaseIso[0] ) );
                 }
                 /* in case of non-tautomeric component this is the final result */
                 /* i = CtFullCompare( Ct_BaseIso, Ct_Temp, num_at_tg, 0, 0 );*/
@@ -6270,7 +6246,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         /* return values & input/output */
         pCD[iOther].nLenLinearCT = s[iOther].nLenCTAtOnly;
         pCD[iOther].nLenCTAtOnly = s[iOther].nLenCTAtOnly;
-        pCD[iOther].lenNumH = num_atoms; /* djb-rwth: removing redundant code */
+        pCD[iOther].lenNumH = lenNumHNoTautH = num_atoms;
         pCD[iOther].lenNumHfixed = num_atoms;
         pCD[iOther].len_iso_sort_key = 0;
         pCD[iOther].maxlen_iso_sort_key = 0;
@@ -6303,7 +6279,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         }
 
         /* refine no-H partition according to non-taut H distribution */
-        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
         for (i = 0; i < num_atoms; i++)
         {
             pAtomInvariantAux[i].val[0] = nSymmRankBase[i];
@@ -6316,7 +6292,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         /* make equitable, digraph procedure */
         nNumCurrRanks = DifferentiateRanks2( pCG, num_atoms, NeighList[TAUT_NON],
                                             nNumCurrRanks, nRankAux,
-                                            nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                            nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ );
         /* to accelerate do not call CanonGraph() to find really equivalent atoms */
         pCD[iOther].nAuxRank = nRankAux;
 #endif
@@ -6333,12 +6309,12 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
         /*******************************************************************************************/
         /* get "fixed H" isotopic canonical numbering, connection table, and equivalence partition */
         /*******************************************************************************************/
-        iflag = (s[iBase].num_isotopic_atoms && !s[iBase].bIgnoreIsotopic) ||
-            (s[iBase].bHasIsotopicTautGroups && !bTautIgnoreIsotopic); /* djb-rwth: addressing LLVM warning */
+        iflag = s[iBase].num_isotopic_atoms && !s[iBase].bIgnoreIsotopic ||
+            s[iBase].bHasIsotopicTautGroups && !bTautIgnoreIsotopic;
         if (bFixIsoFixedH) /* #if ( FIX_ISO_FIXEDH_BUG == 1 )  */
              /* fix bug when iso H was removed as a proton and fixed-H isotopic layer is missing -  2008-09-24 DT*/
         {
-            iflag = iflag || (s[iOther].num_isotopic_atoms && !s[iOther].bIgnoreIsotopic); /* djb-rwth: addressing LLVM warning */
+            iflag = iflag || s[iOther].num_isotopic_atoms && !s[iOther].bIgnoreIsotopic;
         }
         if (iflag)
         {
@@ -6451,7 +6427,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
             /* return values & input/output */
             pCD[iOther].nLenLinearCT = s[iOther].nLenCTAtOnly;
             pCD[iOther].nLenCTAtOnly = s[iOther].nLenCTAtOnly;
-            pCD[iOther].lenNumH = num_atoms; /* djb-rwth: removing redundant code */
+            pCD[iOther].lenNumH = lenNumHNoTautH = num_atoms;
             pCD[iOther].lenNumHfixed = num_atoms;
             pCD[iOther].len_iso_sort_key = len_iso_sort_key_NoTautH = num_atoms;
             pCD[iOther].maxlen_iso_sort_key = maxlen_iso_sort_key_NoTautH;
@@ -6473,7 +6449,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
             {
                 /* check whether we need NoTautH cononicalization */
-                memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                memset( nTempRank, 0, num_max * sizeof( nTempRank[0] ) );
                 for (i = 0; i < num_atoms; i++)
                 {
                     if (nTempRank[nSymmRankFixH[i] - 1] < i)
@@ -6506,7 +6482,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
 
 #if ( USE_AUX_RANKING == 1 )
                 /* refine fixed-taut-H partition according to the isotopic distribution */
-                memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                memset( pAtomInvariantAux, 0, num_max * sizeof( pAtomInvariantAux[0] ) );
                 for (i = 0; i < num_atoms; i++)
                 {
                     pAtomInvariantAux[i].val[0] = nSymmRankFixH[i];
@@ -6531,7 +6507,7 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                 /* make equitable, digraph procedure */
                 nNumCurrRanks = DifferentiateRanks2( pCG, num_atoms, NeighList[TAUT_NON],
                                                     nNumCurrRanks, nRankAux,
-                                                    nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                                    nTempRank, nAtomNumberAux, &lCount, 0 /* 0 means use qsort */ );
 
                 /* to accelerate do not call CanonGraph() to find really equivalent atoms */
                 pCD[iOther].nAuxRank = nRankAux;
@@ -6587,9 +6563,9 @@ int GetBaseCanonRanking( INCHI_CLOCK *ic,
                 }
                 Ct_FixHIso = Ct_Temp;
                 Ct_Temp = NULL;
-                memcpy(nSymmRankFixHIso, nSymmRankFixH, num_atoms * sizeof(nSymmRankFixHIso[0]));
-                memcpy(nCanonRankFixHIso, nCanonRankFixH, num_atoms * sizeof(nCanonRankFixHIso[0]));
-                memcpy(nAtomNumberCanonFixHIso, nAtomNumberCanonFixH, num_atoms * sizeof(nAtomNumberCanonFixHIso[0]));
+                memcpy( nSymmRankFixHIso, nSymmRankFixH, num_atoms * sizeof( nSymmRankFixHIso[0] ) );
+                memcpy( nCanonRankFixHIso, nCanonRankFixH, num_atoms * sizeof( nCanonRankFixHIso[0] ) );
+                memcpy( nAtomNumberCanonFixHIso, nAtomNumberCanonFixH, num_atoms * sizeof( nAtomNumberCanonFixHIso[0] ) );
             }
             /* in case of non-tautomeric component this is the final result */
             /* i = CtFullCompare( Ct_NoTautHIso, Ct_Temp, num_atoms, 0, 0 );*/

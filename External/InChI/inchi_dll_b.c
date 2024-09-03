@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,24 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 
 #include <stdio.h>
@@ -65,7 +58,6 @@
 #include "ichitime.h"
 #include "ichicant.h"
 #include "readinch.h"
-#include "bcf_s.h"
 
 #include "inchi_dll.h"
 #include "inchi_dll_b.h"
@@ -128,7 +120,7 @@ int INCHI_DECL MakeINCHIFromMolfileText( const char *moltext,
                                          char *szOptions,
                                          inchi_Output *result )
 {
-    int retcode = 0, retcode2 = 0, rsz;
+    int retcode = 0, retcode2 = 0;
     long num_inp = 0, num_err = 0;
     char szTitle[MAX_SDF_HEADER + MAX_SDF_VALUE + 256];
 
@@ -153,8 +145,8 @@ int INCHI_DECL MakeINCHIFromMolfileText( const char *moltext,
 
     CANON_GLOBALS CG;
     INCHI_CLOCK ic;
-    memset( &CG, 0, sizeof( CG ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( &ic, 0, sizeof( ic ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( &CG, 0, sizeof( CG ) );
+    memset( &ic, 0, sizeof( ic ) );
 
     retcode = PrepareToMakeINCHI( sd, ip, orig_inp_data, prep_inp_data,
                                    pINChI, pINChI_Aux,
@@ -238,17 +230,13 @@ int INCHI_DECL MakeINCHIFromMolfileText( const char *moltext,
                 /* As OutErrInchi was requested, we must fill an
                    InChI string anyway, here is the last chance  */
                 result->szInChI = (char *) inchi_malloc( 12 * sizeof( char ) );
-                rsz = 12;
-                if (result->szInChI) /* djb-rwth: fixing a NULL pointer dereference */
+                if (ip->bINChIOutputOptions & INCHI_OUT_STDINCHI)
                 {
-                    if (ip->bINChIOutputOptions & INCHI_OUT_STDINCHI)
-                    {
-                        strcpy(result->szInChI, "InChI=1S//");
-                    }
-                    else
-                    {
-                        strcpy(result->szInChI, "InChI=1//");
-                    }
+                    strcpy( result->szInChI, "InChI=1S//" );
+                }
+                else
+                {
+                    strcpy( result->szInChI, "InChI=1//" );
                 }
             }
         }
@@ -335,15 +323,15 @@ int PrepareToMakeINCHI( STRUCT_DATA *sd,
     inp_file->s.nUsedLength = strlen( moltext ) + 1;
     inp_file->f = NULL;
 
-    memset( szSdfDataValue, 0, sizeof( szSdfDataValue ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( szSdfDataValue, 0, sizeof( szSdfDataValue ) );
 
 
     /* data structs */
-    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( ip, 0, sizeof( *ip ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd, 0, sizeof( *sd ) );
+    memset( ip, 0, sizeof( *ip ) );
 
-    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( orig_inp_data, 0, sizeof( *orig_inp_data ) );
+    memset( prep_inp_data, 0, 2 * sizeof( *prep_inp_data ) );
 
     pINChI[0] = pINChI[1] = NULL;
     pINChI_Aux[0] = pINChI_Aux[1] = NULL;
@@ -440,7 +428,7 @@ void FreeInchi_Input( inchi_Input *inp_at_data )
 {
     FreeInchi_Atom( &inp_at_data->atom );
     FreeInchi_Stereo0D( &inp_at_data->stereo0D );
-    memset( inp_at_data, 0, sizeof( *inp_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inp_at_data, 0, sizeof( *inp_at_data ) );
 }
 
 
@@ -577,8 +565,9 @@ int is_element_a_metal( char szEl[] )
 
 /*****************************************************************************/
 
-/* djb-rwth: placed as global variables to avoid function buffer issues */
-char szLine_i2ia[INCHI_LINE_LEN], szNextLine_i2ia[INCHI_LINE_ADD];
+
+
+/****************************************************************************/
 int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                       inchi_Stereo0D **stereo0D,
                       int *num_stereo0D,
@@ -596,12 +585,12 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                       int *err,
                       char *pStrErr )
 {
-    int      num_atoms = 0, bFindNext = 0, len, bHeaderRead, bItemIsOver, bErrorMsg, bRestoreInfo;; /* djb-rwth: removing redundant variables; initialising variables */
+    int      num_atoms = 0, bFindNext = 0, len, bHeaderRead, bItemIsOver, bErrorMsg, bRestoreInfo;
     int      bFatal = 0, num_struct = 0;
     int      i, k, k2, res, bond_type, bond_stereo1, bond_stereo2, bond_char, neigh, bond_parity, bond_parityNM;
     int      bTooLongLine, res2, bTooLongLine2, pos, hlen, hk;
     long     longID;
-    char     *p, *q, *s, parity;
+    char     szLine[INCHI_LINE_LEN], szNextLine[INCHI_LINE_ADD], *p, *q, *s, parity;
     int      b2D = 0, b3D = 0, b23D, nNumBonds = 0, bNonZeroXYZ, bNonMetal;
     int      len_stereo0D = 0, max_len_stereo0D = 0;
     inchi_Stereo0D  *atom_stereo0D = NULL;
@@ -630,7 +619,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
         if (*at && max_num_at)
         {
-            memset( *at, 0, max_num_at * sizeof( **at ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( *at, 0, max_num_at * sizeof( **at ) );
         }
 
         if (stereo0D && num_stereo0D)
@@ -638,7 +627,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
             if (*stereo0D && *num_stereo0D)
             {
                 max_len_stereo0D = *num_stereo0D;
-                memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) );
             }
             else
             {
@@ -660,17 +649,17 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
     if (nInputType == INPUT_INCHI_PLAIN)
     {
-            
-        bHeaderRead = hk = 0; /* djb-rwth: ignoring LLVM warning: value used */
 
-        while (0 < ( res = inchi_ios_getsTab(szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine ) ))
+        bHeaderRead = hk = 0;
+
+        while (0 < ( res = inchi_ios_getsTab( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine ) ))
         {
 
             /********************* find and interpret structure header ************/
             if (!bTooLongLine &&
-                ( hlen = sizeof( sStructHdrPln ) - 1, !memcmp(szLine_i2ia, sStructHdrPln, hlen ) ))
+                ( hlen = sizeof( sStructHdrPln ) - 1, !memcmp( szLine, sStructHdrPln, hlen ) ))
             {
-                p = szLine_i2ia + hlen;
+                p = szLine + hlen;
                 longID = 0;
                 num_atoms = 0;
 
@@ -696,7 +685,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     /* has label name */
 
                     /*p ++;*/
-                    if ((q = strchr( p, '=' ))) /* djb-rwth: addressing LLVM warning */
+                    if (q = strchr( p, '=' ))
                     {
 
                         /* '=' separates label name from the value */
@@ -718,17 +707,17 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                             {
                                 mystrncpy( pSdfValue, p, len );
                             }
-                            p = q; /* djb-rwth: ignoring LLVM warning: value used */
+                            p = q;
                         }
                     }
-                    else if ((q = strstr( p, sStructHdrPlnNoLblVal ))) /* djb-rwth: addressing LLVM warning */
+                    else if (q = strstr( p, sStructHdrPlnNoLblVal ))
                     {
                         len = inchi_min( q - p + 1, MAX_SDF_HEADER - 1 );
                         if (pSdfLabel)
                         {
                             mystrncpy( pSdfLabel, p, len );
                         }
-                        p = q + 1; /* djb-rwth: ignoring LLVM warning: value used */
+                        p = q + 1;
                     }
                 }
 
@@ -740,7 +729,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 bHeaderRead = 1;
                 bErrorMsg = bRestoreInfo = 0;
             }
-            else if (!memcmp(szLine_i2ia, sStructHdrPlnAuxStart, lenStructHdrPlnAuxStart ))
+            else if (!memcmp( szLine, sStructHdrPlnAuxStart, lenStructHdrPlnAuxStart ))
             {
                 /* found the header of the AuxInfo, read AuxInfo head of the line */
 
@@ -761,11 +750,11 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
                 }
 
-                bHeaderRead = 0; /* djb-rwth: ignoring LLVM warning: value used */
+                bHeaderRead = 0;
 
                 /* check for empty "AuxInfo=ver//" */
 
-                p = strchr(szLine_i2ia + lenStructHdrPlnAuxStart, '/' );
+                p = strchr( szLine + lenStructHdrPlnAuxStart, '/' );
 
                 if (p && p[1] == '/' && ( !p[2] || '\n' == p[2] ))
                 {
@@ -774,14 +763,14 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 /***************** search for atoms block (plain) **********************/
 
-                p = szLine_i2ia;
+                p = szLine;
                 sToken = sStructHdrPlnRevAt;
                 lToken = sizeof( sStructHdrPlnRevAt ) - 1;
 
                 /* search for sToken in the line; load next segments of the line if sToken has not found */
 
                 p = FindToken( inp_file, &bTooLongLine, sToken, lToken,
-                    szLine_i2ia, sizeof(szLine_i2ia), p, &res );
+                               szLine, sizeof( szLine ), p, &res );
 
                 if (!p)
                 {
@@ -795,14 +784,14 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     /* atoms block started */
 
                     i = 0;
-                    res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
+                    res2 = bTooLongLine2 = -1;
                     bItemIsOver = ( s = strchr( p, '/' ) ) || !bTooLongLine;
 
                     while (1)
                     {
 
                         p = LoadLine( inp_file, &bTooLongLine, &bItemIsOver, &s,
-                            szLine_i2ia, sizeof(szLine_i2ia), INCHI_LINE_ADD, p, &res );
+                                      szLine, sizeof( szLine ), INCHI_LINE_ADD, p, &res );
 
                         if (!i)
                         {
@@ -838,7 +827,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                 }
                                 else
                                 {
-                                    memset( *at, 0, max_num_at * sizeof( **at ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                                    memset( *at, 0, max_num_at * sizeof( **at ) );
                                     atom = *at;
                                 }
                             }
@@ -865,7 +854,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                 }
                                 else
                                 {
-                                    memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                                    memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) );
                                     atom_stereo0D = *stereo0D;
                                 }
                             }
@@ -996,7 +985,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
 
 
-                    if (!bItemIsOver || i != num_atoms || (s && p != s)) /* djb-rwth: addressing LLVM warning */
+                    if (!bItemIsOver || i != num_atoms || s && p != s)
                     {
                         num_atoms = INCHI_INP_ERROR_RET; /* error */
                         *err = INCHI_INP_ERROR_ERR;
@@ -1014,7 +1003,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 /* search for sToken in the line; load next segments of the line if sToken has not found */
 
                 p = FindToken( inp_file, &bTooLongLine, sToken, lToken,
-                    szLine_i2ia, sizeof(szLine_i2ia), p, &res );
+                               szLine, sizeof( szLine ), p, &res );
 
                 if (!p)
                 {
@@ -1029,7 +1018,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                     i = 1;
 
-                    res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
+                    res2 = bTooLongLine2 = -1;
 
                     bItemIsOver = ( s = strchr( p, '/' ) ) || !bTooLongLine;
 
@@ -1038,16 +1027,16 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                         /* needed because the next '/' may be still out of szLine */
 
                         p = LoadLine( inp_file, &bTooLongLine, &bItemIsOver, &s,
-                            szLine_i2ia, sizeof(szLine_i2ia), INCHI_LINE_ADD, p, &res );
+                                      szLine, sizeof( szLine ), INCHI_LINE_ADD, p, &res );
                     }
 
                     while (i < num_atoms)
                     {
 
                         p = LoadLine( inp_file, &bTooLongLine, &bItemIsOver, &s,
-                            szLine_i2ia, sizeof(szLine_i2ia), INCHI_LINE_ADD, p, &res );
+                                      szLine, sizeof( szLine ), INCHI_LINE_ADD, p, &res );
 
-                        if (i >= num_atoms || (s && p >= s)) /* djb-rwth: addressing LLVM warning */
+                        if (i >= num_atoms || s && p >= s)
                         {
                             break; /* end of bonds (plain) */
                         }
@@ -1232,15 +1221,15 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     goto bypass_end_of_INChI_plain;
                                 }
 
-                                memcpy(new_atom_stereo0D, atom_stereo0D, len_stereo0D * sizeof(*atom_stereo0D));
+                                memcpy( new_atom_stereo0D, atom_stereo0D, len_stereo0D * sizeof( *atom_stereo0D ) );
                                 FreeInchi_Stereo0D( &atom_stereo0D );
                                 atom_stereo0D = new_atom_stereo0D;
                                 max_len_stereo0D += num_atoms;
                             }
 
                             /* (a) i may be allene endpoint and     neigh = allene middle point or
-                                (b) i may be allene middle point and neigh = allene endpoint
-                                !!!!! CURRENTLY ONLY (b) IS ALLOWED !!!!!
+                               (b) i may be allene middle point and neigh = allene endpoint
+                               !!!!! CURRENTLY ONLY (b) IS ALLOWED !!!!!
                             */
 
                             atom_stereo0D[len_stereo0D].neighbor[1] = neigh; /* neigh < i */
@@ -1251,7 +1240,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                         }
                     }
 
-                    if (!bItemIsOver || i != num_atoms || (s && p != s)) /* djb-rwth: addressing LLVM warning */
+                    if (!bItemIsOver || i != num_atoms || s && p != s)
                     {
                         num_atoms = INCHI_INP_ERROR_RET; /* error */
                         *err = INCHI_INP_ERROR_ERR;
@@ -1269,7 +1258,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 /* search for sToken in the line; load next segments of the line if sToken has not found */
 
                 p = FindToken( inp_file, &bTooLongLine, sToken, lToken,
-                    szLine_i2ia, sizeof(szLine_i2ia), p, &res );
+                               szLine, sizeof( szLine ), p, &res );
 
                 if (!p)
                 {
@@ -1281,9 +1270,9 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 else
                 {
                     /* coordinates block started */
-                    if ((pszCoord = (MOL_COORD*) inchi_malloc( inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) ))) /* djb-rwth: addressing LLVM warning */
+                    if (pszCoord = (MOL_COORD*) inchi_malloc( inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) ))
                     {
-                        memset( pszCoord, ' ', inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                        memset( pszCoord, ' ', inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) );
                     }
                     else
                     {
@@ -1294,16 +1283,16 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
 
                     i = 0;
-                    res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
+                    res2 = bTooLongLine2 = -1;
                     bItemIsOver = ( s = strchr( p, '/' ) ) || !bTooLongLine;
 
                     while (i < num_atoms)
                     {
 
                         p = LoadLine( inp_file, &bTooLongLine, &bItemIsOver, &s,
-                            szLine_i2ia, sizeof(szLine_i2ia), INCHI_LINE_ADD, p, &res );
+                                      szLine, sizeof( szLine ), INCHI_LINE_ADD, p, &res );
 
-                        if (i >= num_atoms || (s && p >= s)) /* djb-rwth: addressing LLVM warning */
+                        if (i >= num_atoms || s && p >= s)
                         {
                             break; /* end of bonds (plain) */
                         }
@@ -1344,7 +1333,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     bNonZeroXYZ = fabs( xyz ) > MIN_BOND_LENGTH;
                                     if (q != NULL)
                                     {
-                                        memcpy( pszCoord[i] + LEN_COORD*(long long)k, p, q - p ); /* djb-rwth: cast operator added */
+                                        memcpy( pszCoord[i] + LEN_COORD*k, p, q - p );
                                         if (*q == ',')
                                             q++;
                                         p = q;
@@ -1385,7 +1374,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                         }
                     }
 
-                    if (!bItemIsOver || (s && p != s) || i != num_atoms) /* djb-rwth: addressing LLVM warning */
+                    if (!bItemIsOver || s && p != s || i != num_atoms)
                     {
                         num_atoms = INCHI_INP_ERROR_RET; /* error */
                         *err = INCHI_INP_ERROR_ERR;
@@ -1398,7 +1387,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 /* set special valences and implicit H (xml) */
 
                 b23D = b2D | b3D;
-                b2D = b3D = 0; /* djb-rwth: ignoring LLVM warning: values used */
+                b2D = b3D = 0;
                 if (at)
                 {
                     if (!*at)
@@ -1418,7 +1407,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                                 int num_bond_type[MAX_INPUT_BOND_TYPE - MIN_INPUT_BOND_TYPE + 1];
 
-                                memset( num_bond_type, 0, sizeof( num_bond_type ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                                memset( num_bond_type, 0, sizeof( num_bond_type ) );
 
                                 valence = AT_BONDS_VAL( atom, a1 ); /*  save atom valence if available */
                                 AT_BONDS_VAL( atom, a1 ) = 0;
@@ -1499,9 +1488,9 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     }
                                 }
                                 /********************************
-                                    *
-                                    *  Set number of hydrogen atoms
-                                    */
+                                 *
+                                 *  Set number of hydrogen atoms
+                                 */
                                 {
                                     int num_iso_H;
                                     num_iso_H = atom[a1].num_iso_H[1] + atom[a1].num_iso_H[2] + atom[a1].num_iso_H[3];
@@ -1601,19 +1590,19 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     sb_ord_from_a2 = p2 - atom[a2].neighbor;
 
                                     if (AT_NUM_BONDS( atom[a1] ) == 2 &&
-                                            atom[a1].bond_type[0] + atom[a1].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                            0 == inchi_NUMH2( atom, a1 ) &&
-                                            ( AT_NUM_BONDS( atom[a2] ) != 2 ||
-                                                atom[a2].bond_type[0] + atom[a2].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
+                                          atom[a1].bond_type[0] + atom[a1].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                          0 == inchi_NUMH2( atom, a1 ) &&
+                                          ( AT_NUM_BONDS( atom[a2] ) != 2 ||
+                                              atom[a2].bond_type[0] + atom[a2].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
                                     {
                                         bEnd2 = 1; /* a2 is the end-atom, a1 is middle atom */
                                     }
 
                                     if (AT_NUM_BONDS( atom[a2] ) == 2 &&
-                                            atom[a2].bond_type[0] + atom[a2].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                            0 == inchi_NUMH2( atom, a2 ) &&
-                                            ( AT_NUM_BONDS( atom[a1] ) != 2 ||
-                                                atom[a1].bond_type[0] + atom[a1].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
+                                          atom[a2].bond_type[0] + atom[a2].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                          0 == inchi_NUMH2( atom, a2 ) &&
+                                          ( AT_NUM_BONDS( atom[a1] ) != 2 ||
+                                              atom[a1].bond_type[0] + atom[a1].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
                                     {
                                         bEnd1 = 1; /* a1 is the end-atom, a2 is middle atom */
                                     }
@@ -1647,8 +1636,8 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                             cur = next;
                                                 /* follow double bond path && avoid going back */
                                             if (AT_NUM_BONDS( atom[cur] ) == 2 &&
-                                                    atom[cur].bond_type[0] + atom[cur].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                                    0 == inchi_NUMH2( atom, cur ))
+                                                 atom[cur].bond_type[0] + atom[cur].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                                 0 == inchi_NUMH2( atom, cur ))
                                             {
                                                 next = atom[cur].neighbor[atom[cur].neighbor[0] == prev];
                                                 chain[len++] = next;
@@ -1703,11 +1692,11 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     }
 
                                     if (atom_stereo0D[i].type != INCHI_StereoType_None &&
-                                            sb_ord_from_a1 >= 0 && sb_ord_from_a2 >= 0 &&
-                                            ATOM_PARITY_WELL_DEF( SB_PARITY_2( atom_stereo0D[i].parity ) ))
+                                         sb_ord_from_a1 >= 0 && sb_ord_from_a2 >= 0 &&
+                                         ATOM_PARITY_WELL_DEF( SB_PARITY_2( atom_stereo0D[i].parity ) ))
                                     {
                                         /* Detected well-defined disconnected stereo
-                                            * locate first non-metal neighbors */
+                                         * locate first non-metal neighbors */
 
                                         int    a, n, j, /* k,*/ sb_ord, cur_neigh, min_neigh;
 
@@ -1797,14 +1786,14 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
         }
 
         while (bTooLongLine &&
-                0 < inchi_ios_getsTab1(szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine ))
+                0 < inchi_ios_getsTab1( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine ))
         {
             ;
         }
 
 
         /* cleanup */
-        if (at && !*at) /* djb-rwth: fixing a NULL pointer dereference */
+        if (!*at)
         {
             if (atom)
             {
@@ -1852,18 +1841,18 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
         static const char sStructAuxXmlEnd[] = "</identifier.auxiliary-info";
         int         bInTheAuxInfo = 0;
 
-        while (0 < ( res = inchi_ios_gets(szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine ) ))
+        while (0 < ( res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine ) ))
         {
             /********************* find and interpret structure header ************/
 
-            if (!memcmp(szLine_i2ia, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
+            if (!memcmp( szLine, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
             {
                 num_struct = 1;
-                p = szLine_i2ia + sizeof( sStructHdrXml ) - 1;
+                p = szLine + sizeof( sStructHdrXml ) - 1;
                 longID = 0;
                 num_atoms = 0;
                 /* structure number */
-                if ((q = strstr( p, sStructHdrXmlNumber ))) /* djb-rwth: addressing LLVM warning */
+                if (q = strstr( p, sStructHdrXmlNumber ))
                 {
                     p = q + sizeof( sStructHdrXmlNumber ) - 1;
                     longID = strtol( p, &q, 10 );
@@ -1881,7 +1870,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     pSdfValue[0] = '\0';
                 }
                 /* pSdfLabel */
-                if ((q = strstr( p, sStructHdrXmlIdName ))) /* djb-rwth: addressing LLVM warning */
+                if (q = strstr( p, sStructHdrXmlIdName ))
                 {
                     p = q + sizeof( sStructHdrXmlIdName ) - 1;
                     q = strchr( p, '\"' );
@@ -1896,7 +1885,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
                 }
                 /* pSdfValue */
-                if ((q = strstr( p, sStructHdrXmlIdValue ))) /* djb-rwth: addressing LLVM warning */
+                if (q = strstr( p, sStructHdrXmlIdValue ))
                 {
                     p = q + sizeof( sStructHdrXmlIdValue ) - 1;
                     q = strchr( p, '\"' );
@@ -1907,7 +1896,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                         {
                             mystrncpy( pSdfValue, p, len );
                         }
-                        p = q + 1; /* djb-rwth: ignoring LLVM warning: value used */
+                        p = q + 1;
                     }
                 }
                 if (Id)
@@ -1917,21 +1906,10 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 bHeaderRead = 1;
                 bErrorMsg = bRestoreInfo = 0;
             }
-            else if ( (bHeaderRead && !memcmp(szLine_i2ia, sStructMsgXmlErr, sizeof(sStructMsgXmlErr) - 1) ) ||
-                    (bHeaderRead && !memcmp(szLine_i2ia, sStructMsgXmlErrFatal, sizeof(sStructMsgXmlErrFatal) - 1) ) ) /* djb-rwth: fixed incorrectly written operators */
+            else if (bHeaderRead && ( bFatal = 0, len = sizeof( sStructMsgXmlErr ) - 1, !memcmp( szLine, sStructMsgXmlErr, len ) ) ||
+                 bHeaderRead && ( len = sizeof( sStructMsgXmlErrFatal ) - 1, !memcmp( szLine, sStructMsgXmlErrFatal, len ) ) && ( bFatal = 1 ))
             {
-                /* djb-rwth: remaining block from the above condition */
-                if (bHeaderRead && !memcmp(szLine_i2ia, sStructMsgXmlErr, sizeof(sStructMsgXmlErr) - 1))
-                {
-                    bFatal = 0;
-                    len = sizeof(sStructMsgXmlErr) - 1;
-                }
-                if (bHeaderRead && !memcmp(szLine_i2ia, sStructMsgXmlErrFatal, sizeof(sStructMsgXmlErrFatal) - 1))
-                {
-                    bFatal = 1;
-                    len = sizeof(sStructMsgXmlErrFatal) - 1;
-                } 
-                p = szLine_i2ia + len;
+                p = szLine + len;
                 q = strchr( p, '\"' );
                 if (q && !bFindNext)
                 {
@@ -1947,42 +1925,42 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 num_atoms = bFatal ? INCHI_INP_FATAL_RET : INCHI_INP_ERROR_RET;
                 goto bypass_end_of_INChI;
             }
-            else if (bHeaderRead && !memcmp(szLine_i2ia, sStructAuxXml, sizeof( sStructAuxXml ) - 1 ))
+            else if (bHeaderRead && !memcmp( szLine, sStructAuxXml, sizeof( sStructAuxXml ) - 1 ))
             {
                 bInTheAuxInfo = 1;
             }
-            else if (bHeaderRead && !memcmp(szLine_i2ia, sStructAuxXmlEnd, sizeof( sStructAuxXmlEnd ) - 1 ))
+            else if (bHeaderRead && !memcmp( szLine, sStructAuxXmlEnd, sizeof( sStructAuxXmlEnd ) - 1 ))
             {
                 *err = INCHI_INP_ERROR_ERR;
                 num_atoms = INCHI_INP_ERROR_RET;
                 TREAT_ERR( *err, 0, "Missing reversibility info" );
                 goto bypass_end_of_INChI; /* reversibility info not found */
             }
-            else if (bHeaderRead && bInTheAuxInfo && !memcmp(szLine_i2ia, sStructRevXmlRevHdr, sizeof( sStructRevXmlRevHdr ) - 1 ))
+            else if (bHeaderRead && bInTheAuxInfo && !memcmp( szLine, sStructRevXmlRevHdr, sizeof( sStructRevXmlRevHdr ) - 1 ))
             {
                 /***********************  atoms xml ***************************/
                 num_struct = 1;
-                res = inchi_ios_gets(szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine );
+                res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine );
                 if (res <= 0)
                 {
                     num_atoms = INCHI_INP_EOF_RET; /* no data, probably end of file */
                     *err = INCHI_INP_EOF_ERR;
                     goto bypass_end_of_INChI;
                 }
-                if (memcmp(szLine_i2ia, sStructRevXmlRevAt, sizeof( sStructRevXmlRevAt ) - 1 ))
+                if (memcmp( szLine, sStructRevXmlRevAt, sizeof( sStructRevXmlRevAt ) - 1 ))
                 {
                     bHeaderRead = 0; /* invalid reversibility info; look for another header */
                     continue;
                 }
                 /* read (the head of) the atoms line */
-                res = inchi_ios_gets(szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine );
+                res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine );
                 if (res <= 0)
                 {
                     num_atoms = INCHI_INP_EOF_RET; /* no data */
                     *err = INCHI_INP_EOF_ERR;
                     goto bypass_end_of_INChI;
                 }
-                p = szLine_i2ia;
+                p = szLine;
                 num_atoms = strtol( p, &q, 10 );
                 if (!num_atoms || !q || !*q)
                 {
@@ -2012,7 +1990,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
                     else
                     {
-                        memset( *at, 0, max_num_at * sizeof( **at ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                        memset( *at, 0, max_num_at * sizeof( **at ) );
                         atom = *at;
                     }
                 }
@@ -2035,7 +2013,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
                     else
                     {
-                        memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                        memset( *stereo0D, 0, max_len_stereo0D * sizeof( **stereo0D ) );
                         atom_stereo0D = *stereo0D;
                     }
                 }
@@ -2054,28 +2032,28 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 i = 0;
                 bItemIsOver = 0;
-                res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
+                res2 = bTooLongLine2 = -1;
 
                 /* read all atoms xml */
                 while (i < num_atoms)
                 {
-                    pos = p - szLine_i2ia;
-                    if (!bItemIsOver && ( int )sizeof(szLine_i2ia) - res + pos > ( int )sizeof(szNextLine_i2ia))
+                    pos = p - szLine;
+                    if (!bItemIsOver && ( int )sizeof( szLine ) - res + pos > ( int )sizeof( szNextLine ))
                     {
                         /* load next line if possible */
-                        res2 = inchi_ios_gets( szNextLine_i2ia, sizeof(szNextLine_i2ia) - 1, inp_file, &bTooLongLine2 );
-                        if (res2 > 0 && memcmp( szNextLine_i2ia, sStructRevXmlRevAtEnd, sizeof( sStructRevXmlRevAtEnd ) - 1 ))
+                        res2 = inchi_ios_gets( szNextLine, sizeof( szNextLine ) - 1, inp_file, &bTooLongLine2 );
+                        if (res2 > 0 && memcmp( szNextLine, sStructRevXmlRevAtEnd, sizeof( sStructRevXmlRevAtEnd ) - 1 ))
                         {
                             if (pos)
                             {
                                 res -= pos;  /* number of chars left to process in szLine */
-                                memmove(szLine_i2ia, p, res * sizeof(szLine_i2ia[0] ) ); /* move them to the start of the line */
+                                memmove( szLine, p, res * sizeof( szLine[0] ) ); /* move them to the start of the line */
                             }
-                            memcpy(szLine_i2ia + res, szNextLine_i2ia, ( (long long)res2 + 1 ) * sizeof(szNextLine_i2ia[0] ) ); /* djb-rwth: cast operator added */
+                            memcpy( szLine + res, szNextLine, ( res2 + 1 ) * sizeof( szNextLine[0] ) );
                             res += res2;
-                            szLine_i2ia[res] = '\0';
+                            szLine[res] = '\0';
                             bTooLongLine = bTooLongLine2;
-                            p = szLine_i2ia;
+                            p = szLine;
                         }
                         else
                         {
@@ -2086,7 +2064,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     /* element, first char */
                     if (!isalpha( UCINT *p ) || !isupper( UCINT *p ) || i >= num_atoms)
                     {
-                        bHeaderRead = 0; /* wrong atom data */ /* djb-rwth: ignoring LLVM warning: value used */
+                        bHeaderRead = 0; /* wrong atom data */
                         num_atoms = INCHI_INP_ERROR_RET; /* was 0, error */
                         *err = INCHI_INP_ERROR_ERR;     /* 40 */
                         TREAT_ERR( *err, 0, "Wrong atoms data" );
@@ -2192,7 +2170,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     i++;
                 }
 
-                if (!bItemIsOver || p - szLine_i2ia != res || i != num_atoms)
+                if (!bItemIsOver || p - szLine != res || i != num_atoms)
                 {
                     num_atoms = INCHI_INP_ERROR_RET; /* error */
                     *err = INCHI_INP_ERROR_ERR;
@@ -2202,13 +2180,13 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 /********************** bonds xml ****************************/
 
-                res = inchi_ios_gets( szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine );
+                res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine );
                 if (res <= 0)
                 {
                     num_atoms = 0; /* no data */
                     goto bypass_end_of_INChI;
                 }
-                if (memcmp( szLine_i2ia, sStructRevXmlRevBn, sizeof( sStructRevXmlRevBn ) - 1 ))
+                if (memcmp( szLine, sStructRevXmlRevBn, sizeof( sStructRevXmlRevBn ) - 1 ))
                 {
                     bHeaderRead = 0; /* invalid reversibility info; look for another header */
                     continue;
@@ -2216,7 +2194,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 /* read (the head of) the xml bonds line */
 
-                res = inchi_ios_gets( szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine );
+                res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine );
 
                 if (res <= 0)
                 {
@@ -2227,10 +2205,10 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 i = 1;
                 bItemIsOver = 0;
-                res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
-                p = szLine_i2ia;
+                res2 = bTooLongLine2 = -1;
+                p = szLine;
 
-                if (!memcmp( szLine_i2ia, sStructRevXmlRevBnEnd, sizeof( sStructRevXmlRevBnEnd ) - 1 ))
+                if (!memcmp( szLine, sStructRevXmlRevBnEnd, sizeof( sStructRevXmlRevBnEnd ) - 1 ))
                 {
                     /* empty bonds section */
                     res = 0;
@@ -2241,26 +2219,26 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 while (i < num_atoms)
                 {
-                    pos = p - szLine_i2ia;
+                    pos = p - szLine;
                     if (!bItemIsOver &&
-                        ( int )sizeof(szLine_i2ia) - res + pos > ( int )sizeof(szNextLine_i2ia))
+                        ( int )sizeof( szLine ) - res + pos > ( int )sizeof( szNextLine ))
                     {
                         /* load next line if possible */
 
-                        res2 = inchi_ios_gets( szNextLine_i2ia, sizeof(szNextLine_i2ia) - 1, inp_file, &bTooLongLine2 );
+                        res2 = inchi_ios_gets( szNextLine, sizeof( szNextLine ) - 1, inp_file, &bTooLongLine2 );
 
-                        if (res2 > 0 && memcmp( szNextLine_i2ia, sStructRevXmlRevBnEnd, sizeof( sStructRevXmlRevBnEnd ) - 1 ))
+                        if (res2 > 0 && memcmp( szNextLine, sStructRevXmlRevBnEnd, sizeof( sStructRevXmlRevBnEnd ) - 1 ))
                         {
                             if (pos)
                             {
                                 res -= pos;  /* number of chars left to process in szLine */
-                                memmove(szLine_i2ia, p, res * sizeof(szLine_i2ia[0] ) ); /* move them to the start of the line */
+                                memmove( szLine, p, res * sizeof( szLine[0] ) ); /* move them to the start of the line */
                             }
-                            memcpy( szLine_i2ia + res, szNextLine_i2ia, ( (long long)res2 + 1 ) * sizeof(szNextLine_i2ia[0] ) ); /* djb-rwth: cast operator added */
+                            memcpy( szLine + res, szNextLine, ( res2 + 1 ) * sizeof( szNextLine[0] ) );
                             res += res2;
-                            szLine_i2ia[res] = '\0';
+                            szLine[res] = '\0';
                             bTooLongLine = bTooLongLine2;
-                            p = szLine_i2ia;
+                            p = szLine;
                         }
                         else
                             bItemIsOver = 1;
@@ -2455,8 +2433,8 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                             max_len_stereo0D += num_atoms;
                         }
                         /* (a) i may be allene endpoint and     neigh = allene middle point or
-                            (b) i may be allene middle point and neigh = allene endpoint
-                            !!!!! CURRENTLY ONLY (b) IS ALLOWED !!!!!
+                           (b) i may be allene middle point and neigh = allene endpoint
+                           !!!!! CURRENTLY ONLY (b) IS ALLOWED !!!!!
                         */
                         atom_stereo0D[len_stereo0D].neighbor[1] = neigh; /* neigh < i */
                         atom_stereo0D[len_stereo0D].neighbor[2] = i;
@@ -2466,7 +2444,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                     }
                 }
 
-                if (!bItemIsOver || p - szLine_i2ia != res || i != num_atoms)
+                if (!bItemIsOver || p - szLine != res || i != num_atoms)
                 {
                     num_atoms = INCHI_INP_ERROR_RET; /* error in input data */
                     *err = INCHI_INP_ERROR_ERR;
@@ -2480,14 +2458,14 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                 if (pszCoord)
                 {
-                    memset( pszCoord, ' ', inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-                    res = inchi_ios_gets( szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine );
+                    memset( pszCoord, ' ', inchi_max( num_atoms, 1 ) * sizeof( MOL_COORD ) );
+                    res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine );
 
                     if (res <= 0 ||
-                            /* compare the header */
-                            memcmp( szLine_i2ia, sStructRevXmlRevXYZ, sizeof( sStructRevXmlRevXYZ ) - 1 ) ||
-                            /* read (the head of) the coordinates (xml) line */
-                            0 >= ( res = inchi_ios_gets( szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine ) ))
+                         /* compare the header */
+                         memcmp( szLine, sStructRevXmlRevXYZ, sizeof( sStructRevXmlRevXYZ ) - 1 ) ||
+                         /* read (the head of) the coordinates (xml) line */
+                         0 >= ( res = inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine ) ))
                     {
                         num_atoms = INCHI_INP_ERROR_RET; /* error in input data: atoms, bonds & coord must be present together */
                         *err = INCHI_INP_ERROR_ERR;
@@ -2497,9 +2475,9 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                     i = 0;
                     bItemIsOver = 0;
-                    res2 = bTooLongLine2 = -1; /* djb-rwth: ignoring LLVM warning: value used */
-                    p = szLine_i2ia;
-                    if (!memcmp( szLine_i2ia, sStructRevXmlRevXYZEnd, sizeof( sStructRevXmlRevXYZEnd ) - 1 ))
+                    res2 = bTooLongLine2 = -1;
+                    p = szLine;
+                    if (!memcmp( szLine, sStructRevXmlRevXYZEnd, sizeof( sStructRevXmlRevXYZEnd ) - 1 ))
                     {
                         /* empty bonds section */
                         res = 0;
@@ -2510,28 +2488,28 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
 
                     while (i < num_atoms)
                     {
-                        pos = p - szLine_i2ia;
+                        pos = p - szLine;
 
                         if (!bItemIsOver &&
-                            ( int )sizeof(szLine_i2ia) - res + pos > ( int )sizeof(szNextLine_i2ia))
+                            ( int )sizeof( szLine ) - res + pos > ( int )sizeof( szNextLine ))
                         {
 
                             /* load next line if possible */
 
-                            res2 = inchi_ios_gets( szNextLine_i2ia, sizeof(szNextLine_i2ia) - 1, inp_file, &bTooLongLine2 );
+                            res2 = inchi_ios_gets( szNextLine, sizeof( szNextLine ) - 1, inp_file, &bTooLongLine2 );
 
-                            if (res2 > 0 && memcmp( szNextLine_i2ia, sStructRevXmlRevXYZEnd, sizeof( sStructRevXmlRevXYZEnd ) - 1 ))
+                            if (res2 > 0 && memcmp( szNextLine, sStructRevXmlRevXYZEnd, sizeof( sStructRevXmlRevXYZEnd ) - 1 ))
                             {
                                 if (pos)
                                 {
                                     res -= pos;  /* number of chars left to process in szLine */
-                                    memmove(szLine_i2ia, p, res * sizeof(szLine_i2ia[0] ) ); /* move them to the start of the line */
+                                    memmove( szLine, p, res * sizeof( szLine[0] ) ); /* move them to the start of the line */
                                 }
-                                memcpy(szLine_i2ia + res, szNextLine_i2ia, ( (long long)res2 + 1 ) * sizeof( szNextLine_i2ia[0] ) ); /* djb-rwth: cast operator added */
+                                memcpy( szLine + res, szNextLine, ( res2 + 1 ) * sizeof( szNextLine[0] ) );
                                 res += res2;
-                                szLine_i2ia[res] = '\0';
+                                szLine[res] = '\0';
                                 bTooLongLine = bTooLongLine2;
-                                p = szLine_i2ia;
+                                p = szLine;
                             }
                             else
                             {
@@ -2574,7 +2552,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                 bNonZeroXYZ = fabs( xyz ) > MIN_BOND_LENGTH;
                                 if (q != NULL)
                                 {
-                                    memcpy( pszCoord[i] + LEN_COORD*(long long)k, p, q - p ); /* djb-rwth: cast operator added */
+                                    memcpy( pszCoord[i] + LEN_COORD*k, p, q - p );
                                     if (*q == ',')
                                         q++;
                                     p = q;
@@ -2616,7 +2594,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                         }
                     }
 
-                    if (!bItemIsOver || p - szLine_i2ia != res || i != num_atoms)
+                    if (!bItemIsOver || p - szLine != res || i != num_atoms)
                     {
                         num_atoms = INCHI_INP_ERROR_RET; /* error in input data: atoms, bonds & coord must be present together */
                         *err = INCHI_INP_ERROR_ERR;
@@ -2636,7 +2614,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                 /* set special valences and implicit H (xml) */
 
                 b23D = b2D | b3D;
-                b2D = b3D = 0; /* djb-rwth: ignoring LLVM warning: values used */
+                b2D = b3D = 0;
 
                 if (at)
                 {
@@ -2654,7 +2632,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                             {
                                 int num_bond_type[MAX_INPUT_BOND_TYPE - MIN_INPUT_BOND_TYPE + 1];
 
-                                memset( num_bond_type, 0, sizeof( num_bond_type ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                                memset( num_bond_type, 0, sizeof( num_bond_type ) );
 
                                 valence = AT_BONDS_VAL( atom, a1 ); /*  save atom valence if available */
                                 AT_BONDS_VAL( atom, a1 ) = 0;
@@ -2689,8 +2667,8 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                 }
 
                                 if (MIN_INPUT_BOND_TYPE <= INCHI_BOND_TYPE_ALTERN &&
-                                        INCHI_BOND_TYPE_ALTERN <= MAX_INPUT_BOND_TYPE &&
-                                        ( n2 = num_bond_type[INCHI_BOND_TYPE_ALTERN - MIN_INPUT_BOND_TYPE] ))
+                                     INCHI_BOND_TYPE_ALTERN <= MAX_INPUT_BOND_TYPE &&
+                                     ( n2 = num_bond_type[INCHI_BOND_TYPE_ALTERN - MIN_INPUT_BOND_TYPE] ))
                                 {
 
                                     /* accept input aromatic bonds for now */
@@ -2734,9 +2712,9 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                 }
 
                                 /*************************************************************************************
-                                    *
-                                    *  Set number of hydrogen atoms
-                                    */
+                                 *
+                                 *  Set number of hydrogen atoms
+                                 */
                                 {
                                     int num_iso_H;
                                     num_iso_H = atom[a1].num_iso_H[1] + atom[a1].num_iso_H[2] + atom[a1].num_iso_H[3];
@@ -2843,18 +2821,18 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     sb_ord_from_a2 = p2 - atom[a2].neighbor;
 
                                     if (AT_NUM_BONDS( atom[a1] ) == 2 &&
-                                            atom[a1].bond_type[0] + atom[a1].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                            0 == inchi_NUMH2( atom, a1 ) &&
-                                            ( AT_NUM_BONDS( atom[a2] ) != 2 ||
-                                                atom[a2].bond_type[0] + atom[a2].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
+                                          atom[a1].bond_type[0] + atom[a1].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                          0 == inchi_NUMH2( atom, a1 ) &&
+                                          ( AT_NUM_BONDS( atom[a2] ) != 2 ||
+                                              atom[a2].bond_type[0] + atom[a2].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
                                     {
                                         bEnd2 = 1; /* a2 is the end-atom, a1 is middle atom */
                                     }
                                     if (AT_NUM_BONDS( atom[a2] ) == 2 &&
-                                            atom[a2].bond_type[0] + atom[a2].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                            0 == inchi_NUMH2( atom, a2 ) &&
-                                            ( AT_NUM_BONDS( atom[a1] ) != 2 ||
-                                                atom[a1].bond_type[0] + atom[a1].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
+                                          atom[a2].bond_type[0] + atom[a2].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                          0 == inchi_NUMH2( atom, a2 ) &&
+                                          ( AT_NUM_BONDS( atom[a1] ) != 2 ||
+                                              atom[a1].bond_type[0] + atom[a1].bond_type[1] != 2 * INCHI_BOND_TYPE_DOUBLE ))
                                     {
                                         bEnd1 = 1; /* a1 is the end-atom, a2 is middle atom */
                                     }
@@ -2886,8 +2864,8 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                             cur = next;
                                                 /* follow double bond path && avoid going back */
                                             if (AT_NUM_BONDS( atom[cur] ) == 2 &&
-                                                    atom[cur].bond_type[0] + atom[cur].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
-                                                    0 == inchi_NUMH2( atom, cur ))
+                                                 atom[cur].bond_type[0] + atom[cur].bond_type[1] == 2 * INCHI_BOND_TYPE_DOUBLE &&
+                                                 0 == inchi_NUMH2( atom, cur ))
                                             {
                                                 next = atom[cur].neighbor[atom[cur].neighbor[0] == prev];
                                                 chain[len++] = next;
@@ -2946,20 +2924,20 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
                                     }
 
                                     if (atom_stereo0D[i].type != INCHI_StereoType_None &&
-                                            sb_ord_from_a1 >= 0 && sb_ord_from_a2 >= 0 &&
-                                            ATOM_PARITY_WELL_DEF( SB_PARITY_2( atom_stereo0D[i].parity ) ))
+                                         sb_ord_from_a1 >= 0 && sb_ord_from_a2 >= 0 &&
+                                         ATOM_PARITY_WELL_DEF( SB_PARITY_2( atom_stereo0D[i].parity ) ))
                                     {
 
                                         /* Detected well-defined disconnected stereo
-                                            * locate first non-metal neighbors */
+                                         * locate first non-metal neighbors */
 
-                                        int    a, n, j, /* k,*/ sb_ord, cur_neigh, min_neigh; /* djb-rwth: removing redundant variables */
+                                        int    a, n, j, /* k,*/ sb_ord, cur_neigh, min_neigh;
                                         for (k = 0; k < 2; k++)
                                         {
                                             a = k ? atom_stereo0D[i].neighbor[2] : atom_stereo0D[i].neighbor[1];
                                             sb_ord = k ? sb_ord_from_a2 : sb_ord_from_a1;
                                             min_neigh = num_atoms;
-                                            for (n = j = 0; j < AT_NUM_BONDS( atom[a] ); j++) /* djb-rwth: removing redundant code */
+                                            for (n = j = 0; j < AT_NUM_BONDS( atom[a] ); j++)
                                             {
                                                 cur_neigh = atom[a].neighbor[j];
                                                 if (j != sb_ord && !IS_METAL_ATOM( atom, cur_neigh ))
@@ -3008,7 +2986,7 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
         }
 
         if (atom_stereo0D)
-            FreeInchi_Stereo0D(&atom_stereo0D);
+            FreeInchi_Stereo0D( &atom_stereo0D );
 
         /* end of struct. reading cycle, code never used? */
 
@@ -3036,25 +3014,25 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
             FreeInchi_Stereo0D( &atom_stereo0D );
         }
 
-        if (!memcmp( szLine_i2ia, sStructHdrXmlEnd, sizeof( sStructHdrXmlEnd ) - 1 ))
+        if (!memcmp( szLine, sStructHdrXmlEnd, sizeof( sStructHdrXmlEnd ) - 1 ))
         {
             num_struct--;
         }
 
-        if (!memcmp( szLine_i2ia, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
+        if (!memcmp( szLine, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
         {
             num_struct++;
         }
 
-        while (num_struct > 0 && 0 < inchi_ios_gets( szLine_i2ia, sizeof(szLine_i2ia) - 1, inp_file, &bTooLongLine ))
+        while (num_struct > 0 && 0 < inchi_ios_gets( szLine, sizeof( szLine ) - 1, inp_file, &bTooLongLine ))
         {
-            if (!memcmp( szLine_i2ia, sStructHdrXmlEnd, sizeof( sStructHdrXmlEnd ) - 1 ))
+            if (!memcmp( szLine, sStructHdrXmlEnd, sizeof( sStructHdrXmlEnd ) - 1 ))
             {
                 num_struct--;
             }
             else
             {
-                if (!memcmp( szLine_i2ia, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
+                if (!memcmp( szLine, sStructHdrXml, sizeof( sStructHdrXml ) - 1 ))
                 {
                     num_struct++;
                 }
@@ -3063,7 +3041,6 @@ int InchiToInchiAtom( INCHI_IOSTREAM *inp_file,
         return num_atoms;
     }
 
-    /* djb-rwth: avoiding memory leak */
-    inchi_free(atom);
     return num_atoms;
 }
+

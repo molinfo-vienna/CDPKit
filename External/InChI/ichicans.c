@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,24 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 
 #include <stdlib.h>
@@ -46,8 +39,6 @@
 #include "ichicant.h"
 #include "ichicomn.h"
 #include "ichister.h"
-
-#include "bcf_s.h"
 
 typedef struct tagStereoBondNeighbor
 {
@@ -212,7 +203,7 @@ int RemoveHalfStereoBond( sp_ATOM *at,
     int k2;
     if (k1 < MAX_NUM_STEREO_BOND_NEIGH && at[jn].stereo_bond_neighbor[k1])
     {
-        for (k2 = k1; k2 < MAX_NUM_STEREO_BOND_NEIGH - 1; k2++) /* djb-rwth: loop condition corrected (buffer error) */
+        for (k2 = k1; k2 + 1 < MAX_NUM_STEREO_BOND_NEIGH; k2++)
         {
             at[jn].stereo_bond_neighbor[k2] = at[jn].stereo_bond_neighbor[k2 + 1];
             at[jn].stereo_bond_ord[k2] = at[jn].stereo_bond_ord[k2 + 1];
@@ -247,9 +238,9 @@ int SetOneStereoBondIllDefParity( sp_ATOM *at,
     int k1, ret = 0, kn, jn = (int) at[jc].stereo_bond_neighbor[k] - 1;
 
     /*  opposite end */
-    for (k1 = ret = 0;
+    for (k1 = kn = ret = 0;
             k1 < MAX_NUM_STEREO_BOND_NEIGH && ( kn = at[jn].stereo_bond_neighbor[k1] );
-              k1++) /* djb-rwth: removing redundant code */
+              k1++)
     {
         if (kn - 1 == jc)
         {
@@ -276,9 +267,9 @@ int RemoveOneStereoBond( sp_ATOM *at,
     int k1, ret = 0, kn, jn = (int) at[jc].stereo_bond_neighbor[k] - 1;
 
     /*  opposite end */
-    for (k1 = ret = 0;
+    for (k1 = kn = ret = 0;
             k1 < MAX_NUM_STEREO_BOND_NEIGH && ( kn = at[jn].stereo_bond_neighbor[k1] );
-              k1++) /* djb-rwth: removing redundant code */
+              k1++)
     {
         if (kn - 1 == jc)
         {
@@ -331,7 +322,7 @@ int UnmarkNonStereo( CANON_GLOBALS *pCG,
     AT_RANK nNeighborNumber[MAX_NUM_STEREO_ATOM_NEIGH];
     AT_RANK nPrevAtomRank, nPrevNeighRank;
 #ifdef FIX_OLEAN_SPIRO_CHIRALITY_DETECTION_BUG
-    int num_in_same_ring_system = 1, nRingSystem, num_with_eq_neigh_in_same_ring_system = 0; /* djb-rwth: although unlikely to ever occur, uninitialised num_in_same_ring_system variable can lead to garbage value in line 449, including 0 which leads to various errors and inconsistency with 1.06 outputs -- function rewriting and discussion required */
+    int num_in_same_ring_system, nRingSystem, num_with_eq_neigh_in_same_ring_system = 0;
 #endif
 
 
@@ -394,7 +385,7 @@ int UnmarkNonStereo( CANON_GLOBALS *pCG,
                                     /*  Check if they have only non-stereogenic neighbors */
 #ifdef FIX_OLEAN_SPIRO_CHIRALITY_DETECTION_BUG
                                     num_in_same_ring_system = nRingSystem = 0;
-                                    for (kn = k1; kn < k2; kn++) /* djb-rwth: removing redundant code */
+                                    for (kn = k1, num_neighbors_with_parity = 0; kn < k2; kn++)
                                     {
                                         int nCurNeighRingSystem = at[(int) at[jc].neighbor[nNeighborNumber[kn]]].nRingSystem;
                                         if (!nRingSystem)
@@ -410,7 +401,7 @@ int UnmarkNonStereo( CANON_GLOBALS *pCG,
 
                                     for (kn = k1, num_neighbors_with_parity = 0; kn < k2; kn++)
                                     {
-                                        memset( visited, 0, num_atoms * sizeof( visited[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                                        memset( visited, 0, num_atoms * sizeof( visited[0] ) );
                                         visited[jc] = 1; /*  starting point; the only atom with parity */
                                         num_neighbors_with_parity +=
                                             find_atoms_with_parity( at, visited, jc, (int) at[jc].neighbor[nNeighborNumber[kn]] );
@@ -438,11 +429,12 @@ int UnmarkNonStereo( CANON_GLOBALS *pCG,
                         }
                         if (num_implicit_H > 1)
                         {
-                            if ((bIsotopic && ( at[jc].num_iso_H[0] > 1 ||
+                            if (bIsotopic && ( at[jc].num_iso_H[0] > 1 ||
                                 at[jc].num_iso_H[1] > 1 ||
-                                at[jc].num_iso_H[2] > 1 )) ||
+                                at[jc].num_iso_H[2] > 1 ) ||
                                   num_implicit_H > NUM_H_ISOTOPES ||
-                                  !bIsotopic) /* djb-rwth: addressing LLVM warning */
+                                  !bIsotopic
+                                )
                             {
                                 num_neighbors_with_parity = 0;
                             }
@@ -453,7 +445,7 @@ int UnmarkNonStereo( CANON_GLOBALS *pCG,
                         /*  (c) all constitutionally equivalent neighbors are not connected to atoms with parity */
                         num_no_parity_atoms += !num_neighbors_with_parity;
 #ifdef FIX_OLEAN_SPIRO_CHIRALITY_DETECTION_BUG
-                        num_with_eq_neigh_in_same_ring_system += ( num_in_same_ring_system != 0 ); /* djb-rwth: initialisation of num_in_same_ring_system is required to avoid garbage value */
+                        num_with_eq_neigh_in_same_ring_system += ( num_in_same_ring_system != 0 );
 #endif
                     }
 #ifdef FIX_OLEAN_SPIRO_CHIRALITY_DETECTION_BUG
@@ -586,7 +578,7 @@ int FillSingleStereoDescriptors( CANON_GLOBALS  *pCG,
                 nStereoNeigh[num_stereo] = n - 1;
                 num_allene += IS_ALLENE_CHAIN( at[i].stereo_bond_parity[num_stereo] );
             }
-            if ((bAllene > 0 && !num_allene) || (bAllene == 0 && num_allene)) /* djb-rwth: addressing LLVM warning */
+            if (bAllene > 0 && !num_allene || bAllene == 0 && num_allene)
             {
                 return 0;
             }
@@ -917,7 +909,7 @@ int SetKnownStereoBondParities( CANON_GLOBALS *pCG,
             }
 
             prev_trans = -1;
-            trans_k1 = -2; /* djb-rwth: ignoring LLVM warning: value used */
+            trans_k1 = -2;
             trans_k = -4; /* 2004-04-28 */
 
             /*  find all pairs of atoms that can be mapped on at[i1], at[i2] pair */
@@ -941,7 +933,7 @@ int SetKnownStereoBondParities( CANON_GLOBALS *pCG,
                     }
                     m2 = -1; /*  undefined yet */
                     prev = k1;
-                    /* djb-rwth: removing redundant code */
+                    len = 0;
                     if (cumulene_len)
                     {
                         for (len = 0, next = (int) at[k1].neighbor[m1]; len < cumulene_len; len++)
@@ -1100,7 +1092,7 @@ int MarkKnownEqualStereoBondParities( sp_ATOM       *at,
     int i1, i2, k1, k2, n1, n2, m1, m2, s1, s2, stereo_bond_parity, stereo_bond_parity2, cumulene_len;
     AT_RANK nAtomRank1, nAtomRank2, nAtom1NeighRank, nAtom2NeighRank;
 
-    /* djb-rwth: removing redundant code */
+    num_set = 0;
 
     for (i1 = 0, num_set = 0; i1 < num_atoms; i1++)
     {
@@ -1123,14 +1115,14 @@ int MarkKnownEqualStereoBondParities( sp_ATOM       *at,
         /*  search for bonds possibly constitutionally equivalent to each of the adjacent bonds */
         /*  and find if all of them have same already known parity */
 
-        for (n1 = 0;
+        for (n1 = 0, i2 = 0;
                 n1 < MAX_NUM_STEREO_BONDS && ( i2 = (int) at[i1].stereo_bond_neighbor[n1] );
-                    n1++) /* djb-rwth: removing redundant code */
+                    n1++)
         {
             i2--;
 
             nAtomRank2 = nRank[i2];
-            if (nAtomRank2 < nAtomRank1 || (nAtomRank2 == nAtomRank1 && i1 < i2)) /* djb-rwth: addressing LLVM warning */
+            if (nAtomRank2 < nAtomRank1 || nAtomRank2 == nAtomRank1 && i1 < i2)
             {
                 /*  An attempt to reduce unnecessary repetitions. */
                 /*  We still have repetitions because we do not accumulate a list of */
@@ -1227,7 +1219,7 @@ int MarkKnownEqualStereoBondParities( sp_ATOM       *at,
 
                     m2 = -1; /*  undefined yet */
                     prev = k1;
-                    /* djb-rwth: removing redundant code */
+                    len = 0;
 
                     /*  if cumulene then bypass the cumulene chain */
 
@@ -1362,7 +1354,7 @@ int MarkKnownEqualStereoBondParities( sp_ATOM       *at,
                             j1++)
                 {
                     /*  at[k1] is constitutionally equivalent to at[i1] */
-                    for (s1 = 0; s1 < MAX_NUM_STEREO_BONDS && ( k2 = (int) at[k1].stereo_bond_neighbor[s1] ); s1++) /* djb-rwth: removing redundant code */
+                    for (s1 = 0, k2 = 0; s1 < MAX_NUM_STEREO_BONDS && ( k2 = (int) at[k1].stereo_bond_neighbor[s1] ); s1++)
                     {
                         k2--;
                         if (nRank[k2] == nAtomRank2)
@@ -1485,7 +1477,7 @@ int GetAndCheckNextNeighbors( sp_ATOM       *at,
          i1 < MAX_NUM_STEREO_BONDS &&
          ( s1 = at[cur1].stereo_bond_neighbor[i1] ) &&
             !( k1 = ( at[cur1].neighbor[(int) at[cur1].stereo_bond_ord[i1]] == *n1 ) );
-         i1++) /* djb-rwth: ignoring LLVM warning: variable used */
+         i1++)
     {
         ;
     }
@@ -1494,7 +1486,7 @@ int GetAndCheckNextNeighbors( sp_ATOM       *at,
          i2 < MAX_NUM_STEREO_BONDS &&
          ( s2 = at[cur2].stereo_bond_neighbor[i2] ) &&
             !( k2 = ( at[cur2].neighbor[(int) at[cur2].stereo_bond_ord[i2]] == *n2 ) );
-         i2++) /* djb-rwth: ignoring LLVM warning: variable used */
+         i2++)
     {
         ;
     }
@@ -1547,7 +1539,8 @@ AT_RANK PathsHaveIdenticalKnownParities( sp_ATOM       *at,
 
     /*  the atoms must be either both stereogenic and have well-defined parities or non-stereogenic at all. */
     if (at[cur1].stereo_atom_parity != at[cur2].stereo_atom_parity ||
-         (at[cur1].stereo_atom_parity && !PARITY_WELL_DEF( at[cur1].stereo_atom_parity )) ) /* djb-rwth: addressing LLVM warning */
+         at[cur1].stereo_atom_parity && !PARITY_WELL_DEF( at[cur1].stereo_atom_parity )
+          )
     {
         return 0;  /*  Reject: Different or unknown in advance parities */
     }
@@ -1657,7 +1650,7 @@ int RemoveKnownNonStereoBondParities( sp_ATOM       *at,
                 ret = CT_OUT_OF_RAM;  /*   <BRKPT> */
                 goto exit_function;
             }
-            memset( nVisited, 0, sizeof( nVisited[0] )*num_atoms ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( nVisited, 0, sizeof( nVisited[0] )*num_atoms );
             nVisited[i1] = 1;
             if (PathsHaveIdenticalKnownParities( at, (AT_RANK) i1, neigh[0], (AT_RANK) i1, neigh[1], nVisited, nVisited, nRank, nCanonRank, 1 ))
             {
@@ -1677,7 +1670,9 @@ int RemoveKnownNonStereoBondParities( sp_ATOM       *at,
                     {
                         if (n < m)
                         { /*  remove pCS->LinearCTStereoDble[n] */
-                            memmove( pCS->LinearCTStereoDble + n, pCS->LinearCTStereoDble + n + 1, ( (long long)m - (long long)n ) * sizeof( pCS->LinearCTStereoDble[0] ) ); /* djb-rwth: cast operators added */
+                            memmove( pCS->LinearCTStereoDble + n,
+                                     pCS->LinearCTStereoDble + n + 1,
+                                     ( m - n ) * sizeof( pCS->LinearCTStereoDble[0] ) );
                         }
                         pCS->nLenLinearCTStereoDble--;
 #if ( bRELEASE_VERSION == 0 )
@@ -1880,7 +1875,7 @@ int RemoveKnownNonStereoCenterParities( CANON_GLOBALS *pCG,
                         ret = CT_OUT_OF_RAM;  /*   <BRKPT> */
                         goto exit_function;
                     }
-                    memset( nVisited, 0, sizeof( nVisited[0] )*num_atoms ); /* djb-rwth: memset_s C11/Annex K variant? */
+                    memset( nVisited, 0, sizeof( nVisited[0] )*num_atoms );
                     nVisited[i] = 1;
                     if (PathsHaveIdenticalKnownParities( at, (AT_RANK) i, at[i].neighbor[(int) nNeighOrd[j - 1]],
                         (AT_RANK) i, at[i].neighbor[(int) nNeighOrd[k]],
@@ -1896,7 +1891,9 @@ int RemoveKnownNonStereoCenterParities( CANON_GLOBALS *pCG,
                             {
                                 if (n < m)
                                 {    /*  remove pCS->LinearCTStereoCarb[n] */
-                                    memmove( pCS->LinearCTStereoCarb + n, pCS->LinearCTStereoCarb + n + 1, ( (long long)m - (long long)n ) * sizeof( pCS->LinearCTStereoCarb[0] ) ); /* djb-rwth: cast operators added */
+                                    memmove( pCS->LinearCTStereoCarb + n,
+                                             pCS->LinearCTStereoCarb + n + 1,
+                                             ( m - n ) * sizeof( pCS->LinearCTStereoCarb[0] ) );
                                 }
                                 pCS->nLenLinearCTStereoCarb--;
                                 k = 0;

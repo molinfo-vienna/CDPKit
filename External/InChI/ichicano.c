@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,25 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,7 +46,7 @@
 #include "ichi.h"
 #include "ichicomn.h"
 
-#include "bcf_s.h"
+
 
  /****************************************************************************
  *
@@ -188,8 +182,8 @@ long InchiTimeMsecDiff( INCHI_CLOCK *ic, inchiTime *TickEnd, inchiTime *TickStar
         FillMaxMinClock( ic );
         if (!TickEnd || !TickStart)
             return 0;
-        if ((TickEnd->clockTime >= 0 && TickStart->clockTime >= 0) ||
-             (TickEnd->clockTime <= 0 && TickStart->clockTime <= 0)) /* djb-rwth: addressing LLVM warnings */
+        if (TickEnd->clockTime >= 0 && TickStart->clockTime >= 0 ||
+             TickEnd->clockTime <= 0 && TickStart->clockTime <= 0)
         {
             delta = TickEnd->clockTime - TickStart->clockTime;
         }
@@ -292,8 +286,8 @@ int bInchiTimeIsOver( INCHI_CLOCK *ic, inchiTime *TickStart )
         if (!TickStart)
             return 0;
         clockCurrTime = InchiClock( );
-        if ((clockCurrTime >= 0 && TickStart->clockTime >= 0) ||
-             (clockCurrTime <= 0 && TickStart->clockTime <= 0)) /* djb-rwth: addressing LLVM warning */
+        if (clockCurrTime >= 0 && TickStart->clockTime >= 0 ||
+             clockCurrTime <= 0 && TickStart->clockTime <= 0)
         {
             return ( clockCurrTime > TickStart->clockTime );
         }
@@ -635,8 +629,8 @@ int AllocateCS( CANON_STAT *pCS,
     }
     /* isotopic atoms & t-groups */
     if (( nMode & CMODE_ISO ) /*&& nLenIsotopic > 0*/ ||
-        (( nMode & CMODE_ISO ) && CANON_MODE_TAUT == ( nMode & CANON_MODE_TAUT ) && nLenLinearCTIsotopicTautomer > 0
-        )) /* djb-rwth: addressing LLVM warning */
+        ( nMode & CMODE_ISO ) && CANON_MODE_TAUT == ( nMode & CANON_MODE_TAUT ) && nLenLinearCTIsotopicTautomer > 0
+        )
     {
         num_err += !pCS_CALLOC( nSymmRankIsotopic, AT_RANK, num_at_tg );
         num_err += !pCS_CALLOC( nCanonOrdIsotopic, AT_RANK, num_at_tg );
@@ -693,8 +687,8 @@ int AllocateCS( CANON_STAT *pCS,
             num_err += !pCS_CALLOC( nCanonOrdIsotopicStereoTaut, AT_RANK, num_t_groups );
         }
     }
-    if ((( nMode & CMODE_STEREO ) && ( nLenLinearCTStereoDble > 0 || nLenLinearCTStereoCarb > 0 )) ||
-        (( nMode & CMODE_ISO_STEREO ) && ( nLenLinearCTIsotopicStereoDble > 0 || nLenLinearCTIsotopicStereoCarb > 0 ))) /* djb-rwth: addressing LLVM warning */
+    if (( nMode & CMODE_STEREO ) && ( nLenLinearCTStereoDble > 0 || nLenLinearCTStereoCarb > 0 ) ||
+        ( nMode & CMODE_ISO_STEREO ) && ( nLenLinearCTIsotopicStereoDble > 0 || nLenLinearCTIsotopicStereoCarb > 0 ))
     {
         num_err += !pCS_CALLOC( bRankUsedForStereo, S_CHAR, num_at );
         num_err += !pCS_CALLOC( bAtomUsedForStereo, S_CHAR, num_at );
@@ -798,7 +792,7 @@ int FillIsotopicAtLinearCT( int num_atoms,
     /* go to a separate buffers. */
     if (LinearCTIsotopic && nMaxLenLinearCTIsotopic > 0)
     {
-        memset( LinearCTIsotopic, 0, nMaxLenLinearCTIsotopic * sizeof( LinearCTIsotopic[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( LinearCTIsotopic, 0, nMaxLenLinearCTIsotopic * sizeof( LinearCTIsotopic[0] ) );
     }
     else
     {
@@ -879,7 +873,7 @@ int FillTautLinearCT2( CANON_GLOBALS *pCG,
 
     T_GROUP *t_group;
 
-    int      i, j, len = 0, g, offset, max_len = 0, len_iso = 0; /* djb-rwth: removing redundant variable */
+    int      i, j, len = 0, g, num_num, offset, max_len = 0, len_iso = 0;
     const static int max_num_num = sizeof( t_group->num ) / sizeof( t_group->num[0] );
     const static int max_num_iso = sizeof( LinearCTIsotopicTautomer->num ) / sizeof( LinearCTIsotopicTautomer->num[0] ) + T_NUM_NO_ISOTOPIC;
 
@@ -894,8 +888,8 @@ int FillTautLinearCT2( CANON_GLOBALS *pCG,
         int        num_t_groups = t_group_info->num_t_groups;
         AT_NUMB   *tGroupNumber = t_group_info->tGroupNumber;
         AT_NUMB   *tSymmRank = tGroupNumber + TGSO_SYMM_RANK*num_t_groups;  /*  equivalence */
-        AT_NUMB   *tiSymmRank = tGroupNumber + TGSO_SYMM_IRANK*(long long)num_t_groups; /* djb-rwth: cast operator added */
-        AT_NUMB   *tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER*(long long)num_t_groups; /* djb-rwth: cast operator added */
+        AT_NUMB   *tiSymmRank = tGroupNumber + TGSO_SYMM_IRANK*num_t_groups;
+        AT_NUMB   *tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER*num_t_groups;
         AT_RANK    nOffset = (AT_RANK) num_atoms;
 
         /*  Fill Canonical ranks and Symmetry Ranks */
@@ -946,7 +940,7 @@ int FillTautLinearCT2( CANON_GLOBALS *pCG,
          * End mark : N==0
          ****************************************************************/
         /* num_num = t_group_info->bIgnoreIsotopic? T_NUM_NO_ISOTOPIC : max_num_num; */
-        /* num_num = max_num_num;   always include isotopic info; ignore it at the CT comparison step. */ /* djb-rwth: removing redundant code */
+        num_num = max_num_num; /*  always include isotopic info; ignore it at the CT comparison step. */
         for (i = 0; i < t_group_info->num_t_groups; i++)
         {
             g = tGroupNumber[i]; /*  ith tautomeric group number in canonical order */
@@ -1069,8 +1063,6 @@ int UpdateFullLinearCT( int num_atoms,
     AT_NUMB      *nEndpointAtomNumber = NULL;
 
     int  nCTLen = 0, nCTLenAtOnly = 0;
-    
-    num_neigh = 0; /* djb-rwth: num_neigh initialisation added */
 
     AT_NUMB         r_neigh;
     AT_NUMB        *LinearCT = pCS->LinearCT;
@@ -1200,26 +1192,22 @@ int UpdateFullLinearCT( int num_atoms,
         ********************************************************/
 
         /* sort endpoints */
-        if (t_group_info) 
-            nEndpointAtomNumber = t_group_info->nEndpointAtomNumber + (int) t_group[i].nFirstEndpointAtNoPos; /* djb-rwth: fixing a NULL pointer dereference */
+        nEndpointAtomNumber = t_group_info->nEndpointAtomNumber + (int) t_group[i].nFirstEndpointAtNoPos;
         pCG->m_pn_RankForSort = nRank;
-        if (t_group + i)
-            num_neigh = (int)t_group[i].nNumEndpoints;
+        num_neigh = (int) t_group[i].nNumEndpoints;
         insertions_sort( pCG, nEndpointAtomNumber, (size_t) num_neigh, sizeof( nEndpointAtomNumber[0] ), CompRank );
 
         for (k = 0; k < num_neigh; k++)
         {
             /* rank = (new current atom Rank) */
-            if (nEndpointAtomNumber + k) /* djb-rwth: fixing a NULL pointer dereference */
+            if ((int) ( r_neigh = (AT_NUMB) nRank[(int) nEndpointAtomNumber[k]] )
+                                                              CT_NEIGH_SMALLER_THAN rank)
             {
-                if ((int)(r_neigh = (AT_NUMB)nRank[(int)nEndpointAtomNumber[k]]) CT_NEIGH_SMALLER_THAN rank) 
+                if (CHECK_OVERFLOW( nCTLen, pCS->nMaxLenLinearCT ))
                 {
-                    if (CHECK_OVERFLOW(nCTLen, pCS->nMaxLenLinearCT))
-                    {
-                        return CT_OVERFLOW;  /*  <BRKPT> */
-                    }
-                    COMPARE_WITH_CT(LinearCT, nCTLen, r_neigh, bCompare);
+                    return CT_OVERFLOW;  /*  <BRKPT> */
                 }
+                COMPARE_WITH_CT( LinearCT, nCTLen, r_neigh, bCompare );
             }
         }
     } /* end of cycle over all tautomeric groups. */
@@ -1342,7 +1330,7 @@ int FixCanonEquivalenceInfo( CANON_GLOBALS *pCG,
     ----------------------------------------------------------------------------------*/
     if (bChangeCurrRank)
     {
-        memcpy(nCurrRank, nTempRank, num_at_tg * sizeof(nCurrRank[0]));
+        memcpy( nCurrRank, nTempRank, num_at_tg * sizeof( nCurrRank[0] ) );
     }
     if (bChangeSymmRank)
     {
@@ -1563,7 +1551,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
     /* 1. non-isotopic */
 
     /* linear CT, H */
-    memcpy(pCS->LinearCT, ftcn->LinearCt, ftcn->nLenLinearCt * sizeof(pCS->LinearCT[0]));
+    memcpy( pCS->LinearCT, ftcn->LinearCt, ftcn->nLenLinearCt * sizeof( pCS->LinearCT[0] ) );
     if (pCS->nNum_H && ftcn->nNumH)
     {
         for (i = 0; i < num_atoms; i++)
@@ -1584,11 +1572,11 @@ VII. Optimize isotopic stereo descriptors (optimized)
     /* save non-isotopic atoms equivalence and numbering */
     if (pCS->nSymmRank)
     {
-        memcpy(pCS->nSymmRank, ftcn->nSymmRankCt, num_at_tg * sizeof(pCS->nSymmRank[0]));
+        memcpy( pCS->nSymmRank, ftcn->nSymmRankCt, num_at_tg * sizeof( pCS->nSymmRank[0] ) );
     }
     if (pCS->nCanonOrd)
     {
-        memcpy(pCS->nCanonOrd, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof(pCS->nCanonOrd[0]));
+        memcpy( pCS->nCanonOrd, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof( pCS->nCanonOrd[0] ) );
         pCS->nLenCanonOrd = num_atoms;
     }
     if (ftcn->iso_exchg_atnos && pCS->nExchgIsoH)
@@ -1606,11 +1594,11 @@ VII. Optimize isotopic stereo descriptors (optimized)
         /* save atoms equivalence and numbering */
         if (pCS->nSymmRankIsotopic)
         {
-            memcpy(pCS->nSymmRankIsotopic, ftcn->nSymmRankCtIso, num_at_tg * sizeof(pCS->nSymmRankIsotopic[0]));
+            memcpy( pCS->nSymmRankIsotopic, ftcn->nSymmRankCtIso, num_at_tg * sizeof( pCS->nSymmRankIsotopic[0] ) );
         }
         if (pCS->nCanonOrdIsotopic)
         {
-            memcpy(pCS->nCanonOrdIsotopic, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof(pCS->nCanonOrdIsotopic[0]));
+            memcpy( pCS->nCanonOrdIsotopic, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof( pCS->nCanonOrdIsotopic[0] ) );
             pCS->nLenCanonOrdIsotopic = num_at_tg;
         }
 
@@ -1666,24 +1654,24 @@ VII. Optimize isotopic stereo descriptors (optimized)
             AT_NUMB *tSymmRank = tGroupNumber + TGSO_SYMM_RANK*num_t_groups;
             if (pCS->nSymmRankTaut)
             {
-                memcpy(pCS->nSymmRankTaut, tSymmRank, num_t_groups * sizeof(pCS->nSymmRank[0])); /* fixed 5-23-02 */
+                memcpy( pCS->nSymmRankTaut, tSymmRank, num_t_groups * sizeof( pCS->nSymmRank[0] ) ); /* fixed 5-23-02 */
             }
             if (pCS->nCanonOrdTaut)
             {
-                memcpy(pCS->nCanonOrdTaut, tGroupNumber, num_t_groups * sizeof(pCS->nCanonOrdTaut[0]));
+                memcpy( pCS->nCanonOrdTaut, tGroupNumber, num_t_groups * sizeof( pCS->nCanonOrdTaut[0] ) );
                 pCS->nLenCanonOrdTaut = num_t_groups;
             }
             if (bCanonIsotopic /*&& pCS->nLenLinearCTIsotopicTautomer*/)
             {
                 /* tautomeric groups: save isotopic symmetry & t_group order */
                 /*AT_NUMB ntRankOffset       = (AT_RANK)num_atoms;*/
-                AT_NUMB *tiSymmRank = tGroupNumber + TGSO_SYMM_IRANK*(long long)num_t_groups; /* djb-rwth: cast operator added */
-                AT_NUMB *tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER*(long long)num_t_groups; /* djb-rwth: cast operator added */
+                AT_NUMB *tiSymmRank = tGroupNumber + TGSO_SYMM_IRANK*num_t_groups;
+                AT_NUMB *tiGroupNumber = tGroupNumber + TGSO_SYMM_IORDER*num_t_groups;
                 if (pCS->nSymmRankIsotopicTaut)
                 {
-                    memcpy(pCS->nSymmRankIsotopicTaut, tiSymmRank, num_t_groups * sizeof(pCS->nSymmRankIsotopicTaut[0]));
+                    memcpy( pCS->nSymmRankIsotopicTaut, tiSymmRank, num_t_groups * sizeof( pCS->nSymmRankIsotopicTaut[0] ) );
                 }
-                memcpy(pCS->nCanonOrdIsotopicTaut, tiGroupNumber, num_t_groups * sizeof(pCS->nCanonOrdIsotopicTaut[0]));
+                memcpy( pCS->nCanonOrdIsotopicTaut, tiGroupNumber, num_t_groups * sizeof( pCS->nCanonOrdIsotopicTaut[0] ) );
                 pCS->nLenCanonOrdIsotopicTaut = num_t_groups;
             }
         }
@@ -1691,7 +1679,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
     /* save connection table if requested */
     if (pCS->LinearCT2)
     {
-        memcpy(pCS->LinearCT2, pCS->LinearCT, sizeof(pCS->LinearCT2[0])* pCS->nLenLinearCT);
+        memcpy( pCS->LinearCT2, pCS->LinearCT, sizeof( pCS->LinearCT2[0] )*pCS->nLenLinearCT );
         pCS->nLenLinearCT2 = pCS->nLenLinearCT;
         pCS->nLenLinearCTAtOnly2 = pCS->nLenLinearCTAtOnly;
     }
@@ -1743,7 +1731,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
     if (!( nMode & CMODE_NOEQ_STEREO ) && ( bCanonStereo || bCanonIsoStereo ))
     {
         /* will be used to discover vertex equivalences in stereo canonicalization */
-        memset( &CurrentTree, 0, sizeof( CurrentTree ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( &CurrentTree, 0, sizeof( CurrentTree ) );
         cur_tree = &CurrentTree;
     }
 
@@ -1791,9 +1779,9 @@ VII. Optimize isotopic stereo descriptors (optimized)
        /* *pCS2 = *pCS; */ /* save input information and pointers to allocated memory */
 
         /* initial ranking for non-isotopic mapping */
-        memcpy(nAtomNumber, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof(nAtomNumber[0]));
-        memcpy(nRank, ftcn->PartitionCt.Rank, num_at_tg * sizeof(nRank[0]));
-        memcpy(nSymmRank, ftcn->nSymmRankCt, num_at_tg * sizeof(nSymmRank[0]));
+        memcpy( nAtomNumber, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof( nAtomNumber[0] ) );
+        memcpy( nRank, ftcn->PartitionCt.Rank, num_at_tg * sizeof( nRank[0] ) );
+        memcpy( nSymmRank, ftcn->nSymmRankCt, num_at_tg * sizeof( nSymmRank[0] ) );
 
         /* nSymmRank changes if canonical numbers of constitutionally equivalent atoms are not contiguous */
         nNumCurrRanks = FixCanonEquivalenceInfo( pCG, num_at_tg,
@@ -1802,7 +1790,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
                                                  nAtomNumber /* in&out */,
                                                  NULL );
         /* atom numbers in canonical order */
-        memcpy(pCS->nPrevAtomNumber, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof(nAtomNumber[0]));
+        memcpy( pCS->nPrevAtomNumber, ftcn->PartitionCt.AtNumber, num_at_tg * sizeof( nAtomNumber[0] ) );
 
         /* fill stereo part of the connection table with initial (not optimized) parities */
         /* input
@@ -1846,7 +1834,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
         }
         if (!nSymmStereo && !( nMode & CMODE_NOEQ_STEREO ))
         {
-            nSymmStereo = (AT_RANK *) qmalloc( ( (long long)num_max + 1 ) * sizeof( *nSymmStereo ) ); /* djb-rwth: cast operator added */
+            nSymmStereo = (AT_RANK *) qmalloc( ( num_max + 1 ) * sizeof( *nSymmStereo ) );
         }
 
         if (!( nMode & CMODE_NOEQ_STEREO ) && 0 > CurTreeAlloc( cur_tree, num_at_tg ))
@@ -1929,7 +1917,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
             int bFailed = 0;
             if (!nRet)
             {
-                /* djb-rwth: removing redundant code */
+                bFailed = 1; /* progrm error */
                 pCS2->nLenLinearCTStereoCarb =
                     pCS->nLenLinearCTStereoCarb = -abs( pCS->nLenLinearCTStereoCarb );
                 pCS2->nLenLinearCTStereoDble =
@@ -1942,13 +1930,13 @@ VII. Optimize isotopic stereo descriptors (optimized)
                 /* save non-isotopic lengths */
                 pCS2->nLenLinearCTStereoDble = pCS->nLenLinearCTStereoDble;
                 pCS2->nLenLinearCTStereoCarb = pCS->nLenLinearCTStereoCarb;
-                /* djb-rwth: removing redundant code */
+                nRet = 0;
             }
 
             /* save stereo canonical numbering */
             if (pCS->nCanonOrdStereo)
             {
-                for (i = 0; i < num_at_tg; i++) /* djb-rwth: removing redundant code */
+                for (i = n = 0; i < num_at_tg; i++)
                 {
                     if (nCanonRankStereo[i] && (int) nCanonRankStereo[i] <= num_at_tg)
                     {
@@ -1971,18 +1959,18 @@ VII. Optimize isotopic stereo descriptors (optimized)
                     int num_t_groups = t_group_info1->num_t_groups;
                     AT_NUMB *tGroupNumber = t_group_info1->tGroupNumber;
                     /*AT_NUMB *tiSymmRank        = tGroupNumber + TGSO_SYMM_IRANK*num_t_groups; */
-                    memcpy(pCS->nCanonOrdStereoTaut, tGroupNumber, num_t_groups * sizeof(pCS->nCanonOrdStereoTaut[0]));
+                    memcpy( pCS->nCanonOrdStereoTaut, tGroupNumber, num_t_groups * sizeof( pCS->nCanonOrdStereoTaut[0] ) );
                     pCS->nLenCanonOrdStereoTaut = ( bFailed ) ? -num_t_groups
                         : num_t_groups;
                 }
+                else if (RETURNED_ERROR( nRet ))
+                {
+                    goto exit_function;
+                }
                 else
                 {
-                    if (RETURNED_ERROR(nRet))
-                    {
-                        goto exit_function;
-                    }
+                    nRet = 0;
                 }
-                /* djb-rwth: removing redundant code */
                 /*SortTautomerGroupsAndEndpoints( t_group_info1, nCanonRank ); */ /* ??? return to non-isotopic canonical numbering */
             }
         }
@@ -2020,14 +2008,14 @@ VII. Optimize isotopic stereo descriptors (optimized)
         if (pCS->nLenLinearCTStereoDble > 0 || pCS->nLenLinearCTStereoCarb > 0)
         {
             /* copy previous results, the canonical stereo CT */
-            memcpy(pCS->LinearCTStereoDble, pCS2->LinearCTStereoDble, pCS->nLenLinearCTStereoDble * sizeof(pCS->LinearCTStereoDble[0]));
-            memcpy(pCS->LinearCTStereoCarb, pCS2->LinearCTStereoCarb, pCS->nLenLinearCTStereoCarb * sizeof(pCS->LinearCTStereoCarb[0]));
+            memcpy( pCS->LinearCTStereoDble, pCS2->LinearCTStereoDble, pCS->nLenLinearCTStereoDble * sizeof( pCS->LinearCTStereoDble[0] ) );
+            memcpy( pCS->LinearCTStereoCarb, pCS2->LinearCTStereoCarb, pCS->nLenLinearCTStereoCarb * sizeof( pCS->LinearCTStereoCarb[0] ) );
         }
-        memcpy(nCanonRankStereoInv, nCanonRankStereo, num_max * sizeof(nCanonRankStereoInv[0]));
+        memcpy( nCanonRankStereoInv, nCanonRankStereo, num_max * sizeof( nCanonRankStereoInv[0] ) );
         if (pCS->nCanonOrdStereoInv && pCS->nCanonOrdStereo)
         {
             /* in case there is nothing to invert */
-            memcpy(pCS->nCanonOrdStereoInv, pCS->nCanonOrdStereo, num_at_tg * sizeof(pCS->nCanonOrdStereoInv[0]));
+            memcpy( pCS->nCanonOrdStereoInv, pCS->nCanonOrdStereo, num_at_tg * sizeof( pCS->nCanonOrdStereoInv[0] ) );
         }
 
         /******************************
@@ -2049,7 +2037,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
         else if (nRet > 0)
         {
             /* InvertStereo() has done some changes */
-            /* djb-rwth: removing redundant code */
+            nRet = 0;
             /* FillOutStereoParities() has already been called to fill out these 2 LinearCTs */
 
             /* set the 1st ranks in the rest of the stack to zero: prepare for ranks reuse */
@@ -2111,7 +2099,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
                 int bFailed = 0;
                 if (!nRet)
                 {
-                    /* djb-rwth: removing redundant code */
+                    bFailed = 1; /* progrm error */
                     pCS2->nLenLinearCTStereoCarb =
                         pCS->nLenLinearCTStereoCarb = -abs( pCS->nLenLinearCTStereoCarb );
                     pCS2->nLenLinearCTStereoDble =
@@ -2172,7 +2160,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
                 /* save stereo canonical numbering */
                 if (pCS->nCanonOrdStereoInv)
                 {
-                    for (i = 0; i < num_at_tg; i++) /* djb-rwth: removing redundant code */
+                    for (i = n = 0; i < num_at_tg; i++)
                     {
                         if (nCanonRankStereoInv[i] && (int) nCanonRankStereoInv[i] <= num_at_tg)
                         {
@@ -2228,13 +2216,16 @@ VII. Optimize isotopic stereo descriptors (optimized)
         */
 
         /* Initial ranking for isotopic mapping */
-        memcpy(nAtomNumber, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof(nAtomNumber[0]));
-        memcpy(nRank, ftcn->PartitionCtIso.Rank, num_at_tg * sizeof(nRank[0]));
-        memcpy(nSymmRank, ftcn->nSymmRankCtIso, num_at_tg * sizeof(nSymmRank[0]));
+        memcpy( nAtomNumber, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof( nAtomNumber[0] ) );
+        memcpy( nRank, ftcn->PartitionCtIso.Rank, num_at_tg * sizeof( nRank[0] ) );
+        memcpy( nSymmRank, ftcn->nSymmRankCtIso, num_at_tg * sizeof( nSymmRank[0] ) );
+
         /* nSymmRank will change if canonical numbers of of constitutionally equivalent atoms are not contiguous */
         nNumCurrRanks = FixCanonEquivalenceInfo( pCG, num_at_tg, nSymmRank /* in&out*/,
                                            nRank, nTempRank /* out */, nAtomNumber /* in&out */, NULL );
-        memcpy(pCS->nPrevAtomNumber, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof(nAtomNumber[0]));
+
+        memcpy( pCS->nPrevAtomNumber, ftcn->PartitionCtIso.AtNumber, num_at_tg * sizeof( nAtomNumber[0] ) );
+
         /* Allocate memory for optimized stereo canonicalization */
         /* for stereo canonical numbering to be found. */
         if (!nCanonRankIsotopicStereo)
@@ -2243,7 +2234,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
         }
         if (!nSymmStereo && !( nMode & CMODE_NOEQ_STEREO ))
         {
-            nSymmStereo = (AT_RANK *) qmalloc( ( (long long)num_max + 1 ) * sizeof( *nSymmStereo ) ); /* djb-rwth: cast operator added */
+            nSymmStereo = (AT_RANK *) qmalloc( ( num_max + 1 ) * sizeof( *nSymmStereo ) );
         }
         if (!( nMode & CMODE_NOEQ_STEREO ) && CurTreeAlloc( cur_tree, num_at_tg ))
         {
@@ -2290,22 +2281,21 @@ VII. Optimize isotopic stereo descriptors (optimized)
         {
             goto exit_function;  /* program error */
         }
+        else if (!nRet)
+        {
+            /* no isotopic stereo */
+            pCS2->nLenLinearCTIsotopicStereoDble = pCS->nLenLinearCTIsotopicStereoDble = 0;
+            pCS2->nLenLinearCTIsotopicStereoCarb = pCS->nLenLinearCTIsotopicStereoCarb = 0;
+            pCS->nLenCanonOrdIsotopicStereo = 0;
+            pCS->nLenCanonOrdIsotopicStereoTaut = 0;
+            pCS2->nLenLinearCTIsotopicStereoDbleInv = pCS->nLenLinearCTIsotopicStereoDbleInv = 0;
+            pCS2->nLenLinearCTIsotopicStereoCarbInv = pCS->nLenLinearCTIsotopicStereoCarbInv = 0;
+            goto bypass_isotopic_stereo;
+        }
         else
         {
-            if (!nRet)
-            {
-                /* no isotopic stereo */
-                pCS2->nLenLinearCTIsotopicStereoDble = pCS->nLenLinearCTIsotopicStereoDble = 0;
-                pCS2->nLenLinearCTIsotopicStereoCarb = pCS->nLenLinearCTIsotopicStereoCarb = 0;
-                pCS->nLenCanonOrdIsotopicStereo = 0;
-                pCS->nLenCanonOrdIsotopicStereoTaut = 0;
-                pCS2->nLenLinearCTIsotopicStereoDbleInv = pCS->nLenLinearCTIsotopicStereoDbleInv = 0;
-                pCS2->nLenLinearCTIsotopicStereoCarbInv = pCS->nLenLinearCTIsotopicStereoCarbInv = 0;
-                goto bypass_isotopic_stereo;
-            }
+            nRet = 0; /* not an error */
         }
-
-        /* djb-rwth: removing redundant code */
 
 
         /*************************************************************
@@ -2363,7 +2353,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
 
             if (!nRet)
             {
-                /* djb-rwth: removing redundant code */
+                bFailed = 1; /* program error */
                 pCS2->nLenLinearCTIsotopicStereoDble =
                     pCS->nLenLinearCTIsotopicStereoDble = -abs( pCS->nLenLinearCTStereoDble );
                 pCS2->nLenLinearCTIsotopicStereoCarb =
@@ -2382,7 +2372,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
                     /* save stereo canonical numbering */
                 if (pCS->nCanonOrdIsotopicStereo)
                 {
-                    for (i = 0; i < num_at_tg; i++) /* djb-rwth: removing redundant code */
+                    for (i = n = 0; i < num_at_tg; i++)
                     {
                         if (nCanonRankIsotopicStereo[i] && (int) nCanonRankIsotopicStereo[i] <= num_at_tg)
                         {
@@ -2405,19 +2395,19 @@ VII. Optimize isotopic stereo descriptors (optimized)
                         int num_t_groups = t_group_info1->num_t_groups;
                         AT_NUMB *tGroupNumber = t_group_info1->tGroupNumber;
                         /*AT_NUMB *tiSymmRank        = tGroupNumber + TGSO_SYMM_IRANK*num_t_groups; */
-                        memcpy(pCS->nCanonOrdIsotopicStereoTaut, tGroupNumber, num_t_groups * sizeof(pCS->nCanonOrdIsotopicStereoTaut[0]));
+                        memcpy( pCS->nCanonOrdIsotopicStereoTaut, tGroupNumber, num_t_groups * sizeof( pCS->nCanonOrdIsotopicStereoTaut[0] ) );
                         pCS->nLenCanonOrdIsotopicStereoTaut = bFailed ? -num_t_groups : num_t_groups;
 
                         /*SortTautomerGroupsAndEndpoints( t_group_info1, nCanonRank ); */ /* ??? return to non-isotopic canonical numbering */
                     }
+                    else if (RETURNED_ERROR( nRet ))
+                    {
+                        goto exit_function;
+                    }
                     else
                     {
-                        if (RETURNED_ERROR(nRet))
-                        {
-                            goto exit_function;
-                        }
+                        nRet = 0;
                     }
-                    /* djb-rwth: removing redundant code */
                 }
             }
         }
@@ -2452,14 +2442,14 @@ VII. Optimize isotopic stereo descriptors (optimized)
         if (pCS->nLenLinearCTStereoDble > 0 || pCS->nLenLinearCTStereoCarb > 0)
         {
             /* copy previous results, the canonical stereo CT */
-            memcpy(pCS->LinearCTStereoDble, pCS2->LinearCTIsotopicStereoDble, pCS->nLenLinearCTStereoDble * sizeof(pCS->LinearCTStereoDble[0]));
-            memcpy(pCS->LinearCTStereoCarb, pCS2->LinearCTIsotopicStereoCarb, pCS->nLenLinearCTStereoCarb * sizeof(pCS->LinearCTStereoCarb[0]));
+            memcpy( pCS->LinearCTStereoDble, pCS2->LinearCTIsotopicStereoDble, pCS->nLenLinearCTStereoDble * sizeof( pCS->LinearCTStereoDble[0] ) );
+            memcpy( pCS->LinearCTStereoCarb, pCS2->LinearCTIsotopicStereoCarb, pCS->nLenLinearCTStereoCarb * sizeof( pCS->LinearCTStereoCarb[0] ) );
         }
-        memcpy(nCanonRankIsotopicStereoInv, nCanonRankIsotopicStereo, num_max * sizeof(nCanonRankIsotopicStereoInv[0]));
+        memcpy( nCanonRankIsotopicStereoInv, nCanonRankIsotopicStereo, num_max * sizeof( nCanonRankIsotopicStereoInv[0] ) );
         if (pCS->nCanonOrdIsotopicStereoInv && pCS->nCanonOrdIsotopicStereo)
         {
             /* in case there is nothing to invert */
-            memcpy(pCS->nCanonOrdIsotopicStereoInv, pCS->nCanonOrdIsotopicStereo, num_at_tg * sizeof(pCS->nCanonOrdIsotopicStereoInv[0]));
+            memcpy( pCS->nCanonOrdIsotopicStereoInv, pCS->nCanonOrdIsotopicStereo, num_at_tg * sizeof( pCS->nCanonOrdIsotopicStereoInv[0] ) );
         }
 
         /******************************
@@ -2488,7 +2478,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
         else if (nRet > 0)
         {
             /* InvertStereo() has done some changes */
-            /* djb-rwth: removing redundant code */
+            nRet = 0;
             /* FillOutStereoParities() has already been called to fill out these 2 LinearCTs */
 
             /* set the 1st ranks in the rest of the stack to zero: prepare for ranks reuse */
@@ -2553,7 +2543,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
 
                 if (!nRet)
                 {
-                    /* djb-rwth: removing redundant code */
+                    bFailed = 1; /* program error */
                     pCS2->nLenLinearCTIsotopicStereoDble =
                         pCS->nLenLinearCTIsotopicStereoDble = -abs( pCS->nLenLinearCTStereoDble );
                     pCS2->nLenLinearCTIsotopicStereoCarb =
@@ -2609,7 +2599,7 @@ VII. Optimize isotopic stereo descriptors (optimized)
                 /* save stereo canonical numbering */
                 if (pCS->nCanonOrdIsotopicStereoInv)
                 {
-                    for (i = 0; i < num_at_tg; i++) /* djb-rwth: removing redundant code */
+                    for (i = n = 0; i < num_at_tg; i++)
                     {
                         if (nCanonRankIsotopicStereoInv[i] && (int) nCanonRankIsotopicStereoInv[i] <= num_at_tg)
                         {

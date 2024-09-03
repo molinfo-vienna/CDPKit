@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,25 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -44,10 +38,6 @@
 #include "mode.h"
 #include "ichimain.h"
 #include "ichi_io.h"
-
-#include "bcf_s.h"
-
-#include "logging.h"                   /*(@nnuk : Nauman Ullah Khan) :: Needed for logging functionality*/
 
 /* Local */
 
@@ -145,7 +135,7 @@ int GetHillFormulaIndexLength( int count )
     char szCount[16];
     if (count > 1)
     {
-        return sprintf(szCount, "%d", count);
+        return sprintf( szCount, "%d", count );
     }
 
     return 0;
@@ -283,7 +273,7 @@ int AddElementAndCount( const char *szElement, int mult, char *szLinearCT, int n
     {
         if (mult > 1)
         {
-            len2 = sprintf(szMult, "%d", mult);
+            len2 = sprintf( szMult, "%d", mult );
         }
         else
         {
@@ -292,8 +282,8 @@ int AddElementAndCount( const char *szElement, int mult, char *szLinearCT, int n
         }
         if (len1 + len2 < nLenLinearCT)
         {
-            memcpy(szLinearCT, szElement, len1);
-            memcpy(szLinearCT + len1, szMult, (long long)len2 + 1); /*  adding zero termination */ /* djb-rwth: added cast operator */
+            memcpy( szLinearCT, szElement, len1 );
+            memcpy( szLinearCT + len1, szMult, len2 + 1 ); /*  adding zero termination */
             return len1 + len2;
         }
         else
@@ -415,7 +405,7 @@ char *AllocateAndFillHillFormula( INChI *pINChI )
     {
 
 #if ( FIX_GAF_2019_2==1 )
-        pHillFormula = (char*)inchi_calloc((long long )nLen + 1, sizeof(char)); /* djb-rwth: cast operator added */
+        pHillFormula = (char*)inchi_calloc(nLen + 1, sizeof(char));
 #else
         pHillFormula = (char*)inchi_malloc(nLen + 1);
 #endif
@@ -532,8 +522,8 @@ int Copy2StereoBondOrAllene( INChI_Stereo *Stereo,
 
             if (j < *nNumberOfStereoCenters)
             {
-                memmove(nNumber + j + 1, nNumber + j, (*nNumberOfStereoCenters - (long long)j) * sizeof(nNumber[0])); /* djb-rwth: cast operator added */
-                memmove(t_parity + j + 1, t_parity + j, (*nNumberOfStereoCenters - (long long)j) * sizeof(t_parity[0])); /* djb-rwth: cast operator added */
+                memmove( nNumber + j + 1, nNumber + j, ( *nNumberOfStereoCenters - j ) * sizeof( nNumber[0] ) );
+                memmove( t_parity + j + 1, t_parity + j, ( *nNumberOfStereoCenters - j ) * sizeof( t_parity[0] ) );
             }
 
             /* fill the new stereo center info */
@@ -580,127 +570,114 @@ int CopyLinearCTStereoToINChIStereo( INChI_Stereo *Stereo,
 
     /* Stereo centers */
 
-    /* djb-rwth: fixing oss-fuzz issue #68271 */
-    if (Stereo)
+    n = Stereo->nNumberOfStereoCenters = nLenLinearCTStereoCarb;
+
+    for (i = 0; i < n; i++)
     {
-        n = Stereo->nNumberOfStereoCenters = nLenLinearCTStereoCarb;
+        Stereo->nNumber[i] = LinearCTStereoCarb[i].at_num;
+        Stereo->t_parity[i] = LinearCTStereoCarb[i].parity;
+        Stereo->nNumberInv[i] = LinearCTStereoCarbInv[i].at_num;
+        Stereo->t_parityInv[i] = LinearCTStereoCarbInv[i].parity;
+    }
 
-        for (i = 0; i < n; i++)
+    /* Stereo bonds */
+
+    n = nLenLinearCTStereoDble;
+    lenInv = Stereo->nNumberOfStereoCenters;
+
+    for (i = len = 0; i < n; i++)
+    {
+        bAllene =
+            Copy2StereoBondOrAllene( Stereo,
+                                     &Stereo->nNumberOfStereoCenters,
+                                     &len,
+                                     LinearCTStereoDble + i,
+                                     pCanonOrd, pCanonRank,
+                                     at,
+                                     bIsotopic );
+
+        bAlleneInv =
+            Copy2StereoBondOrAllene( Stereo,
+                                     &lenInv,
+                                     NULL,
+                                     LinearCTStereoDbleInv + i,
+                                     pCanonOrdInv, pCanonRankInv,
+                                     at,
+                                     bIsotopic );
+
+        /* make sure double bond stereo is identical in original and inverted geometry */
+        /* Note: all allenes are AFTER double bonds in LinearCTStereoDble... */
+        if (bAllene != bAlleneInv || !bAllene &&
+             CompareLinCtStereoDble( LinearCTStereoDble + i, 1,
+                 LinearCTStereoDbleInv + i, 1 ))
         {
-            if (LinearCTStereoCarb) /* djb-rwth: fixing a NULL pointer dereference */
-            {
-                Stereo->nNumber[i] = LinearCTStereoCarb[i].at_num;
-                Stereo->t_parity[i] = LinearCTStereoCarb[i].parity;
-            }
-            if (LinearCTStereoCarbInv) /* djb-rwth: fixing a NULL pointer dereference */
-            {
-                Stereo->nNumberInv[i] = LinearCTStereoCarbInv[i].at_num;
-                Stereo->t_parityInv[i] = LinearCTStereoCarbInv[i].parity;
-            }
-        }
-
-        /* Stereo bonds */
-
-        n = nLenLinearCTStereoDble;
-        lenInv = Stereo->nNumberOfStereoCenters;
-
-        for (i = len = 0; i < n; i++)
-        {
-            bAllene =
-                Copy2StereoBondOrAllene(Stereo,
-                    &Stereo->nNumberOfStereoCenters,
-                    &len,
-                    LinearCTStereoDble + i,
-                    pCanonOrd, pCanonRank,
-                    at,
-                    bIsotopic);
-
-            bAlleneInv =
-                Copy2StereoBondOrAllene(Stereo,
-                    &lenInv,
-                    NULL,
-                    LinearCTStereoDbleInv + i,
-                    pCanonOrdInv, pCanonRankInv,
-                    at,
-                    bIsotopic);
-
-            /* make sure double bond stereo is identical in original and inverted geometry */
-            /* Note: all allenes are AFTER double bonds in LinearCTStereoDble... */
-            if (bAllene != bAlleneInv || (!bAllene &&
-                CompareLinCtStereoDble(LinearCTStereoDble + i, 1,
-                    LinearCTStereoDbleInv + i, 1))) /* djb-rwth: addressing LLVM warning */
-            {
-                /* double bond stereo Inv is NOT identical to Abs */
-                nErrorCode = -4;
-                goto exit_function;
-            }
-        }
-
-        Stereo->nNumberOfStereoBonds = len;
-
-        if (lenInv != Stereo->nNumberOfStereoCenters)
-        {
-            nErrorCode = -5; /* different number of stereo centers in Abs and Inv */
+            /* double bond stereo Inv is NOT identical to Abs */
+            nErrorCode = -4;
             goto exit_function;
         }
+    }
+
+    Stereo->nNumberOfStereoBonds = len;
+
+    if (lenInv != Stereo->nNumberOfStereoCenters)
+    {
+        nErrorCode = -5; /* different number of stereo centers in Abs and Inv */
+        goto exit_function;
+    }
 
 
-        /* compare inverted stereocenters to absolute */
+    /* compare inverted stereocenters to absolute */
 
-        n = Stereo->nNumberOfStereoCenters;
-        /* djb-rwth: removing redundant code */
+    n = Stereo->nNumberOfStereoCenters;
+    diff = 0;
 
+    for (i = 0, diff = 0; i < n; i++)
+    {
+        if (Stereo->nNumberInv[i] != Stereo->nNumber[i])
+        {
+            diff = ( Stereo->nNumberInv[i] > Stereo->nNumber[i] ) ? 2 : -2;
+            break; /* Abs != Inv */
+        }
+        if (Stereo->t_parityInv[i] != Stereo->t_parity[i])
+        {
+            diff = ( Stereo->t_parityInv[i] > Stereo->t_parity[i] ) ? 1 : -1;
+            break; /* Abs != Inv */
+        }
+    }
+
+    Stereo->nCompInv2Abs =
+        ( diff > 0 ) ? 1 : ( diff < 0 ) ? -1 : 0;
+
+    if (diff == -1 || diff == 1)
+    {
+        /* The first found difference was in parities */
         for (i = 0, diff = 0; i < n; i++)
         {
             if (Stereo->nNumberInv[i] != Stereo->nNumber[i])
             {
-                diff = (Stereo->nNumberInv[i] > Stereo->nNumber[i]) ? 2 : -2;
-                break; /* Abs != Inv */
+                diff = 2; /* difference in stereo center numbering */
+                break;
             }
-            if (Stereo->t_parityInv[i] != Stereo->t_parity[i])
+
+            /*  Parities can be only 1, 2, 3, 4. Therefore only mutually inverted pairs
+             *  (t_parityInv, t_parity) = (1,2) or (2,1) statisfy conditions
+             *  (t_parityInv != t_parity) && (t_parityInv + t_parity == 3)
+             */
+
+            if (Stereo->t_parityInv[i] == Stereo->t_parity[i] ||
+                 Stereo->t_parityInv[i] + Stereo->t_parity[i] != 3)
             {
-                diff = (Stereo->t_parityInv[i] > Stereo->t_parity[i]) ? 1 : -1;
-                break; /* Abs != Inv */
+                diff = 1; /* parities are same or different and cannot be obtained by simple inversion */
+                break;
             }
         }
-
-        Stereo->nCompInv2Abs =
-            (diff > 0) ? 1 : (diff < 0) ? -1 : 0;
-
-        if (diff == -1 || diff == 1)
-        {
-            /* The first found difference was in parities */
-            for (i = 0, diff = 0; i < n; i++)
-            {
-                if (Stereo->nNumberInv[i] != Stereo->nNumber[i])
-                {
-                    diff = 2; /* difference in stereo center numbering */
-                    break;
-                }
-
-                /*  Parities can be only 1, 2, 3, 4. Therefore only mutually inverted pairs
-                 *  (t_parityInv, t_parity) = (1,2) or (2,1) statisfy conditions
-                 *  (t_parityInv != t_parity) && (t_parityInv + t_parity == 3)
-                 */
-
-                if (Stereo->t_parityInv[i] == Stereo->t_parity[i] ||
-                    Stereo->t_parityInv[i] + Stereo->t_parity[i] != 3)
-                {
-                    diff = 1; /* parities are same or different and cannot be obtained by simple inversion */
-                    break;
-                }
-            }
-            Stereo->bTrivialInv = !diff;
-        }
-        else
-        {
-            Stereo->bTrivialInv = 0;
-        }
+        Stereo->bTrivialInv = !diff;
     }
     else
     {
-        nErrorCode = 1;
+        Stereo->bTrivialInv = 0;
     }
+
 
 exit_function:
     return nErrorCode;
@@ -824,7 +801,7 @@ INCHI_MODE UnmarkAllUndefinedUnknownStereo( INChI_Stereo *Stereo,
     INCHI_MODE nRet = 0;
     int   i, n;
 
-    if (!Stereo || (Stereo && !Stereo->nNumberOfStereoCenters && !Stereo->nNumberOfStereoBonds)) /* djb-rwth: addressing LLVM warning */
+    if (!Stereo || Stereo && !Stereo->nNumberOfStereoCenters && !Stereo->nNumberOfStereoBonds)
     {
         return nRet;
     }
@@ -1046,9 +1023,9 @@ int FillOutINChI( INChI *pINChI,
         nErrorCode |= WARN_FAILED_ISOTOPIC_STEREO;
     }
 
-    pCanonRankAtoms = (AT_NUMB *) inchi_calloc( (long long)num_at_tg + 1, sizeof( pCanonRankAtoms[0] ) ); /* djb-rwth: cast operator added */
+    pCanonRankAtoms = (AT_NUMB *) inchi_calloc( num_at_tg + 1, sizeof( pCanonRankAtoms[0] ) );
 
-    pSortOrd = (AT_NUMB *) inchi_calloc( (long long)num_at_tg + 1, sizeof( pSortOrd[0] ) ); /*  must have more than num_atoms */ /* djb-rwth: cast operator added */
+    pSortOrd = (AT_NUMB *) inchi_calloc( num_at_tg + 1, sizeof( pSortOrd[0] ) ); /*  must have more than num_atoms */
 
     if (!pCanonRankAtoms || !pSortOrd)
     {
@@ -1059,15 +1036,6 @@ int FillOutINChI( INChI *pINChI,
     }
 
     /*  Total charge */
-    /* djb-rwth: required for fixing oss-fuzz issue #69656 */
-    if (num_atoms + num_removed_H > sp_at_size)
-    {
-        nErrorCode = 0;
-        ret = CT_OVERFLOW;
-        pINChI->nErrorCode = pINChI_Aux->nErrorCode = CT_OVERFLOW;
-        goto exit_function;
-    }
-
     for (i = 0, n = 0; i < num_atoms + num_removed_H; i++)
     {
         n += at[i].charge;
@@ -1112,10 +1080,10 @@ int FillOutINChI( INChI *pINChI,
     /* Abs or rel stereo may establish one of two canonical numberings */
     if (( pCS->nLenLinearCTStereoCarb > 0 || pCS->nLenLinearCTStereoDble > 0 ) &&
           pCS->nLenCanonOrdStereo > 0 &&
-          ( (pCS->LinearCTStereoCarb && pCS->LinearCTStereoCarbInv) ||
-              (pCS->LinearCTStereoDble && pCS->LinearCTStereoDbleInv) ) &&
-          pCS->nCanonOrdStereo && pCS->nCanonOrdStereoInv
-       ) /* djb-rwth: addressing LLVM warning */
+          ( pCS->LinearCTStereoCarb && pCS->LinearCTStereoCarbInv ||
+              pCS->LinearCTStereoDble && pCS->LinearCTStereoDbleInv ) &&
+          pCS->nCanonOrdStereo    && pCS->nCanonOrdStereoInv
+       )
     {
         pCanonRank = pCanonRankAtoms;
         pCanonOrd = pCS->nCanonOrdStereo;
@@ -1143,15 +1111,6 @@ int FillOutINChI( INChI *pINChI,
                                                       pCS->LinearCTStereoCarbInv,
                                                       pCS->LinearCTStereoDbleInv,
                                                       pCanonOrdInv, pCanonRankInv );
-
-        /* djb-rwth: fixing oss-fuzz issue #68271 */
-        if (nErrorCode == 1)
-        {
-            nErrorCode = 0;
-            ret = CT_OUT_OF_RAM;  /*   <BRKPT> */
-            pINChI->nErrorCode = pINChI_Aux->nErrorCode = CT_OUT_OF_RAM;
-            goto exit_function;
-        }
 
         if (Stereo->t_parityInv && Stereo->nNumberInv)
         {
@@ -1184,15 +1143,11 @@ int FillOutINChI( INChI *pINChI,
             }
         }
 
-        LOG_NO_ARGS("************************** Canonical Ordering with Stereo (L1183:ichimak2.c) ***************************\n");
         for (i = 0; i < num_atoms; i++)
         {
             pINChI_Aux->nOrigAtNosInCanonOrdInv[i] = at[pCanonOrdInv[i]].orig_at_number;
             pINChI_Aux->nOrigAtNosInCanonOrd[i] = at[pCanonOrd[i]].orig_at_number;
-            LOG_MULT_ARGS("Atom Nr: %d, Canonical Numbering Normal: %d, Element Name: %s\n", i + 1, at[pCanonOrd[i]].orig_at_number, at[i].elname);
         }
-
-        LOG_NO_ARGS("\n******************************************************************************************************\n");
 
         if (bUseNumberingInv)
         {
@@ -1200,9 +1155,9 @@ int FillOutINChI( INChI *pINChI,
             switch_ptrs( &pCanonRank, &pCanonRankInv );
             switch_ptrs( &pCanonOrd, &pCanonOrdInv );
             /* save inverted stereo ranks & order because it represents the smallest (relative) */
-            memcpy(pCanonRank, pCanonRankInv, num_at_tg * sizeof(pCanonRank[0]));
+            memcpy( pCanonRank, pCanonRankInv, num_at_tg * sizeof( pCanonRank[0] ) );
             /* change pCS->nCanonOrdStereo[] to inverted: */
-            memcpy(pCanonOrd, pCanonOrdInv, num_at_tg * sizeof(pCanonOrd[0]));
+            memcpy( pCanonOrd, pCanonOrdInv, num_at_tg * sizeof( pCanonOrd[0] ) );
         }
 
         pCanonRankInv = NULL;
@@ -1239,30 +1194,28 @@ int FillOutINChI( INChI *pINChI,
         /* charges, radicals, valences */
         for (i = 0; i < num_atoms; i++)
         {
-            if (pCanonOrd) /* djb-rwth: fixing a NULL pointer dereference */
+            ii = pCanonOrd[i];
+
+            if (norm_at[ii].valence || norm_at[ii].num_H)
             {
-                ii = pCanonOrd[i]; 
-                if (norm_at[ii].valence || norm_at[ii].num_H)
-                {
-                    pINChI_Aux->OrigInfo[i].cCharge = norm_at[ii].charge;
+                pINChI_Aux->OrigInfo[i].cCharge = norm_at[ii].charge;
 
-                    pINChI_Aux->OrigInfo[i].cRadical = (norm_at[ii].radical == RADICAL_SINGLET) ? 0 :
-                        (norm_at[ii].radical == RADICAL_DOUBLET) ? 1 :
-                        (norm_at[ii].radical == RADICAL_TRIPLET) ? 2 :
-                        norm_at[ii].radical ? 3 : 0;
+                pINChI_Aux->OrigInfo[i].cRadical = ( norm_at[ii].radical == RADICAL_SINGLET ) ? 0 :
+                    ( norm_at[ii].radical == RADICAL_DOUBLET ) ? 1 :
+                    ( norm_at[ii].radical == RADICAL_TRIPLET ) ? 2 :
+                    norm_at[ii].radical ? 3 : 0;
 
-                    pINChI_Aux->OrigInfo[i].cUnusualValence =
-                        get_unusual_el_valence(norm_at[ii].el_number, norm_at[ii].charge, norm_at[ii].radical,
-                            norm_at[ii].chem_bonds_valence, norm_at[ii].num_H, norm_at[ii].valence);
-                }
-                else
-                {
-                    /* charge of a single atom component is in the INChI; valence = 0 is standard */
-                    pINChI_Aux->OrigInfo[i].cRadical = (norm_at[ii].radical == RADICAL_SINGLET) ? 0 :
-                        (norm_at[ii].radical == RADICAL_DOUBLET) ? 1 :
-                        (norm_at[ii].radical == RADICAL_TRIPLET) ? 2 :
-                        norm_at[ii].radical ? 3 : 0;
-                }
+                pINChI_Aux->OrigInfo[i].cUnusualValence =
+                    get_unusual_el_valence( norm_at[ii].el_number, norm_at[ii].charge, norm_at[ii].radical,
+                                            norm_at[ii].chem_bonds_valence, norm_at[ii].num_H, norm_at[ii].valence );
+            }
+            else
+            {
+                /* charge of a single atom component is in the INChI; valence = 0 is standard */
+                pINChI_Aux->OrigInfo[i].cRadical = ( norm_at[ii].radical == RADICAL_SINGLET ) ? 0 :
+                    ( norm_at[ii].radical == RADICAL_DOUBLET ) ? 1 :
+                    ( norm_at[ii].radical == RADICAL_TRIPLET ) ? 2 :
+                    norm_at[ii].radical ? 3 : 0;
             }
         }
     }
@@ -1332,7 +1285,7 @@ int FillOutINChI( INChI *pINChI,
         goto exit_function;
     }
 
-    memcpy(pINChI->nConnTable, pCS->LinearCT, sizeof(pINChI->nConnTable[0]) * pCS->nLenLinearCTAtOnly);
+    memcpy( pINChI->nConnTable, pCS->LinearCT, sizeof( pINChI->nConnTable[0] )*pCS->nLenLinearCTAtOnly );
 
     pINChI->lenConnTable = pCS->nLenLinearCTAtOnly;
 
@@ -1362,20 +1315,14 @@ int FillOutINChI( INChI *pINChI,
 
             /*  Num(H), Num(-) */
 
-            for (j = 0; j < INCHI_T_NUM_MOVABLE; j++) /* djb-rwth: redundant condition; && j < T_NUM_NO_ISOTOPIC part should be checked; can INCHI_T_NUM_MOVABLE and T_NUM_NO_ISOTOPIC change values from 2? */
+            for (j = 0; j < INCHI_T_NUM_MOVABLE && j < T_NUM_NO_ISOTOPIC; j++)
             {
                 pINChI->nTautomer[len++] = t_group->num[j];
             }
-            
-            
-            /* djb-rwth: erroneous loop execution condition
-            
             for (j = T_NUM_NO_ISOTOPIC; j < INCHI_T_NUM_MOVABLE; j++)
             {
-                pINChI->nTautomer[len++] = 0; // should not happen 
+                pINChI->nTautomer[len++] = 0; /* should not happen */
             }
-            
-            */
 
             /* tautomeric group endpoint canonical numbers, pre-sorted in ascending order */
 
@@ -1395,9 +1342,9 @@ int FillOutINChI( INChI *pINChI,
         pINChI_Aux->nNumberOfTGroups = 0;
 
         if (t_group_info && ( ( t_group_info->tni.bNormalizationFlags & FLAG_NORM_CONSIDER_TAUT ) ||
-            (t_group_info->nNumIsotopicEndpoints > 1 &&
-            ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) )) )
-           ) /* djb-rwth: addressing LLVM warning */
+            t_group_info->nNumIsotopicEndpoints > 1 &&
+            ( t_group_info->bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) ) )
+           )
         {
             /* only protons (re)moved or added */
             pINChI->lenTautomer = 1;
@@ -1521,10 +1468,10 @@ int FillOutINChI( INChI *pINChI,
 
     if (( pCS->nLenLinearCTIsotopicStereoCarb > 0 || pCS->nLenLinearCTIsotopicStereoDble > 0 ) &&
           pCS->nLenCanonOrdIsotopicStereo > 0 &&
-          ( (pCS->LinearCTIsotopicStereoCarb && pCS->LinearCTIsotopicStereoCarbInv) ||
-              (pCS->LinearCTIsotopicStereoDble && pCS->LinearCTIsotopicStereoDbleInv) ) &&
-          pCS->nCanonOrdIsotopicStereo && pCS->nCanonOrdIsotopicStereoInv
-          ) /* djb-rwth: addressing LLVM warning */
+          ( pCS->LinearCTIsotopicStereoCarb && pCS->LinearCTIsotopicStereoCarbInv ||
+              pCS->LinearCTIsotopicStereoDble && pCS->LinearCTIsotopicStereoDbleInv ) &&
+          pCS->nCanonOrdIsotopicStereo    && pCS->nCanonOrdIsotopicStereoInv
+          )
     {
         /* found isotopic stereo */
 
@@ -1555,15 +1502,6 @@ int FillOutINChI( INChI *pINChI,
                                                       pCS->LinearCTIsotopicStereoDbleInv,
                                                       pCanonOrdInv, pCanonRankInv );
 
-        /* djb-rwth: fixing oss-fuzz issue #68271 */
-        if (nErrorCode == 1)
-        {
-            nErrorCode = 0;
-            ret = CT_OUT_OF_RAM;  /*   <BRKPT> */
-            pINChI->nErrorCode = pINChI_Aux->nErrorCode = CT_OUT_OF_RAM;
-            goto exit_function;
-        }
-        
         if (Stereo->t_parityInv && Stereo->nNumberInv)
         {
             if (nUserMode & REQ_MODE_RELATIVE_STEREO)
@@ -1605,8 +1543,8 @@ int FillOutINChI( INChI *pINChI,
         {
             switch_ptrs( &pCanonRank, &pCanonRankInv );
             switch_ptrs( &pCanonOrd, &pCanonOrdInv );
-            memcpy(pCanonRank, pCanonRankInv, num_at_tg * sizeof(pCanonRank[0]));
-            memcpy(pCanonOrd, pCanonOrdInv, num_at_tg * sizeof(pCanonOrd[0]));
+            memcpy( pCanonRank, pCanonRankInv, num_at_tg * sizeof( pCanonRank[0] ) );
+            memcpy( pCanonOrd, pCanonOrdInv, num_at_tg * sizeof( pCanonOrd[0] ) );
         }
 
         pCanonRankInv = NULL;
@@ -1623,8 +1561,7 @@ int FillOutINChI( INChI *pINChI,
         pCanonRank = pCanonRankAtoms;
         pOrigNosInCanonOrd = pINChI_Aux->nIsotopicOrigAtNosInCanonOrd;
 
-        /* djb-rwth: fixing oss-fuzz issue #30496 */
-        if (pCanonOrd && pCanonRank && pOrigNosInCanonOrd)
+        if (pCanonOrd && pCanonRank)
         {
             for (i = 0; i < num_atoms; i++)
             {
@@ -1728,7 +1665,7 @@ int FillOutINChI( INChI *pINChI,
         pINChI->nPossibleLocationsOfIsotopicH[0] = (AT_NUMB) j; /* length including the 0th element */
     }
 
-    if ((nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->StereoIsotopic, nUserMode ))) /* djb-rwth: addressing LLVM warning */
+    if (nStereoUnmarkMode = UnmarkAllUndefinedUnknownStereo( pINChI->StereoIsotopic, nUserMode ))
     {
         pINChI->nFlags |=
             ( nStereoUnmarkMode & REQ_MODE_SC_IGN_ALL_UU ) ? INCHI_FLAG_SC_IGN_ALL_ISO_UU
@@ -1765,7 +1702,7 @@ int FillOutINChI( INChI *pINChI,
          t_group_info && t_group_info->num_t_groups > 0)
     {
 
-        /* djb-rwth: removing redundant code */
+        n = t_group_info->num_t_groups;
 
         pCanonOrdTaut =
             pCS->nLenCanonOrdIsotopicStereoTaut > 0 ? ( n = pCS->nLenCanonOrdIsotopicStereoTaut, pCS->nCanonOrdIsotopicStereoTaut )

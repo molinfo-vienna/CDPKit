@@ -2,7 +2,6 @@ master:
 
  - Updated embedded MessagePack library to version 6.1.1
  - Updated embedded SQLite3 database to version 3.46.1
- - Updated embedded InChI library to version 1.07.1
  - Updated embedded MMTF library to version 1.1.0
  - Updated PDB residue dictionary, now covering 43441 chemical components
  - CDPL Python bindings now support NumPy V>=2.0

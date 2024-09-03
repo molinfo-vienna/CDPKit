@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,24 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 
 #ifndef _MODE_H_
@@ -67,30 +60,28 @@
 
 #if defined(TARGET_EXE_STANDALONE)
 /* Uncomment the next line to perform atom ordering/renumbering tests (internal only) */
-#define RENUMBER_ATOMS_AND_RECALC_V106 1
+/*#define RENUMBER_ATOMS_AND_RECALC_V106 1*/
 #ifdef      RENUMBER_ATOMS_AND_RECALC_V106
 /* Comment the next line to print all renumbering changing the initial InChIKey */
 #define STOP_AFTER_FIRST_CHANGE_ON_RENUMBERING 1
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (inchi-1 executable)"
-/*#define APP_DESCRIPTION "InChI version 1, Software v. 1.06-PT6 (inchi-1 executable) \n*** INTERNAL TEST MODE: ATOM RENUMBERING TEST IS ACTIVE ***"*/
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (inchi-1 executable) \n*** INTERNAL TEST MODE: ATOM RENUMBERING TEST IS ACTIVE ***"
 #else
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (inchi-1 executable)***"
-/*#define APP_DESCRIPTION "InChI version 1, Software v. 1.06-PT6 (inchi-1 executable) \n*** UNOFFICIAL TEST VERSION: 6 PT TAUTO RULES AVAILABLE ***"*/
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (inchi-1 executable)"
 #endif
 
 #elif defined(TARGET_API_LIB)
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (API Library)"
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (API Library)"
 
 #elif defined(TARGET_EXE_USING_API)
 #ifndef APP_DESCRIPTION
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (executable calling API Library)"
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (executable calling API Library)"
 #endif
 
 #elif defined(TARGET_LIB_FOR_WINCHI)
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (Library for wInChI GUI executable)"
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (Library for wInChI GUI executable)"
 
 #elif defined(TARGET_WINCHI)
-#define APP_DESCRIPTION "InChI version 1, Software v. 1.07 (wInChI GUI executable)"
+#define APP_DESCRIPTION "InChI version 1, Software v. 1.06 (wInChI GUI executable)"
 
 #else
 #error  No build target #defined, pls check compiler options... (TARGET_EXE_STANDALONE|TARGET_API_LIB|TARGET_EXE_USING_API|TARGET_LIB_FOR_WINCHI)
@@ -129,11 +120,11 @@ BUILD_WITH_AMI
 
 /* #define BUILD_LINK_AS_DLL */
 
-
+/*
 #ifndef BUILD_WITH_ENG_OPTIONS
-#define BUILD_WITH_ENG_OPTIONS 0
+#define BUILD_WITH_ENG_OPTIONS 1
 #endif
-
+*/
 
 
 #ifndef BUILD_WITH_AMI
@@ -354,13 +345,7 @@ extern "C" {
                                         /* atom in aromatic ring */
 
 
-/* Software version 1.07 */
-
-/* INTENTIONALLY DISABLE 1.06 FIXES */
-/*#define DISABLE_106_FIXES 1  */
-
-#ifndef DISABLE_106_FIXES
-
+/* Software version 1.06 */
 #define FIX_STEREOCOUNT_ERR           1 /* (2018-01-09) Supplied by DT                              */
                                         /* Fix for InChI Error -30010 (STEREOCOUNT_ERR)             */
                                         /* appeared on PubChem CIDs 124897603, 124921144            */
@@ -394,7 +379,7 @@ extern "C" {
 #define FIX_GAF_2019_1 1
 #define FIX_GAF_2019_2 1
 
-/* v. 1.06 October 2023 */
+/* v. 1.06 December 2020 */
 /*  Sep-Dec 2020 Fixed oss-fuzz issues:
     25604 25607 25609 25618 25726 25727 25728 25730 25731 25735
     25736 25737 25741 25830 25835 26514 27901 27903 27905
@@ -406,10 +391,6 @@ extern "C" {
 #define FIX_GAF_2020_25607 1
 #define FIX_GAF_2020_25726 1
 #define FIX_GAF_2020_25741 1
-
-/* v. 1.061 August 2021 */
-#define FIX_OSS_FUZZ_30162_30343 1
-#define FIX_OSS_FUZZ_25734_28139 1
 
 /* internal v. 1.052, January 2020 */
 /* Thanks to CURE53 for detecting and reporting the issues */
@@ -423,7 +404,7 @@ extern "C" {
                                         */
 #define FIX_GAF_2019_3 1
 #define FIX_ONE_LINE_INCHI_INPUT_CONVERSION_ISSUE 1
-#endif
+
 
 #define ALLOW_EMPTY_INCHI_AS_INPUT    1 /* Allow "InChI=1//" and standard/beta analogues in input   */
 
@@ -471,18 +452,11 @@ extern "C" {
 #define KETO_ENOL_TAUT             1 /* include keto-enol tautomerism */
 #define TAUT_15_NON_RING           1 /* 1,5 tautomerism with endpoints not in ring */
 
-#define TAUT_PT_22_00              1 /* tautomerism rule PT_22_00 */
-#define TAUT_PT_16_00              1 /* tautomerism rule PT_16_00 */
-#define TAUT_PT_06_00              1 /* tautomerism rule PT_06_00 */
-#define TAUT_PT_39_00              1 /* tautomerism rule PT_39_00 */
-#define TAUT_PT_13_00              1 /* tautomerism rule PT_13_00 */
-#define TAUT_PT_18_00              1 /* tautomerism rule PT_18_00 */  
 
-#ifdef  BUILD_WITH_ENG_OPTIONS
+#if 0
 #define UNDERIVATIZE               1 /* split to possible underivatized fragments */
 #define RING2CHAIN                 1 /* open rings R-C(-OH)-O-R => R-C(=O) OH-R   */
-#endif
-
+#endif 
 
 #if( UNDERIVATIZE == 1 )
 #define UNDERIVATIZE_REPORT        1 /* if SdfValue found, add to SdfValue a list of removed deriv. agents */
@@ -553,7 +527,7 @@ extern "C" {
                                       *     NIP=No Ion Pairs
                                       */
 /* salts treatment */
-#define DISCONNECT_SALTS            1  /* 1=>disconnect metal atoms from salts, 0=>dont */ /* djb-rwth: default 1 */
+#define DISCONNECT_SALTS            1  /* 1=>disconnect metal atoms from salts, 0=>dont */
 #define TEST_REMOVE_S_ATOMS         1  /* 1=>default: after merging into one group test &
                                         *    remove unreachable,
                                         * 0=> old version: test only before merging into one t-group */
@@ -580,9 +554,9 @@ extern "C" {
 #define ADD_MOVEABLE_O_PLUS          1  /* 1=> allow charges on O(+) to move */
 /* recently added -- end */
 
-#define DISCONNECT_METALS           1  /* make main layer disconnected */ /* djb-rwth: default 1 */
+#define DISCONNECT_METALS           1  /* make main layer disconnected */
 #define RECONNECT_METALS            0  /* 1=> by default add reconnected layer in case of coord.
-                                        *     compound disconnection */ /* djb-rwth: default 0 */
+                                        *     compound disconnection */
 #define CHECK_METAL_VALENCE         0  /* 1=> disconnect only metals that have abnormal valence */
 #define bREUSE_INCHI                1  /* 1=> do not recalulate INChI for components in reconnected
                                         *     structure that are same as in the connected one */
@@ -979,12 +953,6 @@ extern "C" {
 #define TG_FLAG_FIX_ISO_FIXEDH_BUG       0x00200000   /* fix bug found after v.102b (isotopic H representation)  */
 #define TG_FLAG_FIX_TERM_H_CHRG_BUG      0x00400000   /* fix bug found after v.102b (moving H charge in 'remove_terminal_HDT') */
 
-#define TG_FLAG_PT_22_00                 0x00800000
-#define TG_FLAG_PT_16_00                 0x01000000
-#define TG_FLAG_PT_06_00                 0x02000000
-#define TG_FLAG_PT_39_00                 0x04000000
-#define TG_FLAG_PT_13_00                 0x08000000
-#define TG_FLAG_PT_18_00                 0x10000000
 
 /* output bTautFlags flags */
 
@@ -1192,7 +1160,7 @@ do {\
 #define qzfree(X)   do{if(X){inchi_free(X);(X)=NULL;}}while(0)
 
 /* rellocation */
-/* djb-rwth: avoiding memory leaks */
+
 #define MYREALLOC2(PTRTYPE1, PTRTYPE2, PTR1, PTR2, LEN1, LEN2, ERR) \
     do { \
         if( (LEN1) <= (LEN2) ) {\
@@ -1212,8 +1180,6 @@ do {\
                 (LEN1) = (LEN2);  \
                 (ERR)  = 0; \
             } else {        \
-                inchi_free(newPTR1); \
-                inchi_free(newPTR2); \
                 (ERR)  = 1; \
             }               \
         } else { (ERR) = 0; } \
@@ -1229,9 +1195,9 @@ do {\
 #endif
 
 #define POLYMERS_NO 0		/* ignore polymers										*/
-#define POLYMERS_MODERN 1	/* v. 1.06+ way to treat polymers with Zz			*/
-#define POLYMERS_LEGACY 2	/* v. 1.05 mode, no explicit Zz (internally they are here) */
-#define POLYMERS_LEGACY_PLUS 3	/* v. 1.05 mode with an addition of that in all
+#define POLYMERS_MODERN 1	/* current (1.06) way to treat polymers with Zz			*/
+#define POLYMERS_LEGACY 2	/* 1.05 mode, no explicit Zz (internally they are here) */
+#define POLYMERS_LEGACY_PLUS 3	/* 1.05 mode with an addition of that in all
                                    frame-shiftable-bistar-CRUs their backbone bonds 
                                    are reordered in descending seniority order. 
                                    Used as hidden 1st pass in 1.06 treatment		*/
@@ -1242,7 +1208,7 @@ do {\
 /* #define STEREO_AT_ZZ 1 */
 
 /* Set to 1 and use in engineering mode, if necessary */
-#define ALLOW_SUBSTRUCTURE_FILTERING 1
+/*#define ALLOW_SUBSTRUCTURE_FILTERING 1 */
 
 
 #ifndef COMPILE_ALL_CPP

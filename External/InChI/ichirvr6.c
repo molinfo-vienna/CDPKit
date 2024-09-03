@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <string.h>
 
@@ -50,7 +44,6 @@
 #include "ichicant.h"
 #include "ichirvrs.h"
 
-#include "bcf_s.h"
 
 #define INC_ADD_EDGE 64
 
@@ -84,7 +77,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 {
     /*--------- process extra or missing Fixed-H on non-tautomeric atoms ------*/
     /* at2 should be the most recently restored atom, Fixed-H */
-    int i, j, k, delta, max_success, cur_success, ret = 0; /* djb-rwth: removing redundant variables */
+    int i, j, k, delta, tot_succes, max_success, cur_success, ret = 0;
     int err, iOrigInChI, iRevrInChI;
     int j12, v1, v2, e, vRad;
     BNS_VERTEX *pv1, *pv2, *pvRad;
@@ -170,7 +163,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         iRevrInChI = 0;
     }
 
-    memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( icr2, 0, sizeof( *icr2 ) );
     if (iRevrInChI || iOrigInChI)
     {
         /* additional mobile-H compare in case of Fixed-H */
@@ -202,16 +195,15 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             {
                 /* do not store same bond 2 times */
                 if (( pe->forbidden & forbidden_stereo_edge_mask ) &&
-                    ( ret = AddToEdgeList( &FixedStereoEdges, e, INC_ADD_EDGE ) )) /* djb-rwth: ignoring LLVM warning as there should be no memory leak */
+                    ( ret = AddToEdgeList( &FixedStereoEdges, e, INC_ADD_EDGE ) ))
                 {
-                    inchi_free(pe); /* djb-rwth: avoiding memory leak */
                     goto exit_function;
                 }
             }
         }
     }
 
-    /* djb-rwth: removing redundant code */
+    tot_succes = 0;
     cur_success = 0;
     if (( cmpInChI & IDIF_SB_MISS ) && ( !cmpInChI2 || ( cmpInChI2 & IDIF_SB_MISS ) ) &&
          0 < ( max_success = pBNS->tot_st_cap - pBNS->tot_st_flow ))
@@ -247,7 +239,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             pv1->st_edge.flow--;
             pv2->st_edge.flow--;
             pe->flow--; /* new radical on v2 */
-            /* djb-rwth: removing redundant code */
+            vRad = NO_VERTEX;
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
             pv1->st_edge.cap++;
@@ -324,14 +316,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         SetForbiddenEdgeMask( pBNS, &FixedStereoEdges, forbidden_stereo_edge_mask );
         if (cur_success)
         {
-            /* djb-rwth: removing redundant code */
+            tot_succes += cur_success;
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -352,7 +344,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 goto exit_function;
             }
             cmpInChI2 = 0;
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
                 /* additional mobile-H compare in case of Fixed-H */
@@ -387,23 +379,24 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         }
     }
 
-    /* djb-rwth: removing redundant code */
+    cur_success = 0;
     if (!( cmpInChI & IDIF_SB_MISS ) && ( cmpInChI2 & IDIF_SB_MISS ) &&
          icr2->num_sb_in2_only &&
-         0 < ( pBNS->tot_st_cap - pBNS->tot_st_flow )) /* djb-rwth: removing redundant code */
+         0 < ( max_success = pBNS->tot_st_cap - pBNS->tot_st_flow ))
     {
         /*----------------------------------------------------*/
         /* case 02: missing stereogenic bond in Mobile-H only */
         /* X=N-O*  => X=N=O and eliminate radical             */
         /*----------------------------------------------------*/
         int retC, ret2C, retS, ret2S;
-        /* djb-rwth: removing redundant variables */
+        INCHI_MODE cmpInChI_Prev, cmpInChI2_Prev;
         ICR  icr_Prev, icr2_Prev;
 
         /* blind attepmt */
         icr_Prev = *icr;
         icr2_Prev = *icr2;
-        /* djb-rwth: removing redundant code */
+        cmpInChI_Prev = cmpInChI;
+        cmpInChI2_Prev = cmpInChI2;
         for (i = AllRadList.num_edges = 0; i < pStruct->num_atoms; i++)
         {
             if (pBNS->vert[i].st_edge.cap - pBNS->vert[i].st_edge.flow == 1 &&
@@ -426,7 +419,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         {
             goto exit_function;
         }
-        if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+        if (ret = FillOutExtraFixedHDataRestr( pStruct ))
         {
             goto exit_function;
         }
@@ -447,7 +440,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             goto exit_function;
         }
         cmpInChI2 = 0;
-        memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( icr2, 0, sizeof( *icr2 ) );
         if (iRevrInChI || iOrigInChI)
         {
             /* additional mobile-H compare in case of Fixed-H */
@@ -493,7 +486,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -514,7 +507,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 goto exit_function;
             }
             cmpInChI2 = 0;
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
                 /* additional mobile-H compare in case of Fixed-H */
@@ -567,7 +560,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         {
             j12 = icr->sb_undef_in1_only[i];
             pv1 = pBNS->vert + ( v1 = pStereoRevrs->nBondAtom1[j12] - 1 );
-            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 ); /* djb-rwth: ignoring LLVM warning: variable used */
+            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 );
 
             if (pStereo2Revrs)
             {
@@ -626,7 +619,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     {
                         if (!pStruct->endpoint[j])
                         {
-                            if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                             {
                                 goto exit_function;
                             }
@@ -635,7 +628,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                             if (pVA[j].cNumValenceElectrons == 6)
                             {
                                 /* O */
-                                if ((ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -643,7 +636,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                             else
                             {
                                                  /* N */
-                                if ((ret = AddToEdgeList( TautMinusEdges + 1, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( TautMinusEdges + 1, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -651,7 +644,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     }
                     if (( k = pVA[j].nCPlusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                         {
                             goto exit_function;
                         }
@@ -662,7 +655,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 
                             if (!pBNS->edge[j].forbidden && pBNS->edge[k].flow)
                             {
-                                if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -705,8 +698,8 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                           &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                    if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                        (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+                    if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                        vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 0)
                     {
                         /* Negative charge has been moved, no change in number of charges */
                         ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
@@ -737,14 +730,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 /*exit_case_03:*/
         if (cur_success)
         {
-            /* djb-rwth: removing redundant code */
+            tot_succes += cur_success;
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -765,7 +758,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 goto exit_function;
             }
             cmpInChI2 = 0;
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
                 /* additional mobile-H compare in case of Fixed-H */
@@ -816,10 +809,8 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         {
             j12 = icr->sb_undef_in1_only[i];
             pv1 = pBNS->vert + ( v1 = pStereoRevrs->nBondAtom1[j12] - 1 );
-            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 ); /* djb-rwth: ignoring LLVM warning: variable used */
-            
-            /* djb-rwth: fixing oss-fuzz issue #67650 */
-            pe = pBNS->edge + (e = pv1->iedge[0]); /* djb-rwth: proper initialisation required to avoid garbage values */
+            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 );
+
             /* find the edge between v1 and v2 */
             for (k = 0; k < at2[v1].valence; k++)
             {
@@ -860,7 +851,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 {
                     if (( k = pVA[j].nCMinusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                         {
                             goto exit_function;
                         }
@@ -868,11 +859,11 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     if (( k = pVA[j].nCPlusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
                     {
                         int bMayBeUnfixed = !at2[j].num_H && !( pStruct->endpoint && pStruct->endpoint[j] );
-                        if ((bMayBeUnfixed && pVA[j].cNumValenceElectrons == 6) ||
-                             (pVA[j].cNumValenceElectrons == 5 && pVA[j].cPeriodicRowNumber > 1)) /* djb-rwth: addressing LLVM warning */
+                        if (bMayBeUnfixed && pVA[j].cNumValenceElectrons == 6 ||
+                             pVA[j].cNumValenceElectrons == 5 && pVA[j].cPeriodicRowNumber > 1)
                         {
                             /* O & P */
-                            if ((ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))
                             {
                                 goto exit_function;
                             }
@@ -883,14 +874,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                                     pVA[j].cNumValenceElectrons == 5 && pVA[j].cPeriodicRowNumber == 1)
                             {
                                 /* N */
-                                if ((ret = AddToEdgeList( TautMinusEdges + 1, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( TautMinusEdges + 1, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
                             }
                             else
                             {
-                                if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -902,7 +893,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                         {
                             if (!pBNS->edge[j].forbidden && pBNS->edge[k].flow)
                             {
-                                if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -946,8 +937,8 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                           &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                    if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                        (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+                    if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                        vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 0)
                     {
                         /* Negative charge has been moved, no change in number of charges */
                         ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
@@ -978,14 +969,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 /*exit_case_04:*/
         if (cur_success)
         {
-            /* djb-rwth: removing redundant code */
+            tot_succes += cur_success;
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -1006,7 +997,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 goto exit_function;
             }
             cmpInChI2 = 0;
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
 /* additional mobile-H compare in case of Fixed-H */
@@ -1085,13 +1076,13 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         {
             j12 = icr->sb_undef_in1_only[i];
             pv1 = pBNS->vert + ( v1 = pStereoRevrs->nBondAtom1[j12] - 1 );
-            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 ); /* djb-rwth: ignoring LLVM warning: variable used */
+            pv2 = pBNS->vert + ( v2 = pStereoRevrs->nBondAtom2[j12] - 1 );
             /* indicators of -NH: */
             i1 = at2[v1].valence == 1 && at2[v1].num_H == 1 && !at2[v1].endpoint &&
                 pVA[v1].cNumValenceElectrons == 5 && pVA[v1].cPeriodicRowNumber == 1;
             i2 = at2[v2].valence == 1 && at2[v2].num_H == 1 && !at2[v2].endpoint &&
                 pVA[v2].cNumValenceElectrons == 5 && pVA[v2].cPeriodicRowNumber == 1;
-            if ((!i1 && !i2) || (i1 && i2)) /* djb-rwth: addressing LLVM warnings */
+            if (!i1 && !i2 || i1 && i2)
             {
                 continue;
             }
@@ -1145,7 +1136,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 {
                     if (( k = pVA[j].nCMinusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                         {
                             goto exit_function;
                         }
@@ -1154,14 +1145,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     {
                         if (pVA[j].cNumValenceElectrons == 5 && pVA[j].cPeriodicRowNumber == 1 &&
                              !at2[j].num_H && at2[j].valence == 3 &&
-                             !( at2[j].endpoint || (pStruct->endpoint && pStruct->endpoint[j]) )) /* djb-rwth: addressing LLVM warning */
+                             !( at2[j].endpoint || pStruct->endpoint && pStruct->endpoint[j] ))
                         {
                             ; /* do not fix -N< or =N(+)< */
                         }
                         else
                         {
                                              /* all others */
-                            if ((ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))
                             {
                                 goto exit_function;
                             }
@@ -1172,7 +1163,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                         {
                             if (!pBNS->edge[j].forbidden && pBNS->edge[k].flow)
                             {
-                                if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -1189,7 +1180,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             pBNS->vert[vPlusMinus].st_edge.cap += delta; /* create radical on (+/-) */
             pBNS->tot_st_flow -= 2 * delta;
             /* fix C-NH bond */
-            if ((ret = AddToEdgeList( &AllChargeEdges, e, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &AllChargeEdges, e, INC_ADD_EDGE ))
             {
                 goto exit_function;
             }
@@ -1201,8 +1192,8 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == vPlusMinus && vPathStart == aC) ||
-                (vPathEnd == aC && vPathStart == vPlusMinus) ) && nDeltaCharge == 1) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == vPlusMinus && vPathStart == aC ||
+                vPathEnd == aC && vPathStart == vPlusMinus ) && nDeltaCharge == 1)
             {
                 /* Negative charge has been moved, no change in number of charges */
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
@@ -1235,14 +1226,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 /*exit_case_05:*/
         if (cur_success)
         {
-            /* djb-rwth: removing redundant code */
+            tot_succes += cur_success;
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -1263,7 +1254,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 goto exit_function;
             }
             cmpInChI2 = 0;
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
                 /* additional mobile-H compare in case of Fixed-H */
@@ -1283,7 +1274,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                        pStruct->pOneINChI[0]->StereoIsotopic->nNumberOfStereoBonds +
                        pStruct->pOneINChI[0]->StereoIsotopic->nNumberOfStereoCenters )
                 ? pStruct->pOneINChI[0]->StereoIsotopic
-                : pStruct->pOneINChI[0]->Stereo; /* djb-rwth: ignoring LLVM warning: variable used */
+                : pStruct->pOneINChI[0]->Stereo;
 
 
             pStereo2Revrs = ( pStruct->bMobileH == TAUT_YES || !pStruct->pOneINChI[1] ||
@@ -1323,7 +1314,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         /* Solution: Move (+) from -NH2(+) to othe -N<              */
         /*                                                          */
         /*----------------------------------------------------------*/
-        int aN, i1, i2, ePlus; /* djb-rwth: removing redundant variables */
+        int aN, aC, i1, i2, ePlus;
         BNS_EDGE   *pePlus;
         AllChargeEdges.num_edges = 0;
         /* in1 => in restored structure; in2 => in original InChI */
@@ -1331,20 +1322,20 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
         {
             j12 = icr2->sb_undef_in1_only[i];
             pv1 = pBNS->vert + ( v1 = pStereo2Revrs->nBondAtom1[j12] - 1 );
-            pv2 = pBNS->vert + ( v2 = pStereo2Revrs->nBondAtom2[j12] - 1 ); /* djb-rwth: ignoring LLVM warning: variable used */
+            pv2 = pBNS->vert + ( v2 = pStereo2Revrs->nBondAtom2[j12] - 1 );
             /* indicators of -NH: */
             i1 = at2[v1].valence == 1 && at2[v1].num_H == 2 && !at2[v1].endpoint &&
                 pVA[v1].cNumValenceElectrons == 5 && pVA[v1].cPeriodicRowNumber == 1;
             i2 = at2[v2].valence == 1 && at2[v2].num_H == 2 && !at2[v2].endpoint &&
                 pVA[v2].cNumValenceElectrons == 5 && pVA[v2].cPeriodicRowNumber == 1;
-            if ((!i1 && !i2) || (i1 && i2)) /* djb-rwth: addressing LLVM warnings */
+            if (!i1 && !i2 || i1 && i2)
             {
                 continue;
             }
             /* find the edge between v1 and v2 */
             for (k = 0; k < at2[v1].valence; k++)
             {
-                pe = pBNS->edge + ( e = pv1->iedge[k] ); /* djb-rwth: ignoring LLVM warning: variable used */
+                pe = pBNS->edge + ( e = pv1->iedge[k] );
                 if (v2 == ( pe->neighbor12 ^ v1 ))
                     break; /* the edge has been found */
             }
@@ -1358,7 +1349,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 continue; /* already charged */
             }
             aN = i1 ? v1 : v2; /* -NH atom */
-            /* djb-rwth: removing redundant code */
+            aC = i1 ? v2 : v1; /* neighbor */
             if (0 > ( ePlus = pVA[aN].nCPlusGroupEdge - 1 ) ||
                 ( pePlus = pBNS->edge + ePlus )->flow ||  /* must be (+) charged */
                  pePlus->forbidden)
@@ -1374,7 +1365,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 {
                     if (( k = pVA[j].nCMinusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                         {
                             goto exit_function;
                         }
@@ -1383,14 +1374,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     {
                         if (pVA[j].cNumValenceElectrons == 5 && pVA[j].cPeriodicRowNumber == 1 &&
                              !at2[j].num_H && at2[j].valence == 3 &&
-                             !( at2[j].endpoint || (pStruct->endpoint && pStruct->endpoint[j]) )) /* djb-rwth: addressing LLVM warning */
+                             !( at2[j].endpoint || pStruct->endpoint && pStruct->endpoint[j] ))
                         {
                             ; /* do not fix -N< or =N(+)< */
                         }
                         else
                         {
                                              /* all others */
-                            if ((ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( TautMinusEdges + 0, k, INC_ADD_EDGE ))
                             {
                                 goto exit_function;
                             }
@@ -1401,7 +1392,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                         {
                             if (!pBNS->edge[j].forbidden && pBNS->edge[k].flow)
                             {
-                                if ((ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &AllChargeEdges, k, INC_ADD_EDGE ))
                                 {
                                     goto exit_function;
                                 }
@@ -1412,7 +1403,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             }
             /* pePlus edge is already fixed; unfix it */
             /* To decrement (+) on =NH2(+) decrement its double bond order */
-            /* djb-rwth: removing redundant code */
+            delta = 1;
             if (!pe->flow)
                 continue;
             pv1 = pBNS->vert + ( v1 = pe->neighbor1 );
@@ -1430,8 +1421,8 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 0)
             {
                 /* (+)charge was just moved, no change in number of charges */
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
@@ -1454,14 +1445,14 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
 /*exit_case_06:*/
         if (cur_success)
         {
-            /* djb-rwth: removing redundant code */
+            tot_succes += cur_success;
             /* recalculate InChI from the structure */
             if (0 > ( ret = MakeOneInChIOutOfStrFromINChI2( pCG, ic, ip, sd, pBNS, pStruct, at, at2, at3, pVA, pTCGroups,
                 ppt_group_info, ppat_norm, ppat_prep ) ))
             {
                 goto exit_function;
             }
-            if ((ret = FillOutExtraFixedHDataRestr( pStruct ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = FillOutExtraFixedHDataRestr( pStruct ))
             {
                 goto exit_function;
             }
@@ -1481,12 +1472,12 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                 ret = RI_ERR_ALLOC;
                 goto exit_function;
             }
-            /* djb-rwth: removing redundant code */
-            memset( icr2, 0, sizeof( *icr2 ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            cmpInChI2 = 0;
+            memset( icr2, 0, sizeof( *icr2 ) );
             if (iRevrInChI || iOrigInChI)
             {
                 /* additional mobile-H compare in case of Fixed-H */
-                cmpInChI2 = CompareReversedINChI2( pStruct->pOneINChI[iRevrInChI], pInChI[iOrigInChI], pStruct->pOneINChI_Aux[iRevrInChI], NULL /*INChI_Aux *v2*/, icr2, &err ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                cmpInChI2 = CompareReversedINChI2( pStruct->pOneINChI[iRevrInChI], pInChI[iOrigInChI], pStruct->pOneINChI_Aux[iRevrInChI], NULL /*INChI_Aux *v2*/, icr2, &err );
                 if (cmpInChI & IDIF_PROBLEM)
                 {
                     ret = RI_ERR_PROGR; /* severe restore problem */
@@ -1502,7 +1493,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                        pStruct->pOneINChI[0]->StereoIsotopic->nNumberOfStereoBonds +
                        pStruct->pOneINChI[0]->StereoIsotopic->nNumberOfStereoCenters )
                 ? pStruct->pOneINChI[0]->StereoIsotopic
-                : pStruct->pOneINChI[0]->Stereo; /* djb-rwth: ignoring LLVM warning: variable used */
+                : pStruct->pOneINChI[0]->Stereo;
 
 
             pStereo2Revrs = ( pStruct->bMobileH == TAUT_YES || !pStruct->pOneINChI[1] ||
@@ -1512,7 +1503,7 @@ int FixRestoredStructureStereo( struct tagCANON_GLOBALS *pCG,
                     pStruct->pOneINChI[1]->StereoIsotopic->nNumberOfStereoBonds +
                     pStruct->pOneINChI[1]->StereoIsotopic->nNumberOfStereoCenters ) ?
                     pStruct->pOneINChI[1]->StereoIsotopic :
-                    pStruct->pOneINChI[1]->Stereo; /* djb-rwth: ignoring LLVM warning: variable used */
+                    pStruct->pOneINChI[1]->Stereo;
         }
     }
 

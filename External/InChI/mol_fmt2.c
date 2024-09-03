@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -52,7 +46,6 @@
 #include "util.h"
 #include "ichi_io.h"
 
-#include "bcf_s.h"
 
 /*
     MolFile related procedures - 2
@@ -71,7 +64,7 @@ int MolfileStrnread( char* dest, char* source, int len, char **first_space )
 
     if (len > 0)
     {
-        strncpy(dest, source, len);
+        strncpy( dest, source, len );
     }
     dest[len] = '\0';
 
@@ -79,7 +72,7 @@ int MolfileStrnread( char* dest, char* source, int len, char **first_space )
 
     for (i = ( len - 1 ); i >= 0 && 0 != ( c = source[i] ) && isspace( UCINT c ); i--);
 
-    *first_space = dest + ( (long long)i + 1 ); /* first blank or zero terminating byte in dest */ /* djb-rwth: cast operator added */
+    *first_space = dest + ( i + 1 ); /* first blank or zero terminating byte in dest */
 
     return len; /* number of actually processed bytes excluding zero terminator */
 }
@@ -143,7 +136,7 @@ int MolfileReadField( void* data,
 
             ret = ( q - (char*) data );/* actual data length */
             *q = '\0';                /* add zero termination to data if it is not there yet*/
-            *line_ptr += ( (long long)len + (long long)i );     /* ptr to the 1st byte of the next input field or to zero termination */ /* djb-rwth: cast operators added */
+            *line_ptr += ( len + i );     /* ptr to the 1st byte of the next input field or to zero termination */
             break;
 
 
@@ -437,9 +430,9 @@ int MolfileSaveCopy( INCHI_IOSTREAM *inp_file,
             {
                 int len;
                 lrtrim( line, &len );
-                len = sprintf(szNumber, "#%ld%s", num, len ? "/" : "");
+                len = sprintf( szNumber, "#%ld%s", num, len ? "/" : "" );
                 mystrncpy( line + len, line, sizeof( line ) - len - 1 );
-                memcpy(line, szNumber, len);
+                memcpy( line, szNumber, len );
             }
 
             if (!strchr( line, '\n' ))

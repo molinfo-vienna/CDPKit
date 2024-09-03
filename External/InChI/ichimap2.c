@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,17 +12,31 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
+
 
 #include <stdlib.h>
 #include <string.h>
 
 #include "mode.h"
 #include "ichicomn.h"
-
-#include "bcf_s.h"
 
 #define MAP_MODE_STD  0 /* Standard approach: switch 2 neighbors */
 #define MAP_MODE_C2v  1 /* Check for C2v reflection leading to parity inversion */
@@ -155,31 +147,24 @@ int SortedEquInfoToRanks( const AT_RANK* nSymmRank, AT_RANK* nRank, const AT_RAN
     int            nNumDiffRanks = 1;
 
 
-    int            i, j, nNumChanges = 0, i_init;
-
-    i_init = num_atoms - 1;
-    /* djb-rwth: fixing oss-fuzz issue #69965 */
-    if ((i_init >= 0) && (i_init < na_global))
+    int            i, j, nNumChanges = 0;
+    for (i = num_atoms - 1, j = (int) nAtomNumber[i],
+          rOld = nSymmRank[j], rNew = nRank[j] = (AT_RANK) num_atoms,
+          nNumDiffRanks = 1;
+             i > 0;
+                 i--)
     {
-        j = (int)nAtomNumber[i_init];
-        rOld = nSymmRank[j];
-        rNew = (AT_RANK)num_atoms;
-        nRank[j] = (AT_RANK)num_atoms;
-        nNumDiffRanks = 1;
-        for (i = i_init; i > 0; i--)
+        j = (int) nAtomNumber[i - 1];
+
+        if (nSymmRank[j] != rOld)
         {
-            j = (int)nAtomNumber[i - 1];
-
-            if (nSymmRank[j] != rOld)
-            {
-                nNumDiffRanks++;
-                rNew = (AT_RANK)i;
-                nNumChanges += (rOld != rNew + 1);
-                rOld = nSymmRank[j];
-            }
-
-            nRank[j] = rNew;
+            nNumDiffRanks++;
+            rNew = (AT_RANK) i;
+            nNumChanges += ( rOld != rNew + 1 );
+            rOld = nSymmRank[j];
         }
+
+        nRank[j] = rNew;
     }
     if (bChanged)
     {
@@ -245,7 +230,7 @@ int SetNewRanksFromNeighLists3( CANON_GLOBALS *pCG,
                                 AT_RANK *nNewRank,
                                 AT_RANK *nAtomNumber )
 {
-    int     i, j, k, nNumDiffRanks, nNumNewRanks;
+    int     i, j, nNumDiffRanks, nNumNewRanks;
     AT_RANK r1, r2;
 
     /*  -- nAtomNumber[] is already properly set --
@@ -260,14 +245,12 @@ int SetNewRanksFromNeighLists3( CANON_GLOBALS *pCG,
     nNumDiffRanks = 0;
     nNumNewRanks = 0;
 
-    memset( nNewRank, 0, num_atoms * sizeof( nNewRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( nNewRank, 0, num_atoms * sizeof( nNewRank[0] ) );
 
     /*  sorting */
     for (i = 0, r1 = 1; i < num_atoms; r1++)
     {
-        j = (int)nAtomNumber[i];
-        r2 = nRank[j];
-        if (r1 == r2)
+        if (r1 == ( r2 = nRank[j = (int) nAtomNumber[i]] ))
         {
             nNewRank[j] = r2;
             nNumDiffRanks++;
@@ -278,8 +261,7 @@ int SetNewRanksFromNeighLists3( CANON_GLOBALS *pCG,
         insertions_sort_AT_NUMBERS( pCG, nAtomNumber + i, (int) r2 - i, CompNeighLists );
         /*insertions_sort( nAtomNumber+i, r2-i, sizeof( nAtomNumber[0] ), CompNeighLists );*/
         j = r2 - 1;
-        k = (int)nAtomNumber[j];
-        nNewRank[k] = r2;
+        nNewRank[(int) nAtomNumber[j]] = r2;
         nNumDiffRanks++;
         while (j > i)
         {
@@ -328,7 +310,7 @@ int SetNewRanksFromNeighLists4( CANON_GLOBALS *pCG,
     nNumNewRanks = 0;
     pCG->m_nMaxAtNeighRankForSort = nMaxAtRank;
 
-    memset( nNewRank, 0, num_atoms * sizeof( nNewRank[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( nNewRank, 0, num_atoms * sizeof( nNewRank[0] ) );
 
     /*  sorting */
     for (i = 0, r1 = 1; i < num_atoms; r1++)
@@ -386,7 +368,7 @@ int SetNewRanksFromNeighLists( CANON_GLOBALS *pCG,
                                int bUseAltSort,
                                int( *comp )( const void *, const void *, void * ) )
 {
-    int     i, nNumDiffRanks, j;
+    int     i, nNumDiffRanks;
     AT_RANK nCurrentRank;
     /*  -- nAtomNumber[] is already properly set --
     for ( i = 0; i < num_atoms; i++ ) {
@@ -404,24 +386,17 @@ int SetNewRanksFromNeighLists( CANON_GLOBALS *pCG,
     else
         inchi_qsort( pCG, nAtomNumber, num_atoms, sizeof( nAtomNumber[0] ), comp /*CompNeighListRanksOrd*/ );
 
-    /* djb-rwth: fixing oss-fuzz issue #69315 */
-    nNumDiffRanks = 1;
-    if ((num_atoms > 0) && (num_atoms <= na_global))
+    for (i = num_atoms - 1, nCurrentRank = nNewRank[(int) nAtomNumber[i]] = (AT_RANK) num_atoms, nNumDiffRanks = 1;
+          0 < i;
+          i--)
     {
-        nCurrentRank = (AT_RANK)num_atoms;
-        j = num_atoms - 1;
-        nNewRank[(int)nAtomNumber[j]] = nCurrentRank;
-        
-        for (i = num_atoms - 1; i > 0; i--)
+        /*  Note: CompNeighListRanks() in following line implicitly reads nRank pointed by pn_RankForSort */
+        if (CompNeighListRanks( &nAtomNumber[i - 1], &nAtomNumber[i], pCG ))
         {
-            /*  Note: CompNeighListRanks() in following line implicitly reads nRank pointed by pn_RankForSort */
-            if (CompNeighListRanks(&nAtomNumber[i - 1], &nAtomNumber[i], pCG))
-            {
-                nNumDiffRanks++;
-                nCurrentRank = (AT_RANK)i;
-            }
-            nNewRank[(int)nAtomNumber[i - 1]] = nCurrentRank;
+            nNumDiffRanks++;
+            nCurrentRank = (AT_RANK) i;
         }
+        nNewRank[(int) nAtomNumber[i - 1]] = nCurrentRank;
     }
 
     return nNumDiffRanks;
@@ -451,7 +426,7 @@ int SortNeighLists2( int num_atoms,
                      AT_RANK *nAtomNumber )
 {
     int k, i;
-    AT_RANK nPrevRank = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+    AT_RANK nPrevRank = 0;
     /*
      * on entry nRank[nAtomNumber[k]] <= nRank[nAtomNumber[k+1]]  ( k < num_atoms-1 )
      *          nRank[nAtomNumber[k]] >= k+1                      ( k < num_atoms )
@@ -471,7 +446,7 @@ int SortNeighLists2( int num_atoms,
             /*  nRank[i] is tied (duplicated) */
             insertions_sort_NeighList_AT_NUMBERS( NeighList[i], nRank );
         }
-        nPrevRank = nRank[i]; /* djb-rwth: ignoring LLVM warning: variable used */
+        nPrevRank = nRank[i];
     }
 
     return 0;
@@ -755,10 +730,10 @@ int NumberOfTies( AT_RANK **pRankStack1,
             switch (i)
             {
                 case 2:
-                    memcpy(pTempArray, nRank2, length);
+                    memcpy( pTempArray, nRank2, length );
                     break;
                 case 3:
-                    memcpy(pTempArray, nAtomNumber2, length);
+                    memcpy( pTempArray, nAtomNumber2, length );
                     break;
             }
             if (i < 2)
@@ -922,7 +897,7 @@ int HalfStereoBondParity( sp_ATOM *at,
         }
     }
     at_no2 = at[at_no1].neighbor[(int) at[at_no1].stereo_bond_ord[i_sb_neigh]];
-    memset( r, 0, sizeof( r ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( r, 0, sizeof( r ) );
     for (i = j = 0, iNeigh = -1; i < at[at_no1].valence; i++)
     {
         if (( k = (int) at[at_no1].neighbor[i] ) == at_no2)
@@ -938,10 +913,10 @@ int HalfStereoBondParity( sp_ATOM *at,
     {
         return CT_STEREOBOND_ERROR;  /*   <BRKPT> */
     }
-    if ((j > 0 && !r[0]) || (j > 1 && !r[1])) /* djb-rwth: addressing LLVM warning */
+    if (j > 0 && !r[0] || j > 1 && !r[1])
         return 0; /*  undefined ranks */
 
-    if ((j == 2 && r[0] == r[1]) || iNeigh < 0) /* djb-rwth: addressing LLVM warning */
+    if (j == 2 && r[0] == r[1] || iNeigh < 0)
     {
         parity = AB_PARITY_CALC;  /*  cannot calculate bond parity without additional breaking ties. */
     }
@@ -978,7 +953,7 @@ int parity_of_mapped_half_bond( int from_at,
 
     if (pEN)
     {
-        memset( pEN, 0, sizeof( *pEN ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pEN, 0, sizeof( *pEN ) );
     }
 
     /*  for debug only */
@@ -1177,14 +1152,14 @@ int parity_of_mapped_atom2( CANON_GLOBALS *pCG,
     AT_RANK nNeighRankFrom[4], nNeighNumberFrom[4], nNeighRankTo[4], nNeighNumberTo[4];
     AT_RANK nNeighRankFromCanon[4], nNeighRankToCanon[4];
     int     i, j, k, num_neigh;
-    int     r1, r2, r, r_canon_from_min, neigh_canon_from_min = 0, r_canon_from; /* djb-rwth: proper initialisation required */
-    int     num_trans_to, num_trans_from, neigh1, neigh2; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    int     r1, r2, r, r_canon_from_min, neigh_canon_from_min, r_canon_from;
+    int     num_trans_to, num_trans_from, neigh1, neigh2;
 
     num_neigh = at[to_at].valence;
 
     if (pEN)
     {
-        memset( pEN, 0, sizeof( *pEN ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pEN, 0, sizeof( *pEN ) );
     }
 
     /*  for debug only */
@@ -1221,7 +1196,7 @@ int parity_of_mapped_atom2( CANON_GLOBALS *pCG,
 
     pCG->m_pn_RankForSort = nNeighRankFrom;
     pCG->m_nNumCompNeighborsRanksCountEql = 0; /*  sort mapping ranks-from */
-    num_trans_from = insertions_sort( pCG, nNeighNumberFrom, num_neigh, sizeof( nNeighNumberFrom[0] ), CompNeighborsRanksCountEql ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    num_trans_from = insertions_sort( pCG, nNeighNumberFrom, num_neigh, sizeof( nNeighNumberFrom[0] ), CompNeighborsRanksCountEql );
 
     if (pCG->m_nNumCompNeighborsRanksCountEql)
     {
@@ -1392,8 +1367,8 @@ int map_an_atom2( CANON_GLOBALS *pCG,
         nNewRank2 = *pRankStack2++;
         nNewAtomNumber2 = *pRankStack2++;  /*  ranks for mapping "2", "to" */
         /*  break a tie for "to" */
-        memcpy(nNewRank2, nRank2, length);
-        memcpy(nNewAtomNumber2, nAtomNumber2, length);
+        memcpy( nNewRank2, nRank2, length );
+        memcpy( nNewAtomNumber2, nAtomNumber2, length );
         nNewRank2[at_no2] = nNewRank;
         nNewNumRanks2 = DifferentiateRanks2( pCG, num_atoms, NeighList,
                                          nNumMappedRanks, nNewRank2, nTempRank,
@@ -1423,8 +1398,8 @@ int map_an_atom2( CANON_GLOBALS *pCG,
             {
                 pRankStack1[i][0] = 0;
             }
-            memcpy(nNewRank1, nRank1, length);
-            memcpy(nNewAtomNumber1, nAtomNumber1, length);  /* GPF: bad nAtomNumber1 */
+            memcpy( nNewRank1, nRank1, length );
+            memcpy( nNewAtomNumber1, nAtomNumber1, length );  /* GPF: bad nAtomNumber1 */
             nNewRank1[at_no1] = nNewRank;
             nNewNumRanks1 = DifferentiateRanks2( pCG, num_atoms, NeighList,
                                              nNumMappedRanks, nNewRank1, nTempRank,
@@ -1630,19 +1605,19 @@ int BreakNeighborsTie( CANON_GLOBALS *pCG,
     int     nNumDiffRanks, nNumDiffRanks1, nNumDiffRanks2, i;
     int n1 = (int) neigh_num[in1];
     int n2 = (int) neigh_num[in2];
-    int other_neigh[2] = {0}, other_neig_ord[2] = {0}, num_other_neigh; /* djb-rwth: initialisations added */
+    int other_neigh[2], other_neig_ord[2], num_other_neigh;
 
     /*  asymmetric calculation */
 
-    if ((mode == MAP_MODE_S4  && in1) || /* for S4 we need only (in1,in2) = (0,1) (0,2) (0,3) pairs of neighbors */
-         (mode != MAP_MODE_STD && at[ia].valence != MAX_NUM_STEREO_ATOM_NEIGH) ||
-         (mode != MAP_MODE_STD && nSymmRank[n1] != nSymmRank[n2])) /* djb-rwth: addressing LLVM warning */
+    if (mode == MAP_MODE_S4  && in1 || /* for S4 we need only (in1,in2) = (0,1) (0,2) (0,3) pairs of neighbors */
+         mode != MAP_MODE_STD && at[ia].valence != MAX_NUM_STEREO_ATOM_NEIGH ||
+         mode != MAP_MODE_STD && nSymmRank[n1] != nSymmRank[n2])
     {
         return 0;
     }
 
     /*  1. Create initial ranks from equivalence information stored in nSymmRank */
-    memcpy(pRankStack1[0], nSymmRank, num_at_tg * sizeof(pRankStack1[0][0]));
+    memcpy( pRankStack1[0], nSymmRank, num_at_tg * sizeof( pRankStack1[0][0] ) );
     pCG->m_pn_RankForSort = pRankStack1[0];
     tsort( pCG, pRankStack1[1], num_at_tg, sizeof( pRankStack1[1][0] ), CompRanksOrd );
     nNumDiffRanks = SortedEquInfoToRanks( pRankStack1[0]/*inp*/, pRankStack1[0]/*out*/, pRankStack1[1], num_at_tg, NULL );
@@ -1661,8 +1636,8 @@ int BreakNeighborsTie( CANON_GLOBALS *pCG,
             }
         }
     }
-    if ((mode != MAP_MODE_STD && nSymmRank[other_neigh[0]] != nSymmRank[other_neigh[1]]) ||
-         (mode == MAP_MODE_S4 && nSymmRank[n1] != nSymmRank[other_neigh[1]])) /* djb-rwth: addressing LLVM warning */
+    if (mode != MAP_MODE_STD && nSymmRank[other_neigh[0]] != nSymmRank[other_neigh[1]] ||
+         mode == MAP_MODE_S4  && nSymmRank[n1] != nSymmRank[other_neigh[1]])
     {
         return 0;
     }
@@ -1712,8 +1687,9 @@ int BreakNeighborsTie( CANON_GLOBALS *pCG,
     nRank2 = GetMinNewRank( pRankStack1[0], pRankStack1[1], nRank1 );
 
     /*  6. Copy the results to the 2nd eq. rank arrays */
-    memcpy(pRankStack2[0], pRankStack1[0], num_at_tg * sizeof(pRankStack2[0][0]));
-    memcpy(pRankStack2[1], pRankStack1[1], num_at_tg * sizeof(pRankStack2[0][0]));
+    memcpy( pRankStack2[0], pRankStack1[0], num_at_tg * sizeof( pRankStack2[0][0] ) );
+    memcpy( pRankStack2[1], pRankStack1[1], num_at_tg * sizeof( pRankStack2[0][0] ) );
+
     /*  7. Break neighbor tie: map n1(1) <--> n2(2) */
     /*  7. Break neighbor tie: map n1(1) <--> n2(2) */
     pRankStack1[0][n1] = nRank2;
@@ -2426,8 +2402,8 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
     not_well_def_parities = 0;
     nNumEqStereogenic = 0;
 
-    if ((nNeighMode != NEIGH_MODE_RING &&
-         bParitiesInverted != 0) || abs( bParitiesInverted ) != 1) /* djb-rwth: addressing LLVM warning */
+    if (nNeighMode != NEIGH_MODE_RING &&
+         bParitiesInverted != 0 || abs( bParitiesInverted ) != 1)
     {
         bParitiesInverted = 0;
     }
@@ -2462,8 +2438,8 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
             nAtomNumberCanon2[i] = MAX_ATOMS + 1;  /*  mark unchanged */
         }
     }
-    if ((bParitiesInverted > 0 && !( mode == MAP_MODE_C2v || mode == MAP_MODE_S4 )) ||
-         (bParitiesInverted == 0 && !( mode == MAP_MODE_C2 || mode == MAP_MODE_STD ))) /* djb-rwth: addressing LLVM warning */
+    if (bParitiesInverted > 0 && !( mode == MAP_MODE_C2v || mode == MAP_MODE_S4 ) ||
+         bParitiesInverted == 0 && !( mode == MAP_MODE_C2 || mode == MAP_MODE_STD ))
     {
         return 0;
     }
@@ -2741,18 +2717,18 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
             {
                 return -1; /*  program error: only one out of s1 and s2 must be 1, another must be 0. */
             }
-            if ((s1 && !at[i11].parity) || (s2 && !at[i12].parity)) /* djb-rwth: addressing LLVM warning */
+            if (s1 && !at[i11].parity || s2 && !at[i12].parity)
             {
                 return 0; /*  another atom does not have parity (it might have been removed) 9-11-2002 */
             }
         }
 
         parity = pCS->LinearCTStereoCarb[i].parity;
-        if (nNeighMode == (NEIGH_MODE_RING && ( i11 != i01 ) && ( i12 != i01 )) ||
+        if (nNeighMode == NEIGH_MODE_RING && ( i11 != i01 ) && ( i12 != i01 ) ||
              /*  in NEIGH_MODE_RING case we know that i11 == i12 except bCurParityInv1 == 1 */
              nNeighMode == NEIGH_MODE_CHAIN
              /*  in NEIGH_MODE_CHAIN case here we always have 2 different atoms */
-           ) /* djb-rwth: addressing LLVM warning */
+           )
         {
             /****************************************************************
             * Case of two transposed atoms or a circular permutation in D4h
@@ -2770,10 +2746,10 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
                     int parity1orig = GetStereoCenterParity( pCG, at, i11, nCanonRank );
                     int parity2orig = GetStereoCenterParity( pCG, at, i12, nCanonRank );
                     if (i11 == i12 ||
-                        (( parity1 == parity1orig || parity2 == parity2orig || parity1 != parity2 ) &&
-                         ATOM_PARITY_WELL_DEF( parity1 )) ||
-                         ((parity1 != parity2 && ( !ATOM_PARITY_WELL_DEF( parity1 ))) ||
-                             !ATOM_PARITY_WELL_DEF( parity2 ) )) /* djb-rwth: addressing LLVM warning */
+                        ( parity1 == parity1orig || parity2 == parity2orig || parity1 != parity2 ) &&
+                         ATOM_PARITY_WELL_DEF( parity1 ) ||
+                         parity1 != parity2 && ( !ATOM_PARITY_WELL_DEF( parity1 ) ||
+                             !ATOM_PARITY_WELL_DEF( parity2 ) ))
                         /*return -1; */ /* should be different atoms with inverted parities */
                         nNumDiff++;
                 }
@@ -2904,8 +2880,8 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
 
         if (nCheckingMode == CHECKING_STEREOBOND)
         {
-            switch (( (i11 == cur && i12 == prev_sb_neigh) || (i12 == cur && i11 == prev_sb_neigh) ) +
-                ( (i21 == cur && i22 == prev_sb_neigh) || (i22 == cur && i21 == prev_sb_neigh) )) /* djb-rwth: addressing LLVM warning */
+            switch (( i11 == cur && i12 == prev_sb_neigh || i12 == cur && i11 == prev_sb_neigh ) +
+                ( i21 == cur && i22 == prev_sb_neigh || i22 == cur && i21 == prev_sb_neigh ))
             {
                 case 2:
                     continue; /*  do not recheck the starting bond/cumulene */
@@ -2937,8 +2913,8 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
             {
                 return -1; /*  program error: only one out of s1 and s2 must be 1, another must be 0. */
             }
-            if ((s1 && 0 > GetStereoNeighborPos( at, i11, i12 )) ||
-                 (s2 && 0 > GetStereoNeighborPos( at, i21, i22 ))) /* djb-rwth: addressing LLVM warning */
+            if (s1 && 0 > GetStereoNeighborPos( at, i11, i12 ) ||
+                 s2 && 0 > GetStereoNeighborPos( at, i21, i22 ))
             {
                 return 0; /*  another bond is not stereo (the stereo might have been removed) 9-11-2002 */
             }
@@ -2948,9 +2924,9 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
         /* bMustBeIdentical  = ATOM_PARITY_ILL_DEF(parity); */
         /* nNumEqStereogenic = 0; */
 
-        if ((nNeighMode == NEIGH_MODE_RING && ( i11 != i01 || i12 != i02 ) && ( i11 != i02 || i12 != i01 )) ||
+        if (nNeighMode == NEIGH_MODE_RING && ( i11 != i01 || i12 != i02 ) && ( i11 != i02 || i12 != i01 ) ||
              nNeighMode == NEIGH_MODE_CHAIN                    /*  in NEIGH_MODE_CHAIN case here we always have 2 different atoms */
-        ) /* djb-rwth: addressing LLVM warning */
+        )
         {
          /*******************************************/
          /*  case of two transposed bonds/cumulenes */
@@ -2960,7 +2936,7 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
             {
                 return -1; /*  should not happen: must have been detected at the time of traversal */
             }
-            if (s1 && s2 && ( (( i11 != i21 || i12 != i22 ) && ( i11 != i22 || i12 != i21 )) || parity1 != parity2 )) /* djb-rwth: addressing LLVM warning */
+            if (s1 && s2 && ( ( i11 != i21 || i12 != i22 ) && ( i11 != i22 || i12 != i21 ) || parity1 != parity2 ))
             {
                 return -1; /*  program error: must be the same bond/cumulene */
             }
@@ -2973,8 +2949,8 @@ int CalculatedPathsParitiesAreIdentical( CANON_GLOBALS *pCG,
                 {
                     /*  all 3 bonds: cur-prev_sb_neigh, i01-i02, i11-i12 are different */
                     /*  (here <i11,i12>==<i21,i22> compared as unordered pairs) */
-                    if ((nSymmRank[cur] == nSymmRank[i01] && nSymmRank[prev_sb_neigh] == nSymmRank[i02]) ||
-                         (nSymmRank[cur] == nSymmRank[i02] && nSymmRank[prev_sb_neigh] == nSymmRank[i01])) /* djb-rwth: addressing LLVM warning */
+                    if (nSymmRank[cur] == nSymmRank[i01] && nSymmRank[prev_sb_neigh] == nSymmRank[i02] ||
+                         nSymmRank[cur] == nSymmRank[i02] && nSymmRank[prev_sb_neigh] == nSymmRank[i01])
                     {
                         nNumEqStereogenic++;
                     }
@@ -3119,7 +3095,7 @@ int RemoveCalculatedNonStereoBondParities( CANON_GLOBALS *pCG,
     int j, n, m, ret, ret1, ret2, ret_failed = 0;
 
     int i1, n1, s2;  /*  n1 must be SIGNED integer */
-    AT_RANK nAtomRank1, nAtomRank2, neigh[3] = { 0 }, nAvoidCheckAtom[2], opposite_atom, nLength; /* djb-rwth: initialisation of neigh required to avoid undefined array subscript */
+    AT_RANK nAtomRank1, nAtomRank2, neigh[3], nAvoidCheckAtom[2], opposite_atom, nLength;
     int         nNeighMode = NEIGH_MODE_CHAIN;
     int         nNumEqRingNeigh = 0, bRingNeigh, bSymmNeigh, bParitiesInverted;
     NEIGH_LIST *nl01, *nl02;
@@ -3129,21 +3105,21 @@ int RemoveCalculatedNonStereoBondParities( CANON_GLOBALS *pCG,
 
 second_pass:
 
-    for (i1 = 0; i1 < num_atoms && !RETURNED_ERROR(ret_failed); i1++)
+    for (i1 = 0; i1 < num_atoms && !RETURNED_ERROR( ret_failed ); i1++)
     {
         if (at[i1].valence != 3 || !at[i1].stereo_bond_neighbor[0])
         {
             continue;
         }
-        for (n1 = 0; n1 < MAX_NUM_STEREO_BONDS && !RETURNED_ERROR(ret_failed) && (s2 = at[i1].stereo_bond_neighbor[n1]); n1++)
+        for (n1 = 0; n1 < MAX_NUM_STEREO_BONDS && !RETURNED_ERROR( ret_failed ) && ( s2 = at[i1].stereo_bond_neighbor[n1] ); n1++)
         {
-            if (!PARITY_CALCULATE(at[i1].stereo_bond_parity[n1]) && PARITY_WELL_DEF(at[i1].stereo_bond_parity[n1]))
+            if (!PARITY_CALCULATE( at[i1].stereo_bond_parity[n1] ) && PARITY_WELL_DEF( at[i1].stereo_bond_parity[n1] ))
             {
                 continue;
             }
-            opposite_atom = (AT_RANK)(s2 - 1);
-            s2 = at[i1].neighbor[(int)at[i1].stereo_bond_ord[n1]]; /*  different from opposite_atom in case of a cumulene */
-            for (j = 1, n = 0; j <= (int)at[i1].valence; j++)
+            opposite_atom = (AT_RANK) ( s2 - 1 );
+            s2 = at[i1].neighbor[(int) at[i1].stereo_bond_ord[n1]]; /*  different from opposite_atom in case of a cumulene */
+            for (j = 1, n = 0; j <= (int) at[i1].valence; j++)
             {
                 if (nl[i1][j] != s2)
                 {
@@ -3155,60 +3131,60 @@ second_pass:
                 ret = CT_STEREOBOND_ERROR;  /*   <BRKPT> */
                 goto exit_function;
             }
-            if (nSymmRank[(int)neigh[0]] != nSymmRank[(int)neigh[1]])
+            if (nSymmRank[(int) neigh[0]] != nSymmRank[(int) neigh[1]])
             {
                 continue; /*  may happen if another half-bond has not a defined parity */
             }
 
-            bRingNeigh = (at[(int)neigh[0]].nRingSystem == at[(int)neigh[1]].nRingSystem);
+            bRingNeigh = ( at[(int) neigh[0]].nRingSystem == at[(int) neigh[1]].nRingSystem );
             switch (nNeighMode)
             {
-            case NEIGH_MODE_CHAIN:
-                if (bRingNeigh)
-                {
-                    nNumEqRingNeigh++;
-                    continue;
-                }
-                nl01 = nl;
-                nl02 = nl;
-                nSymmRank1 = nSymmRank;
-                nSymmRank2 = nSymmRank;
-                break;
+                case NEIGH_MODE_CHAIN:
+                    if (bRingNeigh)
+                    {
+                        nNumEqRingNeigh++;
+                        continue;
+                    }
+                    nl01 = nl;
+                    nl02 = nl;
+                    nSymmRank1 = nSymmRank;
+                    nSymmRank2 = nSymmRank;
+                    break;
 
-            case NEIGH_MODE_RING:
-                if (!bRingNeigh)
-                    continue;
-                /*  break a tie between the two contitutionally equivalent neighbors, */
-                /*  refine the two partitions, sort neighbors lists nl1, nl2 */
+                case NEIGH_MODE_RING:
+                    if (!bRingNeigh)
+                        continue;
+                    /*  break a tie between the two contitutionally equivalent neighbors, */
+                    /*  refine the two partitions, sort neighbors lists nl1, nl2 */
 
-                bSymmNeigh = BreakNeighborsTie(pCG,
-                    at, num_atoms, num_at_tg,
-                    opposite_atom, i1,
-                    neigh, 0, 1, 0,
-                    pRankStack1, pRankStack2, nTempRank,
-                    NeighList, nSymmRank, nCanonRank,
-                    nl1, nl2, &pCS->lNumNeighListIter);
+                    bSymmNeigh = BreakNeighborsTie( pCG,
+                                                     at, num_atoms, num_at_tg,
+                                                     opposite_atom, i1,
+                                                     neigh, 0, 1, 0,
+                                                     pRankStack1, pRankStack2, nTempRank,
+                                                     NeighList, nSymmRank, nCanonRank,
+                                                     nl1, nl2, &pCS->lNumNeighListIter );
 
-                if (bSymmNeigh <= 0)
-                {
-                    if (ret_failed > bSymmNeigh)
-                        ret_failed = bSymmNeigh;
-                    continue;
-                }
-                nl01 = nl1;
-                nl02 = nl2;
-                nSymmRank1 = pRankStack1[0];
-                nSymmRank2 = pRankStack2[0];
-                break;
-            default:
-                return CT_STEREOCOUNT_ERR;  /*  <BRKPT> */
+                    if (bSymmNeigh <= 0)
+                    {
+                        if (ret_failed > bSymmNeigh)
+                            ret_failed = bSymmNeigh;
+                        continue;
+                    }
+                    nl01 = nl1;
+                    nl02 = nl2;
+                    nSymmRank1 = pRankStack1[0];
+                    nSymmRank2 = pRankStack2[0];
+                    break;
+                default:
+                    return CT_STEREOCOUNT_ERR;  /*  <BRKPT> */
             }
 
             /*  initialize arrays */
-            memset(nVisited1, 0, sizeof(nVisited1[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-            memset(nVisited2, 0, sizeof(nVisited2[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-            memset(nAtomNumberCanon1, 0, sizeof(nAtomNumberCanon1[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-            memset(nAtomNumberCanon2, 0, sizeof(nAtomNumberCanon2[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( nVisited1, 0, sizeof( nVisited1[0] )*num_atoms );
+            memset( nVisited2, 0, sizeof( nVisited2[0] )*num_atoms );
+            memset( nAtomNumberCanon1, 0, sizeof( nAtomNumberCanon1[0] )*num_atoms );
+            memset( nAtomNumberCanon2, 0, sizeof( nAtomNumberCanon2[0] )*num_atoms );
             nLength = 1;
             nVisited1[i1] = i1 + 1;   /*  start atoms are the same */
             nVisited2[i1] = i1 + 1;
@@ -3216,121 +3192,112 @@ second_pass:
             nAtomNumberCanon2[i1] = nLength;
             nAvoidCheckAtom[0] = i1;
             nAvoidCheckAtom[1] = opposite_atom;
-            bParitiesInverted = (nNeighMode == NEIGH_MODE_RING &&
-                IS_ALLENE_CHAIN(at[i1].stereo_bond_parity[n1]) &&
-                PARITY_CALCULATE(at[i1].stereo_bond_parity[n1]) &&
-                at[i1].nRingSystem == at[opposite_atom].nRingSystem &&
-                at[opposite_atom].valence == MAX_NUM_STEREO_BONDS) ? -1 : 0;
-            /* djb-rwth: removing redundant code */
-
-            /* djb-rwth: restructuring code to avoid garbage values -- discussion required */
-
-            ret1 = CreateCheckSymmPaths(at, (AT_RANK)i1, neigh[0], (AT_RANK)i1, neigh[1], nAvoidCheckAtom,
+            bParitiesInverted = ( nNeighMode == NEIGH_MODE_RING &&
+                                  IS_ALLENE_CHAIN( at[i1].stereo_bond_parity[n1] ) &&
+                                  PARITY_CALCULATE( at[i1].stereo_bond_parity[n1] ) &&
+                                  at[i1].nRingSystem == at[opposite_atom].nRingSystem &&
+                                  at[opposite_atom].valence == MAX_NUM_STEREO_BONDS ) ? -1 : 0;
+            ret1 = ret2 = 0;
+            if (0 < ( ret1 = CreateCheckSymmPaths( at, (AT_RANK) i1, neigh[0], (AT_RANK) i1, neigh[1], nAvoidCheckAtom,
                 nVisited1, nVisited2, nAtomNumberCanon1, nAtomNumberCanon2,
-                nl01, nl02, nSymmRank1, nSymmRank2, nCanonRank, &nLength, &bParitiesInverted, 0);
-            ret2 = CalculatedPathsParitiesAreIdentical(pCG, at, num_atoms, nSymmRank,
-                nCanonRank, nAtomNumberCanon, nAtomNumberCanon1, nAtomNumberCanon2,
-                nVisited1, nVisited2, opposite_atom, (AT_RANK)i1,
-                neigh[0], neigh[1], nNeighMode, bParitiesInverted, 0,
-                pCS, vABParityUnknown);
-
-            if (0 < ret1) /* djb-rwth: or is this (0 < ret1) && (0 < ret2) ? */
+                nl01, nl02, nSymmRank1, nSymmRank2, nCanonRank, &nLength, &bParitiesInverted, 0 ) ) &&
+                 0 < ( ret2 = CalculatedPathsParitiesAreIdentical( pCG, at, num_atoms, nSymmRank,
+                     nCanonRank, nAtomNumberCanon, nAtomNumberCanon1, nAtomNumberCanon2,
+                     nVisited1, nVisited2, opposite_atom, (AT_RANK) i1,
+                     neigh[0], neigh[1], nNeighMode, bParitiesInverted, 0,
+                     pCS, vABParityUnknown ) )
+               )
             {
-                if (0 < ret2)
+                if (ret2 & ( NOT_WELL_DEF_UNKN | NOT_WELL_DEF_UNDF ))
                 {
+                    /*  possibly change the parity to unknown or undefined */
+                    int new_parity = ( ret2 & NOT_WELL_DEF_UNKN ) ? vABParityUnknown /*AB_PARITY_UNKN*/ : AB_PARITY_UNDF;
+                    if (PARITY_ILL_DEF( at[i1].stereo_bond_parity[n1] ) && PARITY_VAL( at[i1].stereo_bond_parity[n1] ) > new_parity ||
+                         PARITY_CALCULATE( at[i1].stereo_bond_parity[n1] ))
                     {
-                        if (ret2 & (NOT_WELL_DEF_UNKN | NOT_WELL_DEF_UNDF))
+                        /*  set new unknown or undefined parity */
+                        SetOneStereoBondIllDefParity( at, i1, /* atom number*/ n1 /* stereo bond ord. number*/, new_parity );
+                        /*  change in pCS */
+                        nAtomRank1 = inchi_max( nCanonRank[i1], nCanonRank[opposite_atom] );
+                        nAtomRank2 = inchi_min( nCanonRank[i1], nCanonRank[opposite_atom] );
+                        for (n = 0, m = pCS->nLenLinearCTStereoDble - 1; n <= m; n++)
                         {
-                            /*  possibly change the parity to unknown or undefined */
-                            int new_parity = (ret2 & NOT_WELL_DEF_UNKN) ? vABParityUnknown /*AB_PARITY_UNKN*/ : AB_PARITY_UNDF;
-                            if ((PARITY_ILL_DEF(at[i1].stereo_bond_parity[n1]) && PARITY_VAL(at[i1].stereo_bond_parity[n1]) > new_parity) ||
-                                PARITY_CALCULATE(at[i1].stereo_bond_parity[n1])) /* djb-rwth: addressing LLVM warning */
+                            if (pCS->LinearCTStereoDble[n].at_num1 == nAtomRank1 &&
+                                 pCS->LinearCTStereoDble[n].at_num2 == nAtomRank2)
                             {
-                                /*  set new unknown or undefined parity */
-                                SetOneStereoBondIllDefParity(at, i1, /* atom number*/ n1 /* stereo bond ord. number*/, new_parity);
-                                /*  change in pCS */
-                                nAtomRank1 = inchi_max(nCanonRank[i1], nCanonRank[opposite_atom]);
-                                nAtomRank2 = inchi_min(nCanonRank[i1], nCanonRank[opposite_atom]);
-                                for (n = 0, m = pCS->nLenLinearCTStereoDble - 1; n <= m; n++)
-                                {
-                                    if (pCS->LinearCTStereoDble[n].at_num1 == nAtomRank1 &&
-                                        pCS->LinearCTStereoDble[n].at_num2 == nAtomRank2)
-                                    {
-                                        pCS->LinearCTStereoDble[n].parity = new_parity;
+                                pCS->LinearCTStereoDble[n].parity = new_parity;
 #if ( bRELEASE_VERSION == 0 )
-                                        pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
+                                pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
 #endif
-                                        m = -1;
-                                        break;
-                                    }
-                                }
-                                if (m >= 0)
-                                {
-                                    ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
-                                    goto exit_function;
-                                }
-                                ret++;
+                                m = -1;
+                                break;
                             }
                         }
-                        else
+                        if (m >= 0)
                         {
-                            /*  remove the parity */
-                            if (!RemoveOneStereoBond(at, i1, /* atom number*/ n1 /* stereo bond ord. number*/))
-                            {
-                                ret = CT_STEREOBOND_ERROR;  /*   <BRKPT> */
-                                goto exit_function;
-                            }
-                            n1--;  /*  cycle counter may temporarily become negative */
-                            /*  Remove from the pCS */
-                            nAtomRank1 = inchi_max(nCanonRank[i1], nCanonRank[opposite_atom]);
-                            nAtomRank2 = inchi_min(nCanonRank[i1], nCanonRank[opposite_atom]);
-                            for (n = 0, m = pCS->nLenLinearCTStereoDble - 1; n <= m; n++)
-                            {
-                                if (pCS->LinearCTStereoDble[n].at_num1 == nAtomRank1 &&
-                                    pCS->LinearCTStereoDble[n].at_num2 == nAtomRank2)
-                                {
-                                    if (n < m)
-                                    {
-                                        /*  remove pCS->LinearCTStereoDble[n] */
-                                        memmove(pCS->LinearCTStereoDble + n,
-                                            pCS->LinearCTStereoDble + n + 1,
-                                            ((long long)m - (long long)n) * sizeof(pCS->LinearCTStereoDble[0])); /* djb-rwth: cast operators added */
-                                    }
-                                    pCS->nLenLinearCTStereoDble--;
-#if ( bRELEASE_VERSION == 0 )
-                                    pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
-#endif
-                                    m = -1;
-                                    break;
-                                }
-                            }
-                            if (m >= 0)
-                            {
-                                ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
-                                goto exit_function;
-                            }
-                            ret++;
+                            ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
+                            goto exit_function;
                         }
+                        ret++;
                     }
                 }
                 else
                 {
-                    if (!ret_failed)
+                    /*  remove the parity */
+                    if (!RemoveOneStereoBond( at, i1, /* atom number*/ n1 /* stereo bond ord. number*/ ))
                     {
-                        ret_failed = (ret1 < 0) ? ret1 : (ret2 < 0) ? ret2 : 0;
+                        ret = CT_STEREOBOND_ERROR;  /*   <BRKPT> */
+                        goto exit_function;
                     }
-                    if (!RETURNED_ERROR(ret_failed))
+                    n1--;  /*  cycle counter may temporarily become negative */
+                    /*  Remove from the pCS */
+                    nAtomRank1 = inchi_max( nCanonRank[i1], nCanonRank[opposite_atom] );
+                    nAtomRank2 = inchi_min( nCanonRank[i1], nCanonRank[opposite_atom] );
+                    for (n = 0, m = pCS->nLenLinearCTStereoDble - 1; n <= m; n++)
                     {
-                        if (RETURNED_ERROR(ret1))
+                        if (pCS->LinearCTStereoDble[n].at_num1 == nAtomRank1 &&
+                             pCS->LinearCTStereoDble[n].at_num2 == nAtomRank2)
                         {
-                            ret_failed = ret1;
-                        }
-                        else
-                        {
-                            if (RETURNED_ERROR(ret2))
+                            if (n < m)
                             {
-                                ret_failed = ret2;
+                                /*  remove pCS->LinearCTStereoDble[n] */
+                                memmove( pCS->LinearCTStereoDble + n,
+                                         pCS->LinearCTStereoDble + n + 1,
+                                         ( m - n ) * sizeof( pCS->LinearCTStereoDble[0] ) );
                             }
+                            pCS->nLenLinearCTStereoDble--;
+#if ( bRELEASE_VERSION == 0 )
+                            pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
+#endif
+                            m = -1;
+                            break;
+                        }
+                    }
+                    if (m >= 0)
+                    {
+                        ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
+                        goto exit_function;
+                    }
+                    ret++;
+                }
+            }
+            else
+            {
+                if (!ret_failed)
+                {
+                    ret_failed = ( ret1 < 0 ) ? ret1 : ( ret2 < 0 ) ? ret2 : 0;
+                }
+                if (!RETURNED_ERROR( ret_failed ))
+                {
+                    if (RETURNED_ERROR( ret1 ))
+                    {
+                        ret_failed = ret1;
+                    }
+                    else
+                    {
+                        if (RETURNED_ERROR( ret2 ))
+                        {
+                            ret_failed = ret2;
                         }
                     }
                 }
@@ -3377,7 +3344,7 @@ int RemoveCalculatedNonStereoCenterParities( CANON_GLOBALS *pCG,
     int j, n, m, ret;
 
     int i, k, ret1, ret2, ret_failed = 0, mode, max_mode;
-    AT_RANK nAtomRank1, neigh[MAX_NUM_STEREO_ATOM_NEIGH] = { 0 }, nAvoidCheckAtom[2], nLength; /* djb-rwth: initialisation of neigh required to avoid undefined array subscript */
+    AT_RANK nAtomRank1, neigh[MAX_NUM_STEREO_ATOM_NEIGH], nAvoidCheckAtom[2], nLength;
     int         nNeighMode = NEIGH_MODE_CHAIN;
     int         nNumEqRingNeigh = 0, bRingNeigh, bSymmNeigh, bParitiesInverted;
     NEIGH_LIST *nl01, *nl02;
@@ -3448,55 +3415,55 @@ second_pass:
         {
             for (k = j + 1; k < at[i].valence && at[i].parity && !RETURNED_ERROR( ret_failed ); k++)
             {
-                for (mode = 0; mode <= max_mode && at[i].parity && !RETURNED_ERROR(ret_failed); mode++)
+                for (mode = 0; mode <= max_mode && at[i].parity && !RETURNED_ERROR( ret_failed ); mode++)
                 {
-                    if (nSymmRank[(int)neigh[j]] != nSymmRank[(int)neigh[k]])
+                    if (nSymmRank[(int) neigh[j]] != nSymmRank[(int) neigh[k]])
                     {
                         continue; /*  the two neighbors are not constitutionally identical */
                     }
-                    bRingNeigh = (at[(int)neigh[j]].nRingSystem == at[(int)neigh[k]].nRingSystem);
+                    bRingNeigh = ( at[(int) neigh[j]].nRingSystem == at[(int) neigh[k]].nRingSystem );
                     switch (nNeighMode)
                     {
-                    case NEIGH_MODE_CHAIN:
-                        if (bRingNeigh)
-                        {
-                            nNumEqRingNeigh++;
-                            continue;
-                        }
-                        nl01 = nl;
-                        nl02 = nl;
-                        nSymmRank1 = nSymmRank;
-                        nSymmRank2 = nSymmRank;
-                        break;
-                    case NEIGH_MODE_RING:
-                        if (!bRingNeigh)
-                            continue;
-                        /*  break a tie between the two contitutionally equivalent neighbors, */
-                        /*  refine the two partitions, sort neighbors lists nl1, nl2 */
-                        bSymmNeigh = BreakNeighborsTie(pCG, at, num_atoms, num_at_tg, MAX_ATOMS + 1, i,
-                            neigh, j, k, mode,
-                            pRankStack1, pRankStack2, nTempRank, NeighList, nSymmRank, nCanonRank,
-                            nl1, nl2, &pCS->lNumNeighListIter);
-                        if (bSymmNeigh <= 0)
-                        {
-                            if (ret_failed > bSymmNeigh)
-                                ret_failed = bSymmNeigh;
-                            continue;
-                        }
-                        nl01 = nl1;
-                        nl02 = nl2;
-                        nSymmRank1 = pRankStack1[0];
-                        nSymmRank2 = pRankStack2[0];
-                        break;
-                    default:
-                        return CT_STEREOCOUNT_ERR;  /*  <BRKPT> */
+                        case NEIGH_MODE_CHAIN:
+                            if (bRingNeigh)
+                            {
+                                nNumEqRingNeigh++;
+                                continue;
+                            }
+                            nl01 = nl;
+                            nl02 = nl;
+                            nSymmRank1 = nSymmRank;
+                            nSymmRank2 = nSymmRank;
+                            break;
+                        case NEIGH_MODE_RING:
+                            if (!bRingNeigh)
+                                continue;
+                            /*  break a tie between the two contitutionally equivalent neighbors, */
+                            /*  refine the two partitions, sort neighbors lists nl1, nl2 */
+                            bSymmNeigh = BreakNeighborsTie( pCG, at, num_atoms, num_at_tg, MAX_ATOMS + 1, i,
+                                                neigh, j, k, mode,
+                                                pRankStack1, pRankStack2, nTempRank, NeighList, nSymmRank, nCanonRank,
+                                                nl1, nl2, &pCS->lNumNeighListIter );
+                            if (bSymmNeigh <= 0)
+                            {
+                                if (ret_failed > bSymmNeigh)
+                                    ret_failed = bSymmNeigh;
+                                continue;
+                            }
+                            nl01 = nl1;
+                            nl02 = nl2;
+                            nSymmRank1 = pRankStack1[0];
+                            nSymmRank2 = pRankStack2[0];
+                            break;
+                        default:
+                            return CT_STEREOCOUNT_ERR;  /*  <BRKPT> */
                     }
 
                     /*  initialize arrays */
-                    memset(nVisited1, 0, sizeof(nVisited1[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-                    memset(nVisited2, 0, sizeof(nVisited2[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-                    memset(nAtomNumberCanon1, 0, sizeof(nAtomNumberCanon1[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
-                    memset(nAtomNumberCanon2, 0, sizeof(nAtomNumberCanon2[0]) * num_atoms); /* djb-rwth: memset_s C11/Annex K variant? */
+                    memset( nVisited1, 0, sizeof( nVisited1[0] )*num_atoms );
+                    memset( nVisited2, 0, sizeof( nVisited2[0] )*num_atoms );
+                    memset( nAtomNumberCanon1, 0, sizeof( nAtomNumberCanon1[0] )*num_atoms );
+                    memset( nAtomNumberCanon2, 0, sizeof( nAtomNumberCanon2[0] )*num_atoms );
                     nLength = 1;
                     nVisited1[i] = i + 1;   /*  start atom is same */
                     nVisited2[i] = i + 1;
@@ -3505,7 +3472,7 @@ second_pass:
                     nAvoidCheckAtom[0] = i;
                     nAvoidCheckAtom[1] = MAX_ATOMS + 1;
 
-                    bParitiesInverted = (mode == MAP_MODE_C2v || mode == MAP_MODE_S4) ? -1 : 0;
+                    bParitiesInverted = ( mode == MAP_MODE_C2v || mode == MAP_MODE_S4 ) ? -1 : 0;
 
                     /*
                     if (nNeighMode==NEIGH_MODE_RING && at[i].valence==MAX_NUM_STEREO_ATOM_NEIGH) {
@@ -3522,131 +3489,126 @@ second_pass:
 
                     /* allow matching inverted centers only in case all equivalent neighbors in same ring system */
 
-                    /* djb-rwth: restructuring code to avoid undefined array subscripts; removing unnecessary code; discussion required */
+                    ret2 = 0; /* initilize. 1/8/2002 */
 
-                    ret1 = CreateCheckSymmPaths(at, (AT_RANK)i, neigh[j], (AT_RANK)i, neigh[k], nAvoidCheckAtom,
+                    if (0 < ( ret1 = CreateCheckSymmPaths( at, (AT_RANK) i, neigh[j], (AT_RANK) i, neigh[k],
+                        nAvoidCheckAtom,
                         nVisited1, nVisited2, nAtomNumberCanon1, nAtomNumberCanon2,
                         nl01, nl02, nSymmRank1, nSymmRank2, nCanonRank, &nLength,
-                        &bParitiesInverted, mode);
-                    ret2 = CalculatedPathsParitiesAreIdentical(pCG, at, num_atoms, nSymmRank,
-                        nCanonRank, nAtomNumberCanon, nAtomNumberCanon1, nAtomNumberCanon2,
-                        nVisited1, nVisited2, (AT_RANK)MAX_ATOMS, (AT_RANK)i,
-                        neigh[j], neigh[k], nNeighMode,
-                        bParitiesInverted, mode, pCS, vABParityUnknown);
-
-                    if (0 < ret1) /* djb-rwth: or is this (0 < ret1) && (0 < ret2) ? */
+                        &bParitiesInverted, mode ) ) &&
+                         0 < ( ret2 = CalculatedPathsParitiesAreIdentical( pCG, at, num_atoms, nSymmRank,
+                             nCanonRank, nAtomNumberCanon, nAtomNumberCanon1, nAtomNumberCanon2,
+                             nVisited1, nVisited2, (AT_RANK) MAX_ATOMS, (AT_RANK) i,
+                             neigh[j], neigh[k], nNeighMode,
+                             bParitiesInverted, mode, pCS,
+                             vABParityUnknown ) ))
                     {
-                        if (0 < ret2)
+                        if (ret2 & ( NOT_WELL_DEF_UNKN | NOT_WELL_DEF_UNDF ))
                         {
+                            /*  possibly change the parity to unknown or undefined */
+                            int new_parity = ( ret2 & NOT_WELL_DEF_UNKN ) ? vABParityUnknown /*AB_PARITY_UNKN*/ : AB_PARITY_UNDF;
+                            if (PARITY_ILL_DEF( at[i].stereo_atom_parity ) &&
+                                 PARITY_VAL( at[i].stereo_atom_parity ) > new_parity ||
+                                 PARITY_CALCULATE( at[i].stereo_atom_parity ))
                             {
-                                if (ret2 & (NOT_WELL_DEF_UNKN | NOT_WELL_DEF_UNDF))
+                                /*  set new unknown or undefined parity */
+                                at[i].stereo_atom_parity = ( at[i].stereo_atom_parity ^ PARITY_VAL( at[i].stereo_atom_parity ) ) | PARITY_VAL( new_parity );
+                                at[i].parity = PARITY_VAL( new_parity );
+                                /*  Remove from pCS */
+                                nAtomRank1 = nCanonRank[i];
+                                for (n = 0, m = pCS->nLenLinearCTStereoCarb - 1; n <= m; n++)
                                 {
-                                    /*  possibly change the parity to unknown or undefined */
-                                    int new_parity = (ret2 & NOT_WELL_DEF_UNKN) ? vABParityUnknown /*AB_PARITY_UNKN*/ : AB_PARITY_UNDF;
-                                    if ((PARITY_ILL_DEF(at[i].stereo_atom_parity) &&
-                                        PARITY_VAL(at[i].stereo_atom_parity) > new_parity) ||
-                                        PARITY_CALCULATE(at[i].stereo_atom_parity)) /* djb-rwth: addressing LLVM warning */
+                                    if (pCS->LinearCTStereoCarb[n].at_num == nAtomRank1)
                                     {
-                                        /*  set new unknown or undefined parity */
-                                        at[i].stereo_atom_parity = (at[i].stereo_atom_parity ^ PARITY_VAL(at[i].stereo_atom_parity)) | PARITY_VAL(new_parity);
-                                        at[i].parity = PARITY_VAL(new_parity);
-                                        /*  Remove from pCS */
-                                        nAtomRank1 = nCanonRank[i];
-                                        for (n = 0, m = pCS->nLenLinearCTStereoCarb - 1; n <= m; n++)
-                                        {
-                                            if (pCS->LinearCTStereoCarb[n].at_num == nAtomRank1)
-                                            {
-                                                pCS->LinearCTStereoCarb[n].parity = PARITY_VAL(new_parity);
+                                        pCS->LinearCTStereoCarb[n].parity = PARITY_VAL( new_parity );
 #if ( bRELEASE_VERSION == 0 )
-                                                pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
+                                        pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
 #endif
-                                                m = -1;
-                                                break;
-                                            }
-                                        }
-                                        if (m >= 0)
-                                        {
-                                            ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
-                                            goto exit_function;
-                                        }
-                                        ret++; /*  number of removed or set unknown/undefined parities */
+                                        m = -1;
+                                        break;
                                     }
                                 }
-                                else
+                                if (m >= 0)
                                 {
-#ifdef FIX_STEREOCOUNT_ERR
-                                    if (at[i].stereo_atom_parity & KNOWN_PARITIES_EQL)
-                                    {
-                                        int jj;
-                                        AT_RANK EqRank = pCS->nSymmRank[i];
-                                        for (jj = 0; jj < num_atoms; jj++)
-                                        {
-                                            if (pCS->nSymmRank[jj] == EqRank)
-                                            {
-                                                at[jj].stereo_atom_parity &= ~KNOWN_PARITIES_EQL;
-                                            }
-                                        }
-                                    }
-#endif
-                                    RemoveOneStereoCenter(at, i /* atom number*/);
-                                    /*  Remove from pCS */
-                                    nAtomRank1 = nCanonRank[i];
-                                    for (n = 0, m = pCS->nLenLinearCTStereoCarb - 1; n <= m; n++)
-                                    {
-                                        if (pCS->LinearCTStereoCarb[n].at_num == nAtomRank1)
-                                        {
-                                            if (n < m)
-                                            {
-                                                /*  remove pCS->LinearCTStereoDble[n] */
-                                                memmove(pCS->LinearCTStereoCarb + n,
-                                                    pCS->LinearCTStereoCarb + n + 1,
-                                                    ((long long)m - (long long)n) * sizeof(pCS->LinearCTStereoCarb[0])); /* djb-rwth: cast operators added */
-                                            }
-                                            pCS->nLenLinearCTStereoCarb--;
-#if ( bRELEASE_VERSION == 0 )
-                                            pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
-#endif
-                                            m = -1;
-                                            break;
-                                        }
-                                    }
-                                    if (m >= 0)
-                                    {
-                                        ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
-                                        goto exit_function;
-                                    }
-                                    ret++;  /*  number of removed or set unknown/undefined parities */
+                                    ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
+                                    goto exit_function;
                                 }
+                                ret++; /*  number of removed or set unknown/undefined parities */
                             }
                         }
                         else
                         {
-                            if (!ret_failed)
+#ifdef FIX_STEREOCOUNT_ERR
+                            if (at[i].stereo_atom_parity & KNOWN_PARITIES_EQL)
                             {
-                                if (ret1 < 0)
+                                int jj;
+                                AT_RANK EqRank = pCS->nSymmRank[i];
+                                for (jj = 0; jj < num_atoms; jj++)
                                 {
-                                    ret_failed = ret1;
-                                }
-                                else
-                                {
-                                    if (ret2 < 0)
+                                    if (pCS->nSymmRank[jj] == EqRank)
                                     {
-                                        ret_failed = ret2;
+                                        at[jj].stereo_atom_parity &= ~KNOWN_PARITIES_EQL;
                                     }
                                 }
                             }
-                            if (!RETURNED_ERROR(ret_failed))
+#endif
+                            RemoveOneStereoCenter( at, i /* atom number*/ );
+                            /*  Remove from pCS */
+                            nAtomRank1 = nCanonRank[i];
+                            for (n = 0, m = pCS->nLenLinearCTStereoCarb - 1; n <= m; n++)
                             {
-                                if (RETURNED_ERROR(ret1))
+                                if (pCS->LinearCTStereoCarb[n].at_num == nAtomRank1)
                                 {
-                                    ret_failed = ret1;
-                                }
-                                else
-                                {
-                                    if (RETURNED_ERROR(ret2))
+                                    if (n < m)
                                     {
-                                        ret_failed = ret2;
+                                        /*  remove pCS->LinearCTStereoDble[n] */
+                                        memmove( pCS->LinearCTStereoCarb + n,
+                                                 pCS->LinearCTStereoCarb + n + 1,
+                                                 ( m - n ) * sizeof( pCS->LinearCTStereoCarb[0] ) );
                                     }
+                                    pCS->nLenLinearCTStereoCarb--;
+#if ( bRELEASE_VERSION == 0 )
+                                    pCS->bExtract |= EXTR_CALC_USED_TO_REMOVE_PARITY;
+#endif
+                                    m = -1;
+                                    break;
+                                }
+                            }
+                            if (m >= 0)
+                            {
+                                ret = CT_STEREOCOUNT_ERR;  /*   <BRKPT> */
+                                goto exit_function;
+                            }
+                            ret++;  /*  number of removed or set unknown/undefined parities */
+                        }
+                    }
+                    else
+                    {
+                        if (!ret_failed)
+                        {
+                            if (ret1 < 0)
+                            {
+                                ret_failed = ret1;
+                            }
+                            else
+                            {
+                                if (ret2 < 0)
+                                {
+                                    ret_failed = ret2;
+                                }
+                            }
+                        }
+                        if (!RETURNED_ERROR( ret_failed ))
+                        {
+                            if (RETURNED_ERROR( ret1 ))
+                            {
+                                ret_failed = ret1;
+                            }
+                            else
+                            {
+                                if (RETURNED_ERROR( ret2 ))
+                                {
+                                    ret_failed = ret2;
                                 }
                             }
                         }

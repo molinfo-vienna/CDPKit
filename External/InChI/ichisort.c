@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <string.h>
 
@@ -44,7 +38,6 @@
 #include "ichicomn.h"
 #include "ichicant.h"
 
-#include "bcf_s.h"
 
 #if 0
 #define RET_MAX 32767
@@ -304,7 +297,7 @@ void inchi_swap( char *a, char *b, size_t width )
 int insertions_sort( void *pCG,
                      void *base,
                      size_t num, size_t width,
-                     int( *compare )( const void *, const void *, void * ) ) /* djb-rwth: types of variables are sufficient */
+                     int( *compare )( const void *e1, const void *e2, void * ) )
 {
     char *i, *j, *pk = (char*) base;
     int  num_trans = 0;
@@ -430,7 +423,7 @@ void insertions_sort_NeighListBySymmAndCanonRank( NEIGH_LIST base,
         for (j = ( i = pk ) + 1;
              j > base &&    /*  always j > i */
              ( 0 > ( diff = (int) nSymmRank[(int) *i] - (int) nSymmRank[(int) *j] ) ||
-             (!diff && nCanonRank[(int) *i] < nCanonRank[(int) *j]) ); /* djb-rwth: addressing LLVM warning */
+             !diff && nCanonRank[(int) *i] < nCanonRank[(int) *j] );
              j = i, i--)
         {
             tmp = *i;
@@ -563,16 +556,12 @@ int CompareNeighListLex( NEIGH_LIST pp1, NEIGH_LIST pp2, const AT_RANK *nRank )
     int len2 = (int) *pp2++;
     int len = inchi_min( len1, len2 );
     int diff = 0;
-    int ret;
-    /* djb-rwth: fixing oss-fuzz issue #25642 */
-    while ((len > 0) && !diff) 
+    while (len-- > 0 && !( diff = (int) nRank[*pp1++] - (int) nRank[*pp2++] ))
     {
-        len--;
-        diff = (int)nRank[*pp1++] - (int)nRank[*pp2++];
-    };
+        ;
+    }
 
-    ret = diff ? diff : (len1 - len2);
-    return ret;
+    return diff ? diff : ( len1 - len2 );
 }
 
 
@@ -716,8 +705,7 @@ NEIGH_LIST *CreateNeighListFromLinearCT( AT_NUMB *LinearCT, int nLenCT, int num_
     {
         goto exit_function;
     }
-    valence = (S_CHAR*)inchi_calloc((long long)num_atoms + 1, sizeof(valence[0]));
-    if (!valence) /* djb-rwth: cast operator added */
+    if (!( valence = (S_CHAR*) inchi_calloc( num_atoms + 1, sizeof( valence[0] ) ) ))
     {
         goto exit_function;
     }
@@ -743,11 +731,9 @@ NEIGH_LIST *CreateNeighListFromLinearCT( AT_NUMB *LinearCT, int nLenCT, int num_
         goto exit_function;
     }
     length = num_bonds + num_atoms + 1;
-    pp = (NEIGH_LIST*)inchi_calloc(((long long)num_atoms + 1), sizeof(NEIGH_LIST));
-    pAtList = (AT_NUMB*)inchi_malloc(length * sizeof(*pAtList));
-    if (pp) /* djb-rwth: cast operator added; addressing LLVM warning */
+    if (pp = (NEIGH_LIST *) inchi_calloc( ( num_atoms + 1 ), sizeof( NEIGH_LIST ) ))
     {
-        if (pAtList) /* djb-rwth: addressing LLVM warning */
+        if (pAtList = (AT_NUMB *) inchi_malloc( length * sizeof( *pAtList ) ))
         {
             /*  Create empty connection table */
             for (i = 1, length = 0; i <= num_atoms; i++)
@@ -799,7 +785,7 @@ exit_function:
         }
     }
 
-    return pp; /* djb-rwth: ignoring LLVM warning: since a pointer is returned, memory should be freed in a function which calls *CreateNeighListFromLinearCT */
+    return pp;
 }
 
 
@@ -817,7 +803,7 @@ NEIGH_LIST *CreateNeighList( int num_atoms,
                              T_GROUP_INFO *t_group_info )
 {
     /*  +1 to add NULL termination */
-    NEIGH_LIST *pp = (NEIGH_LIST *) inchi_calloc( ( (long long)num_at_tg + 1 ), sizeof( NEIGH_LIST ) ); /* djb-rwth: cast operator added */
+    NEIGH_LIST *pp = (NEIGH_LIST *) inchi_calloc( ( num_at_tg + 1 ), sizeof( NEIGH_LIST ) );
     T_GROUP   *t_group = NULL;
     AT_NUMB   *nEndpointAtomNumber = NULL;
     int        num_t_groups = 0;
@@ -866,8 +852,7 @@ NEIGH_LIST *CreateNeighList( int num_atoms,
             length += num_t_groups;
         }
         length++; /*  +1 to save number of neighbors */
-        pAtList = (AT_NUMB*)inchi_malloc(length * sizeof(*pAtList));
-        if (pAtList) /* djb-rwth: addressing LLVM warning */
+        if (pAtList = (AT_NUMB *) inchi_malloc( length * sizeof( *pAtList ) ))
         {
             if (!bDoubleBondSquare)
             {
@@ -896,7 +881,7 @@ NEIGH_LIST *CreateNeighList( int num_atoms,
                     start = length++;
                     for (j = 0; j < val; j++)
                     {
-                        pAtList[length++] = at[i].neighbor[j]; /* djb-rwth: buffer overrun avoided implicitly */
+                        pAtList[length++] = at[i].neighbor[j];
                         if (bDoubleBondSquare && BOND_DOUBLE == at[i].bond_type[j])
                         {
                             pAtList[length++] = at[i].neighbor[j]; /*  a list of neighbor orig. numbers */
@@ -933,7 +918,7 @@ NEIGH_LIST *CreateNeighList( int num_atoms,
         }
     }
 
-    return pp; /* djb-rwth: ignoring LLVM warning: since a pointer is returned, memory should be freed in a function which calls *CreateNeighList */
+    return pp;
 }
 
 
@@ -986,8 +971,9 @@ int BreakAllTies( CANON_GLOBALS *pCG,
 
     if (nNewRank && nNewAtomNumber)
     {
-        memcpy(nNewAtomNumber, nPrevAtomNumber, num_atoms * sizeof(nNewAtomNumber[0]));
-        memcpy(nNewRank, nPrevRank, num_atoms * sizeof(nNewRank[0]));
+        memcpy( nNewAtomNumber, nPrevAtomNumber, num_atoms * sizeof( nNewAtomNumber[0] ) );
+        memcpy( nNewRank, nPrevRank, num_atoms * sizeof( nNewRank[0] ) );
+
         for (i = 1, nRet = 0; i < num_atoms; i++)
         {
             /*  12-12-2001: replaced Prev... with New... */

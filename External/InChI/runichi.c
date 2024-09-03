@@ -1,41 +1,34 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
 
 
@@ -72,7 +65,6 @@
 #include "readinch.h"
 #include "ichirvrs.h"
 
-#include "bcf_s.h"
 
 extern int DisplayTheWholeStructure( struct tagCANON_GLOBALS *pCG,
                                      struct tagINCHI_CLOCK   *ic,
@@ -245,7 +237,9 @@ int ProcessOneStructure( INCHI_CLOCK            *ic,
     ORIG_STRUCT *pOrigStruct = NULL;
     int err, ret1 = 0;
 
-    /* djb-rwth: removing redundant code */
+#if ( RING2CHAIN == 1 || UNDERIVATIZE == 1 )
+    int /*ret1=0,*/ret2 = 0;
+#endif
 
     /*    1. Preliminary work */
 
@@ -258,8 +252,8 @@ int ProcessOneStructure( INCHI_CLOCK            *ic,
 
     sd->bUserQuitComponent = 0;
     sd->bUserQuitComponentDisplay = 0;
-    memset( composite_norm_data, 0, sizeof( composite_norm_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( pncFlags, 0, sizeof( *pncFlags ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( composite_norm_data, 0, sizeof( composite_norm_data ) );
+    memset( pncFlags, 0, sizeof( *pncFlags ) );
 
         
     /* For experimental purposes only */
@@ -314,7 +308,7 @@ int ProcessOneStructure( INCHI_CLOCK            *ic,
 
 
     pOrigStruct = &OrigStruct;
-    memset( pOrigStruct, 0, sizeof( *pOrigStruct ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( pOrigStruct, 0, sizeof( *pOrigStruct ) );
 
     OrigAtData_StoreNativeInput( pCG, &nRet, sd,  ip,  orig_inp_data, pOrigStruct );
 
@@ -437,7 +431,7 @@ int ProcessOneStructure( INCHI_CLOCK            *ic,
                                    sd->bTautFlags, sd->bTautFlagsDone,
                                    pncFlags, num_inp,
                                    pINChI, pINChI_Aux,
-                                   &bSortPrintINChIFlags, save_opt_bits ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                   &bSortPrintINChIFlags, save_opt_bits );
     }
 
 
@@ -493,7 +487,7 @@ int DoOneStructureEarlyPreprocessing( INCHI_CLOCK *ic,
 {
 
 #if ( RING2CHAIN == 1 || UNDERIVATIZE == 1 )
-    int ret1 = 0, ret2 = 0; /* djb-rwth: removing redundant variables */
+    int ret1 = 0, ret2 = 0, nRet = 0;
 #endif
 
 #if ( REMOVE_ION_PAIRS_ORIG_STRU == 1 )
@@ -530,7 +524,7 @@ int DoOneStructureEarlyPreprocessing( INCHI_CLOCK *ic,
         AddErrorMessage( sd->pStrErrStruct, "Ring to chain error" );
         sd->nStructReadError = 99;
         sd->nErrorType = _IS_ERROR;
-        /* djb-rwth: removing redundant code */
+        nRet = _IS_ERROR;
         TreatErrorsInReadTheStructure( sd, ip, LOG_MASK_ALL,
                                        inp_file, log_file,
                                        out_file, prb_file,
@@ -565,7 +559,8 @@ int OrigAtData_SaveMolfile( ORIG_ATOM_DATA  *orig_inp_data,
     else
     {
         char szNumber[256];
-        sprintf(szNumber, "Structure #%ld. %s%s%s%s", num_inp, SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue));
+        sprintf( szNumber, "Structure #%ld. %s%s%s%s", num_inp, SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ) );
+
         ret = OrigAtData_WriteToSDfile( orig_inp_data, out_file, szNumber, NULL,
                                         ( sd->bChiralFlag&FLAG_INP_AT_CHIRAL ) ? 1 : 0,
                                         ( ip->bINChIOutputOptions&INCHI_OUT_SDFILE_ATOMS_DT ) ? 1 : 0,
@@ -638,18 +633,6 @@ void PrepareSaveOptBits( unsigned char *save_opt_bits, INPUT_PARMS *ip )
             {
                 ( *save_opt_bits ) |= SAVE_OPT_15T;
             }
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_22_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_22_00;
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_16_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_16_00;
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_06_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_06_00;
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_39_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_39_00;
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_13_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_13_00;
-            if (0 != (ip->bTautFlags & TG_FLAG_PT_18_00))
-                (*save_opt_bits) |= SAVE_OPT_PT_18_00;
             /* Check if /SNon requested and turn OFF stereo bits if so */
             if (!( ip->nMode & REQ_MODE_STEREO ))
             {
@@ -878,15 +861,15 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
     inp_norm_data[TAUT_NON] = &InpNormAtData;
     inp_norm_data[TAUT_YES] = &InpNormTautData;
 
-    memset( inp_cur_data, 0, sizeof( *inp_cur_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-    memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inp_cur_data, 0, sizeof( *inp_cur_data ) );
+    memset( inp_norm_data[TAUT_NON], 0, sizeof( *inp_norm_data[0] ) );
+    memset( inp_norm_data[TAUT_YES], 0, sizeof( *inp_norm_data[0] ) );
 
     {
         /*#ifndef COMPILE_ANSI_ONLY*/
-        memset( composite_norm_data + TAUT_NON, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-        memset( composite_norm_data + TAUT_YES, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-        memset( composite_norm_data + TAUT_INI, 0, sizeof( composite_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( composite_norm_data + TAUT_NON, 0, sizeof( composite_norm_data[0] ) );
+        memset( composite_norm_data + TAUT_YES, 0, sizeof( composite_norm_data[0] ) );
+        memset( composite_norm_data + TAUT_INI, 0, sizeof( composite_norm_data[0] ) );
     }   /*#endif*/
 
     if (ip->bAllowEmptyStructure && !orig_inp_data->at && !orig_inp_data->num_inp_atoms)
@@ -908,7 +891,6 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
         AddErrorMessage( sd->pStrErrStruct, "Fatal undetermined program error" );
         sd->nStructReadError = 97;
         nRet = sd->nErrorType = _IS_FATAL;
-        inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
         goto exit_function;
     }
 
@@ -1036,7 +1018,6 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                     inp_file, log_file, orig_inp_data, num_inp,
                     -1, bShowStructure, bINCHI_LIB_Flag ))
                 {
-                    inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
                     goto exit_function;
                 }
             }
@@ -1135,7 +1116,6 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                 bShowStructure,
                 bINCHI_LIB_Flag ))
             {
-                inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
                 goto exit_function;
             }
         }
@@ -1144,41 +1124,13 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
 
     /* allocate pINChI[iINChI] and pINChI_Aux2[iINChI] -- arrays of pointers to INChI and INChI_Aux */
     /* assign values to sd->num_components[]                                                  */
-    
-    /* djb-rwth: MYREALLOC2 has been replaced and the whole block rewritten to address memory leaks and reading from freed memory locations */
-    do {
-        if( (sd->num_components[iINChI]) <= ((long long)cur_prep_inp_data->num_components) ) {
-            PINChI2* newPTR1 = (PINChI2*)inchi_calloc( ((long long)cur_prep_inp_data->num_components)+1, sizeof(PINChI2) );
-            PINChI_Aux2* newPTR2 = (PINChI_Aux2*)inchi_calloc( ((long long)cur_prep_inp_data->num_components)+1, sizeof(PINChI_Aux2) );
-            if ( newPTR1 && newPTR2 ) {
-                if ( (pINChI2[iINChI]) && (sd->num_components[iINChI]) > 0 )
-                    memcpy(newPTR1, pINChI2[iINChI], (sd->num_components[iINChI]) * sizeof(PINChI2));
-                if ((pINChI_Aux2[iINChI]) && (sd->num_components[iINChI]) > 0)
-                    memcpy(newPTR2, pINChI_Aux2[iINChI], (sd->num_components[iINChI]) * sizeof(PINChI_Aux2));
-                if (pINChI2[iINChI])
-                    inchi_free(pINChI2[iINChI]);
-                if (pINChI_Aux2[iINChI])
-                    inchi_free(pINChI_Aux2[iINChI]);
-                pINChI2[iINChI] = newPTR1;
-                pINChI_Aux2[iINChI] = newPTR2;
-                sd->num_components[iINChI] = cur_prep_inp_data->num_components;
-                k = 0;
-            }
-            else {
-                inchi_free(newPTR1);
-                inchi_free(newPTR2);
-                k = 1;
-            }
-        }
-        else { k = 0; }
-    } while (0);
+    MYREALLOC2( PINChI2, PINChI_Aux2, pINChI2[iINChI], pINChI_Aux2[iINChI], sd->num_components[iINChI], cur_prep_inp_data->num_components, k );
 
     if (k)
     {
         AddErrorMessage( sd->pStrErrStruct, "Cannot allocate output data. Terminating" );
         sd->nStructReadError = 99;
         sd->nErrorType = _IS_FATAL;
-        inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
         goto exit_function;
     }
 
@@ -1208,11 +1160,11 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
 #ifndef TARGET_LIB_FOR_WINCHI  /* { */
 #if ( bREUSE_INCHI == 1 )
 
-        if ((iINChI == INCHI_REC &&
+        if (iINChI == INCHI_REC &&
              /*( !ip->bDisplay &&
                !ip->bDisplayCompositeResults && */
-               !( ip->bCompareComponents & CMP_COMPONENTS )) ||
-               sd->bUserQuitComponentDisplay) /* djb-rwth: addressing LLVM warning */
+               !( ip->bCompareComponents & CMP_COMPONENTS ) ||
+               sd->bUserQuitComponentDisplay)
         {
             /* Reconnected structure (06-20-2005: added "&& !ip->bDisplayCompositeResults" to display composite structure) */
             int m = iINChI - 1;
@@ -1226,8 +1178,8 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                     /* Yes, we have already done this */
                     if (!n++)
                     {
-                        memcpy(pINChI + i, pINChI2[m] + j, sizeof(pINChI[0]));
-                        memcpy(pINChI_Aux + i, pINChI_Aux2[m] + j, sizeof(pINChI_Aux[0]));
+                        memcpy( pINChI + i, pINChI2[m] + j, sizeof( pINChI[0] ) );
+                        memcpy( pINChI_Aux + i, pINChI_Aux2[m] + j, sizeof( pINChI_Aux[0] ) );
                         for (k = 0; k < TAUT_NUM; k++)
                         {
                             if (pINChI[i][k])
@@ -1274,7 +1226,6 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                 AddErrorMessage( sd->pStrErrStruct, "Cannot distinguish components" );
                 sd->nStructReadError = 99;
                 sd->nErrorType = _IS_ERROR;
-                inchi_free(all_inp_norm_data); /* djb-rwth: avoiding memory leak */
                 goto exit_function;
             }
         }
@@ -1315,23 +1266,22 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
         }
 #endif
 
-        /*#ifndef COMPILE_ANSI_ONLY  
-        { */
+        /*#ifndef COMPILE_ANSI_ONLY  /* { */
 
         /*  b) Display the extracted original component structure */
         if (ip->bDisplay && inp_cur_data->at && !sd->bUserQuitComponentDisplay)
         {
             if (cur_prep_inp_data->num_components == 1)
             {
-                sprintf(szTitle, "%sInput Structure #%ld.%s%s%s%s%s",
-                    bStructurePreprocessed ? "Preprocessed " : "",
-                    num_inp, SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue), iINChI ? " (Reconnected)" : "");
+                sprintf( szTitle, "%sInput Structure #%ld.%s%s%s%s%s",
+                                  bStructurePreprocessed ? "Preprocessed " : "",
+                                  num_inp, SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ), iINChI ? " (Reconnected)" : "" );
             }
             else
             {
-                sprintf(szTitle, "Component #%d of %d, Input Structure #%ld.%s%s%s%s%s",
-                    i + 1, cur_prep_inp_data->num_components,
-                    num_inp, SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue), iINChI ? " (Reconnected)" : "");
+                sprintf( szTitle, "Component #%d of %d, Input Structure #%ld.%s%s%s%s%s",
+                                  i + 1, cur_prep_inp_data->num_components,
+                                  num_inp, SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ), iINChI ? " (Reconnected)" : "" );
             }
 
 #if defined (TARGET_EXE_STANDALONE) && defined(_WIN32)
@@ -1446,7 +1396,7 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
              *                                   inp_norm_data[1]->bHasIsotopicLayer  *
              **************************************************************************/
 
-            int bIsotopic, bTautomeric, bDisplayTaut, bHasIsotopicLayer, bFixedBondsTaut, m_max, m, nNumDisplayedFixedBondTaut = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+            int bIsotopic, bTautomeric, bDisplayTaut, bHasIsotopicLayer, bFixedBondsTaut, m_max, m, nNumDisplayedFixedBondTaut = 0;
 
             for ( j = 0;
                   ip->bDisplay && !sd->bUserQuitComponentDisplay && j < TAUT_NUM;
@@ -1474,21 +1424,21 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                             /*  Added number of components, added another format for a single component case - DCh */
                             if (cur_prep_inp_data->num_components > 1)
                             {
-                                sprintf(szTitle, "%s Component #%d of %d, Structure #%ld%s%s.%s%s%s%s%s",
-                                    bFixedBondsTaut ? "Preprocessed" : "Result for",
-                                    i + 1, cur_prep_inp_data->num_components, num_inp,
-                                    bDisplayTaut == 1 ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
-                                    bIsotopic ? ", isotopic" : "",
-                                    SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue), iINChI ? " (Reconnected)" : "");
+                                sprintf( szTitle, "%s Component #%d of %d, Structure #%ld%s%s.%s%s%s%s%s",
+                                              bFixedBondsTaut ? "Preprocessed" : "Result for",
+                                              i + 1, cur_prep_inp_data->num_components, num_inp,
+                                              bDisplayTaut == 1 ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
+                                              bIsotopic ? ", isotopic" : "",
+                                              SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ), iINChI ? " (Reconnected)" : "" );
                             }
                             else
                             {
-                                sprintf(szTitle, "%s Structure #%ld%s%s.%s%s%s%s%s",
-                                    bFixedBondsTaut ? "Preprocessed" : "Result for",
-                                    num_inp,
-                                    bDisplayTaut == 1 ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
-                                    bIsotopic ? ", isotopic" : "",
-                                    SDF_LBL_VAL(ip->pSdfLabel, ip->pSdfValue), iINChI ? " (Reconnected)" : "");
+                                sprintf( szTitle, "%s Structure #%ld%s%s.%s%s%s%s%s",
+                                              bFixedBondsTaut ? "Preprocessed" : "Result for",
+                                              num_inp,
+                                              bDisplayTaut == 1 ? ", mobile H" : bDisplayTaut == 0 ? ", fixed H" : "",
+                                              bIsotopic ? ", isotopic" : "",
+                                              SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ), iINChI ? " (Reconnected)" : "" );
                             }
 
 #if defined (TARGET_EXE_STANDALONE) && defined(_WIN32)
@@ -1535,7 +1485,7 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                                                             &ip->dp,
                                                             ip->nMode, szTitle );
                                 }
-                                if ((sd->bUserQuitComponentDisplay = (err_display == ESC_KEY ))) /* djb-rwth: addressing LLVM warning */
+                                if (sd->bUserQuitComponentDisplay = (err_display == ESC_KEY ))
                                 {
                                     break;
                                 }
@@ -1634,7 +1584,7 @@ int CreateOneStructureINChI( CANON_GLOBALS          *pCG,
                     if (inp_norm_data[j]->bExists)
                     {
                         all_inp_norm_data[i][j] = *inp_norm_data[j];
-                        memset( inp_norm_data[j], 0, sizeof( *inp_norm_data[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+                        memset( inp_norm_data[j], 0, sizeof( *inp_norm_data[0] ) );
                     }
                 }
             }
@@ -1763,20 +1713,13 @@ int CreateOneComponentINChI( CANON_GLOBALS      *pCG,
     /*  Allocate memory for non-tautomeric (k=0) and tautomeric (k=1) results */
     for (k = 0; k < TAUT_NUM; k++)
     {
-        /* djb-rwth: introducing variables for correct nAllocMode expression */
-        int nAM1 = 0, nAM2 = 0;
+        int nAllocMode = ( k == TAUT_YES ? REQ_MODE_TAUT : 0 ) |
+            ( bTautFlagsDone & ( TG_FLAG_FOUND_ISOTOPIC_H_DONE |
+                TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE ) )
+            ? ( ip->nMode & REQ_MODE_ISO ) : 0;
 
-        if (k == TAUT_YES)
-            nAM1 = REQ_MODE_TAUT;
-
-        if (bTautFlagsDone & (TG_FLAG_FOUND_ISOTOPIC_H_DONE | TG_FLAG_FOUND_ISOTOPIC_ATOM_DONE))
-            nAM2 = ip->nMode & REQ_MODE_ISO;
-
-        int nAllocMode = nAM1 | nAM2; /* djb-rwth: original sequence of bit-wise operations had to be rewritten */
-
-
-        if ((k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC )) ||
-             (k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT ))) /* djb-rwth: addressing LLVM warning */
+        if (k == TAUT_NON && ( ip->nMode & REQ_MODE_BASIC ) ||
+             k == TAUT_YES && ( ip->nMode & REQ_MODE_TAUT ))
         {
             /*  alloc INChI and INChI_Aux */
             cur_INChI[k] = Alloc_INChI( inp_cur_data->at,
@@ -1935,8 +1878,8 @@ int CreateOneComponentINChI( CANON_GLOBALS      *pCG,
         int cur_is_in_taut = ( pINChI[i][TAUT_YES] &&
                                    pINChI[i][TAUT_YES]->nNumberOfAtoms > 0 );
 
-        int cur_is_non_taut = (cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer) ||
-            (cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer); /* djb-rwth: addressing LLVM warnings */
+        int cur_is_non_taut = cur_is_in_non_taut && 0 == pINChI[i][TAUT_NON]->lenTautomer ||
+            cur_is_in_taut && 0 == pINChI[i][TAUT_YES]->lenTautomer;
         int cur_is_taut = cur_is_in_taut && 0 < pINChI[i][TAUT_YES]->lenTautomer;
 
         /*
@@ -1956,8 +1899,8 @@ int CreateOneComponentINChI( CANON_GLOBALS      *pCG,
             {
                 int bIsotopic = ( pINChI[i][j]->nNumberOfIsotopicAtoms ||
                                   pINChI[i][j]->nNumberOfIsotopicTGroups ||
-                                  (pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1) ); /* djb-rwth: addressing LLVM warning */
-                if (pINChI_Aux[i][j] && (j == TAUT_YES)) /* djb-rwth: fixing a NULL pointer dereference */
+                                  pINChI[i][j]->nPossibleLocationsOfIsotopicH && pINChI[i][j]->nPossibleLocationsOfIsotopicH[0] > 1 );
+                if (j == TAUT_YES)
                 {
                     bIsotopic |= ( 0 < pINChI_Aux[i][j]->nNumRemovedIsotopicH[0] +
                                       pINChI_Aux[i][j]->nNumRemovedIsotopicH[1] +
@@ -1998,7 +1941,7 @@ int CreateOneComponentINChI( CANON_GLOBALS      *pCG,
  Extended-functionality version of ProcessOneStructure
 
  able to handle both polymer related and unrelated pseudoelement atoms
- and to perform advanced polymer treatment (v. 1.06+)
+ and to perform advanced polymer treatment (v. 1.06)
  ****************************************************************************/
 int ProcessOneStructureEx( struct tagINCHI_CLOCK    *ic,
                            struct tagCANON_GLOBALS  *CG,
@@ -2050,7 +1993,7 @@ int ProcessOneStructureEx( struct tagINCHI_CLOCK    *ic,
                                     inp_file, log_file, out_file, prb_file,
                                     orig_inp_data, prep_inp_data,
                                     num_inp, strbuf, save_opt_bits,
-                                    &sinchi_noedits, &saux_noedits); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                    &sinchi_noedits, &saux_noedits);
 
     /* CALCULATE INCHI */
     
@@ -2157,7 +2100,7 @@ int PreprocessPolymerCRUData(	struct tagINCHI_CLOCK    *ic,
 
                 if (orig_inp_data->polymer->treat == POLYMERS_MODERN)
                 {
-                    int n_done, n_todo = 0, n_poly_zz = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+                    int n_done, n_todo = 0, n_poly_zz = 0;
 
                     /*  First, get InChI and AuxInfo for the unedited original input
                     (actually, we are interested in AuxInfo for original structure;
@@ -2230,7 +2173,7 @@ int PreprocessPolymerCRUData(	struct tagINCHI_CLOCK    *ic,
                         /* else */
                         {
                             /* Proceed with CRU fold */
-                            n_done = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+                            n_done = 0;
                             n_todo = ed_fold->del_atom->used + ed_fold->del_bond->used + ed_fold->new_bond->used + ed_fold->mod_bond->used;
                             ed_fold->del_side_chains = 1;
                             OAD_StructureEdits_DebugPrint(ed_fold);
@@ -2238,7 +2181,7 @@ int PreprocessPolymerCRUData(	struct tagINCHI_CLOCK    *ic,
                             {
                                 /* Edit the original input data */
                                 ed_fold->del_side_chains = 1;
-                                n_done = OAD_StructureEdits_Apply(sd, ip, orig_inp_data, ed_fold, &ret); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                n_done = OAD_StructureEdits_Apply(sd, ip, orig_inp_data, ed_fold, &ret);
                                 if (ret == _IS_FATAL || ret == _IS_ERROR)
                                 {
                                     ret = _IS_WARNING;
@@ -2295,7 +2238,7 @@ frame_shift:        ;
 
                         ret = OAD_Polymer_PrepareFrameShiftEdits( orig_inp_data, sinchi_105p, saux_105p, ed_fs);
                      
-                        if (ret == _IS_FATAL || ret == _IS_ERROR) /* djb-rwth: logical operator corrected */
+                        if (ret == _IS_FATAL && ret == _IS_ERROR)
                         {
                             ret = _IS_WARNING;
                             /*inchi_ios_eprint(log_file, "Warning (Frame shift analysis failed) structure #%ld.%s%s%s%s\n",
@@ -2309,7 +2252,7 @@ frame_shift:        ;
                         else
                         {
                             /* OK, proceed with frame shift */
-                            n_done = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+                            n_done = 0;
                             n_todo = ed_fs->del_atom->used +
                                      ed_fs->del_bond->used + ed_fs->new_bond->used + ed_fs->mod_bond->used +
                                      ed_fs->mod_coord->used;
@@ -2317,7 +2260,7 @@ frame_shift:        ;
                             if (n_todo)
                             {
                                 /* Edit the original input data according to frame shift info */
-                                n_done = OAD_StructureEdits_Apply(sd, ip, orig_inp_data, ed_fs, &ret); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                n_done = OAD_StructureEdits_Apply(sd, ip, orig_inp_data, ed_fs, &ret);
                                 if (ret == _IS_FATAL || ret == _IS_ERROR)
                                 {
                                     ret = _IS_WARNING;
@@ -2584,15 +2527,15 @@ int OAD_StructureEdits_Apply( STRUCT_DATA *sd,
             /* Atom to keep; copy it */ 
             new_at0 = new_at + nacc;
             ++nacc;
-            memcpy(new_at0, orig_at_data->at + i, sizeof(new_at[0]));
+            memcpy(new_at0, orig_at_data->at + i, sizeof(new_at[0]) );
             /* Correct its own number(s) */
             new_at0->orig_at_number = new_num + 1;
             
             /* Correct its nbr number(s) */
             valen = new_at0->valence;
-            memcpy(nbr0, new_at0->neighbor, valen * sizeof(AT_NUMB));
+            memcpy(nbr0, new_at0->neighbor, valen*sizeof(AT_NUMB));
             memcpy(btype0, new_at0->bond_type, valen);
-            memset(new_at0->neighbor, 0, valen); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset(new_at0->neighbor, 0, valen);
             for (m = 0, macc=0; m < valen; m++)
             {
                 int num2 = nbr0[m];
@@ -2641,12 +2584,12 @@ int OAD_StructureEdits_Apply( STRUCT_DATA *sd,
             {
                 OAD_PolymerUnit* u = p->units[iu];
                 int new_na, new_nb, new_bb;
-                memset(ibuf, 0, n_max_stored * sizeof(ibuf[0])); /* djb-rwth: memset_s C11/Annex K variant? */
+                memset(ibuf, 0, n_max_stored * sizeof(ibuf[0]));
                 if (u)
                 {
                     if (u->alist)
                     {
-                        memcpy(ibuf, u->alist, u->na * sizeof(ibuf[0]));
+                        memcpy(ibuf, u->alist, u->na*sizeof(ibuf[0]));
                         new_na = set_renumbered_or_delete(u->alist, ibuf, u->na, at_renum, 1);
                         if (new_na == -1)
                         {
@@ -2657,7 +2600,7 @@ int OAD_StructureEdits_Apply( STRUCT_DATA *sd,
                     }
                     if (u->blist)
                     {
-                        memcpy(ibuf, u->blist, 2 * (long long)u->nb * sizeof(int)); /* djb-rwth: cast operator added */
+                        memcpy(ibuf, u->blist, 2*u->nb * sizeof(int));
                         new_nb = set_renumbered_or_delete(u->blist, ibuf, 2*u->nb, at_renum, 1);
                         new_nb /= 2;
                         if (new_nb == -1)
@@ -2678,7 +2621,7 @@ int OAD_StructureEdits_Apply( STRUCT_DATA *sd,
                             bnd[0] = u->bkbonds[b][0];
                             bnd[1] = u->bkbonds[b][1];
                             memcpy(ibuf, bnd, 2 * sizeof(ibuf[0]));
-                            memset(u->bkbonds[b], 0, 2 * sizeof(u->bkbonds[0][0])); /* djb-rwth: memset_s C11/Annex K variant? */
+                            memset(u->bkbonds[b], 0, 2 * sizeof(u->bkbonds[0][0]));
                             new_bb = set_renumbered_or_delete(bnd, ibuf, 2, at_renum, 1);
                             if (new_bb == -1)
                             {
@@ -2700,13 +2643,10 @@ int OAD_StructureEdits_Apply( STRUCT_DATA *sd,
                         u->nbkbonds = new_nbkbonds;
                     }
 
-                    if (u->blist) /* djb-rwth: fixing a NULL pointer dereference */
-                    {
-                        u->cap1 = u->blist[0];
-                        u->end_atom1 = u->blist[1];
-                        u->cap2 = u->blist[2];
-                        u->end_atom2 = u->blist[3];
-                    }
+                    u->cap1 = u->blist[0];
+                    u->end_atom1 = u->blist[1];
+                    u->cap2 = u->blist[2];
+                    u->end_atom2 = u->blist[3];
                     if (u->cap1 < 1 || u->cap2 < 1 || u->end_atom1 < 1 || u->end_atom2 < 1)
                     {
                         *ret = _IS_ERROR;
@@ -2753,8 +2693,8 @@ int set_renumbered_or_delete( int *number,	/* numbers to correct */
                               int base)
 {
     int i, new_nelems;
-    memcpy(buf, number, nelems * sizeof(int));
-    memset(number, 0, nelems * sizeof(int)); /* djb-rwth: memset_s C11/Annex K variant? */
+    memcpy(buf, number, nelems*sizeof(int));
+    memset(number, 0, nelems * sizeof(int));
     for (i = 0, new_nelems = 0; i < nelems; i++)
     {
         int new_num = renum[ buf[i]-base ] + base;
@@ -2891,8 +2831,7 @@ int ValidateAndPreparePolymerAndPseudoatoms( struct tagINCHI_CLOCK *ic,
                           sd->nErrorCode, sd->pStrErrStruct, num_inp,
                           SDF_LBL_VAL( ip->pSdfLabel, ip->pSdfValue ) );
         res = _IS_ERROR;
-        if (orig_inp_data) /* djb-rwth: fixing a NULL pointer dereference */
-            orig_inp_data->num_inp_atoms = -1;
+        orig_inp_data->num_inp_atoms = -1;
         goto exit_function;
     }
 
@@ -3127,13 +3066,13 @@ int mark_atoms_to_delete_or_renumber( ORIG_ATOM_DATA *orig_at_data,
 {
     int i, j;
     int fail=0, ret = 0;
-    size_t *atnums = NULL; /* djb-rwth: needs to be size_t type */
-    size_t max_atoms = orig_at_data->num_inp_atoms;
+    int *atnums = NULL;
+    int max_atoms = orig_at_data->num_inp_atoms;
 
     /* NB:	new/old ORIG_ATOM_DATA atom numbers are 0-based (==orig_number-1) 
             while those in ed->... are just 1-based orig_numbers */
     
-    for (i = 0; (size_t)i < max_atoms; i++)
+    for (i=0;i<max_atoms;i++)
     {
         at_renum[i] = i;
     }
@@ -3144,12 +3083,12 @@ int mark_atoms_to_delete_or_renumber( ORIG_ATOM_DATA *orig_at_data,
         (i.e., delete a whole connected component(s) comprising original atoms)
         */
         int natnums = 0;
-        atnums = (size_t *)inchi_calloc(max_atoms, sizeof(size_t)); /* djb-rwth: size_t type used for max_atoms to fit the definition of inchi_calloc  */
+        atnums = (int *)inchi_calloc(max_atoms, sizeof(int));
         if (!atnums)
         {
             return _IS_ERROR;
         }
-        for (i = 0; (size_t)i < max_atoms; i++)
+        for (i = 0; i < max_atoms; i++)
         {
             int iatom = ed->del_atom->item[i] - 1;
             subgraf *sg = NULL;
@@ -3158,12 +3097,12 @@ int mark_atoms_to_delete_or_renumber( ORIG_ATOM_DATA *orig_at_data,
             {
                 break;
             }
-            for (j = 0; (size_t)j < max_atoms; j++)
+            for (j = 0; j < max_atoms; j++)
             {
                 atnums[j] = orig_at_data->at[j].orig_at_number; /*j+1;*/
             }
-            sg = subgraf_new(orig_at_data, max_atoms, (int*)atnums);
-            memset(atnums, 0, max_atoms * sizeof(int)); /* djb-rwth: memset_s C11/Annex K variant? */
+            sg = subgraf_new(orig_at_data, max_atoms, atnums);
+            memset(atnums, 0, max_atoms * sizeof(int));
             if (!sg)
             {
                 ret = _IS_ERROR;
@@ -3177,12 +3116,12 @@ int mark_atoms_to_delete_or_renumber( ORIG_ATOM_DATA *orig_at_data,
             }
             spf->start = iatom;
             spf->nseen = 0;
-            natnums = subgraf_pathfinder_collect_all(spf, 0, NULL, (int*)atnums);
+            natnums = subgraf_pathfinder_collect_all(spf, 0, NULL, atnums);
             if (natnums)
             {
                 for (j = 0; j < natnums; j++)
                 {
-                    fail = IntArray_AppendIfAbsent(ed->del_atom, atnums[j]); /* djb-rwth: ui_rr? */
+                    fail = IntArray_AppendIfAbsent(ed->del_atom, atnums[j]);
                     if (fail)
                     {
                         ret = _IS_ERROR;

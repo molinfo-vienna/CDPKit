@@ -1,41 +1,34 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
 
 #include <stdlib.h>
@@ -52,8 +45,6 @@
 #include "util.h"
 #include "ichi_io.h"
 #include "ichimain.h"
-
-#include "bcf_s.h"
 
 /*
     SDFile related procedures
@@ -348,37 +339,26 @@ int SDFileIdentifyLabel( char* inp_line, const char *pSdfLabel )
 {
     char line[MOL_FMT_MAXLINELEN];
     char *p, *q;
-    int  i, j, len, tmp1 = 0, tmp2 = 0, cnd = 0;
+    int  i, j, len;
 
     if (( p = strchr( inp_line, '<' ) ) &&
         ( q = strchr( p, '>' ) ) &&
         ( len = q - p - 1 ) > 0 && len < ( int )sizeof( line ))
     {
-        memcpy(line, p + 1, len);
+        memcpy( line, p + 1, len );
         line[len] = '\0';
 
-        for (i = 0; (i < len) && (cnd == 0); i++)
+        for (i = 0; isspace( UCINT line[i] ); i++)
         {
-            if (isspace(UCINT line[i]))
-            {
-                tmp1 = i;
-                cnd = 1;
-            }
+            ;
+        }
+        for (j = len - 1; j >= i && isspace( UCINT line[i] ); j--)
+        {
+            ;
         }
 
-        cnd = 0;
-
-        for (j = len - 1; (j >= tmp1) && (cnd == 0); j--)
-        {
-            if (isspace(UCINT line[j]))
-            {
-                tmp2 = j;
-                cnd = 1;
-            }
-        }
-
-        len = tmp2 - tmp1 + 1;
-        p = line + tmp1;
+        len = j - i + 1;
+        p = line + i;
 
         if (pSdfLabel && pSdfLabel[0] && len == (int) strlen( pSdfLabel ) && !inchi_memicmp( p, pSdfLabel, len ))
         {
@@ -437,7 +417,7 @@ int NumLists_Alloc( NUM_LISTS *num_lists, int nlists )
 {
     if (num_lists)
     {
-        if ((num_lists->lists = (int **) inchi_calloc( nlists, sizeof( int* ) ))) /* djb-rwth: addressing LLVM warning */
+        if (num_lists->lists = (int **) inchi_calloc( nlists, sizeof( int* ) ))
         {
             num_lists->increment =
                 num_lists->allocated = nlists;
@@ -456,10 +436,10 @@ int NumLists_ReAlloc( NUM_LISTS *num_lists )
         if (num_lists->lists && num_lists->allocated > 0 && num_lists->increment > 0)
         {
             void *p = num_lists->lists;
-            if ((num_lists->lists =
-                (int **) inchi_calloc( (long long)num_lists->allocated + (long long)num_lists->increment, sizeof( int * ) ))) /* djb-rwth: cast operators added; addressing LLVM warning */
+            if (num_lists->lists =
+                (int **) inchi_calloc( num_lists->allocated + num_lists->increment, sizeof( int * ) ))
             {
-                memcpy(num_lists->lists, p, num_lists->used * sizeof(num_lists->lists[0]));
+                memcpy( num_lists->lists, p, num_lists->used * sizeof( num_lists->lists[0] ) );
                 inchi_free( p );
                 num_lists->allocated += num_lists->increment;
                 return 0; /*  ok */
@@ -499,9 +479,9 @@ void NumLists_Free( NUM_LISTS *num_lists )
     {
         int i;
         for (i = 0; i < num_lists->used; i++)
-            inchi_free( num_lists->lists[i] ); /* djb-rwth: ui_rr? */
+            inchi_free( num_lists->lists[i] );
         inchi_free( num_lists->lists );
-        memset( num_lists, 0, sizeof( *num_lists ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( num_lists, 0, sizeof( *num_lists ) );
     }
 }
 
@@ -515,7 +495,7 @@ void NumLists_Free( NUM_LISTS *num_lists )
 ****************************************************************************/
 int IntArray_Alloc( INT_ARRAY *items, int nitems )
 {
-    if ((items->item = (int *) inchi_calloc( nitems, sizeof( int ) ))) /* djb-rwth: addressing LLVM warning */
+    if (items->item = (int *) inchi_calloc( nitems, sizeof( int ) ))
     {
         items->increment = items->allocated = nitems;
         items->used = 0;
@@ -536,15 +516,14 @@ int IntArray_ReAlloc( INT_ARRAY *items )
         if (items->item && items->allocated > 0 && items->increment > 0)
         {
             void *p = items->item;
-            if ((items->item =
-                (int *) inchi_calloc( (long long)items->allocated + (long long)items->increment, sizeof( items->item[0] ) ))) /* djb-rwth: cast operators added; addressing LLVM warning */
+            if (items->item =
+                (int *) inchi_calloc( items->allocated + items->increment, sizeof( items->item[0] ) ))
             {
-                memcpy(items->item, p, items->used * sizeof(items->item[0]));
+                memcpy( items->item, p, items->used * sizeof( items->item[0] ) );
                 inchi_free( p );
                 items->allocated += items->increment;
                 return 0;
             }
-            inchi_free(p);
         }
     }
 
@@ -627,7 +606,7 @@ void IntArray_Free( INT_ARRAY *items )
         {
             inchi_free( items->item );
         }
-        memset( items, 0, sizeof( *items ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( items, 0, sizeof( *items ) );
     }
     return;
 }
@@ -716,10 +695,10 @@ int MolFmtSgroups_ReAlloc( MOL_FMT_SGROUPS *sgroups )
         if (sgroups->group && sgroups->allocated > 0 && sgroups->increment > 0)
         {
             void *p = sgroups->group;
-            if ((sgroups->group = (MOL_FMT_SGROUP **) inchi_calloc( (long long)sgroups->allocated + (long long)sgroups->increment,
-                sizeof( sgroups->group[0] ) ))) /* djb-rwth: cast operators added; addressing LLVM warning */
+            if (sgroups->group = (MOL_FMT_SGROUP **) inchi_calloc( sgroups->allocated + sgroups->increment,
+                sizeof( sgroups->group[0] ) ))
             {
-                memcpy(sgroups->group, p, sgroups->used * sizeof(sgroups->group[0]));
+                memcpy( sgroups->group, p, sgroups->used * sizeof( sgroups->group[0] ) );
                 inchi_free( p );
                 sgroups->allocated += sgroups->increment;
                 return 0; /*  ok */
@@ -746,10 +725,8 @@ int MolFmtSgroups_Append( MOL_FMT_SGROUPS *sgroups, int id, int type )
         if (sgroups->used + 1 > sgroups->allocated)
         {
             /* expand buffer */
-            if (MolFmtSgroups_ReAlloc(sgroups))
-            {
-                return -1; /*  no RAM */ /* djb-rwth: ignoring LLVM warning: since a pointer is returned, memory should be freed in a function which calls *CreateNeighListFromLinearCT */
-            }
+            if (MolFmtSgroups_ReAlloc( sgroups ))
+                return -1; /*  no RAM */
         }
         sgroups->group[sgroups->used++] = sgroup;
 
@@ -781,7 +758,7 @@ void MolFmtSgroups_Free( MOL_FMT_SGROUPS *sgroups )
         /* ITRACE_( "\nAbout to free sgroups->group at %-p\n", sgroups->group ); */
         inchi_free( sgroups->group );
 
-        memset( sgroups, 0, sizeof( MOL_FMT_SGROUPS ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( sgroups, 0, sizeof( MOL_FMT_SGROUPS ) );
     }
 }
 
@@ -898,10 +875,10 @@ int OrigAtData_WriteToSDfileHeaderAndCountThings( const ORIG_ATOM_DATA *inp_at_d
 
     {
         char strLocName[82];
-        memset( strLocName, 0, sizeof( strLocName ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( strLocName, 0, sizeof( strLocName ) );
         if (name && *name)
         {
-            strncpy(strLocName, name, 80);
+            strncpy( strLocName, name, 80 );
         }
         inchi_ios_print_nodisplay( fcb, "%s\n", strLocName );
     }
@@ -934,10 +911,10 @@ Changed 01/10/2009 to conform CTFile specification (by Symyx request)*/
 
     {   char strLocName[82];
 
-    memset( strLocName, 0, sizeof( strLocName ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( strLocName, 0, sizeof( strLocName ) );
     if (comment && *comment)
     {
-        strncpy(strLocName, comment, 80);
+        strncpy( strLocName, comment, 80 );
     }
     inchi_ios_print_nodisplay( fcb, "%s\n", strLocName );
     }
@@ -952,7 +929,7 @@ Changed 01/10/2009 to conform CTFile specification (by Symyx request)*/
     /*find if we need "M  CHG" and "M  RAD"*/
     for (i = 0; i < num_atoms; i++)
     {
-        if ((bAtomNeedsAlias = ALIASED_AT( i ))) /* djb-rwth: addressing LLVM warning */
+        if (bAtomNeedsAlias = ALIASED_AT( i ))
         {
             /* has isotopic implicit D or T; ignoring pure 1H */
             ( *nNumAliasLines ) += 2 * bAtomNeedsAlias;
@@ -1019,7 +996,7 @@ int OrigAtData_WriteToSDfileAtomsBlock( const ORIG_ATOM_DATA *inp_at_data,
 {
     int i, ret = 0;
     int bAtomNeedsAlias;
-    /* djb-rwth: removing redundant variables */
+    int flag_bad_charge = 0, flag_bad_iso = 0;
     int num_atoms = inp_at_data->num_inp_atoms;
     const inp_ATOM *at = inp_at_data->at;
     double x, y, z;
@@ -1033,24 +1010,23 @@ int OrigAtData_WriteToSDfileAtomsBlock( const ORIG_ATOM_DATA *inp_at_data,
         int  nIsotopeH = IS_DEUTERIUM( i ) ? 1 : IS_TRITIUM( i ) ? 2 : 0;
         int  bonds_val;
         bAtomNeedsAlias = ALIASED_AT( i );
-        memset( elname, 0, sizeof( elname ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( elname, 0, sizeof( elname ) );
 
         if (bAtomNeedsAlias)
         {
             /* alias */
-            strcpy(elname, "C");
+            strcpy( elname, "C" );
         }
         else
         {
             /* isotope*/
             if (nIsotopeH)
             {
-                strcpy(elname, bAtomsDT ? (nIsotopeH == 1 ? "D" : "T") : "H");
+                strcpy( elname, bAtomsDT ? ( nIsotopeH == 1 ? "D" : "T" ) : "H" );
             }
             else
             {
-                strncpy(elname, at[i].elname, sizeof(elname) - 1);
-                elname[sizeof(elname) - 1] = 0; /* adding zero termination after strncpy */
+                strncpy( elname, at[i].elname, sizeof( elname ) - 1 );
             }
             if (!ABNORMAL_CHG( i ) && !ANY_RAD( i ))
             {
@@ -1065,7 +1041,7 @@ int OrigAtData_WriteToSDfileAtomsBlock( const ORIG_ATOM_DATA *inp_at_data,
                     case -2: charge = 6; break;
                     case -3: charge = 7; break;
                     case  0: charge = 0; break;
-                    default: break; /* djb-rwth: removing redundant code */
+                    default: flag_bad_charge = 1; break;
                 }
             }
 
@@ -1084,7 +1060,7 @@ int OrigAtData_WriteToSDfileAtomsBlock( const ORIG_ATOM_DATA *inp_at_data,
         {
             iso = at[i].iso_atw_diff > 0 ? at[i].iso_atw_diff - 1 :
                     at[i].iso_atw_diff < 0 ? at[i].iso_atw_diff :
-                        nIsotopeH ? nIsotopeH : 0; /* djb-rwth: removing redundant code */
+                        nIsotopeH ? nIsotopeH : ( flag_bad_iso++, 0 );
         }
 
         x = at[i].x;
@@ -1102,7 +1078,6 @@ int OrigAtData_WriteToSDfileAtomsBlock( const ORIG_ATOM_DATA *inp_at_data,
         }
 
         /* Convert "Zz" to "*" element symbol */
-
         if (!strcmp( elname, "Zz" )|| !strcmp( elname, "Zy" ))
         {
             strcpy( elname, "*" );
@@ -1148,7 +1123,7 @@ int OrigAtData_WriteToSDfileBondsBlock( const ORIG_ATOM_DATA *inp_at_data,
             if (i < at[i].neighbor[j])
             {
                 unsigned a1, a2;
-                if ((k = at[i].bond_stereo[j])) /* djb-rwth: addressing LLVM warning */
+                if (k = at[i].bond_stereo[j])
                 {
                     /* bond stereo */
                     if (k < 0)
@@ -1202,196 +1177,195 @@ int OrigAtData_WriteToSDfileAdditionalLines( const ORIG_ATOM_DATA *inp_at_data,
                                              int                  nNumIsoLines,
                                              INT_ARRAY            *written_bond_ends )
 {
-    char str_m[66], entry[25];
+    char str_m[66], entry[10];
     int  i, num_m, k, j, ret = 0;
 
-    if (inp_at_data) /* djb-rwth: fixing a NULL pointer dereference */
+    int num_atoms = inp_at_data->num_inp_atoms;
+    int is_polymer = inp_at_data && inp_at_data->polymer && inp_at_data->polymer->n > 0 && inp_at_data->valid_polymer;
+    const inp_ATOM *at = inp_at_data->at;
+
+    /* Aliases. 5-3-99 DCh.*/
+    if (nNumAliasLines)
     {
-        int num_atoms = inp_at_data->num_inp_atoms;
-        int is_polymer = inp_at_data && inp_at_data->polymer && inp_at_data->polymer->n > 0 && inp_at_data->valid_polymer;
-        const inp_ATOM* at = inp_at_data->at;
-
-        /* Aliases. 5-3-99 DCh.*/
-        if (nNumAliasLines)
+        num_m = 0;
+        for (i = 0; i < num_atoms; i++)
         {
-            num_m = 0;
-            for (i = 0; i < num_atoms; i++)
+            if (ALIASED_AT( i ))
             {
-                if (ALIASED_AT(i))
+                int len;
+                inchi_ios_print_nodisplay( fcb, "A  %d\n", i + 1 );
+                num_m++;
+                len = sprintf( str_m, "%s", at[i].elname );
+
+                /* add isotopic H to the alias */
+                for (k = 0; k < NUM_H_ISOTOPES; k++)
                 {
-                    int len;
-                    inchi_ios_print_nodisplay(fcb, "A  %d\n", i + 1);
-                    num_m++;
-                    len = sprintf(str_m, "%s", at[i].elname);
-                    /* add isotopic H to the alias */
-                    for (k = 0; k < NUM_H_ISOTOPES; k++)
+                    int num_H = at[i].num_iso_H[k] + ( k ? 0 : at[i].num_H );
+                    if (num_H)
                     {
-                        int num_H = at[i].num_iso_H[k] + (k ? 0 : at[i].num_H);
-                        if (num_H)
+                        len += sprintf( str_m + len, "%s", k == 0 ? "H" : k == 1 ? "D" : k == 2 ? "T" : "?" );
+                        if (num_H != 1)
                         {
-                            len += sprintf(str_m + len, "%s", k == 0 ? "H" : k == 1 ? "D" : k == 2 ? "T" : "?");
-                            if (num_H != 1)
-                            {
-                                len += sprintf(str_m + len, "%d", num_H);
-                            }
+                            len += sprintf( str_m + len, "%d", num_H );
                         }
                     }
-
-                    /* Add charge to the Alias */
-                    if (at[i].charge)
-                    {
-                        len += sprintf(str_m + len, "%s", at[i].charge > 0 ? "+" : "-");
-                        if (1 < (j = abs(at[i].charge)))
-                        {
-                            len += sprintf(str_m + len, "%d", j);
-                        }
-                    }
-
-                    /* Add radical to the Alias */
-                    if (at[i].radical == RADICAL_SINGLET)
-                    {
-                        len += sprintf(str_m + len, "%s", ":");
-                    }
-                    else if (at[i].radical == RADICAL_DOUBLET)
-                    {
-                        len += sprintf(str_m + len, "%s", "^");
-                    }
-                    else if (at[i].radical == RADICAL_TRIPLET)
-                    {
-                        len += sprintf(str_m + len, "%s", "^^");
-                    }
-                    inchi_ios_print_nodisplay(fcb, "%s\n", str_m);
-                    num_m++;
                 }
-            }
 
-            if (num_m != nNumAliasLines)
-            {
-                /* error in lines counting*/
-                ret++;
+                /* Add charge to the Alias */
+                if (at[i].charge)
+                {
+                    len += sprintf( str_m + len, "%s", at[i].charge > 0 ? "+" : "-" );
+                    if (1 < ( j = abs( at[i].charge ) ))
+                    {
+                        len += sprintf( str_m + len, "%d", j );
+                    }
+                }
+
+                /* Add radical to the Alias */
+                if (at[i].radical == RADICAL_SINGLET)
+                {
+                    len += sprintf( str_m + len, "%s", ":" );
+                }
+                else if (at[i].radical == RADICAL_DOUBLET)
+                {
+                    len += sprintf( str_m + len, "%s", "^" );
+                }
+                else if (at[i].radical == RADICAL_TRIPLET)
+                {
+                    len += sprintf( str_m + len, "%s", "^^" );
+                }
+                inchi_ios_print_nodisplay( fcb, "%s\n", str_m );
+                num_m++;
             }
         }
 
-        /* charges*/
-        str_m[0] = 0;
-        num_m = 0;
-        if (nNumChargeLines)
+        if (num_m != nNumAliasLines)
         {
-            for (i = 0; i < num_atoms; i++)
-            {
-                if (at[i].charge && !ALIASED_AT(i))
-                {
-                    sprintf(entry, " %3d %3d", i + 1, (int)at[i].charge);
-                    strcat(str_m, entry);
-                    num_m++;
-                }
-                if ((i == num_atoms - 1 && num_m) || num_m == 8) /* djb-rwth: addressing LLVM warning */
-                {
-                    inchi_ios_print_nodisplay(fcb, "M  CHG%3d%s\n", num_m, str_m);
-                    str_m[0] = 0;
-                    num_m = 0;
-                }
-            }
+            /* error in lines counting*/
+            ret++;
         }
-
-        /* radicals*/
-        str_m[0] = 0;
-        num_m = 0;
-
-        if (nNumRadicalLines)
-        {
-            for (i = 0; i < num_atoms; i++)
-            {
-                if (at[i].radical && !ALIASED_AT(i))
-                {
-                    int radical = (at[i].radical == RADICAL_SINGLET ||
-                        at[i].radical == RADICAL_DOUBLET ||
-                        at[i].radical == RADICAL_TRIPLET) ? at[i].radical : 0;
-                    if (radical)
-                    {
-                        sprintf(entry, " %3d %3d", i + 1, radical);
-                        strcat(str_m, entry);
-                        num_m++;
-                    }
-                }
-                if ((i == num_atoms - 1 && num_m) || num_m == 8) /* djb-rwth: addressing LLVM warning */
-                {
-                    inchi_ios_print_nodisplay(fcb, "M  RAD%3d%s\n", num_m, str_m);
-                    str_m[0] = 0;
-                    num_m = 0;
-                }
-            }
-        }
-
-        /* isotopes*/
-        str_m[0] = 0;
-        num_m = 0;
-        if (nNumIsoLines)
-        {
-            int el_num, iso;
-            for (i = 0; i < num_atoms; i++)
-            {
-                /*
-                if ( 0 == strcmp( at[i].elname, "D" ) ) {
-                    sprintf( entry, " %3d %3d", i+1, 2 );
-                    strcat( str_m, entry );
-                    num_m ++;
-                } else
-                if ( 0 == strcmp( at[i].elname, "T" ) ) {
-                    sprintf( entry, " %3d %3d", i+1, 3 );
-                    strcat( str_m, entry );
-                    num_m ++;
-                } else
-                if ( k = at[i].iso_atw_diff ) {
-                    int mw = get_atomic_mass_from_elnum( at[i].el_number );
-                    mw += (k > 0)? k-1 : k;
-                    sprintf( entry, " %3d %3d", i+1, mw );
-                    strcat( str_m, entry );
-                    num_m ++;
-                }
-                */
-
-                if (ANY_ISO(i, bAtomsDT) && !ALIASED_AT(i))
-                {
-                    if (IS_DEUTERIUM(i))
-                    {
-                        iso = 1;
-                        el_num = 1;
-                    }
-                    else if (IS_TRITIUM(i))
-                    {
-                        iso = 2;
-                        el_num = 1;
-                    }
-                    else
-                    {
-                        iso = at[i].iso_atw_diff > 0 ? at[i].iso_atw_diff - 1 : at[i].iso_atw_diff;
-                        el_num = at[i].el_number;
-                    }
-                    iso += get_atomic_mass_from_elnum(el_num);
-                    sprintf(entry, " %3d %3d", i + 1, iso);
-                    strcat(str_m, entry);
-                    num_m++;
-                }
-
-                if ((i == num_atoms - 1 && num_m) || num_m == 8) /* djb-rwth: addressing LLVM warning */
-                {
-                    inchi_ios_print_nodisplay(fcb, "M  ISO%3d%s\n", num_m, str_m);
-                    str_m[0] = 0;
-                    num_m = 0;
-                }
-            }
-        }
-
-        if (is_polymer)
-        {
-            OrigAtData_WriteToSDfilePolymerData(inp_at_data, fcb, name, comment,
-                szLabel, szValue, written_bond_ends);
-        }
-
-        inchi_ios_print_nodisplay(fcb, "M  END\n");
-
     }
+
+    /* charges*/
+    str_m[0] = 0;
+    num_m = 0;
+    if (nNumChargeLines)
+    {
+        for (i = 0; i < num_atoms; i++)
+        {
+            if (at[i].charge && !ALIASED_AT( i ))
+            {
+                sprintf( entry, " %3d %3d", i + 1, (int) at[i].charge );
+                strcat( str_m, entry );
+                num_m++;
+            }
+            if (i == num_atoms - 1 && num_m || num_m == 8)
+            {
+                inchi_ios_print_nodisplay( fcb, "M  CHG%3d%s\n", num_m, str_m );
+                str_m[0] = 0;
+                num_m = 0;
+            }
+        }
+    }
+
+    /* radicals*/
+    str_m[0] = 0;
+    num_m = 0;
+
+    if (nNumRadicalLines)
+    {
+        for (i = 0; i < num_atoms; i++)
+        {
+            if (at[i].radical && !ALIASED_AT( i ))
+            {
+                int radical = ( at[i].radical == RADICAL_SINGLET ||
+                               at[i].radical == RADICAL_DOUBLET ||
+                               at[i].radical == RADICAL_TRIPLET ) ? at[i].radical : 0;
+                if (radical)
+                {
+                    sprintf( entry, " %3d %3d", i + 1, radical );
+                    strcat( str_m, entry );
+                    num_m++;
+                }
+            }
+            if (i == num_atoms - 1 && num_m || num_m == 8)
+            {
+                inchi_ios_print_nodisplay( fcb, "M  RAD%3d%s\n", num_m, str_m );
+                str_m[0] = 0;
+                num_m = 0;
+            }
+        }
+    }
+
+    /* isotopes*/
+    str_m[0] = 0;
+    num_m = 0;
+    if (nNumIsoLines)
+    {
+        int el_num, iso;
+        for (i = 0; i < num_atoms; i++)
+        {
+            /*
+            if ( 0 == strcmp( at[i].elname, "D" ) ) {
+                sprintf( entry, " %3d %3d", i+1, 2 );
+                strcat( str_m, entry );
+                num_m ++;
+            } else
+            if ( 0 == strcmp( at[i].elname, "T" ) ) {
+                sprintf( entry, " %3d %3d", i+1, 3 );
+                strcat( str_m, entry );
+                num_m ++;
+            } else
+            if ( k = at[i].iso_atw_diff ) {
+                int mw = get_atomic_mass_from_elnum( at[i].el_number );
+                mw += (k > 0)? k-1 : k;
+                sprintf( entry, " %3d %3d", i+1, mw );
+                strcat( str_m, entry );
+                num_m ++;
+            }
+            */
+
+            if (ANY_ISO( i, bAtomsDT ) && !ALIASED_AT( i ))
+            {
+                if (IS_DEUTERIUM( i ))
+                {
+                    iso = 1;
+                    el_num = 1;
+                }
+                else if (IS_TRITIUM( i ))
+                {
+                    iso = 2;
+                    el_num = 1;
+                }
+                else
+                {
+                    iso = at[i].iso_atw_diff > 0 ? at[i].iso_atw_diff - 1 : at[i].iso_atw_diff;
+                    el_num = at[i].el_number;
+                }
+                iso += get_atomic_mass_from_elnum( el_num );
+
+                sprintf( entry, " %3d %3d", i + 1, iso );
+                strcat( str_m, entry );
+                num_m++;
+            }
+
+            if (i == num_atoms - 1 && num_m || num_m == 8)
+            {
+                inchi_ios_print_nodisplay( fcb, "M  ISO%3d%s\n", num_m, str_m );
+                str_m[0] = 0;
+                num_m = 0;
+            }
+        }
+    }
+
+    if (is_polymer)
+    {
+        OrigAtData_WriteToSDfilePolymerData( inp_at_data, fcb, name, comment,
+                                             szLabel, szValue, written_bond_ends );
+    }
+
+    inchi_ios_print_nodisplay( fcb, "M  END\n" );
+
     return ret;
 }
 
@@ -1440,11 +1414,11 @@ int OrigAtData_WriteToSDfilePolymerData( const ORIG_ATOM_DATA *inp_at_data,
         }
     }
     /* SLB */
-    /* djb-rwth: removing redundant code */
+    jj = 0;
     jprev = -1;
     for (j = 0; j < inp_at_data->polymer->n; j++)
     {
-        /* djb-rwth: removing redundant code */
+        u = inp_at_data->polymer->units[j];
         if (j == 8 || j == inp_at_data->polymer->n - 1)
         {
             jj = j + 1;
@@ -1455,14 +1429,14 @@ int OrigAtData_WriteToSDfilePolymerData( const ORIG_ATOM_DATA *inp_at_data,
                 inchi_ios_print_nodisplay( fcb, " %3d %3d", u->id, u->label );
             }
             inchi_ios_print_nodisplay( fcb, "\n" );
-            /* djb-rwth: removing redundant code */
+            jj = 0;
             jprev = j;
         }
     }
 
     /* SST */
     jj = 0;
-    /* djb-rwth: removing redundant code */
+    jprev = -1;
     for (j = 0; j < inp_at_data->polymer->n; j++)
     {
         u = inp_at_data->polymer->units[j];
@@ -1502,7 +1476,7 @@ int OrigAtData_WriteToSDfilePolymerData( const ORIG_ATOM_DATA *inp_at_data,
 
     /* SCN */
     jj = 0;
-    /* djb-rwth: removing redundant code */
+    jprev = -1;
     for (j = 0; j < inp_at_data->polymer->n; j++)
     {
         u = inp_at_data->polymer->units[j];
@@ -1607,8 +1581,8 @@ int OrigAtData_WriteToSDfilePolymerData( const ORIG_ATOM_DATA *inp_at_data,
     {
         /* better than nothing */
         float xmin, xmax, ymin, ymax;
-        xmin = ymin = -1.0*( (float)j + 1.0 ); /* djb-rwth: cast operator added, 1->1.0 */
-        xmax = ymax = +1.0*( (float)j + 1.0 ); /* djb-rwth: cast operator added, 1->1.0 */
+        xmin = ymin = -1.0*( j + 1 );
+        xmax = ymax = +1.0*( j + 1 );
         u = inp_at_data->polymer->units[j];
         /* u->xbr1[0], x1, y1, x2, y2 u->xbr1[1], u->xbr1[2], u->xbr1[3] */
         inchi_ios_print_nodisplay( fcb, "M  SDI %3d%3d%10.4f%10.4f%10.4f%10.4f\n", u->id, 4, xmin, ymin, xmin, ymax );

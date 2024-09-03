@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -49,10 +43,6 @@
 #include "ichister.h"
 #include "ichi_io.h"
 #include "ichimain.h"
-
-#include <stdbool.h>
-
-#include "bcf_s.h"
 
 /* Added fix to remove_ion_pairs() -- 2010-03-17 DT */
 #define FIX_P_IV_Plus_O_Minus
@@ -124,7 +114,7 @@ int DisconnectAmmoniumSalt( inp_ATOM *at,
 /*int bIsMetalSalt( inp_ATOM *at, int i ); - moved to strutil,h */
 int DisconnectMetalSalt( inp_ATOM *at, int i );
 int bIsMetalToDisconnect( inp_ATOM *at, int i, int bCheckMetalValence );
-int get_iat_number( int el_number );
+int get_iat_number( int el_number, const int el_num[], int el_num_len );
 int tot_unsat( int unsat[] );
 int max_unsat( int unsat[] );
 double dist3D( inp_ATOM *at1, inp_ATOM *at2 );
@@ -192,7 +182,7 @@ int the_only_doublet_neigh( inp_ATOM *at,
     }
     for (i = 0; i < a->valence; i++)
     {
-        b = at + ( (int) a->neighbor[i] ); /* djb-rwth: removing redundant code */
+        b = at + ( neigh1 = (int) a->neighbor[i] );
         if (RADICAL_DOUBLET == b->radical)
         {
             num_rad1++;
@@ -524,8 +514,8 @@ int fix_non_uniform_drawn_amidiniums( int num_atoms,
         }
 
         /* NB: center must have neutral neighbours, two of them are aliphatic N's of which at least one bears H. */
-        mismatch = nuH = nuN = kk = 0; /* djb-rwth: removing redundant code */
-        memset( nitrogens, 0, sizeof( nitrogens ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        mismatch = nuH = nuN = jj = kk = 0;
+        memset( nitrogens, 0, sizeof( nitrogens ) );
         jj = -1;
         for (k = 0; k < at[i].valence; k++)
         {
@@ -607,30 +597,43 @@ int fix_odd_things( int num_atoms,
                     int bFixBug,
                     int bFixNonUniformDraw )
 {
-    /* N;P;As;Sb;O;S;Se;Te;C;Si */
-    static const U_CHAR en[] = {
-        EL_NUMBER_N,
-        EL_NUMBER_P,
-        EL_NUMBER_AS,
-        EL_NUMBER_SB,
-        EL_NUMBER_O,
-        EL_NUMBER_S,
-        EL_NUMBER_SE,
-        EL_NUMBER_TE
-    };
-    static int ne = sizeof(en)/sizeof(en[0]);
+    /*                           0 1 2  3  4 5 6  7                       8  9  */
+    static const char    el[] = "N;P;As;Sb;O;S;Se;Te;";   /* 8 elements + C, Si */
+    static U_CHAR  en[10];              /* same number: 8 elements */
+    static int     ne = 0;           /* will be 8 and 10 */
 
 #define FIRST_NEIGHB2  4
 #define FIRST_CENTER2  5
+#define NUM_CENTERS_N  4
 
     int i1, i2, k1, k2, c = -1, num_changes = 0;
-    /* djb-rwth: removing redundant variables */
+    char elname[ATOM_EL_LEN];
+    int ne2, ne3;
 
     if (bFixNonUniformDraw)
     {
-        int ret1; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-        ret1 = fix_non_uniform_drawn_oxoanions( num_atoms, at, &num_changes ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-        ret1 = fix_non_uniform_drawn_amidiniums( num_atoms, at, &num_changes ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+        int ret1;
+        ret1 = fix_non_uniform_drawn_oxoanions( num_atoms, at, &num_changes );
+        ret1 = fix_non_uniform_drawn_amidiniums( num_atoms, at, &num_changes );
+    }
+
+    if (!ne)
+    {
+        /* one time initialization */
+        const char *b, *e;
+        int  len;
+        ne3 = 0;
+        for (b = el; e = strchr( b, ';' ); b = e + 1)
+        {
+            len = (int) ( e - b );
+            memcpy( elname, b, len );
+            elname[len] = '\0';
+            en[ne3++] = get_periodic_table_number( elname );
+        }
+        ne2 = ne3;
+        en[ne2++] = EL_NUMBER_C;
+        en[ne2++] = EL_NUMBER_SI;
+        ne = ne3;
     }
 
     /* H(-)-X  -> H-X(-);  H(+)-X  -> H-X(+) */
@@ -652,10 +655,10 @@ int fix_odd_things( int num_atoms,
     for (i1 = 0; i1 < num_atoms; i1++)
     {
         if (1 != at[i1].charge ||
-             (at[i1].radical && RADICAL_SINGLET != at[i1].radical) ||
+             at[i1].radical && RADICAL_SINGLET != at[i1].radical ||
              at[i1].chem_bonds_valence == at[i1].valence ||
              !memchr( en, at[i1].el_number, ne ) ||
-             get_el_valence( at[i1].el_number, at[i1].charge, 0 ) != at[i1].chem_bonds_valence + NUMH( at, i1 )) /* djb-rwth: addressing LLVM warning */
+             get_el_valence( at[i1].el_number, at[i1].charge, 0 ) != at[i1].chem_bonds_valence + NUMH( at, i1 ))
         {
             continue;
         }
@@ -800,12 +803,12 @@ int fix_odd_things( int num_atoms,
              ( 0 == at[i1].radical || RADICAL_SINGLET == at[i1].radical ) &&
              !NUMH( at, i1 ) &&
              BOND_TYPE_SINGLE == at[i1].bond_type[0] &&
-             memchr( en + FIRST_NEIGHB2, at[i1].el_number, (long long)ne - FIRST_NEIGHB2 )) /* djb-rwth: cast operator added */
+             memchr( en + FIRST_NEIGHB2, at[i1].el_number, ne - FIRST_NEIGHB2 ))
         {
             int charge, i;
             /* found a candidate for X */
             c = (int) at[i1].neighbor[0]; /* candidate for Y */
-            if (( ( charge = 2 ) == at[c].charge && memchr( en + FIRST_CENTER2, at[c].el_number, (long long)ne - FIRST_CENTER2 ) /* djb-rwth: cast operator added */
+            if (( ( charge = 2 ) == at[c].charge && memchr( en + FIRST_CENTER2, at[c].el_number, ne - FIRST_CENTER2 )
 
 #ifndef FIX_P_IV_Plus_O_Minus
                   || ( charge = 1 ) == at[c].charge && EL_NUMBER_P == at[c].el_number
@@ -831,7 +834,7 @@ int fix_odd_things( int num_atoms,
                 }
                 if (1 == at[i2].valence &&
                      -1 == at[i2].charge  &&
-                     memchr( en + FIRST_NEIGHB2, at[i2].el_number, (long long)ne - FIRST_NEIGHB2 ) && /* djb-rwth: cast operator added */
+                     memchr( en + FIRST_NEIGHB2, at[i2].el_number, ne - FIRST_NEIGHB2 ) &&
                      /*at[i2].el_number == at[i1].el_number &&*/ /* exact match */
                      ( 0 == at[i2].radical || RADICAL_SINGLET == at[i2].radical ) &&
                      !NUMH( at, i2 ) &&
@@ -926,7 +929,7 @@ int post_fix_odd_things( int num_atoms, inp_ATOM *at )
 /****************************************************************************/
 int nFindOneOM( inp_ATOM *at, int at_no, int ord_OM[], int num_OM )
 {
-    int i, n_OM, best_value, cur_value, diff; /* djb-rwth: removing redundant variables */
+    int i, n_OM, n_OM_best, best_value, cur_value, diff;
     int num_best;
 
     if (1 == num_OM)
@@ -950,7 +953,7 @@ int nFindOneOM( inp_ATOM *at, int at_no, int ord_OM[], int num_OM )
         diff = cur_value - best_value;
         if (diff < 0)
         {
-            /* djb-rwth: removing redundant code */
+            n_OM_best = n_OM;
             best_value = cur_value;
             ord_OM[0] = ord_OM[i];
             num_best = 1;
@@ -979,7 +982,7 @@ int nFindOneOM( inp_ATOM *at, int at_no, int ord_OM[], int num_OM )
         diff = cur_value - best_value;
         if (diff < 0)
         {
-            /* djb-rwth: removing redundant code */
+            n_OM_best = n_OM;
             best_value = cur_value;
             ord_OM[0] = ord_OM[i];
             num_best = 1;
@@ -1014,7 +1017,7 @@ int nFindOneOM( inp_ATOM *at, int at_no, int ord_OM[], int num_OM )
         diff = cur_value - best_value;
         if (( !cur_value && best_value ) || diff < 0)
         {
-            /* djb-rwth: removing redundant code */
+            n_OM_best = n_OM;
             best_value = cur_value;
             ord_OM[0] = ord_OM[i];
             num_best = 1;
@@ -1044,6 +1047,23 @@ the bonds are fixed in fix_special_bonds()
 int remove_ion_pairs( int num_atoms, inp_ATOM *at )
 {
     int num_changes = 0;
+
+    /*                           0 1 2  3  4 5 6  7  8  9                   8  9  */
+#if ( FIX_REM_ION_PAIRS_Si_BUG == 1 )
+    static const char    el[] = "N;P;As;Sb;O;S;Se;Te;C;Si;";   /* 8 elements + C, Si */
+#else
+    static const char    el[] = "N;P;As;Sb;O;S;Se;Te;C;Si";   /* 8 elements + C, Si */
+#endif
+    static char    en[12];         /* same number: 8 elements */
+    static int     ne = 0;           /* will be 8 and 10 */
+
+#define ELEM_N_FST  0
+#define ELEM_N_LEN  4
+#define ELEM_O_FST  4
+#define ELEM_O_LEN  4
+#define ELEM_C_FST  8
+#define ELEM_C_LEN  2
+
 #define MAX_NEIGH 6
 
     int i, n, n2, i1, i2, i3, i4, type, chrg;
@@ -1054,14 +1074,37 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
 #endif
 
     inp_ATOM *a;
+    char elname[ATOM_EL_LEN], *p;
+
+    int ne2;
+
+    if (!ne)
+    {
+        /* one time initialization */
+        const char *b, *e;
+        int  len;
+        ne2 = 0;
+        for (b = el; e = strchr( b, ';' ); b = e + 1)
+        {
+            len = (int) ( e - b );
+            memcpy( elname, b, len );
+            elname[len] = '\0';
+            en[ne2++] = get_periodic_table_number( elname );
+        }
+        en[ne2] = '\0';
+        ne = ne2;
+    }
+
     /****** count candidates ********/
     for (i = 0, a = at; i < num_atoms; i++, a++)
     {
         if (1 == ( chrg = a->charge ) || -1 == chrg)
         {
-            switch (ion_el_group( a->el_number ))
+            if (p = (char*) memchr( en, a->el_number, ne ))
             {
-                case EL_NUMBER_C:
+                n = (int) ( p - en );
+                if (n >= ELEM_C_FST)
+                {
                     if (chrg > 0)
                     {
                         num_C_plus++;
@@ -1070,8 +1113,9 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     {
                         num_C_minus++;
                     }
-                    break;
-                case EL_NUMBER_O:
+                }
+                else if (n >= ELEM_O_FST)
+                {
                     if (chrg > 0)
                     {
                         num_O_plus++;
@@ -1080,8 +1124,9 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     {
                         num_O_minus++;
                     }
-                    break;
-                case EL_NUMBER_N:
+                }
+                else
+                {
                     if (chrg > 0)
                     {
                         num_N_plus++;
@@ -1090,18 +1135,16 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     {
                         num_N_minus++;
                     }
+
 #ifdef FIX_P_IV_Plus_O_Minus
-                    num_P_IV_plus += a->el_number != EL_NUMBER_N && 
-                                     chrg == 1 &&
-                                     a->valence == 4 && 
-                                     a->chem_bonds_valence == 4; /* added 2010-03-17 DT */
-#endif 
-                    break;                
+                    num_P_IV_plus += n > 0 && chrg == 1 && a->valence == 4 && a->chem_bonds_valence == 4; /* added 2010-03-17 DT */
+#endif
+                }
             }
         }
         else if (!chrg && a->chem_bonds_valence + NUMH( a, 0 ) == 2 &&
                   get_el_valence( a->el_number, 0, 0 ) == 4 &&
-                  ion_el_group( a->el_number ) == EL_NUMBER_C)
+                  NULL != memchr( en + ELEM_C_FST, a->el_number, ELEM_C_LEN ))
         {
             num_C_II++;
         }
@@ -1137,7 +1180,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
             {
                 if (1 == at[i].charge && 3 == nNoMetalNumBonds( at, i ) &&
                      4 == nNoMetalBondsValence( at, i ) &&
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_N)
+                     NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ))
                 {
                     int num_OM = 0, ord_OM[3]; /* -O(-) */
                     int num_O = 0; /* =O    */
@@ -1146,7 +1189,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     {
                         n = at[i].neighbor[i1];
                         if (1 == nNoMetalNumBonds( at, n ) && 0 == num_of_H( at, n ) &&
-                            ion_el_group( at[n].el_number) == EL_NUMBER_O) /* djb-rwth: ignoring LLVM warning: variable used */
+                             NULL != ( p = (char*) memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ) ))
                         {
                             if (BOND_TYPE_SINGLE == at[i].bond_type[i1] &&
                                  -1 == at[n].charge)
@@ -1204,16 +1247,16 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
             {
                 if (1 == at[i].charge && 4 == nNoMetalNumBonds( at, i ) &&
                      4 == nNoMetalBondsValence( at, i ) &&
-                     at[i].el_number != EL_NUMBER_N && ion_el_group( at[i].el_number ) == EL_NUMBER_N)
+                     NULL != memchr( en + ELEM_N_FST + 1, at[i].el_number, ELEM_N_LEN - 1 ))
                 {
                     int num_OM = 0, ord_OM[4]; /* -O(-) */
                                                /*int num_O  = 0;*/ /* =O    */
-                    /* djb-rwth: removing redundant variables */
+                    int num_O_other = 0;
                     for (i1 = 0; i1 < at[i].valence; i1++)
                     {
                         n = at[i].neighbor[i1];
                         if (1 == nNoMetalNumBonds( at, n ) && 0 == num_of_H( at, n ) &&
-                            ion_el_group( at[n].el_number) == EL_NUMBER_O) /* djb-rwth: ignoring LLVM warning: variable used */
+                             NULL != ( p = (char*) memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ) ))
                         {
                             if (BOND_TYPE_SINGLE == at[i].bond_type[i1] &&
                                  -1 == at[n].charge)
@@ -1226,7 +1269,10 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                                 num_O ++;
                                 */
                             }
-                            /* djb-rwth: removing redundant code */
+                            else
+                            {
+                                num_O_other++;
+                            }
                         }
                     }
                     if (num_OM > 0 /*&& num_O > 0 && !num_O_other*/ &&
@@ -1269,13 +1315,13 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
         9 7:  N(-)=C(+)(III) => N#C-
         --------------------------------------------------------------------------*/
 
-        if (!type || (2 <= type && type <= 9)) /* djb-rwth: addressing LLVM warning */
+        if (!type || 2 <= type && type <= 9)
         {
             for (i = 0; i < num_atoms && 0 < num_All; i++)
             {
                 if (0 == at[i].charge && 1 == nNoMetalNumBonds( at, i ) && 2 == nNoMetalBondsValence( at, i ) &&
                      0 == num_of_H( at, i ) &&
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_O &&
+                     NULL != memchr( en + ELEM_O_FST, at[i].el_number, ELEM_O_LEN ) &&
                      0 <= ( i1 = nNoMetalNeighIndex( at, i ) ) &&
                      at[i].bond_type[i1] <= BOND_TYPE_TRIPLE)
                 {
@@ -1287,7 +1333,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         if (0 == at[n].charge &&
                              2 == nNoMetalNumBonds( at, n ) && 3 == nNoMetalBondsValence( at, n ) &&
                              0 == num_of_H( at, n ) &&
-                             ion_el_group( at[n].el_number ) == EL_NUMBER_N &&
+                             NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ) &&
                              0 <= ( i2 = nNoMetalOtherNeighIndex( at, n, i ) ) &&
                              at[n].bond_type[i2] <= BOND_TYPE_TRIPLE)
                         {
@@ -1297,7 +1343,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             if (0 == at[n2].charge &&
                                  2 == at[n2].valence && 2 == at[n2].chem_bonds_valence &&
                                  0 == num_of_H( at, n2 ) &&
-                                 ion_el_group( at[n2].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n2].el_number, ELEM_C_LEN ))
                             {
                                 /*       i n n2     */
                                 /* found O=N-C(II)- */
@@ -1321,7 +1367,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     {
                         if (1 == at[n].charge && 2 == nNoMetalNumBonds( at, n ) && 3 == nNoMetalBondsValence( at, n ) &&
                              0 == num_of_H( at, n ) &&
-                             ion_el_group( at[n].el_number ) == EL_NUMBER_O &&
+                             NULL != memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ) &&
                              0 <= ( i2 = nNoMetalOtherNeighIndex( at, n, i ) ) &&
                              at[n].bond_type[i2] <= BOND_TYPE_TRIPLE)
                         {
@@ -1330,7 +1376,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             /*i2 = (at[n].neighbor[0] == i);*/
                             n2 = at[n].neighbor[i2];
                             if (-1 == at[n2].charge && 3 >= nNoMetalNumBonds( at, n2 ) && 3 == nNoMetalBondsValence( at, n2 ) + NUMH( at, n2 ) &&
-                                 ion_el_group( at[n2].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n2].el_number, ELEM_C_LEN ))
                             {
                                 /*             i n    n2        */
                                 /* found found O=O(+)-C(-)(III) */
@@ -1357,7 +1403,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                           0 < num_N_plus + num_O_plus + num_C_plus &&
                           1 == nNoMetalNumBonds( at, i ) && 1 == nNoMetalBondsValence( at, i ) &&
                           0 == num_of_H( at, i ) &&
-                          ion_el_group( at[i].el_number ) == EL_NUMBER_O &&
+                          NULL != memchr( en + ELEM_O_FST, at[i].el_number, ELEM_O_LEN ) &&
                           0 <= ( i1 = nNoMetalNeighIndex( at, i ) ) &&
                           at[i].bond_type[i1] <= BOND_TYPE_TRIPLE)
                 {
@@ -1367,7 +1413,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     if (( !type || type == 4 ) && 0 < num_O_minus && 0 < num_N_plus && /* O(-)-N(+)(IV) */
                          1 == at[n].charge && 3 >= nNoMetalNumBonds( at, n ) && 4 == nNoMetalBondsValence( at, n ) &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_N /* except >O(+)- */
+                         NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ) /* except >O(+)- */
                          )
                     {
                         /* found O(-)-N(+)(IV) */
@@ -1390,7 +1436,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     if (( !type || type == 5 ) && 0 < num_O_minus && 0 < num_O_plus &&/* O(-)-O(+)(III) */
                          1 == at[n].charge && 3 >= nNoMetalNumBonds( at, n ) && 3 == nNoMetalBondsValence( at, n ) &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_O /* except >O(+)- */
+                         NULL != memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ) /* except >O(+)- */
                          )
                     {
                         /* found  O(+)(III) */
@@ -1415,7 +1461,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                          0 < num_O_minus && 0 < num_C_plus &&
                          0 == at[n].charge && 2 == nNoMetalNumBonds( at, n ) && 2 == nNoMetalBondsValence( at, n ) &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_O &&
+                         NULL != memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ) &&
                          0 <= ( i2 = nNoMetalOtherNeighIndex( at, n, i ) ) &&
                          at[n].bond_type[i2] <= BOND_TYPE_TRIPLE)
                     {
@@ -1425,7 +1471,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         n2 = at[n].neighbor[i2];
                         if (1 == at[n2].charge && 3 >= nNoMetalNumBonds( at, n2 ) &&
                              3 == nNoMetalBondsValence( at, n2 ) + NUMH( at, n2 ) &&
-                             ion_el_group( at[n2].el_number ) == EL_NUMBER_C)
+                             NULL != memchr( en + ELEM_C_FST, at[n2].el_number, ELEM_C_LEN ))
                         {
                             /*       i    n n2  */
                             /* found O(-)-O-C(+)(III) */
@@ -1454,7 +1500,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                 else if (-1 == at[i].charge && 0 < num_N_minus && 0 < num_N_plus + num_O_plus + num_C_plus &&
                           1 == nNoMetalNumBonds( at, i ) && 2 == nNoMetalBondsValence( at, i ) + NUMH( at, i ) &&
                           /*0 == num_of_H( at, i ) &&*/
-                          ion_el_group( at[i].el_number ) == EL_NUMBER_N &&
+                          NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ) &&
                           0 <= ( i1 = nNoMetalNeighIndex( at, i ) ) &&
                           at[i].bond_type[i1] <= BOND_TYPE_TRIPLE)
                 {
@@ -1463,7 +1509,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     if (( !type || type == 7 ) && 0 < num_N_plus && /* N(-)=N(+)(IV) */
                          1 == at[n].charge && 3 >= nNoMetalNumBonds( at, n ) && 4 == nNoMetalBondsValence( at, n ) &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_N)
+                         NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ))
                     {
                         /* found N(-)-N(+)(IV) */
                         /* convert N(-)=N(+)(IV)     => N#N(V)  */
@@ -1484,7 +1530,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     if (( !type || type == 8 ) && 0 < num_O_plus && /* N(-)=O(+)(III) */
                          1 == at[n].charge && 2 == nNoMetalNumBonds( at, n ) && 3 == nNoMetalBondsValence( at, n ) &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_O)
+                         NULL != memchr( en + ELEM_O_FST, at[n].el_number, ELEM_O_LEN ))
                     {
                         /* found N(-)-O(+)(III) */
                         /* convert N(-)=O(+)(III)    => N#O(IV)- */
@@ -1504,7 +1550,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     if (( !type || type == 9 ) && 0 < num_C_plus && /* N(-)=C(+)(III) */
                          1 == at[n].charge && 2 == at[n].valence && 3 == at[n].chem_bonds_valence &&
                          0 == num_of_H( at, n ) &&
-                         ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                         NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                     {
                         /* found N(-)=C(+)(III) */
                         /* convert N(-)=C(+)(III)    => N#C(IV)- */
@@ -1541,7 +1587,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
         15:  O(+)(III)-N(-)(II)     => O(IV)=N(III) (allow terminal H on N(-))
         --------------------------------------------------------------------------*/
 
-        if (!type || (10 <= type && type <= 15)) /* djb-rwth: addressing LLVM warning */
+        if (!type || 10 <= type && type <= 15)
         {
             for (i = 0; i < num_atoms && 0 < num_All; i++)
             {
@@ -1549,7 +1595,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                      0 < num_N_plus + num_O_plus && 0 < num_C_minus + num_N_minus &&
                      4 >= nNoMetalNumBonds( at, i ) && 4 == nNoMetalBondsValence( at, i ) &&
                      0 == num_of_H( at, i ) &&
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_N)
+                     NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ))
                 {
                     /* found non-terminal N(+)(IV) */
                     if (( !type || 10 == type ) && 0 < num_N_plus && 0 < num_C_minus)
@@ -1561,7 +1607,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             if (-1 == at[n].charge && 3 >= at[n].valence && 3 == at[n].chem_bonds_valence + NUMH( at, n ) &&
                                  /*0 == at[n].num_H &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_SINGLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 /* found N(+)(IV)-C(-)(III); prepare conversion to N(V)=C(IV) */
                                 num_neigh++;
@@ -1571,8 +1617,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         i1 = pos_neigh;
                         if (1 == num_neigh &&
                              at[i].bond_type[i1] <= BOND_TYPE_TRIPLE &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1] ) &&
-                             !has_other_ion_neigh( at, n, i ))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1598,7 +1644,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             if (-1 == at[n].charge && 3 >= at[n].valence && 3 == at[n].chem_bonds_valence + NUMH( at, n ) &&
                                  /*0 == at[n].num_H &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_DOUBLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 /* found N(+)(IV)=C(-)(III); prepare conversion to N(V)#C(IV) */
                                 num_neigh++;
@@ -1606,8 +1652,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             }
                         }
                         if (1 == num_neigh &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh]) &&
-                             !has_other_ion_neigh( at, n, i))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1624,7 +1670,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             continue;
                         }
                     }
-                    if (!type || (12 == type && 0 < num_N_plus && 0 < num_N_minus)) /* djb-rwth: addressing LLVM warning */
+                    if (!type || 12 == type && 0 < num_N_plus && 0 < num_N_minus)
                     {
                         int num_neigh = 0, pos_neigh = -1;
                         for (i1 = 0; i1 < at[i].valence; i1++)
@@ -1634,7 +1680,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                                  2 == nNoMetalBondsValence( at, n ) + NUMH( at, n ) &&
                                  /*0 == num_of_H( at, n ) &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_SINGLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_N)
+                                 NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ))
                             {
                                 /* found N(+)(IV)=N(-)(II); prepare conversion to N(V)#N(III) */
                                 num_neigh++;
@@ -1642,8 +1688,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             }
                         }
                         if (1 == num_neigh &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh]) &&
-                             !has_other_ion_neigh( at, n, i))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1665,7 +1711,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                           0 < num_O_plus && 0 < num_C_minus + num_N_minus &&
                           3 >= nNoMetalNumBonds( at, i ) && 3 == nNoMetalBondsValence( at, i ) &&
                           0 == num_of_H( at, i ) &&
-                          ion_el_group( at[i].el_number ) == EL_NUMBER_O)
+                          NULL != memchr( en + ELEM_O_FST, at[i].el_number, ELEM_O_LEN ))
                 {
                     /* found non-terminal O(+)(III) */
                     if (( !type || 13 == type ) && 0 < num_C_minus)
@@ -1677,7 +1723,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             if (-1 == at[n].charge && 3 >= at[n].valence && 3 == at[n].chem_bonds_valence + NUMH( at, n ) &&
                                  /*0 == at[n].num_H &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_SINGLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 /* found O(+)(III)-C(-)(II); prepare conversion to O(IV)=C(IV) */
                                 num_neigh++;
@@ -1685,8 +1731,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             }
                         }
                         if (1 == num_neigh &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh]) &&
-                             !has_other_ion_neigh( at, n, i))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1712,7 +1758,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             if (-1 == at[n].charge && 3 >= at[n].valence && 3 == at[n].chem_bonds_valence + NUMH( at, n ) &&
                                  /*0 == at[n].num_H &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_DOUBLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 /* found O(+)(III)=C(-)(III); prepare conversion to O(IV)#C(IV) */
                                 num_neigh++;
@@ -1720,8 +1766,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             }
                         }
                         if (1 == num_neigh &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh]) &&
-                             !has_other_ion_neigh( at, n, i))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1748,7 +1794,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                                  2 == nNoMetalBondsValence( at, n ) + NUMH( at, n ) &&
                                  /*0 == num_of_H( at, n ) &&*/
                                  at[i].bond_type[i1] == BOND_TYPE_SINGLE &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_N)
+                                 NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ))
                             {
                                 /* found O(+)(III)=N(-)(II); prepare conversion to O(IV)#N(III) */
                                 num_neigh++;
@@ -1756,8 +1802,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                             }
                         }
                         if (1 == num_neigh &&
-                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh]) &&
-                             !has_other_ion_neigh( at, n, i))
+                             !has_other_ion_neigh( at, i, n = at[i].neighbor[i1 = pos_neigh], en, ne ) &&
+                             !has_other_ion_neigh( at, n, i, en, ne ))
                         {
                             /*n = at[i].neighbor[i1=pos_neigh];*/
                             i2 = (int) ( is_in_the_list( at[n].neighbor, (AT_NUMB) i, at[n].valence ) - at[n].neighbor );
@@ -1806,7 +1852,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                      0 == at[m[0]].charge + at[m[1] = at[i].neighbor[j[1]]].charge &&
                      5 >= nNoMetalBondsValence( at, m[0] ) + nNoMetalBondsValence( at, m[1] ) &&
                      /*5 >= at[m[0]].chem_bonds_valence + at[m[1]].chem_bonds_valence &&*/
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_O)
+                     NULL != memchr( en + ELEM_O_FST, at[i].el_number, ELEM_O_LEN ))
                 {
                     /* found non-terminal A(+)-O-B(-); chem_bond_val of A+B <= 5 */
                     int n_N = -1, n_C = -1, i_C = -1;
@@ -1815,20 +1861,20 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         n = m[k];
                         if (-1 == at[n].charge && 2 == nNoMetalNumBonds( at, n ) + NUMH( at, n ) &&
                              /*0 == num_of_H( at, n ) &&*/
-                             ion_el_group( at[n].el_number ) == EL_NUMBER_N)
+                             NULL != memchr( en + ELEM_N_FST, at[n].el_number, ELEM_N_LEN ))
                         {
                             n_N = n;
                         }
                         else if (1 == at[n].charge && 3 == at[n].chem_bonds_valence + NUMH( at, n ) &&
-                                  ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                  NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                         {
                             n_C = n;
                             i_C = k;
                         }
                     }
                     if (n_C < 0 || n_N < 0 ||
-                         has_other_ion_in_sphere_2( at, n_C, n_N) ||
-                         has_other_ion_in_sphere_2( at, n_N, n_C))
+                         has_other_ion_in_sphere_2( at, n_C, n_N, en, ne ) ||
+                         has_other_ion_in_sphere_2( at, n_N, n_C, en, ne ))
                     {
                         continue;
                     }
@@ -1870,7 +1916,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                      2 == ( 3 == ( c[0] ? at[m[0]].chem_bonds_valence + NUMH( at, m[0] ) : 0 ) )
                      + ( 3 == ( c[1] ? at[m[1]].chem_bonds_valence + NUMH( at, m[1] ) : 0 ) )
                      + ( 3 == ( c[2] ? at[m[2]].chem_bonds_valence + NUMH( at, m[2] ) : 0 ) ) &&
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_N)
+                     NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ))
                 {
                     /* found non-terminal A(+)-O-B(-) */
                     int n_Cp = -1, n_Cm = -1, i_Cp = -1, i_Cm = -1; /* p = positive, m = negatice ion C */
@@ -1880,13 +1926,13 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         {
                             n = m[k];
                             if (-1 == at[n].charge &&
-                                 ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                 NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 n_Cm = n;
                                 i_Cm = k;
                             }
                             else if (1 == at[n].charge &&
-                                      ion_el_group( at[n].el_number ) == EL_NUMBER_C)
+                                      NULL != memchr( en + ELEM_C_FST, at[n].el_number, ELEM_C_LEN ))
                             {
                                 n_Cp = n;
                                 i_Cp = k;
@@ -1894,8 +1940,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         }
                     }
                     if (n_Cp < 0 || n_Cm < 0 ||
-                         has_other_ion_in_sphere_2( at, n_Cp, n_Cm) ||
-                         has_other_ion_in_sphere_2( at, n_Cm, n_Cp))
+                         has_other_ion_in_sphere_2( at, n_Cp, n_Cm, en, ne ) ||
+                         has_other_ion_in_sphere_2( at, n_Cm, n_Cp, en, ne ))
                     {
                         continue;
                     }
@@ -1921,7 +1967,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
             }
         }
 
-        if (( !type || 18 == type ) && ( (0 < num_C_plus && 0 < num_C_minus) || 0 < num_C_II )) /* djb-rwth: addressing LLVM warning */
+        if (( !type || 18 == type ) && ( 0 < num_C_plus && 0 < num_C_minus || 0 < num_C_II ))
         {
             int m[2], v[2], j[2], k;
             for (i = 0; i < num_atoms; i++)
@@ -1935,9 +1981,9 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                      6 == ( v[0] = at[m[0]].chem_bonds_valence + NUMH( at, m[0] ) )
                      + ( v[1] = at[m[1]].chem_bonds_valence + NUMH( at, m[1] ) ) &&
                      2 >= abs( v[0] - v[1] ) &&
-                     ion_el_group( at[i].el_number ) == EL_NUMBER_N &&
-                     ion_el_group( at[m[0]].el_number ) == EL_NUMBER_C &&
-                     ion_el_group( at[m[1]].el_number ) == EL_NUMBER_C)
+                     NULL != memchr( en + ELEM_N_FST, at[i].el_number, ELEM_N_LEN ) &&
+                     NULL != memchr( en + ELEM_C_FST, at[m[0]].el_number, ELEM_C_LEN ) &&
+                     NULL != memchr( en + ELEM_C_FST, at[m[1]].el_number, ELEM_C_LEN ))
                 {
                     /*                    n_Cm      i n_Cp */
                     /* found non-terminal C(-)(III)-N=C(+)(III) or C(IV)=N-C(II): Cm-N-Cp */
@@ -1946,12 +1992,12 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     for (k = 0; k < 2; k++)
                     {
                         n = m[k];
-                        if (v[k] == 4 || (v[k] == 3 && at[i].bond_type[j[k]] == BOND_TYPE_SINGLE)) /* djb-rwth: addressing LLVM warning */
+                        if (v[k] == 4 || v[k] == 3 && at[i].bond_type[j[k]] == BOND_TYPE_SINGLE)
                         {
                             n_Cm = n;
                             i_Cm = k;
                         }
-                        else if (v[k] == 2 || (v[k] == 3 && at[i].bond_type[j[k]] == BOND_TYPE_DOUBLE)) /* djb-rwth: addressing LLVM warning */
+                        else if (v[k] == 2 || v[k] == 3 && at[i].bond_type[j[k]] == BOND_TYPE_DOUBLE)
                         {
                             n_Cp = n;
                             i_Cp = k;
@@ -1967,7 +2013,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                         {
                             /* neighbor of at[n_Cp] opposite to at[i] */
                             k = at[n_Cp].neighbor[at[n_Cp].neighbor[0] == i];
-                            if (ion_el_group( at[k].el_number ) == EL_NUMBER_N)
+                            if (NULL != memchr( en + ELEM_N_FST, at[k].el_number, ELEM_N_LEN ))
                             {
                                 continue;
                             }
@@ -1975,8 +2021,8 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                     }
                     else if (at[n_Cp].charge)
                     {
-                        if (has_other_ion_in_sphere_2( at, n_Cp, n_Cm) ||
-                             has_other_ion_in_sphere_2( at, n_Cm, n_Cp))
+                        if (has_other_ion_in_sphere_2( at, n_Cp, n_Cm, en, ne ) ||
+                             has_other_ion_in_sphere_2( at, n_Cm, n_Cp, en, ne ))
                         {
                             continue;
                         }
@@ -2040,7 +2086,7 @@ int remove_ion_pairs( int num_atoms, inp_ATOM *at )
                                   /****************************************************************************/
 int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
 {
-    int      i, j, m, m2; /* djb-rwth: removing redundant variables */
+    int      i, j, m, m2, k2;
     inp_ATOM *at = atom + iat;
     inp_ATOM *at2 = NULL;
     int      val = at->valence - 1;
@@ -2088,7 +2134,7 @@ int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
         {
             for (m = 0; m < MAX_NUM_STEREO_BONDS && at->sb_parity[m]; )
             {
-                if (k == at->sb_ord[m] || (k == at->sn_ord[m] && val < 2 && ATOM_PARITY_WELL_DEF( at->sb_parity[m] ))) /* djb-rwth: addressing LLVM warning */
+                if (k == at->sb_ord[m] || k == at->sn_ord[m] && val < 2 && ATOM_PARITY_WELL_DEF( at->sb_parity[m] ))
                 {
                     /* !!! FLAW: does take into account removed H !!! */
                     /* stereogenic bond is being removed OR */
@@ -2099,7 +2145,7 @@ int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
                     {
                         i = pinxt_sb_parity_ord;
                         at2 = atom + pnxt_atom;
-                        /* djb-rwth: removing redundant code */
+                        k2 = pinxt2cur;
                     }
                     else
                     {
@@ -2119,10 +2165,10 @@ int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
                         /* remove bond parity from at */
                         if (m < MAX_NUM_STEREO_BONDS - 1)
                         {
-                            memmove(at->sb_parity + m, at->sb_parity + m + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m) * sizeof(at->sb_parity[0])); /* djb-rwth: cast operator added */
-                            memmove(at->sb_ord + m, at->sb_ord + m + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m) * sizeof(at->sb_ord[0])); /* djb-rwth: cast operator added */
-                            memmove(at->sn_ord + m, at->sn_ord + m + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m) * sizeof(at->sn_ord[0])); /* djb-rwth: cast operator added */
-                            memmove(at->sn_orig_at_num + m, at->sn_orig_at_num + m + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m) * sizeof(at->sn_orig_at_num[0])); /* djb-rwth: cast operator added */
+                            memmove( at->sb_parity + m, at->sb_parity + m + 1, ( MAX_NUM_STEREO_BONDS - 1 - m ) * sizeof( at->sb_parity[0] ) );
+                            memmove( at->sb_ord + m, at->sb_ord + m + 1, ( MAX_NUM_STEREO_BONDS - 1 - m ) * sizeof( at->sb_ord[0] ) );
+                            memmove( at->sn_ord + m, at->sn_ord + m + 1, ( MAX_NUM_STEREO_BONDS - 1 - m ) * sizeof( at->sn_ord[0] ) );
+                            memmove( at->sn_orig_at_num + m, at->sn_orig_at_num + m + 1, ( MAX_NUM_STEREO_BONDS - 1 - m ) * sizeof( at->sn_orig_at_num[0] ) );
                         }
                         at->sb_parity[MAX_NUM_STEREO_BONDS - 1] = 0;
                         at->sb_ord[MAX_NUM_STEREO_BONDS - 1] = 0;
@@ -2131,10 +2177,10 @@ int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
                         /* remove bond parity from at2 */
                         if (m2 < MAX_NUM_STEREO_BONDS - 1)
                         {
-                            memmove(at2->sb_parity + m2, at2->sb_parity + m2 + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m2) * sizeof(at2->sb_parity[0])); /* djb-rwth: cast operator added */
-                            memmove(at2->sb_ord + m2, at2->sb_ord + m2 + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m2) * sizeof(at2->sb_ord[0])); /* djb-rwth: cast operator added */
-                            memmove(at2->sn_ord + m2, at2->sn_ord + m2 + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m2) * sizeof(at2->sn_ord[0])); /* djb-rwth: cast operator added */
-                            memmove(at2->sn_orig_at_num + m2, at2->sn_orig_at_num + m2 + 1, (MAX_NUM_STEREO_BONDS - 1 - (long long)m2) * sizeof(at2->sn_orig_at_num[0])); /* djb-rwth: cast operator added */
+                            memmove( at2->sb_parity + m2, at2->sb_parity + m2 + 1, ( MAX_NUM_STEREO_BONDS - 1 - m2 ) * sizeof( at2->sb_parity[0] ) );
+                            memmove( at2->sb_ord + m2, at2->sb_ord + m2 + 1, ( MAX_NUM_STEREO_BONDS - 1 - m2 ) * sizeof( at2->sb_ord[0] ) );
+                            memmove( at2->sn_ord + m2, at2->sn_ord + m2 + 1, ( MAX_NUM_STEREO_BONDS - 1 - m2 ) * sizeof( at2->sn_ord[0] ) );
+                            memmove( at2->sn_orig_at_num + m2, at2->sn_orig_at_num + m2 + 1, ( MAX_NUM_STEREO_BONDS - 1 - m2 ) * sizeof( at2->sn_orig_at_num[0] ) );
                         }
                         at2->sb_parity[MAX_NUM_STEREO_BONDS - 1] = 0;
                         at2->sb_ord[MAX_NUM_STEREO_BONDS - 1] = 0;
@@ -2234,9 +2280,9 @@ int RemoveInpAtBond( inp_ATOM *atom, int iat, int k )
 
         if (k < val)
         {
-            memmove(at->neighbor + k, at->neighbor + k + 1, sizeof(at->neighbor[0])* ((long long)val - (long long)k)); /* djb-rwth: cast operators added */
-            memmove(at->bond_stereo + k, at->bond_stereo + k + 1, sizeof(at->bond_stereo[0])* ((long long)val - (long long)k)); /* djb-rwth: cast operators added */
-            memmove(at->bond_type + k, at->bond_type + k + 1, sizeof(at->bond_type[0])* ((long long)val - (long long)k)); /* djb-rwth: cast operators added */
+            memmove( at->neighbor + k, at->neighbor + k + 1, sizeof( at->neighbor[0] )*( val - k ) );
+            memmove( at->bond_stereo + k, at->bond_stereo + k + 1, sizeof( at->bond_stereo[0] )*( val - k ) );
+            memmove( at->bond_type + k, at->bond_type + k + 1, sizeof( at->bond_type[0] )*( val - k ) );
         }
 
         at->neighbor[val] = 0;
@@ -2275,11 +2321,11 @@ int DisconnectInpAtBond( inp_ATOM *at,
         ret += RemoveInpAtBond( at, neigh, i );
         if (nOldCompNumber && ret)
         {
-            if ((component = at[iat].component)) /* djb-rwth: addressing LLVM warning */
+            if (component = at[iat].component)
             {
                 nOldCompNumber[component - 1] = 0;
             }
-            if ((component = at[neigh].component)) /* djb-rwth: addressing LLVM warning */
+            if (component = at[neigh].component)
             {
                 nOldCompNumber[component - 1] = 0;
             }
@@ -2316,13 +2362,13 @@ int bIsAmmoniumSalt( inp_ATOM *at,
     if (val + num_H == 5)
     {
         int num_O = 0;
-        memset( num_explicit_H, 0, ( NUM_H_ISOTOPES + 1 ) * sizeof( num_explicit_H[0] ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( num_explicit_H, 0, ( NUM_H_ISOTOPES + 1 ) * sizeof( num_explicit_H[0] ) );
         for (j = 0; j < val; j++)
         { /* looking for O: H4N-O-C... */
             neigh = at[i].neighbor[j];
             if (at[neigh].num_H ||
-                 (at[neigh].charge && ( at[neigh].el_number != EL_NUMBER_O || at[neigh].charge + at[i].charge )) ||
-                 (at[neigh].radical && at[neigh].radical != RADICAL_SINGLET)) /* djb-rwth: addressing LLVM warnings */
+                 at[neigh].charge && ( at[neigh].el_number != EL_NUMBER_O || at[neigh].charge + at[i].charge ) ||
+                 at[neigh].radical && at[neigh].radical != RADICAL_SINGLET)
             {
                 bDisconnect = 0;
                 break; /* reject */
@@ -2344,8 +2390,8 @@ int bIsAmmoniumSalt( inp_ATOM *at,
                                                        at[iC].num_H ||
                                                        at[iC].chem_bonds_valence != 4 || */
                      at[iC].charge ||
-                     (at[iC].radical && at[iC].radical != RADICAL_SINGLET) /*||
-                                                                         at[iC].valence == at[iC].chem_bonds_valence*/) /* djb-rwth: addressing LLVM warning */
+                     at[iC].radical && at[iC].radical != RADICAL_SINGLET /*||
+                                                                         at[iC].valence == at[iC].chem_bonds_valence*/)
                 {
                     bDisconnect = 0;
                     break; /* reject */
@@ -2361,7 +2407,7 @@ int bIsAmmoniumSalt( inp_ATOM *at,
                 num_O++; /* found O: N-O- */
                 iO = neigh;
                 k = j;
-                /* djb-rwth: removing redundant code */
+                iC = -1;
             }
             else
             {
@@ -2519,11 +2565,11 @@ int bIsMetalSalt( inp_ATOM *at, int i )
     else
     {
         /* check valence */
-        if ((at[i].charge == 0 &&
-            ( (( type & 1 ) && val == get_el_valence( at[i].el_number, 0, 0 )) ||
-             (( type & 2 ) && val == get_el_valence( at[i].el_number, 0, 1 ) ))) ||
-             (at[i].charge > 0 &&
-             ( type & 1 ) && val == get_el_valence( at[i].el_number, at[i].charge, 0 ))) /* djb-rwth: addressing LLVM warnings */
+        if (at[i].charge == 0 &&
+            ( ( type & 1 ) && val == get_el_valence( at[i].el_number, 0, 0 ) ||
+             ( type & 2 ) && val == get_el_valence( at[i].el_number, 0, 1 ) ) ||
+             at[i].charge > 0 &&
+             ( type & 1 ) && val == get_el_valence( at[i].el_number, at[i].charge, 0 ))
         {
             ; /* accept */
         }
@@ -2560,8 +2606,8 @@ int bIsMetalSalt( inp_ATOM *at, int i )
                      NUMH( at, iO ) ||
                      at[iO].valence != 2 ||
                      at[iO].charge ||
-                     (at[iO].radical && at[iO].radical != RADICAL_SINGLET) ||
-                     at[iO].valence != at[iO].chem_bonds_valence) /* djb-rwth: addressing LLVM warning */
+                     at[iO].radical && at[iO].radical != RADICAL_SINGLET ||
+                     at[iO].valence != at[iO].chem_bonds_valence)
                 {
                     bDisconnect = 0; /* reject */
                     break;
@@ -2571,8 +2617,8 @@ int bIsMetalSalt( inp_ATOM *at, int i )
                      at[iC].num_H ||
                      at[iC].chem_bonds_valence != 4 ||
                      at[iC].charge ||
-                     (at[iC].radical && at[iC].radical != RADICAL_SINGLET) ||
-                     at[iC].valence == at[iC].chem_bonds_valence) /* djb-rwth: addressing LLVM warning */
+                     at[iC].radical && at[iC].radical != RADICAL_SINGLET ||
+                     at[iC].valence == at[iC].chem_bonds_valence)
                 {
                     bDisconnect = 0; /* reject */
                     break;
@@ -2668,7 +2714,7 @@ int DisconnectSalts( ORIG_ATOM_DATA *orig_inp_data, int bDisconnect )
 
         if (!( val = at[i].valence ) || /* disconnected atom */
              val != at[i].chem_bonds_valence || /* a bond has higher multiplicity than 1 */
-             (at[i].radical && at[i].radical != RADICAL_SINGLET) /* radical */) /* djb-rwth: addressing LLVM warning */
+             at[i].radical && at[i].radical != RADICAL_SINGLET /* radical */)
         {
             continue;   /* reject */
         }
@@ -2875,8 +2921,8 @@ int DisconnectMetals( ORIG_ATOM_DATA *orig_inp_data,
     num_at = num_atoms;
     num_disconnected = 0;
 
-    if (!( at = (inp_ATOM *) inchi_calloc( (long long)num_at + (long long)nNumExplH, sizeof( at[0] ) ) ) || /* djb-rwth: cast operators added */
-         !( bMetal = (S_CHAR    *) inchi_calloc( (long long)num_at + (long long)nNumExplH, sizeof( bMetal[0] ) ) )) /* djb-rwth: cast operators added */
+    if (!( at = (inp_ATOM *) inchi_calloc( num_at + nNumExplH, sizeof( at[0] ) ) ) ||
+         !( bMetal = (S_CHAR    *) inchi_calloc( num_at + nNumExplH, sizeof( bMetal[0] ) ) ))
     {
         err = 1;
         goto exit_function;
@@ -2886,28 +2932,28 @@ int DisconnectMetals( ORIG_ATOM_DATA *orig_inp_data,
     {
         i = 0;
         /* halogens */
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_F; /* 0 */
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_CL;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_BR;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_I;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_AT; /* 4 */
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "F" ); /* 0 */
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "Cl" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "Br" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "I" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "At" ); /* 4 */
         num_halogens2 = i;
         /* other non-metal */
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_N;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_P;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_AS;
-        /*elnumber_Heteroat[i++] = EL_NUMBER_SB;*/ /* metal 10-28-2003 */
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_O;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_S;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_SE;
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_TE;
-        /*elnumber_Heteroat[i++] = EL_NUMBER_PO;*/ /* metal 10-28-2003 */
-        elnumber_Heteroat[i++] = (char) EL_NUMBER_B;
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "N" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "P" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "As" );
+        /*elnumber_Heteroat[i++] = get_periodic_table_number( "Sb" );*/ /* metal 10-28-2003 */
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "O" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "S" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "Se" );
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "Te" );
+        /*elnumber_Heteroat[i++] = get_periodic_table_number( "Po" );*/ /* metal 10-28-2003 */
+        elnumber_Heteroat[i++] = (char) get_periodic_table_number( "B" );
         elnumber_Heteroat[i++] = 0;
         num_halogens = num_halogens2;
     }
 
-    memcpy(at, atom, num_atoms * sizeof(at[0]));
+    memcpy( at, atom, num_atoms * sizeof( at[0] ) );
 
     /* check each atom, mark metals */
     for (i = 0, k = 0, num_changes = 0; i < num_atoms; i++)
@@ -3171,9 +3217,9 @@ int DisconnectOneLigand( inp_ATOM *at,
 
     /* attempt to change ligand charge to make its valence 'natural' */
     i = num_tot_arom_bonds - num_del_arom_bonds;
-    if ((i && i != 2 && i != 3) ||
-         (at[iLigand].radical && at[iLigand].radical != RADICAL_SINGLET) ||
-         !( p = strchr( elnumber_Heteroat, at[iLigand].el_number ) )) /* djb-rwth: addressing LLVM warnings */
+    if (i  && i != 2 && i != 3 ||
+         at[iLigand].radical && at[iLigand].radical != RADICAL_SINGLET ||
+         !( p = strchr( elnumber_Heteroat, at[iLigand].el_number ) ))
     {
         goto exit_function;  /* non-standard atom */
     }
@@ -3303,7 +3349,7 @@ double GetMinDistDistribution( inp_ATOM *at,
                     /* make sure the r(i)->r(n) vector is counterclockwise around at[iat] */
                     inchi_swap( (char*) &xi, (char*) &xn, sizeof( xi ) );
                     inchi_swap( (char*) &yi, (char*) &yn, sizeof( yi ) );
-                    /* djb-rwth: removing redundant code */
+                    cross_prod_in = -cross_prod_in;
                 }
 
                 xni = xn - xi; /* r(n)->r(i) */
@@ -3482,7 +3528,7 @@ int move_explicit_Hcation( inp_ATOM *at,
     const double f_step = two_pi / NUM_SEGM;
     const double h_step = f_step / 2.0;
     double min_dist[NUM_SEGM];
-    int nB, i, k, kk, next, val = 0;
+    int nB, i, k, kk, next, val;
     double r, r0, xd, yd, zd, xr, yr, zr, ave_bond_len;
     /*double step = 4.0*atan(1.0)/NUM_SEGM;*/
     /* find at[iat] neighbors coordinates */
@@ -3615,7 +3661,7 @@ int move_explicit_Hcation( inp_ATOM *at,
             else
             {
                 /* found a good sector */
-                f = f_step * ( (double)start_max +  ((double)len_max - 1.0 ) / 2.0 ); /* djb-rwth: cast operators added */
+                f = f_step * ( start_max + (double) ( len_max - 1 ) / 2.0 );
                 r0 = dist / 1.5;
                 xr = r0 * cos( f );
                 yr = r0 * sin( f );
@@ -3664,18 +3710,11 @@ done:
 
         /* connect H to at[iat] */
         val = at[iat].valence;
-        
-#pragma warning (push)
-#pragma warning (disable: 6386)
-        if (val < MAXVAL)
-        {
-            at[iat].neighbor[val] = iat_H;
-            at[iat].bond_type[val] = at[iat_H].bond_type[0];
-            at[iat].bond_stereo[val] = 0;
-            at[iat].chem_bonds_valence += at[iat_H].bond_type[0];
-            at[iat].valence = val + 1;
-        };
-#pragma warning (pop)
+        at[iat].neighbor[val] = iat_H;
+        at[iat].bond_type[val] = at[iat_H].bond_type[0];
+        at[iat].bond_stereo[val] = 0;
+        at[iat].chem_bonds_valence += at[iat_H].bond_type[0];
+        at[iat].valence = val + 1;
 
         at[iat_H].component = at[iat].component;
         at[iat_H].neighbor[0] = iat;
@@ -3796,8 +3835,7 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
                 num_hydrogens++;
                 if (k == 0 && ATW_H <= at[i].iso_atw_diff && at[i].iso_atw_diff < ATW_H + NUM_H_ISOTOPES)
                 {
-                    k = at[i].iso_atw_diff; /*  H isotope has already been marked above or elsewhere */ /* djb-rwth: ignoring LLVM warning: variable used */
-
+                    k = at[i].iso_atw_diff; /*  H isotope has already been marked above or elsewhere */
                 }
                 if (at[i].charge)
                 {
@@ -3846,8 +3884,8 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
         /*  renumber neighbors according to new_ord[] and detach terminal hydrogens */
         for (i = 0; i < num_others; i++)
         {
-            memset( new_HydrogenAt_order, 0, sizeof( new_HydrogenAt_order ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-            memset( new_OtherNeigh_order, 0, sizeof( new_OtherNeigh_order ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( new_HydrogenAt_order, 0, sizeof( new_HydrogenAt_order ) );
+            memset( new_OtherNeigh_order, 0, sizeof( new_OtherNeigh_order ) );
             num_OtherNeigh = 0;
             num_HydrogenAt = 0;
             num_H = 0;
@@ -3857,7 +3895,7 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
                 old_trans[m] = 2 - ( new_at[i].sn_ord[m] + new_at[i].sb_ord[m] + ( new_at[i].sn_ord[m] > new_at[i].sb_ord[m] ) ) % 2;
             }
 
-            for (k = val = 0; k < new_at[i].valence; k++) /* djb-rwth: removing redundant variables/code */
+            for (k = j = val = 0; k < new_at[i].valence; k++)
             {
                 if (num_others <= ( n = new_ord[new_at[i].neighbor[k]] ))
                 {
@@ -3931,12 +3969,12 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
                 if (num_HydrogenAt == new_at[i].valence - val && num_HydrogenAt + num_OtherNeigh <= MAXVAL)
                 {
                     /* recalculate parity so that it would describe neighbor sequence H,1H,D,T,neigh[0],neigh[1]... */
-                    memmove(new_OtherNeigh_order + num_HydrogenAt, new_OtherNeigh_order, num_OtherNeigh * sizeof(new_OtherNeigh_order[0]));
+                    memmove( new_OtherNeigh_order + num_HydrogenAt, new_OtherNeigh_order, num_OtherNeigh * sizeof( new_OtherNeigh_order[0] ) );
                     for (k = 0, j = 1; k <= NUM_H_ISOTOPES; k++)
                     {
                         if (new_HydrogenAt_order[k])
                         {
-                            new_OtherNeigh_order[num_HydrogenAt - j] = new_HydrogenAt_order[k]; /* djb-rwth: buffer overrun avoided implicitly */
+                            new_OtherNeigh_order[num_HydrogenAt - j] = new_HydrogenAt_order[k];
                             for (m = 0; m < MAX_NUM_STEREO_BONDS && new_at[i].sb_parity[m]; m++)
                             {
                                 if ((int) new_at[i].sn_ord[m] == -( k + 1 ))
@@ -3951,8 +3989,8 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
                     }
                     /* at this point new_OtherNeigh_order[] contains
                     incremented old ordering numbers in new order */
-                    k = insertions_sort_AT_RANK( new_OtherNeigh_order, num_HydrogenAt + num_OtherNeigh ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-                    /* djb-rwth: removing redundant code */
+                    k = insertions_sort_AT_RANK( new_OtherNeigh_order, num_HydrogenAt + num_OtherNeigh );
+                    k = k % 2; /* seems to be of no use */
                                /*if ( k ) {*/
                                /*
                                for ( m = 0; m < MAX_NUM_STEREO_BONDS && new_at[i].sb_parity[m]; m ++ ) {
@@ -3968,7 +4006,7 @@ int remove_terminal_HDT( int num_atoms, inp_ATOM *at, int bFixTermHChrg )
             }
             new_at[i].valence = val;
         }
-        memcpy(at, new_at, sizeof(at[0])* num_atoms);
+        memcpy( at, new_at, sizeof( at[0] )*num_atoms );
         ret = num_others;
     }
     else
@@ -3991,6 +4029,23 @@ exit_function:
 }
 
 
+
+/****************************************************************************/
+int get_iat_number( int el_number, const int el_num[], int el_num_len )
+{
+    int i;
+    for (i = 0; i < el_num_len; i++)
+    {
+        if (el_num[i] == el_number)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
 /*#endif*/ /* } DISCONNECT_SALTS */
 
 typedef enum tagIonAtomType
@@ -4007,28 +4062,10 @@ typedef enum tagIonAtomType
     IAT_Cl,
     IAT_Br,
     IAT_I,
-    IAT_MAX = 12
+    IAT_MAX
 } ION_ATOM_TYPE;
 
-/****************************************************************************/
-int get_iat_number( int el_number )
-{
-    switch (el_number) {
-        case EL_NUMBER_H:  return IAT_H;
-        case EL_NUMBER_C:  return IAT_C;
-        case EL_NUMBER_N:  return IAT_N;
-        case EL_NUMBER_P:  return IAT_P;
-        case EL_NUMBER_O:  return IAT_O;
-        case EL_NUMBER_S:  return IAT_S;
-        case EL_NUMBER_SE: return IAT_Se;
-        case EL_NUMBER_TE: return IAT_Te;
-        case EL_NUMBER_F:  return IAT_F;
-        case EL_NUMBER_CL: return IAT_Cl;
-        case EL_NUMBER_BR: return IAT_Br;
-        case EL_NUMBER_I:  return IAT_I;
-        default: return -1;
-    }
-}
+
 
 #if ( READ_INCHI_STRING == 1 )
 
@@ -4037,14 +4074,31 @@ int get_iat_number( int el_number )
 int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
 {
     inp_ATOM *at = atom + iat, *at2;
-    int j, val, is_H = 0, num_H, iat_numb, bAccept; /* djb-rwth: removing redundant variables */
+    static int el_num[IAT_MAX];
+    int j, val, is_O = 0, is_Cl = 0, is_N = 0, is_H = 0, num_H, iat_numb, bAccept, cur_num_iso_H;
 
-    if (0 > ( iat_numb = get_iat_number( at->el_number ) ))
+    if (!el_num[IAT_H])
+    {
+        el_num[IAT_H] = get_periodic_table_number( "H" );
+        el_num[IAT_C] = get_periodic_table_number( "C" );
+        el_num[IAT_N] = get_periodic_table_number( "N" );
+        el_num[IAT_P] = get_periodic_table_number( "P" );
+        el_num[IAT_O] = get_periodic_table_number( "O" );
+        el_num[IAT_S] = get_periodic_table_number( "S" );
+        el_num[IAT_Se] = get_periodic_table_number( "Se" );
+        el_num[IAT_Te] = get_periodic_table_number( "Te" );
+        el_num[IAT_F] = get_periodic_table_number( "F" );
+        el_num[IAT_Cl] = get_periodic_table_number( "Cl" );
+        el_num[IAT_Br] = get_periodic_table_number( "Br" );
+        el_num[IAT_I] = get_periodic_table_number( "I" );
+    }
+
+    if (0 > ( iat_numb = get_iat_number( at->el_number, el_num, IAT_MAX ) ))
     {
         return 0;
     }
 
-    if (abs( at->charge ) > 1 || (at->radical && RADICAL_SINGLET != at->radical)) /* djb-rwth: addressing LLVM warning */
+    if (abs( at->charge ) > 1 || at->radical && RADICAL_SINGLET != at->radical)
     {
         return 0;
     }
@@ -4054,7 +4108,7 @@ int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
     {
         case IAT_N:
         case IAT_P:
-            /* djb-rwth: removing redundant code */
+            is_N = 1;
             val = 3 + at->charge;
             break;
 
@@ -4062,7 +4116,7 @@ int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
         case IAT_S:
         case IAT_Se:
         case IAT_Te:
-            /* djb-rwth: removing redundant code */
+            is_O = 1;
             val = 2 + at->charge;
             break;
 
@@ -4072,7 +4126,7 @@ int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
         case IAT_I:
             if (at->charge == 0)
             {
-                /* djb-rwth: removing redundant code */
+                is_Cl = 1; /* isolated HCl */
                 val = 1;
             }
             break;
@@ -4100,12 +4154,12 @@ int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
     }
     else
     {
-        /* djb-rwth: removing redundant code */
+        cur_num_iso_H = 0;
         for (j = 0, bAccept = 1; j < at->valence && bAccept; j++)
         {
             at2 = atom + (int) at->neighbor[j];
-            if ((at2->charge && at->charge) ||
-                ( at2->radical && RADICAL_SINGLET != at2->radical )) /* djb-rwth: addressing LLVM warning */
+            if (at2->charge && at->charge ||
+                ( at2->radical && RADICAL_SINGLET != at2->radical ))
             {
                 return 0; /* adjacent charged/radical atoms: do not neutralizate */
             }
@@ -4122,8 +4176,26 @@ int bHeteroAtomMayHaveXchgIsoH( inp_ATOM *atom, int iat )
 /****************************************************************************/
 int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
 {
-    int i, j, val, is_H = 0, num_H, iat_numb, bAccept, num_iso_H, cur_num_iso_H, num_iso_atoms; /* djb-rwth: removing redundant variables */
+    static int el_num[IAT_MAX];
+    int i, j, val, is_O = 0, is_Cl = 0, is_N = 0, is_H = 0, num_H, iat_numb, bAccept, num_iso_H, cur_num_iso_H, num_iso_atoms;
     inp_ATOM *at, *at2;
+
+    /* one time initialization */
+    if (!el_num[IAT_H])
+    {
+        el_num[IAT_H] = get_periodic_table_number( "H" );
+        el_num[IAT_C] = get_periodic_table_number( "C" );
+        el_num[IAT_N] = get_periodic_table_number( "N" );
+        el_num[IAT_P] = get_periodic_table_number( "P" );
+        el_num[IAT_O] = get_periodic_table_number( "O" );
+        el_num[IAT_S] = get_periodic_table_number( "S" );
+        el_num[IAT_Se] = get_periodic_table_number( "Se" );
+        el_num[IAT_Te] = get_periodic_table_number( "Te" );
+        el_num[IAT_F] = get_periodic_table_number( "F" );
+        el_num[IAT_Cl] = get_periodic_table_number( "Cl" );
+        el_num[IAT_Br] = get_periodic_table_number( "Br" );
+        el_num[IAT_I] = get_periodic_table_number( "I" );
+    }
 
     num_iso_H = 0;
     num_iso_atoms = 0;
@@ -4134,12 +4206,12 @@ int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
         num_iso_atoms += ( at->iso_atw_diff != 0 || NUM_ISO_H( at, 0 ) );
         /* isotopic atoms and implicit isotopic H */
 
-        if (0 >( iat_numb = get_iat_number( at->el_number ) ))
+        if (0 >( iat_numb = get_iat_number( at->el_number, el_num, IAT_MAX ) ))
         {
             continue;
         }
 
-        if (abs( at->charge ) > 1 || (at->radical && RADICAL_SINGLET != at->radical)) /* djb-rwth: addressing LLVM warning */
+        if (abs( at->charge ) > 1 || at->radical && RADICAL_SINGLET != at->radical)
         {
             continue;
         }
@@ -4149,7 +4221,7 @@ int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
         {
             case IAT_N:
             case IAT_P:
-                /* djb-rwth: removing redundant code */
+                is_N = 1;
                 val = 3 + at->charge;
                 break;
 
@@ -4157,7 +4229,7 @@ int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
             case IAT_S:
             case IAT_Se:
             case IAT_Te:
-                /* djb-rwth: removing redundant code */
+                is_O = 1;
                 val = 2 + at->charge;
                 break;
 
@@ -4167,7 +4239,7 @@ int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
             case IAT_I:
                 if (at->charge == 0)
                 {
-                    /* djb-rwth: removing redundant code */
+                    is_Cl = 1; /* isolated HCl */
                     val = 1;
                 }
                 break;
@@ -4202,13 +4274,13 @@ int bNumHeterAtomHasIsotopicH( inp_ATOM *atom, int num_atoms )
             for (j = 0, bAccept = 1; j < at->valence && bAccept; j++)
             {
                 at2 = atom + (int) at->neighbor[j];
-                if ((at2->charge && at->charge) ||
-                    ( at2->radical && RADICAL_SINGLET != at2->radical )) /* djb-rwth: addressing LLVM warning */
+                if (at2->charge && at->charge ||
+                    ( at2->radical && RADICAL_SINGLET != at2->radical ))
                 {
                     bAccept = 0; /* adjacent charged/radical atoms: do not neutralizate */
                     break;
                 }
-                else if (at2->el_number == EL_NUMBER_H &&
+                else if (at2->el_number == el_num[IAT_H] &&
                           at2->valence == 1 && at2->iso_atw_diff)
                 {
                     cur_num_iso_H++; /* isotopic explicit H */
@@ -4244,7 +4316,7 @@ int cmp_components( const void *a1, const void *a2 )
     /* number of atoms in the component -- descending order */
     n2 = ( (const AT_NUMB *) a2 )[0];
 
-    if ((ret = (int) n2 - (int) n1)) /* djb-rwth: addressing LLVM warning */
+    if (ret = (int) n2 - (int) n1)
     {
         return ret;
     }
@@ -4309,42 +4381,34 @@ int MarkDisconnectedComponents( ORIG_ATOM_DATA *orig_at_data,
         return 0;
     }
 
-    nNewCompNumber = (AT_NUMB*)inchi_calloc(num_at, sizeof(nNewCompNumber[0]));
-    nPrevAtom = (AT_NUMB*)inchi_calloc(num_at, sizeof(nPrevAtom[0]));
-    iNeigh = (S_CHAR*)inchi_calloc(num_at, sizeof(iNeigh[0]));
-
-    if (!nNewCompNumber || !nPrevAtom || !iNeigh) /* nNewCompNumber: for non-recursive DFS only: */ 
+    if (!( nNewCompNumber = (AT_NUMB *) inchi_calloc( num_at, sizeof( nNewCompNumber[0] ) ) ) ||
+         /* for non-recursive DFS only: */
+         !( nPrevAtom = (AT_NUMB *) inchi_calloc( num_at, sizeof( nPrevAtom[0] ) ) ) ||
+         !( iNeigh = (S_CHAR  *) inchi_calloc( num_at, sizeof( iNeigh[0] ) ) ))
     {
         goto exit_function;
     }
 
-    /*printf("\nnum_at = %d\n", num_at);*/
-
     /* Mark and count; avoid deep DFS recursion: it may make verifying software unhappy */
     /* nNewCompNumber[i] will contain new component number for atoms at[i], i=0..num_at-1 */
-    
     for (j = 0; j < num_at; j++)
     {
         if (!nNewCompNumber[j])
         {
             /* mark starting with at[j] */
-            int fst_at = 0, nxt_at = 0, cur_at = j;
+            int fst_at, nxt_at, cur_at = j;
             num_components++;
 
             /* first time at at[j] */
-            fst_at = cur_at;
-            nNewCompNumber[fst_at] = (AT_NUMB) num_components;
-
-            bool cur_neq_fst = true;
+            nNewCompNumber[fst_at = cur_at] = (AT_NUMB) num_components;
 
             /* find next neighbor */
-            do
+            while (1)
             {
+
                 if (iNeigh[cur_at] < at[cur_at].valence)
                 {
-                    int ineigh_incr = (int)iNeigh[cur_at];
-                    nxt_at = at[cur_at].neighbor[ineigh_incr];
-                    iNeigh[cur_at]++;
+                    nxt_at = at[cur_at].neighbor[(int) iNeigh[cur_at] ++];
 
                     if (!nNewCompNumber[nxt_at])
                     {
@@ -4356,14 +4420,13 @@ int MarkDisconnectedComponents( ORIG_ATOM_DATA *orig_at_data,
                 }
                 else if (cur_at == fst_at)
                 {
-                    cur_neq_fst = false;
-                    /* break;  done */
+                    break; /* done */
                 }
                 else
                 {
                     cur_at = nPrevAtom[cur_at]; /* retract */
                 }
-            } while (cur_neq_fst);
+            }
         }
     }
 
@@ -4375,11 +4438,12 @@ int MarkDisconnectedComponents( ORIG_ATOM_DATA *orig_at_data,
     /* Allocate more memory */
     i = inchi_max( num_components, orig_at_data->num_components );
 
-    nCurAtLen = (AT_NUMB*)inchi_calloc((long long)num_components + 1, sizeof(nCurAtLen[0])); /* djb-rwth: cast operator added */
-    nOldCompNumber = (AT_NUMB*)inchi_calloc((long long)i + 1, sizeof(nOldCompNumber[0])); /* djb-rwth: cast operator added */
-    component_nbr = (AT_TRIPLE*)inchi_calloc((long long)num_components + 1, sizeof(component_nbr[0])); /* djb-rwth: cast operator added */
-
-    if (!nCurAtLen || !nOldCompNumber || !component_nbr)
+    if (!( nCurAtLen = (AT_NUMB *)
+           inchi_calloc( num_components + 1, sizeof( nCurAtLen[0] ) ) ) ||
+         !( nOldCompNumber = (AT_NUMB *)
+            inchi_calloc( i + 1, sizeof( nOldCompNumber[0] ) ) ) ||
+         !( component_nbr = (AT_TRIPLE *)
+            inchi_calloc( num_components + 1, sizeof( component_nbr[0] ) ) ))
     {
         goto exit_function;
     }
@@ -4402,7 +4466,10 @@ int MarkDisconnectedComponents( ORIG_ATOM_DATA *orig_at_data,
     stable sort
     */
 
-    qsort( (void*) component_nbr[0], num_components, sizeof( component_nbr[0] ), cmp_components ); /* djb-rwth: buffer overrun while writing component_nbr[0]? */ /* djb-rwth: ui_rr */
+    qsort( (void*) component_nbr[0],
+           num_components,
+           sizeof( component_nbr[0] ),
+           cmp_components );
 
     /* Invert the transposition */
     for (i = 0; i < num_components; i++)
@@ -4535,7 +4602,8 @@ exit_function:
 
     orig_at_data->num_components = num_components;
 
-    return ret;  /* number of disconnected components;
+    return
+        ret;  /* number of disconnected components;
               1=>single connected structure        */
 }
 
@@ -4665,7 +4733,7 @@ int Free_INChI( INChI **ppINChI )
 
     INChI *pINChI;
 
-    if ((pINChI = *ppINChI)) /* djb-rwth: addressing LLVM warning */
+    if (pINChI = *ppINChI)
     {
 
 #if ( bREUSE_INCHI == 1 )
@@ -4687,17 +4755,17 @@ int Free_INChI_Members( INChI *pINChI )
 {
     if (pINChI)
     {
-        Free_INChI_Stereo(pINChI->Stereo);
-        Free_INChI_Stereo(pINChI->StereoIsotopic);
-        qzfree(pINChI->nAtom);
-        qzfree(pINChI->nConnTable);
-        qzfree(pINChI->nTautomer);
-        qzfree(pINChI->nNum_H);
-        qzfree(pINChI->nNum_H_fixed);
-        qzfree(pINChI->IsotopicAtom);
-        qzfree(pINChI->IsotopicTGroup);
-        qzfree(pINChI->nPossibleLocationsOfIsotopicH);
-        qzfree( pINChI->Stereo );       
+        Free_INChI_Stereo( pINChI->Stereo );
+        Free_INChI_Stereo( pINChI->StereoIsotopic );
+        qzfree( pINChI->nAtom );
+        qzfree( pINChI->nConnTable );
+        qzfree( pINChI->nTautomer );
+        qzfree( pINChI->nNum_H );
+        qzfree( pINChI->nNum_H_fixed );
+        qzfree( pINChI->IsotopicAtom );
+        qzfree( pINChI->IsotopicTGroup );
+        qzfree( pINChI->nPossibleLocationsOfIsotopicH );
+        qzfree( pINChI->Stereo );
         qzfree( pINChI->StereoIsotopic );
         qzfree( pINChI->szHillFormula );
     }
@@ -4742,8 +4810,8 @@ INChI *Alloc_INChI( inp_ATOM *at,
     *found_num_isotopic = num_isotopic_atoms;
 
     if (( pINChI->nAtom = (U_CHAR*) inchi_calloc( num_at, sizeof( pINChI->nAtom[0] ) ) ) &&
-        ( pINChI->nConnTable = (AT_NUMB*) inchi_calloc( (long long)num_at + (long long)num_bonds, sizeof( pINChI->nConnTable[0] ) ) ) && /* djb-rwth: cast operator added */
-         ( pINChI->nTautomer = (AT_NUMB*) inchi_calloc( ( ( 3 + INCHI_T_NUM_MOVABLE )*(long long)num_at ) / 2 + 1, sizeof( pINChI->nTautomer[0] ) ) ) && /* djb-rwth: cast operator added */
+        ( pINChI->nConnTable = (AT_NUMB*) inchi_calloc( num_at + num_bonds, sizeof( pINChI->nConnTable[0] ) ) ) &&
+         ( pINChI->nTautomer = (AT_NUMB*) inchi_calloc( ( ( 3 + INCHI_T_NUM_MOVABLE )*num_at ) / 2 + 1, sizeof( pINChI->nTautomer[0] ) ) ) &&
          ( pINChI->nNum_H = (S_CHAR*) inchi_calloc( num_at, sizeof( pINChI->nNum_H[0] ) ) ) &&
          ( pINChI->nNum_H_fixed = (S_CHAR*) inchi_calloc( num_at, sizeof( pINChI->nNum_H_fixed[0] ) ) ))
     {
@@ -4785,7 +4853,7 @@ INChI *Alloc_INChI( inp_ATOM *at,
         {
             goto out_of_RAM;
         }
-        if (!( pINChI->nPossibleLocationsOfIsotopicH = (AT_NUMB *) inchi_calloc( (long long)num_at + 1, sizeof( pINChI->nPossibleLocationsOfIsotopicH[0] ) ) )) /* djb-rwth: cast operator added */
+        if (!( pINChI->nPossibleLocationsOfIsotopicH = (AT_NUMB *) inchi_calloc( num_at + 1, sizeof( pINChI->nPossibleLocationsOfIsotopicH[0] ) ) ))
         {
             goto out_of_RAM;
         }
@@ -4900,7 +4968,7 @@ INChI_Aux *Alloc_INChI_Aux( int num_at,
     }
 
     if (num_at > 1 &&
-        ( pINChI_Aux->nConstitEquTGroupNumbers = (AT_NUMB*) inchi_calloc( sizeof( pINChI_Aux->nConstitEquTGroupNumbers[0] ), (long long)num_at / 2 + 1 ) )) /* djb-rwth: cast operator added */
+        ( pINChI_Aux->nConstitEquTGroupNumbers = (AT_NUMB*) inchi_calloc( sizeof( pINChI_Aux->nConstitEquTGroupNumbers[0] ), num_at / 2 + 1 ) ))
     {
         ;
     }
@@ -4941,7 +5009,7 @@ INChI_Aux *Alloc_INChI_Aux( int num_at,
         }
 
         if ( /*num_isotopic_atoms && num_at > 1 &&*/
-            ( pINChI_Aux->nConstitEquIsotopicTGroupNumbers = (AT_NUMB*) inchi_calloc( sizeof( pINChI_Aux->nConstitEquIsotopicTGroupNumbers[0] ), (long long)num_at / 2 + 1 ) )) /* djb-rwth: cast operator added */
+            ( pINChI_Aux->nConstitEquIsotopicTGroupNumbers = (AT_NUMB*) inchi_calloc( sizeof( pINChI_Aux->nConstitEquIsotopicTGroupNumbers[0] ), num_at / 2 + 1 ) ))
         {
             ;
         }
@@ -5028,7 +5096,7 @@ void imat_free( int m, int **a )
     {
         for (i = 0; i < m; i++)
         {
-            if (NULL != a[i]) /* djb-rwth: ui_rr? */
+            if (NULL != a[i])
             {
                 inchi_free( a[i] );
             }
@@ -5050,7 +5118,7 @@ Lt-wt subgraph
  Establish light-weight subgraph representing (part of) orig_inp_data
  ****************************************************************************/
 subgraf *subgraf_new( ORIG_ATOM_DATA *orig_inp_data,
-                      int nnodes,
+                      int nnodes, 
                       int *nodes )
 {
     int i, j, iat, nbr, jat, nj, degree, nat, err = 0;
@@ -5065,7 +5133,7 @@ subgraf *subgraf_new( ORIG_ATOM_DATA *orig_inp_data,
 
     /* orig2node is mapping of original at numbers --> subgraph node numbers */
     err = 1;
-    if (!( sg->orig2node = (int *) inchi_calloc( (long long)nat + 1, sizeof( int ) ) )) /* djb-rwth: cast operator added */
+    if (!( sg->orig2node = (int *) inchi_calloc( nat + 1, sizeof( int ) ) ))
     {
         goto exit_function;
     }
@@ -5132,7 +5200,6 @@ exit_function:
     if (err)
     {
         subgraf_free( sg );
-        return NULL; /* djb-rwth: avoiding reading from freed memory */
     }
 
     return sg;
@@ -5163,7 +5230,7 @@ void subgraf_free( subgraf *sg )
     {
         for (i = 0; i < sg->nnodes; i++)
         {
-            if (sg->adj[i]) /* djb-rwth: ui_rr? */
+            if (sg->adj[i])
             {
                 inchi_free( sg->adj[i] );
             }
@@ -5194,7 +5261,7 @@ void subgraf_debug_trace( subgraf *sg )
                  p, sg->nodes[p] );
         for (q = 0; q < sg->degrees[p]; q++)
         {
-            int nbr = sg->adj[p][q].nbr; /* djb-rwth: ignoring LLVM warning: variable used */
+            int nbr = sg->adj[p][q].nbr;
             ITRACE_( "(%-d/%-d/%-d)  ", nbr, sg->nodes[nbr] );
         }
         ITRACE_( "\n" );
@@ -5258,7 +5325,7 @@ void subgraf_pathfinder_free( subgraf_pathfinder *spf )
  and fill bonds[nbonds] and atoms[natoms]
  Do not traverse through supplied forbidden edges (if not zero/NULL)
 ****************************************************************************/
-void subgraf_pathfinder_run( subgraf_pathfinder *spf,
+void subgraf_pathfinder_run( subgraf_pathfinder *spf, 
                              int nforbidden,		/* number of edges forbidden for traversal	*/
                              int *forbidden,		/* nodes of forbidden edges: [edge1node1,edge1node2, edge2node1, edge2node2, ... ] */
                              int *nbonds,
@@ -5366,9 +5433,9 @@ void subgraf_pathfinder_run( subgraf_pathfinder *spf,
 
 /****************************************************************************/
 void add_bond_if_unseen( subgraf_pathfinder *spf,
-                         int node0,
+                         int node0, 
                          int node,
-                         int *nbonds,
+                         int *nbonds, 
                          int **bonds )
 {
     int seen, p, at1, at2;
@@ -5407,7 +5474,7 @@ void add_bond_if_unseen( subgraf_pathfinder *spf,
 /****************************************************************************
  At the first call, push start node to spf->start and set spf->nseen = 0
 ****************************************************************************/
-int subgraf_pathfinder_collect_all(subgraf_pathfinder *spf,
+int subgraf_pathfinder_collect_all(subgraf_pathfinder *spf, 
                                    int nforbidden,		/* number of edges forbidden for traversal	*/
                                    int *forbidden,		/* nodes of forbidden edges: [edge1node1,edge1node2, edge2node1, edge2node2, ... ] */
                                    int *atnums          /* 1-based origs# */

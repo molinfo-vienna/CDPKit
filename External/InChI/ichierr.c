@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,18 +12,34 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 #pragma warning( disable : 4706 4127 4514 4100 4786 4996 4244 4267 )
+
+
 
 #include <string.h>
 
 #include "mode.h"
 #include "ichierr.h"
 
-#include "bcf_s.h"
 
 static int already_have_this_message( char *prev_messages, const char *new_message );
 
@@ -87,12 +81,12 @@ const char *ErrMsg( int nErrorCode )
         default:
             if (nErrorCode > CT_UNKNOWN_ERR)
             {
-                sprintf(szErrMsg, "No description(%d)", nErrorCode);
+                sprintf( szErrMsg, "No description(%d)", nErrorCode );
                 p = szErrMsg;
             }
             else
             {
-                sprintf(szErrMsg, "UNKNOWN_ERR(%d)", CT_UNKNOWN_ERR - nErrorCode);
+                sprintf( szErrMsg, "UNKNOWN_ERR(%d)", CT_UNKNOWN_ERR - nErrorCode );
                 p = szErrMsg;
             }
             break;
@@ -134,11 +128,11 @@ int AddErrorMessage( char *all_messages, const char *new_message )
         {
             if (all_messages[len_all - 1] != ':')
             {
-                strcat(all_messages, ";");
+                strcat( all_messages, ";" );
             }
-            strcat(all_messages, " ");
+            strcat( all_messages, " " );
         }
-        strcat(all_messages, new_message);
+        strcat( all_messages, new_message );
         return 1;
     }
 
@@ -149,7 +143,7 @@ int AddErrorMessage( char *all_messages, const char *new_message )
     }
     if (len_all + 3 < STR_ERR_LEN)
     {
-        strcat(all_messages, "...");
+        strcat( all_messages, "..." );
     }
 
     return 0;
@@ -165,12 +159,12 @@ int already_have_this_message( char *prev_messages, const char *new_message )
 
     if (p)
     {
-        have = ( p == prev_messages || (*( p - 1 ) == ' ' && ( *( p - 2 ) == ';' || *( p - 2 ) == ':' )) ); /* djb-rwth: addressing LLVM warning */
+        have = ( p == prev_messages || *( p - 1 ) == ' ' && ( *( p - 2 ) == ';' || *( p - 2 ) == ':' ) );
         if (have)
         {
             int len_prev = (int) strlen( prev_messages );
             int len = (int) strlen( new_message );
-            have = ( p + len == prev_messages + len_prev || (p[len] == ';' && p[len + 1] == ' ') || (p[len - 1] == ':' && p[len] == ' ') ); /* djb-rwth: addressing LLVM warning */
+            have = ( p + len == prev_messages + len_prev || p[len] == ';' && p[len + 1] == ' ' || p[len - 1] == ':' && p[len] == ' ' );
         }
     }
 

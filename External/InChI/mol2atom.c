@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -48,10 +42,6 @@
 #include "util.h"
 #include "strutil.h"
 #include "inchi_api.h"
-
-#include "bcf_s.h"
-
-#include "logging.h"              /*(@nnuk : Nauman Ullah Khan) :: Needed for logging functionality*/
 
 /*
 Convert input molecular data to internal representation
@@ -125,7 +115,7 @@ int CreateOrigInpDataFromMolfile( INCHI_IOSTREAM *inp_file,
                                   int bNoWarnings )
 {
     int i, j, max_num_at;
-    int num_dimensions_new = 0; /* djb-rwth: initialisation required to avoid garbage values */
+    int num_dimensions_new;
     int num_inp_bonds_new;
     int num_inp_atoms_new;
     int nNumAtoms = 0;
@@ -213,21 +203,18 @@ int CreateOrigInpDataFromMolfile( INCHI_IOSTREAM *inp_file,
                 /*  switch at_new <--> orig_at_data->at; */
                 if (orig_at_data->num_inp_atoms)
                 {
-                    memcpy(orig_at_data->at, at_old, orig_at_data->num_inp_atoms * sizeof(orig_at_data->at[0]));
+                    memcpy( orig_at_data->at, at_old, orig_at_data->num_inp_atoms * sizeof( orig_at_data->at[0] ) );
                     /*  adjust numbering in the newly read structure */
                     for (i = 0; i < num_inp_atoms_new; i++)
                     {
-                        if (at_new) /* djb-rwth: fixing a NULL pointer dereference */
+                        for (j = 0; j < at_new[i].valence; j++)
                         {
-                            for (j = 0; j < at_new[i].valence; j++)
-                            {
-                                at_new[i].neighbor[j] += orig_at_data->num_inp_atoms;
-                            }
-                            at_new[i].orig_at_number += orig_at_data->num_inp_atoms; /* 12-19-2003 */
+                            at_new[i].neighbor[j] += orig_at_data->num_inp_atoms;
                         }
+                        at_new[i].orig_at_number += orig_at_data->num_inp_atoms; /* 12-19-2003 */
                     }
                     if (orig_at_data->szCoord && szCoordOld)
-                        memcpy(orig_at_data->szCoord, szCoordOld, orig_at_data->num_inp_atoms * sizeof(MOL_COORD));
+                        memcpy( orig_at_data->szCoord, szCoordOld, orig_at_data->num_inp_atoms * sizeof( MOL_COORD ) );
                 }
                 if (at_old)
                 {
@@ -241,13 +228,15 @@ int CreateOrigInpDataFromMolfile( INCHI_IOSTREAM *inp_file,
                 }
 
                 /*  Copy newly read structure */
-                if (at_new) /* djb-rwth: fixing a NULL pointer dereference */
-                    memcpy(orig_at_data->at + orig_at_data->num_inp_atoms, at_new, num_inp_atoms_new * sizeof(orig_at_data->at[0]));
+                memcpy( orig_at_data->at + orig_at_data->num_inp_atoms,
+                        at_new,
+                        num_inp_atoms_new * sizeof( orig_at_data->at[0] ) );
+
                 if (orig_at_data->szCoord && szCoordNew)
                 {
-                    memcpy(orig_at_data->szCoord + orig_at_data->num_inp_atoms,
-                        szCoordNew,
-                        num_inp_atoms_new * sizeof(MOL_COORD));
+                    memcpy( orig_at_data->szCoord + orig_at_data->num_inp_atoms,
+                            szCoordNew,
+                            num_inp_atoms_new * sizeof( MOL_COORD ) );
                 }
 
                 /*  Add other things */
@@ -348,7 +337,7 @@ int ReadMolfileToInpAtoms( INCHI_IOSTREAM *inp_file,
         pOnlyHeaderBlock = NULL;
         if (*at && max_num_at)
         {
-            memset( *at, 0, max_num_at * sizeof( inp_ATOM ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( *at, 0, max_num_at * sizeof( inp_ATOM ) );
         }
         if (szCoord && *szCoord)
         {
@@ -405,7 +394,7 @@ int ReadMolfileToInpAtoms( INCHI_IOSTREAM *inp_file,
         }
         else if (!inchi_stricmp( pSdfLabel, "MolfileIntRegNo" ) && pHdr->internal_regno)
         {
-            sprintf(pSdfValue, "%ld", pHdr->internal_regno);
+            sprintf( pSdfValue, "%ld", pHdr->internal_regno );
         }
 
         if (!pSdfValue[0])
@@ -535,11 +524,6 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
     *num_atoms = mfdata->ctab.n_atoms;
     *num_bonds = 0;
 
-    /*(@nnuk : Nauman Ullah Khan) */
-    LOG_NO_ARGS("\n############### (L579:mol2atom.c) ################\n");
-    LOG_MULT_ARGS("Number of atoms : %d\n", *num_atoms);
-    LOG_NO_ARGS("####################################################\n");
-
     if (MolfileHasNoChemStruc( mfdata ))
     {
         goto exit_function;
@@ -561,10 +545,6 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
     }
 
     /* Copy atoms info */
-
-    /*(@nnuk : Nauman Ullah Khan) */
-    LOG_NO_ARGS("\n##################### Atoms Data #########################\n");
-
     for (i = 0; i < *num_atoms; i++)
     {
 
@@ -664,12 +644,6 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
                 }
             }
         }
-
-        /*(@nnuk : Nauman Ullah Khan) */
-        LOG_NO_ARGS("\n############################## (L714:mol2atom.c) #####################################\n");
-        LOG_MULT_ARGS("Atom %d: element=%s, x=%f, y=%f, z=%f, chrg=%d, rad=%d, iso=%d\n", i, at[i].elname, at[i].x, at[i].y, at[i].z, at[i].charge, at[i].radical, at[i].iso_atw_diff);
-        LOG_NO_ARGS("########################################################################################\n");
-
     } /* eof copy atom info */
 
 
@@ -693,9 +667,6 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
 
 
       /* Copy bond info */
-
-    LOG_NO_ARGS("\n######################### Bonds Data ###############################\n");
-
     for (i = 0, bonds = 0; i < mfdata->ctab.n_bonds; i++)
     {
 
@@ -718,11 +689,6 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
         p1 = is_in_the_list( at[a1].neighbor, (AT_NUMB) a2, at[a1].valence );
         p2 = is_in_the_list( at[a2].neighbor, (AT_NUMB) a1, at[a2].valence );
 
-        /*(@nnuk : Nauman Ullah Khan) */
-        LOG_NO_ARGS("\n################## (L771:mol2atom.c) ##################\n");
-        LOG_MULT_ARGS("Valence = %d\n", at[i].valence);
-        LOG_NO_ARGS("#########################################################\n");
-
         if (( p1 || p2 ) && ( p1 || at[a1].valence < MAXVAL ) && ( p2 || at[a2].valence < MAXVAL ))
         {
             n1 = p1 ? ( p1 - at[a1].neighbor ) : at[a1].valence++;
@@ -740,8 +706,8 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
         {
             char szMsg[64];
             *err |= 4; /*  too large number of bonds. Some bonds ignored. */
-            sprintf(szMsg, "Atom '%s' has more than %d bonds",
-                at[a1].valence >= MAXVAL ? at[a1].elname : at[a2].elname, MAXVAL);
+            sprintf( szMsg, "Atom '%s' has more than %d bonds",
+                     at[a1].valence >= MAXVAL ? at[a1].elname : at[a2].elname, MAXVAL );
             TREAT_ERR( *err, 0, szMsg );
             continue;
         }
@@ -749,7 +715,7 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
         if (bond_type < MIN_INPUT_BOND_TYPE || bond_type > MAX_INPUT_BOND_TYPE)
         {
             char szBondType[16];
-            sprintf(szBondType, "%d", bond_type);
+            sprintf( szBondType, "%d", bond_type );
             bond_type = 1;
             TREAT_ERR( *err, 0, "Unrecognized bond type:" );
             TREAT_ERR( *err, 0, szBondType );
@@ -757,28 +723,27 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
         }
 
         /* bond type */
-        if (n1 < MAXVAL && n2 < MAXVAL) /* djb-rwth: buffer overrun prevention */
+        at[a1].bond_type[n1] =
+            at[a2].bond_type[n2] = bond_type;
+
+        /* connection */
+        at[a1].neighbor[n1] = (AT_NUMB) a2;
+        at[a2].neighbor[n2] = (AT_NUMB) a1;
+
+        /* stereo */
+        if (bond_stereo == INPUT_STEREO_DBLE_EITHER /* 3 */)
         {
-            at[a1].bond_type[n1] = at[a2].bond_type[n2] = bond_type;
-
-            /* connection */
-            at[a1].neighbor[n1] = (AT_NUMB)a2;
-            at[a2].neighbor[n2] = (AT_NUMB)a1;
-
-            /* stereo */
-            if (bond_stereo == INPUT_STEREO_DBLE_EITHER /* 3 */)
+            at[a1].bond_stereo[n1] =
+                at[a2].bond_stereo[n2] =
+                STEREO_DBLE_EITHER;
+        }
+        else if (bond_stereo == INPUT_STEREO_SNGL_UP ||  /* 1 */
+                  bond_stereo == INPUT_STEREO_SNGL_EITHER ||  /* 4 */
+                  bond_stereo == INPUT_STEREO_SNGL_DOWN       /* 6 */)
+        {
+            char cStereo;
+            switch (bond_stereo)
             {
-                at[a1].bond_stereo[n1] =
-                    at[a2].bond_stereo[n2] =
-                    STEREO_DBLE_EITHER;
-            }
-            else if (bond_stereo == INPUT_STEREO_SNGL_UP ||  /* 1 */
-                bond_stereo == INPUT_STEREO_SNGL_EITHER ||  /* 4 */
-                bond_stereo == INPUT_STEREO_SNGL_DOWN       /* 6 */)
-            {
-                char cStereo;
-                switch (bond_stereo)
-                {
                 case INPUT_STEREO_SNGL_UP:
                     cStereo = STEREO_SNGL_UP;
                     break;
@@ -788,23 +753,16 @@ inp_ATOM* MakeInpAtomsFromMolfileData( MOL_FMT_DATA* mfdata,
                 case INPUT_STEREO_SNGL_DOWN:
                     cStereo = STEREO_SNGL_DOWN;
                     break;
-                }
-                at[a1].bond_stereo[n1] = cStereo; /*  >0: the wedge (pointed) end is at this atom, a1 */
-                at[a2].bond_stereo[n2] = -cStereo; /*  <0: the wedge (pointed) end is at the opposite atom, a1 */
             }
-            else if (bond_stereo)
-            {
-                *err |= 16; /*  Ignored unrecognized Bond stereo */
-                TREAT_ERR(*err, 0, "Unrecognized bond stereo");
-                continue;
-            }
+            at[a1].bond_stereo[n1] = cStereo; /*  >0: the wedge (pointed) end is at this atom, a1 */
+            at[a2].bond_stereo[n2] = -cStereo; /*  <0: the wedge (pointed) end is at the opposite atom, a1 */
         }
-
-        /*(@nnuk : Nauman Ullah Khan) */
-        LOG_NO_ARGS("\n################ (L862:mol2atom.c) ##################\n");
-        LOG_MULT_ARGS("Bond %d: atom1=%d, atom2=%d, type=%d, stereo=%d\n", i, a1, a2, bond_type, bond_stereo);
-        LOG_NO_ARGS("#######################################################\n");
-
+        else if (bond_stereo)
+        {
+            *err |= 16; /*  Ignored unrecognized Bond stereo */
+            TREAT_ERR( *err, 0, "Unrecognized bond stereo" );
+            continue;
+        }
     } /* eof copy bond info */
 
     *num_bonds = bonds;
@@ -847,7 +805,7 @@ void calculate_valences( MOL_FMT_DATA* mfdata,
                 continue;
             }
 
-            memset( num_bond_type, 0, sizeof( num_bond_type ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( num_bond_type, 0, sizeof( num_bond_type ) );
 
             /* valence = at[a1].chem_bonds_valence; */ /*  save atom valence if available */
                                                        /* 2006-08-31: fix for uncharged >N(IV)- in an aromatic ring */
@@ -879,7 +837,7 @@ void calculate_valences( MOL_FMT_DATA* mfdata,
                 at[a1].chem_bonds_valence += ( MIN_INPUT_BOND_TYPE + n1 ) * num_bond_type[n1];
             }
 
-            n2 = 0; /* djb-rwth: ignoring LLVM warning: value used */
+            n2 = 0;
             if (MIN_INPUT_BOND_TYPE <= BOND_TYPE_ALTERN &&
                  BOND_TYPE_ALTERN <= MAX_INPUT_BOND_TYPE &&
                  ( n2 = num_bond_type[BOND_TYPE_ALTERN - MIN_INPUT_BOND_TYPE] ))
@@ -1078,7 +1036,7 @@ void FreeInpAtomData( INP_ATOM_DATA *inp_at_data )
     {
         FreeInpAtom( &inp_at_data->at );
         FreeInpAtom( &inp_at_data->at_fixed_bonds );
-        memset( inp_at_data, 0, sizeof( *inp_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( inp_at_data, 0, sizeof( *inp_at_data ) );
     }
 
     return;
@@ -1114,7 +1072,7 @@ void FreeCompAtomData( COMP_ATOM_DATA *inp_at_data )
     {
         inchi_free( inp_at_data->nOffsetAtAndH );
     }
-    memset( inp_at_data, 0, sizeof( *inp_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inp_at_data, 0, sizeof( *inp_at_data ) );
 }
 
 
@@ -1131,7 +1089,7 @@ int CreateCompAtomData( COMP_ATOM_DATA *inp_at_data,
 
     if (( inp_at_data->at = CreateInpAtom( num_atoms ) ) &&
         ( num_components <= 1 || bIntermediateTaut ||
-         ( inp_at_data->nOffsetAtAndH = (AT_NUMB*) inchi_calloc( sizeof( inp_at_data->nOffsetAtAndH[0] ), 2 * ( (long long)num_components + 1 ) ) ) )) /* djb-rwth: cast operator added */
+         ( inp_at_data->nOffsetAtAndH = (AT_NUMB*) inchi_calloc( sizeof( inp_at_data->nOffsetAtAndH[0] ), 2 * ( num_components + 1 ) ) ) ))
     {
         inp_at_data->num_at = num_atoms;
         inp_at_data->num_components = ( num_components > 1 ) ? num_components : 0;
@@ -1174,7 +1132,7 @@ void FreeInfoAtomData( INF_ATOM_DATA *inf_at_data )
     {
         inchi_free( inf_at_data->pStereoFlags );
     }
-    memset( inf_at_data, 0, sizeof( *inf_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inf_at_data, 0, sizeof( *inf_at_data ) );
 
     return;
 }
@@ -1187,11 +1145,11 @@ int CreateInfoAtomData( INF_ATOM_DATA *inf_at_data,
 {
     FreeInfoAtomData( inf_at_data );
 
-    memset( inf_at_data, 0, sizeof( *inf_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( inf_at_data, 0, sizeof( *inf_at_data ) );
 
     if (( inf_at_data->at = CreateInfAtom( num_atoms ) ) &&
         ( num_components <= 1 ||
-         ( inf_at_data->pStereoFlags = (AT_NUMB *) inchi_calloc( (long long)num_components + 1, sizeof( inf_at_data->pStereoFlags[0] ) ) ) /* djb-rwth: cast operator added */
+         ( inf_at_data->pStereoFlags = (AT_NUMB *) inchi_calloc( num_components + 1, sizeof( inf_at_data->pStereoFlags[0] ) ) )
           )
          )
     {
@@ -1211,10 +1169,10 @@ int AllocateInfoAtomData( INF_ATOM_DATA *inf_at_data,
                           int num_atoms,
                           int num_components )
 {
-    if ((inf_at_data->at = CreateInfAtom( num_atoms ))) /* djb-rwth: addressing LLVM warning */
+    if (inf_at_data->at = CreateInfAtom( num_atoms ))
     {
         if (num_components > 1 &&
-             !( inf_at_data->pStereoFlags = (AT_NUMB *) inchi_calloc( (long long)num_components + 1, sizeof( inf_at_data->pStereoFlags[0] ) ) )) /* djb-rwth: cast operator added */
+             !( inf_at_data->pStereoFlags = (AT_NUMB *) inchi_calloc( num_components + 1, sizeof( inf_at_data->pStereoFlags[0] ) ) ))
         {
             FreeInfAtom( &inf_at_data->at );
             return 0;
@@ -1234,12 +1192,12 @@ int DuplicateInfoAtomData( INF_ATOM_DATA *inf_at_data_to,
 
     if (AllocateInfoAtomData( inf_at_data_to, inf_at_data_from->num_at, inf_at_data_from->num_components ))
     {
-        memcpy(inf_at_data_to->at, inf_at_data_from->at,
-            inf_at_data_from->num_at * sizeof(inf_at_data_to->at[0]));
+        memcpy( inf_at_data_to->at, inf_at_data_from->at,
+                inf_at_data_from->num_at * sizeof( inf_at_data_to->at[0] ) );
         if (inf_at_data_to->pStereoFlags && inf_at_data_from->pStereoFlags)
         {
-            memcpy(inf_at_data_to->pStereoFlags, inf_at_data_from->pStereoFlags,
-                ((long long)inf_at_data_from->num_components + 1) * sizeof(inf_at_data_to->pStereoFlags[0])); /* djb-rwth: cast operator added */
+            memcpy( inf_at_data_to->pStereoFlags, inf_at_data_from->pStereoFlags,
+                ( inf_at_data_from->num_components + 1 ) * sizeof( inf_at_data_to->pStereoFlags[0] ) );
         }
         return 1;
     }
@@ -1288,7 +1246,7 @@ void FreeOrigAtData( ORIG_ATOM_DATA *orig_at_data )
     /* v 1.05 */
     FreeExtOrigAtData( orig_at_data->polymer, orig_at_data->v3000 );
 
-    memset( orig_at_data, 0, sizeof( *orig_at_data ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( orig_at_data, 0, sizeof( *orig_at_data ) );
 
     return;
 }
@@ -1360,7 +1318,7 @@ void FreeExtOrigAtData( OAD_Polymer *pd, OAD_V3000 *v3k )
             inchi_free( v3k->lists_sterac );
             v3k->lists_sterac = NULL;
         }
-        memset( v3k, 0, sizeof( *v3k ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( v3k, 0, sizeof( *v3k ) );/**/
         inchi_free( v3k );
     }
 
@@ -1396,7 +1354,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
             TREAT_ERR( err, 9001, "Out of RAM" );
             goto exit_function;
         }
-        memset( ( *ppPolymer )->units, 0, sizeof( *( *ppPolymer )->units ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( ( *ppPolymer )->units, 0, sizeof( *( *ppPolymer )->units ) );
 
         ( *ppPolymer )->n = nsgroups;
         ( *ppPolymer )->is_in_reconn = 0;
@@ -1419,7 +1377,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
                 goto exit_function;
             }
 
-            memset( unitk, 0, sizeof( *unitk ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+            memset( unitk, 0, sizeof( *unitk ) );
             unitk->id = groupk->id;
             unitk->type = groupk->type;
             unitk->subtype = groupk->subtype;
@@ -1431,7 +1389,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
                 unitk->xbr1[q] = groupk->xbr1[q];
                 unitk->xbr2[q] = groupk->xbr2[q];
             }
-            strcpy(unitk->smt, groupk->smt);
+            strcpy( unitk->smt, groupk->smt );
             unitk->na = groupk->alist.used;
             unitk->alist = (int *) inchi_calloc( unitk->na, sizeof( int ) );
             if (!unitk->alist)
@@ -1446,7 +1404,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
             unitk->nb = groupk->blist.used;
             if (unitk->nb > 0)
             {
-                unitk->blist = (int *) inchi_calloc( 2 * (long long)unitk->nb, sizeof( int ) ); /* djb-rwth: cast operator added */
+                unitk->blist = (int *) inchi_calloc( 2 * unitk->nb, sizeof( int ) );
                 if (!unitk->blist )
                 {
                     TREAT_ERR( err, 9001, "Out of RAM" );
@@ -1493,7 +1451,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
             TREAT_ERR( err, 9001, "Out of RAM" );
             goto exit_function;
         }
-        memset( pv, 0, sizeof( *pv ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pv, 0, sizeof( *pv ) );
 
 
         pv->n_collections = mpv->n_collections;
@@ -1515,7 +1473,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
                 TREAT_ERR( err, 9001, "Out of RAM" );
                 goto exit_function;
             }
-            memcpy(pv->atom_index_orig, mpv->atom_index_orig, mfdata->ctab.n_atoms);
+            memcpy( pv->atom_index_orig, mpv->atom_index_orig, mfdata->ctab.n_atoms );
         }
         if (mpv->atom_index_fin)
         {
@@ -1525,7 +1483,7 @@ int SetExtOrigAtDataByMolfileExtInput( MOL_FMT_DATA* mfdata,
                 TREAT_ERR( err, 9001, "Out of RAM" );
                 goto exit_function;
             }
-            memcpy(pv->atom_index_fin, mpv->atom_index_fin, mfdata->ctab.n_atoms);
+            memcpy( pv->atom_index_fin, mpv->atom_index_fin, mfdata->ctab.n_atoms );
         }
         if (mpv->n_haptic_bonds && mpv->haptic_bonds)
         {

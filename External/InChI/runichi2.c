@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,24 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
 
 
 /*
@@ -77,7 +70,6 @@
 
 #include "ichirvrs.h"
 
-#include "bcf_s.h"
 
 /* Modified in-CRU stereoventer info */
 typedef struct tagModSCenterInfo
@@ -114,7 +106,7 @@ static void ModSCenter_DelFrom( ModSCenterInfo *scinfo, int idel );
 static int ModSCenter_IsChanged( ModSCenterInfo *scinfo, inp_ATOM *at );
 
 static int GetFrameShiftInfoFrom105PlusInChI( char *sinchi, int *alist, int max_crossing );
-/* static int IsPolymerRequiringEdits(ORIG_ATOM_DATA* orig_inp_data); */ /* djb-rwth: function definition not found*/
+static int IsPolymerRequiringEdits( ORIG_ATOM_DATA *orig_inp_data );
 static int analyze_CRU_folding( ORIG_ATOM_DATA *orig_at_data,
                                 int iunit,
                                 int n_all_bkb,
@@ -167,7 +159,7 @@ int GetOneStructure( INCHI_CLOCK    *ic,
         {
 
             INCHI_FPTR *new_fptr = (INCHI_FPTR *) 
-                                        inchi_calloc( (long long)struct_fptrs->len_fptr + ADD_LEN_STRUCT_FPTRS, sizeof( new_fptr[0] ) ); /* djb-rwth: cast operator added */
+                                        inchi_calloc( struct_fptrs->len_fptr + ADD_LEN_STRUCT_FPTRS, sizeof( new_fptr[0] ) );
 
             if (new_fptr)
             {
@@ -175,7 +167,7 @@ int GetOneStructure( INCHI_CLOCK    *ic,
                 {
                     if (struct_fptrs->len_fptr)
                     {
-                        memcpy(new_fptr, struct_fptrs->fptr, struct_fptrs->len_fptr * sizeof(new_fptr[0]));
+                        memcpy( new_fptr, struct_fptrs->fptr, struct_fptrs->len_fptr * sizeof( new_fptr[0] ) );
                     }
                     inchi_free( struct_fptrs->fptr );
                 }
@@ -427,7 +419,7 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
         InpAtomFlags |= FLAG_SET_INP_LARGE_MOLS;
     }
 
-    memset( sd, 0, sizeof( *sd ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset( sd, 0, sizeof( *sd ) );
 
     switch (ip->nInputType)
     {
@@ -453,11 +445,11 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                          ']' == q[0] &&
                          !q[1])
                     {
-                        sprintf(p + 1, "%d]", n + 1);
+                        sprintf( p + 1, "%d]", n + 1 );
                     }
                     else
                     {
-                        strcat(ip->pSdfValue, " [+1]");
+                        strcat( ip->pSdfValue, " [+1]" );
                     }
                 }
 
@@ -481,7 +473,7 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                                                       &InpAtomFlags,
                                                       &sd->nStructReadError,
                                                       sd->pStrErrStruct,
-                                                      ip->bNoWarnings); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                                      ip->bNoWarnings);
 
 
 
@@ -523,7 +515,7 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                 {
                     InpAtomFlags = FLAG_INP_AT_NONCHIRAL; /* forced by the user */
                 }
-                else if (( InpAtomFlags & FLAG_INP_AT_CHIRAL ) && ( InpAtomFlags & FLAG_INP_AT_NONCHIRAL )) /* djb-rwth: correcting &&->& for bitwise calculation? */
+                else if (( InpAtomFlags & FLAG_INP_AT_CHIRAL ) && ( InpAtomFlags && FLAG_INP_AT_NONCHIRAL ))
                 {
                     InpAtomFlags &= ~FLAG_INP_AT_NONCHIRAL;
                 }
@@ -605,11 +597,11 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                          ']' == q[0] &&
                          !q[1])
                     {
-                        sprintf(p + 1, "%d]", n + 1);
+                        sprintf( p + 1, "%d]", n + 1 );
                     }
                     else
                     {
-                        strcat(ip->pSdfValue, " [+1]");
+                        strcat( ip->pSdfValue, " [+1]" );
                     }
                 }
 
@@ -634,7 +626,7 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                                          (unsigned long *) &ip->lMolfileNumber,
                                          &InpAtomFlags,
                                          &sd->nStructReadError,
-                                         sd->pStrErrStruct ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                         sd->pStrErrStruct );
 
                 /*if ( !ip->bGetSdfileId || ip->lSdfId == 999999LU) ip->lSdfId = 0;*/
                 if (inp_file->type == INCHI_IOS_TYPE_FILE && inp_file->f)
@@ -657,7 +649,7 @@ int ReadTheStructure( struct tagINCHI_CLOCK *ic,
                 {
                     InpAtomFlags = FLAG_INP_AT_NONCHIRAL; /* forced by the user */
                 }
-                else if (( InpAtomFlags & FLAG_INP_AT_CHIRAL ) && ( InpAtomFlags & FLAG_INP_AT_NONCHIRAL )) /* djb-rwth: correcting &&->& for bitwise calculation? */
+                else if (( InpAtomFlags & FLAG_INP_AT_CHIRAL ) && ( InpAtomFlags && FLAG_INP_AT_NONCHIRAL ))
                 {
                     InpAtomFlags &= ~FLAG_INP_AT_NONCHIRAL;
                 }
@@ -769,8 +761,7 @@ int TreatErrorsInReadTheStructure( STRUCT_DATA      *sd,
         }
 
 #if ( bRELEASE_VERSION == 1 || EXTR_FLAGS == 0 )
-        /* djb-rwth: fixing oss-fuzz issue #27902 */
-        if (prb_file && prb_file->f && 0L <= sd->fPtrStart && sd->fPtrStart < sd->fPtrEnd && !ip->bSaveAllGoodStructsAsProblem)
+        if (prb_file->f && 0L <= sd->fPtrStart && sd->fPtrStart < sd->fPtrEnd && !ip->bSaveAllGoodStructsAsProblem)
         {
             MolfileSaveCopy( inp_file, sd->fPtrStart, sd->fPtrEnd, prb_file->f, *num_inp );
         }
@@ -1168,26 +1159,23 @@ int InchiToOrigAtom( INCHI_IOSTREAM *inp_molfile,
                 /*  switch at_new <--> orig_at_data->at; */
                 if (orig_at_data->num_inp_atoms)
                 {
-                    memcpy(orig_at_data->at,
-                        at_old,
-                        orig_at_data->num_inp_atoms * sizeof(orig_at_data->at[0]));
+                    memcpy( orig_at_data->at,
+                            at_old,
+                            orig_at_data->num_inp_atoms * sizeof( orig_at_data->at[0] ) );
                     /*  adjust numbering in the newly read structure */
                     for (i = 0; i < num_inp_atoms_new; i++)
                     {
-                        if (at_new) /* djb-rwth: fixing a NULL pointer dereference */
+                        for (j = 0; j < at_new[i].valence; j++)
                         {
-                            for (j = 0; j < at_new[i].valence; j++)
-                            {
-                                at_new[i].neighbor[j] += orig_at_data->num_inp_atoms;
-                            }
-                            at_new[i].orig_at_number += orig_at_data->num_inp_atoms; /* 12-19-2003 */
+                            at_new[i].neighbor[j] += orig_at_data->num_inp_atoms;
                         }
+                        at_new[i].orig_at_number += orig_at_data->num_inp_atoms; /* 12-19-2003 */
                     }
                     if (orig_at_data->szCoord && szCoordOld)
                     {
-                        memcpy(orig_at_data->szCoord,
-                            szCoordOld,
-                            orig_at_data->num_inp_atoms * sizeof(MOL_COORD));
+                        memcpy( orig_at_data->szCoord,
+                                szCoordOld,
+                                orig_at_data->num_inp_atoms * sizeof( MOL_COORD ) );
                     }
                 }
                 if (at_old)
@@ -1201,13 +1189,14 @@ int InchiToOrigAtom( INCHI_IOSTREAM *inp_molfile,
                     szCoordOld = NULL;
                 }
                 /*  copy newly read structure */
-                if (at_new) /* djb-rwth: fixing a NULL pointer dereference */
-                    memcpy(orig_at_data->at + orig_at_data->num_inp_atoms, at_new, num_inp_atoms_new * sizeof(orig_at_data->at[0]));
+                memcpy( orig_at_data->at + orig_at_data->num_inp_atoms,
+                        at_new,
+                        num_inp_atoms_new * sizeof( orig_at_data->at[0] ) );
                 if (orig_at_data->szCoord && szCoordNew)
                 {
-                    memcpy(orig_at_data->szCoord + orig_at_data->num_inp_atoms,
-                        szCoordNew,
-                        num_inp_atoms_new * sizeof(MOL_COORD));
+                    memcpy( orig_at_data->szCoord + orig_at_data->num_inp_atoms,
+                            szCoordNew,
+                            num_inp_atoms_new * sizeof( MOL_COORD ) );
                 }
                 /*  add other things */
                 orig_at_data->num_inp_atoms += num_inp_atoms_new;
@@ -1398,10 +1387,10 @@ int extract_orig_nums_from_auxinfo_string(char *saux, int *orig)
     p += 3;
     q = p;
 
-    while ((k = inchi_strtol(p, &q, 10))) /* djb-rwth: addressing LLVM warning */
+    while (k = inchi_strtol(p, &q, 10))
     {
         orig[cano_num++] = k/* - 1*/; /* 1-based numbers */
-        if ((c = UCINT *q) && c != '/') /* djb-rwth: addressing LLVM warning */
+        if (c = UCINT *q && c != '/')
         {
             p = q + 1;
         }
@@ -1434,8 +1423,8 @@ int extract_nonstereo_eq_classes_from_auxinfo_string( char *saux,
     /* Note that all atom and class numbers here are 1-based */
 
     *nclasses = 0;
-    memset(eclass, -1, ((long long)nat+1) * sizeof(int)); /* djb-rwth: cast operator added; memset_s C11/Annex K variant? */
-    memset(eclass_by_origs, -1, ((long long)nat+1) * sizeof(int)); /* djb-rwth: cast operator added; memset_s C11/Annex K variant? */
+    memset(eclass, -1, (nat+1) * sizeof(int));
+    memset(eclass_by_origs, -1, (nat+1) * sizeof(int));
 
     p = strstr(saux, "/E:");
     if (!p)
@@ -1446,7 +1435,7 @@ int extract_nonstereo_eq_classes_from_auxinfo_string( char *saux,
 
     p += 3;
     q = p;
-    while ((k = (AT_NUMB)inchi_strtol(p + 1, &q, 10))) /* djb-rwth: addressing LLVM warning */
+    while (k = (AT_NUMB)inchi_strtol(p + 1, &q, 10))
     {
         c = UCINT *q;
         if (c == '/')
@@ -1507,11 +1496,11 @@ int  POSEContext_Init(POSEContext *context,
     char *sz = NULL;
     int ret = _IS_OKAY, res = 0, i;
 
-    memset(context, 0, sizeof(*context)); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset(context, 0, sizeof(*context));
 
     if (!sd)
     {
-        memset(&context->sd, 0, sizeof(context->sd)); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset(&context->sd, 0, sizeof(context->sd));
     }
     else
     {
@@ -1520,7 +1509,7 @@ int  POSEContext_Init(POSEContext *context,
 
     if (!ip)
     {
-        memset(&context->ip, 0, sizeof(context->ip)); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset(&context->ip, 0, sizeof(context->ip));
     }
     else
     {
@@ -1554,13 +1543,13 @@ int  POSEContext_Init(POSEContext *context,
     /* assuming that NULL's are there. If not just raise an error.                  */
 
     context->pINChI2[0] = context->pINChI2[1] = NULL;
-    if (pINChI2 && (pINChI2[0] || pINChI2[1])) /* djb-rwth: condition corrected */
+    if (pINChI2 && (pINChI2[0] || pINChI2[0]))
     {
         ret = _IS_ERROR;
         goto exit_function;
     }
-    context->pINChI_Aux2[0] = context->pINChI_Aux2[1] = NULL; 
-    if (pINChI_Aux2 && (pINChI_Aux2[0] || pINChI_Aux2[1])) /* djb-rwth: condition corrected */
+    context->pINChI_Aux2[0] = context->pINChI_Aux2[1] = NULL;
+    if (pINChI_Aux2 && (pINChI_Aux2[0] || pINChI_Aux2[0]))
     {
         ret = _IS_ERROR;
         goto exit_function;
@@ -1584,7 +1573,7 @@ int  POSEContext_Init(POSEContext *context,
 
     if (orig_inp_data)
     {
-        memset(context->orig_inp_data, 0, sizeof(*context->orig_inp_data)); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset(context->orig_inp_data, 0, sizeof(*context->orig_inp_data));
         res = OrigAtData_Duplicate(context->orig_inp_data, orig_inp_data);
         if (res)
         {
@@ -1595,7 +1584,7 @@ int  POSEContext_Init(POSEContext *context,
 
     if (prep_inp_data)
     {
-        memset(context->prep_inp_data, 0, 2 * sizeof(*context->prep_inp_data)); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset(context->prep_inp_data, 0, 2 * sizeof(*context->prep_inp_data));
         res = OrigAtData_Duplicate(context->prep_inp_data, prep_inp_data);
         if (res)
         {
@@ -1822,15 +1811,6 @@ void OAD_StructureEdits_DebugPrint(OAD_StructureEdits *ed)
  Prepare CRU fold edits as suggested by the strings with preliminary
  generated interim (1.05+ flavoured) InChI and AuxInfo
 ****************************************************************************/
-/* djb-rwth: placed as global variables to avoid function buffer issues */
-int ec_opp[MAX_ATOMS],		/* equivalence classes for atoms, in order of 1-based orig nums	*/
-ec_cano_opp[MAX_ATOMS],	/* equivalence classes for atoms, in order of 1-based cano nums	*/
-at_stereo_mark_orig_opp[MAX_ATOMS],	/* stereo parities, in order of 1-based orig nums	*/
-xc_opp[MAX_ATOMS];      /* Extended (stereo-aware) atom classes.
-                            There are 'n_ec' non-stereo atom equivalence classes
-                            For ec[i]=k, keep value k for no-stereo atoms while use
-                            (k + neclasses)   for '-' parity
-                            (k + 2*neclasses) for '+' parity                            */
 int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
                                       char *sinchi_noedits, 
                                       char *saux_noedits,
@@ -1845,14 +1825,21 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
     int *orig = NULL;
     int nat = orig_at_data->num_inp_atoms;
     int neclasses = 0;		/* No of constitutional equivalence classses for the atoms		*/
+    int ec[MAX_ATOMS],		/* equivalence classes for atoms, in order of 1-based orig nums	*/
+        ec_cano[MAX_ATOMS],	/* equivalence classes for atoms, in order of 1-based cano nums	*/
+        at_stereo_mark_orig[MAX_ATOMS];	/* stereo parities, in order of 1-based orig nums	*/
     int nxclasses = 0;      /* No of extended (stereo-aware) atom classses == 3*neclasses   */
-    
+    int xc[MAX_ATOMS];      /* Extended (stereo-aware) atom classes.
+                                There are 'n_ec' non-stereo atom equivalence classes
+                                For ec[i]=k, keep value k for no-stereo atoms while use
+                                (k + neclasses)   for '-' parity
+                                (k + 2*neclasses) for '+' parity                            */
     int *all_bkb_orig = NULL, n_all_bkb_orig = 0;
     OAD_Polymer *p = orig_at_data->polymer;
     int nu = orig_at_data->polymer->n;
-
+         
     /* Extract cano_nums-->orig_nums mapping from AuxInfo AuxInfo Main Layer */
-    orig = (int*)inchi_calloc((long long)nat + 1, sizeof(int)); /* djb-rwth: cast operator added */
+    orig = (int *)inchi_calloc(nat + 1, sizeof(int));
     if (!orig)
     {
         ret = _IS_ERROR;
@@ -1865,20 +1852,20 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
         goto exit_function;
     }
     /* Extract non-stereo eq. classes data from AuxInfo */
-    ret = extract_nonstereo_eq_classes_from_auxinfo_string(saux, nat, orig, &neclasses, ec_cano_opp, ec_opp);
+    ret = extract_nonstereo_eq_classes_from_auxinfo_string(saux, nat, orig, &neclasses, ec_cano, ec);
     if (ret != _IS_OKAY && ret != _IS_WARNING)
     {
         ret = _IS_ERROR;
         goto exit_function;
     }
-    if (neclasses == 0)
+    if (neclasses==0)
     {
         goto exit_function;
     }
     /* Extract stereocenter data from InChI */
-
+    
     /*ret = extract_stereo_info_from_inchi_string(sinchi, nat, orig, at_stereo_mark_orig);*/
-    ret = extract_stereo_info_from_inchi_string(sinchi_noedits, nat, orig, at_stereo_mark_orig_opp);
+    ret = extract_stereo_info_from_inchi_string(sinchi_noedits, nat, orig, at_stereo_mark_orig);
     if (ret != _IS_OKAY && ret != _IS_WARNING)
     {
         ret = _IS_ERROR;
@@ -1888,29 +1875,29 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
     nxclasses = neclasses * 3;
     for (i = 1; i <= nat; i++)  /* orig # */
     {
-        int atom_class = ec_opp[i];
+        int atom_class = ec[i];
 
-        if (at_stereo_mark_orig_opp[i] == INCHI_PARITY_ODD)
+        if (at_stereo_mark_orig[i] == INCHI_PARITY_ODD)
         {
             atom_class += neclasses;
         }
-        else if (at_stereo_mark_orig_opp[i] == INCHI_PARITY_EVEN)
+        else if (at_stereo_mark_orig[i] == INCHI_PARITY_EVEN)
         {
             atom_class += 2 * neclasses;
         }
-        xc_opp[i] = atom_class;
+        xc[i] = atom_class;
     }
     /* Extract all backbone bonds, in all units, from InChI (z layer).
-        NB: we assume that units are not 'inter-crossing' so
+        NB: we assume that units are not 'inter-crossing' so 
         any particular bkbond belongs to some unique CRU.
     */
-    all_bkb_orig = (int*)inchi_calloc(2 * ((long long)orig_at_data->num_inp_bonds + 1), sizeof(int)); /* djb-rwth: cast operator added */
+    all_bkb_orig = (int *)inchi_calloc(2 * (orig_at_data->num_inp_bonds + 1), sizeof(int));
     if (!all_bkb_orig)
     {
         ret = _IS_ERROR;
         goto exit_function;
     }
-    memset(all_bkb_orig, 0, ((long long)orig_at_data->num_inp_bonds + 1) * sizeof(int)); /* djb-rwth: cast operator added; memset_s C11/Annex K variant? */
+    memset(all_bkb_orig, 0, (orig_at_data->num_inp_bonds + 1) * sizeof(int));
     ret = extract_all_backbone_bonds_from_inchi_string(sinchi, &n_all_bkb_orig, orig, all_bkb_orig);
     if (ret != _IS_OKAY && ret != _IS_WARNING)
     {
@@ -1918,7 +1905,7 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
         goto exit_function;
     }
     /* just for case, remove those bkbonds which are not single (alternate may be here) */
-    for (k = n_all_bkb_orig - 1; k >= 0; k--)
+    for (k = n_all_bkb_orig-1; k >=0 ; k--)
     {
         int orig1 = all_bkb_orig[2 * k];
         int orig2 = all_bkb_orig[2 * k + 1];
@@ -1929,8 +1916,8 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
             int kk;
             for (kk = k; kk < n_all_bkb_orig; kk++)
             {
-                all_bkb_orig[2 * kk] = all_bkb_orig[2 * (kk + 1)];
-                all_bkb_orig[2 * kk + 1] = all_bkb_orig[2 * (kk + 1) + 1];
+                all_bkb_orig[2*kk]	= all_bkb_orig[2*(kk+1)];
+                all_bkb_orig[2*kk+1]= all_bkb_orig[2*(kk + 1) + 1];
             }
             all_bkb_orig[2 * n_all_bkb_orig] = 0;
             all_bkb_orig[2 * n_all_bkb_orig + 1] = 0;
@@ -1951,8 +1938,8 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
     /* For each unit analyze a possibility of folding (i.e., removal of excess in-CRU repeats) */
     for (j = 0; j < nu; j++)
     {
-        OAD_PolymerUnit* u = p->units[j];
-
+        OAD_PolymerUnit *u = p->units[j];
+        
         if (u->na < 2)
         {
             goto nextj;
@@ -1971,17 +1958,17 @@ int  OAD_Polymer_PrepareFoldCRUEdits( ORIG_ATOM_DATA *orig_at_data,
             goto nextj;
         }
 
-        err = analyze_CRU_folding(orig_at_data, j,
-            n_all_bkb_orig, all_bkb_orig,
-            nxclasses, xc_opp,
-            ed);
+        err = analyze_CRU_folding(orig_at_data, j, 
+                                  n_all_bkb_orig, all_bkb_orig, 
+                                  nxclasses, xc, 
+                                  ed);
         if (err)
         {
-            ret = inchi_max(_IS_WARNING, err);
+            ret = inchi_max( _IS_WARNING, err);
             goto nextj;
         }
 
-    nextj:;
+nextj:;
     }
 
 exit_function:
@@ -2066,14 +2053,14 @@ void DiylFrag_MakeSignature(DiylFrag *pfrag,
                             int *xc,            /* xclasses (molecule-wide)         */
                             int *cnt )          /* temp storage: counts of xclasses */
 {
-    int i, k, nxc_frag; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    int i, k, nxc_frag;
     
     inchi_strbuf_printf(&pfrag->sig, "%-d,%-d,%-d{", pfrag->na, xc[pfrag->end1], xc[pfrag->end2]);
     for (i = 0; i < pfrag->na; i++)
     {
         pfrag->xclist[i] = xc[pfrag->alist[i]];
     }  
-    nxc_frag = count_colors_in_sequence(pfrag->xclist, pfrag->na, nxc+1, cnt); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    nxc_frag = count_colors_in_sequence(pfrag->xclist, pfrag->na, nxc+1, cnt);
     for (k = 0; k < nxc; k++)
     {
         if (cnt[k] > 0)
@@ -2151,7 +2138,7 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
     int n_cuts = 0, n_frags = 0; 
     int n_frags_in_repeating_subunit = 0;
     int n_fold, n_frag_classes = 0;
-    int subunit_last_atom, next_subunit_first_atom = 0;
+    int subunit_last_atom, next_subunit_first_atom;
     int *cut = NULL;        /* [ bkbond1at1, bkbond1at2,  bkbond2at1,bkbond2at2, ... ] 
                                these are (atoms of) backbone bonds which are non-cyclic and non-multiple ('breakable')      */
     DiylFrag **frag=NULL;   /* frag is divalent fragment surrounded by 'cut' bonds, so it may be a repeating CRU sub-unit   */
@@ -2165,7 +2152,7 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
 
 
     /* Reserve space for frag-specific xclass counts */
-    frag_xc_counts = (int *)inchi_calloc((long long)nxclasses + 1, sizeof(int)); /* djb-rwth: cast operator added */
+    frag_xc_counts = (int *)inchi_calloc(nxclasses + 1, sizeof(int));
     if (!frag_xc_counts)
     {
         ret = _IS_ERROR;
@@ -2174,7 +2161,7 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
 
 
     /* Prepare list of cuts - backbone lying on the way from cap1 to cap2 */
-    cut = (int *)inchi_calloc(2 * (long long)n_all_bkb, sizeof(int)); /* djb-rwth: cast operator added */
+    cut = (int *)inchi_calloc(2 * n_all_bkb, sizeof(int));
     if (!cut)
     {
         ret = _IS_ERROR;
@@ -2211,7 +2198,7 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
         {
             if (bIsSameBond(a1, a2, all_bkb[2 * j], all_bkb[2 * j + 1]))
             {
-                cut[2 * n_cuts] = a1; /* djb-rwth: buffer overrun implicitly avoided in loop condition */
+                cut[2 * n_cuts] = a1;
                 cut[2 * n_cuts + 1] = a2;
                 n_cuts++;
                 break;
@@ -2332,10 +2319,9 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
 
     ITRACE_("\n* Found %-d times foldable unit of %-d fragments\n* First repeating sub-unit formed by %-d-fragment backbone : ",
             n_fold, n_frags, n_frags_in_repeating_subunit);
-    
-    for (k = 0; k < n_frags_in_repeating_subunit && frag[k]; k++) /* djb-rwth: fixing a NULL pointer dereference */
+    for (k = 0; k < n_frags_in_repeating_subunit; k++)
     {
-        if (frag[k]->end1 == frag[k]->end2)
+        if (frag[k]->end1==frag[k]->end2)
         {
             ITRACE_("-{%-d}-", frag[k]->end1, frag[k]->end2);
         }
@@ -2344,7 +2330,6 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
             ITRACE_("-{%-d...%-d}-", frag[k]->end1, frag[k]->end2);
         }
     }
-
     ITRACE_("\n");
     ITRACE_("* Backbone pattern for %-d fragments that may be removed :  ", n_frags - n_frags_in_repeating_subunit);
     for (k = n_frags_in_repeating_subunit; k < n_frags; k++)
@@ -2372,44 +2357,35 @@ int analyze_CRU_folding(ORIG_ATOM_DATA *orig_at_data,
     /* Break bond from the subunit to the next fragment and replace an original 
        bond to "right" cap with bond from the subunit "right" atom  
     */
-
-    /*djb-rwth: the whole block had to be rewritten to fix NULL pointer dereference */
-    if (frag[n_frags_in_repeating_subunit] && frag[n_frags_in_repeating_subunit - 1]) /* djb-rwth: fixing a NULL pointer dereference */ /* djb-rwth: ui_rr */
-    {
-        subunit_last_atom        = frag[n_frags_in_repeating_subunit - 1]->end2;
-        next_subunit_first_atom  = frag[n_frags_in_repeating_subunit]->end1;
-
-        fail = 0;
-        fail += IntArray_Append(ed->del_bond, subunit_last_atom);
-        fail += IntArray_Append(ed->del_bond, next_subunit_first_atom);
-
-        fail += IntArray_Append(ed->mod_bond, u->end_atom2);
-        fail += IntArray_Append(ed->mod_bond, u->cap2);
-        fail += IntArray_Append(ed->mod_bond, subunit_last_atom);
-        fail += IntArray_Append(ed->mod_bond, u->cap2);
-
-        if (fail)
-        {
-            ret = _IS_ERROR;
-            goto exit_function;
-        }
-    }
+    subunit_last_atom        = frag[n_frags_in_repeating_subunit - 1]->end2;
+    next_subunit_first_atom  = frag[n_frags_in_repeating_subunit]->end1;
             
+    fail = 0;
+    fail += IntArray_Append(ed->del_bond, subunit_last_atom);
+    fail += IntArray_Append(ed->del_bond, next_subunit_first_atom);
+
+    fail += IntArray_Append(ed->mod_bond, u->end_atom2);
+    fail += IntArray_Append(ed->mod_bond, u->cap2);
+    fail += IntArray_Append(ed->mod_bond, subunit_last_atom);
+    fail += IntArray_Append(ed->mod_bond, u->cap2);
+
+    if (fail)
+    {
+        ret = _IS_ERROR;
+        goto exit_function;
+    }
     /*	Now collect all backbone atoms to be deleted (we will then delete the
     associated side chains also, but no need to reveal them at the moment)	*/
 
     for (k = n_frags_in_repeating_subunit; k < n_frags; k++)
     {
-        if (frag[k]) /* djb-rwth: fixing a NULL pointer dereference */
+        for (m = 0; m < frag[k]->na; m++)
         {
-            for (m = 0; m < frag[k]->na; m++)
+            fail = IntArray_AppendIfAbsent(ed->del_atom, frag[k]->alist[m]);
+            if (fail)
             {
-                fail = IntArray_AppendIfAbsent(ed->del_atom, frag[k]->alist[m]);
-                if (fail)
-                {
-                    ret = _IS_ERROR;
-                    goto exit_function;
-                }
+                ret = _IS_ERROR;
+                goto exit_function;
             }
         }
     }
@@ -2458,7 +2434,7 @@ exit_function:
 int count_colors_in_sequence( int *color, int n, int maxcol, int *counts)
 {
     int i, ncol=0;
-    memset(counts, 0, maxcol * sizeof(int)); /* djb-rwth: memset_s C11/Annex K variant? */
+    memset(counts, 0, maxcol * sizeof(int)); 
     for (i = 0; i<n; i++) 
     {
         int colori = color[i];
@@ -2530,7 +2506,7 @@ int  OAD_Polymer_PrepareFrameShiftEdits( ORIG_ATOM_DATA *orig_at_data,
     int nat = orig_at_data->num_inp_atoms;
     
     /* Extract cano_nums-->orig_nums mapping for InChI AuxInfo Main Layer */
-    orig = (int *)inchi_calloc((long long)nat + 1, sizeof(int)); /* djb-rwth: cast operator added */
+    orig = (int *)inchi_calloc(nat + 1, sizeof(int));
     if (!orig)
     {
         ret = _IS_ERROR;
@@ -2552,7 +2528,7 @@ int  OAD_Polymer_PrepareFrameShiftEdits( ORIG_ATOM_DATA *orig_at_data,
     
 
     /* Parse InChI and extract, for each 'bistar' CRU, the senior bkbond (to frame-shift brackets to its ends) */
-    frame_shift_info = (int *)inchi_calloc(3 * ((long long)nu + 1), sizeof(int)); /* djb-rwth: cast operator added */
+    frame_shift_info = (int *)inchi_calloc(3 * (nu + 1), sizeof(int));
     if (!frame_shift_info)
     {
         ret = _IS_ERROR;
@@ -2655,7 +2631,7 @@ int  OAD_Polymer_PrepareFrameShiftEdits( ORIG_ATOM_DATA *orig_at_data,
             ModSCenter_Init(&scinfo[2], orig_at_data->at, end1 - 1);
             ModSCenter_Init(&scinfo[3], orig_at_data->at, end2 - 1);
 
-            /* djb-rwth: removing redundant code */
+            fail = 0;
             if (!bIsSameBond(old_end1, cap1, end1, cap1))
             {
                 /* Modify bond: (old_end1-cap1) --> (end1-cap1) */
@@ -2706,7 +2682,6 @@ int  OAD_Polymer_PrepareFrameShiftEdits( ORIG_ATOM_DATA *orig_at_data,
 
         }
 
-        /* djb-rwth: n_flip and ModSCenter_IsChanged function completely redundant? -- discussion required */
         if (orig_at_data->num_dimensions)
         {
             /* Check if we must flip stereocenter configuration */
@@ -2827,11 +2802,10 @@ void ModSCenter_DelFrom(ModSCenterInfo *scinfo, int idel)
 /****************************************************************************
  Check if stereo configuration of modifiable stereo center changed
 ****************************************************************************/
-/* djb-rwth: n_flip and ModSCenter_IsChanged function completely redundant? -- discussion required */
 int ModSCenter_IsChanged(ModSCenterInfo *scinfo, inp_ATOM *at)
 {
     int i, ns, base1=-1, base2=-1, new_base2=-1, n_changed=0;
-    double a[3], b[3], new_b[3], z[3], new_z[3], zz; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    double a[3], b[3], new_b[3], z[3], new_z[3], zz;
 
     if (scinfo->n_stereo < 1)
     {
@@ -2888,7 +2862,7 @@ int ModSCenter_IsChanged(ModSCenterInfo *scinfo, inp_ATOM *at)
 
     cross_prod3(a, b, z);
     cross_prod3(a, new_b, new_z);
-    zz = dot_prod3(z, new_z); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    zz = dot_prod3(z, new_z);
 
     return -1;
 }

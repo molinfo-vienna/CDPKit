@@ -1,32 +1,10 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.07
- * April 30, 2024
+ * Software version 1.06
+ * December 15, 2020
  *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
-*
-* The InChI library and programs are free software developed under the
+ * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
  * Originally developed at NIST.
  * Modifications and additions by IUPAC and the InChI Trust.
@@ -34,9 +12,25 @@
  * (either contractor or volunteer) which are listed in the file
  * 'External-contributors' included in this distribution.
  *
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+ * or any later version.
+ *
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+ *
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
  * info@inchi-trust.org
  *
-*/
+ */
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -51,7 +45,7 @@
 #include "ichister.h"
 #include "ichirvrs.h"
 
-#include "bcf_s.h"
+
 
 /****************************************************************************/
 void CopyAt2St( inp_ATOM *at, inp_ATOM_STEREO * st, int num_atoms )
@@ -61,15 +55,15 @@ void CopyAt2St( inp_ATOM *at, inp_ATOM_STEREO * st, int num_atoms )
     {
         if (at[i].p_parity)
         {
-            memcpy(st[i].p_orig_at_num, at[i].p_orig_at_num, sizeof(st[0].p_orig_at_num));
+            memcpy( st[i].p_orig_at_num, at[i].p_orig_at_num, sizeof( st[0].p_orig_at_num ) );
             st[i].p_parity = at[i].p_parity;
         }
         if (at[i].sb_parity[0])
         {
-            memcpy(st[i].sb_ord, at[i].sb_ord, sizeof(st[0].sb_ord));
-            memcpy(st[i].sb_parity, at[i].sb_parity, sizeof(st[0].sb_parity));
-            memcpy(st[i].sn_ord, at[i].sn_ord, sizeof(st[0].sn_ord));
-            memcpy(st[i].sn_orig_at_num, at[i].sn_orig_at_num, sizeof(st[0].sn_orig_at_num));
+            memcpy( st[i].sb_ord, at[i].sb_ord, sizeof( st[0].sb_ord ) );
+            memcpy( st[i].sb_parity, at[i].sb_parity, sizeof( st[0].sb_parity ) );
+            memcpy( st[i].sn_ord, at[i].sn_ord, sizeof( st[0].sn_ord ) );
+            memcpy( st[i].sn_orig_at_num, at[i].sn_orig_at_num, sizeof( st[0].sn_orig_at_num ) );
         }
     }
 }
@@ -88,15 +82,15 @@ void CopySt2At( inp_ATOM *at, inp_ATOM_STEREO * st, int num_atoms )
     {
         if (st[i].p_parity)
         {
-            memcpy(at[i].p_orig_at_num, st[i].p_orig_at_num, sizeof(at[0].p_orig_at_num));
+            memcpy( at[i].p_orig_at_num, st[i].p_orig_at_num, sizeof( at[0].p_orig_at_num ) );
             at[i].p_parity = st[i].p_parity;
         }
         if (st[i].sb_parity[0])
         {
-            memcpy(at[i].sb_ord, st[i].sb_ord, sizeof(st[0].sb_ord));
-            memcpy(at[i].sb_parity, st[i].sb_parity, sizeof(at[0].sb_parity));
-            memcpy(at[i].sn_ord, st[i].sn_ord, sizeof(at[0].sn_ord));
-            memcpy(at[i].sn_orig_at_num, st[i].sn_orig_at_num, sizeof(at[0].sn_orig_at_num));
+            memcpy( at[i].sb_ord, st[i].sb_ord, sizeof( st[0].sb_ord ) );
+            memcpy( at[i].sb_parity, st[i].sb_parity, sizeof( at[0].sb_parity ) );
+            memcpy( at[i].sn_ord, st[i].sn_ord, sizeof( at[0].sn_ord ) );
+            memcpy( at[i].sn_orig_at_num, st[i].sn_orig_at_num, sizeof( at[0].sn_orig_at_num ) );
         }
     }
 }
@@ -109,10 +103,11 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                                      INChI *pInChI,
                                      INChI *pInChIMobH )
 {
-    inp_ATOM_STEREO *st = NULL;
+    inp_ATOM     *at = NULL;
+    inp_ATOM_STEREO * st = NULL;
     int           num_atoms, i, jv, jn, n_vertex, n_neigh, num_H, parity;
     int           nNumDeletedH = 0, iDeletedH = 0, idelH1, idelH2, ret = 0, len;
-    int           num_stereo_bonds2, num_stereo_centers2; /* djb-rwth: removing redundant variables */
+    int           num_stereo_bonds, num_stereo_centers, num_stereo_bonds2, num_stereo_centers2;
     INChI_Stereo *pStereo = NULL, *pStereo2 = NULL;
     AT_NUMB       nCumulene[MAX_CUMULENE_LEN + 2];
 
@@ -124,14 +119,14 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
 
     INCHI_HEAPCHK
 
-        /* atoms */
-    inp_ATOM* at = (inp_ATOM*)inchi_calloc(num_atoms, sizeof(pStruct->at[0]));
+    /* atoms */
+        pStruct->at = at = (inp_ATOM *) inchi_calloc( num_atoms, sizeof( pStruct->at[0] ) );
     if (!at)
     {
         ret = RI_ERR_ALLOC;
         goto exit_function;
     }
-    pStruct->at = at;
+
     pStruct->num_atoms = num_atoms;
 
     /* charge */
@@ -199,14 +194,10 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
         for (i = 0; i < pInChI->nNumberOfIsotopicAtoms; i++)
         {
             n_vertex = pInChI->IsotopicAtom[i].nAtomNumber - 1;
-            /* djb-rwth: fixing oss-fuzz issues #68742, #30956 */
-            if (n_vertex < num_atoms)
-            {
-                at[n_vertex].iso_atw_diff = (char)pInChI->IsotopicAtom[i].nIsoDifference;
-                at[n_vertex].num_iso_H[0] = (char)pInChI->IsotopicAtom[i].nNum_H;
-                at[n_vertex].num_iso_H[1] = (char)pInChI->IsotopicAtom[i].nNum_D;
-                at[n_vertex].num_iso_H[2] = (char)pInChI->IsotopicAtom[i].nNum_T;
-            }
+            at[n_vertex].iso_atw_diff = (char) pInChI->IsotopicAtom[i].nIsoDifference;
+            at[n_vertex].num_iso_H[0] = (char) pInChI->IsotopicAtom[i].nNum_H;
+            at[n_vertex].num_iso_H[1] = (char) pInChI->IsotopicAtom[i].nNum_D;
+            at[n_vertex].num_iso_H[2] = (char) pInChI->IsotopicAtom[i].nNum_T;
         }
         pStruct->bIsotopic |= 1;
     }
@@ -214,7 +205,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
     INCHI_HEAPCHK
 
     /* tautomeric groups */
-    if ((ret = GetTgroupInfoFromInChI( &pStruct->ti, at, NULL, pInChI ))) /* djb-rwth: addressing LLVM warning */
+    if (ret = GetTgroupInfoFromInChI( &pStruct->ti, at, NULL, pInChI ))
     {
         goto exit_function;
     }
@@ -267,8 +258,8 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
 
     INCHI_HEAPCHK
 
-    num_stereo_bonds2 = 0; /* djb-rwth: removing redundant code */
-    num_stereo_centers2 = 0; /* djb-rwth: removing redundant code */
+    num_stereo_bonds = num_stereo_bonds2 = 0;
+    num_stereo_centers = num_stereo_centers2 = 0;
     /* -- have already been done in the initialization --
        iDeletedH = 0;
        nNumDeletedH = 0;
@@ -309,15 +300,13 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 i2++;
             }
 
-            jv = at[n_vertex].neighbor[0]; /* djb-rwth: avoiding unsequenced modification and access */
-            jn = at[n_vertex].neighbor[1]; /* djb-rwth: avoiding unsequenced modification and access */
             /* find whether it is an allene */
             if (at[n_vertex].valence == 2 &&
                  at[n_vertex].num_H == 0 &&
                  bCanAtomBeMiddleAllene( at[n_vertex].elname, 0, 0 ) &&
-                 at[jv].valence + at[jv].num_H == 3 &&
+                 at[jv = at[n_vertex].neighbor[0]].valence + at[jv].num_H == 3 &&
                  bCanAtomBeTerminalAllene( at[jv].elname, 0, 0 ) &&
-                 at[jn].valence + at[jn].num_H == 3 &&
+                 at[jn = at[n_vertex].neighbor[1]].valence + at[jn].num_H == 3 &&
                  bCanAtomBeTerminalAllene( at[jn].elname, 0, 0 ))
             {
                 /* allene */
@@ -354,7 +343,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
             {
                 diff = (int) pStereo->nBondAtom1[i] - (int) pStereo2->nBondAtom1[i2];
                 diff2 = (int) pStereo->nBondAtom2[i] - (int) pStereo2->nBondAtom2[i2];
-                if (diff < 0 || (diff == 0 && diff2 <= 0)) /* djb-rwth: addressing LLVM warning */
+                if (diff < 0 || diff == 0 && diff2 <= 0)
                 {
                     n_vertex = pStereo->nBondAtom1[i] - 1;
                     n_neigh = pStereo->nBondAtom2[i] - 1;
@@ -383,8 +372,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 i2++;
             }
 
-            /* djb-rwth: fixing oss-fuzz issue #67650 */
-            if ((n_vertex < num_atoms) && !is_in_the_list( at[n_vertex].neighbor,
+            if (!is_in_the_list( at[n_vertex].neighbor,
                 (AT_NUMB) n_neigh, at[n_vertex].valence ))
             {
                 /* must be a cumulene */
@@ -396,7 +384,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 }
             }
 
-            if ((n_vertex < num_atoms) && !at[n_vertex].at_type && at[n_vertex].num_H)
+            if (!at[n_vertex].at_type && at[n_vertex].num_H)
             {
                 nNumDeletedH += at[n_vertex].num_H;
                 at[n_vertex].at_type++;  /* H should be added as an explicit H */
@@ -427,17 +415,12 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 goto exit_function;
             }
             pStruct->num_deleted_H = nNumDeletedH;
-#if USE_BCF
-            memcpy_s( at2, sizeof(at2[0])*num_atoms, at, num_atoms * sizeof(at2[0])); /* djb-rwth: function replaced with its safe C11 variant */
-#else
-            memcpy(at2, at, num_atoms * sizeof(at2[0]));
-#endif
+            memcpy( at2, at, num_atoms * sizeof( at2[0] ) );
             inchi_free( at );
             pStruct->at = at = at2;
             /* fill out deleted H atom info */
             for (i = num_atoms; i < num_atoms + nNumDeletedH; i++)
             {
-                /* djb-rwth: ui_rr */
                 strcpy( at[i].elname, "H" );
                 at[i].el_number = EL_NUMBER_H;
                 at[i].orig_at_number = iAtNoOffset + i + 1;
@@ -549,7 +532,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 {
                     goto exit_function;
                 }
-                /* djb-rwth: removing redundant code */
+                num_stereo_centers++;
             }
 
             if (ret < 0)
@@ -712,7 +695,7 @@ int RestoreAtomConnectionsSetStereo( StrFromINChI *pStruct,
                 {
                     goto exit_function;
                 }
-                /* djb-rwth: removing redundant code */
+                num_stereo_centers++;
             }
             if (ret < 0)
             {
@@ -830,7 +813,7 @@ found:
     {
         /* if bond_type = BOND_TYPE_DOUBLE then increments at->cham_bonds_valence: */
         /* at->cham_bonds_valence += BOND_TYPE_DOUBLE-BOND_TYPE_SINGLE */
-        if (0 > ( ret = set_bond_type( at, (AT_NUMB) nCumulene[j - 1], (AT_NUMB) nCumulene[j], bond_type ) )) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+        if (0 > ( ret = set_bond_type( at, (AT_NUMB) nCumulene[j - 1], (AT_NUMB) nCumulene[j], bond_type ) ))
         {
             return RI_ERR_PROGR; /* failed */
         }
@@ -981,7 +964,7 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
                    ALL_TC_GROUPS *pTCGroups,
                    int bAllowZeroBondOrder )
 {
-    int i, j, charge, ret = 0, v1, nMinorder; /* djb-rwth: removing redundant variables */
+    int i, j, atom_charge, left_charge, charge, ret = 0, v1, nMinorder;
     int          num_at = pStruct->num_atoms;
     inp_ATOM *at = pStruct->at;
     ICHICONST SRM *pSrm = pStruct->pSrm;
@@ -989,7 +972,7 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
     BNS_EDGE    *pe;
     int          chem_bonds_valence, bond_order;
 
-    /* djb-rwth: removing redundant code */
+    atom_charge = left_charge = 0;
     for (i = 0; i < num_at; i++)
     {
         pv = pBNS->vert + i;
@@ -1013,19 +996,19 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
         if (pVA[i].nCMinusGroupEdge)
         {
             pe = pBNS->edge + pVA[i].nCMinusGroupEdge - 1;
-            if ((charge = pe->flow)) /* djb-rwth: addressing LLVM warning */
+            if (charge = pe->flow)
             {
                 at[i].charge -= charge;
-                /* djb-rwth: removing redundant code */
+                atom_charge -= charge;
             }
         }
         if (pVA[i].nCPlusGroupEdge)
         {
             pe = pBNS->edge + pVA[i].nCPlusGroupEdge - 1;
-            if ((charge = pe->cap - pe->flow)) /* djb-rwth: addressing LLVM warning */
+            if (charge = pe->cap - pe->flow)
             {
                 at[i].charge += charge;
-                /* djb-rwth: removing redundant code */
+                atom_charge += charge;
             }
         }
         if (pv->st_edge.cap > pv->st_edge.flow)
@@ -1034,7 +1017,22 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
         }
     }
     /* find charge excess */
-    /* djb-rwth: removing redundant variables/code */
+    for (i = num_at; i < pBNS->num_vertices; i++)
+    {
+        pv = pBNS->vert + i;
+        if (charge = pv->st_edge.cap - pv->st_edge.flow)
+        {
+            if (IS_BNS_VT_C_OR_CSUPER_GR( pv->type ))
+            {
+                left_charge -= charge;
+            }
+            else
+                if (IS_BNS_VT_YVCONNECTOR( pv->type ))
+                {
+                    left_charge += charge;
+                }
+        }
+    }
     /* tautomeric H and (-) */
     for (i = 0; i < pBNS->num_t_groups; i++)
     {
@@ -1090,7 +1088,7 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
                     {
                         at[v1].num_H += num_at_add;
                         num_H -= num_at_add;
-                        /* djb-rwth: removing redundant code */
+                        num_at_add = 0;
                     }
                 }
                 at[v1].endpoint = i + 1;
@@ -1134,7 +1132,7 @@ int CopyBnsToAtom( StrFromINChI *pStruct,
                     {
                         at[v1].num_H += num_at_add;
                         num_H -= num_at_add;
-                        /* djb-rwth: removing redundant code */
+                        num_at_add = 0;
                     }
                 }
                 at[v1].endpoint = i + 1;
@@ -1715,7 +1713,7 @@ int set_cumulene_0D_parity( inp_ATOM *at,
     sn_orig_at_num1[m1] = at[idelH1].orig_at_number;
     if (idelH1 < num_at)
     {
-        if ((p1 = is_in_the_list( at[i1].neighbor, (AT_NUMB) idelH1, at[i1].valence ))) /* djb-rwth: addressing LLVM warning */
+        if (p1 = is_in_the_list( at[i1].neighbor, (AT_NUMB) idelH1, at[i1].valence ))
         {
             sn_ord1[m1] = (int) ( p1 - at[i1].neighbor );
         }
@@ -1732,7 +1730,7 @@ int set_cumulene_0D_parity( inp_ATOM *at,
     sn_orig_at_num2[m2] = at[idelH2].orig_at_number;
     if (idelH2 < num_at)
     {
-        if ((p2 = is_in_the_list( at[i2].neighbor, (AT_NUMB) idelH2, at[i2].valence ))) /* djb-rwth: addressing LLVM warning */
+        if (p2 = is_in_the_list( at[i2].neighbor, (AT_NUMB) idelH2, at[i2].valence ))
         {
             sn_ord2[m2] = (int) ( p2 - at[i2].neighbor );
         }
@@ -1947,7 +1945,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
         {
             pBNS->vert[i].st_edge.cap += pnDelta[i];
         }
-        /* djb-rwth: removing redundant code */
+        bAtomRadRemoved = 0;
     }
     pBNS->edge_forbidden_mask &= ~forbidden_mask;
 
@@ -1963,7 +1961,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
         extra_charge = 0;
         for (i = pBNS->num_atoms, pv = pBNS->vert + i; i < pBNS->num_vertices; i++, pv++)
         {
-            if ((delta = pv->st_edge.cap - pv->st_edge.flow)) /* djb-rwth: addressing LLVM warning */
+            if (delta = pv->st_edge.cap - pv->st_edge.flow)
             {
                 if (IS_BNS_VT_C_OR_CSUPER_GR( pv->type ))
                 {
@@ -1989,7 +1987,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
         num_candidates = 0;
         for (i = 0; i < pBNS->num_vertices; i++)
         {
-            pnRad[i] = ( pBNS->vert[i].st_edge.cap - pBNS->vert[i].st_edge.flow ); /* djb-rwth: garbage values on the right side of - -- discussion required; pnRad[i] = ( pBNS->vert[i].st_edge.cap - pBNS->vert[i].st_edge.flow ) - pnRad[i]; */
+            pnRad[i] = ( pBNS->vert[i].st_edge.cap - pBNS->vert[i].st_edge.flow ) - pnRad[i];
             if (pnRad[i] > 0 && i < pBNS->num_atoms && !pVA[i].nTautGroupEdge)
             {
                 num_candidates++;
@@ -2005,7 +2003,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
             goto exit_function;
         }
         /* create atom */
-        memcpy(at2, at, len_at * sizeof(at2[0]));
+        memcpy( at2, at, len_at * sizeof( at2[0] ) );
         pStruct->at = at2;
         ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
         pStruct->at = at;
@@ -2017,7 +2015,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
 
         for (i = 0, j = 0; i < pBNS->num_vertices; i++)
         {
-            if (pnRad[i] > 0 && i < pBNS->num_atoms && !pVA[i].nTautGroupEdge) /* djb-rwth: ignoring LLVM warning as pnRad is initialised above */
+            if (pnRad[i] > 0 && i < pBNS->num_atoms && !pVA[i].nTautGroupEdge)
             {
                 pCand[j].iat = i;
                 pCand[j].num_bonds = at2[i].valence;
@@ -2053,7 +2051,7 @@ int MoveRadToAtomsAddCharges( BN_STRUCT *pBNS,
             {
                 for (i = pBNS->num_vertices - 1, pv = pBNS->vert + i; this_atom_add_charge && pBNS->num_atoms <= i; i--, pv--)
                 {
-                    if ((delta = pv->st_edge.cap - pv->st_edge.flow)) /* djb-rwth: addressing LLVM warning */
+                    if (delta = pv->st_edge.cap - pv->st_edge.flow)
                     {
                         if (this_atom_add_charge < 0 && IS_BNS_VT_C_OR_CSUPER_GR( pv->type ))
                         {
@@ -2139,10 +2137,10 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
     int centerpoint_type, neigh_type;
     int num_changes;
     int num_donors, num_acceptors, num_donor_endpoints, num_acceptor_endpoints;
-    int neigh, tg_number, num_eql_mobile_gr, num_dif_mobile_gr, bond_type, has_mobile_H; /* djb-rwth: removing redundant variables */
+    int neigh, tg_number, num_eql_mobile_gr, num_dif_mobile_gr, bond_type, has_mobile_H, has_mobile;
     int num_forbidden, ind_forbidden, forbidden, num_N, num_O, num_P, num_S, num_OSt;
     int val, delta_val, delta_met, num_bonds_non_metal, bonds_valence_non_metal;
-    /* djb-rwth: removing redundant variables */
+    int num_bonds, bonds_valence;
     int inv_forbidden_mask = ~forbidden_mask;
     MOBILE_GR MobileGr[MAXVAL];
     int       num_endpoints;
@@ -2161,20 +2159,20 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
              !( centerpoint_type = get_pVA_atom_type( pVA, at, i, 0 ) ) ||
              2 > ( delta_val = at[i].chem_bonds_valence - ( val = get_el_valence( at[i].el_number, 0, 0 ) ) ) ||
              2 > ( delta_met = ( bonds_valence_non_metal = nNoMetalBondsValence( at, i ) ) - val )
-           ) /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+           )
         {
             continue;
         }
 
         num_donors = num_acceptors = num_donor_endpoints = num_acceptor_endpoints = 0;
         num_mgroups = num_endpoints = num_diff_t_groups = 0;
-        has_mobile_H = num_eql_mobile_gr = num_dif_mobile_gr = tg_number = 0; /* djb-rwth: removing redundant code */
+        has_mobile = has_mobile_H = num_eql_mobile_gr = num_dif_mobile_gr = tg_number = 0;
         ind_forbidden = -1;
         num_forbidden = 0;
         num_N = num_O = num_P = num_S = num_OSt = 0;
         num_bonds_non_metal = nNoMetalNumBonds( at, i );
-        /* djb-rwth: removing redundant code */
-        /* djb-rwth: removing redundant code */
+        bonds_valence = at[i].chem_bonds_valence;
+        num_bonds = at[i].valence;
 
         for (j = 0; j < at[i].valence; j++)
         {
@@ -2265,12 +2263,12 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
                     if (at[neigh].endpoint)
                     {
                         has_mobile_H |= 1;
-                        /* djb-rwth: removing redundant code */
+                        has_mobile |= 1;
                     }
                     else
                     {
                         has_mobile_H |= ( 0 != at[neigh].num_H );
-                        /* djb-rwth: removing redundant code */
+                        has_mobile |= ( 0 != at[neigh].num_H ) || ( at[neigh].charge == -1 );
                     }
                 }
             }
@@ -2296,8 +2294,8 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
             }
         }
         if (!num_acceptors || !num_donors || /* num_acceptors > 2 ||*/
-             (num_eql_mobile_gr == num_endpoints && !num_forbidden) ||
-             (!tg_number && !has_mobile_H)) /* djb-rwth: addressing LLVM warnings */
+             num_eql_mobile_gr == num_endpoints && !num_forbidden ||
+             !tg_number && !has_mobile_H)
         {
             continue; /* nothing to do */
         }
@@ -2779,7 +2777,7 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
               Move H from NH to =O to allow O=S bond change by making a terminal -OH
               (this unfixes the bond, see fix_special_bonds(...) )
             *********************************************************/
-            int jO = -1, jNH = -1, jX = -1, n = 0; /* djb-rwth: ignoring LLVM warning: variable used */
+            int jO = -1, jNH = -1, jX = -1, n = 0;
             for (j = 0; j < num_endpoints; j++)
             {
                 if (( MobileGr[j].atom_type_pVA & ( EL_TYPE_O | EL_TYPE_S ) ) &&
@@ -2891,11 +2889,11 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
                 else
                 {
                     if (!( ( MobileGr[j].atom_type_pVA & ( EL_TYPE_N | EL_TYPE_P ) ) ||
-                        (( MobileGr[j].atom_type_pVA & ( EL_TYPE_O | EL_TYPE_S ) ) &&
-                           MobileGr[j].num_bonds > 1 )) &&
+                        ( MobileGr[j].atom_type_pVA & ( EL_TYPE_O | EL_TYPE_S ) ) &&
+                           MobileGr[j].num_bonds > 1 ) &&
                            ( MobileGr[j].forbidden & forbidden_mask ) &&
                             MobileGr[j].bond_type == BOND_TYPE_SINGLE &&
-                            jX < 0) /* djb-rwth: addressing LLVM warning */
+                            jX < 0)
                     {
                         jX = j;
                         n++;
@@ -2955,7 +2953,7 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
                 (this unfixes the bond, see fix_special_bonds(...) )
               *********************************************************/
             int jN1 = -1, jN2 = -1, jX = -1, n = 0;
-            EdgeIndex ie1, ie2; /* djb-rwth: removing redundant variables */
+            EdgeIndex ie, ie1, ie2;
             for (j = 0; j < num_endpoints; j++)
             {
                 if (( MobileGr[j].atom_type_pVA & EL_TYPE_MASK ) == EL_TYPE_N &&
@@ -3007,7 +3005,7 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
             }
             pv1 = pBNS->vert + e->neighbor1;  /* must be jN2 */
             pv2 = pBNS->vert + ( e->neighbor1 ^ e->neighbor12 );
-            /* djb-rwth: removing redundant code */
+            ie = (int) ( e - pBNS->edge );
             ie1 = ie2 = -1;
             for (j = 0; j < pv1->num_adj_edges; j++)
             {
@@ -3077,8 +3075,8 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
                         Move H from ZH to N2 to make N1=S bond unfixed and fix S-X bond (Table 5, case 8)
                         (see fix_special_bonds(...) for details )
                         *********************************************************/
-            int jN1 = -1, jN2 = -1, jX = -1, n = 0; /* djb-rwth: ignoring LLVM warning: variable used */
-            EdgeIndex ie1, ie2; /* djb-rwth: removing redundant variables */
+            int jN1 = -1, jN2 = -1, jX = -1, n = 0;
+            EdgeIndex ie, ie1, ie2;
             for (j = 0; j < num_endpoints; j++)
             {
                 if (( MobileGr[j].atom_type_pVA & EL_TYPE_MASK ) == EL_TYPE_N)
@@ -3108,11 +3106,11 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
                 else
                 {
                     if (!( ( MobileGr[j].atom_type_pVA & ( EL_TYPE_N | EL_TYPE_P ) ) ||
-                        (( MobileGr[j].atom_type_pVA & ( EL_TYPE_O | EL_TYPE_S ) ) &&
-                           MobileGr[j].num_bonds > 1 )) &&
+                        ( MobileGr[j].atom_type_pVA & ( EL_TYPE_O | EL_TYPE_S ) ) &&
+                           MobileGr[j].num_bonds > 1 ) &&
                             !( MobileGr[j].forbidden & forbidden_mask ) &&
                             MobileGr[j].bond_type == BOND_TYPE_SINGLE &&
-                            jX < 0) /* djb-rwth: addressing LLVM warning */
+                            jX < 0)
                     {
                         jX = j;
                         n++;
@@ -3132,7 +3130,7 @@ int AdjustTgroupsToForbiddenEdges2( BN_STRUCT *pBNS,
             }
             pv1 = pBNS->vert + e->neighbor1;  /* must be jN2 */
             pv2 = pBNS->vert + ( e->neighbor1 ^ e->neighbor12 );
-            /* djb-rwth: removing redundant code */
+            ie = (int) ( e - pBNS->edge );
             ie1 = ie2 = -1;
             ev->forbidden &= inv_forbidden_mask;
             for (j = 0; j < pv1->num_adj_edges; j++)
@@ -3421,7 +3419,7 @@ int RearrangePlusMinusEdgesFlow( BN_STRUCT *pBNS,
         {
             pPlus = pBNS->edge + ePlus;
             pMinus = pBNS->edge + eMinus;
-            if (( pMinus->flow ) > 0 && ( pPlus->cap - pPlus->flow ) > 0) /* djb-rwth: removing redundant code */
+            if (( k1 = pMinus->flow ) > 0 && ( k2 = pPlus->cap - pPlus->flow ) > 0)
             {
                 num_found++;
             }
@@ -3431,12 +3429,12 @@ int RearrangePlusMinusEdgesFlow( BN_STRUCT *pBNS,
     {
         goto exit_function;
     }
-    if ((ret = AllocEdgeList( &NewlyFixedEdges, num_tot + pBNS->num_bonds ))) /* djb-rwth: addressing LLVM warning */
+    if (ret = AllocEdgeList( &NewlyFixedEdges, num_tot + pBNS->num_bonds ))
     {
         goto exit_function;
     }
 
-    for (i = 0, num_tot = 0; i < pBNS->num_atoms; i++) /* djb-rwth: removing redundant code */
+    for (i = 0, num_found = num_tot = 0; i < pBNS->num_atoms; i++)
     {
         eMinus = pVA[i].nCMinusGroupEdge - 1;
         ePlus = pVA[i].nCPlusGroupEdge - 1;
@@ -3472,7 +3470,7 @@ int RearrangePlusMinusEdgesFlow( BN_STRUCT *pBNS,
                 /* fix charges */
                 pMinus = pBNS->edge + eMinus;
                 pMinus->forbidden |= forbidden_edge_mask;
-                if ((ret = AddToEdgeList( &NewlyFixedEdges, eMinus, 0 ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NewlyFixedEdges, eMinus, 0 ))
                 {
                     goto exit_function;
                 }
@@ -3484,7 +3482,7 @@ int RearrangePlusMinusEdgesFlow( BN_STRUCT *pBNS,
                     /* fix charges */
                     pPlus = pBNS->edge + ePlus;
                     pPlus->forbidden |= forbidden_edge_mask;
-                    if ((ret = AddToEdgeList( &NewlyFixedEdges, ePlus, 0 ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NewlyFixedEdges, ePlus, 0 ))
                     {
                         goto exit_function;
                     }
@@ -3495,7 +3493,7 @@ int RearrangePlusMinusEdgesFlow( BN_STRUCT *pBNS,
     for (i = 0; i < pBNS->num_bonds; i++)
     {
         pBNS->edge[i].forbidden |= forbidden_edge_mask;
-        if ((ret = AddToEdgeList( &NewlyFixedEdges, i, 0 ))) /* djb-rwth: addressing LLVM warning */
+        if (ret = AddToEdgeList( &NewlyFixedEdges, i, 0 ))
         {
             goto exit_function;
         }
@@ -3556,7 +3554,7 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
         goto exit_function;
     }
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -3609,7 +3607,7 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
                     pe = pBNS->edge + pBNS->vert[i].iedge[k];
                     if (pe->flow == 1 && !( pe->forbidden & forbidden_edge_mask ))
                     {
-                        if ((ret = AddToEdgeList( &NewlyFixedEdges, (int) ( pe - pBNS->edge ), FIX_BOND_ADD_ALLOC ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &NewlyFixedEdges, (int) ( pe - pBNS->edge ), FIX_BOND_ADD_ALLOC ))
                         {
                             goto exit_function;
                         }
@@ -3626,7 +3624,7 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
                          !( pe->forbidden & forbidden_edge_mask ))
                     {
 
-                        if ((ret = AddToEdgeList( &NewlyFixedEdges, (int) ( pe - pBNS->edge ), FIX_BOND_ADD_ALLOC ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &NewlyFixedEdges, (int) ( pe - pBNS->edge ), FIX_BOND_ADD_ALLOC ))
                         {
                             goto exit_function;
                         }
@@ -3668,8 +3666,8 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
                 ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                       &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                if (ret == 1 && ( (vPathEnd == vMeFlower0 && vPathStart == vNeighMeigh) ||
-                    (vPathEnd == vNeighMeigh && vPathStart == vMeFlower0) ) && abs( nDeltaCharge ) <= 2) /* djb-rwth: addressing LLVM warnings */
+                if (ret == 1 && ( vPathEnd == vMeFlower0 && vPathStart == vNeighMeigh ||
+                    vPathEnd == vNeighMeigh && vPathStart == vMeFlower0 ) && abs( nDeltaCharge ) <= 2)
                 {
                     ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     if (ret > 0)
@@ -3679,7 +3677,7 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
                         num_changes++;
                         bSuccess = ret;
                     }
-                    if ((ret = AddToEdgeList( &NewlyFixedEdges, (int) ( peZero - pBNS->edge ), FIX_BOND_ADD_ALLOC ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NewlyFixedEdges, (int) ( peZero - pBNS->edge ), FIX_BOND_ADD_ALLOC ))
                     {
                         goto exit_function;
                     }
@@ -3699,7 +3697,7 @@ int IncrementZeroOrderBondsToHeteroat( BN_STRUCT *pBNS,
                 if (bSuccess)
                 {
                     /* update at2[] */
-                    memcpy(at2, at, len_at * sizeof(at2[0]));
+                    memcpy( at2, at, len_at * sizeof( at2[0] ) );
                     pStruct->at = at2;
                     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
                     pStruct->at = at;
@@ -3742,7 +3740,7 @@ int MovePlusFromS2DiaminoCarbon( BN_STRUCT *pBNS,
                                  int *pnTotalDelta,
                                  int forbidden_edge_mask )
 {
-    int i, j, k, ret, ret2; /* djb-rwth: removing redundant variables */
+    int i, j, k, ret, ret2, cur_success;
     int delta;
     EdgeIndex        ePlusS, ePlusC, eMinusC, e;
     BNS_VERTEX *pvS, *pvC, *pv1, *pv2;
@@ -3759,11 +3757,11 @@ int MovePlusFromS2DiaminoCarbon( BN_STRUCT *pBNS,
     EDGE_LIST AllChargeEdges;
 
     ret = 0;
-    /* djb-rwth: removing redundant code */
+    cur_success = 0;
 
     AllocEdgeList( &AllChargeEdges, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -3775,10 +3773,9 @@ int MovePlusFromS2DiaminoCarbon( BN_STRUCT *pBNS,
     /* find (NH2)C=S(+) */
     for (i = 0; i < num_at; i++)
     {
-        pvS = pBNS->vert + i; /* djb-rwth: avoiding unsequenced modification and access */
         if (!pVA[i].cMetal && pVA[i].cNumValenceElectrons == 6 &&
              at2[i].valence == 2 &&
-             pvS->st_edge.cap == pvS->st_edge.flow &&
+             ( pvS = pBNS->vert + i )->st_edge.cap == pvS->st_edge.flow &&
              0 <= ( ePlusS = pVA[i].nCPlusGroupEdge - 1 ) && !( pePlusS = pBNS->edge + ePlusS )->flow && /* S(+) */
              ( pe1 = pBNS->edge + pvS->iedge[0] )->flow +
              ( pe2 = pBNS->edge + pvS->iedge[1] )->flow == 1 /* -S(+)= */ &&
@@ -3849,8 +3846,8 @@ int MovePlusFromS2DiaminoCarbon( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == -1) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == -1)
             {
                 /* Remover (+)charge from S => nDeltaCharge == -1 */
                 /* Flow change on pe (+)charge edge (atom S) is not known to RunBnsTestOnce()) */
@@ -3858,7 +3855,7 @@ int MovePlusFromS2DiaminoCarbon( BN_STRUCT *pBNS,
                 if (ret > 0)
                 {
                     ( *pnNumRunBNS )++;
-                    /* djb-rwth: removing redundant code */
+                    cur_success++;
                 }
             }
             else
@@ -3945,7 +3942,7 @@ int EliminateChargeSeparationOnHeteroatoms( BN_STRUCT *pBNS,
         }
     }
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -4010,8 +4007,8 @@ int EliminateChargeSeparationOnHeteroatoms( BN_STRUCT *pBNS,
                 {
                     goto exit_function;
                 }
-                if (ret == 1 && ( (vPathEnd == vPlusSuper && vPathStart == vPlusMinus) ||
-                    (vPathEnd == vPlusMinus && vPathStart == vPlusSuper) ) && nDeltaCharge < 0) /* djb-rwth: addressing LLVM warnings */
+                if (ret == 1 && ( vPathEnd == vPlusSuper && vPathStart == vPlusMinus ||
+                    vPathEnd == vPlusMinus && vPathStart == vPlusSuper ) && nDeltaCharge < 0)
                 {
                     ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     ( *pnNumRunBNS )++;
@@ -4110,7 +4107,7 @@ int EliminateChargeSeparationOnHeteroatoms( BN_STRUCT *pBNS,
             pEdge->forbidden &= inv_forbidden_edge_mask;
         }
     }
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at;
 
 exit_function:
@@ -4576,7 +4573,7 @@ int RestoreCyanoGroup( BN_STRUCT *pBNS,
     ret = 0;
     AllocEdgeList( &CarbonChargeEdges, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -4606,7 +4603,7 @@ int RestoreCyanoGroup( BN_STRUCT *pBNS,
              cnList[pVA[i].cnListIndex - 1].bits == cn_bits_MN)
         {
             /* found N(-)=C= */
-            pe = pBNS->edge + ( (long long)pVA[i].nCMinusGroupEdge - 1 ); /* N#N(+) triple bond edge */ /* djb-rwth: cast operator added */
+            pe = pBNS->edge + ( pVA[i].nCMinusGroupEdge - 1 ); /* N#N(+) triple bond edge */
 
             if (!pe->flow)
             {
@@ -4629,8 +4626,8 @@ int RestoreCyanoGroup( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 1) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 1)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
@@ -4691,7 +4688,7 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
     AllocEdgeList( &AllChargeEdges, EDGE_LIST_CLEAR );    /* heteroatom charge edges */
     AllocEdgeList( &IsoCyanoCarbonChargeEdges, EDGE_LIST_CLEAR );   /* C in C(+)#N(+) charge edges */
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -4707,13 +4704,13 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
     {
         /* accumulate edges for subsequent fixing them */
         bIsCarbon = ( pVA[i].cNumValenceElectrons == 4 && pVA[i].cPeriodicRowNumber == 1 );
-        /* djb-rwth: removing redundant variables/code */
+        eNFlowerEdge1 = NO_VERTEX;
         if (( eNMinusEdge = pVA[i].nCMinusGroupEdge - 1 ) >= 0 &&
              !pBNS->edge[eNMinusEdge].forbidden)
         {
             if (bIsCarbon)
             {
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -4722,7 +4719,7 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
             {
                 if (!pVA[i].cMetal && !at2[i].endpoint && at2[i].charge != -1)
                 {
-                    if ((ret = AddToEdgeList( &AllChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &AllChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
@@ -4734,7 +4731,7 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
         {
             if (bIsCarbon)
             {
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -4743,7 +4740,7 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
             {
                 if (!pVA[i].cMetal && !at2[i].endpoint)
                 {
-                    if ((ret = AddToEdgeList( &AllChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &AllChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
@@ -4751,7 +4748,7 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
                          NO_VERTEX != ( eNFlowerEdge1 = GetChargeFlowerUpperEdge( pBNS, pVA, eNPlusEdge ) ) &&
                          !pBNS->edge[eNFlowerEdge1].flow)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, eNFlowerEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, eNFlowerEdge1, INC_EDGE_LIST ))
                         {
                             goto exit_function;
                         }
@@ -4774,8 +4771,8 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
              at2[j].num_H == 0 &&
              at2[j].radical == 0 &&
              pVA[j].cNumValenceElectrons == 5 &&
-             ( eNPlusEdge1 = pVA[j].nCPlusGroupEdge - 1 ) >= 0 && 
-             pBNS->edge[eNPlusEdge].flow == 0) /* djb-rwth: ignoring LLVM warning: variable used */
+             ( eNPlusEdge1 = pVA[j].nCPlusGroupEdge - 1 ) >= 0 &&
+             pBNS->edge[eNPlusEdge].flow == 0)
         {     /* -N(+)- */
 
 #ifdef NEVER /* I have not found a good reason to do this yet */
@@ -4824,9 +4821,9 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
             if (IS_BNS_VT_C_GR( pBNS->vert[v1].type ))
             {
                 /* v1 is 5(+C) */
-                /* djb-rwth: removing redundant variables */
+                Vertex tmp = v1;
                 v1 = v2;
-                /* djb-rwth: removing redundant code */
+                v2 = tmp;
             }
             /* v1 should be 4, v2 - 5(+C) */
             if (!IS_BNS_VT_CHRG_STRUCT( pBNS->vert[v1].type ) || pBNS->vert[v1].num_adj_edges != 2)
@@ -4840,15 +4837,15 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
                 continue;
             }
             /* save 3 edges: 6-3, 4-5, and 3-4 in this order */
-            if ((ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
-            if ((ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
-            if ((ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eN34Edge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &IsoCyanoCarbonChargeEdges, eN34Edge, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
@@ -4860,7 +4857,8 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
     RemoveForbiddenEdgeMask( pBNS, &IsoCyanoCarbonChargeEdges, forbidden_edge_mask );
     for (i = IsoCyanoCarbonChargeEdges.num_edges - 3; 0 <= i; i -= 3)
     {
-        /* djb-rwth: removing redundant code */
+        eNMinusEdge = IsoCyanoCarbonChargeEdges.pnEdges[i];
+        eNPlusEdge = IsoCyanoCarbonChargeEdges.pnEdges[i + 1];
         eN34Edge = IsoCyanoCarbonChargeEdges.pnEdges[i + 2];
 
         pe = pBNS->edge + eN34Edge;
@@ -4880,8 +4878,8 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
         ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                               &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-        if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-            (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge <= -2) /* djb-rwth: addressing LLVM warnings */
+        if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+            vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge <= -2)
         {
             ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
             ( *pnNumRunBNS )++;
@@ -4904,7 +4902,8 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
         RemoveForbiddenEdgeMask( pBNS, &AllChargeEdges, forbidden_edge_mask );
         for (i = IsoCyanoCarbonChargeEdges.num_edges - 3; 0 <= i; i -= 3)
         {
-            /* djb-rwth: removing redundant code */
+            eNMinusEdge = IsoCyanoCarbonChargeEdges.pnEdges[i];
+            eNPlusEdge = IsoCyanoCarbonChargeEdges.pnEdges[i + 1];
             eN34Edge = IsoCyanoCarbonChargeEdges.pnEdges[i + 2];
 
             pe = pBNS->edge + eN34Edge;
@@ -4924,8 +4923,8 @@ int RestoreIsoCyanoGroup( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge <= 2) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge <= 2)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
@@ -4974,7 +4973,7 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
 #define INC_EDGE_LIST 16
     Vertex     vPathStart, vPathEnd;
     int        nPathLen, nDeltaH, nDeltaCharge, nNumVisitedAtoms;
-    int        num_success, n; /* djb-rwth: removing redundant variables */
+    int        num_failed, num_success, n, nDeltaChargeMax, nMetalCharge;
     BNS_EDGE  *pe;
     Vertex    v1, v2;
 
@@ -4988,10 +4987,10 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
     EDGE_LIST AllChargeEdges;
 
     ret = 0;
-    num_success = 0; /* djb-rwth: removing redundant code */
+    num_failed = num_success = 0;
     AllocEdgeList( &AllChargeEdges, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -5034,7 +5033,7 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
                     if (( e = pVA[n].nCMinusGroupEdge - 1 ) >= 0 &&
                          !pBNS->edge[e].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, e, num_at ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, e, num_at ))
                         {
                             goto exit_function;
                         }
@@ -5042,7 +5041,7 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
                     if (( e = pVA[n].nCPlusGroupEdge - 1 ) >= 0 &&
                          !pBNS->edge[e].forbidden)
                     {
-                        if ((ret = AddToEdgeList( &AllChargeEdges, e, num_at ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &AllChargeEdges, e, num_at ))
                         {
                             goto exit_function;
                         }
@@ -5050,7 +5049,7 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
                              NO_VERTEX != ( e = GetChargeFlowerUpperEdge( pBNS, pVA, e ) ) &&
                              pBNS->edge[e].flow == 0)
                         {
-                            if ((ret = AddToEdgeList( &AllChargeEdges, e, num_at ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( &AllChargeEdges, e, num_at ))
                             {
                                 goto exit_function;
                             }
@@ -5059,8 +5058,26 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
                 }
             }
 
-            /* djb-rwth: removing redundant code */
-            /* djb-rwth: removing redundant code */
+            nMetalCharge = ( pBNS->edge[eNPlusEdge2].cap - pBNS->edge[eNPlusEdge2].flow )
+                - pBNS->edge[eNMinusEdge2].flow;
+            if (nMetalCharge == 0)
+            {
+                /* change on O is invisible; charge from N(-) goes, charge comes to Metal */
+                nDeltaChargeMax = 0;
+            }
+            else
+            {
+                if (nMetalCharge == 2)
+                {
+                    /* charges on Metal and N disappear */
+                    nDeltaChargeMax = -2;
+                }
+                else
+                {
+                    /* charge from N disappears */
+                    nDeltaChargeMax = -1;
+                }
+            }
 
             SetForbiddenEdgeMask( pBNS, &AllChargeEdges, forbidden_edge_mask );
             pBNS->edge[eNMinusEdge1].forbidden &= inv_forbidden_edge_mask;
@@ -5079,9 +5096,9 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) /*&& nDeltaCharge == nDeltaChargeMax*/) /* djb-rwth: addressing LLVM warnings */
-            { 
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) /*&& nDeltaCharge == nDeltaChargeMax*/)
+            {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
                 *pnTotalDelta += ret;
@@ -5093,7 +5110,7 @@ int FixMetal_Nminus_Ominus( BN_STRUCT *pBNS,
                 pBNS->vert[v1].st_edge.flow++;
                 pBNS->vert[v2].st_edge.flow++;
                 pBNS->tot_st_flow += 2;
-                /* djb-rwth: removing redundant code */
+                num_failed++;
             }
             RemoveForbiddenEdgeMask( pBNS, &AllChargeEdges, forbidden_edge_mask );
         }
@@ -5146,7 +5163,7 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
     AllocEdgeList( &AllNNNTermAtoms, EDGE_LIST_CLEAR );
     AllocEdgeList( &AllNIIIChargeEdges, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -5214,19 +5231,19 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge <= 0) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge <= 0)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
                 *pnTotalDelta += ret;
                 num_success++;
                 /* fix charges on N(-)=N(+)=N- */
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5260,7 +5277,7 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
         if (( eNMinusEdge = pVA[i].nCMinusGroupEdge - 1 ) >= 0 &&
              !pBNS->edge[eNMinusEdge].forbidden)
         {
-            if ((ret = AddToEdgeList( &AllChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &AllChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
@@ -5272,13 +5289,13 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
         if (( eNPlusEdge = pVA[i].nCPlusGroupEdge - 1 ) >= 0 &&
              !pBNS->edge[eNPlusEdge].forbidden)
         {
-            if ((ret = AddToEdgeList( &AllChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &AllChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
             if (pVA[i].cNumValenceElectrons == 5 && at2[i].valence == 3 && at2[i].chem_bonds_valence == 3)
             {
-                if ((ret = AddToEdgeList( &AllNIIIChargeEdges, eNPlusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &AllNIIIChargeEdges, eNPlusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5292,7 +5309,10 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                 goto exit_function;
             }
         }
-        /* djb-rwth: removing redundant code */
+        else
+        {
+            eNPlusEdge = -1;
+        }
 
         if (0 <= eNMinusEdge &&
              at2[i].valence == 1 &&
@@ -5331,7 +5351,7 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                 continue; /* already good */
             }
             /* accumulate terminal atoms of all other NNN */
-            if ((ret = AddToEdgeList( &AllNNNTermAtoms, i, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &AllNNNTermAtoms, i, INC_EDGE_LIST ))
             {
                 goto exit_function;
             }
@@ -5341,7 +5361,7 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 1    /* N */)
             {
 /* unfix (-) edge on terminal N# */
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5353,7 +5373,7 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 1    /* N */)
             {
                 /* unfix (+) edge on middle N */
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5365,11 +5385,11 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 1 && pBNS->edge[eNPlusEdge2].flow == 1    /* N(-) */)
             {
                 /* unfix (-) edge on the 1st and 3rd N */
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5381,11 +5401,11 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 0    /* N(+) */)
             {
                 /* unfix (-) edge on the 1st and (+) edge on the 3rd N */
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5486,8 +5506,8 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) /*&& nDeltaCharge <= 2*/) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) /*&& nDeltaCharge <= 2*/)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
@@ -5565,23 +5585,23 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 1    /* N */)
             {
                 /* fix charges on N(-)=N(+)=N- */
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5593,24 +5613,24 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                  pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 1    /* N */)
             {
                 /* unfix (-) edge on terminal N# */
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
                 pe = pBNS->edge + pBNS->vert[i].iedge[0];
-                /* djb-rwth: removing redundant code */
+                nDeltaChargeMax = 0;
                 nDeltaChargeMax = ( num_failed && !num_success && pStruct->nNumRemovedProtonsMobHInChI > 0 ) ? 2 : 0;
             }
             else
@@ -5621,19 +5641,19 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                      pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 1    /* N */)
                 {
                     /* unfix (+) edge on middle N */
-                    if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
-                    if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
-                    if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
-                    if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                     {
                         goto exit_function;
                     }
@@ -5654,15 +5674,15 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                          pBNS->edge[eNMinusEdge2].flow == 1 && pBNS->edge[eNPlusEdge2].flow == 1    /* N(-) */)
                     {
                         /* unfix (-) edge on the 1st and 3rd N */
-                        if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                         {
                             goto exit_function;
                         }
-                        if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                         {
                             goto exit_function;
                         }
-                        if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                         {
                             goto exit_function;
                         }
@@ -5678,15 +5698,15 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
                              pBNS->edge[eNMinusEdge2].flow == 0 && pBNS->edge[eNPlusEdge2].flow == 0    /* N(+) */)
                         {
                             /* unfix (-) edge on the 1st and (+) edge on the 3rd N */
-                            if ((ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( &NNNChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                             {
                                 goto exit_function;
                             }
-                            if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                             {
                                 goto exit_function;
                             }
-                            if ((ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                            if (ret = AddToEdgeList( &NNNChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                             {
                                 goto exit_function;
                             }
@@ -5704,14 +5724,14 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
 
             if (NO_VERTEX != eNFlowerEdge1 && !pBNS->edge[eNFlowerEdge1].flow)
             {
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNFlowerEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNFlowerEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
             }
             if (NO_VERTEX != eNFlowerEdge2 && !pBNS->edge[eNFlowerEdge2].flow)
             {
-                if ((ret = AddToEdgeList( &NNNChargeEdges, eNFlowerEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &NNNChargeEdges, eNFlowerEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5744,31 +5764,31 @@ int RestoreNNNgroup( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-            if (ret == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge <= nDeltaChargeMax) /* djb-rwth: addressing LLVM warnings */
+            if (ret == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge <= nDeltaChargeMax)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                 ( *pnNumRunBNS )++;
                 *pnTotalDelta += ret;
                 num_success++;
                 /* fix charges on N(-)=N(+)=N- */
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge1, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNPlusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, eNMinusEdge2, INC_EDGE_LIST ))
                 {
                     goto exit_function;
                 }
@@ -5827,7 +5847,7 @@ int EliminateNitrogen5Val3Bonds( BN_STRUCT *pBNS,
     bForbiddenCarbonCharges = 0;
     AllocEdgeList( &CarbonChargeEdges, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     if (ret2 < 0)
@@ -5873,14 +5893,14 @@ int EliminateNitrogen5Val3Bonds( BN_STRUCT *pBNS,
     {
         if (pVA[i].cNumValenceElectrons == 5 && at2[i].valence == 3 &&
              at2[i].chem_bonds_valence == 5 && !at2[i].charge && !at2[i].radical &&
-             !( at2[i].endpoint || (pStruct->endpoint && pStruct->endpoint[i]) ) && pVA[i].cnListIndex > 0 &&
+             !( at2[i].endpoint || pStruct->endpoint && pStruct->endpoint[i] ) && pVA[i].cnListIndex > 0 &&
              cnList[pVA[i].cnListIndex - 1].bits == cn_bits_NPN &&
-             pVA[i].nCPlusGroupEdge > 0) /* djb-rwth: addressing LLVM warning */
+             pVA[i].nCPlusGroupEdge > 0)
         {
 
             Vertex v, v0 = NO_VERTEX, v1 = NO_VERTEX, v2 = NO_VERTEX;
-            EdgeIndex iePlus, ie, ie12 = NO_VERTEX; /* djb-rwth: removing redundant variables */
-            BNS_VERTEX *pv0, *pv2 = NULL; /* djb-rwth: removing redundant variables */
+            EdgeIndex iePlus, ie, ie12 = NO_VERTEX, ie02, ie01;
+            BNS_VERTEX *pv0, *pv1, *pv2 = NULL;
             BNS_EDGE   *pePlus, *pe, *pe12 = NULL, *pe02 = NULL, *pe01 = NULL;
             Vertex     vPathStart, vPathEnd;
             int        nPathLen;
@@ -5905,7 +5925,7 @@ int EliminateNitrogen5Val3Bonds( BN_STRUCT *pBNS,
                     /* 0 - 2, edge 02 */
                     v2 = pe->neighbor12 ^ v0;
                     pv2 = pBNS->vert + v2;
-                    /* djb-rwth: removing redundant code */
+                    ie02 = ie;
                     pe02 = pe;
                 }
                 else
@@ -5914,8 +5934,8 @@ int EliminateNitrogen5Val3Bonds( BN_STRUCT *pBNS,
                     {
                         /* 0 - 1, edge 01 */
                         v1 = pe->neighbor12 ^ v0;
-                        /* djb-rwth: removing redundant code */
-                        /* djb-rwth: removing redundant code */
+                        pv1 = pBNS->vert + v2;
+                        ie01 = ie;
                         pe01 = pe;
                     }
                     else
@@ -6003,7 +6023,7 @@ int EliminateNitrogen5Val3Bonds( BN_STRUCT *pBNS,
             {
                 if (ret)
                 {
-                    memcpy(at2, at, len_at * sizeof(at2[0]));
+                    memcpy( at2, at, len_at * sizeof( at2[0] ) );
                     pStruct->at = at2;
                     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
                     if (ret2 < 0)
@@ -6072,7 +6092,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
     AllocEdgeList( &CarbonChargeEdges, EDGE_LIST_CLEAR );
     AllocEdgeList( &FlowerEdgesList, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     if (ret2 < 0)
@@ -6092,7 +6112,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
         {
 
             pBNS->edge[k].forbidden |= forbidden_edge_mask;
-            if ((ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+            if (ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))
             {
                 goto exit_function;
             }
@@ -6107,7 +6127,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
                     {
 
                         pBNS->edge[k = pBNS->vert[i].iedge[j]].forbidden |= forbidden_edge_mask;
-                        if ((ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+                        if (ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))
                         {
                             goto exit_function;
                         }
@@ -6134,7 +6154,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
                             k = pBNS->vert[i].iedge[j];
                             if (!pBNS->edge[k].forbidden)
                             {
-                                if ((ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+                                if (ret = AddToEdgeList( &FlowerEdgesList, k, 64 ))
                                 {
                                     goto exit_function;
                                 }
@@ -6208,8 +6228,8 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
             if (ret == 1 &&
-                ( (vPathEnd == v1 && vPathStart == v2) || (vPathEnd == v2 && vPathStart == v1) ) &&
-                 nDeltaCharge <= ( pVA[i].cNumBondsToMetal ? 2 : 0 )) /* djb-rwth: addressing LLVM warnings */
+                ( vPathEnd == v1 && vPathStart == v2 || vPathEnd == v2 && vPathStart == v1 ) &&
+                 nDeltaCharge <= ( pVA[i].cNumBondsToMetal ? 2 : 0 ))
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
             }
@@ -6229,7 +6249,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
             {
                 if (ret)
                 {
-                    memcpy(at2, at, len_at * sizeof(at2[0]));
+                    memcpy( at2, at, len_at * sizeof( at2[0] ) );
                     pStruct->at = at2;
                     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
                     if (ret2 < 0)
@@ -6238,7 +6258,7 @@ int Convert_SIV_to_SVI( BN_STRUCT *pBNS,
                         goto exit_function;
                     }
                     /* store the fixed edge to unfix it upon exit */
-                    if ((ret = AddToEdgeList( &FlowerEdgesList, nFlowerEdge, 64 ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &FlowerEdgesList, nFlowerEdge, 64 ))
                     {
                         goto exit_function;
                     }
@@ -6276,7 +6296,7 @@ int PlusFromDB_N_DB_O_to_Metal( BN_STRUCT *pBNS,
                                 int *pnTotalDelta,
                                 int forbidden_edge_mask )
 {
-    int i, j, k, n, delta, ret2, ret, num_NO, num_M; /* djb-rwth: removing redundant variables */
+    int i, j, k, n, bForbiddenCarbonCharges, delta, ret2, ret, num_NO, num_M;
     int num_at = pStruct->num_atoms;
     int num_deleted_H = pStruct->num_deleted_H;
     int len_at = num_at + num_deleted_H;
@@ -6297,12 +6317,12 @@ int PlusFromDB_N_DB_O_to_Metal( BN_STRUCT *pBNS,
     }
 
     ret = 0;
-    /* djb-rwth: removing redundant code */
+    bForbiddenCarbonCharges = 0;
     AllocEdgeList( &CarbonChargeEdges, EDGE_LIST_CLEAR ); /* all charges */
     AllocEdgeList( &NO_ChargeEdgeList, EDGE_LIST_CLEAR ); /* charges to be changed */
     AllocEdgeList( &NO_EdgeList, EDGE_LIST_CLEAR );       /* N(+)=O edges */
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     if (ret2 < 0)
@@ -6321,14 +6341,14 @@ int PlusFromDB_N_DB_O_to_Metal( BN_STRUCT *pBNS,
         {
             if (( k = pVA[i].nCPlusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
             {
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, k, 64 ))
                 {
                     goto exit_function;
                 }
             }
             if (( k = pVA[i].nCMinusGroupEdge - 1 ) >= 0 && !pBNS->edge[k].forbidden)
             {
-                if ((ret = AddToEdgeList( &CarbonChargeEdges, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+                if (ret = AddToEdgeList( &CarbonChargeEdges, k, 64 ))
                 {
                     goto exit_function;
                 }
@@ -6378,7 +6398,7 @@ int PlusFromDB_N_DB_O_to_Metal( BN_STRUCT *pBNS,
                 k = pBNS->vert[i].iedge[0];  /* N(+)=O bond */
                 if (!pBNS->edge[k].forbidden)
                 {
-                    if ((ret = AddToEdgeList( &NO_EdgeList, k, 64 ))) /* djb-rwth: addressing LLVM warning */
+                    if (ret = AddToEdgeList( &NO_EdgeList, k, 64 ))
                     {
                         goto exit_function;
                     }
@@ -6409,8 +6429,8 @@ int PlusFromDB_N_DB_O_to_Metal( BN_STRUCT *pBNS,
             ret = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                   &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
             if (ret == 1 &&
-                ( (vPathEnd == v1 && vPathStart == v2) || (vPathEnd == v2 && vPathStart == v1) ) &&
-                 nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+                ( vPathEnd == v1 && vPathStart == v2 || vPathEnd == v2 && vPathStart == v1 ) &&
+                 nDeltaCharge == 0)
             {
                 ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
             }
@@ -6462,7 +6482,7 @@ int MoveMobileHToAvoidFixedBonds( BN_STRUCT *pBNS,
 
     if (pTCGroups->num_tgroups)
     {
-        memcpy(at2, at, len_at * sizeof(at2[0]));
+        memcpy( at2, at, len_at * sizeof( at2[0] ) );
         pStruct->at = at2;
         ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
         pStruct->at = at;
@@ -6544,10 +6564,11 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
     BNS_VERTEX *ptg1, *pEndp0 = NULL, *pEndp1, *pEndp2, *pCentp, *pCentp_found, *pEndp2_found = NULL;
     BNS_EDGE   *etg0 = NULL, *etg1, *etg2, *ecp0, *ecp1, *ecp2;
     BNS_EDGE   *etg1_found = NULL, *ecp0_found = NULL, *ecp1_found = NULL, *ecp2_found = NULL;
-    int         num_endpoints, max_vertices, nMaxAddAtoms = 2; /* djb-rwth: removing redundant variables; fixing oss-fuzz issue #25732 */
+    int         tgroup_number, num_endpoints;
 
-    /* djb-rwth: removing redundant code */
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    ret = 0;
+
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     if (ret2 < 0)
@@ -6561,7 +6582,7 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
         for (itg = 0; itg < pTCGroups->num_tgroups; itg++)
         {
             pCentp_found = NULL;
-            /* djb-rwth: removing redundant code */
+            tgroup_number = pTCGroups->pTCG[itg].ord_num;
             vtg1 = pTCGroups->pTCG[itg].nVertexNumber;      /* taut group vertex index */
             ptg1 = pBNS->vert + vtg1;                       /* taut group vertex */
             num_endpoints = pTCGroups->pTCG[itg].num_edges;
@@ -6569,23 +6590,18 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
             {
                 etg0 = pBNS->edge + ptg1->iedge[i];         /* edge from t-group to endpoint */
                 endpoint0 = etg0->neighbor12 ^ vtg1;        /* taut endpoint vertex index */
-                /* djb-rwth: fixing oss-fuzz issues #68494, #25732 */
-                max_vertices = pTCGroups->nVertices + nMaxAddAtoms;
-                if (endpoint0 < max_vertices)
+                pEndp0 = pBNS->vert + endpoint0;            /* taut endpoint vertex (possible location of mobile H */
+                if (pEndp0->st_edge.cap > pEndp0->st_edge.flow)
                 {
-                    pEndp0 = pBNS->vert + endpoint0;            /* taut endpoint vertex (possible location of mobile H */
-                    if (pEndp0->st_edge.cap > pEndp0->st_edge.flow)
-                    {
-                        /* radical endpoint1 has been detected */
-                        /* find a 1-3 centerpoint that has two or more endpoints */
-                        /* connected to the t-group vertex by edges with flow>0 and */
-                        /* to the centerpoint by edges with flow = 0 */
-                        /* after that: (1) increment etg1 flow to eliminate radical */
-                        /* (2) increment flow on one of the two other edges to the t-group */
-                        /* (3) increment st_cap on the found centerpoint */
-                        /* (4) rerun the BNS and re-create the structure */
-                        break;
-                    }
+                /* radical endpoint1 has been detected */
+                /* find a 1-3 centerpoint that has two or more endpoints */
+                /* connected to the t-group vertex by edges with flow>0 and */
+                /* to the centerpoint by edges with flow = 0 */
+                /* after that: (1) increment etg1 flow to eliminate radical */
+                /* (2) increment flow on one of the two other edges to the t-group */
+                /* (3) increment st_cap on the found centerpoint */
+                /* (4) rerun the BNS and re-create the structure */
+                    break;
                 }
             }
             if (i == num_endpoints)
@@ -6662,16 +6678,16 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
                             /* compare centerpoints */
                             if (!pCentp_found ||
                                  /* try to avoid carbons */
-                                (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                     pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                  pVA[centerpoint_found].cNumValenceElectrons == 4 &&
-                                 pVA[centerpoint_found].cPeriodicRowNumber == 1) ||
+                                 pVA[centerpoint_found].cPeriodicRowNumber == 1 ||
                                  /* try a better non-carbon */
-                                 (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                 ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                      pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                      ( at[centerpoint].valence > at[centerpoint_found].valence ||
-                                         (at[centerpoint].valence == at[centerpoint_found].valence &&
-                                         at[centerpoint].el_number > at[centerpoint_found].el_number) ))) /* djb-rwth: addressing LLVM warnings */
+                                         at[centerpoint].valence == at[centerpoint_found].valence &&
+                                         at[centerpoint].el_number > at[centerpoint_found].el_number ))
                             {
 
                                 pCentp_found = pCentp;
@@ -6805,16 +6821,16 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
                             /* compare centerpoints */
                             if (!pCentp_found ||
                                  /* try to avoid carbons */
-                                (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                     pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                  pVA[centerpoint_found].cNumValenceElectrons == 4 &&
-                                 pVA[centerpoint_found].cPeriodicRowNumber == 1) ||
+                                 pVA[centerpoint_found].cPeriodicRowNumber == 1 ||
                                  /* try a better non-carbon */
-                                 (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                 ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                      pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                      ( at[centerpoint].valence > at[centerpoint_found].valence ||
-                                         (at[centerpoint].valence == at[centerpoint_found].valence &&
-                                         at[centerpoint].el_number > at[centerpoint_found].el_number)) )) /* djb-rwth: addressing LLVM warnings */
+                                         at[centerpoint].valence == at[centerpoint_found].valence &&
+                                         at[centerpoint].el_number > at[centerpoint_found].el_number ))
                             {
 
                                 pCentp_found = pCentp;
@@ -6904,8 +6920,8 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
                         ret2 = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                               &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                        if (ret2 == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                            (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+                        if (ret2 == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                            vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 0)
                         {
                             ret2 = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                             if (ret2 > 0)
@@ -6915,7 +6931,7 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
                                 pBNS->vert[jj].st_edge.cap += delta; /* create radical on =C- */
                                 pBNS->tot_st_cap += delta;
                                 pCentp_found = NULL;
-                                /* djb-rwth: removing redundant code */
+                                bNotFixed = 0; /* exit from the cycle */
                                 break;
                             }
                         }
@@ -6949,7 +6965,8 @@ int RemoveRadFromMobileHEndpoint( BN_STRUCT *pBNS,
 
 exit_function:
     pStruct->at = at;
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
+
     return ret;
 }
 
@@ -6978,12 +6995,12 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
     int len_at = num_at + num_deleted_H;
     int inv_forbidden_edge_mask = ~forbidden_edge_mask;
     EDGE_LIST ChargeEdgeList, BondEdgeList;
-    int         itg, j, k, n, m; /* djb-rwth: removing redundant variables */
+    int         itg, j, k, n, m, num_endp;
     Vertex      endpoint0 = NO_VERTEX, endpoint1, endpoint2 = NO_VERTEX, centerpoint;
     Vertex      centerpoint_found = NO_VERTEX, endpoint2_found = NO_VERTEX;
     BNS_VERTEX *pEndp0 = NULL, *pEndp1, *pEndp2, *pCentp, *pCentp_found, *pEndp2_found = NULL;
     BNS_EDGE   *ecp0, *ecp1, *ecp2, *ecp0_found = NULL, *ecp1_found = NULL, *ecp2_found = NULL;
-    int         num_endpoints; /* djb-rwth: removing redundant variables */
+    int          tgroup_number, num_endpoints;
 
     ret = 0;
 
@@ -6993,7 +7010,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
     AllocEdgeList( &ChargeEdgeList, EDGE_LIST_CLEAR );
     AllocEdgeList( &BondEdgeList, EDGE_LIST_CLEAR );
 
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     if (ret2 < 0)
@@ -7008,7 +7025,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
         for (itg = 0; itg < pStruct->ti.num_t_groups; iEndpoint += num_endpoints, itg++)
         {
             pCentp_found = NULL;
-            /* djb-rwth: removing redundant code */
+            tgroup_number = pStruct->ti.t_group[itg].nGroupNumber;
             num_endpoints = pStruct->ti.t_group[itg].nNumEndpoints;
             for (i = 0; i < num_endpoints; i++)
             {
@@ -7076,7 +7093,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                         /* 1. Find a double bond to an endpoint */
                         ecp2 = NULL;
                         pEndp2 = NULL;
-                        for (n = 0; n < at2[centerpoint].valence; n++) /* djb-rwth: removing redundant code */
+                        for (n = 0, num_endp = 0; n < at2[centerpoint].valence; n++)
                         {
                             ecp0 = pBNS->edge + pCentp->iedge[n];
                             if (ecp0->flow)
@@ -7109,7 +7126,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                             continue;
                         }
                         /* 2. Find a single bond to an endpoint0 */
-                        for (n = 0; n < at2[centerpoint].valence; n++) /* djb-rwth: removing redundant code */
+                        for (n = 0, num_endp = 0; n < at2[centerpoint].valence; n++)
                         {
                             ecp0 = pBNS->edge + pCentp->iedge[n];
                             if (ecp0->flow)
@@ -7138,16 +7155,16 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                             /* compare centerpoints */
                             if (!pCentp_found ||
                                  /* try to avoid carbons */
-                                (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                     pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                  pVA[centerpoint_found].cNumValenceElectrons == 4 &&
-                                 pVA[centerpoint_found].cPeriodicRowNumber == 1) ||
+                                 pVA[centerpoint_found].cPeriodicRowNumber == 1 ||
                                  /* try a better non-carbon */
-                                 (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                 ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                      pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                      ( at[centerpoint].valence > at[centerpoint_found].valence ||
-                                         (at[centerpoint].valence == at[centerpoint_found].valence &&
-                                         at[centerpoint].el_number > at[centerpoint_found].el_number)) )) /* djb-rwth: addressing LLVM warnings */
+                                         at[centerpoint].valence == at[centerpoint_found].valence &&
+                                         at[centerpoint].el_number > at[centerpoint_found].el_number ))
                             {
 
                                 pCentp_found = pCentp;
@@ -7231,7 +7248,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                         }
                         pCentp = pBNS->vert + centerpoint;
                         /* traverse centerpoint edges to find the 2nd endpoint */
-                        for (n = 0; n < pCentp->num_adj_edges; n++) /* djb-rwth: removing redundant code */
+                        for (n = 0, num_endp = 0; n < pCentp->num_adj_edges; n++)
                         {
                             ecp2 = pBNS->edge + pCentp->iedge[n];
                             if (ecp2->flow)
@@ -7247,7 +7264,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                             {
                                 continue;
                             }
-                            /* djb-rwth: removing redundant code */
+                            pEndp2 = pBNS->vert + endpoint2;
 
                             if (at2[endpoint2].num_H || at2[endpoint1].charge == -1)
                             {
@@ -7270,16 +7287,16 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                             /* compare centerpoints */
                             if (!pCentp_found ||
                                  /* try to avoid carbons */
-                                (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                     pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                  pVA[centerpoint_found].cNumValenceElectrons == 4 &&
-                                 pVA[centerpoint_found].cPeriodicRowNumber == 1) ||
+                                 pVA[centerpoint_found].cPeriodicRowNumber == 1 ||
                                  /* try a better non-carbon */
-                                 (( pVA[centerpoint].cNumValenceElectrons != 4 ||
+                                 ( pVA[centerpoint].cNumValenceElectrons != 4 ||
                                      pVA[centerpoint].cPeriodicRowNumber != 1 ) &&
                                      ( at[centerpoint].valence > at[centerpoint_found].valence ||
-                                         (at[centerpoint].valence == at[centerpoint_found].valence &&
-                                         at[centerpoint].el_number > at[centerpoint_found].el_number)) )) /* djb-rwth: addressing LLVM warnings */
+                                         at[centerpoint].valence == at[centerpoint_found].valence &&
+                                         at[centerpoint].el_number > at[centerpoint_found].el_number ))
                             {
 
                                 pCentp_found = pCentp;
@@ -7307,8 +7324,8 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                 ret3 = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                       &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                if (ret3 == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                    (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge % 2 == 0) /* djb-rwth: addressing LLVM warnings */
+                if (ret3 == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                    vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge % 2 == 0)
                 {
                     ret3 = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     if (ret3 > 0)
@@ -7396,7 +7413,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                         /* 1. Find a double bond to a not endpoint */
                         ecp2 = NULL;
                         pEndp2 = NULL;
-                        for (n = 0; n < pCentp->num_adj_edges; n++) /* djb-rwth: removing redundant variables/code */
+                        for (n = 0, num_endp = 0; n < pCentp->num_adj_edges; n++)
                         {
                             ecp0 = pBNS->edge + pCentp->iedge[n];
                             if (ecp0->flow && !ecp0->forbidden)
@@ -7419,7 +7436,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                                 {
                                     continue;
                                 }
-                                /* djb-rwth: removing redundant code */
+                                pEndp2 = pBNS->vert + endpoint2;
                                 ecp2 = ecp0;           /* e2C */
                                 break;
                             }
@@ -7431,9 +7448,9 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                         /* compare centerpoints */
                         if (!pCentp_found ||
                              /* try to find carbons */
-                             (!IS_C( endpoint2_found ) && IS_C( endpoint2 )) ||
-                             (IS_C( endpoint2_found ) && IS_C( endpoint2 ) &&
-                             !IS_C( centerpoint_found ) && IS_C( centerpoint ))) /* djb-rwth: addressing LLVM warnings */
+                             !IS_C( endpoint2_found ) && IS_C( endpoint2 ) ||
+                             IS_C( endpoint2_found ) && IS_C( endpoint2 ) &&
+                             !IS_C( centerpoint_found ) && IS_C( centerpoint ))
                         {
 
                             pCentp_found = pCentp;
@@ -7459,8 +7476,8 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                 Vertex    vEndp1 = ecp1_found->neighbor12 ^ centerpoint_found;
                 Vertex    vEndp2 = ecp2_found->neighbor12 ^ centerpoint_found;
                 BNS_EDGE *pe0 = ecp0_found;
-                BNS_EDGE *pe1 = pBNS->edge + ( (long long)pVA[vEndp1].nCMinusGroupEdge - 1 ); /* djb-rwth: cast operator added */
-                /* djb-rwth: removing redundant code */
+                BNS_EDGE *pe1 = pBNS->edge + ( pVA[vEndp1].nCMinusGroupEdge - 1 );
+                pEndp1 = pBNS->vert + vEndp1;
                 pEndp2 = pBNS->vert + vEndp2;
                 pCentp = pCentp_found;
                 if (!ChargeEdgeList.num_alloc)
@@ -7510,8 +7527,8 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                 ret2 = RunBnsTestOnce( pBNS, pBD, pVA, &vPathStart, &vPathEnd, &nPathLen,
                                       &nDeltaH, &nDeltaCharge, &nNumVisitedAtoms );
 
-                if (ret2 == 1 && ( (vPathEnd == v1 && vPathStart == v2) ||
-                    (vPathEnd == v2 && vPathStart == v1) ) && nDeltaCharge == 0) /* djb-rwth: addressing LLVM warnings */
+                if (ret2 == 1 && ( vPathEnd == v1 && vPathStart == v2 ||
+                    vPathEnd == v2 && vPathStart == v1 ) && nDeltaCharge == 0)
                 {
                     ret2 = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                     if (ret2 > 0)
@@ -7554,7 +7571,7 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
         for (itg = 0; itg < pStruct->ti.num_t_groups; iEndpoint += num_endpoints, itg++)
         {
             pCentp_found = NULL;
-            /* djb-rwth: removing redundant code */
+            tgroup_number = pStruct->ti.t_group[itg].nGroupNumber;
             num_endpoints = pStruct->ti.t_group[itg].nNumEndpoints;
             for (i = 0; i < num_endpoints; i++)
             {
@@ -7602,12 +7619,12 @@ int RemoveRadFromMobileHEndpointFixH( BN_STRUCT *pBNS,
                         }
                         if (!pEndp2_found ||
                              /* try to find carbons */
-                             (!IS_C( endpoint2_found ) && IS_C( endpoint1 )) ||
-                             (IS_C( endpoint2_found ) && IS_C( endpoint1 ) &&
-                             !IS_C( centerpoint_found ) && IS_C( centerpoint ))) /* djb-rwth: addressing LLVM warning */
+                             !IS_C( endpoint2_found ) && IS_C( endpoint1 ) ||
+                             IS_C( endpoint2_found ) && IS_C( endpoint1 ) &&
+                             !IS_C( centerpoint_found ) && IS_C( centerpoint ))
                         {
                             pEndp2_found = pEndp1;
-                            /* djb-rwth: removing redundant code */
+                            pCentp_found = pCentp;
                             endpoint2_found = endpoint1;
                             centerpoint_found = centerpoint;
                             ecp1_found = ecp0;
@@ -7643,7 +7660,7 @@ exit_function:
     AllocEdgeList( &BondEdgeList, EDGE_LIST_FREE );
 
     pStruct->at = at;
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
 
     return ret;
 #undef IS_C
@@ -7679,11 +7696,11 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
     Vertex      v1p, v2p, v1m, v2m;
     BNS_VERTEX *pv1p, *pv2p, *pv1m, *pv2m;
 
-    /* djb-rwth: removing redundant code */
+    ret = 0;
     num_success = 0;
 
     /* to simplify, prepare new at[] from pBNS */
-    memcpy(at2, at, len_at * sizeof(at2[0]));
+    memcpy( at2, at, len_at * sizeof( at2[0] ) );
     pStruct->at = at2;
     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
     pStruct->at = at;
@@ -7722,8 +7739,8 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
             if (j == at2[i].valence && num_endpoints > 1)
             {
                 /* found possible centerpoint */
-                pEdgePlus = pBNS->edge + ( (long long)pVA[i].nCPlusGroupEdge - 1 ); /* djb-rwth: cast operator added */
-                pEdgeMinus = ( pVA[i].nCMinusGroupEdge > 0 ) ? pBNS->edge + ((long long) pVA[i].nCMinusGroupEdge - 1 ) : NULL; /* djb-rwth: cast operator added */
+                pEdgePlus = pBNS->edge + ( pVA[i].nCPlusGroupEdge - 1 );
+                pEdgeMinus = ( pVA[i].nCMinusGroupEdge > 0 ) ? pBNS->edge + ( pVA[i].nCMinusGroupEdge - 1 ) : NULL;
                 if (pEdgePlus->flow + ( pEdgeMinus ? pEdgeMinus->flow : 0 ) != 1)
                 {
                     continue;
@@ -7749,7 +7766,7 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
                 ret = 0;
 
                 /* set new flow to run BNS Search */
-                if ((delta = pEdgePlus->flow)) /* djb-rwth: addressing LLVM warning */
+                if (delta = pEdgePlus->flow)
                 {
                     /* positive charge <=> flow=0 on (=) edge */
                     pEdgePlus->flow -= delta;
@@ -7770,9 +7787,9 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
                         goto exit_function;
                     }
 
-                    if (ret == 1 && ( (vPathEnd == v1p && vPathStart == v2p) ||
-                        (vPathEnd == v2p && vPathStart == v1p) ) &&
-                                      nDeltaCharge == -1 /* charge moving to this atom disappers*/) /* djb-rwth: addressing LLVM warning */
+                    if (ret == 1 && ( vPathEnd == v1p && vPathStart == v2p ||
+                        vPathEnd == v2p && vPathStart == v1p ) &&
+                                      nDeltaCharge == -1 /* charge moving to this atom disappers*/)
                     {
                         ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                         ( *pnNumRunBNS )++;
@@ -7821,9 +7838,9 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
                         {
                             goto exit_function;
                         }
-                        if (ret == 1 && ( (vPathEnd == v1m && vPathStart == v2m) ||
-                                          (vPathEnd == v2m && vPathStart == v1m) ) &&
-                                          nDeltaCharge == -1  /* charge moving to this atom disappers*/) /* djb-rwth: addressing LLVM warning */
+                        if (ret == 1 && ( vPathEnd == v1m && vPathStart == v2m ||
+                                          vPathEnd == v2m && vPathStart == v1m ) &&
+                                          nDeltaCharge == -1  /* charge moving to this atom disappers*/)
                         {
                             ret = RunBnsRestoreOnce( pBNS, pBD, pVA, pTCGroups );
                             ( *pnNumRunBNS )++;
@@ -7856,7 +7873,7 @@ int MoveChargeToMakeCenerpoints( BN_STRUCT *pBNS,
                 if (ret)
                 {
                     num_success++;
-                    memcpy(at2, at, len_at * sizeof(at2[0]));
+                    memcpy( at2, at, len_at * sizeof( at2[0] ) );
                     pStruct->at = at2;
                     ret2 = CopyBnsToAtom( pStruct, pBNS, pVA, pTCGroups, 1 );
                     pStruct->at = at;

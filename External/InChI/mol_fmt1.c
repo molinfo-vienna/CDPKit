@@ -1,42 +1,36 @@
 /*
- * International Chemical Identifier (InChI)
- * Version 1
- * Software version 1.07
- * April 30, 2024
- *
- * MIT License
- *
- * Copyright (c) 2024 IUPAC and InChI Trust
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+* International Chemical Identifier (InChI)
+* Version 1
+* Software version 1.06
+* December 15, 2020
 *
 * The InChI library and programs are free software developed under the
- * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST.
- * Modifications and additions by IUPAC and the InChI Trust.
- * Some portions of code were developed/changed by external contributors
- * (either contractor or volunteer) which are listed in the file
- * 'External-contributors' included in this distribution.
- *
- * info@inchi-trust.org
- *
+* auspices of the International Union of Pure and Applied Chemistry (IUPAC).
+* Originally developed at NIST.
+* Modifications and additions by IUPAC and the InChI Trust.
+* Some portions of code were developed/changed by external contributors
+* (either contractor or volunteer) which are listed in the file
+* 'External-contributors' included in this distribution.
+*
+* IUPAC/InChI-Trust Licence No.1.0 for the
+* International Chemical Identifier (InChI)
+* Copyright (C) IUPAC and InChI Trust
+*
+* This library is free software; you can redistribute it and/or modify it
+* under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
+* or any later version.
+*
+* Please note that this library is distributed WITHOUT ANY WARRANTIES
+* whatsoever, whether expressed or implied.
+* See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
+*
+* You should have received a copy of the IUPAC/InChI Trust InChI
+* Licence No. 1.0 with this library; if not, please e-mail:
+*
+* info@inchi-trust.org
+*
 */
+
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -53,7 +47,6 @@
 #include "ichi_io.h"
 #include "strutil.h"
 
-#include "bcf_s.h"
 
 /*
     MolFile related procedures - 1
@@ -159,12 +152,12 @@ MOL_FMT_DATA* ReadMolfile( INCHI_IOSTREAM *inp_file,
     */
     if (mfdata)
     {
-        int nzz = 0; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+        int nzz = 0;
         int pseudos_allowed = (treat_NPZz == 1) || (treat_polymers != POLYMERS_NO);		
         nzz = MolfileTreatPseudoElementAtoms( &mfdata->ctab,
                                               pseudos_allowed,
                                               err,
-                                              pStrErr ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                                              pStrErr );
     }
 
     return mfdata;
@@ -195,7 +188,7 @@ MOL_FMT_DATA * MolfileReadDataLines( INCHI_IOSTREAM *inp_file,
         should_read_all = 1;
     }
 
-    /* djb-rwth: removing redundant code */
+    retcode = 0;
     *err = 0;
 
     if (should_read_all)
@@ -216,8 +209,8 @@ MOL_FMT_DATA * MolfileReadDataLines( INCHI_IOSTREAM *inp_file,
     {
         pHdr = OnlyHeaderBlock;
         pCtab = OnlyCTab ? OnlyCTab : &ctab;
-        memset( pHdr, 0, sizeof( MOL_FMT_HEADER_BLOCK ) ); /* djb-rwth: memset_s C11/Annex K variant? */
-        memset( pCtab, 0, sizeof( MOL_FMT_CTAB ) ); /* djb-rwth: memset_s C11/Annex K variant? */
+        memset( pHdr, 0, sizeof( MOL_FMT_HEADER_BLOCK ) );
+        memset( pCtab, 0, sizeof( MOL_FMT_CTAB ) );
     }
 
     pCtab->bonds = NULL;
@@ -401,31 +394,25 @@ MOL_FMT_DATA * MolfileReadDataLines( INCHI_IOSTREAM *inp_file,
         int i;
         for (i = 0; i < pCtab->n_atoms; i++)
         {
-            if (pCtab->atoms) /* djb-rwth: fixing a NULL pointer dereference */
+            if (pCtab->atoms[i].valence > MAXVAL)
             {
-                if (pCtab->atoms[i].valence > MAXVAL)
-                {
-                    retcode = 70 + 9;
-                    TREAT_ERR( retcode, 0, "Too large input atomic valence" );
-                    break;
-                }
+                retcode = 70 + 9;
+                TREAT_ERR( retcode, 0, "Too large input atomic valence" );
+                break;
             }
         }
 #if ( FIX_CURE53_ISSUE_NULL_DEREFERENCE_MAKE_A_COPY_OF_T_GROUP_INFO==1 || defined(FIX_IMPOSSIBLE_H_ISOTOPE_BUG) )
         /* Do not eat H isotopes other than [H,D,T] */
         for (i = 0; i < pCtab->n_atoms; i++)
         {
-            if (pCtab->atoms) /* djb-rwth: fixing a NULL pointer dereference */
+            int dmass = pCtab->atoms[i].mass_difference;
+            if ((!strcmp(pCtab->atoms[i].symbol, "H") && dmass != 0 && dmass != 1 && dmass != 2 && dmass != 127) ||
+                (!strcmp(pCtab->atoms[i].symbol, "D") && dmass != 0 && dmass != 1 && dmass != -1) ||
+                (!strcmp(pCtab->atoms[i].symbol, "T") && dmass != 0 && dmass != -1 && dmass != -2))
             {
-                int dmass = pCtab->atoms[i].mass_difference;
-                if ((!strcmp(pCtab->atoms[i].symbol, "H") && dmass != 0 && dmass != 1 && dmass != 2 && dmass != 127) ||
-                    (!strcmp(pCtab->atoms[i].symbol, "D") && dmass != 0 && dmass != 1 && dmass != -1) ||
-                    (!strcmp(pCtab->atoms[i].symbol, "T") && dmass != 0 && dmass != -1 && dmass != -2))
-                {
-                    retcode = 70 + 8;
-                    TREAT_ERR(retcode, 0, "Unacceptable isotope of hydrogen");
-                    break;
-                }
+                retcode = 70 + 8;
+                TREAT_ERR(retcode, 0, "Unacceptable isotope of hydrogen");
+                break;
             }
         }
 #endif
@@ -467,7 +454,7 @@ int MolfileReadHeaderLines( MOL_FMT_HEADER_BLOCK *hdr,
 /* Header Block */
 
     char line[MOL_FMT_INPLINELEN]; /* + cr +lf +zero termination + reserve */
-    int  err = 0, len; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    int  err = 0, len;
     const int  line_len = sizeof( line );
     char *p;
 
@@ -496,7 +483,7 @@ int MolfileReadHeaderLines( MOL_FMT_HEADER_BLOCK *hdr,
     len = MolfileReadField( hdr->molname,
                             sizeof( hdr->molname ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
 
     /* Header line #2 */
     p = inchi_fgetsLf( line, line_len, inp_file );
@@ -522,30 +509,30 @@ int MolfileReadHeaderLines( MOL_FMT_HEADER_BLOCK *hdr,
     len = MolfileReadField( hdr->user_initls,
                             sizeof( hdr->user_initls ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
     len = MolfileReadField( hdr->prog_name,
                             sizeof( hdr->prog_name ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
 
     /*------------ Relax strictness -----------------------*/
-    len = MolfileReadField( &hdr->month, 2, MOL_FMT_CHAR_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->day, 2, MOL_FMT_CHAR_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->year, 2, MOL_FMT_CHAR_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->hour, 2, MOL_FMT_CHAR_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->minute, 2, MOL_FMT_CHAR_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( hdr->dim_code, sizeof( hdr->dim_code ) - 1, MOL_FMT_STRING_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->scaling_factor1, 2, MOL_FMT_SHORT_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->scaling_factor2, 10, MOL_FMT_DOUBLE_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->energy, 12, MOL_FMT_DOUBLE_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
-    len = MolfileReadField( &hdr->internal_regno, 6, MOL_FMT_LONG_INT_DATA, &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    len = MolfileReadField( &hdr->month, 2, MOL_FMT_CHAR_INT_DATA, &p );
+    len = MolfileReadField( &hdr->day, 2, MOL_FMT_CHAR_INT_DATA, &p );
+    len = MolfileReadField( &hdr->year, 2, MOL_FMT_CHAR_INT_DATA, &p );
+    len = MolfileReadField( &hdr->hour, 2, MOL_FMT_CHAR_INT_DATA, &p );
+    len = MolfileReadField( &hdr->minute, 2, MOL_FMT_CHAR_INT_DATA, &p );
+    len = MolfileReadField( hdr->dim_code, sizeof( hdr->dim_code ) - 1, MOL_FMT_STRING_DATA, &p );
+    len = MolfileReadField( &hdr->scaling_factor1, 2, MOL_FMT_SHORT_INT_DATA, &p );
+    len = MolfileReadField( &hdr->scaling_factor2, 10, MOL_FMT_DOUBLE_DATA, &p );
+    len = MolfileReadField( &hdr->energy, 12, MOL_FMT_DOUBLE_DATA, &p );
+    len = MolfileReadField( &hdr->internal_regno, 6, MOL_FMT_LONG_INT_DATA, &p );
 
     /* Save the whole line 2 */
     p = line;
     len = MolfileReadField( hdr->line2,
                             sizeof( hdr->line2 ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
 
     /* Header line #3: comment */
     p = inchi_fgetsLf( line, line_len, inp_file );
@@ -566,7 +553,7 @@ int MolfileReadHeaderLines( MOL_FMT_HEADER_BLOCK *hdr,
     len = MolfileReadField( hdr->comment,
                             sizeof( hdr->comment ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
 
 err_fin:
 
@@ -584,7 +571,7 @@ int MolfileReadCountsLine( MOL_FMT_CTAB* ctab,
     char *p;
     char line[MOL_FMT_INPLINELEN];
     const int line_len = sizeof( line );
-    int   err = 0, len; /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+    int   err = 0, len;
 
     p = inchi_fgetsLf( line, line_len, inp_file );
 
@@ -639,7 +626,7 @@ int MolfileReadCountsLine( MOL_FMT_CTAB* ctab,
     len = MolfileReadField( ctab->version_string,
                             sizeof( ctab->version_string ) - 1,
                             MOL_FMT_STRING_DATA,
-                            &p ); /* djb-rwth: ignoring LLVM warning: variable used to store function return value */
+                            &p );
 
     /* Allocate additional space if V3000 */
     if (!strcmp( ctab->version_string, "V3000" ))
@@ -991,7 +978,6 @@ int MolfileReadPropBlock( MOL_FMT_CTAB* ctab,
     int  isotope_encountered = 0;
     int     polymer_occurred = 0;
 
-    szType[0] = '\0'; /* djb-rwth: adding zero termination */
     int debug_polymers = 0;
 #if ( DEBUG_POLYMERS == 1 )
     debug_polymers = 1;
@@ -1085,11 +1071,11 @@ int MolfileReadPropBlock( MOL_FMT_CTAB* ctab,
                 }
                 if (strlen( p ) < sizeof( ctab->atoms[0].symbol ))
                 {
-                    strcpy(atom->symbol, p);
+                    strcpy( atom->symbol, p );
                 }
                 else
                 {
-                    strcpy(atom->symbol, "???");
+                    strcpy( atom->symbol, "???" );
                 }
                 atom->atom_aliased_flag++;
             }
@@ -1340,7 +1326,7 @@ int MolfileReadPropBlock( MOL_FMT_CTAB* ctab,
                 if (1 /* !ctab->atoms[atoms[j]-1].atom_aliased_flag */)
                 {
                     char *at = ctab->atoms[atoms[j] - 1].symbol;
-                    if (at[1] || (at[0] != 'D' && at[0] != 'T')) /* djb-rwth: addressing LLVM warning */
+                    if (at[1] || at[0] != 'D' && at[0] != 'T')
                     {  /*  D & T cannot have ISO */
                         /*  need atomic weight to calculate isotope difference. 7-14-00 DCh. */
 
@@ -1446,13 +1432,13 @@ int MolfileReadSgroupOfPolymer( MOL_FMT_CTAB* ctab,
     char  stmp[4], stmplong[81];
     S_SHORT sg_nums[8], sg_num = -1, sg_atoms[15], sg_bonds[15], tmp;
     int q, fail = 0, len;
-    /* djb-rwth: removing redundant variables */
+    int debug_polymers = 0;
 #if ( DEBUG_POLYMERS == 1 )
     debug_polymers = 1;
 #elif  ( DEBUG_POLYMERS == 2 )
     debug_polymers = 2;
 #endif
-    /* djb-rwth: removing redundant code */
+    debug_polymers = 0;
 
     /* Check for possible lead codes */
 
@@ -1836,7 +1822,7 @@ int MolfileReadSgroupOfPolymer( MOL_FMT_CTAB* ctab,
         if (!fail)
         {
             lrtrim( stmplong, &len );
-            strcpy(ctab->sgroups.group[index]->smt, stmplong);
+            strcpy( ctab->sgroups.group[index]->smt, stmplong );
         }
         if (fail)
         {
