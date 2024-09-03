@@ -11,6 +11,7 @@
 #define MSGPACK_V1_VREFBUFFER_HPP
 
 #include "msgpack/v1/vrefbuffer_decl.hpp"
+#include "msgpack/assert.hpp"
 
 #include <stdexcept>
 #include <algorithm>
@@ -24,11 +25,16 @@
 
 #if defined(unix) || defined(__unix) || defined(__APPLE__) || defined(__OpenBSD__)
 #include <sys/uio.h>
+namespace msgpack {
+typedef ::iovec iovec;
+} // namespace msgpack
 #else
+namespace msgpack {
 struct iovec {
     void  *iov_base;
     size_t iov_len;
 };
+} // namespace msgpack
 #endif
 
 namespace msgpack {
@@ -107,6 +113,10 @@ public:
 public:
     void write(const char* buf, size_t len)
     {
+        MSGPACK_ASSERT(buf || len == 0);
+
+        if (!buf) return;
+
         if(len < m_ref_size) {
             append_copy(buf, len);
         } else {
@@ -117,7 +127,7 @@ public:
     void append_ref(const char* buf, size_t len)
     {
         if(m_tail == m_end) {
-            const size_t nused = m_tail - m_array;
+            const size_t nused = static_cast<size_t>(m_tail - m_array);
             const size_t nnext = nused * 2;
 
             iovec* nvec = static_cast<iovec*>(::realloc(
@@ -145,11 +155,11 @@ public:
             if(sz < len) {
                 sz = len;
             }
-             
+
             if(sizeof(chunk) + sz < sz){
                 throw std::bad_alloc();
             }
-            
+
             chunk* c = static_cast<chunk*>(::malloc(sizeof(chunk) + sz));
             if(!c) {
                 throw std::bad_alloc();
@@ -177,14 +187,14 @@ public:
         }
     }
 
-    const struct iovec* vector() const
+    const iovec* vector() const
     {
         return m_array;
     }
 
     size_t vector_size() const
     {
-        return m_tail - m_array;
+        return static_cast<size_t>(m_tail - m_array);
     }
 
     void migrate(vrefbuffer* to)
@@ -202,11 +212,11 @@ public:
 
         empty->next = MSGPACK_NULLPTR;
 
-        const size_t nused = m_tail - m_array;
+        const size_t nused = static_cast<size_t>(m_tail - m_array);
         if(to->m_tail + nused < m_end) {
-            const size_t tosize = to->m_tail - to->m_array;
+            const size_t tosize = static_cast<size_t>(to->m_tail - to->m_array);
             const size_t reqsize = nused + tosize;
-            size_t nnext = (to->m_end - to->m_array) * 2;
+            size_t nnext = static_cast<size_t>(to->m_end - to->m_array) * 2;
             while(nnext < reqsize) {
                 size_t tmp_nnext = nnext * 2;
                 if (tmp_nnext <= nnext) {
