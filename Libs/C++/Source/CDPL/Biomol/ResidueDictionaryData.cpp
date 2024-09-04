@@ -64,7 +64,7 @@ namespace CDPL
 #ifndef _MSC_VER
 
             const char RESIDUE_STRUCTURE_DATA[] =
-                #include "ResidueDictionaryStructureData.cdf.str"
+                #include "ResidueDictionaryStructureData.cdf.gz.str"
                 ;
 
             std::pair<const char*, std::size_t> getStructureData()

@@ -35,7 +35,7 @@
 #include "CDPL/Biomol/ResidueType.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/CDFMoleculeReader.hpp"
+#include "CDPL/Chem/CDFGZMoleculeReader.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -106,8 +106,8 @@ namespace
 
         static std::pair<const char*, std::size_t> res_struct_data = Biomol::ResidueDictionaryData::getStructureData();
         static boost::iostreams::stream<boost::iostreams::array_source>
-            res_struct_is(res_struct_data.first, res_struct_data.second);
-        static Chem::CDFMoleculeReader rest_struct_reader(res_struct_is);
+                                         res_struct_is(res_struct_data.first, res_struct_data.second);
+        static Chem::CDFGZMoleculeReader res_struct_reader(res_struct_is);
 
         StructureCache::const_iterator rsc_it = resStructureCache.find(code);
 
@@ -123,7 +123,7 @@ namespace
         Molecule::SharedPointer mol_ptr(new BasicMolecule());
 
         try {
-            rest_struct_reader.read(data_entry.molIndex, *mol_ptr);
+            res_struct_reader.read(data_entry.molIndex, *mol_ptr);
 
         } catch (std::exception& e) {
             throw Base::IOError(
@@ -147,23 +147,16 @@ namespace
             }
         }
 
-        setResidueCode(*mol_ptr, code);
         setName(*mol_ptr, data_entry.name);
-
-        setAtomTypesFromSymbols(*mol_ptr, false);
         perceiveComponents(*mol_ptr, false);
-        perceiveComponentGroups(*mol_ptr, false);
         perceiveSSSR(*mol_ptr, false);
         setRingFlags(*mol_ptr, false);
-        calcTopologicalDistanceMatrix(*mol_ptr, false);
         calcImplicitHydrogenCounts(*mol_ptr, false);
         perceiveHybridizationStates(*mol_ptr, false);
         setAromaticityFlags(*mol_ptr, false);
         perceiveAtomStereoCenters(*mol_ptr, false, false);
         perceiveBondStereoCenters(*mol_ptr, false, false);
-        calcAtomStereoDescriptors(*mol_ptr, false, 3);
-        calcBondStereoDescriptors(*mol_ptr, false, 3);
-
+      
         resStructureCache.insert(StructureCache::value_type(code, mol_ptr));
 
         return mol_ptr;

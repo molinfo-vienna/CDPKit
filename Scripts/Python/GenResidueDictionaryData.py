@@ -73,24 +73,44 @@ def genResidueDictionaryData():
     output.append('// clang-format off\nconst ResidueDataEntry RESIDUE_DATA[] = {\n')
 
     comp_reader = Biomol.FileMMCIFMoleculeReader(sys.argv[1])
-    comp_writer = Chem.FileCDFMolecularGraphWriter(sys.argv[3])
+    comp_writer = Chem.FileCDFGZMolecularGraphWriter(sys.argv[3])
     comp = Chem.BasicMolecule()
     comp_idx = 0
 
     while comp_reader.read(comp):
         comp_name = Chem.getName(comp).replace('\n', '').replace('"', '\\"')
+        cif_data = Biomol.getMMCIFData(comp)
         
+        try:
+            Chem.perceiveSSSR(comp, False)
+            Chem.setRingFlags(comp, False)
+            Chem.calcImplicitHydrogenCounts(comp, False)
+            Chem.perceiveHybridizationStates(comp, False)
+            Chem.setAromaticityFlags(comp, False)
+            Chem.perceiveAtomStereoCenters(comp, False, False)
+            Chem.perceiveBondStereoCenters(comp, False, False)
+            Chem.calcAtomStereoDescriptors(comp, False, 3)
+            Chem.calcBondStereoDescriptors(comp, False, 3)
+        except Exception as e:
+            print(f'!! Calculationg stereodescriptors for entry {cif_data.id} failed: {e.what()}', file=sys.stderr)
+            
         Chem.clearComponents(comp)
+        Chem.clearSSSR(comp)
+        Chem.clearAromaticSubstructure(comp)
         Chem.clearName(comp)
         
         for atom in comp.atoms:
             if Chem.getFormalCharge(atom) == 0:
                 Chem.clearFormalCharge(atom)
 
+            Chem.clearImplicitHydrogenCount(atom)
+            Chem.clearHybridizationState(atom)
             Chem.clear3DCoordinates(atom)
             Chem.clear3DCoordinatesArray(atom)
             Chem.clearCIPConfiguration(atom)
             Chem.clearAromaticityFlag(atom)
+            Chem.clearRingFlag(atom)
+            Chem.clearStereoCenterFlag(atom)
 
             if Chem.getType(atom) != Chem.AtomType.UNKNOWN:
                 Chem.clearSymbol(atom)
@@ -103,8 +123,8 @@ def genResidueDictionaryData():
         for bond in comp.bonds:
             Chem.clearCIPConfiguration(bond)
             Chem.clearAromaticityFlag(bond)
-
-        cif_data = Biomol.getMMCIFData(comp)
+            Chem.clearRingFlag(bond)
+            Chem.clearStereoCenterFlag(bond)
 
         #print('Processing dictionary entry ' + cif_data.id + ' ...', file=sys.stderr)
 

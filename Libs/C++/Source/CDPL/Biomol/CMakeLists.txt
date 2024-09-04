@@ -26,14 +26,14 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_
 if(MSVC)
   configure_file(ResidueDictionaryStructureData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/ResidueDictionaryStructureData.rc" @ONLY)
 else()
-  add_custom_command(OUTPUT ResidueDictionaryStructureData.cdf.str
+  add_custom_command(OUTPUT ResidueDictionaryStructureData.cdf.gz.str
     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-    "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-    "ResidueDictionaryStructureData.cdf.str"
-    DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+    "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf.gz" 
+    "ResidueDictionaryStructureData.cdf.gz.str"
+    DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf.gz" 
     COMMENT "-- Processing residue dictionary structure data..."
     )
-  add_custom_target(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.str)
+  add_custom_target(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.gz.str)
 endif()
 
 set(cdpl-biomol_LIB_SRCS
@@ -85,7 +85,7 @@ set(cdpl-biomol_LIB_SRCS
 if(MSVC)
   set(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/ResidueDictionaryStructureData.rc")
 else()
-  set(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.cdf.str)
+  set(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.cdf.gz.str)
 endif()
  
 link_libraries(${Boost_IOSTREAMS_LIBRARY})
