@@ -34,6 +34,7 @@
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/ComponentSet.hpp"
@@ -254,7 +255,7 @@ void Biomol::MMCIFDataReader::initChemCompDict(const MMCIFData& data)
 {
     procChemCompAtoms(data);
     procChemCompBonds(data);
-
+    getMissingChemCompLinkAtoms();
 }
 
 void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
@@ -293,24 +294,8 @@ void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
 
         if (!id)
             continue;
-        
-        std::size_t comp_list_idx = chemCompCount;
 
-        auto it = chemCompDict.find(*comp_id);
-
-        if (it == chemCompDict.end()) {
-            assert(chemCompCount <= chemCompList.size());
-            
-            if (chemCompCount == chemCompList.size())
-                chemCompList.resize(++chemCompCount);
-            else
-                chemCompList[chemCompCount++].clear();
-
-            chemCompDict.emplace(*comp_id, comp_list_idx);
-            
-        } else
-            comp_list_idx = it->second;
-
+        auto& comp = getOrAddChemCompData(*comp_id);
         auto* alt_id = getValue(alt_ids, i);
         auto atom_type = Chem::AtomType::UNKNOWN;
         
@@ -329,8 +314,9 @@ void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
         getValue(comp_atoms, form_charges, i, form_charge);
         getValue(comp_atoms, leaving_flags, i, leaving_flag);
 
-        chemCompAtomLookupMap.emplace(ChemCompAtomID{comp_id, id}, chemCompList[comp_list_idx].atoms.size());
-        chemCompList[comp_list_idx].atoms.emplace_back(id, alt_id, form_charge, atom_type, leaving_flag);
+        chemCompAtomLookupMap.emplace(ChemCompAtomID{comp_id, id}, comp.atoms.size());
+
+        comp.atoms.emplace_back(id, alt_id, form_charge, atom_type, leaving_flag);
     }
 }
 
@@ -419,10 +405,73 @@ void Biomol::MMCIFDataReader::procChemCompBonds(const MMCIFData& data)
         } else
             order = 1;
 
-        chemCompList[it->second].bonds.emplace_back(it1->second, it2->second, order);
+        auto& comp = chemCompList[it->second];
+        auto atom_1_idx = it1->second;
+        auto atom_2_idx = it1->second;
+                          
+        comp.bonds.emplace_back(atom_1_idx, atom_2_idx, order);
+
+        if (comp.atoms[atom_1_idx].leavingFlag ^ comp.atoms[atom_2_idx].leavingFlag)
+            comp.linkAtoms.insert(comp.atoms[atom_1_idx].leavingFlag ? atom_2_idx : atom_1_idx);
     }
 }
 
+void Biomol::MMCIFDataReader::getMissingChemCompLinkAtoms()
+{
+    for (auto& ce : chemCompDict) {
+        auto& comp = chemCompList[ce.second];
+
+        if (!comp.linkAtoms.empty())
+            continue;
+        
+        auto& comp_id = ce.first;        
+        auto dict_struct = ResidueDictionary::getStructure(comp_id);
+
+        if (!dict_struct)
+            continue;
+        
+        for (auto& atom : dict_struct->getAtoms()) {
+            if (!getResidueLinkingAtomFlag(atom))
+                continue;
+
+            auto it = chemCompAtomLookupMap.find({&comp_id, &getResidueAtomName(atom)});
+
+            if (it == chemCompAtomLookupMap.end()) {
+                if (!hasResidueAltAtomName(atom))
+                    continue;
+
+                it = chemCompAtomLookupMap.find({&comp_id, &getResidueAltAtomName(atom)});
+
+                if (it == chemCompAtomLookupMap.end())
+                    continue;
+            }
+            
+            comp.linkAtoms.insert(it->second);
+        }
+    }
+}
+
+Biomol::MMCIFDataReader::ChemComp& Biomol::MMCIFDataReader::getOrAddChemCompData(const std::string& comp_id)
+{
+    auto it = chemCompDict.find(comp_id);
+
+    if (it == chemCompDict.end()) {
+        assert(chemCompCount <= chemCompList.size());
+
+        chemCompDict.emplace(comp_id, chemCompCount);
+
+        if (chemCompCount == chemCompList.size()) {
+            chemCompList.resize(++chemCompCount);
+
+            return chemCompList.back();
+        }
+
+        return chemCompList[chemCompCount++].clear();
+    }
+
+    return chemCompList[it->second];
+}
+           
 void Biomol::MMCIFDataReader::readChemComps(const MMCIFData& data, Chem::Molecule& mol)
 {
     auto prev_num_atoms = mol.getNumAtoms();
@@ -598,12 +647,11 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
             set3DCoordinatesArray(atom, coords_array_ptr);
             set3DCoordinates(atom, coords);
             
-        } else if (have_coords) {
+        } else if (have_coords)
             set3DCoordinates(atom, coords);
             
-        } else if (have_ideal_coords) {
+        else if (have_ideal_coords)
             set3DCoordinates(atom, ideal_coords);
-        }
 
         if (auto* sto_config = getValue(sto_configs, i)) {
             if (Internal::isEqualCI(*sto_config, ChemCompAtom::StereoConfig::R))

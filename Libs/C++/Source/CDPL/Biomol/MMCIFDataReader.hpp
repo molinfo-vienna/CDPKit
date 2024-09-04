@@ -65,6 +65,8 @@ namespace CDPL
           private:
             enum Token : int;
 
+            struct ChemComp;
+            
             void init(std::istream&);
 
             void readMacromolecule(const MMCIFData& data, Chem::Molecule& mol);
@@ -72,7 +74,11 @@ namespace CDPL
             void initChemCompDict(const MMCIFData& data);
             void procChemCompAtoms(const MMCIFData& data);
             void procChemCompBonds(const MMCIFData& data);
-       
+            
+            void getMissingChemCompLinkAtoms();
+            
+            ChemComp& getOrAddChemCompData(const std::string& comp_id);
+            
             void readChemComps(const MMCIFData& data, Chem::Molecule& mol);
             void readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol);
             bool readChemCompBonds(const MMCIFData& data, Chem::Molecule& mol);
@@ -133,11 +139,13 @@ namespace CDPL
                     std::size_t order;
                 };
 
-                void clear()
+                ChemComp& clear()
                 {
                     atoms.clear();
                     bonds.clear();
                     linkAtoms.clear();
+
+                    return *this;
                 }
 
                 typedef std::vector<Atom>     AtomList;
