@@ -248,7 +248,7 @@ void Biomol::MMCIFDataReader::init(std::istream& is)
 void Biomol::MMCIFDataReader::readMacromolecule(const MMCIFData& data, Chem::Molecule& mol)
 {
     initChemCompDict(data);
-
+    readAtomSites(data, mol);
 }
 
 void Biomol::MMCIFDataReader::initChemCompDict(const MMCIFData& data)
@@ -413,6 +413,50 @@ void Biomol::MMCIFDataReader::procChemCompBonds(const MMCIFData& data)
 
         if (comp.atoms[atom_1_idx].leavingFlag ^ comp.atoms[atom_2_idx].leavingFlag)
             comp.linkAtoms.insert(comp.atoms[atom_1_idx].leavingFlag ? atom_2_idx : atom_1_idx);
+    }
+}
+
+void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecule& mol)
+{
+    using namespace MMCIF;
+    
+    auto atom_sites = data.findCategory(AtomSite::NAME);
+
+    if (!atom_sites)
+        return;
+
+    auto num_atoms = atom_sites->getNumValueRows();
+
+    if (num_atoms == 0)
+        return;
+
+    auto pdb_groups = atom_sites->findItem(AtomSite::Item::GROUP_PDB);
+    auto ids = atom_sites->findItem(AtomSite::Item::ID);
+    auto type_syms = atom_sites->findItem(AtomSite::Item::TYPE_SYMBOL);
+    auto atom_ids = atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID);
+    auto atom_alt_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
+    auto comp_ids = atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID);
+    auto res_seq_ids = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
+    auto chain_ids = atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID);
+    auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
+    auto coords_x = atom_sites->findItem(AtomSite::Item::COORDS_X);
+    auto coords_y = atom_sites->findItem(AtomSite::Item::COORDS_Y);
+    auto coords_z = atom_sites->findItem(AtomSite::Item::COORDS_Z);
+    auto occupancies = atom_sites->findItem(AtomSite::Item::OCCUPANCY);
+    auto b_factors = atom_sites->findItem(AtomSite::Item::B_ISO_OR_EQUIV);
+    auto form_charges = atom_sites->findItem(AtomSite::Item::PDBX_FORMAL_CHARGE);
+    auto model_nums = atom_sites->findItem(AtomSite::Item::PDBX_PDB_MODEL_NUM);
+
+    Math::Vector3D coords;
+    
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        auto& atom = mol.addAtom();
+     
+        if (getValue(atom_sites, coords_x, i, coords[0]) &&
+            getValue(atom_sites, coords_y, i, coords[1]) &&
+            getValue(atom_sites, coords_z, i, coords[2]))
+
+            set3DCoordinates(atom, coords);
     }
 }
 

@@ -73,16 +73,16 @@ namespace CDPL
                     const std::string LABEL_ASYM_ID      = "label_asym_id";
                     const std::string LABEL_ENTITY_ID    = "label_entity_id";
                     const std::string LABEL_SEQ_ID       = "label_seq_id";
-                    const std::string PDBX_PDB_INS_CODE  = "pdbx_PDB_ins_code";
-                    const std::string CARTN_X            = "Cartn_x";
-                    const std::string CARTN_Y            = "Cartn_y";
-                    const std::string CARTN_Z            = "Cartn_z";
+                    const std::string COORDS_X           = "Cartn_x";
+                    const std::string COORDS_Y           = "Cartn_y";
+                    const std::string COORDS_Z           = "Cartn_z";
                     const std::string OCCUPANCY          = "occupancy";
                     const std::string B_ISO_OR_EQUIV     = "B_iso_or_equiv";
                     const std::string AUTH_SEQ_ID        = "auth_seq_id";
                     const std::string AUTH_COMP_ID       = "auth_comp_id";
                     const std::string AUTH_ASYM_ID       = "auth_asym_id";
                     const std::string AUTH_ATOM_ID       = "auth_atom_id";
+                    const std::string PDBX_PDB_INS_CODE  = "pdbx_PDB_ins_code";
                     const std::string PDBX_FORMAL_CHARGE = "pdbx_formal_charge";
                     const std::string PDBX_PDB_MODEL_NUM = "pdbx_PDB_model_num";
                 } // namespace Item

@@ -74,6 +74,8 @@ namespace CDPL
             void initChemCompDict(const MMCIFData& data);
             void procChemCompAtoms(const MMCIFData& data);
             void procChemCompBonds(const MMCIFData& data);
+
+            void readAtomSites(const MMCIFData& data, Chem::Molecule& mol);
             
             void getMissingChemCompLinkAtoms();
             
