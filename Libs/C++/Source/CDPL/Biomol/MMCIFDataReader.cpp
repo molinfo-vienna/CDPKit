@@ -218,6 +218,8 @@ bool Biomol::MMCIFDataReader::skipMolecule(std::istream& is)
 
 bool Biomol::MMCIFDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 {
+    init(is);
+
     auto data = parseInput(is);
 
     if (!data)
@@ -431,13 +433,30 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
         return;
 
     auto pdb_groups = atom_sites->findItem(AtomSite::Item::GROUP_PDB);
-    auto ids = atom_sites->findItem(AtomSite::Item::ID);
+    auto serial_nos = atom_sites->findItem(AtomSite::Item::ID);
     auto type_syms = atom_sites->findItem(AtomSite::Item::TYPE_SYMBOL);
-    auto atom_ids = atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID);
     auto atom_alt_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
+
+    auto atom_ids = atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID);
+
+    if (!atom_ids)
+        atom_ids = atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID);
+    
     auto comp_ids = atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID);
-    auto res_seq_ids = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
+
+    if (!comp_ids)
+        comp_ids = atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID);
+    
+    auto res_seq_nos = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
+
+    if (!res_seq_nos)
+        res_seq_nos = atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID);
+    
     auto chain_ids = atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID);
+
+    if (!chain_ids)
+        chain_ids = atom_sites->findItem(AtomSite::Item::AUTH_ASYM_ID);
+    
     auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
     auto coords_x = atom_sites->findItem(AtomSite::Item::COORDS_X);
     auto coords_y = atom_sites->findItem(AtomSite::Item::COORDS_Y);
@@ -445,18 +464,105 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     auto occupancies = atom_sites->findItem(AtomSite::Item::OCCUPANCY);
     auto b_factors = atom_sites->findItem(AtomSite::Item::B_ISO_OR_EQUIV);
     auto form_charges = atom_sites->findItem(AtomSite::Item::PDBX_FORMAL_CHARGE);
-    auto model_nums = atom_sites->findItem(AtomSite::Item::PDBX_PDB_MODEL_NUM);
+    auto model_nos = atom_sites->findItem(AtomSite::Item::PDBX_PDB_MODEL_NUM);
 
     Math::Vector3D coords;
     
     for (std::size_t i = 0; i < num_atoms; i++) {
         auto& atom = mol.addAtom();
-     
+        auto comp_id = getValue(comp_ids, i);
+
+        if (comp_id)
+            setResidueCode(atom, *comp_id);
+        
+        if (auto pdb_group = getValue(pdb_groups, i)) {
+            if (Internal::isEqualCI(*pdb_group, AtomSite::PDBGroup::ATOM))
+                setHeteroAtomFlag(atom, false);
+
+            else if (Internal::isEqualCI(*pdb_group, AtomSite::PDBGroup::HET_ATOM))
+                setHeteroAtomFlag(atom, true);
+
+            else if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(atom_sites, pdb_groups) +
+                                    ": invalid PDB atom group specification '" + *pdb_group +
+                                    (num_atoms > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+            else
+                setHeteroAtomFlag(atom, comp_id ? !ResidueDictionary::isStdResidue(*comp_id) : true);
+
+        } else
+            setHeteroAtomFlag(atom, comp_id ? !ResidueDictionary::isStdResidue(*comp_id) : true);
+
+        if (auto atom_id = getValue(atom_ids, i))
+            setResidueAtomName(atom, *atom_id);
+
+        if (auto atom_id = getValue(atom_alt_ids, i))
+            setResidueAltAtomName(atom, *atom_id);
+       
+        long serial_no = 0;
+
+        if (getValue(atom_sites, serial_nos, i, serial_no))
+            setSerialNumber(atom, serial_no);
+
+        long res_seq_no = 0;
+
+        if (getValue(atom_sites, res_seq_nos, i, res_seq_no))
+            setResidueSequenceNumber(atom, res_seq_no);
+
+        if (auto chain_id = getValue(chain_ids, i))
+            setChainID(atom, *chain_id);
+
+        if (auto ins_code = getValue(ins_codes, i)) {
+            if (ins_code->length() == 1)
+                setResidueInsertionCode(atom, (*ins_code)[0]);
+
+            else if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(atom_sites, type_syms) +
+                                    ": invalid residue insertion code" +
+                                    (num_atoms > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+        }
+        
+        if (auto* type_sym = getValue(type_syms, i)) {
+            auto atom_type = Chem::AtomDictionary::getType(*type_sym);
+
+            if (atom_type == Chem::AtomType::UNKNOWN) {
+                if (strictErrorChecking)
+                    throw Base::IOError("MMCIFDataReader: " + getFQItemName(atom_sites, type_syms) +
+                                        ": unknown atom type symbol '" + *type_sym +
+                                        (num_atoms > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+
+                setSymbol(atom, *type_sym);
+                
+            } else
+                setSymbol(atom, Chem::AtomDictionary::getSymbol(atom_type));
+
+            setType(atom, atom_type);
+        }
+        
+        long form_charge = 0;
+        
+        if (getValue(atom_sites, form_charges, i, form_charge))
+            setFormalCharge(atom, form_charge);
+        
         if (getValue(atom_sites, coords_x, i, coords[0]) &&
             getValue(atom_sites, coords_y, i, coords[1]) &&
             getValue(atom_sites, coords_z, i, coords[2]))
 
             set3DCoordinates(atom, coords);
+
+        std::size_t model_no = 0;
+
+        if (getValue(atom_sites, model_nos, i, model_no))
+            setModelNumber(atom, model_no);
+
+        double occup = 0.0;
+
+        if (getValue(atom_sites, occupancies, i, occup))
+            setOccupancy(atom, occup);
+
+        double b_fact = 0.0;
+
+        if (getValue(atom_sites, b_factors, i, b_fact))
+            setBFactor(atom, b_fact);
     }
 }
 
@@ -629,8 +735,6 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
     auto form_charges = comp_atoms->findItem(ChemCompAtom::Item::CHARGE);
     auto sto_configs = comp_atoms->findItem(ChemCompAtom::Item::PDBX_STEREO_CONFIG);
 
-    long int_val = 0;
-    bool bool_val = 0;
     Math::Vector3D coords;
     Math::Vector3D ideal_coords;
     
@@ -666,14 +770,20 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
             setType(atom, atom_type);
         }
 
-        if (getValue(comp_atoms, form_charges, i, int_val))
-            setFormalCharge(atom, int_val);
+        long form_charge = 0;
+        
+        if (getValue(comp_atoms, form_charges, i, form_charge))
+            setFormalCharge(atom, form_charge);
 
-        if (getValue(comp_atoms, arom_flags, i, bool_val))
-            setAromaticityFlag(atom, bool_val);
+        bool arom_flag = false;
+        
+        if (getValue(comp_atoms, arom_flags, i, arom_flag))
+            setAromaticityFlag(atom, arom_flag);
 
-        if (getValue(comp_atoms, leaving_flags, i, bool_val))
-            setResidueLeavingAtomFlag(atom, bool_val);
+        bool leaving_flag = false;
+        
+        if (getValue(comp_atoms, leaving_flags, i, leaving_flag))
+            setResidueLeavingAtomFlag(atom, leaving_flag);
 
         bool have_coords = getValue(comp_atoms, coords_x, i, coords[0]) &&
                            getValue(comp_atoms, coords_y, i, coords[1]) &&
@@ -755,7 +865,6 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
             if (strictErrorChecking)
                 throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_1 + "' specified in _" + comp_bonds->getName() +
                                     (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
-
             continue;
         }
 
@@ -765,7 +874,6 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
             if (strictErrorChecking)
                 throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_2 + "' specified in _" + comp_bonds->getName() +
                                     (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
-
             continue;
         }
 

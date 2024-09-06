@@ -86,6 +86,13 @@ namespace CDPL
                     const std::string PDBX_FORMAL_CHARGE = "pdbx_formal_charge";
                     const std::string PDBX_PDB_MODEL_NUM = "pdbx_PDB_model_num";
                 } // namespace Item
+
+                namespace PDBGroup
+                {
+
+                    const std::string ATOM     = "ATOM";
+                    const std::string HET_ATOM = "HETATM";
+                } // namespace StereoConfig
             } // namespace AtomSite
 
             namespace ChemComp
