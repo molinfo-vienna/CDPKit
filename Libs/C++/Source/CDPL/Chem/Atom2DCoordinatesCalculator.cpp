@@ -116,7 +116,7 @@ namespace
     constexpr double ANGLE_BENDING_DELTA           = 15.0 * M_PI / 180.0;
     constexpr double ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.5;
     constexpr double ATOM_BOND_COLLISION_TEST_DIST = DEF_BOND_LENGTH * 0.3;
-    constexpr double COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
+    constexpr double COMPONENT_X_SPACING           = DEF_BOND_LENGTH * 1.20;
     constexpr double COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;
     constexpr std::size_t BACKTRACKING_LIMIT       = 200;
     constexpr std::size_t DG_MC_MIN_RING_SIZE      = 12;
@@ -379,13 +379,14 @@ void Chem::Atom2DCoordinatesCalculator::alignComponents(Math::Vector2DArray& coo
         }
 
         double comp_x_pos = -0.5 * (row_x_dim - COMPONENT_X_SPACING);
-        double comp_y_pos = row_y_pos + 0.5 * row_y_dim;
 
         for (std::size_t j = 0; j < i; j++, ++it) {
             const BoundingBox& bbox = comp_bounds[j];
             double x_dim = bbox.second[0] - bbox.first[0];
-
-            moveComponent(bbox, comp_x_pos + 0.5 * x_dim, comp_y_pos, *it, coords);
+            double y_dim = bbox.second[1] - bbox.first[1];
+            double comp_y_pos = row_y_pos + (row_y_dim - y_dim) * 0.5;
+        
+            moveComponent(bbox, comp_x_pos, comp_y_pos, *it, coords);
 
             comp_x_pos += x_dim + COMPONENT_X_SPACING;
         }
@@ -405,8 +406,14 @@ void Chem::Atom2DCoordinatesCalculator::addPoint(BoundingBox& bbox, const Math::
 
 void Chem::Atom2DCoordinatesCalculator::calcBounds(BoundingBox& bbox, const Fragment& comp, Math::Vector2DArray& coords) const
 {
-    bbox.first.clear();
-    bbox.second.clear();
+    if (comp.getNumAtoms() == 0) {
+        bbox.first.clear();
+        bbox.second.clear();
+        return;
+    }
+    
+    bbox.first.clear(std::numeric_limits<double>::max());
+    bbox.second.clear(-std::numeric_limits<double>::max());
 
     Fragment::ConstAtomIterator atoms_end = comp.getAtomsEnd();
 
@@ -416,11 +423,7 @@ void Chem::Atom2DCoordinatesCalculator::calcBounds(BoundingBox& bbox, const Frag
 
 void Chem::Atom2DCoordinatesCalculator::moveComponent(const BoundingBox& bbox, double x_pos, double y_pos, const Fragment& comp, Math::Vector2DArray& coords)
 {
-    Math::Vector2D t;
-    
-    t[0] = x_pos - 0.5 * (bbox.first[0] + bbox.second[0]);
-    t[1] = y_pos - 0.5 * (bbox.first[1] + bbox.second[1]);
-
+    Math::Vector2D t{x_pos - bbox.first[0], y_pos - bbox.first[1]};
     Fragment::ConstAtomIterator atoms_end = comp.getAtomsEnd();
 
     for (Fragment::ConstAtomIterator it = comp.getAtomsBegin(); it != atoms_end; ++it)
