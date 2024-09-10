@@ -253,9 +253,11 @@ namespace ChOX
         const std::string                          INCHI_OUTPUT_RECORD_SEPARATOR           = "\n";
         const bool                                 INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES  = true;
 
-        const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = true;
+        const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = false;
         const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
 
+        const bool                                 MMCIF_INPUT_STRICT_ERROR_CHECKING       = false;
+        
         const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
 
         const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;

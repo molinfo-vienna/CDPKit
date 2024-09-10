@@ -79,6 +79,8 @@ Settings::Settings(QObject* parent): QObject(parent)
     readerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::XYZ.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
+    readerControlParams[Biomol::DataFormat::MMCIF_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::MMCIF.getName()]);
+    readerControlParams[Biomol::DataFormat::MMCIF_BZ2.getName()].setParent(&readerControlParams[Biomol::DataFormat::MMCIF.getName()]);
 
     writerControlParams[Chem::DataFormat::CDF_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::CDF.getName()]);
     writerControlParams[Chem::DataFormat::CDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::CDF.getName()]);
@@ -94,6 +96,8 @@ Settings::Settings(QObject* parent): QObject(parent)
     writerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::XYZ.getName()]);
     writerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
     writerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
+    writerControlParams[Biomol::DataFormat::MMCIF_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::MMCIF.getName()]);
+    writerControlParams[Biomol::DataFormat::MMCIF_BZ2.getName()].setParent(&writerControlParams[Biomol::DataFormat::MMCIF.getName()]);
 
     SettingsContainer& img_params = writerControlParams["img"];
 
@@ -651,6 +655,18 @@ void Settings::load()
     readParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::PDB_INPUT_CHECK_LINE_LENGTH);
 
     settings.endGroup();
+
+    // ------
+
+    settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::MMCIF.getName()));
+
+    SettingsContainer& mmcif_rparams = readerControlParams[Biomol::DataFormat::MMCIF.getName()];
+
+    pdb_rparams.setParent(this);
+
+    readParameter<bool>(mmcif_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MMCIF_INPUT_STRICT_ERROR_CHECKING);
+
+    settings.endGroup();
     
     // ------
 
@@ -1163,6 +1179,16 @@ void Settings::save() const
 
     writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
     writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH);
+
+    settings.endGroup();
+
+    // ------
+
+    settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::MMCIF.getName()));
+
+    const SettingsContainer& mmcif_rparams = getReaderControlParameters(Biomol::DataFormat::MMCIF.getName());
+
+    writeParameter<bool>(mmcif_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
 
     settings.endGroup();
 
