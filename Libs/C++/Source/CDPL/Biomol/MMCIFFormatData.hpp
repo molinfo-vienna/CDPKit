@@ -66,13 +66,13 @@ namespace CDPL
 
                     const std::string GROUP_PDB          = "group_PDB";
                     const std::string ID                 = "id";
-                    const std::string TYPE_SYMBOL        = "type_symbol";
-                    const std::string LABEL_ATOM_ID      = "label_atom_id";
-                    const std::string LABEL_ALT_ID       = "label_alt_id";
-                    const std::string LABEL_COMP_ID      = "label_comp_id";
-                    const std::string LABEL_ASYM_ID      = "label_asym_id";
-                    const std::string LABEL_ENTITY_ID    = "label_entity_id";
-                    const std::string LABEL_SEQ_ID       = "label_seq_id";
+                    const std::string TYPE_SYMBOL        = "type_symbol";     // mandatory
+                    const std::string LABEL_ATOM_ID      = "label_atom_id";   // mandatory
+                    const std::string LABEL_ALT_ID       = "label_alt_id";    // mandatory
+                    const std::string LABEL_COMP_ID      = "label_comp_id";   // mandatory
+                    const std::string LABEL_ASYM_ID      = "label_asym_id";   // mandatory
+                    const std::string LABEL_ENTITY_ID    = "label_entity_id"; // mandatory
+                    const std::string LABEL_SEQ_ID       = "label_seq_id";    // mandatory
                     const std::string COORDS_X           = "Cartn_x";
                     const std::string COORDS_Y           = "Cartn_y";
                     const std::string COORDS_Z           = "Cartn_z";
@@ -80,7 +80,7 @@ namespace CDPL
                     const std::string B_ISO_OR_EQUIV     = "B_iso_or_equiv";
                     const std::string AUTH_SEQ_ID        = "auth_seq_id";
                     const std::string AUTH_COMP_ID       = "auth_comp_id";
-                    const std::string AUTH_ASYM_ID       = "auth_asym_id";
+                    const std::string AUTH_ASYM_ID       = "auth_asym_id";    // mandatory
                     const std::string AUTH_ATOM_ID       = "auth_atom_id";
                     const std::string PDBX_PDB_INS_CODE  = "pdbx_PDB_ins_code";
                     const std::string PDBX_FORMAL_CHARGE = "pdbx_formal_charge";

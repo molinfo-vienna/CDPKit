@@ -31,6 +31,7 @@
 #include <set>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
 namespace CDPL
@@ -68,7 +69,8 @@ namespace CDPL
             struct ChemComp;
             
             void init(std::istream&);
-
+            void init(std::istream&, Chem::Molecule& mol);
+            
             void readMacromolecule(const MMCIFData& data, Chem::Molecule& mol);
 
             void initChemCompDict(const MMCIFData& data);
@@ -76,10 +78,15 @@ namespace CDPL
             void procChemCompBonds(const MMCIFData& data);
 
             void readAtomSites(const MMCIFData& data, Chem::Molecule& mol);
+            void postprocAtomSites(const MMCIFData& data, Chem::Molecule& mol);
+
+            const ResidueDictionary& getResidueDictionary() const;
             
-            void getMissingChemCompLinkAtoms();
+            void getMissingChemCompLinkAtomsFromResDictStructs();
+            void setupChemCompDataFromResDictStruct(ChemComp& chem_comp, const std::string& comp_id);
             
             ChemComp& getOrAddChemCompData(const std::string& comp_id);
+            ChemComp& getChemCompData(const std::string& comp_id);
             
             void readChemComps(const MMCIFData& data, Chem::Molecule& mol);
             void readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol);
@@ -109,6 +116,33 @@ namespace CDPL
                 bool operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const
                 {
                     return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
+                }
+            };
+
+            struct StringPtrHash
+            {
+
+                std::size_t operator()(const std::string* str_ptr) const
+                {
+                    if (!str_ptr)
+                        return 0;
+                    
+                    return std::hash<std::string>{}(*str_ptr);
+                }
+            };
+
+            struct StringPtrCmpFunc
+            {
+
+                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+                {
+                    if (!str_ptr1)
+                        return !str_ptr2;
+
+                    if (!str_ptr2)
+                        return false;
+                    
+                    return (*str_ptr1 == *str_ptr2);
                 }
             };
 
@@ -150,6 +184,24 @@ namespace CDPL
                     return *this;
                 }
 
+                bool hasAtom(const std::string& id) const
+                {
+                    for (auto& atom : atoms) {
+                        if (atom.id && (*atom.id == id))
+                            return true;
+
+                        if (atom.altId && (*atom.altId == id))
+                            return true;
+                    }
+
+                    return false;
+                }
+
+                operator bool() const
+                {
+                    return !atoms.empty();
+                }
+
                 typedef std::vector<Atom>     AtomList;
                 typedef std::vector<Bond>     BondList;
                 typedef std::set<std::size_t> LinkAtomSet;
@@ -161,18 +213,35 @@ namespace CDPL
 
             typedef std::unordered_map<ChemCompAtomID, std::size_t,
                                        ChemCompAtomIDHash,
-                                       ChemCompAtomIDCmpFunc>    ChemCompAtomLookupMap;
-            typedef std::vector<ChemComp>                        ChemCompList;
-            typedef std::unordered_map<std::string, std::size_t> ChemCompDictionary;
+                                       ChemCompAtomIDCmpFunc>           ChemCompAtomLookupMap;
+            typedef std::vector<ChemComp>                               ChemCompList;
+            typedef std::unordered_map<std::string, std::size_t>        ChemCompDictionary;
+            typedef std::vector<Chem::Atom*>                            AtomList;
+            typedef std::unordered_map<const std::string*, Chem::Atom*,
+                                       StringPtrHash, StringPtrCmpFunc> NameToAtomMap;
+            typedef ResidueDictionary::SharedPointer                    ResDictPointer;
 
-            const Base::DataIOBase&     ioBase;
-            std::istream::pos_type      lastStreamPos;
-            std::string                 tokenValue;
-            bool                        strictErrorChecking;
-            ChemCompAtomLookupMap       chemCompAtomLookupMap;
-            ChemCompList                chemCompList;
-            ChemCompDictionary          chemCompDict;
-            std::size_t                 chemCompCount;
+            const Base::DataIOBase& ioBase;
+            std::istream::pos_type  lastStreamPos;
+            std::string             tokenValue;
+            bool                    strictErrorChecking;
+            ResDictPointer          resDictionary;
+            bool                    applyDictAtomBonding;
+            bool                    applyDictBondOrders;
+            bool                    applyDictAtomCharges;
+            bool                    applyDictAtomTypes;
+            bool                    calcCharges;
+            bool                    perceiveOrders;
+            ChemCompAtomLookupMap   chemCompAtomLookupMap;
+            ChemCompList            chemCompList;
+            ChemCompDictionary      chemCompDict;
+            std::size_t             chemCompCount;
+            std::size_t             startAtomCount;
+            std::size_t             startBondCount;
+            AtomList                atomSiteSequence;
+            NameToAtomMap           currResidueAtoms;
+            AtomList                currResidueLinkAtoms;
+            AtomList                prevResidueLinkAtoms;
         };
     } // namespace Biomol
 } // namespace CDPL
