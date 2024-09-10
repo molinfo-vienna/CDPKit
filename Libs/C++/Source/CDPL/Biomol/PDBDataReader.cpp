@@ -129,6 +129,9 @@ namespace
         }
 
     } init;
+
+    constexpr double MIN_BOND_LENGTH       = 0.4;
+    constexpr double BOND_LENGTH_TOLERANCE = 0.4;
 }
 
 
@@ -346,7 +349,7 @@ bool Biomol::PDBDataReader::skipPDBFile(std::istream& is)
         
         if (strictErrorChecking && stringData.length() < PDB::RECORD_NAME_LENGTH)
             throw Base::IOError("PDBDataReader: PDB record name length < " + std::to_string(PDB::RECORD_NAME_LENGTH));
-
+        
         Internal::trimString(stringData, false, true);
 
         skipPDBLines(is, 1, ("PDBDataReader: error while skipping input to end of line of record " + stringData).c_str()); 
@@ -799,7 +802,7 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
     if (strictErrorChecking && rec_name.length() < PDB::RECORD_NAME_LENGTH)
         throw Base::IOError("PDBDataReader: record name length < " +
                             std::to_string(PDB::RECORD_NAME_LENGTH));
-
+    
     Internal::trimString(rec_name, false, true);
 
     bool rec_name_change = (prev_rec_name != rec_name);
@@ -884,7 +887,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
     for (AtomList::iterator as_it = atomSequence.begin(), as_end = atomSequence.end(); as_it != as_end; ) {
         Atom* first_atom = *as_it;
-        std::size_t res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
+        auto res_id = getResidueSequenceNumber(*first_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
         const std::string& res_code = getResidueCode(*first_atom);
         const std::string& chain_id = getChainID(*first_atom);
 
@@ -906,7 +909,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             if (next_res_code != res_code)
                 break;
 
-            std::size_t next_res_id = (getResidueSequenceNumber(*next_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
+            auto next_res_id = getResidueSequenceNumber(*next_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
 
             if (next_res_id != res_id)
                 break;
@@ -920,7 +923,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             Math::Vector3DArray::SharedPointer coords;
             char alt_loc_id = getAltLocationID(*atom);
 
-            currResidueAtoms[atom_name] = atom;
+            currResidueAtoms[&atom_name] = atom;
 
             for (++res_as_it; res_as_it != as_it; ++res_as_it) {
                 Atom* next_atom = *res_as_it;
@@ -954,7 +957,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             if (applyDictAtomTypes || applyDictAtomCharges) {
                 for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
                     const Atom& atom = *a_it;
-                    Atom* res_atom = currResidueAtoms[getResTemplateAtomName(atom)];
+                    Atom* res_atom = currResidueAtoms[&getResTemplateAtomName(atom)];
 
                     if (!res_atom)
                         continue;
@@ -971,17 +974,20 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 for (MolecularGraph::ConstBondIterator b_it = res_tmplt->getBondsBegin(), b_end = res_tmplt->getBondsEnd(); b_it != b_end; ++b_it) {
                     const Bond& bond = *b_it;
 
-                    Atom* res_atom1 = currResidueAtoms[getResTemplateAtomName(bond.getBegin())];
+                    Atom* res_atom1 = currResidueAtoms[&getResTemplateAtomName(bond.getBegin())];
 
                     if (!res_atom1) 
                         continue;
 
-                    Atom* res_atom2 = currResidueAtoms[getResTemplateAtomName(bond.getEnd())];
+                    Atom* res_atom2 = currResidueAtoms[&getResTemplateAtomName(bond.getEnd())];
 
                     if (!res_atom2) 
                         continue;
 
-                    mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
+                    auto& res_bond = mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
+
+                    if ((is_std_res && applyDictOrderToStdResidues) || (!is_std_res && applyDictOrderToNonStdResidues))
+                        setOrder(res_bond, getOrder(bond));
                 }
             }
         }
@@ -1055,7 +1061,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 double cov_rad2 = MolProp::getCovalentRadius(*atom2, 1);
                 double dist = norm2(atom1_pos - atom2_pos);
 
-                if (dist > 0.4 && dist <= (cov_rad1 + cov_rad2 + 0.4))
+                if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE))
                     mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
             }
         }
@@ -1066,7 +1072,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             if (res_tmplt) {
                 for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
                     const Atom& atom = *a_it;
-                    Atom* res_atom = currResidueAtoms[getResTemplateAtomName(atom)];
+                    Atom* res_atom = currResidueAtoms[&getResTemplateAtomName(atom)];
 
                     if (!res_atom)
                         continue;
@@ -1099,7 +1105,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
                     double dist = norm2(atom1_pos - atom2_pos);
 
-                    if (dist > 0.4 && dist <= (cov_rad1 + cov_rad2 + 0.4)) {
+                    if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE)) {
                         mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
                         exit = true;
                         break;
@@ -1121,7 +1127,9 @@ void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
 {
     using namespace Chem;
 
-    if (!applyDictOrderToStdResidues && !applyDictOrderToNonStdResidues)
+    if ((!applyDictOrderToStdResidues && !applyDictOrderToNonStdResidues) ||
+        (applyDictOrderToStdResidues && applyDictOrderToNonStdResidues &&
+         applyDictAtomBondingToStdResidues && applyDictAtomBondingToStdResidues))
         return;
 
     std::string bo_cache_key;

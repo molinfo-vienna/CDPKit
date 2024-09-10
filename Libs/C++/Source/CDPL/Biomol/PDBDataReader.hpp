@@ -102,10 +102,38 @@ namespace CDPL
             const Chem::Atom*  getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
             const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
+            struct StringPtrHash
+            {
+
+                std::size_t operator()(const std::string* str_ptr) const
+                {
+                    if (!str_ptr)
+                        return 0;
+
+                    return std::hash<std::string>{}(*str_ptr);
+                }
+            };
+
+            struct StringPtrCmpFunc
+            {
+
+                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+                {
+                    if (!str_ptr1)
+                        return !str_ptr2;
+
+                    if (!str_ptr2)
+                        return false;
+
+                    return (*str_ptr1 == *str_ptr2);
+                }
+            };
+
             typedef std::vector<Chem::Atom*>                                                AtomList;
             typedef std::unordered_map<std::string, std::size_t>                            RecordHistogram;
             typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
-            typedef std::unordered_map<std::string, Chem::Atom*>                            NameToAtomMap;
+            typedef std::unordered_map<const std::string*, Chem::Atom*,
+                                       StringPtrHash, StringPtrCmpFunc>                     NameToAtomMap;
             typedef std::unordered_map<std::string, std::size_t>                            BondOrderCache;
 
             typedef ResidueDictionary::SharedPointer ResDictPointer;
