@@ -1,5 +1,8 @@
 master:
 
+ - Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol because they are now also
+   used by the mmCIF data I/O code
+ - Added new control-parameters and associated functions in namespace Biomol for mmCIF data I/O
  - Updated embedded MessagePack library to version 6.1.1
  - Updated embedded SQLite3 database to version 3.46.1
  - Updated embedded MMTF library to version 1.1.0
