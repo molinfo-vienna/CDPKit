@@ -155,6 +155,7 @@ namespace CDPL
             bool                    calcCharges;
             bool                    perceiveOrders;
             bool                    evalMASTERRecord;
+            bool                    combInterferingResCoords;
             unsigned int            formatVersion;
             PDBData::SharedPointer  pdbData;
             RecordHistogram         recordHistogram;

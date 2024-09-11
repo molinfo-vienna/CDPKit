@@ -326,7 +326,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
     checkMandatoryRecords();
     processAtomSequence(mol, true);
 
-    if (getCombineInterferingResidueCoordinatesParameter(ioBase))
+    if (combInterferingResCoords)
         combineInterferingResidueCoordinates(mol);
 
     setBondOrdersFromResTemplates(mol);
@@ -378,7 +378,7 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 {
     init(is);
 
-    resDictionary                        = getPDBResidueDictionaryParameter(ioBase);
+    resDictionary                        = getResidueDictionaryParameter(ioBase);
     applyDictAtomBondingToStdResidues    = getPDBApplyDictAtomBondingToStdResiduesParameter(ioBase);
     applyDictOrderToStdResidues          = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
     applyDictAtomBondingToNonStdResidues = getPDBApplyDictAtomBondingToNonStdResiduesParameter(ioBase);
@@ -386,13 +386,14 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
     ignoreConectRecords                  = getPDBIgnoreConectRecordsParameter(ioBase);
     setOrdersFromCONECTRecords           = getPDBDeduceBondOrdersFromCONECTRecordsParameter(ioBase);
     ignoreChargeField                    = getPDBIgnoreFormalChargeFieldParameter(ioBase);
-    applyDictAtomCharges                 = getPDBApplyDictFormalAtomChargesParameter(ioBase);
-    applyDictAtomTypes                   = getPDBApplyDictAtomTypesParameter(ioBase);
-    calcCharges                          = getPDBCalcMissingFormalChargesParameter(ioBase);
-    perceiveOrders                       = getPDBPerceiveMissingBondOrdersParameter(ioBase);
+    applyDictAtomCharges                 = getApplyDictFormalChargesParameter(ioBase);
+    applyDictAtomTypes                   = getApplyDictAtomTypesParameter(ioBase);
+    calcCharges                          = getCalcMissingFormalChargesParameter(ioBase);
+    perceiveOrders                       = getPerceiveMissingBondOrdersParameter(ioBase);
     evalMASTERRecord                     = getPDBEvaluateMASTERRecordParameter(ioBase);
     formatVersion                        = getPDBFormatVersionParameter(ioBase);
-
+    combInterferingResCoords             = getCombineInterferingResidueCoordinatesParameter(ioBase);
+    
     pdbData = PDBData::SharedPointer(new PDBData());
     currModelID = 0;
     lastModelID = 0;

@@ -62,16 +62,71 @@ namespace CDPL
 
         CDPL_BIOMOL_API void clearCheckLineLengthParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API const ResidueDictionary::SharedPointer& getResidueDictionaryParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API const ResidueDictionary::SharedPointer& getPDBResidueDictionaryParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setResidueDictionaryParameter(Base::ControlParameterContainer& cntnr, const ResidueDictionary::SharedPointer& dict);
 
-        CDPL_BIOMOL_API void setPDBResidueDictionaryParameter(Base::ControlParameterContainer& cntnr, const ResidueDictionary::SharedPointer& dict);
+        CDPL_BIOMOL_API bool hasResidueDictionaryParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasPDBResidueDictionaryParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void clearResidueDictionaryParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void clearPDBResidueDictionaryParameter(Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getApplyDictFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_BIOMOL_API void setApplyDictFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
+        CDPL_BIOMOL_API bool hasApplyDictFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearApplyDictFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr, bool apply);
+
+        CDPL_BIOMOL_API bool hasApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
+
+        CDPL_BIOMOL_API bool hasCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool perceive);
+
+        CDPL_BIOMOL_API bool hasPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr);
+
+        
+        CDPL_BIOMOL_API bool getCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr, bool comb);
+
+        CDPL_BIOMOL_API bool hasCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
+
+        
         CDPL_BIOMOL_API bool getPDBApplyDictAtomBondingToStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void setPDBApplyDictAtomBondingToStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
@@ -135,42 +190,6 @@ namespace CDPL
         CDPL_BIOMOL_API void clearPDBIgnoreFormalChargeFieldParameter(Base::ControlParameterContainer& cntnr);
 
 
-        CDPL_BIOMOL_API bool getPDBApplyDictFormalAtomChargesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void setPDBApplyDictFormalAtomChargesParameter(Base::ControlParameterContainer& cntnr, bool apply);
-
-        CDPL_BIOMOL_API bool hasPDBApplyDictFormalAtomChargesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBApplyDictFormalAtomChargesParameter(Base::ControlParameterContainer& cntnr);
-
-
-        CDPL_BIOMOL_API bool getPDBApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void setPDBApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr, bool apply);
-
-        CDPL_BIOMOL_API bool hasPDBApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr);
-
-
-        CDPL_BIOMOL_API bool getPDBCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void setPDBCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
-
-        CDPL_BIOMOL_API bool hasPDBCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr);
-
-
-        CDPL_BIOMOL_API bool getPDBPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void setPDBPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool perceive);
-
-        CDPL_BIOMOL_API bool hasPDBPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr);
-
-
         CDPL_BIOMOL_API bool getPDBEvaluateMASTERRecordParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void setPDBEvaluateMASTERRecordParameter(Base::ControlParameterContainer& cntnr, bool eval);
@@ -232,15 +251,29 @@ namespace CDPL
         CDPL_BIOMOL_API bool hasPDBFormatVersionParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void clearPDBFormatVersionParameter(Base::ControlParameterContainer& cntnr);
+        
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getMMCIFApplyDictAtomBondingParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_BIOMOL_API void setMMCIFApplyDictAtomBondingParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
-        CDPL_BIOMOL_API bool getCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API bool hasMMCIFApplyDictAtomBondingParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void setCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr, bool comb);
+        CDPL_BIOMOL_API void clearMMCIFApplyDictAtomBondingParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getMMCIFApplyDictBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setMMCIFApplyDictBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool apply);
+
+        CDPL_BIOMOL_API bool hasMMCIFApplyDictBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearMMCIFApplyDictBondOrdersParameter(Base::ControlParameterContainer& cntnr);
+
     } // namespace Biomol
 } // namespace CDPL
 

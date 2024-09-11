@@ -232,6 +232,7 @@ namespace CDPL
             bool                    applyDictAtomTypes;
             bool                    calcCharges;
             bool                    perceiveOrders;
+            bool                    combInterferingResCoords;
             ChemCompAtomLookupMap   chemCompAtomLookupMap;
             ChemCompList            chemCompList;
             ChemCompDictionary      chemCompDict;

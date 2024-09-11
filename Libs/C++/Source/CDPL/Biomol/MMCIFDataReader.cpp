@@ -280,13 +280,14 @@ void Biomol::MMCIFDataReader::init(std::istream& is, Chem::Molecule& mol)
 {
     init(is);
 
-    resDictionary        = getPDBResidueDictionaryParameter(ioBase);
-    applyDictAtomBonding = getPDBApplyDictAtomBondingToStdResiduesParameter(ioBase);
-    applyDictBondOrders  = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
-    applyDictAtomCharges = getPDBApplyDictFormalAtomChargesParameter(ioBase);
-    applyDictAtomTypes   = getPDBApplyDictAtomTypesParameter(ioBase);
-    calcCharges          = getPDBCalcMissingFormalChargesParameter(ioBase);
-    perceiveOrders       = getPDBPerceiveMissingBondOrdersParameter(ioBase);
+    resDictionary            = getResidueDictionaryParameter(ioBase);
+    applyDictAtomBonding     = getMMCIFApplyDictAtomBondingParameter(ioBase);
+    applyDictBondOrders      = getMMCIFApplyDictBondOrdersParameter(ioBase);
+    applyDictAtomCharges     = getApplyDictFormalChargesParameter(ioBase);
+    applyDictAtomTypes       = getApplyDictAtomTypesParameter(ioBase);
+    calcCharges              = getCalcMissingFormalChargesParameter(ioBase);
+    perceiveOrders           = getPerceiveMissingBondOrdersParameter(ioBase);
+    combInterferingResCoords = getCombineInterferingResidueCoordinatesParameter(ioBase);
 
     startAtomCount = mol.getNumAtoms();
     startBondCount = mol.getNumBonds();

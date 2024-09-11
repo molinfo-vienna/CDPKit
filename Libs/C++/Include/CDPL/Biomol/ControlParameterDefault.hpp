@@ -57,8 +57,33 @@ namespace CDPL
              */
             extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
 
-            extern CDPL_BIOMOL_API const ResidueDictionary::SharedPointer PDB_RESIDUE_DICTIONARY;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const ResidueDictionary::SharedPointer RESIDUE_DICTIONARY;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool APPLY_DICT_FORMAL_CHARGES;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool APPLY_DICT_ATOM_TYPES;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool CALC_MISSING_FORMAL_CHARGES;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool PERCEIVE_MISSING_BOND_ORDERS;
+
+            extern CDPL_BIOMOL_API const bool COMBINE_INTERFERING_RESIDUE_COORDINATES;
+            
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
@@ -72,15 +97,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const bool PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
             extern CDPL_BIOMOL_API const bool PDB_IGNORE_FORMAL_CHARGE_FIELD;
-
-            extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_FORMAL_ATOM_CHARGES;
-
-            extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_TYPES;
-
-            extern CDPL_BIOMOL_API const bool PDB_CALC_MISSING_FORMAL_CHARGES;
-
-            extern CDPL_BIOMOL_API const bool PDB_PERCEIVE_MISSING_BOND_ORDERS;
-
+    
             extern CDPL_BIOMOL_API const bool PDB_EVALUATE_MASTER_RECORD;
 
             extern CDPL_BIOMOL_API const bool PDB_TRUNCATE_LINES;
@@ -95,7 +112,16 @@ namespace CDPL
 
             extern CDPL_BIOMOL_API const unsigned int PDB_FORMAT_VERSION;
 
-            extern CDPL_BIOMOL_API const bool COMBINE_INTERFERING_RESIDUE_COORDINATES;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool MMCIF_APPLY_DICT_ATOM_BONDING;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool MMCIF_APPLY_DICT_BOND_ORDERS;
+
         } // namespace ControlParameterDefault
     } // namespace Biomol
 } // namespace CDPL

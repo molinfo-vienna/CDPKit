@@ -30,35 +30,40 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)        \
-    TYPE Biomol::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
-                                                 ControlParameterDefault::PARAM_NAME); \
-    }                                                                    \
-                                                                        \
+#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)                            \
+    TYPE Biomol::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                         \
+        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,                \
+                                                 ControlParameterDefault::PARAM_NAME);        \
+    }                                                                                         \
+                                                                                              \
     void Biomol::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
-    {                                                                    \
-        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);            \
-    }                                                                    \
-                                                                        \
-    bool Biomol::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);        \
-    }                                                                    \
-                                                                        \
-    void Biomol::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        cntnr.removeParameter(ControlParameter::PARAM_NAME);            \
+    {                                                                                         \
+        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                                \
+    }                                                                                         \
+                                                                                              \
+    bool Biomol::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                         \
+        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);                            \
+    }                                                                                         \
+                                                                                              \
+    void Biomol::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)         \
+    {                                                                                         \
+        cntnr.removeParameter(ControlParameter::PARAM_NAME);                                  \
     }
 
 
 MAKE_CONTROL_PARAM_FUNCTIONS(STRICT_ERROR_CHECKING, bool, StrictErrorChecking)
 MAKE_CONTROL_PARAM_FUNCTIONS(CHECK_LINE_LENGTH, bool, CheckLineLength)
-MAKE_CONTROL_PARAM_FUNCTIONS(PDB_RESIDUE_DICTIONARY, const Biomol::ResidueDictionary::SharedPointer&, PDBResidueDictionary)
+MAKE_CONTROL_PARAM_FUNCTIONS(RESIDUE_DICTIONARY, const Biomol::ResidueDictionary::SharedPointer&, ResidueDictionary)
+MAKE_CONTROL_PARAM_FUNCTIONS(APPLY_DICT_FORMAL_CHARGES, bool, ApplyDictFormalCharges)
+MAKE_CONTROL_PARAM_FUNCTIONS(APPLY_DICT_ATOM_TYPES, bool, ApplyDictAtomTypes)
+MAKE_CONTROL_PARAM_FUNCTIONS(CALC_MISSING_FORMAL_CHARGES, bool, CalcMissingFormalCharges)
+MAKE_CONTROL_PARAM_FUNCTIONS(PERCEIVE_MISSING_BOND_ORDERS, bool, PerceiveMissingBondOrders)
+MAKE_CONTROL_PARAM_FUNCTIONS(COMBINE_INTERFERING_RESIDUE_COORDINATES, bool, CombineInterferingResidueCoordinates)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES, bool, PDBApplyDictAtomBondingToNonStdResidues)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES, bool, PDBApplyDictAtomBondingToStdResidues)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES, bool, PDBApplyDictBondOrdersToNonStdResidues)
@@ -66,10 +71,6 @@ MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES, bool, P
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_IGNORE_CONECT_RECORDS, bool, PDBIgnoreConectRecords)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS, bool, PDBDeduceBondOrdersFromCONECTRecords)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_IGNORE_FORMAL_CHARGE_FIELD, bool, PDBIgnoreFormalChargeField)
-MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_FORMAL_ATOM_CHARGES, bool, PDBApplyDictFormalAtomCharges)
-MAKE_CONTROL_PARAM_FUNCTIONS(PDB_APPLY_DICT_ATOM_TYPES, bool, PDBApplyDictAtomTypes)
-MAKE_CONTROL_PARAM_FUNCTIONS(PDB_CALC_MISSING_FORMAL_CHARGES, bool, PDBCalcMissingFormalCharges)
-MAKE_CONTROL_PARAM_FUNCTIONS(PDB_PERCEIVE_MISSING_BOND_ORDERS, bool, PDBPerceiveMissingBondOrders)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_EVALUATE_MASTER_RECORD, bool, PDBEvaluateMASTERRecord)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_TRUNCATE_LINES, bool, PDBTruncateLines)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_WRITE_FORMAL_CHARGES, bool, PDBWriteFormalCharges)
@@ -77,4 +78,5 @@ MAKE_CONTROL_PARAM_FUNCTIONS(PDB_WRITE_CONECT_RECORDS, bool, PDBWriteCONECTRecor
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS, bool, PDBWriteCONECTRecordsForAllBonds)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER, bool, PDBWriteCONECTRecordsReflectingBondOrder)
 MAKE_CONTROL_PARAM_FUNCTIONS(PDB_FORMAT_VERSION, unsigned int, PDBFormatVersion)
-MAKE_CONTROL_PARAM_FUNCTIONS(COMBINE_INTERFERING_RESIDUE_COORDINATES, bool, CombineInterferingResidueCoordinates)
+MAKE_CONTROL_PARAM_FUNCTIONS(MMCIF_APPLY_DICT_ATOM_BONDING, bool, MMCIFApplyDictAtomBonding)
+MAKE_CONTROL_PARAM_FUNCTIONS(MMCIF_APPLY_DICT_BOND_ORDERS, bool, MMCIFApplyDictBondOrders)

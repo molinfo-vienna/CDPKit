@@ -76,8 +76,33 @@ namespace CDPL
              */
             extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
 
-            extern CDPL_BIOMOL_API const Base::LookupKey PDB_RESIDUE_DICTIONARY;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_DICTIONARY;
+            
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey APPLY_DICT_FORMAL_CHARGES;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey APPLY_DICT_ATOM_TYPES;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey CALC_MISSING_FORMAL_CHARGES;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey PERCEIVE_MISSING_BOND_ORDERS;
+
+            extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
+            
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
@@ -91,14 +116,6 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_IGNORE_FORMAL_CHARGE_FIELD;
-
-            extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_FORMAL_ATOM_CHARGES;
-
-            extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_TYPES;
-
-            extern CDPL_BIOMOL_API const Base::LookupKey PDB_CALC_MISSING_FORMAL_CHARGES;
-
-            extern CDPL_BIOMOL_API const Base::LookupKey PDB_PERCEIVE_MISSING_BOND_ORDERS;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_EVALUATE_MASTER_RECORD;
 
@@ -114,7 +131,16 @@ namespace CDPL
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_FORMAT_VERSION;
 
-            extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_ATOM_BONDING;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_APPLY_DICT_BOND_ORDERS;
+            
         } // namespace ControlParameter
     } // namespace Biomol
 } // namespace CDPL

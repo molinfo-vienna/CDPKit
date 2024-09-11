@@ -122,7 +122,7 @@ void Biomol::PDBDataWriter::init(std::ostream& os)
     strictErrorChecking          = getStrictErrorCheckingParameter(ioBase); 
     checkLineLength              = getCheckLineLengthParameter(ioBase); 
     truncLines                   = getPDBTruncateLinesParameter(ioBase);
-    resDictionary                = getPDBResidueDictionaryParameter(ioBase);
+    resDictionary                = getResidueDictionaryParameter(ioBase);
     writeFormCharges             = getPDBWriteFormalChargesParameter(ioBase);
     writeConectRecords           = getPDBWriteCONECTRecordsParameter(ioBase);
     writeConectRecsForAllBonds   = getPDBWriteCONECTRecordsForAllBondsParameter(ioBase);
