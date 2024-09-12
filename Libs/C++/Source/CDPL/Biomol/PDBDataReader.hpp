@@ -25,16 +25,13 @@
 #ifndef CDPL_BIOMOL_PDBDATAREADER_HPP
 #define CDPL_BIOMOL_PDBDATAREADER_HPP
 
-#include <cstddef>
 #include <iosfwd>
-#include <string>
 #include <vector>
-#include <list>
 #include <unordered_map>
 
-#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 
 namespace CDPL
