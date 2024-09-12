@@ -37,7 +37,32 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    PDB_RESIDUE_DICTIONARY = None
+    RESIDUE_DICTIONARY = None
+
+    ##
+    # \brief 
+    #
+    COMBINE_INTERFERING_RESIDUE_COORDINATES = True
+
+    ##
+    # \brief 
+    #
+    APPLY_DICT_FORMAL_CHARGES = False
+
+    ##
+    # \brief 
+    #
+    APPLY_DICT_ATOM_TYPES = True
+
+    ##
+    # \brief 
+    #
+    CALC_MISSING_FORMAL_CHARGES = False
+
+    ##
+    # \brief 
+    #
+    PERCEIVE_MISSING_BOND_ORDERS = True
 
     ##
     # \brief 
@@ -68,26 +93,6 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief 
     #
     PDB_IGNORE_FORMAL_CHARGE_FIELD = False
-
-    ##
-    # \brief 
-    #
-    PDB_APPLY_DICT_FORMAL_ATOM_CHARGES = False
-
-    ##
-    # \brief 
-    #
-    PDB_APPLY_DICT_ATOM_TYPES = True
-
-    ##
-    # \brief 
-    #
-    PDB_CALC_MISSING_FORMAL_CHARGES = False
-
-    ##
-    # \brief 
-    #
-    PDB_PERCEIVE_MISSING_BOND_ORDERS = True
 
     ##
     # \brief 
@@ -127,4 +132,9 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    COMBINE_INTERFERING_RESIDUE_COORDINATES = True
+    MMCIF_APPLY_DICT_ATOM_BONDING = True
+
+    ##
+    # \brief 
+    #
+    MMCIF_APPLY_DICT_BOND_ORDERS = True

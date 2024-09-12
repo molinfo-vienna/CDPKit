@@ -33,12 +33,14 @@ class ComponentSet(FragmentList):
     # \brief Constructs a <tt>ComponentSet</tt> instance that contains the componenents of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the components.
+    # \param min_atom_idx The min. index of atoms in <em>molgraph</em> to be considered for component perception (since 1.2).
     # 
-    def __init__(molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph, min_atom_idx: int = 0) -> None: pass
 
     ##
     # \brief Replaces the current set of components by the components of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the components.
+    # \param min_atom_idx The min. index of atoms in <em>molgraph</em> to be considered for component perception (since 1.2).
     # 
-    def perceive(molgraph: MolecularGraph) -> None: pass
+    def perceive(molgraph: MolecularGraph, min_atom_idx: int = 0) -> None: pass

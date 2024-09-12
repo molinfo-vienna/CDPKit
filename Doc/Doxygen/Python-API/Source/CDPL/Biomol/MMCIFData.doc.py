@@ -298,6 +298,12 @@ class MMCIFData(Boost.Python.instance):
         # 
         def __contains__(name: str) -> bool: pass
 
+        ##
+        # \brief Returns a string representation of the \e %Category instance.
+        # \return The generated string representation.
+        # 
+        def __str__() -> object: pass
+
         objectID = property(getObjectID)
 
         numValueRows = property(getNumValueRows)
@@ -401,6 +407,12 @@ class MMCIFData(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def lastCategory() -> Category: pass
+
+    ##
+    # \brief 
     # \param name 
     # \return 
     #
@@ -451,6 +463,12 @@ class MMCIFData(Boost.Python.instance):
     # \return The result of the membership test operation.
     # 
     def __contains__(name: str) -> bool: pass
+
+    ##
+    # \brief Returns a string representation of the \e %MMCIFData instance.
+    # \return The generated string representation.
+    # 
+    def __str__() -> object: pass
 
     objectID = property(getObjectID)
 

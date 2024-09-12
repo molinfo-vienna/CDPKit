@@ -229,6 +229,18 @@ class MoleculeIOManager(Boost.Python.instance):
     def getInputHandlerByFileExtension(file_ext: str) -> MoleculeInputHandler: pass
 
     ##
+    # \brief Returns a reference to a Chem.MoleculeInputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>.
+    # 
+    # \param file_name Specifies the file name for which to search for a data format that matches its extension.
+    # 
+    # \return A reference to a Chem.MoleculeInputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <em>None</em> if not available. 
+    # 
+    # \note The matching of the file extension is not case-sensitive.
+    # 
+    @staticmethod
+    def getInputHandlerByFileName(file_name: str) -> MoleculeInputHandler: pass
+
+    ##
     # \brief Returns a reference to a Chem.MoleculeInputHandler implementation instance registered for the data format with the specified mime-type.
     # 
     # \param mime_type Specifies the mime-type of the data format that is associated with the requested Chem.MoleculeInputHandler implementation instance.
@@ -341,6 +353,18 @@ class MoleculeIOManager(Boost.Python.instance):
     # 
     @staticmethod
     def getOutputHandlerByFileExtension(file_ext: str) -> MoleculeOutputHandler: pass
+
+    ##
+    # \brief Returns a reference to a Chem.MoleculeOutputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>.
+    # 
+    # \param file_name Specifies the file name for which to search for a data format that matches its extension.
+    # 
+    # \return A reference to a Chem.MoleculeOutputHandler implementation instance registered for the data format matching the extension of <em>file_name</em>, or <em>None</em> if not available. 
+    # 
+    # \note The matching of the file extension is not case-sensitive.
+    # 
+    @staticmethod
+    def getOutputHandlerByFileName(file_name: str) -> MoleculeOutputHandler: pass
 
     ##
     # \brief Returns a reference to a Chem.MoleculeOutputHandler implementation instance registered for the data format with the specified mime-type.

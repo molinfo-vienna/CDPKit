@@ -77,6 +77,33 @@ def setPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer, e
 # \brief 
 # \param cntnr 
 #
+def clearMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param apply 
+#
+def setMMCIFApplyDictAtomBondingParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -320,55 +347,55 @@ def setPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer, wri
 # \brief 
 # \param cntnr 
 #
-def clearPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param calc 
 #
-def setPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
+def setCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
+def setApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
@@ -401,28 +428,28 @@ def setPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer, trunc: b
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
+def setApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
@@ -563,52 +590,79 @@ def setPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameter
 # \brief 
 # \param cntnr 
 #
-def clearPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param perceive 
 #
-def setPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
+def setPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> ResidueDictionary: pass
+def hasMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param apply 
+#
+def setMMCIFApplyDictBondOrdersParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> ResidueDictionary: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param dict 
 #
-def setPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer, dict: ResidueDictionary) -> None: pass
+def setResidueDictionaryParameter(cntnr: Base.ControlParameterContainer, dict: ResidueDictionary) -> None: pass

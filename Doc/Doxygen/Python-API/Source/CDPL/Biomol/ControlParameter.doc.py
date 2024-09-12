@@ -45,7 +45,32 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    PDB_RESIDUE_DICTIONARY = CDPL.Base.LookupKey('PDB_RESIDUE_DICTIONARY')
+    RESIDUE_DICTIONARY = CDPL.Base.LookupKey('RESIDUE_DICTIONARY')
+
+    ##
+    # \brief 
+    #
+    APPLY_DICT_FORMAL_CHARGES = CDPL.Base.LookupKey('APPLY_DICT_FORMAL_CHARGES')
+
+    ##
+    # \brief 
+    #
+    APPLY_DICT_ATOM_TYPES = CDPL.Base.LookupKey('APPLY_DICT_ATOM_TYPES')
+
+    ##
+    # \brief 
+    #
+    CALC_MISSING_FORMAL_CHARGES = CDPL.Base.LookupKey('CALC_MISSING_FORMAL_CHARGES')
+
+    ##
+    # \brief 
+    #
+    PERCEIVE_MISSING_BOND_ORDERS = CDPL.Base.LookupKey('PERCEIVE_MISSING_BOND_ORDERS')
+
+    ##
+    # \brief 
+    #
+    COMBINE_INTERFERING_RESIDUE_COORDINATES = CDPL.Base.LookupKey('COMBINE_INTERFERING_RESIDUE_COORDINATES')
 
     ##
     # \brief 
@@ -76,26 +101,6 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     PDB_IGNORE_FORMAL_CHARGE_FIELD = CDPL.Base.LookupKey('PDB_IGNORE_FORMAL_CHARGE_FIELD')
-
-    ##
-    # \brief 
-    #
-    PDB_APPLY_DICT_FORMAL_ATOM_CHARGES = CDPL.Base.LookupKey('PDB_APPLY_DICT_FORMAL_ATOM_CHARGES')
-
-    ##
-    # \brief 
-    #
-    PDB_APPLY_DICT_ATOM_TYPES = CDPL.Base.LookupKey('PDB_APPLY_DICT_ATOM_TYPES')
-
-    ##
-    # \brief 
-    #
-    PDB_CALC_MISSING_FORMAL_CHARGES = CDPL.Base.LookupKey('PDB_CALC_MISSING_FORMAL_CHARGES')
-
-    ##
-    # \brief 
-    #
-    PDB_PERCEIVE_MISSING_BOND_ORDERS = CDPL.Base.LookupKey('PDB_PERCEIVE_MISSING_BOND_ORDERS')
 
     ##
     # \brief 
@@ -135,4 +140,9 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    COMBINE_INTERFERING_RESIDUE_COORDINATES = CDPL.Base.LookupKey('COMBINE_INTERFERING_RESIDUE_COORDINATES')
+    MMCIF_APPLY_DICT_ATOM_BONDING = CDPL.Base.LookupKey('MMCIF_APPLY_DICT_ATOM_BONDING')
+
+    ##
+    # \brief 
+    #
+    MMCIF_APPLY_DICT_BOND_ORDERS = CDPL.Base.LookupKey('MMCIF_APPLY_DICT_BOND_ORDERS')
