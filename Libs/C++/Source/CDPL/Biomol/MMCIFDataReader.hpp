@@ -29,9 +29,11 @@
 #include <vector>
 #include <unordered_map>
 #include <set>
+#include <utility>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 
 namespace CDPL
@@ -78,8 +80,18 @@ namespace CDPL
             void procChemCompBonds(const MMCIFData& data);
 
             void readAtomSites(const MMCIFData& data, Chem::Molecule& mol);
-            void postprocAtomSites(const MMCIFData& data, Chem::Molecule& mol);
+            void postprocAtomSites(Chem::Molecule& mol);
+            void createNonStdInterResidueBonds(const MMCIFData& data, Chem::Molecule& mol) const;
+            void applyDictionaryBondOrders(Chem::Molecule& mol);
+            void setMacromoleculeName(const MMCIFData& data, Chem::Molecule& mol) const;
 
+            Chem::Atom* getAtom(const MMCIFData& data, Chem::Molecule& mol,
+                                const std::string* auth_asym_id, const std::string* auth_atom_id,
+                                const std::string* auth_comp_id, const std::string* auth_seq_id,
+                                const std::string* label_asym_id, const std::string* label_atom_id,
+                                const std::string* label_comp_id, const std::string* label_seq_id,
+                                const std::string* ins_code) const;
+            
             const ResidueDictionary& getResidueDictionary() const;
             
             void getMissingChemCompLinkAtomsFromResDictStructs();
@@ -91,6 +103,10 @@ namespace CDPL
             void readChemComps(const MMCIFData& data, Chem::Molecule& mol);
             void readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol);
             bool readChemCompBonds(const MMCIFData& data, Chem::Molecule& mol);
+            void postprocReadChemComps(const MMCIFData& data, Chem::Molecule& mol) const;
+
+            void perceiveBondOrders(Chem::Molecule& mol);
+            void calcAtomCharges(Chem::Molecule& mol);
             
             MMCIFData::SharedPointer parseInput(std::istream& is);
 
@@ -113,37 +129,19 @@ namespace CDPL
             struct ChemCompAtomIDCmpFunc
             {
 
-                bool operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const
-                {
-                    return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
-                }
+                bool operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const;
             };
 
             struct StringPtrHash
             {
 
-                std::size_t operator()(const std::string* str_ptr) const
-                {
-                    if (!str_ptr)
-                        return 0;
-                    
-                    return std::hash<std::string>{}(*str_ptr);
-                }
+                std::size_t operator()(const std::string* str_ptr) const;
             };
 
             struct StringPtrCmpFunc
             {
 
-                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
-                {
-                    if (!str_ptr1)
-                        return !str_ptr2;
-
-                    if (!str_ptr2)
-                        return false;
-                    
-                    return (*str_ptr1 == *str_ptr2);
-                }
+                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const;
             };
 
             struct ChemComp
@@ -175,32 +173,13 @@ namespace CDPL
                     std::size_t order;
                 };
 
-                ChemComp& clear()
-                {
-                    atoms.clear();
-                    bonds.clear();
-                    linkAtoms.clear();
+                ChemComp& clear();
+              
+                bool hasAtom(const std::string& id) const;
 
-                    return *this;
-                }
+                std::size_t getBondOrder(const std::string& atom_1_id, const std::string& atom_2_id) const;
 
-                bool hasAtom(const std::string& id) const
-                {
-                    for (auto& atom : atoms) {
-                        if (atom.id && (*atom.id == id))
-                            return true;
-
-                        if (atom.altId && (*atom.altId == id))
-                            return true;
-                    }
-
-                    return false;
-                }
-
-                operator bool() const
-                {
-                    return !atoms.empty();
-                }
+                operator bool() const;
 
                 typedef std::vector<Atom>     AtomList;
                 typedef std::vector<Bond>     BondList;
@@ -217,8 +196,11 @@ namespace CDPL
             typedef std::vector<ChemComp>                               ChemCompList;
             typedef std::unordered_map<std::string, std::size_t>        ChemCompDictionary;
             typedef std::vector<Chem::Atom*>                            AtomList;
+            typedef std::pair<Chem::Atom*, std::size_t>                 AtomIndexPair;
+            typedef std::vector<AtomIndexPair>                          AtomIndexPairList;
             typedef std::unordered_map<const std::string*, Chem::Atom*,
                                        StringPtrHash, StringPtrCmpFunc> NameToAtomMap;
+            typedef std::unordered_map<std::string, std::size_t>        BondOrderCache;
             typedef ResidueDictionary::SharedPointer                    ResDictPointer;
 
             const Base::DataIOBase& ioBase;
@@ -239,10 +221,12 @@ namespace CDPL
             std::size_t             chemCompCount;
             std::size_t             startAtomCount;
             std::size_t             startBondCount;
-            AtomList                atomSiteSequence;
+            AtomIndexPairList       atomSiteSequence;
             NameToAtomMap           currResidueAtoms;
             AtomList                currResidueLinkAtoms;
             AtomList                prevResidueLinkAtoms;
+            BondOrderCache          bondOrderCache;
+            Chem::Fragment          readMolGraph;
         };
     } // namespace Biomol
 } // namespace CDPL

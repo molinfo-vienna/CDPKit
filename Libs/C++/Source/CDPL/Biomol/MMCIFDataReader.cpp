@@ -34,6 +34,7 @@
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -137,6 +138,17 @@ namespace
 
         return &val;
     }
+
+    inline bool valuesMatch(const std::string* query_val, const Biomol::MMCIFData::Item* item, std::size_t row_idx)
+    {
+        if (!query_val)
+            return true;
+        
+        if (!item)
+            return false;
+     
+        return (*query_val == item->getValue(row_idx));
+    }
     
     template <typename T>
     bool getValue(const Biomol::MMCIFData::Category* cat, const Biomol::MMCIFData::Item* item, std::size_t row_idx, T& value)
@@ -208,6 +220,56 @@ enum Biomol::MMCIFDataReader::Token : int
 };
 
 
+Biomol::MMCIFDataReader::ChemComp& Biomol::MMCIFDataReader::ChemComp::clear()
+{
+    atoms.clear();
+    bonds.clear();
+    linkAtoms.clear();
+
+    return *this;
+}
+
+bool Biomol::MMCIFDataReader::ChemComp::hasAtom(const std::string& id) const
+{
+    for (auto& atom : atoms) {
+        if (atom.id && (*atom.id == id))
+            return true;
+
+        if (atom.altId && (*atom.altId == id))
+            return true;
+    }
+
+    return false;
+}
+
+std::size_t Biomol::MMCIFDataReader::ChemComp::getBondOrder(const std::string& atom_1_id, const std::string& atom_2_id) const
+{
+    for (auto& bond : bonds) {
+        auto& bond_beg = atoms[bond.atom1Idx];
+        auto& bond_end = atoms[bond.atom2Idx];
+
+        auto bond_beg_atom_1_match = (bond_beg.id && (*bond_beg.id == atom_1_id)) || (bond_beg.altId && (*bond_beg.altId == atom_1_id));
+        auto bond_end_atom_2_match = (bond_end.id && (*bond_end.id == atom_2_id)) || (bond_end.altId && (*bond_end.altId == atom_2_id));
+
+        if (bond_beg_atom_1_match && bond_end_atom_2_match)
+            return bond.order;
+
+        auto bond_end_atom_1_match = (bond_end.id && (*bond_end.id == atom_1_id)) || (bond_end.altId && (*bond_end.altId == atom_1_id));
+        auto bond_beg_atom_2_match = (bond_beg.id && (*bond_beg.id == atom_2_id)) || (bond_beg.altId && (*bond_beg.altId == atom_2_id));
+
+        if (bond_end_atom_1_match && bond_beg_atom_2_match)
+            return bond.order;
+    }
+
+    return 0;
+}
+
+Biomol::MMCIFDataReader::ChemComp::operator bool() const
+{
+    return !atoms.empty();
+}
+
+
 std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHash::operator()(const ChemCompAtomID& atom_id) const
 {
     std::size_t h = 0;
@@ -218,6 +280,33 @@ std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHash::operator()(const ChemCo
     boost::hash_combine(h, *atom_id.second);
 
     return h;
+}
+
+
+bool Biomol::MMCIFDataReader::ChemCompAtomIDCmpFunc::operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const
+{
+    return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
+}
+
+
+std::size_t Biomol::MMCIFDataReader::StringPtrHash::operator()(const std::string* str_ptr) const
+{
+    if (!str_ptr)
+        return 0;
+
+    return std::hash<std::string>{}(*str_ptr);
+}
+
+
+bool Biomol::MMCIFDataReader::StringPtrCmpFunc::operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+{
+    if (!str_ptr1)
+        return !str_ptr2;
+
+    if (!str_ptr2)
+        return false;
+
+    return (*str_ptr1 == *str_ptr2);
 }
 
 
@@ -297,7 +386,16 @@ void Biomol::MMCIFDataReader::readMacromolecule(const MMCIFData& data, Chem::Mol
 {
     initChemCompDict(data);
     readAtomSites(data, mol);
-    postprocAtomSites(data, mol);
+    postprocAtomSites(mol);
+    createNonStdInterResidueBonds(data, mol);
+
+    if (combInterferingResCoords)
+        combineInterferingResidueCoordinates(mol);
+
+    applyDictionaryBondOrders(mol);
+    perceiveBondOrders(mol);
+    calcAtomCharges(mol);
+    setMacromoleculeName(data, mol);
 }
 
 void Biomol::MMCIFDataReader::initChemCompDict(const MMCIFData& data)
@@ -503,7 +601,7 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     for (std::size_t i = 0; i < num_atoms; i++) {
         auto& atom = mol.addAtom();
 
-        atomSiteSequence.push_back(&atom);
+        atomSiteSequence.emplace_back(&atom, i);
         
         auto comp_id = getValue(comp_ids, i);
 
@@ -601,7 +699,7 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     }
 }
 
-void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Molecule& mol)
+void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
 {
     using namespace Chem;
 
@@ -611,7 +709,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
     prevResidueLinkAtoms.clear();
 
     for (auto as_it = atomSiteSequence.begin(), as_end = atomSiteSequence.end(); as_it != as_end; ) {
-        auto first_atom = *as_it;
+        auto first_atom = as_it->first;
         auto res_id = getResidueSequenceNumber(*first_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
         auto& res_code = getResidueCode(*first_atom);
         auto& chain_id = getChainID(*first_atom);
@@ -622,7 +720,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
         auto res_as_start_it = as_it;
 
         for (++as_it; as_it != as_end; ++as_it) {
-            auto next_atom = *as_it;
+            auto next_atom = as_it->first;
 
             auto& next_chain_id = getChainID(*next_atom);
 
@@ -640,19 +738,19 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
                 break;
         }
 
-        std::sort(res_as_start_it, as_it, [](const Chem::Atom* atom1, const Chem::Atom* atom2) {
-                                              auto& res_atom_name1 = getResidueAtomName(*atom1);
-                                              auto& res_atom_name2 = getResidueAtomName(*atom2);
+        std::sort(res_as_start_it, as_it, [](const AtomIndexPair& atom1, const AtomIndexPair& atom2) {
+                                              auto& res_atom_name1 = getResidueAtomName(*atom1.first);
+                                              auto& res_atom_name2 = getResidueAtomName(*atom2.first);
 
                                               if (res_atom_name1 == res_atom_name2)
-                                                  return ((hasAltLocationID(*atom1) ? getAltLocationID(*atom1) : ' ') <
-                                                          (hasAltLocationID(*atom2) ? getAltLocationID(*atom2) : ' '));
+                                                  return ((hasAltLocationID(*atom1.first) ? getAltLocationID(*atom1.first) : ' ') <
+                                                          (hasAltLocationID(*atom2.first) ? getAltLocationID(*atom2.first) : ' '));
     
                                               return (res_atom_name1 < res_atom_name2);
                                           });
 
         for (auto res_as_it = res_as_start_it; res_as_it != as_it; ) {
-            auto atom = *res_as_it;
+            auto atom = res_as_it->first;
             auto& atom_name = getResidueAtomName(*atom);
             auto alt_loc_id = (hasAltLocationID(*atom) ? getAltLocationID(*atom) : ' ');
             Math::Vector3DArray::SharedPointer coords;
@@ -660,7 +758,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
             currResidueAtoms[&atom_name] = atom;
 
             for (++res_as_it; res_as_it != as_it; ++res_as_it) {
-                auto next_atom = *res_as_it;
+                auto next_atom = res_as_it->first;
                 auto& next_atom_name = getResidueAtomName(*next_atom);
 
                 if (next_atom_name != atom_name)
@@ -728,44 +826,9 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
             }
         }
 
-        for (auto a_it = res_as_start_it; a_it != as_it; ++a_it) {
-            auto atom = *a_it;
-            
-            if (!mol.containsAtom(*atom))
-                continue;
-            
-            if (getType(*atom) != AtomType::UNKNOWN)
-                continue;
-
-            auto& atom_name = getResidueAtomName(*atom);
-
-            // as a last resort, try to extract the element symbol from the residue atom name
-            for (char c : atom_name) {
-                switch (c) {
-
-                    case 'H':
-                    case 'N':
-                    case 'O':
-                    case 'C':
-                    case 'S': {
-                        std::string sym(1, c);
-                            
-                        setSymbol(*atom, sym);
-                        setType(*atom, AtomDictionary::getType(sym));
-                        break;
-                    }
-
-                    default:
-                        continue;
-                }
-
-                break;
-            }
-        }
-
         // create potentially missing intra-residue bonds
         for (auto a_it1 = res_as_start_it; a_it1 != as_it; ) {
-            auto atom1 = *a_it1;
+            auto atom1 = a_it1->first;
             
             if (!mol.containsAtom(*atom1)) {
                 ++a_it1;
@@ -778,8 +841,8 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
             auto& atom1_pos = get3DCoordinates(*atom1);
             auto cov_rad1 = MolProp::getCovalentRadius(*atom1, 1);
                 
-            for (AtomList::const_iterator a_it2 = ++a_it1; a_it2 != as_it; ++a_it2) {
-                const Atom* atom2 = *a_it2;
+            for (auto a_it2 = ++a_it1; a_it2 != as_it; ++a_it2) {
+                auto atom2 = a_it2->first;
             
                 if (!mol.containsAtom(*atom2))
                     continue;
@@ -817,11 +880,14 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
             setResidueLinkingAtomFlag(*res_atom, true);
         }
 
-        if (currResidueLinkAtoms.empty() && (!chem_comp || !chem_comp.linkAtoms.empty()))
+        if (!chem_comp || (currResidueLinkAtoms.size() != chem_comp.linkAtoms.size())) {
+            currResidueLinkAtoms.clear();
+            
             for (auto a_it = res_as_start_it; a_it != as_it; ++a_it)
-                if (mol.containsAtom(**a_it))
-                    currResidueLinkAtoms.push_back(*a_it);
-
+                if (mol.containsAtom(*a_it->first))
+                    currResidueLinkAtoms.push_back(a_it->first);
+        }
+        
         bool exit = false;
 
         for (auto atom1 : prevResidueLinkAtoms) {
@@ -847,6 +913,252 @@ void Biomol::MMCIFDataReader::postprocAtomSites(const MMCIFData& data, Chem::Mol
 
         prevResidueLinkAtoms.swap(currResidueLinkAtoms);
     }
+}
+
+void Biomol::MMCIFDataReader::createNonStdInterResidueBonds(const MMCIFData& data, Chem::Molecule& mol) const
+{
+    using namespace MMCIF;
+  
+    auto struct_cons = data.findCategory(StructConn::NAME);
+
+    if (!struct_cons)
+        return;
+
+    auto num_cons = struct_cons->getNumValueRows();
+
+    if (num_cons == 0)
+        return;
+    
+    auto con_types = struct_cons->findItem(StructConn::Item::CONN_TYPE_ID);
+
+    if (!con_types) {
+        if (strictErrorChecking)
+            throw Base::IOError("MMCIFDataReader: missing mandatory _" + StructConn::NAME + "." + StructConn::Item::CONN_TYPE_ID +
+                                " data items");
+        return;
+    }
+    
+    auto ptnr1_auth_asym_ids = struct_cons->findItem(StructConn::Item::PTNR1_AUTH_ASYM_ID);
+    auto ptnr1_label_asym_ids = struct_cons->findItem(StructConn::Item::PTNR1_LABEL_ASYM_ID);
+    auto ptnr1_auth_atom_ids = struct_cons->findItem(StructConn::Item::PTNR1_AUTH_ATOM_ID);
+    auto ptnr1_label_atom_ids = struct_cons->findItem(StructConn::Item::PTNR1_LABEL_ATOM_ID);
+    auto ptnr1_auth_comp_ids = struct_cons->findItem(StructConn::Item::PTNR1_AUTH_COMP_ID);
+    auto ptnr1_label_comp_ids = struct_cons->findItem(StructConn::Item::PTNR1_LABEL_COMP_ID);
+    auto ptnr1_auth_seq_ids = struct_cons->findItem(StructConn::Item::PTNR1_AUTH_SEQ_ID);
+    auto ptnr1_label_seq_ids = struct_cons->findItem(StructConn::Item::PTNR1_LABEL_SEQ_ID);
+    auto ptnr1_ins_codes = struct_cons->findItem(StructConn::Item::PDBX_PTNR1_PDB_INS_CODE);
+    auto ptnr2_auth_asym_ids = struct_cons->findItem(StructConn::Item::PTNR2_AUTH_ASYM_ID);
+    auto ptnr2_label_asym_ids = struct_cons->findItem(StructConn::Item::PTNR2_LABEL_ASYM_ID);
+    auto ptnr2_auth_atom_ids = struct_cons->findItem(StructConn::Item::PTNR2_AUTH_ATOM_ID);
+    auto ptnr2_label_atom_ids = struct_cons->findItem(StructConn::Item::PTNR2_LABEL_ATOM_ID);
+    auto ptnr2_auth_comp_ids = struct_cons->findItem(StructConn::Item::PTNR2_AUTH_COMP_ID);
+    auto ptnr2_label_comp_ids = struct_cons->findItem(StructConn::Item::PTNR2_LABEL_COMP_ID);
+    auto ptnr2_auth_seq_ids = struct_cons->findItem(StructConn::Item::PTNR2_AUTH_SEQ_ID);
+    auto ptnr2_label_seq_ids = struct_cons->findItem(StructConn::Item::PTNR2_LABEL_SEQ_ID);
+    auto ptnr2_ins_codes = struct_cons->findItem(StructConn::Item::PDBX_PTNR2_PDB_INS_CODE);
+    
+    for (std::size_t i = 0; i < num_cons; i++) {
+        if (auto con_type = getValue(con_types, i)) {
+            if (Internal::isEqualCI(*con_type, StructConn::Type::SALTBR) ||
+                Internal::isEqualCI(*con_type, StructConn::Type::HYDROG) ||
+                Internal::isEqualCI(*con_type, StructConn::Type::MISMAT) ||
+                Internal::isEqualCI(*con_type, StructConn::Type::METALC))
+                continue;
+
+            if (!Internal::isEqualCI(*con_type, StructConn::Type::COVALE) &&
+                !Internal::isEqualCI(*con_type, StructConn::Type::COVALE_BASE) &&
+                !Internal::isEqualCI(*con_type, StructConn::Type::COVALE_PHOSPHATE) &&
+                !Internal::isEqualCI(*con_type, StructConn::Type::COVALE_SUGAR) &&
+                !Internal::isEqualCI(*con_type, StructConn::Type::DISULF) &&
+                !Internal::isEqualCI(*con_type, StructConn::Type::MODRES)) {
+
+                if (strictErrorChecking)
+                    throw Base::IOError("MMCIFDataReader: " + getFQItemName(struct_cons, con_types) +
+                                        ": invalid structure connection type specification '" + *con_type +
+                                        (num_cons > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+                continue;
+            }
+
+        } else {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(struct_cons, con_types) +
+                                    ": missing structure connection type specification" +
+                                    (num_cons > 1 ? " at data row " + std::to_string(i) : std::string("")));
+            continue;
+        }
+        
+        auto ptnr1_atom = getAtom(data, mol,
+                                  getValue(ptnr1_auth_asym_ids, i), getValue(ptnr1_auth_atom_ids, i),
+                                  getValue(ptnr1_auth_comp_ids, i), getValue(ptnr1_auth_seq_ids, i),
+                                  getValue(ptnr1_label_asym_ids, i), getValue(ptnr1_label_atom_ids, i),
+                                  getValue(ptnr1_label_comp_ids, i), getValue(ptnr1_label_seq_ids, i),
+                                  getValue(ptnr1_ins_codes, i));
+
+        if (!ptnr1_atom) {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: could not find first binding partner atom specified in _" + StructConn::NAME +
+                                    (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+            continue;
+        }
+        
+        auto ptnr2_atom = getAtom(data, mol,
+                                  getValue(ptnr2_auth_asym_ids, i), getValue(ptnr2_auth_atom_ids, i),
+                                  getValue(ptnr2_auth_comp_ids, i), getValue(ptnr2_auth_seq_ids, i),
+                                  getValue(ptnr2_label_asym_ids, i), getValue(ptnr2_label_atom_ids, i),
+                                  getValue(ptnr2_label_comp_ids, i), getValue(ptnr2_label_seq_ids, i),
+                                  getValue(ptnr2_ins_codes, i));
+
+        if (!ptnr2_atom) {
+            if (strictErrorChecking)
+                throw Base::IOError("MMCIFDataReader: could not find second binding partner atom specified in _" + StructConn::NAME +
+                                    (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+            continue;
+        }
+        
+        mol.addBond(mol.getAtomIndex(*ptnr1_atom), mol.getAtomIndex(*ptnr2_atom));
+    }
+}
+
+void Biomol::MMCIFDataReader::applyDictionaryBondOrders(Chem::Molecule& mol)
+{
+    if (!applyDictBondOrders || applyDictAtomBonding)
+        return;
+
+    std::string bo_cache_key;
+
+    for (auto it = mol.getBondsBegin() + startBondCount, end = mol.getBondsEnd(); it != end; ++it) {
+        auto& bond = *it;
+
+        if (hasOrder(bond))
+            continue;
+
+        auto& atom1 = bond.getBegin();
+        auto& atom2 = bond.getEnd();
+
+        if (getResidueSequenceNumber(atom1) != getResidueSequenceNumber(atom2))
+            continue;
+
+        auto& res_code1 = getResidueCode(atom1);
+        auto& res_code2 = getResidueCode(atom2);
+
+        if (res_code1 != res_code2)
+            continue;
+
+        auto& atom_name1 = getResidueAtomName(atom1);
+        auto& atom_name2 = getResidueAtomName(atom2);
+
+        bo_cache_key = res_code1;
+        bo_cache_key.push_back('-');
+        bo_cache_key.append(atom_name1);
+        bo_cache_key.push_back('-');
+        bo_cache_key.append(atom_name2);
+
+        auto boc_it = bondOrderCache.find(bo_cache_key);
+
+        if (boc_it != bondOrderCache.end()) {
+            setOrder(bond, boc_it->second); 
+            continue;
+        }
+
+        auto& chem_comp = getChemCompData(res_code1);
+
+        if (!chem_comp)
+            continue;
+
+        if (auto order = chem_comp.getBondOrder(atom_name1, atom_name2)) {
+            bondOrderCache[bo_cache_key] = order;
+
+            bo_cache_key = res_code1;
+            bo_cache_key.push_back('-');
+            bo_cache_key.append(atom_name2);
+            bo_cache_key.push_back('-');
+            bo_cache_key.append(atom_name1);
+
+            bondOrderCache[bo_cache_key] = order;
+
+            setOrder(bond, order);
+        }
+    }
+}
+
+void Biomol::MMCIFDataReader::setMacromoleculeName(const MMCIFData& data, Chem::Molecule& mol) const
+{
+    auto entry = data.findCategory(MMCIF::Entry::NAME);
+
+    if (!entry)
+        return;
+    
+    auto entry_id = entry->findItem(MMCIF::Entry::Item::ID);
+
+    if (!entry_id)
+        return;
+    
+    if (entry_id->getNumValues() != 1)
+        return;
+
+    if (auto* id = getValue(entry_id, 0))
+        setName(mol, *id);
+}
+
+Chem::Atom* Biomol::MMCIFDataReader::getAtom(const MMCIFData& data, Chem::Molecule& mol,
+                                             const std::string* auth_asym_id, const std::string* auth_atom_id,
+                                             const std::string* auth_comp_id, const std::string* auth_seq_id,
+                                             const std::string* label_asym_id, const std::string* label_atom_id,
+                                             const std::string* label_comp_id, const std::string* label_seq_id,
+                                             const std::string* ins_code) const
+{
+    using namespace MMCIF;
+  
+    auto atom_sites = data.findCategory(AtomSite::NAME);
+
+    if (!atom_sites)
+        return nullptr;
+
+    auto auth_asym_ids = atom_sites->findItem(AtomSite::Item::AUTH_ASYM_ID);
+    auto label_asym_ids = atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID);
+    auto auth_atom_ids = atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID);
+    auto label_atom_ids = atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID);
+    auto auth_comp_ids = atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID);
+    auto label_comp_ids = atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID);
+    auto auth_seq_ids = atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID);
+    auto label_seq_ids = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
+    auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
+    
+    for (auto& ase : atomSiteSequence) {
+        if (!mol.containsAtom(*ase.first))
+            continue;
+
+        if (!valuesMatch(auth_asym_id, auth_asym_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(label_asym_id, label_asym_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(auth_atom_id, auth_atom_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(label_atom_id, label_atom_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(auth_comp_id, auth_comp_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(label_comp_id, label_comp_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(auth_seq_id, auth_seq_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(label_seq_id, label_seq_ids, ase.second))
+            continue;
+
+        if (!valuesMatch(ins_code, ins_codes, ase.second))
+            continue;
+
+        return ase.first;
+    }
+
+    return nullptr;
 }
 
 const Biomol::ResidueDictionary& Biomol::MMCIFDataReader::getResidueDictionary() const
@@ -951,81 +1263,11 @@ void Biomol::MMCIFDataReader::readChemComps(const MMCIFData& data, Chem::Molecul
     readChemCompAtoms(data, mol);
 
     if (readChemCompBonds(data, mol))
-        kekulizeBonds(mol);
+        perceiveBondOrders(mol);
 
-    auto prev_num_atoms = startAtomCount;
-    
-    if (!hasComponents(mol))
-        prev_num_atoms = 0;
-
-    auto comps = data.findCategory(MMCIF::ChemComp::NAME);
-    auto comp_ids = (comps ? comps->findItem(MMCIF::ChemComp::Item::ID) : nullptr);
-    auto comp_names = (comps ? comps->findItem(MMCIF::ChemComp::Item::NAME) : nullptr);
-    auto num_comps = (comps && comp_ids && comp_names ? comps->getNumValueRows() : std::size_t(0));
-    
-    Chem::FragmentList::SharedPointer comps_ptr(new Chem::ComponentSet(mol, prev_num_atoms));
-
-    for (auto& comp : *comps_ptr) {
-        const std::string* comp_id = nullptr;
-        
-        for (auto& atom : comp.getAtoms()) {
-            if (!hasResidueCode(atom)) {
-                comp_id = nullptr;
-                break;
-            }
-
-            if (!comp_id) {
-                comp_id = &getResidueCode(atom);
-                continue;
-            }
-
-            if (*comp_id != getResidueCode(atom)) {
-                comp_id = nullptr;
-                break;
-            }
-        }
-
-        if (!comp_id)
-            continue;
-
-        setResidueCode(comp, *comp_id);
-
-        for (std::size_t i = 0; i < num_comps; i++) {
-            auto id = getValue(comp_ids, i);
-
-            if (!id)
-                continue;
-
-            auto name = getValue(comp_names, i);
-
-            if (!name)
-                continue;
-
-            if (*id == *comp_id) {
-                setName(comp, *name);
-                break;
-            }
-        }
-    }
-
-    if (hasComponents(mol)) {
-        auto& old_comps_ptr = getComponents(mol);
-
-        old_comps_ptr->insertElements(old_comps_ptr->Chem::FragmentList::BaseType::end(),
-                                      comps_ptr->Chem::FragmentList::BaseType::begin(),
-                                      comps_ptr->Chem::FragmentList::BaseType::end());
-    } else
-        setComponents(mol, comps_ptr);
-    
-    if (prev_num_atoms == 0 && num_comps == 1) {
-        if (!hasResidueCode(mol))
-            if (auto res_code = getValue(comp_ids, 0))
-                setResidueCode(mol, *res_code);
-
-        if (!hasName(mol))
-            if (auto name = getValue(comp_names, 0))
-                setName(mol, *name);
-    }
+    calcAtomCharges(mol);
+ 
+    postprocReadChemComps(data, mol);
 }
 
 void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol)
@@ -1187,7 +1429,7 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
 
         if (it1 == chemCompAtomLookupMap.end()) {
             if (strictErrorChecking)
-                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_1 + "' specified in _" + comp_bonds->getName() +
+                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_1 + "' specified in _" + ChemCompBond::NAME +
                                     (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
             continue;
         }
@@ -1196,7 +1438,7 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
 
         if (it2 == chemCompAtomLookupMap.end()) {
             if (strictErrorChecking)
-                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_2 + "' specified in _" + comp_bonds->getName() +
+                throw Base::IOError("MMCIFDataReader: could not find atom with id '" + *atom_id_2 + "' specified in _" + ChemCompBond::NAME +
                                     (num_bonds > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
             continue;
         }
@@ -1254,6 +1496,142 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
     }
 
     return undef_bond_orders;
+}
+
+void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem::Molecule& mol) const
+{
+    auto prev_num_atoms = startAtomCount;
+    
+    if (!hasComponents(mol))
+        prev_num_atoms = 0;
+
+    auto comps = data.findCategory(MMCIF::ChemComp::NAME);
+    auto comp_ids = (comps ? comps->findItem(MMCIF::ChemComp::Item::ID) : nullptr);
+    auto comp_names = (comps ? comps->findItem(MMCIF::ChemComp::Item::NAME) : nullptr);
+    auto num_comps = (comps && comp_ids && comp_names ? comps->getNumValueRows() : std::size_t(0));
+    
+    Chem::FragmentList::SharedPointer comps_ptr(new Chem::ComponentSet(mol, prev_num_atoms));
+
+    for (auto& comp : *comps_ptr) {
+        const std::string* comp_id = nullptr;
+        
+        for (auto& atom : comp.getAtoms()) {
+            if (!hasResidueCode(atom)) {
+                comp_id = nullptr;
+                break;
+            }
+
+            if (!comp_id) {
+                comp_id = &getResidueCode(atom);
+                continue;
+            }
+
+            if (*comp_id != getResidueCode(atom)) {
+                comp_id = nullptr;
+                break;
+            }
+        }
+
+        if (!comp_id)
+            continue;
+
+        setResidueCode(comp, *comp_id);
+
+        for (std::size_t i = 0; i < num_comps; i++) {
+            if (!valuesMatch(comp_id, comp_ids, i))
+                continue;
+
+            if (auto name = getValue(comp_names, i)) {
+                setName(comp, *name);
+                break;
+            }
+        }
+    }
+
+    if (hasComponents(mol)) {
+        auto& old_comps_ptr = getComponents(mol);
+
+        old_comps_ptr->insertElements(old_comps_ptr->Chem::FragmentList::BaseType::end(),
+                                      comps_ptr->Chem::FragmentList::BaseType::begin(),
+                                      comps_ptr->Chem::FragmentList::BaseType::end());
+    } else
+        setComponents(mol, comps_ptr);
+    
+    if (prev_num_atoms == 0 && num_comps == 1) {
+        if (!hasResidueCode(mol))
+            if (auto res_code = getValue(comp_ids, 0))
+                setResidueCode(mol, *res_code);
+
+        if (!hasName(mol))
+            if (auto name = getValue(comp_names, 0))
+                setName(mol, *name);
+    }
+}
+
+void Biomol::MMCIFDataReader::perceiveBondOrders(Chem::Molecule& mol)
+{
+    if (!perceiveOrders)
+        return;
+
+    if (startBondCount == 0) {
+        perceiveSSSR(mol, true);
+        setRingFlags(mol, true);
+
+        Chem::perceiveBondOrders(mol, false);
+        return;
+    }
+
+    readMolGraph.clear();
+
+    std::for_each(mol.getBondsBegin() + startBondCount, mol.getBondsEnd(), 
+                  [&](const Chem::Bond& bond) { readMolGraph.addBond(bond); });
+
+    setRingFlags(readMolGraph, true);
+    
+    Chem::perceiveBondOrders(readMolGraph, false);
+}
+
+void Biomol::MMCIFDataReader::calcAtomCharges(Chem::Molecule& mol)
+{
+    using namespace Chem;
+
+    if (!calcCharges)
+        return;
+
+    if (startAtomCount != 0)
+        readMolGraph.clear();
+
+    for (Molecule::BondIterator it = mol.getBondsBegin() + startBondCount, end = mol.getBondsEnd(); it != end; ++it) {
+        Bond& bond = *it;
+
+        if (hasOrder(bond))
+            continue;
+
+        setOrder(bond, 1);
+
+        if (startAtomCount != 0)
+            readMolGraph.addBond(bond);
+    }
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin() + startAtomCount, end = mol.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
+
+        if (startAtomCount != 0)
+            readMolGraph.addAtom(atom);
+
+        if (hasImplicitHydrogenCount(atom))
+            continue;
+
+        if (hasFormalCharge(atom))
+            continue;
+
+        setImplicitHydrogenCount(atom, 0);
+    }
+
+    if (startAtomCount != 0)
+        Chem::calcFormalCharges(readMolGraph, false);
+    else
+        Chem::calcFormalCharges(mol, false);
 }
 
 Biomol::MMCIFData::SharedPointer Biomol::MMCIFDataReader::parseInput(std::istream& is)

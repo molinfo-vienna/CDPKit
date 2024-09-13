@@ -56,6 +56,18 @@ namespace CDPL
             const std::string TRUE_FLAG            = "Y";
             const std::string FALSE_FLAG           = "N";
 
+            namespace Entry
+            {
+
+                const std::string NAME = "entry";
+
+                namespace Item
+                {
+
+                    const std::string ID = "id";
+                }
+            } // namespace Entry
+
             namespace AtomSite
             {
 
@@ -94,6 +106,59 @@ namespace CDPL
                     const std::string HET_ATOM = "HETATM";
                 } // namespace StereoConfig
             } // namespace AtomSite
+
+            namespace StructConn
+            {
+
+                const std::string NAME = "struct_conn";
+
+                namespace Item
+                {
+
+                    const std::string ID                      = "id";
+                    const std::string CONN_TYPE_ID            = "conn_type_id";
+                    const std::string DETAILS                 = "details";
+                    const std::string PTNR1_AUTH_ASYM_ID      = "ptnr1_auth_asym_id";
+                    const std::string PTNR1_AUTH_ATOM_ID      = "ptnr1_auth_atom_id";
+                    const std::string PTNR1_AUTH_COMP_ID      = "ptnr1_auth_comp_id";
+                    const std::string PTNR1_AUTH_SEQ_ID       = "ptnr1_auth_seq_id";
+                    const std::string PTNR1_LABEL_ALT_ID      = "ptnr1_label_alt_id";
+                    const std::string PTNR1_LABEL_ASYM_ID     = "ptnr1_label_asym_id";
+                    const std::string PTNR1_LABEL_ATOM_ID     = "ptnr1_label_atom_id";
+                    const std::string PTNR1_LABEL_COMP_ID     = "ptnr1_label_comp_id";
+                    const std::string PTNR1_LABEL_SEQ_ID      = "ptnr1_label_seq_id";
+                    const std::string PDBX_PTNR1_PDB_INS_CODE = "pdbx_ptnr1_PDB_ins_code";
+                    const std::string PTNR1_ROLE              = "ptnr1_role";
+                    const std::string PTNR1_SYMMETRY          = "ptnr1_symmetry";
+                    const std::string PTNR2_AUTH_ASYM_ID      = "ptnr2_auth_asym_id";
+                    const std::string PTNR2_AUTH_ATOM_ID      = "ptnr2_auth_atom_id";
+                    const std::string PTNR2_AUTH_COMP_ID      = "ptnr2_auth_comp_id";
+                    const std::string PTNR2_AUTH_SEQ_ID       = "ptnr2_auth_seq_id";
+                    const std::string PTNR2_LABEL_ALT_ID      = "ptnr2_label_alt_id";
+                    const std::string PTNR2_LABEL_ASYM_ID     = "ptnr2_label_asym_id";
+                    const std::string PTNR2_LABEL_ATOM_ID     = "ptnr2_label_atom_id";
+                    const std::string PTNR2_LABEL_COMP_ID     = "ptnr2_label_comp_id";
+                    const std::string PTNR2_LABEL_SEQ_ID      = "ptnr2_label_seq_id";
+                    const std::string PDBX_PTNR2_PDB_INS_CODE = "pdbx_ptnr2_PDB_ins_code";
+                    const std::string PTNR2_ROLE              = "ptnr2_role";
+                    const std::string PTNR2_SYMMETRY          = "ptnr2_symmetry";
+                } // namespace Item
+
+                namespace Type
+                {
+
+                    const std::string COVALE           = "covale";           // covalent bond
+                    const std::string COVALE_BASE      = "covale_base";      // covalent modification of a nucleotide base
+                    const std::string COVALE_PHOSPHATE = "covale_phosphate"; // covalent modification of a nucleotide phosphate
+                    const std::string COVALE_SUGAR     = "covale_sugar";     // covalent modification of a nucleotide sugar
+                    const std::string DISULF           = "disulf";           // disulfide bridge
+                    const std::string HYDROG           = "hydrog";           // hydrogen bond
+                    const std::string METALC           = "metalc";           // metal coordination
+                    const std::string MISMAT           = "mismat";           // mismatched base pairs
+                    const std::string MODRES           = "modres";           // covalent residue modification
+                    const std::string SALTBR           = "saltbr";           // ionic interaction
+                } // namespace ConnType
+            } // namespace StructConn
 
             namespace ChemComp
             {
