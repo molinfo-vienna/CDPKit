@@ -135,6 +135,27 @@ namespace
 }
 
 
+std::size_t Biomol::PDBDataReader::StringPtrHash::operator()(const std::string* str_ptr) const
+{
+    if (!str_ptr)
+        return 0;
+
+    return std::hash<std::string>{}(*str_ptr);
+}
+
+
+bool Biomol::PDBDataReader::StringPtrCmpFunc::operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+{
+    if (!str_ptr1)
+        return !str_ptr2;
+
+    if (!str_ptr2)
+        return false;
+
+    return (*str_ptr1 == *str_ptr2);
+}
+
+
 bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 {
     if (!hasMoreData(is))
@@ -329,7 +350,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
     if (combInterferingResCoords)
         combineInterferingResidueCoordinates(mol);
 
-    setBondOrdersFromResTemplates(mol);
+    applyDictionaryBondOrders(mol);
     perceiveBondOrders(mol);
     calcAtomCharges(mol);
     setPDBData(mol, pdbData);
@@ -380,9 +401,9 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 
     resDictionary                        = getResidueDictionaryParameter(ioBase);
     applyDictAtomBondingToStdResidues    = getPDBApplyDictAtomBondingToStdResiduesParameter(ioBase);
-    applyDictOrderToStdResidues          = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
+    applyDictBondOrderToStdResidues      = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
     applyDictAtomBondingToNonStdResidues = getPDBApplyDictAtomBondingToNonStdResiduesParameter(ioBase);
-    applyDictOrderToNonStdResidues       = getPDBApplyDictBondOrdersToNonStdResiduesParameter(ioBase);
+    applyDictBondOrderToNonStdResidues   = getPDBApplyDictBondOrdersToNonStdResiduesParameter(ioBase);
     ignoreConectRecords                  = getPDBIgnoreConectRecordsParameter(ioBase);
     setOrdersFromCONECTRecords           = getPDBDeduceBondOrdersFromCONECTRecordsParameter(ioBase);
     ignoreChargeField                    = getPDBIgnoreFormalChargeFieldParameter(ioBase);
@@ -987,7 +1008,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
                     auto& res_bond = mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
 
-                    if ((is_std_res && applyDictOrderToStdResidues) || (!is_std_res && applyDictOrderToNonStdResidues))
+                    if ((is_std_res && applyDictBondOrderToStdResidues) || (!is_std_res && applyDictBondOrderToNonStdResidues))
                         setOrder(res_bond, getOrder(bond));
                 }
             }
@@ -1005,23 +1026,26 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             const std::string& atom_name = getResidueAtomName(*atom);
 
             // as a last resort, try to extract the element symbol from the residue atom name
-            for (std::size_t i = 0; i < atom_name.length(); i++) {
-                switch (atom_name[i]) {
+            for (char c : atom_name) {
+                switch (c) {
 
                     case 'H':
                     case 'N':
                     case 'O':
                     case 'C':
                     case 'S': {
-                        std::string sym(1, atom_name[i]);
+                        std::string sym(1, c);
                             
                         setSymbol(*atom, sym);
                         setType(*atom, AtomDictionary::getType(sym));
-
-                        i = atom_name.length();
                         break;
                     }
+
+                    default:
+                        continue;
                 }
+
+                break;
             }
         }
 
@@ -1067,18 +1091,23 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             }
         }
         
-        if (chain_term) {
-            // connect residues
+        if (chain_term) {             // connect residues
+            std::size_t num_tmplt_link_atoms = 0;
             
             if (res_tmplt) {
                 for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
                     const Atom& atom = *a_it;
+                    bool is_link_atom = getResidueLinkingAtomFlag(atom);
+
+                    if (is_link_atom)
+                        num_tmplt_link_atoms++;
+                    
                     Atom* res_atom = currResidueAtoms[&getResTemplateAtomName(atom)];
 
                     if (!res_atom)
                         continue;
         
-                    if (getResidueLinkingAtomFlag(atom)) {
+                    if (is_link_atom) {
                         currResidueLinkAtoms.push_back(res_atom);
                         setResidueLinkingAtomFlag(*res_atom, true);
 
@@ -1087,10 +1116,13 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 } 
             }
             
-            if (currResidueLinkAtoms.empty())
+            if (!res_tmplt || (currResidueLinkAtoms.size() != num_tmplt_link_atoms)) {
+                currResidueLinkAtoms.clear();
+                
                 for (AtomList::const_iterator a_it = res_as_start_it; a_it != as_it; ++a_it)
                     if (mol.containsAtom(**a_it))
                         currResidueLinkAtoms.push_back(*a_it);
+            }
             
             bool exit = false;
 
@@ -1124,12 +1156,12 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
     atomSequence.clear();
 }
 
-void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
+void Biomol::PDBDataReader::applyDictionaryBondOrders(Chem::Molecule& mol)
 {
     using namespace Chem;
 
-    if ((!applyDictOrderToStdResidues && !applyDictOrderToNonStdResidues) ||
-        (applyDictOrderToStdResidues && applyDictOrderToNonStdResidues &&
+    if ((!applyDictBondOrderToStdResidues && !applyDictBondOrderToNonStdResidues) ||
+        (applyDictBondOrderToStdResidues && applyDictBondOrderToNonStdResidues &&
          applyDictAtomBondingToStdResidues && applyDictAtomBondingToStdResidues))
         return;
 
@@ -1156,7 +1188,7 @@ void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
 
         bool is_std_res = res_dict->isStdResidue(res_code1);    
 
-        if ((is_std_res && !applyDictOrderToStdResidues) || (!is_std_res && !applyDictOrderToNonStdResidues))
+        if ((is_std_res && !applyDictBondOrderToStdResidues) || (!is_std_res && !applyDictBondOrderToNonStdResidues))
             continue;
 
         const std::string& atom_name1 = getResidueAtomName(atom1);

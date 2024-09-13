@@ -92,7 +92,7 @@ namespace CDPL
 
             void processAtomSequence(Chem::Molecule&, bool);
 
-            void setBondOrdersFromResTemplates(Chem::Molecule&);
+            void applyDictionaryBondOrders(Chem::Molecule&);
             void perceiveBondOrders(Chem::Molecule&);
             void calcAtomCharges(Chem::Molecule&);
 
@@ -102,28 +102,13 @@ namespace CDPL
             struct StringPtrHash
             {
 
-                std::size_t operator()(const std::string* str_ptr) const
-                {
-                    if (!str_ptr)
-                        return 0;
-
-                    return std::hash<std::string>{}(*str_ptr);
-                }
+                std::size_t operator()(const std::string* str_ptr) const;
             };
 
             struct StringPtrCmpFunc
             {
 
-                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
-                {
-                    if (!str_ptr1)
-                        return !str_ptr2;
-
-                    if (!str_ptr2)
-                        return false;
-
-                    return (*str_ptr1 == *str_ptr2);
-                }
+                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const;
             };
 
             typedef std::vector<Chem::Atom*>                                                AtomList;
@@ -141,9 +126,9 @@ namespace CDPL
             bool                    checkLineLength;
             ResDictPointer          resDictionary;
             bool                    applyDictAtomBondingToStdResidues;
-            bool                    applyDictOrderToStdResidues;
+            bool                    applyDictBondOrderToStdResidues;
             bool                    applyDictAtomBondingToNonStdResidues;
-            bool                    applyDictOrderToNonStdResidues;
+            bool                    applyDictBondOrderToNonStdResidues;
             bool                    ignoreConectRecords;
             bool                    setOrdersFromCONECTRecords;
             bool                    ignoreChargeField;
