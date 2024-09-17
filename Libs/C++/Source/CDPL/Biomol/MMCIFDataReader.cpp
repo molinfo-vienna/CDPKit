@@ -1500,17 +1500,12 @@ bool Biomol::MMCIFDataReader::readChemCompBonds(const MMCIFData& data, Chem::Mol
 
 void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem::Molecule& mol) const
 {
-    auto prev_num_atoms = startAtomCount;
-    
-    if (!hasComponents(mol))
-        prev_num_atoms = 0;
-
     auto comps = data.findCategory(MMCIF::ChemComp::NAME);
     auto comp_ids = (comps ? comps->findItem(MMCIF::ChemComp::Item::ID) : nullptr);
     auto comp_names = (comps ? comps->findItem(MMCIF::ChemComp::Item::NAME) : nullptr);
     auto num_comps = (comps && comp_ids && comp_names ? comps->getNumValueRows() : std::size_t(0));
     
-    Chem::FragmentList::SharedPointer comps_ptr(new Chem::ComponentSet(mol, prev_num_atoms));
+    Chem::FragmentList::SharedPointer comps_ptr(new Chem::ComponentSet(mol, !hasComponents(mol) ? std::size_t(0) : startAtomCount));
 
     for (auto& comp : *comps_ptr) {
         const std::string* comp_id = nullptr;
@@ -1554,17 +1549,59 @@ void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem:
         old_comps_ptr->insertElements(old_comps_ptr->Chem::FragmentList::BaseType::end(),
                                       comps_ptr->Chem::FragmentList::BaseType::begin(),
                                       comps_ptr->Chem::FragmentList::BaseType::end());
+
+        comps_ptr = old_comps_ptr;
+        
     } else
         setComponents(mol, comps_ptr);
     
-    if (prev_num_atoms == 0 && num_comps == 1) {
-        if (!hasResidueCode(mol))
-            if (auto res_code = getValue(comp_ids, 0))
-                setResidueCode(mol, *res_code);
+    if (startAtomCount > 0)
+        return;
 
-        if (!hasName(mol))
-            if (auto name = getValue(comp_names, 0))
-                setName(mol, *name);
+    if (!hasResidueCode(mol)) {
+        const std::string* res_code = nullptr;
+    
+        for (auto& comp : *comps_ptr) {
+            if (hasResidueCode(comp)) {
+                if (!res_code) {
+                    res_code = &getResidueCode(comp);
+                    continue;
+                }
+                
+                if (*res_code != getResidueCode(comp)) {
+                    res_code = nullptr;
+                    break;
+                }
+            
+            } else
+                break;
+        }
+
+        if (res_code)
+            setResidueCode(mol, *res_code);
+    }
+
+    if (!hasName(mol)) {
+        const std::string* name = nullptr;
+    
+        for (auto& comp : *comps_ptr) {
+            if (hasName(comp)) {
+                if (!name) {
+                    name = &getName(comp);
+                    continue;
+                }
+                
+                if (*name != getName(comp)) {
+                    name = nullptr;
+                    break;
+                }
+            
+            } else
+                break;
+        }
+
+        if (name)
+            setName(mol, *name);
     }
 }
 
