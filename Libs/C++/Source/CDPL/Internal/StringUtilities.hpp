@@ -28,6 +28,9 @@
 #include <string>
 #include <string_view>
 #include <locale>
+#include <cstddef>
+
+#include <boost/functional/hash.hpp>
 
 
 namespace CDPL
@@ -35,6 +38,14 @@ namespace CDPL
 
     namespace Internal
     {
+
+        std::string& trimString(std::string& str, bool left = true, bool right = true);
+
+        std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
+
+        bool isEqualCI(const std::string_view& str1, const std::string_view& str2);
+
+        bool startsWithCI(const std::string_view& str, const std::string_view& query);
 
         struct IsNonWhitespace
         {
@@ -58,14 +69,87 @@ namespace CDPL
             }
         };
 
-        std::string& trimString(std::string& str, bool left = true, bool right = true);
+        struct StringPtrHashFunc
+        {
 
-        std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
+            std::size_t operator()(const std::string* str_ptr) const
+            {
+                if (!str_ptr)
+                    return 0;
 
-        bool isEqualCI(const std::string_view& str1, const std::string_view& str2);
+                return std::hash<std::string>{}(*str_ptr);
+            }
+        };
 
-        bool startsWithCI(const std::string_view& str, const std::string_view& query);
+        struct StringPtrCmpFunc
+        {
+
+            bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+            {
+                if (!str_ptr1)
+                    return !str_ptr2;
+
+                if (!str_ptr2)
+                    return false;
+
+                return (*str_ptr1 == *str_ptr2);
+            }
+        };
         
+        struct CIStringPtrHashFunc
+        {
+
+            std::size_t operator()(const std::string* str_ptr) const
+            {
+                if (!str_ptr)
+                    return 0;
+
+                std::size_t h = 0;
+
+                for (auto c : *str_ptr)
+                    boost::hash_combine(h, std::tolower(c, std::locale::classic()));
+
+                return h;
+            }
+        };
+
+        struct CIStringPtrCmpFunc
+        {
+
+            bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
+            {
+                if (!str_ptr1)
+                    return !str_ptr2;
+
+                if (!str_ptr2)
+                    return false;
+
+                return isEqualCI(*str_ptr1, *str_ptr2);
+            }
+        };
+
+        struct CIStringHashFunc
+        {
+
+            std::size_t operator()(const std::string& str) const
+            {
+                std::size_t h = 0;
+
+                for (auto c : str)
+                    boost::hash_combine(h, std::tolower(c, std::locale::classic()));
+
+                return h;
+            }
+        };
+
+        struct CIStringCmpFunc
+        {
+
+            bool operator()(const std::string& str1, const std::string& str2) const
+            {
+                return isEqualCI(str1, str2);
+            }
+        };
     } // namespace Internal
 } // namespace CDPL
 
