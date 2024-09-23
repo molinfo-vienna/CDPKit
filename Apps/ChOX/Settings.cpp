@@ -667,7 +667,20 @@ void Settings::load()
     readParameter<bool>(mmcif_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MMCIF_INPUT_STRICT_ERROR_CHECKING);
 
     settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Biomol::DataFormat::MMCIF.getName()));
+
+    SettingsContainer& mmcif_wparams = writerControlParams[Biomol::DataFormat::MMCIF.getName()];
+
+    mmcif_wparams.setParent(this);
+
+    readParameter<bool>(mmcif_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MMCIF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(mmcif_wparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MMCIF_OUTPUT_STRICT_ERROR_CHECKING);
     
+    settings.endGroup();
+
     // ------
 
     settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::MMTF.getName()));
@@ -1189,6 +1202,17 @@ void Settings::save() const
     const SettingsContainer& mmcif_rparams = getReaderControlParameters(Biomol::DataFormat::MMCIF.getName());
 
     writeParameter<bool>(mmcif_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
+
+    settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Biomol::DataFormat::MMCIF.getName()));
+
+    const SettingsContainer& mmcif_wparams = getWriterControlParameters(Biomol::DataFormat::MMCIF.getName());
+
+    writeParameter<bool>(mmcif_wparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
+    writeParameter<bool>(mmcif_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 

@@ -236,13 +236,13 @@ namespace ChOX
         const bool                                 SMILES_OUTPUT_WRITE_ISOTOPE             = true;
         const bool                                 SMILES_OUTPUT_NO_ORGANIC_SUBSET         = false;
         const std::size_t                          SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE = 8;
-        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
+        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = false;
         const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "SN";
 
         const bool                                 SMARTS_INPUT_STRICT_ERROR_CHECKING      = false;
 
         const bool                                 SMARTS_OUTPUT_STRICT_ERROR_CHECKING     = false;
-        const bool                                 SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
+        const bool                                 SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES = false;
         const std::string                          SMARTS_OUTPUT_RECORD_SEPARATOR          = "\n";
 
         const bool                                 INCHI_INPUT_STRICT_ERROR_CHECKING       = false;
@@ -257,7 +257,10 @@ namespace ChOX
         const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
 
         const bool                                 MMCIF_INPUT_STRICT_ERROR_CHECKING       = false;
-        
+
+        const bool                                 MMCIF_OUTPUT_STRICT_ERROR_CHECKING      = false;
+        const bool                                 MMCIF_OUTPUT_WRITE_SINGLE_RECORD_FILES  = false;
+
         const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
 
         const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
