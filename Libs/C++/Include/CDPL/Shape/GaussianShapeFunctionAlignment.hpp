@@ -105,8 +105,12 @@ namespace CDPL
 
             GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class);
 
+            GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment) = delete;
+            
             ~GaussianShapeFunctionAlignment();
 
+            GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment) = delete;
+ 
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
 
             GaussianShapeOverlapFunction& getOverlapFunction() const;
@@ -182,10 +186,6 @@ namespace CDPL
             ConstResultIterator end() const;
 
           private:
-            GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
-
-            GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment);
-
             bool checkValidity(const GaussianShapeFunction& func) const;
 
             double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);

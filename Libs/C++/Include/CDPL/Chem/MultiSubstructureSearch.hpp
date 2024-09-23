@@ -59,6 +59,8 @@ namespace CDPL
              */
             MultiSubstructureSearch();
 
+            MultiSubstructureSearch(const MultiSubstructureSearch&) = delete;
+            
             /**
              * \brief Destructor.
              *
@@ -66,6 +68,8 @@ namespace CDPL
              */
             ~MultiSubstructureSearch();
 
+            MultiSubstructureSearch& operator=(const MultiSubstructureSearch&) = delete;
+          
             bool matches(const MolecularGraph& molgraph);
 
             void addSubstructure(const MolecularGraph::SharedPointer& molgraph);
@@ -84,11 +88,7 @@ namespace CDPL
 
             typedef std::unique_ptr<ExprTreeNode>              ExprTreeNodePtr;
             typedef std::vector<MolecularGraph::SharedPointer> MolGraphPtrArray;
-
-            MultiSubstructureSearch(const MultiSubstructureSearch&) = delete;
-
-            MultiSubstructureSearch& operator=(const MultiSubstructureSearch&) = delete;
-            
+  
             Token nextToken(const std::string& expr);
 
             ExprTreeNodePtr parseExpression(const std::string& expr);

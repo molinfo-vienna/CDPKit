@@ -77,10 +77,14 @@ namespace CDPL
              */
             SMARTSMolecularGraphWriter(std::ostream& os);
 
+            SMARTSMolecularGraphWriter(const SMARTSMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMARTSMolecularGraphWriter();
+
+            SMARTSMolecularGraphWriter& operator=(const SMARTSMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -93,10 +97,6 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            SMARTSMolecularGraphWriter(const SMARTSMolecularGraphWriter&);
-
-            SMARTSMolecularGraphWriter& operator=(const SMARTSMolecularGraphWriter&);
-
             typedef std::unique_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
 
             std::ostream&       output;

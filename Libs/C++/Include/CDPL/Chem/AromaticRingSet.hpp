@@ -61,12 +61,16 @@ namespace CDPL
              */
             AromaticRingSet() {}
 
+            AromaticRingSet(const AromaticRingSet&) = delete;
+            
             /**
              * \brief Construct a \c %AromaticRingSet instance that contains all aromatic rings of the
              *        molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the aromatic rings.
              */
             AromaticRingSet(const MolecularGraph& molgraph);
+
+            AromaticRingSet& operator=(const AromaticRingSet&) = delete;
 
             /**
              * \brief Replaces the current set of rings by the aromatic rings of the molecular graph \a molgraph.
@@ -75,10 +79,6 @@ namespace CDPL
             void perceive(const MolecularGraph& molgraph);
 
           private:
-            AromaticRingSet(const AromaticRingSet&);
-
-            AromaticRingSet& operator=(const AromaticRingSet&);
-
             void init(const MolecularGraph&);
 
             void findAromaticRings();

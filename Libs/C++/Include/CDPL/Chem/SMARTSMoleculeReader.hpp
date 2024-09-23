@@ -71,17 +71,17 @@ namespace CDPL
              */
             SMARTSMoleculeReader(std::istream& is);
 
+            SMARTSMoleculeReader(const SMARTSMoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMARTSMoleculeReader();
 
+            SMARTSMoleculeReader& operator=(const SMARTSMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Molecule, SMARTSMoleculeReader>;
-
-            SMARTSMoleculeReader(const SMARTSMoleculeReader&);
-
-            SMARTSMoleculeReader& operator=(const SMARTSMoleculeReader&);
 
             bool readData(std::istream&, Molecule&, bool overwrite);
             bool skipData(std::istream&);

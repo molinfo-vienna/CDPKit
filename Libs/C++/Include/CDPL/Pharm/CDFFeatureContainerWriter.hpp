@@ -59,10 +59,14 @@ namespace CDPL
              */
             CDFFeatureContainerWriter(std::ostream& os);
 
+            CDFFeatureContainerWriter(const CDFFeatureContainerWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CDFFeatureContainerWriter();
+
+            CDFFeatureContainerWriter& operator=(const CDFFeatureContainerWriter&) = delete;
 
             /**
              * \brief Writes data of the feature container \a cntnr to the output stream specified in the constructor.
@@ -71,15 +75,11 @@ namespace CDPL
              */
             Base::DataWriter<FeatureContainer>& write(const FeatureContainer& cntnr);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
-
-            CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
-
-            CDFFeatureContainerWriter& operator=(const CDFFeatureContainerWriter&);
 
             std::ostream&    output;
             bool             state;

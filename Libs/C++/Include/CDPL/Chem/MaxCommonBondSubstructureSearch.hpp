@@ -86,12 +86,16 @@ namespace CDPL
              */
             MaxCommonBondSubstructureSearch(const MolecularGraph& query);
 
+            MaxCommonBondSubstructureSearch(const MaxCommonBondSubstructureSearch&) = delete;
+              
             /**
              * \brief Destructor.
              *
              * Destroys the \c %MaxCommonBondSubstructureSearch instance and frees all allocated resources.
              */
             ~MaxCommonBondSubstructureSearch();
+
+            MaxCommonBondSubstructureSearch& operator=(const MaxCommonBondSubstructureSearch&) = delete;
 
             /**
              * \brief Allows to specify a new query structure.
@@ -261,10 +265,6 @@ namespace CDPL
 
           private:
             class AGNode;
-
-            MaxCommonBondSubstructureSearch(const MaxCommonBondSubstructureSearch&);
-
-            MaxCommonBondSubstructureSearch& operator=(const MaxCommonBondSubstructureSearch&);
 
             bool init(const MolecularGraph&);
 

@@ -56,10 +56,14 @@ namespace CDPL
              */
             XYZMolecularGraphWriter(std::ostream& os);
 
+            XYZMolecularGraphWriter(const XYZMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~XYZMolecularGraphWriter();
+
+            XYZMolecularGraphWriter& operator=(const XYZMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -72,10 +76,6 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            XYZMolecularGraphWriter(const XYZMolecularGraphWriter&);
-
-            XYZMolecularGraphWriter& operator=(const XYZMolecularGraphWriter&);
-
             typedef std::unique_ptr<XYZDataWriter> XYZDataWriterPtr;
 
             std::ostream&    output;

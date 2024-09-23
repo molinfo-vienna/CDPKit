@@ -72,12 +72,16 @@ namespace CDPL
              */
             PEOESigmaChargeCalculator();
 
+            PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&) = delete;
+            
             /**
              * \brief Constructs the \c %PEOESigmaChargeCalculator instance and calculates the sigma charges and
              *        electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
              * \param molgraph The molecular graph for which to perform the calculations.
              */
             PEOESigmaChargeCalculator(const Chem::MolecularGraph& molgraph);
+
+            PEOESigmaChargeCalculator& operator=(const PEOESigmaChargeCalculator&) = delete;
 
             /**
              * \brief Allows to specify the number of charge shifting iterations that have to be performed.
@@ -129,10 +133,6 @@ namespace CDPL
 
           private:
             friend class MHMOPiChargeCalculator;
-
-            PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&);
-
-            PEOESigmaChargeCalculator& operator=(const PEOESigmaChargeCalculator&);
 
             void init(const Chem::MolecularGraph& molgraph);
             void calcCharges();

@@ -77,6 +77,10 @@ namespace CDPL
              */
             MolecularComplexityCalculator(const Chem::MolecularGraph& molgraph);
 
+            MolecularComplexityCalculator(const MolecularComplexityCalculator&) = delete;
+            
+            MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&) = delete;
+   
             /**
              * \brief Calculates the complexity of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to calculate the complexity.
@@ -92,10 +96,6 @@ namespace CDPL
             double getResult() const;
 
           private:
-            MolecularComplexityCalculator(const MolecularComplexityCalculator&);
-
-            MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&);
-
             void processAtom(const Chem::Atom&);
             void processBond(const Chem::Bond&);
 

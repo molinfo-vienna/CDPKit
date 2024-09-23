@@ -69,6 +69,10 @@ namespace CDPL
              */
             CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
 
+            CIPPriorityCalculator(const CIPPriorityCalculator&) = delete;
+
+            CIPPriorityCalculator& operator=(const CIPPriorityCalculator&) = delete;
+
             /**
              * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
@@ -80,10 +84,6 @@ namespace CDPL
 
           private:
             class AtomNode;
-
-            CIPPriorityCalculator(const CIPPriorityCalculator&);
-
-            CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
 
             void init(const MolecularGraph&, Util::STArray&);
             void determinePriorities(Util::STArray&);

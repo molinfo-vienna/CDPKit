@@ -73,6 +73,10 @@ namespace CDPL
              */
             MorganNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
+            MorganNumberingCalculator(const MorganNumberingCalculator&) = delete;
+
+            MorganNumberingCalculator& operator=(const MorganNumberingCalculator&) = delete;
+
             /**
              * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perform the canonical numbering.
@@ -83,10 +87,6 @@ namespace CDPL
             void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
           private:
-            MorganNumberingCalculator(const MorganNumberingCalculator&);
-
-            MorganNumberingCalculator& operator=(const MorganNumberingCalculator&);
-
             typedef std::pair<std::size_t, std::size_t> STPair;
 
             typedef std::vector<STPair>      STPairArray;

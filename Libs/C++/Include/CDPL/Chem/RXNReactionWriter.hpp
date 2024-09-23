@@ -128,10 +128,14 @@ namespace CDPL
              */
             RXNReactionWriter(std::ostream& os);
 
+            RXNReactionWriter(const RXNReactionWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~RXNReactionWriter();
+
+            RXNReactionWriter& operator=(const RXNReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -145,10 +149,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
-
-            RXNReactionWriter(const RXNReactionWriter&);
-
-            RXNReactionWriter& operator=(const RXNReactionWriter&);
 
             std::ostream&    output;
             bool             state;

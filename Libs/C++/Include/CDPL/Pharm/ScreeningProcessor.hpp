@@ -117,10 +117,14 @@ namespace CDPL
              */
             ScreeningProcessor(ScreeningDBAccessor& db_acc);
 
+            ScreeningProcessor(const ScreeningProcessor& proc) = delete;
+            
             /**
              * Destructor.
              */
             ~ScreeningProcessor();
+
+            ScreeningProcessor& operator=(const ScreeningProcessor& proc) = delete;
 
             void setDBAccessor(ScreeningDBAccessor& db_acc);
 
@@ -158,10 +162,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<ScreeningProcessorImpl> ImplementationPointer;
-
-            ScreeningProcessor(const ScreeningProcessor& proc);
-
-            ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
             ImplementationPointer impl;
         };

@@ -128,10 +128,14 @@ namespace CDPL
              */
             MOLMolecularGraphWriter(std::ostream& os);
 
+            MOLMolecularGraphWriter(const MOLMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~MOLMolecularGraphWriter();
+
+            MOLMolecularGraphWriter& operator=(const MOLMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -140,15 +144,11 @@ namespace CDPL
              */
             Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
-
-            MOLMolecularGraphWriter(const MOLMolecularGraphWriter&);
-
-            MOLMolecularGraphWriter& operator=(const MOLMolecularGraphWriter&);
 
             std::ostream&    output;
             bool             state;

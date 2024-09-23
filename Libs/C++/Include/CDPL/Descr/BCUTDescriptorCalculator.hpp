@@ -64,6 +64,8 @@ namespace CDPL
              */
             BCUTDescriptorCalculator() {}
 
+            BCUTDescriptorCalculator(const BCUTDescriptorCalculator&) = delete;
+            
             /**
              * \brief Constructs the \c %BCUTDescriptorCalculator instance and calculates the \e BCUT descriptor of
              *        the molecular graph \a molgraph.
@@ -74,6 +76,8 @@ namespace CDPL
              * \param descr The calculated \e BCUT descriptor. 
              */
             BCUTDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
+
+            BCUTDescriptorCalculator& operator=(const BCUTDescriptorCalculator&) = delete;
 
             /**
              * \brief Allows to specify a custom atom weight function for the initialization of the
@@ -98,10 +102,6 @@ namespace CDPL
             void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
           private:
-            BCUTDescriptorCalculator(const BCUTDescriptorCalculator&);
-
-            BCUTDescriptorCalculator& operator=(const BCUTDescriptorCalculator&);
-
             BurdenMatrixGenerator burdenMatrixGenerator;
             Math::DVector         bcutDescriptor;
             Math::DMatrix         tmpBurdenMatrix;

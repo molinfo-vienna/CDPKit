@@ -83,7 +83,11 @@ namespace CDPL
 
             FastGaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
+            FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment) = delete;
+              
             ~FastGaussianShapeAlignment();
+
+            FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment) = delete;
 
             void setResultCompareFunction(const ResultCompareFunction& func);
 
@@ -222,10 +226,6 @@ namespace CDPL
             };
 
             typedef std::pair<std::size_t, std::size_t> ResultID;
-
-            FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment);
-
-            FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment);
 
             void alignAndProcessResults(std::size_t ref_idx, std::size_t al_idx);
             void processResult(AlignmentResult& res, std::size_t ref_idx, std::size_t al_idx);

@@ -61,10 +61,14 @@ namespace CDPL
              */
             PSDScreeningDBAccessor(const std::string& name);
 
+            PSDScreeningDBAccessor(const PSDScreeningDBAccessor&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~PSDScreeningDBAccessor();
+
+            PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&) = delete;
 
             void open(const std::string& name);
 
@@ -94,10 +98,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
-
-            PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
-
-            PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
 
             ImplementationPointer impl;
         };

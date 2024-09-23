@@ -65,8 +65,12 @@ namespace CDPL
 
             FragmentAssembler();
 
+            FragmentAssembler(const FragmentAssembler&) = delete;
+
             ~FragmentAssembler();
-            
+
+            FragmentAssembler& operator=(const FragmentAssembler&) = delete;
+
             const FragmentAssemblerSettings& getSettings() const;
 
             FragmentAssemblerSettings& getSettings();
@@ -118,10 +122,6 @@ namespace CDPL
             ConformerIterator end();
 
           private:
-            FragmentAssembler(const FragmentAssembler&);
-
-            FragmentAssembler& operator=(const FragmentAssembler&);
-
             typedef std::unique_ptr<FragmentAssemblerImpl> ImplementationPointer;
 
             ImplementationPointer impl;

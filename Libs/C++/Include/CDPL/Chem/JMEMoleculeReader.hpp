@@ -387,17 +387,17 @@ namespace CDPL
              */
             JMEMoleculeReader(std::istream& is);
 
+            JMEMoleculeReader(const JMEMoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~JMEMoleculeReader();
 
+            JMEMoleculeReader& operator=(const JMEMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Molecule, JMEMoleculeReader>;
-
-            JMEMoleculeReader(const JMEMoleculeReader&);
-
-            JMEMoleculeReader& operator=(const JMEMoleculeReader&);
 
             bool readData(std::istream&, Molecule&, bool overwrite);
             bool skipData(std::istream&);

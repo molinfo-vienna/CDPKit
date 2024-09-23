@@ -64,10 +64,14 @@ namespace CDPL
              */
             MMTFMolecularGraphWriter(std::ostream& os);
 
+            MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~MMTFMolecularGraphWriter();
+
+            MMTFMolecularGraphWriter& operator=(const MMTFMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -81,10 +85,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<MMTFDataWriter> MMTFDataWriterPtr;
-
-            MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&);
-
-            MMTFMolecularGraphWriter& operator=(const MMTFMolecularGraphWriter&);
 
             std::ostream&     output;
             bool              state;

@@ -97,12 +97,16 @@ namespace CDPL
              */
             SubstructureSearch(const MolecularGraph& query);
 
+            SubstructureSearch(const SubstructureSearch&) = delete;
+              
             /**
              * \brief Destructor.
              *
              * Destroys the \c %SubstructureSearch instance and frees all allocated resources.
              */
             ~SubstructureSearch();
+
+            SubstructureSearch& operator=(const SubstructureSearch&) = delete;
 
             void setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func);
 
@@ -300,10 +304,6 @@ namespace CDPL
             void clearBondMappingConstraints();
 
           private:
-            SubstructureSearch(const SubstructureSearch&);
-
-            SubstructureSearch& operator=(const SubstructureSearch&);
-
             bool init(const MolecularGraph&);
 
             void initMatchExpressions();

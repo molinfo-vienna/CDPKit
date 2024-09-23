@@ -87,12 +87,16 @@ namespace CDPL
              */
             CommonConnectedSubstructureSearch(const MolecularGraph& query);
 
+            CommonConnectedSubstructureSearch(const CommonConnectedSubstructureSearch&) = delete;
+              
             /**
              * \brief Destructor.
              *
              * Destroys the \c %CommonConnectedSubstructureSearch instance and frees all allocated resources.
              */
             ~CommonConnectedSubstructureSearch();
+
+            CommonConnectedSubstructureSearch& operator=(const CommonConnectedSubstructureSearch&) = delete;
 
             /**
              * \brief Allows to specify a new query structure.
@@ -276,10 +280,6 @@ namespace CDPL
             std::size_t getMinSubstructureSize() const;
 
           private:
-            CommonConnectedSubstructureSearch(const CommonConnectedSubstructureSearch&);
-
-            CommonConnectedSubstructureSearch& operator=(const CommonConnectedSubstructureSearch&);
-
             bool init(const MolecularGraph&);
 
             void initMatchExpressions();

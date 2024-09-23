@@ -40,33 +40,33 @@ namespace CDPL
     {
 
         /**
-     * \brief Entity3D.
-     */
+         * \brief Entity3D.
+         */
         class CDPL_CHEM_API Entity3D : public Base::PropertyContainer
         {
 
           protected:
             /**
-         * \brief Default constructor.
-         */
+             * \brief Default constructor.
+             */
             Entity3D();
 
             /**
-         * \brief Constructs a copy of the \c %Entity3D instance \a entity.
-         * \param entity The \c %Entity3D instance to copy.
-         */
+             * \brief Constructs a copy of the \c %Entity3D instance \a entity.
+             * \param entity The \c %Entity3D instance to copy.
+             */
             Entity3D(const Entity3D& entity);
 
             /**
-         * \brief Virtual destructor.
-         */
+             * \brief Virtual destructor.
+             */
             virtual ~Entity3D() {}
 
             /**
-         * \brief Assignment operator.
-         * \param cntnr The \c %Entity3D instance to copy.
-         * \return A reference to itself.
-         */
+             * \brief Assignment operator.
+             * \param cntnr The \c %Entity3D instance to copy.
+             * \return A reference to itself.
+             */
             Entity3D& operator=(const Entity3D& cntnr);
         };
     } // namespace Chem

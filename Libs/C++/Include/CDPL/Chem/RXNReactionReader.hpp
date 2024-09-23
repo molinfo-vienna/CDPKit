@@ -91,17 +91,17 @@ namespace CDPL
              */
             RXNReactionReader(std::istream& is);
 
+            RXNReactionReader(const RXNReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~RXNReactionReader();
 
+            RXNReactionReader& operator=(const RXNReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, RXNReactionReader>;
-
-            RXNReactionReader(const RXNReactionReader&);
-
-            RXNReactionReader& operator=(const RXNReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

@@ -77,6 +77,10 @@ namespace CDPL
              */
             BondStereoFlagCalculator(const MolecularGraph& molgraph, Util::UIArray& flags);
 
+            BondStereoFlagCalculator(const BondStereoFlagCalculator&) = delete;
+
+            BondStereoFlagCalculator& operator=(const BondStereoFlagCalculator&) = delete;
+
             /**
              * \brief Specifies a function for the retrieval of atom 2D-coordinates.
              * \param func The atom 2D-coordinates function.
@@ -102,10 +106,6 @@ namespace CDPL
 
           private:
             class StereoAtomInfo;
-
-            BondStereoFlagCalculator(const BondStereoFlagCalculator&);
-
-            BondStereoFlagCalculator& operator=(const BondStereoFlagCalculator&);
 
             void init(const MolecularGraph&, Util::UIArray&);
 

@@ -70,12 +70,16 @@ namespace CDPL
             typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
             MHMOPiChargeCalculator();
-
-            ~MHMOPiChargeCalculator();
-
+            
             MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
 
             MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+
+            MHMOPiChargeCalculator(const MHMOPiChargeCalculator&) = delete;
+
+            ~MHMOPiChargeCalculator();
+      
+            MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&) = delete;
 
             void localizedPiBonds(bool localized);
 
@@ -94,10 +98,6 @@ namespace CDPL
             double getEnergy() const;
 
           private:
-            MHMOPiChargeCalculator(const MHMOPiChargeCalculator&);
-
-            MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&);
-
             void initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
             void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 

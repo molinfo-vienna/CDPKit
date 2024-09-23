@@ -79,14 +79,18 @@ namespace CDPL
              */
             Reactor(const Reaction& rxn_pattern);
 
+            Reactor(const Reactor&) = delete;
+            
             /**
              * \brief Destructor.
              *
              * Destroys the \c %Reactor instance and frees all allocated resources.
              */
             ~Reactor();
+ 
+            Reactor& operator=(const Reactor&) = delete;
 
-            /**
+             /**
              * \brief Allows to specify a new reaction pattern for the transformation of reactants to products.
              * \param rxn_pattern The reaction pattern describing the transformation of reactants to products.
              */
@@ -197,10 +201,6 @@ namespace CDPL
             void performReaction(const ReactionSite& rxn_site);
 
           private:
-            Reactor(const Reactor&);
-
-            Reactor& operator=(const Reactor&);
-
             void init();
 
             void createAtoms(Molecule*);

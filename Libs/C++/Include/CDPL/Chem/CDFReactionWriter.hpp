@@ -59,10 +59,14 @@ namespace CDPL
              */
             CDFReactionWriter(std::ostream& os);
 
+            CDFReactionWriter(const CDFReactionWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CDFReactionWriter();
+
+            CDFReactionWriter& operator=(const CDFReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -76,10 +80,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<CDFDataWriter> CDFDataWriterPtr;
-
-            CDFReactionWriter(const CDFReactionWriter&);
-
-            CDFReactionWriter& operator=(const CDFReactionWriter&);
 
             std::ostream&    output;
             bool             state;

@@ -60,11 +60,11 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void        setRecordIndex(std::size_t idx);
+            void setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
             void close();

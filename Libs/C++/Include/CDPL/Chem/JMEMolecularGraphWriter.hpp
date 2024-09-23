@@ -451,10 +451,14 @@ namespace CDPL
              */
             JMEMolecularGraphWriter(std::ostream& os);
 
+            JMEMolecularGraphWriter(const JMEMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~JMEMolecularGraphWriter();
+
+            JMEMolecularGraphWriter& operator=(const JMEMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -463,15 +467,11 @@ namespace CDPL
              */
             Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<JMEDataWriter> JMEDataWriterPtr;
-
-            JMEMolecularGraphWriter(const JMEMolecularGraphWriter&);
-
-            JMEMolecularGraphWriter& operator=(const JMEMolecularGraphWriter&);
 
             std::ostream&    output;
             bool             state;

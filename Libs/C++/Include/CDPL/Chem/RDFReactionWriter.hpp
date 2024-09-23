@@ -128,10 +128,14 @@ namespace CDPL
              */
             RDFReactionWriter(std::ostream& os);
 
+            RDFReactionWriter(const RDFReactionWriter&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~RDFReactionWriter();
+
+            RDFReactionWriter& operator=(const RDFReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -144,10 +148,6 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            RDFReactionWriter(const RDFReactionWriter&);
-
-            RDFReactionWriter& operator=(const RDFReactionWriter&);
-
             typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
 
             std::ostream&    output;

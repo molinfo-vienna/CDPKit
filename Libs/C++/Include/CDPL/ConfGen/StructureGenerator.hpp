@@ -60,7 +60,11 @@ namespace CDPL
           public:
             StructureGenerator();
 
+            StructureGenerator(const StructureGenerator&) = delete;
+
             ~StructureGenerator();
+
+            StructureGenerator& operator=(const StructureGenerator&) = delete;
 
             const StructureGeneratorSettings& getSettings() const;
 
@@ -104,10 +108,6 @@ namespace CDPL
             const ConformerData& getCoordinates() const;
 
           private:
-            StructureGenerator(const StructureGenerator&);
-
-            StructureGenerator& operator=(const StructureGenerator&);
-
             unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph* fixed_substr,
                                   const Math::Vector3DArray* fixed_substr_coords);
 

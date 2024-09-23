@@ -62,10 +62,14 @@ namespace CDPL
              */
             CairoFontMetrics(const CairoPointer<cairo_t>& cairo_ctxt);
 
+            CairoFontMetrics(const CairoFontMetrics&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CairoFontMetrics();
+
+            CairoFontMetrics& operator=(const CairoFontMetrics&) = delete;
 
             void setFont(const Font& font);
 
@@ -82,10 +86,6 @@ namespace CDPL
 
           private:
             struct CairoExtents;
-
-            CairoFontMetrics(const CairoFontMetrics&);
-
-            CairoFontMetrics& operator=(const CairoFontMetrics&);
 
             CairoPointer<cairo_t>       cairoContext;
             std::unique_ptr<CairoExtents> cairoExtents;

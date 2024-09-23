@@ -198,6 +198,10 @@ namespace CDPL
              */
             HashCodeCalculator(const MolecularGraph& molgraph);
 
+            HashCodeCalculator(const HashCodeCalculator&) = delete;
+
+            HashCodeCalculator& operator=(const HashCodeCalculator&) = delete;
+
             /**
              * \brief Allows to specify a custom function for the generation of initial atom hash codes.
              * \param func A HashCodeCalculator::AtomHashSeedFunction instance that wraps the target function.
@@ -226,10 +230,6 @@ namespace CDPL
             std::uint64_t getResult() const;
 
           private:
-            HashCodeCalculator(const HashCodeCalculator&);
-
-            HashCodeCalculator& operator=(const HashCodeCalculator&);
-
             void init(const MolecularGraph&);
 
             void calcAtomHashCodes();

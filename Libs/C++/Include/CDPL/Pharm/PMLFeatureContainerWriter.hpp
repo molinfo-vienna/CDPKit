@@ -59,10 +59,14 @@ namespace CDPL
              */
             PMLFeatureContainerWriter(std::ostream& os);
 
+            PMLFeatureContainerWriter(const PMLFeatureContainerWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~PMLFeatureContainerWriter();
+
+            PMLFeatureContainerWriter& operator=(const PMLFeatureContainerWriter&) = delete;
 
             /**
              * \brief Writes data of the feature container \a cntnr to the output stream specified in the constructor.
@@ -79,10 +83,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<PMLDataWriter> PMLDataWriterPtr;
-
-            PMLFeatureContainerWriter(const PMLFeatureContainerWriter&);
-
-            PMLFeatureContainerWriter& operator=(const PMLFeatureContainerWriter&);
 
             std::ostream&    output;
             bool             state;

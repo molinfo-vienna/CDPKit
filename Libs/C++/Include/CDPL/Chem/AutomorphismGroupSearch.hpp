@@ -87,6 +87,10 @@ namespace CDPL
             AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS,
                                     unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
 
+            AutomorphismGroupSearch(const AutomorphismGroupSearch&) = delete;
+
+            AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&) = delete;
+
             void setAtomPropertyFlags(unsigned int flags);
 
             unsigned int getAtomPropertyFlags() const;
@@ -249,10 +253,6 @@ namespace CDPL
             const MappingCallbackFunction& getFoundMappingCallback() const;
 
           private:
-            AutomorphismGroupSearch(const AutomorphismGroupSearch&);
-
-            AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&);
-
             const MatchExpression<Atom, MolecularGraph>::SharedPointer&
             getAtomMatchExpression(const Atom& atom) const;
 

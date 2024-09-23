@@ -59,7 +59,6 @@ namespace CDPL
             void close();
 
             operator const void*() const;
-
             bool operator!() const;
 
           private:

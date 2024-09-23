@@ -102,17 +102,17 @@ namespace CDPL
              */
             MOLMoleculeReader(std::istream& is);
 
+            MOLMoleculeReader(const MOLMoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~MOLMoleculeReader();
 
+            MOLMoleculeReader& operator=(const MOLMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Molecule, MOLMoleculeReader>;
-
-            MOLMoleculeReader(const MOLMoleculeReader&);
-
-            MOLMoleculeReader& operator=(const MOLMoleculeReader&);
 
             bool readData(std::istream&, Molecule&, bool overwrite);
             bool skipData(std::istream&);

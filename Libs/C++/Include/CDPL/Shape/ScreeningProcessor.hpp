@@ -71,7 +71,11 @@ namespace CDPL
 
             ScreeningProcessor(const Chem::MolecularGraph& query);
 
+            ScreeningProcessor(const ScreeningProcessor& proc) = delete;
+              
             ~ScreeningProcessor();
+
+            ScreeningProcessor& operator=(const ScreeningProcessor& proc) = delete;
 
             void setHitCallback(const HitCallbackFunction& func);
 
@@ -96,10 +100,6 @@ namespace CDPL
             bool process(const Chem::MolecularGraph& molgraph);
 
           private:
-            ScreeningProcessor(const ScreeningProcessor& proc);
-
-            ScreeningProcessor& operator=(const ScreeningProcessor& proc);
-
             void init();
             void applyShapeGenSettings(bool query);
             void applyAlignmentSettings();

@@ -68,6 +68,10 @@ namespace CDPL
              */
             ConnectedSubstructureSet(const MolecularGraph& molgraph);
 
+            ConnectedSubstructureSet(const ConnectedSubstructureSet&) = delete;
+
+            ConnectedSubstructureSet& operator=(const ConnectedSubstructureSet&) = delete;
+
             /**
              * \brief Specifies the molecular graph that is searched for connected substructures.
              *
@@ -104,10 +108,6 @@ namespace CDPL
 
             typedef Util::ObjectPool<SubstructDescriptor>         SubstructDescriptorCache;
             typedef SubstructDescriptorCache::SharedObjectPointer SubstructDescriptorPtr;
-
-            ConnectedSubstructureSet(const ConnectedSubstructureSet&);
-
-            ConnectedSubstructureSet& operator=(const ConnectedSubstructureSet&);
 
             void reset();
 

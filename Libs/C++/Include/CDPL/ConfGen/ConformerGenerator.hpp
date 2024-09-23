@@ -65,7 +65,11 @@ namespace CDPL
 
             ConformerGenerator();
 
+            ConformerGenerator(const ConformerGenerator&) = delete;
+
             ~ConformerGenerator();
+
+            ConformerGenerator& operator=(const ConformerGenerator&) = delete;
 
             const ConformerGeneratorSettings& getSettings() const;
 
@@ -129,10 +133,6 @@ namespace CDPL
             ConformerIterator end();
 
           private:
-            ConformerGenerator(const ConformerGenerator&);
-
-            ConformerGenerator& operator=(const ConformerGenerator&);
-
             typedef std::unique_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
             ImplementationPointer impl;

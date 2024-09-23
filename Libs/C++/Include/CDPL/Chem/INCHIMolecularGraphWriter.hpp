@@ -168,10 +168,14 @@ namespace CDPL
              */
             INCHIMolecularGraphWriter(std::ostream& os);
 
+            INCHIMolecularGraphWriter(const INCHIMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~INCHIMolecularGraphWriter();
+
+            INCHIMolecularGraphWriter& operator=(const INCHIMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -201,14 +205,10 @@ namespace CDPL
              */
             const std::string& getLogOutput() const;
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
-            INCHIMolecularGraphWriter(const INCHIMolecularGraphWriter&);
-
-            INCHIMolecularGraphWriter& operator=(const INCHIMolecularGraphWriter&);
-
             void writeMolGraph(const MolecularGraph&);
 
             void setupAtomTable(const MolecularGraph&, std::size_t);

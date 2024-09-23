@@ -64,10 +64,14 @@ namespace CDPL
              */
             PSDScreeningDBCreator(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
+            PSDScreeningDBCreator(const PSDScreeningDBCreator&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~PSDScreeningDBCreator();
+
+            PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&) = delete;
 
             void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
@@ -93,10 +97,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
-
-            PSDScreeningDBCreator(const PSDScreeningDBCreator&);
-
-            PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
 
             ImplementationPointer impl;
         };

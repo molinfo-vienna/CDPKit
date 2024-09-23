@@ -387,17 +387,17 @@ namespace CDPL
              */
             JMEReactionReader(std::istream& is);
 
+            JMEReactionReader(const JMEReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~JMEReactionReader();
 
+            JMEReactionReader& operator=(const JMEReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, JMEReactionReader>;
-
-            JMEReactionReader(const JMEReactionReader&);
-
-            JMEReactionReader& operator=(const JMEReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

@@ -59,6 +59,10 @@ namespace CDPL
 
             RMSDConformerSelector();
 
+            RMSDConformerSelector(const RMSDConformerSelector&) = delete;
+
+            RMSDConformerSelector& operator=(const RMSDConformerSelector&) = delete;
+
             void setMinRMSD(double min_rmsd);
 
             double getMinRMSD() const;
@@ -84,10 +88,6 @@ namespace CDPL
             typedef std::vector<std::size_t>              IndexArray;
             typedef Util::ObjectPool<Math::Vector3DArray> VectorArrayCache;
             typedef VectorArrayCache::SharedObjectPointer VectorArrayPtr;
-
-            RMSDConformerSelector(const RMSDConformerSelector&);
-
-            RMSDConformerSelector& operator=(const RMSDConformerSelector&);
 
             void buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask);
             void setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,

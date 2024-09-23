@@ -75,6 +75,10 @@ namespace CDPL
              */
             MMFF94AromaticSSSRSubset(const Chem::MolecularGraph& molgraph);
 
+            MMFF94AromaticSSSRSubset(const MMFF94AromaticSSSRSubset&) = delete;
+
+            MMFF94AromaticSSSRSubset& operator=(const MMFF94AromaticSSSRSubset&) = delete;
+
             /**
              * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to extract the aromatic rings.
@@ -89,10 +93,6 @@ namespace CDPL
             void extract(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& sssr);
 
           private:
-            MMFF94AromaticSSSRSubset(const MMFF94AromaticSSSRSubset&);
-
-            MMFF94AromaticSSSRSubset& operator=(const MMFF94AromaticSSSRSubset&);
-
             void init(const Chem::MolecularGraph& molgraph);
 
             void perceiveAromaticRings(const Chem::FragmentList& sssr);

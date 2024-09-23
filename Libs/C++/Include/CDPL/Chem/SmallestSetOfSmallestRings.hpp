@@ -74,6 +74,10 @@ namespace CDPL
              */
             SmallestSetOfSmallestRings(const MolecularGraph& molgraph);
 
+            SmallestSetOfSmallestRings(const SmallestSetOfSmallestRings&) = delete;
+
+            SmallestSetOfSmallestRings& operator=(const SmallestSetOfSmallestRings&) = delete;
+
             /**
              * \brief Replaces the current set of rings by the \e SSSR of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the \e SSSR.
@@ -87,10 +91,6 @@ namespace CDPL
             typedef Util::ObjectPool<PathMessage>     MessageCache;
             typedef MessageCache::SharedObjectPointer MessagePtr;
             typedef std::vector<MessagePtr>           MessageList;
-
-            SmallestSetOfSmallestRings(const SmallestSetOfSmallestRings&);
-
-            SmallestSetOfSmallestRings& operator=(const SmallestSetOfSmallestRings&);
 
             void visitComponentAtom(const Atom& atom);
 

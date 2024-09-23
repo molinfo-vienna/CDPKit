@@ -85,12 +85,16 @@ namespace CDPL
              */
             ReactionSubstructureSearch(const Reaction& query);
 
+            ReactionSubstructureSearch(const ReactionSubstructureSearch&) = delete;
+              
             /**
              * \brief Destructor.
              *
              * Destroys the \c %ReactionSubstructureSearch instance and frees all allocated resources.
              */
             ~ReactionSubstructureSearch();
+
+            ReactionSubstructureSearch& operator=(const ReactionSubstructureSearch&) = delete;
 
             /**
              * \brief Allows to specify a new query reaction pattern.
@@ -260,10 +264,6 @@ namespace CDPL
 
           private:
             typedef std::pair<std::size_t, std::size_t> IndexOffsetPair;
-
-            ReactionSubstructureSearch(const ReactionSubstructureSearch&);
-
-            ReactionSubstructureSearch& operator=(const ReactionSubstructureSearch&);
 
             bool init(const Reaction&);
 

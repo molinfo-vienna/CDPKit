@@ -76,17 +76,17 @@ namespace CDPL
              */
             SMILESReactionReader(std::istream& is);
 
+            SMILESReactionReader(const SMILESReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMILESReactionReader();
 
+            SMILESReactionReader& operator=(const SMILESReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, SMILESReactionReader>;
-
-            SMILESReactionReader(const SMILESReactionReader&);
-
-            SMILESReactionReader& operator=(const SMILESReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

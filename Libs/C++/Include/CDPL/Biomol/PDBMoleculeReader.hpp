@@ -64,17 +64,17 @@ namespace CDPL
              */
             PDBMoleculeReader(std::istream& is);
 
+            PDBMoleculeReader(const PDBMoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~PDBMoleculeReader();
 
+            PDBMoleculeReader& operator=(const PDBMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>;
-
-            PDBMoleculeReader(const PDBMoleculeReader&);
-
-            PDBMoleculeReader& operator=(const PDBMoleculeReader&);
 
             bool readData(std::istream&, Chem::Molecule&, bool overwrite);
             bool skipData(std::istream&);

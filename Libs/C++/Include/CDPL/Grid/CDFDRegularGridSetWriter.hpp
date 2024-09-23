@@ -59,10 +59,14 @@ namespace CDPL
              */
             CDFDRegularGridSetWriter(std::ostream& os);
 
+            CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~CDFDRegularGridSetWriter();
+
+            CDFDRegularGridSetWriter& operator=(const CDFDRegularGridSetWriter&) = delete;
 
             /**
              * \brief Writes data of the spatial regular grid set \a grid_set to the output stream specified in the constructor.
@@ -71,15 +75,11 @@ namespace CDPL
              */
             Base::DataWriter<DRegularGridSet>& write(const DRegularGridSet& grid_set);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<CDFRegularGridSetDataWriter> CDFDataWriterPtr;
-
-            CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&);
-
-            CDFDRegularGridSetWriter& operator=(const CDFDRegularGridSetWriter&);
 
             std::ostream&    output;
             bool             state;

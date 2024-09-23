@@ -55,17 +55,17 @@ namespace CDPL
              */
             MOL2MoleculeReader(std::istream& is);
 
+            MOL2MoleculeReader(const MOL2MoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~MOL2MoleculeReader();
 
+            MOL2MoleculeReader& operator=(const MOL2MoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Molecule, MOL2MoleculeReader>;
-
-            MOL2MoleculeReader(const MOL2MoleculeReader&);
-
-            MOL2MoleculeReader& operator=(const MOL2MoleculeReader&);
 
             bool readData(std::istream&, Molecule&, bool overwrite);
             bool skipData(std::istream&);

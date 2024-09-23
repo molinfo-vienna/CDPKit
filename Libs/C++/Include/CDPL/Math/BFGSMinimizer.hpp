@@ -249,10 +249,6 @@ namespace CDPL
             }
 
           private:
-            BFGSMinimizer();
-
-            BFGSMinimizer& operator=(const BFGSMinimizer&);
-
             void initFuncEvalCache()
             {
                 assign(xAlpha, x0);

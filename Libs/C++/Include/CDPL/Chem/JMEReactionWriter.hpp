@@ -460,10 +460,14 @@ namespace CDPL
              */
             JMEReactionWriter(std::ostream& os);
 
+            JMEReactionWriter(const JMEReactionWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~JMEReactionWriter();
+
+            JMEReactionWriter& operator=(const JMEReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -472,15 +476,11 @@ namespace CDPL
              */
             Base::DataWriter<Reaction>& write(const Reaction& rxn);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<JMEDataWriter> JMEDataWriterPtr;
-
-            JMEReactionWriter(const JMEReactionWriter&);
-
-            JMEReactionWriter& operator=(const JMEReactionWriter&);
 
             std::ostream&    output;
             bool             state;

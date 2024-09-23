@@ -58,17 +58,17 @@ namespace CDPL
              */
             CDFReactionReader(std::istream& is);
 
+            CDFReactionReader(const CDFReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CDFReactionReader();
 
+            CDFReactionReader& operator=(const CDFReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, CDFReactionReader>;
-
-            CDFReactionReader(const CDFReactionReader&);
-
-            CDFReactionReader& operator=(const CDFReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

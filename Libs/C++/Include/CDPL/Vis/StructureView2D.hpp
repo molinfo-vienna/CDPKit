@@ -690,11 +690,15 @@ namespace CDPL
              */
             StructureView2D(const Chem::MolecularGraph* molgraph = 0);
 
+            StructureView2D(const StructureView2D&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~StructureView2D();
 
+            StructureView2D& operator=(const StructureView2D&) = delete;
+            
             void render(Renderer2D& renderer);
 
             void setFontMetrics(FontMetrics* font_metrics);
@@ -731,10 +735,7 @@ namespace CDPL
           private:
             friend class ReactionView2D;
 
-            StructureView2D(const StructureView2D&);
             StructureView2D(bool);
-
-            StructureView2D& operator=(const StructureView2D&);
 
             void paintBackground(Renderer2D&) const;
 

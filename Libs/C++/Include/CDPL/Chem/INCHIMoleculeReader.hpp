@@ -158,6 +158,10 @@ namespace CDPL
              */
             INCHIMoleculeReader(std::istream& is);
 
+            INCHIMoleculeReader(const INCHIMoleculeReader&) = delete;
+
+            INCHIMoleculeReader& operator=(const INCHIMoleculeReader&) = delete;
+
             /**
              * \brief Returns the error code of the last read operation.
              *
@@ -181,10 +185,6 @@ namespace CDPL
 
           private:
             friend class Util::StreamDataReader<Molecule, INCHIMoleculeReader>;
-
-            INCHIMoleculeReader(const INCHIMoleculeReader&);
-
-            INCHIMoleculeReader& operator=(const INCHIMoleculeReader&);
 
             bool readData(std::istream&, Molecule&, bool overwrite);
             bool skipData(std::istream&);

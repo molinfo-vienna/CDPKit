@@ -64,10 +64,14 @@ namespace CDPL
              */
             PDBMolecularGraphWriter(std::ostream& os);
 
+            PDBMolecularGraphWriter(const PDBMolecularGraphWriter&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~PDBMolecularGraphWriter();
+
+            PDBMolecularGraphWriter& operator=(const PDBMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -81,10 +85,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<PDBDataWriter> PDBDataWriterPtr;
-
-            PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
-
-            PDBMolecularGraphWriter& operator=(const PDBMolecularGraphWriter&);
 
             std::ostream&    output;
             bool             state;

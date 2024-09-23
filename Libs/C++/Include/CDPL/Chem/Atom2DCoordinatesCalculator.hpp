@@ -80,6 +80,10 @@ namespace CDPL
              */
             Atom2DCoordinatesCalculator(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
+            Atom2DCoordinatesCalculator(const Atom2DCoordinatesCalculator&) = delete;
+
+            Atom2DCoordinatesCalculator& operator=(const Atom2DCoordinatesCalculator&) = delete;
+
             /**
              * \brief Calculates 2D-coordinates for the atoms of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to calculate 2D-coordinates.
@@ -462,10 +466,6 @@ namespace CDPL
             };
 
             typedef std::pair<Math::Vector2D, Math::Vector2D> BoundingBox;
-
-            Atom2DCoordinatesCalculator(const Atom2DCoordinatesCalculator&);
-
-            Atom2DCoordinatesCalculator& operator=(const Atom2DCoordinatesCalculator&);
 
             void init(const MolecularGraph&, Math::Vector2DArray&);
 

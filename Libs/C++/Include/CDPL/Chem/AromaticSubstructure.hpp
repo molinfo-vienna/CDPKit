@@ -69,6 +69,10 @@ namespace CDPL
              */
             AromaticSubstructure(const MolecularGraph& molgraph);
 
+            AromaticSubstructure(const AromaticSubstructure&) = delete;
+
+            AromaticSubstructure& operator=(const AromaticSubstructure&) = delete;
+
             /**
              * \brief Replaces the currently stored atoms and bonds by the set of aromatic atoms and bonds of the
              *        molecular graph \a molgraph.
@@ -98,10 +102,6 @@ namespace CDPL
                 const RingDescriptor*   subRing2;
                 Util::BitSet            bondMask;
             };
-
-            AromaticSubstructure(const AromaticSubstructure&);
-
-            AromaticSubstructure& operator=(const AromaticSubstructure&);
 
             void freeMemory();
 

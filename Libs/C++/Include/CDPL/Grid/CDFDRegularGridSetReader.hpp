@@ -58,17 +58,17 @@ namespace CDPL
              */
             CDFDRegularGridSetReader(std::istream& is);
 
+            CDFDRegularGridSetReader(const CDFDRegularGridSetReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CDFDRegularGridSetReader();
 
+            CDFDRegularGridSetReader& operator=(const CDFDRegularGridSetReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<DRegularGridSet, CDFDRegularGridSetReader>;
-
-            CDFDRegularGridSetReader(const CDFDRegularGridSetReader&);
-
-            CDFDRegularGridSetReader& operator=(const CDFDRegularGridSetReader&);
 
             bool readData(std::istream&, DRegularGridSet&, bool overwrite);
             bool skipData(std::istream&);

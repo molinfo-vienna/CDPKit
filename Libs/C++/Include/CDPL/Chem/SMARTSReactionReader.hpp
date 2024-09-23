@@ -71,17 +71,17 @@ namespace CDPL
              */
             SMARTSReactionReader(std::istream& is);
 
+            SMARTSReactionReader(const SMARTSReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMARTSReactionReader();
 
+            SMARTSReactionReader& operator=(const SMARTSReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, SMARTSReactionReader>;
-
-            SMARTSReactionReader(const SMARTSReactionReader&);
-
-            SMARTSReactionReader& operator=(const SMARTSReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

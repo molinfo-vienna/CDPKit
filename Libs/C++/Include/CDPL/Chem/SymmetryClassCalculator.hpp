@@ -85,6 +85,10 @@ namespace CDPL
              */
             SymmetryClassCalculator(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
+            SymmetryClassCalculator(const SymmetryClassCalculator&) = delete;
+
+            SymmetryClassCalculator& operator=(const SymmetryClassCalculator&) = delete;
+
             /**
              * \brief Allows to specify the set of atomic properties that has to be considered in the perception of
              *        topological symmetry classes.
@@ -157,10 +161,6 @@ namespace CDPL
             void calculate(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
           private:
-            SymmetryClassCalculator(const SymmetryClassCalculator&);
-
-            SymmetryClassCalculator& operator=(const SymmetryClassCalculator&);
-
             void init(const MolecularGraph&, Util::STArray&);
 
             void calcSVMNumbers();

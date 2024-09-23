@@ -78,6 +78,10 @@ namespace CDPL
              */
             BurdenMatrixGenerator(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
 
+            BurdenMatrixGenerator(const BurdenMatrixGenerator&) = delete;
+
+            BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&) = delete;
+
             /**
              * \brief Allows to specify a custom atom weight function for the diagonal elements of the \e Burden matrix.
              * \param func A BurdenMatrixGenerator::AtomWeightFunction instance that wraps the target function.
@@ -94,10 +98,6 @@ namespace CDPL
             void generate(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
 
           private:
-            BurdenMatrixGenerator(const BurdenMatrixGenerator&);
-
-            BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&);
-
             AtomWeightFunction atomWeightFunc;
         };
     } // namespace Descr

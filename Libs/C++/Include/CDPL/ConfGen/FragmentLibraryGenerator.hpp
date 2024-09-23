@@ -55,6 +55,10 @@ namespace CDPL
 
             FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib);
 
+            FragmentLibraryGenerator(const FragmentLibraryGenerator&) = delete;
+
+            FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&) = delete;
+
             void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
             const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
@@ -82,10 +86,6 @@ namespace CDPL
             std::uint64_t getLibraryEntryHashCode() const;
 
           private:
-            FragmentLibraryGenerator(const FragmentLibraryGenerator&);
-
-            FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
-
             FragmentLibraryEntry::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 
             void removeNewLibraryEntry() const;

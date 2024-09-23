@@ -77,10 +77,14 @@ namespace CDPL
              */
             SMARTSReactionWriter(std::ostream& os);
 
+            SMARTSReactionWriter(const SMARTSReactionWriter&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~SMARTSReactionWriter();
+
+            SMARTSReactionWriter& operator=(const SMARTSReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -89,15 +93,11 @@ namespace CDPL
              */
             Base::DataWriter<Reaction>& write(const Reaction& rxn);
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             typedef std::unique_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
-
-            SMARTSReactionWriter(const SMARTSReactionWriter&);
-
-            SMARTSReactionWriter& operator=(const SMARTSReactionWriter&);
 
             std::ostream&       output;
             bool                state;

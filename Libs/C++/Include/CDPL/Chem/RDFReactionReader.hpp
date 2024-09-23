@@ -91,17 +91,17 @@ namespace CDPL
              */
             RDFReactionReader(std::istream& is);
 
+            RDFReactionReader(const RDFReactionReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~RDFReactionReader();
 
+            RDFReactionReader& operator=(const RDFReactionReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Reaction, RDFReactionReader>;
-
-            RDFReactionReader(const RDFReactionReader&);
-
-            RDFReactionReader& operator=(const RDFReactionReader&);
 
             bool readData(std::istream&, Reaction&, bool overwrite);
             bool skipData(std::istream&);

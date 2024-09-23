@@ -67,7 +67,11 @@ namespace CDPL
 
             TorsionDriver();
 
+            TorsionDriver(const TorsionDriver&) = delete;
+            
             ~TorsionDriver();
+
+            TorsionDriver& operator=(const TorsionDriver&) = delete;
 
             const TorsionDriverSettings& getSettings() const;
 
@@ -129,10 +133,6 @@ namespace CDPL
             ConformerIterator end();
 
           private:
-            TorsionDriver(const TorsionDriver&);
-
-            TorsionDriver& operator=(const TorsionDriver&);
-
             typedef std::unique_ptr<TorsionDriverImpl> ImplementationPointer;
 
             ImplementationPointer impl;

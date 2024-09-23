@@ -137,10 +137,14 @@ namespace CDPL
              */
             SMILESReactionWriter(std::ostream& os);
 
+            SMILESReactionWriter(const SMILESReactionWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMILESReactionWriter();
+
+            SMILESReactionWriter& operator=(const SMILESReactionWriter&) = delete;
 
             /**
              * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
@@ -154,10 +158,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<SMILESDataWriter> SMILESDataWriterPtr;
-
-            SMILESReactionWriter(const SMILESReactionWriter&);
-
-            SMILESReactionWriter& operator=(const SMILESReactionWriter&);
 
             std::ostream&       output;
             bool                state;

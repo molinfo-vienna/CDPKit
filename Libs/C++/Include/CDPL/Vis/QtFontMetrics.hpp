@@ -62,10 +62,14 @@ namespace CDPL
              */
             QtFontMetrics(QPaintDevice* paint_dev = 0);
 
+            QtFontMetrics(const QtFontMetrics&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~QtFontMetrics();
+
+            QtFontMetrics& operator=(const QtFontMetrics&) = delete;
 
             void setFont(const Font& font);
 
@@ -81,10 +85,6 @@ namespace CDPL
             void getBounds(char ch, Rectangle2D& bounds) const;
 
           private:
-            QtFontMetrics(const QtFontMetrics&);
-
-            QtFontMetrics& operator=(const QtFontMetrics&);
-
             QPaintDevice*                  qPaintDevice;
             std::unique_ptr<QFontMetricsF> qFontMetrics;
         };

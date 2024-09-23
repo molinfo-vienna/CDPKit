@@ -63,8 +63,12 @@ namespace CDPL
           protected:
             ImageWriter(const Base::DataIOBase& io_base);
 
+            ImageWriter(const ImageWriter&) = delete;
+            
             virtual ~ImageWriter();
 
+            ImageWriter& operator=(const ImageWriter&) = delete;
+ 
             cairo_surface_t* renderMolGraphImage(const Chem::MolecularGraph&);
             cairo_surface_t* renderReactionImage(const Chem::Reaction&);
 
@@ -72,13 +76,9 @@ namespace CDPL
             virtual cairo_surface_t* createCairoSurface() const               = 0;
 
           private:
-            ImageWriter(const ImageWriter&);
-
             cairo_surface_t* renderImage(View2D&) const;
 
             void getImageBounds(View2D&, Rectangle2D&) const;
-
-            ImageWriter& operator=(const ImageWriter&);
 
             typedef std::unique_ptr<StructureView2D> StructureViewPtr;
             typedef std::unique_ptr<ReactionView2D>  ReactionViewPtr;

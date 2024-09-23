@@ -74,10 +74,14 @@ namespace CDPL
              */
             CompleteRingSet(const MolecularGraph& molgraph);
 
+            CompleteRingSet(const CompleteRingSet&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~CompleteRingSet();
+
+            CompleteRingSet& operator=(const CompleteRingSet&) = delete;
 
             /**
              * \brief Replaces the current set of rings by the rings in the molecular graph \a molgraph.
@@ -91,10 +95,6 @@ namespace CDPL
 
             typedef Util::ObjectPool<Edge>         EdgeCache;
             typedef EdgeCache::SharedObjectPointer EdgePtr;
-
-            CompleteRingSet(const CompleteRingSet&);
-
-            CompleteRingSet& operator=(const CompleteRingSet&);
 
             void init(const MolecularGraph&);
             void reduce();

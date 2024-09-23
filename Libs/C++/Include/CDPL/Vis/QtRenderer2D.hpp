@@ -63,10 +63,14 @@ namespace CDPL
              */
             QtRenderer2D(QPainter& painter);
 
+            QtRenderer2D(const QtRenderer2D&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~QtRenderer2D();
+
+            QtRenderer2D& operator=(const QtRenderer2D&) = delete;
 
             void saveState();
             void restoreState();
@@ -92,10 +96,6 @@ namespace CDPL
             void clearClipPath();
 
           private:
-            QtRenderer2D(const QtRenderer2D&);
-
-            QtRenderer2D& operator=(const QtRenderer2D&);
-
             void convertToQPolygon(const Math::Vector2DArray&);
 
             QPainter&                     qPainter;

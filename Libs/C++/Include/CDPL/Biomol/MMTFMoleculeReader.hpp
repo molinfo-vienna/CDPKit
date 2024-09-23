@@ -64,17 +64,17 @@ namespace CDPL
              */
             MMTFMoleculeReader(std::istream& is);
 
+            MMTFMoleculeReader(const MMTFMoleculeReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~MMTFMoleculeReader();
 
+            MMTFMoleculeReader& operator=(const MMTFMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>;
-
-            MMTFMoleculeReader(const MMTFMoleculeReader&);
-
-            MMTFMoleculeReader& operator=(const MMTFMoleculeReader&);
 
             bool readData(std::istream&, Chem::Molecule&, bool overwrite);
             bool skipData(std::istream&);

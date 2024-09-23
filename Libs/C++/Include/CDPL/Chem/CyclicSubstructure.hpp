@@ -67,6 +67,10 @@ namespace CDPL
              */
             CyclicSubstructure(const MolecularGraph& molgraph);
 
+            CyclicSubstructure(const CyclicSubstructure&) = delete;
+
+            CyclicSubstructure& operator=(const CyclicSubstructure&) = delete;
+
             /**
              * \brief Replaces the currently stored atoms and bonds by the set of ring atoms and bonds of the
              *        molecular graph \a molgraph.
@@ -75,10 +79,6 @@ namespace CDPL
             void perceive(const MolecularGraph& molgraph);
 
           private:
-            CyclicSubstructure(const CyclicSubstructure&);
-
-            CyclicSubstructure& operator=(const CyclicSubstructure&);
-
             typedef std::vector<const Atom*> AtomStack;
             typedef std::vector<const Bond*> BondStack;
 

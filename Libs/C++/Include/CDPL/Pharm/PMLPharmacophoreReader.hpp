@@ -58,17 +58,17 @@ namespace CDPL
              */
             PMLPharmacophoreReader(std::istream& is);
 
+            PMLPharmacophoreReader(const PMLPharmacophoreReader&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~PMLPharmacophoreReader();
 
+            PMLPharmacophoreReader& operator=(const PMLPharmacophoreReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>;
-
-            PMLPharmacophoreReader(const PMLPharmacophoreReader&);
-
-            PMLPharmacophoreReader& operator=(const PMLPharmacophoreReader&);
 
             bool readData(std::istream&, Pharmacophore&, bool overwrite);
             bool skipData(std::istream&);

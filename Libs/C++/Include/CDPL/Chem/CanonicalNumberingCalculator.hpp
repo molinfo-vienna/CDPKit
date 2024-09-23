@@ -99,6 +99,10 @@ namespace CDPL
              */
             CanonicalNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
+            CanonicalNumberingCalculator(const CanonicalNumberingCalculator&) = delete;
+
+            CanonicalNumberingCalculator& operator=(const CanonicalNumberingCalculator&) = delete;
+
             /**
              * \brief Allows to specify the set of atomic properties that has to be considered by the
              *        canonical numering algorithm.
@@ -167,10 +171,6 @@ namespace CDPL
 
             typedef CanonicalNumberingCalculator Calculator;
             typedef std::vector<Edge*>           EdgeList;
-
-            CanonicalNumberingCalculator(const CanonicalNumberingCalculator&);
-
-            CanonicalNumberingCalculator& operator=(const CanonicalNumberingCalculator&);
 
             typedef std::vector<std::uint64_t> ConnectionTable;
 

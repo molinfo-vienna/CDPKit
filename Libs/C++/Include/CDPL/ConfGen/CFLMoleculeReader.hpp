@@ -63,17 +63,17 @@ namespace CDPL
              */
             CFLMoleculeReader(std::istream& is);
 
+            CFLMoleculeReader(const CFLMoleculeReader&) = delete;
+
             /**
              * \brief Destructor.
              */
             ~CFLMoleculeReader();
 
+            CFLMoleculeReader& operator=(const CFLMoleculeReader&) = delete;
+
           private:
             friend class Util::StreamDataReader<Chem::Molecule, CFLMoleculeReader>;
-
-            CFLMoleculeReader(const CFLMoleculeReader&);
-
-            CFLMoleculeReader& operator=(const CFLMoleculeReader&);
 
             bool readData(std::istream&, Chem::Molecule&, bool overwrite);
             bool skipData(std::istream&);

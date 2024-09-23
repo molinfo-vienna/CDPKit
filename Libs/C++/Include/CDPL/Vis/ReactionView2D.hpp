@@ -601,10 +601,14 @@ namespace CDPL
              */
             ReactionView2D(const Chem::Reaction* rxn = 0);
 
+            ReactionView2D(const ReactionView2D&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~ReactionView2D();
+
+            ReactionView2D& operator=(const ReactionView2D&) = delete;
 
             void render(Renderer2D& renderer);
 
@@ -635,10 +639,6 @@ namespace CDPL
             void getModelBounds(Rectangle2D& bounds);
 
           private:
-            ReactionView2D(const ReactionView2D&);
-
-            ReactionView2D& operator=(const ReactionView2D&);
-
             void paintBackground(Renderer2D&) const;
 
             void renderComponents(Renderer2D&) const;

@@ -137,10 +137,14 @@ namespace CDPL
              */
             SMILESMolecularGraphWriter(std::ostream& os);
 
+            SMILESMolecularGraphWriter(const SMILESMolecularGraphWriter&) = delete;
+            
             /**
              * \brief Destructor.
              */
             ~SMILESMolecularGraphWriter();
+
+            SMILESMolecularGraphWriter& operator=(const SMILESMolecularGraphWriter&) = delete;
 
             /**
              * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
@@ -154,10 +158,6 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<SMILESDataWriter> SMILESDataWriterPtr;
-
-            SMILESMolecularGraphWriter(const SMILESMolecularGraphWriter&);
-
-            SMILESMolecularGraphWriter& operator=(const SMILESMolecularGraphWriter&);
 
             std::ostream&       output;
             bool                state;

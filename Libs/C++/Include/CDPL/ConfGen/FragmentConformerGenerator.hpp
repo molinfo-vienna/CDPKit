@@ -63,7 +63,11 @@ namespace CDPL
 
             FragmentConformerGenerator();
 
+            FragmentConformerGenerator(const FragmentConformerGenerator&) = delete;
+
             ~FragmentConformerGenerator();
+
+            FragmentConformerGenerator& operator=(const FragmentConformerGenerator&) = delete;
 
             FragmentConformerGeneratorSettings& getSettings();
 
@@ -123,10 +127,6 @@ namespace CDPL
             ConformerIterator end();
 
           private:
-            FragmentConformerGenerator(const FragmentConformerGenerator&);
-
-            FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
-
             typedef std::unique_ptr<FragmentConformerGeneratorImpl> ImplementationPointer;
 
             ImplementationPointer impl;

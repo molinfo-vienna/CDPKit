@@ -87,7 +87,11 @@ namespace CDPL
 
             GaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
+            GaussianShapeAlignment(const GaussianShapeAlignment& alignment) = delete;
+              
             ~GaussianShapeAlignment();
+
+            GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment) = delete;
 
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
 
@@ -213,10 +217,6 @@ namespace CDPL
             };
 
             typedef std::pair<std::size_t, std::size_t> ResultID;
-
-            GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
-
-            GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
             void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
 
