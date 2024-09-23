@@ -39,6 +39,7 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "ResidueDictionaryData.hpp"
 
@@ -49,9 +50,11 @@ using namespace CDPL;
 namespace
 {
 
-    typedef std::unordered_set<std::string> StdResidueSet;
-    typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
-    typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
+    typedef std::unordered_set<std::string, Internal::CIStringHashFunc, Internal::CIStringCmpFunc>  StdResidueSet;
+    typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*,
+                               Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               ResCodeToDataEntryMap;
+    typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer,
+                               Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               StructureCache;
 
     StdResidueSet                            stdResidueSet;
     ResCodeToDataEntryMap                    resCodeToDataEntryMap;
@@ -357,4 +360,20 @@ bool Biomol::ResidueDictionary::isObsolete(const std::string& code)
     const Entry& entry = get()->getEntry(code);
 
     return entry.isObsolete();
+}
+
+
+std::size_t Biomol::ResidueDictionary::CIStringHashFunc::operator()(const std::string& str) const
+{
+    static const Internal::CIStringHashFunc hash_func;
+
+    return hash_func(str);
+}
+
+
+bool Biomol::ResidueDictionary::CIStringCmpFunc::operator()(const std::string& str1, const std::string& str2) const
+{
+    static const Internal::CIStringCmpFunc cmp_func;
+
+    return cmp_func(str1, str2);
 }

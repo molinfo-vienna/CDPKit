@@ -90,7 +90,19 @@ namespace CDPL
             };
 
           private:
-            typedef std::unordered_map<std::string, Entry> EntryLookupTable;
+            struct CIStringHashFunc
+            {
+
+                std::size_t operator()(const std::string& str) const;
+            };
+
+            struct CIStringCmpFunc
+            {
+
+                bool operator()(const std::string& str1, const std::string& str2) const;
+            };
+              
+            typedef std::unordered_map<std::string, Entry, CIStringHashFunc, CIStringCmpFunc> EntryLookupTable;
 
           public:
             typedef std::shared_ptr<ResidueDictionary> SharedPointer;
