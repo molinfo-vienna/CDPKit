@@ -53,7 +53,7 @@ namespace
     bool containsCharFollowedByWS(char c, const std::string& str)
     {
         for (std::string::size_type i = str.find_first_of(c); i != std::string::npos; i = str.find_first_of(c, i)) {
-            if (i < (str.length() - 1) && std::isspace(str[i + 1]))
+            if (i < (str.length() - 1) && Biomol::MMCIF::isSpace(str[i + 1]))
                 return true;
         }
 
@@ -223,6 +223,7 @@ const std::string& Biomol::MMCIFData::getID() const
 void Biomol::MMCIFData::clear()
 {
     categories.clear();
+    id.clear();
 }
 
 std::size_t Biomol::MMCIFData::getNumCategories() const
@@ -302,9 +303,15 @@ Biomol::MMCIFData::Category& Biomol::MMCIFData::lastCategory()
     return categories.back();
 }
 
-Biomol::MMCIFData::Category& Biomol::MMCIFData::addCategory(const std::string& name)
+Biomol::MMCIFData::Category& Biomol::MMCIFData::addCategory(const std::string& name, bool front)
 {
-    categories.emplace_back(name);
+    if (front) {
+        categories.push_front(new Category(name));
+        
+        return categories.front();
+    }
+    
+    categories.push_back(new Category(name));
 
     return categories.back();
 }
@@ -469,7 +476,7 @@ Biomol::MMCIFData::Item* Biomol::MMCIFData::Category::findItem(const std::string
 
 Biomol::MMCIFData::Item& Biomol::MMCIFData::Category::addItem(const std::string& name)
 {
-    items.emplace_back(name);
+    items.push_back(new Item(name));
 
     return items.back();
 }
@@ -674,7 +681,6 @@ Biomol::MMCIFData::Item::ValueIterator Biomol::MMCIFData::Item::end()
 
 std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData& data)
 {
-
     os << MMCIF::DATA_BLOCK_ID_PREFIX << data.getID() << MMCIF::END_OF_LINE << MMCIF::COMMENT_PREFIX << MMCIF::END_OF_LINE;
 
     for (auto& cat : data)

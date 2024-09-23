@@ -160,7 +160,7 @@ void CDPLPythonBiomol::exportMMCIFData()
         .def("clear", &Biomol::MMCIFData::clear, python::arg("self"))
         .def("findCategory", static_cast<Biomol::MMCIFData::Category* (Biomol::MMCIFData::*)(const std::string&)>(&Biomol::MMCIFData::findCategory),
              (python::arg("self"), python::arg("name")), python::return_internal_reference<>())
-        .def("addCategory", &Biomol::MMCIFData::addCategory, (python::arg("self"), python::arg("name")),
+        .def("addCategory", &Biomol::MMCIFData::addCategory, (python::arg("self"), python::arg("name"), python::arg("front") = false),
              python::return_internal_reference<>())
         .def("getCategory", static_cast<Biomol::MMCIFData::Category& (Biomol::MMCIFData::*)(const std::string&)>(&Biomol::MMCIFData::getCategory),
              (python::arg("self"), python::arg("name")),

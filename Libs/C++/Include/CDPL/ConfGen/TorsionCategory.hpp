@@ -29,9 +29,10 @@
 #ifndef CDPL_CONFGEN_TORSIONCATEGORY_HPP
 #define CDPL_CONFGEN_TORSIONCATEGORY_HPP
 
-#include <vector>
 #include <string>
 #include <cstddef>
+
+#include <boost/ptr_container/ptr_vector.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"
@@ -47,8 +48,8 @@ namespace CDPL
         class CDPL_CONFGEN_API TorsionCategory
         {
 
-            typedef std::vector<TorsionCategory> CategoryList;
-            typedef std::vector<TorsionRule>     RuleList;
+            typedef boost::ptr_vector<TorsionCategory> CategoryList;
+            typedef boost::ptr_vector<TorsionRule>     RuleList;
 
           public:
             typedef CategoryList::iterator       CategoryIterator;

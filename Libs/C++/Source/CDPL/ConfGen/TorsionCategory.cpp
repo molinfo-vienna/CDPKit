@@ -90,28 +90,28 @@ void ConfGen::TorsionCategory::setBondAtom2Type(unsigned int type)
 
 ConfGen::TorsionCategory& ConfGen::TorsionCategory::addCategory()
 {
-    categories.push_back(TorsionCategory());
+    categories.push_back(new TorsionCategory());
 
     return categories.back();
 }
 
 ConfGen::TorsionCategory& ConfGen::TorsionCategory::addCategory(const TorsionCategory& cat)
 {
-    categories.push_back(cat);
+    categories.push_back(new TorsionCategory(cat));
 
     return categories.back();
 }
 
 ConfGen::TorsionRule& ConfGen::TorsionCategory::addRule()
 {
-    rules.push_back(TorsionRule());
+    rules.push_back(new TorsionRule());
 
     return rules.back();
 }
 
 ConfGen::TorsionRule& ConfGen::TorsionCategory::addRule(const TorsionRule& rule)
 {
-    rules.push_back(rule);
+    rules.push_back(new TorsionRule(rule));
 
     return rules.back();
 }

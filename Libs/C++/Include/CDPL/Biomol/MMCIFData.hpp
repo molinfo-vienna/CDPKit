@@ -31,9 +31,11 @@
 
 #include <cstddef>
 #include <string>
-#include <vector>
 #include <memory>
 #include <iosfwd>
+
+#include <boost/ptr_container/ptr_vector.hpp>
+#include <boost/ptr_container/ptr_deque.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 
@@ -108,7 +110,7 @@ namespace CDPL
             class CDPL_BIOMOL_API Category
             {
 
-                typedef std::vector<Item> ItemList;
+                typedef boost::ptr_vector<Item> ItemList;
 
               public:
                 typedef ItemList::const_iterator ConstItemIterator;
@@ -174,7 +176,7 @@ namespace CDPL
             };
 
           private:
-            typedef std::vector<Category> CategoryList;
+            typedef boost::ptr_deque<Category> CategoryList;
             
           public:
             typedef CategoryList::const_iterator ConstCategoryIterator;
@@ -208,7 +210,7 @@ namespace CDPL
 
             Category& lastCategory();
             
-            Category& addCategory(const std::string& name);
+            Category& addCategory(const std::string& name, bool front = false);
 
             CategoryIterator removeCategory(const CategoryIterator& it);
 
