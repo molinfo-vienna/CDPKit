@@ -26,6 +26,10 @@
 #define CDPL_BIOMOL_MMCIFDATAWRITER_HPP
 
 #include <iosfwd>
+#include <unordered_set>
+
+#include "CDPL/Biomol/MMCIFData.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
 namespace CDPL
@@ -51,14 +55,32 @@ namespace CDPL
 
           public:
             MMCIFDataWriter(const Base::DataIOBase& io_base):
-                ioBase(io_base) {}
+                ioBase(io_base), numOutDataBlocks(0) {}
 
             bool writeMolecularGraph(std::ostream& os, const Chem::MolecularGraph& molgraph);
 
           private:
             void init(std::ostream& os);
 
+            bool genMacromoleculeData(const Chem::MolecularGraph& molgraph);
+
+            void genChemCompData(const Chem::MolecularGraph& molgraph);
+            void genChemCompAtomsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
+            void genChemCompBondsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
+
+            std::string getChemCompId(const Chem::MolecularGraph& molgraph);
+            
+            void setDataBlockId(const Chem::MolecularGraph& molgraph);
+
+            typedef ResidueDictionary::SharedPointer ResDictPointer;
+            
             const Base::DataIOBase& ioBase;
+            ResDictPointer          resDictionary;
+            bool                    strictErrorChecking;
+            MMCIFData               mmCIFData;
+            std::size_t             numOutDataBlocks;
+            bool                    writeAsChemComp;
+            std::string             tmpString;
         };
     } // namespace Biomol
 } // namespace CDPL

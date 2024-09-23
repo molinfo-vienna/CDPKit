@@ -30,13 +30,12 @@
 #include <algorithm>
 
 #include <boost/functional/hash.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
-#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
-#include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -49,11 +48,9 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/CIPDescriptor.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
-#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "MMCIFDataReader.hpp"
 #include "MMCIFFormatData.hpp"
@@ -139,14 +136,17 @@ namespace
         return &val;
     }
 
-    inline bool valuesMatch(const std::string* query_val, const Biomol::MMCIFData::Item* item, std::size_t row_idx)
+    inline bool valuesMatch(const std::string* query_val, const Biomol::MMCIFData::Item* item, std::size_t row_idx, bool ci = false)
     {
         if (!query_val)
             return true;
         
         if (!item)
             return false;
-     
+
+        if (ci)
+            return Internal::isEqualCI(*query_val, item->getValue(row_idx));
+        
         return (*query_val == item->getValue(row_idx));
     }
     
@@ -272,11 +272,10 @@ Biomol::MMCIFDataReader::ChemComp::operator bool() const
 
 std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHash::operator()(const ChemCompAtomID& atom_id) const
 {
-    std::size_t h = 0;
+    static const Internal::CIStringPtrHashFunc ci_str_ptr_hash_func;
 
-    if (atom_id.first)
-        boost::hash_combine(h, *atom_id.first);
-
+    std::size_t h = ci_str_ptr_hash_func(atom_id.first);
+    
     boost::hash_combine(h, *atom_id.second);
 
     return h;
@@ -285,30 +284,15 @@ std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHash::operator()(const ChemCo
 
 bool Biomol::MMCIFDataReader::ChemCompAtomIDCmpFunc::operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const
 {
-    return (*atom_id1.first == *atom_id2.first && *atom_id1.second == *atom_id2.second);
+    static const Internal::CIStringPtrCmpFunc ci_str_ptr_cmp_func;
+    
+    return (ci_str_ptr_cmp_func(atom_id1.first, atom_id2.first) && (*atom_id1.second == *atom_id2.second));
 }
 
 
-std::size_t Biomol::MMCIFDataReader::StringPtrHash::operator()(const std::string* str_ptr) const
-{
-    if (!str_ptr)
-        return 0;
-
-    return std::hash<std::string>{}(*str_ptr);
-}
-
-
-bool Biomol::MMCIFDataReader::StringPtrCmpFunc::operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
-{
-    if (!str_ptr1)
-        return !str_ptr2;
-
-    if (!str_ptr2)
-        return false;
-
-    return (*str_ptr1 == *str_ptr2);
-}
-
+Biomol::MMCIFDataReader::MMCIFDataReader(const Base::DataIOBase& io_base):
+    ioBase(io_base)
+{}
 
 bool Biomol::MMCIFDataReader::hasMoreData(std::istream& is)
 {
@@ -729,7 +713,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
 
             auto& next_res_code = getResidueCode(*next_atom);
 
-            if (next_res_code != res_code)
+            if (!Internal::isEqualCI(next_res_code, res_code))
                 break;
 
             auto next_res_id = getResidueSequenceNumber(*next_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
@@ -1041,13 +1025,16 @@ void Biomol::MMCIFDataReader::applyDictionaryBondOrders(Chem::Molecule& mol)
         auto& res_code1 = getResidueCode(atom1);
         auto& res_code2 = getResidueCode(atom2);
 
-        if (res_code1 != res_code2)
+        if (!Internal::isEqualCI(res_code1, res_code2))
             continue;
 
         auto& atom_name1 = getResidueAtomName(atom1);
         auto& atom_name2 = getResidueAtomName(atom2);
 
         bo_cache_key = res_code1;
+
+        boost::to_upper(bo_cache_key, std::locale::classic());
+        
         bo_cache_key.push_back('-');
         bo_cache_key.append(atom_name1);
         bo_cache_key.push_back('-');
@@ -1069,6 +1056,9 @@ void Biomol::MMCIFDataReader::applyDictionaryBondOrders(Chem::Molecule& mol)
             bondOrderCache[bo_cache_key] = order;
 
             bo_cache_key = res_code1;
+
+            boost::to_upper(bo_cache_key, std::locale::classic());
+            
             bo_cache_key.push_back('-');
             bo_cache_key.append(atom_name2);
             bo_cache_key.push_back('-');
@@ -1140,10 +1130,10 @@ Chem::Atom* Biomol::MMCIFDataReader::getAtom(const MMCIFData& data, Chem::Molecu
         if (!valuesMatch(label_atom_id, label_atom_ids, ase.second))
             continue;
 
-        if (!valuesMatch(auth_comp_id, auth_comp_ids, ase.second))
+        if (!valuesMatch(auth_comp_id, auth_comp_ids, ase.second, true))
             continue;
 
-        if (!valuesMatch(label_comp_id, label_comp_ids, ase.second))
+        if (!valuesMatch(label_comp_id, label_comp_ids, ase.second, true))
             continue;
 
         if (!valuesMatch(auth_seq_id, auth_seq_ids, ase.second))
@@ -1521,7 +1511,7 @@ void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem:
                 continue;
             }
 
-            if (*comp_id != getResidueCode(atom)) {
+            if (!Internal::isEqualCI(*comp_id, getResidueCode(atom))) {
                 comp_id = nullptr;
                 break;
             }
@@ -1533,7 +1523,7 @@ void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem:
         setResidueCode(comp, *comp_id);
 
         for (std::size_t i = 0; i < num_comps; i++) {
-            if (!valuesMatch(comp_id, comp_ids, i))
+            if (!valuesMatch(comp_id, comp_ids, i, true))
                 continue;
 
             if (auto name = getValue(comp_names, i)) {
@@ -1568,7 +1558,7 @@ void Biomol::MMCIFDataReader::postprocReadChemComps(const MMCIFData& data, Chem:
                     continue;
                 }
                 
-                if (*res_code != getResidueCode(comp)) {
+                if (!Internal::isEqualCI(*res_code, getResidueCode(comp))) {
                     res_code = nullptr;
                     break;
                 }

@@ -32,6 +32,7 @@
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 namespace CDPL
@@ -99,23 +100,12 @@ namespace CDPL
             const Chem::Atom*  getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
             const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
-            struct StringPtrHash
-            {
-
-                std::size_t operator()(const std::string* str_ptr) const;
-            };
-
-            struct StringPtrCmpFunc
-            {
-
-                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const;
-            };
-
             typedef std::vector<Chem::Atom*>                                                AtomList;
             typedef std::unordered_map<std::string, std::size_t>                            RecordHistogram;
             typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
             typedef std::unordered_map<const std::string*, Chem::Atom*,
-                                       StringPtrHash, StringPtrCmpFunc>                     NameToAtomMap;
+                                       Internal::StringPtrHashFunc,
+                                       Internal::StringPtrCmpFunc>                          NameToAtomMap;
             typedef std::unordered_map<std::string, std::size_t>                            BondOrderCache;
 
             typedef ResidueDictionary::SharedPointer ResDictPointer;

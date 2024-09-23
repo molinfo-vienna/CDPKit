@@ -34,6 +34,7 @@
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 namespace CDPL
@@ -50,7 +51,7 @@ namespace CDPL
 
         class Molecule;
     }
-    
+
     namespace Biomol
     {
 
@@ -58,9 +59,8 @@ namespace CDPL
         {
 
           public:
-            MMCIFDataReader(const Base::DataIOBase& io_base):
-                ioBase(io_base) {}
-
+            MMCIFDataReader(const Base::DataIOBase& io_base);
+            
             bool hasMoreData(std::istream& is);
             bool skipMolecule(std::istream& is);
             bool readMolecule(std::istream& is, Chem::Molecule& mol);
@@ -132,18 +132,6 @@ namespace CDPL
                 bool operator()(const ChemCompAtomID& atom_id1, const ChemCompAtomID& atom_id2) const;
             };
 
-            struct StringPtrHash
-            {
-
-                std::size_t operator()(const std::string* str_ptr) const;
-            };
-
-            struct StringPtrCmpFunc
-            {
-
-                bool operator()(const std::string* str_ptr1, const std::string* str_ptr2) const;
-            };
-
             struct ChemComp
             {
                 
@@ -194,12 +182,15 @@ namespace CDPL
                                        ChemCompAtomIDHash,
                                        ChemCompAtomIDCmpFunc>           ChemCompAtomLookupMap;
             typedef std::vector<ChemComp>                               ChemCompList;
-            typedef std::unordered_map<std::string, std::size_t>        ChemCompDictionary;
+            typedef std::unordered_map<std::string, std::size_t,
+                                       Internal::CIStringHashFunc,
+                                       Internal::CIStringCmpFunc>       ChemCompDictionary;
             typedef std::vector<Chem::Atom*>                            AtomList;
             typedef std::pair<Chem::Atom*, std::size_t>                 AtomIndexPair;
             typedef std::vector<AtomIndexPair>                          AtomIndexPairList;
             typedef std::unordered_map<const std::string*, Chem::Atom*,
-                                       StringPtrHash, StringPtrCmpFunc> NameToAtomMap;
+                                       Internal::StringPtrHashFunc,
+                                       Internal::StringPtrCmpFunc>      NameToAtomMap;
             typedef std::unordered_map<std::string, std::size_t>        BondOrderCache;
             typedef ResidueDictionary::SharedPointer                    ResDictPointer;
 

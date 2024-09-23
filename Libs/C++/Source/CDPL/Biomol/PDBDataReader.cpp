@@ -50,7 +50,6 @@
 #include "CDPL/Biomol/PDBFormatVersion.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "PDBDataReader.hpp"
@@ -132,27 +131,6 @@ namespace
 
     constexpr double MIN_BOND_LENGTH       = 0.4;
     constexpr double BOND_LENGTH_TOLERANCE = 0.4;
-}
-
-
-std::size_t Biomol::PDBDataReader::StringPtrHash::operator()(const std::string* str_ptr) const
-{
-    if (!str_ptr)
-        return 0;
-
-    return std::hash<std::string>{}(*str_ptr);
-}
-
-
-bool Biomol::PDBDataReader::StringPtrCmpFunc::operator()(const std::string* str_ptr1, const std::string* str_ptr2) const
-{
-    if (!str_ptr1)
-        return !str_ptr2;
-
-    if (!str_ptr2)
-        return false;
-
-    return (*str_ptr1 == *str_ptr2);
 }
 
 

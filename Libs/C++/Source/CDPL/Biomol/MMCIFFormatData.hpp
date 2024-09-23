@@ -56,6 +56,8 @@ namespace CDPL
             const std::string TRUE_FLAG            = "Y";
             const std::string FALSE_FLAG           = "N";
 
+            const std::string::size_type MAX_DATA_BLOCK_ID_LENGTH = 75;
+            
             namespace Entry
             {
 
