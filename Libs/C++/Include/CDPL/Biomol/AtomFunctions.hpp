@@ -140,7 +140,18 @@ namespace CDPL
 
         CDPL_BIOMOL_API bool hasAltLocationID(const Chem::Atom& atom);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API const std::string& getEntityID(const Chem::Atom& atom);
 
+        CDPL_BIOMOL_API void setEntityID(Chem::Atom& atom, const std::string& id);
+
+        CDPL_BIOMOL_API void clearEntityID(Chem::Atom& atom);
+
+        CDPL_BIOMOL_API bool hasEntityID(const Chem::Atom& atom);
+
+        
         CDPL_BIOMOL_API std::size_t getModelNumber(const Chem::Atom& atom);
 
         CDPL_BIOMOL_API void setModelNumber(Chem::Atom& atom, std::size_t model_no);

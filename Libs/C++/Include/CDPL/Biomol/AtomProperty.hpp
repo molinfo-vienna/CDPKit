@@ -62,6 +62,12 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey SERIAL_NUMBER;
             extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
             extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey ENTITY_ID;
+
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
             extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
             extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
