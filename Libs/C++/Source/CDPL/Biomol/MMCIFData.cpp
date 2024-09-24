@@ -693,16 +693,23 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
 {
     if (cat.getNumItems() == 0)
         return os;
-  
-    auto num_rows = std::max(std::size_t(1), cat.getNumValueRows());
+    
+    auto num_rows = cat.getNumValueRows();
 
     os << std::setfill(' ');
     
-    if (num_rows == 1) {
+    if (num_rows <= 1) {
         auto max_name_len = getMaxItemNameLength(cat) + 3;
 
         for (auto& item : cat) {
-            os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << std::setw(max_name_len) << std::left << item.getName();
+            if (num_rows == 0) {
+                os << MMCIF::COMMENT_PREFIX << MMCIF::DATA_NAME_PREFIX << cat.getName()
+                   << MMCIF::CATEGORY_NAME_SEPARATOR << item.getName() << MMCIF::END_OF_LINE;
+                continue;
+            }
+                
+            os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR
+               << std::setw(max_name_len) << std::left << item.getName();
 
             if (!outputValue(os, item.getNumValues() != 0 ? item.getValue(0) : MMCIF:: MISSING_DATA_VALUE))
                 os << MMCIF::END_OF_LINE;
@@ -718,7 +725,7 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
     for (auto& item : cat) {
         os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << item.getName() << MMCIF::END_OF_LINE;
 
-        field_widths.push_back(getMaxItemValueLength(item));
+        field_widths.push_back(std::max(std::size_t(1), getMaxItemValueLength(item)));
     }
 
     for (std::size_t i = 0, num_items = cat.getNumItems(); i < num_rows; i++) {

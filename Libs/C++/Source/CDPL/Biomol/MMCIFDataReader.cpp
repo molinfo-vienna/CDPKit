@@ -551,7 +551,7 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
 {
     using namespace MMCIF;
 
-    atomSiteSequence.clear();
+    atomSites.clear();
     
     auto atom_sites = data.findCategory(AtomSite::NAME);
 
@@ -566,7 +566,8 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     auto pdb_groups = atom_sites->findItem(AtomSite::Item::GROUP_PDB);
     auto serial_nos = atom_sites->findItem(AtomSite::Item::ID);
     auto type_syms = atom_sites->findItem(AtomSite::Item::TYPE_SYMBOL);
-    auto atom_alt_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
+    auto atom_alt_loc_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
+    auto entity_ids = atom_sites->findItem(AtomSite::Item::LABEL_ENTITY_ID);
     auto atom_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID), atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID));
     auto comp_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID), atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID));
     auto res_seq_nos = select(atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID), atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID));
@@ -585,7 +586,7 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     for (std::size_t i = 0; i < num_atoms; i++) {
         auto& atom = mol.addAtom();
 
-        atomSiteSequence.emplace_back(&atom, i);
+        atomSites.emplace_back(&atom, i);
         
         auto comp_id = getValue(comp_ids, i);
 
@@ -612,8 +613,11 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
         if (auto atom_id = getValue(atom_ids, i))
             setResidueAtomName(atom, *atom_id);
 
-        if (auto atom_id = getValue(atom_alt_ids, i))
-            setResidueAltAtomName(atom, *atom_id);
+        if (auto atom_alt_loc_id = getValue(atom_alt_loc_ids, i))
+            setAltLocationID(atom, atom_alt_loc_id->front());
+
+        if (auto entity_id = getValue(entity_ids, i))
+            setEntityID(atom, *entity_id);
        
         long serial_no = 0;
 
@@ -666,6 +670,11 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
 
             set3DCoordinates(atom, coords);
 
+        else if (strictErrorChecking)
+            throw Base::IOError("MMCIFDataReader: " + getFQItemName(atom_sites, type_syms) +
+                                ": missing 3D atom coordinates" + 
+                                (num_atoms > 1 ? " at data row " + std::to_string(i) : std::string()));
+    
         std::size_t model_no = 0;
 
         if (getValue(atom_sites, model_nos, i, model_no))
@@ -687,12 +696,12 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
 {
     using namespace Chem;
 
-    if (atomSiteSequence.empty())
+    if (atomSites.empty())
         return;
 
     prevResidueLinkAtoms.clear();
 
-    for (auto as_it = atomSiteSequence.begin(), as_end = atomSiteSequence.end(); as_it != as_end; ) {
+    for (auto as_it = atomSites.begin(), as_end = atomSites.end(); as_it != as_end; ) {
         auto first_atom = as_it->first;
         auto res_id = getResidueSequenceNumber(*first_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
         auto& res_code = getResidueCode(*first_atom);
@@ -723,15 +732,15 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
         }
 
         std::sort(res_as_start_it, as_it, [](const AtomIndexPair& atom1, const AtomIndexPair& atom2) {
-                                              auto& res_atom_name1 = getResidueAtomName(*atom1.first);
-                                              auto& res_atom_name2 = getResidueAtomName(*atom2.first);
+            auto& res_atom_name1 = getResidueAtomName(*atom1.first);
+            auto& res_atom_name2 = getResidueAtomName(*atom2.first);
 
-                                              if (res_atom_name1 == res_atom_name2)
-                                                  return ((hasAltLocationID(*atom1.first) ? getAltLocationID(*atom1.first) : ' ') <
-                                                          (hasAltLocationID(*atom2.first) ? getAltLocationID(*atom2.first) : ' '));
-    
-                                              return (res_atom_name1 < res_atom_name2);
-                                          });
+            if (res_atom_name1 == res_atom_name2)
+                return ((hasAltLocationID(*atom1.first) ? getAltLocationID(*atom1.first) : ' ') <
+                        (hasAltLocationID(*atom2.first) ? getAltLocationID(*atom2.first) : ' '));
+
+            return (res_atom_name1 < res_atom_name2);
+        });
 
         for (auto res_as_it = res_as_start_it; res_as_it != as_it; ) {
             auto atom = res_as_it->first;
@@ -753,10 +762,13 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
 
                 if (!coords) {
                     coords.reset(new Math::Vector3DArray());
-                    coords->addElement(get3DCoordinates(*atom));                    
+
+                    if (has3DCoordinates(*atom))
+                        coords->addElement(get3DCoordinates(*atom));
                 }
 
-                coords->addElement(get3DCoordinates(*next_atom));
+                if (has3DCoordinates(*next_atom))
+                    coords->addElement(get3DCoordinates(*next_atom));
 
                 mol.removeAtom(next_atom->getIndex());
             }
@@ -1114,7 +1126,7 @@ Chem::Atom* Biomol::MMCIFDataReader::getAtom(const MMCIFData& data, Chem::Molecu
     auto label_seq_ids = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
     auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
     
-    for (auto& ase : atomSiteSequence) {
+    for (auto& ase : atomSites) {
         if (!mol.containsAtom(*ase.first))
             continue;
 
@@ -1280,9 +1292,9 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
     auto ids = comp_atoms->findItem(ChemCompAtom::Item::ATOM_ID);
     auto alt_ids = comp_atoms->findItem(ChemCompAtom::Item::ALT_ATOM_ID);
     auto type_syms = comp_atoms->findItem(ChemCompAtom::Item::TYPE_SYMBOL);
-    auto coords_x = comp_atoms->findItem(ChemCompAtom::Item::COORDS_X);
-    auto coords_y = comp_atoms->findItem(ChemCompAtom::Item::COORDS_Y);
-    auto coords_z = comp_atoms->findItem(ChemCompAtom::Item::COORDS_Z);
+    auto model_coords_x = comp_atoms->findItem(ChemCompAtom::Item::COORDS_X);
+    auto model_coords_y = comp_atoms->findItem(ChemCompAtom::Item::COORDS_Y);
+    auto model_coords_z = comp_atoms->findItem(ChemCompAtom::Item::COORDS_Z);
     auto ideal_coords_x = comp_atoms->findItem(ChemCompAtom::Item::PDBX_IDEAL_COORDS_X);
     auto ideal_coords_y = comp_atoms->findItem(ChemCompAtom::Item::PDBX_IDEAL_COORDS_Y);
     auto ideal_coords_z = comp_atoms->findItem(ChemCompAtom::Item::PDBX_IDEAL_COORDS_Z);
@@ -1291,8 +1303,16 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
     auto form_charges = comp_atoms->findItem(ChemCompAtom::Item::CHARGE);
     auto sto_configs = comp_atoms->findItem(ChemCompAtom::Item::PDBX_STEREO_CONFIG);
 
+    auto coords_x = select(model_coords_x, ideal_coords_x);
+    auto coords_y = model_coords_y;
+    auto coords_z = model_coords_z;
+    
+    if (coords_x == ideal_coords_x) {
+        coords_y = ideal_coords_y;
+        coords_z = ideal_coords_z;
+    }
+    
     Math::Vector3D coords;
-    Math::Vector3D ideal_coords;
     
     for (std::size_t i = 0; i < num_atoms; i++) {
         auto& atom = mol.addAtom();
@@ -1341,27 +1361,11 @@ void Biomol::MMCIFDataReader::readChemCompAtoms(const MMCIFData& data, Chem::Mol
         if (getValue(comp_atoms, leaving_flags, i, leaving_flag))
             setResidueLeavingAtomFlag(atom, leaving_flag);
 
-        bool have_coords = getValue(comp_atoms, coords_x, i, coords[0]) &&
-                           getValue(comp_atoms, coords_y, i, coords[1]) &&
-                           getValue(comp_atoms, coords_z, i, coords[2]);
-        bool have_ideal_coords = getValue(comp_atoms, ideal_coords_x, i, ideal_coords[0]) &&
-                                 getValue(comp_atoms, ideal_coords_y, i, ideal_coords[1]) &&
-                                 getValue(comp_atoms, ideal_coords_z, i, ideal_coords[2]);
+        if (getValue(comp_atoms, coords_x, i, coords[0]) &&
+            getValue(comp_atoms, coords_y, i, coords[1]) &&
+            getValue(comp_atoms, coords_z, i, coords[2]))
 
-        if (have_coords && have_ideal_coords) {
-            Math::Vector3DArray::SharedPointer coords_array_ptr(new Math::Vector3DArray());
-
-            coords_array_ptr->addElement(coords);
-            coords_array_ptr->addElement(ideal_coords);
-
-            set3DCoordinatesArray(atom, coords_array_ptr);
             set3DCoordinates(atom, coords);
-            
-        } else if (have_coords)
-            set3DCoordinates(atom, coords);
-            
-        else if (have_ideal_coords)
-            set3DCoordinates(atom, ideal_coords);
 
         if (auto* sto_config = getValue(sto_configs, i)) {
             if (Internal::isEqualCI(*sto_config, ChemCompAtom::StereoConfig::R))

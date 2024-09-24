@@ -212,7 +212,7 @@ namespace CDPL
             std::size_t             chemCompCount;
             std::size_t             startAtomCount;
             std::size_t             startBondCount;
-            AtomIndexPairList       atomSiteSequence;
+            AtomIndexPairList       atomSites;
             NameToAtomMap           currResidueAtoms;
             AtomList                currResidueLinkAtoms;
             AtomList                prevResidueLinkAtoms;

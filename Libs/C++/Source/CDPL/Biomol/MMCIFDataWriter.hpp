@@ -27,9 +27,11 @@
 
 #include <iosfwd>
 #include <unordered_set>
+#include <vector>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 namespace CDPL
@@ -41,12 +43,6 @@ namespace CDPL
         class DataIOBase;
     }
 
-    namespace Chem
-    {
-
-        class MolecularGraph;
-    }
-    
     namespace Biomol
     {
 
@@ -60,10 +56,15 @@ namespace CDPL
             bool writeMolecularGraph(std::ostream& os, const Chem::MolecularGraph& molgraph);
 
           private:
+            typedef std::unordered_set<const std::string*,
+                                       Internal::StringPtrHashFunc,
+                                       Internal::StringPtrCmpFunc>  AtomIdSet;
+            
             void init(std::ostream& os);
 
             bool genMacromoleculeData(const Chem::MolecularGraph& molgraph);
-
+            bool genAtomSiteData(const Chem::MolecularGraph& molgraph);
+    
             void genChemCompData(const Chem::MolecularGraph& molgraph);
             void genChemCompAtomsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
             void genChemCompBondsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
@@ -72,15 +73,21 @@ namespace CDPL
             
             void setDataBlockId(const Chem::MolecularGraph& molgraph);
 
+            const std::string& createUniqueAtomId(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
+                                                  const AtomIdSet& id_set, std::string& id) const;
+
             typedef ResidueDictionary::SharedPointer ResDictPointer;
-            
+            typedef std::vector<const Chem::Atom*>   AtomList;
+
             const Base::DataIOBase& ioBase;
             ResDictPointer          resDictionary;
             bool                    strictErrorChecking;
             MMCIFData               mmCIFData;
             std::size_t             numOutDataBlocks;
-            bool                    writeAsChemComp;
+            bool                    outputAsChemComp;
+            AtomList                atomSites;
             std::string             tmpString;
+            AtomIdSet               chemCompAtomIds[2];
         };
     } // namespace Biomol
 } // namespace CDPL
