@@ -48,14 +48,6 @@ namespace CDPL
         class DataIOBase;
     }
 
-    namespace Chem
-    {
-
-        class MolecularGraph;
-        class Atom;
-        class Bond;
-    } // namespace Chem
-
     namespace Biomol
     {
 
@@ -104,15 +96,7 @@ namespace CDPL
             long checkResidueSequenceNumber(long seq_no) const;
 
             bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
-            /*
-            long getSerialNumber(const Chem::Atom& atom) const;
-            long getResidueSequenceNumber(const Chem::Atom& atom) const;
-            char getResidueInsertionCode(const Chem::Atom& atom) const;
-            const std::string& getChainID(const Chem::Atom& atom) const;
-            bool getHeteroAtomFlag(const Chem::Atom& atom) const;
-            const std::string& getResidueCode(const Chem::Atom& atom) const;
-            const std::string& getResidueAtomName(const Chem::Atom& atom) const;
-*/
+
             typedef std::vector<const Chem::Atom*>                           AtomList;
             typedef std::vector<long>                                        AtomSerialList;
             typedef std::unordered_map<std::string, std::size_t>             RecordHistogram;
@@ -141,7 +125,6 @@ namespace CDPL
             SerialPairSet           connectedResidueLookup;
             BondSet                 conectRecordBonds;
             std::size_t             numModels;
-            //std::size_t             numWrittenModels;
         };
     } // namespace Biomol
 } // namespace CDPL
