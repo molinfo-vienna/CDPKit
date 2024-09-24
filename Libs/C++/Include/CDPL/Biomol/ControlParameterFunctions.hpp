@@ -274,6 +274,17 @@ namespace CDPL
 
         CDPL_BIOMOL_API void clearMMCIFApplyDictBondOrdersParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getMMCIFOutputBiopolymersAsChemCompParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setMMCIFOutputBiopolymersAsChemCompParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_BIOMOL_API bool hasMMCIFOutputBiopolymersAsChemCompParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearMMCIFOutputBiopolymersAsChemCompParameter(Base::ControlParameterContainer& cntnr);
+
     } // namespace Biomol
 } // namespace CDPL
 

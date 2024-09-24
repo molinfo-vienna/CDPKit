@@ -122,6 +122,11 @@ namespace CDPL
              */
             extern CDPL_BIOMOL_API const bool MMCIF_APPLY_DICT_BOND_ORDERS;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
+
         } // namespace ControlParameterDefault
     } // namespace Biomol
 } // namespace CDPL
