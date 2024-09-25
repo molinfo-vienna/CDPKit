@@ -62,6 +62,7 @@ namespace CDPL
             const bool                             MMCIF_APPLY_DICT_ATOM_BONDING                   = true;
             const bool                             MMCIF_APPLY_DICT_BOND_ORDERS                    = true;
             const bool                             MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP           = false;
+            const MMCIFDataProcessingFunction      MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION             = MMCIFDataProcessingFunction();
         }
 
         void initControlParameterDefaults() {}

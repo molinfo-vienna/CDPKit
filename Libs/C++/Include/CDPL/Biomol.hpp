@@ -43,6 +43,7 @@
 #include "CDPL/Biomol/ControlParameter.hpp"
 #include "CDPL/Biomol/ControlParameterDefault.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
+#include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"

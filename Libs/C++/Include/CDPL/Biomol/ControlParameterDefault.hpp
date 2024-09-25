@@ -33,6 +33,7 @@
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
 
 
 namespace CDPL
@@ -127,6 +128,11 @@ namespace CDPL
              */
             extern CDPL_BIOMOL_API const bool MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const MMCIFDataProcessingFunction MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION;
+            
         } // namespace ControlParameterDefault
     } // namespace Biomol
 } // namespace CDPL

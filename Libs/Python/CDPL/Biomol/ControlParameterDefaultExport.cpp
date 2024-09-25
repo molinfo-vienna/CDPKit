@@ -66,5 +66,6 @@ void CDPLPythonBiomol::exportControlParameterDefaults()
         .def_readonly("MMCIF_APPLY_DICT_ATOM_BONDING", &Biomol::ControlParameterDefault::MMCIF_APPLY_DICT_ATOM_BONDING)
         .def_readonly("MMCIF_APPLY_DICT_BOND_ORDERS", &Biomol::ControlParameterDefault::MMCIF_APPLY_DICT_BOND_ORDERS)
         .def_readonly("MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP", &Biomol::ControlParameterDefault::MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP)
+        .def_readonly("MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION", &Biomol::ControlParameterDefault::MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION)
         ;
 }

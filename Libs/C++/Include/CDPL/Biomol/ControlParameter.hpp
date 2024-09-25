@@ -145,6 +145,11 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const Base::LookupKey MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION;
             
         } // namespace ControlParameter
     } // namespace Biomol

@@ -1,5 +1,5 @@
 /* 
- * FunctionWrapperExport.cpp 
+ * MMCIFDataProcessingFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,23 +21,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of a generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
+ */
 
-#include <string>
+#ifndef CDPL_BIOMOL_MMCIFDATAPROCESSINGFUNCTION_HPP
+#define CDPL_BIOMOL_MMCIFDATAPROCESSINGFUNCTION_HPP
 
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
-#include "CDPL/Biomol/MMCIFData.hpp"
-
-#include "Base/FunctionWrapperExport.hpp"
-
-#include "ClassExports.hpp"
+#include <functional>
 
 
-void CDPLPythonBiomol::exportFunctionWrappers()
+namespace CDPL
 {
-    using namespace CDPL;
 
-    CDPLPythonBase::Function1Export<Chem::MolecularGraph::SharedPointer(const std::string&)>("MolecularGraphPointerStringFunctor");
+    namespace Chem
+    {
 
-    CDPLPythonBase::Function2Export<void(Biomol::MMCIFData&, const Chem::MolecularGraph&)>("MMCIFDataProcessingFunction");
-}
+        class MolecularGraph;
+    }
+    
+    namespace Biomol
+    {
+
+        class MMCIFData;
+        
+        /**
+         * \brief A generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
+         */
+        typedef std::function<void(Biomol::MMCIFData&, const Chem::MolecularGraph&)> MMCIFDataProcessingFunction;
+    } // namespace Biomol
+} // namespace CDPL
+
+#endif // CDPL_BIOMOL_MMCIFDATAPROCESSINGFUNCTION_HPP

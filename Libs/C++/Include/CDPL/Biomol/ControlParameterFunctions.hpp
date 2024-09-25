@@ -31,6 +31,7 @@
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
 
 
 namespace CDPL
@@ -284,6 +285,17 @@ namespace CDPL
         CDPL_BIOMOL_API bool hasMMCIFOutputBiopolymersAsChemCompParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void clearMMCIFOutputBiopolymersAsChemCompParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API const MMCIFDataProcessingFunction& getMMCIFOutputDataPostprocFunctionParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void setMMCIFOutputDataPostprocFunctionParameter(Base::ControlParameterContainer& cntnr, const MMCIFDataProcessingFunction& func);
+
+        CDPL_BIOMOL_API bool hasMMCIFOutputDataPostprocFunctionParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_BIOMOL_API void clearMMCIFOutputDataPostprocFunctionParameter(Base::ControlParameterContainer& cntnr);
 
     } // namespace Biomol
 } // namespace CDPL

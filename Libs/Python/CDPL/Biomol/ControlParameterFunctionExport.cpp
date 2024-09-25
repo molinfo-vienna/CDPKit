@@ -84,6 +84,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MMCIFApplyDictAtomBonding)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MMCIFApplyDictBondOrders)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MMCIFOutputBiopolymersAsChemComp)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Biomol::MMCIFDataProcessingFunction&, MMCIFOutputDataPostprocFunction)
 }
 
 
@@ -117,4 +118,5 @@ void CDPLPythonBiomol::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(MMCIFApplyDictAtomBonding, apply)
     EXPORT_CONTROL_PARAM_FUNCS(MMCIFApplyDictBondOrders, apply)
     EXPORT_CONTROL_PARAM_FUNCS(MMCIFOutputBiopolymersAsChemComp, output)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(MMCIFOutputDataPostprocFunction, func)
 }
