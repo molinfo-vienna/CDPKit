@@ -87,6 +87,9 @@ bool Biomol::MMCIFDataWriter::writeMolecularGraph(std::ostream& os, const Chem::
     if (outputAsChemComp || !genMacromoleculeData(molgraph))
         genChemCompData(molgraph);
 
+    if (dataPostprocFunc)
+        dataPostprocFunc(mmCIFData, molgraph);
+    
     return (os << mmCIFData).good();
 }
 
@@ -94,6 +97,7 @@ void Biomol::MMCIFDataWriter::init(std::ostream& os)
 {
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
     resDictionary       = getResidueDictionaryParameter(ioBase);
+    dataPostprocFunc    = getMMCIFOutputDataPostprocFunctionParameter(ioBase);
     outputAsChemComp    = getMMCIFOutputBiopolymersAsChemCompParameter(ioBase);
 
     mmCIFData.clear();

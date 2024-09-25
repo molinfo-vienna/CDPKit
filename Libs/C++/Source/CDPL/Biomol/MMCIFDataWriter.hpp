@@ -31,6 +31,8 @@
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
+
 #include "CDPL/Internal/StringUtilities.hpp"
 
 
@@ -79,15 +81,16 @@ namespace CDPL
             typedef ResidueDictionary::SharedPointer ResDictPointer;
             typedef std::vector<const Chem::Atom*>   AtomList;
 
-            const Base::DataIOBase& ioBase;
-            ResDictPointer          resDictionary;
-            bool                    strictErrorChecking;
-            MMCIFData               mmCIFData;
-            std::size_t             numOutDataBlocks;
-            bool                    outputAsChemComp;
-            AtomList                atomSites;
-            std::string             tmpString;
-            AtomIdSet               chemCompAtomIds[2];
+            const Base::DataIOBase&     ioBase;
+            ResDictPointer              resDictionary;
+            MMCIFDataProcessingFunction dataPostprocFunc;
+            bool                        strictErrorChecking;
+            MMCIFData                   mmCIFData;
+            std::size_t                 numOutDataBlocks;
+            bool                        outputAsChemComp;
+            AtomList                    atomSites;
+            std::string                 tmpString;
+            AtomIdSet                   chemCompAtomIds[2];
         };
     } // namespace Biomol
 } // namespace CDPL
