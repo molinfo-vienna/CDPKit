@@ -97,6 +97,8 @@ namespace CDPL
 
             bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
 
+            const ResidueDictionary& getResidueDictionary() const;
+            
             typedef std::vector<const Chem::Atom*>                           AtomList;
             typedef std::vector<long>                                        AtomSerialList;
             typedef std::unordered_map<std::string, std::size_t>             RecordHistogram;

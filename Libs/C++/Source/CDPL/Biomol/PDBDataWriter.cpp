@@ -90,6 +90,13 @@ namespace
         return false;
     }
 
+    inline long getResidueId(const Chem::Atom& atom)
+    {
+        using namespace Biomol;
+        
+        return (getResidueSequenceNumber(atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(atom));
+    }
+    
     const std::string DEF_RESIDUE_CODE = "UNL";
     const std::string DEF_CHAIN_ID     = "A";
 }
@@ -166,7 +173,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 
     for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {
         const Atom* first_atom = *it;
-        long res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
+        long res_id = getResidueId(*first_atom);
         const std::string& res_code = getResidueCode(*first_atom);
 
         atomToResidueSerialMap[first_atom] = res_serial; 
@@ -178,7 +185,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
             if (next_res_code != res_code)
                 break;
 
-            long next_res_id = (getResidueSequenceNumber(*next_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
+            long next_res_id = getResidueId(*next_atom);
 
             if (next_res_id != res_id)
                 break;
@@ -214,7 +221,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
     if (!writeConectRecords)
         return;
 
-    ResDictPointer res_dict = (resDictionary ? resDictionary : ResidueDictionary::get());
+    auto& res_dict = getResidueDictionary();
 
     for (Chem::MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
@@ -250,14 +257,14 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
         }
 
         if (res_serial1 == res_serial2) {
-            MolecularGraph::SharedPointer tmplt = res_dict->getStructure(res_code1);
+            auto tmplt = res_dict.getStructure(res_code1);
 
             if (tmplt && isStandardBond(bond, *tmplt))
                 continue;
 
         } else if (std::abs(res_serial1 - res_serial2) == 1) {
-            MolecularGraph::SharedPointer tmplt1 = res_dict->getStructure(res_code1);
-            MolecularGraph::SharedPointer tmplt2 = res_dict->getStructure(res_code2);
+            auto tmplt1 = res_dict.getStructure(res_code1);
+            auto tmplt2 = res_dict.getStructure(res_code2);
 
             if (tmplt1 && tmplt2 && isLinkingAtom(atom1, *tmplt1) && isLinkingAtom(atom2, *tmplt2))
                 continue;
@@ -800,4 +807,12 @@ bool Biomol::PDBDataWriter::atomOrderingFunc(const Chem::Atom* atom1, const Chem
         return false;
 
     return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
+}
+
+const Biomol::ResidueDictionary& Biomol::PDBDataWriter::getResidueDictionary() const
+{
+    if (resDictionary)
+        return *resDictionary->get();
+
+    return *ResidueDictionary::get();
 }

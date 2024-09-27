@@ -100,6 +100,8 @@ namespace CDPL
             const Chem::Atom*  getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
             const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
+            const ResidueDictionary& getResidueDictionary() const;
+            
             typedef std::vector<Chem::Atom*>                                                AtomList;
             typedef std::unordered_map<std::string, std::size_t>                            RecordHistogram;
             typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
