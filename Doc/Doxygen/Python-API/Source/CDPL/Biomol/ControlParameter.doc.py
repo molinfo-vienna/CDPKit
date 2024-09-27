@@ -146,3 +146,13 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     MMCIF_APPLY_DICT_BOND_ORDERS = CDPL.Base.LookupKey('MMCIF_APPLY_DICT_BOND_ORDERS')
+
+    ##
+    # \brief 
+    #
+    MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP = CDPL.Base.LookupKey('MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP')
+
+    ##
+    # \brief 
+    #
+    MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION = CDPL.Base.LookupKey('MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION')

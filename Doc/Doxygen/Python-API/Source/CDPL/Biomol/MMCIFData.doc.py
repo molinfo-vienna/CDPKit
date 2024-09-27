@@ -387,9 +387,10 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief 
     # \param name 
+    # \param front 
     # \return 
     #
-    def addCategory(name: str) -> Category: pass
+    def addCategory(name: str, front: bool = False) -> Category: pass
 
     ##
     # \brief 

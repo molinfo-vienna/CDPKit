@@ -77,6 +77,11 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
+    ENTITY_ID = CDPL.Base.LookupKey('ENTITY_ID')
+
+    ##
+    # \brief 
+    #
     MODEL_NUMBER = CDPL.Base.LookupKey('MODEL_NUMBER')
 
     ##

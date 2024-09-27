@@ -138,3 +138,13 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief 
     #
     MMCIF_APPLY_DICT_BOND_ORDERS = True
+
+    ##
+    # \brief 
+    #
+    MMCIF_OUTPUT_BIOPOLYMERS_AS_CHEM_COMP = False
+
+    ##
+    # \brief 
+    #
+    MMCIF_OUTPUT_DATA_POSTPROC_FUNCTION = _HIDDEN_VALUE_

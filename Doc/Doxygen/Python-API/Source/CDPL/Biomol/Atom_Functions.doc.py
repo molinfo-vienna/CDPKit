@@ -77,6 +77,33 @@ def setAltLocationID(atom: Chem.Atom, id: str) -> None: pass
 # \brief 
 # \param atom 
 #
+def clearEntityID(atom: Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasEntityID(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getEntityID(atom: Chem.Atom) -> str: pass
+
+##
+# \brief 
+# \param atom 
+# \param id 
+#
+def setEntityID(atom: Chem.Atom, id: str) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
 def clearResidueCode(atom: Chem.Atom) -> None: pass
 
 ##

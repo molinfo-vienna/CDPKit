@@ -224,18 +224,18 @@ class ResidueDictionary(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
     def getReplacedCode(code: str) -> str: pass
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
     def getReplacedByCode(code: str) -> str: pass
 
     ##
@@ -244,14 +244,22 @@ class ResidueDictionary(Boost.Python.instance):
     # \return 
     #
     @staticmethod
+    def getSingleLetterCode(code: str) -> str: pass
+
+    ##
+    # \brief 
+    # \param arg1 
+    # \param code 
+    # \return 
+    #
     def isObsolete(code: str) -> bool: pass
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
     def getName(code: str) -> str: pass
 
     ##
@@ -264,18 +272,18 @@ class ResidueDictionary(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
     def getType(code: str) -> int: pass
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
     def getStructure(code: str) -> Chem.MolecularGraph: pass
 
     objectID = property(getObjectID)

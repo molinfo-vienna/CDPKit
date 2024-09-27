@@ -185,6 +185,60 @@ def setPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer, ver: int
 # \brief 
 # \param cntnr 
 #
+def clearMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer) -> MMCIFDataProcessingFunction: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param func 
+#
+def setMMCIFOutputDataPostprocFunctionParameter(cntnr: Base.ControlParameterContainer, func: MMCIFDataProcessingFunction) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
