@@ -1,8 +1,9 @@
 master:
 
- - Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol because they are now also
-   used by the mmCIF data I/O code
- - Added new control-parameters and associated functions in namespace Biomol for mmCIF data I/O
+ - Added static method to class Biomol::ResidueDictionary for the lookup of amino acid single letter codes
+ - Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol for their
+   future dual-use by the mmCIF data I/O code
+ - Added new control-parameters, atom properties and associated functions to namespace Biomol
  - Updated embedded MessagePack library to version 6.1.1
  - Updated embedded SQLite3 database to version 3.46.1
  - Updated embedded MMTF library to version 1.1.0
