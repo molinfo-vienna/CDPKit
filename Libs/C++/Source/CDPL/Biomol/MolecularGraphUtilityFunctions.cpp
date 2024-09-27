@@ -211,8 +211,11 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
                 setResidueCode(atom, getResidueCode(prnt_atom));
 
             if (flags & AtomPropertyFlag::MODEL_NUMBER)
-                setModelNumber(atom, getModelNumber(prnt_atom));
-
+				if (hasModelNumber(prnt_atom))
+					setModelNumber(atom, getModelNumber(prnt_atom));
+				else
+					clearModelNumber(atom);
+			
             if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO)
                 setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
 
@@ -220,22 +223,25 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
                 setChainID(atom, getChainID(prnt_atom));
 
             if (flags & AtomPropertyFlag::RESIDUE_INS_CODE)
-                setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
-
+				if (hasResidueInsertionCode(prnt_atom))
+					setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
+				else
+					clearResidueInsertionCode(atom);
+			
         } else {
-            if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom))
+            if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom) && hasResidueCode(prnt_atom))
                 setResidueCode(atom, getResidueCode(prnt_atom));
 
-            if ((flags & AtomPropertyFlag::MODEL_NUMBER) && !hasModelNumber(atom))
+            if ((flags & AtomPropertyFlag::MODEL_NUMBER) && !hasModelNumber(atom) && hasModelNumber(prnt_atom))
                 setModelNumber(atom, getModelNumber(prnt_atom));
 
-            if ((flags & AtomPropertyFlag::RESIDUE_SEQ_NO) && !hasResidueSequenceNumber(atom))
+            if ((flags & AtomPropertyFlag::RESIDUE_SEQ_NO) && !hasResidueSequenceNumber(atom) && hasResidueSequenceNumber(prnt_atom))
                 setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
 
-            if ((flags & AtomPropertyFlag::CHAIN_ID) && !hasChainID(atom))
+            if ((flags & AtomPropertyFlag::CHAIN_ID) && !hasChainID(atom) && hasChainID(prnt_atom))
                 setChainID(atom, getChainID(prnt_atom));
 
-            if ((flags & AtomPropertyFlag::RESIDUE_INS_CODE) && !hasResidueInsertionCode(atom))
+            if ((flags & AtomPropertyFlag::RESIDUE_INS_CODE) && !hasResidueInsertionCode(atom) && hasResidueInsertionCode(prnt_atom))
                 setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
         }
     }
