@@ -70,6 +70,41 @@ namespace CDPL
                 }
             } // namespace Entry
 
+            namespace Entity
+            {
+
+                const std::string NAME = "entity";
+
+                namespace Item
+                {
+
+                    const std::string ID                 = "id";
+                    const std::string DETAILS            = "details";
+                    const std::string FORMULA_WEIGHT     = "formula_weight";
+                    const std::string SRC_METHOD         = "src_method";
+                    const std::string TYPE               = "type";
+                    const std::string PDBX_NUM_MOLECULES = "pdbx_number_of_molecules";
+                    const std::string PDBX_DESCRIPTION   = "pdbx_description";
+                } // namespace Item
+
+                namespace Type
+                {
+                    const std::string NON_POLYMER = "non-polymer";
+                    const std::string POLYMER     = "polymer";
+                    const std::string WATER       = "water";
+                    const std::string MACROLIDE   = "macrolide";
+                    const std::string BRANCHED    = "branched";
+                } // namespace Type
+
+                namespace Source
+                {
+
+                    const std::string MANIPULATED = "man";
+                    const std::string NATURAL     = "nat";
+                    const std::string SYNTHETIC   = "syn";
+                } // namespace Source
+            }
+            
             namespace AtomSite
             {
 
@@ -106,7 +141,7 @@ namespace CDPL
 
                     const std::string ATOM     = "ATOM";
                     const std::string HET_ATOM = "HETATM";
-                } // namespace StereoConfig
+                } // namespace PDBGroup
             } // namespace AtomSite
 
             namespace StructConn
@@ -159,7 +194,7 @@ namespace CDPL
                     const std::string MISMAT           = "mismat";           // mismatched base pairs
                     const std::string MODRES           = "modres";           // covalent residue modification
                     const std::string SALTBR           = "saltbr";           // ionic interaction
-                } // namespace ConnType
+                } // namespace Type
             } // namespace StructConn
 
             namespace ChemComp

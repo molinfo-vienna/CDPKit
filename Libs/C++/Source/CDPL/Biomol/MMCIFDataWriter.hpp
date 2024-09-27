@@ -27,12 +27,15 @@
 
 #include <iosfwd>
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
+#include <utility>
+
+#include <boost/ptr_container/ptr_vector.hpp>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/MMCIFDataProcessingFunction.hpp"
-
 #include "CDPL/Internal/StringUtilities.hpp"
 
 
@@ -44,7 +47,7 @@ namespace CDPL
 
         class DataIOBase;
     }
-
+    
     namespace Biomol
     {
 
@@ -52,8 +55,7 @@ namespace CDPL
         {
 
           public:
-            MMCIFDataWriter(const Base::DataIOBase& io_base):
-                ioBase(io_base), numOutDataBlocks(0) {}
+            MMCIFDataWriter(const Base::DataIOBase& io_base);
 
             bool writeMolecularGraph(std::ostream& os, const Chem::MolecularGraph& molgraph);
 
@@ -61,16 +63,32 @@ namespace CDPL
             typedef std::unordered_set<const std::string*,
                                        Internal::StringPtrHashFunc,
                                        Internal::StringPtrCmpFunc>  AtomIdSet;
+            struct ChemComp;
             
             void init(std::ostream& os);
 
-            bool genMacromoleculeData(const Chem::MolecularGraph& molgraph);
-            bool genAtomSiteData(const Chem::MolecularGraph& molgraph);
-    
-            void genChemCompData(const Chem::MolecularGraph& molgraph);
-            void genChemCompAtomsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
-            void genChemCompBondsData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
+            bool outputMacromoleculeData(const Chem::MolecularGraph& molgraph);
+            void outputEntryData();
+            void outputEntityData();
+            void outputAtomSiteData(const Chem::MolecularGraph& molgraph);
+            void outputMacromoleculeCompData();
+            void outputMacromoleculeCompAtomData();
+            void outputMacromoleculeCompBondData();
+            
+            bool prepAtomSiteData(const Chem::MolecularGraph& molgraph);
+            void prepEntityData(const Chem::MolecularGraph& molgraph);
+            void prepMacromoleculeCompData(const Chem::MolecularGraph& molgraph);
+            
+            void getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no);
+            
+            void outputChemCompData(const Chem::MolecularGraph& molgraph);
+            void outputChemCompAtomData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
+            void outputChemCompBondData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
 
+            const ResidueDictionary& getResidueDictionary() const;
+
+            ChemComp& getChemCompData(const std::string& comp_id);
+            
             std::string getChemCompId(const Chem::MolecularGraph& molgraph);
             
             void setDataBlockId(const Chem::MolecularGraph& molgraph);
@@ -78,9 +96,89 @@ namespace CDPL
             const std::string& createUniqueAtomId(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
                                                   const AtomIdSet& id_set, std::string& id) const;
 
-            typedef ResidueDictionary::SharedPointer ResDictPointer;
-            typedef std::vector<const Chem::Atom*>   AtomList;
+            typedef std::vector<const std::string*> StringPtrList;
 
+            struct Entity
+            {
+
+                std::size_t   id{0};
+                std::size_t   modelNo{0};
+                std::size_t   count{1};
+                double        weight{0.0};
+                std::string   type;
+                std::string   srcMethod;
+                std::string   descr;
+                StringPtrList resSequence;
+            };
+
+            struct ChemComp
+            {
+                
+                struct Atom
+                {
+
+                    Atom(const std::string* id, unsigned int type, unsigned int config, int aromatic):
+                        id(id), type(type), config(config), aromatic(aromatic)
+                    {}
+
+                    const std::string* id;
+                    unsigned int       type;
+                    unsigned int       config;
+                    int                aromatic;
+                };
+                
+                struct Bond
+                {
+
+                    Bond(const std::string* atom_1_id, const std::string* atom_2_id, std::size_t order,
+                         unsigned int config, int aromatic):
+                        atom1Id(atom_1_id), atom2Id(atom_2_id), order(order), config(config), aromatic(aromatic)
+                    {}
+
+                    const std::string* atom1Id;
+                    const std::string* atom2Id;
+                    std::size_t        order;
+                    unsigned int       config;
+                    int                aromatic;
+                };
+
+                void addAtom(const Chem::Atom& atom);
+                void addBond(const Chem::Bond& bond);
+                
+                typedef std::pair<const std::string*, const std::string*> BondID;
+
+                struct BondIDHashFunc
+                {
+
+                    std::size_t operator()(const BondID& bond_id) const;
+                };
+
+                struct BondIDCmpFunc
+                {
+
+                    bool operator()(const BondID& bond_id1, const BondID& bond_id2) const;
+                };
+                
+                typedef std::unordered_set<BondID,
+                                           BondIDHashFunc, BondIDCmpFunc> BondIdSet;
+                typedef std::vector<Atom>                                 AtomList;
+                typedef std::vector<Bond>                                 BondList;
+                typedef std::unique_ptr<ChemComp>                         Pointer;
+                
+                AtomList    atoms;
+                AtomIdSet   atomIds;
+                BondList    bonds;
+                BondIdSet   bondIds;
+            };
+
+            typedef boost::ptr_vector<Entity>                           EntityList;
+            typedef std::unordered_map<std::string, ChemComp::Pointer,
+                                       Internal::CIStringHashFunc,
+                                       Internal::CIStringCmpFunc>       ChemCompDictionary;
+            typedef ResidueDictionary::SharedPointer                    ResDictPointer;
+            typedef std::vector<const Chem::Atom*>                      AtomList;
+            typedef std::vector<std::size_t>                            UIntArray;
+            
             const Base::DataIOBase&     ioBase;
             ResDictPointer              resDictionary;
             MMCIFDataProcessingFunction dataPostprocFunc;
@@ -89,8 +187,13 @@ namespace CDPL
             std::size_t                 numOutDataBlocks;
             bool                        outputAsChemComp;
             AtomList                    atomSites;
-            std::string                 tmpString;
+            ChemCompDictionary          chemCompDict;
+            EntityList                  entities;
+            AtomList                    entityAtoms;
+            StringPtrList               entityResSequence;
+            UIntArray                   atomEntityIds;
             AtomIdSet                   chemCompAtomIds[2];
+            std::string                 tmpString;
         };
     } // namespace Biomol
 } // namespace CDPL

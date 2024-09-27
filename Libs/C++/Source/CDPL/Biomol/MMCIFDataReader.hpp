@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <set>
 #include <utility>
+#include <memory>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
@@ -120,7 +121,7 @@ namespace CDPL
 
             typedef std::pair<const std::string*, const std::string*> ChemCompAtomID;
 
-            struct ChemCompAtomIDHash
+            struct ChemCompAtomIDHashFunc
             {
 
                 std::size_t operator()(const ChemCompAtomID& atom_id) const;
@@ -161,17 +162,16 @@ namespace CDPL
                     std::size_t order;
                 };
 
-                ChemComp& clear();
-              
                 bool hasAtom(const std::string& id) const;
 
                 std::size_t getBondOrder(const std::string& atom_1_id, const std::string& atom_2_id) const;
 
                 operator bool() const;
 
-                typedef std::vector<Atom>     AtomList;
-                typedef std::vector<Bond>     BondList;
-                typedef std::set<std::size_t> LinkAtomSet;
+                typedef std::unique_ptr<ChemComp> Pointer;
+                typedef std::vector<Atom>         AtomList;
+                typedef std::vector<Bond>         BondList;
+                typedef std::set<std::size_t>     LinkAtomSet;
 
                 AtomList    atoms;
                 BondList    bonds;
@@ -179,10 +179,9 @@ namespace CDPL
             };
 
             typedef std::unordered_map<ChemCompAtomID, std::size_t,
-                                       ChemCompAtomIDHash,
+                                       ChemCompAtomIDHashFunc,
                                        ChemCompAtomIDCmpFunc>           ChemCompAtomLookupMap;
-            typedef std::vector<ChemComp>                               ChemCompList;
-            typedef std::unordered_map<std::string, std::size_t,
+            typedef std::unordered_map<std::string, ChemComp::Pointer,
                                        Internal::CIStringHashFunc,
                                        Internal::CIStringCmpFunc>       ChemCompDictionary;
             typedef std::vector<Chem::Atom*>                            AtomList;
@@ -207,9 +206,7 @@ namespace CDPL
             bool                    perceiveOrders;
             bool                    combInterferingResCoords;
             ChemCompAtomLookupMap   chemCompAtomLookupMap;
-            ChemCompList            chemCompList;
             ChemCompDictionary      chemCompDict;
-            std::size_t             chemCompCount;
             std::size_t             startAtomCount;
             std::size_t             startBondCount;
             AtomIndexPairList       atomSites;

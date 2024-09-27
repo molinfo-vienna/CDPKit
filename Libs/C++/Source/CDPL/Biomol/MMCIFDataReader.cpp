@@ -205,6 +205,13 @@ namespace
 
         return item2;
     }
+
+    inline long getResidueId(const Chem::Atom& atom)
+    {
+        using namespace Biomol;
+        
+        return (getResidueSequenceNumber(atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(atom));
+    }
     
     constexpr double MIN_BOND_LENGTH       = 0.4;
     constexpr double BOND_LENGTH_TOLERANCE = 0.4;
@@ -219,15 +226,6 @@ enum Biomol::MMCIFDataReader::Token : int
     TEXT_FIELD
 };
 
-
-Biomol::MMCIFDataReader::ChemComp& Biomol::MMCIFDataReader::ChemComp::clear()
-{
-    atoms.clear();
-    bonds.clear();
-    linkAtoms.clear();
-
-    return *this;
-}
 
 bool Biomol::MMCIFDataReader::ChemComp::hasAtom(const std::string& id) const
 {
@@ -270,7 +268,7 @@ Biomol::MMCIFDataReader::ChemComp::operator bool() const
 }
 
 
-std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHash::operator()(const ChemCompAtomID& atom_id) const
+std::size_t Biomol::MMCIFDataReader::ChemCompAtomIDHashFunc::operator()(const ChemCompAtomID& atom_id) const
 {
     static const Internal::CIStringPtrHashFunc ci_str_ptr_hash_func;
 
@@ -395,8 +393,6 @@ void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
 
     chemCompAtomLookupMap.clear();
     chemCompDict.clear();
-
-    chemCompCount = 0;
     
     auto comp_atoms = data.findCategory(ChemCompAtom::NAME);
 
@@ -536,7 +532,7 @@ void Biomol::MMCIFDataReader::procChemCompBonds(const MMCIFData& data)
         } else
             order = 1;
 
-        auto& comp = chemCompList[it->second];
+        auto& comp = *it->second;
         auto atom_1_idx = it1->second;
         auto atom_2_idx = it2->second;
                           
@@ -703,7 +699,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
 
     for (auto as_it = atomSites.begin(), as_end = atomSites.end(); as_it != as_end; ) {
         auto first_atom = as_it->first;
-        auto res_id = getResidueSequenceNumber(*first_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
+        auto res_id = getResidueId(*first_atom);
         auto& res_code = getResidueCode(*first_atom);
         auto& chain_id = getChainID(*first_atom);
 
@@ -725,7 +721,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
             if (!Internal::isEqualCI(next_res_code, res_code))
                 break;
 
-            auto next_res_id = getResidueSequenceNumber(*next_atom) * (1 << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
+            auto next_res_id = getResidueId(*next_atom);
 
             if (next_res_id != res_id)
                 break;
@@ -1168,7 +1164,7 @@ const Biomol::ResidueDictionary& Biomol::MMCIFDataReader::getResidueDictionary()
     if (resDictionary)
         return *resDictionary->get();
 
-    return *resDictionary;
+    return *ResidueDictionary::get();
 }
 
 void Biomol::MMCIFDataReader::getMissingChemCompLinkAtomsFromResDictStructs()
@@ -1176,7 +1172,7 @@ void Biomol::MMCIFDataReader::getMissingChemCompLinkAtomsFromResDictStructs()
     auto& res_dict = getResidueDictionary();
     
     for (auto& ce : chemCompDict) {
-        auto& comp = chemCompList[ce.second];
+        auto& comp = *ce.second;
 
         if (!comp.linkAtoms.empty())
             continue;
@@ -1231,23 +1227,12 @@ void Biomol::MMCIFDataReader::setupChemCompDataFromResDictStruct(ChemComp& chem_
 
 Biomol::MMCIFDataReader::ChemComp& Biomol::MMCIFDataReader::getOrAddChemCompData(const std::string& comp_id)
 {
-    auto it = chemCompDict.find(comp_id);
+    auto& comp_ptr = chemCompDict[comp_id];
 
-    if (it == chemCompDict.end()) {
-        assert(chemCompCount <= chemCompList.size());
-
-        chemCompDict.emplace(comp_id, chemCompCount);
-
-        if (chemCompCount == chemCompList.size()) {
-            chemCompList.resize(++chemCompCount);
-
-            return chemCompList.back();
-        }
-
-        return chemCompList[chemCompCount++].clear();
-    }
-
-    return chemCompList[it->second];
+    if (!comp_ptr)
+        comp_ptr.reset(new ChemComp());
+  
+    return *comp_ptr;
 }
 
 Biomol::MMCIFDataReader::ChemComp& Biomol::MMCIFDataReader::getChemCompData(const std::string& comp_id)
