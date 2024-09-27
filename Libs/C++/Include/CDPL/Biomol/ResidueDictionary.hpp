@@ -111,6 +111,10 @@ namespace CDPL
                                               EntryLookupTable::const_iterator>
                 ConstEntryIterator;
 
+            static const std::string& getSingleLetterCode(const std::string& code);
+           
+            static bool isStdResidue(const std::string& code);
+            
             void addEntry(const Entry& entry);
 
             bool containsEntry(const std::string& code) const;
@@ -131,25 +135,23 @@ namespace CDPL
 
             ConstEntryIterator end() const;
 
+            const std::string& getReplacedCode(const std::string& code) const;
+
+            const std::string& getReplacedByCode(const std::string& code) const;
+
+            bool isObsolete(const std::string& code) const;
+
+            const std::string& getName(const std::string& code) const;
+
+            unsigned int getType(const std::string& code) const;
+
+            Chem::MolecularGraph::SharedPointer getStructure(const std::string& code) const;
+            
             void loadDefaults();
 
             static void set(const SharedPointer& dict);
 
             static const SharedPointer& get();
-
-            static const std::string& getReplacedCode(const std::string& code);
-
-            static const std::string& getReplacedByCode(const std::string& code);
-
-            static bool isObsolete(const std::string& code);
-
-            static const std::string& getName(const std::string& code);
-
-            static bool isStdResidue(const std::string& code);
-
-            static unsigned int getType(const std::string& code);
-
-            static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
 
           private:
             static SharedPointer defaultDict;

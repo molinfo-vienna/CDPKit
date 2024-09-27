@@ -51,12 +51,15 @@ namespace
 {
 
     typedef std::unordered_set<std::string, Internal::CIStringHashFunc, Internal::CIStringCmpFunc>  StdResidueSet;
+    typedef std::unordered_map<std::string, std::string,
+                               Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               SingleLetterCodeMap;
     typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*,
                                Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               ResCodeToDataEntryMap;
     typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer,
                                Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               StructureCache;
 
     StdResidueSet                            stdResidueSet;
+    SingleLetterCodeMap                      singleLetterCodeMap;
     ResCodeToDataEntryMap                    resCodeToDataEntryMap;
     StructureCache                           resStructureCache;
     Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
@@ -67,18 +70,54 @@ namespace
 
     const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
-    const char* stdResidueList[] = { "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
-                                     "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
-                                     "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
-                                     "ASX", "GLX", "N",   "DA",  "DC",  "DG",  "DI",  "DU",
-                                     "DT",  "A",   "C",   "G",   "I",   "U" };
+    const char* stdResidues[] =
+    { "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
+      "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
+      "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
+      "ASX", "GLX", "N",   "DA",  "DC",  "DG",  "DI",  "DU",
+      "DT",  "A",   "C",   "G",   "I",   "U"
+    };
+
+    const char* singleLetterCodes[][2] =
+    { { "ALA", "A" },
+      { "ARG", "R" },
+      { "ASN", "N" },
+      { "ASP", "D" },
+      { "CYS", "C" },
+      { "GLN", "Q" },
+      { "GLU", "E" },
+      { "GLY", "G" },
+      { "HIS", "H" },
+      { "ILE", "I" },
+      { "LEU", "L" },
+      { "LYS", "K" },
+      { "MET", "M" },
+      { "PHE", "F" },
+      { "PRO", "P" },
+      { "SER", "S" },
+      { "THR", "T" },
+      { "TRP", "W" },
+      { "TYR", "Y" },
+      { "VAL", "V" },
+      { "A", "A" },
+      { "C", "C" },
+      { "G", "G" },
+      { "I", "I" },
+      { "U", "U" }
+    };
+
+    const std::string NO_SINGLE_LETTER_CODE;
+
     struct Init
     {
 
         Init()
         {
-            stdResidueSet.insert(&stdResidueList[0],
-                                 &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
+            stdResidueSet.insert(&stdResidues[0],
+                                 &stdResidues[sizeof(stdResidues) / sizeof(const char*)]);
+
+            for (auto& p : singleLetterCodes) 
+                singleLetterCodeMap.emplace(p[0], p[1]);
         }
 
     } init;
@@ -320,44 +359,54 @@ bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)
     return (stdResidueSet.find(code) != stdResidueSet.end());
 }
 
-unsigned int Biomol::ResidueDictionary::getType(const std::string& code)
+unsigned int Biomol::ResidueDictionary::getType(const std::string& code) const
 {
-    const Entry& entry = get()->getEntry(code);
+    const Entry& entry = getEntry(code);
 
     return entry.getType();
 }
 
-const std::string& Biomol::ResidueDictionary::getName(const std::string& code)
+const std::string& Biomol::ResidueDictionary::getName(const std::string& code) const
 {
-    const Entry& entry = get()->getEntry(code);
+    const Entry& entry = getEntry(code);
 
     return entry.getName();
 }
 
-Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::getStructure(const std::string& code)
+Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::getStructure(const std::string& code) const
 {
-    const Entry& entry = get()->getEntry(code);
+    const Entry& entry = getEntry(code);
 
     return entry.getStructure();
 }
 
-const std::string& Biomol::ResidueDictionary::getReplacedCode(const std::string& code)
+const std::string& Biomol::ResidueDictionary::getReplacedCode(const std::string& code) const
 {
-    const Entry& entry = get()->getEntry(code);
+    const Entry& entry = getEntry(code);
 
     return entry.getReplacedCode();
 }
 
-const std::string& Biomol::ResidueDictionary::getReplacedByCode(const std::string& code)
+const std::string& Biomol::ResidueDictionary::getReplacedByCode(const std::string& code) const
 {
-    const Entry& entry = get()->getEntry(code);
+    const Entry& entry = getEntry(code);
 
     return entry.getReplacedByCode();
 }
 
-bool Biomol::ResidueDictionary::isObsolete(const std::string& code)
+const std::string& Biomol::ResidueDictionary::getSingleLetterCode(const std::string& code)
 {
-    const Entry& entry = get()->getEntry(code);
+    auto it = singleLetterCodeMap.find(code);
+
+    if (it == singleLetterCodeMap.end())
+        return NO_SINGLE_LETTER_CODE;
+
+    return it->second;
+}
+
+bool Biomol::ResidueDictionary::isObsolete(const std::string& code) const
+{
+    const Entry& entry = getEntry(code);
 
     return entry.isObsolete();
 }

@@ -78,21 +78,18 @@ void CDPLPythonBiomol::exportResidueDictionary()
         .staticmethod("get")
         .def("getReplacedCode", &Biomol::ResidueDictionary::getReplacedCode, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
-        .staticmethod("getReplacedCode")
         .def("getReplacedByCode", &Biomol::ResidueDictionary::getReplacedByCode, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
-        .staticmethod("getReplacedByCode")
+        .def("getSingleLetterCode", &Biomol::ResidueDictionary::getSingleLetterCode, python::arg("code"),
+             python::return_value_policy<python::copy_const_reference>())
+        .staticmethod("getSingleLetterCode")
         .def("isObsolete", &Biomol::ResidueDictionary::isObsolete, python::arg("code"))
-        .staticmethod("isObsolete")
         .def("getName", &Biomol::ResidueDictionary::getName, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
-        .staticmethod("getName")
         .def("isStdResidue", &Biomol::ResidueDictionary::isStdResidue, python::arg("code"))
         .staticmethod("isStdResidue")
         .def("getType", &Biomol::ResidueDictionary::getType, python::arg("code"))
-        .staticmethod("getType")
-        .def("getStructure", &Biomol::ResidueDictionary::getStructure, python::arg("code"))
-        .staticmethod("getStructure");
+        .def("getStructure", &Biomol::ResidueDictionary::getStructure, python::arg("code"));
 
     python::class_<Biomol::ResidueDictionary::Entry>("Entry", python::no_init)
         .def(python::init<>(python::arg("self")))
