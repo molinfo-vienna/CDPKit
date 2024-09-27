@@ -128,7 +128,7 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initTargetData(const Chem::MolecularG
 {
     using namespace Pharm;
 
-    std::size_t num_atoms = tgt_env.getNumAtoms();
+    auto num_atoms = tgt_env.getNumAtoms();
 
     tgtAtomCoords.resize(num_atoms);
 
@@ -141,7 +141,7 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initTargetData(const Chem::MolecularG
     }
     
     for (std::size_t i = 0; i < num_atoms; i++) {
-        const Chem::Atom& atom = tgt_env.getAtom(i);
+        auto& atom = tgt_env.getAtom(i);
         
         tgtAtomCoords[i] = coords_func(atom);
 
@@ -161,7 +161,7 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initTargetData(const Chem::MolecularG
         ftr_ss.features.clear();
 
     for (auto& ftr : tgtPharmacophore) {
-        unsigned int ftr_type = ftrTypeFunc(ftr, false);
+        auto ftr_type = ftrTypeFunc(ftr, false);
         
         if (ftr_type > FeatureType::MAX_EXT_TYPE) // sanity check
             continue;
@@ -173,7 +173,7 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initTargetData(const Chem::MolecularG
     }
 
     for (auto& ftr_ss : tgtFtrSubsets) {
-        std::size_t num_ftrs = ftr_ss.features.size();
+        auto num_ftrs = ftr_ss.features.size();
         
         ftr_ss.ftrCoords.resize(num_ftrs);
 
@@ -209,11 +209,11 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initLigandData(const Chem::MolecularG
     ligHBDAtomMask.resize(numLigAtoms);
     ligHBDAtomMask.reset();
     
-    double total_hyd = 0.0;
-    double log_p = 0.0;
+    auto total_hyd = 0.0;
+    auto log_p = 0.0;
         
     for (std::size_t i = 0; i < numLigAtoms; i++) {
-        const Atom& atom = ligand.getAtom(i);
+        auto& atom = ligand.getAtom(i);
 
         if (getType(atom) != AtomType::H)
             ligHeavyAtoms.push_back(i);
@@ -230,7 +230,7 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initLigandData(const Chem::MolecularG
     for (auto& il : ligFtrSubsets)
         il.clear();
 
-    std::size_t num_ftrs = ligPharmacophore.getNumFeatures();
+    auto num_ftrs = ligPharmacophore.getNumFeatures();
 
     if (ligFtrWeights.size() < num_ftrs)
         ligFtrWeights.resize(num_ftrs);
@@ -241,19 +241,19 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initLigandData(const Chem::MolecularG
     ligFtrCoords.resize(num_ftrs);
     
     for (std::size_t i = 0; i < num_ftrs; i++) {
-        const Feature& ftr = ligPharmacophore.getFeature(i);
-        const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
-        unsigned int ftr_type = getType(ftr);
-        Util::BitSet* hba_hbd_mask = (ftr_type == FeatureType::H_BOND_ACCEPTOR ? &ligHBAAtomMask :
-                                      ftr_type == FeatureType::H_BOND_DONOR    ? &ligHBDAtomMask : nullptr);
+        auto& ftr = ligPharmacophore.getFeature(i);
+        auto& ftr_substruct = getSubstructure(ftr);
+        auto ftr_type = getType(ftr);
+        auto hba_hbd_mask = (ftr_type == FeatureType::H_BOND_ACCEPTOR ? &ligHBAAtomMask :
+                             ftr_type == FeatureType::H_BOND_DONOR    ? &ligHBDAtomMask : nullptr);
 
         ligFtrAtoms[i].clear();
 
-        for (const auto& atom : ftr_substruct->getAtoms()) {
+        for (auto& atom : ftr_substruct->getAtoms()) {
             if (getType(atom) == AtomType::H)
                 continue;
 
-            std::size_t atom_idx = ligand.getAtomIndex(atom);
+            auto atom_idx = ligand.getAtomIndex(atom);
             
             ligFtrAtoms[i].push_back(atom_idx);
 
@@ -277,8 +277,8 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initLigandData(const Chem::MolecularG
     }
 
     for (std::size_t i = 0, num_ftr_types = ligDescrFtrTypes.size(); i < num_ftr_types; i++) {
-        const FeatureTypeInfo& ftr_type = ligDescrFtrTypes[i];
-        const IndexList& ftrs = ligFtrSubsets[ftr_type.type];
+        auto& ftr_type = ligDescrFtrTypes[i];
+        auto& ftrs = ligFtrSubsets[ftr_type.type];
         
         if (!ftr_type.isHBD) {
             ligDescriptor.push_back(ftrs.size());
@@ -289,8 +289,8 @@ void GRAIL::GRAILDescriptorCalculatorImpl::initLigandData(const Chem::MolecularG
         std::size_t hbd_cnt = 0;
 
         for (auto ftr_idx : ftrs) {
-            const Feature& ftr = ligPharmacophore.getFeature(ftr_idx);
-            const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
+            auto& ftr = ligPharmacophore.getFeature(ftr_idx);
+            auto& ftr_substruct = getSubstructure(ftr);
 
             for (const auto& atom : ftr_substruct->getAtoms()) {
                 if (getType(atom) == AtomType::H)
@@ -332,9 +332,9 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calculate(const Math::Vector3DArray& 
 void GRAIL::GRAILDescriptorCalculatorImpl::calcLigFtrCoordinates(const Math::Vector3DArray::StorageType& atom_coords)
 {
     for (std::size_t i = 0, num_ftrs = ligFtrCoords.size(); i < num_ftrs; i++) {
-        Math::Vector3D& ftr_pos = ligFtrCoords[i];
-        const IndexList& ftr_atoms  = ligFtrAtoms[i];
-        std::size_t num_atoms = ftr_atoms.size();
+        auto& ftr_pos = ligFtrCoords[i];
+        auto& ftr_atoms  = ligFtrAtoms[i];
+        auto num_atoms = ftr_atoms.size();
         
         if (num_atoms == 0) // should never happen!
             continue;
@@ -365,9 +365,9 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calcTgtEnvHBAHBDOccupation(const Math
                                                                       bool is_hba_type, std::size_t& idx)
 {
     Pharm::HBondingInteractionScore scoring_func(is_hba_type);
-    const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[tgt_ftr_type];
-    double score_sum = 0.0;
-    double score_max = 0.0;
+    auto& tgt_ftr_ss = tgtFtrSubsets[tgt_ftr_type];
+    auto score_sum = 0.0;
+    auto score_max = 0.0;
 
     for (auto lig_atom_idx : ligHeavyAtoms) {
         if (is_hba_type) {
@@ -377,14 +377,14 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calcTgtEnvHBAHBDOccupation(const Math
         } else if (ligHBAAtomMask.test(lig_atom_idx))
             continue;
         
-        const Math::Vector3D& lig_atom_pos = atom_coords[lig_atom_idx];
-        double max_score = 0.0;
+        auto& lig_atom_pos = atom_coords[lig_atom_idx];
+        auto max_score = 0.0;
 
         tmpIndexList.clear();
         tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_atom_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
         for (auto tgt_ftr_idx : tmpIndexList) {
-            double s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
+            auto s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
 
             max_score = std::max(max_score, s);
             score_sum += s;
@@ -399,22 +399,22 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calcTgtEnvHBAHBDOccupation(const Math
 
 void GRAIL::GRAILDescriptorCalculatorImpl::calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx)
 {
-    for (const auto& func_data : ftrInteractionFuncList) {
-        const IndexList& lig_ftrs = ligFtrSubsets[func_data.ligFtrType];
-        const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[func_data.tgtFtrType];
-        double score_sum = 0.0;
-        double score_max = 0.0;
+    for (auto& func_data : ftrInteractionFuncList) {
+        auto& lig_ftrs = ligFtrSubsets[func_data.ligFtrType];
+        auto& tgt_ftr_ss = tgtFtrSubsets[func_data.tgtFtrType];
+        auto score_sum = 0.0;
+        auto score_max = 0.0;
         
         for (auto lig_ftr_idx : lig_ftrs) {
-            double lig_ftr_wt = ligFtrWeights[lig_ftr_idx];
-            const Math::Vector3D& lig_ftr_pos = ligFtrCoords[lig_ftr_idx];
-            double max_score = 0.0;
+            auto lig_ftr_wt = ligFtrWeights[lig_ftr_idx];
+            auto& lig_ftr_pos = ligFtrCoords[lig_ftr_idx];
+            auto max_score = 0.0;
             
             tmpIndexList.clear();
             tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_ftr_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
             
             for (auto tgt_ftr_idx : tmpIndexList) {
-                double s = lig_ftr_wt * (*func_data.scoringFunc)(lig_ftr_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
+                auto s = lig_ftr_wt * (*func_data.scoringFunc)(lig_ftr_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
 
                 max_score = std::max(max_score, s);
                 score_sum += s;
@@ -431,19 +431,19 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calcFeatureInteractionScores(Math::DV
 void GRAIL::GRAILDescriptorCalculatorImpl::calcElectrostaticInteractionEnergy(const Math::Vector3DArray::StorageType& atom_coords,
                                                                               Math::DVector& descr, std::size_t& idx)
 {
-    double energy           = 0.0;
-    double energy_sqrd_dist = 0.0;
+    auto energy           = 0.0;
+    auto energy_sqrd_dist = 0.0;
     
     for (std::size_t i = 0; i < numLigAtoms; i++) {
-        double la_charge = ligAtomCharges[i];
-        const Math::Vector3D& la_pos = atom_coords[i];
+        auto la_charge = ligAtomCharges[i];
+        auto& la_pos = atom_coords[i];
 
         tmpIndexList.clear();
         tgtAtomOctree->radiusNeighbors<Octree::L2Distance>(la_pos, ESTAT_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
         for (auto tgt_atom_idx : tmpIndexList) {
-            double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
-            double e = la_charge * tgtAtomCharges[tgt_atom_idx] / (r_ij * DIELECTRIC_CONST);
+            auto r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
+            auto e = la_charge * tgtAtomCharges[tgt_atom_idx] / (r_ij * DIELECTRIC_CONST);
 
             energy += e;
             energy_sqrd_dist += e / r_ij;
@@ -466,23 +466,23 @@ void GRAIL::GRAILDescriptorCalculatorImpl::calcVdWInteractionEnergy(const Math::
     const double RMIN_FACT = std::pow(2, 1.0 / 6);
     const double ALPHA     = 1.1;
 
-    double energy_att = 0.0;
-    double energy_rep = 0.0;
+    auto energy_att = 0.0;
+    auto energy_rep = 0.0;
     
     for (std::size_t i = 0; i < numLigAtoms; i++) {
-        const DoublePair& la_params = ligAtomVdWParams[i];
-        const Math::Vector3D& la_pos = atom_coords[i];
+        auto& la_params = ligAtomVdWParams[i];
+        auto& la_pos = atom_coords[i];
 
         tmpIndexList.clear();
         tgtAtomOctree->radiusNeighbors<Octree::L2Distance>(la_pos, VDW_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
         for (auto tgt_atom_idx : tmpIndexList) {
-            const DoublePair& ta_params = tgtAtomVdWParams[tgt_atom_idx];
+            auto& ta_params = tgtAtomVdWParams[tgt_atom_idx];
 
-            double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
-            double D_ij = std::sqrt(la_params.second * ta_params.second);
-            double x_ij = RMIN_FACT * std::sqrt(la_params.first * ta_params.first);
-            double r_delta = r_ij - x_ij;
+            auto r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
+            auto D_ij = std::sqrt(la_params.second * ta_params.second);
+            auto x_ij = RMIN_FACT * std::sqrt(la_params.first * ta_params.first);
+            auto r_delta = r_ij - x_ij;
 
             energy_att += -D_ij * 2 * std::exp(-ALPHA * r_delta);
             energy_rep += D_ij * std::exp(-2 * ALPHA * r_delta);
