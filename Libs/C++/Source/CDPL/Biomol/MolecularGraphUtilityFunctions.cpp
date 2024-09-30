@@ -210,11 +210,12 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
             if (flags & AtomPropertyFlag::RESIDUE_CODE)
                 setResidueCode(atom, getResidueCode(prnt_atom));
 
-            if (flags & AtomPropertyFlag::MODEL_NUMBER)
+            if (flags & AtomPropertyFlag::MODEL_NUMBER) {
 				if (hasModelNumber(prnt_atom))
 					setModelNumber(atom, getModelNumber(prnt_atom));
 				else
 					clearModelNumber(atom);
+			}
 			
             if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO)
                 setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
@@ -222,11 +223,12 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
             if (flags & AtomPropertyFlag::CHAIN_ID)
                 setChainID(atom, getChainID(prnt_atom));
 
-            if (flags & AtomPropertyFlag::RESIDUE_INS_CODE)
+            if (flags & AtomPropertyFlag::RESIDUE_INS_CODE) {
 				if (hasResidueInsertionCode(prnt_atom))
 					setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
 				else
 					clearResidueInsertionCode(atom);
+			}
 			
         } else {
             if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom) && hasResidueCode(prnt_atom))
