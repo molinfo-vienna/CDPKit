@@ -28,6 +28,7 @@
 #include <ostream>
 #include <iomanip>
 #include <locale>
+#include <utility>
 
 #include "CDPL/Biomol/MMCIFData.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -612,9 +613,22 @@ void Biomol::MMCIFData::Item::setValue(std::size_t index, const std::string& val
     values[index] = value;
 }
 
+void Biomol::MMCIFData::Item::setValue(std::size_t index, std::string&& value)
+{
+    if (index >= values.size())
+        throw Base::IndexError("MMCIFData::Item: value index out of bounds");
+
+    values[index] = std::move(value);
+}
+
 void Biomol::MMCIFData::Item::addValue(const std::string& value)
 {
-    values.push_back(value);
+    values.emplace_back(value);
+}
+
+void Biomol::MMCIFData::Item::addValue(std::string&& value)
+{
+    values.emplace_back(std::move(value));
 }
 
 Biomol::MMCIFData::Item::ValueIterator Biomol::MMCIFData::Item::removeValue(const ValueIterator& it)

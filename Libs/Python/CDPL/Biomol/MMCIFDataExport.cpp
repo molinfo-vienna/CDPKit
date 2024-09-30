@@ -81,9 +81,10 @@ void CDPLPythonBiomol::exportMMCIFData()
         .def("getValue", &Biomol::MMCIFData::Item::getValue,
              (python::arg("self"), python::arg("index")),
              python::return_value_policy<python::copy_const_reference>())
-        .def("setValue", &Biomol::MMCIFData::Item::setValue,
+        .def("setValue", static_cast<void (Biomol::MMCIFData::Item::*)(std::size_t, const std::string&)>(&Biomol::MMCIFData::Item::setValue),
              (python::arg("self"), python::arg("index"), python::arg("value")))
-        .def("addValue", &Biomol::MMCIFData::Item::addValue, (python::arg("self"), python::arg("value")))
+        .def("addValue", static_cast<void (Biomol::MMCIFData::Item::*)(const std::string&)>(&Biomol::MMCIFData::Item::addValue),
+             (python::arg("self"), python::arg("value")))
         .def("removeValue", static_cast<void (Biomol::MMCIFData::Item::*)(std::size_t)>(&Biomol::MMCIFData::Item::removeValue),
              (python::arg("self"), python::arg("index")))
         .def("__len__", &Biomol::MMCIFData::Item::getNumValues, python::arg("self"))
@@ -92,7 +93,7 @@ void CDPLPythonBiomol::exportMMCIFData()
              python::return_value_policy<python::copy_const_reference>())
         .def("__delitem__", static_cast<void (Biomol::MMCIFData::Item::*)(std::size_t)>(&Biomol::MMCIFData::Item::removeValue),
              (python::arg("self"), python::arg("index")))
-        .def("__setitem__", &Biomol::MMCIFData::Item::setValue,
+        .def("__setitem__", static_cast<void (Biomol::MMCIFData::Item::*)(std::size_t, const std::string&)>(&Biomol::MMCIFData::Item::setValue),
              (python::arg("self"), python::arg("index"), python::arg("value")))
         .add_property("numValues", &Biomol::MMCIFData::Item::getNumValues)
         .add_property("name", python::make_function(&Biomol::MMCIFData::Item::getName,

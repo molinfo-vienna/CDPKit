@@ -77,8 +77,10 @@ namespace CDPL
                 const std::string& getValue(std::size_t index) const;
 
                 void setValue(std::size_t index, const std::string& value);
+                void setValue(std::size_t index, std::string&& value);
 
                 void addValue(const std::string& value);
+                void addValue(std::string&& value);
 
                 ValueIterator removeValue(const ValueIterator& it);
 
