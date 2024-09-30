@@ -90,7 +90,7 @@ namespace
         return false;
     }
 
-    inline long getResidueId(const Chem::Atom& atom)
+    inline long getResidueID(const Chem::Atom& atom)
     {
         using namespace Biomol;
         
@@ -173,7 +173,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 
     for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {
         const Atom* first_atom = *it;
-        long res_id = getResidueId(*first_atom);
+        long res_id = getResidueID(*first_atom);
         const std::string& res_code = getResidueCode(*first_atom);
 
         atomToResidueSerialMap[first_atom] = res_serial; 
@@ -185,7 +185,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
             if (next_res_code != res_code)
                 break;
 
-            long next_res_id = getResidueId(*next_atom);
+            long next_res_id = getResidueID(*next_atom);
 
             if (next_res_id != res_id)
                 break;

@@ -91,7 +91,7 @@ namespace
         return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Biomol::PDB::END_OF_LINE);
     }
 
-    inline long getResidueId(const Chem::Atom& atom)
+    inline long getResidueID(const Chem::Atom& atom)
     {
         using namespace Biomol;
         
@@ -894,7 +894,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
     for (AtomList::iterator as_it = atomSequence.begin(), as_end = atomSequence.end(); as_it != as_end; ) {
         Atom* first_atom = *as_it;
-        auto res_id = getResidueId(*first_atom);
+        auto res_id = getResidueID(*first_atom);
         const std::string& res_code = getResidueCode(*first_atom);
         const std::string& chain_id = getChainID(*first_atom);
 
@@ -916,7 +916,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
             if (next_res_code != res_code)
                 break;
 
-            auto next_res_id = getResidueId(*next_atom);
+            auto next_res_id = getResidueID(*next_atom);
 
             if (next_res_id != res_id)
                 break;
