@@ -58,28 +58,16 @@ namespace
     typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer,
                                Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               StructureCache;
 
-    StdResidueSet                            stdResidueSet;
-    SingleLetterCodeMap                      singleLetterCodeMap;
-    ResCodeToDataEntryMap                    resCodeToDataEntryMap;
-    StructureCache                           resStructureCache;
-    Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
-
-    std::mutex     loadStructureMutex;
-    std::once_flag initBuiltinDictionaryFlag;
-    std::once_flag initResCodeToDataEntryMapFlag;
-
-    const Biomol::ResidueDictionary::Entry DEF_ENTRY;
-
-    const char* stdResidues[] =
-    { "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
+    StdResidueSet stdResidueSet{
+       "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
       "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
       "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
       "ASX", "GLX", "N",   "DA",  "DC",  "DG",  "DI",  "DU",
       "DT",  "A",   "C",   "G",   "I",   "U"
     };
-
-    const char* singleLetterCodes[][2] =
-    { { "ALA", "A" },
+    
+    SingleLetterCodeMap singleLetterCodeMap{
+      { "ALA", "A" },
       { "ARG", "R" },
       { "ASN", "N" },
       { "ASP", "D" },
@@ -105,22 +93,17 @@ namespace
       { "I", "I" },
       { "U", "U" }
     };
+    
+    ResCodeToDataEntryMap                    resCodeToDataEntryMap;
+    StructureCache                           resStructureCache;
+    Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
 
-    const std::string NO_SINGLE_LETTER_CODE;
+    std::mutex     loadStructureMutex;
+    std::once_flag initBuiltinDictionaryFlag;
+    std::once_flag initResCodeToDataEntryMapFlag;
 
-    struct Init
-    {
-
-        Init()
-        {
-            stdResidueSet.insert(&stdResidues[0],
-                                 &stdResidues[sizeof(stdResidues) / sizeof(const char*)]);
-
-            for (auto& p : singleLetterCodes) 
-                singleLetterCodeMap.emplace(p[0], p[1]);
-        }
-
-    } init;
+    const Biomol::ResidueDictionary::Entry DEF_ENTRY;
+    const std::string                      NO_SINGLE_LETTER_CODE;
 
     void initBuiltinDictionary()
     {

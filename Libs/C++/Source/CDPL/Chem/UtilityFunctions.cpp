@@ -65,10 +65,10 @@ namespace
             using namespace MOL2;
 
             for (std::size_t i = 0; i < sizeof(ATOM_TYPE_STRINGS) / sizeof(TypeToString); i++)
-                sybylAtomTypeToStringMap.insert(SybylTypeToStringMap::value_type(ATOM_TYPE_STRINGS[i].type, ATOM_TYPE_STRINGS[i].string));
+                sybylAtomTypeToStringMap.emplace(ATOM_TYPE_STRINGS[i].type, ATOM_TYPE_STRINGS[i].string);
 
             for (std::size_t i = 0; i < sizeof(BOND_TYPE_STRINGS) / sizeof(TypeToString); i++)
-                sybylBondTypeToStringMap.insert(SybylTypeToStringMap::value_type(BOND_TYPE_STRINGS[i].type, BOND_TYPE_STRINGS[i].string));
+                sybylBondTypeToStringMap.emplace(BOND_TYPE_STRINGS[i].type, BOND_TYPE_STRINGS[i].string);
         }
 
     } init;

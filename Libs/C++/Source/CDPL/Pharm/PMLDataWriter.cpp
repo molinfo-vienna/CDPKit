@@ -55,22 +55,16 @@ namespace
 
     typedef std::map<unsigned int, std::string> FeatureTypeToNameMap;
 
-    FeatureTypeToNameMap ls4FeatureNames;
-
-    struct Init {
-
-        Init() {
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HYDROPHOBIC, Pharm::PML::HYDROPHOBIC_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::AROMATIC, Pharm::PML::AROMATIC_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::PML::NEG_IONIZABLE_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::H_BOND_DONOR_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HALOGEN_BOND_DONOR, Pharm::PML::X_BOND_DONOR_FEATURE_NAME));
-            ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME));
-        }
-
-    } init;
+    FeatureTypeToNameMap ls4FeatureNames{
+      { Pharm::FeatureType::HYDROPHOBIC, Pharm::PML::HYDROPHOBIC_FEATURE_NAME },
+      { Pharm::FeatureType::AROMATIC, Pharm::PML::AROMATIC_FEATURE_NAME },
+      { Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::PML::NEG_IONIZABLE_FEATURE_NAME },
+      { Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME },
+      { Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::H_BOND_DONOR_FEATURE_NAME },
+      { Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME },
+      { Pharm::FeatureType::HALOGEN_BOND_DONOR, Pharm::PML::X_BOND_DONOR_FEATURE_NAME },
+      { Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME }
+    };
 
     const std::string& getLS4FeatureName(unsigned int type)
     {

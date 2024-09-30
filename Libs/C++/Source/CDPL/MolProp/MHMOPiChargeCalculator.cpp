@@ -49,88 +49,82 @@ namespace
 
     typedef std::unordered_map<std::uint64_t, double> ParameterMap;
 
-    ParameterMap alphaParams;
-    ParameterMap betaParams;
-
-    struct Init
-    {
-
-        Init() {
-            alphaParams.insert(ParameterMap::value_type(5000, -0.45)); // B0
-            alphaParams.insert(ParameterMap::value_type(6000, 0.00)); // C*
-            alphaParams.insert(ParameterMap::value_type(7010, 0.33)); // N*
-            alphaParams.insert(ParameterMap::value_type(7000, 1.21)); // N**
-            alphaParams.insert(ParameterMap::value_type(7001, 1.21)); // N** // nitro
-            alphaParams.insert(ParameterMap::value_type(8020, 0.15)); // O*
-            alphaParams.insert(ParameterMap::value_type(8010, 2.10)); // O**
-            alphaParams.insert(ParameterMap::value_type(9020, 2.12)); // F**
-            alphaParams.insert(ParameterMap::value_type(15010, 0.14)); // P*
-            alphaParams.insert(ParameterMap::value_type(15020, 3.31)); // P**
-            alphaParams.insert(ParameterMap::value_type(15011, 0.03)); // P*
-            alphaParams.insert(ParameterMap::value_type(16010, 0.10)); // S*
-            alphaParams.insert(ParameterMap::value_type(16020, 4.17)); // S**
-            alphaParams.insert(ParameterMap::value_type(16011, 0.06)); // S* // hypervalent
-            alphaParams.insert(ParameterMap::value_type(16021, 4.66)); // S** // hypervalent
-            alphaParams.insert(ParameterMap::value_type(17020, 1.12)); // Cl**
-            alphaParams.insert(ParameterMap::value_type(35020, 1.10)); // Br**
-            alphaParams.insert(ParameterMap::value_type(53020, 0.90)); // I**
-            alphaParams.insert(ParameterMap::value_type(14000,-0.10)); // Si*
-            
-            betaParams.insert(ParameterMap::value_type(500006000, 0.73)); // B0-C*
-            betaParams.insert(ParameterMap::value_type(500007010, 0.66)); // B0-N*
-            betaParams.insert(ParameterMap::value_type(500007000, 0.53)); // B0-N**
-            betaParams.insert(ParameterMap::value_type(500008020, 0.60)); // B0-O*
-            betaParams.insert(ParameterMap::value_type(500008010, 0.35)); // B0-O**
-            betaParams.insert(ParameterMap::value_type(500009020, 0.26)); // B0-F**
-            betaParams.insert(ParameterMap::value_type(500017020, 0.41)); // B0-Cl**
-            betaParams.insert(ParameterMap::value_type(500035020, 0.50)); // B0-Br**
-            betaParams.insert(ParameterMap::value_type(500053020, 0.50)); // B0-I**
-            betaParams.insert(ParameterMap::value_type(500014000, 0.57)); // B0-Si*
-            betaParams.insert(ParameterMap::value_type(500015010, 0.53)); // B0-P*
-            betaParams.insert(ParameterMap::value_type(500015020, 0.54)); // B0-P**
-            betaParams.insert(ParameterMap::value_type(500016010, 0.51)); // B0-S*    
-            betaParams.insert(ParameterMap::value_type(500016020, 0.44)); // B0-S**
-            betaParams.insert(ParameterMap::value_type(600006000, 1.00)); // C*-C*
-            betaParams.insert(ParameterMap::value_type(600007010, 1.19)); // C*-N*
-            betaParams.insert(ParameterMap::value_type(600007000, 0.68)); // C*-N**
-            betaParams.insert(ParameterMap::value_type(600007001, 0.72)); // C*-Nitro
-            betaParams.insert(ParameterMap::value_type(600008020, 1.08)); // C*-O*
-            betaParams.insert(ParameterMap::value_type(600008010, 0.65)); // C*-O**
-            betaParams.insert(ParameterMap::value_type(600009020, 0.63)); // C*-F**
-            betaParams.insert(ParameterMap::value_type(701007010, 0.58)); // N*-N*
-            betaParams.insert(ParameterMap::value_type(701007000, 0.80)); // N*-N**
-            betaParams.insert(ParameterMap::value_type(700007000, 1.30)); // N**-N** // eg. phenylhydrazine
-            betaParams.insert(ParameterMap::value_type(701008010, 0.92)); // N*-O**
-            betaParams.insert(ParameterMap::value_type(700008020, 0.55)); // N**-O* // ???
-            betaParams.insert(ParameterMap::value_type(700108020, 0.55)); // N**-O* // nitro
-            betaParams.insert(ParameterMap::value_type(700008010, 0.01)); // N**-O**
-            betaParams.insert(ParameterMap::value_type(600015010, 0.41)); // C*-P*
-            betaParams.insert(ParameterMap::value_type(600015020, 0.08)); // C*-P**
-            betaParams.insert(ParameterMap::value_type(701015010, 0.63)); // N*-P*
-            betaParams.insert(ParameterMap::value_type(600015011, 0.18)); // C*-P*
-            betaParams.insert(ParameterMap::value_type(700015011, 0.31)); // N*-P* // P(=O)(O)(O)N
-            betaParams.insert(ParameterMap::value_type(802015011, 0.60)); // O*-P*
-            betaParams.insert(ParameterMap::value_type(801015011, 0.25)); // O**-P*
-            betaParams.insert(ParameterMap::value_type(600016010, 0.68)); // C*-S*
-            betaParams.insert(ParameterMap::value_type(600016020, 0.41)); // C*-S**
-            betaParams.insert(ParameterMap::value_type(600016011, 0.24)); // C*-S* // hypervalent
-            betaParams.insert(ParameterMap::value_type(600016021, 0.63)); // C*-S** // hypervalent sulfur
-            betaParams.insert(ParameterMap::value_type(700016020, 0.47)); // N**-S**
-            betaParams.insert(ParameterMap::value_type(700016021, 0.47)); // N**-S** // S(=O)(=O)NH2
-            betaParams.insert(ParameterMap::value_type(802016010, 0.19)); // O*-S* 
-            betaParams.insert(ParameterMap::value_type(802016011, 0.19)); // O*-S*   // RS(=O)R'
-            betaParams.insert(ParameterMap::value_type(802016020, 3.28)); // O*-S**
-            betaParams.insert(ParameterMap::value_type(801016020, 0.18)); // O**-S**
-            betaParams.insert(ParameterMap::value_type(802016021, 3.28)); // O*-S**  // S(=O)(=O)OH
-            betaParams.insert(ParameterMap::value_type(801016021, 0.18)); // O**-S** // S(=O)(=O)OH
-            betaParams.insert(ParameterMap::value_type(600017020, 0.29)); // C*-Cl**
-            betaParams.insert(ParameterMap::value_type(600035020, 0.29)); // C*-Br**
-            betaParams.insert(ParameterMap::value_type(600053020, 0.20)); // C*-I**
-            betaParams.insert(ParameterMap::value_type(902016020, 0.76)); // F**-S** // S(=O)(=O)F
-            betaParams.insert(ParameterMap::value_type(902016021, 0.76)); // F**-S** // S(=O)(=O)F
-        }
-
-    } init;
+    ParameterMap alphaParams{
+      { 5000, -0.45 }, // B0
+      { 6000, 0.00 },  // C*
+      { 7010, 0.33 },  // N*
+      { 7000, 1.21 },  // N**
+      { 7001, 1.21 },  // N** // nitro
+      { 8020, 0.15 },  // O*
+      { 8010, 2.10 },  // O**
+      { 9020, 2.12 },  // F**
+      { 15010, 0.14 }, // P*
+      { 15020, 3.31 }, // P**
+      { 15011, 0.03 }, // P*
+      { 16010, 0.10 }, // S*
+      { 16020, 4.17 }, // S**
+      { 16011, 0.06 }, // S*  // hypervalent
+      { 16021, 4.66 }, // S** // hypervalent
+      { 17020, 1.12 }, // Cl**
+      { 35020, 1.10 }, // Br**
+      { 53020, 0.90 }, // I**
+      { 14000,-0.10 }, // Si*
+    };
+    
+    ParameterMap betaParams {
+      { 500006000, 0.73 }, // B0-C*
+      { 500007010, 0.66 }, // B0-N*
+      { 500007000, 0.53 }, // B0-N**
+      { 500008020, 0.60 }, // B0-O*
+      { 500008010, 0.35 }, // B0-O**
+      { 500009020, 0.26 }, // B0-F**
+      { 500017020, 0.41 }, // B0-Cl**
+      { 500035020, 0.50 }, // B0-Br**
+      { 500053020, 0.50 }, // B0-I**
+      { 500014000, 0.57 }, // B0-Si*
+      { 500015010, 0.53 }, // B0-P*
+      { 500015020, 0.54 }, // B0-P**
+      { 500016010, 0.51 }, // B0-S*    
+      { 500016020, 0.44 }, // B0-S**
+      { 600006000, 1.00 }, // C*-C*
+      { 600007010, 1.19 }, // C*-N*
+      { 600007000, 0.68 }, // C*-N**
+      { 600007001, 0.72 }, // C*-Nitro
+      { 600008020, 1.08 }, // C*-O*
+      { 600008010, 0.65 }, // C*-O**
+      { 600009020, 0.63 }, // C*-F**
+      { 701007010, 0.58 }, // N*-N*
+      { 701007000, 0.80 }, // N*-N**
+      { 700007000, 1.30 }, // N**-N** // eg. phenylhydrazine
+      { 701008010, 0.92 }, // N*-O**
+      { 700008020, 0.55 }, // N**-O* // ???
+      { 700108020, 0.55 }, // N**-O* // nitro
+      { 700008010, 0.01 }, // N**-O**
+      { 600015010, 0.41 }, // C*-P*
+      { 600015020, 0.08 }, // C*-P**
+      { 701015010, 0.63 }, // N*-P*
+      { 600015011, 0.18 }, // C*-P*
+      { 700015011, 0.31 }, // N*-P* // P(=O)(O)(O)N
+      { 802015011, 0.60 }, // O*-P*
+      { 801015011, 0.25 }, // O**-P*
+      { 600016010, 0.68 }, // C*-S*
+      { 600016020, 0.41 }, // C*-S**
+      { 600016011, 0.24 }, // C*-S*  // hypervalent
+      { 600016021, 0.63 }, // C*-S** // hypervalent sulfur
+      { 700016020, 0.47 }, // N**-S**
+      { 700016021, 0.47 }, // N**-S** // S(=O)(=O)NH2
+      { 802016010, 0.19 }, // O*-S* 
+      { 802016011, 0.19 }, // O*-S*   // RS(=O)R'
+      { 802016020, 3.28 }, // O*-S**
+      { 801016020, 0.18 }, // O**-S**
+      { 802016021, 3.28 }, // O*-S**  // S(=O)(=O)OH
+      { 801016021, 0.18 }, // O**-S** // S(=O)(=O)OH
+      { 600017020, 0.29 }, // C*-Cl**
+      { 600035020, 0.29 }, // C*-Br**
+      { 600053020, 0.20 }, // C*-I**
+      { 902016020, 0.76 }, // F**-S** // S(=O)(=O)F
+      { 902016021, 0.76 }, // F**-S** // S(=O)(=O)F
+    };
 
     constexpr double ENERGY_LEVEL_COMP_TOL = 0.01;
     constexpr double SIGMA_CORR_REF        = 7.325405621223034;

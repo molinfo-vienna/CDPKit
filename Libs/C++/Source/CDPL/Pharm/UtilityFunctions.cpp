@@ -38,27 +38,20 @@ namespace
 
     typedef std::unordered_map<unsigned int, std::string> FeatureTypeToStringMap;
 
-    FeatureTypeToStringMap featureTypeToStringMap;
-    const std::string      EMPTY_STRING;
-    
-    struct Init {
+    FeatureTypeToStringMap featureTypeToStringMap{
+      { Pharm::FeatureType::UNKNOWN, "UNK" },
+      { Pharm::FeatureType::HYDROPHOBIC, "H" },
+      { Pharm::FeatureType::AROMATIC, "AR" },
+      { Pharm::FeatureType::NEGATIVE_IONIZABLE, "NI" },
+      { Pharm::FeatureType::POSITIVE_IONIZABLE, "PI" },
+      { Pharm::FeatureType::H_BOND_DONOR, "HBD" },
+      { Pharm::FeatureType::H_BOND_ACCEPTOR, "HBA" },
+      { Pharm::FeatureType::HALOGEN_BOND_DONOR, "XBD" },
+      { Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, "XBA" },
+      { Pharm::FeatureType::EXCLUSION_VOLUME, "XV" },
+    };
 
-    Init() {
-        using namespace Pharm;
-
-        featureTypeToStringMap.emplace(FeatureType::UNKNOWN, "UNK");
-        featureTypeToStringMap.emplace(FeatureType::HYDROPHOBIC, "H");
-        featureTypeToStringMap.emplace(FeatureType::AROMATIC, "AR");
-        featureTypeToStringMap.emplace(FeatureType::NEGATIVE_IONIZABLE, "NI");
-        featureTypeToStringMap.emplace(FeatureType::POSITIVE_IONIZABLE, "PI");
-        featureTypeToStringMap.emplace(FeatureType::H_BOND_DONOR, "HBD");
-        featureTypeToStringMap.emplace(FeatureType::H_BOND_ACCEPTOR, "HBA");
-        featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_DONOR, "XBD");
-        featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_ACCEPTOR, "XBA");
-        featureTypeToStringMap.emplace(FeatureType::EXCLUSION_VOLUME, "XV");
-    }
-
-    } init;
+    const std::string EMPTY_STRING;
 }
 
 
