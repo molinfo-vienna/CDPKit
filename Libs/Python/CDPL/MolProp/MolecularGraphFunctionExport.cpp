@@ -42,11 +42,11 @@ namespace
         return boost::python::str(str.c_str());
     }
 
-    boost::python::object generateMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
+    boost::python::object generateMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& sep)
     {
         std::string str;
 
-        CDPL::MolProp::generateMolecularFormula(molgraph, str);
+        CDPL::MolProp::generateMolecularFormula(molgraph, str, sep);
 
         return boost::python::str(str.c_str());
     }
@@ -102,7 +102,7 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite"), python::arg("num_iter") = 20, python::arg("damping") = 0.48));
     python::def("calcMHMOProperties", &MolProp::calcMHMOProperties,    (python::arg("molgraph"), python::arg("overwrite")));
     python::def("generateMassCompositionString", &generateMassCompositionStringWrapper, python::arg("molgraph"));
-    python::def("generateMolecularFormula", &generateMolecularFormulaWrapper, python::arg("molgraph"));
+    python::def("generateMolecularFormula", &generateMolecularFormulaWrapper, (python::arg("molgraph"), python::arg("sep") = std::string()));
 
     python::def("perceiveHBondDonorAtomTypes", &MolProp::perceiveHBondDonorAtomTypes,
                 (python::arg("molgraph"), python::arg("overwrite")));

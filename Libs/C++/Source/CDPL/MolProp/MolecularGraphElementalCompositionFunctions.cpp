@@ -37,7 +37,7 @@
 using namespace CDPL; 
 
 
-void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula)
+void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula, const std::string& sep)
 {
     using namespace Chem;
     
@@ -47,10 +47,10 @@ void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std
     std::size_t unknown_count = 0;
     std::size_t imp_h_count = 0;
 
-    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    auto atoms_end = molgraph.getAtomsEnd();
 
-    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-        const Atom& atom = *it;
+    for (auto it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        auto& atom = *it;
         unsigned int atom_type = getType(atom);
 
         if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
@@ -65,40 +65,53 @@ void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std
 
     std::ostringstream formula_os;
 
-    ElemCountMap::iterator it = elem_counts.find("C");
-
+    auto it = elem_counts.find("C");
+    auto first = true;
+    
     if (it != elem_counts.end()) {
         formula_os << 'C';
 
         if (it->second > 1)
             formula_os << it->second;
-
+ 
         elem_counts.erase(it);
-
+    
         it = elem_counts.find("H");
 
         if (it != elem_counts.end()) {
-            formula_os << 'H';
+            formula_os << sep << 'H';
             
             if (it->second > 1)
                 formula_os << it->second;
-
+        
             elem_counts.erase(it);
         }
+
+        first = false;
     }
 
-    for (ElemCountMap::const_iterator it = elem_counts.begin(), end = elem_counts.end(); it != end; ++it) {
+    for (auto it = elem_counts.begin(), end = elem_counts.end(); it != end; ++it) {
+        if (!first)
+            formula_os << sep;
+        
         formula_os << it->first;
 
         if (it->second > 1)
-            formula_os << std::to_string(it->second);
+            formula_os << it->second;
+
+        first = false;
     }
 
-    if (unknown_count > 0)
+    if (unknown_count > 0) {
+        if (!first)
+            formula_os << sep;
+         
         formula_os << '?';
-    if (unknown_count > 1)
-        formula_os << std::to_string(unknown_count);
-
+    
+        if (unknown_count > 1)
+            formula_os << unknown_count;
+    }
+    
     formula = formula_os.str();
 }
 

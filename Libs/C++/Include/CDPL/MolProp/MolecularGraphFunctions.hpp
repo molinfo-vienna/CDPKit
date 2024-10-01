@@ -56,7 +56,13 @@ namespace CDPL
 
         CDPL_MOLPROP_API void generateMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp);
 
-        CDPL_MOLPROP_API void generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula);
+        /**
+         * \brief Generates the molecular formula of the molecular graph \a molgraph.
+         * \param molgraph The molecular graph.
+         * \param formula A reference to the output string.
+         * \param sep A string separating the output for each element (since 1.2).
+         */
+        CDPL_MOLPROP_API void generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula, const std::string& sep = std::string());
 
         CDPL_MOLPROP_API void generateElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
