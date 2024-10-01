@@ -61,7 +61,8 @@ void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std
         imp_h_count += getImplicitHydrogenCount(atom);
     }
 
-    elem_counts["H"] += imp_h_count;
+    if (imp_h_count)
+        elem_counts["H"] += imp_h_count;
 
     std::ostringstream formula_os;
 
@@ -75,18 +76,21 @@ void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std
             formula_os << it->second;
  
         elem_counts.erase(it);
-    
-        it = elem_counts.find("H");
+        first = false;
+    }
 
-        if (it != elem_counts.end()) {
-            formula_os << sep << 'H';
+    it = elem_counts.find("H");
+
+    if (it != elem_counts.end()) {
+        if (!first)
+            formula_os << sep;
+
+        formula_os << 'H';
             
-            if (it->second > 1)
-                formula_os << it->second;
+        if (it->second > 1)
+            formula_os << it->second;
         
-            elem_counts.erase(it);
-        }
-
+        elem_counts.erase(it);
         first = false;
     }
 
@@ -102,7 +106,7 @@ void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std
         first = false;
     }
 
-    if (unknown_count > 0) {
+    if (unknown_count) {
         if (!first)
             formula_os << sep;
          
