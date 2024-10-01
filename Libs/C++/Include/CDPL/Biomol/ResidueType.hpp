@@ -39,21 +39,134 @@ namespace CDPL
         namespace ResidueType
         {
 
-            constexpr unsigned int UNKNOWN                  = 0;
-            constexpr unsigned int OTHER                    = 1;
-            constexpr unsigned int NON_POLYMER              = 2;
-            constexpr unsigned int PEPTIDE_CARBOXY_TERMINUS = 3;
-            constexpr unsigned int PEPTIDE_AMINO_TERMINUS   = 4;
-            constexpr unsigned int PEPTIDE_LINKING          = 5;
-            constexpr unsigned int BETA_PEPTIDE_LINKING     = 6;
-            constexpr unsigned int GAMMA_PEPTIDE_LINKING    = 7;
-            constexpr unsigned int PEPTIDE_LIKE             = 8;
-            constexpr unsigned int RNA_HYDROXY_TERMINUS     = 9;
-            constexpr unsigned int DNA_HYDROXY_TERMINUS     = 10;
-            constexpr unsigned int RNA_LINKING              = 11;
-            constexpr unsigned int DNA_LINKING              = 12;
-            constexpr unsigned int SACCHARIDE_LINKING       = 13;
-            constexpr unsigned int SACCHARIDE               = 14;
+            constexpr unsigned int UNKNOWN                    = 0;
+            constexpr unsigned int OTHER                      = 1;
+            constexpr unsigned int NON_POLYMER                = 2;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_PEPTIDE_CARBOXY_TERMINUS = 3;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_PEPTIDE_AMINO_TERMINUS   = 4;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_PEPTIDE_AMINO_TERMINUS   = 5;
+            
+            constexpr unsigned int PEPTIDE_LINKING            = 6;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_PEPTIDE_LINKING          = 7;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_PEPTIDE_LINKING          = 8;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_BETA_PEPTIDE_LINKING     = 9;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_BETA_PEPTIDE_LINKING     = 10;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_GAMMA_PEPTIDE_LINKING    = 11;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_GAMMA_PEPTIDE_LINKING    = 12;
+            
+            constexpr unsigned int PEPTIDE_LIKE               = 13;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int RNA_3_HYDROXY_TERMINUS     = 14;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int RNA_5_HYDROXY_TERMINUS     = 15;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int DNA_3_HYDROXY_TERMINUS     = 16;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int DNA_5_HYDROXY_TERMINUS     = 17;
+
+            constexpr unsigned int RNA_LINKING                = 18;
+            constexpr unsigned int DNA_LINKING                = 19;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_RNA_LINKING              = 20;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_DNA_LINKING              = 21;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_SACCHARIDE_1_4_LINKING   = 22;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_SACCHARIDE_1_4_LINKING   = 23;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_SACCHARIDE_ALPHA_LINKING = 24;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_SACCHARIDE_ALPHA_LINKING = 25;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_SACCHARIDE_BETA_LINKING  = 26;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_SACCHARIDE_BETA_LINKING  = 27;
+            
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int L_SACCHARIDE               = 28;
+
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int D_SACCHARIDE               = 29;
+            
+            constexpr unsigned int SACCHARIDE                 = 30;
+
         } // namespace ResidueType
     } // namespace Biomol
 } // namespace CDPL

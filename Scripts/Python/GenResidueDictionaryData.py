@@ -38,33 +38,33 @@ def genResidueDictionaryData():
 
     comp_type_map = { 'other' : 'OTHER', \
                       'non-polymer' : 'NON_POLYMER', \
-                      'l-peptide cooh carboxy terminus' : 'PEPTIDE_CARBOXY_TERMINUS', \
-                      'd-peptide nh3 amino terminus' : 'PEPTIDE_AMINO_TERMINUS', \
-                      'l-peptide nh3 amino terminus' : 'PEPTIDE_AMINO_TERMINUS', \
-                      'rna oh 3 prime terminus' : 'RNA_HYDROXY_TERMINUS', \
-                      'rna oh 5 prime terminus' : 'RNA_HYDROXY_TERMINUS', \
-                      'dna oh 3 prime terminus' : 'DNA_HYDROXY_TERMINUS', \
-                      'dna oh 5 prime terminus' : 'DNA_HYDROXY_TERMINUS', \
+                      'l-peptide cooh carboxy terminus' : 'L_PEPTIDE_CARBOXY_TERMINUS', \
+                      'd-peptide nh3 amino terminus' : 'D_PEPTIDE_AMINO_TERMINUS', \
+                      'l-peptide nh3 amino terminus' : 'L_PEPTIDE_AMINO_TERMINUS', \
+                      'rna oh 3 prime terminus' : 'RNA_3_HYDROXY_TERMINUS', \
+                      'rna oh 5 prime terminus' : 'RNA_5_HYDROXY_TERMINUS', \
+                      'dna oh 3 prime terminus' : 'DNA_3_HYDROXY_TERMINUS', \
+                      'dna oh 5 prime terminus' : 'DNA_5_HYDROXY_TERMINUS', \
                       'peptide linking' : 'PEPTIDE_LINKING', \
-                      'l-peptide linking' : 'PEPTIDE_LINKING', \
-                      'd-peptide linking' : 'PEPTIDE_LINKING', \
-                      'l-beta-peptide, c-gamma linking' : 'BETA_PEPTIDE_LINKING', \
-                      'd-beta-peptide, c-gamma linking' : 'BETA_PEPTIDE_LINKING', \
-                      'l-gamma-peptide, c-delta linking' : 'GAMMA_PEPTIDE_LINKING', \
-                      'd-gamma-peptide, c-delta linking' : 'GAMMA_PEPTIDE_LINKING', \
+                      'l-peptide linking' : 'L_PEPTIDE_LINKING', \
+                      'd-peptide linking' : 'D_PEPTIDE_LINKING', \
+                      'l-beta-peptide, c-gamma linking' : 'L_BETA_PEPTIDE_LINKING', \
+                      'd-beta-peptide, c-gamma linking' : 'D_BETA_PEPTIDE_LINKING', \
+                      'l-gamma-peptide, c-delta linking' : 'L_GAMMA_PEPTIDE_LINKING', \
+                      'd-gamma-peptide, c-delta linking' : 'D_GAMMA_PEPTIDE_LINKING', \
                       'peptide-like' : 'PEPTIDE_LIKE', \
                       'rna linking' : 'RNA_LINKING', \
                       'dna linking' : 'DNA_LINKING', \
-                      'l-rna linking' : 'RNA_LINKING', \
-                      'l-dna linking' : 'DNA_LINKING', \
-                      'l-saccharide 1,4 and 1,4 linking' : 'SACCHARIDE_LINKING', \
-                      'd-saccharide 1,4 and 1,4 linking' : 'SACCHARIDE_LINKING', \
-                      'l-saccharide, alpha linking' : 'SACCHARIDE_LINKING', \
-                      'l-saccharide, beta linking' : 'SACCHARIDE_LINKING', \
-                      'd-saccharide, alpha linking' : 'SACCHARIDE_LINKING', \
-                      'd-saccharide, beta linking' : 'SACCHARIDE_LINKING', \
-                      'l-saccharide' : 'SACCHARIDE', \
-                      'd-saccharide' : 'SACCHARIDE', \
+                      'l-rna linking' : 'L_RNA_LINKING', \
+                      'l-dna linking' : 'L_DNA_LINKING', \
+                      'l-saccharide 1,4 and 1,4 linking' : 'L_SACCHARIDE_1_4_LINKING', \
+                      'd-saccharide 1,4 and 1,4 linking' : 'D_SACCHARIDE_1_4_LINKING', \
+                      'l-saccharide, alpha linking' : 'L_SACCHARIDE_ALPHA_LINKING', \
+                      'l-saccharide, beta linking' : 'L_SACCHARIDE_BETA_LINKING', \
+                      'd-saccharide, alpha linking' : 'D_SACCHARIDE_ALPHA_LINKING', \
+                      'd-saccharide, beta linking' : 'D_SACCHARIDE_BETA_LINKING', \
+                      'l-saccharide' : 'L_SACCHARIDE', \
+                      'd-saccharide' : 'D_SACCHARIDE', \
                       'saccharide' : 'SACCHARIDE' \
     }
 
@@ -92,7 +92,7 @@ def genResidueDictionaryData():
             Chem.calcAtomStereoDescriptors(comp, False, 3)
             Chem.calcBondStereoDescriptors(comp, False, 3)
         except Exception as e:
-            print(f'!! Calculationg stereodescriptors for entry {cif_data.id} failed: {e.what()}', file=sys.stderr)
+            print(f'!! Calculating stereodescriptors for entry {cif_data.id} failed: {e.what()}', file=sys.stderr)
             
         Chem.clearComponents(comp)
         Chem.clearSSSR(comp)
