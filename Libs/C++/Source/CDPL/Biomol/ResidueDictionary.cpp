@@ -173,6 +173,7 @@ namespace
         }
 
         setName(*mol_ptr, data_entry.name);
+        setAtomSymbolsFromTypes(*mol_ptr, false);
         perceiveComponents(*mol_ptr, false);
         perceiveSSSR(*mol_ptr, false);
         setRingFlags(*mol_ptr, false);
@@ -181,7 +182,9 @@ namespace
         setAromaticityFlags(*mol_ptr, false);
         perceiveAtomStereoCenters(*mol_ptr, false, false);
         perceiveBondStereoCenters(*mol_ptr, false, false);
-      
+        calcAtomCIPConfigurations(*mol_ptr, false);
+        calcBondCIPConfigurations(*mol_ptr, false);
+        
         resStructureCache.insert(StructureCache::value_type(code, mol_ptr));
 
         return mol_ptr;
