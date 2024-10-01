@@ -60,16 +60,32 @@ namespace CDPL
               public:
                 typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
 
-                Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
-                      const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
-
+                /**
+                 * \brief Constructs and initializes a \c %Entry instance with the given data.
+                 * \param code
+                 * \param rep_code
+                 * \param rep_by_code
+                 * \param parent_code The TLC of the parent residue (since 1.2).
+                 * \param obsolete
+                 * \param name
+                 * \param type
+                 * \param struc_ret_func
+                 */
+                Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, const std::string& parent_code,
+                      bool obsolete, const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
+                
                 Entry();
-
+                
                 const std::string& getCode() const;
 
                 const std::string& getReplacedCode() const;
 
                 const std::string& getReplacedByCode() const;
+
+                /**
+                 * \since 1.2
+                 */
+                const std::string& getParentCode() const;
 
                 bool isObsolete() const;
 
@@ -83,6 +99,7 @@ namespace CDPL
                 std::string                code;
                 std::string                replacesCode;
                 std::string                replacedByCode;
+                std::string                parentCode;
                 bool                       obsolete;
                 std::string                name;
                 unsigned int               type;
@@ -108,14 +125,21 @@ namespace CDPL
             typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
             typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
-                                              EntryLookupTable::const_iterator>
-                ConstEntryIterator;
+                                              EntryLookupTable::const_iterator>   ConstEntryIterator;
 
+            /**
+             * \since 1.2
+             */
             static const std::string& getSingleLetterCode(const std::string& code);
            
             static bool isStdResidue(const std::string& code);
             
             void addEntry(const Entry& entry);
+
+            /**
+             * \since 1.2
+             */
+            void addEntry(Entry&& entry);
 
             bool containsEntry(const std::string& code) const;
 
@@ -138,6 +162,11 @@ namespace CDPL
             const std::string& getReplacedCode(const std::string& code) const;
 
             const std::string& getReplacedByCode(const std::string& code) const;
+
+            /**
+             * \since 1.2
+             */
+            const std::string& getParentCode(const std::string& code) const;
 
             bool isObsolete(const std::string& code) const;
 

@@ -102,7 +102,7 @@ def genResidueDictionaryData():
         for atom in comp.atoms:
             if Chem.getFormalCharge(atom) == 0:
                 Chem.clearFormalCharge(atom)
-
+                
             Chem.clearImplicitHydrogenCount(atom)
             Chem.clearHybridizationState(atom)
             Chem.clear3DCoordinates(atom)
@@ -149,6 +149,13 @@ def genResidueDictionaryData():
      
         if rel_status == 'OBS':
             obsolete = 'true'
+
+        parent_code = cif_comp_data.findItem('mon_nstd_parent_comp_id')
+
+        if parent_code:
+            parent_code = parent_code.getValue(0).replace('?', '').replace('.', '').replace('"', '')
+        else:
+            parent_code = ''
             
         comp_type = cif_comp_data.findItem('type')
 
@@ -182,7 +189,7 @@ def genResidueDictionaryData():
         
         comp_writer.write(comp)
 
-        output.append('    { "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(comp_idx) + ' },\n')
+        output.append(f'    {{ "{code}", "{replaces_code}", "{replaced_by_code}", "{parent_code}", ResidueType::{comp_type}, {obsolete}, "{comp_name}", {comp_idx} }},' + '\n')
 
         comp_idx += 1
 

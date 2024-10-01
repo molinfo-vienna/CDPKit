@@ -44,6 +44,7 @@ namespace CDPL
                 const char*  code;
                 const char*  replacesCode;
                 const char*  replacedByCode;
+                const char*  parentCode;
                 unsigned int type;
                 bool         obsolete;
                 const char*  name;

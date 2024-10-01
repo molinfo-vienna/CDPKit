@@ -25,6 +25,7 @@
 #include "StaticInit.hpp"
 
 #include <unordered_set>
+#include <utility>
 #include <mutex>
 #include <functional>
 
@@ -196,16 +197,16 @@ Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::defaultDict 
 
 
 Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code,
-                                        const std::string& rep_by_code, bool obsolete,
-                                        const std::string& name, unsigned int type,
+                                        const std::string& rep_by_code, const std::string& parent_code,
+                                        bool obsolete, const std::string& name, unsigned int type,
                                         const StructureRetrievalFunction& struc_ret_func):
     code(code),
-    replacesCode(rep_code), replacedByCode(rep_by_code), obsolete(obsolete), name(name), type(type),
+    replacesCode(rep_code), replacedByCode(rep_by_code), parentCode(parent_code), obsolete(obsolete), name(name), type(type),
     structRetrievalFunc(struc_ret_func)
 {}
 
 Biomol::ResidueDictionary::Entry::Entry():
-    code(), replacesCode(), replacedByCode(), obsolete(false), name(), type(ResidueType::UNKNOWN),
+    code(), replacesCode(), replacedByCode(), parentCode(), obsolete(false), name(), type(ResidueType::UNKNOWN),
     structRetrievalFunc()
 {}
 
@@ -222,6 +223,11 @@ const std::string& Biomol::ResidueDictionary::Entry::getReplacedCode() const
 const std::string& Biomol::ResidueDictionary::Entry::getReplacedByCode() const
 {
     return replacedByCode;
+}
+
+const std::string& Biomol::ResidueDictionary::Entry::getParentCode() const
+{
+    return parentCode;
 }
 
 bool Biomol::ResidueDictionary::Entry::isObsolete() const
@@ -250,7 +256,12 @@ Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::Entry::getStructu
 
 void Biomol::ResidueDictionary::addEntry(const Entry& entry)
 {
-    entries.insert(EntryLookupTable::value_type(entry.getCode(), entry));
+    entries.emplace(entry.getCode(), Entry(entry));
+}
+
+void Biomol::ResidueDictionary::addEntry(Entry&& entry)
+{
+    entries.emplace(entry.getCode(), std::move(entry));
 }
 
 bool Biomol::ResidueDictionary::containsEntry(const std::string& code) const
@@ -322,7 +333,8 @@ void Biomol::ResidueDictionary::loadDefaults()
         const ResidueDataEntry& res_data = RESIDUE_DATA[i];
 
         Entry entry(res_data.code, res_data.replacesCode, res_data.replacedByCode,
-                    res_data.obsolete, res_data.name, res_data.type, struc_ret_func);
+                    res_data.parentCode, res_data.obsolete, res_data.name, res_data.type,
+                    struc_ret_func);
 
         addEntry(entry);
     }
@@ -347,9 +359,7 @@ bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)
 
 unsigned int Biomol::ResidueDictionary::getType(const std::string& code) const
 {
-    const Entry& entry = getEntry(code);
-
-    return entry.getType();
+    return getEntry(code).getType();
 }
 
 const std::string& Biomol::ResidueDictionary::getName(const std::string& code) const
@@ -361,23 +371,22 @@ const std::string& Biomol::ResidueDictionary::getName(const std::string& code) c
 
 Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::getStructure(const std::string& code) const
 {
-    const Entry& entry = getEntry(code);
-
-    return entry.getStructure();
+    return getEntry(code).getStructure();
 }
 
 const std::string& Biomol::ResidueDictionary::getReplacedCode(const std::string& code) const
 {
-    const Entry& entry = getEntry(code);
-
-    return entry.getReplacedCode();
+    return getEntry(code).getReplacedCode();
 }
 
 const std::string& Biomol::ResidueDictionary::getReplacedByCode(const std::string& code) const
 {
-    const Entry& entry = getEntry(code);
+    return getEntry(code).getReplacedByCode();
+}
 
-    return entry.getReplacedByCode();
+const std::string& Biomol::ResidueDictionary::getParentCode(const std::string& code) const
+{
+    return getEntry(code).getParentCode();
 }
 
 const std::string& Biomol::ResidueDictionary::getSingleLetterCode(const std::string& code)
