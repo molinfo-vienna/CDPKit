@@ -1,5 +1,7 @@
 master:
 
+ - Added new and changed existing constants in namespace Biomol::ResidueType which now fully cover the 
+   set of residue types defined in the mmCIF/PDBX specification
  - Added static method to class Biomol::ResidueDictionary for the lookup of amino acid single letter codes
  - Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol for their
    future dual-use by the mmCIF data I/O code
