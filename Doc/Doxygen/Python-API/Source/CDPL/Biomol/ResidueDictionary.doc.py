@@ -41,16 +41,18 @@ class ResidueDictionary(Boost.Python.instance):
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Constructs and initializes a <tt>Entry</tt> instance with the given data.
+        # 
         # \param code 
         # \param rep_code 
         # \param rep_by_code 
+        # \param parent_code The TLC of the parent residue (since 1.2).
         # \param obsolete 
         # \param name 
         # \param type 
-        # \param struc_ret_func 
+        # \param struc_ret_func
         # 
-        def __init__(code: str, rep_code: str, rep_by_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
+        def __init__(code: str, rep_code: str, rep_by_code: str, parent_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -88,6 +90,12 @@ class ResidueDictionary(Boost.Python.instance):
         # \return 
         #
         def getReplacedByCode() -> str: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getParentCode() -> str: pass
 
         ##
         # \brief 
@@ -237,6 +245,14 @@ class ResidueDictionary(Boost.Python.instance):
     # \return 
     #
     def getReplacedByCode(code: str) -> str: pass
+
+    ##
+    # \brief 
+    # \param arg1 
+    # \param code 
+    # \return 
+    #
+    def getParentCode(code: str) -> str: pass
 
     ##
     # \brief 
