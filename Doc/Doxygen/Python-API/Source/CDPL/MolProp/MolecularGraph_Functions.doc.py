@@ -43,9 +43,10 @@ def calcLogS(molgraph: Chem.MolecularGraph) -> float: pass
 ##
 # \brief 
 # \param molgraph 
+# \param sep 
 # \return 
 #
-def generateMolecularFormula(molgraph: Chem.MolecularGraph) -> object: pass
+def generateMolecularFormula(molgraph: Chem.MolecularGraph, sep: str = '') -> object: pass
 
 ##
 # \brief 

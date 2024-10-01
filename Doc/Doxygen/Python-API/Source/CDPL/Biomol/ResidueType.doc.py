@@ -42,59 +42,139 @@ class ResidueType(Boost.Python.instance):
     ##
     # \brief 
     #
-    PEPTIDE_CARBOXY_TERMINUS = 3
+    L_PEPTIDE_CARBOXY_TERMINUS = 3
 
     ##
     # \brief 
     #
-    PEPTIDE_AMINO_TERMINUS = 4
+    L_PEPTIDE_AMINO_TERMINUS = 4
 
     ##
     # \brief 
     #
-    PEPTIDE_LINKING = 5
+    D_PEPTIDE_AMINO_TERMINUS = 5
 
     ##
     # \brief 
     #
-    BETA_PEPTIDE_LINKING = 6
+    PEPTIDE_LINKING = 6
 
     ##
     # \brief 
     #
-    GAMMA_PEPTIDE_LINKING = 7
+    L_PEPTIDE_LINKING = 7
 
     ##
     # \brief 
     #
-    PEPTIDE_LIKE = 8
+    D_PEPTIDE_LINKING = 8
 
     ##
     # \brief 
     #
-    RNA_HYDROXY_TERMINUS = 9
+    L_BETA_PEPTIDE_LINKING = 9
 
     ##
     # \brief 
     #
-    DNA_HYDROXY_TERMINUS = 10
+    D_BETA_PEPTIDE_LINKING = 10
 
     ##
     # \brief 
     #
-    RNA_LINKING = 11
+    L_GAMMA_PEPTIDE_LINKING = 11
 
     ##
     # \brief 
     #
-    DNA_LINKING = 12
+    D_GAMMA_PEPTIDE_LINKING = 12
 
     ##
     # \brief 
     #
-    SACCHARIDE_LINKING = 13
+    PEPTIDE_LIKE = 13
 
     ##
     # \brief 
     #
-    SACCHARIDE = 14
+    RNA_3_HYDROXY_TERMINUS = 14
+
+    ##
+    # \brief 
+    #
+    RNA_5_HYDROXY_TERMINUS = 15
+
+    ##
+    # \brief 
+    #
+    DNA_3_HYDROXY_TERMINUS = 16
+
+    ##
+    # \brief 
+    #
+    DNA_5_HYDROXY_TERMINUS = 17
+
+    ##
+    # \brief 
+    #
+    RNA_LINKING = 18
+
+    ##
+    # \brief 
+    #
+    DNA_LINKING = 19
+
+    ##
+    # \brief 
+    #
+    L_RNA_LINKING = 20
+
+    ##
+    # \brief 
+    #
+    L_DNA_LINKING = 21
+
+    ##
+    # \brief 
+    #
+    L_SACCHARIDE_1_4_LINKING = 22
+
+    ##
+    # \brief 
+    #
+    D_SACCHARIDE_1_4_LINKING = 23
+
+    ##
+    # \brief 
+    #
+    L_SACCHARIDE_ALPHA_LINKING = 24
+
+    ##
+    # \brief 
+    #
+    D_SACCHARIDE_ALPHA_LINKING = 25
+
+    ##
+    # \brief 
+    #
+    L_SACCHARIDE_BETA_LINKING = 26
+
+    ##
+    # \brief 
+    #
+    D_SACCHARIDE_BETA_LINKING = 27
+
+    ##
+    # \brief 
+    #
+    L_SACCHARIDE = 28
+
+    ##
+    # \brief 
+    #
+    D_SACCHARIDE = 29
+
+    ##
+    # \brief 
+    #
+    SACCHARIDE = 30
