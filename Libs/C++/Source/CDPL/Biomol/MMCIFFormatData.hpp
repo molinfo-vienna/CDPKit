@@ -53,8 +53,10 @@ namespace CDPL
 
             const std::string UNDEFINED_DATA_VALUE = ".";
             const std::string MISSING_DATA_VALUE   = "?";
-            const std::string TRUE_FLAG            = "Y";
-            const std::string FALSE_FLAG           = "N";
+            const std::string TRUE_FLAG_1          = "Y";
+            const std::string TRUE_FLAG_2          = "YES";
+            const std::string FALSE_FLAG_1         = "N";
+            const std::string FALSE_FLAG_2         = "NO";
 
             const std::string::size_type MAX_DATA_BLOCK_ID_LENGTH = 75;
             
@@ -104,7 +106,39 @@ namespace CDPL
                     const std::string SYNTHETIC   = "syn";
                 } // namespace Source
             }
-            
+
+            namespace EntityPoly
+            {
+
+                const std::string NAME = "entity_poly";
+
+                namespace Item
+                {
+
+                    const std::string ENTITY_ID                    = "entity_id";
+                    const std::string TYPE                         = "type";
+                    const std::string NSTD_LINKAGE                 = "nstd_linkage";
+                    const std::string NSTD_MONOMER                 = "nstd_monomer";
+                    const std::string PDBX_SEQ_ONE_LETTER_CODE     = "pdbx_seq_one_letter_code";
+                    const std::string PDBX_SEQ_ONE_LETTER_CODE_CAN = "pdbx_seq_one_letter_code_can";
+                    const std::string PDBX_STRAND_ID               = "pdbx_strand_id";
+                    const std::string PDBX_TARGET_ID               = "pdbx_target_identifier";
+                } // namespace Item
+
+                namespace Type
+                {
+
+                    const std::string CYCLIC_PSEUDO_PEPTIDE   = "cyclic-pseudo-peptide";
+                    const std::string OTHER                   = "other";
+                    const std::string PEPTIDE_NUCLEIC_ACID    = "peptide nucleic acid";
+                    const std::string POLYDEOXYRIBONUCLEOTIDE = "polydeoxyribonucleotide";
+                    const std::string POLYNUCLEOTIDE_HYBRID   = "polydeoxyribonucleotide/polyribonucleotide hybrid";
+                    const std::string POLYPEPTIDE_D           = "polypeptide(D)";
+                    const std::string POLYPEPTIDE_L           = "polypeptide(L)";
+                    const std::string POLYRIBONUCLEOTIDE      = "polyribonucleotide";
+                } // namespace Type
+            } // namespace EntityPoly
+
             namespace AtomSite
             {
 
@@ -231,6 +265,41 @@ namespace CDPL
                     const std::string PDBX_SUBCOMP_LIST              = "pdbx_subcomponent_list";
                     const std::string PDBX_PROC_SITE                 = "pdbx_processing_site";
                 } // namespace Item
+
+                namespace Type
+                {
+
+                    const std::string OTHER                      = "other";
+                    const std::string NON_POLYMER                = "non-polymer";
+                    const std::string L_PEPTIDE_CARBOXY_TERMINUS = "l-peptide cooh carboxy terminus";
+                    const std::string D_PEPTIDE_AMINO_TERMINUS   = "d-peptide nh3 amino terminus";
+                    const std::string L_PEPTIDE_AMINO_TERMINUS   = "l-peptide nh3 amino terminus";
+                    const std::string RNA_3_HYDROXY_TERMINUS     = "rna oh 3 prime terminus";
+                    const std::string RNA_5_HYDROXY_TERMINUS     = "rna oh 5 prime terminus";
+                    const std::string DNA_3_HYDROXY_TERMINUS     = "dna oh 3 prime terminus";
+                    const std::string DNA_5_HYDROXY_TERMINUS     = "dna oh 5 prime terminus";
+                    const std::string PEPTIDE_LINKING            = "peptide linking";
+                    const std::string L_PEPTIDE_LINKING          = "l-peptide linking";
+                    const std::string D_PEPTIDE_LINKING          = "d-peptide linking";
+                    const std::string L_BETA_PEPTIDE_LINKING     = "l-beta-peptide, c-gamma linking";
+                    const std::string D_BETA_PEPTIDE_LINKING     = "d-beta-peptide, c-gamma linking";
+                    const std::string L_GAMMA_PEPTIDE_LINKING    = "l-gamma-peptide, c-delta linking";
+                    const std::string D_GAMMA_PEPTIDE_LINKING    = "d-gamma-peptide, c-delta linking";
+                    const std::string PEPTIDE_LIKE               = "peptide-like";
+                    const std::string RNA_LINKING                = "rna linking";
+                    const std::string DNA_LINKING                = "dna linking";
+                    const std::string L_RNA_LINKING              = "l-rna linking";
+                    const std::string L_DNA_LINKING              = "l-dna linking";
+                    const std::string L_SACCHARIDE_1_4_LINKING   = "l-saccharide 1,4 and 1,4 linking";
+                    const std::string D_SACCHARIDE_1_4_LINKING   = "d-saccharide 1,4 and 1,4 linking";
+                    const std::string L_SACCHARIDE_ALPHA_LINKING = "l-saccharide, alpha linking";
+                    const std::string L_SACCHARIDE_BETA_LINKING  = "l-saccharide, beta linking";
+                    const std::string D_SACCHARIDE_ALPHA_LINKING = "d-saccharide, alpha linking";
+                    const std::string D_SACCHARIDE_BETA_LINKING  = "d-saccharide, beta linking";
+                    const std::string L_SACCHARIDE               = "l-saccharide";
+                    const std::string D_SACCHARIDE               = "d-saccharide";
+                    const std::string SACCHARIDE                 = "saccharide";
+                } // namespace Type
             } // namespace ChemComp
 
             namespace ChemCompAtom

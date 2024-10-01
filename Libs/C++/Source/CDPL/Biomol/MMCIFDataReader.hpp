@@ -74,7 +74,7 @@ namespace CDPL
             void init(std::istream&);
             void init(std::istream&, Chem::Molecule& mol);
             
-            void readMacromolecule(const MMCIFData& data, Chem::Molecule& mol);
+            void readMacromol(const MMCIFData& data, Chem::Molecule& mol);
 
             void initChemCompDict(const MMCIFData& data);
             void procChemCompAtoms(const MMCIFData& data);
@@ -84,7 +84,7 @@ namespace CDPL
             void postprocAtomSites(Chem::Molecule& mol);
             void createNonStdInterResidueBonds(const MMCIFData& data, Chem::Molecule& mol) const;
             void applyDictionaryBondOrders(Chem::Molecule& mol);
-            void setMacromoleculeName(const MMCIFData& data, Chem::Molecule& mol) const;
+            void setMacromolName(const MMCIFData& data, Chem::Molecule& mol) const;
 
             Chem::Atom* getAtom(const MMCIFData& data, Chem::Molecule& mol,
                                 const std::string* auth_asym_id, const std::string* auth_atom_id,
@@ -98,8 +98,8 @@ namespace CDPL
             void getMissingChemCompLinkAtomsFromResDictStructs();
             void setupChemCompDataFromResDictStruct(ChemComp& chem_comp, const std::string& comp_id);
             
-            ChemComp& getOrAddChemCompData(const std::string& comp_id);
-            ChemComp& getChemCompData(const std::string& comp_id);
+            ChemComp& getOrAddChemCompData(const std::string* comp_id);
+            ChemComp& getChemCompData(const std::string* comp_id);
             
             void readChemComps(const MMCIFData& data, Chem::Molecule& mol);
             void readChemCompAtoms(const MMCIFData& data, Chem::Molecule& mol);
@@ -181,9 +181,10 @@ namespace CDPL
             typedef std::unordered_map<ChemCompAtomID, std::size_t,
                                        ChemCompAtomIDHashFunc,
                                        ChemCompAtomIDCmpFunc>           ChemCompAtomLookupMap;
-            typedef std::unordered_map<std::string, ChemComp::Pointer,
-                                       Internal::CIStringHashFunc,
-                                       Internal::CIStringCmpFunc>       ChemCompDictionary;
+            typedef std::unordered_map<const std::string*,
+                                       ChemComp::Pointer,
+                                       Internal::CIStringPtrHashFunc,
+                                       Internal::CIStringPtrCmpFunc>    ChemCompDictionary;
             typedef std::vector<Chem::Atom*>                            AtomList;
             typedef std::pair<Chem::Atom*, std::size_t>                 AtomIndexPair;
             typedef std::vector<AtomIndexPair>                          AtomIndexPairList;
