@@ -27,6 +27,7 @@
 
 #include <iosfwd>
 #include <unordered_set>
+#include <set>
 #include <map>
 #include <vector>
 #include <utility>
@@ -70,6 +71,8 @@ namespace CDPL
             bool outputMacromolData(const Chem::MolecularGraph& molgraph);
             void outputEntryData();
             void outputEntityData();
+            void outputEntityPolyData();
+            void outputEntityPolySeqData();
             void outputAtomSiteData(const Chem::MolecularGraph& molgraph);
             void outputMacromolCompData();
             void outputMacromolCompAtomData();
@@ -96,10 +99,18 @@ namespace CDPL
             const std::string& createUniqueAtomID(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
                                                   const AtomIDSet& id_set, std::string& id) const;
 
-            typedef std::vector<const std::string*> StringPtrList;
-
             struct Entity
             {
+                
+                struct StringPtrLessCmpFunc
+                {
+
+                    bool operator()(const std::string* str1, const std::string* str2) const;
+                };
+
+                typedef std::pair<const std::string*, long>                ResidueID;
+                typedef std::vector<ResidueID>                             ResidueIDList;
+                typedef std::set<const std::string*, StringPtrLessCmpFunc> ChainIDSet;
 
                 std::size_t        id{0};
                 std::size_t        modelNo{0};
@@ -108,7 +119,8 @@ namespace CDPL
                 const std::string* type{nullptr};
                 const std::string* srcMethod{nullptr};
                 const std::string* descr{nullptr};
-                StringPtrList      resSequence;
+                ResidueIDList      resSequence;
+                ChainIDSet         chains;
             };
 
             struct ChemComp
@@ -202,7 +214,7 @@ namespace CDPL
             ChemCompDictionary          chemCompDict;
             EntityList                  entities;
             AtomList                    entityAtoms;
-            StringPtrList               entityResSequence;
+            Entity::ResidueIDList       entityResSequence;
             UIntArray                   atomEntityIds;
             AtomIDSet                   chemCompAtomIds[2];
             ChemComp::BondIDSet         chemCompBondIds;     

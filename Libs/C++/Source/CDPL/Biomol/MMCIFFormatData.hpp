@@ -139,6 +139,21 @@ namespace CDPL
                 } // namespace Type
             } // namespace EntityPoly
 
+            namespace EntityPolySeq
+            {
+
+                const std::string NAME = "entity_poly_seq";
+
+                namespace Item
+                {
+
+                    const std::string entity_id = "entity_id";
+                    const std::string num       = "num";
+                    const std::string mon_id    = "mon_id";
+                    const std::string hetero    = "hetero";
+                } // namespace Item
+            } // namespace EntityPolySeq
+
             namespace AtomSite
             {
 

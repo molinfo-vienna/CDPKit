@@ -171,6 +171,12 @@ namespace
 }
 
 
+bool Biomol::MMCIFDataWriter::Entity::StringPtrLessCmpFunc::operator()(const std::string* str1, const std::string* str2) const
+{
+    return (*str1 < *str2);
+}
+
+
 std::size_t Biomol::MMCIFDataWriter::ChemComp::BondIDHashFunc::operator()(const BondID& bond_id) const
 {
     std::size_t h = 0;
@@ -298,6 +304,14 @@ void Biomol::MMCIFDataWriter::outputEntityData()
         counts.addValue(std::to_string(entity.count));
         weights.addValue(toString(entity.weight));
     }
+}
+
+void Biomol::MMCIFDataWriter::outputEntityPolyData()
+{
+}
+
+void Biomol::MMCIFDataWriter::outputEntityPolySeqData()
+{
 }
 
 void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& molgraph)
@@ -690,7 +704,7 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                 if (*e.type == MMCIF::Entity::Type::WATER) {
                     if (e.modelNo == model_no)
                         e.count++;
-
+                   
                     entity = &e;
                     break;
                 }
@@ -713,11 +727,12 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                 return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
             });
 
-            auto curr_res_id = getResidueID(*entityAtoms.front());
+            auto& first_atom = *entityAtoms.front();
+            auto curr_res_id = getResidueID(first_atom);
             auto weight = 0.0;
 
             entityResSequence.clear();
-            entityResSequence.push_back(&getResidueCode(*entityAtoms.front()));
+            entityResSequence.emplace_back(&getResidueCode(first_atom), getResidueSequenceNumber(first_atom));
 
             for (auto atom : entityAtoms) {
                 weight += H_WEIGHT * calcImplicitHydrogenCount(*atom, molgraph) + Chem::AtomDictionary::getAtomicWeight(getType(*atom), 0);
@@ -725,19 +740,25 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                 auto res_id = getResidueID(*atom);
 
                 if (res_id != curr_res_id) {
-                    entityResSequence.push_back(&getResidueCode(*atom));
+                    entityResSequence.emplace_back(&getResidueCode(*atom), getResidueSequenceNumber(*atom));
                     curr_res_id = res_id;
                 }
             }
-            
+
             for (auto& e : entities)
                 if (std::equal(entityResSequence.begin(), entityResSequence.end(),
                                e.resSequence.begin(), e.resSequence.end(),
-                               Internal::CIStringPtrCmpFunc())) {
+                               [](const Entity::ResidueID& id1, const Entity::ResidueID& id2) {
+                                   return ((id1.second == id2.second) && Internal::isEqualCI(*id1.first, *id2.first));
+                               })) {
 
-                    if (e.modelNo == model_no)
+                    if (e.modelNo == model_no) {
                         e.count++;
 
+                        if (entityResSequence.size() > 1)
+                            e.chains.insert(&getChainID(first_atom));
+                    }
+                    
                     e.weight = std::max(e.weight, weight);
                     
                     entity = &e;
@@ -758,8 +779,10 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                     entity->descr = &MMCIF::MISSING_DATA_VALUE;                    
                     entity->weight = weight;
                     
+                    entity->chains.insert(&getChainID(first_atom));
+                      
                 } else {
-                    auto& comp = getChemCompData(entityResSequence.front());
+                    auto& comp = getChemCompData(entityResSequence.front().first);
              
                     entity->descr = comp.name;
                     entity->weight = (comp.weight >= 0.0 ? comp.weight : weight);
