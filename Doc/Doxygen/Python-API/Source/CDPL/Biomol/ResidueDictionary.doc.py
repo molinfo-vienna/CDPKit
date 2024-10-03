@@ -43,16 +43,17 @@ class ResidueDictionary(Boost.Python.instance):
         ##
         # \brief Constructs and initializes a <tt>Entry</tt> instance with the given data.
         # 
-        # \param code 
+        # \param code The three letter code (TLC) of the residue.
         # \param rep_code 
         # \param rep_by_code 
         # \param parent_code The TLC of the parent residue (since 1.2).
+        # \param one_letter_code The one letter code (since 1.2).
         # \param obsolete 
         # \param name 
         # \param type 
         # \param struc_ret_func
         # 
-        def __init__(code: str, rep_code: str, rep_by_code: str, parent_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
+        def __init__(code: str, rep_code: str, rep_by_code: str, parent_code: str, one_letter_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -101,6 +102,12 @@ class ResidueDictionary(Boost.Python.instance):
         # \brief 
         # \return 
         #
+        def getOneLetterCode() -> str: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
         def getType() -> int: pass
 
         ##
@@ -128,6 +135,10 @@ class ResidueDictionary(Boost.Python.instance):
         replacedCode = property(getReplacedCode)
 
         replacedByCode = property(getReplacedByCode)
+
+        parentCode = property(getParentCode)
+
+        oneLetterCode = property(getOneLetterCode)
 
         obsolete = property(isObsolete)
 
@@ -256,11 +267,11 @@ class ResidueDictionary(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param arg1 
     # \param code 
     # \return 
     #
-    @staticmethod
-    def getSingleLetterCode(code: str) -> str: pass
+    def getOneLetterCode(code: str) -> str: pass
 
     ##
     # \brief 

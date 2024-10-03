@@ -153,9 +153,16 @@ def genResidueDictionaryData():
         parent_code = cif_comp_data.findItem('mon_nstd_parent_comp_id')
 
         if parent_code:
-            parent_code = parent_code.getValue(0).replace('?', '').replace('.', '').replace('"', '')
+            parent_code = parent_code.getValue(0).replace('?', '').replace('.', '').replace('"', '').replace(' ', '')
         else:
             parent_code = ''
+
+        one_letter_code = cif_comp_data.findItem('one_letter_code')
+
+        if one_letter_code:
+            one_letter_code = one_letter_code.getValue(0).replace('?', '').replace('.', '')
+        else:
+            one_letter_code = ''
             
         comp_type = cif_comp_data.findItem('type')
 
@@ -189,7 +196,8 @@ def genResidueDictionaryData():
         
         comp_writer.write(comp)
 
-        output.append(f'    {{ "{code}", "{replaces_code}", "{replaced_by_code}", "{parent_code}", ResidueType::{comp_type}, {obsolete}, "{comp_name}", {comp_idx} }},' + '\n')
+        output.append(f'    {{ "{code}", "{replaces_code}", "{replaced_by_code}", "{parent_code}", "{one_letter_code}", \
+        ResidueType::{comp_type}, {obsolete}, "{comp_name}", {comp_idx} }},' + '\n')
 
         comp_idx += 1
 
