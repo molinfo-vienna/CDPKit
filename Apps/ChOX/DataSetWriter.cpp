@@ -213,9 +213,11 @@ void DataSetWriter::writeRecords(const std::string& def_format)
     qApp->processEvents();
 
     if (writeSelection) {
-        progress_dlg.setMaximum(dataSet.getNumSelectedRecords());
+        auto num_sel_recs = dataSet.getNumSelectedRecords();
+        
+        progress_dlg.setMaximum(num_sel_recs);
 
-        if (!single_rec_files) {
+        if (!single_rec_files || (num_sel_recs <= 1)) {
             QString fileName = base_name + "." + file_ext;
         
             emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
@@ -289,7 +291,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
     } else {
         progress_dlg.setMaximum(dataSet.getSize());
 
-        if (!single_rec_files) {
+        if (!single_rec_files || (dataSet.getSize() <= 1)) {
             QString fileName = base_name + "." + file_ext;
 
             emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
