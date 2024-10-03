@@ -83,9 +83,8 @@ void CDPLPythonBiomol::exportResidueDictionary()
              python::return_value_policy<python::copy_const_reference>())
         .def("getParentCode", &Biomol::ResidueDictionary::getParentCode, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
-        .def("getSingleLetterCode", &Biomol::ResidueDictionary::getSingleLetterCode, python::arg("code"),
+        .def("getOneLetterCode", &Biomol::ResidueDictionary::getOneLetterCode, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
-        .staticmethod("getSingleLetterCode")
         .def("isObsolete", &Biomol::ResidueDictionary::isObsolete, python::arg("code"))
         .def("getName", &Biomol::ResidueDictionary::getName, python::arg("code"),
              python::return_value_policy<python::copy_const_reference>())
@@ -97,11 +96,11 @@ void CDPLPythonBiomol::exportResidueDictionary()
     python::class_<Biomol::ResidueDictionary::Entry>("Entry", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Biomol::ResidueDictionary::Entry&>((python::arg("self"), python::arg("entry"))))
-        .def(python::init<const std::string&, const std::string&, const std::string&, const std::string&, bool,
+        .def(python::init<const std::string&, const std::string&, const std::string&, const std::string&, const std::string&, bool,
              const std::string&, unsigned int, const Biomol::ResidueDictionary::Entry::StructureRetrievalFunction&>(
                  (python::arg("self"), python::arg("code"), python::arg("rep_code"), python::arg("rep_by_code"),
-                  python::arg("parent_code"), python::arg("obsolete"), python::arg("name"), python::arg("type"),
-                  python::arg("struc_ret_func"))))
+                  python::arg("parent_code"), python::arg("one_letter_code"), python::arg("obsolete"), python::arg("name"),
+                  python::arg("type"), python::arg("struc_ret_func"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Biomol::ResidueDictionary::Entry>())    
         .def("assign", CDPLPythonBase::copyAssOp<Biomol::ResidueDictionary::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
@@ -113,6 +112,8 @@ void CDPLPythonBiomol::exportResidueDictionary()
              python::return_value_policy<python::copy_const_reference>())
         .def("getParentCode", &Biomol::ResidueDictionary::Entry::getParentCode, python::arg("self"),
              python::return_value_policy<python::copy_const_reference>())
+        .def("getOneLetterCode", &Biomol::ResidueDictionary::Entry::getOneLetterCode, python::arg("self"),
+             python::return_value_policy<python::copy_const_reference>())
         .def("getType", &Biomol::ResidueDictionary::Entry::getType, python::arg("self"))
         .def("getName", &Biomol::ResidueDictionary::Entry::getName, python::arg("self"),
              python::return_value_policy<python::copy_const_reference>())
@@ -123,6 +124,10 @@ void CDPLPythonBiomol::exportResidueDictionary()
         .add_property("replacedCode", python::make_function(&Biomol::ResidueDictionary::Entry::getReplacedCode,
                                                             python::return_value_policy<python::copy_const_reference>()))
         .add_property("replacedByCode", python::make_function(&Biomol::ResidueDictionary::Entry::getReplacedByCode,
+                                                              python::return_value_policy<python::copy_const_reference>()))
+        .add_property("parentCode", python::make_function(&Biomol::ResidueDictionary::Entry::getParentCode,
+                                                              python::return_value_policy<python::copy_const_reference>()))
+        .add_property("oneLetterCode", python::make_function(&Biomol::ResidueDictionary::Entry::getOneLetterCode,
                                                               python::return_value_policy<python::copy_const_reference>()))
         .add_property("obsolete", &Biomol::ResidueDictionary::Entry::isObsolete)
         .add_property("name", python::make_function(&Biomol::ResidueDictionary::Entry::getName,

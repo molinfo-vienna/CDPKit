@@ -167,6 +167,11 @@ namespace CDPL
             
             constexpr unsigned int SACCHARIDE                 = 30;
 
+            /*
+             * \since 1.2
+             */
+            constexpr unsigned int MAX_TYPE                   = SACCHARIDE;
+
         } // namespace ResidueType
     } // namespace Biomol
 } // namespace CDPL

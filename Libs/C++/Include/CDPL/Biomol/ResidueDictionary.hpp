@@ -62,17 +62,19 @@ namespace CDPL
 
                 /**
                  * \brief Constructs and initializes a \c %Entry instance with the given data.
-                 * \param code
+                 * \param code The three letter code (TLC) of the residue.
                  * \param rep_code
                  * \param rep_by_code
                  * \param parent_code The TLC of the parent residue (since 1.2).
+                 * \param one_letter_code The one letter code (since 1.2).
                  * \param obsolete
                  * \param name
                  * \param type
                  * \param struc_ret_func
                  */
                 Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, const std::string& parent_code,
-                      bool obsolete, const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
+                      const std::string& one_letter_code,bool obsolete, const std::string& name, unsigned int type,
+                      const StructureRetrievalFunction& struc_ret_func);
                 
                 Entry();
                 
@@ -87,6 +89,11 @@ namespace CDPL
                  */
                 const std::string& getParentCode() const;
 
+                /**
+                 * \since 1.2
+                 */
+                const std::string& getOneLetterCode() const;
+
                 bool isObsolete() const;
 
                 const std::string& getName() const;
@@ -100,6 +107,7 @@ namespace CDPL
                 std::string                replacesCode;
                 std::string                replacedByCode;
                 std::string                parentCode;
+                std::string                oneLetterCode;
                 bool                       obsolete;
                 std::string                name;
                 unsigned int               type;
@@ -127,11 +135,6 @@ namespace CDPL
             typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
                                               EntryLookupTable::const_iterator>   ConstEntryIterator;
 
-            /**
-             * \since 1.2
-             */
-            static const std::string& getSingleLetterCode(const std::string& code);
-           
             static bool isStdResidue(const std::string& code);
             
             void addEntry(const Entry& entry);
@@ -168,6 +171,11 @@ namespace CDPL
              */
             const std::string& getParentCode(const std::string& code) const;
 
+            /**
+             * \since 1.2
+             */
+            const std::string& getOneLetterCode(const std::string& code) const;
+           
             bool isObsolete(const std::string& code) const;
 
             const std::string& getName(const std::string& code) const;

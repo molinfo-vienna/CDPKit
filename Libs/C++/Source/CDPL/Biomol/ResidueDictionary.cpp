@@ -52,47 +52,17 @@ namespace
 {
 
     typedef std::unordered_set<std::string, Internal::CIStringHashFunc, Internal::CIStringCmpFunc>  StdResidueSet;
-    typedef std::unordered_map<std::string, std::string,
-                               Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               SingleLetterCodeMap;
     typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*,
                                Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               ResCodeToDataEntryMap;
     typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer,
                                Internal::CIStringHashFunc, Internal::CIStringCmpFunc>               StructureCache;
 
     StdResidueSet stdResidueSet{
-       "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
+      "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
       "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
       "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
       "ASX", "GLX", "N",   "DA",  "DC",  "DG",  "DI",  "DU",
       "DT",  "A",   "C",   "G",   "I",   "U"
-    };
-    
-    SingleLetterCodeMap singleLetterCodeMap{
-      { "ALA", "A" },
-      { "ARG", "R" },
-      { "ASN", "N" },
-      { "ASP", "D" },
-      { "CYS", "C" },
-      { "GLN", "Q" },
-      { "GLU", "E" },
-      { "GLY", "G" },
-      { "HIS", "H" },
-      { "ILE", "I" },
-      { "LEU", "L" },
-      { "LYS", "K" },
-      { "MET", "M" },
-      { "PHE", "F" },
-      { "PRO", "P" },
-      { "SER", "S" },
-      { "THR", "T" },
-      { "TRP", "W" },
-      { "TYR", "Y" },
-      { "VAL", "V" },
-      { "A", "A" },
-      { "C", "C" },
-      { "G", "G" },
-      { "I", "I" },
-      { "U", "U" }
     };
     
     ResCodeToDataEntryMap                    resCodeToDataEntryMap;
@@ -104,7 +74,6 @@ namespace
     std::once_flag initResCodeToDataEntryMapFlag;
 
     const Biomol::ResidueDictionary::Entry DEF_ENTRY;
-    const std::string                      NO_SINGLE_LETTER_CODE;
 
     void initBuiltinDictionary()
     {
@@ -198,16 +167,16 @@ Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::defaultDict 
 
 Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code,
                                         const std::string& rep_by_code, const std::string& parent_code,
-                                        bool obsolete, const std::string& name, unsigned int type,
-                                        const StructureRetrievalFunction& struc_ret_func):
+                                        const std::string& one_letter_code, bool obsolete, const std::string& name,
+                                        unsigned int type, const StructureRetrievalFunction& struc_ret_func):
     code(code),
-    replacesCode(rep_code), replacedByCode(rep_by_code), parentCode(parent_code), obsolete(obsolete), name(name), type(type),
-    structRetrievalFunc(struc_ret_func)
+    replacesCode(rep_code), replacedByCode(rep_by_code), parentCode(parent_code), oneLetterCode(one_letter_code),
+    obsolete(obsolete), name(name), type(type), structRetrievalFunc(struc_ret_func)
 {}
 
 Biomol::ResidueDictionary::Entry::Entry():
-    code(), replacesCode(), replacedByCode(), parentCode(), obsolete(false), name(), type(ResidueType::UNKNOWN),
-    structRetrievalFunc()
+    code(), replacesCode(), replacedByCode(), parentCode(), oneLetterCode(), obsolete(false), name(),
+    type(ResidueType::UNKNOWN), structRetrievalFunc()
 {}
 
 const std::string& Biomol::ResidueDictionary::Entry::getCode() const
@@ -228,6 +197,11 @@ const std::string& Biomol::ResidueDictionary::Entry::getReplacedByCode() const
 const std::string& Biomol::ResidueDictionary::Entry::getParentCode() const
 {
     return parentCode;
+}
+
+const std::string& Biomol::ResidueDictionary::Entry::getOneLetterCode() const
+{
+    return oneLetterCode;
 }
 
 bool Biomol::ResidueDictionary::Entry::isObsolete() const
@@ -333,8 +307,8 @@ void Biomol::ResidueDictionary::loadDefaults()
         const ResidueDataEntry& res_data = RESIDUE_DATA[i];
 
         Entry entry(res_data.code, res_data.replacesCode, res_data.replacedByCode,
-                    res_data.parentCode, res_data.obsolete, res_data.name, res_data.type,
-                    struc_ret_func);
+                    res_data.parentCode, res_data.oneLetterCode, res_data.obsolete,
+                    res_data.name, res_data.type, struc_ret_func);
 
         addEntry(entry);
     }
@@ -389,14 +363,9 @@ const std::string& Biomol::ResidueDictionary::getParentCode(const std::string& c
     return getEntry(code).getParentCode();
 }
 
-const std::string& Biomol::ResidueDictionary::getSingleLetterCode(const std::string& code)
+const std::string& Biomol::ResidueDictionary::getOneLetterCode(const std::string& code) const
 {
-    auto it = singleLetterCodeMap.find(code);
-
-    if (it == singleLetterCodeMap.end())
-        return NO_SINGLE_LETTER_CODE;
-
-    return it->second;
+    return getEntry(code).getOneLetterCode();
 }
 
 bool Biomol::ResidueDictionary::isObsolete(const std::string& code) const
