@@ -271,6 +271,8 @@ bool Biomol::MMCIFDataWriter::outputMacromolData(const Chem::MolecularGraph& mol
     
     outputEntryData();
     outputEntityData();
+    outputEntityPolyData();
+    outputEntityPolySeqData();
     outputAtomSiteData(molgraph);
     outputMacromolCompData();
     outputMacromolCompAtomData();
@@ -308,10 +310,170 @@ void Biomol::MMCIFDataWriter::outputEntityData()
 
 void Biomol::MMCIFDataWriter::outputEntityPolyData()
 {
+    using namespace MMCIF;
+
+    static const std::unordered_set<std::string,
+                                    Internal::CIStringHashFunc,
+                                    Internal::CIStringCmpFunc> oneLetterCodeExclSet
+        { "DA", "DC", "DG", "DT", "MSE", "SEP", "TPO", "PTR", "PCA", "UNK", "ACE", "NH2" };
+    
+    auto& entity_poly = mmCIFData.addCategory(EntityPoly::NAME);
+    auto& entity_ids = entity_poly.addItem(EntityPoly::Item::ENTITY_ID);
+    auto& types = entity_poly.addItem(EntityPoly::Item::TYPE);
+    auto& nstd_lkg_flags = entity_poly.addItem(EntityPoly::Item::NSTD_LINKAGE);
+    auto& nstd_mon_flags = entity_poly.addItem(EntityPoly::Item::NSTD_MONOMER);
+    auto& olc_seqs = entity_poly.addItem(EntityPoly::Item::PDBX_SEQ_ONE_LETTER_CODE);
+    auto& can_olc_seqs = entity_poly.addItem(EntityPoly::Item::PDBX_SEQ_ONE_LETTER_CODE_CAN);
+    auto& strand_ids = entity_poly.addItem(EntityPoly::Item::PDBX_STRAND_ID);
+    auto& target_ids = entity_poly.addItem(EntityPoly::Item::PDBX_TARGET_ID);
+
+    auto& res_dict = getResidueDictionary();
+    
+    std::string olc_seq;
+    std::string can_olc_seq;
+    
+    for (auto& entity : entities) {
+        if (entity.resSequence.size() <= 1)
+            continue;
+
+        entity_ids.addValue(std::to_string(entity.id));
+        
+        auto has_nstd_mon = false;
+        std::size_t line_res_count = 0;
+        
+        olc_seq.clear();
+        can_olc_seq.clear();
+
+        for (auto& e : entity.resSequence) {
+            if (line_res_count++ >= 80) {
+                olc_seq.push_back('\n');
+                can_olc_seq.push_back('\n');
+                line_res_count = 0;
+            }
+            
+            auto& comp = getChemCompData(e.first);
+
+            if (comp.unknown) {
+                olc_seq.push_back('(');
+                olc_seq.append(*e.first);
+                olc_seq.push_back(')');
+                can_olc_seq.push_back('X');
+                has_nstd_mon = true;
+                continue;
+            }
+
+            auto is_std_comp = ResidueDictionary::isStdResidue(*e.first);
+            
+            if (!is_std_comp)
+                has_nstd_mon = true;
+
+            if (!is_std_comp || !comp.oneLetterCode || (oneLetterCodeExclSet.find(*e.first) != oneLetterCodeExclSet.end())) {
+                olc_seq.push_back('(');
+                olc_seq.append(*e.first);
+                olc_seq.push_back(')');
+
+            } else
+                olc_seq.append(*comp.oneLetterCode);
+            
+            if (comp.oneLetterCode) {
+                can_olc_seq.append(*comp.oneLetterCode);
+                continue;
+            }
+
+            if (!comp.parent) {
+                can_olc_seq.push_back('X');
+                continue;
+            }
+
+            auto comma_pos = comp.parent->find(',');
+            
+            if (comma_pos != std::string::npos) {
+                can_olc_seq.push_back('(');
+
+                for (std::string::size_type substr_start = 0; ; ) {
+                    if (substr_start != 0)
+                        can_olc_seq.push_back(',');
+
+                    auto& pnt_olc = res_dict.getOneLetterCode(comp.parent->substr(substr_start, comma_pos));
+
+                    if (!pnt_olc.empty())
+                        can_olc_seq.append(pnt_olc);
+                    else
+                        can_olc_seq.push_back('X');
+
+                    if (comma_pos == std::string::npos)
+                        break;
+                    
+                    substr_start = comma_pos + 1;
+                    comma_pos = comp.parent->find(',', substr_start);
+                }
+
+                can_olc_seq.push_back(')');
+                continue;
+            }
+            
+            auto& pnt_olc = res_dict.getOneLetterCode(*comp.parent);
+
+            if (!pnt_olc.empty())
+                can_olc_seq.append(pnt_olc);
+            else
+                can_olc_seq.push_back('X');
+        }
+
+        boost::to_upper(olc_seq);
+        boost::to_upper(can_olc_seq);
+        
+        olc_seqs.addValue(std::move(olc_seq));
+        can_olc_seqs.addValue(std::move(can_olc_seq));
+
+        types.addValue(MISSING_DATA_VALUE); // TODO
+        nstd_lkg_flags.addValue(MISSING_DATA_VALUE); // TODO
+        
+        nstd_mon_flags.addValue(boost::to_lower_copy(has_nstd_mon ? TRUE_FLAG_1 : FALSE_FLAG_1));
+     
+        tmpString.clear();
+
+        for (auto chain_id : entity.chains) {
+            if (!tmpString.empty())
+                tmpString.push_back(',');
+
+            tmpString.append(*chain_id);
+        }
+
+        if (tmpString.empty())
+            strand_ids.addValue(UNDEFINED_DATA_VALUE);
+        else
+            strand_ids.addValue(std::move(tmpString));
+        
+        target_ids.addValue(MISSING_DATA_VALUE);
+    }
 }
 
 void Biomol::MMCIFDataWriter::outputEntityPolySeqData()
 {
+    using namespace MMCIF;
+
+    auto& entity_seq = mmCIFData.addCategory(EntityPolySeq::NAME);
+    auto& entity_ids = entity_seq.addItem(EntityPolySeq::Item::ENTITY_ID);
+    auto& res_seq_nums = entity_seq.addItem(EntityPolySeq::Item::NUM);
+    auto& mon_ids = entity_seq.addItem(EntityPolySeq::Item::MON_ID);
+    auto& hetero_flags = entity_seq.addItem(EntityPolySeq::Item::HETERO);
+
+    std::string false_flag(boost::to_lower_copy(MMCIF::FALSE_FLAG_1));
+    
+    for (auto& entity : entities) {
+        if (entity.resSequence.size() <= 1)
+            continue;
+
+        tmpString = std::to_string(entity.id);
+        
+        for (auto& res : entity.resSequence) {
+            entity_ids.addValue(tmpString);
+            res_seq_nums.addValue(std::to_string(res.second));
+            mon_ids.addValue(*res.first);
+            hetero_flags.addValue(false_flag);
+        }
+    }
 }
 
 void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& molgraph)
@@ -322,8 +484,8 @@ void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& mol
     auto& pdb_groups = atom_sites.addItem(AtomSite::Item::GROUP_PDB);
     auto& serial_nos = atom_sites.addItem(AtomSite::Item::ID);
     auto& type_syms = atom_sites.addItem(AtomSite::Item::TYPE_SYMBOL);
-    auto& atom_alt_loc_ids = atom_sites.addItem(AtomSite::Item::LABEL_ALT_ID);
     auto& atom_ids = atom_sites.addItem(AtomSite::Item::LABEL_ATOM_ID);
+    auto& atom_alt_loc_ids = atom_sites.addItem(AtomSite::Item::LABEL_ALT_ID);
     auto& comp_ids = atom_sites.addItem(AtomSite::Item::LABEL_COMP_ID);
     auto& chain_ids = atom_sites.addItem(AtomSite::Item::LABEL_ASYM_ID);
     auto& entity_ids = atom_sites.addItem(AtomSite::Item::LABEL_ENTITY_ID);
@@ -338,7 +500,7 @@ void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& mol
     auto& auth_res_seq_nos = atom_sites.addItem(AtomSite::Item::AUTH_SEQ_ID);
     auto& auth_comp_ids = atom_sites.addItem(AtomSite::Item::AUTH_COMP_ID);
     auto& auth_chain_ids = atom_sites.addItem(AtomSite::Item::AUTH_ASYM_ID);
-    auto& auth_atom_ids = atom_sites.addItem(AtomSite::Item::LABEL_ATOM_ID);
+    auto& auth_atom_ids = atom_sites.addItem(AtomSite::Item::AUTH_ATOM_ID);
     auto& model_nos = atom_sites.addItem(AtomSite::Item::PDBX_PDB_MODEL_NUM);
 
     std::size_t serial = 1;
@@ -654,6 +816,28 @@ bool Biomol::MMCIFDataWriter::prepAtomSiteData(const Chem::MolecularGraph& molgr
         return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
     });
 
+    atomUniqueResIds.resize(molgraph.getNumAtoms());
+
+    std::size_t unique_res_id = 1;
+    auto curr_res_code = &getResidueCode(*atomSites.front());
+    auto curr_chain_id = &getChainID(*atomSites.front());
+    auto curr_res_id = getResidueID(*atomSites.front());
+    
+    for (auto atom : atomSites) {
+        auto res_code = &getResidueCode(*atom);
+        auto chain_id = &getChainID(*atom);
+        auto res_id = getResidueID(*atom);
+
+        if ((res_id != curr_res_id) || (*chain_id != *curr_chain_id) || !Internal::isEqualCI(*res_code, *curr_res_code)) {
+            curr_res_code = res_code;
+            curr_chain_id = chain_id;
+            curr_res_id = res_id;
+            unique_res_id++;
+        }
+
+        atomUniqueResIds[molgraph.getAtomIndex(*atom)] = unique_res_id;
+    }
+    
     return true;
 }
 
@@ -813,10 +997,10 @@ void Biomol::MMCIFDataWriter::prepMacromolCompData(const Chem::MolecularGraph& m
         if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2))
             continue;
 
-        if (getResidueID(atom1) != getResidueID(atom2))
-            continue;
-
-        if (getChainID(atom1) != getChainID(atom2))
+        auto atom1_res_id = atomUniqueResIds[molgraph.getAtomIndex(atom1)];
+        auto atom2_res_id = atomUniqueResIds[molgraph.getAtomIndex(atom2)];
+        
+        if (atom1_res_id != atom2_res_id)
             continue;
 
         getChemCompData(&getResidueCode(atom1)).addBond(bond);
@@ -826,11 +1010,12 @@ void Biomol::MMCIFDataWriter::prepMacromolCompData(const Chem::MolecularGraph& m
     
     for (auto& e : chemCompDict) {
         auto& comp = *e.second;
+        auto& code = *e.first;
         
         comp.name = &MMCIF::MISSING_DATA_VALUE;
         comp.type = ResidueType::UNKNOWN;
         
-        auto res_struct = res_dict.getStructure(*e.first);
+        auto res_struct = res_dict.getStructure(code);
 
         if (!res_struct)
             continue;
@@ -938,12 +1123,17 @@ void Biomol::MMCIFDataWriter::prepMacromolCompData(const Chem::MolecularGraph& m
         if (!name.empty())
             comp.name = &name;
 
-        auto& parent = res_dict.getParentCode(*e.first);
+        auto& parent = res_dict.getParentCode(code);
 
         if (!parent.empty())
             comp.parent = &parent;
+
+        auto& olc = res_dict.getOneLetterCode(code);
+
+        if (!olc.empty())
+            comp.oneLetterCode = &olc;
         
-        comp.type = res_dict.getType(*e.first);
+        comp.type = res_dict.getType(code);
         comp.weight = MolProp::calcMass(*res_struct);
 
         MolProp::generateMolecularFormula(*res_struct, comp.formula, " ");

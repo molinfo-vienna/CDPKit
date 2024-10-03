@@ -147,10 +147,10 @@ namespace CDPL
                 namespace Item
                 {
 
-                    const std::string entity_id = "entity_id";
-                    const std::string num       = "num";
-                    const std::string mon_id    = "mon_id";
-                    const std::string hetero    = "hetero";
+                    const std::string ENTITY_ID = "entity_id";
+                    const std::string NUM       = "num";
+                    const std::string MON_ID    = "mon_id";
+                    const std::string HETERO    = "hetero";
                 } // namespace Item
             } // namespace EntityPolySeq
 

@@ -572,9 +572,9 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     auto type_syms = atom_sites->findItem(AtomSite::Item::TYPE_SYMBOL);
     auto atom_alt_loc_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
     auto entity_ids = atom_sites->findItem(AtomSite::Item::LABEL_ENTITY_ID);
-    auto atom_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID), atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID));
-    auto comp_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID), atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID));
-    auto res_seq_nos = select(atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID), atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID));
+    auto atom_ids = select(atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID), atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID));
+    auto comp_ids = select(atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID), atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID));
+    auto res_seq_nos = select(atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID), atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID));
     auto chain_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_ASYM_ID), atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID));
     auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
     auto coords_x = atom_sites->findItem(AtomSite::Item::COORDS_X);

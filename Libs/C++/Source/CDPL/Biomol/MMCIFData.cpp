@@ -181,7 +181,7 @@ namespace
         return max_len;
     }
 
-    bool outputValue(std::ostream& os, const std::string& value, std::size_t width = 0)
+    bool outputValue(std::ostream& os, const std::string& value, bool after_nl, std::size_t width = 0)
     {
         using namespace Biomol;
 
@@ -200,7 +200,10 @@ namespace
                 return false;
 
             default:
-                os << MMCIF::END_OF_LINE << MMCIF::TEXT_FIELD_DELIMITER << value << MMCIF::END_OF_LINE
+                if (!after_nl)
+                    os << MMCIF::END_OF_LINE;
+                
+                os << MMCIF::TEXT_FIELD_DELIMITER << value << MMCIF::END_OF_LINE
                    << MMCIF::TEXT_FIELD_DELIMITER << MMCIF::END_OF_LINE;
                 return true;
         }
@@ -725,7 +728,7 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
             os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR
                << std::setw(max_name_len) << std::left << item.getName();
 
-            if (!outputValue(os, item.getNumValues() != 0 ? item.getValue(0) : MMCIF:: MISSING_DATA_VALUE))
+            if (!outputValue(os, item.getNumValues() != 0 ? item.getValue(0) : MMCIF:: MISSING_DATA_VALUE, false))
                 os << MMCIF::END_OF_LINE;
         }
 
@@ -737,18 +740,19 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
     os << MMCIF::LOOP_KEYWORD << MMCIF::END_OF_LINE;
 
     for (auto& item : cat) {
-        os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << item.getName() << MMCIF::END_OF_LINE;
+        os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR << item.getName()
+           << ' ' /* trailing space only for LigandScout bug compatibility */ << MMCIF::END_OF_LINE;
 
         field_widths.push_back(std::max(std::size_t(1), getMaxItemValueLength(item)));
     }
 
     for (std::size_t i = 0, num_items = cat.getNumItems(); i < num_rows; i++) {
-        bool wrote_nl = false;
+        bool wrote_nl = true;
 
         for (std::size_t j = 0; j < num_items; j++) {
             auto& item = cat.getItem(j);
             
-            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, field_widths[j] + 1);
+            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, wrote_nl, field_widths[j] + 1);
         }
 
         if (!wrote_nl)

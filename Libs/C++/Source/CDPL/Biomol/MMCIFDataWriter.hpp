@@ -185,6 +185,7 @@ namespace CDPL
                 bool               unknown{true};
                 const std::string* name{nullptr};
                 const std::string* parent{nullptr};
+                const std::string* oneLetterCode{nullptr};
                 unsigned int       type{0};
                 std::string        formula;
                 double             weight{-1.0};
@@ -200,6 +201,7 @@ namespace CDPL
             typedef std::map<const std::string*, ChemComp::Pointer,
                              CIStringPtrLessCmpFunc>                    ChemCompDictionary;
             typedef ResidueDictionary::SharedPointer                    ResDictPointer;
+            typedef std::unordered_set<const Chem::Bond*>               BondSet;
             typedef std::vector<const Chem::Atom*>                      AtomList;
             typedef std::vector<std::size_t>                            UIntArray;
             
@@ -214,8 +216,12 @@ namespace CDPL
             ChemCompDictionary          chemCompDict;
             EntityList                  entities;
             AtomList                    entityAtoms;
+            AtomList                    entityBonds;
             Entity::ResidueIDList       entityResSequence;
             UIntArray                   atomEntityIds;
+            UIntArray                   atomUniqueResIds;
+            BondSet                     disulfBonds;
+            BondSet                     nonStdBonds;
             AtomIDSet                   chemCompAtomIds[2];
             ChemComp::BondIDSet         chemCompBondIds;     
             std::string                 tmpString;
