@@ -169,31 +169,27 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
     numModels = model_ids.size();
 
     std::sort(atomSequence.begin(), atomSequence.end(), std::bind(&PDBDataWriter::atomOrderingFunc, this, _1, _2));
+
     long res_serial = 1;
+    auto curr_res_code = &getResidueCode(*atomSequence.front());
+    auto curr_chain_id = &getChainID(*atomSequence.front());
+    auto curr_res_id = getResidueID(*atomSequence.front());
+    
+    for (auto atom : atomSequence) {
+        auto res_code = &getResidueCode(*atom);
+        auto chain_id = &getChainID(*atom);
+        auto res_id = getResidueID(*atom);
 
-    for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {
-        const Atom* first_atom = *it;
-        long res_id = getResidueID(*first_atom);
-        const std::string& res_code = getResidueCode(*first_atom);
-
-        atomToResidueSerialMap[first_atom] = res_serial; 
-
-        for (++it; it != end; ++it) {
-            const Atom* next_atom = *it;
-            const std::string& next_res_code = getResidueCode(*next_atom);
-
-            if (next_res_code != res_code)
-                break;
-
-            long next_res_id = getResidueID(*next_atom);
-
-            if (next_res_id != res_id)
-                break;
-
-            atomToResidueSerialMap[next_atom] = res_serial; 
+        if ((res_id != curr_res_id) || (*chain_id != *curr_chain_id) || (*res_code != *curr_res_code)) {
+            curr_res_code = res_code;
+            curr_chain_id = chain_id;
+            curr_res_id = res_id;
+            res_serial++;
         }
-    }
 
+        atomToResidueSerialMap[atom] = res_serial;
+    }
+    
     for (Chem::MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
         const Atom& atom1 = bond.getBegin();
