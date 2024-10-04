@@ -59,7 +59,7 @@ namespace CDPL
             const std::string FALSE_FLAG_2         = "NO";
 
             const std::string::size_type MAX_DATA_BLOCK_ID_LENGTH = 75;
-            
+
             namespace Entry
             {
 
@@ -154,6 +154,18 @@ namespace CDPL
                 } // namespace Item
             } // namespace EntityPolySeq
 
+            namespace AtomType
+            {
+
+                const std::string NAME = "atom_type";
+
+                namespace Item
+                {
+
+                    const std::string SYMBOL = "symbol";
+                }
+            } // namespace AtomType
+
             namespace AtomSite
             {
 
@@ -164,13 +176,13 @@ namespace CDPL
 
                     const std::string GROUP_PDB          = "group_PDB";
                     const std::string ID                 = "id";
-                    const std::string TYPE_SYMBOL        = "type_symbol";     // mandatory
-                    const std::string LABEL_ATOM_ID      = "label_atom_id";   // mandatory
-                    const std::string LABEL_ALT_ID       = "label_alt_id";    // mandatory
-                    const std::string LABEL_COMP_ID      = "label_comp_id";   // mandatory
-                    const std::string LABEL_ASYM_ID      = "label_asym_id";   // mandatory
-                    const std::string LABEL_ENTITY_ID    = "label_entity_id"; // mandatory
-                    const std::string LABEL_SEQ_ID       = "label_seq_id";    // mandatory
+                    const std::string TYPE_SYMBOL        = "type_symbol";
+                    const std::string LABEL_ATOM_ID      = "label_atom_id";
+                    const std::string LABEL_ALT_ID       = "label_alt_id";
+                    const std::string LABEL_COMP_ID      = "label_comp_id";
+                    const std::string LABEL_ASYM_ID      = "label_asym_id";
+                    const std::string LABEL_ENTITY_ID    = "label_entity_id";
+                    const std::string LABEL_SEQ_ID       = "label_seq_id";
                     const std::string COORDS_X           = "Cartn_x";
                     const std::string COORDS_Y           = "Cartn_y";
                     const std::string COORDS_Z           = "Cartn_z";
@@ -178,7 +190,7 @@ namespace CDPL
                     const std::string B_ISO_OR_EQUIV     = "B_iso_or_equiv";
                     const std::string AUTH_SEQ_ID        = "auth_seq_id";
                     const std::string AUTH_COMP_ID       = "auth_comp_id";
-                    const std::string AUTH_ASYM_ID       = "auth_asym_id";    // mandatory
+                    const std::string AUTH_ASYM_ID       = "auth_asym_id";
                     const std::string AUTH_ATOM_ID       = "auth_atom_id";
                     const std::string PDBX_PDB_INS_CODE  = "pdbx_PDB_ins_code";
                     const std::string PDBX_FORMAL_CHARGE = "pdbx_formal_charge";
@@ -201,48 +213,62 @@ namespace CDPL
                 namespace Item
                 {
 
-                    const std::string ID                      = "id";
-                    const std::string CONN_TYPE_ID            = "conn_type_id";
-                    const std::string DETAILS                 = "details";
-                    const std::string PTNR1_AUTH_ASYM_ID      = "ptnr1_auth_asym_id";
-                    const std::string PTNR1_AUTH_ATOM_ID      = "ptnr1_auth_atom_id";
-                    const std::string PTNR1_AUTH_COMP_ID      = "ptnr1_auth_comp_id";
-                    const std::string PTNR1_AUTH_SEQ_ID       = "ptnr1_auth_seq_id";
-                    const std::string PTNR1_LABEL_ALT_ID      = "ptnr1_label_alt_id";
-                    const std::string PTNR1_LABEL_ASYM_ID     = "ptnr1_label_asym_id";
-                    const std::string PTNR1_LABEL_ATOM_ID     = "ptnr1_label_atom_id";
-                    const std::string PTNR1_LABEL_COMP_ID     = "ptnr1_label_comp_id";
-                    const std::string PTNR1_LABEL_SEQ_ID      = "ptnr1_label_seq_id";
-                    const std::string PDBX_PTNR1_PDB_INS_CODE = "pdbx_ptnr1_PDB_ins_code";
-                    const std::string PTNR1_ROLE              = "ptnr1_role";
-                    const std::string PTNR1_SYMMETRY          = "ptnr1_symmetry";
-                    const std::string PTNR2_AUTH_ASYM_ID      = "ptnr2_auth_asym_id";
-                    const std::string PTNR2_AUTH_ATOM_ID      = "ptnr2_auth_atom_id";
-                    const std::string PTNR2_AUTH_COMP_ID      = "ptnr2_auth_comp_id";
-                    const std::string PTNR2_AUTH_SEQ_ID       = "ptnr2_auth_seq_id";
-                    const std::string PTNR2_LABEL_ALT_ID      = "ptnr2_label_alt_id";
-                    const std::string PTNR2_LABEL_ASYM_ID     = "ptnr2_label_asym_id";
-                    const std::string PTNR2_LABEL_ATOM_ID     = "ptnr2_label_atom_id";
-                    const std::string PTNR2_LABEL_COMP_ID     = "ptnr2_label_comp_id";
-                    const std::string PTNR2_LABEL_SEQ_ID      = "ptnr2_label_seq_id";
-                    const std::string PDBX_PTNR2_PDB_INS_CODE = "pdbx_ptnr2_PDB_ins_code";
-                    const std::string PTNR2_ROLE              = "ptnr2_role";
-                    const std::string PTNR2_SYMMETRY          = "ptnr2_symmetry";
+                    const std::string ID                       = "id";
+                    const std::string CONN_TYPE_ID             = "conn_type_id";
+                    const std::string PDBX_LEAVING_ATOM_FLAG   = "pdbx_leaving_atom_flag";
+                    const std::string PDBX_PDB_ID              = "pdbx_PDB_id";
+                    const std::string PTNR1_LABEL_ASYM_ID      = "ptnr1_label_asym_id";
+                    const std::string PTNR1_LABEL_COMP_ID      = "ptnr1_label_comp_id";
+                    const std::string PTNR1_LABEL_SEQ_ID       = "ptnr1_label_seq_id";
+                    const std::string PTNR1_LABEL_ATOM_ID      = "ptnr1_label_atom_id";
+                    const std::string PTNR1_LABEL_ALT_ID       = "ptnr1_label_alt_id";
+                    const std::string PTNR1_ROLE               = "ptnr1_role";
+                    const std::string PDBX_PTNR1_LABEL_ALT_ID  = "pdbx_ptnr1_label_alt_id";
+                    const std::string PDBX_PTNR1_PDB_INS_CODE  = "pdbx_ptnr1_PDB_ins_code";
+                    const std::string PDBX_PTNR1_STD_COMP_ID   = "pdbx_ptnr1_standard_comp_id";
+                    const std::string PTNR1_SYMMETRY           = "ptnr1_symmetry";
+                    const std::string PTNR2_LABEL_ASYM_ID      = "ptnr2_label_asym_id";
+                    const std::string PTNR2_LABEL_COMP_ID      = "ptnr2_label_comp_id";
+                    const std::string PTNR2_LABEL_SEQ_ID       = "ptnr2_label_seq_id";
+                    const std::string PTNR2_LABEL_ATOM_ID      = "ptnr2_label_atom_id";
+                    const std::string PTNR2_LABEL_ALT_ID       = "ptnr2_label_alt_id";
+                    const std::string PTNR2_ROLE               = "ptnr2_role";
+                    const std::string PDBX_PTNR2_LABEL_ALT_ID  = "pdbx_ptnr2_label_alt_id";
+                    const std::string PDBX_PTNR2_PDB_INS_CODE  = "pdbx_ptnr2_PDB_ins_code";
+                    const std::string PTNR1_AUTH_ASYM_ID       = "ptnr1_auth_asym_id";
+                    const std::string PTNR1_AUTH_COMP_ID       = "ptnr1_auth_comp_id";
+                    const std::string PTNR1_AUTH_SEQ_ID        = "ptnr1_auth_seq_id";
+                    const std::string PTNR1_AUTH_ATOM_ID       = "ptnr1_auth_atom_id";
+                    const std::string PTNR2_AUTH_ASYM_ID       = "ptnr2_auth_asym_id";
+                    const std::string PTNR2_AUTH_COMP_ID       = "ptnr2_auth_comp_id";
+                    const std::string PTNR2_AUTH_SEQ_ID        = "ptnr2_auth_seq_id";
+                    const std::string PTNR2_AUTH_ATOM_ID       = "ptnr2_auth_atom_id";
+                    const std::string PTNR2_SYMMETRY           = "ptnr2_symmetry";
+                    const std::string PDBX_PTNR3_LABEL_ATOM_ID = "pdbx_ptnr3_label_atom_id";
+                    const std::string PDBX_PTNR3_LABEL_SEQ_ID  = "pdbx_ptnr3_label_seq_id";
+                    const std::string PDBX_PTNR3_LABEL_COMP_ID = "pdbx_ptnr3_label_comp_id";
+                    const std::string PDBX_PTNR3_LABEL_ASYM_ID = "pdbx_ptnr3_label_asym_id";
+                    const std::string PDBX_PTNR3_LABEL_ALT_ID  = "pdbx_ptnr3_label_alt_id";
+                    const std::string PDBX_PTNR3_PDB_INS_CODE  = "pdbx_ptnr3_PDB_ins_code";
+                    const std::string DETAILS                  = "details";
+                    const std::string PDBX_DIST_VALUE          = "pdbx_dist_value";
+                    const std::string PDBX_VALUE_ORDER         = "pdbx_value_order";
+                    const std::string PDBX_ROLE                = "pdbx_role";
                 } // namespace Item
 
                 namespace Type
                 {
 
-                    const std::string COVALE           = "covale";           // covalent bond
-                    const std::string COVALE_BASE      = "covale_base";      // covalent modification of a nucleotide base
-                    const std::string COVALE_PHOSPHATE = "covale_phosphate"; // covalent modification of a nucleotide phosphate
-                    const std::string COVALE_SUGAR     = "covale_sugar";     // covalent modification of a nucleotide sugar
-                    const std::string DISULF           = "disulf";           // disulfide bridge
-                    const std::string HYDROG           = "hydrog";           // hydrogen bond
-                    const std::string METALC           = "metalc";           // metal coordination
-                    const std::string MISMAT           = "mismat";           // mismatched base pairs
-                    const std::string MODRES           = "modres";           // covalent residue modification
-                    const std::string SALTBR           = "saltbr";           // ionic interaction
+                    const std::string COVALE           = "covale";
+                    const std::string COVALE_BASE      = "covale_base";
+                    const std::string COVALE_PHOSPHATE = "covale_phosphate";
+                    const std::string COVALE_SUGAR     = "covale_sugar";
+                    const std::string DISULF           = "disulf";
+                    const std::string HYDROG           = "hydrog";
+                    const std::string METALC           = "metalc";
+                    const std::string MISMAT           = "mismat";
+                    const std::string MODRES           = "modres";
+                    const std::string SALTBR           = "saltbr";
                 } // namespace Type
             } // namespace StructConn
 

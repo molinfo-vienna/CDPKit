@@ -73,15 +73,18 @@ namespace CDPL
             void outputEntityData();
             void outputEntityPolyData();
             void outputEntityPolySeqData();
+            void outputStructConnData();
+            void outputAtomTypeData();
             void outputAtomSiteData(const Chem::MolecularGraph& molgraph);
             void outputMacromolCompData();
             void outputMacromolCompAtomData();
             void outputMacromolCompBondData();
             
             bool prepAtomSiteData(const Chem::MolecularGraph& molgraph);
+            void prepMacromolCompData();
+            void prepStructConnData(const Chem::MolecularGraph& molgraph);
             void prepEntityData(const Chem::MolecularGraph& molgraph);
-            void prepMacromolCompData(const Chem::MolecularGraph& molgraph);
-            
+
             void getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no);
             
             void outputChemCompData(const Chem::MolecularGraph& molgraph);
@@ -129,23 +132,22 @@ namespace CDPL
                 struct Atom
                 {
 
-                    Atom(const std::string* id, const std::string* sym, unsigned int type, unsigned int config, int aromatic):
-                        id(id), symbol(sym), type(type), config(config), aromatic(aromatic)
+                    Atom(const std::string* id, const std::string* sym, unsigned int config, bool arom):
+                        id(id), symbol(sym), config(config), aromatic(arom)
                     {}
 
                     const std::string* id;
                     const std::string* symbol;
-                    unsigned int       type;
                     unsigned int       config;
-                    int                aromatic;
+                    bool               aromatic;
                 };
                 
                 struct Bond
                 {
 
                     Bond(const std::string* atom_1_id, const std::string* atom_2_id, std::size_t order,
-                         unsigned int config, int aromatic):
-                        atom1Id(atom_1_id), atom2Id(atom_2_id), order(order), config(config), aromatic(aromatic)
+                         unsigned int config, bool arom):
+                        atom1Id(atom_1_id), atom2Id(atom_2_id), order(order), config(config), aromatic(arom)
                     {}
 
                     const std::string* atom1Id;
@@ -154,9 +156,6 @@ namespace CDPL
                     unsigned int       config;
                     int                aromatic;
                 };
-
-                void addAtom(const Chem::Atom& atom);
-                void addBond(const Chem::Bond& bond);
                 
                 typedef std::pair<const std::string*, const std::string*> BondID;
 
@@ -179,7 +178,7 @@ namespace CDPL
                 typedef std::unique_ptr<ChemComp>                         Pointer;
 
                 AtomList           atoms;
-                AtomIDSet          atomIds;
+                AtomIDSet          linkAtomIds;
                 BondList           bonds;
                 BondIDSet          bondIds;
                 bool               unknown{true};
@@ -216,14 +215,12 @@ namespace CDPL
             ChemCompDictionary          chemCompDict;
             EntityList                  entities;
             AtomList                    entityAtoms;
-            AtomList                    entityBonds;
             Entity::ResidueIDList       entityResSequence;
             UIntArray                   atomEntityIds;
             UIntArray                   atomUniqueResIds;
             BondSet                     disulfBonds;
             BondSet                     nonStdBonds;
             AtomIDSet                   chemCompAtomIds[2];
-            ChemComp::BondIDSet         chemCompBondIds;     
             std::string                 tmpString;
         };
     } // namespace Biomol

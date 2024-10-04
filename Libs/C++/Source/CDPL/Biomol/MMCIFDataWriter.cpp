@@ -193,35 +193,6 @@ bool Biomol::MMCIFDataWriter::ChemComp::BondIDCmpFunc::operator()(const BondID& 
     return ((*bond_id1.first == *bond_id2.first) && (*bond_id1.second == *bond_id2.second));
 }
 
-void Biomol::MMCIFDataWriter::ChemComp::addAtom(const Chem::Atom& atom)
-    
-{
-    auto atom_id = &getResidueAtomName(atom);
-    
-    if (!atomIds.insert(atom_id).second)
-        return;
-
-    atoms.emplace_back(atom_id, hasSymbol(atom) ? &getSymbol(atom) : nullptr, getType(atom),
-                       hasCIPConfiguration(atom) ? getCIPConfiguration(atom) : Chem::CIPDescriptor::UNDEF,
-                       hasAromaticityFlag(atom) ? int(getAromaticityFlag(atom)) : -1);
-}
-
-
-void Biomol::MMCIFDataWriter::ChemComp::addBond(const Chem::Bond& bond)
-{
-    auto atom_1_id = &getResidueAtomName(bond.getBegin());
-    auto atom_2_id = &getResidueAtomName(bond.getEnd());
-
-    if (!bondIds.emplace(atom_1_id, atom_2_id).second)
-        return;
-
-    bondIds.emplace(atom_2_id, atom_1_id);
-
-    bonds.emplace_back(atom_1_id, atom_2_id, getOrder(bond),
-                       hasCIPConfiguration(bond) ? getCIPConfiguration(bond) : Chem::CIPDescriptor::UNDEF,
-                       hasAromaticityFlag(bond) ? int(getAromaticityFlag(bond)) : -1);
-}
-
 
 bool Biomol::MMCIFDataWriter::CIStringPtrLessCmpFunc::operator()(const std::string* str1, const std::string* str2) const
 {
@@ -266,15 +237,18 @@ bool Biomol::MMCIFDataWriter::outputMacromolData(const Chem::MolecularGraph& mol
     if (!prepAtomSiteData(molgraph))
         return false;
 
-    prepMacromolCompData(molgraph);
+    prepMacromolCompData();
+    prepStructConnData(molgraph);
     prepEntityData(molgraph);
     
     outputEntryData();
     outputEntityData();
     outputEntityPolyData();
     outputEntityPolySeqData();
-    outputAtomSiteData(molgraph);
     outputMacromolCompData();
+    outputStructConnData();
+    outputAtomTypeData();
+    outputAtomSiteData(molgraph);
     outputMacromolCompAtomData();
     outputMacromolCompBondData();
             
@@ -476,6 +450,16 @@ void Biomol::MMCIFDataWriter::outputEntityPolySeqData()
     }
 }
 
+void Biomol::MMCIFDataWriter::outputStructConnData()
+{
+    // TODO
+}
+
+void Biomol::MMCIFDataWriter::outputAtomTypeData()
+{
+    // TODO
+}
+
 void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& molgraph)
 {
     using namespace MMCIF;
@@ -662,20 +646,8 @@ void Biomol::MMCIFDataWriter::outputMacromolCompAtomData()
         for (auto& atom : comp.atoms) {
             comp_ids.addValue(comp_id);
             ids.addValue(*atom.id);
-            arom_flags.addValue(atom.aromatic < 0 ? MISSING_DATA_VALUE : atom.aromatic ? TRUE_FLAG_1 : FALSE_FLAG_1);
-
-            if (atom.symbol) {
-                if (Chem::AtomDictionary::isChemicalElement(atom.type))
-                    type_syms.addValue(boost::to_upper_copy(*atom.symbol));
-                else
-                    type_syms.addValue(*atom.symbol);
-
-            } else {
-                if (Chem::AtomDictionary::isChemicalElement(atom.type))
-                    type_syms.addValue(boost::to_upper_copy(Chem::AtomDictionary::getSymbol(atom.type)));
-                else
-                    type_syms.addValue(Biomol::MMCIF::MISSING_DATA_VALUE);
-            }
+            arom_flags.addValue(atom.aromatic ? TRUE_FLAG_1 : FALSE_FLAG_1);
+            type_syms.addValue(boost::to_upper_copy(*atom.symbol));
             
             switch (atom.config) {
 
@@ -841,6 +813,100 @@ bool Biomol::MMCIFDataWriter::prepAtomSiteData(const Chem::MolecularGraph& molgr
     return true;
 }
 
+void Biomol::MMCIFDataWriter::prepMacromolCompData()
+{
+    chemCompDict.clear();
+    
+    for (auto atom : atomSites)
+        getChemCompData(&getResidueCode(*atom));
+
+    auto& res_dict = getResidueDictionary();
+    
+    for (auto& e : chemCompDict) {
+        auto& comp = *e.second;
+        auto& code = *e.first;
+        
+        comp.name = &MMCIF::MISSING_DATA_VALUE;
+        comp.type = ResidueType::UNKNOWN;
+        
+        auto res_struct = res_dict.getStructure(code);
+
+        if (!res_struct)
+            continue;
+
+        for (auto& atom : res_struct->getAtoms()) {
+            auto atom_id = &getResidueAtomName(atom);
+            
+            comp.atoms.emplace_back(atom_id, &getSymbol(atom),
+                                    hasCIPConfiguration(atom) ? getCIPConfiguration(atom) : Chem::CIPDescriptor::UNDEF,
+                                    getAromaticityFlag(atom));
+
+            if (getResidueLinkingAtomFlag(atom)) {
+                comp.linkAtomIds.emplace(atom_id);
+
+                if (hasResidueAltAtomName(atom))
+                    comp.linkAtomIds.emplace(&getResidueAltAtomName(atom));
+            }
+        }
+        
+        for (auto& bond : res_struct->getBonds()) {
+            auto& atom1 = bond.getBegin();
+            auto& atom2 = bond.getEnd();
+            auto atom_1_id = &getResidueAtomName(atom1);
+            auto atom_1_alt_id = (hasResidueAltAtomName(atom1) ? &getResidueAltAtomName(atom1) : atom_1_id);
+            auto atom_2_id = &getResidueAtomName(atom2);
+            auto atom_2_alt_id = (hasResidueAltAtomName(atom2) ? &getResidueAltAtomName(atom2) : atom_2_id);
+
+            comp.bondIds.emplace(atom_1_id, atom_2_id);
+            comp.bondIds.emplace(atom_1_alt_id, atom_2_id);
+            comp.bondIds.emplace(atom_1_id, atom_2_alt_id);
+            comp.bondIds.emplace(atom_1_alt_id, atom_2_alt_id);
+            comp.bondIds.emplace(atom_2_id, atom_1_id);
+            comp.bondIds.emplace(atom_2_alt_id, atom_1_id);
+            comp.bondIds.emplace(atom_2_id, atom_1_alt_id);
+            comp.bondIds.emplace(atom_2_alt_id, atom_1_alt_id);
+
+            comp.bonds.emplace_back(atom_1_id, atom_2_id, getOrder(bond),
+                                    hasCIPConfiguration(bond) ? getCIPConfiguration(bond) : Chem::CIPDescriptor::UNDEF,
+                                    getAromaticityFlag(bond));
+        }
+
+        comp.unknown = false;
+        
+        auto& name = getName(*res_struct);
+
+        if (!name.empty())
+            comp.name = &name;
+
+        auto& parent = res_dict.getParentCode(code);
+
+        if (!parent.empty())
+            comp.parent = &parent;
+
+        auto& olc = res_dict.getOneLetterCode(code);
+
+        if (!olc.empty())
+            comp.oneLetterCode = &olc;
+        
+        comp.type = res_dict.getType(code);
+        comp.weight = MolProp::calcMass(*res_struct);
+
+        MolProp::generateMolecularFormula(*res_struct, comp.formula, " ");
+
+        auto net_charge = MolProp::getNetFormalCharge(*res_struct);
+
+        if (net_charge != 0) {
+            comp.formula.push_back(' ');
+            comp.formula.append(std::to_string(net_charge));
+        }
+    }
+}
+
+void Biomol::MMCIFDataWriter::prepStructConnData(const Chem::MolecularGraph& molgraph)
+{
+    // TODO
+}
+
 void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgraph)
 {
     static const auto H_WEIGHT = Chem::AtomDictionary::getAtomicWeight(Chem::AtomType::H, 0);
@@ -980,170 +1046,6 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
 
         for (auto atom : entityAtoms)
             atomEntityIds[molgraph.getAtomIndex(*atom)] = entity->id;
-    }
-}
-
-void Biomol::MMCIFDataWriter::prepMacromolCompData(const Chem::MolecularGraph& molgraph)
-{
-    chemCompDict.clear();
-    
-    for (auto atom : atomSites)
-        getChemCompData(&getResidueCode(*atom)).addAtom(*atom);
-
-    for (auto& bond : molgraph.getBonds()) {
-        auto& atom1 = bond.getBegin();
-        auto& atom2 = bond.getEnd();
-        
-        if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2))
-            continue;
-
-        auto atom1_res_id = atomUniqueResIds[molgraph.getAtomIndex(atom1)];
-        auto atom2_res_id = atomUniqueResIds[molgraph.getAtomIndex(atom2)];
-        
-        if (atom1_res_id != atom2_res_id)
-            continue;
-
-        getChemCompData(&getResidueCode(atom1)).addBond(bond);
-    }
-
-    auto& res_dict = getResidueDictionary();
-    
-    for (auto& e : chemCompDict) {
-        auto& comp = *e.second;
-        auto& code = *e.first;
-        
-        comp.name = &MMCIF::MISSING_DATA_VALUE;
-        comp.type = ResidueType::UNKNOWN;
-        
-        auto res_struct = res_dict.getStructure(code);
-
-        if (!res_struct)
-            continue;
-
-        chemCompAtomIds[0].clear();
-        
-        for (auto& atom : res_struct->getAtoms()) {
-            chemCompAtomIds[0].insert(&getResidueAtomName(atom));
-
-            if (hasResidueAtomName(atom))
-                chemCompAtomIds[0].insert(&getResidueAltAtomName(atom));
-        }
-
-        auto found_all_atoms = true;
-        
-        for (auto& atom : comp.atoms)
-            if (chemCompAtomIds[0].find(atom.id) == chemCompAtomIds[0].end()) {
-                 found_all_atoms = false;
-                 break;
-            }
-        
-        if (!found_all_atoms)
-            continue;
-
-        chemCompBondIds.clear();
-
-        for (auto& bond : res_struct->getBonds()) {
-            auto& atom1 = bond.getBegin();
-            auto& atom2 = bond.getEnd();
-            auto atom_1_id = &getResidueAtomName(atom1);
-            auto atom_1_alt_id = (hasResidueAltAtomName(atom1) ? &getResidueAltAtomName(atom1) : atom_1_id);
-            auto atom_2_id = &getResidueAtomName(atom2);
-            auto atom_2_alt_id = (hasResidueAltAtomName(atom2) ? &getResidueAltAtomName(atom2) : atom_2_id);
-
-            chemCompBondIds.emplace(atom_1_id, atom_2_id);
-            chemCompBondIds.emplace(atom_1_alt_id, atom_2_id);
-            chemCompBondIds.emplace(atom_1_id, atom_2_alt_id);
-            chemCompBondIds.emplace(atom_1_alt_id, atom_2_alt_id);
-            chemCompBondIds.emplace(atom_2_id, atom_1_id);
-            chemCompBondIds.emplace(atom_2_alt_id, atom_1_id);
-            chemCompBondIds.emplace(atom_2_id, atom_1_alt_id);
-            chemCompBondIds.emplace(atom_2_alt_id, atom_1_alt_id);
-        }
-         
-        auto found_all_bonds = true;
-
-        for (auto& bond : comp.bonds)
-            if (chemCompBondIds.find({bond.atom1Id, bond.atom2Id}) == chemCompBondIds.end()) {
-                 found_all_bonds = false;
-                 break;
-            }
-        
-        if (!found_all_bonds)
-            continue;
-
-        comp.atoms.clear();
-        comp.bonds.clear();
-
-        for (auto& atom : res_struct->getAtoms()) {
-            auto id = &getResidueAtomName(atom);
-            auto out_id = id;
-            
-            if ((comp.atomIds.find(id) == comp.atomIds.end()) && hasResidueAltAtomName(atom)) {
-                auto alt_id = &getResidueAltAtomName(atom);
-
-                if (comp.atomIds.find(alt_id) != comp.atomIds.end())
-                    out_id = alt_id;
-            }
-
-            comp.atoms.emplace_back(out_id, &getSymbol(atom), getType(atom),
-                                    hasCIPConfiguration(atom) ? getCIPConfiguration(atom) : Chem::CIPDescriptor::UNDEF,
-                                    getAromaticityFlag(atom));
-        }
-
-        for (auto& bond : res_struct->getBonds()) {
-            auto id = &getResidueAtomName(bond.getBegin());
-            auto atom_1_id = id;
-            
-            if ((comp.atomIds.find(id) == comp.atomIds.end()) && hasResidueAltAtomName(bond.getBegin())) {
-                auto alt_id = &getResidueAltAtomName(bond.getBegin());
-
-                if (comp.atomIds.find(alt_id) != comp.atomIds.end())
-                    atom_1_id = alt_id;
-            }
-
-            id = &getResidueAtomName(bond.getEnd());
-            auto atom_2_id = id;
-            
-            if ((comp.atomIds.find(id) == comp.atomIds.end()) && hasResidueAltAtomName(bond.getEnd())) {
-                auto alt_id = &getResidueAltAtomName(bond.getEnd());
-
-                if (comp.atomIds.find(alt_id) != comp.atomIds.end())
-                    atom_2_id = alt_id;
-            }
-
-            comp.bonds.emplace_back(atom_1_id, atom_2_id, getOrder(bond),
-                                    hasCIPConfiguration(bond) ? getCIPConfiguration(bond) : Chem::CIPDescriptor::UNDEF,
-                                    getAromaticityFlag(bond));
-        }
-
-        comp.unknown = false;
-        
-        auto& name = getName(*res_struct);
-
-        if (!name.empty())
-            comp.name = &name;
-
-        auto& parent = res_dict.getParentCode(code);
-
-        if (!parent.empty())
-            comp.parent = &parent;
-
-        auto& olc = res_dict.getOneLetterCode(code);
-
-        if (!olc.empty())
-            comp.oneLetterCode = &olc;
-        
-        comp.type = res_dict.getType(code);
-        comp.weight = MolProp::calcMass(*res_struct);
-
-        MolProp::generateMolecularFormula(*res_struct, comp.formula, " ");
-
-        auto net_charge = MolProp::getNetFormalCharge(*res_struct);
-
-        if (net_charge != 0) {
-            comp.formula.push_back(' ');
-            comp.formula.append(std::to_string(net_charge));
-        }
     }
 }
 
