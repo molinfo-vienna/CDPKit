@@ -270,7 +270,30 @@ namespace CDPL
                     const std::string MODRES           = "modres";
                     const std::string SALTBR           = "saltbr";
                 } // namespace Type
+
+                namespace Order
+                {
+
+                    const std::string SINGLE    = "sing";
+                    const std::string DOUBLE    = "doub";
+                    const std::string TRIPLE    = "trip";
+                    const std::string QUADRUPLE = "quad";
+                } // namespace Order
             } // namespace StructConn
+
+            namespace StructConnType
+            {
+
+                const std::string NAME = "struct_conn_type";
+
+                namespace Item
+                {
+
+                    const std::string ID        = "id";
+                    const std::string CRITERIA  = "criteria";
+                    const std::string REFERENCE = "reference";
+                } // namespace Item
+            } // namespace StructConnType
 
             namespace ChemComp
             {

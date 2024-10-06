@@ -201,6 +201,7 @@ namespace CDPL
                              CIStringPtrLessCmpFunc>                    ChemCompDictionary;
             typedef ResidueDictionary::SharedPointer                    ResDictPointer;
             typedef std::unordered_set<const Chem::Bond*>               BondSet;
+            typedef std::set<std::string>                               StringSet;
             typedef std::vector<const Chem::Atom*>                      AtomList;
             typedef std::vector<std::size_t>                            UIntArray;
             
@@ -220,6 +221,7 @@ namespace CDPL
             UIntArray                   atomUniqueResIds;
             BondSet                     disulfBonds;
             BondSet                     nonStdBonds;
+            StringSet                   seenAtomTypes;
             AtomIDSet                   chemCompAtomIds[2];
             std::string                 tmpString;
         };

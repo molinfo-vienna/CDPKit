@@ -956,6 +956,7 @@ void Biomol::MMCIFDataReader::createNonStdInterResidueBonds(const MMCIFData& dat
     auto ptnr2_auth_seq_ids = struct_cons->findItem(StructConn::Item::PTNR2_AUTH_SEQ_ID);
     auto ptnr2_label_seq_ids = struct_cons->findItem(StructConn::Item::PTNR2_LABEL_SEQ_ID);
     auto ptnr2_ins_codes = struct_cons->findItem(StructConn::Item::PDBX_PTNR2_PDB_INS_CODE);
+    auto bond_orders = struct_cons->findItem(StructConn::Item::PDBX_VALUE_ORDER);
     
     for (std::size_t i = 0; i < num_cons; i++) {
         if (auto con_type = getValue(con_types, i)) {
@@ -1015,7 +1016,23 @@ void Biomol::MMCIFDataReader::createNonStdInterResidueBonds(const MMCIFData& dat
             continue;
         }
 
-        mol.addBond(mol.getAtomIndex(*ptnr1_atom), mol.getAtomIndex(*ptnr2_atom));
+        auto& bond = mol.addBond(mol.getAtomIndex(*ptnr1_atom), mol.getAtomIndex(*ptnr2_atom));
+
+        if (auto order = getValue(bond_orders, i)) {
+            if (Internal::isEqualCI(*order, StructConn::Order::SINGLE))
+                setOrder(bond, 1);
+            
+            else if (Internal::isEqualCI(*order, StructConn::Order::DOUBLE))
+                setOrder(bond, 2);
+            
+            else if (Internal::isEqualCI(*order, StructConn::Order::TRIPLE))
+                setOrder(bond, 3);
+
+            else if (strictErrorChecking && !Internal::isEqualCI(*order, StructConn::Order::QUADRUPLE))
+                throw Base::IOError("MMCIFDataReader: " + getFQItemName(struct_cons, bond_orders) +
+                                    ": invalid bond order specification '" + *order +
+                                    (num_cons > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+        }
     }
 }
 
