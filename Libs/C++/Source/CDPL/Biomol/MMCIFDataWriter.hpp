@@ -184,6 +184,7 @@ namespace CDPL
                 BondList           bonds;
                 BondIDSet          bondIds;
                 bool               unknown{true};
+                bool               isStdRes{false};
                 const std::string* name{nullptr};
                 const std::string* parent{nullptr};
                 const std::string* oneLetterCode{nullptr};

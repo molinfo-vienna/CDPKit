@@ -313,10 +313,8 @@ void Biomol::MMCIFDataWriter::outputEntityPolyData()
        
         olc_seqs.addValue(std::move(olc_seq));
         can_olc_seqs.addValue(std::move(can_olc_seq));
-
         types.addValue(MISSING_DATA_VALUE); // TODO
-
-        nstd_lkg_flags.addValue(boost::to_lower_copy(FALSE_FLAG_2));
+        nstd_lkg_flags.addValue(MISSING_DATA_VALUE);  // TODO
         nstd_mon_flags.addValue(boost::to_lower_copy(has_nstd_mon ? TRUE_FLAG_2 : FALSE_FLAG_2));
      
         tmpString.clear();
@@ -437,7 +435,8 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
             
             ids.addValue(id_pfx + std::to_string(id++));
             type_ids.addValue(type_id);
-
+            lvg_flags.addValue(MISSING_DATA_VALUE); // TODO
+            
             if (has3DCoordinates(atom1) && has3DCoordinates(atom2))
                 dist_values.addValue(std::to_string(length(get3DCoordinates(atom1) - get3DCoordinates(atom2))));
             else
@@ -498,7 +497,6 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
             pdbx_ptnr2_alt_ids.addValue(MISSING_DATA_VALUE);
             ptnr2_syms.addValue(MISSING_DATA_VALUE);
             pdb_ids.addValue(MISSING_DATA_VALUE);
-            lvg_flags.addValue(MISSING_DATA_VALUE);
             ptnr3_atom_ids.addValue(MISSING_DATA_VALUE);
             ptnr3_seq_ids.addValue(MISSING_DATA_VALUE);
             ptnr3_comp_ids.addValue(MISSING_DATA_VALUE);
@@ -563,14 +561,9 @@ void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& mol
         serial_nos.addValue(std::to_string(serial++));
         
         auto& res_code = getResidueCode(*atom);
-
-        if (hasHeteroAtomFlag(*atom))
-            pdb_groups.addValue(getHeteroAtomFlag(*atom) ? AtomSite::PDBGroup::HET_ATOM : AtomSite::PDBGroup::ATOM);
-
-        else
-            pdb_groups.addValue(!getChemCompData(&res_code).unknown && ResidueDictionary::isStdResidue(res_code) ?
-                                AtomSite::PDBGroup::ATOM : AtomSite::PDBGroup::HET_ATOM);
-
+        auto is_het_atom = (hasHeteroAtomFlag(*atom) ? getHeteroAtomFlag(*atom) : !getChemCompData(&res_code).isStdRes);
+        
+        pdb_groups.addValue(is_het_atom ? AtomSite::PDBGroup::HET_ATOM : AtomSite::PDBGroup::ATOM);
         outputSymbol(*atom, type_syms);
 
         auto& id = getResidueAtomName(*atom);
@@ -674,10 +667,11 @@ void Biomol::MMCIFDataWriter::outputMacromolCompData()
 
         types.addValue(it == resTypeToStringMap.end() ? MMCIF::MISSING_DATA_VALUE : it->second);
 
-        if (!comp.unknown) {
-            if (ResidueDictionary::isStdResidue(*e.first))
-                mon_nstd_flags.addValue(boost::to_lower_copy(MMCIF::TRUE_FLAG_1));
-            else if ((comp.type == ResidueType::NON_POLYMER) || (comp.type == ResidueType::OTHER) || !comp.parent)
+        if (comp.isStdRes)
+            mon_nstd_flags.addValue(boost::to_lower_copy(MMCIF::TRUE_FLAG_1));
+
+        else if (!comp.unknown) {
+            if ((comp.type == ResidueType::NON_POLYMER) || (comp.type == ResidueType::OTHER) || !comp.parent)
                 mon_nstd_flags.addValue(MMCIF::UNDEFINED_DATA_VALUE);
             else
                 mon_nstd_flags.addValue(boost::to_lower_copy(MMCIF::FALSE_FLAG_1));
@@ -898,6 +892,7 @@ void Biomol::MMCIFDataWriter::prepMacromolCompData()
         
         comp.name = &MMCIF::MISSING_DATA_VALUE;
         comp.type = ResidueType::UNKNOWN;
+        comp.isStdRes = ResidueDictionary::isStdResidue(code);
         
         auto res_struct = res_dict.getStructure(code);
 
@@ -1001,7 +996,8 @@ void Biomol::MMCIFDataWriter::prepStructConnData(const Chem::MolecularGraph& mol
             auto& comp1 = getChemCompData(&getResidueCode(atom1));
             auto& comp2 = getChemCompData(&getResidueCode(atom1));
 
-            if ((comp1.linkAtomIds.find(&getResidueAtomName(atom1)) != comp1.linkAtomIds.end()) &&
+            if (comp1.isStdRes && comp2.isStdRes &&
+                (comp1.linkAtomIds.find(&getResidueAtomName(atom1)) != comp1.linkAtomIds.end()) &&
                 (comp2.linkAtomIds.find(&getResidueAtomName(atom2)) != comp2.linkAtomIds.end()))
                 continue;
         }
@@ -1175,7 +1171,6 @@ void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem:
 
     auto b_it = atom.getBondsBegin();
     auto ss_bonds_end = disulfBonds.end();
-    auto non_std_bonds_end = nonStdBonds.end();
     
     for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
         auto& bond = *b_it;
@@ -1184,9 +1179,6 @@ void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem:
             continue;
 
         if (disulfBonds.find(&bond) != ss_bonds_end)
-            continue;
-
-        if (nonStdBonds.find(&bond) != non_std_bonds_end)
             continue;
         
         auto& nbr_atom = *a_it;
@@ -1206,7 +1198,7 @@ bool Biomol::MMCIFDataWriter::genEntityPolySeqStrings(const Entity& entity, std:
         oneLetterCodeExclSet{ "DA", "DC", "DG", "DT", "MSE", "SEP", "TPO", "PTR", "PCA", "UNK", "ACE", "NH2" };
 
     std::size_t line_res_count = 0;
-    auto has_nstd_mon  = false;
+    auto has_nstd_mon = false;
     auto& res_dict = getResidueDictionary();
    
     olc_seq.clear();
@@ -1230,12 +1222,10 @@ bool Biomol::MMCIFDataWriter::genEntityPolySeqStrings(const Entity& entity, std:
             continue;
         }
 
-        auto is_std_comp = ResidueDictionary::isStdResidue(*e.first);
-
-        if (!is_std_comp)
+        if (!comp.isStdRes)
             has_nstd_mon = true;
 
-        if (!is_std_comp || !comp.oneLetterCode || (oneLetterCodeExclSet.find(*e.first) != oneLetterCodeExclSet.end())) {
+        if (!comp.isStdRes || !comp.oneLetterCode || (oneLetterCodeExclSet.find(*e.first) != oneLetterCodeExclSet.end())) {
             olc_seq.push_back('(');
             olc_seq.append(*e.first);
             olc_seq.push_back(')');
