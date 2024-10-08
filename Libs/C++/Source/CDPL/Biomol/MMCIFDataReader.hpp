@@ -96,7 +96,7 @@ namespace CDPL
             const ResidueDictionary& getResidueDictionary() const;
             
             void getMissingChemCompLinkAtomsFromResDictStructs();
-            void setupChemCompDataFromResDictStruct(ChemComp& chem_comp, const std::string& comp_id);
+            void setupChemCompDataFromResDictStruct(ChemComp& comp, const std::string& comp_id);
             
             ChemComp& getOrAddChemCompData(const std::string* comp_id);
             ChemComp& getChemCompData(const std::string* comp_id);
@@ -153,8 +153,8 @@ namespace CDPL
                 struct Bond
                 {
 
-                    Bond(std::size_t atom_1_idx, std::size_t atom_2_idx, std::size_t order):
-                        atom1Idx(atom_1_idx), atom2Idx(atom_2_idx), order(order)
+                    Bond(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order):
+                        atom1Idx(atom1_idx), atom2Idx(atom2_idx), order(order)
                     {}
 
                     std::size_t atom1Idx;
@@ -164,7 +164,7 @@ namespace CDPL
 
                 bool hasAtom(const std::string& id) const;
 
-                std::size_t getBondOrder(const std::string& atom_1_id, const std::string& atom_2_id) const;
+                std::size_t getBondOrder(const std::string& atom1_id, const std::string& atom2_id) const;
 
                 operator bool() const;
 

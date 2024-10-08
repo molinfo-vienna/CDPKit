@@ -290,11 +290,6 @@ void Biomol::MMCIFDataWriter::outputEntityPolyData()
 {
     using namespace MMCIF;
 
-    static const std::unordered_set<std::string,
-                                    Internal::CIStringHashFunc,
-                                    Internal::CIStringCmpFunc>
-        oneLetterCodeExclSet{ "DA", "DC", "DG", "DT", "MSE", "SEP", "TPO", "PTR", "PCA", "UNK", "ACE", "NH2" };
-    
     auto& entity_poly = mmCIFData.addCategory(EntityPoly::NAME, true);
     auto& entity_ids = entity_poly.addItem(EntityPoly::Item::ENTITY_ID);
     auto& types = entity_poly.addItem(EntityPoly::Item::TYPE);
@@ -304,9 +299,7 @@ void Biomol::MMCIFDataWriter::outputEntityPolyData()
     auto& can_olc_seqs = entity_poly.addItem(EntityPoly::Item::PDBX_SEQ_ONE_LETTER_CODE_CAN);
     auto& strand_ids = entity_poly.addItem(EntityPoly::Item::PDBX_STRAND_ID);
     auto& target_ids = entity_poly.addItem(EntityPoly::Item::PDBX_TARGET_ID);
-
-    auto& res_dict = getResidueDictionary();
-    
+ 
     std::string olc_seq;
     std::string can_olc_seq;
     
@@ -316,98 +309,15 @@ void Biomol::MMCIFDataWriter::outputEntityPolyData()
 
         entity_ids.addValue(std::to_string(entity.id));
         
-        auto has_nstd_mon = false;
-        std::size_t line_res_count = 0;
-        
-        olc_seq.clear();
-        can_olc_seq.clear();
-
-        for (auto& e : entity.resSequence) {
-            if (line_res_count++ >= MAX_OLC_SEQ_LINE_LENGTH) {
-                olc_seq.push_back('\n');
-                can_olc_seq.push_back('\n');
-                line_res_count = 0;
-            }
-            
-            auto& comp = getChemCompData(e.first);
-
-            if (comp.unknown) {
-                olc_seq.push_back('(');
-                olc_seq.append(*e.first);
-                olc_seq.push_back(')');
-                can_olc_seq.push_back('X');
-                has_nstd_mon = true;
-                continue;
-            }
-
-            auto is_std_comp = ResidueDictionary::isStdResidue(*e.first);
-            
-            if (!is_std_comp)
-                has_nstd_mon = true;
-
-            if (!is_std_comp || !comp.oneLetterCode || (oneLetterCodeExclSet.find(*e.first) != oneLetterCodeExclSet.end())) {
-                olc_seq.push_back('(');
-                olc_seq.append(*e.first);
-                olc_seq.push_back(')');
-
-            } else
-                olc_seq.append(*comp.oneLetterCode);
-            
-            if (comp.oneLetterCode) {
-                can_olc_seq.append(*comp.oneLetterCode);
-                continue;
-            }
-
-            if (!comp.parent) {
-                can_olc_seq.push_back('X');
-                continue;
-            }
-
-            auto comma_pos = comp.parent->find(',');
-            
-            if (comma_pos != std::string::npos) {
-                can_olc_seq.push_back('(');
-
-                for (std::string::size_type substr_start = 0; ; ) {
-                    if (substr_start != 0)
-                        can_olc_seq.push_back(',');
-
-                    auto& pnt_olc = res_dict.getOneLetterCode(comp.parent->substr(substr_start, comma_pos));
-
-                    if (!pnt_olc.empty())
-                        can_olc_seq.append(pnt_olc);
-                    else
-                        can_olc_seq.push_back('X');
-
-                    if (comma_pos == std::string::npos)
-                        break;
-                    
-                    substr_start = comma_pos + 1;
-                    comma_pos = comp.parent->find(',', substr_start);
-                }
-
-                can_olc_seq.push_back(')');
-                continue;
-            }
-            
-            auto& pnt_olc = res_dict.getOneLetterCode(*comp.parent);
-
-            if (!pnt_olc.empty())
-                can_olc_seq.append(pnt_olc);
-            else
-                can_olc_seq.push_back('X');
-        }
-
-        boost::to_upper(olc_seq);
-        boost::to_upper(can_olc_seq);
-        
+        auto has_nstd_mon = genEntityPolySeqStrings(entity, olc_seq, can_olc_seq);
+       
         olc_seqs.addValue(std::move(olc_seq));
         can_olc_seqs.addValue(std::move(can_olc_seq));
 
         types.addValue(MISSING_DATA_VALUE); // TODO
 
-        nstd_lkg_flags.addValue(boost::to_lower_copy(FALSE_FLAG_1));
-        nstd_mon_flags.addValue(boost::to_lower_copy(has_nstd_mon ? TRUE_FLAG_1 : FALSE_FLAG_1));
+        nstd_lkg_flags.addValue(boost::to_lower_copy(FALSE_FLAG_2));
+        nstd_mon_flags.addValue(boost::to_lower_copy(has_nstd_mon ? TRUE_FLAG_2 : FALSE_FLAG_2));
      
         tmpString.clear();
 
@@ -470,8 +380,6 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
     auto& ptnr1_comp_ids = struct_cons.addItem(StructConn::Item::PTNR1_LABEL_COMP_ID);
     auto& ptnr1_seq_ids = struct_cons.addItem(StructConn::Item::PTNR1_LABEL_SEQ_ID);
     auto& ptnr1_atom_ids = struct_cons.addItem(StructConn::Item::PTNR1_LABEL_ATOM_ID);
-    auto& ptnr1_alt_ids = struct_cons.addItem(StructConn::Item::PTNR1_LABEL_ALT_ID);
-    auto& ptnr1_roles = struct_cons.addItem(StructConn::Item::PTNR1_ROLE);
     auto& pdbx_ptnr1_alt_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR1_LABEL_ALT_ID);
     auto& ptnr1_ins_codes = struct_cons.addItem(StructConn::Item::PDBX_PTNR1_PDB_INS_CODE);
     auto& ptnr1_std_comp_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR1_STD_COMP_ID);
@@ -480,19 +388,15 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
     auto& ptnr2_comp_ids = struct_cons.addItem(StructConn::Item::PTNR2_LABEL_COMP_ID);
     auto& ptnr2_seq_ids = struct_cons.addItem(StructConn::Item::PTNR2_LABEL_SEQ_ID);
     auto& ptnr2_atom_ids = struct_cons.addItem(StructConn::Item::PTNR2_LABEL_ATOM_ID);
-    auto& ptnr2_alt_ids = struct_cons.addItem(StructConn::Item::PTNR2_LABEL_ALT_ID);
-    auto& ptnr2_roles = struct_cons.addItem(StructConn::Item::PTNR2_ROLE);
     auto& pdbx_ptnr2_alt_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR2_LABEL_ALT_ID);
     auto& ptnr2_ins_codes = struct_cons.addItem(StructConn::Item::PDBX_PTNR2_PDB_INS_CODE);
-    auto& ptnr2_syms = struct_cons.addItem(StructConn::Item::PTNR2_SYMMETRY);
     auto& ptnr1_auth_asym_ids = struct_cons.addItem(StructConn::Item::PTNR1_AUTH_ASYM_ID);
     auto& ptnr1_auth_comp_ids = struct_cons.addItem(StructConn::Item::PTNR1_AUTH_COMP_ID);
     auto& ptnr1_auth_seq_ids = struct_cons.addItem(StructConn::Item::PTNR1_AUTH_SEQ_ID);
-    auto& ptnr1_auth_atom_ids = struct_cons.addItem(StructConn::Item::PTNR1_AUTH_ATOM_ID);
     auto& ptnr2_auth_asym_ids = struct_cons.addItem(StructConn::Item::PTNR2_AUTH_ASYM_ID);
     auto& ptnr2_auth_comp_ids = struct_cons.addItem(StructConn::Item::PTNR2_AUTH_COMP_ID);
     auto& ptnr2_auth_seq_ids = struct_cons.addItem(StructConn::Item::PTNR2_AUTH_SEQ_ID);
-    auto& ptnr2_auth_atom_ids = struct_cons.addItem(StructConn::Item::PTNR2_AUTH_ATOM_ID);
+    auto& ptnr2_syms = struct_cons.addItem(StructConn::Item::PTNR2_SYMMETRY);
     auto& ptnr3_atom_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR3_LABEL_ATOM_ID);
     auto& ptnr3_seq_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR3_LABEL_SEQ_ID);
     auto& ptnr3_comp_ids = struct_cons.addItem(StructConn::Item::PDBX_PTNR3_LABEL_COMP_ID);
@@ -557,37 +461,44 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
                     orders.addValue(MISSING_DATA_VALUE);
             }
 
-            // TODO
+            auto& atom1_asym_id = getChainID(atom1);
+            auto& atom2_asym_id = getChainID(atom2);
             
-            lvg_flags.addValue(MISSING_DATA_VALUE);
-            pdb_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_asym_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_comp_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_seq_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_atom_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_alt_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_roles.addValue(MISSING_DATA_VALUE);
+            ptnr1_asym_ids.addValue(atom1_asym_id);
+            ptnr1_auth_asym_ids.addValue(atom1_asym_id);
+            ptnr2_asym_ids.addValue(atom2_asym_id);
+            ptnr2_auth_asym_ids.addValue(atom2_asym_id);
+
+            auto& atom1_comp_id = getResidueCode(atom1);
+            auto& atom2_comp_id = getResidueCode(atom2);
+            
+            ptnr1_comp_ids.addValue(atom1_comp_id);
+            ptnr1_auth_comp_ids.addValue(atom1_comp_id);
+            ptnr2_comp_ids.addValue(atom2_comp_id);
+            ptnr2_auth_comp_ids.addValue(atom2_comp_id);            
+
+            tmpString = std::to_string(getResidueSequenceNumber(atom1));
+                
+            ptnr1_seq_ids.addValue(tmpString);
+            ptnr1_auth_seq_ids.addValue(std::move(tmpString));
+
+            tmpString = std::to_string(getResidueSequenceNumber(atom2));
+    
+            ptnr2_seq_ids.addValue(tmpString);
+            ptnr2_auth_seq_ids.addValue(std::move(tmpString));
+            
+            ptnr1_atom_ids.addValue(getResidueAtomName(atom1));
+            ptnr2_atom_ids.addValue(getResidueAtomName(atom2));
+            ptnr1_ins_codes.addValue(hasResidueInsertionCode(atom1) ? std::string(1, getResidueInsertionCode(atom1)) : MISSING_DATA_VALUE);
+            ptnr2_ins_codes.addValue(hasResidueInsertionCode(atom1) ? std::string(1, getResidueInsertionCode(atom2)) : MISSING_DATA_VALUE);
+            
             pdbx_ptnr1_alt_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_ins_codes.addValue(MISSING_DATA_VALUE);
             ptnr1_std_comp_ids.addValue(MISSING_DATA_VALUE);
             ptnr1_syms.addValue(MISSING_DATA_VALUE);
-            ptnr2_asym_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_comp_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_seq_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_atom_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_alt_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_roles.addValue(MISSING_DATA_VALUE);
             pdbx_ptnr2_alt_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_ins_codes.addValue(MISSING_DATA_VALUE);
             ptnr2_syms.addValue(MISSING_DATA_VALUE);
-            ptnr1_auth_asym_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_auth_comp_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_auth_seq_ids.addValue(MISSING_DATA_VALUE);
-            ptnr1_auth_atom_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_auth_asym_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_auth_comp_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_auth_seq_ids.addValue(MISSING_DATA_VALUE);
-            ptnr2_auth_atom_ids.addValue(MISSING_DATA_VALUE);
+            pdb_ids.addValue(MISSING_DATA_VALUE);
+            lvg_flags.addValue(MISSING_DATA_VALUE);
             ptnr3_atom_ids.addValue(MISSING_DATA_VALUE);
             ptnr3_seq_ids.addValue(MISSING_DATA_VALUE);
             ptnr3_comp_ids.addValue(MISSING_DATA_VALUE);
@@ -842,8 +753,8 @@ void Biomol::MMCIFDataWriter::outputMacromolCompBondData()
 
     auto& comp_bonds = mmCIFData.addCategory(ChemCompBond::NAME);
     auto& comp_ids = comp_bonds.addItem(ChemCompBond::Item::COMP_ID);
-    auto& atom_ids_1 = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_1);
-    auto& atom_ids_2 = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_2);
+    auto& atom1_ids = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_1);
+    auto& atom2_ids = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_2);
     auto& orders = comp_bonds.addItem(ChemCompBond::Item::ORDER);
     auto& arom_flags = comp_bonds.addItem(ChemCompBond::Item::PDBX_AROM_FLAG);
     auto& sto_configs = comp_bonds.addItem(ChemCompBond::Item::PDBX_STEREO_CONFIG);
@@ -857,8 +768,8 @@ void Biomol::MMCIFDataWriter::outputMacromolCompBondData()
 
         for (auto& bond : comp.bonds) {
             comp_ids.addValue(comp_id);
-            atom_ids_1.addValue(*bond.atom1Id);
-            atom_ids_2.addValue(*bond.atom2Id);
+            atom1_ids.addValue(*bond.atom1Id);
+            atom2_ids.addValue(*bond.atom2Id);
 
             switch (bond.order) {
 
@@ -947,7 +858,7 @@ bool Biomol::MMCIFDataWriter::prepAtomSiteData(const Chem::MolecularGraph& molgr
         return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
     });
 
-    atomUniqueResIds.resize(molgraph.getNumAtoms());
+    uniqueAtomResIds.resize(molgraph.getNumAtoms());
 
     std::size_t unique_res_id = 1;
     auto curr_res_code = &getResidueCode(*atomSites.front());
@@ -966,7 +877,7 @@ bool Biomol::MMCIFDataWriter::prepAtomSiteData(const Chem::MolecularGraph& molgr
             unique_res_id++;
         }
 
-        atomUniqueResIds[molgraph.getAtomIndex(*atom)] = unique_res_id;
+        uniqueAtomResIds[molgraph.getAtomIndex(*atom)] = unique_res_id;
     }
     
     return true;
@@ -1066,7 +977,40 @@ void Biomol::MMCIFDataWriter::prepStructConnData(const Chem::MolecularGraph& mol
     disulfBonds.clear();
     nonStdBonds.clear();
     
-    // TODO
+    for (auto& bond : molgraph.getBonds()) {
+        auto& atom1 = bond.getBegin();
+
+        if (!molgraph.containsAtom(atom1))
+            continue;
+
+        auto& atom2 = bond.getEnd();
+
+        if (!molgraph.containsAtom(atom2))
+            continue;
+
+        long res_id1 = uniqueAtomResIds[molgraph.getAtomIndex(atom1)];
+        long res_id2 = uniqueAtomResIds[molgraph.getAtomIndex(atom2)];
+
+        if (res_id1 == res_id2) {
+            auto& comp = getChemCompData(&getResidueCode(atom1));
+            
+            if (comp.bondIds.find({&getResidueAtomName(atom1), &getResidueAtomName(atom2)}) != comp.bondIds.end())
+                continue;
+
+        } else if (std::abs(res_id1 - res_id2) == 1) {
+            auto& comp1 = getChemCompData(&getResidueCode(atom1));
+            auto& comp2 = getChemCompData(&getResidueCode(atom1));
+
+            if ((comp1.linkAtomIds.find(&getResidueAtomName(atom1)) != comp1.linkAtomIds.end()) &&
+                (comp2.linkAtomIds.find(&getResidueAtomName(atom2)) != comp2.linkAtomIds.end()))
+                continue;
+        }
+
+        if ((getOrder(bond) == 1) && (getType(atom1) == Chem::AtomType::S) && (getType(atom2) == Chem::AtomType::S))
+            disulfBonds.insert(&bond);
+        else
+            nonStdBonds.insert(&bond);
+    }
 }
 
 void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgraph)
@@ -1254,6 +1198,102 @@ void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem:
     }
 }
 
+bool Biomol::MMCIFDataWriter::genEntityPolySeqStrings(const Entity& entity, std::string& olc_seq, std::string& can_olc_seq)
+{
+    static const std::unordered_set<std::string,
+                                    Internal::CIStringHashFunc,
+                                    Internal::CIStringCmpFunc>
+        oneLetterCodeExclSet{ "DA", "DC", "DG", "DT", "MSE", "SEP", "TPO", "PTR", "PCA", "UNK", "ACE", "NH2" };
+
+    std::size_t line_res_count = 0;
+    auto has_nstd_mon  = false;
+    auto& res_dict = getResidueDictionary();
+   
+    olc_seq.clear();
+    can_olc_seq.clear();
+
+    for (auto& e : entity.resSequence) {
+        if (line_res_count++ >= MAX_OLC_SEQ_LINE_LENGTH) {
+            olc_seq.push_back('\n');
+            can_olc_seq.push_back('\n');
+            line_res_count = 0;
+        }
+
+        auto& comp = getChemCompData(e.first);
+
+        if (comp.unknown) {
+            olc_seq.push_back('(');
+            olc_seq.append(*e.first);
+            olc_seq.push_back(')');
+            can_olc_seq.push_back('X');
+            has_nstd_mon = true;
+            continue;
+        }
+
+        auto is_std_comp = ResidueDictionary::isStdResidue(*e.first);
+
+        if (!is_std_comp)
+            has_nstd_mon = true;
+
+        if (!is_std_comp || !comp.oneLetterCode || (oneLetterCodeExclSet.find(*e.first) != oneLetterCodeExclSet.end())) {
+            olc_seq.push_back('(');
+            olc_seq.append(*e.first);
+            olc_seq.push_back(')');
+
+        } else
+            olc_seq.append(*comp.oneLetterCode);
+
+        if (comp.oneLetterCode) {
+            can_olc_seq.append(*comp.oneLetterCode);
+            continue;
+        }
+
+        if (!comp.parent) {
+            can_olc_seq.push_back('X');
+            continue;
+        }
+
+        auto comma_pos = comp.parent->find(',');
+
+        if (comma_pos != std::string::npos) {
+            can_olc_seq.push_back('(');
+
+            for (std::string::size_type substr_start = 0;;) {
+                if (substr_start != 0)
+                    can_olc_seq.push_back(',');
+
+                auto& pnt_olc = res_dict.getOneLetterCode(comp.parent->substr(substr_start, comma_pos));
+
+                if (!pnt_olc.empty())
+                    can_olc_seq.append(pnt_olc);
+                else
+                    can_olc_seq.push_back('X');
+
+                if (comma_pos == std::string::npos)
+                    break;
+
+                substr_start = comma_pos + 1;
+                comma_pos    = comp.parent->find(',', substr_start);
+            }
+
+            can_olc_seq.push_back(')');
+            continue;
+        }
+
+        auto& pnt_olc = res_dict.getOneLetterCode(*comp.parent);
+
+        if (!pnt_olc.empty())
+            can_olc_seq.append(pnt_olc);
+        else
+            can_olc_seq.push_back('X');
+    }
+
+    boost::to_upper(olc_seq);
+    boost::to_upper(can_olc_seq);
+
+    return has_nstd_mon;
+}
+
 void Biomol::MMCIFDataWriter::outputChemCompData(const Chem::MolecularGraph& molgraph)
 {
     const std::string& comp_id = getChemCompId(molgraph);
@@ -1401,8 +1441,8 @@ void Biomol::MMCIFDataWriter::outputChemCompBondData(const Chem::MolecularGraph&
 
     auto& comp_bonds = mmCIFData.addCategory(ChemCompBond::NAME);
     auto& comp_ids = comp_bonds.addItem(ChemCompBond::Item::COMP_ID);
-    auto& atom_ids_1 = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_1);
-    auto& atom_ids_2 = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_2);
+    auto& atom1_ids = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_1);
+    auto& atom2_ids = comp_bonds.addItem(ChemCompBond::Item::ATOM_ID_2);
     auto& orders = comp_bonds.addItem(ChemCompBond::Item::ORDER);
     auto& arom_flags = comp_bonds.addItem(ChemCompBond::Item::PDBX_AROM_FLAG);
     auto& sto_configs = comp_bonds.addItem(ChemCompBond::Item::PDBX_STEREO_CONFIG);
@@ -1426,8 +1466,8 @@ void Biomol::MMCIFDataWriter::outputChemCompBondData(const Chem::MolecularGraph&
 
         comp_ids.addValue(comp_id);
 
-        atom_ids_1.addValue(atom_ids.getValue(molgraph.getAtomIndex(atom1)));
-        atom_ids_2.addValue(atom_ids.getValue(molgraph.getAtomIndex(atom2)));
+        atom1_ids.addValue(atom_ids.getValue(molgraph.getAtomIndex(atom1)));
+        atom2_ids.addValue(atom_ids.getValue(molgraph.getAtomIndex(atom2)));
 
         switch (getOrder(bond)) {
 

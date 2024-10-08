@@ -64,6 +64,7 @@ namespace CDPL
             typedef std::unordered_set<const std::string*,
                                        Internal::StringPtrHashFunc,
                                        Internal::StringPtrCmpFunc>  AtomIDSet;
+            struct Entity;
             struct ChemComp;
             
             void init(std::ostream& os);
@@ -86,6 +87,7 @@ namespace CDPL
             void prepEntityData(const Chem::MolecularGraph& molgraph);
 
             void getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no);
+            bool genEntityPolySeqStrings(const Entity& entity, std::string& olc_seq, std::string& can_olc_seq);
             
             void outputChemCompData(const Chem::MolecularGraph& molgraph);
             void outputChemCompAtomData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
@@ -145,9 +147,9 @@ namespace CDPL
                 struct Bond
                 {
 
-                    Bond(const std::string* atom_1_id, const std::string* atom_2_id, std::size_t order,
+                    Bond(const std::string* atom1_id, const std::string* atom2_id, std::size_t order,
                          unsigned int config, bool arom):
-                        atom1Id(atom_1_id), atom2Id(atom_2_id), order(order), config(config), aromatic(arom)
+                        atom1Id(atom1_id), atom2Id(atom2_id), order(order), config(config), aromatic(arom)
                     {}
 
                     const std::string* atom1Id;
@@ -218,7 +220,7 @@ namespace CDPL
             AtomList                    entityAtoms;
             Entity::ResidueIDList       entityResSequence;
             UIntArray                   atomEntityIds;
-            UIntArray                   atomUniqueResIds;
+            UIntArray                   uniqueAtomResIds;
             BondSet                     disulfBonds;
             BondSet                     nonStdBonds;
             StringSet                   seenAtomTypes;
