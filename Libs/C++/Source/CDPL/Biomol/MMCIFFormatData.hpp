@@ -279,6 +279,14 @@ namespace CDPL
                     const std::string TRIPLE    = "trip";
                     const std::string QUADRUPLE = "quad";
                 } // namespace Order
+
+                namespace LeavingAtomFlag
+                {
+
+                    const std::string BOTH = "both";
+                    const std::string NONE = "none";
+                    const std::string ONE  = "one";
+                } // namespace LeavingAtomFlag
             } // namespace StructConn
 
             namespace StructConnType

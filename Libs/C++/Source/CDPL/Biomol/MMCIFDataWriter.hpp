@@ -74,7 +74,7 @@ namespace CDPL
             void outputEntityData();
             void outputEntityPolyData();
             void outputEntityPolySeqData();
-            void outputStructConnData();
+            void outputStructConnData(const Chem::MolecularGraph& molgraph);
             void outputAtomTypeData();
             void outputAtomSiteData(const Chem::MolecularGraph& molgraph);
             void outputMacromolCompData();
@@ -87,12 +87,17 @@ namespace CDPL
             void prepEntityData(const Chem::MolecularGraph& molgraph);
 
             void getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no);
+
             bool genEntityPolySeqStrings(const Entity& entity, std::string& olc_seq, std::string& can_olc_seq);
+
+            const std::string& getPolymerEntityType(const Entity& entity);
             
             void outputChemCompData(const Chem::MolecularGraph& molgraph);
             void outputChemCompAtomData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
             void outputChemCompBondData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
 
+            bool hasMissingLeavingAtomNbrs(const Chem::Atom& atom, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
+            
             const ResidueDictionary& getResidueDictionary() const;
 
             ChemComp& getChemCompData(const std::string* comp_id);
@@ -106,7 +111,7 @@ namespace CDPL
 
             struct Entity
             {
-                
+             
                 struct StringPtrLessCmpFunc
                 {
 
@@ -117,7 +122,8 @@ namespace CDPL
                 typedef std::vector<ResidueID>                             ResidueIDList;
                 typedef std::set<const std::string*, StringPtrLessCmpFunc> ChainIDSet;
 
-                std::size_t        id{0};
+                std::size_t        index;
+                std::string        id;
                 std::size_t        modelNo{0};
                 std::size_t        count{1};
                 double             weight{0.0};
@@ -134,14 +140,18 @@ namespace CDPL
                 struct Atom
                 {
 
-                    Atom(const std::string* id, const std::string* sym, unsigned int config, bool arom):
-                        id(id), symbol(sym), config(config), aromatic(arom)
+                    Atom(const std::string* id, const std::string* alt_id, const std::string* sym,
+                         unsigned int config, bool arom, std::size_t num_lvg_nbrs):
+                        id(id), altId(alt_id), symbol(sym), config(config), aromatic(arom),
+                        numLvgNbrs(num_lvg_nbrs)
                     {}
 
                     const std::string* id;
+                    const std::string* altId;
                     const std::string* symbol;
                     unsigned int       config;
                     bool               aromatic;
+                    std::size_t        numLvgNbrs;
                 };
                 
                 struct Bond
@@ -181,6 +191,7 @@ namespace CDPL
 
                 AtomList           atoms;
                 AtomIDSet          linkAtomIds;
+                AtomIDSet          leavingAtomIds;
                 BondList           bonds;
                 BondIDSet          bondIds;
                 bool               unknown{true};
@@ -220,7 +231,7 @@ namespace CDPL
             EntityList                  entities;
             AtomList                    entityAtoms;
             Entity::ResidueIDList       entityResSequence;
-            UIntArray                   atomEntityIds;
+            UIntArray                   atomEntityIndices;
             UIntArray                   uniqueAtomResIds;
             BondSet                     disulfBonds;
             BondSet                     nonStdBonds;

@@ -129,6 +129,17 @@ namespace
         }
     }
 
+    template <typename AE>
+    std::size_t arrayElemSum(const std::size_t* array, const AE& elem_inds)
+    {
+        std::size_t sum = 0;
+
+        for (auto i : elem_inds)
+            sum += array[i];
+        
+        return sum;
+    }
+    
     typedef std::unordered_map<unsigned int, std::string> ResidueTypeToStringMap;
 
     ResidueTypeToStringMap resTypeToStringMap{
@@ -163,6 +174,13 @@ namespace
       { Biomol::ResidueType::L_SACCHARIDE, Biomol::MMCIF::ChemComp::Type::L_SACCHARIDE },
       { Biomol::ResidueType::D_SACCHARIDE, Biomol::MMCIF::ChemComp::Type::D_SACCHARIDE },
       { Biomol::ResidueType::SACCHARIDE, Biomol::MMCIF::ChemComp::Type::SACCHARIDE }
+    };
+
+    constexpr std::size_t L_PEPTIDE_RES_TYPES[] = {
+        Biomol::ResidueType::PEPTIDE_LINKING,
+        Biomol::ResidueType::L_PEPTIDE_LINKING,
+        Biomol::ResidueType::L_GAMMA_PEPTIDE_LINKING,
+        Biomol::ResidueType::NON_POLYMER
     };
 
     const std::string DEF_DATA_BLOCK_ID_PREFIX    = "MOL";
@@ -247,7 +265,7 @@ bool Biomol::MMCIFDataWriter::outputMacromolData(const Chem::MolecularGraph& mol
 
     outputAtomSiteData(molgraph);
     outputAtomTypeData();
-    outputStructConnData();
+    outputStructConnData(molgraph);
     outputMacromolCompData();
     outputEntityPolySeqData();
     outputEntityPolyData();
@@ -276,7 +294,7 @@ void Biomol::MMCIFDataWriter::outputEntityData()
     auto& details = entity_cat.addItem(MMCIF::Entity::Item::DETAILS);
 
     for (auto& entity : entities) {
-        ids.addValue(std::to_string(entity.id));
+        ids.addValue(entity.id);
         types.addValue(*entity.type);
         details.addValue(MMCIF::MISSING_DATA_VALUE);
         src_methods.addValue(*entity.srcMethod);
@@ -307,13 +325,13 @@ void Biomol::MMCIFDataWriter::outputEntityPolyData()
         if (entity.resSequence.size() <= 1)
             continue;
 
-        entity_ids.addValue(std::to_string(entity.id));
+        entity_ids.addValue(entity.id);
         
         auto has_nstd_mon = genEntityPolySeqStrings(entity, olc_seq, can_olc_seq);
        
         olc_seqs.addValue(std::move(olc_seq));
         can_olc_seqs.addValue(std::move(can_olc_seq));
-        types.addValue(MISSING_DATA_VALUE); // TODO
+        types.addValue(getPolymerEntityType(entity));
         nstd_lkg_flags.addValue(MISSING_DATA_VALUE);  // TODO
         nstd_mon_flags.addValue(boost::to_lower_copy(has_nstd_mon ? TRUE_FLAG_2 : FALSE_FLAG_2));
      
@@ -350,11 +368,9 @@ void Biomol::MMCIFDataWriter::outputEntityPolySeqData()
     for (auto& entity : entities) {
         if (entity.resSequence.size() <= 1)
             continue;
-
-        tmpString = std::to_string(entity.id);
         
         for (auto& res : entity.resSequence) {
-            entity_ids.addValue(tmpString);
+            entity_ids.addValue(entity.id);
             res_seq_nums.addValue(std::to_string(res.second));
             mon_ids.addValue(*res.first);
             hetero_flags.addValue(false_flag);
@@ -362,7 +378,7 @@ void Biomol::MMCIFDataWriter::outputEntityPolySeqData()
     }
 }
 
-void Biomol::MMCIFDataWriter::outputStructConnData()
+void Biomol::MMCIFDataWriter::outputStructConnData(const Chem::MolecularGraph& molgraph)
 {
     using namespace MMCIF;
 
@@ -435,12 +451,29 @@ void Biomol::MMCIFDataWriter::outputStructConnData()
             
             ids.addValue(id_pfx + std::to_string(id++));
             type_ids.addValue(type_id);
-            lvg_flags.addValue(MISSING_DATA_VALUE); // TODO
             
             if (has3DCoordinates(atom1) && has3DCoordinates(atom2))
                 dist_values.addValue(std::to_string(length(get3DCoordinates(atom1) - get3DCoordinates(atom2))));
             else
                 dist_values.addValue(MISSING_DATA_VALUE);
+
+            if (i) {
+                switch (hasMissingLeavingAtomNbrs(atom1, *bond, molgraph) + hasMissingLeavingAtomNbrs(atom2, *bond, molgraph)) {
+
+                    case 1:
+                        lvg_flags.addValue(StructConn::LeavingAtomFlag::ONE);
+                        break;
+
+                    case 2:
+                        lvg_flags.addValue(StructConn::LeavingAtomFlag::BOTH);
+                        break;
+
+                    default:
+                        lvg_flags.addValue(StructConn::LeavingAtomFlag::NONE);
+                }
+                
+            } else
+                lvg_flags.addValue(MISSING_DATA_VALUE);
 
             switch (getOrder(*bond)) {
 
@@ -576,7 +609,7 @@ void Biomol::MMCIFDataWriter::outputAtomSiteData(const Chem::MolecularGraph& mol
         auth_res_seq_nos.addValue(res_seq_nos.getValue(res_seq_nos.getNumValues() - 1));
         chain_ids.addValue(getChainID(*atom));
         ins_codes.addValue(hasResidueInsertionCode(*atom) ? std::string(1, getResidueInsertionCode(*atom)) : MISSING_DATA_VALUE);
-        entity_ids.addValue(std::to_string(atomEntityIds[molgraph.getAtomIndex(*atom)]));
+        entity_ids.addValue(entities[atomEntityIndices[molgraph.getAtomIndex(*atom)] - 1].id);
         occupancies.addValue(hasOccupancy(*atom) ? toString(getOccupancy(*atom)) : MISSING_DATA_VALUE);
         b_factors.addValue(hasBFactor(*atom) ? toString(getBFactor(*atom)) : MISSING_DATA_VALUE);
         auth_chain_ids.addValue(chain_ids.getValue(auth_chain_ids.getNumValues()));
@@ -901,17 +934,30 @@ void Biomol::MMCIFDataWriter::prepMacromolCompData()
 
         for (auto& atom : res_struct->getAtoms()) {
             auto atom_id = &getResidueAtomName(atom);
+            auto alt_atom_id = (hasResidueAltAtomName(atom) ? &getResidueAltAtomName(atom) : nullptr);
+            std::size_t num_lvg_nbrs = 0;
             
-            comp.atoms.emplace_back(atom_id, &getSymbol(atom),
-                                    hasCIPConfiguration(atom) ? getCIPConfiguration(atom) : Chem::CIPDescriptor::UNDEF,
-                                    getAromaticityFlag(atom));
-
             if (getResidueLinkingAtomFlag(atom)) {
                 comp.linkAtomIds.emplace(atom_id);
 
-                if (hasResidueAltAtomName(atom))
-                    comp.linkAtomIds.emplace(&getResidueAltAtomName(atom));
+                if (alt_atom_id)
+                    comp.linkAtomIds.emplace(alt_atom_id);
+
+                for (auto& nbr_atom : atom.getAtoms())
+                    if (getResidueLeavingAtomFlag(nbr_atom))
+                        num_lvg_nbrs++;
+                
+            } else if (getResidueLeavingAtomFlag(atom)) {
+                comp.leavingAtomIds.emplace(atom_id);
+
+                if (alt_atom_id)
+                    comp.leavingAtomIds.emplace(alt_atom_id);
             }
+
+            comp.atoms.emplace_back(atom_id, alt_atom_id, &getSymbol(atom),
+                                    hasCIPConfiguration(atom) ? getCIPConfiguration(atom) : Chem::CIPDescriptor::UNDEF,
+                                    getAromaticityFlag(atom), num_lvg_nbrs);
+
         }
         
         for (auto& bond : res_struct->getBonds()) {
@@ -1014,12 +1060,12 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
     static const auto H_WEIGHT = Chem::AtomDictionary::getAtomicWeight(Chem::AtomType::H, 0);
     
     entities.clear();
-    atomEntityIds.assign(molgraph.getNumAtoms(), 0);
+    atomEntityIndices.assign(molgraph.getNumAtoms(), 0);
  
     for (auto atom : atomSites) {
         auto atom_idx = molgraph.getAtomIndex(*atom);
         
-        if (atomEntityIds[atom_idx])
+        if (atomEntityIndices[atom_idx])
             continue;
 
         auto model_no = getModelNumber(*atom);
@@ -1066,7 +1112,8 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
 
                 entities.push_back(entity);
 
-                entity->id = entities.size();
+                entity->index = entities.size();
+                entity->id = std::to_string(entities.size());
                 entity->modelNo = model_no;
                 entity->weight = WATER_WEIGHT;
                 entity->descr = &WATER_ENTITY_DESCR;
@@ -1121,8 +1168,9 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                 entity = new Entity();
 
                 entities.push_back(entity);
-                
-                entity->id  = entities.size();
+
+                entity->index = entities.size();
+                entity->id  = std::to_string(entities.size());
                 entity->modelNo = model_no;
 
                 if (entityResSequence.size() > 1) {
@@ -1147,7 +1195,7 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
         }
 
         for (auto atom : entityAtoms)
-            atomEntityIds[molgraph.getAtomIndex(*atom)] = entity->id;
+            atomEntityIndices[molgraph.getAtomIndex(*atom)] = entity->index;
     }
 }
 
@@ -1162,10 +1210,10 @@ void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem:
     
     auto atom_idx = molgraph.getAtomIndex(atom);
 
-    if (atomEntityIds[atom_idx] != 0)
+    if (atomEntityIndices[atom_idx] != 0)
         return;
 
-    atomEntityIds[atom_idx] = 1;
+    atomEntityIndices[atom_idx] = 1;
 
     entityAtoms.push_back(&atom);
 
@@ -1282,6 +1330,25 @@ bool Biomol::MMCIFDataWriter::genEntityPolySeqStrings(const Entity& entity, std:
     boost::to_upper(can_olc_seq);
 
     return has_nstd_mon;
+}
+
+const std::string& Biomol::MMCIFDataWriter::getPolymerEntityType(const Entity& entity)
+{
+    using namespace MMCIF;
+    
+    std::size_t res_type_histo[ResidueType::MAX_TYPE + 1] = {};
+
+    for (auto& e : entity.resSequence)
+        res_type_histo[getChemCompData(e.first).type]++;
+
+    auto num_res = entity.resSequence.size();
+
+    if (arrayElemSum(res_type_histo, L_PEPTIDE_RES_TYPES) == num_res)
+        return EntityPoly::Type::POLYPEPTIDE_L;
+    
+    // TODO
+    
+    return MISSING_DATA_VALUE;
 }
 
 void Biomol::MMCIFDataWriter::outputChemCompData(const Chem::MolecularGraph& molgraph)
@@ -1541,6 +1608,47 @@ void Biomol::MMCIFDataWriter::setDataBlockId(const Chem::MolecularGraph& molgrap
     }
 
     mmCIFData.setID(DEF_DATA_BLOCK_ID_PREFIX + std::to_string(numOutDataBlocks));
+}
+
+bool Biomol::MMCIFDataWriter::hasMissingLeavingAtomNbrs(const Chem::Atom& atom, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
+{
+    auto& comp = getChemCompData(&getResidueCode(atom));
+    auto& atom_id = getResidueAtomName(atom);
+
+    if (comp.linkAtomIds.find(&atom_id) == comp.linkAtomIds.end())
+        return false;
+
+    std::size_t max_num_lvg_atoms = 0;
+
+    for (auto& comp_atom : comp.atoms)
+        if ((atom_id == *comp_atom.id) || (comp_atom.altId && (atom_id == *comp_atom.altId))) {
+            max_num_lvg_atoms = comp_atom.numLvgNbrs;
+            break;
+        }
+    
+    std::size_t num_lvg_atoms = 0;
+    auto a_it = atom.getAtomsBegin();
+
+    for (auto b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+        if (&(*b_it) == &bond)
+            continue;
+        
+        if (!molgraph.containsBond(*b_it))
+            continue;
+
+        if (!molgraph.containsAtom(*a_it))
+            continue;
+
+        auto nbr_id = &getResidueAtomName(*a_it);
+
+        if (comp.bondIds.find({&atom_id, nbr_id}) == comp.bondIds.end())
+            continue;
+        
+        if (comp.leavingAtomIds.find(nbr_id) != comp.leavingAtomIds.end())
+            num_lvg_atoms++;
+    }
+        
+    return (num_lvg_atoms < max_num_lvg_atoms);
 }
 
 const Biomol::ResidueDictionary& Biomol::MMCIFDataWriter::getResidueDictionary() const
