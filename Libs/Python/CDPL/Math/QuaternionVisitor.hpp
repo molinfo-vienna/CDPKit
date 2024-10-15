@@ -98,8 +98,6 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            NumPy::import();
-
             npy_intp  shape[] = {4};
             PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
 

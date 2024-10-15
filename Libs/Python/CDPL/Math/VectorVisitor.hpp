@@ -106,9 +106,7 @@ namespace CDPLPythonMath
         static boost::python::object toArray(const VectorType& vec)
         {
             using namespace boost;
-
-            NumPy::import();
-            
+  
             npy_intp  shape[] = {npy_intp(vec.getSize())};
             PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
 

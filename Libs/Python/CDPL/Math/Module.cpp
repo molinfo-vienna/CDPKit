@@ -23,15 +23,24 @@
 
 
 #include <boost/python.hpp>
+#include "CDPL/Config.hpp"
 
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "ConverterRegistration.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
 
 BOOST_PYTHON_MODULE(_math)
 {
     using namespace CDPLPythonMath;
+
+#ifdef HAVE_NUMPY
+    NumPy::import();
+#endif
 
     exportVectorExpressionTypes();
     exportMatrixExpressionTypes();

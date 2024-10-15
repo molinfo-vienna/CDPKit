@@ -134,8 +134,6 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            NumPy::import();
-
             npy_intp       shape[] = {npy_intp(grd.getSize1()), npy_intp(grd.getSize2()), npy_intp(grd.getSize3())};
             PyObject*      py_obj  = PyArray_SimpleNew(3, shape, NumPy::DataTypeNum<typename GridType::ValueType>::Value);
             PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);

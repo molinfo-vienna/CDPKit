@@ -110,8 +110,6 @@ namespace CDPLPythonMath
         {
             using namespace boost;
 
-            NumPy::import();
-
             npy_intp       shape[] = {npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2())};
             PyObject*      py_obj  = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
             PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);

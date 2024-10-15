@@ -69,8 +69,6 @@ namespace
             using namespace boost;
             using namespace CDPLPythonMath;
 
-            NumPy::import();
-
             typedef typename ArrayType::ValueType::ValueType ValueType;
 
             if (as_vec) {
