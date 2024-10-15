@@ -96,6 +96,8 @@ namespace CDPL
             const ResidueDictionary& getResidueDictionary() const;
             
             void getMissingChemCompLinkAtomsFromResDictStructs();
+            void getMissingChemCompAtomChargesFromResDictStructs();
+            
             void setupChemCompDataFromResDictStruct(ChemComp& comp, const std::string& comp_id);
             
             ChemComp& getOrAddChemCompData(const std::string* comp_id);
@@ -139,13 +141,12 @@ namespace CDPL
                 struct Atom
                 {
 
-                    Atom(const std::string* id, const std::string* alt_id, long form_charge, unsigned int type, bool leaving_flag):
-                        id(id), altId(alt_id), formCharge(form_charge), type(type), leavingFlag(leaving_flag)
+                    Atom(const std::string* id, const std::string* alt_id, unsigned int type, bool leaving_flag):
+                        id(id), altId(alt_id), type(type), leavingFlag(leaving_flag)
                     {}
 
                     const std::string* id;
                     const std::string* altId;
-                    long               formCharge;
                     unsigned int       type;
                     bool               leavingFlag;
                 };
@@ -168,14 +169,18 @@ namespace CDPL
 
                 operator bool() const;
 
-                typedef std::unique_ptr<ChemComp> Pointer;
-                typedef std::vector<Atom>         AtomList;
-                typedef std::vector<Bond>         BondList;
-                typedef std::set<std::size_t>     LinkAtomSet;
+                typedef std::unique_ptr<ChemComp>                    Pointer;
+                typedef std::vector<Atom>                            AtomList;
+                typedef std::vector<Bond>                            BondList;
+                typedef std::set<std::size_t>                        LinkAtomSet;
+                typedef std::unordered_map<const std::string*, long,
+                                       Internal::StringPtrHashFunc,
+                                       Internal::StringPtrCmpFunc>   AtomChargeMap;
 
-                AtomList    atoms;
-                BondList    bonds;
-                LinkAtomSet linkAtoms;
+                AtomList      atoms;
+                BondList      bonds;
+                LinkAtomSet   linkAtoms;
+                AtomChargeMap atomCharges;
             };
 
             typedef std::unordered_map<ChemCompAtomID, std::size_t,

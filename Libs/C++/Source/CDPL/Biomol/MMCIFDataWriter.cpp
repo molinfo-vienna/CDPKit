@@ -183,6 +183,33 @@ namespace
         Biomol::ResidueType::NON_POLYMER
     };
 
+    constexpr std::size_t D_PEPTIDE_RES_TYPES[] = {
+        Biomol::ResidueType::PEPTIDE_LINKING,
+        Biomol::ResidueType::D_PEPTIDE_LINKING,
+        Biomol::ResidueType::D_GAMMA_PEPTIDE_LINKING,
+        Biomol::ResidueType::NON_POLYMER
+    };
+
+    constexpr std::size_t POLYDEOXYRIBONUCLEOTIDE_RES_TYPES[] = {
+        Biomol::ResidueType::DNA_LINKING,
+        Biomol::ResidueType::L_DNA_LINKING,
+        Biomol::ResidueType::NON_POLYMER
+    };
+
+    constexpr std::size_t POLYRIBONUCLEOTIDE_RES_TYPES[] = {
+        Biomol::ResidueType::RNA_LINKING,
+        Biomol::ResidueType::L_RNA_LINKING,
+        Biomol::ResidueType::NON_POLYMER
+    };
+
+    constexpr std::size_t POLYNUCLEOTIDE_HYBRID_RES_TYPES[] = {
+        Biomol::ResidueType::RNA_LINKING,
+        Biomol::ResidueType::DNA_LINKING,
+        Biomol::ResidueType::L_RNA_LINKING,
+        Biomol::ResidueType::L_DNA_LINKING,
+        Biomol::ResidueType::NON_POLYMER
+    };
+
     const std::string DEF_DATA_BLOCK_ID_PREFIX    = "MOL";
     const std::string WATER_ENTITY_DESCR          = "water";
     const std::string DISULF_BOND_ID_PREFIX       = Biomol::MMCIF::StructConn::Type::DISULF;
@@ -1069,10 +1096,11 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
             continue;
 
         auto model_no = getModelNumber(*atom);
+        auto& chain_id = getChainID(*atom);
 
         entityAtoms.clear();
         
-        getEntityAtoms(*atom, molgraph, model_no);
+        getEntityAtoms(*atom, molgraph, model_no, chain_id);
 
         Entity* entity = nullptr;
         bool is_water = false;
@@ -1145,8 +1173,8 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
             }
 
             for (auto& e : entities)
-                if (std::equal(entityResSequence.begin(), entityResSequence.end(),
-                               e.resSequence.begin(), e.resSequence.end(),
+                if (((e.type == &MMCIF::Entity::Type::NON_POLYMER) && Internal::isEqualCI(*e.resSequence.front().first, getResidueCode(first_atom))) ||
+                    std::equal(entityResSequence.begin(), entityResSequence.end(), e.resSequence.begin(), e.resSequence.end(),
                                [](const Entity::ResidueID& id1, const Entity::ResidueID& id2) {
                                    return ((id1.second == id2.second) && Internal::isEqualCI(*id1.first, *id2.first));
                                })) {
@@ -1155,10 +1183,11 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                         e.count++;
 
                         if (entityResSequence.size() > 1)
-                            e.chains.insert(&getChainID(first_atom));
+                            e.chains.insert(&chain_id);
                     }
-                    
-                    e.weight = std::max(e.weight, weight);
+
+                    if (e.type != &MMCIF::Entity::Type::NON_POLYMER)
+                        e.weight = std::max(e.weight, weight);
                     
                     entity = &e;
                     break;
@@ -1170,7 +1199,7 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                 entities.push_back(entity);
 
                 entity->index = entities.size();
-                entity->id  = std::to_string(entities.size());
+                entity->id = std::to_string(entities.size());
                 entity->modelNo = model_no;
 
                 if (entityResSequence.size() > 1) {
@@ -1179,7 +1208,7 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
                     entity->descr = &MMCIF::MISSING_DATA_VALUE;                    
                     entity->weight = weight;
                     
-                    entity->chains.insert(&getChainID(first_atom));
+                    entity->chains.insert(&chain_id);
                       
                 } else {
                     auto& comp = getChemCompData(entityResSequence.front().first);
@@ -1199,20 +1228,24 @@ void Biomol::MMCIFDataWriter::prepEntityData(const Chem::MolecularGraph& molgrap
     }
 }
 
-void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no)
+void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
+                                             std::size_t model_no, const std::string& chain_id)
 {
+    auto atom_idx = molgraph.getAtomIndex(atom);
+
+    if (atomEntityIndices[atom_idx] != 0)
+        return;
+
     if (getModelNumber(atom) != model_no) {
         if (strictErrorChecking)
             throw Base::IOError("MMCIFDataWriter: encountered inconsistent atom site model number assignment");
         
         return;
     }
-    
-    auto atom_idx = molgraph.getAtomIndex(atom);
 
-    if (atomEntityIndices[atom_idx] != 0)
+    if (getChainID(atom) != chain_id)
         return;
-
+    
     atomEntityIndices[atom_idx] = 1;
 
     entityAtoms.push_back(&atom);
@@ -1234,7 +1267,7 @@ void Biomol::MMCIFDataWriter::getEntityAtoms(const Chem::Atom& atom, const Chem:
         if (!molgraph.containsAtom(nbr_atom))
             continue;
         
-        getEntityAtoms(nbr_atom, molgraph, model_no);
+        getEntityAtoms(nbr_atom, molgraph, model_no, chain_id);
     }
 }
 
@@ -1345,8 +1378,18 @@ const std::string& Biomol::MMCIFDataWriter::getPolymerEntityType(const Entity& e
 
     if (arrayElemSum(res_type_histo, L_PEPTIDE_RES_TYPES) == num_res)
         return EntityPoly::Type::POLYPEPTIDE_L;
-    
-    // TODO
+
+    if (arrayElemSum(res_type_histo, D_PEPTIDE_RES_TYPES) == num_res)
+        return EntityPoly::Type::POLYPEPTIDE_D;
+
+    if (arrayElemSum(res_type_histo, POLYDEOXYRIBONUCLEOTIDE_RES_TYPES) == num_res)
+        return EntityPoly::Type::POLYDEOXYRIBONUCLEOTIDE;
+
+    if (arrayElemSum(res_type_histo, POLYRIBONUCLEOTIDE_RES_TYPES) == num_res)
+        return EntityPoly::Type::POLYRIBONUCLEOTIDE;
+
+    if (arrayElemSum(res_type_histo, POLYNUCLEOTIDE_HYBRID_RES_TYPES) == num_res)
+        return EntityPoly::Type::POLYNUCLEOTIDE_HYBRID;
     
     return MISSING_DATA_VALUE;
 }

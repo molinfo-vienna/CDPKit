@@ -393,6 +393,7 @@ void Biomol::MMCIFDataReader::initChemCompDict(const MMCIFData& data)
     procChemCompAtoms(data);
     procChemCompBonds(data);
     getMissingChemCompLinkAtomsFromResDictStructs();
+    getMissingChemCompAtomChargesFromResDictStructs();
 }
 
 void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
@@ -444,14 +445,17 @@ void Biomol::MMCIFDataReader::procChemCompAtoms(const MMCIFData& data)
         }
 
         long form_charge = 0;
+
+        if (getValue(comp_atoms, form_charges, i, form_charge))
+            comp.atomCharges.emplace(id, form_charge);
+                
         bool leaving_flag = false;
         
-        getValue(comp_atoms, form_charges, i, form_charge);
         getValue(comp_atoms, leaving_flags, i, leaving_flag);
 
         chemCompAtomLookupMap.emplace(ChemCompAtomID{comp_id, id}, comp.atoms.size());
 
-        comp.atoms.emplace_back(id, alt_id, form_charge, atom_type, leaving_flag);
+        comp.atoms.emplace_back(id, alt_id, atom_type, leaving_flag);
     }
 }
 
@@ -797,7 +801,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
                     setType(*res_atom, atom.type);
 
                 if (applyDictAtomCharges && !hasFormalCharge(*res_atom)) // fix missing form. charge
-                    setFormalCharge(*res_atom, atom.formCharge);
+                    setFormalCharge(*res_atom, comp.atomCharges[atom.id]);
             }
         }
 
@@ -1229,6 +1233,27 @@ void Biomol::MMCIFDataReader::getMissingChemCompLinkAtomsFromResDictStructs()
     }
 }
 
+void Biomol::MMCIFDataReader::getMissingChemCompAtomChargesFromResDictStructs()
+{
+    auto& res_dict = getResidueDictionary();
+    
+    for (auto& ce : chemCompDict) {
+        auto& comp = *ce.second;
+
+        if (!comp.atomCharges.empty())
+            continue;
+        
+        auto& comp_id = *ce.first;        
+        auto dict_struct = res_dict.getStructure(comp_id);
+
+        if (!dict_struct)
+            continue;
+        
+        for (auto& atom : dict_struct->getAtoms())
+            comp.atomCharges.emplace(&getResidueAtomName(atom), getFormalCharge(atom));
+    }
+}
+
 void Biomol::MMCIFDataReader::setupChemCompDataFromResDictStruct(ChemComp& comp, const std::string& comp_id)
 {
      auto& res_dict = getResidueDictionary();
@@ -1241,8 +1266,11 @@ void Biomol::MMCIFDataReader::setupChemCompDataFromResDictStruct(ChemComp& comp,
          if (getResidueLinkingAtomFlag(atom))
              comp.linkAtoms.insert(comp.atoms.size());
 
-         comp.atoms.emplace_back(&getResidueAtomName(atom), hasResidueAltAtomName(atom) ? &getResidueAltAtomName(atom) : nullptr,
-                                 getFormalCharge(atom), getType(atom), getResidueLeavingAtomFlag(atom));
+         auto atom_id = &getResidueAtomName(atom);
+         
+         comp.atoms.emplace_back(atom_id, hasResidueAltAtomName(atom) ? &getResidueAltAtomName(atom) : nullptr,
+                                 getType(atom), getResidueLeavingAtomFlag(atom));
+         comp.atomCharges.emplace(atom_id, getFormalCharge(atom));
      }
 
      for (auto& bond : dict_struct->getBonds())

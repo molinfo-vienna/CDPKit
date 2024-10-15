@@ -40,7 +40,7 @@ namespace CDPL
             const bool                             STRICT_ERROR_CHECKING                           = false;
             const bool                             CHECK_LINE_LENGTH                               = false;
             const ResidueDictionary::SharedPointer RESIDUE_DICTIONARY                              = ResidueDictionary::SharedPointer();
-            const bool                             APPLY_DICT_FORMAL_CHARGES                       = false;
+            const bool                             APPLY_DICT_FORMAL_CHARGES                       = true;//false;
             const bool                             APPLY_DICT_ATOM_TYPES                           = true;
             const bool                             CALC_MISSING_FORMAL_CHARGES                     = false;
             const bool                             PERCEIVE_MISSING_BOND_ORDERS                    = true;
