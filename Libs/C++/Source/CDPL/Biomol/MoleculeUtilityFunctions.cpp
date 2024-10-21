@@ -54,291 +54,292 @@ namespace
     struct AtomLessCompareFunc
     {
 
-    bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {
-        using namespace Biomol;
+        bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const
+        {
+            using namespace Biomol;
 
-        std::size_t model_no1 = getModelNumber(*atom1);
-        std::size_t model_no2 = getModelNumber(*atom2);
+            std::size_t model_no1 = getModelNumber(*atom1);
+            std::size_t model_no2 = getModelNumber(*atom2);
 
-        if (model_no1 < model_no2)
-        return true;
+            if (model_no1 < model_no2)
+                return true;
 
-        if (model_no1 > model_no2)
-        return false;
-     
-        const std::string& res_code1 = getResidueCode(*atom1);
-        const std::string& res_code2 = getResidueCode(*atom2);
+            if (model_no1 > model_no2)
+                return false;
 
-        if (res_code1 < res_code2)
-        return true;
+            const std::string& res_code1 = getResidueCode(*atom1);
+            const std::string& res_code2 = getResidueCode(*atom2);
 
-        if (res_code1 > res_code2)
-        return false;
- 
-        const std::string& chain_id1 = getChainID(*atom1);
-        const std::string& chain_id2 = getChainID(*atom2);
+            if (res_code1 < res_code2)
+                return true;
 
-        if (chain_id1 < chain_id2)
-        return true;
+            if (res_code1 > res_code2)
+                return false;
 
-        if (chain_id1 > chain_id2)
-        return false;
+            const std::string& chain_id1 = getChainID(*atom1);
+            const std::string& chain_id2 = getChainID(*atom2);
 
-        long res_seq_no1 = getResidueSequenceNumber(*atom1);
-        long res_seq_no2 = getResidueSequenceNumber(*atom2);
+            if (chain_id1 < chain_id2)
+                return true;
 
-        if (res_seq_no1 < res_seq_no2)
-        return true;
+            if (chain_id1 > chain_id2)
+                return false;
 
-        if (res_seq_no1 > res_seq_no2)
-        return false;
+            long res_seq_no1 = getResidueSequenceNumber(*atom1);
+            long res_seq_no2 = getResidueSequenceNumber(*atom2);
 
-        char ins_code1 = getResidueInsertionCode(*atom1);
-        char ins_code2 = getResidueInsertionCode(*atom2);
+            if (res_seq_no1 < res_seq_no2)
+                return true;
 
-        if (ins_code1 < ins_code2)
-        return true;
+            if (res_seq_no1 > res_seq_no2)
+                return false;
 
-        if (ins_code1 > ins_code2)
-        return false;
+            char ins_code1 = getResidueInsertionCode(*atom1);
+            char ins_code2 = getResidueInsertionCode(*atom2);
 
-        const std::string& res_atom_name1 = getResidueAtomName(*atom1);
-        const std::string& res_atom_name2 = getResidueAtomName(*atom2);
+            if (ins_code1 < ins_code2)
+                return true;
 
-        return (res_atom_name1 < res_atom_name2);
-    }
+            if (ins_code1 > ins_code2)
+                return false;
+
+            const std::string& res_atom_name1 = getResidueAtomName(*atom1);
+            const std::string& res_atom_name2 = getResidueAtomName(*atom2);
+
+            return (res_atom_name1 < res_atom_name2);
+        }
     };
 
     typedef std::vector<Math::Vector3DArray::SharedPointer> ConfArray;
-    typedef std::vector<Chem::Atom*> AtomArray;
-    typedef std::vector<std::size_t> SizeTArray;
+    typedef std::vector<Chem::Atom*>                        AtomArray;
+    typedef std::vector<std::size_t>                        SizeTArray;
 
 
     bool fetchCoordinates(AtomArray& atoms, std::size_t start_idx, std::size_t num_atoms, ConfArray& confs)
     {
-    using namespace Chem;
+        using namespace Chem;
 
-    if (confs.size() < num_atoms + 1)
-        confs.resize(num_atoms + 1);
+        if (confs.size() < num_atoms + 1)
+            confs.resize(num_atoms + 1);
 
-    for (std::size_t i = 0; i <= num_atoms; i++) {
-        if (!confs[i])
-        confs[i].reset(new Math::Vector3DArray());
+        for (std::size_t i = 0; i <= num_atoms; i++) {
+            if (!confs[i])
+                confs[i].reset(new Math::Vector3DArray());
 
-        if (i == num_atoms) 
+            if (i == num_atoms)
+                return true;
+
+            Atom* atom = atoms[i + start_idx];
+
+            if (has3DCoordinatesArray(*atom) && get3DCoordinatesArray(*atom)->getSize() > 1)
+                return false;
+
+            confs[i]->clear();
+            confs[i]->addElement(get3DCoordinates(*atom));
+        }
+
         return true;
-
-        Atom* atom = atoms[i + start_idx];
-
-        if (has3DCoordinatesArray(*atom) && get3DCoordinatesArray(*atom)->getSize() > 1)
-        return false;
-
-        confs[i]->clear();        
-        confs[i]->addElement(get3DCoordinates(*atom));
     }
 
-    return true;
-    }
- 
     bool fetchCoordinates(AtomArray& atoms, std::size_t start_idx, std::size_t num_atoms, Math::Vector3DArray& coords)
     {
-    using namespace Chem;
+        using namespace Chem;
 
-    if (coords.size() < num_atoms)
-        coords.resize(num_atoms);
+        if (coords.size() < num_atoms)
+            coords.resize(num_atoms);
 
-    for (std::size_t i = 0; i < num_atoms; i++) {
-        Atom* atom = atoms[i + start_idx];
+        for (std::size_t i = 0; i < num_atoms; i++) {
+            Atom* atom = atoms[i + start_idx];
 
-        if (has3DCoordinatesArray(*atom) && get3DCoordinatesArray(*atom)->getSize() > 1)
-        return false;
+            if (has3DCoordinatesArray(*atom) && get3DCoordinatesArray(*atom)->getSize() > 1)
+                return false;
 
-        coords[i] = get3DCoordinates(*atom);
-    }
-
-    return true;
-    }
-
-    double calcMinCtrDist(ConfArray& confs, Math::Vector3DArray& coords, std::size_t num_atoms, std::size_t num_confs) 
-    {
-    Math::Vector3D ctr1;
-
-    for (std::size_t j = 0; j < num_atoms; j++) 
-        ctr1.plusAssign(coords[j]);
-
-    ctr1 /= num_atoms;
-
-    Math::Vector3D ctr2;
-    double min_dist = std::numeric_limits<double>::max();
-
-    for (std::size_t i = 0; i < num_confs; i++) {
-        ctr2.clear();
-
-        for (std::size_t j = 0; j < num_atoms; j++) 
-        ctr2.plusAssign((*confs[j])[i]);
-
-        ctr2 /= num_atoms;
-
-        double dist = length(ctr1 - ctr2);
-
-        if (dist < min_dist)
-        min_dist = dist;
-    }
-
-    return min_dist;
-    }
-
-    bool processResidueSequence(Chem::Molecule& mol, AtomArray& atoms, SizeTArray& res_bounds, ConfArray& confs, double max_ctr_dist) 
-    {
-    using namespace Biomol;
-
-    bool changes = false;
-
-    for (std::size_t i = 0, end = res_bounds.size(); i < end; i += 2) {
-        std::size_t num_atoms = res_bounds[i + 1] - res_bounds[i];
-
-        if (num_atoms == 0)
-        continue;
-
-        if (!fetchCoordinates(atoms, res_bounds[i], num_atoms, confs))
-        continue;
-
-        std::size_t num_confs = 1;
-
-        for (std::size_t j = i + 2; j < end; j+= 2) {
-        if ((res_bounds[j + 1] - res_bounds[j]) != num_atoms)
-            continue;
-
-        if (!fetchCoordinates(atoms, res_bounds[j], num_atoms, *confs[num_atoms]))
-            continue;
-
-        bool same_atom_seq = true;
-
-        for (std::size_t k = 0; k < num_atoms; k++)
-            if (getResidueAtomName(*atoms[res_bounds[i] + k]) != getResidueAtomName(*atoms[res_bounds[j] + k])) {
-            same_atom_seq = false;
-            break;
-            }
-            
-        if (!same_atom_seq) 
-            continue;
-            
-        double min_ctr_dist = calcMinCtrDist(confs, *confs[num_atoms], num_atoms, num_confs);
-
-        if (min_ctr_dist <= max_ctr_dist) {
-            for (std::size_t k = 0; k < num_atoms; k++) {
-            confs[k]->addElement((*confs[num_atoms])[k]);
-
-            mol.removeAtom(mol.getAtomIndex(*atoms[res_bounds[j] + k]));
-            }
-            
-            res_bounds[j + 1] = res_bounds[j];
-            num_confs++;
-
-            changes = true;
-        } 
+            coords[i] = get3DCoordinates(*atom);
         }
 
-        if (num_confs > 1) {
+        return true;
+    }
+
+    double calcMinCtrDist(ConfArray& confs, Math::Vector3DArray& coords, std::size_t num_atoms, std::size_t num_confs)
+    {
+        Math::Vector3D ctr1;
+
         for (std::size_t j = 0; j < num_atoms; j++)
-            set3DCoordinatesArray(*atoms[res_bounds[i] + j], Math::Vector3DArray::SharedPointer(new Math::Vector3DArray(*confs[j])));
+            ctr1.plusAssign(coords[j]);
+
+        ctr1 /= num_atoms;
+
+        Math::Vector3D ctr2;
+        double min_dist = std::numeric_limits<double>::max();
+
+        for (std::size_t i = 0; i < num_confs; i++) {
+            ctr2.clear();
+
+            for (std::size_t j = 0; j < num_atoms; j++)
+                ctr2.plusAssign((*confs[j])[i]);
+
+            ctr2 /= num_atoms;
+
+            double dist = length(ctr1 - ctr2);
+
+            if (dist < min_dist)
+                min_dist = dist;
         }
+
+        return min_dist;
     }
 
-    return changes;
-    }
-
-    bool isWaterOxygen(const Chem::Atom& atom) 
+    bool processResidueSequence(Chem::Molecule& mol, AtomArray& atoms, SizeTArray& res_bounds, ConfArray& confs, double max_ctr_dist)
     {
-    using namespace Chem;
+        using namespace Biomol;
 
-    if (getType(atom) != AtomType::O) 
-        return false;
+        bool changes = false;
 
-    return (MolProp::getHeavyAtomCount(atom) == 0);
+        for (std::size_t i = 0, end = res_bounds.size(); i < end; i += 2) {
+            std::size_t num_atoms = res_bounds[i + 1] - res_bounds[i];
+
+            if (num_atoms == 0)
+                continue;
+
+            if (!fetchCoordinates(atoms, res_bounds[i], num_atoms, confs))
+                continue;
+
+            std::size_t num_confs = 1;
+
+            for (std::size_t j = i + 2; j < end; j += 2) {
+                if ((res_bounds[j + 1] - res_bounds[j]) != num_atoms)
+                    continue;
+
+                if (!fetchCoordinates(atoms, res_bounds[j], num_atoms, *confs[num_atoms]))
+                    continue;
+
+                bool same_atom_seq = true;
+
+                for (std::size_t k = 0; k < num_atoms; k++)
+                    if (getResidueAtomName(*atoms[res_bounds[i] + k]) != getResidueAtomName(*atoms[res_bounds[j] + k])) {
+                        same_atom_seq = false;
+                        break;
+                    }
+
+                if (!same_atom_seq)
+                    continue;
+
+                double min_ctr_dist = calcMinCtrDist(confs, *confs[num_atoms], num_atoms, num_confs);
+
+                if (min_ctr_dist <= max_ctr_dist) {
+                    for (std::size_t k = 0; k < num_atoms; k++) {
+                        confs[k]->addElement((*confs[num_atoms])[k]);
+
+                        mol.removeAtom(mol.getAtomIndex(*atoms[res_bounds[j] + k]));
+                    }
+
+                    res_bounds[j + 1] = res_bounds[j];
+                    num_confs++;
+
+                    changes = true;
+                }
+            }
+
+            if (num_confs > 1) {
+                for (std::size_t j = 0; j < num_atoms; j++)
+                    set3DCoordinatesArray(*atoms[res_bounds[i] + j], Math::Vector3DArray::SharedPointer(new Math::Vector3DArray(*confs[j])));
+            }
+        }
+
+        return changes;
     }
-}
 
-    
+    bool isWaterOxygen(const Chem::Atom& atom)
+    {
+        using namespace Chem;
+
+        if (getType(atom) != AtomType::O)
+            return false;
+
+        return (MolProp::getHeavyAtomCount(atom) == 0);
+    }
+} // namespace
+
+
 bool Biomol::combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_ctr_dist)
 {
     using namespace Chem;
 
     if (mol.getNumAtoms() == 0)
-    return false;
+        return false;
 
-    AtomArray atoms;
+    AtomArray  atoms;
     SizeTArray res_bounds;
-    ConfArray confs;
+    ConfArray  confs;
 
     for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-    Atom& atom = *it;
+        Atom& atom = *it;
 
-    if (atom.getNumBonds() == 0)
-        continue;
+        if (atom.getNumBonds() == 0)
+            continue;
 
-    if (isWaterOxygen(atom) || isWaterOxygen(atom.getAtom(0)))
-        continue;
+        if (isWaterOxygen(atom) || isWaterOxygen(atom.getAtom(0)))
+            continue;
 
-    atoms.push_back(&atom);
+        atoms.push_back(&atom);
     }
 
     std::sort(atoms.begin(), atoms.end(), AtomLessCompareFunc());
 
     std::size_t num_atoms = atoms.size();
-    bool changes = false;
+    bool        changes   = false;
 
     Atom* atom = atoms.front();
 
-    std::size_t model_no = getModelNumber(*atom);
-    std::string res_code = getResidueCode(*atom);
-    long res_seq_no = getResidueSequenceNumber(*atom);
-    std::string chain_id = getChainID(*atom);
-    char ins_code = getResidueInsertionCode(*atom);
+    std::size_t model_no   = getModelNumber(*atom);
+    std::string res_code   = getResidueCode(*atom);
+    long        res_seq_no = getResidueSequenceNumber(*atom);
+    std::string chain_id   = getChainID(*atom);
+    char        ins_code   = getResidueInsertionCode(*atom);
 
     res_bounds.push_back(0);
 
     for (std::size_t i = 1; i < num_atoms; i++) {
-    atom = atoms[i];
+        atom = atoms[i];
 
-    std::size_t curr_model_no = getModelNumber(*atom);
-    const std::string& curr_res_code = getResidueCode(*atom);
-    long curr_res_seq_no = getResidueSequenceNumber(*atom);
-    const std::string& curr_chain_id = getChainID(*atom);
-    char curr_ins_code = getResidueInsertionCode(*atom);
+        std::size_t        curr_model_no   = getModelNumber(*atom);
+        const std::string& curr_res_code   = getResidueCode(*atom);
+        long               curr_res_seq_no = getResidueSequenceNumber(*atom);
+        const std::string& curr_chain_id   = getChainID(*atom);
+        char               curr_ins_code   = getResidueInsertionCode(*atom);
 
-    bool res_code_change = (curr_res_code != res_code);
-    bool chain_id_change = (curr_chain_id != chain_id);
+        bool res_code_change = (curr_res_code != res_code);
+        bool chain_id_change = (curr_chain_id != chain_id);
 
-    if (res_code_change || chain_id_change || curr_model_no != model_no || curr_res_seq_no != res_seq_no || curr_ins_code != ins_code) {
-        res_bounds.push_back(i);
+        if (res_code_change || chain_id_change || curr_model_no != model_no || curr_res_seq_no != res_seq_no || curr_ins_code != ins_code) {
+            res_bounds.push_back(i);
 
-        if (res_code_change || curr_model_no != model_no) {
-        changes |= processResidueSequence(mol, atoms, res_bounds, confs, max_ctr_dist);
+            if (res_code_change || curr_model_no != model_no) {
+                changes |= processResidueSequence(mol, atoms, res_bounds, confs, max_ctr_dist);
 
-        model_no = curr_model_no;
+                model_no = curr_model_no;
 
-        if (res_code_change)
-            res_code = curr_res_code;
+                if (res_code_change)
+                    res_code = curr_res_code;
 
-        res_bounds.clear();
+                res_bounds.clear();
+            }
+
+            if (chain_id_change)
+                chain_id = curr_chain_id;
+
+            res_seq_no = curr_res_seq_no;
+            ins_code   = curr_ins_code;
+
+            res_bounds.push_back(i);
         }
-
-        if (chain_id_change)
-        chain_id = curr_chain_id;
-
-        res_seq_no = curr_res_seq_no;
-        ins_code = curr_ins_code;
-
-        res_bounds.push_back(i);
-    } 
     }
 
     if (!res_bounds.empty()) {
-    res_bounds.push_back(num_atoms);
+        res_bounds.push_back(num_atoms);
 
-    changes |= processResidueSequence(mol, atoms, res_bounds, confs, max_ctr_dist);
+        changes |= processResidueSequence(mol, atoms, res_bounds, confs, max_ctr_dist);
     }
-    
+
     return changes;
 }
