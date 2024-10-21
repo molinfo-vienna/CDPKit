@@ -142,7 +142,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
     bsphere_rad += max_dist;
 
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
-        const Atom&           atom     = *it;
+        const Atom& atom     = *it;
         const Math::Vector3D& atom_pos = coords_func(atom);
 
         if (length(atom_pos - core_ctr) > bsphere_rad)
@@ -162,8 +162,8 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
     std::size_t num_atoms = env_residues.getNumAtoms();
 
     for (std::size_t i = 0; i < num_atoms; i++) {
-        const Atom&             env_atom = env_residues.getAtom(i);
-        Atom::ConstBondIterator b_it     = env_atom.getBondsBegin();
+        const Atom& env_atom = env_residues.getAtom(i);
+        Atom::ConstBondIterator b_it = env_atom.getBondsBegin();
 
         for (Atom::ConstAtomIterator a_it = env_atom.getAtomsBegin(), a_end = env_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
             const Atom& nbr_atom = *a_it;
@@ -207,29 +207,41 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
             overwrite = false;
 
         if (overwrite) {
-            if (flags & AtomPropertyFlag::RESIDUE_CODE)
-                setResidueCode(atom, getResidueCode(prnt_atom));
+            if (flags & AtomPropertyFlag::RESIDUE_CODE) {
+                if (hasResidueCode(prnt_atom))
+                    setResidueCode(atom, getResidueCode(prnt_atom));
+                else
+                    clearResidueCode(atom);
+            }
 
             if (flags & AtomPropertyFlag::MODEL_NUMBER) {
-				if (hasModelNumber(prnt_atom))
-					setModelNumber(atom, getModelNumber(prnt_atom));
-				else
-					clearModelNumber(atom);
-			}
-			
-            if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO)
-                setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
+                if (hasModelNumber(prnt_atom))
+                    setModelNumber(atom, getModelNumber(prnt_atom));
+                else
+                    clearModelNumber(atom);
+            }
 
-            if (flags & AtomPropertyFlag::CHAIN_ID)
-                setChainID(atom, getChainID(prnt_atom));
+            if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) {
+                if (hasResidueSequenceNumber(prnt_atom))
+                    setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
+                else
+                    clearResidueSequenceNumber(atom);
+            }
+
+            if (flags & AtomPropertyFlag::CHAIN_ID) {
+                if (hasChainID(prnt_atom))
+                    setChainID(atom, getChainID(prnt_atom));
+                else
+                    clearChainID(atom);
+            }
 
             if (flags & AtomPropertyFlag::RESIDUE_INS_CODE) {
-				if (hasResidueInsertionCode(prnt_atom))
-					setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
-				else
-					clearResidueInsertionCode(atom);
-			}
-			
+                if (hasResidueInsertionCode(prnt_atom))
+                    setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
+                else
+                    clearResidueInsertionCode(atom);
+            }
+
         } else {
             if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom) && hasResidueCode(prnt_atom))
                 setResidueCode(atom, getResidueCode(prnt_atom));
@@ -252,19 +264,19 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
 bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code, const char* chain_id, long res_seq_no,
                                 char ins_code, std::size_t model_no)
 {
-    if (res_code != 0 && (getResidueCode(molgraph) != res_code))
+    if ((res_code != 0) && (getResidueCode(molgraph) != res_code))
         return false;
 
-    if (chain_id != 0 && (getChainID(molgraph) != chain_id))
+    if ((chain_id != 0) && (getChainID(molgraph) != chain_id))
         return false;
 
-    if (res_seq_no != IGNORE_SEQUENCE_NO && (getResidueSequenceNumber(molgraph) != res_seq_no))
+    if ((res_seq_no != IGNORE_SEQUENCE_NO) && (getResidueSequenceNumber(molgraph) != res_seq_no))
         return false;
 
-    if (ins_code != 0 && (getResidueInsertionCode(molgraph) != ins_code))
+    if ((ins_code != 0) && (getResidueInsertionCode(molgraph) != ins_code))
         return false;
 
-    if (model_no != 0 && (getModelNumber(molgraph) != model_no))
+    if ((model_no != 0) && (getModelNumber(molgraph) != model_no))
         return false;
 
     return true;
