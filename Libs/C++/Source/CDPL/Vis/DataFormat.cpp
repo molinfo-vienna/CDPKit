@@ -63,13 +63,13 @@ namespace
 using namespace CDPL;
 
         
-const Base::DataFormat Vis::DataFormat::PNG("PNG", "Portable Network Graphics", "image/png", 
+const Base::DataFormat Vis::DataFormat::PNG("PNG", "Portable Network Graphics Format", "image/png", 
                                             pngFileExtensions, pngFileExtensions + 1, false);
 const Base::DataFormat Vis::DataFormat::PDF("PDF", "Adobe Portable Document Format", "application/pdf", 
                                             pdfFileExtensions, pdfFileExtensions + 1, false);
-const Base::DataFormat Vis::DataFormat::PS("PS", "Adobe PostScript", "application/postscript", 
+const Base::DataFormat Vis::DataFormat::PS("PS", "Adobe PostScript Format", "application/postscript", 
                                            psFileExtensions, psFileExtensions + 2, false);
-const Base::DataFormat Vis::DataFormat::SVG("SVG", "Scalable Vector Graphics", "image/svg+xml", 
+const Base::DataFormat Vis::DataFormat::SVG("SVG", "Scalable Vector Graphics Format", "image/svg+xml", 
                                             svgFileExtensions, svgFileExtensions + 1, false);
 
 namespace CDPL

@@ -1,5 +1,7 @@
 master:
 
+ - CDPL Python bindings wheel files for Linux are now built on manylinux_2_28
+ - Added support for the I/O of molecular structure data in mmCIF format
  - Added new and changed existing constants in namespace Biomol::ResidueType which now fully cover the 
    set of residue types defined in the mmCIF/PDBX specification
  - Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue parent structure information

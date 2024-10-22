@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(DataFormatTest)
     using namespace Vis;
 
     BOOST_CHECK(DataFormat::PNG.getName() == "PNG");
-    BOOST_CHECK(DataFormat::PNG.getDescription() == "Portable Network Graphics");
+    BOOST_CHECK(DataFormat::PNG.getDescription() == "Portable Network Graphics Format");
     BOOST_CHECK(DataFormat::PNG.getMimeType() == "image/png");
     BOOST_CHECK(DataFormat::PNG.isMultiRecordFormat() == false);
 
@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(DataFormatTest)
 //-----
 
     BOOST_CHECK(DataFormat::SVG.getName() == "SVG");
-    BOOST_CHECK(DataFormat::SVG.getDescription() == "Scalable Vector Graphics");
+    BOOST_CHECK(DataFormat::SVG.getDescription() == "Scalable Vector Graphics Format");
     BOOST_CHECK(DataFormat::SVG.getMimeType() == "image/svg+xml");
     BOOST_CHECK(DataFormat::SVG.isMultiRecordFormat() == false);
 
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(DataFormatTest)
 //-----
 
     BOOST_CHECK(DataFormat::PS.getName() == "PS");
-    BOOST_CHECK(DataFormat::PS.getDescription() == "Adobe PostScript");
+    BOOST_CHECK(DataFormat::PS.getDescription() == "Adobe PostScript Format");
     BOOST_CHECK(DataFormat::PS.getMimeType() == "application/postscript");
     BOOST_CHECK(DataFormat::PS.isMultiRecordFormat() == false);
 

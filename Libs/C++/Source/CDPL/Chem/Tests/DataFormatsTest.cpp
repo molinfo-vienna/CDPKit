@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SDF.getName() == "SDF");
-    BOOST_CHECK(DataFormat::SDF.getDescription() == "MDL Structure-Data File");
+    BOOST_CHECK(DataFormat::SDF.getDescription() == "MDL Structure-Data Format");
     BOOST_CHECK(DataFormat::SDF.getMimeType() == "chemical/x-mdl-sdfile");
     BOOST_CHECK(DataFormat::SDF.isMultiRecordFormat() == true);
 
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SDF_GZ.getName() == "SDF_GZ");
-    BOOST_CHECK(DataFormat::SDF_GZ.getDescription() == "GZip-Compressed MDL Structure-Data File");
+    BOOST_CHECK(DataFormat::SDF_GZ.getDescription() == "GZip-Compressed MDL Structure-Data Format");
     BOOST_CHECK(DataFormat::SDF_GZ.getMimeType() == "chemical/x-mdl-sdfile");
     BOOST_CHECK(DataFormat::SDF_GZ.isMultiRecordFormat() == true);
 
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SDF_BZ2.getName() == "SDF_BZ2");
-    BOOST_CHECK(DataFormat::SDF_BZ2.getDescription() == "BZip2-Compressed MDL Structure-Data File");
+    BOOST_CHECK(DataFormat::SDF_BZ2.getDescription() == "BZip2-Compressed MDL Structure-Data Format");
     BOOST_CHECK(DataFormat::SDF_BZ2.getMimeType() == "chemical/x-mdl-sdfile");
     BOOST_CHECK(DataFormat::SDF_BZ2.isMultiRecordFormat() == true);
 
@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::RXN.getName() == "RXN");
-    BOOST_CHECK(DataFormat::RXN.getDescription() == "MDL Reaction File");
+    BOOST_CHECK(DataFormat::RXN.getDescription() == "MDL Reaction Format");
     BOOST_CHECK(DataFormat::RXN.getMimeType() == "chemical/x-mdl-rxnfile");
     BOOST_CHECK(DataFormat::RXN.isMultiRecordFormat() == true);
 
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::RDF.getName() == "RDF");
-    BOOST_CHECK(DataFormat::RDF.getDescription() == "MDL Reaction-Data File");
+    BOOST_CHECK(DataFormat::RDF.getDescription() == "MDL Reaction-Data Format");
     BOOST_CHECK(DataFormat::RDF.getMimeType() == "chemical/x-mdl-rdfile");
     BOOST_CHECK(DataFormat::RDF.isMultiRecordFormat() == true);
 
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::RDF_GZ.getName() == "RDF_GZ");
-    BOOST_CHECK(DataFormat::RDF_GZ.getDescription() == "GZip-Compressed MDL Reaction-Data File");
+    BOOST_CHECK(DataFormat::RDF_GZ.getDescription() == "GZip-Compressed MDL Reaction-Data Format");
     BOOST_CHECK(DataFormat::RDF_GZ.getMimeType() == "chemical/x-mdl-rdfile");
     BOOST_CHECK(DataFormat::RDF_GZ.isMultiRecordFormat() == true);
 
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::RDF_BZ2.getName() == "RDF_BZ2");
-    BOOST_CHECK(DataFormat::RDF_BZ2.getDescription() == "BZip2-Compressed MDL Reaction-Data File");
+    BOOST_CHECK(DataFormat::RDF_BZ2.getDescription() == "BZip2-Compressed MDL Reaction-Data Format");
     BOOST_CHECK(DataFormat::RDF_BZ2.getMimeType() == "chemical/x-mdl-rdfile");
     BOOST_CHECK(DataFormat::RDF_BZ2.isMultiRecordFormat() == true);
 
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SMILES.getName() == "SMILES");
-    BOOST_CHECK(DataFormat::SMILES.getDescription() == "Daylight SMILES String");
+    BOOST_CHECK(DataFormat::SMILES.getDescription() == "Daylight SMILES Format");
     BOOST_CHECK(DataFormat::SMILES.getMimeType() == "chemical/x-daylight-smiles");
     BOOST_CHECK(DataFormat::SMILES.isMultiRecordFormat() == true);
 
@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SMILES_GZ.getName() == "SMILES_GZ");
-    BOOST_CHECK(DataFormat::SMILES_GZ.getDescription() == "GZip-Compressed Daylight SMILES String");
+    BOOST_CHECK(DataFormat::SMILES_GZ.getDescription() == "GZip-Compressed Daylight SMILES Format");
     BOOST_CHECK(DataFormat::SMILES_GZ.getMimeType() == "chemical/x-daylight-smiles");
     BOOST_CHECK(DataFormat::SMILES_GZ.isMultiRecordFormat() == true);
 
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SMILES_BZ2.getName() == "SMILES_BZ2");
-    BOOST_CHECK(DataFormat::SMILES_BZ2.getDescription() == "BZip2-Compressed Daylight SMILES String");
+    BOOST_CHECK(DataFormat::SMILES_BZ2.getDescription() == "BZip2-Compressed Daylight SMILES Format");
     BOOST_CHECK(DataFormat::SMILES_BZ2.getMimeType() == "chemical/x-daylight-smiles");
     BOOST_CHECK(DataFormat::SMILES_BZ2.isMultiRecordFormat() == true);
 
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::SMARTS.getName() == "SMARTS");
-    BOOST_CHECK(DataFormat::SMARTS.getDescription() == "Daylight SMARTS String");
+    BOOST_CHECK(DataFormat::SMARTS.getDescription() == "Daylight SMARTS Format");
     BOOST_CHECK(DataFormat::SMARTS.getMimeType() == "");
     BOOST_CHECK(DataFormat::SMARTS.isMultiRecordFormat() == true);
 
@@ -197,7 +197,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::MOL2.getName() == "MOL2");
-    BOOST_CHECK(DataFormat::MOL2.getDescription() == "Tripos Sybyl MOL2 File");
+    BOOST_CHECK(DataFormat::MOL2.getDescription() == "Tripos Sybyl MOL2 Format");
     BOOST_CHECK(DataFormat::MOL2.getMimeType() == "");
     BOOST_CHECK(DataFormat::MOL2.isMultiRecordFormat() == true);
 
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::MOL2_GZ.getName() == "MOL2_GZ");
-    BOOST_CHECK(DataFormat::MOL2_GZ.getDescription() == "GZip-Compressed Tripos Sybyl MOL2 File");
+    BOOST_CHECK(DataFormat::MOL2_GZ.getDescription() == "GZip-Compressed Tripos Sybyl MOL2 Format");
     BOOST_CHECK(DataFormat::MOL2_GZ.getMimeType() == "");
     BOOST_CHECK(DataFormat::MOL2_GZ.isMultiRecordFormat() == true);
 
@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::MOL2_BZ2.getName() == "MOL2_BZ2");
-    BOOST_CHECK(DataFormat::MOL2_BZ2.getDescription() == "BZip2-Compressed Tripos Sybyl MOL2 File");
+    BOOST_CHECK(DataFormat::MOL2_BZ2.getDescription() == "BZip2-Compressed Tripos Sybyl MOL2 Format");
     BOOST_CHECK(DataFormat::MOL2_BZ2.getMimeType() == "");
     BOOST_CHECK(DataFormat::MOL2_BZ2.isMultiRecordFormat() == true);
 
@@ -230,7 +230,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::CDF.getName() == "CDF");
-    BOOST_CHECK(DataFormat::CDF.getDescription() == "Native CDPL-Format");
+    BOOST_CHECK(DataFormat::CDF.getDescription() == "Native CDPL Format");
     BOOST_CHECK(DataFormat::CDF.getMimeType() == "");
     BOOST_CHECK(DataFormat::CDF.isMultiRecordFormat() == true);
 
@@ -241,7 +241,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::CDF_GZ.getName() == "CDF_GZ");
-    BOOST_CHECK(DataFormat::CDF_GZ.getDescription() == "GZip-Compressed Native CDPL-Format");
+    BOOST_CHECK(DataFormat::CDF_GZ.getDescription() == "GZip-Compressed Native CDPL Format");
     BOOST_CHECK(DataFormat::CDF_GZ.getMimeType() == "");
     BOOST_CHECK(DataFormat::CDF_GZ.isMultiRecordFormat() == true);
 
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(DataFormatsTest)
 //-----
 
     BOOST_CHECK(DataFormat::CDF_BZ2.getName() == "CDF_BZ2");
-    BOOST_CHECK(DataFormat::CDF_BZ2.getDescription() == "BZip2-Compressed Native CDPL-Format");
+    BOOST_CHECK(DataFormat::CDF_BZ2.getDescription() == "BZip2-Compressed Native CDPL Format");
     BOOST_CHECK(DataFormat::CDF_BZ2.getMimeType() == "");
     BOOST_CHECK(DataFormat::CDF_BZ2.isMultiRecordFormat() == true);
 

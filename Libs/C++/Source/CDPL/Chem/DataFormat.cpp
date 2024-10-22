@@ -117,6 +117,9 @@ namespace
     const char* xyzFileExtensions[]       = { "xyz" };
     const char* xyzGzFileExtensions[]     = { "xyz.gz" };
     const char* xyzBz2FileExtensions[]    = { "xyz.bz2" };
+    const char* cmlFileExtensions[]       = { "cml" };
+    const char* cmlGzFileExtensions[]     = { "cml.gz" };
+    const char* cmlBz2FileExtensions[]    = { "cml.bz2" };
 }
 
 
@@ -127,48 +130,54 @@ const Base::DataFormat Chem::DataFormat::JME("JME", "JME Molecular Editor String
                                              jmeFileExtensions, jmeFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL("MOL", "MDL Molfile", "chemical/x-mdl-molfile", 
                                              molFileExtensions, molFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::SDF("SDF", "MDL Structure-Data File", "chemical/x-mdl-sdfile", 
+const Base::DataFormat Chem::DataFormat::SDF("SDF", "MDL Structure-Data Format", "chemical/x-mdl-sdfile", 
                                              sdfFileExtensions, sdfFileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::SDF_GZ("SDF_GZ", "GZip-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
+const Base::DataFormat Chem::DataFormat::SDF_GZ("SDF_GZ", "GZip-Compressed MDL Structure-Data Format", "chemical/x-mdl-sdfile", 
                                              sdfGzFileExtensions, sdfGzFileExtensions + 3, true);
-const Base::DataFormat Chem::DataFormat::SDF_BZ2("SDF_BZ2", "BZip2-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
+const Base::DataFormat Chem::DataFormat::SDF_BZ2("SDF_BZ2", "BZip2-Compressed MDL Structure-Data Format", "chemical/x-mdl-sdfile", 
                                              sdfBz2FileExtensions, sdfBz2FileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::RXN("RXN", "MDL Reaction File", "chemical/x-mdl-rxnfile", 
+const Base::DataFormat Chem::DataFormat::RXN("RXN", "MDL Reaction Format", "chemical/x-mdl-rxnfile", 
                                              rxnFileExtensions, rxnFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::RDF("RDF", "MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
+const Base::DataFormat Chem::DataFormat::RDF("RDF", "MDL Reaction-Data Format", "chemical/x-mdl-rdfile", 
                                              rdfFileExtensions, rdfFileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::RDF_GZ("RDF_GZ", "GZip-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
+const Base::DataFormat Chem::DataFormat::RDF_GZ("RDF_GZ", "GZip-Compressed MDL Reaction-Data Format", "chemical/x-mdl-rdfile", 
                                              rdfGzFileExtensions, rdfGzFileExtensions + 3, true);
-const Base::DataFormat Chem::DataFormat::RDF_BZ2("RDF_BZ2", "BZip2-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
+const Base::DataFormat Chem::DataFormat::RDF_BZ2("RDF_BZ2", "BZip2-Compressed MDL Reaction-Data Format", "chemical/x-mdl-rdfile", 
                                              rdfBz2FileExtensions, rdfBz2FileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::SMILES("SMILES", "Daylight SMILES String", "chemical/x-daylight-smiles", 
+const Base::DataFormat Chem::DataFormat::SMILES("SMILES", "Daylight SMILES Format", "chemical/x-daylight-smiles", 
                                                 smilesFileExtensions, smilesFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::SMILES_GZ("SMILES_GZ", "GZip-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
+const Base::DataFormat Chem::DataFormat::SMILES_GZ("SMILES_GZ", "GZip-Compressed Daylight SMILES Format", "chemical/x-daylight-smiles", 
                                                 smilesGzFileExtensions, smilesGzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::SMILES_BZ2("SMILES_BZ2", "BZip2-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
+const Base::DataFormat Chem::DataFormat::SMILES_BZ2("SMILES_BZ2", "BZip2-Compressed Daylight SMILES Format", "chemical/x-daylight-smiles", 
                                                 smilesBz2FileExtensions, smilesBz2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::SMARTS("SMARTS", "Daylight SMARTS String", "", 
+const Base::DataFormat Chem::DataFormat::SMARTS("SMARTS", "Daylight SMARTS Format", "", 
                                                 smartsFileExtensions, smartsFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::INCHI("INCHI", "IUPAC International Chemical Identifier", "chemical/x-inchi", 
                                                inchiFileExtensions, inchiFileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::CDF("CDF", "Native CDPL Format", "", 
                                              cdfFileExtensions, cdfFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL Format", "", 
                                              cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL Format", "", 
                                              cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Tripos Sybyl MOL2 File", "", 
+const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Tripos Sybyl MOL2 Format", "", 
                                              mol2FileExtensions, mol2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Tripos Sybyl MOL2 File", "", 
+const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Tripos Sybyl MOL2 Format", "", 
                                              mol2GzFileExtensions, mol2GzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Tripos Sybyl MOL2 File", "", 
+const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Tripos Sybyl MOL2 Format", "", 
                                              mol2Bz2FileExtensions, mol2Bz2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::XYZ("XYZ", "Atomic Coordinates XYZ File", "", 
+const Base::DataFormat Chem::DataFormat::XYZ("XYZ", "Atomic Coordinates XYZ Format", "", 
                                              xyzFileExtensions, xyzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::XYZ_GZ("XYZ_GZ", "GZip-Compressed Atomic Coordinates XYZ File", "", 
+const Base::DataFormat Chem::DataFormat::XYZ_GZ("XYZ_GZ", "GZip-Compressed Atomic Coordinates XYZ Format", "", 
                                              xyzGzFileExtensions, xyzGzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::XYZ_BZ2("XYZ_BZ2", "BZip2-Compressed Atomic Coordinates XYZ File", "", 
+const Base::DataFormat Chem::DataFormat::XYZ_BZ2("XYZ_BZ2", "BZip2-Compressed Atomic Coordinates XYZ Format", "", 
                                              xyzBz2FileExtensions, xyzBz2FileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::CML("CML", "Chemical Markup Language Format", "", 
+                                             cmlFileExtensions, cmlFileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::CML_GZ("CML_GZ", "GZip-Compressed Chemical Markup Language Format", "", 
+                                             cmlGzFileExtensions, cmlGzFileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::CML_BZ2("CML_BZ2", "BZip2-Compressed Chemical Markup Language Format", "", 
+                                             cmlBz2FileExtensions, cmlBz2FileExtensions + 1, true);
 
 
 namespace CDPL

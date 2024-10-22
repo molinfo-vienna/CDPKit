@@ -54,15 +54,15 @@ namespace
 using namespace CDPL;
 
 
-const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
+const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL Format", "", 
                                               cdfFileExtensions, cdfFileExtensions + 1, true);
-const Base::DataFormat Pharm::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Pharm::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL Format", "", 
                                               cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
-const Base::DataFormat Pharm::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Pharm::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL Format", "", 
                                               cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
-const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language", "", 
+const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language Format", "", 
                                               pmlFileExtensions, pmlFileExtensions + 1, true);
-const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database", "", 
+const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database Format", "", 
                                               psdFileExtensions, psdFileExtensions + 1, true);
 
 namespace CDPL

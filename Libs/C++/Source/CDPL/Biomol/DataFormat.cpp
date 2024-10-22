@@ -71,11 +71,11 @@ namespace
 using namespace CDPL;
 
         
-const Base::DataFormat Biomol::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
+const Base::DataFormat Biomol::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry Format", "chemical/x-pdb", 
                                                pdbFileExtensions, pdbFileExtensions + 2, false);
-const Base::DataFormat Biomol::DataFormat::PDB_GZ("PDB_GZ", "GZip-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
+const Base::DataFormat Biomol::DataFormat::PDB_GZ("PDB_GZ", "GZip-Compressed Brookhaven Protein Data Bank Entry Format", "chemical/x-pdb", 
                                                pdbGzFileExtensions, pdbGzFileExtensions + 2, false);
-const Base::DataFormat Biomol::DataFormat::PDB_BZ2("PDB_BZ2", "BZip2-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
+const Base::DataFormat Biomol::DataFormat::PDB_BZ2("PDB_BZ2", "BZip2-Compressed Brookhaven Protein Data Bank Entry Format", "chemical/x-pdb", 
                                                pdbBz2FileExtensions, pdbBz2FileExtensions + 2, false);
 
 const Base::DataFormat Biomol::DataFormat::MMTF("MMTF", "Macromolecular Transmission Format", "chemical/x-mmtf", 
@@ -85,11 +85,11 @@ const Base::DataFormat Biomol::DataFormat::MMTF_GZ("MMTF_GZ", "GZip-Compressed M
 const Base::DataFormat Biomol::DataFormat::MMTF_BZ2("MMTF_BZ2", "BZip2-Compressed Macromolecular Transmission Format", "chemical/x-mmtf", 
                                                mmtfBz2FileExtensions, mmtfBz2FileExtensions + 1, false);
 
-const Base::DataFormat Biomol::DataFormat::MMCIF("MMCIF", "Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+const Base::DataFormat Biomol::DataFormat::MMCIF("MMCIF", "Macromolecular Crystallographic Information File Format", "chemical/x-mmcif", 
                                                mmcifFileExtensions, mmcifFileExtensions + 2, true);
-const Base::DataFormat Biomol::DataFormat::MMCIF_GZ("MMCIF_GZ", "GZip-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+const Base::DataFormat Biomol::DataFormat::MMCIF_GZ("MMCIF_GZ", "GZip-Compressed Macromolecular Crystallographic Information File Format", "chemical/x-mmcif", 
                                                mmcifGzFileExtensions, mmcifGzFileExtensions + 2, true);
-const Base::DataFormat Biomol::DataFormat::MMCIF_BZ2("MMCIF_BZ2", "BZip2-Compressed Macromolecular Crystallographic Information File", "chemical/x-mmcif", 
+const Base::DataFormat Biomol::DataFormat::MMCIF_BZ2("MMCIF_BZ2", "BZip2-Compressed Macromolecular Crystallographic Information File Format", "chemical/x-mmcif", 
                                                mmcifBz2FileExtensions, mmcifBz2FileExtensions + 2, true);
 
 

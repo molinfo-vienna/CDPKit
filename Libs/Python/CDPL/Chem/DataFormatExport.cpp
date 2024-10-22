@@ -65,5 +65,9 @@ void CDPLPythonChem::exportDataFormats()
         .def_readonly("MOL2_BZ2", &Chem::DataFormat::MOL2_BZ2)
         .def_readonly("XYZ", &Chem::DataFormat::XYZ)
         .def_readonly("XYZ_GZ", &Chem::DataFormat::XYZ_GZ)
-        .def_readonly("XYZ_BZ2", &Chem::DataFormat::XYZ_BZ2);
+        .def_readonly("XYZ_BZ2", &Chem::DataFormat::XYZ_BZ2)
+        .def_readonly("CML", &Chem::DataFormat::CML)
+        .def_readonly("CML_GZ", &Chem::DataFormat::CML_GZ)
+        .def_readonly("CML_BZ2", &Chem::DataFormat::CML_BZ2)
+        ;
 }

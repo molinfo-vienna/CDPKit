@@ -167,6 +167,24 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::DataFormat XYZ_BZ2;
 
+            /**
+             * \brief Provides meta-information about the <em>Chemical Markup Language</em> [\ref CML] format.
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CML;
+
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>Chemical Markup Language</em> [\ref CML] format.
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CML_GZ;
+
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>Chemical Markup Language</em> [\ref CML] format.
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CML_BZ2;
+
         } // namespace DataFormat
     } // namespace Chem
 } // namespace CDPL
