@@ -21,7 +21,7 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-cmake_minimum_required(VERSION 3.17.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.17...3.31 FATAL_ERROR)
 cmake_policy(SET CMP0057 NEW)
 
 set(CMAKE_COLOR_MAKEFILE ON)
