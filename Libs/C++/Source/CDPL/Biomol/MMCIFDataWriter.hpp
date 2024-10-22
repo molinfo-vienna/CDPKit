@@ -86,13 +86,13 @@ namespace CDPL
             void prepStructConnData(const Chem::MolecularGraph& molgraph);
             void prepEntityData(const Chem::MolecularGraph& molgraph);
 
+            std::size_t getEntityWaterCount(const Chem::MolecularGraph& molgraph) const;
+            void perceiveEntityNonStdLinkage(Entity& entity, const Chem::MolecularGraph& molgraph) const;
+            void perceiveEntityType(Entity& entity);
+            void genEntityResidueSequenceStrings(Entity& entity);
             void getEntityAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t model_no,
                                 const std::string& chain_id);
 
-            bool genEntityPolySeqStrings(const Entity& entity, std::string& olc_seq, std::string& can_olc_seq);
-
-            const std::string& getPolymerEntityType(const Entity& entity);
-            
             void outputChemCompData(const Chem::MolecularGraph& molgraph);
             void outputChemCompAtomData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
             void outputChemCompBondData(const Chem::MolecularGraph& molgraph, const std::string& comp_id);
@@ -126,13 +126,19 @@ namespace CDPL
                 std::size_t        index;
                 std::string        id;
                 std::size_t        modelNo{0};
-                std::size_t        count{1};
+                std::size_t        count{0};
                 double             weight{0.0};
                 const std::string* type{nullptr};
                 const std::string* srcMethod{nullptr};
                 const std::string* descr{nullptr};
+                const std::string* polymerType{nullptr};
                 ResidueIDList      resSequence;
                 ChainIDSet         chains;
+                std::string        resOLCSequence;
+                std::string        canResOLCSequence;
+                bool               hasNonStdMon{false};
+                bool               hasNonStdLinks{false};
+                bool               isCyclic{false};
             };
 
             struct ChemComp
@@ -228,6 +234,7 @@ namespace CDPL
             std::size_t                 numOutDataBlocks;
             bool                        outputAsChemComp;
             AtomList                    atomSites;
+            bool                        haveAtomEntityIds;
             ChemCompDictionary          chemCompDict;
             EntityList                  entities;
             AtomList                    entityAtoms;

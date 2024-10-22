@@ -82,7 +82,7 @@ namespace CDPL
 
             void readAtomSites(const MMCIFData& data, Chem::Molecule& mol);
             void postprocAtomSites(Chem::Molecule& mol);
-            void createNonStdInterResidueBonds(const MMCIFData& data, Chem::Molecule& mol) const;
+            void createNonStdBonds(const MMCIFData& data, Chem::Molecule& mol) const;
             void applyDictionaryBondOrders(Chem::Molecule& mol);
             void setMacromolName(const MMCIFData& data, Chem::Molecule& mol) const;
 
@@ -91,7 +91,7 @@ namespace CDPL
                                 const std::string* auth_comp_id, const std::string* auth_seq_id,
                                 const std::string* label_asym_id, const std::string* label_atom_id,
                                 const std::string* label_comp_id, const std::string* label_seq_id,
-                                const std::string* ins_code) const;
+                                const std::string* ins_code, std::size_t& ase_idx) const;
             
             const ResidueDictionary& getResidueDictionary() const;
             

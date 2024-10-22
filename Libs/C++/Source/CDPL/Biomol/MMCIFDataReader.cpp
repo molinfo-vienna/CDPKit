@@ -377,7 +377,7 @@ void Biomol::MMCIFDataReader::readMacromol(const MMCIFData& data, Chem::Molecule
     initChemCompDict(data);
     readAtomSites(data, mol);
     postprocAtomSites(mol);
-    createNonStdInterResidueBonds(data, mol);
+    createNonStdBonds(data, mol);
 
     if (combInterferingResCoords)
         combineInterferingResidueCoordinates(mol);
@@ -576,10 +576,10 @@ void Biomol::MMCIFDataReader::readAtomSites(const MMCIFData& data, Chem::Molecul
     auto type_syms = atom_sites->findItem(AtomSite::Item::TYPE_SYMBOL);
     auto atom_alt_loc_ids = atom_sites->findItem(AtomSite::Item::LABEL_ALT_ID);
     auto entity_ids = atom_sites->findItem(AtomSite::Item::LABEL_ENTITY_ID);
-    auto atom_ids = select(atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID), atom_sites->findItem(AtomSite::Item::AUTH_ATOM_ID));
-    auto comp_ids = select(atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID), atom_sites->findItem(AtomSite::Item::AUTH_COMP_ID));
-    auto res_seq_nos = select(atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID), atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID));
-    auto chain_ids = select(atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID), atom_sites->findItem(AtomSite::Item::AUTH_ASYM_ID));
+    auto atom_ids = atom_sites->findItem(AtomSite::Item::LABEL_ATOM_ID);
+    auto comp_ids = atom_sites->findItem(AtomSite::Item::LABEL_COMP_ID);
+    auto res_seq_nos = select(atom_sites->findItem(AtomSite::Item::AUTH_SEQ_ID), atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID));
+    auto chain_ids = select(atom_sites->findItem(AtomSite::Item::AUTH_ASYM_ID), atom_sites->findItem(AtomSite::Item::LABEL_ASYM_ID));
     auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
     auto coords_x = atom_sites->findItem(AtomSite::Item::COORDS_X);
     auto coords_y = atom_sites->findItem(AtomSite::Item::COORDS_Y);
@@ -919,7 +919,7 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
     }
 }
 
-void Biomol::MMCIFDataReader::createNonStdInterResidueBonds(const MMCIFData& data, Chem::Molecule& mol) const
+void Biomol::MMCIFDataReader::createNonStdBonds(const MMCIFData& data, Chem::Molecule& mol) const
 {
     using namespace MMCIF;
   
@@ -991,51 +991,60 @@ void Biomol::MMCIFDataReader::createNonStdInterResidueBonds(const MMCIFData& dat
                                     (num_cons > 1 ? " at data row " + std::to_string(i) : std::string("")));
             continue;
         }
-        
-        auto ptnr1_atom = getAtom(data, mol,
-                                  getValue(ptnr1_auth_asym_ids, i), getValue(ptnr1_auth_atom_ids, i),
-                                  getValue(ptnr1_auth_comp_ids, i), getValue(ptnr1_auth_seq_ids, i),
-                                  getValue(ptnr1_label_asym_ids, i), getValue(ptnr1_label_atom_ids, i),
-                                  getValue(ptnr1_label_comp_ids, i), getValue(ptnr1_label_seq_ids, i),
-                                  getValue(ptnr1_ins_codes, i));
 
-        if (!ptnr1_atom) {
-            if (strictErrorChecking)
-                throw Base::IOError("MMCIFDataReader: could not find first binding partner atom specified in _" + StructConn::NAME +
-                                    (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
-            continue;
-        }
-        
-        auto ptnr2_atom = getAtom(data, mol,
-                                  getValue(ptnr2_auth_asym_ids, i), getValue(ptnr2_auth_atom_ids, i),
-                                  getValue(ptnr2_auth_comp_ids, i), getValue(ptnr2_auth_seq_ids, i),
-                                  getValue(ptnr2_label_asym_ids, i), getValue(ptnr2_label_atom_ids, i),
-                                  getValue(ptnr2_label_comp_ids, i), getValue(ptnr2_label_seq_ids, i),
-                                  getValue(ptnr2_ins_codes, i));
+        std::size_t order = 0;
 
-        if (!ptnr2_atom) {
-            if (strictErrorChecking)
-                throw Base::IOError("MMCIFDataReader: could not find second binding partner atom specified in _" + StructConn::NAME +
-                                    (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
-            continue;
-        }
-
-        auto& bond = mol.addBond(mol.getAtomIndex(*ptnr1_atom), mol.getAtomIndex(*ptnr2_atom));
-
-        if (auto order = getValue(bond_orders, i)) {
-            if (Internal::isEqualCI(*order, StructConn::Order::SINGLE))
-                setOrder(bond, 1);
+        if (auto order_val = getValue(bond_orders, i)) {
+            if (Internal::isEqualCI(*order_val, StructConn::Order::SINGLE))
+                order = 1;
             
-            else if (Internal::isEqualCI(*order, StructConn::Order::DOUBLE))
-                setOrder(bond, 2);
+            else if (Internal::isEqualCI(*order_val, StructConn::Order::DOUBLE))
+                order = 2;
             
-            else if (Internal::isEqualCI(*order, StructConn::Order::TRIPLE))
-                setOrder(bond, 3);
+            else if (Internal::isEqualCI(*order_val, StructConn::Order::TRIPLE))
+                order = 3;
 
-            else if (strictErrorChecking && !Internal::isEqualCI(*order, StructConn::Order::QUADRUPLE))
+            else if (strictErrorChecking && !Internal::isEqualCI(*order_val, StructConn::Order::QUADRUPLE))
                 throw Base::IOError("MMCIFDataReader: " + getFQItemName(struct_cons, bond_orders) +
-                                    ": invalid bond order specification '" + *order +
+                                    ": invalid bond order specification '" + *order_val +
                                     (num_cons > 1 ? "' at data row " + std::to_string(i) : std::string("'")));
+        }
+
+        bool made_bond = false;
+
+        for (std::size_t ptnr1_ase_idx = 0, ptnr2_ase_idx = 0; ; ptnr1_ase_idx++, ptnr2_ase_idx++, made_bond = true) {
+            auto ptnr1_atom = getAtom(data, mol,
+                                      getValue(ptnr1_auth_asym_ids, i), getValue(ptnr1_auth_atom_ids, i),
+                                      getValue(ptnr1_auth_comp_ids, i), getValue(ptnr1_auth_seq_ids, i),
+                                      getValue(ptnr1_label_asym_ids, i), getValue(ptnr1_label_atom_ids, i),
+                                      getValue(ptnr1_label_comp_ids, i), getValue(ptnr1_label_seq_ids, i),
+                                      getValue(ptnr1_ins_codes, i), ptnr1_ase_idx);
+
+            if (!ptnr1_atom) {
+                if (!made_bond && strictErrorChecking)
+                    throw Base::IOError("MMCIFDataReader: could not find first binding partner atom specified in _" + StructConn::NAME +
+                                        (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+                break;
+            }
+
+            auto ptnr2_atom = getAtom(data, mol,
+                                      getValue(ptnr2_auth_asym_ids, i), getValue(ptnr2_auth_atom_ids, i),
+                                      getValue(ptnr2_auth_comp_ids, i), getValue(ptnr2_auth_seq_ids, i),
+                                      getValue(ptnr2_label_asym_ids, i), getValue(ptnr2_label_atom_ids, i),
+                                      getValue(ptnr2_label_comp_ids, i), getValue(ptnr2_label_seq_ids, i),
+                                      getValue(ptnr2_ins_codes, i), ptnr2_ase_idx);
+
+            if (!ptnr2_atom) {
+                if (!made_bond && strictErrorChecking)
+                    throw Base::IOError("MMCIFDataReader: could not find second binding partner atom specified in _" + StructConn::NAME +
+                                        (num_cons > 1 ? " data at row " + std::to_string(i) : std::string(" data")));
+                break;
+            }
+
+            auto& bond = mol.addBond(mol.getAtomIndex(*ptnr1_atom), mol.getAtomIndex(*ptnr2_atom));
+
+            if (order != 0)
+                setOrder(bond, order);
         }
     }
 }
@@ -1132,7 +1141,7 @@ Chem::Atom* Biomol::MMCIFDataReader::getAtom(const MMCIFData& data, Chem::Molecu
                                              const std::string* auth_comp_id, const std::string* auth_seq_id,
                                              const std::string* label_asym_id, const std::string* label_atom_id,
                                              const std::string* label_comp_id, const std::string* label_seq_id,
-                                             const std::string* ins_code) const
+                                             const std::string* ins_code, std::size_t& ase_idx) const
 {
     using namespace MMCIF;
   
@@ -1151,7 +1160,9 @@ Chem::Atom* Biomol::MMCIFDataReader::getAtom(const MMCIFData& data, Chem::Molecu
     auto label_seq_ids = atom_sites->findItem(AtomSite::Item::LABEL_SEQ_ID);
     auto ins_codes = atom_sites->findItem(AtomSite::Item::PDBX_PDB_INS_CODE);
     
-    for (auto& ase : atomSites) {
+    for (auto num_ase = atomSites.size(); ase_idx < num_ase; ase_idx++) {
+        auto& ase = atomSites[ase_idx];
+        
         if (!mol.containsAtom(*ase.first))
             continue;
 

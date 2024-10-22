@@ -51,6 +51,8 @@ namespace
         TEXT_FIELD
     };
 
+    constexpr std::size_t NEW_LINE_FIELD_WIDTH = 80;
+    
     bool containsCharFollowedByWS(char c, const std::string& str)
     {
         for (std::string::size_type i = str.find_first_of(c); i != std::string::npos; i = str.find_first_of(c, i)) {
@@ -95,6 +97,21 @@ namespace
                 return std::isalnum(c, std::locale::classic());
         }
     }
+
+    bool isProblematicChar(char c)
+    {
+        switch (c) {
+
+            case '(':
+            case ')':
+            case '[':
+            case ']':
+                return true;
+
+            default:
+                return false;
+        }
+    }
     
     StringOutputType getOutputType(const std::string& str)
     {
@@ -110,7 +127,7 @@ namespace
             return StringOutputType::TEXT_FIELD;
 
         for (auto c : str)
-            if (c == '[' || c == ']' || MMCIF::isSpace(c)) {
+            if (isProblematicChar(c) || MMCIF::isSpace(c)) {
                 if (str.find(MMCIF::QUOTED_STRING_DELIMITER_1) == std::string::npos)
                     return StringOutputType::QUOTED_1;
 
@@ -166,12 +183,12 @@ namespace
             switch (getOutputType(value)) {
 
                 case StringOutputType::PLAIN:
-                    max_len = std::max(max_len, value.length());
+                    max_len = std::max(max_len, value.length() > NEW_LINE_FIELD_WIDTH ? max_len : value.length());
                     continue;
 
                 case StringOutputType::QUOTED_1:
                 case StringOutputType::QUOTED_2:
-                    max_len = std::max(max_len, value.length() + 2);
+                    max_len = std::max(max_len, (value.length() + 2) > NEW_LINE_FIELD_WIDTH ? max_len : value.length() + 2);
 
                 default:
                     continue;
@@ -188,14 +205,38 @@ namespace
         switch (getOutputType(value)) {
 
             case StringOutputType::PLAIN:
+                if (value.length() > NEW_LINE_FIELD_WIDTH) {
+                    if (!after_nl)
+                        os << MMCIF::END_OF_LINE;
+                    
+                    os << value << MMCIF::END_OF_LINE;
+                    return true;
+                }
+                
                 os << std::setw(width) << std::left << value;
                 return false;
 
             case StringOutputType::QUOTED_1:
+                if ((value.length() + 2) > NEW_LINE_FIELD_WIDTH) {
+                    if (!after_nl)
+                        os << MMCIF::END_OF_LINE;
+                    
+                    os << MMCIF::QUOTED_STRING_DELIMITER_1 << value << MMCIF::QUOTED_STRING_DELIMITER_1 << MMCIF::END_OF_LINE;
+                    return true;
+                }
+                
                 os << std::setw(width) << std::left << (MMCIF::QUOTED_STRING_DELIMITER_1 + value + MMCIF::QUOTED_STRING_DELIMITER_1);
                 return false;
 
             case StringOutputType::QUOTED_2:
+                if ((value.length() + 2) > NEW_LINE_FIELD_WIDTH) {
+                    if (!after_nl)
+                        os << MMCIF::END_OF_LINE;
+                    
+                    os << MMCIF::QUOTED_STRING_DELIMITER_2 << value << MMCIF::QUOTED_STRING_DELIMITER_2 << MMCIF::END_OF_LINE;
+                    return true;
+                }
+                    
                 os << std::setw(width) << std::left << (MMCIF::QUOTED_STRING_DELIMITER_2 + value + MMCIF::QUOTED_STRING_DELIMITER_2);
                 return false;
 
@@ -727,7 +768,7 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
                 
             os << MMCIF::DATA_NAME_PREFIX << cat.getName() << MMCIF::CATEGORY_NAME_SEPARATOR
                << std::setw(max_name_len) << std::left << item.getName();
-
+            
             if (!outputValue(os, item.getNumValues() != 0 ? item.getValue(0) : MMCIF:: MISSING_DATA_VALUE, false))
                 os << MMCIF::END_OF_LINE;
         }
@@ -747,15 +788,15 @@ std::ostream& Biomol::operator<<(std::ostream& os, const Biomol::MMCIFData::Cate
     }
 
     for (std::size_t i = 0, num_items = cat.getNumItems(); i < num_rows; i++) {
-        bool wrote_nl = true;
-
+        bool at_nl = true;
+        
         for (std::size_t j = 0; j < num_items; j++) {
             auto& item = cat.getItem(j);
             
-            wrote_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, wrote_nl, field_widths[j] + 1);
+            at_nl = outputValue(os, item.getNumValues() > i ? item.getValue(i) : MMCIF:: MISSING_DATA_VALUE, at_nl, field_widths[j] + 1);
         }
 
-        if (!wrote_nl)
+        if (!at_nl)
             os << MMCIF::END_OF_LINE;
     }
     
