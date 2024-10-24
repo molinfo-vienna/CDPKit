@@ -43,7 +43,7 @@
 namespace
 {
 
-    bool haveCommonBond(const CDPL::Chem::BondContainer& ring1, const CDPL::Chem::BondContainer& ring2)
+    inline bool haveCommonBond(const CDPL::Chem::BondContainer& ring1, const CDPL::Chem::BondContainer& ring2)
     {
         for (const auto& bond : ring1)
             if (ring2.containsBond(bond))
@@ -52,22 +52,14 @@ namespace
         return false;
     }
 
-    bool isPotentialBridgehead(const CDPL::Chem::Atom& atom, const CDPL::Chem::MolecularGraph& molgraph)
+    inline bool isPotentialBridgehead(const CDPL::Chem::Atom& atom, const CDPL::Chem::MolecularGraph& molgraph)
     {
         using namespace CDPL;
         
         if (!getRingFlag(atom))
             return false;
 
-        auto ring_bnd_cnt = Internal::getRingBondCount(atom, molgraph);
-
-        if (ring_bnd_cnt <= 2)
-            return false;
-
-        //if ((ring_bnd_cnt % 2) == 0 && Internal::isSpiroCenter(atom, molgraph))
-        //    return false;
-
-        return true;
+        return (Internal::getRingBondCount(atom, molgraph) > 2);
     }
 }
 
@@ -334,17 +326,22 @@ bool CDPL::Internal::isBridgehead(const Chem::Atom& atom, const Chem::MolecularG
 
     if (!isPotentialBridgehead(atom, molgraph))
         return false;
-
-    if (!bridged_only)
-        return !isSpiroCenter(atom, molgraph);
-    
-    auto& sssr = *getSSSR(molgraph);
-
+ 
     std::vector<std::size_t> atom_rings;
+    auto& sssr = *getSSSR(molgraph);
     
     for (std::size_t i = 0, num_rings = sssr.getSize(); i < num_rings; i++)
         if (sssr[i].containsAtom(atom))
             atom_rings.push_back(i);
+    
+    if (!bridged_only) {
+        for (std::size_t i = 0, num_rings = atom_rings.size(); i < num_rings; i++)
+            for (std::size_t j = i + 1; j < num_rings; j++)
+                if (haveCommonBond(sssr[i], sssr[j]))
+                    return true;
+
+        return false;
+    } 
 
     for (auto& other_atom : molgraph.getAtoms()) {
         if (&other_atom == &atom)
@@ -370,20 +367,22 @@ bool CDPL::Internal::isSpiroCenter(const Chem::Atom& atom, const Chem::Molecular
 {
     using namespace Chem;
 
-    auto& sssr = *getSSSR(molgraph);
-
+    if (!isPotentialBridgehead(atom, molgraph))
+        return false;
+  
     std::vector<std::size_t> atom_rings;
-
+    auto& sssr = *getSSSR(molgraph);
+    
     for (std::size_t i = 0, num_rings = sssr.getSize(); i < num_rings; i++)
         if (sssr[i].containsAtom(atom))
             atom_rings.push_back(i);
-
+  
     for (std::size_t i = 0, num_rings = atom_rings.size(); i < num_rings; i++)
         for (std::size_t j = i + 1; j < num_rings; j++)
-            if (haveCommonBond(sssr[i], sssr[j]))
-                return false;
+            if (!haveCommonBond(sssr[i], sssr[j]))
+                return true;
 
-    return true;
+    return false;
 }
 
 double CDPL::Internal::getVdWRadius(const Chem::Atom& atom)

@@ -140,6 +140,8 @@ def outputProperties(molgraph: Chem.MolecularGraph) -> None:
         print('\tIs amide nitrogen: %s' % str(MolProp.isAmideNitrogen(atom, molgraph, True, True)))
         print('\tIs invertible nitrogen: %s' % str(MolProp.isInvertibleNitrogen(atom, molgraph)))
         print('\tIs planar nitrogen: %s' % str(MolProp.isPlanarNitrogen(atom, molgraph)))
+        print('\tIs spiro center: %s' % str(MolProp.isSpiroCenter(atom, molgraph)))
+        print('\tIs bridgehead: %s' % str(MolProp.isBridgehead(atom, molgraph, True)))
         
 def main() -> None:
     if len(sys.argv) < 2:

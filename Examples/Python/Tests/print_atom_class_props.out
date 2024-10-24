@@ -11,6 +11,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #1
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -24,6 +26,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #2
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -37,6 +41,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #3
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -50,6 +56,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #4
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -63,6 +71,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #5
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -76,6 +86,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #6
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -89,6 +101,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #7
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -102,6 +116,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: True
+	Is bridgehead: True
 - Atom #8
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -115,6 +131,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #9
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -128,6 +146,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: True
 - Atom #10
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -141,6 +161,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #11
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -154,6 +176,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #12
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -167,6 +191,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #13
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -180,6 +206,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #14
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -193,6 +221,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #15
 	Is std. hydrogen: False
 	Is heavy atom: False
@@ -206,6 +236,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #16
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -219,6 +251,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #17
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -232,6 +266,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #18
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -245,6 +281,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #19
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -258,6 +296,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: True
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #20
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -271,6 +311,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #21
 	Is std. hydrogen: False
 	Is heavy atom: True
@@ -284,6 +326,8 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
 - Atom #22
 	Is std. hydrogen: True
 	Is heavy atom: False
@@ -297,3 +341,5 @@
 	Is amide nitrogen: False
 	Is invertible nitrogen: False
 	Is planar nitrogen: False
+	Is spiro center: False
+	Is bridgehead: False
