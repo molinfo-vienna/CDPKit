@@ -1,5 +1,8 @@
 master:
 
+ - Renamed function MolProp::isCarbonylLikeAtom() into MolProp::isCarbonylLike()
+ - Renamed function MolProp::isAmideCenterAtom() into MolProp::isAmideCenter()
+ - New atom classification functions MolProp::isBridgehead() and MolProp::isSpiroCenter()
  - CDPL Python bindings wheel files for Linux are now built on manylinux_2_28
  - Added support for the I/O of molecular structure data in mmCIF format
  - Added new and changed existing constants in namespace Biomol::ResidueType which now fully cover the 
@@ -12,7 +15,7 @@ master:
  - Updated embedded MessagePack library to version 6.1.1
  - Updated embedded SQLite3 database to version 3.46.1
  - Updated embedded MMTF library to version 1.1.0
- - Updated PDB residue dictionary, now covering 43441 chemical components
+ - Updated PDB residue dictionary which now features 43441 chemical components
  - CDPL Python bindings now support NumPy V>=2.0
  - Removed function Biomol::convertMOL2ToPDBResidueInfo(): if possible, the conversion of MOL2 substructure to
    PDB residue/sequence information is now carried out automatically
