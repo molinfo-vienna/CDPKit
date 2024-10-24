@@ -20,81 +20,22 @@
 #
 
 ##
-# \brief 
-#
-BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
+# \brief A Reader for molecule data in the <em>Chemical Markup Language</em> [\ref CML] format.
+# 
+# <tt>CMLMoleculeReader</tt> supports the following control-parameters:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
+# </table>
+# 
+# \since 1.2
+# 
+class CMLMoleculeReader(MoleculeReaderBase):
 
-##
-# \brief 
-#
-BUILD_TIME = 202410241958
-
-##
-# \brief 
-#
-COMPILER_ID = 'GNU'
-
-##
-# \brief 
-#
-COMPILER_VERSION = '8.5.0'
-
-##
-# \brief 
-#
-HAVE_CAIRO = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PDF_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PNG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_PS_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_CAIRO_SVG_SUPPORT = True
-
-##
-# \brief 
-#
-HAVE_NUMPY = True
-
-##
-# \brief 
-#
-HAVE_QT = True
-
-##
-# \brief 
-#
-VERSION = 10200
-
-##
-# \brief 
-#
-VERSION_MAJOR = 1
-
-##
-# \brief 
-#
-VERSION_MINOR = 2
-
-##
-# \brief 
-#
-VERSION_PATCH = 0
-
-##
-# \brief 
-#
-VERSION_STRING = '1.2.0.dev1'
+    ##
+    # \brief Constructs a <tt>CMLMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
+    def __init__(is: Base.IStream) -> None: pass

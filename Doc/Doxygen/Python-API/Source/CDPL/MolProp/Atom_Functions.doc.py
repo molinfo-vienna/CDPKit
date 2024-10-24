@@ -23,6 +23,15 @@
 # \brief 
 # \param atom 
 # \param molgraph 
+# \param bridged_only 
+# \return 
+#
+def isBridgehead(atom: Chem.Atom, molgraph: Chem.MolecularGraph, bridged_only: bool) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
 # \return 
 #
 def isUnsaturated(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
@@ -110,6 +119,16 @@ def setMHMOPiCharge(atom: Chem.Atom, charge: float) -> None: pass
 # \return 
 #
 def calcTotalPartialCharge(atom: Chem.Atom) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param c_only 
+# \param db_o_only 
+# \return 
+#
+def isCarbonylLike(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
 
 ##
 # \brief 
@@ -220,26 +239,6 @@ def isMetal(atom: Chem.Atom) -> bool: pass
 ##
 # \brief 
 # \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isCarbonylLikeAtom(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isAmideCenterAtom(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param atom 
 # \return 
 #
 def isHalogen(atom: Chem.Atom) -> bool: pass
@@ -293,6 +292,24 @@ def getIUPACGroup(atom: Chem.Atom) -> int: pass
 # \return 
 #
 def calcStericNumber(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param c_only 
+# \param db_o_only 
+# \return 
+#
+def isAmideCenter(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def isSpiroCenter(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 

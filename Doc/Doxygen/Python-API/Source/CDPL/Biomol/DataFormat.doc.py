@@ -27,17 +27,17 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
     # 
-    PDB = CDPL.Base.DataFormat(name='PDB', descr='Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb', 'ent'], multi_rec=False)
+    PDB = CDPL.Base.DataFormat(name='PDB', descr='Brookhaven Protein Data Bank Entry Format', mime_type'chemical/x-pdb', file_exts=['pdb', 'ent'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the gzip-compressed <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
     # 
-    PDB_GZ = CDPL.Base.DataFormat(name='PDB_GZ', descr='GZip-Compressed Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb.gz', 'ent.gz'], multi_rec=False)
+    PDB_GZ = CDPL.Base.DataFormat(name='PDB_GZ', descr='GZip-Compressed Brookhaven Protein Data Bank Entry Format', mime_type'chemical/x-pdb', file_exts=['pdb.gz', 'ent.gz'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the bzip2-compressed <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
     # 
-    PDB_BZ2 = CDPL.Base.DataFormat(name='PDB_BZ2', descr='BZip2-Compressed Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb.bz2', 'ent.bz2'], multi_rec=False)
+    PDB_BZ2 = CDPL.Base.DataFormat(name='PDB_BZ2', descr='BZip2-Compressed Brookhaven Protein Data Bank Entry Format', mime_type'chemical/x-pdb', file_exts=['pdb.bz2', 'ent.bz2'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
@@ -63,14 +63,14 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
     # 
-    MMCIF = CDPL.Base.DataFormat(name='MMCIF', descr='Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif', 'cif'], multi_rec=True)
+    MMCIF = CDPL.Base.DataFormat(name='MMCIF', descr='Macromolecular Crystallographic Information File Format', mime_type'chemical/x-mmcif', file_exts=['mmcif', 'cif'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the gzip-compressed <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
     # 
-    MMCIF_GZ = CDPL.Base.DataFormat(name='MMCIF_GZ', descr='GZip-Compressed Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif.gz', 'cif.gz'], multi_rec=True)
+    MMCIF_GZ = CDPL.Base.DataFormat(name='MMCIF_GZ', descr='GZip-Compressed Macromolecular Crystallographic Information File Format', mime_type'chemical/x-mmcif', file_exts=['mmcif.gz', 'cif.gz'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Crystallographic Information File Format</em> [\ref MMCIF] format.
     # 
-    MMCIF_BZ2 = CDPL.Base.DataFormat(name='MMCIF_BZ2', descr='BZip2-Compressed Macromolecular Crystallographic Information File', mime_type'chemical/x-mmcif', file_exts=['mmcif.bz2', 'cif.bz2'], multi_rec=True)
+    MMCIF_BZ2 = CDPL.Base.DataFormat(name='MMCIF_BZ2', descr='BZip2-Compressed Macromolecular Crystallographic Information File Format', mime_type'chemical/x-mmcif', file_exts=['mmcif.bz2', 'cif.bz2'], multi_rec=True)

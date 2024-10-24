@@ -27,7 +27,7 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>Portable Network Graphics</em> [\ref WPNG] format.
     # 
-    PNG = CDPL.Base.DataFormat(name='PNG', descr='Portable Network Graphics', mime_type'image/png', file_exts=['png'], multi_rec=False)
+    PNG = CDPL.Base.DataFormat(name='PNG', descr='Portable Network Graphics Format', mime_type'image/png', file_exts=['png'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the <em>Portable Document Format</em> [\ref WPDF].
@@ -37,9 +37,9 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>PostScript</em> [\ref WPS] format.
     # 
-    PS = CDPL.Base.DataFormat(name='PS', descr='Adobe PostScript', mime_type'application/postscript', file_exts=['ps', 'eps'], multi_rec=False)
+    PS = CDPL.Base.DataFormat(name='PS', descr='Adobe PostScript Format', mime_type'application/postscript', file_exts=['ps', 'eps'], multi_rec=False)
 
     ##
     # \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
     # 
-    SVG = CDPL.Base.DataFormat(name='SVG', descr='Scalable Vector Graphics', mime_type'image/svg+xml', file_exts=['svg'], multi_rec=False)
+    SVG = CDPL.Base.DataFormat(name='SVG', descr='Scalable Vector Graphics Format', mime_type'image/svg+xml', file_exts=['svg'], multi_rec=False)

@@ -47,7 +47,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    APPLY_DICT_FORMAL_CHARGES = False
+    APPLY_DICT_FORMAL_CHARGES = True
 
     ##
     # \brief 
