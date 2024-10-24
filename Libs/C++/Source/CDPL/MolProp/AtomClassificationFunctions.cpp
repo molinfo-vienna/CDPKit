@@ -102,14 +102,14 @@ bool MolProp::isHBondDonor(const Chem::Atom& atom, const Chem::MolecularGraph& m
     return (getAtomCount(atom, molgraph, AtomType::H) > 0);
 }
 
-bool MolProp::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
+bool MolProp::isCarbonylLike(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-    return Internal::isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only);
+    return Internal::isCarbonylLike(atom, molgraph, c_only, db_o_only);
 }
 
-bool MolProp::isAmideCenterAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
+bool MolProp::isAmideCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-    return (isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only) && getExplicitBondCount(atom, molgraph, 1, Chem::AtomType::N, true) > 0);
+    return (isCarbonylLike(atom, molgraph, c_only, db_o_only) && getExplicitBondCount(atom, molgraph, 1, Chem::AtomType::N, true) > 0);
 }
 
 bool MolProp::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
@@ -125,4 +125,14 @@ bool MolProp::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Molecular
 bool MolProp::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     return Internal::isPlanarNitrogen(atom, molgraph);
+}
+
+bool MolProp::isBridgehead(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool bridged_only)
+{
+    return Internal::isBridgehead(atom, molgraph, bridged_only);
+}
+
+bool MolProp::isSpiroCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+{
+    return Internal::isSpiroCenter(atom, molgraph);
 }

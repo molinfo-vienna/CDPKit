@@ -82,6 +82,7 @@ namespace
     MAKE_FUNCTION_WRAPPER2(bool, isUnsaturated, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(bool, isHBondAcceptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(bool, isHBondDonor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(bool, isSpiroCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getChainAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getRingAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getAromaticAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
@@ -109,9 +110,10 @@ namespace
     MAKE_FUNCTION_WRAPPER3(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
     MAKE_FUNCTION_WRAPPER3(unsigned int, getVSEPRCoordinationGeometry, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
     MAKE_FUNCTION_WRAPPER3(double, calcInductiveEffect, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
+    MAKE_FUNCTION_WRAPPER3(bool, isBridgehead, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool);
     
-    MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLikeAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
-    MAKE_FUNCTION_WRAPPER4(bool, isAmideCenterAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
+    MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLike, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
+    MAKE_FUNCTION_WRAPPER4(bool, isAmideCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
     MAKE_FUNCTION_WRAPPER4(bool, isAmideNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
     MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
     MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
@@ -170,6 +172,7 @@ void CDPLPythonMolProp::exportAtomFunctions()
     python::def("isUnsaturated", &isUnsaturatedWrapper2, (python::arg("atom"), python::arg("molgraph")));
     python::def("isHBondAcceptor", &isHBondAcceptorWrapper2, (python::arg("atom"), python::arg("molgraph")));
     python::def("isHBondDonor", &isHBondDonorWrapper2, (python::arg("atom"), python::arg("molgraph")));
+    python::def("isSpiroCenter", &isSpiroCenterWrapper2, (python::arg("atom"), python::arg("molgraph")));
     python::def("getChainAtomCount", &getChainAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
     python::def("getRingAtomCount", &getRingAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
     python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
@@ -206,10 +209,11 @@ void CDPLPythonMolProp::exportAtomFunctions()
                 (python::arg("atom"), python::arg("molgraph"), python::arg("steric_num")));
     python::def("calcInductiveEffect", &calcInductiveEffectWrapper3,
                 (python::arg("atom"), python::arg("molgraph"), python::arg("num_bonds") = 10));
-    
-    python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
+    python::def("isBridgehead", &isBridgeheadWrapper3, (python::arg("atom"), python::arg("molgraph"), python::arg("bridged_only")));
+        
+    python::def("isCarbonylLike", &isCarbonylLikeWrapper4, 
                 (python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
-    python::def("isAmideCenterAtom", &isAmideCenterAtomWrapper4, 
+    python::def("isAmideCenter", &isAmideCenterWrapper4, 
                 (python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
     python::def("isAmideNitrogen", &isAmideNitrogenWrapper4, 
                 (python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));

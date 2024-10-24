@@ -22,6 +22,8 @@
  */
 
 
+#include <vector>
+
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -36,6 +38,38 @@
 #include "CDPL/Chem/AtomDictionary.hpp"
 
 #include "BondFunctions.hpp"
+
+
+namespace
+{
+
+    bool haveCommonBond(const CDPL::Chem::BondContainer& ring1, const CDPL::Chem::BondContainer& ring2)
+    {
+        for (const auto& bond : ring1)
+            if (ring2.containsBond(bond))
+                return true;
+
+        return false;
+    }
+
+    bool isPotentialBridgehead(const CDPL::Chem::Atom& atom, const CDPL::Chem::MolecularGraph& molgraph)
+    {
+        using namespace CDPL;
+        
+        if (!getRingFlag(atom))
+            return false;
+
+        auto ring_bnd_cnt = Internal::getRingBondCount(atom, molgraph);
+
+        if (ring_bnd_cnt <= 2)
+            return false;
+
+        //if ((ring_bnd_cnt % 2) == 0 && Internal::isSpiroCenter(atom, molgraph))
+        //    return false;
+
+        return true;
+    }
+}
 
 
 std::size_t CDPL::Internal::getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
@@ -153,7 +187,7 @@ bool CDPL::Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::Molecul
         if (getOrder(bond) != 1)
             continue;
 
-        if (isCarbonylLikeAtom(nbr_atom, molgraph, c_only, db_o_only))
+        if (isCarbonylLike(nbr_atom, molgraph, c_only, db_o_only))
             return true;
     }
 
@@ -255,7 +289,7 @@ bool CDPL::Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::Molecu
     return (unsat_nbrs || getAromaticityFlag(atom));
 }
 
-bool CDPL::Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
+bool CDPL::Internal::isCarbonylLike(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
     using namespace Chem;
 
@@ -292,6 +326,64 @@ bool CDPL::Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::Mole
         return false;
 
     return (type != AtomType::S && getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) > 0);
+}
+
+bool CDPL::Internal::isBridgehead(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool bridged_only)
+{
+    using namespace Chem;
+
+    if (!isPotentialBridgehead(atom, molgraph))
+        return false;
+
+    if (!bridged_only)
+        return !isSpiroCenter(atom, molgraph);
+    
+    auto& sssr = *getSSSR(molgraph);
+
+    std::vector<std::size_t> atom_rings;
+    
+    for (std::size_t i = 0, num_rings = sssr.getSize(); i < num_rings; i++)
+        if (sssr[i].containsAtom(atom))
+            atom_rings.push_back(i);
+
+    for (auto& other_atom : molgraph.getAtoms()) {
+        if (&other_atom == &atom)
+            continue;
+
+        if (!isPotentialBridgehead(other_atom, molgraph))
+            continue;
+
+        std::size_t shrd_ring_cnt = 0;
+
+        for (auto i : atom_rings)
+            if (sssr[i].containsAtom(other_atom))
+                shrd_ring_cnt++;
+
+        if (shrd_ring_cnt >= 2 && !atom.findBondToAtom(other_atom))
+            return true;
+    }
+    
+    return false;
+}
+
+bool CDPL::Internal::isSpiroCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+{
+    using namespace Chem;
+
+    auto& sssr = *getSSSR(molgraph);
+
+    std::vector<std::size_t> atom_rings;
+
+    for (std::size_t i = 0, num_rings = sssr.getSize(); i < num_rings; i++)
+        if (sssr[i].containsAtom(atom))
+            atom_rings.push_back(i);
+
+    for (std::size_t i = 0, num_rings = atom_rings.size(); i < num_rings; i++)
+        for (std::size_t j = i + 1; j < num_rings; j++)
+            if (haveCommonBond(sssr[i], sssr[j]))
+                return false;
+
+    return true;
 }
 
 double CDPL::Internal::getVdWRadius(const Chem::Atom& atom)

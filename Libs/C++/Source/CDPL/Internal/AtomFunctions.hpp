@@ -70,8 +70,10 @@ namespace CDPL
         inline bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = true);
         inline bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
         inline bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-        inline bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only);
-
+        inline bool isCarbonylLike(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only);
+        inline bool isBridgehead(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool brdiged_only);
+        inline bool isSpiroCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        
         inline std::size_t getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
     } // namespace Internal
 } // namespace CDPL

@@ -154,9 +154,15 @@ namespace CDPL
 
         CDPL_MOLPROP_API bool isHBondDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-        CDPL_MOLPROP_API bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+        /**
+         * \since 1.2
+         */
+        CDPL_MOLPROP_API bool isCarbonylLike(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
 
-        CDPL_MOLPROP_API bool isAmideCenterAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+        /**
+         * \since 1.2
+         */
+        CDPL_MOLPROP_API bool isAmideCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
 
         CDPL_MOLPROP_API bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
 
@@ -164,7 +170,17 @@ namespace CDPL
 
         CDPL_MOLPROP_API bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-
+        /**
+         * \since 1.2
+         */
+        CDPL_MOLPROP_API bool isBridgehead(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool bridged_only);
+       
+        /**
+         * \since 1.2
+         */
+        CDPL_MOLPROP_API bool isSpiroCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        
+        
         CDPL_MOLPROP_API std::size_t getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
                                                               unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
 

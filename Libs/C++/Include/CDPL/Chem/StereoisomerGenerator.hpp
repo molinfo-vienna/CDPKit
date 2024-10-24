@@ -49,7 +49,6 @@ namespace CDPL
     {
 
         class MolecularGraph;
-        class BondContainer;
         
         /**
          * \brief StereoisomerGenerator.
@@ -118,13 +117,10 @@ namespace CDPL
             bool isExcluded(const Bond& bond, const MolecularGraph& molgraph, bool has_config) const;
 
             void findBridgeheadAtoms(const MolecularGraph& molgraph);
-            bool isSpiroCenter(const Atom& atom, const MolecularGraph& molgraph);
-            bool haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const;
-
+           
             void flipConfiguration(const StereoCenterID& ctr_id);
 
             typedef std::vector<StereoCenterID> StereoCenterIDList;
-            typedef std::vector<std::size_t> IndexList;
 
             AtomPredicate         atomPred;
             BondPredicate         bondPred;
@@ -140,8 +136,6 @@ namespace CDPL
             StereoDescriptorArray bondDescrs;
             StereoCenterIDList    procCtrs;
             Util::BitSet          flipStates;
-            Util::BitSet          bhAtoms;
-            IndexList             atomRingSet;
         };
     } // namespace Chem
 } // namespace CDPL

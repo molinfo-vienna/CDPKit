@@ -48,10 +48,10 @@ bool MolProp::isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& mo
     const Atom& atom2 = bond.getEnd();
 
     if (getType(atom1) == AtomType::N)
-        return isCarbonylLikeAtom(atom2, molgraph, c_only, db_o_only);
+        return isCarbonylLike(atom2, molgraph, c_only, db_o_only);
 
     if (getType(atom2) == AtomType::N)
-        return isCarbonylLikeAtom(atom1, molgraph, c_only, db_o_only);
+        return isCarbonylLike(atom1, molgraph, c_only, db_o_only);
 
     return false;
 }

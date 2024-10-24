@@ -28,12 +28,10 @@
 #include <algorithm>
 
 #include "CDPL/Chem/StereoisomerGenerator.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
 
@@ -146,9 +144,6 @@ void Chem::StereoisomerGenerator::setup(const MolecularGraph& molgraph)
     bondDescrs.clear();
     procCtrs.clear();
 
-    if (!incBridgeheads)
-        findBridgeheadAtoms(molgraph);
-    
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
         const Atom& atom = molgraph.getAtom(i);
         const StereoDescriptor& descr = getStereoDescriptor(atom);
@@ -261,7 +256,7 @@ bool Chem::StereoisomerGenerator::isExcluded(const Atom& atom, const MolecularGr
     if (!isStereoCenter(atom, molgraph, !incSymmetricCtrs, !incInvNitrogens, !incInvNitrogens))
         return true;
 
-    if (!incBridgeheads && bhAtoms.test(molgraph.getAtomIndex(atom)))
+    if (!incBridgeheads && Internal::isBridgehead(atom, molgraph, true))
         return true;
 
     return false;
@@ -280,91 +275,6 @@ bool Chem::StereoisomerGenerator::isExcluded(const Bond& bond, const MolecularGr
         
     if (!isStereoCenter(bond, molgraph, !incSymmetricCtrs, true, true, minRingSize))
         return true;
-
-    return false;
-}
-
-void Chem::StereoisomerGenerator::findBridgeheadAtoms(const MolecularGraph& molgraph)
-{
-    bhAtoms.resize(molgraph.getNumAtoms());
-    bhAtoms.reset();
-
-    for (const auto& atom : molgraph.getAtoms()) {
-        if (!getRingFlag(atom))
-            continue;
-
-        std::size_t ring_bnd_cnt = Internal::getRingBondCount(atom, molgraph);
-
-        if (ring_bnd_cnt <= 2)
-            continue;
-
-        if ((ring_bnd_cnt % 2) == 0 && isSpiroCenter(atom, molgraph))
-            continue;
-        
-        bhAtoms.set(molgraph.getAtomIndex(atom));
-    }
-
-    // remove all preliminary bridgehead atoms that are members of simple ring fusion bonds
-    
-    const FragmentList& sssr = *getSSSR(molgraph);
-    std::size_t num_rings = sssr.getSize();
-    
-    for (Util::BitSet::size_type i = bhAtoms.find_first(); i != Util::BitSet::npos; i = bhAtoms.find_next(i)) {
-        const Atom& atom = molgraph.getAtom(i);
-     
-        atomRingSet.clear();
-
-        for (std::size_t j = 0; j < num_rings; j++)
-            if (sssr[j].containsAtom(atom))
-                atomRingSet.push_back(j);
-
-        bool is_bh_atom = false;
-        
-        for (Util::BitSet::size_type j = bhAtoms.find_first(); j != Util::BitSet::npos; j = bhAtoms.find_next(j)) {
-            if (i == j)
-                continue;
-            
-            const Atom& other_atom = molgraph.getAtom(j);
-            std::size_t shrd_ring_cnt = 0;
-
-            for (std::size_t k : atomRingSet)
-                if (sssr[k].containsAtom(other_atom))
-                    shrd_ring_cnt++;
-
-            if (shrd_ring_cnt >= 2 && !atom.findBondToAtom(other_atom)) {
-                is_bh_atom = true;
-                break;
-            }
-        }
-
-        if (!is_bh_atom)
-            bhAtoms.reset(i);
-    }
-}
-
-bool Chem::StereoisomerGenerator::isSpiroCenter(const Atom& atom, const MolecularGraph& molgraph)
-{
-    const FragmentList& sssr = *getSSSR(molgraph);
-
-    atomRingSet.clear();
-
-    for (std::size_t i = 0, num_rings = sssr.getSize(); i < num_rings; i++)
-        if (sssr[i].containsAtom(atom))
-            atomRingSet.push_back(i);
-
-    for (std::size_t i = 0, num_rings = atomRingSet.size(); i < num_rings; i++)
-        for (std::size_t j = i + 1; j < num_rings; j++)
-            if (haveCommonBond(sssr[i], sssr[j]))
-                return false;
-
-    return true;
-}
-
-bool Chem::StereoisomerGenerator::haveCommonBond(const BondContainer& ring1, const BondContainer& ring2) const
-{
-    for (const auto& bond : ring1)
-        if (ring2.containsBond(bond))
-            return true;
 
     return false;
 }
