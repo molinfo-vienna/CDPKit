@@ -59,7 +59,7 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_co
     return fp
     
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Calculates extended connectivity fingerprints (ECFPs) for given input molecules.')
+    parser = argparse.ArgumentParser(description='Generates extended connectivity fingerprints (ECFPs) for given input molecules.')
 
     parser.add_argument('-i',
                         dest='in_file',

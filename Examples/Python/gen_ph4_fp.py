@@ -49,7 +49,7 @@ def genPharmFingerprint(mol: Chem.Molecule, num_bits: int, bin_size: float, dim:
     return fp
     
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Calculates extended connectivity fingerprints (ECFPs) for given input molecules.')
+    parser = argparse.ArgumentParser(description='Generates 2D or 3D pharmacophore fingerprints for given input molecules.')
 
     parser.add_argument('-i',
                         dest='in_file',
