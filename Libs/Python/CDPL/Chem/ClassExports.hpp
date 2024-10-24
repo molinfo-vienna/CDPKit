@@ -177,6 +177,8 @@ namespace CDPLPythonChem
     void exportMOL2MolecularGraphWriter();
     void exportXYZMoleculeReader();
     void exportXYZMolecularGraphWriter();
+    void exportCMLMoleculeReader();
+    void exportCMLMolecularGraphWriter();
     
     void exportMoleculeIOManager();
     void exportMolecularGraphIOManager();
@@ -218,6 +220,8 @@ namespace CDPLPythonChem
     void exportMOL2MolecularGraphOutputHandler();
     void exportXYZMoleculeInputHandler();
     void exportXYZMolecularGraphOutputHandler();
+    void exportCMLMoleculeInputHandler();
+    void exportCMLMolecularGraphOutputHandler();
 } // namespace CDPLPythonChem
 
 #endif // CDPL_PYTHON_CHEM_CLASSEXPORTS_HPP

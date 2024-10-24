@@ -126,7 +126,11 @@ set(cdpl-chem_LIB_SRCS
     XYZDataWriter.cpp
     XYZMoleculeReader.cpp
     XYZMolecularGraphWriter.cpp
-  
+    CMLDataReader.cpp
+    CMLDataWriter.cpp
+    CMLMoleculeReader.cpp
+    CMLMolecularGraphWriter.cpp
+
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp
     CommonConnectedSubstructureSearch.cpp

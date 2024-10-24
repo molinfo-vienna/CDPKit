@@ -180,6 +180,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportMOL2MolecularGraphWriter();
     exportXYZMoleculeReader();
     exportXYZMolecularGraphWriter();
+    exportCMLMoleculeReader();
+    exportCMLMolecularGraphWriter();
   
     exportMoleculeIOManager();
     exportMolecularGraphIOManager();
@@ -221,6 +223,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportMOL2MolecularGraphOutputHandler();
     exportXYZMoleculeInputHandler();
     exportXYZMolecularGraphOutputHandler();
+    exportCMLMoleculeInputHandler();
+    exportCMLMolecularGraphOutputHandler();
 
     exportMolecularGraphProperties();
     exportEntity3DProperties();

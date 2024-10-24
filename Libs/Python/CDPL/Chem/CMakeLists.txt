@@ -177,6 +177,8 @@ set(chem_MOD_SRCS
     MOL2MolecularGraphOutputHandlerExport.cpp 
     XYZMoleculeInputHandlerExport.cpp 
     XYZMolecularGraphOutputHandlerExport.cpp 
+    CMLMoleculeInputHandlerExport.cpp 
+    CMLMolecularGraphOutputHandlerExport.cpp 
 
     MoleculeReaderExport.cpp 
     MolecularGraphWriterExport.cpp 
@@ -212,6 +214,8 @@ set(chem_MOD_SRCS
     MOL2MolecularGraphWriterExport.cpp
     XYZMoleculeReaderExport.cpp 
     XYZMolecularGraphWriterExport.cpp
+    CMLMoleculeReaderExport.cpp 
+    CMLMolecularGraphWriterExport.cpp
     
     MolecularGraphPropertyExport.cpp 
     Entity3DPropertyExport.cpp 
