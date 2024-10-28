@@ -57,6 +57,8 @@
 #include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/XYZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/XYZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CMLMoleculeInputHandler.hpp"
+#include "CDPL/Chem/CMLMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SDFBZ2MoleculeInputHandler.hpp"
@@ -89,6 +91,10 @@
 #include "CDPL/Chem/XYZGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/XYZBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/XYZBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CMLGZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/CMLGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CMLBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/CMLBZ2MolecularGraphOutputHandler.hpp"
 
 
 namespace
@@ -172,11 +178,11 @@ const Base::DataFormat Chem::DataFormat::XYZ_GZ("XYZ_GZ", "GZip-Compressed Atomi
                                              xyzGzFileExtensions, xyzGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::XYZ_BZ2("XYZ_BZ2", "BZip2-Compressed Atomic Coordinates XYZ Format", "", 
                                              xyzBz2FileExtensions, xyzBz2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::CML("CML", "Chemical Markup Language Format", "", 
+const Base::DataFormat Chem::DataFormat::CML("CML", "Chemical Markup Language Format", "chemical/x-cml", 
                                              cmlFileExtensions, cmlFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::CML_GZ("CML_GZ", "GZip-Compressed Chemical Markup Language Format", "", 
+const Base::DataFormat Chem::DataFormat::CML_GZ("CML_GZ", "GZip-Compressed Chemical Markup Language Format", "chemical/x-cml", 
                                              cmlGzFileExtensions, cmlGzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::CML_BZ2("CML_BZ2", "BZip2-Compressed Chemical Markup Language Format", "", 
+const Base::DataFormat Chem::DataFormat::CML_BZ2("CML_BZ2", "BZip2-Compressed Chemical Markup Language Format", "chemical/x-cml", 
                                              cmlBz2FileExtensions, cmlBz2FileExtensions + 1, true);
 
 
@@ -210,6 +216,7 @@ namespace
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFMoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2MoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new XYZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CMLMoleculeInputHandler()));
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new JMEMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFMolecularGraphOutputHandler()));
@@ -220,6 +227,7 @@ namespace
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2MolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new XYZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CMLMolecularGraphOutputHandler()));
 
             DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new JMEReactionInputHandler()));
             DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RXNReactionInputHandler()));
@@ -245,6 +253,8 @@ namespace
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2BZ2MoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new XYZGZMoleculeInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new XYZBZ2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CMLGZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CMLBZ2MoleculeInputHandler()));
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFGZMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFBZ2MolecularGraphOutputHandler()));
@@ -256,6 +266,8 @@ namespace
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2BZ2MolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new XYZGZMolecularGraphOutputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new XYZBZ2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CMLGZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CMLBZ2MolecularGraphOutputHandler()));
 
             DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFGZReactionInputHandler()));
             DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFBZ2ReactionInputHandler()));
