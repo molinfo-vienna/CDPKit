@@ -36,50 +36,63 @@ namespace CDPL
 
         namespace PML
         {
-
-            const std::string ELEM_CONTAINER_HEADER = "<ElementContainer activeResult=\"-1\"><ContainerPharmacophores>";
-            const std::string ELEM_CONTAINER_FOOTER = "</ContainerPharmacophores></ElementContainer>";
-
-            const std::string ALIGNMENT_ELEM_TAG = "alignmentElement";
-            const std::string PHARMACOPHORE_TAG  = "pharmacophore";
-            const std::string POINT_FEATURE_TAG  = "point";
-            const std::string PLANE_FEATURE_TAG  = "plane";
-            const std::string VECTOR_FEATURE_TAG = "vector";
-            const std::string VOLUME_FEATURE_TAG = "volume";
-
-            const std::string FEATURE_POSITION_TAG = "position";
-            const std::string FEATURE_NORMAL_TAG   = "normal";
-            const std::string FEATURE_ORIGIN_TAG   = "origin";
-            const std::string FEATURE_TARGET_TAG   = "target";
-
-            const std::string NAME_ATTRIBUTE             = "name";
-            const std::string FLAG_CODE_ATTRIBUTE        = "flagCode";
-            const std::string ID_ATTRIBUTE               = "id";
-            const std::string FEATURE_ID_ATTRIBUTE       = "featureId";
-            const std::string OPTIONAL_ATTRIBUTE         = "optional";
-            const std::string DISABLED_ATTRIBUTE         = "disabled";
-            const std::string WEIGHT_ATTRIBUTE           = "weight";
-            const std::string POINTS_TO_LIGAND_ATTRIBUTE = "pointsToLigand";
-            const std::string PROJECTED_POINT_ATTRIBUTE  = "hasSyntheticProjectedPoint";
-            const std::string TYPE_ATTRIBUTE             = "type";
-            const std::string TOLERANCE_ATTRIBUTE        = "tolerance";
-            const std::string COORDS_X_ATTRIBUTE         = "x3";
-            const std::string COORDS_Y_ATTRIBUTE         = "y3";
-            const std::string COORDS_Z_ATTRIBUTE         = "z3";
-            const std::string PHARM_TYPE_ATTRIBUTE       = "pharmacophoreType";
+            
+            
+            const std::string HEADER = "<ElementContainer activeResult=\"-1\">\n <ContainerPharmacophores>";
+            const std::string FOOTER = " </ContainerPharmacophores>\n</ElementContainer>";
 
             const std::string DEFAULT_FLAG_CODE       = "111000000";
             const std::string PHARM_TYPE_LIGAND_SCOUT = "LIGAND_SCOUT";
             const std::string VOLUME_TYPE_EXCLUSION   = "exclusion";
+            
+            namespace Element
+            {
 
-            const std::string HYDROPHOBIC_FEATURE_NAME     = "H";
-            const std::string AROMATIC_FEATURE_NAME        = "AR";
-            const std::string NEG_IONIZABLE_FEATURE_NAME   = "NI";
-            const std::string POS_IONIZABLE_FEATURE_NAME   = "PI";
-            const std::string H_BOND_DONOR_FEATURE_NAME    = "HBD";
-            const std::string H_BOND_ACCEPTOR_FEATURE_NAME = "HBA";
-            const std::string X_BOND_DONOR_FEATURE_NAME    = "XBD";
-            const std::string X_BOND_ACCEPTOR_FEATURE_NAME = "XBA";
+                const std::string ALIGNMENT_ELEM = "alignmentElement";
+                const std::string PHARMACOPHORE  = "pharmacophore";
+                const std::string POINT_FEATURE  = "point";
+                const std::string PLANE_FEATURE  = "plane";
+                const std::string VECTOR_FEATURE = "vector";
+                const std::string VOLUME_FEATURE = "volume";
+
+                const std::string FEATURE_POSITION = "position";
+                const std::string FEATURE_NORMAL   = "normal";
+                const std::string FEATURE_ORIGIN   = "origin";
+                const std::string FEATURE_TARGET   = "target";
+            } // namespace Element
+
+            namespace Attribute
+            {
+
+                const std::string NAME                    = "name";
+                const std::string FLAG_CODE               = "flagCode";
+                const std::string ID                      = "id";
+                const std::string FEATURE_ID              = "featureId";
+                const std::string OPTIONAL                = "optional";
+                const std::string DISABLED                = "disabled";
+                const std::string WEIGHT                  = "weight";
+                const std::string POINTS_TO_LIGAND        = "pointsToLigand";
+                const std::string HAS_SYN_PROJECTED_POINT = "hasSyntheticProjectedPoint";
+                const std::string TYPE                    = "type";
+                const std::string TOLERANCE               = "tolerance";
+                const std::string COORDS_X                = "x3";
+                const std::string COORDS_Y                = "y3";
+                const std::string COORDS_Z                = "z3";
+                const std::string PHARM_TYPE              = "pharmacophoreType";
+            } // namespace Attribute
+
+            namespace FeatureName
+            {
+
+                const std::string HYDROPHOBIC     = "H";
+                const std::string AROMATIC        = "AR";
+                const std::string NEG_IONIZABLE   = "NI";
+                const std::string POS_IONIZABLE   = "PI";
+                const std::string H_BOND_DONOR    = "HBD";
+                const std::string H_BOND_ACCEPTOR = "HBA";
+                const std::string X_BOND_DONOR    = "XBD";
+                const std::string X_BOND_ACCEPTOR = "XBA";
+            } // namespace FeatureName
         } // namespace PML
     } // namespace Pharm
 } // namespace CDPL

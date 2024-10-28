@@ -51,22 +51,22 @@ using namespace CDPL;
 namespace
 {
 
-    const std::string PHARMACOPHORE_START_TAG = '<' + Pharm::PML::PHARMACOPHORE_TAG;
-    const std::string PHARMACOPHORE_END_TAG   = "</" + Pharm::PML::PHARMACOPHORE_TAG + '>';
-    const std::string FALSE                   = "false";
-    const std::string ZERO                    = "0";
+    const std::string PHARMACOPHORE_START = '<' + Pharm::PML::Element::PHARMACOPHORE;
+    const std::string PHARMACOPHORE_END   = "</" + Pharm::PML::Element::PHARMACOPHORE + '>';
+    const std::string FALSE               = "false";
+    const std::string ZERO                = "0";
 
     typedef std::unordered_map<std::string, unsigned int> FeatureNameToTypeMap;
 
     FeatureNameToTypeMap ls4FeatureTypes{
-      { Pharm::PML::HYDROPHOBIC_FEATURE_NAME, Pharm::FeatureType::HYDROPHOBIC},
-      { Pharm::PML::AROMATIC_FEATURE_NAME, Pharm::FeatureType::AROMATIC },
-      { Pharm::PML::NEG_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::NEGATIVE_IONIZABLE },
-      { Pharm::PML::POS_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::POSITIVE_IONIZABLE },
-      { Pharm::PML::H_BOND_DONOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_DONOR },
-      { Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_ACCEPTOR },
-      { Pharm::PML::X_BOND_DONOR_FEATURE_NAME, Pharm::FeatureType::HALOGEN_BOND_DONOR },
-      { Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME, Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR }
+      { Pharm::PML::FeatureName::HYDROPHOBIC, Pharm::FeatureType::HYDROPHOBIC},
+      { Pharm::PML::FeatureName::AROMATIC, Pharm::FeatureType::AROMATIC },
+      { Pharm::PML::FeatureName::NEG_IONIZABLE, Pharm::FeatureType::NEGATIVE_IONIZABLE },
+      { Pharm::PML::FeatureName::POS_IONIZABLE, Pharm::FeatureType::POSITIVE_IONIZABLE },
+      { Pharm::PML::FeatureName::H_BOND_DONOR, Pharm::FeatureType::H_BOND_DONOR },
+      { Pharm::PML::FeatureName::H_BOND_ACCEPTOR, Pharm::FeatureType::H_BOND_ACCEPTOR },
+      { Pharm::PML::FeatureName::X_BOND_DONOR, Pharm::FeatureType::HALOGEN_BOND_DONOR },
+      { Pharm::PML::FeatureName::X_BOND_ACCEPTOR, Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR }
     };
 
     unsigned int getFeatureTypeFromLS4Name(const std::string& name)
@@ -98,19 +98,19 @@ Pharm::PMLDataReader::PMLDataReader(const Base::DataIOBase& io_base):
 
 bool Pharm::PMLDataReader::hasMoreData(std::istream& is)
 {
-    return Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false);
+    return Internal::skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false);
 }
 
 bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& pharm)
 {
     init();
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false))
+    if (!Internal::skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
         return false;
 
     pharmData.clear();
 
-    if (!Internal::readToString(is, PHARMACOPHORE_END_TAG, pharmData, "PMLDataReader", true)) {
+    if (!Internal::readToString(is, PHARMACOPHORE_END, pharmData, "PMLDataReader", true)) {
         if (strictErrorChecking)
             throw Base::IOError("PMLDataReader: error while reading pharmacophore, no closing pharmacophore tag found");
 
@@ -119,7 +119,7 @@ bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
 
     pharmDocument.parse<rapidxml::parse_trim_whitespace>(&pharmData[0]);
     
-    const XMLNode* pharm_node = pharmDocument.first_node(PML::PHARMACOPHORE_TAG.c_str());
+    const XMLNode* pharm_node = pharmDocument.first_node(PML::Element::PHARMACOPHORE.c_str());
 
     if (!pharm_node)
         throw Base::IOError("PMLDataReader: error while reading pharmacophore, pharmacophore node not accessible");
@@ -134,10 +134,10 @@ bool Pharm::PMLDataReader::skipPharmacophore(std::istream& is)
 {
     init();
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false))
+    if (!Internal::skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
         return false;
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_END_TAG, "PMLDataReader", true)) {
+    if (!Internal::skipToString(is, PHARMACOPHORE_END, "PMLDataReader", true)) {
         if (strictErrorChecking)
             throw Base::IOError("PMLDataReader: error while skipping input pharmacophore, no closing pharmacophore tag found");
 
@@ -154,7 +154,7 @@ void Pharm::PMLDataReader::init()
 
 void Pharm::PMLDataReader::getPharmacophoreProperties(const XMLNode* pharm_node, Pharmacophore& pharm) const
 {
-    if (const XMLAttribute* attr = pharm_node->first_attribute(PML::NAME_ATTRIBUTE.c_str()))
+    if (const XMLAttribute* attr = pharm_node->first_attribute(PML::Attribute::NAME.c_str()))
         setName(pharm, attr->value());
 }
 
@@ -163,16 +163,16 @@ void Pharm::PMLDataReader::extractFeatures(const XMLNode* pharm_node, Pharmacoph
     for (const XMLNode* node = pharm_node->first_node(); node; node = node->next_sibling()) {
         const char* node_name = node->name();
 
-        if (std::strcmp(node_name, PML::POINT_FEATURE_TAG.c_str()) == 0)
+        if (std::strcmp(node_name, PML::Element::POINT_FEATURE.c_str()) == 0)
             addPointFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::PLANE_FEATURE_TAG.c_str()) == 0)
+        else if (std::strcmp(node_name, PML::Element::PLANE_FEATURE.c_str()) == 0)
             addPlaneFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::VECTOR_FEATURE_TAG.c_str()) == 0)
+        else if (std::strcmp(node_name, PML::Element::VECTOR_FEATURE.c_str()) == 0)
             addVectorFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::VOLUME_FEATURE_TAG.c_str()) == 0)
+        else if (std::strcmp(node_name, PML::Element::VOLUME_FEATURE.c_str()) == 0)
             addVolumeFeature(node, pharm);
     }
 }
@@ -188,12 +188,12 @@ void Pharm::PMLDataReader::addPointFeature(const XMLNode* ftr_node, Pharmacophor
 
     Math::Vector3D pos;
 
-    if (getPosition(ftr_node, PML::FEATURE_POSITION_TAG, pos))
+    if (getPosition(ftr_node, PML::Element::FEATURE_POSITION, pos))
         set3DCoordinates(*ftr, pos);
 
     double tol = 1.0;
         
-    if (getTolerance(ftr_node, PML::FEATURE_POSITION_TAG, tol))
+    if (getTolerance(ftr_node, PML::Element::FEATURE_POSITION, tol))
         setTolerance(*ftr, tol);
 }
 
@@ -208,15 +208,15 @@ void Pharm::PMLDataReader::addPlaneFeature(const XMLNode* ftr_node, Pharmacophor
 
     Math::Vector3D vec;
 
-    if (getPosition(ftr_node, PML::FEATURE_POSITION_TAG, vec))
+    if (getPosition(ftr_node, PML::Element::FEATURE_POSITION, vec))
         set3DCoordinates(*ftr, vec);
 
-    if (getPosition(ftr_node, PML::FEATURE_NORMAL_TAG, vec))
+    if (getPosition(ftr_node, PML::Element::FEATURE_NORMAL, vec))
         setOrientation(*ftr, vec);
 
     double tol = 1.0;
         
-    if (getTolerance(ftr_node, PML::FEATURE_POSITION_TAG, tol))
+    if (getTolerance(ftr_node, PML::Element::FEATURE_POSITION, tol))
         setTolerance(*ftr, tol);
 }
 
@@ -229,17 +229,17 @@ void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacopho
     
     setGeometry(*ftr, FeatureGeometry::VECTOR);
 
-    const XMLAttribute* attr = ftr_node->first_attribute(PML::POINTS_TO_LIGAND_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = ftr_node->first_attribute(PML::Attribute::POINTS_TO_LIGAND.c_str());
     bool points_to_lig = false;
 
     if (attr)
         points_to_lig = getBoolValue(attr->value());
 
     Math::Vector3D org_pos;
-    bool have_org_pos = getPosition(ftr_node, PML::FEATURE_ORIGIN_TAG, org_pos);
+    bool have_org_pos = getPosition(ftr_node, PML::Element::FEATURE_ORIGIN, org_pos);
 
     Math::Vector3D tgt_pos;
-    bool have_tgt_pos = getPosition(ftr_node, PML::FEATURE_TARGET_TAG, tgt_pos);
+    bool have_tgt_pos = getPosition(ftr_node, PML::Element::FEATURE_TARGET, tgt_pos);
 
     if (have_tgt_pos && have_org_pos) {
         Math::Vector3D orient = tgt_pos - org_pos;
@@ -254,7 +254,7 @@ void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacopho
     if (points_to_lig) {
         double tol = 1.0;
 
-        if (getTolerance(ftr_node, PML::FEATURE_TARGET_TAG, tol))
+        if (getTolerance(ftr_node, PML::Element::FEATURE_TARGET, tol))
             setTolerance(*ftr, tol);
 
         if (have_tgt_pos)
@@ -263,7 +263,7 @@ void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacopho
     } else {
         double tol = 1.0;
 
-        if (getTolerance(ftr_node, PML::FEATURE_ORIGIN_TAG, tol))
+        if (getTolerance(ftr_node, PML::Element::FEATURE_ORIGIN, tol))
             setTolerance(*ftr, tol);
 
         if (have_org_pos)
@@ -273,7 +273,7 @@ void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacopho
 
 void Pharm::PMLDataReader::addVolumeFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
-    const XMLAttribute* attr = ftr_node->first_attribute(PML::TYPE_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = ftr_node->first_attribute(PML::Attribute::TYPE.c_str());
 
     if (!attr)
         return;
@@ -290,18 +290,18 @@ void Pharm::PMLDataReader::addVolumeFeature(const XMLNode* ftr_node, Pharmacopho
 
     Math::Vector3D pos;
 
-    if (getPosition(ftr_node, PML::FEATURE_POSITION_TAG, pos))
+    if (getPosition(ftr_node, PML::Element::FEATURE_POSITION, pos))
         set3DCoordinates(ftr, pos);
 
     double tol = 1.0;
         
-    if (getTolerance(ftr_node, PML::FEATURE_POSITION_TAG, tol))
+    if (getTolerance(ftr_node, PML::Element::FEATURE_POSITION, tol))
         setTolerance(ftr, tol);
 }
 
 Pharm::Feature* Pharm::PMLDataReader::createFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
-    const XMLAttribute* attr = ftr_node->first_attribute(PML::NAME_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = ftr_node->first_attribute(PML::Attribute::NAME.c_str());
 
     if (!attr)
         return 0;
@@ -321,12 +321,12 @@ Pharm::Feature* Pharm::PMLDataReader::createFeature(const XMLNode* ftr_node, Pha
 
 void Pharm::PMLDataReader::getDefaultFeatureProperties(const XMLNode* ftr_node, Feature& ftr) const
 {
-    const XMLAttribute* attr = ftr_node->first_attribute(PML::OPTIONAL_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = ftr_node->first_attribute(PML::Attribute::OPTIONAL.c_str());
 
     if (attr)
         setOptionalFlag(ftr, getBoolValue(attr->value()));
 
-    attr = ftr_node->first_attribute(PML::DISABLED_ATTRIBUTE.c_str());
+    attr = ftr_node->first_attribute(PML::Attribute::DISABLED.c_str());
 
     if (attr)
         setDisabledFlag(ftr, getBoolValue(attr->value()));
@@ -341,19 +341,19 @@ bool Pharm::PMLDataReader::getPosition(const XMLNode* ftr_node, const std::strin
     if (!vec_node)
         return false;
 
-    const XMLAttribute* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = vec_node->first_attribute(PML::Attribute::COORDS_X.c_str());
 
     if (attr)
         vec[0] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector x-ccordinate");
 
-    attr = vec_node->first_attribute(PML::COORDS_Y_ATTRIBUTE.c_str());
+    attr = vec_node->first_attribute(PML::Attribute::COORDS_Y.c_str());
 
     if (attr)
         vec[1] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector y-ccordinate");
 
-    attr = vec_node->first_attribute(PML::COORDS_Z_ATTRIBUTE.c_str());
+    attr = vec_node->first_attribute(PML::Attribute::COORDS_Z.c_str());
 
     if (attr)
         vec[2] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
@@ -369,7 +369,7 @@ bool Pharm::PMLDataReader::getTolerance(const XMLNode* ftr_node, const std::stri
     if (!vec_node)
         return false;
 
-    const XMLAttribute* attr = vec_node->first_attribute(PML::TOLERANCE_ATTRIBUTE.c_str());
+    const XMLAttribute* attr = vec_node->first_attribute(PML::Attribute::TOLERANCE.c_str());
 
     if (!attr)
         return false;

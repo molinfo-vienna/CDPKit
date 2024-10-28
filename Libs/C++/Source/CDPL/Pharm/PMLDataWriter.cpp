@@ -56,14 +56,14 @@ namespace
     typedef std::map<unsigned int, std::string> FeatureTypeToNameMap;
 
     FeatureTypeToNameMap ls4FeatureNames{
-      { Pharm::FeatureType::HYDROPHOBIC, Pharm::PML::HYDROPHOBIC_FEATURE_NAME },
-      { Pharm::FeatureType::AROMATIC, Pharm::PML::AROMATIC_FEATURE_NAME },
-      { Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::PML::NEG_IONIZABLE_FEATURE_NAME },
-      { Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME },
-      { Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::H_BOND_DONOR_FEATURE_NAME },
-      { Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME },
-      { Pharm::FeatureType::HALOGEN_BOND_DONOR, Pharm::PML::X_BOND_DONOR_FEATURE_NAME },
-      { Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME }
+      { Pharm::FeatureType::HYDROPHOBIC, Pharm::PML::FeatureName::HYDROPHOBIC },
+      { Pharm::FeatureType::AROMATIC, Pharm::PML::FeatureName::AROMATIC },
+      { Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::PML::FeatureName::NEG_IONIZABLE },
+      { Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::FeatureName::POS_IONIZABLE },
+      { Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::FeatureName::H_BOND_DONOR },
+      { Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::FeatureName::H_BOND_ACCEPTOR },
+      { Pharm::FeatureType::HALOGEN_BOND_DONOR, Pharm::PML::FeatureName::X_BOND_DONOR },
+      { Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Pharm::PML::FeatureName::X_BOND_ACCEPTOR }
     };
 
     const std::string& getLS4FeatureName(unsigned int type)
@@ -87,7 +87,7 @@ bool Pharm::PMLDataWriter::writeFeatureContainer(std::ostream& os, const Feature
     init(os);
 
     if (writeHeader) {
-        writeElemContainerHeader(os);
+        writePMLHeader(os);
 
         writeHeader = false;
         alignElemID = 0;
@@ -115,46 +115,46 @@ void Pharm::PMLDataWriter::close(std::ostream& os)
     if (writeHeader)
         return;
 
-    writeElemContainerFooter(os);
+    writePMLFooter(os);
     writeHeader = true;
 }
 
-void Pharm::PMLDataWriter::writeElemContainerHeader(std::ostream& os) const
+void Pharm::PMLDataWriter::writePMLHeader(std::ostream& os) const
 {
-    os << PML::ELEM_CONTAINER_HEADER << '\n';
+    os << PML::HEADER << '\n';
 }
 
-void Pharm::PMLDataWriter::writeElemContainerFooter(std::ostream& os) const
+void Pharm::PMLDataWriter::writePMLFooter(std::ostream& os) const
 {
-    os << PML::ELEM_CONTAINER_FOOTER << '\n';
+    os << PML::FOOTER << '\n';
 }
 
 void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr)
 {
-    writeStartTag(os, PML::ALIGNMENT_ELEM_TAG, false);
+    writeStartTag(os, PML::Element::ALIGNMENT_ELEM, false, 2);
 
-    writeAttribute(os, PML::NAME_ATTRIBUTE, getName(cntnr), false);
-    writeAttribute(os, PML::ID_ATTRIBUTE, PML::ALIGNMENT_ELEM_TAG + std::to_string(alignElemID++), false);
-    writeAttribute(os, PML::FLAG_CODE_ATTRIBUTE, PML::DEFAULT_FLAG_CODE, true);
+    writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
+    writeAttribute(os, PML::Attribute::ID, PML::Element::ALIGNMENT_ELEM + std::to_string(alignElemID++), false);
+    writeAttribute(os, PML::Attribute::FLAG_CODE, PML::DEFAULT_FLAG_CODE, true);
 }
 
 void Pharm::PMLDataWriter::endAlignmentElement(std::ostream& os) const
 {
-    writeEndTag(os, PML::ALIGNMENT_ELEM_TAG);
+    writeEndTag(os, PML::Element::ALIGNMENT_ELEM, 2);
 }
 
 void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const
 {
-    writeStartTag(os, PML::PHARMACOPHORE_TAG, false);
+    writeStartTag(os, PML::Element::PHARMACOPHORE, false, 3);
 
-    writeAttribute(os, PML::NAME_ATTRIBUTE, getName(cntnr), false);
-    writeAttribute(os, PML::ID_ATTRIBUTE, PML::PHARMACOPHORE_TAG + '0', false);
-    writeAttribute(os, PML::PHARM_TYPE_ATTRIBUTE, PML::PHARM_TYPE_LIGAND_SCOUT, true);
+    writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
+    writeAttribute(os, PML::Attribute::ID, PML::Element::PHARMACOPHORE + '0', false);
+    writeAttribute(os, PML::Attribute::PHARM_TYPE, PML::PHARM_TYPE_LIGAND_SCOUT, true);
 }
 
 void Pharm::PMLDataWriter::endPharmacophore(std::ostream& os) const
 {
-    writeEndTag(os, PML::PHARMACOPHORE_TAG);
+    writeEndTag(os, PML::Element::PHARMACOPHORE, 3);
 }
 
 void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContainer& cntnr)
@@ -204,97 +204,97 @@ void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContaine
 
 void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool close)
 {
-    writeAttribute(os, PML::NAME_ATTRIBUTE, name, false);
-    writeAttribute(os, PML::FEATURE_ID_ATTRIBUTE, featureID++, false);
-    writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
-    writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
-    writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
-    writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + std::to_string(id), close);
+    writeAttribute(os, PML::Attribute::NAME, name, false);
+    writeAttribute(os, PML::Attribute::FEATURE_ID, featureID++, false);
+    writeAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr), false);
+    writeAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr), false);
+    writeAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr), false);
+    writeAttribute(os, PML::Attribute::ID, "feature" + std::to_string(id), close);
 }
 
 void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id)
 {
-    writeStartTag(os, PML::VOLUME_FEATURE_TAG, false);
+    writeStartTag(os, PML::Element::VOLUME_FEATURE, false, 4);
     
-    writeAttribute(os, PML::TYPE_ATTRIBUTE, PML::VOLUME_TYPE_EXCLUSION, false);
-    writeAttribute(os, PML::FEATURE_ID_ATTRIBUTE, featureID++, false);
-    writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
-    writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
-    writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
-    writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + std::to_string(id), true);
+    writeAttribute(os, PML::Attribute::TYPE, PML::VOLUME_TYPE_EXCLUSION, false);
+    writeAttribute(os, PML::Attribute::FEATURE_ID, featureID++, false);
+    writeAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr), false);
+    writeAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr), false);
+    writeAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr), false);
+    writeAttribute(os, PML::Attribute::ID, "feature" + std::to_string(id), true);
 
-    writePositionAndTolerance(os, PML::FEATURE_POSITION_TAG, get3DCoordinates(ftr), getTolerance(ftr));
+    writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
 
-    writeEndTag(os, PML::VOLUME_FEATURE_TAG);
+    writeEndTag(os, PML::Element::VOLUME_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
-    writeStartTag(os, PML::POINT_FEATURE_TAG, false);
+    writeStartTag(os, PML::Element::POINT_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
 
-    writePositionAndTolerance(os, PML::FEATURE_POSITION_TAG, get3DCoordinates(ftr), getTolerance(ftr));
+    writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
 
-    writeEndTag(os, PML::POINT_FEATURE_TAG);
+    writeEndTag(os, PML::Element::POINT_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig)
 {
-    writeStartTag(os, PML::VECTOR_FEATURE_TAG, false);
+    writeStartTag(os, PML::Element::VECTOR_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, false);
-    writeAttribute(os, PML::PROJECTED_POINT_ATTRIBUTE, false, false);
-    writeAttribute(os, PML::POINTS_TO_LIGAND_ATTRIBUTE, points_to_lig, true);
+    writeAttribute(os, PML::Attribute::HAS_SYN_PROJECTED_POINT, false, false);
+    writeAttribute(os, PML::Attribute::POINTS_TO_LIGAND, points_to_lig, true);
 
     if (points_to_lig) {
-        writePositionAndTolerance(os, PML::FEATURE_TARGET_TAG, get3DCoordinates(ftr), getTolerance(ftr));
-        writePositionAndTolerance(os, PML::FEATURE_ORIGIN_TAG, get3DCoordinates(ftr) - (getOrientation(ftr) * getLength(ftr)), 
+        writePositionAndTolerance(os, PML::Element::FEATURE_TARGET, get3DCoordinates(ftr), getTolerance(ftr));
+        writePositionAndTolerance(os, PML::Element::FEATURE_ORIGIN, get3DCoordinates(ftr) - (getOrientation(ftr) * getLength(ftr)), 
                                   getTolerance(ftr) * VECTOR_FEATURE_TARGET_TOL_FACTOR);
 
     } else {
-        writePositionAndTolerance(os, PML::FEATURE_ORIGIN_TAG, get3DCoordinates(ftr), getTolerance(ftr));
-        writePositionAndTolerance(os, PML::FEATURE_TARGET_TAG, get3DCoordinates(ftr) + (getOrientation(ftr) * getLength(ftr)), 
+        writePositionAndTolerance(os, PML::Element::FEATURE_ORIGIN, get3DCoordinates(ftr), getTolerance(ftr));
+        writePositionAndTolerance(os, PML::Element::FEATURE_TARGET, get3DCoordinates(ftr) + (getOrientation(ftr) * getLength(ftr)), 
                                   getTolerance(ftr) * VECTOR_FEATURE_TARGET_TOL_FACTOR);
     }
 
-    writeEndTag(os, PML::VECTOR_FEATURE_TAG);
+    writeEndTag(os, PML::Element::VECTOR_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
-    writeStartTag(os, PML::PLANE_FEATURE_TAG, false);
+    writeStartTag(os, PML::Element::PLANE_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
 
-    writePositionAndTolerance(os, PML::FEATURE_POSITION_TAG, get3DCoordinates(ftr), getTolerance(ftr));
-    writePositionAndTolerance(os, PML::FEATURE_NORMAL_TAG, getOrientation(ftr), getTolerance(ftr) * PLANE_FEATURE_SECOND_TOL_FACTOR);
+    writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
+    writePositionAndTolerance(os, PML::Element::FEATURE_NORMAL, getOrientation(ftr), getTolerance(ftr) * PLANE_FEATURE_SECOND_TOL_FACTOR);
 
-    writeEndTag(os, PML::PLANE_FEATURE_TAG);
+    writeEndTag(os, PML::Element::PLANE_FEATURE, 4);
 }
 
 template <typename VE>
 void Pharm::PMLDataWriter::writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const
 {
-    writeStartTag(os, tag, false);
+    writeStartTag(os, tag, false, 5);
 
-    writeAttribute(os, PML::COORDS_X_ATTRIBUTE, pos[0], false);
-    writeAttribute(os, PML::COORDS_Y_ATTRIBUTE, pos[1], false);
-    writeAttribute(os, PML::COORDS_Z_ATTRIBUTE, pos[2], false);
-    writeAttribute(os, PML::TOLERANCE_ATTRIBUTE, tol, true, true);
+    writeAttribute(os, PML::Attribute::COORDS_X, pos[0], false);
+    writeAttribute(os, PML::Attribute::COORDS_Y, pos[1], false);
+    writeAttribute(os, PML::Attribute::COORDS_Z, pos[2], false);
+    writeAttribute(os, PML::Attribute::TOLERANCE, tol, true, true);
 }
 
-void Pharm::PMLDataWriter::writeStartTag(std::ostream& os, const std::string& tag, bool close) const
+void Pharm::PMLDataWriter::writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent) const
 {
-    os << '<' << tag;
+    os << std::setfill(' ') << std::setw(indent) << ' ' << '<' << tag;
 
     if (close)
         os << ">\n";
 }
 
-void Pharm::PMLDataWriter::writeEndTag(std::ostream& os, const std::string& tag) const
+void Pharm::PMLDataWriter::writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent) const
 {
-    os << "</" << tag << ">\n";
+    os << std::setfill(' ') << std::setw(indent) << ' ' << "</" << tag << ">\n";
 }
 
 template <typename T>
@@ -303,5 +303,5 @@ void Pharm::PMLDataWriter::writeAttribute(std::ostream& os, const std::string& n
     os << ' ' << name << "=\"" << value << "\"";
 
     if (close) 
-        os << (empty ? " />\n" : ">\n");
+        os << (empty ? "/>\n" : ">\n");
 }
