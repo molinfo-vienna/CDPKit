@@ -37,29 +37,37 @@ namespace CDPL
         namespace TorsionLibraryFormatData
         {
 
-            const std::string LIBRARY_TAG            = "library";
-            const std::string CATEGORY_TAG           = "category";
-            const std::string RULE_TAG               = "rule";
-            const std::string ANGLE_LIST_TAG         = "torsions";
-            const std::string ANGLE_TAG              = "angle";
-            const std::string NOTE_TAG               = "note";
-            const std::string HISTOGRAM_TAG          = "histogram";
-            const std::string HISTOGRAM2_TAG         = "histogram2";
-            const std::string HISTOGRAM_SHIFTED_TAG  = "histogram_shifted";
-            const std::string HISTOGRAM2_SHIFTED_TAG = "histogram2_shifted";
-            const std::string BIN_TAG                = "bin";
-            
-            const std::string CATEGORY_NAME_ATTR       = "name";
-            const std::string CATEGORY_PATTERN_ATTR    = "pattern";
-            const std::string CATEGORY_ATOM_TYPE1_ATTR = "atomType1";
-            const std::string CATEGORY_ATOM_TYPE2_ATTR = "atomType2";
+            namespace Element
+            {
 
-            const std::string RULE_PATTERN_ATTR = "pattern";
+                const std::string LIBRARY            = "library";
+                const std::string CATEGORY           = "category";
+                const std::string RULE               = "rule";
+                const std::string ANGLE_LIST         = "torsions";
+                const std::string ANGLE              = "angle";
+                const std::string NOTE               = "note";
+                const std::string HISTOGRAM          = "histogram";
+                const std::string HISTOGRAM2         = "histogram2";
+                const std::string HISTOGRAM_SHIFTED  = "histogram_shifted";
+                const std::string HISTOGRAM2_SHIFTED = "histogram2_shifted";
+                const std::string BIN                = "bin";
+            } // namespace Element
 
-            const std::string ANGLE_VALUE_ATTR      = "value";
-            const std::string ANGLE_TOLERANCE1_ATTR = "tolerance1";
-            const std::string ANGLE_TOLERANCE2_ATTR = "tolerance2";
-            const std::string ANGLE_SCORE_ATTR      = "score";
+            namespace Attribute
+            {
+
+                const std::string CATEGORY_NAME       = "name";
+                const std::string CATEGORY_PATTERN    = "pattern";
+                const std::string CATEGORY_ATOM_TYPE1 = "atomType1";
+                const std::string CATEGORY_ATOM_TYPE2 = "atomType2";
+
+                const std::string RULE_PATTERN = "pattern";
+
+                const std::string ANGLE_VALUE      = "value";
+                const std::string ANGLE_TOLERANCE1 = "tolerance1";
+                const std::string ANGLE_TOLERANCE2 = "tolerance2";
+                const std::string ANGLE_SCORE      = "score";
+            } // namespace Attribute
         } // namespace TorsionLibraryFormatData
     } // namespace ConfGen
 } // namespace CDPL

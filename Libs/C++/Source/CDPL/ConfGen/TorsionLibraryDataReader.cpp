@@ -84,10 +84,10 @@ void ConfGen::TorsionLibraryDataReader::processData(char* data, TorsionLibrary& 
 
     torLibDocument.parse<rapidxml::parse_trim_whitespace>(data);
 
-    const XMLNode* lib_node = torLibDocument.first_node(LIBRARY_TAG.c_str());
+    const XMLNode* lib_node = torLibDocument.first_node(Element::LIBRARY.c_str());
 
     if (!lib_node)
-        throw Base::IOError("TorsionLibraryDataReader: <" + LIBRARY_TAG + "> document root node not found");
+        throw Base::IOError("TorsionLibraryDataReader: <" + Element::LIBRARY + "> document root node not found");
 
     processCategory(lib_node, lib);
 }
@@ -96,23 +96,23 @@ void ConfGen::TorsionLibraryDataReader::processCategory(const XMLNode* cat_node,
 {
     using namespace TorsionLibraryFormatData;
 
-    const XMLAttribute* attr = cat_node->first_attribute(CATEGORY_NAME_ATTR.c_str());
+    const XMLAttribute* attr = cat_node->first_attribute(Attribute::CATEGORY_NAME.c_str());
     std::string str;
 
     if (attr) 
         cat.setName(str = attr->value());
     
-    attr = cat_node->first_attribute(CATEGORY_ATOM_TYPE1_ATTR.c_str());
+    attr = cat_node->first_attribute(Attribute::CATEGORY_ATOM_TYPE1.c_str());
 
     if (attr) 
         cat.setBondAtom1Type(Chem::AtomDictionary::getType(str = attr->value()));
 
-    attr = cat_node->first_attribute(CATEGORY_ATOM_TYPE2_ATTR.c_str());
+    attr = cat_node->first_attribute(Attribute::CATEGORY_ATOM_TYPE2.c_str());
 
     if (attr) 
         cat.setBondAtom2Type(Chem::AtomDictionary::getType(str = attr->value()));
     
-    attr = cat_node->first_attribute(CATEGORY_PATTERN_ATTR.c_str());
+    attr = cat_node->first_attribute(Attribute::CATEGORY_PATTERN.c_str());
 
     if (attr)  {
         cat.setMatchPatternString(attr->value());
@@ -122,11 +122,11 @@ void ConfGen::TorsionLibraryDataReader::processCategory(const XMLNode* cat_node,
     for (const XMLNode* node = cat_node->first_node(); node; node = node->next_sibling()) {
         const char* node_name = node->name();
 
-        if (node_name == CATEGORY_TAG) 
+        if (node_name == Element::CATEGORY) 
             processCategory(node, cat.addCategory());
-        else if (node_name == RULE_TAG)
+        else if (node_name == Element::RULE)
             processRule(node, cat.addRule());
-        else if (node_name != NOTE_TAG)
+        else if (node_name != Element::NOTE)
             throw Base::IOError(std::string("TorsionLibraryDataReader: invalid tag <") + node_name + ">");
     }
 }
@@ -135,23 +135,23 @@ void ConfGen::TorsionLibraryDataReader::processRule(const XMLNode* rule_node, To
 {
     using namespace TorsionLibraryFormatData;
 
-    const XMLAttribute* attr = rule_node->first_attribute(RULE_PATTERN_ATTR.c_str());
+    const XMLAttribute* attr = rule_node->first_attribute(Attribute::RULE_PATTERN.c_str());
 
     if (attr) {
         rule.setMatchPattern(parseSMARTS(attr->value()));
         rule.setMatchPatternString(attr->value());
 
     } else
-        throw Base::IOError("TorsionLibraryDataReader: missing rule '" + RULE_PATTERN_ATTR + "' attribute");
+        throw Base::IOError("TorsionLibraryDataReader: missing rule '" + Attribute::RULE_PATTERN + "' attribute");
 
     if (!rule.getMatchPattern())
-        throw Base::IOError("TorsionLibraryDataReader: empty or invalid rule '" + RULE_PATTERN_ATTR + "' attribute");
+        throw Base::IOError("TorsionLibraryDataReader: empty or invalid rule '" + Attribute::RULE_PATTERN + "' attribute");
 
     for (const XMLNode* node = rule_node->first_node(); node; node = node->next_sibling()) {
-        if (node->name() == ANGLE_LIST_TAG) 
+        if (node->name() == Element::ANGLE_LIST) 
             processAngleList(node, rule);
-        else if (node->name() != HISTOGRAM_TAG && node->name() != HISTOGRAM2_TAG &&
-                 node->name() != HISTOGRAM_SHIFTED_TAG && node->name() != HISTOGRAM2_SHIFTED_TAG)
+        else if (node->name() != Element::HISTOGRAM && node->name() != Element::HISTOGRAM2 &&
+                 node->name() != Element::HISTOGRAM_SHIFTED && node->name() != Element::HISTOGRAM2_SHIFTED)
             throw Base::IOError(std::string("TorsionLibraryDataReader: invalid tag <") + node->name() + ">");
     }
 }
@@ -163,28 +163,28 @@ void ConfGen::TorsionLibraryDataReader::processAngleList(const XMLNode* ang_list
     for (const XMLNode* node = ang_list_node->first_node(); node; node = node->next_sibling()) {
         const char* node_name = node->name();
 
-        if (node_name != ANGLE_TAG)
+        if (node_name != Element::ANGLE)
             throw Base::IOError(std::string("TorsionLibraryDataReader: invalid tag <") + node_name + ">");
 
-        const XMLAttribute* value_attr = node->first_attribute(ANGLE_VALUE_ATTR.c_str());
+        const XMLAttribute* value_attr = node->first_attribute(Attribute::ANGLE_VALUE.c_str());
 
         if (!value_attr)
-            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + ANGLE_VALUE_ATTR + "' attribute");
+            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + Attribute::ANGLE_VALUE + "' attribute");
 
-        const XMLAttribute* tol1_attr = node->first_attribute(ANGLE_TOLERANCE1_ATTR.c_str());
+        const XMLAttribute* tol1_attr = node->first_attribute(Attribute::ANGLE_TOLERANCE1.c_str());
 
         if (!tol1_attr)
-            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + ANGLE_TOLERANCE1_ATTR + "' attribute");
+            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + Attribute::ANGLE_TOLERANCE1 + "' attribute");
 
-        const XMLAttribute* tol2_attr = node->first_attribute(ANGLE_TOLERANCE2_ATTR.c_str());
+        const XMLAttribute* tol2_attr = node->first_attribute(Attribute::ANGLE_TOLERANCE2.c_str());
 
         if (!tol2_attr)
-            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + ANGLE_TOLERANCE2_ATTR + "' attribute");
+            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + Attribute::ANGLE_TOLERANCE2 + "' attribute");
 
-        const XMLAttribute* score_attr = node->first_attribute(ANGLE_SCORE_ATTR.c_str());
+        const XMLAttribute* score_attr = node->first_attribute(Attribute::ANGLE_SCORE.c_str());
 
         if (!score_attr)
-            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + ANGLE_SCORE_ATTR + "' attribute");
+            throw Base::IOError("TorsionLibraryDataReader: missing angle entry '" + Attribute::ANGLE_SCORE + "' attribute");
 
         rule.addAngle(Internal::parseNumber<double>(value_attr->value(), value_attr->value() + value_attr->value_size(), 
                                                     "TorsionLibraryDataReader: error while parsing torsion angle value"),

@@ -24,6 +24,16 @@
 
 #include <algorithm>
 #include <iterator>
+#include <istream>
+#include <ostream>
+#include <sstream>
+#include <iomanip>
+#include <locale>
+#include <clocale>
+#include <limits>
+#include <cstdlib>
+
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "StringUtilities.hpp"
 
@@ -128,7 +138,100 @@ bool CDPL::Internal::readToString(std::istream& is, const std::string& str, std:
     }
 
     return false;
-} 
+}
+
+template <typename T>
+T CDPL::Internal::parseNumber(const char* str_beg, const char* str_end, const char* err_msg, bool throw_ex,
+                              const T empty_def_val, const T err_def_val)
+{
+    if (str_beg == str_end)
+        return empty_def_val;
+
+    T val;
+    char* parse_end;
+
+    if (std::numeric_limits<T>::is_integer) {
+        if (std::numeric_limits<T>::is_signed)
+            val = T(std::strtol(str_beg, &parse_end, 10));
+        else
+            val = T(std::strtoul(str_beg, &parse_end, 10));
+
+    } else {
+        const char* old_loc = std::setlocale(LC_NUMERIC, "C");
+
+        val = T(std::strtod(str_beg, &parse_end));
+
+        std::setlocale(LC_NUMERIC, old_loc);
+    }
+
+    if (str_end != parse_end) {
+        if (throw_ex)
+            throw Base::IOError(std::string(err_msg) + ": '" + std::string(str_beg) + "' invalid number format");
+
+        return err_def_val;
+    }
+
+    return val;
+}
+
+template <typename T>
+T CDPL::Internal::parseNumber(const std::string& str, const char* err_msg, bool throw_ex,
+                              const T empty_def_val, const T err_def_val)
+{
+    const char* c_str = str.c_str();
+
+    return parseNumber<T>(c_str, c_str + str.size(), err_msg, throw_ex, empty_def_val, err_def_val);
+}
+
+template <typename T, std::size_t FieldSize>
+T CDPL::Internal::readNumber(std::istream& is, const char* err_msg, bool throw_ex,
+                             const T empty_def_val, const T err_def_val, char eol_char)
+{
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+            
+    char  buf[FieldSize + 1];
+    char* buf_end_ptr = buf;
+    char  c           = 0;
+    auto  rdbuf       = is.rdbuf();
+
+    for (std::size_t i = 0; i < FieldSize; i++) {
+        int tmp = rdbuf->sbumpc();
+
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
+            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            break;
+        }
+                
+        c = std::istream::traits_type::to_char_type(tmp);
+
+        if (c == eol_char)
+            break;
+                
+        if (std::isspace(c, std::locale::classic()))
+            continue;
+
+        *buf_end_ptr++ = c;
+    }
+
+    checkStreamState(is, err_msg);
+
+    if (c == eol_char)
+        is.putback(eol_char);
+
+    *buf_end_ptr = 0;
+
+    return parseNumber<T>(buf, buf_end_ptr, err_msg, throw_ex, empty_def_val, err_def_val);
+}
+
+void CDPL::Internal::writeWhitespace(std::ostream& os, std::size_t width)
+{
+    os << std::setfill(' ') << std::setw(width) << "";
+}
+
+void CDPL::Internal::writeEOL(std::ostream& os, char eol_char)
+{
+    os << eol_char;
+}
 
 void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char, bool allow_eof)
 {
@@ -282,4 +385,86 @@ void CDPL::Internal::writeSubstring(std::ostream& os, const std::string& str, st
     std::string::const_iterator str_beg = str.begin();
 
     std::copy(str_beg + start, str_beg + end, std::ostream_iterator<char>(os));
+}
+
+template <typename T>
+void CDPL::Internal::writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const char* err_msg,
+                                        bool align_left, char fill)
+{
+    std::ostringstream oss;
+
+    oss.imbue(std::locale::classic());
+
+    oss << std::setw(field_size) << std::setfill(fill);
+
+    if (align_left)
+        oss << std::left;
+    else
+        oss << std::right;
+
+    oss << value;
+
+    if (!oss.good())
+        throw Base::IOError(std::string(err_msg) + ": conversion of numeric value to string failed");
+
+    std::string val_str = oss.str();
+
+    if (val_str.size() > field_size)
+        throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " + std::to_string(field_size) + " allowed digits");
+
+    os << val_str;
+}
+
+template <typename T>
+void CDPL::Internal::writeFloatNumber(std::ostream& os, std::size_t field_size, std::size_t prec,
+                                      const T value, const char* err_msg)
+{
+    std::ostringstream oss;
+
+    oss.imbue(std::locale::classic());
+
+    oss << std::fixed << std::setw(field_size) << std::showpoint << std::setprecision(prec) << std::right << value;
+
+    if (!oss.good())
+        throw Base::IOError(std::string(err_msg) + ": conversion of numeric value to string failed");
+
+    std::string val_str = oss.str();
+
+    if (val_str.size() > field_size)
+        throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " + std::to_string(field_size) + " allowed characters");
+
+    os << val_str;
+}
+
+void CDPL::Internal::writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent)
+{
+    if (indent > 0)
+        writeWhitespace(os, indent);
+
+    os << '<' << tag;
+
+    if (close)
+        os << ">\n";
+}
+
+void CDPL::Internal::writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent)
+{
+    if (indent > 0)
+        writeWhitespace(os, indent);
+
+    os << "</" << tag << ">\n";
+}
+
+void CDPL::Internal::closeTag(std::ostream& os)
+{
+    os << ">\n";
+}
+
+template <typename T>
+void CDPL::Internal::writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty)
+{
+    os << ' ' << name << "=\"" << value << '"';
+
+    if (close) 
+        os << (empty ? " />\n" : ">\n");
 }

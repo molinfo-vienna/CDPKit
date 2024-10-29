@@ -58,8 +58,8 @@ namespace CDPL
           private:
             void init(std::ostream& os);
 
-            void writePMLHeader(std::ostream& os) const;
-            void writePMLFooter(std::ostream& os) const;
+            void writeHeader(std::ostream& os) const;
+            void writeFooter(std::ostream& os) const;
 
             void startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr);
             void endAlignmentElement(std::ostream& os) const;
@@ -79,14 +79,8 @@ namespace CDPL
             template <typename VE>
             void writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const;
 
-            void writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent) const;
-            void writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent) const;
-
-            template <typename T>
-            void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty = false) const;
-
             const Base::DataIOBase& ioBase;
-            bool                    writeHeader;
+            bool                    wrtHeader;
             bool                    strictErrorChecking;
             std::size_t             alignElemID;
             std::size_t             featureID;

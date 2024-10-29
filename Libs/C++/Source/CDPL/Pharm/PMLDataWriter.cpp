@@ -38,6 +38,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "PMLDataWriter.hpp"
 #include "PMLFormatData.hpp"
@@ -79,17 +80,17 @@ namespace
 
 
 Pharm::PMLDataWriter::PMLDataWriter(const Base::DataIOBase& io_base): 
-    ioBase(io_base), writeHeader(true), strictErrorChecking(true)
+    ioBase(io_base), wrtHeader(true), strictErrorChecking(true)
 {}
 
 bool Pharm::PMLDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
     init(os);
 
-    if (writeHeader) {
-        writePMLHeader(os);
+    if (wrtHeader) {
+        writeHeader(os);
 
-        writeHeader = false;
+        wrtHeader = false;
         alignElemID = 0;
         featureID = 1;
     }
@@ -112,25 +113,27 @@ void Pharm::PMLDataWriter::init(std::ostream& os)
 
 void Pharm::PMLDataWriter::close(std::ostream& os)
 {
-    if (writeHeader)
+    if (wrtHeader)
         return;
 
-    writePMLFooter(os);
-    writeHeader = true;
+    writeFooter(os);
+    wrtHeader = true;
 }
 
-void Pharm::PMLDataWriter::writePMLHeader(std::ostream& os) const
+void Pharm::PMLDataWriter::writeHeader(std::ostream& os) const
 {
     os << PML::HEADER << '\n';
 }
 
-void Pharm::PMLDataWriter::writePMLFooter(std::ostream& os) const
+void Pharm::PMLDataWriter::writeFooter(std::ostream& os) const
 {
     os << PML::FOOTER << '\n';
 }
 
 void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr)
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::ALIGNMENT_ELEM, false, 2);
 
     writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
@@ -140,11 +143,13 @@ void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const Feature
 
 void Pharm::PMLDataWriter::endAlignmentElement(std::ostream& os) const
 {
-    writeEndTag(os, PML::Element::ALIGNMENT_ELEM, 2);
+    Internal::writeEndTag(os, PML::Element::ALIGNMENT_ELEM, 2);
 }
 
 void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::PHARMACOPHORE, false, 3);
 
     writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
@@ -154,7 +159,7 @@ void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureCon
 
 void Pharm::PMLDataWriter::endPharmacophore(std::ostream& os) const
 {
-    writeEndTag(os, PML::Element::PHARMACOPHORE, 3);
+    Internal::writeEndTag(os, PML::Element::PHARMACOPHORE, 3);
 }
 
 void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContainer& cntnr)
@@ -204,6 +209,8 @@ void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContaine
 
 void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool close)
 {
+    using namespace Internal;
+    
     writeAttribute(os, PML::Attribute::NAME, name, false);
     writeAttribute(os, PML::Attribute::FEATURE_ID, featureID++, false);
     writeAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr), false);
@@ -214,6 +221,8 @@ void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const
 
 void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id)
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::VOLUME_FEATURE, false, 4);
     
     writeAttribute(os, PML::Attribute::TYPE, PML::VOLUME_TYPE_EXCLUSION, false);
@@ -230,6 +239,8 @@ void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, st
 
 void Pharm::PMLDataWriter::writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::POINT_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
@@ -241,6 +252,8 @@ void Pharm::PMLDataWriter::writePointFeature(std::ostream& os, const Feature& ft
 
 void Pharm::PMLDataWriter::writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig)
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::VECTOR_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, false);
@@ -263,6 +276,8 @@ void Pharm::PMLDataWriter::writeVectorFeature(std::ostream& os, const Feature& f
 
 void Pharm::PMLDataWriter::writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
+    using namespace Internal;
+    
     writeStartTag(os, PML::Element::PLANE_FEATURE, false, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
@@ -276,32 +291,12 @@ void Pharm::PMLDataWriter::writePlaneFeature(std::ostream& os, const Feature& ft
 template <typename VE>
 void Pharm::PMLDataWriter::writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const
 {
+    using namespace Internal;
+    
     writeStartTag(os, tag, false, 5);
 
     writeAttribute(os, PML::Attribute::COORDS_X, pos[0], false);
     writeAttribute(os, PML::Attribute::COORDS_Y, pos[1], false);
     writeAttribute(os, PML::Attribute::COORDS_Z, pos[2], false);
     writeAttribute(os, PML::Attribute::TOLERANCE, tol, true, true);
-}
-
-void Pharm::PMLDataWriter::writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent) const
-{
-    os << std::setfill(' ') << std::setw(indent) << ' ' << '<' << tag;
-
-    if (close)
-        os << ">\n";
-}
-
-void Pharm::PMLDataWriter::writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent) const
-{
-    os << std::setfill(' ') << std::setw(indent) << ' ' << "</" << tag << ">\n";
-}
-
-template <typename T>
-void Pharm::PMLDataWriter::writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty) const
-{
-    os << ' ' << name << "=\"" << value << "\"";
-
-    if (close) 
-        os << (empty ? "/>\n" : ">\n");
 }
