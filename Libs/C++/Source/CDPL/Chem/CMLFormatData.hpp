@@ -37,14 +37,58 @@ namespace CDPL
         namespace CML
         {
 
-            const std::string CML_NAMESPACE_DEF = "";
+            const std::string HEADER =
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                "<cml xmlns=\"http://www.xml-cml.org/schema\" xmlns:convention=\"http://www.xml-cml.org/convention/\" "
+                "convention=\"convention:molecular\">\n";
+            const std::string FOOTER = "</cml>\n";
 
-            const std::string CML_TAG = "cml";
-            const std::string MOLECULE_TAG  = "molecule";
-            const std::string ATOM_ARRAY_TAG  = "atomArray";
-            const std::string ATOM_TAG  = "atom";
-            const std::string BOND_TAG  = "bond";
-        
+            namespace Element
+            {
+
+                const std::string CML         = "cml";
+                const std::string MOLECULE    = "molecule";
+                const std::string FORMULA     = "formula";
+                const std::string PROPERTY    = "property";
+                const std::string LABEL       = "label";
+                const std::string NAME        = "name";
+                const std::string SPECTRUM    = "spectrum";
+                const std::string ATOM_ARRAY  = "atomArray";
+                const std::string ATOM        = "atom";
+                const std::string ATOM_PARITY = "atomParity";
+                const std::string BOND_ARRAY  = "bondArray";
+                const std::string BOND        = "bond";
+                const std::string BOND_STEREO = "bondStereo";
+                const std::string SCALAR      = "scalar";
+            } // namespace Element
+
+            namespace Attribute
+            {
+
+                const std::string ID                = "id";
+                const std::string FORMAL_CHARGE     = "formalCharge";
+                const std::string SPIN_MULTIPLICITY = "spinMultiplicity";
+                const std::string CHIRALITY         = "chirality";
+                const std::string COUNT             = "count";
+                const std::string CONCISE           = "concise";
+                const std::string INLINE            = "inline";
+                const std::string TITLE             = "title";
+                const std::string DICT_REF          = "dictRef";
+                const std::string UNIT              = "units";
+                const std::string DATA_TYPE         = "dataType";
+                const std::string ELEMENT_TYPE      = "elementType";
+                const std::string X2                = "x2";
+                const std::string Y2                = "y2";
+                const std::string X3                = "x3";
+                const std::string Y3                = "y3";
+                const std::string Z3                = "z3";
+                const std::string ISOTOPE           = "isotopeNumber";
+                const std::string REF_ATOMS4        = "atomRefs4";
+                const std::string REF_ATOMS2        = "atomRefs2";
+                const std::string ORDER             = "order";
+                
+            } // namespace Attribute
+
         } // namespace CML
     } // namespace Chem
 } // namespace CDPL
