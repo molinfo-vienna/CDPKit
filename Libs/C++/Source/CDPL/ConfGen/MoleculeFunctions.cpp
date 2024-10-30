@@ -84,24 +84,18 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 {
     using namespace Chem;
 
-    bool added_hs = makeHydrogenComplete(mol, true);
-
-    perceiveComponents(mol, added_hs);
+    calcImplicitHydrogenCounts(mol, false);
     perceiveHybridizationStates(mol, false);
     perceiveSSSR(mol, false);
     setRingFlags(mol, false);
     setAromaticityFlags(mol, false);
-    calcCIPPriorities(mol, added_hs);
+    calcCIPPriorities(mol, false);
 
     for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
 
-        if (hasStereoDescriptor(atom)) {
-            if (added_hs)
-                setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
-            
+        if (hasStereoDescriptor(atom))
             continue;
-        }
         
         if (!isStereoCenter(atom, mol, true, true, false)) {
             setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
@@ -116,11 +110,8 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
     for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
         Bond& bond = *it;
 
-        if (hasStereoDescriptor(bond)) {
-            if (added_hs)
-                setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 0));
+        if (hasStereoDescriptor(bond))
             continue;
-        }
         
         if (!isStereoCenter(bond, mol, true, false)) 
             setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
@@ -160,6 +151,8 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
         }
     }
 
+    bool added_hs = makeHydrogenComplete(mol, true);
+
     if (canon) {
         if (added_hs) {
             for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
@@ -174,14 +167,20 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 
                 setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
             }
-        }
+
+            perceiveComponents(mol, true);
+
+        } else
+            perceiveComponents(mol, false);
         
         calcCanonicalNumbering(mol, false);
         canonicalize(mol, true, true, true, true);
         perceiveSSSR(mol, true);
         perceiveComponents(mol, true);
-    }
 
+    } else
+        perceiveComponents(mol, added_hs);
+    
     calcTopologicalDistanceMatrix(mol, canon || added_hs);
 
     FragmentList& comps = *getComponents(mol);
