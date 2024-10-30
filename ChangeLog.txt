@@ -1,5 +1,7 @@
 master:
 
+ - Fallback perception of atom/bond stereochemistry from input 3D coordinates during conformer generation molecule preprocessing
+   now does not require the presence of explicit hydrogens anymore
  - Renamed function MolProp::isCarbonylLikeAtom() into MolProp::isCarbonylLike()
  - Renamed function MolProp::isAmideCenterAtom() into MolProp::isAmideCenter()
  - New atom classification functions MolProp::isBridgehead() and MolProp::isSpiroCenter()
