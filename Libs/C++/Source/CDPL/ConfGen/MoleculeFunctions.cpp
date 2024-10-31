@@ -153,27 +153,24 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 
     bool added_hs = makeHydrogenComplete(mol, true);
 
+    if (added_hs) {
+        for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+            Atom& atom = *it;
+            const StereoDescriptor& descr = getStereoDescriptor(atom);
+
+            if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
+                continue;
+
+            if (descr.getNumReferenceAtoms() == atom.getNumBonds())
+                continue;
+
+            setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
+        }
+    }
+   
     if (canon) {
-        if (added_hs) {
-            for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-                Atom& atom = *it;
-                const StereoDescriptor& descr = getStereoDescriptor(atom);
-
-                if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
-                    continue;
-
-                if (descr.getNumReferenceAtoms() == atom.getNumBonds())
-                    continue;
-
-                setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
-            }
-
-            perceiveComponents(mol, true);
-
-        } else
-            perceiveComponents(mol, false);
-        
-        calcCanonicalNumbering(mol, false);
+        perceiveComponents(mol, added_hs);
+        calcCanonicalNumbering(mol, true);
         canonicalize(mol, true, true, true, true);
         perceiveSSSR(mol, true);
         perceiveComponents(mol, true);
