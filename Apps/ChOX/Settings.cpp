@@ -77,6 +77,8 @@ Settings::Settings(QObject* parent): QObject(parent)
     readerControlParams[Chem::DataFormat::MOL2_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::MOL2.getName()]);
     readerControlParams[Chem::DataFormat::XYZ_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::XYZ.getName()]);
     readerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::XYZ.getName()]);
+    readerControlParams[Chem::DataFormat::CML_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::CML.getName()]);
+    readerControlParams[Chem::DataFormat::CML_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::CML.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
     readerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
     readerControlParams[Biomol::DataFormat::MMCIF_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::MMCIF.getName()]);
@@ -94,6 +96,8 @@ Settings::Settings(QObject* parent): QObject(parent)
     writerControlParams[Chem::DataFormat::MOL2_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::MOL2.getName()]);
     writerControlParams[Chem::DataFormat::XYZ_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::XYZ.getName()]);
     writerControlParams[Chem::DataFormat::XYZ_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::XYZ.getName()]);
+    writerControlParams[Chem::DataFormat::CML_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::CML.getName()]);
+    writerControlParams[Chem::DataFormat::CML_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::CML.getName()]);   
     writerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
     writerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
     writerControlParams[Biomol::DataFormat::MMCIF_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::MMCIF.getName()]);
@@ -460,6 +464,30 @@ void Settings::load()
 
     readParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::XYZ_OUTPUT_WRITE_SINGLE_RECORD_FILES);
     readParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::XYZ_OUTPUT_MULTI_CONF_EXPORT);
+
+    settings.endGroup();
+
+    // ------
+
+    settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::CML.getName()));
+
+    SettingsContainer& cml_rparams = readerControlParams[Chem::DataFormat::CML.getName()];
+
+    cml_rparams.setParent(this);
+
+    readParameter<bool>(cml_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::CML_INPUT_STRICT_ERROR_CHECKING);
+
+    settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::CML.getName()));
+
+    SettingsContainer& cml_wparams = writerControlParams[Chem::DataFormat::CML.getName()];
+
+    cml_wparams.setParent(this);
+
+    readParameter<bool>(cml_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::CML_OUTPUT_WRITE_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -1043,6 +1071,26 @@ void Settings::save() const
 
     writeParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
     writeParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
+
+    settings.endGroup();
+
+    // ------
+    
+    settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::CML.getName()));
+
+    const SettingsContainer& cml_rparams = getReaderControlParameters(Chem::DataFormat::CML.getName());
+
+    writeParameter<bool>(cml_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
+
+    settings.endGroup();
+
+    // +++
+
+    settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::CML.getName()));
+
+    const SettingsContainer& cml_wparams = getWriterControlParameters(Chem::DataFormat::CML.getName());
+
+    writeParameter<bool>(cml_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
