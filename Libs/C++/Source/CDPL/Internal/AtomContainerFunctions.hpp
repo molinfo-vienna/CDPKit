@@ -40,6 +40,8 @@ namespace CDPL
     {
 
         inline std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+
+        inline long getNetFormalCharge(const Chem::AtomContainer& cntnr);
     }
 } // namespace CDPL
 

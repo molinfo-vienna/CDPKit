@@ -25,9 +25,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
-#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Internal/AtomContainerFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -35,10 +33,5 @@ using namespace CDPL;
 
 long MolProp::getNetFormalCharge(const Chem::AtomContainer& cntnr)
 {
-    long charge = 0;
-
-    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-        charge += getFormalCharge(*it);
-
-    return charge;
+    return Internal::getNetFormalCharge(cntnr);
 }

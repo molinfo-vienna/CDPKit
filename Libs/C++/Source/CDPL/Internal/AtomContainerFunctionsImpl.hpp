@@ -38,3 +38,13 @@ std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::AtomContainer& cntn
 
     return count;
 }
+
+long CDPL::Internal::getNetFormalCharge(const Chem::AtomContainer& cntnr)
+{
+    long charge = 0;
+
+    for (auto& atom : cntnr.getAtoms())
+        charge += getFormalCharge(atom);
+
+    return charge;
+}
