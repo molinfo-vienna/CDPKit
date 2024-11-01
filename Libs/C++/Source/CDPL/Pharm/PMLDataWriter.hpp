@@ -58,13 +58,13 @@ namespace CDPL
           private:
             void init(std::ostream& os);
 
-            void writeHeader(std::ostream& os) const;
-            void writeFooter(std::ostream& os) const;
+            void startDocument(std::ostream& os) const;
+            void endDocument(std::ostream& os) const;
 
             void startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr);
             void endAlignmentElement(std::ostream& os) const;
 
-            void startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const;
+            void startPharmacophore(std::ostream& os, const FeatureContainer& cntnr);
             void endPharmacophore(std::ostream& os) const;
 
             void writeFeatures(std::ostream& os, const FeatureContainer& cntnr);
@@ -80,10 +80,11 @@ namespace CDPL
             void writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const;
 
             const Base::DataIOBase& ioBase;
-            bool                    wrtHeader;
+            bool                    startDoc;
             bool                    strictErrorChecking;
-            std::size_t             alignElemID;
-            std::size_t             featureID;
+            std::size_t             alignElemId;
+            std::size_t             featureId;
+            std::string             tmpString;
         };
     } // namespace Pharm
 } // namespace CDPL

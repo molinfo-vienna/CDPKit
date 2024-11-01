@@ -26,6 +26,8 @@
 #define CDPL_CHEM_CMLDATAWRITER_HPP
 
 #include <iosfwd>
+#include <cstddef>
+#include <string>
 
 
 namespace CDPL
@@ -41,20 +43,42 @@ namespace CDPL
     {
 
         class MolecularGraph;
+        class Atom;
+        class Bond;
 
         class CMLDataWriter
         {
 
           public:
-            CMLDataWriter(const Base::DataIOBase& io_base):
-                ioBase(io_base) {}
+            CMLDataWriter(const Base::DataIOBase& io_base);
 
             bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
 
+            void close(std::ostream& os);
+            
           private:
-            void init(std::ostream& os);
+            void startDocument(std::ostream& os) const;
+            void endDocument(std::ostream& os) const;
 
+            void startMoleculeElement(std::ostream& os, const MolecularGraph& molgraph);
+            void endMoleculeElement(std::ostream& os) const;
+            
+            void writeName(std::ostream& os, const MolecularGraph& molgraph);
+
+            void writeAtoms(std::ostream& os, const MolecularGraph& molgraph);
+            bool writeAtomParity(std::ostream& os, const Atom& atom, const MolecularGraph& molgraph);
+                
+            void writeBonds(std::ostream& os, const MolecularGraph& molgraph);
+            bool writeBondStereo(std::ostream& os, const Bond& bond, const MolecularGraph& molgraph);
+                
+            void writeProperties(std::ostream& os, const MolecularGraph& molgraph);
+
+            const std::string& getAtomId(const Atom& atom, const MolecularGraph& molgraph, std::string& id_str) const;
+            
             const Base::DataIOBase& ioBase;
+            bool                    startDoc;
+            std::size_t             molId;
+            std::string             tmpString[2];
         };
     } // namespace Chem
 } // namespace CDPL

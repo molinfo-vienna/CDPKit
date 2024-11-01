@@ -47,20 +47,6 @@ namespace CDPL
 
         /**
          * \brief A writer for molecular graph data in the <em>Chemical Markup Language</em> [\ref CML] format.
-         *
-         * \c %CMLMolecularGraphWriter supports the following control-parameters:
-         *
-         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-         *   <td align="center">\c false</td>
-         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a write operation to fail</td>
-         *  </tr>
-         * </table>
-         *
          * \since 1.2
          */
         class CDPL_CHEM_API CMLMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
@@ -90,7 +76,10 @@ namespace CDPL
              */
             Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
+            void close();
+
             operator const void*() const;
+
             bool operator!() const;
 
           private:

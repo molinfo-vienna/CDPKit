@@ -98,16 +98,19 @@ namespace CDPL
                               const T value, const char* err_msg = "Error");
       
         inline
-        void writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent = 0);
+        void beginXMLStartTag(std::ostream& os, const std::string& tag, std::size_t indent = 0);
 
         inline
-        void writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent = 0);
-
-        inline
-        void closeTag(std::ostream& os);
+        void endXMLStartTag(std::ostream& os, bool empty = false, bool write_nl = true);
         
+        inline
+        void writeXMLEndTag(std::ostream& os, const std::string& tag, std::size_t indent = 0);
+
         template <typename T>
-        void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty = false);
+        void writeXMLAttribute(std::ostream& os, const std::string& name, const T& value);
+
+        inline
+        const std::string& escapeXMLData(const std::string& data, std::string& esc_data, bool attr_val, char keep_char = 0);
         
     } // namespace Internal
 } // namespace CDPL

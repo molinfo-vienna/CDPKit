@@ -436,18 +436,26 @@ void CDPL::Internal::writeFloatNumber(std::ostream& os, std::size_t field_size, 
     os << val_str;
 }
 
-void CDPL::Internal::writeStartTag(std::ostream& os, const std::string& tag, bool close, std::size_t indent)
+void CDPL::Internal::beginXMLStartTag(std::ostream& os, const std::string& tag, std::size_t indent)
 {
     if (indent > 0)
         writeWhitespace(os, indent);
 
     os << '<' << tag;
-
-    if (close)
-        os << ">\n";
 }
 
-void CDPL::Internal::writeEndTag(std::ostream& os, const std::string& tag, std::size_t indent)
+void CDPL::Internal::endXMLStartTag(std::ostream& os, bool empty, bool write_nl)
+{
+    if (empty)
+        os << " />";
+    else
+        os << '>';
+    
+    if (write_nl)
+        os << '\n';
+}
+
+void CDPL::Internal::writeXMLEndTag(std::ostream& os, const std::string& tag, std::size_t indent)
 {
     if (indent > 0)
         writeWhitespace(os, indent);
@@ -455,16 +463,53 @@ void CDPL::Internal::writeEndTag(std::ostream& os, const std::string& tag, std::
     os << "</" << tag << ">\n";
 }
 
-void CDPL::Internal::closeTag(std::ostream& os)
-{
-    os << ">\n";
-}
-
 template <typename T>
-void CDPL::Internal::writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty)
+void CDPL::Internal::writeXMLAttribute(std::ostream& os, const std::string& name, const T& value)
 {
     os << ' ' << name << "=\"" << value << '"';
+}
 
-    if (close) 
-        os << (empty ? " />\n" : ">\n");
+const std::string& CDPL::Internal::escapeXMLData(const std::string& data, std::string& esc_data, bool attr_val, char keep_char)
+{
+    esc_data.clear();
+
+    for (char c : data) {
+        if (c != keep_char) {
+            switch (c) {
+
+                case '<':
+                    esc_data.push_back('&'); esc_data.push_back('l'); esc_data.push_back('t'); esc_data.push_back(';');
+                    continue;
+                    
+                case '>': 
+                    esc_data.push_back('&'); esc_data.push_back('g'); esc_data.push_back('t'); esc_data.push_back(';');
+                    continue;
+
+                case '\'': 
+                    esc_data.push_back('&'); esc_data.push_back('a'); esc_data.push_back('p'); esc_data.push_back('o'); esc_data.push_back('s'); esc_data.push_back(';');
+                    continue;
+
+                case '"': 
+                    esc_data.push_back('&'); esc_data.push_back('q'); esc_data.push_back('u'); esc_data.push_back('o'); esc_data.push_back('t'); esc_data.push_back(';');
+                    continue;
+
+                case '&': 
+                    esc_data.push_back('&'); esc_data.push_back('a'); esc_data.push_back('m'); esc_data.push_back('p'); esc_data.push_back(';'); 
+                    continue;
+
+                default:
+                    if (std::isspace(c, std::locale::classic())) {
+                        if (attr_val && ((c == ' ') || (c == '\t')))
+                            break;
+                        
+                        esc_data.push_back('&'); esc_data.push_back('#'); esc_data.append(std::to_string(int(c))); esc_data.push_back(';');
+                        continue;
+                    }
+            }
+        }
+
+        esc_data.push_back(c);
+    }
+    
+    return esc_data;
 }

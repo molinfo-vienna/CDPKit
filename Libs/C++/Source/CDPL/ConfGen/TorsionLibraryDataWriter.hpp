@@ -54,12 +54,14 @@ namespace CDPL
             bool write(std::ostream& os, const TorsionLibrary& lib);
 
           private:
-            void writeCategory(std::ostream& os, std::size_t indent, const TorsionCategory& cat, bool contents_only) const;
-            void writeRule(std::ostream& os, std::size_t indent, const TorsionRule& rule) const;
+            void writeCategory(std::ostream& os, std::size_t indent, const TorsionCategory& cat, bool contents_only);
+            void writeRule(std::ostream& os, std::size_t indent, const TorsionRule& rule);
             void writeAngleList(std::ostream& os, std::size_t indent, const TorsionRule& rule) const;
             void writeAngleEntry(std::ostream& os, std::size_t indent, const TorsionRule::AngleEntry& angle_entry) const;
 
             std::string getSMARTSPattern(const Chem::MolecularGraph& molgraph) const;
+
+            std::string tmpString;
         };
     } // namespace ConfGen
 } // namespace CDPL

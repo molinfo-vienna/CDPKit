@@ -54,6 +54,9 @@ namespace
     constexpr double VECTOR_FEATURE_TARGET_TOL_FACTOR = 1.5;
     const std::string NOT_FOUND;
 
+    const std::string FEATURE_ID_PREFIX = "feature";
+    const std::string PHARMACOPHORE_ID  = Pharm::PML::Element::PHARMACOPHORE + '0';
+
     typedef std::map<unsigned int, std::string> FeatureTypeToNameMap;
 
     FeatureTypeToNameMap ls4FeatureNames{
@@ -80,19 +83,19 @@ namespace
 
 
 Pharm::PMLDataWriter::PMLDataWriter(const Base::DataIOBase& io_base): 
-    ioBase(io_base), wrtHeader(true), strictErrorChecking(true)
+    ioBase(io_base), startDoc(true)
 {}
 
 bool Pharm::PMLDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
     init(os);
 
-    if (wrtHeader) {
-        writeHeader(os);
+    if (startDoc) {
+        startDocument(os);
 
-        wrtHeader = false;
-        alignElemID = 0;
-        featureID = 1;
+        startDoc = false;
+        alignElemId = 0;
+        featureId = 1;
     }
 
     startAlignmentElement(os, cntnr);
@@ -113,53 +116,57 @@ void Pharm::PMLDataWriter::init(std::ostream& os)
 
 void Pharm::PMLDataWriter::close(std::ostream& os)
 {
-    if (wrtHeader)
+    if (startDoc)
         return;
 
-    writeFooter(os);
-    wrtHeader = true;
+    endDocument(os);
+    startDoc = true;
 }
 
-void Pharm::PMLDataWriter::writeHeader(std::ostream& os) const
+void Pharm::PMLDataWriter::startDocument(std::ostream& os) const
 {
-    os << PML::HEADER << '\n';
+    os << PML::DOC_PROLOG << '\n';
 }
 
-void Pharm::PMLDataWriter::writeFooter(std::ostream& os) const
+void Pharm::PMLDataWriter::endDocument(std::ostream& os) const
 {
-    os << PML::FOOTER << '\n';
+    os << PML::DOC_EPILOG << '\n';
 }
 
 void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::ALIGNMENT_ELEM, false, 2);
+    beginXMLStartTag(os, PML::Element::ALIGNMENT_ELEM, 2);
 
-    writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
-    writeAttribute(os, PML::Attribute::ID, PML::Element::ALIGNMENT_ELEM + std::to_string(alignElemID++), false);
-    writeAttribute(os, PML::Attribute::FLAG_CODE, PML::DEFAULT_FLAG_CODE, true);
+    writeXMLAttribute(os, PML::Attribute::NAME, escapeXMLData(getName(cntnr), tmpString, true));
+    writeXMLAttribute(os, PML::Attribute::ID, PML::Element::ALIGNMENT_ELEM + std::to_string(alignElemId++));
+    writeXMLAttribute(os, PML::Attribute::FLAG_CODE, PML::DEFAULT_FLAG_CODE);
+
+    endXMLStartTag(os);
 }
 
 void Pharm::PMLDataWriter::endAlignmentElement(std::ostream& os) const
 {
-    Internal::writeEndTag(os, PML::Element::ALIGNMENT_ELEM, 2);
+    Internal::writeXMLEndTag(os, PML::Element::ALIGNMENT_ELEM, 2);
 }
 
-void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const
+void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureContainer& cntnr)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::PHARMACOPHORE, false, 3);
+    beginXMLStartTag(os, PML::Element::PHARMACOPHORE, 3);
 
-    writeAttribute(os, PML::Attribute::NAME, getName(cntnr), false);
-    writeAttribute(os, PML::Attribute::ID, PML::Element::PHARMACOPHORE + '0', false);
-    writeAttribute(os, PML::Attribute::PHARM_TYPE, PML::PHARM_TYPE_LIGAND_SCOUT, true);
+    writeXMLAttribute(os, PML::Attribute::NAME, escapeXMLData(getName(cntnr), tmpString, true));
+    writeXMLAttribute(os, PML::Attribute::ID, PHARMACOPHORE_ID);
+    writeXMLAttribute(os, PML::Attribute::PHARM_TYPE, PML::PHARM_TYPE_LIGAND_SCOUT);
+
+    endXMLStartTag(os);
 }
 
 void Pharm::PMLDataWriter::endPharmacophore(std::ostream& os) const
 {
-    Internal::writeEndTag(os, PML::Element::PHARMACOPHORE, 3);
+    Internal::writeXMLEndTag(os, PML::Element::PHARMACOPHORE, 3);
 }
 
 void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContainer& cntnr)
@@ -211,54 +218,61 @@ void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const
 {
     using namespace Internal;
     
-    writeAttribute(os, PML::Attribute::NAME, name, false);
-    writeAttribute(os, PML::Attribute::FEATURE_ID, featureID++, false);
-    writeAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr), false);
-    writeAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr), false);
-    writeAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr), false);
-    writeAttribute(os, PML::Attribute::ID, "feature" + std::to_string(id), close);
+    writeXMLAttribute(os, PML::Attribute::NAME, name);
+    writeXMLAttribute(os, PML::Attribute::FEATURE_ID, featureId++);
+    writeXMLAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr));
+    writeXMLAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr));
+    writeXMLAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr));
+    writeXMLAttribute(os, PML::Attribute::ID, FEATURE_ID_PREFIX + std::to_string(id));
+
+    if (close)
+        endXMLStartTag(os);
 }
 
 void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::VOLUME_FEATURE, false, 4);
+    beginXMLStartTag(os, PML::Element::VOLUME_FEATURE, 4);
     
-    writeAttribute(os, PML::Attribute::TYPE, PML::VOLUME_TYPE_EXCLUSION, false);
-    writeAttribute(os, PML::Attribute::FEATURE_ID, featureID++, false);
-    writeAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr), false);
-    writeAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr), false);
-    writeAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr), false);
-    writeAttribute(os, PML::Attribute::ID, "feature" + std::to_string(id), true);
+    writeXMLAttribute(os, PML::Attribute::TYPE, PML::VOLUME_TYPE_EXCLUSION);
+    writeXMLAttribute(os, PML::Attribute::FEATURE_ID, featureId++);
+    writeXMLAttribute(os, PML::Attribute::OPTIONAL, getOptionalFlag(ftr));
+    writeXMLAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr));
+    writeXMLAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr));
+    writeXMLAttribute(os, PML::Attribute::ID, FEATURE_ID_PREFIX + std::to_string(id));
+
+    endXMLStartTag(os);
 
     writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
 
-    writeEndTag(os, PML::Element::VOLUME_FEATURE, 4);
+    writeXMLEndTag(os, PML::Element::VOLUME_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::POINT_FEATURE, false, 4);
+    beginXMLStartTag(os, PML::Element::POINT_FEATURE, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
 
     writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
 
-    writeEndTag(os, PML::Element::POINT_FEATURE, 4);
+    writeXMLEndTag(os, PML::Element::POINT_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::VECTOR_FEATURE, false, 4);
+    beginXMLStartTag(os, PML::Element::VECTOR_FEATURE, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, false);
-    writeAttribute(os, PML::Attribute::HAS_SYN_PROJECTED_POINT, false, false);
-    writeAttribute(os, PML::Attribute::POINTS_TO_LIGAND, points_to_lig, true);
+    writeXMLAttribute(os, PML::Attribute::HAS_SYN_PROJECTED_POINT, false);
+    writeXMLAttribute(os, PML::Attribute::POINTS_TO_LIGAND, points_to_lig);
+
+    endXMLStartTag(os);
 
     if (points_to_lig) {
         writePositionAndTolerance(os, PML::Element::FEATURE_TARGET, get3DCoordinates(ftr), getTolerance(ftr));
@@ -271,21 +285,21 @@ void Pharm::PMLDataWriter::writeVectorFeature(std::ostream& os, const Feature& f
                                   getTolerance(ftr) * VECTOR_FEATURE_TARGET_TOL_FACTOR);
     }
 
-    writeEndTag(os, PML::Element::VECTOR_FEATURE, 4);
+    writeXMLEndTag(os, PML::Element::VECTOR_FEATURE, 4);
 }
 
 void Pharm::PMLDataWriter::writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id)
 {
     using namespace Internal;
     
-    writeStartTag(os, PML::Element::PLANE_FEATURE, false, 4);
+    beginXMLStartTag(os, PML::Element::PLANE_FEATURE, 4);
 
     writeDefaultFeatureAttributes(os, ftr, name, id, true);
 
     writePositionAndTolerance(os, PML::Element::FEATURE_POSITION, get3DCoordinates(ftr), getTolerance(ftr));
     writePositionAndTolerance(os, PML::Element::FEATURE_NORMAL, getOrientation(ftr), getTolerance(ftr) * PLANE_FEATURE_SECOND_TOL_FACTOR);
 
-    writeEndTag(os, PML::Element::PLANE_FEATURE, 4);
+    writeXMLEndTag(os, PML::Element::PLANE_FEATURE, 4);
 }
 
 template <typename VE>
@@ -293,10 +307,12 @@ void Pharm::PMLDataWriter::writePositionAndTolerance(std::ostream& os, const std
 {
     using namespace Internal;
     
-    writeStartTag(os, tag, false, 5);
+    beginXMLStartTag(os, tag, 5);
 
-    writeAttribute(os, PML::Attribute::COORDS_X, pos[0], false);
-    writeAttribute(os, PML::Attribute::COORDS_Y, pos[1], false);
-    writeAttribute(os, PML::Attribute::COORDS_Z, pos[2], false);
-    writeAttribute(os, PML::Attribute::TOLERANCE, tol, true, true);
+    writeXMLAttribute(os, PML::Attribute::COORDS_X, pos[0]);
+    writeXMLAttribute(os, PML::Attribute::COORDS_Y, pos[1]);
+    writeXMLAttribute(os, PML::Attribute::COORDS_Z, pos[2]);
+    writeXMLAttribute(os, PML::Attribute::TOLERANCE, tol);
+
+    endXMLStartTag(os, true);
 }

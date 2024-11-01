@@ -37,11 +37,13 @@ namespace CDPL
         namespace CML
         {
 
-            const std::string HEADER =
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                "<cml xmlns=\"http://www.xml-cml.org/schema\" xmlns:convention=\"http://www.xml-cml.org/convention/\" "
-                "convention=\"convention:molecular\">\n";
-            const std::string FOOTER = "</cml>\n";
+            const std::string DOC_PROLOG = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                           "<cml xmlns=\"http://www.xml-cml.org/schema\" "
+                                           "xmlns:convention=\"http://www.xml-cml.org/convention/\" "
+                                           "xmlns:unit=\"http://www.xml-cml.org/unit/si/\" "
+                                           "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+                                           "convention=\"convention:molecular\">";
+            const std::string DOC_EPILOG = "</cml>";
 
             namespace Element
             {
@@ -88,6 +90,47 @@ namespace CDPL
                 const std::string ORDER             = "order";
                 
             } // namespace Attribute
+
+            namespace AttributeValue
+            {
+
+                const std::string STRING_PROP_DATA_TYPE = "xsd:string";
+                const std::string STRING_PROP_UNIT      = "unit:none";
+            } // namespace AttributeValue
+
+            namespace BondOrder
+            {
+
+                const std::string UNKNOWN   = "";
+                const std::string SINGLE_1  = "1";
+                const std::string SINGLE_2  = "S";
+                const std::string DOUBLE_1  = "2";
+                const std::string DOUBLE_2  = "D";
+                const std::string TRIPLE_1  = "3";
+                const std::string TRIPLE_2  = "T";
+                const std::string PARTIAL01 = "partial01";
+                const std::string PARTIAL12 = "partial12";
+                const std::string PARTIAL23 = "partial23";
+                const std::string H_BOND    = "hbond";
+                const std::string AROMATIC  = "A";
+            } // namespace BondOrder
+
+            namespace BondStereo
+            {
+
+                const std::string CIS     = "C";
+                const std::string TRANS   = "T";
+                const std::string WEDGED  = "W";
+                const std::string HATCHED = "H";
+            } // namespace BondStereo
+
+            namespace AtomType
+            {
+
+                const std::string DUMMY_1        = "Du";
+                const std::string DUMMY_2        = "Dummy";
+                const std::string R_GROUP_PREFIX = "R";
+            } // namespace AtomType
 
         } // namespace CML
     } // namespace Chem

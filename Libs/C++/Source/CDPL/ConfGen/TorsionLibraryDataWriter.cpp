@@ -49,65 +49,84 @@ bool ConfGen::TorsionLibraryDataWriter::write(std::ostream& os, const TorsionLib
     
     os << std::fixed << std::setprecision(2) << std::boolalpha;
 
-    writeStartTag(os, Element::LIBRARY, false);
-    writeAttribute(os, Attribute::CATEGORY_NAME, lib.getName(), true, false);
+    beginXMLStartTag(os, Element::LIBRARY);
+    
+    writeXMLAttribute(os, Attribute::CATEGORY_NAME, escapeXMLData(lib.getName(), tmpString, true));
+
+    endXMLStartTag(os);
+    
     writeCategory(os, 0, lib, true);
-    writeEndTag(os, Element::LIBRARY);
+
+    writeXMLEndTag(os, Element::LIBRARY);
 
     return os.good();
 }
 
-void ConfGen::TorsionLibraryDataWriter::writeCategory(std::ostream& os, std::size_t indent, const TorsionCategory& cat, bool contents_only) const
+void ConfGen::TorsionLibraryDataWriter::writeCategory(std::ostream& os, std::size_t indent, const TorsionCategory& cat, bool contents_only)
 {
     using namespace TorsionLibraryFormatData;
     using namespace Internal;
     using namespace std::placeholders;
     
     if (!contents_only) {
-        writeStartTag(os, Element::CATEGORY, false, indent);
-        writeAttribute(os, Attribute::CATEGORY_NAME, cat.getName(), false, false);
-    
-        if (!cat.getMatchPatternString().empty())
-            writeAttribute(os, Attribute::CATEGORY_PATTERN, cat.getMatchPatternString(), true, false);
+        beginXMLStartTag(os, Element::CATEGORY, indent);
 
-        else if (cat.getMatchPattern())
-            writeAttribute(os, Attribute::CATEGORY_PATTERN, getSMARTSPattern(*cat.getMatchPattern()), true, false);
+        writeXMLAttribute(os, Attribute::CATEGORY_NAME, cat.getName());
 
-        else if (cat.getBondAtom1Type() != Chem::AtomType::UNKNOWN && cat.getBondAtom2Type() != Chem::AtomType::UNKNOWN) {
-            writeAttribute(os, Attribute::CATEGORY_ATOM_TYPE1, Chem::AtomDictionary::getSymbol(cat.getBondAtom1Type()), false, false);
-            writeAttribute(os, Attribute::CATEGORY_ATOM_TYPE2, Chem::AtomDictionary::getSymbol(cat.getBondAtom2Type()), true, false);
+        bool have_cat_bond_spec = false;
+        
+        if (!cat.getMatchPatternString().empty()) {
+            writeXMLAttribute(os, Attribute::CATEGORY_PATTERN, escapeXMLData(cat.getMatchPatternString(), tmpString, true, '&'));
+            have_cat_bond_spec = true;
+            
+        } else if (cat.getMatchPattern()) {
+            writeXMLAttribute(os, Attribute::CATEGORY_PATTERN, getSMARTSPattern(*cat.getMatchPattern()));
+            have_cat_bond_spec = true;
+        }
+        
+        if (cat.getBondAtom1Type() != Chem::AtomType::UNKNOWN && cat.getBondAtom2Type() != Chem::AtomType::UNKNOWN) {
+            writeXMLAttribute(os, Attribute::CATEGORY_ATOM_TYPE1, Chem::AtomDictionary::getSymbol(cat.getBondAtom1Type()));
+            writeXMLAttribute(os, Attribute::CATEGORY_ATOM_TYPE2, Chem::AtomDictionary::getSymbol(cat.getBondAtom2Type()));
+            have_cat_bond_spec = true;
+        }
 
-        } else
+        if (!have_cat_bond_spec)
             throw Base::IOError("TorsionLibraryDataWriter: missing category pattern or bond atom types");
+
+        endXMLStartTag(os);
     }
 
-    std::for_each(cat.getCategoriesBegin(), cat.getCategoriesEnd(),
-                  std::bind(&TorsionLibraryDataWriter::writeCategory, this, std::ref(os), indent + 1, _1, false));
     std::for_each(cat.getRulesBegin(), cat.getRulesEnd(),
                   std::bind(&TorsionLibraryDataWriter::writeRule, this, std::ref(os), indent + 1, _1));
 
+    std::for_each(cat.getCategoriesBegin(), cat.getCategoriesEnd(),
+                  std::bind(&TorsionLibraryDataWriter::writeCategory, this, std::ref(os), indent + 1, _1, false));
+
     if (!contents_only)
-        writeEndTag(os, Element::CATEGORY, indent);
+        writeXMLEndTag(os, Element::CATEGORY, indent);
 }
 
-void ConfGen::TorsionLibraryDataWriter::writeRule(std::ostream& os, std::size_t indent, const TorsionRule& rule) const
+void ConfGen::TorsionLibraryDataWriter::writeRule(std::ostream& os, std::size_t indent, const TorsionRule& rule)
 {
     using namespace TorsionLibraryFormatData;
     using namespace Internal;
     
-    writeStartTag(os, Element::RULE, false, indent);
+    beginXMLStartTag(os, Element::RULE, indent);
 
     if (!rule.getMatchPatternString().empty())
-        writeAttribute(os, Attribute::RULE_PATTERN, rule.getMatchPatternString(), true, false);
+        writeXMLAttribute(os, Attribute::RULE_PATTERN, escapeXMLData(rule.getMatchPatternString(), tmpString, true, '&'));
 
     else if (rule.getMatchPattern())
-        writeAttribute(os, Attribute::RULE_PATTERN, getSMARTSPattern(*rule.getMatchPattern()), true, false);
+        writeXMLAttribute(os, Attribute::RULE_PATTERN, getSMARTSPattern(*rule.getMatchPattern()));
 
     else
         throw Base::IOError("TorsionLibraryDataWriter: missing rule pattern");
 
+    endXMLStartTag(os);
+    
     writeAngleList(os, indent + 1, rule);
-    writeEndTag(os, Element::RULE, indent);
+    
+    writeXMLEndTag(os, Element::RULE, indent);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeAngleList(std::ostream& os, std::size_t indent, const TorsionRule& rule) const
@@ -115,13 +134,14 @@ void ConfGen::TorsionLibraryDataWriter::writeAngleList(std::ostream& os, std::si
     using namespace TorsionLibraryFormatData;
     using namespace Internal;
     
-    writeStartTag(os, Element::ANGLE_LIST, true, indent);
+    beginXMLStartTag(os, Element::ANGLE_LIST, indent);
+    endXMLStartTag(os);
     
     std::for_each(rule.getAnglesBegin(), rule.getAnglesEnd(),
                   std::bind(&TorsionLibraryDataWriter::writeAngleEntry, this,
                             std::ref(os), indent + 1, std::placeholders::_1));
 
-    writeEndTag(os, Element::ANGLE_LIST, indent);
+    writeXMLEndTag(os, Element::ANGLE_LIST, indent);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeAngleEntry(std::ostream& os, std::size_t indent, const TorsionRule::AngleEntry& angle_entry) const
@@ -129,11 +149,14 @@ void ConfGen::TorsionLibraryDataWriter::writeAngleEntry(std::ostream& os, std::s
     using namespace TorsionLibraryFormatData;
     using namespace Internal;
     
-    writeStartTag(os, Element::ANGLE, false, indent);
-    writeAttribute(os, Attribute::ANGLE_VALUE, angle_entry.getAngle(), false, true);
-    writeAttribute(os, Attribute::ANGLE_TOLERANCE1, angle_entry.getTolerance1(), false, true);
-    writeAttribute(os, Attribute::ANGLE_TOLERANCE2, angle_entry.getTolerance2(), false, true);
-    writeAttribute(os, Attribute::ANGLE_SCORE, angle_entry.getScore(), true, true);
+    beginXMLStartTag(os, Element::ANGLE, indent);
+    
+    writeXMLAttribute(os, Attribute::ANGLE_VALUE, angle_entry.getAngle());
+    writeXMLAttribute(os, Attribute::ANGLE_TOLERANCE1, angle_entry.getTolerance1());
+    writeXMLAttribute(os, Attribute::ANGLE_TOLERANCE2, angle_entry.getTolerance2());
+    writeXMLAttribute(os, Attribute::ANGLE_SCORE, angle_entry.getScore());
+
+    endXMLStartTag(os, true);
 }
 
 std::string ConfGen::TorsionLibraryDataWriter::getSMARTSPattern(const Chem::MolecularGraph& molgraph) const

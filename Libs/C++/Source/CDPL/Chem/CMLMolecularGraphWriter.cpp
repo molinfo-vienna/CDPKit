@@ -38,7 +38,10 @@ using namespace CDPL;
 Chem::CMLMolecularGraphWriter::CMLMolecularGraphWriter(std::ostream& os): 
     output(os), state(os.good()), writer(new CMLDataWriter(*this)) {}
 
-Chem::CMLMolecularGraphWriter::~CMLMolecularGraphWriter() {}
+Chem::CMLMolecularGraphWriter::~CMLMolecularGraphWriter()
+{
+    close();
+}
 
 Base::DataWriter<Chem::MolecularGraph>& Chem::CMLMolecularGraphWriter::write(const MolecularGraph& molgraph)
 {
@@ -64,4 +67,10 @@ Chem::CMLMolecularGraphWriter::operator const void*() const
 bool Chem::CMLMolecularGraphWriter::operator!() const
 {
     return !state;
+}
+
+
+void Chem::CMLMolecularGraphWriter::close()
+{
+    writer->close(output);
 }

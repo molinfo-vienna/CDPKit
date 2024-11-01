@@ -38,8 +38,8 @@ namespace CDPL
         {
             
             
-            const std::string HEADER = "<ElementContainer activeResult=\"-1\">\n <ContainerPharmacophores>";
-            const std::string FOOTER = " </ContainerPharmacophores>\n</ElementContainer>";
+            const std::string DOC_PROLOG = "<ElementContainer activeResult=\"-1\">\n <ContainerPharmacophores>";
+            const std::string DOC_EPILOG = " </ContainerPharmacophores>\n</ElementContainer>";
 
             const std::string DEFAULT_FLAG_CODE       = "111000000";
             const std::string PHARM_TYPE_LIGAND_SCOUT = "LIGAND_SCOUT";
