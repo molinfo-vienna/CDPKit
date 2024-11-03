@@ -69,7 +69,7 @@ namespace CDPL
             bool writeAtomParity(std::ostream& os, const Atom& atom, const MolecularGraph& molgraph);
                 
             void writeBonds(std::ostream& os, const MolecularGraph& molgraph);
-            bool writeBondStereo(std::ostream& os, const Bond& bond, const MolecularGraph& molgraph);
+            bool writeBondStereo(std::ostream& os, const Bond& bond, const MolecularGraph& molgraph, bool write_sf);
                 
             void writeProperties(std::ostream& os, const MolecularGraph& molgraph);
 
