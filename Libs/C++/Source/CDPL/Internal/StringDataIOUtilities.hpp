@@ -25,7 +25,8 @@
 #ifndef CDPL_INTERNAL_STRINGDATAIOUTILITIES_HPP
 #define CDPL_INTERNAL_STRINGDATAIOUTILITIES_HPP
 
-#include <iosfwd>
+#include <istream>
+#include <ostream>
 #include <cstddef>
 #include <string>
 
@@ -111,6 +112,25 @@ namespace CDPL
 
         inline
         const std::string& escapeXMLData(const std::string& data, std::string& esc_data, bool attr_val, char keep_char = 0);
+
+        struct XMLTagInfo
+        {
+
+            enum Type
+            {
+                UNDEF,
+                START,
+                END,
+                EMPTY
+            };
+
+            std::string            name;
+            std::size_t            nameOffset;
+            Type                   type;
+            std::istream::pos_type streamPos;
+        };
+
+        inline bool getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::string* read_data = nullptr);
         
     } // namespace Internal
 } // namespace CDPL

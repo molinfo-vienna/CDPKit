@@ -24,8 +24,6 @@
 
 #include <algorithm>
 #include <iterator>
-#include <istream>
-#include <ostream>
 #include <sstream>
 #include <iomanip>
 #include <locale>
@@ -512,4 +510,172 @@ const std::string& CDPL::Internal::escapeXMLData(const std::string& data, std::s
     }
     
     return esc_data;
+}
+
+bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::string* read_data)
+{
+    static constexpr int EOF_ = std::istream::traits_type::eof();
+
+    enum State
+    {
+        START,
+        TAG_NAME,
+        TAG_NAME_END,
+        EMPTY_TAG_END,
+        ATTR_NAME,
+        ATTR_VAL_DQ,
+        ATTR_VAL_SQ
+    };
+    
+    auto state = START;
+    auto rdbuf = is.rdbuf();
+    auto& locale = std::locale::classic();
+    auto exit = false;
+    
+    while (!exit) {
+        auto tmp = rdbuf->sbumpc();
+
+        if (std::istream::traits_type::eq_int_type(tmp, EOF_))
+            return false;
+        
+        auto c = std::istream::traits_type::to_char_type(tmp);
+
+        if (read_data)
+            read_data->push_back(c);
+        
+        switch (state) {
+
+            case START:
+                if (c != '<')
+                    continue;
+                
+                state = TAG_NAME;
+                    
+                tag_info.name.clear();
+                tag_info.nameOffset = 0;
+                tag_info.type = XMLTagInfo::UNDEF;
+                tag_info.streamPos = is.tellg() - std::istream::pos_type(1);
+                continue;
+
+            case TAG_NAME:
+                if (tag_info.name.empty()) {
+                    if (c == '/') {
+                        tag_info.type = XMLTagInfo::END;
+                        continue;
+                    }
+
+                    if ((c != '_') && !std::isalpha(c, locale)) {
+                        state = START;
+                        continue;
+                    }
+
+                    if (tag_info.type == XMLTagInfo::UNDEF)
+                        tag_info.type = XMLTagInfo::START;
+
+                    tag_info.name.push_back(c);
+                    continue;
+                }
+
+                switch (c) {
+
+                    case '/':
+                    case '>':
+                        rdbuf->sungetc();
+                        state = TAG_NAME_END;
+                        continue;
+
+                    case ':':
+                        tag_info.nameOffset = tag_info.name.size() + 1;
+                        
+                    case '_':
+                    case '-':
+                    case '.':
+                        tag_info.name.push_back(c);
+                        continue;
+                }
+                
+                if (std::isspace(c, locale)) {
+                    state = TAG_NAME_END;
+                    continue;
+                }
+                    
+                if (!std::isalnum(c, locale)) {
+                    rdbuf->sungetc();
+                    state = START;
+
+                } else
+                    tag_info.name.push_back(c);
+
+                continue;
+
+            case TAG_NAME_END:
+                if (std::isspace(c, locale))
+                    continue;
+
+                if (c == '>') {
+                    exit = true;
+                    continue;
+                }
+
+                if (c == '/') {
+                    state = EMPTY_TAG_END;
+                    continue;
+                }
+
+                rdbuf->sungetc();
+                state = ATTR_NAME;
+                continue;
+
+            case EMPTY_TAG_END:
+                if (c == '>') {
+                    tag_info.type = XMLTagInfo::EMPTY;
+                    exit = true;
+                    continue;
+                }
+
+                rdbuf->sungetc();
+                state = START;
+                continue;
+
+            case ATTR_NAME:
+                if (std::isspace(c, locale)) {
+                    state = TAG_NAME_END;
+                    continue;
+                }
+
+                if (c == '"') {
+                    state = ATTR_VAL_DQ;
+                    continue;
+                }
+
+                if (c == '\'') {
+                    state = ATTR_VAL_SQ;
+                    continue;
+                }
+
+                if (c == '>') {
+                    exit = true;
+                    continue;
+                }
+
+                if (c == '/')
+                    state = EMPTY_TAG_END;
+
+                continue;
+
+            case ATTR_VAL_DQ:
+                if (c == '"')
+                    state = TAG_NAME_END;
+                
+                continue;
+
+            case ATTR_VAL_SQ:
+                if (c == '\'')
+                    state = TAG_NAME_END;
+                
+                continue;
+        }
+    }
+
+    return true;
 }
