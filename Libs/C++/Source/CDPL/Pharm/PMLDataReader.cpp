@@ -103,21 +103,23 @@ bool Pharm::PMLDataReader::hasMoreData(std::istream& is)
 
 bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& pharm)
 {
+    using namespace Internal;
+    
     init();
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
+    if (!skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
         return false;
 
     pharmData.clear();
 
-    if (!Internal::readToString(is, PHARMACOPHORE_END, pharmData, "PMLDataReader", true)) {
+    if (!readToString(is, PHARMACOPHORE_END, pharmData, "PMLDataReader", true)) {
         if (strictErrorChecking)
             throw Base::IOError("PMLDataReader: error while reading pharmacophore, no closing pharmacophore tag found");
 
         return false;
     }
 
-    pharmDocument.parse<rapidxml::parse_trim_whitespace>(&pharmData[0]);
+    pharmDocument.parse<0>(&pharmData[0]);
     
     const XMLNode* pharm_node = pharmDocument.first_node(PML::Element::PHARMACOPHORE.c_str());
 
@@ -132,12 +134,14 @@ bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
 
 bool Pharm::PMLDataReader::skipPharmacophore(std::istream& is)
 {
+    using namespace Internal;
+    
     init();
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
-        return false;
+    if (!skipToString(is, PHARMACOPHORE_START, "PMLDataReader", false))
+        throw Base::IOError("PMLDataReader: unexpected end of input");
 
-    if (!Internal::skipToString(is, PHARMACOPHORE_END, "PMLDataReader", true)) {
+    if (!skipToString(is, PHARMACOPHORE_END, "PMLDataReader", true)) {
         if (strictErrorChecking)
             throw Base::IOError("PMLDataReader: error while skipping input pharmacophore, no closing pharmacophore tag found");
 
@@ -358,7 +362,6 @@ bool Pharm::PMLDataReader::getPosition(const XMLNode* ftr_node, const std::strin
     if (attr)
         vec[2] = parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                      "PMLDataReader: error while parsing vector z-ccordinate");
-
     return true;
 }
 
@@ -376,6 +379,5 @@ bool Pharm::PMLDataReader::getTolerance(const XMLNode* ftr_node, const std::stri
 
     tol = Internal::parseNumber<double>(attr->value(), attr->value() + attr->value_size(), 
                                         "PMLDataReader: error while parsing feature tolerance");
-
     return true;
 }
