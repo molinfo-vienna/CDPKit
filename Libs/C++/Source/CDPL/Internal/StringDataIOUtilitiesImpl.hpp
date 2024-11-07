@@ -73,6 +73,8 @@ bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, cons
 {
     static constexpr int EOF_ = std::istream::traits_type::eof();
 
+    checkStreamState(is, err_msg);
+ 
     std::size_t str_len = str.length();
     auto rdbuf = is.rdbuf();
     
@@ -88,13 +90,16 @@ bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, cons
 
             if (std::istream::traits_type::to_char_type(tmp) != str[i]) {
                 is.seekg(last_spos + std::istream::pos_type(1));
+                checkStreamState(is, err_msg);
                 break;
             }
         }
     
         if (i == str_len) {
-            if (!pos_after)
+            if (!pos_after) {
                 is.seekg(last_spos);
+                checkStreamState(is, err_msg);
+            }
             
             return true;
         }
@@ -106,6 +111,8 @@ bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, cons
 bool CDPL::Internal::readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg, bool inc_str)
 {
     static constexpr int EOF_ = std::istream::traits_type::eof();
+
+    checkStreamState(is, err_msg);
 
     std::size_t str_len = str.length();
     auto rdbuf = is.rdbuf();
@@ -512,7 +519,7 @@ const std::string& CDPL::Internal::escapeXMLData(const std::string& data, std::s
     return esc_data;
 }
 
-bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::string* read_data)
+bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, const char* err_msg, std::string* read_data)
 {
     static constexpr int EOF_ = std::istream::traits_type::eof();
 
@@ -526,6 +533,8 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
         ATTR_VAL_DQ,
         ATTR_VAL_SQ
     };
+
+    checkStreamState(is, err_msg);
     
     auto state = START;
     auto rdbuf = is.rdbuf();
@@ -552,7 +561,8 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
                 state = TAG_NAME;
                     
                 tag_info.name.clear();
-                tag_info.nameOffset = 0;
+                tag_info.ns.clear();
+                
                 tag_info.type = XMLTagInfo::UNDEF;
                 tag_info.streamPos = is.tellg() - std::istream::pos_type(1);
                 continue;
@@ -581,11 +591,18 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
                     case '/':
                     case '>':
                         rdbuf->sungetc();
+
+                        if (read_data)
+                            read_data->pop_back();
+
                         state = TAG_NAME_END;
                         continue;
 
                     case ':':
-                        tag_info.nameOffset = tag_info.name.size() + 1;
+                        if (tag_info.ns.empty()) {
+                            tag_info.name.swap(tag_info.ns);
+                            continue;
+                        }
                         
                     case '_':
                     case '-':
@@ -601,6 +618,10 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
                     
                 if (!std::isalnum(c, locale)) {
                     rdbuf->sungetc();
+
+                    if (read_data)
+                        read_data->pop_back();
+                    
                     state = START;
 
                 } else
@@ -623,6 +644,10 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
                 }
 
                 rdbuf->sungetc();
+
+                if (read_data)
+                    read_data->pop_back();
+
                 state = ATTR_NAME;
                 continue;
 
@@ -634,6 +659,10 @@ bool CDPL::Internal::getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::
                 }
 
                 rdbuf->sungetc();
+
+                if (read_data)
+                    read_data->pop_back();              
+
                 state = START;
                 continue;
 

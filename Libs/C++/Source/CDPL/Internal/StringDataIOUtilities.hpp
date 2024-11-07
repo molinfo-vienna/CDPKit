@@ -125,12 +125,12 @@ namespace CDPL
             };
 
             std::string            name;
-            std::size_t            nameOffset;
+            std::string            ns;
             Type                   type;
             std::istream::pos_type streamPos;
         };
 
-        inline bool getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, std::string* read_data = nullptr);
+        inline bool getNextXMLTag(std::istream& is, XMLTagInfo& tag_info, const char* err_msg = "Error", std::string* read_data = nullptr);
         
     } // namespace Internal
 } // namespace CDPL

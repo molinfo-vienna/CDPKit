@@ -26,6 +26,11 @@
 #define CDPL_CHEM_CMLDATAREADER_HPP
 
 #include <iosfwd>
+#include <string>
+
+#include "CDPL/Internal/StringDataIOUtilities.hpp"
+
+#include "RapidXML/rapidxml.hpp"
 
 
 namespace CDPL
@@ -49,15 +54,25 @@ namespace CDPL
             CMLDataReader(const Base::DataIOBase& io_base):
                 ioBase(io_base) {}
 
-            bool readMolecule(std::istream&, Molecule&);
-            bool skipMolecule(std::istream&);
-            bool hasMoreData(std::istream&) const;
+            bool readMolecule(std::istream& is, Molecule& mol);
+            bool skipMolecule(std::istream& is);
+            bool hasMoreData(std::istream& is);
 
           private:
-            void init(std::istream&);
-           
+            typedef rapidxml::xml_document<char>  XMLDocument;
+            typedef rapidxml::xml_node<char>      XMLNode;
+            typedef rapidxml::xml_attribute<char> XMLAttribute;
+            typedef Internal::XMLTagInfo          XMLTagInfo;
+
+            void init(std::istream& is);
+
+            void readMoleculeCMLData(std::istream& is, bool save_data);
+
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
+            XMLTagInfo              tagInfo;
+            std::string             molData;
+            XMLDocument             molDocument;
         };
     } // namespace Chem
 } // namespace CDPL
