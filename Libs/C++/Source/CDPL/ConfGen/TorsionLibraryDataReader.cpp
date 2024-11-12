@@ -87,7 +87,7 @@ void ConfGen::TorsionLibraryDataReader::processData(char* data, TorsionLibrary& 
     const XMLNode* lib_node = torLibDocument.first_node(Element::LIBRARY.c_str());
 
     if (!lib_node)
-        throw Base::IOError("TorsionLibraryDataReader: <" + Element::LIBRARY + "> document root node not found");
+        throw Base::IOError("TorsionLibraryDataReader: <" + Element::LIBRARY + "> element not found");
 
     processCategory(lib_node, lib);
 }
