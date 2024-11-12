@@ -876,7 +876,7 @@ void Chem::MDLDataReader::readCTabV2000(std::istream& is, Molecule& mol)
     readCTabV2000AtomBlock(is, mol, atom_index_offs);
 
     if (readCTabV2000BondBlock(is, mol, atom_index_offs))
-        kekulizeUndefBonds(mol);
+        kekulizeBonds(mol);
 
     readCTabV2000AListBlock(is, mol, atom_index_offs);
     readCTabV2000STextBlock(is);
@@ -2707,7 +2707,7 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
     readCTabV3000AtomBlock(is, mol);
     
     if (readCTabV3000BondBlock(is, mol))
-        kekulizeUndefBonds(mol);
+        kekulizeBonds(mol);
 
     readPastCTabV3000BlockEnd(is);
 
@@ -3993,7 +3993,7 @@ void Chem::MDLDataReader::convertParities(Molecule& mol) const
     }
 }
 
-void Chem::MDLDataReader::kekulizeUndefBonds(Molecule& mol) const
+void Chem::MDLDataReader::kekulizeBonds(Molecule& mol) const
 {
-    kekulizeBonds(mol);
+    Chem::kekulizeBonds(mol);
 }

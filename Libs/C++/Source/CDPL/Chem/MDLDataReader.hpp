@@ -213,7 +213,7 @@ namespace CDPL
 
             void fixAtomCoordsDim(Molecule&, std::size_t) const;
             void addAtomQueryHCountConstraints() const;
-            void kekulizeUndefBonds(Molecule&) const;
+            void kekulizeBonds(Molecule&) const;
             void convertParities(Molecule&) const;
 
             typedef std::map<std::size_t, std::size_t>          AtomIndexMap;
