@@ -114,17 +114,17 @@ bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
 
     if (!readToString(is, PHARMACOPHORE_END, pharmData, "PMLDataReader", true)) {
         if (strictErrorChecking)
-            throw Base::IOError("PMLDataReader: error while reading pharmacophore, no closing pharmacophore tag found");
+            throw Base::IOError("PMLDataReader: " + PHARMACOPHORE_END + " tag not found");
 
         return false;
     }
 
-    pharmDocument.parse<0>(&pharmData[0]);
+    pharmDocument.parse<rapidxml::parse_trim_whitespace>(&pharmData[0]);
     
     const XMLNode* pharm_node = pharmDocument.first_node(PML::Element::PHARMACOPHORE.c_str());
 
     if (!pharm_node)
-        throw Base::IOError("PMLDataReader: error while reading pharmacophore, pharmacophore node not accessible");
+        throw Base::IOError("PMLDataReader: <" + PML::Element::PHARMACOPHORE + "> element not found");
 
     getPharmacophoreProperties(pharm_node, pharm);
     extractFeatures(pharm_node, pharm);
@@ -167,16 +167,16 @@ void Pharm::PMLDataReader::extractFeatures(const XMLNode* pharm_node, Pharmacoph
     for (const XMLNode* node = pharm_node->first_node(); node; node = node->next_sibling()) {
         const char* node_name = node->name();
 
-        if (std::strcmp(node_name, PML::Element::POINT_FEATURE.c_str()) == 0)
+        if (node_name == PML::Element::POINT_FEATURE)
             addPointFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::Element::PLANE_FEATURE.c_str()) == 0)
+        else if (node_name == PML::Element::PLANE_FEATURE)
             addPlaneFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::Element::VECTOR_FEATURE.c_str()) == 0)
+        else if (node_name == PML::Element::VECTOR_FEATURE)
             addVectorFeature(node, pharm);
 
-        else if (std::strcmp(node_name, PML::Element::VOLUME_FEATURE.c_str()) == 0)
+        else if (node_name == PML::Element::VOLUME_FEATURE)
             addVolumeFeature(node, pharm);
     }
 }
@@ -282,7 +282,7 @@ void Pharm::PMLDataReader::addVolumeFeature(const XMLNode* ftr_node, Pharmacopho
     if (!attr)
         return;
 
-    if (std::strcmp(attr->value(), PML::VOLUME_TYPE_EXCLUSION.c_str()) != 0)
+    if (attr->value() != PML::VOLUME_TYPE_EXCLUSION)
         return;
 
     Feature& ftr = pharm.addFeature();
