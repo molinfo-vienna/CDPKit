@@ -67,28 +67,41 @@ namespace CDPL
             namespace Attribute
             {
 
-                const std::string ID                = "id";
-                const std::string FORMAL_CHARGE     = "formalCharge";
-                const std::string SPIN_MULTIPLICITY = "spinMultiplicity";
-                const std::string CHIRALITY         = "chirality";
-                const std::string COUNT             = "count";
-                const std::string CONCISE           = "concise";
-                const std::string INLINE            = "inline";
-                const std::string TITLE             = "title";
-                const std::string DICT_REF          = "dictRef";
-                const std::string UNIT              = "units";
-                const std::string DATA_TYPE         = "dataType";
-                const std::string ELEMENT_TYPE      = "elementType";
-                const std::string X2                = "x2";
-                const std::string Y2                = "y2";
-                const std::string X3                = "x3";
-                const std::string Y3                = "y3";
-                const std::string Z3                = "z3";
-                const std::string ISOTOPE           = "isotopeNumber";
-                const std::string REF_ATOMS4        = "atomRefs4";
-                const std::string REF_ATOMS2        = "atomRefs2";
-                const std::string ORDER             = "order";
-                
+                const std::string ID                   = "id";
+                const std::string ATOM_ID_ARRAY        = "atomID";
+                const std::string FORMAL_CHARGE        = "formalCharge";
+                const std::string FORMAL_CHARGE_ARRAY  = "formalCharge";
+                const std::string SPIN_MULTIPLICITY    = "spinMultiplicity";
+                const std::string CHIRALITY            = "chirality";
+                const std::string COUNT                = "count";
+                const std::string HYDROGEN_COUNT       = "hydrogenCount";
+                const std::string HYDROGEN_COUNT_ARRAY = "hydrogenCount";
+                const std::string CONCISE              = "concise";
+                const std::string INLINE               = "inline";
+                const std::string TITLE                = "title";
+                const std::string DICT_REF             = "dictRef";
+                const std::string UNIT                 = "units";
+                const std::string DATA_TYPE            = "dataType";
+                const std::string ELEMENT_TYPE         = "elementType";
+                const std::string ELEMENT_TYPE_ARRAY   = "elementType";
+                const std::string X2                   = "x2";
+                const std::string X2_ARRAY             = "x2";
+                const std::string Y2                   = "y2";
+                const std::string Y2_ARRAY             = "y2";
+                const std::string X3                   = "x3";
+                const std::string X3_ARRAY             = "x3";
+                const std::string Y3                   = "y3";
+                const std::string Y3_ARRAY             = "y3";
+                const std::string Z3                   = "z3";
+                const std::string Z3_ARRAY             = "z3";
+                const std::string ISOTOPE              = "isotopeNumber";
+                const std::string REF_ATOM1_ARRAY      = "atomRef1";
+                const std::string REF_ATOM2_ARRAY      = "atomRef2";
+                const std::string REF_ATOMS4           = "atomRefs4";
+                const std::string REF_ATOMS2           = "atomRefs2";
+                const std::string ORDER                = "order";
+                const std::string ORDER_ARRAY          = "order";
+
             } // namespace Attribute
 
             namespace AttributeValue

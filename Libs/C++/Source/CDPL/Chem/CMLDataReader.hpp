@@ -27,7 +27,13 @@
 
 #include <iosfwd>
 #include <string>
+#include <string_view>
+#include <cstddef>
+#include <vector>
+#include <unordered_map>
+#include <utility>
 
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "RapidXML/rapidxml.hpp"
@@ -46,7 +52,7 @@ namespace CDPL
     {
 
         class Molecule;
-        
+     
         class CMLDataReader
         {
 
@@ -59,20 +65,46 @@ namespace CDPL
             bool hasMoreData(std::istream& is);
 
           private:
-            typedef rapidxml::xml_document<char>  XMLDocument;
-            typedef rapidxml::xml_node<char>      XMLNode;
-            typedef rapidxml::xml_attribute<char> XMLAttribute;
-            typedef Internal::XMLTagInfo          XMLTagInfo;
+            typedef rapidxml::xml_node<char> XMLNode;
 
-            void init(std::istream& is);
+            void init();
 
-            void readMoleculeCMLData(std::istream& is, bool save_data);
+            void readMoleculeData(std::istream& is, bool save_data);
+
+            void readMolecule(const XMLNode* mol_node, Molecule& mol, bool top_level);
+
+            void readAtoms(const XMLNode* atom_arr_node, Molecule& mol);
+            void readArrayStyleAtoms(const XMLNode* atom_arr_node, Molecule& mol);
+            void addAtom(const XMLNode* atom_node, Molecule& mol);
+            
+            void readBonds(const XMLNode* bond_arr_node, Molecule& mol);
+            bool readArrayStyleBonds(const XMLNode* bond_arr_node, Molecule& mol) const;
+            bool addBond(const XMLNode* bond_node, Molecule& mol) const;
+            void setBondStereo(const XMLNode* stereo_node, Bond& bond, Molecule& mol) const;
+            
+            void setName(const XMLNode* name_node, Molecule& mol) const;
+            void addProperty(const XMLNode* prop_node, Molecule& mol) const;
+        
+            void setAtomConfigurations(Molecule& mol) const;
+            void perceiveBondOrders(Molecule& mol, std::size_t bond_offs);
+            
+            const XMLNode* getChildNode(const XMLNode* prnt_node, const std::string& name) const;
+
+            typedef rapidxml::xml_document<char>                      XMLDocument;
+            typedef rapidxml::xml_attribute<char>                     XMLAttribute;
+            typedef Internal::XMLTagInfo                              XMLTagInfo;
+            typedef std::pair<std::size_t, const XMLNode*>            IndexNodePair;
+            typedef std::vector<IndexNodePair>                        IndexNodePairList;
+            typedef std::unordered_map<std::string_view, std::size_t> AtomIDToIndexMap;
 
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             XMLTagInfo              tagInfo;
             std::string             molData;
             XMLDocument             molDocument;
+            AtomIDToIndexMap        atomIDtoIndexMap;
+            IndexNodePairList       stereoAtoms;
+            Fragment                readMolGraph;
         };
     } // namespace Chem
 } // namespace CDPL
