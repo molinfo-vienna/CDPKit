@@ -91,5 +91,17 @@ void CDPLPythonChem::exportControlParameters()
         .def_readonly("COMMENT_IS_NAME", &Chem::ControlParameter::XYZ_COMMENT_IS_NAME)
         .def_readonly("XYZ_PERCEIVE_CONNECTIVITY", &Chem::ControlParameter::XYZ_PERCEIVE_CONNECTIVITY)
         .def_readonly("XYZ_PERCEIVE_BOND_ORDERS", &Chem::ControlParameter::XYZ_PERCEIVE_BOND_ORDERS)
-        .def_readonly("XYZ_CALC_FORMAL_CHARGES", &Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES);
+        .def_readonly("XYZ_CALC_FORMAL_CHARGES", &Chem::ControlParameter::XYZ_CALC_FORMAL_CHARGES)
+        .def_readonly("CML_OUTPUT_XML_DECLARATION", &Chem::ControlParameter::CML_OUTPUT_XML_DECLARATION)
+        .def_readonly("CML_OUTPUT_ELEMENT_NAMESPACE", &Chem::ControlParameter::CML_OUTPUT_ELEMENT_NAMESPACE)
+        .def_readonly("CML_OUTPUT_ATOM_PARITY", &Chem::ControlParameter::CML_OUTPUT_ATOM_PARITY)
+        .def_readonly("CML_OUTPUT_SINGLE_BOND_STEREO", &Chem::ControlParameter::CML_OUTPUT_SINGLE_BOND_STEREO)
+        .def_readonly("CML_OUTPUT_DOUBLE_BOND_STEREO", &Chem::ControlParameter::CML_OUTPUT_DOUBLE_BOND_STEREO)
+        .def_readonly("CML_OUTPUT_BOND_AROMATICITY", &Chem::ControlParameter::CML_OUTPUT_BOND_AROMATICITY)
+        .def_readonly("CML_OUTPUT_MOLECULE_NAME", &Chem::ControlParameter::CML_OUTPUT_MOLECULE_NAME)
+        .def_readonly("CML_OUTPUT_STRUCTURE_DATA", &Chem::ControlParameter::CML_OUTPUT_STRUCTURE_DATA)
+        .def_readonly("CML_OUTPUT_ISOTOPE", &Chem::ControlParameter::CML_OUTPUT_ISOTOPE)
+        .def_readonly("CML_OUTPUT_SPIN_MULTIPLICITY", &Chem::ControlParameter::CML_OUTPUT_SPIN_MULTIPLICITY)
+        .def_readonly("CML_OUTPUT_COMPACT_ATOM_DATA", &Chem::ControlParameter::CML_OUTPUT_COMPACT_ATOM_DATA)
+        .def_readonly("CML_OUTPUT_COMPACT_BOND_DATA", &Chem::ControlParameter::CML_OUTPUT_COMPACT_BOND_DATA);
 }

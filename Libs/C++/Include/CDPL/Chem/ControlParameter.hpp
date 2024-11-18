@@ -484,6 +484,78 @@ namespace CDPL
 
             extern CDPL_CHEM_API const Base::LookupKey XYZ_CALC_FORMAL_CHARGES;
 
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_XML_DECLARATION;
+
+            /**
+             * \valuetype \c std::string
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ELEMENT_NAMESPACE;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ATOM_PARITY;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_SINGLE_BOND_STEREO;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_DOUBLE_BOND_STEREO;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_BOND_AROMATICITY;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_MOLECULE_NAME;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_STRUCTURE_DATA;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_ISOTOPE;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_SPIN_MULTIPLICITY;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_COMPACT_ATOM_DATA;
+
+            /**
+             * \valuetype \c bool
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_COMPACT_BOND_DATA;
+
         } // namespace ControlParameter
     } // namespace Chem
 } // namespace CDPL

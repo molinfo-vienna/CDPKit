@@ -260,6 +260,66 @@ namespace CDPL
 
             extern CDPL_CHEM_API const bool XYZ_CALC_FORMAL_CHARGES;
 
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_XML_DECLARATION;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const std::string CML_OUTPUT_ELEMENT_NAMESPACE;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_ATOM_PARITY;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_SINGLE_BOND_STEREO;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_DOUBLE_BOND_STEREO;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_BOND_AROMATICITY;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_MOLECULE_NAME;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_STRUCTURE_DATA;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_ISOTOPE;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_SPIN_MULTIPLICITY;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_ATOM_DATA;
+
+            /**
+             * \since 1.2
+             */
+            extern CDPL_CHEM_API const bool CML_OUTPUT_COMPACT_BOND_DATA;
+            
         } // namespace ControlParameterDefault
     } // namespace Chem
 } // namespace CDPL

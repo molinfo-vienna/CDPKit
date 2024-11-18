@@ -96,6 +96,19 @@ namespace CDPL
             const bool XYZ_PERCEIVE_CONNECTIVITY                                            = true;
             const bool XYZ_PERCEIVE_BOND_ORDERS                                             = true;
             const bool XYZ_CALC_FORMAL_CHARGES                                              = true;
+
+            const bool CML_OUTPUT_XML_DECLARATION                                           = true;
+            const std::string CML_OUTPUT_ELEMENT_NAMESPACE                                  = "";
+            const bool CML_OUTPUT_ATOM_PARITY                                               = true;
+            const bool CML_OUTPUT_SINGLE_BOND_STEREO                                        = true;
+            const bool CML_OUTPUT_DOUBLE_BOND_STEREO                                        = true;
+            const bool CML_OUTPUT_BOND_AROMATICITY                                          = false;
+            const bool CML_OUTPUT_MOLECULE_NAME                                             = true;
+            const bool CML_OUTPUT_STRUCTURE_DATA                                            = true;
+            const bool CML_OUTPUT_ISOTOPE                                                   = true;
+            const bool CML_OUTPUT_SPIN_MULTIPLICITY                                         = true;
+            const bool CML_OUTPUT_COMPACT_ATOM_DATA                                         = true;
+            const bool CML_OUTPUT_COMPACT_BOND_DATA                                         = true;
         }
 
         void initControlParameterDefaults() {}
