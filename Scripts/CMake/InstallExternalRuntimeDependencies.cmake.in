@@ -59,6 +59,7 @@ function(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     list(APPEND EXCLUDE_PATTERNS
       "libstdc\\+\\+"
       "Python"
+      "libpython"
       )
   elseif(WIN32)
     list(APPEND EXCLUDE_PATTERNS
