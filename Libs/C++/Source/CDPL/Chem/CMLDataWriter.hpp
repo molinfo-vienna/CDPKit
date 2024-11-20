@@ -57,6 +57,8 @@ namespace CDPL
             void close(std::ostream& os);
             
           private:
+            void getControlParams();
+            
             void startDocument(std::ostream& os) const;
             void endDocument(std::ostream& os) const;
 
@@ -77,6 +79,18 @@ namespace CDPL
             
             const Base::DataIOBase& ioBase;
             bool                    startDoc;
+            bool                    outputXMLDecl;
+            std::string             elemNamespace;
+            bool                    outputMolName;
+            bool                    outputStructData;
+            bool                    outputAtomParity;
+            bool                    outputSBStereo;
+            bool                    outputDBStereo;
+            bool                    outputKekulized;
+            bool                    outputIsotope;
+            bool                    outputSpinMult;
+            bool                    compactAtomData;
+            bool                    compactBondData;
             std::size_t             molId;
             std::string             tmpString[2];
         };

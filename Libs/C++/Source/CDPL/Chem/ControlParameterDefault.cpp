@@ -102,7 +102,7 @@ namespace CDPL
             const bool CML_OUTPUT_ATOM_PARITY                                               = true;
             const bool CML_OUTPUT_SINGLE_BOND_STEREO                                        = true;
             const bool CML_OUTPUT_DOUBLE_BOND_STEREO                                        = true;
-            const bool CML_OUTPUT_BOND_AROMATICITY                                          = false;
+            const bool CML_OUTPUT_KEKULE_FORM                                               = true;
             const bool CML_OUTPUT_MOLECULE_NAME                                             = true;
             const bool CML_OUTPUT_STRUCTURE_DATA                                            = true;
             const bool CML_OUTPUT_ISOTOPE                                                   = true;

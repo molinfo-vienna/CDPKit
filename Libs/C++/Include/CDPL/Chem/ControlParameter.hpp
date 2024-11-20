@@ -518,7 +518,7 @@ namespace CDPL
              * \valuetype \c bool
              * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_BOND_AROMATICITY;
+            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_KEKULE_FORM;
 
             /**
              * \valuetype \c bool

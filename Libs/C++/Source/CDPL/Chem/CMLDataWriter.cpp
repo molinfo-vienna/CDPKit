@@ -29,6 +29,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -40,6 +41,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
+#include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 #include "CDPL/Internal/AtomContainerFunctions.hpp"
@@ -66,6 +68,8 @@ Chem::CMLDataWriter::CMLDataWriter(const Base::DataIOBase& io_base):
 
 bool Chem::CMLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph)
 {
+    getControlParams();
+    
     if (startDoc) {
         startDocument(os);
 
@@ -82,6 +86,7 @@ bool Chem::CMLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
     
     return os.good();
 }
+
 void Chem::CMLDataWriter::close(std::ostream& os)
 {
     if (startDoc)
@@ -89,6 +94,22 @@ void Chem::CMLDataWriter::close(std::ostream& os)
 
     endDocument(os);
     startDoc = true;
+}
+
+void Chem::CMLDataWriter::getControlParams()
+{
+    outputXMLDecl    = getCMLOutputXMLDeclarationParameter(ioBase);
+    elemNamespace    = getCMLOutputElementNamespaceParameter(ioBase);
+    outputMolName    = getCMLOutputMoleculeNameParameter(ioBase);
+    outputStructData = getCMLOutputStructureDataParameter(ioBase);
+    outputAtomParity = getCMLOutputAtomParityParameter(ioBase);
+    outputSBStereo   = getCMLOutputSingleBondStereoParameter(ioBase);
+    outputDBStereo   = getCMLOutputDoubleBondStereoParameter(ioBase);
+    outputKekulized  = getCMLOutputKekuleFormParameter(ioBase);
+    outputIsotope    = getCMLOutputIsotopeParameter(ioBase);
+    outputSpinMult   = getCMLOutputSpinMultiplicityParameter(ioBase);
+    compactAtomData  = getCMLOutputCompactAtomDataParameter(ioBase);
+    compactBondData  = getCMLOutputCompactBondDataParameter(ioBase);
 }
 
 void Chem::CMLDataWriter::startDocument(std::ostream& os) const

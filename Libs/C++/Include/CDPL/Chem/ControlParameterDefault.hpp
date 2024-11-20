@@ -288,7 +288,7 @@ namespace CDPL
             /**
              * \since 1.2
              */
-            extern CDPL_CHEM_API const bool CML_OUTPUT_BOND_AROMATICITY;
+            extern CDPL_CHEM_API const bool CML_OUTPUT_KEKULE_FORM;
 
             /**
              * \since 1.2

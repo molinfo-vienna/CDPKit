@@ -489,6 +489,138 @@ namespace CDPL
 
         CDPL_CHEM_API void clearXYZCalcFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputXMLDeclarationParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputXMLDeclarationParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputXMLDeclarationParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputXMLDeclarationParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API const std::string& getCMLOutputElementNamespaceParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputElementNamespaceParameter(Base::ControlParameterContainer& cntnr, const std::string& ns);
+
+        CDPL_CHEM_API bool hasCMLOutputElementNamespaceParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputElementNamespaceParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputAtomParityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputAtomParityParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputAtomParityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputAtomParityParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputSingleBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputSingleBondStereoParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputSingleBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputSingleBondStereoParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputDoubleBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputDoubleBondStereoParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputDoubleBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputDoubleBondStereoParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputMoleculeNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputMoleculeNameParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputMoleculeNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputMoleculeNameParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputStructureDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputStructureDataParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputStructureDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputStructureDataParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputIsotopeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputIsotopeParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputIsotopeParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputIsotopeParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputSpinMultiplicityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputSpinMultiplicityParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputSpinMultiplicityParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputSpinMultiplicityParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputCompactAtomDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputCompactAtomDataParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputCompactAtomDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputCompactAtomDataParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCMLOutputCompactBondDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setCMLOutputCompactBondDataParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasCMLOutputCompactBondDataParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearCMLOutputCompactBondDataParameter(Base::ControlParameterContainer& cntnr);
+        
     } // namespace Chem
 } // namespace CDPL
 
