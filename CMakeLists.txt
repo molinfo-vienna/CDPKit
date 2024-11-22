@@ -402,7 +402,7 @@ configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/CMakeUninstall.cmake.in" "${CMAKE_CU
 add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake")
 
-include_directories("${CDPL_INCLUDE_DIR}" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}" "${Boost_INCLUDE_DIR}")
+include_directories("${CDPL_INCLUDE_DIR}" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}" "${Boost_INCLUDE_DIRS}")
 
 if(NOT PYPI_PACKAGE_BUILD)
   install(FILES ChangeLog.txt DESTINATION "." COMPONENT Documentation)
