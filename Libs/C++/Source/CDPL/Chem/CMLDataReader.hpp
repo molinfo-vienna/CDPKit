@@ -79,13 +79,14 @@ namespace CDPL
             
             void readBonds(const XMLNode* bond_arr_node, Molecule& mol);
             bool readArrayStyleBonds(const XMLNode* bond_arr_node, Molecule& mol) const;
-            bool addBond(const XMLNode* bond_node, Molecule& mol) const;
-            void setBondStereo(const XMLNode* stereo_node, Bond& bond, Molecule& mol) const;
+            bool addBond(const XMLNode* bond_node, Molecule& mol);
             
             void setName(const XMLNode* name_node, Molecule& mol) const;
             void addProperty(const XMLNode* prop_node, Molecule& mol) const;
         
-            void setAtomConfigurations(Molecule& mol) const;
+            void postprocStereoAtoms(Molecule& mol) const;
+            void postprocStereoBonds(Molecule& mol) const;
+            void postprocStereoBond(const XMLNode* stereo_node, Bond& bond, Molecule& mol) const;
             void perceiveBondOrders(Molecule& mol, std::size_t bond_offs);
             
             const XMLNode* getChildNode(const XMLNode* prnt_node, const std::string& name) const;
@@ -104,6 +105,7 @@ namespace CDPL
             XMLDocument             molDocument;
             AtomIDToIndexMap        atomIDtoIndexMap;
             IndexNodePairList       stereoAtoms;
+            IndexNodePairList       stereoBonds;
             Fragment                readMolGraph;
         };
     } // namespace Chem

@@ -441,12 +441,17 @@ void CDPL::Internal::writeFloatNumber(std::ostream& os, std::size_t field_size, 
     os << val_str;
 }
 
-void CDPL::Internal::beginXMLStartTag(std::ostream& os, const std::string& tag, std::size_t indent)
+void CDPL::Internal::beginXMLStartTag(std::ostream& os, const std::string& tag, std::size_t indent, const std::string& ns)
 {
     if (indent > 0)
         writeWhitespace(os, indent);
 
-    os << '<' << tag;
+    os << '<';
+
+    if (!ns.empty())
+        os << ns << ':';
+    
+    os << tag;
 }
 
 void CDPL::Internal::endXMLStartTag(std::ostream& os, bool empty, bool write_nl)
@@ -460,12 +465,17 @@ void CDPL::Internal::endXMLStartTag(std::ostream& os, bool empty, bool write_nl)
         os << '\n';
 }
 
-void CDPL::Internal::writeXMLEndTag(std::ostream& os, const std::string& tag, std::size_t indent)
+void CDPL::Internal::writeXMLEndTag(std::ostream& os, const std::string& tag, std::size_t indent, const std::string& ns)
 {
     if (indent > 0)
         writeWhitespace(os, indent);
 
-    os << "</" << tag << ">\n";
+    os << "</";
+
+    if (!ns.empty())
+        os << ns << ':';
+  
+    os << tag << ">\n";
 }
 
 template <typename T>

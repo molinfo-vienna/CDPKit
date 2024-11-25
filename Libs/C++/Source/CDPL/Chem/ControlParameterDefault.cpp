@@ -107,8 +107,8 @@ namespace CDPL
             const bool CML_OUTPUT_STRUCTURE_DATA                                            = true;
             const bool CML_OUTPUT_ISOTOPE                                                   = true;
             const bool CML_OUTPUT_SPIN_MULTIPLICITY                                         = true;
-            const bool CML_OUTPUT_COMPACT_ATOM_DATA                                         = true;
-            const bool CML_OUTPUT_COMPACT_BOND_DATA                                         = true;
+            const bool CML_OUTPUT_COMPACT_ATOM_DATA                                         = false;
+            const bool CML_OUTPUT_COMPACT_BOND_DATA                                         = false;
         }
 
         void initControlParameterDefaults() {}

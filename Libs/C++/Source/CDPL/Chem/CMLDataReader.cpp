@@ -165,6 +165,7 @@ void Chem::CMLDataReader::readMolecule(const XMLNode* mol_node, Molecule& mol, b
 {
     atomIDtoIndexMap.clear();
     stereoAtoms.clear();
+    stereoBonds.clear();
 
     auto init_atom_count = mol.getNumAtoms();
     auto init_bond_count = mol.getNumBonds();
@@ -175,6 +176,12 @@ void Chem::CMLDataReader::readMolecule(const XMLNode* mol_node, Molecule& mol, b
     if (auto bond_array = getChildNode(mol_node, CML::Element::BOND_ARRAY))
         readBonds(bond_array, mol);
 
+    if (!stereoAtoms.empty())
+        postprocStereoAtoms(mol);
+
+    if (!stereoBonds.empty())
+         postprocStereoBonds(mol);
+    
     if (!top_level) {
         auto count_attr = mol_node->first_attribute(CML::Attribute::COUNT.c_str());
 
@@ -218,9 +225,6 @@ void Chem::CMLDataReader::readAtoms(const XMLNode* atom_arr_node, Molecule& mol)
     for (auto node = atom_arr_node->first_node(); node; node = node->next_sibling())
         if (nameMatches(node->name(), node->name_size(), CML::Element::ATOM))
             addAtom(node, mol);
-
-    if (!stereoAtoms.empty())
-        setAtomConfigurations(mol);
 }
 
 void Chem::CMLDataReader::readArrayStyleAtoms(const XMLNode* atom_arr_node, Molecule& mol)
@@ -286,7 +290,7 @@ void Chem::CMLDataReader::readArrayStyleAtoms(const XMLNode* atom_arr_node, Mole
                                                         "CMLDataReader: error while parsing atom 2D y-coordinate", strictErrorChecking)});
 
         if (!value[5].empty() && !value[6].empty() && !value[7].empty())
-            set2DCoordinates(atom, {parseNumber<double>(value[5].data(), value[5].data() + value[5].size(),
+            set3DCoordinates(atom, {parseNumber<double>(value[5].data(), value[5].data() + value[5].size(),
                                                         "CMLDataReader: error while parsing atom 3D x-coordinate", strictErrorChecking),
                                     parseNumber<double>(value[6].data(), value[6].data() + value[6].size(),
                                                         "CMLDataReader: error while parsing atom 3D y-coordinate", strictErrorChecking),
@@ -448,7 +452,7 @@ bool Chem::CMLDataReader::readArrayStyleBonds(const XMLNode* bond_arr_node, Mole
     return undef_orders;
 }
 
-bool Chem::CMLDataReader::addBond(const XMLNode* bond_node, Molecule& mol) const
+bool Chem::CMLDataReader::addBond(const XMLNode* bond_node, Molecule& mol)
 {
     auto atom_refs_attr = bond_node->first_attribute(CML::Attribute::REF_ATOMS2.c_str());
 
@@ -513,12 +517,114 @@ bool Chem::CMLDataReader::addBond(const XMLNode* bond_node, Molecule& mol) const
         setOrder(bond, order);
 
     if (auto stereo_node = getChildNode(bond_node, CML::Element::BOND_STEREO))
-        setBondStereo(stereo_node, bond, mol);
+        stereoBonds.emplace_back(bond.getIndex(), stereo_node);
     
     return (order == 0);
 }
 
-void Chem::CMLDataReader::setBondStereo(const XMLNode* stereo_node, Bond& bond, Molecule& mol) const
+void Chem::CMLDataReader::setName(const XMLNode* name_node, Molecule& mol) const
+{
+    Chem::setName(mol, name_node->value());
+}
+
+void Chem::CMLDataReader::addProperty(const XMLNode* prop_node, Molecule& mol) const
+{
+    auto title_attr = prop_node->first_attribute(CML::Attribute::TITLE.c_str());
+
+    if (!title_attr)
+        return;
+
+    auto value_attr = getChildNode(prop_node, CML::Element::SCALAR);
+
+    if (!value_attr)
+        return;
+
+    StringDataBlock::SharedPointer props;
+
+    if (hasStructureData(mol))
+        props = getStructureData(mol);
+
+    else {
+        props.reset(new StringDataBlock());
+        setStructureData(mol, props);
+    }
+
+    props->addEntry(title_attr->value(), value_attr->value());
+}
+
+void Chem::CMLDataReader::postprocStereoAtoms(Molecule& mol) const
+{
+    for (auto& sa : stereoAtoms) {
+        auto par_node = sa.second;
+        auto atom_refs_attr = par_node->first_attribute(CML::Attribute::REF_ATOMS4.c_str());
+
+        if (!atom_refs_attr) {
+            if (strictErrorChecking)
+                throw Base::IOError("CMLDataReader: atom parity reference atom ids not specified");
+
+            continue;
+        }
+
+        std::size_t ref_atom_inds[4];
+        std::size_t num_ref_atoms = 0;
+        
+        for (std::size_t i = 0, atom_id_offs = 0; i < 4; i++, num_ref_atoms++) {
+            auto atom_id = nextToken(atom_refs_attr->value(), atom_refs_attr->value_size(), atom_id_offs);
+
+            if (atom_id.empty()) {
+                if (strictErrorChecking)
+                    throw Base::IOError("CMLDataReader: atom parity reference atom " + std::to_string(i + 1) + " id not specified");
+
+                break;
+            }
+     
+            auto atom_idx = atomIDtoIndexMap.find(atom_id);
+
+            if (atom_idx == atomIDtoIndexMap.end()) {
+                if (strictErrorChecking)
+                    throw Base::IOError("CMLDataReader: atom parity reference atom with id '" + std::string(atom_id) + "' not found");
+        
+                break;
+            }
+
+            ref_atom_inds[i] = atom_idx->second;
+        }
+
+        if (num_ref_atoms != 4)
+            continue;
+        
+        auto parity = Internal::parseNumber<int>(par_node->value(), par_node->value() + par_node->value_size(),
+                                                 "CMLDataReader: error while parsing atom parity value", strictErrorChecking);
+        if (parity == 0)
+            continue;
+            
+        auto config = (parity < 0 ? AtomConfiguration::R : AtomConfiguration::S);
+        auto& atom = mol.getAtom(sa.first);
+        
+        auto descr = (ref_atom_inds[3] != sa.first ?
+                      StereoDescriptor(config, mol.getAtom(ref_atom_inds[0]), mol.getAtom(ref_atom_inds[1]),
+                                       mol.getAtom(ref_atom_inds[2]), mol.getAtom(ref_atom_inds[3])) :
+                      StereoDescriptor(config, mol.getAtom(ref_atom_inds[0]), mol.getAtom(ref_atom_inds[1]),
+                                       mol.getAtom(ref_atom_inds[2])));
+
+        if (!descr.isValid(atom)) {
+            if (strictErrorChecking)
+                throw Base::IOError("CMLDataReader: invalid atom parity reference atom sequence");
+
+           continue;
+        }
+        
+        setStereoDescriptor(atom, descr);
+    }
+}
+
+void Chem::CMLDataReader::postprocStereoBonds(Molecule& mol) const
+{
+     for (auto& sb : stereoBonds)
+         postprocStereoBond(sb.second, mol.getBond(sb.first), mol);
+}
+
+void Chem::CMLDataReader::postprocStereoBond(const XMLNode* stereo_node, Bond& bond, Molecule& mol) const
 {
     if (auto atom_refs_attr = stereo_node->first_attribute(CML::Attribute::REF_ATOMS2.c_str())) {
         std::size_t atom_inds[2];
@@ -631,102 +737,6 @@ void Chem::CMLDataReader::setBondStereo(const XMLNode* stereo_node, Bond& bond, 
     }
 
     setStereoDescriptor(bond, descr);
-}
-
-void Chem::CMLDataReader::setName(const XMLNode* name_node, Molecule& mol) const
-{
-    Chem::setName(mol, name_node->value());
-}
-
-void Chem::CMLDataReader::addProperty(const XMLNode* prop_node, Molecule& mol) const
-{
-    auto title_attr = prop_node->first_attribute(CML::Attribute::TITLE.c_str());
-
-    if (!title_attr)
-        return;
-
-    auto value_attr = getChildNode(prop_node, CML::Element::SCALAR);
-
-    if (!value_attr)
-        return;
-
-    StringDataBlock::SharedPointer props;
-
-    if (hasStructureData(mol))
-        props = getStructureData(mol);
-
-    else {
-        props.reset(new StringDataBlock());
-        setStructureData(mol, props);
-    }
-
-    props->addEntry(title_attr->value(), value_attr->value());
-}
-
-void Chem::CMLDataReader::setAtomConfigurations(Molecule& mol) const
-{
-    for (auto& pe : stereoAtoms) {
-        auto par_node = pe.second;
-        auto atom_refs_attr = par_node->first_attribute(CML::Attribute::REF_ATOMS4.c_str());
-
-        if (!atom_refs_attr) {
-            if (strictErrorChecking)
-                throw Base::IOError("CMLDataReader: atom parity reference atom ids not specified");
-
-            continue;
-        }
-
-        std::size_t ref_atom_inds[4];
-        std::size_t num_ref_atoms = 0;
-        
-        for (std::size_t i = 0, atom_id_offs = 0; i < 4; i++, num_ref_atoms++) {
-            auto atom_id = nextToken(atom_refs_attr->value(), atom_refs_attr->value_size(), atom_id_offs);
-
-            if (atom_id.empty()) {
-                if (strictErrorChecking)
-                    throw Base::IOError("CMLDataReader: atom parity reference atom " + std::to_string(i + 1) + " id not specified");
-
-                break;
-            }
-     
-            auto atom_idx = atomIDtoIndexMap.find(atom_id);
-
-            if (atom_idx == atomIDtoIndexMap.end()) {
-                if (strictErrorChecking)
-                    throw Base::IOError("CMLDataReader: atom parity reference atom with id '" + std::string(atom_id) + "' not found");
-        
-                break;
-            }
-
-            ref_atom_inds[i] = atom_idx->second;
-        }
-
-        if (num_ref_atoms != 4)
-            continue;
-        
-        auto parity = Internal::parseNumber<int>(par_node->value(), par_node->value() + par_node->value_size(),
-                                                 "CMLDataReader: error while parsing atom parity value", strictErrorChecking);
-        if (parity == 0)
-            continue;
-            
-        auto config = (parity < 0 ? AtomConfiguration::R : AtomConfiguration::S);
-        auto& atom = mol.getAtom(pe.first);
-        
-        auto descr = (ref_atom_inds[3] != pe.first ?
-                      StereoDescriptor(config, mol.getAtom(ref_atom_inds[0]), mol.getAtom(ref_atom_inds[1]),
-                                       mol.getAtom(ref_atom_inds[2]), mol.getAtom(ref_atom_inds[3])) :
-                      StereoDescriptor(config, mol.getAtom(ref_atom_inds[0]), mol.getAtom(ref_atom_inds[1]),
-                                       mol.getAtom(ref_atom_inds[2])));
-
-        if (!descr.isValid(atom)) {
-            if (strictErrorChecking)
-                throw Base::IOError("CMLDataReader: invalid atom parity reference atom sequence");
-
-           continue;
-        }
-        
-        setStereoDescriptor(atom, descr);
-    }
 }
 
 void Chem::CMLDataReader::perceiveBondOrders(Molecule& mol, std::size_t bond_offs)

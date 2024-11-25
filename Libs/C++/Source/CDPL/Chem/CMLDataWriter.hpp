@@ -28,6 +28,9 @@
 #include <iosfwd>
 #include <cstddef>
 #include <string>
+#include <vector>
+
+#include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 namespace CDPL
@@ -69,13 +72,19 @@ namespace CDPL
 
             void writeAtoms(std::ostream& os, const MolecularGraph& molgraph);
             bool writeAtomParity(std::ostream& os, const Atom& atom, const MolecularGraph& molgraph);
-                
+            bool writeAtomsCompact(std::ostream& os, const MolecularGraph& molgraph);
+            void calcAtomStereoDescriptors(const MolecularGraph& molgraph);
+            
             void writeBonds(std::ostream& os, const MolecularGraph& molgraph);
             bool writeBondStereo(std::ostream& os, const Bond& bond, const MolecularGraph& molgraph, bool write_sf);
-                
+            bool writeBondsCompact(std::ostream& os, const MolecularGraph& molgraph);
+            void calcBondStereoDescriptors(const MolecularGraph& molgraph);
+            
             void writeProperties(std::ostream& os, const MolecularGraph& molgraph);
 
             const std::string& getAtomId(const Atom& atom, const MolecularGraph& molgraph, std::string& id_str) const;
+
+            typedef std::vector<StereoDescriptor> StereoDescriptorArray;
             
             const Base::DataIOBase& ioBase;
             bool                    startDoc;
@@ -92,7 +101,9 @@ namespace CDPL
             bool                    compactAtomData;
             bool                    compactBondData;
             std::size_t             molId;
-            std::string             tmpString[2];
+            std::string             tmpString[9];
+            StereoDescriptorArray   atomStereoDescrs;
+            StereoDescriptorArray   bondStereoDescrs;
         };
     } // namespace Chem
 } // namespace CDPL

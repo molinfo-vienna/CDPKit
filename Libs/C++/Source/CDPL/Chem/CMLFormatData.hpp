@@ -37,13 +37,12 @@ namespace CDPL
         namespace CML
         {
 
-            const std::string DOC_PROLOG = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                           "<cml xmlns=\"http://www.xml-cml.org/schema\" "
-                                           "xmlns:convention=\"http://www.xml-cml.org/convention/\" "
-                                           "xmlns:unit=\"http://www.xml-cml.org/unit/si/\" "
-                                           "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
-                                           "convention=\"convention:molecular\">";
-            const std::string DOC_EPILOG = "</cml>";
+            const std::string XML_DECLARATION  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            const std::string CML_DECLARATIONS = "=\"http://www.xml-cml.org/schema\" "
+                                                 "xmlns:convention=\"http://www.xml-cml.org/convention/\" "
+                                                 "xmlns:unit=\"http://www.xml-cml.org/unit/si/\" "
+                                                 "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+                                                 "convention=\"convention:molecular\">\n";
 
             namespace Element
             {
@@ -69,6 +68,7 @@ namespace CDPL
 
                 const std::string ID                   = "id";
                 const std::string ATOM_ID_ARRAY        = "atomID";
+                const std::string BOND_ID_ARRAY        = "bondID";
                 const std::string FORMAL_CHARGE        = "formalCharge";
                 const std::string FORMAL_CHARGE_ARRAY  = "formalCharge";
                 const std::string SPIN_MULTIPLICITY    = "spinMultiplicity";
