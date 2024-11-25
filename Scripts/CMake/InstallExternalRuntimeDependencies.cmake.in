@@ -58,8 +58,8 @@ function(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
   if(APPLE)
     list(APPEND EXCLUDE_PATTERNS
       "libstdc\\+\\+"
-      "Python"
-      "libpython"
+#      "Python"
+#      "libpython"
       )
   elseif(WIN32)
     list(APPEND EXCLUDE_PATTERNS
@@ -114,8 +114,8 @@ function(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     get_filename_component(FILE_NAME "${DEPENDENCY}" NAME)
 
     if(APPLE)
-      if("${DEPENDENCY}" MATCHES "/Python$")
-        execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "${DEPENDENCY}" "@executable_path/../../../../../../Python" "${BINARY_INPUT_FILE}"
+      if("${DEPENDENCY}" MATCHES "/Python$" OR "${DEPENDENCY}" MATCHES "/libpython.*dylib$")
+        execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "${DEPENDENCY}" "@executable_path/../Python" "${BINARY_INPUT_FILE}"
                     OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
         CONTINUE()
       endif()
