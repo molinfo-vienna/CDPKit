@@ -1,5 +1,6 @@
 master:
 
+ - Added support for the I/O of molecular structure data in CML format
  - Fallback perception of atom/bond stereochemistry from input 3D coordinates during conformer generation molecule preprocessing
    now does not require the presence of explicit hydrogens anymore
  - Renamed function MolProp::isCarbonylLikeAtom() into MolProp::isCarbonylLike()
