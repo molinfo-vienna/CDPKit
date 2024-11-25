@@ -119,7 +119,7 @@ namespace CDPL
                 typedef ItemList::iterator       ItemIterator;
 
                 Category(const std::string& name):
-                  name(name), numRows(0) {}
+                  name(name) {}
 
                 const std::string& getName() const;
 
@@ -174,7 +174,6 @@ namespace CDPL
 
                 std::string name;
                 ItemList    items;
-                  std::size_t numRows;
             };
 
           private:
