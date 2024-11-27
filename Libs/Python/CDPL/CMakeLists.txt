@@ -50,6 +50,11 @@ set(cdpl_MOD_SRCS
     BuildInfoExport.cpp
    )
 
+if(APPLE)
+  set(PYTHON_LIBRARIES "")
+  set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+endif(APPLE)   
+   
 add_library(_cdpl MODULE ${cdpl_MOD_SRCS})
 target_link_libraries(_cdpl ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})
 
