@@ -33,9 +33,9 @@ foreach(PYTHON_FILE ${PYTHON_FILES})
   configure_file("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
 endforeach(PYTHON_FILE)
 
-if(MINGW)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-maybe-uninitialized")
-endif(MINGW)
+endif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 
 if(NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
