@@ -301,7 +301,7 @@ endif(NOT PYPI_PACKAGE_BUILD)
 find_package(Cairo)
 
 if(NOT CAIRO_FOUND)
-  message("!! Warning: CAIRO library not found -> can't build Cairo rendering backend.")
+  message("!! Warning: Cairo library not found -> can't build Cairo rendering backend.")
 else(NOT CAIRO_FOUND)
   include(CheckFunctionExists)
 
