@@ -6,3 +6,4 @@ Generation of Fingerprints
 
    ecfp
    fame_fp
+   ph4_fp
