@@ -123,7 +123,7 @@ namespace ChOX
         const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
         const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";
 
-        const bool                                 WRITE_SINGLE_RECORD_FILES               = true;
+        const bool                                 OUTPUT_SINGLE_RECORD_FILES              = true;
 
         const std::string                          RECORD_SEPARATOR                        = "";
 
@@ -131,17 +131,17 @@ namespace ChOX
         const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT            = true;
 
         const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING       = false;
-        const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES   = false;
+        const bool                                 MOL2_OUTPUT_SINGLE_RECORD_FILES         = false;
         const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT           = true;
 
         const bool                                 XYZ_INPUT_MULTI_CONF_IMPORT             = true;
 
-        const bool                                 XYZ_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 XYZ_OUTPUT_SINGLE_RECORD_FILES          = false;
         const bool                                 XYZ_OUTPUT_MULTI_CONF_EXPORT            = true;
 
         const bool                                 CML_INPUT_STRICT_ERROR_CHECKING         = false;
 
-        const bool                                 CML_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 CML_OUTPUT_SINGLE_RECORD_FILES          = false;
 
         const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING         = false;
         const bool                                 MOL_INPUT_IGNORE_PARITY                 = true;
@@ -159,7 +159,7 @@ namespace ChOX
         const bool                                 MOL_OUTPUT_TRUNCATE_LINES               = false;
         const bool                                 MOL_OUTPUT_CHECK_LINE_LENGTH            = false;
         const bool                                 MOL_OUTPUT_IGNORE_PARITY                = true;
-        const bool                                 MOL_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const bool                                 MOL_OUTPUT_SINGLE_RECORD_FILES          = true;
         const bool                                 MOL_OUTPUT_MULTI_CONF_EXPORT            = false;
 
         const bool                                 SDF_INPUT_STRICT_ERROR_CHECKING         = false;
@@ -178,7 +178,7 @@ namespace ChOX
         const bool                                 SDF_OUTPUT_TRUNCATE_LINES               = false;
         const bool                                 SDF_OUTPUT_CHECK_LINE_LENGTH            = false;
         const bool                                 SDF_OUTPUT_IGNORE_PARITY                = true;
-        const bool                                 SDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 SDF_OUTPUT_SINGLE_RECORD_FILES          = false;
         const bool                                 SDF_OUTPUT_MULTI_CONF_EXPORT            = true;
 
         const bool                                 RXN_INPUT_STRICT_ERROR_CHECKING         = false;
@@ -197,7 +197,7 @@ namespace ChOX
         const bool                                 RXN_OUTPUT_TRUNCATE_LINES               = false;
         const bool                                 RXN_OUTPUT_CHECK_LINE_LENGTH            = false;
         const bool                                 RXN_OUTPUT_IGNORE_PARITY                = true;
-        const bool                                 RXN_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const bool                                 RXN_OUTPUT_SINGLE_RECORD_FILES          = true;
 
         const bool                                 RDF_INPUT_STRICT_ERROR_CHECKING         = false;
         const bool                                 RDF_INPUT_IGNORE_PARITY                 = true;
@@ -215,13 +215,13 @@ namespace ChOX
         const bool                                 RDF_OUTPUT_TRUNCATE_LINES               = false;
         const bool                                 RDF_OUTPUT_CHECK_LINE_LENGTH            = false;
         const bool                                 RDF_OUTPUT_IGNORE_PARITY                = true;
-        const bool                                 RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 RDF_OUTPUT_SINGLE_RECORD_FILES          = false;
 
         const bool                                 JME_INPUT_STRICT_ERROR_CHECKING         = false;
 
         const bool                                 JME_OUTPUT_STRICT_ERROR_CHECKING        = false;
         const bool                                 JME_OUTPUT_SEPARATE_COMPONENTS          = true;
-        const bool                                 JME_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const bool                                 JME_OUTPUT_SINGLE_RECORD_FILES          = true;
         const std::string                          JME_OUTPUT_RECORD_SEPARATOR             = "\n";
 
         const bool                                 SMILES_INPUT_STRICT_ERROR_CHECKING      = false;
@@ -229,24 +229,24 @@ namespace ChOX
 
         const bool                                 SMILES_OUTPUT_STRICT_ERROR_CHECKING     = false;
         const bool                                 SMILES_OUTPUT_ORDINARY_H_DEPLETE        = true;
-        const bool                                 SMILES_OUTPUT_WRITE_CANONICAL_FORM      = false;
-        const bool                                 SMILES_OUTPUT_WRITE_KEKULE_FORM         = false;
-        const bool                                 SMILES_OUTPUT_WRITE_ATOM_STEREO         = true;
-        const bool                                 SMILES_OUTPUT_WRITE_BOND_STEREO         = true;
-        const bool                                 SMILES_OUTPUT_WRITE_RING_BOND_STEREO    = false;
-        const bool                                 SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID     = true;
-        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_BONDS        = false;
-        const bool                                 SMILES_OUTPUT_WRITE_AROMATIC_BONDS      = false;
-        const bool                                 SMILES_OUTPUT_WRITE_ISOTOPE             = true;
+        const bool                                 SMILES_OUTPUT_CANONICAL_FORM            = false;
+        const bool                                 SMILES_OUTPUT_KEKULE_FORM               = false;
+        const bool                                 SMILES_OUTPUT_ATOM_STEREO               = true;
+        const bool                                 SMILES_OUTPUT_BOND_STEREO               = true;
+        const bool                                 SMILES_OUTPUT_RING_BOND_STEREO          = false;
+        const bool                                 SMILES_OUTPUT_ATOM_MAPPING_ID           = true;
+        const bool                                 SMILES_OUTPUT_SINGLE_BONDS              = false;
+        const bool                                 SMILES_OUTPUT_AROMATIC_BONDS            = false;
+        const bool                                 SMILES_OUTPUT_ISOTOPE                   = true;
         const bool                                 SMILES_OUTPUT_NO_ORGANIC_SUBSET         = false;
         const std::size_t                          SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE = 8;
-        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = false;
+        const bool                                 SMILES_OUTPUT_SINGLE_RECORD_FILES       = false;
         const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "SN";
 
         const bool                                 SMARTS_INPUT_STRICT_ERROR_CHECKING      = false;
 
         const bool                                 SMARTS_OUTPUT_STRICT_ERROR_CHECKING     = false;
-        const bool                                 SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES = false;
+        const bool                                 SMARTS_OUTPUT_SINGLE_RECORD_FILES       = false;
         const std::string                          SMARTS_OUTPUT_RECORD_SEPARATOR          = "\n";
 
         const bool                                 INCHI_INPUT_STRICT_ERROR_CHECKING       = false;
@@ -255,7 +255,7 @@ namespace ChOX
         const bool                                 INCHI_OUTPUT_STRICT_ERROR_CHECKING      = false;
         const std::string                          INCHI_OUTPUT_OPTIONS                    = "-WarnOnEmptyStructure -AuxNone -NEWPSOFF";
         const std::string                          INCHI_OUTPUT_RECORD_SEPARATOR           = "\n";
-        const bool                                 INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES  = true;
+        const bool                                 INCHI_OUTPUT_SINGLE_RECORD_FILES        = true;
 
         const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = false;
         const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
@@ -263,19 +263,19 @@ namespace ChOX
         const bool                                 MMCIF_INPUT_STRICT_ERROR_CHECKING       = false;
 
         const bool                                 MMCIF_OUTPUT_STRICT_ERROR_CHECKING      = false;
-        const bool                                 MMCIF_OUTPUT_WRITE_SINGLE_RECORD_FILES  = false;
+        const bool                                 MMCIF_OUTPUT_SINGLE_RECORD_FILES        = false;
 
         const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
 
-        const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
-        const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
+        const bool                                 CDF_OUTPUT_SINGLE_RECORD_FILES          = false;
+        const bool                                 CDF_OUTPUT_SINGLE_PRECISION_FLOATS      = true;
 
         const bool                                 CFL_INPUT_STRICT_ERROR_CHECKING         = true;
 
-        const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
-        const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
-        const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
-        const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
+        const bool                                  PSD_OUTPUT_SINGLE_RECORD_FILES         = false;
+        const bool                                  PSD_OUTPUT_SINGLE_PRECISION_FLOATS     = true;
+        const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES            = true;
+        const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                      = CDPL::Pharm::ScreeningDBCreator::CREATE;
 
         const QStringList                           SUBSTRUCT_HIGHLIGHTING_PATTERNS        = QStringList();
         const bool                                  SUBSTRUCT_HIGHLIGHTING_ENABLED         = true;

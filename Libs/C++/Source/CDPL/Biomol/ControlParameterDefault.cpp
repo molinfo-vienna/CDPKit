@@ -40,7 +40,7 @@ namespace CDPL
             const bool                             STRICT_ERROR_CHECKING                           = false;
             const bool                             CHECK_LINE_LENGTH                               = false;
             const ResidueDictionary::SharedPointer RESIDUE_DICTIONARY                              = ResidueDictionary::SharedPointer();
-            const bool                             APPLY_DICT_FORMAL_CHARGES                       = true;//false;
+            const bool                             APPLY_DICT_FORMAL_CHARGES                       = true;
             const bool                             APPLY_DICT_ATOM_TYPES                           = true;
             const bool                             CALC_MISSING_FORMAL_CHARGES                     = false;
             const bool                             PERCEIVE_MISSING_BOND_ORDERS                    = true;
@@ -54,10 +54,10 @@ namespace CDPL
             const bool                             PDB_IGNORE_FORMAL_CHARGE_FIELD                  = false;
             const bool                             PDB_EVALUATE_MASTER_RECORD                      = false;
             const bool                             PDB_TRUNCATE_LINES                              = false;
-            const bool                             PDB_WRITE_FORMAL_CHARGES                        = true;
-            const bool                             PDB_WRITE_CONECT_RECORDS                        = true;
-            const bool                             PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS          = false;
-            const bool                             PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER  = false;
+            const bool                             PDB_OUTPUT_FORMAL_CHARGES                       = true;
+            const bool                             PDB_OUTPUT_CONECT_RECORDS                       = true;
+            const bool                             PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS         = false;
+            const bool                             PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER = false;
             const unsigned int                     PDB_FORMAT_VERSION                              = PDBFormatVersion::V3;
             const bool                             MMCIF_APPLY_DICT_ATOM_BONDING                   = true;
             const bool                             MMCIF_APPLY_DICT_BOND_ORDERS                    = true;

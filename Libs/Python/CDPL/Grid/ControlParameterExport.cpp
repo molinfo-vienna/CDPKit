@@ -44,5 +44,5 @@ void CDPLPythonGrid::exportControlParameters()
 
     python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
         .def_readonly("STRICT_ERROR_CHECKING", &Grid::ControlParameter::STRICT_ERROR_CHECKING)
-        .def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Grid::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+        .def_readonly("CDF_OUTPUT_SINGLE_PRECISION_FLOATS", &Grid::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS);
 }

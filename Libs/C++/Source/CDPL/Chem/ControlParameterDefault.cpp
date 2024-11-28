@@ -64,17 +64,17 @@ namespace CDPL
             const std::string MDL_CONF_ENERGY_SD_TAG                                        = "<Energy>";
 
             const std::string SMILES_RECORD_FORMAT                                          = "SN";
-            const bool SMILES_WRITE_CANONICAL_FORM                                          = false;
-            const bool SMILES_WRITE_KEKULE_FORM                                             = false;
-            const bool SMILES_WRITE_ATOM_STEREO                                             = true;
-            const bool SMILES_WRITE_BOND_STEREO                                             = true;
-            const bool SMILES_WRITE_RING_BOND_STEREO                                        = true;
+            const bool SMILES_OUTPUT_CANONICAL_FORM                                         = false;
+            const bool SMILES_OUTPUT_KEKULE_FORM                                            = false;
+            const bool SMILES_OUTPUT_ATOM_STEREO                                            = true;
+            const bool SMILES_OUTPUT_BOND_STEREO                                            = true;
+            const bool SMILES_OUTPUT_RING_BOND_STEREO                                       = true;
             const std::size_t SMILES_MIN_STEREO_BOND_RING_SIZE                              = 8;
-            const bool SMILES_WRITE_ISOTOPE                                                 = true;
-            const bool SMILES_RXN_WRITE_ATOM_MAPPING_ID                                     = true;
-            const bool SMILES_MOL_WRITE_ATOM_MAPPING_ID                                     = false;
-            const bool SMILES_WRITE_SINGLE_BONDS                                            = false;
-            const bool SMILES_WRITE_AROMATIC_BONDS                                          = false;
+            const bool SMILES_OUTPUT_ISOTOPE                                                = true;
+            const bool SMILES_RXN_OUTPUT_ATOM_MAPPING_ID                                    = true;
+            const bool SMILES_MOL_OUTPUT_ATOM_MAPPING_ID                                    = false;
+            const bool SMILES_OUTPUT_SINGLE_BONDS                                           = false;
+            const bool SMILES_OUTPUT_AROMATIC_BONDS                                         = false;
             const bool SMILES_NO_ORGANIC_SUBSET                                             = false;
 
             const bool MULTI_CONF_IMPORT                                                    = true;
@@ -83,7 +83,7 @@ namespace CDPL
             const bool OUTPUT_CONF_ENERGY_AS_COMMENT                                        = false;
             const std::string CONF_INDEX_NAME_SUFFIX_PATTERN                                = "";
 
-            const bool CDF_WRITE_SINGLE_PRECISION_FLOATS                                    = true;
+            const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS                                   = true;
 
             const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES                                      = false;
             const bool MOL2_ENABLE_AROMATIC_BOND_TYPES                                      = false;

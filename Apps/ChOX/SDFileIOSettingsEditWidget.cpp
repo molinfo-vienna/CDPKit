@@ -75,7 +75,7 @@ void SDFileIOSettingsEditWidget::apply()
     setMDLUpdateTimestampParameter(writer_params, optUpdateTimeStampCheckBox->isChecked());
     setMDLTruncateStringsParameter(writer_params, optTruncateStringsCheckBox->isChecked());
     setMDLTruncateLinesParameter(writer_params, optTruncateLinesCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(writer_params, optSplitRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(writer_params, optSplitRecordsCheckBox->isChecked());
     setMultiConfExportParameter(writer_params, optMultiConfExportCheckBox->isChecked());
 
     setMDLCTABVersionParameter(writer_params, optCTabVersion);
@@ -107,7 +107,7 @@ void SDFileIOSettingsEditWidget::reset()
     optUpdateTimeStampCheckBox->setChecked(getMDLUpdateTimestampParameter(writer_params)); 
     optTruncateStringsCheckBox->setChecked(getMDLTruncateStringsParameter(writer_params)); 
     optTruncateLinesCheckBox->setChecked(getMDLTruncateLinesParameter(writer_params)); 
-    optSplitRecordsCheckBox->setChecked(getWriteSingleRecordFilesParameter(writer_params)); 
+    optSplitRecordsCheckBox->setChecked(getOutputSingleRecordFilesParameter(writer_params)); 
     optMultiConfExportCheckBox->setChecked(getMultiConfExportParameter(writer_params)); 
 
     optCTabVersion = getMDLCTABVersionParameter(writer_params); 
@@ -138,7 +138,7 @@ void SDFileIOSettingsEditWidget::setDefaults()
     optUpdateTimeStampCheckBox->setChecked(SDF_OUTPUT_UPDATE_TIMESTAMP);
     optTruncateStringsCheckBox->setChecked(SDF_OUTPUT_TRUNCATE_STRINGS);
     optTruncateLinesCheckBox->setChecked(SDF_OUTPUT_TRUNCATE_LINES);
-    optSplitRecordsCheckBox->setChecked(SDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    optSplitRecordsCheckBox->setChecked(SDF_OUTPUT_SINGLE_RECORD_FILES);
     optMultiConfExportCheckBox->setChecked(SDF_OUTPUT_MULTI_CONF_EXPORT);
 
     optCTabVersion = SDF_OUTPUT_CTAB_VERSION;

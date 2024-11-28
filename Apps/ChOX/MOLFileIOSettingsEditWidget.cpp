@@ -75,7 +75,7 @@ void MOLFileIOSettingsEditWidget::apply()
     setMDLUpdateTimestampParameter(writer_params, optUpdateTimeStampCheckBox->isChecked());
     setMDLTruncateStringsParameter(writer_params, optTruncateStringsCheckBox->isChecked());
     setMDLTruncateLinesParameter(writer_params, optTruncateLinesCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
     setMultiConfExportParameter(writer_params, optMultiConfExportCheckBox->isChecked());
 
     setMDLCTABVersionParameter(writer_params, optCTabVersion);
@@ -107,7 +107,7 @@ void MOLFileIOSettingsEditWidget::reset()
     optUpdateTimeStampCheckBox->setChecked(getMDLUpdateTimestampParameter(writer_params)); 
     optTruncateStringsCheckBox->setChecked(getMDLTruncateStringsParameter(writer_params)); 
     optTruncateLinesCheckBox->setChecked(getMDLTruncateLinesParameter(writer_params)); 
-    optConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(writer_params)); 
+    optConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(writer_params)); 
     optMultiConfExportCheckBox->setChecked(getMultiConfExportParameter(writer_params)); 
 
     optCTabVersion = getMDLCTABVersionParameter(writer_params); 
@@ -138,7 +138,7 @@ void MOLFileIOSettingsEditWidget::setDefaults()
     optUpdateTimeStampCheckBox->setChecked(MOL_OUTPUT_UPDATE_TIMESTAMP);
     optTruncateStringsCheckBox->setChecked(MOL_OUTPUT_TRUNCATE_STRINGS);
     optTruncateLinesCheckBox->setChecked(MOL_OUTPUT_TRUNCATE_LINES);
-    optConcatenateRecordsCheckBox->setChecked(!MOL_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    optConcatenateRecordsCheckBox->setChecked(!MOL_OUTPUT_SINGLE_RECORD_FILES);
     optMultiConfExportCheckBox->setChecked(MOL_OUTPUT_MULTI_CONF_EXPORT);
 
     optCTabVersion = MOL_OUTPUT_CTAB_VERSION;

@@ -49,7 +49,11 @@ namespace CDPL
              */
             extern CDPL_GRID_API const bool STRICT_ERROR_CHECKING;
 
-            extern CDPL_GRID_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_GRID_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
+
         } // namespace ControlParameterDefault
     } // namespace Grid
 } // namespace CDPL

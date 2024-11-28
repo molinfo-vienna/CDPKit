@@ -316,7 +316,7 @@ void Settings::load()
 
     readParameter<bool>(jme_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::JME_OUTPUT_STRICT_ERROR_CHECKING);
     readParameter<bool>(jme_wparams, settings, Chem::ControlParameter::JME_SEPARATE_COMPONENTS, ControlParameterDefault::JME_OUTPUT_SEPARATE_COMPONENTS);
-    readParameter<bool>(jme_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::JME_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(jme_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::JME_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<std::string>(jme_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR, ControlParameterDefault::JME_OUTPUT_RECORD_SEPARATOR);
 
     settings.endGroup();
@@ -344,19 +344,19 @@ void Settings::load()
 
     readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::SMILES_OUTPUT_STRICT_ERROR_CHECKING);
     readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::ORDINARY_HYDROGEN_DEPLETE, ControlParameterDefault::SMILES_OUTPUT_ORDINARY_H_DEPLETE);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_CANONICAL_FORM, ControlParameterDefault::SMILES_OUTPUT_WRITE_CANONICAL_FORM);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_KEKULE_FORM, ControlParameterDefault::SMILES_OUTPUT_WRITE_KEKULE_FORM);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_ATOM_STEREO, ControlParameterDefault::SMILES_OUTPUT_WRITE_ATOM_STEREO);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_ISOTOPE, ControlParameterDefault::SMILES_OUTPUT_WRITE_ISOTOPE);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_BOND_STEREO, ControlParameterDefault::SMILES_OUTPUT_WRITE_BOND_STEREO);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_RING_BOND_STEREO, ControlParameterDefault::SMILES_OUTPUT_WRITE_RING_BOND_STEREO);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RXN_WRITE_ATOM_MAPPING_ID, ControlParameterDefault::SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MOL_WRITE_ATOM_MAPPING_ID, ControlParameterDefault::SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_SINGLE_BONDS, ControlParameterDefault::SMILES_OUTPUT_WRITE_SINGLE_BONDS);
-    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_AROMATIC_BONDS, ControlParameterDefault::SMILES_OUTPUT_WRITE_AROMATIC_BONDS);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_CANONICAL_FORM, ControlParameterDefault::SMILES_OUTPUT_CANONICAL_FORM);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM, ControlParameterDefault::SMILES_OUTPUT_KEKULE_FORM);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_ATOM_STEREO, ControlParameterDefault::SMILES_OUTPUT_ATOM_STEREO);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_ISOTOPE, ControlParameterDefault::SMILES_OUTPUT_ISOTOPE);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO, ControlParameterDefault::SMILES_OUTPUT_BOND_STEREO);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO, ControlParameterDefault::SMILES_OUTPUT_RING_BOND_STEREO);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RXN_OUTPUT_ATOM_MAPPING_ID, ControlParameterDefault::SMILES_OUTPUT_ATOM_MAPPING_ID);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MOL_OUTPUT_ATOM_MAPPING_ID, ControlParameterDefault::SMILES_OUTPUT_ATOM_MAPPING_ID);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_SINGLE_BONDS, ControlParameterDefault::SMILES_OUTPUT_SINGLE_BONDS);
+    readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_AROMATIC_BONDS, ControlParameterDefault::SMILES_OUTPUT_AROMATIC_BONDS);
     readParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET, ControlParameterDefault::SMILES_OUTPUT_NO_ORGANIC_SUBSET);
     readParameter<std::size_t>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE, ControlParameterDefault::SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE);
-    readParameter<bool>(smiles_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(smiles_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::SMILES_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<std::string>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT, ControlParameterDefault::SMILES_OUTPUT_RECORD_FORMAT);
 
     settings.endGroup();
@@ -382,7 +382,7 @@ void Settings::load()
     smarts_wparams.setParent(this);
 
     readParameter<bool>(smarts_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::SMARTS_OUTPUT_STRICT_ERROR_CHECKING);
-    readParameter<bool>(smarts_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(smarts_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::SMARTS_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<std::string>(smarts_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR, ControlParameterDefault::SMARTS_OUTPUT_RECORD_SEPARATOR);
 
     settings.endGroup();
@@ -410,7 +410,7 @@ void Settings::load()
 
     readParameter<bool>(inchi_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::INCHI_OUTPUT_STRICT_ERROR_CHECKING);
     readParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR, ControlParameterDefault::INCHI_OUTPUT_RECORD_SEPARATOR);
-    readParameter<bool>(inchi_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(inchi_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::INCHI_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::INCHI_OUTPUT_OPTIONS, ControlParameterDefault::INCHI_OUTPUT_OPTIONS);
 
     settings.endGroup();
@@ -437,7 +437,7 @@ void Settings::load()
     mol2_wparams.setParent(this);
 
     readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MOL2_OUTPUT_STRICT_ERROR_CHECKING);
-    readParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(mol2_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::MOL2_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::MOL2_OUTPUT_MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -462,7 +462,7 @@ void Settings::load()
 
     xyz_wparams.setParent(this);
 
-    readParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::XYZ_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(xyz_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::XYZ_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::XYZ_OUTPUT_MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -487,7 +487,7 @@ void Settings::load()
 
     cml_wparams.setParent(this);
 
-    readParameter<bool>(cml_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::CML_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(cml_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::CML_OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -525,7 +525,7 @@ void Settings::load()
     readParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES, ControlParameterDefault::MOL_OUTPUT_TRUNCATE_LINES);
     readParameter<bool>(mol_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::MOL_OUTPUT_CHECK_LINE_LENGTH);
     readParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY, ControlParameterDefault::MOL_OUTPUT_IGNORE_PARITY);
-    readParameter<bool>(mol_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MOL_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(mol_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::MOL_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::MOL_OUTPUT_MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -564,7 +564,7 @@ void Settings::load()
     readParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES, ControlParameterDefault::SDF_OUTPUT_TRUNCATE_LINES);
     readParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::SDF_OUTPUT_CHECK_LINE_LENGTH);
     readParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY, ControlParameterDefault::SDF_OUTPUT_IGNORE_PARITY);
-    readParameter<bool>(sdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::SDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(sdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::SDF_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::SDF_OUTPUT_MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -603,7 +603,7 @@ void Settings::load()
     readParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES, ControlParameterDefault::RXN_OUTPUT_TRUNCATE_LINES);
     readParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::RXN_OUTPUT_CHECK_LINE_LENGTH);
     readParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY, ControlParameterDefault::RXN_OUTPUT_IGNORE_PARITY);
-    readParameter<bool>(rxn_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::RXN_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(rxn_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::RXN_OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -641,7 +641,7 @@ void Settings::load()
     readParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES, ControlParameterDefault::RDF_OUTPUT_TRUNCATE_LINES);
     readParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::RDF_OUTPUT_CHECK_LINE_LENGTH);
     readParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY, ControlParameterDefault::RDF_OUTPUT_IGNORE_PARITY);
-    readParameter<bool>(rdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(rdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::RDF_OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -663,9 +663,9 @@ void Settings::load()
 
     psd_wparams.setParent(this);
 
-    readParameter<bool>(psd_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES);
-    readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
-    readParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
+    readParameter<bool>(psd_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::PSD_OUTPUT_SINGLE_RECORD_FILES);
+    readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_SINGLE_PRECISION_FLOATS);
+    readParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_SINGLE_PRECISION_FLOATS);
     readParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::PSD_ALLOW_DUPLICATES, ControlParameterDefault::PSD_OUTPUT_ALLOW_DUPLICATES);
     readDBCreationModeParameter(psd_wparams, settings, Pharm::ControlParameter::PSD_CREATION_MODE, ControlParameterDefault::PSD_CREATION_MODE);
 
@@ -704,7 +704,7 @@ void Settings::load()
 
     mmcif_wparams.setParent(this);
 
-    readParameter<bool>(mmcif_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MMCIF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    readParameter<bool>(mmcif_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::MMCIF_OUTPUT_SINGLE_RECORD_FILES);
     readParameter<bool>(mmcif_wparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MMCIF_OUTPUT_STRICT_ERROR_CHECKING);
     
     settings.endGroup();
@@ -739,8 +739,8 @@ void Settings::load()
 
     cdf_wparams.setParent(this);
 
-    readParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
-    readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
+    readParameter<bool>(cdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES, ControlParameterDefault::CDF_OUTPUT_SINGLE_RECORD_FILES);
+    readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS, ControlParameterDefault::CDF_OUTPUT_SINGLE_PRECISION_FLOATS);
 
     settings.endGroup();
 
@@ -943,7 +943,7 @@ void Settings::save() const
 
     writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
     writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::JME_SEPARATE_COMPONENTS);
-    writeParameter<bool>(jme_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(jme_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeStrParameter(jme_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 
     settings.endGroup();
@@ -967,19 +967,19 @@ void Settings::save() const
 
     writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
     writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::ORDINARY_HYDROGEN_DEPLETE);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_CANONICAL_FORM);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_KEKULE_FORM);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_ATOM_STEREO);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_BOND_STEREO);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_RING_BOND_STEREO);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MOL_WRITE_ATOM_MAPPING_ID);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RXN_WRITE_ATOM_MAPPING_ID);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_SINGLE_BONDS);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_AROMATIC_BONDS);
-    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_WRITE_ISOTOPE);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_CANONICAL_FORM);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_ATOM_STEREO);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MOL_OUTPUT_ATOM_MAPPING_ID);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RXN_OUTPUT_ATOM_MAPPING_ID);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_SINGLE_BONDS);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_AROMATIC_BONDS);
+    writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_OUTPUT_ISOTOPE);
     writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET);
     writeParameter<std::size_t>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE);
-    writeParameter<bool>(smiles_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(smiles_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeStrParameter(smiles_wparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
 
     settings.endGroup();
@@ -1001,7 +1001,7 @@ void Settings::save() const
     const SettingsContainer& smarts_wparams = getWriterControlParameters(Chem::DataFormat::SMARTS.getName());
 
     writeParameter<bool>(smarts_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-    writeParameter<bool>(smarts_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(smarts_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeStrParameter(smarts_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 
     settings.endGroup();
@@ -1025,7 +1025,7 @@ void Settings::save() const
 
     writeParameter<bool>(inchi_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
     writeStrParameter(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
-    writeParameter<bool>(inchi_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(inchi_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeStrParameter(inchi_wparams, settings, Chem::ControlParameter::INCHI_OUTPUT_OPTIONS);
 
     settings.endGroup();
@@ -1048,7 +1048,7 @@ void Settings::save() const
     const SettingsContainer& mol2_wparams = getWriterControlParameters(Chem::DataFormat::MOL2.getName());
 
     writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-    writeParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(mol2_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -1069,7 +1069,7 @@ void Settings::save() const
 
     const SettingsContainer& xyz_wparams = getWriterControlParameters(Chem::DataFormat::XYZ.getName());
 
-    writeParameter<bool>(xyz_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(xyz_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeParameter<bool>(xyz_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -1090,7 +1090,7 @@ void Settings::save() const
 
     const SettingsContainer& cml_wparams = getWriterControlParameters(Chem::DataFormat::CML.getName());
 
-    writeParameter<bool>(cml_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(cml_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -1124,7 +1124,7 @@ void Settings::save() const
     writeParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES);
     writeParameter<bool>(mol_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH);
     writeParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
-    writeParameter<bool>(mol_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(mol_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeParameter<bool>(mol_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -1159,7 +1159,7 @@ void Settings::save() const
     writeParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES);
     writeParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH);
     writeParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
-    writeParameter<bool>(sdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(sdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
     writeParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
     settings.endGroup();
@@ -1194,7 +1194,7 @@ void Settings::save() const
     writeParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES);
     writeParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH);
     writeParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
-    writeParameter<bool>(rxn_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(rxn_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -1228,7 +1228,7 @@ void Settings::save() const
     writeParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::MDL_TRUNCATE_LINES);
     writeParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH);
     writeParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
-    writeParameter<bool>(rdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(rdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -1260,7 +1260,7 @@ void Settings::save() const
     const SettingsContainer& mmcif_wparams = getWriterControlParameters(Biomol::DataFormat::MMCIF.getName());
 
     writeParameter<bool>(mmcif_wparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
-    writeParameter<bool>(mmcif_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+    writeParameter<bool>(mmcif_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
 
     settings.endGroup();
 
@@ -1288,8 +1288,8 @@ void Settings::save() const
 
     const SettingsContainer& psd_wparams = getWriterControlParameters(Pharm::DataFormat::PSD.getName());
 
-    writeParameter<bool>(psd_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-    writeParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+    writeParameter<bool>(psd_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
+    writeParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS);
     writeParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::PSD_ALLOW_DUPLICATES);
     writeDBCreationModeParameter(psd_wparams, settings, Pharm::ControlParameter::PSD_CREATION_MODE);
 
@@ -1309,8 +1309,8 @@ void Settings::save() const
 
     const SettingsContainer& cdf_wparams = getWriterControlParameters(Chem::DataFormat::CDF.getName());
 
-    writeParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-    writeParameter<bool>(cdf_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+    writeParameter<bool>(cdf_wparams, settings, ControlParameter::OUTPUT_SINGLE_RECORD_FILES);
+    writeParameter<bool>(cdf_wparams, settings, Chem::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS);
 
     settings.endGroup();
 

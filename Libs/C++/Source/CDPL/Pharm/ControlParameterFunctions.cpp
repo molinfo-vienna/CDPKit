@@ -30,35 +30,35 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)        \
-    TYPE Pharm::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
-                                                 ControlParameterDefault::PARAM_NAME); \
-    }                                                                    \
-                                                                        \
+#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)                           \
+    TYPE Pharm::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                        \
+        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,               \
+                                                 ControlParameterDefault::PARAM_NAME);       \
+    }                                                                                        \
+                                                                                             \
     void Pharm::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
-    {                                                                    \
-        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);            \
-    }                                                                    \
-                                                                        \
-    bool Pharm::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);        \
-    }                                                                    \
-                                                                        \
-    void Pharm::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr) \
-    {                                                                    \
-        cntnr.removeParameter(ControlParameter::PARAM_NAME);            \
+    {                                                                                        \
+        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                               \
+    }                                                                                        \
+                                                                                             \
+    bool Pharm::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
+    {                                                                                        \
+        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);                           \
+    }                                                                                        \
+                                                                                             \
+    void Pharm::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)         \
+    {                                                                                        \
+        cntnr.removeParameter(ControlParameter::PARAM_NAME);                                 \
     }
 
 
 MAKE_CONTROL_PARAM_FUNCTIONS(STRICT_ERROR_CHECKING, bool, StrictErrorChecking)
 
-MAKE_CONTROL_PARAM_FUNCTIONS(CDF_WRITE_SINGLE_PRECISION_FLOATS, bool, CDFWriteSinglePrecisionFloats)
+MAKE_CONTROL_PARAM_FUNCTIONS(CDF_OUTPUT_SINGLE_PRECISION_FLOATS, bool, CDFWriteSinglePrecisionFloats)
 
 MAKE_CONTROL_PARAM_FUNCTIONS(PSD_CREATION_MODE, Pharm::ScreeningDBCreator::Mode, PSDCreationMode)
 MAKE_CONTROL_PARAM_FUNCTIONS(PSD_ALLOW_DUPLICATES, bool, PSDAllowDuplicates)

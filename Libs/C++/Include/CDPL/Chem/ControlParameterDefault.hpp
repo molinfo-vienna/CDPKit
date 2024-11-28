@@ -154,29 +154,34 @@ namespace CDPL
             extern CDPL_CHEM_API const std::string SMILES_RECORD_FORMAT;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_WRITE_CANONICAL_FORM.
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_CANONICAL_FORM.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_CANONICAL_FORM;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_CANONICAL_FORM;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_WRITE_KEKULE_FORM.
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_KEKULE_FORM;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_KEKULE_FORM;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_WRITE_ATOM_STEREO.
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_STEREO.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_ATOM_STEREO;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_ATOM_STEREO;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_WRITE_BOND_STEREO.
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_BOND_STEREO;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_BOND_STEREO;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_WRITE_RING_BOND_STEREO.
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_RING_BOND_STEREO;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_RING_BOND_STEREO;
 
             /**
              * \brief Default setting (= \c 8) for the control-parameter Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE.
@@ -184,31 +189,36 @@ namespace CDPL
             extern CDPL_CHEM_API const std::size_t SMILES_MIN_STEREO_BOND_RING_SIZE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_WRITE_ISOTOPE.
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ISOTOPE.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_ISOTOPE;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_ISOTOPE;
 
             /**
-             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_WRITE_ATOM_MAPPING_ID
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
              *        on reaction SMILES output.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_RXN_WRITE_ATOM_MAPPING_ID;
+            extern CDPL_CHEM_API const bool SMILES_RXN_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_WRITE_ATOM_MAPPING_ID
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
              *        on molecule SMILES output.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_MOL_WRITE_ATOM_MAPPING_ID;
+            extern CDPL_CHEM_API const bool SMILES_MOL_OUTPUT_ATOM_MAPPING_ID;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_WRITE_SINGLE_BONDS.
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_SINGLE_BONDS.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_SINGLE_BONDS;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_SINGLE_BONDS;
 
             /**
-             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_WRITE_AROMATIC_BONDS.
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_AROMATIC_BONDS.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const bool SMILES_WRITE_AROMATIC_BONDS;
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_AROMATIC_BONDS;
 
             /**
              * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET.
@@ -238,7 +248,7 @@ namespace CDPL
 
             extern CDPL_CHEM_API const std::string CONF_INDEX_NAME_SUFFIX_PATTERN;
 
-            extern CDPL_CHEM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+            extern CDPL_CHEM_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;
 

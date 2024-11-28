@@ -71,7 +71,7 @@ void OtherIOSettingsEditWidget::apply()
     SettingsContainer& jme_wparams = settings.getWriterControlParameters("JME");
 
     setStrictErrorCheckingParameter(jme_wparams, jmeOptStrictErrorCheckingCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(jme_wparams, !jmeOptConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(jme_wparams, !jmeOptConcatenateRecordsCheckBox->isChecked());
     setRecordSeparatorParameter(jme_wparams, jmeOptRecordSeparator);
 
     SettingsContainer& inchi_rparams = settings.getReaderControlParameters("INCHI");
@@ -82,7 +82,7 @@ void OtherIOSettingsEditWidget::apply()
     SettingsContainer& inchi_wparams = settings.getWriterControlParameters("INCHI");
 
     setStrictErrorCheckingParameter(inchi_wparams, inchiOptStrictErrorCheckingCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(inchi_wparams, !inchiOptConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(inchi_wparams, !inchiOptConcatenateRecordsCheckBox->isChecked());
     setRecordSeparatorParameter(inchi_wparams, inchiOptRecordSeparator);
     setINCHIOutputOptionsParameter(inchi_wparams, inchiOptOptionsLineEdit->text().toStdString());
 
@@ -93,7 +93,7 @@ void OtherIOSettingsEditWidget::apply()
     SettingsContainer& smarts_wparams = settings.getWriterControlParameters("SMARTS");
 
     setStrictErrorCheckingParameter(smarts_wparams, smartsOptStrictErrorCheckingCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(smarts_wparams, !smartsOptConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(smarts_wparams, !smartsOptConcatenateRecordsCheckBox->isChecked());
     setRecordSeparatorParameter(smarts_wparams, smartsOptRecordSeparator);
 
     SettingsContainer& img_params = settings.getWriterControlParameters("img");
@@ -120,7 +120,7 @@ void OtherIOSettingsEditWidget::reset()
     const SettingsContainer& jme_wparams = settings.getWriterControlParameters("JME");
 
     jmeOptStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(jme_wparams)); 
-    jmeOptConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(jme_wparams)); 
+    jmeOptConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(jme_wparams)); 
     jmeOptRecordSeparator = getRecordSeparatorParameter(jme_wparams); 
 
     const SettingsContainer& inchi_rparams = settings.getReaderControlParameters("INCHI");
@@ -131,7 +131,7 @@ void OtherIOSettingsEditWidget::reset()
     const SettingsContainer& inchi_wparams = settings.getWriterControlParameters("INCHI");
 
     inchiOptStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(inchi_wparams)); 
-    inchiOptConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(inchi_wparams)); 
+    inchiOptConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(inchi_wparams)); 
     inchiOptOptionsLineEdit->setText(QString::fromStdString(getINCHIOutputOptionsParameter(inchi_wparams))); 
     inchiOptRecordSeparator = getRecordSeparatorParameter(inchi_wparams); 
 
@@ -142,7 +142,7 @@ void OtherIOSettingsEditWidget::reset()
     const SettingsContainer& smarts_wparams = settings.getWriterControlParameters("SMARTS");
 
     smartsOptStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(smarts_wparams)); 
-    smartsOptConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(smarts_wparams)); 
+    smartsOptConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(smarts_wparams)); 
     smartsOptRecordSeparator = getRecordSeparatorParameter(smarts_wparams); 
 
     const SettingsContainer& img_params = settings.getWriterControlParameters("img");
@@ -167,21 +167,21 @@ void OtherIOSettingsEditWidget::setDefaults()
     jmeIptStrictErrorCheckingCheckBox->setChecked(JME_INPUT_STRICT_ERROR_CHECKING);
 
     jmeOptStrictErrorCheckingCheckBox->setChecked(JME_OUTPUT_STRICT_ERROR_CHECKING);
-    jmeOptConcatenateRecordsCheckBox->setChecked(!JME_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    jmeOptConcatenateRecordsCheckBox->setChecked(!JME_OUTPUT_SINGLE_RECORD_FILES);
     jmeOptRecordSeparator = JME_OUTPUT_RECORD_SEPARATOR;
 
     inchiIptStrictErrorCheckingCheckBox->setChecked(INCHI_INPUT_STRICT_ERROR_CHECKING);
     inchiIptOptionsLineEdit->setText(QString::fromStdString(INCHI_INPUT_OPTIONS));
 
     inchiOptStrictErrorCheckingCheckBox->setChecked(INCHI_OUTPUT_STRICT_ERROR_CHECKING);
-    inchiOptConcatenateRecordsCheckBox->setChecked(!INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    inchiOptConcatenateRecordsCheckBox->setChecked(!INCHI_OUTPUT_SINGLE_RECORD_FILES);
     inchiOptOptionsLineEdit->setText(QString::fromStdString(INCHI_OUTPUT_OPTIONS));
     inchiOptRecordSeparator = INCHI_OUTPUT_RECORD_SEPARATOR;
 
     smartsIptStrictErrorCheckingCheckBox->setChecked(SMARTS_INPUT_STRICT_ERROR_CHECKING);
 
     smartsOptStrictErrorCheckingCheckBox->setChecked(SMARTS_OUTPUT_STRICT_ERROR_CHECKING);
-    smartsOptConcatenateRecordsCheckBox->setChecked(!SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    smartsOptConcatenateRecordsCheckBox->setChecked(!SMARTS_OUTPUT_SINGLE_RECORD_FILES);
     smartsOptRecordSeparator = SMARTS_OUTPUT_RECORD_SEPARATOR;
 
     imgOptEraseBackgroundCheckBox->setChecked(CDPL::Vis::ControlParameterDefault::BACKGROUND_BRUSH.getStyle() != CDPL::Vis::Brush::NO_PATTERN);

@@ -282,26 +282,28 @@ namespace CDPL
              * If the control-parameter is set to \c true, canonical \e SMILES strings will be generated. A canonical \e SMILES
              * string is unique for a given chemical structure and is always identical regardless of the atom and bond order in
              * the Chem::MolecularGraph object that describes the structure.
-             * If the value of \c %SMILES_WRITE_CANONICAL_FORM is \c false, the form of a generated \e SMILES string depends
+             * If the value of \c %SMILES_OUTPUT_CANONICAL_FORM is \c false, the form of a generated \e SMILES string depends
              * on the order of the atoms and bonds in the output molecular graph and thus may differ across a set of 
              * Chem::MolecularGraph objects that otherwise represent the same chemical structure.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_CANONICAL_FORM;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_CANONICAL_FORM;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with kekulized aromatic rings.
              *
              * If the control-parameter is set to \c true, aromatic rings will be represented as \e Kekul&eacute; structures with
              * standard (non-lowercase) atom element symbols and localized bond orders.
-             * If the value of \c %SMILES_WRITE_KEKULE_FORM is \c false, the order of localized aromatic bonds is left unspecified
+             * If the value of \c %SMILES_OUTPUT_KEKULE_FORM is \c false, the order of localized aromatic bonds is left unspecified
              * and aromatic atoms of type <em>C, N, O, S, Se, Te</em> or \e As will be indicated by lowercase atom element
              * symbols.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_KEKULE_FORM;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_KEKULE_FORM;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with atom parity specifications.
@@ -311,8 +313,9 @@ namespace CDPL
              * stereogenic atoms is left unspecified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_ATOM_STEREO;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_ATOM_STEREO;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] that include directional bonds for the definition of
@@ -323,8 +326,9 @@ namespace CDPL
              * geometry of double bonds is left unspecified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_BOND_STEREO;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_BOND_STEREO;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] that also include directional bonds for the definition of
@@ -336,17 +340,18 @@ namespace CDPL
              * If the value of the control-parameter is \c false, the geometry of ring double bonds will not be specified.
              *
              * \valuetype \c bool
-             * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_WRITE_BOND_STEREO
+             * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_OUTPUT_BOND_STEREO
              *       is set to \c true.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_RING_BOND_STEREO;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_RING_BOND_STEREO;
 
             /**
              * \brief Specifies the minimum ring size that is required for the specification of ring double bond geometries
              *        in generated \e SMILES strings [\ref SMILES].
              * 
              * \valuetype \c std::size_t
-             * \see Chem::ControlParameter::SMILES_WRITE_RING_BOND_STEREO
+             * \see Chem::ControlParameter::SMILES_OUTPUT_RING_BOND_STEREO
              */
             extern CDPL_CHEM_API const Base::LookupKey SMILES_MIN_STEREO_BOND_RING_SIZE;
 
@@ -355,56 +360,61 @@ namespace CDPL
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify the isotopic mass of
              * of atoms (if non-standard). 
-             * If the value of \c %SMILES_WRITE_ISOTOPE is \c false, the isotopic mass is left unspecified.
+             * If the value of \c %SMILES_OUTPUT_ISOTOPE is \c false, the isotopic mass is left unspecified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_ISOTOPE;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_ISOTOPE;
 
             /**
              * \brief Specifies whether to generate molecule \e SMILES strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify reaction atom-atom
              * mapping numbers (see Chem::AtomProperty::REACTION_ATOM_MAPPING_ID). 
-             * If the value of \c %SMILES_WRITE_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
+             * If the value of \c %SMILES_OUTPUT_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_MOL_WRITE_ATOM_MAPPING_ID;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_MOL_OUTPUT_ATOM_MAPPING_ID;
 
             /**
              * \brief Specifies whether to generate reaction \e SMILES strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
              *
              * If the control-parameter is set to \c true, the generated \e SMILES string will specify reaction atom-atom
              * mapping numbers (see Chem::AtomProperty::REACTION_ATOM_MAPPING_ID). 
-             * If the value of \c %SMILES_WRITE_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
+             * If the value of \c %SMILES_OUTPUT_ATOM_MAPPING_ID is \c false, atom-atom mapping numbers will not be specified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_RXN_WRITE_ATOM_MAPPING_ID;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_RXN_OUTPUT_ATOM_MAPPING_ID;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with explicit single bond specifications.
              *
              * If the control-parameter is set to \c true, generated \e SMILES strings will not only specify double and triple
              * bonds, but also single bonds.
-             * If the value of \c %SMILES_WRITE_SINGLE_BONDS is \c false, single bonds are left unspecified.
+             * If the value of \c %SMILES_OUTPUT_SINGLE_BONDS is \c false, single bonds are left unspecified.
              *
              * \valuetype \c bool
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_SINGLE_BONDS;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_SINGLE_BONDS;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] with explicit aromatic bond specifications.
              *
              * If the control-parameter is set to \c true, generated \e SMILES strings will explicitly specify aromatic bonds.
-             * If the value of \c %SMILES_WRITE_AROMATIC_BONDS is \c false, aromatic bonds are left unspecified.
+             * If the value of \c %SMILES_OUTPUT_AROMATIC_BONDS is \c false, aromatic bonds are left unspecified.
              *
              * \valuetype \c bool
-             * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_WRITE_KEKULE_FORM
+             * \note The setting of this control-parameter has only an effect if Chem::ControlParameter::SMILES_OUTPUT_KEKULE_FORM
              *       is set to \c false.
+             * \since 1.2
              */
-            extern CDPL_CHEM_API const Base::LookupKey SMILES_WRITE_AROMATIC_BONDS;
+            extern CDPL_CHEM_API const Base::LookupKey SMILES_OUTPUT_AROMATIC_BONDS;
 
             /**
              * \brief Specifies whether to generate \e SMILES strings [\ref SMILES] where all atom symbols are enclosed in brackets.
@@ -462,7 +472,7 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_INPUT_PROCESSOR;
 
-            extern CDPL_CHEM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
+            extern CDPL_CHEM_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
             extern CDPL_CHEM_API const Base::LookupKey MOL2_ENABLE_EXTENDED_ATOM_TYPES;
 

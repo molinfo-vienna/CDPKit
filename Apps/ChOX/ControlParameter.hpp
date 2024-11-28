@@ -81,7 +81,7 @@ namespace ChOX
         extern const CDPL::Base::LookupKey DEFAULT_MOL_OUTPUT_FORMAT;
         extern const CDPL::Base::LookupKey DEFAULT_RXN_OUTPUT_FORMAT;
 
-        extern const CDPL::Base::LookupKey WRITE_SINGLE_RECORD_FILES;
+        extern const CDPL::Base::LookupKey OUTPUT_SINGLE_RECORD_FILES;
 
         extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
         extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;

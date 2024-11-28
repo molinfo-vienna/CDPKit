@@ -36,9 +36,9 @@ namespace CDPL
         namespace ControlParameterDefault
         {
 
-            const bool                     STRICT_ERROR_CHECKING             = false;
+            const bool STRICT_ERROR_CHECKING              = false;
             
-            const bool                     CDF_WRITE_SINGLE_PRECISION_FLOATS = true;
+            const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS = true;
         }
 
         void initControlParameterDefaults() {}

@@ -103,13 +103,25 @@ namespace CDPL
 
             extern CDPL_BIOMOL_API const bool PDB_TRUNCATE_LINES;
 
-            extern CDPL_BIOMOL_API const bool PDB_WRITE_FORMAL_CHARGES;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool PDB_OUTPUT_FORMAL_CHARGES;
 
-            extern CDPL_BIOMOL_API const bool PDB_WRITE_CONECT_RECORDS;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS;
 
-            extern CDPL_BIOMOL_API const bool PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS;
 
-            extern CDPL_BIOMOL_API const bool PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_BIOMOL_API const bool PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER;
 
             extern CDPL_BIOMOL_API const unsigned int PDB_FORMAT_VERSION;
 

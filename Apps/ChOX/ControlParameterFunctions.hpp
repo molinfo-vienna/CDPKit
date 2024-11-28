@@ -145,8 +145,8 @@ namespace ChOX
     const std::string& getDefaultRxnOutputFormatParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void               setDefaultRxnOutputFormatParameter(CDPL::Base::ControlParameterContainer& cntnr, const std::string& format);
 
-    bool getWriteSingleRecordFilesParameter(const CDPL::Base::ControlParameterContainer& cntnr);
-    void setWriteSingleRecordFilesParameter(CDPL::Base::ControlParameterContainer& cntnr, bool write);
+    bool getOutputSingleRecordFilesParameter(const CDPL::Base::ControlParameterContainer& cntnr);
+    void setOutputSingleRecordFilesParameter(CDPL::Base::ControlParameterContainer& cntnr, bool output);
 
     bool getUseAtomColorTableParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void setUseAtomColorTableParameter(CDPL::Base::ControlParameterContainer& cntnr, bool use);

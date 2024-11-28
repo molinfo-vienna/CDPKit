@@ -36,12 +36,12 @@ namespace CDPL
         namespace ControlParameterDefault
         {
 
-            const bool                     STRICT_ERROR_CHECKING             = false;
+            const bool                     STRICT_ERROR_CHECKING              = false;
             
-            const bool                     CDF_WRITE_SINGLE_PRECISION_FLOATS = true;
+            const bool                     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = true;
 
-            const ScreeningDBCreator::Mode PSD_CREATION_MODE                 = ScreeningDBCreator::CREATE;
-            const bool                     PSD_ALLOW_DUPLICATES              = true;
+            const ScreeningDBCreator::Mode PSD_CREATION_MODE                  = ScreeningDBCreator::CREATE;
+            const bool                     PSD_ALLOW_DUPLICATES               = true;
         }
 
         void initControlParameterDefaults() {}

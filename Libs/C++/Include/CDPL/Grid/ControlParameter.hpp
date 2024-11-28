@@ -62,7 +62,10 @@ namespace CDPL
              */
             extern CDPL_GRID_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
-            extern CDPL_GRID_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
+            /**
+             * \since 1.2
+             */
+            extern CDPL_GRID_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
         } // namespace ControlParameter
     } // namespace Grid
 } // namespace CDPL

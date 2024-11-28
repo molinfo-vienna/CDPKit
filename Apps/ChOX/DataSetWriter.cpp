@@ -201,7 +201,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
     const DataFormat& fmt_descr = handler->getDataFormat();
     const SettingsContainer& params = settings.getWriterControlParameters(fmt_descr.getName());
-    bool single_rec_files = getWriteSingleRecordFilesParameter(params) || !fmt_descr.isMultiRecordFormat();
+    bool single_rec_files = getOutputSingleRecordFilesParameter(params) || !fmt_descr.isMultiRecordFormat();
 
     QProgressDialog progress_dlg(tr("Please wait ..."), tr("Abort"), 0, 100, parent);
 

@@ -75,7 +75,7 @@ void RXNFileIOSettingsEditWidget::apply()
     setMDLUpdateTimestampParameter(writer_params, optUpdateTimeStampCheckBox->isChecked());
     setMDLTruncateStringsParameter(writer_params, optTruncateStringsCheckBox->isChecked());
     setMDLTruncateLinesParameter(writer_params, optTruncateLinesCheckBox->isChecked());
-    setWriteSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
 
     setMDLCTABVersionParameter(writer_params, optCTabVersion);
     setMDLRXNFileVersionParameter(writer_params, optRXNFileVersion);
@@ -106,7 +106,7 @@ void RXNFileIOSettingsEditWidget::reset()
     optUpdateTimeStampCheckBox->setChecked(getMDLUpdateTimestampParameter(writer_params)); 
     optTruncateStringsCheckBox->setChecked(getMDLTruncateStringsParameter(writer_params)); 
     optTruncateLinesCheckBox->setChecked(getMDLTruncateLinesParameter(writer_params)); 
-    optConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(writer_params)); 
+    optConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(writer_params)); 
 
     optCTabVersion = getMDLCTABVersionParameter(writer_params); 
     optRXNFileVersion = getMDLRXNFileVersionParameter(writer_params); 
@@ -143,7 +143,7 @@ void RXNFileIOSettingsEditWidget::setDefaults()
     optUpdateTimeStampCheckBox->setChecked(RXN_OUTPUT_UPDATE_TIMESTAMP);
     optTruncateStringsCheckBox->setChecked(RXN_OUTPUT_TRUNCATE_STRINGS);
     optTruncateLinesCheckBox->setChecked(RXN_OUTPUT_TRUNCATE_LINES);
-    optConcatenateRecordsCheckBox->setChecked(!RXN_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    optConcatenateRecordsCheckBox->setChecked(!RXN_OUTPUT_SINGLE_RECORD_FILES);
 
     optCTabVersion = RXN_OUTPUT_CTAB_VERSION;
     optRXNFileVersion = RXN_OUTPUT_RXN_FILE_VERSION;

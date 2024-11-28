@@ -79,7 +79,7 @@ void SMILESIOSettingsEditWidget::apply()
     setSMILESWriteAromaticBondsParameter(writer_params, optExplicitAromaticBondsCheckBox->isChecked());
     setSMILESNoOrganicSubsetParameter(writer_params, optNoOrganicSubsetCheckBox->isChecked());
     setSMILESMinStereoBondRingSizeParameter(writer_params, std::size_t(optMinRingSizeSpinBox->value()));
-    setWriteSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
+    setOutputSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
     setSMILESRecordFormatParameter(writer_params, optRecordFormat);
 }
 
@@ -110,7 +110,7 @@ void SMILESIOSettingsEditWidget::reset()
     optExplicitSingleBondsCheckBox->setChecked(getSMILESWriteSingleBondsParameter(writer_params));
     optExplicitAromaticBondsCheckBox->setChecked(getSMILESWriteAromaticBondsParameter(writer_params));
     optNoOrganicSubsetCheckBox->setChecked(getSMILESNoOrganicSubsetParameter(writer_params));
-    optConcatenateRecordsCheckBox->setChecked(!getWriteSingleRecordFilesParameter(writer_params));
+    optConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(writer_params));
 
     optMinRingSizeSpinBox->setValue(getSMILESMinStereoBondRingSizeParameter(writer_params));
 
@@ -135,17 +135,17 @@ void SMILESIOSettingsEditWidget::setDefaults()
 
     optStrictErrorCheckingCheckBox->setChecked(SMILES_OUTPUT_STRICT_ERROR_CHECKING);
     optOrdinaryHDepleteCheckBox->setChecked(SMILES_OUTPUT_ORDINARY_H_DEPLETE);
-    optCanonicalFormCheckBox->setChecked(SMILES_OUTPUT_WRITE_CANONICAL_FORM);
-    optKekuleFormCheckBox->setChecked(SMILES_OUTPUT_WRITE_KEKULE_FORM);
-    optIsotopeCheckBox->setChecked(SMILES_OUTPUT_WRITE_ISOTOPE);
-    optAtomStereoCheckBox->setChecked(SMILES_OUTPUT_WRITE_ATOM_STEREO);
-    optBondStereoCheckBox->setChecked(SMILES_OUTPUT_WRITE_BOND_STEREO);
-    optRingBondStereoCheckBox->setChecked(SMILES_OUTPUT_WRITE_RING_BOND_STEREO);
-    optAtomAtomMappingsCheckBox->setChecked(SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID);
-    optExplicitSingleBondsCheckBox->setChecked(SMILES_OUTPUT_WRITE_SINGLE_BONDS);
-    optExplicitAromaticBondsCheckBox->setChecked(SMILES_OUTPUT_WRITE_AROMATIC_BONDS);
+    optCanonicalFormCheckBox->setChecked(SMILES_OUTPUT_CANONICAL_FORM);
+    optKekuleFormCheckBox->setChecked(SMILES_OUTPUT_KEKULE_FORM);
+    optIsotopeCheckBox->setChecked(SMILES_OUTPUT_ISOTOPE);
+    optAtomStereoCheckBox->setChecked(SMILES_OUTPUT_ATOM_STEREO);
+    optBondStereoCheckBox->setChecked(SMILES_OUTPUT_BOND_STEREO);
+    optRingBondStereoCheckBox->setChecked(SMILES_OUTPUT_RING_BOND_STEREO);
+    optAtomAtomMappingsCheckBox->setChecked(SMILES_OUTPUT_ATOM_MAPPING_ID);
+    optExplicitSingleBondsCheckBox->setChecked(SMILES_OUTPUT_SINGLE_BONDS);
+    optExplicitAromaticBondsCheckBox->setChecked(SMILES_OUTPUT_AROMATIC_BONDS);
     optNoOrganicSubsetCheckBox->setChecked(SMILES_OUTPUT_NO_ORGANIC_SUBSET);
-    optConcatenateRecordsCheckBox->setChecked(!SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    optConcatenateRecordsCheckBox->setChecked(!SMILES_OUTPUT_SINGLE_RECORD_FILES);
     optRecordFormat = SMILES_OUTPUT_RECORD_FORMAT;
 
     optMinRingSizeSpinBox->setValue(SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE);
