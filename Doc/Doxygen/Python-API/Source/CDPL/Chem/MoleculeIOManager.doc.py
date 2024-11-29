@@ -162,7 +162,7 @@ class MoleculeIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numInputHandlers = 30
+    numInputHandlers = 33
 
     ##
     # \brief 

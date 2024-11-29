@@ -130,29 +130,39 @@ class ControlParameterDefault(Boost.Python.instance):
     SMILES_RECORD_FORMAT = 'SN'
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_CANONICAL_FORM.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_CANONICAL_FORM.
     # 
-    SMILES_WRITE_CANONICAL_FORM = False
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_CANONICAL_FORM = False
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_KEKULE_FORM.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM.
     # 
-    SMILES_WRITE_KEKULE_FORM = False
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_KEKULE_FORM = False
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_STEREO.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_STEREO.
     # 
-    SMILES_WRITE_ATOM_STEREO = True
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_ATOM_STEREO = True
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_BOND_STEREO.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO.
     # 
-    SMILES_WRITE_BOND_STEREO = True
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_BOND_STEREO = True
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_RING_BOND_STEREO.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO.
     # 
-    SMILES_WRITE_RING_BOND_STEREO = True
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_RING_BOND_STEREO = True
 
     ##
     # \brief Default setting (= <tt>8</tt>) for the control-parameter Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE.
@@ -160,29 +170,39 @@ class ControlParameterDefault(Boost.Python.instance):
     SMILES_MIN_STEREO_BOND_RING_SIZE = 8
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ISOTOPE.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ISOTOPE.
     # 
-    SMILES_WRITE_ISOTOPE = True
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_ISOTOPE = True
 
     ##
-    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_MAPPING_ID on reaction SMILES output.
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on reaction SMILES output.
     # 
-    SMILES_RXN_WRITE_ATOM_MAPPING_ID = True
+    # \since 1.2
+    # 
+    SMILES_RXN_OUTPUT_ATOM_MAPPING_ID = True
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_MAPPING_ID on molecule SMILES output.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on molecule SMILES output.
     # 
-    SMILES_MOL_WRITE_ATOM_MAPPING_ID = False
+    # \since 1.2
+    # 
+    SMILES_MOL_OUTPUT_ATOM_MAPPING_ID = False
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_SINGLE_BONDS.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_SINGLE_BONDS.
     # 
-    SMILES_WRITE_SINGLE_BONDS = False
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_SINGLE_BONDS = False
 
     ##
-    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_AROMATIC_BONDS.
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_AROMATIC_BONDS.
     # 
-    SMILES_WRITE_AROMATIC_BONDS = False
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_AROMATIC_BONDS = False
 
     ##
     # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET.
@@ -217,7 +237,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = True
+    CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True
 
     ##
     # \brief 
@@ -268,3 +288,63 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief 
     #
     XYZ_CALC_FORMAL_CHARGES = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_XML_DECLARATION = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ELEMENT_NAMESPACE = ''
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ATOM_PARITY = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_SINGLE_BOND_STEREO = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_DOUBLE_BOND_STEREO = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_KEKULE_FORM = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_MOLECULE_NAME = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_STRUCTURE_DATA = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ISOTOPE = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_SPIN_MULTIPLICITY = True
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_COMPACT_ATOM_DATA = False
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_COMPACT_BOND_DATA = False

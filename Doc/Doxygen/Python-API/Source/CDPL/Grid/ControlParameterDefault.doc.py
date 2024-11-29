@@ -32,4 +32,4 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = True
+    CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True

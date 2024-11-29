@@ -200,7 +200,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the minimum ring size that is required for the specification of ring double bond geometries in generated <em>SMILES</em> strings [\ref SMILES].
     # 
-    # <b>Value Type:</b> <tt>std::size_t</tt> \see Chem.ControlParameter.SMILES_WRITE_RING_BOND_STEREO
+    # <b>Value Type:</b> <tt>std::size_t</tt> \see Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO
     # 
     SMILES_MIN_STEREO_BOND_RING_SIZE = CDPL.Base.LookupKey('SMILES_MIN_STEREO_BOND_RING_SIZE')
 
@@ -216,92 +216,96 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with explicit aromatic bond specifications.
     # 
-    # If the control-parameter is set to <tt>True</tt>, generated <em>SMILES</em> strings will explicitly specify aromatic bonds. If the value of <tt>SMILES_WRITE_AROMATIC_BONDS</tt> is <tt>False</tt>, aromatic bonds are left unspecified.
+    # If the control-parameter is set to <tt>True</tt>, generated <em>SMILES</em> strings will explicitly specify aromatic bonds. If the value of <tt>SMILES_OUTPUT_AROMATIC_BONDS</tt> is <tt>False</tt>, aromatic bonds are left unspecified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_WRITE_KEKULE_FORM is set to <tt>False</tt>.
+    # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_OUTPUT_KEKULE_FORM is set to <tt>False</tt>. 
     # 
-    SMILES_WRITE_AROMATIC_BONDS = CDPL.Base.LookupKey('SMILES_WRITE_AROMATIC_BONDS')
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_AROMATIC_BONDS = CDPL.Base.LookupKey('SMILES_OUTPUT_AROMATIC_BONDS')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with isotopic mass specifications.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the isotopic mass of of atoms (if non-standard). If the value of <tt>SMILES_WRITE_ISOTOPE</tt> is <tt>False</tt>, the isotopic mass is left unspecified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the isotopic mass of of atoms (if non-standard). If the value of <tt>SMILES_OUTPUT_ISOTOPE</tt> is <tt>False</tt>, the isotopic mass is left unspecified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_ISOTOPE = CDPL.Base.LookupKey('SMILES_WRITE_ISOTOPE')
+    SMILES_OUTPUT_ISOTOPE = CDPL.Base.LookupKey('SMILES_OUTPUT_ISOTOPE')
 
     ##
     # \brief Specifies whether to generate molecule <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_WRITE_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_MOL_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_MOL_WRITE_ATOM_MAPPING_ID')
+    SMILES_MOL_OUTPUT_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_MOL_OUTPUT_ATOM_MAPPING_ID')
 
     ##
     # \brief Specifies whether to generate reaction <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_WRITE_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_RXN_WRITE_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_RXN_WRITE_ATOM_MAPPING_ID')
+    SMILES_RXN_OUTPUT_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_RXN_OUTPUT_ATOM_MAPPING_ID')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with atom parity specifications.
     # 
     # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the parity of terahedral stereogenic atoms. If the value of the control-parameter is <tt>False</tt>, the parity of stereogenic atoms is left unspecified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_ATOM_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_ATOM_STEREO')
+    SMILES_OUTPUT_ATOM_STEREO = CDPL.Base.LookupKey('SMILES_OUTPUT_ATOM_STEREO')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] that include directional bonds for the definition of double bond geometries.
     # 
     # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will contain directional bonds for the specification of chain double bond geometries. If the value of the control-parameter is <tt>False</tt>, the geometry of double bonds is left unspecified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_BOND_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_BOND_STEREO')
+    SMILES_OUTPUT_BOND_STEREO = CDPL.Base.LookupKey('SMILES_OUTPUT_BOND_STEREO')
 
     ##
     # \brief Specifies whether to generate canonical <em>SMILES</em> strings [\ref SMILES].
     # 
-    # If the control-parameter is set to <tt>True</tt>, canonical <em>SMILES</em> strings will be generated. A canonical <em>SMILES</em> string is unique for a given chemical structure and is always identical regardless of the atom and bond order in the Chem.MolecularGraph object that describes the structure. If the value of <tt>SMILES_WRITE_CANONICAL_FORM</tt> is <tt>False</tt>, the form of a generated <em>SMILES</em> string depends on the order of the atoms and bonds in the output molecular graph and thus may differ across a set of Chem.MolecularGraph objects that otherwise represent the same chemical structure.
+    # If the control-parameter is set to <tt>True</tt>, canonical <em>SMILES</em> strings will be generated. A canonical <em>SMILES</em> string is unique for a given chemical structure and is always identical regardless of the atom and bond order in the Chem.MolecularGraph object that describes the structure. If the value of <tt>SMILES_OUTPUT_CANONICAL_FORM</tt> is <tt>False</tt>, the form of a generated <em>SMILES</em> string depends on the order of the atoms and bonds in the output molecular graph and thus may differ across a set of Chem.MolecularGraph objects that otherwise represent the same chemical structure.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_CANONICAL_FORM = CDPL.Base.LookupKey('SMILES_WRITE_CANONICAL_FORM')
+    SMILES_OUTPUT_CANONICAL_FORM = CDPL.Base.LookupKey('SMILES_OUTPUT_CANONICAL_FORM')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with kekulized aromatic rings.
     # 
-    # If the control-parameter is set to <tt>True</tt>, aromatic rings will be represented as <em>Kekul&eacute;</em> structures with standard (non-lowercase) atom element symbols and localized bond orders. If the value of <tt>SMILES_WRITE_KEKULE_FORM</tt> is <tt>False</tt>, the order of localized aromatic bonds is left unspecified and aromatic atoms of type <em>C, N, O, S, Se, Te</em> or <em>As</em> will be indicated by lowercase atom element symbols.
+    # If the control-parameter is set to <tt>True</tt>, aromatic rings will be represented as <em>Kekul&eacute;</em> structures with standard (non-lowercase) atom element symbols and localized bond orders. If the value of <tt>SMILES_OUTPUT_KEKULE_FORM</tt> is <tt>False</tt>, the order of localized aromatic bonds is left unspecified and aromatic atoms of type <em>C, N, O, S, Se, Te</em> or <em>As</em> will be indicated by lowercase atom element symbols.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_KEKULE_FORM = CDPL.Base.LookupKey('SMILES_WRITE_KEKULE_FORM')
+    SMILES_OUTPUT_KEKULE_FORM = CDPL.Base.LookupKey('SMILES_OUTPUT_KEKULE_FORM')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] that also include directional bonds for the definition of ring double bond geometries.
     # 
     # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the geometry of any double bond that is not a member of a ring which is smaller than the size specified by Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE. If the value of the control-parameter is <tt>False</tt>, the geometry of ring double bonds will not be specified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_WRITE_BOND_STEREO is set to <tt>True</tt>.
+    # <b>Value Type:</b> <tt>bool</tt> \note The setting of this control-parameter has only an effect if Chem.ControlParameter.SMILES_OUTPUT_BOND_STEREO is set to <tt>True</tt>. 
     # 
-    SMILES_WRITE_RING_BOND_STEREO = CDPL.Base.LookupKey('SMILES_WRITE_RING_BOND_STEREO')
+    # \since 1.2
+    # 
+    SMILES_OUTPUT_RING_BOND_STEREO = CDPL.Base.LookupKey('SMILES_OUTPUT_RING_BOND_STEREO')
 
     ##
     # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with explicit single bond specifications.
     # 
-    # If the control-parameter is set to <tt>True</tt>, generated <em>SMILES</em> strings will not only specify double and triple bonds, but also single bonds. If the value of <tt>SMILES_WRITE_SINGLE_BONDS</tt> is <tt>False</tt>, single bonds are left unspecified.
+    # If the control-parameter is set to <tt>True</tt>, generated <em>SMILES</em> strings will not only specify double and triple bonds, but also single bonds. If the value of <tt>SMILES_OUTPUT_SINGLE_BONDS</tt> is <tt>False</tt>, single bonds are left unspecified.
     # 
-    # <b>Value Type:</b> <tt>bool</tt>
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
-    SMILES_WRITE_SINGLE_BONDS = CDPL.Base.LookupKey('SMILES_WRITE_SINGLE_BONDS')
+    SMILES_OUTPUT_SINGLE_BONDS = CDPL.Base.LookupKey('SMILES_OUTPUT_SINGLE_BONDS')
 
     ##
     # \brief Specifies options for the input of <em>InChI</em> strings [\ref INCHI].
@@ -349,7 +353,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_WRITE_SINGLE_PRECISION_FLOATS')
+    CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
     # \brief 
@@ -400,3 +404,63 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     XYZ_CALC_FORMAL_CHARGES = CDPL.Base.LookupKey('XYZ_CALC_FORMAL_CHARGES')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_XML_DECLARATION = CDPL.Base.LookupKey('CML_OUTPUT_XML_DECLARATION')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ELEMENT_NAMESPACE = CDPL.Base.LookupKey('CML_OUTPUT_ELEMENT_NAMESPACE')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ATOM_PARITY = CDPL.Base.LookupKey('CML_OUTPUT_ATOM_PARITY')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_SINGLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_SINGLE_BOND_STEREO')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_DOUBLE_BOND_STEREO = CDPL.Base.LookupKey('CML_OUTPUT_DOUBLE_BOND_STEREO')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_KEKULE_FORM = CDPL.Base.LookupKey('CML_OUTPUT_KEKULE_FORM')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_MOLECULE_NAME = CDPL.Base.LookupKey('CML_OUTPUT_MOLECULE_NAME')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_STRUCTURE_DATA = CDPL.Base.LookupKey('CML_OUTPUT_STRUCTURE_DATA')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_ISOTOPE = CDPL.Base.LookupKey('CML_OUTPUT_ISOTOPE')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_SPIN_MULTIPLICITY = CDPL.Base.LookupKey('CML_OUTPUT_SPIN_MULTIPLICITY')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_COMPACT_ATOM_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_ATOM_DATA')
+
+    ##
+    # \brief 
+    #
+    CML_OUTPUT_COMPACT_BOND_DATA = CDPL.Base.LookupKey('CML_OUTPUT_COMPACT_BOND_DATA')

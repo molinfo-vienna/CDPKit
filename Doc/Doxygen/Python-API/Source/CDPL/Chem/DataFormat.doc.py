@@ -144,18 +144,18 @@ class DataFormat(Boost.Python.instance):
     # 
     # \since 1.2
     # 
-    CML = CDPL.Base.DataFormat(name='CML', descr='Chemical Markup Language Format', mime_type'', file_exts=['cml'], multi_rec=True)
+    CML = CDPL.Base.DataFormat(name='CML', descr='Chemical Markup Language Format', mime_type'chemical/x-cml', file_exts=['cml'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the gzip-compressed <em>Chemical Markup Language</em> [\ref CML] format.
     # 
     # \since 1.2
     # 
-    CML_GZ = CDPL.Base.DataFormat(name='CML_GZ', descr='GZip-Compressed Chemical Markup Language Format', mime_type'', file_exts=['cml.gz'], multi_rec=True)
+    CML_GZ = CDPL.Base.DataFormat(name='CML_GZ', descr='GZip-Compressed Chemical Markup Language Format', mime_type'chemical/x-cml', file_exts=['cml.gz'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the bzip2-compressed <em>Chemical Markup Language</em> [\ref CML] format.
     # 
     # \since 1.2
     # 
-    CML_BZ2 = CDPL.Base.DataFormat(name='CML_BZ2', descr='BZip2-Compressed Chemical Markup Language Format', mime_type'', file_exts=['cml.bz2'], multi_rec=True)
+    CML_BZ2 = CDPL.Base.DataFormat(name='CML_BZ2', descr='BZip2-Compressed Chemical Markup Language Format', mime_type'chemical/x-cml', file_exts=['cml.bz2'], multi_rec=True)

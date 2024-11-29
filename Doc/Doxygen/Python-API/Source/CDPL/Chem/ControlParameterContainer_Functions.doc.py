@@ -23,55 +23,136 @@
 # \brief 
 # \param cntnr 
 #
-def clearSMILESMolWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESMolWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESMolWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setSMILESMolWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setSMILESMolOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSMILESRxnWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSMILESRxnWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESRxnWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \return 
 #
-def setSMILESRxnWriteAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def getSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESRxnOutputAtomMappingIDParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputCompactBondDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputStructureDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputCompactAtomDataParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -104,6 +185,60 @@ def setMDLOutputConfEnergyToEnergyFieldParameter(cntnr: Base.ControlParameterCon
 # \brief 
 # \param cntnr 
 #
+def clearCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer) -> str: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ns 
+#
+def setCMLOutputElementNamespaceParameter(cntnr: Base.ControlParameterContainer, ns: str) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputMoleculeNameParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -131,28 +266,55 @@ def setXYZCommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name:
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESWriteIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setSMILESWriteIsotopeParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setCMLOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputIsotopeParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -347,55 +509,82 @@ def setCheckLineLengthParameter(cntnr: Base.ControlParameterContainer, check: bo
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESWriteKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setSMILESWriteKekuleFormParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSMILESWriteCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \return 
 #
-def setSMILESWriteCanonicalFormParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def getSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputCanonicalFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -482,6 +671,33 @@ def setMDLRXNFileVersionParameter(cntnr: Base.ControlParameterContainer, version
 # \brief 
 # \param cntnr 
 #
+def clearCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputXMLDeclarationParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -509,82 +725,136 @@ def setConfIndexNameSuffixPatternParameter(cntnr: Base.ControlParameterContainer
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESWriteBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setSMILESWriteBondStereoParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setCMLOutputDoubleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSMILESWriteRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param write 
-#
-def setSMILESWriteRingBondStereoParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
-def clearSMILESWriteAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def hasCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESWriteAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputSingleBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \return 
 #
-def setSMILESWriteAtomStereoParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def getSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputRingBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputBondStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputAtomStereoParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -671,55 +941,55 @@ def setRecordSeparatorParameter(cntnr: Base.ControlParameterContainer, sep: str)
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasSMILESWriteAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setSMILESWriteAromaticBondsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setSMILESOutputAromaticBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSMILESWriteSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSMILESWriteSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSMILESWriteSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \return 
 #
-def setSMILESWriteSingleBondsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def getSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputSingleBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -1049,28 +1319,28 @@ def setXYZPerceiveBondOrdersParameter(cntnr: Base.ControlParameterContainer, per
 # \brief 
 # \param cntnr 
 #
-def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param single_prec 
 #
-def setCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
+def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
 # \brief 
@@ -1292,6 +1562,33 @@ def setMDLOutputConfEnergyAsSDEntryParameter(cntnr: Base.ControlParameterContain
 # \brief 
 # \param cntnr 
 #
+def clearCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputSpinMultiplicityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1314,6 +1611,33 @@ def getMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer) -> bool: 
 # \param ignore 
 #
 def setMDLIgnoreParityParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setCMLOutputAtomParityParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 

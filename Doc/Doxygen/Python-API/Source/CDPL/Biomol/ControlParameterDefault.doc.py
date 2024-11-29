@@ -112,17 +112,17 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    PDB_WRITE_CONECT_RECORDS = True
+    PDB_OUTPUT_CONECT_RECORDS = True
 
     ##
     # \brief 
     #
-    PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS = False
+    PDB_OUTPUT_CONECT_RECORDS_FOR_ALL_BONDS = False
 
     ##
     # \brief 
     #
-    PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER = False
+    PDB_OUTPUT_CONECT_RECORDS_REFLECTING_BOND_ORDER = False
 
     ##
     # \brief 

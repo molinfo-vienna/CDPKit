@@ -50,25 +50,25 @@ def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, stric
 # \brief 
 # \param cntnr 
 #
-def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param single_prec 
 #
-def setCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
+def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass

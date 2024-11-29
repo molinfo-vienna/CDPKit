@@ -239,82 +239,55 @@ def setMMCIFOutputBiopolymersAsChemCompParameter(cntnr: Base.ControlParameterCon
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param write 
+# \param output 
 #
-def setPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBOutputCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def clearPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param write 
-#
-def setPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
-def clearPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def hasPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \return 
+# \param output 
 #
-def getPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param write 
-#
-def setPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 
@@ -347,6 +320,33 @@ def setPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParamete
 # \brief 
 # \param cntnr 
 #
+def clearPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -369,33 +369,6 @@ def getPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # \param ignore 
 #
 def setPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
-def clearPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param write 
-#
-def setPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
 
 ##
 # \brief 
@@ -450,6 +423,33 @@ def getApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer) ->
 # \param apply 
 #
 def setApplyDictFormalChargesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setPDBOutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
 
 ##
 # \brief 

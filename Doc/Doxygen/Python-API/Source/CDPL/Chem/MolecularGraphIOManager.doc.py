@@ -172,7 +172,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numOutputHandlers = 33
+    numOutputHandlers = 36
 
     ##
     # \brief Registers the specified Chem.MolecularGraphInputHandler implementation instance.

@@ -36,4 +36,4 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_WRITE_SINGLE_PRECISION_FLOATS')
+    CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
