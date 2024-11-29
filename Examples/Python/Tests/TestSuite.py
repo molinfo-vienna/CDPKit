@@ -55,7 +55,7 @@ def checkScriptOutput(script_name, args):
         print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
         return True
 
-def checkScriptFileOutput(script_name, out_file, args):
+def checkScriptFileOutput(script_name, out_file, args, exp_output_file=None):
     script_dir = os.environ['PYTHON_EXAMPLES_DIR']
     script_path = os.path.join(script_dir, script_name + '.py')
 
@@ -64,7 +64,11 @@ def checkScriptFileOutput(script_name, out_file, args):
     try:
         result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
         output = open(out_file, 'r').read()
-        exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
+
+        if exp_output_file:
+            exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), exp_output_file), 'r').read()
+        else:
+            exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
         if output == exp_output:
             print('ok', file=sys.stderr)
@@ -133,7 +137,13 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('gen_ecfp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out'), '-y', '-c' ])
     errors |= checkScriptOutput('gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
-
+    errors |= checkScriptFileOutput('gen_ph4_fp', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '5737', '-d', '3' ],
+                                    'gen_ph4_fp_3d.out')
+    errors |= checkScriptFileOutput('gen_ph4_fp', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-d', '2' ],
+                                    'gen_ph4_fp_2d.out')
+   
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
     errors |= checkScriptFileOutput('tor_drive', outputFilePath('tor_drive.mol2'),
