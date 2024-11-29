@@ -193,13 +193,13 @@ void ConfGen::FragmentLibraryGenerator::init()
 {    
     setRecordSeparatorParameter(smilesGen, "");
     setOrdinaryHydrogenDepleteParameter(smilesGen, false);
-    setSMILESWriteCanonicalFormParameter(smilesGen, false);
-    setSMILESMolWriteAtomMappingIDParameter(smilesGen, false);
-    setSMILESWriteIsotopeParameter(smilesGen, false);
-    setSMILESWriteAtomStereoParameter(smilesGen, true);
-    setSMILESWriteBondStereoParameter(smilesGen, true);
-    setSMILESWriteRingBondStereoParameter(smilesGen, true);
-    setSMILESWriteAromaticBondsParameter(smilesGen, false);
-    setSMILESWriteKekuleFormParameter(smilesGen, false);
+    setSMILESOutputCanonicalFormParameter(smilesGen, false);
+    setSMILESMolOutputAtomMappingIDParameter(smilesGen, false);
+    setSMILESOutputIsotopeParameter(smilesGen, false);
+    setSMILESOutputAtomStereoParameter(smilesGen, true);
+    setSMILESOutputBondStereoParameter(smilesGen, true);
+    setSMILESOutputRingBondStereoParameter(smilesGen, true);
+    setSMILESOutputAromaticBondsParameter(smilesGen, false);
+    setSMILESOutputKekuleFormParameter(smilesGen, false);
 }
 

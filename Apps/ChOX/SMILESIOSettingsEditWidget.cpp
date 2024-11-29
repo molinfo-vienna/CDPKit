@@ -67,16 +67,16 @@ void SMILESIOSettingsEditWidget::apply()
 
     setStrictErrorCheckingParameter(writer_params, optStrictErrorCheckingCheckBox->isChecked());
     setOrdinaryHydrogenDepleteParameter(writer_params, optOrdinaryHDepleteCheckBox->isChecked());
-    setSMILESWriteCanonicalFormParameter(writer_params, optCanonicalFormCheckBox->isChecked());
-    setSMILESWriteKekuleFormParameter(writer_params, optKekuleFormCheckBox->isChecked());
-    setSMILESWriteIsotopeParameter(writer_params, optIsotopeCheckBox->isChecked());
-    setSMILESWriteAtomStereoParameter(writer_params, optAtomStereoCheckBox->isChecked());
-    setSMILESWriteBondStereoParameter(writer_params, optBondStereoCheckBox->isChecked());
-    setSMILESWriteRingBondStereoParameter(writer_params, optRingBondStereoCheckBox->isChecked());
-    setSMILESMolWriteAtomMappingIDParameter(writer_params, optAtomAtomMappingsCheckBox->isChecked());
-    setSMILESRxnWriteAtomMappingIDParameter(writer_params, optAtomAtomMappingsCheckBox->isChecked());
-    setSMILESWriteSingleBondsParameter(writer_params, optExplicitSingleBondsCheckBox->isChecked());
-    setSMILESWriteAromaticBondsParameter(writer_params, optExplicitAromaticBondsCheckBox->isChecked());
+    setSMILESOutputCanonicalFormParameter(writer_params, optCanonicalFormCheckBox->isChecked());
+    setSMILESOutputKekuleFormParameter(writer_params, optKekuleFormCheckBox->isChecked());
+    setSMILESOutputIsotopeParameter(writer_params, optIsotopeCheckBox->isChecked());
+    setSMILESOutputAtomStereoParameter(writer_params, optAtomStereoCheckBox->isChecked());
+    setSMILESOutputBondStereoParameter(writer_params, optBondStereoCheckBox->isChecked());
+    setSMILESOutputRingBondStereoParameter(writer_params, optRingBondStereoCheckBox->isChecked());
+    setSMILESMolOutputAtomMappingIDParameter(writer_params, optAtomAtomMappingsCheckBox->isChecked());
+    setSMILESRxnOutputAtomMappingIDParameter(writer_params, optAtomAtomMappingsCheckBox->isChecked());
+    setSMILESOutputSingleBondsParameter(writer_params, optExplicitSingleBondsCheckBox->isChecked());
+    setSMILESOutputAromaticBondsParameter(writer_params, optExplicitAromaticBondsCheckBox->isChecked());
     setSMILESNoOrganicSubsetParameter(writer_params, optNoOrganicSubsetCheckBox->isChecked());
     setSMILESMinStereoBondRingSizeParameter(writer_params, std::size_t(optMinRingSizeSpinBox->value()));
     setOutputSingleRecordFilesParameter(writer_params, !optConcatenateRecordsCheckBox->isChecked());
@@ -99,16 +99,16 @@ void SMILESIOSettingsEditWidget::reset()
 
     optStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(writer_params));
     optOrdinaryHDepleteCheckBox->setChecked(getOrdinaryHydrogenDepleteParameter(writer_params));
-    optCanonicalFormCheckBox->setChecked(getSMILESWriteCanonicalFormParameter(writer_params));
-    optKekuleFormCheckBox->setChecked(getSMILESWriteKekuleFormParameter(writer_params));
-    optIsotopeCheckBox->setChecked(getSMILESWriteIsotopeParameter(writer_params));
-    optAtomStereoCheckBox->setChecked(getSMILESWriteAtomStereoParameter(writer_params));
-    optBondStereoCheckBox->setChecked(getSMILESWriteBondStereoParameter(writer_params));
-    optRingBondStereoCheckBox->setChecked(getSMILESWriteRingBondStereoParameter(writer_params));
-    optAtomAtomMappingsCheckBox->setChecked(getSMILESMolWriteAtomMappingIDParameter(writer_params) ||
-                                            getSMILESRxnWriteAtomMappingIDParameter(writer_params));
-    optExplicitSingleBondsCheckBox->setChecked(getSMILESWriteSingleBondsParameter(writer_params));
-    optExplicitAromaticBondsCheckBox->setChecked(getSMILESWriteAromaticBondsParameter(writer_params));
+    optCanonicalFormCheckBox->setChecked(getSMILESOutputCanonicalFormParameter(writer_params));
+    optKekuleFormCheckBox->setChecked(getSMILESOutputKekuleFormParameter(writer_params));
+    optIsotopeCheckBox->setChecked(getSMILESOutputIsotopeParameter(writer_params));
+    optAtomStereoCheckBox->setChecked(getSMILESOutputAtomStereoParameter(writer_params));
+    optBondStereoCheckBox->setChecked(getSMILESOutputBondStereoParameter(writer_params));
+    optRingBondStereoCheckBox->setChecked(getSMILESOutputRingBondStereoParameter(writer_params));
+    optAtomAtomMappingsCheckBox->setChecked(getSMILESMolOutputAtomMappingIDParameter(writer_params) ||
+                                            getSMILESRxnOutputAtomMappingIDParameter(writer_params));
+    optExplicitSingleBondsCheckBox->setChecked(getSMILESOutputSingleBondsParameter(writer_params));
+    optExplicitAromaticBondsCheckBox->setChecked(getSMILESOutputAromaticBondsParameter(writer_params));
     optNoOrganicSubsetCheckBox->setChecked(getSMILESNoOrganicSubsetParameter(writer_params));
     optConcatenateRecordsCheckBox->setChecked(!getOutputSingleRecordFilesParameter(writer_params));
 

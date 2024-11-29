@@ -208,41 +208,49 @@ namespace CDPL
 
         CDPL_BIOMOL_API void clearPDBTruncateLinesParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getPDBOutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool getPDBWriteFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setPDBOutputFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_BIOMOL_API void setPDBWriteFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_BIOMOL_API bool hasPDBOutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasPDBWriteFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void clearPDBOutputFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void clearPDBWriteFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_BIOMOL_API void setPDBOutputCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API bool hasPDBOutputCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void setPDBWriteCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setPDBOutputCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr, bool output);
 
+        CDPL_BIOMOL_API bool hasPDBOutputCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API void setPDBWriteCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr, bool write);
+        /**
+         * \since 1.2
+         */
+        CDPL_BIOMOL_API bool getPDBOutputCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setPDBOutputCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API bool hasPDBOutputCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
 
-
-        CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void setPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr, bool write);
-
-        CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void clearPDBOutputCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_BIOMOL_API unsigned int getPDBFormatVersionParameter(const Base::ControlParameterContainer& cntnr);

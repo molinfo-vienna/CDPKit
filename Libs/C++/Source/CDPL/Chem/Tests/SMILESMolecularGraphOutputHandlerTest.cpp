@@ -69,9 +69,9 @@ BOOST_AUTO_TEST_CASE(SMILESMolecularGraphOutputHandlerTest)
 
     DataWriter<MolecularGraph>::SharedPointer writer_ptr(handler->createWriter(oss));
 
-    setSMILESWriteAtomStereoParameter(*writer_ptr, true);
-    setSMILESWriteBondStereoParameter(*writer_ptr, true);
-    setSMILESWriteRingBondStereoParameter(*writer_ptr, true);
+    setSMILESOutputAtomStereoParameter(*writer_ptr, true);
+    setSMILESOutputBondStereoParameter(*writer_ptr, true);
+    setSMILESOutputRingBondStereoParameter(*writer_ptr, true);
     setSMILESMinStereoBondRingSizeParameter(*writer_ptr, std::size_t(3));
 
     BasicMolecule mol2;

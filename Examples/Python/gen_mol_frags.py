@@ -120,7 +120,7 @@ def main() -> None:
     writer = Chem.MolecularGraphWriter(args.out_file) 
   
     if args.atom_mpg: # enable atom mapping IDs for SMILES output
-        Chem.setSMILESMolWriteAtomMappingIDParameter(writer, True)
+        Chem.setSMILESMolOutputAtomMappingIDParameter(writer, True)
     
     # create instances of the default implementation of the Chem.Molecule interface for the input molecule
     in_mol = Chem.BasicMolecule()

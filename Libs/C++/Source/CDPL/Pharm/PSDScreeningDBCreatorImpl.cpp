@@ -363,8 +363,8 @@ void Pharm::PSDScreeningDBCreatorImpl::initControlParams()
     Pharm::setStrictErrorCheckingParameter(controlParams, true);
     Chem::setStrictErrorCheckingParameter(controlParams, true);
 
-    Pharm::setCDFWriteSinglePrecisionFloatsParameter(controlParams, true);
-    Chem::setCDFWriteSinglePrecisionFloatsParameter(controlParams, true);
+    Pharm::setCDFOutputSinglePrecisionFloatsParameter(controlParams, true);
+    Chem::setCDFOutputSinglePrecisionFloatsParameter(controlParams, true);
 }
 
 void Pharm::PSDScreeningDBCreatorImpl::setupTables()

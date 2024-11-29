@@ -76,7 +76,7 @@ void Grid::CDFRegularGridDataWriter::appendGrid(const DRegularGrid& grid, Intern
 void Grid::CDFRegularGridDataWriter::init()
 {
     strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
-    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
+    singlePrecisionFloats(getCDFOutputSinglePrecisionFloatsParameter(ctrlParams));
 }
 
 void Grid::CDFRegularGridDataWriter::outputGridHeader(const DRegularGrid& grid, Internal::ByteBuffer& bbuf, std::size_t rec_size) const

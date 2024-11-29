@@ -118,7 +118,7 @@ void Chem::CDFDataWriter::registerExternalMolGraphPropertyHandler(const MolGraph
 void Chem::CDFDataWriter::init()
 {
     strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
-    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
+    singlePrecisionFloats(getCDFOutputSinglePrecisionFloatsParameter(ctrlParams));
 }
 
 const Base::ControlParameterContainer& Chem::CDFDataWriter::getCtrlParameters() const

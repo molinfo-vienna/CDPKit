@@ -53,14 +53,16 @@ namespace CDPL
 
         CDPL_PHARM_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API bool getCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_PHARM_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API void setCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
-        CDPL_PHARM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
+        CDPL_PHARM_API bool hasCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_PHARM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_PHARM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API void clearCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_PHARM_API ScreeningDBCreator::Mode getPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);

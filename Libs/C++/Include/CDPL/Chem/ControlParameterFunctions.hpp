@@ -219,50 +219,60 @@ namespace CDPL
 
         CDPL_CHEM_API void clearSMILESRecordFormatParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputCanonicalFormParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESWriteCanonicalFormParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESOutputCanonicalFormParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API void setSMILESWriteCanonicalFormParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API bool hasSMILESOutputCanonicalFormParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESWriteCanonicalFormParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESOutputCanonicalFormParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESWriteCanonicalFormParameter(Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_CHEM_API void setSMILESOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API bool getSMILESWriteKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESWriteKekuleFormParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API void clearSMILESOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESWriteKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputAtomStereoParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESWriteKekuleFormParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESOutputAtomStereoParameter(Base::ControlParameterContainer& cntnr, bool output);
 
+        CDPL_CHEM_API bool hasSMILESOutputAtomStereoParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESWriteAtomStereoParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESOutputAtomStereoParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESWriteAtomStereoParameter(Base::ControlParameterContainer& cntnr, bool write);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputBondStereoParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESWriteAtomStereoParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESOutputBondStereoParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API void clearSMILESWriteAtomStereoParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESOutputBondStereoParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_CHEM_API void clearSMILESOutputBondStereoParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESWriteBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputRingBondStereoParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESWriteBondStereoParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API void setSMILESOutputRingBondStereoParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API bool hasSMILESWriteBondStereoParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESOutputRingBondStereoParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESWriteBondStereoParameter(Base::ControlParameterContainer& cntnr);
-
-
-        CDPL_CHEM_API bool getSMILESWriteRingBondStereoParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_CHEM_API void setSMILESWriteRingBondStereoParameter(Base::ControlParameterContainer& cntnr, bool write);
-
-        CDPL_CHEM_API bool hasSMILESWriteRingBondStereoParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_CHEM_API void clearSMILESWriteRingBondStereoParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESOutputRingBondStereoParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_CHEM_API std::size_t getSMILESMinStereoBondRingSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -273,50 +283,60 @@ namespace CDPL
 
         CDPL_CHEM_API void clearSMILESMinStereoBondRingSizeParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputIsotopeParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESWriteIsotopeParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESOutputIsotopeParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API void setSMILESWriteIsotopeParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API bool hasSMILESOutputIsotopeParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESWriteIsotopeParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESOutputIsotopeParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESWriteIsotopeParameter(Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESMolOutputAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_CHEM_API void setSMILESMolOutputAtomMappingIDParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API bool getSMILESMolWriteAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESMolOutputAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESMolWriteAtomMappingIDParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API void clearSMILESMolOutputAtomMappingIDParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESMolWriteAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESRxnOutputAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESMolWriteAtomMappingIDParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESRxnOutputAtomMappingIDParameter(Base::ControlParameterContainer& cntnr, bool output);
 
+        CDPL_CHEM_API bool hasSMILESRxnOutputAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESRxnWriteAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESRxnOutputAtomMappingIDParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESRxnWriteAtomMappingIDParameter(Base::ControlParameterContainer& cntnr, bool write);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputSingleBondsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasSMILESRxnWriteAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setSMILESOutputSingleBondsParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API void clearSMILESRxnWriteAtomMappingIDParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESOutputSingleBondsParameter(const Base::ControlParameterContainer& cntnr);
 
+        CDPL_CHEM_API void clearSMILESOutputSingleBondsParameter(Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getSMILESWriteSingleBondsParameter(const Base::ControlParameterContainer& cntnr);
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getSMILESOutputAromaticBondsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setSMILESWriteSingleBondsParameter(Base::ControlParameterContainer& cntnr, bool write);
+        CDPL_CHEM_API void setSMILESOutputAromaticBondsParameter(Base::ControlParameterContainer& cntnr, bool output);
 
-        CDPL_CHEM_API bool hasSMILESWriteSingleBondsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasSMILESOutputAromaticBondsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearSMILESWriteSingleBondsParameter(Base::ControlParameterContainer& cntnr);
-
-
-        CDPL_CHEM_API bool getSMILESWriteAromaticBondsParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_CHEM_API void setSMILESWriteAromaticBondsParameter(Base::ControlParameterContainer& cntnr, bool write);
-
-        CDPL_CHEM_API bool hasSMILESWriteAromaticBondsParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_CHEM_API void clearSMILESWriteAromaticBondsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearSMILESOutputAromaticBondsParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_CHEM_API bool getSMILESNoOrganicSubsetParameter(const Base::ControlParameterContainer& cntnr);
@@ -390,14 +410,16 @@ namespace CDPL
 
         CDPL_CHEM_API void clearMultiConfInputProcessorParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2
+         */
+        CDPL_CHEM_API bool getCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void setCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
-        CDPL_CHEM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
+        CDPL_CHEM_API bool hasCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_CHEM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_CHEM_API bool getMOL2EnableExtendedAtomTypesParameter(const Base::ControlParameterContainer& cntnr);

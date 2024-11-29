@@ -160,20 +160,20 @@ bool Chem::SMILESDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
 
 void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
 {
-    ctrlParameters.strictErrorChecking    =  getStrictErrorCheckingParameter(ioBase); 
-    ctrlParameters.writeHydrogens         = !getOrdinaryHydrogenDepleteParameter(ioBase); 
-    ctrlParameters.canonicalize           =  getSMILESWriteCanonicalFormParameter(ioBase); 
-    ctrlParameters.writeKekuleForm        =  getSMILESWriteKekuleFormParameter(ioBase); 
-    ctrlParameters.writeIsotope           =  getSMILESWriteIsotopeParameter(ioBase); 
-    ctrlParameters.writeAtomStereo        =  getSMILESWriteAtomStereoParameter(ioBase); 
-    ctrlParameters.writeBondStereo        =  getSMILESWriteBondStereoParameter(ioBase); 
-    ctrlParameters.writeRingBondStereo    =  getSMILESWriteRingBondStereoParameter(ioBase); 
-    ctrlParameters.writeSingleBonds       =  getSMILESWriteSingleBondsParameter(ioBase); 
-    ctrlParameters.writeAromaticBonds     =  getSMILESWriteAromaticBondsParameter(ioBase); 
-    ctrlParameters.noOrganicSubset        =  getSMILESNoOrganicSubsetParameter(ioBase); 
-    ctrlParameters.minStereoBondRingSize  =  getSMILESMinStereoBondRingSizeParameter(ioBase); 
-    ctrlParameters.writeRxnAtomMappingID  =  rxn_context ? getSMILESRxnWriteAtomMappingIDParameter(ioBase) : getSMILESMolWriteAtomMappingIDParameter(ioBase);
-    ctrlParameters.recordFormat           =  getSMILESRecordFormatParameter(ioBase); 
+    ctrlParameters.strictErrorChecking    = getStrictErrorCheckingParameter(ioBase);
+    ctrlParameters.outputHydrogens        = !getOrdinaryHydrogenDepleteParameter(ioBase);
+    ctrlParameters.canonicalize           = getSMILESOutputCanonicalFormParameter(ioBase);
+    ctrlParameters.outputKekuleForm       = getSMILESOutputKekuleFormParameter(ioBase);
+    ctrlParameters.outputIsotope          = getSMILESOutputIsotopeParameter(ioBase);
+    ctrlParameters.outputAtomStereo       = getSMILESOutputAtomStereoParameter(ioBase);
+    ctrlParameters.outputBondStereo       = getSMILESOutputBondStereoParameter(ioBase);
+    ctrlParameters.outputRingBondStereo   = getSMILESOutputRingBondStereoParameter(ioBase);
+    ctrlParameters.outputSingleBonds      = getSMILESOutputSingleBondsParameter(ioBase);
+    ctrlParameters.outputAromaticBonds    = getSMILESOutputAromaticBondsParameter(ioBase);
+    ctrlParameters.noOrganicSubset        = getSMILESNoOrganicSubsetParameter(ioBase);
+    ctrlParameters.minStereoBondRingSize  = getSMILESMinStereoBondRingSizeParameter(ioBase);
+    ctrlParameters.outputRxnAtomMappingID = rxn_context ? getSMILESRxnOutputAtomMappingIDParameter(ioBase) : getSMILESMolOutputAtomMappingIDParameter(ioBase);
+    ctrlParameters.recordFormat           = getSMILESRecordFormatParameter(ioBase);
 
     if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "SN" && ctrlParameters.recordFormat != "NS")
         throw Base::IOError("SMILESDataWriter: invalid smiles record format control-parameter '" + ctrlParameters.recordFormat + '\'');
@@ -320,7 +320,7 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 
         MolecularGraph* output_molgraph = &comp;
 
-        if (!ctrlParameters.writeHydrogens) {
+        if (!ctrlParameters.outputHydrogens) {
             buildHDepleteMolGraph(comp);
             output_molgraph = hDepleteMolGraph.get();
         } 
@@ -356,18 +356,18 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
     unsigned int atom_prop_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT;
     unsigned int bond_prop_flags = BondPropertyFlag::ORDER;
 
-    if (!ctrlParameters.writeKekuleForm) {
+    if (!ctrlParameters.outputKekuleForm) {
         atom_prop_flags |= AtomPropertyFlag::AROMATICITY;
         bond_prop_flags |= BondPropertyFlag::AROMATICITY;
     }
 
-    if (ctrlParameters.writeIsotope)
+    if (ctrlParameters.outputIsotope)
         atom_prop_flags |= AtomPropertyFlag::ISOTOPE;
 
-    if (ctrlParameters.writeAtomStereo)
+    if (ctrlParameters.outputAtomStereo)
         atom_prop_flags |= AtomPropertyFlag::CONFIGURATION;
 
-    if (ctrlParameters.writeBondStereo)
+    if (ctrlParameters.outputBondStereo)
         bond_prop_flags |= BondPropertyFlag::CONFIGURATION;
 
     if (!canonNumberingCalculator.get())
@@ -386,7 +386,7 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
         if (comp.getNumAtoms() == 0)
             continue;
 
-        if (!ctrlParameters.writeHydrogens) {
+        if (!ctrlParameters.outputHydrogens) {
             buildHDepleteMolGraph(comp);
             buildCanonMolGraph(*hDepleteMolGraph);
 
@@ -445,7 +445,7 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
 
         std::size_t exp_bond_count = Internal::getExplicitBondCount(atom, *hDepleteMolGraph);
 
-        if (ctrlParameters.writeBondStereo) {
+        if (ctrlParameters.outputBondStereo) {
             if (exp_bond_count == 2 &&
                 Internal::calcExplicitValence(atom, *hDepleteMolGraph) == 3 &&
                 Internal::getExplicitBondCount(atom, *hDepleteMolGraph, 1, AtomType::H) == 1 &&
@@ -484,7 +484,7 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
             }
         }
 
-        if (ctrlParameters.writeAtomStereo) {
+        if (ctrlParameters.outputAtomStereo) {
             const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
             unsigned int config = stereo_desc.getConfiguration();
 
@@ -509,10 +509,10 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
             if (getType(nbr_atom) != AtomType::H)
                 continue;
             
-            if (ctrlParameters.writeIsotope && getIsotope(nbr_atom) > 0)
+            if (ctrlParameters.outputIsotope && getIsotope(nbr_atom) > 0)
                 continue;
                     
-            if (ctrlParameters.writeRxnAtomMappingID &&
+            if (ctrlParameters.outputRxnAtomMappingID &&
                 getAtomMappingID(nbr_atom) > 0)
                 continue;
         
@@ -725,7 +725,7 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(cons
     DFSTreeNode* root_node = allocNode();
     const Atom* root_atom = 0;
 
-    if (!ctrlParameters.writeAtomStereo)
+    if (!ctrlParameters.outputAtomStereo)
         root_atom = &molgraph.getAtom(0);
 
     else {
@@ -810,7 +810,7 @@ void Chem::SMILESDataWriter::collectStereoBondEdges(DFSTreeNode* node, const Mol
             continue;
         
         if (getRingFlag(bond)) {
-            if (!ctrlParameters.writeRingBondStereo)
+            if (!ctrlParameters.outputRingBondStereo)
                 continue;
 
             if (ctrlParameters.minStereoBondRingSize > 0 &&
@@ -835,7 +835,7 @@ void Chem::SMILESDataWriter::collectStereoBondEdges(DFSTreeNode* node, const Mol
 
 void Chem::SMILESDataWriter::distBondDirections(const MolecularGraph& molgraph)
 {
-    if (!ctrlParameters.writeBondStereo)
+    if (!ctrlParameters.outputBondStereo)
         return;
     
     stereoBondEdges.clear();
@@ -1186,9 +1186,9 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
 {
     long charge = getFormalCharge(*atom);
     unsigned int atom_type = getType(*atom);
-    std::size_t isotope = (writer.ctrlParameters.writeIsotope ? getIsotope(*atom) : 0);
-    std::size_t aam_id = (writer.ctrlParameters.writeRxnAtomMappingID ? getAtomMappingID(*atom) : 0);
-    int stereo_rot = (writer.ctrlParameters.writeAtomStereo ? getStereoParity() : 0);
+    std::size_t isotope = (writer.ctrlParameters.outputIsotope ? getIsotope(*atom) : 0);
+    std::size_t aam_id = (writer.ctrlParameters.outputRxnAtomMappingID ? getAtomMappingID(*atom) : 0);
+    int stereo_rot = (writer.ctrlParameters.outputAtomStereo ? getStereoParity() : 0);
     std::size_t impl_h_count = calcImplicitHydrogenCount(*atom, *molGraph);
     bool in_brackets;
 
@@ -1207,7 +1207,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
 
             case AtomType::N:
                 in_brackets = (valence != 3 || 
-                               (!writer.ctrlParameters.writeKekuleForm && getAromaticityFlag(*atom) && impl_h_count > 0));
+                               (!writer.ctrlParameters.outputKekuleForm && getAromaticityFlag(*atom) && impl_h_count > 0));
                 break;
 
             case AtomType::O:
@@ -1306,7 +1306,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomSymbol(std::ostream& os, unsi
 
     const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
-    if (writer.ctrlParameters.writeKekuleForm) {
+    if (writer.ctrlParameters.outputKekuleForm) {
         os << symbol;
         return;
     }
@@ -1600,13 +1600,13 @@ void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) cons
 {
     std::size_t order = getOrder(*bond);
 
-    if (writer.ctrlParameters.writeBondStereo && order == 1 && direction != 0) {
+    if (writer.ctrlParameters.outputBondStereo && order == 1 && direction != 0) {
         os << direction;
         return;
     }
 
-    if (!writer.ctrlParameters.writeKekuleForm && getAromaticityFlag(*bond)) {
-        if (writer.ctrlParameters.writeAromaticBonds) 
+    if (!writer.ctrlParameters.outputKekuleForm && getAromaticityFlag(*bond)) {
+        if (writer.ctrlParameters.outputAromaticBonds) 
             os << SMILES::BondSymbol::AROMATIC_BOND;
         return;    
     }
@@ -1614,7 +1614,7 @@ void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) cons
     switch (order) {
 
         case 1:
-            if (writer.ctrlParameters.writeSingleBonds) 
+            if (writer.ctrlParameters.outputSingleBonds) 
                 os << SMILES::BondSymbol::SINGLE_BOND;
             return;
 

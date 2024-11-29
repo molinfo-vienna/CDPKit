@@ -72,9 +72,9 @@ BOOST_AUTO_TEST_CASE(SMILESMoleculeInputHandlerTest)
 
     SMILESMolecularGraphWriter writer(oss);
 
-    setSMILESWriteAtomStereoParameter(writer, true);
-    setSMILESWriteBondStereoParameter(writer, true);
-    setSMILESWriteRingBondStereoParameter(writer, true);
+    setSMILESOutputAtomStereoParameter(writer, true);
+    setSMILESOutputBondStereoParameter(writer, true);
+    setSMILESOutputRingBondStereoParameter(writer, true);
     setSMILESMinStereoBondRingSizeParameter(writer, std::size_t(3));
 
     makeHydrogenDeplete(mol1);

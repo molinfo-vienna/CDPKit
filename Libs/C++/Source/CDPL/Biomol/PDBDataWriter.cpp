@@ -130,10 +130,10 @@ void Biomol::PDBDataWriter::init(std::ostream& os)
     checkLineLength              = getCheckLineLengthParameter(ioBase); 
     truncLines                   = getPDBTruncateLinesParameter(ioBase);
     resDictionary                = getResidueDictionaryParameter(ioBase);
-    writeFormCharges             = getPDBWriteFormalChargesParameter(ioBase);
-    writeConectRecords           = getPDBWriteCONECTRecordsParameter(ioBase);
-    writeConectRecsForAllBonds   = getPDBWriteCONECTRecordsForAllBondsParameter(ioBase);
-    writeConectRecsRefBondOrders = getPDBWriteCONECTRecordsReflectingBondOrderParameter(ioBase);
+    outputFormCharges             = getPDBOutputFormalChargesParameter(ioBase);
+    outputConectRecords           = getPDBOutputCONECTRecordsParameter(ioBase);
+    outputConectRecsForAllBonds   = getPDBOutputCONECTRecordsForAllBondsParameter(ioBase);
+    outputConectRecsRefBondOrders = getPDBOutputCONECTRecordsReflectingBondOrderParameter(ioBase);
 
     os.imbue(std::locale::classic());
 
@@ -214,7 +214,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 {
     using namespace Chem;
 
-    if (!writeConectRecords)
+    if (!outputConectRecords)
         return;
 
     auto& res_dict = getResidueDictionary();
@@ -231,7 +231,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
         if (!molgraph.containsAtom(atom2))
             continue;
 
-        if (writeConectRecsForAllBonds) {
+        if (outputConectRecsForAllBonds) {
             conectRecordBonds.insert(&bond);
             continue;
         }
@@ -457,7 +457,7 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
     using namespace Chem;
     using namespace Internal;
 
-    if (!writeConectRecords)
+    if (!outputConectRecords)
         return;
 
     BondSet::const_iterator conect_bonds_end = conectRecordBonds.end();
@@ -480,7 +480,7 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
             if (!writtenConectAtomPairs.insert(SerialPair(serial, nbr_serial)).second)
                 continue;
 
-            if (writeConectRecsRefBondOrders) {
+            if (outputConectRecsRefBondOrders) {
                 for (std::size_t i = 0, order = getOrder(bond); i < order; i++)
                     nbrAtomSerials.push_back(nbr_serial);
             } else
@@ -678,7 +678,7 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
     writeString(os, 2, symbol, ("PDBDataWriter: error while writing element symbol for " + rec_prefix + " record").c_str(), 
                 true, !strictErrorChecking, true);
 
-    if (writeFormCharges) { 
+    if (outputFormCharges) { 
         long charge = getFormalCharge(atom);
 
         if (charge != 0) {

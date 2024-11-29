@@ -59,7 +59,7 @@ namespace
 {
 
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
-    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CDFWriteSinglePrecisionFloats)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CDFOutputSinglePrecisionFloats)
 }
 
 
@@ -69,5 +69,5 @@ void CDPLPythonGrid::exportControlParameterFunctions()
     using namespace CDPL;
 
     EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
-    EXPORT_CONTROL_PARAM_FUNCS(CDFWriteSinglePrecisionFloats, single_prec)
+    EXPORT_CONTROL_PARAM_FUNCS(CDFOutputSinglePrecisionFloats, single_prec)
 }

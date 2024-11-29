@@ -66,7 +66,7 @@ void Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(const FeatureConta
 void Pharm::CDFPharmacophoreDataWriter::init()
 {
     strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
-    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
+    singlePrecisionFloats(getCDFOutputSinglePrecisionFloatsParameter(ctrlParams));
 }
 
 void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const

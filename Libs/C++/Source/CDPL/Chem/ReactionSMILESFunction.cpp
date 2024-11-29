@@ -48,14 +48,14 @@ bool Chem::generateSMILES(const Reaction& rxn, std::string& smiles, bool canonic
 
     setRecordSeparatorParameter(smi_writer, "");
     setOrdinaryHydrogenDepleteParameter(smi_writer, ord_h_deplete);
-    setSMILESWriteCanonicalFormParameter(smi_writer, canonical);
-    setSMILESRxnWriteAtomMappingIDParameter(smi_writer, atom_flags & AtomPropertyFlag::ATOM_MAPPING_ID);
-    setSMILESWriteIsotopeParameter(smi_writer, atom_flags & AtomPropertyFlag::ISOTOPE);
-    setSMILESWriteAtomStereoParameter(smi_writer, atom_flags & AtomPropertyFlag::CONFIGURATION);
-    setSMILESWriteBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
-    setSMILESWriteRingBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
-    setSMILESWriteAromaticBondsParameter(smi_writer, atom_flags & BondPropertyFlag::AROMATICITY);
-    setSMILESWriteKekuleFormParameter(smi_writer, atom_flags & BondPropertyFlag::ORDER);
+    setSMILESOutputCanonicalFormParameter(smi_writer, canonical);
+    setSMILESRxnOutputAtomMappingIDParameter(smi_writer, atom_flags & AtomPropertyFlag::ATOM_MAPPING_ID);
+    setSMILESOutputIsotopeParameter(smi_writer, atom_flags & AtomPropertyFlag::ISOTOPE);
+    setSMILESOutputAtomStereoParameter(smi_writer, atom_flags & AtomPropertyFlag::CONFIGURATION);
+    setSMILESOutputBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
+    setSMILESOutputRingBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
+    setSMILESOutputAromaticBondsParameter(smi_writer, atom_flags & BondPropertyFlag::AROMATICITY);
+    setSMILESOutputKekuleFormParameter(smi_writer, atom_flags & BondPropertyFlag::ORDER);
 
     bool result = !(!smi_writer.write(rxn));
 

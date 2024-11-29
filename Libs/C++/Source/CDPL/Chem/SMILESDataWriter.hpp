@@ -117,15 +117,15 @@ namespace CDPL
 
                 bool        strictErrorChecking;
                 bool        canonicalize;
-                bool        writeKekuleForm;
-                bool        writeAtomStereo;
-                bool        writeBondStereo;
-                bool        writeRingBondStereo;
-                bool        writeIsotope;
-                bool        writeRxnAtomMappingID;
-                bool        writeSingleBonds;
-                bool        writeAromaticBonds;
-                bool        writeHydrogens;
+                bool        outputKekuleForm;
+                bool        outputAtomStereo;
+                bool        outputBondStereo;
+                bool        outputRingBondStereo;
+                bool        outputIsotope;
+                bool        outputRxnAtomMappingID;
+                bool        outputSingleBonds;
+                bool        outputAromaticBonds;
+                bool        outputHydrogens;
                 bool        noOrganicSubset;
                 std::size_t minStereoBondRingSize;
                 std::string recordFormat;

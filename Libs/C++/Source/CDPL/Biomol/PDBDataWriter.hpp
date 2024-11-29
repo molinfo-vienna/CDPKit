@@ -113,10 +113,10 @@ namespace CDPL
             bool                    strictErrorChecking;
             bool                    checkLineLength;
             bool                    truncLines;
-            bool                    writeFormCharges;
-            bool                    writeConectRecords;
-            bool                    writeConectRecsForAllBonds;
-            bool                    writeConectRecsRefBondOrders;
+            bool                    outputFormCharges;
+            bool                    outputConectRecords;
+            bool                    outputConectRecsForAllBonds;
+            bool                    outputConectRecsRefBondOrders;
             ResDictPointer          resDictionary;
             AtomList                atomSequence;
             RecordHistogram         recordHistogram;
