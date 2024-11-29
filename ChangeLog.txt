@@ -1,4 +1,5 @@
 master:
+ - Unified the naming of control-parameters and associated functions in namespaces Chem, Pharm, Grid, and Biomol
  - Improved support for different Python installation flavors on macOS (with the greatly appreciated help of Yakov Pechersky)
  - Added support for the I/O of molecular structure data in CML format
  - Fallback perception of atom/bond stereochemistry from input 3D coordinates during conformer generation molecule preprocessing
