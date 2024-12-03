@@ -26,7 +26,7 @@
 
 #include <istream>
 
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -39,6 +39,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/DefaultMultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -85,17 +86,59 @@ bool Chem::CMLDataReader::readMolecule(std::istream& is, Molecule& mol)
         return false;
 
     init();
-    readMoleculeData(is, true);
+   
+    auto atom_idx_offs = mol.getNumAtoms();
+    auto bond_idx_offs = mol.getNumBonds();
 
-    molDocument.parse<0>(&molData[0]);
+    doReadMolecule(is, mol);
+
+    if (!multiConfImport)
+        return true;
+
+    MolecularGraph* tgt_molgraph;
+
+    if (atom_idx_offs == 0) {
+        tgt_molgraph = &mol;
+
+    } else {
+        if (!confTargetFragment)
+            confTargetFragment.reset(new Fragment());
+        else
+            confTargetFragment->clear();
+
+        tgt_molgraph = confTargetFragment.get();
+
+        std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), 
+                      [&](const Chem::Atom& atom) { confTargetFragment->addAtom(atom); });
+
+        std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), 
+                      [&](const Chem::Bond& bond) { confTargetFragment->addBond(bond); });
+
+        tgt_molgraph->copyProperties(mol);
+    }
+
+    MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+    if (!mc_input_proc)
+        mc_input_proc.reset(new DefaultMultiConfMoleculeInputProcessor());
     
-    auto mol_node = getChildNode(&molDocument, CML::Element::MOLECULE);
+    if (!mc_input_proc->init(*tgt_molgraph))
+        return true;
 
-    if (!mol_node)
-        throw Base::IOError("CMLDataReader: <" + CML::Element::MOLECULE + "> element not found");
+    if (!confTestMolecule)
+        confTestMolecule.reset(new BasicMolecule());
 
-    readMolecule(mol_node, mol, true);
-    
+    for (std::istream::pos_type last_spos = is.tellg(); hasMoreData(is); last_spos = is.tellg()) {
+        confTestMolecule->clear();
+
+        doReadMolecule(is, *confTestMolecule);
+
+        if (!mc_input_proc->addConformation(*tgt_molgraph, *confTestMolecule)) {
+            is.seekg(last_spos);
+            return true;
+        }
+    }
+
     return true;
 }
 
@@ -104,8 +147,42 @@ bool Chem::CMLDataReader::skipMolecule(std::istream& is)
     if (!hasMoreData(is))
         return false;
 
-    readMoleculeData(is, false);
+    init();
+
+    if (!multiConfImport) {
+        readMoleculeData(is, false);
+        return true;
+    }
+
+    if (!confTargetMolecule)
+        confTargetMolecule.reset(new BasicMolecule());
+    else
+        confTargetMolecule->clear();
+
+    doReadMolecule(is, *confTargetMolecule);
+
+    MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+    if (!mc_input_proc)
+        mc_input_proc.reset(new DefaultMultiConfMoleculeInputProcessor());
     
+    if (!mc_input_proc->init(*confTargetMolecule))
+        return true;
+
+    if (!confTestMolecule)
+        confTestMolecule.reset(new BasicMolecule());
+   
+    for (std::istream::pos_type last_spos = is.tellg(); hasMoreData(is); last_spos = is.tellg()) {
+        confTestMolecule->clear();
+
+        doReadMolecule(is, *confTestMolecule);
+
+        if (!mc_input_proc->isConformation(*confTargetMolecule, *confTestMolecule)) {
+            is.seekg(last_spos);
+            return true;
+        }
+    }
+
     return true;
 }
 
@@ -125,7 +202,22 @@ bool Chem::CMLDataReader::hasMoreData(std::istream& is)
 
 void Chem::CMLDataReader::init()
 {
-    strictErrorChecking = getStrictErrorCheckingParameter(ioBase); 
+    strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
+    multiConfImport     = getMultiConfImportParameter(ioBase);
+}
+
+void Chem::CMLDataReader::doReadMolecule(std::istream& is, Molecule& mol)
+{
+    readMoleculeData(is, true);
+
+    molDocument.parse<0>(&molData[0]);
+    
+    auto mol_node = getChildNode(&molDocument, CML::Element::MOLECULE);
+
+    if (!mol_node)
+        throw Base::IOError("CMLDataReader: <" + CML::Element::MOLECULE + "> element not found");
+
+    readMolecule(mol_node, mol, true);
 }
 
 void Chem::CMLDataReader::readMoleculeData(std::istream& is, bool save_data)
@@ -193,17 +285,19 @@ void Chem::CMLDataReader::readMolecule(const XMLNode* mol_node, Molecule& mol, b
         if (count <= 1)
             return;
 
-        readMolGraph.clear();
+        if (!readMolGraph)
+            readMolGraph.reset(new Fragment());
+        else
+            readMolGraph->clear();
 
         std::for_each(mol.getAtomsBegin() + init_atom_count, mol.getAtomsEnd(), 
-                      [&](const Chem::Atom& atom) { readMolGraph.addAtom(atom); });
+                      [&](const Chem::Atom& atom) { readMolGraph->addAtom(atom); });
 
         std::for_each(mol.getBondsBegin() + init_bond_count, mol.getBondsEnd(), 
-                      [&](const Chem::Bond& bond) { readMolGraph.addBond(bond); });
-
+                      [&](const Chem::Bond& bond) { readMolGraph->addBond(bond); });
 
         for (std::size_t i = 1; i < count; i++)
-            mol += readMolGraph;
+            mol += *readMolGraph;
         
         return;
     }
@@ -749,14 +843,17 @@ void Chem::CMLDataReader::perceiveBondOrders(Molecule& mol, std::size_t bond_off
         return;
     }
 
-    readMolGraph.clear();
+    if (!readMolGraph)
+        readMolGraph.reset(new Fragment());
+    else
+        readMolGraph->clear();
 
     std::for_each(mol.getBondsBegin() + bond_offs, mol.getBondsEnd(), 
-                  [&](const Chem::Bond& bond) { readMolGraph.addBond(bond); });
+                  [&](const Chem::Bond& bond) { readMolGraph->addBond(bond); });
 
-    setRingFlags(readMolGraph, true);
+    setRingFlags(*readMolGraph, true);
     
-    Chem::perceiveBondOrders(readMolGraph, false);
+    Chem::perceiveBondOrders(*readMolGraph, false);
 }
             
 const Chem::CMLDataReader::XMLNode* Chem::CMLDataReader::getChildNode(const XMLNode* prnt_node, const std::string& name) const

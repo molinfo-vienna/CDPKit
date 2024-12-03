@@ -25,6 +25,9 @@
 #include "StaticInit.hpp"
 
 #include <ostream>
+#include <locale>
+
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -41,7 +44,6 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
-#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 #include "CDPL/Internal/AtomContainerFunctions.hpp"
 
@@ -76,7 +78,7 @@ Chem::CMLDataWriter::CMLDataWriter(const Base::DataIOBase& io_base):
 
 bool Chem::CMLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph)
 {
-    getControlParams();
+    init(os);
     
     if (startDoc) {
         startDocument(os);
@@ -85,19 +87,21 @@ bool Chem::CMLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
         molId = 1;
     }
 
-    startMoleculeElement(os, molgraph);
-
-    if (outputMolName)
-        writeName(os, molgraph);
+    std::size_t num_confs = (multiConfExport ? getNumConformations(molgraph) : 0);
+    auto have_2d_coords = hasCoordinates(molgraph, 2);
     
-    writeAtoms(os, molgraph);
-    writeBonds(os, molgraph);
+    if (num_confs == 0) {
+        multiConfExport = false;
 
-    if (outputStructData)
-        writeProperties(os, molgraph);
+        writeMoleculeData(os, molgraph, have_2d_coords, 0);
+        
+    } else {
+        for (std::size_t i = 0; i < num_confs; i++) {
+            getConformation(molgraph, i, confCoordinates, false);
+            writeMoleculeData(os, molgraph, have_2d_coords, i);
+        }
+    }
 
-    endMoleculeElement(os);
-    
     return os.good();
 }
 
@@ -110,7 +114,7 @@ void Chem::CMLDataWriter::close(std::ostream& os)
     startDoc = true;
 }
 
-void Chem::CMLDataWriter::getControlParams()
+void Chem::CMLDataWriter::init(std::ostream& os)
 {
     outputXMLDecl    = getCMLOutputXMLDeclarationParameter(ioBase);
     elemNamespace    = getCMLOutputElementNamespaceParameter(ioBase);
@@ -124,6 +128,12 @@ void Chem::CMLDataWriter::getControlParams()
     outputSpinMult   = getCMLOutputSpinMultiplicityParameter(ioBase);
     compactAtomData  = getCMLOutputCompactAtomDataParameter(ioBase);
     compactBondData  = getCMLOutputCompactBondDataParameter(ioBase);
+    multiConfExport  = getMultiConfExportParameter(ioBase);
+
+    if (multiConfExport)
+        confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);
+
+    os.imbue(std::locale::classic());
 }
 
 void Chem::CMLDataWriter::startDocument(std::ostream& os) const
@@ -146,6 +156,22 @@ void Chem::CMLDataWriter::endDocument(std::ostream& os) const
     Internal::writeXMLEndTag(os, CML::Element::CML, 0, elemNamespace);
 }
 
+void Chem::CMLDataWriter::writeMoleculeData(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords, std::size_t conf_idx)
+{
+    startMoleculeElement(os, molgraph);
+
+    if (outputMolName)
+        writeName(os, molgraph, conf_idx);
+
+    writeAtoms(os, molgraph);
+    writeBonds(os, molgraph, have_2d_coords);
+
+    if (outputStructData)
+        writeProperties(os, molgraph);
+
+    endMoleculeElement(os);
+}
+
 void Chem::CMLDataWriter::startMoleculeElement(std::ostream& os, const MolecularGraph& molgraph)
 {
     using namespace Internal;
@@ -165,17 +191,33 @@ void Chem::CMLDataWriter::endMoleculeElement(std::ostream& os) const
     Internal::writeXMLEndTag(os, CML::Element::MOLECULE, 1, elemNamespace);
 }
 
-void Chem::CMLDataWriter::writeName(std::ostream& os, const MolecularGraph& molgraph)
+void Chem::CMLDataWriter::writeName(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx)
 {
     using namespace Internal;
 
-    if (!hasName(molgraph))
-        return;
+    if (!multiConfExport || confIdxSuffixPattern.empty()) {
+        if (!hasName(molgraph))
+            return;
 
+        beginXMLStartTag(os, CML::Element::NAME, 2, elemNamespace);
+        endXMLStartTag(os, false, false);
+        
+        os << escapeXMLData(getName(molgraph), tmpString[0], false);
+    
+        writeXMLEndTag(os, CML::Element::NAME, 0, elemNamespace);
+        return;
+    }
+
+    tmpString[0] = getName(molgraph);
+    tmpString[1] = boost::replace_all_copy(confIdxSuffixPattern, "%I%", std::to_string(conf_idx + 1));
+
+    if (tmpString[1] != confIdxSuffixPattern) 
+        tmpString[0].append(tmpString[1]);
+                               
     beginXMLStartTag(os, CML::Element::NAME, 2, elemNamespace);
     endXMLStartTag(os, false, false);
-    
-    os << escapeXMLData(getName(molgraph), tmpString[0], false);
+        
+    os << escapeXMLData(tmpString[0], tmpString[1], false);
     
     writeXMLEndTag(os, CML::Element::NAME, 0, elemNamespace);
 }
@@ -233,12 +275,13 @@ void Chem::CMLDataWriter::writeAtoms(std::ostream& os, const MolecularGraph& mol
             writeXMLAttribute(os, CML::Attribute::Y2, coords[1]);
         }
 
-        if (has3DCoordinates(atom)) {
-            auto& coords = get3DCoordinates(atom);
-
-            writeXMLAttribute(os, CML::Attribute::X3, coords[0]);
-            writeXMLAttribute(os, CML::Attribute::Y3, coords[1]);
-            writeXMLAttribute(os, CML::Attribute::Z3, coords[2]);
+        auto* coords = (multiConfExport ? &confCoordinates[molgraph.getAtomIndex(atom)] :
+                        has3DCoordinates(atom) ? &get3DCoordinates(atom) : nullptr);
+        
+        if (coords) {
+            writeXMLAttribute(os, CML::Attribute::X3, (*coords)[0]);
+            writeXMLAttribute(os, CML::Attribute::Y3, (*coords)[1]);
+            writeXMLAttribute(os, CML::Attribute::Z3, (*coords)[2]);
         }
         
         if (outputAtomParity && writeAtomParity(os, atom, molgraph))
@@ -457,7 +500,7 @@ void Chem::CMLDataWriter::calcAtomStereoDescriptors(const MolecularGraph& molgra
         atomStereoDescrs[i] = calcStereoDescriptor(molgraph.getAtom(i), molgraph, 0);
 }
            
-void Chem::CMLDataWriter::writeBonds(std::ostream& os, const MolecularGraph& molgraph)
+void Chem::CMLDataWriter::writeBonds(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords)
 {
     using namespace Internal;
 
@@ -465,12 +508,11 @@ void Chem::CMLDataWriter::writeBonds(std::ostream& os, const MolecularGraph& mol
         return;
 
     calcBondStereoDescriptors(molgraph);
-   
-    if (compactBondData && writeBondsCompact(os, molgraph))
+
+    if (compactBondData && writeBondsCompact(os, molgraph, have_2d_coords))
         return;
     
     std::size_t bond_id = 0;
-    auto have_2d_coords = hasCoordinates(molgraph, 2);
     
     for (auto& bond : molgraph.getBonds()) {
         auto& atom1 = bond.getBegin();
@@ -623,7 +665,7 @@ bool Chem::CMLDataWriter::writeBondStereo(std::ostream& os, const Bond& bond, co
     return true;
 }
 
-bool Chem::CMLDataWriter::writeBondsCompact(std::ostream& os, const MolecularGraph& molgraph)
+bool Chem::CMLDataWriter::writeBondsCompact(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords)
 {
     using namespace Internal;
  
@@ -657,7 +699,7 @@ bool Chem::CMLDataWriter::writeBondsCompact(std::ostream& os, const MolecularGra
              }
         }
 
-        if (outputSBStereo && (order == 1))
+        if (have_2d_coords && outputSBStereo && (order == 1))
             switch (get2DStereoFlag(bond)) {
 
                 case BondStereoFlag::UP:

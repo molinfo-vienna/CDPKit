@@ -34,6 +34,7 @@
 #include <utility>
 
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "RapidXML/rapidxml.hpp"
@@ -69,8 +70,8 @@ namespace CDPL
 
             void init();
 
+            void doReadMolecule(std::istream& is, Molecule& mol);
             void readMoleculeData(std::istream& is, bool save_data);
-
             void readMolecule(const XMLNode* mol_node, Molecule& mol, bool top_level);
 
             void readAtoms(const XMLNode* atom_arr_node, Molecule& mol);
@@ -100,13 +101,17 @@ namespace CDPL
 
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
+            bool                    multiConfImport;
             XMLTagInfo              tagInfo;
             std::string             molData;
             XMLDocument             molDocument;
             AtomIDToIndexMap        atomIDtoIndexMap;
             IndexNodePairList       stereoAtoms;
             IndexNodePairList       stereoBonds;
-            Fragment                readMolGraph;
+            Fragment::SharedPointer readMolGraph;
+            Fragment::SharedPointer confTargetFragment;
+            Molecule::SharedPointer confTargetMolecule;
+            Molecule::SharedPointer confTestMolecule;
         };
     } // namespace Chem
 } // namespace CDPL

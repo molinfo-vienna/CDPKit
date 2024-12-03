@@ -31,6 +31,7 @@
 #include <vector>
 
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -60,24 +61,26 @@ namespace CDPL
             void close(std::ostream& os);
             
           private:
-            void getControlParams();
+            void init(std::ostream& os);
             
             void startDocument(std::ostream& os) const;
             void endDocument(std::ostream& os) const;
 
+            void writeMoleculeData(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords, std::size_t conf_idx);
+            
             void startMoleculeElement(std::ostream& os, const MolecularGraph& molgraph);
             void endMoleculeElement(std::ostream& os) const;
             
-            void writeName(std::ostream& os, const MolecularGraph& molgraph);
+            void writeName(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx);
 
             void writeAtoms(std::ostream& os, const MolecularGraph& molgraph);
             bool writeAtomParity(std::ostream& os, const Atom& atom, const MolecularGraph& molgraph);
             bool writeAtomsCompact(std::ostream& os, const MolecularGraph& molgraph);
             void calcAtomStereoDescriptors(const MolecularGraph& molgraph);
             
-            void writeBonds(std::ostream& os, const MolecularGraph& molgraph);
+            void writeBonds(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords);
             bool writeBondStereo(std::ostream& os, const Bond& bond, const MolecularGraph& molgraph, bool write_sf);
-            bool writeBondsCompact(std::ostream& os, const MolecularGraph& molgraph);
+            bool writeBondsCompact(std::ostream& os, const MolecularGraph& molgraph, bool have_2d_coords);
             void calcBondStereoDescriptors(const MolecularGraph& molgraph);
             
             void writeProperties(std::ostream& os, const MolecularGraph& molgraph);
@@ -100,10 +103,13 @@ namespace CDPL
             bool                    outputSpinMult;
             bool                    compactAtomData;
             bool                    compactBondData;
+            bool                    multiConfExport;
+            std::string             confIdxSuffixPattern;
             std::size_t             molId;
             std::string             tmpString[9];
             StereoDescriptorArray   atomStereoDescrs;
             StereoDescriptorArray   bondStereoDescrs;
+            Math::Vector3DArray     confCoordinates;
         };
     } // namespace Chem
 } // namespace CDPL
