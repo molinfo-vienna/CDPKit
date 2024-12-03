@@ -237,6 +237,9 @@ bool Chem::MOL2DataReader::skipMolecule(std::istream& is)
     if (!mc_input_proc->init(*confTargetMolecule))
         return true;
 
+    if (!confTestMolecule)
+        confTestMolecule.reset(new BasicMolecule());
+
     for (std::istream::pos_type last_spos = is.tellg(); skipInputToRTI(is, MOL2::MOLECULE_RTI, true); last_spos = is.tellg()) {
         confTestMolecule->clear();
 
