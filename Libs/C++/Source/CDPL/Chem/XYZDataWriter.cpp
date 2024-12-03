@@ -45,7 +45,7 @@ using namespace CDPL;
 namespace
 {
 
-    const char        END_OF_LINE  = '\n';
+    constexpr char    END_OF_LINE  = '\n';
     const std::string UNDEF_SYMBOL = "*";
 }
 
