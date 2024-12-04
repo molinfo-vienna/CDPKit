@@ -77,6 +77,8 @@ namespace
 
         return (name[name_len - query.length() - 1] == ':');
     }
+
+    const Chem::DefaultMultiConfMoleculeInputProcessor fallbackMultiConfMoleculeInputProcessor;
 }
 
 
@@ -117,10 +119,10 @@ bool Chem::CMLDataReader::readMolecule(std::istream& is, Molecule& mol)
         tgt_molgraph->copyProperties(mol);
     }
 
-    MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+    const auto* mc_input_proc = getMultiConfInputProcessorParameter(ioBase).get();
 
     if (!mc_input_proc)
-        mc_input_proc.reset(new DefaultMultiConfMoleculeInputProcessor());
+        mc_input_proc = &fallbackMultiConfMoleculeInputProcessor;
     
     if (!mc_input_proc->init(*tgt_molgraph))
         return true;
@@ -161,10 +163,10 @@ bool Chem::CMLDataReader::skipMolecule(std::istream& is)
 
     doReadMolecule(is, *confTargetMolecule);
 
-    MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+    const auto* mc_input_proc = getMultiConfInputProcessorParameter(ioBase).get();
 
     if (!mc_input_proc)
-        mc_input_proc.reset(new DefaultMultiConfMoleculeInputProcessor());
+        mc_input_proc = &fallbackMultiConfMoleculeInputProcessor;
     
     if (!mc_input_proc->init(*confTargetMolecule))
         return true;
