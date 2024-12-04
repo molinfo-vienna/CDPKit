@@ -72,7 +72,7 @@ def genResidueDictionaryData():
 
     output.append('// clang-format off\nconst ResidueDataEntry RESIDUE_DATA[] = {\n')
 
-    comp_reader = Biomol.FileMMCIFMoleculeReader(sys.argv[1])
+    comp_reader = Chem.MoleculeReader(sys.argv[1])
     comp_writer = Chem.FileCDFGZMolecularGraphWriter(sys.argv[3])
     comp = Chem.BasicMolecule()
     comp_idx = 0
