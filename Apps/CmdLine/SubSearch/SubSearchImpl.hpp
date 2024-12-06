@@ -1,5 +1,5 @@
 /* 
- * IsoGenImpl.hpp
+ * SubSearchImpl.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef ISOGEN_ISOGENIMPL_HPP
-#define ISOGEN_ISOGENIMPL_HPP
+#ifndef SUBSEARCH_SUBSEARCHIMPL_HPP
+#define SUBSEARCH_SUBSEARCHIMPL_HPP
 
 #include <cstddef>
 #include <vector>
@@ -31,40 +31,32 @@
 
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Chem/MolecularGraphWriter.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
 
-namespace CDPL
+namespace SubSearch
 {
 
-    namespace Chem
-    {
-
-        class Molecule;
-    } // namespace Chem
-} // namespace CDPL
-
-
-namespace IsoGen
-{
-
-    class IsoGenImpl : public CmdLineLib::CmdLineBase
+    class SubSearchImpl : public CmdLineLib::CmdLineBase
     {
 
       public:
-        IsoGenImpl();
+        SubSearchImpl();
 
       private:
+        typedef std::vector<std::string> StringList;
+
         const char* getProgName() const;
         const char* getProgAboutText() const;
 
         void setInputFormat(const std::string& file_ext);
         void setOutputFormat(const std::string& file_ext);
-
+        
         int process();
-        void genIsomers();
+        void findMatches();
 
         std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 
@@ -78,6 +70,10 @@ namespace IsoGen
         void printStatistics();
 
         void checkInputFiles() const;
+        void checkMatchExpression() const;
+
+        void parseSubstructPatterns();
+        
         void printOptionSummary();
         void initInputReader();
         void initOutputWriter();
@@ -88,36 +84,27 @@ namespace IsoGen
         void addOptionLongDescriptions();
 
         class InputScanProgressCallback;
-        class IsomerGenerationWorker;
+        class SubSearchWorker;
 
-        typedef std::vector<std::string>                             StringList;
+        typedef std::vector<CDPL::Chem::Molecule::SharedPointer>     MoleculeList;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
         typedef CDPL::Internal::Timer                                Timer;
 
         StringList         inputFiles;
         std::string        outputFile;
-        std::size_t        maxNumIsomers;
+        StringList         substrSMARTSPatterns;
+        MoleculeList       substrPatterns;
+        std::string        matchExpression;
         std::string        inputFormat;
         std::string        outputFormat;
-        bool               enumAtomConfig;
-        bool               enumBondConfig;
-        bool               incSpecCtrs;
-        bool               incSymCtrs;
-        bool               incInvNitrogens;
-        bool               incBridgeheads;
-        bool               incRingBonds;
-        bool               use2DCoords;
-        bool               use3DCoords;
-        std::size_t        minRingSize;
-        bool               titleSuffix;
         CompMoleculeReader inputReader;
         MoleculeWriterPtr  outputWriter;
         std::string        errorMessage;
         Timer              timer;
         std::size_t        numProcMols;
-        std::size_t        numOutIsomers;
+        std::size_t        numMatches;
     };
-} // namespace IsoGen
+} // namespace SubSearch
 
-#endif // ISOGEN_ISOGENIMPL_HPP
+#endif // SUBSEARCH_SUBSEARCHIMPL_HPP
