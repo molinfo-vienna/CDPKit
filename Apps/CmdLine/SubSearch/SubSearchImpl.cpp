@@ -110,12 +110,14 @@ private:
             Chem::initSubstructureSearchTarget(molecule, false);
 
             if (subSearch.matches(molecule)) {
-                parent->writeMolecule(molecule);
+                parent->writeMolecule(molecule, true);
                 parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": match");
                 
-            } else
+            } else {
+                parent->writeMolecule(molecule, false);
                 parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, orig_mol_name) + ": no match");
-
+            }
+            
             parent->numProcMols++;
             return true;
 
@@ -136,19 +138,24 @@ private:
 
 
 SubSearchImpl::SubSearchImpl(): 
-    matchExpression(), inputFormat(), outputFormat(), outputWriter(), numProcMols(0),
+    nonMatchingOutFile(), matchExpression(), inputFormat(), matchingOutFormat(),
+    nonMatchingOutFormat(), matchingWriter(), nonMatchingWriter(), numProcMols(0),
     numMatches(0)
 {
     using namespace std::placeholders;
     
-    addOption("input,i", "Input file(s).", 
+    addOption("input,i", "Molecule input file(s).", 
               value<StringList>(&inputFiles)->multitoken()->required());
-    addOption("output,o", "Stereoisomer output file.", 
-              value<std::string>(&outputFile)->required());
-    addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
+    addOption("output,o", "Matching molecule output file.", 
+              value<std::string>(&matchingOutFile)->required());
+    addOption("nm-output,n", "Non-matching molecule output file.", 
+              value<std::string>(&nonMatchingOutFile));
+    addOption("input-format,I", "Molecule Input file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { setInputFormat(fmt); }));
-    addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
-              value<std::string>()->notifier([this](const std::string& fmt) { setOutputFormat(fmt); }));
+    addOption("output-format,O", "Matching molecule output file format (default: auto-detect from file extension).", 
+              value<std::string>()->notifier([this](const std::string& fmt) { setMatchingOutputFormat(fmt); }));
+    addOption("nm-output-format,N", "Non-matching molecule output file format (default: auto-detect from file extension).", 
+              value<std::string>()->notifier([this](const std::string& fmt) { setNonMatchingOutputFormat(fmt); }));
     addOption("substructs,s", "Substructure SMARTS pattern(s).", 
               value<StringList>(&substrSMARTSPatterns)->multitoken()->required());
     addOption("match-expr,e", "Substructure matching expression (default: one of the spec. patterns has to match).", 
@@ -169,10 +176,20 @@ const char* SubSearchImpl::getProgAboutText() const
 void SubSearchImpl::addOptionLongDescriptions()
 {
     addOptionLongDescription("match-expr",
-                             "Allows to define a complex substructure query in the form of a logical expression that derives "
+                             "Allows to define a complex substructure query in the form of a logical expression that infers "
                              "a final matching result from the obtained per substructure results. "
-                             "If no expression is specified the default logic is an OR combination of the patterns. That is, an input "
-                             "molecule must contain one of the specified substructures to be considered as matching the query.");
+                             "If no expression is specified the default logic is an OR combination. That is, an input "
+                             "molecule must contain one of the specified substructures to be considered as a match.\n\n"
+                             "Supported logical operations:\n"
+                             " - AND (symbol: &)\n"
+                             " - OR  (symbol: |)\n"
+                             " - XOR (symbol: ^)\n"
+                             " - NOT (symbol: !)\n\n"
+                             "Parentheses can be used for grouping without limit on nesting depth. Any whitespace characters "
+                             "will be stripped before expression evaluation and thus can be used freely.\n"
+                             "Substructure patterns are referenced by positive integer numbers >= 1. "
+                             "The id of a pattern correspond to its position in the argument list of option -s.\n\n"
+                             "Example: -e '!(1&(2^3)) | 4'");
 
     StringList formats;
     std::string formats_str = "Supported Input Formats:";
@@ -204,7 +221,7 @@ void SubSearchImpl::addOptionLongDescriptions()
         formats_str.append("\n - ").append(fmt);
 
     addOptionLongDescription("output-format", 
-                             "Allows to explicitly specify the output format by providing one of the supported "
+                             "Allows to explicitly specify the matching molecule output format by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
@@ -214,6 +231,17 @@ void SubSearchImpl::addOptionLongDescriptions()
 
     addOptionLongDescription("output", 
                              "Specifies the output file where the matching molecules will be stored.\n\n" +
+                             formats_str);
+
+    addOptionLongDescription("nm-output-format", 
+                             "Allows to explicitly specify the non-matching molecule output format by providing one of the supported "
+                             "file-extensions (without leading dot!) as argument.\n\n" +
+                             formats_str +
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
+                             "(because missing, misleading or not supported).");
+
+    addOptionLongDescription("nm-output", 
+                             "Specifies the output file where the non-matching molecules will be stored.\n\n" +
                              formats_str);
 }
 
@@ -227,14 +255,24 @@ void SubSearchImpl::setInputFormat(const std::string& file_ext)
     inputFormat = file_ext;
 }
 
-void SubSearchImpl::setOutputFormat(const std::string& file_ext)
+void SubSearchImpl::setMatchingOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
     
     if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
 
-    outputFormat = file_ext;
+    matchingOutFormat = file_ext;
+}
+
+void SubSearchImpl::setNonMatchingOutputFormat(const std::string& file_ext)
+{
+    using namespace CDPL;
+    
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
+        throwValidationError("nm-output-format");
+
+    nonMatchingOutFormat = file_ext;
 }
 
 int SubSearchImpl::process()
@@ -250,7 +288,7 @@ int SubSearchImpl::process()
     printOptionSummary();
 
     initInputReader();
-    initOutputWriter();
+    initOutputWriters();
 
     if (termSignalCaught())
         return EXIT_FAILURE;
@@ -350,12 +388,18 @@ std::size_t SubSearchImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
     return 0;
 }
 
-void SubSearchImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol)
+void SubSearchImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool match)
 {
-    if (!outputWriter->write(mol))
-        throw CDPL::Base::IOError("could not write output molecule");
+    if (match) {
+        if (!matchingWriter->write(mol))
+            throw CDPL::Base::IOError("could not write output molecule");
 
-    numMatches++;
+        numMatches++;
+        
+    } else if (nonMatchingWriter) {
+        if (!nonMatchingWriter->write(mol))
+            throw CDPL::Base::IOError("could not write output molecule");
+    }
 }
 
 void SubSearchImpl::checkInputFiles() const
@@ -373,7 +417,13 @@ void SubSearchImpl::checkInputFiles() const
 
     if (std::find_if(inputFiles.begin(), inputFiles.end(),
                      [&](const std::string& file) {
-                         return Util::checkIfSameFile(outputFile, file);
+                         return Util::checkIfSameFile(matchingOutFile, file);
+                     }) != inputFiles.end())
+        throw Base::ValueError("output file must not occur in list of input files");
+
+    if (std::find_if(inputFiles.begin(), inputFiles.end(),
+                     [&](const std::string& file) {
+                         return Util::checkIfSameFile(nonMatchingOutFile, file);
                      }) != inputFiles.end())
         throw Base::ValueError("output file must not occur in list of input files");
 }
@@ -415,20 +465,22 @@ void SubSearchImpl::printMessage(VerbosityLevel level, const std::string& msg, b
 void SubSearchImpl::printOptionSummary()
 {
     printMessage(VERBOSE, "Option Summary:");
-    printMessage(VERBOSE, " Input File(s):                         " + inputFiles[0]);
+    printMessage(VERBOSE, " Input File(s):                            " + inputFiles[0]);
     
     for (auto it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
-        printMessage(VERBOSE, std::string(40, ' ') + *it);
+        printMessage(VERBOSE, std::string(43, ' ') + *it);
 
-    printMessage(VERBOSE, " Output File:                           " + outputFile);
-    printMessage(VERBOSE, " Substructure Patterns:                 " + substrSMARTSPatterns[0]);
+    printMessage(VERBOSE, " Matching Molecule Output File:            " + matchingOutFile);
+    printMessage(VERBOSE, " Non-Matching Molecule Output File:        " + nonMatchingOutFile);
+    printMessage(VERBOSE, " Substructure Patterns:                    " + substrSMARTSPatterns[0]);
     
     for (auto it = ++substrSMARTSPatterns.begin(), end = substrSMARTSPatterns.end(); it != end; ++it)
-        printMessage(VERBOSE, std::string(40, ' ') + *it);
+        printMessage(VERBOSE, std::string(43, ' ') + *it);
 
-    printMessage(VERBOSE, " Substructure Pattern Match Expression: " + (!matchExpression.empty() ? matchExpression : std::string("Default")));
-    printMessage(VERBOSE, " Input File Format:                     " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Output File Format:                    " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Substructure Pattern Match Expression:    " + (!matchExpression.empty() ? matchExpression : std::string("Default")));
+    printMessage(VERBOSE, " Input File Format:                        " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Matching Molecule Output File Format:     " + (!matchingOutFormat.empty() ? matchingOutFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Non-Matching Molecule Output File Format: " + (!nonMatchingOutFormat.empty() ? nonMatchingOutFormat : std::string("Auto-detect")));
     
     printMessage(VERBOSE, "");
 }
@@ -485,21 +537,36 @@ void SubSearchImpl::initInputReader()
     printMessage(INFO, "");
 }
 
-void SubSearchImpl::initOutputWriter()
+void SubSearchImpl::initOutputWriters()
 {
     using namespace CDPL;
 
     try {
-        outputWriter.reset(outputFormat.empty() ? new Chem::MolecularGraphWriter(outputFile) :
-                           new Chem::MolecularGraphWriter(outputFile, outputFormat));
+        matchingWriter.reset(matchingOutFormat.empty() ? new Chem::MolecularGraphWriter(matchingOutFile) :
+                             new Chem::MolecularGraphWriter(matchingOutFile, matchingOutFormat));
 
     } catch (const Base::IOError& e) {
-        throw Base::IOError("no output handler found for file '" + outputFile + '\'');
+        throw Base::IOError("no output handler found for file '" + matchingOutFile + '\'');
     }
 
-    setSMILESRecordFormatParameter(*outputWriter, "SN");
-    setSMILESOutputCanonicalFormParameter(*outputWriter, true);
-    setMultiConfExportParameter(*outputWriter, true);
+    setSMILESRecordFormatParameter(*matchingWriter, "SN");
+    setSMILESOutputCanonicalFormParameter(*matchingWriter, true);
+    setMultiConfExportParameter(*matchingWriter, true);
+
+    if (nonMatchingOutFile.empty())
+        return;
+
+    try {
+        nonMatchingWriter.reset(nonMatchingOutFormat.empty() ? new Chem::MolecularGraphWriter(nonMatchingOutFile) :
+                             new Chem::MolecularGraphWriter(nonMatchingOutFile, nonMatchingOutFormat));
+
+    } catch (const Base::IOError& e) {
+        throw Base::IOError("no output handler found for file '" + nonMatchingOutFile + '\'');
+    }
+
+    setSMILESRecordFormatParameter(*nonMatchingWriter, "SN");
+    setSMILESOutputCanonicalFormParameter(*nonMatchingWriter, true);
+    setMultiConfExportParameter(*nonMatchingWriter, true);
 }
 
 std::string SubSearchImpl::createMoleculeIdentifier(std::size_t rec_idx, const std::string& mol_name)

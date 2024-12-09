@@ -53,14 +53,15 @@ namespace SubSearch
         const char* getProgAboutText() const;
 
         void setInputFormat(const std::string& file_ext);
-        void setOutputFormat(const std::string& file_ext);
+        void setMatchingOutputFormat(const std::string& file_ext);
+        void setNonMatchingOutputFormat(const std::string& file_ext);
         
         int process();
         void findMatches();
 
         std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 
-        void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
+        void writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool match);
 
         void setErrorMessage(const std::string& msg);
         bool haveErrorMessage();
@@ -76,7 +77,7 @@ namespace SubSearch
         
         void printOptionSummary();
         void initInputReader();
-        void initOutputWriter();
+        void initOutputWriters();
 
         std::string createMoleculeIdentifier(std::size_t rec_idx, const std::string& mol_name);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
@@ -92,14 +93,17 @@ namespace SubSearch
         typedef CDPL::Internal::Timer                                Timer;
 
         StringList         inputFiles;
-        std::string        outputFile;
+        std::string        matchingOutFile;
+        std::string        nonMatchingOutFile;
         StringList         substrSMARTSPatterns;
         MoleculeList       substrPatterns;
         std::string        matchExpression;
         std::string        inputFormat;
-        std::string        outputFormat;
+        std::string        matchingOutFormat;
+        std::string        nonMatchingOutFormat;
         CompMoleculeReader inputReader;
-        MoleculeWriterPtr  outputWriter;
+        MoleculeWriterPtr  matchingWriter;
+        MoleculeWriterPtr  nonMatchingWriter;
         std::string        errorMessage;
         Timer              timer;
         std::size_t        numProcMols;
