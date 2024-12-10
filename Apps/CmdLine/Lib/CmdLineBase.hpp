@@ -49,6 +49,8 @@ namespace CmdLineLib
 
         int run(int argc, char* argv[]);
 
+        static void setCursorVisible(bool visible);
+        
       protected:
         enum VerbosityLevel
         {

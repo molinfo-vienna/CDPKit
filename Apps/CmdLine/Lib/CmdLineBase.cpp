@@ -99,6 +99,8 @@ namespace
     {
         if (signalCaught.load()) {
             std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - exiting..." << std::endl;
+
+            CmdLineBase::setCursorVisible(true);
             std::exit(EXIT_FAILURE);
         }
             
@@ -131,29 +133,14 @@ CmdLineBase::CmdLineBase():
 #ifndef _WIN32
     std::signal(SIGHUP, &handleSignal);
     std::signal(SIGQUIT, &handleSignal);
-    std::cerr << "\033[?25l"; // hide cursor
-#else
-    // hide cursor    
-    static const HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cci;
-    GetConsoleCursorInfo(handle, &cci);
-    cci.bVisible = false; 
-    SetConsoleCursorInfo(handle, &cci);
 #endif // !defined _WIN32
+
+    setCursorVisible(false);
 }
 
 CmdLineBase::~CmdLineBase()
 {
-    // show cursor again
-#ifdef _WIN32
-    static const HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cci;
-    GetConsoleCursorInfo(handle, &cci);
-    cci.bVisible = true; 
-    SetConsoleCursorInfo(handle, &cci);
-#else
-    std::cerr << "\033[?25h";
-#endif // defined _WIN32
+    setCursorVisible(true);
 }
     
 int CmdLineBase::run(int argc, char* argv[])
@@ -228,6 +215,20 @@ CmdLineBase::VerbosityLevel CmdLineBase::getVerbosityLevel() const
 bool CmdLineBase::termSignalCaught()
 {
     return signalCaught.load();
+}
+
+void CmdLineBase::setCursorVisible(bool visible)
+{
+#ifndef _WIN32
+    std::cerr << (visible ? "\033[?25h" : "\033[?25l");
+#else
+    static const HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cci;
+
+    GetConsoleCursorInfo(handle, &cci);
+    cci.bVisible = visible;
+    SetConsoleCursorInfo(handle, &cci);
+#endif // !defined _WIN32 
 }
 
 void CmdLineBase::addOption(const char* name, const std::string& descr)
@@ -358,20 +359,32 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
               << (double(lastProgressValue) / 100) 
               << "% |";
 
-    std::string bar_str;
+    bool partial = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+    std::string bar_str(curr_prog_bar_len == 0 ? partial ? "\033[0;35m" : "\033[0;37m" : progressBarLen == curr_prog_bar_len ? "\033[0;32m" : "\033[0;35m");
+        
+    if ((curr_prog_bar_len > 0) || partial) {
+        for (std::size_t i = 0; i < curr_prog_bar_len; i++)
+            bar_str.append("━");
 
-    for (std::size_t i = 0; i < curr_prog_bar_len; i++)
-        bar_str.append(u8"━");
+        if (progressBarLen != curr_prog_bar_len) {
+            if (partial) {
+                bar_str.append("╸");
+                bar_str.append("\033[0;37m");
 
-    if ((progressBarLen * progress - curr_prog_bar_len) >= 0.5) {
-        bar_str.append(u8"╸");
-        curr_prog_bar_len++;
-    }
+            } else {
+                bar_str.append("\033[0;37m");
+                bar_str.append("╺");
+            }
+
+            for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
+                bar_str.append("━");
+        }
+        
+    } else 
+        for (std::size_t i = 0; i < progressBarLen; i++)
+            bar_str.append("━");
     
-    for (std::size_t i = 0; i < (progressBarLen - curr_prog_bar_len); i++)
-        bar_str.push_back(' ');
-
-    bar_str.push_back('|');
+    bar_str.append("\033[0m|");
         
     std::cerr << bar_str;
     
