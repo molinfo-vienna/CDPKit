@@ -57,7 +57,7 @@ public:
         if (SubSearchImpl::termSignalCaught())
             throw Terminated();
 
-        parent->printProgress("Scanning Input File(s)...  ", offset + scale * progress);
+        parent->printProgress("Scanning Input File(s)...", offset + scale * progress);
     }
 
   private:
@@ -176,10 +176,10 @@ const char* SubSearchImpl::getProgAboutText() const
 void SubSearchImpl::addOptionLongDescriptions()
 {
     addOptionLongDescription("match-expr",
-                             "Allows to define a complex substructure query in the form of a logical expression that infers "
-                             "a final matching result from the obtained per substructure results. "
-                             "If no expression is specified the default logic is an OR combination. That is, an input "
-                             "molecule must contain one of the specified substructures to be considered as a match.\n\n"
+                             "Allows to define a complex substructure query in the form of a logical expression that specifies how "
+                             "the individual SMARTS pattern matching results have to be merged into a single overall molecule matching result. "
+                             "When no expression is specified the default logic is an OR combination. That is, at least one of the "
+                             "given SMARTS patterns has to match for a positive molecule matching result.\n\n"
                              "Supported logical operations:\n"
                              " - AND (symbol: &)\n"
                              " - OR  (symbol: |)\n"
@@ -187,8 +187,8 @@ void SubSearchImpl::addOptionLongDescriptions()
                              " - NOT (symbol: !)\n\n"
                              "Parentheses can be used for grouping without limit on nesting depth. Any whitespace characters "
                              "will be stripped before expression evaluation and thus can be used freely.\n"
-                             "Substructure patterns are referenced by positive integer numbers >= 1. "
-                             "The id of a pattern correspond to its position in the argument list of option -s.\n\n"
+                             "SMARTS patterns specified by option -s are referenced by positive integer numbers >= 1. "
+                             "The numeric id of a pattern corresponds to its position in the argument list of option -s.\n\n"
                              "Example: -e '!(1&(2^3)) | 4'");
 
     StringList formats;
@@ -206,10 +206,8 @@ void SubSearchImpl::addOptionLongDescriptions()
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).");
 
-    formats_str.pop_back();
-
     addOptionLongDescription("input", 
-                             "Specifies one or more molecule input file(s) to be searched for matches.\n\n" +
+                             "Specifies one or more molecule input file(s) to be searched for matching substructures.\n\n" +
                              formats_str);
 
     formats.clear();
@@ -226,8 +224,6 @@ void SubSearchImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
-
-    formats_str.pop_back();
 
     addOptionLongDescription("output", 
                              "Specifies the output file where the matching molecules will be stored.\n\n" +
@@ -421,10 +417,10 @@ void SubSearchImpl::checkInputFiles() const
                      }) != inputFiles.end())
         throw Base::ValueError("output file must not occur in list of input files");
 
-    if (std::find_if(inputFiles.begin(), inputFiles.end(),
-                     [&](const std::string& file) {
-                         return Util::checkIfSameFile(nonMatchingOutFile, file);
-                     }) != inputFiles.end())
+    if (!nonMatchingOutFile.empty() && (std::find_if(inputFiles.begin(), inputFiles.end(),
+                                                     [&](const std::string& file) {
+                                                         return Util::checkIfSameFile(nonMatchingOutFile, file);
+                                                     }) != inputFiles.end()))
         throw Base::ValueError("output file must not occur in list of input files");
 }
 
@@ -471,7 +467,7 @@ void SubSearchImpl::printOptionSummary()
         printMessage(VERBOSE, std::string(43, ' ') + *it);
 
     printMessage(VERBOSE, " Matching Molecule Output File:            " + matchingOutFile);
-    printMessage(VERBOSE, " Non-Matching Molecule Output File:        " + nonMatchingOutFile);
+    printMessage(VERBOSE, " Non-Matching Molecule Output File:        " + (nonMatchingOutFile.empty() ? std::string("None") : nonMatchingOutFile));
     printMessage(VERBOSE, " Substructure Patterns:                    " + substrSMARTSPatterns[0]);
     
     for (auto it = ++substrSMARTSPatterns.begin(), end = substrSMARTSPatterns.end(); it != end; ++it)

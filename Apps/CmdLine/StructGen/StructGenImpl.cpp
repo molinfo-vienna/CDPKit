@@ -554,8 +554,6 @@ void StructGenImpl::addOptionLongDescriptions()
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).");
 
-    formats_str.pop_back();
-
     addOptionLongDescription("input", 
                              "Specifies one or more input file(s) with molecules for which conformers have to be generated.\n\n" +
                              formats_str);
@@ -582,8 +580,6 @@ void StructGenImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
-
-    formats_str.pop_back();
 
     addOptionLongDescription("output", 
                              "Specifies the output file where the generated structures will be stored.\n\n" +

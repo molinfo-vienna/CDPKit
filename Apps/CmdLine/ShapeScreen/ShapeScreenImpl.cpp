@@ -251,7 +251,6 @@ void ShapeScreenImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).\nNote that atom 3D-coordinates are required for shape screening!");
-    formats_str.pop_back();
 
     addOptionLongDescription("query", 
                              "The query molecule input file.\n\n" +
@@ -276,7 +275,6 @@ void ShapeScreenImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
-    formats_str.pop_back();
 
     addOptionLongDescription("output", 
                              "Hit molecule output file.\n\n" + formats_str);
