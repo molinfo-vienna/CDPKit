@@ -15,6 +15,7 @@ Pharmacophore screening                        :doc:`psdscreen`
 Pharmacophore screening database generation    :doc:`psdcreate`
 Pharmacophore screening database management    :doc:`psdmerge`, :doc:`psdinfo`
 Shape-based screening                          :doc:`shapescreen`
+Substructure searching                         :doc:`subsearch`
 3D structure generation                        :doc:`structgen`
 Conformer ensemble generation                  :doc:`confgen`, :doc:`genfraglib`
 Tautomer generation and standardization        :doc:`tautgen`
@@ -30,6 +31,7 @@ Chemical structure/reaction data inspection    :doc:`ChOX <chox>`
    psdmerge
    psdinfo
    shapescreen
+   subsearch
    structgen
    confgen
    genfraglib

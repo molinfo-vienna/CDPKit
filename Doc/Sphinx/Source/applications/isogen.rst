@@ -3,7 +3,6 @@ isogen
 
 Performs stereoisomer enumeration for a set of input molecules.
 
-
 Synopsis
 --------
 
@@ -27,9 +26,9 @@ Mandatory options
      - Native CDPL-Format (.cdf)
      - Tripos Sybyl MOL2 File (.mol2)
      - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (*.cml)
-     - GZip-Compressed Chemical Markup Language Format (*.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (*.cml.bz2)
+     - Chemical Markup Language Format (.cml)
+     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
      - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
      - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
      - GZip-Compressed Native CDPL-Format (.cdf.gz)
@@ -37,7 +36,7 @@ Mandatory options
      - GZip-Compressed Daylight SMILES String (.smi.gz)
      - BZip2-Compressed Daylight SMILES String (.smi.bz2)
      - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2
+     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
 
   -o [ --output ] arg
 
@@ -53,9 +52,9 @@ Mandatory options
      - Native CDPL-Format (.cdf)
      - Tripos Sybyl MOL2 File (.mol2)
      - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (*.cml)
-     - GZip-Compressed Chemical Markup Language Format (*.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (*.cml.bz2)
+     - Chemical Markup Language Format (.cml)
+     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
      - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
      - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
      - GZip-Compressed Native CDPL-Format (.cdf.gz)
@@ -63,7 +62,7 @@ Mandatory options
      - GZip-Compressed Daylight SMILES String (.smi.gz)
      - BZip2-Compressed Daylight SMILES String (.smi.bz2)
      - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2
+     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
 
 Other options
 -------------
