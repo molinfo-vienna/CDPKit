@@ -45,7 +45,7 @@ namespace CmdLineLib
       public:
         CmdLineBase();
 
-        virtual ~CmdLineBase() {}
+        virtual ~CmdLineBase();
 
         int run(int argc, char* argv[]);
 

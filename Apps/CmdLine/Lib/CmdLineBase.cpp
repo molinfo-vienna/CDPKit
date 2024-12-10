@@ -46,6 +46,12 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/tokenizer.hpp>
 
+#ifdef _WIN32
+# define WIN32_LEAN_AND_MEAN
+# define VC_EXTRALEAN
+# include <Windows.h>
+#endif // !defined _WIN32
+
 #include "CDPL/Version.hpp"
 #include "CDPL/BuildInfo.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -125,9 +131,31 @@ CmdLineBase::CmdLineBase():
 #ifndef _WIN32
     std::signal(SIGHUP, &handleSignal);
     std::signal(SIGQUIT, &handleSignal);
+    std::cerr << "\033[?25l"; // hide cursor
+#else
+    // hide cursor    
+    static const HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cci;
+    GetConsoleCursorInfo(handle, &cci);
+    cci.bVisible = false; 
+    SetConsoleCursorInfo(handle, &cci);
 #endif // !defined _WIN32
 }
 
+CmdLineBase::~CmdLineBase()
+{
+    // show cursor again
+#ifdef _WIN32
+    static const HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cci;
+    GetConsoleCursorInfo(handle, &cci);
+    cci.bVisible = true; 
+    SetConsoleCursorInfo(handle, &cci);
+#else
+    std::cerr << "\033[?25h";
+#endif // defined _WIN32
+}
+    
 int CmdLineBase::run(int argc, char* argv[])
 {
     namespace po = boost::program_options;
