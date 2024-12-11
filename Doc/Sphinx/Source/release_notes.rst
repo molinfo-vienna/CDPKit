@@ -3,6 +3,77 @@
 Release Notes
 =============
 
+Release V1.2.0
+--------------
+
+- Improved the visual appearance of command line tool progress bars
+- Sphinx documentation updates
+- New command line tool 'SubSearch' for performing substructure searching in molecular data files with support
+  for multiple query substructures and customizable logical expressions
+- Unified the naming of control-parameters and associated functions in namespaces Chem, Pharm, Grid, and Biomol
+- Improved support for different Python installation flavors on macOS (with the greatly appreciated help of Yakov Pechersky)
+- Added support for the I/O of molecular structure data in CML format
+- Fallback perception of atom/bond stereochemistry from input 3D coordinates during conformer generation molecule preprocessing
+  now does not require the presence of explicit hydrogens anymore
+- Renamed function MolProp::isCarbonylLikeAtom() into MolProp::isCarbonylLike()
+- Renamed function MolProp::isAmideCenterAtom() into MolProp::isAmideCenter()
+- New atom classification functions MolProp::isBridgehead() and MolProp::isSpiroCenter()
+- CDPL Python bindings wheel files for Linux are now built on manylinux_2_28
+- Added support for the I/O of molecular structure data in mmCIF format
+- Added new and changed existing constants in namespace Biomol::ResidueType which now fully cover the 
+  set of residue types defined in the mmCIF/PDBX specification
+- Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue parent structure information
+- Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue one letter codes
+- Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol for their
+  future dual-use by the mmCIF data I/O code
+- Added new control-parameters, atom properties and associated functions to namespace Biomol
+- Updated embedded MessagePack library to version 6.1.1
+- Updated embedded SQLite3 database to version 3.46.1
+- Updated embedded MMTF library to version 1.1.0
+- Updated PDB residue dictionary which now features 44906 chemical components
+- CDPL Python bindings now support NumPy V>=2.0
+- Removed function Biomol::convertMOL2ToPDBResidueInfo(): if possible, the conversion of MOL2 substructure to
+  PDB residue/sequence information is now carried out automatically
+- Fixed a bug in program 'ChOX' that prevented the successful saving of data to PSD files
+- Program 'ChOX' now uses the same file open/save dialog instance for all opened main windows 
+- New class Chem::MultiSubstructureSearch for performing substructure matching with multiple query structures that
+  can be combined in the form of boolean expressions
+- Program 'ChOX' now supports basic cut/copy/paste as well as drag and drop operations
+- New feature of the program 'ChOX' that allows to perform substructure searching with logical combinations of SMARTS patterns
+- New feature of the program 'ChOX' that allows to highlight substructures defined by SMARTS patterns
+- New classes Descr::NPoint2DPharmacophoreFingerprintGenerator and Descr::NPoint3DPharmacophoreFingerprintGeneratorfor
+  for the generation of variably sized hashed 2D and 3D pharmacophore fingerprints
+- Removed methods setNumBits() and getNumBits() in class Descr::PathFingerprintGenerator (fp-length now
+  implicitly given by the size of the bitset provided as argument to method generate())
+- New class Descr::PubChemFingerprintGenerator for the generation of 881 bit PubChem fingerprints
+- New class Chem::ExtendedSSSR fro the perception extended smallest sets of smallest rings
+- The SDF reader now also accepts input data that do not end with a newline character
+- Made MOL2 reader implementation more tolerant regarding missing sections
+- Fixed missing support for certain chemical element symbols in class Chem::SMARTSMoleculeReader
+- Extended the set of supported chemical elements to atomic number 114
+- New class Descr::MACCSFingerprintGenerator for the generation of 166 bit MACCS key fingerprints
+- Fixed a bug in Math::RegularSpatialGrid causing erroneous transformations of world to grid-local coordinates
+- Fixed a problem in Chem::RECAPFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments
+- Fixed a problem in Chem::BRICSFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments   
+- Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
+  specify a background fill pattern (see Vis::Brush) for 2D structure renderings
+- New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
+- Vis::CairoRenderer2D now supports the rendering of overlined, underlined and striked-out text
+- Fixed an issue with the calculation of text bounds by Vis::CairoFontMetrics and Vis::QtFontMetrics
+  that lead to too small bounding boxes in the presence of leading and/or trailing whitespace
+- Updated the internally used 'rapidxml' XML-parser library to the lastest version and fixed an issue with
+  whitespace-only data elements that were missing in the generated DOM-trees
+- New 2D graphics primitive Vis::TextBlockPrimitive2D for the rendering of multi-line text blocks supporting
+  several options for the styling of individual text fragments
+- Support for setting the image output scaling factor in the program 'ChOX'
+- New control-parameter Vis::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
+  depictions saved in pixel-based output formats
+- Fixed an issue in program 'ChOX' where the background color setting of 2D structure/reaction depictions was ignored on
+  file output 
+- Support for atom and bond highlighting in 2D structure/reaction depictions
+- Fixed several errors in Python example scripts
+- Support for fully customizable atom and bond labels in 2D structure/reaction depictions
+
 Release V1.1.1
 --------------
 
