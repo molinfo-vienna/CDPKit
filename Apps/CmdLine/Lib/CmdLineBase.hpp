@@ -151,6 +151,7 @@ namespace CmdLineLib
         std::size_t        progressUpdateInterv;
         std::size_t        lastProgressDotCount;
         std::size_t        maxProgressDotCount;
+        std::string        progressBar;
         bool               inProgressLine;
         bool               inNewLine;
         Timer              progTimer;

@@ -49,7 +49,7 @@
 #ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN
 # define VC_EXTRALEAN
-# include <Windows.h>
+# include <windows.h>
 #endif // !defined _WIN32
 
 #include "CDPL/Version.hpp"
@@ -133,6 +133,8 @@ CmdLineBase::CmdLineBase():
 #ifndef _WIN32
     std::signal(SIGHUP, &handleSignal);
     std::signal(SIGQUIT, &handleSignal);
+#else
+    SetConsoleOutputCP(CP_UTF8);
 #endif // !defined _WIN32
 
     setCursorVisible(false);
@@ -357,44 +359,53 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 
     std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
               << (double(lastProgressValue) / 100) 
-              << "% |";
+              << "% ";
 
-    bool partial = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
-    std::string bar_str(curr_prog_bar_len == 0 ? partial ? "\033[0;35m" : "\033[0;37m" : progressBarLen == curr_prog_bar_len ? "\033[0;32m" : "\033[0;35m");
-        
-    if ((curr_prog_bar_len > 0) || partial) {
+    static const std::string INFINITY_SYM("\u221E");
+    static const std::string FULL_LINE("\u2501");       // box drawings heavy horizontal
+    static const std::string LEFT_HALF_LINE("\u2578");  // box drawings heavy left
+    static const std::string RIGHT_HALF_LINE("\u257A"); // box drawings heavy right
+    static const std::string GRAY("\033[38;5;248m");
+    static const std::string PURPLE("\033[35m");
+    static const std::string GREEN("\033[32m");
+    static const std::string COLOR_RESET("\033[0m");
+    
+    bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+    progressBar = (curr_prog_bar_len == 0 ? fractional ? PURPLE : GRAY : progressBarLen == curr_prog_bar_len ? GREEN : PURPLE);
+   
+    if ((curr_prog_bar_len > 0) || fractional) {
         for (std::size_t i = 0; i < curr_prog_bar_len; i++)
-            bar_str.append("━");
+            progressBar.append(FULL_LINE);
 
         if (progressBarLen != curr_prog_bar_len) {
-            if (partial) {
-                bar_str.append("╸");
-                bar_str.append("\033[0;37m");
+            if (fractional) {
+                progressBar.append(LEFT_HALF_LINE);
+                progressBar.append(GRAY);
 
             } else {
-                bar_str.append("\033[0;37m");
-                bar_str.append("╺");
+                progressBar.append(GRAY);
+                progressBar.append(RIGHT_HALF_LINE);
             }
 
             for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
-                bar_str.append("━");
+                progressBar.append(FULL_LINE);
         }
         
     } else 
         for (std::size_t i = 0; i < progressBarLen; i++)
-            bar_str.append("━");
+            progressBar.append(FULL_LINE);
     
-    bar_str.append("\033[0m|");
+    progressBar.append(COLOR_RESET);
         
-    std::cerr << bar_str;
+    std::cerr << progressBar;
     
     if (progress > 0.0) {
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
-        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << std::setw(10) << "\r";
+        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << std::setw(10) << '\r';
 
     } else
-        std::cerr << " ETA: \u221E\r";
+        std::cerr << " ETA: " << INFINITY_SYM << '\r';
     
     inProgressLine = true;
     inNewLine = false;
