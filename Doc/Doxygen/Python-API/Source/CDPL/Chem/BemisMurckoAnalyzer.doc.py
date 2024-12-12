@@ -88,10 +88,7 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     #
     def getFrameworks() -> FragmentList: pass
 
-    ##
-    # \brief FIXME!
-    #
-    hydrogenStripping = property(getHydrogenStripping, setHydrogenStripping)
+    hydrogenStripping = property(hydrogensStripped, stripHydrogens)
 
     ringSystems = property(getRingSystems)
 

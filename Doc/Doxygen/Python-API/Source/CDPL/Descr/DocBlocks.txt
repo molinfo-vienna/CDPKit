@@ -15,3 +15,7 @@ CircularFingerprintGenerator.incChirality.value
 chiralityIncluded
 includeChirality
 $$$$
+
+NPointPharmacophoreFingerprintGenerator.pharmGenerator.value
+getPharmacophoreGenerator
+$$$$

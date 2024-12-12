@@ -4,3 +4,8 @@
 ResidueDictionary.Entry.obsolete.value
 isObsolete
 $$$$
+
+MMCIFData.id.value
+getID
+setID
+$$$$

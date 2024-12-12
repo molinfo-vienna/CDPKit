@@ -110,7 +110,4 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
 
     binSize = property(getBinSize, setBinSize)
 
-    ##
-    # \brief FIXME!
-    #
-    pharmGenerator = property(getPharmGenerator)
+    pharmGenerator = property(getPharmacophoreGenerator)

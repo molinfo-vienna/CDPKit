@@ -259,40 +259,19 @@ class StereoisomerGenerator(Boost.Python.instance):
 
     bondPredicate = property(getBondPredicate, setBondPredicate)
 
-    ##
-    # \brief FIXME!
-    #
-    enumAtomConfig = property(getEnumAtomConfig, setEnumAtomConfig)
+    enumAtomConfig = property(atomConfigEnumerated, enumerateAtomConfig)
 
-    ##
-    # \brief FIXME!
-    #
-    enumBondConfig = property(getEnumBondConfig, setEnumBondConfig)
+    enumBondConfig = property(enumerateBondConfig, bondConfigEnumerated)
 
-    ##
-    # \brief FIXME!
-    #
-    incSpecifiedCenters = property(getIncSpecifiedCenters, setIncSpecifiedCenters)
+    incSpecifiedCenters = property(specifiedCentersIncluded, includeSpecifiedCenters)
 
-    ##
-    # \brief FIXME!
-    #
-    incSymmetricCenters = property(getIncSymmetricCenters, setIncSymmetricCenters)
+    incSymmetricCenters = property(symmetricCentersIncluded, includeSymmetricCenters)
 
-    ##
-    # \brief FIXME!
-    #
-    incBridgeheadAtoms = property(getIncBridgeheadAtoms, setIncBridgeheadAtoms)
+    incBridgeheadAtoms = property(bridgeheadAtomsIncluded, includeBridgeheadAtoms)
 
-    ##
-    # \brief FIXME!
-    #
-    incInvNitrogens = property(getIncInvNitrogens, setIncInvNitrogens)
+    incInvNitrogens = property(invertibleNitrogensIncluded, includeInvertibleNitrogens)
 
-    ##
-    # \brief FIXME!
-    #
-    incRingBonds = property(getIncRingBonds, setIncRingBonds)
+    incRingBonds = property(ringBondsIncluded, includeRingBonds)
 
     minRingSize = property(getMinRingSize, setMinRingSize)
 

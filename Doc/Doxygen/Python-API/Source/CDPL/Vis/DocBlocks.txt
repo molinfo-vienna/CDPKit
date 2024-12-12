@@ -58,3 +58,14 @@ Line2D.cwPerpDirection.value
 getCWPerpDirection
 $$$$
 
+Path2D.empty.value
+isEmpty
+$$$$
+
+Path2D.empty.value
+isEmpty
+$$$$
+
+Path2D.hasDrawingElem.value
+hasDrawingElements
+$$$$

@@ -27,7 +27,7 @@ BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
 ##
 # \brief 
 #
-BUILD_TIME = 202411290839
+BUILD_TIME = 202412120941
 
 ##
 # \brief 
@@ -97,4 +97,4 @@ VERSION_PATCH = 0
 ##
 # \brief 
 #
-VERSION_STRING = '1.2.0.dev3'
+VERSION_STRING = '1.2.0'

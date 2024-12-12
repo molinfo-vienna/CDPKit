@@ -629,6 +629,9 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
 
         if name.startswith('_' + class_obj.__name__ + '_'):
             continue
+
+        if len(name) > 1 and name.startswith('_') and name[1] != '_': # 'private' methods
+            continue
         
         if isProperty(obj):
             properties.append((obj, name))

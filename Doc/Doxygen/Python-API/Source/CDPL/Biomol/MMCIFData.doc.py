@@ -475,7 +475,4 @@ class MMCIFData(Boost.Python.instance):
 
     numCategories = property(getNumCategories)
 
-    ##
-    # \brief FIXME!
-    #
-    id = property(getId, setId)
+    id = property(getID, setID)

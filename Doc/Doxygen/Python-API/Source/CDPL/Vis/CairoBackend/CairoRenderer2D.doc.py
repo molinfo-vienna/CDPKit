@@ -213,13 +213,3 @@ class CairoRenderer2D(Vis.Renderer2D):
     # \brief Disables clipping.
     # 
     def clearClipPath() -> None: pass
-
-    ##
-    # \brief FIXME!
-    #
-    def _fillPath(CairoRenderer2D self): -> None: pass
-
-    ##
-    # \brief FIXME!
-    #
-    def _strokePath(CairoRenderer2D self): -> None: pass

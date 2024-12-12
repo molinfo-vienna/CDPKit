@@ -182,9 +182,6 @@ class TautomerGenerator(Boost.Python.instance):
 
     regIsotopes = property(isotopesRegarded, regardIsotopes)
 
-    ##
-    # \brief FIXME!
-    #
-    remResonanceDuplicates = property(getRemResonanceDuplicates, setRemResonanceDuplicates)
+    remResonanceDuplicates = property(resonanceDuplicatesRemoved, removeResonanceDuplicates)
 
     numTautomerizationRules = property(getNumTautomerizationRules)

@@ -319,14 +319,8 @@ class Path2D(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    empty = property(getEmpty)
+    empty = property(isEmpty)
 
-    ##
-    # \brief FIXME!
-    #
-    hasDrawingElem = property(getHasDrawingElem)
+    hasDrawingElem = property(hasDrawingElements)
 
     fillRule = property(getFillRule, setFillRule)
