@@ -60,12 +60,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Implements the 2D visualization of multiple chemical structures arrange in a grid.
+         * \brief Implements the 2D visualization of multiple chemical structures arranged in a grid.
          *
-         * \c %StructureGridView2D visualizes multiple chemical structures as 2D structure diagrams 
+         * \c %StructureGridView2D visualizes one or more molecules as 2D structure diagrams 
          * arranged in a grid of arbitrary size.
          *
-         * \c %StructureGridView2D relies on Vis::StructureView2D for structure visualization and thus supports all 
+         * \c %StructureGridView2D relies on Vis::StructureView2D for 2D structure visualization and thus supports all 
          * all of its parameters controlling the graphical details of the generated structure diagrams (colors, fonts,
          * line-widths etc.). Structure visualization parameters of a \c %StructureGridView2D instance can be set for individual grid
          * cells as well as for the whole grid. Furthermore, any Chem::Atom, Chem::Bond and Chem::MolecularGraph relevant for 2D visualization
