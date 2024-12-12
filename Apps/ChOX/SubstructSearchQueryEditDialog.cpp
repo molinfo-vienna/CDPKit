@@ -22,6 +22,8 @@
  */
 
 
+#include <locale>
+
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGroupBox>
@@ -266,6 +268,7 @@ void SubstructSearchQueryEditDialog::validateExpression()
     auto palette = exprLineEdit->palette();
     
     if (!error.empty()) {
+        error[0] = std::toupper(error[0], std::locale());
         palette.setColor(QPalette::Active, exprLineEdit->foregroundRole(), Qt::red);
         exprLineEdit->setToolTip(tr(error.c_str()));
 

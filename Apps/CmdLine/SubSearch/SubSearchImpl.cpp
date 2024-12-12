@@ -142,8 +142,6 @@ SubSearchImpl::SubSearchImpl():
     nonMatchingOutFormat(), matchingWriter(), nonMatchingWriter(), numProcMols(0),
     numMatches(0)
 {
-    using namespace std::placeholders;
-    
     addOption("input,i", "Molecule input file(s).", 
               value<StringList>(&inputFiles)->multitoken()->required());
     addOption("output,o", "Matching molecule output file.", 
@@ -450,7 +448,7 @@ void SubSearchImpl::checkMatchExpression() const
     auto err_msg = Chem::MultiSubstructureSearch().validate(matchExpression, substrSMARTSPatterns.size() + 1);
 
     if (!err_msg.empty())
-        throw Base::ValueError("invalid substructure match expression" +  err_msg.substr(err_msg.find_last_of(':')));
+        throw Base::ValueError("invalid substructure match expression: " +  err_msg);
 }
 
 void SubSearchImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)

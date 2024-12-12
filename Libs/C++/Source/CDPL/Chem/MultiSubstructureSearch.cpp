@@ -116,27 +116,31 @@ void Chem::MultiSubstructureSearch::clear()
     substructures.clear();
 }
 
-
 void Chem::MultiSubstructureSearch::setup(const std::string& expr)
 {
     nextTokenStart = 0;
 
-    if (nextToken(expr) == EOI) {
-        if (substructures.empty()) {
-            exprTree.reset();
+    try {
+        if (nextToken(expr) == EOI) {
+            if (substructures.empty()) {
+                exprTree.reset();
+                return;
+            }
+
+            exprTree.reset(new ExprTreeNode(substructures[0]));
+
+            for (auto it = ++substructures.begin(), end = substructures.end(); it != end; ++it)
+                exprTree.reset(new ExprTreeNode(OR, ExprTreeNodePtr(exprTree.release()), ExprTreeNodePtr(new ExprTreeNode(*it))));
+        
             return;
         }
 
-        exprTree.reset(new ExprTreeNode(substructures[0]));
-
-        for (auto it = ++substructures.begin(), end = substructures.end(); it != end; ++it)
-            exprTree.reset(new ExprTreeNode(OR, ExprTreeNodePtr(exprTree.release()), ExprTreeNodePtr(new ExprTreeNode(*it))));
+        exprTree = parseExpression(expr);
         
-        return;
+    } catch (const Base::ValueError& e) {
+        throw Base::ValueError(std::string("MultiSubstructureSearch: ") + e.what());
     }
-
-    exprTree = parseExpression(expr);
-
+    
     if (currToken != EOI)
         throw Base::ValueError("MultiSubstructureSearch: garbage at end of expression");
 }
@@ -152,7 +156,7 @@ std::string Chem::MultiSubstructureSearch::validate(const std::string& expr, std
         validateExpression(expr, max_substr_id);
 
         if (currToken != EOI)
-            throw Base::ValueError("MultiSubstructureSearch: garbage at end of expression");
+            return "garbage at end of expression";
 
         return std::string();
 
@@ -267,7 +271,7 @@ Chem::MultiSubstructureSearch::Token Chem::MultiSubstructureSearch::nextToken(co
                 return (currToken = SSID);
         }
 
-        throw Base::ValueError("MultiSubstructureSearch: invalid expression element");
+        throw Base::ValueError("invalid expression element");
     }
 
     return (currToken = EOI);
@@ -320,10 +324,10 @@ Chem::MultiSubstructureSearch::parseFactor(const std::string& expr)
 
         case SSID: {
             if (substrID == 0)
-                 throw Base::ValueError("MultiSubstructureSearch: invalid substructure ID");
+                 throw Base::ValueError("invalid substructure ID");
 
             if (substrID > substructures.size())
-                 throw Base::ValueError("MultiSubstructureSearch: substructure ID out of allowed range");
+                 throw Base::ValueError("substructure ID out of allowed range");
 
             std::size_t substr_idx = substrID - 1;
                         
@@ -338,7 +342,7 @@ Chem::MultiSubstructureSearch::parseFactor(const std::string& expr)
             auto exp = parseExpression(expr);
 
             if (currToken != RP)
-                throw Base::ValueError("MultiSubstructureSearch: expected right parenthesis");
+                throw Base::ValueError("expected right parenthesis");
 
             nextToken(expr);
             return exp;
@@ -349,10 +353,10 @@ Chem::MultiSubstructureSearch::parseFactor(const std::string& expr)
             return ExprTreeNodePtr(new ExprTreeNode(parseFactor(expr)));
             
         case EOI:
-            throw Base::ValueError("MultiSubstructureSearch: unexpected end of expression");
+            throw Base::ValueError("unexpected end of expression");
 
         default:
-            throw Base::ValueError("MultiSubstructureSearch: expression syntax error");
+            throw Base::ValueError("expression syntax error");
     }
 }
 
@@ -382,10 +386,10 @@ void Chem::MultiSubstructureSearch::validateFactor(const std::string& expr, std:
 
         case SSID:
             if (substrID == 0)
-                 throw Base::ValueError("MultiSubstructureSearch: invalid substructure ID");
+                 throw Base::ValueError("invalid substructure ID");
 
             if (substrID > max_substr_id)
-                 throw Base::ValueError("MultiSubstructureSearch: substructure ID out of allowed range");
+                 throw Base::ValueError("substructure ID out of allowed range");
 
             nextToken(expr);
             return;
@@ -395,7 +399,7 @@ void Chem::MultiSubstructureSearch::validateFactor(const std::string& expr, std:
             validateExpression(expr, max_substr_id);
 
             if (currToken != RP)
-                throw Base::ValueError("MultiSubstructureSearch: expected right parenthesis");
+                throw Base::ValueError("expected right parenthesis");
 
             nextToken(expr);
             return;
@@ -406,9 +410,9 @@ void Chem::MultiSubstructureSearch::validateFactor(const std::string& expr, std:
             return;
             
         case EOI:
-            throw Base::ValueError("MultiSubstructureSearch: unexpected end of expression");
+            throw Base::ValueError("unexpected end of expression");
 
         default:
-            throw Base::ValueError("MultiSubstructureSearch: expression syntax error");
+            throw Base::ValueError("expression syntax error");
     }
 }
