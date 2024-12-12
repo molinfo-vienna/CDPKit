@@ -6,7 +6,7 @@ V1.2.0:
  - New command line tool 'SubSearch' for performing substructure searching in molecular data files with support
    for multiple query substructures and customizable logical expressions
  - Unified the naming of control-parameters and associated functions in namespaces Chem, Pharm, Grid, and Biomol
- - Improved support for different Python installation flavors on macOS (with the greatly appreciated help of Yakov Pechersky)
+ - Improved support for different Python installation flavors on macOS (the help provided by Yakov Pechersky is greatly appreciated)
  - Added support for the I/O of molecular structure data in CML format
  - Fallback perception of atom/bond stereochemistry from input 3D coordinates during conformer generation molecule preprocessing
    now does not require the presence of explicit hydrogens anymore
@@ -41,7 +41,7 @@ V1.2.0:
  - Removed methods setNumBits() and getNumBits() in class Descr::PathFingerprintGenerator (fp-length now
    implicitly given by the size of the bitset provided as argument to method generate())
  - New class Descr::PubChemFingerprintGenerator for the generation of 881 bit PubChem fingerprints
- - New class Chem::ExtendedSSSR fro the perception extended smallest sets of smallest rings
+ - New class Chem::ExtendedSSSR for the perception extended smallest sets of smallest rings
  - The SDF reader now also accepts input data that do not end with a newline character
  - Made MOL2 reader implementation more tolerant regarding missing sections
  - Fixed missing support for certain chemical element symbols in class Chem::SMARTSMoleculeReader
@@ -64,7 +64,9 @@ V1.2.0:
  - New control-parameter Vis::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
    depictions saved in pixel-based output formats
  - Fixed an issue in program 'ChOX' where the background color setting of 2D structure/reaction depictions was ignored on
-   file output 
+   file output
+ - New class Vis::StructureGridView2D for the visualization of multiple molecules as 2D structure diagrams 
+   arranged in a grid of arbitrary size
  - Support for atom and bond highlighting in 2D structure/reaction depictions
  - Fixed several errors in Python example scripts
  - Support for fully customizable atom and bond labels in 2D structure/reaction depictions
