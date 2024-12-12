@@ -107,6 +107,16 @@ namespace
         std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - attempting graceful shutdown..." << std::endl;
         signalCaught.store(true);
     }
+
+    const std::string ERASE_LINE("\033[2K");
+    const std::string INFINITY_SYM_CHAR("\u221E");
+    const std::string FULL_LINE_CHAR("\u2501");       // box drawings heavy horizontal
+    const std::string LEFT_HALF_LINE_CHAR("\u2578");  // box drawings heavy left
+    const std::string RIGHT_HALF_LINE_CHAR("\u257A"); // box drawings heavy right
+    const std::string GRAY("\033[38;5;248m");
+    const std::string PURPLE("\033[35m");
+    const std::string GREEN("\033[32m");
+    const std::string DEF_COLOR("\033[39m");
 }
 
 
@@ -357,55 +367,46 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
-    std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
+    std::cerr << ERASE_LINE << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
               << (double(lastProgressValue) / 100) 
               << "% ";
-
-    static const std::string INFINITY_SYM("\u221E");
-    static const std::string FULL_LINE("\u2501");       // box drawings heavy horizontal
-    static const std::string LEFT_HALF_LINE("\u2578");  // box drawings heavy left
-    static const std::string RIGHT_HALF_LINE("\u257A"); // box drawings heavy right
-    static const std::string GRAY("\033[38;5;248m");
-    static const std::string PURPLE("\033[35m");
-    static const std::string GREEN("\033[32m");
-    static const std::string COLOR_RESET("\033[0m");
-    
+  
     bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
     progressBar = (curr_prog_bar_len == 0 ? fractional ? PURPLE : GRAY : progressBarLen == curr_prog_bar_len ? GREEN : PURPLE);
    
     if ((curr_prog_bar_len > 0) || fractional) {
         for (std::size_t i = 0; i < curr_prog_bar_len; i++)
-            progressBar.append(FULL_LINE);
+            progressBar.append(FULL_LINE_CHAR);
 
         if (progressBarLen != curr_prog_bar_len) {
             if (fractional) {
-                progressBar.append(LEFT_HALF_LINE);
+                progressBar.append(LEFT_HALF_LINE_CHAR);
                 progressBar.append(GRAY);
 
             } else {
                 progressBar.append(GRAY);
-                progressBar.append(RIGHT_HALF_LINE);
+                progressBar.append(RIGHT_HALF_LINE_CHAR);
             }
 
             for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
-                progressBar.append(FULL_LINE);
+                progressBar.append(FULL_LINE_CHAR);
         }
         
     } else 
         for (std::size_t i = 0; i < progressBarLen; i++)
-            progressBar.append(FULL_LINE);
+            progressBar.append(FULL_LINE_CHAR);
     
-    progressBar.append(COLOR_RESET);
+    progressBar.append(DEF_COLOR);
         
     std::cerr << progressBar;
     
     if (progress > 0.0) {
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
-        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << std::setw(10) << '\r';
+        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
 
     } else
-        std::cerr << " ETA: " << INFINITY_SYM << '\r';
+        std::cerr << " ETA: " << INFINITY_SYM_CHAR << '\r';
     
     inProgressLine = true;
     inNewLine = false;
@@ -424,8 +425,7 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
-    std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << 
-        std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << "" << "\r";
+    std::cerr << ERASE_LINE << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << '\r';
 
     if (++lastProgressDotCount > maxProgressDotCount)
         lastProgressDotCount = 1;
