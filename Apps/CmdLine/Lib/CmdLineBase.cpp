@@ -146,8 +146,6 @@ CmdLineBase::CmdLineBase():
 #else
     SetConsoleOutputCP(CP_UTF8);
 #endif // !defined _WIN32
-
-    setCursorVisible(false);
 }
 
 CmdLineBase::~CmdLineBase()
@@ -346,6 +344,9 @@ void CmdLineBase::initProgress(std::size_t prog_bar_len)
     progressBarLen = prog_bar_len;
     lastProgressValue = -1;
     progTimer.reset();
+
+    if (showProgress)
+        setCursorVisible(false);
 }
 
 void CmdLineBase::printProgress(const std::string& prefix, double progress)
@@ -392,10 +393,10 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
                 progressBar.append(FULL_LINE_CHAR);
         }
         
-    } else 
+    } else
         for (std::size_t i = 0; i < progressBarLen; i++)
             progressBar.append(FULL_LINE_CHAR);
-    
+
     progressBar.append(DEF_COLOR);
         
     std::cerr << progressBar;
@@ -404,6 +405,9 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
         std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
+
+        if (progressBarLen == curr_prog_bar_len)
+            setCursorVisible(true);
 
     } else
         std::cerr << " ETA: " << INFINITY_SYM_CHAR << '\r';
