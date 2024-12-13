@@ -3,7 +3,7 @@ master:
 V1.2.0:
  - Improved the visual appearance of command line tool progress bars
  - Sphinx documentation updates
- - New command line tool 'SubSearch' for performing substructure searching in molecular data files with support
+ - New command line tool 'SubSearch' for performing substructure searching on molecular data files with support
    for multiple query substructures and customizable logical expressions
  - Unified the naming of control-parameters and associated functions in namespaces Chem, Pharm, Grid, and Biomol
  - Improved support for different Python installation flavors on macOS (the help provided by Yakov Pechersky is greatly appreciated)
@@ -15,10 +15,9 @@ V1.2.0:
  - New atom classification functions MolProp::isBridgehead() and MolProp::isSpiroCenter()
  - CDPL Python bindings wheel files for Linux are now built on manylinux_2_28
  - Added support for the I/O of molecular structure data in mmCIF format
- - Added new and changed existing constants in namespace Biomol::ResidueType which now fully cover the 
-   set of residue types defined in the mmCIF/PDBX specification
+ - Added new constants to namespace Biomol::ResidueType which now fully cover the set of residue types defined by the mmCIF/PDBX specification
  - Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue parent structure information
- - Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue one letter codes
+ - Added method to classes Biomol::ResidueDictionary/Biomol::ResidueDictionary::Entry for the lookup of residue single letter codes
  - Renamed some previously PDB format-specific control-parameters and associated functions in namespace Biomol for their
    future dual-use by the mmCIF data I/O code
  - Added new control-parameters, atom properties and associated functions to namespace Biomol
@@ -31,7 +30,7 @@ V1.2.0:
    PDB residue/sequence information is now carried out automatically
  - Fixed a bug in program 'ChOX' that prevented the successful saving of data to PSD files
  - Program 'ChOX' now uses the same file open/save dialog instance for all opened main windows 
- - New class Chem::MultiSubstructureSearch for performing substructure matching with multiple query structures that
+ - New class Chem::MultiSubstructureSearch for performing substructure searching with multiple query substructures that
    can be combined in the form of boolean expressions
  - Program 'ChOX' now supports basic cut/copy/paste as well as drag and drop operations
  - New feature of the program 'ChOX' that allows to perform substructure searching with logical combinations of SMARTS patterns
@@ -43,13 +42,13 @@ V1.2.0:
  - New class Descr::PubChemFingerprintGenerator for the generation of 881 bit PubChem fingerprints
  - New class Chem::ExtendedSSSR for the perception extended smallest sets of smallest rings
  - The SDF reader now also accepts input data that do not end with a newline character
- - Made MOL2 reader implementation more tolerant regarding missing sections
+ - Made the MOL2 reader implementation more tolerant regarding missing sections
  - Fixed missing support for certain chemical element symbols in class Chem::SMARTSMoleculeReader
  - Extended the set of supported chemical elements to atomic number 114
  - New class Descr::MACCSFingerprintGenerator for the generation of 166 bit MACCS key fingerprints
- - Fixed a bug in Math::RegularSpatialGrid causing erroneous transformations of world to grid-local coordinates
- - Fixed a problem in Chem::RECAPFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments
- - Fixed a problem in Chem::BRICSFragmentGenerator with H-deplete molecules that lead to the generation of too few fragments   
+ - Fixed a bug in Math::RegularSpatialGrid that caused an erroneous transformation of world to grid-local coordinates
+ - Fixed a problem in Chem::RECAPFragmentGenerator that lead to the generation of too few fragments for H-depleted molecules
+ - Fixed a problem in Chem::BRICSFragmentGenerator that lead to the generation of too few fragments for H-depleted molecules
  - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
    specify a background fill pattern (see Vis::Brush) for 2D structure renderings
  - New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
@@ -68,7 +67,7 @@ V1.2.0:
  - New class Vis::StructureGridView2D for the visualization of multiple molecules as 2D structure diagrams 
    arranged in a grid of arbitrary size
  - Support for atom and bond highlighting in 2D structure/reaction depictions
- - Fixed several errors in Python example scripts
+ - Fixed several minor bugs in Python example scripts
  - Support for fully customizable atom and bond labels in 2D structure/reaction depictions
 
 V1.1.1:
