@@ -384,7 +384,7 @@ bool Chem::CMLDataWriter::writeAtomsCompact(std::ostream& os, const MolecularGra
         if (has2DCoordinates(atom))
             num_2d_coords++;
 
-        if (has3DCoordinates(atom))
+        if (multiConfExport || has3DCoordinates(atom))
             num_3d_coords++;
     }
 
@@ -456,7 +456,7 @@ bool Chem::CMLDataWriter::writeAtomsCompact(std::ostream& os, const MolecularGra
         }
         
         if (num_3d_coords > 0) {
-            auto& coords = get3DCoordinates(atom);
+            auto& coords = (multiConfExport ? confCoordinates[molgraph.getAtomIndex(atom)] : get3DCoordinates(atom));
 
             tmpString[6].append(std::to_string(coords[0]));
             tmpString[7].append(std::to_string(coords[1]));
