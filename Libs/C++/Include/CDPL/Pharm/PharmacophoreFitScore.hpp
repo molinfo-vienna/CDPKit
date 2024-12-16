@@ -30,6 +30,8 @@
 #define CDPL_PHARM_PHARMACOPHOREFITSCORE_HPP
 
 #include <vector>
+#include <unordered_set>
+#include <cstddef>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -77,13 +79,19 @@ namespace CDPL
             double operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping);
 
           private:
-            typedef std::vector<const Feature*> FeatureList;
+            typedef std::vector<const Feature*>        FeatureList;
+            typedef std::unordered_set<const Feature*> FeatureSet;
 
+            void calcMaxScore(FeatureList::const_iterator it, const SpatialFeatureMapping& mapping,
+                              std::size_t mat_ftr_cnt, double tot_fit_score);
+            
             SpatialFeatureMapping spatFtrMapping;
             double                ftrMatchCntWeight;
             double                ftrPosMatchWeight;
             double                ftrGeomMatchWeight;
             FeatureList           groupedRefFtrs;
+            FeatureSet            assignedFtrs;
+            double                maxScore;
         };
     } // namespace Pharm
 } // namespace CDPL

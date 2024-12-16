@@ -135,9 +135,18 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 
     if (groupedRefFtrs.empty())
         return 0.0;
-
+    
     std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
 
+    maxScore = 0.0;
+    assignedFtrs.clear();
+    
+    calcMaxScore(groupedRefFtrs.begin(), mapping, 0, 0.0);
+
+    return maxScore;
+    
+    /*
+    
     std::size_t mat_ftr_cnt = 0;
     double tot_fit_score = 0.0;
     
@@ -179,4 +188,52 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
         return 0.0;
     
     return (ftrMatchCntWeight * mat_ftr_cnt + tot_fit_score / mat_ftr_cnt);
+    */
 }
+
+void Pharm::PharmacophoreFitScore::calcMaxScore(FeatureList::const_iterator it, const SpatialFeatureMapping& mapping,
+                                                std::size_t mat_ftr_cnt, double tot_fit_score)
+{
+    auto ftrs_end = groupedRefFtrs.end();
+    
+    if (it == ftrs_end) {
+        auto score = ftrMatchCntWeight * mat_ftr_cnt + tot_fit_score / mat_ftr_cnt;
+
+        if (score > maxScore)
+            maxScore = score;
+        
+        return;
+    }
+    
+    auto ftr = *it;
+    auto ref_type =  getType(*ftr);
+    auto& ref_pos = get3DCoordinates(*ftr);
+    auto next_grp = it + 1;
+
+    for ( ; next_grp != ftrs_end; ++next_grp)
+        if (ref_type != getType(**next_grp) || ref_pos != get3DCoordinates(**next_grp))
+            break;
+
+    for ( ; it != next_grp; ++it) {
+        ftr = *it;
+
+        auto mpd_ftrs = mapping.getEntries(ftr);
+
+        for (auto mf_it = mpd_ftrs.first; mf_it != mpd_ftrs.second; ++mf_it) {
+            auto m_ftr = mf_it->second;
+            auto pair_pos_score = mapping.getPositionMatchScore(*ftr, *m_ftr);
+            auto pair_geom_score = mapping.getGeometryMatchScore(*ftr, *m_ftr);
+
+            if (!assignedFtrs.insert(m_ftr).second)
+                continue;
+            
+            calcMaxScore(next_grp, mapping, mat_ftr_cnt + 1, tot_fit_score +
+                         ftrPosMatchWeight * pair_pos_score + ftrGeomMatchWeight * pair_geom_score);
+
+            assignedFtrs.erase(m_ftr);
+        }
+    }
+
+    calcMaxScore(next_grp, mapping, mat_ftr_cnt, tot_fit_score);
+}
+        
