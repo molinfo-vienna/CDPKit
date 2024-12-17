@@ -26,6 +26,7 @@
 
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
+#include "CDPL/Pharm/FeatureSet.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 
@@ -75,6 +76,9 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
     python::def("transform3DCoordinates", &Pharm::transform3DCoordinates, 
                 (python::arg("cntnr"), python::arg("mtx")));
     python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms"), python::arg("append") = false));
+    python::def("clearOrientations", &Pharm::clearOrientations, (python::arg("cntnr"), python::arg("fix_geom") = true));
+    python::def("removePositionalDuplicates", &Pharm::removePositionalDuplicates,
+                (python::arg("cntnr"), python::arg("tgt_set"), python::arg("pos_tol") = 0.0, python::arg("append") = false));
 
     EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)
 }

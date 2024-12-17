@@ -119,6 +119,8 @@ set(cdpl-pharm_LIB_SRCS
     FeatureContainerXVolumeClashTestFunction.cpp
     FeatureContainerGetFeatureAtomsFunction.cpp
     FeatureContainerTransform3DCoordinatesFunction.cpp
+    FeatureContainerClearOrientationsFunction.cpp
+    FeatureContainerRemovePositionalDuplicatesFunction.cpp
 
     FeatureSetGetFeaturesFunction.cpp
 

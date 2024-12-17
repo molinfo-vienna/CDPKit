@@ -52,7 +52,8 @@ namespace CDPL
 
         class FeatureContainer;
         class FeatureTypeHistogram;
-
+        class FeatureSet;
+        
         CDPL_PHARM_API const std::string& getName(const FeatureContainer& cntnr);
 
         CDPL_PHARM_API void setName(FeatureContainer& cntnr, const std::string& name);
@@ -70,7 +71,16 @@ namespace CDPL
 
         CDPL_PHARM_API void generateFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str);
 
-
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API void clearOrientations(FeatureContainer& cntnr, bool fix_geom = true);
+        
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API void removePositionalDuplicates(const FeatureContainer& cntnr, FeatureSet& tgt_set, double pos_tol = 0.0, bool append = false);
+  
         CDPL_PHARM_API void transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx);
 
         CDPL_PHARM_API bool checkForExclusionVolumeClashes(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr,
