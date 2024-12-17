@@ -89,7 +89,7 @@ def trace(e: ConstFMatrixExpression) -> float: pass
 # \param s2 
 # \return 
 #
-def slice(e: ConstFMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> ConstFMatrixSlice: pass
+def slice(e: ConstFMatrixExpression, s1: Slice, s2: Slice) -> ConstFMatrixSlice: pass
 
 ##
 # \brief 

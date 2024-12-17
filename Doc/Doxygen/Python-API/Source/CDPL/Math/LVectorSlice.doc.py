@@ -35,7 +35,7 @@ class LVectorSlice(Boost.Python.instance):
     # \param e 
     # \param s 
     # 
-    def __init__(e: LVectorExpression, s: ast.Slice) -> None: pass
+    def __init__(e: LVectorExpression, s: Slice) -> None: pass
 
     ##
     # \brief 

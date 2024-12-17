@@ -35,7 +35,7 @@ class ConstFVectorSlice(Boost.Python.instance):
     # \param e 
     # \param s 
     # 
-    def __init__(e: ConstFVectorExpression, s: ast.Slice) -> None: pass
+    def __init__(e: ConstFVectorExpression, s: Slice) -> None: pass
 
     ##
     # \brief 

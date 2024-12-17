@@ -910,12 +910,16 @@ def outputPackageDoc():
     
 def extendByModuleName(type_name):
     ignored_types = [ 'int', 'object', 'float', 'None', 'str', 'bool', 'list', 'tuple', 'dict' ]
+    ignored_modules = [ 'typing', 're', 'ast', '_ast' ]
 
     if type_name in ignored_types:
         return type_name
         
     for module in sys.modules.values():
         if module != None:
+            if module.__name__ in ignored_modules:
+                continue;
+
             if type_name in module.__dict__.keys():
                 return cleanModuleName(module.__name__) +  type_name
 

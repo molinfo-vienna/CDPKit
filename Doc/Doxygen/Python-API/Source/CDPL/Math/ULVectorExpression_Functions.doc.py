@@ -25,7 +25,7 @@
 # \param s 
 # \return 
 #
-def slice(e: ULVectorExpression, s: ast.Slice) -> ULVectorSlice: pass
+def slice(e: ULVectorExpression, s: Slice) -> ULVectorSlice: pass
 
 ##
 # \brief 

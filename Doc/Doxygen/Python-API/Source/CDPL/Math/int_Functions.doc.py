@@ -53,7 +53,7 @@ def vec(t1: int, t2: int, t3: int, t4: int) -> Vector4L: pass
 # \param size 
 # \return 
 #
-def slice(start: int, stride: int, size: int) -> ast.Slice: pass
+def slice(start: int, stride: int, size: int) -> Slice: pass
 
 ##
 # \brief 

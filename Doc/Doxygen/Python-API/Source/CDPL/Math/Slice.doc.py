@@ -33,7 +33,7 @@ class Slice(Boost.Python.instance):
     # \brief Initializes a copy of the \e %Slice instance \a s.
     # \param s The \e %Slice instance to copy.
     # 
-    def __init__(s: ast.Slice) -> None: pass
+    def __init__(s: Slice) -> None: pass
 
     ##
     # \brief Initializes the \e %Slice instance.
@@ -79,13 +79,13 @@ class Slice(Boost.Python.instance):
     # \param s The \e %Slice instance to copy.
     # \return \a self
     # 
-    def assign(s: ast.Slice) -> ast.Slice: pass
+    def assign(s: Slice) -> Slice: pass
 
     ##
     # \brief 
     # \param s 
     #
-    def swap(s: ast.Slice) -> None: pass
+    def swap(s: Slice) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -104,14 +104,14 @@ class Slice(Boost.Python.instance):
     # \param s The \e %Slice instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(s: ast.Slice) -> bool: pass
+    def __eq__(s: Slice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
     # \param s The \e %Slice instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(s: ast.Slice) -> bool: pass
+    def __ne__(s: Slice) -> bool: pass
 
     ##
     # \brief 

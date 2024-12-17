@@ -25,7 +25,7 @@
 # \param s 
 # \return 
 #
-def slice(e: DVectorExpression, s: ast.Slice) -> DVectorSlice: pass
+def slice(e: DVectorExpression, s: Slice) -> DVectorSlice: pass
 
 ##
 # \brief 

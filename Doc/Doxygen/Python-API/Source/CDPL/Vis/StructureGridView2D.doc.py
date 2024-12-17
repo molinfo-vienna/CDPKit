@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief Implements the 2D visualization of multiple chemical structures arrange in a grid.
+# \brief Implements the 2D visualization of multiple chemical structures arranged in a grid.
 # 
-# <tt>StructureGridView2D</tt> visualizes multiple chemical structures as 2D structure diagrams arranged in a grid of arbitrary size.
+# <tt>StructureGridView2D</tt> visualizes one or more molecules as 2D structure diagrams arranged in a grid of arbitrary size.
 # 
-# <tt>StructureGridView2D</tt> relies on Vis.StructureView2D for structure visualization and thus supports all all of its parameters controlling the graphical details of the generated structure diagrams (colors, fonts, line-widths etc.). Structure visualization parameters of a <tt>StructureGridView2D</tt> instance can be set for individual grid cells as well as for the whole grid. Furthermore, any Chem.Atom, Chem.Bond and Chem.MolecularGraph relevant for 2D visualization properties will also be regarded (see Vis.StructureView2D for the list of supported properties). Properties of the visualized structures have a higher priority than the corresponding control-parameters of the grid cells hosting the structures. Likewise, control-parameters set for individual grid cells override the corresponding settings of the <tt>StructureGridView2D</tt> instance.
+# <tt>StructureGridView2D</tt> relies on Vis.StructureView2D for 2D structure visualization and thus supports all all of its parameters controlling the graphical details of the generated structure diagrams (colors, fonts, line-widths etc.). Structure visualization parameters of a <tt>StructureGridView2D</tt> instance can be set for individual grid cells as well as for the whole grid. Furthermore, any Chem.Atom, Chem.Bond and Chem.MolecularGraph relevant for 2D visualization properties will also be regarded (see Vis.StructureView2D for the list of supported properties). Properties of the visualized structures have a higher priority than the corresponding control-parameters of the grid cells hosting the structures. Likewise, control-parameters set for individual grid cells override the corresponding settings of the <tt>StructureGridView2D</tt> instance.
 # 
 # Each grid cell can host up to nine text blocks which are located at the corners, edges and the cell center. Text blocks are stored as Vis.TextBlockPrimitive2D instances which allow the text to span multiple lines and support the styling (colors, italic, bold, sub/super-scripting, etc.) of individual text fragments.
 # 

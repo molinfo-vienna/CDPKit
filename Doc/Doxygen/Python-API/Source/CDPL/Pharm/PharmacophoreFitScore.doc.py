@@ -110,6 +110,18 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def referenceFeaturesGrouped() -> bool: pass
+
+    ##
+    # \brief 
+    # \param group 
+    #
+    def groupReferenceFeatures(group: bool) -> None: pass
+
+    ##
+    # \brief 
     # \param ref_ftrs 
     # \param algnd_ftrs 
     # \param xform 
@@ -132,3 +144,5 @@ class PharmacophoreFitScore(Boost.Python.instance):
     featurePositionMatchWeight = property(getFeaturePositionMatchWeight, setFeaturePositionMatchWeight)
 
     featureGeometryMatchWeight = property(getFeatureGeometryMatchWeight, setFeatureGeometryMatchWeight)
+
+    referenceFeatureGrouping = property(referenceFeaturesGrouped, groupReferenceFeatures)

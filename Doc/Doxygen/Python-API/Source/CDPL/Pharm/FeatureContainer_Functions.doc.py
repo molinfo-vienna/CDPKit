@@ -75,6 +75,15 @@ def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem
 ##
 # \brief 
 # \param cntnr 
+# \param tgt_set 
+# \param pos_tol 
+# \param append 
+#
+def removePositionalDuplicates(cntnr: FeatureContainer, tgt_set: FeatureSet, pos_tol: float = 0.0, append: bool = False) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
 # \param mtx 
 #
 def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None: pass
@@ -86,6 +95,13 @@ def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None:
 # \param append 
 #
 def getFeatureAtoms(cntnr: FeatureContainer, atoms: Chem.Fragment, append: bool = False) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param fix_geom 
+#
+def clearOrientations(cntnr: FeatureContainer, fix_geom: bool = True) -> None: pass
 
 ##
 # \brief 

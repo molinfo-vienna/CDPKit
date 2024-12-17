@@ -36,7 +36,7 @@ class LMatrixSlice(Boost.Python.instance):
     # \param s1 
     # \param s2 
     # 
-    def __init__(e: LMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> None: pass
+    def __init__(e: LMatrixExpression, s1: Slice, s2: Slice) -> None: pass
 
     ##
     # \brief 

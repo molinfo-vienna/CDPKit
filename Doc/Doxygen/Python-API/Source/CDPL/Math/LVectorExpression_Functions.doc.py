@@ -25,7 +25,7 @@
 # \param s 
 # \return 
 #
-def slice(e: LVectorExpression, s: ast.Slice) -> LVectorSlice: pass
+def slice(e: LVectorExpression, s: Slice) -> LVectorSlice: pass
 
 ##
 # \brief 

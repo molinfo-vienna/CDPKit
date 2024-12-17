@@ -26,7 +26,7 @@
 # \param s2 
 # \return 
 #
-def slice(e: FMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> FMatrixSlice: pass
+def slice(e: FMatrixExpression, s1: Slice, s2: Slice) -> FMatrixSlice: pass
 
 ##
 # \brief 
