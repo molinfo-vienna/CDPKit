@@ -36,6 +36,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/SpatialFeatureMapping.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -73,6 +74,16 @@ namespace CDPL
 
             void setFeatureGeometryMatchWeight(double weight);
 
+            /**
+             * \since 1.2
+             */
+            void groupReferenceFeatures(bool group);
+
+            /**
+             * \since 1.2
+             */
+            bool referenceFeaturesGrouped() const;
+            
             double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs,
                               const Math::Matrix4D& xform);
 
@@ -80,18 +91,24 @@ namespace CDPL
 
           private:
             typedef std::vector<const Feature*>        FeatureList;
+            typedef std::vector<std::size_t>           IndexList;
             typedef std::unordered_set<const Feature*> FeatureSet;
 
-            void calcMaxScore(FeatureList::const_iterator it, const SpatialFeatureMapping& mapping,
-                              std::size_t mat_ftr_cnt, double tot_fit_score);
+            void calcScore(std::size_t idx, const SpatialFeatureMapping& mapping,
+                           std::size_t mat_ftr_cnt, std::size_t mat_mand_ftr_cnt, double tot_fit_score);
             
             SpatialFeatureMapping spatFtrMapping;
             double                ftrMatchCntWeight;
             double                ftrPosMatchWeight;
             double                ftrGeomMatchWeight;
-            FeatureList           groupedRefFtrs;
-            FeatureSet            assignedFtrs;
+            bool                  grpRefFtrs;
+            FeatureList           grpdRefFtrs;
+            IndexList             refFtrGrpBounds;
+            Util::BitSet          mandRefFtrGrps;
+            FeatureSet            assignedAlgdFtrs;
             double                maxScore;
+            std::size_t           maxMpdMandFtrCount;
+            std::size_t           maxMpdFtrCount;
         };
     } // namespace Pharm
 } // namespace CDPL

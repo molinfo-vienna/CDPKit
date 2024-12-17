@@ -65,12 +65,18 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
              python::arg("self"))
         .def("setFeatureGeometryMatchWeight", &Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight,
              (python::arg("self"), python::arg("weight")))
+        .def("referenceFeaturesGrouped", &Pharm::PharmacophoreFitScore::referenceFeaturesGrouped,
+             python::arg("self"))
+        .def("groupReferenceFeatures", &Pharm::PharmacophoreFitScore::groupReferenceFeatures,
+             (python::arg("self"), python::arg("group")))
         .add_property("featureMatchCountWeight", &Pharm::PharmacophoreFitScore::getFeatureMatchCountWeight, 
                       &Pharm::PharmacophoreFitScore::setFeatureMatchCountWeight)
         .add_property("featurePositionMatchWeight", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchWeight, 
                       &Pharm::PharmacophoreFitScore::setFeaturePositionMatchWeight)
         .add_property("featureGeometryMatchWeight", &Pharm::PharmacophoreFitScore::getFeatureGeometryMatchWeight, 
                       &Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight)
+        .add_property("referenceFeatureGrouping", &Pharm::PharmacophoreFitScore::referenceFeaturesGrouped, 
+                      &Pharm::PharmacophoreFitScore::groupReferenceFeatures)
         .def_readonly("DEF_FTR_MATCH_COUNT_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT)
         .def_readonly("DEF_FTR_POS_MATCH_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT)
         .def_readonly("DEF_FTR_GEOM_MATCH_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT);

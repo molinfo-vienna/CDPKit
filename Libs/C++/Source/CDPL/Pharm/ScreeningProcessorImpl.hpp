@@ -137,6 +137,7 @@ namespace CDPL
             bool performAlignment(std::size_t pharm_idx, std::size_t mol_idx);
 
             bool checkGeomAlignment();
+            bool deepCheckGeomAlignment(std::size_t idx, std::size_t num_matches, std::size_t min_num_matches);
             bool checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx);
 
             bool checkTopologicalMapping(const Util::STPairArray& mapping) const;
@@ -187,6 +188,7 @@ namespace CDPL
             bool                              initDBFeaturesByType;
             IndexPairList                     pharmIndices;
             Util::BitSet                      molHitSet;
+            Util::BitSet                      mappedDBFeatures;
             std::size_t                       numHits;
             std::size_t                       loadedPharmIndex;
             std::size_t                       loadedMolIndex;

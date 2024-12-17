@@ -100,3 +100,8 @@ SpatialFeatureAlignment.entityCoordsFunction.value
 getEntity3DCoordinatesFunction
 setEntity3DCoordinatesFunction
 $$$$
+
+PharmacophoreFitScore.referenceFeatureGrouping.value
+referenceFeaturesGrouped
+groupReferenceFeatures
+$$$$

@@ -29,7 +29,6 @@
 #include <cmath>
 #include <iterator>
 #include <cassert>
-#include <functional>
 
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -72,13 +71,10 @@ Pharm::ScreeningProcessorImpl::ScreeningProcessorImpl(ScreeningProcessor& parent
     checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
     scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(), pharmAlignment(true)
 {
-    using namespace std::placeholders;
-    
     pharmAlignment.setTopAlignmentConstraintFunction(
-        std::bind(&ScreeningProcessorImpl::checkTopologicalMapping, this, _1));
-
+        [this](const Util::STPairArray& mapping) -> bool { return checkTopologicalMapping(mapping); });
     pharmAlignment.setEntity3DCoordinatesFunction(
-        std::bind(&ScreeningProcessorImpl::getFeatureCoordinates, this, _1));
+        [this](const Feature& ftr) -> const Math::Vector3D& { return getFeatureCoordinates(ftr); });
 }
 
 void Pharm::ScreeningProcessorImpl::setDBAccessor(ScreeningDBAccessor& db_acc)
@@ -392,9 +388,6 @@ bool Pharm::ScreeningProcessorImpl::check2PointPharmacophores(std::size_t pharm_
         bool match = false;
 
         for ( ; eq_range.first != eq_range.second; ++eq_range.first) {
-//            if (!TwoPointPharmEqCmpFunc()(query_2pt_pharm, *eq_range.first))
-//                continue;
-
             double dist = eq_range.first->getFeatureDistance();
 
             if (dist >= min_dist && dist <= max_dist) {
@@ -472,6 +465,7 @@ bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
         }
 
         initDBFeaturesByType = false;
+        mappedDBFeatures.resize(dbPharmacophore.getNumFeatures());
     }
 
     if (dbFeaturePositions.isEmpty())
@@ -525,11 +519,55 @@ bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
             num_matches++;
 
             if (num_matches >= min_num_matches)
-                return true;
+                break;
         }
     }
 
-    return true;
+    mappedDBFeatures.reset();
+    
+    return deepCheckGeomAlignment(0, 0, min_num_matches);
+}
+
+bool Pharm::ScreeningProcessorImpl::deepCheckGeomAlignment(std::size_t idx, std::size_t num_matches, std::size_t min_num_matches)
+{
+    if (num_matches >= min_num_matches)
+        return true;
+
+    if ((idx - num_matches) > maxOmittedFeatures)
+        return false;
+      
+    if (idx == alignedQueryMandFeatures.size()) 
+        return false;
+    
+    auto& xform = pharmAlignment.getTransform();
+    auto query_ftr_idx = alignedQueryMandFeatures[idx]->getIndex();
+    auto& query_pos = queryFeaturePositions[query_ftr_idx];
+    auto query_tol = queryFeatureTolerances[query_ftr_idx];
+    Math::Vector3D tmp;
+
+    for (auto db_ftr : dbFeaturesByType[queryMandFeatureTypes[idx]]) {
+        auto db_ftr_idx = db_ftr->getIndex();
+
+        if (mappedDBFeatures.test(db_ftr_idx))
+            continue;
+        
+        tmp = alignedDBFeaturePositions[db_ftr_idx];
+        tmp.minusAssign(query_pos);
+
+        if (length(tmp) > query_tol)
+            continue;
+
+        mappedDBFeatures.set(db_ftr_idx);
+        
+        for (auto ftr : queryMandFeatures[idx])
+            if ((featureGeomMatchFunction(*ftr, *db_ftr, xform) > 0.0) &&
+                deepCheckGeomAlignment(idx + 1, num_matches + 1, min_num_matches))
+                    return true;
+
+        mappedDBFeatures.reset(db_ftr_idx);
+    }
+    
+    return deepCheckGeomAlignment(idx + 1, num_matches, min_num_matches);
 }
 
 bool Pharm::ScreeningProcessorImpl::checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx)
