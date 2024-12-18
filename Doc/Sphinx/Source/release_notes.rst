@@ -71,7 +71,8 @@ Release V1.2.0
 - New setter/getter method pair *groupReferenceFeatures()/referenceFeaturesGrouped()* in class *Pharm::PharmacophoreFitScore* for controlling
   whether multiple directed features of the same type at the same position shall be considered as independent individual features or as different
   orientation options of a single feature
-- New utility functions *Pharm::clearOrientations()* and *Pharm::removePositionalDuplicates()* for the manipulation of pharmacophoric features
+- New utility functions *Pharm::clearOrientations()*, *Pharm::removePositionalDuplicates()*, *Pharm::removeFeaturesWithType()*
+  for the manipulation of pharmacophore data
 - Unified the naming of control-parameters and associated functions in namespaces *Chem*, *Pharm*, *Grid*, and *Biomol*
 - Renamed function *MolProp::isCarbonylLikeAtom()* into *MolProp::isCarbonylLike()*
 - Renamed function *MolProp::isAmideCenterAtom()* into *MolProp::isAmideCenter()*
