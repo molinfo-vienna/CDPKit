@@ -22,6 +22,14 @@
 ##
 # \brief 
 # \param pharm 
+# \param type 
+# \return 
+#
+def removeFeaturesWithType(pharm: Pharmacophore, type: int) -> bool: pass
+
+##
+# \brief 
+# \param pharm 
 # \param iactions 
 # \param append 
 #
@@ -69,3 +77,11 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 # \param append 
 #
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
+
+##
+# \brief 
+# \param pharm 
+# \param pos_tol 
+# \return 
+#
+def removePositionalDuplicates(pharm: Pharmacophore, pos_tol: float = 0.0) -> bool: pass

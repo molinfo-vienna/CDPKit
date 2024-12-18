@@ -49,6 +49,16 @@ def setName(cntnr: FeatureContainer, name: str) -> None: pass
 ##
 # \brief 
 # \param cntnr 
+# \param tgt_set 
+# \param type 
+# \param append 
+# \return 
+#
+def removeFeaturesWithType(cntnr: FeatureContainer, tgt_set: FeatureSet, type: int, append: bool = False) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
 # \return 
 #
 def generateFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
@@ -78,8 +88,9 @@ def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem
 # \param tgt_set 
 # \param pos_tol 
 # \param append 
+# \return 
 #
-def removePositionalDuplicates(cntnr: FeatureContainer, tgt_set: FeatureSet, pos_tol: float = 0.0, append: bool = False) -> None: pass
+def removePositionalDuplicates(cntnr: FeatureContainer, tgt_set: FeatureSet, pos_tol: float = 0.0, append: bool = False) -> bool: pass
 
 ##
 # \brief 

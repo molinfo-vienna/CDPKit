@@ -22,7 +22,23 @@
 ##
 # \brief 
 # \param ftr_set 
+# \param type 
+# \return 
+#
+def removeFeaturesWithType(ftr_set: FeatureSet, type: int) -> bool: pass
+
+##
+# \brief 
+# \param ftr_set 
 # \param mapping 
 # \param first 
 #
 def getFeatures(ftr_set: FeatureSet, mapping: FeatureMapping, first: bool) -> None: pass
+
+##
+# \brief 
+# \param ftr_set 
+# \param pos_tol 
+# \return 
+#
+def removePositionalDuplicates(ftr_set: FeatureSet, pos_tol: float = 0.0) -> bool: pass
