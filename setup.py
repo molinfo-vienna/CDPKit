@@ -58,7 +58,7 @@ def postproc_manifest(cmake_manifest):
 LONG_DESCRIPTION = r'''
 *CDPKit* (short for Chemical Data Processing Toolkit) is an open-source cheminformatics toolkit written in C++.
 
-CDPKit comprises a suite of software tools and a programming library called the *Chemical Data Processing Library* (CDPL).
+CDPKit comprises a set of software tools and a programming library called the *Chemical Data Processing Library* (CDPL).
 The CDPL provides a high-quality and well-tested modular implementation of basic functionality typically required by any
 higher-level cheminformatics software application.
 
