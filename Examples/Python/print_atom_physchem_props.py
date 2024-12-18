@@ -26,11 +26,7 @@ import CDPL.MolProp as MolProp
 
 # outputs the corresponding properties of each atom of the provided molecular graph
 def outputProperties(molgraph: Chem.MolecularGraph) -> None:
-    Chem.calcImplicitHydrogenCounts(molgraph, False)    # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(molgraph, False)   # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(molgraph, False)                  # perceive SSSR and store as Chem.MolecularGraph property
-    Chem.setRingFlags(molgraph, False)                  # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(molgraph, False)           # perceive aromaticity and set corresponding atom and bond properties
+    Chem.calcBasicProperties(molgraph, False)           # calculate basic molecular properties (if not yet done)
     Chem.calcTopologicalDistanceMatrix(molgraph, False) # calculate topological distance matrix and store as Chem.MolecularGraph property
                                                         # (required for effective polarizability calculations)
     for atom in molgraph.atoms:

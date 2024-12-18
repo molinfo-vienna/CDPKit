@@ -24,14 +24,10 @@ import CDPL.Chem as Chem
 
 
 # extracts the structural environments of the atoms in the specified molecular graph and outputs them as SMILES strings
-def printEnvironments(molgraph: Chem.MolecularGraph) -> None: 
-    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
-
-    frag = Chem.Fragment()                            # for storing extracted atom environments
+def printEnvironments(molgraph: Chem.MolecularGraph) -> None:
+    Chem.calcBasicProperties(molgraph, False)  # calculate basic molecular properties (if not yet done)
+   
+    frag = Chem.Fragment()                     # for storing extracted atom environments
     
     print('- Atom environments (radius = 3 bonds)')
     

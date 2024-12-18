@@ -26,12 +26,8 @@ import CDPL.MolProp as MolProp
 
 # outputs the corresponding properties of each atom of the provided molecular graph
 def outputProperties(molgraph: Chem.MolecularGraph) -> None:
-    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
-    MolProp.perceiveHBondDonorAtomTypes(molgraph, False) # perceive H-bond donor atom types and set corresponding atom properties
+    Chem.calcBasicProperties(molgraph, False)               # calculate basic molecular properties (if not yet done)
+    MolProp.perceiveHBondDonorAtomTypes(molgraph, False)    # perceive H-bond donor atom types and set corresponding atom properties
     MolProp.perceiveHBondAcceptorAtomTypes(molgraph, False) # perceive H-bond acceptor atom types and set corresponding atom properties
 
     hba_type_str = { MolProp.HBondAcceptorAtomType.UNDEF                   : 'UNDEF',

@@ -28,13 +28,9 @@ import CDPL.Util as Util
 
 # generates the binary ECFP for the given molecule
 def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_config: bool) -> Util.BitSet:
-    Chem.calcImplicitHydrogenCounts(mol, False)        # calculate implicit hydrogen counts (if not yet done)
-    Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.setRingFlags(mol, False)                      # perceive cycles and set corresponding atom and bond properties
-    Chem.perceiveSSSR(mol, False)                      # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setAromaticityFlags(mol, False)               # perceive aromaticity and set corresponding atom and bond properties
-    
-    ecfp_gen = Descr.CircularFingerprintGenerator()    # create ECFP generator instance
+    Chem.calcBasicProperties(mol, False)            # calculate basic molecular properties (if not yet done)
+   
+    ecfp_gen = Descr.CircularFingerprintGenerator() # create ECFP generator instance
 
     if inc_config:
         ecfp_gen.includeChirality(True)                  # allow atom chirality to have an impact on the ECFP generation

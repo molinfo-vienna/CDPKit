@@ -40,11 +40,7 @@ def genFAMEDescriptor(ctr_atom: Chem.Atom, molgraph: Chem.MolecularGraph, radius
         
 # function called for each read molecule
 def procMolecule(molgraph: Chem.MolecularGraph) -> None: 
-    Chem.calcImplicitHydrogenCounts(molgraph, False)     # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(molgraph, False)    # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(molgraph, False)                   # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(molgraph, False)                   # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(molgraph, False)            # perceive aromaticity and set corresponding atom and bond properties
+    Chem.calcBasicProperties(molgraph, False)            # calculate basic molecular properties (if not yet done)
     Chem.perceiveSybylAtomTypes(molgraph, False)         # perceive Sybyl atom types and set corresponding property for all atoms
     Chem.calcTopologicalDistanceMatrix(molgraph, False)  # calculate topological distance matrix and store as Chem.MolecularGraph property
    

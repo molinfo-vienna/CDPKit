@@ -27,13 +27,9 @@ import CDPL.MolProp as MolProp
 
 # outputs the corresponding properties of each atom of the provided molecule
 def outputProperties(mol: Chem.Molecule) -> None:
-    Chem.calcImplicitHydrogenCounts(mol, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(mol, False) # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(mol, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(mol, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(mol, False)         # perceive aromaticity and set corresponding atom and bond properties
-    Chem.perceivePiElectronSystems(mol, False)   # perceive pi electron systems and store info as Chem.MolecularGraph property
-                                                 # (required for MHMO calculations)
+    Chem.calcBasicProperties(mol, False)       # calculate basic molecular properties (if not yet done)
+    Chem.perceivePiElectronSystems(mol, False) # perceive pi electron systems and store info as Chem.MolecularGraph property
+                                               # (required for MHMO calculations)
 
     # calculate sigma charges and electronegativities using the PEOE method and store values as atom properties
     # (prerequisite for MHMO calculations)
