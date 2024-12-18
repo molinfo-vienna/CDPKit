@@ -1,6 +1,13 @@
 master:
 
 V1.2.0:
+ - Added new setter/getter method pair groupReferenceFeatures()/referenceFeaturesGrouped() to class Pharm::PharmacophoreFitScore for controlling
+   whether multiple directed features of the same type at the same position shall be considered as independent individual features or as different
+   orientation options of a single feature
+ - New utility functions Pharm::clearOrientations() and Pharm::removePositionalDuplicates() for the manipulation of pharmacophoric features
+ - Fixed an issue concerning the calculation of pharmacophore fit scores that previously also considered mappings
+   of multiple query features to the same target feature. Now, more correctly, the best score that could be calculated
+   for all possible one-to-one feature mappings is reported.
  - Improved the visual appearance of command line tool progress bars
  - Sphinx documentation updates
  - New command line tool 'SubSearch' for performing substructure searching on molecular data files with support

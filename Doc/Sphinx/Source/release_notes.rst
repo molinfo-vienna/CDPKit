@@ -8,12 +8,13 @@ Release V1.2.0
 
 .. rubric:: New Functionality and Features
 
+- New utility functions for the manipulation of pharmacophore data
 - New command line tool :doc:`subsearch </applications/subsearch>` for substructure searching on molecular data files with support
   for multiple query substructures and customizable logical expressions
 - Added support for the I/O of molecular structure data in CML format
 - Added support for the I/O of macromolecular structure data in mmCIF format
 - New atom classification functions for the detection of bridgehead atoms and spirocenters in complex ring systems
-- The residue database now allows to query residue parent structure information and residue single letter codes for a given three letter code
+- The residue database now also provides parent structure and single letter code information for a query residue
 - New class implementing substructure searching with multiple query substructures that can be combined by boolean expressions
 - New class implementing the generation of variably sized hashed 2D and 3D pharmacophore fingerprints
 - New class implementing the generation of 881 bit PubChem fingerprints
@@ -49,6 +50,9 @@ Release V1.2.0
 
 .. rubric:: Bug Fixes
 
+- Fixed an issue concerning the calculation of pharmacophore fit scores that previously also considered mappings
+  of multiple query features to the same target feature. Now, more correctly, the best score that could be calculated
+  for all possible one-to-one feature mappings is reported.
 - Fixed a bug in program :doc:`ChOX </applications/chox>` that prevented the successful saving of data in \*.psd format
 - Fixed the missing support for certain chemical element symbols in class *Chem::SMARTSMoleculeReader*
 - Fixed a bug in class *Math::RegularSpatialGrid* that caused an erroneous transformation of world to grid-local coordinates
@@ -64,6 +68,10 @@ Release V1.2.0
 
 .. rubric:: API Changes
 
+- New setter/getter method pair *groupReferenceFeatures()/referenceFeaturesGrouped()* in class *Pharm::PharmacophoreFitScore* for controlling
+  whether multiple directed features of the same type at the same position shall be considered as independent individual features or as different
+  orientation options of a single feature
+- New utility functions *Pharm::clearOrientations()* and *Pharm::removePositionalDuplicates()* for the manipulation of pharmacophoric features
 - Unified the naming of control-parameters and associated functions in namespaces *Chem*, *Pharm*, *Grid*, and *Biomol*
 - Renamed function *MolProp::isCarbonylLikeAtom()* into *MolProp::isCarbonylLike()*
 - Renamed function *MolProp::isAmideCenterAtom()* into *MolProp::isAmideCenter()*
