@@ -49,6 +49,16 @@ namespace CDPL
         class FeatureMapping;
         class FeatureContainer;
 
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API bool removePositionalDuplicates(Pharmacophore& pharm, double pos_tol = 0.0);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API bool removeFeaturesWithType(Pharmacophore& pharm, unsigned int type);
+          
         CDPL_PHARM_API void generateInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
 
         CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,

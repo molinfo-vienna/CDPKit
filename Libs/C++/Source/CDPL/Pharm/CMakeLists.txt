@@ -121,13 +121,18 @@ set(cdpl-pharm_LIB_SRCS
     FeatureContainerTransform3DCoordinatesFunction.cpp
     FeatureContainerClearOrientationsFunction.cpp
     FeatureContainerRemovePositionalDuplicatesFunction.cpp
+    FeatureContainerRemoveFeaturesWithTypeFunction.cpp
 
     FeatureSetGetFeaturesFunction.cpp
-
+    FeatureSetRemovePositionalDuplicatesFunction.cpp
+    FeatureSetRemoveFeaturesWithTypeFunction.cpp
+    
     PharmacophoreBuildInteractionPharmFunction.cpp
     PharmacophoreCreateXVolumesFunctions.cpp
     PharmacophoreXVolumesModificationFunctions.cpp
-
+    PharmacophoreRemovePositionalDuplicatesFunction.cpp
+    PharmacophoreRemoveFeaturesWithTypeFunction.cpp
+    
     ControlParameterFunctions.cpp
     MoleculeFunctions.cpp
     UtilityFunctions.cpp

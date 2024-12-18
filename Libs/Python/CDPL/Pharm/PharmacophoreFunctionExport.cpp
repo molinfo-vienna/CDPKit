@@ -48,6 +48,8 @@ namespace
     MAKE_FUNCTION_WRAPPER4(bool, resizeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
                            CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
 
+    MAKE_FUNCTION_WRAPPER2(bool, removePositionalDuplicates, CDPL::Pharm::Pharmacophore&, double);
+    MAKE_FUNCTION_WRAPPER2(bool, removeFeaturesWithType, CDPL::Pharm::Pharmacophore&, unsigned int);
 }
 
 
@@ -70,4 +72,8 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
                 (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
     python::def("resizeExclusionVolumesWithClashes", &resizeExclusionVolumesWithClashesWrapper4,
                 (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
+    python::def("removePositionalDuplicates", &removePositionalDuplicatesWrapper2,
+                (python::arg("pharm"), python::arg("pos_tol") = 0.0));
+    python::def("removeFeaturesWithType", &removeFeaturesWithTypeWrapper2,
+                (python::arg("pharm"), python::arg("type")));
 }

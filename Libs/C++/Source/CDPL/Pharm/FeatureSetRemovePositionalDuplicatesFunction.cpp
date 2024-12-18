@@ -1,5 +1,5 @@
 /* 
- * FeatureSetFunctions.hpp 
+ * FeatureContainerRemovePositionalDuplicatesFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,40 +21,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Declaration of functions that operate on Pharm::FeatureSet instances.
- */
 
-#ifndef CDPL_PHARM_FEATURESETFUNCTIONS_HPP
-#define CDPL_PHARM_FEATURESETFUNCTIONS_HPP
+#include "StaticInit.hpp"
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/FeatureMapping.hpp"
+#include "CDPL/Pharm/FeatureSetFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
+#include "CDPL/Pharm/FeatureSet.hpp"
 
 
-namespace CDPL
+using namespace CDPL; 
+
+
+bool Pharm::removePositionalDuplicates(FeatureSet& ftr_set, double pos_tol)
 {
+    FeatureSet tmp;
 
-    namespace Pharm
-    {
+    auto rem = removePositionalDuplicates(ftr_set, tmp, pos_tol);
 
-        class FeatureSet;
-        class FeatureMapping;
+    tmp.swap(ftr_set);
 
-        CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
-
-        /**
-         * \since 1.2
-         */
-        CDPL_PHARM_API bool removePositionalDuplicates(FeatureSet& ftr_set, double pos_tol = 0.0);
-
-        /**
-         * \since 1.2
-         */
-        CDPL_PHARM_API bool removeFeaturesWithType(FeatureSet& ftr_set, unsigned int type);
-        
-    } // namespace Pharm
-} // namespace CDPL
-
-#endif // CDPL_PHARM_FEATURESETFUNCTIONS_HPP
+    return rem;
+}

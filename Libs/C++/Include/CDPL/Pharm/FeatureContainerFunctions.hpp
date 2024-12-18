@@ -79,7 +79,12 @@ namespace CDPL
         /**
          * \since 1.2
          */
-        CDPL_PHARM_API void removePositionalDuplicates(const FeatureContainer& cntnr, FeatureSet& tgt_set, double pos_tol = 0.0, bool append = false);
+        CDPL_PHARM_API bool removePositionalDuplicates(const FeatureContainer& cntnr, FeatureSet& tgt_set, double pos_tol = 0.0, bool append = false);
+
+        /**
+         * \since 1.2
+         */
+        CDPL_PHARM_API bool removeFeaturesWithType(const FeatureContainer& cntnr, FeatureSet& tgt_set, unsigned int type, bool append = false);
   
         CDPL_PHARM_API void transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx);
 

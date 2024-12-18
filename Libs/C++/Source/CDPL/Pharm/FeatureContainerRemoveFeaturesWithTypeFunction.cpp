@@ -1,5 +1,5 @@
 /* 
- * FeatureContainerRemovePositionalDuplicatesFunction.cpp 
+ * FeatureContainerRemoveFeaturesWithTypeFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,52 +29,25 @@
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL; 
 
 
-bool Pharm::removePositionalDuplicates(const FeatureContainer& cntnr, FeatureSet& tgt_set, double pos_tol, bool append)
+bool Pharm::removeFeaturesWithType(const FeatureContainer& cntnr, FeatureSet& tgt_set, unsigned int type, bool append)
 {
     if (!append)
         tgt_set.clear();
 
     auto rem = false;
     
-    for (auto& src_ftr : cntnr) {
-        auto& pos = get3DCoordinates(src_ftr);
-        auto type = getType(src_ftr);
-        const Feature* dup_tgt_ftr = nullptr;
-        
-        for (auto& tgt_ftr : tgt_set) {
-            if (getType(tgt_ftr) != type)
-                continue;
-
-            if (pos_tol <= 0.0) {
-                if (pos != get3DCoordinates(tgt_ftr))
-                    continue;
-                
-            } else {
-                if (length(pos - get3DCoordinates(tgt_ftr)) > pos_tol)
-                    continue;
-            }
-
-            dup_tgt_ftr = &tgt_ftr;
-            break;
-        }
-
-        if (dup_tgt_ftr) {
+    for (auto& ftr : cntnr) {
+        if (getType(ftr) == type) {
             rem = true;
-            
-            if (getTolerance(src_ftr) <= getTolerance(*dup_tgt_ftr))
-                continue;
-            
-            tgt_set.removeFeature(*dup_tgt_ftr);
+            continue;
         }
-        
-        tgt_set.addFeature(src_ftr);
+
+        tgt_set.addFeature(ftr);
     }
 
     return rem;

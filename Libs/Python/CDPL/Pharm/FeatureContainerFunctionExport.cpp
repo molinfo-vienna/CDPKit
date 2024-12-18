@@ -79,6 +79,8 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
     python::def("clearOrientations", &Pharm::clearOrientations, (python::arg("cntnr"), python::arg("fix_geom") = true));
     python::def("removePositionalDuplicates", &Pharm::removePositionalDuplicates,
                 (python::arg("cntnr"), python::arg("tgt_set"), python::arg("pos_tol") = 0.0, python::arg("append") = false));
+    python::def("removeFeaturesWithType", &Pharm::removeFeaturesWithType,
+                (python::arg("cntnr"), python::arg("tgt_set"), python::arg("type"), python::arg("append") = false));
 
     EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)
 }

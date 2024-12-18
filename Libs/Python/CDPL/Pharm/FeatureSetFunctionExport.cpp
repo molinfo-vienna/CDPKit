@@ -37,5 +37,8 @@ void CDPLPythonPharm::exportFeatureSetFunctions()
     
     python::def("getFeatures", &Pharm::getFeatures, 
                 (python::arg("ftr_set"), python::arg("mapping"), python::arg("first")));
-
+    python::def("removePositionalDuplicates", &Pharm::removePositionalDuplicates,
+                (python::arg("ftr_set"), python::arg("pos_tol") = 0.0));
+    python::def("removeFeaturesWithType", &Pharm::removeFeaturesWithType,
+                (python::arg("ftr_set"), python::arg("type")));
 }
