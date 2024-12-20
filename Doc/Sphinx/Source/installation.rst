@@ -147,7 +147,7 @@ as C++ compiler) or utilizes the :program:`MSVC` toolset.
 
                          > mkdir <BUILD-DIR>
                          > cd <BUILD-DIR>
-                         > cmake <SOURCE-DIR> -DCMAKE_PREFIX_PATH=/path/to/Qt/installation/subdir/msvc<VER>_64 -DCAIRO_LIBRARIES=/path/to/cairo/cairo.lib -DCAIRO_INCLUDE_DIR=/path/to/cairo/include -G "NMake Makefiles"
+                         > cmake <SOURCE-DIR> -DCMAKE_PREFIX_PATH=/path/to/Qt/installation/subdir/msvc<VER>_64 -D_CAIRO_LIBDIR=/path/to/cairo/lib/dir -D_CAIRO_INCLUDEDIR=/path/to/cairo/include/dir -G "NMake Makefiles"
 
 If :command:`cmake` is executed as shown above the default build type will be ``Release``. Configuring for a different build type can be achieved via the argument
 *-DCMAKE_BUILD_TYPE=<BUILD-TYPE>* on the :command:`cmake` command line. Possible values of ``<BUILD-TYPE>`` are:
