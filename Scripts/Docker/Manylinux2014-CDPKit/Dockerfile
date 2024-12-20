@@ -27,7 +27,7 @@
 FROM quay.io/pypa/manylinux2014_x86_64
 
 # do a yum install
-RUN yum install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip2-devel cairo-devel git ninja-build patchelf
+RUN yum install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip2-devel cairo-devel git ninja-build patchelf twine
 
 # inject files
 COPY . /io

@@ -27,7 +27,7 @@
 FROM quay.io/pypa/manylinux_2_28_x86_64
 
 # do a dnf install
-RUN dnf install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip2-devel cairo-devel git ninja-build
+RUN dnf install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip2-devel cairo-devel git ninja-build twine
 
 # inject files
 COPY . /io
