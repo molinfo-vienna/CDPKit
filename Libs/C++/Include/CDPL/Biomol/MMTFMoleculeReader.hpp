@@ -44,6 +44,10 @@ namespace CDPL
         class Molecule;
     }
 
+#ifdef _MSC_VER
+    template class __declspec(dllimport) Base::DataReader<Chem::Molecule>;
+#endif
+
     namespace Biomol
     {
 
