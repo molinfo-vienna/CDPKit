@@ -24,7 +24,7 @@ import numpy
 import CDPL.Chem as Chem
 
 
-# calculates the FAME descriptor for a given atom of the provided molecule
+# calculates the FAME descriptor for a given atom of the provided molecular graph
 def genFAMEDescriptor(ctr_atom: Chem.Atom, molgraph: Chem.MolecularGraph, radius: int) -> numpy.array:
     env = Chem.Fragment()                                                      # for storing of extracted environment atoms
     descr = numpy.zeros((Chem.SybylAtomType.MAX_TYPE + 1) * (radius + 1))

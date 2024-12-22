@@ -105,6 +105,9 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('gen_mol_frags', outputFilePath('gen_mol_frags.smi'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_mol_frags.smi'),
                                       '-r', 'bRics', '-b', '-m', '-x' ])
+    errors |= checkScriptFileOutput('gen_bm_frags', outputFilePath('gen_bm_frags.smi'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_bm_frags.smi'),
+                                      '-f', 'true', '-r', '-l', '-m', '-x' ])
     errors |= checkScriptOutput('sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('clean_mol_db', outputFilePath('clean_mol_db.smi'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf.gz'), '-o', outputFilePath('clean_mol_db.smi'),
@@ -143,7 +146,13 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('gen_ph4_fp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-d', '2' ],
                                     'gen_ph4_fp_2d.out')
-   
+    errors |= checkScriptFileOutput('gen_pubchem_fp', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out') ])
+    errors |= checkScriptFileOutput('gen_maccs_key', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out') ])
+    errors |= checkScriptFileOutput('gen_path_fp', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '2023', '-H', '-l', '1', '-u', '6' ])
+     
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
     errors |= checkScriptFileOutput('tor_drive', outputFilePath('tor_drive.mol2'),

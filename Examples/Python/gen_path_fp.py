@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# gen_ecfp.py 
+# gen_path_fp.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -26,28 +26,26 @@ import CDPL.Descr as Descr
 import CDPL.Util as Util
 
 
-# generates the binary ECFP of the given molecule
-def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_config: bool) -> Util.BitSet:
-    Chem.calcBasicProperties(mol, False)            # calculate basic molecular properties (if not yet done)
-   
-    ecfp_gen = Descr.CircularFingerprintGenerator() # create ECFP generator instance
+# generates the binary path fingerprint of the given molecule
+def genPathFingerprint(mol: Chem.Molecule, num_bits: int, min_len: int, max_len: int, inc_hs: bool) -> Util.BitSet:
+    Chem.calcBasicProperties(mol, False)      # calculate basic molecular properties (if not yet done)
 
-    if inc_config:
-        ecfp_gen.includeChirality(True)                  # allow atom chirality to have an impact on the ECFP generation
-        Chem.calcCIPPriorities(mol, False)               # calculate atom symmetry classes for chiral atom perception and set corresponding property for all atoms
-        Chem.perceiveAtomStereoCenters(mol, False, True) # perceive chiral atoms and set corresponding property for all atoms
-        Chem.calcAtomStereoDescriptors(mol, False)       # calculate atom stereo descriptors and set corresponding property for all atoms
-
+    # apply option -H
     if inc_hs:        
-        ecfp_gen.includeHydrogens(True)                # include explicit hydrogens in the ECFP generation
-        Chem.makeHydrogenComplete(mol)                 # make any implicit hydrogens explicit
-         
-    fp = Util.BitSet()                                 # create fingerprint bitset
-    fp.resize(num_bits)                                # set desired fingerprint size
+        Chem.makeHydrogenComplete(mol)        # make any implicit hydrogens explicit
+    else:        
+        Chem.makeHydrogenDeplete(mol)         # make any explicit hydrogens implicit
+        
+    fp_gen = Descr.PathFingerprintGenerator() # create path fingerprint generator instance
 
-    ecfp_gen.setNumIterations(radius)                  # set num. iterations (=atom. env. radius)
-    ecfp_gen.generate(mol)                             # extract chracteristic structural features
-    ecfp_gen.setFeatureBits(fp)                        # set bits associated with the extracted structural features
+    fp_gen.setMinPathLength(min_len)          # set min. path length
+    fp_gen.setMaxPathLength(max_len)          # set max. path length
+    
+    fp = Util.BitSet()                        # create fingerprint bitset
+    fp.resize(num_bits)                       # set desired fingerprint size
+
+    # generate the fingerprint
+    fp_gen.generate(mol, fp)                  
 
     # if needed, fp could be converted into a numpy single precision float array as follows:
     # fp = numpy.array(fp, dtype=numpy.float32)
@@ -55,7 +53,7 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_co
     return fp
     
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates extended connectivity fingerprints (ECFPs) for given input molecules.')
+    parser = argparse.ArgumentParser(description='Generates path (aka Daylight) fingerprints for given input molecules.')
 
     parser.add_argument('-i',
                         dest='in_file',
@@ -74,26 +72,27 @@ def parseArgs() -> argparse.Namespace:
                         default=1024,
                         help='Fingerprint size in bits (default: 1024)',
                         type=int)
-    parser.add_argument('-r',
-                        dest='radius',
+    parser.add_argument('-l',
+                        dest='min_path_len',
                         required=False,
                         metavar='<integer>',
-                        default=2,
-                        help='Max. atom environment radius in number of bonds (default: 2)',
+                        default=0,
+                        help='Minimum path length to consider (in number of bonds, default: 0)',
                         type=int)
-    parser.add_argument('-y',
+    parser.add_argument('-u',
+                        dest='max_path_len',
+                        required=False,
+                        metavar='<integer>',
+                        default=5,
+                        help='Maximum path length to consider (in number of bonds, default: 5)',
+                        type=int)
+    parser.add_argument('-H',
                         dest='inc_hs',
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Do not ignore hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)')
-    parser.add_argument('-c',
-                        dest='inc_config',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Include atom chirality (by default, atom chirality is not considered)')
-
+                        help='Include hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)')
+ 
     return parser.parse_args()
     
 def main() -> None:
@@ -112,7 +111,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                fp = genECFP(mol, args.num_bits, args.radius, args.inc_hs, args.inc_config)
+                fp = genPathFingerprint(mol, args.num_bits, args.min_path_len, args.max_path_len, args.inc_hs)
 
                 out_file.write(str(fp))
                 out_file.write('\n')

@@ -107,8 +107,10 @@ def getLogMessage(change_flags: Chem.ChEMBLStandardizer.ChangeFlags, args: argpa
 def parseArgs() -> argparse.Namespace:
     def strtobool(value: str) -> bool:
         value = value.lower()
+        
         if value in ("y", "yes", "on", "1", "true", "t"):
             return True
+        
         return False
     
     parser = argparse.ArgumentParser(description='Performs molecule standardization as done by the ChEMBL structure curation pipeline')
@@ -165,6 +167,9 @@ def main() -> None:
 
     # do not update timestamp for output in an MDL format, just for testing purposes!
     Chem.setMDLUpdateTimestampParameter(writer, False)
+
+    # write canonical SMILES
+    Chem.setSMILESOutputCanonicalFormParameter(writer, True)
     
     # create instances of the default implementation of the Chem.Molecule interface for the input and output molecules
     in_mol = Chem.BasicMolecule()

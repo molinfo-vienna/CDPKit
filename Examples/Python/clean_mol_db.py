@@ -306,9 +306,14 @@ def main() -> None:
     # create writer for molecules passing the checks (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
+    # write canonical SMILES
+    Chem.setSMILESOutputCanonicalFormParameter(writer, True)
+    
     if args.disc_file:
         # create writer for sorted out molecules (format specified by file extension)
-        disc_writer = Chem.MolecularGraphWriter(args.disc_file) 
+        disc_writer = Chem.MolecularGraphWriter(args.disc_file)
+        # write canonical SMILES
+        Chem.setSMILESOutputCanonicalFormParameter(disc_writer, True)
     else:
         disc_writer = None
         
