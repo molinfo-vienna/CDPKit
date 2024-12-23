@@ -24,10 +24,14 @@
 
 #include "StaticInit.hpp"
 
+#include <unordered_set>
+
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"
-#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
-#include "CDPL/Pharm/FeatureSet.hpp"
+#include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL; 
@@ -35,11 +39,54 @@ using namespace CDPL;
 
 bool Pharm::removePositionalDuplicates(Pharmacophore& pharm, double pos_tol)
 {
-    FeatureSet tmp;
+    std::unordered_set<const Feature*> kept_ftrs;
+ 
+    for (auto& ftr : pharm) {
+        auto& pos = get3DCoordinates(ftr);
+        auto type = getType(ftr);
+        auto dup_ftr_it = kept_ftrs.end();
+        
+        for (auto it = kept_ftrs.begin(), end = kept_ftrs.end(); it != end; ++it) {
+            auto& kept_ftr = *it;
+            
+            if (getType(*kept_ftr) != type)
+                continue;
 
-    auto rem = removePositionalDuplicates(pharm, tmp, pos_tol);
+            if (pos_tol <= 0.0) {
+                if (pos != get3DCoordinates(*kept_ftr))
+                    continue;
+                
+            } else {
+                if (length(pos - get3DCoordinates(*kept_ftr)) > pos_tol)
+                    continue;
+            }
 
-    pharm -= tmp;
+            dup_ftr_it = it;
+            break;
+        }
+
+        if (dup_ftr_it != kept_ftrs.end()) {
+            if (getTolerance(ftr) <= getTolerance(**dup_ftr_it))
+                continue;
+            
+            kept_ftrs.erase(dup_ftr_it);
+        }
+        
+        kept_ftrs.insert(&ftr);
+    }
+
+    auto rem = false;
+    
+    for (std::size_t i = 0, num_ftrs = pharm.getNumFeatures(); i < num_ftrs; ) {
+        if (kept_ftrs.find(&pharm.getFeature(i)) != kept_ftrs.end()) {
+            i++;
+            continue;
+        }
+
+        pharm.removeFeature(i);
+        num_ftrs--;
+        rem = true;
+    }
 
     return rem;
 }
