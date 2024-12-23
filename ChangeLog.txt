@@ -1,5 +1,9 @@
 master:
 
+V1.2.1:
+ - Fixed a bug in function Pharm::removePositionalDuplicates(Pharmacophore&) that resulted in the
+   duplicate features (that should be removed) to be retained instead of the non-duplicated ones
+
 V1.2.0:
  - Added new setter/getter method pair groupReferenceFeatures()/referenceFeaturesGrouped() to class Pharm::PharmacophoreFitScore for controlling
    whether multiple directed features of the same type at the same position shall be considered as independent individual features or as different
