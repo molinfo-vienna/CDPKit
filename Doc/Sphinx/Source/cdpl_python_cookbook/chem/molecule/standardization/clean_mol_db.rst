@@ -12,51 +12,51 @@ and then writes only those molecules that fulfill particular user-defined criter
 
  -i <file>
  
-    Input molecule file.
+    Input molecule file
 
  -o <file>
 
-    Output molecule file.
+    Output molecule file
 
 **Other options**
 
-  -h, --help
+ -h, --help
 
-    Shows help message.
-    
-  -d <file>
+    Show this help message and exit
+  
+ -d <file>
 
-    Discarded molecule output file.
+    Discarded molecule output file
     
-  -s
+ -s
 
-    Keep only the largest molecule component (default: false).
+    Keep only the largest molecule component (default: false)
     
-  -c
+ -c
 
     Minimize the number of charged atoms (default: false) by
-    protonation/deprotonation and charge equalization.
+    protonation/deprotonation and charge equalization
     
-  -x <element list>
+ -x <element list>
 
-    List of excluded chem. elements (default: no elements are excluded).
+    List of excluded chem. elements (default: no elements are excluded)
     
-  -a <element list>
+ -a <element list>
 
-    List of allowed chem. elements (default: all elements are allowed).
+    List of allowed chem. elements (default: all elements are allowed)
     
-  -m <element count list>
+ -m <element count list>
   
-    Minimum chem. element specific atom counts (default: no count limits).
+    Minimum chem. element specific atom counts (default: no count limits)
     
-  -M <element count list>
+ -M <element count list>
 
-    Maximum chem. element specific atom counts (default: no count limits).
+    Maximum chem. element specific atom counts (default: no count limits)
     
-  -v <0|1|2|3>
+ -v <0|1|2|3>
 
     Verbosity level (default: 1; 0 -> no console output,
-    1 -> print summary, 2 -> verbose, 3 -> extra verbose).
+    1 -> print summary, 2 -> verbose, 3 -> extra verbose)
 
 The options *-a* and *-x* both require a list of chemical elements as argument.
 Chemical element lists are specified in the form *<S>,...,<S>* where *<S>* is

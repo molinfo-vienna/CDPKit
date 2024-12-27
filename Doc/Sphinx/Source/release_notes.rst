@@ -3,6 +3,14 @@
 Release Notes
 =============
 
+Release V1.2.1
+--------------
+
+.. rubric:: Bug Fixes
+
+- Fix for function *Pharm::removePositionalDuplicates(Pharmacophore&)* which erroneously retained
+  the duplicate features (to be removed) instead of the desired features all having unique position and type
+
 Release V1.2.0
 --------------
 
