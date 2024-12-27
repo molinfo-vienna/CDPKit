@@ -123,7 +123,7 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Output fragments as carbon only skeletons (default: false)')
+                        help='Transform fragments into carbon skeletons (default: false)')
    
     return parser.parse_args()
 

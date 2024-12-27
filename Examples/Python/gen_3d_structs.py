@@ -43,7 +43,7 @@ def gen3DStructure(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -
     return status
         
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules.')
+    parser = argparse.ArgumentParser(description='Generates low energy 3D stuctures of the given input molecules.')
 
     parser.add_argument('-i',
                         dest='in_file',

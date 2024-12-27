@@ -113,7 +113,7 @@ def parseArgs() -> argparse.Namespace:
         
         return False
     
-    parser = argparse.ArgumentParser(description='Performs molecule standardization as done by the ChEMBL structure curation pipeline')
+    parser = argparse.ArgumentParser(description='Performs molecule standardization according to the ChEMBL structure curation pipeline workflow.')
 
     parser.add_argument('-i',
                         dest='in_file',

@@ -109,7 +109,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-s',
                         dest='strip_res_list',
                         required=False,
-                        metavar='<three-letter code(s)>',
+                        metavar='<three-letter code>',
                         nargs='+',
                         help='Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)')
     parser.add_argument('-q',

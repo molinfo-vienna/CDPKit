@@ -54,7 +54,7 @@ def getLogMessage(verb_level: int, mol_id: str, num_frags: int, frag_gen: Chem.F
     return msg
 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Performs molecule fragmentation using BRICS or RECAP rules')
+    parser = argparse.ArgumentParser(description='Performs molecule fragmentation using BRICS or RECAP rules.')
 
     parser.add_argument('-i',
                         dest='in_file',

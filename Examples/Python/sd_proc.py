@@ -23,7 +23,7 @@ import sys
 import CDPL.Chem as Chem
 
 
-# retrieves and prints the MDL structure data of the given molecule
+# retrieves and outputs the MDL structure data of the given molecule
 def printStructureData(mol: Chem.Molecule) -> None: 
     if not Chem.hasStructureData(mol):        # is a structure data property available?
         print('Error: no structure data available for molecule \'%s\'' % Chem.getName(mol))

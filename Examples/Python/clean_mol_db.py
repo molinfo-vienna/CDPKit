@@ -227,7 +227,7 @@ def parseElementCountList(elem_count_list: str) -> dict:
     return atom_type_counts
                                 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Strips compounds that fulfill particular user-defined criteria from a molecule database')
+    parser = argparse.ArgumentParser(description='Strips compounds that fulfill particular user-defined criteria from a molecule database.')
 
     parser.add_argument('-i',
                         dest='in_file',
