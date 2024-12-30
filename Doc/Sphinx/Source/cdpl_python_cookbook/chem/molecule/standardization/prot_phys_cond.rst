@@ -22,7 +22,7 @@ a set of given input molecules and then writes the resulting structures to the s
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
     
  -q
 

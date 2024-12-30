@@ -22,7 +22,7 @@ and then writes only those molecules that fulfill particular user-defined criter
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
   
  -d <file>
 

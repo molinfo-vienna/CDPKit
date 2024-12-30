@@ -1,8 +1,8 @@
 Bemis-Murcko Framework Analysis
 ===============================
 
-The script *gen_bm_frags.py* analyzes the framework of given input molecules according to the rules established by Bemis and
-Murcko.
+The script *gen_bm_frags.py* analyzes the framework of input molecules according to the rules established by Bemis and
+Murcko :cite:`doi:10.1021/jm9602928`.
 
 **Synopsis**
 
@@ -22,7 +22,7 @@ Murcko.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -v
  

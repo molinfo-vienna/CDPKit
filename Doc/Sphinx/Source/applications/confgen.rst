@@ -7,7 +7,7 @@ Details regarding the implementation and performance of CONFORGE can be found in
 
 Built-in torsion rules are based on the torsion library V3.0 developed by the
 University of Hamburg, Center for Bioinformatics, Hamburg, Germany and F. Hoffmann-La-Roche Ltd., Basel, Switzerland
-:cite:`doi:10.1021/jm3016816`:cite:`doi:10.1021/acs.jcim.5b00522`:cite:`doi:10.1021/acs.jcim.2c00043`.
+:cite:`doi:10.1021/jm3016816,doi:10.1021/acs.jcim.5b00522,doi:10.1021/acs.jcim.2c00043`.
 
 Synopsis
 --------

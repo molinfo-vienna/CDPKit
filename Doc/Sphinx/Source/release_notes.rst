@@ -11,6 +11,11 @@ Release V1.2.1
 - Fix for function *Pharm::removePositionalDuplicates(Pharmacophore&)* which erroneously retained
   the duplicate features (to be removed) instead of the desired features all having unique position and type
 
+.. rubric:: Improvements
+
+- Additional Python cookbook scripts
+- Documentation updates
+  
 Release V1.2.0
 --------------
 

@@ -1,7 +1,8 @@
 ChEMBL Structure Curation Pipeline
 ==================================
 
-The script *chembl_preproc.py* Performs molecule standardization according to the ChEMBL structure curation pipeline workflow.
+The script *chembl_preproc.py* Performs molecule standardization according to the ChEMBL structure
+curation pipeline workflow :cite:`Bento2020`.
 
 **Synopsis**
 
@@ -21,7 +22,7 @@ The script *chembl_preproc.py* Performs molecule standardization according to th
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -i <file>
 

@@ -1,8 +1,8 @@
 Bond-Path Fingerprints
 ======================
 
-The script *gen_path_fp.py* generates path (aka Daylight) fingerprints of molecules
-read from the specified file.
+The script *gen_path_fp.py* generates and outputs the bond-path (aka Daylight) fingerprint of molecules
+read from a specified input file.
 
 **Synopsis**
 
@@ -22,7 +22,7 @@ read from the specified file.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -n <integer>
 

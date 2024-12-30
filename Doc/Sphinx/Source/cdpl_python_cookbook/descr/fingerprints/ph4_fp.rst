@@ -1,8 +1,8 @@
 2D and 3D Pharmacophore Fingerprints
 ====================================
 
-The script *gen_ph4_fp.py* generates 2D or 3D pharmacophore fingerprints of molecules
-read from the specified file.
+The script *gen_ph4_fp.py* generates and outputs the 2D or 3D pharmacophore fingerprint of molecules
+read from a specified input file.
 
 **Synopsis**
 
@@ -22,7 +22,7 @@ read from the specified file.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -n <integer>
 

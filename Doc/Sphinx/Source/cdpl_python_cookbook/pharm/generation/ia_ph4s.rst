@@ -2,7 +2,7 @@ Ligand-receptor Interaction Pharmacophores
 ==========================================
 
 The script *gen_ia_ph4s.py* generates pharmacophores describing the interactions between a given receptor structure and a set of
-provided ligand molecules.
+ligand molecules.
 
 **Synopsis**
 
@@ -26,7 +26,7 @@ provided ligand molecules.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
  
  **-s <three-letter code> [<three-letter code> ...]**
 

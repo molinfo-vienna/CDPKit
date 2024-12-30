@@ -26,7 +26,7 @@ the specified SMARTS substructure pattern to the output file.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
   
  -q
 

@@ -1,7 +1,8 @@
 Rule-based Fragmentation
 ========================
 
-The script *gen_mol_frags.py* performs molecule fragmentation according to BRICS or RECAP rules.
+The script *gen_mol_frags.py* performs molecule fragmentation according to BRICS :cite:`https://doi.org/10.1002/cmdc.200800178`
+or RECAP rules :cite:`doi:10.1021/ci970429i`.
 
 **Synopsis**
 
@@ -25,7 +26,7 @@ The script *gen_mol_frags.py* performs molecule fragmentation according to BRICS
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -v <0|1|2>
 

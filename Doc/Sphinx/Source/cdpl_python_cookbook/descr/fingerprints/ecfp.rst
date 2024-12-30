@@ -1,8 +1,8 @@
 Extended Connectivity Fingerprints (ECFPs)
 ==========================================
 
-The script *gen_ecfp.py* generates extended connectivity fingerprints (ECFPs) of molecules
-read from the specified file.
+The script *gen_ecfp.py* generates and outputs the *Extended Connectivity Fingerprint* (ECFP) :cite:`doi:10.1021/ci100050t` of molecules
+read from a specified input file.
 
 **Synopsis**
 
@@ -22,7 +22,7 @@ read from the specified file.
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
  
  -n <integer>
 

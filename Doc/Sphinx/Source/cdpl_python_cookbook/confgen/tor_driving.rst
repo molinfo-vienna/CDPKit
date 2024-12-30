@@ -22,7 +22,7 @@ driving on the provided 3D structure and writes the resulting conformer ensemble
 
  -h, --help
 
-    Show this help message and exit
+    Show help message and exit
 
  -f <SMARTS>
 

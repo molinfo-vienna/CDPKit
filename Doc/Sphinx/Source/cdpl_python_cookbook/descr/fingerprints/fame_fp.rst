@@ -1,8 +1,9 @@
 FAME Atom Environment Fingerprints
 ==================================
 
-The script *gen_fame_fp.py* generates the FAME environment descriptor for each atom of molecules
-read from the specified file.
+The script *gen_fame_fp.py* generates and outputs the FAME environment descriptor
+:cite:`doi:10.1021/acs.jcim.9b00376,doi:10.1021/acs.jcim.3c01588`
+for each atom of molecules read from a specified input file.
 
 **Synopsis**
 
