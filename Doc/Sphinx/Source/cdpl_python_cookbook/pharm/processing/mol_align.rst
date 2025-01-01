@@ -2,7 +2,7 @@ Molecule to Reference Pharmacophore Alignment
 =============================================
 
 The script *align_mols_to_ph4.py* overlays a set of input molecules with a given reference pharmacophore and outputs
-the molecules in the calculated alignment pose(s).
+the molecules translated/rotated to the calculated alignment pose(s).
 
 **Synopsis**
 
