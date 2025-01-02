@@ -3,6 +3,7 @@ master:
 V1.2.1:
  - Fixed a bug in function Pharm::removePositionalDuplicates(Pharmacophore&) that resulted in the
    duplicate features (that should be removed) to be retained instead of the non-duplicated ones
+ - Sphinx documentation updates
 
 V1.2.0:
  - Added new setter/getter method pair groupReferenceFeatures()/referenceFeaturesGrouped() to class Pharm::PharmacophoreFitScore for controlling
