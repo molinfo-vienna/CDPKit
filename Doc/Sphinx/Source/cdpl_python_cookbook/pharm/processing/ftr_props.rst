@@ -2,7 +2,18 @@ Retrieving Feature Properties
 =============================
 
 The script *print_ph4_ftrs.py* demonstrates how to iterate over the features of pharmacophores
-read from an input file and query basic feature properties like position, orientation, type, tolerance, etc.
+read from a specified input file and query the following feature properties:
+
+ - Type
+ - Geometry
+ - Tolerance
+ - Position
+ - Orientation
+ - Orientation vector length
+ - Weight
+ - Hydrophobicity
+ - Is optional
+ - Is disabled
 
 **Synopsis**
 

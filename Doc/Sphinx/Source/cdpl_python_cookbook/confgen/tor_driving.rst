@@ -1,8 +1,8 @@
 Torsion Driving
 ===============
 
-The script *tor_drive.py* generates conformers for the molecules read from the input file by performing torsion
-driving on the provided 3D structure and writes the resulting conformer ensembles to the specified output file.
+The script *tor_drive.py* generates a conformer ensemble for each molecule read from the specified input file by performing torsion
+driving on the provided 3D structure and writes the resulting ensembles to the desired output file.
 
 **Synopsis**
 

@@ -2,7 +2,7 @@ Conformer Ensembles
 ===================
 
 The script *gen_confs.py* generates a conformer ensemble :cite:`doi:10.1021/acs.jcim.3c00563` for each molecule read from
-the specified input file and writes the resulting ensembles to the specified output file.
+the specified input file and writes the resulting ensembles to the desired output file.
 
 **Synopsis**
 

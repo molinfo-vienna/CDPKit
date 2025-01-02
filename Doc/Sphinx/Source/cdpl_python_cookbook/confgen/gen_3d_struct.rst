@@ -2,7 +2,7 @@ Single Low-energy 3D Structures
 ===============================
 
 The script *gen_3d_structs.py* generates a single low energy 3D stucture for each molecule read from
-the specified input file and writes the result to the specified output file.
+the specified input file and writes the resulting structure to the desired output file.
 
 **Synopsis**
 
