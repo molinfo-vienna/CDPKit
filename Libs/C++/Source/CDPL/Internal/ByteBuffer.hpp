@@ -126,7 +126,7 @@ namespace CDPL
             inline
             std::size_t putValueBytes(const char* bytes, std::size_t num_bytes, bool compress);
             inline
-            void        getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes);
+            void getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes);
 
             typedef std::vector<char> StorageType;
 
