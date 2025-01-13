@@ -161,7 +161,7 @@ namespace
 
 
 Pharm::PSDScreeningDBCreatorImpl::PSDScreeningDBCreatorImpl():
-    pharmWriter(controlParams),    molWriter(controlParams), pharmGenerator(), mode(ScreeningDBCreator::CREATE),
+    pharmWriter(controlParams), molWriter(controlParams), pharmGenerator(), mode(ScreeningDBCreator::CREATE),
     allowDupEntries(true), numProcessed(0), numRejected(0), numDeleted(0), numInserted(0)
 {
     initControlParams();
