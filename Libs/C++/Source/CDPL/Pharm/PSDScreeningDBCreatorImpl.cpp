@@ -87,6 +87,9 @@ namespace
         DROP_PHARM_TABLE_SQL +
         DROP_FTR_COUNT_TABLE_SQL;
 
+    const std::string VACUUM_SQL = 
+        "VACUUM;";
+
     const std::string MOL_ID_AND_HASH_QUERY_SQL = "SELECT " +
         Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + ", " +
         Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " FROM " +
@@ -130,13 +133,8 @@ namespace
         "PRAGMA page_size = 4096;" 
         "PRAGMA cache_size = 10000;"  
         "PRAGMA locking_mode = EXCLUSIVE;" 
-        "PRAGMA synchronous = NORMAL;" 
-//        "PRAGMA journal_mode = WAL;" 
+        "PRAGMA synchronous = NORMAL;"
         "PRAGMA temp_store = MEMORY;";
-/*
-    const std::string SQLITE_CLOSE_PRAGMAS = 
-        "PRAGMA journal_mode = DELETE;" 
-*/
 
     class TransactionRollback
     {
@@ -190,8 +188,6 @@ const std::string& Pharm::PSDScreeningDBCreatorImpl::getDatabaseName() const
 
 void Pharm::PSDScreeningDBCreatorImpl::closeDBConnection()
 {
-    //execStatements(SQLITE_CLOSE_PRAGMAS);
-
     beginTransStmt.reset();
     commitTransStmt.reset();
     insMoleculeStmt.reset();
@@ -384,7 +380,10 @@ void Pharm::PSDScreeningDBCreatorImpl::setupTables()
 
     // The prepared 'BEGIN TRANSACTION' seems not to be reusable anymore if tables are dropped/created
     // Maybe this is a bug?
-    beginTransStmt.reset(); 
+    beginTransStmt.reset();
+
+    if (mode == ScreeningDBCreator::CREATE)
+        execStatements(VACUUM_SQL);
 }
 
 void Pharm::PSDScreeningDBCreatorImpl::loadMolHashToIDMap()
