@@ -101,8 +101,8 @@ set(cdpl-pharm_LIB_SRCS
     PSDMoleculeReader.cpp
     PSDMolecularGraphWriter.cpp
       
-    CDFPharmacophoreDataReader.cpp
-    CDFPharmacophoreDataWriter.cpp
+    CDFDataReader.cpp
+    CDFDataWriter.cpp
     CDFPharmacophoreReader.cpp
     CDFFeatureContainerWriter.cpp
   

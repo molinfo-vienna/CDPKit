@@ -35,7 +35,7 @@
 
 #include "CDPL/Pharm/SQLiteDataIOBase.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreDataReader.hpp"
+#include "CDPL/Pharm/CDFDataReader.hpp"
 #include "CDPL/Chem/CDFDataReader.hpp"
 #include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -116,7 +116,7 @@ namespace CDPL
             MolIDConfIdxToPharmIdxMap  molIDConfIdxToPharmIdxMap;
             Internal::ByteBuffer       byteBuffer;
             Base::ControlParameterList controlParams;
-            CDFPharmacophoreDataReader pharmReader;
+            CDFDataReader              pharmReader;
             Chem::CDFDataReader        molReader;
         };
     } // namespace Pharm

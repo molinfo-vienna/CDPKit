@@ -1,5 +1,5 @@
 /* 
- * CDFPharmacophoreDataWriter.cpp 
+ * CDFDataWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -35,21 +35,21 @@
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
-#include "CDFPharmacophoreDataWriter.hpp"
+#include "CDFDataWriter.hpp"
 #include "CDFFormatData.hpp"
 
 
 using namespace CDPL;
 
 
-bool Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
+bool Pharm::CDFDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
     writeFeatureContainer(cntnr, dataBuffer);
 
     return writeRecordData(os);
 }
 
-void Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf)
+void Pharm::CDFDataWriter::writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf)
 {
     init();
 
@@ -63,13 +63,13 @@ void Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(const FeatureConta
     outputFtrContainerHeader(cntnr, bbuf);
 }
 
-void Pharm::CDFPharmacophoreDataWriter::init()
+void Pharm::CDFDataWriter::init()
 {
     strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
     singlePrecisionFloats(getCDFOutputSinglePrecisionFloatsParameter(ctrlParams));
 }
 
-void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
     CDF::Header cdf_header;
 
@@ -82,7 +82,7 @@ void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerHeader(const FeatureCo
     putHeader(cdf_header, bbuf);
 }
 
-void Pharm::CDFPharmacophoreDataWriter::outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
     bbuf.putInt(boost::numeric_cast<CDF::SizeType>(cntnr.getNumFeatures()), false);
 
@@ -125,7 +125,7 @@ void Pharm::CDFPharmacophoreDataWriter::outputFeatures(const FeatureContainer& c
     }
 }
 
-void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
     if (hasName(cntnr))
         putStringProperty(CDF::PharmacophoreProperty::NAME, getName(cntnr), bbuf);
@@ -133,7 +133,7 @@ void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerProperties(const Featu
     putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
-bool Pharm::CDFPharmacophoreDataWriter::writeRecordData(std::ostream& os) const
+bool Pharm::CDFDataWriter::writeRecordData(std::ostream& os) const
 {
     dataBuffer.writeBuffer(os);
 

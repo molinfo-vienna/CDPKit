@@ -1,5 +1,5 @@
 /* 
- * CDFPharmacophoreDataWriter.hpp 
+ * CDFDataWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef CDPL_PHARM_CDFPHARMACOPHOREDATAWRITER_HPP
-#define CDPL_PHARM_CDFPHARMACOPHOREDATAWRITER_HPP
+#ifndef CDPL_PHARM_CDFDATAWRITER_HPP
+#define CDPL_PHARM_CDFDATAWRITER_HPP
 
 #include <iosfwd>
 
@@ -45,11 +45,11 @@ namespace CDPL
 
         class FeatureContainer;
 
-        class CDFPharmacophoreDataWriter : private Internal::CDFDataWriterBase
+        class CDFDataWriter : private Internal::CDFDataWriterBase
         {
 
           public:
-            CDFPharmacophoreDataWriter(const Base::ControlParameterContainer& ctrl_params):
+            CDFDataWriter(const Base::ControlParameterContainer& ctrl_params):
                 ctrlParams(ctrl_params) {}
 
             bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
@@ -71,4 +71,4 @@ namespace CDPL
     } // namespace Pharm
 } // namespace CDPL
 
-#endif // CDPL_PHARM_CDFPHARMACOPHOREDATAWRITER_HPP
+#endif // CDPL_PHARM_CDFDATAWRITER_HPP

@@ -1,5 +1,5 @@
 /* 
- * CDFPharmacophoreDataReader.cpp 
+ * CDFDataReader.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -33,14 +33,14 @@
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Math/Vector.hpp"
 
-#include "CDFPharmacophoreDataReader.hpp"
+#include "CDFDataReader.hpp"
 #include "CDFFormatData.hpp"
 
 
 using namespace CDPL;
 
 
-bool Pharm::CDFPharmacophoreDataReader::hasMoreData(std::istream& is)
+bool Pharm::CDFDataReader::hasMoreData(std::istream& is)
 {
     init();
 
@@ -49,7 +49,7 @@ bool Pharm::CDFPharmacophoreDataReader::hasMoreData(std::istream& is)
     return CDFDataReaderBase::skipToRecord(is, header, CDF::PHARMACOPHORE_RECORD_ID, true, dataBuffer);
 }
 
-bool Pharm::CDFPharmacophoreDataReader::readPharmacophore(std::istream& is, Pharmacophore& pharm)
+bool Pharm::CDFDataReader::readPharmacophore(std::istream& is, Pharmacophore& pharm)
 {
     init();
 
@@ -68,19 +68,19 @@ bool Pharm::CDFPharmacophoreDataReader::readPharmacophore(std::istream& is, Phar
     return true;
 }
 
-bool Pharm::CDFPharmacophoreDataReader::skipPharmacophore(std::istream& is)
+bool Pharm::CDFDataReader::skipPharmacophore(std::istream& is)
 {
     init();
 
     return skipNextRecord(is, CDF::PHARMACOPHORE_RECORD_ID, dataBuffer);
 }
 
-void Pharm::CDFPharmacophoreDataReader::init()
+void Pharm::CDFDataReader::init()
 {
     strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
 }
 
-bool Pharm::CDFPharmacophoreDataReader::readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf)
+bool Pharm::CDFDataReader::readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf)
 {
     init();
 
@@ -93,7 +93,7 @@ bool Pharm::CDFPharmacophoreDataReader::readPharmacophore(Pharmacophore& pharm, 
 
     if (header.recordTypeID != CDF::PHARMACOPHORE_RECORD_ID) {
         if (strictErrorChecking())
-            throw Base::IOError("CDFPharmacophoreDataReader: trying to read a non-pharmacophore record");
+            throw Base::IOError("CDFDataReader: trying to read a non-pharmacophore record");
 
         return false;
     }
@@ -104,7 +104,7 @@ bool Pharm::CDFPharmacophoreDataReader::readPharmacophore(Pharmacophore& pharm, 
     return true;
 }
 
-void Pharm::CDFPharmacophoreDataReader::readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
 {
     CDF::PropertySpec prop_spec;
     CDF::UIntType uint_val;
@@ -178,13 +178,13 @@ void Pharm::CDFPharmacophoreDataReader::readFeatures(Pharmacophore& pharm, Inter
                     continue;
 
                 default:
-                    throw Base::IOError("CDFPharmacophoreDataReader: unsupported feature property");
+                    throw Base::IOError("CDFDataReader: unsupported feature property");
             }
         }
     }
 }
 
-void Pharm::CDFPharmacophoreDataReader::readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataReader::readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
 {
     CDF::PropertySpec prop_spec;
     std::string str_val;
@@ -203,7 +203,7 @@ void Pharm::CDFPharmacophoreDataReader::readPharmProperties(Pharmacophore& pharm
                 continue;
 
             default:
-                throw Base::IOError("CDFPharmacophoreDataReader: unsupported pharmacophore property");
+                throw Base::IOError("CDFDataReader: unsupported pharmacophore property");
         }
     }
 }

@@ -41,7 +41,7 @@ namespace CDPL
     namespace Pharm
     {
 
-        class CDFPharmacophoreDataReader;
+        class CDFDataReader;
         class Pharmacophore;
 
         /**
@@ -74,7 +74,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::unique_ptr<CDFPharmacophoreDataReader> CDFDataReaderPtr;
+            typedef std::unique_ptr<CDFDataReader> CDFDataReaderPtr;
 
             CDFDataReaderPtr reader;
         };

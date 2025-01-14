@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreDataWriter.hpp"
+#include "CDPL/Pharm/CDFDataWriter.hpp"
 #include "CDPL/Chem/CDFDataWriter.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -128,7 +128,7 @@ namespace CDPL
             Chem::HashCodeCalculator      hashCalculator;
             Internal::ByteBuffer          byteBuffer;
             Base::ControlParameterList    controlParams;
-            CDFPharmacophoreDataWriter    pharmWriter;
+            CDFDataWriter                 pharmWriter;
             Chem::CDFDataWriter           molWriter;
             BasicPharmacophore            pharmacophore;
             DefaultPharmacophoreGenerator pharmGenerator;

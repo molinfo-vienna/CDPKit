@@ -1,5 +1,5 @@
-/* 
- * CDFPharmacophoreDataReader.hpp 
+ /* 
+ * CDFDataReader.hpp 
  *
  * This file is part of the Pharmical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef CDPL_PHARM_CDFPHARMACOPHOREDATAREADER_HPP
-#define CDPL_PHARM_CDFPHARMACOPHOREDATAREADER_HPP
+#ifndef CDPL_PHARM_CDFDATAREADER_HPP
+#define CDPL_PHARM_CDFDATAREADER_HPP
 
 #include <iosfwd>
 
@@ -45,11 +45,11 @@ namespace CDPL
 
         class Pharmacophore;
 
-        class CDFPharmacophoreDataReader : private Internal::CDFDataReaderBase
+        class CDFDataReader : private Internal::CDFDataReaderBase
         {
 
           public:
-            CDFPharmacophoreDataReader(const Base::ControlParameterContainer& ctrl_params):
+            CDFDataReader(const Base::ControlParameterContainer& ctrl_params):
                 ctrlParams(ctrl_params) {}
 
             bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
@@ -72,4 +72,4 @@ namespace CDPL
     } // namespace Pharm
 } // namespace CDPL
 
-#endif // CDPL_PHARM_CDFPHARMACOPHOREDATAREADER_HPP
+#endif // CDPL_PHARM_CDFDATAREADER_HPP
