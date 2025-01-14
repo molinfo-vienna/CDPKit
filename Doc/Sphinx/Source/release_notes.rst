@@ -15,6 +15,9 @@ Release V1.2.1
 
 - Additional Python cookbook scripts
 - Documentation updates
+- All disk space consumed by an existing pharmacophore screening database (PSD) that is specified as
+  destination file for a new database to be created by the tool :doc:`subsearch </applications/psdcreate>` is now
+  completely freed and not just internally marked as unallocated space
   
 Release V1.2.0
 --------------
