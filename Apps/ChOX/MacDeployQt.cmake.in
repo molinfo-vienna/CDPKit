@@ -26,6 +26,9 @@ execute_process(COMMAND "@MACDEPLOYQT_EXECUTABLE@" "${CMAKE_INSTALL_PREFIX}/@CDP
 
 # workaround for macdeployqt bug
 
+execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "/opt/homebrew/Cellar/libxcb/1.17.0/lib/libxcb.1.dylib" "@loader_path/libxcb.1.dylib" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app/Contents/Frameworks/libxcb-render.0.dylib" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
+execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "/opt/homebrew/Cellar/libxcb/1.17.0/lib/libxcb.1.dylib" "@loader_path/libxcb.1.dylib" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app/Contents/Frameworks/libxcb-shm.0.dylib" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
+
 execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "/opt/homebrew/Cellar/libxcb/1.16/lib/libxcb.1.dylib" "@loader_path/libxcb.1.dylib" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app/Contents/Frameworks/libxcb-render.0.dylib" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
 execute_process(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "/opt/homebrew/Cellar/libxcb/1.16/lib/libxcb.1.dylib" "@loader_path/libxcb.1.dylib" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app/Contents/Frameworks/libxcb-shm.0.dylib" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
 
