@@ -35,7 +35,7 @@ SubstructHighlightingPatternsEditAction::SubstructHighlightingPatternsEditAction
 
 QWidget* SubstructHighlightingPatternsEditAction::createWidget(QWidget* parent)
 {
-    auto widget =  new SubstructHighlightingPatternsEditWidget(parent, settings);
+    auto widget = new SubstructHighlightingPatternsEditWidget(parent, settings);
 
     connect(widget, SIGNAL(finished()), this, SIGNAL(triggered()));
 
