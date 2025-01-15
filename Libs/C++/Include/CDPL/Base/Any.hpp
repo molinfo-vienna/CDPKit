@@ -30,6 +30,7 @@
 #define CDPL_BASE_ANY_HPP
 
 #include <string>
+#include <cstring>
 #include <typeinfo>
 #include <type_traits>
 #include <stdexcept>
@@ -410,7 +411,16 @@ namespace CDPL
             // Same effect as is_same(this->getTypeID(), t);
             bool isTyped(const std::type_info& t) const
             {
-                return (this->getTypeID() == t);
+                if (&this->getTypeID() == &t)
+                    return true;
+
+                auto n1 = this->getTypeID().name();
+                auto n2 = t.name();
+
+                if (n1 == n2)
+                    return true;
+                
+                return (std::strcmp(this->getTypeID().name(), t.name()) == 0);
             }
 
             // Casts (with no type_info checks) the storage pointer as const T*.
