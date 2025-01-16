@@ -88,8 +88,9 @@ Package managers on modern Linux systems usually provide all listed software pac
 
 .. rubric:: macOS
 
-On macOS (*Big Sur* is the minimum supported version) the recommended way to install everything that is needed for a successful build
-is to use the `Homebrew <https://brew.sh/index>`_ package manager.
+On macOS (*Big Sur* is the minimum supported version) the best way to install everything needed for a successful build
+is to use the `Homebrew <https://brew.sh/index>`_ or `MacPorts <https://ports.macports.org>`_ (recommended) package
+distributions.
 
 .. rubric:: Windows
 
