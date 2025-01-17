@@ -195,8 +195,8 @@ def calcBondAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Mat
 #  \f$ \cos(\omega_{ijk;l}) = \frac{\vec{n_{ijk}} \cdot \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} \f$<br>
 # 
 # where<br>
-#  \f$ M_1 = \left| \begin{array}{ccc} 0 & -\vec{v_{jk}}.z & \vec{v_{jk}}.y \\ \vec{v_{jk}}.z & 0 & -\vec{v_{jk}}.x \\ -\vec{v_{jk}}.y & \vec{v_{jk}}.x & 0 \end{array} \right| \f$<br>
-#  \f$ M_2 = \left| \begin{array}{ccc} 0 & \vec{v_{ji}}.z & -\vec{v_{ji}}.y \\ -\vec{v_{ji}}.z & 0 & \vec{v_{ji}}.x \\ \vec{v_{ji}}.y & -\vec{v_{ji}}.x & 0 \end{array} \right| \f$<br>
+#  \f$ M_1 = \begin{vmatrix} 0 & -\vec{v_{jk}}.z & \vec{v_{jk}}.y \\ \vec{v_{jk}}.z & 0 & -\vec{v_{jk}}.x \\ -\vec{v_{jk}}.y & \vec{v_{jk}}.x & 0 \end{vmatrix} \f$<br>
+#  \f$ M_2 = \begin{vmatrix} 0 & \vec{v_{ji}}.z & -\vec{v_{ji}}.y \\ -\vec{v_{ji}}.z & 0 & \vec{v_{ji}}.x \\ \vec{v_{ji}}.y & -\vec{v_{ji}}.x & 0 \end{vmatrix} \f$<br>
 #  \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
 #  \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
 #  \f$ \vec{v_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
