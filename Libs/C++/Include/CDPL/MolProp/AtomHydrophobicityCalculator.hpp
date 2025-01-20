@@ -33,7 +33,7 @@
 #include <vector>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
-#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -44,8 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief AtomHydrophobicityCalculator.
-         * \see [\ref CATA] 
+         * \brief Implements Greene's algorithm [\ref CATA] for the calculation of atom hydrophobicities.
          */
         class CDPL_MOLPROP_API AtomHydrophobicityCalculator
         {
@@ -89,15 +88,18 @@ namespace CDPL
             AtomHydrophobicityCalculator& operator=(const AtomHydrophobicityCalculator& calculator);
 
           private:
-            typedef std::vector<std::string> StringList;
+            typedef std::vector<std::string>  StringList;
+            typedef std::vector<unsigned int> UIntArray;
 
             void calcHydrophobicities(const Chem::MolecularGraph& molgraph, Util::DArray& atom_hyds);
 
             double calcAccessibleSurfaceFactor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-            Chem::SubstructureSearch substructSearch;
-            std::string              atomDescr;
-            StringList               atomEnvData;
+            Chem::Fragment atomEnvironment;
+            UIntArray      cat9To11Counts;
+            UIntArray      cat13Counts;
+            std::string    atomDescr;
+            StringList     atomEnvData;
         };
     } // namespace MolProp
 } // namespace CDPL

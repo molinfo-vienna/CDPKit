@@ -35,10 +35,8 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
-#include "CDPL/Chem/AtomBondMapping.hpp"
 
 #include "AtomSurfaceAccessibilityData.hpp"
 
@@ -48,56 +46,6 @@ using namespace CDPL;
 
 namespace
 {
-
-    double atomHydCategoryFactors[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.6, 0.6, 0.6, 0, 0.25, 0 };
-
-    typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
-    
-    PatternTable atomHydCategoryPatterns;
-    std::once_flag initHydCategoryPatternsFlag;
-
-    void initHydCategoryPatterns() 
-    {
-        using namespace Chem;
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#1,#7,#8:1]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[SX2v2;!H0:2]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~*~[!+0]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~[!+0]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[!+0:3]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0;!$(*-*=,:*)]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0;!$(*-*=,:*)]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[SX2;!H0;!$(*-*=,:*)]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]~*=[O]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]=[O]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:7]~[#16;v3,v4,v5,v6]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6:7]"));
-            
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#16:8]=*"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:9]~*~*=[O]"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:10]~*~[#16;v3,v4,v5,v6]"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:11]~[#16;$(*=*)]"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~*=[O]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~[#16;$(*=*)]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~[#16;$(*=*)]"));
-        atomHydCategoryPatterns.push_back(parseSMARTS("[#16;$(*=*)]~[*:12]~[#16;$(*=*)]"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,OX2;!$(*-*=,:*)]"));
-
-        atomHydCategoryPatterns.push_back(parseSMARTS("[N,OX2;!$(*-*=,:*)]~[*:14]~[N,OX2;!$(*-*=,:*)]"));
-    }
 
     typedef std::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
 
@@ -160,19 +108,13 @@ namespace
 
 
 MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator()
-{
-    substructSearch.uniqueMappingsOnly(true);
-}
+{}
 
 MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calc)
-{
-    substructSearch.uniqueMappingsOnly(true);
-}
+{}
 
 MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table)
 {
-    substructSearch.uniqueMappingsOnly(true);
-
     calculate(molgraph, hyd_table);
 }
 
@@ -192,40 +134,184 @@ void MolProp::AtomHydrophobicityCalculator::calcHydrophobicities(const Chem::Mol
 {
     using namespace Chem;
 
-    std::call_once(initHydCategoryPatternsFlag, &initHydCategoryPatterns);
     std::call_once(initAtomSurfAccTableFlag, &initAtomSurfAccTable);
 
     std::size_t num_atoms = molgraph.getNumAtoms();
+       
+    hyd_table.assign(num_atoms, 0.0);
+    cat9To11Counts.assign(num_atoms, 0);
+    cat13Counts.assign(num_atoms, 0);
+    
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        auto& atom = molgraph.getAtom(i);
 
-    hyd_table.assign(num_atoms, 1.0);
+        if (getFormalCharge(atom) != 0) { // category 3 atom
+            getEnvironment(atom, molgraph, 2, atomEnvironment);
 
-    for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); 
-         p_it != p_end; ++p_it) {
+            for (auto& env_atom : atomEnvironment.getAtoms()) // category 3 env. atoms
+                hyd_table[molgraph.getAtomIndex(env_atom)] = -3.0;
+        }
+        
+        auto type = getType(atom);
+ 
+        switch (type) {
 
-        substructSearch.setQuery(**p_it);
-        substructSearch.findMappings(molgraph);
+            case AtomType::N:
+            case AtomType::O:
+                // category 1 atom
+                hyd_table[i] = -1.0;
+                
+            case AtomType::S:
+                break;
 
-        for (SubstructureSearch::ConstMappingIterator m_it = substructSearch.getMappingsBegin(),
-                 m_end = substructSearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+            case AtomType::H:
+                // category 1 atom
+                hyd_table[i] = -1.0;
+                
+            default:
+                continue;
+        }
 
-            const AtomMapping& mapping = m_it->getAtomMapping();
+        std::size_t num_bonds = 0;
+        std::size_t valence = 0;
+        std::size_t h_count = 0;
+        auto unsat = false;
+        auto deloc = getAromaticityFlag(atom);
+        auto b_it = atom.getBondsBegin();
 
-            for (AtomMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it) {
-                std::size_t hyd_cat = getAtomMappingID(*it->first);
+        for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+            auto& nbr_atom = *a_it;
 
-                if (hyd_cat == 0)
-                    continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
 
-                hyd_table[molgraph.getAtomIndex(*it->second)] *= atomHydCategoryFactors[hyd_cat];
+            auto& nbr_bond = *b_it;
+
+            if (!molgraph.containsBond(nbr_bond))
+                continue;
+
+            auto order = getOrder(nbr_bond);
+            auto nbr_type = getType(nbr_atom);
+            
+            if ((order == 1) && (nbr_type == AtomType::H))
+                h_count++;
+
+            if (order > 1)
+                unsat = true;
+
+            if (!deloc && (order == 1) && getAromaticityFlag(nbr_atom))
+                deloc = true;
+            
+            num_bonds++;
+            valence += order;
+        }
+
+        auto impl_h_cnt = getImplicitHydrogenCount(atom);
+
+        valence += impl_h_cnt;
+        num_bonds += impl_h_cnt;
+        h_count += impl_h_cnt;
+
+        if (type == AtomType::S) {
+            if ((valence == 2) && (num_bonds == 2) && (h_count >= 1)) { // category 2 atom
+                if (!deloc) { 
+                    getEnvironment(atom, molgraph, 1, atomEnvironment);
+
+                    for (auto& env_atom : atomEnvironment.getAtoms())  // category 5 env. atoms
+                        hyd_table[molgraph.getAtomIndex(env_atom)] = -5.0;
+                }
+
+                hyd_table[i] = -2.0;
+                continue;
+            }
+
+            if (valence > 2) {  // category 7 atom
+                getEnvironment(atom, molgraph, 1, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms()) // category 7 env. atoms
+                    hyd_table[molgraph.getAtomIndex(env_atom)] = -7.0;
+
+                getEnvironment(atom, molgraph, 2, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms()) // category 10 env. atoms
+                    cat9To11Counts[molgraph.getAtomIndex(env_atom)]++;
+
+                continue;
+            }
+            
+            if (unsat) {  // category 8 atom
+                hyd_table[i] = -8.0;
+
+                getEnvironment(atom, molgraph, 1, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms()) // category 11 env. atom
+                    cat9To11Counts[molgraph.getAtomIndex(env_atom)]++;
+            }
+            
+            continue;
+        }
+
+        if (type == AtomType::O) {
+            if (unsat) { // category 6 atom
+                getEnvironment(atom, molgraph, 2, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms()) // category 6 env. atoms
+                    hyd_table[molgraph.getAtomIndex(env_atom)] = -6.0;
+
+                getEnvironment(atom, molgraph, 3, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms()) // category 9 env. atoms
+                    cat9To11Counts[molgraph.getAtomIndex(env_atom)]++;
+                
+                continue;
+            }
+
+            if (!deloc) {
+                if (h_count > 0) { // category 4 atom
+                    getEnvironment(atom, molgraph, 2, atomEnvironment);
+
+                    for (auto& env_atom : atomEnvironment.getAtoms()) // category 4 env. atoms
+                        hyd_table[molgraph.getAtomIndex(env_atom)] = -4.0;
+                    
+                } else {
+                    getEnvironment(atom, molgraph, 1, atomEnvironment);
+
+                    for (auto& env_atom : atomEnvironment.getAtoms()) // category 13 env. atoms
+                        cat13Counts[molgraph.getAtomIndex(env_atom)]++;
+                }
+            }
+            
+            continue;
+        }
+
+        if ((type == AtomType::N) && !deloc) {
+            if (h_count > 0) { // category 4 atom
+                getEnvironment(atom, molgraph, 2, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms())
+                    hyd_table[molgraph.getAtomIndex(env_atom)] = -4.0; // category 4 env. atoms
+                    
+            } else {
+                getEnvironment(atom, molgraph, 1, atomEnvironment);
+
+                for (auto& env_atom : atomEnvironment.getAtoms())
+                    cat13Counts[molgraph.getAtomIndex(env_atom)]++; // category 13 env. atoms
             }
         }
     }
-
+    
     for (std::size_t i = 0; i < num_atoms; i++) {
-        if (hyd_table[i] == 0.0)
+        if ((hyd_table[i] != 0.0) || (cat9To11Counts[i] > 1) || (cat13Counts[i] > 1)) { 
+            hyd_table[i] = 0.0;
             continue;
-        
-        hyd_table[i] *= calcAccessibleSurfaceFactor(molgraph.getAtom(i), molgraph);
+        }
+  
+        auto base_hyd = (cat9To11Counts[i] > 0 ? 0.6 : 1.0);
+
+        if (cat13Counts[i] > 0)
+            base_hyd *= 0.25;
+       
+        hyd_table[i] = base_hyd * calcAccessibleSurfaceFactor(molgraph.getAtom(i), molgraph);
     }
 }
 
