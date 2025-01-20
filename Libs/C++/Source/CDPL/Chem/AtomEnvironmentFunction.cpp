@@ -36,38 +36,38 @@ using namespace CDPL;
 std::size_t Chem::getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append)
 {
     if (!append)
-    env.clear();
+        env.clear();
 
     std::size_t last_num_atoms = env.getNumAtoms();
 
     env.addAtom(atom);
-    
+
     for (std::size_t i = 0; i < max_dist; i++) {
-    std::size_t curr_num_atoms = env.getNumAtoms();
-    
-    for (std::size_t j = last_num_atoms; j < curr_num_atoms; j++) {
-        const Atom& curr_atom = env.getAtom(j);
-        Atom::ConstBondIterator nb_it = curr_atom.getBondsBegin();
+        std::size_t curr_num_atoms = env.getNumAtoms();
 
-        for (Atom::ConstAtomIterator na_it = curr_atom.getAtomsBegin(), na_end = curr_atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
-        const Atom& nbr_atom = *na_it;
+        for (std::size_t j = last_num_atoms; j < curr_num_atoms; j++) {
+            const Atom& curr_atom = env.getAtom(j);
+            Atom::ConstBondIterator nb_it = curr_atom.getBondsBegin();
 
-        if (!molgraph.containsAtom(nbr_atom))
-            continue;
+            for (Atom::ConstAtomIterator na_it = curr_atom.getAtomsBegin(), na_end = curr_atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+                const Atom& nbr_atom = *na_it;
 
-        const Bond& nbr_bond = *nb_it;
+                if (!molgraph.containsAtom(nbr_atom))
+                    continue;
 
-        if (!molgraph.containsBond(nbr_bond))
-            continue;
+                const Bond& nbr_bond = *nb_it;
 
-        env.addBond(nbr_bond);
+                if (!molgraph.containsBond(nbr_bond))
+                    continue;
+
+                env.addBond(nbr_bond);
+            }
         }
-    }
 
-    if (curr_num_atoms == env.getNumAtoms())
-        return i;
+        if (curr_num_atoms == env.getNumAtoms())
+            return i;
 
-    last_num_atoms = curr_num_atoms;
+        last_num_atoms = curr_num_atoms;
     }
 
     return max_dist;
