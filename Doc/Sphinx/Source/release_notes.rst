@@ -13,6 +13,8 @@ Release V1.2.1
 
 .. rubric:: Improvements
 
+- New implementation of Greene's algorithm for the calculation of atom hydrophobicities which
+  is now more correct and ~100 times faster than the previous one
 - Additional Python cookbook scripts
 - Documentation updates
 - All disk space consumed by an existing pharmacophore screening database (PSD) that is specified as

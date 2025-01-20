@@ -88,9 +88,9 @@ Package managers on modern Linux systems usually provide all listed software pac
 
 .. rubric:: macOS
 
-On macOS (*Big Sur* is the minimum supported version) the best way to install everything needed for a successful build
-is to use the `Homebrew <https://brew.sh/index>`_ or `MacPorts <https://ports.macports.org>`_ (recommended) package
-distributions.
+On macOS (*Big Sur* is the minimum supported version) all packages needed for a successful build of CDPKit
+are provided by the `Homebrew <https://brew.sh/index>`_ or `MacPorts <https://ports.macports.org>`_ (recommended)
+software distribution.
 
 .. rubric:: Windows
 
