@@ -20,9 +20,7 @@
 #
 
 ##
-# \brief AtomHydrophobicityCalculator.
-# 
-# \see [\ref CATA]
+# \brief Implements Greene's algorithm [\ref CATA] for the calculation of atom hydrophobicities.
 # 
 class AtomHydrophobicityCalculator(Boost.Python.instance):
 
