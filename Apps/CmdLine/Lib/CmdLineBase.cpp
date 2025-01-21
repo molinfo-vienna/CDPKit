@@ -51,6 +51,7 @@
 # define VC_EXTRALEAN
 # include <windows.h>
 # undef ERROR
+# define NO_ANSI_ESC_CODE_SUPPORT
 #endif // !defined _WIN32
 
 #include "CDPL/Version.hpp"
@@ -369,6 +370,36 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
+#ifdef NO_ANSI_ESC_CODE_SUPPORT
+  std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
+            << (double(lastProgressValue) / 100) << "% ";
+  
+    bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+
+    progressBar.clear();
+    progressBar.push_back('|');
+    
+    if ((curr_prog_bar_len > 0) || fractional) {
+        for (std::size_t i = 0; i < curr_prog_bar_len; i++)
+            progressBar.append(FULL_LINE_CHAR);
+
+        if (progressBarLen != curr_prog_bar_len) {
+            if (fractional)
+                progressBar.append(LEFT_HALF_LINE_CHAR);
+            else
+                progressBar.push_back(' ');
+
+            for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
+                progressBar.push_back(' ');
+        }
+        
+    } else
+        for (std::size_t i = 0; i < progressBarLen; i++)
+            progressBar.push_back(' ');
+
+    progressBar.push_back('|');
+
+#else // defined NO_ANSI_ESC_CODE_SUPPORT
     std::cerr << ERASE_LINE << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
               << (double(lastProgressValue) / 100) 
               << "% ";
@@ -399,14 +430,17 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
             progressBar.append(FULL_LINE_CHAR);
 
     progressBar.append(DEF_COLOR);
-        
+#endif // defined NO_ANSI_ESC_CODE_SUPPORT
+
     std::cerr << progressBar;
     
     if (progress > 0.0) {
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
-
+#ifdef NO_ANSI_ESC_CODE_SUPPORT
+        std::cerr << " ETA: " << std::setw(13) << std::left << formatTimeDuration(tot_eta_secs) << std::right << '\r';
+#else
         std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
-
+#endif
         if (progressBarLen == curr_prog_bar_len)
             setCursorVisible(true);
 
