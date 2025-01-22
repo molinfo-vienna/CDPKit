@@ -31,7 +31,7 @@ RUN yum install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip
 
 # inject files
 COPY . /io
-ADD https://boostorg.jfrog.io/artifactory/main/release/1.84.0/source/boost_1_84_0.tar.gz /io/boost.tgz
+ADD https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz /io/boost.tgz
 
 # unpack boost
 RUN mkdir /boost
