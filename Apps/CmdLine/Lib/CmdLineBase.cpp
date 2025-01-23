@@ -52,7 +52,6 @@
 # define NOMINMAX
 # include <windows.h>
 # undef ERROR
-# define NO_ANSI_ESC_CODE_SUPPORT
 #endif // !defined _WIN32
 
 #include "CDPL/Version.hpp"
@@ -111,6 +110,28 @@ namespace
         signalCaught.store(true);
     }
 
+    bool enableWinVTermProcessing()
+    {
+#ifdef _WIN32
+        // set output mode to handle virtual terminal sequences
+        HANDLE hOut = GetStdHandle(STD_ERROR_HANDLE);
+
+        if (hOut == INVALID_HANDLE_VALUE)
+            return false;
+
+        DWORD dwMode = 0;
+
+        if (!GetConsoleMode(hOut, &dwMode))
+            return false;
+
+        dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+
+        if (!SetConsoleMode(hOut, dwMode))
+            return false;
+#endif // defined _WIN32
+        return true;    
+    }
+    
     const std::string ERASE_LINE("\033[2K");
     const std::string INFINITY_SYM_CHAR("\u221E");
     const std::string FULL_LINE_CHAR("\u2501");       // box drawings heavy horizontal
@@ -126,7 +147,7 @@ namespace
 CmdLineBase::CmdLineBase(): 
     optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
     logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1),
-    inProgressLine(false), inNewLine(true)
+    haveEscSeqSupport(enableWinVTermProcessing()), inProgressLine(false), inNewLine(true)
 {
     addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
               value<std::string>()->implicit_value("SHORT"));
@@ -298,7 +319,7 @@ std::string CmdLineBase::getProgTitleString() const
     }
     
     if (getProgCopyright()) {
-        title += " (C) ";
+        title += " \u00A9 ";
         title += getProgCopyright();
     }
 
@@ -371,77 +392,78 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
-#ifdef NO_ANSI_ESC_CODE_SUPPORT
-  std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
-            << (double(lastProgressValue) / 100) << "% ";
-  
-    bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+    if (!haveEscSeqSupport) {
+        std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2)
+                  << (double(lastProgressValue) / 100) << "% ";
 
-    progressBar.clear();
-    progressBar.push_back('|');
-    
-    if ((curr_prog_bar_len > 0) || fractional) {
-        for (std::size_t i = 0; i < curr_prog_bar_len; i++)
-            progressBar.append(FULL_LINE_CHAR);
+        bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
 
-        if (progressBarLen != curr_prog_bar_len) {
-            if (fractional)
-                progressBar.append(LEFT_HALF_LINE_CHAR);
-            else
-                progressBar.push_back(' ');
+        progressBar.clear();
+        progressBar.push_back('|');
 
-            for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
-                progressBar.push_back(' ');
-        }
-        
-    } else
-        for (std::size_t i = 0; i < progressBarLen; i++)
-            progressBar.push_back(' ');
+        if ((curr_prog_bar_len > 0) || fractional) {
+            for (std::size_t i = 0; i < curr_prog_bar_len; i++)
+                progressBar.append(FULL_LINE_CHAR);
 
-    progressBar.push_back('|');
+            if (progressBarLen != curr_prog_bar_len) {
+                if (fractional)
+                    progressBar.append(LEFT_HALF_LINE_CHAR);
+                else
+                    progressBar.push_back(' ');
 
-#else // defined NO_ANSI_ESC_CODE_SUPPORT
-    std::cerr << ERASE_LINE << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
-              << (double(lastProgressValue) / 100) 
-              << "% ";
-  
-    bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
-    progressBar = (curr_prog_bar_len == 0 ? fractional ? PURPLE : GRAY : progressBarLen == curr_prog_bar_len ? GREEN : PURPLE);
-   
-    if ((curr_prog_bar_len > 0) || fractional) {
-        for (std::size_t i = 0; i < curr_prog_bar_len; i++)
-            progressBar.append(FULL_LINE_CHAR);
-
-        if (progressBarLen != curr_prog_bar_len) {
-            if (fractional) {
-                progressBar.append(LEFT_HALF_LINE_CHAR);
-                progressBar.append(GRAY);
-
-            } else {
-                progressBar.append(GRAY);
-                progressBar.append(RIGHT_HALF_LINE_CHAR);
+                for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
+                    progressBar.push_back(' ');
             }
 
-            for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
-                progressBar.append(FULL_LINE_CHAR);
-        }
-        
-    } else
-        for (std::size_t i = 0; i < progressBarLen; i++)
-            progressBar.append(FULL_LINE_CHAR);
+        } else
+            for (std::size_t i = 0; i < progressBarLen; i++)
+                progressBar.push_back(' ');
 
-    progressBar.append(DEF_COLOR);
-#endif // defined NO_ANSI_ESC_CODE_SUPPORT
+        progressBar.push_back('|');
+
+    } else {
+        std::cerr << ERASE_LINE << prefix << std::fixed << std::setw(7) << std::setprecision(2)
+                  << (double(lastProgressValue) / 100) << "% ";
+
+        bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+        progressBar = (curr_prog_bar_len == 0 ? fractional ? PURPLE : GRAY : progressBarLen == curr_prog_bar_len ? GREEN :
+                                                                                                                       PURPLE);
+
+        if ((curr_prog_bar_len > 0) || fractional) {
+            for (std::size_t i = 0; i < curr_prog_bar_len; i++)
+                progressBar.append(FULL_LINE_CHAR);
+
+            if (progressBarLen != curr_prog_bar_len) {
+                if (fractional) {
+                    progressBar.append(LEFT_HALF_LINE_CHAR);
+                    progressBar.append(GRAY);
+
+                } else {
+                    progressBar.append(GRAY);
+                    progressBar.append(RIGHT_HALF_LINE_CHAR);
+                }
+
+                for (std::size_t i = 1; i < (progressBarLen - curr_prog_bar_len); i++)
+                    progressBar.append(FULL_LINE_CHAR);
+            }
+
+        } else
+            for (std::size_t i = 0; i < progressBarLen; i++)
+                progressBar.append(FULL_LINE_CHAR);
+
+        progressBar.append(DEF_COLOR);
+    }
 
     std::cerr << progressBar;
     
     if (progress > 0.0) {
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
-#ifdef NO_ANSI_ESC_CODE_SUPPORT
-        std::cerr << " ETA: " << std::setw(13) << std::left << formatTimeDuration(tot_eta_secs) << std::right << '\r';
-#else
-        std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
-#endif
+
+        if (!haveEscSeqSupport)
+            std::cerr << " ETA: " << std::setw(13) << std::left << formatTimeDuration(tot_eta_secs) << std::right << '\r';
+        else
+            std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
+
         if (progressBarLen == curr_prog_bar_len)
             setCursorVisible(true);
 

@@ -154,6 +154,7 @@ namespace CmdLineLib
         std::string        progressBar;
         bool               inProgressLine;
         bool               inNewLine;
+        bool               haveEscSeqSupport;
         Timer              progTimer;
     };
 
