@@ -34,6 +34,8 @@ set(CDPKIT_VERSION_MAJOR ${CMAKE_MATCH_1})
 set(CDPKIT_VERSION_MINOR ${CMAKE_MATCH_2})
 set(CDPKIT_VERSION_PATCH ${CMAKE_MATCH_3})
 
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "Version")
+
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "Setting build type to 'Release' as none was specified")
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
