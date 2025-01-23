@@ -132,7 +132,6 @@ namespace
         return true;    
     }
     
-    const std::string ERASE_LINE("\033[2K");
     const std::string INFINITY_SYM_CHAR("\u221E");
     const std::string FULL_LINE_CHAR("\u2501");       // box drawings heavy horizontal
     const std::string LEFT_HALF_LINE_CHAR("\u2578");  // box drawings heavy left
@@ -147,7 +146,7 @@ namespace
 CmdLineBase::CmdLineBase(): 
     optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
     logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1),
-    haveEscSeqSupport(enableWinVTermProcessing()), inProgressLine(false), inNewLine(true)
+    inProgressLine(false), inNewLine(true), haveEscSeqSupport(enableWinVTermProcessing())
 {
     addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
               value<std::string>()->implicit_value("SHORT"));
@@ -392,12 +391,12 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
+    std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2)
+              << (double(lastProgressValue) / 100) << "% ";
+
+    bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
+    
     if (!haveEscSeqSupport) {
-        std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2)
-                  << (double(lastProgressValue) / 100) << "% ";
-
-        bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
-
         progressBar.clear();
         progressBar.push_back('|');
 
@@ -422,12 +421,8 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
         progressBar.push_back('|');
 
     } else {
-        std::cerr << ERASE_LINE << prefix << std::fixed << std::setw(7) << std::setprecision(2)
-                  << (double(lastProgressValue) / 100) << "% ";
-
-        bool fractional = (progressBarLen * progress - curr_prog_bar_len) >= 0.5;
         progressBar = (curr_prog_bar_len == 0 ? fractional ? PURPLE : GRAY : progressBarLen == curr_prog_bar_len ? GREEN :
-                                                                                                                       PURPLE);
+                       PURPLE);
 
         if ((curr_prog_bar_len > 0) || fractional) {
             for (std::size_t i = 0; i < curr_prog_bar_len; i++)
@@ -459,10 +454,7 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
     if (progress > 0.0) {
         std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
-        if (!haveEscSeqSupport)
-            std::cerr << " ETA: " << std::setw(13) << std::left << formatTimeDuration(tot_eta_secs) << std::right << '\r';
-        else
-            std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) << '\r';
+        std::cerr << " ETA: " << std::setw(13) << std::left << formatTimeDuration(tot_eta_secs) << std::right << '\r';
 
         if (progressBarLen == curr_prog_bar_len)
             setCursorVisible(true);
@@ -487,7 +479,8 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
 
-    std::cerr << ERASE_LINE << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << '\r';
+    std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << ""
+              << std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << ""<< '\r';
 
     if (++lastProgressDotCount > maxProgressDotCount)
         lastProgressDotCount = 1;
