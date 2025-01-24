@@ -33,22 +33,16 @@
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
-#include "CDPL/Pharm/CDFDataWriter.hpp"
-#include "CDPL/Chem/CDFDataWriter.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
-#include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
+
+#include "PSDFeatureContainerByteBufferWriter.hpp"
+#include "PSDMolecularGraphByteBufferWriter.hpp"
 
 
 namespace CDPL
 {
-
-    namespace Chem
-    {
-
-        class MolecularGraph;
-    }
 
     namespace Pharm
     {
@@ -84,8 +78,6 @@ namespace CDPL
             std::size_t getNumInserted() const;
 
           private:
-            void initControlParams();
-
             void closeDBConnection();
 
             void setupTables();
@@ -113,33 +105,32 @@ namespace CDPL
             typedef std::unordered_multimap<std::uint64_t, std::int64_t> MolHashToIDMap;
             typedef std::unordered_set<std::uint64_t>                    MolHashSet;
 
-            SQLite3StmtPointer            beginTransStmt;
-            SQLite3StmtPointer            commitTransStmt;
-            SQLite3StmtPointer            insMoleculeStmt;
-            SQLite3StmtPointer            insPharmStmt;
-            SQLite3StmtPointer            insFtrCountStmt;
-            SQLite3StmtPointer            delMolWithMolIDStmt;
-            SQLite3StmtPointer            delPharmsWithMolIDStmt;
-            SQLite3StmtPointer            delFeatureCountsWithMolIDStmt;
-            SQLite3StmtPointer            delTwoPointPharmsWithMolIDStmt;
-            SQLite3StmtPointer            delThreePointPharmsWithMolIDStmt;
-            MolHashToIDMap                molHashToIDMap;
-            MolHashSet                    procMolecules;
-            Chem::HashCodeCalculator      hashCalculator;
-            Internal::ByteBuffer          byteBuffer;
-            Base::ControlParameterList    controlParams;
-            CDFDataWriter                 pharmWriter;
-            Chem::CDFDataWriter           molWriter;
-            BasicPharmacophore            pharmacophore;
-            DefaultPharmacophoreGenerator pharmGenerator;
-            FeatureTypeHistogram          featureCounts;
-            Math::Vector3DArray           coordinates;
-            ScreeningDBCreator::Mode      mode;
-            bool                          allowDupEntries;
-            std::size_t                   numProcessed;
-            std::size_t                   numRejected;
-            std::size_t                   numDeleted;
-            std::size_t                   numInserted;
+            SQLite3StmtPointer                  beginTransStmt;
+            SQLite3StmtPointer                  commitTransStmt;
+            SQLite3StmtPointer                  insMoleculeStmt;
+            SQLite3StmtPointer                  insPharmStmt;
+            SQLite3StmtPointer                  insFtrCountStmt;
+            SQLite3StmtPointer                  delMolWithMolIDStmt;
+            SQLite3StmtPointer                  delPharmsWithMolIDStmt;
+            SQLite3StmtPointer                  delFeatureCountsWithMolIDStmt;
+            SQLite3StmtPointer                  delTwoPointPharmsWithMolIDStmt;
+            SQLite3StmtPointer                  delThreePointPharmsWithMolIDStmt;
+            MolHashToIDMap                      molHashToIDMap;
+            MolHashSet                          procMolecules;
+            Chem::HashCodeCalculator            hashCalculator;
+            Internal::ByteBuffer                byteBuffer;
+            PSDFeatureContainerByteBufferWriter pharmWriter;
+            PSDMolecularGraphByteBufferWriter   molWriter;
+            BasicPharmacophore                  pharmacophore;
+            DefaultPharmacophoreGenerator       pharmGenerator;
+            FeatureTypeHistogram                featureCounts;
+            Math::Vector3DArray                 coordinates;
+            ScreeningDBCreator::Mode            mode;
+            bool                                allowDupEntries;
+            std::size_t                         numProcessed;
+            std::size_t                         numRejected;
+            std::size_t                         numDeleted;
+            std::size_t                         numInserted;
         };
     } // namespace Pharm
 } // namespace CDPL

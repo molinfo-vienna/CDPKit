@@ -24,12 +24,8 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/ControlParameterFunctions.hpp"
-
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
-
 #include "PSDScreeningDBAccessorImpl.hpp"
-#include "SQLScreeningDBMetaData.hpp"
+#include "PSDTableInfo.hpp"
 
 
 using namespace CDPL;
@@ -39,39 +35,36 @@ namespace
 {
 
     const std::string MOL_DATA_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::MOL_DATA_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + " WHERE " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
+        Pharm::PSDTableInfo::MOL_DATA_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
 
     const std::string PHARM_DATA_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::PHARM_DATA_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + " WHERE " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1 AND " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " = ?2;";
+        Pharm::PSDTableInfo::PHARM_DATA_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1 AND " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " = ?2;";
 
     const std::string MOL_ID_FROM_MOL_TABLE_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + ";";
 
     const std::string MOL_ID_CONF_IDX_FROM_PHARM_TABLE_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + ";";
 
     const std::string FTR_COUNT_TABLE_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::FTR_TYPE_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::FTR_COUNT_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + ";";
 }
 
 
-Pharm::PSDScreeningDBAccessorImpl::PSDScreeningDBAccessorImpl():
-    pharmReader(controlParams), molReader(controlParams)
-{
-    initControlParams();
-}
+Pharm::PSDScreeningDBAccessorImpl::PSDScreeningDBAccessorImpl()
+{}
 
 void Pharm::PSDScreeningDBAccessorImpl::open(const std::string& name)
 {
@@ -151,7 +144,7 @@ void Pharm::PSDScreeningDBAccessorImpl::getMolecule(std::size_t mol_idx, Chem::M
     byteBuffer.setIOPointer(0);
     byteBuffer.putBytes(reinterpret_cast<const char*>(blob), num_bytes);
 
-    molReader.readMolecule(mol, byteBuffer);
+    molReader.readMolecule(byteBuffer, mol);
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm)
@@ -274,14 +267,8 @@ void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, i
     byteBuffer.setIOPointer(0);
     byteBuffer.putBytes(reinterpret_cast<const char*>(blob), num_bytes);
 
-    pharmReader.readPharmacophore(pharm, byteBuffer);
+    pharmReader.readPharmacophore(byteBuffer, pharm);
 } 
-
-void Pharm::PSDScreeningDBAccessorImpl::initControlParams()
-{
-    Pharm::setStrictErrorCheckingParameter(controlParams, true);
-    Chem::setStrictErrorCheckingParameter(controlParams, true);
-}
 
 void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
 {

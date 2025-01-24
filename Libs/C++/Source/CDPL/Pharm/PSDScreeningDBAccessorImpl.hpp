@@ -35,20 +35,14 @@
 
 #include "CDPL/Pharm/SQLiteDataIOBase.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
-#include "CDPL/Pharm/CDFDataReader.hpp"
-#include "CDPL/Chem/CDFDataReader.hpp"
-#include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
+
+#include "PSDPharmacophoreByteBufferReader.hpp"
+#include "PSDMoleculeByteBufferReader.hpp"
 
 
 namespace CDPL
 {
-
-    namespace Chem
-    {
-
-        class Molecule;
-    }
 
     namespace Pharm
     {
@@ -86,8 +80,6 @@ namespace CDPL
             const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx);
 
           private:
-            void initControlParams();
-
             void closeDBConnection();
 
             void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
@@ -103,21 +95,20 @@ namespace CDPL
             typedef std::unordered_map<std::int64_t, std::size_t>                                     MolIDToUIntMap;
             typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
 
-            SQLite3StmtPointer         selMolDataStmt;
-            SQLite3StmtPointer         selPharmDataStmt;
-            SQLite3StmtPointer         selMolIDStmt;
-            SQLite3StmtPointer         selMolIDConfIdxStmt;
-            SQLite3StmtPointer         selFtrCountsStmt;
-            FeatureCountsArray         featureCounts;
-            MolIDArray                 molIdxToIDMap;
-            MolIDToUIntMap             molIDToIdxMap;
-            MolIDToUIntMap             molIDConfCountMap;
-            MolIDConfIdxPairArray      pharmIdxToMolIDConfIdxMap;
-            MolIDConfIdxToPharmIdxMap  molIDConfIdxToPharmIdxMap;
-            Internal::ByteBuffer       byteBuffer;
-            Base::ControlParameterList controlParams;
-            CDFDataReader              pharmReader;
-            Chem::CDFDataReader        molReader;
+            SQLite3StmtPointer               selMolDataStmt;
+            SQLite3StmtPointer               selPharmDataStmt;
+            SQLite3StmtPointer               selMolIDStmt;
+            SQLite3StmtPointer               selMolIDConfIdxStmt;
+            SQLite3StmtPointer               selFtrCountsStmt;
+            FeatureCountsArray               featureCounts;
+            MolIDArray                       molIdxToIDMap;
+            MolIDToUIntMap                   molIDToIdxMap;
+            MolIDToUIntMap                   molIDConfCountMap;
+            MolIDConfIdxPairArray            pharmIdxToMolIDConfIdxMap;
+            MolIDConfIdxToPharmIdxMap        molIDConfIdxToPharmIdxMap;
+            Internal::ByteBuffer             byteBuffer;
+            PSDPharmacophoreByteBufferReader pharmReader;
+            PSDMoleculeByteBufferReader      molReader;
         };
     } // namespace Pharm
 } // namespace CDPL

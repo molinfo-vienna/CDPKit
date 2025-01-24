@@ -88,6 +88,10 @@ set(cdpl-pharm_LIB_SRCS
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
     FileScreeningHitCollector.cpp
+    PSDPharmacophoreByteBufferReader.cpp
+    PSDFeatureContainerByteBufferWriter.cpp
+    PSDMoleculeByteBufferReader.cpp
+    PSDMolecularGraphByteBufferWriter.cpp
     PSDScreeningDBCreator.cpp
     PSDScreeningDBCreatorImpl.cpp
     PSDScreeningDBAccessorImpl.cpp

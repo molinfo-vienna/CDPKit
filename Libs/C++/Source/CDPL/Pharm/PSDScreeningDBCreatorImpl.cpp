@@ -26,11 +26,9 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
-#include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
@@ -38,7 +36,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "PSDScreeningDBCreatorImpl.hpp"
-#include "SQLScreeningDBMetaData.hpp"
+#include "PSDTableInfo.hpp"
 
 
 using namespace CDPL;
@@ -48,34 +46,34 @@ namespace
 {
 
     const std::string CREATE_MOL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + "(" + 
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER PRIMARY KEY, " + 
-        Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::MOL_DATA_COLUMN_NAME + " BLOB);";
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + "(" + 
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " INTEGER PRIMARY KEY, " + 
+        Pharm::PSDTableInfo::MOL_HASH_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::MOL_DATA_COLUMN_NAME + " BLOB);";
 
     const std::string DROP_MOL_TABLE_SQL = "DROP TABLE IF EXISTS " + 
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + ";";
 
     const std::string CREATE_PHARM_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + "(" + 
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::PHARM_DATA_COLUMN_NAME + " BLOB, PRIMARY KEY(" +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + "));";
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + "(" + 
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::PHARM_DATA_COLUMN_NAME + " BLOB, PRIMARY KEY(" +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + "));";
  
     const std::string DROP_PHARM_TABLE_SQL = "DROP TABLE IF EXISTS " + 
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + ";";
 
     const std::string CREATE_FTR_COUNT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
-        Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + "(" + 
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::FTR_TYPE_COLUMN_NAME + " INTEGER, " + 
-        Pharm::SQLScreeningDB::FTR_COUNT_COLUMN_NAME + " INTEGER);";
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + "(" + 
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + " INTEGER, " + 
+        Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + " INTEGER);";
     
     const std::string DROP_FTR_COUNT_TABLE_SQL = "DROP TABLE IF EXISTS " + 
-        Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + ";";
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + ";";
 
     const std::string CREATE_TABLES_SQL = 
         CREATE_MOL_TABLE_SQL +
@@ -91,46 +89,46 @@ namespace
         "VACUUM;";
 
     const std::string MOL_ID_AND_HASH_QUERY_SQL = "SELECT " +
-        Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " FROM " +
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME;
+        Pharm::PSDTableInfo::MOL_HASH_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::MOL_TABLE_NAME;
 
     const std::string DELETE_MOL_WITH_MOL_ID_SQL = "DELETE FROM " +
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + " WHERE " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
 
     const std::string DELETE_PHARMS_WITH_MOL_ID_SQL = "DELETE FROM " +
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + " WHERE " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
 
     const std::string DELETE_FTR_COUNTS_WITH_MOL_ID_SQL = "DELETE FROM " +
-        Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + " WHERE " +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
 
     const std::string INSERT_MOL_DATA_SQL = "INSERT INTO " +
-        Pharm::SQLScreeningDB::MOL_TABLE_NAME + "(" +
-        Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_DATA_COLUMN_NAME + ") VALUES (?1, ?2);";
+        Pharm::PSDTableInfo::MOL_TABLE_NAME + "(" +
+        Pharm::PSDTableInfo::MOL_HASH_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_DATA_COLUMN_NAME + ") VALUES (?1, ?2);";
 
     const std::string INSERT_PHARM_DATA_SQL = "INSERT INTO " +
-        Pharm::SQLScreeningDB::PHARM_TABLE_NAME + "(" +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::PHARM_DATA_COLUMN_NAME + ") VALUES (?1, ?2, ?3);";
+        Pharm::PSDTableInfo::PHARM_TABLE_NAME + "(" +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::PHARM_DATA_COLUMN_NAME + ") VALUES (?1, ?2, ?3);";
 
     const std::string INSERT_FTR_COUNT_SQL = "INSERT INTO " +
-        Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + "(" +
-        Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::FTR_TYPE_COLUMN_NAME + ", " +
-        Pharm::SQLScreeningDB::FTR_COUNT_COLUMN_NAME + ") VALUES (?1, ?2, ?3, ?4);";
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + "(" +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + ") VALUES (?1, ?2, ?3, ?4);";
 
     const std::string BEGIN_TRANSACTION_SQL    = "BEGIN TRANSACTION;";
     const std::string COMMIT_TRANSACTION_SQL   = "COMMIT TRANSACTION;";
     const std::string ROLLBACK_TRANSACTION_SQL = "ROLLBACK TRANSACTION;";
     
     const std::string SQLITE_OPEN_PRAGMAS = 
-        "PRAGMA page_size = 4096;" 
+        "PRAGMA page_size = 4096;"
         "PRAGMA cache_size = 10000;"  
         "PRAGMA locking_mode = EXCLUSIVE;" 
         "PRAGMA synchronous = NORMAL;"
@@ -159,11 +157,9 @@ namespace
 
 
 Pharm::PSDScreeningDBCreatorImpl::PSDScreeningDBCreatorImpl():
-    pharmWriter(controlParams), molWriter(controlParams), pharmGenerator(), mode(ScreeningDBCreator::CREATE),
+    pharmGenerator(), mode(ScreeningDBCreator::CREATE),
     allowDupEntries(true), numProcessed(0), numRejected(0), numDeleted(0), numInserted(0)
-{
-    initControlParams();
-}
+{}
 
 void Pharm::PSDScreeningDBCreatorImpl::open(const std::string& name, ScreeningDBCreator::Mode mode, bool allow_dup_entries)
 {
@@ -354,15 +350,6 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
     return (numInserted > old_num_ins);
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::initControlParams()
-{
-    Pharm::setStrictErrorCheckingParameter(controlParams, true);
-    Chem::setStrictErrorCheckingParameter(controlParams, true);
-
-    Pharm::setCDFOutputSinglePrecisionFloatsParameter(controlParams, true);
-    Chem::setCDFOutputSinglePrecisionFloatsParameter(controlParams, true);
-}
-
 void Pharm::PSDScreeningDBCreatorImpl::setupTables()
 {
     execStatements(SQLITE_OPEN_PRAGMAS);
@@ -428,7 +415,7 @@ std::size_t Pharm::PSDScreeningDBCreatorImpl::deleteEntries(std::uint64_t mol_ha
 
 std::int64_t Pharm::PSDScreeningDBCreatorImpl::insertMolecule(const Chem::MolecularGraph& molgraph, std::uint64_t mol_hash)
 {
-    molWriter.writeMolGraph(molgraph, byteBuffer);
+    molWriter.writeMolecularGraph(molgraph, byteBuffer);
 
     setupStatement(insMoleculeStmt, INSERT_MOL_DATA_SQL, true);
 

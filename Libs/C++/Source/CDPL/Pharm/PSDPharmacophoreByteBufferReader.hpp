@@ -1,5 +1,5 @@
 /* 
- * SQLScreeningDBMetaData.hpp
+ * PSDPharmacophoreByteBufferReader.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,36 +22,45 @@
  */
 
 
-#ifndef CDPL_PHARM_SQLSCREENINGDBMETADATA_HPP
-#define CDPL_PHARM_SQLSCREENINGDBMETADATA_HPP
+#ifndef CDPL_PHARM_PSDPHARMACOPHOREBYTEBUFFERREADER_HPP
+#define CDPL_PHARM_PSDPHARMACOPHOREBYTEBUFFERREADER_HPP
 
-#include <string>
+#include <memory>
+
+#include "CDPL/Base/ControlParameterContainer.hpp"
 
 
 namespace CDPL
 {
+    
+    namespace Internal
+    {
 
+        class ByteBuffer;
+    }
+    
     namespace Pharm
     {
 
-        namespace SQLScreeningDB
+        class CDFDataReader;
+        class Pharmacophore;
+        
+        class PSDPharmacophoreByteBufferReader : private Base::ControlParameterContainer
         {
 
-            const std::string MOL_TABLE_NAME       = "molecules";
-            const std::string PHARM_TABLE_NAME     = "pharmacophores";
-            const std::string FTR_COUNT_TABLE_NAME = "ftr_counts";
+          public:
+            PSDPharmacophoreByteBufferReader();
 
-            const std::string MOL_ID_COLUMN_NAME       = "mol_id";
-            const std::string MOL_HASH_COLUMN_NAME     = "mol_hash";
-            const std::string MOL_DATA_COLUMN_NAME     = "mol_data";
-            const std::string MOL_CONF_IDX_COLUMN_NAME = "mol_conf_idx";
+            ~PSDPharmacophoreByteBufferReader();
 
-            const std::string PHARM_DATA_COLUMN_NAME = "pharm_data";
+            void readPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm);
 
-            const std::string FTR_TYPE_COLUMN_NAME  = "ftr_type";
-            const std::string FTR_COUNT_COLUMN_NAME = "ftr_count";
-        } // namespace SQLScreeningDB
+          private:
+            typedef std::unique_ptr<CDFDataReader> CDFDataReaderPtr;
+            
+            CDFDataReaderPtr cdfReader;
+        };
     } // namespace Pharm
 } // namespace CDPL
 
-#endif // CDPL_PHARM_SQLSCREENINGDBMETADATA_HPP
+#endif // CDPL_PHARM_PSDPHARMACOPHOREBYTEBUFFERREADER_HPP
