@@ -24,11 +24,19 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
+#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 #include "CDFDataReader.hpp"
 #include "PSDPharmacophoreByteBufferReader.hpp"
+#include "PSDPharmacophoreDataFormat.hpp"
+#include "PSDDataIOUtilities.hpp"
 
 
 using namespace CDPL;
@@ -44,8 +52,28 @@ Pharm::PSDPharmacophoreByteBufferReader::~PSDPharmacophoreByteBufferReader()
 
 void Pharm::PSDPharmacophoreByteBufferReader::readPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm)
 {
-    if (!cdfReader)
-        cdfReader.reset(new CDFDataReader(*this));
+    if (containsCDFData(byte_buf)) {
+        if (!cdfReader)
+            cdfReader.reset(new CDFDataReader(*this));
 
-    cdfReader->readPharmacophore(pharm, byte_buf);
+        cdfReader->readPharmacophore(pharm, byte_buf);
+        return;
+    }
+
+    using namespace PSDPharmacophoreDataFormat;
+
+    std::uint8_t tmp;
+
+    byte_buf.setIOPointer(0);
+    byte_buf.getInt(tmp);
+
+    if (tmp != FORMAT_ID)
+        throw Base::IOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format");
+
+    byte_buf.getInt(tmp);
+
+    if ((tmp & VERSION_MASK) != CURR_VERSION)
+        throw Base::IOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format version");
+
+    
 } 

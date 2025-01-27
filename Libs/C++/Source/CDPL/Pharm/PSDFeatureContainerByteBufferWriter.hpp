@@ -26,6 +26,7 @@
 #define CDPL_PHARM_PSDFEATURECONTAINERBYTEBUFFERWRITER_HPP
 
 #include <memory>
+#include <vector>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
@@ -57,8 +58,10 @@ namespace CDPL
 
           private:
             typedef std::unique_ptr<CDFDataWriter> CDFDataWriterPtr;
-            
+            typedef std::vector<double>            CoordinatesArray;
+
             CDFDataWriterPtr cdfWriter;
+            CoordinatesArray ftrPosCoords;
         };
     } // namespace Pharm
 } // namespace CDPL
