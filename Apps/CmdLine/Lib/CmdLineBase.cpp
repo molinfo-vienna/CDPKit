@@ -140,6 +140,8 @@ namespace
     const std::string PURPLE("\033[35m");
     const std::string GREEN("\033[32m");
     const std::string DEF_COLOR("\033[39m");
+
+    const char* DEF_COPYRIGHT = "2003 Thomas Seidel";
 }
 
 
@@ -305,7 +307,7 @@ const char* CmdLineBase::getProgVersion() const
 
 const char* CmdLineBase::getProgCopyright() const
 {
-    return "Thomas Seidel";
+    return DEF_COPYRIGHT;
 }
 
 std::string CmdLineBase::getProgTitleString() const
