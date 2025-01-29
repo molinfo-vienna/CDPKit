@@ -24,11 +24,22 @@
 
 #include "StaticInit.hpp"
 
+#include <cstdint>
+
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/CDFDataReader.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 #include "PSDMoleculeByteBufferReader.hpp"
+#include "PSDMoleculeDataFormat.hpp"
+#include "PSDDataIOUtilities.hpp"
 
 
 using namespace CDPL;
@@ -44,8 +55,38 @@ Pharm::PSDMoleculeByteBufferReader::~PSDMoleculeByteBufferReader()
 
 void Pharm::PSDMoleculeByteBufferReader::readMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol)
 {
-    if (!cdfReader)
-        cdfReader.reset(new Chem::CDFDataReader(*this));
+    try {
+        doReadMolecule(byte_buf, mol);
 
-    cdfReader->readMolecule(mol, byte_buf);
+    } catch (const PSDIOError& e) {
+        throw e;
+
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMoleculeByteBufferReader: reading molecule data failed: ") + e.what());
+    }  
 } 
+
+void Pharm::PSDMoleculeByteBufferReader::doReadMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol)
+{
+    if (containsCDFData(byte_buf)) {
+        if (!cdfReader)
+            cdfReader.reset(new Chem::CDFDataReader(*this));
+
+        if (!cdfReader->readMolecule(mol, byte_buf))
+            throw PSDIOError("PSDMoleculeByteBufferReader: reading molecule data failed");
+
+        return;
+    }
+
+    using namespace PSDMoleculeDataFormat;
+
+    std::uint8_t tmp = 0;
+
+    byte_buf.setIOPointer(0);
+    byte_buf.getInt(tmp);
+    
+    if (tmp != FORMAT_ID)
+        throw PSDIOError("PSDMoleculeByteBufferReader: invalid molecule data format");
+
+    // TODO
+}

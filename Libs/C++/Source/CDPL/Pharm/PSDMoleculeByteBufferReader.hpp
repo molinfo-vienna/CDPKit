@@ -26,6 +26,7 @@
 #define CDPL_PHARM_PSDMOLECULEBYTEBUFFERREADER_HPP
 
 #include <memory>
+#include <string>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
@@ -60,9 +61,12 @@ namespace CDPL
             void readMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol);
 
           private:
+            void doReadMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol);
+            
             typedef std::unique_ptr<Chem::CDFDataReader> CDFDataReaderPtr;
             
             CDFDataReaderPtr cdfReader;
+            std::string      tmpString;
         };
     } // namespace Pharm
 } // namespace CDPL

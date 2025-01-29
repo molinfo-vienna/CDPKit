@@ -67,20 +67,6 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
     byte_buf.resize(0);
     byte_buf.setIOPointer(0);
     byte_buf.putInt(FORMAT_ID, false);
-    
-    std::uint32_t ftr_cnt = boost::numeric_cast<std::uint32_t>(cntnr.getNumFeatures());
-    std::uint8_t ftr_cnt_stor_size = 0;
-    
-    if (ftr_cnt > 0) {
-        byte_buf.setIOPointer(2);
-
-        ftr_cnt_stor_size = byte_buf.putInt(ftr_cnt, true);
-
-        byte_buf.setIOPointer(1);
-    }
-
-    byte_buf.putInt(std::uint8_t(CURR_VERSION + (ftr_cnt_stor_size << FEATURE_COUNT_BYTE_COUNT_SHIFT)), false);
-    byte_buf.setIOPointer(2 + ftr_cnt_stor_size);
 
     std::uint32_t name_len = 0; 
     std::uint8_t name_len_sto_size = 0;
@@ -89,68 +75,68 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
         auto& name = getName(cntnr);
 
         if (!name.empty()) {
-            name_len = name.size();
-            auto saved_pos = byte_buf.getIOPointer();
-
-            byte_buf.setIOPointer(saved_pos + 1);
+            name_len = boost::numeric_cast<std::uint32_t>(name.size());
+            byte_buf.setIOPointer(2);
 
             name_len_sto_size = byte_buf.putInt(name_len, true);
 
             byte_buf.putBytes(name.c_str(), name_len);
-            byte_buf.setIOPointer(saved_pos);
+            byte_buf.setIOPointer(1);
         }
     }
+
+    byte_buf.putInt(std::uint8_t(CURR_VERSION + (name_len_sto_size << NAME_LENGTH_BYTE_COUNT_SHIFT)), false);
+    
+    std::uint32_t ftr_cnt = boost::numeric_cast<std::uint32_t>(cntnr.getNumFeatures());
+
+    if (ftr_cnt == 0)
+        return;
 
     double pos_trans_vec[3] = { 0.0 };
     double pos_scaling_fact = 1.0;
     std::uint8_t trans_flags = 0;
     
-    if (ftr_cnt > 0) {
-        ftrPosCoords.clear();
+    ftrPosCoords.clear();
 
-        for (auto& ftr : cntnr) {
-            if (!Chem::has3DCoordinates(ftr))
-                continue;
+    for (auto& ftr : cntnr) {
+        if (!Chem::has3DCoordinates(ftr))
+            continue;
 
-            auto& coords = Chem::get3DCoordinates(ftr);
+        auto& coords = Chem::get3DCoordinates(ftr);
 
-            for (int i = 0; i < 3; i++) 
-                ftrPosCoords.push_back(coords(i));
-        }
+        for (int i = 0; i < 3; i++) 
+            ftrPosCoords.push_back(coords(i));
+    }
 
-        calcCoordsTransform(ftrPosCoords, pos_trans_vec, pos_scaling_fact, Feature::POSITION_PRECISION);
+    calcCoordsTransform(ftrPosCoords, pos_trans_vec, pos_scaling_fact, Feature::POSITION_PRECISION);
     
-        if (pos_trans_vec[0] != 0.0)
-            trans_flags |= FEATURE_X_POS_TRANSLATION_FLAG;
+    byte_buf.setIOPointer(2 + name_len_sto_size + name_len + 1);
 
-        if (pos_trans_vec[1] != 0.0)
-            trans_flags |= FEATURE_Y_POS_TRANSLATION_FLAG;
+    std::uint8_t ftr_cnt_stor_size = byte_buf.putInt(ftr_cnt, true);
 
-        if (pos_trans_vec[2] != 0.0)
-            trans_flags |= FEATURE_Z_POS_TRANSLATION_FLAG;
-
-        if (pos_scaling_fact != 1.0)
-            trans_flags |= FEATURE_POS_SCALING_FACTOR_FLAG;
+    if (pos_trans_vec[0] != 0.0) {
+        trans_flags |= FEATURE_X_POS_TRANSLATION_FLAG;
+        byte_buf.putFloat(float(pos_trans_vec[0]));
     }
     
-    byte_buf.putInt(std::uint8_t(name_len_sto_size + trans_flags), false);
-
-    if (ftr_cnt == 0)
-        return;
-
-    byte_buf.setIOPointer(byte_buf.getIOPointer() + name_len_sto_size + name_len);
-    
-    if (trans_flags & FEATURE_X_POS_TRANSLATION_FLAG)
-        byte_buf.putFloat(float(pos_trans_vec[0]));
-
-    if (trans_flags & FEATURE_Y_POS_TRANSLATION_FLAG)
+    if (pos_trans_vec[1] != 0.0) {
+        trans_flags |= FEATURE_Y_POS_TRANSLATION_FLAG;
         byte_buf.putFloat(float(pos_trans_vec[1]));
-
-    if (trans_flags & FEATURE_Z_POS_TRANSLATION_FLAG)
+    }
+    
+    if (pos_trans_vec[2] != 0.0) {
+        trans_flags |= FEATURE_Z_POS_TRANSLATION_FLAG;
         byte_buf.putFloat(float(pos_trans_vec[2]));
-
-    if (trans_flags & FEATURE_POS_SCALING_FACTOR_FLAG)
+    }
+    
+    if (pos_scaling_fact != 1.0) {
+        trans_flags |= FEATURE_POS_SCALING_FACTOR_FLAG;
         byte_buf.putFloat(float(pos_scaling_fact));
+    }
+    
+    byte_buf.setIOPointer(2 + name_len_sto_size + name_len);
+    byte_buf.putInt(std::uint8_t(ftr_cnt_stor_size + trans_flags), false);
+    byte_buf.setIOPointer(byte_buf.getSize());
 
     for (auto& ftr : cntnr) {
         std::uint8_t prop_flags = 0;

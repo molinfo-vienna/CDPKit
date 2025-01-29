@@ -42,11 +42,11 @@ namespace CDPL
             constexpr std::uint8_t CURR_VERSION = 0;
             constexpr std::uint8_t VERSION_MASK = 0x0f;
 
-            constexpr std::uint8_t FEATURE_COUNT_BYTE_COUNT_MASK  = 0xf0;
-            constexpr unsigned int FEATURE_COUNT_BYTE_COUNT_SHIFT = 4;
-            
-            constexpr std::uint8_t NAME_LENGTH_BYTE_COUNT_MASK  = 0x0f;
+            constexpr std::uint8_t NAME_LENGTH_BYTE_COUNT_MASK  = 0xf0;
+            constexpr unsigned int NAME_LENGTH_BYTE_COUNT_SHIFT = 4;
 
+            constexpr std::uint8_t FEATURE_COUNT_BYTE_COUNT_MASK  = 0x0f;
+            
             constexpr std::uint8_t FEATURE_X_POS_TRANSLATION_FLAG  = 0x10;
             constexpr std::uint8_t FEATURE_Y_POS_TRANSLATION_FLAG  = 0x20;
             constexpr std::uint8_t FEATURE_Z_POS_TRANSLATION_FLAG  = 0x40;

@@ -37,7 +37,18 @@ namespace CDPL
         namespace PSDMoleculeDataFormat
         {
 
+            constexpr std::uint8_t FORMAT_ID = 'M';
 
+            constexpr std::uint8_t CURR_VERSION = 0;
+            constexpr std::uint8_t VERSION_MASK = 0x0f;
+
+            namespace Atom
+            {
+            }
+
+            namespace Bond
+            {
+            }
         } // namespace PSDMoleculeDataFormat
     } // namespace Pharm
 } // namespace CDPL

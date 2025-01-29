@@ -24,11 +24,24 @@
 
 #include "StaticInit.hpp"
 
+#include <cstdint>
+
+#include <boost/numeric/conversion/cast.hpp>
+
+#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/CDFDataWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 #include "PSDMolecularGraphByteBufferWriter.hpp"
+#include "PSDMoleculeDataFormat.hpp"
+#include "PSDDataIOUtilities.hpp"
 
 
 using namespace CDPL;
@@ -45,8 +58,25 @@ Pharm::PSDMolecularGraphByteBufferWriter::~PSDMolecularGraphByteBufferWriter()
 
 void Pharm::PSDMolecularGraphByteBufferWriter::writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf)
 {
-    if (!cdfWriter)
-        cdfWriter.reset(new Chem::CDFDataWriter(*this));
+    try {
+        
+        if (!cdfWriter)
+            cdfWriter.reset(new Chem::CDFDataWriter(*this));
 
-    cdfWriter->writeMolGraph(molgraph, byte_buf);
+        cdfWriter->writeMolGraph(molgraph, byte_buf);
+        
+        //doWriteMolecularGraph(molgraph, byte_buf);
+
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMolecularGraphByteBufferWriter: writing molecule data failed: ") + e.what());
+    }
 } 
+
+void Pharm::PSDMolecularGraphByteBufferWriter::doWriteMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf)
+{
+    using namespace PSDMoleculeDataFormat;
+
+    byte_buf.resize(0);
+    byte_buf.setIOPointer(0);
+    byte_buf.putInt(FORMAT_ID, false);
+}

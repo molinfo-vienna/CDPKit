@@ -92,15 +92,10 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
     if ((tmp & VERSION_MASK) != CURR_VERSION) // so far there is only one version
         throw PSDIOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format version");
 
-    std::uint32_t ftr_count = 0;
-
-    byte_buf.getInt(ftr_count, (tmp & FEATURE_COUNT_BYTE_COUNT_MASK) >> FEATURE_COUNT_BYTE_COUNT_SHIFT);
-    byte_buf.getInt(tmp);
-
-    if ((tmp & NAME_LENGTH_BYTE_COUNT_MASK) > 0) {
+    if ((tmp & NAME_LENGTH_BYTE_COUNT_MASK)) {
         std::uint32_t name_len = 0;
 
-        byte_buf.getInt(name_len, tmp & NAME_LENGTH_BYTE_COUNT_MASK);
+        byte_buf.getInt(name_len, (tmp & NAME_LENGTH_BYTE_COUNT_MASK) >> NAME_LENGTH_BYTE_COUNT_SHIFT);
 
         pharmName.resize(name_len);
 
@@ -109,9 +104,14 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
         setName(pharm, pharmName);
     }
 
-    if (ftr_count == 0)
+    if (byte_buf.getIOPointer() == byte_buf.getSize())
         return;
 
+    std::uint32_t ftr_count = 0;
+    
+    byte_buf.getInt(tmp);
+    byte_buf.getInt(ftr_count, tmp & FEATURE_COUNT_BYTE_COUNT_MASK);
+    
     float pos_trans_vec[3] = { 0.0f };
     float pos_scaling_fact = 1.0f;
 
