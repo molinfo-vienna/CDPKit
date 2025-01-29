@@ -24,15 +24,18 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/ControlParameterFunctions.hpp"
+#include <cstdint>
+
+#include <boost/numeric/conversion/cast.hpp>
+
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
-#include "CDFDataWriter.hpp"
 #include "PSDFeatureContainerByteBufferWriter.hpp"
 #include "PSDPharmacophoreDataFormat.hpp"
 #include "PSDDataIOUtilities.hpp"
@@ -42,42 +45,45 @@ using namespace CDPL;
 
 
 Pharm::PSDFeatureContainerByteBufferWriter::PSDFeatureContainerByteBufferWriter()
-{
-    setStrictErrorCheckingParameter(*this, true);
-    setCDFOutputSinglePrecisionFloatsParameter(*this, true);
-}
+{}
 
 Pharm::PSDFeatureContainerByteBufferWriter::~PSDFeatureContainerByteBufferWriter()
 {}
 
 void Pharm::PSDFeatureContainerByteBufferWriter::writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& byte_buf)
 {
-    if (!cdfWriter)
-        cdfWriter.reset(new CDFDataWriter(*this));
+    try {
+        doWriteFeatureContainer(cntnr, byte_buf);
 
-    cdfWriter->writeFeatureContainer(cntnr, byte_buf);
-/*
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDFeatureContainerByteBufferWriter: writing pharmacophore data failed: ") + e.what());
+    }
+}
+
+void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& byte_buf)
+{
     using namespace PSDPharmacophoreDataFormat;
 
     byte_buf.resize(0);
+    byte_buf.setIOPointer(0);
     byte_buf.putInt(FORMAT_ID, false);
     
-    std::uint64_t ftr_cnt = cntnr.getNumFeatures();
-    std::uint8_t ftr_cnt_val_size = 0;
+    std::uint32_t ftr_cnt = boost::numeric_cast<std::uint32_t>(cntnr.getNumFeatures());
+    std::uint8_t ftr_cnt_stor_size = 0;
     
     if (ftr_cnt > 0) {
+        byte_buf.setIOPointer(2);
+
+        ftr_cnt_stor_size = byte_buf.putInt(ftr_cnt, true);
+
         byte_buf.setIOPointer(1);
-
-        ftr_cnt_val_size = byte_buf.putInt(ftr_cnt, true);
-
-        byte_buf.setIOPointer(0);
     }
 
-    byte_buf.putInt(std::uint8_t(CURR_VERSION + (ftr_cnt_val_size << FEATURE_COUNT_BYTE_COUNT_SHIFT)), false);
-    byte_buf.setIOPointer(1 + ftr_cnt_val_size);
+    byte_buf.putInt(std::uint8_t(CURR_VERSION + (ftr_cnt_stor_size << FEATURE_COUNT_BYTE_COUNT_SHIFT)), false);
+    byte_buf.setIOPointer(2 + ftr_cnt_stor_size);
 
-    std::uint64_t name_len = 0; 
-    std::uint8_t name_len_val_size = 0;
+    std::uint32_t name_len = 0; 
+    std::uint8_t name_len_sto_size = 0;
     
     if (hasName(cntnr)) {
         auto& name = getName(cntnr);
@@ -88,7 +94,7 @@ void Pharm::PSDFeatureContainerByteBufferWriter::writeFeatureContainer(const Fea
 
             byte_buf.setIOPointer(saved_pos + 1);
 
-            name_len_val_size = byte_buf.putInt(name_len, true);
+            name_len_sto_size = byte_buf.putInt(name_len, true);
 
             byte_buf.putBytes(name.c_str(), name_len);
             byte_buf.setIOPointer(saved_pos);
@@ -97,7 +103,8 @@ void Pharm::PSDFeatureContainerByteBufferWriter::writeFeatureContainer(const Fea
 
     double pos_trans_vec[3] = { 0.0 };
     double pos_scaling_fact = 1.0;
-
+    std::uint8_t trans_flags = 0;
+    
     if (ftr_cnt > 0) {
         ftrPosCoords.clear();
 
@@ -114,37 +121,37 @@ void Pharm::PSDFeatureContainerByteBufferWriter::writeFeatureContainer(const Fea
         calcCoordsTransform(ftrPosCoords, pos_trans_vec, pos_scaling_fact, Feature::POSITION_PRECISION);
     
         if (pos_trans_vec[0] != 0.0)
-            name_len_val_size |= FEATURE_X_POS_TRANSLATION_FLAG;
+            trans_flags |= FEATURE_X_POS_TRANSLATION_FLAG;
 
         if (pos_trans_vec[1] != 0.0)
-            name_len_val_size |= FEATURE_Y_POS_TRANSLATION_FLAG;
+            trans_flags |= FEATURE_Y_POS_TRANSLATION_FLAG;
 
         if (pos_trans_vec[2] != 0.0)
-            name_len_val_size |= FEATURE_Z_POS_TRANSLATION_FLAG;
+            trans_flags |= FEATURE_Z_POS_TRANSLATION_FLAG;
 
         if (pos_scaling_fact != 1.0)
-            name_len_val_size |= FEATURE_POS_SCALING_FACTOR_FLAG;
+            trans_flags |= FEATURE_POS_SCALING_FACTOR_FLAG;
     }
     
-    byte_buf.putInt(name_len_val_size, false);
+    byte_buf.putInt(std::uint8_t(name_len_sto_size + trans_flags), false);
 
     if (ftr_cnt == 0)
         return;
 
-    byte_buf.setIOPointer(byte_buf.getIOPointer() + name_len_val_size + name_len);
+    byte_buf.setIOPointer(byte_buf.getIOPointer() + name_len_sto_size + name_len);
     
-    if (name_len_val_size & FEATURE_X_POS_TRANSLATION_FLAG)
+    if (trans_flags & FEATURE_X_POS_TRANSLATION_FLAG)
         byte_buf.putFloat(float(pos_trans_vec[0]));
 
-    if (name_len_val_size & FEATURE_Y_POS_TRANSLATION_FLAG)
+    if (trans_flags & FEATURE_Y_POS_TRANSLATION_FLAG)
         byte_buf.putFloat(float(pos_trans_vec[1]));
 
-    if (name_len_val_size & FEATURE_Z_POS_TRANSLATION_FLAG)
+    if (trans_flags & FEATURE_Z_POS_TRANSLATION_FLAG)
         byte_buf.putFloat(float(pos_trans_vec[2]));
 
-    if (name_len_val_size & FEATURE_POS_SCALING_FACTOR_FLAG)
+    if (trans_flags & FEATURE_POS_SCALING_FACTOR_FLAG)
         byte_buf.putFloat(float(pos_scaling_fact));
-    
+
     for (auto& ftr : cntnr) {
         std::uint8_t prop_flags = 0;
 
@@ -212,5 +219,4 @@ void Pharm::PSDFeatureContainerByteBufferWriter::writeFeatureContainer(const Fea
         if (prop_flags & Feature::HYDROPHOBICITY_FLAG)
             byte_buf.putInt(floatingToInt16FixedPoint(getHydrophobicity(ftr), Feature::HYDROPHOBICITY_PRECISION), false);
     }
-*/
 } 

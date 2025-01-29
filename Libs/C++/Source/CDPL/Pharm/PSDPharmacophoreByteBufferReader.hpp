@@ -26,6 +26,7 @@
 #define CDPL_PHARM_PSDPHARMACOPHOREBYTEBUFFERREADER_HPP
 
 #include <memory>
+#include <string>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
@@ -56,9 +57,12 @@ namespace CDPL
             void readPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm);
 
           private:
+            void doReadPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm);
+            
             typedef std::unique_ptr<CDFDataReader> CDFDataReaderPtr;
             
             CDFDataReaderPtr cdfReader;
+            std::string      pharmName;
         };
     } // namespace Pharm
 } // namespace CDPL

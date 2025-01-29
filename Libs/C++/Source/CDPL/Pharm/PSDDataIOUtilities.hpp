@@ -29,6 +29,7 @@
 #include <cmath>
 #include <limits>
 
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -155,6 +156,12 @@ namespace CDPL
 
             return (cdf_id == Internal::CDF::FORMAT_ID);
         }
+
+        struct PSDIOError : public Base::IOError
+        {
+            
+            PSDIOError(const std::string& msg): IOError(msg) {}
+        };
         
     } // namespace Pharm
 } // namespace CDPL

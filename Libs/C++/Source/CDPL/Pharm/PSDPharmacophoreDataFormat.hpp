@@ -38,9 +38,9 @@ namespace CDPL
         {
 
             constexpr std::uint8_t FORMAT_ID = 'P';
-            
+
             constexpr std::uint8_t CURR_VERSION = 0;
-            constexpr std::uint8_t VERSION_MASK  = 0x0f;
+            constexpr std::uint8_t VERSION_MASK = 0x0f;
 
             constexpr std::uint8_t FEATURE_COUNT_BYTE_COUNT_MASK  = 0xf0;
             constexpr unsigned int FEATURE_COUNT_BYTE_COUNT_SHIFT = 4;
@@ -66,9 +66,9 @@ namespace CDPL
 
                 constexpr std::uint8_t TYPE_MASK = 0x0f;
 
-                constexpr std::uint8_t GEOMETRY_MASK = 0xf0;
+                constexpr std::uint8_t GEOMETRY_MASK  = 0xf0;
                 constexpr unsigned int GEOMETRY_SHIFT = 4;
-                
+
                 constexpr unsigned int POSITION_PRECISION       = 10;
                 constexpr unsigned int ORIENTATION_PRECISION    = 14;
                 constexpr unsigned int TOLERANCE_PRECISION      = 11;
