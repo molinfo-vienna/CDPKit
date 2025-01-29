@@ -92,7 +92,7 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
     if ((tmp & VERSION_MASK) != CURR_VERSION) // so far there is only one version
         throw PSDIOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format version");
 
-    if ((tmp & NAME_LENGTH_BYTE_COUNT_MASK)) {
+    if (tmp & NAME_LENGTH_BYTE_COUNT_MASK) {
         std::uint32_t name_len = 0;
 
         byte_buf.getInt(name_len, (tmp & NAME_LENGTH_BYTE_COUNT_MASK) >> NAME_LENGTH_BYTE_COUNT_SHIFT);
@@ -156,7 +156,7 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
                 pos(j) = (int16FixedToFloatingPoint<double>(i16_val, Feature::POSITION_PRECISION) - pos_trans_vec[j]) / pos_scaling_fact;
             }
 
-            Chem::set3DCoordinates(ftr, pos);
+            set3DCoordinates(ftr, pos);
         }
        
         if (prop_flags & Feature::ORIENTATION_FLAG) {

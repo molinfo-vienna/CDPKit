@@ -99,10 +99,10 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
     ftrPosCoords.clear();
 
     for (auto& ftr : cntnr) {
-        if (!Chem::has3DCoordinates(ftr))
+        if (!has3DCoordinates(ftr))
             continue;
 
-        auto& coords = Chem::get3DCoordinates(ftr);
+        auto& coords = get3DCoordinates(ftr);
 
         for (int i = 0; i < 3; i++) 
             ftrPosCoords.push_back(coords(i));
@@ -110,7 +110,9 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
 
     calcCoordsTransform(ftrPosCoords, pos_trans_vec, pos_scaling_fact, Feature::POSITION_PRECISION);
     
-    byte_buf.setIOPointer(2 + name_len_sto_size + name_len + 1);
+    auto saved_io_ptr = byte_buf.getSize();
+    
+    byte_buf.setIOPointer(saved_io_ptr + 1);
 
     std::uint8_t ftr_cnt_stor_size = byte_buf.putInt(ftr_cnt, true);
 
@@ -134,7 +136,7 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
         byte_buf.putFloat(float(pos_scaling_fact));
     }
     
-    byte_buf.setIOPointer(2 + name_len_sto_size + name_len);
+    byte_buf.setIOPointer(saved_io_ptr);
     byte_buf.putInt(std::uint8_t(ftr_cnt_stor_size + trans_flags), false);
     byte_buf.setIOPointer(byte_buf.getSize());
 
