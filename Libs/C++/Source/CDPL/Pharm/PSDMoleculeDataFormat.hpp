@@ -42,6 +42,13 @@ namespace CDPL
             constexpr std::uint8_t CURR_VERSION = 0;
             constexpr std::uint8_t VERSION_MASK = 0x0f;
 
+            constexpr std::uint8_t NAME_LENGTH_BYTE_COUNT_MASK  = 0xf0;
+            constexpr unsigned int NAME_LENGTH_BYTE_COUNT_SHIFT = 4;
+
+            constexpr unsigned int SD_HEADER_LENGTH_BYTE_COUNT_MASK = 0x0f;
+            constexpr unsigned int SD_DATA_LENGTH_BYTE_COUNT_MASK   = 0xf0;
+            constexpr unsigned int SD_DATA_LENGTH_BYTE_COUNT_SHIFT  = 4;
+
             namespace Atom
             {
             }

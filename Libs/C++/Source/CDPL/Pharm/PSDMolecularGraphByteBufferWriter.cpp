@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/CDFDataWriter.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -59,12 +60,11 @@ Pharm::PSDMolecularGraphByteBufferWriter::~PSDMolecularGraphByteBufferWriter()
 void Pharm::PSDMolecularGraphByteBufferWriter::writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf)
 {
     try {
-        
         if (!cdfWriter)
             cdfWriter.reset(new Chem::CDFDataWriter(*this));
 
         cdfWriter->writeMolGraph(molgraph, byte_buf);
-        
+
         //doWriteMolecularGraph(molgraph, byte_buf);
 
     } catch (const std::exception& e) {
@@ -79,4 +79,68 @@ void Pharm::PSDMolecularGraphByteBufferWriter::doWriteMolecularGraph(const Chem:
     byte_buf.resize(0);
     byte_buf.setIOPointer(0);
     byte_buf.putInt(FORMAT_ID, false);
+
+    std::uint32_t name_len = 0; 
+    std::uint8_t name_len_sto_size = 0;
+    
+    if (hasName(molgraph)) {
+        auto& name = getName(molgraph);
+
+        if (!name.empty()) {
+            name_len = boost::numeric_cast<std::uint32_t>(name.size());
+            byte_buf.setIOPointer(2);
+
+            name_len_sto_size = byte_buf.putInt(name_len, true);
+
+            byte_buf.putBytes(name.c_str(), name_len);
+            byte_buf.setIOPointer(1);
+        }
+    }
+
+    std::uint32_t num_atoms = boost::numeric_cast<std::uint32_t>(molgraph.getNumAtoms());
+    
+    byte_buf.putInt(std::uint8_t(CURR_VERSION + (name_len_sto_size << NAME_LENGTH_BYTE_COUNT_SHIFT)), false);
+    byte_buf.setIOPointer(byte_buf.getSize());
+    
+    if (hasStructureData(molgraph)) {
+        auto& struct_data = getStructureData(molgraph);
+        std::uint32_t num_sd_entries = boost::numeric_cast<std::uint32_t>(struct_data->getSize());
+        auto saved_io_ptr = byte_buf.getSize();
+        
+        byte_buf.setIOPointer(saved_io_ptr + 1);
+        
+        std::uint8_t num_sd_entries_stor_size = byte_buf.putInt(num_sd_entries, true);
+
+        byte_buf.setIOPointer(saved_io_ptr);
+        byte_buf.putInt(num_sd_entries_stor_size, false);
+        byte_buf.setIOPointer(byte_buf.getSize());
+
+        for (auto& sd_entry : *struct_data) {
+            auto& header = sd_entry.getHeader();
+            auto& data = sd_entry.getData();
+            
+            saved_io_ptr = byte_buf.getSize();
+
+            byte_buf.setIOPointer(saved_io_ptr + 1);
+
+            std::uint8_t str_lens_stor_sizes =
+                (header.empty() ? 0 : byte_buf.putInt(boost::numeric_cast<std::uint32_t>(header.size()), true));
+
+            str_lens_stor_sizes +=
+                (data.empty() ? 0 : (byte_buf.putInt(boost::numeric_cast<std::uint32_t>(data.size()), true) << SD_DATA_LENGTH_BYTE_COUNT_SHIFT));
+
+            byte_buf.setIOPointer(saved_io_ptr);
+            byte_buf.putInt(str_lens_stor_sizes, false);
+            byte_buf.setIOPointer(byte_buf.getSize());
+
+            byte_buf.putBytes(header.c_str(), header.size());
+            byte_buf.putBytes(data.c_str(), data.size());
+        }
+        
+    } else if (num_atoms > 0)
+        byte_buf.putInt(std::uint8_t(0), false);
+
+     if (num_atoms == 0)
+         return;
+     
 }

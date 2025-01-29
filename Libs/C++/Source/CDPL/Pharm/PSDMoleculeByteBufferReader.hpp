@@ -66,7 +66,7 @@ namespace CDPL
             typedef std::unique_ptr<Chem::CDFDataReader> CDFDataReaderPtr;
             
             CDFDataReaderPtr cdfReader;
-            std::string      tmpString;
+            std::string      tmpString[2];
         };
     } // namespace Pharm
 } // namespace CDPL
