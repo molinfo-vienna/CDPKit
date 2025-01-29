@@ -1,3 +1,8 @@
+head/master:
+
+ - Fixed a bug in the command line tool 'StructGen' that lead to the termination of the process due to a Base::ItemNotFound
+   exception which was thrown when exceeding the set time limit without having generated a set of 3D atom coordinates
+
 V1.2.1:
  - New implementation of Greene's algorithm for the calculation of atom hydrophobicities which
    is now more correct and ~100 times faster than the previous one
