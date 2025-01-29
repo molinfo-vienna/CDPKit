@@ -198,7 +198,7 @@ private:
                         return false;
 
                     case ReturnCode::TIMEOUT:
-                        if (parent->hardTimeout) {
+                        if (parent->hardTimeout || ((molecule.getNumAtoms() > 0) && structGen.getCoordinates().isEmpty())) {
                             handleError(rec_idx, ret_code, true, false);
                             break;
                         }
@@ -264,8 +264,6 @@ private:
     void outputStructure(std::size_t rec_idx, unsigned int ret_code) {
         using namespace CDPL::ConfGen;
 
-        setMDLDimensionality(molecule, 3);
-
         if (verbLevel == VERBOSE || (verbLevel == INFO && ret_code == ReturnCode::TIMEOUT)) {
             logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": Success, " << 
                 timer.format<3>() << 's';
@@ -280,7 +278,9 @@ private:
 
         if (fixedSubstruct.getNumAtoms() > 0 && parent->fixedSubstructAlign)
             alignOnFixedSubstruct();
-   
+
+        setMDLDimensionality(molecule, 3);
+        
         parent->writeMolecule(molecule, false);
     }
 
