@@ -51,10 +51,24 @@ namespace CDPL
 
             namespace Atom
             {
+
+                constexpr std::uint8_t TYPE_FLAG                = 0x01;
+                constexpr std::uint8_t SYMBOL_FLAG              = 0x02;
+                constexpr std::uint8_t FORMAL_CHARGE_FLAG       = 0x04;
+                constexpr std::uint8_t UNPAIRED_ELEC_COUNT_FLAG = 0x08;
+                constexpr std::uint8_t STEREO_DESCRIPTOR_FLAG   = 0x10;
+
             }
 
             namespace Bond
             {
+
+                constexpr std::uint8_t ORDER_FLAG             = 0x01;
+                constexpr std::uint8_t STEREO_DESCRIPTOR_FLAG = 0x02;
+
+                constexpr unsigned int ATOM1_INDEX_BYTE_COUNT_MASK  = 0x0f;
+                constexpr unsigned int ATOM2_INDEX_BYTE_COUNT_MASK  = 0xf0;
+                constexpr unsigned int ATOM2_INDEX_BYTE_COUNT_SHIFT = 4;
             }
         } // namespace PSDMoleculeDataFormat
     } // namespace Pharm

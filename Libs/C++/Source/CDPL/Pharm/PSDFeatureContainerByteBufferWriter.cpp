@@ -80,7 +80,7 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
 
             name_len_sto_size = byte_buf.putInt(name_len, true);
 
-            byte_buf.putBytes(name.c_str(), name_len);
+            byte_buf.putBytes(name.data(), name_len);
             byte_buf.setIOPointer(1);
         }
     }
@@ -98,15 +98,9 @@ void Pharm::PSDFeatureContainerByteBufferWriter::doWriteFeatureContainer(const F
     
     ftrPosCoords.clear();
 
-    for (auto& ftr : cntnr) {
-        if (!has3DCoordinates(ftr))
-            continue;
-
-        auto& coords = get3DCoordinates(ftr);
-
-        for (int i = 0; i < 3; i++) 
-            ftrPosCoords.push_back(coords(i));
-    }
+    for (auto& ftr : cntnr)
+        if (has3DCoordinates(ftr))
+            ftrPosCoords.addElement(get3DCoordinates(ftr));
 
     calcCoordsTransform(ftrPosCoords, pos_trans_vec, pos_scaling_fact, Feature::POSITION_PRECISION);
     

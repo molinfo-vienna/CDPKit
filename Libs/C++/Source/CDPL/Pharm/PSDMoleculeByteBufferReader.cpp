@@ -101,7 +101,7 @@ void Pharm::PSDMoleculeByteBufferReader::doReadMolecule(Internal::ByteBuffer& by
 
         tmpString[0].resize(name_len);
 
-        byte_buf.getBytes(&tmpString[0][0], name_len);
+        byte_buf.getBytes(tmpString[0].data(), name_len);
 
         setName(mol, tmpString[0]);
     }
@@ -132,8 +132,8 @@ void Pharm::PSDMoleculeByteBufferReader::doReadMolecule(Internal::ByteBuffer& by
             tmpString[0].resize(header_len);
             tmpString[1].resize(data_len);
 
-            byte_buf.getBytes(&tmpString[0][0], header_len);
-            byte_buf.getBytes(&tmpString[1][0], data_len);
+            byte_buf.getBytes(tmpString[0].data(), header_len);
+            byte_buf.getBytes(tmpString[1].data(), data_len);
 
             struct_data->addEntry(tmpString[0], tmpString[1]);
         }

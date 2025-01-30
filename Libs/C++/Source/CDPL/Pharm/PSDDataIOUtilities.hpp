@@ -29,6 +29,7 @@
 #include <cmath>
 #include <limits>
 
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -81,21 +82,17 @@ namespace CDPL
             }
         }
 
-        template <typename T>
-        inline void calcCoordsTransform(const T& coords, typename T::value_type* trans, typename T::value_type& scaling_fact, unsigned int prec)
+        inline void calcCoordsTransform(const Math::Vector3DArray& coords, double* trans, double& scaling_fact, unsigned int prec)
         {
-            typedef typename T::value_type CVT;
-            typedef typename T::size_type SizeType;
-
-            constexpr CVT CVT_MAX = std::numeric_limits<CVT>::max();
-            constexpr CVT CVT_MIN = -CVT_MAX;
+            constexpr double DOUBLE_MAX = std::numeric_limits<double>::max();
+            constexpr double DOUBLE_MIN = -DOUBLE_MAX;
             
-            CVT bbox_min[3] = { CVT_MAX, CVT_MAX, CVT_MAX };
-            CVT bbox_max[3] = { CVT_MIN, CVT_MIN, CVT_MIN };
+            double bbox_min[3] = { DOUBLE_MAX, DOUBLE_MAX, DOUBLE_MAX };
+            double bbox_max[3] = { DOUBLE_MIN, DOUBLE_MIN, DOUBLE_MIN };
             
-            for (SizeType i = 0, num_triplets = coords.size() / 3; i < num_triplets; i++) {
-                for (SizeType j = 0; j < 3; j++) {
-                    auto c = coords[i * 3 + j];
+            for (std::size_t i = 0, num_vecs = coords.getSize(); i < num_vecs; i++) {
+                for (std::size_t j = 0; j < 3; j++) {
+                    auto c = coords[i](j);
 
                     if (std::isnan(c) || std::isinf(c))
                         continue;
@@ -108,26 +105,26 @@ namespace CDPL
                 }
             }
 
-            CVT max_bbox_dim{0};
+            double max_bbox_dim = 0.0;
 
-            for (SizeType i = 0; i < 3; i++)
+            for (std::size_t i = 0; i < 3; i++)
                 if (bbox_max[i] > bbox_min[i])
                     max_bbox_dim = std::max(max_bbox_dim, bbox_max[i] - bbox_min[i]);
 
             max_bbox_dim = std::round(max_bbox_dim * (1 << prec));
 
-            if (max_bbox_dim > (CVT(INT16_FIXED_POINT_MAX) - CVT(INT16_FIXED_POINT_MIN))) {
-                scaling_fact = (CVT(INT16_FIXED_POINT_MAX) - CVT(INT16_FIXED_POINT_MIN)) / max_bbox_dim;
+            if (max_bbox_dim > (double(INT16_FIXED_POINT_MAX) - double(INT16_FIXED_POINT_MIN))) {
+                scaling_fact = (double(INT16_FIXED_POINT_MAX) - double(INT16_FIXED_POINT_MIN)) / max_bbox_dim;
 
-                for (SizeType i = 0; i < 3; i++)
+                for (std::size_t i = 0; i < 3; i++)
                     if (bbox_max[i] >= bbox_min[i]) {
                         bbox_max[i] *= scaling_fact;
                         bbox_min[i] *= scaling_fact;
                     }
             } else
-                scaling_fact = CVT(1);
+                scaling_fact = 1.0;
 
-            for (SizeType i = 0; i < 3; i++) {
+            for (std::size_t i = 0; i < 3; i++) {
                 if (bbox_max[i] < bbox_min[i]) {
                     trans[i] = 0.0;
                     continue;

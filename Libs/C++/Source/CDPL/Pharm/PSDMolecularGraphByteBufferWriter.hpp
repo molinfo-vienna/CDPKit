@@ -26,9 +26,9 @@
 #define CDPL_PHARM_PSDMOLECULARGRAPHBYTEBUFFERWRITER_HPP
 
 #include <memory>
-#include <vector>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -45,6 +45,7 @@ namespace CDPL
         
         class CDFDataWriter;
         class MolecularGraph;
+        class StereoDescriptor;
     }
     
     namespace Pharm
@@ -63,11 +64,13 @@ namespace CDPL
           private:
             void doWriteMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf);
 
-            typedef std::unique_ptr<Chem::CDFDataWriter> CDFDataWriterPtr;
-            typedef std::vector<double>                  CoordinatesArray;
+            void outputStereoDescriptor(const Chem::StereoDescriptor& descr, const Chem::MolecularGraph& molgraph,
+                                        Internal::ByteBuffer& byte_buf) const;
 
-            CDFDataWriterPtr cdfWriter;
-            CoordinatesArray atomPosCoords;
+            typedef std::unique_ptr<Chem::CDFDataWriter> CDFDataWriterPtr;
+
+            CDFDataWriterPtr    cdfWriter;
+            Math::Vector3DArray atomPosCoords;
         };
     } // namespace Pharm
 } // namespace CDPL

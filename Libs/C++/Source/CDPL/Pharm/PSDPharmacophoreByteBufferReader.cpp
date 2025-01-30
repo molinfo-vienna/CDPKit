@@ -99,7 +99,7 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
 
         pharmName.resize(name_len);
 
-        byte_buf.getBytes(&pharmName[0], name_len);
+        byte_buf.getBytes(pharmName.data(), name_len);
 
         setName(pharm, pharmName);
     }

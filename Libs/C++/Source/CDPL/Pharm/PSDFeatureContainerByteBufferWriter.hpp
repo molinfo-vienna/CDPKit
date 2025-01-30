@@ -25,7 +25,7 @@
 #ifndef CDPL_PHARM_PSDFEATURECONTAINERBYTEBUFFERWRITER_HPP
 #define CDPL_PHARM_PSDFEATURECONTAINERBYTEBUFFERWRITER_HPP
 
-#include <vector>
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -55,9 +55,7 @@ namespace CDPL
           private:
             void doWriteFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& byte_buf);
             
-            typedef std::vector<double> CoordinatesArray;
-
-            CoordinatesArray ftrPosCoords;
+            Math::Vector3DArray ftrPosCoords;
         };
     } // namespace Pharm
 } // namespace CDPL
