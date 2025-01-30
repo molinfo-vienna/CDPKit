@@ -181,7 +181,7 @@ void CDPL::Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop
 
     str.resize(str_len);
 
-    bbuf.getBytes(&str[0], str_len);
+    bbuf.getBytes(str.data(), str_len);
 }
 
 void CDPL::Internal::CDFDataReaderBase::getString(std::string& str, ByteBuffer& bbuf) const
@@ -194,7 +194,7 @@ void CDPL::Internal::CDFDataReaderBase::getString(std::string& str, ByteBuffer& 
 
     str.resize(str_len);
 
-    bbuf.getBytes(&str[0], str_len);
+    bbuf.getBytes(str.data(), str_len);
 }
 
 unsigned int CDPL::Internal::CDFDataReaderBase::getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const
