@@ -104,8 +104,8 @@ namespace CDPL
             void readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf);
 
             std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
-            void        readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
-            void        readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
+            void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
+            void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
 
             void readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
