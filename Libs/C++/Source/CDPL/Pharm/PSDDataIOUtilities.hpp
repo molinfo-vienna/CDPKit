@@ -26,6 +26,7 @@
 #define CDPL_PHARM_PSDDATAIOUTILITIES_HPP
 
 #include <cstdint>
+#include <cstddef>
 #include <cmath>
 #include <limits>
 
@@ -90,18 +91,18 @@ namespace CDPL
             double bbox_min[3] = { DOUBLE_MAX, DOUBLE_MAX, DOUBLE_MAX };
             double bbox_max[3] = { DOUBLE_MIN, DOUBLE_MIN, DOUBLE_MIN };
             
-            for (std::size_t i = 0, num_vecs = coords.getSize(); i < num_vecs; i++) {
-                for (std::size_t j = 0; j < 3; j++) {
-                    auto c = coords[i](j);
+            for (auto& xyz : coords) {
+                for (std::size_t i = 0; i < 3; i++) {
+                    auto c = xyz(i);
 
                     if (std::isnan(c) || std::isinf(c))
                         continue;
 
-                    if (c > bbox_max[j])
-                        bbox_max[j] = c;
+                    if (c > bbox_max[i])
+                        bbox_max[i] = c;
 
-                    if (c < bbox_min[j])
-                        bbox_min[j] = c;
+                    if (c < bbox_min[i])
+                        bbox_min[i] = c;
                 }
             }
 

@@ -25,6 +25,7 @@
 #include "StaticInit.hpp"
 
 #include <cstdint>
+#include <cstddef>
 
 #include <boost/numeric/conversion/cast.hpp>
 
@@ -32,11 +33,12 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
-#include "CDPL/Chem/CDFDataWriter.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -48,205 +50,261 @@
 using namespace CDPL;
 
 
-Pharm::PSDMolecularGraphByteBufferWriter::PSDMolecularGraphByteBufferWriter()
-{
-    Chem::setStrictErrorCheckingParameter(*this, true);
-    Chem::setCDFOutputSinglePrecisionFloatsParameter(*this, true);
-}
-
-Pharm::PSDMolecularGraphByteBufferWriter::~PSDMolecularGraphByteBufferWriter()
-{}
-
-void Pharm::PSDMolecularGraphByteBufferWriter::writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf)
+void Pharm::PSDMolecularGraphByteBufferWriter::writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
     try {
-        if (!cdfWriter)
-            cdfWriter.reset(new Chem::CDFDataWriter(*this));
+        outputHeaderAndName(molgraph, bbuf);
+        outputStructureData(molgraph, bbuf);
 
-        cdfWriter->writeMolGraph(molgraph, byte_buf);
-
-        //doWriteMolecularGraph(molgraph, byte_buf);
+        if (molgraph.getNumAtoms() == 0)
+            return;
+    
+        outputAtoms(molgraph, bbuf);
+        outputConformers(molgraph, bbuf);
+        outputBonds(molgraph, bbuf);
 
     } catch (const std::exception& e) {
         throw Base::IOError(std::string("PSDMolecularGraphByteBufferWriter: writing molecule data failed: ") + e.what());
     }
 } 
 
-void Pharm::PSDMolecularGraphByteBufferWriter::doWriteMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf)
+void Pharm::PSDMolecularGraphByteBufferWriter::outputHeaderAndName(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
 {
     using namespace PSDMoleculeDataFormat;
 
-    byte_buf.resize(0);
-    byte_buf.setIOPointer(0);
-    byte_buf.putInt(FORMAT_ID, false);
+    // header
+    bbuf.resize(0);
+    bbuf.setIOPointer(0);
+    bbuf.putInt(FORMAT_ID, false);
 
+    // name
     std::uint32_t name_len = 0; 
     std::uint8_t name_len_sto_size = 0;
     
     if (hasName(molgraph)) {
         auto& name = getName(molgraph);
 
-        if (!name.empty()) {
-            name_len = boost::numeric_cast<std::uint32_t>(name.size());
-            byte_buf.setIOPointer(2);
+        name_len = boost::numeric_cast<std::uint32_t>(name.size());
+        bbuf.setIOPointer(2);
 
-            name_len_sto_size = byte_buf.putInt(name_len, true);
+        name_len_sto_size = bbuf.putInt(name_len, true);
 
-            byte_buf.putBytes(name.data(), name_len);
-            byte_buf.setIOPointer(1);
-        }
+        bbuf.putBytes(name.data(), name_len);
+        bbuf.setIOPointer(1);
     }
-
-    std::uint32_t num_atoms = boost::numeric_cast<std::uint32_t>(molgraph.getNumAtoms());
     
-    byte_buf.putInt(std::uint8_t(CURR_VERSION + (name_len_sto_size << NAME_LENGTH_BYTE_COUNT_SHIFT)), false);
-    byte_buf.setIOPointer(byte_buf.getSize());
+    bbuf.putInt(std::uint8_t(CURR_VERSION + (name_len_sto_size << NAME_LENGTH_BYTE_COUNT_SHIFT)), false);
+    bbuf.setIOPointer(bbuf.getSize());
+}
+
+void Pharm::PSDMolecularGraphByteBufferWriter::outputStructureData(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+{
+    using namespace PSDMoleculeDataFormat;
+
+    if (!hasStructureData(molgraph)) {
+        if (molgraph.getNumAtoms() > 0)
+            bbuf.putInt(std::uint8_t(0), false);
+
+        return;
+    }
     
-    if (hasStructureData(molgraph)) {
-        auto& struct_data = getStructureData(molgraph);
-        std::uint32_t num_sd_entries = boost::numeric_cast<std::uint32_t>(struct_data->getSize());
-        auto saved_io_ptr = byte_buf.getIOPointer();
-        
-        byte_buf.setIOPointer(saved_io_ptr + 1);
-        
-        std::uint8_t num_sd_entries_stor_size = byte_buf.putInt(num_sd_entries, true);
+    auto& struct_data = getStructureData(molgraph);
 
-        byte_buf.setIOPointer(saved_io_ptr);
-        byte_buf.putInt(num_sd_entries_stor_size, false);
-        byte_buf.setIOPointer(byte_buf.getSize());
+    bbuf.putCompressedInt(boost::numeric_cast<std::uint32_t>(struct_data->getSize()));
 
-        for (auto& sd_entry : *struct_data) {
-            auto& header = sd_entry.getHeader();
-            auto& data = sd_entry.getData();
-            
-            saved_io_ptr = byte_buf.getIOPointer();
+    for (auto& sd_entry : *struct_data) {
+        auto& header = sd_entry.getHeader();
+        auto& data = sd_entry.getData();
+        auto saved_io_ptr = bbuf.getIOPointer();
 
-            byte_buf.setIOPointer(saved_io_ptr + 1);
+        bbuf.setIOPointer(saved_io_ptr + 1);
 
-            std::uint8_t str_lens_stor_sizes =
-                (header.empty() ? 0 : byte_buf.putInt(boost::numeric_cast<std::uint32_t>(header.size()), true));
+        std::uint8_t str_lens_stor_sizes =
+            (header.empty() ? 0 : bbuf.putInt(boost::numeric_cast<std::uint32_t>(header.size()), true));
 
-            str_lens_stor_sizes +=
-                (data.empty() ? 0 : (byte_buf.putInt(boost::numeric_cast<std::uint32_t>(data.size()), true) << SD_DATA_LENGTH_BYTE_COUNT_SHIFT));
+        str_lens_stor_sizes +=
+            (data.empty() ? 0 : (bbuf.putInt(boost::numeric_cast<std::uint32_t>(data.size()), true) << SD_DATA_LENGTH_BYTE_COUNT_SHIFT));
 
-            byte_buf.setIOPointer(saved_io_ptr);
-            byte_buf.putInt(str_lens_stor_sizes, false);
-            byte_buf.setIOPointer(byte_buf.getSize());
+        bbuf.setIOPointer(saved_io_ptr);
+        bbuf.putInt(str_lens_stor_sizes, false);
+        bbuf.setIOPointer(bbuf.getSize());
 
-            byte_buf.putBytes(header.data(), header.size());
-            byte_buf.putBytes(data.data(), data.size());
+        bbuf.putBytes(header.data(), header.size());
+        bbuf.putBytes(data.data(), data.size());
+    }
+}
+
+void Pharm::PSDMolecularGraphByteBufferWriter::outputAtoms(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+{
+    using namespace PSDMoleculeDataFormat;
+
+    bbuf.putCompressedInt(boost::numeric_cast<std::uint32_t>(molgraph.getNumAtoms()));
+
+    for (auto& atom : molgraph.getAtoms()) {
+        std::uint8_t prop_flags = 0;
+
+        if (hasType(atom))
+            prop_flags |= Atom::TYPE_FLAG;
+
+        if (hasSymbol(atom))
+            prop_flags |= Atom::SYMBOL_FLAG;
+
+        if (hasFormalCharge(atom))
+            prop_flags |= Atom::FORMAL_CHARGE_FLAG;
+
+        if (hasStereoDescriptor(atom))
+            prop_flags |= Atom::STEREO_DESCRIPTOR_FLAG;
+         
+        bbuf.putInt(prop_flags, false);
+
+        if (prop_flags & Atom::TYPE_FLAG)
+            bbuf.putInt(boost::numeric_cast<std::uint8_t>(getType(atom)), false);
+
+        if (prop_flags & Atom::SYMBOL_FLAG) {
+            auto& symbol = getSymbol(atom);
+
+            bbuf.putInt(boost::numeric_cast<std::uint8_t>(symbol.length()), false);
+            bbuf.putBytes(symbol.data(), symbol.length());
         }
-        
-    } else if (num_atoms > 0)
-        byte_buf.putInt(std::uint8_t(0), false);
 
-     if (num_atoms == 0)
-         return;
+        if (prop_flags & Atom::FORMAL_CHARGE_FLAG)
+            bbuf.putInt(boost::numeric_cast<std::int8_t>(getFormalCharge(atom)), false);
 
-     auto saved_io_ptr = byte_buf.getIOPointer();
+        if (prop_flags & Atom::STEREO_DESCRIPTOR_FLAG)
+            outputStereoDescriptor(getStereoDescriptor(atom), molgraph, bbuf);
+    }
+}
 
-     byte_buf.setIOPointer(saved_io_ptr + 1);
+void Pharm::PSDMolecularGraphByteBufferWriter::outputConformers(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
+{
+    using namespace PSDMoleculeDataFormat;
 
-     std::uint8_t num_atoms_stor_size = byte_buf.putInt(num_atoms, true);
+    std::uint32_t num_confs = boost::numeric_cast<std::uint32_t>(getNumConformations(molgraph));
 
-     byte_buf.setIOPointer(saved_io_ptr);
-     byte_buf.putInt(num_atoms_stor_size, false);
-     byte_buf.setIOPointer(byte_buf.getSize());
+    if (num_confs > 0) {
+        bbuf.putCompressedInt(num_confs);
 
-     for (auto& atom : molgraph.getAtoms()) {
-         std::uint8_t prop_flags = 0;
-
-         if (hasType(atom))
-             prop_flags |= Atom::TYPE_FLAG;
-
-         if (hasSymbol(atom))
-             prop_flags |= Atom::SYMBOL_FLAG;
-
-         if (hasFormalCharge(atom))
-             prop_flags |= Atom::FORMAL_CHARGE_FLAG;
-
-         if (hasStereoDescriptor(atom))
-             prop_flags |= Atom::STEREO_DESCRIPTOR_FLAG;
+        for (std::size_t i = 0; i < num_confs; i++) {
+            getConformation(molgraph, i, coordinates);
+            outputCoordinates(bbuf);
+        }
          
-         byte_buf.putInt(prop_flags, false);
+    } else if (hasCoordinates(molgraph, 3)) {
+        bbuf.putInt(ATOM_3D_COORDS_MARKER, false);
 
-         if (prop_flags & Atom::TYPE_FLAG)
-             byte_buf.putInt(boost::numeric_cast<std::uint8_t>(getType(atom)), false);
+        get3DCoordinates(molgraph, coordinates);
+        outputCoordinates(bbuf);
+         
+    } else if (molgraph.getNumBonds() > 0)
+        bbuf.putInt(std::int8_t(0), false);
+}
 
-         if (prop_flags & Atom::SYMBOL_FLAG) {
-             auto& symbol = getSymbol(atom);
+void Pharm::PSDMolecularGraphByteBufferWriter::outputBonds(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+{
+    using namespace PSDMoleculeDataFormat;
+  
+    std::uint32_t num_bonds = boost::numeric_cast<std::uint32_t>(getCompleteBondCount(molgraph));
 
-             byte_buf.putInt(boost::numeric_cast<std::uint8_t>(symbol.length()), false);
-             byte_buf.putBytes(symbol.data(), symbol.length());
-         }
+    if (num_bonds == 0)
+        return;
 
-         if (prop_flags & Atom::FORMAL_CHARGE_FLAG)
-             byte_buf.putInt(boost::numeric_cast<std::int8_t>(getFormalCharge(atom)), false);
+    bbuf.putCompressedInt(num_bonds);
 
-         if (prop_flags & Atom::STEREO_DESCRIPTOR_FLAG)
-             outputStereoDescriptor(getStereoDescriptor(atom), molgraph, byte_buf);
-     }
+    for (auto& bond : molgraph.getBonds()) {
+        auto& atom1 = bond.getBegin();
 
-     std::uint32_t num_bonds = boost::numeric_cast<std::uint32_t>(getCompleteBondCount(molgraph));
+        if (!molgraph.containsAtom(atom1))
+            continue;
 
-     if (num_bonds == 0)
-         return;
+        auto& atom2 = bond.getEnd();
 
-     saved_io_ptr = byte_buf.getIOPointer();
+        if (!molgraph.containsAtom(atom2))
+            continue;
 
-     byte_buf.setIOPointer(saved_io_ptr + 1);
+        auto saved_io_ptr = bbuf.getIOPointer();
+
+        bbuf.setIOPointer(saved_io_ptr + 1);
      
-     std::uint8_t num_bonds_stor_size = byte_buf.putInt(num_bonds, true);
+        std::uint8_t atom_inds_stor_sizes =
+            bbuf.putInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(atom1)), true);
 
-     byte_buf.setIOPointer(saved_io_ptr);
-     byte_buf.putInt(num_bonds_stor_size, false);
-     byte_buf.setIOPointer(byte_buf.getSize());
+        atom_inds_stor_sizes +=
+            (bbuf.putInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(atom2)), true) << Bond::ATOM2_INDEX_BYTE_COUNT_SHIFT);
 
-     for (auto& bond : molgraph.getBonds()) {
-         auto& atom1 = bond.getBegin();
-
-         if (!molgraph.containsAtom(atom1))
-             continue;
-
-         auto& atom2 = bond.getEnd();
-
-         if (!molgraph.containsAtom(atom2))
-             continue;
-
-         saved_io_ptr = byte_buf.getIOPointer();
-
-         byte_buf.setIOPointer(saved_io_ptr + 1);
-     
-         std::uint8_t atom_inds_stor_sizes =
-             byte_buf.putInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(atom1)), true);
-
-         atom_inds_stor_sizes +=
-             (byte_buf.putInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(atom2)), true) << Bond::ATOM2_INDEX_BYTE_COUNT_SHIFT);
-
-         byte_buf.setIOPointer(saved_io_ptr);
-         byte_buf.putInt(atom_inds_stor_sizes, false);
-         byte_buf.setIOPointer(byte_buf.getSize());
+        bbuf.setIOPointer(saved_io_ptr);
+        bbuf.putInt(atom_inds_stor_sizes, false);
+        bbuf.setIOPointer(bbuf.getSize());
          
-         std::uint8_t prop_flags = 0;
+        std::uint8_t prop_flags = 0;
 
-         if (hasOrder(bond))
-             prop_flags |= Bond::ORDER_FLAG;
+        if (hasOrder(bond))
+            prop_flags |= Bond::ORDER_FLAG;
 
-         if (hasStereoDescriptor(bond))
-             prop_flags |= Bond::STEREO_DESCRIPTOR_FLAG;
+        if (hasStereoDescriptor(bond))
+            prop_flags |= Bond::STEREO_DESCRIPTOR_FLAG;
          
-         byte_buf.putInt(prop_flags, false);
+        bbuf.putInt(prop_flags, false);
 
-         if (prop_flags & Bond::ORDER_FLAG)
-             byte_buf.putInt(boost::numeric_cast<std::uint8_t>(getOrder(bond)), false);
+        if (prop_flags & Bond::ORDER_FLAG)
+            bbuf.putInt(boost::numeric_cast<std::uint8_t>(getOrder(bond)), false);
 
-         if (prop_flags & Bond::STEREO_DESCRIPTOR_FLAG)
-             outputStereoDescriptor(getStereoDescriptor(bond), molgraph, byte_buf);
-     }
+        if (prop_flags & Bond::STEREO_DESCRIPTOR_FLAG)
+            outputStereoDescriptor(getStereoDescriptor(bond), molgraph, bbuf);
+    }
 }
 
 void Pharm::PSDMolecularGraphByteBufferWriter::outputStereoDescriptor(const Chem::StereoDescriptor& descr, const Chem::MolecularGraph& molgraph,
-                                                                      Internal::ByteBuffer& byte_buf) const
+                                                                      Internal::ByteBuffer& bbuf) const
 {
-    // TODO
+    bbuf.putInt(boost::numeric_cast<std::uint8_t>(descr.getConfiguration()), false);
+
+    std::uint8_t num_ref_atoms = boost::numeric_cast<std::uint8_t>(descr.getNumReferenceAtoms());
+
+    bbuf.putInt(num_ref_atoms, false);
+
+    for (std::size_t i = 0; i < num_ref_atoms; i++)
+        bbuf.putCompressedInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(*descr.getReferenceAtoms()[i])));
+ }
+
+void Pharm::PSDMolecularGraphByteBufferWriter::outputCoordinates(Internal::ByteBuffer& bbuf) const
+{
+    using namespace PSDMoleculeDataFormat;
+
+    double trans_vec[3] = { 0.0 };
+    double scaling_fact = 1.0;
+    std::uint8_t trans_flags = 0;
+   
+    calcCoordsTransform(coordinates, trans_vec, scaling_fact, COORDS_PRECISION);
+
+    auto saved_io_ptr = bbuf.getSize();
+    
+    bbuf.setIOPointer(saved_io_ptr + 1);
+    
+    if (trans_vec[0] != 0.0) {
+        trans_flags |= X_COORD_TRANSLATION_FLAG;
+        bbuf.putFloat(float(trans_vec[0]));
+    }
+    
+    if (trans_vec[1] != 0.0) {
+        trans_flags |= Y_COORD_TRANSLATION_FLAG;
+        bbuf.putFloat(float(trans_vec[1]));
+    }
+    
+    if (trans_vec[2] != 0.0) {
+        trans_flags |= Z_COORD_TRANSLATION_FLAG;
+        bbuf.putFloat(float(trans_vec[2]));
+    }
+    
+    if (scaling_fact != 1.0) {
+        trans_flags |= COORDS_SCALING_FACTOR_FLAG;
+        bbuf.putFloat(float(scaling_fact));
+    }
+
+    bbuf.setIOPointer(saved_io_ptr);
+    bbuf.putInt(trans_flags, false);
+    bbuf.setIOPointer(bbuf.getSize());
+
+    for (auto& xyz : coordinates)
+          for (std::size_t i = 0; i < 3; i++)
+              bbuf.putInt(floatingToInt16FixedPoint(trans_vec[i] + xyz(i) * scaling_fact, COORDS_PRECISION), false);
 }

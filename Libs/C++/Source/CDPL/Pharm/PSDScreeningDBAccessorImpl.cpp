@@ -140,7 +140,8 @@ void Pharm::PSDScreeningDBAccessorImpl::getMolecule(std::size_t mol_idx, Chem::M
 
     const void* blob = sqlite3_column_blob(selMolDataStmt.get(), 0);
     std::size_t num_bytes = sqlite3_column_bytes(selMolDataStmt.get(), 0);
-    
+
+    byteBuffer.resize(0);
     byteBuffer.setIOPointer(0);
     byteBuffer.putBytes(reinterpret_cast<const char*>(blob), num_bytes);
 
@@ -263,7 +264,8 @@ void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, i
 
     const void* blob = sqlite3_column_blob(selPharmDataStmt.get(), 0);
     std::size_t num_bytes = sqlite3_column_bytes(selPharmDataStmt.get(), 0);
-    
+
+    byteBuffer.resize(0);
     byteBuffer.setIOPointer(0);
     byteBuffer.putBytes(reinterpret_cast<const char*>(blob), num_bytes);
 

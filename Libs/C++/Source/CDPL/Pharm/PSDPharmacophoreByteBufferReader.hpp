@@ -54,10 +54,11 @@ namespace CDPL
 
             ~PSDPharmacophoreByteBufferReader();
 
-            void readPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm);
+            void readPharmacophore(Internal::ByteBuffer& bbuf, Pharmacophore& pharm);
 
           private:
-            void doReadPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm);
+            void readHeaderAndName(Internal::ByteBuffer& bbuf, Pharmacophore& pharm);
+            void readFeatures(Internal::ByteBuffer& bbuf, Pharmacophore& pharm) const;
             
             typedef std::unique_ptr<CDFDataReader> CDFDataReaderPtr;
             

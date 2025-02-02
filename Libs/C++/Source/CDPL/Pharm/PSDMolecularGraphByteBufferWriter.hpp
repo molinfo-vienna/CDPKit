@@ -25,9 +25,6 @@
 #ifndef CDPL_PHARM_PSDMOLECULARGRAPHBYTEBUFFERWRITER_HPP
 #define CDPL_PHARM_PSDMOLECULARGRAPHBYTEBUFFERWRITER_HPP
 
-#include <memory>
-
-#include "CDPL/Base/ControlParameterContainer.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 
@@ -43,7 +40,6 @@ namespace CDPL
     namespace Chem
     {
         
-        class CDFDataWriter;
         class MolecularGraph;
         class StereoDescriptor;
     }
@@ -51,26 +47,24 @@ namespace CDPL
     namespace Pharm
     {
         
-        class PSDMolecularGraphByteBufferWriter : private Base::ControlParameterContainer
+        class PSDMolecularGraphByteBufferWriter
         {
 
           public:
-            PSDMolecularGraphByteBufferWriter();
-
-            ~PSDMolecularGraphByteBufferWriter();
-
-            void writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf);
+            void writeMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
           private:
-            void doWriteMolecularGraph(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& byte_buf);
-
+            void outputHeaderAndName(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+            void outputStructureData(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+            void outputAtoms(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+            void outputConformers(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+            void outputBonds(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+            
             void outputStereoDescriptor(const Chem::StereoDescriptor& descr, const Chem::MolecularGraph& molgraph,
-                                        Internal::ByteBuffer& byte_buf) const;
-
-            typedef std::unique_ptr<Chem::CDFDataWriter> CDFDataWriterPtr;
-
-            CDFDataWriterPtr    cdfWriter;
-            Math::Vector3DArray atomPosCoords;
+                                        Internal::ByteBuffer& bbuf) const;
+            void outputCoordinates(Internal::ByteBuffer& bbuf) const;
+            
+            Math::Vector3DArray coordinates;
         };
     } // namespace Pharm
 } // namespace CDPL

@@ -25,6 +25,7 @@
 #include "StaticInit.hpp"
 
 #include <cstdint>
+#include <cstddef>
 
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -52,10 +53,25 @@ Pharm::PSDPharmacophoreByteBufferReader::PSDPharmacophoreByteBufferReader()
 Pharm::PSDPharmacophoreByteBufferReader::~PSDPharmacophoreByteBufferReader()
 {}
 
-void Pharm::PSDPharmacophoreByteBufferReader::readPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm)
+void Pharm::PSDPharmacophoreByteBufferReader::readPharmacophore(Internal::ByteBuffer& bbuf, Pharmacophore& pharm)
 {
     try {
-        doReadPharmacophore(byte_buf, pharm);
+        if (containsCDFData(bbuf)) {
+            if (!cdfReader)
+                cdfReader.reset(new CDFDataReader(*this));
+
+            if (!cdfReader->readPharmacophore(pharm, bbuf))
+                throw PSDIOError("PSDPharmacophoreByteBufferReader: reading pharmacophore data failed");
+
+            return;
+        }
+
+        readHeaderAndName(bbuf, pharm);
+
+        if (bbuf.getIOPointer() == bbuf.getSize())
+            return;
+
+        readFeatures(bbuf, pharm);
 
     } catch (const PSDIOError& e) {
         throw e;
@@ -65,78 +81,73 @@ void Pharm::PSDPharmacophoreByteBufferReader::readPharmacophore(Internal::ByteBu
     }
 }
 
-void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::ByteBuffer& byte_buf, Pharmacophore& pharm)
+void Pharm::PSDPharmacophoreByteBufferReader::readHeaderAndName(Internal::ByteBuffer& bbuf, Pharmacophore& pharm)
 {
-    if (containsCDFData(byte_buf)) {
-        if (!cdfReader)
-            cdfReader.reset(new CDFDataReader(*this));
-
-        if (!cdfReader->readPharmacophore(pharm, byte_buf))
-            throw PSDIOError("PSDPharmacophoreByteBufferReader: reading pharmacophore data failed");
-
-        return;
-    }
-
     using namespace PSDPharmacophoreDataFormat;
-
+    
     std::uint8_t tmp = 0;
 
-    byte_buf.setIOPointer(0);
-    byte_buf.getInt(tmp);
+    // header
+    bbuf.setIOPointer(0);
+    bbuf.getInt(tmp);
     
     if (tmp != FORMAT_ID)
         throw PSDIOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format");
 
-    byte_buf.getInt(tmp);
+    bbuf.getInt(tmp);
 
     if ((tmp & VERSION_MASK) != CURR_VERSION) // so far there is only one version
         throw PSDIOError("PSDPharmacophoreByteBufferReader: invalid pharmacophore data format version");
 
+    // name
     if (tmp & NAME_LENGTH_BYTE_COUNT_MASK) {
         std::uint32_t name_len = 0;
 
-        byte_buf.getInt(name_len, (tmp & NAME_LENGTH_BYTE_COUNT_MASK) >> NAME_LENGTH_BYTE_COUNT_SHIFT);
+        bbuf.getInt(name_len, (tmp & NAME_LENGTH_BYTE_COUNT_MASK) >> NAME_LENGTH_BYTE_COUNT_SHIFT);
 
         pharmName.resize(name_len);
 
-        byte_buf.getBytes(pharmName.data(), name_len);
+        bbuf.getBytes(pharmName.data(), name_len);
 
         setName(pharm, pharmName);
     }
+}
 
-    if (byte_buf.getIOPointer() == byte_buf.getSize())
-        return;
-
-    std::uint32_t ftr_count = 0;
+void Pharm::PSDPharmacophoreByteBufferReader::readFeatures(Internal::ByteBuffer& bbuf, Pharmacophore& pharm) const
+{
+    using namespace PSDPharmacophoreDataFormat;
     
-    byte_buf.getInt(tmp);
-    byte_buf.getInt(ftr_count, tmp & FEATURE_COUNT_BYTE_COUNT_MASK);
+    std::uint8_t tmp;
+    std::uint32_t ftr_count = 0;
+
+    bbuf.getInt(tmp);
+    bbuf.getInt(ftr_count, tmp & FEATURE_COUNT_BYTE_COUNT_MASK);
     
     float pos_trans_vec[3] = { 0.0f };
     float pos_scaling_fact = 1.0f;
 
     if (tmp & FEATURE_X_POS_TRANSLATION_FLAG)
-        byte_buf.getFloat(pos_trans_vec[0]);
+        bbuf.getFloat(pos_trans_vec[0]);
 
     if (tmp & FEATURE_Y_POS_TRANSLATION_FLAG)
-        byte_buf.getFloat(pos_trans_vec[1]);
+        bbuf.getFloat(pos_trans_vec[1]);
     
     if (tmp & FEATURE_Z_POS_TRANSLATION_FLAG)
-        byte_buf.getFloat(pos_trans_vec[2]);
+        bbuf.getFloat(pos_trans_vec[2]);
 
     if (tmp & FEATURE_POS_SCALING_FACTOR_FLAG)
-        byte_buf.getFloat(pos_scaling_fact);
+        bbuf.getFloat(pos_scaling_fact);
 
-    for (std::uint32_t i = 0; i < ftr_count; i++) {
+    for (std::size_t i = 0; i < ftr_count; i++) {
         auto& ftr = pharm.addFeature();
         std::uint8_t prop_flags = 0;
 
-        byte_buf.getInt(prop_flags);
+        bbuf.getInt(prop_flags);
      
         if ((prop_flags & Feature::TYPE_FLAG) || (prop_flags & Feature::GEOMETRY_FLAG)) {
             std::uint8_t type_and_geo = 0;
 
-            byte_buf.getInt(type_and_geo);
+            bbuf.getInt(type_and_geo);
          
             if (prop_flags & Feature::TYPE_FLAG)
                 setType(ftr, type_and_geo & Feature::TYPE_MASK);
@@ -150,8 +161,8 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
         if (prop_flags & Feature::POSITION_FLAG) {
             Math::Vector3D pos;
 
-            for (int j = 0; j < 3; j++) {
-                byte_buf.getInt(i16_val);
+            for (std::size_t j = 0; j < 3; j++) {
+                bbuf.getInt(i16_val);
 
                 pos(j) = (int16FixedToFloatingPoint<double>(i16_val, Feature::POSITION_PRECISION) - pos_trans_vec[j]) / pos_scaling_fact;
             }
@@ -162,8 +173,8 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
         if (prop_flags & Feature::ORIENTATION_FLAG) {
             Math::Vector3D orient;
 
-            for (int j = 0; j < 3; j++) {
-                byte_buf.getInt(i16_val);
+            for (std::size_t j = 0; j < 3; j++) {
+                bbuf.getInt(i16_val);
 
                 orient(j) = int16FixedToFloatingPoint<double>(i16_val, Feature::ORIENTATION_PRECISION);
             }
@@ -172,25 +183,25 @@ void Pharm::PSDPharmacophoreByteBufferReader::doReadPharmacophore(Internal::Byte
         }
 
         if (prop_flags & Feature::TOLERANCE_FLAG) {
-            byte_buf.getInt(i16_val);
+            bbuf.getInt(i16_val);
 
             setTolerance(ftr, int16FixedToFloatingPoint<double>(i16_val, Feature::TOLERANCE_PRECISION));
         }
         
         if (prop_flags & Feature::LENGTH_FLAG) {
-            byte_buf.getInt(i16_val);
+            bbuf.getInt(i16_val);
 
             setLength(ftr, int16FixedToFloatingPoint<double>(i16_val, Feature::LENGTH_PRECISION));
         }
         
         if (prop_flags & Feature::WEIGHT_FLAG) {
-            byte_buf.getInt(i16_val);
+            bbuf.getInt(i16_val);
 
             setWeight(ftr, int16FixedToFloatingPoint<double>(i16_val, Feature::WEIGHT_PRECISION));
         }
         
         if (prop_flags & Feature::HYDROPHOBICITY_FLAG) {
-            byte_buf.getInt(i16_val);
+            bbuf.getInt(i16_val);
 
             setHydrophobicity(ftr, int16FixedToFloatingPoint<double>(i16_val, Feature::HYDROPHOBICITY_PRECISION));
         }

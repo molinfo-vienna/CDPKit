@@ -27,8 +27,11 @@
 
 #include <memory>
 #include <string>
+#include <cstddef>
+#include <vector>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -58,15 +61,46 @@ namespace CDPL
 
             ~PSDMoleculeByteBufferReader();
 
-            void readMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol);
+            void readMolecule(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
 
           private:
-            void doReadMolecule(Internal::ByteBuffer& byte_buf, Chem::Molecule& mol);
+            struct StereoDescr
+            {
+
+                StereoDescr(std::size_t obj_idx):
+                    objIndex(obj_idx) {}
+
+                std::size_t  objIndex;
+                unsigned int config;
+                std::size_t  numRefAtoms;
+                std::size_t  refAtomInds[4];
+            };
             
-            typedef std::unique_ptr<Chem::CDFDataReader> CDFDataReaderPtr;
-            
-            CDFDataReaderPtr cdfReader;
-            std::string      tmpString[2];
+            void readHeaderAndName(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
+            void readStructureData(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
+            void readAtoms(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
+            void readConformers(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
+            void readBonds(Internal::ByteBuffer& bbuf, Chem::Molecule& mol);
+
+            void readStereoDescriptor(StereoDescr& descr, Internal::ByteBuffer& bbuf) const;
+            void readCoordinates(std::size_t num_atoms, Internal::ByteBuffer& bbuf);
+
+            void setStereoDescriptors(Chem::Molecule& mol) const;
+
+            template <typename T>
+            void setStereoDescriptor(T& obj, const Chem::Molecule& mol, const StereoDescr& descr) const;
+
+            typedef std::unique_ptr<Chem::CDFDataReader>            CDFDataReaderPtr;
+            typedef std::vector<StereoDescr>                        StereoDescrList;
+            typedef std::vector<Math::Vector3DArray::SharedPointer> AtomCoordsArrayList;
+
+            CDFDataReaderPtr    cdfReader;
+            StereoDescrList     atomStereoDescrs;
+            StereoDescrList     bondStereoDescrs;
+            Math::Vector3DArray coordinates;
+            AtomCoordsArrayList atomCoordsArrays;
+            std::string         tmpString[2];
+            std::size_t         startAtomIdx;
         };
     } // namespace Pharm
 } // namespace CDPL

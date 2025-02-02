@@ -46,16 +46,13 @@ namespace CDPL
         {
 
           public:
-            PSDFeatureContainerByteBufferWriter();
-
-            ~PSDFeatureContainerByteBufferWriter();
-
-            void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& byte_buf);
+            void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
 
           private:
-            void doWriteFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& byte_buf);
+            void outputHeaderAndName(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+            void outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
             
-            Math::Vector3DArray ftrPosCoords;
+            Math::Vector3DArray coordinates;
         };
     } // namespace Pharm
 } // namespace CDPL

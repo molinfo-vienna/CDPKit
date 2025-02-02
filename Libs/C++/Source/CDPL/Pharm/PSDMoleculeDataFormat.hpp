@@ -49,6 +49,15 @@ namespace CDPL
             constexpr unsigned int SD_DATA_LENGTH_BYTE_COUNT_MASK   = 0xf0;
             constexpr unsigned int SD_DATA_LENGTH_BYTE_COUNT_SHIFT  = 4;
 
+            constexpr std::uint8_t ATOM_3D_COORDS_MARKER = 0xff;
+
+            constexpr unsigned int COORDS_PRECISION = 10;
+
+            constexpr std::uint8_t X_COORD_TRANSLATION_FLAG   = 0x10;
+            constexpr std::uint8_t Y_COORD_TRANSLATION_FLAG   = 0x20;
+            constexpr std::uint8_t Z_COORD_TRANSLATION_FLAG   = 0x40;
+            constexpr std::uint8_t COORDS_SCALING_FACTOR_FLAG = 0x80;
+
             namespace Atom
             {
 
@@ -57,7 +66,6 @@ namespace CDPL
                 constexpr std::uint8_t FORMAL_CHARGE_FLAG       = 0x04;
                 constexpr std::uint8_t UNPAIRED_ELEC_COUNT_FLAG = 0x08;
                 constexpr std::uint8_t STEREO_DESCRIPTOR_FLAG   = 0x10;
-
             }
 
             namespace Bond
