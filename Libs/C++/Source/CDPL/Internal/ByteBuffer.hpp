@@ -84,12 +84,18 @@ namespace CDPL
             template <typename T>
             std::size_t putInt(const T& value, bool compress);
 
+            template <typename T, typename BCT = std::uint8_t>
+            void putCompressedInt(const T& value);
+            
             template <typename T>
             void getInt(T& value);
 
             template <typename T>
             void getInt(T& value, std::size_t num_bytes);
 
+            template <typename T, typename BCT = std::uint8_t>
+            void getCompressedInt(T& value);
+  
             template <typename T>
             void putFloat(const T& value);
 
@@ -287,6 +293,22 @@ std::size_t CDPL::Internal::ByteBuffer::putInt(const T& value, bool compress)
     return putValueBytes(reinterpret_cast<const char*>(&value), sizeof(T), compress);
 }
 
+template <typename T, typename BCT>
+void CDPL::Internal::ByteBuffer::putCompressedInt(const T& value)
+{
+    auto old_io_pos = ioPointer++;
+
+    BCT byte_count = putInt(value, true);
+
+    auto new_io_pos = ioPointer;
+
+    ioPointer = old_io_pos;
+    
+    putInt(byte_count, false);
+
+    ioPointer = new_io_pos;
+}
+
 template <typename T>
 void CDPL::Internal::ByteBuffer::getInt(T& value)
 {
@@ -296,12 +318,21 @@ void CDPL::Internal::ByteBuffer::getInt(T& value)
 template <typename T>
 void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
 {
-    value     = T();
+    value = T();
     num_bytes = std::min(num_bytes, sizeof(T));
 
     getValueBytes(reinterpret_cast<char*>(&value), sizeof(T), num_bytes);
 }
 
+template <typename T, typename BCT>
+void CDPL::Internal::ByteBuffer::getCompressedInt(T& value)
+{
+    BCT byte_count = BCT();
+
+    getInt(byte_count);
+    getInt(value, byte_count);
+}
+  
 template <typename T>
 void CDPL::Internal::ByteBuffer::putFloat(const T& value)
 {
