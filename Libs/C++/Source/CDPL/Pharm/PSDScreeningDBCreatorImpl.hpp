@@ -55,6 +55,10 @@ namespace CDPL
           public:
             PSDScreeningDBCreatorImpl();
 
+            ~PSDScreeningDBCreatorImpl() {
+                close();
+            }
+            
             void open(const std::string& name, ScreeningDBCreator::Mode mode = ScreeningDBCreator::CREATE, bool allow_dup_entries = true);
 
             void close();
@@ -101,7 +105,7 @@ namespace CDPL
 
             void beginTransaction();
             void commitTransaction();
-
+       
             typedef std::unordered_multimap<std::uint64_t, std::int64_t> MolHashToIDMap;
             typedef std::unordered_set<std::uint64_t>                    MolHashSet;
 

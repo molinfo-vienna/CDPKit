@@ -71,16 +71,24 @@ namespace
         Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
         Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + " INTEGER, " + 
         Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + " INTEGER);";
+
+    const std::string CREATE_FTR_COUNT_TABLE_IDX_SQL = "CREATE INDEX IF NOT EXISTS " +
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_IDX_NAME + " ON " + 
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + "(" + 
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ");";
     
     const std::string DROP_FTR_COUNT_TABLE_SQL = "DROP TABLE IF EXISTS " + 
         Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + ";";
+
+    const std::string DROP_FTR_COUNT_TABLE_IDX_SQL = "DROP INDEX IF EXISTS " + 
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_IDX_NAME + ";";
 
     const std::string CREATE_TABLES_SQL = 
         CREATE_MOL_TABLE_SQL +
         CREATE_PHARM_TABLE_SQL +
         CREATE_FTR_COUNT_TABLE_SQL;
-    
-    const std::string DROP_TABLES_SQL = 
+        
+    const std::string DROP_TABLES_SQL =
         DROP_MOL_TABLE_SQL +
         DROP_PHARM_TABLE_SQL +
         DROP_FTR_COUNT_TABLE_SQL;
@@ -174,6 +182,7 @@ void Pharm::PSDScreeningDBCreatorImpl::open(const std::string& name, ScreeningDB
 
 void Pharm::PSDScreeningDBCreatorImpl::close()
 {
+    execStatements(CREATE_FTR_COUNT_TABLE_IDX_SQL);
     closeDBConnection();
 }
 
@@ -239,6 +248,7 @@ bool Pharm::PSDScreeningDBCreatorImpl::process(const Chem::MolecularGraph& molgr
         throw Base::IOError("PSDScreeningDBCreatorImpl: no open database connection");
 
     numProcessed++;
+
     std::uint64_t mol_hash = hashCalculator.calculate(molgraph);
 
     if (!allowDupEntries) {
@@ -357,6 +367,8 @@ void Pharm::PSDScreeningDBCreatorImpl::setupTables()
     beginTransaction();
     TransactionRollback trb(getDBConnection().get());
 
+    execStatements(DROP_FTR_COUNT_TABLE_IDX_SQL);
+    
     if (mode == ScreeningDBCreator::CREATE)
         execStatements(DROP_TABLES_SQL);
 

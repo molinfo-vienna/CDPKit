@@ -53,6 +53,10 @@ namespace CDPL
           public:
             PSDScreeningDBAccessorImpl();
 
+            ~PSDScreeningDBAccessorImpl() {
+                close();
+            }
+            
             void open(const std::string& name);
 
             void close();
@@ -86,6 +90,7 @@ namespace CDPL
 
             void initMolIdxIDMappings();
             void initPharmIdxMolIDConfIdxMappings();
+            void loadFeatureCounts(std::int64_t mol_id);
             void loadFeatureCounts();
 
             typedef std::vector<FeatureTypeHistogram>                                                 FeatureCountsArray;
@@ -99,8 +104,10 @@ namespace CDPL
             SQLite3StmtPointer               selPharmDataStmt;
             SQLite3StmtPointer               selMolIDStmt;
             SQLite3StmtPointer               selMolIDConfIdxStmt;
-            SQLite3StmtPointer               selFtrCountsStmt;
+            SQLite3StmtPointer               selAllFtrCountsStmt;
+            SQLite3StmtPointer               selMolIDFtrCountsStmt;
             FeatureCountsArray               featureCounts;
+            std::int64_t                     featureCountsMolID{0};
             MolIDArray                       molIdxToIDMap;
             MolIDToUIntMap                   molIDToIdxMap;
             MolIDToUIntMap                   molIDConfCountMap;

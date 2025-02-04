@@ -54,12 +54,22 @@ namespace
         Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + " FROM " +
         Pharm::PSDTableInfo::PHARM_TABLE_NAME + ";";
 
-    const std::string FTR_COUNT_TABLE_QUERY_SQL = "SELECT " +
+    const std::string COMPLETE_FTR_COUNT_TABLE_QUERY_SQL = "SELECT " +
         Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
         Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + ", " +
         Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + ", " +
         Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + " FROM " +
         Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + ";";
+
+    const std::string MOL_ID_FTR_COUNT_TABLE_QUERY_SQL = "SELECT " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::MOL_CONF_IDX_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_TYPE_COLUMN_NAME + ", " +
+        Pharm::PSDTableInfo::FTR_COUNT_COLUMN_NAME + " FROM " +
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + " WHERE " +
+        Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
+
+    const Pharm::FeatureTypeHistogram NO_FEATURE_COUNTS;
 }
 
 
@@ -158,7 +168,9 @@ void Pharm::PSDScreeningDBAccessorImpl::getPharmacophore(std::size_t pharm_idx, 
     if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
         throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
-    loadPharmacophore(pharmIdxToMolIDConfIdxMap[pharm_idx].first, pharmIdxToMolIDConfIdxMap[pharm_idx].second, pharm);
+    auto& entry = pharmIdxToMolIDConfIdxMap[pharm_idx]; 
+    
+    loadPharmacophore(entry.first, entry.second, pharm);
 } 
 
 void Pharm::PSDScreeningDBAccessorImpl::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm)
@@ -208,6 +220,25 @@ std::size_t Pharm::PSDScreeningDBAccessorImpl::getConformationIndex(std::size_t 
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t pharm_idx)
 {
+
+    if (!getDBConnection())
+        throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
+
+    initPharmIdxMolIDConfIdxMappings();
+
+    if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
+        throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
+
+    auto& entry = pharmIdxToMolIDConfIdxMap[pharm_idx];
+    
+    loadFeatureCounts(entry.first);
+
+    if (entry.second >= featureCounts.size())
+        return NO_FEATURE_COUNTS;
+    
+    return featureCounts[entry.second];
+
+/*  
     if (!getDBConnection())
         throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
@@ -217,10 +248,28 @@ const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeature
         throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
     return featureCounts[pharm_idx];
+*/ 
 }
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx)
 {
+
+    if (!getDBConnection())
+        throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
+
+    initMolIdxIDMappings();
+
+    if (mol_idx >= molIdxToIDMap.size())
+        throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
+
+    loadFeatureCounts(molIdxToIDMap[mol_idx]);
+    
+    if (mol_conf_idx >= featureCounts.size())
+        return NO_FEATURE_COUNTS;
+    
+    return featureCounts[mol_conf_idx];
+
+/*
     if (!getDBConnection())
         throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
@@ -242,6 +291,7 @@ const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeature
         throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
     return featureCounts[pharm_idx];
+*/
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, int mol_conf_idx, Pharmacophore& pharm)
@@ -278,7 +328,8 @@ void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
     selPharmDataStmt.reset();
     selMolIDStmt.reset();
     selMolIDConfIdxStmt.reset();
-    selFtrCountsStmt.reset();
+    selAllFtrCountsStmt.reset();
+    selMolIDFtrCountsStmt.reset();
 
     SQLiteDataIOBase::closeDBConnection();
 
@@ -288,6 +339,8 @@ void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
     molIDConfCountMap.clear();
     pharmIdxToMolIDConfIdxMap.clear();
     molIDConfIdxToPharmIdxMap.clear();
+
+    featureCountsMolID = 0;
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::initMolIdxIDMappings()
@@ -301,7 +354,7 @@ void Pharm::PSDScreeningDBAccessorImpl::initMolIdxIDMappings()
 
     for (std::size_t i = 0; (res = sqlite3_step(selMolIDStmt.get())) == SQLITE_ROW; i++) {
         sqlite3_int64 mol_id = sqlite3_column_int64(selMolIDStmt.get(), 0);
-
+        
         molIdxToIDMap.push_back(mol_id);
         molIDToIdxMap.insert(MolIDToUIntMap::value_type(mol_id, i));
     }
@@ -322,7 +375,7 @@ void Pharm::PSDScreeningDBAccessorImpl::initPharmIdxMolIDConfIdxMappings()
     for (std::size_t i = 0; (res = sqlite3_step(selMolIDConfIdxStmt.get())) == SQLITE_ROW; i++) {
         sqlite3_int64 mol_id = sqlite3_column_int64(selMolIDConfIdxStmt.get(), 0);
         int conf_idx = sqlite3_column_int(selMolIDConfIdxStmt.get(), 1);
-
+ 
         MolIDConfIdxPair mol_id_conf_idx(mol_id, conf_idx);
 
         pharmIdxToMolIDConfIdxMap.push_back(mol_id_conf_idx);
@@ -340,16 +393,16 @@ void Pharm::PSDScreeningDBAccessorImpl::loadFeatureCounts()
         return;
 
     initPharmIdxMolIDConfIdxMappings();
-    setupStatement(selFtrCountsStmt, FTR_COUNT_TABLE_QUERY_SQL, false);
+    setupStatement(selAllFtrCountsStmt, COMPLETE_FTR_COUNT_TABLE_QUERY_SQL, false);
 
     featureCounts.resize(pharmIdxToMolIDConfIdxMap.size());
     int res;
 
-    while ((res = sqlite3_step(selFtrCountsStmt.get())) == SQLITE_ROW) {
-        sqlite3_int64 mol_id = sqlite3_column_int64(selFtrCountsStmt.get(), 0);
-        int conf_idx = sqlite3_column_int(selFtrCountsStmt.get(), 1);
-        int ftr_type = sqlite3_column_int(selFtrCountsStmt.get(), 2);
-        int ftr_count = sqlite3_column_int(selFtrCountsStmt.get(), 3);
+    while ((res = sqlite3_step(selAllFtrCountsStmt.get())) == SQLITE_ROW) {
+        sqlite3_int64 mol_id = sqlite3_column_int64(selAllFtrCountsStmt.get(), 0);
+        int conf_idx = sqlite3_column_int(selAllFtrCountsStmt.get(), 1);
+        int ftr_type = sqlite3_column_int(selAllFtrCountsStmt.get(), 2);
+        int ftr_count = sqlite3_column_int(selAllFtrCountsStmt.get(), 3);
 
         MolIDConfIdxPair mol_id_conf_idx(mol_id, conf_idx);
         MolIDConfIdxToPharmIdxMap::const_iterator it = molIDConfIdxToPharmIdxMap.find(mol_id_conf_idx);
@@ -364,7 +417,38 @@ void Pharm::PSDScreeningDBAccessorImpl::loadFeatureCounts()
 
         featureCounts[pharm_idx].insertEntry(FeatureTypeHistogram::Entry(ftr_type, ftr_count));
     }
-
+ 
     if (res != SQLITE_DONE)
         throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading feature counts");
+}
+
+void Pharm::PSDScreeningDBAccessorImpl::loadFeatureCounts(std::int64_t mol_id)
+{
+    if (featureCountsMolID == mol_id)
+        return;
+
+    setupStatement(selMolIDFtrCountsStmt, MOL_ID_FTR_COUNT_TABLE_QUERY_SQL, true);
+
+    if (sqlite3_bind_int64(selMolIDFtrCountsStmt.get(), 1, mol_id) != SQLITE_OK)
+        throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while binding molecule id to prepared statement");
+
+    featureCounts.clear();
+    
+    int res;
+
+    while ((res = sqlite3_step(selMolIDFtrCountsStmt.get())) == SQLITE_ROW) {
+        std::size_t conf_idx = sqlite3_column_int(selMolIDFtrCountsStmt.get(), 1);
+        int ftr_type = sqlite3_column_int(selMolIDFtrCountsStmt.get(), 2);
+        int ftr_count = sqlite3_column_int(selMolIDFtrCountsStmt.get(), 3);
+
+        if (featureCounts.size() <= conf_idx)
+            featureCounts.resize(conf_idx + 1);
+     
+        featureCounts[conf_idx].insertEntry(FeatureTypeHistogram::Entry(ftr_type, ftr_count));
+    }
+   
+    if (res != SQLITE_DONE)
+        throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading feature counts for molecule id");
+
+    featureCountsMolID = mol_id;
 }
