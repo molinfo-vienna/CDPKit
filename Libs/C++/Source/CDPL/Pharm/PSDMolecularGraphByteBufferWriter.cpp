@@ -264,7 +264,7 @@ void Pharm::PSDMolecularGraphByteBufferWriter::outputStereoDescriptor(const Chem
 
     for (std::size_t i = 0; i < num_ref_atoms; i++)
         bbuf.putCompressedInt(boost::numeric_cast<std::uint32_t>(molgraph.getAtomIndex(*descr.getReferenceAtoms()[i])));
- }
+}
 
 void Pharm::PSDMolecularGraphByteBufferWriter::outputCoordinates(Internal::ByteBuffer& bbuf) const
 {
