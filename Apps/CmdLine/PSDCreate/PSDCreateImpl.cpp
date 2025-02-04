@@ -322,6 +322,8 @@ void PSDCreateImpl::processSingleThreaded()
 
     printStatistics(db_creator->getNumProcessed(), db_creator->getNumRejected(),
                     db_creator->getNumDeleted(), db_creator->getNumInserted());
+
+    db_creator->close();
 }
 
 void PSDCreateImpl::processMultiThreaded()
@@ -416,6 +418,8 @@ void PSDCreateImpl::processMultiThreaded()
     num_rej += main_db_creator->getNumRejected();
 
     printStatistics(num_proc, num_rej, num_del, num_ins);
+
+    main_db_creator->close();
 }
 
 void PSDCreateImpl::setErrorMessage(const std::string& msg)
