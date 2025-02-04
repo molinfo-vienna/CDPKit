@@ -37,9 +37,10 @@ namespace CDPL
         namespace PSDTableInfo
         {
 
-            const std::string MOL_TABLE_NAME       = "molecules";
-            const std::string PHARM_TABLE_NAME     = "pharmacophores";
-            const std::string FTR_COUNT_TABLE_NAME = "ftr_counts";
+            const std::string MOL_TABLE_NAME           = "molecules";
+            const std::string PHARM_TABLE_NAME         = "pharmacophores";
+            const std::string FTR_COUNT_TABLE_NAME     = "ftr_counts";
+            const std::string FTR_COUNT_TABLE_IDX_NAME = "ftr_counts_idx";
 
             const std::string MOL_ID_COLUMN_NAME       = "mol_id";
             const std::string MOL_HASH_COLUMN_NAME     = "mol_hash";
