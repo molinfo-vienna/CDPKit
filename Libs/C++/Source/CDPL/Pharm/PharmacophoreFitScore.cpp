@@ -172,7 +172,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
             refFtrGrpBounds.push_back(i);
             refFtrGrpBounds.push_back(++i);
         }
-    
+
     calcScore(0, mapping, 0, 0, 0.0);
 
     return maxScore;
