@@ -32,11 +32,6 @@
 using namespace CDPL;
 
 
-Pharm::SQLiteDataIOBase::~SQLiteDataIOBase()
-{
-    closeDBConnection();
-}
-
 const Pharm::SQLiteDataIOBase::SQLite3DBPointer& Pharm::SQLiteDataIOBase::getDBConnection() const
 {
     return database;
@@ -107,9 +102,8 @@ int Pharm::SQLiteDataIOBase::evalStatement(const SQLite3StmtPointer& stmt_ptr) c
 {
     int res = sqlite3_step(stmt_ptr.get());
 
-    if (res != SQLITE_DONE && res != SQLITE_ROW && res != SQLITE_OK) {
+    if (res != SQLITE_DONE && res != SQLITE_ROW && res != SQLITE_OK)
         throwSQLiteIOError("SQLiteDataIOBase: evaluation of prepared statement failed");
-    }
 
     return res;
 }
@@ -118,7 +112,7 @@ void Pharm::SQLiteDataIOBase::resetStatement(const SQLite3StmtPointer& stmt_ptr,
 {
     sqlite3_reset(stmt_ptr.get());
 
-    if (clr_bindings &&    sqlite3_clear_bindings(stmt_ptr.get()) != SQLITE_OK)
+    if (clr_bindings && sqlite3_clear_bindings(stmt_ptr.get()) != SQLITE_OK)
         throwSQLiteIOError("SQLiteDataIOBase: clearing of prepared statement bindings failes");
 }
 

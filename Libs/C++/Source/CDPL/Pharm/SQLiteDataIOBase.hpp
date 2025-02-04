@@ -46,7 +46,7 @@ namespace CDPL
 
             SQLiteDataIOBase() {}
 
-            virtual ~SQLiteDataIOBase();
+            virtual ~SQLiteDataIOBase() {}
 
             void openDBConnection(const std::string& name, int mode);
 
