@@ -51,9 +51,7 @@ namespace CDPL
         {
 
           public:
-            ~PSDScreeningDBAccessorImpl() {
-                close();
-            }
+            ~PSDScreeningDBAccessorImpl();
             
             void open(const std::string& name);
 
@@ -82,8 +80,7 @@ namespace CDPL
             const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx);
 
           private:
-            void closeDBConnection();
-            void checkForFtrCountsTableIdx();
+            void init();
 
             void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
 

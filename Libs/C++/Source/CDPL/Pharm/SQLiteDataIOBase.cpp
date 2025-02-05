@@ -39,19 +39,16 @@ const Pharm::SQLiteDataIOBase::SQLite3DBPointer& Pharm::SQLiteDataIOBase::getDBC
 
 void Pharm::SQLiteDataIOBase::openDBConnection(const std::string& name, int mode)
 {
+    databaseName.reserve(name.length());
+    
     sqlite3* new_db = 0;
     int res = sqlite3_open_v2(name.c_str(), &new_db, mode, NULL);
-    SQLite3DBPointer new_db_ptr(new_db, sqlite3_close);
 
     if (res != SQLITE_OK)
         throwSQLiteIOError(("SQLiteDataIOBase: could not open database '" + name + "'").c_str());
-
-    databaseName.reserve(name.length());
-
-    closeDBConnection();
-
+    
+    database = SQLite3DBPointer(new_db, sqlite3_close);
     databaseName = name;
-    database = new_db_ptr;
 }
 
 void Pharm::SQLiteDataIOBase::closeDBConnection()

@@ -50,7 +50,7 @@ namespace CDPL
 
             void openDBConnection(const std::string& name, int mode);
 
-            virtual void closeDBConnection();
+            void closeDBConnection();
 
             const std::string& getDBName() const;
 

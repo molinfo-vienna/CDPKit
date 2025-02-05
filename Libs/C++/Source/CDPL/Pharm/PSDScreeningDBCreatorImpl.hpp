@@ -55,9 +55,7 @@ namespace CDPL
           public:
             PSDScreeningDBCreatorImpl();
 
-            ~PSDScreeningDBCreatorImpl() {
-                close();
-            }
+            ~PSDScreeningDBCreatorImpl();
             
             void open(const std::string& name, ScreeningDBCreator::Mode mode = ScreeningDBCreator::CREATE, bool allow_dup_entries = true);
 
@@ -82,8 +80,6 @@ namespace CDPL
             std::size_t getNumInserted() const;
 
           private:
-            void closeDBConnection();
-
             void setupTables();
 
             void loadMolHashToIDMap();
@@ -98,8 +94,9 @@ namespace CDPL
             void insertPharmacophore(std::int64_t mol_id, std::size_t conf_idx);
 
             void genFtrCounts();
-            void insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx);
-            void insertFtrCount(std::int64_t mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count);
+            void mergeFtrCounts(bool init);
+            void insertFtrCounts(std::int64_t mol_id);
+            void insertFtrCount(std::int64_t mol_id, unsigned int ftr_type, std::size_t ftr_count);
 
             void deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, std::int64_t mol_id) const;
 
@@ -128,6 +125,7 @@ namespace CDPL
             BasicPharmacophore                  pharmacophore;
             DefaultPharmacophoreGenerator       pharmGenerator;
             FeatureTypeHistogram                featureCounts;
+            FeatureTypeHistogram                tmpFeatureCounts;
             Math::Vector3DArray                 coordinates;
             ScreeningDBCreator::Mode            mode;
             bool                                allowDupEntries;
