@@ -51,8 +51,6 @@ namespace CDPL
         {
 
           public:
-            PSDScreeningDBAccessorImpl();
-
             ~PSDScreeningDBAccessorImpl() {
                 close();
             }
@@ -85,6 +83,7 @@ namespace CDPL
 
           private:
             void closeDBConnection();
+            void checkForFtrCountsTableIdx();
 
             void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
 
@@ -106,8 +105,10 @@ namespace CDPL
             SQLite3StmtPointer               selMolIDConfIdxStmt;
             SQLite3StmtPointer               selAllFtrCountsStmt;
             SQLite3StmtPointer               selMolIDFtrCountsStmt;
+            SQLite3StmtPointer               selFtrCountsTableIdxInfoStmt;
+            bool                             foundFtrCountsTableIdx;
             FeatureCountsArray               featureCounts;
-            std::int64_t                     featureCountsMolID{0};
+            std::int64_t                     featureCountsMolID;
             MolIDArray                       molIdxToIDMap;
             MolIDToUIntMap                   molIDToIdxMap;
             MolIDToUIntMap                   molIDConfCountMap;

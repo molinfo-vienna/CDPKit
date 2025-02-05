@@ -69,16 +69,19 @@ namespace
         Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + " WHERE " +
         Pharm::PSDTableInfo::MOL_ID_COLUMN_NAME + " = ?1;";
 
+    const std::string FTR_COUNT_TABLE_IDX_INFO_QUERY_SQL =
+        "SELECT * FROM sqlite_master WHERE type = 'index' AND tbl_name = '" +
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_NAME + "' AND name = '" +
+        Pharm::PSDTableInfo::FTR_COUNT_TABLE_IDX_NAME + "';";
+
     const Pharm::FeatureTypeHistogram NO_FEATURE_COUNTS;
 }
 
 
-Pharm::PSDScreeningDBAccessorImpl::PSDScreeningDBAccessorImpl()
-{}
-
 void Pharm::PSDScreeningDBAccessorImpl::open(const std::string& name)
 {
     openDBConnection(name, SQLITE_OPEN_READONLY);
+    checkForFtrCountsTableIdx();
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::close()
@@ -220,25 +223,25 @@ std::size_t Pharm::PSDScreeningDBAccessorImpl::getConformationIndex(std::size_t 
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t pharm_idx)
 {
+    if (foundFtrCountsTableIdx) {
+        if (!getDBConnection())
+            throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
-    if (!getDBConnection())
-        throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
+        initPharmIdxMolIDConfIdxMappings();
 
-    initPharmIdxMolIDConfIdxMappings();
+        if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
+            throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
-    if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
-        throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
-
-    auto& entry = pharmIdxToMolIDConfIdxMap[pharm_idx];
+        auto& entry = pharmIdxToMolIDConfIdxMap[pharm_idx];
     
-    loadFeatureCounts(entry.first);
+        loadFeatureCounts(entry.first);
 
-    if (entry.second >= featureCounts.size())
-        return NO_FEATURE_COUNTS;
-    
-    return featureCounts[entry.second];
+        if (entry.second >= featureCounts.size())
+            return NO_FEATURE_COUNTS;
+        
+        return featureCounts[entry.second];
+    }
 
-/*  
     if (!getDBConnection())
         throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
@@ -248,28 +251,27 @@ const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeature
         throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
     return featureCounts[pharm_idx];
-*/ 
 }
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx)
 {
+    if (foundFtrCountsTableIdx) {
+        if (!getDBConnection())
+            throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
-    if (!getDBConnection())
-        throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
+        initMolIdxIDMappings();
 
-    initMolIdxIDMappings();
+        if (mol_idx >= molIdxToIDMap.size())
+            throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
 
-    if (mol_idx >= molIdxToIDMap.size())
-        throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
-
-    loadFeatureCounts(molIdxToIDMap[mol_idx]);
+        loadFeatureCounts(molIdxToIDMap[mol_idx]);
     
-    if (mol_conf_idx >= featureCounts.size())
-        return NO_FEATURE_COUNTS;
-    
-    return featureCounts[mol_conf_idx];
+        if (mol_conf_idx >= featureCounts.size())
+            return NO_FEATURE_COUNTS;
+        
+        return featureCounts[mol_conf_idx];
+    }
 
-/*
     if (!getDBConnection())
         throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
@@ -291,7 +293,6 @@ const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeature
         throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
     return featureCounts[pharm_idx];
-*/
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, int mol_conf_idx, Pharmacophore& pharm)
@@ -330,7 +331,8 @@ void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
     selMolIDConfIdxStmt.reset();
     selAllFtrCountsStmt.reset();
     selMolIDFtrCountsStmt.reset();
-
+    selFtrCountsTableIdxInfoStmt.reset();
+    
     SQLiteDataIOBase::closeDBConnection();
 
     featureCounts.clear();
@@ -341,6 +343,23 @@ void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
     molIDConfIdxToPharmIdxMap.clear();
 
     featureCountsMolID = 0;
+}
+
+void Pharm::PSDScreeningDBAccessorImpl::checkForFtrCountsTableIdx()
+{
+    foundFtrCountsTableIdx = false;
+
+    setupStatement(selFtrCountsTableIdxInfoStmt, FTR_COUNT_TABLE_IDX_INFO_QUERY_SQL, false);
+
+    int res = sqlite3_step(selFtrCountsTableIdxInfoStmt.get());
+
+    if (res == SQLITE_ROW) {
+        foundFtrCountsTableIdx = true;
+        return;
+    }
+
+    if (res != SQLITE_DONE)
+        throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while checking for the presence of a feature count table molecule ID index");
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::initMolIdxIDMappings()
