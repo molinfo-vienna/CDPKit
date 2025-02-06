@@ -75,14 +75,11 @@ namespace
 }
 
 
-Pharm::PSDScreeningDBAccessorImpl::~PSDScreeningDBAccessorImpl()
-{}
-
 void Pharm::PSDScreeningDBAccessorImpl::open(const std::string& name)
 {
     close();
     openDBConnection(name, SQLITE_OPEN_READONLY);
-    init();
+    checkForFtrCountsTableIndex();
 }
 
 void Pharm::PSDScreeningDBAccessorImpl::close()
@@ -99,6 +96,13 @@ void Pharm::PSDScreeningDBAccessorImpl::close()
     selFtrCountsTableIdxInfoStmt.reset();
     
     SQLiteDataIOBase::closeDBConnection();
+
+    featureCounts.clear();
+    molIdxToIDMap.clear();
+    molIDToIdxMap.clear();
+    molIDConfCountMap.clear();
+    pharmIdxToMolIDConfIdxMap.clear();
+    molIDConfIdxToPharmIdxMap.clear();
 }
 
 const std::string& Pharm::PSDScreeningDBAccessorImpl::getDatabaseName() const
@@ -327,24 +331,17 @@ void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, i
     pharmReader.readPharmacophore(byteBuffer, pharm);
 } 
 
-void Pharm::PSDScreeningDBAccessorImpl::init()
+void Pharm::PSDScreeningDBAccessorImpl::checkForFtrCountsTableIndex()
 {
     foundFtrCountsTableIdx = false;
-    featureCountsMolID = 0;
     
-    featureCounts.clear();
-    molIdxToIDMap.clear();
-    molIDToIdxMap.clear();
-    molIDConfCountMap.clear();
-    pharmIdxToMolIDConfIdxMap.clear();
-    molIDConfIdxToPharmIdxMap.clear();
-
     setupStatement(selFtrCountsTableIdxInfoStmt, FTR_COUNT_TABLE_IDX_INFO_QUERY_SQL, false);
 
     int res = sqlite3_step(selFtrCountsTableIdxInfoStmt.get());
 
     if (res == SQLITE_ROW) {
         foundFtrCountsTableIdx = true;
+        featureCountsMolID = 0;
         return;
     }
 

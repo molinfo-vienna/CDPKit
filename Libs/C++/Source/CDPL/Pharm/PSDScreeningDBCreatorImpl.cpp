@@ -173,7 +173,11 @@ Pharm::PSDScreeningDBCreatorImpl::PSDScreeningDBCreatorImpl():
 
 Pharm::PSDScreeningDBCreatorImpl::~PSDScreeningDBCreatorImpl()
 {
-    try { close(); } catch (...) {}
+    if (getDBConnection()) {
+        try {
+            execStatements(CREATE_FTR_COUNT_TABLE_IDX_SQL);
+        } catch (...) {}
+    }
 }
 
 void Pharm::PSDScreeningDBCreatorImpl::open(const std::string& name, ScreeningDBCreator::Mode mode, bool allow_dup_entries)
@@ -183,11 +187,7 @@ void Pharm::PSDScreeningDBCreatorImpl::open(const std::string& name, ScreeningDB
 
     this->mode = mode;
     allowDupEntries = allow_dup_entries;
-    numProcessed = 0;
-    numRejected = 0;
-    numDeleted = 0;
-    numInserted = 0;
-    
+  
     setupTables();
     loadMolHashToIDMap();
 }
@@ -197,8 +197,10 @@ void Pharm::PSDScreeningDBCreatorImpl::close()
     if (!getDBConnection())
         return;
 
-    execStatements(CREATE_FTR_COUNT_TABLE_IDX_SQL);
-
+    try {
+        execStatements(CREATE_FTR_COUNT_TABLE_IDX_SQL);
+    } catch (const Base::IOError&) {}
+    
     beginTransStmt.reset();
     commitTransStmt.reset();
     insMoleculeStmt.reset();
@@ -211,6 +213,11 @@ void Pharm::PSDScreeningDBCreatorImpl::close()
     delThreePointPharmsWithMolIDStmt.reset();
     
     SQLiteDataIOBase::closeDBConnection();
+
+    numProcessed = 0;
+    numRejected = 0;
+    numDeleted = 0;
+    numInserted = 0;
 }
 
 const std::string& Pharm::PSDScreeningDBCreatorImpl::getDatabaseName() const
