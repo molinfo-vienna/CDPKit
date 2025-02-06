@@ -119,7 +119,9 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('substruct_filter', outputFilePath('substruct_filter.smi'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('substruct_filter.smi'),
                                       '-p', 'c1ccccc1' ])
- 
+    errors |= checkScriptFileOutput('enum_stereo', outputFilePath('enum_stereo.smi'),
+                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('enum_stereo.smi') ])
+    
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
     errors |= checkScriptOutput('gen_ia_ph4s',
