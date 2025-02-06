@@ -244,7 +244,7 @@ IsoGenImpl::IsoGenImpl():
     addOption("min-ring-size,R", "Minimum size of rings below which the configuration of member bonds shall not be altered "
               "(only effective if option -r is true; default: 8).",
               value<std::size_t>(&minRingSize));
-     addOption("use-2d-coords,u", "If present, use atom 2D coordinates and stereo bonds to perceive the configuration "
+    addOption("use-2d-coords,u", "If present, use atom 2D coordinates and stereo bonds to perceive the configuration "
               "of otherwise unspecified stereocenters (default: true).",
               value<bool>(&use2DCoords)->implicit_value(true));
     addOption("use-3d-coords,y", "If present, use atom 3D coordinates to perceive the configuration of otherwise "
