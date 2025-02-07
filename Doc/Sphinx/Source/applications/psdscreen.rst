@@ -6,7 +6,7 @@ Performs a pharmacophore-based virtual screening of molecule databases (see :doc
 Synopsis
 --------
 
-  :program:`psdscreen` [-hVvpxabSICDNPt] [-c arg] [-l arg] [-m arg] [-s arg] [-e arg] [-n arg] [-M arg] [-O arg] [-Q arg] -d arg -q arg -o arg
+  :program:`psdscreen` [-hVvpxabSICDNPt] [-c arg] [-l arg] [-o arg] [-r arg] [-m arg] [-s arg] [-e arg] [-n arg] [-M arg] [-O arg] [-Q arg] -d arg -q arg 
 
 Mandatory options
 -----------------
@@ -26,6 +26,9 @@ Mandatory options
      - Pharmacophore Screening Database (.psd)
      - GZip-Compressed Native CDPL-Format (.cdf.gz)
      - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
+
+Other options
+-------------
 
   -o [ --output ] arg
 
@@ -51,8 +54,9 @@ Mandatory options
      - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
      - Pharmacophore Screening Database (.psd)
 
-Other options
--------------
+  -r [ --report ] arg
+
+    Report output file.
 
   -h [ --help ] [=arg(=SHORT)]
 
