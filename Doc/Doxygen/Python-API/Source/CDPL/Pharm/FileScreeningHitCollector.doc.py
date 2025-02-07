@@ -129,6 +129,18 @@ class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param zero_based 
+    #
+    def outputZeroBasedIndices(zero_based: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def outputZeroBasedIndices() -> bool: pass
+
+    ##
+    # \brief 
     # \param hit 
     # \param score 
     # \return 
@@ -148,3 +160,5 @@ class FileScreeningHitCollector(Boost.Python.instance):
     outputDBMoleculeIndexProp = property(outputDBMoleculeIndexProperty, outputDBMoleculeIndexProperty)
 
     outputMoleculeConfIndexProp = property(outputMoleculeConfIndexProperty, outputMoleculeConfIndexProperty)
+
+    outputZeroBasedInds = property(outputZeroBasedIndices, outputZeroBasedIndices)

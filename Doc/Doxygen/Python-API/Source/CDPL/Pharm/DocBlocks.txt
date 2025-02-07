@@ -73,6 +73,11 @@ outputMoleculeConfIndexProperty
 outputMoleculeConfIndexProperty
 $$$$
 
+FileScreeningHitCollector.outputZeroBasedInds.value
+outputZeroBasedIndices
+outputZeroBasedIndices
+$$$$
+
 Functor.qryMode.value
 queryMode
 $$$$
