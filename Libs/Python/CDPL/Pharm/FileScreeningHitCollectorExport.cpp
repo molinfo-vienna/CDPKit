@@ -73,6 +73,10 @@ void CDPLPythonPharm::exportFileScreeningHitCollector()
              (python::arg("self"), python::arg("output")))
         .def("outputMoleculeConfIndexProperty", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty), 
              python::arg("self"))
+        .def("outputZeroBasedIndices", SetBoolFunc(&Pharm::FileScreeningHitCollector::outputZeroBasedIndices), 
+             (python::arg("self"), python::arg("zero_based")))
+        .def("outputZeroBasedIndices", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputZeroBasedIndices), 
+             python::arg("self"))
         .add_property("dataWriter", python::make_function(&Pharm::FileScreeningHitCollector::getDataWriter,
                                                           python::return_internal_reference<>()),
                       python::make_function(&Pharm::FileScreeningHitCollector::setDataWriter, 
@@ -86,5 +90,7 @@ void CDPLPythonPharm::exportFileScreeningHitCollector()
         .add_property("outputDBMoleculeIndexProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty),
                       SetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty))
         .add_property("outputMoleculeConfIndexProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty),
-                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty));
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty))
+        .add_property("outputZeroBasedInds", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputZeroBasedIndices),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputZeroBasedIndices));
 }

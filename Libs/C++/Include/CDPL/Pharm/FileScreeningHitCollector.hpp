@@ -83,6 +83,10 @@ namespace CDPL
 
             bool outputMoleculeConfIndexProperty() const;
 
+            void outputZeroBasedIndices(bool zero_based);
+
+            bool outputZeroBasedIndices() const;
+
             bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
 
           private:
@@ -92,6 +96,7 @@ namespace CDPL
             bool                  optDBName;
             bool                  optMolIndex;
             bool                  optConfIndex;
+            bool                  optZeroBasedInds;
             Math::Vector3DArray   alignedCoords;
             Chem::BasicMolecule   molecule;
         };

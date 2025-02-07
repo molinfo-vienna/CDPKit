@@ -60,7 +60,7 @@ namespace
 
 Pharm::FileScreeningHitCollector::FileScreeningHitCollector(MolecularGraphWriter& writer):
     dataWriter(&writer), alignMolecule(true), optScore(true), optDBName(true), 
-    optMolIndex(true), optConfIndex(false)
+    optMolIndex(true), optConfIndex(false), optZeroBasedInds(true)
 {}
 
 void Pharm::FileScreeningHitCollector::setDataWriter(MolecularGraphWriter& writer)
@@ -123,6 +123,16 @@ bool Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty() const
     return optConfIndex;
 }
 
+void Pharm::FileScreeningHitCollector::outputZeroBasedIndices(bool zero_based)
+{
+    optZeroBasedInds = zero_based;
+}
+
+bool Pharm::FileScreeningHitCollector::outputZeroBasedIndices() const
+{
+    return optZeroBasedInds;
+}
+
 bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::SearchHit& hit, double score)
 {
     molecule.copy(hit.getHitMolecule());
@@ -165,12 +175,12 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 
     if (optMolIndex) {
         struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
-                             std::to_string(hit.getHitMoleculeIndex()));
+                             std::to_string(hit.getHitMoleculeIndex() + (optZeroBasedInds ? 0 : 1)));
     }
 
     if (optConfIndex)
         struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
-                             std::to_string(hit.getHitConformationIndex()));
+                             std::to_string(hit.getHitConformationIndex() + (optZeroBasedInds ? 0 : 1)));
 
     setStructureData(molecule, struc_data);
     dataWriter->write(molecule);
