@@ -1074,16 +1074,16 @@ void ShapeScreenImpl::checkInputFiles() const
         throw Base::IOError("database file '" + databaseFile + "' does not exist");
 
     if (!splitOutFiles) {
-        if (queryFile == hitOutputFile)
+        if (Util::checkIfSameFile(queryFile, hitOutputFile))
             throw Base::ValueError("hit output file must not be identical to query molecule file");
 
-        if (queryFile == reportFile)
+        if (Util::checkIfSameFile(queryFile, reportFile))
             throw Base::ValueError("report output file must not be identical to query molecule file");
 
-        if (databaseFile == hitOutputFile)
+        if (Util::checkIfSameFile(databaseFile, hitOutputFile))
             throw Base::ValueError("hit output file must not be identical to screening database file");
 
-        if (databaseFile == reportFile)
+        if (Util::checkIfSameFile(databaseFile, reportFile))
             throw Base::ValueError("report output file must not be identical to screening database file");
     }
 }
