@@ -31,6 +31,7 @@
 #include <mutex>
 #include <memory>
 #include <unordered_set>
+#include <fstream>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreReader.hpp"
@@ -90,16 +91,18 @@ namespace PSDScreen
         void printStatistics();
         void printOptionSummary();
 
+        void checkOutputFileOptions() const;
         void checkInputFiles() const;
         void initQueryPharmReader();
+        void initReportFile();
         void initHitCollector();
         void analyzeInputFiles();
 
         bool getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
         bool doGetQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
 
-        bool collectHit(const SearchHit& hit, double score);
-        bool doCollectHit(const SearchHit& hit, double score);
+        bool collectHit(const SearchHit& hit, double score, std::size_t query_idx);
+        bool doCollectHit(const SearchHit& hit, double score, std::size_t query_idx);
 
         bool printProgress(std::size_t worker_idx, double progress);
         bool doPrintProgress(std::size_t worker_idx, double progress);
@@ -119,6 +122,8 @@ namespace PSDScreen
         std::string         queryPharmFile;
         std::string         screeningDB;
         std::string         hitOutputFile;
+        std::string         reportFile;
+        std::fstream        reportFileStream;
         bool                checkXVols;
         bool                alignConfs;
         bool                bestAlignments;

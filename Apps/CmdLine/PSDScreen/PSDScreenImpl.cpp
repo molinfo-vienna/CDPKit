@@ -120,7 +120,7 @@ struct PSDScreenImpl::ScreeningWorker
 
             if (parent->outputPharmIndex)
                 struc_data->addEntry(PHARM_IDX_PROPERTY_NAME, 
-                                     std::to_string(queryIndex));
+                                     std::to_string(queryIndex + 1));
             if (parent->outputPharmName)
                 struc_data->addEntry(PHARM_NAME_PROPERTY_NAME, 
                                      getName(hit.getHitPharmacophore()));
@@ -135,10 +135,10 @@ struct PSDScreenImpl::ScreeningWorker
                                                                            hit.getHitPharmacophoreIndex(),
                                                                            hit.getHitMoleculeIndex(),
                                                                            hit.getHitConformationIndex()),
-                                      score);
+                                      score, queryIndex);
         }
 
-        return parent->collectHit(hit, score);
+        return parent->collectHit(hit, score, queryIndex);
     }
 
     bool reportProgress(std::size_t i, std::size_t max_val) {
@@ -173,7 +173,9 @@ PSDScreenImpl::PSDScreenImpl():
     addOption("query,q", "Query pharmacophore(s).", 
               value<std::string>(&queryPharmFile)->required());
     addOption("output,o", "Hit output file.", 
-              value<std::string>(&hitOutputFile)->required());
+              value<std::string>(&hitOutputFile));
+    addOption("report,r", "Report output file.", 
+              value<std::string>(&reportFile));
     addOption("mode,m", "Molecule conformer matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: FIRST-MATCH).", 
               value<std::string>()->notifier(std::bind(&PSDScreenImpl::setMatchingMode, this, _1)));
     addOption("start-index,s", "Screening start molecule index (zero-based, default: 0).", 
@@ -310,12 +312,14 @@ int PSDScreenImpl::process()
     printMessage(INFO, getProgTitleString());
     printMessage(INFO, "");
 
+    checkOutputFileOptions();
     checkInputFiles();
     printOptionSummary();
     initQueryPharmReader();
     initHitCollector();
+    initReportFile();
     analyzeInputFiles();
-
+    
     if (progressEnabled()) {
         initProgress();
         printMessage(INFO, "Screening Database...", true, true);
@@ -410,7 +414,7 @@ void PSDScreenImpl::processMultiThreaded()
     }
 }
 
-bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
+bool PSDScreenImpl::collectHit(const SearchHit& hit, double score, std::size_t query_idx)
 {
     if (termSignalCaught())
         return false;
@@ -421,13 +425,13 @@ bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
     if (numThreads > 0) {
         std::lock_guard<std::mutex> lock(collHitMutex);
 
-        return doCollectHit(hit, score);
+        return doCollectHit(hit, score, query_idx);
     }
 
-    return doCollectHit(hit, score);
+    return doCollectHit(hit, score, query_idx);
 }
 
-bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
+bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score, std::size_t query_idx)
 {
     try {
         if (maxNumHits > 0 && numHits >= maxNumHits)
@@ -435,8 +439,8 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 
         printMessage(VERBOSE, "Found matching molecule '" + getName(hit.getHitMolecule()) + 
                      "' - DB: '" + hit.getHitProvider().getDBAccessor().getDatabaseName() + 
-                     "', Mol. Index: " + std::to_string(hit.getHitMoleculeIndex()) + 
-                     ", Conf. Index: " + std::to_string(hit.getHitConformationIndex()) +
+                     "', Mol. Index: " + std::to_string(hit.getHitMoleculeIndex() + 1) + 
+                     ", Conf. Index: " + std::to_string(hit.getHitConformationIndex() + 1) +
                      ", Score: " + std::to_string(score));
 
         if (uniqueHits && !hitMolIDs.insert(hit.getHitMoleculeIndex()).second) {
@@ -446,7 +450,19 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
         
         numHits++;
 
-        return (*hitCollector)(hit, score);
+        if (!reportFile.empty()) {
+            reportFileStream << getName(hit.getHitMolecule()) << '\t'
+                             << (hit.getHitMoleculeIndex() + 1) << '\t'
+                             << (hit.getHitConformationIndex() + 1) << '\t'
+                             << (query_idx + 1) << '\t'
+                             << score << '\n';
+
+            if (!reportFileStream.good())
+                throw CDPL::Base::IOError("writing to report file failed");
+        }
+        
+        if (hitCollector)
+            return (*hitCollector)(hit, score);
 
     } catch (const std::exception& e) {
         printMessage(ERROR, std::string("Collecting hit molecule failed: ") + e.what());
@@ -593,6 +609,12 @@ void PSDScreenImpl::printStatistics()
     printMessage(INFO, " Processing Time:         " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
+void PSDScreenImpl::checkOutputFileOptions() const
+{
+    if (hitOutputFile.empty() && reportFile.empty())
+        throw CDPL::Base::ValueError("A hit output and/or report file has to be specified");
+}
+
 void PSDScreenImpl::checkInputFiles() const
 {
     using namespace CDPL;
@@ -602,6 +624,22 @@ void PSDScreenImpl::checkInputFiles() const
 
     if (!Util::fileExists(screeningDB))
         throw Base::IOError("screening database '" + screeningDB + "' does not exist");
+
+    if (!hitOutputFile.empty()) {
+        if (Util::checkIfSameFile(screeningDB, hitOutputFile))
+            throw Base::ValueError("hit output file must not be identical to screening database file");
+        
+        if (Util::checkIfSameFile(queryPharmFile, hitOutputFile))
+            throw Base::ValueError("hit output file must not be identical to query pharmacophore file");
+    }
+
+    if (!reportFile.empty()) {
+        if (Util::checkIfSameFile(screeningDB, reportFile))
+            throw Base::ValueError("report file must not be identical to screening database file");
+        
+        if (Util::checkIfSameFile(queryPharmFile, reportFile))
+            throw Base::ValueError("report file must not be identical to query pharmacophore file");
+    }
 }
 
 void PSDScreenImpl::printOptionSummary()
@@ -609,7 +647,8 @@ void PSDScreenImpl::printOptionSummary()
     printMessage(VERBOSE, "Option Summary:");
     printMessage(VERBOSE, " Pharm. Query File(s):         " + queryPharmFile);
     printMessage(VERBOSE, " Screening Database:           " + screeningDB);
-    printMessage(VERBOSE, " Hit Output File:              " + hitOutputFile);
+    printMessage(VERBOSE, " Hit Output File:              " + (hitOutputFile.empty() ? std::string("None") : hitOutputFile));
+    printMessage(VERBOSE, " Report Output File:           " + (reportFile.empty() ? std::string("None") : reportFile));
     printMessage(VERBOSE, " Conformation Matching Mode:   " + getMatchingModeString());
     printMessage(VERBOSE, " Max. Num. Omitted Features:   " + std::to_string(maxOmittedFtrs));
     printMessage(VERBOSE, " Screening Start Molecule:     " + std::to_string(startMolIndex));
@@ -635,10 +674,33 @@ void PSDScreenImpl::printOptionSummary()
     printMessage(VERBOSE, "");
 }
 
+void PSDScreenImpl::initReportFile()
+{
+    if (reportFile.empty())
+        return;
+
+    reportFileStream.open(reportFile, std::ios_base::out | std::ios_base::trunc);
+
+    if (!reportFileStream)
+        throw CDPL::Base::IOError("opening report file failed");
+
+    reportFileStream << "Mol. Name\t"
+                     << "Mol. Index\t"
+                     << "Mol. Conf. Index\t"
+                     << "Query Pharm. Index\t"
+                     << "Score\n";
+
+    if (!reportFileStream.good())
+        throw CDPL::Base::IOError("writing to report file failed");
+}
+
 void PSDScreenImpl::initHitCollector()
 {
     using namespace CDPL;
 
+    if (hitOutputFile.empty())
+        return;
+    
     try {
         hitMolWriter.reset(hitOutputFormat.empty() ? new Chem::MolecularGraphWriter(hitOutputFile) :
                                                      new Chem::MolecularGraphWriter(hitOutputFile, hitOutputFormat));
@@ -656,6 +718,7 @@ void PSDScreenImpl::initHitCollector()
     hitCollector->outputDBNameProperty(outputDBName);
     hitCollector->outputDBMoleculeIndexProperty(outputMolIndex);
     hitCollector->outputMoleculeConfIndexProperty(outputConfIndex);
+    hitCollector->outputZeroBasedIndices(false);
 }
 
 void PSDScreenImpl::initQueryPharmReader()
