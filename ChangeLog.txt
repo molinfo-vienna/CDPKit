@@ -1,5 +1,14 @@
 head/master:
 
+ - Added new setter/getter method pair outputZeroBasedIndices(bool)/outputZeroBasedIndices() to class Pharm::FileScreeningHitCollector
+   that allows to control whether any indices (mol. index, conf. index, etc.) stored to mol. SD entries shall be zero- or one-based
+ - The command line tool 'PSDScreen' now offers a new option -r that allows to specify a report file in which
+   sceening hit information gets written as lines of tab-separated values (without any mol. structure data).
+   The new option can be used in additon or instead of option -o which, as before, specifies an output file for saving
+   structural hit molecule data
+ - Reduction of RAM consumption when querying pharmacophore feature count data stored in PSD files
+ - Reduction of pharmacophore screening database (PSD) file sizes by ~55% due to the introduction of more compact
+   molecule/pharmacophore data storage formats
  - Fixed a bug in the command line tool 'StructGen' that lead to process termination caused by a Base::ItemNotFound
    exception which was thrown when exceeding the set time limit without having generated a set of 3D atom coordinates
 
