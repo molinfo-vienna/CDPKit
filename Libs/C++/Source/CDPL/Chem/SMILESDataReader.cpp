@@ -386,21 +386,30 @@ void Chem::SMILESDataReader::parseSMILES(Molecule& mol, Atom* prev_atom)
     }
 
     ungetChar();
-
+    
     Atom* next_atom;
 
     if (prev_atom) {
-        BondParameters bond_params;
+        if (std::isdigit(c, std::locale::classic())) {
+            //if (strictErrorChecking)
+            //    throw Base::IOError("SMILESDataReader: invalid position of ring closure bond specification");
 
-        parseBondParameters(bond_params);
+            parseRingClosures(mol, *prev_atom);
+            next_atom = prev_atom;
+            
+        } else {
+            BondParameters bond_params;
 
-        next_atom = parseAtom(mol);
+            parseBondParameters(bond_params);
 
-        createBond(mol, prev_atom, next_atom, bond_params, lexicalBondNumber);
+            next_atom = parseAtom(mol);
 
-        addToBondList(mol.getAtomIndex(*prev_atom), lexicalBondNumber);
-        addToBondList(mol.getAtomIndex(*next_atom), lexicalBondNumber++, false);
+            createBond(mol, prev_atom, next_atom, bond_params, lexicalBondNumber);
 
+            addToBondList(mol.getAtomIndex(*prev_atom), lexicalBondNumber);
+            addToBondList(mol.getAtomIndex(*next_atom), lexicalBondNumber++, false);
+        }
+        
     } else
         next_atom = parseAtom(mol);
 

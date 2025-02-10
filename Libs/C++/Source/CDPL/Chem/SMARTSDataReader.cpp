@@ -332,15 +332,23 @@ void Chem::SMARTSDataReader::parseSMARTS(Molecule& mol, const Atom* prev_atom)
     const Atom* next_atom;
 
     if (prev_atom) {
-        MatchConstraintList::SharedPointer constr_list = parseBondExpression();
+        if (std::isdigit(c, std::locale::classic())) {
+            //if (strictErrorChecking)
+            //    throw Base::IOError("SMARTSDataReader: invalid position of ring closure bond specification");
 
-        next_atom = parseAtom(mol);
+            parseRingClosures(mol, *prev_atom);
+            next_atom = prev_atom;
+            
+        } else {
+            MatchConstraintList::SharedPointer constr_list = parseBondExpression();
 
-        createBond(mol, prev_atom, next_atom, constr_list, lexicalBondNumber);
+            next_atom = parseAtom(mol);
 
-        addToBondList(mol.getAtomIndex(*prev_atom), lexicalBondNumber);
-        addToBondList(mol.getAtomIndex(*next_atom), lexicalBondNumber++, false);
+            createBond(mol, prev_atom, next_atom, constr_list, lexicalBondNumber);
 
+            addToBondList(mol.getAtomIndex(*prev_atom), lexicalBondNumber);
+            addToBondList(mol.getAtomIndex(*next_atom), lexicalBondNumber++, false);
+        }
     } else
         next_atom = parseAtom(mol);
 

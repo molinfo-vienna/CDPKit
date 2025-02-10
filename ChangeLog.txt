@@ -1,5 +1,7 @@
 head/master:
 
+ - Fixed an issue leading to a segmentation fault in the course of parsing (invalid) SMILES/SMARTS strings that occurs
+   if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure numbers
  - Added new setter/getter method pair outputZeroBasedIndices(bool)/outputZeroBasedIndices() to class Pharm::FileScreeningHitCollector
    that allows to control whether any indices (mol. index, conf. index, etc.) stored to mol. SD entries shall be zero- or one-based
  - The command line tool 'PSDScreen' now offers a new option -r that allows to specify a report file in which
