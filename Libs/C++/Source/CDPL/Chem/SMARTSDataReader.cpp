@@ -2188,21 +2188,35 @@ void Chem::SMARTSDataReader::setAtomStereoDescriptor(const Molecule& mol, const 
     }
 
     const Atom* ref_atoms[4];
-
+    
     if (num_bonds == 4) {
         for (std::size_t i = 1; i <= 4; i++) {
             std::size_t lex_bond_no = lex_bond_list[i % 4];
             
             assert(lex_bond_no < bondTable.size());
 
-            ref_atoms[i - 1] = &bondTable[lex_bond_no]->getNeighbor(atom);
+            auto bond = bondTable[lex_bond_no];
+
+            if (!bond) {
+                constraint.setValue(StereoDescriptor(0)); // dangling ring closure
+                return;
+            }
+                
+            ref_atoms[i - 1] = &bond->getNeighbor(atom);
         }
 
         std::size_t lex_bond_no = lex_bond_list[0];
         
         assert(lex_bond_no < bondTable.size());
 
-        ref_atoms[3] = &bondTable[lex_bond_no]->getNeighbor(atom);
+        auto bond = bondTable[lex_bond_no];
+        
+        if (!bond) {
+            constraint.setValue(StereoDescriptor(0)); // dangling ring closure
+            return;
+        }
+            
+        ref_atoms[3] = &bond->getNeighbor(atom);
 
     } else {
         if (std::find_if(atom.getAtomsBegin(), atom.getAtomsEnd(), 
@@ -2218,7 +2232,14 @@ void Chem::SMARTSDataReader::setAtomStereoDescriptor(const Molecule& mol, const 
             
             assert(lex_bond_no < bondTable.size());
 
-            ref_atoms[i] = &bondTable[lex_bond_no]->getNeighbor(atom);
+            auto bond = bondTable[lex_bond_no];
+
+            if (!bond) {
+                constraint.setValue(StereoDescriptor(0)); // dangling ring closure
+                return;
+            }
+           
+            ref_atoms[i] = &bond->getNeighbor(atom);
         }
     }
 

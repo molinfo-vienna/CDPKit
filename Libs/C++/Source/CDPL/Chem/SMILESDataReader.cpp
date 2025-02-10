@@ -1035,21 +1035,37 @@ void Chem::SMILESDataReader::setAtomStereoDescriptors(const Molecule& mol) const
             continue;
 
         const Atom* ref_atoms[4];
-
+        auto invalid = false;
+        
         if (num_bonds == 4) {
             for (std::size_t i = 1; i <= 4; i++) {
                 std::size_t lex_bond_no = lex_bond_list[i % 4];
             
                 assert(lex_bond_no < bondTable.size());
 
-                ref_atoms[i - 1] = &bondTable[lex_bond_no]->getNeighbor(*atom);
+                auto bond = bondTable[lex_bond_no];
+
+                if (!bond) {
+                    invalid = true; // dangling ring closure
+                    break;
+                }
+                
+                ref_atoms[i - 1] = &bond->getNeighbor(*atom);
             }
 
+            if (invalid)
+                continue;
+            
             std::size_t lex_bond_no = lex_bond_list[0];
             
             assert(lex_bond_no < bondTable.size());
-            
-            ref_atoms[3] = &bondTable[lex_bond_no]->getNeighbor(*atom);
+
+            auto bond = bondTable[lex_bond_no];
+
+            if (!bond)
+                continue; // dangling ring closure
+
+            ref_atoms[3] = &bond->getNeighbor(*atom);
 
         } else {
             if (std::find_if(atom->getAtomsBegin(), atom->getAtomsEnd(), 
@@ -1065,8 +1081,18 @@ void Chem::SMILESDataReader::setAtomStereoDescriptors(const Molecule& mol) const
             
                 assert(lex_bond_no < bondTable.size());
 
-                ref_atoms[i] = &bondTable[lex_bond_no]->getNeighbor(*atom);
+                auto bond = bondTable[lex_bond_no];
+
+                if (!bond) {
+                    invalid = true; // dangling ring closure
+                    break;
+                }
+                
+                ref_atoms[i] = &bond->getNeighbor(*atom);
             }
+
+            if (invalid)
+                continue;
         }
     
         unsigned int config = (perm_desig == 1 ? AtomConfiguration::R : AtomConfiguration::S);
