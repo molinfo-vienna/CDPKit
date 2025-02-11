@@ -87,7 +87,8 @@ void Pharm::PSDFeatureContainerByteBufferWriter::outputHeaderAndName(const Featu
 void Pharm::PSDFeatureContainerByteBufferWriter::outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf)
 {
     using namespace PSDPharmacophoreDataFormat;
-
+    namespace Feature = PSDPharmacophoreDataFormat::Feature;
+    
     std::uint32_t ftr_cnt = boost::numeric_cast<std::uint32_t>(cntnr.getNumFeatures());
 
     if (ftr_cnt == 0)

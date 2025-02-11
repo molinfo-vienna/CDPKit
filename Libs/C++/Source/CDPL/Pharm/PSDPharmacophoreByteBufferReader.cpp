@@ -116,6 +116,7 @@ void Pharm::PSDPharmacophoreByteBufferReader::readHeaderAndName(Internal::ByteBu
 void Pharm::PSDPharmacophoreByteBufferReader::readFeatures(Internal::ByteBuffer& bbuf, Pharmacophore& pharm) const
 {
     using namespace PSDPharmacophoreDataFormat;
+    namespace Feature = PSDPharmacophoreDataFormat::Feature;
     
     std::uint8_t tmp;
     std::uint32_t ftr_count = 0;
