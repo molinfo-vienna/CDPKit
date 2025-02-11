@@ -1,5 +1,7 @@
-head/master:
+v1.2.2:
 
+ - The command line tool 'PSDCreate' now offers the possibility to process only a subset of the input molecules that
+   can be specified by means of a start (option -s) and an end molecule index (option -e)
  - Fixed an issue leading to a segmentation fault in the course of parsing (invalid) SMILES/SMARTS strings that occurs
    if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure numbers
  - Added new setter/getter method pair outputZeroBasedIndices(bool)/outputZeroBasedIndices() to class Pharm::FileScreeningHitCollector
@@ -11,10 +13,11 @@ head/master:
  - Reduction of RAM consumption when querying pharmacophore feature count data stored in PSD files
  - Reduction of pharmacophore screening database (PSD) file sizes by ~55% due to the introduction of more compact
    molecule/pharmacophore data storage formats
- - Fixed a bug in the command line tool 'StructGen' that lead to process termination caused by a Base::ItemNotFound
+ - Fixed a bug in the command line tool 'StructGen' that led to process termination caused by a Base::ItemNotFound
    exception which was thrown when exceeding the set time limit without having generated a set of 3D atom coordinates
 
 V1.2.1:
+
  - New implementation of Greene's algorithm for the calculation of atom hydrophobicities which
    is now more correct and ~100 times faster than the previous one
  - All disk space consumed by an existing pharmacophore screening database (PSD) that is specified as
@@ -25,6 +28,7 @@ V1.2.1:
  - Sphinx documentation updates
 
 V1.2.0:
+
  - Added new setter/getter method pair groupReferenceFeatures()/referenceFeaturesGrouped() to class Pharm::PharmacophoreFitScore for controlling
    whether multiple directed features of the same type at the same position shall be considered as independent individual features or as different
    orientation options of a single feature
@@ -79,14 +83,14 @@ V1.2.0:
  - Extended the set of supported chemical elements to atomic number 114
  - New class Descr::MACCSFingerprintGenerator for the generation of 166 bit MACCS key fingerprints
  - Fixed a bug in Math::RegularSpatialGrid that caused an erroneous transformation of world to grid-local coordinates
- - Fixed a problem in Chem::RECAPFragmentGenerator that lead to the generation of too few fragments for H-depleted molecules
- - Fixed a problem in Chem::BRICSFragmentGenerator that lead to the generation of too few fragments for H-depleted molecules
+ - Fixed a problem in Chem::RECAPFragmentGenerator that led to the generation of too few fragments for H-depleted molecules
+ - Fixed a problem in Chem::BRICSFragmentGenerator that led to the generation of too few fragments for H-depleted molecules
  - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
    specify a background fill pattern (see Vis::Brush) for 2D structure renderings
  - New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
  - Vis::CairoRenderer2D now supports the rendering of overlined, underlined and striked-out text
  - Fixed an issue with the calculation of text bounds by Vis::CairoFontMetrics and Vis::QtFontMetrics
-   that lead to too small bounding boxes in the presence of leading and/or trailing whitespace
+   that led to too small bounding boxes in the presence of leading and/or trailing whitespace
  - Updated the internally used 'rapidxml' XML-parser library to the lastest version and fixed an issue with
    whitespace-only data elements that were missing in the generated DOM-trees
  - New 2D graphics primitive Vis::TextBlockPrimitive2D for the rendering of multi-line text blocks supporting
@@ -115,6 +119,7 @@ V1.1.1:
  - Compiling CDPKit now requires a compiler with C++17 support
 
 V1.1.0:
+
  - The tool 'tautgen' provides two new tautomer generation modes BEST_SCORING and BEST_SCORING_UNIQUE
    (the new default mode) for generating only the chemically most reasonable tautomers
  - New getter/setter method pair in class Chem::TautomerGenerator that allows to suppress the output of generated tautomers
@@ -142,7 +147,7 @@ V1.1.0:
  - Update of the torsion library used for systematic conformer generation
  - The pharmacophore screening application 'psdscreen' provides a new option '--unique-hits'
    which enforces that a database molecule matched by multiple query pharmacophores is saved only once to the output hit list
- - Fix for a bug in the SMARTS parser that lead to the storage of wrong bond directions
+ - Fix for a bug in the SMARTS parser that led to the storage of wrong bond directions
  - Bond direction specifications (up/down) in SMILES and SMARTS strings are now correctly interpreted
  - Support for reading/writing molecular structures in XYZ format 
  - Systematic conformer sampling speed optimizations
@@ -154,7 +159,7 @@ V1.1.0:
  - New class (Chem::StereoisomerGenerator) for the exhaustive enumeration of R/S and E/Z stereoisomers
  - New 2D drawing primitives (Vis::Path2D and Vis::PathPrimitive2D) and support for clipping operations
    (class Vis::ClipPathPrimitive2D)
- - Fixed a bug in the 'shapescreen' tool that lead to the calculation of erroneous similarity scores
+ - Fixed a bug in the 'shapescreen' tool that led to the calculation of erroneous similarity scores
    when option '--score-only' was specified
  - Fix for a minor bug that affected the indentation of SD-file property entries
  - New class (Chem::BemisMurckoAnalyzer) for the extraction of Bemis-Murcko scaffolds
