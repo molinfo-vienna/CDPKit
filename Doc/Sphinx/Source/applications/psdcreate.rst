@@ -7,7 +7,7 @@ files (see :doc:`psdscreen`).
 Synopsis
 --------
 
-  :program:`psdcreate` [-hVvpdts] [-c arg] [-l arg] [-m arg] [-I arg] [-T arg] -i arg [arg]... -o arg
+  :program:`psdcreate` [-hVvpdtS] [-c arg] [-l arg] [-s arg] [-e arg] [-m arg] [-I arg] [-T arg] -i arg [arg]... -o arg
 
 Mandatory options
 -----------------
@@ -68,6 +68,15 @@ Other options
 
     Show progress bar (default: true).
 
+  -s [ --start-index ] arg (=0)
+
+    Input start molecule index (zero-based, default: 0).
+
+  -e [ --end-index ] arg (=0)
+
+    Input end molecule index (zero-based and not included, default: number of input 
+    molecules).
+
   -m [ --mode ] arg
 
     Database creation mode (CREATE, APPEND, UPDATE, default: CREATE).
@@ -93,6 +102,6 @@ Other options
 
     Temporary file directory (default: '/tmp')
 
-  -s [ --add-src-file-prop ] [=arg(=1)]
+  -S [ --add-src-file-prop ] [=arg(=1)]
 
     Add a source-file property to output molecules (default: false).
