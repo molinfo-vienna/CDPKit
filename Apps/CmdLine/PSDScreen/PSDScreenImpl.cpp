@@ -652,7 +652,7 @@ void PSDScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Conformation Matching Mode:   " + getMatchingModeString());
     printMessage(VERBOSE, " Max. Num. Omitted Features:   " + std::to_string(maxOmittedFtrs));
     printMessage(VERBOSE, " Screening Start Molecule:     " + std::to_string(startMolIndex));
-    printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? std::to_string(startMolIndex) : std::string("Last")));
+    printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? std::to_string(endMolIndex) : std::string("Last")));
     printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
     printMessage(VERBOSE, " Check X-Volume Clashes:       " + std::string(checkXVols ? "Yes" : "No"));
     printMessage(VERBOSE, " Align Hit Molecules:          " + std::string(alignConfs ? "Yes" : "No"));
