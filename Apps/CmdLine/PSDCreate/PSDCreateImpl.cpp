@@ -161,7 +161,8 @@ private:
 
 
 PSDCreateImpl::PSDCreateImpl(): 
-    dropDuplicates(false), numThreads(0), creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), 
+    dropDuplicates(false), startMolIndex(0), endMolIndex(0), numThreads(0),
+    creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), 
     inputFormat(), addSourceFileProp(false)
 {
     using namespace std::placeholders;
@@ -174,6 +175,11 @@ PSDCreateImpl::PSDCreateImpl():
               value<std::string>()->notifier(std::bind(&PSDCreateImpl::setCreationMode, this, _1)));
     addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
               value<bool>(&dropDuplicates)->implicit_value(true));
+    addOption("start-index,s", "Input start molecule index (zero-based, default: 0).", 
+              value<std::size_t>(&startMolIndex)->default_value(0));
+    addOption("end-index,e", "Input end molecule index (zero-based and not included, "
+              "default: number of input molecules).", 
+              value<std::size_t>(&endMolIndex)->default_value(0));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
               std::to_string(std::thread::hardware_concurrency()) + 
               " threads, must be >= 0, 0 disables multithreading).", 
@@ -182,7 +188,7 @@ PSDCreateImpl::PSDCreateImpl():
               value<std::string>()->notifier(std::bind(&PSDCreateImpl::setInputFormat, this, _1)));
     addOption("tmp-file-dir,T", "Temporary file directory (default: '" + FILESYSTEM_NS::temp_directory_path().string() + "')", 
               value<std::string>()->notifier(std::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
-    addOption("add-src-file-prop,s", "Add a source-file property to output molecules (default: false).", 
+    addOption("add-src-file-prop,S", "Add a source-file property to output molecules (default: false).", 
               value<bool>(&addSourceFileProp)->implicit_value(true));
 
     addOptionLongDescriptions();
@@ -487,9 +493,9 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
             else
                 msg = "Creating Temporary Databases... ";
             
-            printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+            printProgress(msg, double(inputReader.getRecordIndex() - startMolIndex) / (endMolIndex - startMolIndex));
 
-            if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
+            if (inputReader.getRecordIndex() >= endMolIndex) 
                 return 0;
 
             if (!inputReader.read(mol)) {
@@ -550,6 +556,8 @@ void PSDCreateImpl::printOptionSummary()
     for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
         printMessage(VERBOSE, std::string(27, ' ') + *it);
 
+    printMessage(VERBOSE, " Input Start Molecule:     " + std::to_string(startMolIndex));
+    printMessage(VERBOSE, " Input End Molecule:       " + (endMolIndex != 0 ? std::to_string(endMolIndex) : std::string("Last")));
     printMessage(VERBOSE, " Output Database:          " + outputDatabase);
     printMessage(VERBOSE, " Creation Mode:            " + getCreationModeString());
     printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
@@ -612,8 +620,19 @@ void PSDCreateImpl::initInputReader()
     if (PSDCreateImpl::termSignalCaught())
         return;
 
-    printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
+    auto num_input_mols = inputReader.getNumRecords();
+
+    printMessage(INFO, " - Found " + std::to_string(num_input_mols) + " input molecule(s)");
     printMessage(INFO, "");
+
+    if (endMolIndex == 0)
+        endMolIndex = num_input_mols;
+    else
+        endMolIndex = std::min(endMolIndex, num_input_mols);
+
+    startMolIndex = std::min(startMolIndex, num_input_mols);
+
+    inputReader.setRecordIndex(startMolIndex);
 }
 
 std::string PSDCreateImpl::getCreationModeString() const

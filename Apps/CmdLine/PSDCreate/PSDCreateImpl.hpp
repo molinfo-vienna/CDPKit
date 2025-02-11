@@ -103,6 +103,8 @@ namespace PSDCreate
         StringList         inputFiles;
         std::string        outputDatabase;
         bool               dropDuplicates;
+        std::size_t        startMolIndex;
+        std::size_t        endMolIndex;
         std::size_t        numThreads;
         CreationMode       creationMode;
         std::string        inputFormat;
