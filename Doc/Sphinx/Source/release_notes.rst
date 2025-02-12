@@ -10,15 +10,15 @@ Release V1.2.2
 
 - Fix for an issue leading to a segmentation fault during the parsing of partially invalid SMILES/SMARTS strings that occurs
   if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure bond numbers
-- Fix for a bug in the command line tool :doc:`subsearch </applications/structgen` that led to process termination due
+- Fix for a bug in the command line tool :doc:`structgen </applications/structgen>` that led to process termination due
   to a *Base::ItemNotFound* exception which was thrown when the set time limit got exceeded without having generated a
   complete set of 3D atom coordinates
 
 .. rubric:: New Functionality and Features
                         
-- The command line tool :doc:`subsearch </applications/psdreate` now offers the possibility to process only a subset of the input molecules
+- The command line tool :doc:`psdcreate </applications/psdreate>` now offers the possibility to process only a subset of the input molecules
   which can be specified by means of a start (option **-s**) and an end molecule index (option **-e**)
-- The command line tool :doc:`subsearch </applications/psdscreen` now offers a new option **-r** that allows to specify a report file in which
+- The command line tool :doc:`psdscreen </applications/psdscreen>` now offers a new option **-r** that allows to specify a report file in which
   sceening hit molecule information will be written as lines of tab-separated values (i.e., without any mol. structure data).
   The new option can be used in additon or instead of option **-o** which, as before, specifies an output file for saving
   aligned hit molecule structures
