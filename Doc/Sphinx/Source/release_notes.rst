@@ -16,7 +16,7 @@ Release V1.2.2
 
 .. rubric:: New Functionality and Features
                         
-- The command line tool :doc:`psdcreate </applications/psdreate>` now offers the possibility to process only a subset of the input molecules
+- The command line tool :doc:`psdcreate </applications/psdcreate>` now offers the possibility to process only a subset of the input molecules
   which can be specified by means of a start (option **-s**) and an end molecule index (option **-e**)
 - The command line tool :doc:`psdscreen </applications/psdscreen>` now offers a new option **-r** that allows to specify a report file in which
   sceening hit molecule information will be written as lines of tab-separated values (i.e., without any mol. structure data).
