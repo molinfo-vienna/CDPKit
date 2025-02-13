@@ -47,12 +47,20 @@
 #include <boost/tokenizer.hpp>
 
 #ifdef _WIN32
-# define WIN32_LEAN_AND_MEAN
-# define VC_EXTRALEAN
-# define NOMINMAX
+# ifndef WIN32_LEAN_AND_MEAN
+#  define WIN32_LEAN_AND_MEAN
+# endif
+# ifndef VC_EXTRALEAN
+#  define VC_EXTRALEAN
+# endif
+# ifndef NOMINMAX
+#  define NOMINMAX
+# endif
 # include <windows.h>
-# undef ERROR
-#endif // !defined _WIN32
+# ifdef ERROR
+#  undef ERROR
+# endif
+#endif // defined _WIN32
 
 #include "CDPL/Version.hpp"
 #include "CDPL/BuildInfo.hpp"
