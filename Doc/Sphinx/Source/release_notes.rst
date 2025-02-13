@@ -8,18 +8,18 @@ Release V1.2.2
 
 .. rubric:: Bug Fixes
 
-- Fix for an issue leading to a segmentation fault during parsing partially invalid SMILES/SMARTS strings that occurs
-  if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed bond numbers
-- Fix for a bug in the command line tool :doc:`subsearch </applications/structgen` that led to process termination due
+- Fix for an issue leading to a segmentation fault during the parsing of partially invalid SMILES/SMARTS strings that occurs
+  if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure bond numbers
+- Fix for a bug in the command line tool :doc:`structgen </applications/structgen>` that led to process termination due
   to a *Base::ItemNotFound* exception which was thrown when the set time limit got exceeded without having generated a
   complete set of 3D atom coordinates
 
 .. rubric:: New Functionality and Features
                         
-- The command line tool :doc:`subsearch </applications/psdreate` now offers the possibility to process only a subset of the input molecules
+- The command line tool :doc:`psdcreate </applications/psdcreate>` now offers the possibility to process only a subset of the input molecules
   which can be specified by means of a start (option **-s**) and an end molecule index (option **-e**)
-- The command line tool :doc:`subsearch </applications/psdscreen` now offers a new option **-r** that allows to specify a report file in which
-  sceening hit molecule information will be written as lines of tab-separated values (without any mol. structure data).
+- The command line tool :doc:`psdscreen </applications/psdscreen>` now offers a new option **-r** that allows to specify a report file in which
+  sceening hit molecule information will be written as lines of tab-separated values (i.e., without any mol. structure data).
   The new option can be used in additon or instead of option **-o** which, as before, specifies an output file for saving
   aligned hit molecule structures
 
@@ -28,11 +28,12 @@ Release V1.2.2
 - Reduction of RAM consumption when querying pharmacophore feature count data stored in \*.psd files
 - Reduction of pharmacophore screening database (PSD) file sizes by ~55% due to the introduction of
   more compact molecule/pharmacophore data storage formats
-   
+- Additional Python cookbook script demonstrating how to use the stereoisomer enumeration functionality
+     
 .. rubric:: API Changes
              
 - Added new setter/getter method pair *outputZeroBasedIndices(bool)/outputZeroBasedIndices()* to class *Pharm::FileScreeningHitCollector*
-  that allows to control whether any indices (mol. index, conf. index, etc.) stored as output molecule SD-entries shall be zero- or one-based
+  that allows to control whether any indices (mol. index, conf. index, etc.) stored as SD-entries of output molecules shall be zero- or one-based
 
 Release V1.2.1
 --------------
