@@ -83,10 +83,10 @@ Published scientific work that relies on CDPKit functionality:
    doi:10.1021/acs.jcim.3c00563
    molecules26206185
    doi:10.1021/acs.jcim.2c00814
-   ph15091122
-   Kohlbacher2021
    doi:10.1021/acs.jctc.8b00495
    doi:10.1021/acs.jcim.6b00674
+   ph15091122
+   Kohlbacher2021
 
 .. index:: Citing
            
