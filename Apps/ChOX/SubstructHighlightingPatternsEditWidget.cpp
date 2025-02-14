@@ -88,8 +88,6 @@ void SubstructHighlightingPatternsEditWidget::init()
 
     button = new QPushButton(tr("OK"), this);
 
-    button->setDefault(true);
-
     h_layout->addWidget(button);
 
     connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
