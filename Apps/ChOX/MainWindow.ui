@@ -184,7 +184,8 @@
     <addaction name="viewShowGridAction"/>
     <addaction name="viewShowRecordNumbersAction"/>
     <addaction name="viewShowRecordNamesAction"/>
-    <addaction name="viewSubstructHighlightingAction"/>
+    <addaction name="viewShowPropertyTableAction"/>
+    <addaction name="viewEnableSubstructHighlightingAction"/>
     <addaction name="separator"/>
     <addaction name="viewHorAlignmentMenu"/>
     <addaction name="viewVerAlignmentMenu"/>
@@ -499,7 +500,25 @@
     <string>Show &amp;Grid</string>
    </property>
    <property name="iconText">
-    <string>Show Grid</string>
+    <string>Grid</string>
+   </property>
+  </action>
+  <action name="viewShowPropertyTableAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Property Table</string>
+   </property>
+   <property name="iconText">
+    <string>Show/Hide Property Table</string>
+   </property>
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/table.svg</normaloff>:/Icons/table.svg</iconset>
    </property>
   </action>
   <action name="viewShowRecordNumbersAction">
@@ -530,7 +549,7 @@
     <string>Show Record Names</string>
    </property>
   </action>
-  <action name="viewSubstructHighlightingAction">
+  <action name="viewEnableSubstructHighlightingAction">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -538,10 +557,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Enable Substructure High&amp;lighting</string>
+    <string>Substructure High&amp;lighting</string>
    </property>
    <property name="iconText">
-    <string>Enable Substructure Highlighting</string>
+    <string>Substructure Highlighting</string>
    </property>
   </action>
   <action name="viewReactionAction">
@@ -1566,10 +1585,26 @@
    </hints>
   </connection>
   <connection>
-   <sender>viewSubstructHighlightingAction</sender>
+   <sender>viewEnableSubstructHighlightingAction</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>viewSubstructHighlightingChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowPropertyTableAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewPropertyTableVisibilityChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

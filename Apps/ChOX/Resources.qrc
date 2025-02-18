@@ -26,6 +26,7 @@
         <file>Icons/search.svg</file>
         <file>Icons/error.svg</file>
         <file>Icons/success.svg</file>
-        <file>Icons/nosuccess.svg</file>        
+        <file>Icons/nosuccess.svg</file>
+        <file>Icons/table.svg</file>
     </qresource>
 </RCC>

@@ -101,6 +101,8 @@ void ChOX::MainWindow::init()
     dataSetView = new DataSetView(this, *settings, *dataSet);
     dataSetViewControl = new DataSetViewControl(this, *dataSetView);
     substructHilightingProc = new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
+
+    dataSetViewControl->addAction(uiMainWindow.viewShowPropertyTableAction);
     
     addToolBar(dataSetViewControl);
 
@@ -877,7 +879,7 @@ void ChOX::MainWindow::handleComponentLayoutDirChange()
     uiMainWindow.viewComponentLayoutDirActionGroup->blockSignals(false);
 }
 
-void ChOX::MainWindow::handleReactantVisibilityChange( )
+void ChOX::MainWindow::handleReactantVisibilityChange()
 {
     using namespace CDPL;
     using namespace Vis;
@@ -980,10 +982,20 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
     using namespace CDPL;
 
     if (key == ControlParameter::SUBSTRUCT_HIGHLIGHTING_ENABLED) {
-        uiMainWindow.viewSubstructHighlightingAction->blockSignals(true);
-        uiMainWindow.viewSubstructHighlightingAction->setChecked(getSubstructHighlightingEnabledParameter(*settings));
-        uiMainWindow.viewSubstructHighlightingAction->blockSignals(false);
+        uiMainWindow.viewEnableSubstructHighlightingAction->blockSignals(true);
+        uiMainWindow.viewEnableSubstructHighlightingAction->setChecked(getSubstructHighlightingEnabledParameter(*settings));
+        uiMainWindow.viewEnableSubstructHighlightingAction->blockSignals(false);
+        return;
+    }
 
+    if (key == ControlParameter::SHOW_PROPERTY_TABLE) {
+        uiMainWindow.viewShowPropertyTableAction->blockSignals(true);
+        bool show = getShowPropertyTableParameter(*settings);
+        
+        uiMainWindow.viewShowPropertyTableAction->setChecked(show);
+        dataSetView->showProperties(show);
+        
+        uiMainWindow.viewShowPropertyTableAction->blockSignals(false);
         return;
     }
     
@@ -1165,7 +1177,12 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
 
 void ChOX::MainWindow::viewSubstructHighlightingChanged()
 {
-    setSubstructHighlightingEnabledParameter(*settings, uiMainWindow.viewSubstructHighlightingAction->isChecked());
+    setSubstructHighlightingEnabledParameter(*settings, uiMainWindow.viewEnableSubstructHighlightingAction->isChecked());
+}
+
+void ChOX::MainWindow::viewPropertyTableVisibilityChanged()
+{
+    setShowPropertyTableParameter(*settings, uiMainWindow.viewShowPropertyTableAction->isChecked());
 }
 
 void ChOX::MainWindow::viewAlignmentChanged()

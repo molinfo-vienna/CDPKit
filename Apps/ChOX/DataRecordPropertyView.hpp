@@ -1,5 +1,5 @@
 /* 
- * DataSetView.hpp 
+ * DataRecordPropertyView.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,50 +22,48 @@
  */
 
 
-#ifndef CHOX_DATASETVIEW_HPP
-#define CHOX_DATASETVIEW_HPP
+#ifndef CHOX_DATARECORDPROPERTYVIEW_HPP
+#define CHOX_DATARECORDPROPERTYVIEW_HPP
 
-#include <QSplitter>
+#include <vector>
+#include <unordered_map>
 
+#include <QTableWidget>
+#include <QStringList>
 
-class QScrollBar;
+#include "CDPL/Chem/StringDataBlock.hpp"
+
+#include "RecordDataVisitor.hpp"
 
 
 namespace ChOX
 {
 
-    class DataSet;
     class DataSetPageView;
-    class DataRecordPropertyView;
     class Settings;
 
-    class DataSetView : public QSplitter
+    class DataRecordPropertyView : public QTableWidget, public RecordDataVisitor
     {
 
         Q_OBJECT
 
       public:
-        DataSetView(QWidget*, Settings&, DataSet&);
+        DataRecordPropertyView(QWidget* parent);
 
-        DataSetPageView& getPageView() const;
-        DataSet& getDataSet() const;
-
-        void showProperties(bool show);
-
-      private slots:
-        void update(int);
+        void update(DataSetPageView& page_view);
         
       private:
-        void wheelEvent(QWheelEvent*);
+        void visit(CDPL::Chem::Reaction& rxn);
+        void visit(CDPL::Chem::Molecule& mol);
 
-        void init();
+        typedef std::vector<CDPL::Chem::StringDataBlock::SharedPointer> PropertyData;
+        typedef std::unordered_map<std::string, int>                    NameToIndexMap;
 
-        QScrollBar*             scrollBar;
-        DataSetPageView*        pageView;
-        DataRecordPropertyView* propertyView;
-        DataSet&                dataSet;
-        Settings&               settings;
+        PropertyData   propData;
+        NameToIndexMap propColIndices;
+        QStringList    colHeaders;
+        QStringList    rowHeaders;
     };
 } // namespace ChOX
 
-#endif // CHOX_DATASETVIEW_HPP
+#endif // CHOX_DATARECORDPROPERTYVIEW_HPP

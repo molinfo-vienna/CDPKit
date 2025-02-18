@@ -30,14 +30,17 @@
 
 #include "DataSetView.hpp"
 #include "DataSetPageView.hpp"
+#include "DataRecordPropertyView.hpp"
+#include "ControlParameterFunctions.hpp"
 #include "DataSet.hpp"
+#include "Settings.hpp"
 
 
 using namespace ChOX;
 
 
 DataSetView::DataSetView(QWidget* parent, Settings& settings, DataSet& data_set): 
-    QFrame(parent), dataSet(data_set), settings(settings)
+    QSplitter(Qt::Vertical, parent), dataSet(data_set), settings(settings)
 {
     init();
 }
@@ -52,6 +55,14 @@ DataSet& DataSetView::getDataSet() const
     return dataSet;
 }
 
+void DataSetView::showProperties(bool show)
+{
+    if (show)
+        propertyView->update(*pageView);
+
+    propertyView->setVisible(show);
+}
+
 void DataSetView::wheelEvent(QWheelEvent* e)
 {
     e->accept();
@@ -64,14 +75,15 @@ void DataSetView::wheelEvent(QWheelEvent* e)
 
 void DataSetView::init()
 {
-    QHBoxLayout* main_layout = new QHBoxLayout();
+    auto struct_view = new QWidget(this);
+    QHBoxLayout* struct_view_layout = new QHBoxLayout();
 
-    setLayout(main_layout);
+    struct_view->setLayout(struct_view_layout);
 
-    main_layout->setSpacing(0);
-    main_layout->setMargin(2);
+    struct_view_layout->setSpacing(0);
+    struct_view_layout->setMargin(2);
 
-    scrollBar = new QScrollBar(this);
+    scrollBar = new QScrollBar(struct_view);
 
     scrollBar->hide();
     scrollBar->setPageStep(1);
@@ -79,54 +91,66 @@ void DataSetView::init()
     scrollBar->setMinimum(0);
     scrollBar->setMaximum(0);
 
-    pageView = new DataSetPageView(this, settings, dataSet);
+    pageView = new DataSetPageView(struct_view, settings, dataSet);
 
-    main_layout->addWidget(pageView);
-    main_layout->addWidget(scrollBar);
+    struct_view_layout->addWidget(pageView);
+    struct_view_layout->addWidget(scrollBar);
+
+    propertyView = new DataRecordPropertyView(this);
+
+    propertyView->setVisible(getShowPropertyTableParameter(settings));
+    
+    addWidget(struct_view);
+    addWidget(propertyView);
+
+    setStretchFactor(0, 1);
+    setStretchFactor(1, 0);
+    
+    // ------------
 
     connect(scrollBar, SIGNAL(valueChanged(int)), pageView, SLOT(setPageOffset(int)));
 
-    connect(&dataSet, SIGNAL(sizeChanged(int)), this, SLOT(adjustScrollBar(int)));
-    connect(pageView, SIGNAL(numRowsChanged(int)), this, SLOT(adjustScrollBar(int)));
-    connect(pageView, SIGNAL(numColumnsChanged(int)), this, SLOT(adjustScrollBar(int)));
-    connect(pageView, SIGNAL(pageOffsetChanged(int)), this, SLOT(adjustScrollBar(int)));
+    connect(&dataSet, SIGNAL(sizeChanged(int)), this, SLOT(update(int)));
+    connect(pageView, SIGNAL(numRowsChanged(int)), this, SLOT(update(int)));
+    connect(pageView, SIGNAL(numColumnsChanged(int)), this, SLOT(update(int)));
+    connect(pageView, SIGNAL(pageOffsetChanged(int)), this, SLOT(update(int)));
 
-    QShortcut* shortcut = new QShortcut(Qt::Key_PageDown, this);
+    QShortcut* shortcut = new QShortcut(Qt::Key_PageDown, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextPage()));
 
-    shortcut = new QShortcut(Qt::Key_PageUp, this);
+    shortcut = new QShortcut(Qt::Key_PageUp, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevPage()));
 
-    shortcut = new QShortcut(Qt::Key_Down, this);
+    shortcut = new QShortcut(Qt::Key_Down, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextRow()));
 
-    shortcut = new QShortcut(Qt::Key_Up, this);
+    shortcut = new QShortcut(Qt::Key_Up, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevRow()));
 
-    shortcut = new QShortcut(Qt::Key_Home, this);
+    shortcut = new QShortcut(Qt::Key_Home, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toFirstRecord()));
 
-    shortcut = new QShortcut(Qt::Key_End, this);
+    shortcut = new QShortcut(Qt::Key_End, struct_view);
     shortcut->setContext(Qt::WidgetShortcut);
 
     connect(shortcut, SIGNAL(activated()), pageView, SLOT(toLastRecord()));
 
-    setFocusPolicy(Qt::StrongFocus);
+    struct_view->setFocusPolicy(Qt::StrongFocus);
 
     setFrameStyle(StyledPanel);
 }
 
-void DataSetView::adjustScrollBar(int)
+void DataSetView::update(int)
 {
     scrollBar->blockSignals(true);
     
@@ -147,4 +171,7 @@ void DataSetView::adjustScrollBar(int)
     }
 
     scrollBar->blockSignals(false);
+
+    if (propertyView->isVisible())
+        propertyView->update(*pageView);
 }

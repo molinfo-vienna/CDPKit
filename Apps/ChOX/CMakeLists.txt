@@ -32,6 +32,7 @@ set(chox_SRCS
     DataSetPageView.cpp
     DataSetPagePainter.cpp
     DataRecordPainter.cpp
+    DataRecordPropertyView.cpp
     DataSetPrinter.cpp
     DataSetWriter.cpp
     DataSetReader.cpp
@@ -103,7 +104,8 @@ set(chox_MOC_HDRS
     DataSetPageView.hpp 
     DataSetPrinter.hpp 
     DataSetWriter.hpp 
-    DataSetReader.hpp 
+    DataSetReader.hpp
+    DataRecordPropertyView.hpp
     RecentFilesList.hpp 
     MainWindowList.hpp 
     Settings.hpp 

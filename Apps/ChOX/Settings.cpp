@@ -160,6 +160,7 @@ void Settings::load()
     readParameter<bool>(*this, settings, ControlParameter::SHOW_GRID, ControlParameterDefault::SHOW_GRID);
     readParameter<bool>(*this, settings, ControlParameter::SHOW_RECORD_NUMBERS, ControlParameterDefault::SHOW_RECORD_NUMBERS);
     readParameter<bool>(*this, settings, ControlParameter::SHOW_RECORD_NAMES, ControlParameterDefault::SHOW_RECORD_NAMES);
+    readParameter<bool>(*this, settings, ControlParameter::SHOW_PROPERTY_TABLE, ControlParameterDefault::SHOW_PROPERTY_TABLE);
     readLineStyleParameter(*this, settings, ControlParameter::GRID_LINE_STYLE, ControlParameterDefault::GRID_LINE_STYLE);
     readParameter<std::size_t>(*this, settings, ControlParameter::GRID_ROW_COUNT, ControlParameterDefault::GRID_ROW_COUNT);
     readParameter<std::size_t>(*this, settings, ControlParameter::GRID_COLUMN_COUNT, ControlParameterDefault::GRID_COLUMN_COUNT);
@@ -796,6 +797,7 @@ void Settings::save() const
     writeParameter<bool>(*this, settings, ControlParameter::SHOW_GRID);
     writeParameter<bool>(*this, settings, ControlParameter::SHOW_RECORD_NUMBERS);
     writeParameter<bool>(*this, settings, ControlParameter::SHOW_RECORD_NAMES);
+    writeParameter<bool>(*this, settings, ControlParameter::SHOW_PROPERTY_TABLE);
     writeParameter<std::size_t>(*this, settings, ControlParameter::GRID_ROW_COUNT);
     writeParameter<std::size_t>(*this, settings, ControlParameter::GRID_COLUMN_COUNT);
     writeLineStyleParameter(*this, settings, ControlParameter::GRID_LINE_STYLE);

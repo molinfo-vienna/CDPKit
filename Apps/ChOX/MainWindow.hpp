@@ -95,6 +95,7 @@ namespace ChOX
         void setWindowActive();
         void handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val);
         void viewSubstructHighlightingChanged();
+        void viewPropertyTableVisibilityChanged();
         void viewAlignmentChanged();
         void viewSizeAdjustmentChanged();
         void reactionArrowStyleChanged();

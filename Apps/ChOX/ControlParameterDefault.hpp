@@ -63,6 +63,7 @@ namespace ChOX
         extern const bool                         SHOW_GRID;
         extern const bool                         SHOW_RECORD_NUMBERS;
         extern const bool                         SHOW_RECORD_NAMES;
+        extern const bool                         SHOW_PROPERTY_TABLE;
         extern const CDPL::Vis::Pen::LineStyle    GRID_LINE_STYLE;
         extern const CDPL::Vis::Color             GRID_LINE_COLOR;
         extern const CDPL::Vis::SizeSpecification GRID_LINE_WIDTH;

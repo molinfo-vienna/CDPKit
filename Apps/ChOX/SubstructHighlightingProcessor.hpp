@@ -31,7 +31,6 @@
 #include <QObject>
 
 #include "RecordDataVisitor.hpp"
-#include "CDPLFwd.hpp"
 
 
 namespace CDPL
