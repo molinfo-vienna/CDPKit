@@ -53,9 +53,13 @@ namespace ChOX
         void update(DataSetPageView& page_view);
         
       private:
+        void init();
+        
         void visit(CDPL::Chem::Reaction& rxn);
         void visit(CDPL::Chem::Molecule& mol);
 
+        void contextMenuEvent(QContextMenuEvent* event);
+    
         typedef std::vector<CDPL::Chem::StringDataBlock::SharedPointer> PropertyData;
         typedef std::unordered_map<std::string, int>                    NameToIndexMap;
 

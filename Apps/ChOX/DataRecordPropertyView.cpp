@@ -22,6 +22,8 @@
  */
 
 
+#include <QHeaderView>
+
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 
@@ -35,27 +37,46 @@ using namespace ChOX;
 
 DataRecordPropertyView::DataRecordPropertyView(QWidget* parent): 
     QTableWidget(parent)
-{}
+{
+    init();
+}
 
 void DataRecordPropertyView::update(DataSetPageView& page_view)
 {
+    if (page_view.getDataSet().getSize() == 0) {
+        clear();
+        setRowCount(0);
+        setColumnCount(0);
+        colHeaders.clear();
+        propColIndices.clear();
+        return;
+    }
+
     propData.clear();
-    rowHeaders.clear();
-    colHeaders.clear();
-    propColIndices.clear();
-    
+
     for (int i = page_view.getPageOffset(),
              end_idx = std::min(page_view.getDataSet().getSize(),
                                 page_view.getPageOffset() +
                                 page_view.getNumRows() * page_view.getNumColumns()); i < end_idx; i++) {
 
         page_view.accept(i, *this);
-        rowHeaders << QString::number(i + 1);
     }
 
-    setRowCount(propData.size());
+    auto old_num_cols = colHeaders.count();
+    auto num_rows = propData.size();
 
-    for (int i = 0; i < rowHeaders.count(); i++) {
+    setSortingEnabled(false);
+    setRowCount(num_rows);
+    clearContents();
+    
+    for (std::size_t i = 0; i < num_rows; i++) {
+        if (columnCount() == 0) {
+            colHeaders = QStringList("#");
+            setColumnCount(1);
+        }
+        
+        setItem(i, 0, new QTableWidgetItem(QString::number(page_view.getPageOffset() + i + 1)));
+                
         if (!propData[i])
             continue;
         
@@ -71,12 +92,26 @@ void DataRecordPropertyView::update(DataSetPageView& page_view)
 
             setColumnCount(colHeaders.count() + 1);
             setItem(i, colHeaders.count(), new QTableWidgetItem(QString::fromStdString(item.getData())));
+
             colHeaders << QString::fromStdString(item.getHeader());
         }
     }
+
+    if (colHeaders.count() != old_num_cols)
+        setHorizontalHeaderLabels(colHeaders);
     
-    setHorizontalHeaderLabels(colHeaders);
-    setVerticalHeaderLabels(rowHeaders);
+    setSortingEnabled(true);
+}
+
+void DataRecordPropertyView::init()
+{
+    setContextMenuPolicy(Qt::DefaultContextMenu);
+    setVerticalScrollMode(ScrollPerItem);
+    setSelectionMode(NoSelection);
+
+    verticalHeader()->hide();
+
+    colHeaders = QStringList("Rec. No.");
 }
 
 void DataRecordPropertyView::visit(CDPL::Chem::Reaction& rxn)
@@ -93,4 +128,9 @@ void DataRecordPropertyView::visit(CDPL::Chem::Molecule& mol)
         propData.push_back(getStructureData(mol));
     else
         propData.push_back(CDPL::Chem::StringDataBlock::SharedPointer());
+}
+
+void DataRecordPropertyView::contextMenuEvent(QContextMenuEvent* event)
+{
+    QTableWidget::contextMenuEvent(event);
 }

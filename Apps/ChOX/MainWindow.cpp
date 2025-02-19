@@ -243,7 +243,12 @@ void ChOX::MainWindow::init()
     move(win_settings.value("Pos", QPoint(200, 200)).toPoint());
 
     win_settings.endGroup();
+    win_settings.beginGroup("General/DataSetView");
 
+    dataSetView->restoreState(win_settings.value("State").toByteArray());
+
+    win_settings.endGroup();
+    
     settings->load();
 
 //----
@@ -612,7 +617,12 @@ void ChOX::MainWindow::closeEvent(QCloseEvent* e)
     win_settings.setValue("Pos", pos());
     
     win_settings.endGroup();
+    win_settings.beginGroup("General/DataSetView");
 
+    win_settings.setValue("State", dataSetView->saveState());
+
+    win_settings.endGroup();
+    
     //settings->save();
 
     QMainWindow::closeEvent(e);
