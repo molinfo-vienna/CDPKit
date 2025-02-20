@@ -89,6 +89,7 @@ void ViewSettingsEditWidget::apply()
     setShowRecordNumbersParameter(settings, showRecordNumbersCheckBox->isChecked());
     setShowRecordNamesParameter(settings, showRecordNamesCheckBox->isChecked());
     setSubstructHighlightingEnabledParameter(settings, showHighlightedSubstructsCheckBox->isChecked());
+    setShowRecordPropertiesParameter(settings, showRecordPropertiesCheckBox->isChecked());
 }
 
 void ViewSettingsEditWidget::reset()
@@ -124,7 +125,8 @@ void ViewSettingsEditWidget::reset()
     showRecordNumbersCheckBox->setChecked(getShowRecordNumbersParameter(settings)); 
     showRecordNamesCheckBox->setChecked(getShowRecordNamesParameter(settings)); 
     showHighlightedSubstructsCheckBox->setChecked(getSubstructHighlightingEnabledParameter(settings));
-    
+    showRecordPropertiesCheckBox->setChecked(getShowRecordPropertiesParameter(settings));
+        
     blockSignals(false);
 
     haveChanges = false;
@@ -162,7 +164,8 @@ void ViewSettingsEditWidget::setDefaults()
     showRecordNumbersCheckBox->setChecked(ControlParameterDefault::SHOW_RECORD_NUMBERS);
     showRecordNamesCheckBox->setChecked(ControlParameterDefault::SHOW_RECORD_NAMES);
     showHighlightedSubstructsCheckBox->setChecked(ControlParameterDefault::SUBSTRUCT_HIGHLIGHTING_ENABLED);
-    
+    showRecordPropertiesCheckBox->setChecked(ControlParameterDefault::SHOW_RECORD_PROPERTIES);
+        
     haveChanges = true;
 
     emit updateGUI();
@@ -223,6 +226,14 @@ void ViewSettingsEditWidget::init()
     connect(showHighlightedSubstructsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
     main_layout->addWidget(group_box);
+
+    // +++
+
+    showRecordPropertiesCheckBox = new QCheckBox(tr("Record &Properties"), group_box);
+
+    grid_layout->addWidget(showRecordPropertiesCheckBox, 2, 0);
+
+    connect(showRecordPropertiesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
     // --------
 

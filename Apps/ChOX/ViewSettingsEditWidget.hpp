@@ -86,6 +86,7 @@ namespace ChOX
         QCheckBox*                   showGridCheckBox;
         QCheckBox*                   showRecordNumbersCheckBox;
         QCheckBox*                   showRecordNamesCheckBox;
+        QCheckBox*                   showRecordPropertiesCheckBox;
         QCheckBox*                   showHighlightedSubstructsCheckBox;
         bool                         haveChanges;
     };

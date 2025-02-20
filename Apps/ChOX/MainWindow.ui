@@ -184,7 +184,7 @@
     <addaction name="viewShowGridAction"/>
     <addaction name="viewShowRecordNumbersAction"/>
     <addaction name="viewShowRecordNamesAction"/>
-    <addaction name="viewShowPropertyTableAction"/>
+    <addaction name="viewShowRecordPropertiesAction"/>
     <addaction name="viewEnableSubstructHighlightingAction"/>
     <addaction name="separator"/>
     <addaction name="viewHorAlignmentMenu"/>
@@ -503,7 +503,7 @@
     <string>Grid</string>
    </property>
   </action>
-  <action name="viewShowPropertyTableAction">
+  <action name="viewShowRecordPropertiesAction">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -511,10 +511,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Show &amp;Property Table</string>
+    <string>Show Record &amp;Properties</string>
    </property>
    <property name="iconText">
-    <string>Show/Hide Property Table</string>
+    <string>Show Record Properties</string>
    </property>
    <property name="icon">
     <iconset resource="Resources.qrc">
@@ -1601,10 +1601,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>viewShowPropertyTableAction</sender>
+   <sender>viewShowRecordPropertiesAction</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>viewPropertyTableVisibilityChanged()</slot>
+   <slot>viewRecordPropertyVisibilityChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

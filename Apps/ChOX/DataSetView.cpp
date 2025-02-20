@@ -81,7 +81,7 @@ void DataSetView::init()
     struct_view->setLayout(struct_view_layout);
 
     struct_view_layout->setSpacing(0);
-    struct_view_layout->setMargin(2);
+    struct_view_layout->setMargin(1);
 
     scrollBar = new QScrollBar(struct_view);
 
@@ -98,7 +98,7 @@ void DataSetView::init()
 
     propertyView = new DataRecordPropertyView(this);
 
-    propertyView->setVisible(getShowPropertyTableParameter(settings));
+    propertyView->setVisible(getShowRecordPropertiesParameter(settings));
     
     addWidget(struct_view);
     addWidget(propertyView);

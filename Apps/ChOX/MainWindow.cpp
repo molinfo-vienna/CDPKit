@@ -102,7 +102,7 @@ void ChOX::MainWindow::init()
     dataSetViewControl = new DataSetViewControl(this, *dataSetView);
     substructHilightingProc = new SubstructHighlightingProcessor(&dataSetView->getPageView(), *settings);
 
-    dataSetViewControl->addAction(uiMainWindow.viewShowPropertyTableAction);
+    dataSetViewControl->addAction(uiMainWindow.viewShowRecordPropertiesAction);
     
     addToolBar(dataSetViewControl);
 
@@ -998,14 +998,14 @@ void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
         return;
     }
 
-    if (key == ControlParameter::SHOW_PROPERTY_TABLE) {
-        uiMainWindow.viewShowPropertyTableAction->blockSignals(true);
-        bool show = getShowPropertyTableParameter(*settings);
+    if (key == ControlParameter::SHOW_RECORD_PROPERTIES) {
+        uiMainWindow.viewShowRecordPropertiesAction->blockSignals(true);
+        bool show = getShowRecordPropertiesParameter(*settings);
         
-        uiMainWindow.viewShowPropertyTableAction->setChecked(show);
+        uiMainWindow.viewShowRecordPropertiesAction->setChecked(show);
         dataSetView->showProperties(show);
         
-        uiMainWindow.viewShowPropertyTableAction->blockSignals(false);
+        uiMainWindow.viewShowRecordPropertiesAction->blockSignals(false);
         return;
     }
     
@@ -1190,9 +1190,9 @@ void ChOX::MainWindow::viewSubstructHighlightingChanged()
     setSubstructHighlightingEnabledParameter(*settings, uiMainWindow.viewEnableSubstructHighlightingAction->isChecked());
 }
 
-void ChOX::MainWindow::viewPropertyTableVisibilityChanged()
+void ChOX::MainWindow::viewRecordPropertyVisibilityChanged()
 {
-    setShowPropertyTableParameter(*settings, uiMainWindow.viewShowPropertyTableAction->isChecked());
+    setShowRecordPropertiesParameter(*settings, uiMainWindow.viewShowRecordPropertiesAction->isChecked());
 }
 
 void ChOX::MainWindow::viewAlignmentChanged()

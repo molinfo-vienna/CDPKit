@@ -58,8 +58,8 @@ namespace ChOX
     bool getShowRecordNamesParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void setShowRecordNamesParameter(CDPL::Base::ControlParameterContainer& cntnr, bool show);
 
-    bool getShowPropertyTableParameter(const CDPL::Base::ControlParameterContainer& cntnr);
-    void setShowPropertyTableParameter(CDPL::Base::ControlParameterContainer& cntnr, bool show);
+    bool getShowRecordPropertiesParameter(const CDPL::Base::ControlParameterContainer& cntnr);
+    void setShowRecordPropertiesParameter(CDPL::Base::ControlParameterContainer& cntnr, bool show);
 
     std::size_t getGridColumnCountParameter(const CDPL::Base::ControlParameterContainer& cntnr);
     void        setGridColumnCountParameter(CDPL::Base::ControlParameterContainer& cntnr, std::size_t count);

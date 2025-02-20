@@ -49,7 +49,7 @@ namespace ChOX
         extern const CDPL::Base::LookupKey SHOW_GRID;
         extern const CDPL::Base::LookupKey SHOW_RECORD_NUMBERS;
         extern const CDPL::Base::LookupKey SHOW_RECORD_NAMES;
-        extern const CDPL::Base::LookupKey SHOW_PROPERTY_TABLE;
+        extern const CDPL::Base::LookupKey SHOW_RECORD_PROPERTIES;
         extern const CDPL::Base::LookupKey GRID_COLUMN_COUNT;
         extern const CDPL::Base::LookupKey GRID_ROW_COUNT;
         extern const CDPL::Base::LookupKey GRID_LINE_STYLE;

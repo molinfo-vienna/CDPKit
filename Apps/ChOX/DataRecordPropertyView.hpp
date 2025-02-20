@@ -32,6 +32,7 @@
 #include <QStringList>
 
 #include "CDPL/Chem/StringDataBlock.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "RecordDataVisitor.hpp"
 
@@ -51,22 +52,42 @@ namespace ChOX
         DataRecordPropertyView(QWidget* parent);
 
         void update(DataSetPageView& page_view);
+
+      private slots:
+        void hideAllColumns();
+        void showAllColumns();
+        void contextMenuRequested(const QPoint& pos);
+        void colVisActionTriggered(QAction* action);
         
       private:
+        class TableItem : public QTableWidgetItem
+        {
+
+          public:
+            TableItem(const DataRecordPropertyView* parent, const QString& value);
+
+            bool operator<(const QTableWidgetItem& rhs) const;
+
+          private:
+            const DataRecordPropertyView* parent;
+        };
+       
         void init();
         
         void visit(CDPL::Chem::Reaction& rxn);
         void visit(CDPL::Chem::Molecule& mol);
-
-        void contextMenuEvent(QContextMenuEvent* event);
     
         typedef std::vector<CDPL::Chem::StringDataBlock::SharedPointer> PropertyData;
         typedef std::unordered_map<std::string, int>                    NameToIndexMap;
-
-        PropertyData   propData;
-        NameToIndexMap propColIndices;
-        QStringList    colHeaders;
-        QStringList    rowHeaders;
+        typedef std::unordered_map<QAction*, int>                       ActionToIndexMap;
+        
+        PropertyData       propData;
+        NameToIndexMap     propColIndices;
+        QStringList        colHeaders;
+        QStringList        rowHeaders;
+        CDPL::Util::BitSet numColumns;
+        QMenu*             contextMenu;
+        ActionToIndexMap   colVisActionToIndexMap;
     };
 } // namespace ChOX
 

@@ -83,7 +83,7 @@ namespace ChOX
         const bool                                 SHOW_GRID                               = true;
         const bool                                 SHOW_RECORD_NUMBERS                     = true;
         const bool                                 SHOW_RECORD_NAMES                       = true;
-        const bool                                 SHOW_PROPERTY_TABLE                     = false;
+        const bool                                 SHOW_RECORD_PROPERTIES                  = false;
         const CDPL::Vis::Pen::LineStyle            GRID_LINE_STYLE                         = CDPL::Vis::Pen::DOT_LINE;
         const CDPL::Vis::Color                     GRID_LINE_COLOR                         = CDPL::Vis::Color(0.7, 0.7, 0.7);
         const CDPL::Vis::SizeSpecification         GRID_LINE_WIDTH                         = CDPL::Vis::SizeSpecification(1.0);
