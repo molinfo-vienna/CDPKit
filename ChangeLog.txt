@@ -1,3 +1,8 @@
+master:
+
+ - New feature of program 'ChOX' that allows to display structure/reaction data associated
+   with the currently shown molecules/reactions
+
 v1.2.2:
 
  - The command line tool 'PSDCreate' now offers the possibility to process only a subset of the input molecules that
