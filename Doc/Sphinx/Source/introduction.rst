@@ -79,6 +79,8 @@ Published scientific work that relies on CDPKit functionality:
    :list: bullet
    :filter: False
 
+   rose2025pharmacomatch
+   doi:10.1021/acs.jcim.4c01902
    doi:10.1021/acs.jcim.3c01588
    doi:10.1021/acs.jcim.3c00563
    molecules26206185
