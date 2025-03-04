@@ -30,6 +30,7 @@
 #define CDPL_DESCR_SIMILARITYFUNCTIONS_HPP
 
 #include <cstddef>
+#include <cmath>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -43,9 +44,9 @@ namespace CDPL
     {
 
         /**
-         * \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Tanimoto Similarity</em> [\ref CITB] of the bitsets \a bs1 and \a bs2.
          *
-         * The <em>Tanimoto Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} 
@@ -65,9 +66,9 @@ namespace CDPL
 
 
         /**
-         * \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given vectors \a v1 and \a v2.
+         * \brief Calculates the <em>Tanimoto Similarity</em> [\ref CITB] of the vectors \a v1 and \a v2.
          *
-         * The <em>Tanimoto Similarity Measure</em> \f$ S_{12} \f$ is calculated by:
+         * The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
          *
          * \f[ 
          *    S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
@@ -81,9 +82,9 @@ namespace CDPL
         inline double calcTanimotoSimilarity(const V& v1, const V& v2);
 
         /**
-         * \brief Calculates the <em>Cosine Similarity Measure</em> [\ref WCOS] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Cosine Similarity</em> [\ref WCOS] of the bitsets \a bs1 and \a bs2.
          *
-         * The <em>Cosine Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Cosine Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \frac{N_{ab}}{\sqrt{N_a * N_b}} 
@@ -102,9 +103,25 @@ namespace CDPL
         CDPL_DESCR_API double calcCosineSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
 
         /**
-         * \brief Calculates the <em>Euclidean Similarity Measure</em> [\ref GSIM] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Cosine Similarity</em> [\ref WCOS] of the vectors \a v1 and \a v2.
          *
-         * The <em>Euclidean Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Cosine Similarity</em>\f$ S_{12} \f$ is calculated by:
+         *
+         * \f[ 
+         *    S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+         * \f] 
+         * 
+         * \param v1 The first vector.
+         * \param v2 The second vector.
+         * \return The calculated similarity measure.
+         */
+        template <typename V>
+        inline double calcCosineSimilarity(const V& v1, const V& v2);
+        
+        /**
+         * \brief Calculates the <em>Euclidean Similarity</em> [\ref GSIM] of the bitsets \a bs1 and \a bs2.
+         *
+         * The <em>Euclidean Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}}
@@ -124,9 +141,9 @@ namespace CDPL
         CDPL_DESCR_API double calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
 
         /**
-         * \brief Calculates the <em>Manhattan Similarity Measure</em> [\ref GSIM] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Manhattan Similarity</em> [\ref GSIM] of the bitsets \a bs1 and \a bs2.
          *
-         * The <em>Manhattan Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}}
@@ -146,9 +163,9 @@ namespace CDPL
         CDPL_DESCR_API double calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
 
         /**
-         * \brief Calculates the <em>Dice Similarity Measure</em> [\ref GSIM] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Dice Similarity</em> [\ref GSIM] of the bitsets \a bs1 and \a bs2.
          *
-         * The <em>Dice Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} 
@@ -167,9 +184,9 @@ namespace CDPL
         CDPL_DESCR_API double calcDiceSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
 
         /**
-         * \brief Calculates the <em>Tversky Similarity Measure</em> [\ref GSIM] for the given bitsets \a bs1 and \a bs2.
+         * \brief Calculates the <em>Tversky Similarity</em> [\ref GSIM] of the bitsets \a bs1 and \a bs2.
          *
-         * The <em>Tversky Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+         * The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
          *
          * \f[ 
          *    S_{ab} = \frac{N_{ab}}{a * N_a + b * N_b + N_{ab}} 
@@ -179,7 +196,7 @@ namespace CDPL
          * bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.
          * \f$ a \f$ and \f$ b \f$ are bitset contribution weighting factors. 
          *
-         * The <em>Tversky Measure</em> is asymmetric. Setting the parameters \f$ a = b = 1.0 \f$ is identical to using the <em>Tanimoto</em> measure.
+         * The <em>Tversky</em> measure is asymmetric. Setting the parameters \f$ a = b = 1.0 \f$ makes it identical to the <em>Tanimoto</em> measure.
          *
          * If the specified bitsets \a bs1 and \a bs2 are of different size, missing bits at the end of the smaller bitset are assumed
          * to be zero.
@@ -245,6 +262,12 @@ inline double CDPL::Descr::calcTanimotoSimilarity(const V& v1, const V& v2)
     double ep12 = elemProd(v1, v2);
 
     return (ep12 / (elemProd(v1, v1) + elemProd(v2, v2) - ep12));
+}
+
+template <typename V>
+inline double CDPL::Descr::calcCosineSimilarity(const V& v1, const V& v2)
+{
+    return (elemProd(v1, v2) / (std::sqrt(double(elemProd(v1, v1))) * std::sqrt(double(elemProd(v2, v2)))));
 }
 
 #endif // CDPL_DESCR_SIMILARITYFUNCTIONS_HPP
