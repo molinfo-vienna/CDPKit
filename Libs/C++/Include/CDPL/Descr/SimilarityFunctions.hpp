@@ -33,6 +33,7 @@
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/VectorExpression.hpp"
 
 
 namespace CDPL
@@ -61,6 +62,23 @@ namespace CDPL
          * \return The calculated similarity measure.
          */
         CDPL_DESCR_API double calcTanimotoSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
+
+
+        /**
+         * \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given vectors \a v1 and \a v2.
+         *
+         * The <em>Tanimoto Similarity Measure</em> \f$ S_{12} \f$ is calculated by:
+         *
+         * \f[ 
+         *    S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+         * \f] 
+         * 
+         * \param v1 The first vector.
+         * \param v2 The second vector.
+         * \return The calculated similarity measure.
+         */
+        template <typename V>
+        inline double calcTanimotoSimilarity(const V& v1, const V& v2);
 
         /**
          * \brief Calculates the <em>Cosine Similarity Measure</em> [\ref WCOS] for the given bitsets \a bs1 and \a bs2.
@@ -217,5 +235,16 @@ namespace CDPL
         CDPL_DESCR_API double calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
     } // namespace Descr
 } // namespace CDPL
+
+
+// Implementation
+
+template <typename V>
+inline double CDPL::Descr::calcTanimotoSimilarity(const V& v1, const V& v2)
+{
+    double ep12 = elemProd(v1, v2);
+
+    return (ep12 / (elemProd(v1, v1) + elemProd(v2, v2) - ep12));
+}
 
 #endif // CDPL_DESCR_SIMILARITYFUNCTIONS_HPP

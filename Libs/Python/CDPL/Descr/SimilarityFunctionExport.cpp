@@ -34,7 +34,7 @@ void CDPLPythonDescr::exportSimilarityFunctions()
     using namespace boost;
     using namespace CDPL;
 
-    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcTanimotoSimilarity", static_cast<double(*)(const Util::BitSet&, const Util::BitSet&)>(&Descr::calcTanimotoSimilarity), (python::arg("bs1"), python::arg("bs2")));
     python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity, (python::arg("bs1"), python::arg("bs2")));
     python::def("calcEuclideanSimilarity", &Descr::calcEuclideanSimilarity, (python::arg("bs1"), python::arg("bs2")));
     python::def("calcDiceSimilarity", &Descr::calcDiceSimilarity, (python::arg("bs1"), python::arg("bs2")));
