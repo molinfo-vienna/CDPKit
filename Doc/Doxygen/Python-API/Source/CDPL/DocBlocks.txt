@@ -1,1 +1,3 @@
- 
+__version__
+\brief CDPL version string.
+$$$$

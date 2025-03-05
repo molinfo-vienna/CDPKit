@@ -56,9 +56,9 @@ def calcHammingDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> int: pass
 def calcEuclideanDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Dice Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Dice Similarity</em> [\ref GSIM] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Dice Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} \]
 # 
@@ -74,9 +74,9 @@ def calcEuclideanDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcDiceSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Cosine Similarity Measure</em> [\ref WCOS] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Cosine Similarity</em> [\ref WCOS] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Cosine Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Cosine Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \frac{N_{ab}}{\sqrt{N_a * N_b}} \]
 # 
@@ -92,9 +92,9 @@ def calcDiceSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcCosineSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Euclidean Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Euclidean Similarity</em> [\ref GSIM] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Euclidean Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Euclidean Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}} \]
 # 
@@ -110,9 +110,9 @@ def calcCosineSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Manhattan Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Manhattan Similarity</em> [\ref GSIM] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Manhattan Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}} \]
 # 
@@ -128,9 +128,9 @@ def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcManhattanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Tanimoto Similarity</em> [\ref CITB] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Tanimoto Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} \]
 # 
@@ -146,15 +146,15 @@ def calcManhattanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcTanimotoSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief Calculates the <em>Tversky Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
+# \brief Calculates the <em>Tversky Similarity</em> [\ref GSIM] of the bitsets <em>bs1</em> and <em>bs2</em>.
 # 
-# The <em>Tversky Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
+# The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
 # \[ S_{ab} = \frac{N_{ab}}{a * N_a + b * N_b + N_{ab}} \]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset. \f$ a \f$ and \f$ b \f$ are bitset contribution weighting factors.
 # 
-# The <em>Tversky Measure</em> is asymmetric. Setting the parameters \f$ a = b = 1.0 \f$ is identical to using the <em>Tanimoto</em> measure.
+# The <em>Tversky</em> measure is asymmetric. Setting the parameters \f$ a = b = 1.0 \f$ makes it identical to the <em>Tanimoto</em> measure.
 # 
 # If the specified bitsets <em>bs1</em> and <em>bs2</em> are of different size, missing bits at the end of the smaller bitset are assumed to be zero.
 # 

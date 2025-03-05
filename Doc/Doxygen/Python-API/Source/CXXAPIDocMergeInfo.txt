@@ -21,7 +21,14 @@ true % True
 false % False
 <em>null</em> % <em>None</em>
 A reference to itself. % \a self
-    
+
+#
+# --- CDPL package ---
+#
+VERSION % CDPL_VERSION
+VERSION_STRING % CDPL_VERSION_STRING
+
+
 #
 # --- CDPL.Base package ---
 #

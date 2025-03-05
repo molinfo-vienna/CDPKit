@@ -867,7 +867,10 @@ def printVariables(variable_objects):
     out_file = openOutputFile('Variables')
 
     for var_obj, name in variable_objects:
-        if '__' in name or name == 'absolute_import':
+        if '__' in name and name != '__version__':
+            continue
+
+        if name == 'absolute_import':
             continue
 
         out_file.write('\n')
@@ -910,7 +913,7 @@ def outputPackageDoc():
     
 def extendByModuleName(type_name):
     ignored_types = [ 'int', 'object', 'float', 'None', 'str', 'bool', 'list', 'tuple', 'dict' ]
-    ignored_modules = [ 'typing', 're', 'ast', '_ast' ]
+    ignored_modules = [ 'typing.re', 'typing', 're', 'ast', '_ast' ]
 
     if type_name in ignored_types:
         return type_name

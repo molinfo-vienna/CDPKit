@@ -22,12 +22,12 @@
 ##
 # \brief 
 #
-BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
+BUILD_SYSTEM = 'Linux-5.14.0-427.22.1.el9_4.x86_64'
 
 ##
 # \brief 
 #
-BUILD_TIME = 202502111133
+BUILD_TIME = 202503051217
 
 ##
 # \brief 
@@ -37,7 +37,7 @@ COMPILER_ID = 'GNU'
 ##
 # \brief 
 #
-COMPILER_VERSION = '8.5.0'
+COMPILER_VERSION = '11.4.1'
 
 ##
 # \brief 
@@ -77,7 +77,7 @@ HAVE_QT = True
 ##
 # \brief 
 #
-VERSION = 10202
+VERSION = 10300
 
 ##
 # \brief 
@@ -87,14 +87,19 @@ VERSION_MAJOR = 1
 ##
 # \brief 
 #
-VERSION_MINOR = 2
+VERSION_MINOR = 3
 
 ##
 # \brief 
 #
-VERSION_PATCH = 2
+VERSION_PATCH = 0
 
 ##
 # \brief 
 #
-VERSION_STRING = '1.2.2'
+VERSION_STRING = '1.3.0.dev1'
+
+##
+# \brief CDPL version string.
+# 
+__version__ = '1.3.0.dev1'
