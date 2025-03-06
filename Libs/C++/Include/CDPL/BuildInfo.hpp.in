@@ -30,12 +30,12 @@
 #define CDPL_BUILDINFO_HPP
 
 /**
- * \brief An identifier for the compiler that was used to build \e %CDPL.
+ * \brief An identifier for the compiler that was used to build the \e %CDPL.
  */
 #define CDPL_COMPILER_ID      "@CDPKIT_COMPILER_ID@"
 
 /**
- * \brief The version of the compiler that was used to build \e %CDPL.
+ * \brief The version of the compiler that was used to build the \e %CDPL.
  */
 #define CDPL_COMPILER_VERSION "@CDPKIT_COMPILER_VERSION@"
 
