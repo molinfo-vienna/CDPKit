@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Provides functions for the calculation of various similarity measures.
+ * \brief Provides functions for the calculation of various similarity and distance measures.
  */
 
 #ifndef CDPL_DESCR_SIMILARITYFUNCTIONS_HPP
@@ -42,7 +42,7 @@ namespace CDPL
 
     namespace Descr
     {
-
+      
         /**
          * \brief Calculates the <em>Tanimoto Similarity</em> [\ref CITB] of the bitsets \a bs1 and \a bs2.
          *
@@ -63,7 +63,6 @@ namespace CDPL
          * \return The calculated similarity measure.
          */
         CDPL_DESCR_API double calcTanimotoSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2);
-
 
         /**
          * \brief Calculates the <em>Tanimoto Similarity</em> [\ref CITB] of the vectors \a v1 and \a v2.
@@ -231,6 +230,22 @@ namespace CDPL
         CDPL_DESCR_API std::size_t calcHammingDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
 
         /**
+         * \brief Calculates the <em>Manhattan Distance</em> [\ref MADI] between the vectors \a v1 and \a v2.
+         *
+         * The <em>Manhattan Distance</em>\f$ D_{12} \f$ is calculated by:
+         *
+         * \f[ 
+         *    D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+         * \f] 
+         * 
+         * \param v1 The first vector.
+         * \param v2 The second vector.
+         * \return The calculated distance measure.
+         */
+        template <typename V>
+        inline double calcManhattanDistance(const V& v1, const V& v2);
+        
+        /**
          * \brief Calculates the <em>Euclidean Distance</em> [\ref CITB] between the bitsets \a bs1 and \a bs2.
          *
          * The <em>Euclidean Distance</em> \f$ D_{ab} \f$ is calculated by:
@@ -250,6 +265,23 @@ namespace CDPL
          * \return The calculated distance.
          */
         CDPL_DESCR_API double calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
+
+        /**
+         * \brief Calculates the <em>Euclidean Distance</em> [\ref CITB] between the vectors \a v1 and \a v2.
+         *
+         * The <em>Euclidean Distance</em>\f$ D_{12} \f$ is calculated by:
+         *
+         * \f[ 
+         *    D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+         * \f] 
+         * 
+         * \param v1 The first vector.
+         * \param v2 The second vector.
+         * \return The calculated distance measure.
+         */
+        template <typename V>
+        inline double calcEuclideanDistance(const V& v1, const V& v2);
+        
     } // namespace Descr
 } // namespace CDPL
 
@@ -259,15 +291,29 @@ namespace CDPL
 template <typename V>
 inline double CDPL::Descr::calcTanimotoSimilarity(const V& v1, const V& v2)
 {
-    double ep12 = elemProd(v1, v2);
+    double ep12 = innerProd(v1, v2);
 
-    return (ep12 / (elemProd(v1, v1) + elemProd(v2, v2) - ep12));
+    return (ep12 / (innerProd(v1, v1) + innerProd(v2, v2) - ep12));
 }
 
 template <typename V>
 inline double CDPL::Descr::calcCosineSimilarity(const V& v1, const V& v2)
 {
-    return (elemProd(v1, v2) / (std::sqrt(double(elemProd(v1, v1))) * std::sqrt(double(elemProd(v2, v2)))));
+    return angleCos(v1, v2, double(norm2(v1) * norm2(v2)));
+}
+
+template <typename V>
+inline double CDPL::Descr::calcManhattanDistance(const V& v1, const V& v2)
+{
+    return norm1(v1 - v2);
+}
+
+template <typename V>
+inline double CDPL::Descr::calcEuclideanDistance(const V& v1, const V& v2)
+{
+    auto dv = v1 - v2;
+    
+    return std::sqrt(double(innerProd(dv, dv)));
 }
 
 #endif // CDPL_DESCR_SIMILARITYFUNCTIONS_HPP
