@@ -1,5 +1,7 @@
 master:
 
+ - Similarity and distance functions in namespace Descr are now also available in the form of functor classes
+ - New similarity and distance functions for generic descriptor vectors
  - New feature of program 'ChOX' that allows to display structure/reaction data associated
    with the currently shown molecules/reactions
 
