@@ -25,9 +25,16 @@ A reference to itself. % \a self
 #
 # --- CDPL package ---
 #
-VERSION % CDPL_VERSION
-VERSION_STRING % CDPL_VERSION_STRING
+CDPL.VERSION % CDPL_VERSION
 
+CDPL.__version__ % CDPL_VERSION_STRING
+
+CDPL.COMPILER % CDPL_COMPILER
+
+CDPL.BUILD % CDPL_BUILD
+
+CDPL.HAVE % HAVE
+Defined % True
 
 #
 # --- CDPL.Base package ---

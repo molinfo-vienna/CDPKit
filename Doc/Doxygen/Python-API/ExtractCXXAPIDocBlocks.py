@@ -257,7 +257,7 @@ def processCXXAPIDocFile(file_path, api_doc_db):
     if doc_block:
         api_doc_db[comp_name] = doc_block
 
-    sup_mem_kinds = [ 'function', 'variable', 'enum', 'typedef' ]
+    sup_mem_kinds = [ 'function', 'variable', 'enum', 'typedef', 'define' ]
         
     for mem_def in comp_def.getElementsByTagName('memberdef'):
         mem_kind = mem_def.attributes['kind'].value
@@ -306,8 +306,11 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                     arg_names = arg_names[1:]
                     
                 mem_name += '(' + arg_names + ')'
-                
-        api_doc_db[comp_name + '.' + mem_name] = doc_block
+
+        if mem_kind == 'define':
+            api_doc_db[mem_name] = doc_block
+        else:
+            api_doc_db[comp_name + '.' + mem_name] = doc_block
 
         if mem_kind == 'enum':
             for enum_val in comp_def.getElementsByTagName('enumvalue'):
@@ -327,10 +330,10 @@ def extractCXXAPIDocBlocks():
     api_doc_db = {}
         
     for f in glob.glob(path.join(sys.argv[1], '*.xml')):
-        if 'hpp' in f or 'spacestd' in f or 'spaceboost' in f:
+        if 'spacestd' in f or 'spaceboost' in f:
             continue
         
-        if 'struct' in f or 'class' in f or 'namespace' in f:
+        if 'struct' in f or 'class' in f or 'namespace' in f or 'hpp' in f:
             processCXXAPIDocFile(f, api_doc_db)
 
     out_file = open(sys.argv[2], 'wb')

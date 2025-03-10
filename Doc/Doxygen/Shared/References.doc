@@ -241,6 +241,13 @@ Atom Contribution Approach, <i>J. Chem. Inf. Comput. Sci.</i> <b>2004</b>, 44, 2
 </tr>
 
 <tr>
+<td valign="top">\anchor MADI<i>[MADI]</i></td>
+<td valign="top">
+P. E. Black, "Manhattan distance", Dictionary of Algorithms and Data Structures <b>2019</b>, https://www.nist.gov/dads/HTML/manhattanDistance.html
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor MACCSK<i>[MACCSK]</i></td>
 <td valign="top">
 J. L. Durant, B. A. Leland, D. R. Henry, J. G. Nourse, Reoptimization of MDL keys for use in drug discovery,
@@ -430,7 +437,7 @@ D. Rogers and M. Hahn, Extended-Connectivity Fingerprints,
 <tr>
 <td valign="top">\anchor STLRAI<i>[STLRAI]</i></td>
 <td valign="top">
-Random Access Iterator concept definition: http://www.sgi.com/tech/stl/RandomAccessIterator.html
+Random Access Iterator concept definition: https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
 </td>
 </tr>
 
@@ -484,7 +491,7 @@ Wikipedia article about the Hamming Distance: http://en.wikipedia.org/wiki/Hammi
 <tr>
 <td valign="top">\anchor WCOS<i>[WCOS]</i></td>
 <td valign="top">
-Wikipedia article about the Cosine Similarity MEasure: http://en.wikipedia.org/wiki/Cosine_similarity
+Wikipedia article about the Cosine Similarity Measure: http://en.wikipedia.org/wiki/Cosine_similarity
 </td>
 </tr>
 

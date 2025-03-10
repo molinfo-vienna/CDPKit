@@ -874,7 +874,7 @@ def printVariables(variable_objects):
             continue
 
         out_file.write('\n')
- 
+
         doc_block = getAPIDocBlock(name)
         value_str = getValueString(var_obj, False)
 
