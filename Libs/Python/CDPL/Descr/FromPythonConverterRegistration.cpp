@@ -22,8 +22,12 @@
  */
 
 
+#include <functional>
+
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
+#include "CDPL/Descr/SimilarityFunctors.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 #include "Base/GenericFromPythonConverter.hpp"
 
@@ -42,4 +46,63 @@ void CDPLPythonDescr::registerFromPythonConverters()
                                                Descr::CircularFingerprintGenerator::AtomIdentifierFunction>();
     CDPLPythonBase::GenericFromPythonConverter<const Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor&,
                                                Descr::CircularFingerprintGenerator::BondIdentifierFunction>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TanimotoSimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TanimotoSimilarity&,
+                                               std::function<double(const Math::FVector&, const Math::FVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TanimotoSimilarity&,
+                                               std::function<double(const Math::DVector&, const Math::DVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TanimotoSimilarity&,
+                                               std::function<double(const Math::ULVector&, const Math::ULVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TanimotoSimilarity&,
+                                               std::function<double(const Math::LVector&, const Math::LVector&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CosineSimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CosineSimilarity&,
+                                               std::function<double(const Math::FVector&, const Math::FVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CosineSimilarity&,
+                                               std::function<double(const Math::DVector&, const Math::DVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CosineSimilarity&,
+                                               std::function<double(const Math::ULVector&, const Math::ULVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CosineSimilarity&,
+                                               std::function<double(const Math::LVector&, const Math::LVector&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanSimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::ManhattanSimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::DiceSimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::TverskySimilarity&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::HammingDistance&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::HammingDistance&,
+                                               std::function<std::size_t(const Util::BitSet&, const Util::BitSet&)>>();
+
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::ManhattanDistance&,
+                                               std::function<double(const Math::FVector&, const Math::FVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::ManhattanDistance&,
+                                               std::function<double(const Math::DVector&, const Math::DVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::ManhattanDistance&,
+                                               std::function<double(const Math::ULVector&, const Math::ULVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::ManhattanDistance&,
+                                               std::function<double(const Math::LVector&, const Math::LVector&)>>();
+    
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanDistance&,
+                                               std::function<double(const Util::BitSet&, const Util::BitSet&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanDistance&,
+                                               std::function<double(const Math::FVector&, const Math::FVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanDistance&,
+                                               std::function<double(const Math::DVector&, const Math::DVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanDistance&,
+                                               std::function<double(const Math::ULVector&, const Math::ULVector&)>>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::EuclideanDistance&,
+                                               std::function<double(const Math::LVector&, const Math::LVector&)>>();
 }

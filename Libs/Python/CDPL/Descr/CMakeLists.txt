@@ -32,6 +32,8 @@ endforeach(PYTHON_FILE)
 set(descr_MOD_SRCS
     Module.cpp
 
+    SimilarityFunctorExport.cpp 
+    
     AtomRDFCodeCalculatorExport.cpp 
     MoleculeRDFDescriptorCalculatorExport.cpp 
 
@@ -64,6 +66,7 @@ set(descr_MOD_SRCS
     SimilarityFunctionExport.cpp 
 
     FromPythonConverterRegistration.cpp
+    FunctionWrapperExport.cpp
    )
 
 add_library(_descr MODULE ${descr_MOD_SRCS})

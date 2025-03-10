@@ -25,6 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Descr/SimilarityFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -36,13 +37,34 @@ void CDPLPythonDescr::exportSimilarityFunctions()
 
     python::def("calcTanimotoSimilarity", static_cast<double(*)(const Util::BitSet&, const Util::BitSet&)>
                 (&Descr::calcTanimotoSimilarity), (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity<Math::FVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity<Math::DVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity<Math::LVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity<Math::ULVector>, (python::arg("v1"), python::arg("v2")));
+    
     python::def("calcCosineSimilarity", static_cast<double(*)(const Util::BitSet&, const Util::BitSet&)>
                 (&Descr::calcCosineSimilarity), (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity<Math::FVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity<Math::DVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity<Math::LVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity<Math::ULVector>, (python::arg("v1"), python::arg("v2")));
+    
     python::def("calcEuclideanSimilarity", &Descr::calcEuclideanSimilarity, (python::arg("bs1"), python::arg("bs2")));
     python::def("calcDiceSimilarity", &Descr::calcDiceSimilarity, (python::arg("bs1"), python::arg("bs2")));
     python::def("calcManhattanSimilarity", &Descr::calcManhattanSimilarity, (python::arg("bs1"), python::arg("bs2")));
     python::def("calcTverskySimilarity", &Descr::calcTverskySimilarity,
                 (python::arg("bs1"), python::arg("bs2"), python::arg("a"), (python::arg("b"))));
+    
     python::def("calcHammingDistance", &Descr::calcHammingDistance, (python::arg("bs1"), python::arg("bs2")));
-    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcManhattanDistance", &Descr::calcManhattanDistance<Math::FVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcManhattanDistance", &Descr::calcManhattanDistance<Math::DVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcManhattanDistance", &Descr::calcManhattanDistance<Math::LVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcManhattanDistance", &Descr::calcManhattanDistance<Math::ULVector>, (python::arg("v1"), python::arg("v2")));
+
+    python::def("calcEuclideanDistance", static_cast<double(*)(const Util::BitSet&, const Util::BitSet&)>
+                (&Descr::calcEuclideanDistance), (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance<Math::FVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance<Math::DVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance<Math::LVector>, (python::arg("v1"), python::arg("v2")));
+    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance<Math::ULVector>, (python::arg("v1"), python::arg("v2")));
 }

@@ -29,6 +29,7 @@
 namespace CDPLPythonDescr
 {
 
+    void exportSimilarityFunctors();
     void exportAutoCorrelation2DVectorCalculator();
     void exportAtomRDFCodeCalculator();
     void exportMoleculeRDFDescriptorCalculator();
@@ -49,6 +50,8 @@ namespace CDPLPythonDescr
     void exportNPointPharmacophoreFingerprintGenerator();
     void exportNPoint2DPharmacophoreFingerprintGenerator();
     void exportNPoint3DPharmacophoreFingerprintGenerator();
+
+    void exportFunctionWrappers();
 } // namespace CDPLPythonDescr
 
 #endif // CDPL_PYTHON_DESCR_CLASSEXPORTS_HPP
