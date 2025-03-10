@@ -33,6 +33,7 @@
 #include "CDPL/Descr/AtomContainerFunctions.hpp"
 #include "CDPL/Descr/MolecularGraphFunctions.hpp"
 #include "CDPL/Descr/SimilarityFunctions.hpp"
+#include "CDPL/Descr/SimilarityFunctors.hpp"
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Descr/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Descr/AtomAutoCorrelation3DVectorCalculator.hpp"
