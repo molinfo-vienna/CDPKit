@@ -1,5 +1,7 @@
 master:
 
+ - New class template Descr::BulkSimilarityCalculator for the calculation of multiple query <-> target descriptor
+   similarities/distances in a single run 
  - Similarity and distance functions in namespace Descr are now also available in the form of functor classes
  - New similarity and distance functions for generic descriptor vectors
  - New feature of program 'ChOX' that allows to display structure/reaction data associated
