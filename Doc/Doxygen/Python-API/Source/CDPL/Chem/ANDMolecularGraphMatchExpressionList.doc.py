@@ -36,8 +36,8 @@ class ANDMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
     def __init__(expr: ANDMolecularGraphMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDMolecularGraphMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDMolecularGraphMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ANDMolecularGraphMatchExpressionList instance \a expr.
+    # \param expr The \c %ANDMolecularGraphMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(expr: ANDMolecularGraphMatchExpressionList) -> ANDMolecularGraphMatchExpressionList: pass

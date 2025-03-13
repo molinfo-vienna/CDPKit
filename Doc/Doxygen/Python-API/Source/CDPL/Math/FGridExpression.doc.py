@@ -31,29 +31,29 @@ class FGridExpression(ConstFGridExpression):
     def swap(e: FGridExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FGridExpression instance \a e.
-    # \param e The \e %FGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FGridExpression instance \a e.
+    # \param e The \c %FGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: FGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
-    # \param e The \e %ConstFGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
+    # \param e The \c %ConstFGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
-    # \param e The \e %ConstDGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
+    # \param e The \c %ConstDGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDGridExpression) -> FGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
-    # \param e The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
+    # \param e The \c %object instance to copy.
     # \return \a self
     # 
     def assign(e: object) -> FGridExpression: pass
@@ -77,42 +77,42 @@ class FGridExpression(ConstFGridExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __iadd__(e: FGridExpression) -> FGridExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __iadd__(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __isub__(e: FGridExpression) -> FGridExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __isub__(e: ConstFGridExpression) -> FGridExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __imul__(t: float) -> FGridExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %FGridExpression instance \a self.
+    # \return The updated \c %FGridExpression instance \a self.
     # 
     def __idiv__(t: float) -> FGridExpression: pass
 

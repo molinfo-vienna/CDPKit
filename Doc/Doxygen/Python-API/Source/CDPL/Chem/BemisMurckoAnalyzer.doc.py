@@ -40,8 +40,8 @@ class BemisMurckoAnalyzer(Boost.Python.instance):
     def __init__(analyzer: BemisMurckoAnalyzer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BemisMurckoAnalyzer instance \a gen.
-    # \param gen The \e %BemisMurckoAnalyzer instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %BemisMurckoAnalyzer instance \a gen.
+    # \param gen The \c %BemisMurckoAnalyzer instance to copy.
     # \return \a self
     # 
     def assign(gen: BemisMurckoAnalyzer) -> BemisMurckoAnalyzer: pass

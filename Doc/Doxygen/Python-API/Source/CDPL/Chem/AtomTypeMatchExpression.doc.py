@@ -39,8 +39,8 @@ class AtomTypeMatchExpression(AtomMatchExpression):
     def __init__(atom_type: int, not_match: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomTypeMatchExpression instance \a expr.
-    # \param expr The \e %AtomTypeMatchExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %AtomTypeMatchExpression instance \a expr.
+    # \param expr The \c %AtomTypeMatchExpression instance to copy.
     # \return \a self
     # 
     def assign(expr: AtomTypeMatchExpression) -> AtomTypeMatchExpression: pass

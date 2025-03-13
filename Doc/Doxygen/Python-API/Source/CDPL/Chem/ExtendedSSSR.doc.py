@@ -43,8 +43,8 @@ class ExtendedSSSR(FragmentList):
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ExtendedSSSR instance \a esssr.
-    # \param esssr The \e %ExtendedSSSR instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ExtendedSSSR instance \a esssr.
+    # \param esssr The \c %ExtendedSSSR instance to copy.
     # \return \a self
     # 
     def assign(esssr: ExtendedSSSR) -> ExtendedSSSR: pass

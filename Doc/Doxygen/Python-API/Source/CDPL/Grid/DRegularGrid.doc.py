@@ -77,29 +77,29 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
-    # \param e The \e %ConstFGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
+    # \param e The \c %ConstFGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: Math.ConstFGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
-    # \param e The \e %ConstDGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
+    # \param e The \c %ConstDGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: Math.ConstDGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
-    # \param e The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
+    # \param e The \c %object instance to copy.
     # \return \a self
     # 
     def assign(e: object) -> Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularSpatialGrid instance \a g.
-    # \param g The \e %DRegularSpatialGrid instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DRegularSpatialGrid instance \a g.
+    # \param g The \c %DRegularSpatialGrid instance to copy.
     # \return \a self
     # 
     def assign(g: Math.DRegularSpatialGrid) -> Math.DRegularSpatialGrid: pass
@@ -258,28 +258,28 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param g The \e %DRegularSpatialGrid instance to be compared with.
+    # \param g The \c %DRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(g: Math.DRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ConstDGridExpression instance to be compared with.
+    # \param e The \c %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: Math.ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param g The \e %DRegularSpatialGrid instance to be compared with.
+    # \param g The \c %DRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(g: Math.DRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ConstDGridExpression instance to be compared with.
+    # \param e The \c %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: Math.ConstDGridExpression) -> bool: pass
@@ -305,28 +305,28 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %Math.ConstDGridExpression instance holding the result of the addition.
+    # \return A \c %Math.ConstDGridExpression instance holding the result of the addition.
     # 
     def __add__(e: Math.ConstDGridExpression) -> Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \e %DRegularGrid instance holding the result of the subtraction.
+    # \return A \c %DRegularGrid instance holding the result of the subtraction.
     # 
     def __sub__(e: Math.ConstDGridExpression) -> Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %Math.ConstDGridExpression instance holding the result of the multiplication.
+    # \return A \c %Math.ConstDGridExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %Math.ConstDGridExpression instance holding the result of the division.
+    # \return A \c %Math.ConstDGridExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> Math.ConstDGridExpression: pass
 
@@ -347,42 +347,42 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
     # \param g Specifies the second addend.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __iadd__(g: Math.DRegularSpatialGrid) -> Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __iadd__(e: Math.ConstDGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
     # \param g Specifies the subtrahend.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __isub__(g: Math.DRegularSpatialGrid) -> Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __isub__(e: Math.ConstDGridExpression) -> Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __imul__(t: float) -> Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %Math.DRegularSpatialGrid instance \a self.
+    # \return The updated \c %Math.DRegularSpatialGrid instance \a self.
     # 
     def __idiv__(t: float) -> Math.DRegularSpatialGrid: pass
 

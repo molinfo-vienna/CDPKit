@@ -36,8 +36,8 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     def __init__(prim: TextLabelPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TextLabelPrimitive2D instance \a prim.
-    # \param prim The \e %TextLabelPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %TextLabelPrimitive2D instance \a prim.
+    # \param prim The \c %TextLabelPrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: TextLabelPrimitive2D) -> TextLabelPrimitive2D: pass

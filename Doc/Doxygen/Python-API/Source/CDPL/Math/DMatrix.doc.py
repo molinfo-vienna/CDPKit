@@ -98,8 +98,8 @@ class DMatrix(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %DMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DMatrix instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %DMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DMatrix instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -108,43 +108,43 @@ class DMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
-    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFMatrixExpression instance \a e.
+    # \param e The \c %ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
-    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDMatrixExpression instance \a e.
+    # \param e The \c %ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
-    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLMatrixExpression instance \a e.
+    # \param e The \c %ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
-    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULMatrixExpression instance \a e.
+    # \param e The \c %ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrix instance \a m.
-    # \param m The \e %DMatrix instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DMatrix instance \a m.
+    # \param m The \c %DMatrix instance to copy.
     # \return \a self
     # 
     def assign(m: DMatrix) -> DMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -218,28 +218,28 @@ class DMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param m The \e %DMatrix instance to be compared with.
+    # \param m The \c %DMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(m: DMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ConstDMatrixExpression instance to be compared with.
+    # \param e The \c %ConstDMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param m The \e %DMatrix instance to be compared with.
+    # \param m The \c %DMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(m: DMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ConstDMatrixExpression instance to be compared with.
+    # \param e The \c %ConstDMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
@@ -265,42 +265,42 @@ class DMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ConstDMatrixExpression instance holding the result of the addition.
+    # \return A \c %ConstDMatrixExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \e %DMatrix instance holding the result of the subtraction.
+    # \return A \c %DMatrix instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ConstDMatrixExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstDMatrixExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDMatrixExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ConstDMatrixExpression instance holding the result of the division.
+    # \return A \c %ConstDMatrixExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstDMatrixExpression: pass
 
@@ -328,42 +328,42 @@ class DMatrix(Boost.Python.instance):
     ##
     # \brief Performs the in-place addition operation <tt>self += m</tt>.
     # \param m Specifies the second addend.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __iadd__(m: DMatrix) -> DMatrix: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __iadd__(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= m</tt>.
     # \param m Specifies the subtrahend.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __isub__(m: DMatrix) -> DMatrix: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __isub__(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __imul__(t: float) -> DMatrix: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %DMatrix instance \a self.
+    # \return The updated \c %DMatrix instance \a self.
     # 
     def __idiv__(t: float) -> DMatrix: pass
 

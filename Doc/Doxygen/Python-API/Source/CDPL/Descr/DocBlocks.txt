@@ -19,3 +19,8 @@ $$$$
 NPointPharmacophoreFingerprintGenerator.pharmGenerator.value
 getPharmacophoreGenerator
 $$$$
+
+.similarityFunc.value
+getSimilarityFunction
+setSimilarityFunction
+$$$$

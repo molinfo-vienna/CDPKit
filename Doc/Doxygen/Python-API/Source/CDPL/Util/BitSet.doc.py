@@ -58,8 +58,8 @@ class BitSet(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %BitSet instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BitSet instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %BitSet instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %BitSet instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -74,8 +74,8 @@ class BitSet(Boost.Python.instance):
     def swap(bs: BitSet) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSet instance \a bs.
-    # \param bs The \e %BitSet instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %BitSet instance \a bs.
+    # \param bs The \c %BitSet instance to copy.
     # \return \a self
     # 
     def assign(bs: BitSet) -> BitSet: pass
@@ -246,7 +246,7 @@ class BitSet(Boost.Python.instance):
     ##
     # \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
     # \param bs Specifies the subtrahend.
-    # \return A \e %BitSet instance holding the result of the subtraction.
+    # \return A \c %BitSet instance holding the result of the subtraction.
     # 
     def __sub__(bs: BitSet) -> BitSet: pass
 
@@ -274,7 +274,7 @@ class BitSet(Boost.Python.instance):
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
     # \param bs Specifies the subtrahend.
-    # \return The updated \e %BitSet instance \a self.
+    # \return The updated \c %BitSet instance \a self.
     # 
     def __isub__(bs: BitSet) -> BitSet: pass
 
@@ -320,14 +320,14 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(bs: BitSet) -> bool: pass
@@ -348,14 +348,14 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __gt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ge__(bs: BitSet) -> bool: pass

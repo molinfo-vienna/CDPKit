@@ -134,20 +134,20 @@ class BasicMolecule(Molecule):
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
     # \param mol Specifies the second addend.
-    # \return The updated \e %BasicMolecule instance \a self.
+    # \return The updated \c %BasicMolecule instance \a self.
     # 
     def __iadd__(mol: BasicMolecule) -> BasicMolecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
     # \param mol Specifies the second addend.
-    # \return The updated \e %BasicMolecule instance \a self.
+    # \return The updated \c %BasicMolecule instance \a self.
     # 
     def __iadd__(mol: Molecule) -> BasicMolecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
     # \param molgraph Specifies the second addend.
-    # \return The updated \e %BasicMolecule instance \a self.
+    # \return The updated \c %BasicMolecule instance \a self.
     # 
     def __iadd__(molgraph: MolecularGraph) -> BasicMolecule: pass

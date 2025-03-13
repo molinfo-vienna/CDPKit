@@ -116,8 +116,8 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     def getTorsionParameter3() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94TorsionInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94TorsionInteraction instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMFF94TorsionInteraction instance \a iactn.
+    # \param iactn The \c %MMFF94TorsionInteraction instance to copy.
     # \return \a self
     # 
     def assign(iactn: MMFF94TorsionInteraction) -> MMFF94TorsionInteraction: pass
@@ -125,8 +125,8 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %MMFF94TorsionInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94TorsionInteraction instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %MMFF94TorsionInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MMFF94TorsionInteraction instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 

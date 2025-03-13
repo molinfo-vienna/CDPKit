@@ -134,20 +134,20 @@ class BasicPharmacophore(Pharmacophore):
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
     # \param pharm Specifies the second addend.
-    # \return The updated \e %BasicPharmacophore instance \a self.
+    # \return The updated \c %BasicPharmacophore instance \a self.
     # 
     def __iadd__(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
     # \param pharm Specifies the second addend.
-    # \return The updated \e %BasicPharmacophore instance \a self.
+    # \return The updated \c %BasicPharmacophore instance \a self.
     # 
     def __iadd__(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
     # \param cntnr Specifies the second addend.
-    # \return The updated \e %BasicPharmacophore instance \a self.
+    # \return The updated \c %BasicPharmacophore instance \a self.
     # 
     def __iadd__(cntnr: FeatureContainer) -> BasicPharmacophore: pass

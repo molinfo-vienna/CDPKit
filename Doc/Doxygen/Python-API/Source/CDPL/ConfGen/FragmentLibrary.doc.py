@@ -38,8 +38,8 @@ class FragmentLibrary(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %FragmentLibrary instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibrary instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %FragmentLibrary instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FragmentLibrary instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -116,8 +116,8 @@ class FragmentLibrary(Boost.Python.instance):
     def save(os: Base.OStream) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibrary instance \a lib.
-    # \param lib The \e %FragmentLibrary instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FragmentLibrary instance \a lib.
+    # \param lib The \c %FragmentLibrary instance to copy.
     # \return \a self
     # 
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass

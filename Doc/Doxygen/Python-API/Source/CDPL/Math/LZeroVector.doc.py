@@ -50,8 +50,8 @@ class LZeroVector(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %LZeroVector instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LZeroVector instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %LZeroVector instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %LZeroVector instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -85,8 +85,8 @@ class LZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LZeroVector instance \a v.
-    # \param v The \e %LZeroVector instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %LZeroVector instance \a v.
+    # \param v The \c %LZeroVector instance to copy.
     # \return \a self
     # 
     def assign(v: LZeroVector) -> LZeroVector: pass
@@ -99,28 +99,28 @@ class LZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param v The \e %LZeroVector instance to be compared with.
+    # \param v The \c %LZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(v: LZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ConstLVectorExpression instance to be compared with.
+    # \param e The \c %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param v The \e %LZeroVector instance to be compared with.
+    # \param v The \c %LZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(v: LZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ConstLVectorExpression instance to be compared with.
+    # \param e The \c %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
@@ -166,35 +166,35 @@ class LZeroVector(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ConstLVectorExpression instance holding the result of the addition.
+    # \return A \c %ConstLVectorExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \e %LZeroVector instance holding the result of the subtraction.
+    # \return A \c %LZeroVector instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
+    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ConstLVectorExpression instance holding the result of the division.
+    # \return A \c %ConstLVectorExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 

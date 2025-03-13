@@ -36,8 +36,8 @@ class ANDAtomMatchExpressionList(AtomMatchExpressionList):
     def __init__(expr: ANDAtomMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDAtomMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDAtomMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ANDAtomMatchExpressionList instance \a expr.
+    # \param expr The \c %ANDAtomMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(expr: ANDAtomMatchExpressionList) -> ANDAtomMatchExpressionList: pass

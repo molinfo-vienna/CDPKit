@@ -48,8 +48,8 @@ class DMLRModel(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %DMLRModel instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DMLRModel instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %DMLRModel instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DMLRModel instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -58,8 +58,8 @@ class DMLRModel(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DMLRModel instance \a model.
-    # \param model The \e %DMLRModel instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DMLRModel instance \a model.
+    # \param model The \c %DMLRModel instance to copy.
     # \return \a self
     # 
     def assign(model: DMLRModel) -> DMLRModel: pass

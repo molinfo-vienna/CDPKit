@@ -31,43 +31,43 @@ class DVectorExpression(ConstDVectorExpression):
     def swap(e: DVectorExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param e The \e %DVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DVectorExpression instance \a e.
+    # \param e The \c %DVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
+    # \param e The \c %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
+    # \param e The \c %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
+    # \param e The \c %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
+    # \param e The \c %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -89,42 +89,42 @@ class DVectorExpression(ConstDVectorExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __iadd__(e: DVectorExpression) -> DVectorExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __iadd__(e: ConstDVectorExpression) -> DVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __isub__(e: DVectorExpression) -> DVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __isub__(e: ConstDVectorExpression) -> DVectorExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __imul__(t: float) -> DVectorExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %DVectorExpression instance \a self.
+    # \return The updated \c %DVectorExpression instance \a self.
     # 
     def __idiv__(t: float) -> DVectorExpression: pass
 

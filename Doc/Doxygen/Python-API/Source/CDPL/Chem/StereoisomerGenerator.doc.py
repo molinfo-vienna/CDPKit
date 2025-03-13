@@ -34,8 +34,8 @@ class StereoisomerGenerator(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %StereoDescriptorArray instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StereoDescriptorArray instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %StereoDescriptorArray instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %StereoDescriptorArray instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -93,8 +93,8 @@ class StereoisomerGenerator(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %StereoisomerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StereoisomerGenerator instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %StereoisomerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %StereoisomerGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -103,8 +103,8 @@ class StereoisomerGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %StereoisomerGenerator instance \a gen.
-    # \param gen The \e %StereoisomerGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %StereoisomerGenerator instance \a gen.
+    # \param gen The \c %StereoisomerGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: StereoisomerGenerator) -> StereoisomerGenerator: pass

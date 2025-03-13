@@ -51,8 +51,8 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
     def __init__(beg: Math.Vector2D, end: Math.Vector2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LinePrimitive2D instance \a prim.
-    # \param prim The \e %LinePrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %LinePrimitive2D instance \a prim.
+    # \param prim The \c %LinePrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: LinePrimitive2D) -> LinePrimitive2D: pass

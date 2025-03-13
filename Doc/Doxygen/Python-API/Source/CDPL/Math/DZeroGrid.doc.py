@@ -54,8 +54,8 @@ class DZeroGrid(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %DZeroGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DZeroGrid instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %DZeroGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DZeroGrid instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -116,8 +116,8 @@ class DZeroGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DZeroGrid instance \a g.
-    # \param g The \e %DZeroGrid instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DZeroGrid instance \a g.
+    # \param g The \c %DZeroGrid instance to copy.
     # \return \a self
     # 
     def assign(g: DZeroGrid) -> DZeroGrid: pass
@@ -166,28 +166,28 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param g The \e %DZeroGrid instance to be compared with.
+    # \param g The \c %DZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(g: DZeroGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ConstDGridExpression instance to be compared with.
+    # \param e The \c %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(e: ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param g The \e %DZeroGrid instance to be compared with.
+    # \param g The \c %DZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(g: DZeroGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ConstDGridExpression instance to be compared with.
+    # \param e The \c %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(e: ConstDGridExpression) -> bool: pass
@@ -213,28 +213,28 @@ class DZeroGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ConstDGridExpression instance holding the result of the addition.
+    # \return A \c %ConstDGridExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \e %DZeroGrid instance holding the result of the subtraction.
+    # \return A \c %DZeroGrid instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ConstDGridExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDGridExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ConstDGridExpression instance holding the result of the division.
+    # \return A \c %ConstDGridExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstDGridExpression: pass
 

@@ -47,8 +47,8 @@ class MMFF94AtomTyper(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %MMFF94AtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94AtomTyper instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %MMFF94AtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MMFF94AtomTyper instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -93,8 +93,8 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AtomTyper instance \a typer.
-    # \param typer The \e %MMFF94AtomTyper instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMFF94AtomTyper instance \a typer.
+    # \param typer The \c %MMFF94AtomTyper instance to copy.
     # \return \a self
     # 
     def assign(typer: MMFF94AtomTyper) -> MMFF94AtomTyper: pass

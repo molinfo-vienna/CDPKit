@@ -38,8 +38,8 @@ class FragmentList(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %FragmentList instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentList instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %FragmentList instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FragmentList instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -95,8 +95,8 @@ class FragmentList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentList instance \a array.
-    # \param array The \e %FragmentList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FragmentList instance \a array.
+    # \param array The \c %FragmentList instance to copy.
     # \return \a self
     # 
     def assign(array: FragmentList) -> FragmentList: pass
@@ -244,14 +244,14 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.
-    # \param list The \e %object instance to be compared with.
+    # \param list The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(list: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != list</tt>.
-    # \param list The \e %object instance to be compared with.
+    # \param list The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(list: object) -> bool: pass

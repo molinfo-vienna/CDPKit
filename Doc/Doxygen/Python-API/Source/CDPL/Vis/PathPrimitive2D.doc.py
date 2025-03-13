@@ -38,8 +38,8 @@ class PathPrimitive2D(Path2D, GraphicsPrimitive2D):
     def __init__(prim: PathPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PathPrimitive2D instance \a prim.
-    # \param prim The \e %PathPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %PathPrimitive2D instance \a prim.
+    # \param prim The \c %PathPrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: PathPrimitive2D) -> PathPrimitive2D: pass

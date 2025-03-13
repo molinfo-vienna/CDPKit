@@ -46,8 +46,8 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %MMFF94BondStretchingInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondStretchingInteractionParameterizer instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %MMFF94BondStretchingInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MMFF94BondStretchingInteractionParameterizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -98,8 +98,8 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94BondStretchingInteractionParameterizer instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94BondStretchingInteractionParameterizer instance to copy.
     # \return \a self
     # 
     def assign(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> MMFF94BondStretchingInteractionParameterizer: pass

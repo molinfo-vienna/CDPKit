@@ -44,8 +44,8 @@ class Vector3LArray(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %Vector3LArray instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector3LArray instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %Vector3LArray instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Vector3LArray instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -101,8 +101,8 @@ class Vector3LArray(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3LArray instance \a array.
-    # \param array The \e %Vector3LArray instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %Vector3LArray instance \a array.
+    # \param array The \c %Vector3LArray instance to copy.
     # \return \a self
     # 
     def assign(array: Vector3LArray) -> Vector3LArray: pass
@@ -118,8 +118,8 @@ class Vector3LArray(Boost.Python.instance):
     def assign(num_elem: int, value: Vector3L) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -264,14 +264,14 @@ class Vector3LArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == array</tt>.
-    # \param array The \e %object instance to be compared with.
+    # \param array The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(array: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != array</tt>.
-    # \param array The \e %object instance to be compared with.
+    # \param array The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(array: object) -> bool: pass

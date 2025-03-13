@@ -36,8 +36,8 @@ class ORBondMatchExpressionList(BondMatchExpressionList):
     def __init__(expr: ORBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ORBondMatchExpressionList instance \a expr.
-    # \param expr The \e %ORBondMatchExpressionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ORBondMatchExpressionList instance \a expr.
+    # \param expr The \c %ORBondMatchExpressionList instance to copy.
     # \return \a self
     # 
     def assign(expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass

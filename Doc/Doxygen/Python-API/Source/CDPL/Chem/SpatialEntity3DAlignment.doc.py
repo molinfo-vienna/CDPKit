@@ -38,8 +38,8 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %SpatialEntity3DAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialEntity3DAlignment instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %SpatialEntity3DAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %SpatialEntity3DAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -185,8 +185,8 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     def getTransform() -> Math.Matrix4D: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialEntity3DAlignment instance \a alignment.
-    # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %SpatialEntity3DAlignment instance \a alignment.
+    # \param alignment The \c %SpatialEntity3DAlignment instance to copy.
     # \return \a self
     # 
     def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass

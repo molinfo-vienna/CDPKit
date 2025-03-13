@@ -48,8 +48,8 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
-    # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FastGaussianShapeOverlapFunction instance \a func.
+    # \param func The \c %FastGaussianShapeOverlapFunction instance to copy.
     # \return \a self
     # 
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass

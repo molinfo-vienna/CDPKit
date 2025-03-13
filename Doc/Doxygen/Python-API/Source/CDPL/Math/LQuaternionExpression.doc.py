@@ -31,43 +31,43 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     def swap(e: LQuaternionExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
-    # \param e The \e %LQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %LQuaternionExpression instance \a e.
+    # \param e The \c %LQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
-    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFQuaternionExpression instance \a e.
+    # \param e The \c %ConstFQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
-    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDQuaternionExpression instance \a e.
+    # \param e The \c %ConstDQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
-    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLQuaternionExpression instance \a e.
+    # \param e The \c %ConstLQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
-    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULQuaternionExpression instance \a e.
+    # \param e The \c %ConstULQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -108,84 +108,84 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
     # \param t Specifies the second addend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __iadd__(t: int) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __iadd__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
     # \param q Specifies the second addend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __iadd__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
     # \param t Specifies the subtrahend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __isub__(t: int) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __isub__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
     # \param q Specifies the subtrahend.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __isub__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __imul__(t: int) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= e</tt>.
     # \param e Specifies the multiplier.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __imul__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
     # \param q Specifies the multiplier.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __imul__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __idiv__(t: int) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= e</tt>.
     # \param e Specifies the divisor.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __idiv__(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
     # \param q Specifies the divisor.
-    # \return The updated \e %LQuaternionExpression instance \a self.
+    # \return The updated \c %LQuaternionExpression instance \a self.
     # 
     def __idiv__(q: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 

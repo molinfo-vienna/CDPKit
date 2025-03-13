@@ -38,8 +38,8 @@ class MMFF94OutOfPlaneBendingInteractionList(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %MMFF94OutOfPlaneBendingInteractionList instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94OutOfPlaneBendingInteractionList instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %MMFF94OutOfPlaneBendingInteractionList instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MMFF94OutOfPlaneBendingInteractionList instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -84,8 +84,8 @@ class MMFF94OutOfPlaneBendingInteractionList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteractionList instance \a array.
-    # \param array The \e %MMFF94OutOfPlaneBendingInteractionList instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMFF94OutOfPlaneBendingInteractionList instance \a array.
+    # \param array The \c %MMFF94OutOfPlaneBendingInteractionList instance to copy.
     # \return \a self
     # 
     def assign(array: MMFF94OutOfPlaneBendingInteractionList) -> MMFF94OutOfPlaneBendingInteractionList: pass

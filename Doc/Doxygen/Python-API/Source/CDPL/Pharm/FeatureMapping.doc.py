@@ -40,8 +40,8 @@ class FeatureMapping(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %FeatureMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureMapping instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %FeatureMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FeatureMapping instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -69,8 +69,8 @@ class FeatureMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureMapping instance \a map.
-    # \param map The \e %FeatureMapping instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FeatureMapping instance \a map.
+    # \param map The \c %FeatureMapping instance to copy.
     # \return \a self
     # 
     def assign(map: FeatureMapping) -> FeatureMapping: pass

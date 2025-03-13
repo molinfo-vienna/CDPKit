@@ -52,8 +52,8 @@ class NPoint3DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     def __init__(gen: NPoint3DPharmacophoreFingerprintGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %NPoint3DPharmacophoreFingerprintGenerator instance \a gen.
-    # \param gen The \e %NPoint3DPharmacophoreFingerprintGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %NPoint3DPharmacophoreFingerprintGenerator instance \a gen.
+    # \param gen The \c %NPoint3DPharmacophoreFingerprintGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: NPoint3DPharmacophoreFingerprintGenerator) -> NPoint3DPharmacophoreFingerprintGenerator: pass

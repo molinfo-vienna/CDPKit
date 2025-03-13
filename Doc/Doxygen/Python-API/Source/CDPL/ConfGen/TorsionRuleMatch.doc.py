@@ -69,8 +69,8 @@ class TorsionRuleMatch(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %TorsionRuleMatch instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatch instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %TorsionRuleMatch instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %TorsionRuleMatch instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -97,8 +97,8 @@ class TorsionRuleMatch(Boost.Python.instance):
     def getRule() -> TorsionRule: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRuleMatch instance \a match.
-    # \param match The \e %TorsionRuleMatch instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %TorsionRuleMatch instance \a match.
+    # \param match The \c %TorsionRuleMatch instance to copy.
     # \return \a self
     # 
     def assign(match: TorsionRuleMatch) -> TorsionRuleMatch: pass

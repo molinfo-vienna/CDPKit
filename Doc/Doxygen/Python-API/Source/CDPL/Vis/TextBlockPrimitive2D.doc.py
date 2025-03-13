@@ -38,8 +38,8 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def __init__(prim: TextBlockPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TextBlockPrimitive2D instance \a prim.
-    # \param prim The \e %TextBlockPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %TextBlockPrimitive2D instance \a prim.
+    # \param prim The \c %TextBlockPrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: TextBlockPrimitive2D) -> TextBlockPrimitive2D: pass

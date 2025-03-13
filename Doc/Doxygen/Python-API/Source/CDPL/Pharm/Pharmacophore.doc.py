@@ -175,21 +175,21 @@ class Pharmacophore(FeatureContainer):
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
     # \param pharm Specifies the second addend.
-    # \return The updated \e %Pharmacophore instance \a self.
+    # \return The updated \c %Pharmacophore instance \a self.
     # 
     def __iadd__(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
     # \param cntnr Specifies the second addend.
-    # \return The updated \e %Pharmacophore instance \a self.
+    # \return The updated \c %Pharmacophore instance \a self.
     # 
     def __iadd__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
     # \param cntnr Specifies the subtrahend.
-    # \return The updated \e %Pharmacophore instance \a self.
+    # \return The updated \c %Pharmacophore instance \a self.
     # 
     def __isub__(cntnr: FeatureContainer) -> Pharmacophore: pass
 

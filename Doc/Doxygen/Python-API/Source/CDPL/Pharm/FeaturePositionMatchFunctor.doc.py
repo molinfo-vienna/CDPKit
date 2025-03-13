@@ -39,8 +39,8 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %FeaturePositionMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeaturePositionMatchFunctor instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %FeaturePositionMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %FeaturePositionMatchFunctor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -49,8 +49,8 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePositionMatchFunctor instance \a func.
-    # \param func The \e %FeaturePositionMatchFunctor instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FeaturePositionMatchFunctor instance \a func.
+    # \param func The \c %FeaturePositionMatchFunctor instance to copy.
     # \return \a self
     # 
     def assign(func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass

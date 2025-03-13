@@ -46,8 +46,8 @@ class MMCIFData(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %Item instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Item instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %Item instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Item instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -56,8 +56,8 @@ class MMCIFData(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Item instance \a item.
-        # \param item The \e %Item instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %Item instance \a item.
+        # \param item The \c %Item instance to copy.
         # \return \a self
         # 
         def assign(item: Item) -> Item: pass
@@ -164,8 +164,8 @@ class MMCIFData(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %Category instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Category instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %Category instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Category instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -174,15 +174,15 @@ class MMCIFData(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Category instance \a cat.
-        # \param cat The \e %Category instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %Category instance \a cat.
+        # \param cat The \c %Category instance to copy.
         # \return \a self
         # 
         def assign(cat: Category) -> Category: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %MMCIFData instance \a cat.
-        # \param cat The \e %MMCIFData instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %MMCIFData instance \a cat.
+        # \param cat The \c %MMCIFData instance to copy.
         # \return \a self
         # 
         def assign(cat: MMCIFData) -> MMCIFData: pass
@@ -332,8 +332,8 @@ class MMCIFData(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %MMCIFData instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMCIFData instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %MMCIFData instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MMCIFData instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -360,8 +360,8 @@ class MMCIFData(Boost.Python.instance):
     def getNumCategories() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMCIFData instance \a data.
-    # \param data The \e %MMCIFData instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %MMCIFData instance \a data.
+    # \param data The \c %MMCIFData instance to copy.
     # \return \a self
     # 
     def assign(data: MMCIFData) -> MMCIFData: pass

@@ -39,8 +39,8 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %DVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %DVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -49,36 +49,36 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
-    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFQuaternionExpression instance \a e.
+    # \param e The \c %ConstFQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
-    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDQuaternionExpression instance \a e.
+    # \param e The \c %ConstDQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
-    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLQuaternionExpression instance \a e.
+    # \param e The \c %ConstLQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
-    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULQuaternionExpression instance \a e.
+    # \param e The \c %ConstULQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorQuaternionAdapter instance \a a.
-    # \param a The \e %DVectorQuaternionAdapter instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DVectorQuaternionAdapter instance \a a.
+    # \param a The \c %DVectorQuaternionAdapter instance to copy.
     # \return \a self
     # 
     def assign(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
@@ -160,28 +160,28 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param a The \e %DVectorQuaternionAdapter instance to be compared with.
+    # \param a The \c %DVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(a: DVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param q The \e %ConstDQuaternionExpression instance to be compared with.
+    # \param q The \c %ConstDQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param a The \e %DVectorQuaternionAdapter instance to be compared with.
+    # \param a The \c %DVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(a: DVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param q The \e %ConstDQuaternionExpression instance to be compared with.
+    # \param q The \c %ConstDQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(q: ConstDQuaternionExpression) -> bool: pass
@@ -207,14 +207,14 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
     # \param t Specifies the second addend.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the addition.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the addition.
     # 
     def __add__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the addition.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the addition.
     # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -228,14 +228,14 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
     # \param t Specifies the subtrahend.
-    # \return A \e %DVectorQuaternionAdapter instance holding the result of the subtraction.
+    # \return A \c %DVectorQuaternionAdapter instance holding the result of the subtraction.
     # 
     def __sub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
     # \param e Specifies the subtrahend.
-    # \return A \e %DVectorQuaternionAdapter instance holding the result of the subtraction.
+    # \return A \c %DVectorQuaternionAdapter instance holding the result of the subtraction.
     # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -249,14 +249,14 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the multiplication.
     # 
     def __mul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the multiplication.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the multiplication.
     # 
     def __mul__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -270,14 +270,14 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the division.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
     # \param e Specifies the divisor.
-    # \return A \e %ConstDQuaternionExpression instance holding the result of the division.
+    # \return A \c %ConstDQuaternionExpression instance holding the result of the division.
     # 
     def __div__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
@@ -298,84 +298,84 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
     # \param t Specifies the second addend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __iadd__(t: float) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += a</tt>.
     # \param a Specifies the second addend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __iadd__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
     # \param q Specifies the second addend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __iadd__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
     # \param t Specifies the subtrahend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __isub__(t: float) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
     # \param a Specifies the subtrahend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __isub__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
     # \param q Specifies the subtrahend.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __isub__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __imul__(t: float) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= a</tt>.
     # \param a Specifies the multiplier.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __imul__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
     # \param q Specifies the multiplier.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __imul__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(t: float) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= a</tt>.
     # \param a Specifies the divisor.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
     # \param q Specifies the divisor.
-    # \return The updated \e %DVectorQuaternionAdapter instance \a self.
+    # \return The updated \c %DVectorQuaternionAdapter instance \a self.
     # 
     def __idiv__(q: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 

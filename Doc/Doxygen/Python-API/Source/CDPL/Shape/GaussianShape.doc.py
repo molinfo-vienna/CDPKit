@@ -38,8 +38,8 @@ class GaussianShape(Base.PropertyContainer):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %Element instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Element instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %Element instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Element instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -48,8 +48,8 @@ class GaussianShape(Base.PropertyContainer):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Element instance \a elem.
-        # \param elem The \e %Element instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %Element instance \a elem.
+        # \param elem The \c %Element instance to copy.
         # \return \a self
         # 
         def assign(elem: Element) -> Element: pass
@@ -124,8 +124,8 @@ class GaussianShape(Base.PropertyContainer):
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShape instance \a shape.
-    # \param shape The \e %GaussianShape instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %GaussianShape instance \a shape.
+    # \param shape The \c %GaussianShape instance to copy.
     # \return \a self
     # 
     def assign(shape: GaussianShape) -> GaussianShape: pass

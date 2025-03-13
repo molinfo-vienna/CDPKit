@@ -45,8 +45,8 @@ class PosIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PosIonizableFeatureGenerator instance \a gen.
-    # \param gen The \e %PosIonizableFeatureGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %PosIonizableFeatureGenerator instance \a gen.
+    # \param gen The \c %PosIonizableFeatureGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: PosIonizableFeatureGenerator) -> PosIonizableFeatureGenerator: pass

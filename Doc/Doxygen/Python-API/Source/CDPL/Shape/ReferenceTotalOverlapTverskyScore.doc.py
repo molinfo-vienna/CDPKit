@@ -39,8 +39,8 @@ class ReferenceTotalOverlapTverskyScore(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %ReferenceTotalOverlapTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ReferenceTotalOverlapTverskyScore instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %ReferenceTotalOverlapTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %ReferenceTotalOverlapTverskyScore instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -49,8 +49,8 @@ class ReferenceTotalOverlapTverskyScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReferenceTotalOverlapTverskyScore instance \a score.
-    # \param score The \e %ReferenceTotalOverlapTverskyScore instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ReferenceTotalOverlapTverskyScore instance \a score.
+    # \param score The \c %ReferenceTotalOverlapTverskyScore instance to copy.
     # \return \a self
     # 
     def assign(score: ReferenceTotalOverlapTverskyScore) -> ReferenceTotalOverlapTverskyScore: pass

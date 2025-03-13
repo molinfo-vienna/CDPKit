@@ -31,43 +31,43 @@ class ULVectorExpression(ConstULVectorExpression):
     def swap(e: ULVectorExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVectorExpression instance \a e.
-    # \param e The \e %ULVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ULVectorExpression instance \a e.
+    # \param e The \c %ULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ULVectorExpression) -> ULVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFVectorExpression instance \a e.
+    # \param e The \c %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFVectorExpression) -> ULVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDVectorExpression instance \a e.
+    # \param e The \c %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDVectorExpression) -> ULVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLVectorExpression instance \a e.
+    # \param e The \c %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLVectorExpression) -> ULVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULVectorExpression instance \a e.
+    # \param e The \c %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULVectorExpression) -> ULVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -89,42 +89,42 @@ class ULVectorExpression(ConstULVectorExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __iadd__(e: ULVectorExpression) -> ULVectorExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __iadd__(e: ConstULVectorExpression) -> ULVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __isub__(e: ULVectorExpression) -> ULVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __isub__(e: ConstULVectorExpression) -> ULVectorExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __imul__(t: int) -> ULVectorExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %ULVectorExpression instance \a self.
+    # \return The updated \c %ULVectorExpression instance \a self.
     # 
     def __idiv__(t: int) -> ULVectorExpression: pass
 

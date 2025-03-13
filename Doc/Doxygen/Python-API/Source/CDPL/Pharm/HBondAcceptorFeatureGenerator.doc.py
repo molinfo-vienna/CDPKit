@@ -44,8 +44,8 @@ class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondAcceptorFeatureGenerator instance \a gen.
-    # \param gen The \e %HBondAcceptorFeatureGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %HBondAcceptorFeatureGenerator instance \a gen.
+    # \param gen The \c %HBondAcceptorFeatureGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: HBondAcceptorFeatureGenerator) -> HBondAcceptorFeatureGenerator: pass

@@ -38,8 +38,8 @@ class ClipPathPrimitive2D(Path2D, GraphicsPrimitive2D):
     def __init__(prim: ClipPathPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ClipPathPrimitive2D instance \a prim.
-    # \param prim The \e %ClipPathPrimitive2D instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ClipPathPrimitive2D instance \a prim.
+    # \param prim The \c %ClipPathPrimitive2D instance to copy.
     # \return \a self
     # 
     def assign(prim: ClipPathPrimitive2D) -> ClipPathPrimitive2D: pass

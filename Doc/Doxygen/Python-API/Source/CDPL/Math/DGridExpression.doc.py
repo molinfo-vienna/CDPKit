@@ -31,29 +31,29 @@ class DGridExpression(ConstDGridExpression):
     def swap(e: DGridExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGridExpression instance \a e.
-    # \param e The \e %DGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DGridExpression instance \a e.
+    # \param e The \c %DGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: DGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
-    # \param e The \e %ConstFGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFGridExpression instance \a e.
+    # \param e The \c %ConstFGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
-    # \param e The \e %ConstDGridExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDGridExpression instance \a e.
+    # \param e The \c %ConstDGridExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
-    # \param e The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a e.
+    # \param e The \c %object instance to copy.
     # \return \a self
     # 
     def assign(e: object) -> DGridExpression: pass
@@ -77,42 +77,42 @@ class DGridExpression(ConstDGridExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __iadd__(e: DGridExpression) -> DGridExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __iadd__(e: ConstDGridExpression) -> DGridExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __isub__(e: DGridExpression) -> DGridExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __isub__(e: ConstDGridExpression) -> DGridExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __imul__(t: float) -> DGridExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %DGridExpression instance \a self.
+    # \return The updated \c %DGridExpression instance \a self.
     # 
     def __idiv__(t: float) -> DGridExpression: pass
 

@@ -45,8 +45,8 @@ class DGConstraintGenerator(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %StereoCenterData instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StereoCenterData instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %StereoCenterData instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %StereoCenterData instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -86,8 +86,8 @@ class DGConstraintGenerator(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %DGConstraintGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGConstraintGenerator instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %DGConstraintGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %DGConstraintGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -96,8 +96,8 @@ class DGConstraintGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGenerator instance \a gen.
-    # \param gen The \e %DGConstraintGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %DGConstraintGenerator instance \a gen.
+    # \param gen The \c %DGConstraintGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: DGConstraintGenerator) -> DGConstraintGenerator: pass

@@ -38,8 +38,8 @@ class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
     def __init__(atom_mapping: AtomMapping) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionAtomMappingMatchExpression instance \a expr.
-    # \param expr The \e %ReactionAtomMappingMatchExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ReactionAtomMappingMatchExpression instance \a expr.
+    # \param expr The \c %ReactionAtomMappingMatchExpression instance to copy.
     # \return \a self
     # 
     def assign(expr: ReactionAtomMappingMatchExpression) -> ReactionAtomMappingMatchExpression: pass

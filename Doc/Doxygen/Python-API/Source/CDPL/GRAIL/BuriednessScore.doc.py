@@ -51,8 +51,8 @@ class BuriednessScore(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %BuriednessScore instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BuriednessScore instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %BuriednessScore instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %BuriednessScore instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -110,8 +110,8 @@ class BuriednessScore(Boost.Python.instance):
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessScore instance \a score.
-    # \param score The \e %BuriednessScore instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %BuriednessScore instance \a score.
+    # \param score The \c %BuriednessScore instance to copy.
     # \return \a self
     # 
     def assign(score: BuriednessScore) -> BuriednessScore: pass

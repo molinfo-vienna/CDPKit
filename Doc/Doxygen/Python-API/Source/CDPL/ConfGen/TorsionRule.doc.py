@@ -47,8 +47,8 @@ class TorsionRule(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %AngleEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AngleEntry instances \e a and \e b reference different C++ objects. 
+        # Different Python \c %AngleEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %AngleEntry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -57,8 +57,8 @@ class TorsionRule(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %AngleEntry instance \a entry.
-        # \param entry The \e %AngleEntry instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %AngleEntry instance \a entry.
+        # \param entry The \c %AngleEntry instance to copy.
         # \return \a self
         # 
         def assign(entry: AngleEntry) -> AngleEntry: pass
@@ -111,8 +111,8 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \e %TorsionRule instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRule instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %TorsionRule instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %TorsionRule instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -121,8 +121,8 @@ class TorsionRule(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRule instance \a rule.
-    # \param rule The \e %TorsionRule instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %TorsionRule instance \a rule.
+    # \param rule The \c %TorsionRule instance to copy.
     # \return \a self
     # 
     def assign(rule: TorsionRule) -> TorsionRule: pass
@@ -218,7 +218,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Performs the in-place addition operation <tt>self += ang_entry</tt>.
     # \param ang_entry Specifies the second addend.
-    # \return The updated \e %None instance \a self.
+    # \return The updated \c %None instance \a self.
     # 
     def __iadd__(ang_entry: AngleEntry) -> None: pass
 

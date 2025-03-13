@@ -270,14 +270,14 @@ class Fragment(MolecularGraph):
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
     # \param molgraph Specifies the second addend.
-    # \return The updated \e %Fragment instance \a self.
+    # \return The updated \c %Fragment instance \a self.
     # 
     def __iadd__(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
     # \param molgraph Specifies the subtrahend.
-    # \return The updated \e %Fragment instance \a self.
+    # \return The updated \c %Fragment instance \a self.
     # 
     def __isub__(molgraph: MolecularGraph) -> Fragment: pass
 

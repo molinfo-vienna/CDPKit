@@ -44,8 +44,8 @@ class XBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondDonorFeatureGenerator instance \a gen.
-    # \param gen The \e %XBondDonorFeatureGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %XBondDonorFeatureGenerator instance \a gen.
+    # \param gen The \c %XBondDonorFeatureGenerator instance to copy.
     # \return \a self
     # 
     def assign(gen: XBondDonorFeatureGenerator) -> XBondDonorFeatureGenerator: pass

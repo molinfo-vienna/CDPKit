@@ -67,22 +67,22 @@ class STPair(Boost.Python.instance):
     def setSecond(value: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %STPair instance \a array.
-    # \param array The \e %STPair instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %STPair instance \a array.
+    # \param array The \c %STPair instance to copy.
     # \return \a self
     # 
     def assign(array: STPair) -> STPair: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __eq__(pair: STPair) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ne__(pair: STPair) -> bool: pass
@@ -96,7 +96,7 @@ class STPair(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __ge__(pair: STPair) -> bool: pass
@@ -110,7 +110,7 @@ class STPair(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __gt__(pair: STPair) -> bool: pass

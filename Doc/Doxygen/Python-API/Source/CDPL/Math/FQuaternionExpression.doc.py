@@ -31,43 +31,43 @@ class FQuaternionExpression(ConstFQuaternionExpression):
     def swap(e: FQuaternionExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionExpression instance \a e.
-    # \param e The \e %FQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %FQuaternionExpression instance \a e.
+    # \param e The \c %FQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
-    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstFQuaternionExpression instance \a e.
+    # \param e The \c %ConstFQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
-    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstDQuaternionExpression instance \a e.
+    # \param e The \c %ConstDQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstDQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
-    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstLQuaternionExpression instance \a e.
+    # \param e The \c %ConstLQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstLQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
-    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConstULQuaternionExpression instance \a e.
+    # \param e The \c %ConstULQuaternionExpression instance to copy.
     # \return \a self
     # 
     def assign(e: ConstULQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %object instance \a a.
+    # \param a The \c %object instance to copy.
     # \return \a self
     # 
     def assign(a: object) -> None: pass
@@ -108,84 +108,84 @@ class FQuaternionExpression(ConstFQuaternionExpression):
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
     # \param t Specifies the second addend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __iadd__(t: float) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
     # \param e Specifies the second addend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __iadd__(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
     # \param q Specifies the second addend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __iadd__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
     # \param t Specifies the subtrahend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __isub__(t: float) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __isub__(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
     # \param q Specifies the subtrahend.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __isub__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
     # \param t Specifies the multiplier.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __imul__(t: float) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= e</tt>.
     # \param e Specifies the multiplier.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __imul__(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
     # \param q Specifies the multiplier.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __imul__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
     # \param t Specifies the divisor.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __idiv__(t: float) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= e</tt>.
     # \param e Specifies the divisor.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __idiv__(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
     # \param q Specifies the divisor.
-    # \return The updated \e %FQuaternionExpression instance \a self.
+    # \return The updated \c %FQuaternionExpression instance \a self.
     # 
     def __idiv__(q: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
