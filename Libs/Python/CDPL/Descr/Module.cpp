@@ -34,6 +34,8 @@ BOOST_PYTHON_MODULE(_descr)
     using namespace CDPLPythonDescr;
 
     exportSimilarityFunctors();
+    exportBulkSimilarityCalculator();
+
     exportAutoCorrelation2DVectorCalculator();
     exportAtomRDFCodeCalculator();
     exportMoleculeRDFDescriptorCalculator();

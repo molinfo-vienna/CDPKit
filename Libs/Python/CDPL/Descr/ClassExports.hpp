@@ -30,6 +30,7 @@ namespace CDPLPythonDescr
 {
 
     void exportSimilarityFunctors();
+    void exportBulkSimilarityCalculator();
     void exportAutoCorrelation2DVectorCalculator();
     void exportAtomRDFCodeCalculator();
     void exportMoleculeRDFDescriptorCalculator();

@@ -30,7 +30,6 @@
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
-#include "Base/GenericFromPythonConverter.hpp"
 
 #include "ClassExports.hpp"
 

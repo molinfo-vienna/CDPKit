@@ -32,7 +32,8 @@ endforeach(PYTHON_FILE)
 set(descr_MOD_SRCS
     Module.cpp
 
-    SimilarityFunctorExport.cpp 
+    SimilarityFunctorExport.cpp
+    BulkSimilarityCalculatorExport.cpp 
     
     AtomRDFCodeCalculatorExport.cpp 
     MoleculeRDFDescriptorCalculatorExport.cpp 
