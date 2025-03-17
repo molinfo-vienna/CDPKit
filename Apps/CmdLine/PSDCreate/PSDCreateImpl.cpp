@@ -128,13 +128,7 @@ private:
             return false;
                 
         try {
-            perceiveComponents(molecule, false);
-            perceiveSSSR(molecule, false);
-            setRingFlags(molecule, false);
-            calcImplicitHydrogenCounts(molecule, false);
-            perceiveHybridizationStates(molecule, false);
-            setAromaticityFlags(molecule, false);
-            calcCIPPriorities(molecule, false);
+            calcBasicProperties(molecule, false);
             calcAtomCIPConfigurations(molecule, false);
             calcBondCIPConfigurations(molecule, false);
             CDPL::MolProp::calcAtomHydrophobicities(molecule, false);

@@ -316,11 +316,14 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
 
         db_acc.getMolecule(i, mol);
 
-        calcCIPPriorities(mol, false);
+        calcBasicProperties(mol, false);
+        calcAtomCIPConfigurations(mol, false);
+        calcBondCIPConfigurations(mol, false);
+
+        auto mol_hash = hashCalculator.calculate(mol);
+    
         numProcessed++;
 
-        std::uint64_t mol_hash = hashCalculator.calculate(mol);
-    
         if (!allowDupEntries) {
             if (procMolecules.find(mol_hash) != procMolecules.end()) {
                 numRejected++;
