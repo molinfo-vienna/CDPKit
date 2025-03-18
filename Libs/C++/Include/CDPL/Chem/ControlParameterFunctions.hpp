@@ -439,6 +439,17 @@ namespace CDPL
 
         CDPL_CHEM_API void clearMOL2EnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2.3
+         */
+        CDPL_CHEM_API bool getMOL2ReadPartialAsFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setMOL2ReadPartialAsFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool read);
+
+        CDPL_CHEM_API bool hasMOL2ReadPartialAsFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearMOL2ReadPartialAsFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
 
         CDPL_CHEM_API bool getMOL2CalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
@@ -475,6 +486,17 @@ namespace CDPL
 
         CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.2.3
+         */
+        CDPL_CHEM_API bool getMOL2OutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setMOL2OutputFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasMOL2OutputFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearMOL2OutputFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+        
 
         CDPL_CHEM_API bool getXYZCommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
 

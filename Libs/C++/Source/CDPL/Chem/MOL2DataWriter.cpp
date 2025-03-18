@@ -157,6 +157,7 @@ void Chem::MOL2DataWriter::init(std::ostream& os)
     atomChargeType         = getMOL2ChargeTypeParameter(ioBase);
     moleculeType           = getMOL2MoleculeTypeParameter(ioBase);
     outputSubstructs       = getMOL2OutputSubstructuresParameter(ioBase);
+    outputFormalCharges    = getMOL2OutputFormalChargesParameter(ioBase);
     writeConfEnergyComment = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
 
     if (multiConfExport)
@@ -316,8 +317,12 @@ void Chem::MOL2DataWriter::writeAtomSection(std::ostream& os, const MolecularGra
             } else
                 os << "\t0\t" << MOL2::EMPTY_STRING_FIELD;
 
-            if (atomChargeType != MOL2ChargeType::NO_CHARGES)
-                os << '\t' << getMOL2Charge(atom);
+            if (atomChargeType != MOL2ChargeType::NO_CHARGES) {
+                if (outputFormalCharges)
+                    os << '\t' << getFormalCharge(atom);
+                else
+                    os << '\t' << getMOL2Charge(atom);
+            }
         }
 
         os << MOL2::END_OF_LINE;
@@ -391,6 +396,12 @@ const std::string& Chem::MOL2DataWriter::getMoleculeTypeString(const MolecularGr
 
 const std::string& Chem::MOL2DataWriter::getChargeTypeString(const MolecularGraph& molgraph)
 {
+    if (outputFormalCharges) {
+        atomChargeType = MOL2ChargeType::USER;
+        
+        return chargeTypeToStringMap[MOL2ChargeType::USER];
+    }
+    
     if (hasMOL2ChargeType(molgraph))
         atomChargeType = getMOL2ChargeType(molgraph);
 

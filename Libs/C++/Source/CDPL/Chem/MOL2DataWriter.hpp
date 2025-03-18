@@ -107,6 +107,7 @@ namespace CDPL
             bool                    extendedAtomTypes;
             bool                    aromaticBondTypes;
             bool                    outputSubstructs;
+            bool                    outputFormalCharges;
             unsigned int            atomChargeType;
             unsigned int            moleculeType;
             bool                    writeConfEnergyComment;

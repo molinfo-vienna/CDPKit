@@ -97,6 +97,7 @@ namespace CDPL
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             bool                    multiConfImport;
+            bool                    readFormalCharges;
             bool                    calcFormalCharges;
             std::size_t             molAtomCount;
             std::size_t             molBondCount;

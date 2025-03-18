@@ -87,10 +87,12 @@ namespace CDPL
 
             const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES                                      = false;
             const bool MOL2_ENABLE_AROMATIC_BOND_TYPES                                      = false;
+            const bool MOL2_READ_PARTIAL_AS_FORMAL_CHARGES                                  = false;
             const bool MOL2_CALC_FORMAL_CHARGES                                             = true;
             const unsigned int MOL2_CHARGE_TYPE                                             = MOL2ChargeType::NO_CHARGES;
             const unsigned int MOL2_MOLECULE_TYPE                                           = MOL2MoleculeType::SMALL;
             const bool MOL2_OUTPUT_SUBSTRUCTURES                                            = true;
+            const bool MOL2_OUTPUT_FORMAL_CHARGES                                           = false;
 
             const bool XYZ_COMMENT_IS_NAME                                                  = true;
             const bool XYZ_PERCEIVE_CONNECTIVITY                                            = true;

@@ -254,6 +254,11 @@ namespace CDPL
 
             extern CDPL_CHEM_API const bool MOL2_ENABLE_AROMATIC_BOND_TYPES;
 
+            /**
+             * \since 1.2.3
+             */
+            extern CDPL_CHEM_API const bool MOL2_READ_PARTIAL_AS_FORMAL_CHARGES;
+            
             extern CDPL_CHEM_API const bool MOL2_CALC_FORMAL_CHARGES;
 
             extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
@@ -262,6 +267,11 @@ namespace CDPL
 
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 
+            /**
+             * \since 1.2.3
+             */
+            extern CDPL_CHEM_API const bool MOL2_OUTPUT_FORMAL_CHARGES;
+            
             extern CDPL_CHEM_API const bool XYZ_COMMENT_IS_NAME;
             
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;

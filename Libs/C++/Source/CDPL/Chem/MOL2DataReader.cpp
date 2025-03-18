@@ -264,6 +264,7 @@ void Chem::MOL2DataReader::init(std::istream& is)
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase); 
     multiConfImport     = getMultiConfImportParameter(ioBase);
     calcFormalCharges   = getMOL2CalcFormalChargesParameter(ioBase);
+    readFormalCharges   = getMOL2ReadPartialAsFormalChargesParameter(ioBase);
 
     is.imbue(std::locale::classic());
 }
@@ -283,6 +284,9 @@ void Chem::MOL2DataReader::doReadMolecule(std::istream& is, Molecule& mol)
     for (std::size_t i = num_atoms - molAtomCount, j = 0; j < molAtomCount; i++, j++) {
         Atom& atom = mol.getAtom(i);
 
+        if (readFormalCharges && hasFormalCharge(atom))
+            continue;
+        
         setImplicitHydrogenCount(atom, 0);
         setFormalCharge(atom, calcFormalCharge(atom, mol));
     }
@@ -485,8 +489,16 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 
 // Atom charge
                 if (charge_type != MOL2ChargeType::NO_CHARGES && ++t_it != t_end) {
-                    setMOL2Charge(atom, parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom charge"));
                     have_charge = true;
+
+                    if (*t_it != MOL2::EMPTY_STRING_FIELD) {
+                        auto charge = parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom charge");
+
+                        if (readFormalCharges)
+                            setFormalCharge(atom, charge);
+                        
+                        setMOL2Charge(atom, charge);
+                    }
                 }
             } 
         } 
