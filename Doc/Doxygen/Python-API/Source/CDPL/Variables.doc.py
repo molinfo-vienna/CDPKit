@@ -27,7 +27,7 @@ BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
 ##
 # \brief The <em>CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
 # 
-BUILD_TIME = 202503130904
+BUILD_TIME = 202503181232
 
 ##
 # \brief An identifier for the compiler that was used to build the <em>CDPL</em>.
@@ -77,7 +77,7 @@ HAVE_QT = True
 ##
 # \brief The full <em>CDPL</em> version number.
 # 
-VERSION = 10300
+VERSION = 10203
 
 ##
 # \brief The <em>CDPL</em> major version.
@@ -87,19 +87,19 @@ VERSION_MAJOR = 1
 ##
 # \brief The <em>CDPL</em> minor version.
 # 
-VERSION_MINOR = 3
+VERSION_MINOR = 2
 
 ##
 # \brief The <em>CDPL</em> patch-level.
 # 
-VERSION_PATCH = 0
+VERSION_PATCH = 3
 
 ##
 # \brief The full <em>CDPL</em> version as string.
 # 
-VERSION_STRING = '1.3.0.dev1'
+VERSION_STRING = '1.2.3'
 
 ##
 # \brief The full <em>CDPL</em> version as string.
 # 
-__version__ = '1.3.0.dev1'
+__version__ = '1.2.3'

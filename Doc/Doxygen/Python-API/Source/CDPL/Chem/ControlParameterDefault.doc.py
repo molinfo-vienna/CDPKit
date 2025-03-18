@@ -272,6 +272,16 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
+    MOL2_READ_PARTIAL_AS_FORMAL_CHARGES = False
+
+    ##
+    # \brief 
+    #
+    MOL2_OUTPUT_FORMAL_CHARGES = False
+
+    ##
+    # \brief 
+    #
     COMMENT_IS_NAME = True
 
     ##

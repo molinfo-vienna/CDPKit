@@ -388,6 +388,16 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
+    MOL2_READ_PARTIAL_AS_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_READ_PARTIAL_AS_FORMAL_CHARGES')
+
+    ##
+    # \brief 
+    #
+    MOL2_OUTPUT_FORMAL_CHARGES = CDPL.Base.LookupKey('MOL2_OUTPUT_FORMAL_CHARGES')
+
+    ##
+    # \brief 
+    #
     COMMENT_IS_NAME = CDPL.Base.LookupKey('XYZ_COMMENT_IS_NAME')
 
     ##
