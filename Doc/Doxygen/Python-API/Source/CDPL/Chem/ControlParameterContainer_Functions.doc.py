@@ -1049,6 +1049,60 @@ def setXYZCalcFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc
 # \brief 
 # \param cntnr 
 #
+def clearMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param read 
+#
+def setMOL2ReadPartialAsFormalChargesParameter(cntnr: Base.ControlParameterContainer, read: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setMOL2OutputFormalChargesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearMDLTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
