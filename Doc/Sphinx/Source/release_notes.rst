@@ -3,6 +3,30 @@
 Release Notes
 =============
 
+Release V1.2.3
+--------------
+
+.. rubric:: Bug Fixes
+
+- Fix for a *Base::ItemNotFound* exception thrown during the merging of temporary PSD files
+  when running the command line tool :doc:`psdcreate </applications/psdcreate>` in multi-threaded mode
+   
+.. rubric:: New Functionality and Features
+
+- New feature of program :doc:`ChOX </applications/chox>` that allows to display structure/reaction data associated
+  with the currently shown molecule/reaction records
+- See section below
+
+.. rubric:: API Changes
+
+- New control-parameters *Chem::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES* and *Chem::MOL2_OUTPUT_FORMAL_CHARGES* plus
+  associated setter/getter functions that allow to control whether formal instead of partial charges shall be read
+  from/written to MOL2 files
+- New class template *Descr::BulkSimilarityCalculator* for the calculation of multiple query <-> target descriptor
+  similarities/distances in a single run 
+- Similarity and distance functions in namespace *Descr* are now also available as functor classes (e.g. *Descr::TanimotoSimilarity*)
+- New similarity and distance functions supporting generic mathematical vectors
+     
 Release V1.2.2
 --------------
 

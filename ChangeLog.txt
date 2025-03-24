@@ -1,14 +1,16 @@
 master:
 
+v1.2.3:
+
  - New control-parameters Chem::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES and Chem::MOL2_OUTPUT_FORMAL_CHARGES plus
    associated functions that allow to control whether formal instead of partial charges shall be read from/written to
-   MOL2 files. Note: this is an extension not backed by the official MOL2 format specification!
+   MOL2 files
  - Fix for a Base::ItemNotFound exception that gets thrown during the merging of temporary PSD files which occur
    when running the program 'PSDCreate' in multi-threaded mode
  - New class template Descr::BulkSimilarityCalculator for the calculation of multiple query <-> target descriptor
    similarities/distances in a single run 
  - Similarity and distance functions in namespace Descr are now also available in the form of functor classes
- - New similarity and distance functions for generic descriptor vectors
+ - New similarity and distance functions in namespace Descr applicable to generic mathematical vectors
  - New feature of program 'ChOX' that allows to display structure/reaction data associated
    with the currently shown molecules/reactions
 
