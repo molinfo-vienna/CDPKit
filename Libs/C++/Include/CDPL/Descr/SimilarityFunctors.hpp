@@ -29,7 +29,6 @@
 #ifndef CDPL_DESCR_SIMILARITYFUNCTORS_HPP
 #define CDPL_DESCR_SIMILARITYFUNCTORS_HPP
 
-#include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Descr/SimilarityFunctions.hpp"
 
 
@@ -42,7 +41,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating <em>Tanimoto Similarities</em> [\ref CITB] of bitsets and vectors.
          */
-        class CDPL_DESCR_API TanimotoSimilarity
+        class TanimotoSimilarity
         {
 
           public:
@@ -93,7 +92,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating <em>Cosine Similarities</em> [\ref WCOS] of bitsets and vectors.
          */
-        class CDPL_DESCR_API CosineSimilarity
+        class CosineSimilarity
         {
 
           public:
@@ -144,7 +143,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Euclidean Similarity</em> [\ref GSIM] of bitsets.
          */
-        class CDPL_DESCR_API EuclideanSimilarity
+        class EuclideanSimilarity
         {
 
           public:
@@ -177,7 +176,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Manhattan Similarity</em> [\ref GSIM] of bitsets.
          */
-        class CDPL_DESCR_API ManhattanSimilarity
+        class ManhattanSimilarity
         {
 
           public:
@@ -210,7 +209,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Dice Similarity</em> [\ref GSIM] of bitsets.
          */
-        class CDPL_DESCR_API DiceSimilarity
+        class DiceSimilarity
         {
 
           public:
@@ -242,7 +241,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Tversky Similarity</em> [\ref GSIM] of bitsets.
          */
-        class CDPL_DESCR_API TverskySimilarity
+        class TverskySimilarity
         {
 
           public:
@@ -290,7 +289,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Hamming Distance</em> [\ref WHAM, \ref CITB] between bitsets.
          */
-        class CDPL_DESCR_API HammingDistance
+        class HammingDistance
         {
 
           public:
@@ -322,7 +321,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Manhattan Distance</em> [\ref MADI] between bitsets and vectors.
          */
-        class CDPL_DESCR_API ManhattanDistance
+        class ManhattanDistance
         {
 
           public:
@@ -349,7 +348,7 @@ namespace CDPL
         /**
          * \brief Functor class for calculating the <em>Euclidean Distance</em> [\ref CITB] between bitsets and vectors.
          */
-        class CDPL_DESCR_API EuclideanDistance
+        class EuclideanDistance
         {
 
           public:
