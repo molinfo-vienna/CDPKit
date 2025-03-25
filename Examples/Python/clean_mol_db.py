@@ -26,7 +26,7 @@ import CDPL.MolProp as MolProp
 
     
 # performs a (optional) standardization of the argument molecule and then checks whether
-# it fulfills certain user-defined criteria for inclusion/exclusion
+# it fulfills certain user-defined criteria for forwarding/rejection
 def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
     chgs_mod = False
 
@@ -339,16 +339,16 @@ def main() -> None:
     # create writer for molecules passing the checks (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
-    if args.canonicalize:
+    # if canonicalization is enabled and the output format is SMILES then generate canonical SMILES directly 
+    if args.canonicalize and (writer.getDataFormat() == Chem.DataFormat.SMILES or \
+                              writer.getDataFormat() == Chem.DataFormat.SMILES_GZ or \
+                              writer.getDataFormat() == Chem.DataFormat.SMILES_BZ2):
+        args.canonicalize = False
         Chem.setSMILESOutputCanonicalFormParameter(writer, True)
             
     if args.disc_file:
         # create writer for sorted out molecules (format specified by file extension)
         disc_writer = Chem.MolecularGraphWriter(args.disc_file)
-
-        if args.canonicalize:
-            Chem.setSMILESOutputCanonicalFormParameter(disc_writer, True)
-        
     else:
         disc_writer = None
         
