@@ -33,6 +33,10 @@
 
 #include "ConverterRegistration.hpp"
 
+# ifdef _MSC_VER
+#  pragma warning(disable : 4244)
+# endif // _MSC_VER
+
 
 void CDPLPythonDescr::registerFromPythonConverters()
 {
