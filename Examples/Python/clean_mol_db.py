@@ -104,6 +104,18 @@ def processMolecule(mol: Chem.Molecule, args: argparse.Namespace) -> tuple:
             log_msg += ', removed components'
         else:
             log_msg = 'removed components'
+
+    if args.strip_stereo:
+        for atom in mol.atoms:  # clear atom stereo descriptors
+            Chem.clearStereoDescriptor(atom)
+
+        for bond in mol.bonds:  # clear bond stereo descriptors
+            Chem.clearStereoDescriptor(bond) 
+    
+    if args.canonicalize:
+        Chem.calcBasicProperties(mol, False)    # calc. basic properties required for canonicalization
+        Chem.calcCanonicalNumbering(mol, True)  # calc. canon. numbering of atoms
+        Chem.canonicalize(mol)                  # order atoms/bonds according to canon. numbering
             
     return (mol, log_msg)
 
@@ -227,6 +239,14 @@ def parseElementCountList(elem_count_list: str) -> dict:
     return atom_type_counts
                                 
 def parseArgs() -> argparse.Namespace:
+    def strtobool(value: str) -> bool:
+        value = value.lower()
+        
+        if value in ('y', 'yes', 'on', '1', 'true', 't'):
+            return True
+        
+        return False
+
     parser = argparse.ArgumentParser(description='Strips compounds that fulfill particular user-defined criteria from a molecule database.')
 
     parser.add_argument('-i',
@@ -250,12 +270,25 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Keep only the largest molecule component (default: false)')
+    parser.add_argument('-S',
+                        dest='strip_stereo',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Remove atom and bond stereochemistry information (default: false)')
     parser.add_argument('-c',
                         dest='min_charges',
                         required=False,
                         action='store_true',
                         default=False,
                         help='Minimize number of charged atoms (default: false)')
+    parser.add_argument('-C',
+                        dest='canonicalize',
+                        required=False,
+                        metavar='<true|false>',
+                        type=lambda x:bool(strtobool(x)),
+                        default=True,
+                        help='Canonicalize output molecule (default: true)')
     parser.add_argument('-x',
                         dest='excluded_elements',
                         required=False,
@@ -306,14 +339,16 @@ def main() -> None:
     # create writer for molecules passing the checks (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
-    # write canonical SMILES
-    Chem.setSMILESOutputCanonicalFormParameter(writer, True)
-    
+    if args.canonicalize:
+        Chem.setSMILESOutputCanonicalFormParameter(writer, True)
+            
     if args.disc_file:
         # create writer for sorted out molecules (format specified by file extension)
         disc_writer = Chem.MolecularGraphWriter(args.disc_file)
-        # write canonical SMILES
-        Chem.setSMILESOutputCanonicalFormParameter(disc_writer, True)
+
+        if args.canonicalize:
+            Chem.setSMILESOutputCanonicalFormParameter(disc_writer, True)
+        
     else:
         disc_writer = None
         

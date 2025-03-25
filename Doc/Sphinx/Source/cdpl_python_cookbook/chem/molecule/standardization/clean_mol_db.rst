@@ -31,12 +31,20 @@ and then writes only those molecules that fulfill particular user-defined criter
  -s
 
     Keep only the largest molecule component (default: false)
-    
+
+ -S
+
+    Remove atom and bond stereochemistry information (default: false)
+ 
  -c
 
     Minimize the number of charged atoms (default: false) by
     protonation/deprotonation and charge equalization
-    
+
+ -C <true|false>
+
+    Canonicalize output molecule (default: true)
+     
  -x <element list>
 
     List of excluded chem. elements (default: no elements are excluded)
