@@ -44,7 +44,7 @@ namespace CDPLPythonBase
 
         static void* convertible(PyObject* obj_ptr)
         {
-            return obj_ptr;
+            return (obj_ptr && PyCallable_Check(obj_ptr) ? obj_ptr : nullptr);
         }
 
         static bool nonZero(FunctionWrapperType& func)
