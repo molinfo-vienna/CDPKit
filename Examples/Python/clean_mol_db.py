@@ -374,7 +374,7 @@ def main() -> None:
                 # process input molecule
                 out_mol, log_msg = processMolecule(in_mol, args) 
                 
-                if not out_mol:         # check whether the molecule has been sorted out
+                if out_mol is None:     # check whether the molecule has been sorted out
                     if args.verb_level > 1 and log_msg:
                         print('- Molecule %s: discarded, %s' % (mol_id, log_msg))
 
