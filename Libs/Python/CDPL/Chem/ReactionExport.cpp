@@ -230,12 +230,12 @@ void CDPLPythonChem::exportReaction()
         .staticmethod("registerCopyPostprocessingFunction")
         .def("invokeCopyPostprocessingFunctions", &ReactionWrapper::invokeCopyPostprocessingFunctions,
              (python::arg("self"), python::arg("src_rxn")))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def("__getitem__", getComponentFunc, (python::arg("self"), python::arg("idx")), 
              python::return_internal_reference<1>())
         .def("__delitem__", removeComponentFunc, (python::arg("self"), python::arg("idx")))
         .def("__contains__", &Chem::Reaction::containsComponent, (python::arg("self"), python::arg("mol"))) 
-        //.def("__len__", getNumComponentsFunc, python::arg("self"))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .def("__len__", getNumComponentsFunc, python::arg("self"))
         .add_property("reactants", python::make_function(&createComponentSequence<Chem::ReactionRole::REACTANT>, 
                                                          python::with_custodian_and_ward_postcall<0, 1>()))
         .add_property("agents", python::make_function(&createComponentSequence<Chem::ReactionRole::AGENT>, 

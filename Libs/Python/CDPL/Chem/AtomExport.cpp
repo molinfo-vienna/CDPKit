@@ -111,11 +111,11 @@ void CDPLPythonChem::exportAtom()
              python::with_custodian_and_ward_postcall<0, 1>())
         .def("getBonds", &createBondSequence<Chem::BondContainer>, python::arg("self"),
              python::with_custodian_and_ward_postcall<0, 1>())
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(AtomContainerVirtualFunctionsVisitor<AtomWrapper>())
         .def(BondContainerVirtualFunctionsVisitor())
-        .def(AtomContainerSpecialFunctionsVisitor(true))
         .def(BondContainerSpecialFunctionsVisitor(true))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .def(AtomContainerSpecialFunctionsVisitor(true))
         .add_property("molecule", python::make_function(getMoleculeFunc, python::return_internal_reference<1>()))
         .add_property("index", &Chem::Atom::getIndex)
         .add_property("atoms", python::make_function(&createAtomSequence<Chem::Atom>, 

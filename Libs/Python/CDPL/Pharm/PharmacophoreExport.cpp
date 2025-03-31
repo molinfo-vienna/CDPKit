@@ -127,9 +127,9 @@ void CDPLPythonPharm::exportPharmacophore()
         .def("__iadd__", addFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
         .def("__isub__", &Pharm::Pharmacophore::operator-=, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
         .def("__delitem__", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true))
         .def(FeatureContainerVirtualFunctionsVisitor<PharmacophoreWrapper>())
-        .def(FeatureContainerSpecialFunctionsVisitor(false))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true));
+        .def(FeatureContainerSpecialFunctionsVisitor(false));
 
     python::register_ptr_to_python<Pharm::Pharmacophore::SharedPointer>();
 }

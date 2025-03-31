@@ -100,9 +100,9 @@ void CDPLPythonChem::exportFragment()
              python::with_custodian_and_ward_postcall<0, 1>())
         .def("reserveMemoryForAtoms", &Chem::Fragment::reserveMemoryForAtoms, (python::arg("self"), python::arg("num_atoms")))
         .def("reserveMemoryForBonds", &Chem::Fragment::reserveMemoryForBonds, (python::arg("self"), python::arg("num_bonds")))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(AtomContainerSpecialFunctionsVisitor(true))
         .def(BondContainerSpecialFunctionsVisitor(true))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def("__iadd__", &Chem::Fragment::operator+=, (python::arg("self"), python::arg("molgraph")), 
              python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("__isub__", &Chem::Fragment::operator-=, (python::arg("self"), python::arg("molgraph")), 

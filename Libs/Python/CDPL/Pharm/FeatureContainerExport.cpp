@@ -57,9 +57,9 @@ void CDPLPythonPharm::exportFeatureContainer()
                                          python::bases<Chem::Entity3DContainer, Base::PropertyContainer>,
                                          boost::noncopyable>("FeatureContainer", python::no_init)
         .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(FeatureContainerVirtualFunctionsVisitor<FeatureContainerWrapper>())
         .def(FeatureContainerSpecialFunctionsVisitor(false))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .add_property("numFeatures", &Pharm::FeatureContainer::getNumFeatures);
 
     python::register_ptr_to_python<Pharm::FeatureContainer::SharedPointer>();

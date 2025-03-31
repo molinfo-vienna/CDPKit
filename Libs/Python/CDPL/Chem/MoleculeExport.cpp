@@ -179,11 +179,11 @@ void CDPLPythonChem::exportMolecule()
         .def("__iadd__", addMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
         .def("__iadd__", addMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
         .def("__isub__", &Chem::Molecule::operator-=, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(AtomContainerVirtualFunctionsVisitor<MoleculeWrapper>())
         .def(BondContainerVirtualFunctionsVisitor())
-        .def(AtomContainerSpecialFunctionsVisitor(true))
         .def(BondContainerSpecialFunctionsVisitor(true))
-        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .def(AtomContainerSpecialFunctionsVisitor(true))
         .add_property("atoms", python::make_function(&createMutableAtomSequence<Chem::Molecule>,
                                                      python::with_custodian_and_ward_postcall<0, 1>()))
         .add_property("bonds", python::make_function(&createMutableBondSequence<Chem::Molecule>,
