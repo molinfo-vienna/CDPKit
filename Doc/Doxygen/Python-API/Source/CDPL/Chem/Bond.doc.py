@@ -169,11 +169,11 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def getNumEntities() -> int: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param atom The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(atom: Atom) -> bool: pass
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
@@ -183,11 +183,11 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+    # \param atom The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief 

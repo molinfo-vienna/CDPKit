@@ -207,18 +207,11 @@ class Pharmacophore(FeatureContainer):
     def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param ftr The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(ftr: Feature) -> bool: pass
-
-    ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(key: Base.LookupKey) -> bool: pass
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -228,17 +221,18 @@ class Pharmacophore(FeatureContainer):
     def __getitem__(idx: int) -> Feature: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param key The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
-    def __len__() -> int: pass
+    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
+    # \param ftr The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(ftr: Feature) -> bool: pass
 
     ##
     # \brief 
@@ -246,3 +240,9 @@ class Pharmacophore(FeatureContainer):
     # \param value 
     #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def __len__() -> int: pass

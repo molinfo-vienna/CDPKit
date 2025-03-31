@@ -375,18 +375,11 @@ class Molecule(MolecularGraph):
     def __isub__(molgraph: MolecularGraph) -> Molecule: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param atom The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(atom: Atom) -> bool: pass
-
-    ##
-    # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param bond The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(bond: Bond) -> bool: pass
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
@@ -396,11 +389,18 @@ class Molecule(MolecularGraph):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+    # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
+    # \param bond The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(bond: Bond) -> bool: pass
+
+    ##
+    # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+    # \param atom The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief 

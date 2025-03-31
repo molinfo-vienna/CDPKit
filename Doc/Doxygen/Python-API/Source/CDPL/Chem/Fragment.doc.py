@@ -220,6 +220,20 @@ class Fragment(MolecularGraph):
     def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
     ##
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+
+    ##
+    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param key The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(key: Base.LookupKey) -> bool: pass
+
+    ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
@@ -232,20 +246,6 @@ class Fragment(MolecularGraph):
     # \return The result of the membership test operation.
     # 
     def __contains__(bond: Bond) -> bool: pass
-
-    ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(key: Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 

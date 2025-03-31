@@ -253,13 +253,6 @@ class Reaction(Base.PropertyContainer):
 
     ##
     # \brief 
-    # \param idx 
-    # \return 
-    #
-    def __getitem__(idx: int) -> Molecule: pass
-
-    ##
-    # \brief 
     # \param key 
     # \return 
     #
@@ -268,22 +261,9 @@ class Reaction(Base.PropertyContainer):
     ##
     # \brief 
     # \param idx 
-    #
-    def __delitem__(idx: int) -> None: pass
-
-    ##
-    # \brief 
-    # \param key 
     # \return 
     #
-    def __delitem__(key: Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief Returns the result of the membership test operation <tt>mol in self</tt>.
-    # \param mol The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(mol: Molecule) -> bool: pass
+    def __getitem__(idx: int) -> Molecule: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
@@ -293,11 +273,31 @@ class Reaction(Base.PropertyContainer):
     def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
+    # \brief Returns the result of the membership test operation <tt>mol in self</tt>.
+    # \param mol The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(mol: Molecule) -> bool: pass
+
+    ##
     # \brief 
     # \param key 
     # \param value 
     #
     def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
+
+    ##
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __delitem__(key: Base.LookupKey) -> bool: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    #
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 

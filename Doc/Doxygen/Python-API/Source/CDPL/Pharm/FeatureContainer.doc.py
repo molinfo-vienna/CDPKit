@@ -80,18 +80,11 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def getNumEntities() -> int: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param ftr The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(ftr: Feature) -> bool: pass
-
-    ##
-    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param key The value to test for membership.
-    # \return The result of the membership test operation.
-    # 
-    def __contains__(key: Base.LookupKey) -> bool: pass
+    # \brief 
+    # \param key 
+    # \return 
+    #
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -101,17 +94,18 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def __getitem__(idx: int) -> Feature: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param key The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
-    def __len__() -> int: pass
+    # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
+    # \param ftr The value to test for membership.
+    # \return The result of the membership test operation.
+    # 
+    def __contains__(ftr: Feature) -> bool: pass
 
     ##
     # \brief 
@@ -126,5 +120,11 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     # \return 
     #
     def __delitem__(key: Base.LookupKey) -> bool: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def __len__() -> int: pass
 
     numFeatures = property(getNumFeatures)
