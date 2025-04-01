@@ -1,5 +1,8 @@
 master:
 
+- Support for the automated generation and installation of a CMake package configuration file that
+  greatly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
+
 v1.2.3:
 
  - New control-parameters Chem::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES and Chem::MOL2_OUTPUT_FORMAL_CHARGES plus
