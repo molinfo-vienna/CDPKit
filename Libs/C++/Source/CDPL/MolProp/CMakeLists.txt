@@ -89,8 +89,12 @@ if(NOT PYPI_PACKAGE_BUILD)
     OUTPUT_NAME cdpl-molprop
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_MOLPROP_STATIC_LINK")
+  target_include_directories(cdpl-molprop-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
-  install(TARGETS cdpl-molprop-static
+  install(TARGETS cdpl-molprop-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 
   target_link_libraries(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
@@ -99,6 +103,10 @@ endif(NOT PYPI_PACKAGE_BUILD)
 add_library(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 target_link_libraries(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
+target_include_directories(cdpl-molprop-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-molprop
@@ -120,7 +128,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-molprop-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-molprop-shared
+  install(TARGETS cdpl-molprop-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

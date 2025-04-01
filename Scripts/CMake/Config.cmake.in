@@ -1,6 +1,4 @@
 ##
-# CMakeLists.txt  
-#
 # This file is part of the Chemical Data Processing Toolkit
 #
 # Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
@@ -21,22 +19,30 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
-set(cmdline_LIB_SRCS
-  CmdLineBase.cpp
-  HelperFunctions.cpp)
+@PACKAGE_INIT@
 
-add_library(cmdline-static STATIC ${cmdline_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+include(CMakeFindDependencyMacro)
 
-set_target_properties(cmdline-static PROPERTIES 
-  OUTPUT_NAME cmdline
-  CLEAN_DIRECT_OUTPUT 1)
+find_dependency(Boost @CDPKIT_MIN_BOOST_VERSION@ REQUIRED iostreams QUIET)
 
-target_link_libraries(cmdline-static Boost::program_options)
+set(CXX_FILESYSTEM_HAVE_FS "@CXX_FILESYSTEM_HAVE_FS@")
+set(CXX_FILESYSTEM_STDCPPFS_NEEDED "@CXX_FILESYSTEM_STDCPPFS_NEEDED@")
+set(CXX_FILESYSTEM_CPPFS_NEEDED "@CXX_FILESYSTEM_CPPFS_NEEDED@")
 
 if(CXX_FILESYSTEM_HAVE_FS)
-  target_link_libraries(cmdline-static std::filesystem)
+  add_library(std::filesystem INTERFACE IMPORTED)
+  set_property(TARGET std::filesystem APPEND PROPERTY INTERFACE_COMPILE_FEATURES cxx_std_17)
+
+  if(CXX_FILESYSTEM_STDCPPFS_NEEDED)
+    set_property(TARGET std::filesystem APPEND PROPERTY INTERFACE_LINK_LIBRARIES -lstdc++fs)
+  elseif(CXX_FILESYSTEM_CPPFS_NEEDED)
+    set_property(TARGET std::filesystem APPEND PROPERTY INTERFACE_LINK_LIBRARIES -lc++fs)
+  endif()
 else()
-  target_link_libraries(cmdline-static Boost::filesystem)
-endif(CXX_FILESYSTEM_HAVE_FS)
+  find_dependency(Boost @CDPKIT_MIN_BOOST_VERSION@ REQUIRED filesystem QUIET)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/ExportedTargets.cmake")
+
+check_required_components(CDPKit)

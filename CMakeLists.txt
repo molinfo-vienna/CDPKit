@@ -108,6 +108,7 @@ endif(PYPI_PACKAGE_BUILD)
 set(CDPKIT_INCLUDE_INSTALL_DIR Include)
 set(CDPKIT_DOC_INSTALL_DIR Doc)
 set(CDPKIT_EXAMPLES_INSTALL_DIR Examples)
+set(CDPKIT_PACKAGE_CONFIG_INSTALL_DIR CMake)
 set(CDPKIT_COMPILER_ID ${CMAKE_CXX_COMPILER_ID})
 set(CDPKIT_COMPILER_VERSION ${CMAKE_CXX_COMPILER_VERSION})
 set(CDPKIT_BUILD_SYSTEM ${CMAKE_SYSTEM})
@@ -405,13 +406,14 @@ configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/CMakeUninstall.cmake.in" "${CMAKE_CU
 add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake")
 
-include_directories("${CDPL_INCLUDE_DIR}" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}" "${Boost_INCLUDE_DIRS}")
+include_directories("${CDPL_INCLUDE_DIR}" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}")
+link_libraries(Boost::headers)
 
 if(NOT PYPI_PACKAGE_BUILD)
   install(FILES ChangeLog.txt DESTINATION "." COMPONENT Documentation)
   install(FILES COPYING DESTINATION "." COMPONENT CDPLSharedLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
-    
+
 # CPack related setup
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME_WITH_VERSION}")
 set(CPACK_PACKAGE_VENDOR "Thomas Seidel/University of Vienna")
@@ -519,3 +521,36 @@ if(WIN32)
   
   include(InstallRequiredSystemLibraries)
 endif(WIN32)
+
+# Package configuration file related setup
+if(NOT PYPI_PACKAGE_BUILD)
+  include(CMakePackageConfigHelpers)
+
+  configure_package_config_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/Config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/CDPKitConfig.cmake"
+    INSTALL_DESTINATION "${CDPKIT_PACKAGE_CONFIG_INSTALL_DIR}"
+  )
+
+  write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/CDPKitConfigVersion.cmake"
+    VERSION "${CDPKIT_VERSION_MAJOR}.${CDPKIT_VERSION_MINOR}.${CDPKIT_VERSION_PATCH}"
+    COMPATIBILITY AnyNewerVersion
+  )
+
+  install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/CDPKitConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/CDPKitConfigVersion.cmake"
+    "${CDPKIT_CMAKE_SCRIPTS_DIR}/FindCairo.cmake"
+    DESTINATION "${CDPKIT_PACKAGE_CONFIG_INSTALL_DIR}"
+  )
+
+  install(EXPORT ExportedTargets
+    FILE "ExportedTargets.cmake"
+    NAMESPACE CDPKit::
+    DESTINATION "${CDPKIT_PACKAGE_CONFIG_INSTALL_DIR}"
+  )
+ 
+  export(EXPORT ExportedTargets
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/ExportedTargets.cmake"
+    NAMESPACE CDPKit::)
+endif(NOT PYPI_PACKAGE_BUILD)

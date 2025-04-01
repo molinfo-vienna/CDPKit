@@ -88,8 +88,6 @@ else()
   set(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.cdf.gz.str)
 endif()
  
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
 if(WIN32)
   if(MINGW)
     link_libraries(libwsock32.a)
@@ -110,9 +108,13 @@ if(NOT PYPI_PACKAGE_BUILD)
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_BIOMOL_STATIC_LINK")
 
-  target_link_libraries(cdpl-biomol-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)
-
-  install(TARGETS cdpl-biomol-static
+  target_link_libraries(cdpl-biomol-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static Boost::iostreams)
+  target_include_directories(cdpl-biomol-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
+  
+  install(TARGETS cdpl-biomol-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
@@ -122,8 +124,14 @@ if(NOT MSVC)
   add_dependencies(cdpl-biomol-shared gen-biomol-data-files)
 endif()
 
-target_link_libraries(cdpl-biomol-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-biomol-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-biomol-shared PRIVATE Boost::iostreams)
 
+target_include_directories(cdpl-biomol-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
+ 
 set_target_properties(cdpl-biomol-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-biomol
   CLEAN_DIRECT_OUTPUT 1
@@ -144,7 +152,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-biomol-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-biomol-shared
+  install(TARGETS cdpl-biomol-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

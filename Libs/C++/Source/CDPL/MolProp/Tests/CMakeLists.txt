@@ -47,6 +47,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(molprop-test-suite ${test-suite_SRCS})
 
-target_link_libraries(molprop-test-suite cdpl-molprop-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(molprop-test-suite cdpl-molprop-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::MolProp" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/molprop-test-suite")

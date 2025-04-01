@@ -114,7 +114,6 @@ if(CAIRO_FOUND)
        )    
   endif(HAVE_CAIRO_SVG_SUPPORT)
 
-  link_libraries(${CAIRO_LIBRARIES})
   include_directories("${CAIRO_INCLUDE_DIR}")
 endif(CAIRO_FOUND)
 
@@ -123,18 +122,36 @@ if(NOT PYPI_PACKAGE_BUILD)
 
   target_link_libraries(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-base-static)
 
+  if(CAIRO_FOUND)
+    target_link_libraries(cdpl-vis-static Cairo::Library)
+  endif(CAIRO_FOUND)
+  
+  target_include_directories(cdpl-vis-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
+
   set_target_properties(cdpl-vis-static PROPERTIES 
     OUTPUT_NAME cdpl-vis
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK")
 
-  install(TARGETS cdpl-vis-static
+  install(TARGETS cdpl-vis-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-target_link_libraries(cdpl-vis-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared)
+target_link_libraries(cdpl-vis-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared)
+
+if(CAIRO_FOUND)
+  target_link_libraries(cdpl-vis-shared PRIVATE Cairo::Library)
+endif(CAIRO_FOUND)
+
+target_include_directories(cdpl-vis-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-vis-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-vis
@@ -156,7 +173,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-vis-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-vis-shared
+  install(TARGETS cdpl-vis-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
@@ -174,25 +191,33 @@ if(NOT PYPI_PACKAGE_BUILD AND Qt5Gui_FOUND)
   add_library(cdpl-vis-qt-static STATIC ${cdpl-vis-qt_LIB_SRCS})
 
   target_link_libraries(cdpl-vis-qt-static cdpl-vis-static Qt5::Gui)
+  target_include_directories(cdpl-vis-qt-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
   set_target_properties(cdpl-vis-qt-static PROPERTIES 
     OUTPUT_NAME cdpl-vis-qt
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_VIS_QT_STATIC_LINK")
 
-  install(TARGETS cdpl-vis-qt-static
+  install(TARGETS cdpl-vis-qt-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 
   add_library(cdpl-vis-qt-shared SHARED ${cdpl-vis-qt_LIB_SRCS})
 
   target_link_libraries(cdpl-vis-qt-shared cdpl-vis-shared Qt5::Gui)
+  target_include_directories(cdpl-vis-qt-shared
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
   set_target_properties(cdpl-vis-qt-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
     OUTPUT_NAME cdpl-vis-qt
     CLEAN_DIRECT_OUTPUT 1
     INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
-  install(TARGETS cdpl-vis-qt-shared
+  install(TARGETS cdpl-vis-qt-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

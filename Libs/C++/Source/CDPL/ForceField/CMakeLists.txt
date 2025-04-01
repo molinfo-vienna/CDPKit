@@ -121,8 +121,6 @@ set(cdpl-forcefield_LIB_SRCS
     DataIOUtilities.cpp
    )
 
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
   add_dependencies(cdpl-forcefield-static gen-forcefield-data-files)
@@ -132,16 +130,26 @@ if(NOT PYPI_PACKAGE_BUILD)
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_FORCEFIELD_STATIC_LINK")
 
-  target_link_libraries(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static)
+  target_link_libraries(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static Boost::iostreams)
+  target_include_directories(cdpl-forcefield-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
-  install(TARGETS cdpl-forcefield-static
+  install(TARGETS cdpl-forcefield-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 add_dependencies(cdpl-forcefield-shared gen-forcefield-data-files)
 
-target_link_libraries(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
+target_link_libraries(cdpl-forcefield-shared PUBLIC cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
+target_link_libraries(cdpl-forcefield-shared PRIVATE Boost::iostreams)
+
+target_include_directories(cdpl-forcefield-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-forcefield
@@ -163,7 +171,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-forcefield-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-forcefield-shared
+  install(TARGETS cdpl-forcefield-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

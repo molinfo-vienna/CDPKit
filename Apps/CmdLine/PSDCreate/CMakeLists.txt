@@ -47,7 +47,7 @@ target_link_libraries(psdcreate cmdline-static cdpl-util-shared cdpl-base-shared
 if(CXX_FILESYSTEM_HAVE_FS)
   target_link_libraries(psdcreate std::filesystem)
 else()
-  target_link_libraries(psdcreate ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+  target_link_libraries(psdcreate Boost::filesystem)
 endif(CXX_FILESYSTEM_HAVE_FS)
 
 install(TARGETS psdcreate DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

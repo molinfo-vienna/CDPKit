@@ -38,6 +38,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(pharm-test-suite ${test-suite_SRCS})
 
-target_link_libraries(pharm-test-suite cdpl-pharm-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(pharm-test-suite cdpl-pharm-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Pharm" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/pharm-test-suite")

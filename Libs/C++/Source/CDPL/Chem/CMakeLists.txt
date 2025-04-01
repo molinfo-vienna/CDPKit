@@ -341,8 +341,6 @@ set(cdpl-chem_LIB_SRCS
     ReactionComponentGroupingMatchExpression.cpp
    )
 
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
   add_dependencies(cdpl-chem-static gen-chem-data-files)
@@ -352,16 +350,26 @@ if(NOT PYPI_PACKAGE_BUILD)
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK")
 
-  target_link_libraries(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
-
-  install(TARGETS cdpl-chem-static
+  target_link_libraries(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static Boost::iostreams)
+  target_include_directories(cdpl-chem-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
+ 
+  install(TARGETS cdpl-chem-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
 add_dependencies(cdpl-chem-shared gen-chem-data-files)
 
-target_link_libraries(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-chem-shared PUBLIC cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-chem-shared PRIVATE Boost::iostreams)
+
+target_include_directories(cdpl-chem-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-chem-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-chem
@@ -383,7 +391,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-chem-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-chem-shared
+  install(TARGETS cdpl-chem-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

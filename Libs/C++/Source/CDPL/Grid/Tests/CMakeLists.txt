@@ -34,6 +34,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(grid-test-suite ${test-suite_SRCS})
 
-target_link_libraries(grid-test-suite cdpl-grid-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(grid-test-suite cdpl-grid-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Grid" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/grid-test-suite")

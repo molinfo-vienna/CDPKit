@@ -59,14 +59,22 @@ if(NOT PYPI_PACKAGE_BUILD)
     COMPILE_DEFINITIONS "CDPL_SHAPE_STATIC_LINK")
 
   target_link_libraries(cdpl-shape-static cdpl-base-static cdpl-util-static cdpl-math-static cdpl-chem-static cdpl-pharm-static)
+  target_include_directories(cdpl-shape-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
-  install(TARGETS cdpl-shape-static
+  install(TARGETS cdpl-shape-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-shape-shared SHARED ${cdpl-shape_LIB_SRCS})
 
 target_link_libraries(cdpl-shape-shared cdpl-base-shared cdpl-util-shared cdpl-math-shared cdpl-chem-shared cdpl-pharm-shared)
+target_include_directories(cdpl-shape-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-shape-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-shape
@@ -88,7 +96,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-shape-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-shape-shared
+  install(TARGETS cdpl-shape-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

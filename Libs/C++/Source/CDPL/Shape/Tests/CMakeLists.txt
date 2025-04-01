@@ -39,6 +39,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(shape-test-suite ${test-suite_SRCS})
 
-target_link_libraries(shape-test-suite cdpl-shape-shared cdpl-chem-shared cdpl-biomol-shared cdpl-util-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(shape-test-suite cdpl-shape-shared cdpl-chem-shared cdpl-biomol-shared cdpl-util-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Shape" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/shape-test-suite")

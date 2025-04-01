@@ -34,6 +34,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(grail-test-suite ${test-suite_SRCS})
 
-target_link_libraries(grail-test-suite cdpl-grail-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(grail-test-suite cdpl-grail-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::GRAIL" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/grail-test-suite")

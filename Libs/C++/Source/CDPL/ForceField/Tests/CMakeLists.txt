@@ -51,6 +51,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(forcefield-test-suite ${test-suite_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-target_link_libraries(forcefield-test-suite cdpl-forcefield-shared cdpl-chem-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(forcefield-test-suite cdpl-forcefield-shared cdpl-chem-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::ForceField" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/forcefield-test-suite")

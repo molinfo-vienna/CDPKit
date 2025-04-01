@@ -57,14 +57,23 @@ if(NOT PYPI_PACKAGE_BUILD)
 
   target_link_libraries(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static
     cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
+  target_include_directories(cdpl-grail-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
-  install(TARGETS cdpl-grail-static DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+  install(TARGETS cdpl-grail-static  EXPORT ExportedTargets
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
     
 add_library(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 target_link_libraries(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared
   cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
+target_include_directories(cdpl-grail-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-grail-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-grail
@@ -87,7 +96,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-grail-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-grail-shared
+  install(TARGETS cdpl-grail-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

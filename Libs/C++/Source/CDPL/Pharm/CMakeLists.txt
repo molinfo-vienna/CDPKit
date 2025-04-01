@@ -145,14 +145,6 @@ set(cdpl-pharm_LIB_SRCS
     TwoPointPharmacophore.cpp
     QueryTwoPointPharmacophore.cpp
    )
- 
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
-if(CXX_FILESYSTEM_HAVE_FS)
-  link_libraries(std::filesystem)
-else()
-  link_libraries(${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-endif(CXX_FILESYSTEM_HAVE_FS)
 
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:sqlite3> $<TARGET_OBJECTS:cdpl-internal>)
@@ -163,20 +155,43 @@ if(NOT PYPI_PACKAGE_BUILD)
     COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK")
 
   target_link_libraries(cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-biomol-static cdpl-math-static
-    cdpl-util-static cdpl-base-static)
+    cdpl-util-static cdpl-base-static Boost::iostreams)
 
-  install(TARGETS cdpl-pharm-static
+  if(CXX_FILESYSTEM_HAVE_FS)
+    target_link_libraries(cdpl-pharm-static std::filesystem)
+  else()
+    target_link_libraries(cdpl-pharm-static Boost::filesystem)
+  endif(CXX_FILESYSTEM_HAVE_FS)
+  
+  target_include_directories(cdpl-pharm-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
+
+  install(TARGETS cdpl-pharm-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
     )
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:sqlite3> $<TARGET_OBJECTS:cdpl-internal>)
 
-target_link_libraries(cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-biomol-shared cdpl-base-shared
+target_link_libraries(cdpl-pharm-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-biomol-shared cdpl-base-shared
   cdpl-math-shared cdpl-util-shared)
+target_link_libraries(cdpl-pharm-shared PRIVATE Boost::iostreams)
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  target_link_libraries(cdpl-pharm-shared PRIVATE std::filesystem)
+else()
+  target_link_libraries(cdpl-pharm-shared PRIVATE Boost::filesystem)
+endif(CXX_FILESYSTEM_HAVE_FS)
+
+target_include_directories(cdpl-pharm-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 if(UNIX)
-  target_link_libraries(cdpl-pharm-shared dl) # for sqlite3
+  target_link_libraries(cdpl-pharm-shared PRIVATE dl) # for sqlite3
 endif()
 
 set_target_properties(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
@@ -199,7 +214,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-pharm-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-pharm-shared
+  install(TARGETS cdpl-pharm-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

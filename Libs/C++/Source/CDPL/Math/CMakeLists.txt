@@ -31,19 +31,27 @@ if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-math-static STATIC ${cdpl-math_LIB_SRCS})
 
   target_link_libraries(cdpl-math-static cdpl-base-static)
+  target_include_directories(cdpl-math-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
   set_target_properties(cdpl-math-static PROPERTIES 
     OUTPUT_NAME cdpl-math
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_MATH_STATIC_LINK")
 
-  install(TARGETS cdpl-math-static
+  install(TARGETS cdpl-math-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-math-shared SHARED ${cdpl-math_LIB_SRCS})
 
 target_link_libraries(cdpl-math-shared cdpl-base-shared)
+target_include_directories(cdpl-math-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-math-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-math
@@ -65,7 +73,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-math-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-math-shared
+  install(TARGETS cdpl-math-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

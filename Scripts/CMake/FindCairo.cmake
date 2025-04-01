@@ -128,6 +128,12 @@ find_package_handle_standard_args(
 )
 
 MARK_AS_ADVANCED(
-    CAIRO_INCLUDE_DIR
-    CAIRO_LIBRARY
-    CAIRO_LIBRARIES)
+  CAIRO_INCLUDE_DIR
+  CAIRO_LIBRARY
+  CAIRO_LIBRARIES)
+
+if(CAIRO_FOUND AND NOT TARGET Cairo::Library)
+  add_library(Cairo::Library INTERFACE IMPORTED)
+  target_include_directories(Cairo::Library INTERFACE "${CAIRO_INCLUDE_DIR}")
+  target_link_libraries(Cairo::Library INTERFACE ${CAIRO_LIBRARIES})
+endif()    

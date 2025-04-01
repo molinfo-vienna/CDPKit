@@ -145,6 +145,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(chem-test-suite ${test-suite_SRCS})
 
-target_link_libraries(chem-test-suite cdpl-chem-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(chem-test-suite cdpl-chem-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Chem" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/chem-test-suite")

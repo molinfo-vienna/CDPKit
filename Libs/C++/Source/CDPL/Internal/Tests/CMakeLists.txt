@@ -36,6 +36,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(internal-test-suite ${test-suite_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-target_link_libraries(internal-test-suite cdpl-chem-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(internal-test-suite cdpl-chem-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Internal" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/internal-test-suite")

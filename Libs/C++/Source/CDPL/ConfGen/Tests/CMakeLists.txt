@@ -34,6 +34,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(confgen-test-suite ${test-suite_SRCS})
 
-target_link_libraries(confgen-test-suite cdpl-confgen-shared cdpl-chem-shared cdpl-forcefield-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(confgen-test-suite cdpl-confgen-shared cdpl-chem-shared cdpl-forcefield-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::ConfGen" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/confgen-test-suite")

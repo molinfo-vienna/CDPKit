@@ -122,8 +122,6 @@ if(MSVC)
       "${CMAKE_CURRENT_BINARY_DIR}/TorsionLibraryData.rc")
 endif()
   
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
   add_dependencies(cdpl-confgen-static gen-confgen-data-files)
@@ -134,17 +132,27 @@ if(NOT PYPI_PACKAGE_BUILD)
     COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK")
 
   target_link_libraries(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static
-    cdpl-util-static cdpl-forcefield-static)
+    cdpl-util-static cdpl-forcefield-static Boost::iostreams)
+  target_include_directories(cdpl-confgen-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
-  install(TARGETS cdpl-confgen-static
+  install(TARGETS cdpl-confgen-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 add_dependencies(cdpl-confgen-shared gen-confgen-data-files)
 
-target_link_libraries(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
+target_link_libraries(cdpl-confgen-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
   cdpl-util-shared cdpl-forcefield-shared)
+target_link_libraries(cdpl-confgen-shared PRIVATE Boost::iostreams)
+
+target_include_directories(cdpl-confgen-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-confgen
@@ -166,7 +174,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-confgen-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-confgen-shared
+  install(TARGETS cdpl-confgen-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)

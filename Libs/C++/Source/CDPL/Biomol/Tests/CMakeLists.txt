@@ -34,6 +34,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(biomol-test-suite ${test-suite_SRCS})
 
-target_link_libraries(biomol-test-suite cdpl-biomol-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(biomol-test-suite cdpl-biomol-shared Boost::unit_test_framework)
 
 ADD_TEST("CDPL::Biomol" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/biomol-test-suite")

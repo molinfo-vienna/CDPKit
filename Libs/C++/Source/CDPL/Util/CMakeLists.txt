@@ -29,31 +29,46 @@ set(cdpl-util_LIB_SRCS
     FileFunctions.cpp
    )
 
-link_libraries(${Boost_IOSTREAMS_LIBRARY})
-
-if(CXX_FILESYSTEM_HAVE_FS)
-  link_libraries(std::filesystem)
-else()
-  link_libraries(${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-endif(CXX_FILESYSTEM_HAVE_FS)
-
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
 
-  target_link_libraries(cdpl-util-static cdpl-base-static)
+  target_link_libraries(cdpl-util-static cdpl-base-static Boost::iostreams)
+
+  if(CXX_FILESYSTEM_HAVE_FS)
+    target_link_libraries(cdpl-util-static std::filesystem)
+  else()
+    target_link_libraries(cdpl-util-static Boost::filesystem)
+  endif(CXX_FILESYSTEM_HAVE_FS)
+  
+  target_include_directories(cdpl-util-static
+    PUBLIC
+    "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+    "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
   set_target_properties(cdpl-util-static PROPERTIES 
     OUTPUT_NAME cdpl-util
     CLEAN_DIRECT_OUTPUT 1
     COMPILE_DEFINITIONS "CDPL_UTIL_STATIC_LINK")
 
-  install(TARGETS cdpl-util-static
+  install(TARGETS cdpl-util-static EXPORT ExportedTargets
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-util-shared SHARED ${cdpl-util_LIB_SRCS})
 
-target_link_libraries(cdpl-util-shared cdpl-base-shared)
+target_link_libraries(cdpl-util-shared PUBLIC cdpl-base-shared)
+target_link_libraries(cdpl-util-shared PRIVATE Boost::iostreams)
+
+if(CXX_FILESYSTEM_HAVE_FS)
+  target_link_libraries(cdpl-util-shared PRIVATE std::filesystem)
+else()
+  target_link_libraries(cdpl-util-shared PRIVATE Boost::filesystem)
+endif(CXX_FILESYSTEM_HAVE_FS)
+
+target_include_directories(cdpl-util-shared
+  PUBLIC
+  "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
+  "$<INSTALL_INTERFACE:${CDPKIT_INCLUDE_INSTALL_DIR}>")
 
 set_target_properties(cdpl-util-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-util
@@ -75,7 +90,7 @@ if(WIN32 AND PYPI_PACKAGE_BUILD)
    install(TARGETS cdpl-util-shared
      RUNTIME DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries)
 else()
-  install(TARGETS cdpl-util-shared
+  install(TARGETS cdpl-util-shared EXPORT ExportedTargets
     RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
     ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
