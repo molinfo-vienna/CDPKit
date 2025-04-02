@@ -1,3 +1,15 @@
+IStream.STD_IN
+\brief The standard input stream of the current process.
+$$$$
+
+OStream.STD_OUT
+\brief The standard output stream of the current process.
+$$$$
+
+OStream.STD_ERR
+\brief The standard error stream of the current process.
+$$$$
+
 #
 # --- Unresolved property getter/setter functions ---
 #

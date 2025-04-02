@@ -25,6 +25,16 @@
 class OStream(Boost.Python.instance):
 
     ##
+    # \brief The standard output stream of the current process.
+    # 
+    STD_OUT = \brief The standard output stream of the current process.
+
+    ##
+    # \brief The standard error stream of the current process.
+    # 
+    STD_ERR = \brief The standard error stream of the current process.
+
+    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
     # Different Python \c %OStream instances may reference the same underlying C++ class instance. The commonly used Python expression
