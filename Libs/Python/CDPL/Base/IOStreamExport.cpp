@@ -24,6 +24,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 #include <boost/python.hpp>
 
@@ -161,10 +162,13 @@ void CDPLPythonBase::exportIOStreams()
     using namespace boost;
 
     python::class_<std::istream, boost::noncopyable>("IStream", python::no_init)
-        .def(ObjectIdentityCheckVisitor<std::istream>());
+        .def(ObjectIdentityCheckVisitor<std::istream>())
+        .def_readonly("STD_IN", &std::cin);
 
     python::class_<std::ostream, boost::noncopyable>("OStream", python::no_init)
-        .def(ObjectIdentityCheckVisitor<std::ostream>());
+        .def(ObjectIdentityCheckVisitor<std::ostream>())
+        .def_readonly("STD_OUT", &std::cout)
+        .def_readonly("STD_ERR", &std::cerr);
 
     {
         python::scope scope = python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init);
