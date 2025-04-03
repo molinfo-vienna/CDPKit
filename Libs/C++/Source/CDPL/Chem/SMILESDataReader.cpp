@@ -81,6 +81,9 @@ namespace
 
         return 0;
     }
+
+    constexpr std::size_t DELETE_BOND_ID  = 4;
+    constexpr std::size_t RETAIN_ORDER_ID = 5;
 }
 
 
@@ -145,7 +148,7 @@ bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
     
             parseSMILES(comp, 0);
     
-            kekulizeBonds(comp);
+            postprocBondOrders(comp);
             setAtomStereoDescriptors(comp);
             setBondStereoDescriptors(comp);
         }
@@ -205,7 +208,7 @@ bool Chem::SMILESDataReader::readMolecule(std::istream& is, Molecule& mol)
 
     parseSMILES(mol, 0);
 
-    kekulizeBonds(mol);
+    postprocBondOrders(mol);
     setAtomStereoDescriptors(mol);
     setBondStereoDescriptors(mol);
     setName(mol, name);
@@ -336,6 +339,7 @@ void Chem::SMILESDataReader::init(const Molecule& mol)
     stereoAtomList.clear();
     bondDirectionTable.clear();
     bondTable.clear();
+    specialBonds.clear();
     closureBondMap.clear();
     nbrBondListTable.clear();
 }
@@ -500,6 +504,14 @@ bool Chem::SMILESDataReader::parseBondParameters(BondParameters& bond_params)
             bond_params.order = 3;
             break;
 
+        case BondSymbol::RETAIN_ORDER_FLAG:
+            bond_params.order = RETAIN_ORDER_ID;
+            break;
+
+        case BondSymbol::DELETE_BOND_FLAG:
+            bond_params.order = DELETE_BOND_ID;
+            break;
+            
         case BondSymbol::AROMATIC_BOND:
             bond_params.aromatic = true;
             break;
@@ -528,7 +540,11 @@ void Chem::SMILESDataReader::createBond(Molecule& mol, Atom* atom1, Atom* atom2,
 
     std::size_t bond_idx = mol.getBondIndex(bond);
 
-    if (bond_params.aromatic) {
+    if (bond_params.order == DELETE_BOND_ID || bond_params.order == RETAIN_ORDER_ID) {
+        specialBonds.push_back(&bond);
+        setOrder(bond, bond_params.order);
+        
+    } else if (bond_params.aromatic) {
         setAtomAromaticityFlag(atom1_idx);
         setAtomAromaticityFlag(atom2_idx);
         setAromaticityFlag(*atom1, true);
@@ -621,8 +637,18 @@ Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
     std::size_t atom_idx = mol.getAtomIndex(atom);
     std::string symbol_str(symbol);
 
-    setSymbol(atom, symbol_str);
-    setType(atom, AtomDictionary::getType(symbol_str));
+    switch (symbol[0]) {
+
+        case SMILES::AtomString::DELETE_ATOM_FLAG:
+            setType(atom, 0);
+            
+        case SMILES::AtomString::RETAIN_TYPE_FLAG:
+            break;
+            
+        default:
+            setSymbol(atom, symbol_str);
+            setType(atom, AtomDictionary::getType(symbol_str));
+    }
 
     if (iso_spec)
         setIsotope(atom, isotope);
@@ -656,9 +682,19 @@ bool Chem::SMILESDataReader::parseElementSymbol(char symbol[3], bool org_subset)
 
     getChar(symbol[0], false);
 
-    if (symbol[0] == SMILES::AtomString::UNDEF_ELEMENT_SYMBOL)
-        return false;
+    switch (symbol[0]) {
 
+        case SMILES::AtomString::UNDEF_ELEMENT_SYMBOL:
+            return false;
+            
+        case SMILES::AtomString::DELETE_ATOM_FLAG:
+        case SMILES::AtomString::RETAIN_TYPE_FLAG:
+            if (org_subset && strictErrorChecking)
+                throw Base::IOError("SMILESDataReader: invalid element symbol");
+            
+            return false;
+    }
+    
     if (!std::isalpha(symbol[0], std::locale::classic())) {
         if (strictErrorChecking)
             throw Base::IOError("SMILESDataReader: invalid element symbol");
@@ -670,9 +706,21 @@ bool Chem::SMILESDataReader::parseElementSymbol(char symbol[3], bool org_subset)
         switch (symbol[0]) {
 
             case 't':
-                if (org_subset && strictErrorChecking)
+                if (!org_subset) {
+                    getChar(symbol[1], false);
+                    
+                    if (symbol[1] == 'e')
+                        break;
+
+                    ungetChar();
+                    symbol[1] = 0;
+                }
+
+                if (strictErrorChecking)
                     throw Base::IOError("SMILESDataReader: invalid element symbol");
 
+                return false;
+                 
             case 's':
                 if (!org_subset) {
                     getChar(symbol[1], false);
@@ -1104,19 +1152,33 @@ void Chem::SMILESDataReader::setAtomStereoDescriptors(const Molecule& mol) const
     } 
 }
 
-void Chem::SMILESDataReader::kekulizeBonds(Molecule& mol)
+void Chem::SMILESDataReader::postprocBondOrders(Molecule& mol)
 {
+    for (auto bond : specialBonds)
+        if (getOrder(*bond) == DELETE_BOND_ID)
+            setOrder(*bond, 0);
+        else
+            setOrder(*bond, 1);
+
     if (startBondIndex == 0) {
         Chem::kekulizeBonds(mol);
-        return;
+
+        for (auto bond : specialBonds)
+            if (getOrder(*bond) != 0)
+                clearOrder(*bond);
+
+    } else {
+        readMolGraph.clear();
+
+        std::for_each(mol.getBondsBegin() + startBondIndex, mol.getBondsEnd(), 
+                      std::bind(&Fragment::addBond, readMolGraph, std::placeholders::_1));
+
+        Chem::kekulizeBonds(readMolGraph);
     }
 
-    readMolGraph.clear();
-
-    std::for_each(mol.getBondsBegin() + startBondIndex, mol.getBondsEnd(), 
-                  std::bind(&Fragment::addBond, readMolGraph, std::placeholders::_1));
-
-    Chem::kekulizeBonds(readMolGraph);
+    for (auto bond : specialBonds)
+        if (getOrder(*bond) == 1)
+            clearOrder(*bond);
 }
 
 void Chem::SMILESDataReader::setBondStereoDescriptors(Molecule& mol) const

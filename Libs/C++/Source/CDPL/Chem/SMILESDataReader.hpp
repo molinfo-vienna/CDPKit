@@ -128,7 +128,7 @@ namespace CDPL
             void setAtomStereoDescriptors(const Molecule&) const;
             void setBondStereoDescriptors(Molecule&) const;
 
-            void kekulizeBonds(Molecule&);
+            void postprocBondOrders(Molecule&);
 
             struct ClosureBond
             {
@@ -143,6 +143,7 @@ namespace CDPL
 
             typedef std::map<std::size_t, ClosureBond>  ClosureBondMap;
             typedef std::vector<const Bond*>            BondTable;
+            typedef std::vector<Bond*>                  BondList;
             typedef std::vector<STArray>                BondListTable;
             typedef std::pair<std::size_t, std::size_t> STPair;
             typedef std::vector<STPair>                 STPairArray;
@@ -164,6 +165,7 @@ namespace CDPL
             StereoAtomList          stereoAtomList;
             BondDirectionTable      bondDirectionTable;
             BondTable               bondTable;
+            BondList                specialBonds;
             ClosureBondMap          closureBondMap;
             BondListTable           nbrBondListTable;
             bool                    strictErrorChecking;

@@ -1239,7 +1239,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
         os << SMILES::AtomString::SPECIAL_ATOM_PREFIX;
 
         writeIsotope(os, isotope);
-        writeAtomSymbol(os, atom_type);
+        writeAtomSymbol(os, atom_type, hasType(*atom));
         writeAtomStereo(os, stereo_rot);
         writeHCount(os, impl_h_count);
         writeCharge(os, charge);
@@ -1250,7 +1250,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
         return;
     }
 
-    writeAtomSymbol(os, atom_type);
+    writeAtomSymbol(os, atom_type, true);
 }
 
 void Chem::SMILESDataWriter::DFSTreeNode::writeRingClosures(std::ostream& os) const
@@ -1297,9 +1297,19 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeIsotope(std::ostream& os, std::si
         os << isotope;
 }    
 
-void Chem::SMILESDataWriter::DFSTreeNode::writeAtomSymbol(std::ostream& os, unsigned int atom_type) const
+void Chem::SMILESDataWriter::DFSTreeNode::writeAtomSymbol(std::ostream& os, unsigned int atom_type, bool has_type) const
 {
-    if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO) {
+    if (!has_type) {
+        os << SMILES::AtomString::RETAIN_TYPE_FLAG;
+        return;
+    }
+
+    if (atom_type == 0) {
+        os << SMILES::AtomString::DELETE_ATOM_FLAG;
+        return;
+    }
+    
+    if (atom_type > AtomType::MAX_ATOMIC_NO) {
         os << SMILES::AtomString::UNDEF_ELEMENT_SYMBOL;
         return;
     }
@@ -1598,6 +1608,11 @@ bool Chem::SMILESDataWriter::DFSTreeEdge::wasVisited() const
 
 void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) const
 {
+    if (!hasOrder(*bond)) {
+        os << SMILES::BondSymbol::RETAIN_ORDER_FLAG;
+        return;
+    }
+    
     std::size_t order = getOrder(*bond);
 
     if (writer.ctrlParameters.outputBondStereo && order == 1 && direction != 0) {
@@ -1613,6 +1628,10 @@ void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) cons
 
     switch (order) {
 
+        case 0:
+            os << SMILES::BondSymbol::DELETE_BOND_FLAG;
+            return;
+            
         case 1:
             if (writer.ctrlParameters.outputSingleBonds) 
                 os << SMILES::BondSymbol::SINGLE_BOND;

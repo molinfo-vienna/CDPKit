@@ -53,6 +53,9 @@ namespace CDPL
 
                 const char UNDEF_ELEMENT_SYMBOL = '*';
 
+                const char DELETE_ATOM_FLAG = 'x';
+                const char RETAIN_TYPE_FLAG = '~';
+
                 const char H_COUNT_PREFIX = 'H';
 
                 const char POSITIVE_CHARGE_PREFIX = '+';
@@ -72,11 +75,14 @@ namespace CDPL
             namespace BondSymbol
             {
 
-                const char SINGLE_BOND   = '-';
-                const char DOUBLE_BOND   = '=';
-                const char TRIPLE_BOND   = '#';
-                const char AROMATIC_BOND = ':';
+                const char SINGLE_BOND    = '-';
+                const char DOUBLE_BOND    = '=';
+                const char TRIPLE_BOND    = '#';
+                const char AROMATIC_BOND  = ':';
 
+                const char DELETE_BOND_FLAG  = 'x';
+                const char RETAIN_ORDER_FLAG = '~';
+                
                 const char UP_DIR_FLAG   = '/';
                 const char DOWN_DIR_FLAG = '\\';
             } // namespace BondSymbol

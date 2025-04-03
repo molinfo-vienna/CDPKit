@@ -254,7 +254,7 @@ namespace CDPL
                 void writeChildNodes(std::ostream&) const;
 
                 void writeIsotope(std::ostream&, std::size_t) const;
-                void writeAtomSymbol(std::ostream&, unsigned int) const;
+                void writeAtomSymbol(std::ostream&, unsigned int, bool) const;
                 void writeAtomStereo(std::ostream&, int) const;
                 void writeHCount(std::ostream&, std::size_t) const;
                 void writeCharge(std::ostream&, long) const;
