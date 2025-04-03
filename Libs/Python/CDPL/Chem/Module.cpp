@@ -91,6 +91,7 @@ BOOST_PYTHON_MODULE(_chem)
     exportMultiSubstructureSearch();
     
     exportReactor();
+    exportSubstructureEditor();
 
     exportTopologicalEntityAlignments();
     exportSpatialEntityAlignments();

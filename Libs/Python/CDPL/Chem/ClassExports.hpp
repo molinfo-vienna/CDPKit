@@ -84,6 +84,7 @@ namespace CDPLPythonChem
     void exportMultiSubstructureSearch();
     
     void exportReactor();
+    void exportSubstructureEditor();
 
     void exportAtom3DCoordinatesFunctor();
     void exportAtomConformer3DCoordinatesFunctor();

@@ -144,12 +144,12 @@ Pharm::PatternBasedFeatureGenerator& Pharm::PatternBasedFeatureGenerator::operat
     includePatterns.clear();
 
     for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
-        includePatterns.push_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
+        includePatterns.emplace_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
 
     excludePatterns.clear();
 
     for (ExcludePatternList::const_iterator it = gen.excludePatterns.begin(), end = gen.excludePatterns.end(); it != end; ++it)
-        excludePatterns.push_back(ExcludePattern(it->subQuery));
+        excludePatterns.emplace_back(ExcludePattern(it->subQuery));
 
     return *this;
 }

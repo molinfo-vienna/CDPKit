@@ -139,6 +139,7 @@ set(cdpl-chem_LIB_SRCS
     AutomorphismGroupSearch.cpp
     MultiSubstructureSearch.cpp
     Reactor.cpp
+    SubstructureEditor.cpp
 
     TautomerScore.cpp
     TautomerGenerator.cpp

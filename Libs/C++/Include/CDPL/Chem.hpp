@@ -273,6 +273,7 @@
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Chem/MultiSubstructureSearch.hpp"
 #include "CDPL/Chem/Reactor.hpp"
+#include "CDPL/Chem/SubstructureEditor.hpp"
 #include "CDPL/Chem/MorganNumberingCalculator.hpp"
 #include "CDPL/Chem/CIPPriorityCalculator.hpp"
 #include "CDPL/Chem/CIPConfigurationLabeler.hpp"

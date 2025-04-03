@@ -83,7 +83,8 @@ set(chem_MOD_SRCS
     AutomorphismGroupSearchExport.cpp 
     MultiSubstructureSearchExport.cpp
     
-    ReactorExport.cpp 
+    ReactorExport.cpp
+    SubstructureEditorExport.cpp 
   
     TopologicalEntityAlignmentExport.cpp    
     SpatialEntityAlignmentExport.cpp
