@@ -82,11 +82,15 @@ void Chem::ExtendedSSSR::perceive(const MolecularGraph& molgraph)
         
         if (num_ring_nbrs <= 2)
             continue;
+
+        currAtomPath.set(i);
         
         for (std::size_t j = 0; j < num_ring_nbrs; j++) {
             auto& nbr1_data = atomRingNbrs[j];
+            auto nbr1_atom_idx = molgraph.getAtomIndex(*nbr1_data.first);
             auto nbr1_bond_idx = molgraph.getBondIndex(*nbr1_data.second);
 
+            currAtomPath.set(nbr1_atom_idx);
             currBondPath.set(nbr1_bond_idx);
             
             for (std::size_t k = j + 1; k < num_ring_nbrs; k++) {
@@ -97,6 +101,9 @@ void Chem::ExtendedSSSR::perceive(const MolecularGraph& molgraph)
                      continue;
 
                  smallestRingSize = 0;
+                 auto nbr2_atom_idx = molgraph.getAtomIndex(*nbr2_data.first);
+
+                 currAtomPath.set(nbr2_atom_idx);
                  currBondPath.set(nbr2_bond_idx);
                  
                  perceiveRings(molgraph, *nbr2_data.first, *nbr1_data.first);
@@ -129,10 +136,14 @@ void Chem::ExtendedSSSR::perceive(const MolecularGraph& molgraph)
                  }
 
                  currBondPath.reset(nbr2_bond_idx);
+                 currAtomPath.reset(nbr2_atom_idx);
             }
 
             currBondPath.reset(nbr1_bond_idx);
+            currAtomPath.reset(nbr1_atom_idx);
         }
+
+        currAtomPath.reset(i);
     }
 
     std::sort(this->Array::getElementsBegin(), this->Array::getElementsEnd(),
@@ -149,6 +160,9 @@ void Chem::ExtendedSSSR::init(const MolecularGraph& molgraph)
 
     for (std::size_t i = 0; i < num_bonds; i++)
         ringBonds.set(i, getRingFlag(molgraph.getBond(i)));
+
+    currAtomPath.resize(molgraph.getNumAtoms());
+    currAtomPath.reset();
 
     currBondPath.resize(molgraph.getNumBonds());
     currBondPath.reset();
@@ -190,8 +204,16 @@ void Chem::ExtendedSSSR::perceiveRings(const MolecularGraph& molgraph, const Ato
         
         if (&nbr_atom == &start_atom)
             processFoundRing(molgraph);
-        else
-            perceiveRings(molgraph, nbr_atom, start_atom);
+
+        else {
+            auto nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
+
+            if (!currAtomPath.test(nbr_atom_idx)) {
+                currAtomPath.set(nbr_atom_idx);
+                perceiveRings(molgraph, nbr_atom, start_atom);
+                currAtomPath.reset(nbr_atom_idx);
+            }
+        }
 
         currBondPath.reset(nbr_bond_idx);
     }

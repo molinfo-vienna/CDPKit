@@ -91,6 +91,7 @@ namespace CDPL
             Util::BitSet ringBonds;
             AtomBondList atomRingNbrs;
             Util::BitSet currBondPath;
+            Util::BitSet currAtomPath;
             Util::BitSet smallestRingBonds;
             std::size_t  smallestRingSize;
         };
