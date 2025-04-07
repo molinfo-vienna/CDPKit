@@ -49,6 +49,7 @@ namespace CDPL
 
         /**
          * \brief SubstructureEditor.
+         * \since 1.2.3
          */
         class CDPL_CHEM_API SubstructureEditor
         {

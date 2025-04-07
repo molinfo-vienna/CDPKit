@@ -76,6 +76,7 @@ namespace CDPL
          * \param v1 The first vector.
          * \param v2 The second vector.
          * \return The calculated similarity measure.
+         * \since 1.2.3
          */
         template <typename V>
         inline double calcTanimotoSimilarity(const V& v1, const V& v2);
@@ -113,6 +114,7 @@ namespace CDPL
          * \param v1 The first vector.
          * \param v2 The second vector.
          * \return The calculated similarity measure.
+         * \since 1.2.3
          */
         template <typename V>
         inline double calcCosineSimilarity(const V& v1, const V& v2);
@@ -241,6 +243,7 @@ namespace CDPL
          * \param v1 The first vector.
          * \param v2 The second vector.
          * \return The calculated distance measure.
+         * \since 1.2.3
          */
         template <typename V>
         inline double calcManhattanDistance(const V& v1, const V& v2);
@@ -278,6 +281,7 @@ namespace CDPL
          * \param v1 The first vector.
          * \param v2 The second vector.
          * \return The calculated distance measure.
+         * \since 1.2.3
          */
         template <typename V>
         inline double calcEuclideanDistance(const V& v1, const V& v2);

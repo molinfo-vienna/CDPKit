@@ -1,5 +1,7 @@
 master:
 
+ - Fixed an issue with spiro ring systems in the implementation of the 'extended smallest set of smallest rings'
+   perception algorithm
  - C++ standard input, output and error streams (std::cin, std::cout and std::cerr) are now exposed
    as class variables Base.IStream.STD_IN, Base.OStream.STD_OUT and Base.OStream.STD_ERR, respectively.
    For example, Base.IStream.STD_IN might be passed as argument to the constructor of a Chem.MoleculeReader

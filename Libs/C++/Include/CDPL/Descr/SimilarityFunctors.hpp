@@ -40,6 +40,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating <em>Tanimoto Similarities</em> [\ref CITB] of bitsets and vectors.
+         * \since 1.2.3
          */
         class TanimotoSimilarity
         {
@@ -91,6 +92,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating <em>Cosine Similarities</em> [\ref WCOS] of bitsets and vectors.
+         * \since 1.2.3
          */
         class CosineSimilarity
         {
@@ -142,6 +144,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Euclidean Similarity</em> [\ref GSIM] of bitsets.
+         * \since 1.2.3
          */
         class EuclideanSimilarity
         {
@@ -175,6 +178,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Manhattan Similarity</em> [\ref GSIM] of bitsets.
+         * \since 1.2.3
          */
         class ManhattanSimilarity
         {
@@ -208,6 +212,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Dice Similarity</em> [\ref GSIM] of bitsets.
+         * \since 1.2.3
          */
         class DiceSimilarity
         {
@@ -240,6 +245,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Tversky Similarity</em> [\ref GSIM] of bitsets.
+         * \since 1.2.3
          */
         class TverskySimilarity
         {
@@ -288,6 +294,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Hamming Distance</em> [\ref WHAM, \ref CITB] between bitsets.
+         * \since 1.2.3
          */
         class HammingDistance
         {
@@ -320,6 +327,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Manhattan Distance</em> [\ref MADI] between bitsets and vectors.
+         * \since 1.2.3
          */
         class ManhattanDistance
         {
@@ -347,6 +355,7 @@ namespace CDPL
 
         /**
          * \brief Functor class for calculating the <em>Euclidean Distance</em> [\ref CITB] between bitsets and vectors.
+         * \since 1.2.3
          */
         class EuclideanDistance
         {

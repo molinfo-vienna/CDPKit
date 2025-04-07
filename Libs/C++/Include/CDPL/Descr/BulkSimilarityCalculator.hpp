@@ -48,6 +48,9 @@ namespace CDPL
     namespace Descr
     {
 
+        /**
+         * \since 1.2.3
+         */
         template <typename DT = Util::BitSet, typename SVT = double>
         class BulkSimilarityCalculator
         {
