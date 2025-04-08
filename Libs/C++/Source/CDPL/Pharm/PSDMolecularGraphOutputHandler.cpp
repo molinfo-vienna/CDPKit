@@ -38,9 +38,9 @@ const Base::DataFormat& Pharm::PSDMolecularGraphOutputHandler::getDataFormat() c
 }
 
 Pharm::PSDMolecularGraphOutputHandler::WriterType::SharedPointer
-Pharm::PSDMolecularGraphOutputHandler::createWriter(std::iostream& ios) const
+Pharm::PSDMolecularGraphOutputHandler::createWriter(std::ostream& os) const
 {
-    return WriterType::SharedPointer(new PSDMolecularGraphWriter(ios));
+    return WriterType::SharedPointer(new PSDMolecularGraphWriter(os));
 }
 
 Pharm::PSDMolecularGraphOutputHandler::WriterType::SharedPointer

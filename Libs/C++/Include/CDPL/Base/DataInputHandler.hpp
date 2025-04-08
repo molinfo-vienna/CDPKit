@@ -30,6 +30,7 @@
 #define CDPL_BASE_DATAINPUTHANDLER_HPP
 
 #include <ios>
+#include <iosfwd>
 #include <string>
 #include <memory>
 

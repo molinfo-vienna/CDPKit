@@ -54,7 +54,7 @@ namespace CDPL
           public:
             const Base::DataFormat& getDataFormat() const;
 
-            WriterType::SharedPointer createWriter(std::iostream& ios) const;
+            WriterType::SharedPointer createWriter(std::ostream& os) const;
 
             WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const;
         };

@@ -56,9 +56,9 @@ namespace CDPLPythonBase
             return boost::python::call<const CDPL::Base::DataFormat&>(this->get_override("getDataFormat").ptr());
         }
 
-        typename WriterType::SharedPointer createWriter(std::iostream& ios) const
+        typename WriterType::SharedPointer createWriter(std::ostream& os) const
         {
-            return this->get_override("createWriter")(boost::ref(ios));
+            return this->get_override("createWriter")(boost::ref(os));
         }
 
         typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const
@@ -78,7 +78,7 @@ namespace CDPLPythonBase
 
             typedef Base::DataOutputHandler<T> HandlerType;
 
-            typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc1)(std::iostream&) const                              = &HandlerType::createWriter;
+            typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc1)(std::ostream&) const                               = &HandlerType::createWriter;
             typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc2)(const std::string&, std::ios_base::openmode) const = &HandlerType::createWriter;
 
             python::class_<DataOutputHandlerWrapper<T>, typename DataOutputHandlerWrapper<T>::SharedPointer, boost::noncopyable>(name, python::no_init)
@@ -87,7 +87,7 @@ namespace CDPLPythonBase
                 .def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat),
                      python::arg("self"), python::return_internal_reference<1>())
                 .def("createWriter", python::pure_virtual(createWriterFunc1),
-                     (python::arg("self"), python::arg("ios")), python::with_custodian_and_ward_postcall<0, 2>())
+                     (python::arg("self"), python::arg("os")), python::with_custodian_and_ward_postcall<0, 2>())
                 .def("createWriter", python::pure_virtual(createWriterFunc2),
                      (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary));
 

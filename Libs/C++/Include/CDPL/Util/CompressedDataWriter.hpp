@@ -50,7 +50,7 @@ namespace CDPL
         {
 
           public:
-            CompressedDataWriter(std::iostream& ios);
+            CompressedDataWriter(std::ostream& os);
 
             CompressedDataWriter& write(const DataType& obj);
 
@@ -71,8 +71,8 @@ namespace CDPL
 // Implementation
 
 template <typename WriterImpl, typename DecompStream, typename DataType>
-CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::CompressedDataWriter(std::iostream& ios):
-    stream(ios), writer(stream)
+CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::CompressedDataWriter(std::ostream& os):
+    stream(os), writer(stream)
 {
     writer.setParent(this);
     writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));

@@ -74,7 +74,7 @@ namespace
             return format;
         }
 
-        virtual CDPL::Base::DataWriter<int>::SharedPointer createWriter(std::iostream&) const {
+        virtual CDPL::Base::DataWriter<int>::SharedPointer createWriter(std::ostream&) const {
             return CDPL::Base::DataWriter<int>::SharedPointer();
         }
 

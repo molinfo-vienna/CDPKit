@@ -36,10 +36,10 @@ Chem::SubstructureEditor::SubstructureEditor()
 Chem::SubstructureEditor::SubstructureEditor(const SubstructureEditor& editor)
 {
     for (auto &ptn : editor.searchPatterns)
-        searchPatterns.emplace_back(ptn.pattern);
+        searchPatterns.emplace_back(ptn.pattern, false);
 
     for (auto &ptn : editor.excludePatterns)
-        excludePatterns.emplace_back(ptn.pattern);
+        excludePatterns.emplace_back(ptn.pattern, true);
 }
 
 Chem::SubstructureEditor::~SubstructureEditor()
@@ -47,12 +47,12 @@ Chem::SubstructureEditor::~SubstructureEditor()
 
 void Chem::SubstructureEditor::addSearchPattern(const Chem::MolecularGraph::SharedPointer& pattern)
 {
-    searchPatterns.emplace_back(pattern);
+    searchPatterns.emplace_back(pattern, false);
 }
 
 void Chem::SubstructureEditor::addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern)
 {
-    excludePatterns.emplace_back(pattern);
+    excludePatterns.emplace_back(pattern, true);
 }
 
 void Chem::SubstructureEditor::clearSearchPatterns()
@@ -73,12 +73,12 @@ Chem::SubstructureEditor& Chem::SubstructureEditor::operator=(const Substructure
     searchPatterns.clear();
 
     for (auto &ptn : editor.searchPatterns)
-        searchPatterns.emplace_back(ptn.pattern);
+        searchPatterns.emplace_back(ptn.pattern, false);
 
     excludePatterns.clear();
 
     for (auto &ptn : editor.excludePatterns)
-        excludePatterns.emplace_back(ptn.pattern);
+        excludePatterns.emplace_back(ptn.pattern, true);
  
     return *this;
 }

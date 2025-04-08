@@ -58,10 +58,10 @@ namespace CDPL
           public:
             /**
              * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the 
-             *        I/O stream \a ios.
-             * \param ios The I/O stream to write to.
+             *        output stream \a os.
+             * \param ios The output stream to write to.
              */
-            PSDMolecularGraphWriter(std::iostream& ios);
+            PSDMolecularGraphWriter(std::ostream& os);
 
             /**
              * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the output
@@ -76,12 +76,12 @@ namespace CDPL
 
             void close();
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
             PSDScreeningDBCreator creator;
-            std::iostream*        output;
+            std::ostream*         output;
             std::streampos        outputPos;
             bool                  state;
             bool                  closed;

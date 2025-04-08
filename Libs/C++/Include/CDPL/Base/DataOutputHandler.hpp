@@ -30,6 +30,7 @@
 #define CDPL_BASE_DATAOUTPUTHANDLER_HPP
 
 #include <ios>
+#include <iosfwd>
 #include <memory>
 
 #include "CDPL/Base/DataWriter.hpp"
@@ -69,11 +70,11 @@ namespace CDPL
             virtual const DataFormat& getDataFormat() const = 0;
 
             /**
-             * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
-             * \param ios The I/O stream to write to.
+             * \brief Creates a Base::DataWriter instance that will write the data to the output stream \a os.
+             * \param os The output stream to write to.
              * \return A shared pointer to the created Base::DataWriter instance.
              */
-            virtual typename WriterType::SharedPointer createWriter(std::iostream& ios) const = 0;
+            virtual typename WriterType::SharedPointer createWriter(std::ostream& os) const = 0;
 
             /**
              * \brief Creates a Base::DataWriter instance that will write the data to the file specified by \a file_name.

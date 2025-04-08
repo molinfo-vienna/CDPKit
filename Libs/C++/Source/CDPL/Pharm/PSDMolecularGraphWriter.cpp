@@ -38,23 +38,25 @@
 using namespace CDPL;
 
 
-Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(std::iostream& ios): 
-    output(&ios), outputPos(ios.tellp()), state(false), closed(true)
+Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(std::ostream& os): 
+    output(&os), outputPos(os.tellp()), state(false), closed(true)
 {
     Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
 
-    try {
-        std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
+    if (auto ios = dynamic_cast<std::iostream*>(&os)) {
+        try {
+            std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
 
-        boost::iostreams::copy(ios, tmp_fs);
+            boost::iostreams::copy(*ios, tmp_fs);
 
-        if (!ios.good() || !tmp_fs.good())
-            throw Base::IOError("copying input data failed");
+            if (!ios->good() || !tmp_fs.good())
+                throw Base::IOError("copying input data failed");
 
-    } catch (const std::exception& e) {
-        throw Base::IOError(std::string("PSDMolecularGraphWriter: could not create temporary database file: ") + e.what());
+        } catch (const std::exception& e) {
+            throw Base::IOError(std::string("PSDMolecularGraphWriter: could not create temporary database file: ") + e.what());
+        }
     }
-
+    
     try {
         creator.open(tmp_file_rem.getPath(), getPSDCreationModeParameter(*this), 
                      getPSDAllowDuplicatesParameter(*this));

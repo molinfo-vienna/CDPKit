@@ -54,9 +54,9 @@ namespace CDPL
                 return FORMAT;
             }
 
-            typename WriterType::SharedPointer createWriter(std::iostream& ios) const
+            typename WriterType::SharedPointer createWriter(std::ostream& os) const
             {
-                return typename WriterType::SharedPointer(new WriterImpl(ios));
+                return typename WriterType::SharedPointer(new WriterImpl(os));
             }
 
             typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const

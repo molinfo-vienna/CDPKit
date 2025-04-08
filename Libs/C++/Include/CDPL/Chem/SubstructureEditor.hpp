@@ -29,6 +29,7 @@
 #ifndef CDPL_CHEM_SUBSTRUCTUREEDITOR_HPP
 #define CDPL_CHEM_SUBSTRUCTUREEDITOR_HPP
 
+#include <cstddef>
 #include <vector>
 #include <memory>
 
@@ -49,7 +50,7 @@ namespace CDPL
 
         /**
          * \brief SubstructureEditor.
-         * \since 1.2.3
+         * \since 1.3.0
          */
         class CDPL_CHEM_API SubstructureEditor
         {
@@ -76,10 +77,11 @@ namespace CDPL
             /**
              * \brief Appends a new substructure search pattern to the current set of patterns.
              * \param pattern The substructure search pattern to add.
-           
              */
             void addSearchPattern(const Chem::MolecularGraph::SharedPointer& pattern);
 
+
+            
             /**
              * \brief Appends a new substructure exclude pattern to the current set of patterns.
              * \param pattern The substructure exclude pattern to add.
@@ -107,10 +109,10 @@ namespace CDPL
             struct SubstructPattern
             {
 
-                SubstructPattern(const Chem::MolecularGraph::SharedPointer& ptn):
+                SubstructPattern(const Chem::MolecularGraph::SharedPointer& ptn, bool unique_mpgs):
                     pattern(ptn), subSearch(new Chem::SubstructureSearch(*ptn))
                 {
-                    subSearch->uniqueMappingsOnly(false);
+                    subSearch->uniqueMappingsOnly(unique_mpgs);
                 }
 
                 MolecularGraph::SharedPointer     pattern;
