@@ -161,7 +161,7 @@ struct PSDScreenImpl::ScreeningWorker
 PSDScreenImpl::PSDScreenImpl(): 
     checkXVols(true), alignConfs(true), bestAlignments(false), outputScore(true), outputMolIndex(false), 
     outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false),  
-    numThreads(0), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
+    uniqueHits(false), numThreads(0), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
     matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputFormat(), 
     queryInputFormat(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0),
     lastProgValue(-1)

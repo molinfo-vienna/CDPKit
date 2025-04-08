@@ -1,5 +1,8 @@
 master:
 
+ - Fixed an issue with the command line tool 'PSDScreen' where the default value of option -u
+   was not properly set at program startup. In screening mode 'ALL-MATCHES', multiple program executions
+   using the same input files might thus have led to varying number of reported hits 
  - The screening hit rate reported by command line tool 'PSDScreen' now always specifies the number of
    matched unique database molecules in relation to the total amount of screened molecules -
    irrespective of the number of query pharmacophores and screening mode (-m option)
