@@ -1,5 +1,8 @@
 master:
 
+ - The screening hit rate reported by command line tool 'PSDScreen' now always specifies the number of
+   matched unique database molecules in relation to the total amount of screened molecules -
+   irrespective of the number of query pharmacophores and screening mode (-m option)
  - Fixed an issue with spiro ring systems in the implementation of the 'extended smallest set of smallest rings'
    perception algorithm
  - C++ standard input, output and error streams (std::cin, std::cout and std::cerr) are now exposed

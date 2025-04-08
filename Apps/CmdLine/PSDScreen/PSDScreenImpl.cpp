@@ -443,10 +443,14 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score, std::size_t
                      ", Conf. Index: " + std::to_string(hit.getHitConformationIndex() + 1) +
                      ", Score: " + std::to_string(score));
 
-        if (uniqueHits && !hitMolIDs.insert(hit.getHitMoleculeIndex()).second) {
-            printMessage(VERBOSE, "  Molecule was already reported as a hit and unique hits have been requested -> hit ignored");
-            return true;
-        }
+        if (uniqueHits) {
+            if (!hitMolIDs.insert(hit.getHitMoleculeIndex()).second) {
+                printMessage(VERBOSE, "  Molecule was already reported as a hit and unique hits have been requested -> hit ignored");
+                return true;
+            }
+
+        } else
+            hitMolIDs.insert(hit.getHitMoleculeIndex());
         
         numHits++;
 
@@ -587,25 +591,17 @@ void PSDScreenImpl::printStatistics()
     printMessage(INFO, " Num. Screened Molecules: " + std::to_string(endMolIndex - startMolIndex));
     printMessage(INFO, " Num. Reported Hits:      " + std::to_string(numHits));
 
-    if (matchingMode == ScreeningProcessor::FIRST_MATCHING_CONF || 
-        matchingMode == ScreeningProcessor::BEST_MATCHING_CONF || 
-        (numDBMolecules == (endMolIndex - startMolIndex))) {
+    double hit_rate = double(hitMolIDs.size()) / (endMolIndex - startMolIndex) * 100.0;
 
-        double hit_rate = double(numHits) * 100;
+    if (hit_rate > 100.0)  // could be > 100% due to rounding errors
+        hit_rate = 100.0;
+        
+    std::ostringstream oss;
 
-        if (matchingMode == ScreeningProcessor::ALL_MATCHING_CONFS)
-            hit_rate /= numDBPharms;
-        else
-            hit_rate /= (endMolIndex - startMolIndex);
+    oss.unsetf(std::ios::floatfield);
+    oss << std::setprecision(4) << hit_rate << '%';
 
-        std::ostringstream oss;
-
-        oss.unsetf(std::ios::floatfield);
-        oss << std::setprecision(4) << hit_rate << '%';
-
-        printMessage(INFO, " Hit Rate:                " + oss.str());
-    }
-
+    printMessage(INFO, " Hit Rate:                " + oss.str());
     printMessage(INFO, " Processing Time:         " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
