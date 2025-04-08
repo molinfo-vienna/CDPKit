@@ -49,13 +49,13 @@ class ReactionOutputHandler(Boost.Python.instance):
     def getDataFormat() -> Base.DataFormat: pass
 
     ##
-    # \brief Creates a ReactionWriterBase instance that will write the data to the I/O stream <em>ios</em>.
+    # \brief Creates a ReactionWriterBase instance that will write the data to the output stream <em>os</em>.
     # 
-    # \param ios The I/O stream to write to.
+    # \param os The output stream to write to.
     # 
     # \return The created ReactionWriterBase instance.
     # 
-    def createWriter(ios: Base.IOStream) -> ReactionWriterBase: pass
+    def createWriter(os: Base.OStream) -> ReactionWriterBase: pass
 
     ##
     # \brief Creates a ReactionWriterBase instance that will write the data to the file specified by <em>file_name</em>.

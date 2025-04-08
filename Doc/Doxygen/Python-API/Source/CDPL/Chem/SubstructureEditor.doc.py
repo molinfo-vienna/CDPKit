@@ -20,20 +20,29 @@
 #
 
 ##
-# \brief 
-#
-class MoleculeOutputHandler(Boost.Python.instance):
+# \brief SubstructureEditor.
+# 
+# \since 1.3.0
+# 
+class SubstructureEditor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MoleculeOutputHandler instance.
+    # \brief Constructs the <tt>SubstructureEditor</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
+    # \brief Constructs a copy of the <tt>SubstructureEditor</tt> instance <em>editor</em>.
+    # 
+    # \param editor The <tt>SubstructureEditor</tt> instance to copy.
+    # 
+    def __init__(editor: SubstructureEditor) -> None: pass
+
+    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %MoleculeOutputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %MoleculeOutputHandler instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %SubstructureEditor instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %SubstructureEditor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -42,24 +51,10 @@ class MoleculeOutputHandler(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
-    def getDataFormat() -> Base.DataFormat: pass
-
-    ##
-    # \brief 
-    # \param os 
-    # \return 
-    #
-    def createWriter(os: Base.OStream) -> object: pass
-
-    ##
-    # \brief 
-    # \param file_name 
-    # \param mode 
-    # \return 
-    #
-    def createWriter(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> object: pass
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %SubstructureEditor instance \a editor.
+    # \param editor The \c %SubstructureEditor instance to copy.
+    # \return \a self
+    # 
+    def assign(editor: SubstructureEditor) -> SubstructureEditor: pass
 
     objectID = property(getObjectID)

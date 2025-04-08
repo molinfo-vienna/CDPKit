@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating the <em>Euclidean Distance</em> [\ref CITB] between bitsets and vectors.
 # 
+# \since 1.2.3
+# 
 class EuclideanDistance(Boost.Python.instance):
 
     ##

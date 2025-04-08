@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating <em>Cosine Similarities</em> [\ref WCOS] of bitsets and vectors.
 # 
+# \since 1.2.3
+# 
 class CosineSimilarity(Boost.Python.instance):
 
     ##

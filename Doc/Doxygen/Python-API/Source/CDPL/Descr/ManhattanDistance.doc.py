@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating the <em>Manhattan Distance</em> [\ref MADI] between bitsets and vectors.
 # 
+# \since 1.2.3
+# 
 class ManhattanDistance(Boost.Python.instance):
 
     ##

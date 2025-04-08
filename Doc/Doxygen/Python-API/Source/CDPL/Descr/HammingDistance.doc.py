@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating the <em>Hamming Distance</em> [\ref WHAM, \ref CITB] between bitsets.
 # 
+# \since 1.2.3
+# 
 class HammingDistance(Boost.Python.instance):
 
     ##

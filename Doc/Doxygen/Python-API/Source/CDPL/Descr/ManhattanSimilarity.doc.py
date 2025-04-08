@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating the <em>Manhattan Similarity</em> [\ref GSIM] of bitsets.
 # 
+# \since 1.2.3
+# 
 class ManhattanSimilarity(Boost.Python.instance):
 
     ##

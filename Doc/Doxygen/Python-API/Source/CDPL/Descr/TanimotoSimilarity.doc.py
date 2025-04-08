@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating <em>Tanimoto Similarities</em> [\ref CITB] of bitsets and vectors.
 # 
+# \since 1.2.3
+# 
 class TanimotoSimilarity(Boost.Python.instance):
 
     ##

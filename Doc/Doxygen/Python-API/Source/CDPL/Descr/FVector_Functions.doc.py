@@ -29,7 +29,9 @@
 # \param v1 The first vector.
 # \param v2 The second vector.
 # 
-# \return The calculated distance measure.
+# \return The calculated distance measure. 
+# 
+# \since 1.2.3
 # 
 def calcEuclideanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 
@@ -43,7 +45,9 @@ def calcEuclideanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # \param v1 The first vector.
 # \param v2 The second vector.
 # 
-# \return The calculated distance measure.
+# \return The calculated distance measure. 
+# 
+# \since 1.2.3
 # 
 def calcManhattanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 
@@ -57,7 +61,9 @@ def calcManhattanDistance(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # \param v1 The first vector.
 # \param v2 The second vector.
 # 
-# \return The calculated similarity measure.
+# \return The calculated similarity measure. 
+# 
+# \since 1.2.3
 # 
 def calcCosineSimilarity(v1: Math.FVector, v2: Math.FVector) -> float: pass
 
@@ -71,6 +77,8 @@ def calcCosineSimilarity(v1: Math.FVector, v2: Math.FVector) -> float: pass
 # \param v1 The first vector.
 # \param v2 The second vector.
 # 
-# \return The calculated similarity measure.
+# \return The calculated similarity measure. 
+# 
+# \since 1.2.3
 # 
 def calcTanimotoSimilarity(v1: Math.FVector, v2: Math.FVector) -> float: pass

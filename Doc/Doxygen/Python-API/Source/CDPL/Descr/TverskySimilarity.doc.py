@@ -22,6 +22,8 @@
 ##
 # \brief Functor class for calculating the <em>Tversky Similarity</em> [\ref GSIM] of bitsets.
 # 
+# \since 1.2.3
+# 
 class TverskySimilarity(Boost.Python.instance):
 
     ##

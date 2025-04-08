@@ -25,9 +25,8 @@
 class PSDMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Constructs a <tt>PSDMolecularGraphWriter</tt> instance that will write the molecular graph data to the I/O stream <em>ios</em>.
-    # 
-    # \param ios The I/O stream to write to.
+    # \brief Initializes the \e %PSDMolecularGraphWriter instance.
+    # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass
 
