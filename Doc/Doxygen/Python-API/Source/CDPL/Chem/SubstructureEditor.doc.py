@@ -57,4 +57,99 @@ class SubstructureEditor(Boost.Python.instance):
     # 
     def assign(editor: SubstructureEditor) -> SubstructureEditor: pass
 
+    ##
+    # \brief Appends a new substructure search pattern to the current set of patterns.
+    # 
+    # \param pattern The substructure search pattern to add.
+    # 
+    def addSearchPattern(pattern: MolecularGraph) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumSearchPatterns() -> int: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \return 
+    #
+    def getSearchPattern(idx: int) -> MolecularGraph: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    #
+    def removeSearchPattern(idx: int) -> None: pass
+
+    ##
+    # \brief Clears the current set of substructuresearch patterns.
+    # 
+    def clearSearchPatterns() -> None: pass
+
+    ##
+    # \brief Appends a new substructure exclude pattern to the current set of patterns.
+    # 
+    # \param pattern The substructure exclude pattern to add.
+    # 
+    def addExcludePattern(pattern: MolecularGraph) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumExcludePatterns() -> int: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \return 
+    #
+    def getExcludePattern(idx: int) -> MolecularGraph: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    #
+    def removeExcludePattern(idx: int) -> None: pass
+
+    ##
+    # \brief Clears the current set of substructure exclude patterns.
+    # 
+    def clearExcludePatterns() -> None: pass
+
+    ##
+    # \brief 
+    # \param pattern 
+    #
+    def setResultPattern(pattern: MolecularGraph) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getResultPattern() -> MolecularGraph: pass
+
+    ##
+    # \brief 
+    # \param mol 
+    # \return 
+    #
+    def edit(mol: Molecule) -> int: pass
+
+    ##
+    # \brief 
+    # \param molgraph 
+    # \param res_mol 
+    # \return 
+    #
+    def edit(molgraph: MolecularGraph, res_mol: Molecule) -> int: pass
+
     objectID = property(getObjectID)
+
+    numSearchPatterns = property(getNumSearchPatterns)
+
+    numExcludePatterns = property(getNumExcludePatterns)
+
+    resultPattern = property(getResultPattern, setResultPattern)
