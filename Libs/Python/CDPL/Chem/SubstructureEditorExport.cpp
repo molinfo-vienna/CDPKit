@@ -25,6 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/SubstructureEditor.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -43,5 +44,39 @@ void CDPLPythonChem::exportSubstructureEditor()
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureEditor>())
         .def("assign", &Chem::SubstructureEditor::operator=, (python::arg("self"), python::arg("editor")),
              python::return_self<>())
-     ;
+        .def("addSearchPattern", &Chem::SubstructureEditor::addSearchPattern,
+             (python::arg("self"), python::arg("pattern")))
+        .def("getNumSearchPatterns", &Chem::SubstructureEditor::getNumSearchPatterns, python::arg("self"))
+        .def("getSearchPattern", &Chem::SubstructureEditor::getSearchPattern,
+             (python::arg("self"), python::arg("idx")),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("removeSearchPattern", static_cast<void (Chem::SubstructureEditor::*)(std::size_t)>
+             (&Chem::SubstructureEditor::removeSearchPattern),
+             (python::arg("self"), python::arg("idx")))
+        .def("clearSearchPatterns", &Chem::SubstructureEditor::clearSearchPatterns, python::arg("self"))
+        .def("addExcludePattern", &Chem::SubstructureEditor::addExcludePattern,
+             (python::arg("self"), python::arg("pattern")))
+        .def("getNumExcludePatterns", &Chem::SubstructureEditor::getNumExcludePatterns, python::arg("self"))
+        .def("getExcludePattern", &Chem::SubstructureEditor::getExcludePattern,
+             (python::arg("self"), python::arg("idx")),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("removeExcludePattern", static_cast<void (Chem::SubstructureEditor::*)(std::size_t)>
+             (&Chem::SubstructureEditor::removeExcludePattern),
+             (python::arg("self"), python::arg("idx")))
+        .def("clearExcludePatterns", &Chem::SubstructureEditor::clearExcludePatterns, python::arg("self"))
+        .def("setResultPattern", &Chem::SubstructureEditor::setResultPattern,
+             (python::arg("self"), python::arg("pattern")))
+        .def("getResultPattern", &Chem::SubstructureEditor::getResultPattern,
+             python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+        .def("edit", static_cast<std::size_t (Chem::SubstructureEditor::*)(Chem::Molecule&)>(&Chem::SubstructureEditor::edit),
+             (python::arg("self"), python::arg("mol")))
+        .def("edit", static_cast<std::size_t (Chem::SubstructureEditor::*)(const Chem::MolecularGraph&, Chem::Molecule&)>
+             (&Chem::SubstructureEditor::edit),
+             (python::arg("self"), python::arg("molgraph"), python::arg("res_mol")))
+        .add_property("numSearchPatterns", &Chem::SubstructureEditor::getNumSearchPatterns)
+        .add_property("numExcludePatterns", &Chem::SubstructureEditor::getNumExcludePatterns)
+        .add_property("resultPattern",
+                      python::make_function(&Chem::SubstructureEditor::getResultPattern,
+                                            python::return_value_policy<python::copy_const_reference>()),
+                      &Chem::SubstructureEditor::setResultPattern);
 }

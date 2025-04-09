@@ -33,6 +33,8 @@
 #include <vector>
 #include <memory>
 
+#include <boost/iterator/transform_iterator.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -55,8 +57,27 @@ namespace CDPL
         class CDPL_CHEM_API SubstructureEditor
         {
 
+            struct SubstructPattern
+            {
+
+                SubstructPattern(const MolecularGraph::SharedPointer& ptn, bool unique_mpgs):
+                    pattern(ptn), subSearch(new Chem::SubstructureSearch(*ptn))
+                {
+                    subSearch->uniqueMappingsOnly(unique_mpgs);
+                }
+
+                MolecularGraph::SharedPointer     pattern;
+                SubstructureSearch::SharedPointer subSearch;
+            };
+
+            typedef std::vector<SubstructPattern> SubstructPatternList;
+            typedef const MolecularGraph::SharedPointer& (*GetPatternFunction)(const SubstructPattern&);
+
           public:
             typedef std::shared_ptr<SubstructureEditor> SharedPointer;
+
+            typedef boost::transform_iterator<GetPatternFunction, SubstructPatternList::const_iterator> ConstPatternIterator;
+            typedef boost::transform_iterator<GetPatternFunction, SubstructPatternList::iterator>       PatternIterator;
 
             /**
              * \brief Constructs the \c %SubstructureEditor instance.
@@ -78,25 +99,63 @@ namespace CDPL
              * \brief Appends a new substructure search pattern to the current set of patterns.
              * \param pattern The substructure search pattern to add.
              */
-            void addSearchPattern(const Chem::MolecularGraph::SharedPointer& pattern);
+            void addSearchPattern(const MolecularGraph::SharedPointer& pattern);
 
+            std::size_t getNumSearchPatterns() const;
 
-            
-            /**
-             * \brief Appends a new substructure exclude pattern to the current set of patterns.
-             * \param pattern The substructure exclude pattern to add.
-             */
-            void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
+            const MolecularGraph::SharedPointer& getSearchPattern(std::size_t idx) const;
+
+            void removeSearchPattern(std::size_t idx);
+
+            void removeSearchPattern(const PatternIterator& it);
 
             /**
              * \brief Clears the current set of substructuresearch patterns.
              */
             void clearSearchPatterns();
 
+            PatternIterator getSearchPatternsBegin();
+
+            PatternIterator getSearchPatternsEnd();
+
+            ConstPatternIterator getSearchPatternsBegin() const;
+
+            ConstPatternIterator getSearchPatternsEnd() const;
+
+            /**
+             * \brief Appends a new substructure exclude pattern to the current set of patterns.
+             * \param pattern The substructure exclude pattern to add.
+             */
+            void addExcludePattern(const MolecularGraph::SharedPointer& pattern);
+
+            std::size_t getNumExcludePatterns() const;
+
+            const MolecularGraph::SharedPointer& getExcludePattern(std::size_t idx) const;
+
+            void removeExcludePattern(std::size_t idx);
+
+            void removeExcludePattern(const PatternIterator& it);
+
             /**
              * \brief Clears the current set of substructure exclude patterns.
              */
             void clearExcludePatterns();
+
+            PatternIterator getExcludePatternsBegin();
+
+            PatternIterator getExcludePatternsEnd();
+
+            ConstPatternIterator getExcludePatternsBegin() const;
+
+            ConstPatternIterator getExcludePatternsEnd() const;
+
+            void setResultPattern(const MolecularGraph::SharedPointer& pattern);
+
+            const MolecularGraph::SharedPointer& getResultPattern() const;
+
+            std::size_t edit(Molecule& mol);
+
+            std::size_t edit(const MolecularGraph& molgraph, Molecule& res_mol);
 
             /**
              * \brief Copies the state of the \c %SubstructureEditor instance \a gen.
@@ -106,24 +165,15 @@ namespace CDPL
             SubstructureEditor& operator=(const SubstructureEditor& gen);
 
           private:
-            struct SubstructPattern
+            static const MolecularGraph::SharedPointer& getPattern(const SubstructPattern& ptn)
             {
+                return ptn.pattern;
+            }
 
-                SubstructPattern(const Chem::MolecularGraph::SharedPointer& ptn, bool unique_mpgs):
-                    pattern(ptn), subSearch(new Chem::SubstructureSearch(*ptn))
-                {
-                    subSearch->uniqueMappingsOnly(unique_mpgs);
-                }
-
-                MolecularGraph::SharedPointer     pattern;
-                SubstructureSearch::SharedPointer subSearch;
-            };
-
-            typedef std::vector<SubstructPattern>     SubstructPatternList;
-
-            const Chem::MolecularGraph* molGraph;
-            SubstructPatternList        searchPatterns;
-            SubstructPatternList        excludePatterns;
+            const MolecularGraph*         molGraph;
+            SubstructPatternList          searchPatterns;
+            SubstructPatternList          excludePatterns;
+            MolecularGraph::SharedPointer resultPattern;
         };
     } // namespace Chem
 } // namespace CDPL
