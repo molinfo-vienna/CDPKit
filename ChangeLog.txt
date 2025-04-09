@@ -1,5 +1,7 @@
 master:
 
+ - Signature of method Base::DataOutputHandler::createWriter(std::iostream&) has been changed to
+   Base::DataOutputHandler<T>::createWriter(std::ostream&) in order to support write-only output streams
  - Fixed an issue with the command line tool 'PSDScreen' where the default value of option -u
    was not properly set at program startup. In screening mode 'ALL-MATCHES', multiple program executions
    using the same input files might thus have led to varying number of reported hits 
@@ -9,7 +11,7 @@ master:
  - Fixed an issue with spiro ring systems in the implementation of the 'extended smallest set of smallest rings'
    perception algorithm
  - C++ standard input, output and error streams (std::cin, std::cout and std::cerr) are now exposed
-   as class variables Base.IStream.STD_IN, Base.OStream.STD_OUT and Base.OStream.STD_ERR, respectively.
+   as class variables Base.IStream.STD_IN, Base.OStream.STD_OUT and Base.OStream.STD_ERR, respectively
    For example, Base.IStream.STD_IN might be passed as argument to the constructor of a Chem.MoleculeReader
    instance which will then read molecule data from the standard input of the current process
  - Support for the automated generation and installation of a CMake package configuration file that
