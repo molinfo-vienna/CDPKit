@@ -141,7 +141,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \param proc_excluded 
     # \return 
     #
-    def standardize(mol: Molecule, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
+    def standardize(mol: MolecularGraph, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
 
     ##
     # \brief 
@@ -160,6 +160,6 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \param check_exclusion 
     # \return 
     #
-    def getParent(mol: Molecule, parent_mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
+    def getParent(mol: MolecularGraph, parent_mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
     objectID = property(getObjectID)

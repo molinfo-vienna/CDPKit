@@ -60,9 +60,9 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Appends a new substructure search pattern to the current set of patterns.
     # 
-    # \param pattern The substructure search pattern to add.
+    # \param molgraph The molecular graph of the substructure search pattern to add.
     # 
-    def addSearchPattern(pattern: MolecularGraph) -> None: pass
+    def addSearchPattern(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
@@ -91,9 +91,9 @@ class SubstructureEditor(Boost.Python.instance):
     ##
     # \brief Appends a new substructure exclude pattern to the current set of patterns.
     # 
-    # \param pattern The substructure exclude pattern to add.
+    # \param molgraph The molecular graph of the substructure exclude pattern to add.
     # 
-    def addExcludePattern(pattern: MolecularGraph) -> None: pass
+    def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
@@ -121,9 +121,9 @@ class SubstructureEditor(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param pattern 
+    # \param molgraph 
     #
-    def setResultPattern(pattern: MolecularGraph) -> None: pass
+    def setResultPattern(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 

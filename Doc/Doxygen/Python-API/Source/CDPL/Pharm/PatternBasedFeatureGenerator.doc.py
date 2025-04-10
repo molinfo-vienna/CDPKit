@@ -62,22 +62,22 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
     def __init__(gen: PatternBasedFeatureGenerator) -> None: pass
 
     ##
-    # \brief Appends a new feature include pattern to the current set of patterns.
+    # \brief Appends a new feature substructure include pattern to the current set of patterns.
     # 
-    # \param pattern The substructure search pattern of the feature.
+    # \param molgraph The molecular graph of the feature substructure search pattern.
     # \param type The value of the type property of the feature.
     # \param tol The value of the tolerance property of the feature.
     # \param geom The value of the geometry property of the feature.
     # \param length The value of the length property of vector features.
     # 
-    def addIncludePattern(pattern: Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
+    def addIncludePattern(molgraph: Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
 
     ##
-    # \brief Appends a new feature include pattern to the current set of patterns.
+    # \brief Appends a new feature substructure exclude pattern to the current set of patterns.
     # 
-    # \param pattern The substructure search pattern of the feature.
+    # \param molgraph The molecular graph of the feature substructure exclude pattern.
     # 
-    def addExcludePattern(pattern: Chem.MolecularGraph) -> None: pass
+    def addExcludePattern(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Clears the current set of include patterns.

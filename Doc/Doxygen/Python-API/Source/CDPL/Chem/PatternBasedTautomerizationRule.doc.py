@@ -129,16 +129,16 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
     # \brief 
-    # \param pattern 
+    # \param molgraph 
     # \param bond_chgs 
     #
-    def addTransformationPattern(pattern: MolecularGraph, bond_chgs: object) -> None: pass
+    def addTransformationPattern(molgraph: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
     # \brief 
-    # \param pattern 
+    # \param molgraph 
     #
-    def addExcludePattern(pattern: MolecularGraph) -> None: pass
+    def addExcludePattern(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 

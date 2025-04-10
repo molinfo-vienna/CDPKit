@@ -30,20 +30,20 @@ class PatternAtomTyper(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Pattern instance \a ptn.
-        # \param ptn The \e %Pattern instance to copy.
+        # \brief Initializes a copy of the \e %Pattern instance \a pattern.
+        # \param pattern The \e %Pattern instance to copy.
         # 
-        def __init__(ptn: Pattern) -> None: pass
+        def __init__(pattern: Pattern) -> None: pass
 
         ##
         # \brief Initializes the \e %Pattern instance.
-        # \param structure 
+        # \param molgraph 
         # \param atom_label 
         # \param priority 
         # \param all_matches 
         # \param unique_matches 
         # 
-        def __init__(structure: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
+        def __init__(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -58,11 +58,11 @@ class PatternAtomTyper(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \c %Pattern instance \a ptn.
-        # \param ptn The \c %Pattern instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \c %Pattern instance \a pattern.
+        # \param pattern The \c %Pattern instance to copy.
         # \return \a self
         # 
-        def assign(ptn: Pattern) -> Pattern: pass
+        def assign(pattern: Pattern) -> Pattern: pass
 
         ##
         # \brief 
@@ -131,19 +131,19 @@ class PatternAtomTyper(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param structure 
+    # \param molgraph 
     # \param atom_label 
     # \param priority 
     # \param all_matches 
     # \param unique_matches 
     #
-    def addPattern(structure: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
+    def addPattern(molgraph: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
 
     ##
     # \brief 
-    # \param ptn 
+    # \param pattern 
     #
-    def addPattern(ptn: Pattern) -> None: pass
+    def addPattern(pattern: Pattern) -> None: pass
 
     ##
     # \brief 
