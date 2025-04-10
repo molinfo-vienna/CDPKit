@@ -57,27 +57,16 @@ namespace CDPL
         class CDPL_CHEM_API SubstructureEditor
         {
 
-            struct SubstructPattern
-            {
+            struct Pattern;
 
-                SubstructPattern(const MolecularGraph::SharedPointer& ptn, bool unique_mpgs):
-                    pattern(ptn), subSearch(new Chem::SubstructureSearch(*ptn))
-                {
-                    subSearch->uniqueMappingsOnly(unique_mpgs);
-                }
-
-                MolecularGraph::SharedPointer     pattern;
-                SubstructureSearch::SharedPointer subSearch;
-            };
-
-            typedef std::vector<SubstructPattern> SubstructPatternList;
-            typedef const MolecularGraph::SharedPointer& (*GetPatternFunction)(const SubstructPattern&);
+            typedef std::vector<Pattern> PatternList;
+            typedef const MolecularGraph::SharedPointer& (*GetMolGraphFunc)(const Pattern&);
 
           public:
             typedef std::shared_ptr<SubstructureEditor> SharedPointer;
 
-            typedef boost::transform_iterator<GetPatternFunction, SubstructPatternList::const_iterator> ConstPatternIterator;
-            typedef boost::transform_iterator<GetPatternFunction, SubstructPatternList::iterator>       PatternIterator;
+            typedef boost::transform_iterator<GetMolGraphFunc, PatternList::const_iterator> ConstPatternIterator;
+            typedef boost::transform_iterator<GetMolGraphFunc, PatternList::iterator>       PatternIterator;
 
             /**
              * \brief Constructs the \c %SubstructureEditor instance.
@@ -97,9 +86,9 @@ namespace CDPL
 
             /**
              * \brief Appends a new substructure search pattern to the current set of patterns.
-             * \param pattern The substructure search pattern to add.
+             * \param molgraph The molecular graph of the substructure search pattern to add.
              */
-            void addSearchPattern(const MolecularGraph::SharedPointer& pattern);
+            void addSearchPattern(const MolecularGraph::SharedPointer& molgraph);
 
             std::size_t getNumSearchPatterns() const;
 
@@ -124,9 +113,9 @@ namespace CDPL
 
             /**
              * \brief Appends a new substructure exclude pattern to the current set of patterns.
-             * \param pattern The substructure exclude pattern to add.
+             * \param molgraph The molecular graph of the substructure exclude pattern to add.
              */
-            void addExcludePattern(const MolecularGraph::SharedPointer& pattern);
+            void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
             std::size_t getNumExcludePatterns() const;
 
@@ -165,15 +154,48 @@ namespace CDPL
             SubstructureEditor& operator=(const SubstructureEditor& gen);
 
           private:
-            static const MolecularGraph::SharedPointer& getPattern(const SubstructPattern& ptn)
+            struct Pattern
             {
-                return ptn.pattern;
-            }
+
+                Pattern(const MolecularGraph::SharedPointer& molgraph):
+                    molGraph(molgraph), subSearch(new Chem::SubstructureSearch(*molgraph))
+                    {}
+
+                MolecularGraph::SharedPointer     molGraph;
+                SubstructureSearch::SharedPointer subSearch;
+            };
+
+            bool edit(Molecule& mol, const AtomMapping& mapping);
+
+            bool editAtomStereoDescriptors(Molecule& mol) const;
+            bool editBondStereoDescriptors(Molecule& mol) const;
+
+            void getExcludeMatches(const MolecularGraph& molgraph);
+
+            bool createMatchedAtomAndBondMask(const MolecularGraph& molgraph, const AtomBondMapping& mapping,
+                                              Util::BitSet& mask, bool lbld_only, bool init) const;
+
+            const Chem::Atom* getMappedAtomForID(const AtomMapping& mapping, std::size_t id) const;
+
+            template <typename T>
+            void copyProperty(const T& src_cntnr, T& tgt_cntnr, const Base::LookupKey& key) const;
+
+            template <typename VT, typename T>
+            bool copyPropertyWithChangeCheck(const T& src_cntnr, T& tgt_cntnr, const Base::LookupKey& key) const;
+
+            static const MolecularGraph::SharedPointer& getMolGraph(const Pattern& ptn);
+
+            typedef Util::ObjectStack<Util::BitSet> BitSetCache;
+            typedef std::vector<Util::BitSet*>      BitSetList;
+            typedef std::vector<Atom*>              AtomArray;
 
             const MolecularGraph*         molGraph;
-            SubstructPatternList          searchPatterns;
-            SubstructPatternList          excludePatterns;
+            PatternList                   searchPatterns;
+            PatternList                   excludePatterns;
             MolecularGraph::SharedPointer resultPattern;
+            BitSetList                    excludeMatches;
+            AtomArray                     resPtnAtomMapping;
+            BitSetCache                   bitSetCache;
         };
     } // namespace Chem
 } // namespace CDPL

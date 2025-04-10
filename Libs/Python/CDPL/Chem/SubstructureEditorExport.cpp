@@ -45,7 +45,7 @@ void CDPLPythonChem::exportSubstructureEditor()
         .def("assign", &Chem::SubstructureEditor::operator=, (python::arg("self"), python::arg("editor")),
              python::return_self<>())
         .def("addSearchPattern", &Chem::SubstructureEditor::addSearchPattern,
-             (python::arg("self"), python::arg("pattern")))
+             (python::arg("self"), python::arg("molgraph")))
         .def("getNumSearchPatterns", &Chem::SubstructureEditor::getNumSearchPatterns, python::arg("self"))
         .def("getSearchPattern", &Chem::SubstructureEditor::getSearchPattern,
              (python::arg("self"), python::arg("idx")),
@@ -55,7 +55,7 @@ void CDPLPythonChem::exportSubstructureEditor()
              (python::arg("self"), python::arg("idx")))
         .def("clearSearchPatterns", &Chem::SubstructureEditor::clearSearchPatterns, python::arg("self"))
         .def("addExcludePattern", &Chem::SubstructureEditor::addExcludePattern,
-             (python::arg("self"), python::arg("pattern")))
+             (python::arg("self"), python::arg("molgraph")))
         .def("getNumExcludePatterns", &Chem::SubstructureEditor::getNumExcludePatterns, python::arg("self"))
         .def("getExcludePattern", &Chem::SubstructureEditor::getExcludePattern,
              (python::arg("self"), python::arg("idx")),
@@ -65,7 +65,7 @@ void CDPLPythonChem::exportSubstructureEditor()
              (python::arg("self"), python::arg("idx")))
         .def("clearExcludePatterns", &Chem::SubstructureEditor::clearExcludePatterns, python::arg("self"))
         .def("setResultPattern", &Chem::SubstructureEditor::setResultPattern,
-             (python::arg("self"), python::arg("pattern")))
+             (python::arg("self"), python::arg("molgraph")))
         .def("getResultPattern", &Chem::SubstructureEditor::getResultPattern,
              python::arg("self"), python::return_value_policy<python::copy_const_reference>())
         .def("edit", static_cast<std::size_t (Chem::SubstructureEditor::*)(Chem::Molecule&)>(&Chem::SubstructureEditor::edit),
