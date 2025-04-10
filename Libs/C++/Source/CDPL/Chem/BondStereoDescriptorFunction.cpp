@@ -175,7 +175,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
             if (dim != 3 && dim != 0) {
                 unsigned int bnd_stereo = get2DStereoFlag(nbr_bond);
 
-                if ((bnd_stereo == BondStereoFlag::EITHER || bnd_stereo == BondStereoFlag::REVERSE_EITHER)) {
+                if (bnd_stereo == BondStereoFlag::EITHER || bnd_stereo == BondStereoFlag::REVERSE_EITHER) {
                     if (dim == 2)
                         return makeStereoDescriptor(BondConfiguration::EITHER, bond, molgraph);
 
