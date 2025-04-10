@@ -1,5 +1,7 @@
 master:
 
+ - Made the ChEMBL standardization code also work with Chem::MolecularGraph objects if
+   standardization shall be performed on a supplied target Chem::Molecule instance
  - Signature of method Base::DataOutputHandler::createWriter(std::iostream&) has been changed to
    Base::DataOutputHandler<T>::createWriter(std::ostream&) in order to support write-only output streams
  - Fixed an issue with the command line tool 'PSDScreen' where the default value of option -u
