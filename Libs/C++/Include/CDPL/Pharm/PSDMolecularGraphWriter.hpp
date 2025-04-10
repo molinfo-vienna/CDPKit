@@ -59,7 +59,7 @@ namespace CDPL
             /**
              * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the 
              *        output stream \a os.
-             * \param ios The output stream to write to.
+             * \param os The output stream to write to.
              */
             PSDMolecularGraphWriter(std::ostream& os);
 
