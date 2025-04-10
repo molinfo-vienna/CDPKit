@@ -32,6 +32,7 @@
 #include <cstddef>
 #include <vector>
 #include <memory>
+#include <unordered_set>
 
 #include <boost/iterator/transform_iterator.hpp>
 
@@ -188,6 +189,8 @@ namespace CDPL
             typedef Util::ObjectStack<Util::BitSet> BitSetCache;
             typedef std::vector<Util::BitSet*>      BitSetList;
             typedef std::vector<Atom*>              AtomArray;
+            typedef std::unordered_set<Atom*>       AtomSet;
+            typedef std::unordered_set<Bond*>       BondSet;
 
             const MolecularGraph*         molGraph;
             PatternList                   searchPatterns;
@@ -195,6 +198,9 @@ namespace CDPL
             MolecularGraph::SharedPointer resultPattern;
             BitSetList                    excludeMatches;
             AtomArray                     resPtnAtomMapping;
+            AtomSet                       hybStateUpdateAtoms;
+            AtomSet                       configUpdateAtoms;
+            BondSet                       configUpdateBonds;
             BitSetCache                   bitSetCache;
         };
     } // namespace Chem

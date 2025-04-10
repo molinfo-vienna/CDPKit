@@ -24,17 +24,20 @@
  
 #include "StaticInit.hpp"
 
-#include <algorithm>
+#include <utility>
 
 #include "CDPL/Chem/SubstructureEditor.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/BondProperty.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -201,12 +204,13 @@ std::size_t Chem::SubstructureEditor::edit(Molecule& mol)
     if (!resultPattern || searchPatterns.empty())
         return 0;
 
+    initSubstructureSearchTarget(mol, false);
+    
     std::size_t num_edits = 0;
 
     for (bool changes = true; changes; ) {
         Util::BitSet* mtd_substr_mask = nullptr;
 
-        initSubstructureSearchTarget(mol, false);
         getExcludeMatches(mol);
 
         changes = false;
@@ -277,13 +281,17 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
 {
     auto changes = false;
     auto clr_comps = false;
-    auto clr_arom = false;
-    auto clr_rings = false;
+    auto update_arom = false;
+    auto update_rings = false;
     auto& res_ptn = *resultPattern;
     auto num_res_ptn_atoms = res_ptn.getNumAtoms();
 
     if (resPtnAtomMapping.size() < num_res_ptn_atoms)
         resPtnAtomMapping.resize(num_res_ptn_atoms);
+
+    hybStateUpdateAtoms.clear();
+    configUpdateAtoms.clear();
+    configUpdateBonds.clear();
     
     for (std::size_t i = 0; i < num_res_ptn_atoms; i++) {
         auto& res_ptn_atom = res_ptn.getAtom(i);
@@ -303,7 +311,9 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
             copyProperty(res_ptn_atom, *mpd_atom, AtomProperty::RADICAL_TYPE);
             copyProperty(res_ptn_atom, *mpd_atom, AtomProperty::ISOTOPE);
             copyProperty(res_ptn_atom, *mpd_atom, AtomProperty::UNPAIRED_ELECTRON_COUNT);
-              
+
+            configUpdateAtoms.insert(mpd_atom);
+            
             resPtnAtomMapping[i] = mpd_atom;
             changes = true;
             clr_comps = true;
@@ -311,18 +321,16 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
         }
 
         if (hasType(res_ptn_atom) && (getType(res_ptn_atom) == 0)) {
-            for (auto& atom : mpd_atom->getAtoms()) {
-                clearHybridizationState(atom);
-                clearImplicitHydrogenCount(atom);
-            }
+            for (auto& atom : mpd_atom->getAtoms())
+                configUpdateAtoms.insert(&atom);
 
             mol.removeAtom(mol.getAtomIndex(*mpd_atom));
             
             resPtnAtomMapping[i] = nullptr;
             changes = true;
             clr_comps = true;
-            clr_rings = true;
-            clr_arom = true;
+            update_rings = true;
+            update_arom = true;
             continue;
         }
 
@@ -335,11 +343,10 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
             copyPropertyWithChangeCheck<long>(res_ptn_atom, *mpd_atom, AtomProperty::FORMAL_CHARGE) |
             copyPropertyWithChangeCheck<std::size_t>(res_ptn_atom, *mpd_atom, AtomProperty::UNPAIRED_ELECTRON_COUNT)) {
 
-            clearHybridizationState(*mpd_atom);
-            clearImplicitHydrogenCount(*mpd_atom);
+            configUpdateAtoms.insert(mpd_atom);
             
             changes = true;
-            clr_arom = true;
+            update_arom = true;
         }
 
         resPtnAtomMapping[i] = mpd_atom;
@@ -374,78 +381,208 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
             copyProperty(res_ptn_bond, *mpd_bond, BondProperty::ORDER);
             copyProperty(res_ptn_bond, *mpd_bond, BondProperty::STEREO_2D_FLAG);
 
-            clearHybridizationState(*mpd_atom1);
-            clearHybridizationState(*mpd_atom2);
-            clearImplicitHydrogenCount(*mpd_atom1);
-            clearImplicitHydrogenCount(*mpd_atom2);
-            
+            configUpdateBonds.insert(mpd_bond);
+            configUpdateAtoms.insert(mpd_atom1);
+            configUpdateAtoms.insert(mpd_atom2);
+
             changes = true;
             clr_comps = true;
-            clr_rings = true;
-            clr_arom = true;
+            update_rings = true;
+            update_arom = true;
             continue;
         }
 
         if (hasOrder(res_ptn_bond) && (getOrder(res_ptn_bond) == 0)) {
             mol.removeBond(mol.getBondIndex(*mpd_bond));
 
-            clearHybridizationState(*mpd_atom1);
-            clearHybridizationState(*mpd_atom2);
-            clearImplicitHydrogenCount(*mpd_atom1);
-            clearImplicitHydrogenCount(*mpd_atom2);
+            configUpdateAtoms.insert(mpd_atom1);
+            configUpdateAtoms.insert(mpd_atom2);
             
             changes = true;
             clr_comps = true;
-            clr_rings = true;
-            clr_arom = true;
+            update_rings = true;
+            update_arom = true;
             continue;
         }
 
         if (copyPropertyWithChangeCheck<std::size_t>(res_ptn_bond, *mpd_bond, BondProperty::ORDER)) {
-            clearHybridizationState(*mpd_atom1);
-            clearHybridizationState(*mpd_atom2);
-            clearImplicitHydrogenCount(*mpd_atom1);
-            clearImplicitHydrogenCount(*mpd_atom2);
+            configUpdateBonds.insert(mpd_bond);
+            configUpdateAtoms.insert(mpd_atom1);
+            configUpdateAtoms.insert(mpd_atom2);
             
             changes = true;
-            clr_arom = true;
+            update_arom = true;
         }
     }
-
-    changes |= editAtomStereoDescriptors(mol);
-    changes |= editBondStereoDescriptors(mol);
-    
-    if (!changes)
-        return false;
 
     if (clr_comps)
         clearComponents(mol);
 
-    if (clr_rings) {
-        clearSSSR(mol);
+    if (update_rings) {
+        perceiveSSSR(mol, true);
+        setRingFlags(mol, true);
+    }
 
-        std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), static_cast<void (*)(Atom&)>(&clearRingFlag));
-        std::for_each(mol.getBondsBegin(), mol.getBondsEnd(), static_cast<void (*)(Bond&)>(&clearRingFlag));
+    for (auto atom : configUpdateAtoms) {
+        setImplicitHydrogenCount(*atom, calcImplicitHydrogenCount(*atom, mol));
+        setHybridizationState(*atom, perceiveHybridizationState(*atom, mol));
     }
     
-    if (clr_arom) {
-        std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), static_cast<void (*)(Atom&)>(&clearAromaticityFlag));
-        std::for_each(mol.getBondsBegin(), mol.getBondsEnd(), static_cast<void (*)(Bond&)>(&clearAromaticityFlag));
-    }
-        
-    return true;
+    if (update_arom)
+        setAromaticityFlags(mol, true);
+
+    for (auto atom : configUpdateAtoms)
+        setStereoDescriptor(*atom, calcStereoDescriptor(*atom, mol, 0));
+
+    for (auto bond : configUpdateBonds)
+        setStereoDescriptor(*bond, calcStereoDescriptor(*bond, mol, 0));
+    
+    changes |= editAtomStereoDescriptors(mol);
+    changes |= editBondStereoDescriptors(mol);
+ 
+    return changes;
 }
 
 bool Chem::SubstructureEditor::editAtomStereoDescriptors(Molecule& mol) const
 {
-    // TODO
-    return false;
+    auto changes = false;
+    auto& res_ptn = *resultPattern;
+    
+    for (std::size_t i = 0, num_res_ptn_atoms = res_ptn.getNumAtoms(); i < num_res_ptn_atoms; i++) {
+        if (!resPtnAtomMapping[i])
+            continue;
+            
+        auto& res_ptn_atom = res_ptn.getAtom(i);
+
+        if (!hasStereoDescriptor(res_ptn_atom))
+            continue;
+        
+        auto& res_stereo_desc = getStereoDescriptor(res_ptn_atom);
+        auto res_config = res_stereo_desc.getConfiguration();
+        
+        if (res_config == AtomConfiguration::R || res_config == AtomConfiguration::S) {
+            auto num_res_ref_atoms = res_stereo_desc.getNumReferenceAtoms();
+
+            if (num_res_ref_atoms < 3 || num_res_ref_atoms > 4 || !res_stereo_desc.isValid(res_ptn_atom))
+                continue;
+
+            auto res_ref_atoms = res_stereo_desc.getReferenceAtoms();
+            std::size_t num_mpd_ref_atoms = 0;
+            const Atom* mpd_ref_atoms[4];
+            const Atom* valid_res_ref_atoms[4];
+
+            for (std::size_t j = 0; j < num_res_ref_atoms; j++) {
+                auto mpd_atom = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[j])];
+
+                if (mpd_atom && mpd_atom->findBondToAtom(*resPtnAtomMapping[i])) {
+                    mpd_ref_atoms[num_mpd_ref_atoms] = mpd_atom;
+                    valid_res_ref_atoms[num_mpd_ref_atoms++] = res_ref_atoms[j];
+                }
+            }
+
+            if (num_mpd_ref_atoms < 3)
+                continue;
+
+            if ((num_mpd_ref_atoms < num_res_ref_atoms) && 
+                (res_stereo_desc.getPermutationParity(*valid_res_ref_atoms[0], *valid_res_ref_atoms[1], *valid_res_ref_atoms[2]) == 1))
+                res_config = (res_config == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
+            
+            if (num_mpd_ref_atoms == 3)
+                setStereoDescriptor(*resPtnAtomMapping[i],
+                                    StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2]));
+            else
+                setStereoDescriptor(*resPtnAtomMapping[i],
+                                    StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2], *mpd_ref_atoms[3]));
+        } else {
+            auto stereo_desc = getStereoDescriptor(*resPtnAtomMapping[i]);
+
+            stereo_desc.setConfiguration(res_config);
+
+            setStereoDescriptor(*resPtnAtomMapping[i], stereo_desc);
+        }
+
+        changes = true;
+    }
+
+    return changes;
 }
 
 bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
 {
-    // TODO
-    return false;
+    auto changes = false;
+    auto& res_ptn = *resultPattern;
+    
+    for (auto& res_ptn_bond : res_ptn.getBonds()) {
+        if (!hasStereoDescriptor(res_ptn_bond))
+            continue;
+      
+        auto& res_atom1 = res_ptn_bond.getBegin();
+
+        if (!res_ptn.containsAtom(res_atom1))
+            continue;
+
+        auto& res_atom2 = res_ptn_bond.getEnd();
+
+        if (!res_ptn.containsAtom(res_atom2))
+            continue;
+
+        auto mpd_atom1 = resPtnAtomMapping[res_ptn.getAtomIndex(res_atom1)];
+
+        if (!mpd_atom1)
+            continue;
+        
+        auto mpd_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(res_atom2)];
+
+        if (!mpd_atom2)
+            continue;
+
+        auto mpd_bond = mpd_atom1->findBondToAtom(*mpd_atom2);
+
+        if (!mpd_bond)
+            continue;
+
+        auto& res_stereo_desc = getStereoDescriptor(res_ptn_bond);
+        auto res_config = res_stereo_desc.getConfiguration();
+        
+        if (res_config == BondConfiguration::CIS || res_config == BondConfiguration::TRANS) {
+            if (!res_stereo_desc.isValid(res_ptn_bond))
+                continue;
+
+            auto res_ref_atoms = res_stereo_desc.getReferenceAtoms();
+
+            if (res_ref_atoms[1] != &res_atom1)
+                std::swap(mpd_atom1, mpd_atom2);
+
+            auto mpd_ref_atom1 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[0])];
+
+            if (!mpd_ref_atom1)
+                continue;
+
+            auto mpd_ref_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[3])];
+
+            if (!mpd_ref_atom2)
+                continue;
+
+            if (!mpd_atom1->findBondToAtom(*mpd_ref_atom1))
+                continue;
+
+            if (!mpd_atom2->findBondToAtom(*mpd_ref_atom2))
+                continue;
+
+            setStereoDescriptor(*mpd_bond,
+                                StereoDescriptor(res_config, *mpd_ref_atom1, *mpd_atom1, *mpd_atom2, *mpd_ref_atom2));
+        } else {
+            auto stereo_desc = getStereoDescriptor(*mpd_bond);
+
+            stereo_desc.setConfiguration(res_config);
+
+            setStereoDescriptor(*mpd_bond, stereo_desc);
+        }
+
+        changes = true;
+    }
+            
+    return changes;
 }
 
 void Chem::SubstructureEditor::getExcludeMatches(const MolecularGraph& molgraph)
