@@ -247,9 +247,9 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Mole
     return changes;
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(const MolecularGraph& molgraph, Molecule& std_mol, bool proc_excluded)
 {
-    copyMolecule(mol, std_mol);
+    copyMolecularGraph(molgraph, std_mol);
     
     return standardize(std_mol, proc_excluded);
 }
@@ -437,9 +437,9 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
     return changes;
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize, bool check_exclusion)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(const MolecularGraph& molgraph, Molecule& parent_mol, bool neutralize, bool check_exclusion)
 {
-    copyMolecule(mol, parent_mol);
+    copyMolecularGraph(molgraph, parent_mol);
     
     return getParent(parent_mol, neutralize, check_exclusion);
 }
@@ -449,9 +449,9 @@ Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStanda
     return *this;
 }
     
-void Chem::ChEMBLStandardizer::copyMolecule(const Molecule& mol, Molecule& mol_copy) const
+void Chem::ChEMBLStandardizer::copyMolecularGraph(const MolecularGraph& molgraph, Molecule& mol_copy) const
 {
-    mol_copy.copy(mol);
+    mol_copy.copy(molgraph);
 
     clearComponents(mol_copy);
 }

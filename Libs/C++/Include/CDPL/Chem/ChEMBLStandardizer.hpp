@@ -91,18 +91,18 @@ namespace CDPL
 
             ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
 
-            ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded = false);
+            ChangeFlags standardize(const MolecularGraph& molgraph, Molecule& std_mol, bool proc_excluded = false);
 
             ChangeFlags getParent(Molecule& mol, bool neutralize = true, bool check_exclusion = true);
 
-            ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
+            ChangeFlags getParent(const MolecularGraph& molgraph, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
 
             ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 
           private:
             typedef std::vector<Atom*> AtomList;
 
-            void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
+            void copyMolecularGraph(const MolecularGraph& molgraph, Molecule& mol_copy) const;
 
             bool checkExclusionCriterions(const Molecule& mol) const;
             bool checkExclusionCriterions(const MolecularGraph& molgraph, std::size_t& boron_cnt) const;
