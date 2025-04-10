@@ -42,13 +42,13 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
     python::scope scope = cl;
 
     python::class_<Chem::SubstructureHistogramCalculator::Pattern>("Pattern", python::no_init)
-        .def(python::init<const Chem::SubstructureHistogramCalculator::Pattern&>((python::arg("self"), python::arg("ptn"))))
+        .def(python::init<const Chem::SubstructureHistogramCalculator::Pattern&>((python::arg("self"), python::arg("pattern"))))
         .def(python::init<const Chem::MolecularGraph::SharedPointer&, std::size_t, std::size_t, bool, bool>(
-                 (python::arg("self"), python::arg("structure"), python::arg("id"), (python::arg("priority") = 0), 
+                 (python::arg("self"), python::arg("molgraph"), python::arg("id"), (python::arg("priority") = 0), 
                   (python::arg("all_matches") = true), (python::arg("unique_matches") = true))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureHistogramCalculator::Pattern>())    
         .def("assign", CDPLPythonBase::copyAssOp<Chem::SubstructureHistogramCalculator::Pattern>(), 
-             (python::arg("self"), python::arg("ptn")), python::return_self<>())
+             (python::arg("self"), python::arg("pattern")), python::return_self<>())
         .def("getStructure", &Chem::SubstructureHistogramCalculator::Pattern::getStructure, python::arg("self"),  
              python::return_value_policy<python::copy_const_reference>())
         .def("getPriority", &Chem::SubstructureHistogramCalculator::Pattern::getPriority, python::arg("self"))
@@ -68,11 +68,11 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureHistogramCalculator>())    
         .def("addPattern", 
              static_cast<void (Chem::SubstructureHistogramCalculator::*)(const Chem::MolecularGraph::SharedPointer&, std::size_t, std::size_t, bool, bool)>(&Chem::SubstructureHistogramCalculator::addPattern), 
-             (python::arg("self"), python::arg("structure"), (python::arg("id") = 0), (python::arg("priority") = 0), 
+             (python::arg("self"), python::arg("molgraph"), (python::arg("id") = 0), (python::arg("priority") = 0), 
               (python::arg("all_matches") = true), (python::arg("unique_matches") = true)))
         .def("addPattern", 
              static_cast<void (Chem::SubstructureHistogramCalculator::*)(const Chem::SubstructureHistogramCalculator::Pattern&)>(&Chem::SubstructureHistogramCalculator::addPattern),
-             (python::arg("self"), python::arg("ptn")))
+             (python::arg("self"), python::arg("pattern")))
         .def("getPattern", &Chem::SubstructureHistogramCalculator::getPattern, 
              (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
         .def("removePattern", static_cast<void (Chem::SubstructureHistogramCalculator::*)(std::size_t)>(&Chem::SubstructureHistogramCalculator::removePattern),

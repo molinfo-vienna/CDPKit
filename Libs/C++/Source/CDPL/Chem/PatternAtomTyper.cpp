@@ -33,14 +33,14 @@
 using namespace CDPL;
 
 
-Chem::PatternAtomTyper::Pattern::Pattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label, std::size_t priority, 
+Chem::PatternAtomTyper::Pattern::Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t atom_label, std::size_t priority, 
                                          bool all_matches, bool unique_matches):
-    structure(structure), priority(priority), atomLabel(atom_label), allMatches(all_matches), uniqueMatches(unique_matches)
+    molGraph(molgraph), priority(priority), atomLabel(atom_label), allMatches(all_matches), uniqueMatches(unique_matches)
 {
-    if (!structure)
+    if (!molgraph)
         return;
 
-    for (MolecularGraph::ConstAtomIterator it = structure->getAtomsBegin(), end = structure->getAtomsEnd(); it != end; ++it) {
+    for (MolecularGraph::ConstAtomIterator it = molgraph->getAtomsBegin(), end = molgraph->getAtomsEnd(); it != end; ++it) {
         const Atom& atom = *it;
 
         if (hasAtomMappingID(atom))
@@ -50,7 +50,7 @@ Chem::PatternAtomTyper::Pattern::Pattern(const MolecularGraph::SharedPointer& st
 
 const Chem::MolecularGraph::SharedPointer& Chem::PatternAtomTyper::Pattern::getStructure() const
 {
-    return structure;
+    return molGraph;
 }
 
 std::size_t Chem::PatternAtomTyper::Pattern::getPriority() const
@@ -88,15 +88,15 @@ Chem::PatternAtomTyper::PatternAtomTyper(const PatternAtomTyper& typer):
     matchingPatternIndices(typer.matchingPatternIndices) 
 {}
 
-void Chem::PatternAtomTyper::addPattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label, 
+void Chem::PatternAtomTyper::addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t atom_label, 
                                         std::size_t priority, bool all_matches, bool unique_matches)
 {
-    addPattern(Pattern(structure, atom_label, priority, all_matches, unique_matches));
+    addPattern(Pattern(molgraph, atom_label, priority, all_matches, unique_matches));
 }
 
-void Chem::PatternAtomTyper::addPattern(const Pattern& ptn)
+void Chem::PatternAtomTyper::addPattern(const Pattern& pattern)
 {
-    patterns.push_back(ptn);
+    patterns.push_back(pattern);
 }
 
 const Chem::PatternAtomTyper::Pattern& Chem::PatternAtomTyper::getPattern(std::size_t idx) const
@@ -125,14 +125,12 @@ std::size_t Chem::PatternAtomTyper::getNumPatterns() const
     return patterns.size();
 }
 
-void Chem::PatternAtomTyper::removePattern(const PatternIterator& ptn_it)
+void Chem::PatternAtomTyper::removePattern(const PatternIterator& it)
 {
-    std::size_t idx = ptn_it - patterns.begin();
-
-    if (idx >= patterns.size())
+    if ((it < patterns.begin()) || (it >= patterns.end()))
         throw Base::IndexError("PatternAtomTyper: pattern iterator out of bounds");
 
-    patterns.erase(ptn_it);
+    patterns.erase(it);
 }
 
 Chem::PatternAtomTyper::ConstPatternIterator Chem::PatternAtomTyper::getPatternsBegin() const
@@ -241,11 +239,11 @@ void Chem::PatternAtomTyper::processPattern(const Pattern& ptn, std::size_t ptn_
     if (!ptn.getStructure())
         return;
 
-    substructSearch.uniqueMappingsOnly(ptn.processUniqueMatchesOnly());
-    substructSearch.setQuery(*ptn.getStructure());
-    substructSearch.findMappings(*molGraph);
+    subSearch.uniqueMappingsOnly(ptn.processUniqueMatchesOnly());
+    subSearch.setQuery(*ptn.getStructure());
+    subSearch.findMappings(*molGraph);
 
-    for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(), end = substructSearch.getMappingsEnd(); it != end; ++it) {
+    for (SubstructureSearch::ConstMappingIterator it = subSearch.getMappingsBegin(), end = subSearch.getMappingsEnd(); it != end; ++it) {
         if (processMatch(it->getAtomMapping(), ptn, ptn_idx) && !ptn.processAllMatches())
             return;
     }

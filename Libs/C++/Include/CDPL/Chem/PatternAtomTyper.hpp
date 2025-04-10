@@ -70,7 +70,7 @@ namespace CDPL
                 friend class PatternAtomTyper;
 
               public:
-                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0,
+                Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t atom_label = 0, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = false);
 
                 const MolecularGraph::SharedPointer& getStructure() const;
@@ -89,7 +89,7 @@ namespace CDPL
 
                 const LabeledAtomList& getLabeledAtoms() const;
 
-                MolecularGraph::SharedPointer structure;
+                MolecularGraph::SharedPointer molGraph;
                 std::size_t                   priority;
                 std::size_t                   atomLabel;
                 bool                          allMatches;
@@ -101,16 +101,16 @@ namespace CDPL
 
             PatternAtomTyper(const PatternAtomTyper& typer);
 
-            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0,
+            void addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t atom_label = 0, std::size_t priority = 0,
                             bool all_matches = true, bool unique_matches = false);
 
-            void addPattern(const Pattern& ptn);
+            void addPattern(const Pattern& pattern);
 
             const Pattern& getPattern(std::size_t idx) const;
 
             void removePattern(std::size_t idx);
 
-            void removePattern(const PatternIterator& ptn_it);
+            void removePattern(const PatternIterator& it);
 
             void clear();
 
@@ -148,7 +148,7 @@ namespace CDPL
             PatternList           patterns;
             SizeTypeArray         atomLabeling;
             SizeTypeArray         matchingPatternIndices;
-            SubstructureSearch    substructSearch;
+            SubstructureSearch    subSearch;
             Util::BitSet          labeledAtomMask;
         };
     } // namespace Chem

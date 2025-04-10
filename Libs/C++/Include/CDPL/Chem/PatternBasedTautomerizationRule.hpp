@@ -74,16 +74,16 @@ namespace CDPL
             PatternBasedTautomerizationRule& operator=(const PatternBasedTautomerizationRule& rule);
 
             template <typename Iter>
-            void addTransformationPattern(const MolecularGraph::SharedPointer& pattern, Iter bond_chgs_beg, Iter bond_chgs_end)
+            void addTransformationPattern(const MolecularGraph::SharedPointer& molgraph, Iter bond_chgs_beg, Iter bond_chgs_end)
             {
-                structPatterns.push_back(pattern);
-                patternSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(*pattern)));
+                structPatterns.push_back(molgraph);
+                patternSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(*molgraph)));
                 patternBondChangeLists.resize(patternBondChangeLists.size() + 1);
 
                 std::copy(bond_chgs_beg, bond_chgs_end, std::back_inserter(patternBondChangeLists.back()));
             }
 
-            void addExcludePattern(const MolecularGraph::SharedPointer& pattern);
+            void addExcludePattern(const MolecularGraph::SharedPointer& molgraph);
 
             void addExcludePatterns(const PatternBasedTautomerizationRule& rule);
 

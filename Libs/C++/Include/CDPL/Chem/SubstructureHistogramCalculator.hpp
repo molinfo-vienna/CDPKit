@@ -70,7 +70,7 @@ namespace CDPL
             {
 
               public:
-                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0,
+                Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = true);
 
                 const MolecularGraph::SharedPointer& getStructure() const;
@@ -84,7 +84,7 @@ namespace CDPL
                 bool processUniqueMatchesOnly() const;
 
               private:
-                MolecularGraph::SharedPointer structure;
+                MolecularGraph::SharedPointer molGraph;
                 std::size_t                   id;
                 std::size_t                   priority;
                 bool                          allMatches;
@@ -95,16 +95,16 @@ namespace CDPL
 
             SubstructureHistogramCalculator(const SubstructureHistogramCalculator& gen);
 
-            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0,
+            void addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, std::size_t priority = 0,
                             bool all_matches = true, bool unique_matches = true);
 
-            void addPattern(const Pattern& ptn);
+            void addPattern(const Pattern& pattern);
 
             const Pattern& getPattern(std::size_t idx) const;
 
             void removePattern(std::size_t idx);
 
-            void removePattern(const PatternIterator& ptn_it);
+            void removePattern(const PatternIterator& it);
 
             void clear();
 
@@ -159,7 +159,7 @@ namespace CDPL
 
             const MolecularGraph*     molGraph;
             PatternList               patterns;
-            SubstructureSearch        substructSearch;
+            SubstructureSearch        subSearch;
             PriorityToAtomBondMaskMap matchedSubstructMasks;
             AtomBondMask              testingAtomBondMask;
             Util::BitSet              tmpMask;

@@ -58,24 +58,24 @@ Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternB
     FeatureGenerator(gen), bitSetCache(MAX_BIT_SET_CACHE_SIZE)
 {
     for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
-        includePatterns.push_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
+        includePatterns.push_back(IncludePattern(it->molGraph, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
 
     for (ExcludePatternList::const_iterator it = gen.excludePatterns.begin(), end = gen.excludePatterns.end(); it != end; ++it)
-        excludePatterns.push_back(ExcludePattern(it->subQuery));
+        excludePatterns.push_back(ExcludePattern(it->molGraph));
 }
 
 Pharm::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 
-void Pharm::PatternBasedFeatureGenerator::addIncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, 
+void Pharm::PatternBasedFeatureGenerator::addIncludePattern(const Chem::MolecularGraph::SharedPointer& molgraph, 
                                                             unsigned int type, double tol, unsigned int geom,
                                                             double length)
 {
-    includePatterns.push_back(IncludePattern(substruct, type, tol, geom, length));
+    includePatterns.push_back(IncludePattern(molgraph, type, tol, geom, length));
 }
 
-void Pharm::PatternBasedFeatureGenerator::addExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct)
+void Pharm::PatternBasedFeatureGenerator::addExcludePattern(const Chem::MolecularGraph::SharedPointer& molgraph)
 {
-    excludePatterns.push_back(ExcludePattern(substruct));
+    excludePatterns.push_back(ExcludePattern(molgraph));
 }
         
 void Pharm::PatternBasedFeatureGenerator::clearIncludePatterns()
@@ -144,12 +144,12 @@ Pharm::PatternBasedFeatureGenerator& Pharm::PatternBasedFeatureGenerator::operat
     includePatterns.clear();
 
     for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
-        includePatterns.emplace_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
+        includePatterns.emplace_back(IncludePattern(it->molGraph, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
 
     excludePatterns.clear();
 
     for (ExcludePatternList::const_iterator it = gen.excludePatterns.begin(), end = gen.excludePatterns.end(); it != end; ++it)
-        excludePatterns.emplace_back(ExcludePattern(it->subQuery));
+        excludePatterns.emplace_back(ExcludePattern(it->molGraph));
 
     return *this;
 }
@@ -320,10 +320,8 @@ void Pharm::PatternBasedFeatureGenerator::getExcludeMatches()
             Util::BitSet* atom_mask = bitSetCache.get();
             const AtomMapping& atom_mapping = m_it->getAtomMapping();
 
-            createMatchedAtomMask(atom_mapping, *atom_mask, true);
-
-            if (!atom_mask->any())
-                createMatchedAtomMask(atom_mapping, *atom_mask, false);
+            if (!createMatchedAtomMask(atom_mapping, *atom_mask, true))
+                createMatchedAtomMask(atom_mapping, *atom_mask, false, false);
 
             excludeMatches.push_back(atom_mask);
         }
@@ -349,13 +347,18 @@ bool Pharm::PatternBasedFeatureGenerator::isContainedInExMatchList(const Util::B
     return isContainedInList(atom_mask, excludeMatches);
 }
 
-void Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::AtomMapping& mapping, Util::BitSet& atom_mask, bool check_label) const
+bool Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::AtomMapping& mapping, Util::BitSet& atom_mask,
+                                                                bool check_label, bool init) const
 {
     using namespace Chem;
 
-    atom_mask.resize(molGraph->getNumAtoms());
-    atom_mask.reset();
-
+    if (init) {
+        atom_mask.resize(molGraph->getNumAtoms());
+        atom_mask.reset();
+    }
+    
+    auto any = false;
+    
     for (AtomMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it) {
         if (check_label) {
             std::size_t label = getAtomMappingID(*it->first);
@@ -365,7 +368,10 @@ void Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::Atom
         }
 
         atom_mask.set(molGraph->getAtomIndex(*it->second));
+        any = true;
     }
+
+    return any;
 }
 
 void Pharm::PatternBasedFeatureGenerator::init(const Chem::MolecularGraph& molgraph)

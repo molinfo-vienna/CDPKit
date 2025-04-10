@@ -42,13 +42,13 @@ void CDPLPythonChem::exportPatternAtomTyper()
     python::scope scope = cl;
 
     python::class_<Chem::PatternAtomTyper::Pattern>("Pattern", python::no_init)
-        .def(python::init<const Chem::PatternAtomTyper::Pattern&>((python::arg("self"), python::arg("ptn"))))
+        .def(python::init<const Chem::PatternAtomTyper::Pattern&>((python::arg("self"), python::arg("pattern"))))
         .def(python::init<const Chem::MolecularGraph::SharedPointer&, std::size_t, std::size_t, bool, bool>(
-                 (python::arg("self"), python::arg("structure"), (python::arg("atom_label") = 0), (python::arg("priority") = 0), 
+                 (python::arg("self"), python::arg("molgraph"), (python::arg("atom_label") = 0), (python::arg("priority") = 0), 
                   (python::arg("all_matches") = true), (python::arg("unique_matches") = false))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternAtomTyper::Pattern>())    
         .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternAtomTyper::Pattern>(), 
-             (python::arg("self"), python::arg("ptn")), python::return_self<>())
+             (python::arg("self"), python::arg("pattern")), python::return_self<>())
         .def("getStructure", &Chem::PatternAtomTyper::Pattern::getStructure, python::arg("self"),  
              python::return_value_policy<python::copy_const_reference>())
         .def("getPriority", &Chem::PatternAtomTyper::Pattern::getPriority, python::arg("self"))
@@ -68,11 +68,11 @@ void CDPLPythonChem::exportPatternAtomTyper()
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternAtomTyper>())    
         .def("addPattern", 
              static_cast<void (Chem::PatternAtomTyper::*)(const Chem::MolecularGraph::SharedPointer&, std::size_t, std::size_t, bool, bool)>(&Chem::PatternAtomTyper::addPattern), 
-             (python::arg("self"), python::arg("structure"), (python::arg("atom_label") = 0), (python::arg("priority") = 0), 
+             (python::arg("self"), python::arg("molgraph"), (python::arg("atom_label") = 0), (python::arg("priority") = 0), 
               (python::arg("all_matches") = true), (python::arg("unique_matches") = false)))
         .def("addPattern", 
              static_cast<void (Chem::PatternAtomTyper::*)(const Chem::PatternAtomTyper::Pattern&)>(&Chem::PatternAtomTyper::addPattern),
-             (python::arg("self"), python::arg("ptn")))
+             (python::arg("self"), python::arg("pattern")))
         .def("getPattern", &Chem::PatternAtomTyper::getPattern, (python::arg("self"), python::arg("idx")),
              python::return_internal_reference<>())
         .def("removePattern", static_cast<void (Chem::PatternAtomTyper::*)(std::size_t)>(&Chem::PatternAtomTyper::removePattern),

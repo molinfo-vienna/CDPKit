@@ -34,14 +34,14 @@
 using namespace CDPL;
 
 
-Chem::SubstructureHistogramCalculator::Pattern::Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id,
+Chem::SubstructureHistogramCalculator::Pattern::Pattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id,
                                                        std::size_t priority, bool all_matches, bool unique_matches):
-    structure(structure), id(id), priority(priority), allMatches(all_matches), uniqueMatches(unique_matches)
+    molGraph(molgraph), id(id), priority(priority), allMatches(all_matches), uniqueMatches(unique_matches)
 {}
 
 const Chem::MolecularGraph::SharedPointer& Chem::SubstructureHistogramCalculator::Pattern::getStructure() const
 {
-    return structure;
+    return molGraph;
 }
 
 std::size_t Chem::SubstructureHistogramCalculator::Pattern::getID() const
@@ -73,20 +73,20 @@ Chem::SubstructureHistogramCalculator::SubstructureHistogramCalculator(const Sub
     patterns(calculator.patterns), matchedSubstructMasks(calculator.matchedSubstructMasks)
 {}
 
-void Chem::SubstructureHistogramCalculator::addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, 
+void Chem::SubstructureHistogramCalculator::addPattern(const MolecularGraph::SharedPointer& molgraph, std::size_t id, 
                                                       std::size_t priority, bool all_matches, bool unique_matches)
 {
-    addPattern(Pattern(structure, id, priority, all_matches, unique_matches));
+    addPattern(Pattern(molgraph, id, priority, all_matches, unique_matches));
 }
 
-void Chem::SubstructureHistogramCalculator::addPattern(const Pattern& ptn)
+void Chem::SubstructureHistogramCalculator::addPattern(const Pattern& pattern)
 {
-    PriorityToAtomBondMaskMap::const_iterator it = matchedSubstructMasks.find(ptn.getPriority());
+    PriorityToAtomBondMaskMap::const_iterator it = matchedSubstructMasks.find(pattern.getPriority());
 
     if (it == matchedSubstructMasks.end())
-        matchedSubstructMasks.insert(PriorityToAtomBondMaskMap::value_type(ptn.getPriority(), AtomBondMask()));
+        matchedSubstructMasks.insert(PriorityToAtomBondMaskMap::value_type(pattern.getPriority(), AtomBondMask()));
 
-    patterns.push_back(ptn);
+    patterns.push_back(pattern);
 }
 
 const Chem::SubstructureHistogramCalculator::Pattern& Chem::SubstructureHistogramCalculator::getPattern(std::size_t idx) const
@@ -123,16 +123,14 @@ std::size_t Chem::SubstructureHistogramCalculator::getNumPatterns() const
     return patterns.size();
 }
 
-void Chem::SubstructureHistogramCalculator::removePattern(const PatternIterator& ptn_it)
+void Chem::SubstructureHistogramCalculator::removePattern(const PatternIterator& it)
 {
-    std::size_t idx = ptn_it - patterns.begin();
-
-    if (idx >= patterns.size())
+    if ((it < patterns.begin()) || (it >= patterns.end()))
         throw Base::IndexError("SubstructureHistogramCalculator: pattern iterator out of bounds");
 
-    std::size_t priority = ptn_it->getPriority();
+    std::size_t priority = it->getPriority();
 
-    patterns.erase(ptn_it);
+    patterns.erase(it);
 
     if (std::find_if(patterns.begin(), patterns.end(),
                      std::bind(std::equal_to<std::size_t>(), priority,
@@ -230,11 +228,11 @@ void Chem::SubstructureHistogramCalculator::processPattern(const Pattern& ptn, c
     if (!ptn.getStructure())
         return;
 
-    substructSearch.uniqueMappingsOnly(ptn.processUniqueMatchesOnly());
-    substructSearch.setQuery(*ptn.getStructure());
-    substructSearch.findMappings(*molGraph);
+    subSearch.uniqueMappingsOnly(ptn.processUniqueMatchesOnly());
+    subSearch.setQuery(*ptn.getStructure());
+    subSearch.findMappings(*molGraph);
 
-    for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(), end = substructSearch.getMappingsEnd(); it != end; ++it) {
+    for (SubstructureSearch::ConstMappingIterator it = subSearch.getMappingsBegin(), end = subSearch.getMappingsEnd(); it != end; ++it) {
         if (processMatch(*it, ptn, func) && !ptn.processAllMatches())
             return;
     }

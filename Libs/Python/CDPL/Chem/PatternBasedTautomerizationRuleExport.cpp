@@ -37,7 +37,7 @@
 namespace
 {
 
-    void addTransformationPattern(CDPL::Chem::PatternBasedTautomerizationRule& rule, const CDPL::Chem::MolecularGraph::SharedPointer& pattern, PyObject* iterable)
+    void addTransformationPattern(CDPL::Chem::PatternBasedTautomerizationRule& rule, const CDPL::Chem::MolecularGraph::SharedPointer& molgraph, PyObject* iterable)
     {
         using namespace CDPL;
         using namespace Chem;
@@ -67,7 +67,7 @@ namespace
             order_chgs.push_back(python::extract<PatternBasedTautomerizationRule::BondOrderChange>(item)());
         }
 
-        rule.addTransformationPattern(pattern, order_chgs.begin(), order_chgs.end());
+        rule.addTransformationPattern(molgraph, order_chgs.begin(), order_chgs.end());
     }
 
     std::size_t getAtom1ID(const CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change)
@@ -132,8 +132,8 @@ void CDPLPythonChem::exportPatternBasedTautomerizationRule()
         .def(python::init<unsigned int>((python::arg("self"), python::arg("id"))))
         .def(python::init<const Chem::PatternBasedTautomerizationRule&>((python::arg("self"), python::arg("rule"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedTautomerizationRule>())    
-        .def("addTransformationPattern", &addTransformationPattern, (python::arg("self"), python::arg("pattern"), python::arg("bond_chgs")))
-        .def("addExcludePattern", &Chem::PatternBasedTautomerizationRule::addExcludePattern, (python::arg("self"), python::arg("pattern")))
+        .def("addTransformationPattern", &addTransformationPattern, (python::arg("self"), python::arg("molgraph"), python::arg("bond_chgs")))
+        .def("addExcludePattern", &Chem::PatternBasedTautomerizationRule::addExcludePattern, (python::arg("self"), python::arg("molgraph")))
         .def("addExcludePatterns", &Chem::PatternBasedTautomerizationRule::addExcludePatterns, (python::arg("self"), python::arg("rule")))
         .def("clearExcludePatterns", &Chem::PatternBasedTautomerizationRule::clearExcludePatterns, python::arg("self"))
         .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternBasedTautomerizationRule>(), 

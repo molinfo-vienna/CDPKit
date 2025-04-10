@@ -87,10 +87,10 @@ Chem::PatternBasedTautomerizationRule& Chem::PatternBasedTautomerizationRule::op
     return *this;
 }
 
-void Chem::PatternBasedTautomerizationRule::addExcludePattern(const MolecularGraph::SharedPointer& pattern)
+void Chem::PatternBasedTautomerizationRule::addExcludePattern(const MolecularGraph::SharedPointer& molgraph)
 {
-    excludePatterns.push_back(pattern);
-    excludeSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(*pattern)));
+    excludePatterns.push_back(molgraph);
+    excludeSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(*molgraph)));
 }
 
 void Chem::PatternBasedTautomerizationRule::addExcludePatterns(const PatternBasedTautomerizationRule& rule)

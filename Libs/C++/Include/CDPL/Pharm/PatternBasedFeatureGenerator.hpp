@@ -86,21 +86,21 @@ namespace CDPL
             virtual ~PatternBasedFeatureGenerator();
 
             /**
-             * \brief Appends a new feature include pattern to the current set of patterns.
-             * \param pattern The substructure search pattern of the feature.
+             * \brief Appends a new feature substructure include pattern to the current set of patterns.
+             * \param molgraph The molecular graph of the feature substructure search pattern.
              * \param type The value of the type property of the feature.
              * \param tol The value of the tolerance property of the feature.
              * \param geom The value of the geometry property of the feature.
              * \param length The value of the length property of vector features.
              */
-            void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type,
+            void addIncludePattern(const Chem::MolecularGraph::SharedPointer& molgraph, unsigned int type,
                                    double tol, unsigned int geom, double length = 1.0);
 
             /**
-             * \brief Appends a new feature include pattern to the current set of patterns.
-             * \param pattern The substructure search pattern of the feature.
+             * \brief Appends a new feature substructure exclude pattern to the current set of patterns.
+             * \param molgraph The molecular graph of the feature substructure exclude pattern.
              */
-            void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
+            void addExcludePattern(const Chem::MolecularGraph::SharedPointer& molgraph);
 
             /**
              * \brief Clears the current set of include patterns.
@@ -146,17 +146,13 @@ namespace CDPL
             struct IncludePattern
             {
 
-                IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type,
+                IncludePattern(const Chem::MolecularGraph::SharedPointer& molgraph, unsigned int type,
                                double tol, unsigned int geom, double length):
-                    subQuery(substruct),
-                    subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
+                    molGraph(molgraph), subSearch(new Chem::SubstructureSearch(*molgraph)), featureType(type),
                     featureTol(tol), featureGeom(geom), vectorLength(length)
-                {
+                {}
 
-                    subSearch->uniqueMappingsOnly(false);
-                }
-
-                Chem::MolecularGraph::SharedPointer     subQuery;
+                Chem::MolecularGraph::SharedPointer     molGraph;
                 Chem::SubstructureSearch::SharedPointer subSearch;
                 unsigned int                            featureType;
                 double                                  featureTol;
@@ -167,14 +163,11 @@ namespace CDPL
             struct ExcludePattern
             {
 
-                ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct):
-                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct))
-                {
+                ExcludePattern(const Chem::MolecularGraph::SharedPointer& molgraph):
+                    molGraph(molgraph), subSearch(new Chem::SubstructureSearch(*molgraph))
+                {}
 
-                    subSearch->uniqueMappingsOnly(true);
-                }
-
-                Chem::MolecularGraph::SharedPointer     subQuery;
+                Chem::MolecularGraph::SharedPointer     molGraph;
                 Chem::SubstructureSearch::SharedPointer subSearch;
             };
 
@@ -189,7 +182,7 @@ namespace CDPL
 
             void addFeature(const Chem::AtomBondMapping&, const IncludePattern&, Pharmacophore&);
 
-            void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
+            bool createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool, bool = true) const;
             bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
             const Chem::MolecularGraph* molGraph;
