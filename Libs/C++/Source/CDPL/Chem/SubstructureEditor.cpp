@@ -555,20 +555,18 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
 
             auto mpd_ref_atom1 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[0])];
 
-            if (!mpd_ref_atom1)
+            if (!mpd_ref_atom1 || !mpd_atom1->findBondToAtom(*mpd_ref_atom1)) {
+                // TODO
                 continue;
+            }
 
             auto mpd_ref_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[3])];
 
-            if (!mpd_ref_atom2)
+            if (!mpd_ref_atom2 || !mpd_atom2->findBondToAtom(*mpd_ref_atom2)) {
+                // TODO
                 continue;
-
-            if (!mpd_atom1->findBondToAtom(*mpd_ref_atom1))
-                continue;
-
-            if (!mpd_atom2->findBondToAtom(*mpd_ref_atom2))
-                continue;
-
+            }
+            
             setStereoDescriptor(*mpd_bond,
                                 StereoDescriptor(res_config, *mpd_ref_atom1, *mpd_atom1, *mpd_atom2, *mpd_ref_atom2));
         } else {
