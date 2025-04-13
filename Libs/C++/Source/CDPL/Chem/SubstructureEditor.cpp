@@ -41,14 +41,14 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+using namespace CDPL;
+
+
 namespace
 {
 
     constexpr std::size_t MAX_BIT_SET_CACHE_SIZE = 500;
 }
-
-
-using namespace CDPL;
 
 
 Chem::SubstructureEditor::SubstructureEditor():
@@ -553,18 +553,22 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
             if (res_ref_atoms[1] != &res_atom1)
                 std::swap(mpd_atom1, mpd_atom2);
 
-            auto mpd_ref_atom1 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[0])];
+            const Atom* mpd_ref_atom1 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[0])];
 
             if (!mpd_ref_atom1 || !mpd_atom1->findBondToAtom(*mpd_ref_atom1)) {
-                // TODO
-                continue;
+                if (!(mpd_ref_atom1 = getNeighbor(mpd_atom1, mpd_atom2)))
+                    continue;
+
+                res_config = (res_config == BondConfiguration::CIS ? res_config == BondConfiguration::TRANS : BondConfiguration::CIS);
             }
 
-            auto mpd_ref_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[3])];
+           const Atom* mpd_ref_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[3])];
 
             if (!mpd_ref_atom2 || !mpd_atom2->findBondToAtom(*mpd_ref_atom2)) {
-                // TODO
-                continue;
+                if (!(mpd_ref_atom2 = getNeighbor(mpd_atom2, mpd_atom1)))
+                    continue;
+
+                res_config = (res_config == BondConfiguration::CIS ? res_config == BondConfiguration::TRANS : BondConfiguration::CIS);
             }
             
             setStereoDescriptor(*mpd_bond,
@@ -582,7 +586,7 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
             
     return changes;
 }
-
+                                      
 void Chem::SubstructureEditor::getExcludeMatches(const MolecularGraph& molgraph)
 {
     excludeMatches.clear();
@@ -642,6 +646,15 @@ const Chem::Atom* Chem::SubstructureEditor::getMappedAtomForID(const AtomMapping
         if (getAtomMappingID(*qa) == id)
             return ma;
 
+    return nullptr;
+}
+
+const Chem::Atom* Chem::SubstructureEditor::getNeighbor(const Atom* ctr_atom, const Atom* excl_nbr) const
+{
+    for (auto& atom : ctr_atom->getAtoms())
+        if (&atom != excl_nbr)
+            return &atom;
+    
     return nullptr;
 }
 

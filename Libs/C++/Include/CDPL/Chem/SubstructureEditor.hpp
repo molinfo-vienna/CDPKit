@@ -177,6 +177,7 @@ namespace CDPL
                                               Util::BitSet& mask, bool lbld_only, bool init) const;
 
             const Chem::Atom* getMappedAtomForID(const AtomMapping& mapping, std::size_t id) const;
+            const Chem::Atom* getNeighbor(const Atom* ctr_atom, const Atom* excl_nbr) const;
 
             template <typename T>
             void copyProperty(const T& src_cntnr, T& tgt_cntnr, const Base::LookupKey& key) const;
