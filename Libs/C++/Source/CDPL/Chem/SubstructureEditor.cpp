@@ -248,7 +248,7 @@ std::size_t Chem::SubstructureEditor::edit(Molecule& mol)
                 break;
         }
     }
-    
+
     return num_edits;
 }
 
@@ -299,7 +299,7 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
         Atom* mpd_atom = nullptr;
         
         if (id > 0)
-            getMappedAtomForID(mapping, id);
+            mpd_atom = getMappedAtomForID(mapping, id);
         
         if ((id == 0) || !mpd_atom) {
             mpd_atom = &mol.addAtom();
@@ -640,11 +640,11 @@ bool Chem::SubstructureEditor::createMatchedAtomAndBondMask(const MolecularGraph
     return true;
 }
 
-const Chem::Atom* Chem::SubstructureEditor::getMappedAtomForID(const AtomMapping& mapping, std::size_t id) const
+Chem::Atom* Chem::SubstructureEditor::getMappedAtomForID(const AtomMapping& mapping, std::size_t id) const
 {
     for (auto [qa, ma] : mapping)
         if (getAtomMappingID(*qa) == id)
-            return ma;
+            return const_cast<Atom*>(ma);
 
     return nullptr;
 }
