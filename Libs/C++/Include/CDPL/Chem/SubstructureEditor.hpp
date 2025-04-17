@@ -143,6 +143,11 @@ namespace CDPL
 
             const MolecularGraph::SharedPointer& getResultPattern() const;
 
+            /**
+             * \brief Clears the current editing result pattern and the sets of substructure search and exclude patterns.
+             */
+            void clear();
+
             std::size_t edit(Molecule& mol);
 
             std::size_t edit(const MolecularGraph& molgraph, Molecule& res_mol);

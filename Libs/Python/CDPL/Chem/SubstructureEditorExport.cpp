@@ -68,6 +68,7 @@ void CDPLPythonChem::exportSubstructureEditor()
              (python::arg("self"), python::arg("molgraph")))
         .def("getResultPattern", &Chem::SubstructureEditor::getResultPattern,
              python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+        .def("clear", &Chem::SubstructureEditor::clear, python::arg("self"))
         .def("edit", static_cast<std::size_t (Chem::SubstructureEditor::*)(Chem::Molecule&)>(&Chem::SubstructureEditor::edit),
              (python::arg("self"), python::arg("mol")))
         .def("edit", static_cast<std::size_t (Chem::SubstructureEditor::*)(const Chem::MolecularGraph&, Chem::Molecule&)>

@@ -63,6 +63,8 @@ Chem::SubstructureEditor::SubstructureEditor(const SubstructureEditor& editor):
 
     for (auto &ptn : editor.excludePatterns)
         excludePatterns.emplace_back(ptn.molGraph);
+
+    resultPattern = editor.resultPattern;
 }
 
 Chem::SubstructureEditor::~SubstructureEditor() {}
@@ -199,6 +201,13 @@ const Chem::MolecularGraph::SharedPointer& Chem::SubstructureEditor::getResultPa
     return resultPattern;
 }
 
+void Chem::SubstructureEditor::clear()
+{
+    searchPatterns.clear();
+    excludePatterns.clear();
+    resultPattern.reset();
+}
+ 
 std::size_t Chem::SubstructureEditor::edit(Molecule& mol)
 {
     if (!resultPattern || searchPatterns.empty())
@@ -273,7 +282,9 @@ Chem::SubstructureEditor& Chem::SubstructureEditor::operator=(const Substructure
 
     for (auto &ptn : editor.excludePatterns)
         excludePatterns.emplace_back(ptn.molGraph);
- 
+
+    resultPattern = editor.resultPattern;
+    
     return *this;
 }
 
