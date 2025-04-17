@@ -132,6 +132,11 @@ class SubstructureEditor(Boost.Python.instance):
     def getResultPattern() -> MolecularGraph: pass
 
     ##
+    # \brief Clears the current editing result pattern and the sets of substructure search and exclude patterns.
+    # 
+    def clear() -> None: pass
+
+    ##
     # \brief 
     # \param mol 
     # \return 
