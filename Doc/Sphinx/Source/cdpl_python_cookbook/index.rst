@@ -27,4 +27,5 @@ The source code provided by this cookbook can be used without restrictions for a
    descr/index
    confgen/index
    forcefield/index
+   shape/index
 .. biomol/index
