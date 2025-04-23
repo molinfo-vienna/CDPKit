@@ -133,6 +133,10 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 
+    errors |= checkScriptFileOutput('align_mols_by_shape', outputFilePath('align_mols_by_shape.sdf'),
+                                    [ '-r', testDataFilePath('LS1.sdf'), '-i', testDataFilePath('CDK2_actives.sdf'),
+                                      '-o', outputFilePath('align_mols_by_shape.sdf'), '-f', '-q', '-p' ])
+    
     errors |= checkScriptOutput('print_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('print_atom_class_props', [ testDataFilePath('Morphine.jme') ])
     errors |= checkScriptOutput('print_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
