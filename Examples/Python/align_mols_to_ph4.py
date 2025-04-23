@@ -130,7 +130,7 @@ def main() -> None:
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
 
-    # create instance of class implementing the pharmacophore alignment algorithm
+    # create an instance of the class implementing the pharmacophore alignment algorithm
     almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
 
     if args.pos_only:                          # clear feature orientation information
