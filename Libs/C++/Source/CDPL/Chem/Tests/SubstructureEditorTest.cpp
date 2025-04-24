@@ -108,6 +108,7 @@ BOOST_AUTO_TEST_CASE(SubstructureEditorTest)
         BOOST_CHECK(std::size_t(const_cast<const SubstructureEditor&>(editor).getExcludePatternsEnd() - const_cast<const SubstructureEditor&>(editor).getExcludePatternsBegin()) == editor.getNumExcludePatterns());
 
         if (*it == "-") {
+            ++it;
             editor.setResultPattern(MolecularGraph::SharedPointer());
 
             BOOST_CHECK(!editor.getResultPattern());    
@@ -128,7 +129,7 @@ BOOST_AUTO_TEST_CASE(SubstructureEditorTest)
         calcBasicProperties(edited_mol, false);
         generateSMILES(edited_mol, res_smiles, true);
 
-        BOOST_TEST_MESSAGE("edit result:" << res_smiles);
+        //BOOST_TEST_MESSAGE("edit result: " << res_smiles);
         
         BOOST_CHECK(res_smiles == *it);
 

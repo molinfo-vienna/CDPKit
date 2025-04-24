@@ -307,13 +307,9 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
     for (std::size_t i = 0; i < num_res_ptn_atoms; i++) {
         auto& res_ptn_atom = res_ptn.getAtom(i);
         auto id = getAtomMappingID(res_ptn_atom);
-        Atom* mpd_atom = nullptr;
         
-        if (id > 0)
-            mpd_atom = getMappedAtomForID(mapping, id);
-        
-        if ((id == 0) || !mpd_atom) {
-            mpd_atom = &mol.addAtom();
+        if (id == 0) {
+            auto mpd_atom = &mol.addAtom();
 
             copyProperty(res_ptn_atom, *mpd_atom, AtomProperty::SYMBOL);
             copyProperty(res_ptn_atom, *mpd_atom, AtomProperty::NAME);
@@ -331,6 +327,13 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
             continue;
         }
 
+        auto mpd_atom = getMappedAtomForID(mapping, id);
+
+        if (!mpd_atom) {
+            resPtnAtomMapping[i] = nullptr;
+            continue;
+        }
+        
         if (hasType(res_ptn_atom) && (getType(res_ptn_atom) == 0)) {
             for (auto& atom : mpd_atom->getAtoms())
                 configUpdateAtoms.insert(&atom);
@@ -499,20 +502,18 @@ bool Chem::SubstructureEditor::editAtomStereoDescriptors(Molecule& mol) const
                 res_config = (res_config == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
             
             if (num_mpd_ref_atoms == 3)
-                setStereoDescriptor(*resPtnAtomMapping[i],
-                                    StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2]));
+                changes |= setStereoDescriptorWithChangeCheck(*resPtnAtomMapping[i],
+                                                              StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2]));
             else
-                setStereoDescriptor(*resPtnAtomMapping[i],
-                                    StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2], *mpd_ref_atoms[3]));
+                changes |= setStereoDescriptorWithChangeCheck(*resPtnAtomMapping[i],
+                                                              StereoDescriptor(res_config, *mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2], *mpd_ref_atoms[3]));
         } else {
             auto stereo_desc = getStereoDescriptor(*resPtnAtomMapping[i]);
 
             stereo_desc.setConfiguration(res_config);
 
-            setStereoDescriptor(*resPtnAtomMapping[i], stereo_desc);
+            changes |= setStereoDescriptorWithChangeCheck(*resPtnAtomMapping[i], stereo_desc);
         }
-
-        changes = true;
     }
 
     return changes;
@@ -554,7 +555,7 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
 
         auto& res_stereo_desc = getStereoDescriptor(res_ptn_bond);
         auto res_config = res_stereo_desc.getConfiguration();
-        
+
         if (res_config == BondConfiguration::CIS || res_config == BondConfiguration::TRANS) {
             if (!res_stereo_desc.isValid(res_ptn_bond))
                 continue;
@@ -570,7 +571,7 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
                 if (!(mpd_ref_atom1 = getNeighbor(mpd_atom1, mpd_atom2)))
                     continue;
 
-                res_config = (res_config == BondConfiguration::CIS ? res_config == BondConfiguration::TRANS : BondConfiguration::CIS);
+                res_config = (res_config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
             }
 
            const Atom* mpd_ref_atom2 = resPtnAtomMapping[res_ptn.getAtomIndex(*res_ref_atoms[3])];
@@ -579,20 +580,18 @@ bool Chem::SubstructureEditor::editBondStereoDescriptors(Molecule& mol) const
                 if (!(mpd_ref_atom2 = getNeighbor(mpd_atom2, mpd_atom1)))
                     continue;
 
-                res_config = (res_config == BondConfiguration::CIS ? res_config == BondConfiguration::TRANS : BondConfiguration::CIS);
+                res_config = (res_config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
             }
             
-            setStereoDescriptor(*mpd_bond,
-                                StereoDescriptor(res_config, *mpd_ref_atom1, *mpd_atom1, *mpd_atom2, *mpd_ref_atom2));
+            changes |= setStereoDescriptorWithChangeCheck(*mpd_bond,
+                                                          StereoDescriptor(res_config, *mpd_ref_atom1, *mpd_atom1, *mpd_atom2, *mpd_ref_atom2));
         } else {
             auto stereo_desc = getStereoDescriptor(*mpd_bond);
 
             stereo_desc.setConfiguration(res_config);
 
-            setStereoDescriptor(*mpd_bond, stereo_desc);
+            changes |= setStereoDescriptorWithChangeCheck(*mpd_bond, stereo_desc);
         }
-
-        changes = true;
     }
             
     return changes;
@@ -694,6 +693,71 @@ bool Chem::SubstructureEditor::copyPropertyWithChangeCheck(const T& src_cntnr, T
         return false;
     
     tgt_cntnr.setProperty(key, src_prop_val);
+    return true;
+}
+
+bool Chem::SubstructureEditor::setStereoDescriptorWithChangeCheck(Atom& atom, const StereoDescriptor& descr) const
+{
+    auto& old_descr = getStereoDescriptor(atom);
+    auto old_config = old_descr.getConfiguration();
+    auto new_config = descr.getConfiguration();
+    
+    if (((old_config == AtomConfiguration::R) || (old_config == AtomConfiguration::S)) &&
+        ((new_config == AtomConfiguration::R) || (new_config == AtomConfiguration::S))) {
+
+        if (!old_descr.isValid(atom)) {
+            setStereoDescriptor(atom, descr);
+            return true;
+        }
+
+        auto old_ref_atoms = old_descr.getReferenceAtoms();
+        auto perm_pty = (old_descr.getNumReferenceAtoms() == 3 ? descr.getPermutationParity(*old_ref_atoms[0], *old_ref_atoms[1], *old_ref_atoms[2]) :
+                         descr.getPermutationParity(*old_ref_atoms[0], *old_ref_atoms[1], *old_ref_atoms[2], *old_ref_atoms[3]));
+        
+        if (perm_pty == 1)
+            old_config = (old_config == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
+        
+        if (old_config == new_config)
+            return false;
+            
+    } else if (old_config == new_config)
+        return false;
+    
+    setStereoDescriptor(atom, descr);
+    return true;
+}
+
+bool Chem::SubstructureEditor::setStereoDescriptorWithChangeCheck(Bond& bond, const StereoDescriptor& descr) const
+{
+    auto& old_descr = getStereoDescriptor(bond);
+    auto old_config = old_descr.getConfiguration();
+    auto new_config = descr.getConfiguration();
+    
+    if (((old_config == BondConfiguration::CIS) || (old_config == BondConfiguration::TRANS)) &&
+        ((new_config == BondConfiguration::CIS) || (new_config == BondConfiguration::TRANS))) {
+
+        if (!old_descr.isValid(bond)) {
+            setStereoDescriptor(bond, descr);
+            return true;
+        }
+
+        auto old_ref_atoms = old_descr.getReferenceAtoms();
+        auto new_ref_atoms = descr.getReferenceAtoms();
+        const Atom* old_ref_atoms_copy[] = { old_ref_atoms[0], old_ref_atoms[3] };
+
+        if (old_ref_atoms[1] != new_ref_atoms[1])
+            std::swap(old_ref_atoms_copy[0], old_ref_atoms_copy[1]);
+
+        if ((old_ref_atoms_copy[0] == new_ref_atoms[0]) ^ (old_ref_atoms_copy[1] == new_ref_atoms[3]))
+            old_config = (old_config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
+
+        if (old_config == new_config)
+            return false;
+            
+    } else if (old_config == new_config)
+        return false;
+    
+    setStereoDescriptor(bond, descr);
     return true;
 }
 

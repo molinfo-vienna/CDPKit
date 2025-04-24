@@ -50,6 +50,7 @@ namespace CDPL
     {
 
         class Molecule;
+        class StereoDescriptor;
 
         /**
          * \brief SubstructureEditor.
@@ -189,6 +190,9 @@ namespace CDPL
 
             template <typename VT, typename T>
             bool copyPropertyWithChangeCheck(const T& src_cntnr, T& tgt_cntnr, const Base::LookupKey& key) const;
+
+            bool setStereoDescriptorWithChangeCheck(Atom& atom, const StereoDescriptor& descr) const;
+            bool setStereoDescriptorWithChangeCheck(Bond& bond, const StereoDescriptor& descr) const;
 
             static const MolecularGraph::SharedPointer& getMolGraph(const Pattern& ptn);
 
