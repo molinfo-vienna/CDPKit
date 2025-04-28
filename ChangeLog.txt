@@ -1,5 +1,12 @@
 master:
 
+ - New utility functions Chem::editSubstructures() for editing substructures of Chem::Molecule instances (directly
+   or as a copy of a provided Chem::MolecularGraph instance). The substructure search and optional exclude pattern(s)
+   are specified by SMARTS strings. Multiple search/exclude patterns can be specified as whitespace separated lists
+   of the respective patterns. The editing result pattern is provided as a SMILES string (with extensions implemented
+   especially for substructure editing)
+ - New class Chem::SubstructureEditor for editing the atoms and/or bonds of molecular graph substructures according to
+   a specified target substructure template
  - Made the ChEMBL standardization code also work with Chem::MolecularGraph objects if
    standardization shall be performed on a supplied target Chem::Molecule instance
  - Signature of method Base::DataOutputHandler::createWriter(std::iostream&) has been changed to
