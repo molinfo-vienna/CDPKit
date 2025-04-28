@@ -303,6 +303,7 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphConformerFunctions.cpp
     MolecularGraphPiElectronSystemsFunctions.cpp
     MolecularGraphInitializationFunctions.cpp
+    MolecularGraphEditSubstructuresFunction.cpp
     
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
@@ -318,7 +319,8 @@ set(cdpl-chem_LIB_SRCS
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeRemoveAtomsFunctions.cpp
     MoleculeConnectAtomsFunctions.cpp
-
+    MoleculeEditSubstructuresFunction.cpp
+    
     FragmentHydrogenManipulationFunctions.cpp
     FragmentRemoveAtomsFunctions.cpp
 

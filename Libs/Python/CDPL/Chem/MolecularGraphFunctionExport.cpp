@@ -26,6 +26,7 @@
 
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 
 #include "FunctionExports.hpp"
@@ -292,6 +293,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("calcBasicProperties", &Chem::calcBasicProperties,
                 (python::arg("molgraph"), python::arg("overwrite")));
 
+    python::def("editSubstructures", &Chem::editSubstructures,
+                (python::arg("molgraph"), python::arg("result_mol"), python::arg("search_ptns"),
+                 python::arg("result_ptn"), python::arg("exclude_ptns") = std::string()));
+ 
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)

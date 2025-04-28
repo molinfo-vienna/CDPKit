@@ -56,6 +56,8 @@ namespace CDPL
     namespace Chem
     {
 
+        class Molecule;
+
         CDPL_CHEM_API const std::string& getName(const MolecularGraph& molgraph);
 
         CDPL_CHEM_API void setName(MolecularGraph& molgraph, const std::string& name);
@@ -514,6 +516,12 @@ namespace CDPL
          * \since 1.1
          */
         CDPL_CHEM_API void calcBasicProperties(MolecularGraph& molgraph, bool overwrite);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API std::size_t editSubstructures(const MolecularGraph& molgraph, Molecule& result_mol, const std::string& search_ptns,
+                                                    const std::string& result_ptn, const std::string& exclude_ptns = std::string());
         
     } // namespace Chem
 } // namespace CDPL

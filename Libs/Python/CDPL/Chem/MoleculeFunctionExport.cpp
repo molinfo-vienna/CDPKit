@@ -47,4 +47,8 @@ void CDPLPythonChem::exportMoleculeFunctions()
 
     python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
     python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
+
+    python::def("editSubstructures", &Chem::editSubstructures,
+                (python::arg("mol"), python::arg("search_ptns"),
+                 python::arg("result_ptn"), python::arg("exclude_ptns") = std::string()));
 }

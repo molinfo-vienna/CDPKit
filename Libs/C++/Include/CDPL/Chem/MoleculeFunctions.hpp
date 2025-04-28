@@ -30,6 +30,7 @@
 #define CDPL_CHEM_MOLECULEFUNCTIONS_HPP
 
 #include <cstddef>
+#include <string>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
@@ -82,6 +83,13 @@ namespace CDPL
         CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 
         CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API std::size_t editSubstructures(Molecule& mol, const std::string& search_ptns,
+                                                    const std::string& result_ptn, const std::string& exclude_ptns = std::string());
+
     } // namespace Chem
 } // namespace CDPL
 

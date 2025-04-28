@@ -84,7 +84,8 @@ set(test-suite_SRCS
     ComponentSetTest.cpp 
     CIPConfigurationLabelerTest.cpp
     SubstructureEditorTest.cpp
-
+    SubstructureEditingFunctionsTest.cpp
+    
     #AtomFunctionsTest.cpp
     #BondFunctionsTest.cpp
     MoleculeHydrogenManipulationFunctionsTest.cpp
