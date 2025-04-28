@@ -724,6 +724,17 @@ def perceiveSybylAtomTypes(molgraph: MolecularGraph, overwrite: bool) -> None: p
 ##
 # \brief 
 # \param molgraph 
+# \param result_mol 
+# \param search_ptns 
+# \param result_ptn 
+# \param exclude_ptns 
+# \return 
+#
+def editSubstructures(molgraph: MolecularGraph, result_mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
+
+##
+# \brief 
+# \param molgraph 
 # \param overwrite 
 # \param atom_flags 
 # \param bond_flags 

@@ -62,6 +62,16 @@ def removeAtomsIf(mol: Molecule, pred: AtomPredicate) -> None: pass
 ##
 # \brief 
 # \param mol 
+# \param search_ptns 
+# \param result_ptn 
+# \param exclude_ptns 
+# \return 
+#
+def editSubstructures(mol: Molecule, search_ptns: str, result_ptn: str, exclude_ptns: str = '') -> int: pass
+
+##
+# \brief 
+# \param mol 
 # \param coords_func 
 # \param dist_tol 
 # \param atom_idx_offs 
