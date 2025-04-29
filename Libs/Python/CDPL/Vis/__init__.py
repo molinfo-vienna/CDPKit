@@ -24,6 +24,39 @@
 
 from __future__ import absolute_import
 
+import CDPL
+import CDPL.Base
 import CDPL.Chem
 
 from ._vis import *
+
+# IPython rich object representation display support
+if CDPL.HAVE_CAIRO_SVG_SUPPORT:
+    def _molGraphToSVG(molgraph: CDPL.Chem.MolecularGraph) -> str:
+        os = CDPL.Base.StringIOStream()
+        w = SVGMolecularGraphWriter(os)
+        mol = CDPL.Chem.BasicMolecule(molgraph)
+
+        prepareFor2DVisualization(mol)
+        setAtomColorTableParameter(w, AtomColorTable.ELEMENT_COLORS_2D)
+
+        w.write(mol)
+        w.close()
+        
+        return os.getvalue()
+
+    def _reactionToSVG(rxn: CDPL.Chem.Reaction) -> str:
+        os = CDPL.Base.StringIOStream()
+        w = SVGReactionWriter(os)
+        rnx = CDPL.Chem.BasicReaction(rxn)
+
+        prepareFor2DVisualization(rxn)
+        setAtomColorTableParameter(w, AtomColorTable.ELEMENT_COLORS_2D)
+
+        w.write(rxn)
+        w.close()
+        
+        return os.getvalue()
+    
+    CDPL.Chem.MolecularGraph._repr_svg_ = _molGraphToSVG
+    CDPL.Chem.Reaction._repr_svg_ = _reactionToSVG
