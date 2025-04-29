@@ -715,6 +715,9 @@ def printFunctions(func_objects):
     class_funcs = {}
     
     for func_obj in func_objects:
+        if func_obj.__name__.startswith('_'):
+            continue
+        
         overloads = getFuncOverloads(func_obj, func_obj.__name__)
     
         if len(overloads) > 0:
@@ -734,7 +737,7 @@ def printFunctions(func_objects):
             #out_file.write('# \\brief ' + func_data['name'] + '. FIXME!\n')
             out_file.write('# \\brief FIXME!\n')
             out_file.write('#\n')
-            out_file.write('def ' + func_data['name'] + '() -> None: pass\n')
+            out_file.write('def ' + func_obj.__name__ + '() -> None: pass\n')
 
     def func_sort_key(func_data):
         return func_data['name'][::-1]
