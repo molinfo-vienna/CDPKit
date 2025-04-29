@@ -266,6 +266,12 @@ def setComponentMargin(rxn: Chem.Reaction, margin: SizeSpecification) -> None: p
 # \brief 
 # \param rxn 
 #
+def prepareFor2DVisualization(rxn: Chem.Reaction) -> None: pass
+
+##
+# \brief 
+# \param rxn 
+#
 def clearAgentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 
 ##

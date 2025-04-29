@@ -725,6 +725,12 @@ def setAtomLabelMargin(molgraph: Chem.MolecularGraph, margin: SizeSpecification)
 # \brief 
 # \param molgraph 
 #
+def prepareFor2DVisualization(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+#
 def clearBondColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
