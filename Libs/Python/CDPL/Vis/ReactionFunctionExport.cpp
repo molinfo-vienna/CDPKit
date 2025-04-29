@@ -71,4 +71,6 @@ void CDPLPythonVis::exportReactionFunctions()
     EXPORT_REACTION_FUNCS_INT_REF(PlusSignSize, size)
     EXPORT_REACTION_FUNCS_INT_REF(PlusSignLineWidth, width)
     EXPORT_REACTION_FUNCS(ShowPlusSigns, show)
+
+    python::def("prepareFor2DVisualization", &Vis::prepareFor2DVisualization, python::arg("rxn"));
 }

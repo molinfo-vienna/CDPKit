@@ -42,6 +42,8 @@ set(cdpl-vis_LIB_SRCS
     MolecularGraphPropertyFunctions.cpp
     ReactionPropertyFunctions.cpp
 
+    MolecularGraphPrepareFor2DVisualizationFunction.cpp
+    ReactionPrepareFor2DVisualizationFunction.cpp    
     DataFormat.cpp
 
     StructureView2D.cpp

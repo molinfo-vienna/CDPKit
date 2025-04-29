@@ -438,6 +438,11 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondCustomLabelColor(Chem::MolecularGraph& molgraph);
 
+        /*
+         * \since 1.3
+         */
+        CDPL_VIS_API void prepareFor2DVisualization(Chem::MolecularGraph& molgraph);
+        
     } // namespace Vis
 } // namespace CDPL
 

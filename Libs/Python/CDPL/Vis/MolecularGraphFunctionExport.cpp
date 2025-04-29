@@ -96,4 +96,6 @@ void CDPLPythonVis::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaWidth, width)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaBrush, brush)
     EXPORT_MOLGRAPH_FUNCS_INT_REF(BondHighlightAreaOutlinePen, pen)
+
+    python::def("prepareFor2DVisualization", &Vis::prepareFor2DVisualization, python::arg("molgraph"));
 }
