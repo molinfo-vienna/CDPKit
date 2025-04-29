@@ -46,7 +46,7 @@ namespace CDPL
             {
 
                 const std::string LINE_PREFIX            = "M  V30 ";
-                constexpr char        LINE_CONTINUATION_MARK = '-';
+                constexpr char    LINE_CONTINUATION_MARK = '-';
 
                 const std::string BLOCK_BEGIN_TAG = "BEGIN";
                 const std::string BLOCK_END_TAG   = "END";
