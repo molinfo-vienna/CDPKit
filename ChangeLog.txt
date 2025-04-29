@@ -1,5 +1,9 @@
 master:
 
+ - Support for the display of 2D structure renderings of Chem::MolecularGraph and Chem::Reaction instances in
+   Jupyter notebooks
+ - New utility functions Vis::prepareFor2DVisualization() that perform 2D visualization specific setup work for
+   Chem::MolecularGraph and Chem::Reaction instances
  - New utility functions Chem::editSubstructures() for editing substructures of Chem::Molecule instances (directly
    or as a copy of a provided Chem::MolecularGraph instance). The substructure search and optional exclude pattern(s)
    are specified by SMARTS strings. Multiple search/exclude patterns can be specified as whitespace separated lists
