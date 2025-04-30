@@ -378,6 +378,7 @@ private:
         setStructureData(molgraph, sd);
         perceiveComponents(molgraph, false);
         setAtomSymbolsFromTypes(molgraph, false);
+        clearMDLDimensionality(molgraph);
 
         if (parent->titleSuffix)
             setName(molgraph, getName(molecule) + '_' + std::to_string(idx));
