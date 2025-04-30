@@ -736,6 +736,9 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
     else if (tmpString == Header::DIM_CODE_3D)
         coordsDim = 3;
 
+    else if (tmpString == Header::DIM_CODE_0D)
+        coordsDim = 0;
+
     else if (strictErrorChecking)
         throw Base::IOError("MDLDataReader: invalid dimension code in molfile header block");
 
@@ -3938,6 +3941,15 @@ void Chem::MDLDataReader::fixAtomCoordsDim(Molecule& mol, std::size_t old_num_at
 {
     if (coordsDim == 3) {
         setMDLDimensionality(mol, 3); 
+        return;
+    }
+
+    if (coordsDim == 0) {
+        setMDLDimensionality(mol, 0);
+
+        for (auto it = mol.getAtomsBegin() + old_num_atoms, atoms_end = mol.getAtomsEnd(); it != atoms_end; ++it)
+            clear3DCoordinates(*it);
+
         return;
     }
 

@@ -69,6 +69,7 @@ namespace CDPL
                 namespace Header
                 {
 
+                    const std::string DIM_CODE_0D = "  ";
                     const std::string DIM_CODE_2D = "2D";
                     const std::string DIM_CODE_3D = "3D";
                 } // namespace Header

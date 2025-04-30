@@ -51,6 +51,7 @@
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/MDLParity.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
 #include "CDPL/Chem/BondMatchConstraint.hpp"
@@ -394,7 +395,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
     writeMDLTimestamp<2>(os, ts);
 
-    writeString(os, 2, coordsDim == 2 ? Header::DIM_CODE_2D : Header::DIM_CODE_3D); 
+    writeString(os, 2, coordsDim == 2 ? Header::DIM_CODE_2D : coordsDim == 3 ? Header::DIM_CODE_3D : Header::DIM_CODE_0D); 
 
     long scaling_fac1 = getMDLScalingFactor1(molgraph);
  
@@ -491,7 +492,7 @@ void Chem::MDLDataWriter::setupCTabCountsLine(const MolecularGraph& molgraph)
     atomCount = atom_count;
     bondCount = bond_count;
 
-    bool chiral_flag = getMDLChiralFlag(molgraph);
+    bool chiral_flag = (hasMDLChiralFlag(molgraph) ? getMDLChiralFlag(molgraph) : isChiral(molgraph));
 
     chiralFlag = (!chiral_flag ? CountsLine::CHIRAL_FLAG_OFF : CountsLine::CHIRAL_FLAG_ON);
 }
@@ -2942,7 +2943,7 @@ void Chem::MDLDataWriter::writeV3000DataLine(std::ostream& os, const std::string
 
 unsigned int Chem::MDLDataWriter::getBondStereo(const Bond& bond) const
 {    
-    if (coordsDim == 3) 
+    if (coordsDim != 2) 
         return BondStereoFlag::PLAIN;
 
     return get2DStereoFlag(bond);
@@ -2960,4 +2961,21 @@ bool Chem::MDLDataWriter::isReverseStereo(unsigned int stereo_flag) const
         default:
             return false;
     }
+}
+
+bool Chem::MDLDataWriter::isChiral(const MolecularGraph& molgraph) const
+{
+    for (auto& atom : molgraph.getAtoms()) {
+        auto& sto_descr = getStereoDescriptor(atom);
+
+        if (!sto_descr.isValid(atom))
+            continue;
+
+        auto config = sto_descr.getConfiguration();
+
+        if ((config == AtomConfiguration::R) || (config == AtomConfiguration::S))
+            return true;
+    }
+
+    return false;
 }

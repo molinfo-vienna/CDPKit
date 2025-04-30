@@ -180,8 +180,10 @@ namespace CDPL
             void writeV3000DataLine(std::ostream&, const std::string&) const;
 
             unsigned int getBondStereo(const Bond&) const;
-            bool         isReverseStereo(unsigned int) const;
+            bool isReverseStereo(unsigned int) const;
 
+            bool isChiral(const MolecularGraph&) const;
+            
             const Base::DataIOBase& ioBase;
             std::size_t             coordsDim;
             std::size_t             atomCount;
