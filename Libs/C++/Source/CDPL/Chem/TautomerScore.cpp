@@ -58,7 +58,6 @@ double Chem::TautomerScore::operator()(const MolecularGraph& molgraph)
 
         score += std::max(getAtomTypeScoreIncrement(getType(bond.getBegin())), getAtomTypeScoreIncrement(getType(bond.getEnd())));
         score += std::max(getUnsaturatedNeighborCount(bond.getBegin(), bond, molgraph), getUnsaturatedNeighborCount(bond.getEnd(), bond, molgraph));
-        score += getExocyclicBondIncrement(bond);
     }
 
     const FragmentList& sssr = *getSSSR(molgraph);
@@ -102,7 +101,7 @@ double Chem::TautomerScore::getAtomTypeScoreIncrement(unsigned int type) const
             return 0.0;
     }
 }
-
+/*
 double Chem::TautomerScore::getExocyclicBondIncrement(const Bond& bond) const 
 {
     bool ring_flag1 = getRingFlag(bond.getBegin());
@@ -119,7 +118,7 @@ double Chem::TautomerScore::getExocyclicBondIncrement(const Bond& bond) const
 
     return 0.0;
 }
-
+*/
 std::size_t Chem::TautomerScore::getUnsaturatedNeighborCount(const Atom& atom, const Bond& bond, const MolecularGraph& molgraph) const
 {
     std::size_t count = 0;
