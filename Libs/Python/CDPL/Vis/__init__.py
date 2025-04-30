@@ -34,27 +34,29 @@ from ._vis import *
 if CDPL.HAVE_CAIRO_SVG_SUPPORT:
     def _molGraphToSVG(molgraph: CDPL.Chem.MolecularGraph) -> str:
         os = CDPL.Base.StringIOStream()
-        w = SVGMolecularGraphWriter(os)
+        svg_writer = SVGMolecularGraphWriter(os)
         mol = CDPL.Chem.BasicMolecule(molgraph)
 
         prepareFor2DVisualization(mol)
-        setAtomColorTableParameter(w, AtomColorTable.ELEMENT_COLORS_2D)
+        setAtomColorTableParameter(svg_writer, AtomColorTable.ELEMENT_COLORS_2D)
+        setShowExplicitHydrogensParameter(svg_writer, True)
 
-        w.write(mol)
-        w.close()
+        svg_writer.write(mol)
+        svg_writer.close()
         
         return os.getvalue()
 
     def _reactionToSVG(rxn: CDPL.Chem.Reaction) -> str:
         os = CDPL.Base.StringIOStream()
-        w = SVGReactionWriter(os)
+        svg_writer = SVGReactionWriter(os)
         rnx = CDPL.Chem.BasicReaction(rxn)
 
         prepareFor2DVisualization(rxn)
-        setAtomColorTableParameter(w, AtomColorTable.ELEMENT_COLORS_2D)
+        setAtomColorTableParameter(svg_writer, AtomColorTable.ELEMENT_COLORS_2D)
+        setShowExplicitHydrogensParameter(svg_writer, True)
 
-        w.write(rxn)
-        w.close()
+        svg_writer.write(rxn)
+        svg_writer.close()
         
         return os.getvalue()
     
