@@ -211,7 +211,7 @@ namespace CDPL
             void readV3000DataEndTag(std::istream&);
             void skipV3000Data(std::istream&);
 
-            void fixAtomCoordsDim(Molecule&, std::size_t) const;
+            void postprocAtomCoords(Molecule&, std::size_t) const;
             void addAtomQueryHCountConstraints() const;
             void kekulizeBonds(Molecule&) const;
             void convertParities(Molecule&) const;

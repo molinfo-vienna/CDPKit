@@ -908,7 +908,7 @@ void Chem::MDLDataReader::readCTabV2000AtomBlock(std::istream& is, Molecule& mol
     for (std::size_t i = 0; i < atomCount; i++)
         readCTabV2000Atom(is, mol);
 
-    fixAtomCoordsDim(mol, atom_index_offs);
+    postprocAtomCoords(mol, atom_index_offs);
 }
 
 bool Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
@@ -2789,7 +2789,7 @@ void Chem::MDLDataReader::readCTabV3000AtomBlock(std::istream& is, Molecule& mol
 
     readV3000BlockEnd(is, AtomBlock::BLOCK_TYPE_KEY);
 
-    fixAtomCoordsDim(mol, old_num_atoms);
+    postprocAtomCoords(mol, old_num_atoms);
 }
 
 bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol)
@@ -3937,7 +3937,7 @@ void Chem::MDLDataReader::skipV3000Data(std::istream& is)
     }
 }
 
-void Chem::MDLDataReader::fixAtomCoordsDim(Molecule& mol, std::size_t old_num_atoms) const
+void Chem::MDLDataReader::postprocAtomCoords(Molecule& mol, std::size_t old_num_atoms) const
 {
     if (coordsDim == 3) {
         setMDLDimensionality(mol, 3); 
@@ -3947,11 +3947,33 @@ void Chem::MDLDataReader::fixAtomCoordsDim(Molecule& mol, std::size_t old_num_at
     if (coordsDim == 0) {
         setMDLDimensionality(mol, 0);
 
-        for (auto it = mol.getAtomsBegin() + old_num_atoms, atoms_end = mol.getAtomsEnd(); it != atoms_end; ++it)
-            clear3DCoordinates(*it);
+        auto has_x_coords = false;
+        auto has_y_coords = false;
+        auto has_z_coords = false;
 
-        return;
-    }
+        for (auto it = mol.getAtomsBegin() + old_num_atoms, atoms_end = mol.getAtomsEnd(); it != atoms_end; ++it) {
+            auto& coords = get3DCoordinates(*it);
+
+            has_x_coords |= (coords(0) != 0.0);
+            has_y_coords |= (coords(1) != 0.0);
+            has_z_coords |= (coords(2) != 0.0);
+
+            if (has_z_coords)
+                break;
+        }
+
+        if (has_z_coords)
+            return;
+
+        if (!has_x_coords && !has_y_coords) {
+            for (auto it = mol.getAtomsBegin() + old_num_atoms, atoms_end = mol.getAtomsEnd(); it != atoms_end; ++it)
+                clear3DCoordinates(*it);
+
+            return;
+        }
+        
+    } else
+        setMDLDimensionality(mol, 2); 
 
     Molecule::AtomIterator atoms_end = mol.getAtomsEnd();
 
