@@ -56,7 +56,8 @@ using namespace CDPL;
 
 Chem::TautomerGenerator::TautomerGenerator():
     molCache(MAX_MOLECULE_CACHE_SIZE),
-    mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true), remResDuplicates(true)
+    mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true), remResDuplicates(true),
+    clear2DCoords(false), clear3DCoords(true)
 {
     molCache.setCleanupFunction(&BasicMolecule::clear);
 }
@@ -64,7 +65,8 @@ Chem::TautomerGenerator::TautomerGenerator():
 Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):
     molCache(MAX_MOLECULE_CACHE_SIZE),
     callbackFunc(gen.callbackFunc), mode(gen.mode), regStereo(gen.regStereo),
-    regIsotopes(gen.regIsotopes), remResDuplicates(gen.remResDuplicates)
+    regIsotopes(gen.regIsotopes), remResDuplicates(gen.remResDuplicates),
+    clear2DCoords(gen.clear2DCoords), clear3DCoords(gen.clear3DCoords)
 {
     molCache.setCleanupFunction(&BasicMolecule::clear);
 
@@ -81,7 +83,9 @@ Chem::TautomerGenerator& Chem::TautomerGenerator::operator=(const TautomerGenera
     regStereo = gen.regStereo;
     regIsotopes = gen.regIsotopes;
     remResDuplicates = gen.remResDuplicates;
-
+    clear2DCoords = gen.clear2DCoords;
+    clear3DCoords = gen.clear3DCoords;
+    
     tautRules.clear();
 
     std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), 
@@ -164,6 +168,26 @@ void Chem::TautomerGenerator::removeResonanceDuplicates(bool remove)
 bool Chem::TautomerGenerator::resonanceDuplicatesRemoved() const
 {
     return remResDuplicates;
+}
+
+void Chem::TautomerGenerator::clearCoordinates2D(bool clear)
+{
+    clear2DCoords = clear;
+}
+
+bool Chem::TautomerGenerator::coordinates2DCleared() const
+{
+    return clear2DCoords;
+}
+
+void Chem::TautomerGenerator::clearCoordinates3D(bool clear)
+{
+    clear3DCoords = clear;
+}
+
+bool Chem::TautomerGenerator::coordinates3DCleared() const
+{
+    return clear3DCoords;
 }
 
 void Chem::TautomerGenerator::setCustomSetupFunction(const CustomSetupFunction& func)
@@ -269,6 +293,17 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
   
         if (regIsotopes)
             setIsotope(atom_copy, getIsotope(atom));
+
+        if (!clear2DCoords && has2DCoordinates(atom))
+            set2DCoordinates(atom_copy, get2DCoordinates(atom));
+
+        if (!clear3DCoords) {
+            if (has3DCoordinates(atom))
+                set3DCoordinates(atom_copy, get3DCoordinates(atom));
+
+            if (has3DCoordinatesArray(atom))
+                set3DCoordinatesArray(atom_copy, get3DCoordinatesArray(atom));
+        }
     }
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
@@ -279,6 +314,9 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
 
         if (hasRingFlag(bond))
             setRingFlag(bond_copy, getRingFlag(bond));
+
+        if (!clear2DCoords && has2DStereoFlag(bond))
+            set2DStereoFlag(bond_copy, get2DStereoFlag(bond));
     }
 
     calcImplicitHydrogenCounts(*mol_copy, true);

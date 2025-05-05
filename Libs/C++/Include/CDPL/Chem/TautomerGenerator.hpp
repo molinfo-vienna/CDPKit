@@ -108,6 +108,26 @@ namespace CDPL
             bool isotopesRegarded() const;
 
             /**
+             * \since 1.3
+             */
+            void clearCoordinates2D(bool clear);
+
+            /**
+             * \since 1.3
+             */
+            bool coordinates2DCleared() const;
+
+            /**
+             * \since 1.3
+             */
+            void clearCoordinates3D(bool clear);
+
+            /**
+             * \since 1.3
+             */
+            bool coordinates3DCleared() const;
+            
+            /**
              * \since 1.1
              */
             void removeResonanceDuplicates(bool remove);
@@ -162,6 +182,8 @@ namespace CDPL
             bool                       regStereo;
             bool                       regIsotopes;
             bool                       remResDuplicates;
+            bool                       clear2DCoords;
+            bool                       clear3DCoords;
             CustomSetupFunction        customSetupFunc;
             TautRuleList               tautRules;
             MoleculeList               currGeneration;

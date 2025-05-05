@@ -202,6 +202,15 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
 
         if (hasRingFlag(atom))
             setRingFlag(atom_copy, getRingFlag(atom));
+
+        if (has2DCoordinates(atom))
+            set2DCoordinates(atom_copy, get2DCoordinates(atom));
+
+        if (has3DCoordinates(atom))
+            set3DCoordinates(atom_copy, get3DCoordinates(atom));
+
+        if (has3DCoordinatesArray(atom))
+            set3DCoordinatesArray(atom_copy, get3DCoordinatesArray(atom));
     }
 
     for (MolecularGraph::ConstBondIterator it = parentMolGraph->getBondsBegin(), end = parentMolGraph->getBondsEnd(); it != end; ++it) {
@@ -212,6 +221,9 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
 
         if (hasRingFlag(bond))
             setRingFlag(bond_copy, getRingFlag(bond));
+
+        if (has2DStereoFlag(bond))
+            set2DStereoFlag(bond_copy, get2DStereoFlag(bond));
     }
 
     const AtomMapping& atom_mapping = mapping.getAtomMapping();
