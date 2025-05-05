@@ -113,6 +113,16 @@ isotopesRegarded
 regardIsotopes
 $$$$
 
+TautomerGenerator.clearCoordinates2D.value
+coordinates2DCleared
+clearCoordinates2D
+$$$$
+
+TautomerGenerator.clearCoordinates3D.value
+coordinates3DCleared
+clearCoordinates3D
+$$$$
+
 SubstructureHistogramCalculator.Pattern.id.value
 getID
 $$$$

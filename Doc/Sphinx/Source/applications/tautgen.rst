@@ -6,7 +6,7 @@ Performs tautomer generation/standardization for a set of input molecules.
 Synopsis
 --------
 
-  :program:`tautgen` [-hVvptsdzS] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
+  :program:`tautgen` [-hVvptsdzSrR] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
 
 Mandatory options
 -----------------
@@ -138,6 +138,14 @@ Other options
   -S [ --title-suffix ] [=arg(=1)]
 
     Append tautomer number to the title of the output molecules (default: false). [since V1.1]
+
+  -r [ --retain-2D-coords ] [=arg(=1)]
+
+    Retain input atom 2D coordinates (default: false). [since V1.3]
+
+  -R [ --retain-3D-coords ] [=arg(=1)]
+
+    Retain input atom 3D coordinates (default: false). [since V1.3]
 
   --keto-enol [=arg(=1)]
 
