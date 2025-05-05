@@ -159,7 +159,9 @@ private:
         tautGen.regardIsotopes(parent->regardIsotopes);
         tautGen.regardStereochemistry(parent->regardStereo);
         tautGen.setCustomSetupFunction(std::bind(&setRingFlags, _1, false));
-   
+        tautGen.clearCoordinates2D(!parent->retain2DCoords);
+        tautGen.clearCoordinates3D(!parent->retain3DCoords);
+
         PatternBasedTautomerizationRule::SharedPointer h13_shift(new GenericHydrogen13ShiftTautomerization());
         PatternBasedTautomerizationRule::SharedPointer h15_shift(new GenericHydrogen15ShiftTautomerization());
         PatternBasedTautomerizationRule::SharedPointer keto_enol(new KetoEnolTautomerization());
@@ -295,7 +297,11 @@ private:
         double score = tautScoreCalc(taut);
 
         if (parent->mode == ALL || parent->mode == ALL_UNIQUE) {
-            outputMolecule(taut, score, numGenMolTauts);
+            molCache.putAll();
+
+            auto taut_copy = copyTautomer(taut);
+            
+            outputMolecule(*taut_copy, score, numGenMolTauts);
 
             return (parent->maxNumTautomers == 0 || numGenMolTauts < parent->maxNumTautomers);
         }
@@ -310,10 +316,10 @@ private:
                 std::uint64_t hash = hashCalc.calculate(taut);
                 
                 if (score > bestScore || hash > hashCode) {
-                    if (bestTautomers.empty())
-                        bestTautomers.push_back(molCache.get());
+                    bestTautomers.clear();
+                    molCache.putAll();
 
-                    *bestTautomers.front() = taut;
+                    bestTautomers.push_back(copyTautomer(taut));
                     hashCode = hash;
                 }
                 
@@ -331,7 +337,7 @@ private:
                 bestTautomers.clear();
                 molCache.putAll();
 
-                bestTautomers.push_back(&(*molCache.get() = taut));
+                bestTautomers.push_back(copyTautomer(taut));
 
             } else {
                 if (parent->mode == BEST_SCORING_UNIQUE) {
@@ -343,10 +349,10 @@ private:
                     std::uint64_t hash = hashCalc.calculate(taut);
 
                     if (hashCodes.insert(hash).second)
-                        bestTautomers.push_back(&(*molCache.get() = taut));
+                        bestTautomers.push_back(copyTautomer(taut));
 
                 } else
-                    bestTautomers.push_back(&(*molCache.get() = taut));
+                    bestTautomers.push_back(copyTautomer(taut));
             }
             
             bestScore = score;
@@ -365,6 +371,17 @@ private:
         setAromaticityFlags(molgraph, false);
     }
 
+    CDPL::Chem::Molecule* copyTautomer(CDPL::Chem::MolecularGraph& taut) {
+        auto& taut_copy = *molCache.get();
+
+        taut_copy = taut;
+
+        while (taut_copy.getNumAtoms() > molecule.getNumAtoms())
+            taut_copy.removeAtom(taut_copy.getNumAtoms() - 1);
+        
+        return &taut_copy;
+    }
+
     void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, std::size_t idx) {
         using namespace CDPL;
         using namespace Chem;
@@ -376,7 +393,8 @@ private:
         sd->addEntry("<Tautomer Score>", std::to_string(score));
 
         setStructureData(molgraph, sd);
-        perceiveComponents(molgraph, false);
+        calcImplicitHydrogenCounts(molgraph, true);
+        perceiveComponents(molgraph, true);
         setAtomSymbolsFromTypes(molgraph, false);
         clearMDLDimensionality(molgraph);
 
@@ -416,6 +434,7 @@ TautGenImpl::TautGenImpl():
     imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
     lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
     sulfenicAcid(true), genericH13Shift(true), genericH15Shift(false), titleSuffix(false),
+    retain2DCoords(false), retain3DCoords(false),
     numThreads(0), maxNumTautomers(0), mode(Mode::BEST_SCORING_UNIQUE), 
     inputFormat(), outputFormat(), outputWriter(), numOutTautomers(0)
 {
@@ -468,6 +487,10 @@ TautGenImpl::TautGenImpl():
               value<bool>(&genericH15Shift)->implicit_value(true));
     addOption("title-suffix,S", "Append tautomer number to the title of the output molecules (default: false).", 
               value<bool>(&titleSuffix)->implicit_value(true));
+    addOption("retain-2D-coords,r", "Retain input atom 2D coordinates (default: false).", 
+              value<bool>(&retain2DCoords)->implicit_value(true));
+    addOption("retain-3D-coords,R", "Retain input atom 2D coordinates (default: false).", 
+              value<bool>(&retain3DCoords)->implicit_value(true));
     addOptionLongDescriptions();
 }
 
@@ -833,6 +856,8 @@ void TautGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Neutralize Charges:                " + std::string(neutralize ? "Yes" : "No"));
     printMessage(VERBOSE, " Max. Num. Tautomers:               " + std::to_string(maxNumTautomers));
     printMessage(VERBOSE, " Append Taut. No. to Mol. Title:    " + std::string(titleSuffix ? "Yes" : "No"));
+    printMessage(VERBOSE, " Retain 2D Atom Coordinates:        " + std::string(retain2DCoords ? "Yes" : "No"));
+    printMessage(VERBOSE, " Retain 3D Atom Coordinates:        " + std::string(retain3DCoords ? "Yes" : "No"));
     printMessage(VERBOSE, " Keto-Enol Tautomerization:         " + std::string(ketoEnol ? "Yes" : "No"));
     printMessage(VERBOSE, " Imine-Enamine Tautomerization:     " + std::string(imineEnamine ? "Yes" : "No"));
     printMessage(VERBOSE, " Nitroso-Oxime Tautomerization:     " + std::string(nitrosoOxime ? "Yes" : "No"));

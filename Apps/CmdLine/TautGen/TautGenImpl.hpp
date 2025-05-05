@@ -133,6 +133,8 @@ namespace TautGen
         bool               genericH13Shift;
         bool               genericH15Shift;
         bool               titleSuffix;
+        bool               retain2DCoords;
+        bool               retain3DCoords;
         std::size_t        numThreads;
         std::size_t        maxNumTautomers;
         Mode               mode;
