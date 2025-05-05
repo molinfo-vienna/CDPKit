@@ -30,40 +30,40 @@
 #include "CDPL/Grid/AttributedGrid.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 #define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-    void GRAIL::set##FUNC_SUFFIX(Grid::AttributedGrid& grid, TYPE arg)    \
-    {                                                                    \
-        grid.setProperty(AttributedGridProperty::PROP_NAME, arg);        \
-    }                                                                    \
-                                                                        \
-    bool GRAIL::has##FUNC_SUFFIX(const Grid::AttributedGrid& grid)        \
-    {                                                                    \
-        return grid.isPropertySet(AttributedGridProperty::PROP_NAME);    \
-    }                                                                    \
-                                                                        \
-    void GRAIL::clear##FUNC_SUFFIX(Grid::AttributedGrid& grid)            \
-    {                                                                    \
-        grid.removeProperty(AttributedGridProperty::PROP_NAME);            \
+    void GRAIL::set##FUNC_SUFFIX(Grid::AttributedGrid& grid, TYPE arg)        \
+    {                                                                         \
+        grid.setProperty(AttributedGridProperty::PROP_NAME, arg);             \
+    }                                                                         \
+                                                                              \
+    bool GRAIL::has##FUNC_SUFFIX(const Grid::AttributedGrid& grid)            \
+    {                                                                         \
+        return grid.isPropertySet(AttributedGridProperty::PROP_NAME);         \
+    }                                                                         \
+                                                                              \
+    void GRAIL::clear##FUNC_SUFFIX(Grid::AttributedGrid& grid)                \
+    {                                                                         \
+        grid.removeProperty(AttributedGridProperty::PROP_NAME);               \
     }
 
 #define MAKE_ATTRGRID_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
     TYPE GRAIL::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)        \
-    {                                                                    \
+    {                                                                     \
         return grid.getProperty<TYPE>(AttributedGridProperty::PROP_NAME); \
-    }                                                                    \
-                                                                        \
+    }                                                                     \
+                                                                          \
     MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
-    TYPE GRAIL::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)        \
-    {                                                                    \
-        return grid.getPropertyOrDefault<TYPE>(AttributedGridProperty::PROP_NAME, \
+#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)           \
+    TYPE GRAIL::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)                        \
+    {                                                                                     \
+        return grid.getPropertyOrDefault<TYPE>(AttributedGridProperty::PROP_NAME,         \
                                                AttributedGridPropertyDefault::PROP_NAME); \
-    }                                                                    \
-                                                                        \
+    }                                                                                     \
+                                                                                          \
     MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 

@@ -30,40 +30,40 @@
 #include "CDPL/Chem/Reaction.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 #define MAKE_REACTION_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-    void Chem::set##FUNC_SUFFIX(Chem::Reaction& rxn, TYPE arg)            \
-    {                                                                    \
-        rxn.setProperty(ReactionProperty::PROP_NAME, arg);                \
-    }                                                                    \
-                                                                        \
-    bool Chem::has##FUNC_SUFFIX(const Chem::Reaction& rxn)                \
-    {                                                                    \
-        return rxn.isPropertySet(ReactionProperty::PROP_NAME);            \
-    }                                                                    \
-                                                                        \
-    void Chem::clear##FUNC_SUFFIX(Chem::Reaction& rxn)                    \
-    {                                                                    \
-        rxn.removeProperty(ReactionProperty::PROP_NAME);                \
+    void Chem::set##FUNC_SUFFIX(Chem::Reaction& rxn, TYPE arg)                \
+    {                                                                         \
+        rxn.setProperty(ReactionProperty::PROP_NAME, arg);                    \
+    }                                                                         \
+                                                                              \
+    bool Chem::has##FUNC_SUFFIX(const Chem::Reaction& rxn)                    \
+    {                                                                         \
+        return rxn.isPropertySet(ReactionProperty::PROP_NAME);                \
+    }                                                                         \
+                                                                              \
+    void Chem::clear##FUNC_SUFFIX(Chem::Reaction& rxn)                        \
+    {                                                                         \
+        rxn.removeProperty(ReactionProperty::PROP_NAME);                      \
     }
 
-#define MAKE_REACTION_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
-    TYPE Chem::get##FUNC_SUFFIX(const Chem::Reaction& rxn)                \
-    {                                                                    \
-        return rxn.getProperty<TYPE>(ReactionProperty::PROP_NAME);        \
-    }                                                                    \
-                                                                        \
+#define MAKE_REACTION_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX) \
+    TYPE Chem::get##FUNC_SUFFIX(const Chem::Reaction& rxn)             \
+    {                                                                  \
+        return rxn.getProperty<TYPE>(ReactionProperty::PROP_NAME);     \
+    }                                                                  \
+                                                                       \
     MAKE_REACTION_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 #define MAKE_REACTION_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)    \
-    TYPE Chem::get##FUNC_SUFFIX(const Chem::Reaction& rxn)                \
-    {                                                                    \
-        return rxn.getPropertyOrDefault<TYPE>(ReactionProperty::PROP_NAME, \
+    TYPE Chem::get##FUNC_SUFFIX(const Chem::Reaction& rxn)                         \
+    {                                                                              \
+        return rxn.getPropertyOrDefault<TYPE>(ReactionProperty::PROP_NAME,         \
                                               ReactionPropertyDefault::PROP_NAME); \
-    }                                                                    \
-                                                                        \
+    }                                                                              \
+                                                                                   \
     MAKE_REACTION_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 

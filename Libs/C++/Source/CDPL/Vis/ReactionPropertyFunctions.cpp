@@ -30,29 +30,29 @@
 #include "CDPL/Chem/Reaction.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-#define MAKE_RXN_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)        \
-    TYPE Vis::get##FUNC_SUFFIX(const Chem::Reaction& rxn)                \
-    {                                                                    \
-        return rxn.getPropertyOrDefault<TYPE>(ReactionProperty::PROP_NAME, \
+#define MAKE_RXN_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)                  \
+    TYPE Vis::get##FUNC_SUFFIX(const Chem::Reaction& rxn)                          \
+    {                                                                              \
+        return rxn.getPropertyOrDefault<TYPE>(ReactionProperty::PROP_NAME,         \
                                               ReactionPropertyDefault::PROP_NAME); \
-    }                                                                    \
-                                                                        \
-    void Vis::set##FUNC_SUFFIX(Chem::Reaction& rxn, TYPE arg)            \
-    {                                                                    \
-        rxn.setProperty(ReactionProperty::PROP_NAME, arg);                \
-    }                                                                    \
-                                                                        \
-    bool Vis::has##FUNC_SUFFIX(const Chem::Reaction& rxn)                \
-    {                                                                    \
-        return rxn.isPropertySet(ReactionProperty::PROP_NAME);            \
-    }                                                                    \
-                                                                        \
-    void Vis::clear##FUNC_SUFFIX(Chem::Reaction& rxn)                    \
-    {                                                                    \
-        rxn.removeProperty(ReactionProperty::PROP_NAME);                \
+    }                                                                              \
+                                                                                   \
+    void Vis::set##FUNC_SUFFIX(Chem::Reaction& rxn, TYPE arg)                      \
+    {                                                                              \
+        rxn.setProperty(ReactionProperty::PROP_NAME, arg);                         \
+    }                                                                              \
+                                                                                   \
+    bool Vis::has##FUNC_SUFFIX(const Chem::Reaction& rxn)                          \
+    {                                                                              \
+        return rxn.isPropertySet(ReactionProperty::PROP_NAME);                     \
+    }                                                                              \
+                                                                                   \
+    void Vis::clear##FUNC_SUFFIX(Chem::Reaction& rxn)                              \
+    {                                                                              \
+        rxn.removeProperty(ReactionProperty::PROP_NAME);                           \
     }
 
 
