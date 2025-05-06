@@ -132,6 +132,7 @@ namespace TautGen
         bool               sulfenicAcid;
         bool               genericH13Shift;
         bool               genericH15Shift;
+        bool               conjRingBondSwitch;
         bool               titleSuffix;
         bool               retain2DCoords;
         bool               retain3DCoords;

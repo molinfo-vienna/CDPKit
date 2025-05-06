@@ -155,7 +155,8 @@ set(cdpl-chem_LIB_SRCS
     PhosphinicAcidTautomerization.cpp  
     SulfenicAcidTautomerization.cpp  
     GenericHydrogen13ShiftTautomerization.cpp  
-    GenericHydrogen15ShiftTautomerization.cpp  
+    GenericHydrogen15ShiftTautomerization.cpp
+    ConjugatedRingBondPatternSwitching.cpp
     ResonanceStructureGenerator.cpp
     StereoisomerGenerator.cpp
     ChEMBLStandardizer.cpp

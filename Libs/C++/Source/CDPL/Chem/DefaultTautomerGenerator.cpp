@@ -30,6 +30,7 @@
 #include "CDPL/Chem/SulfenicAcidTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen13ShiftTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"  
+#include "CDPL/Chem/ConjugatedRingBondPatternSwitching.hpp"
 
 
 using namespace CDPL;
@@ -42,4 +43,5 @@ Chem::DefaultTautomerGenerator::DefaultTautomerGenerator()
     addTautomerizationRule(TautomerizationRule::SharedPointer(new KeteneYnolTautomerization()));
     addTautomerizationRule(TautomerizationRule::SharedPointer(new PhosphinicAcidTautomerization()));
     addTautomerizationRule(TautomerizationRule::SharedPointer(new SulfenicAcidTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new ConjugatedRingBondPatternSwitching()));
 }

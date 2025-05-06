@@ -129,7 +129,8 @@ set(chem_MOD_SRCS
     PhosphinicAcidTautomerizationExport.cpp  
     SulfenicAcidTautomerizationExport.cpp  
     GenericHydrogen13ShiftTautomerizationExport.cpp  
-    GenericHydrogen15ShiftTautomerizationExport.cpp  
+    GenericHydrogen15ShiftTautomerizationExport.cpp
+    ConjugatedRingBondPatternSwitchingExport.cpp 
     FragmentGeneratorExport.cpp
     RECAPFragmentGeneratorExport.cpp
     BRICSFragmentGeneratorExport.cpp

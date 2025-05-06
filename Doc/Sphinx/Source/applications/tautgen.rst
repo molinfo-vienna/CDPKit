@@ -6,7 +6,7 @@ Performs tautomer generation/standardization for a set of input molecules.
 Synopsis
 --------
 
-  :program:`tautgen` [-hVvptsdzSrR] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
+  :program:`tautgen` [-hVvptsdzSrR] [-c arg] [-l arg] [-m arg] [-I arg] [-O arg] [-n arg] [--keto-enol] [--imine-enamine] [--nitroso-oxime] [--amide-imidic-acid] [--lactam-lactim] [--ketene-ynol] [--nitro-aci] [--phosphinic-acid] [--sulfenic-acid] [--conj-ring-bond-pattern] [--generic-h13-shift] [--generic-h15-shift] -i arg [arg]... -o arg
 
 Mandatory options
 -----------------
@@ -182,6 +182,10 @@ Other options
   --sulfenic-acid [=arg(=1)]
 
     Enable sulfenic acid tautomerization (default: true).
+
+  --conj-ring-bond-pattern [=arg(=1)]
+
+    Enable conjugated ring bond order pattern switching (default: true). [since V1.3]
 
   --generic-h13-shift [=arg(=1)]
 

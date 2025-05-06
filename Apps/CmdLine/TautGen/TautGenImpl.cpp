@@ -46,7 +46,8 @@
 #include "CDPL/Chem/PhosphinicAcidTautomerization.hpp"  
 #include "CDPL/Chem/SulfenicAcidTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen13ShiftTautomerization.hpp"  
-#include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"  
+#include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"
+#include "CDPL/Chem/ConjugatedRingBondPatternSwitching.hpp"  
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"  
 #include "CDPL/Chem/AtomPropertyFlag.hpp"  
@@ -173,6 +174,7 @@ private:
         PatternBasedTautomerizationRule::SharedPointer ketene_ynol(new KeteneYnolTautomerization());
         PatternBasedTautomerizationRule::SharedPointer posph_acid(new PhosphinicAcidTautomerization());
         PatternBasedTautomerizationRule::SharedPointer sulf_acid(new SulfenicAcidTautomerization());
+        TautomerizationRule::SharedPointer conj_rb_switch(new ConjugatedRingBondPatternSwitching());
 
         h13_shift->addExcludePatterns(*keto_enol);
         h13_shift->addExcludePatterns(*imine_enamine);
@@ -225,6 +227,9 @@ private:
 
         if (parent->genericH15Shift)
             tautGen.addTautomerizationRule(h15_shift);
+
+        if (parent->conjRingBondSwitch)
+            tautGen.addTautomerizationRule(conj_rb_switch);
     }
 
     bool processNextMolecule() {
@@ -433,8 +438,8 @@ TautGenImpl::TautGenImpl():
     regardStereo(true), regardIsotopes(true), neutralize(false), ketoEnol(true), 
     imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
     lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
-    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(false), titleSuffix(false),
-    retain2DCoords(false), retain3DCoords(false),
+    sulfenicAcid(true), genericH13Shift(true), genericH15Shift(false), conjRingBondSwitch(true),
+    titleSuffix(false), retain2DCoords(false), retain3DCoords(false),
     numThreads(0), maxNumTautomers(0), mode(Mode::BEST_SCORING_UNIQUE), 
     inputFormat(), outputFormat(), outputWriter(), numOutTautomers(0)
 {
@@ -481,6 +486,8 @@ TautGenImpl::TautGenImpl():
               value<bool>(&phosphinicAcid)->implicit_value(true));
     addOption("sulfenic-acid", "Enable sulfenic acid tautomerization (default: true).", 
               value<bool>(&sulfenicAcid)->implicit_value(true));
+    addOption("conj-ring-bond-pattern", "Enable conjugated ring bond order pattern switching (default: true).", 
+              value<bool>(&conjRingBondSwitch)->implicit_value(true));
     addOption("generic-h13-shift", "Enable generic hydrogen 1 <-> 3 shift tautomerization (default: true).", 
               value<bool>(&genericH13Shift)->implicit_value(true));
     addOption("generic-h15-shift", "Enable generic hydrogen 1 <-> 5 shift tautomerization (default: false).", 
@@ -867,6 +874,7 @@ void TautGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Nitro-Aci Tautomerization:         " + std::string(nitroAci ? "Yes" : "No"));
     printMessage(VERBOSE, " Phosphinic Acid Tautomerization:   " + std::string(phosphinicAcid ? "Yes" : "No"));
     printMessage(VERBOSE, " Sulfenic Acid Tautomerization:     " + std::string(sulfenicAcid ? "Yes" : "No"));
+    printMessage(VERBOSE, " Conj. Ring Bond Pattern Switching: " + std::string(conjRingBondSwitch ? "Yes" : "No"));
     printMessage(VERBOSE, " Gen. H-1,3-Shift Tautomerization:  " + std::string(genericH13Shift ? "Yes" : "No"));
     printMessage(VERBOSE, " Gen. H-1,5-Shift Tautomerization:  " + std::string(genericH15Shift ? "Yes" : "No"));
     printMessage(VERBOSE, "");

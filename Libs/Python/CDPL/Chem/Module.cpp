@@ -137,7 +137,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportPhosphinicAcidTautomerization();  
     exportSulfenicAcidTautomerization();  
     exportGenericHydrogen13ShiftTautomerization();  
-    exportGenericHydrogen15ShiftTautomerization();  
+    exportGenericHydrogen15ShiftTautomerization();
+    exportConjugatedRingBondPatternSwitching();
     exportFragmentGenerator();
     exportRECAPFragmentGenerator();
     exportBRICSFragmentGenerator();

@@ -42,17 +42,22 @@ namespace CDPL
         namespace TautomerizationType
         {
 
-            constexpr unsigned int KETO_ENOL          = 0;
-            constexpr unsigned int IMINE_ENAMINE      = 1;
-            constexpr unsigned int NITROSO_OXIME      = 2;
-            constexpr unsigned int AMIDE_IMIDIC_ACID  = 3;
-            constexpr unsigned int LACTAM_LACTIM      = 4;
-            constexpr unsigned int KETENE_YNOL        = 5;
-            constexpr unsigned int NITRO_ACI          = 6;
-            constexpr unsigned int PHOSPHINIC_ACID    = 7;
-            constexpr unsigned int SULFENIC_ACID      = 8;
-            constexpr unsigned int GENERIC_H_13_SHIFT = 9;
-            constexpr unsigned int GENERIC_H_15_SHIFT = 10;
+            constexpr unsigned int KETO_ENOL             = 0;
+            constexpr unsigned int IMINE_ENAMINE         = 1;
+            constexpr unsigned int NITROSO_OXIME         = 2;
+            constexpr unsigned int AMIDE_IMIDIC_ACID     = 3;
+            constexpr unsigned int LACTAM_LACTIM         = 4;
+            constexpr unsigned int KETENE_YNOL           = 5;
+            constexpr unsigned int NITRO_ACI             = 6;
+            constexpr unsigned int PHOSPHINIC_ACID       = 7;
+            constexpr unsigned int SULFENIC_ACID         = 8;
+            constexpr unsigned int GENERIC_H_13_SHIFT    = 9;
+            constexpr unsigned int GENERIC_H_15_SHIFT    = 10;
+
+            /**
+             * \since 1.3
+             */
+            constexpr unsigned int CONJ_RING_BOND_SWITCH = 11;
 
         } // namespace TautomerizationType
     } // namespace Chem

@@ -52,5 +52,6 @@ void CDPLPythonChem::exportTautomerizationTypes()
         .def_readonly("PHOSPHINIC_ACID", &Chem::TautomerizationType::PHOSPHINIC_ACID)
         .def_readonly("SULFENIC_ACID", &Chem::TautomerizationType::SULFENIC_ACID)
         .def_readonly("GENERIC_H_13_SHIFT", &Chem::TautomerizationType::GENERIC_H_13_SHIFT)
-        .def_readonly("GENERIC_H_15_SHIFT", &Chem::TautomerizationType::GENERIC_H_15_SHIFT);
+        .def_readonly("GENERIC_H_15_SHIFT", &Chem::TautomerizationType::GENERIC_H_15_SHIFT)
+        .def_readonly("CONJ_RING_BOND_SWITCH", &Chem::TautomerizationType::CONJ_RING_BOND_SWITCH);
 }
