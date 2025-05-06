@@ -59,13 +59,13 @@ namespace CDPL
             TautomerScore& operator=(const TautomerScore& ts);
 
           private:
-            double getAtomTypeScoreIncrement(unsigned int type) const;
-            //double getExocyclicBondIncrement(const Bond& bond) const;
+            double getAtomTypeScoreIncrement(unsigned int type, bool in_ring) const;
 
             std::size_t getUnsaturatedNeighborCount(const Atom& atom, const Bond& bond, const MolecularGraph& molgraph) const;
 
-            bool isLactim(const Fragment& ring, const MolecularGraph& molgraph) const;
-
+            bool is24HydroxyPyridineLike(const Fragment& ring, const MolecularGraph& molgraph) const;
+            bool isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph) const;
+            bool isCarboxyOxygen(const Atom& atom, const MolecularGraph& molgraph) const;
             bool hasExocyclicOH(const Atom& atom, const MolecularGraph& molgraph) const;
         };
     } // namespace Chem
