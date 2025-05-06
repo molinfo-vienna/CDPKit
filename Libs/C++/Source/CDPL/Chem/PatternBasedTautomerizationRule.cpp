@@ -191,7 +191,6 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
 
     for (MolecularGraph::ConstAtomIterator it = parentMolGraph->getAtomsBegin(), end = parentMolGraph->getAtomsEnd(); it != end; ++it) {
         const Atom& atom = *it;
-
         Atom& atom_copy = tautomer.addAtom();
 
         setType(atom_copy, getType(atom));
