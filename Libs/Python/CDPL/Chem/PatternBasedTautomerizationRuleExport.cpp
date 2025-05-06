@@ -131,11 +131,10 @@ void CDPLPythonChem::exportPatternBasedTautomerizationRule()
     cl
         .def(python::init<unsigned int>((python::arg("self"), python::arg("id"))))
         .def(python::init<const Chem::PatternBasedTautomerizationRule&>((python::arg("self"), python::arg("rule"))))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedTautomerizationRule>())    
         .def("addTransformationPattern", &addTransformationPattern, (python::arg("self"), python::arg("molgraph"), python::arg("bond_chgs")))
         .def("addExcludePattern", &Chem::PatternBasedTautomerizationRule::addExcludePattern, (python::arg("self"), python::arg("molgraph")))
         .def("addExcludePatterns", &Chem::PatternBasedTautomerizationRule::addExcludePatterns, (python::arg("self"), python::arg("rule")))
         .def("clearExcludePatterns", &Chem::PatternBasedTautomerizationRule::clearExcludePatterns, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternBasedTautomerizationRule>(), 
+        .def("assign", &Chem::PatternBasedTautomerizationRule::operator=,
              (python::arg("self"), python::arg("rule")), python::return_self<>());
 }
