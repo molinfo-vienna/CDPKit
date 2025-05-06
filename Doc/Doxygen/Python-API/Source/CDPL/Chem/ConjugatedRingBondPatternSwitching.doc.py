@@ -20,66 +20,26 @@
 #
 
 ##
-# \brief Provides constants serving as identifiers for built-in Chem.TautomerizationRule implementations.
+# \brief ConjugatedRingBondPatternSwitching.
 # 
-class TautomerizationType(Boost.Python.instance):
+# \since 1.3
+# 
+class ConjugatedRingBondPatternSwitching(TautomerizationRule):
 
     ##
-    # \brief 
-    #
-    KETO_ENOL = 0
+    # \brief Initializes the \e %ConjugatedRingBondPatternSwitching instance.
+    # 
+    def __init__() -> None: pass
 
     ##
-    # \brief 
-    #
-    IMINE_ENAMINE = 1
+    # \brief Initializes a copy of the \e %ConjugatedRingBondPatternSwitching instance \a rule.
+    # \param rule The \e %ConjugatedRingBondPatternSwitching instance to copy.
+    # 
+    def __init__(rule: ConjugatedRingBondPatternSwitching) -> None: pass
 
     ##
-    # \brief 
-    #
-    NITROSO_OXIME = 2
-
-    ##
-    # \brief 
-    #
-    AMIDE_IMIDIC_ACID = 3
-
-    ##
-    # \brief 
-    #
-    LACTAM_LACTIM = 4
-
-    ##
-    # \brief 
-    #
-    KETENE_YNOL = 5
-
-    ##
-    # \brief 
-    #
-    NITRO_ACI = 6
-
-    ##
-    # \brief 
-    #
-    PHOSPHINIC_ACID = 7
-
-    ##
-    # \brief 
-    #
-    SULFENIC_ACID = 8
-
-    ##
-    # \brief 
-    #
-    GENERIC_H_13_SHIFT = 9
-
-    ##
-    # \brief 
-    #
-    GENERIC_H_15_SHIFT = 10
-
-    ##
-    # \brief 
-    #
-    CONJ_RING_BOND_SWITCH = 11
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ConjugatedRingBondPatternSwitching instance \a rule.
+    # \param rule The \c %ConjugatedRingBondPatternSwitching instance to copy.
+    # \return \a self
+    # 
+    def assign(rule: ConjugatedRingBondPatternSwitching) -> ConjugatedRingBondPatternSwitching: pass

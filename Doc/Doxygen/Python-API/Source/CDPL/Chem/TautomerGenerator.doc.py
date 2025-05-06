@@ -142,6 +142,18 @@ class TautomerGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def coordinates2DCleared() -> bool: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def coordinates3DCleared() -> bool: pass
+
+    ##
+    # \brief 
     # \param remove 
     #
     def removeResonanceDuplicates(remove: bool) -> None: pass
@@ -173,6 +185,10 @@ class TautomerGenerator(Boost.Python.instance):
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 
     objectID = property(getObjectID)
+
+    clearCoordinates2D = property(coordinates2DCleared, clearCoordinates2D)
+
+    clearCoordinates3D = property(coordinates3DCleared, clearCoordinates3D)
 
     callbackFunction = property(getCallbackFunction, setCallbackFunction)
 
