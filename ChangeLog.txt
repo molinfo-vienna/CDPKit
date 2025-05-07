@@ -1,5 +1,17 @@
 master:
 
+ - New option --conj-ring-bond-pattern of command line tool 'TautGen' for enabling (=default)/disabling the new
+   conj. ring bond order flipping tautomerization rule (see below)
+ - Significant improvement of the tautomer scoring function with focus on the evaluation of hydroxy-pyridine
+   containing and highly conjugated molecule tautomers 
+ - The command line tool 'TautGen' provides two new options -r and -R that allow control whether input 2D or 3D
+   atom coordinates shall be retained (might lead to distorted and/or invalid 2D/3D structures) or removed (default)
+   from the generated tautomers
+ - The command line tool 'TautGen' now removes all for the sake of processing added explicit hydrogens from the
+   generated tautomers before output
+ - Added new tautomerization rule id Chem::TautomerizationType::CONJ_RING_BOND_SWITCH
+ - New tautomerization rule implementation Chem::ConjugatedRingBondPatternSwitching for flipping the orders
+   of bonds in conjugated rings having one or more N, O, S, Se or P substituent(s) bearing at least one hydrogen
  - Support for the display of 2D structure renderings of Chem::MolecularGraph and Chem::Reaction instances in
    Jupyter notebooks
  - New utility functions Vis::prepareFor2DVisualization() that perform 2D visualization specific setup work for
