@@ -75,7 +75,7 @@ bool Chem::ConjugatedRingBondPatternSwitching::generate(Molecule& tautomer)
 
     return true;
 }
-#include <iostream>
+
 bool Chem::ConjugatedRingBondPatternSwitching::isConjugated(const Fragment& ring) const
 {
     auto num_bonds = ring.getNumBonds();
