@@ -682,9 +682,14 @@ namespace CDPL
             constexpr unsigned int HET = MAX_ATOMIC_NO + 10;
 
             /**
+             * \brief Specifies an R-group.
+             */
+            constexpr unsigned int R = MAX_ATOMIC_NO + 11;
+
+            /**
              * \brief Marks the end of all supported atom types.
              */
-            constexpr unsigned int MAX_TYPE = HET;
+            constexpr unsigned int MAX_TYPE = R;
         } // namespace AtomType
     } // namespace Chem
 } // namespace CDPL

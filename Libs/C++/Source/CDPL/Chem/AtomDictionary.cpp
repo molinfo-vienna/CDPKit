@@ -810,7 +810,8 @@ namespace
         {Chem::AtomType::X,   0, "X",  "",              0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         },
         {Chem::AtomType::XH,  0, "XH", "",              0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         },
         {Chem::AtomType::ANY, 0, "*",  "",              0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         },
-        {Chem::AtomType::HET, 0, "HET", "",             0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         }
+        {Chem::AtomType::HET, 0, "HET", "",             0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         },
+        {Chem::AtomType::R,   0, "R",  "",              0,   0,          0,  0, false, false, {-1},                      0,    {0, 0, 0},          0,   0         }
     };
 
     Chem::AtomDictionary::SharedPointer builtinDictionary(new Chem::AtomDictionary());
