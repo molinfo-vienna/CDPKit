@@ -25,7 +25,8 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Biomol/ResidueList.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -35,13 +36,16 @@ void CDPLPythonBiomol::exportResidueList()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Biomol::ResidueList, Biomol::ResidueList::SharedPointer, 
-           python::bases<Chem::FragmentList>, boost::noncopyable>("ResidueList", python::no_init)
-    .def(python::init<>(python::arg("self")))
-    .def(python::init<const Chem::MolecularGraph&, unsigned int>((python::arg("self"), python::arg("molgraph"), 
-                                      python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT))
-         [python::with_custodian_and_ward<1, 2>()])
-    .def("extract", &Biomol::ResidueList::extract, (python::arg("self"), python::arg("molgraph"), 
-                            python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT), 
-         python::with_custodian_and_ward<1, 2>());
+    python::class_<Biomol::ResidueList, Biomol::ResidueList::SharedPointer,
+                   python::bases<Chem::FragmentList>, boost::noncopyable>("ResidueList", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, unsigned int>((python::arg("self"), python::arg("molgraph"),
+                                                                      python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Biomol::ResidueList&>((python::arg("self"), python::arg("res_list")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", CDPLPythonBase::copyAssOp<Biomol::ResidueList>(),
+             (python::arg("self"), python::arg("res_list")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("extract", &Biomol::ResidueList::extract, (python::arg("self"), python::arg("molgraph"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT),
+             python::with_custodian_and_ward<1, 2>());
 }
