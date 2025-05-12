@@ -32,26 +32,26 @@
 #include "FunctionExports.hpp"
 
 
-#define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
-python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"));                                \
-python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
+#define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                       \
+    python::def("get" #FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("has" #FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("clear" #FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph")); \
+    python::def("set" #FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
 
-#define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                    \
-python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),                                 \
-            python::return_value_policy<python::copy_const_reference>());                                        \
-python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
+#define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                              \
+    python::def("get" #FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),      \
+                python::return_value_policy<python::copy_const_reference>());              \
+    python::def("has" #FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("clear" #FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph")); \
+    python::def("set" #FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
 
-#define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
-python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),                                 \
-            python::return_value_policy<python::copy_const_reference,                                            \
-            python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
-python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
+#define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                 \
+    python::def("get" #FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),            \
+                python::return_value_policy<python::copy_const_reference,                        \
+                                            python::with_custodian_and_ward_postcall<0, 1> >()); \
+    python::def("has" #FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));           \
+    python::def("clear" #FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));       \
+    python::def("set" #FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
 
 
 namespace
