@@ -44,7 +44,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Implements Greene's algorithm [\ref CATA] for the calculation of atom hydrophobicities.
+         * \brief Implementation of Greene's algorithm [\ref CATA] for the calculation of atom hydrophobicities.
          */
         class CDPL_MOLPROP_API AtomHydrophobicityCalculator
         {
