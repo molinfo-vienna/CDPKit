@@ -36,6 +36,7 @@ namespace CDPL
 
         void initAtomProperties();
         void initBondProperties();
+        void initMolecularGraphProperties();
         void initAtomPropertyDefaults();
     } // namespace MolProp
 } // namespace CDPL
@@ -50,6 +51,7 @@ namespace
         {
             CDPL::MolProp::initAtomProperties();
             CDPL::MolProp::initBondProperties();
+            CDPL::MolProp::initMolecularGraphProperties();
             CDPL::MolProp::initAtomPropertyDefaults();
         }
 

@@ -35,6 +35,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 
 
@@ -122,6 +123,22 @@ namespace CDPL
         CDPL_MOLPROP_API void perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
 
         CDPL_MOLPROP_API void perceiveHBondAcceptorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_MOLPROP_API const Chem::FragmentList::SharedPointer& getFunctionalGroups(const Chem::MolecularGraph& molgraph);
+
+        CDPL_MOLPROP_API void setFunctionalGroups(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& fg_list);
+
+        CDPL_MOLPROP_API void clearFunctionalGroups(Chem::MolecularGraph& molgraph);
+
+        CDPL_MOLPROP_API bool hasFunctionalGroups(const Chem::MolecularGraph& molgraph);
+
+        CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(const Chem::MolecularGraph& molgraph);
+
+        CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(Chem::MolecularGraph& molgraph, bool overwrite);
+        
     } // namespace MolProp
 } // namespace CDPL
 

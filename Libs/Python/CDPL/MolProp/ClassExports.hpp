@@ -40,6 +40,7 @@ namespace CDPLPythonMolProp
     void exportMHMOPiChargeCalculator();
     void exportHBondDonorAtomTyper();
     void exportHBondAcceptorAtomTyper();
+    void exportFunctionalGroupList();
 } // namespace CDPLPythonMolProp
 
 #endif // CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP

@@ -1,5 +1,5 @@
 /* 
- * NamespaceExports.hpp 
+ * MolecularGraphProperty.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,22 +21,43 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::MolProp::MolecularGraphProperty.
+ */
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_MOLPROP_MOLECULARGRAPHPROPERTY_HPP
+#define CDPL_MOLPROP_MOLECULARGRAPHPROPERTY_HPP
+
+#include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace CDPL
 {
 
-    void exportAtomProperties();
-    void exportBondProperties();
-    void exportMolecularGraphProperties();
-    void exportAtomPropertyDefaults();
+    namespace Base
+    {
 
-    void exportCoordinationGeometries();
-    void exportHBondDonorAtomTypes();
-    void exportHBondAcceptorAtomTypes();
-} // namespace CDPLPythonMolProp
+        class LookupKey;
+    }
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+    namespace MolProp
+    {
+
+        /**
+         * \brief Provides keys for built-in MolProp::MolecularGraph properties.
+         * \since 1.3
+         */
+        namespace MolecularGraphProperty
+        {
+
+            /**
+             * \since 1.3
+             */
+            extern CDPL_MOLPROP_API const Base::LookupKey FUNCTIONAL_GROUPS;
+
+        } // namespace MolecularGraphProperty
+    } // namespace MolProp
+} // namespace CDPL
+
+#endif // CDPL_MOLPROP_MOLECULARGRAPHPROPERTY_HPP

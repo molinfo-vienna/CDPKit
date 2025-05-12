@@ -1,5 +1,5 @@
 /* 
- * NamespaceExports.hpp 
+ * MolecularGraphProperty.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -7,7 +7,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
+ * License as published by the Free Software Foundation; either  
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -22,21 +22,24 @@
  */
 
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#include "StaticInit.hpp"
+
+#include "CDPL/MolProp/MolecularGraphProperty.hpp"
+#include "CDPL/Base/LookupKeyDefinition.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace CDPL 
 {
 
-    void exportAtomProperties();
-    void exportBondProperties();
-    void exportMolecularGraphProperties();
-    void exportAtomPropertyDefaults();
+    namespace MolProp
+    {
 
-    void exportCoordinationGeometries();
-    void exportHBondDonorAtomTypes();
-    void exportHBondAcceptorAtomTypes();
-} // namespace CDPLPythonMolProp
+        namespace MolecularGraphProperty
+        {
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+            CDPL_DEFINE_LOOKUP_KEY(FUNCTIONAL_GROUPS);
+        }
+
+        void initMolecularGraphProperties() {}
+    }
+}

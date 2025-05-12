@@ -26,10 +26,12 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 set(cdpl-molprop_LIB_SRCS
     AtomProperty.cpp
     BondProperty.cpp
+    MolecularGraphProperty.cpp
     AtomPropertyDefault.cpp
     
     AtomPropertyFunctions.cpp
     BondPropertyFunctions.cpp
+    MolecularGraphPropertyFunctions.cpp
     
     AtomContainerElementalCompositionFunctions.cpp
     AtomContainerMassCompositionFunctions.cpp
@@ -54,7 +56,8 @@ set(cdpl-molprop_LIB_SRCS
     MolecularGraphLogSFunction.cpp
     MolecularGraphXLogPFunction.cpp
     MolecularGraphHBDHBAAtomTypeFunctions.cpp
-
+    MolecularGraphFunctionalGroupsFunctions.cpp
+    
     AtomPolarizabilityFunctions.cpp
     AtomBondCountFunctions.cpp
     AtomElementPropertyFunctions.cpp
@@ -80,6 +83,7 @@ set(cdpl-molprop_LIB_SRCS
     XLogPCalculator.cpp
     HBondDonorAtomTyper.cpp
     HBondAcceptorAtomTyper.cpp
+    FunctionalGroupList.cpp
    )
  
 if(NOT PYPI_PACKAGE_BUILD)

@@ -34,6 +34,7 @@ set(molprop_MOD_SRCS
 
     AtomPropertyExport.cpp
     BondPropertyExport.cpp
+    MolecularGraphPropertyExport.cpp
     AtomPropertyDefaultExport.cpp
     
     CoordinationGeometryExport.cpp
@@ -57,6 +58,7 @@ set(molprop_MOD_SRCS
     TPSACalculatorExport.cpp
     HBondDonorAtomTyperExport.cpp
     HBondAcceptorAtomTyperExport.cpp
+    FunctionalGroupListExport.cpp
    )
 
 add_library(_molprop MODULE ${molprop_MOD_SRCS})

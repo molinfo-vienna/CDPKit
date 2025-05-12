@@ -31,6 +31,7 @@
 
 #include "CDPL/MolProp/AtomProperty.hpp"
 #include "CDPL/MolProp/BondProperty.hpp"
+#include "CDPL/MolProp/MolecularGraphProperty.hpp"
 #include "CDPL/MolProp/AtomPropertyDefault.hpp"
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
@@ -50,5 +51,6 @@
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 #include "CDPL/MolProp/HBondDonorAtomTyper.hpp"
 #include "CDPL/MolProp/HBondAcceptorAtomTyper.hpp"
+#include "CDPL/MolProp/FunctionalGroupList.hpp"
 
 #endif // CDPL_MOLPROP_HPP

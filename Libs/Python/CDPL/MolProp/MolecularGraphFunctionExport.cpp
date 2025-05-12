@@ -30,6 +30,28 @@
 #include "FunctionExports.hpp"
 
 
+#define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                          \
+    python::def("get" #FUNC_SUFFIX, &MolProp::get##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("has" #FUNC_SUFFIX, &MolProp::has##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("clear" #FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("molgraph")); \
+    python::def("set" #FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
+
+#define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                 \
+    python::def("get" #FUNC_SUFFIX, &MolProp::get##FUNC_SUFFIX, python::arg("molgraph"),      \
+                python::return_value_policy<python::copy_const_reference>());                 \
+    python::def("has" #FUNC_SUFFIX, &MolProp::has##FUNC_SUFFIX, python::arg("molgraph"));     \
+    python::def("clear" #FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("molgraph")); \
+    python::def("set" #FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
+
+#define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                 \
+    python::def("get" #FUNC_SUFFIX, &MolProp::get##FUNC_SUFFIX, python::arg("molgraph"),         \
+                python::return_value_policy<python::copy_const_reference,                        \
+                                            python::with_custodian_and_ward_postcall<0, 1> >()); \
+    python::def("has" #FUNC_SUFFIX, &MolProp::has##FUNC_SUFFIX, python::arg("molgraph"));        \
+    python::def("clear" #FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("molgraph"));    \
+    python::def("set" #FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)));
+
+
 namespace
 {
 
@@ -108,4 +130,12 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("perceiveHBondAcceptorAtomTypes", &MolProp::perceiveHBondAcceptorAtomTypes,
                 (python::arg("molgraph"), python::arg("overwrite")));
+
+    python::def("perceiveFunctionalGroups", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&MolProp::perceiveFunctionalGroups),
+                python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+    python::def("perceiveFunctionalGroups",
+                static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&MolProp::perceiveFunctionalGroups),
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+    
+    EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FunctionalGroups, fg_list)
 }

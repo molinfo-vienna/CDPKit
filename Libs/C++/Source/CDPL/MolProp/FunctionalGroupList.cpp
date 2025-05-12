@@ -1,5 +1,5 @@
 /* 
- * NamespaceExports.hpp 
+ * FunctionalGroupList.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,21 +22,40 @@
  */
 
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#include "StaticInit.hpp"
+
+#include "CDPL/MolProp/FunctionalGroupList.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
 
 
-namespace CDPLPythonMolProp
+using namespace CDPL; 
+
+
+MolProp::FunctionalGroupList::FunctionalGroupList()
+{}
+
+MolProp::FunctionalGroupList::FunctionalGroupList(const FunctionalGroupList& fg_list):
+    FragmentList(fg_list)
+{}
+
+MolProp::FunctionalGroupList::FunctionalGroupList(const Chem::MolecularGraph& molgraph)
 {
+    extract(molgraph);
+}
 
-    void exportAtomProperties();
-    void exportBondProperties();
-    void exportMolecularGraphProperties();
-    void exportAtomPropertyDefaults();
+MolProp::FunctionalGroupList& MolProp::FunctionalGroupList::operator=(FunctionalGroupList& fg_list)
+{
+    if (&fg_list == this)
+        return *this;
 
-    void exportCoordinationGeometries();
-    void exportHBondDonorAtomTypes();
-    void exportHBondAcceptorAtomTypes();
-} // namespace CDPLPythonMolProp
+    FragmentList::operator=(fg_list);
+    
+    return *this;
+}
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+void MolProp::FunctionalGroupList::extract(const Chem::MolecularGraph& molgraph)
+{
+    using namespace Chem;
+
+    clear();
+}

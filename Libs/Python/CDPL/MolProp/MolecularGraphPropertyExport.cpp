@@ -1,5 +1,5 @@
 /* 
- * Module.cpp 
+ * MolecularGraphPropertyExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,40 +24,24 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
+#include "CDPL/MolProp/MolecularGraphProperty.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+
 #include "NamespaceExports.hpp"
 
 
-BOOST_PYTHON_MODULE(_molprop)
+namespace 
 {
-    using namespace CDPLPythonMolProp;
 
-    exportAtomProperties();
-    exportBondProperties();
-    exportMolecularGraphProperties();
-    exportAtomPropertyDefaults();
+    struct MolecularGraphProperty {};
+}
 
-    exportCoordinationGeometries();
-    exportHBondDonorAtomTypes();
-    exportHBondAcceptorAtomTypes();
-    
-    exportElementHistogram();
-    exportMassComposition();
 
-    exportAtomHydrophobicityCalculator();
-    exportLogSCalculator();
-    exportXLogPCalculator();
-    exportTPSACalculator();
-    exportPEOESigmaChargeCalculator();
-    exportMHMOPiChargeCalculator();
-    exportHBondDonorAtomTyper();
-    exportHBondAcceptorAtomTyper();
-    exportFunctionalGroupList();
+void CDPLPythonMolProp::exportMolecularGraphProperties()
+{
+    using namespace boost;
+    using namespace CDPL;
 
-    exportAtomContainerFunctions();
-    exportBondContainerFunctions();
-    exportAtomFunctions();
-    exportBondFunctions();
-    exportMolecularGraphFunctions();
+    python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
+        .def_readonly("FUNCTIONAL_GROUPS", &MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS);
 }
