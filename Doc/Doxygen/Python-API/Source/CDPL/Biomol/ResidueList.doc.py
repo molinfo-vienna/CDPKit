@@ -38,9 +38,22 @@ class ResidueList(Chem.FragmentList):
     def __init__(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
 
     ##
-    # \brief Replaces the current list of residues by the residues in the molecular graph <em>molgraph</em>.
+    # \brief Initializes a copy of the \e %ResidueList instance \a res_list.
+    # \param res_list The \e %ResidueList instance to copy.
     # 
-    # \param molgraph The molecular graph for which to extract the residues.
+    def __init__(res_list: ResidueList) -> None: pass
+
+    ##
+    # \brief Replaces the current state of \a self with a copy of the state of the \c %ResidueList instance \a res_list.
+    # \param res_list The \c %ResidueList instance to copy.
+    # \return \a self
+    # 
+    def assign(res_list: ResidueList) -> ResidueList: pass
+
+    ##
+    # \brief Extracts the substructures of all residues found in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to generate the residue list.
     # \param flags The set of atom properties uniquely identifying a residue.
     # 
     def extract(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> None: pass

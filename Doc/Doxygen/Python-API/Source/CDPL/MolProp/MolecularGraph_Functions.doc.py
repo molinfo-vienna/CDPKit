@@ -127,6 +127,48 @@ def perceiveHBondAcceptorAtomTypes(molgraph: Chem.MolecularGraph, overwrite: boo
 # \param molgraph 
 # \return 
 #
+def perceiveFunctionalGroups(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+# \return 
+#
+def perceiveFunctionalGroups(molgraph: Chem.MolecularGraph, overwrite: bool) -> Chem.FragmentList: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearFunctionalGroups(molgraph: Chem.MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasFunctionalGroups(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getFunctionalGroups(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param fg_list 
+#
+def setFunctionalGroups(molgraph: Chem.MolecularGraph, fg_list: Chem.FragmentList) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
 def calcMass(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##

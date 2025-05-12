@@ -39,7 +39,12 @@ class AtomType(Boost.Python.instance):
     ##
     # \brief Marks the end of all supported atom types.
     # 
-    MAX_TYPE = 123
+    MAX_TYPE = 124
+
+    ##
+    # \brief Specifies an R-group.
+    # 
+    R = 124
 
     ##
     # \brief A generic type that covers any element except hydrogen.
