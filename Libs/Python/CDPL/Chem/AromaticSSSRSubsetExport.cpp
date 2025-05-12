@@ -25,7 +25,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/CopyAssOp.hpp"
 

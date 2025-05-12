@@ -25,7 +25,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/CompleteRingSet.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "ClassExports.hpp"
 

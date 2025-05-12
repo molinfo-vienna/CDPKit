@@ -25,7 +25,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/ExtendedSSSR.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/CopyAssOp.hpp"
 

@@ -25,7 +25,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/ConnectedSubstructureSet.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "ClassExports.hpp"
 
