@@ -162,6 +162,15 @@ Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/
 </tr>
 
 <tr>
+<td valign="top">\anchor FGPE<i>[FGPE]</i></td>
+<td valign="top">
+P. Ertl,
+An algorithm to identify functional groups in organic molecules,
+<i>J. Cheminformatics</i> <b>2017</b>, 9, 36
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor FUNWRP<i>[FUNWRP]</i></td>
 <td valign="top">
 \c std::function documentation: https://en.cppreference.com/w/cpp/utility/functional/function
