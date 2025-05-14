@@ -30,9 +30,13 @@
 #define CDPL_MOLPROP_FUNCTIONALGROUPLIST_HPP
 
 #include <memory>
+#include <sstream>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -62,11 +66,22 @@ namespace CDPL
             void extract(const Chem::MolecularGraph& molgraph);
 
           private:
+            void markAtoms(const Chem::MolecularGraph& molgraph);
+
+            void combineMarkedAtoms(const Chem::MolecularGraph& molgraph);
+            void combineMarkedAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& func_grp);
+
+            void generateAndSetName(Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph);
+            
             const char* getClassName() const
             {
                 return "FunctionalGroupList";
             }
 
+            Util::BitSet                     markedAtoms;
+            std::ostringstream               strStream;
+            Chem::SMILESMolecularGraphWriter smilesWriter;
+            Chem::BasicMolecule              funcGroupMol;
         };
     } // namespace MolProp
 } // namespace CDPL
