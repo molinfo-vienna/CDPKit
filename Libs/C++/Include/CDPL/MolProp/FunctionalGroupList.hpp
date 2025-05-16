@@ -36,6 +36,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
+#include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -66,22 +67,33 @@ namespace CDPL
             void extract(const Chem::MolecularGraph& molgraph);
 
           private:
+            void init();
+
             void markAtoms(const Chem::MolecularGraph& molgraph);
 
             void combineMarkedAtoms(const Chem::MolecularGraph& molgraph);
             void combineMarkedAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& func_grp);
 
             void generateAndSetName(Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph);
+
+            std::size_t getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph);
+
+            void createEnvironmentBonds(std::size_t atom_idx, std::size_t num_bonds, unsigned int atom_type, bool aromatic);
             
             const char* getClassName() const
             {
                 return "FunctionalGroupList";
             }
 
-            Util::BitSet                     markedAtoms;
-            std::ostringstream               strStream;
-            Chem::SMILESMolecularGraphWriter smilesWriter;
-            Chem::BasicMolecule              funcGroupMol;
+            typedef std::vector<const Chem::Atom*> AtomList;
+            
+            Util::BitSet                       markedAtoms;
+            std::ostringstream                 strStream;
+            Chem::SMILESMolecularGraphWriter   smilesWriter;
+            Chem::ProtonationStateStandardizer chargeStandardizer;
+            Chem::BasicMolecule                funcGroupMol;
+            Chem::FragmentList::SharedPointer  funcGroupMolComps;
+            AtomList                           envCarbons;
         };
     } // namespace MolProp
 } // namespace CDPL

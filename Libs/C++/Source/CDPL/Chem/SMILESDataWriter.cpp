@@ -1227,6 +1227,8 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
             case AtomType::Br:
             case AtomType::I:
                 in_brackets = (valence != 1);
+
+            case AtomType::R:
                 break;
 
             default:
@@ -1309,7 +1311,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomSymbol(std::ostream& os, unsi
         return;
     }
     
-    if (atom_type > AtomType::MAX_ATOMIC_NO) {
+    if ((atom_type > AtomType::MAX_ATOMIC_NO) && (atom_type != AtomType::R)) {
         os << SMILES::AtomString::UNDEF_ELEMENT_SYMBOL;
         return;
     }

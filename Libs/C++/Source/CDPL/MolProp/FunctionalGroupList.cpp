@@ -28,9 +28,11 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
 
@@ -63,8 +65,32 @@ MolProp::FunctionalGroupList& MolProp::FunctionalGroupList::operator=(Functional
 
 void MolProp::FunctionalGroupList::extract(const Chem::MolecularGraph& molgraph)
 {
+    init();
     markAtoms(molgraph);
     combineMarkedAtoms(molgraph);
+}
+
+void MolProp::FunctionalGroupList::init()
+{
+    using namespace Chem;
+
+    if (funcGroupMolComps)
+        return;
+
+    setSMILESOutputCanonicalFormParameter(smilesWriter, true);
+    setSMILESOutputAtomStereoParameter(smilesWriter, false);
+    setSMILESOutputBondStereoParameter(smilesWriter, false);
+    setSMILESOutputIsotopeParameter(smilesWriter, false);
+    setSMILESMolOutputAtomMappingIDParameter(smilesWriter, false);
+    setSMILESOutputAromaticBondsParameter(smilesWriter, false);
+    setSMILESOutputSingleBondsParameter(smilesWriter, false);
+    setSMILESOutputKekuleFormParameter(smilesWriter, false);
+    setSMILESNoOrganicSubsetParameter(smilesWriter, false);
+    setSMILESRecordFormatParameter(smilesWriter, "S");
+    setOrdinaryHydrogenDepleteParameter(smilesWriter, false);
+
+    funcGroupMolComps.reset(new FragmentList());
+    funcGroupMolComps->addElement(Fragment::SharedPointer(new Fragment()));
 }
 
 void MolProp::FunctionalGroupList::markAtoms(const Chem::MolecularGraph& molgraph)
@@ -239,10 +265,130 @@ void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::Atom& atom, co
 
 void MolProp::FunctionalGroupList::generateAndSetName(Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph)
 {
+    using namespace Chem;
+
     funcGroupMol.clear();
 
-    for (auto& atom : func_grp.getAtoms())
-        setType(funcGroupMol.addAtom(), getType(atom));
+    for (auto& atom : func_grp.getAtoms()) {
+        auto& atom_copy = funcGroupMol.addAtom();
+        auto atom_type = getType(atom);
 
+        setType(atom_copy, atom_type);
+        setFormalCharge(atom_copy, getFormalCharge(atom));
+    }
+
+    for (auto& bond : func_grp.getBonds()) {
+        auto& bond_copy = funcGroupMol.addBond(func_grp.getAtomIndex(bond.getBegin()), func_grp.getAtomIndex(bond.getEnd()));
+
+        setOrder(bond_copy, getOrder(bond));
+        setAromaticityFlag(bond_copy, false);
+    }
+
+    chargeStandardizer.standardize(funcGroupMol, ProtonationStateStandardizer::MIN_CHARGED_ATOM_COUNT);
+
+    for (std::size_t i = 0, num_atoms = func_grp.getNumAtoms(); i < num_atoms; i++) {
+        auto& atom = func_grp.getAtom(i);
+        auto atom_type = getType(atom);
+        auto& atom_copy = funcGroupMol.getAtom(i);
+        
+        setImplicitHydrogenCount(atom_copy, 0);
+        setAromaticityFlag(atom_copy, getAromaticityFlag(atom));
+
+        switch (atom_type) {
+
+            case AtomType::C:
+                if (!Internal::isCarbonylLike(atom, func_grp, true, true))
+                    continue;
+
+                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                continue;
+
+            case AtomType::N:
+            case AtomType::O:
+                if (num_atoms == 1) {
+                    if (getEnvironmentCarbons(atom, func_grp, molgraph) == 1)
+                        createEnvironmentBonds(i, 1, AtomType::C, getAromaticityFlag(*envCarbons.front()));
+                    else
+                        createEnvironmentBonds(i, envCarbons.size(), AtomType::R, false);
+
+                    createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
+                    
+                } else {
+                    if (atom_type == AtomType::O) {
+                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                        createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
+
+                    } else {
+                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                        createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::R, false);
+                    }
+                }
+                
+                continue;
+                    
+            case AtomType::S:
+                 if (num_atoms == 1) {
+                     createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                     createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
+                     continue;
+                 }
+
+            default:
+                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::R, false);
+        }
+    }
     
+    setComponents(funcGroupMol, funcGroupMolComps);
+
+    funcGroupMolComps->getElement(0) = funcGroupMol;
+    strStream.str(std::string());
+
+    if (!smilesWriter.write(funcGroupMol))
+        throw Base::OperationFailed("FunctionalGroupList: could not generate functional group SMILES representation");
+    
+    setName(func_grp, strStream.str());
+}
+
+std::size_t MolProp::FunctionalGroupList::getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph)
+{
+    envCarbons.clear();
+
+    auto b_it = atom.getBondsBegin();
+
+    for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+        auto& bond = *b_it;
+
+        if (!molgraph.containsBond(bond))
+            continue;
+
+        auto& nbr_atom = *a_it;
+
+        if (!molgraph.containsAtom(nbr_atom))
+            continue;
+
+        if (func_grp.containsAtom(nbr_atom))
+            continue;
+
+        if (getType(nbr_atom) == Chem::AtomType::C)
+            envCarbons.push_back(&nbr_atom);
+    }
+
+    return envCarbons.size();
+}
+
+void MolProp::FunctionalGroupList::createEnvironmentBonds(std::size_t atom_idx, std::size_t num_bonds, unsigned int atom_type, bool aromatic)
+{
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        auto& atom = funcGroupMol.addAtom();
+
+        setType(atom, atom_type);
+        setAromaticityFlag(atom, aromatic);
+        setImplicitHydrogenCount(atom, 0);
+
+        auto& bond = funcGroupMol.addBond(atom_idx, funcGroupMol.getNumAtoms() - 1);
+
+        setOrder(bond, 1);
+        setAromaticityFlag(bond, false);
+    }
 }
