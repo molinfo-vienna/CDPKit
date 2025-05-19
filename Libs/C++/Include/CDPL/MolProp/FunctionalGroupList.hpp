@@ -76,7 +76,8 @@ namespace CDPL
 
             void generateAndSetName(Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph);
 
-            std::size_t getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph);
+            std::size_t getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp,
+                                              const Chem::MolecularGraph& molgraph, std::size_t& x_val);
 
             void createEnvironmentBonds(std::size_t atom_idx, std::size_t num_bonds, unsigned int atom_type, bool aromatic);
             

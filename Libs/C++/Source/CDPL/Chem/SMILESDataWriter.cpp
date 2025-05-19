@@ -1227,8 +1227,6 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
             case AtomType::Br:
             case AtomType::I:
                 in_brackets = (valence != 1);
-
-            case AtomType::R:
                 break;
 
             default:

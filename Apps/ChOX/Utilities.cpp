@@ -160,7 +160,6 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
     }
     
     setAtomSymbolsFromTypes(mol, false);
-
     generateMatchExpressionStrings(mol, false);
 }
 

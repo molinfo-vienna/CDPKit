@@ -613,19 +613,13 @@ Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
 {
     std::size_t isotope;
     bool iso_spec = parseNumber(isotope);
-
     char symbol[3];
     bool aromatic = parseElementSymbol(symbol, false);
-
     unsigned int perm_desig = parseStereoSpec();
-
     std::size_t impl_h_count = 0;
     bool h_count_spec = parseImplicitHCount(impl_h_count);
-
     long charge = parseCharge();
-
     std::size_t aam_id = parseReactionAtomMappingID();
-
     char c;
 
     getChar(c, false);
@@ -789,7 +783,9 @@ bool Chem::SMILESDataReader::parseElementSymbol(char symbol[3], bool org_subset)
     ungetChar();
     symbol[1] = 0;
 
-    if (strictErrorChecking && !AtomDictionary::isChemicalElement(AtomDictionary::getType(symbol)))
+    auto type = AtomDictionary::getType(symbol);
+    
+    if (strictErrorChecking && !((type == AtomType::R) || AtomDictionary::isChemicalElement(type)))
         throw Base::IOError("SMILESDataReader: invalid element symbol");
 
     return false;

@@ -87,7 +87,7 @@ void MolProp::FunctionalGroupList::init()
     setSMILESOutputKekuleFormParameter(smilesWriter, false);
     setSMILESNoOrganicSubsetParameter(smilesWriter, false);
     setSMILESRecordFormatParameter(smilesWriter, "S");
-    setOrdinaryHydrogenDepleteParameter(smilesWriter, false);
+    setOrdinaryHydrogenDepleteParameter(smilesWriter, true);
 
     funcGroupMolComps.reset(new FragmentList());
     funcGroupMolComps->addElement(Fragment::SharedPointer(new Fragment()));
@@ -271,9 +271,9 @@ void MolProp::FunctionalGroupList::generateAndSetName(Chem::Fragment& func_grp, 
 
     for (auto& atom : func_grp.getAtoms()) {
         auto& atom_copy = funcGroupMol.addAtom();
-        auto atom_type = getType(atom);
 
-        setType(atom_copy, atom_type);
+        setType(atom_copy, getType(atom));
+        setAromaticityFlag(atom_copy, getAromaticityFlag(atom));
         setFormalCharge(atom_copy, getFormalCharge(atom));
     }
 
@@ -284,61 +284,101 @@ void MolProp::FunctionalGroupList::generateAndSetName(Chem::Fragment& func_grp, 
         setAromaticityFlag(bond_copy, false);
     }
 
+    auto num_fg_atoms = func_grp.getNumAtoms();
+    
+    for (std::size_t i = 0; i < num_fg_atoms; i++) {
+        auto& atom = func_grp.getAtom(i);
+        auto b_it = atom.getBondsBegin();
+
+        for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+            auto& bond = *b_it;
+
+            if (!molgraph.containsBond(bond))
+                continue;
+
+            auto& nbr_atom = *a_it;
+
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
+
+            if (func_grp.containsAtom(nbr_atom))
+                continue;
+
+            auto& nbr_atom_copy = funcGroupMol.addAtom();
+
+            setType(nbr_atom_copy, getType(nbr_atom));
+            setFormalCharge(nbr_atom_copy, getFormalCharge(nbr_atom));
+
+            auto& bond_copy = funcGroupMol.addBond(i, funcGroupMol.getNumAtoms() - 1);
+
+            setOrder(bond_copy, getOrder(bond));
+        }
+    }
+    
     chargeStandardizer.standardize(funcGroupMol, ProtonationStateStandardizer::MIN_CHARGED_ATOM_COUNT);
 
-    for (std::size_t i = 0, num_atoms = func_grp.getNumAtoms(); i < num_atoms; i++) {
+    while (funcGroupMol.getNumAtoms() > num_fg_atoms)
+        funcGroupMol.removeAtom(funcGroupMol.getNumAtoms() - 1);
+
+    for (auto& bond : funcGroupMol.getBonds())
+        setAromaticityFlag(bond, false);
+    
+    for (std::size_t i = 0, env_x_val = 0; i < num_fg_atoms; i++) {
         auto& atom = func_grp.getAtom(i);
         auto atom_type = getType(atom);
         auto& atom_copy = funcGroupMol.getAtom(i);
-        
-        setImplicitHydrogenCount(atom_copy, 0);
-        setAromaticityFlag(atom_copy, getAromaticityFlag(atom));
 
         switch (atom_type) {
 
             case AtomType::C:
                 if (!Internal::isCarbonylLike(atom, func_grp, true, true))
-                    continue;
+                    break;
 
-                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
-                continue;
+                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val), AtomType::R, false);
+                setUnpairedElectronCount(atom_copy, env_x_val);
+                break;
 
             case AtomType::N:
             case AtomType::O:
-                if (num_atoms == 1) {
-                    if (getEnvironmentCarbons(atom, func_grp, molgraph) == 1)
+                if ((num_fg_atoms == 1) && !getAromaticityFlag(atom)) {
+                    if (getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val) == 1)
                         createEnvironmentBonds(i, 1, AtomType::C, getAromaticityFlag(*envCarbons.front()));
                     else
                         createEnvironmentBonds(i, envCarbons.size(), AtomType::R, false);
 
-                    createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
+                    setUnpairedElectronCount(atom_copy, env_x_val);
                     
                 } else {
                     if (atom_type == AtomType::O) {
-                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
-                        createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
+                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val), AtomType::R, false);
+                        setUnpairedElectronCount(atom_copy, env_x_val);
 
                     } else {
-                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                        createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val), AtomType::R, false);
+                        setUnpairedElectronCount(atom_copy, env_x_val);
                         createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::R, false);
                     }
                 }
                 
-                continue;
+                break;
                     
             case AtomType::S:
-                 if (num_atoms == 1) {
-                     createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
-                     createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::H, false);
-                     continue;
+                 if (num_fg_atoms == 1) {
+                     createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val), AtomType::R, false);
+                     setUnpairedElectronCount(atom_copy, env_x_val);
+                     break;
                  }
 
             default:
-                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph), AtomType::R, false);
+                createEnvironmentBonds(i, getEnvironmentCarbons(atom, func_grp, molgraph, env_x_val), AtomType::R, false);
+                setUnpairedElectronCount(atom_copy, env_x_val);
                 createEnvironmentBonds(i, calcImplicitHydrogenCount(atom_copy, funcGroupMol), AtomType::R, false);
         }
+
+        setImplicitHydrogenCount(atom_copy, calcImplicitHydrogenCount(atom_copy, funcGroupMol));
+        setAromaticityFlag(atom_copy, getAromaticityFlag(atom));
     }
-    
+
     setComponents(funcGroupMol, funcGroupMolComps);
 
     funcGroupMolComps->getElement(0) = funcGroupMol;
@@ -350,10 +390,12 @@ void MolProp::FunctionalGroupList::generateAndSetName(Chem::Fragment& func_grp, 
     setName(func_grp, strStream.str());
 }
 
-std::size_t MolProp::FunctionalGroupList::getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp, const Chem::MolecularGraph& molgraph)
+std::size_t MolProp::FunctionalGroupList::getEnvironmentCarbons(const Chem::Atom& atom, const Chem::Fragment& func_grp,
+                                                                const Chem::MolecularGraph& molgraph, std::size_t& x_val)
 {
     envCarbons.clear();
-
+    x_val = 0;
+    
     auto b_it = atom.getBondsBegin();
 
     for (auto a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
@@ -370,8 +412,14 @@ std::size_t MolProp::FunctionalGroupList::getEnvironmentCarbons(const Chem::Atom
         if (func_grp.containsAtom(nbr_atom))
             continue;
 
-        if (getType(nbr_atom) == Chem::AtomType::C)
+        if (getType(nbr_atom) == Chem::AtomType::C) {
+            auto order = getOrder(bond);
+
+            if (order > 1)
+                x_val += order - 1;
+
             envCarbons.push_back(&nbr_atom);
+        }
     }
 
     return envCarbons.size();
