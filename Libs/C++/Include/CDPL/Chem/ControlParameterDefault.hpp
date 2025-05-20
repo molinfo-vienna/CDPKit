@@ -195,6 +195,12 @@ namespace CDPL
             extern CDPL_CHEM_API const bool SMILES_OUTPUT_ISOTOPE;
 
             /**
+             * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_HYDROGEN_COUNT.
+             * \since 1.3
+             */
+            extern CDPL_CHEM_API const bool SMILES_OUTPUT_HYDROGEN_COUNT;
+
+            /**
              * \brief Default setting (= \c true) for the control-parameter Chem::ControlParameter::SMILES_OUTPUT_ATOM_MAPPING_ID
              *        on reaction SMILES output.
              * \since 1.2

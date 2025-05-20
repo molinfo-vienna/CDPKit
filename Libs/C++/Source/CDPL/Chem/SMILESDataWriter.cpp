@@ -165,6 +165,7 @@ void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
     ctrlParameters.canonicalize           = getSMILESOutputCanonicalFormParameter(ioBase);
     ctrlParameters.outputKekuleForm       = getSMILESOutputKekuleFormParameter(ioBase);
     ctrlParameters.outputIsotope          = getSMILESOutputIsotopeParameter(ioBase);
+    ctrlParameters.outputHCount           = getSMILESOutputHydrogenCountParameter(ioBase);
     ctrlParameters.outputAtomStereo       = getSMILESOutputAtomStereoParameter(ioBase);
     ctrlParameters.outputBondStereo       = getSMILESOutputBondStereoParameter(ioBase);
     ctrlParameters.outputRingBondStereo   = getSMILESOutputRingBondStereoParameter(ioBase);
@@ -1189,44 +1190,45 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
     std::size_t isotope = (writer.ctrlParameters.outputIsotope ? getIsotope(*atom) : 0);
     std::size_t aam_id = (writer.ctrlParameters.outputRxnAtomMappingID ? getAtomMappingID(*atom) : 0);
     int stereo_rot = (writer.ctrlParameters.outputAtomStereo ? getStereoParity() : 0);
-    std::size_t impl_h_count = calcImplicitHydrogenCount(*atom, *molGraph);
+    std::size_t impl_h_count = (writer.ctrlParameters.outputHCount ? calcImplicitHydrogenCount(*atom, *molGraph) : 0);
     bool in_brackets;
 
     if (!(in_brackets = (writer.ctrlParameters.noOrganicSubset || charge != 0 || isotope > 0 || stereo_rot != 0 || aam_id > 0))) {
-        std::size_t valence = Internal::calcExplicitValence(*atom, *molGraph) + impl_h_count;
+        std::size_t valence = (writer.ctrlParameters.outputHCount ? Internal::calcExplicitValence(*atom, *molGraph) + impl_h_count : 0);
 
         switch (atom_type) {
 
             case AtomType::B:
-                in_brackets = (valence != 3);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 3);
                 break;
 
             case AtomType::C:
-                in_brackets = (valence != 4);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 4);
                 break;
 
             case AtomType::N:
-                in_brackets = (valence != 3 || 
-                               (!writer.ctrlParameters.outputKekuleForm && getAromaticityFlag(*atom) && impl_h_count > 0));
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 3 || 
+                                                                     (!writer.ctrlParameters.outputKekuleForm &&
+                                                                      getAromaticityFlag(*atom) && impl_h_count > 0));
                 break;
 
             case AtomType::O:
-                in_brackets = (valence != 2);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 2);
                 break;
 
             case AtomType::P:
-                in_brackets = (valence != 3 && valence != 5);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 3 && valence != 5);
                 break;
 
             case AtomType::S:
-                in_brackets = (valence != 2 && valence != 4 && valence != 6);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 2 && valence != 4 && valence != 6);
                 break;
 
             case AtomType::F:
             case AtomType::Cl:
             case AtomType::Br:
             case AtomType::I:
-                in_brackets = (valence != 1);
+                in_brackets = writer.ctrlParameters.outputHCount && (valence != 1);
                 break;
 
             default:

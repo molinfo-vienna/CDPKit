@@ -122,6 +122,7 @@ namespace CDPL
                 bool        outputBondStereo;
                 bool        outputRingBondStereo;
                 bool        outputIsotope;
+                bool        outputHCount;
                 bool        outputRxnAtomMappingID;
                 bool        outputSingleBonds;
                 bool        outputAromaticBonds;

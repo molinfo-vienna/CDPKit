@@ -71,6 +71,7 @@ namespace CDPL
             const bool SMILES_OUTPUT_RING_BOND_STEREO                                       = true;
             const std::size_t SMILES_MIN_STEREO_BOND_RING_SIZE                              = 8;
             const bool SMILES_OUTPUT_ISOTOPE                                                = true;
+            const bool SMILES_OUTPUT_HYDROGEN_COUNT                                         = true;
             const bool SMILES_RXN_OUTPUT_ATOM_MAPPING_ID                                    = true;
             const bool SMILES_MOL_OUTPUT_ATOM_MAPPING_ID                                    = false;
             const bool SMILES_OUTPUT_SINGLE_BONDS                                           = false;

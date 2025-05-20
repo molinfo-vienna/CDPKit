@@ -295,6 +295,17 @@ namespace CDPL
         CDPL_CHEM_API void clearSMILESOutputIsotopeParameter(Base::ControlParameterContainer& cntnr);
 
         /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool getSMILESOutputHydrogenCountParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setSMILESOutputHydrogenCountParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasSMILESOutputHydrogenCountParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearSMILESOutputHydrogenCountParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
          * \since 1.2
          */
         CDPL_CHEM_API bool getSMILESMolOutputAtomMappingIDParameter(const Base::ControlParameterContainer& cntnr);
