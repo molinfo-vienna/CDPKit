@@ -234,18 +234,27 @@ class ControlParameter(Boost.Python.instance):
     SMILES_OUTPUT_ISOTOPE = CDPL.Base.LookupKey('SMILES_OUTPUT_ISOTOPE')
 
     ##
-    # \brief Specifies whether to generate molecule <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
+    # \brief Specifies whether to generate <em>SMILES</em> strings [\ref SMILES] with implicit hydrogen count specifications.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify the implicit hydrogen count of atoms (if non-standard). If the value of <tt>SMILES_OUTPUT_HYDROGEN_COUNT</tt> is <tt>False</tt>, the implicit hydrogen count is always left unspecified.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.3
+    # 
+    SMILES_OUTPUT_HYDROGEN_COUNT = CDPL.Base.LookupKey('SMILES_OUTPUT_HYDROGEN_COUNT')
+
+    ##
+    # \brief Specifies whether to generate molecule <em>SMILES</em> strings [\ref SMILES] that contain atom-atom mapping numbers.
+    # 
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty:ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
     # 
     # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 
     SMILES_MOL_OUTPUT_ATOM_MAPPING_ID = CDPL.Base.LookupKey('SMILES_MOL_OUTPUT_ATOM_MAPPING_ID')
 
     ##
-    # \brief Specifies whether to generate reaction <em>SMILES</em> strings [\ref SMILES] that contain reaction atom-atom mapping numbers.
+    # \brief Specifies whether to generate reaction <em>SMILES</em> strings [\ref SMILES] that contain atom-atom mapping numbers.
     # 
-    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.REACTION_ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
+    # If the control-parameter is set to <tt>True</tt>, the generated <em>SMILES</em> string will specify reaction atom-atom mapping numbers (see Chem.AtomProperty.ATOM_MAPPING_ID). If the value of <tt>SMILES_OUTPUT_ATOM_MAPPING_ID</tt> is <tt>False</tt>, atom-atom mapping numbers will not be specified.
     # 
     # <b>Value Type:</b> <tt>bool</tt> \since 1.2
     # 

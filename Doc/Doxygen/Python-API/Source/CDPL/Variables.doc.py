@@ -27,7 +27,7 @@ BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
 ##
 # \brief The <em>CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
 # 
-BUILD_TIME = 202505121140
+BUILD_TIME = 202505200831
 
 ##
 # \brief An identifier for the compiler that was used to build the <em>CDPL</em>.

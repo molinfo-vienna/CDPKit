@@ -1508,6 +1508,33 @@ def setOutputConfEnergyAsCommentParameter(cntnr: Base.ControlParameterContainer,
 # \brief 
 # \param cntnr 
 #
+def clearSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setSMILESOutputHydrogenCountParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearMultiConfImportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##

@@ -177,6 +177,13 @@ class ControlParameterDefault(Boost.Python.instance):
     SMILES_OUTPUT_ISOTOPE = True
 
     ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_HYDROGEN_COUNT.
+    # 
+    # \since 1.3
+    # 
+    SMILES_OUTPUT_HYDROGEN_COUNT = True
+
+    ##
     # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_OUTPUT_ATOM_MAPPING_ID on reaction SMILES output.
     # 
     # \since 1.2
