@@ -1,5 +1,16 @@
 master:
 
+ - New molecular graph property MolProp::FUNCTIONAL_GROUPS plus associated functions for the storage of
+   perceived functional groups (see below)
+ - New class MolProp::FunctionalGroupList plus convencience functions MolProp::perceiveFunctionalGroups()
+   that identify and extract functional group substructures of a molecular graph via the algorithm developed by P. Ertl.
+   Core atoms/bonds of detected functional groups are made available as a list of Chem::Fragment objects. The name property
+   (accessible via function Chem::getName()) of each func. group fragment then provides the generalized form of the
+   functional group as a canonical SMILES string
+ - New control-parameter Chem::SMILES_OUTPUT_HYDROGEN_COUNT (plus associated functions) allowing to control whether implicit
+   hydrogen count specifications for atoms in brackets shall be written on SMILES output (default: yes)
+ - SMILES reading/writing code has been extended to support atoms with the novel type Chem::AtomType::R
+ - New atom type constant Chem::AtomType::R for the specification of atoms representing R-groups
  - New option --conj-ring-bond-pattern of command line tool 'TautGen' for enabling (=default)/disabling the new
    conj. ring bond order flipping tautomerization rule (see below)
  - Significant improvement of the tautomer scoring function with focus on the evaluation of hydroxy-pyridine
