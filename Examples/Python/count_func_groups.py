@@ -78,7 +78,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-v',
                         dest='verb_level',
                         required=False,
-                        metavar='<0|1|2>',
+                        metavar='<0|1|2|3>',
                         choices=range(0, 4),
                         default=1,
                         help='Verbosity level (default: 1; 0 -> no console output, 1 -> info, 2 -> verbose, 3 -> extra verbose)',

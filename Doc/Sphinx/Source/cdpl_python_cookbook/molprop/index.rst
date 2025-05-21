@@ -5,3 +5,4 @@ Calculation of Molecule, Atom and Bond Properties
    :maxdepth: 2
 
    atom/index
+   molecule/index
