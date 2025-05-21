@@ -142,7 +142,9 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('print_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('print_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('print_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
-
+    errors |= checkScriptFileOutput('count_func_groups', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('test.out') ])
+  
     errors |= checkScriptFileOutput('gen_ecfp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out'), '-y', '-c' ])
     errors |= checkScriptOutput('gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
