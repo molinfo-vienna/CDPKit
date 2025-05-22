@@ -32,8 +32,8 @@ and outputs the abundances of the detected functional groups as a CSV-file.
 
  -m
 
-    Regard all encountered types of aromatic nitrogens as pyridine
-    nitrogen (default: false)
+    Consider all possible types of aromatic nitrogens as pyridine nitrogen
+    (default: false)
           
 **Code**
 
