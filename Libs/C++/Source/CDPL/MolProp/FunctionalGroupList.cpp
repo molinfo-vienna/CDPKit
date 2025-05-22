@@ -227,13 +227,13 @@ void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::MolecularGraph
         fg_ptr->addAtom(atom);
         markedAtoms.reset(i);
         
-        combineMarkedAtoms(atom, molgraph, *fg_ptr);
+        combineMarkedAtoms(atom, getAromaticityFlag(atom), molgraph, *fg_ptr);
         generateAndSetName(*fg_ptr, molgraph);
         addElement(fg_ptr);
     }
 }
 
-void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& func_grp)
+void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::Atom& atom, bool aromatic, const Chem::MolecularGraph& molgraph, Chem::Fragment& func_grp)
 {
     auto b_it = atom.getBondsBegin();
 
@@ -243,9 +243,6 @@ void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::Atom& atom, co
         if (!molgraph.containsBond(bond))
             continue;
 
-        if (getAromaticityFlag(bond))
-            continue;
-        
         auto& nbr_atom = *a_it;
 
         if (!molgraph.containsAtom(nbr_atom))
@@ -260,10 +257,15 @@ void MolProp::FunctionalGroupList::combineMarkedAtoms(const Chem::Atom& atom, co
             continue;
         }
 
+        auto nbr_arom = getAromaticityFlag(nbr_atom);
+
+        if (aromatic && nbr_arom)
+            continue;
+        
         func_grp.addAtom(nbr_atom);
         markedAtoms.reset(nbr_atom_idx);
         
-        combineMarkedAtoms(nbr_atom, molgraph, func_grp);
+        combineMarkedAtoms(nbr_atom, nbr_arom, molgraph, func_grp);
     }
 }
 

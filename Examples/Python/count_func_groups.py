@@ -26,7 +26,7 @@ import CDPL.MolProp as MolProp
 
     
 # extracts all functional groups of a given input molecule using the provided MolProp.FunctionalGroupsList instance
-# and updates their total counts
+# and updates their global counts
 def extractFunctionalGroups(func_grp_list: MolProp.FunctionalGroupList, in_mol: Chem.Molecule, func_grp_counts: dict, merge_aro_n: bool) -> int:
     Chem.calcBasicProperties(in_mol, False) # calculate required properties 
 
@@ -40,7 +40,7 @@ def extractFunctionalGroups(func_grp_list: MolProp.FunctionalGroupList, in_mol: 
             name = 'n'              # change to pyridine nitrogen type
             Chem.setName(fg, name)  # save modified name for later use
 
-        if name in func_grp_counts: # update the number of times this functional group was encountered
+        if name in func_grp_counts: # update the global number of times this functional group was encountered
             func_grp_counts[name] += 1
         else:
             func_grp_counts[name] = 1
@@ -63,7 +63,8 @@ def getLogMessage(verb_level: int, mol_id: str, func_grp_list: MolProp.Functiona
 
     
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Performs molecule fragmentation using BRICS or RECAP rules.')
+    parser = argparse.ArgumentParser(description='Perceives the functional groups of molecules read from a specified \
+    input file and outputs the abundances as a CSV-file.')
 
     parser.add_argument('-i',
                         dest='in_file',
@@ -88,7 +89,7 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Regard all encountered types of aromatic nitrogens as pyridine nitrogen (default: false)')
+                        help='Consider all possible types of aromatic nitrogens as pyridine nitrogen (default: false)')
 
     return parser.parse_args()
 
@@ -139,7 +140,7 @@ def main() -> None:
         sys.exit(f'Error: reading of molecule {mol_id} failed: {str(e)}')
 
     with open(args.out_file, 'w') as out_file:
-        out_file.write('Name,Count,Percentage\n')
+        out_file.write('Functional Group,Count,Percentage\n')
 
         for count, name in sorted( ((v,k) for k,v in func_grp_counts.items()), reverse=True):
             out_file.write(f'{name},{count},{count / tot_func_grp_count * 100.0:.3f}\n')
