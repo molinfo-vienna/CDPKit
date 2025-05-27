@@ -131,8 +131,8 @@ namespace CDPL
                     SPIRO_EDGE
                 };
 
-                void init(const MolecularGraph*, const Atom*, LGNode*, LGNode*);
-                void init(const MolecularGraph*, const Bond*, LGNode*, LGNode*);
+                void init(const MolecularGraph*, const Atom*, LGNode*, LGNode*, std::size_t);
+                void init(const MolecularGraph*, const Bond*, LGNode*, LGNode*, std::size_t);
 
                 const Atom* getSpiroCenter() const;
                 const Bond* getBond() const;
@@ -140,7 +140,8 @@ namespace CDPL
                 LGNode* otherNode(const LGNode*) const;
 
                 Type getType() const;
-
+                std::size_t getID() const;
+                
                 bool hasConfigConstraint() const;
                 bool configConstraintFulfilled(const Math::Vector2DArray&) const;
 
@@ -156,6 +157,7 @@ namespace CDPL
                 bool                  hasConfig;
                 unsigned int          configuration;
                 const Atom*           configRefAtoms[2];
+                std::size_t           id;
             };
 
             typedef std::vector<std::size_t> AtomIndexList;
@@ -197,7 +199,7 @@ namespace CDPL
 
                 virtual std::size_t getChainID() const = 0;
 
-                virtual void layout()                                                               = 0;
+                virtual void layout() = 0;
                 virtual bool layout(double, const Math::Vector2D&, std::size_t&, std::size_t, bool) = 0;
 
                 virtual bool layoutChildNodes(std::size_t&, std::size_t, bool) = 0;
@@ -340,7 +342,7 @@ namespace CDPL
                 typedef boost::unordered_set<DistConstraintKey>       DistConstraintKeySet;
                 typedef std::vector<const RingInfo*>                  RingInfoList;
                 typedef std::list<const RingInfo*>                    RingLayoutQueue;
-                typedef std::map<const Atom*, EdgeList>               EdgeListMap;
+                typedef std::map<std::size_t, EdgeList>               EdgeListMap;
                 typedef std::map<const Atom*, AngleRange>             AngleRangeMap;
                 typedef std::deque<std::size_t>                       RingSegment;
                 typedef std::vector<std::vector<NodeLayoutInfoList> > NodeLayoutInfoListTable;
@@ -423,8 +425,8 @@ namespace CDPL
                         numCollisions(num_colls) {}
 
                     std::size_t numCollisions;
-                    double      bondLength;
-                    double      edgeAngle;
+                    double      bondLength{0.0};
+                    double      edgeAngle{0.0};
                 };
 
                 void layout(double, double, const Math::Vector2D&, std::size_t, std::size_t, LayoutParameters&);
@@ -502,7 +504,7 @@ namespace CDPL
             LGEdge* allocEdge(const Atom*, LGNode*, LGNode*);
             LGEdge* allocEdge(const Bond*, LGNode*, LGNode*);
 
-            RingInfo*    allocRingInfo(const Fragment&);
+            RingInfo* allocRingInfo(const Fragment&);
             RingSysNode* allocRingSysNode(const RingInfo*, Math::Vector2DArray&);
 
             AtomNode* allocAtomNode(const Atom*, Math::Vector2DArray&);
@@ -546,6 +548,7 @@ namespace CDPL
             std::size_t           numLayoutCollisions;
             std::size_t           maxNumLayoutCollisions;
             std::size_t           backtrackingCount;
+            std::size_t           nextEdgeID;
         };
     } // namespace Chem
 } // namespace CDPL

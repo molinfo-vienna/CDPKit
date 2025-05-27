@@ -800,7 +800,7 @@ void Chem::Atom2DCoordinatesCalculator::layoutNodes()
     maxNumLayoutCollisions = 0;
     backtrackingCount = 0;
 
-    while (!layoutChildNodes(0)) 
+    while (!layoutChildNodes(0))
         backtrackingCount += BACKTRACKING_LIMIT;
 }
 
@@ -842,7 +842,7 @@ Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::al
 {
     LGEdge* edge_ptr = edgeCache.get();
 
-    edge_ptr->init(molGraph, spiro_ctr, n1, n2);
+    edge_ptr->init(molGraph, spiro_ctr, n1, n2, nextEdgeID++);
 
     edgeList.push_back(edge_ptr);
 
@@ -853,7 +853,7 @@ Chem::Atom2DCoordinatesCalculator::LGEdge* Chem::Atom2DCoordinatesCalculator::al
 {
     LGEdge* edge_ptr = edgeCache.get();
 
-    edge_ptr->init(molGraph, bond, n1, n2);
+    edge_ptr->init(molGraph, bond, n1, n2, nextEdgeID++);
 
     edgeList.push_back(edge_ptr);
 
@@ -899,6 +899,8 @@ void Chem::Atom2DCoordinatesCalculator::freeAllocEdges()
 {
     edgeList.clear();
     edgeCache.putAll();
+
+    nextEdgeID = 0;
 }
 
 void Chem::Atom2DCoordinatesCalculator::freeAllocRingInfos()
@@ -975,7 +977,7 @@ std::size_t Chem::Atom2DCoordinatesCalculator::RingInfo::getSize() const
 
 // - LGEdge -
 
-void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgraph, const Atom* spiro_ctr, LGNode* n1, LGNode* n2)
+void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgraph, const Atom* spiro_ctr, LGNode* n1, LGNode* n2, std::size_t id)
 {
     molGraph = molgraph; 
     spiroCenter = spiro_ctr; 
@@ -983,10 +985,11 @@ void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgr
     node1 = n1; 
     node2 = n2; 
     type = SPIRO_EDGE; 
-    hasConfig = false; 
+    hasConfig = false;
+    this->id = id;
 }
 
-void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgraph, const Bond* bnd, LGNode* n1, LGNode* n2)
+void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgraph, const Bond* bnd, LGNode* n1, LGNode* n2, std::size_t id)
 {
     molGraph = molgraph; 
     spiroCenter = 0; 
@@ -994,8 +997,14 @@ void Chem::Atom2DCoordinatesCalculator::LGEdge::init(const MolecularGraph* molgr
     node1 = n1; 
     node2 = n2; 
     type = BOND_EDGE; 
-    hasConfig = initConfigInfo(); 
+    hasConfig = initConfigInfo();
+    this->id = id;
 }    
+
+std::size_t Chem::Atom2DCoordinatesCalculator::LGEdge::getID() const
+{
+    return id;
+}
 
 const Chem::Atom* Chem::Atom2DCoordinatesCalculator::LGEdge::getSpiroCenter() const
 {
@@ -1081,7 +1090,7 @@ std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisions(const
                                                                           const Math::Vector2DArray& coords)
 {
     using namespace std::placeholders;
-    
+
     return std::accumulate(atoms.begin(), atoms.end(), std::size_t(0),
                            std::bind(std::plus<std::size_t>(), _1, 
                                      std::bind(&LGNode::countAtomCollisionsForAtom, this, _2, 
@@ -1332,7 +1341,7 @@ bool Chem::Atom2DCoordinatesCalculator::RingSysNode::addRing(const RingInfo* rin
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::addEdge(const Atom* atom, const LGEdge* edge)
 {
-    edgeListMap[atom].push_back(edge);
+    edgeListMap[molGraph->getAtomIndex(*atom)].push_back(edge);
 }
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::init()
@@ -1391,7 +1400,6 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::getChildNodes(NodeList& chi
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::layout()
 {
     copyCoords();
-
     commitAtomAndBondList();
 }
 
@@ -1568,7 +1576,7 @@ bool Chem::Atom2DCoordinatesCalculator::RingSysNode::setParentEdge(const LGEdge*
     parentEdge = parent_edge;
 
     if (parentEdge->getType() == LGEdge::SPIRO_EDGE)  
-        edgeListMap.erase(parentEdge->getSpiroCenter());
+        edgeListMap.erase(molGraph->getAtomIndex(*parentEdge->getSpiroCenter()));
 
     else {
         const Bond* bond = parentEdge->getBond();
@@ -1578,11 +1586,11 @@ bool Chem::Atom2DCoordinatesCalculator::RingSysNode::setParentEdge(const LGEdge*
         if (!atomMask.test(molGraph->getAtomIndex(*parentEdgeAtom)))
             parentEdgeAtom = &bond->getEnd();
 
-        EdgeListMap::iterator it = edgeListMap.find(parentEdgeAtom);
+        EdgeListMap::iterator it = edgeListMap.find(molGraph->getAtomIndex(*parentEdgeAtom));
         
         assert(it != edgeListMap.end());
 
-        createChildLayouts(it->first, it->second);
+        createChildLayouts(&molGraph->getAtom(it->first), it->second);
 
         parentEdgeAtomEdges.swap(it->second);
 
@@ -1751,7 +1759,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::createChildLayouts()
     EdgeListMap::iterator edge_map_end = edgeListMap.end();
 
     for (EdgeListMap::iterator it = edgeListMap.begin(); it != edge_map_end; ++it)
-        createChildLayouts(it->first, it->second);
+        createChildLayouts(&molGraph->getAtom(it->first), it->second);
 }
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::createChildLayouts(const Atom* atom, EdgeList& edges)
@@ -1799,7 +1807,8 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::createChildLayouts(const At
             angle_offs += ang_demand + edge_spacing;
         }
 
-        std::next_permutation(edges_beg, edges_end);
+        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+                                                        { return (e1->getID() < e2->getID()); });
     }
 
     NodeLayoutInfoListTable::value_type::iterator layouts_end = layout_list.end();
@@ -1884,7 +1893,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::copyCoords()
 {
     rsysRotAngle = 0.0;
     flipped = false;
-
+    
     AtomIndexList::const_iterator atoms_end = atomList.end();
 
     for (AtomIndexList::const_iterator it = atomList.begin(); it != atoms_end; ++it) {
@@ -1910,6 +1919,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcCoords()
     localCoords.resize(outputCoords->getSize());
 
     procAtomMask.resize(atomMask.size());
+    procAtomMask.reset();
 
     if (ringLayoutQueue.size() == 1) {
         calcCoordsForRing(ringLayoutQueue.front());
@@ -2142,10 +2152,11 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::performDistGeomLayout()
                                                     return (ri1->getSize() < ri2->getSize()); });  
     setDistConstraints.clear();
     dgCoordsGenerator.clearDistanceConstraints();
-    
+    dgCoordsGenerator.setRandomSeed(170375);
+
     for (auto ri : ringList) {
         auto rsize = ri->getSize();
-        bool has_trans_bond = false;
+        auto has_trans_bond = false;
         
         if (ri->getSize() >= DG_BS_MIN_RING_SIZE)
             has_trans_bond = addBondStereoDGConstraints(ri);
@@ -2812,8 +2823,8 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcFreeSweeps()
     EdgeListMap::const_iterator edges_end = edgeListMap.end();
 
     for (EdgeListMap::const_iterator it = edgeListMap.begin(); it != edges_end; ++it) {
-        const Atom* atom = it->first;
-        std::size_t atom_idx = molGraph->getAtomIndex(*atom);
+        std::size_t atom_idx = it->first;
+        const Atom& atom = molGraph->getAtom(atom_idx);
 
         for (RingInfoList::const_iterator r_it = rings_beg; r_it != rings_end; ++r_it) {
             const RingInfo* ring_info = *r_it;
@@ -2827,10 +2838,10 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcFreeSweeps()
 
         const Math::Vector2D& atom_pos = localCoords[atom_idx];
 
-        Atom::ConstAtomIterator nbr_atoms_end = atom->getAtomsEnd();
-        Atom::ConstBondIterator b_it = atom->getBondsBegin();
+        Atom::ConstAtomIterator nbr_atoms_end = atom.getAtomsEnd();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-        for (Atom::ConstAtomIterator a_it = atom->getAtomsBegin(); a_it != nbr_atoms_end; ++a_it, ++b_it) {
+        for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != nbr_atoms_end; ++a_it, ++b_it) {
             if (!molGraph->containsAtom(*a_it) || !molGraph->containsBond(*b_it))
                 continue;
 
@@ -2869,7 +2880,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcFreeSweeps()
             min_cf = cf;
         }
 
-        freeSweepMap.insert(AngleRangeMap::value_type(atom, free_sweep));
+        freeSweepMap.insert(AngleRangeMap::value_type(&atom, free_sweep));
 
         bond_angles.clear();
     }
@@ -2963,7 +2974,7 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::getChildNodes(NodeList& child_
         for (EdgeList::const_iterator e_it = edges.begin(); e_it != edges_end; ++e_it) {
             const LGEdge* edge = *e_it;
             LGNode* child_node = edge->otherNode(this);
-
+            
             if (child_node->setParentEdge(edge, chainDirection))
                 child_nodes.push_back(child_node);
         }
@@ -3425,8 +3436,9 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsD4()
             childLayouts[i].push_back(NodeLayoutInfo(edge, edge_angle));
         }
 
-        std::next_permutation(edges_beg, edges_end);
-    }
+        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+                                                        { return (e1->getID() < e2->getID()); });
+      }
 
     removeChildLayoutSymmetryDuplicates();
 }
@@ -3481,7 +3493,8 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsDN()
             childLayouts[i].push_back(NodeLayoutInfo(edge, edge_angle));
         }
 
-        std::next_permutation(edges_beg, edges_end);
+        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+                                                        { return (e1->getID() < e2->getID()); });
     }
 
     removeChildLayoutSymmetryDuplicates();
