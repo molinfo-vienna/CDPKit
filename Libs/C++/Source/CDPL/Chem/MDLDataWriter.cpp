@@ -230,13 +230,12 @@ namespace
 bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph, bool write_data)
 {
     init(os, false);
+    getAtomCoordsDim(molgraph);
 
     std::size_t num_confs = (multiConfExport ? getNumConformations(molgraph) : 0);
 
-    if (num_confs == 0) {
+    if ((num_confs == 0) || (coordsDim != 3)) {
         multiConfExport = false;
-
-        getAtomCoordsDim(molgraph);
 
         writeMOLHeaderBlock(os, molgraph);
         writeMOLCTab(os, molgraph);
@@ -246,8 +245,6 @@ bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
             writeSDFData(os, molgraph);
 
     } else {
-        coordsDim = 3;
-
         Util::DArray::SharedPointer conf_energies;
 
         if ((writeConfEnergySDEntry || writeConfEnergyComment || writeConfEnergyField) && hasConformerEnergies(molgraph))
@@ -332,12 +329,12 @@ void Chem::MDLDataWriter::init(std::ostream& os, bool rxn_mode)
 
 void Chem::MDLDataWriter::getAtomCoordsDim(const MolecularGraph& molgraph)
 {
-    coordsDim = getCoordinatesDimensionParameter(ioBase); 
+    coordsDim = getMDLDimensionality(molgraph);
 
     if (coordsDim == 2 || coordsDim == 3)
         return;
 
-    coordsDim = getMDLDimensionality(molgraph);
+    coordsDim = getCoordinatesDimensionParameter(ioBase); 
 
     if (coordsDim == 2 || coordsDim == 3)
         return;
