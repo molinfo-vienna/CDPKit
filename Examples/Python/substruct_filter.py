@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # substruct_filter.py 
 #

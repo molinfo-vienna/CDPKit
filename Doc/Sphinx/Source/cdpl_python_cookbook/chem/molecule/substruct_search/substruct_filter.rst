@@ -37,6 +37,6 @@ the specified SMARTS substructure pattern to the output file.
 .. literalinclude:: /downloads/substruct_filter.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/substruct_filter.py>`

@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # print_atom_physchem_props.py 
 #

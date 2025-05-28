@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_mol_ph4s.py 
 #

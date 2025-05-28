@@ -61,6 +61,6 @@ on their Gaussian shape representations and outputs the molecules translated/rot
 .. literalinclude:: /downloads/align_mols_by_shape.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/align_mols_by_shape.py>`

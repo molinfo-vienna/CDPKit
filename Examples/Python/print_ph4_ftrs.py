@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # print_ph4_ftrs.py 
 #

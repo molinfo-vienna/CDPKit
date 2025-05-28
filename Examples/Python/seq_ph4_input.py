@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # seq_ph4_input.py 
 #

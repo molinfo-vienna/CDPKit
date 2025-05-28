@@ -46,6 +46,6 @@ ligand molecules.
 .. literalinclude:: /downloads/gen_ia_ph4s.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_ia_ph4s.py>`

@@ -49,6 +49,6 @@ or RECAP rules :cite:`doi:10.1021/ci970429i`.
 .. literalinclude:: /downloads/gen_mol_frags.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_mol_frags.py>`

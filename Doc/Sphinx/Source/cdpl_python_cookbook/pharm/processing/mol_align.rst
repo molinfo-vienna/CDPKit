@@ -55,6 +55,6 @@ the molecules translated/rotated to the calculated alignment pose(s).
 .. literalinclude:: /downloads/align_mols_to_ph4.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/align_mols_to_ph4.py>`

@@ -46,6 +46,6 @@ read from a specified input file.
 .. literalinclude:: /downloads/gen_path_fp.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_path_fp.py>`

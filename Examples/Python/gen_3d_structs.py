@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_3d_structs.py 
 #

@@ -33,6 +33,6 @@ element of each atom:
 .. literalinclude:: /downloads/print_atom_elem_props.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/print_atom_elem_props.py>`

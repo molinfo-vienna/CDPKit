@@ -67,6 +67,6 @@ The script *enum_stereo.py* reads molecules from a given input file, enumerates 
 .. literalinclude:: /downloads/enum_stereo.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/enum_stereo.py>`

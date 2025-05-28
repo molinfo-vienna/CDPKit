@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # prot_phys_cond.py 
 #

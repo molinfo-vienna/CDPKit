@@ -37,6 +37,6 @@ the specified input file and writes the resulting structure to the desired outpu
 .. literalinclude:: /downloads/gen_3d_structs.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_3d_structs.py>`

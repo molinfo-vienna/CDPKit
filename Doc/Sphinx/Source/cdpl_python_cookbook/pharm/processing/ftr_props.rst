@@ -24,6 +24,6 @@ read from a specified input file and query the following feature properties:
 .. literalinclude:: /downloads/print_ph4_ftrs.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/print_ph4_ftrs.py>`

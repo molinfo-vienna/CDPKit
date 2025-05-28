@@ -40,6 +40,6 @@ and outputs the abundances of the detected functional groups as a CSV-file.
 .. literalinclude:: /downloads/count_func_groups.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/count_func_groups.py>`

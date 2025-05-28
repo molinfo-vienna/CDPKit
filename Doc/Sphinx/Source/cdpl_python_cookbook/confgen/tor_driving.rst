@@ -55,6 +55,6 @@ driving on the provided 3D structure and writes the resulting ensembles to the d
 .. literalinclude:: /downloads/tor_drive.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/tor_drive.py>`

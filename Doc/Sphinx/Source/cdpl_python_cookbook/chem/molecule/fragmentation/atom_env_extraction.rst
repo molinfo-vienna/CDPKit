@@ -13,6 +13,6 @@ of the molecules read from the specified input file.
 .. literalinclude:: /downloads/extract_atom_envs.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/extract_atom_envs.py>`

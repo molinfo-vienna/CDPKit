@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # enum_stereo.py 
 #

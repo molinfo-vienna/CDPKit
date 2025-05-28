@@ -16,6 +16,6 @@ read from a specified input file and calculate the following physicochemical ato
 .. literalinclude:: /downloads/print_atom_physchem_props.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/print_atom_physchem_props.py>`

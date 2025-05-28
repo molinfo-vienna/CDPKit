@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # clean_mol_db.py 
 #

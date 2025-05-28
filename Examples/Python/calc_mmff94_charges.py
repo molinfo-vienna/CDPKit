@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # calc_mmff94_charges.py 
 #

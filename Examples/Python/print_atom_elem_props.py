@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # print_atom_elem_props.py 
 #

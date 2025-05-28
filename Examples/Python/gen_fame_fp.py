@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_fame_fp.py 
 #

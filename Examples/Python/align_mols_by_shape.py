@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # align_mols_by_shape.py 
 #

@@ -114,6 +114,6 @@ be written to the specified output file.
 .. literalinclude:: /downloads/clean_mol_db.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/clean_mol_db.py>`

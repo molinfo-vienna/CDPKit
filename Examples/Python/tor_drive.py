@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # tor_drive.py 
 #

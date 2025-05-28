@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # count_func_goups.py 
 #

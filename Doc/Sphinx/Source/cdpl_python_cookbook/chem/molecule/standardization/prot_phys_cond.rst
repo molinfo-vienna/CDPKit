@@ -33,6 +33,6 @@ a set of given input molecules and then writes the resulting structures to the s
 .. literalinclude:: /downloads/prot_phys_cond.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/prot_phys_cond.py>`

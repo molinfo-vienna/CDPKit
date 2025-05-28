@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_maccs_key.py 
 #

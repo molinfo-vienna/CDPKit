@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # sd_proc.py 
 #

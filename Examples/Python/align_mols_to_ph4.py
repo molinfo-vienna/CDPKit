@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # align_mols_to_ph4.py 
 #

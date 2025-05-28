@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_ia_ph4s.py 
 #

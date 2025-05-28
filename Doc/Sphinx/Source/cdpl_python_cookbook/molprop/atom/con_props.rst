@@ -39,6 +39,6 @@ read from a specified input file and retrieve the following atom properties:
 .. literalinclude:: /downloads/print_atom_con_props.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/print_atom_con_props.py>`

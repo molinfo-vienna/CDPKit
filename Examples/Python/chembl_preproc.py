@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # chembl_preproc.py 
 #

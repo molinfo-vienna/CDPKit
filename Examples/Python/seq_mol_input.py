@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # seq_mol_input.py 
 #

@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # gen_path_fp.py 
 #

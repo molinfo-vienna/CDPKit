@@ -13,6 +13,6 @@ with molecules read from the specified MDL SD-file.
 .. literalinclude:: /downloads/sd_proc.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/sd_proc.py>`

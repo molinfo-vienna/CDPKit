@@ -53,6 +53,6 @@ curation pipeline workflow :cite:`Bento2020`.
 .. literalinclude:: /downloads/chembl_preproc.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/chembl_preproc.py>`

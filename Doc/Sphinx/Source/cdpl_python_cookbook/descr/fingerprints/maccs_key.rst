@@ -28,6 +28,6 @@ The script *gen_maccs_key.py* generates and outputs the 166 bit MACCS key of mol
 .. literalinclude:: /downloads/gen_maccs_key.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_maccs_key.py>`

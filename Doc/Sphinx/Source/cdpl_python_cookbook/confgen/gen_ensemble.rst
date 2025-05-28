@@ -49,6 +49,6 @@ the specified input file and writes the resulting ensembles to the desired outpu
 .. literalinclude:: /downloads/gen_confs.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_confs.py>`

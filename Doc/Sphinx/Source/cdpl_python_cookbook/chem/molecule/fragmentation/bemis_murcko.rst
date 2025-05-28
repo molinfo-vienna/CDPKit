@@ -65,6 +65,6 @@ Murcko :cite:`doi:10.1021/jm9602928`.
 .. literalinclude:: /downloads/gen_bm_frags.py
    :language: python
    :linenos:
-   :lines: 21-
+   :lines: 19-
 
 :download:`Download source file</downloads/gen_bm_frags.py>`

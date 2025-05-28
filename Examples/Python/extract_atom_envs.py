@@ -1,5 +1,3 @@
-#!/bin/env python
-
 ##
 # extract_atom_envs.py 
 #
