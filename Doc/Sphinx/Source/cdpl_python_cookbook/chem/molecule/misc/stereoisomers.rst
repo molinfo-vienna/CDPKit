@@ -38,9 +38,11 @@ The script *enum_stereo.py* reads molecules from a given input file, enumerates 
  -s
 
     Include specified atom/bond stereocenters (default: false)
+
  -x
 
     Include atom/bond stereocenters with topological symmetry (default: false)
+
  -n
 
     Include invertible nitrogen stereocenters (default: false)

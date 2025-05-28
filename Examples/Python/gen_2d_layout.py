@@ -27,7 +27,7 @@ import CDPL.Util as Util
 # computes a 2D structure layout of the argument molecule using the provided
 # Chem.Atom2DCoordinatesCalculator and  Chem.BondStereoFlagCalculator instances
 def gen2DLayout(mol: Chem.Molecule, coords_calc: Chem.Atom2DCoordinatesCalculator, bs_flags_calc: Chem.BondStereoFlagCalculator, args: argparse.Namespace) -> None:
-    # prepare the molecule for 2D structure layout
+    # calculate several properties required for 2D structure layout
     Chem.calcBasicProperties(mol, False) 
     Chem.calcCIPPriorities(mol, False)
     Chem.perceiveAtomStereoCenters(mol, False, True)
@@ -37,12 +37,12 @@ def gen2DLayout(mol: Chem.Molecule, coords_calc: Chem.Atom2DCoordinatesCalculato
 
     changes = False
     
-    if args.rem_h:
+    if args.rem_h:   # remove ordinary (with standard form. charge, isotope, connectivity) hydrogens, if desired
         changes = Chem.makeOrdinaryHydrogenDeplete(mol, Chem.AtomPropertyFlag.ISOTOPE | Chem.AtomPropertyFlag.FORMAL_CHARGE | Chem.AtomPropertyFlag.EXPLICIT_BOND_COUNT, True)
-    elif args.add_h:
+    elif args.add_h: # make hydrogen complete, if desired
         changes = Chem.makeHydrogenComplete(mol)
 
-    if changes:
+    if changes:      # if expl. hydrogen count has changed -> recompute dependent properties
         Chem.perceiveComponents(mol, True)
         Chem.calcTopologicalDistanceMatrix(mol, True)
         Chem.calcAtomStereoDescriptors(mol, True, 0, False)
@@ -50,15 +50,19 @@ def gen2DLayout(mol: Chem.Molecule, coords_calc: Chem.Atom2DCoordinatesCalculato
     else:
         Chem.calcTopologicalDistanceMatrix(mol, False)
 
-    coords = Math.Vector2DArray()
-    bs_flags = Util.UIArray()
+    coords = Math.Vector2DArray() # will store the computed 2D coordinates
+    bs_flags = Util.UIArray()     # will store the computed bond stereo flags (up, down) specifying atom (and bond) configurations
 
+    # calculate 2D coordinates
     coords_calc.calculate(mol, coords)
 
+    # store calculated 2D coordinates as corr. atom properties
     Chem.set2DCoordinates(mol, coords)
-    
+
+    # calculate bond stereo flags for the given 2D coordinates
     bs_flags_calc.calculate(mol, bs_flags)
 
+    # store bond stereo flags as corr. bond properties 
     for i in range(mol.numBonds):
         Chem.set2DStereoFlag(mol.getBond(i), bs_flags[i])
         
@@ -74,7 +78,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='out_file',
                         required=True,
                         metavar='<file>',
-                        help='Molecule output file')
+                        help='Laid out molecule output file')
     parser.add_argument('-d',
                         dest='rem_h',
                         required=False,
@@ -129,7 +133,7 @@ def main() -> None:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
             if not args.quiet:
-                print('- Performing 2D layout of molecule %s...' % mol_id)
+                print('- Computing 2D layout of molecule %s...' % mol_id)
 
             try:
                 # generate a 2D structure layout of the read molecule
