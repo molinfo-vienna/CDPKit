@@ -121,7 +121,9 @@ if __name__ == '__main__':
                                       '-p', 'c1ccccc1' ])
     errors |= checkScriptFileOutput('enum_stereo', outputFilePath('enum_stereo.smi'),
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('enum_stereo.smi') ])
-    
+    errors |= checkScriptFileOutput('gen_2d_layout', outputFilePath('gen_2d_layout.jme'),
+                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('gen_2d_layout.jme'), '-d' ])
+      
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
     errors |= checkScriptOutput('gen_ia_ph4s',
