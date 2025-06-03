@@ -647,7 +647,7 @@ Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
     if (iso_spec)
         setIsotope(atom, isotope);
 
-    if (charge != 0)
+    if (charge != std::numeric_limits<long>::max())
         setFormalCharge(atom, charge);
 
     if (!h_count_spec || (h_count_spec && impl_h_count != 0))
@@ -867,7 +867,7 @@ long Chem::SMILESDataReader::parseCharge()
 {
     using namespace SMILES;
 
-    long charge = 0;
+    long charge = std::numeric_limits<long>::max();
     char c;
 
     while (true) {
@@ -894,10 +894,13 @@ long Chem::SMILESDataReader::parseCharge()
 
         parseNumber(count);
 
+        if (charge == std::numeric_limits<long>::max())
+            charge = 0;
+
         charge += sign * count;
     }
 
-    return 0;
+    return charge;
 }
 
 std::size_t Chem::SMILESDataReader::parseReactionAtomMappingID()
