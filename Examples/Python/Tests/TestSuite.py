@@ -123,6 +123,14 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('enum_stereo.smi') ])
     errors |= checkScriptFileOutput('gen_2d_layout', outputFilePath('gen_2d_layout.jme'),
                                     [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('gen_2d_layout.jme'), '-d' ])
+
+    with open(outputFilePath('edit_mols_ptns.txt'), 'w') as ed_ptns:
+        ed_ptns.write('# Test search and result patterns\n')
+        ed_ptns.write('2 [C,S,P:1](=[O:2])-[OX1:3] [C,S,P:1](=[O:2])-[OX2:3]-[#1X1:4] 0 [x:4].[~+0:3]C(C)C')
+        ed_ptns.write('1 [C,S,P:1](=[O:2])@[OX2:3] 0 [~:1](O[H])x[~:3][H]')
+    
+    errors |= checkScriptFileOutput('edit_mols', outputFilePath('edit_mols.smi'),
+                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('edit_mols.smi'), '-p', outputFilePath('edit_mols_ptns.txt'),'-m' ])
       
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
