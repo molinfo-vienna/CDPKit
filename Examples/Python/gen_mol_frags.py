@@ -162,7 +162,7 @@ def main() -> None:
                         frag = out_frags[j]
 
                         # set fragment name encoding the parent molecule and fragment number
-                        Chem.setName(frag, mol_name + f'_F#{j + 1}') 
+                        Chem.setName(frag, f'{mol_name}_F#{j + 1}') 
                         
                         # calculate (if not present) some basic properties of the output fragments
                         # that might be required for writing (output format dependent)

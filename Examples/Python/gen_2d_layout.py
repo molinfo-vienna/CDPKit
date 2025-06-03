@@ -130,10 +130,10 @@ def main() -> None:
             if mol_id == '':
                 mol_id = '#' + str(i) # fallback if name is empty
             else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+                mol_id = f'\'{mol_id}\' (#{i})'
 
             if not args.quiet:
-                print('- Computing 2D layout of molecule %s...' % mol_id)
+                print(f'- Computing 2D layout of molecule {mol_id}...')
 
             try:
                 # generate a 2D structure layout of the read molecule
@@ -144,15 +144,15 @@ def main() -> None:
 
                 # output the laid out molecule
                 if not writer.write(mol):   
-                    sys.exit('Error: writing molecule %s failed' % mol_id)
+                    sys.exit(f'Error: writing molecule {mol_id} failed')
                         
             except Exception as e:
-                sys.exit('Error: 2D structure layout generation or output for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit(f'Error: 2D structure layout generation or output for molecule {mol_id} failed: {str(e)}')
 
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit(f'Error: reading molecule failed: {str(e)}')
 
     writer.close()
     sys.exit(0)

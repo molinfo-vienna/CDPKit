@@ -111,13 +111,12 @@ def main() -> None:
         # read and process molecules one after the other until the end of input has been reached (or a severe error occurs)
         while reader.read(in_mol):
             # compose a molecule identifier
-            mol_name = Chem.getName(in_mol).strip() 
+            mol_id = Chem.getName(in_mol).strip() 
 
-            if mol_name == '':
-                mol_name = f'Mol#{i + 1}'
+            if mol_id == '':
                 mol_id = f'#{i + 1}'  # fallback if name is empty or not available
             else:
-                mol_id = f'\'{mol_name}\' (#{i + 1})'
+                mol_id = f'\'{mol_id}\' (#{i + 1})'
          
             try:
                 # extract the functional groups of the read molecule
