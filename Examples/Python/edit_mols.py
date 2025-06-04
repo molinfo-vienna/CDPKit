@@ -23,34 +23,37 @@ import pathlib
 import CDPL.Chem as Chem
 
 
-# edits substructures the argument molecule (if found) using the provided
-# list of Chem.SubstructureEditor instances
+# exhaustively edits matching substructures of the argument molecule according to the 
+# given editing specifications that are represented by the provided corresponding list
+# of initialized Chem.SubstructureEditor instances
 def editMolecule(mol: Chem.Molecule, ed_list: list) -> int:
     # fill free valences with explicit hydrogens
     added_hs = Chem.makeHydrogenComplete(mol)  
 
-    # if hydrogens were added, invalidate perceived components (if present) since they are invalid now
+    # if hydrogens were added clear the molecular graph components property (if present) since it became invalid
     if added_hs:                               
         Chem.clearComponents(mol)
  
     num_edits = 0
 
-    # perform editing with all Chem.SubstructureEditor instances in turn
+    # perform editing with all provided Chem.SubstructureEditor instances
     for editor in ed_list:
         num_edits += editor.edit(mol)
 
-    # if struct. changes were made: clear 2D and 3D atom coordinates since they became invalid
+    # if struct. changes were made clear 2D and 3D atom coordinates since they became invalid
     if num_edits > 0 or added_hs:
-        # enforce an on-the-fly perception of atom coordinates dimensionality in case of MDL format output
-        Chem.setMDLDimensionality(mol, 0)
+        Chem.setMDLDimensionality(mol, 0)        # indicate for output in *.sdf or *.mol format that there are no atom coordinates
 
         for atom in mol.atoms:
-            Chem.clear2DCoordinates(atom)
-            Chem.clear3DCoordinates(atom)
-            Chem.clear3DCoordinatesArray(atom)
+            Chem.clear2DCoordinates(atom)        # clear 2D coordinates property
+            Chem.clear3DCoordinates(atom)        # clear 3D coordinates property
+            Chem.clear3DCoordinatesArray(atom)   # clear conformer ensemble 3D coordinates 
 
     return num_edits
 
+# creates and initializes a Chem.SubstructureEditor instance as specified
+# by the given string of substructure search, exclude (optional) and editing result patterns
+# in the format <#Search Patterns> <Search Pattern SMARTS> ...  <#Exclude Patterns> [<Exclude Pattern SMARTS> ...] <Result Pattern SMILES>
 def createSubstructureEditor(ed_ptns: str) -> Chem.SubstructureEditor:
     editor = Chem.SubstructureEditor()
     tokens = ed_ptns.split()
@@ -68,23 +71,28 @@ def createSubstructureEditor(ed_ptns: str) -> Chem.SubstructureEditor:
 
     return editor
 
+# processes the value of the argument -p which is either the path to a file containing multiple lines
+# of substructure editing specifications (one per line) or a string directly specifying a complete set
+# of search, exclude (optional) and result patterns (see above)
 def createSubstructureEditors(ed_ptns: str) -> list:
-    if pathlib.Path(ed_ptns).is_file():
+    if pathlib.Path(ed_ptns).is_file():  # if the argument value is a path to an existing file process it line by line
         editors = []
 
         with open(ed_ptns, 'r') as ed_ptns_file:
             for line in ed_ptns_file.readlines():
-                if line.startswith('#'):
+                if line.startswith('#'): # lines starting with '#' ar comment lines
                     continue
 
                 editors.append(createSubstructureEditor(line))
 
         return editors
-    
-    return [ createSubstructureEditor(ed_ptns) ]
+
+    # at this point the argument value specifies a set of search, exclude (optional) and result patterns
+    return [ createSubstructureEditor(ed_ptns) ] 
 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Performs a 2D structure layout for the given input molecules.')
+    parser = argparse.ArgumentParser(description='Performs modifications on the molecular graph of input molecules according \
+    to a given set of substructure editing patterns.')
 
     parser.add_argument('-i',
                         dest='in_file',
@@ -95,7 +103,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='out_file',
                         required=True,
                         metavar='<file>',
-                        help='Laid out molecule output file')
+                        help='Edited molecule output file')
     parser.add_argument('-p',
                         dest='patterns',
                         required=True,
@@ -155,7 +163,7 @@ def main() -> None:
                 num_changes = editMolecule(mol, ed_list)
                 
                 if not args.quiet:
-                    print(f'- Editing molecule {mol_id}: {num_changes} edit(s) performed')
+                    print(f'- Editing molecule {mol_id}: {num_changes} edit(s)')
 
                 Chem.calcBasicProperties(mol, False)
                     
