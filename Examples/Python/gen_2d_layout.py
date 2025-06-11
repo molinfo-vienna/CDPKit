@@ -25,7 +25,7 @@ import CDPL.Util as Util
 
 
 # computes a 2D structure layout of the argument molecule using the provided
-# Chem.Atom2DCoordinatesCalculator and  Chem.BondStereoFlagCalculator instances
+# Chem.Atom2DCoordinatesCalculator and Chem.BondStereoFlagCalculator instances
 def gen2DLayout(mol: Chem.Molecule, coords_calc: Chem.Atom2DCoordinatesCalculator, bs_flags_calc: Chem.BondStereoFlagCalculator, args: argparse.Namespace) -> None:
     # calculate several properties required for 2D structure layout
     Chem.calcBasicProperties(mol, False) 

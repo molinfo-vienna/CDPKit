@@ -199,15 +199,12 @@ bool Chem::SMILESDataReader::readMolecule(std::istream& is, Molecule& mol)
         return false;
 
     getParameters();
-
     readRecord(is, molSMILESString, name, "SMILESDataReader: reading of molecule data record failed");
 
     atomMappingIDOffset = getMaxAtomMappingID(mol);
 
     init(mol);
-
     parseSMILES(mol, 0);
-
     postprocBondOrders(mol);
     setAtomStereoDescriptors(mol);
     setBondStereoDescriptors(mol);

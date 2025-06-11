@@ -130,7 +130,7 @@ if __name__ == '__main__':
         ed_ptns.write('1 [C,S,P:1](=[O:2])@[OX2:3] 0 [~:1](O[H])x[~:3][H]')
     
     errors |= checkScriptFileOutput('edit_mols', outputFilePath('edit_mols.smi'),
-                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('edit_mols.smi'), '-p', outputFilePath('edit_mols_ptns.txt'),'-m' ])
+                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('edit_mols.smi'), '-p', outputFilePath('edit_mols_ptns.txt'), '-m', '-c' ])
       
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])

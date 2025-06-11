@@ -26,13 +26,21 @@ import CDPL.Chem as Chem
 # exhaustively edits matching substructures of the argument molecule according to the 
 # specified editing instructions using the provided list of initialized
 # Chem.SubstructureEditor instances
-def editMolecule(mol: Chem.Molecule, ed_list: list) -> int:
-    # fill free valences with explicit hydrogens
-    added_hs = Chem.makeHydrogenComplete(mol)  
+def editMolecule(mol: Chem.Molecule, ed_list: list, args: argparse.Namespace) -> int:
+    # calculate several required properties
+    Chem.initSubstructureSearchTarget(mol, False)
 
-    # if expl. hydrogens were added clear the molecular graph components property (if present) since it became invalid
-    if added_hs:                               
+    h_changes = False
+    
+    if args.rem_h:   # remove ordinary (with standard form. charge, isotope, connectivity) hydrogens, if desired
+        h_changes = Chem.makeOrdinaryHydrogenDeplete(mol, Chem.AtomPropertyFlag.ISOTOPE | Chem.AtomPropertyFlag.FORMAL_CHARGE | Chem.AtomPropertyFlag.EXPLICIT_BOND_COUNT, True)
+    elif args.add_h: # make hydrogen complete, if desired
+        h_changes = Chem.makeHydrogenComplete(mol)
+
+    if h_changes:      # if expl. hydrogen count has changed -> recompute/invalidate dependent properties
         Chem.clearComponents(mol)
+        Chem.calcAtomStereoDescriptors(mol, True, 0, False)
+        Chem.calcBondStereoDescriptors(mol, True, 0, False)
  
     num_edits = 0
 
@@ -41,7 +49,7 @@ def editMolecule(mol: Chem.Molecule, ed_list: list) -> int:
         num_edits += editor.edit(mol)
 
     # if structural changes were made clear 2D and 3D atom coordinates since they became invalid
-    if num_edits > 0 or added_hs:
+    if num_edits > 0 or h_changes:
         Chem.setMDLDimensionality(mol, 0)        # for output in one of the MDL formats indicate that there are no atom coordinates present
 
         for atom in mol.atoms:
@@ -115,6 +123,18 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Output input molecule before the resulting edited molecule (default: false)')
+    parser.add_argument('-d',
+                        dest='rem_h',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Remove ordinary explicit hydrogens (default: false)')
+    parser.add_argument('-c',
+                        dest='add_h',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Saturate free valences with explicit hydrogens (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -126,7 +146,7 @@ def parseArgs() -> argparse.Namespace:
 
 def main() -> None:
     args = parseArgs()
-    
+
     # create reader for input molecules (format specified by file extension)
     reader = Chem.MoleculeReader(args.in_file) 
 
@@ -139,7 +159,7 @@ def main() -> None:
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
     i = 1
-    
+
     # read and process molecules one after the other until the end of input has been reached
     try:
         while reader.read(mol):
@@ -160,7 +180,7 @@ def main() -> None:
                         sys.exit(f'Error: writing molecule {mol_id} failed')
 
                 # modify the input molecule according to the specified editing rules 
-                num_changes = editMolecule(mol, ed_list)
+                num_changes = editMolecule(mol, ed_list, args)
                 
                 if not args.quiet:
                     print(f'- Editing molecule {mol_id}: {num_changes} edit(s)')
@@ -175,7 +195,7 @@ def main() -> None:
                 sys.exit(f'Error: editing or output of molecule {mol_id} failed: {str(e)}')
 
             i += 1
-                
+
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit(f'Error: reading molecule failed: {str(e)}')
 
