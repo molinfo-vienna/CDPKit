@@ -1,5 +1,5 @@
 ##
-# CMakeLists.txt  
+# CMakeLists.txt
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -45,6 +45,12 @@ project(CDPKit VERSION "${CDPKIT_VERSION_MAJOR}.${CDPKIT_VERSION_MINOR}.${CDPKIT
 
 set(PROJECT_NAME_WITH_VERSION "${PROJECT_NAME}-${CDPKIT_VERSION}")
 
+option(CDPKIT_BUILD_APPS "build the apps" ON)
+option(CDPKIT_BUILD_PYTHON_MODULES "build the python modules" ON)
+option(CDPKIT_PACKAGE_TGZ "generate a TGZ package" OFF)
+option(CDPKIT_PACKAGE_DEB "generate a DEB package" OFF)
+option(CDPKIT_PACKAGE_RPM "generate a RPM package" OFF)
+
 if(NOT DEFINED CDPL_CXX_UNIT_TESTS_ENABLED)
   set(CDPL_CXX_UNIT_TESTS_ENABLED FALSE CACHE BOOL "Enable/disable build of c++ unit tests")
 endif()
@@ -62,7 +68,7 @@ endif(MSVC)
 
 set(CMAKE_CXX_STANDARD 17)
 
-if(APPLE) 
+if(APPLE)
   find_program(CODESIGN_EXECUTABLE codesign REQUIRED)
 
   if(NOT CDPKIT_CODE_SIGNING_IDENTITY)
@@ -74,12 +80,12 @@ elseif(WIN32)
   set(CMAKE_SHARED_LIBRARY_PREFIX "lib")
   set(CMAKE_STATIC_LIBRARY_PREFIX "lib")
   set(CMAKE_IMPORT_LIBRARY_PREFIX "lib")
-  set(CDPKIT_DEF_INSTALL_DIR "C:/Program Files") 
+  set(CDPKIT_DEF_INSTALL_DIR "C:/Program Files")
 else()
   set(CDPKIT_DEF_INSTALL_DIR "/opt")
 endif(APPLE)
 
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT) 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CDPKIT_DEF_INSTALL_DIR}/${PROJECT_NAME}" CACHE PATH "Install path prefix, prepended onto install directories" FORCE)
 endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
@@ -116,7 +122,7 @@ set(CDPKIT_BUILD_SYSTEM ${CMAKE_SYSTEM})
 set(CMAKE_MODULE_PATH "${CDPKIT_CMAKE_SCRIPTS_DIR}")
 
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(CMAKE_MACOSX_RPATH TRUE)
 
@@ -252,7 +258,7 @@ if(NOT BOOST_PYTHON_VERSIONS)
 endif(NOT BOOST_PYTHON_VERSIONS)
 
 foreach(PYTHON_VERSION ${BOOST_PYTHON_VERSIONS})
-  find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} QUIET OPTIONAL_COMPONENTS python${PYTHON_VERSION})            
+  find_package(Boost ${CDPKIT_MIN_BOOST_VERSION} QUIET OPTIONAL_COMPONENTS python${PYTHON_VERSION})
 
   if(Boost_PYTHON${PYTHON_VERSION}_FOUND)
     set(Boost_PYTHON_FOUND TRUE)
@@ -261,19 +267,21 @@ foreach(PYTHON_VERSION ${BOOST_PYTHON_VERSIONS})
   endif(Boost_PYTHON${PYTHON_VERSION}_FOUND)
 endforeach()
 
-if(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-  set(BUILD_PYTHON_MODULES TRUE)
-  set(PYTHON_TESTS_ENABLED TRUE)
-else(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-  if(PYPI_PACKAGE_BUILD)
-    message(FATAL_ERROR "!! Python library and/or Boost python library not found.")    
-  else()
-    message("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")    
-  endif(PYPI_PACKAGE_BUILD)
+if(CDPKIT_BUILD_PYTHON_MODULES)
+  if(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+    set(BUILD_PYTHON_MODULES TRUE)
+    set(PYTHON_TESTS_ENABLED TRUE)
+  else(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+    if(PYPI_PACKAGE_BUILD)
+      message(FATAL_ERROR "!! Python library and/or Boost python library not found.")
+    else()
+      message("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")
+    endif(PYPI_PACKAGE_BUILD)
 
-  set(BUILD_PYTHON_MODULES FALSE)
-  set(PYTHON_TESTS_ENABLED FALSE)
-endif(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+    set(BUILD_PYTHON_MODULES FALSE)
+    set(PYTHON_TESTS_ENABLED FALSE)
+  endif(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+endif(CDPKIT_BUILD_PYTHON_MODULES)
 
 if(NOT PYPI_PACKAGE_BUILD)
   find_package(Qt5Gui PATHS "/opt/homebrew/opt/qt@5" "/usr/local/opt/qt@5")
@@ -395,8 +403,8 @@ set(HAVE_CAIRO ${CAIRO_FOUND})
 set(HAVE_QT ${Qt5Gui_FOUND})
 set(HAVE_NUMPY ${NUMPY_FOUND})
 
-configure_file("${CDPL_INCLUDE_DIR}/CDPL/Config.hpp.in" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}/CDPL/Config.hpp") 
-configure_file("${CDPL_INCLUDE_DIR}/CDPL/Version.hpp.in" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}/CDPL/Version.hpp") 
+configure_file("${CDPL_INCLUDE_DIR}/CDPL/Config.hpp.in" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}/CDPL/Config.hpp")
+configure_file("${CDPL_INCLUDE_DIR}/CDPL/Version.hpp.in" "${CDPL_CONFIG_HEADER_INCLUDE_DIR}/CDPL/Version.hpp")
 
 configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/GenerateBuildInfoHeader.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake" @ONLY)
 add_custom_target(gen-build-info-header ALL
@@ -427,12 +435,12 @@ set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME_WITH_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 set(CPACK_PACKAGE_DEFAULT_LOCATION "${CDPKIT_DEF_INSTALL_DIR}")
 set(CPACK_PACKAGING_INSTALL_PREFIX "/")
-set(CPACK_PACKAGE_RELOCATABLE TRUE) 
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME_WITH_VERSION}")
 set(CPACK_SOURCE_GENERATOR "TGZ")
 set(CPACK_SOURCE_IGNORE_FILES "/[.]git/;.*#$;.*~$;cscope.*")
 
-set(CPACK_COMPONENTS_ALL 
+set(CPACK_COMPONENTS_ALL
   Documentation
   Examples
   CDPLSharedLibraries
@@ -440,9 +448,9 @@ set(CPACK_COMPONENTS_ALL
   CDPLStaticLibraries
   CDPLHeaderFiles
   CDPLPythonModules
-  Applications 
+  Applications
 )
-  
+
 if(WIN32)
   set(CPACK_COMPONENT_APPLICATIONS_DISPLAY_NAME "Applications")
   set(CPACK_COMPONENT_CDPLSTATICLIBRARIES_DISPLAY_NAME "Static Libraries")
@@ -499,17 +507,29 @@ else()
   set(CPACK_STGZ_HEADER_FILE "${CMAKE_CURRENT_BINARY_DIR}/CPackSTGZHeader.sh")
 endif(WIN32)
 
+if(CDPKIT_PACKAGE_TGZ)
+    LIST(APPEND CPACK_GENERATOR "TGZ")
+endif(CDPKIT_PACKAGE_TGZ)
+if(CDPKIT_PACKAGE_DEB)
+    LIST(APPEND CPACK_GENERATOR "DEB")
+endif(CDPKIT_PACKAGE_DEB)
+if(CDPKIT_PACKAGE_RPM)
+    LIST(APPEND CPACK_GENERATOR "RPM")
+endif(CDPKIT_PACKAGE_RPM)
+
 include(CPack)
 
 if(NOT PYPI_PACKAGE_BUILD)
   include(CTest)
 endif(NOT PYPI_PACKAGE_BUILD)
 
-add_subdirectory(External) 
+add_subdirectory(External)
 add_subdirectory(Libs)
 
 if(NOT PYPI_PACKAGE_BUILD)
-  add_subdirectory(Apps)
+  if(CDPKIT_BUILD_APPS)
+    add_subdirectory(Apps)
+  endif(CDPKIT_BUILD_APPS)
   add_subdirectory(Doc)
   add_subdirectory(Examples)
 endif(NOT PYPI_PACKAGE_BUILD)
@@ -518,7 +538,7 @@ if(WIN32)
   set(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
   set(CMAKE_INSTALL_SYSTEM_RUNTIME_COMPONENT CDPLSharedLibraries)
   set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION ${CDPKIT_EXECUTABLE_INSTALL_DIR})
-  
+
   include(InstallRequiredSystemLibraries)
 endif(WIN32)
 
@@ -549,7 +569,7 @@ if(NOT PYPI_PACKAGE_BUILD)
     NAMESPACE CDPKit::
     DESTINATION "${CDPKIT_PACKAGE_CONFIG_INSTALL_DIR}"
   )
- 
+
   export(EXPORT ExportedTargets
     FILE "${CMAKE_CURRENT_BINARY_DIR}/${CDPKIT_PACKAGE_CONFIG_INSTALL_DIR}/ExportedTargets.cmake"
     NAMESPACE CDPKit::)
