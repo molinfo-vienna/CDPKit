@@ -86,7 +86,7 @@ endif(WIN32 AND PYPI_PACKAGE_BUILD)
 
 install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
-if(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPKIT_BUILD_CXX_UNIT_TESTS)
   add_subdirectory(Tests)
-endif(CDPL_CXX_UNIT_TESTS_ENABLED)
+endif(CDPKIT_BUILD_CXX_UNIT_TESTS)
 

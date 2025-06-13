@@ -38,6 +38,6 @@ add_library(cdpl-internal OBJECT ${cdpl-internal_LIB_SRCS})
 
 set_target_properties(cdpl-internal PROPERTIES OUTPUT_NAME cdpl-internal CLEAN_DIRECT_OUTPUT 1)
 
-if(CDPL_CXX_UNIT_TESTS_ENABLED)
+if(CDPKIT_BUILD_CXX_UNIT_TESTS)
   add_subdirectory(Tests)
-endif(CDPL_CXX_UNIT_TESTS_ENABLED)
+endif(CDPKIT_BUILD_CXX_UNIT_TESTS)
