@@ -50,6 +50,7 @@ option(CDPKIT_BUILD_PYTHON_MODULES "Build the CDPL Python modules" ON)
 option(CDPKIT_PACKAGE_TGZ "Generate a TGZ installer package" OFF)
 option(CDPKIT_PACKAGE_DEB "Generate a DEB installer package" OFF)
 option(CDPKIT_PACKAGE_RPM "Generate a RPM installer package" OFF)
+option(CDPKIT_PACKAGE_ZIP "Generate a ZIP installer package" OFF)
 option(CDPKIT_BUILD_CXX_UNIT_TESTS "Enable the build of c++ unit tests" OFF)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DCDPL_MATH_CHECKS_DISABLE")
@@ -519,6 +520,10 @@ else()
     LIST(APPEND CPACK_GENERATOR "RPM")
   endif(CDPKIT_PACKAGE_RPM)
 endif(WIN32)
+
+if(CDPKIT_PACKAGE_ZIP)
+  LIST(APPEND CPACK_GENERATOR "ZIP")
+endif(CDPKIT_PACKAGE_ZIP)
 
 include(CPack)
 
