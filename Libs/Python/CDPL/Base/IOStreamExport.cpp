@@ -148,6 +148,16 @@ namespace
             return str();
         }
 
+        boost::python::object getBytes() const {
+            using namespace boost::python;
+            
+            checkIfClosed();
+
+            auto string = str();
+
+            return object(handle<>(PyBytes_FromStringAndSize(string.data(), string.size())));
+        }
+        
         void setValue(const std::string& value) {
             checkIfClosed();
 
@@ -200,6 +210,7 @@ void CDPLPythonBase::exportIOStreams()
         .def("isatty", &StringIOStream::isATTY, python::arg("self"))
         .def("truncate", &StringIOStream::truncate, (python::arg("self"), python::arg("length") = -1))
         .def("getvalue", &StringIOStream::getValue, python::arg("self"))
+        .def("getbytes", &StringIOStream::getBytes, python::arg("self"))
         .def("setvalue", &StringIOStream::setValue, (python::arg("self"), python::arg("value")))
         //.def("close", &StringIOStream::closeStream, python::arg("self"))
         .add_property("value", &StringIOStream::getValue, &StringIOStream::setValue);

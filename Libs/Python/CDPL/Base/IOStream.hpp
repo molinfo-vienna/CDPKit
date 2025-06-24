@@ -140,7 +140,7 @@ namespace CDPLPythonBase
             return data;
         }
 
-        void writeChars(PyObject* str)
+        void writeChars(PyObject* chars)
         {
             using namespace boost;
 
@@ -150,12 +150,26 @@ namespace CDPLPythonBase
             char*           buf;
             python::ssize_t length;
 
-            if (PyBytes_AsStringAndSize(str, &buf, &length) != 0) {
-                PyErr_SetString(PyExc_TypeError, "IOStream: write() argument must be a string");
+            if (PyBytes_Check(chars)) {
+                if (PyBytes_AsStringAndSize(chars, &buf, &length) != 0) {
+                    PyErr_SetString(PyExc_TypeError, "IOStream: write(): could not get data from bytes object");
+                    
+                    python::throw_error_already_set();
+                }
+                    
+            } else if (PyUnicode_Check(chars)) {
+                if ((buf = PyUnicode_AsUTF8AndSize(chars, &length)) == 0) {
+                    PyErr_SetString(PyExc_TypeError, "IOStream: write(): could not get UTF-8 data from unicode object");
+                    
+                    python::throw_error_already_set();
+                }
 
+            } else {
+                PyErr_SetString(PyExc_TypeError, "IOStream: write() argument must be a str or bytes object");
+                    
                 python::throw_error_already_set();
             }
-
+            
             IOStreamImpl::clear();
             IOStreamImpl::tellp();
 
@@ -194,10 +208,24 @@ namespace CDPLPythonBase
                 char*           buf;
                 python::ssize_t length;
 
-                if (PyBytes_AsStringAndSize(item, &buf, &length) != 0) {
-                    PyErr_SetString(PyExc_TypeError, "IOStream: argument to writelines() must be a sequence of strings");
+                if (PyBytes_Check(item)) {
+                    if (PyBytes_AsStringAndSize(item, &buf, &length) != 0) {
+                        PyErr_SetString(PyExc_TypeError, "IOStream: writelines(): could not get data from bytes object");
+                    
+                        python::throw_error_already_set();
+                    }
+                    
+                } else if (PyUnicode_Check(item)) {
+                    if ((buf = PyUnicode_AsUTF8AndSize(item, &length)) == 0) {
+                        PyErr_SetString(PyExc_TypeError, "IOStream: writelines(): could not get UTF-8 data from unicode object");
+                    
+                        python::throw_error_already_set();
+                    }
 
-                    boost::python::throw_error_already_set();
+                } else {
+                    PyErr_SetString(PyExc_TypeError, "IOStream: argument to writelines() must be a sequence of str or bytes objects");
+                    
+                    python::throw_error_already_set();
                 }
 
                 IOStreamImpl::write(buf, length);
