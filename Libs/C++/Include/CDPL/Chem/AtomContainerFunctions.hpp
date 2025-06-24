@@ -59,6 +59,11 @@ namespace CDPL
 
         CDPL_CHEM_API void transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx);
 
+        /*
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool align2DCoordinates(AtomContainer& cntnr, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords);
+
 
         CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append = false);
 

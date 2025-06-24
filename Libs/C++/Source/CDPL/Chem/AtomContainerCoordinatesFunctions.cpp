@@ -32,6 +32,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
+#include "CDPL/Math/KabschAlgorithm.hpp"
 
 
 using namespace CDPL; 
@@ -88,6 +89,33 @@ void Chem::transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mt
 
         set2DCoordinates(atom, tmp3);
     }
+}
+
+bool Chem::align2DCoordinates(AtomContainer& cntnr, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords)
+{
+    std::size_t num_ref_atoms = ref_atoms.getNumAtoms();
+    
+    if (num_ref_atoms == 0)
+        return false;
+
+    Math::DMatrix ref_coords_mtx(2, num_ref_atoms);
+    Math::DMatrix algnd_coords_mtx(2, num_ref_atoms);
+    
+    for (std::size_t i = 0; i < num_ref_atoms; i++) {
+        auto& ref_atom = ref_atoms.getAtom(i);
+
+        column(ref_coords_mtx, i) = ref_coords[i];
+        column(algnd_coords_mtx, i) = get2DCoordinates(ref_atom);
+    }
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+     
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    transform2DCoordinates(cntnr, kabsch_algo.getTransform());
+
+    return true;
 }
 
 void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append)
