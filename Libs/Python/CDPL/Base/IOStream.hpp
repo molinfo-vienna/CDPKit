@@ -147,16 +147,20 @@ namespace CDPLPythonBase
             checkIfClosed();
             checkIfWriteOpAllowed();
 
-            char*           buf;
-            python::ssize_t length;
-
+            python::ssize_t length = 0;
+            const char* buf = nullptr;
+            
             if (PyBytes_Check(chars)) {
-                if (PyBytes_AsStringAndSize(chars, &buf, &length) != 0) {
+                char* tmp;
+
+                if (PyBytes_AsStringAndSize(chars, &tmp, &length) != 0) {
                     PyErr_SetString(PyExc_TypeError, "IOStream: write(): could not get data from bytes object");
                     
                     python::throw_error_already_set();
                 }
-                    
+
+                buf = tmp;
+                
             } else if (PyUnicode_Check(chars)) {
                 if ((buf = PyUnicode_AsUTF8AndSize(chars, &length)) == 0) {
                     PyErr_SetString(PyExc_TypeError, "IOStream: write(): could not get UTF-8 data from unicode object");
@@ -205,15 +209,19 @@ namespace CDPLPythonBase
                 python::handle<> item_handle(python::borrowed(item));
                 Py_DECREF(item);
 
-                char*           buf;
-                python::ssize_t length;
+                const char* buf = nullptr;
+                python::ssize_t length = 0;
 
                 if (PyBytes_Check(item)) {
-                    if (PyBytes_AsStringAndSize(item, &buf, &length) != 0) {
+                    char* tmp;
+                    
+                    if (PyBytes_AsStringAndSize(item, &tmp, &length) != 0) {
                         PyErr_SetString(PyExc_TypeError, "IOStream: writelines(): could not get data from bytes object");
                     
                         python::throw_error_already_set();
                     }
+
+                    buf = tmp;
                     
                 } else if (PyUnicode_Check(item)) {
                     if ((buf = PyUnicode_AsUTF8AndSize(item, &length)) == 0) {
