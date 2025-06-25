@@ -416,6 +416,12 @@ namespace CDPL
 
         CDPL_CHEM_API void calc2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
+        /*
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo = true);
+
+        
         CDPL_CHEM_API void calcHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
 
         CDPL_CHEM_API void calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);

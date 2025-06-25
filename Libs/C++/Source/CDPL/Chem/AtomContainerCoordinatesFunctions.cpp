@@ -32,7 +32,6 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
-#include "CDPL/Math/KabschAlgorithm.hpp"
 
 
 using namespace CDPL; 
@@ -69,53 +68,17 @@ void Chem::set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coo
 
 void Chem::transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx)
 {
-    Math::Vector3D tmp1;
-    Math::Vector3D tmp2;
-    Math::Vector2D tmp3;
-
-    tmp1[2] = 1.0;
-
+    Math::Vector3D tmp;
+    
     for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
         Atom& atom = *it;
         const Math::Vector2D& coords = get2DCoordinates(atom);
 
-        tmp1[0] = coords[0];
-        tmp1[1] = coords[1];
+        tmp[0] = coords[0] * mtx(0, 0) + coords[1] * mtx(0, 1) + mtx(0, 2);
+        tmp[1] = coords[0] * mtx(1, 0) + coords[1] * mtx(1, 1) + mtx(1, 2);
 
-        prod(mtx, tmp1, tmp2);
-
-        tmp3[0] = tmp2[0];
-        tmp3[1] = tmp2[1];
-
-        set2DCoordinates(atom, tmp3);
+        set2DCoordinates(atom, tmp);
     }
-}
-
-bool Chem::align2DCoordinates(AtomContainer& cntnr, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords)
-{
-    std::size_t num_ref_atoms = ref_atoms.getNumAtoms();
-    
-    if (num_ref_atoms == 0)
-        return false;
-
-    Math::DMatrix ref_coords_mtx(2, num_ref_atoms);
-    Math::DMatrix algnd_coords_mtx(2, num_ref_atoms);
-    
-    for (std::size_t i = 0; i < num_ref_atoms; i++) {
-        auto& ref_atom = ref_atoms.getAtom(i);
-
-        column(ref_coords_mtx, i) = ref_coords[i];
-        column(algnd_coords_mtx, i) = get2DCoordinates(ref_atom);
-    }
-
-    Math::KabschAlgorithm<double> kabsch_algo;
-     
-    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
-        return false;
-
-    transform2DCoordinates(cntnr, kabsch_algo.getTransform());
-
-    return true;
 }
 
 void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append)

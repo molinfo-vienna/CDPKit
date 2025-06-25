@@ -295,6 +295,7 @@ set(cdpl-chem_LIB_SRCS
     MolecularGraphAtomTypesFromSymbolFunction.cpp
     MolecularGraphAtomSymbolsFromTypeFunction.cpp
     MolecularGraph2DCoordinatesFunction.cpp
+    MolecularGraphAlign2DCoordinatesFunctions.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
     MolecularGraphSybylAtomTypesFunction.cpp
     MolecularGraphCanonicalizationFunctions.cpp 

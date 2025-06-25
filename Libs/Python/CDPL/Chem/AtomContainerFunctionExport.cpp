@@ -48,7 +48,6 @@ namespace
     MAKE_FUNCTION_WRAPPER3(bool, calcCentroid, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
     MAKE_FUNCTION_WRAPPER3(bool, calcCenterOfMass, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
     MAKE_FUNCTION_WRAPPER3(bool, alignConformations, CDPL::Chem::AtomContainer&, CDPL::Chem::AtomContainer&, const CDPL::Math::Vector3DArray&);
-    MAKE_FUNCTION_WRAPPER3(bool, align2DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Chem::AtomContainer&, const CDPL::Math::Vector2DArray&);
 
     MAKE_FUNCTION_WRAPPER4(void, getConformation, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&, bool);
     MAKE_FUNCTION_WRAPPER4(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&, const CDPL::Chem::Atom3DCoordinatesFunction&, bool);
@@ -77,8 +76,6 @@ void CDPLPythonChem::exportAtomContainerFunctions()
                 (python::arg("cntnr"), python::arg("coords"), python::arg("append") = false));
     python::def("set2DCoordinates", &Chem::set2DCoordinates, (python::arg("cntnr"), python::arg("coords")));
     python::def("transform2DCoordinates", &Chem::transform2DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
-    python::def("align2DCoordinates", &align2DCoordinatesWrapper3, (python::arg("cntnr"), python::arg("ref_atoms"),
-                                                                  python::arg("ref_coords")));
     python::def("get3DCoordinates", &get3DCoordinatesWrapper4,
                 (python::arg("cntnr"), python::arg("coords"), python::arg("coords_func"), python::arg("append") = false));
     python::def("clearConformations", &Chem::clearConformations, python::arg("cntnr"));

@@ -30,6 +30,7 @@
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 
 #include "FunctionExports.hpp"
+#include "FunctionWrapper.hpp"
 
 
 #define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                       \
@@ -86,7 +87,9 @@ namespace
             return boost::python::object();
 
         return boost::python::str(inchi_key.c_str());
-    } 
+    }
+
+    MAKE_FUNCTION_WRAPPER4(bool, align2DCoordinates, CDPL::Chem::MolecularGraph&, CDPL::Chem::AtomContainer&, const CDPL::Math::Vector2DArray&, bool);
 }
 
 
@@ -109,6 +112,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calc2DCoordinates", &Chem::calc2DCoordinates, 
                 (python::arg("molgraph"), python::arg("overwrite")));
+    python::def("align2DCoordinates", &align2DCoordinatesWrapper4, (python::arg("cntnr"), python::arg("ref_atoms"),
+                                                                    python::arg("ref_coords"), python::arg("fix_bond_stereo") = true));
     python::def("calcHydrogen3DCoordinates", &Chem::calcHydrogen3DCoordinates, 
                 (python::arg("molgraph"), python::arg("undef_only") = true));
     python::def("calcBond2DStereoFlags", &Chem::calcBond2DStereoFlags, 
