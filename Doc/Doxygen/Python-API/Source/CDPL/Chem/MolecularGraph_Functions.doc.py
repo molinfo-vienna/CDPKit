@@ -752,6 +752,45 @@ def calc2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 ##
 # \brief 
 # \param molgraph 
+# \param atoms 
+# \param ref_coords 
+# \param fix_bond_stereo 
+# \return 
+#
+def align2DCoordinates(molgraph: MolecularGraph, atoms: AtomContainer, ref_coords: Math.Vector2DArray, fix_bond_stereo: bool = True) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param ref_atom_mpg 
+# \param fix_bond_stereo 
+# \return 
+#
+def align2DCoordinates(molgraph: MolecularGraph, ref_atom_mpg: AtomMapping, fix_bond_stereo: bool = True) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param ref_molgraph 
+# \param use_mcs 
+# \param fix_bond_stereo 
+# \return 
+#
+def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, use_mcs: bool, fix_bond_stereo: bool = True) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param ref_molgraph 
+# \param substr_ptn 
+# \param fix_bond_stereo 
+# \return 
+#
+def align2DCoordinates(molgraph: MolecularGraph, ref_molgraph: MolecularGraph, substr_ptn: MolecularGraph, fix_bond_stereo: bool = True) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
 # \param undef_only 
 #
 def calcHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass

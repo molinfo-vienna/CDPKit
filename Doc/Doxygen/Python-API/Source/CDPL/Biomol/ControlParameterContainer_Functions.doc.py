@@ -293,6 +293,33 @@ def setPDBOutputCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterCo
 # \brief 
 # \param cntnr 
 #
+def clearPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param ignore 
+#
+def setPDBIgnoreCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -342,33 +369,6 @@ def getPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) ->
 # \param output 
 #
 def setPDBOutputCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
-def clearPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param ignore 
-#
-def setPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
 # \brief 

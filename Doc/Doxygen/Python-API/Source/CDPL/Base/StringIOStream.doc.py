@@ -177,6 +177,12 @@ class StringIOStream(IOStream):
 
     ##
     # \brief 
+    # \return 
+    #
+    def getbytes() -> object: pass
+
+    ##
+    # \brief 
     # \param value 
     #
     def setvalue(value: str) -> None: pass
