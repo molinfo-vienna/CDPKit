@@ -41,18 +41,18 @@ using namespace CDPL;
 namespace
 {
 
-    double calcError(const Chem::AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords, const Math::Matrix3D& xform)
+    double calcError(const Chem::AtomContainer& atoms, const Math::Vector2DArray& ref_coords, const Math::Matrix3D& xform)
     {
         auto err = 0.0;
 
-        std::size_t num_ref_atoms = ref_atoms.getNumAtoms();
+        std::size_t num_atoms = atoms.getNumAtoms();
      
-        for (std::size_t i = 0; i < num_ref_atoms; i++) {
-            auto& ref_atom = ref_atoms.getAtom(i);
-            auto& ref_atom_coords = get2DCoordinates(ref_atom);
+        for (std::size_t i = 0; i < num_atoms; i++) {
+            auto& atom = atoms.getAtom(i);
+            auto& atom_coords = get2DCoordinates(atom);
 
-            auto trans_x = ref_atom_coords[0] * xform(0, 0) + ref_atom_coords[1] * xform(0, 1) + xform(0, 2);
-            auto trans_y = ref_atom_coords[0] * xform(1, 0) + ref_atom_coords[1] * xform(1, 1) + xform(1, 2);
+            auto trans_x = atom_coords[0] * xform(0, 0) + atom_coords[1] * xform(0, 1) + xform(0, 2);
+            auto trans_y = atom_coords[0] * xform(1, 0) + atom_coords[1] * xform(1, 1) + xform(1, 2);
 
             auto d_x = (trans_x - ref_coords[i][0]);
             auto d_y = (trans_y - ref_coords[i][1]);
@@ -60,51 +60,13 @@ namespace
             err += d_x * d_x + d_y * d_y;
         }
 
-        return std::sqrt(err / (2 * num_ref_atoms));
-    }
-}
-
-bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo)
-{
-    std::size_t num_ref_atoms = ref_atoms.getNumAtoms();
-    
-    if (num_ref_atoms == 0)
-        return false;
-
-    Math::DMatrix ref_coords_mtx(2, num_ref_atoms);
-    Math::DMatrix algnd_coords_mtx(2, num_ref_atoms);
-    
-    for (std::size_t i = 0; i < num_ref_atoms; i++) {
-        auto& ref_atom = ref_atoms.getAtom(i);
-
-        column(ref_coords_mtx, i) = ref_coords[i];
-        column(algnd_coords_mtx, i) = get2DCoordinates(ref_atom);
+        return std::sqrt(err / (2 * num_atoms));
     }
 
-    Math::KabschAlgorithm<double> kabsch_algo;
-     
-    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
-        return false;
-
-    Math::Matrix3D xform1 = kabsch_algo.getTransform();
-    auto error1 = calcError(ref_atoms, ref_coords, xform1);
-
-    for (std::size_t i = 0; i < num_ref_atoms; i++) {
-        auto& ref_atom = ref_atoms.getAtom(i);
-        auto& ref_atom_coords = get2DCoordinates(ref_atom);
+    void flipBondStereo(Chem::MolecularGraph& molgraph)
+    {
+        using namespace Chem;
         
-        column(ref_coords_mtx, i) = ref_coords[i];
-        algnd_coords_mtx(0, i) = -ref_atom_coords[0];
-        algnd_coords_mtx(1, i) = ref_atom_coords[1];
-    }
-
-    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
-        return false;
-
-    Math::Matrix3D xform2 = kabsch_algo.getTransform();
-    auto error2 = calcError(ref_atoms, ref_coords, xform2);
-
-    if (fix_bond_stereo && (error2 < error1)) {
         for (auto& bond : molgraph.getBonds()) {
             if (!has2DStereoFlag(bond))
                 continue;
@@ -114,22 +76,81 @@ bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& ref
                 case BondStereoFlag::UP:
                     set2DStereoFlag(bond, BondStereoFlag::DOWN);
                     continue;
-                    
+
                 case BondStereoFlag::REVERSE_UP:
                     set2DStereoFlag(bond, BondStereoFlag::REVERSE_DOWN);
                     continue;
-                    
+
                 case BondStereoFlag::DOWN:
                     set2DStereoFlag(bond, BondStereoFlag::UP);
                     continue;
-                    
+
                 case BondStereoFlag::REVERSE_DOWN:
                     set2DStereoFlag(bond, BondStereoFlag::REVERSE_UP);
             }
         }
     }
+}
+
+bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo)
+{
+    std::size_t num_atoms = atoms.getNumAtoms();
+    
+    if (num_atoms == 0)
+        return false;
+
+    Math::DMatrix ref_coords_mtx(2, num_atoms);
+    Math::DMatrix algnd_coords_mtx(2, num_atoms);
+    
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        auto& atom = atoms.getAtom(i);
+
+        column(ref_coords_mtx, i) = ref_coords[i];
+        column(algnd_coords_mtx, i) = get2DCoordinates(atom);
+    }
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+     
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    Math::Matrix3D xform1 = kabsch_algo.getTransform();
+    auto error1 = calcError(atoms, ref_coords, xform1);
+
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        auto& atom = atoms.getAtom(i);
+        auto& atom_coords = get2DCoordinates(atom);
+        
+        column(ref_coords_mtx, i) = ref_coords[i];
+        algnd_coords_mtx(0, i) = -atom_coords[0];
+        algnd_coords_mtx(1, i) = atom_coords[1];
+    }
+
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    Math::Matrix3D xform2 = kabsch_algo.getTransform();
+    auto error2 = calcError(atoms, ref_coords, xform2);
+
+    if (fix_bond_stereo && (error2 < error1))
+        flipBondStereo(molgraph);
     
     transform2DCoordinates(molgraph, (error1 <= error2 ? xform1 : xform2));
 
     return true;
+}
+
+bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomMapping& ref_atom_mpg, bool fix_bond_stereo)
+{
+    return false; // TODO
+}
+
+bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, bool use_mcss, bool fix_bond_stereo)
+{
+    return false; // TODO
+}
+
+bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, const MolecularGraph& ref_substr_ptn, bool fix_bond_stereo)
+{
+    return false; // TODO
 }
