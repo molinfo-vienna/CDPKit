@@ -172,7 +172,7 @@ namespace CDPL
 
                 /**
                  * \brief Returns the stored data of the currently displayed molecular structure (if any).
-                 * \param A reference to the stored Chem::MolecularGraph instance.
+                 * \return A reference to the stored Chem::MolecularGraph instance.
                  */
                 const Chem::MolecularGraph& getStructure() const;
 
