@@ -121,7 +121,7 @@ namespace CDPL
             bool                    applyDictBondOrderToStdResidues;
             bool                    applyDictAtomBondingToNonStdResidues;
             bool                    applyDictBondOrderToNonStdResidues;
-            bool                    ignoreConectRecords;
+            bool                    ignoreCONECTRecords;
             bool                    setOrdersFromCONECTRecords;
             bool                    ignoreChargeField;
             bool                    applyDictAtomCharges;

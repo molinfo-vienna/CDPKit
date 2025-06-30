@@ -389,7 +389,7 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
     applyDictBondOrderToStdResidues      = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
     applyDictAtomBondingToNonStdResidues = getPDBApplyDictAtomBondingToNonStdResiduesParameter(ioBase);
     applyDictBondOrderToNonStdResidues   = getPDBApplyDictBondOrdersToNonStdResiduesParameter(ioBase);
-    ignoreConectRecords                  = getPDBIgnoreConectRecordsParameter(ioBase);
+    ignoreCONECTRecords                  = getPDBIgnoreCONECTRecordsParameter(ioBase);
     setOrdersFromCONECTRecords           = getPDBDeduceBondOrdersFromCONECTRecordsParameter(ioBase);
     ignoreChargeField                    = getPDBIgnoreFormalChargeFieldParameter(ioBase);
     applyDictAtomCharges                 = getApplyDictFormalChargesParameter(ioBase);
@@ -526,7 +526,7 @@ std::size_t Biomol::PDBDataReader::readENDMDLRecord(Chem::Molecule& mol)
 
 std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Molecule& mol)
 {
-    if (ignoreConectRecords && !strictErrorChecking) {
+    if (ignoreCONECTRecords && !strictErrorChecking) {
         skipPDBChars(is, PDB::CONECT_DATA_LENGTH, "PDBDataReader: error while skipping characters in CONECT record");
         return PDB::CONECT_DATA_LENGTH;
     }
@@ -552,7 +552,7 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
         return chars_read;
     }
 
-    if (ignoreConectRecords)
+    if (ignoreCONECTRecords)
         return chars_read;
 
     for (SerialToAtomMap::const_iterator map_it = serialToAtomMap.begin(), maps_end = serialToAtomMap.end(); map_it != maps_end; ++ map_it) { 
@@ -577,7 +577,7 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
         for (std::size_t i = 1; i < num_atoms; i++) {
             if (!atoms[i])
                 continue;
-
+     
             if (setOrdersFromCONECTRecords) {
                 Chem::Bond* bond = atoms[0]->findBondToAtom(*atoms[i]);
 
@@ -1043,11 +1043,17 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 continue;
             }
 
+            bool atom1_is_h = (getType(*atom1) == AtomType::H);
+
+            if (atom1_is_h && atom1->getNumBonds()) {
+                ++a_it1;
+                continue;
+            }
+            
             const std::string& atom1_name = getResidueAtomName(*atom1);
             bool has_tmplt_bonds1 = (res_tmplt && ((is_std_res && applyDictAtomBondingToStdResidues) ||
                                                    (!is_std_res && applyDictAtomBondingToNonStdResidues)) &&
                                     getResTemplateAtom(*res_tmplt, atom1_name));
-            bool atom1_is_h = (getType(*atom1) == AtomType::H);
             const Math::Vector3D& atom1_pos = get3DCoordinates(*atom1);
             double cov_rad1 = MolProp::getCovalentRadius(*atom1, 1);
                 
@@ -1057,8 +1063,13 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 if (!mol.containsAtom(*atom2))
                     continue;
 
-                if (atom1_is_h && (getType(*atom2) == AtomType::H)) // do not connect hydrogens!
-                    continue;
+                if (getType(*atom2) == AtomType::H) {
+                    if (atom1_is_h) // do not connect hydrogens!
+                        continue;
+                
+                    if (atom2->getNumBonds())
+                        continue;
+                }
                 
                 bool has_tmplt_bonds2 = (res_tmplt && ((is_std_res && applyDictAtomBondingToStdResidues) ||
                                                        (!is_std_res && applyDictAtomBondingToNonStdResidues)) &&
@@ -1071,11 +1082,15 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
                 double cov_rad2 = MolProp::getCovalentRadius(*atom2, 1);
                 double dist = norm2(atom1_pos - atom2_pos);
 
-                if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE))
+                if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE)) {
                     mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
+
+                    if (atom1_is_h)
+                        break;
+                }
             }
         }
-        
+       
         if (chain_term) {             // connect residues
             std::size_t num_tmplt_link_atoms = 0;
             
@@ -1267,6 +1282,7 @@ void Biomol::PDBDataReader::perceiveBondOrders(Chem::Molecule& mol)
     std::for_each(mol.getBondsBegin() + startBondCount, mol.getBondsEnd(), 
                   std::bind(&Chem::Fragment::addBond, readMolGraph, std::placeholders::_1));
 
+    perceiveSSSR(readMolGraph, true);
     setRingFlags(readMolGraph, true);
     
     Chem::perceiveBondOrders(readMolGraph, false);

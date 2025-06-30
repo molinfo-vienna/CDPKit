@@ -163,14 +163,16 @@ namespace CDPL
 
         CDPL_BIOMOL_API void clearPDBApplyDictBondOrdersToNonStdResiduesParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.3
+         */
+        CDPL_BIOMOL_API bool getPDBIgnoreCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool getPDBIgnoreConectRecordsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void setPDBIgnoreCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool ignore);
 
-        CDPL_BIOMOL_API void setPDBIgnoreConectRecordsParameter(Base::ControlParameterContainer& cntnr, bool ignore);
+        CDPL_BIOMOL_API bool hasPDBIgnoreCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_BIOMOL_API bool hasPDBIgnoreConectRecordsParameter(const Base::ControlParameterContainer& cntnr);
-
-        CDPL_BIOMOL_API void clearPDBIgnoreConectRecordsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_BIOMOL_API void clearPDBIgnoreCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
 
 
         CDPL_BIOMOL_API bool getPDBDeduceBondOrdersFromCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);

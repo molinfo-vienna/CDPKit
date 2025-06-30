@@ -126,14 +126,14 @@ bool Biomol::PDBDataWriter::writePDBFileRecord(std::ostream& os, const Chem::Mol
         
 void Biomol::PDBDataWriter::init(std::ostream& os)
 {
-    strictErrorChecking          = getStrictErrorCheckingParameter(ioBase); 
-    checkLineLength              = getCheckLineLengthParameter(ioBase); 
-    truncLines                   = getPDBTruncateLinesParameter(ioBase);
-    resDictionary                = getResidueDictionaryParameter(ioBase);
+    strictErrorChecking           = getStrictErrorCheckingParameter(ioBase);
+    checkLineLength               = getCheckLineLengthParameter(ioBase);
+    truncLines                    = getPDBTruncateLinesParameter(ioBase);
+    resDictionary                 = getResidueDictionaryParameter(ioBase);
     outputFormCharges             = getPDBOutputFormalChargesParameter(ioBase);
-    outputConectRecords           = getPDBOutputCONECTRecordsParameter(ioBase);
-    outputConectRecsForAllBonds   = getPDBOutputCONECTRecordsForAllBondsParameter(ioBase);
-    outputConectRecsRefBondOrders = getPDBOutputCONECTRecordsReflectingBondOrderParameter(ioBase);
+    outputCONECTRecords           = getPDBOutputCONECTRecordsParameter(ioBase);
+    outputCONECTRecsForAllBonds   = getPDBOutputCONECTRecordsForAllBondsParameter(ioBase);
+    outputCONECTRecsRefBondOrders = getPDBOutputCONECTRecordsReflectingBondOrderParameter(ioBase);
 
     os.imbue(std::locale::classic());
 
@@ -142,7 +142,7 @@ void Biomol::PDBDataWriter::init(std::ostream& os)
     atomToSerialMap.clear();
     atomToResidueSerialMap.clear();
     conectRecordBonds.clear();
-    writtenConectAtomPairs.clear();
+    writtenCONECTAtomPairs.clear();
     connectedResidueLookup.clear();
 
     //numWrittenModels = 0;
@@ -214,7 +214,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 {
     using namespace Chem;
 
-    if (!outputConectRecords)
+    if (!outputCONECTRecords)
         return;
 
     auto& res_dict = getResidueDictionary();
@@ -231,7 +231,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
         if (!molgraph.containsAtom(atom2))
             continue;
 
-        if (outputConectRecsForAllBonds) {
+        if (outputCONECTRecsForAllBonds) {
             conectRecordBonds.insert(&bond);
             continue;
         }
@@ -457,7 +457,7 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
     using namespace Chem;
     using namespace Internal;
 
-    if (!outputConectRecords)
+    if (!outputCONECTRecords)
         return;
 
     BondSet::const_iterator conect_bonds_end = conectRecordBonds.end();
@@ -477,10 +477,10 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
             const Atom& nbr_atom = bond.getNeighbor(atom);
             long nbr_serial = atomToSerialMap[&nbr_atom];
 
-            if (!writtenConectAtomPairs.insert(SerialPair(serial, nbr_serial)).second)
+            if (!writtenCONECTAtomPairs.insert(SerialPair(serial, nbr_serial)).second)
                 continue;
 
-            if (outputConectRecsRefBondOrders) {
+            if (outputCONECTRecsRefBondOrders) {
                 for (std::size_t i = 0, order = getOrder(bond); i < order; i++)
                     nbrAtomSerials.push_back(nbr_serial);
             } else
