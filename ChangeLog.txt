@@ -1,5 +1,6 @@
 master:
 
+ - Renamed functions Biomol::*PDBIgnoreConectRecordsParameter() into Biomol::*PDBIgnoreCONECTRecordsParameter()
  - Fixed methods write() and writelines() of class Base.IOStream() which both failed when being called with an argument of
    type str or sequences thereof
  - New method getbytes() of class Base.StringIOStream() that allows to retrieve written data
