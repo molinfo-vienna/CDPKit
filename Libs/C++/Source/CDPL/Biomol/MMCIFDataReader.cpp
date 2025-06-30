@@ -839,9 +839,15 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
                 continue;
             }
 
+            auto atom1_is_h = (getType(*atom1) == AtomType::H);
+            
+            if (atom1_is_h && atom1->getNumBonds()) {
+                ++a_it1;
+                continue;
+            }
+            
             auto& atom1_name = getResidueAtomName(*atom1);
             auto has_tmplt_bonds1 = (applyDictAtomBonding && comp.hasAtom(atom1_name));
-            auto atom1_is_h = (getType(*atom1) == AtomType::H);
             auto& atom1_pos = get3DCoordinates(*atom1);
             auto cov_rad1 = MolProp::getCovalentRadius(*atom1, 1);
                 
@@ -851,8 +857,13 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
                 if (!mol.containsAtom(*atom2))
                     continue;
 
-                if (atom1_is_h && (getType(*atom2) == AtomType::H)) // do not connect hydrogens!
-                    continue;
+                if (getType(*atom2) == AtomType::H) {
+                    if (atom1_is_h) // do not connect hydrogens!
+                        continue;
+                
+                    if (atom2->getNumBonds())
+                        continue;
+                }
                 
                 auto has_tmplt_bonds2 = (applyDictAtomBonding && comp.hasAtom(getResidueAtomName(*atom2)));
 
@@ -863,8 +874,12 @@ void Biomol::MMCIFDataReader::postprocAtomSites(Chem::Molecule& mol)
                 auto cov_rad2 = MolProp::getCovalentRadius(*atom2, 1);
                 auto dist = norm2(atom1_pos - atom2_pos);
 
-                if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE))
+                if (dist > MIN_BOND_LENGTH && dist <= (cov_rad1 + cov_rad2 + BOND_LENGTH_TOLERANCE)) {
                     mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
+
+                    if (atom1_is_h)
+                        break;
+                }
             }
         }
 
