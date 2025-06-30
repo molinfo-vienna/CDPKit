@@ -57,6 +57,7 @@ namespace CDPL
     {
 
         class Molecule;
+        class AtomMapping;
 
         CDPL_CHEM_API const std::string& getName(const MolecularGraph& molgraph);
 
@@ -416,10 +417,25 @@ namespace CDPL
 
         CDPL_CHEM_API void calc2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
-        /*
+        /**
          * \since 1.3
          */
-        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& ref_atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo = true);
+        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo = true);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const AtomMapping& ref_atom_mpg, bool fix_bond_stereo = true);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, bool use_mcss, bool fix_bond_stereo = true);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, const MolecularGraph& substr_ptn, bool fix_bond_stereo = true);
 
         
         CDPL_CHEM_API void calcHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);

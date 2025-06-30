@@ -27,6 +27,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 
 #include "FunctionExports.hpp"
@@ -112,8 +113,14 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calc2DCoordinates", &Chem::calc2DCoordinates, 
                 (python::arg("molgraph"), python::arg("overwrite")));
-    python::def("align2DCoordinates", &align2DCoordinatesWrapper4, (python::arg("cntnr"), python::arg("ref_atoms"),
-                                                                    python::arg("ref_coords"), python::arg("fix_bond_stereo") = true));
+    python::def("align2DCoordinates", &align2DCoordinatesWrapper4,
+                (python::arg("molgraph"), python::arg("atoms"), python::arg("ref_coords"), python::arg("fix_bond_stereo") = true));
+    python::def("align2DCoordinates", static_cast<bool(*)(Chem::MolecularGraph&, const Chem::AtomMapping&, bool)>(&Chem::align2DCoordinates),
+                (python::arg("molgraph"), python::arg("ref_atom_mpg"), python::arg("fix_bond_stereo") = true));
+    python::def("align2DCoordinates", static_cast<bool(*)(Chem::MolecularGraph&, const Chem::MolecularGraph&, bool, bool)>(&Chem::align2DCoordinates),
+                (python::arg("molgraph"), python::arg("ref_molgraph"), python::arg("use_mcs"), python::arg("fix_bond_stereo") = true));
+    python::def("align2DCoordinates", static_cast<bool(*)(Chem::MolecularGraph&, const Chem::MolecularGraph&, const Chem::MolecularGraph&, bool)>(&Chem::align2DCoordinates),
+                (python::arg("molgraph"), python::arg("ref_molgraph"), python::arg("substr_ptn"), python::arg("fix_bond_stereo") = true));
     python::def("calcHydrogen3DCoordinates", &Chem::calcHydrogen3DCoordinates, 
                 (python::arg("molgraph"), python::arg("undef_only") = true));
     python::def("calcBond2DStereoFlags", &Chem::calcBond2DStereoFlags, 
