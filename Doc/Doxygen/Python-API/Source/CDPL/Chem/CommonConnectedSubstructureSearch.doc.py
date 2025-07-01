@@ -51,6 +51,24 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
+    # \brief 
+    # \param func 
+    #
+    def setAtomMatchExpressionFunction(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setBondMatchExpressionFunction(func: BondMatchExpressionPtrBondFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setMolecularGraphMatchExpressionFunction(func: MolGraphMatchExpressionPtrMolGraphFunctor) -> None: pass
+
+    ##
     # \brief Searches for a common connected substructure between the query and the specified target molecular graph.
     # 
     # The method does not store any atom/bond mappings between query and target substructures - it just tells if a valid common substructure mapping solution involving at least getMinSubstructureSize() atoms could be found. If you need access to the atom/bond mappings, use findAllMappings() or findMaxMappings() instead.
