@@ -29,9 +29,13 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
 #include "CDPL/Math/KabschAlgorithm.hpp"
 
 
@@ -41,21 +45,16 @@ using namespace CDPL;
 namespace
 {
 
-    double calcError(const Chem::AtomContainer& atoms, const Math::Vector2DArray& ref_coords, const Math::Matrix3D& xform)
+    double calcError(const Math::DMatrix& ref_coords_mtx, const Math::DMatrix& algnd_coords_mtx, const Math::Matrix3D& xform)
     {
         auto err = 0.0;
-
-        std::size_t num_atoms = atoms.getNumAtoms();
+        std::size_t num_atoms = ref_coords_mtx.getSize2();
      
         for (std::size_t i = 0; i < num_atoms; i++) {
-            auto& atom = atoms.getAtom(i);
-            auto& atom_coords = get2DCoordinates(atom);
-
-            auto trans_x = atom_coords[0] * xform(0, 0) + atom_coords[1] * xform(0, 1) + xform(0, 2);
-            auto trans_y = atom_coords[0] * xform(1, 0) + atom_coords[1] * xform(1, 1) + xform(1, 2);
-
-            auto d_x = (trans_x - ref_coords[i][0]);
-            auto d_y = (trans_y - ref_coords[i][1]);
+            auto trans_x = algnd_coords_mtx(0, i) * xform(0, 0) + algnd_coords_mtx(1, i) * xform(0, 1) + xform(0, 2);
+            auto trans_y = algnd_coords_mtx(0, i) * xform(1, 0) + algnd_coords_mtx(1, i) * xform(1, 1) + xform(1, 2);
+            auto d_x = (trans_x - ref_coords_mtx(0, i));
+            auto d_y = (trans_y - ref_coords_mtx(1, i));
             
             err += d_x * d_x + d_y * d_y;
         }
@@ -90,11 +89,38 @@ namespace
             }
         }
     }
+
+    class DefAtomMatchExpression :
+        public Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const Chem::Atom& query_atom, const Chem::MolecularGraph&,
+                        const Chem::Atom& target_atom, const Chem::MolecularGraph&,
+                        const Base::Any&) const
+        {
+            return Chem::atomTypesMatch(getType(query_atom), getType(target_atom));
+        }
+    };
+
+    class DefBondMatchExpression :
+        public Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>
+    {
+
+      public:
+        bool operator()(const Chem::Bond& query_bond, const Chem::MolecularGraph&,
+                        const Chem::Bond& target_bond, const Chem::MolecularGraph&,
+                        const Base::Any&) const
+        {
+            return (getOrder(query_bond) == getOrder(target_bond) ||
+                    getAromaticityFlag(query_bond) || getAromaticityFlag(target_bond));
+        }
+    };
 }
 
 bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& atoms, const Math::Vector2DArray& ref_coords, bool fix_bond_stereo)
 {
-    std::size_t num_atoms = atoms.getNumAtoms();
+    auto num_atoms = atoms.getNumAtoms();
     
     if (num_atoms == 0)
         return false;
@@ -115,42 +141,254 @@ bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomContainer& ato
         return false;
 
     Math::Matrix3D xform1 = kabsch_algo.getTransform();
-    auto error1 = calcError(atoms, ref_coords, xform1);
+    auto error1 = calcError(ref_coords_mtx, algnd_coords_mtx, xform1);
 
-    for (std::size_t i = 0; i < num_atoms; i++) {
-        auto& atom = atoms.getAtom(i);
-        auto& atom_coords = get2DCoordinates(atom);
-        
-        column(ref_coords_mtx, i) = ref_coords[i];
-        algnd_coords_mtx(0, i) = -atom_coords[0];
-        algnd_coords_mtx(1, i) = atom_coords[1];
-    }
+    for (std::size_t i = 0; i < num_atoms; i++)
+        algnd_coords_mtx(0, i) = -algnd_coords_mtx(0, i);
 
     if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
         return false;
 
     Math::Matrix3D xform2 = kabsch_algo.getTransform();
-    auto error2 = calcError(atoms, ref_coords, xform2);
 
-    if (fix_bond_stereo && (error2 < error1))
-        flipBondStereo(molgraph);
+    if (calcError(ref_coords_mtx, algnd_coords_mtx, xform2) < error1) {
+        xform2(0, 0) = -xform2(0, 0);
+        xform2(1, 0) = -xform2(1, 0);
+
+        if (fix_bond_stereo)
+            flipBondStereo(molgraph);
     
-    transform2DCoordinates(molgraph, (error1 <= error2 ? xform1 : xform2));
+        transform2DCoordinates(molgraph, xform2);
+
+    } else
+        transform2DCoordinates(molgraph, xform1);
 
     return true;
 }
 
 bool Chem::align2DCoordinates(MolecularGraph& molgraph, const AtomMapping& ref_atom_mpg, bool fix_bond_stereo)
 {
-    return false; // TODO
+    auto num_atoms = ref_atom_mpg.getSize();
+    
+    if (num_atoms == 0)
+        return false;
+    
+    Math::DMatrix ref_coords_mtx(2, num_atoms);
+    Math::DMatrix algnd_coords_mtx(2, num_atoms);
+    std::size_t i = 0;
+    
+    for (auto [mg_atom, ref_atom] : ref_atom_mpg) {
+        if (!mg_atom)
+            return false;
+
+        if (!ref_atom)
+            return false;
+        
+        column(ref_coords_mtx, i) = get2DCoordinates(*ref_atom);
+        column(algnd_coords_mtx, i++) = get2DCoordinates(*mg_atom);
+    }
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+     
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    Math::Matrix3D xform1 = kabsch_algo.getTransform();
+    auto error1 = calcError(ref_coords_mtx, algnd_coords_mtx, xform1);
+   
+    for (i = 0; i < num_atoms; i++)
+        algnd_coords_mtx(0, i) = -algnd_coords_mtx(0, i);
+  
+    if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+        return false;
+
+    Math::Matrix3D xform2 = kabsch_algo.getTransform();
+
+    if (calcError(ref_coords_mtx, algnd_coords_mtx, xform2) < error1) {
+        xform2(0, 0) = -xform2(0, 0);
+        xform2(1, 0) = -xform2(1, 0);
+
+        if (fix_bond_stereo)
+            flipBondStereo(molgraph);
+    
+        transform2DCoordinates(molgraph, xform2);
+
+    } else
+        transform2DCoordinates(molgraph, xform1);
+
+    return true;
 }
 
 bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, bool use_mcss, bool fix_bond_stereo)
 {
-    return false; // TODO
+    typedef MatchExpression<MolecularGraph> MolGraphMatchExpression;
+    
+    static const DefAtomMatchExpression::SharedPointer  DEF_ATOM_MATCH_EXPR(new DefAtomMatchExpression());
+    static const DefBondMatchExpression::SharedPointer  DEF_BOND_MATCH_EXPR(new DefBondMatchExpression());
+    static const MolGraphMatchExpression::SharedPointer DEF_MOLGRAPH_MATCH_EXPR(new MolGraphMatchExpression());
+        
+    auto num_atoms = ref_molgraph.getNumAtoms();
+
+    if (num_atoms == 0)
+        return false;
+
+    if (use_mcss) {
+        CommonConnectedSubstructureSearch sub_search(ref_molgraph);
+        // TODO
+        return false;
+    }
+    
+    SubstructureSearch sub_search(ref_molgraph);
+
+    sub_search.setAtomMatchExpressionFunction([](const Atom& atom) {
+                                                  if (hasMatchExpression(atom))
+                                                      return getMatchExpression(atom);
+
+                                                  return DEF_ATOM_MATCH_EXPR;
+                                              });
+    sub_search.setBondMatchExpressionFunction([](const Bond& bond) {
+                                                  if (hasMatchExpression(bond))
+                                                      return getMatchExpression(bond);
+
+                                                  return DEF_BOND_MATCH_EXPR;
+                                              });
+    sub_search.setMolecularGraphMatchExpressionFunction([](const MolecularGraph& molgraph) {
+                                                            if (hasMatchExpression(molgraph))
+                                                                return getMatchExpression(molgraph);
+
+                                                            return DEF_MOLGRAPH_MATCH_EXPR;
+                                              });
+    
+    if (!sub_search.findMappings(molgraph))
+        return false;
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+    Math::DMatrix ref_coords_mtx(2, num_atoms);
+    Math::DMatrix algnd_coords_mtx(2, num_atoms);
+    Math::Matrix3D best_xform;
+    auto best_error = -1.0;
+    bool flipped = false;
+
+    for (auto& mg_match : sub_search) {
+        std::size_t i = 0;
+
+        for (auto [ref_atom, atom] : mg_match.getAtomMapping()) {
+            column(ref_coords_mtx, i) = get2DCoordinates(*ref_atom);
+            column(algnd_coords_mtx, i++) = get2DCoordinates(*atom);
+        }
+
+        if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+            return false;
+
+        Math::Matrix3D xform = kabsch_algo.getTransform();
+        auto error = calcError(ref_coords_mtx, algnd_coords_mtx, xform);
+
+        if ((best_error < 0) || (error < best_error)) {
+            best_error = error;
+            best_xform = xform;
+            flipped = false;
+        }
+
+        for (i = 0; i < num_atoms; i++)
+            algnd_coords_mtx(0, i) = -algnd_coords_mtx(0, i);
+  
+        if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+            return false;
+
+        xform = kabsch_algo.getTransform();
+        error = calcError(ref_coords_mtx, algnd_coords_mtx, xform);
+            
+        if (error < best_error) {
+            best_error = error;
+            best_xform = xform;
+            flipped = true;
+        }
+    }
+
+    if (flipped) {
+        best_xform(0, 0) = -best_xform(0, 0);
+        best_xform(1, 0) = -best_xform(1, 0);
+
+        if (fix_bond_stereo)
+            flipBondStereo(molgraph);
+    }
+
+    transform2DCoordinates(molgraph, best_xform);
+    return true;
 }
 
 bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& ref_molgraph, const MolecularGraph& ref_substr_ptn, bool fix_bond_stereo)
 {
-    return false; // TODO
+    auto num_atoms = ref_substr_ptn.getNumAtoms();
+
+    if (num_atoms == 0)
+        return false;
+ 
+    SubstructureSearch sub_search1(ref_substr_ptn);
+
+    if (!sub_search1.findMappings(molgraph))
+        return false;
+
+    SubstructureSearch sub_search2(ref_substr_ptn);
+    
+    if (!sub_search2.findMappings(ref_molgraph))
+        return false;
+
+    Math::KabschAlgorithm<double> kabsch_algo;
+    Math::DMatrix ref_coords_mtx(2, num_atoms);
+    Math::DMatrix algnd_coords_mtx(2, num_atoms);
+    Math::Matrix3D best_xform;
+    auto best_error = -1.0;
+    bool flipped = false;
+
+    for (auto& mg_match : sub_search1) {
+        for (auto& ref_mg_match : sub_search2) {
+            std::size_t i = 0;
+
+            for (auto [ptn_atom, mg_atom] : mg_match.getAtomMapping()) {
+                auto ref_atom = ref_mg_match.getAtomMapping()[ptn_atom];
+
+                column(ref_coords_mtx, i) = get2DCoordinates(*ref_atom);
+                column(algnd_coords_mtx, i++) = get2DCoordinates(*mg_atom);
+            }
+
+            if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+                return false;
+
+            Math::Matrix3D xform = kabsch_algo.getTransform();
+            auto error = calcError(ref_coords_mtx, algnd_coords_mtx, xform);
+
+            if ((best_error < 0) || (error < best_error)) {
+                best_error = error;
+                best_xform = xform;
+                flipped = false;
+            }
+
+            for (i = 0; i < num_atoms; i++)
+                algnd_coords_mtx(0, i) = -algnd_coords_mtx(0, i);
+  
+            if (!kabsch_algo.align(algnd_coords_mtx, ref_coords_mtx))
+                return false;
+
+            xform = kabsch_algo.getTransform();
+            error = calcError(ref_coords_mtx, algnd_coords_mtx, xform);
+            
+            if (error < best_error) {
+                best_error = error;
+                best_xform = xform;
+                flipped = true;
+            }
+        }
+    }
+
+    if (flipped) {
+        best_xform(0, 0) = -best_xform(0, 0);
+        best_xform(1, 0) = -best_xform(1, 0);
+
+        if (fix_bond_stereo)
+            flipBondStereo(molgraph);
+    }
+
+    transform2DCoordinates(molgraph, best_xform);
+    return true;
 }
