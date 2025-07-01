@@ -329,6 +329,7 @@ bool Chem::SubstructureSearch::findEquivAtoms()
         for (std::size_t j = 0; j < numTargetAtoms; j++) {
             if (!checkAtomMappingConstraints(i, j))
                 continue;
+
             const Atom& target_atom = target->getAtom(j);
 
             if (expr(query_atom, *query, target_atom, *target, Base::Any())) {
