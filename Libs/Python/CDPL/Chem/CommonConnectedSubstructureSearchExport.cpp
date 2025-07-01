@@ -48,7 +48,13 @@ void CDPLPythonChem::exportCommonConnectedSubstructureSearch()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
              [python::with_custodian_and_ward<1, 2>()])
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CommonConnectedSubstructureSearch>())    
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CommonConnectedSubstructureSearch>())
+        .def("setAtomMatchExpressionFunction", &Chem::CommonConnectedSubstructureSearch::setAtomMatchExpressionFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setBondMatchExpressionFunction", &Chem::CommonConnectedSubstructureSearch::setBondMatchExpressionFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setMolecularGraphMatchExpressionFunction", &Chem::CommonConnectedSubstructureSearch::setMolecularGraphMatchExpressionFunction, 
+             (python::arg("self"), python::arg("func")))
         .def("mappingExists", &Chem::CommonConnectedSubstructureSearch::mappingExists, 
              (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
         .def("findAllMappings", &Chem::CommonConnectedSubstructureSearch::findAllMappings, 

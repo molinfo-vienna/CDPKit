@@ -47,13 +47,18 @@ using namespace CDPL;
 
 
 Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(): 
-    query(0), mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true),
+    query(0),
+    atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
+    bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)),
+    mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true),
     uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0), minSubstructureSize(0) 
 {
     mappingCache.setCleanupFunction(&AtomBondMapping::clear);
 }
 
 Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(const MolecularGraph& query): 
+    atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
+    bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)),
     mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), numMappedAtoms(0), 
     maxNumMappings(0), minSubstructureSize(0) 
 {
@@ -63,6 +68,21 @@ Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(const
 }
 
 Chem::CommonConnectedSubstructureSearch::~CommonConnectedSubstructureSearch() {}
+
+void Chem::CommonConnectedSubstructureSearch::setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func)
+{
+    atomMatchExprFunc = func;
+}
+
+void Chem::CommonConnectedSubstructureSearch::setBondMatchExpressionFunction(const BondMatchExpressionFunction& func)
+{
+    bondMatchExprFunc = func;
+}
+
+void Chem::CommonConnectedSubstructureSearch::setMolecularGraphMatchExpressionFunction(const MolecularGraphMatchExpressionFunction& func)
+{
+    molGraphMatchExprFunc = func;
+}
 
 bool Chem::CommonConnectedSubstructureSearch::mappingExists(const MolecularGraph& target)
 {
@@ -267,7 +287,7 @@ void Chem::CommonConnectedSubstructureSearch::initMatchExpressions()
 
     for (MolecularGraph::ConstAtomIterator it = query->getAtomsBegin(); it != atoms_end; ++it) {
         const Atom* atom = &*it;
-        const MatchExpression<Atom, MolecularGraph>::SharedPointer& expr = getMatchExpression(*atom);
+        const MatchExpression<Atom, MolecularGraph>::SharedPointer& expr = atomMatchExprFunc(*atom);
 
         if (expr->requiresAtomBondMapping())
             postMappingMatchAtoms.push_back(atom);
@@ -285,7 +305,7 @@ void Chem::CommonConnectedSubstructureSearch::initMatchExpressions()
             continue;
         }
 
-        const MatchExpression<Bond, MolecularGraph>::SharedPointer& expr = getMatchExpression(*bond);
+        const MatchExpression<Bond, MolecularGraph>::SharedPointer& expr = bondMatchExprFunc(*bond);
 
         if (expr->requiresAtomBondMapping())
             postMappingMatchBonds.push_back(bond);
@@ -293,7 +313,7 @@ void Chem::CommonConnectedSubstructureSearch::initMatchExpressions()
         bondMatchExprTable.push_back(expr);
     }
 
-    molGraphMatchExpr = getMatchExpression(*query);
+    molGraphMatchExpr = molGraphMatchExprFunc(*query);
 }
 
 bool Chem::CommonConnectedSubstructureSearch::findEquivAtoms()

@@ -34,6 +34,7 @@
 #include <set>
 #include <cstddef>
 #include <memory>
+#include <functional>
 
 #include <boost/iterator/indirect_iterator.hpp>
 
@@ -63,6 +64,10 @@ namespace CDPL
 
             typedef std::vector<AtomBondMapping*> ABMappingList;
 
+            typedef MatchExpression<MolecularGraph>::SharedPointer       MolGraphMatchExprPtr;
+            typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
+            typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
+              
           public:
             typedef std::shared_ptr<CommonConnectedSubstructureSearch> SharedPointer;
 
@@ -75,6 +80,10 @@ namespace CDPL
              * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
              */
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
+
+            typedef std::function<const AtomMatchExprPtr&(const Atom&)>               AtomMatchExpressionFunction;
+            typedef std::function<const BondMatchExprPtr&(const Bond&)>               BondMatchExpressionFunction;
+            typedef std::function<const MolGraphMatchExprPtr&(const MolecularGraph&)> MolecularGraphMatchExpressionFunction;
 
             /**
              * \brief Constructs and initializes a \c %CommonConnectedSubstructureSearch instance.
@@ -97,6 +106,12 @@ namespace CDPL
             ~CommonConnectedSubstructureSearch();
 
             CommonConnectedSubstructureSearch& operator=(const CommonConnectedSubstructureSearch&) = delete;
+
+            void setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func);
+
+            void setBondMatchExpressionFunction(const BondMatchExpressionFunction& func);
+
+            void setMolecularGraphMatchExpressionFunction(const MolecularGraphMatchExpressionFunction& func);
 
             /**
              * \brief Allows to specify a new query structure.
@@ -341,8 +356,6 @@ namespace CDPL
                 Util::BitSet targetBondMask;
             };
 
-            typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
-
             typedef std::vector<Util::BitSet>                                         BitMatrix;
             typedef std::vector<const Atom*>                                          AtomMappingTable;
             typedef std::vector<std::size_t>                                          AtomIndexList;
@@ -355,40 +368,43 @@ namespace CDPL
             typedef std::vector<MatchExpression<Bond, MolecularGraph>::SharedPointer> BondMatchExprTable;
             typedef Util::ObjectStack<AtomBondMapping>                                MappingCache;
 
-            const MolecularGraph* query;
-            const MolecularGraph* target;
-            BitMatrix             atomEquivMatrix;
-            BitMatrix             bondEquivMatrix;
-            AtomQueue             termQueryAtoms;
-            AtomIndexList         termTargetAtoms;
-            BondMappingStack      bondMappingStack;
-            AtomMappingTable      queryAtomMapping;
-            ABMappingMask         mappingMask;
-            Util::BitSet          hiddenQueryAtomMask;
-            Util::BitSet          termQueryAtomMask;
-            Util::BitSet          termTargetAtomMask;
-            ABMappingList         foundMappings;
-            UniqueMappingList     uniqueMappings;
-            AtomMatchExprTable    atomMatchExprTable;
-            BondMatchExprTable    bondMatchExprTable;
-            MolGraphMatchExprPtr  molGraphMatchExpr;
-            AtomList              postMappingMatchAtoms;
-            BondList              postMappingMatchBonds;
-            MappingCache          mappingCache;
-            bool                  queryChanged;
-            bool                  initQueryData;
-            bool                  uniqueMatches;
-            bool                  saveMappings;
-            bool                  maxMappingsOnly;
-            std::size_t           numQueryAtoms;
-            std::size_t           numQueryBonds;
-            std::size_t           numTargetAtoms;
-            std::size_t           numTargetBonds;
-            std::size_t           numMappedAtoms;
-            std::size_t           currMaxSubstructureSize;
-            std::size_t           maxBondStackSize;
-            std::size_t           maxNumMappings;
-            std::size_t           minSubstructureSize;
+            const MolecularGraph*                 query;
+            const MolecularGraph*                 target;
+            AtomMatchExpressionFunction           atomMatchExprFunc;
+            BondMatchExpressionFunction           bondMatchExprFunc;
+            MolecularGraphMatchExpressionFunction molGraphMatchExprFunc;
+            BitMatrix                             atomEquivMatrix;
+            BitMatrix                             bondEquivMatrix;
+            AtomQueue                             termQueryAtoms;
+            AtomIndexList                         termTargetAtoms;
+            BondMappingStack                      bondMappingStack;
+            AtomMappingTable                      queryAtomMapping;
+            ABMappingMask                         mappingMask;
+            Util::BitSet                          hiddenQueryAtomMask;
+            Util::BitSet                          termQueryAtomMask;
+            Util::BitSet                          termTargetAtomMask;
+            ABMappingList                         foundMappings;
+            UniqueMappingList                     uniqueMappings;
+            AtomMatchExprTable                    atomMatchExprTable;
+            BondMatchExprTable                    bondMatchExprTable;
+            MolGraphMatchExprPtr                  molGraphMatchExpr;
+            AtomList                              postMappingMatchAtoms;
+            BondList                              postMappingMatchBonds;
+            MappingCache                          mappingCache;
+            bool                                  queryChanged;
+            bool                                  initQueryData;
+            bool                                  uniqueMatches;
+            bool                                  saveMappings;
+            bool                                  maxMappingsOnly;
+            std::size_t                           numQueryAtoms;
+            std::size_t                           numQueryBonds;
+            std::size_t                           numTargetAtoms;
+            std::size_t                           numTargetBonds;
+            std::size_t                           numMappedAtoms;
+            std::size_t                           currMaxSubstructureSize;
+            std::size_t                           maxBondStackSize;
+            std::size_t                           maxNumMappings;
+            std::size_t                           minSubstructureSize;
         };
     } // namespace Chem
 } // namespace CDPL
