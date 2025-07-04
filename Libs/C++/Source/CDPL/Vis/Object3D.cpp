@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3D.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,20 +21,25 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include "CDPL/Vis/Object3D.hpp"
 
 
-namespace CDPLPythonVis
+using namespace CDPL;
+
+
+Vis::Object3D::Object3D() {}
+
+Vis::Object3D::Object3D(const Object3D& object): Base::PropertyContainer(object) {}
+
+Vis::Object3D& Vis::Object3D::operator=(const Object3D& object) 
 {
+    if (this == &object)
+        return *this;
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    PropertyContainer::operator=(object);
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+    return *this;
+}

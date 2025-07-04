@@ -28,11 +28,13 @@ set(cdpl-vis_LIB_SRCS
     BondProperty.cpp
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
+    Object3DProperty.cpp
     AtomPropertyDefault.cpp
     BondPropertyDefault.cpp
     MolecularGraphPropertyDefault.cpp
     ReactionPropertyDefault.cpp
-
+    Object3DPropertyDefault.cpp
+    
     ControlParameter.cpp
     ControlParameterDefault.cpp
     ControlParameterFunctions.cpp
@@ -41,11 +43,14 @@ set(cdpl-vis_LIB_SRCS
     BondPropertyFunctions.cpp
     MolecularGraphPropertyFunctions.cpp
     ReactionPropertyFunctions.cpp
-
+    Object3DPropertyFunctions.cpp
+    
     MolecularGraphPrepareFor2DVisualizationFunction.cpp
     ReactionPrepareFor2DVisualizationFunction.cpp    
     DataFormat.cpp
 
+    Object3D.cpp
+    
     StructureView2D.cpp
     ReactionView2D.cpp
     StructureGridView2D.cpp

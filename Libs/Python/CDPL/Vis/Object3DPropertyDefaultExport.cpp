@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3DPropertyDefaultExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,19 +22,25 @@
  */
 
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Vis/Object3DPropertyDefault.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonVis
+namespace 
 {
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    struct Object3DPropertyDefault {};
+}
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+
+void CDPLPythonVis::exportObject3DPropertyDefaults()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<Object3DPropertyDefault, boost::noncopyable>("Object3DPropertyDefault", python::no_init)
+        ;
+}

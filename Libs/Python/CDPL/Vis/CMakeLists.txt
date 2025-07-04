@@ -31,6 +31,7 @@ endforeach(PYTHON_FILE)
 
 set(vis_MOD_SRCS
     Module.cpp
+    Object3DExport.cpp
     SizeSpecificationExport.cpp
     ColorExport.cpp
     PenExport.cpp
@@ -65,16 +66,19 @@ set(vis_MOD_SRCS
     AtomFunctionExport.cpp
     BondFunctionExport.cpp
     ReactionFunctionExport.cpp
+    Object3DFunctionExport.cpp
     ControlParameterFunctionExport.cpp
 
     MolecularGraphPropertyExport.cpp
     AtomPropertyExport.cpp
     BondPropertyExport.cpp
     ReactionPropertyExport.cpp
+    Object3DPropertyExport.cpp
     MolecularGraphPropertyDefaultExport.cpp
     AtomPropertyDefaultExport.cpp
     BondPropertyDefaultExport.cpp
     ReactionPropertyDefaultExport.cpp
+    Object3DPropertyDefaultExport.cpp
     ControlParameterExport.cpp
     ControlParameterDefaultExport.cpp
 

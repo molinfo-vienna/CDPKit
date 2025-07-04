@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(_vis)
 {
     using namespace CDPLPythonVis;
 
+    exportObject3D();
     exportSizeSpecification();
     exportColor();
     exportPen();
@@ -105,16 +106,19 @@ BOOST_PYTHON_MODULE(_vis)
     exportAtomFunctions();
     exportBondFunctions();
     exportReactionFunctions();
+    exportObject3DFunctions();
     exportControlParameterFunctions();
 
     exportMolecularGraphProperties();
     exportAtomProperties();
     exportBondProperties();
     exportReactionProperties();
+    exportObject3DProperties();
     exportMolecularGraphPropertyDefaults();
     exportAtomPropertyDefaults();
     exportBondPropertyDefaults();
     exportReactionPropertyDefaults();
+    exportObject3DPropertyDefaults();
 
     exportControlParameters();
     exportControlParameterDefaults();

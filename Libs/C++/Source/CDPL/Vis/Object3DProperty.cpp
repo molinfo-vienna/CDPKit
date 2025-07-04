@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3DProperty.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -7,7 +7,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
+ * License as published by the Free Software Foundation; either  
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -22,19 +22,25 @@
  */
 
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include "StaticInit.hpp"
+
+#include "CDPL/Vis/Object3DProperty.hpp"
+
+#include "CDPL/Base/LookupKeyDefinition.hpp"
 
 
-namespace CDPLPythonVis
+namespace CDPL
 {
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    namespace Vis
+    {
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+        namespace Object3DProperty
+        {
+
+            CDPL_DEFINE_LOOKUP_KEY(COLOR);
+        }
+
+        void initObject3DProperties() {}
+    }
+}

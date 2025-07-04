@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3DPropertyDefault.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,20 +21,32 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Vis::Object3DPropertyDefault.
+ */
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_VIS_OBJECT3DPROPERTYDEFAULT_HPP
+#define CDPL_VIS_OBJECT3DPROPERTYDEFAULT_HPP
+
+#include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPLPythonVis
+namespace CDPL
 {
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    namespace Vis
+    {
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+        /**
+         * \brief Provides default values for built-in Vis::Object3D properties.
+         * \since 1.3
+         */
+        namespace Object3DPropertyDefault
+        {
+
+        } // namespace Object3DPropertyDefault
+    } // namespace Vis
+} // namespace CDPL
+
+#endif // CDPL_VIS_OBJECT3DPROPERTYDEFAULT_HPP

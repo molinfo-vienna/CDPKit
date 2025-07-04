@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3DExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,19 +22,36 @@
  */
 
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include <memory>
+
+#include <boost/python.hpp>
+
+#include "CDPL/Vis/Object3D.hpp"
+
+#include "Base/PropertyContainerVisitor.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonVis
+namespace
 {
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    struct Object3DWrapper : CDPL::Vis::Object3D, boost::python::wrapper<CDPL::Vis::Object3D> 
+    {
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+        typedef std::shared_ptr<Object3DWrapper> SharedPointer;
+    };
+}
+
+
+void CDPLPythonVis::exportObject3D()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<Object3DWrapper, Object3DWrapper::SharedPointer, python::bases<Base::PropertyContainer>, boost::noncopyable>("Object3D", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
+
+    python::register_ptr_to_python<Vis::Object3D::SharedPointer>();
+}

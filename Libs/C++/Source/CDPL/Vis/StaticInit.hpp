@@ -38,10 +38,12 @@ namespace CDPL
         void initBondProperties();
         void initMolecularGraphProperties();
         void initReactionProperties();
+        void initObject3DProperties();
         void initAtomPropertyDefaults();
         void initBondPropertyDefaults();
         void initMolecularGraphPropertyDefaults();
         void initReactionPropertyDefaults();
+        void initObject3DPropertyDefaults();
         void initControlParameters();
         void initControlParameterDefaults();
         void initDataFormats();

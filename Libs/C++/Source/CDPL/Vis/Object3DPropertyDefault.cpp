@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * Object3DPropertyDefault.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,19 +22,22 @@
  */
 
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include "StaticInit.hpp"
+
+#include "CDPL/Vis/Object3DPropertyDefault.hpp"
 
 
-namespace CDPLPythonVis
+namespace CDPL
 {
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-} // namespace CDPLPythonVis
+    namespace Vis
+    {
 
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+        namespace Object3DPropertyDefault
+        {
+
+        } // namespace Object3DPropertyDefault
+
+        void initObject3DPropertyDefaults() {}
+    }
+}

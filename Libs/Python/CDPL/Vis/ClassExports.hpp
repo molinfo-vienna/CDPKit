@@ -31,6 +31,7 @@
 namespace CDPLPythonVis
 {
 
+    void exportObject3D();
     void exportSizeSpecification();
     void exportColor();
     void exportPen();
