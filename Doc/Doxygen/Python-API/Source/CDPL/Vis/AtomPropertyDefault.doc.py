@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides default values for built-in Vis.Atom properties.
+# \brief Provides default values for built-in Chem.Atom properties.
 # 
 class AtomPropertyDefault(Boost.Python.instance):
 

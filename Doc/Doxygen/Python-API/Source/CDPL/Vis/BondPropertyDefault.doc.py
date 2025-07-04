@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides default values for built-in Vis.Bond properties.
+# \brief Provides default values for built-in Chem.Bond properties.
 # 
 class BondPropertyDefault(Boost.Python.instance):
 
