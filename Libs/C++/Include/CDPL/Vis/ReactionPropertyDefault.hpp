@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::ReactionPropertyDefault.
+ * \brief Definition of constants in namespace CDPL::Vis::ReactionPropertyDefault.
  */
 
 #ifndef CDPL_VIS_REACTIONPROPERTYDEFAULT_HPP
@@ -42,7 +42,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides default values for built-in Vis::Reaction properties.
+         * \brief Provides default values for built-in Chem::Reaction properties.
          */
         namespace ReactionPropertyDefault
         {

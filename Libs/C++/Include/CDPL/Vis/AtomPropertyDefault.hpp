@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::AtomPropertyDefault.
+ * \brief Definition of constants in namespace CDPL::Vis::AtomPropertyDefault.
  */
 
 #ifndef CDPL_VIS_ATOMPROPERTYDEFAULT_HPP
@@ -46,7 +46,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides default values for built-in Vis::Atom properties.
+         * \brief Provides default values for built-in Chem::Atom properties.
          */
         namespace AtomPropertyDefault
         {

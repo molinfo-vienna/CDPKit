@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::BondPropertyDefault.
+ * \brief Definition of constants in namespace CDPL::Vis::BondPropertyDefault.
  */
 
 #ifndef CDPL_VIS_BONDPROPERTYDEFAULT_HPP
@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides default values for built-in Vis::Bond properties.
+         * \brief Provides default values for built-in Chem::Bond properties.
          */
         namespace BondPropertyDefault
         {
