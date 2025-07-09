@@ -32,11 +32,69 @@ class Object3D(Base.PropertyContainer):
     def __init__() -> None: pass
 
     ##
+    # \brief Constructs a copy of the <tt>Object3D</tt> instance <em>obj</em>.
+    # 
+    # \param obj The <tt>Object3D</tt> instance to copy.
+    # 
+    def __init__(obj: Object3D) -> None: pass
+
+    ##
+    # \brief Replaces the current state of \a arg1 with a copy of the state of the \c %Object3D instance \a self.
+    # \param self The \c %Object3D instance to copy.
+    # \return \a arg1
+    # 
+    def assign(self: Object3D) -> Object3D: pass
+
+    ##
+    # \brief 
+    #
+    def clear() -> None: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    #
+    def removeSubObject(idx: int) -> None: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \return 
+    #
+    def getSubObject(idx: int) -> Object3D: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumSubObjects() -> int: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def addSubObject() -> Object3D: pass
+
+    ##
+    # \brief 
+    # \param obj 
+    # \return 
+    #
+    def addSubObject(obj: Object3D) -> Object3D: pass
+
+    ##
     # \brief 
     # \param key 
     # \return 
     #
     def __getitem__(key: Base.LookupKey) -> Base.Any: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \return 
+    #
+    def __getitem__(idx: int) -> Object3D: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
@@ -61,6 +119,14 @@ class Object3D(Base.PropertyContainer):
 
     ##
     # \brief 
+    # \param idx 
+    #
+    def __delitem__(idx: int) -> None: pass
+
+    ##
+    # \brief 
     # \return 
     #
     def __len__() -> int: pass
+
+    numSubObjects = property(getNumSubObjects)

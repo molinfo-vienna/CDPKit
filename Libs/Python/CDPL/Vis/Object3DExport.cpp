@@ -40,6 +40,10 @@ namespace
     {
 
         typedef std::shared_ptr<Object3DWrapper> SharedPointer;
+
+        Object3DWrapper() = default;
+        
+        Object3DWrapper(const Object3D& obj): Object3D(obj) {}
     };
 }
 
@@ -50,8 +54,27 @@ void CDPLPythonVis::exportObject3D()
     using namespace CDPL;
 
     python::class_<Object3DWrapper, Object3DWrapper::SharedPointer, python::bases<Base::PropertyContainer>, boost::noncopyable>("Object3D", python::no_init)
-    .def(python::init<>(python::arg("self")))
-    .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Vis::Object3D&>((python::arg("self"), python::arg("obj"))))
+        .def("assign", &Vis::Object3D::operator=, python::arg("self"), python::return_self<>())
+        .def("clear", &Vis::Object3D::clear, python::arg("self"))
+        .def("removeSubObject", static_cast<void (Vis::Object3D::*)(std::size_t)>(&Vis::Object3D::removeSubObject),
+             (python::arg("self"), python::arg("idx")))
+        .def("getSubObject", static_cast<Vis::Object3D& (Vis::Object3D::*)(std::size_t)>(&Vis::Object3D::getSubObject),
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
+        .def("getNumSubObjects", &Vis::Object3D::getNumSubObjects, python::arg("self"))
+        .def("addSubObject", static_cast<Vis::Object3D& (Vis::Object3D::*)()>(&Vis::Object3D::addSubObject),
+             python::arg("self"), python::return_internal_reference<1>())
+        .def("addSubObject", static_cast<Vis::Object3D& (Vis::Object3D::*)(const Vis::Object3D::SharedPointer&)>(&Vis::Object3D::addSubObject),
+             (python::arg("self"), python::arg("obj")), python::return_internal_reference<1>())
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true))
+        .def("__delitem__", static_cast<void (Vis::Object3D::*)(std::size_t)>(&Vis::Object3D::removeSubObject),
+             (python::arg("self"), python::arg("idx")))
+        .def("__getitem__", static_cast<Vis::Object3D& (Vis::Object3D::*)(std::size_t)>(&Vis::Object3D::getSubObject),
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
+        .def("__len__", &Vis::Object3D::getNumSubObjects, python::arg("self"))
+        .add_property("numSubObjects", &Vis::Object3D::getNumSubObjects)
+        ;
 
     python::register_ptr_to_python<Vis::Object3D::SharedPointer>();
 }

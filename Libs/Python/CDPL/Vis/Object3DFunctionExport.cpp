@@ -31,36 +31,25 @@
 #include "FunctionExports.hpp"
 
 
-#define MAKE_OBJECT3D_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)          \
-    TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Vis::Object3D& object) \
-    {                                                           \
-        return CDPL::Vis::get##FUNC_SUFFIX(object);             \
-    }                                                           \
-                                                                \
-    bool has##FUNC_SUFFIX##Wrapper(CDPL::Vis::Object3D& object) \
-    {                                                           \
-        return CDPL::Vis::has##FUNC_SUFFIX(object);             \
-    }
+#define EXPORT_OBJECT3D_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                         \
+    python::def("get" #FUNC_SUFFIX, &Vis::get##FUNC_SUFFIX, python::arg("obj"),      \
+                python::return_internal_reference<1>());                             \
+    python::def("has" #FUNC_SUFFIX, &Vis::has##FUNC_SUFFIX, python::arg("obj"));     \
+    python::def("clear" #FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("obj")); \
+    python::def("set" #FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("obj"), python::arg(#ARG_NAME)));
 
-#define EXPORT_OBJECT3D_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                            \
-    python::def("get" #FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("object"),  \
-                python::return_internal_reference<1>());                                \
-    python::def("has" #FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("object")); \
-    python::def("clear" #FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("object")); \
-    python::def("set" #FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("object"), python::arg(#ARG_NAME)));
+#define EXPORT_OBJECT3D_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                        \
+    python::def("get" #FUNC_SUFFIX, &Vis::get##FUNC_SUFFIX, python::arg("obj"),      \
+                python::return_value_policy<python::copy_const_reference>());        \
+    python::def("has" #FUNC_SUFFIX, &Vis::has##FUNC_SUFFIX, python::arg("obj"));     \
+    python::def("clear" #FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("obj")); \
+    python::def("set" #FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("obj"), python::arg(#ARG_NAME)));
 
-#define EXPORT_OBJECT3D_FUNCS(FUNC_SUFFIX, ARG_NAME)                                    \
-    python::def("get" #FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("object")); \
-    python::def("has" #FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("object")); \
-    python::def("clear" #FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("object")); \
-    python::def("set" #FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("object"), python::arg(#ARG_NAME)));
-
-
-namespace
-{
-
-    MAKE_OBJECT3D_FUNC_WRAPPERS(const CDPL::Vis::Color&, Color)
-}
+#define EXPORT_OBJECT3D_FUNCS(FUNC_SUFFIX, ARG_NAME)                                 \
+    python::def("get" #FUNC_SUFFIX, &Vis::get##FUNC_SUFFIX, python::arg("obj"));     \
+    python::def("has" #FUNC_SUFFIX, &Vis::has##FUNC_SUFFIX, python::arg("obj"));     \
+    python::def("clear" #FUNC_SUFFIX, &Vis::clear##FUNC_SUFFIX, python::arg("obj")); \
+    python::def("set" #FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("obj"), python::arg(#ARG_NAME)));
 
 
 void CDPLPythonVis::exportObject3DFunctions()
@@ -68,5 +57,5 @@ void CDPLPythonVis::exportObject3DFunctions()
     using namespace boost;
     using namespace CDPL;
 
-    EXPORT_OBJECT3D_FUNCS_INT_REF(Color, color)
+    EXPORT_OBJECT3D_FUNCS_INT_REF(GraphicsPrimitive, prim)
 }

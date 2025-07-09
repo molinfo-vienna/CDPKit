@@ -84,6 +84,8 @@
 #include "CDPL/Vis/ClipPathPrimitive2D.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
+#include "CDPL/Vis/GraphicsPrimitive3DVisitor.hpp"
+#include "CDPL/Vis/GraphicsPrimitive3D.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

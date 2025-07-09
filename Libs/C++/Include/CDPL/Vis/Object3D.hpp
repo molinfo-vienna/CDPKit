@@ -71,10 +71,10 @@ namespace CDPL
             Object3D();
 
             /**
-             * \brief Constructs a copy of the \c %Object3D instance \a object.
-             * \param object The \c %Object3D instance to copy.
+             * \brief Constructs a copy of the \c %Object3D instance \a obj.
+             * \param obj The \c %Object3D instance to copy.
              */
-            Object3D(const Object3D& object);
+            Object3D(const Object3D& obj);
 
             /**
              * \brief Virtual destructor.
@@ -83,14 +83,14 @@ namespace CDPL
 
             /**
              * \brief Assignment operator.
-             * \param cntnr The \c %Object3D instance to copy.
+             * \param obj The \c %Object3D instance to copy.
              * \return A reference to itself.
              */
-            Object3D& operator=(const Object3D& object);
+            Object3D& operator=(const Object3D& obj);
 
             void clear();
 
-            std::size_t getNumObjects() const;
+            std::size_t getNumSubObjects() const;
 
             /**
              * \brief Returns a constant iterator pointing to the beginning of the sub-objects.

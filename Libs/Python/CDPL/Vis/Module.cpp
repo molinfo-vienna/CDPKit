@@ -65,6 +65,7 @@ BOOST_PYTHON_MODULE(_vis)
     exportEllipsePrimitive2D();
     exportPathPrimitive2D();
     exportClipPathPrimitive2D();
+    exportGraphicsPrimitive3D();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

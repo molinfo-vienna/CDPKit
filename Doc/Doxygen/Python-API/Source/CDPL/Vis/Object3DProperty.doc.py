@@ -27,6 +27,6 @@
 class Object3DProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the color of the 3D object. <b>Value Type:</b> Vis.Color.
+    # \brief Specifies the Vis.GraphicsPrimitive3D instance associated with the 3D object. <b>Value Type:</b> Vis.GraphicsPrimitive3D.SharedPointer.
     # 
-    COLOR = CDPL.Base.LookupKey('COLOR')
+    GRAPHICS_PRIMITIVE = CDPL.Base.LookupKey('GRAPHICS_PRIMITIVE')

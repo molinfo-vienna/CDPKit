@@ -25,4 +25,8 @@
 # \since 1.3
 # 
 class Object3DPropertyDefault(Boost.Python.instance):
-    pass
+
+    ##
+    # \brief 
+    #
+    GRAPHICS_PRIMITIVE = None

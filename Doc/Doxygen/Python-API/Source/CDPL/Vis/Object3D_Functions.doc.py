@@ -21,27 +21,27 @@
 
 ##
 # \brief 
-# \param object 
+# \param obj 
 #
-def clearColor(object: Object3D) -> None: pass
+def clearGraphicsPrimitive(obj: Object3D) -> None: pass
 
 ##
 # \brief 
-# \param object 
+# \param obj 
 # \return 
 #
-def hasColor(object: Object3D) -> bool: pass
+def hasGraphicsPrimitive(obj: Object3D) -> bool: pass
 
 ##
 # \brief 
-# \param object 
+# \param obj 
 # \return 
 #
-def getColor(object: Object3D) -> Color: pass
+def getGraphicsPrimitive(obj: Object3D) -> object: pass
 
 ##
 # \brief 
-# \param object 
-# \param color 
+# \param obj 
+# \param prim 
 #
-def setColor(object: Object3D, color: Color) -> None: pass
+def setGraphicsPrimitive(obj: Object3D, prim: GraphicsPrimitive3D) -> None: pass

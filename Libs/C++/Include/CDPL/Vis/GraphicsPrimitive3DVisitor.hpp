@@ -1,5 +1,5 @@
 /* 
- * Object3DProperty.hpp 
+ * GraphicsPrimitive3DVisitor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,11 +23,11 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Vis::Object3DProperty.
+ * \brief Definition of the class CDPL::Vis::GraphicsPrimitive3DVisitor.
  */
 
-#ifndef CDPL_VIS_OBJECT3DPROPERTY_HPP
-#define CDPL_VIS_OBJECT3DPROPERTY_HPP
+#ifndef CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP
+#define CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP
 
 #include "CDPL/Vis/APIPrefix.hpp"
 
@@ -35,30 +35,29 @@
 namespace CDPL
 {
 
-    namespace Base
-    {
-
-        class LookupKey;
-    }
-
     namespace Vis
     {
 
+        class GraphicsPrimitive3D;
+        
         /**
-         * \brief Provides keys for built-in Vis::Object3D properties.
-         * \since 1.3
+         * \brief The base class of all Vis::GraphicsPrimitive3D subclass visitor implementations [\ref VPTN].
          */
-        namespace Object3DProperty
+        class CDPL_VIS_API GraphicsPrimitive3DVisitor
         {
 
+          public:
             /**
-             * \brief Specifies the Vis::GraphicsPrimitive3D instance associated with the 3D object.
-             * \valuetype Vis::GraphicsPrimitive3D::SharedPointer
+             * \brief Virtual destructor.
              */
-            extern CDPL_VIS_API const Base::LookupKey GRAPHICS_PRIMITIVE;
-            
-        } // namespace Object3DProperty
+            virtual ~GraphicsPrimitive3DVisitor() {}
+
+            /**
+             * \brief Generic visit method for GraphicsPrimitive3D instances.
+             */
+            virtual void visit(const GraphicsPrimitive3D& prim) {}
+        };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_OBJECT3DPROPERTY_HPP
+#endif // CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP

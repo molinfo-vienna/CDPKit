@@ -491,6 +491,13 @@ http://amalfi.dis.unina.it/graph/db/papers/vf-algorithm.pdf
 </tr>
 
 <tr>
+<td valign="top">\anchor VPTN<i>[VPTN]</i></td>
+<td valign="top">
+Wikipedia article about the GoF Visitor Pattern: https://en.wikipedia.org/wiki/Visitor_pattern
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor WHAM<i>[WHAM]</i></td>
 <td valign="top">
 Wikipedia article about the Hamming Distance: http://en.wikipedia.org/wiki/Hamming_distance

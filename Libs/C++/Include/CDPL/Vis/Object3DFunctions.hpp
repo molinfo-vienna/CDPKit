@@ -30,6 +30,7 @@
 #define CDPL_VIS_OBJECT3DFUNCTIONS_HPP
 
 #include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/GraphicsPrimitive3D.hpp"
 
 
 namespace CDPL
@@ -38,19 +39,18 @@ namespace CDPL
     namespace Vis
     {
 
-        class Color;
         class Object3D;
 
         /**
          * \since 1.3
          */
-        CDPL_VIS_API const Color& getColor(const Object3D& object3D);
+        CDPL_VIS_API const GraphicsPrimitive3D::SharedPointer& getGraphicsPrimitive(const Object3D& obj);
 
-        CDPL_VIS_API void setColor(Object3D& object3D, const Color& color);
+        CDPL_VIS_API void setGraphicsPrimitive(Object3D& object3D, const GraphicsPrimitive3D::SharedPointer& prim);
 
-        CDPL_VIS_API bool hasColor(const Object3D& object3D);
+        CDPL_VIS_API bool hasGraphicsPrimitive(const Object3D& obj);
 
-        CDPL_VIS_API void clearColor(Object3D& object3D);
+        CDPL_VIS_API void clearGraphicsPrimitive(Object3D& obj);
         
     } // namespace Vis
 } // namespace CDPL

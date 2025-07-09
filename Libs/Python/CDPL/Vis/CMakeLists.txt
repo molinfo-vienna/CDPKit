@@ -45,6 +45,7 @@ set(vis_MOD_SRCS
     Path2DConverterExport.cpp
     ColorTableExport.cpp
     AtomColorTableExport.cpp
+    
     GraphicsPrimitive2DExport.cpp
     View2DExport.cpp
     Renderer2DExport.cpp
@@ -62,6 +63,8 @@ set(vis_MOD_SRCS
     PathPrimitive2DExport.cpp
     ClipPathPrimitive2DExport.cpp
 
+    GraphicsPrimitive3DExport.cpp
+    
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp
     BondFunctionExport.cpp

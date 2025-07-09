@@ -44,6 +44,7 @@ namespace CDPLPythonVis
     void exportPath2D();
     void exportPath2DConverter();
     void exportColorTable();
+
     void exportGraphicsPrimitive2D();
     void exportView2D();
     void exportRenderer2D();
@@ -61,6 +62,8 @@ namespace CDPLPythonVis
     void exportPathPrimitive2D();
     void exportClipPathPrimitive2D();
 
+    void exportGraphicsPrimitive3D();
+    
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
     void exportPNGMolecularGraphWriter();

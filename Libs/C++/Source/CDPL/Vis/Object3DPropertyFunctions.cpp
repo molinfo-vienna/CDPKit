@@ -28,44 +28,43 @@
 #include "CDPL/Vis/Object3DProperty.hpp"
 #include "CDPL/Vis/Object3DPropertyDefault.hpp"
 #include "CDPL/Vis/Object3D.hpp"
-#include "CDPL/Vis/Color.hpp"
 
 
 using namespace CDPL;
 
 
 #define MAKE_OBJECT3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-    void Vis::set##FUNC_SUFFIX(Vis::Object3D& object, TYPE arg)               \
+    void Vis::set##FUNC_SUFFIX(Vis::Object3D& obj, TYPE arg)                  \
     {                                                                         \
-        object.setProperty(Object3DProperty::PROP_NAME, arg);                 \
+        obj.setProperty(Object3DProperty::PROP_NAME, arg);                    \
     }                                                                         \
                                                                               \
-    bool Vis::has##FUNC_SUFFIX(const Vis::Object3D& object)                   \
+    bool Vis::has##FUNC_SUFFIX(const Vis::Object3D& obj)                      \
     {                                                                         \
-        return object.isPropertySet(Object3DProperty::PROP_NAME);             \
+        return obj.isPropertySet(Object3DProperty::PROP_NAME);                \
     }                                                                         \
                                                                               \
-    void Vis::clear##FUNC_SUFFIX(Vis::Object3D& object)                       \
+    void Vis::clear##FUNC_SUFFIX(Vis::Object3D& obj)                          \
     {                                                                         \
-        object.removeProperty(Object3DProperty::PROP_NAME);                   \
+        obj.removeProperty(Object3DProperty::PROP_NAME);                      \
     }
 
 #define MAKE_OBJECT3D_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX) \
-    TYPE Vis::get##FUNC_SUFFIX(const Vis::Object3D& object)            \
+    TYPE Vis::get##FUNC_SUFFIX(const Vis::Object3D& obj)               \
     {                                                                  \
-        return object.getProperty<TYPE>(Object3DProperty::PROP_NAME);  \
+        return obj.getProperty<TYPE>(Object3DProperty::PROP_NAME);     \
     }                                                                  \
                                                                        \
     MAKE_OBJECT3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_OBJECT3D_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)       \
-    TYPE Vis::get##FUNC_SUFFIX(const Vis::Object3D& object)                           \
-    {                                                                                 \
-        return object.getPropertyOrDefault<TYPE>(Object3DProperty::PROP_NAME,         \
-                                                 Object3DPropertyDefault::PROP_NAME); \
-    }                                                                                 \
-                                                                                      \
+#define MAKE_OBJECT3D_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)    \
+    TYPE Vis::get##FUNC_SUFFIX(const Vis::Object3D& obj)                           \
+    {                                                                              \
+        return obj.getPropertyOrDefault<TYPE>(Object3DProperty::PROP_NAME,         \
+                                              Object3DPropertyDefault::PROP_NAME); \
+    }                                                                              \
+                                                                                   \
     MAKE_OBJECT3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
-MAKE_OBJECT3D_PROPERTY_FUNCTIONS(COLOR, const Vis::Color&, Color)
+MAKE_OBJECT3D_PROPERTY_FUNCTIONS_WITH_DEF(GRAPHICS_PRIMITIVE, const Vis::GraphicsPrimitive3D::SharedPointer&, GraphicsPrimitive)
