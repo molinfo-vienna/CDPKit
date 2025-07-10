@@ -31,7 +31,6 @@ endforeach(PYTHON_FILE)
 
 set(vis_MOD_SRCS
     Module.cpp
-    Object3DExport.cpp
     SizeSpecificationExport.cpp
     ColorExport.cpp
     PenExport.cpp
@@ -63,7 +62,9 @@ set(vis_MOD_SRCS
     PathPrimitive2DExport.cpp
     ClipPathPrimitive2DExport.cpp
 
-    GraphicsPrimitive3DExport.cpp
+    Object3DExport.cpp
+    Shape3DExport.cpp
+    Shape3DVisitorExport.cpp
     
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp

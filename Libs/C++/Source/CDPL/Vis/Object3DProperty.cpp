@@ -38,7 +38,7 @@ namespace CDPL
         namespace Object3DProperty
         {
 
-            CDPL_DEFINE_LOOKUP_KEY(GRAPHICS_PRIMITIVE);
+            CDPL_DEFINE_LOOKUP_KEY(SHAPE);
         }
 
         void initObject3DProperties() {}

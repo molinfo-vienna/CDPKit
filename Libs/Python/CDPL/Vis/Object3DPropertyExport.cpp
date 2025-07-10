@@ -43,6 +43,6 @@ void CDPLPythonVis::exportObject3DProperties()
     using namespace CDPL;
 
     python::class_<Object3DProperty, boost::noncopyable>("Object3DProperty", python::no_init)
-        .def_readonly("GRAPHICS_PRIMITIVE", &Vis::Object3DProperty::GRAPHICS_PRIMITIVE)
+        .def_readonly("SHAPE", &Vis::Object3DProperty::SHAPE)
         ;
 }

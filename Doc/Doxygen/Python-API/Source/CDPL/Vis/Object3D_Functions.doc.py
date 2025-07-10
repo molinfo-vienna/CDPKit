@@ -23,25 +23,25 @@
 # \brief 
 # \param obj 
 #
-def clearGraphicsPrimitive(obj: Object3D) -> None: pass
+def clearShape(obj: Object3D) -> None: pass
 
 ##
 # \brief 
 # \param obj 
 # \return 
 #
-def hasGraphicsPrimitive(obj: Object3D) -> bool: pass
+def hasShape(obj: Object3D) -> bool: pass
 
 ##
 # \brief 
 # \param obj 
 # \return 
 #
-def getGraphicsPrimitive(obj: Object3D) -> object: pass
+def getShape(obj: Object3D) -> object: pass
 
 ##
 # \brief 
 # \param obj 
-# \param prim 
+# \param shape 
 #
-def setGraphicsPrimitive(obj: Object3D, prim: GraphicsPrimitive3D) -> None: pass
+def setShape(obj: Object3D, shape: Shape3D) -> None: pass

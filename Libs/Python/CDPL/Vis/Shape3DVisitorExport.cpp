@@ -1,5 +1,5 @@
 /* 
- * GraphicsPrimitive3DExport.cpp 
+ * Shape3DVisitorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Vis/GraphicsPrimitive3D.hpp"
-#include "CDPL/Vis/GraphicsPrimitive3DVisitor.hpp"
+#include "CDPL/Vis/Shape3DVisitor.hpp"
+#include "CDPL/Vis/Shape3D.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -35,29 +35,32 @@
 namespace
 {
 
-    struct GraphicsPrimitive3DWrapper : CDPL::Vis::GraphicsPrimitive3D, boost::python::wrapper<CDPL::Vis::GraphicsPrimitive3D>
+    struct Shape3DVisitorWrapper : CDPL::Vis::Shape3DVisitor, boost::python::wrapper<CDPL::Vis::Shape3DVisitor>
     {
 
-        CDPL::Vis::GraphicsPrimitive3D::SharedPointer clone() const {
-            return this->get_override("clone")();
+        void visit(const CDPL::Vis::Shape3D& shape) {
+            if (boost::python::override f = this->get_override("visit"))
+                f(boost::ref(shape));    
+            else
+                Shape3DVisitor::visit(shape);
         }
 
-        void accept(CDPL::Vis::GraphicsPrimitive3DVisitor& visitor) const {
-            this->get_override("accept")(boost::ref(visitor));
+        void visitDef(const CDPL::Vis::Shape3D& shape) {
+            Shape3DVisitor::visit(shape);
         }
     };
 }
 
 
-void CDPLPythonVis::exportGraphicsPrimitive3D()
+void CDPLPythonVis::exportShape3DVisitor()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<GraphicsPrimitive3DWrapper, boost::noncopyable>("GraphicsPrimitive3D", python::no_init)
+    python::class_<Shape3DVisitorWrapper, boost::noncopyable>("Shape3DVisitor", python::no_init)
         .def(python::init<>(python::arg("self")))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::GraphicsPrimitive3D>())    
-        .def("clone", python::pure_virtual(&Vis::GraphicsPrimitive3D::clone), python::arg("self"))
-        .def("accept", python::pure_virtual(&Vis::GraphicsPrimitive3D::accept), (python::arg("self"), python::arg("visitor")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Shape3DVisitor>())    
+        .def("visit", &Vis::Shape3DVisitor::visit, &Shape3DVisitorWrapper::visitDef,
+             (python::arg("self"), python::arg("shape")))
         ;
 }

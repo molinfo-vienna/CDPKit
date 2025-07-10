@@ -30,7 +30,7 @@
 #define CDPL_VIS_OBJECT3DPROPERTYDEFAULT_HPP
 
 #include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Vis/GraphicsPrimitive3D.hpp"
+#include "CDPL/Vis/Shape3D.hpp"
 
 
 namespace CDPL
@@ -46,7 +46,7 @@ namespace CDPL
         namespace Object3DPropertyDefault
         {
 
-            extern CDPL_VIS_API const GraphicsPrimitive3D::SharedPointer GRAPHICS_PRIMITIVE;
+            extern CDPL_VIS_API const Shape3D::SharedPointer SHAPE;
             
         } // namespace Object3DPropertyDefault
     } // namespace Vis

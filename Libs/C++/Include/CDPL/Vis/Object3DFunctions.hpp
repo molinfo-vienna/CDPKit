@@ -30,7 +30,7 @@
 #define CDPL_VIS_OBJECT3DFUNCTIONS_HPP
 
 #include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Vis/GraphicsPrimitive3D.hpp"
+#include "CDPL/Vis/Shape3D.hpp"
 
 
 namespace CDPL
@@ -44,13 +44,13 @@ namespace CDPL
         /**
          * \since 1.3
          */
-        CDPL_VIS_API const GraphicsPrimitive3D::SharedPointer& getGraphicsPrimitive(const Object3D& obj);
+        CDPL_VIS_API const Shape3D::SharedPointer& getShape(const Object3D& obj);
 
-        CDPL_VIS_API void setGraphicsPrimitive(Object3D& object3D, const GraphicsPrimitive3D::SharedPointer& prim);
+        CDPL_VIS_API void setShape(Object3D& object3D, const Shape3D::SharedPointer& shape);
 
-        CDPL_VIS_API bool hasGraphicsPrimitive(const Object3D& obj);
+        CDPL_VIS_API bool hasShape(const Object3D& obj);
 
-        CDPL_VIS_API void clearGraphicsPrimitive(Object3D& obj);
+        CDPL_VIS_API void clearShape(Object3D& obj);
         
     } // namespace Vis
 } // namespace CDPL

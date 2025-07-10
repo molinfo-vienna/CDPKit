@@ -29,4 +29,4 @@ class Object3DPropertyDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    GRAPHICS_PRIMITIVE = None
+    SHAPE = None

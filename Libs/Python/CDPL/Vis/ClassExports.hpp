@@ -31,7 +31,6 @@
 namespace CDPLPythonVis
 {
 
-    void exportObject3D();
     void exportSizeSpecification();
     void exportColor();
     void exportPen();
@@ -62,7 +61,9 @@ namespace CDPLPythonVis
     void exportPathPrimitive2D();
     void exportClipPathPrimitive2D();
 
-    void exportGraphicsPrimitive3D();
+    void exportObject3D();
+    void exportShape3D();
+    void exportShape3DVisitor();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

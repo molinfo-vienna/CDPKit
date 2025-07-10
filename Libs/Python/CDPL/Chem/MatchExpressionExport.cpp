@@ -190,7 +190,6 @@ namespace
         MatchExpressionExport(const char* name, const char* query_arg_name, const char* target_arg_name) {
             using namespace boost;
             using namespace CDPL;
-
             
             python::class_<MatchExpressionWrapper<ObjType, void>, 
                 typename MatchExpressionWrapper<ObjType, void>::SharedPointer, 

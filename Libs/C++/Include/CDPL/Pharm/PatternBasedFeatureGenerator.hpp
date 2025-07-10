@@ -134,8 +134,8 @@ namespace CDPL
             typedef std::vector<const Chem::Atom*> AtomList;
 
             double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
-            bool   calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
-            bool   calcCentroid(const AtomList&, Math::Vector3D&) const;
+            bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
+            bool calcCentroid(const AtomList&, Math::Vector3D&) const;
 
             virtual void addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) {}
 

@@ -20,22 +20,22 @@
 #
 
 ##
-# \brief The abstract base class of all 3D graphics primitives.
+# \brief The abstract base of all classes describing the geometric shape of 3D objects.
 # 
-# Graphics primitives are simple (atomic) geometrical objects which can be used as building blocks for larger and more complex 3D objects (e.g. the 3D representation of a molecular structure).
+# \since 1.3
 # 
-class GraphicsPrimitive3D(Boost.Python.instance):
+class Shape3D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %GraphicsPrimitive3D instance.
+    # \brief Initializes the \e %Shape3D instance.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
-    # Different Python \c %GraphicsPrimitive3D instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %GraphicsPrimitive3D instances \e a and \e b reference different C++ objects. 
+    # Different Python \c %Shape3D instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \c %Shape3D instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     # 
@@ -48,11 +48,13 @@ class GraphicsPrimitive3D(Boost.Python.instance):
     # 
     # \return The copy of the graphics primitive.
     # 
-    def clone() -> GraphicsPrimitive3D: pass
+    def clone() -> Shape3D: pass
 
     ##
-    # \brief GraphicsPrimitive3DVisitor implementation accept method [\ref VPTN].
+    # \brief Vis.Shape3DVisitor implementation accept method [\ref VPTN].
     # 
-    def accept(visitor: object) -> None: pass
+    # \param visitor The Vis.Shape3DVisitor instance to accept.
+    # 
+    def accept(visitor: Shape3DVisitor) -> None: pass
 
     objectID = property(getObjectID)

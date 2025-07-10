@@ -26,7 +26,6 @@
 
 #include "CDPL/Vis/Object3D.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
-#include "CDPL/Vis/Color.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -57,5 +56,5 @@ void CDPLPythonVis::exportObject3DFunctions()
     using namespace boost;
     using namespace CDPL;
 
-    EXPORT_OBJECT3D_FUNCS_INT_REF(GraphicsPrimitive, prim)
+    EXPORT_OBJECT3D_FUNCS_INT_REF(Shape, shape)
 }

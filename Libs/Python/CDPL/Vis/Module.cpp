@@ -36,22 +36,22 @@ BOOST_PYTHON_MODULE(_vis)
 {
     using namespace CDPLPythonVis;
 
-    exportObject3D();
     exportSizeSpecification();
     exportColor();
     exportPen();
     exportBrush();
     exportFont();
     exportFontMetrics();
+    exportColorTable();
+    
     exportLine2D();
     exportRectangle2D();
     exportPointArray2D();
     exportPath2D();
     exportPath2DConverter();
-    exportColorTable();
+    exportRenderer2D();
     exportGraphicsPrimitive2D();
     exportView2D();
-    exportRenderer2D();
     exportStructureView2D();
     exportReactionView2D();
     exportStructureGridView2D();
@@ -65,7 +65,10 @@ BOOST_PYTHON_MODULE(_vis)
     exportEllipsePrimitive2D();
     exportPathPrimitive2D();
     exportClipPathPrimitive2D();
-    exportGraphicsPrimitive3D();
+
+    exportObject3D();
+    exportShape3D();
+    exportShape3DVisitor();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

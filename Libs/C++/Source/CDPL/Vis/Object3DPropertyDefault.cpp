@@ -36,7 +36,7 @@ namespace CDPL
         namespace Object3DPropertyDefault
         {
 
-            const GraphicsPrimitive3D::SharedPointer GRAPHICS_PRIMITIVE  = GraphicsPrimitive3D::SharedPointer();
+            const Shape3D::SharedPointer SHAPE  = Shape3D::SharedPointer();
             
         } // namespace Object3DPropertyDefault
 

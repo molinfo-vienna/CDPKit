@@ -1,5 +1,5 @@
 /* 
- * GraphicsPrimitive3DVisitor.hpp 
+ * Shape3D.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,11 +23,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::GraphicsPrimitive3DVisitor.
+ * \brief Definition of the class CDPL::Vis::Shape3D.
  */
 
-#ifndef CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP
-#define CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP
+#ifndef CDPL_VIS_SHAPE3D_HPP
+#define CDPL_VIS_SHAPE3D_HPP
+
+#include <memory>
 
 #include "CDPL/Vis/APIPrefix.hpp"
 
@@ -38,26 +40,39 @@ namespace CDPL
     namespace Vis
     {
 
-        class GraphicsPrimitive3D;
-        
+        class Shape3DVisitor;
+
         /**
-         * \brief The base class of all Vis::GraphicsPrimitive3D subclass visitor implementations [\ref VPTN].
+         * \brief The abstract base of all classes describing the geometric shape of 3D objects.
+         * \since 1.3
          */
-        class CDPL_VIS_API GraphicsPrimitive3DVisitor
+        class CDPL_VIS_API Shape3D
         {
 
           public:
             /**
-             * \brief Virtual destructor.
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Shape3D instances.
              */
-            virtual ~GraphicsPrimitive3DVisitor() {}
+            typedef std::shared_ptr<Shape3D> SharedPointer;
 
             /**
-             * \brief Generic visit method for GraphicsPrimitive3D instances.
+             * \brief Virtual destructor.
              */
-            virtual void visit(const GraphicsPrimitive3D& prim) {}
+            virtual ~Shape3D() {}
+
+            /**
+             * \brief Creates a dynamically allocated copy of the graphics primitive.
+             * \return The copy of the graphics primitive.
+             */
+            virtual SharedPointer clone() const = 0;
+
+            /**
+             * \brief Vis::Shape3DVisitor implementation accept method [\ref VPTN].
+             * \param visitor The Vis::Shape3DVisitor instance to accept.
+             */
+            virtual void accept(Shape3DVisitor& visitor) const = 0;
         };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_GRAPHICSPRIMITIVE3DVISITOR_HPP
+#endif // CDPL_VIS_SHAPE3D_HPP

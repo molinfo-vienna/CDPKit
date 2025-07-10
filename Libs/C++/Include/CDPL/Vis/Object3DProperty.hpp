@@ -52,10 +52,10 @@ namespace CDPL
         {
 
             /**
-             * \brief Specifies the Vis::GraphicsPrimitive3D instance associated with the 3D object.
-             * \valuetype Vis::GraphicsPrimitive3D::SharedPointer
+             * \brief Specifies the Vis::Shape3D instance associated with the 3D object.
+             * \valuetype Vis::Shape3D::SharedPointer
              */
-            extern CDPL_VIS_API const Base::LookupKey GRAPHICS_PRIMITIVE;
+            extern CDPL_VIS_API const Base::LookupKey SHAPE;
             
         } // namespace Object3DProperty
     } // namespace Vis

@@ -27,6 +27,6 @@
 class Object3DProperty(Boost.Python.instance):
 
     ##
-    # \brief Specifies the Vis.GraphicsPrimitive3D instance associated with the 3D object. <b>Value Type:</b> Vis.GraphicsPrimitive3D.SharedPointer.
+    # \brief Specifies the Vis.Shape3D instance associated with the 3D object. <b>Value Type:</b> Vis.Shape3D.SharedPointer.
     # 
-    GRAPHICS_PRIMITIVE = CDPL.Base.LookupKey('GRAPHICS_PRIMITIVE')
+    SHAPE = CDPL.Base.LookupKey('SHAPE')

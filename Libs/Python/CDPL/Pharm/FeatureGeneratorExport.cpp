@@ -61,18 +61,18 @@ void CDPLPythonPharm::exportFeatureGenerator()
     python::class_<FeatureGeneratorWrapper, FeatureGeneratorWrapper::SharedPointer, boost::noncopyable>("FeatureGenerator", python::no_init)
         .def(python::init<>(python::arg("self")))
         //.def(python::init<const Pharm::FeatureGenerator&>((python::arg("self"), python::arg("gen"))))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGenerator>())    
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGenerator>())
         //.def("assign", &Pharm::FeatureGenerator::operator=, (python::arg("self"), python::arg("gen")))
-        .def("setAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::setAtom3DCoordinatesFunction, 
+        .def("setAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::setAtom3DCoordinatesFunction,
              (python::arg("self"), python::arg("func")))
-        .def("getAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
+        .def("getAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::getAtom3DCoordinatesFunction,
              python::arg("self"), python::return_internal_reference<>())
         .def("generate", python::pure_virtual(&Pharm::FeatureGenerator::generate),
              (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
         .def("clone", python::pure_virtual(&Pharm::FeatureGenerator::clone),
              python::arg("self"))
-        .add_property("atomCoordsFunction", python::make_function(&Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
-                                                                python::return_internal_reference<>()),
+        .add_property("atomCoordsFunction",
+                      python::make_function(&Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
                       &Pharm::FeatureGenerator::setAtom3DCoordinatesFunction);
 
     python::register_ptr_to_python<Pharm::FeatureGenerator::SharedPointer>();

@@ -1,5 +1,5 @@
 /* 
- * Object3DPropertyDefaultExport.cpp 
+ * Shape3DVisitor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,27 +21,45 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Vis::Shape3DVisitor.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_VIS_SHAPE3DVISITOR_HPP
+#define CDPL_VIS_SHAPE3DVISITOR_HPP
 
-#include "CDPL/Vis/Object3DPropertyDefault.hpp"
-
-#include "NamespaceExports.hpp"
+#include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace 
+namespace CDPL
 {
 
-    struct Object3DPropertyDefault {};
-}
+    namespace Vis
+    {
 
+        class Shape3D;
+        
+        /**
+         * \brief The base of all Vis::Shape3D visitor implementations [\ref VPTN].
+         * \since 1.3
+         */
+        class CDPL_VIS_API Shape3DVisitor
+        {
 
-void CDPLPythonVis::exportObject3DPropertyDefaults()
-{
-    using namespace boost;
-    using namespace CDPL;
+          public:
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~Shape3DVisitor() {}
 
-    python::class_<Object3DPropertyDefault, boost::noncopyable>("Object3DPropertyDefault", python::no_init)
-        .def_readonly("SHAPE", &Vis::Object3DPropertyDefault::SHAPE)
-        ;
-}
+            /**
+             * \brief Generic visit method for Shape3D instances.
+             * \param shape The Vis::Shape3D instance to visit.
+             */
+            virtual void visit(const Shape3D& shape) {}
+        };
+    } // namespace Vis
+} // namespace CDPL
+
+#endif // CDPL_VIS_SHAPE3DVISITOR_HPP

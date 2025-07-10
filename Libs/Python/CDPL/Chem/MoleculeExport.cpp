@@ -104,7 +104,7 @@ namespace
             Molecule::reserveMemoryForAtoms(num_atoms);
         }
 
-         void reserveMemoryForBonds(std::size_t num_bonds) {
+        void reserveMemoryForBonds(std::size_t num_bonds) {
             if (boost::python::override f = this->get_override("reserveMemoryForBonds"))
                 f(num_bonds);    
             else
