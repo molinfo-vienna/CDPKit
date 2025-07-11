@@ -25,7 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Shape3DVisitor.hpp"
-#include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Vis/TriangleMesh3D.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -48,6 +48,17 @@ namespace
         void visitDef(const CDPL::Vis::Shape3D& shape) {
             Shape3DVisitor::visit(shape);
         }
+
+        void visit(const CDPL::Vis::TriangleMesh3D& mesh) {
+            if (boost::python::override f = this->get_override("visit"))
+                f(boost::ref(mesh));    
+            else
+                Shape3DVisitor::visit(mesh);
+        }
+
+        void visitDef(const CDPL::Vis::TriangleMesh3D& mesh) {
+            Shape3DVisitor::visit(mesh);
+        }
     };
 }
 
@@ -60,7 +71,13 @@ void CDPLPythonVis::exportShape3DVisitor()
     python::class_<Shape3DVisitorWrapper, boost::noncopyable>("Shape3DVisitor", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Shape3DVisitor>())    
-        .def("visit", &Vis::Shape3DVisitor::visit, &Shape3DVisitorWrapper::visitDef,
+        .def("visit",
+             static_cast<void (Vis::Shape3DVisitor::*)(const Vis::Shape3D&)>(&Vis::Shape3DVisitor::visit),
+             static_cast<void (Shape3DVisitorWrapper::*)(const Vis::Shape3D&)>(&Shape3DVisitorWrapper::visitDef),
              (python::arg("self"), python::arg("shape")))
+        .def("visit",
+             static_cast<void (Vis::Shape3DVisitor::*)(const Vis::TriangleMesh3D&)>(&Vis::Shape3DVisitor::visit),
+             static_cast<void (Shape3DVisitorWrapper::*)(const Vis::TriangleMesh3D&)>(&Shape3DVisitorWrapper::visitDef),
+             (python::arg("self"), python::arg("mesh")))
         ;
 }

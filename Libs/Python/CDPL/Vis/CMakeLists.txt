@@ -64,6 +64,7 @@ set(vis_MOD_SRCS
 
     Object3DExport.cpp
     Shape3DExport.cpp
+    TriangleMesh3DExport.cpp
     Shape3DVisitorExport.cpp
     
     MolecularGraphFunctionExport.cpp

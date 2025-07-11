@@ -44,10 +44,17 @@ class Shape3DVisitor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Generic visit method for Shape3D instances.
+    # \brief Generic visit method for Vis.Shape3D instances.
     # 
     # \param shape The Vis.Shape3D instance to visit.
     # 
     def visit(shape: Shape3D) -> None: pass
+
+    ##
+    # \brief Visit method for Vis.TriangleMesh3D instances.
+    # 
+    # \param mesh The Vis.TriangleMesh3D instance to visit.
+    # 
+    def visit(mesh: TriangleMesh3D) -> None: pass
 
     objectID = property(getObjectID)

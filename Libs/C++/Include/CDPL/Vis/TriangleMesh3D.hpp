@@ -1,5 +1,5 @@
 /* 
- * Shape3DVisitor.hpp 
+ * TriangleMesh3D.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,13 +23,16 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Shape3DVisitor.
+ * \brief Definition of the class CDPL::Vis::TriangleMesh3D.
  */
 
-#ifndef CDPL_VIS_SHAPE3DVISITOR_HPP
-#define CDPL_VIS_SHAPE3DVISITOR_HPP
+#ifndef CDPL_VIS_TRIANGLEMESH3D_HPP
+#define CDPL_VIS_TRIANGLEMESH3D_HPP
+
+#include <memory>
 
 #include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/Shape3D.hpp"
 
 
 namespace CDPL
@@ -38,35 +41,28 @@ namespace CDPL
     namespace Vis
     {
 
-        class Shape3D;
-        class TriangleMesh3D;
-        
         /**
-         * \brief The base of all Vis::Shape3D visitor implementations [\ref VPTN].
+         * \brief Data structure used to describing the geometric shape of 3D objects by means of a triangle mesh.
          * \since 1.3
          */
-        class CDPL_VIS_API Shape3DVisitor
+        class CDPL_VIS_API TriangleMesh3D : public Shape3D
         {
 
           public:
-            /**
-             * \brief Virtual destructor.
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TriangleMesh3D instances.
              */
-            virtual ~Shape3DVisitor() {}
+            typedef std::shared_ptr<TriangleMesh3D> SharedPointer;
 
-            /**
-             * \brief Generic visit method for Vis::Shape3D instances.
-             * \param shape The Vis::Shape3D instance to visit.
-             */
-            virtual void visit(const Shape3D& shape) {}
+            TriangleMesh3D();
 
-            /**
-             * \brief Visit method for Vis::TriangleMesh3D instances.
-             * \param mesh The Vis::TriangleMesh3D instance to visit.
-             */
-            virtual void visit(const TriangleMesh3D& mesh) {}
+            TriangleMesh3D(const TriangleMesh3D& mesh);
+            
+            Shape3D::SharedPointer clone() const;
+
+            void accept(Shape3DVisitor& visitor) const;
         };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_SHAPE3DVISITOR_HPP
+#endif // CDPL_VIS_TRIANGLEMESH3D_HPP

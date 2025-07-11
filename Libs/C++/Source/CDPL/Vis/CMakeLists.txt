@@ -50,6 +50,7 @@ set(cdpl-vis_LIB_SRCS
     DataFormat.cpp
 
     Object3D.cpp
+    TriangleMesh3D.cpp
     
     StructureView2D.cpp
     ReactionView2D.cpp

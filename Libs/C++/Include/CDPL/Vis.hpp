@@ -85,6 +85,7 @@
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Vis/TriangleMesh3D.hpp"
 #include "CDPL/Vis/Shape3DVisitor.hpp"
 
 #ifdef HAVE_QT
