@@ -1,5 +1,5 @@
 /* 
- * Shape3DVisitor.hpp 
+ * IcosahedronMesh3D.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,13 +23,16 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Shape3DVisitor.
+ * \brief Definition of the class CDPL::Vis::IcosahedronMesh3D.
  */
 
-#ifndef CDPL_VIS_SHAPE3DVISITOR_HPP
-#define CDPL_VIS_SHAPE3DVISITOR_HPP
+#ifndef CDPL_VIS_ICOSAHEDRONMESH3D_HPP
+#define CDPL_VIS_ICOSAHEDRONMESH3D_HPP
+
+#include <memory>
 
 #include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/TriangleMesh3D.hpp"
 
 
 namespace CDPL
@@ -38,29 +41,22 @@ namespace CDPL
     namespace Vis
     {
 
-        class Shape3D;
-        class TriangleMesh3D;
-        
         /**
-         * \brief The base of all Vis::Shape3D visitor implementations [\ref VPTN].
+         * \brief A pre-defined triangle mesh providing the vertices and faces of a regular icosahedron.
          * \since 1.3
          */
-        class CDPL_VIS_API Shape3DVisitor
+        class CDPL_VIS_API IcosahedronMesh3D : public TriangleMesh3D
         {
 
           public:
-            /**
-             * \brief Virtual destructor.
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %IcosahedronMesh3D instances.
              */
-            virtual ~Shape3DVisitor() {}
+            typedef std::shared_ptr<IcosahedronMesh3D> SharedPointer;
 
-            /**
-             * \brief Visit method for Vis::TriangleMesh3D instances.
-             * \param mesh The Vis::TriangleMesh3D instance to visit.
-             */
-            virtual void visitTriangleMesh(const TriangleMesh3D& mesh) {}
-        };
+            IcosahedronMesh3D(double radius = 1.0);
+         };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_SHAPE3DVISITOR_HPP
+#endif // CDPL_VIS_ICOSAHEDRONMESH3D_HPP

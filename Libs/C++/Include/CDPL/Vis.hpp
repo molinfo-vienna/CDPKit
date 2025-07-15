@@ -50,6 +50,7 @@
 #include "CDPL/Vis/MolecularGraphFunctions.hpp"
 #include "CDPL/Vis/ReactionFunctions.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
+#include "CDPL/Vis/TriangleMesh3DFunctions.hpp"
 #include "CDPL/Vis/SizeAdjustment.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/LayoutStyle.hpp"
@@ -85,8 +86,9 @@
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Vis/TextBlockPrimitive2D.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
-#include "CDPL/Vis/TriangleMesh3D.hpp"
 #include "CDPL/Vis/Shape3DVisitor.hpp"
+#include "CDPL/Vis/TriangleMesh3D.hpp"
+#include "CDPL/Vis/IcosahedronMesh3D.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

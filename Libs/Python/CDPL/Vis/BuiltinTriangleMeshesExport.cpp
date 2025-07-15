@@ -1,5 +1,5 @@
 /* 
- * FunctionExports.hpp 
+ * BuiltinTriangleMeshesExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,20 +22,20 @@
  */
 
 
-#ifndef CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Vis/IcosahedronMesh3D.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonVis
+void CDPLPythonVis::exportBuiltinTriangleMeshes()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-    void exportAtomFunctions();
-    void exportBondFunctions();
-    void exportMolecularGraphFunctions();
-    void exportReactionFunctions();
-    void exportObject3DFunctions();
-    void exportControlParameterFunctions();
-    void exportTriangleMesh3DFunctions();
-} // namespace CDPLPythonVis
-
-#endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP
+    python::class_<Vis::IcosahedronMesh3D, Vis::IcosahedronMesh3D::SharedPointer,
+                   python::bases<Vis::TriangleMesh3D> >("IcosahedronMesh3D", python::no_init)
+        .def(python::init<double>((python::arg("self"), python::arg("radius") = 1.0)))
+        .def(python::init<const Vis::IcosahedronMesh3D&>((python::arg("self"), python::arg("mesh"))));
+}

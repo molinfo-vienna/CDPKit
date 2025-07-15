@@ -57,7 +57,7 @@ namespace CDPL
             typedef typename VecType::Pointer                      VecDataPointer;
             typedef typename MtxType::ConstArrayPointer            MtxDataPointer;
 
-            T              tmp[Dim];
+            T tmp[Dim];
             MtxDataPointer xform_data = xform.getData();
 
             for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
@@ -91,7 +91,7 @@ namespace CDPL
             typedef typename VecType::Pointer                      VecDataPointer;
             typedef typename MtxType::ConstArrayPointer            MtxDataPointer;
 
-            T              tmp[Dim];
+            T tmp[Dim];
             MtxDataPointer xform_data = xform.getData();
 
             for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
@@ -182,7 +182,7 @@ namespace CDPL
             typedef typename VecType::ConstPointer                      VecDataPointer;
             typedef typename MtxType::ConstArrayPointer                 MtxDataPointer;
 
-            T              sd         = T();
+            T sd = T();
             MtxDataPointer xform_data = va1_xform.getData();
 
             for (Iterator it1 = va1.getElementsBegin(), it2 = va2.getElementsBegin(), end = it1 + num_elem; it1 != end; ++it1, ++it2) {

@@ -33,6 +33,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -42,7 +43,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Data structure used to describing the geometric shape of 3D objects by means of a triangle mesh.
+         * \brief Data structure for describing the geometric shape of 3D objects by means of a triangle mesh.
          * \since 1.3
          */
         class CDPL_VIS_API TriangleMesh3D : public Shape3D
@@ -54,13 +55,44 @@ namespace CDPL
              */
             typedef std::shared_ptr<TriangleMesh3D> SharedPointer;
 
-            TriangleMesh3D();
-
-            TriangleMesh3D(const TriangleMesh3D& mesh);
-            
             Shape3D::SharedPointer clone() const;
 
             void accept(Shape3DVisitor& visitor) const;
+
+            Math::Vector3DArray& getVertices();
+
+            const Math::Vector3DArray& getVertices() const;
+
+            void addVertex(double x, double y, double z);
+
+            std::size_t getNumVertices() const;
+            
+            Math::Vector3DArray& getVertexNormals();
+
+            const Math::Vector3DArray& getVertexNormals() const;
+
+            void addVertexNormal(double x, double y, double z);
+
+            std::size_t getNumVertexNormals() const;
+            
+            Math::Vector3ULArray& getFaces();
+
+            const Math::Vector3ULArray& getFaces() const;
+
+            void addFace(unsigned long v1_idx, unsigned long v2_idx, unsigned long v3_idx);
+            
+            std::size_t getNumFaces() const;
+            
+            void clear();
+
+            void swap(TriangleMesh3D& mesh);
+
+            TriangleMesh3D& operator+=(const TriangleMesh3D& mesh);
+            
+          private:
+            Math::Vector3DArray  vertices;
+            Math::Vector3DArray  normals;
+            Math::Vector3ULArray faces;
         };
     } // namespace Vis
 } // namespace CDPL

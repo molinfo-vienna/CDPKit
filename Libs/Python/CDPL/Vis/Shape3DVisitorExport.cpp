@@ -38,26 +38,15 @@ namespace
     struct Shape3DVisitorWrapper : CDPL::Vis::Shape3DVisitor, boost::python::wrapper<CDPL::Vis::Shape3DVisitor>
     {
 
-        void visit(const CDPL::Vis::Shape3D& shape) {
-            if (boost::python::override f = this->get_override("visit"))
-                f(boost::ref(shape));    
-            else
-                Shape3DVisitor::visit(shape);
-        }
-
-        void visitDef(const CDPL::Vis::Shape3D& shape) {
-            Shape3DVisitor::visit(shape);
-        }
-
-        void visit(const CDPL::Vis::TriangleMesh3D& mesh) {
-            if (boost::python::override f = this->get_override("visit"))
+        void visitTriangleMesh(const CDPL::Vis::TriangleMesh3D& mesh) {
+            if (boost::python::override f = this->get_override("visitTriangleMesh"))
                 f(boost::ref(mesh));    
             else
-                Shape3DVisitor::visit(mesh);
+                Shape3DVisitor::visitTriangleMesh(mesh);
         }
 
-        void visitDef(const CDPL::Vis::TriangleMesh3D& mesh) {
-            Shape3DVisitor::visit(mesh);
+        void visitTriangleMeshDef(const CDPL::Vis::TriangleMesh3D& mesh) {
+            Shape3DVisitor::visitTriangleMesh(mesh);
         }
     };
 }
@@ -71,13 +60,9 @@ void CDPLPythonVis::exportShape3DVisitor()
     python::class_<Shape3DVisitorWrapper, boost::noncopyable>("Shape3DVisitor", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Shape3DVisitor>())    
-        .def("visit",
-             static_cast<void (Vis::Shape3DVisitor::*)(const Vis::Shape3D&)>(&Vis::Shape3DVisitor::visit),
-             static_cast<void (Shape3DVisitorWrapper::*)(const Vis::Shape3D&)>(&Shape3DVisitorWrapper::visitDef),
-             (python::arg("self"), python::arg("shape")))
-        .def("visit",
-             static_cast<void (Vis::Shape3DVisitor::*)(const Vis::TriangleMesh3D&)>(&Vis::Shape3DVisitor::visit),
-             static_cast<void (Shape3DVisitorWrapper::*)(const Vis::TriangleMesh3D&)>(&Shape3DVisitorWrapper::visitDef),
+        .def("visitTriangleMesh",
+             static_cast<void (Vis::Shape3DVisitor::*)(const Vis::TriangleMesh3D&)>(&Vis::Shape3DVisitor::visitTriangleMesh),
+             static_cast<void (Shape3DVisitorWrapper::*)(const Vis::TriangleMesh3D&)>(&Shape3DVisitorWrapper::visitTriangleMeshDef),
              (python::arg("self"), python::arg("mesh")))
         ;
 }

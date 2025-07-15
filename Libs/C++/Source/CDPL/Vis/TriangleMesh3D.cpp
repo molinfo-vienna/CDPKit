@@ -31,13 +31,6 @@
 using namespace CDPL;
 
 
-Vis::TriangleMesh3D::TriangleMesh3D() {}
-
-Vis::TriangleMesh3D::TriangleMesh3D(const TriangleMesh3D& mesh)
-{
-    // TODO
-}
-
 Vis::Shape3D::SharedPointer Vis::TriangleMesh3D::clone() const
 {
     return Shape3D::SharedPointer(new TriangleMesh3D(*this));
@@ -45,5 +38,105 @@ Vis::Shape3D::SharedPointer Vis::TriangleMesh3D::clone() const
 
 void Vis::TriangleMesh3D::accept(Shape3DVisitor& visitor) const
 {
-    visitor.visit(*this);
+    visitor.visitTriangleMesh(*this);
+}
+
+Math::Vector3DArray& Vis::TriangleMesh3D::getVertices()
+{
+    return vertices;
+}
+
+const Math::Vector3DArray& Vis::TriangleMesh3D::getVertices() const
+{
+    return vertices;
+}
+
+void Vis::TriangleMesh3D::addVertex(double x, double y, double z)
+{
+    vertices.getData().emplace_back(Math::Vector3D{x, y, z});
+}
+            
+std::size_t Vis::TriangleMesh3D::getNumVertices() const
+{
+    return vertices.getSize();
+}
+
+Math::Vector3DArray& Vis::TriangleMesh3D::getVertexNormals()
+{
+    return normals;
+}
+
+const Math::Vector3DArray& Vis::TriangleMesh3D::getVertexNormals() const
+{
+    return normals;
+}
+
+void Vis::TriangleMesh3D::addVertexNormal(double x, double y, double z)
+{
+    normals.getData().emplace_back(Math::Vector3D{x, y, z});
+}
+  
+std::size_t Vis::TriangleMesh3D::getNumVertexNormals() const
+{
+    return normals.getSize();
+}
+
+Math::Vector3ULArray& Vis::TriangleMesh3D::getFaces()
+{
+    return faces;
+}
+
+const Math::Vector3ULArray& Vis::TriangleMesh3D::getFaces() const
+{
+    return faces;
+}
+
+void Vis::TriangleMesh3D::addFace(unsigned long v1_idx, unsigned long v2_idx, unsigned long v3_idx)
+{
+    faces.getData().emplace_back(Math::Vector3UL{v1_idx, v2_idx, v3_idx});
+}
+
+std::size_t Vis::TriangleMesh3D::getNumFaces() const
+{
+    return faces.getSize();
+}
+
+void Vis::TriangleMesh3D::clear()
+{
+    vertices.clear();
+    normals.clear();
+    faces.clear();
+}
+
+void Vis::TriangleMesh3D::swap(TriangleMesh3D& mesh)
+{
+    vertices.swap(mesh.vertices);
+    normals.swap(mesh.normals);
+    faces.swap(mesh.faces);
+}
+
+Vis::TriangleMesh3D& Vis::TriangleMesh3D::operator+=(const TriangleMesh3D& mesh)
+{
+    auto& v_data = vertices.getData();
+    auto& rhs_v_data = mesh.vertices.getData();
+    auto prev_num_verts = v_data.size();
+    
+    v_data.reserve(prev_num_verts + rhs_v_data.size());
+    v_data.insert(v_data.end(), rhs_v_data.begin(), rhs_v_data.end());
+
+    auto& vn_data = normals.getData();
+    auto& rhs_vn_data = mesh.normals.getData();
+
+    vn_data.reserve(vn_data.size() + rhs_vn_data.size());
+    vn_data.insert(vn_data.end(), rhs_vn_data.begin(), rhs_vn_data.end());
+
+    auto& f_data = faces.getData();
+    auto& rhs_f_data = mesh.faces.getData();
+
+    f_data.reserve(f_data.size() + rhs_f_data.size());
+
+    for (auto& f : rhs_f_data) 
+        f_data.emplace_back(Math::Vector3UL{f[0] + prev_num_verts, f[1] + prev_num_verts, f[2] + prev_num_verts});
+    
+    return *this;
 }

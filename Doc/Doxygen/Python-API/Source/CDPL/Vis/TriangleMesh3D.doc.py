@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Data structure used to describing the geometric shape of 3D objects by means of a triangle mesh.
+# \brief Data structure for describing the geometric shape of 3D objects by means of a triangle mesh.
 # 
 # \since 1.3
 # 
@@ -43,3 +43,94 @@ class TriangleMesh3D(Shape3D):
     # \return \a self
     # 
     def assign(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getVertices() -> Math.Vector3DArray: pass
+
+    ##
+    # \brief 
+    # \param x 
+    # \param y 
+    # \param z 
+    #
+    def addVertex(x: float, y: float, z: float) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumVertices() -> int: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getVertexNormals() -> Math.Vector3DArray: pass
+
+    ##
+    # \brief 
+    # \param x 
+    # \param y 
+    # \param z 
+    #
+    def addVertexNormal(x: float, y: float, z: float) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumVertexNormals() -> int: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFaces() -> Math.Vector3ULArray: pass
+
+    ##
+    # \brief 
+    # \param v1_idx 
+    # \param v2_idx 
+    # \param v3_idx 
+    #
+    def addFace(v1_idx: int, v2_idx: int, v3_idx: int) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumFaces() -> int: pass
+
+    ##
+    # \brief 
+    #
+    def clear() -> None: pass
+
+    ##
+    # \brief 
+    # \param mesh 
+    # \return 
+    #
+    def swap(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
+
+    ##
+    # \brief Performs the in-place addition operation <tt>self += mesh</tt>.
+    # \param mesh Specifies the second addend.
+    # \return The updated \c %TriangleMesh3D instance \a self.
+    # 
+    def __iadd__(mesh: TriangleMesh3D) -> TriangleMesh3D: pass
+
+    vertices = property(getVertices)
+
+    numVertices = property(getNumVertices)
+
+    vertexNormals = property(getVertexNormals)
+
+    numVertexNormals = property(getNumVertexNormals)
+
+    faces = property(getFaces)
+
+    numFaces = property(getNumFaces)

@@ -46,12 +46,14 @@ set(cdpl-vis_LIB_SRCS
     Object3DPropertyFunctions.cpp
     
     MolecularGraphPrepareFor2DVisualizationFunction.cpp
-    ReactionPrepareFor2DVisualizationFunction.cpp    
-    DataFormat.cpp
+    ReactionPrepareFor2DVisualizationFunction.cpp
+    TriangleMesh3DFunctions.cpp
 
     Object3D.cpp
     TriangleMesh3D.cpp
+    IcosahedronMesh3D.cpp
     
+    DataFormat.cpp
     StructureView2D.cpp
     ReactionView2D.cpp
     StructureGridView2D.cpp

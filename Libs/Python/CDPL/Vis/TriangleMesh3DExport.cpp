@@ -42,5 +42,33 @@ void CDPLPythonVis::exportTriangleMesh3D()
         .def(python::init<const Vis::TriangleMesh3D&>((python::arg("self"), python::arg("mesh"))))
         .def("assign", CDPLPythonBase::copyAssOp<Vis::TriangleMesh3D>(),
              (python::arg("self"), python::arg("mesh")), python::return_self<>())
-        ;
+        .def("getVertices", static_cast<Math::Vector3DArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getVertices),
+             python::arg("self"), python::return_internal_reference<>())
+        .def("addVertex", &Vis::TriangleMesh3D::addVertex, (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("z")))
+        .def("getNumVertices", &Vis::TriangleMesh3D::getNumVertices, python::arg("self"))
+        .def("getVertexNormals", static_cast<Math::Vector3DArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getVertexNormals),
+             python::arg("self"), python::return_internal_reference<>())
+        .def("addVertexNormal", &Vis::TriangleMesh3D::addVertex, (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("z")))
+        .def("getNumVertexNormals", &Vis::TriangleMesh3D::getNumVertexNormals, python::arg("self"))
+        .def("getFaces", static_cast<Math::Vector3ULArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getFaces),
+             python::arg("self"), python::return_internal_reference<>())
+        .def("addFace", &Vis::TriangleMesh3D::addFace, (python::arg("self"), python::arg("v1_idx"), python::arg("v2_idx"), python::arg("v3_idx")))
+        .def("getNumFaces", &Vis::TriangleMesh3D::getNumFaces, python::arg("self"))
+        .def("clear", &Vis::TriangleMesh3D::clear, python::arg("self"))
+        .def("swap", &Vis::TriangleMesh3D::swap, (python::arg("self"), python::arg("mesh")),
+             python::return_self<>())
+        .def("__iadd__", &Vis::TriangleMesh3D::operator+=, (python::arg("self"), python::arg("mesh")),
+             python::return_self<>())
+        .add_property("vertices",
+                      python::make_function(static_cast<Math::Vector3DArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getVertices),
+                                            python::return_internal_reference<>()))
+        .add_property("numVertices", &Vis::TriangleMesh3D::getNumVertices)
+        .add_property("vertexNormals",
+                      python::make_function(static_cast<Math::Vector3DArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getVertexNormals),
+                                            python::return_internal_reference<>()))
+        .add_property("numVertexNormals", &Vis::TriangleMesh3D::getNumVertexNormals)
+        .add_property("faces",
+                      python::make_function(static_cast<Math::Vector3ULArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getFaces),
+                                            python::return_internal_reference<>()))
+        .add_property("numFaces", &Vis::TriangleMesh3D::getNumFaces);
 }
