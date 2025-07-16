@@ -37,17 +37,26 @@ namespace
 {
 
     template <typename V>
-    double length(const V& v)
+    inline double length(const V& v)
     {
         return std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     }
 
     template <typename V, typename T>
-    void scale(V& v, T f)
+    inline void scale(V& v, T f)
     {
         v[0] *= f;
         v[1] *= f;
         v[2] *= f;
+    }
+
+    template <typename A>
+    inline std::size_t getArrayEndIndex(const A& array, std::size_t offs, std::size_t count)
+    {
+        if (offs >= array.size())
+            return 0;
+    
+        return (count == 0 ? array.size() : std::min(array.size(), offs + count));
     }
 }
 
@@ -98,11 +107,12 @@ void Vis::subdivideSpherical(TriangleMesh3D& mesh)
             }
         }
 
-        // add new faces
+        // add new triangles
         faces.emplace_back(Math::Vector3UL{num_v, f[1], num_v + 1});
         faces.emplace_back(Math::Vector3UL{num_v + 1, f[2], num_v + 2});
         faces.emplace_back(Math::Vector3UL{num_v, num_v + 1, num_v + 2});
 
+        // modify original triangle
         f[1] = num_v;
         f[2] = num_v + 2;
         
@@ -115,13 +125,8 @@ void Vis::translate(TriangleMesh3D& mesh, double tx, double ty, double tz,
 {
     auto& vertices = mesh.getVertices().getData();
 
-    if (vtx_offs >= vertices.size())
-        return;
-    
-    std::size_t vtx_end_idx = (count == 0 ? vertices.size() : std::min(vertices.size(), vtx_offs + count));
-
-    for ( ; vtx_offs < vtx_end_idx; vtx_offs++) {
-        auto v = vertices[vtx_offs].getData();
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(vertices, vtx_offs, count); i < end_idx; i++) {
+        auto v = vertices[i].getData();
 
         v[0] += tx;
         v[1] += ty;
@@ -134,12 +139,7 @@ void Vis::scale(TriangleMesh3D& mesh, double sx, double sy, double sz,
 {
     auto& vertices = mesh.getVertices().getData();
 
-    if (vtx_offs >= vertices.size())
-        return;
-    
-    std::size_t vtx_end_idx = (count == 0 ? vertices.size() : std::min(vertices.size(), vtx_offs + count));
-
-    for (std::size_t i = vtx_offs; vtx_offs < vtx_end_idx; i++) {
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(vertices, vtx_offs, count); i < end_idx; i++) {
         auto v = vertices[i].getData();
         
         v[0] *= sx;
@@ -149,12 +149,7 @@ void Vis::scale(TriangleMesh3D& mesh, double sx, double sy, double sz,
 
     auto& normals = mesh.getVertexNormals().getData();
 
-    if (vtx_offs >= normals.size())
-        return;
-   
-    vtx_end_idx = (count == 0 ? normals.size() : std::min(normals.size(), vtx_offs + count));
-
-    for (std::size_t i = vtx_offs; vtx_offs < vtx_end_idx; vtx_offs++) {
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(normals, vtx_offs, count); i < end_idx; i++) {
         auto n = normals[i].getData();
 
         n[0] *= sx;
@@ -167,15 +162,81 @@ void Vis::scale(TriangleMesh3D& mesh, double sx, double sy, double sz,
 
 void Vis::rotateX(TriangleMesh3D& mesh, double a, std::size_t vtx_offs, std::size_t count)
 {
-    // TODO
+    auto cos_a = std::cos(a);
+    auto sin_a = std::sin(a);
+    auto& vertices = mesh.getVertices().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(vertices, vtx_offs, count); i < end_idx; i++) {
+        auto v = vertices[i].getData();
+        auto rot_y = cos_a * v[1] + sin_a * v[2];
+        auto rot_z = -sin_a * v[1] + cos_a * v[2]; 
+        
+        v[1] = rot_y;
+        v[2] = rot_z;
+    }
+
+    auto& normals = mesh.getVertexNormals().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(normals, vtx_offs, count); i < end_idx; i++) {
+        auto n = normals[i].getData();
+        auto rot_y = cos_a * n[1] + sin_a * n[2];
+        auto rot_z = -sin_a * n[1] + cos_a * n[2];
+
+        n[1] = rot_y;
+        n[2] = rot_z;
+    }
 }
 
 void Vis::rotateY(TriangleMesh3D& mesh, double a, std::size_t vtx_offs, std::size_t count)
 {
-    // TODO
+    auto cos_a = std::cos(a);
+    auto sin_a = std::sin(a);
+    auto& vertices = mesh.getVertices().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(vertices, vtx_offs, count); i < end_idx; i++) {
+        auto v = vertices[i].getData();
+        auto rot_x = cos_a * v[0] - sin_a * v[2];
+        auto rot_z = sin_a * v[0] + cos_a * v[2]; 
+        
+        v[0] = rot_x;
+        v[2] = rot_z;
+    }
+
+    auto& normals = mesh.getVertexNormals().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(normals, vtx_offs, count); i < end_idx; i++) {
+        auto n = normals[i].getData();
+        auto rot_x = cos_a * n[0] - sin_a * n[2];
+        auto rot_z = sin_a * n[0] + cos_a * n[2];
+
+        n[0] = rot_x;
+        n[2] = rot_z;
+    }
 }
 
 void Vis::rotateZ(TriangleMesh3D& mesh, double a, std::size_t vtx_offs, std::size_t count)
 {
-    // TODO
+    auto cos_a = std::cos(a);
+    auto sin_a = std::sin(a);
+    auto& vertices = mesh.getVertices().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(vertices, vtx_offs, count); i < end_idx; i++) {
+        auto v = vertices[i].getData();
+        auto rot_x = cos_a * v[0] + sin_a * v[1];
+        auto rot_y = -sin_a * v[0] + cos_a * v[1]; 
+        
+        v[0] = rot_x;
+        v[1] = rot_y;
+    }
+
+    auto& normals = mesh.getVertexNormals().getData();
+
+    for (std::size_t i = vtx_offs, end_idx = getArrayEndIndex(normals, vtx_offs, count); i < end_idx; i++) {
+        auto n = normals[i].getData();
+        auto rot_x = cos_a * n[0] + sin_a * n[1];
+        auto rot_y = -sin_a * n[0] + cos_a * n[1];
+
+        n[0] = rot_x;
+        n[1] = rot_y;
+    }
 }
