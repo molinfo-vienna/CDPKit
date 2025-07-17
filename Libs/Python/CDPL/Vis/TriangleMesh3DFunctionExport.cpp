@@ -36,16 +36,21 @@ void CDPLPythonVis::exportTriangleMesh3DFunctions()
     using namespace CDPL;
 
     python::def("subdivideSpherical", &Vis::subdivideSpherical, python::arg("mesh"));
+    python::def("removeVertexDuplicates", &Vis::removeVertexDuplicates, python::arg("mesh"));
+    python::def("calcVertexFromFaceNormals", &Vis::calcVertexFromFaceNormals,
+                (python::arg("mesh"), python::arg("weight_face_size") = false));
     python::def("translate", &Vis::translate,
-                (python::arg("mesh"), python::arg("tx"), python::arg("ty"), python::arg("tz"),
-                 python::arg("vtx_offs") = 0, python::arg("count") = 0));
+                (python::arg("mesh"), python::arg("trans_x"), python::arg("trans_y"), python::arg("trans_z"),
+                 python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
     python::def("scale", &Vis::scale,
-                (python::arg("mesh"), python::arg("sx"), python::arg("sy"), python::arg("sz"),
-                 python::arg("vtx_offs") = 0, python::arg("count") = 0));
+                (python::arg("mesh"), python::arg("scale_x"), python::arg("scale_y"), python::arg("scale_z"),
+                 python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
     python::def("rotateX", &Vis::rotateX,
-                (python::arg("mesh"), python::arg("a"), python::arg("vtx_offs") = 0, python::arg("count") = 0));
+                (python::arg("mesh"), python::arg("angle"), python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
     python::def("rotateY", &Vis::rotateY,
-                (python::arg("mesh"), python::arg("a"), python::arg("vtx_offs") = 0, python::arg("count") = 0));
+                (python::arg("mesh"), python::arg("angle"), python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
     python::def("rotateZ", &Vis::rotateZ,
-                (python::arg("mesh"), python::arg("a"), python::arg("vtx_offs") = 0, python::arg("count") = 0));
+                (python::arg("mesh"), python::arg("angle"), python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
+    python::def("transform", &Vis::transform,
+                (python::arg("mesh"), python::arg("mtx"), python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));
 }

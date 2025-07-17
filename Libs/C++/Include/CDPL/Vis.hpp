@@ -89,6 +89,7 @@
 #include "CDPL/Vis/Shape3DVisitor.hpp"
 #include "CDPL/Vis/TriangleMesh3D.hpp"
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
+#include "CDPL/Vis/RightFrustumMesh3D.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

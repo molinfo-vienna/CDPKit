@@ -32,6 +32,7 @@
 #include <cstddef>
 
 #include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL
@@ -50,32 +51,48 @@ namespace CDPL
         /**
          * \since 1.3
          */
-        CDPL_VIS_API void translate(TriangleMesh3D& mesh, double tx, double ty, double tz,
-                                    std::size_t vtx_offs = 0, std::size_t count = 0);
+        CDPL_VIS_API std::size_t removeVertexDuplicates(TriangleMesh3D& mesh);
 
         /**
          * \since 1.3
          */
-        CDPL_VIS_API void scale(TriangleMesh3D& mesh, double sx, double sy, double sz,
-                                std::size_t vtx_offs = 0, std::size_t count = 0);
+        CDPL_VIS_API void calcVertexFromFaceNormals(TriangleMesh3D& mesh, bool weight_face_size = false);
+    
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API void translate(TriangleMesh3D& mesh, double trans_x, double trans_y, double trans_z,
+                                    std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
 
         /**
          * \since 1.3
          */
-        CDPL_VIS_API void rotateX(TriangleMesh3D& mesh, double a,
-                                  std::size_t vtx_offs = 0, std::size_t count = 0);
+        CDPL_VIS_API void scale(TriangleMesh3D& mesh, double scale_x, double scale_y, double scale_z,
+                                std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API void rotateX(TriangleMesh3D& mesh, double angle,
+                                  std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
         
         /**
          * \since 1.3
          */
-        CDPL_VIS_API void rotateY(TriangleMesh3D& mesh, double a,
-                                  std::size_t vtx_offs = 0, std::size_t count = 0);
+        CDPL_VIS_API void rotateY(TriangleMesh3D& mesh, double angle,
+                                  std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
         
         /**
          * \since 1.3
          */
-        CDPL_VIS_API void rotateZ(TriangleMesh3D& mesh, double a,
-                                  std::size_t vtx_offs = 0, std::size_t count = 0);
+        CDPL_VIS_API void rotateZ(TriangleMesh3D& mesh, double angle,
+                                  std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API void transform(TriangleMesh3D& mesh, const Math::Matrix4D& mtx,
+                                    std::size_t vtx_offs = 0, std::size_t vtx_count = 0);
         
     } // namespace Vis
 } // namespace CDPL

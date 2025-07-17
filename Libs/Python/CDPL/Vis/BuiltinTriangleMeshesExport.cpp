@@ -25,6 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
+#include "CDPL/Vis/RightFrustumMesh3D.hpp"
 
 #include "ClassExports.hpp"
 
@@ -38,4 +39,11 @@ void CDPLPythonVis::exportBuiltinTriangleMeshes()
                    python::bases<Vis::TriangleMesh3D> >("IcosahedronMesh3D", python::no_init)
         .def(python::init<double>((python::arg("self"), python::arg("radius") = 1.0)))
         .def(python::init<const Vis::IcosahedronMesh3D&>((python::arg("self"), python::arg("mesh"))));
+
+    python::class_<Vis::RightFrustumMesh3D, Vis::RightFrustumMesh3D::SharedPointer,
+                   python::bases<Vis::TriangleMesh3D> >("RightFrustumMesh3D", python::no_init)
+        .def(python::init<double, double, double, std::size_t, bool, bool>(
+            (python::arg("self"), python::arg("radius1"), python::arg("radius2"), python::arg("height"),
+             python::arg("num_sides"), python::arg("close_btm") = true, python::arg("close_top") = true)))
+        .def(python::init<const Vis::RightFrustumMesh3D&>((python::arg("self"), python::arg("mesh"))));
 }
