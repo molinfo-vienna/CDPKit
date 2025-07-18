@@ -36,13 +36,124 @@ using namespace CDPL;
 Vis::RightFrustumMesh3D::RightFrustumMesh3D(double radius1, double radius2, double height, std::size_t num_sides,
                                             bool close_btm, bool close_top)
 {
-    auto& vertices = getVertices().getData();
-    auto& faces = getFaces().getData();
+    if (num_sides < 2)
+        return;
 
-    vertices.reserve(2 * num_sides + 2);
-    faces.reserve(4 * num_sides);
+    getVertices().reserve(2 * num_sides + 2);
+    getFaces().reserve(4 * num_sides);
+
+    auto ang_inc = M_PI * 2.0 / num_sides;
     
-    // TODO
+    if (radius1 == 0.0) {
+        addVertex(0.0, 0.0, 0.0);
+
+        for (std::size_t i = 0; i < num_sides; i++) {
+            auto a = ang_inc * i;
+
+            addVertex(radius2 * std::cos(a), radius2 * std::sin(a), height);
+            addFace(0, ((i + 1) % num_sides) + 1, i + 1);
+        }
+
+        if (close_top) {
+            switch (num_sides) {
+
+                case 4:
+                    addFace(1, 3, 4);
+                    
+                case 3:
+                    addFace(1, 2, 3);
+
+                case 2:
+                    break;
+                    
+                default:
+                    addVertex(0.0, 0.0, height);
+                    
+                    for (std::size_t i = 0; i < num_sides; i++)
+                        addFace(num_sides + 1, i + 1, ((i + 1) % num_sides) + 1);
+            }
+        }
+        
+    } else if (radius2 == 0.0) {
+        addVertex(0.0, 0.0, height);
+
+        for (std::size_t i = 0; i < num_sides; i++) {
+            auto a = ang_inc * i;
+
+            addVertex(radius1 * std::cos(a), radius1 * std::sin(a), 0.0);
+            addFace(0, i + 1, ((i + 1) % num_sides) + 1);
+        }
+
+        if (close_btm) {
+            switch (num_sides) {
+
+                case 4:
+                    addFace(1, 4, 3);
+                    
+                case 3:
+                    addFace(1, 3, 2);
+
+                case 2:
+                    break;
+                    
+                default:
+                    addVertex(0.0, 0.0, 0.0);
+                    
+                    for (std::size_t i = 0; i < num_sides; i++)
+                        addFace(num_sides + 1, ((i + 1) % num_sides) + 1, i + 1);
+            }
+        }
+        
+    } else {
+        for (std::size_t i = 0; i < num_sides; i++) {
+            auto a = ang_inc * i;
+            auto cosa = std::cos(a);
+            auto sina = std::sin(a);
+
+            addVertex(radius1 * cosa, radius1 * sina, 0.0);
+            addVertex(radius2 * cosa, radius2 * sina, height);
+            
+            addFace(i * 2, ((i + 1) % num_sides) * 2, ((i + 1) % num_sides) * 2 + 1);
+            addFace(i * 2, ((i + 1) % num_sides) * 2 + 1, i * 2 + 1);
+        }
+
+        if (close_top || close_btm) {
+            switch (num_sides) {
+
+                case 4:
+                    if (close_btm)
+                        addFace(0, 6, 4);
+
+                    if (close_top)
+                        addFace(1, 5, 7);
+                          
+                case 3:
+                    if (close_btm)
+                        addFace(0, 4, 2);
+
+                    if (close_top)
+                        addFace(1, 3, 5);
+
+                case 2:
+                    break;
+
+                default:
+                    if (close_btm) {
+                        addVertex(0.0, 0.0, 0.0);
+
+                        for (std::size_t i = 0; i < num_sides; i++)
+                            addFace(num_sides * 2, ((i + 1) % num_sides) * 2, i * 2);
+                    }
+
+                    if (close_top) {
+                        addVertex(0.0, 0.0, height);
+
+                        for (std::size_t i = 0; i < num_sides; i++)
+                            addFace(num_sides * 2 + (close_btm ? 1 : 0), i * 2 + 1, ((i + 1) % num_sides) * 2 + 1);
+                    }
+            }
+        }
+    }
 
     calcVertexFromFaceNormals(*this);
 }

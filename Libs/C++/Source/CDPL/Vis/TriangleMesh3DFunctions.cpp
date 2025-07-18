@@ -121,7 +121,7 @@ void Vis::subdivideSpherical(TriangleMesh3D& mesh)
     }
 }
 
-std::size_t Vis::removeVertexDuplicates(TriangleMesh3D& mesh)
+std::size_t Vis::removeVertexDuplicates(TriangleMesh3D& mesh, bool check_vn, double tol)
 {
     auto& vertices = mesh.getVertices().getData();
     std::size_t num_v = vertices.size();
@@ -143,7 +143,11 @@ std::size_t Vis::removeVertexDuplicates(TriangleMesh3D& mesh)
             if (vtx_mapping[j] < num_v)
                 continue;
 
-            if ((v == vertices[j]) && ((j >= num_n) || (normals[i] == normals[j])))
+            if (tol > 0.0) {
+                if ((length(v - vertices[j]) <= tol) && (!check_vn || (j >= num_n) || (length(normals[i] - normals[j]) <= tol)))
+                    vtx_mapping[j] = new_vertices.size();
+
+            } else if ((v == vertices[j]) && (!check_vn || (j >= num_n) || (normals[i] == normals[j])))
                 vtx_mapping[j] = new_vertices.size();
         }
 

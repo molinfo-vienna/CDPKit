@@ -51,7 +51,7 @@ namespace CDPL
         /**
          * \since 1.3
          */
-        CDPL_VIS_API std::size_t removeVertexDuplicates(TriangleMesh3D& mesh);
+        CDPL_VIS_API std::size_t removeVertexDuplicates(TriangleMesh3D& mesh, bool check_vn = true, double tol = 0.0);
 
         /**
          * \since 1.3

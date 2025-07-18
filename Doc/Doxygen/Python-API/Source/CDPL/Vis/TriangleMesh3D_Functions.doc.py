@@ -86,9 +86,11 @@ def transform(mesh: TriangleMesh3D, mtx: Math.Matrix4D, vtx_offs: int = 0, vtx_c
 ##
 # \brief 
 # \param mesh 
+# \param check_vn 
+# \param tol 
 # \return 
 #
-def removeVertexDuplicates(mesh: TriangleMesh3D) -> int: pass
+def removeVertexDuplicates(mesh: TriangleMesh3D, check_vn: bool = True, tol: float = 0.0) -> int: pass
 
 ##
 # \brief 

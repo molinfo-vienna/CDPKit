@@ -36,7 +36,8 @@ void CDPLPythonVis::exportTriangleMesh3DFunctions()
     using namespace CDPL;
 
     python::def("subdivideSpherical", &Vis::subdivideSpherical, python::arg("mesh"));
-    python::def("removeVertexDuplicates", &Vis::removeVertexDuplicates, python::arg("mesh"));
+    python::def("removeVertexDuplicates", &Vis::removeVertexDuplicates,
+                (python::arg("mesh"), python::arg("check_vn") = true, python::arg("tol") = 0.0));
     python::def("calcVertexFromFaceNormals", &Vis::calcVertexFromFaceNormals,
                 (python::arg("mesh"), python::arg("weight_face_size") = false));
     python::def("translate", &Vis::translate,
