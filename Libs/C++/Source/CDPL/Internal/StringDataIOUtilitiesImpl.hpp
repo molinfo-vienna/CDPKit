@@ -38,7 +38,7 @@
 
 void CDPL::Internal::checkStreamState(const std::istream& is, const char* err_msg)
 {
-    if (!is.good())
+    if (!is.good() && (is.rdstate() != std::ios_base::eofbit))
         throw Base::IOError(std::string(err_msg) + ": unexpected end of data or unspecified read error");
 }
 
@@ -53,7 +53,7 @@ void CDPL::Internal::skipChars(std::istream& is, std::size_t count, const char* 
         int tmp = rdbuf->sbumpc();
 
         if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
-            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            is.clear(i == 0 ? std::ios_base::eofbit | std::ios_base::failbit : std::ios_base::eofbit);
             break;
         }
 
@@ -203,7 +203,7 @@ T CDPL::Internal::readNumber(std::istream& is, const char* err_msg, bool throw_e
         int tmp = rdbuf->sbumpc();
 
         if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
-            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            is.clear(i == 0 ? std::ios_base::eofbit | std::ios_base::failbit : std::ios_base::eofbit);
             break;
         }
                 
@@ -238,14 +238,13 @@ void CDPL::Internal::writeEOL(std::ostream& os, char eol_char)
     os << eol_char;
 }
 
-void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char, bool allow_eof)
+void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
-    for (std::size_t i = 0; i < count && is.good(); i++)
+    std::size_t i = 0;
+    
+    for ( ; i < count && is.good(); i++)
         is.ignore(std::numeric_limits<std::streamsize>::max(), std::istream::traits_type::to_int_type(eol_char));
 
-    if (allow_eof && is.rdstate() == std::istream::eofbit)
-        return;
-    
     checkStreamState(is, err_msg);
 }
         
@@ -285,7 +284,7 @@ std::string& CDPL::Internal::readString(std::istream& is, std::size_t field_size
         int tmp = rdbuf->sbumpc();
 
         if (std::istream::traits_type::eq_int_type(tmp, EOF_)) {
-            is.clear(std::ios_base::eofbit | std::ios_base::failbit);
+            is.clear(i == 0 ? std::ios_base::eofbit | std::ios_base::failbit : std::ios_base::eofbit);
             break;
         }
 

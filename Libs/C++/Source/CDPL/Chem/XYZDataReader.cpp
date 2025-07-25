@@ -268,7 +268,7 @@ bool Chem::XYZDataReader::readNextConformer(std::istream& is, const MolecularGra
                 throw Base::IOError("XYZDataReader: error while reading atom z coordinate");
         }
 
-        Internal::skipLines(is, 1, "XYZDataReader: error while reading atom line", '\n', i == (atomCount - 1));
+        Internal::skipLines(is, 1, "XYZDataReader: error while reading atom line", '\n');
     }    
 
     return true;
@@ -318,7 +318,7 @@ void Chem::XYZDataReader::readAtoms(std::istream& is, Molecule& mol)
 
         set3DCoordinates(atom, coords);
 
-        Internal::skipLines(is, 1, "XYZDataReader: error while reading atom line", '\n', i == (atomCount - 1));
+        Internal::skipLines(is, 1, "XYZDataReader: error while reading atom line", '\n');
     }
 }
 
