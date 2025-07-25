@@ -308,7 +308,7 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
                 
             } while (hasMoreData(is));
 
-            return false;
+            return true;
         } 
 
         skipMOLHeaderBlock(is);
@@ -2022,16 +2022,8 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
     StringDataBlock::SharedPointer sd_ptr(new StringDataBlock());
     StringDataBlockEntry data_entry;
 
-    while (true) {
-        try {
-            readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
-
-        } catch (const Base::IOError&) {
-            if (is.eof() && (line == SDFile::RECORD_DELIMITER))
-                break;
-
-            throw;
-        }
+    while (hasMoreData(is)) {
+        readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
         
         if (line.empty()) {
             if (strictErrorChecking)
@@ -2056,7 +2048,7 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 
         tmpString.clear();
 
-        while (true) {
+        while (hasMoreData(is)) {
             readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength, 
                         MAX_DATA_LINE_LENGTH);
 
@@ -2081,16 +2073,8 @@ void Chem::MDLDataReader::skipSDFData(std::istream& is)
 {   
     using namespace MDL;
 
-    while (true) {
-        try {
-            readMDLLine(is, line, "MDLDataReader: error while skipping structure data header");
-
-        } catch (const Base::IOError&) {
-            if (is.eof() && (line == SDFile::RECORD_DELIMITER))
-                break;
-
-            throw;
-        }
+    while (hasMoreData(is)) {
+        readMDLLine(is, line, "MDLDataReader: error while skipping structure data header");
 
         if (line.empty()) 
             continue;
@@ -2101,7 +2085,7 @@ void Chem::MDLDataReader::skipSDFData(std::istream& is)
         if (line.find(SDFile::DATA_HEADER_PREFIX) != 0) 
             continue;
         
-        while (true) {
+        while (hasMoreData(is)) {
             readMDLLine(is, line, "MDLDataReader: error while skipping structure data");
 
             if (line.empty())
@@ -2565,7 +2549,7 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 
         line.erase(0, RDFile::DATA_FIELD_IDENTIFIER.length());
 
-        while (true) {
+        while (hasMoreData(is)) {
             readMDLLine(is, tmpString, "MDLDataReader: error while reading rd-file datafield identifier", 
                         false, checkLineLength);
 
@@ -2652,7 +2636,7 @@ void Chem::MDLDataReader::skipRDFData(std::istream& is)
         if (keyword != RDFile::DATA_FIELD_IDENTIFIER) 
             continue;
 
-        while (true) {
+        while (hasMoreData(is)) {
             readMDLLine(is, line, "MDLDataReader: error while reading rd-file datafield identifier", false);
 
             if (!hasRDFKeywordPrefix(line))
