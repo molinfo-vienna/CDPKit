@@ -240,19 +240,19 @@ bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& re
     if (use_mcss) {
         CommonConnectedSubstructureSearch sub_search(ref_molgraph);
 
-        sub_search.setAtomMatchExpressionFunction([](const Atom& atom) {
+        sub_search.setAtomMatchExpressionFunction([](const Atom& atom) -> auto& {
             if (hasMatchExpression(atom))
                 return getMatchExpression(atom);
 
             return DEF_ATOM_MATCH_EXPR;
         });
-        sub_search.setBondMatchExpressionFunction([](const Bond& bond) {
+        sub_search.setBondMatchExpressionFunction([](const Bond& bond) -> auto& {
             if (hasMatchExpression(bond))
                 return getMatchExpression(bond);
 
             return DEF_BOND_MATCH_EXPR;
         });
-        sub_search.setMolecularGraphMatchExpressionFunction([](const MolecularGraph& molgraph) {
+        sub_search.setMolecularGraphMatchExpressionFunction([](const MolecularGraph& molgraph) -> auto& {
             if (hasMatchExpression(molgraph))
                 return getMatchExpression(molgraph);
 
@@ -312,19 +312,19 @@ bool Chem::align2DCoordinates(MolecularGraph& molgraph, const MolecularGraph& re
     } else {
         SubstructureSearch sub_search(ref_molgraph);
 
-        sub_search.setAtomMatchExpressionFunction([](const Atom& atom) {
+        sub_search.setAtomMatchExpressionFunction([](const Atom& atom) -> auto& {
             if (hasMatchExpression(atom))
                 return getMatchExpression(atom);
 
             return DEF_ATOM_MATCH_EXPR;
         });
-        sub_search.setBondMatchExpressionFunction([](const Bond& bond) {
+        sub_search.setBondMatchExpressionFunction([](const Bond& bond) -> auto& {
             if (hasMatchExpression(bond))
                 return getMatchExpression(bond);
 
             return DEF_BOND_MATCH_EXPR;
         });
-        sub_search.setMolecularGraphMatchExpressionFunction([](const MolecularGraph& molgraph) {
+        sub_search.setMolecularGraphMatchExpressionFunction([](const MolecularGraph& molgraph) -> auto& {
             if (hasMatchExpression(molgraph))
                 return getMatchExpression(molgraph);
 
