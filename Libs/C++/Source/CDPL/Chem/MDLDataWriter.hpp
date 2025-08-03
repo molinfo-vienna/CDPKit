@@ -96,7 +96,7 @@ namespace CDPL
 
             void writeCTabV2000Bond(std::ostream&, const MolecularGraph&, const Bond&) const;
             void writeCTabV2000BondAtomIndices(std::ostream&, const MolecularGraph&, const Bond&, bool) const;
-            void writeCTabV2000BondType(std::ostream&, std::size_t, const MatchConstraintList&) const;
+            void writeCTabV2000BondType(std::ostream&, const Bond&, std::size_t, const MatchConstraintList&) const;
             void writeCTabV2000BondStereo(std::ostream&, unsigned int, std::size_t) const;
             void writeCTabV2000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&,
                                                  const MatchConstraintList&) const;
@@ -160,7 +160,7 @@ namespace CDPL
 
             void writeCTabV3000Bond(std::ostream&, const MolecularGraph&, const Bond&) const;
             void writeCTabV3000BondIndex(std::ostream&, const MolecularGraph&, const Bond&) const;
-            void writeCTabV3000BondType(std::ostream&, std::size_t, const MatchConstraintList&) const;
+            void writeCTabV3000BondType(std::ostream&, const Bond&, std::size_t, const MatchConstraintList&) const;
             void writeCTabV3000BondAtomIndices(std::ostream&, const MolecularGraph&, const Bond&, bool) const;
             void writeCTabV3000BondStereo(std::ostream&, unsigned int) const;
             void writeCTabV3000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&,
@@ -207,6 +207,7 @@ namespace CDPL
             bool                    writeConfEnergySDEntry;
             bool                    writeConfEnergyComment;
             bool                    writeConfEnergyField;
+            bool                    outputAromBondTypes;
             std::string             confEnergySDTag;
             std::string             confIdxSuffixPattern;
             double                  confEnergy;

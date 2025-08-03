@@ -192,6 +192,17 @@ namespace CDPL
 
         CDPL_CHEM_API void clearMDLOutputConfEnergyAsSDEntryParameter(Base::ControlParameterContainer& cntnr);
 
+        /**
+         * \since 1.3
+         */
+        CDPL_CHEM_API bool getMDLOutputAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void setMDLOutputAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+        CDPL_CHEM_API bool hasMDLOutputAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_CHEM_API void clearMDLOutputAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
+        
 
         CDPL_CHEM_API const std::string& getMDLConfEnergySDTagParameter(const Base::ControlParameterContainer& cntnr);
 

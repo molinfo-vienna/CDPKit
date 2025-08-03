@@ -135,7 +135,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether the stereo parity of atoms shall be ignored when reading or writing data 
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, the stereo parity of atoms will be ignored both on
              * reading (i.e. the read MDL parity of an input atom will not be converted to the corresponding Chem::StereoDescriptor
@@ -148,7 +148,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to update the timestamp of \e Mol- and \e Rxn-File header blocks when writing data
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, the timestamp of molecule and reaction data records will
              * specify the time of their writing. If \c %MDL_UPDATE_TIMESTAMP is \c false, the time specified by one of the
@@ -162,7 +162,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from string values when reading or writing data
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of string data field
              * values will be removed before processing continues.
@@ -174,7 +174,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to remove leading and trailing whitespace from data lines when reading or writing data 
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, leading and trailing whitespace of data lines 
              * will be removed before processing continues.
@@ -186,7 +186,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether string values that exceed the size of an output data field may be truncated when writing data
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, output string values whose length exceeds the size of the target data
              * field are silently truncated to the respective field size.
@@ -199,7 +199,7 @@ namespace CDPL
 
             /**
              * \brief Specifies whether data lines that exceed the maximum allowed line length may be truncated when writing data
-             *        in a <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
              *
              * If the control-parameter is set to \c true, output data lines which exceed the maximum allowed line length
              * (according to the <em>MDL CTFile</em> specification) are silently truncated before they get written.
@@ -219,8 +219,15 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MDL_CONF_ENERGY_SD_TAG;
 
             /**
+             * \brief Specifies whether to output the value \e 4 (= aromatic) in the bond type field of aromatics bonds when writing data
+             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             * \since 1.3
+             */
+            extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_AROMATIC_BOND_TYPES;
+            
+            /**
              * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
-             *        in a <em>MDL</em> [\ref CTFILE] format.
+             *        in an <em>MDL</em> [\ref CTFILE] format.
              *
              * If the control-parameter is set to \c true, the length of data lines that were read from or have to
              * be written to data encoded in one of the above mentioned formats will be checked against the maximum
@@ -233,7 +240,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CHECK_LINE_LENGTH;
 
             /**
-             * \brief Specifies the desired data format version for the output of reactions in <em>MDL Rxn-</em> or \e RD-File
+             * \brief Specifies the desired data format version for the output of reactions in an <em>MDL Rxn-</em> or \e RD-File
              *        format [\ref CTFILE].
              *
              * The desired data format version is specified by one of the constants defined in namespace CDPL::Chem::MDLDataFormatVersion.

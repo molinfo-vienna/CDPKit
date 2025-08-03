@@ -317,6 +317,7 @@ void Chem::MDLDataWriter::init(std::ostream& os, bool rxn_mode)
     writeConfEnergyField    = (multiConfExport && getMDLOutputConfEnergyToEnergyFieldParameter(ioBase));
     writeConfEnergySDEntry  = (multiConfExport && getMDLOutputConfEnergyAsSDEntryParameter(ioBase));
     writeConfEnergyComment  = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
+    outputAromBondTypes     = getMDLOutputAromaticBondTypesParameter(ioBase);
 
     if (multiConfExport)
         confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);
@@ -855,7 +856,7 @@ void Chem::MDLDataWriter::writeCTabV2000Bond(std::ostream& os, const MolecularGr
 
     writeCTabV2000BondAtomIndices(os, molgraph, bond, bondMemberSwapStereoFix && isReverseStereo(bond_stereo));
 
-    writeCTabV2000BondType(os, order, constr_list);
+    writeCTabV2000BondType(os, bond, order, constr_list);
     writeCTabV2000BondStereo(os, bond_stereo, order);
 
     Internal::writeWhitespace(os, 3);
@@ -884,7 +885,7 @@ void Chem::MDLDataWriter::writeCTabV2000BondAtomIndices(std::ostream& os, const 
     writeIntegerNumber(os, 3, atom2_idx);
 }
 
-void Chem::MDLDataWriter::writeCTabV2000BondType(std::ostream& os, std::size_t order, const MatchConstraintList& constr_list) const
+void Chem::MDLDataWriter::writeCTabV2000BondType(std::ostream& os, const Bond& bond, std::size_t order, const MatchConstraintList& constr_list) const
 {
     using namespace Internal;
     using namespace MDL::MOLFile::CTab::V2000;
@@ -928,25 +929,30 @@ void Chem::MDLDataWriter::writeCTabV2000BondType(std::ostream& os, std::size_t o
 
     unsigned int type;
 
-    switch (order) {
+    if (outputAromBondTypes && getAromaticityFlag(bond))
+        type = BondBlock::TYPE_AROMATIC;
 
-        case 1:
-            type = BondBlock::TYPE_SINGLE;
-            break;
+    else {
+        switch (order) {
 
-        case 2:
-            type = BondBlock::TYPE_DOUBLE;
-            break;
+            case 1:
+                type = BondBlock::TYPE_SINGLE;
+                break;
 
-        case 3:
-            type = BondBlock::TYPE_TRIPLE;
-            break;
-                    
-        default:
-            if (strictErrorChecking)
-                throw Base::IOError("MDLDataWriter: invalid bond order");
+            case 2:
+                type = BondBlock::TYPE_DOUBLE;
+                break;
 
-            type = BondBlock::TYPE_SINGLE;
+            case 3:
+                type = BondBlock::TYPE_TRIPLE;
+                break;
+
+            default:
+                if (strictErrorChecking)
+                    throw Base::IOError("MDLDataWriter: invalid bond order");
+
+                type = BondBlock::TYPE_SINGLE;
+        }
     }
 
     writeIntegerNumber(os, 3, type, "MDLDataWriter: error while writing bond type specification");
@@ -2571,7 +2577,7 @@ void Chem::MDLDataWriter::writeCTabV3000Bond(std::ostream& os, const MolecularGr
 
     unsigned int bond_stereo = getBondStereo(bond);
 
-    writeCTabV3000BondType(line_oss, order, constr_list);
+    writeCTabV3000BondType(line_oss, bond, order, constr_list);
     writeCTabV3000BondAtomIndices(line_oss, molgraph, bond, bondMemberSwapStereoFix && isReverseStereo(bond_stereo));
     writeCTabV3000BondStereo(line_oss, bond_stereo);
     writeCTabV3000BondQueryTopology(line_oss, molgraph, bond, constr_list);
@@ -2586,7 +2592,7 @@ void Chem::MDLDataWriter::writeCTabV3000BondIndex(std::ostream& os, const Molecu
     os << (molgraph.getBondIndex(bond) + 1);
 }
 
-void Chem::MDLDataWriter::writeCTabV3000BondType(std::ostream& os, std::size_t order, const MatchConstraintList& constr_list) const
+void Chem::MDLDataWriter::writeCTabV3000BondType(std::ostream& os, const Bond& bond, std::size_t order, const MatchConstraintList& constr_list) const
 {
     using namespace MDL;
     using namespace MDL::MOLFile::CTab::V3000;
@@ -2630,6 +2636,11 @@ void Chem::MDLDataWriter::writeCTabV3000BondType(std::ostream& os, std::size_t o
         }
     }
 
+    if (outputAromBondTypes && getAromaticityFlag(bond)) {
+        os << BondBlock::TYPE_AROMATIC;
+        return;
+    }
+    
     switch (order) {
 
         case 1:

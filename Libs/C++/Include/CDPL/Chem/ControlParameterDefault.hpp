@@ -139,6 +139,12 @@ namespace CDPL
             extern CDPL_CHEM_API const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
 
             /**
+             * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_OUTPUT_AROMATIC_BOND_TYPES.
+             * \since 1.3
+             */
+            extern CDPL_CHEM_API const bool MDL_OUTPUT_AROMATIC_BOND_TYPES;
+
+            /**
              * \brief Default setting (= \c "<Energy>") for the control-parameter Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG.
              */
             extern CDPL_CHEM_API const std::string MDL_CONF_ENERGY_SD_TAG;

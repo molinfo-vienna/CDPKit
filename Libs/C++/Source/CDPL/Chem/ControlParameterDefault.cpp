@@ -62,7 +62,8 @@ namespace CDPL
             const bool MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD                               = false;
             const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY                                   = false;
             const std::string MDL_CONF_ENERGY_SD_TAG                                        = "<Energy>";
-
+            const bool MDL_OUTPUT_AROMATIC_BOND_TYPES                                       = false;
+            
             const std::string SMILES_RECORD_FORMAT                                          = "SN";
             const bool SMILES_OUTPUT_CANONICAL_FORM                                         = false;
             const bool SMILES_OUTPUT_KEKULE_FORM                                            = false;

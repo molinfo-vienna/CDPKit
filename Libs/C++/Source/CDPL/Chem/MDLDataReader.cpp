@@ -2549,7 +2549,7 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 
         line.erase(0, RDFile::DATA_FIELD_IDENTIFIER.length());
 
-        while (hasMoreData(is)) {
+        while (true) {
             readMDLLine(is, tmpString, "MDLDataReader: error while reading rd-file datafield identifier", 
                         false, checkLineLength);
 
@@ -2636,7 +2636,7 @@ void Chem::MDLDataReader::skipRDFData(std::istream& is)
         if (keyword != RDFile::DATA_FIELD_IDENTIFIER) 
             continue;
 
-        while (hasMoreData(is)) {
+        while (true) {
             readMDLLine(is, line, "MDLDataReader: error while reading rd-file datafield identifier", false);
 
             if (!hasRDFKeywordPrefix(line))

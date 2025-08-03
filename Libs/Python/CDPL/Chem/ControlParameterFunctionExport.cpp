@@ -77,6 +77,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MDLOutputConfEnergyToEnergyField)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MDLOutputConfEnergyAsSDEntry)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const std::string&, MDLConfEnergySDTag)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MDLOutputAromaticBondTypes)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, SMILESOutputCanonicalForm)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, SMILESOutputKekuleForm)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, SMILESOutputAtomStereo)
