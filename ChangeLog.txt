@@ -1,7 +1,7 @@
 master:
 
  - The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
- - Readers for various text-based file formats now do not require anymore that also the last line of a file is terminated by a new-line character
+ - Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
  - Added methods to class Chem::CommonConnectedSubstructureSearch that allow to customize the way atom, bond and molecular graph
    match expression functions employed for substructure matching will be retrieved (default: use the expressions provided as properties)
  - Renamed functions Biomol::*PDBIgnoreConectRecordsParameter() into Biomol::*PDBIgnoreCONECTRecordsParameter()
