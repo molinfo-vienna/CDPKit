@@ -1,5 +1,5 @@
 /* 
- * TorusMesh3D.hpp 
+ * Object3DFactory.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,16 +23,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::TorusMesh3D.
+ * \brief Definition of the class CDPL::Vis::Object3DFactory.
  */
 
-#ifndef CDPL_VIS_TORUSMESH3D_HPP
-#define CDPL_VIS_TORUSMESH3D_HPP
-
-#include <memory>
+#ifndef CDPL_VIS_OBJECT3DFACTORY_HPP
+#define CDPL_VIS_OBJECT3DFACTORY_HPP
 
 #include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Vis/TriangleMesh3D.hpp"
+#include "CDPL/Base/ControlParameterContainer.hpp"
 
 
 namespace CDPL
@@ -42,23 +40,18 @@ namespace CDPL
     {
 
         /**
-         * \brief A pre-defined triangle mesh providing the vertices and faces of a torus specified
-         *        by the contructor arguments.
-         * \since 1.3
+         * \brief The abstract base of classes implementing the creation of Vis::Object3D instances for the 3D visualization of data objects.
          */
-        class CDPL_VIS_API TorusMesh3D : public TriangleMesh3D
+        class CDPL_VIS_API Object3DFactory : public Base::ControlParameterContainer
         {
 
           public:
-            /**    
-             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TorusMesh3D instances.
+            /**
+             * \brief Virtual destructor.
              */
-            typedef std::shared_ptr<TorusMesh3D> SharedPointer;
-
-            TorusMesh3D(double radius1, double radius2, std::size_t num_sect1, std::size_t num_sect2,
-                        double start_angle = 0.0, double first_sect_size = 0.0);
-         };
+            virtual ~Object3DFactory() {}
+        };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_TORUSMESH3D_HPP
+#endif // CDPL_VIS_OBJECT3DFACTORY_HPP

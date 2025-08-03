@@ -50,8 +50,8 @@ void CDPLPythonVis::exportBuiltinTriangleMeshes()
 
     python::class_<Vis::TorusMesh3D, Vis::TorusMesh3D::SharedPointer,
                    python::bases<Vis::TriangleMesh3D> >("TorusMesh3D", python::no_init)
-        .def(python::init<double, double, std::size_t, std::size_t>(
+        .def(python::init<double, double, std::size_t, std::size_t, double, double>(
             (python::arg("self"), python::arg("radius1"), python::arg("radius2"), python::arg("num_sect1"),
-             python::arg("num_sect2"))))
+             python::arg("num_sect2"), python::arg("start_angle") = 0.0, python::arg("first_sect_size") = 0.0)))
         .def(python::init<const Vis::TorusMesh3D&>((python::arg("self"), python::arg("mesh"))));
 }

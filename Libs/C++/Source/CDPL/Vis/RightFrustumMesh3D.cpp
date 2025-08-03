@@ -107,11 +107,11 @@ Vis::RightFrustumMesh3D::RightFrustumMesh3D(double radius1, double radius2, doub
     } else {
         for (std::size_t i = 0; i < num_sides; i++) {
             auto a = ang_inc * i;
-            auto cosa = std::cos(a);
-            auto sina = std::sin(a);
+            auto cos_a = std::cos(a);
+            auto sin_a = std::sin(a);
 
-            addVertex(radius1 * cosa, radius1 * sina, 0.0);
-            addVertex(radius2 * cosa, radius2 * sina, height);
+            addVertex(radius1 * cos_a, radius1 * sin_a, 0.0);
+            addVertex(radius2 * cos_a, radius2 * sin_a, height);
             
             addFace(i * 2, ((i + 1) % num_sides) * 2, ((i + 1) % num_sides) * 2 + 1);
             addFace(i * 2, ((i + 1) % num_sides) * 2 + 1, i * 2 + 1);
