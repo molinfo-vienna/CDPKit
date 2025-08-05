@@ -25,18 +25,48 @@ import CDPL.ConfGen as ConfGen
 
 # generates a conformer ensemble of the argument molecule using
 # the provided initialized ConfGen.ConformerGenerator instance
-def genConfEnsemble(mol: Chem.Molecule, conf_gen: ConfGen.ConformerGenerator) -> (int, int):
+def genConfEnsemble(mol: Chem.Molecule, conf_gen: ConfGen.ConformerGenerator, sub_srch: Chem.SubstructureSearch, align_confs: bool, quiet: bool) -> (int, int):
     # prepare the molecule for conformer generation
-    ConfGen.prepareForConformerGeneration(mol) 
+    ConfGen.prepareForConformerGeneration(mol)
 
-    # generate the conformer ensemble
-    status = conf_gen.generate(mol)             
+    # check if a fixed substructure pattern has been specified and if there are matches
+    if sub_srch != None and sub_srch.findMappings(mol): 
+        if not quiet:
+            print(' -> Found fixed substructure pattern match')
+            
+        fixed_substruct = Chem.Fragment()  # will store atoms and bonds of the matched substructure(s)
+
+        # extract all bonds (and associated atoms) of the first substructure matched by the pattern
+        for bond in sub_srch.getMapping(0).bondMapping.getValues():
+            fixed_substruct.addBond(bond)
+
+        # generate the conformer ensemble keeping the spec. substructure fixed
+        status = conf_gen.generate(mol, fixed_substruct)
+
+    else:
+        if sub_srch != None and not quiet:
+            print(' -> No fixed substructure pattern matches found!')
+
+        fixed_substruct = None
+
+        # generate the conformer ensemble
+        status = conf_gen.generate(mol)       
+    
     num_confs = conf_gen.getNumConformers()
     
     # if successful, store the generated conformer ensemble as
     # per atom 3D coordinates arrays (= the way conformers are represented in CDPKit)
+    # and perform conformer alignment (if requested)
     if status == ConfGen.ReturnCode.SUCCESS or status == ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
-        conf_gen.setConformers(mol)                
+        conf_gen.setConformers(mol)
+
+        # if enabled, perform an alignment of the generated conformers
+        # using the coordinates of the first one as reference
+        if align_confs:
+            if fixed_substruct != None:           # align on fixed substructure atoms
+                Chem.alignConformations(mol, fixed_substruct)
+            else:
+                Chem.alignConformations(mol, mol) # align on all molecule atoms
     else:
         num_confs = 0
         
@@ -84,6 +114,17 @@ def parseArgs() -> argparse.Namespace:
                         type=int,
                         default=100,
                         help='Max. output ensemble size (default: 100)')
+    parser.add_argument('-f',
+                        dest='fix_ptn',
+                        required=False,
+                        metavar='<SMARTS>',
+                        help='SMARTS pattern describing a substructure that shall be kept fixed during conformer generation')
+    parser.add_argument('-a',
+                        dest='align_confs',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Align generated conformers on the fixed part of the input structure (if specified) or on the whole structure (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -101,6 +142,20 @@ def main() -> None:
 
     # create writer for the generated conformer ensembles (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
+
+    # parse the SMARTS pattern describing fixed substructures, if specified
+    if args.fix_ptn:
+        try:
+            sub_srch_ptn = Chem.parseSMARTS(args.fix_ptn)
+        except Exception as e:
+            sys.exit('Error: parsing of SMARTS pattern failed: %s' % str(e))
+
+        # create and initialize an instance of the class Chem.SubstructureSearch that
+        # implements the substructure searching algorithm
+        sub_srch = Chem.SubstructureSearch(sub_srch_ptn)
+        sub_srch.maxNumMappings = 1  # find only only one match
+    else:
+        sub_srch = None
 
     # create and initialize an instance of the class ConfGen.ConformerGenerator which
     # will perform the actual conformer ensemble generation work
@@ -144,7 +199,7 @@ def main() -> None:
 
             try:
                 # generate conformer ensemble for read molecule
-                status, num_confs = genConfEnsemble(mol, conf_gen) 
+                status, num_confs = genConfEnsemble(mol, conf_gen, sub_srch, args.align_confs, args.quiet) 
 
                 # check for severe error reported by status code
                 if status != ConfGen.ReturnCode.SUCCESS and status != ConfGen.ReturnCode.TOO_MUCH_SYMMETRY:
