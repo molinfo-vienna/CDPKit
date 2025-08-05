@@ -1,5 +1,7 @@
 master:
 
+ - New control-parameter Chem::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
+   what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
  - The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
  - Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
  - Added methods to class Chem::CommonConnectedSubstructureSearch that allow to customize the way atom, bond and molecular graph
