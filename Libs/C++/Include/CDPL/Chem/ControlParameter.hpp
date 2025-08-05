@@ -219,8 +219,9 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MDL_CONF_ENERGY_SD_TAG;
 
             /**
-             * \brief Specifies whether to output the value \e 4 (= aromatic) in the bond type field of aromatics bonds when writing data
-             *        in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             * \brief Specifies whether to output the 'aromatic' bond type value (\c 4) in the type field of aromatic bonds when writing 
+             *        molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             * \valuetype \c bool
              * \since 1.3
              */
             extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_AROMATIC_BOND_TYPES;
