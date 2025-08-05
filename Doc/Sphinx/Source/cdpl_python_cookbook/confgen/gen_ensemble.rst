@@ -40,6 +40,16 @@ the specified input file and writes the resulting ensembles to the desired outpu
 
     Max. output ensemble size (default: 100)
 
+ -f <SMARTS>
+
+    SMARTS pattern describing a substructure that shall be kept
+    fixed during conformer generation
+
+ -a
+
+    Align generated conformers on the fixed part of the input
+    structure (if specified) or on the whole structure (default: false)
+
  -q
 
     Disable progress output (default: false)
