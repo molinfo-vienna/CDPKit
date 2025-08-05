@@ -125,6 +125,13 @@ class ControlParameterDefault(Boost.Python.instance):
     MDL_CONF_ENERGY_SD_TAG = '<Energy>'
 
     ##
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_OUTPUT_AROMATIC_BOND_TYPES.
+    # 
+    # \since 1.3
+    # 
+    MDL_OUTPUT_AROMATIC_BOND_TYPES = False
+
+    ##
     # \brief Default setting (= <tt>"S"</tt>) for the control-parameter Chem.ControlParameter.SMILES_RECORD_FORMAT.
     # 
     SMILES_RECORD_FORMAT = 'SN'

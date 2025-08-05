@@ -32,8 +32,10 @@ class TorusMesh3D(TriangleMesh3D):
     # \param radius2 
     # \param num_sect1 
     # \param num_sect2 
+    # \param start_angle 
+    # \param first_sect_size 
     # 
-    def __init__(radius1: float, radius2: float, num_sect1: int, num_sect2: int) -> None: pass
+    def __init__(radius1: float, radius2: float, num_sect1: int, num_sect2: int, start_angle: float = 0.0, first_sect_size: float = 0.0) -> None: pass
 
     ##
     # \brief Initializes a copy of the \e %TorusMesh3D instance \a mesh.
