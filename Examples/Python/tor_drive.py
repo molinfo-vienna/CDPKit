@@ -149,6 +149,59 @@ def alignConformers(ref_struct: Chem.AtomContainer, ref_conf: Math.Vector3DArray
         # apply the transformation to all atom positions assoc. with the current conformation
         if kabsch_algo.align(algnd_coords, ref_coords):
             Math.transform(algnd_conf, Math.Matrix4D(kabsch_algo.transform))
+        
+def parseArgs() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules by performing torsion driving on the provided 3D structure.')
+
+    parser.add_argument('-i',
+                        dest='in_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Molecule input file')
+    parser.add_argument('-o',
+                        dest='out_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Conformer ensemble output file')
+    parser.add_argument('-f',
+                        dest='fix_ptn',
+                        required=False,
+                        metavar='<SMARTS>',
+                        help='SMARTS pattern describing substructures that shall be kept fixed during torsion driving')
+    parser.add_argument('-e',
+                        dest='e_window',
+                        required=False,
+                        metavar='<float>',
+                        type=float,
+                        default=20.0,
+                        help='Output conformer energy window (default: 20.0)')
+    parser.add_argument('-n',
+                        dest='max_confs',
+                        required=False,
+                        metavar='<int>',
+                        type=int,
+                        default=0,
+                        help='Max. output ensemble size (default: 100; if <= 0 -> no limit)')
+    parser.add_argument('-a',
+                        dest='align_confs',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Align generated conformers on the fixed part of the input structure (if specified) or on the whole structure (default: false)')
+    parser.add_argument('-r',
+                        dest='rot_term_het_grps',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Consider single bonds to terminal hetero atoms (= N, O, or S) as rotatable (default: false)')
+    parser.add_argument('-q',
+                        dest='quiet',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Disable progress output (default: false)')
+    
+    return parser.parse_args()
             
 def main() -> None:
     args = parseArgs()
@@ -245,59 +298,6 @@ def main() -> None:
 
     writer.close()
     sys.exit(0)
-        
-def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates conformer ensembles for the given input molecules by performing torsion driving on the provided 3D structure.')
-
-    parser.add_argument('-i',
-                        dest='in_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Molecule input file')
-    parser.add_argument('-o',
-                        dest='out_file',
-                        required=True,
-                        metavar='<file>',
-                        help='Conformer ensemble output file')
-    parser.add_argument('-f',
-                        dest='fix_ptn',
-                        required=False,
-                        metavar='<SMARTS>',
-                        help='SMARTS pattern describing substructures that shall be kept fixed during torsion driving')
-    parser.add_argument('-e',
-                        dest='e_window',
-                        required=False,
-                        metavar='<float>',
-                        type=float,
-                        default=20.0,
-                        help='Output conformer energy window (default: 20.0)')
-    parser.add_argument('-n',
-                        dest='max_confs',
-                        required=False,
-                        metavar='<int>',
-                        type=int,
-                        default=0,
-                        help='Max. output ensemble size (default: 100; if <= 0 -> no limit)')
-    parser.add_argument('-a',
-                        dest='align_confs',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Align generated conformers on the fixed part of the input structure (if specified) or on the whole structure (default: false)')
-    parser.add_argument('-r',
-                        dest='rot_term_het_grps',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Consider single bonds to terminal hetero atoms (= N, O, or S) as rotatable (default: false)')
-    parser.add_argument('-q',
-                        dest='quiet',
-                        required=False,
-                        action='store_true',
-                        default=False,
-                        help='Disable progress output (default: false)')
-    
-    return parser.parse_args()
 
 if __name__ == '__main__':
     main()
