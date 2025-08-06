@@ -177,7 +177,8 @@ def main() -> None:
                       ConfGen.ReturnCode.FRAGMENT_CONF_GEN_TIMEOUT      : 'fragment conformer generation timeout',
                       ConfGen.ReturnCode.FRAGMENT_ALREADY_PROCESSED     : 'fragment already processed',
                       ConfGen.ReturnCode.TORSION_DRIVING_FAILED         : 'torsion driving failed',
-                      ConfGen.ReturnCode.CONF_GEN_FAILED                : 'conformer generation failed' }
+                      ConfGen.ReturnCode.CONF_GEN_FAILED                : 'conformer generation failed',
+                      ConfGen.ReturnCode.NO_FIXED_SUBSTRUCT_COORDS      : 'fixed substructure atoms do not provide 3D coordinates' }
     
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
