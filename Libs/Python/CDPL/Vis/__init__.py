@@ -27,6 +27,7 @@ from __future__ import absolute_import
 import CDPL
 import CDPL.Base
 import CDPL.Chem
+import CDPL.Pharm
 
 from ._vis import *
 

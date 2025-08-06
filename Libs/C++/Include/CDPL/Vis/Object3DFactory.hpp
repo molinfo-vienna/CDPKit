@@ -29,7 +29,9 @@
 #ifndef CDPL_VIS_OBJECT3DFACTORY_HPP
 #define CDPL_VIS_OBJECT3DFACTORY_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
+#include <memory>
+
+#include "CDPL/Vis/Object3D.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
@@ -41,15 +43,24 @@ namespace CDPL
 
         /**
          * \brief The abstract base of classes implementing the creation of Vis::Object3D instances for the 3D visualization of data objects.
+         * \tparam T The type of the data object to create a Vis::Object3D instance for.
          */
-        class CDPL_VIS_API Object3DFactory : public Base::ControlParameterContainer
+        template <typename T>
+        class Object3DFactory : public Base::ControlParameterContainer
         {
 
           public:
             /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Object3DFactory instances.
+             */
+            typedef std::shared_ptr<Object3DFactory> SharedPointer;
+
+            /**
              * \brief Virtual destructor.
              */
             virtual ~Object3DFactory() {}
+
+            virtual Object3D::SharedPointer create(const T& data) = 0;
         };
     } // namespace Vis
 } // namespace CDPL

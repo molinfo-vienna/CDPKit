@@ -132,7 +132,7 @@ endif(CAIRO_FOUND)
 if(NOT PYPI_PACKAGE_BUILD)
   add_library(cdpl-vis-static STATIC ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-  target_link_libraries(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-base-static)
+  target_link_libraries(cdpl-vis-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-base-static)
 
   if(CAIRO_FOUND)
     target_link_libraries(cdpl-vis-static Cairo::Library)
@@ -154,7 +154,7 @@ endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-target_link_libraries(cdpl-vis-shared PUBLIC cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared)
+target_link_libraries(cdpl-vis-shared PUBLIC cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-base-shared)
 
 if(CAIRO_FOUND)
   target_link_libraries(cdpl-vis-shared PRIVATE Cairo::Library)

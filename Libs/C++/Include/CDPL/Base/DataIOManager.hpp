@@ -69,6 +69,12 @@ namespace CDPL
         class RegularGridSet;
     } // namespace Grid
 
+    namespace Vis
+    {
+
+        class Object3D;
+    } // namespace Vis
+    
     namespace Base
     {
 
@@ -379,6 +385,8 @@ namespace CDPL
 
         extern template class _CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
 
+        extern template class _CDPL_BASE_API DataIOManager<Vis::Object3D>;
+        
 #undef _CDPL_BASE_API
         
         // \endcond

@@ -66,6 +66,7 @@ namespace CDPLPythonVis
     void exportTriangleMesh3D();
     void exportBuiltinTriangleMeshes();
     void exportShape3DVisitor();
+    void exportFeatureContainerObject3DFactory();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
