@@ -67,7 +67,13 @@ set(vis_MOD_SRCS
     TriangleMesh3DExport.cpp
     BuiltinTriangleMeshesExport.cpp
     Shape3DVisitorExport.cpp
-    
+    FeatureContainerObject3DFactoryExport.cpp
+    Object3DInputHandlerExport.cpp 
+    Object3DOutputHandlerExport.cpp
+    Object3DIOManagerExport.cpp
+    Object3DReaderExport.cpp 
+    Object3DWriterExport.cpp
+   
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp
     BondFunctionExport.cpp
@@ -75,7 +81,6 @@ set(vis_MOD_SRCS
     Object3DFunctionExport.cpp
     ControlParameterFunctionExport.cpp
     TriangleMesh3DFunctionExport.cpp
-    FeatureContainerObject3DFactoryExport.cpp
 
     MolecularGraphPropertyExport.cpp
     AtomPropertyExport.cpp

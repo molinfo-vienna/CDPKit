@@ -72,6 +72,10 @@ BOOST_PYTHON_MODULE(_vis)
     exportBuiltinTriangleMeshes();
     exportShape3DVisitor();
     exportFeatureContainerObject3DFactory();
+    exportObject3DReader();
+    exportObject3DWriter();
+    exportObject3DInputHandler();
+    exportObject3DOutputHandler();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

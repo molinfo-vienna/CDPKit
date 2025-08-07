@@ -92,6 +92,8 @@
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
 #include "CDPL/Vis/RightFrustumMesh3D.hpp"
 #include "CDPL/Vis/TorusMesh3D.hpp"
+#include "CDPL/Vis/Object3DReader.hpp"
+#include "CDPL/Vis/Object3DWriter.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"
