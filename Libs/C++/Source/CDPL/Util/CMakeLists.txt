@@ -56,8 +56,7 @@ endif(NOT PYPI_PACKAGE_BUILD)
 
 add_library(cdpl-util-shared SHARED ${cdpl-util_LIB_SRCS})
 
-target_link_libraries(cdpl-util-shared PUBLIC cdpl-base-shared)
-target_link_libraries(cdpl-util-shared PRIVATE Boost::iostreams)
+target_link_libraries(cdpl-util-shared PUBLIC cdpl-base-shared Boost::iostreams)
 
 if(CXX_FILESYSTEM_HAVE_FS)
   target_link_libraries(cdpl-util-shared PRIVATE std::filesystem)
