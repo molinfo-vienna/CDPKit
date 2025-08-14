@@ -83,8 +83,8 @@ Vis::TorusMesh3D::TorusMesh3D(double radius1, double radius2, std::size_t num_se
         auto v_offs2 = ((i + 1) % num_sect1) * num_sect2;
         
         for (std::size_t j = 0; j < num_sect2; j++) {
-            addFace(v_offs1 + j, v_offs2 + j, v_offs2 + ((j + 1) % num_sect2));
-            addFace(v_offs1 + j, v_offs2 + ((j + 1) % num_sect2), v_offs1 + ((j + 1) % num_sect2));
+            addFace(v_offs2 + j, v_offs1 + j, v_offs2 + ((j + 1) % num_sect2));
+            addFace(v_offs2 + ((j + 1) % num_sect2), v_offs1 + j, v_offs1 + ((j + 1) % num_sect2));
         }
     }
     

@@ -54,6 +54,7 @@ set(cdpl-vis_LIB_SRCS
     IcosahedronMesh3D.cpp
     RightFrustumMesh3D.cpp
     TorusMesh3D.cpp
+    FeatureContainerObject3DFactory.cpp
     
     DataFormat.cpp
     StructureView2D.cpp

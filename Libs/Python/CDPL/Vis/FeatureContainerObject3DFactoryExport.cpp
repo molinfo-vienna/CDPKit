@@ -23,6 +23,7 @@
 
 
 #include "CDPL/Pharm/FeatureContainer.hpp"
+#include "CDPL/Vis/FeatureContainerObject3DFactory.hpp"
 
 #include "Object3DFactoryExport.hpp"
 #include "ClassExports.hpp"
@@ -30,7 +31,13 @@
 
 void CDPLPythonVis::exportFeatureContainerObject3DFactory()
 {
+    using namespace boost;
     using namespace CDPL;
-    
-    Object3DFactoryExport<Pharm::FeatureContainer>("FeatureContainerObject3DFactory");
+
+    Object3DFactoryExport<Pharm::FeatureContainer>("FeatureContainerObject3DFactoryBase");
+
+    python::class_<Vis::FeatureContainerObject3DFactory, Vis::FeatureContainerObject3DFactory::SharedPointer,
+                   python::bases<Vis::Object3DFactory<Pharm::FeatureContainer> >, boost::noncopyable>("FeatureContainerObject3DFactory", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Vis::FeatureContainerObject3DFactory&>((python::arg("self"), python::arg("factory"))));
 }

@@ -1,5 +1,5 @@
 /* 
- * Object3DFactory.hpp 
+ * FeatureContainerObject3DFactory.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,47 +23,46 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Object3DFactory.
+ * \brief Definition of the class CDPL::Vis::FeatureContainerObject3DFactory.
  */
 
-#ifndef CDPL_VIS_OBJECT3DFACTORY_HPP
-#define CDPL_VIS_OBJECT3DFACTORY_HPP
+#ifndef CDPL_VIS_FEATURECONTAINEROBJECT3DFACTORY_HPP
+#define CDPL_VIS_FEATURECONTAINEROBJECT3DFACTORY_HPP
 
 #include <memory>
 
-#include "CDPL/Vis/Object3D.hpp"
-#include "CDPL/Base/ControlParameterContainer.hpp"
+#include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/Object3DFactory.hpp"
 
 
 namespace CDPL
 {
 
+    namespace Pharm
+    {
+
+        class FeatureContainer;
+    }
+    
     namespace Vis
     {
 
         /**
-         * \brief The abstract base of classes implementing the creation of Vis::Object3D instances for the 3D visualization of data objects.
-         * \tparam T The type of the data object to create a Vis::Object3D instance for.
+         * \brief Class implementing the creation of Vis::Object3D instances for the Pharm::FeatureContainer data objects.
          * \since 1.3
          */
-        template <typename T>
-        class Object3DFactory : public Base::ControlParameterContainer
+        class CDPL_VIS_API FeatureContainerObject3DFactory : public Object3DFactory<Pharm::FeatureContainer>
         {
 
           public:
             /**
-             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Object3DFactory instances.
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureContainerObject3DFactory instances.
              */
-            typedef std::shared_ptr<Object3DFactory> SharedPointer;
+            typedef std::shared_ptr<FeatureContainerObject3DFactory> SharedPointer;
 
-            /**
-             * \brief Virtual destructor.
-             */
-            virtual ~Object3DFactory() {}
-
-            virtual Object3D::SharedPointer create(const T& data) = 0;
+            Object3D::SharedPointer create(const Pharm::FeatureContainer& cntnr);
         };
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_OBJECT3DFACTORY_HPP
+#endif // CDPL_VIS_FEATURECONTAINEROBJECT3DFACTORY_HPP
