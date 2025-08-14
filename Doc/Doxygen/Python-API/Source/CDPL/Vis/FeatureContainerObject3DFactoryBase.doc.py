@@ -20,19 +20,18 @@
 #
 
 ##
-# \brief Class implementing the creation of Vis.Object3D instances for the Pharm.FeatureContainer data objects.
-# 
-# \since 1.3
-# 
-class FeatureContainerObject3DFactory(FeatureContainerObject3DFactoryBase):
+# \brief 
+#
+class FeatureContainerObject3DFactoryBase(Base.ControlParameterContainer):
 
     ##
-    # \brief Initializes the \e %FeatureContainerObject3DFactory instance.
+    # \brief Initializes the \e %FeatureContainerObject3DFactoryBase instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureContainerObject3DFactory instance \a factory.
-    # \param factory The \e %FeatureContainerObject3DFactory instance to copy.
-    # 
-    def __init__(factory: FeatureContainerObject3DFactory) -> None: pass
+    # \brief 
+    # \param data 
+    # \return 
+    #
+    def create(data: Pharm.FeatureContainer) -> Object3D: pass
