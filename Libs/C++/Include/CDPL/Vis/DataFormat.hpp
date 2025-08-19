@@ -69,6 +69,12 @@ namespace CDPL
              * \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
              */
             extern CDPL_VIS_API const Base::DataFormat SVG;
+            
+            /**
+             * \brief Provides meta-information about the <em>STL</em> [\ref STLFMT] format.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::DataFormat STL;
         } // namespace DataFormat
     } // namespace Vis
 } // namespace CDPL

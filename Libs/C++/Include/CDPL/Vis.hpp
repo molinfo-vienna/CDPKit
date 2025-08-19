@@ -95,6 +95,8 @@
 #include "CDPL/Vis/TorusMesh3D.hpp"
 #include "CDPL/Vis/Object3DReader.hpp"
 #include "CDPL/Vis/Object3DWriter.hpp"
+#include "CDPL/Vis/STLObject3DWriter.hpp"
+#include "CDPL/Vis/STLObject3DOutputHandler.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

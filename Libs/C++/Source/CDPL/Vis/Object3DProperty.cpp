@@ -39,6 +39,7 @@ namespace CDPL
         {
 
             CDPL_DEFINE_LOOKUP_KEY(SHAPE);
+            CDPL_DEFINE_LOOKUP_KEY(TRANSFORMATION_MATRIX);
         }
 
         void initObject3DProperties() {}

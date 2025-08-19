@@ -44,5 +44,6 @@ void CDPLPythonVis::exportObject3DProperties()
 
     python::class_<Object3DProperty, boost::noncopyable>("Object3DProperty", python::no_init)
         .def_readonly("SHAPE", &Vis::Object3DProperty::SHAPE)
+        .def_readonly("TRANSFORMATION_MATRIX", &Vis::Object3DProperty::TRANSFORMATION_MATRIX)
         ;
 }

@@ -1,5 +1,5 @@
 /* 
- * Object3DProperty.hpp 
+ * STLObject3DOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,48 +23,29 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Vis::Object3DProperty.
+ * \brief Definition of the class CDPL::Vis::STLObject3DOutputHandler.
  */
 
-#ifndef CDPL_VIS_OBJECT3DPROPERTY_HPP
-#define CDPL_VIS_OBJECT3DPROPERTY_HPP
+#ifndef CDPL_VIS_STLOBJECT3DOUTPUTHANDLER_HPP
+#define CDPL_VIS_STLOBJECT3DOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/STLObject3DWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL
 {
 
-    namespace Base
-    {
-
-        class LookupKey;
-    }
-
     namespace Vis
     {
 
         /**
-         * \brief Provides keys for built-in Vis::Object3D properties.
+         * \brief A handler for the output of Vis::Object3D instances in the <em>STL</em> [\ref STLFMT] format.
          * \since 1.3
          */
-        namespace Object3DProperty
-        {
-
-            /**
-             * \brief Specifies the Vis::Shape3D instance associated with the 3D object.
-             * \valuetype Vis::Shape3D::SharedPointer
-             */
-            extern CDPL_VIS_API const Base::LookupKey SHAPE;
-
-            /**
-             * \brief Specifies a transformation to apply to the geometry of the 3D object and all sub-objects.
-             * \valuetype Math::Matrix4D
-             */
-            extern CDPL_VIS_API const Base::LookupKey TRANSFORMATION_MATRIX;
-            
-        } // namespace Object3DProperty
+        typedef Util::DefaultDataOutputHandler<STLObject3DWriter, DataFormat::STL> STLObject3DOutputHandler;
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_OBJECT3DPROPERTY_HPP
+#endif // CDPL_VIS_STLOBJECT3DOUTPUTHANDLER_HPP

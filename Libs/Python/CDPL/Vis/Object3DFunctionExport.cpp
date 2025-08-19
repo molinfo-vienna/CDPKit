@@ -57,4 +57,5 @@ void CDPLPythonVis::exportObject3DFunctions()
     using namespace CDPL;
 
     EXPORT_OBJECT3D_FUNCS_INT_REF(Shape, shape)
+    EXPORT_OBJECT3D_FUNCS_INT_REF(TransformationMatrix, mtx)
 }

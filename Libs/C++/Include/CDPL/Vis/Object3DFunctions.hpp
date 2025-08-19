@@ -31,6 +31,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL
@@ -51,6 +52,17 @@ namespace CDPL
         CDPL_VIS_API bool hasShape(const Object3D& obj);
 
         CDPL_VIS_API void clearShape(Object3D& obj);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API const Math::Matrix4D& getTransformationMatrix(const Object3D& obj);
+
+        CDPL_VIS_API void setTransformationMatrix(Object3D& object3D, const Math::Matrix4D& mtx);
+
+        CDPL_VIS_API bool hasTransformationMatrix(const Object3D& obj);
+
+        CDPL_VIS_API void clearTransformationMatrix(Object3D& obj);
         
     } // namespace Vis
 } // namespace CDPL

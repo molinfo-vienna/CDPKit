@@ -31,6 +31,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL
@@ -47,6 +48,7 @@ namespace CDPL
         {
 
             extern CDPL_VIS_API const Shape3D::SharedPointer SHAPE;
+            extern CDPL_VIS_API const Math::Matrix4D         TRANSFORMATION_MATRIX;
             
         } // namespace Object3DPropertyDefault
     } // namespace Vis

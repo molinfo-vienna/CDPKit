@@ -36,7 +36,8 @@ namespace CDPL
         namespace Object3DPropertyDefault
         {
 
-            const Shape3D::SharedPointer SHAPE  = Shape3D::SharedPointer();
+            const Shape3D::SharedPointer SHAPE                  = Shape3D::SharedPointer();
+            const Math::Matrix4D         TRANSFORMATION_MATRIX  = Math::IdentityMatrix<double>(4, 4);
             
         } // namespace Object3DPropertyDefault
 

@@ -33,44 +33,22 @@
 #include "CDPL/Vis/RightFrustumMesh3D.hpp"
 #include "CDPL/Vis/TriangleMesh3DFunctions.hpp"
 
-//#include <fstream>
+
 using namespace CDPL;
 
 
 namespace
 {
-/*
-    void dumpSTL(const Vis::TriangleMesh3D& mesh, const std::string& fname)
-    {
-        std::ofstream ofs(fname);
 
-        ofs << "solid name\n";
-
-        for (std::size_t i = 0; i < mesh.getNumFaces(); i++) {
-            auto& f = mesh.getFaces()[i];
-            auto& v1 = mesh.getVertices()[f[0]];
-            auto& v2 = mesh.getVertices()[f[1]];
-            auto& v3 = mesh.getVertices()[f[2]];
-            
-            Math::Vector3D n = crossProd(v2 - v1, v3 - v1);
-
-            ofs << " facet normal " << n[0] << ' ' << n[1] << ' ' << n[2] << '\n';
-            ofs << "  outer loop\n";
-            ofs << "   vertex " << v1[0] << ' ' << v1[1] << ' ' << v1[2] << '\n';
-            ofs << "   vertex "  << v2[0] << ' ' << v2[1] << ' ' << v2[2] << '\n';
-            ofs << "   vertex "  << v3[0] << ' ' << v3[1] << ' ' << v3[2] << '\n';
-            ofs << "  endloop\n";
-            ofs << " endfacet\n";
-        }
-        
-        ofs << "endsolid name\n";
-    }
-*/
     std::once_flag initTriangleMeshesFlag;
 
     Vis::TriangleMesh3D::SharedPointer sphereMesh;
     Vis::TriangleMesh3D::SharedPointer nonDirectedHBFeatureMesh;
     Vis::TriangleMesh3D::SharedPointer directedARFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer ionizableFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer nonDirectedXBFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer arrowShaftMesh;
+    Vis::TriangleMesh3D::SharedPointer arrowHeadMesh;
     
     void initTriangleMeshes()
     {
@@ -82,8 +60,6 @@ namespace
             subdivideSpherical(*sphereMesh);
             removeVertexDuplicates(*sphereMesh);
         }
-
-        //dumpSTL(*sphereMesh, "/home/tseidel/data/sphereMesh.stl");
     
         // ---
 
@@ -113,8 +89,6 @@ namespace
         *nonDirectedHBFeatureMesh += *nonDirectedHBFeatureMesh;
 
         rotateX(*nonDirectedHBFeatureMesh, M_PI, num_prev_verts);
-        
-        //dumpSTL(*nonDirectedHBFeatureMesh, "/home/tseidel/data/nonDirectedHBFeatureMesh.stl");
 
         // ---
 
@@ -135,22 +109,52 @@ namespace
 
         *directedARFeatureMesh += cyl_mesh;
 
-        RightFrustumMesh3D cone_mesh(0.15, 0.0, 0.35, 5, true);
+        RightFrustumMesh3D cone_mesh1(0.15, 0.0, 0.35, 5, true);
 
-        translate(cone_mesh, 0.0, 0.0, 0.9);
+        translate(cone_mesh1, 0.0, 0.0, 0.9);
 
-        *directedARFeatureMesh += cone_mesh;
+        *directedARFeatureMesh += cone_mesh1;
 
-        rotateX(cone_mesh, M_PI);
+        rotateX(cone_mesh1, M_PI);
 
-        *directedARFeatureMesh += cone_mesh;
-        
-        //dumpSTL(*directedARFeatureMesh, "/home/tseidel/data/directedARFeatureMesh.stl");
+        *directedARFeatureMesh += cone_mesh1;
 
         // ---
 
-        
+        nonDirectedXBFeatureMesh.reset(new IcosahedronMesh3D());
 
+        // ---
+
+        RightFrustumMesh3D cone_mesh2(0.0, 0.15, 1.0, 12, false, true);
+        
+        ionizableFeatureMesh.reset(new TriangleMesh3D());
+
+        for (std::size_t i = 0; i < 12; i++) {
+            auto ico_vtx = nonDirectedXBFeatureMesh->getVertices()[i].getData();
+
+            num_prev_verts = ionizableFeatureMesh->getNumVertices();
+
+            *ionizableFeatureMesh += cone_mesh2;
+
+            auto r = std::sqrt(ico_vtx[0] * ico_vtx[0] + ico_vtx[1] * ico_vtx[1]);
+
+            if (r == 0.0)
+                continue;
+
+            auto z_rot = (ico_vtx[1] >= 0.0 ? 1.0 : -1.0) * std::acos(ico_vtx[0] / r);
+            auto y_rot = std::acos(ico_vtx[2]);
+            
+            rotateY(*ionizableFeatureMesh, y_rot, num_prev_verts);
+            rotateZ(*ionizableFeatureMesh, z_rot, num_prev_verts);
+        }
+
+        // ---
+
+        arrowShaftMesh.reset(new RightFrustumMesh3D(0.15, 0.15, 1.0, 20, true, true));
+    
+        // ---        
+
+        arrowHeadMesh.reset(new RightFrustumMesh3D(0.3, 0.0, 0.25, 20, true, false));
     }
 }
 
