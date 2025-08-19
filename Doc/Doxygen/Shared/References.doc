@@ -444,6 +444,13 @@ D. Rogers and M. Hahn, Extended-Connectivity Fingerprints,
 </tr>
 
 <tr>
+<td valign="top">\anchor STLFMT<i>[STLFMT]</i></td>
+<td valign="top">
+Wikipedia article about the STL file format: https://en.wikipedia.org/wiki/STL_(file_format)
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor STLRAI<i>[STLRAI]</i></td>
 <td valign="top">
 Random Access Iterator concept definition: https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator

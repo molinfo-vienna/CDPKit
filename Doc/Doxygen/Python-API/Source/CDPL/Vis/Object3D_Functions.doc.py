@@ -45,3 +45,30 @@ def getShape(obj: Object3D) -> object: pass
 # \param shape 
 #
 def setShape(obj: Object3D, shape: Shape3D) -> None: pass
+
+##
+# \brief 
+# \param obj 
+#
+def clearTransformationMatrix(obj: Object3D) -> None: pass
+
+##
+# \brief 
+# \param obj 
+# \return 
+#
+def hasTransformationMatrix(obj: Object3D) -> bool: pass
+
+##
+# \brief 
+# \param obj 
+# \return 
+#
+def getTransformationMatrix(obj: Object3D) -> Math.Matrix4D: pass
+
+##
+# \brief 
+# \param obj 
+# \param mtx 
+#
+def setTransformationMatrix(obj: Object3D, mtx: Math.Matrix4D) -> None: pass
