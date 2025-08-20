@@ -470,7 +470,7 @@ def printEnumeration(enum_obj, out_file = None, ident = '', scope = ''):
     enum_name = enum_name.split('.')[-1]
     new_file = False
 
-    if out_file == None:
+    if out_file is None:
         new_file = True
         out_file = openOutputFile(enum_name)
         printPackageHeader(out_file)
@@ -542,9 +542,9 @@ def getValueString(obj, is_prop = True):
     if is_prop:
         value = obj.fget()
 
-    if value == None:
+    if value is None:
         return 'None'
-    
+
     type_name = type(value).__name__
 
     if type_name == 'str':
@@ -593,7 +593,7 @@ def printStaticProperty(property_obj, property_name, out_file, ident, scope, cla
     out_file.write(ident + property_name + ' = ' + value_str + '\n')
 
 def printClass(class_obj, out_file = None, ident = '', scope = ''):
-    if out_file == None:
+    if out_file is None:
         out_file = openOutputFile(class_obj.__name__)
 
     ignored_names = [ '__doc__', '__file__', '__name__', '__path__', '__module__', '__class__', '__dict__', '__bases__', '__reduce__' ]
@@ -953,7 +953,7 @@ def genPythonAPIDocFiles():
     functions = []
     variables = []
     ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_grid', '_forcefield',
-                      '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '_descr', '_molprop', '__package__' ]
+                      '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '_descr', '_molprop', '_confgen', '_grail', '_shape', '__package__' ]
     exported_names = []
 
     if hasattr(module, '__all__'):

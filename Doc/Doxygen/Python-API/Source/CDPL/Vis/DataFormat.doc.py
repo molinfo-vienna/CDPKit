@@ -43,3 +43,8 @@ class DataFormat(Boost.Python.instance):
     # \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
     # 
     SVG = CDPL.Base.DataFormat(name='SVG', descr='Scalable Vector Graphics Format', mime_type'image/svg+xml', file_exts=['svg'], multi_rec=False)
+
+    ##
+    # \brief 
+    #
+    STl = CDPL.Base.DataFormat(name='STL', descr='Stereolithography Format', mime_type'model/stl', file_exts=['stl'], multi_rec=False)

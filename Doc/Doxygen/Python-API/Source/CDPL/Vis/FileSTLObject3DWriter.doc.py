@@ -20,18 +20,13 @@
 #
 
 ##
-# \brief Provides default values for built-in Vis.Object3D properties.
-# 
-# \since 1.3
-# 
-class Object3DPropertyDefault(Boost.Python.instance):
+# \brief 
+#
+class FileSTLObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief 
-    #
-    SHAPE = None
-
-    ##
-    # \brief 
-    #
-    TRANSFORMATION_MATRIX = [4,4]((1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1))
+    # \brief Initializes the \e %FileSTLObject3DWriter instance.
+    # \param file_name 
+    # \param mode 
+    # 
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

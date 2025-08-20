@@ -20,18 +20,13 @@
 #
 
 ##
-# \brief Provides default values for built-in Vis.Object3D properties.
+# \brief A handler for the output of Vis.Object3D instances in the <em>STL</em> [\ref STLFMT] format.
 # 
 # \since 1.3
 # 
-class Object3DPropertyDefault(Boost.Python.instance):
+class STLObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief 
-    #
-    SHAPE = None
-
-    ##
-    # \brief 
-    #
-    TRANSFORMATION_MATRIX = [4,4]((1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1))
+    # \brief Initializes the \e %STLObject3DOutputHandler instance.
+    # 
+    def __init__() -> None: pass

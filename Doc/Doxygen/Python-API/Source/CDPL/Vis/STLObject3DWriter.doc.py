@@ -20,18 +20,15 @@
 #
 
 ##
-# \brief Provides default values for built-in Vis.Object3D properties.
+# \brief Output 3D visualization data represented by Vis.Object3D instances in the <em>STL</em> [\ref STLFMT] format.
 # 
 # \since 1.3
 # 
-class Object3DPropertyDefault(Boost.Python.instance):
+class STLObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief 
-    #
-    SHAPE = None
-
-    ##
-    # \brief 
-    #
-    TRANSFORMATION_MATRIX = [4,4]((1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1))
+    # \brief Constructs a <tt>STLObject3DWriter</tt> instance that will write Vis.Object3D data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
+    def __init__(os: Base.OStream) -> None: pass
