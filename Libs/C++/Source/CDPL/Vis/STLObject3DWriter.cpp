@@ -1,5 +1,5 @@
 /* 
- * DataFormatExport.cpp 
+ * STLObject3DWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,32 +22,37 @@
  */
 
 
-#include <boost/python.hpp>
+#include "StaticInit.hpp"
 
-#include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include <ostream>
+#include <cmath>
 
-#include "NamespaceExports.hpp"
+#include "CDPL/Vis/STLObject3DWriter.hpp"
 
 
-namespace 
+using namespace CDPL;
+
+
+Vis::STLObject3DWriter::STLObject3DWriter(std::ostream& os): 
+    output(os), state(os.good()) {}
+
+Base::DataWriter<Vis::Object3D>& Vis::STLObject3DWriter::write(const Object3D& obj)
 {
+    state = false;
 
-    struct DataFormat {};
+    state = true;
+    
+    invokeIOCallbacks(1.0);
+
+    return *this;
 }
 
-
-void CDPLPythonVis::exportDataFormats()
+Vis::STLObject3DWriter::operator const void*() const
 {
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-        .def_readonly("PNG", &Vis::DataFormat::PNG)
-        .def_readonly("PDF", &Vis::DataFormat::PDF)
-        .def_readonly("PS", &Vis::DataFormat::PS)
-        .def_readonly("SVG", &Vis::DataFormat::SVG)
-        .def_readonly("STl", &Vis::DataFormat::STL)
-        ;
+    return (state ? this : nullptr);
 }
 
+bool Vis::STLObject3DWriter::operator!() const
+{
+    return !state;
+}

@@ -83,6 +83,8 @@ set(cdpl-vis_LIB_SRCS
     ClipPathPrimitive2D.cpp
     TextLabelPrimitive2D.cpp
     TextBlockPrimitive2D.cpp
+
+    STLObject3DWriter.cpp
    )
 
 if(CAIRO_FOUND)

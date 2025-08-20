@@ -1,5 +1,5 @@
 /* 
- * DataFormatExport.cpp 
+ * STLObject3DOutputHandlerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,30 +24,17 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Vis/STLObject3DOutputHandler.hpp"
 
-#include "NamespaceExports.hpp"
-
-
-namespace 
-{
-
-    struct DataFormat {};
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonVis::exportDataFormats()
+void CDPLPythonVis::exportSTLObject3DOutputHandler()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-        .def_readonly("PNG", &Vis::DataFormat::PNG)
-        .def_readonly("PDF", &Vis::DataFormat::PDF)
-        .def_readonly("PS", &Vis::DataFormat::PS)
-        .def_readonly("SVG", &Vis::DataFormat::SVG)
-        .def_readonly("STl", &Vis::DataFormat::STL)
-        ;
+    python::class_<Vis::STLObject3DOutputHandler, 
+        python::bases<Base::DataOutputHandler<Vis::Object3D> > >("STLObject3DOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }
-

@@ -73,6 +73,8 @@ set(vis_MOD_SRCS
     Object3DIOManagerExport.cpp
     Object3DReaderExport.cpp 
     Object3DWriterExport.cpp
+    STLObject3DWriterExport.cpp
+    STLObject3DOutputHandlerExport.cpp
    
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp

@@ -1,5 +1,5 @@
 /* 
- * DataFormatExport.cpp 
+ * STLMolecularGraphWriterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,30 +24,25 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Vis/STLObject3DWriter.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
 
-#include "NamespaceExports.hpp"
-
-
-namespace 
-{
-
-    struct DataFormat {};
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonVis::exportDataFormats()
+void CDPLPythonVis::exportSTLObject3DWriter()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-        .def_readonly("PNG", &Vis::DataFormat::PNG)
-        .def_readonly("PDF", &Vis::DataFormat::PDF)
-        .def_readonly("PS", &Vis::DataFormat::PS)
-        .def_readonly("SVG", &Vis::DataFormat::SVG)
-        .def_readonly("STl", &Vis::DataFormat::STL)
-        ;
-}
+    python::class_<Vis::STLObject3DWriter, python::bases<Base::DataWriter<Vis::Object3D> >, 
+        boost::noncopyable>("STLObject3DWriter", python::no_init)
+        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
+    python::class_<Util::FileDataWriter<Vis::STLObject3DWriter>, python::bases<Base::DataWriter<Vis::Object3D> >, 
+        boost::noncopyable>("FileSTLObject3DWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+}

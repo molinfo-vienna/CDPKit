@@ -28,6 +28,7 @@
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/STLObject3DOutputHandler.hpp"
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 # include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
@@ -57,6 +58,7 @@ namespace
     const char* pdfFileExtensions[] = { "pdf" };
     const char* psFileExtensions[]  = { "ps", "eps" };
     const char* svgFileExtensions[] = { "svg" };
+    const char* stlFileExtensions[] = { "stl" };
 }
 
 
@@ -71,6 +73,8 @@ const Base::DataFormat Vis::DataFormat::PS("PS", "Adobe PostScript Format", "app
                                            psFileExtensions, psFileExtensions + 2, false);
 const Base::DataFormat Vis::DataFormat::SVG("SVG", "Scalable Vector Graphics Format", "image/svg+xml", 
                                             svgFileExtensions, svgFileExtensions + 1, false);
+const Base::DataFormat Vis::DataFormat::STL("STL", "Stereolithography Format", "model/stl", 
+                                            stlFileExtensions, stlFileExtensions + 1, false);
 
 namespace CDPL
 {
@@ -94,6 +98,8 @@ namespace
             using namespace Chem;
             using namespace Vis;
 
+            DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new STLObject3DOutputHandler()));
+           
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PNGMolecularGraphOutputHandler()));

@@ -41,11 +41,13 @@ namespace CDPL
     namespace Vis
     {
 
+        class Object3D;
+
         /**
          * \brief Output 3D visualization data represented by Vis::Object3D instances in the <em>STL</em> [\ref STLFMT] format. 
          * \since 1.3
          */
-        class CDPL_VIS_API STLObject3DWriter : public Base::DataWriter<Chem::Object3D>
+        class CDPL_VIS_API STLObject3DWriter : public Base::DataWriter<Object3D>
         {
 
           public:
@@ -59,10 +61,10 @@ namespace CDPL
 
             /**
              * \brief Outputs the Vis::Object3D instance \a obj.
-             * \param molgraph The Vis::Object3D instance to output.
+             * \param obj The Vis::Object3D instance to output.
              * \return A reference to itself.
              */
-            Base::DataWriter<Chem::Object3D>& write(const Chem::Object3D& obj);
+            Base::DataWriter<Object3D>& write(const Object3D& obj);
 
             operator const void*() const;
             bool operator!() const;

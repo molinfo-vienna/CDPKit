@@ -76,7 +76,9 @@ BOOST_PYTHON_MODULE(_vis)
     exportObject3DWriter();
     exportObject3DInputHandler();
     exportObject3DOutputHandler();
-    
+    exportSTLObject3DWriter();
+    exportSTLObject3DOutputHandler();
+
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
     exportPNGMolecularGraphWriter();
