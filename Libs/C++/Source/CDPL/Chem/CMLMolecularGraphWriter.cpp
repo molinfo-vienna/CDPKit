@@ -69,7 +69,6 @@ bool Chem::CMLMolecularGraphWriter::operator!() const
     return !state;
 }
 
-
 void Chem::CMLMolecularGraphWriter::close()
 {
     writer->close(output);

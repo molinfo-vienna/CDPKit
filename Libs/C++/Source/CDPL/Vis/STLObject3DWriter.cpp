@@ -28,19 +28,54 @@
 #include <cmath>
 
 #include "CDPL/Vis/STLObject3DWriter.hpp"
+#include "CDPL/Vis/Object3D.hpp"
+#include "CDPL/Vis/TriangleMesh3D.hpp"
+#include "CDPL/Vis/Object3DFunctions.hpp"
+
+#include "STLFormatData.hpp"
 
 
 using namespace CDPL;
 
 
+namespace
+{
+
+    inline void transform(const Math::Vector3D& vtx, const Math::Matrix4D& mtx, Math::Vector3D& res)
+    {
+        auto vtx_data = vtx.getData();
+        auto res_data = res.getData();
+        auto mtx_data = mtx.getData();
+
+        for (int i = 0; i < 3; i++)
+            res_data[i] = mtx_data[i][0] * vtx_data[0] + mtx_data[i][1] * vtx_data[1] + mtx_data[i][2] * vtx_data[2] + mtx_data[i][3];
+    }
+
+    template <typename T>
+    inline void outputVector(const T& vec, std::ostream& os)
+    {
+        os << vec[0] << ' ' << vec[1] << ' ' << vec[2] << '\n';
+    }
+}
+
+
 Vis::STLObject3DWriter::STLObject3DWriter(std::ostream& os): 
-    output(os), state(os.good()) {}
+    output(os), state(os.good()), headerWritten(false) {}
 
 Base::DataWriter<Vis::Object3D>& Vis::STLObject3DWriter::write(const Object3D& obj)
 {
     state = false;
 
-    state = true;
+    if (!headerWritten) {
+        output << STL::SOLID_HEADER;
+        headerWritten = true;
+    }
+
+    vtxTransform = Math::IdentityMatrix<double>(4, 4);
+
+    process(obj);
+    
+    state = output.good();
     
     invokeIOCallbacks(1.0);
 
@@ -55,4 +90,70 @@ Vis::STLObject3DWriter::operator const void*() const
 bool Vis::STLObject3DWriter::operator!() const
 {
     return !state;
+}
+
+void Vis::STLObject3DWriter::close()
+{
+    if (!headerWritten)
+        return;
+
+    output << STL::SOLID_FOOTER;
+    headerWritten = false;
+}
+
+void Vis::STLObject3DWriter::process(const Object3D& obj)
+{
+    auto has_xform = hasTransformationMatrix(obj);
+    Math::Matrix4D saved_xform = vtxTransform;
+
+    if (has_xform)
+        vtxTransform = vtxTransform * getTransformationMatrix(obj);
+
+    for (auto& sub_obj : obj)
+        process(sub_obj);
+    
+    if (hasShape(obj))
+        getShape(obj)->accept(*this);
+
+    if (has_xform)
+        vtxTransform = saved_xform;
+}
+
+void Vis::STLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
+{
+    auto& verts = mesh.getVertices();
+    auto num_verts = verts.getSize();
+
+    if (transVertices.size() < num_verts)
+        transVertices.resize(num_verts);
+    
+    for (std::size_t i = 0; i < num_verts; i++)
+        transform(verts[i], vtxTransform, transVertices[i]);
+
+    for (auto& face : mesh.getFaces()) {
+        auto face_data = face.getData();
+        auto& v1 = transVertices[face_data[0]];
+        auto& v2 = transVertices[face_data[1]];
+        auto& v3 = transVertices[face_data[2]];
+        
+        output << STL::FACET_HEADER << STL::NORMAL_PREFIX;
+
+        outputVector(crossProd(v2 - v1, v3 - v1), output);
+
+        output << STL::VERTICES_HEADER;
+        output << STL::VERTEX_PREFIX;
+
+        outputVector(v1, output);
+        
+        output << STL::VERTEX_PREFIX;
+
+        outputVector(v2, output);
+
+        output << STL::VERTEX_PREFIX;
+
+        outputVector(v3, output);
+        
+        output << STL::VERTICES_FOOTER;
+        output << STL::FACET_FOOTER;
+    }
 }

@@ -30,9 +30,13 @@
 #define CDPL_VIS_STLOBJECT3DWRITER_HPP
 
 #include <iosfwd>
+#include <vector>
 
 #include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/Shape3DVisitor.hpp"
 #include "CDPL/Base/DataWriter.hpp"
+#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL
@@ -47,7 +51,7 @@ namespace CDPL
          * \brief Output 3D visualization data represented by Vis::Object3D instances in the <em>STL</em> [\ref STLFMT] format. 
          * \since 1.3
          */
-        class CDPL_VIS_API STLObject3DWriter : public Base::DataWriter<Object3D>
+        class CDPL_VIS_API STLObject3DWriter : public Base::DataWriter<Object3D>, private Shape3DVisitor
         {
 
           public:
@@ -69,9 +73,19 @@ namespace CDPL
             operator const void*() const;
             bool operator!() const;
 
+            void close();
+            
           private:
-            std::ostream& output;
-            bool          state;
+            void process(const Object3D& obj);
+            void visitTriangleMesh(const TriangleMesh3D& mesh);
+
+            typedef std::vector<Math::Vector3D> VertexArray;
+
+            std::ostream&  output;
+            bool           state;
+            bool           headerWritten;
+            Math::Matrix4D vtxTransform;
+            VertexArray    transVertices;
         };
     } // namespace Vis
 } // namespace CDPL
