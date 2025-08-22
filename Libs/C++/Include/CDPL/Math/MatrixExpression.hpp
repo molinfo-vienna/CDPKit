@@ -600,7 +600,6 @@ namespace CDPL
             }
 
             template <typename T>
-
             typename std::enable_if<IsScalar<T>::value, MatrixTranspose>::type& operator*=(const T& t)
             {
                 data.operator*=(t);
@@ -608,7 +607,6 @@ namespace CDPL
             }
 
             template <typename T>
-
             typename std::enable_if<IsScalar<T>::value, MatrixTranspose>::type& operator/=(const T& t)
             {
                 data.operator/=(t);
