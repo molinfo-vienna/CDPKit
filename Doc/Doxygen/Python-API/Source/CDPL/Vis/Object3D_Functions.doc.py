@@ -50,6 +50,33 @@ def setShape(obj: Object3D, shape: Shape3D) -> None: pass
 # \brief 
 # \param obj 
 #
+def clearMaterial(obj: Object3D) -> None: pass
+
+##
+# \brief 
+# \param obj 
+# \return 
+#
+def hasMaterial(obj: Object3D) -> bool: pass
+
+##
+# \brief 
+# \param obj 
+# \return 
+#
+def getMaterial(obj: Object3D) -> Material: pass
+
+##
+# \brief 
+# \param obj 
+# \param material 
+#
+def setMaterial(obj: Object3D, material: Material) -> None: pass
+
+##
+# \brief 
+# \param obj 
+#
 def clearTransformationMatrix(obj: Object3D) -> None: pass
 
 ##

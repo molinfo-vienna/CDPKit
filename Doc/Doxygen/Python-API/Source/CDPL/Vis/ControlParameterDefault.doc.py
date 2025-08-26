@@ -544,3 +544,10 @@ class ControlParameterDefault(Boost.Python.instance):
     # \since 1.2
     # 
     GRID_VIEW_TEXT_COLOR = Color(r=0, g=0, b=0)
+
+    ##
+    # \brief Default setting (= <tt>ColorTable</tt>()) for the control-parameter Vis.ControlParameter.FEATURE_COLOR_TABLE.
+    # 
+    # \since 1.3
+    # 
+    FEATURE_COLOR_TABLE = ColorTable({0: (0.6, 0.5, 0, 0.5), 1: (0.8, 0.6, 0.04, 0.2), 2: (0.14, 0.15, 0.45, 0.3), 3: (0.48, 0.12, 0.12, 0.3), 4: (0.12, 0.12, 0.48, 0.3), 5: (0.12, 0.48, 0.12, 0.5), 6: (0.48, 0.12, 0.12, 0.5), 7: (0.69, 0.4, 0.69, 0.5), 8: (0.69, 0.4, 0.69, 0.5), 9: (0.24, 0.24, 0.24, 0.2)})

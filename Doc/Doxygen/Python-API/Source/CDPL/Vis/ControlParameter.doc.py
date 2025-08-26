@@ -903,3 +903,12 @@ class ControlParameter(Boost.Python.instance):
     # <b>Value Type:</b> Vis.Color \since 1.2
     # 
     GRID_VIEW_TEXT_COLOR = CDPL.Base.LookupKey('GRID_VIEW_TEXT_COLOR')
+
+    ##
+    # \brief Specifies a lookup table for the type dependent coloring of pharmacophoric features.
+    # 
+    # If the color for a particular feature type is missing then the color specified for the feature type Pharm.FeatureType.UNKNOWN will be used. If a color for this type is also missing then a builtin default value will be used.
+    # 
+    # <b>Value Type:</b> Vis.ColorTable.SharedPointer \since 1.3
+    # 
+    FEATURE_COLOR_TABLE = CDPL.Base.LookupKey('FEATURE_COLOR_TABLE')

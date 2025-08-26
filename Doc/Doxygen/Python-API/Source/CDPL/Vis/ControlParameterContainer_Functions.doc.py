@@ -23,6 +23,33 @@
 # \brief 
 # \param cntnr 
 #
+def clearFeatureColorTableParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasFeatureColorTableParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getFeatureColorTableParameter(cntnr: Base.ControlParameterContainer) -> ColorTable: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param colors 
+#
+def setFeatureColorTableParameter(cntnr: Base.ControlParameterContainer, colors: ColorTable) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##

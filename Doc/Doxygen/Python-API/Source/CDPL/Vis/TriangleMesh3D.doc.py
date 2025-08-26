@@ -106,6 +106,18 @@ class TriangleMesh3D(Shape3D):
 
     ##
     # \brief 
+    # \return 
+    #
+    def isSolid() -> bool: pass
+
+    ##
+    # \brief 
+    # \param solid 
+    #
+    def setSolid(solid: bool = True) -> None: pass
+
+    ##
+    # \brief 
     #
     def clear() -> None: pass
 
@@ -134,3 +146,5 @@ class TriangleMesh3D(Shape3D):
     faces = property(getFaces)
 
     numFaces = property(getNumFaces)
+
+    solid = property(isSolid, setSolid)

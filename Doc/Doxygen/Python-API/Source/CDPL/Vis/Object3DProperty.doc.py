@@ -35,3 +35,8 @@ class Object3DProperty(Boost.Python.instance):
     # \brief Specifies a transformation to apply to the geometry of the 3D object and all sub-objects. <b>Value Type:</b> Math.Matrix4D.
     # 
     TRANSFORMATION_MATRIX = CDPL.Base.LookupKey('TRANSFORMATION_MATRIX')
+
+    ##
+    # \brief Specifies the material properties of the 3D object and all sub-objects. <b>Value Type:</b> Vis.Material.
+    # 
+    MATERIAL = CDPL.Base.LookupKey('MATERIAL')

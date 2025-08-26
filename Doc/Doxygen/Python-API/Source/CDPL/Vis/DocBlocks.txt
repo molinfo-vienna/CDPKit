@@ -69,3 +69,8 @@ $$$$
 Path2D.hasDrawingElem.value
 hasDrawingElements
 $$$$
+
+TriangleMesh3D.solid.value
+isSolid
+setSolid
+$$$$

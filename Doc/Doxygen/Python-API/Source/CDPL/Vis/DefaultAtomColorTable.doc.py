@@ -20,19 +20,15 @@
 #
 
 ##
-# \brief Class implementing the creation of Vis.Object3D instances providing a 3D representation of Pharm.FeatureContainer data objects for visualization purposes.
+# \brief Provides default colors for the element dependent coloring of atom labels in 2D depictions of chemical structures.
 # 
 # \since 1.3
 # 
-class FeatureContainerObject3DFactory(FeatureContainerObject3DFactoryBase):
+class DefaultAtomColorTable(ColorTable):
 
     ##
-    # \brief Initializes the \e %FeatureContainerObject3DFactory instance.
+    # \brief Initializes the table with default colors for frequently occurring chemical elements.
+    # 
+    # Currently, colors for the following elements are provided: <em>C, H, N, O, S, P, F, Cl, Br, I, Li, Na, B, Fe, Ba, Mg, Zn, Cu, Ni, Ca, Mn, Al, Ti, Cr, Ag, Si, Au</em> and <em>He</em>.
     # 
     def __init__() -> None: pass
-
-    ##
-    # \brief Initializes a copy of the \e %FeatureContainerObject3DFactory instance \a factory.
-    # \param factory The \e %FeatureContainerObject3DFactory instance to copy.
-    # 
-    def __init__(factory: FeatureContainerObject3DFactory) -> None: pass
