@@ -1,5 +1,7 @@
 master:
 
+ - Removed namespace Vis::AtomColorTable
+ - New class Vis::DefaultAtomColorTable replacing namespace member Vis::AtomColorTable::ELEMENT_COLORS_2D
  - New control-parameter Chem::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
    what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
  - The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
