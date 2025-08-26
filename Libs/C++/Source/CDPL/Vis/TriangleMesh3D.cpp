@@ -101,6 +101,16 @@ std::size_t Vis::TriangleMesh3D::getNumFaces() const
     return faces.getSize();
 }
 
+bool Vis::TriangleMesh3D::isSolid() const
+{
+    return solid;
+}
+
+void Vis::TriangleMesh3D::setSolid(bool solid)
+{
+    this->solid = solid;
+}
+
 void Vis::TriangleMesh3D::clear()
 {
     vertices.clear();

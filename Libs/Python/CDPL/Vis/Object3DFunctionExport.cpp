@@ -25,6 +25,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Object3D.hpp"
+#include "CDPL/Vis/Material.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
 
 #include "FunctionExports.hpp"
@@ -58,4 +59,5 @@ void CDPLPythonVis::exportObject3DFunctions()
 
     EXPORT_OBJECT3D_FUNCS_INT_REF(Shape, shape)
     EXPORT_OBJECT3D_FUNCS_INT_REF(TransformationMatrix, mtx)
+    EXPORT_OBJECT3D_FUNCS_INT_REF(Material, material)
 }

@@ -40,9 +40,11 @@ BOOST_PYTHON_MODULE(_vis)
     exportColor();
     exportPen();
     exportBrush();
+    exportMaterial();
     exportFont();
     exportFontMetrics();
     exportColorTable();
+    exportDefaultAtomColorTable();
     
     exportLine2D();
     exportRectangle2D();
@@ -138,7 +140,6 @@ BOOST_PYTHON_MODULE(_vis)
     exportControlParameterDefaults();
 
     exportDataFormats();
-    exportAtomColorTables();
 
     exportAlignments();
     exportArrowStyles();

@@ -33,6 +33,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Object3DFactory.hpp"
+#include "CDPL/Vis/Shape3D.hpp"
 
 
 namespace CDPL
@@ -42,13 +43,15 @@ namespace CDPL
     {
 
         class FeatureContainer;
+        class Feature;
     }
     
     namespace Vis
     {
 
         /**
-         * \brief Class implementing the creation of Vis::Object3D instances for the Pharm::FeatureContainer data objects.
+         * \brief Class implementing the creation of Vis::Object3D instances providing a 
+         *        3D representation of Pharm::FeatureContainer data objects for visualization purposes.
          * \since 1.3
          */
         class CDPL_VIS_API FeatureContainerObject3DFactory : public Object3DFactory<Pharm::FeatureContainer>
@@ -61,6 +64,17 @@ namespace CDPL
             typedef std::shared_ptr<FeatureContainerObject3DFactory> SharedPointer;
 
             Object3D::SharedPointer create(const Pharm::FeatureContainer& cntnr);
+
+          private:
+            
+            void createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const;
+            void createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const;
+            void createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
+            void createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
+            void createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
+            void createSphericalFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr,
+                                            const Shape3D::SharedPointer& shape, double z_rot = 0.0) const;
+            void createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool outgoing, bool dual = false) const;
         };
     } // namespace Vis
 } // namespace CDPL

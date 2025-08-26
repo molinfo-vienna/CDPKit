@@ -139,5 +139,6 @@ void CDPLPythonVis::exportControlParameterDefaults()
         .def_readonly("GRID_VIEW_CELL_PADDING", &Vis::ControlParameterDefault::GRID_VIEW_CELL_PADDING)
         .def_readonly("GRID_VIEW_TEXT_FONT", &Vis::ControlParameterDefault::GRID_VIEW_TEXT_FONT)
         .def_readonly("GRID_VIEW_TEXT_COLOR", &Vis::ControlParameterDefault::GRID_VIEW_TEXT_COLOR)
+        .def_readonly("FEATURE_COLOR_TABLE", &Vis::ControlParameterDefault::FEATURE_COLOR_TABLE)
         ;
 }

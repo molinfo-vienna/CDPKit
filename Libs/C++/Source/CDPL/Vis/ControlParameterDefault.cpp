@@ -36,6 +36,7 @@
 #include "CDPL/Vis/LayoutDirection.hpp"
 #include "CDPL/Vis/LayoutStyle.hpp"
 #include "CDPL/Vis/ArrowStyle.hpp"
+#include "CDPL/Vis/DefaultFeatureColorTable.hpp"
 
 
 namespace CDPL
@@ -145,6 +146,8 @@ namespace CDPL
             const double                    GRID_VIEW_CELL_PADDING               = 5.0;
             const Font                      GRID_VIEW_TEXT_FONT                  = Font("", 10.0);
             const Color                     GRID_VIEW_TEXT_COLOR                 = Color(0, 0, 0);
+
+            const ColorTable::SharedPointer FEATURE_COLOR_TABLE                  = ColorTable::SharedPointer(new DefaultFeatureColorTable());
 
         } // namespace ControlParameterDefault
 

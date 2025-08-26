@@ -949,7 +949,18 @@ namespace CDPL
         CDPL_VIS_API bool hasGridViewTextColorParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearGridViewTextColorParameter(Base::ControlParameterContainer& cntnr);
-        
+
+        /*
+         * \since 1.3
+         */
+        CDPL_VIS_API const ColorTable::SharedPointer& getFeatureColorTableParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setFeatureColorTableParameter(Base::ControlParameterContainer& cntnr, const ColorTable::SharedPointer& colors);
+
+        CDPL_VIS_API bool hasFeatureColorTableParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearFeatureColorTableParameter(Base::ControlParameterContainer& cntnr);
+
     } // namespace Vis
 } // namespace CDPL
 

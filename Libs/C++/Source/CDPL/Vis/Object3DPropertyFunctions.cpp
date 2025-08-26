@@ -28,6 +28,7 @@
 #include "CDPL/Vis/Object3DProperty.hpp"
 #include "CDPL/Vis/Object3DPropertyDefault.hpp"
 #include "CDPL/Vis/Object3D.hpp"
+#include "CDPL/Vis/Material.hpp"
 
 
 using namespace CDPL;
@@ -69,3 +70,4 @@ using namespace CDPL;
 
 MAKE_OBJECT3D_PROPERTY_FUNCTIONS_WITH_DEF(SHAPE, const Vis::Shape3D::SharedPointer&, Shape)
 MAKE_OBJECT3D_PROPERTY_FUNCTIONS_WITH_DEF(TRANSFORMATION_MATRIX, const Math::Matrix4D&, TransformationMatrix)
+MAKE_OBJECT3D_PROPERTY_FUNCTIONS(MATERIAL, const Vis::Material&, Material)

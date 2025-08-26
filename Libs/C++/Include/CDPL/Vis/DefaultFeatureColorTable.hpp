@@ -1,5 +1,5 @@
 /* 
- * Object3DPropertyExport.cpp 
+ * DefaultFeatureColorTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,30 +21,39 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Vis::DefaultFeatureColorTable.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_VIS_DEFAULTFEATURECOLORTABLE_HPP
+#define CDPL_VIS_DEFAULTFEATURECOLORTABLE_HPP
 
-#include "CDPL/Vis/Object3DProperty.hpp"
-#include "CDPL/Base/LookupKey.hpp"
-
-#include "NamespaceExports.hpp"
+#include "CDPL/Vis/APIPrefix.hpp"
+#include "CDPL/Vis/ColorTable.hpp"
 
 
-namespace 
+namespace CDPL
 {
 
-    struct Object3DProperty {};
-}
+    namespace Vis
+    {
 
+        /**
+         * \brief Provides default colors for the type dependent coloring of chemical features in 3D visualizations 
+         *        of pharmacophores.
+         * \since 1.3
+         */
+        class CDPL_VIS_API DefaultFeatureColorTable : public ColorTable
+        {
 
-void CDPLPythonVis::exportObject3DProperties()
-{
-    using namespace boost;
-    using namespace CDPL;
+          public:
+            /**
+             * \brief Initializes the table with default colors for builtin pharmacophoric feature types.
+             */
+            DefaultFeatureColorTable();
+        };
+    } // namespace Vis
+} // namespace CDPL
 
-    python::class_<Object3DProperty, boost::noncopyable>("Object3DProperty", python::no_init)
-        .def_readonly("SHAPE", &Vis::Object3DProperty::SHAPE)
-        .def_readonly("TRANSFORMATION_MATRIX", &Vis::Object3DProperty::TRANSFORMATION_MATRIX)
-        .def_readonly("MATERIAL", &Vis::Object3DProperty::MATERIAL)
-        ;
-}
+#endif // CDPL_VIS_DEFAULTFEATURECOLORTABLE_HPP

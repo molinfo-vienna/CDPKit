@@ -132,4 +132,6 @@ Vis::IcosahedronMesh3D::IcosahedronMesh3D(double radius)
     addFace(6, 2, 10);
     addFace(8, 6, 7);
     addFace(9, 8, 1);
+
+    setSolid();
 }

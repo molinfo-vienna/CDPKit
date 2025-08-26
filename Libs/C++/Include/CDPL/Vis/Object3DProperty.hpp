@@ -62,6 +62,12 @@ namespace CDPL
              * \valuetype Math::Matrix4D
              */
             extern CDPL_VIS_API const Base::LookupKey TRANSFORMATION_MATRIX;
+
+            /**
+             * \brief Specifies the material properties of the 3D object and all sub-objects.
+             * \valuetype Vis::Material
+             */
+            extern CDPL_VIS_API const Base::LookupKey MATERIAL;
             
         } // namespace Object3DProperty
     } // namespace Vis

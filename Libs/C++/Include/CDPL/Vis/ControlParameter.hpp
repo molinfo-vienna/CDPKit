@@ -1288,7 +1288,18 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Base::LookupKey GRID_VIEW_TEXT_COLOR;
-            
+
+            /**
+             * \brief Specifies a lookup table for the type dependent coloring of pharmacophoric features.
+             *
+             * If the color for a particular feature type is missing then the color specified for the feature type Pharm::FeatureType::UNKNOWN
+             * will be used. If a color for this type is also missing then a builtin default value will be used.
+             *
+             * \valuetype Vis::ColorTable::SharedPointer
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::LookupKey FEATURE_COLOR_TABLE;
+
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

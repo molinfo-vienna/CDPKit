@@ -34,7 +34,6 @@ namespace CDPLPythonVis
     void exportLayoutDirections();
     void exportLayoutStyles();
     void exportSizeAdjustments();
-    void exportAtomColorTables();
 
     void exportMolecularGraphProperties();
     void exportAtomProperties();

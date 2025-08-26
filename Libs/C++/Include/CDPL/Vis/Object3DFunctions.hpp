@@ -41,13 +41,14 @@ namespace CDPL
     {
 
         class Object3D;
+        class Material;
 
         /**
          * \since 1.3
          */
         CDPL_VIS_API const Shape3D::SharedPointer& getShape(const Object3D& obj);
 
-        CDPL_VIS_API void setShape(Object3D& object3D, const Shape3D::SharedPointer& shape);
+        CDPL_VIS_API void setShape(Object3D& obj, const Shape3D::SharedPointer& shape);
 
         CDPL_VIS_API bool hasShape(const Object3D& obj);
 
@@ -58,11 +59,22 @@ namespace CDPL
          */
         CDPL_VIS_API const Math::Matrix4D& getTransformationMatrix(const Object3D& obj);
 
-        CDPL_VIS_API void setTransformationMatrix(Object3D& object3D, const Math::Matrix4D& mtx);
+        CDPL_VIS_API void setTransformationMatrix(Object3D& obj, const Math::Matrix4D& mtx);
 
         CDPL_VIS_API bool hasTransformationMatrix(const Object3D& obj);
 
         CDPL_VIS_API void clearTransformationMatrix(Object3D& obj);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API const Material& getMaterial(const Object3D& obj);
+
+        CDPL_VIS_API void setMaterial(Object3D& object3D, const Material& material);
+
+        CDPL_VIS_API bool hasMaterial(const Object3D& obj);
+
+        CDPL_VIS_API void clearMaterial(Object3D& obj);
         
     } // namespace Vis
 } // namespace CDPL

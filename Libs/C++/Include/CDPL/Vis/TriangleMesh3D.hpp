@@ -82,6 +82,10 @@ namespace CDPL
             void addFace(unsigned long v1_idx, unsigned long v2_idx, unsigned long v3_idx);
             
             std::size_t getNumFaces() const;
+
+            bool isSolid() const;
+
+            void setSolid(bool solid = true);
             
             void clear();
 
@@ -93,6 +97,7 @@ namespace CDPL
             Math::Vector3DArray  vertices;
             Math::Vector3DArray  normals;
             Math::Vector3ULArray faces;
+            bool                 solid{false};
         };
     } // namespace Vis
 } // namespace CDPL

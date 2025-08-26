@@ -544,7 +544,13 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_VIS_API const Color GRID_VIEW_TEXT_COLOR;
-            
+
+            /**
+             * \brief Default setting (= \c %ColorTable()) for the control-parameter Vis::ControlParameter::FEATURE_COLOR_TABLE.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const ColorTable::SharedPointer FEATURE_COLOR_TABLE;
+
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL

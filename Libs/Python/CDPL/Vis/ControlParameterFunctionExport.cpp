@@ -162,6 +162,8 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(double, GridViewCellPadding)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Font&, GridViewTextFont)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, GridViewTextColor)
+
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::ColorTable::SharedPointer&, FeatureColorTable)
 }
 
 
@@ -268,4 +270,6 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS(GridViewCellPadding, padding)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewTextFont, font)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewTextColor, color)
+
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(FeatureColorTable, colors)
 }

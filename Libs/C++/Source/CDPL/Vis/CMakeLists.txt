@@ -63,12 +63,14 @@ set(cdpl-vis_LIB_SRCS
     StructureView2DParameters.cpp
     ReactionView2DParameters.cpp
     SizeSpecification.cpp
-    AtomColorTable.cpp
+    DefaultAtomColorTable.cpp
+    DefaultFeatureColorTable.cpp
     Pen.cpp
     Brush.cpp
     Color.cpp
     ColorTable.cpp    
     Font.cpp
+    Material.cpp
     Rectangle2D.cpp
     Line2D.cpp
     PointArray2D.cpp

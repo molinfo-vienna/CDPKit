@@ -1,5 +1,5 @@
 /* 
- * Object3DProperty.cpp 
+ * DefaultAtomColorTableExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -7,7 +7,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either  
+ * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -22,27 +22,18 @@
  */
 
 
-#include "StaticInit.hpp"
+#include <boost/python.hpp>
 
-#include "CDPL/Vis/Object3DProperty.hpp"
+#include "CDPL/Vis/DefaultAtomColorTable.hpp"
 
-#include "CDPL/Base/LookupKeyDefinition.hpp"
+#include "ClassExports.hpp"
 
 
-namespace CDPL
+void CDPLPythonVis::exportDefaultAtomColorTable()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-    namespace Vis
-    {
-
-        namespace Object3DProperty
-        {
-
-            CDPL_DEFINE_LOOKUP_KEY(SHAPE);
-            CDPL_DEFINE_LOOKUP_KEY(TRANSFORMATION_MATRIX);
-            CDPL_DEFINE_LOOKUP_KEY(MATERIAL);
-        }
-
-        void initObject3DProperties() {}
-    }
+    python::class_<Vis::DefaultAtomColorTable, python::bases<Vis::ColorTable>, boost::noncopyable>("DefaultAtomColorTable", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

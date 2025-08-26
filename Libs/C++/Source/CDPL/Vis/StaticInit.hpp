@@ -47,7 +47,6 @@ namespace CDPL
         void initControlParameters();
         void initControlParameterDefaults();
         void initDataFormats();
-        void initAtomColors();
     } // namespace Vis
 } // namespace CDPL
 
@@ -70,7 +69,6 @@ namespace
             CDPL::Vis::initControlParameters();
             CDPL::Vis::initControlParameterDefaults();
             CDPL::Vis::initDataFormats();
-            CDPL::Vis::initAtomColors();
         }
 
     } cdplVisInit;

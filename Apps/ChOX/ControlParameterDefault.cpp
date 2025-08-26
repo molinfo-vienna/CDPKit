@@ -27,46 +27,9 @@
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
-#include "CDPL/Vis/ColorTable.hpp"
-#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Vis/DefaultAtomColorTable.hpp"
 
 #include "ControlParameterDefault.hpp"
-
-
-namespace
-{
-    
-    const CDPL::Vis::ColorTable::Entry ELEM_COLORS_2D[] = {
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::C , CDPL::Vis::Color( 40.0 / 255.0,  40.0 / 255.0,  40.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::O , CDPL::Vis::Color(240.0 / 255.0,   0.0        ,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::H , CDPL::Vis::Color(100.0 / 255.0, 100.0 / 255.0, 100.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::N , CDPL::Vis::Color(143.0 / 255.0, 143.0 / 255.0, 255.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::S , CDPL::Vis::Color(255.0 / 255.0, 200.0 / 255.0,  50.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cl, CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::B , CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::P , CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Fe, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ba, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Na, CDPL::Vis::Color(  0.0        ,   0.0        ,   1.0        )),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mg, CDPL::Vis::Color( 34.0 / 255.0, 139.0 / 255.0,  34.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Zn, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cu, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ni, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Br, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ca, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mn, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Al, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ti, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cr, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ag, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::F , CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Si, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Au, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::I , CDPL::Vis::Color(160.0 / 255.0,  32.0 / 255.0, 240.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Li, CDPL::Vis::Color(178.0 / 255.0,  34.0 / 255.0,  34.0 / 255.0)),
-        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::He, CDPL::Vis::Color(255.0 / 255.0, 192.0 / 255.0, 203.0 / 255.0))
-    };
-}
 
 
 namespace ChOX
@@ -117,9 +80,7 @@ namespace ChOX
                                                                                              CDPL::Vis::Alignment::LEFT;
 
         const bool                                 USE_ATOM_COLOR_TABLE                    = true;
-        const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable(&ELEM_COLORS_2D[0],
-                                                                                                                                                            &ELEM_COLORS_2D[0] +
-                                                                                                                                                            sizeof(ELEM_COLORS_2D) / sizeof(CDPL::Vis::ColorTable::Entry)));
+        const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::DefaultAtomColorTable());
 
         const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
         const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";

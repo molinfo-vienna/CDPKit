@@ -35,6 +35,7 @@ namespace CDPLPythonVis
     void exportColor();
     void exportPen();
     void exportBrush();
+    void exportMaterial();
     void exportFont();
     void exportFontMetrics();
     void exportLine2D();
@@ -43,6 +44,8 @@ namespace CDPLPythonVis
     void exportPath2D();
     void exportPath2DConverter();
     void exportColorTable();
+    void exportDefaultAtomColorTable();
+    void exportDefaultFeatureColorTable();
 
     void exportGraphicsPrimitive2D();
     void exportView2D();

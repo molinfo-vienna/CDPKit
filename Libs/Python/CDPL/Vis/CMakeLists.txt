@@ -35,6 +35,7 @@ set(vis_MOD_SRCS
     ColorExport.cpp
     PenExport.cpp
     BrushExport.cpp
+    MaterialExport.cpp
     FontExport.cpp
     FontMetricsExport.cpp
     Line2DExport.cpp
@@ -43,7 +44,8 @@ set(vis_MOD_SRCS
     Path2DExport.cpp
     Path2DConverterExport.cpp
     ColorTableExport.cpp
-    AtomColorTableExport.cpp
+    DefaultAtomColorTableExport.cpp
+    DefaultFeatureColorTableExport.cpp
     
     GraphicsPrimitive2DExport.cpp
     View2DExport.cpp

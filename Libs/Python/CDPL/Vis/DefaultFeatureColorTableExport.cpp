@@ -1,5 +1,5 @@
 /* 
- * AtomColorTableExport.cpp 
+ * DefaultFeatureColorTableExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,23 +24,16 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Vis/AtomColorTable.hpp"
+#include "CDPL/Vis/DefaultFeatureColorTable.hpp"
 
-#include "NamespaceExports.hpp"
-
-
-namespace 
-{
-
-    struct AtomColorTable {};
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonVis::exportAtomColorTables()
+void CDPLPythonVis::exportDefaultFeatureColorTable()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<AtomColorTable, boost::noncopyable>("AtomColorTable", python::no_init)
-        .def_readonly("ELEMENT_COLORS_2D", Vis::AtomColorTable::ELEMENT_COLORS_2D); 
+    python::class_<Vis::DefaultFeatureColorTable, python::bases<Vis::ColorTable>, boost::noncopyable>("DefaultFeatureColorTable", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }
