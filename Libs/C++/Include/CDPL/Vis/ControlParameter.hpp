@@ -1292,8 +1292,7 @@ namespace CDPL
             /**
              * \brief Specifies a lookup table for the type dependent coloring of pharmacophoric features.
              *
-             * If the color for a particular feature type is missing then the color specified for the feature type Pharm::FeatureType::UNKNOWN
-             * will be used. If a color for this type is also missing then a builtin default value will be used.
+             * If the color for a particular feature type is missing then the color specified for that type in Vis::DefaultFeatureColorTable will be used.
              *
              * \valuetype Vis::ColorTable::SharedPointer
              * \since 1.3

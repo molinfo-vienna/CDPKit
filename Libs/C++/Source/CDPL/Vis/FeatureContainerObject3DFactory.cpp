@@ -31,8 +31,11 @@
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
 #include "CDPL/Vis/TorusMesh3D.hpp"
 #include "CDPL/Vis/RightFrustumMesh3D.hpp"
+#include "CDPL/Vis/DefaultFeatureColorTable.hpp"
+#include "CDPL/Vis/Material.hpp"
 #include "CDPL/Vis/TriangleMesh3DFunctions.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
+#include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -181,12 +184,17 @@ namespace
 
         rot_mtx = Math::RotationMatrix<double>(4, z_rot, 0.0, 0.0, 1.0) * Math::RotationMatrix<double>(4, y_rot, 0.0, 1.0, 0.0);
     }
+
+    constexpr double MAT_SPEC_COLOR_RGB_INCREMENT = 0.5;
+    constexpr double MAT_SHININESS                = 0.15;
 }
 
 
 Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const Pharm::FeatureContainer& cntnr)
 {
     std::call_once(initTriangleMeshesFlag, &initTriangleMeshes);
+
+    colorTable = getFeatureColorTableParameter(*this);
     
     Object3D::SharedPointer obj_ptr(new Object3D());
 
@@ -250,86 +258,88 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
 
         if (!has3DCoordinates(ftr))
             continue;
-    
-        switch (getType(ftr)) {
+
+        auto ftr_type = getType(ftr);
+        
+        switch (ftr_type) {
 
             case Pharm::FeatureType::POSITIVE_IONIZABLE:
             case Pharm::FeatureType::NEGATIVE_IONIZABLE:
-                createSphericalFeatureRepr(*obj_ptr, ftr, ionizableFeatureMesh);
+                createSphericalFeatureRepr(*obj_ptr, ftr, ftr_type, ionizableFeatureMesh);
                 continue;
 
             case Pharm::FeatureType::H_BOND_DONOR:
-                createHBondDonorFeatureRepr(*obj_ptr, ftr, dual_hb_ftr_mask.test(i));
+                createHBondDonorFeatureRepr(*obj_ptr, ftr, ftr_type, dual_hb_ftr_mask.test(i));
                 continue;
 
             case Pharm::FeatureType::H_BOND_ACCEPTOR:
-                createHBondAcceptorFeatureRepr(*obj_ptr, ftr, dual_hb_ftr_mask.test(i));
+                createHBondAcceptorFeatureRepr(*obj_ptr, ftr, ftr_type, dual_hb_ftr_mask.test(i));
                 continue;
 
             case Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR:
-                createHalogenBondAcceptorFeatureRepr(*obj_ptr, ftr);
+                createHalogenBondAcceptorFeatureRepr(*obj_ptr, ftr, ftr_type);
                 continue;
 
             case Pharm::FeatureType::HALOGEN_BOND_DONOR:
-                createHalogenBondDonorFeatureRepr(*obj_ptr, ftr);
+                createHalogenBondDonorFeatureRepr(*obj_ptr, ftr, ftr_type);
                 continue;
 
             case Pharm::FeatureType::AROMATIC:
-                createAromaticFeatureRepr(*obj_ptr, ftr);
+                createAromaticFeatureRepr(*obj_ptr, ftr, ftr_type);
                 continue;
 
             default:
-                createSphericalFeatureRepr(*obj_ptr, ftr, sphereMesh);
+                createSphericalFeatureRepr(*obj_ptr, ftr, ftr_type, sphereMesh);
         }
     }
     
     return obj_ptr;
 }
 
-void Vis::FeatureContainerObject3DFactory::createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const
+void Vis::FeatureContainerObject3DFactory::createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, nonDirectedDonorAceptorFeatureMesh, M_PI / 2.0);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh, M_PI / 2.0);
         return;
     }
 
-    createArrowFeatureRepr(parent_obj, ftr, true, dual);
+    createArrowFeatureRepr(parent_obj, ftr, ftr_type, true, dual);
 }
 
-void Vis::FeatureContainerObject3DFactory::createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const
+void Vis::FeatureContainerObject3DFactory::createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, nonDirectedDonorAceptorFeatureMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh);
         return;
     }
 
-    createArrowFeatureRepr(parent_obj, ftr, false, dual);
+    createArrowFeatureRepr(parent_obj, ftr, ftr_type, false, dual);
 }
 
-void Vis::FeatureContainerObject3DFactory::createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const
+void Vis::FeatureContainerObject3DFactory::createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, nonDirectedDonorAceptorFeatureMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh);
         return;
     }
 
-    createArrowFeatureRepr(parent_obj, ftr, true);
+    createArrowFeatureRepr(parent_obj, ftr, ftr_type, true);
 }
 
-void Vis::FeatureContainerObject3DFactory::createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const
+void Vis::FeatureContainerObject3DFactory::createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, icosahedronMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, icosahedronMesh);
         return;
     }
 
-    createArrowFeatureRepr(parent_obj, ftr, false);
+    createArrowFeatureRepr(parent_obj, ftr, ftr_type, false);
 }
 
-void Vis::FeatureContainerObject3DFactory::createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const
+void Vis::FeatureContainerObject3DFactory::createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, sphereMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, sphereMesh);
         return;
     }
     
@@ -344,11 +354,12 @@ void Vis::FeatureContainerObject3DFactory::createAromaticFeatureRepr(Object3D& p
                             Math::ScalingMatrix<double>(4, tol, tol, tol));
      
     setShape(*obj_ptr, directedAromaticFeatureMesh);
+    setMaterialProperty(*obj_ptr, ftr_type);
     
     parent_obj.addSubObject(obj_ptr);
 }
 
-void Vis::FeatureContainerObject3DFactory::createSphericalFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr,
+void Vis::FeatureContainerObject3DFactory::createSphericalFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type,
                                                                       const Shape3D::SharedPointer& shape, double z_rot) const
 {
     Object3D::SharedPointer obj_ptr(new Object3D());
@@ -364,11 +375,13 @@ void Vis::FeatureContainerObject3DFactory::createSphericalFeatureRepr(Object3D& 
                                 Math::ScalingMatrix<double>(4, tol, tol, tol));
     
     setShape(*obj_ptr, shape);
+    setMaterialProperty(*obj_ptr, ftr_type);
     
     parent_obj.addSubObject(obj_ptr);
 }
 
-void Vis::FeatureContainerObject3DFactory::createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool outgoing, bool dual) const
+void Vis::FeatureContainerObject3DFactory::createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type,
+                                                                  bool outgoing, bool dual) const
 {
     Object3D::SharedPointer arrow_head_obj_ptr(new Object3D());
     Object3D::SharedPointer arrow_shaft_obj_ptr(new Object3D());
@@ -406,6 +419,37 @@ void Vis::FeatureContainerObject3DFactory::createArrowFeatureRepr(Object3D& pare
 
     arrow_obj_ptr->addSubObject(arrow_head_obj_ptr);
     arrow_obj_ptr->addSubObject(arrow_shaft_obj_ptr);
-    
+
+    setMaterialProperty(*arrow_obj_ptr, ftr_type);
+        
     parent_obj.addSubObject(arrow_obj_ptr);
+}
+
+void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, unsigned int ftr_type) const
+{
+    static const DefaultFeatureColorTable DEF_FTR_COLORS;
+
+    const Color* color = nullptr;
+    
+    if (colorTable) {
+        auto it = colorTable->getEntry(ftr_type);
+
+        if (it != colorTable->end())
+            color = &it->second;
+    }
+
+    if (!color) {
+        auto it = DEF_FTR_COLORS.getEntry(ftr_type);
+
+        if (it != DEF_FTR_COLORS.end())
+            color = &it->second;
+    }
+
+    if (!color)
+        color = &DEF_FTR_COLORS[Pharm::FeatureType::UNKNOWN];
+                             
+    setMaterial(obj, Material(*color, *color, Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT,
+                                                    color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT,
+                                                    color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT),
+                              MAT_SHININESS, 1.0 - color->getAlpha()));
 }

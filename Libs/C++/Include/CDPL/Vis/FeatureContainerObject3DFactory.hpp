@@ -34,6 +34,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Object3DFactory.hpp"
 #include "CDPL/Vis/Shape3D.hpp"
+#include "CDPL/Vis/ColorTable.hpp"
 
 
 namespace CDPL
@@ -67,14 +68,18 @@ namespace CDPL
 
           private:
             
-            void createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const;
-            void createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool dual) const;
-            void createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
-            void createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
-            void createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr) const;
-            void createSphericalFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr,
+            void createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const;
+            void createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const;
+            void createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
+            void createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
+            void createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
+            void createSphericalFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type,
                                             const Shape3D::SharedPointer& shape, double z_rot = 0.0) const;
-            void createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, bool outgoing, bool dual = false) const;
+            void createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool outgoing, bool dual = false) const;
+
+            void setMaterialProperty(Object3D& obj, unsigned int ftr_type) const;
+            
+            ColorTable::SharedPointer colorTable;
         };
     } // namespace Vis
 } // namespace CDPL
