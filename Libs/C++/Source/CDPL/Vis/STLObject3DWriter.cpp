@@ -52,8 +52,15 @@ namespace
     }
 
     template <typename T>
-    inline void outputVector(const T& vec, std::ostream& os)
+    inline void outputVector(const T& vec, std::ostream& os, bool normalize = false)
     {
+        if (normalize) {
+            auto length = std::sqrt(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
+
+            os << (vec[0] / length) << ' ' << (vec[1] / length)  << ' ' << (vec[2] / length) << '\n';
+            return;
+        }
+        
         os << vec[0] << ' ' << vec[1] << ' ' << vec[2] << '\n';
     }
 }
@@ -104,7 +111,7 @@ void Vis::STLObject3DWriter::close()
 void Vis::STLObject3DWriter::process(const Object3D& obj)
 {
     auto has_xform = hasTransformationMatrix(obj);
-    Math::Matrix4D saved_xform = vtxTransform;
+    auto saved_xform = vtxTransform;
 
     if (has_xform)
         vtxTransform = vtxTransform * getTransformationMatrix(obj);
@@ -138,7 +145,7 @@ void Vis::STLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
         
         output << STL::FACET_HEADER << STL::NORMAL_PREFIX;
 
-        outputVector(crossProd(v2 - v1, v3 - v1), output);
+        outputVector(crossProd(v2 - v1, v3 - v1), output, true);
 
         output << STL::VERTICES_HEADER;
         output << STL::VERTEX_PREFIX;

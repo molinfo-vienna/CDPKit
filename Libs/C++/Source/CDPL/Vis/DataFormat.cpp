@@ -29,6 +29,7 @@
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
 #include "CDPL/Vis/STLObject3DOutputHandler.hpp"
+#include "CDPL/Vis/VRMLObject3DOutputHandler.hpp"
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 # include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
@@ -54,11 +55,12 @@
 namespace
 {
 
-    const char* pngFileExtensions[] = { "png" };
-    const char* pdfFileExtensions[] = { "pdf" };
-    const char* psFileExtensions[]  = { "ps", "eps" };
-    const char* svgFileExtensions[] = { "svg" };
-    const char* stlFileExtensions[] = { "stl" };
+    const char* pngFileExtensions[]  = {"png"};
+    const char* pdfFileExtensions[]  = {"pdf"};
+    const char* psFileExtensions[]   = {"ps", "eps"};
+    const char* svgFileExtensions[]  = {"svg"};
+    const char* stlFileExtensions[]  = {"stl"};
+    const char* vrmlFileExtensions[] = {"wrl"};
 }
 
 
@@ -75,6 +77,8 @@ const Base::DataFormat Vis::DataFormat::SVG("SVG", "Scalable Vector Graphics For
                                             svgFileExtensions, svgFileExtensions + 1, false);
 const Base::DataFormat Vis::DataFormat::STL("STL", "Stereolithography Format", "model/stl", 
                                             stlFileExtensions, stlFileExtensions + 1, false);
+const Base::DataFormat Vis::DataFormat::VRML("VRML", "Virtual Reality Modeling Language", "model/vrml", 
+                                            vrmlFileExtensions, vrmlFileExtensions + 1, false);
 
 namespace CDPL
 {
@@ -99,6 +103,7 @@ namespace
             using namespace Vis;
 
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new STLObject3DOutputHandler()));
+            DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new VRMLObject3DOutputHandler()));
            
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

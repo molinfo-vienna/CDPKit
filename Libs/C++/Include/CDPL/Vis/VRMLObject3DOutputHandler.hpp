@@ -1,5 +1,5 @@
 /* 
- * DataFormatExport.cpp 
+ * VRMLObject3DOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,34 +21,31 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Vis::VRMLObject3DOutputHandler.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_VIS_VRMLOBJECT3DOUTPUTHANDLER_HPP
+#define CDPL_VIS_VRMLOBJECT3DOUTPUTHANDLER_HPP
 
 #include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Vis/VRMLObject3DWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
-#include "NamespaceExports.hpp"
 
-
-namespace 
+namespace CDPL
 {
 
-    struct DataFormat {};
-}
+    namespace Vis
+    {
 
+        /**
+         * \brief A handler for the output of Vis::Object3D instances in the <em>VRML</em> [\ref VRML97] format.
+         * \since 1.3
+         */
+        typedef Util::DefaultDataOutputHandler<VRMLObject3DWriter, DataFormat::VRML> VRMLObject3DOutputHandler;
+    } // namespace Vis
+} // namespace CDPL
 
-void CDPLPythonVis::exportDataFormats()
-{
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-        .def_readonly("PNG", &Vis::DataFormat::PNG)
-        .def_readonly("PDF", &Vis::DataFormat::PDF)
-        .def_readonly("PS", &Vis::DataFormat::PS)
-        .def_readonly("SVG", &Vis::DataFormat::SVG)
-        .def_readonly("STl", &Vis::DataFormat::STL)
-        .def_readonly("VRML", &Vis::DataFormat::VRML)
-        ;
-}
-
+#endif // CDPL_VIS_VRMLOBJECT3DOUTPUTHANDLER_HPP

@@ -99,6 +99,8 @@
 #include "CDPL/Vis/Object3DWriter.hpp"
 #include "CDPL/Vis/STLObject3DWriter.hpp"
 #include "CDPL/Vis/STLObject3DOutputHandler.hpp"
+#include "CDPL/Vis/VRMLObject3DWriter.hpp"
+#include "CDPL/Vis/VRMLObject3DOutputHandler.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

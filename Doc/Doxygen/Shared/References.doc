@@ -498,6 +498,13 @@ http://amalfi.dis.unina.it/graph/db/papers/vf-algorithm.pdf
 </tr>
 
 <tr>
+<td valign="top">\anchor VRML97<i>[VRML97]</i></td>
+<td valign="top">
+Virtual Reality Modeling Language 1997 (V2.0) specification: https://www.web3d.org/documents/specifications/14772/V2.0/index.html
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor VPTN<i>[VPTN]</i></td>
 <td valign="top">
 Wikipedia article about the GoF Visitor Pattern: https://en.wikipedia.org/wiki/Visitor_pattern

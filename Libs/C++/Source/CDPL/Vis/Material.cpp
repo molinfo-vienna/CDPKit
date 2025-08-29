@@ -30,9 +30,22 @@
 using namespace CDPL;
 
 
-Vis::Material::Material(const Color& amb_color, const Color& diff_color, const Color& spec_color, double shininess, double transp):
-    ambient(amb_color), diffuse(diff_color), specular(spec_color), shininess(shininess), transparency(transp)
-{}
+Vis::Material::Material(const Color& amb_color, double amb_factor, const Color& diff_color, const Color& spec_color, double shininess, double transp):
+    ambient(amb_color), diffuse(diff_color), specular(spec_color)
+{
+    setAmbientFactor(amb_factor);
+    setShininess(shininess);
+    setTransparency(transp);
+}
+
+Vis::Material::Material(double amb_factor, const Color& diff_color, const Color& spec_color, double shininess, double transp):
+    ambient(diff_color.getRed() * amb_factor, diff_color.getGreen() * amb_factor, diff_color.getBlue() * amb_factor, diff_color.getAlpha()),
+    diffuse(diff_color), specular(spec_color)
+{
+    setAmbientFactor(amb_factor);
+    setShininess(shininess);
+    setTransparency(transp);
+}
 
 void Vis::Material::setAmbientColor(const Color& color)
 {
@@ -42,6 +55,16 @@ void Vis::Material::setAmbientColor(const Color& color)
 const Vis::Color& Vis::Material::getAmbientColor() const
 {
     return ambient;
+}
+
+void Vis::Material::setAmbientFactor(double factor)
+{
+    ambientFactor = (factor < 0.0 ? 0.0 : factor > 1.0 ? 1.0 : factor);
+}
+
+double Vis::Material::getAmbientFactor() const
+{
+    return ambientFactor;
 }
 
 void Vis::Material::setDiffuseColor(const Color& color)
@@ -66,7 +89,7 @@ const Vis::Color& Vis::Material::getSpecularColor() const
 
 void Vis::Material::setShininess(double shininess)
 {
-    this->shininess = shininess;
+    this->shininess = (shininess < 0.0 ? 0.0 : shininess > 1.0 ? 1.0 : shininess);
 }
 
 double Vis::Material::getShininess() const
@@ -76,7 +99,7 @@ double Vis::Material::getShininess() const
 
 void Vis::Material::setTransparency(double transp)
 {
-    transparency = transp;
+    transparency = (transp < 0.0 ? 0.0 : transp > 1.0 ? 1.0 : transp);
 }
 
 double Vis::Material::getTransparency() const
@@ -86,9 +109,8 @@ double Vis::Material::getTransparency() const
 
 bool Vis::Material::operator==(const Material& material) const
 {
-    return (ambient == material.ambient && diffuse == material.diffuse &&
-            specular == material.specular && shininess == material.shininess &&
-            transparency == material.transparency);
+    return (ambient == material.ambient && ambientFactor == material.ambientFactor && diffuse == material.diffuse &&
+            specular == material.specular && shininess == material.shininess && transparency == material.transparency);
 }
 
 bool Vis::Material::operator!=(const Material& material) const

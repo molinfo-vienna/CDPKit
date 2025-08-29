@@ -186,7 +186,8 @@ namespace
     }
 
     constexpr double MAT_SPEC_COLOR_RGB_INCREMENT = 0.5;
-    constexpr double MAT_SHININESS                = 0.15;
+    constexpr double MAT_SHININESS                = 0.1;
+    constexpr double MAT_AMBIENT_FACTOR           = 0.35;
 }
 
 
@@ -448,8 +449,10 @@ void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, un
     if (!color)
         color = &DEF_FTR_COLORS[Pharm::FeatureType::UNKNOWN];
                              
-    setMaterial(obj, Material(*color, *color, Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT,
-                                                    color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT,
-                                                    color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT),
+    setMaterial(obj, Material(MAT_AMBIENT_FACTOR, *color,
+                              Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT,
+                                    color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT,
+                                    color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT,
+                                    color->getAlpha()),
                               MAT_SHININESS, 1.0 - color->getAlpha()));
 }

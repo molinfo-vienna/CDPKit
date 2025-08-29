@@ -75,6 +75,13 @@ namespace CDPL
              * \since 1.3
              */
             extern CDPL_VIS_API const Base::DataFormat STL;
+
+            /**
+             * \brief Provides meta-information about the <em>Virtual Reality Modeling Language V2.0</em> [\ref VRML97] format.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::DataFormat VRML;
+            
         } // namespace DataFormat
     } // namespace Vis
 } // namespace CDPL

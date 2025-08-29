@@ -87,6 +87,7 @@ set(cdpl-vis_LIB_SRCS
     TextBlockPrimitive2D.cpp
 
     STLObject3DWriter.cpp
+    VRMLObject3DWriter.cpp
    )
 
 if(CAIRO_FOUND)

@@ -39,14 +39,19 @@ void CDPLPythonVis::exportMaterial()
 
     python::class_<Vis::Material>("Material", python::no_init)
         .def(python::init<const Vis::Material&>((python::arg("self"), python::arg("material"))))
-        .def(python::init<const Vis::Color&, const Vis::Color&, const Vis::Color&, double, double>(
-                 (python::arg("self"), python::arg("amb_color"), python::arg("diff_color"), python::arg("spec_color"),
+        .def(python::init<const Vis::Color&, double, const Vis::Color&, const Vis::Color&, double, double>(
+                 (python::arg("self"), python::arg("amb_color"), python::arg("amb_factor"), python::arg("diff_color"),
+                  python::arg("spec_color"), python::arg("shininess"), python::arg("transp") = 1.0)))
+        .def(python::init<double, const Vis::Color&, const Vis::Color&, double, double>(
+                 (python::arg("self"), python::arg("amb_factor"), python::arg("diff_color"), python::arg("spec_color"),
                   python::arg("shininess"), python::arg("transp") = 1.0)))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Material>())
         .def("assign", CDPLPythonBase::copyAssOp<Vis::Material>(),
              (python::arg("self"), python::arg("material")), python::return_self<>())
         .def("getAmbientColor", &Vis::Material::getAmbientColor, python::arg("self"), python::return_internal_reference<1>())
         .def("setAmbientColor", &Vis::Material::setAmbientColor, (python::arg("self"), python::arg("color")))
+        .def("getAmbientFactor", &Vis::Material::getAmbientFactor, python::arg("self"))
+        .def("setAmbientFactor", &Vis::Material::setAmbientFactor, (python::arg("self"), python::arg("factor")))
         .def("getDiffuseColor", &Vis::Material::getDiffuseColor, python::arg("self"), python::return_internal_reference<1>())
         .def("setDiffuseColor", &Vis::Material::setDiffuseColor, (python::arg("self"), python::arg("color")))
         .def("getSpecularColor", &Vis::Material::getSpecularColor, python::arg("self"), python::return_internal_reference<1>())
@@ -63,6 +68,7 @@ void CDPLPythonVis::exportMaterial()
                       &Vis::Material::setDiffuseColor)
         .add_property("specular", python::make_function(&Vis::Material::getSpecularColor, python::return_internal_reference<1>()),
                       &Vis::Material::setSpecularColor)
+        .add_property("ambientFactor", &Vis::Material::getAmbientFactor, &Vis::Material::setAmbientFactor)
         .add_property("shininess", &Vis::Material::getShininess, &Vis::Material::setShininess)
         .add_property("transparency", &Vis::Material::getTransparency, &Vis::Material::setTransparency);
 }

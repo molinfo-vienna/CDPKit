@@ -59,12 +59,23 @@ namespace CDPL
             /**
              * \brief Constructs an new \c %Material instance with the specified properties.
              * \param amb_color The ambient color component.
+             * \param amb_factor The scaling factor to use for calculating the ambient from the diffuse color component.
              * \param diff_color The diffuse color component.
              * \param spec_color The specular color component.
              * \param shininess The shininess value.
              * \param transp The transparency value.
              */
-            Material(const Color& amb_color, const Color& diff_color, const Color& spec_color, double shininess, double transp = 0.0);
+            Material(const Color& amb_color, double amb_factor, const Color& diff_color, const Color& spec_color, double shininess, double transp = 0.0);
+
+            /**
+             * \brief Constructs an new \c %Material instance with the specified properties.
+             * \param amb_factor The scaling factor to use for calculating the ambient from the diffuse color component.
+             * \param diff_color The diffuse color component.
+             * \param spec_color The specular color component.
+             * \param shininess The shininess value.
+             * \param transp The transparency value.
+             */
+            Material(double amb_factor, const Color& diff_color, const Color& spec_color, double shininess, double transp = 0.0);
 
             /**
              * \brief Sets the ambient color component.
@@ -78,6 +89,18 @@ namespace CDPL
              */
             const Color& getAmbientColor() const;
 
+            /**
+             * \brief Sets the scaling factor to use for calculating the ambient from the diffuse color component.
+             * \param factor The scaling factor in the range [0, 1].
+             */
+            void setAmbientFactor(double factor);
+
+            /**
+             * \brief Returns the scaling factor used for calculating the ambient from the diffuse color component.
+             * \return The scaling factor.
+             */
+            double getAmbientFactor() const;
+            
             /**
              * \brief Sets the diffuse color component.
              * \param color The diffuse color component.
@@ -104,7 +127,7 @@ namespace CDPL
 
             /**
              * \brief Sets the shininess of the material.
-             * \param shininess The shininess value.
+             * \param shininess The shininess value in the range [0, 1].
              */
             void setShininess(double shininess);
 
@@ -116,7 +139,7 @@ namespace CDPL
 
             /**
              * \brief Sets the transparency of the material.
-             * \param transp The transparency value.
+             * \param transp The transparency value in the range [0, 1].
              */
             void setTransparency(double transp);
 
@@ -145,6 +168,7 @@ namespace CDPL
 
           private:
             Color  ambient;
+            double ambientFactor;
             Color  diffuse;
             Color  specular;
             double shininess;
