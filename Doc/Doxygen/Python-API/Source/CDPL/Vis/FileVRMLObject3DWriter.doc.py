@@ -20,15 +20,13 @@
 #
 
 ##
-# \brief Outputs 3D visualization data represented by Vis.Object3D instances in the <em>STL</em> [\ref STLFMT] format.
-# 
-# \since 1.3
-# 
-class STLObject3DWriter(Object3DWriterBase):
+# \brief 
+#
+class FileVRMLObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief Constructs a <tt>STLObject3DWriter</tt> instance that will write Vis.Object3D data to the output stream <em>os</em>.
+    # \brief Initializes the \e %FileVRMLObject3DWriter instance.
+    # \param file_name 
+    # \param mode 
     # 
-    # \param os The output stream to write to.
-    # 
-    def __init__(os: Base.OStream) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

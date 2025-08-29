@@ -48,3 +48,10 @@ class DataFormat(Boost.Python.instance):
     # \brief 
     #
     STl = CDPL.Base.DataFormat(name='STL', descr='Stereolithography Format', mime_type'model/stl', file_exts=['stl'], multi_rec=False)
+
+    ##
+    # \brief Provides meta-information about the <em>Virtual Reality Modeling Language V2.0</em> [\ref VRML97] format.
+    # 
+    # \since 1.3
+    # 
+    VRML = CDPL.Base.DataFormat(name='VRML', descr='Virtual Reality Modeling Language', mime_type'model/vrml', file_exts=['wrl'], multi_rec=False)

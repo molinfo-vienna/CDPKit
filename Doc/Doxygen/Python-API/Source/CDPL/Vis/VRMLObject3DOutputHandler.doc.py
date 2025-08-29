@@ -20,15 +20,13 @@
 #
 
 ##
-# \brief Outputs 3D visualization data represented by Vis.Object3D instances in the <em>STL</em> [\ref STLFMT] format.
+# \brief A handler for the output of Vis.Object3D instances in the <em>VRML</em> [\ref VRML97] format.
 # 
 # \since 1.3
 # 
-class STLObject3DWriter(Object3DWriterBase):
+class VRMLObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief Constructs a <tt>STLObject3DWriter</tt> instance that will write Vis.Object3D data to the output stream <em>os</em>.
+    # \brief Initializes the \e %VRMLObject3DOutputHandler instance.
     # 
-    # \param os The output stream to write to.
-    # 
-    def __init__(os: Base.OStream) -> None: pass
+    def __init__() -> None: pass

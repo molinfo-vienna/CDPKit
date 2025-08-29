@@ -38,12 +38,24 @@ class Material(Boost.Python.instance):
     # \brief Constructs an new <tt>Material</tt> instance with the specified properties.
     # 
     # \param amb_color The ambient color component.
+    # \param amb_factor The scaling factor to use for calculating the ambient from the diffuse color component.
     # \param diff_color The diffuse color component.
     # \param spec_color The specular color component.
     # \param shininess The shininess value.
     # \param transp The transparency value.
     # 
-    def __init__(amb_color: Color, diff_color: Color, spec_color: Color, shininess: float, transp: float = 1.0) -> None: pass
+    def __init__(amb_color: Color, amb_factor: float, diff_color: Color, spec_color: Color, shininess: float, transp: float = 1.0) -> None: pass
+
+    ##
+    # \brief Constructs an new <tt>Material</tt> instance with the specified properties.
+    # 
+    # \param amb_factor The scaling factor to use for calculating the ambient from the diffuse color component.
+    # \param diff_color The diffuse color component.
+    # \param spec_color The specular color component.
+    # \param shininess The shininess value.
+    # \param transp The transparency value.
+    # 
+    def __init__(amb_factor: float, diff_color: Color, spec_color: Color, shininess: float, transp: float = 1.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -77,6 +89,20 @@ class Material(Boost.Python.instance):
     # \param color The ambient color component.
     # 
     def setAmbientColor(color: Color) -> None: pass
+
+    ##
+    # \brief Returns the scaling factor used for calculating the ambient from the diffuse color component.
+    # 
+    # \return The scaling factor.
+    # 
+    def getAmbientFactor() -> float: pass
+
+    ##
+    # \brief Sets the scaling factor to use for calculating the ambient from the diffuse color component.
+    # 
+    # \param factor The scaling factor in the range [0, 1].
+    # 
+    def setAmbientFactor(factor: float) -> None: pass
 
     ##
     # \brief Returns the diffuse color component.
@@ -116,7 +142,7 @@ class Material(Boost.Python.instance):
     ##
     # \brief Sets the transparency of the material.
     # 
-    # \param transp The transparency value.
+    # \param transp The transparency value in the range [0, 1].
     # 
     def setTransparency(transp: float) -> None: pass
 
@@ -130,7 +156,7 @@ class Material(Boost.Python.instance):
     ##
     # \brief Sets the shininess of the material.
     # 
-    # \param shininess The shininess value.
+    # \param shininess The shininess value in the range [0, 1].
     # 
     def setShininess(shininess: float) -> None: pass
 
@@ -170,6 +196,8 @@ class Material(Boost.Python.instance):
     # \brief FIXME!
     #
     specular = property(getSpecular, setSpecular)
+
+    ambientFactor = property(getAmbientFactor, setAmbientFactor)
 
     shininess = property(getShininess, setShininess)
 
