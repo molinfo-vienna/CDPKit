@@ -134,7 +134,7 @@ if __name__ == '__main__':
       
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
-    errors |= checkScriptOutput('gen_ia_ph4s',
+    errors |= checkScriptFileOutput('gen_ia_ph4s', outputFilePath('gen_ia_ph4s.pml'),
                                     [ '-r', testDataFilePath('1ke6.pdb'), '-l', testDataFilePath('1ke6_B_LS2.sdf'), '-s', 'LS2',
                                       '-o', outputFilePath('gen_ia_ph4s.pml'), '-x' ])
     errors |= checkScriptFileOutput('align_mols_to_ph4', outputFilePath('align_mols_to_ph4.sdf'),
