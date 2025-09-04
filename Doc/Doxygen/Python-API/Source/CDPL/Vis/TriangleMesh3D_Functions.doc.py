@@ -98,3 +98,11 @@ def removeVertexDuplicates(mesh: TriangleMesh3D, check_vn: bool = True, tol: flo
 # \param weight_face_size 
 #
 def calcVertexFromFaceNormals(mesh: TriangleMesh3D, weight_face_size: bool = False) -> None: pass
+
+##
+# \brief 
+# \param mesh 
+# \param normals 
+# \param weight_face_size 
+#
+def calcVertexFromFaceNormals(mesh: TriangleMesh3D, normals: Math.Vector3DArray, weight_face_size: bool = False) -> None: pass

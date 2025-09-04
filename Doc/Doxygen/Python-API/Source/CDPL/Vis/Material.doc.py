@@ -180,6 +180,12 @@ class Material(Boost.Python.instance):
     # 
     def __ne__(material: Material) -> bool: pass
 
+    ##
+    # \brief Returns a string representation of the \e %Material instance.
+    # \return The generated string representation.
+    # 
+    def __str__() -> str: pass
+
     objectID = property(getObjectID)
 
     ##

@@ -1022,6 +1022,33 @@ def setReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer, lengt
 # \brief 
 # \param cntnr 
 #
+def clearDefaultMaterialParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasDefaultMaterialParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getDefaultMaterialParameter(cntnr: Base.ControlParameterContainer) -> Material: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param matrial 
+#
+def setDefaultMaterialParameter(cntnr: Base.ControlParameterContainer, matrial: Material) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearBondHighlightAreaOutlinePenParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##

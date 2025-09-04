@@ -55,3 +55,17 @@ class DataFormat(Boost.Python.instance):
     # \since 1.3
     # 
     VRML = CDPL.Base.DataFormat(name='VRML', descr='Virtual Reality Modeling Language', mime_type'model/vrml', file_exts=['wrl'], multi_rec=False)
+
+    ##
+    # \brief Provides meta-information about the <em>Polygon File (or Stanford Triangle) Format</em> [\ref PLYFMT].
+    # 
+    # \since 1.3
+    # 
+    PLY = CDPL.Base.DataFormat(name='PLY', descr='Polygon File Format', mime_type'text/plain', file_exts=['ply'], multi_rec=False)
+
+    ##
+    # \brief Provides meta-information about the <em>Raster3D</em> [\ref R3DFMT] format.
+    # 
+    # \since 1.3
+    # 
+    R3D = CDPL.Base.DataFormat(name='R3D', descr='Raster3D Format', mime_type'text/plain', file_exts=['r3d'], multi_rec=False)
