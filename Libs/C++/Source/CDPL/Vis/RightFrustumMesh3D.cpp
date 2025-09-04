@@ -156,5 +156,5 @@ Vis::RightFrustumMesh3D::RightFrustumMesh3D(double radius1, double radius2, doub
     }
 
     calcVertexFromFaceNormals(*this);
-    setSolid(((radius1 <= 0.0) || close_btm) && ((radius2 <= 0.0) || close_top));
+    setClosed(((radius1 <= 0.0) || close_btm) && ((radius2 <= 0.0) || close_top));
 }

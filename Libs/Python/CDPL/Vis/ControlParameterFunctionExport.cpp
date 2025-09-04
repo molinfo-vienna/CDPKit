@@ -32,6 +32,7 @@
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
+#include "CDPL/Vis/Material.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -164,6 +165,7 @@ namespace
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Color&, GridViewTextColor)
 
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::ColorTable::SharedPointer&, FeatureColorTable)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Material&, DefaultMaterial)
 }
 
 
@@ -272,4 +274,5 @@ void CDPLPythonVis::exportControlParameterFunctions()
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(GridViewTextColor, color)
 
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(FeatureColorTable, colors)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(DefaultMaterial, matrial)
 }

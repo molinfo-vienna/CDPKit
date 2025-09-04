@@ -72,7 +72,7 @@ namespace CDPL
              * \brief The type of the written data objects.
              */
             typedef T DataType;
-
+            
             /**
              * \brief Writes the data object \a obj.
              * \param obj The data object to write.

@@ -51,6 +51,7 @@ namespace CDPL
         class Color;
         class Pen;
         class Brush;
+        class Material;
 
         /*
          * \since 1.2
@@ -960,6 +961,17 @@ namespace CDPL
         CDPL_VIS_API bool hasFeatureColorTableParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearFeatureColorTableParameter(Base::ControlParameterContainer& cntnr);
+
+        /*
+         * \since 1.3
+         */
+        CDPL_VIS_API const Material& getDefaultMaterialParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setDefaultMaterialParameter(Base::ControlParameterContainer& cntnr, const Material& material);
+
+        CDPL_VIS_API bool hasDefaultMaterialParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearDefaultMaterialParameter(Base::ControlParameterContainer& cntnr);
 
     } // namespace Vis
 } // namespace CDPL

@@ -54,8 +54,8 @@ void CDPLPythonVis::exportTriangleMesh3D()
              python::arg("self"), python::return_internal_reference<>())
         .def("addFace", &Vis::TriangleMesh3D::addFace, (python::arg("self"), python::arg("v1_idx"), python::arg("v2_idx"), python::arg("v3_idx")))
         .def("getNumFaces", &Vis::TriangleMesh3D::getNumFaces, python::arg("self"))
-        .def("isSolid", &Vis::TriangleMesh3D::isSolid, python::arg("self"))
-        .def("setSolid", &Vis::TriangleMesh3D::setSolid, (python::arg("self"), python::arg("solid") = true))
+        .def("isClosed", &Vis::TriangleMesh3D::isClosed, python::arg("self"))
+        .def("setClosed", &Vis::TriangleMesh3D::setClosed, (python::arg("self"), python::arg("closed") = true))
         .def("clear", &Vis::TriangleMesh3D::clear, python::arg("self"))
         .def("swap", &Vis::TriangleMesh3D::swap, (python::arg("self"), python::arg("mesh")),
              python::return_self<>())
@@ -73,5 +73,5 @@ void CDPLPythonVis::exportTriangleMesh3D()
                       python::make_function(static_cast<Math::Vector3ULArray& (Vis::TriangleMesh3D::*)()>(&Vis::TriangleMesh3D::getFaces),
                                             python::return_internal_reference<>()))
         .add_property("numFaces", &Vis::TriangleMesh3D::getNumFaces)
-        .add_property("solid", &Vis::TriangleMesh3D::isSolid, &Vis::TriangleMesh3D::setSolid);
+        .add_property("closed", &Vis::TriangleMesh3D::isClosed, &Vis::TriangleMesh3D::setClosed);
 }

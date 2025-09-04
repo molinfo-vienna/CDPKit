@@ -101,14 +101,14 @@ std::size_t Vis::TriangleMesh3D::getNumFaces() const
     return faces.getSize();
 }
 
-bool Vis::TriangleMesh3D::isSolid() const
+bool Vis::TriangleMesh3D::isClosed() const
 {
-    return solid;
+    return closed;
 }
 
-void Vis::TriangleMesh3D::setSolid(bool solid)
+void Vis::TriangleMesh3D::setClosed(bool closed)
 {
-    this->solid = solid;
+    this->closed = closed;
 }
 
 void Vis::TriangleMesh3D::clear()

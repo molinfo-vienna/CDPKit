@@ -81,6 +81,18 @@ namespace CDPL
              * \since 1.3
              */
             extern CDPL_VIS_API const Base::DataFormat VRML;
+
+            /**
+             * \brief Provides meta-information about the <em>Polygon File (or Stanford Triangle) Format</em> [\ref PLYFMT].
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::DataFormat PLY;
+
+            /**
+             * \brief Provides meta-information about the <em>Raster3D</em> [\ref R3DFMT] format.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::DataFormat R3D;
             
         } // namespace DataFormat
     } // namespace Vis

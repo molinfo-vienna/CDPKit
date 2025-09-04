@@ -38,8 +38,10 @@ void CDPLPythonVis::exportTriangleMesh3DFunctions()
     python::def("subdivideSpherical", &Vis::subdivideSpherical, python::arg("mesh"));
     python::def("removeVertexDuplicates", &Vis::removeVertexDuplicates,
                 (python::arg("mesh"), python::arg("check_vn") = true, python::arg("tol") = 0.0));
-    python::def("calcVertexFromFaceNormals", &Vis::calcVertexFromFaceNormals,
+    python::def("calcVertexFromFaceNormals", static_cast<void (*)(Vis::TriangleMesh3D&, bool)>(&Vis::calcVertexFromFaceNormals),
                 (python::arg("mesh"), python::arg("weight_face_size") = false));
+    python::def("calcVertexFromFaceNormals", static_cast<void (*)(const Vis::TriangleMesh3D&, Math::Vector3DArray&, bool)>(&Vis::calcVertexFromFaceNormals),
+                (python::arg("mesh"), python::arg("normals"), python::arg("weight_face_size") = false));
     python::def("translate", &Vis::translate,
                 (python::arg("mesh"), python::arg("trans_x"), python::arg("trans_y"), python::arg("trans_z"),
                  python::arg("vtx_offs") = 0, python::arg("vtx_count") = 0));

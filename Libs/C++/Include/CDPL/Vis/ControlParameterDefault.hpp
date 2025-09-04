@@ -45,6 +45,7 @@ namespace CDPL
         class Rectangle2D;
         class Pen;
         class Brush;
+        class Material;
         
         /**
          * \brief Provides default values for built-in control-parameters.
@@ -546,10 +547,17 @@ namespace CDPL
             extern CDPL_VIS_API const Color GRID_VIEW_TEXT_COLOR;
 
             /**
-             * \brief Default setting (= \c %ColorTable()) for the control-parameter Vis::ControlParameter::FEATURE_COLOR_TABLE.
+             * \brief Default setting (= \c %DefaultAtomColorTable()) for the control-parameter Vis::ControlParameter::FEATURE_COLOR_TABLE.
              * \since 1.3
              */
             extern CDPL_VIS_API const ColorTable::SharedPointer FEATURE_COLOR_TABLE;
+
+            /**
+             * \brief Default setting (= \c %Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1)) 
+             *        for the control-parameter Vis::ControlParameter::DEFAULT_MATERIAL.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Material DEFAULT_MATERIAL;
 
         } // namespace ControlParameterDefault
     } // namespace Vis

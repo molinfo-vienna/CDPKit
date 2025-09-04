@@ -143,6 +143,7 @@ namespace CDPL
             CDPL_DEFINE_LOOKUP_KEY(GRID_VIEW_TEXT_COLOR);
 
             CDPL_DEFINE_LOOKUP_KEY(FEATURE_COLOR_TABLE);
+            CDPL_DEFINE_LOOKUP_KEY(DEFAULT_MATERIAL);
         }
 
         void initControlParameters() {}

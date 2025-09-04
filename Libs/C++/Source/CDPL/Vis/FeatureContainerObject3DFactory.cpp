@@ -161,7 +161,7 @@ namespace
             rotateZ(*ionizableFeatureMesh, z_rot, num_prev_verts);
         }
 
-        ionizableFeatureMesh->setSolid();
+        ionizableFeatureMesh->setClosed();
         
         // ---
 

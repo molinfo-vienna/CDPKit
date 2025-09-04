@@ -33,14 +33,14 @@ using namespace CDPL;
 
 Vis::DefaultFeatureColorTable::DefaultFeatureColorTable()
 {
-    insertEntry(Pharm::FeatureType::AROMATIC, Color(0.14, 0.15, 0.45, 0.3));
-    insertEntry(Pharm::FeatureType::HYDROPHOBIC, Color(0.8, 0.6, 0.04, 0.2));
-    insertEntry(Pharm::FeatureType::POSITIVE_IONIZABLE, Color(0.12, 0.12, 0.48, 0.3));
-    insertEntry(Pharm::FeatureType::NEGATIVE_IONIZABLE, Color(0.48, 0.12, 0.12, 0.3));
+    insertEntry(Pharm::FeatureType::AROMATIC, Color(0.14, 0.15, 0.45, 0.5));
+    insertEntry(Pharm::FeatureType::HYDROPHOBIC, Color(0.8, 0.6, 0.04, 0.5));
+    insertEntry(Pharm::FeatureType::POSITIVE_IONIZABLE, Color(0.12, 0.12, 0.48, 0.5));
+    insertEntry(Pharm::FeatureType::NEGATIVE_IONIZABLE, Color(0.48, 0.12, 0.12, 0.5));
     insertEntry(Pharm::FeatureType::H_BOND_DONOR, Color(0.12, 0.48, 0.12, 0.5));
     insertEntry(Pharm::FeatureType::H_BOND_ACCEPTOR, Color(0.48, 0.12, 0.12, 0.5));
     insertEntry(Pharm::FeatureType::HALOGEN_BOND_DONOR, Color(0.69, 0.4, 0.69, 0.5));
     insertEntry(Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Color(0.69, 0.4, 0.69, 0.5));
-    insertEntry(Pharm::FeatureType::EXCLUSION_VOLUME, Color(0.24, 0.24, 0.24, 0.2));
+    insertEntry(Pharm::FeatureType::EXCLUSION_VOLUME, Color(0.24, 0.24, 0.24, 0.5));
     insertEntry(Pharm::FeatureType::UNKNOWN, Color(0.6, 0.5, 0.0, 0.5));
 }

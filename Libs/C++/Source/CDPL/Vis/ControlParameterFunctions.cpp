@@ -33,6 +33,7 @@
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
+#include "CDPL/Vis/Material.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
@@ -162,3 +163,4 @@ MAKE_CONTROL_PARAM_FUNCTIONS(GRID_VIEW_TEXT_FONT, const Vis::Font&, GridViewText
 MAKE_CONTROL_PARAM_FUNCTIONS(GRID_VIEW_TEXT_COLOR, const Vis::Color&, GridViewTextColor);
 
 MAKE_CONTROL_PARAM_FUNCTIONS(FEATURE_COLOR_TABLE, const Vis::ColorTable::SharedPointer&, FeatureColorTable)
+MAKE_CONTROL_PARAM_FUNCTIONS(DEFAULT_MATERIAL, const Vis::Material&, DefaultMaterial)

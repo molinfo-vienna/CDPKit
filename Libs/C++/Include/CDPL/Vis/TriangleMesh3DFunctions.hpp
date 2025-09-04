@@ -33,6 +33,7 @@
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL
@@ -57,6 +58,11 @@ namespace CDPL
          * \since 1.3
          */
         CDPL_VIS_API void calcVertexFromFaceNormals(TriangleMesh3D& mesh, bool weight_face_size = false);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API void calcVertexFromFaceNormals(const TriangleMesh3D& mesh, Math::Vector3DArray& normals, bool weight_face_size = false);
     
         /**
          * \since 1.3

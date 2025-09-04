@@ -1,5 +1,5 @@
 /* 
- * STLFormatData.hpp
+ * R3DObject3DOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -21,11 +21,17 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Vis::R3DObject3DOutputHandler.
+ */
 
-#ifndef CDPL_VIS_STLFORMATDATA_HPP
-#define CDPL_VIS_STLFORMATDATA_HPP
+#ifndef CDPL_VIS_R3DOBJECT3DOUTPUTHANDLER_HPP
+#define CDPL_VIS_R3DOBJECT3DOUTPUTHANDLER_HPP
 
-#include <string>
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/R3DObject3DWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL
@@ -34,24 +40,12 @@ namespace CDPL
     namespace Vis
     {
 
-        namespace STL
-        {
-
-            const std::string SOLID_HEADER    = "solid unnamed\n";
-            const std::string SOLID_FOOTER    = "endsolid unnamed\n";
-
-            const std::string FACET_HEADER    = " facet";
-            const std::string FACET_FOOTER    = " endfacet\n";
-
-            const std::string NORMAL_PREFIX   = " normal ";
-
-            const std::string VERTICES_HEADER = "  outer loop\n";
-            const std::string VERTICES_FOOTER = "  endloop\n";
-
-            const std::string VERTEX_PREFIX   = "    vertex ";
-
-        } // namespace STL
+        /**
+         * \brief A handler for the output of Vis::Object3D instances in the <em>Raster3D</em> [\ref R3DFMT] format.
+         * \since 1.3
+         */
+        typedef Util::DefaultDataOutputHandler<R3DObject3DWriter, DataFormat::R3D> R3DObject3DOutputHandler;
     } // namespace Vis
 } // namespace CDPL
 
-#endif // CDPL_VIS_STLFORMATDATA_HPP
+#endif // CDPL_VIS_R3DOBJECT3DOUTPUTHANDLER_HPP

@@ -22,6 +22,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Material.hpp"
@@ -30,6 +32,51 @@
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+    std::string colorToString(const CDPL::Vis::Color& col)
+    {
+        std::ostringstream oss;
+
+        oss << "Color(";
+        
+        if (col == CDPL::Vis::Color())
+            oss << ')';
+        
+        else {
+            oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
+
+            if (col.getAlpha() != 1.0)
+                oss << ", a=" << col.getAlpha();
+
+            oss << ')';
+        }
+        
+        return oss.str();
+    }
+
+    std::string toString(const CDPL::Vis::Material& mat)
+    {
+        std::ostringstream oss;
+
+        oss << "CDPL.Vis.Material("
+            << "amb_color=" << colorToString(mat.getAmbientColor()) << ", "
+            << "amb_factor=" << mat.getAmbientFactor() << ", "
+            << "diff_color=" << colorToString(mat.getDiffuseColor()) << ", "
+            << "spec_color=" << colorToString(mat.getSpecularColor()) << ", "
+            << "shininess=" << mat.getShininess();
+        
+        if (mat.getTransparency() != 1.0)
+            oss << ", transp=" << mat.getTransparency();
+
+        oss << ')';
+        
+        return oss.str();
+    }
+}
 
 
 void CDPLPythonVis::exportMaterial()
@@ -62,6 +109,7 @@ void CDPLPythonVis::exportMaterial()
         .def("setShininess", &Vis::Material::setShininess, (python::arg("self"), python::arg("shininess")))
         .def("__eq__", &Vis::Material::operator==, (python::arg("self"), python::arg("material")))
         .def("__ne__", &Vis::Material::operator!=, (python::arg("self"), python::arg("material")))
+        .def("__str__", &toString, python::arg("self"))
         .add_property("ambient", python::make_function(&Vis::Material::getAmbientColor, python::return_internal_reference<1>()),
                       &Vis::Material::setAmbientColor)
         .add_property("diffuse", python::make_function(&Vis::Material::getDiffuseColor, python::return_internal_reference<1>()),

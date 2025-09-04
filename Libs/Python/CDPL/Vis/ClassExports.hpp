@@ -79,7 +79,11 @@ namespace CDPLPythonVis
     void exportSTLObject3DOutputHandler();
     void exportVRMLObject3DWriter();
     void exportVRMLObject3DOutputHandler();
-
+    void exportPLYObject3DWriter();
+    void exportPLYObject3DOutputHandler();
+    void exportR3DObject3DWriter();
+    void exportR3DObject3DOutputHandler();
+    
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
     void exportPNGMolecularGraphWriter();

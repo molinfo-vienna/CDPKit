@@ -35,7 +35,7 @@
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Vis/AtomColorTable.hpp"
+#include "CDPL/Vis/DefaultAtomColorTable.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(StructureGridView2DTest)
         }
     }
 
-    Vis::setAtomColorTableParameter(view(1, 1), ColorTable::SharedPointer(new ColorTable(AtomColorTable::ELEMENT_COLORS_2D)));
+    Vis::setAtomColorTableParameter(view(1, 1), ColorTable::SharedPointer(new DefaultAtomColorTable()));
     Vis::setGridViewTextFontParameter(view(2, 2), Font("Serif", 12.0, true));
     Vis::setGridViewTextColorParameter(view(0, 0), Color::RED);
     Vis::setBackgroundBrushParameter(view, Brush(Color::GRAY, Brush::DIAG_CROSS_PATTERN));

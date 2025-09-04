@@ -83,9 +83,9 @@ namespace CDPL
             
             std::size_t getNumFaces() const;
 
-            bool isSolid() const;
+            bool isClosed() const;
 
-            void setSolid(bool solid = true);
+            void setClosed(bool closed = true);
             
             void clear();
 
@@ -97,7 +97,7 @@ namespace CDPL
             Math::Vector3DArray  vertices;
             Math::Vector3DArray  normals;
             Math::Vector3ULArray faces;
-            bool                 solid{false};
+            bool                 closed{false};
         };
     } // namespace Vis
 } // namespace CDPL

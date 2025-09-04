@@ -88,6 +88,8 @@ set(cdpl-vis_LIB_SRCS
 
     STLObject3DWriter.cpp
     VRMLObject3DWriter.cpp
+    PLYObject3DWriter.cpp
+    R3DObject3DWriter.cpp
    )
 
 if(CAIRO_FOUND)

@@ -174,10 +174,16 @@ std::size_t Vis::removeVertexDuplicates(TriangleMesh3D& mesh, bool check_vn, dou
 
 void Vis::calcVertexFromFaceNormals(TriangleMesh3D& mesh, bool weight_face_size)
 {
+    calcVertexFromFaceNormals(mesh, mesh.getVertexNormals(), weight_face_size);
+}
+
+void Vis::calcVertexFromFaceNormals(const TriangleMesh3D& mesh, Math::Vector3DArray& normals, bool weight_face_size)
+{
     auto& vertices = mesh.getVertices();
     std::size_t num_v = vertices.size();
-    std::vector<Math::Vector3D> calc_normals(num_v);
 
+    normals.assign(num_v, Math::Vector3D());
+    
     for (auto& f : mesh.getFaces()) {
         auto& v1 = vertices[f[0]];
         auto& v2 = vertices[f[1]];
@@ -189,19 +195,17 @@ void Vis::calcVertexFromFaceNormals(TriangleMesh3D& mesh, bool weight_face_size)
             ::scale(fn, 1.0 / length(fn.getData()));
 
         for (std::size_t i = 0; i < 3; i++)
-            calc_normals[f[i]] += fn;
+            normals[f[i]] += fn;
     }
 
-    for (auto& n : calc_normals) {
+    for (auto& n : normals) {
         auto l = length(n.getData());
 
         if (l != 0.0)
             ::scale(n, 1.0 / l);
     }
-
-    mesh.getVertexNormals().getData().swap(calc_normals);
 }
-
+    
 void Vis::translate(TriangleMesh3D& mesh, double trans_x, double trans_y, double trans_z,
                     std::size_t vtx_offs, std::size_t vtx_count)
 {

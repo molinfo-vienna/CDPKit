@@ -30,6 +30,8 @@
 #include "CDPL/Vis/DataFormat.hpp"
 #include "CDPL/Vis/STLObject3DOutputHandler.hpp"
 #include "CDPL/Vis/VRMLObject3DOutputHandler.hpp"
+#include "CDPL/Vis/PLYObject3DOutputHandler.hpp"
+#include "CDPL/Vis/R3DObject3DOutputHandler.hpp"
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 # include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
@@ -55,12 +57,14 @@
 namespace
 {
 
-    const char* pngFileExtensions[]  = {"png"};
-    const char* pdfFileExtensions[]  = {"pdf"};
-    const char* psFileExtensions[]   = {"ps", "eps"};
-    const char* svgFileExtensions[]  = {"svg"};
-    const char* stlFileExtensions[]  = {"stl"};
-    const char* vrmlFileExtensions[] = {"wrl"};
+    const char* pngFileExtensions[]  = { "png" };
+    const char* pdfFileExtensions[]  = { "pdf" };
+    const char* psFileExtensions[]   = { "ps", "eps" };
+    const char* svgFileExtensions[]  = { "svg" };
+    const char* stlFileExtensions[]  = { "stl" };
+    const char* vrmlFileExtensions[] = { "wrl" };
+    const char* plyFileExtensions[]  = { "ply" };
+    const char* r3dFileExtensions[]  = { "r3d" };
 }
 
 
@@ -79,6 +83,10 @@ const Base::DataFormat Vis::DataFormat::STL("STL", "Stereolithography Format", "
                                             stlFileExtensions, stlFileExtensions + 1, false);
 const Base::DataFormat Vis::DataFormat::VRML("VRML", "Virtual Reality Modeling Language", "model/vrml", 
                                             vrmlFileExtensions, vrmlFileExtensions + 1, false);
+const Base::DataFormat Vis::DataFormat::PLY("PLY", "Polygon File Format", "text/plain", 
+                                            plyFileExtensions, plyFileExtensions + 1, false);
+const Base::DataFormat Vis::DataFormat::R3D("R3D", "Raster3D Format", "text/plain", 
+                                            r3dFileExtensions, r3dFileExtensions + 1, false);
 
 namespace CDPL
 {
@@ -104,6 +112,8 @@ namespace
 
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new STLObject3DOutputHandler()));
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new VRMLObject3DOutputHandler()));
+            DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new PLYObject3DOutputHandler()));
+            DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new R3DObject3DOutputHandler()));
            
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

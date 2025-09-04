@@ -32,6 +32,8 @@
 #include "CDPL/Vis/TriangleMesh3D.hpp"
 #include "CDPL/Vis/Material.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
+#include "CDPL/Vis/TriangleMesh3DFunctions.hpp"
+#include "CDPL/Vis/ControlParameterFunctions.hpp"
 
 #include "VRMLFormatData.hpp"
 
@@ -88,7 +90,7 @@ Base::DataWriter<Vis::Object3D>& Vis::VRMLObject3DWriter::write(const Object3D& 
     }
 
     vtxTransform = Math::IdentityMatrix<double>(4, 4);
-    material = nullptr;
+    material = &getDefaultMaterialParameter(*this);
     
     process(obj);
     
@@ -144,26 +146,24 @@ void Vis::VRMLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
 
     // -
 
-    if (material) {
-        output << ' ' << VRML::Shape::APPEARANCE_PREFIX;
-        output << VRML::Appearance::HEADER;
-        output << "  " << VRML::Appearance::MATERIAL_PREFIX;
-        output << VRML::Material::HEADER;
-        output << "   " << VRML::Material::DIFFUSE_COLOR_PREFIX;
+    output << ' ' << VRML::Shape::APPEARANCE_PREFIX;
+    output << VRML::Appearance::HEADER;
+    output << "  " << VRML::Appearance::MATERIAL_PREFIX;
+    output << VRML::Material::HEADER;
+    output << "   " << VRML::Material::DIFFUSE_COLOR_PREFIX;
 
-        outputColor(material->getDiffuseColor(), output);
+    outputColor(material->getDiffuseColor(), output);
 
-        output << "   " << VRML::Material::SPECULAR_COLOR_PREFIX;
+    output << "   " << VRML::Material::SPECULAR_COLOR_PREFIX;
 
-        outputColor(material->getSpecularColor(), output);
+    outputColor(material->getSpecularColor(), output);
 
-        output << "   " << VRML::Material::AMBIENT_INTENSITY_PREFIX << material->getAmbientFactor() << '\n';
-        output << "   " << VRML::Material::SHININESS_PREFIX << material->getShininess() << '\n';
-        output << "   " << VRML::Material::TRANSPARENCY_PREFIX << material->getTransparency() << '\n';
+    output << "   " << VRML::Material::AMBIENT_INTENSITY_PREFIX << material->getAmbientFactor() << '\n';
+    output << "   " << VRML::Material::SHININESS_PREFIX << material->getShininess() << '\n';
+    output << "   " << VRML::Material::TRANSPARENCY_PREFIX << material->getTransparency() << '\n';
 
-        output << "  " << VRML::Material::FOOTER;
-        output << ' ' << VRML::Appearance::FOOTER;
-    }
+    output << "  " << VRML::Material::FOOTER;
+    output << ' ' << VRML::Appearance::FOOTER;
 
     // -
 
@@ -177,9 +177,10 @@ void Vis::VRMLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
     output << "   " << VRML::Coordinate::POINT_PREFIX;
  
     double trans_vec[3];
+    auto& verts = mesh.getVertices().getData();
     
-    for (auto& vtx : mesh.getVertices().getData()) {
-        transform(vtx, vtxTransform, trans_vec);
+    for (auto& vtx : verts) {
+        ::transform(vtx, vtxTransform, trans_vec);
 
         output << "    ";
         
@@ -194,15 +195,22 @@ void Vis::VRMLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
     output << "  " << VRML::IndexedFaceSet::NORMAL_PREFIX;
     output << VRML::Normal::HEADER;
     output << "   " << VRML::Normal::VECTOR_PREFIX;
- 
-    for (auto& normal : mesh.getVertexNormals().getData()) {
-        transform(normal, vtxTransform, trans_vec, false);
+
+    auto& normals = mesh.getVertexNormals().getData();
+    auto num_verts = verts.size();
+    auto num_normals = normals.size();
+
+    if (num_verts > num_normals)
+        calcVertexFromFaceNormals(mesh, calcVtxNormals);
+    
+    for (std::size_t i = 0; i < num_verts; i++) {
+        ::transform((i < num_normals ? normals[i] : calcVtxNormals[i]), vtxTransform, trans_vec, false);
 
         output << "    ";
         
         outputVector(trans_vec, output, true);
     }
-
+    
     output << "   " << VRML::Normal::VECTOR_SUFFIX;
     output << "  " << VRML::Normal::FOOTER;
     
@@ -220,7 +228,7 @@ void Vis::VRMLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
     
     // --
 
-    output << ' ' << VRML::IndexedFaceSet::SOLID_PREFIX << (mesh.isSolid() ? VRML::TRUE : VRML::FALSE) << '\n';
+    output << ' ' << VRML::IndexedFaceSet::SOLID_PREFIX << (mesh.isClosed() ? VRML::TRUE : VRML::FALSE) << '\n';
     output << ' ' << VRML::IndexedFaceSet::FOOTER;
 
     // -

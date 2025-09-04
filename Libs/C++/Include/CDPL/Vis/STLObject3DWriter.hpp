@@ -63,6 +63,8 @@ namespace CDPL
 
             STLObject3DWriter(const STLObject3DWriter&) = delete;
 
+            ~STLObject3DWriter();
+            
             /**
              * \brief Outputs the Vis::Object3D instance \a obj.
              * \param obj The Vis::Object3D instance to output.

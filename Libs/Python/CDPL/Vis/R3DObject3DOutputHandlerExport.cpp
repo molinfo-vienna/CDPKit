@@ -1,5 +1,5 @@
 /* 
- * STLFormatData.hpp
+ * R3DObject3DOutputHandlerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,36 +22,19 @@
  */
 
 
-#ifndef CDPL_VIS_STLFORMATDATA_HPP
-#define CDPL_VIS_STLFORMATDATA_HPP
+#include <boost/python.hpp>
 
-#include <string>
+#include "CDPL/Vis/R3DObject3DOutputHandler.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL
+void CDPLPythonVis::exportR3DObject3DOutputHandler()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-    namespace Vis
-    {
-
-        namespace STL
-        {
-
-            const std::string SOLID_HEADER    = "solid unnamed\n";
-            const std::string SOLID_FOOTER    = "endsolid unnamed\n";
-
-            const std::string FACET_HEADER    = " facet";
-            const std::string FACET_FOOTER    = " endfacet\n";
-
-            const std::string NORMAL_PREFIX   = " normal ";
-
-            const std::string VERTICES_HEADER = "  outer loop\n";
-            const std::string VERTICES_FOOTER = "  endloop\n";
-
-            const std::string VERTEX_PREFIX   = "    vertex ";
-
-        } // namespace STL
-    } // namespace Vis
-} // namespace CDPL
-
-#endif // CDPL_VIS_STLFORMATDATA_HPP
+    python::class_<Vis::R3DObject3DOutputHandler, 
+        python::bases<Base::DataOutputHandler<Vis::Object3D> > >("R3DObject3DOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
+}

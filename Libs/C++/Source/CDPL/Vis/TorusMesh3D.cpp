@@ -89,5 +89,5 @@ Vis::TorusMesh3D::TorusMesh3D(double radius1, double radius2, std::size_t num_se
     }
     
     calcVertexFromFaceNormals(*this);
-    setSolid();
+    setClosed();
 }

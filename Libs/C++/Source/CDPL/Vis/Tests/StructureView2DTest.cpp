@@ -36,7 +36,7 @@
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
-#include "CDPL/Vis/AtomColorTable.hpp"
+#include "CDPL/Vis/DefaultAtomColorTable.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/SizeAdjustment.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
 
     dumpImage(view, "StructureView2DTest_", img_id, "MolecularGraphProperty::ATOM_COLOR = (0.3, 0.3, 0.3)");
 
-    ColorTable::SharedPointer color_tab_ptr(new ColorTable(AtomColorTable::ELEMENT_COLORS_2D));
+    ColorTable::SharedPointer color_tab_ptr(new DefaultAtomColorTable());
 
     mol.removeProperty(MolecularGraphProperty::ATOM_COLOR);
 

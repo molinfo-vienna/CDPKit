@@ -1299,6 +1299,16 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Base::LookupKey FEATURE_COLOR_TABLE;
 
+            /**
+             * \brief Specifies a default material to be used when a material has not been specified explicitly.
+             *
+             * If the control-parameter has not been set then the value of Vis::ControlParameterDefault::DEFAULT_MATERIAL will be used.
+             *
+             * \valuetype Vis::Material
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::LookupKey DEFAULT_MATERIAL;
+
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

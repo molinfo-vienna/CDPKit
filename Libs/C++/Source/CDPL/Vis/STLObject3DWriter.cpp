@@ -31,6 +31,7 @@
 #include "CDPL/Vis/Object3D.hpp"
 #include "CDPL/Vis/TriangleMesh3D.hpp"
 #include "CDPL/Vis/Object3DFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "STLFormatData.hpp"
 
@@ -68,6 +69,11 @@ namespace
 
 Vis::STLObject3DWriter::STLObject3DWriter(std::ostream& os): 
     output(os), state(os.good()), headerWritten(false) {}
+
+Vis::STLObject3DWriter::~STLObject3DWriter()
+{
+    close();
+}
 
 Base::DataWriter<Vis::Object3D>& Vis::STLObject3DWriter::write(const Object3D& obj)
 {
@@ -139,6 +145,10 @@ void Vis::STLObject3DWriter::visitTriangleMesh(const TriangleMesh3D& mesh)
 
     for (auto& face : mesh.getFaces()) {
         auto face_data = face.getData();
+
+        if ((face_data[0] >= num_verts) || (face_data[1] >= num_verts) || (face_data[2] >= num_verts))
+            throw Base::IOError("STLObject3DWriter: face vertex index out of bounds");
+
         auto& v1 = transVertices[face_data[0]];
         auto& v2 = transVertices[face_data[1]];
         auto& v3 = transVertices[face_data[2]];

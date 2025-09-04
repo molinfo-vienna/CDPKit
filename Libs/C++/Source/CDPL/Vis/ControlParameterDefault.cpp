@@ -37,6 +37,7 @@
 #include "CDPL/Vis/LayoutStyle.hpp"
 #include "CDPL/Vis/ArrowStyle.hpp"
 #include "CDPL/Vis/DefaultFeatureColorTable.hpp"
+#include "CDPL/Vis/Material.hpp"
 
 
 namespace CDPL
@@ -149,6 +150,8 @@ namespace CDPL
 
             const ColorTable::SharedPointer FEATURE_COLOR_TABLE                  = ColorTable::SharedPointer(new DefaultFeatureColorTable());
 
+            const Material                  DEFAULT_MATERIAL                     = Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1);
+            
         } // namespace ControlParameterDefault
 
         void initControlParameterDefaults() {}
