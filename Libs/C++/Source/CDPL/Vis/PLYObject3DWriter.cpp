@@ -93,8 +93,8 @@ Base::DataWriter<Vis::Object3D>& Vis::PLYObject3DWriter::write(const Object3D& o
     state = false;
 
     if (closed) {
-        vtxOStream.str();
-        faceOStream.str();
+        vtxOStream.str(std::string());
+        faceOStream.str(std::string());
 
         vtxCount = 0;
         faceCount = 0;
