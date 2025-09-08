@@ -172,7 +172,7 @@ class FeatureContainerIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numOutputHandlers = 4
+    numOutputHandlers = 8
 
     ##
     # \brief Registers the specified Pharm.FeatureContainerInputHandler implementation instance.
