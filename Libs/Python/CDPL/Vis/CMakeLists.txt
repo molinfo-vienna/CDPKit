@@ -83,6 +83,14 @@ set(vis_MOD_SRCS
     PLYObject3DOutputHandlerExport.cpp
     R3DObject3DWriterExport.cpp
     R3DObject3DOutputHandlerExport.cpp
+    STLFeatureContainerWriterExport.cpp
+    STLFeatureContainerOutputHandlerExport.cpp
+    VRMLFeatureContainerWriterExport.cpp
+    VRMLFeatureContainerOutputHandlerExport.cpp
+    PLYFeatureContainerWriterExport.cpp
+    PLYFeatureContainerOutputHandlerExport.cpp
+    R3DFeatureContainerWriterExport.cpp
+    R3DFeatureContainerOutputHandlerExport.cpp
    
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp

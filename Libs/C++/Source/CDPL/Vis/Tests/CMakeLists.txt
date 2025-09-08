@@ -118,6 +118,6 @@ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(vis-test-suite ${test-suite_SRCS})
 
-target_link_libraries(vis-test-suite cdpl-vis-shared cdpl-vis-qt-shared Boost::unit_test_framework)
+target_link_libraries(vis-test-suite cdpl-vis-shared cdpl-vis-qt-shared Boost::unit_test_framework Threads::Threads ${CMAKE_DL_LIBS})
 
 ADD_TEST("CDPL::Vis" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/vis-test-suite")

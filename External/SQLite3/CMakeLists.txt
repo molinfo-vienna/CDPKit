@@ -33,4 +33,3 @@ endif()
 
 add_library(sqlite3 OBJECT ${sqlite3_LIB_SRCS})
 set_target_properties(sqlite3 PROPERTIES COMPILE_DEFINITIONS "SQLITE_ENABLE_RTREE")
-

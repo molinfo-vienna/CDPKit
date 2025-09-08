@@ -1,5 +1,5 @@
 /* 
- * STLObject3DWriterExport.cpp 
+ * STLFeatureContainerOutputHandlerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,25 +24,17 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Vis/STLObject3DWriter.hpp"
-#include "CDPL/Util/FileDataWriter.hpp"
+#include "CDPL/Vis/STLFeatureContainerOutputHandler.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonVis::exportSTLObject3DWriter()
+void CDPLPythonVis::exportSTLFeatureContainerOutputHandler()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Vis::STLObject3DWriter, python::bases<Base::DataWriter<Vis::Object3D> >, 
-        boost::noncopyable>("STLObject3DWriter", python::no_init)
-        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
-             [python::with_custodian_and_ward<1, 2>()]);
-
-    python::class_<Util::FileDataWriter<Vis::STLObject3DWriter>, python::bases<Base::DataWriter<Vis::Object3D> >, 
-        boost::noncopyable>("FileSTLObject3DWriter", python::no_init)
-        .def(python::init<const std::string&, std::ios_base::openmode>(
-                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Vis::STLFeatureContainerOutputHandler, 
+        python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("STLFeatureContainerOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

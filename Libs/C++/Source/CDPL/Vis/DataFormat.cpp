@@ -32,6 +32,10 @@
 #include "CDPL/Vis/VRMLObject3DOutputHandler.hpp"
 #include "CDPL/Vis/PLYObject3DOutputHandler.hpp"
 #include "CDPL/Vis/R3DObject3DOutputHandler.hpp"
+#include "CDPL/Vis/STLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/VRMLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/PLYFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/R3DFeatureContainerOutputHandler.hpp"
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 # include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
@@ -108,13 +112,19 @@ namespace
         Init() {
             using namespace Base;
             using namespace Chem;
+            using namespace Pharm;
             using namespace Vis;
 
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new STLObject3DOutputHandler()));
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new VRMLObject3DOutputHandler()));
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new PLYObject3DOutputHandler()));
             DataIOManager<Object3D>::registerOutputHandler(DataIOManager<Object3D>::OutputHandlerPointer(new R3DObject3DOutputHandler()));
-           
+
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new STLFeatureContainerOutputHandler()));
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new VRMLFeatureContainerOutputHandler()));
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PLYFeatureContainerOutputHandler()));
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new R3DFeatureContainerOutputHandler()));
+
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PNGMolecularGraphOutputHandler()));

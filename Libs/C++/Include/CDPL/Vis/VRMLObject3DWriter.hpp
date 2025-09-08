@@ -73,6 +73,8 @@ namespace CDPL
             operator const void*() const;
             bool operator!() const;
 
+            VRMLObject3DWriter& operator=(const VRMLObject3DWriter&) = delete;
+
             void close();
             
           private:

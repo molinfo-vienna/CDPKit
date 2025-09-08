@@ -1,5 +1,5 @@
 /* 
- * VRMLMolecularGraphWriterExport.cpp 
+ * VRMLObject3DWriterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *

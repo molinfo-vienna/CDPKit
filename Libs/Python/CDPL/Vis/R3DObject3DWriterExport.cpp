@@ -1,5 +1,5 @@
 /* 
- * R3DMolecularGraphWriterExport.cpp 
+ * R3DObject3DWriterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *

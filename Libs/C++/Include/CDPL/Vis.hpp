@@ -105,6 +105,15 @@
 #include "CDPL/Vis/PLYObject3DOutputHandler.hpp"
 #include "CDPL/Vis/R3DObject3DWriter.hpp"
 #include "CDPL/Vis/R3DObject3DOutputHandler.hpp"
+#include "CDPL/Vis/FeatureContainerObject3DWriter.hpp"
+#include "CDPL/Vis/STLFeatureContainerWriter.hpp"
+#include "CDPL/Vis/STLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/VRMLFeatureContainerWriter.hpp"
+#include "CDPL/Vis/VRMLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/PLYFeatureContainerWriter.hpp"
+#include "CDPL/Vis/PLYFeatureContainerOutputHandler.hpp"
+#include "CDPL/Vis/R3DFeatureContainerWriter.hpp"
+#include "CDPL/Vis/R3DFeatureContainerOutputHandler.hpp"
 
 #ifdef HAVE_QT
 # include "CDPL/Vis/QtRenderer2D.hpp"

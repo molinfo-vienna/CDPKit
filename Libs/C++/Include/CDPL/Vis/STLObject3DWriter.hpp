@@ -75,6 +75,8 @@ namespace CDPL
             operator const void*() const;
             bool operator!() const;
 
+            STLObject3DWriter& operator=(const STLObject3DWriter&) = delete;
+
             void close();
             
           private:

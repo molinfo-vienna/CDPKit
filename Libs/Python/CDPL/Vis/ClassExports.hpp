@@ -83,6 +83,14 @@ namespace CDPLPythonVis
     void exportPLYObject3DOutputHandler();
     void exportR3DObject3DWriter();
     void exportR3DObject3DOutputHandler();
+    void exportSTLFeatureContainerWriter();
+    void exportSTLFeatureContainerOutputHandler();
+    void exportVRMLFeatureContainerWriter();
+    void exportVRMLFeatureContainerOutputHandler();
+    void exportPLYFeatureContainerWriter();
+    void exportPLYFeatureContainerOutputHandler();
+    void exportR3DFeatureContainerWriter();
+    void exportR3DFeatureContainerOutputHandler();
     
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 

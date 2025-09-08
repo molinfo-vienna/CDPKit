@@ -86,6 +86,14 @@ BOOST_PYTHON_MODULE(_vis)
     exportPLYObject3DOutputHandler();
     exportR3DObject3DWriter();
     exportR3DObject3DOutputHandler();
+    exportSTLFeatureContainerWriter();
+    exportSTLFeatureContainerOutputHandler();
+    exportVRMLFeatureContainerWriter();
+    exportVRMLFeatureContainerOutputHandler();
+    exportPLYFeatureContainerWriter();
+    exportPLYFeatureContainerOutputHandler();
+    exportR3DFeatureContainerWriter();
+    exportR3DFeatureContainerOutputHandler();
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
