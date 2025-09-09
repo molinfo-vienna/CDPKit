@@ -67,7 +67,6 @@ namespace CDPL
             Object3D::SharedPointer create(const Pharm::FeatureContainer& cntnr);
 
           private:
-            
             void createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const;
             void createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const;
             void createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
@@ -77,7 +76,9 @@ namespace CDPL
                                             const Shape3D::SharedPointer& shape, double z_rot = 0.0) const;
             void createArrowFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool outgoing, bool dual = false) const;
 
-            void setMaterialProperty(Object3D& obj, unsigned int ftr_type) const;
+            void createFeatureCenterSphere(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
+
+            void setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double col_alpha = -1.0) const;
             
             ColorTable::SharedPointer colorTable;
         };

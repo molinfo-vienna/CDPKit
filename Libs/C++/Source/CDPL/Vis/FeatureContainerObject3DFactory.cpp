@@ -26,6 +26,8 @@
 
 #include <mutex>
 #include <cmath>
+#include <vector>
+#include <utility>
 
 #include "CDPL/Vis/FeatureContainerObject3DFactory.hpp"
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
@@ -55,19 +57,121 @@ namespace
     std::once_flag initTriangleMeshesFlag;
 
     Vis::TriangleMesh3D::SharedPointer sphereMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedSphereMesh;
     Vis::TriangleMesh3D::SharedPointer icosahedronMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedIcosahedronMesh;
     Vis::TriangleMesh3D::SharedPointer nonDirectedDonorAceptorFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedNonDirectedDonorAceptorFeatureMesh;
     Vis::TriangleMesh3D::SharedPointer directedAromaticFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedDirectedAromaticFeatureMesh;
     Vis::TriangleMesh3D::SharedPointer ionizableFeatureMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedIonizableFeatureMesh;
     Vis::TriangleMesh3D::SharedPointer arrowShaftMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedArrowShaftMesh;
     Vis::TriangleMesh3D::SharedPointer upArrowHeadMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedUpArrowHeadMesh;
     Vis::TriangleMesh3D::SharedPointer downArrowHeadMesh;
+    Vis::TriangleMesh3D::SharedPointer punchedDownArrowHeadMesh;
+
+    inline bool haveCommonEdge(const unsigned long* face1, const unsigned long* face2)
+    {
+        for (std::size_t i = 0; i < 3; i++) {
+            auto v1 = face1[i];
+            auto v2 = face1[(i + 1) % 3];
+
+            if (v2 < v1)
+                std::swap(v1, v2);
+
+            for (std::size_t j = 0; j < 3; j++) {
+                auto v3 = face2[j];
+                auto v4 = face2[(j + 1) % 3];
+
+                if (v4 < v3)
+                    std::swap(v3, v4);
+
+                if ((v1 == v3) && (v2 == v4))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+    
+    void punch(Vis::TriangleMesh3D& mesh)
+    {
+        auto num_verts = mesh.getVertices().getSize();
+        auto& faces = mesh.getFaces().getData();
+        auto num_faces = faces.size();
+
+        typedef std::vector<std::size_t> FaceIdxList;
+        
+        std::vector<FaceIdxList> vtx_faces(num_verts);
+
+        for (std::size_t i = 0; i < num_faces; i++) {
+            auto face = faces[i].getData();
+
+            for (std::size_t j = 0; j < 3; j++)
+                vtx_faces[face[j]].push_back(i);
+        }
+
+        FaceIdxList curr_faces, next_faces;
+        Util::BitSet np_faces(num_faces), kept_faces(num_faces);
+
+        np_faces.set();
+
+        for (auto start_face_idx = np_faces.find_first(); start_face_idx != Util::BitSet::npos;
+             start_face_idx = np_faces.find_next(start_face_idx)) {
+
+            next_faces.push_back(start_face_idx);
+            np_faces.reset(start_face_idx);
+            kept_faces.set(start_face_idx);
+
+            do {
+                curr_faces.swap(next_faces);
+                next_faces.clear();
+
+                for (auto curr_face_idx : curr_faces) {
+                    auto curr_face = faces[curr_face_idx].getData();
+                    auto kept = kept_faces.test(curr_face_idx);
+
+                    for (std::size_t i = 0; i < 3; i++) {
+                        for (auto adj_face_idx : vtx_faces[curr_face[i]]) {
+                            if (curr_face_idx == adj_face_idx)
+                                continue;
+                            
+                            if (!haveCommonEdge(curr_face, faces[adj_face_idx].getData()))
+                                continue;
+
+                            if (!np_faces.test(adj_face_idx))
+                                continue;
+
+                            np_faces.reset(adj_face_idx);
+                            kept_faces.set(adj_face_idx, !kept);
+                            next_faces.push_back(adj_face_idx);
+                        }
+                    }
+                }
+
+            } while (!next_faces.empty());
+        }
+
+        Math::Vector3ULArray new_faces;
+        
+        for (auto i = kept_faces.find_first(); i != Util::BitSet::npos; i = kept_faces.find_next(i))
+            new_faces.getData().emplace_back(faces[i]);
+
+        mesh.getFaces().swap(new_faces);
+        mesh.setClosed(false);
+    }
     
     void initTriangleMeshes()
     {
         using namespace Vis;
 
         icosahedronMesh.reset(new IcosahedronMesh3D());
+
+        punchedIcosahedronMesh.reset(new IcosahedronMesh3D());
+        punch(*punchedIcosahedronMesh);
         
         // ---        
 
@@ -77,7 +181,10 @@ namespace
             subdivideSpherical(*sphereMesh);
             removeVertexDuplicates(*sphereMesh);
         }
-    
+
+        punchedSphereMesh.reset(new TriangleMesh3D(*sphereMesh));
+        punch(*punchedSphereMesh);
+                                
         // ---
 
         nonDirectedDonorAceptorFeatureMesh.reset(new TriangleMesh3D());
@@ -107,6 +214,9 @@ namespace
 
         rotateX(*nonDirectedDonorAceptorFeatureMesh, M_PI, num_prev_verts);
 
+        punchedNonDirectedDonorAceptorFeatureMesh.reset(new TriangleMesh3D(*nonDirectedDonorAceptorFeatureMesh));
+        punch(*punchedNonDirectedDonorAceptorFeatureMesh);
+        
         // ---
 
         directedAromaticFeatureMesh.reset(new TorusMesh3D(0.5, 0.5, 36, 11, M_PI / 2.0, M_PI));
@@ -126,7 +236,7 @@ namespace
 
         *directedAromaticFeatureMesh += cyl_mesh;
 
-        RightFrustumMesh3D cone_mesh1(0.15, 0.0, 0.35, 5, true);
+        RightFrustumMesh3D cone_mesh1(0.15, 0.0, 0.35, 6, true);
 
         translate(cone_mesh1, 0.0, 0.0, 0.9);
 
@@ -135,7 +245,10 @@ namespace
         rotateX(cone_mesh1, M_PI);
 
         *directedAromaticFeatureMesh += cone_mesh1;
- 
+
+        punchedDirectedAromaticFeatureMesh.reset(new TriangleMesh3D(*directedAromaticFeatureMesh));
+        punch(*punchedDirectedAromaticFeatureMesh);
+        
         // ---
 
         RightFrustumMesh3D cone_mesh2(0.0, 0.15, 1.0, 12, false, true);
@@ -162,12 +275,24 @@ namespace
         }
 
         ionizableFeatureMesh->setClosed();
+
+        punchedIonizableFeatureMesh.reset(new TriangleMesh3D(*ionizableFeatureMesh));
+        punch(*punchedIonizableFeatureMesh);
         
         // ---
 
         arrowShaftMesh.reset(new RightFrustumMesh3D(0.1, 0.1, 1.0, 20, true, true));
         upArrowHeadMesh.reset(new RightFrustumMesh3D(0.2, 0.0, 0.25, 20, true, false));
         downArrowHeadMesh.reset(new RightFrustumMesh3D(0.0, 0.2, 0.25, 20, false, true));
+
+        punchedArrowShaftMesh.reset(new TriangleMesh3D(*arrowShaftMesh));
+        punch(*punchedArrowShaftMesh);
+
+        punchedUpArrowHeadMesh.reset(new TriangleMesh3D(*upArrowHeadMesh));
+        punch(*punchedUpArrowHeadMesh);
+
+        punchedDownArrowHeadMesh.reset(new TriangleMesh3D(*downArrowHeadMesh));
+        punch(*punchedDownArrowHeadMesh);
     }
 
     void calcZAxisAlignmentTransform(const Math::Vector3D& dir, Math::Matrix4D& rot_mtx)
@@ -185,9 +310,12 @@ namespace
         rot_mtx = Math::RotationMatrix<double>(4, z_rot, 0.0, 0.0, 1.0) * Math::RotationMatrix<double>(4, y_rot, 0.0, 1.0, 0.0);
     }
 
-    constexpr double MAT_SPEC_COLOR_RGB_INCREMENT = 0.5;
-    constexpr double MAT_SHININESS                = 0.1;
-    constexpr double MAT_AMBIENT_FACTOR           = 0.35;
+    constexpr double MAT_SPEC_COLOR_RGB_INCREMENT      = 0.5;
+    constexpr double MAT_SHININESS                     = 0.1;
+    constexpr double MAT_AMBIENT_FACTOR                = 0.35;
+    constexpr double DISABLED_COLOR_RGB_INCREMENT      = 0.5;
+    constexpr double FEATURE_CENTER_SPHERE_RADIUS      = 0.5;
+    constexpr double FEATURE_CENTER_SPHERE_COLOR_ALPHA = 0.25;
 }
 
 
@@ -267,31 +395,34 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
             case Pharm::FeatureType::POSITIVE_IONIZABLE:
             case Pharm::FeatureType::NEGATIVE_IONIZABLE:
                 createSphericalFeatureRepr(*obj_ptr, ftr, ftr_type, ionizableFeatureMesh);
-                continue;
+                break;
 
             case Pharm::FeatureType::H_BOND_DONOR:
                 createHBondDonorFeatureRepr(*obj_ptr, ftr, ftr_type, dual_hb_ftr_mask.test(i));
-                continue;
+                break;
 
             case Pharm::FeatureType::H_BOND_ACCEPTOR:
                 createHBondAcceptorFeatureRepr(*obj_ptr, ftr, ftr_type, dual_hb_ftr_mask.test(i));
-                continue;
+                break;
 
             case Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR:
                 createHalogenBondAcceptorFeatureRepr(*obj_ptr, ftr, ftr_type);
-                continue;
+                break;
 
             case Pharm::FeatureType::HALOGEN_BOND_DONOR:
                 createHalogenBondDonorFeatureRepr(*obj_ptr, ftr, ftr_type);
-                continue;
+                break;
 
             case Pharm::FeatureType::AROMATIC:
                 createAromaticFeatureRepr(*obj_ptr, ftr, ftr_type);
-                continue;
+                break;
 
             default:
-                createSphericalFeatureRepr(*obj_ptr, ftr, ftr_type, sphereMesh);
+                createSphericalFeatureRepr(*obj_ptr, ftr, ftr_type,
+                                           getOptionalFlag(ftr) ? punchedSphereMesh : sphereMesh);
         }
+
+        createFeatureCenterSphere(*obj_ptr, ftr, ftr_type);
     }
     
     return obj_ptr;
@@ -300,7 +431,9 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
 void Vis::FeatureContainerObject3DFactory::createHBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh, M_PI / 2.0);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type,
+                                   getOptionalFlag(ftr) ? punchedNonDirectedDonorAceptorFeatureMesh : nonDirectedDonorAceptorFeatureMesh,
+                                   M_PI / 2.0);
         return;
     }
 
@@ -310,7 +443,8 @@ void Vis::FeatureContainerObject3DFactory::createHBondDonorFeatureRepr(Object3D&
 void Vis::FeatureContainerObject3DFactory::createHBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type, bool dual) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type,
+                                   getOptionalFlag(ftr) ? punchedNonDirectedDonorAceptorFeatureMesh : nonDirectedDonorAceptorFeatureMesh);
         return;
     }
 
@@ -320,7 +454,8 @@ void Vis::FeatureContainerObject3DFactory::createHBondAcceptorFeatureRepr(Object
 void Vis::FeatureContainerObject3DFactory::createHalogenBondDonorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, nonDirectedDonorAceptorFeatureMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type,
+                                   getOptionalFlag(ftr) ? punchedNonDirectedDonorAceptorFeatureMesh : nonDirectedDonorAceptorFeatureMesh);
         return;
     }
 
@@ -330,7 +465,8 @@ void Vis::FeatureContainerObject3DFactory::createHalogenBondDonorFeatureRepr(Obj
 void Vis::FeatureContainerObject3DFactory::createHalogenBondAcceptorFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, icosahedronMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type,
+                                   getOptionalFlag(ftr) ? punchedIcosahedronMesh : icosahedronMesh);
         return;
     }
 
@@ -340,7 +476,8 @@ void Vis::FeatureContainerObject3DFactory::createHalogenBondAcceptorFeatureRepr(
 void Vis::FeatureContainerObject3DFactory::createAromaticFeatureRepr(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
 {
     if (!hasOrientation(ftr)) {
-        createSphericalFeatureRepr(parent_obj, ftr, ftr_type, sphereMesh);
+        createSphericalFeatureRepr(parent_obj, ftr, ftr_type,
+                                   getOptionalFlag(ftr) ? punchedSphereMesh : sphereMesh);
         return;
     }
     
@@ -354,8 +491,8 @@ void Vis::FeatureContainerObject3DFactory::createAromaticFeatureRepr(Object3D& p
     setTransformationMatrix(*obj_ptr, Math::TranslationMatrix<double>(4, pos[0], pos[1], pos[2]) * rot_mtx *
                             Math::ScalingMatrix<double>(4, tol, tol, tol));
      
-    setShape(*obj_ptr, directedAromaticFeatureMesh);
-    setMaterialProperty(*obj_ptr, ftr_type);
+    setShape(*obj_ptr, getOptionalFlag(ftr) ? punchedDirectedAromaticFeatureMesh : directedAromaticFeatureMesh);
+    setMaterialProperty(*obj_ptr, ftr_type, getDisabledFlag(ftr));
     
     parent_obj.addSubObject(obj_ptr);
 }
@@ -376,7 +513,7 @@ void Vis::FeatureContainerObject3DFactory::createSphericalFeatureRepr(Object3D& 
                                 Math::ScalingMatrix<double>(4, tol, tol, tol));
     
     setShape(*obj_ptr, shape);
-    setMaterialProperty(*obj_ptr, ftr_type);
+    setMaterialProperty(*obj_ptr, ftr_type, getDisabledFlag(ftr));
     
     parent_obj.addSubObject(obj_ptr);
 }
@@ -386,21 +523,22 @@ void Vis::FeatureContainerObject3DFactory::createArrowFeatureRepr(Object3D& pare
 {
     Object3D::SharedPointer arrow_head_obj_ptr(new Object3D());
     Object3D::SharedPointer arrow_shaft_obj_ptr(new Object3D());
-
+    auto optional = getOptionalFlag(ftr);
+    
     if (outgoing) {
         setTransformationMatrix(*arrow_head_obj_ptr, Math::TranslationMatrix<double>(4, 0.0, 0.0, 0.75));
         setTransformationMatrix(*arrow_shaft_obj_ptr, Math::ScalingMatrix<double>(4, 1.0, 1.0, 0.77));
 
-        setShape(*arrow_head_obj_ptr, upArrowHeadMesh);
+        setShape(*arrow_head_obj_ptr, optional ? punchedUpArrowHeadMesh : upArrowHeadMesh);
 
     } else {
         setTransformationMatrix(*arrow_shaft_obj_ptr, Math::TranslationMatrix<double>(4, 0.0, 0.0, 0.23) *
                                 Math::ScalingMatrix<double>(4, 1.0, 1.0, 0.77));
 
-        setShape(*arrow_head_obj_ptr, downArrowHeadMesh);    
+        setShape(*arrow_head_obj_ptr, optional ? punchedDownArrowHeadMesh : downArrowHeadMesh);    
     }
     
-    setShape(*arrow_shaft_obj_ptr, arrowShaftMesh);
+    setShape(*arrow_shaft_obj_ptr, optional ? punchedArrowShaftMesh : arrowShaftMesh);
  
     Object3D::SharedPointer arrow_obj_ptr(new Object3D());
     auto& pos = get3DCoordinates(ftr);
@@ -421,12 +559,26 @@ void Vis::FeatureContainerObject3DFactory::createArrowFeatureRepr(Object3D& pare
     arrow_obj_ptr->addSubObject(arrow_head_obj_ptr);
     arrow_obj_ptr->addSubObject(arrow_shaft_obj_ptr);
 
-    setMaterialProperty(*arrow_obj_ptr, ftr_type);
+    setMaterialProperty(*arrow_obj_ptr, ftr_type, getDisabledFlag(ftr));
         
     parent_obj.addSubObject(arrow_obj_ptr);
 }
 
-void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, unsigned int ftr_type) const
+void Vis::FeatureContainerObject3DFactory::createFeatureCenterSphere(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const
+{
+    Object3D::SharedPointer obj_ptr(new Object3D());
+    auto& pos = get3DCoordinates(ftr);
+
+    setTransformationMatrix(*obj_ptr, Math::TranslationMatrix<double>(4, pos[0], pos[1], pos[2]) *
+                            Math::ScalingMatrix<double>(4, FEATURE_CENTER_SPHERE_RADIUS, FEATURE_CENTER_SPHERE_RADIUS, FEATURE_CENTER_SPHERE_RADIUS));
+    
+    setShape(*obj_ptr, sphereMesh);
+    setMaterialProperty(*obj_ptr, ftr_type, false, FEATURE_CENTER_SPHERE_COLOR_ALPHA);
+    
+    parent_obj.addSubObject(obj_ptr);
+}
+
+void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double col_alpha) const
 {
     static const DefaultFeatureColorTable DEF_FTR_COLORS;
 
@@ -448,11 +600,18 @@ void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, un
 
     if (!color)
         color = &DEF_FTR_COLORS[Pharm::FeatureType::UNKNOWN];
-                             
-    setMaterial(obj, Material(MAT_AMBIENT_FACTOR, *color,
-                              Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT,
-                                    color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT,
-                                    color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT,
-                                    color->getAlpha()),
-                              MAT_SHININESS, 1.0 - color->getAlpha()));
+
+    auto dis_incr = (ftr_disabled ? DISABLED_COLOR_RGB_INCREMENT : 0.0);
+
+    if (col_alpha < 0.0)
+        col_alpha = color->getAlpha();
+    
+    setMaterial(obj, Material(MAT_AMBIENT_FACTOR,
+                              Color(color->getRed() + dis_incr,
+                                    color->getGreen() + dis_incr,
+                                    color->getBlue() + dis_incr), 
+                              Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr,
+                                    color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr,
+                                    color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr),
+                              MAT_SHININESS, 1.0 - col_alpha));
 }
