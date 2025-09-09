@@ -142,10 +142,9 @@ namespace
                             if (!haveCommonEdge(curr_face, faces[adj_face_idx].getData()))
                                 continue;
 
-                            if (!np_faces.test(adj_face_idx))
+                            if (!np_faces.test_set(adj_face_idx, false))
                                 continue;
 
-                            np_faces.reset(adj_face_idx);
                             kept_faces.set(adj_face_idx, !kept);
                             next_faces.push_back(adj_face_idx);
                         }
@@ -164,6 +163,50 @@ namespace
         mesh.setClosed(false);
     }
     
+    void subdivideLinear(Vis::TriangleMesh3D& mesh)
+    {
+        auto& vertices = mesh.getVertices();
+        auto& normals = mesh.getVertexNormals().getData();
+        auto& faces = mesh.getFaces().getData();
+
+        unsigned long num_v = vertices.size();
+        auto num_f = faces.size();
+        
+        faces.reserve(num_f * 4);
+        vertices.reserve(num_v + num_f * 3);
+        normals.reserve(num_v + num_f * 3);
+
+        Math::Vector3D tmp;
+    
+        for (auto& f : faces) {
+            for (std::size_t i = 0; i < 3; i++) {
+                auto v1 = vertices[f[i]].getData();
+                auto v2 = vertices[f[(i + 1) % 3]].getData();
+
+                tmp[0] = (v1[0] + v2[0]) * 0.5;
+                tmp[1] = (v1[1] + v2[1]) * 0.5;
+                tmp[2] = (v1[2] + v2[2]) * 0.5;
+
+                mesh.addVertex(tmp[0], tmp[1], tmp[2]);
+
+                auto len = length(tmp);
+
+                mesh.addVertexNormal(tmp[0] / len, tmp[1] / len, tmp[2] / len);
+            }
+
+            // add new triangles
+            mesh.addFace(num_v, f[1], num_v + 1);
+            mesh.addFace(num_v + 1, f[2], num_v + 2);
+            mesh.addFace(num_v, num_v + 1, num_v + 2);
+
+            // modify original triangle
+            f[1] = num_v;
+            f[2] = num_v + 2;
+        
+            num_v += 3;
+        }
+    }
+
     void initTriangleMeshes()
     {
         using namespace Vis;
@@ -171,6 +214,12 @@ namespace
         icosahedronMesh.reset(new IcosahedronMesh3D());
 
         punchedIcosahedronMesh.reset(new IcosahedronMesh3D());
+        
+        for (std::size_t i = 0; i < 2; i++) {
+            subdivideLinear(*punchedIcosahedronMesh);
+            removeVertexDuplicates(*punchedIcosahedronMesh);
+        }
+        
         punch(*punchedIcosahedronMesh);
         
         // ---        

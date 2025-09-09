@@ -112,9 +112,15 @@ Vis::RightFrustumMesh3D::RightFrustumMesh3D(double radius1, double radius2, doub
 
             addVertex(radius1 * cos_a, radius1 * sin_a, 0.0);
             addVertex(radius2 * cos_a, radius2 * sin_a, height);
-            
-            addFace(i * 2, ((i + 1) % num_sides) * 2, ((i + 1) % num_sides) * 2 + 1);
-            addFace(i * 2, ((i + 1) % num_sides) * 2 + 1, i * 2 + 1);
+
+            if (i % 2) {
+                addFace(i * 2, ((i + 1) % num_sides) * 2, ((i + 1) % num_sides) * 2 + 1);
+                addFace(i * 2, ((i + 1) % num_sides) * 2 + 1, i * 2 + 1);
+
+            } else {
+                addFace(i * 2, ((i + 1) % num_sides) * 2, i * 2 + 1);
+                addFace(((i + 1) % num_sides) * 2, ((i + 1) % num_sides) * 2 + 1, i * 2 + 1);
+            }
         }
 
         if (close_top || close_btm) {
