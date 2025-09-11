@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CDFBZ2PharmacophoreInputHandler.
+ * \brief Declaration of type CDPL::Pharm::CDFBZ2PharmacophoreInputHandler.
  */
 
 #ifndef CDPL_PHARM_CDFBZ2PHARMACOPHOREINPUTHANDLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::StringDataBlockItem and the type CDPL::Chem::StringDataBlock.
+ * \brief Definition of class CDPL::Chem::StringDataBlockItem and the type CDPL::Chem::StringDataBlock.
  */
 
 #ifndef CDPL_CHEM_STRINGDATABLOCK_HPP

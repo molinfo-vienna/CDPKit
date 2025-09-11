@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94GradientCalculator.
+ * \brief Definition of class CDPL::ForceField::MMFF94GradientCalculator.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94GRADIENTCALCULATOR_HPP

@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ChEMBLStandardizer.
+ * \brief Definition of class CDPL::Chem::ChEMBLStandardizer.
  */
 
 #ifndef CDPL_CHEM_CHEMBLSTANDARDIZER_HPP

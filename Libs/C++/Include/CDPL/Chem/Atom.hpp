@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Atom.
+ * \brief Definition of class CDPL::Chem::Atom.
  */
 
 #ifndef CDPL_CHEM_ATOM_HPP

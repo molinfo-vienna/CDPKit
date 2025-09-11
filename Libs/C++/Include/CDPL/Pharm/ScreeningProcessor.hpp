@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::ScreeningProcessor.
+ * \brief Definition of class CDPL::Pharm::ScreeningProcessor.
  */
 
 #ifndef CDPL_PHARM_SCREENINGPROCESSOR_HPP

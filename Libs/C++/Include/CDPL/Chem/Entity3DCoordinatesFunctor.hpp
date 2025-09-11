@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Entity3DCoordinatesFunctor.
+ * \brief Definition of class CDPL::Chem::Entity3DCoordinatesFunctor.
  */
 
 #ifndef CDPL_CHEM_ENTITY3DCOORDINATESFUNCTOR_HPP

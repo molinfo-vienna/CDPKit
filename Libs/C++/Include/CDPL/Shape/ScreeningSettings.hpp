@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::ScreeningSettings.
+ * \brief Definition of class CDPL::Shape::ScreeningSettings.
  */
 
 #ifndef CDPL_SHAPE_SCREENINGSETTINGS_HPP

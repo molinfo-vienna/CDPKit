@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::PEOESigmaChargeCalculator.
+ * \brief Definition of class CDPL::MolProp::PEOESigmaChargeCalculator.
  */
 
 #ifndef CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP

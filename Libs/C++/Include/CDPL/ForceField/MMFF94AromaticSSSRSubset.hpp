@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AromaticSSSRSubset.
+ * \brief Definition of class CDPL::ForceField::MMFF94AromaticSSSRSubset.
  */
 
 #ifndef CDPL_FORCEFIELD_AROMATICSSSRSUBSET_HPP

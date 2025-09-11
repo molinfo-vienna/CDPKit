@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::VRMLFeatureContainerOutputHandler.
+ * \brief Declaration of type CDPL::Vis::VRMLFeatureContainerOutputHandler.
  */
 
 #ifndef CDPL_VIS_VRMLFEATURECONTAINEROUTPUTHANDLER_HPP

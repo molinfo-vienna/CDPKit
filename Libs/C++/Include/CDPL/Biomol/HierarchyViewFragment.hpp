@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::HierarchyViewFragment.
+ * \brief Definition of class CDPL::Biomol::HierarchyViewFragment.
  */
 
 #ifndef CDPL_BIOMOL_HIERARCHYVIEWFRAGMENT_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::StructureGeneratorSettings.
+ * \brief Definition of class CDPL::ConfGen::StructureGeneratorSettings.
  */
 
 #ifndef CDPL_CONFGEN_STRUCTUREGENERATORSETTINGS_HPP

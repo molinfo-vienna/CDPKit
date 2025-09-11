@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::LinePrimitive2D.
+ * \brief Definition of class CDPL::Vis::LinePrimitive2D.
  */
 
 #ifndef CDPL_VIS_LINEPRIMITIVE2D_HPP

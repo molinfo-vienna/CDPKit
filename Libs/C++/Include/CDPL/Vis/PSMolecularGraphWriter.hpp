@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PSMolecularGraphWriter.
+ * \brief Definition of class CDPL::Vis::PSMolecularGraphWriter.
  */
 
 #ifndef CDPL_VIS_PSMOLECULARGRAPHWRITER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Object3DFactory.
+ * \brief Definition of class CDPL::Vis::Object3DFactory.
  */
 
 #ifndef CDPL_VIS_OBJECT3DFACTORY_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SubstructureEditor.
+ * \brief Definition of class CDPL::Chem::SubstructureEditor.
  */
 
 #ifndef CDPL_CHEM_SUBSTRUCTUREEDITOR_HPP

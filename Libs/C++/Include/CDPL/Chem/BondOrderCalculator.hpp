@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BondOrderCalculator.
+ * \brief Definition of class CDPL::Chem::BondOrderCalculator.
  */
 
 #ifndef CDPL_CHEM_BONDORDERCALCULATOR_HPP

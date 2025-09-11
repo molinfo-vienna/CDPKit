@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::ConformerData.
+ * \brief Definition of class CDPL::ConfGen::ConformerData.
  */
 
 #ifndef CDPL_CONFGEN_CONFORMERDATA_HPP

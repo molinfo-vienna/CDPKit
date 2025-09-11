@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SulfenicAcidTautomerization.
+ * \brief Definition of class CDPL::Chem::SulfenicAcidTautomerization.
  */
 
 #ifndef CDPL_CHEM_SULFENICACIDTAUTOMERIZATION_HPP

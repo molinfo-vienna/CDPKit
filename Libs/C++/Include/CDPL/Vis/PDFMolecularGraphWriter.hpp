@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PDFMolecularGraphWriter.
+ * \brief Definition of class CDPL::Vis::PDFMolecularGraphWriter.
  */
 
 #ifndef CDPL_VIS_PDFMOLECULARGRAPHWRITER_HPP

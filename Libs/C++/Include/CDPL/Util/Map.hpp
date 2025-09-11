@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::Map.
+ * \brief Definition of class CDPL::Util::Map.
  */
 
 #ifndef CDPL_UTIL_MAP_HPP

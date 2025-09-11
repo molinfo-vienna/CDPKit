@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::STLObject3DOutputHandler.
+ * \brief Declaration of type CDPL::Vis::STLObject3DOutputHandler.
  */
 
 #ifndef CDPL_VIS_STLOBJECT3DOUTPUTHANDLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::HBondingInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::HBondingInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_HBONDINGINTERACTIONCONSTRAINT_HPP

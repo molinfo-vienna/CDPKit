@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::HBondDonorAtomTyper.
+ * \brief Definition of class CDPL::MolProp::HBondDonorAtomTyper.
  */
 
 #ifndef CDPL_MOLPROP_HBONDDONORATOMTYPER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::CairoFontMetrics.
+ * \brief Definition of class CDPL::Vis::CairoFontMetrics.
  */
 
 #ifndef CDPL_VIS_CAIROFONTMETRICS_HPP

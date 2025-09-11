@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AmideImidicAcidTautomerization.
+ * \brief Definition of class CDPL::Chem::AmideImidicAcidTautomerization.
  */
 
 #ifndef CDPL_CHEM_AMIDEIMIDICACIDTAUTOMERIZATION_HPP

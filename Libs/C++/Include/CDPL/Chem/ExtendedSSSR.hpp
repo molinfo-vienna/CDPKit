@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ExtendedSSSR.
+ * \brief Definition of class CDPL::Chem::ExtendedSSSR.
  */
 
 #ifndef CDPL_CHEM_EXTENDEDSSSR_HPP

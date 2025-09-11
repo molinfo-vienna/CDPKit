@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::ExactGaussianShapeOverlapFunction.
+ * \brief Definition of class CDPL::Shape::ExactGaussianShapeOverlapFunction.
  */
 
 #ifndef CDPL_SHAPE_EXACTGAUSSIANSHAPEOVERLAPFUNCTION_HPP

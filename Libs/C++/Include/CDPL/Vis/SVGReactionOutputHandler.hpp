@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::SVGReactionOutputHandler.
+ * \brief Declaration of type CDPL::Vis::SVGReactionOutputHandler.
  */
 
 #ifndef CDPL_VIS_SVGREACTIONOUTPUTHANDLER_HPP

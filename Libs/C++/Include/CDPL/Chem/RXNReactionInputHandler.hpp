@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RXNReactionInputHandler.
+ * \brief Declaration of type CDPL::Chem::RXNReactionInputHandler.
  */
 
 #ifndef CDPL_CHEM_RXNREACTIONINPUTHANDLER_HPP

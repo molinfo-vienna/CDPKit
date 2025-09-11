@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::JMEReactionWriter.
+ * \brief Definition of class CDPL::Chem::JMEReactionWriter.
  */
 
 #ifndef CDPL_CHEM_JMEREACTIONWRITER_HPP

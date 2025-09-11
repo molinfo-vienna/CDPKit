@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::JMEReactionReader.
+ * \brief Definition of class CDPL::Chem::JMEReactionReader.
  */
 
 #ifndef CDPL_CHEM_JMEREACTIONREADER_HPP

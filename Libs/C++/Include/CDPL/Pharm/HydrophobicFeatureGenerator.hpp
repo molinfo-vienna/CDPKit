@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::HydrophobicFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::HydrophobicFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_HYDROPHOBICFEATUREGENERATOR_HPP

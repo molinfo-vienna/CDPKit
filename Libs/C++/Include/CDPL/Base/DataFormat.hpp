@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::DataFormat.
+ * \brief Definition of class CDPL::Base::DataFormat.
  */
 
 #ifndef CDPL_BASE_DATAFORMAT_HPP

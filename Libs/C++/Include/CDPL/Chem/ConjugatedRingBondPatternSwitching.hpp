@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ConjugatedRingBondPatternSwitching.
+ * \brief Definition of class CDPL::Chem::ConjugatedRingBondPatternSwitching.
  */
 
 #ifndef CDPL_CHEM_CONJUGATEDRINGBONDPATTERNSWITCHING_HPP

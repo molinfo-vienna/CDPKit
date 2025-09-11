@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::TriangleMesh3D.
+ * \brief Definition of class CDPL::Vis::TriangleMesh3D.
  */
 
 #ifndef CDPL_VIS_TRIANGLEMESH3D_HPP

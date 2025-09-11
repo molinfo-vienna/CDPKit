@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CDFBZ2FeatureContainerOutputHandler.
+ * \brief Declaration of type CDPL::Pharm::CDFBZ2FeatureContainerOutputHandler.
  */
 
 #ifndef CDPL_PHARM_CDFBZ2FEATURECONTAINEROUTPUTHANDLER_HPP

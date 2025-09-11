@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::ParallelPiPiInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::ParallelPiPiInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_PARALLELPIPIINTERACTIONCONSTRAINT_HPP

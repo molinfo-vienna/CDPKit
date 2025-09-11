@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::DefaultFeatureColorTable.
+ * \brief Definition of class CDPL::Vis::DefaultFeatureColorTable.
  */
 
 #ifndef CDPL_VIS_DEFAULTFEATURECOLORTABLE_HPP

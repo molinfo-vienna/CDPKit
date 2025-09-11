@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::PDBMolecularGraphWriter.
+ * \brief Definition of class CDPL::Biomol::PDBMolecularGraphWriter.
  */
 
 #ifndef CDPL_BIOMOL_PDBMOLECULARGRAPHWRITER_HPP

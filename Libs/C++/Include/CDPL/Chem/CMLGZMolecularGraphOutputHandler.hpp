@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CMLGZMolecularGraphOutputHandler.
+ * \brief Declaration of type CDPL::Chem::CMLGZMolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_CHEM_CMLGZMOLECULARGRAPHOUTPUTHANDLER_HPP

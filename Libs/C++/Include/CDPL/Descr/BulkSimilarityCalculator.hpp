@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class template CDPL::Descr::BulkSimilarityCalculator.
+ * \brief Definition of class template CDPL::Descr::BulkSimilarityCalculator.
  */
 
 #ifndef CDPL_DESCR_BULKSIMILARITYCALCULATOR_HPP

@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::XLogPCalculator.
+ * \brief Definition of class CDPL::MolProp::XLogPCalculator.
  */
 
 #ifndef CDPL_MOLPROP_XLOGPCALCULATOR_HPP

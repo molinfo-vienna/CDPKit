@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Atom2DCoordinatesCalculator.
+ * \brief Definition of class CDPL::Chem::Atom2DCoordinatesCalculator.
  */
 
 #ifndef CDPL_CHEM_ATOM2DCOORDINATESCALCULATOR_HPP

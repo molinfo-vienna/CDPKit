@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom predicates.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Atom predicates.
  */
 
 #ifndef CDPL_CHEM_ATOMPREDICATE_HPP

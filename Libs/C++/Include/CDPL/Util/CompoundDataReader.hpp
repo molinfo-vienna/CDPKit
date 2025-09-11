@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::CompoundDataReader.
+ * \brief Definition of class CDPL::Util::CompoundDataReader.
  */
 
 #ifndef CDPL_UTIL_COMPOUNDDATAREADER_HPP

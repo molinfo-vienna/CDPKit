@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::FeatureInteractionScoreGridCalculator.
+ * \brief Definition of class CDPL::GRAIL::FeatureInteractionScoreGridCalculator.
  */
 
 #ifndef CDPL_GRAIL_FEATUREINTERACTIONSCOREGRIDCALCULATOR_HPP

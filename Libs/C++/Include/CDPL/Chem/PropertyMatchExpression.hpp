@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PropertyMatchExpression.
+ * \brief Definition of class CDPL::Chem::PropertyMatchExpression.
  */
 
 #ifndef CDPL_CHEM_PROPERTYMATCHEXPRESSION_HPP

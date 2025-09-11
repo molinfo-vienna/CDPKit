@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESBZ2ReactionOutputHandler.
+ * \brief Declaration of type CDPL::Chem::SMILESBZ2ReactionOutputHandler.
  */
 
 #ifndef CDPL_CHEM_SMILESBZ2REACTIONOUTPUTHANDLER_HPP

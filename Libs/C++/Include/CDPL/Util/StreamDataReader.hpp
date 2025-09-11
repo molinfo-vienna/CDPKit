@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::StreamDataReader.
+ * \brief Definition of class CDPL::Util::StreamDataReader.
  */
 
 #ifndef CDPL_UTIL_STREAMDATAREADER_HPP

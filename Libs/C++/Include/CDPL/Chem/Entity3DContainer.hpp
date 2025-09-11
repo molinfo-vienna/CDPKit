@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Entity3DContainer.
+ * \brief Definition of class CDPL::Chem::Entity3DContainer.
  */
 
 #ifndef CDPL_CHEM_ENTITYCONTAINER_HPP

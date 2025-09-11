@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94VanDerWaalsInteractionParameterizer.
+ * \brief Definition of class CDPL::ForceField::MMFF94VanDerWaalsInteractionParameterizer.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::BasicPharmacophore.
+ * \brief Definition of class CDPL::Pharm::BasicPharmacophore.
  */
 
 #ifndef CDPL_PHARM_BASICPHARMACOPHORE_HPP

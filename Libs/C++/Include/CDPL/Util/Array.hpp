@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::Array.
+ * \brief Definition of class CDPL::Util::Array.
  */
 
 #ifndef CDPL_UTIL_ARRAY_HPP

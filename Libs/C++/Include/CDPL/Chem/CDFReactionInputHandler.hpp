@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFReactionInputHandler.
+ * \brief Declaration of type CDPL::Chem::CDFReactionInputHandler.
  */
 
 #ifndef CDPL_CHEM_CDFREACTIONINPUTHANDLER_HPP

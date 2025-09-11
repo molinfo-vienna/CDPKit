@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::MultiFormatDataWriter.
+ * \brief Definition of class CDPL::Util::MultiFormatDataWriter.
  */
 
 #ifndef CDPL_UTIL_MULTIFORMATDATAWRITER_HPP

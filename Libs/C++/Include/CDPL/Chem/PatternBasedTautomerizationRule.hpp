@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PatternBasedTautomerizationRule.
+ * \brief Definition of class CDPL::Chem::PatternBasedTautomerizationRule.
  */
 
 #ifndef CDPL_CHEM_PATTERNBASEDTAUTOMERIZATIONRULE_HPP

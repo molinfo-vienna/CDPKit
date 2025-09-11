@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CyclicSubstructure.
+ * \brief Definition of class CDPL::Chem::CyclicSubstructure.
  */
 
 #ifndef CDPL_CHEM_CYCLICSUBSTRUCTURE_HPP

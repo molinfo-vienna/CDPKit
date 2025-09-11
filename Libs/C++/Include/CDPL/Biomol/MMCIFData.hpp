@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMCIFData.
+ * \brief Definition of class CDPL::Biomol::MMCIFData.
  */
 
 #ifndef CDPL_BIOMOL_MMCIFDATA_HPP

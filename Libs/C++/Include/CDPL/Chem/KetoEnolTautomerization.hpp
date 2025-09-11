@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::KetoEnolTautomerization.
+ * \brief Definition of class CDPL::Chem::KetoEnolTautomerization.
  */
 
 #ifndef CDPL_CHEM_KETOENOLTAUTOMERIZATION_HPP

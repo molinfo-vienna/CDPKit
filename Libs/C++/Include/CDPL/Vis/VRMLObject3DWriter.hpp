@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::VRMLObject3DWriter.
+ * \brief Definition of class CDPL::Vis::VRMLObject3DWriter.
  */
 
 #ifndef CDPL_VIS_VRMLOBJECT3DWRITER_HPP

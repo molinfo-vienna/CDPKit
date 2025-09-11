@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Bond predicates.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Bond predicates.
  */
 
 #ifndef CDPL_CHEM_BONDPREDICATE_HPP

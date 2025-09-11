@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94StretchBendInteractionList.
+ * \brief Definition of class CDPL::ForceField::MMFF94StretchBendInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONLIST_HPP

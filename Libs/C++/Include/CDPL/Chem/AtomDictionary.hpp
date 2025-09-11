@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomDictionary.
+ * \brief Definition of class CDPL::Chem::AtomDictionary.
  */
 
 #ifndef CDPL_CHEM_ATOMDICTIONARY_HPP

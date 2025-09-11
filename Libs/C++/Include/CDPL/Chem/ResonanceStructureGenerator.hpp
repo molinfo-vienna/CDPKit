@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ResonanceStructureGenerator.
+ * \brief Definition of class CDPL::Chem::ResonanceStructureGenerator.
  */
 
 #ifndef CDPL_CHEM_RESONANCESTRUCTUREGENERATOR_HPP

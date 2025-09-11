@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::LogSCalculator.
+ * \brief Definition of class CDPL::MolProp::LogSCalculator.
  */
 
 #ifndef CDPL_MOLPROP_LOGSCALCULATOR_HPP

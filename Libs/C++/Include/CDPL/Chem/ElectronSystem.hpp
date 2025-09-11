@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ElectronSystem.
+ * \brief Definition of class CDPL::Chem::ElectronSystem.
  */
 
 #ifndef CDPL_CHEM_ELECTRONSYSTEM_HPP

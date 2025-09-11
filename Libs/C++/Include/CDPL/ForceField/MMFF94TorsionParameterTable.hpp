@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94TorsionParameterTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94TorsionParameterTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94TORSIONPARAMETERTABLE_HPP

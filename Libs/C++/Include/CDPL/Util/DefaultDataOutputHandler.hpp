@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::DefaultDataOutputHandler.
+ * \brief Definition of class CDPL::Util::DefaultDataOutputHandler.
  */
 
 #ifndef CDPL_UTIL_DEFAULTDATAOUTPUTHANDLER_HPP

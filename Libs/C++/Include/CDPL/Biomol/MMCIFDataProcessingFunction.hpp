@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
+ * \brief Type declaration of a generic wrapper class used to store a user-defined function for the processing of Biomol::MMCIFData instances.
  */
 
 #ifndef CDPL_BIOMOL_MMCIFDATAPROCESSINGFUNCTION_HPP

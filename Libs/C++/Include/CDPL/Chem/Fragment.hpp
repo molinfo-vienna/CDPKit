@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Fragment.
+ * \brief Definition of class CDPL::Chem::Fragment.
  */
 
 #ifndef CDPL_CHEM_FRAGMENT_HPP

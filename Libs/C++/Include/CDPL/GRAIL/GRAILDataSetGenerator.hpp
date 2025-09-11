@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::GRAILDataSetGenerator.
+ * \brief Definition of class CDPL::GRAIL::GRAILDataSetGenerator.
  */
 
 #ifndef CDPL_GRAIL_GRAILDATASETGENERATOR_HPP

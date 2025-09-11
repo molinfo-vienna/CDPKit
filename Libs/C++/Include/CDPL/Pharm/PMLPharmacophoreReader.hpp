@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PMLPharmacophoreReader.
+ * \brief Definition of class CDPL::Pharm::PMLPharmacophoreReader.
  */
 
 #ifndef CDPL_PHARM_PMLPHARMACOPHOREREADER_HPP

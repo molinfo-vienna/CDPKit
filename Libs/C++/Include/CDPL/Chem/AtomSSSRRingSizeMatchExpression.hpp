@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomSSSRRingSizeMatchExpression.
+ * \brief Definition of class CDPL::Chem::AtomSSSRRingSizeMatchExpression.
  */
 
 #ifndef CDPL_CHEM_ATOMSSSRRINGSIZEMATCHEXPRESSION_HPP

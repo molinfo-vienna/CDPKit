@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::BindingAffinityCalculator.
+ * \brief Definition of class CDPL::GRAIL::BindingAffinityCalculator.
  */
 
 #ifndef CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP

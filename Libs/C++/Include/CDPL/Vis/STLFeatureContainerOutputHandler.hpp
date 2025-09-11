@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::STLFeatureContainerOutputHandler.
+ * \brief Declaration of type CDPL::Vis::STLFeatureContainerOutputHandler.
  */
 
 #ifndef CDPL_VIS_STLFEATURECONTAINEROUTPUTHANDLER_HPP

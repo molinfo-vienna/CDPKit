@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::TorusMesh3D.
+ * \brief Definition of class CDPL::Vis::TorusMesh3D.
  */
 
 #ifndef CDPL_VIS_TORUSMESH3D_HPP

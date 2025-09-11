@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BasicBond.
+ * \brief Definition of class CDPL::Chem::BasicBond.
  */
 
 #ifndef CDPL_CHEM_BASICBOND_HPP

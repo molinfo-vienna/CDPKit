@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMARTSReactionWriter.
+ * \brief Definition of class CDPL::Chem::SMARTSReactionWriter.
  */
 
 #ifndef CDPL_CHEM_SMARTSREACTIONWRITER_HPP

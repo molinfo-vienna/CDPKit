@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94ChargeCalculator.
+ * \brief Definition of class CDPL::ForceField::MMFF94ChargeCalculator.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94CHARGECALCULATOR_HPP

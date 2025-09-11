@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::ParallelPiPiInteractionScore.
+ * \brief Definition of class CDPL::Pharm::ParallelPiPiInteractionScore.
  */
 
 #ifndef CDPL_PHARM_PARALLELPIPIINTERACTIONSCORE_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::ControlParameterList.
+ * \brief Definition of class CDPL::Base::ControlParameterList.
  */
 
 #ifndef CDPL_BASE_CONTROLPARAMETERLIST_HPP

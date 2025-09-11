@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::RightFrustumMesh3D.
+ * \brief Definition of class CDPL::Vis::RightFrustumMesh3D.
  */
 
 #ifndef CDPL_VIS_RIGHTFRUSTUMMESH3D_HPP

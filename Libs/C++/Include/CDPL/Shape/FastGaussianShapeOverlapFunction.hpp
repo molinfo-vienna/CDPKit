@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::FastGaussianShapeOverlapFunction.
+ * \brief Definition of class CDPL::Shape::FastGaussianShapeOverlapFunction.
  */
 
 #ifndef CDPL_SHAPE_FASTGAUSSIANSHAPEOVERLAPFUNCTION_HPP

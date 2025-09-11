@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer.
+ * \brief Definition of class CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP

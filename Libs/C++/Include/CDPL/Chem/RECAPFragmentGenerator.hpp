@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RECAPFragmentGenerator.
+ * \brief Definition of class CDPL::Chem::RECAPFragmentGenerator.
  */
 
 #ifndef CDPL_CHEM_RECAPFRAGMENTGENERATOR_HPP

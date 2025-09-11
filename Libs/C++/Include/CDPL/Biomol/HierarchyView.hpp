@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::HierarchyView.
+ * \brief Definition of class CDPL::Biomol::HierarchyView.
  */
 
 #ifndef CDPL_BIOMOL_HIERARCHYVIEW_HPP

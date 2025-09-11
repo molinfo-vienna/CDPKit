@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RDFGZReactionWriter.
+ * \brief Declaration of type CDPL::Chem::RDFGZReactionWriter.
  */
 
 #ifndef CDPL_CHEM_RDFGZREACTIONWRITER_HPP

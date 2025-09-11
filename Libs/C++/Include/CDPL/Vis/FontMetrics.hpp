@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::FontMetrics.
+ * \brief Definition of class CDPL::Vis::FontMetrics.
  */
 
 #ifndef CDPL_VIS_FONTMETRICS_HPP

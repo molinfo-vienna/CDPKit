@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::NitrosoOximeTautomerization.
+ * \brief Definition of class CDPL::Chem::NitrosoOximeTautomerization.
  */
 
 #ifndef CDPL_CHEM_NITROSOOXIMETAUTOMERIZATION_HPP

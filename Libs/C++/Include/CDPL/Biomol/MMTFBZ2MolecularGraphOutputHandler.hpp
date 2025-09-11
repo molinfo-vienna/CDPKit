@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMTFBZ2MolecularGraphOutputHandler.
+ * \brief Declaration of type CDPL::Biomol::MMTFBZ2MolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

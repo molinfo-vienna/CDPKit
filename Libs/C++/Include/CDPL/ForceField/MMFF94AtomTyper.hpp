@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AtomTyper.
+ * \brief Definition of class CDPL::ForceField::MMFF94AtomTyper.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ATOMTYPER_HPP

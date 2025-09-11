@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMCIFMoleculeReader.
+ * \brief Definition of class CDPL::Biomol::MMCIFMoleculeReader.
  */
 
 #ifndef CDPL_BIOMOL_MMCIFMOLECULEREADER_HPP

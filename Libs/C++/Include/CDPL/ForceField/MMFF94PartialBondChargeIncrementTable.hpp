@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94PartialBondChargeIncrementTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94PartialBondChargeIncrementTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94PARTIALBONDCHARGEINCREMENTTABLE_HPP

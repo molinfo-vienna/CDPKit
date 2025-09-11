@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PointArray2D.
+ * \brief Definition of class CDPL::Vis::PointArray2D.
  */
 
 #ifndef CDPL_VIS_POINTARRAY2D_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SpatialEntityAlignment.
+ * \brief Definition of class CDPL::Chem::SpatialEntityAlignment.
  */
 
 #ifndef CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP

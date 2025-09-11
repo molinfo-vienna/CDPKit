@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::VRMLObject3DOutputHandler.
+ * \brief Declaration of type CDPL::Vis::VRMLObject3DOutputHandler.
  */
 
 #ifndef CDPL_VIS_VRMLOBJECT3DOUTPUTHANDLER_HPP

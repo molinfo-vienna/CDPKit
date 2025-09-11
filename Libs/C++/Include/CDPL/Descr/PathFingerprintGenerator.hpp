@@ -25,7 +25,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::PathFingerprintGenerator.
+ * \brief Definition of class CDPL::Descr::PathFingerprintGenerator.
  */
 
 #ifndef CDPL_DESCR_PATHFINGERPRINTGENERATOR_HPP

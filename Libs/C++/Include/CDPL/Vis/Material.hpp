@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Material.
+ * \brief Definition of class CDPL::Vis::Material.
  */
 
 #ifndef CDPL_VIS_MATERIAL_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::PDBBZ2MoleculeReader.
+ * \brief Declaration of type CDPL::Biomol::PDBBZ2MoleculeReader.
  */
 
 #ifndef CDPL_BIOMOL_PDBBZ2MOLECULEREADER_HPP

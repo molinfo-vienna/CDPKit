@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESReactionInputHandler.
+ * \brief Declaration of type CDPL::Chem::SMILESReactionInputHandler.
  */
 
 #ifndef CDPL_CHEM_SMILESREACTIONINPUTHANDLER_HPP

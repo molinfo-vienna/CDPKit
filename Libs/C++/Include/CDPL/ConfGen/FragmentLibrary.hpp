@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::FragmentLibrary.
+ * \brief Definition of class CDPL::ConfGen::FragmentLibrary.
  */
 
 #ifndef CDPL_CONFGEN_FRAGMENTLIBRARY_HPP

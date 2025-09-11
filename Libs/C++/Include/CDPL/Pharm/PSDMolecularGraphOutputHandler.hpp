@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PSDMolecularGraphOutputHandler.
+ * \brief Definition of class CDPL::Pharm::PSDMolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_PHARM_PSDMOLECULARGRAPHOUTPUTHANDLER_HPP

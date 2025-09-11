@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::ObjectStack.
+ * \brief Definition of class CDPL::Util::ObjectStack.
  */
 
 #ifndef CDPL_UTIL_OBJECTSTACK_HPP

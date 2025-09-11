@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESBZ2MoleculeInputHandler.
+ * \brief Declaration of type CDPL::Chem::SMILESBZ2MoleculeInputHandler.
  */
 
 #ifndef CDPL_CHEM_SMILESBZ2MOLECULEINPUTHANDLER_HPP

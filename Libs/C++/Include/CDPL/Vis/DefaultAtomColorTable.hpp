@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::DefaultAtomColorTable.
+ * \brief Definition of class CDPL::Vis::DefaultAtomColorTable.
  */
 
 #ifndef CDPL_VIS_DEFAULTATOMCOLORTABLE_HPP

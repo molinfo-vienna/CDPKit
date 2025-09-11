@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::UFFAtomTypePropertyTable.
+ * \brief Definition of class CDPL::ForceField::UFFAtomTypePropertyTable.
  */
 
 #ifndef CDPL_FORCEFIELD_UFFATOMTYPEPROPERTYTABLE_HPP

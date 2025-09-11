@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::DataReader.
+ * \brief Definition of class CDPL::Base::DataReader.
  */
 
 #ifndef CDPL_BASE_DATAREADER_HPP

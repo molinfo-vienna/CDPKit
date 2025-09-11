@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94EnergyCalculator.
+ * \brief Definition of class CDPL::ForceField::MMFF94EnergyCalculator.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ENERGYCALCULATOR_HPP

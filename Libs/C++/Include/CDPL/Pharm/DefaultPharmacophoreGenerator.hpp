@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::DefaultPharmacophoreGenerator.
+ * \brief Definition of class CDPL::Pharm::DefaultPharmacophoreGenerator.
  */
 
 #ifndef CDPL_PHARM_DEFAULTPHARMACOPHOREGENERATOR_HPP

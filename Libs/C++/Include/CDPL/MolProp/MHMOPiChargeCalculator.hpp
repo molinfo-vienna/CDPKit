@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::MHMOPiChargeCalculator.
+ * \brief Definition of class CDPL::MolProp::MHMOPiChargeCalculator.
  */
 
 #ifndef CDPL_MOLPROP_MHMOPICHARGECALCULATOR_HPP

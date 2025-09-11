@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::CFLMoleculeInputHandler.
+ * \brief Declaration of type CDPL::ConfGen::CFLMoleculeInputHandler.
  */
 
 #ifndef CDPL_CONFGEN_CFLMOLECULEINPUTHANDLER_HPP

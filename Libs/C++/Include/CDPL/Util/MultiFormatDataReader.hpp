@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::MultiFormatDataReader.
+ * \brief Definition of class CDPL::Util::MultiFormatDataReader.
  */
 
 #ifndef CDPL_UTIL_MULTIFORMATDATAREADER_HPP

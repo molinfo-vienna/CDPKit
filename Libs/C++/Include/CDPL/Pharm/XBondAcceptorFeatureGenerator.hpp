@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::XBondAcceptorFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::XBondAcceptorFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_XBONDACCEPTORFEATUREGENERATOR_HPP

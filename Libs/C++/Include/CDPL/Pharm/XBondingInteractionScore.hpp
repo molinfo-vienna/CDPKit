@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::XBondingInteractionScore.
+ * \brief Definition of class CDPL::Pharm::XBondingInteractionScore.
  */
 
 #ifndef CDPL_PHARM_XBONDINGINTERACTIONSCORE_HPP

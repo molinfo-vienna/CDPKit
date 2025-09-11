@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::HydrophobicInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::HydrophobicInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_HYDROPHOBICINTERACTIONCONSTRAINT_HPP

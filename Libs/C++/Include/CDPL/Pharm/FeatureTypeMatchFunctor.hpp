@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureTypeMatchFunctor.
+ * \brief Definition of class CDPL::Pharm::FeatureTypeMatchFunctor.
  */
 
 #ifndef CDPL_PHARM_FEATURETYPEMATCHFUNCTOR_HPP

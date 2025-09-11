@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ReactionAtomMappingMatchExpression.
+ * \brief Definition of class CDPL::Chem::ReactionAtomMappingMatchExpression.
  */
 
 #ifndef CDPL_CHEM_REACTIONATOMMAPPINGMATCHEXPRESSION_HPP

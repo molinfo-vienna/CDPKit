@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::IcosahedronMesh3D.
+ * \brief Definition of class CDPL::Vis::IcosahedronMesh3D.
  */
 
 #ifndef CDPL_VIS_ICOSAHEDRONMESH3D_HPP

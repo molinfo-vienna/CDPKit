@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RXNReactionReader.
+ * \brief Definition of class CDPL::Chem::RXNReactionReader.
  */
 
 #ifndef CDPL_CHEM_RXNREACTIONREADER_HPP

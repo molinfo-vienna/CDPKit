@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::DGConstraintGeneratorSettings.
+ * \brief Definition of class CDPL::ConfGen::DGConstraintGeneratorSettings.
  */
 
 #ifndef CDPL_CONFGEN_DGCONSTRAINTGENERATORSETTINGS_HPP

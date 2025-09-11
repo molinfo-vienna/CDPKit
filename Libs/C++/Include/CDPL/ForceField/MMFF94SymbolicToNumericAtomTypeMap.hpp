@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94SymbolicToNumericAtomTypeMap.
+ * \brief Definition of class CDPL::ForceField::MMFF94SymbolicToNumericAtomTypeMap.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94SYMBOLICTONUMERICATOMTYPEMAP_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AutomorphismGroupSearch.
+ * \brief Definition of class CDPL::Chem::AutomorphismGroupSearch.
  */
 
 #ifndef CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP

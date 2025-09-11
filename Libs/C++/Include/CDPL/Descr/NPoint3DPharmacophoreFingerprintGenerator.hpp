@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::NPoint3DPharmacophoreFingerprintGenerator.
+ * \brief Definition of class CDPL::Descr::NPoint3DPharmacophoreFingerprintGenerator.
  */
 
 #ifndef CDPL_DESCR_NPOINT3DPHARMACOPHOREFINGERPRINTGENERATOR_HPP

@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SmallestSetOfSmallestRings.
+ * \brief Definition of class CDPL::Chem::SmallestSetOfSmallestRings.
  */
 
 #ifndef CDPL_CHEM_SMALLESTSETOFSMALLESTRINGS_HPP

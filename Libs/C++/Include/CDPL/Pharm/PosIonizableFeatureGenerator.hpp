@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PosIonizableFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::PosIonizableFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_POSIONIZABLEFEATUREGENERATOR_HPP

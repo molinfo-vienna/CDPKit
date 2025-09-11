@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ImineEnamineTautomerization.
+ * \brief Definition of class CDPL::Chem::ImineEnamineTautomerization.
  */
 
 #ifndef CDPL_CHEM_IMINEENAMINETAUTOMERIZATION_HPP

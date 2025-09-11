@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AromaticSubstructure.
+ * \brief Definition of class CDPL::Chem::AromaticSubstructure.
  */
 
 #ifndef CDPL_CHEM_AROMATICSUBSTRUCTURE_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom compare functions.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Atom compare functions.
  */
 
 #ifndef CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP

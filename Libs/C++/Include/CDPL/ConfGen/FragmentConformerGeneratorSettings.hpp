@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::FragmentConformerGeneratorSettings.
+ * \brief Definition of class CDPL::ConfGen::FragmentConformerGeneratorSettings.
  */
 
 #ifndef CDPL_CONFGEN_FRAGMENTCONFORMERGENERATORSETTINGS_HPP

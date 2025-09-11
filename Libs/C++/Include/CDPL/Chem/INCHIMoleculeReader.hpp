@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::INCHIMoleculeReader.
+ * \brief Definition of class CDPL::Chem::INCHIMoleculeReader.
  */
 
 #ifndef CDPL_CHEM_INCHIMOLECULEREADER_HPP

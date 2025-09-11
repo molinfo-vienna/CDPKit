@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ * \brief Type declaration of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
  */
 
 #ifndef CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP

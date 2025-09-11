@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CDFBZ2PharmacophoreReader.
+ * \brief Declaration of type CDPL::Pharm::CDFBZ2PharmacophoreReader.
  */
 
 #ifndef CDPL_PHARM_CDFBZ2PHARMACOPHOREREADER_HPP

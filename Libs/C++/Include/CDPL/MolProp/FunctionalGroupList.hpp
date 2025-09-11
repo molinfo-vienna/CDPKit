@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::FunctionalGroupList.
+ * \brief Definition of class CDPL::MolProp::FunctionalGroupList.
  */
 
 #ifndef CDPL_MOLPROP_FUNCTIONALGROUPLIST_HPP

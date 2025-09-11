@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::MatchConstraintList.
+ * \brief Definition of class CDPL::Chem::MatchConstraintList.
  */
 
 #ifndef CDPL_CHEM_MATCHCONSTRAINTLIST_HPP

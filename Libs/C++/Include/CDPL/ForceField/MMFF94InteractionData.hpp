@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94InteractionData.
+ * \brief Definition of class CDPL::ForceField::MMFF94InteractionData.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94INTERACTIONDATA_HPP

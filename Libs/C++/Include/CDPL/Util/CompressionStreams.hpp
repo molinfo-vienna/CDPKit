@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Provides I/O-streams capable of performing compression and decompression.
+ * \brief Definition of I/O-stream classes capable of performing compression and decompression.
  */
 
 #ifndef CDPL_UTIL_COMPRESSIONSTREAMS_HPP

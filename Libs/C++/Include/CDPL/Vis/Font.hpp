@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Font.
+ * \brief Definition of class CDPL::Vis::Font.
  */
 
 #ifndef CDPL_VIS_FONT_HPP

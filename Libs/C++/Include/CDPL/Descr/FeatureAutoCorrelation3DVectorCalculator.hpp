@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::FeatureAutoCorrelation3DVectorCalculator.
+ * \brief Definition of class CDPL::Descr::FeatureAutoCorrelation3DVectorCalculator.
  */
 
 #ifndef CDPL_DESCR_AUTOCORRELATION3DVECTORCODECALCULATOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Grid::CDFDRegularGridSetWriter.
+ * \brief Definition of class CDPL::Grid::CDFDRegularGridSetWriter.
  */
 
 #ifndef CDPL_GRID_CDFDREGULARGRIDSETWRITER_HPP

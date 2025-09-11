@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMARTSMolecularGraphWriter.
+ * \brief Definition of class CDPL::Chem::SMARTSMolecularGraphWriter.
  */
 
 #ifndef CDPL_CHEM_SMARTSMOLECULARGRAPHWRITER_HPP

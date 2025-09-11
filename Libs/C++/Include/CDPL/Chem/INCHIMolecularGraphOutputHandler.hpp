@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::INCHIMolecularGraphOutputHandler.
+ * \brief Declaration of type CDPL::Chem::INCHIMolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_CHEM_INCHIMOLECULARGRAPHOUTPUTHANDLER_HPP

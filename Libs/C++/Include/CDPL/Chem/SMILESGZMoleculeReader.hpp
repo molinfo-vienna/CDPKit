@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESGZMoleculeReader.
+ * \brief Declaration of type CDPL::Chem::SMILESGZMoleculeReader.
  */
 
 #ifndef CDPL_CHEM_SMILESGZMOLECULEREADER_HPP

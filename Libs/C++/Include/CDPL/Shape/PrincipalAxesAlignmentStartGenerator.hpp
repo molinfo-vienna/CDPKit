@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::PrincipalAxesAlignmentStartGenerator.
+ * \brief Definition of class CDPL::Shape::PrincipalAxesAlignmentStartGenerator.
  */
 
 #ifndef CDPL_SHAPE_PRINCIPALAXESALIGNMENTSTARTGENERATOR_HPP

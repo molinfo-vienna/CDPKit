@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AtomTypePropertyTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94AtomTypePropertyTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ATOMTYPEPROPERTYTABLE_HPP

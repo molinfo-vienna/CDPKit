@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PDFReactionWriter.
+ * \brief Definition of class CDPL::Vis::PDFReactionWriter.
  */
 
 #ifndef CDPL_VIS_PDFREACTIONWRITER_HPP

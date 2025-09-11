@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ProtonationStateStandardizer.
+ * \brief Definition of class CDPL::Chem::ProtonationStateStandardizer.
  */
 
 #ifndef CDPL_CHEM_PROTONATIONSTATESTANDARDIZER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::KekuleStructureCalculator.
+ * \brief Definition of class CDPL::Chem::KekuleStructureCalculator.
  */
 
 #ifndef CDPL_CHEM_KEKULESTRUCTURECALCULATOR_HPP

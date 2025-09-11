@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Color.
+ * \brief Definition of class CDPL::Vis::Color.
  */
 
 #ifndef CDPL_VIS_COLOR_HPP

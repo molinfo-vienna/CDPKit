@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::QtObjectFactory.
+ * \brief Definition of class CDPL::Vis::QtObjectFactory.
  */
 
 #ifndef CDPL_VIS_QTOBJECTFACTORY_HPP

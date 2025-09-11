@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Grid::RegularGridSet.
+ * \brief Definition of class CDPL::Grid::RegularGridSet.
  */
 
 #ifndef CDPL_GRID_REGULARGRIDSET_HPP

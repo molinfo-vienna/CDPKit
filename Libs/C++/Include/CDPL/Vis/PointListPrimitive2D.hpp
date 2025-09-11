@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PointListPrimitive2D.
+ * \brief Definition of class CDPL::Vis::PointListPrimitive2D.
  */
 
 #ifndef CDPL_VIS_POINTLISTPRIMITIVE2D_HPP

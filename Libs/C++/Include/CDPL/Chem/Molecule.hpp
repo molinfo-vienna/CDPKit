@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Molecule.
+ * \brief Definition of class CDPL::Chem::Molecule.
  */
 
 #ifndef CDPL_CHEM_MOLECULE_HPP

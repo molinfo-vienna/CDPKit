@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PLYObject3DWriter.
+ * \brief Definition of class CDPL::Vis::PLYObject3DWriter.
  */
 
 #ifndef CDPL_VIS_PLYOBJECT3DWRITER_HPP

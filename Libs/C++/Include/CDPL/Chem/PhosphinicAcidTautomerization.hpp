@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PhosphinicAcidTautomerization.
+ * \brief Definition of class CDPL::Chem::PhosphinicAcidTautomerization.
  */
 
 #ifndef CDPL_CHEM_PHOSPHINICACIDTAUTOMERIZATION_HPP

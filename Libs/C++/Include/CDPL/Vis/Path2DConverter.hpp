@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Path2DConverter.
+ * \brief Definition of class CDPL::Vis::Path2DConverter.
  */
 
 #ifndef CDPL_VIS_PATH2DCONVERTER_HPP

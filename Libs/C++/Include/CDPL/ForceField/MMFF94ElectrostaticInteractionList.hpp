@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94ElectrostaticInteractionList.
+ * \brief Definition of class CDPL::ForceField::MMFF94ElectrostaticInteractionList.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONLIST_HPP

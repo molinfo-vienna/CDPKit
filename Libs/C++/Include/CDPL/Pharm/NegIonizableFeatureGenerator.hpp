@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::NegIonizableFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::NegIonizableFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_NEGIONIZABLEFEATUREGENERATOR_HPP

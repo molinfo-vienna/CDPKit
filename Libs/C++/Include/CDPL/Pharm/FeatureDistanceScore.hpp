@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureDistanceScore.
+ * \brief Definition of class CDPL::Pharm::FeatureDistanceScore.
  */
 
 #ifndef CDPL_PHARM_FEATUREDISTANCESCORE_HPP

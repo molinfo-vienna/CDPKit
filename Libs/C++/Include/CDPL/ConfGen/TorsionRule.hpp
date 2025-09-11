@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::TorsionRule.
+ * \brief Definition of class CDPL::ConfGen::TorsionRule.
  */
 
 #ifndef CDPL_CONFGEN_TORSIONRULE_HPP

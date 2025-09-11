@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AngleBendingInteraction.
+ * \brief Definition of class CDPL::ForceField::MMFF94AngleBendingInteraction.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTION_HPP

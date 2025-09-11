@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PolygonPrimitive2D.
+ * \brief Definition of class CDPL::Vis::PolygonPrimitive2D.
  */
 
 #ifndef CDPL_VIS_POLYGONPRIMITIVE2D_HPP

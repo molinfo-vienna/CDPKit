@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Math::VectorArray.
+ * \brief Definition of class CDPL::Math::VectorArray.
  */
 
 #ifndef CDPL_MATH_VECTORARRAY_HPP

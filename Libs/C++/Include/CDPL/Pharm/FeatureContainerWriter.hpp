@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureContainerWriter.
+ * \brief Declaration of type CDPL::Pharm::FeatureContainerWriter.
  */
 
 #ifndef CDPL_PHARM_FEATURECONTAINERWRITER_HPP

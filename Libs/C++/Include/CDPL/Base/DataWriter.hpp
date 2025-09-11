@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::DataWriter.
+ * \brief Definition of class CDPL::Base::DataWriter.
  */
 
 #ifndef CDPL_BASE_DATAWRITER_HPP

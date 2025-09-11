@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ComponentSet.
+ * \brief Definition of class CDPL::Chem::ComponentSet.
  */
 
 #ifndef CDPL_CHEM_COMPONENTSET_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FileScreeningHitCollector.
+ * \brief Definition of class CDPL::Pharm::FileScreeningHitCollector.
  */
 
 #ifndef CDPL_PHARM_FILESCREENINGHITCOLLECTOR_HPP

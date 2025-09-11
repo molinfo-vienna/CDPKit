@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the classes CDPL::Util::Dereferencer and CDPL::Util::NullCheckDereferencer.
+ * \brief Definition of classes CDPL::Util::Dereferencer and CDPL::Util::NullCheckDereferencer.
  */
 
 #ifndef CDPL_UTIL_DEREFERENCER_HPP

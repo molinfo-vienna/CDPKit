@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PiElectronSystemList.
+ * \brief Definition of class CDPL::Chem::PiElectronSystemList.
  */
 
 #ifndef CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP

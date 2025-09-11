@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::NOTMatchExpression.
+ * \brief Definition of class CDPL::Chem::NOTMatchExpression.
  */
 
 #ifndef CDPL_CHEM_NOTMATCHEXPRESSION_HPP

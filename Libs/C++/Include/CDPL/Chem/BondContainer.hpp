@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BondContainer.
+ * \brief Definition of class CDPL::Chem::BondContainer.
  */
 
 #ifndef CDPL_CHEM_BONDCONTAINER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::STLFeatureContainerWriter.
+ * \brief Declaration of type CDPL::Vis::STLFeatureContainerWriter.
  */
 
 #ifndef CDPL_VIS_STLFEATURECONTAINERWRITER_HPP

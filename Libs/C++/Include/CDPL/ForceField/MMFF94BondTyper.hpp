@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94BondTyper.
+ * \brief Definition of class CDPL::ForceField::MMFF94BondTyper.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94BONDTYPER_HPP

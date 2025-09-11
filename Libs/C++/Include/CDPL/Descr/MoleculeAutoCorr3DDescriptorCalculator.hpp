@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::MoleculeAutoCorr3DDescriptorCalculator.
+ * \brief Definition of class CDPL::Descr::MoleculeAutoCorr3DDescriptorCalculator.
  */
 
 #ifndef CDPL_DESCR_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP

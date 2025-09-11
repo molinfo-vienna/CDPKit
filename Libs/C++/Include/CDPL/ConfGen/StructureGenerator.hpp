@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::StructureGenerator.
+ * \brief Definition of class CDPL::ConfGen::StructureGenerator.
  */
 
 #ifndef CDPL_CONFGEN_STRUCTUREGENERATOR_HPP

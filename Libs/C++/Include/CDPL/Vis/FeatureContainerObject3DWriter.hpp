@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::FeatureContainerObject3DWriter.
+ * \brief Definition of class CDPL::Vis::FeatureContainerObject3DWriter.
  */
 
 #ifndef CDPL_VIS_FEATURECONTAINEROBJECT3DWRITER_HPP

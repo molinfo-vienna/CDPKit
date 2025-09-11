@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::GaussianShapeAlignmentStartGenerator.
+ * \brief Definition of class CDPL::Shape::GaussianShapeAlignmentStartGenerator.
  */
 
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTSTARTGENERATOR_HPP

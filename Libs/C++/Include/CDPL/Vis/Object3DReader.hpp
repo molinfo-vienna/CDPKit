@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Object3DReader.
+ * \brief Declaration of type CDPL::Vis::Object3DReader.
  */
 
 #ifndef CDPL_VIS_OBJECT3DREADER_HPP

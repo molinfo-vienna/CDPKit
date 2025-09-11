@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::BurdenMatrixGenerator.
+ * \brief Definition of class CDPL::Descr::BurdenMatrixGenerator.
  */
 
 #ifndef CDPL_DESCR_BURDENMATRIXGENERATOR_HPP

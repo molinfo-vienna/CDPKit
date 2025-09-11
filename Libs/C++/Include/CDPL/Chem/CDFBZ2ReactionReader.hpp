@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFBZ2ReactionReader.
+ * \brief Declaration of type CDPL::Chem::CDFBZ2ReactionReader.
  */
 
 #ifndef CDPL_CHEM_CDFBZ2REACTIONREADER_HPP

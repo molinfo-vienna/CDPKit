@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFMolecularGraphWriter.
+ * \brief Definition of class CDPL::Chem::CDFMolecularGraphWriter.
  */
 
 #ifndef CDPL_CHEM_CDFMOLECULARGRAPHWRITER_HPP

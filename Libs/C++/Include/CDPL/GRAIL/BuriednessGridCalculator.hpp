@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::BuriednessGridCalculator.
+ * \brief Definition of class CDPL::GRAIL::BuriednessGridCalculator.
  */
 
 #ifndef CDPL_GRAIL_BURIEDNESSGRIDCALCULATOR_HPP

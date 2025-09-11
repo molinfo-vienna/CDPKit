@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::MolecularGraphComplexityCalculator.
+ * \brief Definition of class CDPL::Descr::MolecularGraphComplexityCalculator.
  */
 
 #ifndef CDPL_DESCR_MOLECULARCOMPLEXITYCALCULATOR_HPP

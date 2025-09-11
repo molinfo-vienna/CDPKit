@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::ResidueDictionary. 
+ * \brief Definition of class CDPL::Biomol::ResidueDictionary. 
  */
 
 #ifndef CDPL_BIOMOL_RESIDUEDICTIONARY_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PSDMolecularGraphWriter.
+ * \brief Definition of class CDPL::Pharm::PSDMolecularGraphWriter.
  */
 
 #ifndef CDPL_PHARM_PSDMOLECULARGRAPHWRITER_HPP

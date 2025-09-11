@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::TautomerScore.
+ * \brief Definition of class CDPL::Chem::TautomerScore.
  */
 
 #ifndef CDPL_CHEM_TAUTOMERSCORE_HPP

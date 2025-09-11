@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::DefaultMultiConfMoleculeInputProcessor.
+ * \brief Definition of class CDPL::Chem::DefaultMultiConfMoleculeInputProcessor.
  */
 
 #ifndef CDPL_CHEM_DEFAULTMULTICONFMOLECULEINPUTPROCESSOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomContainer.
+ * \brief Definition of class CDPL::Chem::AtomContainer.
  */
 
 #ifndef CDPL_CHEM_ATOMCONTAINER_HPP

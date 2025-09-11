@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::CompressedDataReader.
+ * \brief Definition of class CDPL::Util::CompressedDataReader.
  */
 
 #ifndef CDPL_UTIL_COMPRESSEDDATAREADER_HPP

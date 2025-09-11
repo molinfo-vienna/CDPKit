@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94FormalAtomChargeDefinitionTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94FormalAtomChargeDefinitionTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94FORMALATOMCHARGEDEFINITIONTABLE_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::AtomDensityGridCalculator.
+ * \brief Definition of class CDPL::GRAIL::AtomDensityGridCalculator.
  */
 
 #ifndef CDPL_GRAIL_ATOMDENSITYGRIDCALCULATOR_HPP

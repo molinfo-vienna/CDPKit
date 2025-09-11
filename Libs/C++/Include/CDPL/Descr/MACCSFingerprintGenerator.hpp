@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::MACCSFingerprintGenerator.
+ * \brief Definition of class CDPL::Descr::MACCSFingerprintGenerator.
  */
 
 #ifndef CDPL_DESCR_MACCSFINGERPRINTGENERATOR_HPP

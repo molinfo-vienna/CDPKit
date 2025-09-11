@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AromaticSSSRSubset.
+ * \brief Definition of class CDPL::Chem::AromaticSSSRSubset.
  */
 
 #ifndef CDPL_CHEM_AROMATICSSSRSUBSET_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::View2D.
+ * \brief Definition of class CDPL::Vis::View2D.
  */
 
 #ifndef CDPL_VIS_VIEW2D_HPP

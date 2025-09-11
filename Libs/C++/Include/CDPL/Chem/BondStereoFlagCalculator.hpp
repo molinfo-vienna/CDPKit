@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BondStereoFlagCalculator.
+ * \brief Definition of class CDPL::Chem::BondStereoFlagCalculator.
  */
 
 #ifndef CDPL_CHEM_BONDSTEREOFLAGCALCULATOR_HPP

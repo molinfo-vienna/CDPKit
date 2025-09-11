@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::ReactionView2D.
+ * \brief Definition of class CDPL::Vis::ReactionView2D.
  */
 
 #ifndef CDPL_VIS_REACTIONVIEW2D_HPP

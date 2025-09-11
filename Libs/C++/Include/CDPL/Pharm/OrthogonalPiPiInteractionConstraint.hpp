@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::OrthogonalPiPiInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::OrthogonalPiPiInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_ORTHOGONALPIPIINTERACTIONCONSTRAINT_HPP

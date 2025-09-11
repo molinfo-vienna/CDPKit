@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::TextLabelPrimitive2D.
+ * \brief Definition of class CDPL::Vis::TextLabelPrimitive2D.
  */
 
 #ifndef CDPL_VIS_TEXTLABELPRIMITIVE2D_HPP

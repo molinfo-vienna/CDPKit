@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMCIFBZ2MolecularGraphWriter.
+ * \brief Declaration of type CDPL::Biomol::MMCIFBZ2MolecularGraphWriter.
  */
 
 #ifndef CDPL_BIOMOL_MMCIFBZ2MOLECULARGRAPHWRITER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESGZReactionWriter.
+ * \brief Declaration of type CDPL::Chem::SMILESGZReactionWriter.
  */
 
 #ifndef CDPL_CHEM_SMILESGZREACTIONWRITER_HPP

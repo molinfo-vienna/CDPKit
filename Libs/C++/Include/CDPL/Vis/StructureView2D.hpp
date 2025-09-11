@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::StructureView2D.
+ * \brief Definition of class CDPL::Vis::StructureView2D.
  */
 
 #ifndef CDPL_VIS_STRUCTUREVIEW2D_HPP

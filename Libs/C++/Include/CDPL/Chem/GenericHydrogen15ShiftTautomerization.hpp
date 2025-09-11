@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::GenericHydrogen15ShiftTautomerization.
+ * \brief Definition of class CDPL::Chem::GenericHydrogen15ShiftTautomerization.
  */
 
 #ifndef CDPL_CHEM_GENERICHYDROGEN15SHIFTTAUTOMERIZATION_HPP

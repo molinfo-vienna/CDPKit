@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomConformer3DCoordinatesFunctor.
+ * \brief Definition of class CDPL::Chem::AtomConformer3DCoordinatesFunctor.
  */
 
 #ifndef CDPL_CHEM_ATOMCONFORMER3DCOORDINATESFUNCTOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMCIFBZ2MoleculeInputHandler.
+ * \brief Declaration of type CDPL::Biomol::MMCIFBZ2MoleculeInputHandler.
  */
 
 #ifndef CDPL_BIOMOL_MMCIFBZ2MOLECULEINPUTHANDLER_HPP

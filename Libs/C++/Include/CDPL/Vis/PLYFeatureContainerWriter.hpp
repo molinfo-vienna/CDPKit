@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PLYFeatureContainerWriter.
+ * \brief Declaration of type CDPL::Vis::PLYFeatureContainerWriter.
  */
 
 #ifndef CDPL_VIS_PLYFEATURECONTAINERWRITER_HPP

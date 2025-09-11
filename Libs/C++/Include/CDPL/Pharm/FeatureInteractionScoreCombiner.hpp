@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureInteractionScoreCombiner.
+ * \brief Definition of class CDPL::Pharm::FeatureInteractionScoreCombiner.
  */
 
 #ifndef CDPL_PHARM_FEATUREINTERACTIONSCORECOMBINER_HPP

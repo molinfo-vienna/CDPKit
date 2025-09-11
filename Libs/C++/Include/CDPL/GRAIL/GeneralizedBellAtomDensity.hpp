@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::GeneralizedBellAtomDensity.
+ * \brief Definition of class CDPL::GRAIL::GeneralizedBellAtomDensity.
  */
 
 #ifndef CDPL_GRAIL_GENERALIZEDBELLATOMDENSITY_HPP

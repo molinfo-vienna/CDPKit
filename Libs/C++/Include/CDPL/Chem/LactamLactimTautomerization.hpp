@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::LactamLactimTautomerization.
+ * \brief Definition of class CDPL::Chem::LactamLactimTautomerization.
  */
 
 #ifndef CDPL_CHEM_LACTAMLACTIMTAUTOMERIZATION_HPP

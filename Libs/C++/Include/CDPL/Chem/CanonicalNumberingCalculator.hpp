@@ -27,7 +27,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CanonicalNumberingCalculator.
+ * \brief Definition of class CDPL::Chem::CanonicalNumberingCalculator.
  */
 
 #ifndef CDPL_CHEM_CANONICALNUMBERINGCALCULATOR_HPP

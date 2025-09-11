@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PLYObject3DOutputHandler.
+ * \brief Declaration of type CDPL::Vis::PLYObject3DOutputHandler.
  */
 
 #ifndef CDPL_VIS_PLYOBJECT3DOUTPUTHANDLER_HPP

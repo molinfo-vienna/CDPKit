@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::VRMLFeatureContainerWriter.
+ * \brief Declaration of type CDPL::Vis::VRMLFeatureContainerWriter.
  */
 
 #ifndef CDPL_VIS_VRMLFEATURECONTAINERWRITER_HPP

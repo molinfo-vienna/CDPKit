@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::ElasticPotential.
+ * \brief Definition of class CDPL::ForceField::ElasticPotential.
  */
 
 #ifndef CDPL_FORCEFIELD_ELASTICPOTENTIAL_HPP

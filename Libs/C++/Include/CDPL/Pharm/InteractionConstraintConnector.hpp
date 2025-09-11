@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::InteractionConstraintConnector.
+ * \brief Definition of class CDPL::Pharm::InteractionConstraintConnector.
  */
 
 #ifndef CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP

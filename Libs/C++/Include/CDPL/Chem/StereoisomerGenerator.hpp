@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::StereoisomerGenerator.
+ * \brief Definition of class CDPL::Chem::StereoisomerGenerator.
  */
 
 #ifndef CDPL_CHEM_STEREOISOMERGENERATOR_HPP

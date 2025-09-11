@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::IndirectArray.
+ * \brief Definition of class CDPL::Util::IndirectArray.
  */
 
 #ifndef CDPL_UTIL_INDIRECTARRAY_HPP

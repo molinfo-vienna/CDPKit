@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFMoleculeReader.
+ * \brief Definition of class CDPL::Chem::CDFMoleculeReader.
  */
 
 #ifndef CDPL_CHEM_CDFMOLECULEREADER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CationPiInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::CationPiInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_CATIONPIINTERACTIONCONSTRAINT_HPP

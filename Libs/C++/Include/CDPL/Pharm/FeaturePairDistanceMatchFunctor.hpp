@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeaturePairDistanceMatchFunctor.
+ * \brief Definition of class CDPL::Pharm::FeaturePairDistanceMatchFunctor.
  */
 
 #ifndef CDPL_PHARM_FEATUREPAIRDISTANCEMATCHFUNCTOR_HPP

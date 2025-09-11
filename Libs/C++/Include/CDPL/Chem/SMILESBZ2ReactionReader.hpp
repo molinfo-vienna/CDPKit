@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESBZ2ReactionReader.
+ * \brief Declaration of type CDPL::Chem::SMILESBZ2ReactionReader.
  */
 
 #ifndef CDPL_CHEM_SMILESBZ2REACTIONREADER_HPP

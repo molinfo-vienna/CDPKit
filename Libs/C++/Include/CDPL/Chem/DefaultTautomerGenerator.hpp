@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::DefaultTautomerGenerator.
+ * \brief Definition of class CDPL::Chem::DefaultTautomerGenerator.
  */
 
 #ifndef CDPL_CHEM_DEFAULTTAUTOMERGENERATOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Brush.
+ * \brief Definition of class CDPL::Vis::Brush.
  */
 
 #ifndef CDPL_VIS_BRUSH_HPP

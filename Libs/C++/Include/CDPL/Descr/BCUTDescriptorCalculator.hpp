@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::BCUTDescriptorCalculator.
+ * \brief Definition of class CDPL::Descr::BCUTDescriptorCalculator.
  */
 
 #ifndef CDPL_DESCR_BCUTDESCRIPTORCALCULATOR_HPP

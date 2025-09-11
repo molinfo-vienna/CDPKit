@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Shape3D.
+ * \brief Definition of class CDPL::Vis::Shape3D.
  */
 
 #ifndef CDPL_VIS_SHAPE3D_HPP

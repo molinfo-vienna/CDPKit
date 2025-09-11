@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::CFLMoleculeReader.
+ * \brief Definition of class CDPL::ConfGen::CFLMoleculeReader.
  */
 
 #ifndef CDPL_CONFGEN_CFLMOLECULEREADER_HPP

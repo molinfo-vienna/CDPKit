@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BondReactionCenterStatusMatchExpression.
+ * \brief Definition of class CDPL::Chem::BondReactionCenterStatusMatchExpression.
  */
 
 #ifndef CDPL_CHEM_BONDREACTIONCENTERSTATUSMATCHEXPRESSION_HPP

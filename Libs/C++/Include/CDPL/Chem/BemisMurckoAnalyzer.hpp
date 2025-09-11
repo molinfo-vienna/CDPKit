@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BemisMurckoAnalyzer.
+ * \brief Definition of class CDPL::Chem::BemisMurckoAnalyzer.
  */
 
 #ifndef CDPL_CHEM_BEMISMURCKOANALYZER_HPP

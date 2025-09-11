@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::InteractionPharmacophoreGenerator.
+ * \brief Definition of class CDPL::Pharm::InteractionPharmacophoreGenerator.
  */
 
 #ifndef CDPL_PHARM_INTERACTIONPHARMACOPHOREGENERATOR_HPP

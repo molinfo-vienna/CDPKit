@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::CairoPointer.
+ * \brief Definition of class CDPL::Vis::CairoPointer.
  */
 
 #ifndef CDPL_VIS_CAIROPOINTER_HPP

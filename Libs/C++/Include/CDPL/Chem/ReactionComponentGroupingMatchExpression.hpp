@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ReactionComponentGroupingMatchExpression.
+ * \brief Definition of class CDPL::Chem::ReactionComponentGroupingMatchExpression.
  */
 
 #ifndef CDPL_CHEM_REACTIONCOMPONENTGROUPINGMATCHEXPRESSION_HPP

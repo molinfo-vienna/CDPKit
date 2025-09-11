@@ -25,7 +25,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::CircularFingerprintGenerator.
+ * \brief Definition of class CDPL::Descr::CircularFingerprintGenerator.
  */
 
 #ifndef CDPL_DESCR_CIRCULARFINGERPRINTGENERATOR_HPP

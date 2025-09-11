@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::MaxCommonAtomSubstructureSearch.
+ * \brief Definition of class CDPL::Chem::MaxCommonAtomSubstructureSearch.
  */
 
 #ifndef CDPL_CHEM_MAXCOMMONATOMSUBSTRUCTURESEARCH_HPP

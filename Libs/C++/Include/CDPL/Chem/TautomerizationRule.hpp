@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::TautomerizationRule.
+ * \brief Definition of class CDPL::Chem::TautomerizationRule.
  */
 
 #ifndef CDPL_CHEM_TAUTOMERIZATIONRULE_HPP

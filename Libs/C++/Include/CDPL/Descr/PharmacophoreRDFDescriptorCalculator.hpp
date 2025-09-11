@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::PharmacophoreRDFDescriptorCalculator.
+ * \brief Definition of class CDPL::Descr::PharmacophoreRDFDescriptorCalculator.
  */
 
 #ifndef CDPL_DESCR_PHARMACOPHORERDFDESCRIPTORCALCULATOR_HPP

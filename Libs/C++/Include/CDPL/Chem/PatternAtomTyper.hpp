@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PatternAtomTyper.
+ * \brief Definition of class CDPL::Chem::PatternAtomTyper.
  */
 
 #ifndef CDPL_CHEM_PATTERNATOMTYPER_HPP

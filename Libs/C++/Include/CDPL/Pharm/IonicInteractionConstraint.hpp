@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::IonicInteractionConstraint.
+ * \brief Definition of class CDPL::Pharm::IonicInteractionConstraint.
  */
 
 #ifndef CDPL_PHARM_IONICINTERACTIONCONSTRAINT_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PharmacophoreFitScreeningScore.
+ * \brief Definition of class CDPL::Pharm::PharmacophoreFitScreeningScore.
  */
 
 #ifndef CDPL_PHARM_PHARMACOPHOREFITSCREENINGSCORE_HPP

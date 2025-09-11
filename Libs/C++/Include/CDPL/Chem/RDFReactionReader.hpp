@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RDFReactionReader.
+ * \brief Definition of class CDPL::Chem::RDFReactionReader.
  */
 
 #ifndef CDPL_CHEM_RDFREACTIONREADER_HPP

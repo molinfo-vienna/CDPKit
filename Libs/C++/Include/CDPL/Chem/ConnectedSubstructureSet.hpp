@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::ConnectedSubstructureSet.
+ * \brief Definition of class CDPL::Chem::ConnectedSubstructureSet.
  */
 
 #ifndef CDPL_CHEM_CONNECTEDSUBSTRUCTURESET_HPP

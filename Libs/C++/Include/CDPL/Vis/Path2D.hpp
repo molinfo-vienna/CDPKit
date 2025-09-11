@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Path2D.
+ * \brief Definition of class CDPL::Vis::Path2D.
  */
 
 #ifndef CDPL_VIS_PATH2D_HPP

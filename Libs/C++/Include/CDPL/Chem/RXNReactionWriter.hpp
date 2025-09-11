@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RXNReactionWriter.
+ * \brief Definition of class CDPL::Chem::RXNReactionWriter.
  */
 
 #ifndef CDPL_CHEM_RXNREACTIONWRITER_HPP

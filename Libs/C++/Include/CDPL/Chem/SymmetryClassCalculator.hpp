@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SymmetryClassCalculator.
+ * \brief Definition of class CDPL::Chem::SymmetryClassCalculator.
  */
 
 #ifndef CDPL_CHEM_SYMMETRYCLASSCALCULATOR_HPP

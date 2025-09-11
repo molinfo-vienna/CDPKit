@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Hydrogen3DCoordinatesCalculator.
+ * \brief Definition of class CDPL::Chem::Hydrogen3DCoordinatesCalculator.
  */
 
 #ifndef CDPL_CHEM_HYDROGEN3DCOORDINATESCALCULATOR_HPP

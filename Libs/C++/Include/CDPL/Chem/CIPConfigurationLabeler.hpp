@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPConfigurationLabeler.
+ * \brief Definition of class CDPL::Chem::CIPConfigurationLabeler.
  */
 
 #ifndef CDPL_CHEM_CIPCONFIGURATIONLABELER_HPP

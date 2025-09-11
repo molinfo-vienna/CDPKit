@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::RMSDConformerSelector.
+ * \brief Definition of class CDPL::ConfGen::RMSDConformerSelector.
  */
 
 #ifndef CDPL_CONFGEN_RMSDCONFORMERSELECTOR_HPP

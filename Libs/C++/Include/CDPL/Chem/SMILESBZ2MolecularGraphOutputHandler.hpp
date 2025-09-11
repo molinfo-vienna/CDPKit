@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESBZ2MolecularGraphOutputHandler.
+ * \brief Declaration of type CDPL::Chem::SMILESBZ2MolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_CHEM_SMILESBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

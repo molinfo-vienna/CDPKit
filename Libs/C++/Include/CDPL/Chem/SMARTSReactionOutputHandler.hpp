@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMARTSReactionOutputHandler.
+ * \brief Declaration of type CDPL::Chem::SMARTSReactionOutputHandler.
  */
 
 #ifndef CDPL_CHEM_SMARTSREACTIONOUTPUTHANDLER_HPP

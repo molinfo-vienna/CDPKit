@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::LineSegmentListPrimitive2D.
+ * \brief Definition of class CDPL::Vis::LineSegmentListPrimitive2D.
  */
 
 #ifndef CDPL_VIS_LINESEGMENTLISTPRIMITIVE2D_HPP

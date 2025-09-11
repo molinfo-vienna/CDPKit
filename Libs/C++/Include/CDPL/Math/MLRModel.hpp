@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Math::MLRModel.
+ * \brief Definition of class CDPL::Math::MLRModel.
  */
 
 #ifndef CDPL_MATH_MLRMODEL_HPP

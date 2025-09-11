@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::MolecularGraph.
+ * \brief Definition of class CDPL::Chem::MolecularGraph.
  */
 
 #ifndef CDPL_CHEM_MOLECULARGRAPH_HPP

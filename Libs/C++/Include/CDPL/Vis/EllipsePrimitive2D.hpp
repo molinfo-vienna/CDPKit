@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::EllipsePrimitive2D.
+ * \brief Definition of class CDPL::Vis::EllipsePrimitive2D.
  */
 
 #ifndef CDPL_VIS_ELLIPSEPRIMITIVE2D_HPP

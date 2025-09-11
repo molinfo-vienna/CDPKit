@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Reaction.
+ * \brief Definition of class CDPL::Chem::Reaction.
  */
 
 #ifndef CDPL_CHEM_REACTION_HPP

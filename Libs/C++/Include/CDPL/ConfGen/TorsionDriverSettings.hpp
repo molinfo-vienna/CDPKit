@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::TorsionDriverSettings.
+ * \brief Definition of class CDPL::ConfGen::TorsionDriverSettings.
  */
 
 #ifndef CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP

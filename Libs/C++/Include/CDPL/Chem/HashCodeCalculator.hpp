@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::HashCodeCalculator.
+ * \brief Definition of class CDPL::Chem::HashCodeCalculator.
  */
 
 #ifndef CDPL_CHEM_HASHCODECALCULATOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Grid::CDFBZ2DRegularGridSetOutputHandler.
+ * \brief Declaration of type CDPL::Grid::CDFBZ2DRegularGridSetOutputHandler.
  */
 
 #ifndef CDPL_GRID_CDFBZ2DREGULARGRIDSETOUTPUTHANDLER_HPP

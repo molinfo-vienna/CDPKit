@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::DefaultInteractionAnalyzer.
+ * \brief Definition of class CDPL::Pharm::DefaultInteractionAnalyzer.
  */
 
 #ifndef CDPL_PHARM_DEFAULTINTERACTIONANALYZER_HPP

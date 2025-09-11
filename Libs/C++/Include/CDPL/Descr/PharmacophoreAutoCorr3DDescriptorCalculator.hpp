@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator.
+ * \brief Definition of class CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator.
  */
 
 #ifndef CDPL_DESCR_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP

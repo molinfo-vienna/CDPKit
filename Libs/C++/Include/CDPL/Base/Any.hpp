@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::Any.
+ * \brief Definition of class CDPL::Base::Any.
  */
 
 #ifndef CDPL_BASE_ANY_HPP

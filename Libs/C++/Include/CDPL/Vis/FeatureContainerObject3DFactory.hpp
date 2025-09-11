@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::FeatureContainerObject3DFactory.
+ * \brief Definition of class CDPL::Vis::FeatureContainerObject3DFactory.
  */
 
 #ifndef CDPL_VIS_FEATURECONTAINEROBJECT3DFACTORY_HPP

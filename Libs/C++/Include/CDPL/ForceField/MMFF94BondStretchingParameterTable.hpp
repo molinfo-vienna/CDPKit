@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94BondStretchingParameterTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94BondStretchingParameterTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGPARAMETERTABLE_HPP

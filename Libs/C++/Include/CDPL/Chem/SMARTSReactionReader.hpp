@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMARTSReactionReader.
+ * \brief Definition of class CDPL::Chem::SMARTSReactionReader.
  */
 
 #ifndef CDPL_CHEM_SMARTSREACTIONREADER_HPP

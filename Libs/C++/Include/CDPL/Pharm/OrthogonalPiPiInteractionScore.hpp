@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::OrthogonalPiPiInteractionScore.
+ * \brief Definition of class CDPL::Pharm::OrthogonalPiPiInteractionScore.
  */
 
 #ifndef CDPL_PHARM_ORTHOGONALPIPIINTERACTIONSCORE_HPP

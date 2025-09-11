@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureSet.
+ * \brief Definition of class CDPL::Pharm::FeatureSet.
  */
 
 #ifndef CDPL_PHARM_FEATURESET_HPP

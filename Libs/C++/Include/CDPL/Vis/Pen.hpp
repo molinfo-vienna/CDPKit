@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Pen.
+ * \brief Definition of class CDPL::Vis::Pen.
  */
 
 #ifndef CDPL_VIS_PEN_HPP

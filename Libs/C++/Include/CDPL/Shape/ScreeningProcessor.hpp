@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::ScreeningProcessor.
+ * \brief Definition of class CDPL::Shape::ScreeningProcessor.
  */
 
 #ifndef CDPL_SHAPE_SCREENINGPROCESSOR_HPP

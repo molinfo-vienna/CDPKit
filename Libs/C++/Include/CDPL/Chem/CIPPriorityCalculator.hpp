@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CIPPriorityCalculator.
+ * \brief Definition of class CDPL::Chem::CIPPriorityCalculator.
  */
 
 #ifndef CDPL_CHEM_CIPPRIORITYCALCULATOR_HPP

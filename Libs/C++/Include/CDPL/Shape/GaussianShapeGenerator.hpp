@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::GaussianShapeGenerator.
+ * \brief Definition of class CDPL::Shape::GaussianShapeGenerator.
  */
 
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEGENERATOR_HPP

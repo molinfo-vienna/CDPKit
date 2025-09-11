@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::Reactor.
+ * \brief Definition of class CDPL::Chem::Reactor.
  */
 
 #ifndef CDPL_CHEM_REACTOR_HPP

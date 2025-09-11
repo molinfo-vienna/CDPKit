@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureContainer.
+ * \brief Definition of class CDPL::Pharm::FeatureContainer.
  */
 
 #ifndef CDPL_PHARM_FEATURECONTAINER_HPP

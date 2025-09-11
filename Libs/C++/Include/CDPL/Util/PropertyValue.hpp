@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::PropertyValue.
+ * \brief Definition of class CDPL::Util::PropertyValue.
  */
 
 #ifndef CDPL_UTIL_PROPERTYVALUE_HPP

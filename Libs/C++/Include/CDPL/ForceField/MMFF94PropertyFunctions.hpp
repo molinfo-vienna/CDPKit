@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of generic wrapper classes for storing user-defined functions
+ * \brief Type declaration of generic wrapper classes for storing user-defined functions
  *        for the retrieval of MMFF94 related properties.
  */
 

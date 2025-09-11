@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CationPiInteractionScore.
+ * \brief Definition of class CDPL::Pharm::CationPiInteractionScore.
  */
 
 #ifndef CDPL_PHARM_CATIONPIINTERACTIONSCORE_HPP

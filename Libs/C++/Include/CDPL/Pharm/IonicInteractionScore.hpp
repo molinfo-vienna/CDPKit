@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::IonicInteractionScore.
+ * \brief Definition of class CDPL::Pharm::IonicInteractionScore.
  */
 
 #ifndef CDPL_PHARM_IONICINTERACTIONSCORE_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::BondConfigurationMatchExpression.
+ * \brief Definition of class CDPL::Chem::BondConfigurationMatchExpression.
  */
 
 #ifndef CDPL_CHEM_BONDCONFIGURATIONMATCHEXPRESSION_HPP

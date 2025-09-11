@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::MoleculeRDFDescriptorCalculator.
+ * \brief Definition of class CDPL::Descr::MoleculeRDFDescriptorCalculator.
  */
 
 #ifndef CDPL_DESCR_MOLECULERDFDESCRIPTORCALCULATOR_HPP

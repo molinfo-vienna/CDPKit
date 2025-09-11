@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::FileRemover
+ * \brief Definition of class CDPL::Util::FileRemover
  */
 
 #ifndef CDPL_UTIL_FILEREMOVER_HPP

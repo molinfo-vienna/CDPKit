@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureDistanceConstraint.
+ * \brief Definition of class CDPL::Pharm::FeatureDistanceConstraint.
  */
 
 #ifndef CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::DataIOManager.
+ * \brief Definition of class CDPL::Base::DataIOManager.
  */
 
 #ifndef CDPL_BASE_DATAIOMANAGER_HPP

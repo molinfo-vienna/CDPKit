@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::R3DObject3DWriter.
+ * \brief Definition of class CDPL::Vis::R3DObject3DWriter.
  */
 
 #ifndef CDPL_VIS_R3DOBJECT3DWRITER_HPP

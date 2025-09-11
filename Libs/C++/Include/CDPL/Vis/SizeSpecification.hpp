@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::SizeSpecification.
+ * \brief Definition of class CDPL::Vis::SizeSpecification.
  */
 
 #ifndef CDPL_VIS_SIZESPECIFICATION_HPP

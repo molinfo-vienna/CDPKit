@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::FeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_FEATUREGENERATOR_HPP

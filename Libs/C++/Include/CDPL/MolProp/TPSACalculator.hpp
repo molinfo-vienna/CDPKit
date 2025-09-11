@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::TPSACalculator.
+ * \brief Definition of class CDPL::MolProp::TPSACalculator.
  */
 
 #ifndef CDPL_MOLPROP_TPSACALCULATOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::MMTFMoleculeInputHandler.
+ * \brief Declaration of type CDPL::Biomol::MMTFMoleculeInputHandler.
  */
 
 #ifndef CDPL_BIOMOL_MMTFMOLECULEINPUTHANDLER_HPP

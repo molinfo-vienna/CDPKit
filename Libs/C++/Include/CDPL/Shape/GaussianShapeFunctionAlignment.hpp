@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::GaussianShapeFunctionAlignment.
+ * \brief Definition of class CDPL::Shape::GaussianShapeFunctionAlignment.
  */
 
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP

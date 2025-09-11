@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::GradientVectorTraits.
+ * \brief Definition of class CDPL::ForceField::GradientVectorTraits.
  */
 
 #ifndef CDPL_FORCEFIELD_GRADIENTVECTORTRAITS_HPP

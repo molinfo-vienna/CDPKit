@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Shape3DVisitor.
+ * \brief Definition of class CDPL::Vis::Shape3DVisitor.
  */
 
 #ifndef CDPL_VIS_SHAPE3DVISITOR_HPP

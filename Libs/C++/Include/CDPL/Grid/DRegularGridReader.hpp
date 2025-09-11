@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Grid::DRegularGridReader.
+ * \brief Declaration of type CDPL::Grid::DRegularGridReader.
  */
 
 #ifndef CDPL_GRID_DREGULARGRIDREADER_HPP

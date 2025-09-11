@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureGeometryMatchFunctor.
+ * \brief Definition of class CDPL::Pharm::FeatureGeometryMatchFunctor.
  */
 
 #ifndef CDPL_PHARM_FEATUREGEOMETRYMATCHFUNCTOR_HPP

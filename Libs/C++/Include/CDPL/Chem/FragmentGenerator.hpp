@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::FragmentGenerator.
+ * \brief Definition of class CDPL::Chem::FragmentGenerator.
  */
 
 #ifndef CDPL_CHEM_FRAGMENTGENERATOR_HPP

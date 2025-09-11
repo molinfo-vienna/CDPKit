@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::GRAILDescriptorCalculator.
+ * \brief Definition of class CDPL::GRAIL::GRAILDescriptorCalculator.
  */
 
 #ifndef CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP

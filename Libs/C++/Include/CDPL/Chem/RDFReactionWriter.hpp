@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RDFReactionWriter.
+ * \brief Definition of class CDPL::Chem::RDFReactionWriter.
  */
 
 #ifndef CDPL_CHEM_RDFREACTIONWRITER_HPP

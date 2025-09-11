@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PSDPharmacophoreInputHandler.
+ * \brief Definition of class CDPL::Pharm::PSDPharmacophoreInputHandler.
  */
 
 #ifndef CDPL_PHARM_PSDPHARMACOPHOREINPUTHANDLER_HPP

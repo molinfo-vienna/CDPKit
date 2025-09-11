@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94PrimaryToParameterAtomTypeMap.
+ * \brief Definition of class CDPL::ForceField::MMFF94PrimaryToParameterAtomTypeMap.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP

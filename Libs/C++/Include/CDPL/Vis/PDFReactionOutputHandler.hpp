@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PDFReactionOutputHandler.
+ * \brief Declaration of type CDPL::Vis::PDFReactionOutputHandler.
  */
 
 #ifndef CDPL_VIS_PDFREACTIONOUTPUTHANDLER_HPP

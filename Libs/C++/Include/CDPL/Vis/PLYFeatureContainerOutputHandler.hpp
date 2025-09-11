@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PLYFeatureContainerOutputHandler.
+ * \brief Declaration of type CDPL::Vis::PLYFeatureContainerOutputHandler.
  */
 
 #ifndef CDPL_VIS_PLYFEATURECONTAINEROUTPUTHANDLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::SVGMolecularGraphWriter.
+ * \brief Definition of class CDPL::Vis::SVGMolecularGraphWriter.
  */
 
 #ifndef CDPL_VIS_SVGMOLECULARGRAPHWRITER_HPP

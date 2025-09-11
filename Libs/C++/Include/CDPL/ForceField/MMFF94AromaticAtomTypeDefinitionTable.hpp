@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AromaticAtomTypeDefinitionTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94AromaticAtomTypeDefinitionTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP

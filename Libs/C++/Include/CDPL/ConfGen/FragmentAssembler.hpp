@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::FragmentAssembler.
+ * \brief Definition of class CDPL::ConfGen::FragmentAssembler.
  */
 
 #ifndef CDPL_CONFGEN_FRAGMENTASSEMBLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RDFBZ2ReactionInputHandler.
+ * \brief Declaration of type CDPL::Chem::RDFBZ2ReactionInputHandler.
  */
 
 #ifndef CDPL_CHEM_RDFBZ2REACTIONINPUTHANDLER_HPP

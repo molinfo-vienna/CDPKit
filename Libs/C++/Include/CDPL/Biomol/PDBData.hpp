@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Biomol::PDBData.
+ * \brief Definition of class CDPL::Biomol::PDBData.
  */
 
 #ifndef CDPL_BIOMOL_PDBDATA_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Type definition of generic wrapper classes for storing user-defined interaction
+ * \brief Type declaration of generic wrapper classes for storing user-defined interaction
  *        filtering functions.
  */
 

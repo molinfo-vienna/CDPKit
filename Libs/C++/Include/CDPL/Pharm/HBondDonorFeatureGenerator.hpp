@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::HBondDonorFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::HBondDonorFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_HBONDDONORFEATUREGENERATOR_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CommonConnectedSubstructureSearch.
+ * \brief Definition of class CDPL::Chem::CommonConnectedSubstructureSearch.
  */
 
 #ifndef CDPL_CHEM_COMMONCONNECTEDSUBSTRUCTURESEARCH_HPP

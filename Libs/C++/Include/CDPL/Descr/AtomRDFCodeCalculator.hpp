@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::AtomRDFCodeCalculator.
+ * \brief Definition of class CDPL::Descr::AtomRDFCodeCalculator.
  */
 
 #ifndef CDPL_DESCR_ATOMRDFCODECALCULATOR_HPP

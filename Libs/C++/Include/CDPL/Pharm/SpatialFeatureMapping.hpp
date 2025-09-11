@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::SpatialFeatureMapping.
+ * \brief Definition of class CDPL::Pharm::SpatialFeatureMapping.
  */
 
 #ifndef CDPL_PHARM_SPATIALFEATUREMAPPING_HPP

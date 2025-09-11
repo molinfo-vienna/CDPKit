@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Object3D.
+ * \brief Definition of class CDPL::Vis::Object3D.
  */
 
 #ifndef CDPL_VIS_OBJECT3D_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the type CDPL::Util::BitSet.
+ * \brief Declaration of type CDPL::Util::BitSet.
  */
 
 #ifndef CDPL_UTIL_BITSET_HPP

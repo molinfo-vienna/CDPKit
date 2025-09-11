@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::ObjectPool.
+ * \brief Definition of class CDPL::Util::ObjectPool.
  */
 
 #ifndef CDPL_UTIL_OBJECTPOOL_HPP

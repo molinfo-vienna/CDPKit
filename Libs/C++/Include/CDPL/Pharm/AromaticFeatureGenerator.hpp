@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::AromaticFeatureGenerator.
+ * \brief Definition of class CDPL::Pharm::AromaticFeatureGenerator.
  */
 
 #ifndef CDPL_PHARM_AROMATICFEATUREGENERATOR_HPP

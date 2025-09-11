@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AromaticRingSet.
+ * \brief Definition of class CDPL::Chem::AromaticRingSet.
  */
 
 #ifndef CDPL_CHEM_AROMATICRINGSET_HPP

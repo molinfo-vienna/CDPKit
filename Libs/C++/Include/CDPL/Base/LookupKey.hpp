@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::LookupKey.
+ * \brief Definition of class CDPL::Base::LookupKey.
  */
 
 #ifndef CDPL_BASE_VALUEKEY_HPP

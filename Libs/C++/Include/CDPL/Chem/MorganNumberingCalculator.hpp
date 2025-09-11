@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::MorganNumberingCalculator.
+ * \brief Definition of class CDPL::Chem::MorganNumberingCalculator.
  */
 
 #ifndef CDPL_CHEM_MORGANNUMBERINGCALCULATOR_HPP

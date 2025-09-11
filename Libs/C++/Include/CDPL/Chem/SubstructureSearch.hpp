@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SubstructureSearch.
+ * \brief Definition of class CDPL::Chem::SubstructureSearch.
  */
 
 #ifndef CDPL_CHEM_SUBSTRUCTURESEARCH_HPP

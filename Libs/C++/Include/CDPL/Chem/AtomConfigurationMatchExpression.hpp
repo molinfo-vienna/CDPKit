@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomConfigurationMatchExpression.
+ * \brief Definition of class CDPL::Chem::AtomConfigurationMatchExpression.
  */
 
 #ifndef CDPL_CHEM_ATOMCONFIGURATIONMATCHEXPRESSION_HPP

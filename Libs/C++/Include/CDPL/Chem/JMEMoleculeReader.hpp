@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::JMEMoleculeReader.
+ * \brief Definition of class CDPL::Chem::JMEMoleculeReader.
  */
 
 #ifndef CDPL_CHEM_JMEMOLECULEREADER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::R3DFeatureContainerOutputHandler.
+ * \brief Declaration of type CDPL::Vis::R3DFeatureContainerOutputHandler.
  */
 
 #ifndef CDPL_VIS_R3DFEATURECONTAINEROUTPUTHANDLER_HPP

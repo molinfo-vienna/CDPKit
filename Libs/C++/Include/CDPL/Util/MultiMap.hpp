@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::MultiMap.
+ * \brief Definition of class CDPL::Util::MultiMap.
  */
 
 #ifndef CDPL_UTIL_MULTIMAP_HPP

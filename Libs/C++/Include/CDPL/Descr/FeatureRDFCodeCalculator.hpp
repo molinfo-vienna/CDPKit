@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Descr::FeatureRDFCodeCalculator.
+ * \brief Definition of class CDPL::Descr::FeatureRDFCodeCalculator.
  */
 
 #ifndef CDPL_DESCR_FEATURERDFCODECALCULATOR_HPP

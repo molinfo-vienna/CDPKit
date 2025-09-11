@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::DataIOBase.
+ * \brief Definition of class CDPL::Base::DataIOBase.
  */
 
 #ifndef CDPL_BASE_DATAIOBASE_HPP

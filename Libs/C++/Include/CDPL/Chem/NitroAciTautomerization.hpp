@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::NitroAciTautomerization.
+ * \brief Definition of class CDPL::Chem::NitroAciTautomerization.
  */
 
 #ifndef CDPL_CHEM_NITROACITAUTOMERIZATION_HPP

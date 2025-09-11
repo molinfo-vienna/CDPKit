@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::FileDataWriter.
+ * \brief Definition of class CDPL::Util::FileDataWriter.
  */
 
 #ifndef CDPL_UTIL_FILEDATAWRITER_HPP

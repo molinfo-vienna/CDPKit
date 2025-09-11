@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PolylinePrimitive2D.
+ * \brief Definition of class CDPL::Vis::PolylinePrimitive2D.
  */
 
 #ifndef CDPL_VIS_POLYLINEPRIMITIVE2D_HPP

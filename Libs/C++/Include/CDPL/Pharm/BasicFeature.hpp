@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::BasicFeature.
+ * \brief Definition of class CDPL::Pharm::BasicFeature.
  */
 
 #ifndef CDPL_PHARM_BASICFEATURE_HPP

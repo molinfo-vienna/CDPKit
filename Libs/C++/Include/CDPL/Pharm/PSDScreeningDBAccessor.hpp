@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PSDScreeningDBAccessor.
+ * \brief Definition of class CDPL::Pharm::PSDScreeningDBAccessor.
  */
 
 #ifndef CDPL_PHARM_PSDSCREENINGDBACCESSOR_HPP

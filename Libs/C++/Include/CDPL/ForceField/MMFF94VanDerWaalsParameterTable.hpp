@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94VanDerWaalsParameterTable.
+ * \brief Definition of class CDPL::ForceField::MMFF94VanDerWaalsParameterTable.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSPARAMETERTABLE_HPP

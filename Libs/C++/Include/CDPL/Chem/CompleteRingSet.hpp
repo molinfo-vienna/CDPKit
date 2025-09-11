@@ -26,7 +26,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CompleteRingSet.
+ * \brief Definition of class CDPL::Chem::CompleteRingSet.
  */
 
 #ifndef CDPL_CHEM_COMPLETERINGSET_HPP

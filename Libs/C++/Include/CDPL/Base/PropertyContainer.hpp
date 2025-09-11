@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::PropertyContainer.
+ * \brief Definition of class CDPL::Base::PropertyContainer.
  */
 
 #ifndef CDPL_BASE_PROPERTYCONTAINER_HPP

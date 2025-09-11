@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::ScreeningDBCreator.
+ * \brief Definition of class CDPL::Pharm::ScreeningDBCreator.
  */
 
 #ifndef CDPL_PHARM_SCREENINGDBCREATOR_HPP

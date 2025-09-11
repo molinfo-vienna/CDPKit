@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMARTSReactionInputHandler.
+ * \brief Declaration of type CDPL::Chem::SMARTSReactionInputHandler.
  */
 
 #ifndef CDPL_CHEM_SMARTSREACTIONINPUTHANDLER_HPP

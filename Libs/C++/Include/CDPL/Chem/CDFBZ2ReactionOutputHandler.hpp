@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFBZ2ReactionOutputHandler.
+ * \brief Declaration of type CDPL::Chem::CDFBZ2ReactionOutputHandler.
  */
 
 #ifndef CDPL_CHEM_CDFBZ2REACTIONOUTPUTHANDLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PharmacophoreAlignment.
+ * \brief Definition of class CDPL::Pharm::PharmacophoreAlignment.
  */
 
 #ifndef CDPL_PHARM_PHARMACOPHOREALIGNMENT_HPP

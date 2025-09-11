@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94HeavyToHydrogenAtomTypeMap.
+ * \brief Definition of class CDPL::ForceField::MMFF94HeavyToHydrogenAtomTypeMap.
  */
 
 #ifndef CDPL_FORCEFIELD_MMFF94HEAVYTOHYDROGENATOMTYPEMAP_HPP

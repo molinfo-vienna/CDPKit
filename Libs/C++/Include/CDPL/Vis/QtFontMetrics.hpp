@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::QtFontMetrics.
+ * \brief Definition of class CDPL::Vis::QtFontMetrics.
  */
 
 #ifndef CDPL_VIS_QTFONTMETRICS_HPP

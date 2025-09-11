@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AtomBondMapping.
+ * \brief Definition of class CDPL::Chem::AtomBondMapping.
  */
 
 #ifndef CDPL_CHEM_ATOMBONDMAPPING_HPP

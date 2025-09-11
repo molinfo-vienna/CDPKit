@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::PDFMolecularGraphOutputHandler.
+ * \brief Declaration of type CDPL::Vis::PDFMolecularGraphOutputHandler.
  */
 
 #ifndef CDPL_VIS_PDFMOLECULARGRAPHOUTPUTHANDLER_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::SVGReactionWriter.
+ * \brief Definition of class CDPL::Vis::SVGReactionWriter.
  */
 
 #ifndef CDPL_VIS_SVGREACTIONWRITER_HPP

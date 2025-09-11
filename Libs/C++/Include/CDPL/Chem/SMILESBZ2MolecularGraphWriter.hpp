@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::SMILESBZ2MolecularGraphWriter.
+ * \brief Declaration of type CDPL::Chem::SMILESBZ2MolecularGraphWriter.
  */
 
 #ifndef CDPL_CHEM_SMILESBZ2MOLECULARGRAPHWRITER_HPP

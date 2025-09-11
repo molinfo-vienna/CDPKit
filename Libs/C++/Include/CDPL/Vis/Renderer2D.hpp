@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Vis::Renderer2D.
+ * \brief Definition of class CDPL::Vis::Renderer2D.
  */
 
 #ifndef CDPL_VIS_RENDERER2D_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::JMEReactionOutputHandler.
+ * \brief Declaration of type CDPL::Chem::JMEReactionOutputHandler.
  */
 
 #ifndef CDPL_CHEM_JMEREACTIONOUTPUTHANDLER_HPP

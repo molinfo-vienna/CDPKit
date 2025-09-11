@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CMLBZ2MoleculeInputHandler.
+ * \brief Declaration of type CDPL::Chem::CMLBZ2MoleculeInputHandler.
  */
 
 #ifndef CDPL_CHEM_CMLBZ2MOLECULEINPUTHANDLER_HPP
