@@ -71,7 +71,7 @@ namespace CDPL
             extern CDPL_VIS_API const Base::DataFormat SVG;
             
             /**
-             * \brief Provides meta-information about the <em>STL</em> [\ref STLFMT] format.
+             * \brief Provides meta-information about the <em>Stereolithography</em> [\ref STLFMT] format.
              * \since 1.3
              */
             extern CDPL_VIS_API const Base::DataFormat STL;

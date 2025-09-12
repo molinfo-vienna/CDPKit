@@ -1,5 +1,62 @@
 master:
 
+ - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Stereolithography (STL) format
+ - Declaration of new type Vis::PLYFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Polygon File Format (PLY)
+ - Declaration of new type Vis::VRMLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Virtual Reality Modeling Language 97 (VRML) format
+ - Declaration of new type Vis::R3DFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Raster3D (R3D) format
+ - New class template Vis::FeatureContainerObject3DWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances
+   in a supported output format (currently PLY, STL, R3D and VRML)
+ - Declaration of new type Vis::STLFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Stereolithography (STL) format
+ - Declaration of new type Vis::PLYFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Polygon File Format (PLY)
+ - Declaration of new type Vis::VRMLFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Virtual Reality Modeling Language 97 (VRML) format
+ - Declaration of new type Vis::R3DFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+   Raster3D (R3D) format
+ - New class Vis::STLObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the Stereolithography (STL) format
+ - New class Vis::VRMLObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the
+   Virtual Reality Modeling Language 97 (VRML) format
+ - New class Vis::PLYObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the Polygon File Format (PLY)
+ - New class Vis::R3DObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the Raster3D (R3D) format
+ - Declaration of new type Vis::STLObject3DOutputHandler mediating the output of 3D scene data described by Vis::Object3D instances in the
+   Stereolithography (STL) format
+ - Declaration of new type Vis::PLYObject3DOutputHandler mediating the output of 3D scene data described by Vis::Object3D instances in the
+   Polygon File Format (PLY)
+ - Declaration of new type Vis::VRMLObject3DOutputHandler mediating the output of 3D scene data described by Vis::Object3D instances in the
+   Virtual Reality Modeling Language 97 (VRML) format
+ - Declaration of new type Vis::R3DObject3DOutputHandler mediating the output of 3D scene data described by Vis::Object3D instances in the
+   Raster3D (R3D) format
+ - Declaration of new type Vis::Object3DWriter for the output of 3D scene data described by Vis::Object3D instances in a supported output format
+   (currently PLY, STL, R3D and VRML)
+ - Declaration of new type Vis::Object3DReader for reading 3D model data stored in a supported input format (none, currently) into a given
+   Vis::Object3D instance
+ - New control-parameter default values Vis::ControlParameterDefault::FEATURE_COLOR_TABLE and Vis::ControlParameterDefault::DEFAULT_MATERIAL
+ - New control-parameters Vis::ControlParameter::FEATURE_COLOR_TABLE and Vis::ControlParameter::DEFAULT_MATERIAL plus associated functions
+ - New data format descriptors Vis::DataFormat::STL, Vis::DataFormat::PLY, Vis::DataFormat::VRML and Vis::DataFormat::R3D
+ - New class Vis::FeatureContainerObject3DFactory implementing the creation of a visual 3D representation of Pharm::FeatureContainer instances
+ - New class Vis::Object3DFactory defining the common interface of classes which implement the creation of 3D representations (as Vis::Object3D instances)
+   of different types of builtin data structures (e.g. Pharm::FeatureContainer, Chem::MolecularGraph, ...)
+ - New class Vis::DefaultFeatureColorTable specifying default colors for builtin pharmacophoric feature types
+ - New utility functions Vis::subdivideSpherical(), Vis::removeVertexDuplicates(), Vis::calcVertexFromFaceNormals(),
+   Vis::translate(), Vis::scale(), Vis::rotateX(), Vis::rotateY(), Vis::rotateZ() Vis::transform() for the manipulation
+   of Vis::TriangleMesh3D instances
+ - New class Vis::IcosahedronMesh3D implementing the generation of icosahedron vertices and faces
+ - New class Vis::RightFrustumMesh3D implementing the creation of triangle meshes modeling various shapes in the right frustum category
+   (arbitary (truncated) pyramids)
+ - New class Vis::TorusMesh3D implementing the creation of triangle meshes modeling the shape of a torus
+ - New class Vis::TriangleMesh3D used to store the basic data (vertices, faces, vertex normals) of triangle meshes
+ - New property default values Vis::Object3DPropertyDefault::SHAPE and Vis::Object3DPropertyDefault::TRANSFORMATION_MATRIX
+ - New properties Vis::Object3DProperty::SHAPE, Vis::Object3DProperty::TRANSFORMATION_MATRIX and Vis::Object3DProperty::MATERIAL plus associated functions
+ - New class Vis::Shape3DVisitor for the type-safe processing of Vis::Shape3D subclass instances
+ - New class Vis::Shape3D serving as base class of data structures implementing the description of particular types of 3D shape geometries
+ - New class Vis::Material for the specification of ambient, diffuse, specular color and translucency properties of a 3D shapes's material
+ - New class Vis::Object3D which allows to store the description of the geometry of an arbitrary 3D shape together with a transformation matrix and material properties.
+   Moreover, Vis::Object3D instances may be used to build a simple 3D scene graph by connecting Vis::Object3D instances in a parent -> child object(s) manner
  - Removed namespace Vis::AtomColorTable
  - New class Vis::DefaultAtomColorTable replacing namespace member Vis::AtomColorTable::ELEMENT_COLORS_2D
  - New control-parameter Chem::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
