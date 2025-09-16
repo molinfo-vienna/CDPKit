@@ -36,11 +36,12 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphWriter.hpp"
-#include "CDPL/Shape/ScreeningSettings.hpp"
-#include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
+
+#include "ScreeningResult.hpp"
+#include "ScreeningProcessor.hpp"
 
 
 namespace SimSearch
@@ -53,7 +54,6 @@ namespace SimSearch
         SimSearchImpl();
 
       private:
-        typedef CDPL::Shape::ScreeningSettings                  ScreeningSettings;
         typedef CDPL::Chem::Molecule::SharedPointer             MoleculePtr;
         typedef CDPL::Chem::MolecularGraphWriter::SharedPointer MoleculeWriterPtr;
 
@@ -62,23 +62,23 @@ namespace SimSearch
         struct HitMoleculeData
         {
 
-            HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res):
-                dbMolIndex(db_mol_idx), dbMolName(db_mol_name), almntResult(res), dbMolecule() {}
+            HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name, const ScreeningResult& res):
+                dbMolIndex(db_mol_idx), dbMolName(db_mol_name), screeningResult(res), dbMolecule() {}
 
             HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name,
-                            const CDPL::Shape::AlignmentResult& res, const MoleculePtr& db_mol):
+                            const ScreeningResult& res, const MoleculePtr& db_mol):
                 dbMolIndex(db_mol_idx),
-                dbMolName(db_mol_name), almntResult(res), dbMolecule(db_mol) {}
+                dbMolName(db_mol_name), screeningResult(res), dbMolecule(db_mol) {}
 
             bool operator<(const HitMoleculeData& rhs) const
             {
-                return (almntResult.getScore() > rhs.almntResult.getScore());
+                return (screeningResult.getScore() > rhs.screeningResult.getScore());
             }
 
-            std::size_t                  dbMolIndex;
-            std::string                  dbMolName;
-            CDPL::Shape::AlignmentResult almntResult;
-            MoleculePtr                  dbMolecule;
+            std::size_t     dbMolIndex;
+            std::string     dbMolName;
+            ScreeningResult screeningResult;
+            MoleculePtr     dbMolecule;
         };
 
         const char* getProgName() const;
@@ -86,15 +86,9 @@ namespace SimSearch
 
         void addOptionLongDescriptions();
 
-        void setNumRandomStarts(std::size_t num_starts);
-
-        void setColorFeatureType(const std::string& type);
         void setScoringFunction(const std::string& func);
         void setScreeningMode(const std::string& mode);
 
-        void enableAllCarbonMode(bool all_c);
-        void performOverlayOptimization(bool opt);
-        void performThoroughOverlayOptimization(bool thorough);
         void performSingleConformerSearch(bool single_conf);
 
         void setScoreCutoff(double cutoff);
@@ -103,7 +97,6 @@ namespace SimSearch
         void setDatabaseFormat(const std::string& file_ext);
         void setHitOutputFormat(const std::string& file_ext);
 
-        void setAlignmentMode();
         void checkInputFiles() const;
         void checkOutputFileOptions() const;
 
@@ -119,13 +112,11 @@ namespace SimSearch
         void processMultiThreaded();
 
         bool processHit(std::size_t db_mol_idx, const std::string& db_mol_name,
-                        const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res);
+                        const MoleculePtr& db_mol, const ScreeningResult& res);
         bool doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name,
-                          const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res);
+                          const MoleculePtr& db_mol, const ScreeningResult& res);
 
         void readQueryMolecules();
-
-        void setupMolecule(CDPL::Chem::Molecule& mol) const;
 
         void outputHitLists();
         void outputReportFiles();
@@ -149,11 +140,7 @@ namespace SimSearch
 
         void printOptionSummary();
 
-        std::string screeningModeToString(ScreeningSettings::ScreeningMode mode) const;
-        ScreeningSettings::ScreeningMode stringToScreeningMode(const std::string& mode_str) const;
-
-        std::string colorFeatureTypeToString(ScreeningSettings::ColorFeatureType type) const;
-        ScreeningSettings::ColorFeatureType stringToColorFeatureType(const std::string& type_str) const;
+        std::string screeningModeToString() const;
 
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
@@ -169,47 +156,43 @@ namespace SimSearch
         typedef std::vector<MoleculeWriterPtr>            MoleculeWriterArray;
         typedef CDPL::Internal::Timer                     Timer;
 
-        std::string         queryFile;
-        std::string         databaseFile;
-        std::string         hitOutputFile;
-        std::string         reportFile;
-        std::string         scoringFunc;
-        std::size_t         numThreads;
-        ScreeningSettings   settings;
-        bool                scoringOnly;
-        bool                mergeHitLists;
-        bool                splitOutFiles;
-        bool                outputQuery;
-        bool                scoreSDTags;
-        bool                queryNameSDTags;
-        bool                queryMolIdxSDTags;
-        bool                queryConfIdxSDTags;
-        bool                dbMolIdxSDTags;
-        bool                dbConfIdxSDTags;
-        bool                colorCenterStarts;
-        bool                atomCenterStarts;
-        bool                shapeCenterStarts;
-        std::string         hitNamePattern;
-        std::size_t         numBestHits;
-        std::size_t         maxNumHits;
-        double              shapeScoreCutoff;
-        std::string         queryFormat;
-        MoleculeReaderPtr   queryReader;
-        std::string         databaseFormat;
-        MoleculeReaderPtr   databaseReader;
-        std::string         hitOutputFormat;
-        QueryMoleculeList   queryMolecules;
-        HitListArray        hitLists;
-        OStreamArray        reportOStreams;
-        MoleculeWriterArray hitMolWriters;
-        Timer               timer;
-        std::size_t         numProcMols;
-        std::size_t         numHits;
-        std::size_t         numSavedHits;
-        std::mutex          mutex;
-        std::mutex          molReadMutex;
-        std::mutex          hitProcMutex;
-        std::string         errorMessage;
+        std::string                       queryFile;
+        std::string                       databaseFile;
+        std::string                       hitOutputFile;
+        std::string                       reportFile;
+        std::string                       scoringFunc;
+        std::size_t                       numThreads;
+        bool                              mergeHitLists;
+        bool                              splitOutFiles;
+        bool                              outputQuery;
+        bool                              scoreSDTags;
+        bool                              queryNameSDTags;
+        bool                              queryMolIdxSDTags;
+        bool                              queryConfIdxSDTags;
+        bool                              dbMolIdxSDTags;
+        bool                              dbConfIdxSDTags;
+        std::string                       hitNamePattern;
+        std::size_t                       numBestHits;
+        std::size_t                       maxNumHits;
+        double                            scoreCutoff;
+        ScreeningProcessor::ScreeningMode screeningMode;
+        std::string                       queryFormat;
+        MoleculeReaderPtr                 queryReader;
+        std::string                       databaseFormat;
+        MoleculeReaderPtr                 databaseReader;
+        std::string                       hitOutputFormat;
+        QueryMoleculeList                 queryMolecules;
+        HitListArray                      hitLists;
+        OStreamArray                      reportOStreams;
+        MoleculeWriterArray               hitMolWriters;
+        Timer                             timer;
+        std::size_t                       numProcMols;
+        std::size_t                       numHits;
+        std::size_t                       numSavedHits;
+        std::mutex                        mutex;
+        std::mutex                        molReadMutex;
+        std::mutex                        hitProcMutex;
+        std::string                       errorMessage;
     };
 } // namespace SimSearch
 

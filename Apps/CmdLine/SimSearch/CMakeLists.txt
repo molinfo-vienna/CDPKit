@@ -42,7 +42,7 @@ configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 target_link_libraries(simsearch cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
-  cdpl-shape-shared Threads::Threads)
+  cdpl-descr-shared Threads::Threads)
 
 install(TARGETS simsearch DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
