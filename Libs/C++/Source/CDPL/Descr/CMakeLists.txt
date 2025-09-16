@@ -67,7 +67,7 @@ set(cdpl-descr_LIB_SRCS
    )
 
 if(NOT PYPI_PACKAGE_BUILD)
-  add_library(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS})
+  add_library(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
   set_target_properties(cdpl-descr-static PROPERTIES 
     OUTPUT_NAME cdpl-descr
@@ -75,7 +75,7 @@ if(NOT PYPI_PACKAGE_BUILD)
     COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK")
 
   target_link_libraries(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static
-    cdpl-math-static cdpl-util-static cdpl-base-static $<TARGET_OBJECTS:cdpl-internal>)
+    cdpl-math-static cdpl-util-static cdpl-base-static)
   target_include_directories(cdpl-descr-static
     PUBLIC
     "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
@@ -85,10 +85,10 @@ if(NOT PYPI_PACKAGE_BUILD)
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 endif(NOT PYPI_PACKAGE_BUILD)
 
-add_library(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS})
+add_library(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 target_link_libraries(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared
-  cdpl-math-shared cdpl-util-shared $<TARGET_OBJECTS:cdpl-internal>)
+  cdpl-math-shared cdpl-util-shared)
 target_include_directories(cdpl-descr-shared
   PUBLIC
   "$<BUILD_INTERFACE:${CDPL_INCLUDE_DIR};${CDPL_CONFIG_HEADER_INCLUDE_DIR}>"
