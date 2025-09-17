@@ -28,7 +28,6 @@
 #include <iomanip>
 #include <thread>
 #include <chrono>
-#include <functional>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -54,34 +53,34 @@ using namespace SimSearch;
 class SimSearchImpl::ScreeningWorker
 {
 
-public:
-    ScreeningWorker(SimSearchImpl* parent): 
-        parent(parent), molecule(new CDPL::Chem::BasicMolecule()), terminate(false) {
-        
-        screeningProc.setHitCallback([this](const CDPL::Chem::MolecularGraph& query_mol, const CDPL::Chem::MolecularGraph& db_mol, const ScreeningResult& res) {
-                                         this->hitCallback(query_mol, db_mol, res);
-                                     });
-
+  public:
+    ScreeningWorker(SimSearchImpl* parent):
+        parent(parent), molecule(new CDPL::Chem::BasicMolecule())
+    {
         for (auto query : parent->queryMolecules)
             screeningProc.addQuery(*query);
     }
 
-    void operator()() {
+    void operator()()
+    {
         using namespace CDPL;
-
-        while (!terminate) {
+        
+        while (true) {
             if (!molecule.unique())
                 molecule.reset(new CDPL::Chem::BasicMolecule());
 
             if (!(dbMolIndex = parent->readNextMolecule(*molecule)))
                 return;
-            
+
             try {
-                if (!screeningProc.process(*molecule))
+                if (!screeningProc.process(*molecule, screeningResult))
                     parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed");
 
-                continue;
+                else if (!parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, screeningResult))
+                    return;
                 
+                continue;
+
             } catch (const std::exception& e) {
                 parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + ": " + e.what());
 
@@ -93,31 +92,22 @@ public:
         }
     }
 
-private:
-    void hitCallback(const CDPL::Chem::MolecularGraph& query_mol, const CDPL::Chem::MolecularGraph& db_mol, const ScreeningResult& res) {
-        if (terminate)
-            return;
-
-        terminate = !parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, res);
-    }
-
-    SimSearchImpl*     parent;
-    ScreeningProcessor screeningProc;
-    MoleculePtr        molecule;
-    std::size_t        dbMolIndex;
-    bool               terminate;
+  private:
+    SimSearchImpl*             parent;
+    ScreeningProcessor         screeningProc;
+    ScreeningProcessor::Result screeningResult;
+    MoleculePtr                molecule;
+    std::size_t                dbMolIndex;
 };
 
 
 SimSearchImpl::SimSearchImpl(): 
-    scoringFunc("TANIMOTO"), numThreads(0), mergeHitLists(false), 
+    scoringFunc(nullptr), numThreads(0), singleConfSearch(false), mergeHitLists(false), 
     splitOutFiles(true), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
     queryMolIdxSDTags(false), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true),
-    hitNamePattern("@D@_@c@_@Q@_@C@"), numBestHits(1000), maxNumHits(0), scoreCutoff(0.0), 
+    hitNamePattern("@D@_@c@_@Q@_@C@"), numBestHits(1000), maxNumHits(0), scoreCutoff(-1.0), 
     screeningMode(ScreeningProcessor::BEST_MATCH_PER_QUERY), numProcMols(0), numHits(0), numSavedHits(0)
 {
-    using namespace std::placeholders;
-    
     addOption("query,q", "Query molecule file.", 
               value<std::string>(&queryFile)->required());
     addOption("database,d", "Screened database file(s).", 
@@ -133,15 +123,15 @@ SimSearchImpl::SimSearchImpl():
               "(TOTAL_OVERLAP_TANIMOTO, SHAPE_TANIMOTO, COLOR_TANIMOTO, TANIMOTO_COMBO, TOTAL_OVERLAP_TVERSKY, SHAPE_TVERSKY, "
               "COLOR_TVERSKY, TVERSKY_COMBO, QUERY_TOTAL_OVERLAP_TVERSKY, QUERY_SHAPE_TVERSKY, QUERY_COLOR_TVERSKY, "
               "QUERY_TVERSKY_COMBO, DB_TOTAL_OVERLAP_TVERSKY, DB_SHAPE_TVERSKY, DB_COLOR_TVERSKY, DB_TVERSKY_COMBO, "
-              "default: " + scoringFunc + ")",
+              "default: TANIMOTO)",
               value<std::string>()->notifier([this](const std::string& func) { this->setScoringFunction(func); }));
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
               value<std::size_t>(&numBestHits));
     addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the --best-hits option, default: 0 - no limit).",
               value<std::size_t>(&maxNumHits));
-    addOption("cutoff,x", "Score cutoff value which determines whether a database molecule is considered as a hit (default: 0.0 - no cutoff).",
-              value<double>()->notifier([this](double cutoff) { this->setScoreCutoff(cutoff); }));
+    addOption("cutoff,x", "Score cutoff value which determines whether a database molecule is considered as a hit (default: -1.0 - no cutoff).",
+              value<double>(&scoreCutoff));
     addOption("merge-hits,M", "If true, identified hits are merged into a single, combined hit list. "
               "If false, a separate hit list for every query molecule will be maintained (default: false).", 
               value<bool>(&mergeHitLists)->implicit_value(true));
@@ -150,7 +140,7 @@ SimSearchImpl::SimSearchImpl():
     addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit molecule output file (default: true).",
               value<bool>(&outputQuery)->implicit_value(true));
     addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conformer molecules (default: false).",
-              value<bool>()->notifier([this](bool single_conf) { this->performSingleConformerSearch(single_conf); }));
+              value<bool>(&singleConfSearch));
     addOption("score-sd-tags,E", "If true, score values will be appended as SD-block entries of the output hit molecules (default: true).",
               value<bool>(&scoreSDTags)->implicit_value(true));
     addOption("query-name-sd-tags,N", "If true, the query molecule name will be appended to the SD-block of the output hit molecules (default: false).",
@@ -201,8 +191,8 @@ void SimSearchImpl::addOptionLongDescriptions()
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
-    for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append("\n - ").append(*it);
+    for (auto& format : formats)
+        formats_str.append("\n - ").append(format);
 
     addOptionLongDescription("query-format", 
                              "Allows to explicitly specify the format of the query molecule file by providing one of the supported "
@@ -231,8 +221,8 @@ void SimSearchImpl::addOptionLongDescriptions()
 
     CmdLineLib::getSupportedOutputFormats<CDPL::Chem::MolecularGraph>(std::back_inserter(formats));
 
-    for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append("\n - ").append(*it);
+    for (auto& format : formats)
+        formats_str.append("\n - ").append(format);
 
     addOptionLongDescription("output-format", 
                              "Allows to explicitly specify the hit molecule output file format by providing one of the supported "
@@ -247,11 +237,11 @@ void SimSearchImpl::addOptionLongDescriptions()
 
 void SimSearchImpl::setScoringFunction(const std::string& func)
 {
-    namespace po = boost::program_options;
-
-    scoringFunc = func;
-    boost::to_upper(scoringFunc);
 /*
+    scoringFunc = func;
+    
+    boost::to_upper(scoringFunc);
+
     if (scoringFunc == "TOTAL_OVERLAP_TANIMOTO")
         settings.setScoringFunction(TotalOverlapTanimotoScore());
 
@@ -320,16 +310,6 @@ void SimSearchImpl::setScreeningMode(const std::string& mode)
 
     else
         throwValidationError("mode");
-}
-
-void SimSearchImpl::performSingleConformerSearch(bool single_conf)
-{
-    //settings.singleConformerSearch(single_conf);
-}
-
-void SimSearchImpl::setScoreCutoff(double cutoff)
-{
-    //settings.setScoreCutoff(cutoff);
 }
 
 void SimSearchImpl::setQueryFormat(const std::string& file_ext)
@@ -463,10 +443,10 @@ void SimSearchImpl::processMultiThreaded()
     }
 }
 
-bool SimSearchImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
-                                 const MoleculePtr& db_mol, const ScreeningResult& res)
+bool SimSearchImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name,
+                               const MoleculePtr& db_mol, const ScreeningProcessor::Result& res)
 {
-    if (scoreCutoff > 0.0 && res.getScore() < scoreCutoff)
+    if (scoreCutoff >= 0.0 && scoringFunc->compare(res.score, scoreCutoff))
         return true;
 
     if (numThreads > 0) {
@@ -478,31 +458,31 @@ bool SimSearchImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol
     return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
 }
 
-bool SimSearchImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
-                                   const MoleculePtr& db_mol, const ScreeningResult& res)
+bool SimSearchImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name,
+                                 const MoleculePtr& db_mol, const ScreeningProcessor::Result& res)
 {
     if (maxNumHits > 0 && numHits >= maxNumHits)
         return false;
 
     numHits++;
-    
+
     if (numBestHits == 0) {
         HitMoleculeData hit_data(db_mol_idx, db_mol_name, res, db_mol);
 
         if (!hitOutputFile.empty())
-            outputHitMolecule(splitOutFiles ? hitMolWriters[res.getReferenceShapeSetIndex()] : hitMolWriters[0], hit_data);
+            outputHitMolecule(splitOutFiles ? hitMolWriters[res.queryMolIdx] : hitMolWriters[0], hit_data);
 
         if (!reportFile.empty())
-            outputReportFileHitData(splitOutFiles ? *reportOStreams[res.getReferenceShapeSetIndex()] : *reportOStreams[0], hit_data);
+            outputReportFileHitData(splitOutFiles ? *reportOStreams[res.queryMolIdx] : *reportOStreams[0], hit_data);
 
         return true;
     }
 
-    HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[res.getReferenceShapeSetIndex()]);
+    auto& hit_list = (mergeHitLists ? hitLists[0] : hitLists[res.queryMolIdx]);
         
     if (numBestHits > 0) {
         if (hit_list.size() >= numBestHits) {
-            if (hit_list.rbegin()->screeningResult.getScore() >= res.getScore())
+            if (scoringFunc->compare(res.score, hit_list.rbegin()->screeningResult.score))
                 return true;
 
             hit_list.erase(--hit_list.end());
@@ -537,7 +517,10 @@ void SimSearchImpl::readQueryMolecules()
 
 void SimSearchImpl::initHitLists()
 {
-    hitLists.resize(mergeHitLists ? 1 : queryMolecules.size());
+    hitLists.resize(mergeHitLists ? 1 : queryMolecules.size(),
+                    HitList([this](const HitMoleculeData& lhs, const HitMoleculeData& rhs) -> bool {
+                        return this->scoringFunc->compare(lhs.screeningResult.score, rhs.screeningResult.score);
+                    }));
 }
 
 void SimSearchImpl::initReportFileStreams()
@@ -552,13 +535,11 @@ void SimSearchImpl::initReportFileStreams()
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
             reportOStreams.push_back(OStreamPtr(new std::ofstream(getOutputFileName(reportFile, i))));
     
-    for (OStreamArray::const_iterator it = reportOStreams.begin(), end = reportOStreams.end(); it != end; ++it) {
-        std::ostream& os = **it;
-
-        if (!os.good())
+    for (auto& os : reportOStreams) {
+        if (!os->good())
             throw CDPL::Base::IOError("opening report file failed");
     
-        outputReportFileHeader(os);
+        outputReportFileHeader(*os);
     }
 }
 
@@ -591,7 +572,7 @@ void SimSearchImpl::initHitMoleculeWriters()
 
     } else {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
-            std::string file_name = getOutputFileName(hitOutputFile, i);
+            auto file_name = getOutputFileName(hitOutputFile, i);
             MoleculeWriterPtr writer;
 
             try {
@@ -639,13 +620,11 @@ void SimSearchImpl::outputReportFiles()
 {
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
-            std::ostream& os = *reportOStreams[i];
-            const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
+            auto& os = *reportOStreams[i];
+            auto& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
 
-            for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
-                const HitMoleculeData& hit_data = *it;
-
-                if (mergeHitLists && hit_data.screeningResult.getReferenceShapeSetIndex() != i)
+            for (auto& hit_data : hit_list) {
+                if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
                 printInfiniteProgress("Writing Output Files");
@@ -654,14 +633,10 @@ void SimSearchImpl::outputReportFiles()
         }
 
     } else {
-        std::ostream& os = *reportOStreams[0];
+        auto& os = *reportOStreams[0];
 
-        for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1) {
-            const HitList& hit_list = *it1;
-
-            for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
-                const HitMoleculeData& hit_data = *it2;
-
+        for (auto& hit_list : hitLists) {
+            for (auto& hit_data : hit_list) {
                 printInfiniteProgress("Writing Output Files");
                 outputReportFileHitData(os, hit_data);
             }
@@ -671,35 +646,12 @@ void SimSearchImpl::outputReportFiles()
 
 void SimSearchImpl::outputReportFileHeader(std::ostream& os) const
 {
-    os << "Database Mol. Name\t"
-       << "Database Mol. Index\t"
-       << "Database Conf. Index\t";
+    os << "Database Mol. Name\t" << "Database Mol. Index\t" << "Database Conf. Index\t";
 
-    if (!splitOutFiles) {
-        os << "Query Mol. Name\t"
-           << "Query Mol. Index\t";
-    }
+    if (!splitOutFiles)
+        os << "Query Mol. Name\t" << "Query Mol. Index\t";
     
-    os << "Query Conf. Index\t"
-       << "Total Overlap\t"
-       << "Shape Overlap\t"
-       << "Color Overlap\t"
-       << "Total Overlap Tanimoto\t"
-       << "Shape Tanimoto\t"
-       << "Color Tanimoto\t"
-       << "Tanimoto Combo\t"
-       << "Total Overlap Tversky\t"
-       << "Shape Tversky\t"
-       << "Color Tversky\t"
-       << "Tversky Combo\t"
-       << "Query Total Overlap Tversky\t"
-       << "Query Shape Tversky\t"
-       << "Query Color Tversky\t"
-       << "Query Tversky Combo\t"
-       << "DB Total Overlap Tversky\t"
-       << "DB Shape Tversky\t"
-       << "DB Color Tversky\t"
-       << "DB Tversky Combo\n";
+    os << "Query Conf. Index\t" << scoringFunc->getDisplayName() << 'n';
 
     if (!os.good())
         throw CDPL::Base::IOError("writing to report file failed");
@@ -711,34 +663,16 @@ void SimSearchImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeD
 
     os << hit_data.dbMolName << '\t'
        << (hit_data.dbMolIndex + 1) << '\t'
-       << (hit_data.screeningResult.getAlignedShapeIndex() + 1) << '\t';
+       << (hit_data.screeningResult.dbMolConfIdx + 1) << '\t';
 
     if (!splitOutFiles) {
-        os << getName(*queryMolecules[hit_data.screeningResult.getReferenceShapeSetIndex()]) << '\t'
-           << (hit_data.screeningResult.getReferenceShapeSetIndex() + 1) << '\t';
+        os << getName(*queryMolecules[hit_data.screeningResult.queryMolIdx]) << '\t'
+           << (hit_data.screeningResult.queryMolIdx + 1) << '\t';
     }
-    /*
-    os << (hit_data.screeningResult.getReferenceShapeIndex() + 1) << '\t'
-       << (boost::format("%.3f") % hit_data.screeningResult.getOverlap()).str() << '\t'
-       << (boost::format("%.3f") % (hit_data.screeningResult.getOverlap() - hit_data.screeningResult.getColorOverlap())).str() << '\t'
-       << (boost::format("%.3f") % hit_data.screeningResult.getColorOverlap()).str() << '\t'
-       << (boost::format("%.3f") % calcTotalOverlapTanimotoScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcShapeTanimotoScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcColorTanimotoScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcTanimotoComboScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcTotalOverlapTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcShapeTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcColorTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcTverskyComboScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcReferenceTotalOverlapTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcReferenceShapeTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcReferenceColorTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcReferenceTverskyComboScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcAlignedTotalOverlapTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcAlignedShapeTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcAlignedColorTverskyScore(hit_data.screeningResult)).str() << '\t'
-       << (boost::format("%.3f") % calcAlignedTverskyComboScore(hit_data.screeningResult)).str() << '\n';
-    */
+    
+    os << (hit_data.screeningResult.queryMolConfIdx + 1) << '\t'
+       << (boost::format("%.3f") % hit_data.screeningResult.score).str() << '\n';
+
     if (!os.good())
         throw CDPL::Base::IOError("writing to report file failed");
 }
@@ -747,13 +681,11 @@ void SimSearchImpl::outputHitMoleculeFiles()
 {
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
-            const MoleculeWriterPtr& writer = hitMolWriters[i];
-            const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
+            auto& writer = hitMolWriters[i];
+            auto& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
 
-            for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
-                const HitMoleculeData& hit_data = *it;
-
-                if (mergeHitLists && hit_data.screeningResult.getReferenceShapeSetIndex() != i)
+            for (auto& hit_data : hit_list) {
+                if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
                 printInfiniteProgress("Writing Output Files");
@@ -762,20 +694,16 @@ void SimSearchImpl::outputHitMoleculeFiles()
         }
 
     } else {
-        const MoleculeWriterPtr& writer = hitMolWriters[0];
+        auto& writer = hitMolWriters[0];
         std::size_t i = 0;
 
-        for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1, i++) {
-            const HitList& hit_list = *it1;
-
+        for (auto& hit_list : hitLists) {
             if (outputQuery && !mergeHitLists) {
                 setMultiConfExportParameter(*writer, true);
                 outputQueryMolecule(writer, i);
             }
 
-            for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
-                const HitMoleculeData& hit_data = *it2;
-
+            for (auto& hit_data : hit_list) {
                 printInfiniteProgress("Writing Output Files");
                 outputHitMolecule(writer, hit_data);
             }
@@ -787,7 +715,7 @@ void SimSearchImpl::outputQueryMolecule(const MoleculeWriterPtr& writer, std::si
 {
     using namespace CDPL;
 
-    const Chem::Molecule& query_mol = *queryMolecules[query_mol_idx];
+    auto& query_mol = *queryMolecules[query_mol_idx];
 
     try {
         if (writer->write(query_mol))
@@ -809,17 +737,17 @@ void SimSearchImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const Hit
         numSavedHits++;
 
     try {
-        std::string name = hitNamePattern;
+        auto name = hitNamePattern;
 
-        boost::replace_all(name, "@Q@", getName(*queryMolecules[hit_data.screeningResult.getReferenceShapeSetIndex()]));
+        boost::replace_all(name, "@Q@", getName(*queryMolecules[hit_data.screeningResult.queryMolIdx]));
         boost::replace_all(name, "@D@", hit_data.dbMolName);
-        boost::replace_all(name, "@C@", std::to_string(hit_data.screeningResult.getReferenceShapeIndex() + 1));
-        boost::replace_all(name, "@c@", std::to_string(hit_data.screeningResult.getAlignedShapeIndex() + 1));
-        boost::replace_all(name, "@I@", std::to_string(hit_data.screeningResult.getReferenceShapeSetIndex() + 1));
+        boost::replace_all(name, "@C@", std::to_string(hit_data.screeningResult.queryMolConfIdx + 1));
+        boost::replace_all(name, "@c@", std::to_string(hit_data.screeningResult.dbMolConfIdx + 1));
+        boost::replace_all(name, "@I@", std::to_string(hit_data.screeningResult.queryMolIdx + 1));
         boost::replace_all(name, "@i@", std::to_string(hit_data.dbMolIndex + 1));
 
         setName(*hit_data.dbMolecule, name);
-        applyConformation(*hit_data.dbMolecule, hit_data.screeningResult.getAlignedShapeIndex());
+        applyConformation(*hit_data.dbMolecule, hit_data.screeningResult.dbMolConfIdx);
 
         setMultiConfExportParameter(*writer, false);
 
@@ -835,43 +763,22 @@ void SimSearchImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const Hit
                 new_sd_block.reset(new Chem::StringDataBlock());
 
             if (dbConfIdxSDTags)
-                new_sd_block->addEntry("<Conf. Index>", std::to_string(hit_data.screeningResult.getAlignedShapeIndex() + 1));
+                new_sd_block->addEntry("<Conf. Index>", std::to_string(hit_data.screeningResult.dbMolConfIdx + 1));
 
             if (dbMolIdxSDTags)
                 new_sd_block->addEntry("<Mol. Index>", std::to_string(hit_data.dbMolIndex + 1));
 
             if (queryConfIdxSDTags)
-                new_sd_block->addEntry("<Query Conf. Index>", std::to_string(hit_data.screeningResult.getReferenceShapeIndex() + 1));
+                new_sd_block->addEntry("<Query Conf. Index>", std::to_string(hit_data.screeningResult.queryMolConfIdx + 1));
 
             if (queryMolIdxSDTags)
-                new_sd_block->addEntry("<Query Mol. Index>", std::to_string(hit_data.screeningResult.getReferenceShapeSetIndex() + 1));
+                new_sd_block->addEntry("<Query Mol. Index>", std::to_string(hit_data.screeningResult.queryMolIdx + 1));
 
             if (queryNameSDTags)
-                new_sd_block->addEntry("<Query Name>", getName(*queryMolecules[hit_data.screeningResult.getReferenceShapeSetIndex()]));
+                new_sd_block->addEntry("<Query Name>", getName(*queryMolecules[hit_data.screeningResult.queryMolIdx]));
             
-            if (scoreSDTags) {
-                /*
-                new_sd_block->addEntry("<Total Overlap>", (boost::format("%.3f") % hit_data.screeningResult.getOverlap()).str());
-                new_sd_block->addEntry("<Shape Overlap>", (boost::format("%.3f") % (hit_data.screeningResult.getOverlap() - hit_data.screeningResult.getColorOverlap())).str());
-                new_sd_block->addEntry("<Color Overlap>", (boost::format("%.3f") % hit_data.screeningResult.getColorOverlap()).str());
-                new_sd_block->addEntry("<Total Overlap Tanimoto>", (boost::format("%.3f") % calcTotalOverlapTanimotoScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Shape Tanimoto>", (boost::format("%.3f") % calcShapeTanimotoScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Color Tanimoto>", (boost::format("%.3f") % calcColorTanimotoScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Tanimoto Combo>", (boost::format("%.3f") % calcTanimotoComboScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Total Overlap Tversky>", (boost::format("%.3f") % calcTotalOverlapTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Shape Tversky>", (boost::format("%.3f") % calcShapeTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Color Tversky>", (boost::format("%.3f") % calcColorTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Tversky Combo>", (boost::format("%.3f") % calcTverskyComboScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Query Total Overlap Tversky>", (boost::format("%.3f") % calcReferenceTotalOverlapTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Query Shape Tversky>", (boost::format("%.3f") % calcReferenceShapeTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Query Color Tversky>", (boost::format("%.3f") % calcReferenceColorTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<Query Tversky Combo>", (boost::format("%.3f") % calcReferenceTverskyComboScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<DB Total Overlap Tversky>", (boost::format("%.3f") % calcAlignedTotalOverlapTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<DB Shape Tversky>", (boost::format("%.3f") % calcAlignedShapeTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<DB Color Tversky>", (boost::format("%.3f") % calcAlignedColorTverskyScore(hit_data.screeningResult)).str());
-                new_sd_block->addEntry("<DB Tversky Combo>", (boost::format("%.3f") % calcAlignedTverskyComboScore(hit_data.screeningResult)).str());
-                */
-            }
+            if (scoreSDTags)
+                new_sd_block->addEntry('<' + scoringFunc->getDisplayName() + '>', (boost::format("%.3f") % hit_data.screeningResult.score).str());
 
             setStructureData(*hit_data.dbMolecule, new_sd_block);
 
@@ -1028,15 +935,14 @@ void SimSearchImpl::printOptionSummary()
     printMessage(VERBOSE, " Hit Output File:                     " + (hitOutputFile.empty() ? std::string("None") : hitOutputFile));
     printMessage(VERBOSE, " Report Output File:                  " + (reportFile.empty() ? std::string("None") : reportFile));
     printMessage(VERBOSE, " Screening Mode:                      " + screeningModeToString());
-    printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc);
+    printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc->getID());
     printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
     printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
-    //printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ?
-    //                                                                  std::string("None") : (boost::format("%.3f") % settings.getScoreCutoff()).str()));
+    printMessage(VERBOSE, " Score Cutoff:                        " + (scoreCutoff < 0.0 ? std::string("None") : (boost::format("%.3f") % scoreCutoff).str()));
     printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
     printMessage(VERBOSE, " Output File Splitting:               " + std::string(splitOutFiles ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Query Molecules:              " + std::string(outputQuery ? "Yes" : "No"));
-    //printMessage(VERBOSE, " Single Conformer DB-Mode:            " + std::string(settings.singleConformerSearch() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Single Conformer DB-Mode:            " + std::string(singleConfSearch ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Score SD-Tags:                " + std::string(scoreSDTags ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Query Mol. Name SD-Tags:      " + std::string(queryNameSDTags ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Query Mol. Index SD-Tags:     " + std::string(queryMolIdxSDTags ? "Yes" : "No"));
@@ -1126,8 +1032,8 @@ std::string SimSearchImpl::createMoleculeIdentifier(std::size_t rec_idx)
 
 std::string SimSearchImpl::getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const
 {
-    std::string::size_type suffix_pos = file_name_tmplt.find_last_of('.');
-    std::string file_name = file_name_tmplt;
+    auto suffix_pos = file_name_tmplt.find_last_of('.');
+    auto file_name = file_name_tmplt;
         
     if (suffix_pos != std::string::npos)
         return file_name.insert(suffix_pos, "_" + std::to_string(query_mol_idx + 1));

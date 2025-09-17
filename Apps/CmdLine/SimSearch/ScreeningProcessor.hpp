@@ -25,7 +25,7 @@
 #ifndef SIMSEARCH_SCREENINGPROCESSOR_HPP
 #define SIMSEARCH_SCREENINGPROCESSOR_HPP
 
-#include <functional>
+#include <cstddef>
 
 
 namespace CDPL
@@ -35,6 +35,7 @@ namespace CDPL
     {
 
         class MolecularGraph;
+        class Molecule;
     }
 } // namespace CDPL
 
@@ -42,13 +43,18 @@ namespace CDPL
 namespace SimSearch
 {
 
-    class ScreeningResult;
-
     class ScreeningProcessor
     {
 
       public:
-        typedef std::function<void(const CDPL::Chem::MolecularGraph& query_mol, const CDPL::Chem::MolecularGraph& db_mol, const ScreeningResult& res)> HitCallback;
+        struct Result
+        {
+
+            double      score;
+            std::size_t queryMolIdx;
+            std::size_t queryMolConfIdx;
+            std::size_t dbMolConfIdx;
+        };
 
         enum ScreeningMode
         {
@@ -63,17 +69,13 @@ namespace SimSearch
             // TODO
         }
 
-        bool process(const CDPL::Chem::Molecule& db_mol)
+        bool process(const CDPL::Chem::Molecule& db_mol, Result& res)
         {
             return false; // TODO
         }
 
-        void setHitCallback(const HitCallback& func)
-        {
-            // TODO
-        }
-
       private:
+
     };
 } // namespace SimSearch
 

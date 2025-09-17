@@ -1,5 +1,5 @@
 /* 
- * ScreeningResult.hpp
+ * ScoringFunction.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,54 +22,60 @@
  */
 
 
-#ifndef SIMSEARCH_SCREENINGRESULT_HPP
-#define SIMSEARCH_SCREENINGRESULT_HPP
+#ifndef SIMSEARCH_SCORINGFUNCTION_HPP
+#define SIMSEARCH_SCORINGFUNCTION_HPP
+
+#include <string>
 
 
 namespace SimSearch
 {
 
-    class ScreeningResult
+    class ScoringFunction
     {
 
       public:
-        double getScore() const
+        enum DescriptorType
         {
-            return 0; // TODO
+
+            BITSET,
+            VECTOR,
+            ANY
+        };
+
+        ScoringFunction(const std::string& id, const std::string& disp_name, bool dist_score, DescriptorType descr_type):
+            id(id), displayName(disp_name), isDistScore(dist_score), descrType(descr_type)
+        {}
+
+        bool compare(double score1, double score2) const
+        {
+            if (isDistScore)
+                return (score1 > score2);
+
+            return (score1 < score2);
         }
 
-        std::size_t getReferenceShapeSetIndex() const
+        const std::string& getID() const
         {
-            return 0; // TODO
+            return id;
         }
 
-        void setReferenceShapeSetIndex(std::size_t idx)
+        const std::string& getDisplayName() const
         {
-            // TODO
+            return displayName;
         }
 
-        std::size_t getReferenceShapeIndex() const
+        DescriptorType getDescriptorType() const
         {
-            return 0; // TODO
-        }
-
-        void setReferenceShapeIndex(std::size_t idx)
-        {
-            // TODO
-        }
-
-        std::size_t getAlignedShapeIndex() const
-        {
-            return 0; // TODO
-        }
-
-        void setAlignedShapeIndex(std::size_t idx)
-        {
-            // TODO
+            return descrType;
         }
 
       private:
+        std::string    id;
+        std::string    displayName;
+        bool           isDistScore;
+        DescriptorType descrType;
     };
 } // namespace SimSearch
 
-#endif // SIMSEARCH_SCREENINGRESULT_HPP
+#endif // SIMSEARCH_SCORINGFUNCTION_HPP

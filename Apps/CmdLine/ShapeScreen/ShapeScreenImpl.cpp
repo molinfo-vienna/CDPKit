@@ -293,7 +293,6 @@ void ShapeScreenImpl::setColorFeatureType(const std::string& type)
 void ShapeScreenImpl::setScoringFunction(const std::string& func)
 {
     using namespace CDPL::Shape;
-    namespace po = boost::program_options;
 
     scoringFunc = func;
     boost::to_upper(scoringFunc);
