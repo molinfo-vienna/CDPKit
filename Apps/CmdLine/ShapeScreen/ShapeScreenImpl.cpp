@@ -127,7 +127,7 @@ ShapeScreenImpl::ShapeScreenImpl():
     
     addOption("query,q", "Query molecule file.", 
               value<std::string>(&queryFile)->required());
-    addOption("database,d", "Screened database file(s).", 
+    addOption("database,d", "Screened database file.", 
               value<std::string>(&databaseFile)->required());
     addOption("output,o", "Hit molecule output file.", 
               value<std::string>(&hitOutputFile));
@@ -169,7 +169,7 @@ ShapeScreenImpl::ShapeScreenImpl():
     addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit molecule output file (default: true).",
               value<bool>(&outputQuery)->implicit_value(true));
     addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conformer molecules (default: false).",
-              value<bool>()->notifier(std::bind(&ShapeScreenImpl::performSingleConformerSearch, this, _1)));
+              value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::performSingleConformerSearch, this, _1)));
     addOption("color-ftr-type,f", "Specifies which type of color features to generate and score "
               "(NONE, EXP_PHARM, IMP_PHARM, default: IMP_PHARM).",
               value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setColorFeatureType, this, _1)));
