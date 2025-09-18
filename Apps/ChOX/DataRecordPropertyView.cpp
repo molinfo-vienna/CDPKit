@@ -94,35 +94,43 @@ void DataRecordPropertyView::update(DataSetPageView& page_view)
                 
         if (!propData[i])
             continue;
+
+        QString col_header;
+        std::string sd_header;
         
         for (auto& item : *propData[i]) {
-            auto it = propColIndices.find(item.getHeader());
+            sd_header = item.getHeader();
+            auto left_ab_pos = sd_header.find_first_of('<');
+
+            if (left_ab_pos != std::string::npos) {
+                auto right_ab_pos = sd_header.find_last_of('>');
+
+                if ((right_ab_pos != std::string::npos) && (right_ab_pos > left_ab_pos))
+                    sd_header = sd_header.substr(left_ab_pos + 1, right_ab_pos - left_ab_pos - 1);
+            }
+
+            auto it = propColIndices.find(sd_header);
 
             if (it != propColIndices.end()) {
                 setItem(i, it->second, new TableItem(this, QString::fromStdString(item.getData())));
                 continue;
             }
 
-            propColIndices[item.getHeader()] = colHeaders.count();
+            propColIndices[sd_header] = colHeaders.count();
 
             setColumnCount(colHeaders.count() + 1);
             setItem(i, colHeaders.count(), new TableItem(this, QString::fromStdString(item.getData())));
 
-            auto header = QString::fromStdString(item.getHeader()).trimmed();
+            col_header = QString::fromStdString(sd_header).trimmed();
 
-            if ((header.length() > 2) && (header.front() == '<') && (header.back() == '>')) {
-                header.chop(1);
-                header.remove(0, 1);
-            }
-
-            auto action = new QAction(header, contextMenu);
+            auto action = new QAction(col_header, contextMenu);
 
             action->setCheckable(true);
             contextMenu->addAction(action);
             
             colVisActionToIndexMap[action] = colHeaders.count();
 
-            colHeaders << header;
+            colHeaders << col_header;
         }
     }
 
