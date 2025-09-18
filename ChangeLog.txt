@@ -1,5 +1,6 @@
 master:
 
+ - Improved the extraction of ChOX property table view column names from SD-file property record headers
  - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
    Stereolithography (STL) format
  - Declaration of new type Vis::PLYFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
