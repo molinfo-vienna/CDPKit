@@ -34,19 +34,22 @@
 #include <memory>
 #include <functional>
 
-#include "CDPL/Chem/Molecule.hpp"
+#include <boost/ptr_container/ptr_vector.hpp>
+
 #include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphWriter.hpp"
 #include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
-#include "ScoringFunction.hpp"
 #include "ScreeningProcessor.hpp"
 
 
 namespace SimSearch
 {
+
+    class ScoringFunction;
+    class DescriptorCalculator;
 
     class SimSearchImpl : public CmdLineLib::CmdLineBase
     {
@@ -54,9 +57,10 @@ namespace SimSearch
       public:
         SimSearchImpl();
 
+        ~SimSearchImpl();
+        
       private:
-        typedef CDPL::Chem::Molecule::SharedPointer             MoleculePtr;
-        typedef CDPL::Chem::MolecularGraphWriter::SharedPointer MoleculeWriterPtr;
+        typedef std::shared_ptr<CDPL::Chem::Molecule> MoleculePtr;
 
         class ScreeningWorker;
 
@@ -68,8 +72,7 @@ namespace SimSearch
 
             HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name,
                             const ScreeningProcessor::Result& res, const MoleculePtr& db_mol):
-                dbMolIndex(db_mol_idx),
-                dbMolName(db_mol_name), screeningResult(res), dbMolecule(db_mol) {}
+                dbMolIndex(db_mol_idx), dbMolName(db_mol_name), screeningResult(res), dbMolecule(db_mol) {}
             
             std::size_t                dbMolIndex;
             std::string                dbMolName;
@@ -82,7 +85,8 @@ namespace SimSearch
 
         void addOptionLongDescriptions();
 
-        void setScoringFunction(const std::string& func);
+        void setScoringFunction(const std::string& id);
+        void setDescriptorCalculator(const std::string& id);
         void setScreeningMode(const std::string& mode);
 
         void setQueryFormat(const std::string& file_ext);
@@ -97,7 +101,10 @@ namespace SimSearch
         void initHitLists();
         void initReportFileStreams();
         void initHitMoleculeWriters();
+        void initScoringFunctions();
+        void initDescriptorCalculators();
 
+        void processOptions();
         int process();
 
         void processSingleThreaded();
@@ -117,8 +124,8 @@ namespace SimSearch
         void outputReportFileHeader(std::ostream& os) const;
         void outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data);
 
-        void outputQueryMolecule(const MoleculeWriterPtr& writer, std::size_t query_mol_idx);
-        void outputHitMolecule(const MoleculeWriterPtr& writer, const HitMoleculeData& hit_data);
+        void outputQueryMolecule(CDPL::Chem::MolecularGraphWriter& writer, std::size_t query_mol_idx);
+        void outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, const HitMoleculeData& hit_data);
 
         std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
         std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
@@ -139,22 +146,28 @@ namespace SimSearch
 
         std::string getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const;
 
-        typedef std::unique_ptr<std::ostream>                                                                        OStreamPtr;
-        typedef std::unique_ptr<ScoringFunction>                                                                     ScoringFunctionPtr;
-        typedef CDPL::Chem::MoleculeReader::SharedPointer                                                            MoleculeReaderPtr;
-        typedef std::vector<MoleculePtr>                                                                             QueryMoleculeList;
+        ScoringFunction* getScoringFunction(const std::string& id);
+        DescriptorCalculator* getDescriptorCalculator(const std::string& id);
+
+        std::string getScoringFunctionIDs() const;
+        std::string getDescriptorCalculatorIDs() const;
+        
+        typedef std::shared_ptr<CDPL::Chem::MoleculeReader>                                                          MoleculeReaderPtr;
+        typedef boost::ptr_vector<CDPL::Chem::Molecule>                                                              QueryMoleculeList;
         typedef std::multiset<HitMoleculeData, std::function<bool(const HitMoleculeData&, const HitMoleculeData&)> > HitList;
         typedef std::vector<HitList>                                                                                 HitListArray;
-        typedef std::vector<OStreamPtr>                                                                              OStreamArray;
-        typedef std::vector<MoleculeWriterPtr>                                                                       MoleculeWriterArray;
-        typedef std::vector<ScoringFunctionPtr>                                                                      ScoringFunctionList;
+        typedef boost::ptr_vector<std::ostream>                                                                      OStreamArray;
+        typedef boost::ptr_vector<CDPL::Chem::MolecularGraphWriter>                                                  MoleculeWriterArray;
+        typedef boost::ptr_vector<ScoringFunction>                                                                   ScoringFunctionList;
+        typedef boost::ptr_vector<DescriptorCalculator>                                                              DescriptorCalculatorList;
         typedef CDPL::Internal::Timer                                                                                Timer;
 
         std::string                       queryFile;
         std::string                       databaseFile;
         std::string                       hitOutputFile;
         std::string                       reportFile;
-        const ScoringFunction*            scoringFunc;
+        ScoringFunction*                  scoringFunc;
+        DescriptorCalculator*             descrCalculator;
         std::size_t                       numThreads;
         bool                              singleConfSearch;
         bool                              mergeHitLists;
@@ -180,7 +193,8 @@ namespace SimSearch
         HitListArray                      hitLists;
         OStreamArray                      reportOStreams;
         MoleculeWriterArray               hitMolWriters;
-        ScoringFunctionList               scoringFunctions;
+        ScoringFunctionList               scoringFuncs;
+        DescriptorCalculatorList          descrCalculators;
         Timer                             timer;
         std::size_t                       numProcMols;
         std::size_t                       numHits;

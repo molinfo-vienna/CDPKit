@@ -51,6 +51,20 @@ namespace CmdLineLib
 
         static void setCursorVisible(bool visible);
         
+        void addOption(const char* name, const std::string& descr);
+
+        void addOption(const char* name, const std::string& descr,
+                       const boost::program_options::value_semantic* sem);
+
+        void addOptionLongDescription(const char* name, const std::string& descr);
+
+        bool wasOptionSet(const char* name) const;
+
+        template <typename T>
+        const T& getOptionValue(const char* name) const;
+
+        void throwValidationError(const std::string& opt_name) const;
+
       protected:
         enum VerbosityLevel
         {
@@ -68,18 +82,6 @@ namespace CmdLineLib
 
         VerbosityLevel getVerbosityLevel() const;
 
-        void addOption(const char* name, const std::string& descr);
-
-        void addOption(const char* name, const std::string& descr,
-                       const boost::program_options::value_semantic* sem);
-
-        void addOptionLongDescription(const char* name, const std::string& descr);
-
-        bool wasOptionSet(const char* name) const;
-
-        template <typename T>
-        const T& getOptionValue(const char* name) const;
-
         void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
         std::ostream& logStream() const;
@@ -93,8 +95,6 @@ namespace CmdLineLib
         void printInfiniteProgress(const std::string& prefix, bool force = false);
 
         std::string getProgTitleString() const;
-
-        void throwValidationError(const std::string& opt_name) const;
 
         template <typename T>
         static boost::program_options::typed_value<T>* value();
@@ -110,8 +110,8 @@ namespace CmdLineLib
         virtual const char* getProgCopyright() const;
         virtual const char* getProgAboutText() const;
 
-        virtual void init(){};
-        virtual void processOptions(){};
+        virtual void init() {};
+        virtual void processOptions() {};
 
       private:
         typedef boost::program_options::option_description OptionDescription;
