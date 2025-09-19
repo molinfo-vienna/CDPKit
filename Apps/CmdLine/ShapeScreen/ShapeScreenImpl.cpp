@@ -127,7 +127,7 @@ ShapeScreenImpl::ShapeScreenImpl():
     
     addOption("query,q", "Query molecule file.", 
               value<std::string>(&queryFile)->required());
-    addOption("database,d", "Screened database file.", 
+    addOption("database,d", "Molecule database file to screen.", 
               value<std::string>(&databaseFile)->required());
     addOption("output,o", "Hit molecule output file.", 
               value<std::string>(&hitOutputFile));
@@ -257,7 +257,7 @@ void ShapeScreenImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nNote that atom 3D-coordinates are required for shape screening!");
     addOptionLongDescription("database", 
-                             "The screened database input file.\n\n" +
+                             "The molecule database file to screen.\n\n" +
                              formats_str +
                              "\n\nNote that atomic 3D-coordinates are required for shape screening!");
 
@@ -1070,7 +1070,7 @@ void ShapeScreenImpl::checkInputFiles() const
         throw Base::IOError("query file '" + queryFile + "' does not exist");
 
     if (!Util::fileExists(databaseFile))
-        throw Base::IOError("database file '" + databaseFile + "' does not exist");
+        throw Base::IOError("molecule database file '" + databaseFile + "' does not exist");
 
     if (!splitOutFiles) {
         if (Util::checkIfSameFile(queryFile, hitOutputFile))
@@ -1174,7 +1174,7 @@ void ShapeScreenImpl::initDatabaseReader()
                                                       new Chem::MoleculeReader(databaseFile, databaseFormat));
 
     } catch (const Base::IOError& e) {
-        throw Base::IOError("no input handler found for screening database file '" + databaseFile + '\'');
+        throw Base::IOError("no input handler found for molecule database file '" + databaseFile + '\'');
     }
    
     setMultiConfImportParameter(*databaseReader, true);

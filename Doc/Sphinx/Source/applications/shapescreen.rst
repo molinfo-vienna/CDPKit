@@ -36,7 +36,7 @@ Mandatory options
 
   -d [ --database ] arg
 
-    The screened database input file.
+    The molecule database file to screen.
     
     Supported Input Formats:
      - MDL Structure-Data File (.sdf, .sd)
