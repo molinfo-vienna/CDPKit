@@ -1,5 +1,5 @@
 /* 
- * ScoringFunction.hpp
+ * DescriptorCalculator.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,11 +22,25 @@
  */
 
 
-#ifndef SIMSEARCH_SCORINGFUNCTION_HPP
-#define SIMSEARCH_SCORINGFUNCTION_HPP
+#ifndef SIMSCREEN_DESCRIPTORCALCULATOR_HPP
+#define SIMSCREEN_DESCRIPTORCALCULATOR_HPP
 
 #include <string>
 
+#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/Vector.hpp"
+
+
+namespace CDPL
+{
+
+    namespace Chem
+    {
+
+        class MolecularGraph;
+        class Molecule;
+    }
+}
 
 namespace CmdLineLib
 {
@@ -35,10 +49,10 @@ namespace CmdLineLib
 }
 
 
-namespace SimSearch
+namespace SimScreen
 {
 
-    class ScoringFunction
+    class DescriptorCalculator
     {
 
       public:
@@ -50,31 +64,31 @@ namespace SimSearch
             ANY
         };
 
-        ScoringFunction(const std::string& id, const std::string& disp_name, bool dist_score, DescriptorType descr_type):
-            id(id), displayName(disp_name), isDistScore(dist_score), descrType(descr_type) {}
+        DescriptorCalculator(const std::string& id, DescriptorType descr_type):
+            id(id), descrType(descr_type) {}
 
-        virtual ~ScoringFunction() {}
+        virtual ~DescriptorCalculator() {}
 
         virtual void addOptions(CmdLineLib::CmdLineBase& cl_base) {}
 
         virtual void processOptions(CmdLineLib::CmdLineBase& cl_base) {}
+
+        virtual DescriptorCalculator* clone() const = 0;
+
+        virtual void prepare(CDPL::Chem::Molecule& mol);
         
-        bool compare(double score1, double score2) const
-        {
-            if (isDistScore)
-                return (score1 > score2);
+        virtual void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp) {}
 
-            return (score1 < score2);
-        }
-
+        virtual void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Math::DVector& descr) {}
+        
         const std::string& getID() const
         {
             return id;
         }
 
-        const std::string& getDisplayName() const
+        virtual std::string getDisplayName() const
         {
-            return displayName;
+            return id;
         }
 
         DescriptorType getDescriptorType() const
@@ -84,10 +98,8 @@ namespace SimSearch
 
       private:
         std::string    id;
-        std::string    displayName;
-        bool           isDistScore;
         DescriptorType descrType;
     };
-} // namespace SimSearch
+} // namespace SimScreen
 
-#endif // SIMSEARCH_SCORINGFUNCTION_HPP
+#endif // SIMSCREEN_DESCRIPTORCALCULATOR_HPP

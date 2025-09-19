@@ -22,10 +22,12 @@
  */
 
 
-#ifndef SIMSEARCH_SCREENINGPROCESSOR_HPP
-#define SIMSEARCH_SCREENINGPROCESSOR_HPP
+#ifndef SIMSCREEN_SCREENINGPROCESSOR_HPP
+#define SIMSCREEN_SCREENINGPROCESSOR_HPP
 
 #include <cstddef>
+#include <functional>
+#include <memory>
 
 
 namespace CDPL
@@ -34,15 +36,17 @@ namespace CDPL
     namespace Chem
     {
 
-        class MolecularGraph;
         class Molecule;
     }
-} // namespace CDPL
+}
 
 
-namespace SimSearch
+namespace SimScreen
 {
 
+    class ScoringFunction;
+    class DescriptorCalculator;
+    
     class ScreeningProcessor
     {
 
@@ -64,19 +68,23 @@ namespace SimSearch
             BEST_MATCH_PER_QUERY_CONF
         };
 
-        void addQuery(const CDPL::Chem::MolecularGraph& query_mol)
-        {
-            // TODO
-        }
+        typedef std::function<void(const Result& res)> ResultCallbackFunc;
 
-        bool process(const CDPL::Chem::Molecule& db_mol, Result& res)
-        {
-            return false; // TODO
-        }
+        ScreeningProcessor(const ScoringFunction& scr_func, const DescriptorCalculator& calc, const ResultCallbackFunc& cb_func);
+
+        ~ScreeningProcessor();
+        
+        void addQuery(CDPL::Chem::Molecule& query_mol);
+
+        bool process(CDPL::Chem::Molecule& db_mol);
 
       private:
+        typedef std::unique_ptr<DescriptorCalculator> DescriptorCalculatorPtr;
 
+        const ScoringFunction&  scoringFunc;
+        DescriptorCalculatorPtr descrCalculator;
+        ResultCallbackFunc      callbackFunc;
     };
-} // namespace SimSearch
+} // namespace SimScreen
 
-#endif // SIMSEARCH_SCREENINGPROCESSOR_HPP
+#endif // SIMSCREEN_SCREENINGPROCESSOR_HPP

@@ -1,5 +1,5 @@
 /* 
- * DescriptorCalculator.hpp
+ * ScoringFunction.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,10 +22,13 @@
  */
 
 
-#ifndef SIMSEARCH_DESCRIPTORCALCULATOR_HPP
-#define SIMSEARCH_DESCRIPTORCALCULATOR_HPP
+#ifndef SIMSCREEN_SCORINGFUNCTION_HPP
+#define SIMSCREEN_SCORINGFUNCTION_HPP
 
 #include <string>
+
+#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CmdLineLib
@@ -35,10 +38,10 @@ namespace CmdLineLib
 }
 
 
-namespace SimSearch
+namespace SimScreen
 {
 
-    class DescriptorCalculator
+    class ScoringFunction
     {
 
       public:
@@ -50,25 +53,35 @@ namespace SimSearch
             ANY
         };
 
-        DescriptorCalculator(const std::string& id, DescriptorType descr_type):
-            id(id), descrType(descr_type) {}
+        ScoringFunction(const std::string& id, const std::string& disp_name, bool dist_score, DescriptorType descr_type):
+            id(id), displayName(disp_name), isDistScore(dist_score), descrType(descr_type) {}
 
-        virtual ~DescriptorCalculator() {}
+        virtual ~ScoringFunction() {}
 
         virtual void addOptions(CmdLineLib::CmdLineBase& cl_base) {}
 
         virtual void processOptions(CmdLineLib::CmdLineBase& cl_base) {}
 
-        virtual DescriptorCalculator* clone() const = 0;
+        virtual double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const = 0;
+
+        virtual double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const = 0;
+        
+        bool compare(double score1, double score2) const
+        {
+            if (isDistScore)
+                return (score1 > score2);
+
+            return (score1 < score2);
+        }
 
         const std::string& getID() const
         {
             return id;
         }
 
-        virtual std::string getDisplayName() const
+        const std::string& getDisplayName() const
         {
-            return id;
+            return displayName;
         }
 
         DescriptorType getDescriptorType() const
@@ -78,8 +91,10 @@ namespace SimSearch
 
       private:
         std::string    id;
+        std::string    displayName;
+        bool           isDistScore;
         DescriptorType descrType;
     };
-} // namespace SimSearch
+} // namespace SimScreen
 
-#endif // SIMSEARCH_DESCRIPTORCALCULATOR_HPP
+#endif // SIMSCREEN_SCORINGFUNCTION_HPP

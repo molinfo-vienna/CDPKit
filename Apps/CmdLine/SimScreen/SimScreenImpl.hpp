@@ -1,5 +1,5 @@
 /* 
- * SimSearchImpl.hpp
+ * SimScreenImpl.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef SIMSEARCH_SIMSEARCHIMPL_HPP
-#define SIMSEARCH_SIMSEARCHIMPL_HPP
+#ifndef SIMSCREEN_SIMSCREENIMPL_HPP
+#define SIMSCREEN_SIMSCREENIMPL_HPP
 
 #include <cstddef>
 #include <string>
@@ -45,19 +45,19 @@
 #include "ScreeningProcessor.hpp"
 
 
-namespace SimSearch
+namespace SimScreen
 {
 
     class ScoringFunction;
     class DescriptorCalculator;
 
-    class SimSearchImpl : public CmdLineLib::CmdLineBase
+    class SimScreenImpl : public CmdLineLib::CmdLineBase
     {
 
       public:
-        SimSearchImpl();
+        SimScreenImpl();
 
-        ~SimSearchImpl();
+        ~SimScreenImpl();
         
       private:
         typedef std::shared_ptr<CDPL::Chem::Molecule> MoleculePtr;
@@ -204,6 +204,6 @@ namespace SimSearch
         std::mutex                        hitProcMutex;
         std::string                       errorMessage;
     };
-} // namespace SimSearch
+} // namespace SimScreen
 
-#endif // SIMSEARCH_SIMSEARCHIMPL_HPP
+#endif // SIMSCREEN_SIMSCREENIMPL_HPP

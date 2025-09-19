@@ -1,5 +1,5 @@
 /* 
- * Main.cpp
+ * TanimotoSimilarity.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,10 +22,25 @@
  */
 
 
-#include "SimSearchImpl.hpp"
+#ifndef SIMSCREEN_TANIMOTOSIMILARITY_HPP
+#define SIMSCREEN_TANIMOTOSIMILARITY_HPP
+
+#include "ScoringFunction.hpp"
 
 
-int main(int argc, char* argv[])
+namespace SimScreen
 {
-    return SimSearch::SimSearchImpl().run(argc, argv);
-}
+
+    class TanimotoSimilarity : public ScoringFunction
+    {
+
+      public:
+        TanimotoSimilarity(): ScoringFunction("TANIMOTO", "Tanimoto Similarity", false, ANY) {}
+
+        double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const;
+
+        double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const;
+    };
+} // namespace SimScreen
+
+#endif // SIMSCREEN_TANIMOTOSIMILARITY_HPP

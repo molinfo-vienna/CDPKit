@@ -61,6 +61,12 @@ namespace CmdLineLib
         bool wasOptionSet(const char* name) const;
 
         template <typename T>
+        static boost::program_options::typed_value<T>* value();
+
+        template <typename T>
+        static boost::program_options::typed_value<T>* value(T* v);
+
+        template <typename T>
         const T& getOptionValue(const char* name) const;
 
         void throwValidationError(const std::string& opt_name) const;
@@ -95,12 +101,6 @@ namespace CmdLineLib
         void printInfiniteProgress(const std::string& prefix, bool force = false);
 
         std::string getProgTitleString() const;
-
-        template <typename T>
-        static boost::program_options::typed_value<T>* value();
-
-        template <typename T>
-        static boost::program_options::typed_value<T>* value(T* v);
 
         static boost::program_options::typed_value<bool>* boolSwitch();
         static boost::program_options::typed_value<bool>* boolSwitch(bool* v);

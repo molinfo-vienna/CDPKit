@@ -1,5 +1,5 @@
 /* 
- * SimSearchImpl.cpp
+ * SimScreenImpl.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -35,7 +35,6 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
@@ -44,21 +43,29 @@
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
-#include "SimSearchImpl.hpp"
-#include "ScoringFunction.hpp"
-#include "DescriptorCalculator.hpp"
+#include "SimScreenImpl.hpp"
+#include "TanimotoSimilarity.hpp"
+#include "ECFPCalculator.hpp"
 
 
-using namespace SimSearch;
+using namespace SimScreen;
 
 
-class SimSearchImpl::ScreeningWorker
+class SimScreenImpl::ScreeningWorker
 {
 
   public:
-    ScreeningWorker(SimSearchImpl* parent):
-        parent(parent), molecule(new CDPL::Chem::BasicMolecule())
+    ScreeningWorker(SimScreenImpl* parent):
+        parent(parent), screeningProc(*parent->scoringFunc, *parent->descrCalculator,
+                                      [this](const ScreeningProcessor::Result& res) {
+                                          this->processResult(res);
+                                      }),
+        molecule(new CDPL::Chem::BasicMolecule()), terminate(false)
     {
+        static std::mutex mutex;
+
+        std::lock_guard<std::mutex> lock(mutex);
+        
         for (auto& query : parent->queryMolecules)
             screeningProc.addQuery(query);
     }
@@ -67,7 +74,7 @@ class SimSearchImpl::ScreeningWorker
     {
         using namespace CDPL;
         
-        while (true) {
+        while (!terminate) {
             if (!molecule.unique())
                 molecule.reset(new CDPL::Chem::BasicMolecule());
 
@@ -75,12 +82,9 @@ class SimSearchImpl::ScreeningWorker
                 return;
 
             try {
-                if (!screeningProc.process(*molecule, screeningResult))
+                if (!screeningProc.process(*molecule))
                     parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed");
 
-                else if (!parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, screeningResult))
-                    return;
-                
                 continue;
 
             } catch (const std::exception& e) {
@@ -95,15 +99,23 @@ class SimSearchImpl::ScreeningWorker
     }
 
   private:
-    SimSearchImpl*             parent;
-    ScreeningProcessor         screeningProc;
-    ScreeningProcessor::Result screeningResult;
-    MoleculePtr                molecule;
-    std::size_t                dbMolIndex;
+    void processResult(const ScreeningProcessor::Result& res)
+    {
+        if (terminate)
+            return;
+
+        terminate = !parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, res);
+    }
+
+    SimScreenImpl*     parent;
+    ScreeningProcessor screeningProc;
+    MoleculePtr        molecule;
+    std::size_t        dbMolIndex;
+    bool               terminate;
 };
 
 
-SimSearchImpl::SimSearchImpl(): 
+SimScreenImpl::SimScreenImpl(): 
     numThreads(0), singleConfSearch(false), mergeHitLists(false), 
     splitOutFiles(true), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
     queryMolIdxSDTags(false), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true),
@@ -115,27 +127,27 @@ SimSearchImpl::SimSearchImpl():
     
     addOption("query,q", "Query molecule file.", 
               value<std::string>(&queryFile)->required());
-    addOption("input,i", "Molecule input file.", 
+    addOption("database,d", "Molecule database file to screen.", 
               value<std::string>(&databaseFile)->required());
     addOption("output,o", "Molecule output file.", 
               value<std::string>(&hitOutputFile));
     addOption("report,r", "Report output file.", 
               value<std::string>(&reportFile));
-    addOption("mode,m", "Specifies which kind of obtained result for the query/input molecule pairings are of interest "
+    addOption("mode,m", "Specifies which kind of obtained results for the query/input molecule pairings are of interest "
               "(BEST_OVERALL, BEST_PER_QUERY, BEST_PER_QUERY_CONF, default: BEST_PER_QUERY).",
               value<std::string>()->notifier([this](const std::string& mode) { this->setScreeningMode(mode); }));
     addOption("func,f", "Function to use for molecule similarity/distance calculation and ranking operations (" + // TODO
               getScoringFunctionIDs() + ", default: TANIMOTO)",
               value<std::string>()->notifier([this](const std::string& id) { this->setScoringFunction(id); }));
-    addOption("descr,d", "Type of molecule descriptor to use for similarity/distance calculations (" +
+    addOption("descr,e", "Type of molecule descriptor to use for similarity/distance calculations (" +
               getDescriptorCalculatorIDs() + ", default: ECFP)",
               value<std::string>()->notifier([this](const std::string& id) { this->setDescriptorCalculator(id); }));
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
               value<std::size_t>(&numBestHits));
-    addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the --best-hits option, default: 0 - no limit).",
+    addOption("max-hits,n", "Maximum number of found hits at which the screen will terminate (overrides the --best-hits option, default: 0 - no limit).",
               value<std::size_t>(&maxNumHits));
-    addOption("cutoff,x", "Score cutoff value which determines whether an input molecule is considered as a search hit (default: -1.0 -> no cutoff).",
+    addOption("cutoff,x", "Similarity/distance cutoff value which determines whether an database molecule is considered as a hit (default: -1.0 -> no cutoff).",
               value<double>(&scoreCutoff));
     addOption("merge-hits,M", "If true, identified hits are merged into a single, combined hit list. "
               "If false, a separate hit list for every query molecule will be maintained (default: false).", 
@@ -144,7 +156,7 @@ SimSearchImpl::SimSearchImpl():
               value<bool>(&splitOutFiles)->implicit_value(true));
     addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit molecule output file (default: true).",
               value<bool>(&outputQuery)->implicit_value(true));
-    addOption("single-conf,g", "If specified, conformers of the input molecules are treated as individual single conformer molecules (default: false).",
+    addOption("single-conf,g", "If specified, conformers of the database molecules are treated as individual single conformer molecules (default: false).",
               value<bool>(&singleConfSearch)->implicit_value(true));
     addOption("score-sd-tags,S", "If true, similarity/distance score values will be appended as SD-block entries of the output hit molecules (default: true).",
               value<bool>(&scoreSDTags)->implicit_value(true));
@@ -152,23 +164,23 @@ SimSearchImpl::SimSearchImpl():
               value<bool>(&queryNameSDTags)->implicit_value(true));
     addOption("query-idx-sd-tags,G", "If true, the query molecule index will be appended to the SD-block of the output hit molecules (default: false).",
               value<bool>(&queryMolIdxSDTags)->implicit_value(true));
-    addOption("query-conf-sd-tags,F", "If true, the query conformer index will be appended to the SD-block of the output hit molecules (default: true).",
+    addOption("query-conf-sd-tags,F", "If true, the query molecule conformer index will be appended to the SD-block of the output hit molecules (default: true).",
               value<bool>(&queryConfIdxSDTags)->implicit_value(true));
-    addOption("mol-idx-sd-tags,B", "If true, the input molecule index will be appended to the SD-block of the output hit molecules (default: false).",
+    addOption("db-idx-sd-tags,B", "If true, the database molecule index will be appended to the SD-block of the output hit molecules (default: false).",
               value<bool>(&dbMolIdxSDTags)->implicit_value(true));
-    addOption("mol-conf-sd-tags,Y", "If true, the input molecule conformer index will be appended to the SD-block of the output hit molecules (default: true).",
+    addOption("db-conf-sd-tags,Y", "If true, the database molecule conformer index will be appended to the SD-block of the output hit molecules (default: true).",
               value<bool>(&dbConfIdxSDTags)->implicit_value(true));
     addOption("hit-name-ptn,P", "Pattern for composing the names of written hit molecules by variable substitution (supported variables: @Q@ = query molecule name, "
-              "@M@ = input molecule name, @C@ = query molecule conformer index, @c@ = input molecule conformer index, @I@ = query molecule index "
-              "and @i@ = input molecule index, default: " + hitNamePattern + ").",
+              "@D@ = database molecule name, @C@ = query molecule conformer index, @c@ = database molecule conformer index, @I@ = query molecule index "
+              "and @i@ = database molecule index, default: " + hitNamePattern + ").",
               value<std::string>(&hitNamePattern));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
               std::to_string(std::thread::hardware_concurrency()) + 
               " threads, must be >= 0, 0 disables multithreading).", 
               value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
-    addOption("query-format,Q", "Query molecule input file format (default: auto-detect from file extension).", 
+    addOption("query-format,Q", "Query molecule file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { this->setQueryFormat(fmt); }));
-    addOption("input-format,I", "Molecule input file format (default: auto-detect from file extension).", 
+    addOption("database-format,D", "Molecule database file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { this->setDatabaseFormat(fmt); }));
     addOption("output-format,O", "Molecule output file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { this->setHitOutputFormat(fmt); }));
@@ -185,20 +197,20 @@ SimSearchImpl::SimSearchImpl():
     descrCalculator = getDescriptorCalculator("ECFP"); 
 }
 
-SimSearchImpl::~SimSearchImpl()
+SimScreenImpl::~SimScreenImpl()
 {}
 
-const char* SimSearchImpl::getProgName() const
+const char* SimScreenImpl::getProgName() const
 {
-    return "SimSearch";
+    return "SimScreen";
 }
 
-const char* SimSearchImpl::getProgAboutText() const
+const char* SimScreenImpl::getProgAboutText() const
 {
     return "Performs a descriptor-/fingerprint-based similarity screening of molecule databases.";
 }
 
-void SimSearchImpl::addOptionLongDescriptions()
+void SimScreenImpl::addOptionLongDescriptions()
 {
     
     typedef std::vector<std::string> StringList;
@@ -217,8 +229,8 @@ void SimSearchImpl::addOptionLongDescriptions()
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
-    addOptionLongDescription("input-format", 
-                             "Allows to explicitly specify the format of the molecule input file by providing one of the supported "
+    addOptionLongDescription("database-format", 
+                             "Allows to explicitly specify the format of the screening database file by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
                              "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
@@ -226,8 +238,8 @@ void SimSearchImpl::addOptionLongDescriptions()
 
     addOptionLongDescription("query", 
                              "The query molecule input file.\n\n" + formats_str);
-    addOptionLongDescription("input", 
-                             "The molecule input file.\n\n" + formats_str);
+    addOptionLongDescription("database", 
+                             "The molecule database file to screen.\n\n" + formats_str);
 
     formats.clear();
     formats_str = "Supported Output Formats:";
@@ -248,19 +260,19 @@ void SimSearchImpl::addOptionLongDescriptions()
                              "Hit molecule output file.\n\n" + formats_str);
 }
 
-void SimSearchImpl::setScoringFunction(const std::string& id)
+void SimScreenImpl::setScoringFunction(const std::string& id)
 {
     if (!(scoringFunc = getScoringFunction(id)))
         throwValidationError("func");
 }
 
-void SimSearchImpl::setDescriptorCalculator(const std::string& id)
+void SimScreenImpl::setDescriptorCalculator(const std::string& id)
 {
     if (!(descrCalculator = getDescriptorCalculator(id)))
         throwValidationError("descr");
 }
 
-void SimSearchImpl::setScreeningMode(const std::string& mode)
+void SimScreenImpl::setScreeningMode(const std::string& mode)
 {
     using namespace CDPL;
     
@@ -277,7 +289,7 @@ void SimSearchImpl::setScreeningMode(const std::string& mode)
         throwValidationError("mode");
 }
 
-void SimSearchImpl::setQueryFormat(const std::string& file_ext)
+void SimScreenImpl::setQueryFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
@@ -287,7 +299,7 @@ void SimSearchImpl::setQueryFormat(const std::string& file_ext)
     queryFormat = file_ext;
 }
 
-void SimSearchImpl::setDatabaseFormat(const std::string& file_ext)
+void SimScreenImpl::setDatabaseFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
@@ -297,7 +309,7 @@ void SimSearchImpl::setDatabaseFormat(const std::string& file_ext)
     databaseFormat = file_ext;
 }
 
-void SimSearchImpl::setHitOutputFormat(const std::string& file_ext)
+void SimScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
@@ -307,7 +319,7 @@ void SimSearchImpl::setHitOutputFormat(const std::string& file_ext)
     hitOutputFormat = file_ext;
 }
 
-void SimSearchImpl::processOptions()
+void SimScreenImpl::processOptions()
 {
     for (auto& func : scoringFuncs)
         func.processOptions(*this);
@@ -316,7 +328,7 @@ void SimSearchImpl::processOptions()
         calc.processOptions(*this);
 }
 
-int SimSearchImpl::process()
+int SimScreenImpl::process()
 {
     timer.reset();
     
@@ -367,7 +379,7 @@ int SimSearchImpl::process()
     return EXIT_SUCCESS;
 }
 
-void SimSearchImpl::processSingleThreaded()
+void SimScreenImpl::processSingleThreaded()
 {
     using namespace CDPL;
 
@@ -376,7 +388,7 @@ void SimSearchImpl::processSingleThreaded()
     worker();
 }
 
-void SimSearchImpl::processMultiThreaded()
+void SimScreenImpl::processMultiThreaded()
 {
     using namespace CDPL;
 
@@ -417,7 +429,7 @@ void SimSearchImpl::processMultiThreaded()
     }
 }
 
-bool SimSearchImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name,
+bool SimScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name,
                                const MoleculePtr& db_mol, const ScreeningProcessor::Result& res)
 {
     if (scoreCutoff >= 0.0 && scoringFunc->compare(res.score, scoreCutoff))
@@ -432,7 +444,7 @@ bool SimSearchImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol
     return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
 }
 
-bool SimSearchImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name,
+bool SimScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name,
                                  const MoleculePtr& db_mol, const ScreeningProcessor::Result& res)
 {
     if (maxNumHits > 0 && numHits >= maxNumHits)
@@ -467,7 +479,7 @@ bool SimSearchImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_m
     return true;
 }
 
-void SimSearchImpl::readQueryMolecules()
+void SimScreenImpl::readQueryMolecules()
 {
     using namespace CDPL;
     
@@ -479,6 +491,8 @@ void SimSearchImpl::readQueryMolecules()
         if (!queryReader->read(*query_mol))
             break;
 
+        descrCalculator->prepare(*query_mol);
+        
         queryMolecules.push_back(query_mol);
     }
 
@@ -489,7 +503,7 @@ void SimSearchImpl::readQueryMolecules()
     printMessage(INFO, "");
 }
 
-void SimSearchImpl::initHitLists()
+void SimScreenImpl::initHitLists()
 {
     hitLists.resize(mergeHitLists ? 1 : queryMolecules.size(),
                     HitList([this](const HitMoleculeData& lhs, const HitMoleculeData& rhs) -> bool {
@@ -497,7 +511,7 @@ void SimSearchImpl::initHitLists()
                     }));
 }
 
-void SimSearchImpl::initReportFileStreams()
+void SimScreenImpl::initReportFileStreams()
 {
     if (reportFile.empty())
         return;
@@ -517,7 +531,7 @@ void SimSearchImpl::initReportFileStreams()
     }
 }
 
-void SimSearchImpl::initHitMoleculeWriters()
+void SimScreenImpl::initHitMoleculeWriters()
 {
     using namespace CDPL;
     
@@ -560,7 +574,7 @@ void SimSearchImpl::initHitMoleculeWriters()
     }
 }
 
-void SimSearchImpl::outputHitLists()
+void SimScreenImpl::outputHitLists()
 {
     if (numBestHits == 0)
         return;
@@ -583,7 +597,7 @@ void SimSearchImpl::outputHitLists()
         outputHitMoleculeFiles();
 }
 
-void SimSearchImpl::outputReportFiles()
+void SimScreenImpl::outputReportFiles()
 {
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
@@ -611,9 +625,9 @@ void SimSearchImpl::outputReportFiles()
     }
 }
 
-void SimSearchImpl::outputReportFileHeader(std::ostream& os) const
+void SimScreenImpl::outputReportFileHeader(std::ostream& os) const
 {
-    os << "Database Mol. Name\t" << "Input Mol. Index\t" << "Input Conf. Index\t";
+    os << "Database Mol. Name\t" << "Database Mol. Index\t" << "Database Conf. Index\t";
 
     if (!splitOutFiles)
         os << "Query Mol. Name\t" << "Query Mol. Index\t";
@@ -624,7 +638,7 @@ void SimSearchImpl::outputReportFileHeader(std::ostream& os) const
         throw CDPL::Base::IOError("writing to report file failed");
 }
 
-void SimSearchImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data)
+void SimScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data)
 {
     numSavedHits++;
 
@@ -644,7 +658,7 @@ void SimSearchImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeD
         throw CDPL::Base::IOError("writing to report file failed");
 }
 
-void SimSearchImpl::outputHitMoleculeFiles()
+void SimScreenImpl::outputHitMoleculeFiles()
 {
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
@@ -678,7 +692,7 @@ void SimSearchImpl::outputHitMoleculeFiles()
     }
 }
 
-void SimSearchImpl::outputQueryMolecule(CDPL::Chem::MolecularGraphWriter& writer, std::size_t query_mol_idx)
+void SimScreenImpl::outputQueryMolecule(CDPL::Chem::MolecularGraphWriter& writer, std::size_t query_mol_idx)
 {
     using namespace CDPL;
 
@@ -696,7 +710,7 @@ void SimSearchImpl::outputQueryMolecule(CDPL::Chem::MolecularGraphWriter& writer
     throw Base::IOError("unspecified error while writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, query_mol));
 }
 
-void SimSearchImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, const HitMoleculeData& hit_data)
+void SimScreenImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, const HitMoleculeData& hit_data)
 {
     using namespace CDPL;
 
@@ -707,7 +721,7 @@ void SimSearchImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, 
         auto name = hitNamePattern;
 
         boost::replace_all(name, "@Q@", getName(queryMolecules[hit_data.screeningResult.queryMolIdx]));
-        boost::replace_all(name, "@M@", hit_data.dbMolName);
+        boost::replace_all(name, "@D@", hit_data.dbMolName);
         boost::replace_all(name, "@C@", std::to_string(hit_data.screeningResult.queryMolConfIdx + 1));
         boost::replace_all(name, "@c@", std::to_string(hit_data.screeningResult.dbMolConfIdx + 1));
         boost::replace_all(name, "@I@", std::to_string(hit_data.screeningResult.queryMolIdx + 1));
@@ -769,7 +783,7 @@ void SimSearchImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, 
     throw CDPL::Base::IOError("unspecified error while writing hit molecule " + createMoleculeIdentifier(hit_data.dbMolIndex + 1, *hit_data.dbMolecule));
 }
 
-void SimSearchImpl::setErrorMessage(const std::string& msg)
+void SimScreenImpl::setErrorMessage(const std::string& msg)
 {
     if (numThreads > 0) {
         std::lock_guard<std::mutex> lock(mutex);
@@ -784,7 +798,7 @@ void SimSearchImpl::setErrorMessage(const std::string& msg)
         errorMessage = msg;
 }
 
-std::size_t SimSearchImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t SimScreenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
     if (termSignalCaught())
         return 0;
@@ -801,7 +815,7 @@ std::size_t SimSearchImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
     return doReadNextMolecule(mol);
 }
 
-std::size_t SimSearchImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t SimScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
     while (true) {
         try {
@@ -816,10 +830,10 @@ std::size_t SimSearchImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
             return databaseReader->getRecordIndex();
 
         } catch (const std::exception& e) {
-            printMessage(ERROR, "Error while reading input molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1) + ": " + e.what());
+            printMessage(ERROR, "Error while reading database molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1) + ": " + e.what());
 
         } catch (...) {
-            printMessage(ERROR, "Unspecified error while reading input molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1));
+            printMessage(ERROR, "Unspecified error while reading database molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1));
         }
 
         numProcMols++;
@@ -830,7 +844,7 @@ std::size_t SimSearchImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
     return 0;
 }
 
-bool SimSearchImpl::haveErrorMessage()
+bool SimScreenImpl::haveErrorMessage()
 {
     if (numThreads > 0) {
         std::lock_guard<std::mutex> lock(mutex);
@@ -841,7 +855,7 @@ bool SimSearchImpl::haveErrorMessage()
     return !errorMessage.empty();
 }
 
-void SimSearchImpl::printStatistics()
+void SimScreenImpl::printStatistics()
 {
     std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
 
@@ -853,21 +867,21 @@ void SimSearchImpl::printStatistics()
     printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
-void SimSearchImpl::checkOutputFileOptions() const
+void SimScreenImpl::checkOutputFileOptions() const
 {
     if (hitOutputFile.empty() && reportFile.empty())
         throw CDPL::Base::ValueError("A hit output and/or report file has to be specified");
 }
 
-void SimSearchImpl::checkInputFiles() const
+void SimScreenImpl::checkInputFiles() const
 {
     using namespace CDPL;
 
     if (!Util::fileExists(queryFile))
-        throw Base::IOError("query file '" + queryFile + "' does not exist");
+        throw Base::IOError("query molecule file '" + queryFile + "' does not exist");
 
     if (!Util::fileExists(databaseFile))
-        throw Base::IOError("input file '" + databaseFile + "' does not exist");
+        throw Base::IOError("molecule database file '" + databaseFile + "' does not exist");
 
     if (!splitOutFiles) {
         if (Util::checkIfSameFile(queryFile, hitOutputFile))
@@ -884,7 +898,7 @@ void SimSearchImpl::checkInputFiles() const
     }
 }
 
-void SimSearchImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
+void SimScreenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
     if (numThreads == 0) {
         CmdLineBase::printMessage(level, msg, nl, file_only);
@@ -896,14 +910,14 @@ void SimSearchImpl::printMessage(VerbosityLevel level, const std::string& msg, b
     CmdLineBase::printMessage(level, msg, nl, file_only);
 }
 
-void SimSearchImpl::printOptionSummary()
+void SimScreenImpl::printOptionSummary()
 {
     printMessage(VERBOSE, "Option Summary:");
     printMessage(VERBOSE, " Query File:                          " + queryFile);
-    printMessage(VERBOSE, " Input File:                          " + databaseFile);
+    printMessage(VERBOSE, " Database File:                       " + databaseFile);
     printMessage(VERBOSE, " Hit Output File:                     " + (hitOutputFile.empty() ? std::string("None") : hitOutputFile));
     printMessage(VERBOSE, " Report Output File:                  " + (reportFile.empty() ? std::string("None") : reportFile));
-    printMessage(VERBOSE, " Mode:                                " + screeningModeToString());
+    printMessage(VERBOSE, " Screening Mode:                      " + screeningModeToString());
     printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc->getID());
     printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
     printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
@@ -916,8 +930,8 @@ void SimSearchImpl::printOptionSummary()
     printMessage(VERBOSE, " Output Query Mol. Name SD-Tags:      " + std::string(queryNameSDTags ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Query Mol. Index SD-Tags:     " + std::string(queryMolIdxSDTags ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Query Conf. Index SD-Tags:    " + std::string(queryConfIdxSDTags ? "Yes" : "No"));
-    printMessage(VERBOSE, " Output Input Mol. Index SD-Tags:     " + std::string(dbMolIdxSDTags ? "Yes" : "No"));
-    printMessage(VERBOSE, " Output Input Conf. Index SD-Tags:    " + std::string(dbConfIdxSDTags ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Database Mol. Index SD-Tags:  " + std::string(dbMolIdxSDTags ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Database Conf. Index SD-Tags: " + std::string(dbConfIdxSDTags ? "Yes" : "No"));
     printMessage(VERBOSE, " Hit Output Mol. Name Pattern:        " + hitNamePattern);
     printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
@@ -925,12 +939,12 @@ void SimSearchImpl::printOptionSummary()
         printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
     printMessage(VERBOSE, " Query File Format:                   " + (!queryFormat.empty() ? queryFormat : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Input File Format:                   " + (!databaseFormat.empty() ? databaseFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Database File Format:                " + (!databaseFormat.empty() ? databaseFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Hit File Format:                     " + (!hitOutputFormat.empty() ? hitOutputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, "");
 }
 
-void SimSearchImpl::initQueryReader()
+void SimScreenImpl::initQueryReader()
 {
     using namespace CDPL;
 
@@ -948,7 +962,7 @@ void SimSearchImpl::initQueryReader()
     setMultiConfImportParameter(*queryReader, true);
 }
 
-void SimSearchImpl::initDatabaseReader()
+void SimScreenImpl::initDatabaseReader()
 {
     using namespace CDPL;
 
@@ -960,23 +974,27 @@ void SimSearchImpl::initDatabaseReader()
                                                       new Chem::MoleculeReader(databaseFile, databaseFormat));
 
     } catch (const Base::IOError& e) {
-        throw Base::IOError("no input handler found for input molecule file '" + databaseFile + '\'');
+        throw Base::IOError("no input handler found for molecule database file '" + databaseFile + '\'');
     }
    
     setMultiConfImportParameter(*databaseReader, true);
 }
 
-void SimSearchImpl::initScoringFunctions()
+void SimScreenImpl::initScoringFunctions()
 {
+    scoringFuncs.push_back(new TanimotoSimilarity());
+    
     // TODO
 }
 
-void SimSearchImpl::initDescriptorCalculators()
+void SimScreenImpl::initDescriptorCalculators()
 {
+    descrCalculators.push_back(new ECFPCalculator());
+    
     // TODO
 }
         
-std::string SimSearchImpl::screeningModeToString() const
+std::string SimScreenImpl::screeningModeToString() const
 {
     switch (screeningMode) {
         
@@ -996,7 +1014,7 @@ std::string SimSearchImpl::screeningModeToString() const
     return "UNKNOWN";
 }
 
-std::string SimSearchImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+std::string SimScreenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
 {
     if (!getName(mol).empty())
         return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
@@ -1004,12 +1022,12 @@ std::string SimSearchImpl::createMoleculeIdentifier(std::size_t rec_idx, const C
     return createMoleculeIdentifier(rec_idx);
 }
 
-std::string SimSearchImpl::createMoleculeIdentifier(std::size_t rec_idx)
+std::string SimScreenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
     return std::to_string(rec_idx);
 }
 
-std::string SimSearchImpl::getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const
+std::string SimScreenImpl::getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const
 {
     auto suffix_pos = file_name_tmplt.find_last_of('.');
     auto file_name = file_name_tmplt;
@@ -1020,7 +1038,7 @@ std::string SimSearchImpl::getOutputFileName(const std::string& file_name_tmplt,
     return file_name.append("_" + std::to_string(query_mol_idx + 1));
 }
 
-ScoringFunction* SimSearchImpl::getScoringFunction(const std::string& id)
+ScoringFunction* SimScreenImpl::getScoringFunction(const std::string& id)
 {
     for (auto& func : scoringFuncs)
         if (CDPL::Internal::isEqualCI(id, func.getID()))
@@ -1029,7 +1047,7 @@ ScoringFunction* SimSearchImpl::getScoringFunction(const std::string& id)
     return nullptr;
 }
 
-DescriptorCalculator* SimSearchImpl::getDescriptorCalculator(const std::string& id)
+DescriptorCalculator* SimScreenImpl::getDescriptorCalculator(const std::string& id)
 {
     for (auto& calc : descrCalculators)
         if (CDPL::Internal::isEqualCI(id, calc.getID()))
@@ -1038,7 +1056,7 @@ DescriptorCalculator* SimSearchImpl::getDescriptorCalculator(const std::string& 
     return nullptr;
 }
 
-std::string SimSearchImpl::getScoringFunctionIDs() const
+std::string SimScreenImpl::getScoringFunctionIDs() const
 {
     std::string ids;
 
@@ -1052,7 +1070,7 @@ std::string SimSearchImpl::getScoringFunctionIDs() const
     return ids;
 }
 
-std::string SimSearchImpl::getDescriptorCalculatorIDs() const
+std::string SimScreenImpl::getDescriptorCalculatorIDs() const
 {
     std::string ids;
 

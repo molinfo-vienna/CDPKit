@@ -23,26 +23,30 @@
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
 
-set(simsearch_SRCS
+set(simscreen_SRCS
     Main.cpp
-    SimSearchImpl.cpp
+    SimScreenImpl.cpp
+    ScreeningProcessor.cpp
+    DescriptorCalculator.cpp
+    TanimotoSimilarity.cpp
+    ECFPCalculator.cpp
    )
 
-add_executable(simsearch ${simsearch_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+add_executable(simscreen ${simscreen_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-set_target_properties(simsearch PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
+set_target_properties(simscreen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
 if(WIN32)
-  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/simsearch.exe")
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/simscreen.exe")
 else()
-  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/simsearch")
+  set(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/simscreen")
 endif(WIN32)
 
 configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
-target_link_libraries(simsearch cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
+target_link_libraries(simscreen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
   cdpl-descr-shared Threads::Threads)
 
-install(TARGETS simsearch DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+install(TARGETS simscreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
