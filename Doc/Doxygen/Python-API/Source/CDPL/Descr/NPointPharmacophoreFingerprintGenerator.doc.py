@@ -98,6 +98,18 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param func 
+    #
+    def setFeatureFilterFunction(func: Pharm.BoolFeatureFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFeatureFilterFunction() -> Pharm.BoolFeatureFunctor: pass
+
+    ##
+    # \brief 
     # \return 
     #
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
@@ -109,5 +121,7 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
     maxFeatureTupleSize = property(getMaxFeatureTupleSize, setMaxFeatureTupleSize)
 
     binSize = property(getBinSize, setBinSize)
+
+    featureFilterFunction = property(getFeatureFilterFunction, setFeatureFilterFunction)
 
     pharmGenerator = property(getPharmacophoreGenerator)
