@@ -32,10 +32,12 @@
 #include <cstddef>
 #include <vector>
 #include <utility>
+#include <functional>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
+#include "CDPL/Pharm/FeatureSet.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -58,7 +60,9 @@ namespace CDPL
             static constexpr std::size_t DEF_MAX_FEATURE_TUPLE_SIZE = 3;
 
             static constexpr double DEF_BIN_SIZE = 0.5;
-        
+
+            typedef std::function<bool(const Pharm::Feature&)> FeatureFilterFunction;
+            
             virtual ~NPointPharmacophoreFingerprintGenerator() {}
             
             void setMinFeatureTupleSize(std::size_t min_size);
@@ -76,6 +80,16 @@ namespace CDPL
             Pharm::PharmacophoreGenerator& getPharmacophoreGenerator();
 
             const Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
+
+            /**
+             * \since 1.3
+             */
+            void setFeatureFilterFunction(const FeatureFilterFunction& func);
+
+            /**
+             * \since 1.3
+             */
+            const FeatureFilterFunction& getFeatureFilterFunction() const;
             
           protected:
             NPointPharmacophoreFingerprintGenerator();
@@ -105,8 +119,10 @@ namespace CDPL
             std::size_t                          minFtrTupleSize;
             std::size_t                          maxFtrTupleSize;
             double                               binSize;
+            FeatureFilterFunction                ftrFilterFunc;
             Pharm::DefaultPharmacophoreGenerator pharmGen;
             Pharm::BasicPharmacophore            pharm;
+            Pharm::FeatureSet                    ftrSubset;
             FeatureList                          ftrList;
             Math::ULMatrix                       ftrDistMatrix;
             FeatureList                          ftrTuple;

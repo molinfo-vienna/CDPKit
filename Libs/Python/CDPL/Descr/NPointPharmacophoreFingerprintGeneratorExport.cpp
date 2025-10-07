@@ -52,6 +52,10 @@ void CDPLPythonDescr::exportNPointPharmacophoreFingerprintGenerator()
              (python::arg("self"), python::arg("bin_size")))
         .def("getBinSize", &Descr::NPointPharmacophoreFingerprintGenerator::getBinSize,
              python::arg("self"))
+        .def("setFeatureFilterFunction",  &Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("getFeatureFilterFunction", &Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction,
+             python::arg("self"), python::return_internal_reference<>())
         .def("getPharmacophoreGenerator", static_cast<Pharm::PharmacophoreGenerator& (Descr::NPointPharmacophoreFingerprintGenerator::*)()>
              (&Descr::NPointPharmacophoreFingerprintGenerator::getPharmacophoreGenerator), python::arg("self"),
              python::return_internal_reference<>())
@@ -61,6 +65,11 @@ void CDPLPythonDescr::exportNPointPharmacophoreFingerprintGenerator()
                       &Descr::NPointPharmacophoreFingerprintGenerator::setMaxFeatureTupleSize)
         .add_property("binSize", &Descr::NPointPharmacophoreFingerprintGenerator::getBinSize,
                       &Descr::NPointPharmacophoreFingerprintGenerator::setBinSize)
+        .add_property("featureFilterFunction",
+                      python::make_function(static_cast<const Descr::NPointPharmacophoreFingerprintGenerator::FeatureFilterFunction& (Descr::NPointPharmacophoreFingerprintGenerator::*)() const>
+                                            (&Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction),
+                                            python::return_internal_reference<>()),
+                      &Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction)
         .add_property("pharmGenerator",
                       python::make_function(static_cast<Pharm::PharmacophoreGenerator& (Descr::NPointPharmacophoreFingerprintGenerator::*)()>
                                             (&Descr::NPointPharmacophoreFingerprintGenerator::getPharmacophoreGenerator),

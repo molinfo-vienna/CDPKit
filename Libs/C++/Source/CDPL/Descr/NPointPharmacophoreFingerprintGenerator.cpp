@@ -76,7 +76,18 @@ double Descr::NPointPharmacophoreFingerprintGenerator::getBinSize() const
 {
     return binSize;
 }
-            
+        
+void Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction(const FeatureFilterFunction& func)
+{
+    ftrFilterFunc = func;
+}
+
+const Descr::NPointPharmacophoreFingerprintGenerator::FeatureFilterFunction&
+Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction() const
+{
+    return ftrFilterFunc;
+}
+
 void Descr::NPointPharmacophoreFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
 {
     pharmGen.generate(molgraph, pharm);
@@ -92,8 +103,19 @@ void Descr::NPointPharmacophoreFingerprintGenerator::generate(const Pharm::Featu
         return;
 
     fp.reset();
-    
-    init(cntnr);
+
+    if (ftrFilterFunc) {
+        ftrSubset.clear();
+
+        for (auto& ftr : cntnr)
+            if (ftrFilterFunc(ftr))
+                ftrSubset.addFeature(ftr);
+
+        init(ftrSubset);
+        
+    } else
+        init(cntnr);
+
     enumFeatureTuples(0, fp);
 }
 

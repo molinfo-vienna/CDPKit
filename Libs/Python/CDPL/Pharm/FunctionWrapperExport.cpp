@@ -40,7 +40,7 @@ void CDPLPythonPharm::exportFunctionWrappers()
     using namespace Pharm;
 
     CDPLPythonBase::Function1Export<const Math::Vector3D&(const Feature&), Feature&, python::return_internal_reference<> >("Feature3DCoordinatesFunction");
-       CDPLPythonBase::Function1Export<double(const ScreeningProcessor::SearchHit&) >("DoubleSearchHitFunctor");
+    CDPLPythonBase::Function1Export<double(const ScreeningProcessor::SearchHit&) >("DoubleSearchHitFunctor");
     CDPLPythonBase::Function1Export<double(const Feature&), Feature&>("DoubleFeatureFunctor");
     CDPLPythonBase::Function1Export<bool(double), double, python::return_value_policy<python::return_by_value> >("BoolDoubleFunctor"); 
     CDPLPythonBase::Function1Export<double(double), double,    python::return_value_policy<python::return_by_value> >("DoubleDoubleFunctor"); 
