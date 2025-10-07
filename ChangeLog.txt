@@ -1,5 +1,7 @@
 master:
 
+ - Added method Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction() (and Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction())
+   which allows to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
  - Improved the extraction of ChOX property table view column names from SD-file property record headers
  - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
    Stereolithography (STL) format
