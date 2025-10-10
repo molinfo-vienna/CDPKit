@@ -35,7 +35,7 @@ namespace SimScreen
     {
 
       public:
-        TanimotoSimilarity(): ScoringFunction("TANIMOTO", "Tanimoto Similarity", false, ANY) {}
+        TanimotoSimilarity();
 
         double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const;
 

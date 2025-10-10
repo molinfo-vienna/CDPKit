@@ -56,19 +56,11 @@ class SimScreenImpl::ScreeningWorker
 
   public:
     ScreeningWorker(SimScreenImpl* parent):
-        parent(parent), screeningProc(*parent->scoringFunc, *parent->descrCalculator,
+        parent(parent), screeningProc(*parent->screeningProc, *parent->scoringFunc, *parent->descrCalculator,
                                       [this](const ScreeningProcessor::Result& res) {
                                           this->processResult(res);
                                       }),
-        molecule(new CDPL::Chem::BasicMolecule()), terminate(false)
-    {
-        static std::mutex mutex;
-
-        std::lock_guard<std::mutex> lock(mutex);
-        
-        for (auto& query : parent->queryMolecules)
-            screeningProc.addQuery(query);
-    }
+        molecule(new CDPL::Chem::BasicMolecule()), terminate(false) {}
 
     void operator()()
     {
@@ -82,8 +74,8 @@ class SimScreenImpl::ScreeningWorker
                 return;
 
             try {
-                if (!screeningProc.process(*molecule))
-                    parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed");
+                if (!screeningProc.process(*molecule, parent->screeningMode))
+                    parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed: " + screeningProc.getError());
 
                 continue;
 
@@ -212,7 +204,6 @@ const char* SimScreenImpl::getProgAboutText() const
 
 void SimScreenImpl::addOptionLongDescriptions()
 {
-    
     typedef std::vector<std::string> StringList;
 
     StringList formats;
@@ -346,6 +337,7 @@ int SimScreenImpl::process()
         return EXIT_FAILURE;
 
     readQueryMolecules();
+    procQueryMolecules();
     initReportFileStreams();
     initHitMoleculeWriters();
     initHitLists();
@@ -490,9 +482,7 @@ void SimScreenImpl::readQueryMolecules()
 
         if (!queryReader->read(*query_mol))
             break;
-
-        descrCalculator->prepare(*query_mol);
-        
+ 
         queryMolecules.push_back(query_mol);
     }
 
@@ -501,6 +491,17 @@ void SimScreenImpl::readQueryMolecules()
 
     printMessage(INFO, " - Read " + std::to_string(queryMolecules.size()) + " query molecule(s)");
     printMessage(INFO, "");
+}
+
+void SimScreenImpl::procQueryMolecules()
+{
+    printMessage(INFO, "Processing Query Molecules...");
+    
+    screeningProc.reset(new ScreeningProcessor(*scoringFunc, *descrCalculator));
+
+    for (std::size_t i = 0; i < queryMolecules.size(); i++)
+        if (!screeningProc->addQuery(queryMolecules[i]))
+            throw CDPL::Base::OperationFailed("processing of query molecule " + createMoleculeIdentifier(i + 1, queryMolecules[i]) + " failed: " + screeningProc->getError());
 }
 
 void SimScreenImpl::initHitLists()
@@ -632,7 +633,7 @@ void SimScreenImpl::outputReportFileHeader(std::ostream& os) const
     if (!splitOutFiles)
         os << "Query Mol. Name\t" << "Query Mol. Index\t";
     
-    os << "Query Conf. Index\t" << scoringFunc->getDisplayName() << 'n';
+    os << "Query Conf. Index\t" << scoringFunc->getDisplayName() << '\n';
 
     if (!os.good())
         throw CDPL::Base::IOError("writing to report file failed");
@@ -918,7 +919,21 @@ void SimScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Hit Output File:                     " + (hitOutputFile.empty() ? std::string("None") : hitOutputFile));
     printMessage(VERBOSE, " Report Output File:                  " + (reportFile.empty() ? std::string("None") : reportFile));
     printMessage(VERBOSE, " Screening Mode:                      " + screeningModeToString());
+    printMessage(VERBOSE, " Descriptor Type:                     " + descrCalculator->getID());
+
+    std::string ext_summary_str;
+
+    descrCalculator->getOptionSummary(ext_summary_str);
+
+    printOptionSummary(ext_summary_str);
+    
     printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc->getID());
+
+    ext_summary_str.clear();
+    scoringFunc->getOptionSummary(ext_summary_str);
+
+    printOptionSummary(ext_summary_str);
+    
     printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
     printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
     printMessage(VERBOSE, " Score Cutoff:                        " + (scoreCutoff < 0.0 ? std::string("None") : (boost::format("%.3f") % scoreCutoff).str()));
@@ -944,6 +959,26 @@ void SimScreenImpl::printOptionSummary()
     printMessage(VERBOSE, "");
 }
 
+void SimScreenImpl::printOptionSummary(const std::string& summary)
+{
+    for (std::string::size_type i = 0; ; ) {
+        auto title_end = summary.find_first_of(';', i);
+
+        if (title_end == std::string::npos)
+            break;
+
+        auto value_end = summary.find_first_of(';', title_end + 1);
+
+        if (value_end == std::string::npos)
+            break;
+
+        printMessage(VERBOSE, ' ' + summary.substr(i, title_end - i) + ':' + std::string((title_end - i) < 36 ? 36 - (title_end - i) : 0, ' ') +
+                     summary.substr(title_end + 1, value_end - title_end - 1));
+
+        i = value_end + 1;
+    }
+}
+    
 void SimScreenImpl::initQueryReader()
 {
     using namespace CDPL;

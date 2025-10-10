@@ -55,6 +55,8 @@ namespace SimScreen
     
         void addOptions(CmdLineLib::CmdLineBase& cl_base);
 
+        void getOptionSummary(std::string& summary) const;
+        
         DescriptorCalculator* clone() const;
 
         void prepare(CDPL::Chem::Molecule& mol);

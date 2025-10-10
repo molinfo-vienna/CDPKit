@@ -28,6 +28,10 @@
 #include <cstddef>
 #include <functional>
 #include <memory>
+#include <vector>
+
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -70,20 +74,36 @@ namespace SimScreen
 
         typedef std::function<void(const Result& res)> ResultCallbackFunc;
 
-        ScreeningProcessor(const ScoringFunction& scr_func, const DescriptorCalculator& calc, const ResultCallbackFunc& cb_func);
+        ScreeningProcessor(const ScoringFunction& scr_func, const DescriptorCalculator& calc);
+        
+        ScreeningProcessor(const ScreeningProcessor& proc, const ScoringFunction& scr_func, const DescriptorCalculator& calc, const ResultCallbackFunc& cb_func);
 
         ~ScreeningProcessor();
-        
-        void addQuery(CDPL::Chem::Molecule& query_mol);
 
-        bool process(CDPL::Chem::Molecule& db_mol);
+        const std::string& getError() const;
+        
+        bool addQuery(CDPL::Chem::Molecule& query_mol);
+
+        bool process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode);
 
       private:
+        static void convert(const CDPL::Util::BitSet& bset, CDPL::Math::DVector& vec);
+        static void convert(const CDPL::Math::DVector& vec, CDPL::Util::BitSet& bset);
+        
         typedef std::unique_ptr<DescriptorCalculator> DescriptorCalculatorPtr;
+        typedef std::vector<CDPL::Util::BitSet>       BitSetArray;
+        typedef std::vector<CDPL::Math::DVector>      DVectorArray;
+        typedef std::vector<BitSetArray>              BitSetArrayArray;
+        typedef std::vector<DVectorArray>             DVectorArrayArray;
 
         const ScoringFunction&  scoringFunc;
         DescriptorCalculatorPtr descrCalculator;
         ResultCallbackFunc      callbackFunc;
+        std::string             error;
+        BitSetArrayArray        queryBSDescrs;
+        DVectorArrayArray       queryDVDescrs;
+        CDPL::Util::BitSet      tmpBitSet;
+        CDPL::Math::DVector     tmpDVector;
     };
 } // namespace SimScreen
 

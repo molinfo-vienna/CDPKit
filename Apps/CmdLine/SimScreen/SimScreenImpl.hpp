@@ -116,6 +116,7 @@ namespace SimScreen
                           const MoleculePtr& db_mol, const ScreeningProcessor::Result& res);
 
         void readQueryMolecules();
+        void procQueryMolecules();
 
         void outputHitLists();
         void outputReportFiles();
@@ -138,7 +139,8 @@ namespace SimScreen
         void printStatistics();
 
         void printOptionSummary();
-
+        void printOptionSummary(const std::string& summary);
+        
         std::string screeningModeToString() const;
 
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
@@ -161,13 +163,15 @@ namespace SimScreen
         typedef boost::ptr_vector<ScoringFunction>                                                                   ScoringFunctionList;
         typedef boost::ptr_vector<DescriptorCalculator>                                                              DescriptorCalculatorList;
         typedef CDPL::Internal::Timer                                                                                Timer;
-
+        typedef std::auto_ptr<ScreeningProcessor>                                                                    ScreeningProcessorPtr;
+        
         std::string                       queryFile;
         std::string                       databaseFile;
         std::string                       hitOutputFile;
         std::string                       reportFile;
         ScoringFunction*                  scoringFunc;
         DescriptorCalculator*             descrCalculator;
+        ScreeningProcessorPtr             screeningProc;
         std::size_t                       numThreads;
         bool                              singleConfSearch;
         bool                              mergeHitLists;

@@ -30,6 +30,8 @@
 using namespace SimScreen;
 
 
+TanimotoSimilarity::TanimotoSimilarity(): ScoringFunction("TANIMOTO", "Tanimoto Similarity", false, ANY) {}
+
 double TanimotoSimilarity::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
 {
     return CDPL::Descr::calcTanimotoSimilarity(query_fp, db_mol_fp);

@@ -62,6 +62,8 @@ namespace SimScreen
 
         virtual void processOptions(CmdLineLib::CmdLineBase& cl_base) {}
 
+        virtual void getOptionSummary(std::string& summary) {}
+
         virtual double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const = 0;
 
         virtual double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const = 0;

@@ -60,12 +60,11 @@ namespace SimScreen
         {
 
             BITSET,
-            VECTOR,
-            ANY
+            VECTOR
         };
 
-        DescriptorCalculator(const std::string& id, DescriptorType descr_type):
-            id(id), descrType(descr_type) {}
+        DescriptorCalculator(const std::string& id, DescriptorType descr_type, bool req_3d_coords):
+            id(id), descrType(descr_type), req3DCoords(req_3d_coords) {}
 
         virtual ~DescriptorCalculator() {}
 
@@ -73,6 +72,8 @@ namespace SimScreen
 
         virtual void processOptions(CmdLineLib::CmdLineBase& cl_base) {}
 
+        virtual void getOptionSummary(std::string& summary) const {}
+        
         virtual DescriptorCalculator* clone() const = 0;
 
         virtual void prepare(CDPL::Chem::Molecule& mol);
@@ -96,9 +97,15 @@ namespace SimScreen
             return descrType;
         }
 
+        bool requires3DCoordinates() const
+        {
+            return req3DCoords;
+        }
+
       private:
         std::string    id;
         DescriptorType descrType;
+        bool           req3DCoords;
     };
 } // namespace SimScreen
 

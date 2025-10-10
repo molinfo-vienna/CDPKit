@@ -34,7 +34,7 @@
 using namespace SimScreen;
 
 
-ECFPCalculator::ECFPCalculator(): DescriptorCalculator("ECFP", BITSET)
+ECFPCalculator::ECFPCalculator(): DescriptorCalculator("ECFP", BITSET, false)
 {}
 
 ECFPCalculator::~ECFPCalculator()
@@ -48,6 +48,16 @@ void ECFPCalculator::addOptions(CmdLineLib::CmdLineBase& cl_base)
     cl_base.addOption("ecfp-radius",
                       "Atom environment radius in number of bonds (default: " + std::to_string(radius) + ").",
                       cl_base.value<std::size_t>(&radius));
+}
+
+void ECFPCalculator::getOptionSummary(std::string& summary) const
+{
+    summary.append("ECFP Bit Count;");
+    summary.append(std::to_string(size));
+    summary.push_back(';');
+    summary.append("ECFP Atom Env. Radius;");
+    summary.append(std::to_string(radius));
+    summary.push_back(';');
 }
 
 DescriptorCalculator* ECFPCalculator::clone() const
