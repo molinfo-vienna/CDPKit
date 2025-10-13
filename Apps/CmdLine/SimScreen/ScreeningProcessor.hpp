@@ -84,7 +84,7 @@ namespace SimScreen
         
         bool addQuery(CDPL::Chem::Molecule& query_mol);
 
-        bool process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode);
+        bool process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode, bool single_conf_srch);
 
       private:
         static void convert(const CDPL::Util::BitSet& bset, CDPL::Math::DVector& vec);

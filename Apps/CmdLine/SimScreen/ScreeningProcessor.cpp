@@ -123,7 +123,7 @@ bool ScreeningProcessor::addQuery(CDPL::Chem::Molecule& query_mol)
     return true;
 }
 
-bool ScreeningProcessor::process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode)
+bool ScreeningProcessor::process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode, bool single_conf_srch /* TODO */)
 {
     descrCalculator->prepare(db_mol);
 

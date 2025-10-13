@@ -74,7 +74,7 @@ class SimScreenImpl::ScreeningWorker
                 return;
 
             try {
-                if (!screeningProc.process(*molecule, parent->screeningMode))
+                if (!screeningProc.process(*molecule, parent->screeningMode, parent->singleConfSearch))
                     parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed: " + screeningProc.getError());
 
                 continue;
@@ -729,7 +729,9 @@ void SimScreenImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, 
         boost::replace_all(name, "@i@", std::to_string(hit_data.dbMolIndex + 1));
 
         setName(*hit_data.dbMolecule, name);
-        applyConformation(*hit_data.dbMolecule, hit_data.screeningResult.dbMolConfIdx);
+
+        if (descrCalculator->requires3DCoordinates())
+            applyConformation(*hit_data.dbMolecule, hit_data.screeningResult.dbMolConfIdx);
 
         setMultiConfExportParameter(writer, false);
 
