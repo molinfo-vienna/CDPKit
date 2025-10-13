@@ -68,6 +68,8 @@ namespace SimScreen
 
         std::size_t          radius{2};
         std::size_t          size{8192};
+        bool                 incChirality{false};
+        bool                 incHydrogens{false};
         ECFPGeneratorImplPtr ecfpGenImpl;
     };
 } // namespace SimScreen

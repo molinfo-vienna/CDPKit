@@ -67,7 +67,7 @@ namespace SimScreen
         virtual double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const = 0;
 
         virtual double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const = 0;
-        
+ 
         bool compare(double score1, double score2) const
         {
             if (isDistScore)
@@ -89,6 +89,11 @@ namespace SimScreen
         DescriptorType getDescriptorType() const
         {
             return descrType;
+        }
+
+        bool isDistanceScore() const
+        {
+            return isDistScore;
         }
 
       private:

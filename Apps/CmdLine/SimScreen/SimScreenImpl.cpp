@@ -501,14 +501,14 @@ void SimScreenImpl::procQueryMolecules()
 
     for (std::size_t i = 0; i < queryMolecules.size(); i++)
         if (!screeningProc->addQuery(queryMolecules[i]))
-            throw CDPL::Base::OperationFailed("processing of query molecule " + createMoleculeIdentifier(i + 1, queryMolecules[i]) + " failed: " + screeningProc->getError());
+            printMessage(ERROR, "Processing of query molecule " + createMoleculeIdentifier(i + 1, queryMolecules[i]) + " failed: " + screeningProc->getError());
 }
 
 void SimScreenImpl::initHitLists()
 {
     hitLists.resize(mergeHitLists ? 1 : queryMolecules.size(),
                     HitList([this](const HitMoleculeData& lhs, const HitMoleculeData& rhs) -> bool {
-                        return this->scoringFunc->compare(lhs.screeningResult.score, rhs.screeningResult.score);
+                                return this->scoringFunc->compare(rhs.screeningResult.score, lhs.screeningResult.score);
                     }));
 }
 

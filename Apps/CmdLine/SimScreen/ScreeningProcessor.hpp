@@ -58,10 +58,10 @@ namespace SimScreen
         struct Result
         {
 
-            double      score;
-            std::size_t queryMolIdx;
-            std::size_t queryMolConfIdx;
-            std::size_t dbMolConfIdx;
+            double      score{0.0};
+            std::size_t queryMolIdx{0};
+            std::size_t queryMolConfIdx{0};
+            std::size_t dbMolConfIdx{0};
         };
 
         enum ScreeningMode
@@ -100,8 +100,10 @@ namespace SimScreen
         DescriptorCalculatorPtr descrCalculator;
         ResultCallbackFunc      callbackFunc;
         std::string             error;
-        BitSetArrayArray        queryBSDescrs;
-        DVectorArrayArray       queryDVDescrs;
+        BitSetArrayArray        queryMolBSDescrs;
+        DVectorArrayArray       queryMolDVDescrs;
+        BitSetArray             dbMolBSDescrs;
+        DVectorArray            dbMolDVDescrs;
         CDPL::Util::BitSet      tmpBitSet;
         CDPL::Math::DVector     tmpDVector;
     };

@@ -48,6 +48,13 @@ void ECFPCalculator::addOptions(CmdLineLib::CmdLineBase& cl_base)
     cl_base.addOption("ecfp-radius",
                       "Atom environment radius in number of bonds (default: " + std::to_string(radius) + ").",
                       cl_base.value<std::size_t>(&radius));
+    cl_base.addOption("ecfp-inc-H",
+                      "Whether or not to include hydrogen atoms (default: " + std::string(incHydrogens ? "true" : "false") + ").",
+                      cl_base.value<bool>(&incHydrogens));
+    cl_base.addOption("ecfp-inc-chirality",
+                      "Whether or not to regard the chriality of stereo atoms(default: " + std::string(incChirality ? "true" : "false") + ").",
+                      cl_base.value<bool>(&incChirality));
+    
 }
 
 void ECFPCalculator::getOptionSummary(std::string& summary) const
@@ -58,6 +65,13 @@ void ECFPCalculator::getOptionSummary(std::string& summary) const
     summary.append("ECFP Atom Env. Radius;");
     summary.append(std::to_string(radius));
     summary.push_back(';');
+    summary.append("ECFP include Hydrogens;");
+    summary.append(incHydrogens ? "Yes" : "No");
+    summary.push_back(';');
+    summary.append("ECFP include Chirality Info;");
+    summary.append(incChirality ? "Yes" : "No");
+    summary.push_back(';');
+    
 }
 
 DescriptorCalculator* ECFPCalculator::clone() const
@@ -80,8 +94,8 @@ void ECFPCalculator::calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL:
     if (!ecfpGenImpl) {
         ecfpGenImpl.reset(new CDPL::Descr::CircularFingerprintGenerator());
 
-        ecfpGenImpl->includeHydrogens(false);
-        ecfpGenImpl->includeChirality(true);
+        ecfpGenImpl->includeHydrogens(incHydrogens);
+        ecfpGenImpl->includeChirality(incChirality);
         ecfpGenImpl->setNumIterations(radius);
     }
 
