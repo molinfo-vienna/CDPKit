@@ -76,7 +76,8 @@ namespace SimScreen
 
         ScreeningProcessor(const ScoringFunction& scr_func, const DescriptorCalculator& calc);
         
-        ScreeningProcessor(const ScreeningProcessor& proc, const ScoringFunction& scr_func, const DescriptorCalculator& calc, const ResultCallbackFunc& cb_func);
+        ScreeningProcessor(const ScreeningProcessor& proc, const ScoringFunction& scr_func,
+                           const DescriptorCalculator& calc, const ResultCallbackFunc& cb_func);
 
         ~ScreeningProcessor();
 

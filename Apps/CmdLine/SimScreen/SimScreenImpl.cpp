@@ -337,7 +337,6 @@ int SimScreenImpl::process()
         return EXIT_FAILURE;
 
     readQueryMolecules();
-    procQueryMolecules();
     initReportFileStreams();
     initHitMoleculeWriters();
     initHitLists();
@@ -475,33 +474,35 @@ void SimScreenImpl::readQueryMolecules()
 {
     using namespace CDPL;
     
-    printMessage(INFO, "Reading Query Molecules...");
+    printMessage(INFO, "Processing Query Molecules...");
 
+    screeningProc.reset(new ScreeningProcessor(*scoringFunc, *descrCalculator));
+
+    std::size_t num_failed = 0;
+    
     while (!termSignalCaught()) {
         std::auto_ptr<Chem::Molecule> query_mol(new Chem::BasicMolecule());
 
         if (!queryReader->read(*query_mol))
             break;
- 
+
+        if (!screeningProc->addQuery(*query_mol)) {
+            printMessage(ERROR, "Processing of query molecule " + createMoleculeIdentifier(queryReader->getRecordIndex(), *query_mol) + " failed: " + screeningProc->getError());
+            num_failed++;
+        }
+        
         queryMolecules.push_back(query_mol);
     }
 
     if (termSignalCaught())
         return;
 
-    printMessage(INFO, " - Read " + std::to_string(queryMolecules.size()) + " query molecule(s)");
-    printMessage(INFO, "");
-}
-
-void SimScreenImpl::procQueryMolecules()
-{
-    printMessage(INFO, "Processing Query Molecules...");
+    if (num_failed > 0)
+        printMessage(INFO, " - Read " + std::to_string(queryMolecules.size()) + " query molecule(s), " + std::to_string(num_failed) + " ignored due to processing errors");
+    else
+        printMessage(INFO, " - Read " + std::to_string(queryMolecules.size()) + " query molecule(s)");
     
-    screeningProc.reset(new ScreeningProcessor(*scoringFunc, *descrCalculator));
-
-    for (std::size_t i = 0; i < queryMolecules.size(); i++)
-        if (!screeningProc->addQuery(queryMolecules[i]))
-            printMessage(ERROR, "Processing of query molecule " + createMoleculeIdentifier(i + 1, queryMolecules[i]) + " failed: " + screeningProc->getError());
+    printMessage(INFO, "");
 }
 
 void SimScreenImpl::initHitLists()

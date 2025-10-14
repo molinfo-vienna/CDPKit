@@ -24,6 +24,7 @@
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
@@ -86,7 +87,16 @@ DescriptorCalculator* ECFPCalculator::clone() const
 
 void ECFPCalculator::prepare(CDPL::Chem::Molecule& mol)
 {
-    initSubstructureSearchTarget(mol, false);
+    calcBasicProperties(mol, false);
+
+    if (incChirality) {
+        calcCIPPriorities(mol, false);
+        perceiveAtomStereoCenters(mol, false, true);
+        calcAtomStereoDescriptors(mol, false);
+    }
+    
+    if (incHydrogens)        
+        makeHydrogenComplete(mol);
 }
 
 void ECFPCalculator::calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp)

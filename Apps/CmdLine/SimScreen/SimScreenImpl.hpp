@@ -116,7 +116,6 @@ namespace SimScreen
                           const MoleculePtr& db_mol, const ScreeningProcessor::Result& res);
 
         void readQueryMolecules();
-        void procQueryMolecules();
 
         void outputHitLists();
         void outputReportFiles();
