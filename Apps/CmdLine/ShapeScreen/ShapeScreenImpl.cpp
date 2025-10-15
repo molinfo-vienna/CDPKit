@@ -696,7 +696,6 @@ void ShapeScreenImpl::outputHitLists()
 {
     if (numBestHits == 0)
         return;
-
     printMessage(INFO, "");
 
     if (progressEnabled()) {
@@ -717,6 +716,8 @@ void ShapeScreenImpl::outputHitLists()
 
 void ShapeScreenImpl::outputReportFiles()
 {
+    auto force_prog = true;
+
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             std::ostream& os = *reportOStreams[i];
@@ -728,21 +729,21 @@ void ShapeScreenImpl::outputReportFiles()
                 if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputReportFileHitData(os, hit_data);
             }
         }
 
     } else {
         std::ostream& os = *reportOStreams[0];
-
+        
         for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1) {
             const HitList& hit_list = *it1;
 
             for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
                 const HitMoleculeData& hit_data = *it2;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputReportFileHitData(os, hit_data);
             }
         }
@@ -825,6 +826,8 @@ void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMolecul
 
 void ShapeScreenImpl::outputHitMoleculeFiles()
 {
+    auto force_prog = true;
+    
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             const MoleculeWriterPtr& writer = hitMolWriters[i];
@@ -836,7 +839,7 @@ void ShapeScreenImpl::outputHitMoleculeFiles()
                 if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputHitMolecule(writer, hit_data);
             }
         }
@@ -856,7 +859,7 @@ void ShapeScreenImpl::outputHitMoleculeFiles()
             for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
                 const HitMoleculeData& hit_data = *it2;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputHitMolecule(writer, hit_data);
             }
         }

@@ -601,6 +601,8 @@ void SimScreenImpl::outputHitLists()
 
 void SimScreenImpl::outputReportFiles()
 {
+    auto force_prog = true;
+    
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             auto& os = reportOStreams[i];
@@ -610,17 +612,17 @@ void SimScreenImpl::outputReportFiles()
                 if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputReportFileHitData(os, hit_data);
             }
         }
 
     } else {
         auto& os = reportOStreams[0];
-
+        
         for (auto& hit_list : hitLists) {
             for (auto& hit_data : hit_list) {
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputReportFileHitData(os, hit_data);
             }
         }
@@ -662,6 +664,8 @@ void SimScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeD
 
 void SimScreenImpl::outputHitMoleculeFiles()
 {
+    auto force_prog = true;
+
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             auto& writer = hitMolWriters[i];
@@ -671,7 +675,7 @@ void SimScreenImpl::outputHitMoleculeFiles()
                 if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputHitMolecule(writer, hit_data);
             }
         }
@@ -687,7 +691,7 @@ void SimScreenImpl::outputHitMoleculeFiles()
             }
 
             for (auto& hit_data : hit_list) {
-                printInfiniteProgress("Writing Output Files");
+                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
                 outputHitMolecule(writer, hit_data);
             }
         }
