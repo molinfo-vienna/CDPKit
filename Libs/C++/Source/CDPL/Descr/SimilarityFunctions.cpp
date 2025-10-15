@@ -118,16 +118,12 @@ double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSe
 {
     std::size_t bs1_size = bs1.size();
     std::size_t bs2_size = bs2.size();
-    std::size_t a = bs1.count();
-    std::size_t b = bs2.count();
 
     if (bs1_size == bs2_size) {
         std::size_t bab = (bs1 & bs2).count();
-        std::size_t oa = a - bab;
-        std::size_t ob = b - bab;
         std::size_t nab = bs1_size - (bs1 | bs2).count();
 
-        return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+        return (1.0 - std::sqrt(double(bab + nab) / double(bs1_size)));
     }
 
     if (bs1_size < bs2_size) {
@@ -135,22 +131,18 @@ double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSe
         tmp.resize(bs2_size);
 
         std::size_t bab = (tmp & bs2).count();
-        std::size_t oa = a - bab;
-        std::size_t ob = b - bab;
         std::size_t nab = bs2_size - (tmp | bs2).count();
 
-        return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+        return (1.0 - std::sqrt(double(bab + nab) / double(bs2_size)));
     }
 
     Util::BitSet tmp(bs2);
     tmp.resize(bs1_size);
       
     std::size_t bab = (bs1 & tmp).count();
-    std::size_t oa = a - bab;
-    std::size_t ob = b - bab;
     std::size_t nab = bs1_size - (bs1 | tmp).count();
 
-    return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+    return (1.0 - std::sqrt(double(bab + nab) / double(bs1_size)));
 }
 
 double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
@@ -164,9 +156,8 @@ double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSe
         std::size_t bab = (bs1 & bs2).count();
         std::size_t oa = a - bab;
         std::size_t ob = b - bab;
-        std::size_t nab = bs1_size - (bs1 | bs2).count();
 
-        return (double(oa + ob) / double(oa + ob + bab + nab));
+        return (1.0 - double(oa + ob) / double(bs1_size));
     }
 
     if (bs1_size < bs2_size) {
@@ -176,9 +167,8 @@ double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSe
         std::size_t bab = (tmp & bs2).count();
         std::size_t oa = a - bab;
         std::size_t ob = b - bab;
-        std::size_t nab = bs2_size - (tmp | bs2).count();
 
-        return (double(oa + ob) / double(oa + ob + bab + nab));
+        return (1.0 - double(oa + ob) / double(bs2_size));
     }
 
     Util::BitSet tmp(bs2);
@@ -187,9 +177,8 @@ double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSe
     std::size_t bab = (bs1 & tmp).count();
     std::size_t oa = a - bab;
     std::size_t ob = b - bab;
-    std::size_t nab = bs1_size - (bs1 | tmp).count();
 
-    return (double(oa + ob) / double(oa + ob + bab + nab));
+    return (1.0 - double(oa + ob) / double(bs1_size));
 }
 
 double Descr::calcDiceSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
