@@ -64,13 +64,13 @@ namespace SimScreen
         void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp);
 
       private:
-        typedef std::unique_ptr<CDPL::Descr::CircularFingerprintGenerator> ECFPGeneratorImplPtr;
+        typedef std::unique_ptr<CDPL::Descr::CircularFingerprintGenerator> FPGeneratorImplPtr;
 
-        std::size_t          radius{2};
-        std::size_t          size{8192};
-        bool                 incChirality{false};
-        bool                 incHydrogens{false};
-        ECFPGeneratorImplPtr ecfpGenImpl;
+        std::size_t        radius{2};
+        std::size_t        size{8192};
+        bool               incChirality{false};
+        bool               incHydrogens{false};
+        FPGeneratorImplPtr fpGenImpl;
     };
 } // namespace SimScreen
 

@@ -1,5 +1,5 @@
 /* 
- * TanimotoSimilarity.cpp
+ * PubChemFPCalculator.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,22 +22,31 @@
  */
 
 
-#include "CDPL/Descr/SimilarityFunctions.hpp"
+#include "CDPL/Descr/PubChemFingerprintGenerator.hpp"
 
-#include "TanimotoSimilarity.hpp"
+#include "CmdLine/Lib/CmdLineBase.hpp"
+
+#include "PubChemFPCalculator.hpp"
 
 
 using namespace SimScreen;
 
 
-TanimotoSimilarity::TanimotoSimilarity(): ScoringFunction("TANIMOTO_SIM", "Tanimoto Similarity", false, ANY) {}
+PubChemFPCalculator::PubChemFPCalculator(): DescriptorCalculator("PUBCHEM", BITSET, false)
+{}
 
-double TanimotoSimilarity::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
+PubChemFPCalculator::~PubChemFPCalculator()
+{}
+
+DescriptorCalculator* PubChemFPCalculator::clone() const
 {
-    return CDPL::Descr::calcTanimotoSimilarity(query_fp, db_mol_fp);
+    return new PubChemFPCalculator();
 }
 
-double TanimotoSimilarity::calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const
+void PubChemFPCalculator::calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp)
 {
-    return CDPL::Descr::calcTanimotoSimilarity(query_descr, db_mol_descr);
+    if (!fpGenImpl)
+        fpGenImpl.reset(new CDPL::Descr::PubChemFingerprintGenerator());
+
+    fpGenImpl->generate(molgraph, fp);
 }

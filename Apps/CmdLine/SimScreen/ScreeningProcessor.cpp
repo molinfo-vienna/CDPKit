@@ -123,8 +123,13 @@ bool ScreeningProcessor::addQuery(CDPL::Chem::Molecule& query_mol)
     return true;
 }
 
-bool ScreeningProcessor::process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode, bool single_conf_srch /* TODO */)
+bool ScreeningProcessor::process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode, bool single_conf_srch)
 {
+    if (!callbackFunc) {
+        error = "result callback function not set";
+        return false;
+    }
+    
     descrCalculator->prepare(db_mol);
 
     auto bs_descr = false;
@@ -188,73 +193,87 @@ bool ScreeningProcessor::process(CDPL::Chem::Molecule& db_mol, ScreeningMode mod
                 descrCalculator->calculate(db_mol, dbMolDVDescrs[i]);
         }
     }
+
+    if (bs_descr)
+        getResults(queryMolBSDescrs, dbMolBSDescrs, mode, single_conf_srch);
+    else
+        getResults(queryMolDVDescrs, dbMolDVDescrs, mode, single_conf_srch);
     
+    return true;
+}
+
+template <typename QueryMolDescrLists, typename DBMolDescrList>
+void ScreeningProcessor::getResults(const QueryMolDescrLists& query_mol_descr_lists, const DBMolDescrList& db_mol_descr_list,
+                                    ScreeningMode mode, bool single_conf_srch) const
+{
     Result best_result;
-    auto first = true;
+    auto have_res = false;
 
-    if (bs_descr) {
-        for (std::size_t i = 0, num_qery_mols = queryMolBSDescrs.size(); i < num_qery_mols; i++) {
-            auto& query_descr_list = queryMolBSDescrs[i];
+    if (single_conf_srch) {
+        for (std::size_t k = 0, num_db_mol_descrs = db_mol_descr_list.size(); k < num_db_mol_descrs; k++) {
+            for (std::size_t i = 0, num_qery_mols = query_mol_descr_lists.size(); i < num_qery_mols; i++) {
+                auto& query_descr_list = query_mol_descr_lists[i];
 
-            for (std::size_t j = 0, num_query_mol_descrs = query_descr_list.size(); j < num_query_mol_descrs; j++) {
-                for (std::size_t k = 0; k < num_db_mol_descrs; k++) {
-                    auto score = scoringFunc.calculate(query_descr_list[j], dbMolBSDescrs[k]);
+                for (std::size_t j = 0, num_query_mol_descrs = query_descr_list.size(); j < num_query_mol_descrs; j++) {
+                    auto score = scoringFunc.calculate(query_descr_list[j], db_mol_descr_list[k]);
 
-                    if (first || scoringFunc.compare(best_result.score, score)) {
+                    if (!have_res || scoringFunc.compare(best_result.score, score)) {
                         best_result.score           = score;
                         best_result.queryMolIdx     = i;
                         best_result.queryMolConfIdx = j;
                         best_result.dbMolConfIdx    = k;
-                        first                       = false;
+                        have_res                    = true;
+                    }
+
+                    if (mode == BEST_MATCH_PER_QUERY_CONF) {
+                        callbackFunc(best_result);
+                        have_res = false;
                     }
                 }
-                
-                if (mode == BEST_MATCH_PER_QUERY_CONF) {
+
+                if (have_res && (mode == BEST_MATCH_PER_QUERY)) {
                     callbackFunc(best_result);
-                    first = true;
+                    have_res = false;
+                }
+            }
+                
+            if (have_res && (mode == BEST_OVERALL_MATCH))
+                callbackFunc(best_result);
+        }
+
+        return;
+    }
+
+    for (std::size_t i = 0, num_qery_mols = query_mol_descr_lists.size(); i < num_qery_mols; i++) {
+        auto& query_descr_list = query_mol_descr_lists[i];
+
+        for (std::size_t j = 0, num_query_mol_descrs = query_descr_list.size(); j < num_query_mol_descrs; j++) {
+            for (std::size_t k = 0, num_db_mol_descrs = db_mol_descr_list.size(); k < num_db_mol_descrs; k++) {
+                auto score = scoringFunc.calculate(query_descr_list[j], db_mol_descr_list[k]);
+
+                if (!have_res || scoringFunc.compare(best_result.score, score)) {
+                    best_result.score           = score;
+                    best_result.queryMolIdx     = i;
+                    best_result.queryMolConfIdx = j;
+                    best_result.dbMolConfIdx    = k;
+                    have_res                    = true;
                 }
             }
 
-            if (!first && (mode == BEST_MATCH_PER_QUERY)) {
+            if (mode == BEST_MATCH_PER_QUERY_CONF) {
                 callbackFunc(best_result);
-                first = true;
+                have_res = false;
             }
         }
 
-    } else {
-        for (std::size_t i = 0, num_qery_mols = queryMolDVDescrs.size(); i < num_qery_mols; i++) {
-            auto& query_descr_list = queryMolDVDescrs[i];
-
-            for (std::size_t j = 0, num_query_mol_descrs = query_descr_list.size(); j < num_query_mol_descrs; j++) {
-                for (std::size_t k = 0; k < num_db_mol_descrs; k++) {
-                    auto score = scoringFunc.calculate(query_descr_list[j], dbMolDVDescrs[k]);
-
-                    if (first || scoringFunc.compare(best_result.score, score)) {
-                        best_result.score           = score;
-                        best_result.queryMolIdx     = i;
-                        best_result.queryMolConfIdx = j;
-                        best_result.dbMolConfIdx    = k;
-                        first                       = false;
-                    }
-                }
-                
-                if (mode == BEST_MATCH_PER_QUERY_CONF) {
-                    callbackFunc(best_result);
-                    first = true;
-                }
-            }
-
-            if (!first && (mode == BEST_MATCH_PER_QUERY)) {
-                callbackFunc(best_result);
-                first = true;
-            }
+        if (have_res && (mode == BEST_MATCH_PER_QUERY)) {
+            callbackFunc(best_result);
+            have_res = false;
         }
     }
 
-    if (!first && (mode == BEST_OVERALL_MATCH))
+    if (have_res && (mode == BEST_OVERALL_MATCH))
         callbackFunc(best_result);
-
-    return true;
 }
 
 void ScreeningProcessor::convert(const CDPL::Util::BitSet& bset, CDPL::Math::DVector& vec)

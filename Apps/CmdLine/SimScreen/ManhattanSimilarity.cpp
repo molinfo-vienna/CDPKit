@@ -1,5 +1,5 @@
 /* 
- * TanimotoSimilarity.cpp
+ * ManhattanSimilarity.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,20 +24,20 @@
 
 #include "CDPL/Descr/SimilarityFunctions.hpp"
 
-#include "TanimotoSimilarity.hpp"
+#include "ManhattanSimilarity.hpp"
 
 
 using namespace SimScreen;
 
 
-TanimotoSimilarity::TanimotoSimilarity(): ScoringFunction("TANIMOTO_SIM", "Tanimoto Similarity", false, ANY) {}
+ManhattanSimilarity::ManhattanSimilarity(): ScoringFunction("MANHATTAN_SIM", "Manhattan Similarity", false, BITSET) {}
 
-double TanimotoSimilarity::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
+double ManhattanSimilarity::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
 {
-    return CDPL::Descr::calcTanimotoSimilarity(query_fp, db_mol_fp);
+    return CDPL::Descr::calcManhattanSimilarity(query_fp, db_mol_fp);
 }
 
-double TanimotoSimilarity::calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const
+double ManhattanSimilarity::calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const
 {
-    return CDPL::Descr::calcTanimotoSimilarity(query_descr, db_mol_descr);
+    return -1.0;
 }

@@ -88,6 +88,10 @@ namespace SimScreen
         bool process(CDPL::Chem::Molecule& db_mol, ScreeningMode mode, bool single_conf_srch);
 
       private:
+        template <typename QueryMolDescrLists, typename DBMolDescrList>
+        void getResults(const QueryMolDescrLists& query_mol_descr_lists, const DBMolDescrList& db_mol_descr_list,
+                        ScreeningMode mode, bool single_conf_srch) const;
+        
         static void convert(const CDPL::Util::BitSet& bset, CDPL::Math::DVector& vec);
         static void convert(const CDPL::Math::DVector& vec, CDPL::Util::BitSet& bset);
         

@@ -29,7 +29,10 @@ set(simscreen_SRCS
     ScreeningProcessor.cpp
     DescriptorCalculator.cpp
     TanimotoSimilarity.cpp
+    ManhattanSimilarity.cpp
+    ManhattanDistance.cpp
     ECFPCalculator.cpp
+    PubChemFPCalculator.cpp
    )
 
 add_executable(simscreen ${simscreen_SRCS} $<TARGET_OBJECTS:cdpl-internal>)

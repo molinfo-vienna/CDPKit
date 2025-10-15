@@ -45,7 +45,10 @@
 
 #include "SimScreenImpl.hpp"
 #include "TanimotoSimilarity.hpp"
+#include "ManhattanSimilarity.hpp"
+#include "ManhattanDistance.hpp"
 #include "ECFPCalculator.hpp"
+#include "PubChemFPCalculator.hpp"
 
 
 using namespace SimScreen;
@@ -128,11 +131,11 @@ SimScreenImpl::SimScreenImpl():
     addOption("mode,m", "Specifies which kind of obtained results for the query/input molecule pairings are of interest "
               "(BEST_OVERALL, BEST_PER_QUERY, BEST_PER_QUERY_CONF, default: BEST_PER_QUERY).",
               value<std::string>()->notifier([this](const std::string& mode) { this->setScreeningMode(mode); }));
-    addOption("func,f", "Function to use for molecule similarity/distance calculation and ranking operations (" + // TODO
-              getScoringFunctionIDs() + ", default: TANIMOTO)",
+    addOption("func,f", "Function to use for molecule similarity/distance calculation and ranking operations (" +
+              getScoringFunctionIDs() + ", default: " + scoringFuncs.front().getID() + ")",
               value<std::string>()->notifier([this](const std::string& id) { this->setScoringFunction(id); }));
     addOption("descr,e", "Type of molecule descriptor to use for similarity/distance calculations (" +
-              getDescriptorCalculatorIDs() + ", default: ECFP)",
+              getDescriptorCalculatorIDs() + ", default: " + descrCalculators.front().getID() + ")",
               value<std::string>()->notifier([this](const std::string& id) { this->setDescriptorCalculator(id); }));
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
@@ -185,8 +188,8 @@ SimScreenImpl::SimScreenImpl():
     for (auto& calc : descrCalculators)
         calc.addOptions(*this);
 
-    scoringFunc = getScoringFunction("TANIMOTO");
-    descrCalculator = getDescriptorCalculator("ECFP"); 
+    scoringFunc = &scoringFuncs.front();
+    descrCalculator = &descrCalculators.front(); 
 }
 
 SimScreenImpl::~SimScreenImpl()
@@ -585,7 +588,10 @@ void SimScreenImpl::outputHitLists()
 
     if (progressEnabled()) {
         initInfiniteProgress();
+
         printMessage(INFO, "Writing Output Files...", true, true);
+        printInfiniteProgress("Writing Output Files...", true);
+        
     } else
         printMessage(INFO, "Writing Output Files...");
 
@@ -601,8 +607,6 @@ void SimScreenImpl::outputHitLists()
 
 void SimScreenImpl::outputReportFiles()
 {
-    auto force_prog = true;
-    
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             auto& os = reportOStreams[i];
@@ -612,7 +616,7 @@ void SimScreenImpl::outputReportFiles()
                 if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
+                printInfiniteProgress("Writing Output Files");
                 outputReportFileHitData(os, hit_data);
             }
         }
@@ -622,7 +626,7 @@ void SimScreenImpl::outputReportFiles()
         
         for (auto& hit_list : hitLists) {
             for (auto& hit_data : hit_list) {
-                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
+                printInfiniteProgress("Writing Output Files"); 
                 outputReportFileHitData(os, hit_data);
             }
         }
@@ -664,8 +668,6 @@ void SimScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeD
 
 void SimScreenImpl::outputHitMoleculeFiles()
 {
-    auto force_prog = true;
-
     if (splitOutFiles) {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             auto& writer = hitMolWriters[i];
@@ -675,7 +677,7 @@ void SimScreenImpl::outputHitMoleculeFiles()
                 if (mergeHitLists && hit_data.screeningResult.queryMolIdx != i)
                     continue;
 
-                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
+                printInfiniteProgress("Writing Output Files");
                 outputHitMolecule(writer, hit_data);
             }
         }
@@ -691,7 +693,7 @@ void SimScreenImpl::outputHitMoleculeFiles()
             }
 
             for (auto& hit_data : hit_list) {
-                printInfiniteProgress("Writing Output Files", force_prog); force_prog = false;
+                printInfiniteProgress("Writing Output Files");
                 outputHitMolecule(writer, hit_data);
             }
         }
@@ -1025,6 +1027,8 @@ void SimScreenImpl::initDatabaseReader()
 void SimScreenImpl::initScoringFunctions()
 {
     scoringFuncs.push_back(new TanimotoSimilarity());
+    scoringFuncs.push_back(new ManhattanSimilarity());
+    scoringFuncs.push_back(new ManhattanDistance());
     
     // TODO
 }
@@ -1032,6 +1036,7 @@ void SimScreenImpl::initScoringFunctions()
 void SimScreenImpl::initDescriptorCalculators()
 {
     descrCalculators.push_back(new ECFPCalculator());
+    descrCalculators.push_back(new PubChemFPCalculator());
     
     // TODO
 }

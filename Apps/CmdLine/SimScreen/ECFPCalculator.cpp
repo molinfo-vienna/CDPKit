@@ -55,7 +55,6 @@ void ECFPCalculator::addOptions(CmdLineLib::CmdLineBase& cl_base)
     cl_base.addOption("ecfp-inc-chirality",
                       "Whether or not to regard the chriality of stereo atoms(default: " + std::string(incChirality ? "true" : "false") + ").",
                       cl_base.value<bool>(&incChirality));
-    
 }
 
 void ECFPCalculator::getOptionSummary(std::string& summary) const
@@ -72,7 +71,6 @@ void ECFPCalculator::getOptionSummary(std::string& summary) const
     summary.append("ECFP include Chirality Info;");
     summary.append(incChirality ? "Yes" : "No");
     summary.push_back(';');
-    
 }
 
 DescriptorCalculator* ECFPCalculator::clone() const
@@ -101,16 +99,16 @@ void ECFPCalculator::prepare(CDPL::Chem::Molecule& mol)
 
 void ECFPCalculator::calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp)
 {
-    if (!ecfpGenImpl) {
-        ecfpGenImpl.reset(new CDPL::Descr::CircularFingerprintGenerator());
+    if (!fpGenImpl) {
+        fpGenImpl.reset(new CDPL::Descr::CircularFingerprintGenerator());
 
-        ecfpGenImpl->includeHydrogens(incHydrogens);
-        ecfpGenImpl->includeChirality(incChirality);
-        ecfpGenImpl->setNumIterations(radius);
+        fpGenImpl->includeHydrogens(incHydrogens);
+        fpGenImpl->includeChirality(incChirality);
+        fpGenImpl->setNumIterations(radius);
     }
 
     fp.resize(size);
 
-    ecfpGenImpl->generate(molgraph);
-    ecfpGenImpl->setFeatureBits(fp);
+    fpGenImpl->generate(molgraph);
+    fpGenImpl->setFeatureBits(fp);
 }
