@@ -1018,7 +1018,7 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
             }
 
             numProcMols++;
-            printInfiniteProgress("Screening Molecules (" + std::to_string(numProcMols) + " passed)");
+            printInfiniteProgress("Screening Molecules (" + std::to_string(numProcMols) + " passed)", numProcMols == 1);
 
             return databaseReader->getRecordIndex();
 
