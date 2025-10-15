@@ -148,6 +148,7 @@ namespace
     const std::string PURPLE("\033[35m");
     const std::string GREEN("\033[32m");
     const std::string DEF_COLOR("\033[39m");
+    const std::string CLEAR_LINE("\033[K");
 
     const char* DEF_COPYRIGHT = "2003 Thomas Seidel";
 }
@@ -488,6 +489,9 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
 
     if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
         std::cerr << std::endl;
+
+    if (haveEscSeqSupport)
+        std::cerr << CLEAR_LINE;
 
     std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << ""
               << std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << ""<< '\r';
