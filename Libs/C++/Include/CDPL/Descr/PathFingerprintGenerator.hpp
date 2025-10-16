@@ -237,6 +237,10 @@ namespace CDPL
              */
             std::size_t getMaxPathLength() const;
 
+            void includeHydrogens(bool include);
+
+            bool hydrogensIncluded() const;
+            
             /**
              * \brief Generates the fingerprint of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to generate the fingerprint.
@@ -257,6 +261,7 @@ namespace CDPL
             const Chem::MolecularGraph* molGraph;
             std::size_t                 minPathLength;
             std::size_t                 maxPathLength;
+            bool                        incHydrogens;
             AtomDescriptorFunction      atomDescriptorFunc;
             BondDescriptorFunction      bondDescriptorFunc;
             Util::BitSet                visBondMask;

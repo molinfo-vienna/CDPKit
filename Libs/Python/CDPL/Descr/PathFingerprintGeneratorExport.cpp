@@ -75,12 +75,17 @@ void CDPLPythonDescr::exportPathFingerprintGenerator()
              (python::arg("self"), python::arg("max_length")))
         .def("getMinPathLength", &Descr::PathFingerprintGenerator::getMinPathLength, python::arg("self"))
         .def("getMaxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength, python::arg("self"))
+        .def("includeHydrogens", &Descr::PathFingerprintGenerator::includeHydrogens, 
+             (python::arg("self"), python::arg("include")))
+        .def("hydrogensIncluded", &Descr::PathFingerprintGenerator::hydrogensIncluded, python::arg("self"))
         .def("generate", &Descr::PathFingerprintGenerator::generate,
              (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
         .add_property("minPathLength", &Descr::PathFingerprintGenerator::getMinPathLength,
                       &Descr::PathFingerprintGenerator::setMinPathLength)
         .add_property("maxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength,
                       &Descr::PathFingerprintGenerator::setMaxPathLength)
+        .add_property("incHydrogens", &Descr::PathFingerprintGenerator::hydrogensIncluded,
+                      &Descr::PathFingerprintGenerator::includeHydrogens)
         .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
         .def_readonly("DEF_BOND_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
 
