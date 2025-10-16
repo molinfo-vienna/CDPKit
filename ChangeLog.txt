@@ -1,7 +1,9 @@
 master:
 
- - Changed the calculation of Euclidean and Manhattan similarity scores so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
-   (before: highest = 0.0, lowest = 1.0)
+ - Added method Descr::PathFingerprintGenerator::includeHydrogens() (and Descr::PathFingerprintGenerator::hydrogensIncluded())
+   which allows to specify whether hydrogen atoms shall be ignored or not
+ - Changed the calculation of Manhattan similarity scores so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
+   (before: highest sim. = 0.0, lowest sim. = 1.0)
  - Added method Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction() (and Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction())
    which allows to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
  - Improved the extraction of ChOX property table view column names from SD-file property record headers
