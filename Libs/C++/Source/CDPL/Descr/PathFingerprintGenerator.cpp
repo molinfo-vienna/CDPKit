@@ -27,7 +27,6 @@
 #include <cmath>
 #include <algorithm>
 #include <iterator>
-#include <functional>
 
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -35,6 +34,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Internal/RangeHashCode.hpp"
 
 
@@ -108,11 +108,11 @@ std::uint64_t Descr::PathFingerprintGenerator::DefBondDescriptorFunctor::operato
 //-----
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator():
-    molGraph(0), minPathLength(0), maxPathLength(5),
+    molGraph(0), minPathLength(0), maxPathLength(5), incHydrogens(false),
     atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
-    molGraph(0), minPathLength(0), maxPathLength(5), 
+    molGraph(0), minPathLength(0), maxPathLength(5), incHydrogens(false), 
     atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
 {
     generate(molgraph, fp);
@@ -136,6 +136,16 @@ std::size_t Descr::PathFingerprintGenerator::getMinPathLength() const
 std::size_t Descr::PathFingerprintGenerator::getMaxPathLength() const
 {
     return maxPathLength;
+}
+
+void Descr::PathFingerprintGenerator::includeHydrogens(bool include)
+{
+    incHydrogens = include;
+}
+
+bool Descr::PathFingerprintGenerator::hydrogensIncluded() const
+{
+    return incHydrogens;
 }
 
 void Descr::PathFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
@@ -204,15 +214,17 @@ void Descr::PathFingerprintGenerator::calcFingerprint(const Chem::MolecularGraph
     bondPath.clear();
     visBondMask.reset();
 
-    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-                  std::bind(&PathFingerprintGenerator::growPath, this,
-                            std::placeholders::_1, std::ref(fp)));
+    for (auto& atom : molgraph.getAtoms())
+        growPath(atom, fp);
 }
 
 void Descr::PathFingerprintGenerator::growPath(const Chem::Atom& atom, Util::BitSet& fp)
 {
     using namespace Chem;
 
+    if (!incHydrogens && (getType(atom) == Chem::AtomType::H))
+        return;
+    
     std::size_t atom_idx = molGraph->getAtomIndex(atom);
 
     atomPath.push_back(atom_idx);

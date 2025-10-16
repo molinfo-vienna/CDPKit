@@ -237,8 +237,14 @@ namespace CDPL
              */
             std::size_t getMaxPathLength() const;
 
+            /**
+             * \since 1.3
+             */
             void includeHydrogens(bool include);
 
+            /**
+             * \since 1.3
+             */
             bool hydrogensIncluded() const;
             
             /**
