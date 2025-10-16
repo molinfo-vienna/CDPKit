@@ -76,7 +76,7 @@ namespace SimScreen
         
         virtual DescriptorCalculator* clone() const = 0;
 
-        virtual void prepare(CDPL::Chem::Molecule& mol);
+        virtual void prepare(CDPL::Chem::Molecule& mol) const;
         
         virtual void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp) {}
 

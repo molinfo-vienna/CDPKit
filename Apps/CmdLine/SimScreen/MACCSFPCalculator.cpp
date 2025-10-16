@@ -1,5 +1,5 @@
 /* 
- * DescriptorCalculator.cpp
+ * MACCSFPCalculator.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,16 +22,31 @@
  */
 
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Descr/MACCSFingerprintGenerator.hpp"
 
-#include "DescriptorCalculator.hpp"
+#include "CmdLine/Lib/CmdLineBase.hpp"
+
+#include "MACCSFPCalculator.hpp"
 
 
 using namespace SimScreen;
 
 
-void DescriptorCalculator::prepare(CDPL::Chem::Molecule& mol) const
+MACCSFPCalculator::MACCSFPCalculator(): DescriptorCalculator("MACCS", BITSET, false)
+{}
+
+MACCSFPCalculator::~MACCSFPCalculator()
+{}
+
+DescriptorCalculator* MACCSFPCalculator::clone() const
 {
-    calcBasicProperties(mol, false);
+    return new MACCSFPCalculator();
+}
+
+void MACCSFPCalculator::calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp)
+{
+    if (!fpGenImpl)
+        fpGenImpl.reset(new CDPL::Descr::MACCSFingerprintGenerator());
+
+    fpGenImpl->generate(molgraph, fp);
 }

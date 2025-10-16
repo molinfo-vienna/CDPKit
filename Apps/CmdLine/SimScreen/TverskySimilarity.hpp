@@ -1,5 +1,5 @@
 /* 
- * ECFPCalculator.hpp
+ * TverskySimilarity.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,56 +22,33 @@
  */
 
 
-#ifndef SIMSCREEN_ECFPCALCULATOR_HPP
-#define SIMSCREEN_ECFPCALCULATOR_HPP
+#ifndef SIMSCREEN_TVERSKYSIMILARITY_HPP
+#define SIMSCREEN_TVERSKYSIMILARITY_HPP
 
-#include <cstddef>
-#include <memory>
-
-#include "DescriptorCalculator.hpp"
-
-
-namespace CDPL
-{
-
-    namespace Descr
-    {
-
-        class CircularFingerprintGenerator;
-    }
-}
+#include "ScoringFunction.hpp"
 
 
 namespace SimScreen
 {
 
-    class ECFPCalculator : public DescriptorCalculator
+    class TverskySimilarity : public ScoringFunction
     {
 
       public:
-        ECFPCalculator();
+        TverskySimilarity();
 
-        ~ECFPCalculator();
-    
         void addOptions(CmdLineLib::CmdLineBase& cl_base);
 
         void getOptionSummary(std::string& summary) const;
-        
-        DescriptorCalculator* clone() const;
 
-        void prepare(CDPL::Chem::Molecule& mol) const;
-        
-        void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp);
+        double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const;
+
+        double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const;
 
       private:
-        typedef std::unique_ptr<CDPL::Descr::CircularFingerprintGenerator> FPGeneratorImplPtr;
-
-        std::size_t        radius{2};
-        std::size_t        size{8192};
-        bool               incChirality{false};
-        bool               incHydrogens{false};
-        FPGeneratorImplPtr fpGenImpl;
+        double weightA{1.0};
+        double weightB{0.0};
     };
 } // namespace SimScreen
 
-#endif // SIMSCREEN_ECFPCALCULATOR_HPP
+#endif // SIMSCREEN_TVERSKYSIMILARITY_HPP

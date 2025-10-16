@@ -1,5 +1,5 @@
 /* 
- * DescriptorCalculator.cpp
+ * EuclideanDistance.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,16 +22,22 @@
  */
 
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Descr/SimilarityFunctions.hpp"
 
-#include "DescriptorCalculator.hpp"
+#include "EuclideanDistance.hpp"
 
 
 using namespace SimScreen;
 
 
-void DescriptorCalculator::prepare(CDPL::Chem::Molecule& mol) const
+EuclideanDistance::EuclideanDistance(): ScoringFunction("EUCLIDEAN_DIST", "Euclidean Distance", true, ANY) {}
+
+double EuclideanDistance::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
 {
-    calcBasicProperties(mol, false);
+    return CDPL::Descr::calcEuclideanDistance(query_fp, db_mol_fp);
+}
+
+double EuclideanDistance::calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const
+{
+    return CDPL::Descr::calcEuclideanDistance(query_descr, db_mol_descr);
 }

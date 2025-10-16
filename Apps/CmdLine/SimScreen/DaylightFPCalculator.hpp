@@ -1,5 +1,5 @@
 /* 
- * ECFPCalculator.hpp
+ * DaylightFPCalculator.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef SIMSCREEN_ECFPCALCULATOR_HPP
-#define SIMSCREEN_ECFPCALCULATOR_HPP
+#ifndef SIMSCREEN_DAYLIGHTFPCALCULATOR_HPP
+#define SIMSCREEN_DAYLIGHTFPCALCULATOR_HPP
 
 #include <cstddef>
 #include <memory>
@@ -37,7 +37,7 @@ namespace CDPL
     namespace Descr
     {
 
-        class CircularFingerprintGenerator;
+        class PathFingerprintGenerator;
     }
 }
 
@@ -45,13 +45,13 @@ namespace CDPL
 namespace SimScreen
 {
 
-    class ECFPCalculator : public DescriptorCalculator
+    class DaylightFPCalculator : public DescriptorCalculator
     {
 
       public:
-        ECFPCalculator();
+        DaylightFPCalculator();
 
-        ~ECFPCalculator();
+        ~DaylightFPCalculator();
     
         void addOptions(CmdLineLib::CmdLineBase& cl_base);
 
@@ -64,14 +64,14 @@ namespace SimScreen
         void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp);
 
       private:
-        typedef std::unique_ptr<CDPL::Descr::CircularFingerprintGenerator> FPGeneratorImplPtr;
+        typedef std::unique_ptr<CDPL::Descr::PathFingerprintGenerator> FPGeneratorImplPtr;
 
-        std::size_t        radius{2};
-        std::size_t        size{8192};
-        bool               incChirality{false};
+        std::size_t        minPathLen{0};
+        std::size_t        maxPathLen{5};
         bool               incHydrogens{false};
+        std::size_t        size{8191};
         FPGeneratorImplPtr fpGenImpl;
     };
 } // namespace SimScreen
 
-#endif // SIMSCREEN_ECFPCALCULATOR_HPP
+#endif // SIMSCREEN_DAYLIGHTFPCALCULATOR_HPP

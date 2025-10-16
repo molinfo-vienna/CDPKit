@@ -1,5 +1,5 @@
 /* 
- * DescriptorCalculator.cpp
+ * CosineSimilarity.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,16 +22,22 @@
  */
 
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Descr/SimilarityFunctions.hpp"
 
-#include "DescriptorCalculator.hpp"
+#include "CosineSimilarity.hpp"
 
 
 using namespace SimScreen;
 
 
-void DescriptorCalculator::prepare(CDPL::Chem::Molecule& mol) const
+CosineSimilarity::CosineSimilarity(): ScoringFunction("COSINE_SIM", "Cosine Similarity", false, ANY) {}
+
+double CosineSimilarity::calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const
 {
-    calcBasicProperties(mol, false);
+    return CDPL::Descr::calcCosineSimilarity(query_fp, db_mol_fp);
+}
+
+double CosineSimilarity::calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const
+{
+    return CDPL::Descr::calcCosineSimilarity(query_descr, db_mol_descr);
 }

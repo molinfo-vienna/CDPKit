@@ -22,10 +22,8 @@
  */
 
 
-#include <algorithm>
 #include <iterator>
 #include <fstream>
-#include <iomanip>
 #include <thread>
 #include <chrono>
 
@@ -45,10 +43,18 @@
 
 #include "SimScreenImpl.hpp"
 #include "TanimotoSimilarity.hpp"
+#include "TverskySimilarity.hpp"
+#include "CosineSimilarity.hpp"
+#include "DiceSimilarity.hpp"
 #include "ManhattanSimilarity.hpp"
 #include "ManhattanDistance.hpp"
+#include "HammingDistance.hpp"
+#include "EuclideanSimilarity.hpp"
+#include "EuclideanDistance.hpp"
 #include "ECFPCalculator.hpp"
+#include "DaylightFPCalculator.hpp"
 #include "PubChemFPCalculator.hpp"
+#include "MACCSFPCalculator.hpp"
 
 
 using namespace SimScreen;
@@ -124,11 +130,11 @@ SimScreenImpl::SimScreenImpl():
               value<std::string>(&queryFile)->required());
     addOption("database,d", "Molecule database file to screen.", 
               value<std::string>(&databaseFile)->required());
-    addOption("output,o", "Molecule output file.", 
+    addOption("output,o", "Hit molecule output file.", 
               value<std::string>(&hitOutputFile));
     addOption("report,r", "Report output file.", 
               value<std::string>(&reportFile));
-    addOption("mode,m", "Specifies which kind of obtained results for the query/input molecule pairings are of interest "
+    addOption("mode,m", "Specifies which kind of obtained results for the query/database molecule pairings are of interest "
               "(BEST_OVERALL, BEST_PER_QUERY, BEST_PER_QUERY_CONF, default: BEST_PER_QUERY).",
               value<std::string>()->notifier([this](const std::string& mode) { this->setScreeningMode(mode); }));
     addOption("func,f", "Function to use for molecule similarity/distance calculation and ranking operations (" +
@@ -177,7 +183,7 @@ SimScreenImpl::SimScreenImpl():
               value<std::string>()->notifier([this](const std::string& fmt) { this->setQueryFormat(fmt); }));
     addOption("database-format,D", "Molecule database file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { this->setDatabaseFormat(fmt); }));
-    addOption("output-format,O", "Molecule output file format (default: auto-detect from file extension).", 
+    addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
               value<std::string>()->notifier([this](const std::string& fmt) { this->setHitOutputFormat(fmt); }));
  
     addOptionLongDescriptions();
@@ -1024,9 +1030,14 @@ void SimScreenImpl::initDatabaseReader()
 void SimScreenImpl::initScoringFunctions()
 {
     scoringFuncs.push_back(new TanimotoSimilarity());
+    scoringFuncs.push_back(new TverskySimilarity());
+    scoringFuncs.push_back(new CosineSimilarity());
+    scoringFuncs.push_back(new DiceSimilarity());
     scoringFuncs.push_back(new ManhattanSimilarity());
     scoringFuncs.push_back(new ManhattanDistance());
-    // TODO
+    scoringFuncs.push_back(new HammingDistance());
+    scoringFuncs.push_back(new EuclideanSimilarity());
+    scoringFuncs.push_back(new EuclideanDistance());
 
     scoringFunc = &scoringFuncs.front();
 }
@@ -1034,7 +1045,9 @@ void SimScreenImpl::initScoringFunctions()
 void SimScreenImpl::initDescriptorCalculators()
 {
     descrCalculators.push_back(new ECFPCalculator());
+    descrCalculators.push_back(new DaylightFPCalculator());
     descrCalculators.push_back(new PubChemFPCalculator());
+    descrCalculators.push_back(new MACCSFPCalculator());
     // TODO
 
     descrCalculator = &descrCalculators.front();

@@ -44,16 +44,16 @@ ECFPCalculator::~ECFPCalculator()
 void ECFPCalculator::addOptions(CmdLineLib::CmdLineBase& cl_base)
 {
     cl_base.addOption("ecfp-size",
-                      "Size of the generated fingerprint (default: " + std::to_string(size) + ").",
+                      "Size of the generated fingerprint (default: 8191).",
                       cl_base.value<std::size_t>(&size));
     cl_base.addOption("ecfp-radius",
-                      "Atom environment radius in number of bonds (default: " + std::to_string(radius) + ").",
+                      "Atom environment radius in number of bonds (default: 2 -> ECFP4).",
                       cl_base.value<std::size_t>(&radius));
     cl_base.addOption("ecfp-inc-H",
-                      "Whether or not to include hydrogen atoms (default: " + std::string(incHydrogens ? "true" : "false") + ").",
+                      "Whether or not to include hydrogen atoms (default: false).",
                       cl_base.value<bool>(&incHydrogens));
     cl_base.addOption("ecfp-inc-chirality",
-                      "Whether or not to regard the chriality of stereo atoms(default: " + std::string(incChirality ? "true" : "false") + ").",
+                      "Whether or not to regard the chriality of stereo atoms(default: false).",
                       cl_base.value<bool>(&incChirality));
 }
 
@@ -79,11 +79,13 @@ DescriptorCalculator* ECFPCalculator::clone() const
 
     copy->radius = radius;
     copy->size = size;
+    copy->incHydrogens = incHydrogens;
+    copy->incChirality = incChirality;
     
     return copy;
 }
 
-void ECFPCalculator::prepare(CDPL::Chem::Molecule& mol)
+void ECFPCalculator::prepare(CDPL::Chem::Molecule& mol) const
 {
     calcBasicProperties(mol, false);
 

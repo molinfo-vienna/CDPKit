@@ -1,5 +1,5 @@
 /* 
- * DescriptorCalculator.cpp
+ * HammingDistance.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,16 +22,25 @@
  */
 
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#ifndef SIMSCREEN_HAMMINGDISTANCE_HPP
+#define SIMSCREEN_HAMMINGDISTANCE_HPP
 
-#include "DescriptorCalculator.hpp"
-
-
-using namespace SimScreen;
+#include "ScoringFunction.hpp"
 
 
-void DescriptorCalculator::prepare(CDPL::Chem::Molecule& mol) const
+namespace SimScreen
 {
-    calcBasicProperties(mol, false);
-}
+
+    class HammingDistance : public ScoringFunction
+    {
+
+      public:
+        HammingDistance();
+
+        double calculate(const CDPL::Util::BitSet& query_fp, const CDPL::Util::BitSet& db_mol_fp) const;
+
+        double calculate(const CDPL::Math::DVector& query_descr, const CDPL::Math::DVector& db_mol_descr) const;
+    };
+} // namespace SimScreen
+
+#endif // SIMSCREEN_HAMMINGDISTANCE_HPP
