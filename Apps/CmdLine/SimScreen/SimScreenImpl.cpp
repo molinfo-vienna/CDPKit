@@ -132,10 +132,10 @@ SimScreenImpl::SimScreenImpl():
               "(BEST_OVERALL, BEST_PER_QUERY, BEST_PER_QUERY_CONF, default: BEST_PER_QUERY).",
               value<std::string>()->notifier([this](const std::string& mode) { this->setScreeningMode(mode); }));
     addOption("func,f", "Function to use for molecule similarity/distance calculation and ranking operations (" +
-              getScoringFunctionIDs() + ", default: " + scoringFuncs.front().getID() + ")",
+              getScoringFunctionIDs() + ", default: " + scoringFunc->getID() + ")",
               value<std::string>()->notifier([this](const std::string& id) { this->setScoringFunction(id); }));
     addOption("descr,e", "Type of molecule descriptor to use for similarity/distance calculations (" +
-              getDescriptorCalculatorIDs() + ", default: " + descrCalculators.front().getID() + ")",
+              getDescriptorCalculatorIDs() + ", default: " + descrCalculator->getID() + ")",
               value<std::string>()->notifier([this](const std::string& id) { this->setDescriptorCalculator(id); }));
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
@@ -187,9 +187,6 @@ SimScreenImpl::SimScreenImpl():
  
     for (auto& calc : descrCalculators)
         calc.addOptions(*this);
-
-    scoringFunc = &scoringFuncs.front();
-    descrCalculator = &descrCalculators.front(); 
 }
 
 SimScreenImpl::~SimScreenImpl()
@@ -1029,16 +1026,18 @@ void SimScreenImpl::initScoringFunctions()
     scoringFuncs.push_back(new TanimotoSimilarity());
     scoringFuncs.push_back(new ManhattanSimilarity());
     scoringFuncs.push_back(new ManhattanDistance());
-    
     // TODO
+
+    scoringFunc = &scoringFuncs.front();
 }
 
 void SimScreenImpl::initDescriptorCalculators()
 {
     descrCalculators.push_back(new ECFPCalculator());
     descrCalculators.push_back(new PubChemFPCalculator());
-    
     // TODO
+
+    descrCalculator = &descrCalculators.front();
 }
         
 std::string SimScreenImpl::screeningModeToString() const
