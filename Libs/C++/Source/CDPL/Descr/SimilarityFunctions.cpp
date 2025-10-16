@@ -123,7 +123,7 @@ double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSe
         std::size_t bab = (bs1 & bs2).count();
         std::size_t nab = bs1_size - (bs1 | bs2).count();
 
-        return (1.0 - std::sqrt(double(bab + nab) / double(bs1_size)));
+        return (std::sqrt(double(bab + nab) / double(bs1_size)));
     }
 
     if (bs1_size < bs2_size) {
@@ -133,7 +133,7 @@ double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSe
         std::size_t bab = (tmp & bs2).count();
         std::size_t nab = bs2_size - (tmp | bs2).count();
 
-        return (1.0 - std::sqrt(double(bab + nab) / double(bs2_size)));
+        return (std::sqrt(double(bab + nab) / double(bs2_size)));
     }
 
     Util::BitSet tmp(bs2);
@@ -142,7 +142,7 @@ double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSe
     std::size_t bab = (bs1 & tmp).count();
     std::size_t nab = bs1_size - (bs1 | tmp).count();
 
-    return (1.0 - std::sqrt(double(bab + nab) / double(bs1_size)));
+    return (std::sqrt(double(bab + nab) / double(bs1_size)));
 }
 
 double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
