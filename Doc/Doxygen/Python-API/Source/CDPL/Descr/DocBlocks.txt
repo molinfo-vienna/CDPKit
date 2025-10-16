@@ -16,6 +16,11 @@ chiralityIncluded
 includeChirality
 $$$$
 
+PathFingerprintGenerator.incHydrogens.value
+hydrogensIncluded
+includeHydrogens
+$$$$
+
 NPointPharmacophoreFingerprintGenerator.pharmGenerator.value
 getPharmacophoreGenerator
 $$$$

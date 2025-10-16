@@ -61,7 +61,7 @@ class EuclideanSimilarity(Boost.Python.instance):
     # 
     # The <em>Euclidean Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \[ S_{ab} = 1 - \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}} \]
+    # \[ S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}} \]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
     # 

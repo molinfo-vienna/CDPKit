@@ -190,6 +190,18 @@ class PathFingerprintGenerator(Boost.Python.instance):
     def getMaxPathLength() -> int: pass
 
     ##
+    # \brief 
+    # \param include 
+    #
+    def includeHydrogens(include: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def hydrogensIncluded() -> bool: pass
+
+    ##
     # \brief Generates the fingerprint of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to generate the fingerprint.
@@ -202,3 +214,5 @@ class PathFingerprintGenerator(Boost.Python.instance):
     minPathLength = property(getMinPathLength, setMinPathLength)
 
     maxPathLength = property(getMaxPathLength, setMaxPathLength)
+
+    incHydrogens = property(hydrogensIncluded, includeHydrogens)
