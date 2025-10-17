@@ -41,6 +41,8 @@ set(simscreen_SRCS
     DaylightFPCalculator.cpp
     PubChemFPCalculator.cpp
     MACCSFPCalculator.cpp
+    Pharm2DFPCalculator.cpp
+    Pharm3DFPCalculator.cpp
    )
 
 add_executable(simscreen ${simscreen_SRCS} $<TARGET_OBJECTS:cdpl-internal>)

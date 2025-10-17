@@ -55,6 +55,8 @@
 #include "DaylightFPCalculator.hpp"
 #include "PubChemFPCalculator.hpp"
 #include "MACCSFPCalculator.hpp"
+#include "Pharm2DFPCalculator.hpp"
+#include "Pharm3DFPCalculator.hpp"
 
 
 using namespace SimScreen;
@@ -314,15 +316,6 @@ void SimScreenImpl::setHitOutputFormat(const std::string& file_ext)
         throwValidationError("output-format");
 
     hitOutputFormat = file_ext;
-}
-
-void SimScreenImpl::processOptions()
-{
-    for (auto& func : scoringFuncs)
-        func.processOptions(*this);
- 
-    for (auto& calc : descrCalculators)
-        calc.processOptions(*this);
 }
 
 int SimScreenImpl::process()
@@ -1048,7 +1041,8 @@ void SimScreenImpl::initDescriptorCalculators()
     descrCalculators.push_back(new DaylightFPCalculator());
     descrCalculators.push_back(new PubChemFPCalculator());
     descrCalculators.push_back(new MACCSFPCalculator());
-    // TODO
+    descrCalculators.push_back(new Pharm2DFPCalculator());
+    descrCalculators.push_back(new Pharm3DFPCalculator());
 
     descrCalculator = &descrCalculators.front();
 }

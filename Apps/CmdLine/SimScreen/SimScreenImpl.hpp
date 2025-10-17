@@ -104,7 +104,6 @@ namespace SimScreen
         void initScoringFunctions();
         void initDescriptorCalculators();
 
-        void processOptions();
         int process();
 
         void processSingleThreaded();

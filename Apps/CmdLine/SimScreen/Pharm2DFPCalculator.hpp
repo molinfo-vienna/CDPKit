@@ -1,5 +1,5 @@
 /* 
- * ECFPCalculator.hpp
+ * Pharm2DFPCalculator.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,8 +22,8 @@
  */
 
 
-#ifndef SIMSCREEN_ECFPCALCULATOR_HPP
-#define SIMSCREEN_ECFPCALCULATOR_HPP
+#ifndef SIMSCREEN_PHARM2DFPCALCULATOR_HPP
+#define SIMSCREEN_PHARM2DFPCALCULATOR_HPP
 
 #include <cstddef>
 #include <memory>
@@ -37,7 +37,7 @@ namespace CDPL
     namespace Descr
     {
 
-        class CircularFingerprintGenerator;
+        class NPoint2DPharmacophoreFingerprintGenerator;
     }
 }
 
@@ -45,13 +45,13 @@ namespace CDPL
 namespace SimScreen
 {
 
-    class ECFPCalculator : public DescriptorCalculator
+    class Pharm2DFPCalculator : public DescriptorCalculator
     {
 
       public:
-        ECFPCalculator();
+        Pharm2DFPCalculator();
 
-        ~ECFPCalculator();
+        ~Pharm2DFPCalculator();
     
         void addOptions(CmdLineLib::CmdLineBase& cl_base);
 
@@ -64,14 +64,14 @@ namespace SimScreen
         void calculate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Util::BitSet& fp);
 
       private:
-        typedef std::unique_ptr<CDPL::Descr::CircularFingerprintGenerator> FPGeneratorImplPtr;
+        typedef std::unique_ptr<CDPL::Descr::NPoint2DPharmacophoreFingerprintGenerator> FPGeneratorImplPtr;
 
-        std::size_t        radius{2};
+        std::size_t        minTupleSize{1};
+        std::size_t        maxTupleSize{3};
+        double             binSize{0.5};
         std::size_t        size{8191};
-        bool               incChirality{false};
-        bool               incHydrogens{false};
         FPGeneratorImplPtr fpGenImpl;
     };
 } // namespace SimScreen
 
-#endif // SIMSCREEN_ECFPCALCULATOR_HPP
+#endif // SIMSCREEN_PHARM2DFPCALCULATOR_HPP
