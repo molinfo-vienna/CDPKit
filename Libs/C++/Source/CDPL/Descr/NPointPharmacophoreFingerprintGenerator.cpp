@@ -32,6 +32,7 @@
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Internal/Permutation.hpp"
 #include "CDPL/Internal/SHA1.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
@@ -69,6 +70,9 @@ std::size_t Descr::NPointPharmacophoreFingerprintGenerator::getMaxFeatureTupleSi
 
 void Descr::NPointPharmacophoreFingerprintGenerator::setBinSize(double bin_size)
 {
+    if (bin_size <= 0.0)
+        throw Base::RangeError("NPointPharmacophoreFingerprintGenerator: bin size must be > 0.0");
+
     binSize = bin_size;
 }
 
