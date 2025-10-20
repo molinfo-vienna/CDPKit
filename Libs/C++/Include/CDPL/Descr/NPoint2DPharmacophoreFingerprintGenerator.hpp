@@ -60,6 +60,11 @@ namespace CDPL
                 AVG_PATH_LENGTH
             };
 
+            /**
+             * \since 1.3
+             */
+            static constexpr double DEF_BIN_SIZE = 2.0;
+
             static constexpr FeatureDistanceType DEF_FEATURE_DISTANCE_TYPE = MIN_PATH_LENGTH;
             
             NPoint2DPharmacophoreFingerprintGenerator();

@@ -50,5 +50,6 @@ void CDPLPythonDescr::exportNPoint3DPharmacophoreFingerprintGenerator()
              (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
         .def("generate", static_cast<void (Descr::NPoint3DPharmacophoreFingerprintGenerator::*)(const Pharm::FeatureContainer&, Util::BitSet&)>
              (&Descr::NPoint3DPharmacophoreFingerprintGenerator::generate),
-             (python::arg("self"), python::arg("cntnr"), python::arg("fp")));
+             (python::arg("self"), python::arg("cntnr"), python::arg("fp")))
+        .def_readonly("DEF_BIN_SIZE", Descr::NPoint3DPharmacophoreFingerprintGenerator::DEF_BIN_SIZE);
 }

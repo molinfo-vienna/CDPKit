@@ -59,8 +59,6 @@ namespace CDPL
             static constexpr std::size_t DEF_MIN_FEATURE_TUPLE_SIZE = 1;
             static constexpr std::size_t DEF_MAX_FEATURE_TUPLE_SIZE = 3;
 
-            static constexpr double DEF_BIN_SIZE = 0.5;
-
             typedef std::function<bool(const Pharm::Feature&)> FeatureFilterFunction;
             
             virtual ~NPointPharmacophoreFingerprintGenerator() {}
@@ -92,6 +90,8 @@ namespace CDPL
             const FeatureFilterFunction& getFeatureFilterFunction() const;
             
           protected:
+            static constexpr double DEF_BIN_SIZE = 2.0;
+
             NPointPharmacophoreFingerprintGenerator();
 
             NPointPharmacophoreFingerprintGenerator(const NPointPharmacophoreFingerprintGenerator& gen) = default;

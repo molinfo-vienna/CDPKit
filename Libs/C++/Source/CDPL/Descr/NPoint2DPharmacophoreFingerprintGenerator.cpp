@@ -42,11 +42,14 @@ Descr::NPoint2DPharmacophoreFingerprintGenerator::DEF_FEATURE_DISTANCE_TYPE;
 
 Descr::NPoint2DPharmacophoreFingerprintGenerator::NPoint2DPharmacophoreFingerprintGenerator():
     ftrDistType(DEF_FEATURE_DISTANCE_TYPE)
-{}
+{
+    setBinSize(DEF_BIN_SIZE);
+}
 
 Descr::NPoint2DPharmacophoreFingerprintGenerator::NPoint2DPharmacophoreFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
     NPoint2DPharmacophoreFingerprintGenerator()
 {
+    setBinSize(DEF_BIN_SIZE);
     generate(molgraph, fp);
 }
 

@@ -60,5 +60,6 @@ void CDPLPythonDescr::exportNPoint2DPharmacophoreFingerprintGenerator()
              (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
         .add_property("featureDistanceType", &Descr::NPoint2DPharmacophoreFingerprintGenerator::getFeatureDistanceType,
                       &Descr::NPoint2DPharmacophoreFingerprintGenerator::setFeatureDistanceType)
+        .def_readonly("DEF_BIN_SIZE", Descr::NPoint2DPharmacophoreFingerprintGenerator::DEF_BIN_SIZE)
         .def_readonly("DEF_FEATURE_DISTANCE_TYPE", Descr::NPoint2DPharmacophoreFingerprintGenerator::DEF_FEATURE_DISTANCE_TYPE);
 }

@@ -31,13 +31,20 @@
 using namespace CDPL;
 
 
+Descr::NPoint3DPharmacophoreFingerprintGenerator::NPoint3DPharmacophoreFingerprintGenerator()
+{
+    setBinSize(DEF_BIN_SIZE);
+}
+
 Descr::NPoint3DPharmacophoreFingerprintGenerator::NPoint3DPharmacophoreFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
 {
+    setBinSize(DEF_BIN_SIZE);
     generate(molgraph, fp);
 }
 
 Descr::NPoint3DPharmacophoreFingerprintGenerator::NPoint3DPharmacophoreFingerprintGenerator(const Pharm::FeatureContainer& cntnr, Util::BitSet& fp)
 {
+    setBinSize(DEF_BIN_SIZE);
     generate(cntnr, fp);
 }
 

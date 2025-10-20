@@ -75,6 +75,5 @@ void CDPLPythonDescr::exportNPointPharmacophoreFingerprintGenerator()
                                             (&Descr::NPointPharmacophoreFingerprintGenerator::getPharmacophoreGenerator),
                                             python::return_internal_reference<>()))
         .def_readonly("DEF_MIN_FEATURE_TUPLE_SIZE", Descr::NPointPharmacophoreFingerprintGenerator::DEF_MIN_FEATURE_TUPLE_SIZE)
-        .def_readonly("DEF_MAX_FEATURE_TUPLE_SIZE", Descr::NPointPharmacophoreFingerprintGenerator::DEF_MAX_FEATURE_TUPLE_SIZE)
-        .def_readonly("DEF_BIN_SIZE", Descr::NPointPharmacophoreFingerprintGenerator::DEF_BIN_SIZE);
+        .def_readonly("DEF_MAX_FEATURE_TUPLE_SIZE", Descr::NPointPharmacophoreFingerprintGenerator::DEF_MAX_FEATURE_TUPLE_SIZE);
 }

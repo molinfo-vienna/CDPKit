@@ -49,9 +49,14 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \since 1.3
+             */
+            static constexpr double DEF_BIN_SIZE = 3.0;
+
             typedef std::shared_ptr<NPoint3DPharmacophoreFingerprintGenerator> SharedPointer;
 
-            NPoint3DPharmacophoreFingerprintGenerator() = default;
+            NPoint3DPharmacophoreFingerprintGenerator();
 
             NPoint3DPharmacophoreFingerprintGenerator(const NPoint3DPharmacophoreFingerprintGenerator& gen) = default;
 
