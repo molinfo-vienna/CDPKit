@@ -68,7 +68,7 @@ namespace SimScreen
 
         std::size_t        minTupleSize{1};
         std::size_t        maxTupleSize{3};
-        double             binSize{0.5};
+        double             binSize{3.0};
         std::size_t        size{8191};
         FPGeneratorImplPtr fpGenImpl;
     };

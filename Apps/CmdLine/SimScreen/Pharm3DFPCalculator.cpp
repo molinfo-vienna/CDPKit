@@ -54,7 +54,7 @@ void Pharm3DFPCalculator::addOptions(CmdLineLib::CmdLineBase& cl_base)
                       "Maximum feature tuple size (default: 3).",
                       cl_base.value<std::size_t>(&maxTupleSize));
     cl_base.addOption("pharm-3d-bin-size",
-                      "Feature distance bin size (default: 0.5, must be > 0).",
+                      "Feature distance bin size (default: 3.0, must be > 0).",
                       cl_base.value<double>()->notifier(
                           [&](double bin_size) {
                               if (bin_size <= 0.0)

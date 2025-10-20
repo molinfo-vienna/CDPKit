@@ -703,6 +703,8 @@ void SimScreenImpl::outputQueryMolecule(CDPL::Chem::MolecularGraphWriter& writer
     auto& query_mol = queryMolecules[query_mol_idx];
 
     try {
+        perceiveComponents(query_mol, false);
+        
         if (writer.write(query_mol))
             return;
 
@@ -768,7 +770,8 @@ void SimScreenImpl::outputHitMolecule(CDPL::Chem::MolecularGraphWriter& writer, 
                 new_sd_block->addEntry('<' + scoringFunc->getDisplayName() + '>', (boost::format("%.3f") % hit_data.screeningResult.score).str());
 
             setStructureData(*hit_data.dbMolecule, new_sd_block);
-
+            perceiveComponents(*hit_data.dbMolecule, false);
+            
             if (writer.write(*hit_data.dbMolecule)) {
                 if (old_sd_block)
                     setStructureData(*hit_data.dbMolecule, old_sd_block);
