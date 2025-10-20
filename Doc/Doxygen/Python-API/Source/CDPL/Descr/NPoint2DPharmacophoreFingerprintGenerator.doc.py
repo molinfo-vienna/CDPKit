@@ -49,6 +49,11 @@ class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     ##
     # \brief 
     #
+    DEF_BIN_SIZE = 2.0
+
+    ##
+    # \brief 
+    #
     DEF_FEATURE_DISTANCE_TYPE = 
 
     ##

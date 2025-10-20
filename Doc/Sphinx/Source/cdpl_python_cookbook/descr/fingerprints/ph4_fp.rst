@@ -35,7 +35,7 @@ read from a specified input file.
 
  -b <float>
 
-    Feature distance bin size (default: 1.0)
+    Feature distance bin size (default: 2.0)
 
 **Code**
 

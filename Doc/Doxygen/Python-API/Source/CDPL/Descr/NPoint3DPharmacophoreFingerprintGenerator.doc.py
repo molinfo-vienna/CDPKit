@@ -27,6 +27,11 @@
 class NPoint3DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGenerator):
 
     ##
+    # \brief 
+    #
+    DEF_BIN_SIZE = 3.0
+
+    ##
     # \brief Initializes the \e %NPoint3DPharmacophoreFingerprintGenerator instance.
     # 
     def __init__() -> None: pass

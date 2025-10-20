@@ -78,8 +78,8 @@ def parseArgs() -> argparse.Namespace:
                         dest='bin_size',
                         required=False,
                         metavar='<float>',
-                        default=1.0,
-                        help='Feature distance bin size (default: 1.0)',
+                        default=2.0,
+                        help='Feature distance bin size (default: 2.0)',
                         type=float)
   
     return parser.parse_args()

@@ -37,11 +37,6 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
     DEF_MAX_FEATURE_TUPLE_SIZE = 3
 
     ##
-    # \brief 
-    #
-    DEF_BIN_SIZE = 0.5
-
-    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     # 
     # Different Python \c %NPointPharmacophoreFingerprintGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression

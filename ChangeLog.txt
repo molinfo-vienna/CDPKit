@@ -1,5 +1,8 @@
 master:
 
+ - New fingerprint/descriptor-based similarity screening command line tool 'SimScreen'
+ - Changed the default feature distance bin size of Descr::NPoint3DPharmacophoreFingerprintGenerator instances to 3.0 (before 0.5)
+ - Changed the default feature distance bin size of Descr::NPointPharmacophoreFingerprintGenerator instances to 2.0 (before 0.5)
  - Added method Descr::PathFingerprintGenerator::includeHydrogens() (and Descr::PathFingerprintGenerator::hydrogensIncluded())
    which allows to specify whether hydrogen atoms shall be ignored or not
  - Changed the calculation of Manhattan similarity scores so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
