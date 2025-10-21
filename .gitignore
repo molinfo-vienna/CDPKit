@@ -6,3 +6,4 @@ _skbuild
 dist
 CDPKit.egg-info
 MANIFEST.in
+.ipynb_checkpoints

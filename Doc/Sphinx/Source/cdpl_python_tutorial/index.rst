@@ -1,11 +1,7 @@
 .. index:: Python Tutorial, Getting Started
-           
+       
 CDPL Python Tutorial
 ====================
-
-.. note::
-   Please install CDPKit before proceeding with the tutorial. Detailed installation instructions can be found in section
-   :doc:`../installation`.
 
 Welcome to the "Getting Started with Python" tutorial! If you're familiar with cheminformatics 
 libraries like RDKit, you'll find that CDPKit offers a unique set of :doc:`tools <../applications/index>` and a feature-rich software development library that can take your 
@@ -23,10 +19,11 @@ By the end, you'll be well-equipped to incorporate CDPKit into your workflow and
    For a detailed description of a particular function, method or class please visit the `CDPL Python API Documentation <../cdpl_api_doc/python_api_doc/index.html>`_ pages.
    There is also a a powerful search tool on the top right corner of the page that you can use to find particular functions or modules within the documentation.
 
-So, grab a coffee (or tea) and let's embark on this exciting journey into the realm of computational drug design with CDPKit!
-
+The following tutorial is based on a Jupyter notebook which can be :download:`downloaded <cdpl_python_tutorial.ipynb>`
+and then executed on your own computer.
+   
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :numbered:
 
    cdpl_python_tutorial

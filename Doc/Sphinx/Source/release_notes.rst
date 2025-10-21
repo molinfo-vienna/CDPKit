@@ -3,19 +3,30 @@
 Release Notes
 =============
 
-Release V1.2.3
+Release V1.3.0
 --------------
+
+.. rubric:: New Functionality and Features
+
+.. rubric:: Improvements
 
 .. rubric:: Bug Fixes
 
-- Fix for a *Base::ItemNotFound* exception thrown during the merging of temporary PSD files
-  when running the command line tool :doc:`psdcreate </applications/psdcreate>` in multi-threaded mode
-   
+.. rubric:: API Changes
+
+Release V1.2.3
+--------------
+
 .. rubric:: New Functionality and Features
 
 - New feature of program :doc:`ChOX </applications/chox>` that allows to display structure/reaction data associated
   with the currently shown molecule/reaction records
 - See section below
+
+.. rubric:: Bug Fixes
+
+- Fix for a *Base::ItemNotFound* exception thrown during the merging of temporary PSD files
+  when running the command line tool :doc:`psdcreate </applications/psdcreate>` in multi-threaded mode
 
 .. rubric:: API Changes
 
@@ -29,14 +40,6 @@ Release V1.2.3
      
 Release V1.2.2
 --------------
-
-.. rubric:: Bug Fixes
-
-- Fix for an issue leading to a segmentation fault during the parsing of partially invalid SMILES/SMARTS strings that occurs
-  if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure bond numbers
-- Fix for a bug in the command line tool :doc:`structgen </applications/structgen>` that led to process termination due
-  to a *Base::ItemNotFound* exception which was thrown when the set time limit got exceeded without having generated a
-  complete set of 3D atom coordinates
 
 .. rubric:: New Functionality and Features
                         
@@ -53,7 +56,15 @@ Release V1.2.2
 - Reduction of pharmacophore screening database (PSD) file sizes by ~55% due to the introduction of
   more compact molecule/pharmacophore data storage formats
 - Additional Python cookbook script demonstrating how to use the stereoisomer enumeration functionality
-     
+
+.. rubric:: Bug Fixes
+
+- Fix for an issue leading to a segmentation fault during the parsing of partially invalid SMILES/SMARTS strings that occurs
+  if a ring closure at a chiral atom cannot be completed due to either missing or erroneously placed closure bond numbers
+- Fix for a bug in the command line tool :doc:`structgen </applications/structgen>` that led to process termination due
+  to a *Base::ItemNotFound* exception which was thrown when the set time limit got exceeded without having generated a
+  complete set of 3D atom coordinates
+
 .. rubric:: API Changes
              
 - Added new setter/getter method pair *outputZeroBasedIndices(bool)/outputZeroBasedIndices()* to class *Pharm::FileScreeningHitCollector*
@@ -61,11 +72,6 @@ Release V1.2.2
 
 Release V1.2.1
 --------------
-
-.. rubric:: Bug Fixes
-
-- Fix for function *Pharm::removePositionalDuplicates(Pharmacophore&)* which erroneously retained
-  the duplicate features (to be removed) instead of the desired features all having unique position and type
 
 .. rubric:: Improvements
 
@@ -76,7 +82,12 @@ Release V1.2.1
 - All disk space consumed by an existing pharmacophore screening database (PSD) that is specified as
   destination file for a new database to be created by the tool :doc:`subsearch </applications/psdcreate>` is now
   completely freed and not just internally marked as unallocated space
-  
+
+.. rubric:: Bug Fixes
+
+- Fix for function *Pharm::removePositionalDuplicates(Pharmacophore&)* which erroneously retained
+  the duplicate features (to be removed) instead of the desired features all having unique position and type
+
 Release V1.2.0
 --------------
 
