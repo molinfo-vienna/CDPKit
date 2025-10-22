@@ -31,7 +31,7 @@ RUN dnf install -y automake autoconf libtool emacs cppunit-devel zlib-devel bzip
 
 # inject files
 COPY . /io
-ADD https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz /io/boost.tgz
+ADD https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz /io/boost.tgz
 
 # unpack boost
 RUN mkdir /boost
@@ -39,7 +39,7 @@ RUN tar -xzf /io/boost.tgz -C /boost/
 
 # run boost build script
 RUN chmod +x /io/install_boost.sh
-RUN /io/install_boost.sh "3.6 3.7 3.8 3.9 3.10 3.11 3.12 3.13"
+RUN /io/install_boost.sh "3.6 3.7 3.8 3.9 3.10 3.11 3.12 3.13 3.14"
 
 # install required pip packages for all versions
 RUN chmod +x /io/install_pip_packages.sh
