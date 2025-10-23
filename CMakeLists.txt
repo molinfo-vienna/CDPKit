@@ -21,7 +21,7 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-cmake_minimum_required(VERSION 3.17...3.31 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.17...4.2 FATAL_ERROR)
 cmake_policy(SET CMP0057 NEW)
 
 set(CMAKE_COLOR_MAKEFILE ON)
@@ -412,6 +412,7 @@ configure_file("${CDPL_INCLUDE_DIR}/CDPL/Version.hpp.in" "${CDPL_CONFIG_HEADER_I
 configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/GenerateBuildInfoHeader.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake" @ONLY)
 add_custom_target(gen-build-info-header ALL
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake")
+include("${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake")
 
 configure_file("${CDPKIT_CMAKE_SCRIPTS_DIR}/CMakeUninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake" @ONLY)
 add_custom_target(uninstall
