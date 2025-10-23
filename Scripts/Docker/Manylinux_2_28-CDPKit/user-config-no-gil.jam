@@ -1,0 +1,11 @@
+using python
+    : "3.13"
+    : "/opt/python/cp313-cp313t"
+    : "/opt/python/cp313-cp313t/include/python3.13t"
+;
+
+using python
+    : "3.14"
+    : "/opt/python/cp314-cp314t"
+    : "/opt/python/cp314-cp314t/include/python3.14t"
+;

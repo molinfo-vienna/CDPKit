@@ -50,10 +50,18 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     echo "#####################################################################"
 
     PYVER_DOT="$python_version_2_build"
+    PYVER_DOT_NO_T="$(echo $PYVER_DOT | tr -d t)"
     PYVER="$(echo $PYVER_DOT | tr -d .)"
     PYVER_NO_T="$(echo $PYVER | tr -d t)"
-    PY_BID=""
-    CONFIG_FILE="/io/user-config.jam"
+
+    if [[ "$PYVER" = "$PYVER_NO_T" ]]; then
+        PY_BID=""
+        CONFIG_FILE="/io/user-config.jam"
+    else
+        PY_BID="t"
+        CONFIG_FILE="/io/user-config-no-gil.jam"
+    fi
+    
     found_one=0
 
     for PYBIN in /opt/python/cp*/bin; do
@@ -63,7 +71,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
             found_one=1
         fi
 
-        if [[ $(${PYBIN}/python -c "import sys; print(sys.maxunicode)")  == 1114111 ]]; then
+        if [[ $(${PYBIN}/python -c "import sys; print(sys.maxunicode)") == 1114111 ]]; then
             ENCODING="ucs4"
         else
             ENCODING="ucs2"
@@ -71,14 +79,13 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
 
         echo "Building boost.python for requested version: ${python_version_2_build} using python binary: ${PYBIN} (PYVER: ${PYVER} and PYVER_DOT: ${PYVER_DOT} and ENCODING: ${ENCODING})"
 
-        #./bootstrap.sh --prefix=/usr --libdir=/usr/lib64 --includedir=/usr/include
         ./bootstrap.sh --with-python="${PYBIN}/python"
         ./b2 \
             --with-python \
             --user-config="${CONFIG_FILE}" \
             --python-buildid=${PY_BID} \
             --enable-unicode="${ENCODING}" \
-            python="${PYVER_DOT}" \
+            python="${PYVER_DOT_NO_T}" \
             install > /dev/null
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null
