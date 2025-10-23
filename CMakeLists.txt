@@ -61,7 +61,7 @@ if(MSVC)
   set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated-declarations -Wno-stringop-overflow")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated-declarations -Wno-stringop-overread -Wno-alloc-size-larger-than")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-stringop-overread -Wno-alloc-size-larger-than")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 endif(MSVC)
 
