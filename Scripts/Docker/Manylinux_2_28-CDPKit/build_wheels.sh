@@ -29,13 +29,14 @@ git pull
 
 rm -rf dist
 
-for PY_VERS in 3.8 3.9 3.10 3.11 3.12 3.13 3.14
+for PY_VERS in 3.8 3.9 3.10 3.11 3.12 3.13 3.13t 3.14 3.14t
 do
     PY_VERS_NO_DOT="$(echo $PY_VERS | tr -d .)"
-
+    PY_VERS_NO_DOT_NO_T="$(echo $PY_VERS_NO_DOT | tr -d t)"
+    
     for PY_INST in /opt/python/cp*
     do
-        if [[ ! $PY_INST =~ ^/opt/python/cp${PY_VERS_NO_DOT}-* ]]; then
+        if [[ ! $PY_INST =~ ^/opt/python/cp${PY_VERS_NO_DOT_NO_T}-cp${PY_VERS_NO_DOT} ]]; then
             continue;
         fi
 

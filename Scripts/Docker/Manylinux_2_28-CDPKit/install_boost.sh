@@ -49,29 +49,15 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     echo "trying to build python version ${python_version_2_build} as requested"
     echo "#####################################################################"
 
-    if [[ $python_version_2_build =~ [0-9][.][0-9]*$ ]]; then
-        # not unicode suffix
-        PYVER_DOT="$python_version_2_build"
-        PYVER="$(echo $PYVER_DOT | tr -d .)"
-        PY_BID=""
-        CONFIG_FILE="/io/user-config.jam"
-        echo "no unicode suffix"
-
-    elif [[ $python_version_2_build =~ [0-9][.][0-9]*u$ ]]; then
-        PYVER_DOT="$(echo $python_version_2_build | tr -d u)"
-        PYVER="$(echo $PYVER_DOT | tr -d .)"
-        PY_BID="u"
-        CONFIG_FILE="/io/user-config.unicode.jam"
-        echo "with unicode suffix"
-    else
-        echo "Requested python version: \"${python_version_2_build}\" doesn\'t match any known patterns"
-        exit 1;
-    fi
-
+    PYVER_DOT="$python_version_2_build"
+    PYVER="$(echo $PYVER_DOT | tr -d .)"
+    PYVER_NO_T="$(echo $PYVER | tr -d i)"
+    PY_BID=""
+    CONFIG_FILE="/io/user-config.jam"
     found_one=0
 
     for PYBIN in /opt/python/cp*/bin; do
-        if [[ ! $PYBIN =~ ^/opt/python/cp${PYVER}-* ]]; then
+        if [[ ! $PYBIN =~ ^/opt/python/cp${PYVER_NO_T}-${PYVER} ]]; then
             continue;
         else
             found_one=1

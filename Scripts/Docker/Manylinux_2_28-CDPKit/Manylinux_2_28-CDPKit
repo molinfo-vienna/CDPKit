@@ -1,0 +1,12 @@
+  /home/tseidel/Projects/c++/CDPKit/Scripts/Docker/Manylinux_2_28-CDPKit:
+  total used in directory 44 available 1362512
+  drwxrwxr-x. 2 tseidel tseidel 4096 Oct 22 21:55 .
+  drwxrwxr-x. 4 tseidel tseidel 4096 Oct 22  2024 ..
+  -rw-rw-r--. 1 tseidel tseidel 1895 Oct 22 21:55 Dockerfile
+  -rw-rw-r--. 1 tseidel tseidel 1917 Feb 14  2024 Dockerfile~
+  -rw-rw-r--. 1 tseidel tseidel 1542 Oct 22 21:55 build_wheels.sh
+  -rw-rw-r--. 1 tseidel tseidel 1530 Feb 22  2024 build_wheels.sh~
+  -rwxrwxr-x. 1 tseidel tseidel 3722 Sep 29  2023 install_boost.sh
+  -rw-rw-r--. 1 tseidel tseidel 1007 Sep 29  2023 install_pip_packages.sh
+  -rw-rw-r--. 1 tseidel tseidel 1094 Oct 22  2024 user-config.jam
+  -rw-rw-r--. 1 tseidel tseidel  982 Feb 22  2024 user-config.jam~

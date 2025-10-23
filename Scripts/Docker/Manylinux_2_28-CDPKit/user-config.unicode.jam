@@ -1,5 +1,0 @@
-using python
-    : "2.7"
-    : "/opt/python/cp27-cp27mu"
-    : "/opt/python/cp27-cp27mu/include/python2.7"
-;
