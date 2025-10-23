@@ -51,7 +51,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
 
     PYVER_DOT="$python_version_2_build"
     PYVER="$(echo $PYVER_DOT | tr -d .)"
-    PYVER_NO_T="$(echo $PYVER | tr -d i)"
+    PYVER_NO_T="$(echo $PYVER | tr -d t)"
     PY_BID=""
     CONFIG_FILE="/io/user-config.jam"
     found_one=0
