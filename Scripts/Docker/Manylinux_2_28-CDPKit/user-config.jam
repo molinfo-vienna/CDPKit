@@ -57,3 +57,9 @@ using python
     : "/opt/python/cp313-cp313"
     : "/opt/python/cp313-cp313/include/python3.13"
 ;
+
+using python
+    : "3.14"
+    : "/opt/python/cp314-cp314"
+    : "/opt/python/cp314-cp314/include/python3.14"
+;
