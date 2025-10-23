@@ -40,8 +40,10 @@ do
         fi
 
         echo "Building wheel for Python version ${PY_VERS}..."
-
-        ${PY_INST}/bin/python setup.py bdist_wheel -DBOOST_PYTHON_VERSIONS="${PY_VERS_NO_DOT}" -DPYPI_MANYLINUX_PACKAGE_BUILD=TRUE
+        export DBOOST_PYTHON_VERSIONS="${PY_VERS_NO_DOT}"
+        export PYPI_MANYLINUX_PACKAGE_BUILD="TRUE"
+        
+        ${PY_INST}/bin/python -m build --wheel
         break;
     done
 done

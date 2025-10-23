@@ -26,5 +26,5 @@
 
 for py_dir in /opt/python/cp*
 do
-    $py_dir/bin/pip install scikit-build numpy
+    $py_dir/bin/pip install scikit-build numpy build
 done
