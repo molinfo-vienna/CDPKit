@@ -39,7 +39,7 @@ RUN tar -xzf /io/boost.tgz -C /boost/
 
 # run boost build script
 RUN chmod +x /io/install_boost.sh
-RUN /io/install_boost.sh "3.8 3.9 3.10 3.11 3.12 3.13 3.14"
+RUN /io/install_boost.sh "3.8 3.9 3.10 3.11 3.12 3.13"
 
 # install required pip packages for all versions
 RUN chmod +x /io/install_pip_packages.sh
