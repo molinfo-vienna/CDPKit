@@ -78,7 +78,7 @@ master:
  - Renamed functions Biomol::*PDBIgnoreConectRecordsParameter() into Biomol::*PDBIgnoreCONECTRecordsParameter()
  - Fixed methods write() and writelines() of class Base.IOStream() which both failed when being called with an argument of
    type str or sequences thereof
- - New method getbytes() of class Base.StringIOStream() that allows to retrieve written data
+ - New method getbytes() in class Base.StringIOStream() that allows to retrieve written data
    as Python bytes object
  - New function Chem::align2DCoordinates() that computes and carries out a transformation which aligns
    2D coordinates of a set of atoms with given reference coordinates in the best possible way
