@@ -38,6 +38,8 @@
 #include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
+#pragma GCC diagnostic ignored "-Warray-bounds"
+
 
 using namespace CDPL; 
 
