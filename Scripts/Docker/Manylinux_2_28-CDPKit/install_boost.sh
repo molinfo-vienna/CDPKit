@@ -57,7 +57,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     found_one=0
 
     for PYBIN in /opt/python/cp*/bin; do
-        if [[ ! $PYBIN =~ ^/opt/python/cp${PYVER_NO_T}-${PYVER} ]]; then
+        if [[ ! $PYBIN =~ ^/opt/python/cp${PYVER_NO_T}-${PYVER}/bin ]]; then
             continue;
         else
             found_one=1
