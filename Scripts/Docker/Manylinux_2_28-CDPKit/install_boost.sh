@@ -55,9 +55,9 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
     CONFIG_FILE="/io/user-config.jam"
     
     if [[ "$PY_VERS_NO_DOT" = "$PY_VERS_NO_DOT_NO_T" ]]; then
-        PY_VERS_SUFF=""
+        CONFIG_FILE="/io/user-config.jam"
     else
-        PY_VERS_SUFF="0"
+        CONFIG_FILE="/io/user-config-ft.jam"
     fi
     
     found_one=0
@@ -83,7 +83,7 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
             --user-config="${CONFIG_FILE}" \
             --enable-unicode="${ENCODING}" \
             threading=multi \
-            python="${PY_VERS_NO_T}${PY_VERS_SUFF}" \
+            python="${PY_VERS_NO_T}" \
             install > /dev/null
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null

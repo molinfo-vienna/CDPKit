@@ -29,7 +29,8 @@ git pull
 
 rm -rf dist
 
-for PY_VERS in 3.8 3.9 3.10 3.11 3.12 3.13 3.13t 3.14 3.14t
+for PY_VERS in 3.8 3.9 3.10 3.11 3.12 3.13 3.14
+#for PY_VERS in 3.13t 3.14t
 do
     PY_VERS_NO_DOT="$(echo $PY_VERS | tr -d .)"
     PY_VERS_NO_DOT_NO_T="$(echo $PY_VERS_NO_DOT | tr -d t)"
@@ -40,16 +41,10 @@ do
             continue;
         fi
 
-        if [[ "$PY_VERS_NO_DOT" = "$PY_VERS_NO_DOT_NO_T" ]]; then
-            PY_VERS_SUFF=""
-        else
-            PY_VERS_SUFF="0"
-        fi
-        
         echo "Building wheel for Python version ${PY_VERS}..."
         
         ${PY_INST}/bin/python -m build --wheel \
-        -C="--build-option=-DBOOST_PYTHON_VERSIONS=${PY_VERS_NO_DOT_NO_T}${PY_VERS_SUFF}" \
+        -C="--build-option=-DBOOST_PYTHON_VERSIONS=${PY_VERS_NO_DOT_NO_T}" \
         -C="--build-option=-DPYPI_MANYLINUX_PACKAGE_BUILD=TRUE"
         break;
     done

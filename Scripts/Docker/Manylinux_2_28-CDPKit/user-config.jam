@@ -1,22 +1,4 @@
 using python
-    : "3.5"
-    : "/opt/python/cp35-cp35m"
-    : "/opt/python/cp35-cp35m/include/python3.5m"
-;
-
-using python
-    : "3.6"
-    : "/opt/python/cp36-cp36m"
-    : "/opt/python/cp36-cp36m/include/python3.6m"
-;
-
-using python
-    : "3.7"
-    : "/opt/python/cp37-cp37m"
-    : "/opt/python/cp37-cp37m/include/python3.7m"
-;
-
-using python
     : "3.8"
     : "/opt/python/cp38-cp38"
     : "/opt/python/cp38-cp38/include/python3.8"
@@ -56,16 +38,4 @@ using python
     : "3.14"
     : "/opt/python/cp314-cp314"
     : "/opt/python/cp314-cp314/include/python3.14"
-;
-
-using python
-    : "3.130"
-    : "/opt/python/cp313-cp313t"
-    : "/opt/python/cp313-cp313t/include/python3.13t"
-;
-
-using python
-    : "3.140"
-    : "/opt/python/cp314-cp314t"
-    : "/opt/python/cp314-cp314t/include/python3.14t"
 ;
