@@ -44,7 +44,7 @@ cd "${BOOST_ROOT}"
 mkdir -p /usr/local/lib/python_ft
 
 # for each installed python version build only boost_python 
-echo "Will try building boost.python for python versions: ${PY_VERSIONS_TO_BUILD}"
+echo "Will try building boost.python for python versions: ${PY_VERS_TO_BUILD}"
 
 for PY_VERS in ${PY_VERS_TO_BUILD}; do
     echo "#####################################################################"
