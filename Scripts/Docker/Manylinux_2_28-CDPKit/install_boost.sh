@@ -81,7 +81,6 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
         ./b2 \
             --with-python \
             --user-config="${CONFIG_FILE}" \
-            --python-buildid=${PY_BID} \
             --enable-unicode="${ENCODING}" \
             threading=multi \
             python="${PY_VERS_NO_T}${PY_VERS_SUFF}" \
