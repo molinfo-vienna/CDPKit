@@ -37,7 +37,7 @@ echo "Found boost sources at: $BOOST_ROOT"
 
 cd "${BOOST_ROOT}"
 ./bootstrap.sh --without-libraries=python
-./b2 --without-python install > /dev/null
+./b2 --without-python threading=multi install > /dev/null
 ./b2 --clean  > /dev/null
 ./b2 --clean-all > /dev/null
 
@@ -49,23 +49,23 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     echo "trying to build python version ${python_version_2_build} as requested"
     echo "#####################################################################"
 
-    PYVER_DOT="$python_version_2_build"
-    PYVER_DOT_NO_T="$(echo $PYVER_DOT | tr -d t)"
-    PYVER="$(echo $PYVER_DOT | tr -d .)"
-    PYVER_NO_T="$(echo $PYVER | tr -d t)"
+    PY_VERS_DOT="$python_version_2_build"
+    PY_VERS_DOT_NO_T="$(echo $PY_VERS_DOT | tr -d t)"
+    PY_VERS="$(echo $PY_VERS_DOT | tr -d .)"
+    PY_VERS_NO_T="$(echo $PY_VERS | tr -d t)"
 
-    if [[ "$PYVER" = "$PYVER_NO_T" ]]; then
+    if [[ "$PY_VERS" = "$PY_VERS_NO_T" ]]; then
         PY_BID=""
         CONFIG_FILE="/io/user-config.jam"
     else
-        PY_BID="t"
+        PY_BID="mt"
         CONFIG_FILE="/io/user-config-no-gil.jam"
     fi
     
     found_one=0
 
     for PYBIN in /opt/python/cp*/bin; do
-        if [[ ! $PYBIN =~ ^/opt/python/cp${PYVER_NO_T}-cp${PYVER}/bin ]]; then
+        if [[ ! $PYBIN =~ ^/opt/python/cp${PY_VERS_NO_T}-cp${PY_VERS}/bin ]]; then
             continue;
         else
             found_one=1
@@ -77,7 +77,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
             ENCODING="ucs2"
         fi
 
-        echo "Building boost.python for requested version: ${python_version_2_build} using python binary: ${PYBIN} (PYVER: ${PYVER} and PYVER_DOT: ${PYVER_DOT} and ENCODING: ${ENCODING})"
+        echo "Building boost.python for requested version: ${python_version_2_build} using python binary: ${PYBIN} (PY_VERS: ${PY_VERS} and PY_VERS_DOT: ${PY_VERS_DOT} and ENCODING: ${ENCODING})"
 
         ./bootstrap.sh --with-python="${PYBIN}/python"
         ./b2 \
@@ -85,7 +85,8 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
             --user-config="${CONFIG_FILE}" \
             --python-buildid=${PY_BID} \
             --enable-unicode="${ENCODING}" \
-            python="${PYVER_DOT_NO_T}" \
+            threading=multi \
+            python="${PY_VERS_DOT_NO_T}" \
             install > /dev/null
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null
@@ -94,7 +95,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     done
 
     if [[ $found_one == 0 ]]; then
-        echo "Did not find an installed python env at /opt/python/ that matches ${PYVER}"
+        echo "Did not find an installed python env at /opt/python/ that matches ${PY_VERS}"
         exit 1
     fi
 done
