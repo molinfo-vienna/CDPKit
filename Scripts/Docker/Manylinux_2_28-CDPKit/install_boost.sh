@@ -41,8 +41,6 @@ cd "${BOOST_ROOT}"
 ./b2 --clean  > /dev/null
 ./b2 --clean-all > /dev/null
 
-mkdir -p /usr/local/lib/python_ft
-
 # for each installed python version build only boost_python 
 echo "Will try building boost.python for python versions: ${PY_VERS_TO_BUILD}"
 
@@ -54,13 +52,12 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
     PY_VERS_NO_T="$(echo $PY_VERS | tr -d t)"
     PY_VERS_NO_DOT="$(echo $PY_VERS | tr -d .)"
     PY_VERS_NO_DOT_NO_T="$(echo $PY_VERS_NO_DOT | tr -d t)"
-
+    CONFIG_FILE="/io/user-config.jam"
+    
     if [[ "$PY_VERS_NO_DOT" = "$PY_VERS_NO_DOT_NO_T" ]]; then
-        PY_BID=""
-        CONFIG_FILE="/io/user-config.jam"
+        PY_VERS_SUFF=""
     else
-        PY_BID="mt"
-        CONFIG_FILE="/io/user-config-no-gil.jam"
+        PY_VERS_SUFF="0"
     fi
     
     found_one=0
@@ -87,15 +84,10 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
             --python-buildid=${PY_BID} \
             --enable-unicode="${ENCODING}" \
             threading=multi \
-            python="${PY_VERS_NO_T}" \
+            python="${PY_VERS_NO_T}${PY_VERS_SUFF}" \
             install > /dev/null
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null
-
-        if [[ $PY_BID = "mt" ]]; then
-            mv /usr/local/lib/libboost_python*-mt* /usr/local/lib/python_ft/
-        fi
-        
         break;
     done
 
