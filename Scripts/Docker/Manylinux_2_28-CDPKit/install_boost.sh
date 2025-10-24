@@ -28,7 +28,7 @@
 
 set -exu
 
-PY_VERSIONS_TO_BUILD="$*"
+PY_VERS_TO_BUILD="$*"
 
 # build all boost-libraries except boost_python
 BOOST_ROOT="$( find /boost/* -maxdepth 0 -type d -name 'boost*' )"
@@ -41,20 +41,21 @@ cd "${BOOST_ROOT}"
 ./b2 --clean  > /dev/null
 ./b2 --clean-all > /dev/null
 
+mkdir -p /usr/local/lib/python_ft
+
 # for each installed python version build only boost_python 
 echo "Will try building boost.python for python versions: ${PY_VERSIONS_TO_BUILD}"
 
-for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
+for PY_VERS in ${PY_VERS_TO_BUILD}; do
     echo "#####################################################################"
-    echo "trying to build python version ${python_version_2_build} as requested"
+    echo "trying to build python version ${PY_VERS} as requested"
     echo "#####################################################################"
 
-    PY_VERS_DOT="$python_version_2_build"
-    PY_VERS_DOT_NO_T="$(echo $PY_VERS_DOT | tr -d t)"
-    PY_VERS="$(echo $PY_VERS_DOT | tr -d .)"
     PY_VERS_NO_T="$(echo $PY_VERS | tr -d t)"
+    PY_VERS_NO_DOT="$(echo $PY_VERS | tr -d .)"
+    PY_VERS_NO_DOT_NO_T="$(echo $PY_VERS_NO_DOT | tr -d t)"
 
-    if [[ "$PY_VERS" = "$PY_VERS_NO_T" ]]; then
+    if [[ "$PY_VERS_NO_DOT" = "$PY_VERS_NO_DOT_NO_T" ]]; then
         PY_BID=""
         CONFIG_FILE="/io/user-config.jam"
     else
@@ -65,7 +66,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
     found_one=0
 
     for PYBIN in /opt/python/cp*/bin; do
-        if [[ ! $PYBIN =~ ^/opt/python/cp${PY_VERS_NO_T}-cp${PY_VERS}/bin ]]; then
+        if [[ ! $PYBIN =~ ^/opt/python/cp${PY_VERS_NO_DOT_NO_T}-cp${PY_VERS_NO_DOT}/bin ]]; then
             continue;
         else
             found_one=1
@@ -77,7 +78,7 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
             ENCODING="ucs2"
         fi
 
-        echo "Building boost.python for requested version: ${python_version_2_build} using python binary: ${PYBIN} (PY_VERS: ${PY_VERS} and PY_VERS_DOT: ${PY_VERS_DOT} and ENCODING: ${ENCODING})"
+        echo "Building boost.python for requested version: ${PY_VERS} using python binary: ${PYBIN} and ENCODING: ${ENCODING}"
 
         ./bootstrap.sh --with-python="${PYBIN}/python"
         ./b2 \
@@ -86,16 +87,20 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
             --python-buildid=${PY_BID} \
             --enable-unicode="${ENCODING}" \
             threading=multi \
-            python="${PY_VERS_DOT_NO_T}" \
+            python="${PY_VERS_NO_T}" \
             install > /dev/null
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null
 
+        if [[ PY_BID = "mt" ]]; then
+            mv /usr/local/lib/libboost_python*-mt* /usr/local/lib/python_ft/
+        fi
+        
         break;
     done
 
     if [[ $found_one == 0 ]]; then
-        echo "Did not find an installed python env at /opt/python/ that matches ${PY_VERS}"
+        echo "Did not find an installed python env at /opt/python/ that matches ${PY_VERS_NO_DOT}"
         exit 1
     fi
 done

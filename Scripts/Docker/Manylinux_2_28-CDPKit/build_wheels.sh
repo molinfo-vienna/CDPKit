@@ -41,15 +41,15 @@ do
         fi
 
         if [[ "$PY_VERS_NO_DOT" = "$PY_VERS_NO_DOT_NO_T" ]]; then
-            USE_MT="OFF"
+            BOOST_LIBRARYDIR="/usr/local/lib/"
         else
-            USE_MT="ON"
+            BOOST_LIBRARYDIR="/usr/local/lib/python_ft/"
         fi
         
         echo "Building wheel for Python version ${PY_VERS}..."
         
         ${PY_INST}/bin/python -m build --wheel \
-        -C="--build-option=-DBoost_USE_MULTITHREADED=${USE_MT}" \
+        -C="--build-option=-DBOOST_LIBRARYDIR=${BOOST_LIBRARYDIR}" \
         -C="--build-option=-DBOOST_PYTHON_VERSIONS=${PY_VERS_NO_DOT_NO_T}" \
         -C="--build-option=-DPYPI_MANYLINUX_PACKAGE_BUILD=TRUE"
         break;
