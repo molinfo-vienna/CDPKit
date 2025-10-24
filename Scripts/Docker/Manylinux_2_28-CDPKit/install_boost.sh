@@ -92,7 +92,7 @@ for PY_VERS in ${PY_VERS_TO_BUILD}; do
         ./b2 --with-python --clean > /dev/null
         ./b2 --with-python --clean-all > /dev/null
 
-        if [[ PY_BID = "mt" ]]; then
+        if [[ $PY_BID = "mt" ]]; then
             mv /usr/local/lib/libboost_python*-mt* /usr/local/lib/python_ft/
         fi
         
