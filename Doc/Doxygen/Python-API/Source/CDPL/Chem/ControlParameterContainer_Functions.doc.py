@@ -1184,6 +1184,33 @@ def setMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContaine
 # \brief 
 # \param cntnr 
 #
+def clearMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param output 
+#
+def setMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearMOL2EnableExtendedAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
