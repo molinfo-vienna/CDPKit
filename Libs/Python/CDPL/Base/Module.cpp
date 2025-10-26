@@ -22,8 +22,7 @@
  */
 
 
-#include <boost/python.hpp>
-
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "ConverterRegistration.hpp"
 #include "ExceptionTranslatorRegistration.hpp"
@@ -32,6 +31,8 @@
 BOOST_PYTHON_MODULE(_base)
 {
     using namespace CDPLPythonBase;
+
+    CDPLPython::declareGILNotUsed();
 
     exportLookupKey();
     exportPropertyContainer();

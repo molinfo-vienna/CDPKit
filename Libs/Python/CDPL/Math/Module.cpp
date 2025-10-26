@@ -22,9 +22,9 @@
  */
 
 
-#include <boost/python.hpp>
 #include "CDPL/Config.hpp"
 
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "ConverterRegistration.hpp"
@@ -37,6 +37,8 @@
 BOOST_PYTHON_MODULE(_math)
 {
     using namespace CDPLPythonMath;
+
+    CDPLPython::declareGILNotUsed();
 
 #ifdef HAVE_NUMPY
     NumPy::import();

@@ -22,8 +22,7 @@
  */
 
 
-#include <boost/python.hpp>
-
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
@@ -34,6 +33,8 @@
 BOOST_PYTHON_MODULE(_forcefield)
 {
     using namespace CDPLPythonForceField;
+
+    CDPLPython::declareGILNotUsed();
 
     exportInteractionTypes();
 

@@ -22,10 +22,9 @@
  */
 
 
-#include <boost/python.hpp>
-
 #include "CDPL/Config.hpp"
 
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "NamespaceExports.hpp"
 #include "FunctionExports.hpp"
@@ -35,6 +34,8 @@
 BOOST_PYTHON_MODULE(_vis)
 {
     using namespace CDPLPythonVis;
+
+    CDPLPython::declareGILNotUsed();
 
     exportSizeSpecification();
     exportColor();

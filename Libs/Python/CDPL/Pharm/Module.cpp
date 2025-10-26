@@ -22,8 +22,7 @@
  */
 
 
-#include <boost/python.hpp>
-
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
@@ -33,6 +32,8 @@
 BOOST_PYTHON_MODULE(_pharm)
 {
     using namespace CDPLPythonPharm;
+
+    CDPLPython::declareGILNotUsed();
 
     exportFeature();
     exportBasicFeature();

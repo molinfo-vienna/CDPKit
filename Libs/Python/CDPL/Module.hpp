@@ -1,5 +1,5 @@
 /* 
- * Module.cpp 
+ * Module.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,17 +22,22 @@
  */
 
 
-#include "Module.hpp"
-#include "Exports.hpp"
+#ifndef CDPL_PYTHON_MODULE_HPP
+#define CDPL_PYTHON_MODULE_HPP
+
+#include <boost/python.hpp>
 
 
-BOOST_PYTHON_MODULE(_cdpl)
+namespace CDPLPython
 {
-    using namespace CDPLPython;
 
-    declareGILNotUsed();
-    
-    exportVersionInfo();
-    exportConfigInfo();
-    exportBuildInfo();
-}
+    inline void declareGILNotUsed()
+    {
+#ifdef Py_GIL_DISABLED
+        PyUnstable_Module_SetGIL(boost::python::scope().ptr(), Py_MOD_GIL_NOT_USED);
+#endif
+    }
+
+} // namespace CDPLPython
+
+#endif // CDPL_PYTHON_MODULE_HPP

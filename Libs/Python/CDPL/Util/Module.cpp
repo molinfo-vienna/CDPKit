@@ -22,8 +22,7 @@
  */
 
 
-#include <boost/python.hpp>
-
+#include "Module.hpp"
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "ConverterRegistration.hpp"
@@ -32,6 +31,8 @@
 BOOST_PYTHON_MODULE(_util)
 {
     using namespace CDPLPythonUtil;
+
+    CDPLPython::declareGILNotUsed();
 
     exportBitSet();
     exportArrays();
