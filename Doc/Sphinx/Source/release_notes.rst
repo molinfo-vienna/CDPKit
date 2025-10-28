@@ -8,12 +8,182 @@ Release V1.3.0
 
 .. rubric:: New Functionality and Features
 
+- New fingerprint/descriptor-based similarity screening command line tool :doc:`simscreen </applications/simscreen>`
+- New functionality for the generation and export of 3D visual representations of *Pharm::FeatureContainer* instances 
+  in Stereolithography (STL), Virtual Reality Modeling Language 97 (VRML), Polygon File Format (PLY) and Raster3D (R3D) format
+  (see API Changes)
+- Added infrastructure for the construction and on disk storage of arbitrary 3D object scene graphs (see API Changes)
+- Added support for the display of 2D structure renderings of *Chem::MolecularGraph* and *Chem::Reaction* instances in
+  Jupyter notebooks
+- Added methods controlling whether hydrogen atoms shall be included or not when perceiving the bond paths of a molecular graph
+  for path fingerprint generation (class *Descr::PathFingerprintGenerator*, see API Changes)
+- The command line tool :doc:`tautgen </applications/tautgen>` provides two new options **-r** and **-R** that allow control whether input 2D or 3D
+  atom coordinates shall be retained (might lead to distorted and/or invalid 2D/3D structures) or removed (default)
+  from the generated tautomers
+- SMILES reading/writing code has been extended to support atoms with the novel type *Chem::AtomType::R* (see API Changes)
+- Added methods to class *Descr::NPointPharmacophoreFingerprintGenerator*
+  allowing to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
+  (see API Changes)
+- New option **--conj-ring-bond-pattern** of command line tool :doc:`tautgen </applications/tautgen>` for enabling (= default setting)/disabling a new
+  tautomerization rule that flips the orders of bonds in conjugated rings having one or more N, O, S, Se or P substituent(s) bearing at least one hydrogen (see API Changes)
+- New control-parameter allowing to specify what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an
+  MDL CTab based format (see API Changes)
+- It is now possible to customize the way how atom, bond and molecular graph match expression functions employed for common connected substructure matching
+  will be retrieved (see API Changes)
+- New function (see API Changes) that computes and carries out a transformation which aligns
+  2D coordinates of a set of atoms with given reference coordinates in the best possible way 
+- New class (see API Changes) implementing the perception of the functional groups of a molecular graph by P. Ertl's algorithm
+- New control-parameter (plus associated functions, see API Changes) that for SMILES output allows to determine whether implicit
+  hydrogen count specifications for atoms requiring brackets shall be written or not (default: yes)
+- New utility functions that perform 2D visualization specific setup work for *Chem::MolecularGraph* and *Chem::Reaction* instances
+- New class and utility functions implementing the editing of atoms and/or bonds of molecular graph substructures according to
+  a specified target substructure template (see API Changes)
+- C++ standard input, output and error streams are now exposed
+  as class variables of the CDPL Python API class *Base.IStream* (see API Changes for further details)
+- New method of the CDPL Python API class *Base.StringIOStream* that allows to retrieve written data
+  as `Python bytes object <https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview>`_
+
 .. rubric:: Improvements
 
+- CDPL Python bindings now also work with `free-threaded CPython builds (V3.13t and V3.14t) <https://docs.python.org/3/howto/free-threading-python.html>`_
+- The extraction of property table view column names from SD-file property record headers in program :doc:`ChOX </applications/chox>`
+  is now more robust
+- The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
+- Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
+- Significant improvement of the tautomer scoring function with focus on the evaluation of hydroxy-pyridine
+  containing and highly conjugated molecule tautomers
+- Made the ChEMBL standardization code also work with *Chem::MolecularGraph* instances if
+  the standardization result shall be stored in a supplied *Chem::Molecule* instance
+- Support for the automated generation and installation of a CMake package configuration file that
+  significantly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
+ 
 .. rubric:: Bug Fixes
 
+- Fixed methods *write()* and *writelines()* of the CDPL Python API class *Base.IOStream* which both failed when being called with an argument of
+  type *str* or sequences thereof
+- Fixed an issue with the command line tool :doc:`psdscreen </applications/psdscreen>` where the default value of option **-u**
+  was not properly set at program startup. In screening mode ``ALL-MATCHES``, multiple program executions
+  using the same input files might thus have led to varying number of reported hits
+- Fixed an issue with spiro ring systems in the implementation of the *Extended Smallest Set of Smallest Sings (ESSSR)*
+  perception algorithm (class *Chem::ExtendedSSSR*)
+ 
 .. rubric:: API Changes
 
+- New setter/getter method pair *Descr::PathFingerprintGenerator::includeHydrogens()/Descr::PathFingerprintGenerator::hydrogensIncluded()*
+  controlling whether hydrogen atoms shall be included or not when perceiving the bond paths of a molecular graph
+- New method *getbytes()* of the CDPL Python API class *Base.StringIOStream* that allows to retrieve written data
+  as `Python bytes object <https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview>`_
+- New setter/getter method pair *Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction/Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction()*
+  allowing to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
+- Declaration of new type *Vis::STLFeatureContainerWriter* implementing the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Stereolithography (STL) format
+- Declaration of new type *Vis::PLYFeatureContainerWriter* implementing the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Polygon File Format (PLY)
+- Declaration of new type *Vis::VRMLFeatureContainerWriter* implementing the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Virtual Reality Modeling Language 97 (VRML) format
+- Declaration of new type *Vis::R3DFeatureContainerWriter* implementing the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Raster3D (R3D) format
+- New class template *Vis::FeatureContainerObject3DWriter* implementing the output of visual 3D representations of *Pharm::FeatureContainer* instances
+  in a supported output format (currently PLY, STL, R3D and VRML)
+- Declaration of new type *Vis::STLFeatureContainerOutputHandler* mediating the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Stereolithography (STL) format
+- Declaration of new type *Vis::PLYFeatureContainerOutputHandler* mediating the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Polygon File Format (PLY)
+- Declaration of new type *Vis::VRMLFeatureContainerOutputHandler* mediating the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Virtual Reality Modeling Language 97 (VRML) format
+- Declaration of new type *Vis::R3DFeatureContainerOutputHandler* mediating the output of visual 3D representations of *Pharm::FeatureContainer* instances in the
+  Raster3D (R3D) format
+- New class *Vis::STLObject3DWriter* implementing the output of 3D scene data described by *Vis::Object3D* instances in the Stereolithography (STL) format
+- New class *Vis::VRMLObject3DWriter* implementing the output of 3D scene data described by *Vis::Object3D* instances in the
+  Virtual Reality Modeling Language 97 (VRML) format
+- New class *Vis::PLYObject3DWriter* implementing the output of 3D scene data described by *Vis::Object3D* instances in the Polygon File Format (PLY)
+- New class *Vis::R3DObject3DWriter* implementing the output of 3D scene data described by *Vis::Object3D* instances in the Raster3D (R3D) format
+- Declaration of new type *Vis::STLObject3DOutputHandler* mediating the output of 3D scene data described by *Vis::Object3D* instances in the
+  Stereolithography (STL) format
+- Declaration of new type *Vis::PLYObject3DOutputHandler* mediating the output of 3D scene data described by *Vis::Object3D* instances in the
+  Polygon File Format (PLY)
+- Declaration of new type *Vis::VRMLObject3DOutputHandler* mediating the output of 3D scene data described by *Vis::Object3D* instances in the
+  Virtual Reality Modeling Language 97 (VRML) format
+- Declaration of new type *Vis::R3DObject3DOutputHandler* mediating the output of 3D scene data described by *Vis::Object3D* instances in the
+  Raster3D (R3D) format
+- Declaration of new type *Vis::Object3DWriter* for the output of 3D scene data described by *Vis::Object3D* instances in a supported output format
+  (currently PLY, STL, R3D and VRML)
+- Declaration of new *type Vis::Object3DReader* for reading 3D model data stored in a supported input format (none, currently) into a given
+  *Vis::Object3D instance*
+- New control-parameter default values *Vis::ControlParameterDefault::FEATURE_COLOR_TABLE* and *Vis::ControlParameterDefault::DEFAULT_MATERIAL*
+- New control-parameters *Vis::ControlParameter::FEATURE_COLOR_TABLE* and *Vis::ControlParameter::DEFAULT_MATERIAL* plus associated functions
+- New data format descriptors *Vis::DataFormat::STL*, *Vis::DataFormat::PLY*, *Vis::DataFormat::VRML* and *Vis::DataFormat::R3D*
+- New class *Vis::FeatureContainerObject3DFactory* implementing the creation of a visual 3D representation of *Pharm::FeatureContainer* instances
+- New class *Vis::Object3DFactory* defining the common interface of classes which implement the creation of 3D representations (as *Vis::Object3D* instances)
+  of different types of builtin data structures (e.g. *Pharm::FeatureContainer*, *Chem::MolecularGraph*, ...)
+- New class *Vis::DefaultFeatureColorTable* specifying default colors for builtin pharmacophoric feature types
+- New utility functions *Vis::subdivideSpherical()*, *Vis::removeVertexDuplicates()*, *Vis::calcVertexFromFaceNormals()*,
+  *Vis::translate()*, *Vis::scale()*, *Vis::rotateX()*, *Vis::rotateY()*, *Vis::rotateZ()* and *Vis::transform()* for the manipulation
+  of Vis::*TriangleMesh3D* objects
+- New class *Vis::IcosahedronMesh3D* implementing the generation of icosahedron vertices and faces
+- New class *Vis::RightFrustumMesh3D* implementing the creation of triangle meshes modeling various shapes in the right frustum category
+  (arbitary (truncated) pyramids)
+- New class *Vis::TorusMesh3D* implementing the creation of triangle meshes modeling the shape of a torus
+- New class *Vis::TriangleMesh3D* used to store the basic data (vertices, faces, vertex normals) of triangle meshes
+- New property default values *Vis::Object3DPropertyDefault::SHAPE* and *Vis::Object3DPropertyDefault::TRANSFORMATION_MATRIX*
+- New properties *Vis::Object3DProperty::SHAPE*, *Vis::Object3DProperty::TRANSFORMATION_MATRIX* and *Vis::Object3DProperty::MATERIAL* plus associated functions
+- New class *Vis::Shape3DVisitor* for the type-safe processing of *Vis::Shape3D* subclass instances
+- New class *Vis::Shape3D* serving as base class of data structures implementing the description of particular types of 3D shape geometries
+- New class *Vis::Material* for the specification of ambient, diffuse, specular color and translucency properties of a 3D shapes's material
+- New class *Vis::Object3D* which allows to store the description of the geometry of an arbitrary 3D shape together with a transformation matrix and material properties.
+  Moreover, *Vis::Object3D* instances may be used to build a simple 3D scene graph by connecting *Vis::Object3D* instances in a parent -> child object(s) manner
+- Renamed functions *Biomol::\*PDBIgnoreConectRecordsParameter()* into *Biomol::\*PDBIgnoreCONECTRecordsParameter()*
+- Removed namespace *Vis::AtomColorTable*
+- New class *Vis::DefaultAtomColorTable* replacing *Vis::AtomColorTable* namespace member *ELEMENT_COLORS_2D*
+- New atom type constant *Chem::AtomType::R* for the specification of atoms representing R-groups
+- Signature of method *Base::DataOutputHandler::createWriter(std::iostream&)* has been changed to
+  *Base::DataOutputHandler<T>::createWriter(std::ostream&)* in order to support write-only output streams
+- New control-parameter default value *Chem::ControlParameterDefault::MDL_OUTPUT_AROMATIC_BOND_TYPES* 
+- New control-parameter *Chem::ControlParameter::MDL_OUTPUT_AROMATIC_BOND_TYPES* plus associated functions allowing to specify
+  what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
+- Added methods to class *Chem::CommonConnectedSubstructureSearch* that allow to customize the way atom, bond and molecular graph
+  match expression functions employed for substructure matching will be retrieved (default: use the expressions provided as properties)
+- New function *Chem::align2DCoordinates()* that computes and carries out a transformation which aligns
+  2D coordinates of a set of atoms with given reference coordinates in the best possible way
+- New molecular graph property *MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS* plus associated functions for the storage of
+  perceived functional groups (see below)
+- New class *MolProp::FunctionalGroupList* plus convencience functions *MolProp::perceiveFunctionalGroups()*
+  that identify and extract functional group substructures of a molecular graph via the algorithm developed by P. Ertl.
+  Core atoms/bonds of detected functional groups are made available as a list of *Chem::Fragment objects*. The name property
+  (accessible via property function *Chem::getName()*) of each func. group fragment then provides the generalized form of the
+  functional group as a canonical SMILES string
+- New control-parameter default value *Chem::ControlParameterDefault::SMILES_OUTPUT_HYDROGEN_COUNT*
+- New control-parameter *Chem::ControlParameter::SMILES_OUTPUT_HYDROGEN_COUNT* plus associated functions allowing to control whether implicit
+  hydrogen count specifications for atoms in brackets shall be written on SMILES output
+- Added new tautomerization rule identifier *Chem::TautomerizationType::CONJ_RING_BOND_SWITCH*
+- New tautomerization rule implementation *Chem::ConjugatedRingBondPatternSwitching* for flipping the orders
+  of bonds in conjugated rings having one or more N, O, S, Se or P substituent(s) bearing at least one hydrogen
+- New utility functions *Vis::prepareFor2DVisualization()* that perform 2D visualization specific setup work for
+  *Chem::MolecularGraph* and *Chem::Reaction* instances
+- New utility functions *Chem::editSubstructures()* for editing substructures of *Chem::Molecule* instances (directly
+  or as a copy of a given *Chem::MolecularGraph instance*). The substructure search and optional exclude pattern(s)
+  are specified by SMARTS strings. Multiple search/exclude patterns can be specified as whitespace separated lists
+  of the respective patterns. The editing result pattern is provided as a SMILES string (with SMILES extensions implemented
+  especially for substructure editing)
+- New class *Chem::SubstructureEditor* for editing the atoms and/or bonds of molecular graph substructures according to
+  a specified target substructure template
+- C++ standard input, output and error streams (*std::cin*, *std::cout* and *std::cerr*) are now exposed
+  as class variables *Base.IStream.STD_IN*, *Base.OStream.STD_OUT* and *Base.OStream.STD_ERR*, respectively
+  For example, *Base.IStream.STD_IN* might be passed as argument to the constructor of a *Chem.MoleculeReader*
+  instance which will then read molecule data from the standard input of the current process
+
+.. rubric:: Miscellaneous Changes 
+
+- The default feature distance bin size used by Descr::NPoint3DPharmacophoreFingerprintGenerator instances has been changed to 3.0 (before 0.5)
+- The default feature distance bin size used by Descr::NPointPharmacophoreFingerprintGenerator instances has been changed to 2.0 (before 0.5)
+- The calculation of Manhattan similarity scores has bee changed so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
+  (before: highest sim. = 0.0, lowest sim. = 1.0)
+- The command line tool :doc:`tautgen </applications/tautgen>` now removes all for the sake of processing added explicit hydrogens from the
+  generated tautomers before output
+- The screening hit rate reported by command line tool :doc:`psdscreen </applications/psdscreen>` now always specifies the number of
+  matched unique database molecules in relation to the total amount of screened molecules -
+  irrespective of the number of query pharmacophores and screening mode (**-m** option)
+   
 Release V1.2.3
 --------------
 
@@ -30,7 +200,7 @@ Release V1.2.3
 
 .. rubric:: API Changes
 
-- New control-parameters *Chem::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES* and *Chem::MOL2_OUTPUT_FORMAL_CHARGES* plus
+- New control-parameters *Chem::ControlParameter::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES* and *Chem::ControlParameter::MOL2_OUTPUT_FORMAL_CHARGES* plus
   associated setter/getter functions that allow to control whether formal instead of partial charges shall be read
   from/written to MOL2 files
 - New class template *Descr::BulkSimilarityCalculator* for the calculation of multiple query <-> target descriptor
@@ -128,7 +298,7 @@ Release V1.2.0
 - The SDF data reader (class *Chem::SDFMoleculeReader*) now also accepts input data that do not end with a newline character
 - Made the MOL2 data reader (class *Chem::MOL2MoleculeReader*) more tolerant regarding missing sections
 - Extended the set of supported chemical elements to atomic number 114
-- Control-parameter *Vis::BACKGROUND_COLOR* was replaced by *Vis::BACKGROUND_BRUSH* which now allows to also
+- Control-parameter *Vis::ControlParameter::BACKGROUND_COLOR* was replaced by *Vis::ControlParameter::BACKGROUND_BRUSH* which now allows to also
   specify a background fill pattern (see class *Vis::Brush*) for 2D structure renderings
 - Class *Vis::CairoRenderer2D* now supports the rendering of overlined, underlined and striked-out text
 - Support for setting the image output scaling factor in the program :doc:`ChOX </applications/chox>`
@@ -192,7 +362,7 @@ Release V1.2.0
   arranged in a grid of arbitrary size
 - New class *Vis::TextBlockPrimitive2D* for the rendering of multi-line text blocks supporting
   several options for the styling of individual text fragments
-- New control-parameter *Vis::OUTPUT_SCLAING_FACTOR* that allows to achieve higher resolutions of 2D structure/reaction
+- New control-parameter *Vis::ControlParameter::OUTPUT_SCLAING_FACTOR* that allows to achieve higher resolutions of 2D structure/reaction
   depictions saved in pixel-based output formats
 - New control-parameters, properties and associated functions in namespace *Vis* for the rendering of custom atom and bond labels
   in 2D structure/reaction depictions  
@@ -221,7 +391,7 @@ Release V1.1.1
 - Fixed an issue with the generation of conformers under application of a fixed substructure template where the generated
   conformers sometimes displayed the mirror image of the specified 3D template structure
 - The command line tools :doc:`structgen </applications/structgen>` and :doc:`confgen </applications/confgen>` erroneously
-  used the already reserved letter **p** as shortcut for the option *--fixed-substr-min-atoms*. The new shortcut is **~**
+  used the already reserved letter **p** as shortcut for the option **--fixed-substr-min-atoms**. The new shortcut is **~**
    
 .. rubric:: Miscellaneous Changes 
 
@@ -243,7 +413,7 @@ Release V1.1.0
   (more information and examples can be found :ref:`here <confgen_notes_v1_1>`)
 - Conformer generator settings now allow to specify rotatable bond count dependent values for RMSD threshold, energy window and
   max. output ensemble size 
-- The pharmacophore screening application :doc:`psdscreen </applications/psdscreen>` provides a new option *--unique-hits*
+- The pharmacophore screening application :doc:`psdscreen </applications/psdscreen>` provides a new option **--unique-hits**
   which enforces that a database molecule matched by multiple query pharmacophores is saved only once to the output hit list
 - New Python example script for database preparation
 - New Python example script demonstrating how the torsion driving functionality can be used for conformer sampling
@@ -287,7 +457,7 @@ Release V1.1.0
 - Bond direction specifications (up/down) in SMILES and SMARTS strings are now correctly interpreted
 - Fixed a bug that may lead to the generation of conformers with wrong geometries at exocyclic double bonds
 - Fixed a bug in the :doc:`shapescreen </applications/shapescreen>` tool that lead to the calculation of erroneous similarity scores
-  when option *--score-only* was set 
+  when option **--score-only** was set 
 - Fix for a minor bug that affected the indentation of SD-file property entries
 - Function overload resolution order fixes in the *CDPL.Math* Python package
 - Prevented the throwing of exceptions when the env. variable **LC_ALL** has not been initialized
