@@ -1,6 +1,6 @@
 master:
 
- - Added support for free-threaded CPython builds (V3.13t and V3.14t)
+ - Support for free-threaded CPython builds (V3.13t and V3.14t)
  - New fingerprint/descriptor-based similarity screening command line tool 'SimScreen'
  - Changed the default feature distance bin size of Descr::NPoint3DPharmacophoreFingerprintGenerator instances to 3.0 (before 0.5)
  - Changed the default feature distance bin size of Descr::NPointPharmacophoreFingerprintGenerator instances to 2.0 (before 0.5)
@@ -11,23 +11,23 @@ master:
  - Added method Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction() (and Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction())
    which allows to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
  - Improved the extraction of ChOX property table view column names from SD-file property record headers
- - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Stereolithography (STL) format
- - Declaration of new type Vis::PLYFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::PLYFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Polygon File Format (PLY)
- - Declaration of new type Vis::VRMLFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::VRMLFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Virtual Reality Modeling Language 97 (VRML) format
- - Declaration of new type Vis::R3DFeatureContainerWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::R3DFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Raster3D (R3D) format
- - New class template Vis::FeatureContainerObject3DWriter implementing the output of visual 3D representations of a Pharm::FeatureContainer instances
+ - New class template Vis::FeatureContainerObject3DWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances
    in a supported output format (currently PLY, STL, R3D and VRML)
- - Declaration of new type Vis::STLFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::STLFeatureContainerOutputHandler mediating the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Stereolithography (STL) format
- - Declaration of new type Vis::PLYFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::PLYFeatureContainerOutputHandler mediating the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Polygon File Format (PLY)
- - Declaration of new type Vis::VRMLFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::VRMLFeatureContainerOutputHandler mediating the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Virtual Reality Modeling Language 97 (VRML) format
- - Declaration of new type Vis::R3DFeatureContainerOutputHandler mediating the output of visual 3D representations of a Pharm::FeatureContainer instances in the
+ - Declaration of new type Vis::R3DFeatureContainerOutputHandler mediating the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Raster3D (R3D) format
  - New class Vis::STLObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the Stereolithography (STL) format
  - New class Vis::VRMLObject3DWriter implementing the output of 3D scene data described by Vis::Object3D instances in the
@@ -54,7 +54,7 @@ master:
    of different types of builtin data structures (e.g. Pharm::FeatureContainer, Chem::MolecularGraph, ...)
  - New class Vis::DefaultFeatureColorTable specifying default colors for builtin pharmacophoric feature types
  - New utility functions Vis::subdivideSpherical(), Vis::removeVertexDuplicates(), Vis::calcVertexFromFaceNormals(),
-   Vis::translate(), Vis::scale(), Vis::rotateX(), Vis::rotateY(), Vis::rotateZ() Vis::transform() for the manipulation
+   Vis::translate(), Vis::scale(), Vis::rotateX(), Vis::rotateY(), Vis::rotateZ() and Vis::transform() for the manipulation
    of Vis::TriangleMesh3D instances
  - New class Vis::IcosahedronMesh3D implementing the generation of icosahedron vertices and faces
  - New class Vis::RightFrustumMesh3D implementing the creation of triangle meshes modeling various shapes in the right frustum category
@@ -70,27 +70,27 @@ master:
    Moreover, Vis::Object3D instances may be used to build a simple 3D scene graph by connecting Vis::Object3D instances in a parent -> child object(s) manner
  - Removed namespace Vis::AtomColorTable
  - New class Vis::DefaultAtomColorTable replacing namespace member Vis::AtomColorTable::ELEMENT_COLORS_2D
- - New control-parameter Chem::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
+ - New control-parameter Chem::ControlParameter::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
    what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
  - The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
  - Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
  - Added methods to class Chem::CommonConnectedSubstructureSearch that allow to customize the way atom, bond and molecular graph
    match expression functions employed for substructure matching will be retrieved (default: use the expressions provided as properties)
  - Renamed functions Biomol::*PDBIgnoreConectRecordsParameter() into Biomol::*PDBIgnoreCONECTRecordsParameter()
- - Fixed methods write() and writelines() of class Base.IOStream() which both failed when being called with an argument of
+ - Fixed methods write() and writelines() of class Base.IOStream which both failed when being called with an argument of
    type str or sequences thereof
- - New method getbytes() in class Base.StringIOStream() that allows to retrieve written data
+ - New method getbytes() in class Base.StringIOStream that allows to retrieve written data
    as Python bytes object
  - New function Chem::align2DCoordinates() that computes and carries out a transformation which aligns
    2D coordinates of a set of atoms with given reference coordinates in the best possible way
- - New molecular graph property MolProp::FUNCTIONAL_GROUPS plus associated functions for the storage of
+ - New molecular graph property MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS plus associated functions for the storage of
    perceived functional groups (see below)
  - New class MolProp::FunctionalGroupList plus convencience functions MolProp::perceiveFunctionalGroups()
    that identify and extract functional group substructures of a molecular graph via the algorithm developed by P. Ertl.
    Core atoms/bonds of detected functional groups are made available as a list of Chem::Fragment objects. The name property
    (accessible via function Chem::getName()) of each func. group fragment then provides the generalized form of the
    functional group as a canonical SMILES string
- - New control-parameter Chem::SMILES_OUTPUT_HYDROGEN_COUNT (plus associated functions) allowing to control whether implicit
+ - New control-parameter Chem::ControlParameter::SMILES_OUTPUT_HYDROGEN_COUNT (plus associated functions) allowing to control whether implicit
    hydrogen count specifications for atoms in brackets shall be written on SMILES output (default: yes)
  - SMILES reading/writing code has been extended to support atoms with the novel type Chem::AtomType::R
  - New atom type constant Chem::AtomType::R for the specification of atoms representing R-groups
@@ -138,7 +138,7 @@ master:
 
 v1.2.3:
 
- - New control-parameters Chem::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES and Chem::MOL2_OUTPUT_FORMAL_CHARGES plus
+ - New control-parameters Chem::ControlParameter::MOL2_READ_PARTIAL_AS_FORMAL_CHARGES and ControlParameter::Chem::MOL2_OUTPUT_FORMAL_CHARGES plus
    associated functions that allow to control whether formal instead of partial charges shall be read from/written to
    MOL2 files
  - Fix for a Base::ItemNotFound exception that gets thrown during the merging of temporary PSD files which occur
@@ -237,7 +237,7 @@ V1.2.0:
  - Fixed a bug in Math::RegularSpatialGrid that caused an erroneous transformation of world to grid-local coordinates
  - Fixed a problem in Chem::RECAPFragmentGenerator that led to the generation of too few fragments for H-depleted molecules
  - Fixed a problem in Chem::BRICSFragmentGenerator that led to the generation of too few fragments for H-depleted molecules
- - Control-parameter Vis::BACKGROUND_COLOR was replaced by Vis::BACKGROUND_BRUSH which now allows to also
+ - Control-parameter Vis::ControlParameter::BACKGROUND_COLOR was replaced by Vis::ControlParameter::BACKGROUND_BRUSH which now allows to also
    specify a background fill pattern (see Vis::Brush) for 2D structure renderings
  - New unit test case for Vis::TextBlockPrimitive2D and CDPL::Vis test case updates
  - Vis::CairoRenderer2D now supports the rendering of overlined, underlined and striked-out text
@@ -248,7 +248,7 @@ V1.2.0:
  - New 2D graphics primitive Vis::TextBlockPrimitive2D for the rendering of multi-line text blocks supporting
    several options for the styling of individual text fragments
  - Support for setting the image output scaling factor in the program 'ChOX'
- - New control-parameter Vis::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
+ - New control-parameter Vis::ControlParameter::OUTPUT_SCLAING_FACTOR that allows to achieve higher resolutions of 2D structure/reaction
    depictions saved in pixel-based output formats
  - Fixed an issue in program 'ChOX' where the background color setting of 2D structure/reaction depictions was ignored on
    file output
