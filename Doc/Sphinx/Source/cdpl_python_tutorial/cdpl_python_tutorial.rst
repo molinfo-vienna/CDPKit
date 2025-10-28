@@ -21,6 +21,17 @@ First example: parsing a SMILES string
 .. code:: ipython3
 
     mol = Chem.parseSMILES('c1ccccc1')
+    
+    mol
+
+
+
+
+.. parsed-literal::
+
+    <CDPL.Chem._chem.BasicMolecule at 0x7fd0b6cf8b30>
+
+
 
 Display of the parsed molecule:
 
@@ -29,4 +40,24 @@ Display of the parsed molecule:
     import CDPL.Vis
     
     display(mol)
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_8_0.svg
+
+
+.. code:: ipython3
+
+    mol.removeAtom(0)
+
+.. code:: ipython3
+
+    mol
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_10_0.svg
+
+
 

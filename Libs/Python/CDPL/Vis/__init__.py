@@ -39,7 +39,7 @@ if CDPL.HAVE_CAIRO_SVG_SUPPORT:
         mol = CDPL.Chem.BasicMolecule(molgraph)
 
         prepareFor2DVisualization(mol)
-        setAtomColorTableParameter(svg_writer, Vis.DefaultAtomColorTable())
+        setAtomColorTableParameter(svg_writer, DefaultAtomColorTable())
         setShowExplicitHydrogensParameter(svg_writer, True)
 
         svg_writer.write(mol)
@@ -53,7 +53,7 @@ if CDPL.HAVE_CAIRO_SVG_SUPPORT:
         rnx = CDPL.Chem.BasicReaction(rxn)
 
         prepareFor2DVisualization(rxn)
-        setAtomColorTableParameter(svg_writer, Vis.DefaultAtomColorTable())
+        setAtomColorTableParameter(svg_writer, DefaultAtomColorTable())
         setShowExplicitHydrogensParameter(svg_writer, True)
 
         svg_writer.write(rxn)
