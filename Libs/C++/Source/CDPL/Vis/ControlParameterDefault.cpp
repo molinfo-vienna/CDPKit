@@ -149,9 +149,9 @@ namespace CDPL
             const Color                     GRID_VIEW_TEXT_COLOR                 = Color(0, 0, 0);
 
             const ColorTable::SharedPointer FEATURE_COLOR_TABLE                  = ColorTable::SharedPointer(new DefaultFeatureColorTable());
-
             const Material                  DEFAULT_MATERIAL                     = Material(0.5, Color(0.7, 0.7, 0.7), Color(1.0, 1.0, 1.0), 0.1);
-            
+            const bool                      SHOW_FEATURE_CENTERS                 = true;
+
         } // namespace ControlParameterDefault
 
         void initControlParameterDefaults() {}

@@ -226,7 +226,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowPlusSigns(Chem::Reaction& rxn);
 
-        /*
+        /**
          * \since 1.3
          */
         CDPL_VIS_API void prepareFor2DVisualization(Chem::Reaction& rxn);

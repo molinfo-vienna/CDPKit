@@ -559,6 +559,12 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Material DEFAULT_MATERIAL;
 
+            /**
+             * \brief Default setting (= \c true) for the control-parameter Vis::ControlParameter::SHOW_FEATURE_CENTERS.
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const bool SHOW_FEATURE_CENTERS;
+
         } // namespace ControlParameterDefault
     } // namespace Vis
 } // namespace CDPL

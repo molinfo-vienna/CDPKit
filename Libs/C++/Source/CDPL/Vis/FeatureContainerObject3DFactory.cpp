@@ -373,6 +373,7 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
     std::call_once(initTriangleMeshesFlag, &initTriangleMeshes);
 
     colorTable = getFeatureColorTableParameter(*this);
+    auto show_ftr_ctrs = getShowFeatureCentersParameter(*this);
     
     Object3D::SharedPointer obj_ptr(new Object3D());
 
@@ -471,7 +472,30 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
                                            getOptionalFlag(ftr) ? punchedSphereMesh : sphereMesh);
         }
 
-        createFeatureCenterSphere(*obj_ptr, ftr, ftr_type);
+        if (!show_ftr_ctrs)
+            continue;
+        
+        auto& ftr_pos = get3DCoordinates(ftr);
+        auto skip_ftr = false;
+        
+        for (std::size_t j = 0; j < i; j++) {
+            auto& prev_ftr = cntnr.getFeature(j);
+
+            if (getType(prev_ftr) != ftr_type)
+                continue;
+            
+            if (!has3DCoordinates(prev_ftr))
+                continue;
+
+            if (ftr_pos != get3DCoordinates(prev_ftr))
+                continue;
+
+            skip_ftr = true;
+            break;
+        }
+
+        if (!skip_ftr)
+            createFeatureCenterSphere(*obj_ptr, ftr, ftr_type);
     }
     
     return obj_ptr;

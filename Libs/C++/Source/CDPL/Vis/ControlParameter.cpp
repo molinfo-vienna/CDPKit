@@ -144,6 +144,7 @@ namespace CDPL
 
             CDPL_DEFINE_LOOKUP_KEY(FEATURE_COLOR_TABLE);
             CDPL_DEFINE_LOOKUP_KEY(DEFAULT_MATERIAL);
+            CDPL_DEFINE_LOOKUP_KEY(SHOW_FEATURE_CENTERS);
         }
 
         void initControlParameters() {}

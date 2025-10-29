@@ -142,5 +142,6 @@ void CDPLPythonVis::exportControlParameterDefaults()
         .def_readonly("GRID_VIEW_TEXT_COLOR", &Vis::ControlParameterDefault::GRID_VIEW_TEXT_COLOR)
         .def_readonly("FEATURE_COLOR_TABLE", &Vis::ControlParameterDefault::FEATURE_COLOR_TABLE)
         .def_readonly("DEFAULT_MATERIAL", &Vis::ControlParameterDefault::DEFAULT_MATERIAL)
+        .def_readonly("SHOW_FEATURE_CENTERS", &Vis::ControlParameterDefault::SHOW_FEATURE_CENTERS)
         ;
 }

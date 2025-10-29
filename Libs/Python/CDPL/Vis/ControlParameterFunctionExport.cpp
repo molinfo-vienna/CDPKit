@@ -166,6 +166,7 @@ namespace
 
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::ColorTable::SharedPointer&, FeatureColorTable)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Vis::Material&, DefaultMaterial)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, ShowFeatureCenters)
 }
 
 
@@ -275,4 +276,5 @@ void CDPLPythonVis::exportControlParameterFunctions()
 
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(FeatureColorTable, colors)
     EXPORT_CONTROL_PARAM_FUNCS_INT_REF(DefaultMaterial, matrial)
+    EXPORT_CONTROL_PARAM_FUNCS(ShowFeatureCenters, show)
 }

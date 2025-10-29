@@ -53,7 +53,7 @@ namespace CDPL
         class Brush;
         class Material;
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API double getOutputScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
@@ -91,7 +91,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAlignmentParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Brush& getBackgroundBrushParameter(const Base::ControlParameterContainer& cntnr);
@@ -363,7 +363,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearRadicalElectronDotSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getAtomHighlightAreaSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -374,7 +374,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomHighlightAreaSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Brush& getAtomHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
@@ -385,7 +385,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getAtomHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
@@ -396,7 +396,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomHighlightAreaOutlinePenParameter(Base::ControlParameterContainer& cntnr);
     
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getBreakAtomHighlightAreaOutlineParameter(const Base::ControlParameterContainer& cntnr);
@@ -488,7 +488,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowRadicalElectronsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API bool getShowAtomConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
@@ -499,7 +499,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowAtomConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getShowAtomCustomLabelsParameter(const Base::ControlParameterContainer& cntnr);
@@ -510,7 +510,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowAtomCustomLabelsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getEnableAtomHighlightingParameter(const Base::ControlParameterContainer& cntnr);
@@ -521,7 +521,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearEnableAtomHighlightingParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const SizeSpecification& getAtomConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -532,7 +532,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const Font& getAtomConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
@@ -543,7 +543,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getAtomConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
@@ -554,7 +554,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getAtomCustomLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -565,7 +565,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomCustomLabelSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Font& getAtomCustomLabelFontParameter(const Base::ControlParameterContainer& cntnr);
@@ -576,7 +576,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomCustomLabelFontParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getAtomCustomLabelColorParameter(const Base::ControlParameterContainer& cntnr);
@@ -587,7 +587,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearAtomCustomLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getHighlightAreaOutlineWidthParameter(const Base::ControlParameterContainer& cntnr);
@@ -715,7 +715,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondLabelMarginParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getBondHighlightAreaWidthParameter(const Base::ControlParameterContainer& cntnr);
@@ -726,7 +726,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondHighlightAreaWidthParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Brush& getBondHighlightAreaBrushParameter(const Base::ControlParameterContainer& cntnr);
@@ -737,7 +737,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondHighlightAreaBrushParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getBondHighlightAreaOutlinePenParameter(const Base::ControlParameterContainer& cntnr);
@@ -775,7 +775,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowStereoBondsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API bool getShowBondConfigurationLabelsParameter(const Base::ControlParameterContainer& cntnr);
@@ -786,7 +786,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowBondConfigurationLabelsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getShowBondCustomLabelsParameter(const Base::ControlParameterContainer& cntnr);
@@ -797,7 +797,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearShowBondCustomLabelsParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getEnableBondHighlightingParameter(const Base::ControlParameterContainer& cntnr);
@@ -808,7 +808,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearEnableBondHighlightingParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const SizeSpecification& getBondConfigurationLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -819,7 +819,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondConfigurationLabelSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const Font& getBondConfigurationLabelFontParameter(const Base::ControlParameterContainer& cntnr);
@@ -830,7 +830,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondConfigurationLabelFontParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getBondConfigurationLabelColorParameter(const Base::ControlParameterContainer& cntnr);
@@ -841,7 +841,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondConfigurationLabelColorParameter(Base::ControlParameterContainer& cntnr);
     
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getBondCustomLabelSizeParameter(const Base::ControlParameterContainer& cntnr);
@@ -852,7 +852,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondCustomLabelSizeParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Font& getBondCustomLabelFontParameter(const Base::ControlParameterContainer& cntnr);
@@ -863,7 +863,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondCustomLabelFontParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getBondCustomLabelColorParameter(const Base::ControlParameterContainer& cntnr);
@@ -874,7 +874,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearBondCustomLabelColorParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getGridViewBorderPenParameter(const Base::ControlParameterContainer& cntnr);
@@ -885,7 +885,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewBorderPenParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getGridViewRowSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
@@ -896,7 +896,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewRowSeparatorPenParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getGridViewColumnSeparatorPenParameter(const Base::ControlParameterContainer& cntnr);
@@ -907,7 +907,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewColumnSeparatorPenParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API double getGridViewMarginParameter(const Base::ControlParameterContainer& cntnr);
@@ -918,7 +918,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewMarginParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API double getGridViewCellPaddingParameter(const Base::ControlParameterContainer& cntnr);
@@ -929,7 +929,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewCellPaddingParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Font& getGridViewTextFontParameter(const Base::ControlParameterContainer& cntnr);
@@ -940,7 +940,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewTextFontParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getGridViewTextColorParameter(const Base::ControlParameterContainer& cntnr);
@@ -951,7 +951,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearGridViewTextColorParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.3
          */
         CDPL_VIS_API const ColorTable::SharedPointer& getFeatureColorTableParameter(const Base::ControlParameterContainer& cntnr);
@@ -962,7 +962,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearFeatureColorTableParameter(Base::ControlParameterContainer& cntnr);
 
-        /*
+        /**
          * \since 1.3
          */
         CDPL_VIS_API const Material& getDefaultMaterialParameter(const Base::ControlParameterContainer& cntnr);
@@ -972,6 +972,17 @@ namespace CDPL
         CDPL_VIS_API bool hasDefaultMaterialParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearDefaultMaterialParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.3
+         */
+        CDPL_VIS_API bool getShowFeatureCentersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void setShowFeatureCentersParameter(Base::ControlParameterContainer& cntnr, bool show);
+
+        CDPL_VIS_API bool hasShowFeatureCentersParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_VIS_API void clearShowFeatureCentersParameter(Base::ControlParameterContainer& cntnr);
 
     } // namespace Vis
 } // namespace CDPL

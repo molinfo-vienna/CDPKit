@@ -159,7 +159,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearLabelMargin(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Bond& bond);
@@ -170,7 +170,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelFont(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Bond& bond);
@@ -181,7 +181,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Bond& bond);
         
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Bond& bond);
@@ -192,7 +192,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelColor(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Font& getCustomLabelFont(const Chem::Bond& bond);
@@ -203,7 +203,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelFont(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getCustomLabelSize(const Chem::Bond& bond);
@@ -214,7 +214,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelSize(Chem::Bond& bond);
         
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getCustomLabelColor(const Chem::Bond& bond);
@@ -225,7 +225,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelColor(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const std::string& getCustomLabel(const Chem::Bond& bond);
@@ -236,7 +236,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabel(Chem::Bond& bond);
     
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getHighlightedFlag(const Chem::Bond& bond);
@@ -247,7 +247,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearHighlightedFlag(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Brush& getHighlightAreaBrush(const Chem::Bond& bond);
@@ -258,7 +258,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearHighlightAreaBrush(Chem::Bond& bond);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getHighlightAreaOutlinePen(const Chem::Bond& bond);

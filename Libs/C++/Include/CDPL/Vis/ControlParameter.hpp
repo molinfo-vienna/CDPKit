@@ -1309,6 +1309,17 @@ namespace CDPL
              */
             extern CDPL_VIS_API const Base::LookupKey DEFAULT_MATERIAL;
 
+            /**
+             * \brief Specifies whether or not to show feature center spheres.
+             *
+             * If the control-parameter is left unspecified, the default setting 
+             * Vis::ControlParameterDefault::SHOW_FEATURE_CENTERS will be used.
+             *
+             * \valuetype \c bool
+             * \since 1.3
+             */
+            extern CDPL_VIS_API const Base::LookupKey SHOW_FEATURE_CENTERS;
+            
         } // namespace ControlParameter
     } // namespace Vis
 } // namespace CDPL

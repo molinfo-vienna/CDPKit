@@ -114,7 +114,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearRadicalElectronDotSize(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const Font& getConfigurationLabelFont(const Chem::Atom& atom);
@@ -125,7 +125,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelFont(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.1
          */
         CDPL_VIS_API const SizeSpecification& getConfigurationLabelSize(const Chem::Atom& atom);
@@ -136,7 +136,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelSize(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getConfigurationLabelColor(const Chem::Atom& atom);
@@ -147,7 +147,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearConfigurationLabelColor(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Font& getCustomLabelFont(const Chem::Atom& atom);
@@ -158,7 +158,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelFont(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const SizeSpecification& getCustomLabelSize(const Chem::Atom& atom);
@@ -169,7 +169,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelSize(Chem::Atom& atom);
         
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Color& getCustomLabelColor(const Chem::Atom& atom);
@@ -180,7 +180,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabelColor(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const std::string& getCustomLabel(const Chem::Atom& atom);
@@ -191,7 +191,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearCustomLabel(Chem::Atom& atom);
  
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API bool getHighlightedFlag(const Chem::Atom& atom);
@@ -202,7 +202,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearHighlightedFlag(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Brush& getHighlightAreaBrush(const Chem::Atom& atom);
@@ -213,7 +213,7 @@ namespace CDPL
 
         CDPL_VIS_API void clearHighlightAreaBrush(Chem::Atom& atom);
 
-        /*
+        /**
          * \since 1.2
          */
         CDPL_VIS_API const Pen& getHighlightAreaOutlinePen(const Chem::Atom& atom);
