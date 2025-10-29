@@ -8,6 +8,7 @@ Release V1.3.0
 
 .. rubric:: New Functionality and Features
 
+- Complete overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook (made available for download)
 - New fingerprint/descriptor-based similarity screening command line tool :doc:`simscreen </applications/simscreen>`
 - New functionality for the generation and export of 3D visual representations of *Pharm::FeatureContainer* instances 
   in Stereolithography (STL), Virtual Reality Modeling Language 97 (VRML), Polygon File Format (PLY) and Raster3D (R3D) format
@@ -56,6 +57,9 @@ Release V1.3.0
   the standardization result shall be stored in a supplied *Chem::Molecule* instance
 - Support for the automated generation and installation of a CMake package configuration file that
   significantly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
+- Additional Python cookbook script demonstrating the molecule substrucuture editing functionality
+- Additional Python cookbook script demonstrating the perception of functional groups of molecular graphs
+- Additional Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
  
 .. rubric:: Bug Fixes
 
@@ -110,8 +114,10 @@ Release V1.3.0
   (currently PLY, STL, R3D and VRML)
 - Declaration of new *type Vis::Object3DReader* for reading 3D model data stored in a supported input format (none, currently) into a given
   *Vis::Object3D instance*
-- New control-parameter default values *Vis::ControlParameterDefault::FEATURE_COLOR_TABLE* and *Vis::ControlParameterDefault::DEFAULT_MATERIAL*
-- New control-parameters *Vis::ControlParameter::FEATURE_COLOR_TABLE* and *Vis::ControlParameter::DEFAULT_MATERIAL* plus associated functions
+- New control-parameter default values *Vis::ControlParameterDefault::FEATURE_COLOR_TABLE*, *Vis::ControlParameterDefault::DEFAULT_MATERIAL* and
+  *Vis::ControlParameterDefault:SHOW_FEATURE_CENTERS*
+- New control-parameters *Vis::ControlParameter::FEATURE_COLOR_TABLE*, *Vis::ControlParameter::DEFAULT_MATERIAL* and
+  *Vis::ControlParameter::SHOW_FEATURE_CENTERS* plus associated functions
 - New data format descriptors *Vis::DataFormat::STL*, *Vis::DataFormat::PLY*, *Vis::DataFormat::VRML* and *Vis::DataFormat::R3D*
 - New class *Vis::FeatureContainerObject3DFactory* implementing the creation of a visual 3D representation of *Pharm::FeatureContainer* instances
 - New class *Vis::Object3DFactory* defining the common interface of classes which implement the creation of 3D representations (as *Vis::Object3D* instances)

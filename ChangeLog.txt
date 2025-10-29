@@ -1,5 +1,6 @@
 master:
 
+ - Overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook
  - Support for free-threaded CPython builds (V3.13t and V3.14t)
  - New fingerprint/descriptor-based similarity screening command line tool 'SimScreen'
  - Changed the default feature distance bin size of Descr::NPoint3DPharmacophoreFingerprintGenerator instances to 3.0 (before 0.5)
@@ -11,6 +12,9 @@ master:
  - Added method Descr::NPointPharmacophoreFingerprintGenerator::setFeatureFilterFunction() (and Descr::NPointPharmacophoreFingerprintGenerator::getFeatureFilterFunction())
    which allows to set a callback function that tells for each pharm. feature whether it shall be considered for fingerprint generation or not
  - Improved the extraction of ChOX property table view column names from SD-file property record headers
+ - Additional Python cookbook script demonstrating the molecule substrucuture editing functionality
+ - Additional Python cookbook script demonstrating the perception of functional groups of molecular graphs
+ - Additional Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
  - Declaration of new type Vis::STLFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
    Stereolithography (STL) format
  - Declaration of new type Vis::PLYFeatureContainerWriter implementing the output of visual 3D representations of Pharm::FeatureContainer instances in the
@@ -46,8 +50,10 @@ master:
    (currently PLY, STL, R3D and VRML)
  - Declaration of new type Vis::Object3DReader for reading 3D model data stored in a supported input format (none, currently) into a given
    Vis::Object3D instance
- - New control-parameter default values Vis::ControlParameterDefault::FEATURE_COLOR_TABLE and Vis::ControlParameterDefault::DEFAULT_MATERIAL
- - New control-parameters Vis::ControlParameter::FEATURE_COLOR_TABLE and Vis::ControlParameter::DEFAULT_MATERIAL plus associated functions
+ - New control-parameter default values Vis::ControlParameterDefault::FEATURE_COLOR_TABLE, Vis::ControlParameterDefault::DEFAULT_MATERIAL
+   and Vis::ControlParameterDefault::SHOW_FEATURE_CENTERS
+ - New control-parameters Vis::ControlParameter::FEATURE_COLOR_TABLE, Vis::ControlParameter::DEFAULT_MATERIAL and
+   Vis::ControlParameter::SHOW_FEATURE_CENTERS plus associated functions
  - New data format descriptors Vis::DataFormat::STL, Vis::DataFormat::PLY, Vis::DataFormat::VRML and Vis::DataFormat::R3D
  - New class Vis::FeatureContainerObject3DFactory implementing the creation of a visual 3D representation of Pharm::FeatureContainer instances
  - New class Vis::Object3DFactory defining the common interface of classes which implement the creation of 3D representations (as Vis::Object3D instances)
