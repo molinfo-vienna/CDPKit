@@ -558,3 +558,10 @@ class ControlParameterDefault(Boost.Python.instance):
     # \since 1.3
     # 
     DEFAULT_MATERIAL = Material(amb_color=Color(r=0.35, g=0.35, b=0.35), amb_factor=0.5, diff_color=Color(r=0.7, g=0.7, b=0.7), spec_color=Color(r=1, g=1, b=1), shininess=0.1, transp=0)
+
+    ##
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Vis.ControlParameter.SHOW_FEATURE_CENTERS.
+    # 
+    # \since 1.3
+    # 
+    SHOW_FEATURE_CENTERS = True

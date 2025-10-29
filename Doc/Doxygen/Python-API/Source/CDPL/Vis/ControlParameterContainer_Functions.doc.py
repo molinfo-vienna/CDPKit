@@ -2048,6 +2048,33 @@ def setShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: 
 # \brief 
 # \param cntnr 
 #
+def clearShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param show 
+#
+def setShowFeatureCentersParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
 def clearShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##

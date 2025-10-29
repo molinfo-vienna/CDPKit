@@ -921,3 +921,12 @@ class ControlParameter(Boost.Python.instance):
     # <b>Value Type:</b> Vis.Material \since 1.3
     # 
     DEFAULT_MATERIAL = CDPL.Base.LookupKey('DEFAULT_MATERIAL')
+
+    ##
+    # \brief Specifies whether or not to show feature center spheres.
+    # 
+    # If the control-parameter is left unspecified, the default setting Vis.ControlParameterDefault.SHOW_FEATURE_CENTERS will be used.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt> \since 1.3
+    # 
+    SHOW_FEATURE_CENTERS = CDPL.Base.LookupKey('SHOW_FEATURE_CENTERS')
