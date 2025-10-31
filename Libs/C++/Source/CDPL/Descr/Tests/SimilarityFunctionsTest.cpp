@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(SimilarityFunctionsTest)
 
 //-----
 
-    BOOST_CHECK_EQUAL(calcManhattanSimilarity(boost::lexical_cast<BitSet>("10111000"), boost::lexical_cast<BitSet>("11011010")), 0.375);
+    BOOST_CHECK_EQUAL(calcManhattanSimilarity(boost::lexical_cast<BitSet>("10111000"), boost::lexical_cast<BitSet>("11011010")), 1.0 - 0.375);
 
 //-----
 
