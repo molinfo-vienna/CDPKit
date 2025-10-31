@@ -28,13 +28,12 @@ import CDPL.Util as Util
 def genPathFingerprint(mol: Chem.Molecule, num_bits: int, min_len: int, max_len: int, inc_hs: bool) -> Util.BitSet:
     Chem.calcBasicProperties(mol, False)      # calculate basic molecular properties (if not yet done)
 
+    fp_gen = Descr.PathFingerprintGenerator() # create path fingerprint generator instance
+    
     # apply option -H
     if inc_hs:        
         Chem.makeHydrogenComplete(mol)        # make any implicit hydrogens explicit
-    else:        
-        Chem.makeHydrogenDeplete(mol)         # make any explicit hydrogens implicit
-        
-    fp_gen = Descr.PathFingerprintGenerator() # create path fingerprint generator instance
+        fp_gen.includeHydrogens(True)         # default = exclude hydrogens
 
     fp_gen.setMinPathLength(min_len)          # set min. path length
     fp_gen.setMaxPathLength(max_len)          # set max. path length
