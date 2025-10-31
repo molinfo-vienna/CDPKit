@@ -28,4 +28,5 @@ The source code provided by this cookbook can be used without restrictions for a
    confgen/index
    forcefield/index
    shape/index
+   vis/index
 .. biomol/index
