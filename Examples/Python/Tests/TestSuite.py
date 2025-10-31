@@ -159,10 +159,10 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out'), '-y', '-c' ])
     errors |= checkScriptOutput('gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('gen_ph4_fp', outputFilePath('test.out'),
-                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '5737', '-d', '3' ],
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '5737', '-d', '3', '-b', '1.0' ],
                                     'gen_ph4_fp_3d.out')
     errors |= checkScriptFileOutput('gen_ph4_fp', outputFilePath('test.out'),
-                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-d', '2' ],
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-d', '2', '-b', '1.0' ],
                                     'gen_ph4_fp_2d.out')
     errors |= checkScriptFileOutput('gen_pubchem_fp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out') ])
@@ -179,5 +179,8 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_confs.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
     errors |= checkScriptFileOutput('gen_3d_structs', outputFilePath('gen_3d_structs.mol2'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('gen_3d_structs.mol2') ])
-    
+
+    errors |= checkScriptFileOutput('gen_ph4_3d_vis', outputFilePath('gen_ph4_3d_vis_1.r3d'),
+                                    [ '-i', testDataFilePath('1dwc_MIT_ph4.pml'), '-o', outputFilePath('gen_ph4_3d_vis.r3d') ])
+
     sys.exit(errors)
