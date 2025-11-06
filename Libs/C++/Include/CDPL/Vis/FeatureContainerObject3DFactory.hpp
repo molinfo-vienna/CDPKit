@@ -78,7 +78,7 @@ namespace CDPL
 
             void createFeatureCenterSphere(Object3D& parent_obj, const Pharm::Feature& ftr, unsigned int ftr_type) const;
 
-            void setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double col_alpha = -1.0) const;
+            void setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double transp_factor = 1.0) const;
             
             ColorTable::SharedPointer colorTable;
         };

@@ -28,6 +28,7 @@
 #include <cmath>
 #include <vector>
 #include <utility>
+#include <algorithm>
 
 #include "CDPL/Vis/FeatureContainerObject3DFactory.hpp"
 #include "CDPL/Vis/IcosahedronMesh3D.hpp"
@@ -359,12 +360,12 @@ namespace
         rot_mtx = Math::RotationMatrix<double>(4, z_rot, 0.0, 0.0, 1.0) * Math::RotationMatrix<double>(4, y_rot, 0.0, 1.0, 0.0);
     }
 
-    constexpr double MAT_SPEC_COLOR_RGB_INCREMENT      = 0.5;
-    constexpr double MAT_SHININESS                     = 0.1;
-    constexpr double MAT_AMBIENT_FACTOR                = 0.35;
-    constexpr double DISABLED_COLOR_RGB_INCREMENT      = 0.5;
-    constexpr double FEATURE_CENTER_SPHERE_RADIUS      = 0.5;
-    constexpr double FEATURE_CENTER_SPHERE_COLOR_ALPHA = 0.25;
+    constexpr double MAT_SPEC_COLOR_RGB_INCREMENT        = 0.5;
+    constexpr double MAT_SHININESS                       = 0.1;
+    constexpr double MAT_AMBIENT_FACTOR                  = 0.35;
+    constexpr double DISABLED_COLOR_RGB_INCREMENT        = 0.5;
+    constexpr double FEATURE_CENTER_SPHERE_RADIUS        = 0.5;
+    constexpr double FEATURE_CENTER_SPHERE_TRANSP_FACTOR = 1.5;
 }
 
 
@@ -439,7 +440,7 @@ Vis::Object3D::SharedPointer Vis::FeatureContainerObject3DFactory::create(const 
             continue;
 
         auto ftr_type = getType(ftr);
-        
+
         switch (ftr_type) {
 
             case Pharm::FeatureType::POSITIVE_IONIZABLE:
@@ -646,12 +647,12 @@ void Vis::FeatureContainerObject3DFactory::createFeatureCenterSphere(Object3D& p
                             Math::ScalingMatrix<double>(4, FEATURE_CENTER_SPHERE_RADIUS, FEATURE_CENTER_SPHERE_RADIUS, FEATURE_CENTER_SPHERE_RADIUS));
     
     setShape(*obj_ptr, sphereMesh);
-    setMaterialProperty(*obj_ptr, ftr_type, false, FEATURE_CENTER_SPHERE_COLOR_ALPHA);
+    setMaterialProperty(*obj_ptr, ftr_type, false, FEATURE_CENTER_SPHERE_TRANSP_FACTOR);
     
     parent_obj.addSubObject(obj_ptr);
 }
 
-void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double col_alpha) const
+void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, unsigned int ftr_type, bool ftr_disabled, double transp_factor) const
 {
     static const DefaultFeatureColorTable DEF_FTR_COLORS;
 
@@ -675,9 +676,6 @@ void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, un
         color = &DEF_FTR_COLORS[Pharm::FeatureType::UNKNOWN];
 
     auto dis_incr = (ftr_disabled ? DISABLED_COLOR_RGB_INCREMENT : 0.0);
-
-    if (col_alpha < 0.0)
-        col_alpha = color->getAlpha();
     
     setMaterial(obj, Material(MAT_AMBIENT_FACTOR,
                               Color(color->getRed() + dis_incr,
@@ -686,5 +684,5 @@ void Vis::FeatureContainerObject3DFactory::setMaterialProperty(Object3D& obj, un
                               Color(color->getRed() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr,
                                     color->getGreen() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr,
                                     color->getBlue() + MAT_SPEC_COLOR_RGB_INCREMENT + dis_incr),
-                              MAT_SHININESS, 1.0 - col_alpha));
+                              MAT_SHININESS, std::min(1.0, (1.0 - color->getAlpha()) * transp_factor)));
 }
