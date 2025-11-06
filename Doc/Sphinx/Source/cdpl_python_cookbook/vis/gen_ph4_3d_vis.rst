@@ -8,7 +8,7 @@ read from an input file and writes the resulting vector graphics data to one or 
 
 **Synopsis**
 
-  :program:`python` *gen_ph4_3d_vis.py* [-h] -i <file> -o <file> [-c] [-d]
+  :program:`python` *gen_ph4_3d_vis.py* [-h] -i <file> -o <file> [-c] [-d] [-t]
 
 **Mandatory options**
 
@@ -33,6 +33,10 @@ read from an input file and writes the resulting vector graphics data to one or 
  -d
  
     Make vector and plane features undirected (default: false)
+
+ -t
+ 
+    Disable feature transparency (default: false)
 
 **Example**
 

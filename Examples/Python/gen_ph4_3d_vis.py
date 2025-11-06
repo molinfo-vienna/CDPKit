@@ -50,7 +50,13 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Make vector and plane features undirected (default: false)')
-    
+    parser.add_argument('-t',
+                        dest='no_transp',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Disable feature transparency (default: false)')
+     
     return parser.parse_args()
     
 def main() -> None:
@@ -68,7 +74,16 @@ def main() -> None:
 
     # apply the value of option -c
     Vis.setShowFeatureCentersParameter(ph4_3d_repr_factory, not args.no_ftr_ctrs)
-    
+
+    # process option -t
+    if args.no_transp:
+        ftr_colors = Vis.DefaultFeatureColorTable()
+
+        for color in ftr_colors.values():
+            color.setAlpha(1.0)
+
+        Vis.setFeatureColorTableParameter(ph4_3d_repr_factory, ftr_colors)
+
     out_file, out_file_ext = os.path.splitext(args.out_file)
     
     # read and process pharmacophores one after the other until the end of input has been reached
