@@ -46,6 +46,7 @@ BOOST_PYTHON_MODULE(_vis)
     exportFontMetrics();
     exportColorTable();
     exportDefaultAtomColorTable();
+    exportDefaultFeatureColorTable();
     
     exportLine2D();
     exportRectangle2D();
