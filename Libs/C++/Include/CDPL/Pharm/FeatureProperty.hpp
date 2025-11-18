@@ -59,11 +59,17 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey WEIGHT;
 
             extern CDPL_PHARM_API const Base::LookupKey SUBSTRUCTURE;
-
+            
             extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG;
             extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
 
             extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
+            
+            /**
+             * \since 1.3
+             */
+            extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_RESIDUE_INFO;
+            
         } // namespace FeatureProperty
     } // namespace Pharm
 } // namespace CDPL

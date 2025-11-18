@@ -51,6 +51,8 @@ namespace CDPL
             CDPL_DEFINE_LOOKUP_KEY(OPTIONAL_FLAG);
 
             CDPL_DEFINE_LOOKUP_KEY(HYDROPHOBICITY);
+
+            CDPL_DEFINE_LOOKUP_KEY(ENVIRONMENT_RESIDUE_INFO);
         }
 
         void initFeatureProperties() {}

@@ -63,6 +63,13 @@ python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"
 python::def("clear"#FUNC_SUFFIX, &Pharm::clear##FUNC_SUFFIX, python::arg("feature"));                         \
 python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)));
 
+#define EXPORT_FEATURE_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                  \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"),                            \
+            python::return_value_policy<python::copy_const_reference>());                                     \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
+python::def("clear"#FUNC_SUFFIX, &Pharm::clear##FUNC_SUFFIX, python::arg("feature"));                         \
+python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)));
+
 
 namespace
 {
@@ -77,6 +84,7 @@ namespace
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Hydrophobicity)
+    MAKE_FEATURE_FUNC_WRAPPERS(const std::string&, EnvironmentResidueInfo)
 }
 
 
@@ -95,4 +103,5 @@ void CDPLPythonPharm::exportFeatureFunctions()
     EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
     EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
     EXPORT_FEATURE_FUNCS(Hydrophobicity, hyd)
+    EXPORT_FEATURE_FUNCS_COPY_REF(EnvironmentResidueInfo, res_info)
 }

@@ -29,6 +29,8 @@
 #ifndef CDPL_PHARM_FEATUREFUNCTIONS_HPP
 #define CDPL_PHARM_FEATUREFUNCTIONS_HPP
 
+#include <string>
+
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -104,6 +106,17 @@ namespace CDPL
 
         CDPL_PHARM_API bool hasSubstructure(const Feature& feature);
 
+        /**
+         * \since 1.3
+         */
+        CDPL_PHARM_API const std::string& getEnvironmentResidueInfo(const Feature& feature);
+
+        CDPL_PHARM_API void setEnvironmentResidueInfo(Feature& feature, const std::string& res_info);
+
+        CDPL_PHARM_API void clearEnvironmentResidueInfo(Feature& feature);
+
+        CDPL_PHARM_API bool hasEnvironmentResidueInfo(const Feature& feature);
+        
 
         CDPL_PHARM_API bool getDisabledFlag(const Feature& feature);
 
@@ -130,6 +143,7 @@ namespace CDPL
         CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
 
         CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
+        
     } // namespace Pharm
 } // namespace CDPL
 
