@@ -79,6 +79,7 @@ namespace CDPL
                 const std::string COORDS_Y                = "y3";
                 const std::string COORDS_Z                = "z3";
                 const std::string PHARM_TYPE              = "pharmacophoreType";
+                const std::string ENV_COMPOUND            = "envCompound";
             } // namespace Attribute
 
             namespace FeatureName

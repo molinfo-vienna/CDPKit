@@ -334,6 +334,11 @@ void Pharm::PMLDataReader::getDefaultFeatureProperties(const XMLNode* ftr_node, 
 
     if (attr)
         setDisabledFlag(ftr, getBoolValue(attr->value()));
+
+    attr = ftr_node->first_attribute(PML::Attribute::ENV_COMPOUND.c_str());
+
+    if (attr)
+        setEnvironmentResidueInfo(ftr, attr->value());
 }
 
 bool Pharm::PMLDataReader::getPosition(const XMLNode* ftr_node, const std::string& tag, Math::Vector3D& vec) const 
