@@ -177,6 +177,11 @@ void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, Internal::ByteBuff
                     setHydrophobicity(feature, double_val);
                     continue;
 
+                case CDF::FeatureProperty::ENV_RESIDUE_INFO:
+                    getStringProperty(prop_spec, str_val, bbuf);
+                    setEnvironmentResidueInfo(feature, str_val);
+                    continue;
+
                 default:
                     throw Base::IOError("CDFDataReader: unsupported feature property");
             }

@@ -51,16 +51,17 @@ namespace CDPL
             namespace FeatureProperty
             {
 
-                constexpr unsigned int TYPE           = 1;
-                constexpr unsigned int COORDINATES_3D = 2;
-                constexpr unsigned int GEOMETRY       = 3;
-                constexpr unsigned int LENGTH         = 4;
-                constexpr unsigned int ORIENTATION    = 5;
-                constexpr unsigned int TOLERANCE      = 6;
-                constexpr unsigned int DISABLED_FLAG  = 7;
-                constexpr unsigned int OPTIONAL_FLAG  = 8;
-                constexpr unsigned int HYDROPHOBICITY = 9;
-                constexpr unsigned int WEIGHT         = 10;
+                constexpr unsigned int TYPE             = 1;
+                constexpr unsigned int COORDINATES_3D   = 2;
+                constexpr unsigned int GEOMETRY         = 3;
+                constexpr unsigned int LENGTH           = 4;
+                constexpr unsigned int ORIENTATION      = 5;
+                constexpr unsigned int TOLERANCE        = 6;
+                constexpr unsigned int DISABLED_FLAG    = 7;
+                constexpr unsigned int OPTIONAL_FLAG    = 8;
+                constexpr unsigned int HYDROPHOBICITY   = 9;
+                constexpr unsigned int WEIGHT           = 10;
+                constexpr unsigned int ENV_RESIDUE_INFO = 11;
             } // namespace FeatureProperty
 
             namespace PharmacophoreProperty
