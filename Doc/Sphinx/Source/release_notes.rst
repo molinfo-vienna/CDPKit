@@ -9,6 +9,9 @@ Release V1.3.0
 .. rubric:: New Functionality and Features
 
 - Complete overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook (made available for download)
+- The LigandScout PML data I/O code now reads/writes the value of the pharm. feature attribute *envCompound* which provides information
+  about environment residues that interact with the feature. The read/written value is stored to/taken from the feature property
+  *Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO* (see API Changes for further information)
 - New fingerprint/descriptor-based similarity screening command line tool :doc:`simscreen </applications/simscreen>`
 - New functionality for the generation and export of 3D visual representations of *Pharm::FeatureContainer* instances 
   in Stereolithography (STL), Virtual Reality Modeling Language 97 (VRML), Polygon File Format (PLY) and Raster3D (R3D) format
@@ -72,7 +75,9 @@ Release V1.3.0
   perception algorithm (class *Chem::ExtendedSSSR*)
  
 .. rubric:: API Changes
-
+            
+- New pharm. feature property *Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO* (plus associated functions) which stores a string
+  representing a comma-separated list of identifiers of environment residues that were found to interact with the feature
 - New setter/getter method pair *Descr::PathFingerprintGenerator::includeHydrogens()/Descr::PathFingerprintGenerator::hydrogensIncluded()*
   controlling whether hydrogen atoms shall be included or not when perceiving the bond paths of a molecular graph
 - New method *getbytes()* of the CDPL Python API class *Base.StringIOStream* that allows to retrieve written data

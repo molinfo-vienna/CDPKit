@@ -1,5 +1,7 @@
 master:
 
+ - PML data input/output code now reads/writes the value of the pharmacophore feature attribute 'envCompound' (if available)
+ - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO plus associated functions
  - Overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook
  - Support for free-threaded CPython builds (V3.13t and V3.14t)
  - New fingerprint/descriptor-based similarity screening command line tool 'SimScreen'
