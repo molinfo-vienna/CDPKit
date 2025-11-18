@@ -48,6 +48,7 @@
 #include "CDPL/Descr/PubChemFingerprintGenerator.hpp"
 #include "CDPL/Descr/BurdenMatrixGenerator.hpp"
 #include "CDPL/Descr/BCUTDescriptorCalculator.hpp"
+#include "CDPL/Descr/KuvekPocketDescriptorCalculator.hpp"
 #include "CDPL/Descr/MolecularComplexityCalculator.hpp"
 #include "CDPL/Descr/RDFCodeCalculator.hpp"
 #include "CDPL/Descr/AtomRDFCodeCalculator.hpp"
