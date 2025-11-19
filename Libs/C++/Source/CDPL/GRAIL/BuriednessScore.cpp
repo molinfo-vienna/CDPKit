@@ -44,9 +44,7 @@ constexpr std::size_t GRAIL::BuriednessScore::DEF_NUM_TEST_RAYS;
 GRAIL::BuriednessScore::BuriednessScore(double probe_radius, double min_vdw_surf_dist, std::size_t num_test_rays): 
     probeRadius(probe_radius), minVdWSurfaceDist(min_vdw_surf_dist), numTestRays(num_test_rays), 
     coordsFunc(&Chem::get3DCoordinates), probeSurfPoints(num_test_rays), rayHitsMask(num_test_rays)
-{
-    genSphereSurfacePoints();
-}
+{}
 
 void GRAIL::BuriednessScore::setProbeRadius(double radius)
 {
@@ -71,11 +69,6 @@ double GRAIL::BuriednessScore::getMinVdWSurfaceDistance() const
 void GRAIL::BuriednessScore::setNumTestRays(std::size_t num_rays)
 {
     numTestRays = num_rays;
-
-    probeSurfPoints.resize(num_rays);
-    rayHitsMask.resize(num_rays);
-
-    genSphereSurfacePoints();
 }
 
 std::size_t GRAIL::BuriednessScore::getNumTestRays() const
@@ -100,6 +93,8 @@ double GRAIL::BuriednessScore::operator()(const Math::Vector3D& pos, const Chem:
     if (numTestRays == 0)
         return 0.0;
 
+    genSphereSurfacePoints();
+    
     Math::Vector3D tmp;
 
     rayHitsMask.reset();
@@ -140,6 +135,12 @@ double GRAIL::BuriednessScore::operator()(const Math::Vector3D& pos, const Chem:
 
 void GRAIL::BuriednessScore::genSphereSurfacePoints()
 {
+    if (numTestRays == probeSurfPoints.size())
+        return;
+    
+    probeSurfPoints.resize(numTestRays);
+    rayHitsMask.resize(numTestRays);
+    
     // Golden section spiral point distribution
 
     double inc = M_PI * (3.0 - std::sqrt(5.0));
