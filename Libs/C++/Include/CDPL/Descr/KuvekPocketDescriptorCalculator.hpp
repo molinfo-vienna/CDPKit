@@ -51,8 +51,8 @@ namespace CDPL
     {
 
         /**
-         * \brief Implements the calculation of receptor binding pocket shape and electrostatics descriptors
-         *        according to the method devised by Kuvek et al. [\ref KBPD].
+         * \brief Implements the algorithm devised by Kuvek et al. [\ref KBPD] for the calculation of receptor 
+         *        binding pocket shape and surface electrostatics descriptors.
          * \since 1.3
          */
         class CDPL_DESCR_API KuvekPocketDescriptorCalculator
@@ -66,8 +66,8 @@ namespace CDPL
             typedef std::function<double(const Chem::Atom&)> AtomChargeFunction;
             
             KuvekPocketDescriptorCalculator(double sphere_radius = DEF_PROBE_RADIUS,
-                                            double max_atom_to_sphr_surf_dist = DEF_MAX_ATOM_TO_SPHERE_SURF_DIST,
-                                            std::size_t num_test_vecs = DEF_NUM_TEST_VECTORS);
+                                            std::size_t num_test_vecs = DEF_NUM_TEST_VECTORS,
+                                            double max_atom_to_sphr_surf_dist = DEF_MAX_ATOM_TO_SPHERE_SURF_DIST);
 
             void setSphereRadius(double radius);
 
@@ -81,6 +81,8 @@ namespace CDPL
 
             std::size_t getNumTestVectors() const;
 
+            const Math::Vector3D& getTestVector(std::size_t idx);
+            
             /**
              * \brief Specifies a function for the retrieval of atom 3D-coordinates.
              * \param func The atom 3D-coordinates function.
@@ -89,19 +91,28 @@ namespace CDPL
 
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+            /**
+             * \brief Specifies a function for the retrieval of atom charges.
+             * \param func The atom charge retrieval function.
+             * \note By default, formal charges will be used.
+             */
+            void setAtomChargeFunction(const AtomChargeFunction& func);
+
+            const AtomChargeFunction& getAtomChargeFunction() const;
+            
             void calculate(const Math::Vector3D& pos, const Chem::AtomContainer& atoms, Math::DVector& descr);
 
           private:
-            void genSphereSurfacePoints();
-
+            void genTestVectors();
+          
             typedef std::vector<Math::Vector3D> PointList;
 
             double                          sphereRadius;
-            double                          maxAtomToSphereSurfDist;
             std::size_t                     numTestVectors;
+            double                          maxAtomToSphereSurfDist;
             Chem::Atom3DCoordinatesFunction coordsFunc;
             AtomChargeFunction              chargeFunc;
-            PointList                       sphereSurfPoints;
+            PointList                       testVectors;
         };
     } // namespace DESCR
 } // namespace CDPL

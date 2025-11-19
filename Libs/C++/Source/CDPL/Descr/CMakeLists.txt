@@ -31,7 +31,9 @@ set(cdpl-descr_LIB_SRCS
     CircularFingerprintGenerator.cpp 
     PathFingerprintGenerator.cpp
     MACCSFingerprintGenerator.cpp
-    PubChemFingerprintGenerator.cpp 
+    PubChemFingerprintGenerator.cpp
+    
+    KuvekPocketDescriptorCalculator.cpp
 
     AtomRDFCodeCalculator.cpp
     MoleculeRDFDescriptorCalculator.cpp
