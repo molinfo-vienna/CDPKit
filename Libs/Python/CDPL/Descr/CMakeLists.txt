@@ -52,6 +52,8 @@ set(descr_MOD_SRCS
     MACCSFingerprintGeneratorExport.cpp
     PubChemFingerprintGeneratorExport.cpp
 
+    KuvekPocketDescriptorCalculatorExport.cpp
+    
     FeatureRDFCodeCalculatorExport.cpp 
     PharmacophoreRDFDescriptorCalculatorExport.cpp
     FeatureAutoCorrelation3DVectorCalculatorExport.cpp 

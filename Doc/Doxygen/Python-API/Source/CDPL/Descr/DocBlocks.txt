@@ -29,3 +29,8 @@ $$$$
 getSimilarityFunction
 setSimilarityFunction
 $$$$
+
+KuvekPocketDescriptorCalculator.atomCoordsFunction.value
+getAtom3DCoordinatesFunction
+setAtom3DCoordinatesFunction
+$$$$

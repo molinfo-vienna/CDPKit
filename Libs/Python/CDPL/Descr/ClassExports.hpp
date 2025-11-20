@@ -51,7 +51,8 @@ namespace CDPLPythonDescr
     void exportNPointPharmacophoreFingerprintGenerator();
     void exportNPoint2DPharmacophoreFingerprintGenerator();
     void exportNPoint3DPharmacophoreFingerprintGenerator();
-
+    void exportKuvekPocketDescriptorCalculator();
+    
     void exportFunctionWrappers();
 } // namespace CDPLPythonDescr
 

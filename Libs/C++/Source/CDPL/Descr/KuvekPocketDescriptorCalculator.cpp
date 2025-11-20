@@ -32,6 +32,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -112,11 +113,66 @@ Descr::KuvekPocketDescriptorCalculator::getAtomChargeFunction() const
     return chargeFunc;
 }
 
-void Descr::KuvekPocketDescriptorCalculator::calculate(const Math::Vector3D& pos, const Chem::AtomContainer& atoms, Math::DVector& descr)
+void Descr::KuvekPocketDescriptorCalculator::calculate(const Math::Vector3D& sphere_ctr, const Chem::AtomContainer& atoms, Math::DVector& descr)
 {
-    genTestVectors();
+    descr.resize(2 * numTestVectors);
 
-    // TODO
+    if (numTestVectors == 0)
+        return;
+    
+    for (std::size_t i = 0; i < numTestVectors; i++) {
+        descr(i * 2) = sphereRadius;
+        descr(i * 2 + 1) = 0.0; 
+    }
+
+    genTestVectors();
+    
+    auto max_atom_dist = maxAtomToSphereSurfDist + sphereRadius;
+    Math::Vector3D tmp;
+
+    for (auto& atom : atoms.getAtoms()) {
+        auto& atom_pos = coordsFunc(atom);
+
+        tmp.assign(atom_pos - sphere_ctr);
+
+        auto a = length(tmp);
+
+        if (a > max_atom_dist)
+            continue;
+
+        auto vdw_radius = Internal::getVdWRadius(atom);
+        auto charge = chargeFunc(atom);
+
+        if (a < vdw_radius) {
+            for (std::size_t i = 0; i < numTestVectors; i++) {
+                descr(i * 2) = 0.0;
+                descr(i * 2 + 1) = charge;
+            }
+
+            break;
+        }
+        
+        for (std::size_t i = 0; i < numTestVectors; i++) {
+            auto cos_alpha = angleCos(testVectors[i], tmp, a);
+
+            if (cos_alpha < 0.0)
+                continue;
+
+            auto b = a * cos_alpha;
+            auto y = std::sqrt(a * a - b * b);
+
+            if (y > vdw_radius)
+                continue;
+
+            auto x = std::sqrt(sphereRadius * sphereRadius - y * y);
+            auto c = b - x;
+
+            if (c < descr(i * 2)) {
+                descr(i * 2) = c;
+                descr(i * 2 + 1) = charge;
+            }
+        }
+    }
 }
 
 void Descr::KuvekPocketDescriptorCalculator::genTestVectors()
@@ -124,7 +180,21 @@ void Descr::KuvekPocketDescriptorCalculator::genTestVectors()
     if (numTestVectors == testVectors.size())
         return;
 
-    testVectors.clear();
+    testVectors.resize(numTestVectors);
 
-    // TODO
+    // Golden section spiral point distribution
+
+    auto inc = M_PI * (3.0 - std::sqrt(5.0));
+    auto off = 2.0 / numTestVectors;
+
+    for (std::size_t i = 0; i < numTestVectors; i++) {
+        auto y = i * off - 1.0 + off * 0.5;
+        auto r = std::sqrt(1.0 - y * y);
+        auto phi = i * inc;
+        auto vec = testVectors[i].getData();
+        
+        vec[0] = std::cos(phi) * r;
+        vec[1] = y;
+        vec[2] = std::sin(phi) * r;
+    }
 }

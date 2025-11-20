@@ -60,7 +60,9 @@ BOOST_PYTHON_MODULE(_descr)
     exportCircularFingerprintGenerator();
     exportMACCSFingerprintGenerator();
     exportPubChemFingerprintGenerator();
-    
+
+    exportKuvekPocketDescriptorCalculator();
+        
     exportEntity3DContainerFunctions();
     exportAtomContainerFunctions();
     exportMolecularGraphFunctions();

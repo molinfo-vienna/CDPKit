@@ -100,7 +100,7 @@ namespace CDPL
 
             const AtomChargeFunction& getAtomChargeFunction() const;
             
-            void calculate(const Math::Vector3D& pos, const Chem::AtomContainer& atoms, Math::DVector& descr);
+            void calculate(const Math::Vector3D& sphere_ctr, const Chem::AtomContainer& atoms, Math::DVector& descr);
 
           private:
             void genTestVectors();
