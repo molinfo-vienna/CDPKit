@@ -212,6 +212,33 @@ def setOrientation(feature: Feature, orient: Math.Vector3D) -> None: pass
 # \brief 
 # \param feature 
 #
+def clearEnvironmentResidueInfo(feature: Feature) -> None: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def hasEnvironmentResidueInfo(feature: Feature) -> bool: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def getEnvironmentResidueInfo(feature: Feature) -> str: pass
+
+##
+# \brief 
+# \param feature 
+# \param res_info 
+#
+def setEnvironmentResidueInfo(feature: Feature, res_info: str) -> None: pass
+
+##
+# \brief 
+# \param feature 
+#
 def clearWeight(feature: Feature) -> None: pass
 
 ##

@@ -73,3 +73,8 @@ class FeatureProperty(Boost.Python.instance):
     # \brief 
     #
     HYDROPHOBICITY = CDPL.Base.LookupKey('HYDROPHOBICITY')
+
+    ##
+    # \brief 
+    #
+    ENVIRONMENT_RESIDUE_INFO = CDPL.Base.LookupKey('ENVIRONMENT_RESIDUE_INFO')
