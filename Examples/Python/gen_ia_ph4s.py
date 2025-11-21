@@ -71,9 +71,9 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         # prepares the receptor structure for pharmacophore generation
         Chem.perceiveSSSR(rec_mol, rem_atoms)
         Chem.setRingFlags(rec_mol, rem_atoms)
-        Chem.calcImplicitHydrogenCounts(rec_mol, rem_atoms);
-        Chem.perceiveHybridizationStates(rec_mol, rem_atoms);
-        Chem.setAromaticityFlags(rec_mol, rem_atoms);
+        Chem.calcImplicitHydrogenCounts(rec_mol, rem_atoms)
+        Chem.perceiveHybridizationStates(rec_mol, rem_atoms)
+        Chem.setAromaticityFlags(rec_mol, rem_atoms)
 
         if Chem.makeHydrogenComplete(rec_mol):                    # make implicit hydrogens (if any) explicit
             Chem.calcHydrogen3DCoordinates(rec_mol)               # calculate 3D coordinates for the added expl. hydrogens
@@ -82,7 +82,7 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         MolProp.calcAtomHydrophobicities(rec_mol, False)          # calculate atom hydrophobicity values (needed for hydrophobic
                                                                   # pharm. feature generation)
     except Exception as e:
-        sys.exit('Error: processing of receptor structure failed: ' + str(e))            
+        sys.exit('Error: processing of receptor structure failed:\n' + str(e))            
 
     return rec_mol
    
@@ -169,15 +169,15 @@ def main() -> None:
                         sys.exit('Error: writing interaction pharmacophore of molecule %s failed' % mol_id)
 
                 except Exception as e:               # handle exception raised in case of severe write errors
-                    sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))
+                    sys.exit('Error: writing interaction pharmacophore of molecule %s failed:\n%s' % (mol_id, str(e)))
                 
             except Exception as e:                   # handle exception raised in case of severe processing errors
-                sys.exit('Error: interaction pharmacophore generation for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: interaction pharmacophore generation for molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
             
     except Exception as e:                           # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule %s failed: %s' % (str(i), str(e)))
+        sys.exit('Error: reading molecule %s failed:\n%s' % (str(i), str(e)))
 
     if not args.quiet:
         print('Done!')

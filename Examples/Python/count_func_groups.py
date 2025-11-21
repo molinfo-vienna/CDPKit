@@ -129,12 +129,12 @@ def main() -> None:
                     print(log_msg)
                 
             except Exception as e: # handle exception raised in case of severe structure processing errors
-                sys.exit(f'Error: processing of molecule {mol_id} failed: {str(e)}')
+                sys.exit(f'Error: processing of molecule {mol_id} failed:\n{str(e)}')
 
             i += 1
             
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit(f'Error: reading of molecule {mol_id} failed: {str(e)}')
+        sys.exit(f'Error: reading of molecule {mol_id} failed:\n{str(e)}')
 
     with open(args.out_file, 'w') as out_file:
         out_file.write('Functional Group,Count,Percentage\n')

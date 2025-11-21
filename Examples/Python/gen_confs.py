@@ -148,7 +148,7 @@ def main() -> None:
         try:
             sub_srch_ptn = Chem.parseSMARTS(args.fix_ptn)
         except Exception as e:
-            sys.exit('Error: parsing of SMARTS pattern failed: %s' % str(e))
+            sys.exit('Error: parsing of SMARTS pattern failed:\n%s' % str(e))
 
         # create and initialize an instance of the class Chem.SubstructureSearch that
         # implements the substructure searching algorithm
@@ -221,12 +221,12 @@ def main() -> None:
                         sys.exit('Error: output of conformer ensemble for molecule %s failed' % mol_id)
                         
             except Exception as e:
-                sys.exit('Error: conformer ensemble generation or output for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: conformer ensemble generation or output for molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit('Error: reading molecule failed:\n' + str(e))
 
     writer.close()
     sys.exit(0)

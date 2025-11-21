@@ -37,7 +37,7 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
             sys.exit('Error: reading reference pharmacophore failed')
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
+        sys.exit('Error: reading reference pharmacophore failed:\n' + str(e))
 
     return ph4
 
@@ -223,7 +223,7 @@ def main() -> None:
                             sys.exit('Error: writing alignment pose of molecule %s failed' % mol_id)
 
                     except Exception as e: # handle exception raised in case of severe write errors
-                        sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+                        sys.exit('Error: writing alignment pose of molecule %s failed:\n%s' % (mol_id, str(e)))
 
                     last_pose = curr_pose
                     output_cnt += 1
@@ -237,7 +237,7 @@ def main() -> None:
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading input molecule failed: ' + str(e))
+        sys.exit('Error: reading input molecule failed:\n' + str(e))
 
     mol_writer.close()
     sys.exit(0)

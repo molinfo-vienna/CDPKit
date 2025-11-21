@@ -41,10 +41,10 @@ def main() -> None:
             try:
                 procPharmacophore(ph4)
             except Exception as e:
-                sys.exit('Error: processing of pharmacophore failed: ' + str(e))
+                sys.exit('Error: processing of pharmacophore failed:\n' + str(e))
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading pharmacophore failed: ' + str(e))
+        sys.exit('Error: reading pharmacophore failed:\n' + str(e))
 
     sys.exit(0)
         

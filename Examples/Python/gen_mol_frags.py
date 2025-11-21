@@ -174,18 +174,18 @@ def main() -> None:
                             if not writer.write(frag):
                                 sys.exit('Error: writing fragment of molecule {mol_id} failed')
                         except Exception as e: # handle exception raised in case of severe write errors
-                             sys.exit(f'Error: writing fragment of molecule {mol_id} failed: {str(e)}')
+                             sys.exit(f'Error: writing fragment of molecule {mol_id} failed:\n{str(e)}')
                              
                 except Exception as e: # handle exception raised in case of severe write errors
-                    sys.exit(f'Error: writing molecule {mol_id} failed: {str(e)}')
+                    sys.exit(f'Error: writing molecule {mol_id} failed:\n{str(e)}')
                 
             except Exception as e: # handle exception raised in case of severe structure processing errors
-                sys.exit(f'Error: processing of molecule {mol_id} failed: {str(e)}')
+                sys.exit(f'Error: processing of molecule {mol_id} failed:\n{str(e)}')
 
             i += 1
             
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit(f'Error: reading of molecule {mol_id} failed: {str(e)}')
+        sys.exit(f'Error: reading of molecule {mol_id} failed:\n{str(e)}')
 
     writer.close()
     sys.exit(0)

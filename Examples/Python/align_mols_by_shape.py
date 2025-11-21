@@ -37,7 +37,7 @@ def readRefMolecule(filename: str) -> Chem.Molecule:
             sys.exit('Error: reading reference molecule failed')
                 
     except Exception as e:       # handle exception raised in case of severe read errors
-        sys.exit('Error: reading reference molecule failed: ' + str(e))
+        sys.exit('Error: reading reference molecule failed:\n' + str(e))
 
     return mol
 
@@ -196,15 +196,15 @@ def main() -> None:
                         sys.exit(f'Error: writing alignment pose of molecule {mol_id} failed')
 
                 except Exception as e:            # handle exception raised in case of severe write errors
-                    sys.exit(f'Error: writing alignment pose of molecule {mol_id} failed: {str(e)}')
+                    sys.exit(f'Error: writing alignment pose of molecule {mol_id} failed:\n{str(e)}')
 
             except Exception as e:
-                sys.exit(f'Error: shape alignment of molecule {mol_id} failed: {str(e)}')
+                sys.exit(f'Error: shape alignment of molecule {mol_id} failed:\n{str(e)}')
 
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit(f'Error: reading input molecule failed: {str(e)}')
+        sys.exit(f'Error: reading input molecule failed:\n{str(e)}')
 
     mol_writer.close()
     sys.exit(0)

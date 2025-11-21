@@ -216,15 +216,15 @@ def main() -> None:
                         sys.exit('Error: writing molecule %s failed' % mol_id)
 
                 except Exception as e: # handle exception raised in case of severe write errors
-                    sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
+                    sys.exit('Error: writing molecule %s failed:\n%s' % (mol_id, str(e)))
                 
             except Exception as e: # handle exception raised in case of severe structure processing errors
-                sys.exit('Error: processing of molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: processing of molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
             
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading of molecule %s failed: %s' % (str(i), str(e)))
+        sys.exit('Error: reading of molecule %s failed:\n%s' % (str(i), str(e)))
 
     writer.close()
     sys.exit(0)

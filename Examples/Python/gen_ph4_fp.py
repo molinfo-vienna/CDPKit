@@ -110,10 +110,10 @@ def main() -> None:
                 out_file.write('\n')
 
             except Exception as e:
-                sys.exit('Error: processing of molecule failed: ' + str(e))
+                sys.exit('Error: processing of molecule failed:\n' + str(e))
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit('Error: reading molecule failed:\n' + str(e))
 
     out_file.close()
     sys.exit(0)

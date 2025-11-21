@@ -110,10 +110,10 @@ def main() -> None:
                 writer.close()
     
             except Exception as e:
-                sys.exit('Error: generation or output of pharmacophore visualization data failed: ' + str(e))
+                sys.exit('Error: generation or output of pharmacophore visualization data failed:\n' + str(e))
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading pharmacophore failed: ' + str(e))
+        sys.exit('Error: reading pharmacophore failed:\n' + str(e))
 
     sys.exit(0)
         

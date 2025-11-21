@@ -70,7 +70,7 @@ def processMolecules() -> None:
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit('Error: reading molecule failed:\n' + str(e))
 
     writer.close()
     sys.exit(0)

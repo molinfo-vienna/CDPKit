@@ -162,7 +162,7 @@ def outputFragments(frags: Chem.FragmentList, writer: Chem.MolecularGraphWriter,
                 sys.exit('Error: writing fragment of molecule {mol_id} failed')
 
         except Exception as e: # handle exception raised in case of severe write errors
-            sys.exit(f'Error: writing fragment of molecule {mol_id} failed: {str(e)}')  
+            sys.exit(f'Error: writing fragment of molecule {mol_id} failed:\n{str(e)}')  
 
 def main() -> None:
     args = parseArgs() # process command line arguments

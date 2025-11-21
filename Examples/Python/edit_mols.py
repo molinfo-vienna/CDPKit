@@ -192,12 +192,12 @@ def main() -> None:
                     sys.exit(f'Error: writing edited molecule {mol_id} failed')
                         
             except Exception as e:
-                sys.exit(f'Error: editing or output of molecule {mol_id} failed: {str(e)}')
+                sys.exit(f'Error: editing or output of molecule {mol_id} failed:\n{str(e)}')
 
             i += 1
 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit(f'Error: reading molecule failed: {str(e)}')
+        sys.exit(f'Error: reading molecule failed:\n{str(e)}')
 
     writer.close()
     sys.exit(0)

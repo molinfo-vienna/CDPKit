@@ -137,12 +137,12 @@ def main() -> None:
                         sys.exit('Error: writing 3D structure of molecule %s failed' % mol_id)
                         
             except Exception as e:
-                sys.exit('Error: 3D structure generation or output for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: 3D structure generation or output for molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit('Error: reading molecule failed:\n' + str(e))
 
     writer.close()
     sys.exit(0)
