@@ -170,6 +170,8 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out') ])
     errors |= checkScriptFileOutput('gen_path_fp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '2023', '-H', '-l', '1', '-u', '6' ])
+    errors |= checkScriptFileOutput('gen_kuvek_bp_descr', outputFilePath('test.out'),
+                                    [ '-i', testDataFilePath('1ke6.pdb'), '-o', outputFilePath('test.out'), '-n', '600', '-r', '18.0', '-s', 'HOH', 'LS2', '-c', '26.59', '12.2', '11.81', '-q', '-t' ])
      
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
