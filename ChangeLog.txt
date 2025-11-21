@@ -1,5 +1,7 @@
 master:
 
+ - New class Descr::KuvekPocketDescriptorCalculator for calculating receptor binding pocket shape and electrostatics descriptors
+   according to Kuvek et al.
  - PML data input/output code now reads/writes the value of the pharmacophore feature attribute 'envCompound' (if available)
  - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO plus associated functions
  - Overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook
