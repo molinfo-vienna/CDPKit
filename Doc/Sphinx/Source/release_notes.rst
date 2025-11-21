@@ -75,7 +75,9 @@ Release V1.3.0
   perception algorithm (class *Chem::ExtendedSSSR*)
  
 .. rubric:: API Changes
-            
+
+- New class *Descr::KuvekPocketDescriptorCalculator* implementing a method developed by Kuvek et al. for the calculation of
+  receptor binding pocket shape and electrostatics descriptors
 - New pharm. feature property *Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO* (plus associated functions) which stores a string
   representing a comma-separated list of identifiers of environment residues that were found to interact with the feature
 - New setter/getter method pair *Descr::PathFingerprintGenerator::includeHydrogens()/Descr::PathFingerprintGenerator::hydrogensIncluded()*
