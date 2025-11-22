@@ -52,7 +52,7 @@ void CDPLPythonDescr::exportKuvekPocketDescriptorCalculator()
     python::class_<Descr::KuvekPocketDescriptorCalculator, boost::noncopyable>("KuvekPocketDescriptorCalculator", python::no_init)
         .def(python::init<double, std::size_t, double>((python::arg("self"), python::arg("sphere_radius") = Descr::KuvekPocketDescriptorCalculator::DEF_PROBE_RADIUS,
                                                         python::arg("num_test_vecs") = Descr::KuvekPocketDescriptorCalculator::DEF_NUM_TEST_VECTORS,
-                                                        python::arg("max_atom_to_sphr_surf_dist") = Descr::KuvekPocketDescriptorCalculator::DEF_NUM_TEST_VECTORS)))
+                                                        python::arg("max_atom_to_sphr_surf_dist") = Descr::KuvekPocketDescriptorCalculator::DEF_MAX_ATOM_TO_SPHERE_SURF_DIST)))
         .def(python::init<const Descr::KuvekPocketDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::KuvekPocketDescriptorCalculator>())    
         .def("assign", CDPLPythonBase::copyAssOp<Descr::KuvekPocketDescriptorCalculator>(), 

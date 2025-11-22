@@ -47,7 +47,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     # \param num_test_vecs 
     # \param max_atom_to_sphr_surf_dist 
     # 
-    def __init__(sphere_radius: float = 20.0, num_test_vecs: int = 492, max_atom_to_sphr_surf_dist: float = 492) -> None: pass
+    def __init__(sphere_radius: float = 20.0, num_test_vecs: int = 492, max_atom_to_sphr_surf_dist: float = 2.0) -> None: pass
 
     ##
     # \brief Initializes a copy of the \e %KuvekPocketDescriptorCalculator instance \a calc.
