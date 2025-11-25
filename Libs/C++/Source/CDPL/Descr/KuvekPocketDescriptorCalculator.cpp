@@ -164,9 +164,9 @@ void Descr::KuvekPocketDescriptorCalculator::calculate(const Math::Vector3D& sph
             if (y > vdw_radius)
                 continue;
 
-            auto x = std::sqrt(sphereRadius * sphereRadius - y * y);
+            auto x = std::sqrt(vdw_radius * vdw_radius - y * y);
             auto c = b - x;
-
+            
             if (c < descr(i * 2)) {
                 descr(i * 2) = c;
                 descr(i * 2 + 1) = charge;
