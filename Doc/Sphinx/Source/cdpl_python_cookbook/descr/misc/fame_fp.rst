@@ -1,5 +1,5 @@
-FAME Atom Environment Fingerprints
-==================================
+FAME Atom Environment Fingerprint
+=================================
 
 The script *gen_fame_fp.py* generates and outputs the FAME environment descriptor
 :cite:`doi:10.1021/acs.jcim.9b00376,doi:10.1021/acs.jcim.3c01588`

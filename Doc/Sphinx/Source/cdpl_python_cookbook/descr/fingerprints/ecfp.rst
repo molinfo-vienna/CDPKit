@@ -1,5 +1,5 @@
-Extended Connectivity Fingerprints (ECFPs)
-==========================================
+Extended Connectivity Fingerprint (ECFP)
+========================================
 
 The script *gen_ecfp.py* generates and outputs the *Extended Connectivity Fingerprint* (ECFP) :cite:`doi:10.1021/ci100050t` of molecules
 read from a specified input file.

@@ -1,5 +1,5 @@
-PubChem Fingerprints
-====================
+PubChem Fingerprint
+===================
 
 The script *gen_pubchem_fp.py* generates and outputs the 881 bit PubChem fingerprint of molecules read
 from a specified input file.

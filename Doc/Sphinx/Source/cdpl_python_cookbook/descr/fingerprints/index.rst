@@ -1,5 +1,5 @@
-Generation of Fingerprints
-==========================
+Fingerprints
+============
 
 .. toctree::
    :maxdepth: 2
@@ -8,5 +8,4 @@ Generation of Fingerprints
    pubchem_fp
    maccs_key
    path_fp
-   fame_fp
    ph4_fp

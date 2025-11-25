@@ -5,3 +5,4 @@ Calculation of Molecule and Pharmacophore Descriptors
    :maxdepth: 2
 
    fingerprints/index
+   misc/index

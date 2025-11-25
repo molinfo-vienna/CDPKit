@@ -1,5 +1,5 @@
-MDL MACCS Keys
-==============
+MDL MACCS Key
+=============
 
 The script *gen_maccs_key.py* generates and outputs the 166 bit MACCS key of molecules read from a specified input file.
 

@@ -1,5 +1,5 @@
-Bond-Path Fingerprints
-======================
+Bond-Path Fingerprint
+=====================
 
 The script *gen_path_fp.py* generates and outputs the bond-path (aka Daylight) fingerprint of molecules
 read from a specified input file.
