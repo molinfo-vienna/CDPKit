@@ -22,7 +22,7 @@ import numpy as np
 
 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Calculates the various similarity measures defined by Kuvek et al. for two previously calculated binding pocket shape/electrostatics descriptors')
+    parser = argparse.ArgumentParser(description='Calculates the various similarity measures defined by Kuvek et al. for two binding pocket shape/electrostatics descriptors')
 
     parser.add_argument('-i',
                         dest='descr_files',
