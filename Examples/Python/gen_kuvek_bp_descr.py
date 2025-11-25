@@ -92,7 +92,7 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
     return rec_mol
    
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates a binding pocket shape and electrostatics descriptor for a given receptor '\
+    parser = argparse.ArgumentParser(description='Generates a binding pocket shape/electrostatics descriptor for a given receptor '\
                                     'structure according to the procedure devised by Kuvek et al.')
 
     parser.add_argument('-i',
@@ -114,7 +114,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-c',
                         dest='sphere_ctr',
                         required=True,
-                        metavar='<xyz>',
+                        metavar='<float>',
                         nargs='+',
                         type=float,
                         help='Whitespace separated list of probe sphere center x, y and z coordinates')
@@ -128,7 +128,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-n',
                         dest='num_test_vecs',
                         required=False,
-                        metavar='<int>',
+                        metavar='<integer>',
                         type=int,
                         default=492,
                         help='Number of intersection test vectors (default: 492)')
@@ -137,7 +137,7 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Output test vector xyz values (default: false)')
+                        help='Output test vector xyz values for each descriptor element (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
