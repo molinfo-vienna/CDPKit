@@ -36,7 +36,7 @@ def parseArgs() -> argparse.Namespace:
                         metavar='<float>',
                         default=0.0,
                         type=float,
-                        help='Whitespace separated list of probe sphere center x, y and z coordinates')
+                        help='Shape <-> charge descriptor weight split for shape and charge RMSD calculation: -1.0 = 100% shape, +1.0 = 100% charge (default: 0.0)')
 
     return parser.parse_args()
 
