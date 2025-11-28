@@ -1,7 +1,7 @@
+.. index:: Installation
+
 Installing CDPKit
 =================
-
-.. index:: Installation
 
 CDPKit can be installed in different ways:
 
@@ -20,6 +20,8 @@ CDPKit can be installed in different ways:
 
 .. _installation_via_installer_package:
 
+.. index:: single: Installation; using Installer Packages
+           
 Installation via installer package
 ----------------------------------
 
@@ -46,6 +48,9 @@ software packages have to be installed.
 
 .. _installation_from_source:
 
+.. index:: Building CDPKit
+           single: Installation; from Source
+ 
 Installation from source
 ------------------------
 
@@ -246,7 +251,10 @@ will install CDPKit in a platform specific default directory (Linux: :file:`/opt
 Windows: :file:`C:\\Program Files`). A different installation location can be specified by the argument
 *-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>* on the :program:`cmake` command line (see `Build system configuration`_).
 
-.. index:: pip, PyPI
+.. index:: single: Installation; using pip
+           single: Python; CDPL Bindings
+           single: Python; pip
+           single: Python; PyPI
 
 .. _installation_using_pip:
            

@@ -1,6 +1,9 @@
-=========================
- Editing of Substructures
-=========================
+.. index:: single: Molecules; Substructure Editing
+           single: Molecules; Input
+           single: Molecules; Output
+
+Editing of Substructures
+========================
 
 The script *edit_mols.py* performs modifications on the molecular graph of molecules read from a specified file according
 to a provided set of SMARTS/SMILES pattern-based substructure editing rules and writes the results to a given output file.

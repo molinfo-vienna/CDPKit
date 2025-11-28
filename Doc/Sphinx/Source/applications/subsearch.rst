@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; Substructure Searching
+           single: Molecules; Substructure Matching
+
 subsearch
 =========
 

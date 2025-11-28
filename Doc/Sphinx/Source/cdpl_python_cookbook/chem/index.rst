@@ -1,5 +1,5 @@
-Processing of Chemical Data
-===========================
+Basic Processing of Molecules and Reactions
+===========================================
 
 .. toctree::
    :maxdepth: 2

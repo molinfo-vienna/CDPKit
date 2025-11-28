@@ -1,3 +1,5 @@
+.. index:: single: Pharmacophores; Input
+
 Sequential Input
 ================
 

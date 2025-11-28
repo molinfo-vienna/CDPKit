@@ -1,3 +1,6 @@
+.. index:: single: Molecules; Structure Data Processing
+           single: Molecules; Input
+           
 Retrieval and Processing of MDL SD-File Structure Data
 ======================================================
 

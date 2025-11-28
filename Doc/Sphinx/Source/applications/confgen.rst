@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; Conformer Generation
+           single: Molecules; Conformer Generation
+           
 confgen
 =======
 

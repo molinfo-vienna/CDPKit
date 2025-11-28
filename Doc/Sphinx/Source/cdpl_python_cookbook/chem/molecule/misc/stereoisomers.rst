@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Stereoisomer Enumeration
+           single: Molecules; Input
+           single: Molecules; Output
+
 Enumeration of Stereoisomers
 ============================
 

@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Structure Standardization
+           single: Molecules; Input
+           single: Molecules; Output
+
 Database Cleaning
 =================
 

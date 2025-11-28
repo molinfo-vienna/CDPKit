@@ -1,3 +1,6 @@
+.. index:: single: Pharmacophores; 3D Visualization
+           single: Pharmacophores; Input
+           
 Pharmacophore 3D Visualization
 ==============================
 

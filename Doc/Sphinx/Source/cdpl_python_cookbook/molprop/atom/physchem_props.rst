@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Input
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Atom Property Retrieval
+
 Physicochemical Properties
 ==========================
 

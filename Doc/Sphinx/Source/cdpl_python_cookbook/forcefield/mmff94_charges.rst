@@ -1,3 +1,11 @@
+.. index:: single: Molecules; Input
+           single: Molecules; MMFF94 Atom Typing
+           single: Molecules; MMFF94 Bond Typing
+           single: Molecules; MMFF94 Partial Charge Calculation
+           single: Force Fields; MMFF94 Atom Typing
+           single: Force Fields; MMFF94 Bond Typing
+           single: Force Fields; MMFF94 Partial Charge Calculation
+
 MMFF94 Atom Charges
 ===================
 

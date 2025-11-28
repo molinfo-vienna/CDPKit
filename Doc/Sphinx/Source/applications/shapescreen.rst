@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; Gaussian Shape-based Screening
+           single: Molecules; Gaussian Shape-based Alignment
+   
 shapescreen
 ===========
 

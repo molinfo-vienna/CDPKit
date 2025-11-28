@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Conformer Generation
+           single: Molecules; Input
+           single: Molecules; Output
+
 Conformer Ensembles
 ===================
 

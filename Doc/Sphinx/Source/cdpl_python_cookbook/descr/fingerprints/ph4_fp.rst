@@ -1,3 +1,8 @@
+.. index:: single: Descriptors; Pharmacophore Fingerprint Generation
+           single: Molecules; Input
+           single: Molecules; Pharmacophore Fingerprint Generation
+           single: Pharmacophores; Fingerprint Generation
+
 2D and 3D Pharmacophore Fingerprints
 ====================================
 

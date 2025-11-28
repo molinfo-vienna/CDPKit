@@ -1,3 +1,5 @@
+.. index:: single: CLI Applications; Similarity Screening
+
 simscreen
 =========
 

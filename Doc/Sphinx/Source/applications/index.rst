@@ -1,4 +1,4 @@
-.. index:: Tools, Applications
+.. index:: CLI Applications, GUI Applications
 
 CDPKit Applications
 ===================

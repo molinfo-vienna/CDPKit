@@ -1,3 +1,8 @@
+.. index:: single: Molecules; Input
+           single: Molecules; Pharmacophore Generation
+           single: Pharmacophores; Output
+           single: Pharmacophores; Generation
+
 Plain Molecule Pharmacophores
 =============================
 

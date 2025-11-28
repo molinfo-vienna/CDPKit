@@ -1,3 +1,10 @@
+.. index:: single: Molecules; Conformer Generation
+           single: Molecules; Torsion Driving
+           single: Molecules; Substructure Matching
+           single: Molecules; 3D Coordinates-based Alignment
+           single: Molecules; Input
+           single: Molecules; Output
+
 Torsion Driving
 ===============
 

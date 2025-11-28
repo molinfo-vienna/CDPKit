@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Atom Environment Extraction
+           single: Molecules; Input
+           single: Molecules; Output
+
 Extraction of Atom Environments
 ===============================
 

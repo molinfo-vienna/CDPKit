@@ -1,3 +1,7 @@
+.. index:: single: Molecules; 2D Coordinates Calculation
+           single: Molecules; Input
+           single: Molecules; Output
+
 2D Structure Generation
 =======================
 

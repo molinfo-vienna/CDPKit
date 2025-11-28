@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; Tautomer Generation
+           single: Molecules; Tautomer Generation
+           
 tautgen
 =======
 

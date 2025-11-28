@@ -1,3 +1,5 @@
+.. index:: single: Molecules; Input
+
 Sequential Input
 ================
 

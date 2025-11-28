@@ -1,3 +1,9 @@
+.. index:: single: Descriptors; ECFP Fingerprint Generation
+           single: Descriptors; Morgan Fingerprint Generation
+           single: Molecules; Input
+           single: Molecules; ECFP Fingerprint Generation
+           single: Molecules; Morgan Fingerprint Generation
+           
 Extended Connectivity Fingerprint (ECFP)
 ========================================
 

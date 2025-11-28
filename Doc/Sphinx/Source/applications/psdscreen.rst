@@ -1,3 +1,8 @@
+.. index:: single: CLI Applications; Pharmacophore Screening
+           single: Pharmacophores; Screening
+           single: Pharmacophores; Alignment
+           single: Molecules; Pharmacophore-based Alignment
+           
 psdscreen
 =========
 

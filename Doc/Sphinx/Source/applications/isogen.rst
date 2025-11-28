@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; Stereoisomer Enumeration
+           single: Molecules; Stereoisomer Enumeration
+           
 isogen
 ======
 

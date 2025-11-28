@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Substructure Matching
+           single: Molecules; Input
+           single: Molecules; Output
+
 Testing for the Presence of Substructures
 =========================================
 

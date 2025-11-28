@@ -1,3 +1,7 @@
+.. index:: single: Molecules; ChEMBL Structure Curation
+           single: Molecules; Input
+           single: Molecules; Output
+
 ChEMBL Structure Curation Pipeline
 ==================================
 

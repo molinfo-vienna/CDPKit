@@ -1,3 +1,7 @@
+.. index:: single: Descriptors; PubChem Fingerprint Generation
+           single: Molecules; Input
+           single: Molecules; PubChem Fingerprint Generation
+
 PubChem Fingerprint
 ===================
 

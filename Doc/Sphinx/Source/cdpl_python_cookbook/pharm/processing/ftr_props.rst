@@ -1,3 +1,7 @@
+.. index:: single: Pharmacophores; Input
+           single: Pharmacophores; Processing
+           single: Pharmacophores; Feature Property Retrieval
+           
 Retrieving Feature Properties
 =============================
 

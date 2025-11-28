@@ -1,3 +1,7 @@
+.. index:: single: Descriptors; MDL MACCS Key Generation
+           single: Molecules; Input
+           single: Molecules; MDL MACCS Key Generation
+
 MDL MACCS Key
 =============
 

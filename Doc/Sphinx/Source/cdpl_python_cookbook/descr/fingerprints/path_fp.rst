@@ -1,3 +1,7 @@
+.. index:: single: Descriptors; Daylight Fingerprint Generation
+           single: Molecules; Input
+           single: Molecules; Daylight Fingerprint Generation
+
 Bond-Path Fingerprint
 =====================
 

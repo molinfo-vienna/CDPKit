@@ -1,3 +1,5 @@
+.. index:: single: GUI Applications; Molecule/Reaction Data File Inspection
+
 ChOX
 ====
 

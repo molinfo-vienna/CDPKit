@@ -1,3 +1,5 @@
+.. index:: single: CLI Applications; Pharmacophore Screening
+
 psdcreate
 =========
 

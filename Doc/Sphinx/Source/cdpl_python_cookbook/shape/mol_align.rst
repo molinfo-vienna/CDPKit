@@ -1,3 +1,9 @@
+.. index:: single: Molecules; Input
+           single: Molecules; Output
+           single: Molecules; Gaussian Shape-based Alignment
+           single: Molecules; Structure Data Processing
+           single: Molecules; Structure Data Manipulation
+
 Gaussian Shape-based Molecule Alignment
 =======================================
 

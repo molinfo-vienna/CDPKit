@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Functional Group Analysis
+           single: Molecules; Functional Group Perception
+           single: Molecules; Input
+
 Functional Groups
 =================
 

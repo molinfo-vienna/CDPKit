@@ -1,3 +1,7 @@
+.. index:: single: Molecules; 3D Structure Generation
+           single: Molecules; Input
+           single: Molecules; Output
+           
 Single Low-energy 3D Structures
 ===============================
 

@@ -1,3 +1,13 @@
+.. index:: single: Pharmacophores; Input
+           single: Pharmacophores; Processing
+           single: Pharmacophores; Alignment
+           single: Pharmacophores; Generation
+           single: Molecules; Input
+           single: Molecules; Output
+           single: Molecules; Pharmacophore-based Alignment
+           single: Molecules; Structure Data Processing
+           single: Molecules; Structure Data Manipulation
+
 Molecule to Reference Pharmacophore Alignment
 =============================================
 

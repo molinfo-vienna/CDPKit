@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Bemis-Murcko Scaffold Analysis
+           single: Molecules; Input
+           single: Molecules; Output
+
 Bemis-Murcko Framework Analysis
 ===============================
 

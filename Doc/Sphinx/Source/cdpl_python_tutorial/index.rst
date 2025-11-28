@@ -1,4 +1,7 @@
-.. index:: Python Tutorial, Getting Started
+.. index:: single: Python; Tutorial
+           single: Python; Getting Started
+           single: Python; Jupyter Notebook
+           single: Python; Code Snippets
        
 CDPL Python Tutorial
 ====================

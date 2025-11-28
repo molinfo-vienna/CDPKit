@@ -1,3 +1,7 @@
+.. index:: single: Molecules; Rule-based Fragmentation
+           single: Molecules; Input
+           single: Molecules; Output
+
 Rule-based Fragmentation
 ========================
 

@@ -1,5 +1,7 @@
-.. index:: Code Snippets, Examples
-   
+.. index:: single: Python; Code Snippets
+           single: Python; Examples
+           single: Python; Cookbook
+
 CDPL Python Cookbook
 ====================
 

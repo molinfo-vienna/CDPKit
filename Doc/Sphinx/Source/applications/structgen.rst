@@ -1,3 +1,6 @@
+.. index:: single: CLI Applications; 3D Structure Generation
+           single: Molecules; 3D Structure Generation
+
 structgen
 =========
 

@@ -1,3 +1,7 @@
+.. index:: single: Descriptors; FAME Atom Environment Fingerprint Generation
+           single: Molecules; FAME Atom Environment Fingerprint Generation
+           single: Molecules; Input
+
 FAME Atom Environment Fingerprint
 =================================
 
