@@ -50,8 +50,12 @@ The script *gen_kuvek_bp_descr.py* generates and outputs a binding pocket shape/
                         
  -t
 
-    Output test vector xyz values for each descriptor element (default: false)
+    Output test vector x, y and z coordinates for each descriptor element (default: false)
 
+ -p
+
+    Output test vector atom intersection point x, y and z coordinates for each descriptor element  (default: false)
+    
  -q
 
     Disable progress output (default: false)
