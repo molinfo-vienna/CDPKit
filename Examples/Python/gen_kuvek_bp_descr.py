@@ -18,6 +18,7 @@
 
 import sys
 import argparse
+import re
 
 import CDPL.Chem as Chem
 import CDPL.Biomol as Biomol
@@ -56,11 +57,18 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         # delete atoms belonging to residues that should be stripped
         if args.strip_res_list:            
             atoms_to_rem = Chem.Fragment() # will store the atoms to delete
-            res_to_strip = { tlc.upper() for tlc in args.strip_res_list }
-        
-            for atom in rec_mol.atoms:     # identify and note atoms belonging to the stripped residues
-                if Biomol.getResidueCode(atom).upper() in res_to_strip:
-                    atoms_to_rem.addAtom(atom)
+            res_to_strip_ptns = { re.compile(tlc, re.IGNORECASE) for tlc in args.strip_res_list }
+
+            # identify and note atoms belonging to the stripped residues
+            for atom in rec_mol.atoms:
+                # compose identifier of the residue the atom belongs to
+                atom_res_id = f'{Biomol.getChainID(atom).upper()}_{Biomol.getResidueCode(atom).upper()}_{Biomol.getResidueSequenceNumber(atom)}'
+
+                # check if atom belongs to an excluded residue
+                for res_ptn in res_to_strip_ptns:
+                    if res_ptn.search(atom_res_id):
+                        atoms_to_rem.addAtom(atom)
+                        break
 
             if atoms_to_rem.numAtoms > 0:
                 rec_mol -= atoms_to_rem    # delete atoms from the receptor structure
@@ -137,7 +145,13 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Output test vector xyz values for each descriptor element (default: false)')
+                        help='Output test vector x, y and z coordinates for each descriptor element (default: false)')
+    parser.add_argument('-p',
+                        dest='write_inters_pts',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Output test vector atom intersection point x, y and z coordinates for each descriptor element (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -179,7 +193,11 @@ def main() -> None:
                 if args.write_test_vecs:
                     tv = descr_calc.getTestVector(i)
                     out_file.write(f' {tv(0):.4f} {tv(1):.4f} {tv(2):.4f}')
-                        
+
+                if args.write_inters_pts:
+                    ip = descr_calc.getTestVector(i) * descr(i * 2)
+                    out_file.write(f' {ip(0):.4f} {ip(1):.4f} {ip(2):.4f}')
+                    
                 out_file.write('\n')
          
     except Exception as e:    # handle exception raised in case of severe errors
