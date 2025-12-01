@@ -37,6 +37,18 @@ def parseArgs() -> argparse.Namespace:
                         default=0.0,
                         type=float,
                         help='Shape <-> charge descriptor weight split for shape and charge RMSD calculation: -1.0 = 100% shape, +1.0 = 100% charge (default: 0.0)')
+    parser.add_argument('-s',
+                        dest='shape_std_dev',
+                        required=False,
+                        metavar='<float>',
+                        type=float,
+                        help='Shape descriptor standard deviation (default: calculated on the fly)')
+    parser.add_argument('-c',
+                        dest='charge_std_dev',
+                        required=False,
+                        metavar='<float>',
+                        type=float,
+                        help='Charge descriptor standard deviation (default: calculated on the fly)')
 
     return parser.parse_args()
 
@@ -47,19 +59,26 @@ def main() -> None:
     charge_descr1 = np.loadtxt(args.descr_files[0], usecols=1)
     shape_descr2 = np.loadtxt(args.descr_files[1], usecols=0)
     charge_descr2 = np.loadtxt(args.descr_files[1], usecols=1)
-  
-    shape_stddev = np.std(shape_descr1 + shape_descr2)
-    charge_stddev = np.std(charge_descr1 + charge_descr2)
-
     n = len(shape_descr1)
+    
+    if args.shape_std_dev:
+        shape_std_dev = args.shape_std_dev
+    else:
+        shape_std_dev = np.std(shape_descr1 + shape_descr2)
+    
+    if args.charge_std_dev:
+        charge_std_dev = args.charge_std_dev
+    else:
+        charge_std_dev = np.std(charge_descr1 + charge_descr2)
+    
     shape_rmsd = (np.square(shape_descr1 - shape_descr2).sum() / n) ** 0.5
     charge_rmsd = (np.square(charge_descr1 - charge_descr2).sum() / n) ** 0.5
 
     ws = 2 / (2 + args.shape_charge_wt_split)
     wc = (1 + args.shape_charge_wt_split) * ws
 
-    shape_charge_rmsd = ((ws * np.square((shape_descr1 - shape_descr2) / shape_stddev).sum() +
-                          wc * np.square((charge_descr1 - charge_descr2) / charge_stddev).sum()) / n) ** 0.5
+    shape_charge_rmsd = ((ws * np.square((shape_descr1 - shape_descr2) / shape_std_dev).sum() +
+                          wc * np.square((charge_descr1 - charge_descr2) / charge_std_dev).sum()) / n) ** 0.5
     
     print(f'Shape RMSD: {shape_rmsd}')
     print(f'Charge RMSD: {charge_rmsd}')
