@@ -77,7 +77,8 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
                 if not args.quiet:
                     print(f'! Removed {atoms_to_rem.numAtoms} atom(s) from the receptor structure')
 
-        # calc required receptor structure properties
+        # calculate required receptor structure properties
+        # (force recalculation if already present and atoms were removed)
         Chem.perceiveSSSR(rec_mol, rem_atoms)
         Chem.setRingFlags(rec_mol, rem_atoms)
         Chem.calcImplicitHydrogenCounts(rec_mol, rem_atoms)
@@ -88,7 +89,7 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
             Chem.calcHydrogen3DCoordinates(rec_mol)               # calculate 3D coordinates for the added expl. hydrogens
             Biomol.setHydrogenResidueSequenceInfo(rec_mol, False) # set residue information for the added expl. hydrogens
 
-        # calc MMFF94 partial charges
+        # calc. MMFF94 partial charges
         ForceField.perceiveMMFF94AromaticRings(rec_mol, False)        # perceive aromatic rings according to the MMFF94 aroamticity model and store data as Chem.MolecularGraph property
         ForceField.assignMMFF94AtomTypes(rec_mol, False, False)       # perceive MMFF94 atom types (tolerant mode) set corresponding property for all atoms
         ForceField.assignMMFF94BondTypeIndices(rec_mol, False, False) # perceive MMFF94 bond types (tolerant mode) set corresponding property for all bonds
@@ -116,14 +117,19 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-s',
                         dest='strip_res_list',
                         required=False,
-                        metavar='<three-letter code>',
+                        metavar='<res-id>',
                         nargs='+',
-                        help='Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)')
+                        help='Whitespace separated list of identifiers of residues to remove from the receptor structure (e.g. an existing ligand). '\
+                        'Residue identifiers consist of three components separated by an underscore: [chain id]_[tlc]_[res. seq. no.]. '\
+                        'The individual components are optional and the whole string is interpreted '\
+                        'as a regular expression that gets matched against the residue id of '\
+                        'each receptor atom. Examples: HOH -> rem. all waters, A_MET -> remove all MET residues of chain A, '\
+                        '_300$ -> remove all residues with sequ. number 300')
     parser.add_argument('-c',
                         dest='sphere_ctr',
                         required=True,
                         metavar='<float>',
-                        nargs='+',
+                        nargs=3,
                         type=float,
                         help='Whitespace separated list of probe sphere center x, y and z coordinates')
     parser.add_argument('-r',
@@ -152,6 +158,30 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Output test vector atom intersection point x, y and z coordinates for each descriptor element (default: false)')
+    parser.add_argument('-x',
+                        dest='test_vec_x_range',
+                        required=False,
+                        metavar='<float>',
+                        nargs=2,
+                        type=float,
+                        help='Allowed test vector x coordinate range. If a test vector is outside of '\
+                        'this range then the associated descr. element will not be output (default: [-1.0, 1.0])')
+    parser.add_argument('-y',
+                        dest='test_vec_y_range',
+                        required=False,
+                        metavar='<float>',
+                        nargs=2,
+                        type=float,
+                        help='Allowed test vector y coordinate range. If a test vector is outside of '\
+                        'this range then the associated descr. element will not be output (default: [-1.0, 1.0])')
+    parser.add_argument('-z',
+                        dest='test_vec_z_range',
+                        required=False,
+                        metavar='<float>',
+                        nargs=2,
+                        type=float,
+                        help='Allowed test vector z coordinate range. If a test vector is outside of '\
+                        'this range then the associated descr. element will not be output (default: [-1.0, 1.0])')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -164,9 +194,6 @@ def parseArgs() -> argparse.Namespace:
 def main() -> None:
     args = parseArgs()
 
-    if len(args.sphere_ctr) != 3:
-        sys.exit('Error: sphere center coordinates missing or incomplete')       
-    
     # read and preprocess the receptor structure
     rec_mol = readAndPrepareReceptorStructure(args)
 
@@ -184,18 +211,30 @@ def main() -> None:
     descr = Math.DVector()
 
     try:
+        # calculate descriptor
         descr_calc.calculate(args.sphere_ctr, rec_mol, descr)
-        
+
+        # output descriptor vector elements
         with open(args.out_file, 'w') as out_file:
             for i in range(descr_calc.numTestVectors):
+                tv = descr_calc.getTestVector(i)
+
+                if args.test_vec_x_range and (tv(0) < args.test_vec_x_range[0] or tv(0) > args.test_vec_x_range[1]):
+                    continue
+
+                if args.test_vec_y_range and (tv(1) < args.test_vec_y_range[0] or tv(1) > args.test_vec_y_range[1]):
+                    continue
+
+                if args.test_vec_z_range and (tv(2) < args.test_vec_z_range[0] or tv(2) > args.test_vec_z_range[1]):
+                    continue
+                
                 out_file.write(f'{descr(i * 2):.4f} {descr(i * 2 + 1):.4f}')
                 
                 if args.write_test_vecs:
-                    tv = descr_calc.getTestVector(i)
                     out_file.write(f' {tv(0):.4f} {tv(1):.4f} {tv(2):.4f}')
 
                 if args.write_inters_pts:
-                    ip = descr_calc.getTestVector(i) * descr(i * 2)
+                    ip = tv * descr(i * 2)
                     out_file.write(f' {ip(0):.4f} {ip(1):.4f} {ip(2):.4f}')
                     
                 out_file.write('\n')
