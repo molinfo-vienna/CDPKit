@@ -17,7 +17,7 @@ The script *gen_kuvek_bp_descr.py* generates and outputs a binding pocket shape/
 
 **Synopsis**
 
-  :program:`python` *gen_kuvek_bp_descr.py*  [-h] -i <file> -o <file> -c <float> <float> <float> [-r <float>] [-s <three-letter code> [<three-letter code> ...]] [-n <int>] [-t] [-q]
+  :program:`python` *gen_kuvek_bp_descr.py*  [-h] -i <file> -o <file> -c <float> <float> <float> [-r <float>] [-x <float> <float>] [-y <float> <float>] [-z <float> <float>] [-s <res-id> [<res-id> ...]] [-n <int>] [-t] [-p] [-q]
 
 **Mandatory options**
 
@@ -29,6 +29,8 @@ The script *gen_kuvek_bp_descr.py* generates and outputs a binding pocket shape/
 
     Descriptor output file
 
+ -c <float> <float> <float>
+    
 **Other options**
 
  -h, --help
@@ -43,18 +45,33 @@ The script *gen_kuvek_bp_descr.py* generates and outputs a binding pocket shape/
 
     Probe sphere radius (default: 20.0)
 
- **-s <three-letter code> [<three-letter code> ...]**
+ **-s <res-id> [<res-id> ...]**
 
-    Whitespace separated list of PDB three-letter codes specifying residues to
-    remove from the receptor structure (e.g. an existing ligand)
-                        
+    Whitespace separated list of identifiers of residues to remove from the receptor structure (e.g. an existing ligand).
+    Residue identifiers consist of three components separated by an underscore: [chain id]_[tlc]_[res. seq. no.].
+    The individual components are optional and the whole string is interpreted as a regular expression that gets matched against the residue id of
+    each receptor atom. Examples: HOH -> rem. all waters, A_MET -> remove all MET residues of chain A,
+    _300$ -> remove all residues with sequ. number 300
+
+ -x <float> <float>
+
+    Allowed test vector x coordinate range. If a test vector is outside of this range then the associated descr. element will not be output (default: [-1.0, 1.0])
+    
+ -y <float> <float>
+
+    Allowed test vector y coordinate range. If a test vector is outside of this range then the associated descr. element will not be output (default: [-1.0, 1.0])
+
+ -z <float> <float>
+
+    Allowed test vector z coordinate range. If a test vector is outside of this range then the associated descr. element will not be output (default: [-1.0, 1.0])
+  
  -t
 
     Output test vector x, y and z coordinates for each descriptor element (default: false)
 
  -p
 
-    Output test vector atom intersection point x, y and z coordinates for each descriptor element  (default: false)
+    Output test vector atom intersection point x, y and z coordinates for each descriptor element (default: false)
     
  -q
 
