@@ -41,6 +41,13 @@ def filterMolecules() -> None:
     # implements the substructure searching algorithm
     substr_srch = Chem.SubstructureSearch(sub_srch_ptn)
 
+    # special settings for option -m
+    if args.mark_matched_atoms:
+        # store only the first found substructure mapping
+        substr_srch.setMaxNumMappings(1)
+         # in case of SMILES output: write atom-atom mapping ids, if available
+        Chem.setSMILESMolOutputAtomMappingIDParameter(writer, True)
+    
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
     i = 1
@@ -62,11 +69,22 @@ def filterMolecules() -> None:
             try:
                 Chem.initSubstructureSearchTarget(mol, False)
 
-                if substr_srch.mappingExists(mol):
+                if args.mark_matched_atoms:
+                    found_match = substr_srch.findMappings(mol)  # for option -m atom-atom mapping data are required
+                else:
+                    found_match = substr_srch.mappingExists(mol) # if option -m is false, information that a mapping exists is sufficient
+                    
+                if found_match:
                     if not args.quiet:
                         print(' -> substructure found, forwarding molecule to output file')
 
-                    # output the matched molecule                 
+                    # processing for option -m
+                    if args.mark_matched_atoms:
+                        for ap in substr_srch.getMapping(0).atomMapping.items(): # for each [ptn. atom, mol. atom] pair of the found substructure match
+                            if Chem.hasAtomMappingID(ap[0]):                                 # if the pattern atom has an atom-atom mapping id
+                                Chem.setAtomMappingID(ap[1], Chem.getAtomMappingID(ap[0]))   # set the id of the matched molecule atom to the same value
+                        
+                    # output the matched molecule
                     if not writer.write(mol):   
                         sys.exit('Error: output of molecule failed')
 
@@ -102,6 +120,12 @@ def parseArgs() -> argparse.Namespace:
                         required=True,
                         metavar='<SMARTS>',
                         help='SMARTS pattern describing the substructure to search for')
+    parser.add_argument('-m',
+                        dest='mark_matched_atoms',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Set atom mapping ids of output molecule atoms to the ids of the matching SMARTS pattern atoms (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
