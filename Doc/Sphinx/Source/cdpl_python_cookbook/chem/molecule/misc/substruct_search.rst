@@ -10,7 +10,7 @@ the specified SMARTS substructure pattern to the output file.
 
 **Synopsis**
 
-  :program:`python` *substruct_filter.py* [-h] -i <file> -o <file> -p <SMARTS> [-q]
+  :program:`python` *substruct_filter.py* [-h] -i <file> -o <file> -p <SMARTS> [-q] [-m]
 
 **Mandatory options**
 
@@ -31,7 +31,11 @@ the specified SMARTS substructure pattern to the output file.
  -h, --help
 
     Show help message and exit
-  
+
+ -m
+
+    Set atom mapping ids of output molecule atoms to the ids of the matching SMARTS pattern atoms (default: false)
+ 
  -q
 
     Disable progress output (default: false)
