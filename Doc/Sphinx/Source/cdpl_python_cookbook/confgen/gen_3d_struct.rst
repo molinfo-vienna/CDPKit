@@ -1,6 +1,17 @@
 .. index:: single: Molecules; 3D Structure Generation
+           single: Molecules; Atom 3D Coordinates Calculation
            single: Molecules; Input
            single: Molecules; Output
+           single: Molecules; Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Name Property
+           single: Molecules; Atom 3D Coordinates Manipulation
+           single: Atoms; 3D Coordinates Property
+           single: Atoms; 3D Coordinates Calculation
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
+           single: Data Formats; MDL SD-Files
            
 Single Low-energy 3D Structures
 ===============================

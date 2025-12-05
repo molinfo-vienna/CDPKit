@@ -1,6 +1,16 @@
 .. index:: single: Molecules; Substructure Matching
+           single: Molecules; Substructure Match Processing
            single: Molecules; Input
            single: Molecules; Output
+           single: Molecules; SMARTS Parsing
+           single: Molecules; Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Atoms; Atom Mapping ID Property
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
+           single: Data Formats; SMARTS
+           single: Data Formats; SMILES
 
 Testing for the Presence of Substructures
 =========================================

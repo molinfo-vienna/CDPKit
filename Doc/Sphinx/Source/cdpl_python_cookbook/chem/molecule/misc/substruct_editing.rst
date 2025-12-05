@@ -1,7 +1,29 @@
 .. index:: single: Molecules; Substructure Editing
+           single: Molecules; Structure Manipulation
            single: Molecules; Input
            single: Molecules; Output
-
+           single: Molecules; Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Stereo Descriptor Calculation
+           single: Molecules; Bond Stereo Descriptor Calculation
+           single: Molecules; Components Property
+           single: Molecules; Name Property
+           single: Molecules; Hydrogen Completion
+           single: Molecules; Hydrogen Depletion
+           single: Molecules; Atom Processing
+           single: Molecules; SMARTS Parsing
+           single: Molecules; SMILES Parsing
+           single: Atoms; Property Calculation
+           single: Atoms; Stereo Descriptor Property
+           single: Atoms; 2D Coordinates Property
+           single: Atoms; 3D Coordinates Property
+           single: Atoms; 3D Coordinates Array Property
+           single: Bonds; Property Calculation
+           single: Data Formats; MDL SD-Files
+           single: Data Formats; SMARTS
+           single: Data Formats; SMILES
+           
 Editing of Substructures
 ========================
 

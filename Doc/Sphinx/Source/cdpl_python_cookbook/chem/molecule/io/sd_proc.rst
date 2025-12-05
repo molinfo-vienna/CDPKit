@@ -1,6 +1,8 @@
 .. index:: single: Molecules; Structure Data Processing
+           single: Molecules; Structure Data Property
            single: Molecules; Input
-           
+           single: Data Formats; MDL SD-Files
+
 Retrieval and Processing of MDL SD-File Structure Data
 ======================================================
 

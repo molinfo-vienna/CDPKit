@@ -1,6 +1,16 @@
 .. index:: single: Molecules; Rule-based Fragmentation
+           single: Molecules; BRICS Fragmentation
+           single: Molecules; RECAP Fragmentation
+           single: Molecules; Fragments
            single: Molecules; Input
            single: Molecules; Output
+           single: Molecules; SSSR Perception
+           single: Molecules; SSSR Property
+           single: Molecules; Components Perception
+           single: Molecules; Components Property
+           single: Molecules; Name Property
+           single: Atoms; Atom Mapping ID Property
+           single: Data Formats; SMILES
 
 Rule-based Fragmentation
 ========================

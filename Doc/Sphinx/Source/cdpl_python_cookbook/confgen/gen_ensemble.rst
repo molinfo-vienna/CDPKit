@@ -1,7 +1,21 @@
 .. index:: single: Molecules; Conformer Generation
+           single: Molecules; Conformer Alignment
+           single: Molecules; 3D Coordinates-based Alignment
            single: Molecules; Input
            single: Molecules; Output
-
+           single: Molecules; Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Name Property
+           single: Molecules; Conformer Ensemble Handling
+           single: Molecules; Substructure Matching
+           single: Molecules; Substructure Match Processing
+           single: Molecules; SMARTS Parsing
+           single: Atoms; 3D Coordinates Array Property
+           single: Atoms; 3D Coordinates Property
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
+           
 Conformer Ensembles
 ===================
 

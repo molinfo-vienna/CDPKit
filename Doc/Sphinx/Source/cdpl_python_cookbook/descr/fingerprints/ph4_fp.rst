@@ -1,6 +1,14 @@
 .. index:: single: Descriptors; Pharmacophore Fingerprint Generation
+           single: Molecules; Descriptor Generation
+           single: Molecules; Fingerprint Generation
            single: Molecules; Input
            single: Molecules; Pharmacophore Fingerprint Generation
+           single: Molecules; Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Conformer Ensemble Handling
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
            single: Pharmacophores; Fingerprint Generation
 
 2D and 3D Pharmacophore Fingerprints

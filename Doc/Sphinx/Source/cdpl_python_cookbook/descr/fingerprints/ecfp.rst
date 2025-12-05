@@ -1,8 +1,25 @@
 .. index:: single: Descriptors; ECFP Fingerprint Generation
            single: Descriptors; Morgan Fingerprint Generation
+           single: Molecules; Descriptor Generation
+           single: Molecules; Fingerprint Generation
            single: Molecules; Input
            single: Molecules; ECFP Fingerprint Generation
            single: Molecules; Morgan Fingerprint Generation
+           single: Molecules; Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Atom CIP Priority Calculation
+           single: Molecules; Hydrogen Completion
+           single: Molecules; Atom Stereo Center Perception
+           single: Molecules; Atom Stereo Descriptor Calculation
+           single: Atoms; Property Calculation
+           single: Atoms; Stereo Center Perception
+           single: Atoms; Stereo Center Flag Property
+           single: Atoms; Stereo Descriptor Calculation
+           single: Atoms; Stereo Descriptor Property
+           single: Atoms; CIP Priority Calculation
+           single: Atoms; CIP Priority Property
+           single: Bonds; Property Calculation
            
 Extended Connectivity Fingerprint (ECFP)
 ========================================

@@ -1,6 +1,14 @@
 .. index:: single: Descriptors; Daylight Fingerprint Generation
+           single: Molecules; Descriptor Generation
+           single: Molecules; Fingerprint Generation
            single: Molecules; Input
            single: Molecules; Daylight Fingerprint Generation
+           single: Molecules; Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Hydrogen Completion
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
 
 Bond-Path Fingerprint
 =====================
