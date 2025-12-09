@@ -88,6 +88,7 @@ void MolProp::FunctionalGroupList::init()
     setSMILESOutputKekuleFormParameter(smilesWriter, false);
     setSMILESNoOrganicSubsetParameter(smilesWriter, false);
     setSMILESRecordFormatParameter(smilesWriter, "S");
+    setRecordSeparatorParameter(smilesWriter, "");
     setOrdinaryHydrogenDepleteParameter(smilesWriter, true);
 
     funcGroupMolComps.reset(new FragmentList());

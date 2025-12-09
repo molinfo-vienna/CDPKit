@@ -128,7 +128,9 @@ bool Chem::SMILESDataWriter::writeReaction(std::ostream& os, const Reaction& rxn
         if (!name.empty())
             os << ' ' << name;
     }
-    
+
+    os << getRecordSeparatorParameter(ioBase);
+        
     return os.good();
 }
 
@@ -154,7 +156,9 @@ bool Chem::SMILESDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
         if (!name.empty())
             os << ' ' << name;
     }
-    
+
+    os << getRecordSeparatorParameter(ioBase);
+     
     return os.good();
 }
 
@@ -182,9 +186,6 @@ void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
     os.imbue(std::locale::classic());
 
     os << std::dec;
-
-    if (os.tellp() > 0)
-        os << getRecordSeparatorParameter(ioBase);
 }
 
 void Chem::SMILESDataWriter::init()

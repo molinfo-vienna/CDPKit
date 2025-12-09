@@ -143,9 +143,6 @@ bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn
 
     os << std::dec;
     
-    if (os.tellp() > 0)
-        os << getRecordSeparatorParameter(ioBase);
-
     bool first_comp = true;
     Reaction::ConstComponentIterator comps_end = rxn.getComponentsEnd(ReactionRole::REACTANT);
 
@@ -201,6 +198,8 @@ bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn
         first_comp = false;
     }
 
+    os << getRecordSeparatorParameter(ioBase);
+
     return os.good();
 }
 
@@ -212,9 +211,6 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
         os.imbue(std::locale::classic());
 
         os << std::dec;
-
-        if (os.tellp() > 0)
-            os << getRecordSeparatorParameter(ioBase);
     }
 
     bool first_comp = true;
@@ -273,6 +269,8 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
             first_comp = false;
         }
 
+        os << getRecordSeparatorParameter(ioBase);
+    
         return os.good();
     }
 
@@ -292,6 +290,8 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
         first_comp = false;
     }
 
+    os << getRecordSeparatorParameter(ioBase);
+    
     return os.good();
 }
 

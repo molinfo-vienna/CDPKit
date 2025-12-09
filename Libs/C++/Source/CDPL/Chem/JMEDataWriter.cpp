@@ -130,6 +130,8 @@ bool Chem::JMEDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)
         first_comp = false;
     }
 
+    os << getRecordSeparatorParameter(ioBase);
+    
     return os.good();
 }
 
@@ -160,6 +162,8 @@ bool Chem::JMEDataWriter::writeMolGraph(std::ostream& os, const MolecularGraph& 
         }
     }
 
+    os << getRecordSeparatorParameter(ioBase);
+    
     return os.good();
 }
 
@@ -184,9 +188,6 @@ void Chem::JMEDataWriter::init(std::ostream& os)
     os.imbue(std::locale::classic());
 
     os << std::dec << std::noshowpos << std::noshowbase;
-
-    if (os.tellp() > 0)
-        os << getRecordSeparatorParameter(ioBase);
 }
 
 bool Chem::JMEDataWriter::writeComponent(std::ostream& os, const MolecularGraph& molgraph)

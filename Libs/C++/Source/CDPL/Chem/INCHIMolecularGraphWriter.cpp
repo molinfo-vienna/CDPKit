@@ -158,15 +158,14 @@ void Chem::INCHIMolecularGraphWriter::writeMolGraph(const MolecularGraph& molgra
     if (returnCode != INCHIReturnCode::OKAY && returnCode != INCHIReturnCode::WARNING) 
         throw Base::IOError("INCHIMolecularGraphWriter: " + message);
 
-    if (output.tellp() > 0)
-        output << getRecordSeparatorParameter(*this);
-
     if (inchi_output.szInChI)
         output << inchi_output.szInChI;
 
     if (inchi_output.szAuxInfo)
         output << ' ' << inchi_output.szAuxInfo;
 
+    output << getRecordSeparatorParameter(*this);
+        
     state = output.good();
 }
 
