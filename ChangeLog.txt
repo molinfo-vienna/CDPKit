@@ -1,5 +1,9 @@
 master:
 
+ - Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with
+   user expectations
+ - Improved and much more elaborate Sphinx documentation index page
+ - Additional Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
  - New class Descr::KuvekPocketDescriptorCalculator for calculating receptor binding pocket shape and electrostatics descriptors
    according to Kuvek et al.
  - PML data input/output code now reads/writes the value of the pharmacophore feature attribute 'envCompound' (if available)
