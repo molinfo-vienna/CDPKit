@@ -162,7 +162,8 @@ bool Chem::JMEDataWriter::writeMolGraph(std::ostream& os, const MolecularGraph& 
         }
     }
 
-    os << getRecordSeparatorParameter(ioBase);
+    if (call_init)
+        os << getRecordSeparatorParameter(ioBase);
     
     return os.good();
 }

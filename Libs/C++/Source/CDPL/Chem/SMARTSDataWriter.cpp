@@ -269,7 +269,8 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
             first_comp = false;
         }
 
-        os << getRecordSeparatorParameter(ioBase);
+        if (!rxn_context)
+            os << getRecordSeparatorParameter(ioBase);
     
         return os.good();
     }
@@ -290,7 +291,8 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
         first_comp = false;
     }
 
-    os << getRecordSeparatorParameter(ioBase);
+    if (!rxn_context)
+        os << getRecordSeparatorParameter(ioBase);
     
     return os.good();
 }
