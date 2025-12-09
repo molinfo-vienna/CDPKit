@@ -2,7 +2,7 @@ master:
 
  - Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with
    user expectations
- - Improved and much more elaborate Sphinx documentation index page
+ - Improved and much more comprehensive Sphinx documentation index
  - Additional Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
  - New class Descr::KuvekPocketDescriptorCalculator for calculating receptor binding pocket shape and electrostatics descriptors
    according to Kuvek et al.
@@ -65,8 +65,8 @@ master:
  - New data format descriptors Vis::DataFormat::STL, Vis::DataFormat::PLY, Vis::DataFormat::VRML and Vis::DataFormat::R3D
  - New class Vis::FeatureContainerObject3DFactory implementing the creation of a visual 3D representation of Pharm::FeatureContainer instances
  - New class Vis::Object3DFactory defining the common interface of classes which implement the creation of 3D representations (as Vis::Object3D instances)
-   of different types of builtin data structures (e.g. Pharm::FeatureContainer, Chem::MolecularGraph, ...)
- - New class Vis::DefaultFeatureColorTable specifying default colors for builtin pharmacophoric feature types
+   of different types of built-in data structures (e.g. Pharm::FeatureContainer, Chem::MolecularGraph, ...)
+ - New class Vis::DefaultFeatureColorTable specifying default colors for built-in pharmacophoric feature types
  - New utility functions Vis::subdivideSpherical(), Vis::removeVertexDuplicates(), Vis::calcVertexFromFaceNormals(),
    Vis::translate(), Vis::scale(), Vis::rotateX(), Vis::rotateY(), Vis::rotateZ() and Vis::transform() for the manipulation
    of Vis::TriangleMesh3D instances

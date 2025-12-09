@@ -59,7 +59,7 @@ Release V1.3.0
   the standardization result shall be stored in a supplied *Chem::Molecule* instance
 - Support for the automated generation and installation of a CMake package configuration file that
   significantly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
-- Improved and much more elaborate Sphinx documentation index page
+- Improved and much more comprehensive Sphinx documentation index page
 - Complete overhaul of the CDPL Python tutorial which is now based on a `Jupyter <https://jupyter.org>`_ notebook (made available for download)
 - Additional Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
 - Additional Python cookbook script demonstrating the molecule substrucuture editing functionality
@@ -130,8 +130,8 @@ Release V1.3.0
 - New data format descriptors *Vis::DataFormat::STL*, *Vis::DataFormat::PLY*, *Vis::DataFormat::VRML* and *Vis::DataFormat::R3D*
 - New class *Vis::FeatureContainerObject3DFactory* implementing the creation of a visual 3D representation of *Pharm::FeatureContainer* instances
 - New class *Vis::Object3DFactory* defining the common interface of classes which implement the creation of 3D representations (as *Vis::Object3D* instances)
-  of different types of builtin data structures (e.g. *Pharm::FeatureContainer*, *Chem::MolecularGraph*, ...)
-- New class *Vis::DefaultFeatureColorTable* specifying default colors for builtin pharmacophoric feature types
+  of different types of built-in data structures (e.g. *Pharm::FeatureContainer*, *Chem::MolecularGraph*, ...)
+- New class *Vis::DefaultFeatureColorTable* specifying default colors for built-in pharmacophoric feature types
 - New utility functions *Vis::subdivideSpherical()*, *Vis::removeVertexDuplicates()*, *Vis::calcVertexFromFaceNormals()*,
   *Vis::translate()*, *Vis::scale()*, *Vis::rotateX()*, *Vis::rotateY()*, *Vis::rotateZ()* and *Vis::transform()* for the manipulation
   of Vis::*TriangleMesh3D* objects
