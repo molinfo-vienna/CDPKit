@@ -8,7 +8,6 @@ Release V1.3.0
 
 .. rubric:: New Functionality and Features
 
-- Complete overhaul of the CDPL Python tutorial which is now based on a Jupyter notebook (made available for download)
 - The LigandScout PML data I/O code now reads/writes the value of the pharm. feature attribute *envCompound* which provides information
   about environment residues that interact with the feature. The read/written value is stored to/taken from the feature property
   *Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO* (see API Changes for further information)
@@ -60,10 +59,13 @@ Release V1.3.0
   the standardization result shall be stored in a supplied *Chem::Molecule* instance
 - Support for the automated generation and installation of a CMake package configuration file that
   significantly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
+- Improved and much more elaborate Sphinx documentation index page
+- Complete overhaul of the CDPL Python tutorial which is now based on a `Jupyter <https://jupyter.org>`_ notebook (made available for download)
+- Additional Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
 - Additional Python cookbook script demonstrating the molecule substrucuture editing functionality
 - Additional Python cookbook script demonstrating the perception of functional groups of molecular graphs
 - Additional Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
- 
+   
 .. rubric:: Bug Fixes
 
 - Fixed methods *write()* and *writelines()* of the CDPL Python API class *Base.IOStream* which both failed when being called with an argument of
@@ -187,6 +189,8 @@ Release V1.3.0
 
 .. rubric:: Miscellaneous Changes 
 
+- Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with
+  user expectations
 - The default feature distance bin size used by Descr::NPoint3DPharmacophoreFingerprintGenerator instances has been changed to 3.0 (before 0.5)
 - The default feature distance bin size used by Descr::NPointPharmacophoreFingerprintGenerator instances has been changed to 2.0 (before 0.5)
 - The calculation of Manhattan similarity scores has bee changed so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
