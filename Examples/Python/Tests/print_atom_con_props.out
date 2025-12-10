@@ -1,4 +1,7 @@
 - Atom #0
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -25,6 +28,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: NONE
 - Atom #1
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -51,6 +57,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #2
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -77,6 +86,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #3
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -103,6 +115,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #4
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 0
@@ -129,6 +144,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #5
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 1
@@ -155,6 +173,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #6
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -181,6 +202,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: BENT
 - Atom #7
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 2
+	Num. connected hydrogens (incl. impl. H): 2
 	Num. connected std. hydrogens (incl. impl. H): 2
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 1
@@ -207,6 +231,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #8
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 0
@@ -233,6 +260,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #9
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 0
@@ -259,6 +289,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #10
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -285,6 +318,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #11
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -311,6 +347,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #12
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 0
@@ -337,6 +376,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #13
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -363,6 +405,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #14
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -389,6 +434,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #15
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 1
@@ -415,6 +463,9 @@
 	Steric number: 2
 	VSEPR coordination geometry: LINEAR
 - Atom #16
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -441,6 +492,9 @@
 	Steric number: 2
 	VSEPR coordination geometry: NONE
 - Atom #17
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -467,6 +521,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #18
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -493,6 +550,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #19
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -519,6 +579,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #20
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -545,6 +608,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #21
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 2
+	Num. connected hydrogens (incl. impl. H): 2
 	Num. connected std. hydrogens (incl. impl. H): 2
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -571,6 +637,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #22
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 2
+	Num. connected hydrogens (incl. impl. H): 2
 	Num. connected std. hydrogens (incl. impl. H): 2
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -597,6 +666,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #23
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 2
+	Num. connected hydrogens (incl. impl. H): 2
 	Num. connected std. hydrogens (incl. impl. H): 2
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 1
@@ -623,6 +695,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #24
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 3
 	Num. connected heteroatoms: 0
@@ -649,6 +724,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TRIGONAL_PYRAMIDAL
 - Atom #25
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 3
+	Num. connected hydrogens (incl. impl. H): 3
 	Num. connected std. hydrogens (incl. impl. H): 3
 	Num. connected carbon atoms: 0
 	Num. connected heteroatoms: 1
@@ -675,6 +753,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #26
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -701,6 +782,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #27
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -727,6 +811,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #28
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -753,6 +840,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #29
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 3
+	Num. connected hydrogens (incl. impl. H): 3
 	Num. connected std. hydrogens (incl. impl. H): 3
 	Num. connected carbon atoms: 0
 	Num. connected heteroatoms: 1
@@ -779,6 +869,9 @@
 	Steric number: 4
 	VSEPR coordination geometry: TETRAHEDRAL
 - Atom #30
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -805,6 +898,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #31
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -831,6 +927,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #32
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -857,6 +956,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #33
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -883,6 +985,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #34
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -909,6 +1014,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #35
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -935,6 +1043,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #36
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -961,6 +1072,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #37
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -987,6 +1101,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #38
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -1013,6 +1130,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #39
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -1039,6 +1159,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #40
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 1
+	Num. connected hydrogens (incl. impl. H): 1
 	Num. connected std. hydrogens (incl. impl. H): 1
 	Num. connected carbon atoms: 2
 	Num. connected heteroatoms: 0
@@ -1065,6 +1188,9 @@
 	Steric number: 3
 	VSEPR coordination geometry: TRIGONAL_PLANAR
 - Atom #41
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -1091,6 +1217,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #42
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -1117,6 +1246,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #43
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0
@@ -1143,6 +1275,9 @@
 	Steric number: 1
 	VSEPR coordination geometry: NONE
 - Atom #44
+	Num. connected implicit hydrogens: 0
+	Num. connected explicit hydrogens: 0
+	Num. connected hydrogens (incl. impl. H): 0
 	Num. connected std. hydrogens (incl. impl. H): 0
 	Num. connected carbon atoms: 1
 	Num. connected heteroatoms: 0

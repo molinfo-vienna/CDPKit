@@ -2,7 +2,7 @@
            single: Molecules; FAME Atom Environment Fingerprint Generation
            single: Molecules; Atom Environment Extraction
            single: Molecules; Input
-           single: Molecules; Fragment
+           single: Molecules; Fragments
            single: Molecules; Property Calculation
            single: Molecules; Atom Property Calculation
            single: Molecules; Bond Property Calculation

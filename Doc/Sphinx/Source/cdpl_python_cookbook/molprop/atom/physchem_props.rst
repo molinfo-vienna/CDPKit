@@ -1,7 +1,15 @@
 .. index:: single: Molecules; Input
+           single: Molecules; Property Calculation
            single: Molecules; Atom Property Calculation
-           single: Molecules; Atom Property Retrieval
-
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Processing
+           single: Molecules; Topological Distance Matrix Generation
+           single: Molecules; Topological Distance Matrix Property
+           single: Atoms; Property Calculation
+           single: Atoms; Hybrid Polarizability Query
+           single: Atoms; Effective Polarizability Calculation
+           single: Bonds; Property Calculation
+           
 Physicochemical Properties
 ==========================
 

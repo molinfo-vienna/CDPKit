@@ -1,13 +1,40 @@
 .. index:: single: Molecules; Input
+           single: Molecules; Property Calculation
            single: Molecules; Atom Property Calculation
-           single: Molecules; Atom Property Retrieval
-
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Atom Processing
+           single: Atoms; Property Calculation
+           single: Atoms; Implicit Hydrogen Count Property
+           single: Atoms; Connected Hydrogen Atom Count Query
+           single: Atoms; Connected Carbon Atom Count Query
+           single: Atoms; Connected Heteroatom Count Query
+           single: Atoms; Connected Halogen Atom Count Query
+           single: Atoms; Connected Heavy Atom Count Query
+           single: Atoms; Connected Chain Atom Count Query
+           single: Atoms; Connected Ring Atom Count Query
+           single: Atoms; Connected Aromatic Atom Count Query
+           single: Atoms; Incident Single Bond Count Query
+           single: Atoms; Incident Double Bond Count Query
+           single: Atoms; Incident Triple Bond Count Query
+           single: Atoms; Incident Chain Bond Count Query
+           single: Atoms; Incident Ring Bond Count Query
+           single: Atoms; Incident Aromatic Bond Count Query
+           single: Atoms; Incident Heavy Atom Bond Count Query
+           single: Atoms; Incident Rotatable Bond Count Query
+           single: Atoms; Valence Query
+           single: Atoms; Steric Number Query
+           single: Atoms; VSEPR Coordination Geometry Query
+           single: Bonds; Property Calculation
+           
 Connectivity Properties
 =======================
 
 The script *print_atom_con_props.py* demonstrates how to iterate over the atoms of molecules
 read from a specified input file and retrieve the following atom properties:
 
+ - Num. connected implicit hydrogens
+ - Num. connected explicit hydrogens
+ - Num. connected hydrogens (incl. impl. H)
  - Num. connected std. hydrogens (incl. impl. H)
  - Num. connected carbon atoms
  - Num. connected heteroatoms

@@ -19,9 +19,9 @@ The source code provided by this cookbook can be used without restrictions for a
    The scripts require a properly set up installation of the CDPL Python bindings.
    Please visit section :doc:`../installation` for further information.
 
-.. hint::
-   To quickly find cookbook scripts that cover a certain topic or make use of a particular package/class/method/function it is advisable to use the built-in search functionality and/or consult the
-   page :doc:`../genindex`.
+.. tip::
+   To quickly find cookbook scripts that cover a certain topic or utilize a particular package/class/method/function it is advisable to use the built-in search functionality and/or consult the
+   page `index <../genindex.html>`_.
 
 .. toctree::
    :maxdepth: 4

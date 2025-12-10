@@ -33,7 +33,7 @@ def outputProperties(molgraph: Chem.MolecularGraph) -> None:
         print('\tCovalent radius (bond order=1): %s' % str(MolProp.getCovalentRadius(atom, 1)))
         print('\tCovalent radius (bond order=2): %s' % str(MolProp.getCovalentRadius(atom, 2)))
         print('\tCovalent radius (bond order=3): %s' % str(MolProp.getCovalentRadius(atom, 3)))
-        print('\tAllred Rochow electronegativity: %s' % str(MolProp.getAllredRochowElectronegativity(atom)))
+        print('\tAllred-Rochow electronegativity: %s' % str(MolProp.getAllredRochowElectronegativity(atom)))
         print('\tElement name: %s' % MolProp.getElementName(atom))
         print('\tValence electron count: %s' % str(MolProp.getElementValenceElectronCount(atom)))
         print('\tAtom type specifies chemical element: %s' % str(MolProp.isChemicalElement(atom)))

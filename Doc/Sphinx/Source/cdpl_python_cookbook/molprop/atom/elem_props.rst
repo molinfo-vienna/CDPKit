@@ -1,6 +1,21 @@
 .. index:: single: Molecules; Input
-           single: Molecules; Atom Property Calculation
-           single: Molecules; Atom Property Retrieval
+           single: Molecules; Atom Processing
+           single: Atoms; Atomic Weight Query
+           single: Atoms; IUPAC Group Query
+           single: Atoms; PTE Period Number Query
+           single: Atoms; VdW Radius Query
+           single: Atoms; Covalent Radius Query
+           single: Atoms; Allred-Rochow Electronegativity Query
+           single: Atoms; Element Name Query
+           single: Atoms; Valence Electron Count Query
+           single: Atoms; Supported Chemical Element Check
+           single: Atoms; Main Group Element Class Check
+           single: Atoms; Metal Class Check
+           single: Atoms; Transition Metal Class Check
+           single: Atoms; Semi-Metal Class Check
+           single: Atoms; Non-Metal Class Check
+           single: Atoms; Halogen Class Check
+           single: Atoms; Noble gas Class Check
 
 Chemical Element Properties
 ===========================
@@ -16,7 +31,7 @@ element of each atom:
  - Covalent radius (bond order=1)
  - Covalent radius (bond order=2)
  - Covalent radius (bond order=3)
- - Allred Rochow electronegativity
+ - Allred-Rochow electronegativity
  - Element name
  - Valence electron count
  - Is supported chemical element

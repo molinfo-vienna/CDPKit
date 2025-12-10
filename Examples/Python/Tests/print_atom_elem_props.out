@@ -6,7 +6,7 @@
 	Covalent radius (bond order=1): 0.64
 	Covalent radius (bond order=2): 0.59
 	Covalent radius (bond order=3): 0.53
-	Allred Rochow electronegativity: 4.1
+	Allred-Rochow electronegativity: 4.1
 	Element name: Fluorine
 	Valence electron count: 7
 	Atom type specifies chemical element: True
@@ -25,7 +25,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -44,7 +44,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -63,7 +63,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -82,7 +82,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -101,7 +101,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -120,7 +120,7 @@
 	Covalent radius (bond order=1): 0.63
 	Covalent radius (bond order=2): 0.57
 	Covalent radius (bond order=3): 0.53
-	Allred Rochow electronegativity: 3.5
+	Allred-Rochow electronegativity: 3.5
 	Element name: Oxygen
 	Valence electron count: 6
 	Atom type specifies chemical element: True
@@ -139,7 +139,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -158,7 +158,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -177,7 +177,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -196,7 +196,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -215,7 +215,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -234,7 +234,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -253,7 +253,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -272,7 +272,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -291,7 +291,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -310,7 +310,7 @@
 	Covalent radius (bond order=1): 0.71
 	Covalent radius (bond order=2): 0.6
 	Covalent radius (bond order=3): 0.54
-	Allred Rochow electronegativity: 3.1
+	Allred-Rochow electronegativity: 3.1
 	Element name: Nitrogen
 	Valence electron count: 5
 	Atom type specifies chemical element: True
@@ -329,7 +329,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -348,7 +348,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -367,7 +367,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -386,7 +386,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -405,7 +405,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -424,7 +424,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -443,7 +443,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -462,7 +462,7 @@
 	Covalent radius (bond order=1): 0.71
 	Covalent radius (bond order=2): 0.6
 	Covalent radius (bond order=3): 0.54
-	Allred Rochow electronegativity: 3.1
+	Allred-Rochow electronegativity: 3.1
 	Element name: Nitrogen
 	Valence electron count: 5
 	Atom type specifies chemical element: True
@@ -481,7 +481,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -500,7 +500,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -519,7 +519,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -538,7 +538,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -557,7 +557,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -576,7 +576,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -595,7 +595,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -614,7 +614,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -633,7 +633,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -652,7 +652,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -671,7 +671,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -690,7 +690,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -709,7 +709,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -728,7 +728,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -747,7 +747,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -766,7 +766,7 @@
 	Covalent radius (bond order=1): 0.75
 	Covalent radius (bond order=2): 0.67
 	Covalent radius (bond order=3): 0.6
-	Allred Rochow electronegativity: 2.5
+	Allred-Rochow electronegativity: 2.5
 	Element name: Carbon
 	Valence electron count: 4
 	Atom type specifies chemical element: True
@@ -785,7 +785,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -804,7 +804,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -823,7 +823,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True
@@ -842,7 +842,7 @@
 	Covalent radius (bond order=1): 0.32
 	Covalent radius (bond order=2): 0.0
 	Covalent radius (bond order=3): 0.0
-	Allred Rochow electronegativity: 2.2
+	Allred-Rochow electronegativity: 2.2
 	Element name: Hydrogen
 	Valence electron count: 1
 	Atom type specifies chemical element: True

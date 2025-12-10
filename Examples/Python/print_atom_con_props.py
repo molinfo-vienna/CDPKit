@@ -46,6 +46,9 @@ def outputProperties(molgraph: Chem.MolecularGraph) -> None:
     
     for atom in molgraph.atoms:
         print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
+        print('\tNum. connected implicit hydrogens: %s' % str(Chem.getImplicitHydrogenCount(atom)))
+        print('\tNum. connected explicit hydrogens: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.H)))
+        print('\tNum. connected hydrogens (incl. impl. H): %s' % str(MolProp.getAtomCount(atom, molgraph, Chem.AtomType.H)))
         print('\tNum. connected std. hydrogens (incl. impl. H): %s' % str(MolProp.getOrdinaryHydrogenCount(atom, molgraph)))
         print('\tNum. connected carbon atoms: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.C)))
         print('\tNum. connected heteroatoms: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.HET, False)))

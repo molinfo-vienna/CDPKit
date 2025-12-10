@@ -1,25 +1,64 @@
-.. index:: single: Descriptors;  Receptor Binding Pocket Descriptor Generation
+.. index:: single: Descriptors; Receptor Binding Pocket Descriptor Generation
            single: Molecules; Descriptor Generation
            single: Molecules; Input
            single: Molecules; MMFF94 Atom Typing
            single: Molecules; MMFF94 Bond Typing
            single: Molecules; MMFF94 Partial Charge Calculation
+           single: Molecules; MMFF94 Aromaticity Perception
+           single: Molecules; MMFF94 Aromatic Ring Set Property
            single: Molecules; Property Calculation
            single: Molecules; Atom Processing
            single: Molecules; Atom Property Calculation
            single: Molecules; Bond Property Calculation
+           single: Molecules; Fragments
+           single: Molecules; Atom Processing
+           single: Molecules; Structure Manipulation
+           single: Molecules; Atom Hybridization State Perception
+           single: Molecules; Atom Implicit Hydrogen Count Calculation
+           single: Molecules; Aromaticity Perception
+           single: Molecules; SSSR Perception
+           single: Molecules; SSSR Property
+           single: Molecules; Hydrogen Completion
+           single: Molecules; Hydrogen 3D Coordinates Calculation
+           single: Molecules; Atom Ring Membership Detection
+           single: Molecules; Bond Ring Membership Detection
            single: Atoms; Property Calculation
+           single: Atoms; Chain ID Property
+           single: Atoms; Residue Three-Letter Code Property
+           single: Atoms; Residue Sequence Number Property
+           single: Atoms; Aromaticity Flag Property
+           single: Atoms; Aromaticity Perception
+           single: Atoms; Ring Flag Property
+           single: Atoms; Ring Membership Detection
+           single: Atoms; Hybridization State Perception
+           single: Atoms; Hybridization State Property
+           single: Atoms; Implicit Hydrogen Count Calculation
+           single: Atoms; Implicit Hydrogen Count Property
+           single: Atoms; MMFF94 Numeric Type Property
+           single: Atoms; MMFF94 Symbolic Type Property
+           single: Atoms; MMFF94 Partial Charge Property
+           single: Atoms; MMFF94 Atom Typing
+           single: Atoms; MMFF94 Partial Charge Calculation
            single: Bonds; Property Calculation
+           single: Bonds; MMFF94 Bond Typing
+           single: Bonds; MMFF94 Bond Type Index Property
+           single: Bonds; Aromaticity Flag Property
+           single: Bonds; Aromaticity Perception
+           single: Bonds; Ring Flag Property
+           single: Bonds; Ring Membership Detection
            single: Biological Macromolecules; Input
            single: Biological Macromolecules; Processing
            single: Biological Macromolecules; Binding Site Characterization
+           single: Biological Macromolecules; Residue Processing
+           single: Biological Macromolecules; Primary Structure Analysis
            single: Force Fields; MMFF94 Atom Typing
            single: Force Fields; MMFF94 Bond Typing
            single: Force Fields; MMFF94 Partial Charge Calculation
-           single: Data Formats: PDB
-           single: Data Formats: mmCIF
-           single: Data Formats: MMTF
-           single: Data Formats: MOL2
+           single: Force Fields; MMFF94 Aromaticity Perception
+           single: Data Formats; PDB
+           single: Data Formats; mmCIF
+           single: Data Formats; MMTF
+           single: Data Formats; MOL2
            
 Receptor Binding Pocket Descriptor
 ==================================
