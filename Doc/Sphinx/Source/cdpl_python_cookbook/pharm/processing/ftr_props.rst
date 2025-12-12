@@ -1,6 +1,17 @@
 .. index:: single: Pharmacophores; Input
            single: Pharmacophores; Processing
-           single: Pharmacophores; Feature Property Retrieval
+           single: Pharmacophores; Feature Processing
+           single: Pharmacophores; Name Property
+           single: Pharmacophore Features; 3D Coordinates Property
+           single: Pharmacophore Features; Orientation Property
+           single: Pharmacophore Features; Orientation Vector Length Property
+           single: Pharmacophore Features; Type Property
+           single: Pharmacophore Features; Geometry Property
+           single: Pharmacophore Features; Tolerance Property
+           single: Pharmacophore Features; Weight Property
+           single: Pharmacophore Features; Hydrophobicity Property
+           single: Pharmacophore Features; Optional Flag Property
+           single: Pharmacophore Features; Disabled Flag Property 
            
 Retrieving Feature Properties
 =============================

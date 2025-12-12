@@ -7,8 +7,8 @@
            single: Molecules; SSSR Perception
            single: Molecules; SSSR Property
            single: Molecules; Aromaticity Perception
-           single: Molecules; Atom Ring Membership Detection
-           single: Molecules; Bond Ring Membership Detection
+           single: Molecules; Atom Ring Membership Perception
+           single: Molecules; Bond Ring Membership Perception
            single: Molecules; Structure Data Property
            single: Molecules; Property Calculation
            single: Molecules; Bond Property Calculation
@@ -33,7 +33,7 @@
            single: Atoms; Implicit Hydrogen Count Property
            single: Atoms; Implicit Hydrogen Count Calculation
            single: Atoms; Ring Flag Property
-           single: Atoms; Ring Membership Detection
+           single: Atoms; Ring Membership Perception
            single: Atoms; Hybridization State Property
            single: Atoms; Hybridization State Perception
            single: Atoms; Aromaticity Flag Property
@@ -43,7 +43,7 @@
            single: Bonds; Aromaticity Perception
            single: Bonds; Property Calculation
            single: Bonds; Ring Flag Property
-           single: Bonds; Ring Membership Detection
+           single: Bonds; Ring Membership Perception
            single: Bonds; Property Calculation
            single: Data Formats; SMILES
            

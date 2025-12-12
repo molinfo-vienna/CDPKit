@@ -1,8 +1,20 @@
 .. index:: single: Molecules; Input
-           single: Molecules; Pharmacophore Generation
+           single: Molecules; Preparation for Pharmacophore Generation
+           single: Molecules; Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Name Property
+           single: Molecules; Conformer Ensemble Handling
+           single: Molecules; Atom 3D Coordinates Processing
            single: Pharmacophores; Output
            single: Pharmacophores; Generation
-
+           single: Pharmacophores; Preparation for Generation
+           single: Pharmacophores; Name Property
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
+           single: Data Formats; PML
+           single: Data Formats; CDF
+           
 Plain Molecule Pharmacophores
 =============================
 

@@ -2,12 +2,32 @@
            single: Pharmacophores; Processing
            single: Pharmacophores; Alignment
            single: Pharmacophores; Generation
+           single: Pharmacophores; Preparation for Generation
+           single: Pharmacophores; Feature Processing
+           single: Pharmacophores; Alignment Scoring
+           single: Pharmacophore Features; Orientation Property
+           single: Pharmacophore Features; Geometry Property
            single: Molecules; Input
            single: Molecules; Output
            single: Molecules; Pharmacophore-based Alignment
            single: Molecules; Structure Data Processing
            single: Molecules; Structure Data Manipulation
-
+           single: Molecules; Structure Data Property
+           single: Molecules; Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Preparation for Pharmacophore Generation
+           single: Molecules; Conformer Ensemble Handling
+           single: Molecules; Name Property
+           single: Molecules; Atom 3D Coordinates Processing
+           single: Molecules; Atom 3D Coordinates Manipulation
+           single: Molecules; Atom 3D Coordinates Transformation
+           single: Atoms; Property Calculation
+           single: Atoms; 3D Coordinates Property
+           single: Bonds; Property Calculation
+           single: Data Formats; PML
+           single: Data Formats; CDF
+           
 Molecule to Reference Pharmacophore Alignment
 =============================================
 

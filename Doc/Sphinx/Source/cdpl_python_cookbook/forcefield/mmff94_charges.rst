@@ -9,10 +9,10 @@
            single: Molecules; Atom Implicit Hydrogen Count Calculation
            single: Molecules; Atom Processing
            single: Molecules; Atom Property Calculation
-           single: Molecules; Atom Ring Membership Detection
+           single: Molecules; Atom Ring Membership Perception
            single: Molecules; Hydrogen Completion
            single: Molecules; Bond Property Calculation
-           single: Molecules; Bond Ring Membership Detection
+           single: Molecules; Bond Ring Membership Perception
            single: Molecules; Property Calculation
            single: Molecules; SSSR Perception
            single: Molecules; SSSR Property
@@ -29,14 +29,14 @@
            single: Atoms; MMFF94 Symbolic Type Property
            single: Atoms; Property Calculation
            single: Atoms; Ring Flag Property
-           single: Atoms; Ring Membership Detection
+           single: Atoms; Ring Membership Perception
            single: Bonds; Aromaticity Flag Property
            single: Bonds; Aromaticity Perception
            single: Bonds; MMFF94 Bond Type Index Property
            single: Bonds; MMFF94 Bond Typing
            single: Bonds; Property Calculation
            single: Bonds; Ring Flag Property
-           single: Bonds; Ring Membership Detection
+           single: Bonds; Ring Membership Perception
            single: Force Fields; MMFF94 Atom Typing
            single: Force Fields; MMFF94 Bond Typing
            single: Force Fields; MMFF94 Partial Charge Calculation

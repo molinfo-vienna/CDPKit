@@ -1,5 +1,13 @@
 .. index:: single: Pharmacophores; 3D Visualization
            single: Pharmacophores; Input
+           single: Pharmacophores; Feature Processing
+           single: Pharmacophore Features; Orientation Property
+           single: Data Formats; PML
+           single: Data Formats; CDF
+           single: Data Formats; PLY
+           single: Data Formats; WRL
+           single: Data Formats; STL
+           single: Data Formats; R3D
            
 Pharmacophore 3D Visualization
 ==============================

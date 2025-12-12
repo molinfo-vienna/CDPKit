@@ -1,5 +1,7 @@
 .. index:: single: Pharmacophores; Input
-
+           single: Pharmacophores; Name Property
+           single: Pharmacophores; Processing
+           
 Sequential Input
 ================
 

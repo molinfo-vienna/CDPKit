@@ -1,10 +1,55 @@
 .. index:: single: Biological Macromolecules; Input
            single: Biological Macromolecules; Processing
            single: Biological Macromolecules; Ligand Interaction Analysis
+           single: Biological Macromolecules; Residue Processing
+           single: Biological Macromolecules; Primary Structure Analysis
            single: Molecules; Pharmacophore Generation
+           single: Molecules; Atom Processing
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Structure Manipulation
+           single: Molecules; Property Calculation
+           single: Molecules; Fragments
+           single: Molecules; Atom Hybridization State Perception
+           single: Molecules; Atom Implicit Hydrogen Count Calculation
+           single: Molecules; Aromaticity Perception
+           single: Molecules; SSSR Perception
+           single: Molecules; SSSR Property
+           single: Molecules; Hydrogen Completion
+           single: Molecules; Hydrogen 3D Coordinates Calculation
+           single: Molecules; Atom Ring Membership Perception
+           single: Molecules; Bond Ring Membership Perception
+           single: Molecules; Atom Hydrophobicity Calculation
+           single: Molecules; Preparation for Pharmacophore Generation
+           single: Atoms; Property Calculation
+           single: Atoms; Chain ID Property
+           single: Atoms; Residue Three-Letter Code Property
+           single: Atoms; Residue Sequence Number Property
+           single: Atoms; Aromaticity Flag Property
+           single: Atoms; Aromaticity Perception
+           single: Atoms; Ring Flag Property
+           single: Atoms; Ring Membership Perception
+           single: Atoms; Hybridization State Perception
+           single: Atoms; Hybridization State Property
+           single: Atoms; Implicit Hydrogen Count Calculation
+           single: Atoms; Implicit Hydrogen Count Property
+           single: Atoms; Hydrophobicity Calculation
+           single: Atoms; Hydrophobicity Property
+           single: Bonds; Property Calculation
+           single: Bonds; Aromaticity Flag Property
+           single: Bonds; Aromaticity Perception
+           single: Bonds; Ring Flag Property
+           single: Bonds; Ring Membership Perception
            single: Pharmacophores; Output
            single: Pharmacophores; Generation
-
+           single: Pharmacophores; Preparation for Generation
+           single: Data Formats; MMTF
+           single: Data Formats; MOL2
+           single: Data Formats; PDB
+           single: Data Formats; mmCIF
+           single: Data Formats; PML
+           single: Data Formats; CDF
+           
 Ligand-receptor Interaction Pharmacophores
 ==========================================
 

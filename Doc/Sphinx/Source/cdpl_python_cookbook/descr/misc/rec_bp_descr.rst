@@ -20,8 +20,8 @@
            single: Molecules; SSSR Property
            single: Molecules; Hydrogen Completion
            single: Molecules; Hydrogen 3D Coordinates Calculation
-           single: Molecules; Atom Ring Membership Detection
-           single: Molecules; Bond Ring Membership Detection
+           single: Molecules; Atom Ring Membership Perception
+           single: Molecules; Bond Ring Membership Perception
            single: Atoms; Property Calculation
            single: Atoms; Chain ID Property
            single: Atoms; Residue Three-Letter Code Property
@@ -29,7 +29,7 @@
            single: Atoms; Aromaticity Flag Property
            single: Atoms; Aromaticity Perception
            single: Atoms; Ring Flag Property
-           single: Atoms; Ring Membership Detection
+           single: Atoms; Ring Membership Perception
            single: Atoms; Hybridization State Perception
            single: Atoms; Hybridization State Property
            single: Atoms; Implicit Hydrogen Count Calculation
@@ -45,7 +45,7 @@
            single: Bonds; Aromaticity Flag Property
            single: Bonds; Aromaticity Perception
            single: Bonds; Ring Flag Property
-           single: Bonds; Ring Membership Detection
+           single: Bonds; Ring Membership Perception
            single: Biological Macromolecules; Input
            single: Biological Macromolecules; Processing
            single: Biological Macromolecules; Binding Site Characterization

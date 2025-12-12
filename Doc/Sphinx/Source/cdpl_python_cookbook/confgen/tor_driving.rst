@@ -19,7 +19,7 @@
            single: Atoms; 3D Coordinates Property
            single: Atoms; Property Calculation
            single: Bonds; Property Calculation
-           single: Bonds; Rotatability Detection
+           single: Bonds; Rotatability Check
            single: Data Formats; SMARTS
            single: Kabsch Alignment
 

@@ -1,9 +1,23 @@
 .. index:: single: Molecules; Input
            single: Molecules; Output
            single: Molecules; Gaussian Shape-based Alignment
+           single: Molecules; Gaussian Shape-based Alignment Scoring
            single: Molecules; Structure Data Processing
            single: Molecules; Structure Data Manipulation
-
+           single: Molecules; Structure Data Property
+           single: Molecules; Gaussian Shape Generation
+           single: Molecules; Preparation for Pharmacophore Generation
+           single: Molecules; Conformer Ensemble Handling
+           single: Molecules; Property Calculation
+           single: Molecules; Atom Property Calculation
+           single: Molecules; Bond Property Calculation
+           single: Molecules; Name Property
+           single: Molecules; Atom 3D Coordinates Processing
+           single: Molecules; Atom 3D Coordinates Manipulation
+           single: Molecules; Atom 3D Coordinates Transformation
+           single: Atoms; Property Calculation
+           single: Bonds; Property Calculation
+           
 Gaussian Shape-based Molecule Alignment
 =======================================
 
