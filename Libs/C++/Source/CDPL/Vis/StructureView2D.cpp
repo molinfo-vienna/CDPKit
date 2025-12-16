@@ -3383,6 +3383,18 @@ void Vis::StructureView2D::calcOutputStructureBounds()
 
         outputStructureBounds.addRectangle(prim_brect);
     }
+
+    for (auto prim : drawListLayer2) {
+        prim->getBounds(prim_brect, 0);
+
+        outputStructureBounds.addRectangle(prim_brect);
+    }
+
+    for (auto prim : drawListLayer3) {
+        prim->getBounds(prim_brect, 0);
+
+        outputStructureBounds.addRectangle(prim_brect);
+    }
 }
 
 void Vis::StructureView2D::calcOutputAtomCoords()
