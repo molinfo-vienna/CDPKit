@@ -26,7 +26,7 @@ The following tutorial is based on a Jupyter notebook which can be :download:`do
 and then executed on your own computer.
    
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :numbered:
 
    cdpl_python_tutorial
