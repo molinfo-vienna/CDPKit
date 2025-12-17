@@ -1,4 +1,7 @@
-Installing the CDPL Python bindings
+Introduction
+============
+
+Installing the CDPL Python Bindings
 ===================================
 
 To be able to follow this tutorial the *CDPL Python* bindings need to be installed on your computer. The most straightforward way to accomplish this task is to install the latest official release deposited 
@@ -10,8 +13,11 @@ on `PyPI <https://pypi.org/project/CDPKit>`_ using the :program:`pip` command as
 
 Other ways to install the Python bindings are described `here <https://cdpkit.org/installation.html>`_.
 
-Working with molecules
+Working with Molecules
 ======================
+
+In-memory Representation of Molecules
+-------------------------------------
 
 The primary data structure for the in-memory representation of molecules (class `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_) as well as all basic processing functionality is located in package
 `CDPL.Chem <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_. Importing the package as shown below will make all contained classes and functions accessible via the prefix *Chem.\**.
@@ -20,7 +26,7 @@ The primary data structure for the in-memory representation of molecules (class 
 
     import CDPL.Chem as Chem
 
-An initally empty molecule object can then be created as follows:
+An initally empty molecule object without any atoms and bonds can then be created as follows:
 
 .. code:: ipython3
 
@@ -60,18 +66,18 @@ In the same manner, the number of bonds can be retrieved by:
 
 
 
-The *CDPL Python* bindings support the `Rich Output <https://ipython.readthedocs.io/en/stable/interactive/plotting.html>`_ of 
+The *CDPL Python* bindings implement the `Rich Output <https://ipython.readthedocs.io/en/stable/interactive/plotting.html>`_ of
 `Chem.MolecularGraph <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html>`_ instances in Jupyter notebooks. 
-Rich output is activated by importing the `CDPL.Vis <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html>`_ package.
+Rich output is activated by importing the `CDPL.Vis <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html>`_ package:
 
 .. code:: ipython3
 
     import CDPL.Vis
 
-After the import of the package simply typing the variable name and executing the cell will display the skeletal formula representation of the molecular graph (see below).
+After the import, simply typing the variable name and executing the cell will display the skeletal formula of the molecular graph.
 
-Manual molecule construction
-----------------------------
+Manual Construction of Molecular Structures
+-------------------------------------------
 
 Atoms are created by calling the method `addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ab998b55e7f56b00f47e3acbfa4511f2e>`_:
 
@@ -109,7 +115,7 @@ which expects the indices (zero-based) of the two atoms to connect as arguments:
     
     b = mol.addBond(0, 1)
 
-The method returns a `Chem.BasicBond <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html>`_ object which is also owned by the creating *Chem.BasicMolecule* instance *mol*. As with atoms, the created bond does not yet have any properties set. To set the bond order to a value of 2 (= double bond) the property function `Chem.setOrder() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181>`_ needs to be invoked:
+The method returns a `Chem.BasicBond <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html>`_ object which is also owned by the creating *Chem.BasicMolecule* instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order to a value of 2 (= double bond) the property function `Chem.setOrder() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181>`_ needs to be called:
 
 .. code:: ipython3
 
@@ -130,7 +136,18 @@ A previously set bond order property value can be accessed by the accompanying g
 
 
 
-To create a more complex molecule, e.g. Pyridine, from the Ethane fragment that is currently described by **mol** the following lines will do the trick:
+.. code:: ipython3
+
+    mol
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_27_0.svg
+
+
+
+To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that is currently described by **mol** the following lines will do the trick:
 
 .. code:: ipython3
 
@@ -180,40 +197,55 @@ To create a more complex molecule, e.g. Pyridine, from the Ethane fragment that 
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_28_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_32_0.svg
 
 
 
-Construction from molecular data
---------------------------------
+Reading Molecules from Input Data
+---------------------------------
 
-String data
-^^^^^^^^^^^
+Data provided as Strings
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. rubric:: SMILES
+.. rubric:: SMILES and SMARTS
 
 
-For the direct parsing of SMILES strings the `CDPL.Chem <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ package provides the built-in function 
+For the direct parsing of SMILES strings the `CDPL.Chem <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ package provides the built-in utility function 
 `Chem.parseSMILES() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912>`_. 
 The function returns a `Chem.Molecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html>`_ object representing the chemical structure 
 encoded by the given SMILES string. For example:
 
 .. code:: ipython3
 
-    Chem.parseSMILES('c1c(C(=O)O)ccc(CNN)c1')
+    mol = Chem.parseSMILES('c1c(C(=O)O)ccc(CNN)c1')
+    mol
 
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_30_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_34_0.svg
+
+
+
+There is a similar function `Chem.parseSMARTS() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc>`_ that can be used to parse and and prepare SMARTS patterns for substructure searching:
+
+.. code:: ipython3
+
+    mol = Chem.parseSMARTS('c1:c:[n,o,s]:c:c:1-[C:2](-,=[*])-,=O')
+    mol
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_36_0.svg
 
 
 
 .. rubric:: Other formats
 
-A general method to read string data in any of the supported molecule input formats is to create a `Base.StringIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html>`_ 
+A general method to read string data in any of the supported molecule input formats (including SMILES and SMARTS) is to create a `Base.StringIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html>`_ 
 object and pass it together with a format specifier (= file extension) to the constructor of a `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_
-instance which will then decode the data and build the chemical structure on a `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_ object supplied
+instance which will then decode the data and build the chemical structure on top of a `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_ object supplied
 as argument to the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method. 
 
 Example: reading string data in MDL SDF format
@@ -256,7 +288,8 @@ Example: reading string data in MDL SDF format
     > <PUBCHEM_COMPOUND_CID>
     5950
     
-    $$$$"""
+    $$$$
+    """
     
     ios = Base.StringIOStream(sdf_data)
     Chem.MoleculeReader(ios, 'sdf').read(mol)
@@ -266,7 +299,11 @@ Example: reading string data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_32_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
 
 
 
+Reading Molecules from Files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reading molecules from files can be done quite easily by instantiating class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format constants defined in `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_ needs to provided.

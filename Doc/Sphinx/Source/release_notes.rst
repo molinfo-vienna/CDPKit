@@ -68,6 +68,7 @@ Release V1.3.0
    
 .. rubric:: Bug Fixes
 
+- Corrected the calculation of skeletal formula visualization bounding boxes which were too small due to not capturing all rendered graphics primitives
 - Fixed methods *write()* and *writelines()* of the CDPL Python API class *Base.IOStream* which both failed when being called with an argument of
   type *str* or sequences thereof
 - Fixed an issue with the command line tool :doc:`psdscreen </applications/psdscreen>` where the default value of option **-u**

@@ -42,7 +42,8 @@ if(SPHINX_FOUND)
   set(SPHINX_BUILD_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
   add_custom_command(OUTPUT "${SPHINX_SOURCE_DIR}/cdpl_python_tutorial/cdpl_python_tutorial.rst"
-    COMMAND "jupyter" "nbconvert" "--to" "rst" "${SPHINX_SOURCE_DIR}/cdpl_python_tutorial/cdpl_python_tutorial.ipynb" 
+    COMMAND ${CMAKE_COMMAND} -E remove_directory "${SPHINX_SOURCE_DIR}/cdpl_python_tutorial/cdpl_python_tutorial_files" 
+    COMMAND jupyter nbconvert --to rst "${SPHINX_SOURCE_DIR}/cdpl_python_tutorial/cdpl_python_tutorial.ipynb" 
     DEPENDS "${SPHINX_SOURCE_DIR}/cdpl_python_tutorial/cdpl_python_tutorial.ipynb"
     COMMENT "-- Converting CDPL Python tutorial Jupyter-notebook to RST format...")
 
