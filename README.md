@@ -26,7 +26,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 
 ### Installation
 
-Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
+Currently, CDPKit can be installed in three ways: i) using one of the CDPKit binary installers provided for download
 on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) installation after building CDPKit from source and
 iii) using the `pip` package manager (installs CDPL Python bindings only).
 More elaborate installation instructions can be found [here](https://cdpkit.org/v1.1.1/installation.html).

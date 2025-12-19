@@ -190,6 +190,7 @@ Release V1.3.0
 
 .. rubric:: Miscellaneous Changes 
 
+- Constructors of class templates *Util::FileDataReader* and *Util::FileDataWriter* now throw a *Base::IOError* if the file opening operation fails
 - Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with
   user expectations
 - The default feature distance bin size used by Descr::NPoint3DPharmacophoreFingerprintGenerator instances has been changed to 3.0 (before 0.5)
