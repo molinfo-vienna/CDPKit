@@ -58,6 +58,7 @@ Vis::GraphicsPrimitive2D::SharedPointer Vis::LinePrimitive2D::clone() const
 
 void Vis::LinePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
+    bounds.reset();
     bounds.addPoint(getBegin());
     bounds.addPoint(getEnd());
     
