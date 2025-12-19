@@ -345,21 +345,3 @@ Reading molecules from files also requires the creation of a `Chem.MoleculeReade
     # Option 4
     reader = Chem.FileSDFMoleculeReader('/path/to/input/file')
 
-
-::
-
-
-    ---------------------------------------------------------------------------
-
-    IOError                                   Traceback (most recent call last)
-
-    <ipython-input-20-dec064403ae6> in <module>
-          7 
-          8 # Option 2
-    ----> 9 reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), 'sdf')
-         10 # or
-         11 #reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), Chem.DataFormat.SDF)
-
-
-    IOError: FileIOStream: could not open file
-
