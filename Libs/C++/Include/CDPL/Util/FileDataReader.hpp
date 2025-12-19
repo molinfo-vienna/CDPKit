@@ -88,6 +88,9 @@ template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::string& file_name, std::ios_base::openmode mode):
     stream(file_name.c_str(), mode), fileName(file_name), reader(stream)
 {
+    if (!stream.good())
+        throw Base::IOError("FileDataReader: could not open file");
+
     reader.setParent(this);
     reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }

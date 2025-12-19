@@ -76,6 +76,9 @@ template <typename WriterImpl, typename DataType>
 CDPL::Util::FileDataWriter<WriterImpl, DataType>::FileDataWriter(const std::string& file_name, std::ios_base::openmode mode):
     stream(file_name.c_str(), mode), fileName(file_name), writer(stream)
 {
+    if (!stream.good())
+        throw Base::IOError("FileDataWriter: could not open file");
+
     writer.setParent(this);
     writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
