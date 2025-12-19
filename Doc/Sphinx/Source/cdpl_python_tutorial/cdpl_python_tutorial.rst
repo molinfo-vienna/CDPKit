@@ -227,7 +227,7 @@ encoded by the given SMILES string. For example:
 
 
 
-There is a similar function `Chem.parseSMARTS() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc>`_ that can be used to parse and and prepare SMARTS patterns for substructure searching:
+A similar function called `Chem.parseSMARTS() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc>`_ can be used to parse and and prepare SMARTS patterns for substructure searching:
 
 .. code:: ipython3
 
@@ -243,12 +243,18 @@ There is a similar function `Chem.parseSMARTS() <https://cdpkit.org/cdpl_api_doc
 
 .. rubric:: Other formats
 
-A general method to read string data in any of the supported molecule input formats (including SMILES and SMARTS) is to create a `Base.StringIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html>`_ 
-object and pass it together with a format specifier (= file extension) to the constructor of a `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_
-instance which will then decode the data and build the chemical structure on top of a `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_ object supplied
-as argument to the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method. 
+The general procedure for reading molecules from string data in one of the supported input formats (including SMILES and SMARTS) is as follows:
 
-Example: reading string data in MDL SDF format
+1. Create an instance of class `Base.StringIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html>`_ that wraps the string and serves as input data source for the next steps.
+2. Create a suitable `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ subclass instance that will perform the format-specific decoding of the molecule data in step 3.
+3. Call the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method of the created data reader providing an instance of class `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_ for the storage of the read molecular structure as argument. 
+
+Molecule data readers for a specific format (Step 2) can be created in two ways:
+
+1. Via class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ providing the *Base.StringIOStream* instance (Step 1) and a data format specifier (= file extension or one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_) as constructor arguments.
+2. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.MOL2MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html>`_ implementing the Sybyl MOL2 format input).
+
+Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 .. code:: ipython3
@@ -292,8 +298,14 @@ Example: reading string data in MDL SDF format
     """
     
     ios = Base.StringIOStream(sdf_data)
-    Chem.MoleculeReader(ios, 'sdf').read(mol)
     
+    reader = Chem.MoleculeReader(ios, 'sdf')
+    # or
+    #reader = Chem.MoleculeReader(ios, Chem.DataFormat.SDF)
+    # or
+    #reader = Chem.SDFMoleculeReader(ios)
+    
+    reader.read(mol)
     mol
 
 
@@ -306,4 +318,48 @@ Example: reading string data in MDL SDF format
 Reading Molecules from Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Reading molecules from files can be done quite easily by instantiating class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format constants defined in `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_ needs to provided.
+Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ subclass instance that performs the actual format-specific data decoding work. As with string data, several options exist:
+
+1. Instantiation of class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_ needs to be provided.
+2. Instantiation of class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing an instance of class `Base.FileIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html>`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_.
+3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.MOL2MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html>`_ implementing the Sybyl MOL2 format input) that accepts an instance of class `Base.FileIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html>`_ as constructor argument.
+4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.FileSDFMoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html>`_ implementing MDL SDF format input) that accepts a file path as argument to the constructor.
+
+.. code:: ipython3
+
+    # Option 1
+    reader = Chem.MoleculeReader('/path/to/input/file.sdf')
+    # or
+    #reader = Chem.MoleculeReader('/path/to/input/file', 'smi')
+    # or
+    #reader = Chem.MoleculeReader('/path/to/input/file', Chem.DataFormat.SMILES)
+    
+    # Option 2
+    reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), 'sdf')
+    # or
+    #reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), Chem.DataFormat.SDF)
+    
+    # Option 3
+    reader = Chem.MOL2MoleculeReader(Base.FileIOStream('/path/to/input/file'))
+    
+    # Option 4
+    reader = Chem.FileSDFMoleculeReader('/path/to/input/file')
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    IOError                                   Traceback (most recent call last)
+
+    <ipython-input-20-dec064403ae6> in <module>
+          7 
+          8 # Option 2
+    ----> 9 reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), 'sdf')
+         10 # or
+         11 #reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), Chem.DataFormat.SDF)
+
+
+    IOError: FileIOStream: could not open file
+
