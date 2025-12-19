@@ -2789,7 +2789,7 @@ void Vis::StructureView2D::extendBondLineToNeighborBonds(Line2D& line, const Che
 }
 
 void Vis::StructureView2D::clipLineAgainstNeighborBonds(Line2D& line, const Chem::Bond& bond, const Chem::Atom& atom,
-                                                           bool pt1) const
+                                                        bool pt1) const
 {
     using namespace Chem;
 
@@ -3355,21 +3355,6 @@ void Vis::StructureView2D::calcOutputStructureBounds()
     outputStructureBounds = inputStructureBounds;
     outputStructureBounds.scale(stdBondLengthScalingFactor * viewportAdjustmentScalingFactor);
 
-    if (!fontMetrics)
-        return;
-
-    std::size_t num_atoms = structure->getNumAtoms();
-
-    for (std::size_t i = 0; i < num_atoms; i++)
-        std::for_each(atomLabelBounds[i].begin(), atomLabelBounds[i].end(),
-                      std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
-
-    std::size_t num_bonds = structure->getNumBonds();
-
-    for (std::size_t i = 0; i < num_bonds; i++)
-        std::for_each(bondLabelBounds[i].begin(), bondLabelBounds[i].end(),
-                      std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
-
     Rectangle2D prim_brect;
 
     for (auto prim : drawListLayer0) {
@@ -3389,12 +3374,21 @@ void Vis::StructureView2D::calcOutputStructureBounds()
 
         outputStructureBounds.addRectangle(prim_brect);
     }
+    
+    if (!fontMetrics)
+        return;
 
-    for (auto prim : drawListLayer3) {
-        prim->getBounds(prim_brect, 0);
+    std::size_t num_atoms = structure->getNumAtoms();
 
-        outputStructureBounds.addRectangle(prim_brect);
-    }
+    for (std::size_t i = 0; i < num_atoms; i++)
+        std::for_each(atomLabelBounds[i].begin(), atomLabelBounds[i].end(),
+                      std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
+
+    std::size_t num_bonds = structure->getNumBonds();
+
+    for (std::size_t i = 0; i < num_bonds; i++)
+        std::for_each(bondLabelBounds[i].begin(), bondLabelBounds[i].end(),
+                      std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
 }
 
 void Vis::StructureView2D::calcOutputAtomCoords()
