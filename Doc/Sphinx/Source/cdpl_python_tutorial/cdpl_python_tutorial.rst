@@ -38,7 +38,7 @@ The number of (explicit) atoms can be queried either by acessing the property `n
 
     mol.numAtoms
     # or
-    mol.getNumAtoms()
+    #mol.getNumAtoms()
 
 
 
@@ -55,7 +55,7 @@ In the same manner, the number of bonds can be retrieved by:
 
     mol.numBonds
     # or
-    mol.getNumBonds()
+    #mol.getNumBonds()
 
 
 
@@ -218,6 +218,7 @@ encoded by the given SMILES string. For example:
 .. code:: ipython3
 
     mol = Chem.parseSMILES('c1c(C(=O)O)ccc(CNN)c1')
+    
     mol
 
 
@@ -232,6 +233,7 @@ A similar function called `Chem.parseSMARTS() <https://cdpkit.org/cdpl_api_doc/p
 .. code:: ipython3
 
     mol = Chem.parseSMARTS('c1:c:[n,o,s]:c:c:1-[C:2](-,=[*])-,=O')
+    
     mol
 
 
@@ -251,11 +253,10 @@ The general procedure for reading molecules from string data in one of the suppo
 
 Molecule data readers for a specific format (Step 2) can be created in two ways:
 
-1. Via class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ providing the *Base.StringIOStream* instance (Step 1) and a data format specifier (= file extension or one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_) as constructor arguments.
+1. Via class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ providing the `Base.StringIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html>`_ instance (Step 1) and a data format specifier (= file extension or one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_) as constructor arguments.
 2. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.MOL2MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html>`_ implementing the Sybyl MOL2 format input).
 
 Example: Reading a molecule from a string providing data in MDL SDF format
-
 
 .. code:: ipython3
 
@@ -320,28 +321,130 @@ Reading Molecules from Files
 
 Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ subclass instance that performs the actual format-specific data decoding work. As with string data, several options exist:
 
-1. Instantiation of class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_ needs to be provided.
+1. Instantiation of class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_ has to be provided.
 2. Instantiation of class `Chem.MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ passing an instance of class `Base.FileIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html>`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html>`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.MOL2MoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html>`_ implementing the Sybyl MOL2 format input) that accepts an instance of class `Base.FileIOStream <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html>`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ (e.g. `Chem.FileSDFMoleculeReader <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html>`_ implementing MDL SDF format input) that accepts a file path as argument to the constructor.
 
 .. code:: ipython3
-
-    # Option 1
+        
+    # - Option 1 -
     reader = Chem.MoleculeReader('/path/to/input/file.sdf')
     # or
-    #reader = Chem.MoleculeReader('/path/to/input/file', 'smi')
+    reader = Chem.MoleculeReader('/path/to/input/file', 'smi')
     # or
-    #reader = Chem.MoleculeReader('/path/to/input/file', Chem.DataFormat.SMILES)
-    
-    # Option 2
+    reader = Chem.MoleculeReader('/path/to/input/file', Chem.DataFormat.SMILES)
+
+    # - Option 2 -
     reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), 'sdf')
     # or
-    #reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), Chem.DataFormat.SDF)
-    
-    # Option 3
+    reader = Chem.MoleculeReader(Base.FileIOStream('/path/to/input/file'), Chem.DataFormat.SDF)
+
+    # - Option 3 -
     reader = Chem.MOL2MoleculeReader(Base.FileIOStream('/path/to/input/file'))
-    
-    # Option 4
+
+    # - Option 4 -
     reader = Chem.FileSDFMoleculeReader('/path/to/input/file')
+
+Sequential Molecule Reading
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Given a properly initialized `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ subclass instance, molecules can be read in the order provided by the input data by repeatedly calling the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method. If there are no more molecules to read, the return value of the method will evaluate to ``False``:
+
+.. code:: ipython3
+
+    smi_data = """c1n(ccn1)c1ccc(cc1)c1ccc(n1c1c(cc(cc1)C(=O)N)C)CCC(=O)[O-] 022_3QJ5_A
+    CNC(=O)[C@H](C(C)(C)C)NC(=O)[C@@H]([C@H](C)N([O-])C=O)CCCc1ccccc1 023_2WO9_B
+    N1N(C(c2c(C=1Nc1cc([nH]n1)C)ccc(N1CC[NH+](CC1)C)c2)=O)C(C)C 027_3PIX_A
+    """
+    
+    ios = Base.StringIOStream(smi_data)
+    reader = Chem.MoleculeReader(ios, 'smi')
+    mol_count = 0
+    
+    while reader.read(mol):
+       mol_count += 1
+    
+    print(f'Read {mol_count} molecules')
+
+
+.. parsed-literal::
+
+    Read 3 molecules
+
+
+Random Access to Input Molecules
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There is a special version of the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method of class `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ which expects the index (zero-based) of the molecule to read as its first argument. This way molecules can be read in any order, no matter what their order is in the input data. The number of available molecules can be queried either by calling the method `getNumRecords() <https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80>`_ or by accessing the property `numRecords <https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html>`_.
+
+Example:
+
+.. code:: ipython3
+
+    ios = Base.StringIOStream(smi_data)
+    reader = Chem.MoleculeReader(ios, 'smi')
+    
+    num_mols = reader.getNumRecords()
+    # or
+    #num_mols = reader.numRecords
+    
+    print(f'Number of input molecules: {num_mols}')
+
+
+.. parsed-literal::
+
+    Number of input molecules: 3
+
+
+.. code:: ipython3
+
+    # read the 2nd molecule
+    reader.read(1, mol)
+    
+    mol
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_45_0.svg
+
+
+
+.. code:: ipython3
+
+    # read the 1st molecule
+    reader.read(0, mol)
+    
+    mol
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_46_0.svg
+
+
+
+If the index is out of the valid range then a corresponding exception will be thrown:
+
+.. code:: ipython3
+
+    # there is no 5th molecule
+    reader.read(4, mol)
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    IndexError                                Traceback (most recent call last)
+
+    <ipython-input-40-a898d182f25f> in <module>
+          1 # there is no 5th molecule
+    ----> 2 reader.read(4, mol)
+    
+
+    IndexError: StreamDataReader: record index out of bounds
+
 
