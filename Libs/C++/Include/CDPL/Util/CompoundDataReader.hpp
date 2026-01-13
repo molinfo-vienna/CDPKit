@@ -164,7 +164,7 @@ void CDPL::Util::CompoundDataReader<DataType>::removeReader(std::size_t idx)
     readers.erase(readers.begin() + idx);
     recordIdxBounds.erase(recordIdxBounds.begin() + idx);
 
-    for (; idx < readers.size(); idx++)
+    for ( ; idx < readers.size(); idx++)
         recordIdxBounds[idx] -= num_lost_records;
 
     numRecords -= num_lost_records;
@@ -195,7 +195,7 @@ CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj, bool overwrite)
     if (recordIdx >= numRecords)
         return *this;
    
-    std::size_t idx    = recordIdx;
+    std::size_t idx = recordIdx;
     ReaderType* reader = getReaderForRecordIndex(idx);
 
     if (reader && (state = reader->read(idx, obj, overwrite))) {
@@ -210,9 +210,24 @@ template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
 CDPL::Util::CompoundDataReader<DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
-    setRecordIndex(idx);
+    state = false;
 
-    return read(obj, overwrite);
+    if (idx >= numRecords)
+        throw Base::IndexError("CompoundDataReader: record index out of bounds");
+
+    std::size_t tmp_idx = idx;
+    ReaderType* reader = getReaderForRecordIndex(tmp_idx);
+
+    if (!reader) {
+        recordIdx = idx;
+    
+        if ((state = reader->read(tmp_idx, obj, overwrite))) {
+            recordIdx++;
+            this->invokeIOCallbacks(1.0);
+        }
+    }
+
+    return *this;
 }
 
 template <typename DataType>

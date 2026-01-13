@@ -109,14 +109,32 @@ Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol, bo
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(std::size_t idx, Chem::Molecule& mol, bool overwrite)
 {
-    setRecordIndex(idx);
+    state = false;
 
-    return read(mol, overwrite);
+    if (idx >= numRecords)
+        throw Base::IndexError("PSDMoleculeReader: molecule index out of bounds");
+
+    recordIndex = idx;
+
+    try {
+        accessor.getMolecule(recordIndex, mol, overwrite);
+
+    } catch (const std::exception& e) {
+        throw Base::IOError("PSDMoleculeReader: while reading molecule " + std::to_string(recordIndex) + 
+                            ": " + e.what());
+    }
+
+    recordIndex++;
+    state = true;
+
+    invokeIOCallbacks(1.0);
+
+    return *this;
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::skip()
 {
-     state = false;
+    state = false;
 
     if (recordIndex >= numRecords)
         return *this;
@@ -141,8 +159,8 @@ std::size_t Pharm::PSDMoleculeReader::getRecordIndex() const
 
 void Pharm::PSDMoleculeReader::setRecordIndex(std::size_t idx)
 {
-    if (idx >= numRecords)
-        throw Base::IndexError("StreamDataReader: record index out of bounds");
+    if (idx > numRecords)
+        throw Base::IndexError("PSDMoleculeReader: pharmacophore index out of bounds");
 
     recordIndex = idx;
 }
@@ -150,6 +168,7 @@ void Pharm::PSDMoleculeReader::setRecordIndex(std::size_t idx)
 std::size_t Pharm::PSDMoleculeReader::getNumRecords()
 {
     invokeIOCallbacks(1.0);
+    
     return numRecords;
 }
 

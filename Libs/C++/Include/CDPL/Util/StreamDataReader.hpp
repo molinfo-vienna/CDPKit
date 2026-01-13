@@ -134,9 +134,24 @@ template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
 CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
-    setRecordIndex(idx);
+    state = false;
 
-    return read(obj, overwrite);
+    scanDataStream();
+
+    if (idx >= recordPositions.size())
+        throw Base::IndexError("StreamDataReader: record index out of bounds");
+
+    input.clear();
+    input.seekg(recordPositions[idx]);
+
+    recordIndex = idx;
+
+    if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj, overwrite))) {
+        recordIndex++;
+        this->invokeIOCallbacks(1.0);
+    }
+
+    return *this;
 }
 
 template <typename DataType, typename ReaderImpl>

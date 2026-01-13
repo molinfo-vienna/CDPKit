@@ -95,7 +95,7 @@ Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore
         accessor.getPharmacophore(recordIndex, pharm, overwrite);
 
     } catch (const std::exception& e) {
-        throw Base::IOError("PSDPharmacophoreReader: while reading record " + std::to_string(recordIndex) + 
+        throw Base::IOError("PSDPharmacophoreReader: while reading pharmacophore " + std::to_string(recordIndex) + 
                             ": " + e.what());
     }
 
@@ -109,14 +109,32 @@ Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore
 
 Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(std::size_t idx, Pharmacophore& pharm, bool overwrite)
 {
-    setRecordIndex(idx);
+    state = false;
 
-    return read(pharm, overwrite);
+    if (idx >= numRecords)
+        throw Base::IndexError("PSDPharmacophoreReader: pharmacophore index out of bounds");
+
+    recordIndex = idx;
+
+    try {
+        accessor.getPharmacophore(recordIndex, pharm, overwrite);
+
+    } catch (const std::exception& e) {
+        throw Base::IOError("PSDPharmacophoreReader: while reading pharmacophore " + std::to_string(recordIndex) + 
+                            ": " + e.what());
+    }
+
+    recordIndex++;
+    state = true;
+
+    invokeIOCallbacks(1.0);
+
+    return *this;
 }
 
 Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::skip()
 {
-     state = false;
+    state = false;
 
     if (recordIndex >= numRecords)
         return *this;
@@ -141,8 +159,8 @@ std::size_t Pharm::PSDPharmacophoreReader::getRecordIndex() const
 
 void Pharm::PSDPharmacophoreReader::setRecordIndex(std::size_t idx)
 {
-    if (idx >= numRecords)
-        throw Base::IndexError("StreamDataReader: record index out of bounds");
+    if (idx > numRecords)
+        throw Base::IndexError("PSDPharmacophoreReader: pharmacophore index out of bounds");
 
     recordIndex = idx;
 }
@@ -150,6 +168,7 @@ void Pharm::PSDPharmacophoreReader::setRecordIndex(std::size_t idx)
 std::size_t Pharm::PSDPharmacophoreReader::getNumRecords()
 {
     invokeIOCallbacks(1.0);
+    
     return numRecords;
 }
 
