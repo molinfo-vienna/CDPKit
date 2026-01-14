@@ -16,8 +16,8 @@ Other ways to install the Python bindings are described `here <https://cdpkit.or
 Working with Molecules
 ======================
 
-In-memory Representation of Molecules
--------------------------------------
+In-memory Representation of Molecular Structures
+------------------------------------------------
 
 The primary data structure for the in-memory representation of molecules (class `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_) as well as all basic processing functionality is located in package
 `CDPL.Chem <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_. Importing the package as shown below will make all contained classes and functions accessible via the prefix *Chem.\**.
@@ -76,8 +76,8 @@ Rich output is activated by importing the `CDPL.Vis <https://cdpkit.org/cdpl_api
 
 After the import, simply typing the variable name and executing the cell will display the skeletal formula of the molecular graph.
 
-Manual Construction of Molecular Structures
--------------------------------------------
+Manual Construction of Molecules
+--------------------------------
 
 Atoms are created by calling the method `addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ab998b55e7f56b00f47e3acbfa4511f2e>`_:
 
@@ -373,8 +373,8 @@ Given a properly initialized `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_a
     Read 3 molecules
 
 
-Random Access to Input Molecules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Random Molecule Access
+^^^^^^^^^^^^^^^^^^^^^^
 
 There is a special version of the `read() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521>`_ method of class `Chem.MoleculeReaderBase <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase>`_ which expects the index (zero-based) of the molecule to read as its first argument. This way molecules can be read in any order, no matter what their order is in the input data. The number of available molecules can be queried either by calling the method `getNumRecords() <https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80>`_ or by accessing the property `numRecords <https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html>`_.
 
@@ -429,8 +429,8 @@ If the index is out of the valid range then a corresponding exception will be th
 
 .. code:: ipython3
 
-    # there is no 5th molecule
-    reader.read(4, mol)
+    # there is no 4th molecule
+    reader.read(3, mol)
 
 
 ::
@@ -440,11 +440,58 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-40-a898d182f25f> in <module>
-          1 # there is no 5th molecule
-    ----> 2 reader.read(4, mol)
-    
+    Cell In[27], line 2
+          1 # there is no 4th molecule
+    ----> 2 reader.read(3, mol)
+
 
     IndexError: StreamDataReader: record index out of bounds
+
+
+Processing Molecular Graphs
+---------------------------
+
+Accessing Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Atom and bonds of a molecular graph represented by, e. g., a `Chem.BasicMolecule <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html>`_ instance can be accessed by calling the methods 
+`getAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ae4dc0c96b4675cdd0726a6a0a55c681f>`_ and 
+`getBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aad68f03787b42d08b22bfc820e5016a6>`_, respectively. 
+These methods expect the zero-based index of the atom/bond in the parent molecular graphs's atom/bond list as argument.
+Allowed atom/bond indices are in the range *[0, #atoms)/[0, #bonds)*. Providing an index outside the allowed range will result in an exception.
+
+Example: Counting element symbols and bond orders
+
+.. code:: ipython3
+
+    sym_counts = {}
+    order_counts = {}
+    
+    for i in range(0, mol.numAtoms):
+        atom = mol.getAtom(i)
+        sym = Chem.getSymbol(atom)
+    
+        if sym in sym_counts:
+            sym_counts[sym] += 1
+        else:
+            sym_counts[sym] = 1
+    
+    for i in range(0, mol.numBonds):
+        bond = mol.getBond(i)
+        order = Chem.getOrder(bond)
+    
+        if order in order_counts:
+            order_counts[order] += 1
+        else:
+            order_counts[order] = 1
+    
+    print(f'Element symbols: {sym_counts}')
+    print(f'Bond orders: {order_counts}')
+
+
+.. parsed-literal::
+
+    Element symbols: {'C': 24, 'N': 4, 'O': 3}
+    Bond orders: {1: 22, 2: 12}
 
 
