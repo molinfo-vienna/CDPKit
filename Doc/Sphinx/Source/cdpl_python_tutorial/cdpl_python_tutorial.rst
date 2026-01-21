@@ -12,10 +12,10 @@ To be able to follow this tutorial the *CDPL Python* bindings have to be install
 
 Other ways to install the Python bindings are described in section `Installation`_.
 
-CDPL Organization
+CDPL Architecture
 -----------------
 
-The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages together with a brief description which kind of functionality they provide:
+The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages together with a brief description of the kind of functionality they provide:
 
 .. list-table::
    :widths: 15 30
@@ -55,6 +55,13 @@ The *CDPL* comprises several sub-packages each providing functionality related t
        descriptors :cite:`doi:10.1021/acs.jcim.4c01902`
    * - `CDPL.Vis`_
      - Functionality for molecule, reaction and pharmacophore visualization
+
+Object Property Handling
+------------------------
+
+In the *CDPL* properties of molecules, atoms, bonds, pharmacophores, etc. are not stored as data members of the corresponding objects
+but as key:value pairs in a dictionary (similar to the ``__dict__`` attribute of Python objects). 
+
 
 **TODO**
 
