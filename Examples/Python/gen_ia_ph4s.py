@@ -18,6 +18,7 @@
 
 import sys
 import argparse
+import re
 
 import CDPL.Chem as Chem
 import CDPL.Biomol as Biomol
@@ -55,11 +56,18 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         # delete atoms belonging to residues that should be stripped
         if args.strip_res_list:            
             atoms_to_rem = Chem.Fragment() # will store the atoms to delete
-            res_to_strip = { tlc.upper() for tlc in args.strip_res_list }
+            res_to_strip_ptns = { re.compile(tlc, re.IGNORECASE) for tlc in args.strip_res_list }
         
-            for atom in rec_mol.atoms:     # identify and note atoms belonging to the stripped residues
-                if Biomol.getResidueCode(atom).upper() in res_to_strip:
-                    atoms_to_rem.addAtom(atom)
+            # identify and note atoms belonging to the stripped residues
+            for atom in rec_mol.atoms:
+                # compose identifier of the residue the atom belongs to
+                atom_res_id = f'{Biomol.getChainID(atom).upper()}_{Biomol.getResidueCode(atom).upper()}_{Biomol.getResidueSequenceNumber(atom)}'
+
+                # check if atom belongs to an excluded residue
+                for res_ptn in res_to_strip_ptns:
+                    if res_ptn.search(atom_res_id):
+                        atoms_to_rem.addAtom(atom)
+                        break
 
             if atoms_to_rem.numAtoms > 0:
                 rec_mol -= atoms_to_rem    # delete atoms from the receptor structure
@@ -107,9 +115,14 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-s',
                         dest='strip_res_list',
                         required=False,
-                        metavar='<three-letter code>',
+                        metavar='<res-id>',
                         nargs='+',
-                        help='Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)')
+                        help='Whitespace separated list of identifiers of residues to remove from the receptor structure (e.g. an existing ligand). '\
+                        'Residue identifiers consist of three components separated by an underscore: [chain id]_[tlc]_[res. seq. no.]. '\
+                        'The individual components are optional and the whole string is interpreted '\
+                        'as a regular expression that gets matched against the residue id of '\
+                        'each receptor atom. Examples: HOH -> rem. all waters, A_MET -> remove all MET residues of chain A, '\
+                        '_300$ -> remove all residues with sequ. number 300')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,

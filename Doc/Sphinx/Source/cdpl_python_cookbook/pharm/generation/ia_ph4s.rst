@@ -58,7 +58,7 @@ ligand molecules.
 
 **Synopsis**
 
-  :program:`python` *gen_ia_ph4s.py* [-h] -r <file> -l <file> -o <file> [-s <three-letter code> [<three-letter code> ...]] [-q] [-x]
+  :program:`python` *gen_ia_ph4s.py* [-h] -r <file> -l <file> -o <file> [-s <res-id> [<res-id> ...]] [-q] [-x]
 
 **Mandatory options**
 
@@ -80,10 +80,13 @@ ligand molecules.
 
     Show help message and exit
  
- **-s <three-letter code> [<three-letter code> ...]**
+ **-s <res-id> [<res-id> ...]**
 
-    Whitespace separated list of PDB three-letter codes specifying residues to
-    remove from the receptor structure (e.g. an existing ligand)
+    Whitespace separated list of identifiers of residues to remove from the receptor structure (e.g. an existing ligand).
+    Residue identifiers consist of three components separated by an underscore: [chain id]_[tlc]_[res. seq. no.].
+    The individual components are optional and the whole string is interpreted as a regular expression that gets matched against the residue id of
+    each receptor atom. Examples: HOH -> rem. all waters, A_MET -> remove all MET residues of chain A,
+    _300$ -> remove all residues with sequ. number 300
 
  -q
 
