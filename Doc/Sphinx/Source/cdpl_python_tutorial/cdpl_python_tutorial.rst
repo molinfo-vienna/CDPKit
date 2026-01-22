@@ -1,8 +1,5 @@
-Introduction
-============
-
 Installing the CDPL Python Bindings
------------------------------------
+===================================
 
 To be able to follow this tutorial the *CDPL Python* bindings have to be installed on your computer. The most straightforward way to accomplish this task is to install the latest official release deposited on `PyPI`_ using the :program:`pip` command as follows:
 
@@ -12,8 +9,8 @@ To be able to follow this tutorial the *CDPL Python* bindings have to be install
 
 Other ways to install the Python bindings are described in section `Installation`_.
 
-CDPL Architecture
------------------
+CDPL Package Overview
+=====================
 
 The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages together with a brief description of the kind of functionality they provide:
 
@@ -56,11 +53,32 @@ The *CDPL* comprises several sub-packages each providing functionality related t
    * - `CDPL.Vis`_
      - Functionality for molecule, reaction and pharmacophore visualization
 
-Object Property Handling
-------------------------
+Basic Concepts
+==============
 
-In the *CDPL* properties of molecules, atoms, bonds, pharmacophores, etc. are not stored as data members of the corresponding objects
-but as key:value pairs in a dictionary (similar to the ``__dict__`` attribute of Python objects). 
+Dynamic Properties
+------------------
+
+The *CDPL* stores properties of certain data types such as molecules, atoms, bonds, pharmacophores, etc. not as ordinary data members of the associated classes
+but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute of Python objects). This design decision was made due to several advantages of this approach:
+
+* Flexibility and extensibility: new properties can be defined at runtime by user code
+* Class instance specific property values can be stored directly in the dictionary of the instance they are
+  associated with, no external accompanying data structures are required for storing user-defined properties
+  unknown to the *CDPL*
+* It can be easily determined whether the value of a particular property is available or not by checking if
+  the dictionary contains a corresponding entry. C++ class data members (note that *CDPL* Python objects just wrap
+  corresponding C++ class instances!) exist in memory after a class instance has been constructed and from that
+  point on have a value. This is particularly problematic for properties that cannot be assigned a reasonable
+  default value.
+
+All *CDPL* classes supporting this kind of dynamic property storage derive from class 
+`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ that are created on-the-fly in the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. *<PN>* denotes the *CDPL* sub-package name
+(see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
+properties have been defined (example: atom property keys accessible as members of class
+`CDPL.Chem.AtomProperty`_).
+Property values virtually can be of any type and get stored in the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
+Since `CDPL.Base.PropertyContainer`_ methods operating on specific properties always demand the unique key of the property as argument, corresponding code is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the low-level `CDPL.Base.PropertyContainer`_ method calls and provide them with the correct property key and value type. Futhermore, the functions also constrain the type of the `CDPL.Base.PropertyContainer`_  subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example for such four functions that operate on the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances with  integer being the property value type.
 
 
 **TODO**
@@ -71,7 +89,7 @@ Working with Molecules
 In-memory Representation of Molecular Structures
 ------------------------------------------------
 
-The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. Concrete data structures for the in-memory representation of atoms, bonds and molecular graphs implement a hierarchy of interfaces that specify all necessary methods for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
+The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. Concrete data structures for the in-memory representation of atoms, bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
  
 The following table provides an overview of the most relevant interfaces and data structures provided by the *CDPL* for molecular data representation and processing:
    
@@ -613,6 +631,8 @@ Example: Counting element symbols and bond orders
 
 .. _PyPI: https://pypi.org/project/CDPKit
 
+.. _\_\_dict\_\_: https://docs.python.org/3/reference/datamodel.html#object.__dict\_\_
+
 .. _Installation: https://cdpkit.org/installation.html
 
 .. _CDPL.Base: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Base.html
@@ -648,6 +668,22 @@ Example: Counting element symbols and bond orders
 .. _Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
 .. _CDPL.Base.PropertyContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1PropertyContainer.html
+
+.. _CDPL.Base.LookupKey: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1LookupKey.html
+
+.. _CDPL.Base.Any: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1Any.html
+
+.. _CDPL.Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _CDPL.Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
+.. _CDPL.Chem.getOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
+
+.. _CDPL.Chem.setOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
+
+.. _CDPL.Chem.hasOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad021960310274a588d47cb4f2d25098c
+
+.. _CDPL.Chem.clearOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aedc63dddcd7838a82e1327dec7ca5504
 
 .. _CDPL.Chem.Entity3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3D.html
 
