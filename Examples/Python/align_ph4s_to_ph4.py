@@ -41,7 +41,7 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
     return ph4
 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Aligns a set of input molecules onto a given reference pharmacophore.')
+    parser = argparse.ArgumentParser(description='Aligns a set of input pharmacophores onto a given reference pharmacophore.')
 
     parser.add_argument('-r',
                         dest='ref_ph4_file',
