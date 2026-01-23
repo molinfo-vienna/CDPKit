@@ -52,12 +52,6 @@ def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
 
     return ph4
 
-# remove feature orientation informations and set the feature geometry to Pharm.FeatureGeometry.SPHERE
-def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
-    for ftr in ph4:
-        Pharm.clearOrientation(ftr)
-        Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
-    
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Aligns a set of input molecules onto a given reference pharmacophore.')
 
@@ -132,7 +126,7 @@ def main() -> None:
     almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
 
     if args.pos_only:                          # clear feature orientation information
-        clearFeatureOrientations(ref_ph4)
+        Pharm.clearOrientations(ref_ph4)
     
     almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
     almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
@@ -160,7 +154,7 @@ def main() -> None:
                 mol_ph4 = genPharmacophore(mol)    # generate input molecule pharmacophore
 
                 if args.pos_only:                  # clear feature orientation information
-                    clearFeatureOrientations(mol_ph4)
+                    Pharm.clearOrientations(mol_ph4)
 
                 almnt.clearEntities(False)         # clear features of previously aligned pharmacophore
                 almnt.addFeatures(mol_ph4, False)  # specify features of the pharmacophore to align
@@ -174,7 +168,7 @@ def main() -> None:
                     almnt_solutions.append((score, xform))
 
                 if not args.quiet:
-                    print(' -> Found %s alignment solutions' % str(len(almnt_solutions)))
+                    print(' -> Found %s alignment solution(s)' % str(len(almnt_solutions)))
                 
                 saved_coords = Math.Vector3DArray()      # create data structure for storing 3D coordinates
 
@@ -229,10 +223,10 @@ def main() -> None:
                     output_cnt += 1
 
                 if not args.quiet:
-                    print(' -> %s alignment poses saved' % str(output_cnt))
+                    print(' -> %s alignment pose(s) saved' % str(output_cnt))
 
             except Exception as e:
-                sys.exit('Error: pharmacophore alignment of molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: pharmacophore alignment of molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
                 
