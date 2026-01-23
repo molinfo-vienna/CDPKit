@@ -153,6 +153,7 @@ def main() -> None:
                 almnt.addFeatures(ph4, False)      # specify features of the pharmacophore to align
 
                 almnt_solutions = []               # stores the found alignment solutions
+                num_solutions = 0
                 
                 while almnt.nextAlignment():                                     # iterate over all alignment solutions that can be found
                     score = almnt_score(ref_ph4, ph4, almnt.getTransform())      # calculate alignment score
@@ -160,18 +161,24 @@ def main() -> None:
 
                     almnt_solutions.append((score, xform))
 
-                    # order solutions by desc. alignment score
-                    almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
-                    
-                    if args.min_score_diff == 0 or args.num_out_almnts == 1:
+                    num_solutions += 1
+
+                    # save some memory, if possible
+                    if (args.min_score_diff == 0 or args.num_out_almnts == 1) and len(almnt_solutions) > args.num_out_almnts:
+                        # order solutions by desc. alignment score
+                        almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
+                        # erase solutions at the tail of the list
                         almnt_solutions = almnt_solutions[:args.num_out_almnts]
                     
                 if not args.quiet:
-                    print(f' -> Found {len(almnt_solutions)} alignment solution(s)')
+                    print(f' -> Found {num_solutions} alignment solution(s)')
                 
                 output_cnt = 0
                 last_solution = None
-                
+
+                # order solutions by desc. alignment score
+                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
+                        
                 # output parmacophore alignment poses until the max. number of best output solutions has been reached
                 for solution in almnt_solutions:
                     if output_cnt == args.num_out_almnts:
