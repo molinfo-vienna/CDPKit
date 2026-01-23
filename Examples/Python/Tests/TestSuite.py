@@ -130,7 +130,8 @@ if __name__ == '__main__':
         ed_ptns.write('1 [C,S,P:1](=[O:2])@[OX2:3] 0 [~:1](O[H])x[~:3][H]')
     
     errors |= checkScriptFileOutput('edit_mols', outputFilePath('edit_mols.smi'),
-                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('edit_mols.smi'), '-p', outputFilePath('edit_mols_ptns.txt'), '-m', '-c' ])
+                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('edit_mols.smi'),
+                                      '-p', outputFilePath('edit_mols_ptns.txt'), '-m', '-c' ])
       
     errors |= checkScriptFileOutput('gen_mol_ph4s', outputFilePath('gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
@@ -140,6 +141,10 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('align_mols_to_ph4', outputFilePath('align_mols_to_ph4.sdf'),
                                     [ '-r', outputFilePath('gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
                                       '-o', outputFilePath('align_mols_to_ph4.sdf'), '-n', '10', '-d', '0.5' ])
+    errors |= checkScriptFileOutput('align_ph4s_to_ph4', outputFilePath('align_ph4s_to_ph4.pml'),
+                                    [ '-r', testDataFilePath('1dwc_MIT_ph4.pml'), '-i', testDataFilePath('1ke5678_ph4s.pml'),
+                                      '-s', outputFilePath('align_ph4s_to_ph4_scores.txt'),
+                                      '-o', outputFilePath('align_ph4s_to_ph4.pml'), '-n', '10', '-d', '1' ])
     errors |= checkScriptOutput('seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 
@@ -171,7 +176,8 @@ if __name__ == '__main__':
     errors |= checkScriptFileOutput('gen_path_fp', outputFilePath('test.out'),
                                     [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.out'), '-n', '2023', '-H', '-l', '1', '-u', '6' ])
     errors |= checkScriptFileOutput('gen_kuvek_bp_descr', outputFilePath('test.out'),
-                                    [ '-i', testDataFilePath('1ke6.pdb'), '-o', outputFilePath('test.out'), '-n', '600', '-r', '18.0', '-s', 'HOH', 'LS2', '-c', '26.59', '12.2', '11.81', '-q', '-t' ])
+                                    [ '-i', testDataFilePath('1ke6.pdb'), '-o', outputFilePath('test.out'),
+                                      '-n', '600', '-r', '18.0', '-s', 'HOH', 'LS2', '-c', '26.59', '12.2', '11.81', '-q', '-t' ])
      
     errors |= checkScriptOutput('calc_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
 
