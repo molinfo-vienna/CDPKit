@@ -1,5 +1,6 @@
 master:
 
+ - New Python cookbook script demonstrating the alignment of multiple input pharmacophores read from a file to a given reference pharmacophore
  - Constructors of class templates Util::FileDataReader and Util::FileDataWriter now throw a Base::IOError if file opening fails
  - Corrected the calculation of skeletal formula visualization bounding boxes which were too small due to not capturing all rendered graphics primitives
  - Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with

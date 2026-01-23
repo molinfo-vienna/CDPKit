@@ -6,3 +6,4 @@ Processing
 
    ftr_props.rst
    mol_align.rst
+   ph4_align.rst
