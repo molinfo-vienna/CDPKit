@@ -160,15 +160,18 @@ def main() -> None:
 
                     almnt_solutions.append((score, xform))
 
+                    # order solutions by desc. alignment score
+                    almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
+                    
+                    if args.min_score_diff == 0 or args.num_out_almnts == 1:
+                        almnt_solutions = almnt_solutions[:args.num_out_almnts]
+                    
                 if not args.quiet:
                     print(f' -> Found {len(almnt_solutions)} alignment solution(s)')
                 
                 output_cnt = 0
                 last_solution = None
                 
-                # order solutions by desc. alignment score
-                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
-
                 # output parmacophore alignment poses until the max. number of best output solutions has been reached
                 for solution in almnt_solutions:
                     if output_cnt == args.num_out_almnts:
@@ -176,7 +179,7 @@ def main() -> None:
 
                     # check whether the current pose's score is 'different enough' from
                     # the one of the last pose to qualify for output
-                    if args.min_score_diff > 0.0 and last_solution and ((solution[0] - last_solution[0]) < args.min_score_diff):
+                    if args.min_score_diff > 0.0 and last_solution and ((last_solution[0] - solution[0]) < args.min_score_diff):
                         continue
                     
                     # create a copy of the input pharmacophore
