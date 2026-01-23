@@ -122,7 +122,8 @@ def main() -> None:
 
     if args.pos_only:                          # clear feature orientation information
         Pharm.clearOrientations(ref_ph4)
-    
+        Pharm.removePositionalDuplicates(ref_ph4)
+        
     almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
     almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
     
@@ -148,7 +149,8 @@ def main() -> None:
             try:
                 if args.pos_only:                  # clear feature orientation information
                     Pharm.clearOrientations(ph4)
-
+                    Pharm.removePositionalDuplicates(ph4)
+                    
                 almnt.clearEntities(False)         # clear features of previously aligned pharmacophore
                 almnt.addFeatures(ph4, False)      # specify features of the pharmacophore to align
 
