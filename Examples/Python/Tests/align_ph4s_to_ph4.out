@@ -1,0 +1,1969 @@
+<ElementContainer activeResult="-1">
+ <ContainerPharmacophores>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement0" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.234446" y3="17.102931" z3="24.735526" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="30.103875" y3="9.170928" z3="24.379536" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.437547" y3="13.210480" z3="27.187541" tolerance="1.500000" />
+     <origin x3="27.749975" y3="14.560446" z3="29.650456" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="4" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.881534" y3="19.984800" z3="25.003015" tolerance="1.500000" />
+     <origin x3="34.802844" y3="17.758441" z3="27.293105" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="5" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.852295" y3="21.086246" z3="24.204728" tolerance="1.500000" />
+     <origin x3="30.016558" y3="20.447682" z3="21.613829" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="6" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.852295" y3="21.086246" z3="24.204728" tolerance="1.500000" />
+     <origin x3="31.720701" y3="22.687190" z3="27.092247" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="7" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.852295" y3="21.086246" z3="24.204728" tolerance="1.500000" />
+     <origin x3="32.965786" y3="24.396311" z3="24.799939" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="8" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.022918" y3="14.819074" z3="25.421572" tolerance="1.500000" />
+     <target x3="29.118232" y3="16.384244" z3="28.283437" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="9" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="28.512007" y3="10.934070" z3="26.696020" tolerance="1.500000" />
+     <target x3="26.488700" y3="10.664334" z3="28.869315" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="10" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="29.118232" y3="16.384244" z3="28.283437" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="11" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="32.658441" y3="12.812167" z3="27.891910" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="12" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="27.749975" y3="14.560446" z3="29.650456" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="13" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="29.276790" y3="15.966662" z3="21.426189" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="14" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="29.282100" y3="19.000278" z3="29.220649" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="15" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="32.995878" y3="18.992944" z3="28.359937" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="16" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="27.463318" y3="17.974880" z3="22.083914" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="17" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.802844" y3="17.758441" z3="27.293105" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="18" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="25.736130" y3="13.309048" z3="29.123242" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="19" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="25.414110" y3="11.340251" z3="24.965224" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="20" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="30.016558" y3="20.447682" z3="21.613829" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="21" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="26.488700" y3="10.664334" z3="28.869315" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="22" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="28.509261" y3="11.208458" z3="20.354564" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="23" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="31.720701" y3="22.687190" z3="27.092247" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="24" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="33.224374" y3="8.457020" z3="27.021137" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="25" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="30.317739" y3="8.431733" z3="29.832386" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="26" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="32.965786" y3="24.396311" z3="24.799939" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="27" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="27.433113" y3="5.180070" z3="25.250401" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement1" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="28" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="29.141844" y3="16.477138" z3="25.873046" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="29" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.710554" y3="23.624708" z3="28.449005" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="30" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.027481" y3="20.073145" z3="24.894906" tolerance="1.500000" />
+     <origin x3="34.898398" y3="18.410591" z3="23.446908" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="31" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.160073" y3="12.824975" z3="26.913059" tolerance="1.500000" />
+     <origin x3="31.009778" y3="13.435522" z3="28.511938" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="32" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.186775" y3="13.113982" z3="24.691028" tolerance="1.500000" />
+     <origin x3="25.144481" y3="15.373272" z3="23.588713" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="33" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.186775" y3="13.113982" z3="24.691028" tolerance="1.500000" />
+     <origin x3="29.320316" y3="10.846137" z3="23.585142" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="34" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.186775" y3="13.113982" z3="24.691028" tolerance="1.500000" />
+     <origin x3="26.480154" y3="9.685751" z3="24.144593" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="35" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.686388" y3="18.657563" z3="25.752246" tolerance="1.500000" />
+     <target x3="32.869969" y3="16.776159" z3="23.977205" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="36" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.370283" y3="22.081336" z3="26.025761" tolerance="1.500000" />
+     <target x3="35.651165" y3="22.451808" z3="24.141598" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="37" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="32.869969" y3="16.776159" z3="23.977205" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="38" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="33.490424" y3="18.252911" z3="28.760545" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="39" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="34.898398" y3="18.410591" z3="23.446908" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="40" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="26.616180" y3="19.451927" z3="24.952780" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="41" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="32.803200" y3="14.225503" z3="22.864305" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="42" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="31.709528" y3="12.861254" z3="26.251890" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="43" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="26.661087" y3="18.388654" z3="22.379522" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="44" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="31.009778" y3="13.435522" z3="28.511938" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="45" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="35.010211" y3="20.529775" z3="22.265346" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="46" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="31.859190" y3="23.749382" z3="23.252346" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="47" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="25.144481" y3="15.373272" z3="23.588713" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="48" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="35.651165" y3="22.451808" z3="24.141598" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="49" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="27.364655" y3="24.080641" z3="26.499642" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="50" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="29.320316" y3="10.846137" z3="23.585142" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="51" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="34.177540" y3="21.879852" z3="31.294121" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="52" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="37.036209" y3="22.223607" z3="28.454732" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="53" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="26.480154" y3="9.685751" z3="24.144593" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="54" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="34.147839" y3="27.799107" z3="27.776431" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement2" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="55" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="32.742286" y3="11.180677" z3="21.103715" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="56" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.756027" y3="5.365624" z3="15.669192" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="57" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="35.425515" y3="7.045284" z3="18.939226" tolerance="1.500000" />
+     <origin x3="38.129827" y3="7.763493" z3="19.668596" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="58" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.542767" y3="15.037713" z3="21.787280" tolerance="1.500000" />
+     <origin x3="34.138860" y3="14.762383" z3="18.884406" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="59" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.552947" y3="14.019609" z3="24.008005" tolerance="1.500000" />
+     <origin x3="30.593924" y3="11.776084" z3="25.280512" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="60" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.552947" y3="14.019609" z3="24.008005" tolerance="1.500000" />
+     <origin x3="35.518221" y3="15.391947" z3="24.499878" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="61" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.552947" y3="14.019609" z3="24.008005" tolerance="1.500000" />
+     <origin x3="33.188308" y3="17.015515" z3="25.788885" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="62" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.474638" y3="8.957704" z3="19.808913" tolerance="1.500000" />
+     <target x3="36.649104" y3="9.708743" z3="20.712899" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="63" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="34.652507" y3="5.617654" z3="17.267848" tolerance="1.500000" />
+     <target x3="37.290820" y3="4.261544" z3="17.567858" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="64" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="36.649104" y3="9.708743" z3="20.712899" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="65" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="34.740867" y3="10.167140" z3="16.065899" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="66" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="38.129827" y3="7.763493" z3="19.668596" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="67" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="30.080562" y3="8.415483" z3="22.263091" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="68" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="37.811863" y3="11.604208" z3="22.387430" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="69" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="35.856419" y3="14.312270" z3="20.550132" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="70" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="31.511675" y3="8.367759" z3="24.651368" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="71" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.138860" y3="14.762383" z3="18.884406" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="72" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="38.094770" y3="5.354026" z3="19.973166" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="73" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="34.024545" y3="3.191495" z3="19.812848" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="74" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="30.593924" y3="11.776084" z3="25.280512" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="75" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="37.290820" y3="4.261544" z3="17.567858" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="76" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="28.707151" y3="4.713519" z3="19.298771" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="77" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="35.518221" y3="15.391947" z3="24.499878" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="78" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="33.197296" y3="7.773488" z3="12.611387" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="79" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="36.739854" y3="5.995898" z3="13.413102" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="80" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="33.188308" y3="17.015515" z3="25.788885" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="81" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="32.896844" y3="0.999658" z3="13.810375" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement3" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="82" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.707873" y3="16.264361" z3="24.976539" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="83" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="30.513726" y3="8.399078" z3="25.992864" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="84" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.748217" y3="12.622303" z3="24.769815" tolerance="1.500000" />
+     <origin x3="25.449687" y3="14.367943" z3="24.944774" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="85" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.138225" y3="19.551702" z3="26.567539" tolerance="1.500000" />
+     <origin x3="31.368301" y3="18.124612" z3="28.992572" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="86" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.941865" y3="20.056670" z3="24.185375" tolerance="1.500000" />
+     <origin x3="34.176028" y3="18.512632" z3="21.619592" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="87" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.941865" y3="20.056670" z3="24.185375" tolerance="1.500000" />
+     <origin x3="30.585566" y3="22.240531" z3="24.957841" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="88" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.941865" y3="20.056670" z3="24.185375" tolerance="1.500000" />
+     <origin x3="33.376608" y3="23.557644" z3="24.509175" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="89" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.245090" y3="14.027227" z3="24.876745" tolerance="1.500000" />
+     <target x3="27.521102" y3="16.033531" z3="24.991269" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="90" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="27.938782" y3="10.344607" z3="25.222547" tolerance="1.500000" />
+     <target x3="25.031755" y3="10.237001" z3="24.568823" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="91" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="27.521102" y3="16.033531" z3="24.991269" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="92" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="29.201059" y3="13.156700" z3="28.779104" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="93" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="25.449687" y3="14.367943" z3="24.944774" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="94" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="33.439453" y3="14.054505" z3="22.114128" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="95" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="27.106727" y3="18.782680" z3="24.852265" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="96" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="29.696834" y3="19.233628" z3="27.612886" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="97" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="32.207367" y3="15.805896" z3="20.334010" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="98" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="31.368301" y3="18.124612" z3="28.992572" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="99" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="24.750552" y3="12.690506" z3="23.333270" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="100" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="27.928272" y3="9.776537" z3="21.696246" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="101" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="34.176028" y3="18.512632" z3="21.619592" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="102" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="25.031755" y3="10.237001" z3="24.568823" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="103" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="33.415433" y3="9.119226" z3="22.257063" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="104" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="30.585566" y3="22.240531" z3="24.957841" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="105" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="29.717049" y3="8.890649" z3="30.036241" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="106" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="25.850571" y3="9.009345" z3="28.857873" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="107" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="33.376608" y3="23.557644" z3="24.509175" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="108" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="27.963146" y3="4.314581" z3="25.199296" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement4" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="109" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="30.980722" y3="16.106226" z3="24.955837" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="110" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="38.412087" y3="18.696933" z3="23.411606" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="111" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.824487" y3="18.389384" z3="20.995232" tolerance="1.500000" />
+     <origin x3="32.102626" y3="17.815209" z3="18.744314" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="112" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.796238" y3="13.089053" z3="26.184045" tolerance="1.500000" />
+     <origin x3="30.928161" y3="11.771686" z3="24.000138" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="113" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.334123" y3="15.034337" z3="26.399324" tolerance="1.500000" />
+     <origin x3="27.784234" y3="17.811729" z3="28.003677" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="114" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.334123" y3="15.034337" z3="26.399324" tolerance="1.500000" />
+     <origin x3="25.457584" y3="13.747870" z3="24.003139" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="115" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.334123" y3="15.034337" z3="26.399324" tolerance="1.500000" />
+     <origin x3="24.338770" y3="13.200142" z3="26.862204" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="116" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="32.828923" y3="17.348479" z3="23.474142" tolerance="1.500000" />
+     <target x3="30.806450" y3="16.777552" z3="20.820441" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="117" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="36.092020" y3="18.922697" z3="21.050434" tolerance="1.500000" />
+     <target x3="35.648336" y3="19.960660" z3="18.290812" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="118" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="30.806450" y3="16.777552" z3="20.820441" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="119" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="35.136300" y3="14.371527" z3="21.774144" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="120" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="32.102626" y3="17.815209" z3="18.744314" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="121" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="31.957090" y3="19.361496" z3="27.083078" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="122" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="28.221172" y3="15.795078" z3="20.504322" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="123" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="29.197138" y3="12.770622" z3="22.609835" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="124" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="29.519454" y3="20.384996" z3="26.208663" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="125" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="30.928161" y3="11.771686" z3="24.000138" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="126" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="32.888962" y3="20.066079" z3="18.280864" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="127" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="35.144877" y3="22.320492" z3="21.612146" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="128" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="27.784234" y3="17.811729" z3="28.003677" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="129" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="35.648336" y3="19.960660" z3="18.290812" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="130" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="36.482619" y3="21.328241" z3="26.911334" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="131" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="25.457584" y3="13.747870" z3="24.003139" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="132" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="39.567586" y3="14.981946" z3="21.966294" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="133" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="38.612474" y3="16.527956" z3="18.353829" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="134" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="24.338770" y3="13.200142" z3="26.862204" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="135" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="41.544436" y3="21.495270" z3="20.926447" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE5) [A] LS1299" id="alignmentElement5" flagCode="111000000">
+   <pharmacophore name="(1KE5) [A] LS1299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="136" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.479885" y3="16.209156" z3="24.011052" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="137" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="32.030571" y3="10.086954" z3="29.162459" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="138" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.463550" y3="12.253388" z3="26.070137" tolerance="1.500000" />
+     <origin x3="25.824316" y3="13.257211" z3="25.447325" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="139" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.032718" y3="20.056807" z3="23.487839" tolerance="1.500000" />
+     <origin x3="30.486164" y3="19.803168" z3="26.419363" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="140" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.872691" y3="19.145742" z3="21.226731" tolerance="1.500000" />
+     <origin x3="33.576826" y3="16.786307" z3="19.805658" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="141" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.872691" y3="19.145742" z3="21.226731" tolerance="1.500000" />
+     <origin x3="29.042157" y3="20.814091" z3="20.876314" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="142" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.872691" y3="19.145742" z3="21.226731" tolerance="1.500000" />
+     <origin x3="31.486284" y3="22.265880" z3="19.593912" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="143" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.568078" y3="14.009431" z3="25.229362" tolerance="1.500000" />
+     <target x3="27.460046" y3="15.098411" z3="24.446584" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="144" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="29.134939" y3="10.684729" z3="27.656870" tolerance="1.500000" />
+     <target x3="26.372292" y3="9.600044" z3="27.372300" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="145" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="27.460046" y3="15.098411" z3="24.446584" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="146" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="29.512061" y3="15.163037" z3="29.054313" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="147" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="25.824316" y3="13.257211" z3="25.447325" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="148" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="33.835847" y3="13.259148" z3="22.661190" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="149" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="26.445660" y3="17.169438" z3="22.887509" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="150" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="28.694687" y3="19.593858" z3="24.784110" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="151" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="32.351084" y3="13.455495" z3="20.313605" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="152" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="30.486164" y3="19.803168" z3="26.419363" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="153" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="25.620701" y3="10.871540" z3="25.039113" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="154" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="29.467117" y3="8.327523" z3="24.994005" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="155" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="33.576826" y3="16.786307" z3="19.805658" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="156" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="26.372292" y3="9.600044" z3="27.372300" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="157" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="34.916681" y3="9.313310" z3="25.425272" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="158" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="29.042157" y3="20.814091" z3="20.876314" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="159" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="30.899352" y3="12.479947" z3="32.359201" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="160" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="27.184640" y3="11.084609" z3="31.580590" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="161" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="31.486284" y3="22.265880" z3="19.593912" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="162" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="30.519778" y3="5.769359" z3="30.863693" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE6) [A] LS2299" id="alignmentElement6" flagCode="111000000">
+   <pharmacophore name="(1KE6) [A] LS2299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="163" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A">
+     <position x3="31.819824" y3="17.649340" z3="23.668320" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="164" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="36.006568" y3="20.974391" z3="29.855049" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="165" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ALA_144_A, ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="35.015998" y3="18.264618" z3="30.021279" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="166" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.369537" y3="22.278284" z3="25.390652" tolerance="1.500000" />
+     <origin x3="34.998493" y3="23.724550" z3="23.092120" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="167" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.024357" y3="15.197866" z3="20.617115" tolerance="1.500000" />
+     <origin x3="35.432381" y3="15.811745" z3="21.248988" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="168" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.024357" y3="15.197866" z3="20.617115" tolerance="1.500000" />
+     <origin x3="31.106676" y3="16.992651" z3="18.091677" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="169" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.550955" y3="19.451408" z3="25.018030" tolerance="1.500000" />
+     <target x3="33.792025" y3="21.458858" z3="22.366756" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="170" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="35.528019" y3="22.520690" z3="27.419443" tolerance="1.500000" />
+     <target x3="36.046801" y3="25.365468" z3="26.756097" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="171" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="33.792025" y3="21.458858" z3="22.366756" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="172" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="37.561695" y3="19.044708" z3="25.132641" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="173" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="34.998493" y3="23.724550" z3="23.092120" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="174" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="29.882080" y3="21.139842" z3="26.886902" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="175" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="29.986538" y3="18.398949" z3="27.122461" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="176" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="34.348849" y3="25.541102" z3="24.583581" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="177" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="32.603054" y3="24.276276" z3="28.660157" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="178" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="36.046801" y3="25.365468" z3="26.756097" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="179" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="33.023066" y3="21.087822" z3="19.718869" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="180" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="34.412347" y3="17.553134" z3="19.881725" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="181" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="35.432381" y3="15.811745" z3="21.248988" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="182" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="31.384266" y3="19.711942" z3="31.397774" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="183" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="40.046681" y3="23.112260" z3="27.583709" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="184" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="39.795354" y3="19.321106" z3="29.214134" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="185" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="31.106676" y3="16.992651" z3="18.091677" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="186" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="37.488314" y3="24.204532" z3="33.124791" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE6) [A] LS2299" id="alignmentElement7" flagCode="111000000">
+   <pharmacophore name="(1KE6) [A] LS2299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="187" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A">
+     <position x3="31.321622" y3="10.948791" z3="24.861553" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="188" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="28.729709" y3="18.698110" z3="24.560776" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="189" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ALA_144_A, ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="31.547556" y3="18.070315" z3="24.429080" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="190" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="26.802525" y3="14.181655" z3="25.006254" tolerance="1.500000" />
+     <origin x3="24.659320" y3="12.561304" z3="24.263517" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="191" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.656739" y3="7.935691" z3="22.740209" tolerance="1.500000" />
+     <origin x3="31.243334" y3="9.975168" z3="20.243499" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="192" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.656739" y3="7.935691" z3="22.740209" tolerance="1.500000" />
+     <origin x3="30.599041" y3="5.530816" z3="23.391116" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="193" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="29.526914" y3="13.120698" z3="24.504031" tolerance="1.500000" />
+     <target x3="26.891157" y3="11.102072" z3="24.195550" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="194" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="26.791227" y3="16.518194" z3="24.766901" tolerance="1.500000" />
+     <target x3="23.855341" y3="16.524132" z3="25.194057" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="195" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="26.891157" y3="11.102072" z3="24.195550" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="196" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="28.720864" y3="14.796081" z3="20.925212" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="197" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="24.659320" y3="12.561304" z3="24.263517" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="198" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="29.606620" y3="13.553541" z3="28.932397" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="199" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="32.141931" y3="13.428610" z3="27.866805" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="200" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="23.608043" y3="13.896730" z3="26.012176" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="201" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="26.412294" y3="16.694943" z3="28.372736" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="202" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="23.855341" y3="16.524132" z3="25.194057" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="203" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="26.731836" y3="8.346601" z3="23.845888" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="204" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="29.584424" y3="8.567514" z3="21.342974" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="205" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="31.243334" y3="9.975168" z3="20.243499" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="206" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="31.700450" y3="18.040035" z3="28.570900" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="207" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="24.934556" y3="18.583078" z3="21.149683" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="208" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="28.920208" y3="19.428036" z3="20.446175" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="209" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="30.599041" y3="5.530816" z3="23.391116" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="210" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="26.235801" y3="22.701189" z3="25.598257" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE6) [A] LS2299" id="alignmentElement8" flagCode="111000000">
+   <pharmacophore name="(1KE6) [A] LS2299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="211" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A">
+     <position x3="32.224480" y3="10.448841" z3="26.868162" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="212" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="30.340686" y3="18.230258" z3="25.206451" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="213" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ALA_144_A, ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="30.306535" y3="17.243268" z3="27.922407" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="214" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.624342" y3="14.145708" z3="22.761143" tolerance="1.500000" />
+     <origin x3="33.116942" y3="13.177683" z3="20.615078" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="215" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="35.014650" y3="8.048656" z3="28.215556" tolerance="1.500000" />
+     <origin x3="36.879959" y3="10.940004" z3="27.472948" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="216" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="35.014650" y3="8.048656" z3="28.215556" tolerance="1.500000" />
+     <origin x3="35.441878" y3="5.908494" z3="25.832615" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="217" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="32.089261" y3="12.877654" z3="25.402363" tolerance="1.500000" />
+     <target x3="33.365785" y3="11.480084" z3="22.657457" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="218" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.097404" y3="16.417590" z3="23.039922" tolerance="1.500000" />
+     <target x3="31.069871" y3="16.748670" z3="20.091778" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="219" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="33.365785" y3="11.480084" z3="22.657457" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="220" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="35.009325" y3="15.659343" z3="25.399940" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="221" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="33.116942" y3="13.177683" z3="20.615078" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="222" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="27.785783" y3="11.934887" z3="24.773559" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="223" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="28.501687" y3="11.746731" z3="27.425157" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="224" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="31.180683" y3="14.068410" z3="19.430233" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="225" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="27.706574" y3="15.553379" z3="22.074376" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="226" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="31.069871" y3="16.748670" z3="20.091778" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="227" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.602008" y3="9.018462" z3="22.267023" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="228" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="36.514153" y3="9.540640" z3="25.510735" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="229" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="36.879959" y3="10.940004" z3="27.472948" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="230" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="26.411719" y3="15.940090" z3="27.364645" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="231" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="34.062193" y3="19.739909" z3="22.056320" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="232" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="33.940659" y3="20.130167" z3="26.170592" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="233" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="35.441878" y3="5.908494" z3="25.832615" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="234" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="28.396219" y3="22.068431" z3="23.013719" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE6) [A] LS2299" id="alignmentElement9" flagCode="111000000">
+   <pharmacophore name="(1KE6) [A] LS2299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="235" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A">
+     <position x3="32.060333" y3="10.074785" z3="25.624684" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="236" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="29.613942" y3="17.825382" z3="24.728118" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="237" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ALA_144_A, ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="32.414666" y3="17.127738" z3="24.583301" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="238" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.610621" y3="13.405568" z3="25.601507" tolerance="1.500000" />
+     <origin x3="25.417815" y3="11.775133" z3="25.050324" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="239" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.281564" y3="6.865006" z3="23.735947" tolerance="1.500000" />
+     <origin x3="31.845127" y3="8.716456" z3="21.109253" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="240" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.281564" y3="6.865006" z3="23.735947" tolerance="1.500000" />
+     <origin x3="31.194420" y3="4.568911" z3="24.637612" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="241" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.299989" y3="12.247139" z3="25.126642" tolerance="1.500000" />
+     <target x3="27.618166" y3="10.267313" z3="25.053579" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="242" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="27.639008" y3="15.713229" z3="25.164784" tolerance="1.500000" />
+     <target x3="24.715662" y3="15.818906" z3="25.659564" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="243" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="27.618166" y3="10.267313" z3="25.053579" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="244" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="29.435836" y3="13.631297" z3="21.438564" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="245" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="25.417815" y3="11.775133" z3="25.050324" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="246" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="30.501174" y3="13.050693" z3="29.499051" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="247" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="33.005523" y3="12.781233" z3="28.387961" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="248" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="24.437888" y3="13.275991" z3="26.703661" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="249" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="27.355776" y3="16.202129" z3="28.750538" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="250" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="24.715662" y3="15.818906" z3="25.659564" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="251" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="27.396005" y3="7.496259" z3="24.943244" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="252" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="30.187556" y3="7.443026" z3="22.363506" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="253" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="31.845127" y3="8.716456" z3="21.109253" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="254" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="32.672610" y3="17.444140" z3="28.707900" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="255" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="25.731430" y3="17.504948" z3="21.430331" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="256" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="29.713618" y3="18.200811" z3="20.563009" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="257" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="31.194420" y3="4.568911" z3="24.637612" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="258" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="27.226254" y3="21.954940" z3="25.480636" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE6) [A] LS2299" id="alignmentElement10" flagCode="111000000">
+   <pharmacophore name="(1KE6) [A] LS2299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="259" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A">
+     <position x3="32.592750" y3="17.345093" z3="23.222908" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="260" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="30.746989" y3="9.469307" z3="22.028930" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="261" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ALA_144_A, ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="33.179184" y3="10.232969" z3="23.390171" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="262" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.841135" y3="13.898690" z3="20.999783" tolerance="1.500000" />
+     <origin x3="26.464352" y3="15.343856" z3="20.818347" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="263" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.650034" y3="20.257169" z3="25.845491" tolerance="1.500000" />
+     <origin x3="30.473757" y3="17.965071" z3="27.394956" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="264" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.650034" y3="20.257169" z3="25.845491" tolerance="1.500000" />
+     <origin x3="30.882541" y3="22.592320" z3="24.480110" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="265" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.996491" y3="15.061062" z3="22.674144" tolerance="1.500000" />
+     <target x3="28.329593" y3="16.909386" z3="21.906956" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="266" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="28.914993" y3="11.553448" z3="21.105684" tolerance="1.500000" />
+     <target x3="26.453007" y3="11.424922" z3="19.455221" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="267" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="28.329593" y3="16.909386" z3="21.906956" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="268" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="28.876510" y3="13.082562" z3="25.476963" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="269" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="26.464352" y3="15.343856" z3="20.818347" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="270" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="32.992715" y3="14.965482" z3="18.697954" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="271" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="34.811895" y3="15.143657" z3="20.756530" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="272" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="26.370024" y3="14.089486" z3="18.729326" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="273" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="30.126611" y3="11.627215" z3="17.684659" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="274" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="26.453007" y3="11.424922" z3="19.455221" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="275" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="27.817274" y3="19.618762" z3="22.277198" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="276" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="29.336410" y3="19.361730" z3="25.752367" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="277" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="30.473757" y3="17.965071" z3="27.394956" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="278" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="35.082143" y3="10.580990" z3="19.724574" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="279" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="25.863220" y3="9.128895" z3="23.472850" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="280" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="29.220739" y3="8.444688" z3="25.786554" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="281" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="30.882541" y3="22.592320" z3="24.480110" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="282" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="29.262137" y3="5.429320" z3="19.839339" tolerance="1.500000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement11" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="283" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.049880" y3="9.850143" z3="24.886531" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="284" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="30.795893" y3="17.818917" z3="24.195034" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="285" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.919532" y3="13.407781" z3="27.503817" tolerance="1.500000" />
+     <origin x3="28.257599" y3="15.212067" z3="29.378331" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="286" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.497394" y3="20.410496" z3="24.231940" tolerance="1.500000" />
+     <origin x3="35.280204" y3="18.385523" z3="26.750913" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="287" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.193749" y3="15.443868" z3="25.393522" tolerance="1.500000" />
+     <target x3="29.553795" y3="16.895356" z3="27.751240" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="288" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="29.322168" y3="11.189254" z3="26.954074" tolerance="1.500000" />
+     <target x3="27.306031" y3="11.262782" z3="29.171355" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="289" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="33.375559" y3="13.502087" z3="27.835800" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="290" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="29.553795" y3="16.895356" z3="27.751240" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="291" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="28.257599" y3="15.212067" z3="29.378331" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="292" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="26.177566" y3="11.281899" z3="25.170887" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="293" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="29.654348" y3="15.240327" z3="21.179495" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="294" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="27.306031" y3="11.262782" z3="29.171355" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="295" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="26.281374" y3="13.827842" z3="29.097343" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="296" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="26.017610" y3="17.005936" z3="26.670911" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="297" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="27.583574" y3="17.053974" z3="21.628222" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="298" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="29.144576" y3="10.554982" z3="20.670881" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="299" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="31.290103" y3="9.265350" z3="30.421424" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="300" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="34.153185" y3="8.823477" z3="27.695301" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="301" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="35.280204" y3="18.385523" z3="26.750913" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="302" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="33.373695" y3="19.652385" z3="27.547176" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="303" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="28.686085" y3="5.330222" z3="26.278609" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="304" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="34.110616" y3="8.333668" z3="17.510853" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement12" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="305" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.488000" y3="10.170125" z3="28.027931" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="306" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="32.969763" y3="10.548294" z3="20.172652" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="307" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.052099" y3="13.874724" z3="24.865163" tolerance="1.500000" />
+     <origin x3="32.965105" y3="15.966354" z3="23.451337" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="308" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="36.657554" y3="8.753611" z3="18.275798" tolerance="1.500000" />
+     <origin x3="38.095101" y3="10.174155" z3="20.916640" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="309" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="32.500140" y3="11.631270" z3="22.631601" tolerance="1.500000" />
+     <target x3="33.594144" y3="14.071218" z3="21.669826" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="310" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.518558" y3="12.973776" z3="26.936352" tolerance="1.500000" />
+     <target x3="31.068192" y3="15.935355" z3="27.049382" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="311" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="35.863988" y3="11.645471" z3="25.554523" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="312" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="33.594144" y3="14.071218" z3="21.669826" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="313" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="32.965105" y3="15.966354" z3="23.451337" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="314" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="28.055346" y3="13.292926" z3="25.945810" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="315" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="29.795364" y3="8.459385" z3="21.786772" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="316" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="31.068192" y3="15.935355" z3="27.049382" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="317" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="30.858710" y3="16.710230" z3="24.405405" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="318" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="30.187481" y3="15.189147" z3="20.759423" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="319" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="28.819002" y3="10.176742" z3="19.817971" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="320" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="27.908664" y3="7.858019" z3="26.093712" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="321" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.441560" y3="14.514314" z3="29.882450" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="322" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="35.216384" y3="10.621179" z3="30.142035" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="323" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="38.095101" y3="10.174155" z3="20.916640" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="324" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="37.293864" y3="12.028884" z3="19.578075" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="325" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="29.139628" y3="12.188643" z3="32.313467" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="326" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="29.702542" y3="2.244988" z3="28.297674" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement13" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="327" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="33.088173" y3="23.788369" z3="27.800692" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="328" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="29.969634" y3="17.196296" z3="24.504736" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="329" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.824177" y3="20.409090" z3="24.700349" tolerance="1.500000" />
+     <origin x3="36.122906" y3="18.356127" z3="23.557524" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="330" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.404898" y3="13.730047" z3="26.945119" tolerance="1.500000" />
+     <origin x3="31.213813" y3="14.300422" z3="28.631299" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="331" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.958783" y3="19.011045" z3="24.940376" tolerance="1.500000" />
+     <target x3="33.811858" y3="17.077982" z3="23.989281" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="332" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="34.936465" y3="22.413190" z3="25.865327" tolerance="1.500000" />
+     <target x3="37.385811" y3="22.176515" z3="24.153240" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="333" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="34.167841" y3="18.761025" z3="28.802591" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="334" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="33.811858" y3="17.077982" z3="23.989281" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="335" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="36.122906" y3="18.356127" z3="23.557524" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="336" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="33.916713" y3="24.014309" z3="22.787440" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="337" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="28.239567" y3="20.931330" z3="24.185163" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="338" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="37.385811" y3="22.176515" z3="24.153240" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="339" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="36.716882" y3="20.304520" z3="22.234099" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="340" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="33.518389" y3="18.528629" z3="20.599082" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="341" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="28.511937" y3="19.857011" z3="21.625781" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="342" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="29.364900" y3="25.361252" z3="25.442312" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="343" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="38.342027" y3="22.158990" z3="28.682102" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="344" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="35.361783" y3="22.631320" z3="31.274260" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="345" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="31.213813" y3="14.300422" z3="28.631299" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="346" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="31.946912" y3="13.519187" z3="26.457365" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="347" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="36.306930" y3="27.967049" z3="27.435546" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="348" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="26.108382" y3="26.862211" z3="30.611817" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement14" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="349" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="36.147920" y3="15.522845" z3="30.570109" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="350" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="30.833716" y3="11.289772" z3="26.341118" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="351" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.023231" y3="11.917230" z3="31.702016" tolerance="1.500000" />
+     <origin x3="30.965865" y3="10.455474" z3="32.617395" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="352" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.383829" y3="13.186269" z3="24.122937" tolerance="1.500000" />
+     <origin x3="27.158143" y3="14.904823" z3="26.960924" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="353" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="32.159874" y3="11.974878" z3="28.624043" tolerance="1.500000" />
+     <target x3="30.086774" y3="10.714068" z3="30.103168" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="354" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="34.768525" y3="13.375635" z3="32.163751" tolerance="1.500000" />
+     <target x3="34.348563" y3="11.616928" z3="34.554804" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="355" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="30.914398" y3="15.724397" z3="30.685363" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="356" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="30.086774" y3="10.714068" z3="30.103168" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="357" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="30.965865" y3="10.455474" z3="32.617395" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="358" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="36.984611" y3="10.594302" z3="31.507998" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="359" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="34.828418" y3="11.571347" z3="25.336727" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="360" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="34.348563" y3="11.616928" z3="34.554804" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="361" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="32.950502" y3="9.440772" z3="33.582846" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="362" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="32.070363" y3="7.591876" z3="30.138377" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="363" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="34.128752" y3="8.873766" z3="25.447635" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="364" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="38.726511" y3="13.481941" z3="27.240805" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="365" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="33.458204" y3="16.076627" z3="35.417117" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="366" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="34.069876" y3="18.747801" z3="32.533556" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="367" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="27.158143" y3="14.904823" z3="26.960924" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="368" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="26.598384" y3="12.627438" z3="27.572431" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="369" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="39.664002" y3="15.765664" z3="34.511339" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="370" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="39.991462" y3="18.861453" z3="24.233761" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement15" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="371" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="34.356196" y3="20.196557" z3="23.909575" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="372" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="31.284177" y3="13.272693" z3="26.491600" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="373" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="32.815744" y3="18.599441" z3="28.282399" tolerance="1.500000" />
+     <origin x3="31.441906" y3="18.138097" z3="30.542295" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="374" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.474656" y3="11.499811" z3="24.829315" tolerance="1.500000" />
+     <origin x3="26.474670" y3="14.658915" z3="25.109710" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="375" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="32.138077" y3="15.843573" z3="26.809787" tolerance="1.500000" />
+     <target x3="30.646571" y3="15.947959" z3="29.226337" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="376" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.840585" y3="20.132414" z3="26.873183" tolerance="1.500000" />
+     <target x3="34.022965" y3="21.162055" z3="29.682655" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="377" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="29.450441" y3="19.099866" z3="25.384194" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="378" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="30.646571" y3="15.947959" z3="29.226337" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="379" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="31.441906" y3="18.138097" z3="30.542295" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="380" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="36.985257" y3="18.765426" z3="28.021768" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="381" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="34.902505" y3="13.558193" z3="24.523878" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="382" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="34.022965" y3="21.162055" z3="29.682655" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="383" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="33.618147" y3="18.936019" z3="31.268788" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="384" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="33.676984" y3="14.933297" z3="31.089401" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="385" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="35.293052" y3="12.152946" z3="26.901174" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="386" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="37.671114" y3="17.049551" z3="22.906402" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="387" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="31.443288" y3="23.853344" z3="26.939032" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="388" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="31.108096" y3="22.907876" z3="23.089620" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="389" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="26.474670" y3="14.658915" z3="25.109710" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="390" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="26.809294" y3="13.912779" z3="27.391171" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="391" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="37.323205" y3="24.475978" z3="24.825276" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="392" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="36.899054" y3="17.492658" z3="16.678308" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE7) [A] LS3299" id="alignmentElement16" flagCode="111000000">
+   <pharmacophore name="(1KE7) [A] LS3299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="393" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="30.410178" y3="17.855138" z3="25.818827" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="394" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, PHE_82_A">
+     <position x3="31.654245" y3="10.540987" z3="28.818750" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="395" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.589608" y3="13.534370" z3="23.822513" tolerance="1.500000" />
+     <origin x3="32.851002" y3="11.464230" z3="22.668907" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="396" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.838043" y3="9.655011" z3="31.900507" tolerance="1.500000" />
+     <origin x3="36.624614" y3="11.602624" z3="29.882215" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="397" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.499383" y3="12.365478" z3="26.797102" tolerance="1.500000" />
+     <target x3="33.023904" y3="10.585100" z3="25.190463" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="398" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.961497" y3="15.766424" z3="23.724487" tolerance="1.500000" />
+     <target x3="31.116811" y3="14.704330" z3="20.925490" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="399" optional="false" disabled="false" weight="1.000000" id="feature6">
+     <position x3="34.900994" y3="15.204074" z3="26.316926" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="400" optional="false" disabled="false" weight="1.000000" id="feature7">
+     <position x3="33.023904" y3="10.585100" z3="25.190463" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="401" optional="false" disabled="false" weight="1.000000" id="feature8">
+     <position x3="32.851002" y3="11.464230" z3="22.668907" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="402" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="27.598728" y3="14.574109" z3="23.135393" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="403" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="28.186371" y3="12.692336" z3="29.444274" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="404" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="31.116811" y3="14.704330" z3="20.925490" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="405" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="30.971593" y3="11.959925" z3="21.211989" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="406" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="29.879116" y3="9.160101" z3="23.862443" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="407" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="27.503009" y3="10.170466" z3="28.468586" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="408" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="26.373611" y3="16.806474" z3="27.941352" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="409" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.237509" y3="18.015897" z3="21.774024" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="410" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="34.227000" y3="19.796259" z3="25.331331" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="411" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="36.624614" y3="11.602624" z3="29.882215" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="412" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="36.162852" y3="9.615976" z3="28.573108" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="413" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="28.668501" y3="20.915059" z3="21.874396" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="414" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="27.086879" y3="21.089124" z3="32.494562" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement17" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="415" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.206983" y3="16.262459" z3="24.867864" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="416" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="36.598993" y3="20.084427" z3="20.239463" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="417" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="32.106609" y3="11.146284" z3="26.884798" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="418" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.316858" y3="20.707105" z3="24.856470" tolerance="1.500000" />
+     <origin x3="32.793802" y3="22.287129" z3="26.878670" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="419" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.886922" y3="14.068804" z3="24.557081" tolerance="1.500000" />
+     <origin x3="27.313589" y3="17.410802" z3="23.449136" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="420" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.411804" y3="14.036695" z3="26.948990" tolerance="1.500000" />
+     <origin x3="26.046339" y3="12.373545" z3="28.493519" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="421" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="28.411804" y3="14.036695" z3="26.948990" tolerance="1.500000" />
+     <origin x3="26.842491" y3="15.237888" z3="28.562815" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="422" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.068735" y3="18.130050" z3="24.383475" tolerance="1.500000" />
+     <target x3="31.537754" y3="19.960339" z3="26.814763" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="423" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="35.591279" y3="21.472252" z3="23.072923" tolerance="1.500000" />
+     <target x3="36.199875" y3="23.749091" z3="25.021892" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="424" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="31.537754" y3="19.960339" z3="26.814763" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="425" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="31.145574" y3="20.677925" z3="21.797561" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="426" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="34.971025" y3="14.386275" z3="24.573164" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="427" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="32.793802" y3="22.287129" z3="26.878670" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="428" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="29.517735" y3="19.396434" z3="28.653119" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="429" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="35.153359" y3="14.234290" z3="27.329960" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="430" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="27.425295" y3="17.993004" z3="25.803932" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="431" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="27.313589" y3="17.410802" z3="23.449136" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="432" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="35.103151" y3="22.847936" z3="27.376153" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="433" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="38.406653" y3="20.327353" z3="25.146028" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="434" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="36.199875" y3="23.749091" z3="25.021892" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="435" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="35.766495" y3="12.534716" z3="24.929676" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="436" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="38.628819" y3="15.925895" z3="21.772868" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="437" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="33.597571" y3="22.245197" z3="18.249366" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="438" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="34.260688" y3="25.180955" z3="21.085149" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="439" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="26.842491" y3="15.237888" z3="28.562815" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="440" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="26.046339" y3="12.373545" z3="28.493519" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="441" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="40.142852" y3="23.524262" z3="19.653595" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="442" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="36.706208" y3="22.087638" z3="15.199039" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement18" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="443" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.085731" y3="13.584395" z3="23.718252" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="444" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.095437" y3="12.359883" z3="31.693450" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="445" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="32.624458" y3="9.638830" z3="20.096452" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="446" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.682038" y3="13.441988" z3="27.939735" tolerance="1.500000" />
+     <origin x3="25.464265" y3="15.039277" z3="26.741563" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="447" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.351831" y3="15.177467" z3="20.844504" tolerance="1.500000" />
+     <origin x3="32.186578" y3="17.693210" z3="23.089147" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="448" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.473874" y3="14.164350" z3="19.642576" tolerance="1.500000" />
+     <origin x3="31.825888" y3="14.824665" z3="16.450847" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="449" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.473874" y3="14.164350" z3="19.642576" tolerance="1.500000" />
+     <origin x3="29.810785" y3="15.693998" z3="18.457521" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="450" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="29.907193" y3="13.188950" z3="26.093819" tolerance="1.500000" />
+     <target x3="27.225915" y3="14.828905" z3="24.779925" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="451" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="28.289254" y3="13.243143" z3="30.171861" tolerance="1.500000" />
+     <target x3="25.270387" y3="13.502196" z3="30.586831" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="452" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="27.225915" y3="14.828905" z3="24.779925" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="453" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="30.616290" y3="16.726963" z3="28.057694" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="454" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="31.755804" y3="9.599937" z3="24.922424" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="455" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="25.464265" y3="15.039277" z3="26.741563" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="456" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="26.596178" y3="15.726759" z3="22.215688" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="457" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="29.746463" y3="8.713437" z3="23.239290" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="458" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="30.029512" y3="17.352349" z3="22.027365" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="459" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="32.186578" y3="17.693210" z3="23.089147" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="460" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="24.285836" y3="13.348161" z3="28.024729" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="461" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="26.905517" y3="9.854121" z3="29.804864" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="462" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="25.270387" y3="13.502196" z3="30.586831" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="463" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="32.501242" y3="7.880113" z3="24.101042" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="464" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="32.172094" y3="8.125295" z3="29.531510" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="465" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="31.812115" y3="16.423054" z3="32.477645" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="466" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="27.701013" y3="16.778695" z3="32.746748" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="467" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="29.810785" y3="15.693998" z3="18.457521" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="468" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="31.825888" y3="14.824665" z3="16.450847" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="469" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="28.672361" y3="11.465427" z3="35.943544" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="470" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="33.594398" y3="14.545917" z3="35.983749" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement19" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="471" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="34.782404" y3="14.638873" z3="24.056932" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="472" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="29.500299" y3="19.615106" z3="27.583940" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="473" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="33.190274" y3="10.567770" z3="20.600947" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="474" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.462874" y3="19.897087" z3="24.247608" tolerance="1.500000" />
+     <origin x3="36.059696" y3="21.013826" z3="23.291115" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="475" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="36.860275" y3="11.315749" z3="24.812451" tolerance="1.500000" />
+     <origin x3="37.969030" y3="14.007451" z3="26.874150" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="476" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="37.321252" y3="11.795008" z3="22.455425" tolerance="1.500000" />
+     <origin x3="39.454496" y3="9.562050" z3="21.355320" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="477" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="37.321252" y3="11.795008" z3="22.455425" tolerance="1.500000" />
+     <origin x3="39.682108" y3="12.495373" z3="21.787679" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="478" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.560547" y3="17.000571" z3="24.400586" tolerance="1.500000" />
+     <target x3="36.400606" y3="18.395411" z3="23.138243" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="479" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.904305" y3="20.858573" z3="25.674859" tolerance="1.500000" />
+     <target x3="32.839844" y3="23.423585" z3="24.297054" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="480" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="36.400606" y3="18.395411" z3="23.138243" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="481" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="35.021001" y3="18.257339" z3="28.028914" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="482" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="30.817788" y3="14.335715" z3="22.655204" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="483" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="36.059696" y3="21.013826" z3="23.291115" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="484" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="38.690077" y3="17.337780" z3="21.947546" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="485" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="31.680040" y3="14.620271" z3="20.041429" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="486" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="38.965418" y3="14.884313" z3="24.840723" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="487" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="37.969030" y3="14.007451" z3="26.874150" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="488" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="34.422926" y3="22.479347" z3="22.257520" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="489" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="29.907711" y3="21.161899" z3="22.599718" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="490" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="32.839844" y3="23.423585" z3="24.297054" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="491" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="29.689183" y3="12.995453" z3="21.597805" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="492" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="27.038215" y3="16.792472" z3="24.463716" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="493" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="32.006736" y3="20.179238" z3="30.906209" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="494" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="33.443574" y3="23.481101" z3="28.873169" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="495" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="39.682108" y3="12.495373" z3="21.787679" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="496" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="39.454496" y3="9.562050" z3="21.355320" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="497" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="27.268852" y3="24.048461" z3="27.901191" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="498" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="28.078543" y3="20.841356" z3="32.673649" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement20" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="499" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="30.267234" y3="15.618999" z3="24.556628" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="500" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="32.198607" y3="22.912203" z3="21.696159" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="501" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="31.260071" y3="10.939253" z3="21.698859" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="502" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="33.448493" y3="19.861121" z3="25.701319" tolerance="1.500000" />
+     <origin x3="33.839311" y3="19.316826" z3="28.609320" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="503" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="27.141917" y3="13.153197" z3="24.845985" tolerance="1.500000" />
+     <origin x3="26.634599" y3="16.088123" z3="26.809156" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="504" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="29.022923" y3="11.851337" z3="25.720481" tolerance="1.500000" />
+     <origin x3="27.875927" y3="8.955083" z3="26.741841" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="505" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="29.022923" y3="11.851337" z3="25.720481" tolerance="1.500000" />
+     <origin x3="29.054520" y3="11.261601" z3="28.202668" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="506" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="31.728038" y3="17.866082" z3="24.483698" tolerance="1.500000" />
+     <target x3="32.413516" y3="17.255574" z3="27.764311" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="507" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.450558" y3="21.900009" z3="24.590658" tolerance="1.500000" />
+     <target x3="35.546764" y3="22.582512" z3="26.710322" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="508" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="32.413516" y3="17.255574" z3="27.764311" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="509" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="29.127570" y3="20.685985" z3="25.954371" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="510" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="32.601262" y3="15.610501" z3="21.045621" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="511" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="33.839311" y3="19.316826" z3="28.609320" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="512" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="31.915389" y3="15.095757" z3="29.456966" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="513" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="34.426364" y3="13.892550" z3="22.217764" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="514" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="28.291714" y3="15.128124" z3="28.302097" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="515" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="26.634599" y3="16.088123" z3="26.809156" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="516" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="36.009696" y3="20.155571" z3="27.915761" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="517" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="36.670470" y3="20.698338" z3="23.278013" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="518" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="35.546764" y3="22.582512" z3="26.710322" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="519" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="33.085904" y3="14.290529" z3="19.558698" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="520" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="33.927845" y3="19.582018" z3="18.584163" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="521" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="29.076596" y3="24.748880" z3="23.821626" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="522" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="31.887647" y3="25.395688" z3="26.784681" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="523" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="29.054520" y3="11.261601" z3="28.202668" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="524" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="27.875927" y3="8.955083" z3="26.741841" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="525" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="35.167033" y3="26.902306" z3="21.649550" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="526" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="29.515967" y3="27.455468" z3="20.434256" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement21" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="527" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="32.383313" y3="16.563587" z3="24.514031" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="528" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="32.658531" y3="23.911009" z3="21.190937" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="529" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="32.527996" y3="11.905044" z3="21.459584" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="530" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="35.494194" y3="21.006577" z3="24.421404" tolerance="1.500000" />
+     <origin x3="36.971576" y3="20.534662" z3="26.970934" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="531" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="29.748316" y3="13.920498" z3="25.929088" tolerance="1.500000" />
+     <origin x3="29.827989" y3="16.851840" z3="27.960366" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="532" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.896006" y3="12.748000" z3="26.031257" tolerance="1.500000" />
+     <origin x3="31.392125" y3="9.805611" z3="27.386068" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="533" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.896006" y3="12.748000" z3="26.031257" tolerance="1.500000" />
+     <origin x3="32.885070" y3="12.202236" z3="28.319036" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="534" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="33.570682" y3="18.892457" z3="23.918071" tolerance="1.500000" />
+     <target x3="35.463675" y3="18.378215" z3="26.703238" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="535" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="34.957276" y3="23.023343" z3="23.404049" tolerance="1.500000" />
+     <target x3="37.645261" y3="23.864794" z3="24.595504" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="536" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="35.463675" y3="18.378215" z3="26.703238" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="537" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="31.535602" y3="21.575762" z3="26.270832" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="538" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="33.239325" y3="16.636692" z3="20.386461" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="539" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="36.971576" y3="20.534662" z3="26.970934" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="540" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="35.765129" y3="16.220704" z3="28.444586" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="541" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="35.471611" y3="15.050472" z3="20.782788" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="542" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="31.977339" y3="16.017366" z3="28.722238" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="543" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="29.827989" y3="16.851840" z3="27.960366" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="544" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="38.672016" y3="21.490078" z3="25.524984" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="545" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="37.525154" y3="21.994788" z3="20.978568" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="546" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="37.645261" y3="23.864794" z3="24.595504" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="547" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="33.216326" y3="15.323698" z3="18.816856" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="548" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="33.307513" y3="20.639252" z3="17.635751" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="549" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="30.444600" y3="25.592609" z3="24.338742" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="550" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="34.110624" y3="26.455073" z3="26.046512" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="551" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="32.885070" y3="12.202236" z3="28.319036" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="552" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="31.392125" y3="9.805611" z3="27.386068" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="553" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="35.144613" y3="28.070091" z3="20.070190" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="554" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="29.424543" y3="28.264369" z3="21.050259" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+  <alignmentElement name="(1KE8) [A] LS4299" id="alignmentElement22" flagCode="111000000">
+   <pharmacophore name="(1KE8) [A] LS4299" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+    <point name="H" featureId="555" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
+     <position x3="31.643740" y3="16.206319" z3="24.699172" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="556" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ALA_144_A, ALA_31_A, LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="31.793533" y3="8.911117" z3="28.143138" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="557" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A">
+     <position x3="30.258759" y3="16.949048" z3="19.352886" tolerance="1.500000" />
+    </point>
+    <vector name="HBA" featureId="558" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="29.238030" y3="13.395359" z3="28.666211" tolerance="1.500000" />
+     <origin x3="28.219653" y3="15.706095" z3="30.256454" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="559" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="34.095003" y3="18.865328" z3="23.010241" tolerance="1.500000" />
+     <origin x3="34.821410" y3="18.489377" z3="26.482445" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="560" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="LYS_89_A" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.860900" y3="19.819463" z3="22.700130" tolerance="1.500000" />
+     <origin x3="32.187879" y3="22.738721" z3="21.244768" tolerance="2.250000" />
+    </vector>
+    <vector name="HBA" featureId="561" optional="false" disabled="false" weight="1.000000" id="feature6" envCompound="HOH" hasSyntheticProjectedPoint="false" pointsToLigand="true">
+     <target x3="31.860900" y3="19.819463" z3="22.700130" tolerance="1.500000" />
+     <origin x3="31.256642" y3="21.955425" z3="23.958136" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="562" optional="false" disabled="false" weight="1.000000" id="feature7" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="30.709387" y3="14.296428" z3="26.332558" tolerance="1.500000" />
+     <target x3="29.325989" y3="16.834329" z3="28.135417" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="563" optional="false" disabled="false" weight="1.000000" id="feature8" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="29.854112" y3="11.281753" z3="29.403605" tolerance="1.500000" />
+     <target x3="27.589261" y3="11.771336" z3="31.399506" tolerance="2.250000" />
+    </vector>
+    <volume type="exclusion" featureId="564" optional="false" disabled="false" weight="1.000000" id="feature9">
+     <position x3="29.325989" y3="16.834329" z3="28.135417" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="565" optional="false" disabled="false" weight="1.000000" id="feature10">
+     <position x3="33.515708" y3="14.215922" z3="29.331766" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="566" optional="false" disabled="false" weight="1.000000" id="feature11">
+     <position x3="30.038976" y3="13.084667" z3="22.363588" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="567" optional="false" disabled="false" weight="1.000000" id="feature12">
+     <position x3="28.219653" y3="15.706095" z3="30.256454" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="568" optional="false" disabled="false" weight="1.000000" id="feature13">
+     <position x3="29.056019" y3="19.574623" z3="27.692788" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="569" optional="false" disabled="false" weight="1.000000" id="feature14">
+     <position x3="27.719530" y3="14.535627" z3="21.949874" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="570" optional="false" disabled="false" weight="1.000000" id="feature15">
+     <position x3="32.759163" y3="19.721192" z3="26.837787" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="571" optional="false" disabled="false" weight="1.000000" id="feature16">
+     <position x3="34.821410" y3="18.489377" z3="26.482445" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="572" optional="false" disabled="false" weight="1.000000" id="feature17">
+     <position x3="26.429611" y3="14.077699" z3="30.454341" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="573" optional="false" disabled="false" weight="1.000000" id="feature18">
+     <position x3="26.752468" y3="10.254086" z3="27.712868" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="574" optional="false" disabled="false" weight="1.000000" id="feature19">
+     <position x3="27.589261" y3="11.771336" z3="31.399506" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="575" optional="false" disabled="false" weight="1.000000" id="feature20">
+     <position x3="29.576018" y3="12.755296" z3="20.397545" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="576" optional="false" disabled="false" weight="1.000000" id="feature21">
+     <position x3="30.021424" y3="8.395871" z3="23.631035" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="577" optional="false" disabled="false" weight="1.000000" id="feature22">
+     <position x3="34.781648" y3="10.076244" z3="30.854518" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="578" optional="false" disabled="false" weight="1.000000" id="feature23">
+     <position x3="31.667762" y3="10.992763" z3="33.416503" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="579" optional="false" disabled="false" weight="1.000000" id="feature24">
+     <position x3="31.256642" y3="21.955425" z3="23.958136" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="580" optional="false" disabled="false" weight="1.000000" id="feature25">
+     <position x3="32.187879" y3="22.738721" z3="21.244768" tolerance="1.000000" />
+    </volume>
+    <volume type="exclusion" featureId="581" optional="false" disabled="false" weight="1.000000" id="feature26">
+     <position x3="29.759050" y3="5.476564" z3="31.109511" tolerance="1.500000" />
+    </volume>
+    <volume type="exclusion" featureId="582" optional="false" disabled="false" weight="1.000000" id="feature27">
+     <position x3="35.529278" y3="5.794090" z3="30.542838" tolerance="1.000000" />
+    </volume>
+   </pharmacophore>
+  </alignmentElement>
+ </ContainerPharmacophores>
+</ElementContainer>
