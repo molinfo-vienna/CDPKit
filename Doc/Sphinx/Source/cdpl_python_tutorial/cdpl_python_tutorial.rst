@@ -59,7 +59,7 @@ Basic Concepts
 Dynamic Properties
 ------------------
 
-The *CDPL* stores properties of certain data types such as molecules, atoms, bonds, pharmacophores, etc. not as ordinary data members of the associated classes
+The *CDPL* stores properties associated with certain types of data like molecules, atoms, bonds, pharmacophores, etc. not as ordinary data members of the implementing classes
 but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute of Python objects). This design decision was made due to several advantages of this approach:
 
 * Flexibility and extensibility: new properties can be defined at runtime by user code
@@ -73,13 +73,33 @@ but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute o
   default value.
 
 All *CDPL* classes supporting this kind of dynamic property storage derive from class 
-`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ that are created on-the-fly in the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. *<PN>* denotes the *CDPL* sub-package name
+`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. *<PN>* denotes the *CDPL* sub-package name
 (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
 properties have been defined (example: atom property keys accessible as members of class
 `CDPL.Chem.AtomProperty`_).
 Property values virtually can be of any type and get stored in the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
-Since `CDPL.Base.PropertyContainer`_ methods operating on specific properties always demand the unique key of the property as argument, corresponding code is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the low-level `CDPL.Base.PropertyContainer`_ method calls and provide them with the correct property key and value type. Futhermore, the functions also constrain the type of the `CDPL.Base.PropertyContainer`_  subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example for such four functions that operate on the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances with  integer being the property value type.
+Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as argument and setter/getter methods in addition require knowledge of the value type, corresponding code is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example of such four functions that have been provided for the property 
+`CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
 
+Control-Parameters
+------------------
+
+Control-parameters are used for the runtime configuration of arbitrary functionality (in the *CDPL* mainly used by the data I/O and visualization code) in a generic, functionality independent way.
+The implementation and usage of the control-parameter infrastructure largely parallels the one for properties: 
+
+* Control-parameters are identified via unique instances of class `CDPL.Base.LookupKey`_ 
+* Values can be of any type and are stored in a dictionary as `CDPL.Base.Any`_ objects
+* Keys of pre-defined control-parameters are exported as static attributes of classes that follow the naming
+  scheme *CDPL.<PN>.ControlParameter* (<PN> = *CDPL* sub-package name)
+* Four convenience functions are provided for each control-parameter introduced by a package
+
+*CDPL* classes eomploying the control-parameter infrastructure directly or indirectly derive from class
+`CDPL.Base.ControlParameterContainer`_. The class provides methods which are similar to those found in 
+`CDPL.Base.PropertyContainer`_ but also offers methods that allow to link
+`CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. Values of
+parameters stored in a container instance always override the parameter values of its parent
+container. Moreover, if a requested parameter value is not available, the request is internally
+forwarded to the registered parent instance (which may again forward the request to its parent). 
 
 **TODO**
 
@@ -668,6 +688,8 @@ Example: Counting element symbols and bond orders
 .. _Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
 .. _CDPL.Base.PropertyContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1PropertyContainer.html
+
+.. _CDPL.Base.ControlParameterContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html
 
 .. _CDPL.Base.LookupKey: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1LookupKey.html
 
