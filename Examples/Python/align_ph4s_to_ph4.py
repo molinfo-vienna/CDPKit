@@ -38,6 +38,9 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit(f'Error: reading reference pharmacophore failed:\n{str(e)}')
 
+    # remove exclusion volumes
+    Pharm.removeFeaturesWithType(ph4, Pharm.FeatureType.EXCLUSION_VOLUME)
+
     return ph4
 
 def parseArgs() -> argparse.Namespace:
@@ -126,7 +129,7 @@ def main() -> None:
         
     almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
     almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
-    
+
     # create pharmacophore fit score calculator instance
     almnt_score = Pharm.PharmacophoreFitScore()
     

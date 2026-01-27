@@ -39,6 +39,9 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit('Error: reading reference pharmacophore failed:\n' + str(e))
 
+    # remove exclusion volumes
+    Pharm.removeFeaturesWithType(ph4, Pharm.FeatureType.EXCLUSION_VOLUME)
+
     return ph4
 
 # generates and returns the pharmacophore of the specified molecule
