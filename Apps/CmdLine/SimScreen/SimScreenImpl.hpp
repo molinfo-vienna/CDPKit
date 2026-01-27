@@ -161,7 +161,7 @@ namespace SimScreen
         typedef boost::ptr_vector<ScoringFunction>                                                                   ScoringFunctionList;
         typedef boost::ptr_vector<DescriptorCalculator>                                                              DescriptorCalculatorList;
         typedef CDPL::Internal::Timer                                                                                Timer;
-        typedef std::auto_ptr<ScreeningProcessor>                                                                    ScreeningProcessorPtr;
+        typedef std::unique_ptr<ScreeningProcessor>                                                                  ScreeningProcessorPtr;
         
         std::string                       queryFile;
         std::string                       databaseFile;

@@ -23,11 +23,11 @@ MSGPACK_API_VERSION_NAMESPACE(v1) {
 /// @endcond
 
 template <typename T>
-struct unique_ptr : std::auto_ptr<T> {
-    explicit unique_ptr(T* p = 0) throw() : std::auto_ptr<T>(p) {}
-    unique_ptr(unique_ptr& a) throw() : std::auto_ptr<T>(a) {}
+struct unique_ptr : std::unique_ptr<T> {
+    explicit unique_ptr(T* p = 0) throw() : std::unique_ptr<T>(p) {}
+    unique_ptr(unique_ptr& a) throw() : std::unique_ptr<T>(a) {}
     template<class Y>
-    unique_ptr (unique_ptr<Y>& a) throw() : std::auto_ptr<T>(a) {}
+    unique_ptr (unique_ptr<Y>& a) throw() : std::unique_ptr<T>(a) {}
 };
 
 template <typename T>

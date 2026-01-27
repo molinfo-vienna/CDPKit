@@ -480,7 +480,7 @@ void SimScreenImpl::readQueryMolecules()
     std::size_t num_failed = 0;
     
     while (!termSignalCaught()) {
-        std::auto_ptr<Chem::Molecule> query_mol(new Chem::BasicMolecule());
+        std::unique_ptr<Chem::Molecule> query_mol(new Chem::BasicMolecule());
 
         if (!queryReader->read(*query_mol))
             break;
@@ -490,7 +490,7 @@ void SimScreenImpl::readQueryMolecules()
             num_failed++;
         }
         
-        queryMolecules.push_back(query_mol);
+        queryMolecules.push_back(query_mol.release());
     }
 
     if (termSignalCaught())
