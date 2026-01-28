@@ -12,7 +12,8 @@ Other ways to install the Python bindings are described in section `Installation
 CDPL Package Overview
 =====================
 
-The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages together with a brief description of the kind of functionality they provide:
+The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages 
+together with a brief description of the kind of functionality they provide:
 
 .. list-table::
    :widths: 15 30
@@ -30,7 +31,7 @@ The *CDPL* comprises several sub-packages each providing functionality related t
      - Infrastructure for the in-memory representation, I/O and basic processing of molecular
        structures and reactions
    * - `CDPL.MolProp`_
-     - Functionality for the calculation/preciction of physicochemical molecular properties
+     - Functionality for the calculation/prediction of physicochemical and topological atom, bond and molecule properties
    * - `CDPL.Biomol`_
      - Functionality for the I/O and processing of biological macromolecules
    * - `CDPL.Descr`_
@@ -51,7 +52,7 @@ The *CDPL* comprises several sub-packages each providing functionality related t
      - Functionality for the generation of GRAIL data sets :cite:`doi:10.1021/acs.jctc.8b00495` and GRADE
        descriptors :cite:`doi:10.1021/acs.jcim.4c01902`
    * - `CDPL.Vis`_
-     - Functionality for molecule, reaction and pharmacophore visualization
+     - Functionality for molecule, reaction and 3D pharmacophore visualization
 
 Basic Concepts
 ==============
@@ -73,33 +74,49 @@ but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute o
   default value.
 
 All *CDPL* classes supporting this kind of dynamic property storage derive from class 
-`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. *<PN>* denotes the *CDPL* sub-package name
-(see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
-properties have been defined (example: atom property keys accessible as members of class
-`CDPL.Chem.AtomProperty`_).
+`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
+that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
+*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
+properties have been defined (example: atom property keys accessible via class `CDPL.Chem.AtomProperty`_).
 Property values virtually can be of any type and get stored in the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
-Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as argument and setter/getter methods in addition require knowledge of the value type, corresponding code is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example of such four functions that have been provided for the property 
+Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as argument and setter/getter methods in addition require knowledge of the value type, corresponding code
+is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the 
+low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
+subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example of such four functions that have been provided for the property 
 `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
 
 Control-Parameters
 ------------------
 
-Control-parameters are used for the runtime configuration of arbitrary functionality (in the *CDPL* mainly used by the data I/O and visualization code) in a generic, functionality independent way.
-The implementation and usage of the control-parameter infrastructure largely parallels the one for properties: 
+Control-parameters are used for the runtime configuration of arbitrary functionality in a generic, flexible and functionality independent way (in the *CDPL* mainly used by the data I/O and visualization code).
+The implementation and usage of the control-parameter infrastructure largely parallels the one for dynamic properties: 
 
 * Control-parameters are identified via unique instances of class `CDPL.Base.LookupKey`_ 
 * Values can be of any type and are stored in a dictionary as `CDPL.Base.Any`_ objects
 * Keys of pre-defined control-parameters are exported as static attributes of classes that follow the naming
-  scheme *CDPL.<PN>.ControlParameter* (<PN> = *CDPL* sub-package name)
+  scheme *CDPL.<PN>.ControlParameter* (<PN> = *CDPL* sub-package name, example: `CDPL.Chem.ControlParameter`_)
 * Four convenience functions are provided for each control-parameter introduced by a package
 
-*CDPL* classes eomploying the control-parameter infrastructure directly or indirectly derive from class
+*CDPL* classes employing the control-parameter infrastructure (directly or indirectly) derive from class
 `CDPL.Base.ControlParameterContainer`_. The class provides methods which are similar to those found in 
-`CDPL.Base.PropertyContainer`_ but also offers methods that allow to link
-`CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. Values of
-parameters stored in a container instance always override the parameter values of its parent
-container. Moreover, if a requested parameter value is not available, the request is internally
-forwarded to the registered parent instance (which may again forward the request to its parent). 
+`CDPL.Base.PropertyContainer`_ but also offers methods (`setParent()`_ and `getParent()`_) that allow to connect
+`CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. This way tree-like hierarchies of 
+`CDPL.Base.ControlParameterContainer`_ instances for resolving parameter value requests can be built. 
+If a requested parameter value is not stored in a given container, the request gets automatically forwarded to the registered parent
+container which may again forward the request to its parent until a value is found or the root of the tree has been reached.
+Furthermore, methods are provided which allow the registration of user-defined functions or function objects that get called on events
+such as parameter value change (methods `registerParameterChangedCallback()`_ and `unregisterParameterChangedCallback()`_), parameter value removal 
+(methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change (methods `registerParentChangedCallback()`_ 
+and `unregisterParentChangedCallback()`_).
+
+Data I/O
+--------
+
+Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) from/to a data source/sink (e.g. a file) derive from abstract
+classes that follow the naming schemes *CDPL.<PN>.<DT>ReaderBase* and *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package name and *<DT>* is the name of the class 
+representing the data type to read/write in memory (e.g., `CDPL.Chem.MoleculeReaderBase`_ and `CDPL.Chem.MolecularGraphWriterBase`_).
+The mentioned abstract base classes derive from the abstract class `CDPL.Base.DataIOBase`_ which itself derives from `CDPL.Base.ControlParameterContainer`_. Concrete classes implementing  
+particular data I/O formats are thus configurable via format specific control-parameters (see `CDPL.Chem.ControlParameter`_ for examples).
 
 **TODO**
 
@@ -109,7 +126,8 @@ Working with Molecules
 In-memory Representation of Molecular Structures
 ------------------------------------------------
 
-The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. Concrete data structures for the in-memory representation of atoms, bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
+The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. Concrete data structures for the in-memory representation of atoms, 
+bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
  
 The following table provides an overview of the most relevant interfaces and data structures provided by the *CDPL* for molecular data representation and processing:
    
@@ -161,13 +179,12 @@ The following table provides an overview of the most relevant interfaces and dat
    * - `CDPL.Chem.MolecularGraph`_
      - Interface
      - `CDPL.Chem.AtomContainer`_, `CDPL.Chem.BondContainer`_, `CDPL.Base.PropertyContainer`_
-     - Represents an arbitrary molecular graph consisting of `CDPL.Chem.Atom`_ objects, bonds between atoms are
-       described by corresponding `CDPL.Chem.Bond`_ objects; specifies additional methods for cloning and
-       atom/bond sequence reordering
+     - Represents an arbitrary molecular graph described by a list of `CDPL.Chem.Atom`_ and a list of `CDPL.Chem.Bond`_ instances,
+       specifies additional methods for cloning and atom/bond sequence reordering
    * - `CDPL.Chem.Molecule`_
      - Interface
      - `CDPL.Chem.MolecularGraph`_
-     - Extends the `CDPL.Chem.MolecularGraph`_ by methods for atom and bond creation as well as methods for
+     - Extends the `CDPL.Chem.MolecularGraph`_ interface by methods for atom and bond creation as well as methods for
        merging with other molecular graphs
    * - `CDPL.Chem.BasicMolecule`_
      - Implementation
@@ -695,6 +712,10 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Base.Any: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1Any.html
 
+.. _CDPL.Base.DataIOBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataIOBase.html
+
+.. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
+
 .. _CDPL.Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
 .. _CDPL.Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
@@ -751,6 +772,10 @@ Example: Counting element symbols and bond orders
 
 .. _Chem.FileSDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html
 
+.. _CDPL.Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+
+.. _CDPL.Chem.MolecularGraphWriterBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
+
 .. _Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
 .. _numAtoms: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
@@ -771,9 +796,9 @@ Example: Counting element symbols and bond orders
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
-.. _numRecords: https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+.. _numRecords: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
-.. _getNumRecords(): https://cdpkit.org/master/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80
+.. _getNumRecords(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80
 
 .. _Chem.setType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b7bd15a77897e642d44ec56395db91f
 
@@ -786,3 +811,20 @@ Example: Counting element symbols and bond orders
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
 .. _Chem.parseSMARTS(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc
+
+.. _setParent(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac6b8c89fead591acfcdc6d31996a3b84
+
+.. _getParent(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a9d4db56fae26568869b283896b10171a
+
+.. _registerParameterChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a18609f39cfa56248ac4191a1a24740cc
+
+.. _unregisterParameterChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac4130ab4db30b557cc3cbe536c747cea
+
+.. _registerParameterRemovedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a59d55eed967a82380c8b2ed2cd40405b
+
+.. _unregisterParameterRemovedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a6e8209de7f5cfb7a7b3f94cf109b0156
+
+.. _registerParentChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#acf09cf417dfc41787e89825762bb2e32
+
+.. _unregisterParentChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#aca5b0565223043518608dd7a84cb5e0f
+
