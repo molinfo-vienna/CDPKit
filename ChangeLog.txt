@@ -1,5 +1,8 @@
 master:
 
+ - Constructor of class Pharm::PharmacophoreFitScore via a flag now allows to specify whether an on-the-fly performed 3D feature overlap
+   perception (prior to score calculation) shall be carried out in 'query mode' or not (before, ftr. mappings were always perceived in non-query
+   mode which is still the default)
  - New Python cookbook script demonstrating the alignment of multiple input pharmacophores read from a file to a given reference pharmacophore
  - Constructors of class templates Util::FileDataReader and Util::FileDataWriter now throw a Base::IOError if file opening fails
  - Corrected the calculation of skeletal formula visualization bounding boxes which were too small due to not capturing all rendered graphics primitives

@@ -80,6 +80,9 @@ Release V1.3.0
  
 .. rubric:: API Changes
 
+- Constructor of class *Pharm::PharmacophoreFitScore* via an additional argument (flag) now allows to specify whether an on-the-fly performed 3D feature overlap
+  perception (prior to score calculation) shall be carried out in 'query mode' or not (before, ftr. mappings were always perceived in non-query
+  mode which is still the default)
 - New class *Descr::KuvekPocketDescriptorCalculator* implementing a method developed by Kuvek et al. for the calculation of
   receptor binding pocket shape and electrostatics descriptors
 - New pharm. feature property *Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO* (plus associated functions) which stores a string
