@@ -47,11 +47,12 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScore instance.
+    # \param query_mode 
     # \param match_cnt_weight 
     # \param pos_match_weight 
     # \param geom_match_weight 
     # 
-    def __init__(match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
+    def __init__(query_mode: bool = False, match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
