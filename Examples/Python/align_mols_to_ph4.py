@@ -136,7 +136,7 @@ def main() -> None:
     almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
     
     # create pharmacophore fit score calculator instance
-    almnt_score = Pharm.PharmacophoreFitScore()
+    almnt_score = Pharm.PharmacophoreFitScore(True) # True = aligned features have to be within the tolerance spheres of the ref. features
     
     # read and process molecules one after the other until the end of input has been reached
     try:

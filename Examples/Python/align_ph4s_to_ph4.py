@@ -140,7 +140,7 @@ def main() -> None:
     almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
 
     # create pharmacophore fit score calculator instance
-    almnt_score = Pharm.PharmacophoreFitScore()
+    almnt_score = Pharm.PharmacophoreFitScore(args.query_mode)
     
     # read and process molecules one after the other until the end of input has been reached
     try:
