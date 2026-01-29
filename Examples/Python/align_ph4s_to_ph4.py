@@ -86,6 +86,15 @@ def parseArgs() -> argparse.Namespace:
                         default=0.0,
                         help='Minimum required score difference between two consecutively output pharmacophore alignment poses (default: 0.0)',
                         type=float)
+    parser.add_argument('-Q',
+                        dest='query_mode',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='If specified, only alignments where the positions of the features of the input pharmacophores lie strictly '\
+                        'within the tolerance spheres of the reference pharmacophore features will be considered as being valid. Otherwise, '\
+                        'alignments where the position of at least one feature of the aligned pairs lies within the tolerance sphere of the '\
+                        'other feature are also valid (default: false)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -121,9 +130,9 @@ def main() -> None:
     out_ph4 = Pharm.BasicPharmacophore()
 
     # create an instance of the class implementing the pharmacophore alignment algorithm
-    almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
+    almnt = Pharm.PharmacophoreAlignment(args.query_mode) # arg = True -> aligned features must be within the tolerance spheres of the ref. features
 
-    if args.pos_only:                          # clear feature orientation information
+    if args.pos_only:                                     # clear feature orientation information
         Pharm.clearOrientations(ref_ph4)
         Pharm.removePositionalDuplicates(ref_ph4)
         
