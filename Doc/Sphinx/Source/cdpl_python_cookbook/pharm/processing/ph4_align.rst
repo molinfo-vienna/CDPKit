@@ -15,7 +15,7 @@ The script *align_ph4s_to_ph4.py* overlays a set of input pharmacophores with a 
 
 **Synopsis**
 
-  :program:`python` *align_ph4s_to_ph4.py* [-h] -r <file> -i <file> -o <file> [-s <file>] [-n <integer>] [-x] [-d <float>] [-q] [-p]
+  :program:`python` *align_ph4s_to_ph4.py* [-h] -r <file> -i <file> -o <file> [-s <file>] [-n <integer>] [-x] [-d <float>] [-Q] [-q] [-p]
 
 **Mandatory options**
 
@@ -54,6 +54,13 @@ The script *align_ph4s_to_ph4.py* overlays a set of input pharmacophores with a 
 
     Minimum required score difference between two consecutively output pharmacophore alignment poses
     (default: 0.0)
+
+ -Q
+
+    If specified, only alignments where the positions of the features of the input pharmacophores lie strictly
+    within the tolerance spheres of the reference pharmacophore features will be considered as being valid.
+    Otherwise, alignments where the position of at least one feature of the aligned pairs lies within the tolerance
+    sphere of the other feature are also valid (default: false)
 
  -q
 

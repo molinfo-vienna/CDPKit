@@ -73,7 +73,7 @@ but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute o
   point on have a value. This is particularly problematic for properties that cannot be assigned a reasonable
   default value.
 
-All *CDPL* classes supporting this kind of dynamic property storage derive from class 
+All *CDPL* classes supporting this kind of dynamic property storage are derived from class 
 `CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
 that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
 *<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
@@ -97,26 +97,32 @@ The implementation and usage of the control-parameter infrastructure largely par
   scheme *CDPL.<PN>.ControlParameter* (<PN> = *CDPL* sub-package name, example: `CDPL.Chem.ControlParameter`_)
 * Four convenience functions are provided for each control-parameter introduced by a package
 
-*CDPL* classes employing the control-parameter infrastructure (directly or indirectly) derive from class
+*CDPL* classes employing the control-parameter infrastructure (directly or indirectly) are derived from class
 `CDPL.Base.ControlParameterContainer`_. The class provides methods which are similar to those found in 
 `CDPL.Base.PropertyContainer`_ but also offers methods (`setParent()`_ and `getParent()`_) that allow to connect
 `CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. This way tree-like hierarchies of 
 `CDPL.Base.ControlParameterContainer`_ instances for resolving parameter value requests can be built. 
-If a requested parameter value is not stored in a given container, the request gets automatically forwarded to the registered parent
-container which may again forward the request to its parent until a value is found or the root of the tree has been reached.
-Furthermore, methods are provided which allow the registration of user-defined functions or function objects that get called on events
-such as parameter value change (methods `registerParameterChangedCallback()`_ and `unregisterParameterChangedCallback()`_), parameter value removal 
-(methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change (methods `registerParentChangedCallback()`_ 
-and `unregisterParentChangedCallback()`_).
+If a requested parameter value is not stored in a given container, the request gets automatically forwarded to the
+registered parent container which may again forward the request to its parent until a value is found or the root of
+the tree has been reached. Furthermore, methods are provided which allow the registration of user-defined functions
+or function objects that get called on events such as parameter value change (methods 
+`registerParameterChangedCallback()`_ and `unregisterParameterChangedCallback()`_), parameter value removal 
+(methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change 
+(methods `registerParentChangedCallback()`_ and `unregisterParentChangedCallback()`_).
 
 Data I/O
 --------
 
-Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) from/to a data source/sink (e.g. a file) derive from abstract
-classes that follow the naming schemes *CDPL.<PN>.<DT>ReaderBase* and *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package name and *<DT>* is the name of the class 
-representing the data type to read/write in memory (e.g., `CDPL.Chem.MoleculeReaderBase`_ and `CDPL.Chem.MolecularGraphWriterBase`_).
-The mentioned abstract base classes derive from the abstract class `CDPL.Base.DataIOBase`_ which itself derives from `CDPL.Base.ControlParameterContainer`_. Concrete classes implementing  
-particular data I/O formats are thus configurable via format specific control-parameters (see `CDPL.Chem.ControlParameter`_ for examples).
+Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming schemes 
+*CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package
+name and *<DT>* is the name of the data type to read or write (e.g., `CDPL.Chem.MoleculeReaderBase`_ and
+`CDPL.Chem.MolecularGraphWriterBase`_).
+These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing a particular data I/O format
+thus support the configuration of their runtime behavior by control-parameters (see `CDPL.Chem.ControlParameter`_
+for examples).
+
+Each data format implemented by the *CDPL* is described by an instance of class `CDPL.Base.DataFormat`_ which
+stores and allows to retrieve important format-specific information like common file-extensions or mime-type.
 
 **TODO**
 
@@ -494,7 +500,7 @@ Reading Molecules from Files
 
 Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase`_ subclass instance that performs the actual format-specific data decoding work. As with string data, several options exist:
 
-1. Instantiation of class `Chem.MoleculeReader`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behaviour, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
+1. Instantiation of class `Chem.MoleculeReader`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
 2. Instantiation of class `Chem.MoleculeReader`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.SDFMoleculeReader`_ implementing reading MDL SD-file format data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.FileSDFMoleculeReader`_) that accepts a file path as constructor argument.
@@ -713,6 +719,8 @@ Example: Counting element symbols and bond orders
 .. _CDPL.Base.Any: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1Any.html
 
 .. _CDPL.Base.DataIOBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataIOBase.html
+
+.. _CDPL.Base.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataFormat.html
 
 .. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
 
