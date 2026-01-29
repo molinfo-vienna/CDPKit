@@ -40,7 +40,7 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
 
     python::class_<Pharm::PharmacophoreFitScore, boost::noncopyable>("PharmacophoreFitScore", python::no_init)
         .def(python::init<const Pharm::PharmacophoreFitScore&>((python::arg("self"), python::arg("score"))))
-        .def(python::init<double, double, double>((python::arg("self"), 
+        .def(python::init<bool, double, double, double>((python::arg("self"), python::arg("query_mode") = false,
                                                    python::arg("match_cnt_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT, 
                                                    python::arg("pos_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT,
                                                    python::arg("geom_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT)))

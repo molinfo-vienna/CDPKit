@@ -43,9 +43,10 @@ constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT;
 constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT;
 
 
-Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_weight, double pos_match_weight, 
-                            double geom_match_weight):
-    ftrMatchCntWeight(match_cnt_weight), ftrPosMatchWeight(pos_match_weight), ftrGeomMatchWeight(geom_match_weight),
+Pharm::PharmacophoreFitScore::PharmacophoreFitScore(bool query_mode, double match_cnt_weight, double pos_match_weight, 
+                                                    double geom_match_weight):
+    spatFtrMapping(query_mode), ftrMatchCntWeight(match_cnt_weight),
+    ftrPosMatchWeight(pos_match_weight), ftrGeomMatchWeight(geom_match_weight),
     grpRefFtrs(true)
 {}
 
