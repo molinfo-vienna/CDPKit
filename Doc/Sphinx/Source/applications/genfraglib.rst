@@ -19,27 +19,27 @@ Mandatory options
     molecules whose fragments shall be stored in the created fragment library.
     
     Supported Input Formats:
-     - JME Molecular Editor String (.jme)
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - Daylight SMILES String (.smi)
-     - Daylight SMARTS String (.sma)
-     - IUPAC International Chemical Identifier (.inchi, .ichi)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (.cml)
-     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Daylight SMILES String (.smi.gz)
-     - BZip2-Compressed Daylight SMILES String (.smi.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - CDPL Conformer Generator Fragment Library Format (.cfl, .cdf)
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - CDPL Conformer Generator Fragment Library Format (\*.cfl, \*.cdf)
 
     In MERGE mode, specifies multiple existing fragment libraries in CDF format.
 
@@ -91,6 +91,29 @@ Other options
     the supported file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file(s) (because missing, misleading or not supported).
+
+    Supported Input Formats:
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - CDPL Conformer Generator Fragment Library Format (\*.cfl, \*.cdf)
 
   -F [ --preset ] arg
 

@@ -5,6 +5,7 @@
            single: Pharmacophores; Alignment Scoring
            single: Pharmacophore Features; Orientation Property
            single: Pharmacophore Features; Geometry Property
+           single: Pharmacophore Features; Type Property
            single: Data Formats; PML
            single: Data Formats; CDF
            

@@ -20,22 +20,22 @@ Mandatory options
     database.
     
     Supported Input Formats:
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - IUPAC International Chemical Identifier (.inchi, .ichi)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (.cml)
-     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - Pharmacophore Screening Database (.psd)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
 
   -o [ --output ] arg
 
@@ -98,7 +98,24 @@ Other options
     the supported file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file(s) (because missing, misleading or not supported).
-    Note that only storage formats make sense that allow to store atom 3D-coordinates!
+
+    Supported Input Formats:
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
 
   -T [ --tmp-file-dir ] arg
 

@@ -26,11 +26,11 @@ Mandatory options
     a query for the database search.
     
     Supported Input Formats:
-     - Native CDPL-Format (.cdf)
-     - LigandScout Pharmaceutical Markup Language (.pml)
-     - Pharmacophore Screening Database (.psd)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
+     - Native CDPL-Format (\*.cdf)
+     - LigandScout Pharmaceutical Markup Language (\*.pml)
+     - Pharmacophore Screening Database (\*.psd)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
 
 Other options
 -------------
@@ -39,25 +39,25 @@ Other options
 
     Specifies the output file where database molecules matching the query pharmacophore(s) 
     shall be stored.
-    
+
     Supported Output Formats:
-     - JME Molecular Editor String (.jme)
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - Daylight SMILES String (.smi)
-     - Daylight SMARTS String (.sma)
-     - IUPAC International Chemical Identifier (.inchi, .ichi)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Daylight SMILES String (.smi.gz)
-     - BZip2-Compressed Daylight SMILES String (.smi.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - Pharmacophore Screening Database (.psd)
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
 
   -r [ --report ] arg
 
@@ -162,6 +162,25 @@ Other options
     one of the supported file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file (because missing, misleading or not supported).
+    
+    Supported Output Formats:
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
 
   -Q [ --query-format ] arg
 
@@ -169,3 +188,10 @@ Other options
     one of the supported file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file (because missing, misleading or not supported).
+    
+    Supported Input Formats:
+     - Native CDPL-Format (\*.cdf)
+     - LigandScout Pharmaceutical Markup Language (\*.pml)
+     - Pharmacophore Screening Database (\*.psd)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)

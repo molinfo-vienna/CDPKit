@@ -19,21 +19,21 @@ Mandatory options
     The query molecule input file.
     
     Supported Input Formats:
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (.cml)
-     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - Pharmacophore Screening Database (.psd)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
        
     Note that atom 3D-coordinates are required for shape screening!
 
@@ -42,21 +42,21 @@ Mandatory options
     The molecule database file to screen.
     
     Supported Input Formats:
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - Atomic Coordinates XYZ File (.xyz)
-     - Chemical Markup Language Format (.cml)
-     - GZip-Compressed Chemical Markup Language Format (.cml.gz)
-     - BZip2-Compressed Chemical Markup Language Format (.cml.bz2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - Pharmacophore Screening Database (.psd)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
        
     Note that atomic 3D-coordinates are required for shape screening!
 
@@ -94,23 +94,23 @@ Other options
     Hit molecule output file.
     
     Supported Output Formats:
-     - JME Molecular Editor String (.jme)
-     - MDL Structure-Data File (.sdf, .sd)
-     - MDL Molfile (.mol)
-     - Daylight SMILES String (.smi)
-     - Daylight SMARTS String (.sma)
-     - IUPAC International Chemical Identifier (.inchi, .ichi)
-     - Native CDPL-Format (.cdf)
-     - Tripos Sybyl MOL2 File (.mol2)
-     - GZip-Compressed MDL Structure-Data File (.sdf.gz, .sd.gz, .sdz)
-     - BZip2-Compressed MDL Structure-Data File (.sdf.bz2, .sd.bz2)
-     - GZip-Compressed Native CDPL-Format (.cdf.gz)
-     - BZip2-Compressed Native CDPL-Format (.cdf.bz2)
-     - GZip-Compressed Daylight SMILES String (.smi.gz)
-     - BZip2-Compressed Daylight SMILES String (.smi.bz2)
-     - GZip-Compressed Tripos Sybyl MOL2 File (.mol2.gz)
-     - BZip2-Compressed Tripos Sybyl MOL2 File (.mol2.bz2)
-     - Pharmacophore Screening Database (.psd)
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
 
   -r [ --report ] arg
 
@@ -264,6 +264,23 @@ Other options
     of the file (because missing, misleading or not supported).
     Note that atomic 3D-coordinates are required for shape screening!
     
+    Supported Input Formats:
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
+
   -D [ --database-format ] arg
 
     Allows to explicitly specify the format of the screening database file by providing 
@@ -271,10 +288,46 @@ Other options
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file(s) (because missing, misleading or not supported).
     Note that atomic 3D-coordinates are required for shape screening!
-    
+
+    Supported Input Formats:
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - Atomic Coordinates XYZ File (\*.xyz)
+     - Chemical Markup Language Format (\*.cml)
+     - GZip-Compressed Chemical Markup Language Format (\*.cml.gz)
+     - BZip2-Compressed Chemical Markup Language Format (\*.cml.bz2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)
+
   -O [ --output-format ] arg
 
     Allows to explicitly specify the hit molecule output file format by providing one 
     of the supported file-extensions (without leading dot!) as argument.
     This option is useful when the format cannot be auto-detected from the actual extension 
     of the file (because missing, misleading or not supported).
+    
+    Supported Output Formats:
+     - JME Molecular Editor String (\*.jme)
+     - MDL Structure-Data File (\*.sdf, \*.sd)
+     - MDL Molfile (\*.mol)
+     - Daylight SMILES String (\*.smi)
+     - Daylight SMARTS String (\*.sma)
+     - IUPAC International Chemical Identifier (\*.inchi, \*.ichi)
+     - Native CDPL-Format (\*.cdf)
+     - Tripos Sybyl MOL2 File (\*.mol2)
+     - GZip-Compressed MDL Structure-Data File (\*.sdf.gz, \*.sd.gz, \*.sdz)
+     - BZip2-Compressed MDL Structure-Data File (\*.sdf.bz2, \*.sd.bz2)
+     - GZip-Compressed Native CDPL-Format (\*.cdf.gz)
+     - BZip2-Compressed Native CDPL-Format (\*.cdf.bz2)
+     - GZip-Compressed Daylight SMILES String (\*.smi.gz)
+     - BZip2-Compressed Daylight SMILES String (\*.smi.bz2)
+     - GZip-Compressed Tripos Sybyl MOL2 File (\*.mol2.gz)
+     - BZip2-Compressed Tripos Sybyl MOL2 File (\*.mol2.bz2)
+     - Pharmacophore Screening Database (\*.psd)

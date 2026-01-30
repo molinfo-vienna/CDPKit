@@ -7,6 +7,7 @@
            single: Pharmacophores; Alignment Scoring
            single: Pharmacophore Features; Orientation Property
            single: Pharmacophore Features; Geometry Property
+           single: Pharmacophore Features; Type Property
            single: Molecules; Input
            single: Molecules; Output
            single: Molecules; Pharmacophore-based Alignment
