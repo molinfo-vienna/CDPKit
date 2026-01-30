@@ -142,7 +142,7 @@ def main() -> None:
     # create pharmacophore fit score calculator instance
     almnt_score = Pharm.PharmacophoreFitScore(args.query_mode)
     
-    # read and process molecules one after the other until the end of input has been reached
+    # read and process pharmacophores one after the other until the end of input has been reached
     try:
         i = 1
 
