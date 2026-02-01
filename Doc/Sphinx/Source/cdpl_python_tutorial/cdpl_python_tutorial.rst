@@ -110,19 +110,25 @@ or function objects that get called on events such as parameter value change (me
 (methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change 
 (methods `registerParentChangedCallback()`_ and `unregisterParentChangedCallback()`_).
 
-Data I/O
---------
+Data I/O Framework
+------------------
 
 Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming schemes 
 *CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package
-name and *<DT>* is the name of the data type to read or write (e.g., `CDPL.Chem.MoleculeReaderBase`_ and
+name and *<DT>* is the name of the data type to read or write (e.g. `CDPL.Chem.MoleculeReaderBase`_ and
 `CDPL.Chem.MolecularGraphWriterBase`_).
 These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing a particular data I/O format
 thus support the configuration of their runtime behavior by control-parameters (see `CDPL.Chem.ControlParameter`_
-for examples).
+for examples). The name of classes implementing the input/output of data in one of the supported formats all follow the scheme *CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the 
+*CDPL* sub-package name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is 
+the name of the data type to read or write (e.g. `CDPL.Chem.SDFMoleculeReader`_ and
+`CDPL.Chem.SDFMolecularGraphWriter`_).
+These classes all expect an instance of class `CDPL.Base.IOStream`_ as constructor argument which abstracts the type of data source/sink to read from or write to. Subclasses of `CDPL.Base.IOStream`_ are provided that implement a particular type of storage such as files (class `CDPL.Base.FileIOStream`_) and in-memory strings (class `CDPL.Base.StringIOStream`_).
 
 Each data format implemented by the *CDPL* is described by an instance of class `CDPL.Base.DataFormat`_ which
-stores and allows to retrieve important format-specific information like common file-extensions or mime-type.
+stores and gives access to relevant format-specific information such common file-extensions or mime-type. 
+Pre-defined data format descriptors are exported as static attributes of classes following the naming scheme
+*CDPL.<PN>.DataFormat* where *<PN>* is the name of the *CDPL* sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
 
 **TODO**
 
@@ -706,7 +712,13 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Vis: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html
 
+.. _CDPL.Base.IOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IOStream.html
+
+.. _CDPL.Base.StringIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
+
 .. _Base.StringIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
+
+.. _CDPL.Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
 .. _Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
@@ -721,6 +733,8 @@ Example: Counting element symbols and bond orders
 .. _CDPL.Base.DataIOBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataIOBase.html
 
 .. _CDPL.Base.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataFormat.html
+
+.. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
 
 .. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
 
@@ -776,6 +790,8 @@ Example: Counting element symbols and bond orders
 
 .. _Chem.MOL2MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html
 
+.. _CDPL.Chem.SDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
+
 .. _Chem.SDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
 
 .. _Chem.FileSDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html
@@ -783,6 +799,10 @@ Example: Counting element symbols and bond orders
 .. _CDPL.Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
 .. _CDPL.Chem.MolecularGraphWriterBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
+
+.. _CDPL.Chem.SDFMolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
+
+.. _CDPL.Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
 .. _Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
