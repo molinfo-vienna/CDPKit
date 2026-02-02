@@ -96,7 +96,7 @@ def main() -> None:
     else:
         Pharm.removeFeaturesWithType(ref_ph4, working_ref_ph4, Pharm.FeatureType.EXCLUSION_VOLUME)
 
-    # will store the processed reference features
+    # will store the processed input features
     working_ipt_ph4 = Pharm.FeatureSet()
 
     # create reader for input pharmacophores (format specified by file extension)
