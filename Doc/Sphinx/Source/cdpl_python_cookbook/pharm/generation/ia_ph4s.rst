@@ -43,6 +43,10 @@
            single: Pharmacophores; Output
            single: Pharmacophores; Generation
            single: Pharmacophores; Preparation for Generation
+           single: Pharmacophores; Processing
+           single: Pharmacophore Features; Type Property
+           single: Pharmacophore Features; Substructure Property
+           single: Pharmacophore Features; Environment Residue Info Property
            single: Data Formats; MMTF
            single: Data Formats; MOL2
            single: Data Formats; PDB
@@ -58,7 +62,7 @@ ligand molecules.
 
 **Synopsis**
 
-  :program:`python` *gen_ia_ph4s.py* [-h] -r <file> -l <file> -o <file> [-s <res-id> [<res-id> ...]] [-q] [-x]
+  :program:`python` *gen_ia_ph4s.py* [-h] -r <file> -l <file> -o <file> [-i <file>] [-s <res-id> [<res-id> ...]] [-q] [-x]
 
 **Mandatory options**
 
@@ -79,6 +83,10 @@ ligand molecules.
  -h, --help
 
     Show help message and exit
+
+ -i
+ 
+    Interaction data output file
  
  **-s <res-id> [<res-id> ...]**
 

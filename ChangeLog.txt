@@ -1,5 +1,6 @@
 master:
 
+ - New Python cookbook script reporting information about detected feature matches between one or more input pharmacophores and a given reference pharmacophore
  - Constructor of class Pharm::PharmacophoreFitScore via a flag now allows to specify whether an on-the-fly performed 3D feature overlap
    perception (prior to score calculation) shall be carried out in 'query mode' or not (before, ftr. mappings were always perceived in non-query
    mode which is still the default)

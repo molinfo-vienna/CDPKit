@@ -61,11 +61,12 @@ Release V1.3.0
   significantly lowers the barrier for downstream C++ applications to use functionality provied by the CDPL C++ API
 - Improved and much more comprehensive Sphinx documentation index page
 - Complete overhaul of the CDPL Python tutorial which is now based on a `Jupyter <https://jupyter.org>`_ notebook (made available for download)
-- New Python cookbook script demonstrating the alignment of multiple input pharmacophores read from a file to a given reference pharmacophore
-- Additional Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
-- Additional Python cookbook script demonstrating the molecule substrucuture editing functionality
-- Additional Python cookbook script demonstrating the perception of functional groups of molecular graphs
-- Additional Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
+- New Python cookbook script demonstrating how to detect and process feature matches between one or more input pharmacophores and a given reference pharmacophore 
+- New Python cookbook script demonstrating the alignment of one or more input pharmacophores onto a given reference pharmacophore
+- New Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
+- New Python cookbook script demonstrating the molecule substrucuture editing functionality
+- New Python cookbook script demonstrating the perception of functional groups of molecular graphs
+- New Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
    
 .. rubric:: Bug Fixes
 

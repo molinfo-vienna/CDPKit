@@ -10,11 +10,11 @@
 Pharmacophore Feature Mapping Analysis
 ======================================
 
-The script *analyze_ph4_ftr_mpg.py* reports information about the perceived matches between the features of a reference pharmacophore and a set of input pharmacophores.
+The script *report_ph4_ftr_mpg.py* reports information about detected matches between the features of a reference pharmacophore and a set of input pharmacophores.
 
 **Synopsis**
 
-  :program:`python` *analyze_ph4_ftr_mpg.py* [-h] -r <file> -i <file> -o <file> [-x] [-Q] [-q] [-p]
+  :program:`python` *report_ph4_ftr_mpg.py* [-h] -r <file> -i <file> -o <file> [-x] [-Q] [-q] [-p]
 
 **Mandatory options**
 
@@ -47,10 +47,10 @@ The script *analyze_ph4_ftr_mpg.py* reports information about the perceived matc
 
  -Q
 
-    If specified, only alignments where the positions of the features of the input pharmacophores lie strictly
+    If specified, only matches where the positions of the features of the input pharmacophores lie strictly
     within the tolerance spheres of the reference pharmacophore features will be considered as being valid.
-    Otherwise, alignments where the position of at least one feature of the aligned pairs lies within the tolerance
-    sphere of the other feature are also valid (default: false)
+    Otherwise, matches where the position of at least one feature of a pair lies within the tolerance
+    sphere of the other feature are also considered (default: false)
 
  -q
 
@@ -58,9 +58,9 @@ The script *analyze_ph4_ftr_mpg.py* reports information about the perceived matc
 
 **Code**
 
-.. literalinclude:: /downloads/analyze_ph4_ftr_mpg.py
+.. literalinclude:: /downloads/report_ph4_ftr_mpg.py
    :language: python
    :linenos:
    :lines: 19-
 
-:download:`Download source file</downloads/analyze_ph4_ftr_mpg.py>`
+:download:`Download source file</downloads/report_ph4_ftr_mpg.py>`
