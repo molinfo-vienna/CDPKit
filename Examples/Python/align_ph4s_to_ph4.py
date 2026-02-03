@@ -124,8 +124,8 @@ def main() -> None:
 
     if args.score_out_file:
         score_out_file = open(args.score_out_file, 'w')
-    
-    # create an instances of the default implementation of the Pharm.Pharmacophore interface
+
+    # create instances of the default implementation of the Pharm.Pharmacophore interface
     ph4 = Pharm.BasicPharmacophore()
     out_ph4 = Pharm.BasicPharmacophore()
 
@@ -214,7 +214,7 @@ def main() -> None:
                             sys.exit(f'Error: writing alignment pose of parmacophore {ph4_id} failed')
 
                         if args.score_out_file:
-                            score_out_file.write(f'{solution[0]}\n')
+                            score_out_file.write(f'{solution[0]:.4g}\n')
 
                     except Exception as e: # handle exception raised in case of severe write errors
                         sys.exit(f'Error: writing alignment pose of parmacophore {ph4_id} failed:\n{str(e)}')

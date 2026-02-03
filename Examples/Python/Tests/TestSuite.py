@@ -145,6 +145,9 @@ if __name__ == '__main__':
                                     [ '-r', testDataFilePath('1dwc_MIT_ph4.pml'), '-i', testDataFilePath('1ke5678_ph4s.pml'),
                                       '-s', outputFilePath('align_ph4s_to_ph4_scores.txt'),
                                       '-o', outputFilePath('align_ph4s_to_ph4.pml'), '-n', '10', '-d', '1', '-Q' ])
+    errors |= checkScriptFileOutput('report_ph4_ftr_mpg', outputFilePath('report_ph4_ftr_mpg.out'),
+                                    [ '-r', testDataFilePath('1ke5678_ph4s_aligned.pml'), '-i', testDataFilePath('1ke5678_ph4s_aligned.pml'),
+                                      '-o', outputFilePath('report_ph4_ftr_mpg.out'), '-x', '-Q' ])
     errors |= checkScriptOutput('seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 

@@ -1,7 +1,7 @@
 <ElementContainer activeResult="-1">
  <ContainerPharmacophores>
-  <alignmentElement name="" id="alignmentElement0" flagCode="111000000">
-   <pharmacophore name="" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
+  <alignmentElement name="LS2" id="alignmentElement0" flagCode="111000000">
+   <pharmacophore name="LS2" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
     <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="LEU_134_A, VAL_64_A, PHE_80_A, VAL_18_A">
      <position x3="28.532583" y3="14.177302" z3="15.227080" tolerance="1.500000" />
     </point>

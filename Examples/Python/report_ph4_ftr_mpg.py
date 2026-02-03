@@ -1,5 +1,5 @@
 ##
-# analyze_ph4_ftr_mpg.py 
+# report_ph4_ftr_mpg.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -41,7 +41,7 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
     return ph4
 
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Reports information about the perceived matches between the features of a reference pharmacophore and a set of input pharmacophores.')
+    parser = argparse.ArgumentParser(description='Reports information about the detected matches between the features of a reference pharmacophore and a set of input pharmacophores.')
 
     parser.add_argument('-r',
                         dest='ref_ph4_file',
@@ -63,10 +63,10 @@ def parseArgs() -> argparse.Namespace:
                         required=False,
                         action='store_true',
                         default=False,
-                        help='If specified, only alignments where the positions of the features of the input pharmacophores lie strictly '\
+                        help='If specified, only matches where the positions of the features of the input pharmacophores lie strictly '\
                         'within the tolerance spheres of the reference pharmacophore features will be considered as being valid. Otherwise, '\
-                        'alignments where the position of at least one feature of the aligned pairs lies within the tolerance sphere of the '\
-                        'other feature are also valid (default: false)')
+                        'matches where the position of at least one feature of a pair lies within the tolerance sphere of the '\
+                        'other feature are also considered (default: false)')
     parser.add_argument('-x',
                         dest='keep_x_vols',
                         required=False,
@@ -147,8 +147,8 @@ def main() -> None:
                 # output found feature mappings where the features are of the same type
                 for ftr_pair in ftr_mpg.items():
                     out_file.write(f'{i - 1}, {ref_ph4.getFeatureIndex(ftr_pair[0])}, {Pharm.getType(ftr_pair[0])}, {ph4.getFeatureIndex(ftr_pair[1])}, '\
-                                   f'{Pharm.getType(ftr_pair[1])}, {ftr_mpg.getPositionMatchScore(ftr_pair[0], ftr_pair[1])}, '\
-                                   f'{ftr_mpg.getGeometryMatchScore(ftr_pair[0], ftr_pair[1])}\n')
+                                   f'{Pharm.getType(ftr_pair[1])}, {ftr_mpg.getPositionMatchScore(ftr_pair[0], ftr_pair[1]):.4g}, '\
+                                   f'{ftr_mpg.getGeometryMatchScore(ftr_pair[0], ftr_pair[1]):.4g}\n')
                     
                     unmpd_ref_ftrs.discard(working_ref_ph4.getFeatureIndex(ftr_pair[0]))
                     unmpd_ipt_ftrs.discard(working_ipt_ph4.getFeatureIndex(ftr_pair[1]))
@@ -175,7 +175,7 @@ def main() -> None:
                             het_mpd_ipt_ftrs.add(ipt_ftr_idx)
                             
                             out_file.write(f'{i - 1}, {ref_ph4.getFeatureIndex(ref_ftr)}, {Pharm.getType(ref_ftr)}, {ph4.getFeatureIndex(ipt_ftr)}, '\
-                                           f'{Pharm.getType(ipt_ftr)}, {dist_score}, -1\n')
+                                           f'{Pharm.getType(ipt_ftr)}, {dist_score:.4g}, -1\n')
 
                 if not args.quiet:
                     print(f' -> Num. remaining reference features matching input features of any type: {len(het_mpd_ref_ftrs)}')

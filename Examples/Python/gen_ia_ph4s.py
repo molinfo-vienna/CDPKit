@@ -19,6 +19,7 @@
 import sys
 import argparse
 import re
+import os
 
 import CDPL.Chem as Chem
 import CDPL.Biomol as Biomol
@@ -93,7 +94,28 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
         sys.exit('Error: processing of receptor structure failed:\n' + str(e))            
 
     return rec_mol
-   
+
+# outputs useful information about the ligand atoms and pocket residues that are involved in the
+# interactions described by generated pharmacophoric features
+def outputInteractionData(ligand_idx: int, lig_mol: Chem.MolecularGraph, ia_ph4: Pharm.FeatureContainer, out_file) -> None:
+    for ftr in ia_ph4:
+        if Pharm.getType(ftr) == Pharm.FeatureType.EXCLUSION_VOLUME: # only regular features cover ligand atoms
+            continue
+        
+        lig_atom_inds = None
+        lig_substruct = Pharm.getSubstructure(ftr)
+
+        # generate ligand atom index list
+        for atom in lig_substruct.atoms:
+            atom_idx = lig_mol.getAtomIndex(atom)
+
+            if lig_atom_inds:
+                lig_atom_inds = f'{lig_atom_inds}, {atom_idx}'
+            else:
+                lig_atom_inds = str(atom_idx)
+
+        out_file.write(f'{ligand_idx}\t{ia_ph4.getFeatureIndex(ftr)}\t{Pharm.getType(ftr)}\t{lig_atom_inds}\t{Pharm.getEnvironmentResidueInfo(ftr)}\n')
+
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Generates pharmacophores describing the interactions between a given receptor structure and a set of ligand molecules.')
 
@@ -108,10 +130,15 @@ def parseArgs() -> argparse.Namespace:
                         metavar='<file>',
                         help='Ligand structure input file (*.sdf, *.mol2, *.cdf)')
     parser.add_argument('-o',
-                        dest='out_file',
+                        dest='ph4_out_file',
                         required=True,
                         metavar='<file>',
                         help='Pharmacophore output file (*.pml, *.cdf)')
+    parser.add_argument('-i',
+                        dest='ia_out_file',
+                        required=False,
+                        metavar='<file>',
+                        help='Interaction data output file')
     parser.add_argument('-s',
                         dest='strip_res_list',
                         required=False,
@@ -141,10 +168,21 @@ def parseArgs() -> argparse.Namespace:
 def main() -> None:
     args = parseArgs()
 
-    rec_mol = readAndPrepareReceptorStructure(args)          # read and preprocess the receptor structure
-    lig_reader = Chem.MoleculeReader(args.ligands_file)      # create reader for the ligand input file (format specified by file extension)
-    ph4_writer = Pharm.FeatureContainerWriter(args.out_file) # create writer for the generated pharmacophores (format specified by file extension)
- 
+    # read and preprocess the receptor structure
+    rec_mol = readAndPrepareReceptorStructure(args)
+
+    # create reader for the ligand input file (format specified by file extension)
+    lig_reader = Chem.MoleculeReader(args.ligands_file)
+
+     # create writer for the generated pharmacophores (format specified by file extension)
+    ph4_writer = Pharm.FeatureContainerWriter(args.ph4_out_file)
+
+    if args.ia_out_file:
+        ia_out_file = open(args.ia_out_file, 'w')
+        
+        # write TSV file column headers
+        ia_out_file.write('Input Ligand Index\tPharm. Feature Index\tPharm. Feature Type\tLigand Atom Indices\tPocket Residues\n')
+
     lig_mol = Chem.BasicMolecule()          # create an instance of the default implementation of the
                                             # Chem.Molecule interface that will store the ligand structures
     ia_ph4 = Pharm.BasicPharmacophore()     # create an instance of the default implementation of the Pharm.Pharmacophore
@@ -159,12 +197,15 @@ def main() -> None:
 
         # read and process ligand molecules one after the other until the end of input has been reached (or a severe error occurs)
         while lig_reader.read(lig_mol):
-            mol_id = Chem.getName(lig_mol).strip() # compose a simple ligand identifier for messages
+            mol_id = Chem.getName(lig_mol).strip()
 
-            if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty or not available
+            # compose a ligand identifier (for messages) and a name for the created pharmacophore
+            if mol_id == '':   # fallback if ligand name is empty or not available
+                pharm_id = f'{os.path.splitext(os.path.basename(args.ligands_file))[0]}#{i}'
+                mol_id = f'#{i}'  
             else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+                pharm_id = mol_id
+                mol_id = f'\'{mol_id}\' (#{i})'
 
             if not args.quiet:
                 print('- Generating interaction pharmacophore of molecule %s...' % mol_id)
@@ -174,9 +215,14 @@ def main() -> None:
 
                 ph4_gen.generate(lig_mol, rec_mol, ia_ph4, True) # generate the pharmacophore (True = extract ligand environment residues on-the-fly)
 
+                Pharm.setName(ia_ph4, pharm_id)                  # set pharmacophore name
+                
                 if not args.quiet:
                      print(' -> Generated %s features: %s' % (str(ia_ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ia_ph4)))
-                
+
+                if args.ia_out_file:                             # if desired, output interaction data 
+                     outputInteractionData(i - 1, lig_mol, ia_ph4, ia_out_file)
+                    
                 try:
                     if not ph4_writer.write(ia_ph4): # output pharmacophore
                         sys.exit('Error: writing interaction pharmacophore of molecule %s failed' % mol_id)
@@ -194,6 +240,9 @@ def main() -> None:
 
     if not args.quiet:
         print('Done!')
+        
+    if args.ia_out_file:
+        ia_out_file.close()
 
     ph4_writer.close()
     sys.exit(0)
