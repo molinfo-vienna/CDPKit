@@ -203,7 +203,7 @@ Other options
 
   -q [ --stochastic-search-force-field ] arg
 
-    Search force field used in stochastic smapling (MMFF94, MMFF94_NO_ESTAT, MMFF94S, 
+    Search force field used in stochastic sampling (MMFF94, MMFF94_NO_ESTAT, MMFF94S, 
     MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, 
     MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: MMFF94S_RTOR).
 
