@@ -123,6 +123,8 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('enum_stereo.smi') ])
     errors |= checkScriptFileOutput('gen_2d_layout', outputFilePath('gen_2d_layout.jme'),
                                     [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('gen_2d_layout.jme'), '-d' ])
+    errors |= checkScriptFileOutput('canon_mols', outputFilePath('canon_mols.smi'),
+                                    [ '-i', testDataFilePath('MMFF94/MMFF94_hypervalent.mol2'), '-o', outputFilePath('canon_mols.smi') ])
 
     with open(outputFilePath('edit_mols_ptns.txt'), 'w') as ed_ptns:
         ed_ptns.write('# Test search and result patterns\n')
@@ -137,7 +139,7 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('gen_mol_ph4s.pml') ])
     errors |= checkScriptFileOutput('gen_ia_ph4s', outputFilePath('gen_ia_ph4s.pml'),
                                     [ '-r', testDataFilePath('1ke6.pdb'), '-l', testDataFilePath('1ke6_B_LS2.sdf'), '-s', 'LS2',
-                                      '-o', outputFilePath('gen_ia_ph4s.pml'), '-x' ])
+                                      '-o', outputFilePath('gen_ia_ph4s.pml'), '-i', outputFilePath('gen_ia_ph4s.tsv'), '-x' ])
     errors |= checkScriptFileOutput('align_mols_to_ph4', outputFilePath('align_mols_to_ph4.sdf'),
                                     [ '-r', outputFilePath('gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
                                       '-o', outputFilePath('align_mols_to_ph4.sdf'), '-n', '10', '-d', '0.5' ])

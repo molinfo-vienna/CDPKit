@@ -7,3 +7,4 @@ Structure Standardization, Curation and Database Preparation
    chembl_pipeline
    prot_phys_cond
    clean_mol_db
+   mol_canon
