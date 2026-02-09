@@ -106,9 +106,7 @@ def outputInteractionData(ligand_idx: int, lig_mol: Chem.MolecularGraph, ia_ph4:
         lig_substruct = Pharm.getSubstructure(ftr)
 
         # generate ligand atom index list
-        for atom in lig_substruct.atoms:
-            atom_idx = lig_mol.getAtomIndex(atom)
-
+        for atom_idx in sorted(lig_mol.getAtomIndex(atom) for atom in lig_substruct.atoms):
             if lig_atom_inds:
                 lig_atom_inds = f'{lig_atom_inds}, {atom_idx}'
             else:
