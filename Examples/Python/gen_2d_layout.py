@@ -106,7 +106,7 @@ def main() -> None:
     # create reader for input molecules (format specified by file extension)
     reader = Chem.MoleculeReader(args.in_file) 
 
-    # create writer for the generated 3D structures (format specified by file extension)
+    # create writer for the output molecules (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
  
     # create and initialize an instance of the class Chem.Atom2DCoordinatesCalculator which will
