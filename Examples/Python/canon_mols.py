@@ -45,7 +45,7 @@ def canonicalize(mol: Chem.MolecularGraph, ignore_stereo: bool) -> None:
     # if stereochemistry is not considered then clear the corresponding property flags
     if ignore_stereo:
         atom_flags ^= Chem.AtomPropertyFlag.CONFIGURATION
-        bond_flags ^= Chem.AtomPropertyFlag.CONFIGURATION
+        bond_flags ^= Chem.BondPropertyFlag.CONFIGURATION
 
     # calculate canonical atom numbers (numbers will be stored as atom property Chem.AtomProperty.CANONICAL_NUMBER)
     Chem.calcCanonicalNumbering(mol, True, atom_flags, bond_flags)
