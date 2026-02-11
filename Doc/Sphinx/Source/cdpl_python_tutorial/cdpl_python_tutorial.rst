@@ -113,22 +113,40 @@ or function objects that get called on events such as parameter value change (me
 Data I/O Framework
 ------------------
 
-Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming schemes 
+Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming scheme 
 *CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package
-name and *<DT>* is the name of the data type to read or write (e.g. `CDPL.Chem.MoleculeReaderBase`_ and
+name and *<DT>* is the name of the data type to read or write (e.g. classes `CDPL.Chem.MoleculeReaderBase`_ and
 `CDPL.Chem.MolecularGraphWriterBase`_).
-These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing a particular data I/O format
-thus support the configuration of their runtime behavior by control-parameters (see `CDPL.Chem.ControlParameter`_
-for examples). The name of classes implementing the input/output of data in one of the supported formats all follow the scheme *CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the 
-*CDPL* sub-package name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is 
-the name of the data type to read or write (e.g. `CDPL.Chem.SDFMoleculeReader`_ and
-`CDPL.Chem.SDFMolecularGraphWriter`_).
-These classes all expect an instance of class `CDPL.Base.IOStream`_ as constructor argument which abstracts the type of data source/sink to read from or write to. Subclasses of `CDPL.Base.IOStream`_ are provided that implement a particular type of storage such as files (class `CDPL.Base.FileIOStream`_) and in-memory strings (class `CDPL.Base.StringIOStream`_).
+These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing the I/O of data in a particular  format thus support the configuration of their runtime behavior by control-parameters (see 
+`CDPL.Chem.ControlParameter`_ for examples). The names of the format-specific classes all follow the scheme 
+*CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the *CDPL* sub-package name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is the name of 
+the data type to read or write (e.g. `CDPL.Chem.SDFMoleculeReader`_ and `CDPL.Chem.SDFMolecularGraphWriter`_). 
+
+Data reader classes all expect an instance of class `CDPL.Base.IStream`_ and data writer classes an instance of `CDPL.Base.OStream`_ as argument to their constructor. 
+These stream-based I/O classes represent abstract storage devices which allow the same code to handle I/O to files, in-memory strings, or custom adaptor devices that perform arbitrary operations (e.g. compression) on the fly.
+Concrete types of storage devices are implemented by dedicated subclasses of `CDPL.Base.IStream`_ and `CDPL.Base.OStream`_  such as class `CDPL.Base.FileIOStream`_ for file I/O and `CDPL.Base.StringIOStream`_ for in-memory string data I/O, respectively. 
+
+Since files represent the most dealt-with kind of data storage, file I/O-specific variants of reader/writer classes 
+are provided that make reading/writing data from/to files more convenient. These classes follow the naming scheme 
+*CDPL.<PN>.File<FID><DT>Reader* and *CDPL.<PN>.File<FID><DT>Writer* (for the meaning of *<PN>*, *<FID>* and 
+*<DT>* see text above). Instead of an instance of `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ they accept the path 
+to a file as constructor argument and thus circumvent the need to explicitly create and manage instances of class 
+`CDPL.Base.FileIOStream`_.
 
 Each data format implemented by the *CDPL* is described by an instance of class `CDPL.Base.DataFormat`_ which
-stores and gives access to relevant format-specific information such common file-extensions or mime-type. 
+stores and gives access to relevant format-specific information such as common file-extensions or mime-type. 
 Pre-defined data format descriptors are exported as static attributes of classes following the naming scheme
 *CDPL.<PN>.DataFormat* where *<PN>* is the name of the *CDPL* sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
+
+The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes implementing the reading/writing of data in this format gets established by dedicated input- and output-handler classes. These classes provide factory methods to create a reader/writer class instance for a given file path or `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
+*CDPL.<PN>.<FID><DT>InputHandler* and *CDPL.<PN>.<FID><DT>OutputHandler*, respectively (for the meaning of *<PN>*, 
+*<FID>* and *<DT>* see text above; examples: `CDPL.Chem.SDFMoleculeInputHandler`_, 
+`CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the *CDPL* an input- and/or output-handler class instance is registered at a data type-specific singleton class named 
+*CDPL.<PN>.<DT>IOManager* (for the meaning of *<PN>* and *<DT>* see text above; example: 
+`CDPL.Chem.MoleculeIOManager`_). Amongst others, the I/O manager classes provide methods to lookup a registered handler instance for a given file extension, mime-type or `CDPL.Base.DataFormat`_ object. This way it is possible to, e.g., write code that creates a reader class instance for the input of data from a file where the actual data format is determined lateron at runtime.  
+In order to facilitate the writing of data format-independent code the *CDPL* provides special reader and writer classes that perform the runtime lookup of a suitable input/output handler and reader/writer class 
+instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's extension. Optionally, a 
+characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in case the file extension is missing or unknown to the *CDPL*. If the data source/sink is provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
 
 **TODO**
 
@@ -712,6 +730,10 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Vis: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html
 
+.. _CDPL.Base.IStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IStream.html
+
+.. _CDPL.Base.OStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1OStream.html
+
 .. _CDPL.Base.IOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IOStream.html
 
 .. _CDPL.Base.StringIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
@@ -784,9 +806,11 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Chem.Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
 
-.. _Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+.. _CDPL.Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
 
 .. _Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
+
+.. _CDPL.Chem.MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
 
 .. _Chem.MOL2MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html
 
@@ -798,6 +822,8 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
+.. _Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+
 .. _CDPL.Chem.MolecularGraphWriterBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
 
 .. _CDPL.Chem.SDFMolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
@@ -805,6 +831,12 @@ Example: Counting element symbols and bond orders
 .. _CDPL.Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
 .. _Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
+
+.. _CDPL.Chem.SDFMoleculeInputHandler: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeInputHandler.html
+
+.. _CDPL.Chem.SMILESMolecularGraphOutputHandler: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SMILESMolecularGraphOutputHandler.html
+
+.. _CDPL.Chem.MoleculeIOManager: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeIOManager.html
 
 .. _numAtoms: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
 
