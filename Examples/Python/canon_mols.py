@@ -51,7 +51,7 @@ def canonicalize(mol: Chem.MolecularGraph, ignore_stereo: bool) -> None:
     Chem.calcCanonicalNumbering(mol, True, atom_flags, bond_flags)
 
     # reorder all internal atom and bond lists according to the calculated canonical atom numbering
-    Chem.canonicalize(mol, True, True, True)
+    Chem.canonicalize(mol)
         
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Canonicalized the atom and bond order of the given input molecules.')
