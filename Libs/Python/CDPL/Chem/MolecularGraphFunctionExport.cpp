@@ -285,7 +285,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                  python::arg("bonds") = true, python::arg("bond_atoms") = false));
     python::def("canonicalize", static_cast<void (*)(Chem::MolecularGraph& molgraph, const Chem::AtomCompareFunction&, bool, 
                                                      bool, bool, bool)>(&Chem::canonicalize), 
-                (python::arg("molgraph"),  python::arg("func"), python::arg("atoms") = true, 
+                (python::arg("molgraph"), python::arg("func"), python::arg("atoms") = true, 
                  python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
 
     python::def("translateFragment", &Chem::translateFragment,
