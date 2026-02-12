@@ -76,14 +76,19 @@ but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute o
 All *CDPL* classes supporting this kind of dynamic property storage are derived from class 
 `CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
 that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
-*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these 
-properties have been defined (example: atom property keys accessible via class `CDPL.Chem.AtomProperty`_).
-Property values virtually can be of any type and get stored in the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
+*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these properties have been defined (example: atom property keys 
+accessible via class `CDPL.Chem.AtomProperty`_). Property values virtually can be of any type and get stored in 
+the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
+
 Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as argument and setter/getter methods in addition require knowledge of the value type, corresponding code
 is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the 
 low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
-subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ are an example of such four functions that have been provided for the property 
-`CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
+subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ represent an example of such four functions that are provided
+for the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
+Using property getter functions (like `CDPL.Chem.getOrder()`_) has the additional benefit that they will, if one 
+has been defined, automatically return a default value for unset properties. Defined property default values are exported and accessible as static attributes of classes that follow the naming scheme 
+*CDPL.<PN>.<CN>PropertyDefault* (example: `CDPL.Chem.BondPropertyDefault`_; for the meaning of *<PN>* and *<CN>* 
+see text above). 
 
 Control-Parameters
 ------------------
@@ -109,6 +114,11 @@ or function objects that get called on events such as parameter value change (me
 `registerParameterChangedCallback()`_ and `unregisterParameterChangedCallback()`_), parameter value removal 
 (methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change 
 (methods `registerParentChangedCallback()`_ and `unregisterParentChangedCallback()`_).
+
+A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which gets returned by the associated getter function if a parameter value has not been explicitly set. 
+Control-parameter default values are exported and accessible as static attributes of classes that follow the 
+naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = *CDPL* sub-package name; example: 
+`CDPL.Chem.ControlParameterDefault`_). 
 
 Data I/O Framework
 ------------------
@@ -758,11 +768,13 @@ Example: Counting element symbols and bond orders
 
 .. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
 
-.. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
+.. _CDPL.Chem.ControlParameterDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameterDefault.html
 
 .. _CDPL.Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
 .. _CDPL.Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
+.. _CDPL.Chem.BondPropertyDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondPropertyDefault.html
 
 .. _CDPL.Chem.getOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
 
