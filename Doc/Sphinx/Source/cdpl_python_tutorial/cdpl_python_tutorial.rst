@@ -158,8 +158,6 @@ In order to facilitate the writing of data format-independent code the *CDPL* pr
 instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's extension. Optionally, a 
 characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in case the file extension is missing or unknown to the *CDPL*. If the data source/sink is provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
 
-**TODO**
-
 Working with Molecules
 ======================
 
@@ -219,13 +217,13 @@ The following table provides an overview of the most relevant interfaces and dat
    * - `CDPL.Chem.MolecularGraph`_
      - Interface
      - `CDPL.Chem.AtomContainer`_, `CDPL.Chem.BondContainer`_, `CDPL.Base.PropertyContainer`_
-     - Represents an arbitrary molecular graph described by a list of `CDPL.Chem.Atom`_ and a list of `CDPL.Chem.Bond`_ instances,
-       specifies additional methods for cloning and atom/bond sequence reordering
+     - Represents an arbitrary molecular graph described by a list of `CDPL.Chem.Atom`_ and a list of 
+       `CDPL.Chem.Bond`_ instances, specifies additional methods for cloning and atom/bond sequence reordering
    * - `CDPL.Chem.Molecule`_
      - Interface
      - `CDPL.Chem.MolecularGraph`_
-     - Extends the `CDPL.Chem.MolecularGraph`_ interface by methods for atom and bond creation as well as methods for
-       merging with other molecular graphs
+     - Extends the `CDPL.Chem.MolecularGraph`_ interface by methods for atom and bond creation as well as methods 
+       for merging with other molecular graphs
    * - `CDPL.Chem.BasicMolecule`_
      - Implementation
      - `CDPL.Chem.Molecule`_
@@ -252,14 +250,20 @@ the end of a code cell.
 
     import CDPL.Vis
 
-Manual Construction of Molecules
---------------------------------
+Basic Operations on Molecule Objects
+------------------------------------
+
+Creation
+^^^^^^^^
 
 An initally empty molecule object without any atoms and bonds can then be created as follows:
 
 .. code:: ipython3
 
     mol = Chem.BasicMolecule()
+
+Querying Atom and Bond Counts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_:
 
@@ -295,13 +299,17 @@ In the same manner, the number of bonds can be retrieved by:
 
 
 
+Creating Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^
+
 Atoms are created by calling the method `addAtom()`_:
 
 .. code:: ipython3
 
     a = mol.addAtom()
 
-The method returns a `Chem.BasicAtom`_ object which is owned by the creating `Chem.BasicMolecule`_ instance *mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. The values of these properties need to be set explicitly by invoking dedicated property functions which take the atom and desired value of the property as arguments. For example
+The method returns a `Chem.BasicAtom`_ object which is owned by the creating `Chem.BasicMolecule`_ instance 
+**mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. The value of these properties needs to be set explicitly by invoking dedicated property functions which take the atom and desired value of the property as arguments. For example
 
 .. code:: ipython3
 
@@ -417,8 +425,81 @@ To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that 
 
 
 
-Reading Molecules
------------------
+Accessing Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Atom and bonds of a molecular graph represented by, e. g., a `Chem.BasicMolecule`_ instance can be accessed by calling the methods `getAtom()`_ and `getBond()`_, respectively. These methods expect the zero-based index of the atom/bond in the parent molecular graphs's atom/bond list as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an index outside the allowed range will result in an exception.
+
+Example: Counting atom types and bond orders
+
+.. code:: ipython3
+
+    type_counts = {}
+    order_counts = {}
+    
+    for i in range(0, mol.numAtoms):
+        atom = mol.getAtom(i)
+        atom_type = Chem.getType(atom)
+    
+        if sym in type_counts:
+            type_counts[atom_type] += 1
+        else:
+            type_counts[atom_type] = 1
+    
+    for i in range(0, mol.numBonds):
+        bond = mol.getBond(i)
+        bond_order = Chem.getOrder(bond)
+    
+        if bond_order in order_counts:
+            order_counts[bond_order] += 1
+        else:
+            order_counts[bond_order] = 1
+    
+    print(f'Atom types: {sym_counts}')
+    print(f'Bond orders: {order_counts}')
+
+
+.. parsed-literal::
+
+    Atom types: {6: 1, 7: 1, 8: 1}
+    Bond orders: {1: 22, 2: 12}
+
+
+Atoms and bonds can also be accessed in a sequential manner. The following code is an alternative version of the one above using sequential atom/bond access:
+
+.. code:: ipython3
+
+    type_counts = {}
+    order_counts = {}
+    
+    for atom in mol.atoms:
+        atom_type = Chem.getType(atom)
+    
+        if sym in type_counts:
+            type_counts[atom_type] += 1
+        else:
+            type_counts[atom_type] = 1
+    
+    for bond in mol.bonds:
+        bond_order = Chem.getOrder(bond)
+    
+        if bond_order in order_counts:
+            order_counts[bond_order] += 1
+        else:
+            order_counts[bond_order] = 1
+    
+    print(f'Atom types: {sym_counts}')
+    print(f'Bond orders: {order_counts}')
+
+
+.. parsed-literal::
+
+    Atom types: {6: 1, 7: 1, 8: 1}
+    Bond orders: {1: 22, 2: 12}
+
+
+Reading Molecule Data
+---------------------
 
 Data provided as Strings
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -437,7 +518,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_32_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_36_0.svg
 
 
 
@@ -452,7 +533,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_34_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
 
 
 
@@ -525,7 +606,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_36_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_40_0.svg
 
 
 
@@ -620,7 +701,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_43_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_47_0.svg
 
 
 
@@ -634,7 +715,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_44_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_48_0.svg
 
 
 
@@ -653,55 +734,12 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    Cell In[27], line 2
+    <ipython-input-55-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
-
+    
 
     IndexError: StreamDataReader: record index out of bounds
-
-
-Processing Molecular Graphs
----------------------------
-
-Accessing Atoms and Bonds
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Atom and bonds of a molecular graph represented by, e. g., a `Chem.BasicMolecule`_ instance can be accessed by calling the methods `getAtom()`_ and `getBond()`_, respectively. These methods expect the zero-based index of the atom/bond in the parent molecular graphs's atom/bond list as argument. Allowed atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Providing an index outside the allowed range will result in an exception.
-
-Example: Counting element symbols and bond orders
-
-.. code:: ipython3
-
-    sym_counts = {}
-    order_counts = {}
-    
-    for i in range(0, mol.numAtoms):
-        atom = mol.getAtom(i)
-        sym = Chem.getSymbol(atom)
-    
-        if sym in sym_counts:
-            sym_counts[sym] += 1
-        else:
-            sym_counts[sym] = 1
-    
-    for i in range(0, mol.numBonds):
-        bond = mol.getBond(i)
-        order = Chem.getOrder(bond)
-    
-        if order in order_counts:
-            order_counts[order] += 1
-        else:
-            order_counts[order] = 1
-    
-    print(f'Element symbols: {sym_counts}')
-    print(f'Bond orders: {order_counts}')
-
-
-.. parsed-literal::
-
-    Element symbols: {'C': 24, 'N': 4, 'O': 3}
-    Bond orders: {1: 22, 2: 12}
 
 
 .. _Rich Output: https://ipython.readthedocs.io/en/stable/interactive/plotting.html
