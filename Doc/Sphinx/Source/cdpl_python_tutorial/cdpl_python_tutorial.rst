@@ -234,29 +234,46 @@ The following table provides an overview of the most relevant interfaces and dat
      - Stores references (not copies!) to `CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects owned/managed by one or 
        more `CDPL.Chem.Molecule`_ instances and thus allows to specify molecule 
        substructures/fragments of any kind (e.g. rings, substructure matches, ...) in a memory-efficient manner
-       
-Most of the classes listed above as well as other classes/functions used for molecular data I/O and basic processing reside in package `CDPL.Chem`_.
+
+Representation of Molecule Substructures
+----------------------------------------
+
+From ground up, a molecular structure can be created only via an instance of class `CDPL.Chem.Molecule`_. 
+Adding  atoms and bonds via corresponding methods (see next section) will instantiate new 
+`CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects which from that point on will be owned and managed by the 
+`CDPL.Chem.Molecule`_ instance. For the specification of a particular subset of the `CDPL.Chem.Atom`_ and 
+`CDPL.Chem.Bond`_  objects associated with a given `CDPL.Chem.Molecule`_ instance the *CDPL* provides the 
+class `CDPL.Chem.Fragment`_. Analogous to class `CDPL.Chem.Molecule`_ this class also provides methods for adding 
+atoms and bonds. The difference is that these methods expect `CDPL.Chem.Atom`_ or 
+`CDPL.Chem.Bond`_ instances as argument which will be stored internally as light-weight pointers (not as copies!). 
+Like `CDPL.Chem.Molecule`_ class `CDPL.Chem.Fragment`_ derives from `CDPL.Chem.MolecularGraph`_ and instances of both classes thus can be processed in the same way by code that operates on molecular structures represented by 
+`CDPL.Chem.MolecularGraph`_ objects.
+
+Basic Operations on Molecular Graphs
+------------------------------------
+
+Most of the classes for molecular structure representation, molecular data I/O and functions for basic processing reside in package `CDPL.Chem`_.
 
 .. code:: ipython3
 
     import CDPL.Chem as Chem
 
-By the import line above the code in the remainder of this tutorial can conveniently access all package contents via the prefix *Chem.\**.
+By the import line above the code in the remainder of this tutorial can conveniently access all package contents 
+via the prefix *Chem.\**.
 
-Furthermore, the *CDPL Python* bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ instances in Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ package and will be used in the following code snippets to display the skeletal formula of molecular graphs simply by typing the variable name at
+Furthermore, the *CDPL Python* bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ instances in 
+Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ package and will be used in the following 
+code snippets to display the skeletal formula of molecular graphs simply by typing the variable name at 
 the end of a code cell.
 
 .. code:: ipython3
 
     import CDPL.Vis
 
-Basic Operations on Molecule Objects
-------------------------------------
-
 Creation
 ^^^^^^^^
 
-An initally empty molecule object without any atoms and bonds can then be created as follows:
+An initally empty molecule object without any atoms and bonds can then be created by instantiating the class `Chem.BasicMolecule`_ which implements the `Chem.Molecule`_ interface as follows:
 
 .. code:: ipython3
 
@@ -265,7 +282,7 @@ An initally empty molecule object without any atoms and bonds can then be create
 Querying Atom and Bond Counts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_:
+The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ provided by the `Chem.AtomContainer`_ interface:
 
 .. code:: ipython3
 
@@ -282,7 +299,7 @@ The number of (explicit) atoms can be queried either by acessing the property `n
 
 
 
-In the same manner, the number of bonds can be retrieved by:
+In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ provided by the `Chem.BondContainer`_ interface:
 
 .. code:: ipython3
 
@@ -302,13 +319,13 @@ In the same manner, the number of bonds can be retrieved by:
 Creating Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Atoms are created by calling the method `addAtom()`_:
+Atoms are created by calling the method `addAtom()`_ provided by the `Chem.Molecule`_ interface:
 
 .. code:: ipython3
 
     a = mol.addAtom()
 
-The method returns a `Chem.BasicAtom`_ object which is owned by the creating `Chem.BasicMolecule`_ instance 
+The method returns a `Chem.Atom`_ object which is owned by the creating `Chem.Molecule`_ instance 
 **mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. The value of these properties needs to be set explicitly by invoking dedicated property functions which take the atom and desired value of the property as arguments. For example
 
 .. code:: ipython3
@@ -339,13 +356,13 @@ In a similar fashion, bonds are created by calling the method `addBond()`_ which
     
     b = mol.addBond(0, 1)
 
-The method returns a `Chem.BasicBond`_ object which is also owned by the creating `Chem.BasicMolecule`_ instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order to a value of 2 (= double bond) the property function `Chem.setOrder()`_ needs to be called:
+The method returns a `Chem.Bond`_ object which is also owned and managed by the creating `Chem.Molecule`_ instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order to a value of 2 (= double bond) the property function `Chem.setOrder()`_ needs to be called:
 
 .. code:: ipython3
 
     Chem.setOrder(b, 2)
 
-A previously set bond order property value can be accessed by the accompanying getter function `Chem.getOrder()`_:
+A previously set bond order property value can be retrieved by the accompanying getter function `Chem.getOrder()`_:
 
 .. code:: ipython3
 
@@ -367,7 +384,7 @@ A previously set bond order property value can be accessed by the accompanying g
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_25_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_27_0.svg
 
 
 
@@ -421,14 +438,93 @@ To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that 
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_30_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_32_0.svg
+
+
+
+Copying Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^
+
+In the most simplest way a deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instance can be created by passing the instance to the constructur of class `Chem.BasicMolecule`_:
+
+.. code:: ipython3
+
+    mol_copy = Chem.BasicMolecule(mol)
+    
+    mol_copy
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_34_0.svg
+
+
+
+Current atoms and bonds of an existing `Chem.Molecule`_ object can be replaced by calling the method `assign()`_ or `copy()`_:
+
+.. code:: ipython3
+
+    mol_copy = Chem.BasicMolecule()
+    
+    Chem.setType(mol_copy.addAtom(), Chem.AtomType.C)
+    
+    print(mol_copy.numAtoms)
+    
+    mol_copy.assign(mol)
+    # or
+    # mol_copy.copy(mol)
+    
+    mol_copy
+
+
+.. parsed-literal::
+
+    1
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_36_1.svg
+
+
+
+It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using the inplace addition operator (+=):
+
+.. code:: ipython3
+
+    mol_copy.append(mol)
+    
+    mol_copy
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
+
+
+
+.. code:: ipython3
+
+    mol_copy += mol_copy
+    
+    mol_copy
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_39_0.svg
 
 
 
 Accessing Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Atom and bonds of a molecular graph represented by, e. g., a `Chem.BasicMolecule`_ instance can be accessed by calling the methods `getAtom()`_ and `getBond()`_, respectively. These methods expect the zero-based index of the atom/bond in the parent molecular graphs's atom/bond list as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an index outside the allowed range will result in an exception.
+Atom and bonds of a molecular structure represented by a `Chem.MolecularGraph`_ instance can be accessed by 
+calling the methods `getAtom()`_ (`Chem.AtomContainer`_ interface) and `getBond()`_ (`Chem.BondContainer`_ 
+interface), respectively. These methods expect the zero-based index of the atom/bond in the parent molecular 
+graphs's atom/bond list as argument. Valid atom/bond indices are in the range 
+[0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an index outside the allowed range will trigger an 
+exception.
 
 Example: Counting atom types and bond orders
 
@@ -441,7 +537,7 @@ Example: Counting atom types and bond orders
         atom = mol.getAtom(i)
         atom_type = Chem.getType(atom)
     
-        if sym in type_counts:
+        if atom_type in type_counts:
             type_counts[atom_type] += 1
         else:
             type_counts[atom_type] = 1
@@ -455,17 +551,19 @@ Example: Counting atom types and bond orders
         else:
             order_counts[bond_order] = 1
     
-    print(f'Atom types: {sym_counts}')
+    print(f'Atom types: {type_counts}')
     print(f'Bond orders: {order_counts}')
 
 
 .. parsed-literal::
 
-    Atom types: {6: 1, 7: 1, 8: 1}
-    Bond orders: {1: 22, 2: 12}
+    Atom types: {6: 5, 7: 1}
+    Bond orders: {2: 3, 1: 3}
 
 
-Atoms and bonds can also be accessed in a sequential manner. The following code is an alternative version of the one above using sequential atom/bond access:
+Atoms and bonds can also be accessed in a sequential manner by iterating over the corresponding atom and bond 
+lists which can be retieved by method `getAtoms()`_ or property `atoms`_ and method `getBonds()`_ or property `bonds`_ of the `Chem.MolecularGraph`_ interface, respectively. The following code is an alternative version of 
+the one above employing sequential atom/bond access:
 
 .. code:: ipython3
 
@@ -475,7 +573,7 @@ Atoms and bonds can also be accessed in a sequential manner. The following code 
     for atom in mol.atoms:
         atom_type = Chem.getType(atom)
     
-        if sym in type_counts:
+        if atom_type in type_counts:
             type_counts[atom_type] += 1
         else:
             type_counts[atom_type] = 1
@@ -488,14 +586,38 @@ Atoms and bonds can also be accessed in a sequential manner. The following code 
         else:
             order_counts[bond_order] = 1
     
-    print(f'Atom types: {sym_counts}')
+    print(f'Atom types: {type_counts}')
     print(f'Bond orders: {order_counts}')
 
 
 .. parsed-literal::
 
-    Atom types: {6: 1, 7: 1, 8: 1}
-    Bond orders: {1: 22, 2: 12}
+    Atom types: {6: 5, 7: 1}
+    Bond orders: {2: 3, 1: 3}
+
+
+Removing all Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Atoms, bonds and properties can be completely removed by invoking the method `clear()`_ on a `Chem.Molecule`_ instance:
+
+.. code:: ipython3
+
+    print(f'Num. atoms before clear(): {mol_copy.numAtoms}')
+    print(f'Num. bonds before clear(): {mol_copy.numBonds}')
+    
+    mol_copy.clear()
+    
+    print(f'Num. atoms after clear(): {mol_copy.numAtoms}')
+    print(f'Num. bonds after clear(): {mol_copy.numBonds}')
+
+
+.. parsed-literal::
+
+    Num. atoms before clear(): 24
+    Num. bonds before clear(): 24
+    Num. atoms after clear(): 0
+    Num. bonds after clear(): 0
 
 
 Reading Molecule Data
@@ -518,7 +640,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_36_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_47_0.svg
 
 
 
@@ -533,7 +655,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_49_0.svg
 
 
 
@@ -606,7 +728,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_40_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_51_0.svg
 
 
 
@@ -701,7 +823,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_47_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_58_0.svg
 
 
 
@@ -715,7 +837,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_48_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_59_0.svg
 
 
 
@@ -734,7 +856,7 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-55-7fa4905834ac> in <module>
+    <ipython-input-63-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
     
@@ -828,11 +950,15 @@ If the index is out of the valid range then a corresponding exception will be th
 
 .. _CDPL.Chem.Atom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
 
+.. _Chem.Atom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
+
 .. _CDPL.Chem.BasicAtom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
 
 .. _Chem.BasicAtom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
 
 .. _CDPL.Chem.Bond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+
+.. _Chem.Bond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
 .. _CDPL.Chem.BasicBond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html
 
@@ -840,7 +966,11 @@ If the index is out of the valid range then a corresponding exception will be th
 
 .. _CDPL.Chem.AtomContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
 
+.. _Chem.AtomContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
+
 .. _CDPL.Chem.BondContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
+
+.. _Chem.BondContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
 
 .. _CDPL.Chem.MolecularGraph: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
 
@@ -903,6 +1033,22 @@ If the index is out of the valid range then a corresponding exception will be th
 .. _getAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ae4dc0c96b4675cdd0726a6a0a55c681f
 
 .. _getBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aad68f03787b42d08b22bfc820e5016a6
+
+.. _getAtoms(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a19ccf5296f5354f6d9187cfa6d691277
+
+.. _getBonds(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a4a2419ae3fc47e3b71853c679df1eb06
+
+.. _atoms: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+
+.. _bonds: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+
+.. _assign(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#aeb88efb7a7e545f1255dd3525335ec9d
+
+.. _copy(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a3a66552396e11b9f1661aaf2cb735c0f
+
+.. _append(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a8adeff4dfaf59e1ae10d4ac70c8e1e95
+
+.. _clear(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a1e86b5a4d16e62b1e59fad00b4addf4c
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
