@@ -238,16 +238,17 @@ The following table provides an overview of the most relevant interfaces and dat
 Representation of Molecule Substructures
 ----------------------------------------
 
-From ground up, a molecular structure can be created only via an instance of class `CDPL.Chem.Molecule`_. 
-Adding  atoms and bonds via corresponding methods (see next section) will instantiate new 
-`CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects which from that point on will be owned and managed by the 
-`CDPL.Chem.Molecule`_ instance. For the specification of a particular subset of the `CDPL.Chem.Atom`_ and 
-`CDPL.Chem.Bond`_  objects associated with a given `CDPL.Chem.Molecule`_ instance the *CDPL* provides the 
-class `CDPL.Chem.Fragment`_. Analogous to class `CDPL.Chem.Molecule`_ this class also provides methods for adding 
-atoms and bonds. The difference is that these methods expect `CDPL.Chem.Atom`_ or 
-`CDPL.Chem.Bond`_ instances as argument which will be stored internally as light-weight pointers (not as copies!). 
-Like `CDPL.Chem.Molecule`_ class `CDPL.Chem.Fragment`_ derives from `CDPL.Chem.MolecularGraph`_ and instances of both classes thus can be processed in the same way by code that operates on molecular structures represented by 
-`CDPL.Chem.MolecularGraph`_ objects.
+From the ground up, a molecular graph can only be constructed via an instance of class `CDPL.Chem.Molecule`_. 
+Adding atoms and bonds by calling dedicated methods (see next section) will create new 
+`CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects which from that point on are owned and managed by the 
+creating `CDPL.Chem.Molecule`_ instance. For the specification of arbitrary sets of `CDPL.Chem.Atom`_ and 
+`CDPL.Chem.Bond`_  objects that belong to one or more `CDPL.Chem.Molecule`_ instance(s) the `CDPL.Chem`_ package provides the 
+class `CDPL.Chem.Fragment`_. Like `CDPL.Chem.Molecule`_, this class also offers methods for adding 
+atoms and bonds except that the methods of `CDPL.Chem.Fragment`_ expect existing `CDPL.Chem.Atom`_ or 
+`CDPL.Chem.Bond`_ instances as argument. These do not get stored as copies but as light-weight references to the 
+original instances which can be retrieved lateron by methods for atom/bond access.
+`CDPL.Chem.Molecule`_ and `CDPL.Chem.Fragment`_ both implement the `CDPL.Chem.MolecularGraph`_ interface and instances of both classes thus 
+can be processed interchangeably by any code that operates on `CDPL.Chem.MolecularGraph`_ objects.
 
 Basic Operations on Molecular Graphs
 ------------------------------------
@@ -856,10 +857,10 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-63-7fa4905834ac> in <module>
+    Cell In[31], line 2
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
-    
+
 
     IndexError: StreamDataReader: record index out of bounds
 
