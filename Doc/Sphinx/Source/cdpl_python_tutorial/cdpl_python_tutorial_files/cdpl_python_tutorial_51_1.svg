@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.026954pt" height="21.39502pt" viewBox="0 0 65.026954 21.39502" version="1.1">
+<defs>
+<g>
+<symbol overflow="visible" id="glyph0-0">
+<path style="stroke:none;" d="M 0.5 1.765625 L 0.5 -7.046875 L 5.5 -7.046875 L 5.5 1.765625 Z M 1.0625 1.21875 L 4.9375 1.21875 L 4.9375 -6.484375 L 1.0625 -6.484375 Z M 1.0625 1.21875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph0-1">
+<path style="stroke:none;" d="M 0.984375 -7.296875 L 2.3125 -7.296875 L 5.546875 -1.1875 L 5.546875 -7.296875 L 6.5 -7.296875 L 6.5 0 L 5.171875 0 L 1.9375 -6.09375 L 1.9375 0 L 0.984375 0 Z M 0.984375 -7.296875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph0-2">
+<path style="stroke:none;" d="M 0.984375 -7.296875 L 1.96875 -7.296875 L 1.96875 -4.296875 L 5.546875 -4.296875 L 5.546875 -7.296875 L 6.53125 -7.296875 L 6.53125 0 L 5.546875 0 L 5.546875 -3.46875 L 1.96875 -3.46875 L 1.96875 0 L 0.984375 0 Z M 0.984375 -7.296875 "/>
+</symbol>
+</g>
+</defs>
+<g id="surface637">
+<g style="fill:rgb(56.078431%,56.078431%,100%);fill-opacity:1;">
+  <use xlink:href="#glyph0-1" x="8.574219" y="9.289062"/>
+</g>
+<g style="fill:rgb(56.078431%,56.078431%,100%);fill-opacity:1;">
+  <use xlink:href="#glyph0-2" x="1.019531" y="9.289062"/>
+</g>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 25.981152 -15.000488 L 0.000683199 -0.000488281 " transform="matrix(1,0,0,1,38.296192,20.64502)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.000683199 -0.000488281 L -21.221973 -12.254395 " transform="matrix(1,0,0,1,38.296192,20.64502)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.346973 -5.398926 L -18.971973 -16.148926 " transform="matrix(1,0,0,1,38.296192,20.64502)"/>
+</g>
+</svg>
