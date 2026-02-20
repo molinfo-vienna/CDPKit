@@ -273,7 +273,7 @@ the end of a code cell.
 Creation
 ^^^^^^^^
 
-An initally empty molecule object without any atoms and bonds can then be created by instantiating the class `Chem.BasicMolecule`_ which implements the `Chem.Molecule`_ interface:
+A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by instantiating the class `Chem.BasicMolecule`_ (the provided default implementation of the`Chem.Molecule`_ interface):
 
 .. code:: ipython3
 
@@ -282,7 +282,7 @@ An initally empty molecule object without any atoms and bonds can then be create
 Querying Atom and Bond Counts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ provided by the `Chem.AtomContainer`_ interface:
+The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ which are both provided by the `Chem.AtomContainer`_ interface:
 
 .. code:: ipython3
 
@@ -299,7 +299,7 @@ The number of (explicit) atoms can be queried either by acessing the property `n
 
 
 
-In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ provided by the `Chem.BondContainer`_ interface:
+In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ of the `Chem.BondContainer`_ interface:
 
 .. code:: ipython3
 
@@ -445,7 +445,7 @@ To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that 
 Copying Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instance can be created in two ways. The first option is to pass the `Chem.MolecularGraph`_ instance as argument to the constructur of class 
+A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instance can be created in several ways. The first option is to pass the `Chem.MolecularGraph`_ instance as argument to the constructur of class 
 `Chem.BasicMolecule`_:
 
 .. code:: ipython3
@@ -489,6 +489,23 @@ The second possibility is to replace the current atoms and bonds of an existing 
 
 
 
+A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ interface on the `Chem.Molecule`_ instance to copy:
+
+.. code:: ipython3
+
+    mol_copy = mol.clone()
+    
+    assert mol_copy.objectID != mol.objectID
+    
+    mol_copy
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
+
+
+
 It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using the inplace addition operator ``+=``:
 
 .. code:: ipython3
@@ -500,7 +517,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_38_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_40_0.svg
 
 
 
@@ -513,7 +530,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_39_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_41_0.svg
 
 
 
@@ -654,7 +671,7 @@ index outside the allowed range will raise an exception.
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_47_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_49_1.svg
 
 
 
@@ -687,9 +704,13 @@ the bond count:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_49_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_51_1.svg
 
 
+
+.. warning:: `Chem.Atom`_ or `Chem.Bond`_ instances that are removed from their parent `Chem.Molecule`_ instance 
+             get invalidated and performing any operations on such instances (e.g. method calls via variables still 
+             referencing them) results in undefined behavior!
 
 Removing multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -734,7 +755,7 @@ calling the method `remove()`_ or by inplace subtraction of the fragment object:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_51_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_54_1.svg
 
 
 
@@ -758,7 +779,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_53_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_56_0.svg
 
 
 
@@ -773,7 +794,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_55_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_58_0.svg
 
 
 
@@ -846,7 +867,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_57_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_60_0.svg
 
 
 
@@ -941,7 +962,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_64_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_67_0.svg
 
 
 
@@ -955,7 +976,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_65_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_68_0.svg
 
 
 
@@ -974,7 +995,7 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-167-7fa4905834ac> in <module>
+    <ipython-input-70-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
     
@@ -1167,6 +1188,8 @@ If the index is out of the valid range then a corresponding exception will be th
 .. _assign(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#aeb88efb7a7e545f1255dd3525335ec9d
 
 .. _copy(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a3a66552396e11b9f1661aaf2cb735c0f
+
+.. _clone(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a3b93772b99b46746a36302794f42cb6f
 
 .. _append(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a8adeff4dfaf59e1ae10d4ac70c8e1e95
 
