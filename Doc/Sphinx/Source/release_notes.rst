@@ -160,9 +160,10 @@ Release V1.3.0
 - New atom type constant *Chem::AtomType::R* for the specification of atoms representing R-groups
 - Signature of method *Base::DataOutputHandler::createWriter(std::iostream&)* has been changed to
   *Base::DataOutputHandler<T>::createWriter(std::ostream&)* in order to support write-only output streams
-- New control-parameter default value *Chem::ControlParameterDefault::MDL_OUTPUT_AROMATIC_BOND_TYPES* 
-- New control-parameter *Chem::ControlParameter::MDL_OUTPUT_AROMATIC_BOND_TYPES* plus associated functions allowing to specify
-  what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
+- New control-parameter default value *Chem::ControlParameterDefault::MDL_ENABLE_AROMATIC_BOND_TYPES* 
+- New control-parameter *Chem::ControlParameter::MDL_ENABLE_AROMATIC_BOND_TYPES* plus associated functions allowing to specify
+  what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format.
+  If the control-parameter is *true* the on data reading the aromaticity flag of bonds with 'aromatic' type will be set to *true* and *false*, otherwise
 - Added methods to class *Chem::CommonConnectedSubstructureSearch* that allow to customize the way atom, bond and molecular graph
   match expression functions employed for substructure matching will be retrieved (default: use the expressions provided as properties)
 - New function *Chem::align2DCoordinates()* that computes and carries out a transformation which aligns

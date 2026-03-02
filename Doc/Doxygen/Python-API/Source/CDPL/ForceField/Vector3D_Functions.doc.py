@@ -439,7 +439,7 @@ def calcMMFF94StretchBendGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: M
 # \f$ \frac{\partial EA_{ijk}}{\partial \vec{p_x}} = \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
 # 
 # \f$ \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} = -ka_{IJK} \: (86.58992538 \: \vartheta_{ijk}^2 - 3.022558594 \: \vartheta_{ijk} \: \vartheta_{IJK}^0 - 143.9313616 \: \vartheta_{ijk} + 0.02637679965 \: \vartheta_{IJK}^{0^2} + 2.512076157 \: \vartheta_{IJK}^0) \f$<br>
-#  <br>
+# <br>
 #  \f$ \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} = \frac{-1}{\sqrt{1 - \cos(\vartheta_{ijk})^2}} \f$<br>
 # 
 # for the calculation of the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$ see calcBondAngleCosDerivatives().

@@ -185,11 +185,11 @@ class ControlParameter(Boost.Python.instance):
     MDL_CONF_ENERGY_SD_TAG = CDPL.Base.LookupKey('MDL_CONF_ENERGY_SD_TAG')
 
     ##
-    # \brief Specifies whether to output the 'aromatic' bond type value (<tt>4</tt>) in the type field of aromatic bonds when writing molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE]. <b>Value Type:</b> <tt>bool</tt>.
+    # \brief Specifies whether to output the 'aromatic' bond type value (<tt>4</tt>) in the type field of aromatic bonds when writing molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE]. On data reading, the aromaticity flag property of bonds having this type will be set to <tt>True</tt> and to <tt>False</tt> if the bond type specifies a defined bond order. <b>Value Type:</b> <tt>bool</tt>.
     # 
     # \since 1.3
     # 
-    MDL_OUTPUT_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('MDL_OUTPUT_AROMATIC_BOND_TYPES')
+    MDL_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('MDL_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
     # \brief Specifies the format of <em>SMILES</em> molecular graph or reaction data records [\ref SMILES].
@@ -459,7 +459,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    CML_OUTPUT_KEKULE_FORM = CDPL.Base.LookupKey('CML_OUTPUT_KEKULE_FORM')
+    CML_ENABLE_AROMATIC_BOND_TYPES = CDPL.Base.LookupKey('CML_ENABLE_AROMATIC_BOND_TYPES')
 
     ##
     # \brief 

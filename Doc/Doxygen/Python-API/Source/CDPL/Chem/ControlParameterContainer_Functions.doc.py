@@ -509,33 +509,6 @@ def setCheckLineLengthParameter(cntnr: Base.ControlParameterContainer, check: bo
 # \brief 
 # \param cntnr 
 #
-def clearCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param output 
-#
-def setCMLOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-#
 def clearSMILESOutputKekuleFormParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
@@ -1184,28 +1157,55 @@ def setMOL2EnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContaine
 # \brief 
 # \param cntnr 
 #
-def clearMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+def clearMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def hasMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+def getMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
-# \param output 
+# \param enable 
 #
-def setMDLOutputAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, output: bool) -> None: pass
+def setMDLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param enable 
+#
+def setCMLEnableAromaticBondTypesParameter(cntnr: Base.ControlParameterContainer, enable: bool) -> None: pass
 
 ##
 # \brief 

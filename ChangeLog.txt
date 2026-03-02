@@ -92,8 +92,9 @@ master:
    Moreover, Vis::Object3D instances may be used to build a simple 3D scene graph by connecting Vis::Object3D instances in a parent -> child object(s) manner
  - Removed namespace Vis::AtomColorTable
  - New class Vis::DefaultAtomColorTable replacing namespace member Vis::AtomColorTable::ELEMENT_COLORS_2D
- - New control-parameter Chem::ControlParameter::MDL_OUTPUT_AROMATIC_BOND_TYPES (plus associated functions) specifying
-   what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format
+ - New control-parameter Chem::ControlParameter::MDL_ENABLE_AROMATIC_BOND_TYPES (plus associated functions) specifying
+   what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format.
+   If the control-parameter is true then on reading the aromaticity flag of bonds with 'aromatic' type will be set to true and false, otherwise
  - The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
  - Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
  - Added methods to class Chem::CommonConnectedSubstructureSearch that allow to customize the way atom, bond and molecular graph
