@@ -206,6 +206,7 @@ void Chem::CMLDataReader::init()
 {
     strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
     multiConfImport     = getMultiConfImportParameter(ioBase);
+    regardAromBondTypes = getMDLEnableAromaticBondTypesParameter(ioBase);
 }
 
 void Chem::CMLDataReader::doReadMolecule(std::istream& is, Molecule& mol)
@@ -270,6 +271,14 @@ void Chem::CMLDataReader::readMolecule(const XMLNode* mol_node, Molecule& mol, b
     if (auto bond_array = getChildNode(mol_node, CML::Element::BOND_ARRAY))
         readBonds(bond_array, mol);
 
+    if (regardAromBondTypes)
+        for (auto i = init_atom_count, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) {
+            auto& atom = mol.getAtom(i);
+
+            if (!hasAromaticityFlag(atom))
+                setAromaticityFlag(atom, false);
+        }
+    
     if (!stereoAtoms.empty())
         postprocStereoAtoms(mol);
 
@@ -525,7 +534,7 @@ bool Chem::CMLDataReader::readArrayStyleBonds(const XMLNode* bond_arr_node, Mole
         auto& bond = mol.addBond(atom_inds[0], atom_inds[1]);
         
         if ((value[2] == CML::BondOrder::SINGLE_1) ||
-            (value[2] == CML::BondOrder::SINGLE_2))
+            (value[2] == CML::BondOrder::SINGLE_2)) 
             setOrder(bond, 1);
 
         else if ((value[2] == CML::BondOrder::DOUBLE_1) ||
@@ -536,9 +545,18 @@ bool Chem::CMLDataReader::readArrayStyleBonds(const XMLNode* bond_arr_node, Mole
                  (value[2] == CML::BondOrder::TRIPLE_2))
             setOrder(bond, 3);
 
-        else if (strictErrorChecking && (value[2] != CML::BondOrder::PARTIAL01) &&
+        else if (value[2] == CML::BondOrder::AROMATIC) {
+            if (regardAromBondTypes) {
+                setAromaticityFlag(bond, true);
+                setAromaticityFlag(bond.getBegin(), true);
+                setAromaticityFlag(bond.getEnd(), true);
+            }
+
+            undef_orders = true;
+        
+        } else if (strictErrorChecking && (value[2] != CML::BondOrder::PARTIAL01) &&
                  (value[2] != CML::BondOrder::PARTIAL12) && (value[2] != CML::BondOrder::PARTIAL23) &&
-                 (value[2] != CML::BondOrder::AROMATIC) && (value[2] != CML::BondOrder::UNKNOWN))
+                 (value[2] != CML::BondOrder::UNKNOWN))
             throw Base::IOError("CMLDataReader: invalid bond order '" + std::string(value[2]));
 
         else

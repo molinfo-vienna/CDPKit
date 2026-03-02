@@ -153,7 +153,7 @@ void Chem::MOL2DataWriter::init(std::ostream& os)
     strictErrorChecking    = getStrictErrorCheckingParameter(ioBase);
     multiConfExport        = getMultiConfExportParameter(ioBase);
     extendedAtomTypes      = getMOL2EnableExtendedAtomTypesParameter(ioBase);
-    aromaticBondTypes      = getMOL2EnableAromaticBondTypesParameter(ioBase);
+    outputAromBondTypes    = getMOL2EnableAromaticBondTypesParameter(ioBase);
     atomChargeType         = getMOL2ChargeTypeParameter(ioBase);
     moleculeType           = getMOL2MoleculeTypeParameter(ioBase);
     outputSubstructs       = getMOL2OutputSubstructuresParameter(ioBase);
@@ -487,7 +487,7 @@ const std::string& Chem::MOL2DataWriter::getBondTypeString(const Bond& bond, con
     else
         type = perceiveSybylType(bond, molgraph);
 
-    if (type == SybylBondType::AROMATIC && !aromaticBondTypes)
+    if (type == SybylBondType::AROMATIC && !outputAromBondTypes)
         return getBondOrderString(bond);
 
     const std::string& type_str = getSybylBondTypeString(type);

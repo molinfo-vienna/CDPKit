@@ -116,19 +116,19 @@ void Chem::CMLDataWriter::close(std::ostream& os)
 
 void Chem::CMLDataWriter::init(std::ostream& os)
 {
-    outputXMLDecl    = getCMLOutputXMLDeclarationParameter(ioBase);
-    elemNamespace    = getCMLOutputElementNamespaceParameter(ioBase);
-    outputMolName    = getCMLOutputMoleculeNameParameter(ioBase);
-    outputStructData = getCMLOutputStructureDataParameter(ioBase);
-    outputAtomParity = getCMLOutputAtomParityParameter(ioBase);
-    outputSBStereo   = getCMLOutputSingleBondStereoParameter(ioBase);
-    outputDBStereo   = getCMLOutputDoubleBondStereoParameter(ioBase);
-    outputKekulized  = getCMLOutputKekuleFormParameter(ioBase);
-    outputIsotope    = getCMLOutputIsotopeParameter(ioBase);
-    outputSpinMult   = getCMLOutputSpinMultiplicityParameter(ioBase);
-    compactAtomData  = getCMLOutputCompactAtomDataParameter(ioBase);
-    compactBondData  = getCMLOutputCompactBondDataParameter(ioBase);
-    multiConfExport  = getMultiConfExportParameter(ioBase);
+    outputXMLDecl       = getCMLOutputXMLDeclarationParameter(ioBase);
+    elemNamespace       = getCMLOutputElementNamespaceParameter(ioBase);
+    outputMolName       = getCMLOutputMoleculeNameParameter(ioBase);
+    outputStructData    = getCMLOutputStructureDataParameter(ioBase);
+    outputAtomParity    = getCMLOutputAtomParityParameter(ioBase);
+    outputSBStereo      = getCMLOutputSingleBondStereoParameter(ioBase);
+    outputDBStereo      = getCMLOutputDoubleBondStereoParameter(ioBase);
+    outputAromBondTypes = getCMLEnableAromaticBondTypesParameter(ioBase);
+    outputIsotope       = getCMLOutputIsotopeParameter(ioBase);
+    outputSpinMult      = getCMLOutputSpinMultiplicityParameter(ioBase);
+    compactAtomData     = getCMLOutputCompactAtomDataParameter(ioBase);
+    compactBondData     = getCMLOutputCompactBondDataParameter(ioBase);
+    multiConfExport     = getMultiConfExportParameter(ioBase);
 
     if (multiConfExport)
         confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);
@@ -536,7 +536,7 @@ void Chem::CMLDataWriter::writeBonds(std::ostream& os, const MolecularGraph& mol
         writeXMLAttribute(os, CML::Attribute::REF_ATOMS2, getAtomId(atom1, molgraph, tmpString[0]) +
                        ' ' + getAtomId(atom2, molgraph, tmpString[1]));
 
-        if (!outputKekulized && getAromaticityFlag(bond))
+        if (outputAromBondTypes && getAromaticityFlag(bond))
             writeXMLAttribute(os, CML::Attribute::ORDER, CML::BondOrder::AROMATIC);
 
         else {
@@ -741,7 +741,7 @@ bool Chem::CMLDataWriter::writeBondsCompact(std::ostream& os, const MolecularGra
         tmpString[2].append(getAtomId(atom1, molgraph, tmpString[0]));
         tmpString[3].append(getAtomId(atom2, molgraph, tmpString[0]));
 
-        if (!outputKekulized && getAromaticityFlag(bond))
+        if (outputAromBondTypes && getAromaticityFlag(bond))
             tmpString[4].append(CML::BondOrder::AROMATIC);
 
         else {

@@ -98,7 +98,7 @@ namespace CDPL
             bool                    outputAtomParity;
             bool                    outputSBStereo;
             bool                    outputDBStereo;
-            bool                    outputKekulized;
+            bool                    outputAromBondTypes;
             bool                    outputIsotope;
             bool                    outputSpinMult;
             bool                    compactAtomData;

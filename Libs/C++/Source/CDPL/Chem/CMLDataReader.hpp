@@ -102,6 +102,7 @@ namespace CDPL
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             bool                    multiConfImport;
+            bool                    regardAromBondTypes;
             XMLTagInfo              tagInfo;
             std::string             molData;
             XMLDocument             molDocument;

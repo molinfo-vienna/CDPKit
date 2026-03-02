@@ -317,7 +317,7 @@ void Chem::MDLDataWriter::init(std::ostream& os, bool rxn_mode)
     writeConfEnergyField    = (multiConfExport && getMDLOutputConfEnergyToEnergyFieldParameter(ioBase));
     writeConfEnergySDEntry  = (multiConfExport && getMDLOutputConfEnergyAsSDEntryParameter(ioBase));
     writeConfEnergyComment  = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
-    outputAromBondTypes     = getMDLOutputAromaticBondTypesParameter(ioBase);
+    outputAromBondTypes     = getMDLEnableAromaticBondTypesParameter(ioBase);
 
     if (multiConfExport)
         confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);

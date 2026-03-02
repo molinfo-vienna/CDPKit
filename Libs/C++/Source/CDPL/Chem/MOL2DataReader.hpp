@@ -99,6 +99,7 @@ namespace CDPL
             bool                    multiConfImport;
             bool                    readFormalCharges;
             bool                    calcFormalCharges;
+            bool                    regardAromBondTypes;
             std::size_t             molAtomCount;
             std::size_t             molBondCount;
             std::size_t             molSubstructCount;

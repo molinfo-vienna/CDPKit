@@ -105,7 +105,7 @@ namespace CDPL
             bool                    strictErrorChecking;
             bool                    multiConfExport;
             bool                    extendedAtomTypes;
-            bool                    aromaticBondTypes;
+            bool                    outputAromBondTypes;
             bool                    outputSubstructs;
             bool                    outputFormalCharges;
             unsigned int            atomChargeType;

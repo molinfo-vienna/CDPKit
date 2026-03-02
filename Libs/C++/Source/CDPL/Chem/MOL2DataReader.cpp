@@ -265,7 +265,8 @@ void Chem::MOL2DataReader::init(std::istream& is)
     multiConfImport     = getMultiConfImportParameter(ioBase);
     calcFormalCharges   = getMOL2CalcFormalChargesParameter(ioBase);
     readFormalCharges   = getMOL2ReadPartialAsFormalChargesParameter(ioBase);
-
+    regardAromBondTypes = getMDLEnableAromaticBondTypesParameter(ioBase);
+    
     is.imbue(std::locale::classic());
 }
 
@@ -591,22 +592,45 @@ void Chem::MOL2DataReader::readBondSection(std::istream& is, Molecule& mol)
         switch (bond_type) {
 
             case SybylBondType::DOUBLE:
+                if (regardAromBondTypes)
+                    setAromaticityFlag(bond, false);
+
                 setOrder(bond, 2);
                 continue;
 
             case SybylBondType::TRIPLE:
+                if (regardAromBondTypes)
+                    setAromaticityFlag(bond, false);
+                
                 setOrder(bond, 3);
                 continue;
 
             case SybylBondType::AROMATIC:
+                if (regardAromBondTypes) {
+                    setAromaticityFlag(bond, true);
+                    setAromaticityFlag(bond.getBegin(), true);
+                    setAromaticityFlag(bond.getEnd(), true);
+                }
+                
                 kekulize = true;
                 continue;
 
             default:
+                if (regardAromBondTypes)
+                    setAromaticityFlag(bond, false);
+
                 setOrder(bond, 1);
         }
     }
 
+    if (regardAromBondTypes)
+        for (std::size_t i = mol.getNumAtoms() - molAtomCount, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) {
+            auto& atom = mol.getAtom(i);
+
+            if (!hasAromaticityFlag(atom))
+                setAromaticityFlag(atom, false);
+        }
+   
     if (kekulize)
         kekulizeBonds(mol);    
 }

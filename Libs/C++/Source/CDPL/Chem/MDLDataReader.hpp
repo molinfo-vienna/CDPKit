@@ -161,7 +161,7 @@ namespace CDPL
             void readCTabV3000(std::istream&, Molecule&);
             void readCTabV3000CountsLine(std::istream&, Molecule&);
             void readCTabV3000AtomBlock(std::istream&, Molecule&);
-            bool readCTabV3000BondBlock(std::istream&, Molecule&);
+            bool readCTabV3000BondBlock(std::istream&, Molecule&, std::size_t);
             void readPastCTabV3000BlockEnd(std::istream&);
 
             void readCTabV3000Atom(std::istream&, Molecule&);
@@ -239,6 +239,7 @@ namespace CDPL
             bool                    trimLines;
             bool                    checkLineLength;
             bool                    multiConfImport;
+            bool                    regardAromBondTypes;
             std::string             tmpString;
             std::string             line;
             Fragment::SharedPointer confTargetFragment;

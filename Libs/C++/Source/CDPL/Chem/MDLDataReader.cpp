@@ -430,7 +430,8 @@ void Chem::MDLDataReader::init(std::istream& is)
     trimLines           = getMDLTrimLinesParameter(ioBase); 
     checkLineLength     = getCheckLineLengthParameter(ioBase); 
     multiConfImport     = getMultiConfImportParameter(ioBase);
-
+    regardAromBondTypes = getMDLEnableAromaticBondTypesParameter(ioBase);
+    
     is.imbue(std::locale::classic());
 }
 
@@ -920,6 +921,14 @@ bool Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol
     for (std::size_t i = 0; i < bondCount; i++)
         kekulize |= readCTabV2000Bond(is, mol, atom_index_offs);
 
+    if (regardAromBondTypes)
+        for (std::size_t i = atom_index_offs, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) {
+            auto& atom = mol.getAtom(i);
+
+            if (!hasAromaticityFlag(atom))
+                setAromaticityFlag(atom, false);
+        }
+    
     return kekulize;
 }
 
@@ -1385,8 +1394,14 @@ std::size_t Chem::MDLDataReader::readCTabV2000BondType(std::istream& is, Bond& b
             break;
 
         case BondBlock::TYPE_AROMATIC:     
-            constr_list.addElement(BondMatchConstraint::ORDER, MatchConstraint::EQUAL,
-                                   BondMatchConstraint::AROMATIC);
+            if (regardAromBondTypes) {
+                setAromaticityFlag(bond, true);
+                setAromaticityFlag(bond.getBegin(), true);
+                setAromaticityFlag(bond.getEnd(), true);
+
+            } else
+                constr_list.addElement(BondMatchConstraint::ORDER, MatchConstraint::EQUAL,
+                                       BondMatchConstraint::AROMATIC);
             break;
 
         case BondBlock::TYPE_SINGLE_DOUBLE:
@@ -1413,9 +1428,13 @@ std::size_t Chem::MDLDataReader::readCTabV2000BondType(std::istream& is, Bond& b
             throw Base::IOError("MDLDataReader: invalid bond type specification");
     }
 
-    if (order != 0)
+    if (order != 0) {
         setOrder(bond, order);
 
+        if (regardAromBondTypes)
+            setAromaticityFlag(bond, false);
+    }
+    
     return order;
 }
 
@@ -2690,10 +2709,12 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
 
     readV3000BlockBegin(is, V3000::BLOCK_TYPE_KEY);
 
+    auto atom_index_offs = mol.getNumAtoms();
+    
     readCTabV3000CountsLine(is, mol);
     readCTabV3000AtomBlock(is, mol);
     
-    if (readCTabV3000BondBlock(is, mol))
+    if (readCTabV3000BondBlock(is, mol, atom_index_offs))
         kekulizeBonds(mol);
 
     readPastCTabV3000BlockEnd(is);
@@ -2776,7 +2797,7 @@ void Chem::MDLDataReader::readCTabV3000AtomBlock(std::istream& is, Molecule& mol
     postprocAtomCoords(mol, old_num_atoms);
 }
 
-bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol)
+bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs)
 {
     using namespace MDL::MOLFile::CTab::V3000;
 
@@ -2787,6 +2808,14 @@ bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol
     for (std::size_t i = 0; i < bondCount; i++)
         kekulize |= readCTabV3000Bond(is, mol);
 
+    if (regardAromBondTypes)
+        for (std::size_t i = atom_index_offs, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) {
+            auto& atom = mol.getAtom(i);
+
+            if (!hasAromaticityFlag(atom))
+                setAromaticityFlag(atom, false);
+        }
+    
     readV3000BlockEnd(is, BondBlock::BLOCK_TYPE_KEY);
 
     return kekulize;
@@ -3502,8 +3531,14 @@ std::size_t Chem::MDLDataReader::setCTabV3000BondType(unsigned int bond_type, Bo
             break;
 
         case BondBlock::TYPE_AROMATIC:
-            constr_list.addElement(BondMatchConstraint::ORDER, MatchConstraint::EQUAL,
-                                   BondMatchConstraint::AROMATIC);
+            if (regardAromBondTypes) {
+                setAromaticityFlag(bond, true);
+                setAromaticityFlag(bond.getBegin(), true);
+                setAromaticityFlag(bond.getEnd(), true);
+
+            } else
+                constr_list.addElement(BondMatchConstraint::ORDER, MatchConstraint::EQUAL,
+                                       BondMatchConstraint::AROMATIC);
             break;
 
         case BondBlock::TYPE_SINGLE_DOUBLE:
@@ -3530,9 +3565,13 @@ std::size_t Chem::MDLDataReader::setCTabV3000BondType(unsigned int bond_type, Bo
             throw Base::IOError("MDLDataReader: invalid ctab V3000 bond type specification");
     }
 
-    if (order != 0)
+    if (order != 0) {
         setOrder(bond, order);
 
+        if (regardAromBondTypes)
+            setAromaticityFlag(bond, false);
+    }
+    
     return order;
 }
 
