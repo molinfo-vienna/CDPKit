@@ -24,7 +24,7 @@
 
 #include "StaticInit.hpp"
 
-#include <unordered_set>
+#include <set>
 
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -43,7 +43,7 @@ using namespace CDPL;
 namespace
 {
 
-    typedef std::unordered_set<std::string> StringSet;
+    typedef std::set<std::string> StringSet;
     
     void addResidueInfo(const Pharm::Feature& ftr, StringSet& env_res_list, bool clear = false)
     {
