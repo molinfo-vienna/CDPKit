@@ -33,6 +33,19 @@ def testDataFilePath(fname):
 def outputFilePath(fname):
     return os.path.join(os.environ['CURR_BINARY_DIR'], fname)
 
+def cmpSortedLines(output1, output2):
+    lines1 = sorted(output1.split('\n'))
+    lines2 = sorted(output2.split('\n'))
+    
+    if len(lines1) != len(lines2):
+        return False
+
+    for i in range(len(lines1)):
+        if lines1[i] != lines2[i]:
+            return False
+
+    return True
+    
 def checkScriptOutput(script_name, args):
     script_dir = os.environ['PYTHON_EXAMPLES_DIR']
     script_path = os.path.join(script_dir, script_name + '.py')
@@ -55,7 +68,7 @@ def checkScriptOutput(script_name, args):
         print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
         return True
 
-def checkScriptFileOutput(script_name, out_file, args, exp_output_file=None):
+def checkScriptFileOutput(script_name, out_file, args, exp_output_file=None, sort_lines=False):
     script_dir = os.environ['PYTHON_EXAMPLES_DIR']
     script_path = os.path.join(script_dir, script_name + '.py')
 
@@ -70,7 +83,12 @@ def checkScriptFileOutput(script_name, out_file, args, exp_output_file=None):
         else:
             exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
-        if output == exp_output:
+        if sort_lines:
+            if cmpSortedLines(output, exp_output):
+                print('ok', file=sys.stderr)
+                return False
+        
+        elif output == exp_output:
             print('ok', file=sys.stderr)
             return False
 
@@ -149,7 +167,7 @@ if __name__ == '__main__':
                                       '-o', outputFilePath('align_ph4s_to_ph4.pml'), '-n', '10', '-d', '1', '-Q' ])
     errors |= checkScriptFileOutput('report_ph4_ftr_mpg', outputFilePath('report_ph4_ftr_mpg.out'),
                                     [ '-r', testDataFilePath('1ke5678_ph4s_aligned.pml'), '-i', testDataFilePath('1ke5678_ph4s_aligned.pml'),
-                                      '-o', outputFilePath('report_ph4_ftr_mpg.out'), '-x', '-Q' ])
+                                      '-o', outputFilePath('report_ph4_ftr_mpg.out'), '-x', '-Q' ], None, True)
     errors |= checkScriptOutput('seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 

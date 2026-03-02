@@ -2,13 +2,13 @@
  <ContainerPharmacophores>
   <alignmentElement name="LS2" id="alignmentElement0" flagCode="111000000">
    <pharmacophore name="LS2" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
-    <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="LEU_134_A, VAL_64_A, PHE_80_A, VAL_18_A">
+    <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
      <position x3="28.532583" y3="14.177302" z3="15.227080" tolerance="1.500000" />
     </point>
-    <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="LEU_134_A, VAL_18_A, ILE_10_A">
+    <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, LEU_134_A, VAL_18_A">
      <position x3="29.260784" y3="11.546776" z3="14.690523" tolerance="1.500000" />
     </point>
-    <point name="H" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="LEU_134_A, ILE_10_A">
+    <point name="H" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A, LEU_134_A">
      <position x3="25.614904" y3="10.068927" z3="9.236705" tolerance="1.500000" />
     </point>
     <vector name="HBD" featureId="4" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
