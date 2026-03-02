@@ -62,7 +62,7 @@ namespace CDPL
             const bool MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD                               = false;
             const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY                                   = false;
             const std::string MDL_CONF_ENERGY_SD_TAG                                        = "<Energy>";
-            const bool MDL_OUTPUT_AROMATIC_BOND_TYPES                                       = false;
+            const bool MDL_ENABLE_AROMATIC_BOND_TYPES                                       = false;
             
             const std::string SMILES_RECORD_FORMAT                                          = "SN";
             const bool SMILES_OUTPUT_CANONICAL_FORM                                         = false;
@@ -106,7 +106,7 @@ namespace CDPL
             const bool CML_OUTPUT_ATOM_PARITY                                               = true;
             const bool CML_OUTPUT_SINGLE_BOND_STEREO                                        = true;
             const bool CML_OUTPUT_DOUBLE_BOND_STEREO                                        = true;
-            const bool CML_OUTPUT_KEKULE_FORM                                               = true;
+            const bool CML_ENABLE_AROMATIC_BOND_TYPES                                       = false;
             const bool CML_OUTPUT_MOLECULE_NAME                                             = true;
             const bool CML_OUTPUT_STRUCTURE_DATA                                            = true;
             const bool CML_OUTPUT_ISOTOPE                                                   = true;

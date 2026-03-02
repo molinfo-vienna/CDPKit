@@ -195,13 +195,13 @@ namespace CDPL
         /**
          * \since 1.3
          */
-        CDPL_CHEM_API bool getMDLOutputAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool getMDLEnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setMDLOutputAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool output);
+        CDPL_CHEM_API void setMDLEnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
 
-        CDPL_CHEM_API bool hasMDLOutputAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasMDLEnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearMDLOutputAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearMDLEnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
         
 
         CDPL_CHEM_API const std::string& getMDLConfEnergySDTagParameter(const Base::ControlParameterContainer& cntnr);
@@ -611,15 +611,15 @@ namespace CDPL
         CDPL_CHEM_API void clearCMLOutputDoubleBondStereoParameter(Base::ControlParameterContainer& cntnr);
 
         /**
-         * \since 1.2
+         * \since 1.3
          */
-        CDPL_CHEM_API bool getCMLOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool getCMLEnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void setCMLOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr, bool output);
+        CDPL_CHEM_API void setCMLEnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
 
-        CDPL_CHEM_API bool hasCMLOutputKekuleFormParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API bool hasCMLEnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-        CDPL_CHEM_API void clearCMLOutputKekuleFormParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CHEM_API void clearCMLEnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
 
         /**
          * \since 1.2

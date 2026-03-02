@@ -220,11 +220,13 @@ namespace CDPL
 
             /**
              * \brief Specifies whether to output the 'aromatic' bond type value (\c 4) in the type field of aromatic bonds when writing 
-             *        molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE].
+             *        molecular graph data in an <em>MDL CTFile</em> based format [\ref CTFILE]. On data reading, the aromaticity flag
+             *        property of bonds having this type will be set to \c true and to \c false if the bond type specifies a defined 
+             *        bond order.
              * \valuetype \c bool
              * \since 1.3
              */
-            extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_AROMATIC_BOND_TYPES;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_ENABLE_AROMATIC_BOND_TYPES;
             
             /**
              * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
@@ -556,9 +558,9 @@ namespace CDPL
 
             /**
              * \valuetype \c bool
-             * \since 1.2
+             * \since 1.3
              */
-            extern CDPL_CHEM_API const Base::LookupKey CML_OUTPUT_KEKULE_FORM;
+            extern CDPL_CHEM_API const Base::LookupKey CML_ENABLE_AROMATIC_BOND_TYPES;
 
             /**
              * \valuetype \c bool
