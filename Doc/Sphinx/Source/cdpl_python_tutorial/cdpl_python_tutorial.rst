@@ -238,7 +238,7 @@ The following table provides an overview of the most relevant interfaces and dat
 Representation of Molecule Substructures
 ----------------------------------------
 
-From the ground up, a molecular graph can only be constructed via an instance of class `CDPL.Chem.Molecule`_. 
+From scratch, a molecular graph can only be constructed via an instance of class `CDPL.Chem.Molecule`_. 
 Adding atoms and bonds by calling dedicated methods (see next section) will create new 
 `CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects which from that point on are owned and managed by the 
 creating `CDPL.Chem.Molecule`_ instance. For the specification of arbitrary sets of `CDPL.Chem.Atom`_ and 
@@ -580,8 +580,8 @@ Example: Counting atom types and bond orders
 
 
 Atoms and bonds can also be accessed in a sequential manner by iterating over the corresponding atom and bond 
-lists which can be retieved by method `getAtoms()`_ or property `atoms`_ and method `getBonds()`_ or property `bonds`_ of the `Chem.MolecularGraph`_ interface. The following code is an alternative version of 
-the one above that employs sequential atom/bond access:
+lists. The atom sequence can be retrieved via the `Chem.MolecularGraph`_ interface by calling the method 
+`getAtoms()`_ or accessing the property `atoms`_. The bond  sequence by method `getBonds()`_ or property `bonds`_. The following code is an alternative version of the one above that employs sequential atom/bond access:
 
 .. code:: ipython3
 
@@ -641,7 +641,7 @@ Atoms, bonds and properties can be removed completely by calling the method `cle
 Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectiviely. The methods expect the zero-based index of the atom/bond in the parent molecular graphs's atom/bond list as 
+Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectiviely. The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
 argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an 
 index outside the allowed range will raise an exception.
 
@@ -709,15 +709,15 @@ the bond count:
 
 
 .. warning:: `Chem.Atom`_ or `Chem.Bond`_ instances that are removed from their parent `Chem.Molecule`_ instance 
-             get invalidated and performing any operations on such instances (e.g. method calls via variables still 
+             become invalid and performing any operations on such instances (e.g. method calls via variables still 
              referencing them) results in undefined behavior!
 
 Removing multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Multiple atoms and bonds can be removed at once via the help of a `Chem.Fragment`_ instance that specifies the 
-atoms and bonds to remove. After adding atoms and bonds to the fragment their removal is initiated either by 
-calling the method `remove()`_ or by inplace subtraction of the fragment object:
+atoms and bonds to remove. After adding atoms and bonds to the Chem.Fragment`_ instance their removal is initiated 
+either by calling the method `remove()`_ with the fragment object as argument or by inplace subtraction (``-=``) of the fragment object:
 
 .. code:: ipython3
 
@@ -759,6 +759,197 @@ calling the method `remove()`_ or by inplace subtraction of the fragment object:
 
 
 
+Testing Atom and Bond Ownership
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Whether a particular `Chem.Atom`_ instance belongs to a given `Chem.Molecule`_ instance can be checked either 
+by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by the membership 
+test operator ``ìn`` as follows:
+
+.. code:: ipython3
+
+    mol_copy.assign(mol)
+    
+    mol.containsAtom(mol.atoms[0])
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    mol.getAtom(0) in mol
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    mol.containsAtom(mol_copy.getAtom(0))
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    mol_copy.atoms[0] in mol
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+Similarly, a `Chem.Bond`_ instance membership test can be performed by calling the method `containsBond()`_ 
+(`Chem.BondContainer`_ interface) or by using the ``ìn`` operator:
+
+.. code:: ipython3
+
+    mol.containsBond(mol.bonds[0])
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    mol.getBond(0) in mol
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    mol.containsBond(mol_copy.getBond(0))
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    
+    mol_copy.bonds[0] in mol
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+Retrieving Atom and Bond Indices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The index of a `Chem.Atom`_ instance in the atom list of the owning `Chem.Molecule`_ 
+instance can be retrieved by passing the atom as argument to the method `getAtomIndex()`_ 
+(`Chem.AtomContainer`_ interface). In a similar manner, the index of a `Chem.Bond`_ instance can be determined by 
+calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
+
+.. code:: ipython3
+
+    mol.getAtomIndex(mol.getAtom(3))
+
+
+
+
+.. parsed-literal::
+
+    3
+
+
+
+.. code:: ipython3
+
+    mol.getBondIndex(mol.getBond(2))
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index for a `Chem.Molecule`_ that is not the owner will trigger an exception:
+
+.. code:: ipython3
+
+    mol_copy.getAtomIndex(mol.atoms[0])
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    ItemNotFound                              Traceback (most recent call last)
+
+    <ipython-input-121-a90c61ffb428> in <module>
+    ----> 1 mol_copy.getAtomIndex(mol.atoms[0])
+    
+
+    ItemNotFound: BasicMolecule: argument atom not part of the molecule
+
+
+.. code:: ipython3
+
+    mol.getBondIndex(mol_copy.bonds[1])
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    ItemNotFound                              Traceback (most recent call last)
+
+    <ipython-input-122-ae6b58adf8f3> in <module>
+    ----> 1 mol.getBondIndex(mol_copy.bonds[1])
+    
+
+    ItemNotFound: BasicMolecule: argument bond not part of the molecule
+
+
 Reading Molecule Data
 ---------------------
 
@@ -779,7 +970,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_56_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_72_0.svg
 
 
 
@@ -794,7 +985,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_58_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_74_0.svg
 
 
 
@@ -867,7 +1058,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_60_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_76_0.svg
 
 
 
@@ -962,7 +1153,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_67_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_83_0.svg
 
 
 
@@ -976,7 +1167,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_68_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_84_0.svg
 
 
 
@@ -995,7 +1186,7 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-70-7fa4905834ac> in <module>
+    <ipython-input-109-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
     
@@ -1200,6 +1391,14 @@ If the index is out of the valid range then a corresponding exception will be th
 .. _removeBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a633c5d5776b547c5b0103dfc6fab9421
 
 .. _remove(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a260a01ae4366901b071043f8617be64a
+
+.. _containsAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a14a7fa0141f6589604621099f6708cdd
+
+.. _containsBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#ad32cbbec53ec26028a614beb8d1b9433
+
+.. _getAtomIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a0948b758760f41820137c161a17cb7ac
+
+.. _getBondIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aa79fcf4b2cf4112b85e5e9fbf17146f6
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
