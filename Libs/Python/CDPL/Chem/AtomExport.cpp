@@ -107,9 +107,9 @@ void CDPLPythonChem::exportAtom()
              (python::arg("self"), python::arg("atom")), python::return_internal_reference<1>())
         .def("getIndex", python::pure_virtual(&Chem::Atom::getIndex), python::arg("self"))
         .def("assign", &AtomWrapper::assign, (python::arg("self"), python::arg("atom")), python::return_self<>())
-        .def("getAtoms", &createAtomSequence<Chem::AtomContainer>, python::arg("self"),
+        .def("getAtoms", &createAtomSequence<Chem::Atom>, python::arg("self"),
              python::with_custodian_and_ward_postcall<0, 1>())
-        .def("getBonds", &createBondSequence<Chem::BondContainer>, python::arg("self"),
+        .def("getBonds", &createBondSequence<Chem::Atom>, python::arg("self"),
              python::with_custodian_and_ward_postcall<0, 1>())
         .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
         .def(AtomContainerVirtualFunctionsVisitor<AtomWrapper>())
