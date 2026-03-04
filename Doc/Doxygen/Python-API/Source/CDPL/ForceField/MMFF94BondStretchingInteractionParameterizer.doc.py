@@ -59,7 +59,7 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setFilterFunction(func: InteractionFilterFunction2) -> None: pass
+    def setFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 

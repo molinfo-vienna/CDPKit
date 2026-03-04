@@ -51,13 +51,13 @@ class TopologicalAtomAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setEntityMatchFunction(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def setEntityMatchFunction(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getEntityMatchFunction() -> ForceField.InteractionFilterFunction2: pass
+    def getEntityMatchFunction() -> BoolAtom2Functor: pass
 
     ##
     # \brief 

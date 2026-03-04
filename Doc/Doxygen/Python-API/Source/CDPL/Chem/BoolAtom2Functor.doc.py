@@ -30,10 +30,10 @@ class BoolAtom2Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolAtom2Functor instance.
-    # \param func 
+    # \brief Initializes a copy of the \e %BoolAtom2Functor instance \a func.
+    # \param func The \e %BoolAtom2Functor instance to copy.
     # 
-    def __init__(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def __init__(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAtom2Functor instance.

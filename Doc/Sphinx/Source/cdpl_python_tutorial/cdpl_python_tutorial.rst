@@ -190,12 +190,12 @@ The following table provides an overview of the most relevant interfaces and dat
      - Interface
      - `CDPL.Chem.Entity3DContainer`_
      - Represents a collection of `CDPL.Chem.Atom`_ instances and specifies methods for read-only
-       instance access, querying their number and collection membership testing
+       instance access, querying their number, collection membership testing and ordering
    * - `CDPL.Chem.BondContainer`_
      - Interface
      - None
      - Represents a collection of `CDPL.Chem.Bond`_ instances and specifies methods for read-only
-       instance access, querying their number and collection membership testing
+       instance access, querying their number, collection membership testing and ordering
    * - `CDPL.Chem.Atom`_
      - Interface
      - `CDPL.Chem.Entity3D`_, `CDPL.Chem.AtomContainer`_, `CDPL.Chem.BondContainer`_
@@ -217,13 +217,13 @@ The following table provides an overview of the most relevant interfaces and dat
    * - `CDPL.Chem.MolecularGraph`_
      - Interface
      - `CDPL.Chem.AtomContainer`_, `CDPL.Chem.BondContainer`_, `CDPL.Base.PropertyContainer`_
-     - Represents an arbitrary molecular graph described by a list of `CDPL.Chem.Atom`_ and a list of 
-       `CDPL.Chem.Bond`_ instances, specifies additional methods for cloning and atom/bond sequence reordering
+     - Represents an arbitrary molecular graph described by lists of `CDPL.Chem.Atom`_ and  
+       `CDPL.Chem.Bond`_ instances
    * - `CDPL.Chem.Molecule`_
      - Interface
      - `CDPL.Chem.MolecularGraph`_
      - Extends the `CDPL.Chem.MolecularGraph`_ interface by methods for atom and bond creation as well as methods 
-       for merging with other molecular graphs
+       for assignment of and merging with other molecular graphs
    * - `CDPL.Chem.BasicMolecule`_
      - Implementation
      - `CDPL.Chem.Molecule`_
@@ -232,8 +232,7 @@ The following table provides an overview of the most relevant interfaces and dat
      - Implementation
      - `CDPL.Chem.MolecularGraph`_
      - Stores references (not copies!) to `CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects owned/managed by one or 
-       more `CDPL.Chem.Molecule`_ instances and thus allows to specify molecule 
-       substructures/fragments of any kind (e.g. rings, substructure matches, ...) in a memory-efficient manner
+       more `CDPL.Chem.Molecule`_ instances
 
 Representation of Molecule Substructures
 ----------------------------------------
@@ -581,7 +580,8 @@ Example: Counting atom types and bond orders
 
 Atoms and bonds can also be accessed in a sequential manner by iterating over the corresponding atom and bond 
 lists. The atom sequence can be retrieved via the `Chem.MolecularGraph`_ interface by calling the method 
-`getAtoms()`_ or accessing the property `atoms`_. The bond  sequence by method `getBonds()`_ or property `bonds`_. The following code is an alternative version of the one above that employs sequential atom/bond access:
+`getAtoms()`_ or accessing the property `atoms`_. The bond sequence by method `getBonds()`_ or property `bonds`_. 
+The following code is an alternative version of the one above that employs sequential atom/bond access:
 
 .. code:: ipython3
 
@@ -777,7 +777,7 @@ test operator ``ìn`` as follows:
 
 .. parsed-literal::
 
-    False
+    True
 
 
 
@@ -910,11 +910,11 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index for a `Chem.Molecule`_ that is not the owner will trigger an exception:
+.. warning:: The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index on a `Chem.Molecule`_ instance that is not the owner will trigger an exception!
 
 .. code:: ipython3
 
-    mol_copy.getAtomIndex(mol.atoms[0])
+    mol.getAtomIndex(mol_copy.atoms[0])
 
 
 ::
@@ -924,9 +924,9 @@ The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index for a `C
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-121-a90c61ffb428> in <module>
-    ----> 1 mol_copy.getAtomIndex(mol.atoms[0])
-    
+    Cell In[143], line 1
+    ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
+
 
     ItemNotFound: BasicMolecule: argument atom not part of the molecule
 
@@ -943,11 +943,144 @@ The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index for a `C
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-122-ae6b58adf8f3> in <module>
+    Cell In[144], line 1
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
-    
+
 
     ItemNotFound: BasicMolecule: argument bond not part of the molecule
+
+
+Processing Bonds
+^^^^^^^^^^^^^^^^
+
+Class `Chem.Bond`_ is a subclass of `Chem.AtomContainer`_ and therein defined methods/properties are thus also available 
+for accessing and processing the two `Chem.Atom`_ objects referenced by each `Chem.Bond`_ instance: 
+
+
+.. code:: ipython3
+
+    bond = mol.getBond(2)
+    
+    bond.numAtoms
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getAtom(0))
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getAtom(1))
+
+
+
+
+.. parsed-literal::
+
+    3
+
+
+
+Alternatively, the atom pair connected by the bond can be accessed via the `Chem.Bond`_ property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ or the method 
+`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__:
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.atoms[0])
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getAtoms()[0])
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+The first atom (index=0) can also be directly accessed by calling the method `getBegin()`_ or via property `begin`_:
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getBegin())
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.begin)
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+The second atom (index=1) by calling the method `getEnd()`_ or via property `end`_:
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getEnd())
+
+
+
+
+.. parsed-literal::
+
+    3
+
+
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.end)
+
+
+
+
+.. parsed-literal::
+
+    3
+
 
 
 Reading Molecule Data
@@ -970,7 +1103,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_72_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_85_0.svg
 
 
 
@@ -985,7 +1118,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_74_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_87_0.svg
 
 
 
@@ -1058,7 +1191,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_76_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_89_0.svg
 
 
 
@@ -1153,7 +1286,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_83_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_96_0.svg
 
 
 
@@ -1167,11 +1300,11 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_84_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_97_0.svg
 
 
 
-If the index is out of the valid range then a corresponding exception will be thrown:
+.. warning:: If the index is out of the valid range then a corresponding exception will be thrown!
 
 .. code:: ipython3
 
@@ -1186,10 +1319,10 @@ If the index is out of the valid range then a corresponding exception will be th
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-109-7fa4905834ac> in <module>
+    Cell In[161], line 2
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
-    
+
 
     IndexError: StreamDataReader: record index out of bounds
 
@@ -1399,6 +1532,14 @@ If the index is out of the valid range then a corresponding exception will be th
 .. _getAtomIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a0948b758760f41820137c161a17cb7ac
 
 .. _getBondIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aa79fcf4b2cf4112b85e5e9fbf17146f6
+
+.. _getBegin(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ac0ee2582c2e1e5170cf177adb0f1b607
+
+.. _begin: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+
+.. _getEnd(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a13715c1f120b748dbdfa831ab74645fb
+
+.. _end: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 

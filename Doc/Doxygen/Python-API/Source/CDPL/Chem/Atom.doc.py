@@ -126,13 +126,13 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # \brief 
     # \return 
     #
-    def getAtoms() -> object: pass
+    def getAtoms() -> AtomSequence: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getBonds() -> object: pass
+    def getBonds() -> BondSequence: pass
 
     ##
     # \brief Returns a reference to the connected atom at index <em>idx</em>.
@@ -180,7 +180,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # \brief 
     # \param func 
     #
-    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 

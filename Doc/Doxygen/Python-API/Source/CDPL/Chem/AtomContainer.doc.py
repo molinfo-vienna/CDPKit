@@ -74,7 +74,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \param func The atom comparison function implementing the applied ordering criteria.
     # 
-    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief Returns a reference to the entity at index <em>idx</em>.

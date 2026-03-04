@@ -52,7 +52,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setBondStretchingFilterFunction(func: InteractionFilterFunction2) -> None: pass
+    def setBondStretchingFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 
@@ -82,13 +82,13 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setElectrostaticFilterFunction(func: InteractionFilterFunction2) -> None: pass
+    def setElectrostaticFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setVanDerWaalsFilterFunction(func: InteractionFilterFunction2) -> None: pass
+    def setVanDerWaalsFilterFunction(func: Chem.BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 

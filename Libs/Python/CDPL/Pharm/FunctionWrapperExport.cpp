@@ -43,7 +43,7 @@ void CDPLPythonPharm::exportFunctionWrappers()
     CDPLPythonBase::Function1Export<double(const ScreeningProcessor::SearchHit&) >("DoubleSearchHitFunctor");
     CDPLPythonBase::Function1Export<double(const Feature&), Feature&>("DoubleFeatureFunctor");
     CDPLPythonBase::Function1Export<bool(double), double, python::return_value_policy<python::return_by_value> >("BoolDoubleFunctor"); 
-    CDPLPythonBase::Function1Export<double(double), double,    python::return_value_policy<python::return_by_value> >("DoubleDoubleFunctor"); 
+    CDPLPythonBase::Function1Export<double(double), double,  python::return_value_policy<python::return_by_value> >("DoubleDoubleFunctor"); 
     CDPLPythonBase::Function1Export<bool(const Feature&), Feature&>("BoolFeatureFunctor");
 
     CDPLPythonBase::Function2Export<bool(const Feature&, const Feature&), Feature&, Feature&>("BoolFeature2Functor");

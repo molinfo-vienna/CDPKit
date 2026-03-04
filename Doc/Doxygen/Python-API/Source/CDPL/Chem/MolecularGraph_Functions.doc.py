@@ -410,7 +410,7 @@ def canonicalize(molgraph: MolecularGraph, atoms: bool = True, atom_nbrs: bool =
 # \param bonds 
 # \param bond_atoms 
 #
-def canonicalize(molgraph: MolecularGraph, func: ForceField.InteractionFilterFunction2, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
+def canonicalize(molgraph: MolecularGraph, func: BoolAtom2Functor, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
 
 ##
 # \brief 

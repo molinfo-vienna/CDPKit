@@ -287,7 +287,7 @@ class Molecule(MolecularGraph):
     # \brief 
     # \param func 
     #
-    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 

@@ -103,7 +103,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # \brief 
     # \return 
     #
-    def getAtoms() -> object: pass
+    def getAtoms() -> AtomSequence: pass
 
     ##
     # \brief Returns a reference to the atom at index <em>idx</em>.
@@ -153,7 +153,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
     # \brief 
     # \param func 
     #
-    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: BoolAtom2Functor) -> None: pass
 
     ##
     # \brief 
