@@ -879,7 +879,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 Retrieving Atom and Bond Indices
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The index of a `Chem.Atom`_ instance in the atom list of the owning `Chem.Molecule`_ 
+The index of a `Chem.Atom`_ instance in the atom list of the parent `Chem.Molecule`_ 
 instance can be retrieved by passing the atom as argument to the method `getAtomIndex()`_ 
 (`Chem.AtomContainer`_ interface). In a similar manner, the index of a `Chem.Bond`_ instance can be determined by 
 calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
@@ -910,7 +910,9 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-.. warning:: The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index on a `Chem.Molecule`_ instance that is not the owner will trigger an exception!
+.. warning:: The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index on a `Chem.Molecule`_ instance that is not the parent will raise an exception!
+
+Examples:
 
 .. code:: ipython3
 
@@ -924,9 +926,9 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
     ItemNotFound                              Traceback (most recent call last)
 
-    Cell In[143], line 1
+    <ipython-input-412-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
-
+    
 
     ItemNotFound: BasicMolecule: argument atom not part of the molecule
 
@@ -943,9 +945,9 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
     ItemNotFound                              Traceback (most recent call last)
 
-    Cell In[144], line 1
+    <ipython-input-413-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
-
+    
 
     ItemNotFound: BasicMolecule: argument bond not part of the molecule
 
@@ -953,9 +955,9 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 Processing Bonds
 ^^^^^^^^^^^^^^^^
 
-Class `Chem.Bond`_ is a subclass of `Chem.AtomContainer`_ and therein defined methods/properties are thus also available 
-for accessing and processing the two `Chem.Atom`_ objects referenced by each `Chem.Bond`_ instance: 
-
+`Chem.Bond`_ is a subclass of `Chem.AtomContainer`_ and methods/properties of the latter can thus be used 
+to access the two bonded `Chem.Atom`_ objects in the same way as it was done for the parent `Chem.Molecule`_ 
+instance:
 
 .. code:: ipython3
 
@@ -998,8 +1000,9 @@ for accessing and processing the two `Chem.Atom`_ objects referenced by each `Ch
 
 
 
-Alternatively, the atom pair connected by the bond can be accessed via the `Chem.Bond`_ property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ or the method 
-`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__:
+Like class `Chem.MolecularGraph`_, `Chem.Bond`_ provides the property `atoms 
+<https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ and the method 
+`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ which both give access to the atom pair sequence:
 
 .. code:: ipython3
 
@@ -1016,18 +1019,18 @@ Alternatively, the atom pair connected by the bond can be accessed via the `Chem
 
 .. code:: ipython3
 
-    mol.getAtomIndex(bond.getAtoms()[0])
+    mol.getAtomIndex(bond.getAtoms()[1])
 
 
 
 
 .. parsed-literal::
 
-    2
+    3
 
 
 
-The first atom (index=0) can also be directly accessed by calling the method `getBegin()`_ or via property `begin`_:
+Additionally, the first atom (index=0) can be retrieved directly by calling the method `getBegin()`_ or via the property `begin`_:
 
 .. code:: ipython3
 
@@ -1055,7 +1058,7 @@ The first atom (index=0) can also be directly accessed by calling the method `ge
 
 
 
-The second atom (index=1) by calling the method `getEnd()`_ or via property `end`_:
+The second atom (index=1) can be accessed via the property `end`_ or by calling the method `getEnd()`_:
 
 .. code:: ipython3
 
@@ -1083,6 +1086,230 @@ The second atom (index=1) by calling the method `getEnd()`_ or via property `end
 
 
 
+If one `Chem.Atom`_ instance is given the other instance referenced by the `Chem.Bond`_ object can be retrieved 
+by the calling the method `getNeighbor()`_ as follows:
+
+.. code:: ipython3
+
+    mol.getAtomIndex(bond.getNeighbor(bond.atoms[0]))
+
+
+
+
+.. parsed-literal::
+
+    3
+
+
+
+.. warning:: Passing a `Chem.Atom`_ instance as argument that is not a member of the bond will trigger an  exception!
+
+.. code:: ipython3
+
+    bond.getNeighbor(mol.atoms[0])
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    ItemNotFound                              Traceback (most recent call last)
+
+    <ipython-input-424-093f4eea5627> in <module>
+    ----> 1 bond.getNeighbor(mol.atoms[0])
+    
+
+    ItemNotFound: BasicBond: argument atom not a member
+
+
+Processing Atom Connections
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`Chem.Atom`_ sublasses both `Chem.AtomContainer`_ and `Chem.BondContainer`_ which together provide methods and 
+properties that can be used to access incident bonds and connected atoms.
+
+Example:
+
+.. code:: ipython3
+
+    for atom in mol.atoms:
+        print(f'atom index: {mol.getAtomIndex(atom)}')
+        print(f' num. connected atoms: {atom.numAtoms}')
+        
+        for i in range(atom.numAtoms):
+            con_atom = atom.getAtom(i)
+            con_bond = atom.getBond(i)
+            
+            print(f'  connected atom index: {mol.getAtomIndex(con_atom)}')
+            print(f'  bond index: {mol.getBondIndex(con_bond)}')
+
+
+.. parsed-literal::
+
+    atom index: 0
+     num. connected atoms: 2
+      connected atom index: 1
+      bond index: 0
+      connected atom index: 5
+      bond index: 5
+    atom index: 1
+     num. connected atoms: 2
+      connected atom index: 0
+      bond index: 0
+      connected atom index: 2
+      bond index: 1
+    atom index: 2
+     num. connected atoms: 2
+      connected atom index: 1
+      bond index: 1
+      connected atom index: 3
+      bond index: 2
+    atom index: 3
+     num. connected atoms: 2
+      connected atom index: 2
+      bond index: 2
+      connected atom index: 4
+      bond index: 3
+    atom index: 4
+     num. connected atoms: 2
+      connected atom index: 3
+      bond index: 3
+      connected atom index: 5
+      bond index: 4
+    atom index: 5
+     num. connected atoms: 2
+      connected atom index: 4
+      bond index: 4
+      connected atom index: 0
+      bond index: 5
+
+
+Additionally, `Chem.Atom`_ provides the method 
+`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#ad315d5b7c1755ffb65ddda9d9fe3819d>`__ and the property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html>`__ for 
+accessing the list of bonded `Chem.Atom`_ instances as well as the method 
+`getBonds() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a4171f816134f0dcd7762a1648d8518ab>`__ and the property `bonds <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ for 
+corresponding `Chem.Bond`_ instance access.
+
+The above code changed to use the mentioned properties:
+
+.. code:: ipython3
+
+    for atom in mol.atoms:
+        print(f'atom index: {mol.getAtomIndex(atom)}')
+        print(f' num. connected atoms: {atom.numAtoms}')
+        
+        for i in range(atom.numAtoms):
+            con_atom = atom.atoms[i]
+            con_bond = atom.bonds[i]
+            
+            print(f'  connected atom index: {mol.getAtomIndex(con_atom)}')
+            print(f'  bond index: {mol.getBondIndex(con_bond)}')
+
+
+.. parsed-literal::
+
+    atom index: 0
+     num. connected atoms: 2
+      connected atom index: 1
+      bond index: 0
+      connected atom index: 5
+      bond index: 5
+    atom index: 1
+     num. connected atoms: 2
+      connected atom index: 0
+      bond index: 0
+      connected atom index: 2
+      bond index: 1
+    atom index: 2
+     num. connected atoms: 2
+      connected atom index: 1
+      bond index: 1
+      connected atom index: 3
+      bond index: 2
+    atom index: 3
+     num. connected atoms: 2
+      connected atom index: 2
+      bond index: 2
+      connected atom index: 4
+      bond index: 3
+    atom index: 4
+     num. connected atoms: 2
+      connected atom index: 3
+      bond index: 3
+      connected atom index: 5
+      bond index: 4
+    atom index: 5
+     num. connected atoms: 2
+      connected atom index: 4
+      bond index: 4
+      connected atom index: 0
+      bond index: 5
+
+
+The `Chem.Bond`_ instance that connects two specific atoms can be queried using the `Chem.Atom`_ method 
+`getBondToAtom()`_. The method is called on one of the `Chem.Atom`_ instances and expects the bonded other 
+`Chem.Atom`_ instance as argument:
+
+.. code:: ipython3
+
+    mol.getBondIndex(mol.atoms[0].getBondToAtom(mol.atoms[5]))
+
+
+
+
+.. parsed-literal::
+
+    5
+
+
+
+.. warning:: If a `Chem.Bond`_ instance connecting the `Chem.Atom`_ instance pair does not exist then an exception will be raised!
+
+.. code:: ipython3
+
+    mol.atoms[0].getBondToAtom(mol.atoms[2])
+
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    ItemNotFound                              Traceback (most recent call last)
+
+    <ipython-input-428-8b35fac927c4> in <module>
+    ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
+    
+
+    ItemNotFound: BasicAtom: argument atom is not a bonded neighbor
+
+
+Alternatively, the method `findBondToAtom()`_ can be used. In contrast to `getBondToAtom()`_ the method returns 
+``None`` if a connecting `Chem.Bond`_ instance does not exist:
+
+.. code:: ipython3
+
+    print(mol.atoms[0].findBondToAtom(mol.atoms[2]))
+
+
+.. parsed-literal::
+
+    None
+
+
+Basic Operations on `Fragment`_ Objects
+---------------------------------------
+
+Creation
+^^^^^^^^
+
+An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be created simply by:
+
+.. code:: ipython3
+
+    frag = Chem.Fragment()
+
 Reading Molecule Data
 ---------------------
 
@@ -1103,7 +1330,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_85_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_102_0.svg
 
 
 
@@ -1118,7 +1345,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_87_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_104_0.svg
 
 
 
@@ -1191,7 +1418,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_89_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_106_0.svg
 
 
 
@@ -1286,7 +1513,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_96_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_113_0.svg
 
 
 
@@ -1300,7 +1527,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_97_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_114_0.svg
 
 
 
@@ -1319,10 +1546,10 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    Cell In[161], line 2
+    <ipython-input-438-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
-
+    
 
     IndexError: StreamDataReader: record index out of bounds
 
@@ -1453,6 +1680,8 @@ Example:
 
 .. _Chem.Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
 
+.. _Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
+
 .. _CDPL.Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
 
 .. _Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
@@ -1540,6 +1769,12 @@ Example:
 .. _getEnd(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a13715c1f120b748dbdfa831ab74645fb
 
 .. _end: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+
+.. _getNeighbor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a35bdb2637eb405a3da3cc359475a1e31
+
+.. _getBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a497cb5e9b1a04c0cee82dfb52bc05211
+
+.. _findBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a50618b3ee26e58792e35618622ff5697
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
