@@ -83,7 +83,7 @@ namespace
             return (self = bond);
         }
 
-        CDPL::Chem::Atom& getNeighborWrapper(CDPL::Chem::Bond& self, CDPL::Chem::Atom& atom) {
+        static CDPL::Chem::Atom& getNeighborWrapper(CDPL::Chem::Bond& self, CDPL::Chem::Atom& atom) {
               return self.getNeighbor(atom);
         }
     };
@@ -97,7 +97,6 @@ void CDPLPythonChem::exportBond()
 
     Chem::Atom& (Chem::Bond::*getBeginFunc)() = &Chem::Bond::getBegin;
     Chem::Atom& (Chem::Bond::*getEndFunc)() = &Chem::Bond::getEnd;
-
     Chem::Molecule& (Chem::Bond::*getMoleculeFunc)() = &Chem::Bond::getMolecule;
 
     python::scope scope = python::class_<BondWrapper, python::bases<Chem::AtomContainer, Base::PropertyContainer>,
