@@ -55,12 +55,15 @@ class Bond(AtomContainer, Base.PropertyContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \param arg1 
-    # \param atom 
-    # \return 
-    #
-    def getNeighbor(self: Bond, atom: Atom) -> Atom: pass
+    # \brief Returns a reference to the connected neighbor of the argument atom.
+    # 
+    # \param atom The atom for which to return the connected neighbor atom.
+    # 
+    # \return A reference to the connected neighbor atom of the argument atom. 
+    # 
+    # \throw Base.ItemNotFound if the specified atom is not involved in the bond.
+    # 
+    def getNeighbor(atom: Atom) -> Atom: pass
 
     ##
     # \brief Returns a reference to the start atom of the bond.
