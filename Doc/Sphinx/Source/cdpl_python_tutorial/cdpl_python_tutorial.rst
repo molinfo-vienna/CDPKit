@@ -505,7 +505,8 @@ A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ in
 
 
 
-It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using the inplace addition operator ``+=``:
+It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
+
 
 .. code:: ipython3
 
@@ -516,7 +517,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_40_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_41_0.svg
 
 
 
@@ -529,7 +530,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_41_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_42_0.svg
 
 
 
@@ -641,7 +642,7 @@ Atoms, bonds and properties can be removed completely by calling the method `cle
 Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectiviely. The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
+Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectively. The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
 argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an 
 index outside the allowed range will raise an exception.
 
@@ -671,7 +672,7 @@ index outside the allowed range will raise an exception.
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_49_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_50_1.svg
 
 
 
@@ -704,7 +705,7 @@ the bond count:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_51_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_52_1.svg
 
 
 
@@ -717,7 +718,7 @@ Removing multiple Atoms and Bonds
 
 Multiple atoms and bonds can be removed at once via the help of a `Chem.Fragment`_ instance that specifies the 
 atoms and bonds to remove. After adding atoms and bonds to the Chem.Fragment`_ instance their removal is initiated 
-either by calling the method `remove()`_ with the fragment object as argument or by inplace subtraction (``-=``) of the fragment object:
+either by calling the method `remove()`_ with the fragment object as argument or by `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ (``-=``) of the fragment object:
 
 .. code:: ipython3
 
@@ -755,7 +756,7 @@ either by calling the method `remove()`_ with the fragment object as argument or
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_54_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_55_1.svg
 
 
 
@@ -926,7 +927,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-412-835c00aa411f> in <module>
+    <ipython-input-413-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -945,7 +946,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-413-ae6b58adf8f3> in <module>
+    <ipython-input-414-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1116,7 +1117,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-424-093f4eea5627> in <module>
+    <ipython-input-425-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1134,55 +1135,55 @@ Example:
 .. code:: ipython3
 
     for atom in mol.atoms:
-        print(f'atom index: {mol.getAtomIndex(atom)}')
-        print(f' num. connected atoms: {atom.numAtoms}')
+        print(f'Atom index: {mol.getAtomIndex(atom)}')
+        print(f' Num. connected atoms: {atom.numAtoms}')
         
         for i in range(atom.numAtoms):
             con_atom = atom.getAtom(i)
             con_bond = atom.getBond(i)
             
-            print(f'  connected atom index: {mol.getAtomIndex(con_atom)}')
-            print(f'  bond index: {mol.getBondIndex(con_bond)}')
+            print(f'  Connected atom index: {mol.getAtomIndex(con_atom)}')
+            print(f'  Bond index: {mol.getBondIndex(con_bond)}')
 
 
 .. parsed-literal::
 
-    atom index: 0
-     num. connected atoms: 2
-      connected atom index: 1
-      bond index: 0
-      connected atom index: 5
-      bond index: 5
-    atom index: 1
-     num. connected atoms: 2
-      connected atom index: 0
-      bond index: 0
-      connected atom index: 2
-      bond index: 1
-    atom index: 2
-     num. connected atoms: 2
-      connected atom index: 1
-      bond index: 1
-      connected atom index: 3
-      bond index: 2
-    atom index: 3
-     num. connected atoms: 2
-      connected atom index: 2
-      bond index: 2
-      connected atom index: 4
-      bond index: 3
-    atom index: 4
-     num. connected atoms: 2
-      connected atom index: 3
-      bond index: 3
-      connected atom index: 5
-      bond index: 4
-    atom index: 5
-     num. connected atoms: 2
-      connected atom index: 4
-      bond index: 4
-      connected atom index: 0
-      bond index: 5
+    Atom index: 0
+     Num. connected atoms: 2
+      Connected atom index: 1
+      Bond index: 0
+      Connected atom index: 5
+      Bond index: 5
+    Atom index: 1
+     Num. connected atoms: 2
+      Connected atom index: 0
+      Bond index: 0
+      Connected atom index: 2
+      Bond index: 1
+    Atom index: 2
+     Num. connected atoms: 2
+      Connected atom index: 1
+      Bond index: 1
+      Connected atom index: 3
+      Bond index: 2
+    Atom index: 3
+     Num. connected atoms: 2
+      Connected atom index: 2
+      Bond index: 2
+      Connected atom index: 4
+      Bond index: 3
+    Atom index: 4
+     Num. connected atoms: 2
+      Connected atom index: 3
+      Bond index: 3
+      Connected atom index: 5
+      Bond index: 4
+    Atom index: 5
+     Num. connected atoms: 2
+      Connected atom index: 4
+      Bond index: 4
+      Connected atom index: 0
+      Bond index: 5
 
 
 Additionally, `Chem.Atom`_ provides the method 
@@ -1196,55 +1197,55 @@ The above code changed to use the mentioned properties:
 .. code:: ipython3
 
     for atom in mol.atoms:
-        print(f'atom index: {mol.getAtomIndex(atom)}')
-        print(f' num. connected atoms: {atom.numAtoms}')
+        print(f'Atom index: {mol.getAtomIndex(atom)}')
+        print(f' Num. connected atoms: {atom.numAtoms}')
         
         for i in range(atom.numAtoms):
             con_atom = atom.atoms[i]
             con_bond = atom.bonds[i]
             
-            print(f'  connected atom index: {mol.getAtomIndex(con_atom)}')
-            print(f'  bond index: {mol.getBondIndex(con_bond)}')
+            print(f'  Connected atom index: {mol.getAtomIndex(con_atom)}')
+            print(f'  Bond index: {mol.getBondIndex(con_bond)}')
 
 
 .. parsed-literal::
 
-    atom index: 0
-     num. connected atoms: 2
-      connected atom index: 1
-      bond index: 0
-      connected atom index: 5
-      bond index: 5
-    atom index: 1
-     num. connected atoms: 2
-      connected atom index: 0
-      bond index: 0
-      connected atom index: 2
-      bond index: 1
-    atom index: 2
-     num. connected atoms: 2
-      connected atom index: 1
-      bond index: 1
-      connected atom index: 3
-      bond index: 2
-    atom index: 3
-     num. connected atoms: 2
-      connected atom index: 2
-      bond index: 2
-      connected atom index: 4
-      bond index: 3
-    atom index: 4
-     num. connected atoms: 2
-      connected atom index: 3
-      bond index: 3
-      connected atom index: 5
-      bond index: 4
-    atom index: 5
-     num. connected atoms: 2
-      connected atom index: 4
-      bond index: 4
-      connected atom index: 0
-      bond index: 5
+    Atom index: 0
+     Num. connected atoms: 2
+      Connected atom index: 1
+      Bond index: 0
+      Connected atom index: 5
+      Bond index: 5
+    Atom index: 1
+     Num. connected atoms: 2
+      Connected atom index: 0
+      Bond index: 0
+      Connected atom index: 2
+      Bond index: 1
+    Atom index: 2
+     Num. connected atoms: 2
+      Connected atom index: 1
+      Bond index: 1
+      Connected atom index: 3
+      Bond index: 2
+    Atom index: 3
+     Num. connected atoms: 2
+      Connected atom index: 2
+      Bond index: 2
+      Connected atom index: 4
+      Bond index: 3
+    Atom index: 4
+     Num. connected atoms: 2
+      Connected atom index: 3
+      Bond index: 3
+      Connected atom index: 5
+      Bond index: 4
+    Atom index: 5
+     Num. connected atoms: 2
+      Connected atom index: 4
+      Bond index: 4
+      Connected atom index: 0
+      Bond index: 5
 
 
 The `Chem.Bond`_ instance that connects two specific atoms can be queried using the `Chem.Atom`_ method 
@@ -1278,7 +1279,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-428-8b35fac927c4> in <module>
+    <ipython-input-429-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -1301,14 +1302,340 @@ Alternatively, the method `findBondToAtom()`_ can be used. In contrast to `getBo
 Basic Operations on `Fragment`_ Objects
 ---------------------------------------
 
+`Chem.Fragment`_ (see section `Representation of Molecule Substructures`_) implements the `Chem.MolecularGraph`_ 
+interface and thus provides the same methods and properties as `Chem.Molecule`_ for accessing/processing the 
+referenced `Chem.Atom`_ and `Chem.Bond`_ instances (see section `Basic Operations on Molecule Objects`_). 
+In the following subsections therefore only those methods of `Chem.Fragment`_ will be treated that 
+are not present in class `Chem.Molecule`_ or for some other reasons deserve a more closer 
+look. 
+
 Creation
 ^^^^^^^^
 
-An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be created simply by:
+An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be created by:
 
 .. code:: ipython3
 
     frag = Chem.Fragment()
+    
+    frag.numAtoms
+
+
+
+
+.. parsed-literal::
+
+    0
+
+
+
+`Chem.Fragment`_ also provides constructors that accept either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ 
+instance as argument. These constructors create a `Chem.Fragment`_ object that will then reference the same 
+`Chem.Atom`_ and `Chem.Bond`_ instances as the passed argument:
+
+.. code:: ipython3
+
+    frag = Chem.Fragment(mol)
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_103_0.svg
+
+
+
+As noted in section `Representation of Molecule Substructures`_, `Chem.Atom`_ and `Chem.Bond`_ 
+instances added to a `Chem.Fragment`_ instance get stored as pointers (not as copies). 
+Membership tests for `Chem.Atom`_ and `Chem.Bond`_ instances retrieved from a `Chem.Fragment`_ will therefore  
+evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ object:
+
+.. code:: ipython3
+
+    atom = frag.getAtom(0)
+    
+    frag.containsAtom(atom)
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    mol.containsAtom(atom)
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    bond = frag.getBond(0)
+    
+    frag.containsBond(bond)
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+.. code:: ipython3
+
+    mol.containsBond(bond)
+
+
+
+
+.. parsed-literal::
+
+    True
+
+
+
+Adding single Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For adding individual `Chem.Atom`_ and `Chem.Bond`_ instances class `Chem.Fragment`_ provides the methods 
+`addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#afcb879ed6470ef02b6b4bb2c6c8070e8>`__ and 
+`addBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, respectively. 
+For molecular graph consistency reasons adding a `Chem.Bond`_ instance also adds the two 
+`Chem.Atom`_ instances referenced by the bond (if not added already). Furthermore, pointers to `Chem.Atom`_ and 
+`Chem.Bond`_ instances get stored only once. In case a given `Chem.Atom`_ or `Chem.Bond`_ instance has already 
+been added the methods will do nothing and just return ``False``. 
+
+Examples:
+
+.. code:: ipython3
+
+    # atom already present -> False
+    frag.addAtom(mol.atoms[0])
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    # bond already present -> False
+    frag.addBond(mol.bonds[0])
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    frag = Chem.Fragment()
+    
+    print(f'Num. atoms before addBond(): {frag.numAtoms}')
+    
+    frag.addBond(mol_copy.bonds[0])
+    
+    print(f'Num. atoms after addBond(): {frag.numAtoms}')
+    print(f'Num. bonds after addBond(): {frag.numBonds}')
+    
+    frag
+
+
+.. parsed-literal::
+
+    Num. atoms before addBond(): 0
+    Num. atoms after addBond(): 2
+    Num. bonds after addBond(): 1
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_112_1.svg
+
+
+
+Adding multiple Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **replaced** by the method 
+`assign() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as argument:
+
+.. code:: ipython3
+
+    frag.assign(mol)
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_114_0.svg
+
+
+
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** using the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ ``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
+
+.. code:: ipython3
+
+    frag += mol_copy
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_116_0.svg
+
+
+
+Exchanging Atom and Bond Lists
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually exchanged by calling the method `swap()`_ on one of the instances and providing the other as argument:
+
+.. code:: ipython3
+
+    frag2 = Chem.Fragment(mol)
+    
+    frag.swap(frag2)
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_118_0.svg
+
+
+
+.. code:: ipython3
+
+    frag2
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_119_0.svg
+
+
+
+Removing single Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Single atoms and bonds can be removed by calling the methods `removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or their zero-based 
+index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
+Specifying an index outside the allowed range will raise an exception.
+
+Examples:
+
+.. code:: ipython3
+
+    print(f'Num. atoms before removeAtom(1): {frag.numAtoms}')
+    print(f'Num. bonds before removeAtom(1): {frag.numBonds}')
+    
+    # remove 2nd atom
+    frag.removeAtom(1)
+    
+    print(f'Num. atoms after removeAtom(1): {frag.numAtoms}')
+    print(f'Num. bonds after removeAtom(1): {frag.numBonds}')
+    
+    frag
+
+
+.. parsed-literal::
+
+    Num. atoms before removeAtom(1): 6
+    Num. bonds before removeAtom(1): 6
+    Num. atoms after removeAtom(1): 5
+    Num. bonds after removeAtom(1): 4
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_121_1.svg
+
+
+
+In order to maintain molecular graph consistency, removing an atom automatically triggers the removal of all incident bonds. Removal of a bond has no side effect on the atom count:
+
+.. code:: ipython3
+
+    print(f'Num. atoms before removeBond(2): {frag.numAtoms}')
+    print(f'Num. bonds before removeBond(2): {frag.numBonds}')
+    
+    # remove 3rd bond
+    frag.removeBond(frag.bonds[2])
+    
+    print(f'Num. atoms after removeBond(2): {frag.numAtoms}')
+    print(f'Num. bonds after removeBond(2): {frag.numBonds}')
+    
+    frag
+
+
+.. parsed-literal::
+
+    Num. atoms before removeBond(2): 5
+    Num. bonds before removeBond(2): 4
+    Num. atoms after removeBond(2): 5
+    Num. bonds after removeBond(2): 3
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_123_1.svg
+
+
+
+When the removal of a `Chem.Atom`_ or `Chem.Bond`_ instance is attempted that is not contained in the 
+`Chem.Fragment`_ instance then the corresponding methods return ``False`` to indicate that the removal
+operation failed:
+
+.. code:: ipython3
+
+    frag.removeAtom(mol_copy.getAtom(0))
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+.. code:: ipython3
+
+    frag.removeBond(mol_copy.getBond(0))
+
+
+
+
+.. parsed-literal::
+
+    False
+
+
 
 Reading Molecule Data
 ---------------------
@@ -1330,7 +1657,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_102_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_128_0.svg
 
 
 
@@ -1345,7 +1672,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_104_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_130_0.svg
 
 
 
@@ -1418,7 +1745,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_106_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_132_0.svg
 
 
 
@@ -1513,7 +1840,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_113_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_139_0.svg
 
 
 
@@ -1527,7 +1854,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_114_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_140_0.svg
 
 
 
@@ -1546,7 +1873,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-438-7fa4905834ac> in <module>
+    <ipython-input-455-7fa4905834ac> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol)
     
@@ -1775,6 +2102,8 @@ Example:
 .. _getBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a497cb5e9b1a04c0cee82dfb52bc05211
 
 .. _findBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a50618b3ee26e58792e35618622ff5697
+
+.. _swap(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a7dd0fcc088c1a7da30e75e3f61d5ac1a
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
