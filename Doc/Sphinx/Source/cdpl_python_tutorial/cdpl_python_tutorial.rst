@@ -927,7 +927,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-413-835c00aa411f> in <module>
+    <ipython-input-498-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -946,7 +946,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-414-ae6b58adf8f3> in <module>
+    <ipython-input-499-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1117,7 +1117,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-425-093f4eea5627> in <module>
+    <ipython-input-510-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1279,7 +1279,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-429-8b35fac927c4> in <module>
+    <ipython-input-514-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -1509,10 +1509,26 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended**
 
 
 
+Note that only `Chem.Atom`_ and `Chem.Bond`_ instance will be added that are not already part of the `Chem.Fragment`_ instance:
+
+.. code:: ipython3
+
+    # fragment remains unaltered
+    frag += mol_copy
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_118_0.svg
+
+
+
 Exchanging Atom and Bond Lists
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually exchanged by calling the method `swap()`_ on one of the instances and providing the other as argument:
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually exchanged by calling the method `swap()`_ on one of the instances providing the other instance as argument:
 
 .. code:: ipython3
 
@@ -1525,7 +1541,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragme
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_118_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_120_0.svg
 
 
 
@@ -1536,14 +1552,14 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragme
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_119_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_121_0.svg
 
 
 
 Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single atoms and bonds can be removed by calling the methods `removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or their zero-based 
+Single atoms and bonds can be removed by calling the methods `removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or the zero-based 
 index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
 Specifying an index outside the allowed range will raise an exception.
 
@@ -1573,7 +1589,7 @@ Examples:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_121_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_123_1.svg
 
 
 
@@ -1603,11 +1619,11 @@ In order to maintain molecular graph consistency, removing an atom automatically
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_123_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_125_1.svg
 
 
 
-When the removal of a `Chem.Atom`_ or `Chem.Bond`_ instance is attempted that is not contained in the 
+When the removal of a `Chem.Atom`_ or `Chem.Bond`_ instance is attempted that is not part of the
 `Chem.Fragment`_ instance then the corresponding methods return ``False`` to indicate that the removal
 operation failed:
 
@@ -1637,6 +1653,71 @@ operation failed:
 
 
 
+.. code:: ipython3
+
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_129_0.svg
+
+
+
+Removing multiple Atoms and Bonds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ (``-=``) of a `Chem.MolecularGraph`_ instance:
+
+.. code:: ipython3
+
+    frag.assign(mol)
+    
+    frag += mol_copy
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_131_0.svg
+
+
+
+.. code:: ipython3
+
+    frag2.clear()
+    
+    frag2.addBond(mol_copy.getBond(0))
+    frag2.addBond(mol_copy.getBond(1))
+    
+    frag -= frag2
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_132_0.svg
+
+
+
+Attempting to remove `Chem.Atom`_ and `Chem.Bond`_ instances that are not part of the `Chem.Fragment`_ instance 
+will have no effect:
+
+.. code:: ipython3
+
+    frag -= frag2
+    
+    frag
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_134_0.svg
+
+
+
 Reading Molecule Data
 ---------------------
 
@@ -1657,7 +1738,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_128_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_136_0.svg
 
 
 
@@ -1672,7 +1753,7 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_130_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_138_0.svg
 
 
 
@@ -1745,7 +1826,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_132_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_140_0.svg
 
 
 
@@ -1795,7 +1876,7 @@ Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molec
     reader = Chem.MoleculeReader(ios, 'smi')
     mol_count = 0
     
-    while reader.read(mol):
+    while reader.read(mol_copy):
        mol_count += 1
     
     print(f'Read {mol_count} molecules')
@@ -1833,28 +1914,28 @@ Example:
 .. code:: ipython3
 
     # read the 2nd molecule
-    reader.read(1, mol)
+    reader.read(1, mol_copy)
     
-    mol
+    mol_copy
 
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_139_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_147_0.svg
 
 
 
 .. code:: ipython3
 
     # read the 1st molecule
-    reader.read(0, mol)
+    reader.read(0, mol_copy)
     
-    mol
+    mol_copy
 
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_140_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_148_0.svg
 
 
 
@@ -1863,7 +1944,7 @@ Example:
 .. code:: ipython3
 
     # there is no 4th molecule
-    reader.read(3, mol)
+    reader.read(3, mol_copy)
 
 
 ::
@@ -1873,12 +1954,100 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-455-7fa4905834ac> in <module>
+    <ipython-input-545-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
-    ----> 2 reader.read(3, mol)
+    ----> 2 reader.read(3, mol_copy)
     
 
     IndexError: StreamDataReader: record index out of bounds
+
+
+Writing Molecule Data
+---------------------
+
+Direct String Output
+^^^^^^^^^^^^^^^^^^^^
+
+.. rubric:: SMILES
+
+For the direct generation of SMILES strings the  built-in utility function `Chem.generateSMILES()`_ is provided. 
+The function expects a `Chem.MolecularGraph`_ instance representing the chemical structure as its first argument. Additional optional arguments allow to customize the SMILES output in several aspects.
+
+Examples:
+
+.. code:: ipython3
+
+    Chem.calcBasicProperties(mol, False) # calculate required properties, more on that later
+    
+    Chem.generateSMILES(mol) # by default non-canonical SMILES strinsg are generated
+
+
+
+
+.. parsed-literal::
+
+    'OC(=O)[C@@H](N)C'
+
+
+
+.. code:: ipython3
+
+    Chem.generateSMILES(mol, True) # second arg. True -> generate canonical SMILES
+
+
+
+
+.. parsed-literal::
+
+    'C[C@@H](C(O)=O)N'
+
+
+
+.. code:: ipython3
+
+    Chem.generateSMILES(mol, True, False) # third arg. False -> output also standard H-atoms
+
+
+
+
+.. parsed-literal::
+
+    '[H][C@@](C(=O)O[H])(C([H])([H])[H])N([H])[H]'
+
+
+
+.. rubric:: InChI
+
+For the generation of InChI strings the  utility function `Chem.generateINCHI()`_ is provided, The function also 
+expects a `Chem.MolecularGraph`_ instance as its first argument. A second optional argument of type ``str`` allows to provide settings for the InChI generation code (supported options are described `here <https://github.com/IUPAC-InChI/InChI/blob/dev/INCHI-1-DOC/APIReference/InChI_API_Reference.md#getinchi>`__). The third argument controls the dimension of the atom coordinates (0 (=auto sel.), 2 or 3) that are output as part of the generated auxiliary 
+information (if enabled by the provided settings, see second example).
+
+Examples:
+
+.. code:: ipython3
+
+    Chem.generateINCHI(mol)
+
+
+
+
+.. parsed-literal::
+
+    'InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1'
+
+
+
+.. code:: ipython3
+
+    Chem.generateINCHI(mol, '/WarnOnEmptyStructure /NEWPSOFF', 0)
+
+
+
+
+.. parsed-literal::
+
+    'InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1 AuxInfo=1/1/N:5,4,6,3,1,2/E:(5,6)/it:im/rA:13OONCCCHHHHHHH/rB:;;n3;s4;s1d2s4;s4;s5;s5;s5;s3;s3;s1;/rC:5.135,-.25,0;4.269,1.25,0;2.5369,.25,0;3.403,-.25,0;3.403,-1.25,0;4.269,.25,0;3.403,.37,0;2.783,-1.25,0;3.403,-1.87,0;4.023,-1.25,0;2,-.06,0;2.5369,.87,0;5.672,.06,0;'
+
 
 
 .. _Rich Output: https://ipython.readthedocs.io/en/stable/interactive/plotting.html
@@ -2015,6 +2184,8 @@ Example:
 
 .. _CDPL.Chem.MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
 
+.. _Chem.MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
+
 .. _Chem.MOL2MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html
 
 .. _CDPL.Chem.SDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
@@ -2107,6 +2278,8 @@ Example:
 
 .. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
+.. _write(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html#abd69e3d91024fff2fe687d804e36f1ea
+
 .. _numRecords: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
 .. _getNumRecords(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80
@@ -2121,7 +2294,13 @@ Example:
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
+.. _Chem.generateSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b2f4f87930cf893cc80c2930b268014
+
 .. _Chem.parseSMARTS(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc
+
+.. _Chem.generateINCHI(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae64b94b51bd619fb7cfcf1fc39fc3198
+
+.. _Chem.generateINCHIKey(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aaed4c5b1939731a06640f651593e8908
 
 .. _setParent(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac6b8c89fead591acfcdc6d31996a3b84
 
