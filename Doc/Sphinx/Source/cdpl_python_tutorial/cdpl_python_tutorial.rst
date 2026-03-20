@@ -927,7 +927,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-38-835c00aa411f> in <module>
+    <ipython-input-413-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -946,7 +946,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-39-ae6b58adf8f3> in <module>
+    <ipython-input-414-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1117,7 +1117,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-50-093f4eea5627> in <module>
+    <ipython-input-425-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1279,7 +1279,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-54-8b35fac927c4> in <module>
+    <ipython-input-429-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -1954,7 +1954,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-85-4f5078ed4ed6> in <module>
+    <ipython-input-460-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2051,7 +2051,7 @@ Examples:
 
 .. rubric:: InChI Keys
 
-The InChI Key of a given `Chem.MolecularGraph`_ instance can be generated quite simply via the utility function `Chem.generateINCHIKey()`_ as follows:
+Similarly, the InChI Key of a given `Chem.MolecularGraph`_ instance can be generated via the utility function `Chem.generateINCHIKey()`_:
 
 .. code:: ipython3
 
@@ -2145,13 +2145,62 @@ File Output
 ^^^^^^^^^^^
 
 Writing `Chem.MolecularGraph`_ instance data to file storage also requires the creation of a 
-`Chem.MoleculeReaderBase`_ subclass instance that performs the actual format-specific data encoding work. 
-As with string data, several options exist:
+`Chem.MolecularGraphWriterBase`_ subclass instance that performs the actual format-specific data encoding work. 
+As with string data output, several options exist:
 
 1. Instantiation of class `Chem.MolecularGraphWriter`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
 2. Instantiation of class `Chem.MolecularGraphWriter`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.SDFMolecularGraphWriter`_ implementing writing MDL SD-file data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.FileSDFMolecularGraphWriter`_) that accepts a file path as constructor argument.
+
+.. code:: ipython3
+        
+    # - Option 1 -
+    writer = Chem.MolecularGraphWriter('/path/to/output/file.sdf')
+    # or
+    writer = Chem.MolecularGraphWriter('/path/to/output/file', 'smi')
+    # or
+    writer = Chem.MolecularGraphWriter('/path/to/output/file', Chem.DataFormat.SMILES)
+
+    # - Option 2 -
+    writer = Chem.MolecularGraphWriter(Base.FileIOStream('/path/to/output/file', 'w'), 'sdf')
+    # or
+    writer = Chem.MolecularGraphWriter(Base.FileIOStream('/path/to/output/file', 'w'), Chem.DataFormat.SDF)
+
+    # - Option 3 -
+    writer = Chem.MOL2MolecularGraphWriter(Base.FileIOStream('/path/to/output/file', 'w'))
+
+    # - Option 4 -
+    writer = Chem.FileSDFMolecularGraphWriter('/path/to/output/file')
+    
+Once a data writer instance has been created, the `write()`_ method can be called one or multiple times with 
+the `Chem.MolecularGraph`_ instance(s) to output as argument. After all `Chem.MolecularGraph`_ instances have been output the `close()`_ method needs to be called to flush all written data to disk and close the file (note: 
+although this method will be called automatically by the destructor of the data writer, an explicit call will have 
+an immediate effect and is preferred over a delayed destructor call by the garbage collector happening at an 
+indeterminate point in time). 
+
+Example: SMILES output of two `Chem.Molecule`_ instances
+
+.. code:: ipython3
+
+    Chem.calcBasicProperties(mol_copy, False) # calc. required properties
+    
+    writer = Chem.MolecularGraphWriter('output.smi')
+    
+    writer.write(mol)
+    writer.write(mol_copy)
+    writer.close()
+    
+    with open('output.smi', 'r') as smi_file:
+        print(smi_file.read())
+
+
+.. parsed-literal::
+
+    OC(=O)[C@@H](N)C 5950
+    c1n(ccn1)c1ccc(cc1)c1ccc(n1c1c(cc(cc1)C(=O)N)C)CCC(=O)[O-] 022_3QJ5_A
+    
+
 
 .. _Rich Output: https://ipython.readthedocs.io/en/stable/interactive/plotting.html
 
