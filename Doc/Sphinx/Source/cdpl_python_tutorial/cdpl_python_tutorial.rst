@@ -1721,12 +1721,12 @@ will have no effect:
 Reading Molecule Data
 ---------------------
 
-Data provided as Strings
-^^^^^^^^^^^^^^^^^^^^^^^^
+Parsing String Data
+^^^^^^^^^^^^^^^^^^^
 
 .. rubric:: SMILES and SMARTS
 
-For the direct parsing of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.parseSMILES()`_. The function returns a `Chem.BasicMolecule`_ object representing the chemical structure 
+For the parsing of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.parseSMILES()`_. The function returns a `Chem.BasicMolecule`_ object representing the chemical structure 
 encoded by the given SMILES string. For example:
 
 .. code:: ipython3
@@ -1830,8 +1830,8 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-Reading Molecules from Files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Reading Data Files
+^^^^^^^^^^^^^^^^^^
 
 Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase`_ subclass instance that performs the actual format-specific data decoding work. As with string data, several options exist:
 
@@ -1961,6 +1961,102 @@ Example:
 
     IndexError: StreamDataReader: record index out of bounds
 
+
+Essential Atom Properties
+-------------------------
+
+The following table lists a subset of the exported `Chem.Atom`_ properties which are considered essential for a 
+proper description of atoms in a molecular structure. The corresponding property keys are made available as static 
+public members of class `Chem.AtomProperty`_ or `Chem.Entity3DProperty`_ (see section `Dynamic Properties`_ for 
+further infromation). Along  with each defined property key the `CDPL.Chem`_ package provides four functions that 
+allow for a more comfortable and type-safe property value handling.
+
+.. list-table::
+   :widths: 25 20 15 20 20
+   :header-rows: 1
+
+   * - Description
+     - Property Key
+     - Property Functions
+     - C++/Python Value Type
+     - Default Value
+   * - Numeric atom type/atomic number
+     - `TYPE`_
+     - `Chem.setType()`_, `Chem.getType()`_, `Chem.hasType()`_, `Chem.clearType()`_
+     - *unsigned int*/*int*
+     - `Chem.AtomType.UNKNOWN`_
+   * - Symbolic atom type/element symbol
+     - `SYMBOL`_
+     - `Chem.setSymbol()`_, `Chem.getSymbol()`_, 
+       `Chem.hasSymbol()`_, `Chem.clearSymbol()`_
+     - *std::string*/*str*
+     - ``''``
+   * - Formal charge
+     - `FORMAL_CHARGE`_
+     - `Chem.setFormalCharge()`_, `Chem.getFormalCharge()`_, 
+       `Chem.hasFormalCharge()`_, `Chem.clearFormalCharge()`_
+     - *long*/*int*
+     - ``0``
+   * - Isotope (neutron count)
+     - `ISOTOPE`_
+     - `Chem.setIsotope()`_, `Chem.getIsotope()`_, 
+       `Chem.hasIsotope()`_, `Chem.clearIsotope()`_
+     - *std::size_t*/*int*
+     - ``0`` (-> nat. mixture)
+   * - Number of implicit hydrogens
+     - `IMPLICIT_HYDROGEN_COUNT`_
+     - `Chem.setImplicitHydrogenCount()`_, `Chem.getImplicitHydrogenCount()`_, 
+       `Chem.hasImplicitHydrogenCount()`_, `Chem.clearImplicitHydrogenCount()`_
+     - *std::size_t*/*int*
+     - \-
+   * - Number of unpaired electrons
+     - `UNPAIRED_ELECTRON_COUNT`_
+     - `Chem.setUnpairedElectronCount()`_, `Chem.getUnpairedElectronCount()`_, 
+       `Chem.hasUnpairedElectronCount()`_, `Chem.clearUnpairedElectronCount()`_
+     - *std::size_t*/*int*
+     - ``0``
+   * - Hybridization state descriptor
+     - `HYBRIDIZATION`_
+     - `Chem.setHybridizationState()`_, `Chem.getHybridizationState()`_, 
+       `Chem.hasHybridizationState()`_, `Chem.clearHybridizationState()`_
+     - *unsigned int*/*int*
+     - \-
+   * - Stereo configuration descriptor
+     - `STEREO_DESCRIPTOR`_
+     - `Chem.setStereoDescriptor()`_, `Chem.getStereoDescriptor()`_, 
+       `Chem.hasStereoDescriptor()`_, `Chem.clearStereoDescriptor()`_
+     - `Chem.StereoDescriptor`_
+     - ``Chem.StereoDescriptor(Chem.AtomConfiguration.NONE)``
+   * - Ring system membership predicate
+     - `RING_FLAG`_
+     - `Chem.setRingFlag()`_, `Chem.getRingFlag()`_, 
+       `Chem.hasRingFlag()`_, `Chem.clearRingFlag()`_
+     - *bool*
+     - \-
+   * - Aromatic ring system membership predicate
+     - `AROMATICITY_FLAG`_
+     - `Chem.setAromaticityFlag()`_, `Chem.getAromaticityFlag()`_, 
+       `Chem.hasAromaticityFlag()`_, `Chem.clearAromaticityFlag()`_
+     - *bool*
+     - \-
+   * - 2D Coordinates (position in skeletal formula)
+     - `COORDINATES_2D`_
+     - `Chem.set2DCoordinates()`_, `Chem.get2DCoordinates()`_, 
+       `Chem.has2DCoordinates()`_, `Chem.clear2DCoordinates()`_
+     - `CDPL.Math.Vector2D`_
+     - \-
+   * - 3D Coordinates
+     - `COORDINATES_3D`_
+     - `Chem.set3DCoordinates()`_, `Chem.get3DCoordinates()`_, 
+       `Chem.has3DCoordinates()`_, `Chem.clear3DCoordinates()`_
+     - `CDPL.Math.Vector3D`_
+     - \-
+   * - Conformer 3D coordinates
+     - `COORDINATES_3D_ARRAY`_
+     - `Chem.set3DCoordinatesArray()`_, `Chem.get3DCoordinatesArray()`_, 
+       `Chem.has3DCoordinatesArray()`_, `Chem.clear3DCoordinatesArray()`_
+     - `CDPL.Math.Vector3DArray`_
+     - \-
 
 Writing Molecule Data
 ---------------------
@@ -2268,11 +2364,19 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _CDPL.Chem.ControlParameterDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameterDefault.html
 
+.. _Chem.Entity3DProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
+
 .. _CDPL.Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
 .. _CDPL.Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
+.. _Chem.BondProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
 .. _CDPL.Chem.BondPropertyDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondPropertyDefault.html
+
+.. _Chem.MolecularGraphProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
 .. _CDPL.Chem.getOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
 
@@ -2449,6 +2553,142 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.setType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b7bd15a77897e642d44ec56395db91f
 
 .. _Chem.getType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2ab1b85967b8f213bced1ac9b9dcbd6b
+
+.. _Chem.hasType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa11f75af056273ee405943b9b0242afe
+
+.. _Chem.clearType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abbe331861f6f29ddbeb0eea7a342fea9
+
+.. _TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.AtomType.UNKNOWN: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html#a69fe4886bcac34ae4f279709c97370ea
+
+.. _Chem.setSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae467609c02f752b3455a080b62426dce
+
+.. _Chem.getSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aad592b8ec08a6d4804b07755ae99c5b4
+
+.. _Chem.hasSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac9f27c42aa7c5edf4f8585c03a06b707
+
+.. _Chem.clearSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a992a5a2f1ee26ec8d19a9b2b5e9c6225
+
+.. _SYMBOL: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a47e6ee3db0608388012817480fe753f9
+
+.. _Chem.getFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#afa634d2c287d1516f0345fcdd9e979a9
+
+.. _Chem.hasFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a82ce1dd385e95fa1ed769e30208ff066
+
+.. _Chem.clearFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a56b3f79baa71ebab789873a1ca4f4635
+
+.. _FORMAL_CHARGE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6a658c780e6f0cccf48ff2366cc6fd51
+
+.. _Chem.getIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a96cc114a0487cb2c2b1285275d428a3f
+
+.. _Chem.hasIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a37bf75a872a76825a60a6a13f7285339
+
+.. _Chem.clearIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7bde1102c99e94551ac6db93a78bfad0
+
+.. _ISOTOPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae7dd6d307727cf3b886712e360ce871a
+
+.. _Chem.getImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a946cf1c558f4c117db1cf455f6257095
+
+.. _Chem.hasImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a16f4bb56d2f221475adf43a6115e4512
+
+.. _Chem.clearImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae9f0e4e2a80338931e02cf5c5cd55d23
+
+.. _IMPLICIT_HYDROGEN_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af73aba0d54fdb2e0c39655376d7c78df
+
+.. _Chem.getUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7030e4204ccfc678d9adbdd32eb36b9d
+
+.. _Chem.hasUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab440cf0d8825176e08c97867b21018c3
+
+.. _Chem.clearUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3aeb5c8e37c4e4d8a5a54cfd3a08be08
+
+.. _UNPAIRED_ELECTRON_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac7eff0821c7792d9a9a5c34e34244900
+
+.. _Chem.getHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a380460f2c06306105a8f2c8763b62ab7
+
+.. _Chem.hasHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3a7d4d049946aa8ac2cb2fc86282803b
+
+.. _Chem.clearHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a50eed3c6b6e85f7def74057f0f2af6c5
+
+.. _HYBRIDIZATION: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a94ecf7f236b8873dc532fc702d6cd8d7
+
+.. _Chem.getStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3ab885adc327932cd3f9ce4bee93463e
+
+.. _Chem.hasStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8f341fe5f048bd369c4500cc1d33c76a
+
+.. _Chem.clearStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6024e2bfc9acff7940d17239e7f0eb64
+
+.. _STEREO_DESCRIPTOR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.StereoDescriptor: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StereoDescriptor.html
+
+.. _Chem.setRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a10e2530cdef3c762e509ef20d3300f02
+
+.. _Chem.getRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a38c3bdf64e44e6b9696c597216a8eb05
+
+.. _Chem.hasRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a486e8c17e53b693612002759a19f70ad
+
+.. _Chem.clearRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0e21b20b73bdd2aa46ef04a7c16183aa
+
+.. _RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.setAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a92138d75f1fe2915409a42f0da608330
+
+.. _Chem.getAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad1975a5b154e159811c97c6c8375bcd0
+
+.. _Chem.hasAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af5a737bbb0e86fc2d747a33d0523e6a6
+
+.. _Chem.clearAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5d3ab79d30b082c3b22563fdd80851d1
+
+.. _AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.set2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab6b9262e881dc745ff1829eb5025979e
+
+.. _Chem.get2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad2454234fe3de841dc586bb99a666392
+
+.. _Chem.has2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9d484c07a600531a72a24555dc015a39
+
+.. _Chem.clear2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5b9f2bd0833083236ee428f636d50d9a
+
+.. _COORDINATES_2D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _CDPL.Math.Vector2D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector2D.html
+
+.. _Chem.set3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6679f376362d76a2e3b15ab1bf4e1baf
+
+.. _Chem.get3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0c7fd49b633d548b3f3150b1996b4072
+
+.. _Chem.has3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4254dac14bbfb14104e8876b6155cd54
+
+.. _Chem.clear3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae5ed69e4b63ef330a03c834bdb187aad
+
+.. _COORDINATES_3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
+
+.. _CDPL.Math.Vector3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3D.html
+
+.. _Chem.set3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af97a16e29e54afda07d6b82933985771
+
+.. _Chem.get3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5395b5ee402e0da698d818c0016afa1a
+
+.. _Chem.has3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2f655d01263a553bff6e4de859f61bea
+
+.. _Chem.clear3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae6608943ee8e3304a384acb4dac7ec73
+
+.. _COORDINATES_3D_ARRAY: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _CDPL.Math.Vector3DArray: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3DArray.html
 
 .. _Chem.setOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
 
