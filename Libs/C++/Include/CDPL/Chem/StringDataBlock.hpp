@@ -43,7 +43,7 @@ namespace CDPL
 
         /**
          * \brief Represents a data item in the structure or reaction data block of a
-         *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
+         *        \e MDL \e SD- or \e RD-File data record (see [\ref CTFILE]).
          */
         class CDPL_CHEM_API StringDataBlockEntry
         {

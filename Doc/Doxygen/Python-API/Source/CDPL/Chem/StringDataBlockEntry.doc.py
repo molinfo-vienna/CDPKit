@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Represents a data item in the structure or reaction data block of a <em>MDL SD-</em> or <em>RD-File</em> data record (see [\ref CTFILE]).
+# \brief Represents a data item in the structure or reaction data block of a <em>MDL</em> <em>SD-</em> or <em>RD-File</em> data record (see [\ref CTFILE]).
 # 
 class StringDataBlockEntry(Boost.Python.instance):
 
