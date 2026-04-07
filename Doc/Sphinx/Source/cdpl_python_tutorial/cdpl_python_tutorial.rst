@@ -927,7 +927,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-413-835c00aa411f> in <module>
+    <ipython-input-38-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -946,7 +946,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-414-ae6b58adf8f3> in <module>
+    <ipython-input-39-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1117,7 +1117,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-425-093f4eea5627> in <module>
+    <ipython-input-50-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1279,7 +1279,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-429-8b35fac927c4> in <module>
+    <ipython-input-54-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -1954,7 +1954,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-460-4f5078ed4ed6> in <module>
+    <ipython-input-85-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2142,6 +2142,16 @@ testing (see section `Dynamic Properties`_ for further information).
        `Chem.hasStructureData()`_, `Chem.clearStructureData()`_
      - `Chem.StringDataBlock`_
      - \-      
+
+Preparation for Downstream Processing
+-------------------------------------
+
+More complex algorithms and methods operating on molecular structures (e.g. descriptor calculations, 
+conformer generation, substructure searching, ...) often require structure-derived secondary information such as 
+implicit hydrogen counts, atomic orbital hybridization, the smallest set of smallest rings (SSSR), atom/bond ring 
+membership, atom/bond aromaticity, and so forth for to be able to carry out the requested computations. For the 
+sake of computational efficiency, control and flexibility, it is generally the responsibility of the user of a piece of *CDPL* functionality to make sure all of its data prerequisites are fulfilled. When it comes to the structure-derived data mentioned above, the `CDPL.Chem`_ package provides a set of dedicated functions which allow to compute these data in an easy manner and save the results as values of corresponding `Chem.Atom`_, `Chem.Bond`_ or `Chem.MolecularGraph`_  properties for future use (see section `Essential Properties`_). 
+The following sub-sections provide an overview of the most important property calculation functions and demonstrate their correct usage by means of easy to follow code examples.
 
 Writing Molecule Data
 ---------------------
