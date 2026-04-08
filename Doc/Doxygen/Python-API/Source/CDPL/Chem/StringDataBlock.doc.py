@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of Chem.StringDataBlockEntry objects used to store the structure or reaction data block of a <em>STRING SD-</em> or <em>RD-File</em> data record (see [\ref CTFILE]).
+# \brief An array of Chem.StringDataBlockEntry objects used to store the structure or reaction data block of an <em>MDL SD-</em> or <em>RD-File</em> data record (see [\ref CTFILE]).
 # 
 class StringDataBlock(Boost.Python.instance):
 

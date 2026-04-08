@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides keys for built-in MolProp.Atom properties.
+# \brief Provides keys for built-in Chem.Atom properties.
 # 
 class AtomProperty(Boost.Python.instance):
 

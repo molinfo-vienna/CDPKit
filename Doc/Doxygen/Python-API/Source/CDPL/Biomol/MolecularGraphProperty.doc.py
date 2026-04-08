@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Provides keys for built-in Biomol.MolecularGraph properties.
+# \brief Provides keys for built-in Chem.MolecularGraph properties.
 # 
 class MolecularGraphProperty(Boost.Python.instance):
 
