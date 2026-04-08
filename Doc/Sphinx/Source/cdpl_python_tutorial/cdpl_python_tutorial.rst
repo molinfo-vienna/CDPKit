@@ -1,7 +1,9 @@
 Installing the CDPL Python Bindings
 ===================================
 
-To be able to follow this tutorial the *CDPL Python* bindings have to be installed on your computer. The most straightforward way to accomplish this task is to install the latest official release deposited on `PyPI`_ using the :program:`pip` command as follows:
+To be able to follow this tutorial the *CDPL Python* bindings have to be installed on your computer. 
+The most straightforward way to accomplish this task is to install the latest official release deposited 
+on `PyPI`_ using the :program:`pip` command as follows:
 
 .. code:: ipython3
 
@@ -12,7 +14,8 @@ Other ways to install the Python bindings are described in section `Installation
 CDPL Package Overview
 =====================
 
-The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and pharmacoinformatics. The following table lists all available sub-packages 
+The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and 
+pharmacoinformatics. The following table lists all available sub-packages 
 together with a brief description of the kind of functionality they provide:
 
 .. list-table::
@@ -60,8 +63,10 @@ Basic Concepts
 Dynamic Properties
 ------------------
 
-The *CDPL* stores properties associated with certain types of data like molecules, atoms, bonds, pharmacophores, etc. not as ordinary data members of the implementing classes
-but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute of Python objects). This design decision was made due to several advantages of this approach:
+The *CDPL* stores properties associated with certain types of data like molecules, atoms, bonds, 
+pharmacophores, etc. not as ordinary data members of the implementing classes
+but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute of Python objects). 
+This design decision was made due to several advantages of this approach:
 
 * Flexibility and extensibility: new properties can be defined at runtime by user code
 * Class instance specific property values can be stored directly in the dictionary of the instance they are
@@ -74,26 +79,35 @@ but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute o
   default value.
 
 All *CDPL* classes supporting this kind of dynamic property storage are derived from class 
-`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
-that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
-*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of `CDPL.Base.PropertyContainer`_ for which these properties have been defined (example: atom property keys 
+`CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, 
+iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
+that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are 
+exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
+*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of 
+`CDPL.Base.PropertyContainer`_ for which these properties have been defined (example: atom property keys 
 accessible via class `CDPL.Chem.AtomProperty`_). Property values virtually can be of any type and get stored in 
 the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
 
-Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as argument and setter/getter methods in addition require knowledge of the value type, corresponding code
-is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces properties also provides four free functions (at package level) per property that encapsulate the 
-low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
-subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ and `CDPL.Chem.clearOrder()`_ represent an example of such four functions that are provided
+Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as 
+argument and setter/getter methods in addition require knowledge of the value type, corresponding code
+is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces 
+properties also provides four free functions (at package level) per property that encapsulate the 
+low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property 
+key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
+subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ 
+and `CDPL.Chem.clearOrder()`_ represent an example of such four functions that are provided
 for the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
 Using property getter functions (like `CDPL.Chem.getOrder()`_) has the additional benefit that they will, if one 
-has been defined, automatically return a default value for unset properties. Defined property default values are exported and accessible as static attributes of classes that follow the naming scheme 
+has been defined, automatically return a default value for unset properties. Defined property default values are 
+exported and accessible as static attributes of classes that follow the naming scheme 
 *CDPL.<PN>.<CN>PropertyDefault* (example: `CDPL.Chem.BondPropertyDefault`_; for the meaning of *<PN>* and *<CN>* 
 see text above). 
 
 Control-Parameters
 ------------------
 
-Control-parameters are used for the runtime configuration of arbitrary functionality in a generic, flexible and functionality independent way (in the *CDPL* mainly used by the data I/O and visualization code).
+Control-parameters are used for the runtime configuration of arbitrary functionality in a generic, flexible and functionality 
+independent way (in the *CDPL* mainly used by the data I/O and visualization code).
 The implementation and usage of the control-parameter infrastructure largely parallels the one for dynamic properties: 
 
 * Control-parameters are identified via unique instances of class `CDPL.Base.LookupKey`_ 
@@ -115,7 +129,8 @@ or function objects that get called on events such as parameter value change (me
 (methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change 
 (methods `registerParentChangedCallback()`_ and `unregisterParentChangedCallback()`_).
 
-A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which gets returned by the associated getter function if a parameter value has not been explicitly set. 
+A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which 
+gets returned by the associated getter function if a parameter value has not been explicitly set. 
 Control-parameter default values are exported and accessible as static attributes of classes that follow the 
 naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = *CDPL* sub-package name; example: 
 `CDPL.Chem.ControlParameterDefault`_). 
@@ -123,18 +138,25 @@ naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = *CDPL* sub-package n
 Data I/O Framework
 ------------------
 
-Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming scheme 
+Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) 
+are derived from abstract base classes that follow the naming scheme 
 *CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package
 name and *<DT>* is the name of the data type to read or write (e.g. classes `CDPL.Chem.MoleculeReaderBase`_ and
 `CDPL.Chem.MolecularGraphWriterBase`_).
-These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing the I/O of data in a particular  format thus support the configuration of their runtime behavior by control-parameters (see 
+These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from 
+`CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing the I/O of data in a particular 
+format thus support the configuration of their runtime behavior by control-parameters (see 
 `CDPL.Chem.ControlParameter`_ for examples). The names of the format-specific classes all follow the scheme 
-*CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the *CDPL* sub-package name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is the name of 
+*CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the *CDPL* sub-package 
+name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is the name of 
 the data type to read or write (e.g. `CDPL.Chem.SDFMoleculeReader`_ and `CDPL.Chem.SDFMolecularGraphWriter`_). 
 
-Data reader classes all expect an instance of class `CDPL.Base.IStream`_ and data writer classes an instance of `CDPL.Base.OStream`_ as argument to their constructor. 
-These stream-based I/O classes represent abstract storage devices which allow the same code to handle I/O to files, in-memory strings, or custom adaptor devices that perform arbitrary operations (e.g. compression) on the fly.
-Concrete types of storage devices are implemented by dedicated subclasses of `CDPL.Base.IStream`_ and `CDPL.Base.OStream`_  such as class `CDPL.Base.FileIOStream`_ for file I/O and `CDPL.Base.StringIOStream`_ for in-memory string data I/O, respectively. 
+Data reader classes all expect an instance of class `CDPL.Base.IStream`_ and data writer classes an instance of 
+`CDPL.Base.OStream`_ as argument to their constructor. 
+These stream-based I/O classes represent abstract storage devices which allow the same code to handle I/O to files, 
+in-memory strings, or custom adaptor devices that perform arbitrary operations (e.g. compression) on the fly.
+Concrete types of storage devices are implemented by dedicated subclasses of `CDPL.Base.IStream`_ and `CDPL.Base.OStream`_ 
+such as class `CDPL.Base.FileIOStream`_ for file I/O and `CDPL.Base.StringIOStream`_ for in-memory string data I/O, respectively. 
 
 Since files represent the most dealt-with kind of data storage, file I/O-specific variants of reader/writer classes 
 are provided that make reading/writing data from/to files more convenient. These classes follow the naming scheme 
@@ -148,15 +170,27 @@ stores and gives access to relevant format-specific information such as common f
 Pre-defined data format descriptors are exported as static attributes of classes following the naming scheme
 *CDPL.<PN>.DataFormat* where *<PN>* is the name of the *CDPL* sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
 
-The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes implementing the reading/writing of data in this format gets established by dedicated input- and output-handler classes. These classes provide factory methods to create a reader/writer class instance for a given file path or `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
+The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes implementing the 
+reading/writing of data in this format gets established by dedicated input- and output-handler classes. These classes provide 
+factory methods to create a reader/writer class instance for a given file path or `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
 *CDPL.<PN>.<FID><DT>InputHandler* and *CDPL.<PN>.<FID><DT>OutputHandler*, respectively (for the meaning of *<PN>*, 
 *<FID>* and *<DT>* see text above; examples: `CDPL.Chem.SDFMoleculeInputHandler`_, 
-`CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the *CDPL* an input- and/or output-handler class instance is registered at a data type-specific singleton class named 
+`CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the *CDPL* an input- and/or 
+output-handler class instance is registered at a data type-specific singleton class named 
 *CDPL.<PN>.<DT>IOManager* (for the meaning of *<PN>* and *<DT>* see text above; example: 
-`CDPL.Chem.MoleculeIOManager`_). Amongst others, the I/O manager classes provide methods to lookup a registered handler instance for a given file extension, mime-type or `CDPL.Base.DataFormat`_ object. This way it is possible to, e.g., write code that creates a reader class instance for the input of data from a file where the actual data format is determined lateron at runtime.  
-In order to facilitate the writing of data format-independent code the *CDPL* provides special reader and writer classes that perform the runtime lookup of a suitable input/output handler and reader/writer class 
-instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's extension. Optionally, a 
-characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in case the file extension is missing or unknown to the *CDPL*. If the data source/sink is provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
+`CDPL.Chem.MoleculeIOManager`_). Amongst others, the I/O manager classes provide methods to lookup a 
+registered handler instance for a given file extension, mime-type or `CDPL.Base.DataFormat`_ object. This way it is 
+possible to, e.g., write code that creates a reader class instance for the input of data from a file where the a
+ctual data format is determined lateron at runtime.  
+In order to facilitate the writing of data format-independent code the *CDPL* provides special reader and writer 
+classes that perform the runtime lookup of a suitable input/output handler and reader/writer class 
+instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, 
+respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the 
+classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified 
+as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's 
+extension. Optionally, a characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in 
+case the file extension is missing or unknown to the *CDPL*. If the data source/sink is provided as a 
+`CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
 
 Working with Molecules
 ======================
@@ -164,10 +198,13 @@ Working with Molecules
 In-memory Representation of Molecular Structures
 ------------------------------------------------
 
-The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. Concrete data structures for the in-memory representation of atoms, 
-bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
+The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. 
+Concrete data structures for the in-memory representation of atoms, 
+bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods 
+for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
  
-The following table provides an overview of the most relevant interfaces and data structures provided by the *CDPL* for molecular data representation and processing:
+The following table provides an overview of the most relevant interfaces and data structures provided by the 
+*CDPL* for molecular data representation and processing:
    
 .. list-table::
    :widths: 15 12 30 30
@@ -246,7 +283,8 @@ class `CDPL.Chem.Fragment`_. Like `CDPL.Chem.Molecule`_, this class also offers 
 atoms and bonds except that the methods of `CDPL.Chem.Fragment`_ expect existing `CDPL.Chem.Atom`_ or 
 `CDPL.Chem.Bond`_ instances as argument. These do not get stored as copies but as light-weight references to the 
 original instances which can be retrieved lateron by methods for atom/bond access.
-`CDPL.Chem.Molecule`_ as well as `CDPL.Chem.Fragment`_ are subclasses of `CDPL.Chem.MolecularGraph`_ and instances of both can be processed in the same way by any code that operates on `CDPL.Chem.MolecularGraph`_ objects.
+`CDPL.Chem.Molecule`_ as well as `CDPL.Chem.Fragment`_ are subclasses of `CDPL.Chem.MolecularGraph`_ and 
+instances of both can be processed in the same way by any code that operates on `CDPL.Chem.MolecularGraph`_ objects.
 
 Basic Operations on `Molecule`_ Objects
 ---------------------------------------
@@ -272,7 +310,8 @@ the end of a code cell.
 Creation
 ^^^^^^^^
 
-A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by instantiating the class `Chem.BasicMolecule`_ (the provided default implementation of the`Chem.Molecule`_ interface):
+A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by instantiating the class `Chem.BasicMolecule`_ 
+(the provided default implementation of the`Chem.Molecule`_ interface):
 
 .. code:: ipython3
 
@@ -281,7 +320,8 @@ A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by i
 Querying Atom and Bond Counts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ which are both provided by the `Chem.AtomContainer`_ interface:
+The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ 
+which are both provided by the `Chem.AtomContainer`_ interface:
 
 .. code:: ipython3
 
@@ -298,7 +338,8 @@ The number of (explicit) atoms can be queried either by acessing the property `n
 
 
 
-In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ of the `Chem.BondContainer`_ interface:
+In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ 
+of the `Chem.BondContainer`_ interface:
 
 .. code:: ipython3
 
@@ -325,13 +366,16 @@ Atoms are created by calling the method `addAtom()`_ provided by the `Chem.Molec
     a = mol.addAtom()
 
 The method returns a `Chem.Atom`_ object which is owned by the creating `Chem.Molecule`_ instance 
-**mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. The value of these properties needs to be set explicitly by invoking dedicated property functions which take the atom and desired value of the property as arguments. For example
+**mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. 
+The value of these properties needs to be set explicitly by invoking dedicated property functions which take 
+the atom and desired value of the property as arguments. For example
 
 .. code:: ipython3
 
     Chem.setType(a, Chem.AtomType.C)
 
-The `Chem.setType()`_ function will set the type property of the atom to the atomic number of carbon. The value of the type property can be retrieved by the associated function `Chem.getType()`_
+The `Chem.setType()`_ function will set the type property of the atom to the atomic number of carbon. 
+The value of the type property can be retrieved by the associated function `Chem.getType()`_
 
 .. code:: ipython3
 
@@ -346,7 +390,8 @@ The `Chem.setType()`_ function will set the type property of the atom to the ato
 
 
 
-In a similar fashion, bonds are created by calling the method `addBond()`_ which expects the indices (zero-based) of the two atoms to connect as arguments:
+In a similar fashion, bonds are created by calling the method `addBond()`_ which expects the indices (zero-based) 
+of the two atoms to connect as arguments:
 
 .. code:: ipython3
 
@@ -355,7 +400,9 @@ In a similar fashion, bonds are created by calling the method `addBond()`_ which
     
     b = mol.addBond(0, 1)
 
-The method returns a `Chem.Bond`_ object which is also owned and managed by the creating `Chem.Molecule`_ instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order to a value of 2 (= double bond) the property function `Chem.setOrder()`_ needs to be called:
+The method returns a `Chem.Bond`_ object which is also owned and managed by the creating `Chem.Molecule`_ 
+instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order 
+to a value of ``2`` (= double bond) the property function `Chem.setOrder()`_ needs to be called:
 
 .. code:: ipython3
 
@@ -387,7 +434,8 @@ A previously set bond order property value can be retrieved by the accompanying 
 
 
 
-To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that is currently described by **mol** the following lines will do the trick:
+To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that is currently described 
+by **mol** the following lines will do the trick:
 
 .. code:: ipython3
 
@@ -444,7 +492,8 @@ To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that 
 Copying Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instance can be created in several ways. The first option is to pass the `Chem.MolecularGraph`_ instance as argument to the constructur of class 
+A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instance can be created in several ways. 
+The first option is to pass the `Chem.MolecularGraph`_ instance as argument to the constructur of class 
 `Chem.BasicMolecule`_:
 
 .. code:: ipython3
@@ -460,7 +509,8 @@ A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instan
 
 
 
-The second possibility is to replace the current atoms and bonds of an existing `Chem.Molecule`_ object by calling the method `assign()`_ or `copy()`_:
+The second possibility is to replace the current atoms and bonds of an existing `Chem.Molecule`_ object by 
+calling the method `assign()`_ or `copy()`_:
 
 .. code:: ipython3
 
@@ -505,8 +555,8 @@ A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ in
 
 
 
-It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
-
+It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using 
+the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
 
 .. code:: ipython3
 
@@ -517,7 +567,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_41_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_40_0.svg
 
 
 
@@ -530,7 +580,7 @@ It is also possible to concatenate molecular structures either by calling the me
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_42_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_41_0.svg
 
 
 
@@ -642,7 +692,8 @@ Atoms, bonds and properties can be removed completely by calling the method `cle
 Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectively. The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
+Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectively. 
+The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
 argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an 
 index outside the allowed range will raise an exception.
 
@@ -672,11 +723,12 @@ index outside the allowed range will raise an exception.
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_50_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_49_1.svg
 
 
 
-As can be seen, the removal of an atom automatically triggers the removal of all incident bonds. This is necesessary to maintain molecular graph integrity. Removal of a bond, on the other hand, will only affect 
+As can be seen, the removal of an atom automatically triggers the removal of all incident bonds. 
+This is necesessary to maintain molecular graph integrity. Removal of a bond, on the other hand, will only affect 
 the bond count:
 
 .. code:: ipython3
@@ -705,7 +757,7 @@ the bond count:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_52_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_51_1.svg
 
 
 
@@ -718,7 +770,9 @@ Removing multiple Atoms and Bonds
 
 Multiple atoms and bonds can be removed at once via the help of a `Chem.Fragment`_ instance that specifies the 
 atoms and bonds to remove. After adding atoms and bonds to the Chem.Fragment`_ instance their removal is initiated 
-either by calling the method `remove()`_ with the fragment object as argument or by `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ (``-=``) of the fragment object:
+either by calling the method `remove()`_ with the fragment object as argument or by 
+`inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ 
+(``-=``) of the fragment object:
 
 .. code:: ipython3
 
@@ -756,7 +810,7 @@ either by calling the method `remove()`_ with the fragment object as argument or
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_55_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_54_1.svg
 
 
 
@@ -911,7 +965,8 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-.. warning:: The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index on a `Chem.Molecule`_ instance that is not the parent will raise an exception!
+.. warning:: The attempt to retrieve the `Chem.Atom`_ or `Chem.Bond`_ instance index on a `Chem.Molecule`_ instance that 
+             is not the parent will raise an exception!
 
 Examples:
 
@@ -1003,7 +1058,8 @@ instance:
 
 Like class `Chem.MolecularGraph`_, `Chem.Bond`_ provides the property `atoms 
 <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ and the method 
-`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ which both give access to the atom pair sequence:
+`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ 
+which both give access to the atom pair sequence:
 
 .. code:: ipython3
 
@@ -1187,9 +1243,11 @@ Example:
 
 
 Additionally, `Chem.Atom`_ provides the method 
-`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#ad315d5b7c1755ffb65ddda9d9fe3819d>`__ and the property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html>`__ for 
+`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#ad315d5b7c1755ffb65ddda9d9fe3819d>`__ 
+and the property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html>`__ for 
 accessing the list of bonded `Chem.Atom`_ instances as well as the method 
-`getBonds() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a4171f816134f0dcd7762a1648d8518ab>`__ and the property `bonds <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ for 
+`getBonds() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a4171f816134f0dcd7762a1648d8518ab>`__ 
+and the property `bonds <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ for 
 corresponding `Chem.Bond`_ instance access.
 
 The above code changed to use the mentioned properties:
@@ -1342,7 +1400,7 @@ instance as argument. These constructors create a `Chem.Fragment`_ object that w
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_103_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_102_0.svg
 
 
 
@@ -1412,7 +1470,8 @@ Adding single Atoms and Bonds
 
 For adding individual `Chem.Atom`_ and `Chem.Bond`_ instances class `Chem.Fragment`_ provides the methods 
 `addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#afcb879ed6470ef02b6b4bb2c6c8070e8>`__ and 
-`addBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, respectively. 
+`addBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, 
+respectively. 
 For molecular graph consistency reasons adding a `Chem.Bond`_ instance also adds the two 
 `Chem.Atom`_ instances referenced by the bond (if not added already). Furthermore, pointers to `Chem.Atom`_ and 
 `Chem.Bond`_ instances get stored only once. In case a given `Chem.Atom`_ or `Chem.Bond`_ instance has already 
@@ -1471,7 +1530,7 @@ Examples:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_112_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_111_1.svg
 
 
 
@@ -1479,7 +1538,8 @@ Adding multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **replaced** by the method 
-`assign() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as argument:
+`assign() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ 
+which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as argument:
 
 .. code:: ipython3
 
@@ -1490,11 +1550,13 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **replaced**
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_114_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_113_0.svg
 
 
 
-The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** using the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ ``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** using the 
+`inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ 
+``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
 
 .. code:: ipython3
 
@@ -1505,7 +1567,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended**
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_116_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_115_0.svg
 
 
 
@@ -1521,14 +1583,15 @@ Note that only `Chem.Atom`_ and `Chem.Bond`_ instance will be added that are not
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_118_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_117_0.svg
 
 
 
 Exchanging Atom and Bond Lists
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually exchanged by calling the method `swap()`_ on one of the instances providing the other instance as argument:
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually 
+exchanged by calling the method `swap()`_ on one of the instances providing the other instance as argument:
 
 .. code:: ipython3
 
@@ -1541,7 +1604,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragme
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_120_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_119_0.svg
 
 
 
@@ -1552,14 +1615,17 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragme
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_121_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_120_0.svg
 
 
 
 Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single atoms and bonds can be removed by calling the methods `removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or the zero-based 
+Single atoms and bonds can be removed by calling the methods 
+`removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ 
+and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, 
+respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or the zero-based 
 index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
 Specifying an index outside the allowed range will raise an exception.
 
@@ -1589,11 +1655,12 @@ Examples:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_123_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_122_1.svg
 
 
 
-In order to maintain molecular graph consistency, removing an atom automatically triggers the removal of all incident bonds. Removal of a bond has no side effect on the atom count:
+In order to maintain molecular graph consistency, removing an atom automatically triggers the removal of all incident bonds. 
+Removal of a bond has no side effect on the atom count:
 
 .. code:: ipython3
 
@@ -1619,7 +1686,7 @@ In order to maintain molecular graph consistency, removing an atom automatically
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_125_1.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_124_1.svg
 
 
 
@@ -1660,14 +1727,16 @@ operation failed:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_129_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_128_0.svg
 
 
 
 Removing multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ (``-=``) of a `Chem.MolecularGraph`_ instance:
+Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via 
+`inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ 
+(``-=``) of a `Chem.MolecularGraph`_ instance:
 
 .. code:: ipython3
 
@@ -1680,7 +1749,7 @@ Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via `inp
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_131_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_130_0.svg
 
 
 
@@ -1698,7 +1767,7 @@ Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via `inp
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_132_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_131_0.svg
 
 
 
@@ -1714,19 +1783,20 @@ will have no effect:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_134_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_133_0.svg
 
 
 
-Reading Molecule Data
----------------------
+Inpout of Molecule Data
+-----------------------
 
 Parsing String Data
 ^^^^^^^^^^^^^^^^^^^
 
 .. rubric:: SMILES and SMARTS
 
-For the parsing of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.parseSMILES()`_. The function returns a `Chem.BasicMolecule`_ object representing the chemical structure 
+For the parsing of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.parseSMILES()`_. 
+The function returns a `Chem.BasicMolecule`_ object representing the chemical structure 
 encoded by the given SMILES string. For example:
 
 .. code:: ipython3
@@ -1738,7 +1808,7 @@ encoded by the given SMILES string. For example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_136_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_135_0.svg
 
 
 
@@ -1753,13 +1823,14 @@ A similar function called `Chem.parseSMARTS()`_ can be used to parse and and pre
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_138_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_137_0.svg
 
 
 
 .. rubric:: Other formats
 
-The general procedure for the construction of molecules from string data in one of the supported formats (including SMILES and SMARTS) is as follows:
+The general procedure for the construction of molecules from string data in one of the supported formats 
+(including SMILES and SMARTS) is as follows:
 
 1. Create an instance of class `Base.StringIOStream`_ that wraps the string and serves as input data source for the next steps.
 2. Create a suitable `Chem.MoleculeReaderBase`_ subclass instance that will perform the format-specific decoding of the molecule data in step 3.
@@ -1826,16 +1897,17 @@ Example: Reading a molecule from a string providing data in MDL SDF format
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_140_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_139_0.svg
 
 
 
 Reading Data Files
 ^^^^^^^^^^^^^^^^^^
 
-Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase`_ subclass instance that performs the actual format-specific data decoding work. As with string data, several options exist:
+Reading molecules from files also requires the creation of a `Chem.MoleculeReaderBase`_ subclass 
+instance that performs the actual format-specific data decoding work. As with string data, several options exist:
 
-1. Instantiation of class `Chem.MoleculeReader`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
+1. Instantiation of class `Chem.MoleculeReader`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. ``'sdf'``, ``'smi'``, ``'mol2'``, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
 2. Instantiation of class `Chem.MoleculeReader`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.SDFMoleculeReader`_ implementing reading MDL SD-file format data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.FileSDFMoleculeReader`_) that accepts a file path as constructor argument.
@@ -1860,10 +1932,12 @@ Reading molecules from files also requires the creation of a `Chem.MoleculeReade
     # - Option 4 -
     reader = Chem.FileSDFMoleculeReader('/path/to/input/file')
 
-Sequential Molecule Reading
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Sequential Molecule Access
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molecules can be read in the order provided by the input data by repeatedly calling the `read()`_ method. If there are no more molecules to read, the return value of the method will evaluate to ``False``:
+Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molecules can be read in 
+the order provided by the input data by repeatedly calling the `read()`_ method. If there are no more 
+molecules to read, the return value of the method will evaluate to ``False``:
 
 .. code:: ipython3
 
@@ -1890,7 +1964,10 @@ Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molec
 Random Molecule Access
 ^^^^^^^^^^^^^^^^^^^^^^
 
-There is a special version of the `read()`_ method of class `Chem.MoleculeReaderBase`_ which expects the index (zero-based) of the molecule to read as its first argument. This way molecules can be read in any order, no matter what their order is in the input data. The number of available molecules can be queried either by calling the method `getNumRecords()`_ or by accessing the property `numRecords`_.
+There is a special version of the `read()`_ method of class `Chem.MoleculeReaderBase`_ which expects the 
+index (zero-based) of the molecule to read as its first argument. This way molecules can be read in any order, 
+no matter what their order is in the input data. The number of available molecules can be queried either 
+by calling the method `getNumRecords()`_ or by accessing the property `numRecords`_.
 
 Example:
 
@@ -1921,7 +1998,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_147_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_146_0.svg
 
 
 
@@ -1935,7 +2012,7 @@ Example:
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_148_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_147_0.svg
 
 
 
@@ -1967,7 +2044,8 @@ Essential Properties
 
 The following tables list subsets of exported `Chem.Entity3D`_, `Chem.Atom`_, `Chem.Bond`_ and 
 `Chem.MolecularGraph`_ properties which are essential for a proper description and follow-up processing of organic 
-molecular structures. Along with each exported property key the `CDPL.Chem`_ package provides four functions that allow for a more comfortable and type-safe property value assignment and retrieval as well removal and existence
+molecular structures. Along with each exported property key the `CDPL.Chem`_ package provides four functions 
+that allow for a more comfortable and type-safe property value assignment and retrieval as well removal and existence
 testing (see section `Dynamic Properties`_ for further information).
 
 .. list-table:: `Chem.Atom`_ and `Chem.Entity3D`_ properties
@@ -2146,29 +2224,59 @@ testing (see section `Dynamic Properties`_ for further information).
 Preparation for Downstream Processing
 -------------------------------------
 
-More complex algorithms and methods operating on molecular structures (e.g. descriptor calculations, 
-conformer generation, substructure searching, ...) often require structure-derived secondary information such as 
-implicit hydrogen counts, atomic orbital hybridization, the smallest set of smallest rings (SSSR), atom/bond ring 
-membership, atom/bond aromaticity, and so forth for to be able to carry out the requested computations. For the 
-sake of computational efficiency, control and flexibility, it is generally the responsibility of the user of a piece of *CDPL* functionality to make sure all of its data prerequisites are fulfilled. When it comes to the structure-derived data mentioned above, the `CDPL.Chem`_ package provides a set of dedicated functions which allow to compute these data in an easy manner and save the results as values of corresponding `Chem.Atom`_, `Chem.Bond`_ or `Chem.MolecularGraph`_  properties for future use (see section `Essential Properties`_). 
-The following sub-sections provide an overview of the most important property calculation functions and demonstrate their correct usage by means of easy to follow code examples.
+Many of the algorithms and methods provided by the *CDPL* that operate on molecular structures 
+(e.g. data output, descriptor calculations, conformer generation, substructure searching, ...) 
+rely on secondary structure-derived information such as implicit hydrogen counts, atomic orbital hybridization, 
+the smallest set of smallest rings (SSSR), atom/bond ring membership, atom/bond aromaticity, and so forth. 
+For the sake of computational efficiency, control and flexibility, it is generally the responsibility of the 
+user to provide all input data needed by a particular method or algorithm. 
+When it comes to the structure-derived data mentioned above, the `CDPL.Chem`_ package provides a set of easy 
+to use functions that allow to compute these data and save the results as values of corresponding `Chem.Atom`_, 
+`Chem.Bond`_ or `Chem.MolecularGraph`_  properties for future use (see section `Essential Properties`_). 
+The following sub-sections provide an overview of the most important property calculation functions and 
+demonstrate their correct usage by means of code snippets.
 
-Writing Molecule Data
----------------------
+Implicit Hydrogen Count Calculation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Atomic Orbital Hybridization Perception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Atom and Bond Ring Membership Perception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+SSSR Perception
+^^^^^^^^^^^^^^^
+
+
+Atom and Bond Aromaticity Perception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Molecular Graph Component Perception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Output of Molecule Data
+-----------------------
 
 Direct String Output
 ^^^^^^^^^^^^^^^^^^^^
 
 .. rubric:: SMILES
 
-For a direct generation of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.generateSMILES()`_. 
-The function expects a `Chem.MolecularGraph`_ instance representing the chemical structure as first argument. Further optional arguments allow to customize the SMILES output in several aspects.
+For a direct generation of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function 
+`Chem.generateSMILES()`_. 
+The function expects a `Chem.MolecularGraph`_ instance representing the chemical structure as first argument. 
+Further optional arguments allow to customize the SMILES output in several aspects.
 
 Examples:
 
 .. code:: ipython3
 
-    Chem.calcBasicProperties(mol, False) # calculate required properties, more on that later
+    Chem.calcBasicProperties(mol, False) # calculate required properties (see above)
     
     Chem.generateSMILES(mol) # by default, non-canonical SMILES strinsg are generated
 
@@ -2210,7 +2318,11 @@ Examples:
 .. rubric:: InChI
 
 InChI strings can be generated by means of the utility function `Chem.generateINCHI()`_. The function likewise 
-expects a `Chem.MolecularGraph`_ instance as its first argument. A second optional argument of type ``str`` allows to provide settings for the InChI generation code (supported options are described `here <https://github.com/IUPAC-InChI/InChI/blob/dev/INCHI-1-DOC/APIReference/InChI_API_Reference.md#getinchi>`__). The third argument controls the dimension of the atom coordinates (0 -> auto sel., 2 -> 2D or 3 -> 3D) that are output as part of the generated auxiliary information (if enabled by the provided settings, see second example).
+expects a `Chem.MolecularGraph`_ instance as its first argument. A second optional argument of type **str** 
+allows to provide settings for the InChI generation code (supported options are described 
+`here <https://github.com/IUPAC-InChI/InChI/blob/dev/INCHI-1-DOC/APIReference/InChI_API_Reference.md#getinchi>`__). 
+The third argument controls the dimension of the atom coordinates (``0`` -> auto sel., ``2`` -> 2D or ``3`` -> 3D) 
+that are output as part of the generated auxiliary information (if enabled by the provided settings, see second example).
 
 Examples:
 
@@ -2259,7 +2371,8 @@ Similarly, the InChI Key of a given `Chem.MolecularGraph`_ instance can be gener
 
 .. rubric:: Other formats
         
-The general procedure for the output of `Chem.MolecularGraph`_ instances as string data encoded in one of the supported formats (including SMILES and InChI) is as follows:
+The general procedure for the output of `Chem.MolecularGraph`_ instances as string data encoded in 
+one of the supported formats (including SMILES and InChI) is as follows:
 
 1. Create an instance of class `Base.StringIOStream`_ that wraps the string and serves as output data sink for the next steps.
 2. Create a suitable `Chem.MolecularGraphWriterBase`_ subclass instance that will perform the format-specific encoding of the molecule data in step 3.
@@ -2339,7 +2452,7 @@ Writing `Chem.MolecularGraph`_ instance data to file storage also requires the c
 `Chem.MolecularGraphWriterBase`_ subclass instance that performs the actual format-specific data encoding work. 
 As with string data output, several options exist:
 
-1. Instantiation of class `Chem.MolecularGraphWriter`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. sdf, smi, mol2, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
+1. Instantiation of class `Chem.MolecularGraphWriter`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. ``'sdf'``, ``'smi'``, ``'mol2'``, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
 2. Instantiation of class `Chem.MolecularGraphWriter`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.SDFMolecularGraphWriter`_ implementing writing MDL SD-file data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.FileSDFMolecularGraphWriter`_) that accepts a file path as constructor argument.
@@ -2365,7 +2478,8 @@ As with string data output, several options exist:
     writer = Chem.FileSDFMolecularGraphWriter('/path/to/output/file')
     
 Once a data writer instance has been created, the `write()`_ method can be called one or multiple times with 
-the `Chem.MolecularGraph`_ instance(s) to output as argument. After all `Chem.MolecularGraph`_ instances have been output the `close()`_ method needs to be called to flush all written data to disk and close the file (note: 
+the `Chem.MolecularGraph`_ instance(s) to output as argument. After all `Chem.MolecularGraph`_ instances have 
+been output the `close()`_ method needs to be called to flush all written data to disk and close the file (note: 
 although this method will be called automatically by the destructor of the data writer, an explicit call will have 
 an immediate effect and is preferred over a delayed destructor call by the garbage collector happening at an 
 indeterminate point in time). 
