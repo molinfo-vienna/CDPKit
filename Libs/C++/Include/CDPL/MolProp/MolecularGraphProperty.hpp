@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in MolProp::MolecularGraph properties.
+         * \brief Provides keys for built-in Chem::MolecularGraph properties.
          * \since 1.3
          */
         namespace MolecularGraphProperty

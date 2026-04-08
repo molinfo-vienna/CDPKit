@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in MolProp::Atom properties.
+         * \brief Provides keys for built-in Chem::Atom properties.
          */
         namespace AtomProperty
         {

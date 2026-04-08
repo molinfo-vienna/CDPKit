@@ -45,7 +45,7 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in MolProp::Bond properties.
+         * \brief Provides keys for built-in Chem::Bond properties.
          */
         namespace BondProperty
         {
