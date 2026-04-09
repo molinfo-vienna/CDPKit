@@ -982,7 +982,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-38-835c00aa411f> in <module>
+    <ipython-input-314-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -1001,7 +1001,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-39-ae6b58adf8f3> in <module>
+    <ipython-input-315-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1173,7 +1173,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-50-093f4eea5627> in <module>
+    <ipython-input-326-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1337,7 +1337,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-54-8b35fac927c4> in <module>
+    <ipython-input-330-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -2031,7 +2031,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-85-4f5078ed4ed6> in <module>
+    <ipython-input-361-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2224,8 +2224,8 @@ testing (see section `Dynamic Properties`_ for further information).
 Preparation for Downstream Processing
 -------------------------------------
 
-Many of the algorithms and methods provided by the *CDPL* that operate on molecular structures 
-(e.g. data output, descriptor calculations, conformer generation, substructure searching, ...) 
+*CDPL* implementations of many methods and algorithms that operate on molecular structures 
+(e.g. code for data output, descriptor calculations, conformer generation, substructure searching, ...) 
 rely on secondary structure-derived information such as implicit hydrogen counts, atomic orbital hybridization, 
 the smallest set of smallest rings (SSSR), atom/bond ring membership, atom/bond aromaticity, and so forth. 
 For the sake of computational efficiency, control and flexibility, it is generally the responsibility of the 
@@ -2233,11 +2233,100 @@ user to provide all input data needed by a particular method or algorithm.
 When it comes to the structure-derived data mentioned above, the `CDPL.Chem`_ package provides a set of easy 
 to use functions that allow to compute these data and save the results as values of corresponding `Chem.Atom`_, 
 `Chem.Bond`_ or `Chem.MolecularGraph`_  properties for future use (see section `Essential Properties`_). 
-The following sub-sections provide an overview of the most important property calculation functions and 
+The following sub-sections provide an overview of the most relevant property calculation functions and 
 demonstrate their correct usage by means of code snippets.
 
 Implicit Hydrogen Count Calculation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In general, valences of atoms that are not consumed by explicit incident bonds (represented by `Chem.Bond`_ 
+instances) are considered to be used up by imaginary single bonds to **virtually present** hydrogen atoms 
+(not explicitly represented by corresponding `Chem.Atom`_ instances). Within the *CDPL* such 
+virtual hydrogens are denoted as *Implicit Hydrogens*. The implicit hydrogen count of an atom gets
+stored as the unsigned integer value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ of the 
+associated `Chem.Atom`_ instance and not only depends on the chemical element (specified by the value of the property `Chem.AtomProperty.TYPE`_) but also on the values of the properties `Chem.AtomProperty.FORMAL_CHARGE`_ and 
+`Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT`_, respectively. Moreover, the implicit hydrogen count of an atom 
+depends on its structural context and the thus resulting number of incident explicit bonds as well as their 
+order (specified by the value of the `Chem.Bond`_ property `Chem.BondProperty.ORDER`_). 
+
+For the calculation of the implicit hydrogen count of a given atom represented by a `Chem.Atom`_ instance in a particular structural context specified by a `Chem.MolecularGraph`_ instance the `CDPL.Chem`_ package provides the function `Chem.calcImplicitHydrogenCount()`_.
+
+Example 1: Implicit hydrogen count of nitrogen in Methylamine
+
+.. code:: ipython3
+
+    nc_mol = Chem.BasicMolecule()
+    
+    Chem.setType(nc_mol.addAtom(), Chem.AtomType.N)
+    Chem.setType(nc_mol.addAtom(), Chem.AtomType.C)
+    Chem.setOrder(nc_mol.addBond(0, 1), 1)
+    
+    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], nc_mol)
+
+
+
+
+.. parsed-literal::
+
+    2
+
+
+
+Example 2: Implicit hydrogen count of positively charged nitrogen in Methylamine
+
+.. code:: ipython3
+
+    Chem.setFormalCharge(nc_mol.atoms[0], 1) # N -> N+
+    
+    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], nc_mol)
+
+
+
+
+.. parsed-literal::
+
+    3
+
+
+
+Example 3: Implicit hydrogen count of a positively charged nitrogen atom fragment
+
+.. code:: ipython3
+
+    # create substructure referencing only the nitrogen of Methylamine
+    n_frag = Chem.Fragment()
+    n_frag.addAtom(nc_mol.atoms[0])
+    
+    # in n_frag the nitrogen does not have any expl. bonds!
+    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], n_frag) 
+
+
+
+
+.. parsed-literal::
+
+    4
+
+
+
+Example 4: Implicit hydrogen count of carbon in carbene
+
+.. code:: ipython3
+
+    carbene = Chem.BasicMolecule()
+    
+    Chem.setType(carbene.addAtom(), Chem.AtomType.C)
+    Chem.setUnpairedElectronCount(carbene.atoms[0], 2) # -> specify that the carbon has two unpaired electrons
+    
+    Chem.calcImplicitHydrogenCount(carbene.atoms[0], carbene) 
+
+
+
+
+.. parsed-literal::
+
+    2
+
 
 
 Atomic Orbital Hybridization Perception
@@ -2771,6 +2860,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.AtomType.UNKNOWN: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html#a69fe4886bcac34ae4f279709c97370ea
 
 .. _Chem.setSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae467609c02f752b3455a080b62426dce
@@ -2793,6 +2884,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _FORMAL_CHARGE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.FORMAL_CHARGE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.setIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6a658c780e6f0cccf48ff2366cc6fd51
 
 .. _Chem.getIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a96cc114a0487cb2c2b1285275d428a3f
@@ -2813,6 +2906,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _IMPLICIT_HYDROGEN_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.setUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af73aba0d54fdb2e0c39655376d7c78df
 
 .. _Chem.getUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7030e4204ccfc678d9adbdd32eb36b9d
@@ -2823,6 +2918,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _UNPAIRED_ELECTRON_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.setHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac7eff0821c7792d9a9a5c34e34244900
 
 .. _Chem.getHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a380460f2c06306105a8f2c8763b62ab7
@@ -2832,6 +2929,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.clearHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a50eed3c6b6e85f7def74057f0f2af6c5
 
 .. _HYBRIDIZATION: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.AtomProperty.HYBRIDIZATION: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
 .. _Chem.setStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a94ecf7f236b8873dc532fc702d6cd8d7
 
@@ -2911,6 +3010,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
+.. _Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
 .. _Chem.set2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adcbcd27f825a498a2b991c90ff45cad2
 
 .. _Chem.get2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abe0305f94e01b6f334e0433a4d75fa70
@@ -2976,6 +3077,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _STRUCTURE_DATA: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
 .. _Chem.StringDataBlock: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StringDataBlock.html
+
+.. _Chem.calcImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb38459bd2250e3771e77b0eb2925cbe
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
