@@ -982,7 +982,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-314-835c00aa411f> in <module>
+    <ipython-input-342-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -1001,7 +1001,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-315-ae6b58adf8f3> in <module>
+    <ipython-input-343-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1173,7 +1173,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-326-093f4eea5627> in <module>
+    <ipython-input-354-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1337,7 +1337,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-330-8b35fac927c4> in <module>
+    <ipython-input-358-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -2031,7 +2031,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-361-4f5078ed4ed6> in <module>
+    <ipython-input-389-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2327,6 +2327,73 @@ Example 4: Implicit hydrogen count of carbon in carbene
 
     2
 
+
+
+As demonstrated, the function `Chem.calcImplicitHydrogenCount()`_ just calculates the implicit hydrogen count for 
+a single atom and does not yet save the result as value of the property 
+`Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_. To calculate the counts for all `Chem.Atom`_ instances 
+contained in a `Chem.MolecularGraph`_ instance and at the same time set the corresponding property 
+values the convenience function `Chem.calcImplicitHydrogenCounts()`_ is provided. The function expects the 
+`Chem.MolecularGraph`_ instance as first argument and a boolean value as second argument. The second argument 
+tells the function whether the implicit hydrogen shall be calculated even if all `Chem.Atom`_ instances already 
+have the value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ set. This so-called *override* flag has 
+to be ``True`` whenever the molecular graph has changed in a way (e.g. changed atom types, bond orders, 
+formal charges, ...) so that previously calculated implicit hydrogen counts became invalid and thus 
+need to be updated. If the flag is ``False`` then the implicit hydrogen counts will only be calculated for 
+`Chem.Atom`_ instances that do not yet have the corresponding property value set. 
+An override flag argument is also supported by many other property calculation functions and facilitates 
+computational efficiency by making sure calculations are carried out only once unless previous 
+results are not correct anymore and calculations therefore need to be redone.
+
+.. code:: ipython3
+
+    def printImplHCounts(molgraph):
+        for atom in molgraph.atoms:
+            if Chem.hasImplicitHydrogenCount(atom):
+                value = Chem.getImplicitHydrogenCount(atom)
+            else:
+                value = 'n.a.'
+                
+            print(f' Atom#{molgraph.getAtomIndex(atom)}: {value}')
+            
+    print('Impl. H-count property values before calculation:')
+    
+    printImplHCounts(nc_mol)
+    
+    print('Impl. H-count property values after calculation:')
+    
+    Chem.calcImplicitHydrogenCounts(nc_mol, False)
+    
+    printImplHCounts(nc_mol)
+    
+    print('Impl. H-count property values after form. charge change and calculation with override=False:')
+    
+    Chem.setFormalCharge(nc_mol.atoms[0], 0) # N+ -> N
+    Chem.calcImplicitHydrogenCounts(nc_mol, False)
+    
+    printImplHCounts(nc_mol)
+    
+    print('Impl. H-count property values after form. charge change and calculation with override=True:')
+    
+    Chem.calcImplicitHydrogenCounts(nc_mol, True)
+    
+    printImplHCounts(nc_mol)
+
+
+.. parsed-literal::
+
+    Impl. H-count property values before calculation:
+     Atom#0: n.a.
+     Atom#1: n.a.
+    Impl. H-count property values after calculation:
+     Atom#0: 3
+     Atom#1: 3
+    Impl. H-count property values after form. charge change and calculation with override=False:
+     Atom#0: 3
+     Atom#1: 3
+    Impl. H-count property values after form. charge change and calculation with override=True:
+     Atom#0: 2
+     Atom#1: 3
 
 
 Atomic Orbital Hybridization Perception
@@ -3079,6 +3146,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.StringDataBlock: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StringDataBlock.html
 
 .. _Chem.calcImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb38459bd2250e3771e77b0eb2925cbe
+
+.. _Chem.calcImplicitHydrogenCounts(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a109bac8c8a869dd14d26e70361db7c28
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
