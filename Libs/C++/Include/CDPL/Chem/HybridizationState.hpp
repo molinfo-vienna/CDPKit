@@ -68,7 +68,7 @@ namespace CDPL
             constexpr unsigned int SP3 = 3;
 
             /**
-             * \brief Specifies the hybridization \e dp.
+             * \brief Specifies the hybridization state \e dp.
              */
             constexpr unsigned int DP = 4;
 
