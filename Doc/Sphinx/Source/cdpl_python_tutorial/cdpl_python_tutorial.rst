@@ -332,7 +332,7 @@ which are both provided by the `Chem.AtomContainer`_ interface:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     0
 
@@ -350,7 +350,7 @@ of the `Chem.BondContainer`_ interface:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     0
 
@@ -384,7 +384,7 @@ The value of the type property can be retrieved by the associated function `Chem
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     6
 
@@ -417,7 +417,7 @@ A previously set bond order property value can be retrieved by the accompanying 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -459,7 +459,7 @@ by **mol** the following lines will do the trick:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     6
 
@@ -472,7 +472,7 @@ by **mol** the following lines will do the trick:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     6
 
@@ -527,7 +527,7 @@ calling the method `assign()`_ or `copy()`_:
     mol_copy
 
 
-.. parsed-literal::
+.. code-block:: text
 
     1
 
@@ -623,7 +623,7 @@ Example: Counting atom types and bond orders
     print(f'Bond orders: {order_counts}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Atom types: {6: 5, 7: 1}
     Bond orders: {2: 3, 1: 3}
@@ -659,7 +659,7 @@ The following code is an alternative version of the one above that employs seque
     print(f'Bond orders: {order_counts}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Atom types: {6: 5, 7: 1}
     Bond orders: {2: 3, 1: 3}
@@ -681,7 +681,7 @@ Atoms, bonds and properties can be removed completely by calling the method `cle
     print(f'Num. bonds after clear(): {mol_copy.numBonds}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before clear(): 24
     Num. bonds before clear(): 24
@@ -713,7 +713,7 @@ index outside the allowed range will raise an exception.
     mol_copy
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before removeAtom(1): 6
     Num. bonds before removeAtom(1): 6
@@ -747,7 +747,7 @@ the bond count:
     mol_copy
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before removeBond(2): 6
     Num. bonds before removeBond(2): 6
@@ -798,7 +798,7 @@ either by calling the method `remove()`_ with the fragment object as argument or
     mol_copy
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. fragment atoms: 3
     Num. fragment bonds: 1
@@ -830,7 +830,7 @@ test operator ``ìn`` as follows:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -843,7 +843,7 @@ test operator ``ìn`` as follows:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -856,7 +856,7 @@ test operator ``ìn`` as follows:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -869,7 +869,7 @@ test operator ``ìn`` as follows:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -885,7 +885,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -898,7 +898,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -911,7 +911,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -925,7 +925,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -946,7 +946,7 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -959,7 +959,7 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -975,14 +975,14 @@ Examples:
     mol.getAtomIndex(mol_copy.atoms[0])
 
 
-::
+.. code-block:: text
 
 
     ---------------------------------------------------------------------------
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-342-835c00aa411f> in <module>
+    <ipython-input-330-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -994,14 +994,14 @@ Examples:
     mol.getBondIndex(mol_copy.bonds[1])
 
 
-::
+.. code-block:: text
 
 
     ---------------------------------------------------------------------------
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-343-ae6b58adf8f3> in <module>
+    <ipython-input-331-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1024,7 +1024,7 @@ instance:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -1037,7 +1037,7 @@ instance:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -1050,7 +1050,7 @@ instance:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -1068,7 +1068,7 @@ which both give access to the atom pair sequence:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -1081,7 +1081,7 @@ which both give access to the atom pair sequence:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -1096,7 +1096,7 @@ Additionally, the first atom (index=0) can be retrieved directly by calling the 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -1109,7 +1109,7 @@ Additionally, the first atom (index=0) can be retrieved directly by calling the 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -1124,7 +1124,7 @@ The second atom (index=1) can be accessed via the property `end`_ or by calling 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -1137,7 +1137,7 @@ The second atom (index=1) can be accessed via the property `end`_ or by calling 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -1153,7 +1153,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -1166,14 +1166,14 @@ by the calling the method `getNeighbor()`_ as follows:
     bond.getNeighbor(mol.atoms[0])
 
 
-::
+.. code-block:: text
 
 
     ---------------------------------------------------------------------------
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-354-093f4eea5627> in <module>
+    <ipython-input-342-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1202,7 +1202,7 @@ Example:
             print(f'  Bond index: {mol.getBondIndex(con_bond)}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Atom index: 0
      Num. connected atoms: 2
@@ -1266,7 +1266,7 @@ The above code changed to use the mentioned properties:
             print(f'  Bond index: {mol.getBondIndex(con_bond)}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Atom index: 0
      Num. connected atoms: 2
@@ -1317,7 +1317,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     5
 
@@ -1330,14 +1330,14 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
     mol.atoms[0].getBondToAtom(mol.atoms[2])
 
 
-::
+.. code-block:: text
 
 
     ---------------------------------------------------------------------------
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-358-8b35fac927c4> in <module>
+    <ipython-input-346-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -1352,7 +1352,7 @@ Alternatively, the method `findBondToAtom()`_ can be used. In contrast to `getBo
     print(mol.atoms[0].findBondToAtom(mol.atoms[2]))
 
 
-.. parsed-literal::
+.. code-block:: text
 
     None
 
@@ -1381,7 +1381,7 @@ An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     0
 
@@ -1418,7 +1418,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -1431,7 +1431,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -1446,7 +1446,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -1459,7 +1459,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     True
 
@@ -1487,7 +1487,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -1501,7 +1501,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -1521,7 +1521,7 @@ Examples:
     frag
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before addBond(): 0
     Num. atoms after addBond(): 2
@@ -1645,7 +1645,7 @@ Examples:
     frag
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before removeAtom(1): 6
     Num. bonds before removeAtom(1): 6
@@ -1676,7 +1676,7 @@ Removal of a bond has no side effect on the atom count:
     frag
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Num. atoms before removeBond(2): 5
     Num. bonds before removeBond(2): 4
@@ -1701,7 +1701,7 @@ operation failed:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -1714,7 +1714,7 @@ operation failed:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     False
 
@@ -1956,7 +1956,7 @@ molecules to read, the return value of the method will evaluate to ``False``:
     print(f'Read {mol_count} molecules')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Read 3 molecules
 
@@ -1983,7 +1983,7 @@ Example:
     print(f'Number of input molecules: {num_mols}')
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Number of input molecules: 3
 
@@ -2024,14 +2024,14 @@ Example:
     reader.read(3, mol_copy)
 
 
-::
+.. code-block:: text
 
 
     ---------------------------------------------------------------------------
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-389-4f5078ed4ed6> in <module>
+    <ipython-input-377-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2255,18 +2255,18 @@ Example 1: Implicit hydrogen count of nitrogen in Methylamine
 
 .. code:: ipython3
 
-    nc_mol = Chem.BasicMolecule()
+    methylamine = Chem.BasicMolecule()
     
-    Chem.setType(nc_mol.addAtom(), Chem.AtomType.N)
-    Chem.setType(nc_mol.addAtom(), Chem.AtomType.C)
-    Chem.setOrder(nc_mol.addBond(0, 1), 1)
+    Chem.setType(methylamine.addAtom(), Chem.AtomType.N)
+    Chem.setType(methylamine.addAtom(), Chem.AtomType.C)
+    Chem.setOrder(methylamine.addBond(0, 1), 1)
     
-    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], nc_mol)
+    Chem.calcImplicitHydrogenCount(methylamine.atoms[0], methylamine)
 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -2276,14 +2276,14 @@ Example 2: Implicit hydrogen count of positively charged nitrogen in Methylamine
 
 .. code:: ipython3
 
-    Chem.setFormalCharge(nc_mol.atoms[0], 1) # N -> N+
+    Chem.setFormalCharge(methylamine.atoms[0], 1) # N -> N+
     
-    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], nc_mol)
+    Chem.calcImplicitHydrogenCount(methylamine.atoms[0], methylamine)
 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     3
 
@@ -2295,15 +2295,15 @@ Example 3: Implicit hydrogen count of a positively charged nitrogen atom fragmen
 
     # create substructure referencing only the nitrogen of Methylamine
     n_frag = Chem.Fragment()
-    n_frag.addAtom(nc_mol.atoms[0])
+    n_frag.addAtom(methylamine.atoms[0])
     
     # in n_frag the nitrogen does not have any expl. bonds!
-    Chem.calcImplicitHydrogenCount(nc_mol.atoms[0], n_frag) 
+    Chem.calcImplicitHydrogenCount(methylamine.atoms[0], n_frag) 
 
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     4
 
@@ -2323,7 +2323,7 @@ Example 4: Implicit hydrogen count of carbon in carbene
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     2
 
@@ -2336,12 +2336,12 @@ contained in a `Chem.MolecularGraph`_ instance and at the same time set the corr
 values the convenience function `Chem.calcImplicitHydrogenCounts()`_ is provided. The function expects the 
 `Chem.MolecularGraph`_ instance as first argument and a boolean value as second argument. The second argument 
 tells the function whether the implicit hydrogen shall be calculated even if all `Chem.Atom`_ instances already 
-have the value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ set. This so-called *override* flag has 
-to be ``True`` whenever the molecular graph has changed in a way (e.g. changed atom types, bond orders, 
+have the value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ set. This so-called *overwrite* flag 
+has to be ``True`` whenever the molecular graph has changed in a way (e.g. changed atom types, bond orders, 
 formal charges, ...) so that previously calculated implicit hydrogen counts became invalid and thus 
 need to be updated. If the flag is ``False`` then the implicit hydrogen counts will only be calculated for 
 `Chem.Atom`_ instances that do not yet have the corresponding property value set. 
-An override flag argument is also supported by many other property calculation functions and facilitates 
+An overwrite flag argument is also supported by many other property calculation functions and facilitates 
 computational efficiency by making sure calculations are carried out only once unless previous 
 results are not correct anymore and calculations therefore need to be redone.
 
@@ -2358,29 +2358,29 @@ results are not correct anymore and calculations therefore need to be redone.
             
     print('Impl. H-count property values before calculation:')
     
-    printImplHCounts(nc_mol)
+    printImplHCounts(methylamine)
     
     print('Impl. H-count property values after calculation:')
     
-    Chem.calcImplicitHydrogenCounts(nc_mol, False)
+    Chem.calcImplicitHydrogenCounts(methylamine, False)
     
-    printImplHCounts(nc_mol)
+    printImplHCounts(methylamine)
     
     print('Impl. H-count property values after form. charge change and calculation with override=False:')
     
-    Chem.setFormalCharge(nc_mol.atoms[0], 0) # N+ -> N
-    Chem.calcImplicitHydrogenCounts(nc_mol, False)
+    Chem.setFormalCharge(methylamine.atoms[0], 0) # N+ -> N
+    Chem.calcImplicitHydrogenCounts(methylamine, False)
     
-    printImplHCounts(nc_mol)
+    printImplHCounts(methylamine)
     
     print('Impl. H-count property values after form. charge change and calculation with override=True:')
     
-    Chem.calcImplicitHydrogenCounts(nc_mol, True)
+    Chem.calcImplicitHydrogenCounts(methylamine, True)
     
-    printImplHCounts(nc_mol)
+    printImplHCounts(methylamine)
 
 
-.. parsed-literal::
+.. code-block:: text
 
     Impl. H-count property values before calculation:
      Atom#0: n.a.
@@ -2398,6 +2398,82 @@ results are not correct anymore and calculations therefore need to be redone.
 
 Atomic Orbital Hybridization Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The atomic orbital hybridization of a single atom represented by a `Chem.Atom`_ instance in a particular 
+structural context specified by a `Chem.MolecularGraph`_ instance can be perceived by the function `Chem.perceiveHybridizationState()`_. The functions returns the determined hybrization state as value of one 
+of the corresponding integer constants exported as static public attributes of class 
+`Chem.HybridizationState`_. The hybridization state of an atom depends on the chemical element (specified by the 
+value of the property `Chem.AtomProperty.TYPE`_), the formal charge (specified by the value of property 
+`Chem.AtomProperty.FORMAL_CHARGE`_), the implicit hydrogen count (specified by the value of the property 
+`Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_, see previous section) as well as the number and order 
+(specified by the value of the property `Chem.BondProperty.ORDER`_) of any incident explicit bonds. 
+
+Example 1: Hybridization state of carbon in Methane
+
+.. code:: ipython3
+
+    hyb_state_str = {
+        Chem.HybridizationState.UNKNOWN : 'n.a.',
+        Chem.HybridizationState.DP : 'DP',
+        Chem.HybridizationState.SD3 : 'SD3',
+        Chem.HybridizationState.SP : 'SP',
+        Chem.HybridizationState.SP2  : 'SP2 ',
+        Chem.HybridizationState.SP2D : 'SP2D',
+        Chem.HybridizationState.SP3 : 'SP3',
+        Chem.HybridizationState.SP3D : 'SP3D',
+        Chem.HybridizationState.SP3D2 : 'SP3D2',
+        Chem.HybridizationState.SP3D3 : 'SP3D3'
+    }
+    
+    methane = Chem.BasicMolecule()
+    
+    Chem.setType(methane.addAtom(), Chem.AtomType.C)
+    
+    # calc. required property Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT
+    Chem.calcImplicitHydrogenCounts(methane, False)
+    
+    hyb_state = Chem.perceiveHybridizationState(methane.atoms[0], methane)
+    
+    print(f'Hybridization of carbon in Methane: {hyb_state_str[hyb_state]}')
+
+
+.. code-block:: text
+
+    Hybridization of carbon in Methane: SP3
+
+
+For the perception of the hybridization state of all `Chem.Atom`_ instances contained in a `Chem.MolecularGraph`_ instance and saving the state for later use as value of the corresponding property 
+`Chem.AtomProperty.HYBRIDIZATION`_ the convenience function `Chem.perceiveHybridizationStates()`_ is provided. The function expects the `Chem.MolecularGraph`_ instance as first argument and an overwrite flag (see previous 
+section) as second argument.
+
+Example: Hybridization of Alanine atoms
+
+.. code:: ipython3
+
+    Chem.calcImplicitHydrogenCounts(mol, False)
+    Chem.perceiveHybridizationStates(mol, False)
+                                   
+    for atom in mol.atoms:
+        hyb_state = Chem.getHybridizationState(atom)
+        
+        print(f'Atom#{mol.getAtomIndex(atom)}: {hyb_state_str[hyb_state]}')
+
+
+.. code-block:: text
+
+    Atom#0: SP3
+    Atom#1: SP2 
+    Atom#2: SP3
+    Atom#3: SP3
+    Atom#4: SP3
+    Atom#5: SP2 
+    Atom#6: n.a.
+    Atom#7: n.a.
+    Atom#8: n.a.
+    Atom#9: n.a.
+    Atom#10: n.a.
+    Atom#11: n.a.
+    Atom#12: n.a.
 
 
 Atom and Bond Ring Membership Perception
@@ -2439,7 +2515,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     'OC(=O)[C@@H](N)C'
 
@@ -2452,7 +2528,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     'C[C@@H](C(O)=O)N'
 
@@ -2465,7 +2541,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     '[H][C@@](C(=O)O[H])(C([H])([H])[H])N([H])[H]'
 
@@ -2489,7 +2565,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     'InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1'
 
@@ -2502,7 +2578,7 @@ Examples:
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     'InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1 AuxInfo=1/1/N:5,4,6,3,1,2/E:(5,6)/it:im/rA:13OONCCCHHHHHHH/rB:;;n3;s4;s1d2s4;s4;s5;s5;s5;s3;s3;s1;/rC:5.135,-.25,0;4.269,1.25,0;2.5369,.25,0;3.403,-.25,0;3.403,-1.25,0;4.269,.25,0;3.403,.37,0;2.783,-1.25,0;3.403,-1.87,0;4.023,-1.25,0;2,-.06,0;2.5369,.87,0;5.672,.06,0;'
 
@@ -2519,7 +2595,7 @@ Similarly, the InChI Key of a given `Chem.MolecularGraph`_ instance can be gener
 
 
 
-.. parsed-literal::
+.. code-block:: text
 
     'QNAYBMKLOCPYGJ-REOHCLBHSA-N'
 
@@ -2562,7 +2638,7 @@ Example: Generating a string holding the MDL SDF record of a `Chem.MolecularGrap
     print(sdf_str)
 
 
-.. parsed-literal::
+.. code-block:: text
 
     5950
               12162506342D 0   0.00000     0.00000
@@ -2656,7 +2732,7 @@ Example: SMILES output of two `Chem.Molecule`_ instances
         print(smi_file.read())
 
 
-.. parsed-literal::
+.. code-block:: text
 
     OC(=O)[C@@H](N)C 5950
     c1n(ccn1)c1ccc(cc1)c1ccc(n1c1c(cc(cc1)C(=O)N)C)CCC(=O)[O-] 022_3QJ5_A
@@ -3148,6 +3224,12 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.calcImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb38459bd2250e3771e77b0eb2925cbe
 
 .. _Chem.calcImplicitHydrogenCounts(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a109bac8c8a869dd14d26e70361db7c28
+
+.. _Chem.perceiveHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa2acedb689dfdcd9cbba918a1ecabb86
+
+.. _Chem.perceiveHybridizationStates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff960fb1895ebfdea29aa7eb93732afb
+
+.. _Chem.HybridizationState: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1HybridizationState.html
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 

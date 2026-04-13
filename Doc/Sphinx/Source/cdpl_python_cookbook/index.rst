@@ -6,7 +6,9 @@ CDPL Python Cookbook
 ====================
 
 This 'cookbook' provides a set of scripts that demonstrate how often occurring tasks in cheminformatics can be accomplished
-with Python code that utilizes functionality offered by the CDPL.
+with Python code that utilizes functionality offered by the CDPL. In order to understand the cookbook code it is highly recommended
+to first have an in-depth look at the :doc:`../cdpl_python_tutorial/index` which provides valuable information about basic concepts and
+fundamental data structures.
 
 The scripts are all ready-to-run and have been designed to be executed on the command line. Most of the scripts require arguments to be specified
 (e.g. path to input/output files). Information on required/supported arguments can be obtained by running the scripts
