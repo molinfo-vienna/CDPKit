@@ -323,7 +323,7 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                 api_doc_db[comp_name + '.' + mem_name + '.' + name] = doc_block
                 
 def extractCXXAPIDocBlocks():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print('Usage:', sys.argv[0], '[C++ API doc. XML dir] [output file]', file=sys.stderr)
         sys.exit(2)
 

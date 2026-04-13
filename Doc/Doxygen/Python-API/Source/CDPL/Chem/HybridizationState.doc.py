@@ -30,7 +30,7 @@ class HybridizationState(Boost.Python.instance):
     UNKNOWN = 0
 
     ##
-    # \brief Specifies the hybridization <em>dp</em>.
+    # \brief Specifies the hybridization state <em>dp</em>.
     # 
     DP = 4
 
