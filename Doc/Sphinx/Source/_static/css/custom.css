@@ -1,28 +1,31 @@
-/* Change code blocks font and bump up font size slightly (normally 12px)*/
+/* Change code blocks font and bump up font size slightly (normally 12px) */
 .rst-content pre.literal-block, .rst-content div[class^="highlight"] pre, .rst-content .linenodiv pre {
-	font-family: 'Inconsolata', monospace !important;
-	font-size: 13px !important;
-	white-space: pre-wrap;
+    font-family: 'Inconsolata', monospace !important;
+    font-size: 13px !important;
+    white-space: pre-wrap;
 }
 
-/* Change text code block background color*/
+/* Change text code block background color */
 .rst-content div[class^="highlight-text notranslate"] pre {
-	background-color: ghostwhite !important;
+    background-color: ghostwhite !important;
 }
 
 /* Change code descriptions and literal blocks (inline code via ``) to match the normal font size being used in the sphinx_RTD_theme text  (normally 14px)*/
 .rst-content dl:not(.docutils) tt.descname,.rst-content dl:not(.docutils) tt.descclassname,.rst-content dl:not(.docutils) tt.descname,.rst-content dl:not(.docutils) code.descname,.rst-content dl:not(.docutils) tt.descclassname,.rst-content dl:not(.docutils) code.descclassname, code.docutils {
-	font-family: 'Inconsolata', monospace !important;
-	font-size: 14px !important;
+    font-family: 'Inconsolata', monospace !important;
+    font-size: 14px !important;
 }
 
 /* Change default max width from 800px to better suit max 150 line width in */
 .wy-nav-content {
-max-width: 80% !important;
+    max-width: 80% !important;
 }
 
-.wy-table-responsive table td {
-    white-space: normal;
-    white-space-collapse: collapse;
-    text-wrap: stable;
+/* Change text wrapping in tables */
+.wy-table-responsive table td,.wy-table-responsive table th {
+    white-space: wrap !important;
+    white-space-collapse: collapse !important;
+    text-wrap: pretty !important;
+    word-wrap: normal !important;
+    word-break: normal !important;
 }
