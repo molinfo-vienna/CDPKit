@@ -47,6 +47,23 @@ if CDPL.HAVE_CAIRO_SVG_SUPPORT:
         
         return os.getvalue()
 
+    def _fragListToSVG(frags: CDPL.Chem.FragmentList) -> str:
+        os = CDPL.Base.StringIOStream()
+        svg_writer = SVGMolecularGraphWriter(os)
+        mol = CDPL.Chem.BasicMolecule()
+
+        for frag in frags:
+            mol += frag
+        
+        prepareFor2DVisualization(mol)
+        setAtomColorTableParameter(svg_writer, DefaultAtomColorTable())
+        setShowExplicitHydrogensParameter(svg_writer, True)
+
+        svg_writer.write(mol)
+        svg_writer.close()
+        
+        return os.getvalue()
+    
     def _reactionToSVG(rxn: CDPL.Chem.Reaction) -> str:
         os = CDPL.Base.StringIOStream()
         svg_writer = SVGReactionWriter(os)
@@ -62,4 +79,5 @@ if CDPL.HAVE_CAIRO_SVG_SUPPORT:
         return os.getvalue()
     
     CDPL.Chem.MolecularGraph._repr_svg_ = _molGraphToSVG
+    CDPL.Chem.FragmentList._repr_svg_ = _fragListToSVG
     CDPL.Chem.Reaction._repr_svg_ = _reactionToSVG
