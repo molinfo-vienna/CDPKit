@@ -220,7 +220,7 @@ The following table provides an overview of the most relevant interfaces and dat
      - Represents an arbitrary entity that can have a position in 3D space
    * - `CDPL.Chem.Entity3DContainer`_
      - Interface
-     - None
+     - \-
      - Represents a collection of `CDPL.Chem.Entity3D`_ instances and specifies methods for read-only
        instance access and querying their number
    * - `CDPL.Chem.AtomContainer`_
@@ -230,7 +230,7 @@ The following table provides an overview of the most relevant interfaces and dat
        instance access, querying their number, collection membership testing and ordering
    * - `CDPL.Chem.BondContainer`_
      - Interface
-     - None
+     - \-
      - Represents a collection of `CDPL.Chem.Bond`_ instances and specifies methods for read-only
        instance access, querying their number, collection membership testing and ordering
    * - `CDPL.Chem.Atom`_
@@ -298,10 +298,10 @@ Most of the classes for molecular structure representation, molecular data I/O a
 By the import line above the code in the remainder of this tutorial can conveniently access all package contents 
 via the prefix *Chem.\**.
 
-Furthermore, the *CDPL Python* bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ instances in 
-Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ package and will be used in the following 
-code snippets to display the skeletal formula of molecular graphs simply by typing the variable name at 
-the end of a code cell.
+Furthermore, the *CDPL Python* bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ and
+`Chem.FragmentList`_ instances in Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ 
+package and will be used in the following code snippets to display the skeletal formula of molecular graphs 
+simply by typing the variable name at the end of a code cell.
 
 .. code:: ipython3
 
@@ -982,7 +982,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-330-835c00aa411f> in <module>
+    <ipython-input-247-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -1001,7 +1001,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-331-ae6b58adf8f3> in <module>
+    <ipython-input-248-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1173,7 +1173,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-342-093f4eea5627> in <module>
+    <ipython-input-259-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1337,7 +1337,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-346-8b35fac927c4> in <module>
+    <ipython-input-263-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -2031,7 +2031,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-377-4f5078ed4ed6> in <module>
+    <ipython-input-294-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2212,6 +2212,12 @@ testing (see section `Dynamic Properties`_ for further information).
      - `AROMATIC_SUBSTRUCTURE`_
      - `Chem.setAromaticSubstructure()`_, `Chem.getAromaticSubstructure()`_, 
        `Chem.hasAromaticSubstructure()`_, `Chem.clearAromaticSubstructure()`_
+     - `Chem.Fragment`_
+     - \-      
+   * - Ring atoms and bonds
+     - `CYCLIC_SUBSTRUCTURE`_
+     - `Chem.setCyclicSubstructure()`_, `Chem.getCyclicSubstructure()`_, 
+       `Chem.hasCyclicSubstructure()`_, `Chem.clearCyclicSubstructure()`_
      - `Chem.Fragment`_
      - \-      
    * - Arbitrary string data (e.g. from SD-file)
@@ -2400,13 +2406,13 @@ Atomic Orbital Hybridization Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The atomic orbital hybridization of a single atom represented by a `Chem.Atom`_ instance in a particular 
-structural context specified by a `Chem.MolecularGraph`_ instance can be perceived by the function `Chem.perceiveHybridizationState()`_. The functions returns the determined hybrization state as value of one 
-of the corresponding integer constants exported as static public attributes of class 
-`Chem.HybridizationState`_. The hybridization state of an atom depends on the chemical element (specified by the 
-value of the property `Chem.AtomProperty.TYPE`_), the formal charge (specified by the value of property 
-`Chem.AtomProperty.FORMAL_CHARGE`_), the implicit hydrogen count (specified by the value of the property 
-`Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_, see previous section) as well as the number and order 
-(specified by the value of the property `Chem.BondProperty.ORDER`_) of any incident explicit bonds. 
+structural context specified by a `Chem.MolecularGraph`_ instance can be determined by the function `Chem.perceiveHybridizationState()`_. The functions returns the identified hybrization state as an unsigned integer 
+value. The meaning of this value is defined by the constants exported as static public attributes 
+of class `Chem.HybridizationState`_. The hybridization state of an atom depends on the chemical element (specified by the value of property `Chem.AtomProperty.TYPE`_), the formal charge (specified by the value of property 
+`Chem.AtomProperty.FORMAL_CHARGE`_), the implicit hydrogen count (specified by the value of property 
+`Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_, see section `Implicit Hydrogen Count Calculation`_) as well as 
+the number and order (specified by the value of property `Chem.BondProperty.ORDER`_) of any incident explicit 
+bonds. 
 
 Example 1: Hybridization state of carbon in Methane
 
@@ -2414,15 +2420,15 @@ Example 1: Hybridization state of carbon in Methane
 
     hyb_state_str = {
         Chem.HybridizationState.UNKNOWN : 'n.a.',
-        Chem.HybridizationState.DP : 'DP',
-        Chem.HybridizationState.SD3 : 'SD3',
-        Chem.HybridizationState.SP : 'SP',
-        Chem.HybridizationState.SP2  : 'SP2 ',
-        Chem.HybridizationState.SP2D : 'SP2D',
-        Chem.HybridizationState.SP3 : 'SP3',
-        Chem.HybridizationState.SP3D : 'SP3D',
-        Chem.HybridizationState.SP3D2 : 'SP3D2',
-        Chem.HybridizationState.SP3D3 : 'SP3D3'
+        Chem.HybridizationState.DP : 'dp',
+        Chem.HybridizationState.SD3 : 'sd3',
+        Chem.HybridizationState.SP : 'sp',
+        Chem.HybridizationState.SP2  : 'sp2',
+        Chem.HybridizationState.SP2D : 'sp2d',
+        Chem.HybridizationState.SP3 : 'sp3',
+        Chem.HybridizationState.SP3D : 'sp3d',
+        Chem.HybridizationState.SP3D2 : 'sp3d2',
+        Chem.HybridizationState.SP3D3 : 'sp3d3'
     }
     
     methane = Chem.BasicMolecule()
@@ -2439,14 +2445,14 @@ Example 1: Hybridization state of carbon in Methane
 
 .. code-block:: text
 
-    Hybridization of carbon in Methane: SP3
+    Hybridization of carbon in Methane: sp3
 
 
-For the perception of the hybridization state of all `Chem.Atom`_ instances contained in a `Chem.MolecularGraph`_ instance and saving the state for later use as value of the corresponding property 
-`Chem.AtomProperty.HYBRIDIZATION`_ the convenience function `Chem.perceiveHybridizationStates()`_ is provided. The function expects the `Chem.MolecularGraph`_ instance as first argument and an overwrite flag (see previous 
-section) as second argument.
+For perceiving the hybridization state of all `Chem.Atom`_ instances contained in a `Chem.MolecularGraph`_ instance and saving the information for later use as value of the corresponding property 
+`Chem.AtomProperty.HYBRIDIZATION`_ the convenience function `Chem.perceiveHybridizationStates()`_ is provided. The function expects the `Chem.MolecularGraph`_ instance as first argument and the value of the *overwrite* flag (see 
+section `Implicit Hydrogen Count Calculation`_ for information) as second argument.
 
-Example: Hybridization of Alanine atoms
+Example 2: Hybridization of Alanine atoms
 
 .. code:: ipython3
 
@@ -2461,12 +2467,12 @@ Example: Hybridization of Alanine atoms
 
 .. code-block:: text
 
-    Atom#0: SP3
-    Atom#1: SP2 
-    Atom#2: SP3
-    Atom#3: SP3
-    Atom#4: SP3
-    Atom#5: SP2 
+    Atom#0: sp3
+    Atom#1: sp2
+    Atom#2: sp3
+    Atom#3: sp3
+    Atom#4: sp3
+    Atom#5: sp2
     Atom#6: n.a.
     Atom#7: n.a.
     Atom#8: n.a.
@@ -2479,9 +2485,98 @@ Example: Hybridization of Alanine atoms
 Atom and Bond Ring Membership Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Information about the membership of an atom or bond in a cycle of the molecular graph gets stored as boolean value of the `Chem.Atom`_ property `Chem.AtomProperty.RING_FLAG`_ and the `Chem.Bond`_ property `Chem.BondProperty.RING_FLAG`_, respectively. For the perception of atom/bond ring membership the `CDPL.Chem`_ 
+package provides the function `Chem.setRingFlags()`_ which expects the `Chem.MolecularGraph`_ instance as first 
+argument and the value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for 
+information) as second argument. The function also sets the value of the `Chem.MolecularGraph`_ property 
+`Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance specifying the subset 
+of cyclic `Chem.Atom`_ and `Chem.Bond`_ instances.
+
+Example: Perception of cyclic atoms and bonds in Methylcyclohexane
+
+.. code:: ipython3
+
+    mch = Chem.parseSMILES('C1C(C)CCCC1')
+    
+    mch
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_167_0.svg
+
+
+
+.. code:: ipython3
+
+    Chem.setRingFlags(mch, False)
+    
+    ring_atoms = []
+    ring_bonds = []
+    
+    for atom in mch.atoms:
+        if Chem.getRingFlag(atom):
+            ring_atoms.append(mch.getAtomIndex(atom))
+       
+    for bond in mch.bonds:
+        if Chem.getRingFlag(bond):
+            ring_bonds.append(mch.getBondIndex(bond))
+        
+    print(f'Ring atoms: {ring_atoms}')
+    print(f'Ring bonds: {ring_bonds}')
+
+
+.. code-block:: text
+
+    Ring atoms: [0, 1, 3, 4, 5, 6]
+    Ring bonds: [0, 2, 3, 4, 5, 6]
+
+
+.. code:: ipython3
+
+    Chem.getCyclicSubstructure(mch)
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_169_0.svg
+
+
 
 SSSR Perception
 ^^^^^^^^^^^^^^^
+
+The *Smallest Set of Smallest Rings (SSSR)* of a molecular graph is a so-called *Minimal Cycle Basis* which allows to construct **every** cycle within the molecular graph by a linear combination of the cycles 
+in the SSSR (more information on this matter can be found 
+`here <https://depth-first.com/articles/2020/08/31/a-smallest-set-of-smallest-rings/>`_).
+Rings of a `Chem.MolecularGraph`_ instance are simply substructures that are made up of distinct subsets of the overall `Chem.Atom`_ and `Chem.Bond`_ instances. Therefore, the *CDPL* uses `Chem.Fragment`_ instances to describe the individual rings of a molecular graph which are themselves stored in `Chem.FragmentList`_ instances for the 
+representation of complete ring sets. 
+
+
+.. code:: ipython3
+
+    morphine = Chem.parseSMILES('CN1CC[C@]23C4=C5C=CC(O)=C4O[C@H]2[C@@H](O)C=C[C@H]3[C@H]1C5')
+    
+    morphine
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_171_0.svg
+
+
+
+.. code:: ipython3
+
+    Chem.perceiveSSSR(morphine, False)
+    
+    Chem.getSSSR(morphine)
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_172_0.svg
+
 
 
 Atom and Bond Aromaticity Perception
@@ -2504,7 +2599,7 @@ For a direct generation of SMILES strings the `CDPL.Chem`_ package provides the 
 The function expects a `Chem.MolecularGraph`_ instance representing the chemical structure as first argument. 
 Further optional arguments allow to customize the SMILES output in several aspects.
 
-Examples:
+Example 1:
 
 .. code:: ipython3
 
@@ -2521,6 +2616,8 @@ Examples:
 
 
 
+Example 2:
+
 .. code:: ipython3
 
     Chem.generateSMILES(mol, True) # second arg. True -> generate canonical SMILES
@@ -2533,6 +2630,8 @@ Examples:
     'C[C@@H](C(O)=O)N'
 
 
+
+Example 3:
 
 .. code:: ipython3
 
@@ -2556,7 +2655,7 @@ allows to provide settings for the InChI generation code (supported options are 
 The third argument controls the dimension of the atom coordinates (``0`` -> auto sel., ``2`` -> 2D or ``3`` -> 3D) 
 that are output as part of the generated auxiliary information (if enabled by the provided settings, see second example).
 
-Examples:
+Example 1:
 
 .. code:: ipython3
 
@@ -2570,6 +2669,8 @@ Examples:
     'InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1'
 
 
+
+Example 2:
 
 .. code:: ipython3
 
@@ -3097,6 +3198,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.setAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a92138d75f1fe2915409a42f0da608330
 
 .. _Chem.getAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad1975a5b154e159811c97c6c8375bcd0
@@ -3155,6 +3258,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
+.. _Chem.BondProperty.RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
 .. _Chem.set2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adcbcd27f825a498a2b991c90ff45cad2
 
 .. _Chem.get2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abe0305f94e01b6f334e0433a4d75fa70
@@ -3199,6 +3304,18 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _AROMATIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
+.. _Chem.setCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aef5d266659dc218c95941abb65f4bc98
+
+.. _Chem.getCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5741bd8246a3b967e8b41ff8836f844b
+
+.. _Chem.hasCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8d25800cde619cd6600177f85f3cb0bc
+
+.. _Chem.clearCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff443eeb049b638f27c2b2c084384580
+
+.. _CYCLIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+
+.. _Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+
 .. _Chem.setComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a876cf8d98efe7463dc466db978256a51
 
 .. _Chem.getComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a90c6e6d94f82c3fcba45cee5d94b645a
@@ -3230,6 +3347,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.perceiveHybridizationStates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff960fb1895ebfdea29aa7eb93732afb
 
 .. _Chem.HybridizationState: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1HybridizationState.html
+
+.. _Chem.setRingFlags(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a658bcc38eaf6f5718c75eedae20869be
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
