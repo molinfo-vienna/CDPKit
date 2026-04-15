@@ -33,10 +33,9 @@ from ._vis import *
 
 # IPython rich object representation display support
 if CDPL.HAVE_CAIRO_SVG_SUPPORT:
-    def _molGraphToSVG(molgraph: CDPL.Chem.MolecularGraph) -> str:
+    def _molToSVG(mol: CDPL.Chem.Molecule) -> str:
         os = CDPL.Base.StringIOStream()
         svg_writer = SVGMolecularGraphWriter(os)
-        mol = CDPL.Chem.BasicMolecule(molgraph)
 
         prepareFor2DVisualization(mol)
         setAtomColorTableParameter(svg_writer, DefaultAtomColorTable())
@@ -47,23 +46,17 @@ if CDPL.HAVE_CAIRO_SVG_SUPPORT:
         
         return os.getvalue()
 
+    def _molGraphToSVG(molgraph: CDPL.Chem.MolecularGraph) -> str:
+        return _molToSVG(CDPL.Chem.BasicMolecule(molgraph))
+
     def _fragListToSVG(frags: CDPL.Chem.FragmentList) -> str:
-        os = CDPL.Base.StringIOStream()
-        svg_writer = SVGMolecularGraphWriter(os)
         mol = CDPL.Chem.BasicMolecule()
 
         for frag in frags:
             mol += frag
         
-        prepareFor2DVisualization(mol)
-        setAtomColorTableParameter(svg_writer, DefaultAtomColorTable())
-        setShowExplicitHydrogensParameter(svg_writer, True)
+        return _molToSVG(mol)
 
-        svg_writer.write(mol)
-        svg_writer.close()
-        
-        return os.getvalue()
-    
     def _reactionToSVG(rxn: CDPL.Chem.Reaction) -> str:
         os = CDPL.Base.StringIOStream()
         svg_writer = SVGReactionWriter(os)
