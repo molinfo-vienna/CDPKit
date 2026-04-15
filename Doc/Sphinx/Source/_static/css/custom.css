@@ -23,7 +23,7 @@
 
 /* Change text wrapping in tables */
 .wy-table-responsive table td,.wy-table-responsive table th {
-    white-space: wrap !important;
+    white-space: normal !important;
     white-space-collapse: collapse !important;
     text-wrap: pretty !important;
     word-wrap: normal !important;

@@ -982,7 +982,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-247-835c00aa411f> in <module>
+    <ipython-input-149-835c00aa411f> in <module>
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
     
 
@@ -1001,7 +1001,7 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-248-ae6b58adf8f3> in <module>
+    <ipython-input-150-ae6b58adf8f3> in <module>
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
     
 
@@ -1173,7 +1173,7 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-259-093f4eea5627> in <module>
+    <ipython-input-161-093f4eea5627> in <module>
     ----> 1 bond.getNeighbor(mol.atoms[0])
     
 
@@ -1337,7 +1337,7 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-263-8b35fac927c4> in <module>
+    <ipython-input-165-8b35fac927c4> in <module>
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
     
 
@@ -2031,7 +2031,7 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-294-4f5078ed4ed6> in <module>
+    <ipython-input-196-4f5078ed4ed6> in <module>
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
     
@@ -2488,9 +2488,7 @@ Atom and Bond Ring Membership Perception
 Information about the membership of an atom or bond in a cycle of the molecular graph gets stored as boolean value of the `Chem.Atom`_ property `Chem.AtomProperty.RING_FLAG`_ and the `Chem.Bond`_ property `Chem.BondProperty.RING_FLAG`_, respectively. For the perception of atom/bond ring membership the `CDPL.Chem`_ 
 package provides the function `Chem.setRingFlags()`_ which expects the `Chem.MolecularGraph`_ instance as first 
 argument and the value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for 
-information) as second argument. The function also sets the value of the `Chem.MolecularGraph`_ property 
-`Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance specifying the subset 
-of cyclic `Chem.Atom`_ and `Chem.Bond`_ instances.
+information) as second argument.
 
 Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
@@ -2532,6 +2530,10 @@ Example: Perception of cyclic atoms and bonds in Methylcyclohexane
     Ring bonds: [0, 2, 3, 4, 5, 6]
 
 
+The function `Chem.setRingFlags()`_ also sets the value of the `Chem.MolecularGraph`_ property 
+`Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that specifies the subset 
+of `Chem.Atom`_ and `Chem.Bond`_ instances involved in a molecular graph cycle:
+
 .. code:: ipython3
 
     Chem.getCyclicSubstructure(mch)
@@ -2539,19 +2541,27 @@ Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_169_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_170_0.svg
 
 
 
 SSSR Perception
 ^^^^^^^^^^^^^^^
 
-The *Smallest Set of Smallest Rings (SSSR)* of a molecular graph is a so-called *Minimal Cycle Basis* which allows to construct **every** cycle within the molecular graph by a linear combination of the cycles 
-in the SSSR (more information on this matter can be found 
-`here <https://depth-first.com/articles/2020/08/31/a-smallest-set-of-smallest-rings/>`_).
-Rings of a `Chem.MolecularGraph`_ instance are simply substructures that are made up of distinct subsets of the overall `Chem.Atom`_ and `Chem.Bond`_ instances. Therefore, the *CDPL* uses `Chem.Fragment`_ instances to describe the individual rings of a molecular graph which are themselves stored in `Chem.FragmentList`_ instances for the 
-representation of complete ring sets. 
+The *Smallest Set of Smallest Rings (SSSR)* of a molecular graph is a so-called *Minimal Cycle Basis* 
+whose knowledge is a prerequisite for a wide variety of cheminfornatics algorithms (more information on this 
+matter can be found `here <https://depth-first.com/articles/2020/08/31/a-smallest-set-of-smallest-rings/>`_).
+Cycles of a molecular graph can be considered as simple substructures each comprising a distinct 
+subset of the overall atoms and bonds. For this reason, the *CDPL* uses memory-efficient 
+`Chem.Fragment`_ instances to specify the `Chem.Atom`_ and `Chem.Bond`_ instances that constitute a cycle and ring sets (like the SSSR) are represented by `Chem.FragmentList`_ instances which store light-weight pointers to the 
+`Chem.Fragment`_ instances describing the cycles.
+For the perception of the SSSR of a molecular graph the `CDPL.Chem`_ package provides the function 
+`Chem.perceiveSSSR()`_ which expects the `Chem.MolecularGraph`_ instance as first argument and the value of the 
+*overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for information) as second argument. The 
+perceived SSSR gets stored as value (of type `Chem.FragmentList`_) of the property 
+`Chem.MolecularGraphProperty.SSSR`_ for later use.
 
+Example: Perception of the SSSR of Morphine
 
 .. code:: ipython3
 
@@ -2562,7 +2572,7 @@ representation of complete ring sets.
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_171_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_172_0.svg
 
 
 
@@ -2575,12 +2585,74 @@ representation of complete ring sets.
 
 
 
-.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_172_0.svg
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_173_0.svg
 
 
 
 Atom and Bond Aromaticity Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Information about the membership of an atom or bond in an aromatic ring system of the molecular graph gets stored as boolean value of the `Chem.Atom`_ property `Chem.AtomProperty.AROMATICITY_FLAG`_ and the `Chem.Bond`_ property `Chem.BondProperty.AROMATICITY_FLAG`_, respectively. For the perception of atom/bond aromaticity the `CDPL.Chem`_ 
+package provides the function `Chem.setAromaticityFlags()`_ which expects the `Chem.MolecularGraph`_ instance as 
+first argument and the value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for 
+information) as second argument.
+
+Example: Perception of aromatic atoms and bonds of LSD
+
+.. code:: ipython3
+
+    lsd = Chem.parseSMILES('CCN(CC)C(=O)[C@H]1CN([C@@H]2Cc3c[nH]c4c3c(ccc4)C2=C1)C')
+    
+    lsd
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_175_0.svg
+
+
+
+.. code:: ipython3
+
+    Chem.calcImplicitHydrogenCounts(lsd, False)
+    Chem.perceiveSSSR(lsd, False)
+    
+    Chem.setAromaticityFlags(lsd, False)
+    
+    arom_atoms = []
+    arom_bonds = []
+    
+    for atom in lsd.atoms:
+        if Chem.getAromaticityFlag(atom):
+            arom_atoms.append(lsd.getAtomIndex(atom))
+       
+    for bond in lsd.bonds:
+        if Chem.getAromaticityFlag(bond):
+            arom_bonds.append(lsd.getBondIndex(bond))
+        
+    print(f'Aromatic atoms: {arom_atoms}')
+    print(f'Aromatic bonds: {arom_bonds}')
+
+
+.. code-block:: text
+
+    Aromatic atoms: [12, 13, 14, 15, 16, 17, 18, 19, 20]
+    Aromatic bonds: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+
+
+The function `Chem.setAromaticityFlags()`_ also sets the value of the `Chem.MolecularGraph`_ property 
+`Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that specifies the subset 
+of `Chem.Atom`_ and `Chem.Bond`_ instances that are part of an aromatic ring system:
+
+.. code:: ipython3
+
+    Chem.getAromaticSubstructure(lsd)
+
+
+
+
+.. image:: cdpl_python_tutorial_files/cdpl_python_tutorial_178_0.svg
+
 
 
 Molecular Graph Component Perception
@@ -3210,6 +3282,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
+.. _Chem.AtomProperty.AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
 .. _Chem.set2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab6b9262e881dc745ff1829eb5025979e
 
 .. _Chem.get2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad2454234fe3de841dc586bb99a666392
@@ -3260,6 +3334,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _Chem.BondProperty.RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
+.. _Chem.BondProperty.AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+
 .. _Chem.set2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adcbcd27f825a498a2b991c90ff45cad2
 
 .. _Chem.get2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abe0305f94e01b6f334e0433a4d75fa70
@@ -3292,6 +3368,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _SSSR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
+.. _Chem.MolecularGraphProperty.SSSR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+
 .. _Chem.FragmentList: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FragmentList.html
 
 .. _Chem.setAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6af8875f255f53594260c814b63e3f92
@@ -3303,6 +3381,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _Chem.clearAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9598e0b3def60f250898ca7e20fd6921
 
 .. _AROMATIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+
+.. _Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
 .. _Chem.setCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aef5d266659dc218c95941abb65f4bc98
 
@@ -3346,9 +3426,13 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _Chem.perceiveHybridizationStates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff960fb1895ebfdea29aa7eb93732afb
 
+.. _Chem.perceiveSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa230c0768046e81d53cd5ed515d2360d
+
 .. _Chem.HybridizationState: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1HybridizationState.html
 
 .. _Chem.setRingFlags(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a658bcc38eaf6f5718c75eedae20869be
+
+.. _Chem.setAromaticityFlags(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a041765889242bbc38a22d97ae7e35e62
 
 .. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
