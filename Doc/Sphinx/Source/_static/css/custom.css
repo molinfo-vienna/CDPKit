@@ -21,6 +21,11 @@
     max-width: 80% !important;
 }
 
+/* Undo problematic 'overflow-wrap: anywhere' setting of newer sphinx-rtd-theme CSS */
+.rst-content p a {
+    overflow-wrap: normal !important;
+}
+
 /* Change text wrapping in tables */
 .wy-table-responsive table td,.wy-table-responsive table th {
     white-space: normal !important;
