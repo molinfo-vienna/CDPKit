@@ -114,8 +114,22 @@ $$$$
 \return A \c %@RT@ instance holding the result of the multiplication.
 $$$$
 
+.__rmul__
+\brief Returns the result of the multiplication operation <tt>@A1@ * @A0@</tt>.
+\param @A0@ The \c %@CN@ instance acting as multiplier.
+\param @A1@ Specifies the multiplicand.
+\return A \c %@RT@ instance holding the result of the multiplication.
+$$$$
+
 .__div__
-\brief Returns the result of the division operation <tt>@A0@ / @A1@</tt>.
+\brief Returns the result of the division operation <tt>@A0@ // @A1@</tt>.
+\param @A0@ The \c %@CN@ instance acting as dividend.
+\param @A1@ Specifies the divisor.
+\return A \c %@RT@ instance holding the result of the division.
+$$$$
+
+.__truediv__
+\brief Returns the result of the \e true division operation <tt>@A0@ / @A1@</tt>.
 \param @A0@ The \c %@CN@ instance acting as dividend.
 \param @A1@ Specifies the divisor.
 \return A \c %@RT@ instance holding the result of the division.

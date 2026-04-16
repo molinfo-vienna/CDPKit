@@ -193,24 +193,24 @@ class FScalarVector(Boost.Python.instance):
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
     # \return A \c %ConstFVectorExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstFVectorExpression instance holding the result of the division.
+    # 
     def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
+    # \param t Specifies the multiplicand.
+    # \return A \c %ConstFVectorExpression instance holding the result of the multiplication.
+    # 
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
     objectID = property(getObjectID)

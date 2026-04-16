@@ -174,24 +174,24 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
     # \return A \c %ConstLVectorExpression instance holding the result of the division.
     # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstLVectorExpression instance holding the result of the division.
+    # 
     def __truediv__(t: int) -> ConstLVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
+    # \param t Specifies the multiplicand.
+    # \return A \c %ConstLVectorExpression instance holding the result of the multiplication.
+    # 
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 
     objectID = property(getObjectID)

@@ -236,24 +236,24 @@ class DVectorRange(Boost.Python.instance):
     def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
     # \return A \c %ConstDVectorExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstDVectorExpression instance holding the result of the division.
+    # 
     def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
+    # \param t Specifies the multiplicand.
+    # \return A \c %ConstDVectorExpression instance holding the result of the multiplication.
+    # 
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##

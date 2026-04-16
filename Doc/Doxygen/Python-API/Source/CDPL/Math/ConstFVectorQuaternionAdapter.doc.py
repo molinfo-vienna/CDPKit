@@ -187,31 +187,31 @@ class ConstFVectorQuaternionAdapter(Boost.Python.instance):
     def __mul__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the multiplication operation <tt>t * self</tt>.
+    # \param t Specifies the multiplicand.
+    # \return A \c %ConstFQuaternionExpression instance holding the result of the multiplication.
+    # 
     def __rmul__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \brief Returns the result of the division operation <tt>self // t</tt>.
     # \param t Specifies the divisor.
     # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
     # 
     def __div__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief Returns the result of the division operation <tt>self / e</tt>.
+    # \brief Returns the result of the division operation <tt>self // e</tt>.
     # \param e Specifies the divisor.
     # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
     # 
     def __div__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param t 
-    # \return 
-    #
+    # \brief Returns the result of the \e true division operation <tt>self / t</tt>.
+    # \param t Specifies the divisor.
+    # \return A \c %ConstFQuaternionExpression instance holding the result of the division.
+    # 
     def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
