@@ -213,7 +213,7 @@ def main() -> None:
         ia_out_file = open(args.ia_out_file, 'w')
         
         # write TSV file column headers
-        ia_out_file.write('Input Ligand Index\tPharm. Feature Index\tPharm. Feature Type\tLigand Atom Indices\tFunc. Group\tPocket Residues\n')
+        ia_out_file.write('Input Ligand Index\tPharm. Feature Index\tPharm. Feature Type\tLigand Atom Indices\tLigand Func. Group\tPocket Residues\n')
 
     lig_mol = Chem.BasicMolecule()          # create an instance of the default implementation of the
                                             # Chem.Molecule interface that will store the ligand structures
