@@ -6,15 +6,15 @@ CDPL Python Cookbook
 ====================
 
 This 'cookbook' provides a set of scripts that demonstrate how often occurring tasks in cheminformatics can be accomplished
-with Python code that utilizes functionality offered by the CDPL. In order to understand the cookbook code it is highly recommended
-to first have an in-depth look at the :doc:`../cdpl_python_tutorial/index` which provides valuable information about basic concepts and
-fundamental data structures.
+with Python code that utilizes functionality offered by the CDPL. To be able to comprehend the code it is highly recommended
+to first have an in-depth look at the :doc:`../cdpl_python_tutorial/index` which provides valuable information about basic
+concepts and fundamental data structures.
 
-The scripts are all ready-to-run and have been designed to be executed on the command line. Most of the scripts require arguments to be specified
-(e.g. path to input/output files). Information on required/supported arguments can be obtained by running the scripts
+All scripts are ready-to-run and have been designed to be executed on the command line. Most of the scripts require arguments to
+be specified (e.g. path to input/output files). Information on required/supported arguments can be obtained by running the scripts
 without arguments.
 
-The source code provided by this cookbook can be used without restrictions for any purpose under the terms of the
+The source code provided by this cookbook may be used without restrictions for any purpose under the terms of the
 `Zero-Clause BSD License (0BSD) <https://opensource.org/license/0bsd>`_.
 
 .. note::
@@ -22,8 +22,8 @@ The source code provided by this cookbook can be used without restrictions for a
    Please visit section :doc:`../installation` for further information.
 
 .. tip::
-   To quickly find cookbook scripts that cover a certain topic or utilize a particular package/class/method/function it is advisable to use the built-in search functionality and/or consult the
-   page `index <../genindex.html>`_.
+   To quickly find cookbook scripts that cover a certain topic or utilize a particular package/class/method/function it is advisable to use
+   the built-in search functionality and/or consult the page `index <../genindex.html>`_.
 
 .. toctree::
    :maxdepth: 4

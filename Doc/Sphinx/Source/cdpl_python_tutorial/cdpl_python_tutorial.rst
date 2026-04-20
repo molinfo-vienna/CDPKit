@@ -14,7 +14,7 @@ Other ways to install the Python bindings are described in section `Installation
 CDPL Package Overview
 =====================
 
-The *CDPL* comprises several sub-packages each providing functionality related to a certain aspect of chem- and 
+The CDPL comprises several sub-packages each providing functionality related to a certain aspect of chem- and 
 pharmacoinformatics. The following table lists all available sub-packages 
 together with a brief description of the kind of functionality they provide:
 
@@ -25,7 +25,7 @@ together with a brief description of the kind of functionality they provide:
    * - Package
      - Contents
    * - `CDPL.Base`_
-     - Core classes defining a software framework for functionality implemented in the other *CDPL* packages
+     - Core classes defining a software framework for functionality implemented in the other CDPL packages
    * - `CDPL.Util`_
      - Implementations of useful general purpose algorithms, containers, function objects and free functions
    * - `CDPL.Math`_
@@ -63,7 +63,7 @@ Basic Concepts
 Dynamic Properties
 ------------------
 
-The *CDPL* stores properties associated with certain types of data like molecules, atoms, bonds, 
+The CDPL stores properties associated with certain types of data like molecules, atoms, bonds, 
 pharmacophores, etc. not as ordinary data members of the implementing classes
 but as *key:value* pairs in a dictionary (similar to the `__dict__`_ attribute of Python objects). 
 This design decision was made due to several advantages of this approach:
@@ -71,26 +71,26 @@ This design decision was made due to several advantages of this approach:
 * Flexibility and extensibility: new properties can be defined at runtime by user code
 * Class instance specific property values can be stored directly in the dictionary of the instance they are
   associated with, no external accompanying data structures are required for storing user-defined properties
-  unknown to the *CDPL*
+  unknown to the CDPL
 * It can be easily determined whether the value of a particular property is available or not by checking if
-  the dictionary contains a corresponding entry. C++ class data members (note that *CDPL* Python objects just wrap
+  the dictionary contains a corresponding entry. C++ class data members (note that CDPL Python objects just wrap
   corresponding C++ class instances!) exist in memory after a class instance has been constructed and from that
   point on have a value. This is particularly problematic for properties that cannot be assigned a reasonable
   default value.
 
-All *CDPL* classes supporting this kind of dynamic property storage are derived from class 
+All CDPL classes supporting this kind of dynamic property storage are derived from class 
 `CDPL.Base.PropertyContainer`_ which provides methods for property value lookup, storage, removal, 
 iteration, existence testing and counting. Properties are identified by unique keys of type `CDPL.Base.LookupKey`_ 
-that are created on-the-fly during the *CDPL* initialization phase. Keys of pre-defined *CDPL* properties are 
+that are created on-the-fly during the CDPL initialization phase. Keys of pre-defined CDPL properties are 
 exported as static attributes of classes that follow the naming scheme *CDPL.<PN>.<CN>Property*. 
-*<PN>* denotes the *CDPL* sub-package name (see table above) and *<CN>* is the name of a child class of 
+*<PN>* denotes the CDPL sub-package name (see table above) and *<CN>* is the name of a child class of 
 `CDPL.Base.PropertyContainer`_ for which these properties have been defined (example: atom property keys 
 accessible via class `CDPL.Chem.AtomProperty`_). Property values virtually can be of any type and get stored in 
 the dictionary as instances of the data wrapper class `CDPL.Base.Any`_. 
 
 Since `CDPL.Base.PropertyContainer`_ methods acting upon a particular property always demand the key of the property as 
 argument and setter/getter methods in addition require knowledge of the value type, corresponding code
-is not only tedious to write but also hard to read and error prone. Therefore, each *CDPL* sub-package that introduces 
+is not only tedious to write but also hard to read and error prone. Therefore, each CDPL sub-package that introduces 
 properties also provides four free functions (at package level) per property that encapsulate the 
 low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property 
 key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
@@ -107,16 +107,16 @@ Control-Parameters
 ------------------
 
 Control-parameters are used for the runtime configuration of arbitrary functionality in a generic, flexible and functionality 
-independent way (in the *CDPL* mainly used by the data I/O and visualization code).
+independent way (in the CDPL mainly used by the data I/O and visualization code).
 The implementation and usage of the control-parameter infrastructure largely parallels the one for dynamic properties: 
 
 * Control-parameters are identified via unique instances of class `CDPL.Base.LookupKey`_ 
 * Values can be of any type and are stored in a dictionary as `CDPL.Base.Any`_ objects
 * Keys of pre-defined control-parameters are exported as static attributes of classes that follow the naming
-  scheme *CDPL.<PN>.ControlParameter* (<PN> = *CDPL* sub-package name, example: `CDPL.Chem.ControlParameter`_)
+  scheme *CDPL.<PN>.ControlParameter* (<PN> = CDPL sub-package name, example: `CDPL.Chem.ControlParameter`_)
 * Four convenience functions are provided for each control-parameter introduced by a package
 
-*CDPL* classes employing the control-parameter infrastructure (directly or indirectly) are derived from class
+CDPL classes employing the control-parameter infrastructure (directly or indirectly) are derived from class
 `CDPL.Base.ControlParameterContainer`_. The class provides methods which are similar to those found in 
 `CDPL.Base.PropertyContainer`_ but also offers methods (`setParent()`_ and `getParent()`_) that allow to connect
 `CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. This way tree-like hierarchies of 
@@ -132,7 +132,7 @@ or function objects that get called on events such as parameter value change (me
 A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which 
 gets returned by the associated getter function if a parameter value has not been explicitly set. 
 Control-parameter default values are exported and accessible as static attributes of classes that follow the 
-naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = *CDPL* sub-package name; example: 
+naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = CDPL sub-package name; example: 
 `CDPL.Chem.ControlParameterDefault`_). 
 
 Data I/O Framework
@@ -140,14 +140,14 @@ Data I/O Framework
 
 Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) 
 are derived from abstract base classes that follow the naming scheme 
-*CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the *CDPL* sub-package
+*CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the CDPL sub-package
 name and *<DT>* is the name of the data type to read or write (e.g. classes `CDPL.Chem.MoleculeReaderBase`_ and
 `CDPL.Chem.MolecularGraphWriterBase`_).
 These base classes are all derived from the abstract class `CDPL.Base.DataIOBase`_ which itself is derived from 
 `CDPL.Base.ControlParameterContainer`_. Instances of concrete classes implementing the I/O of data in a particular 
 format thus support the configuration of their runtime behavior by control-parameters (see 
 `CDPL.Chem.ControlParameter`_ for examples). The names of the format-specific classes all follow the scheme 
-*CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the *CDPL* sub-package 
+*CDPL.<PN>.<FID><DT>Reader* and *CDPL.<PN>.<FID><DT>Writer*, respectively where *<PN>* denotes the CDPL sub-package 
 name, *<FID>* is a format identifier (usually a characteristic file extension) and *<DT>* is the name of 
 the data type to read or write (e.g. `CDPL.Chem.SDFMoleculeReader`_ and `CDPL.Chem.SDFMolecularGraphWriter`_). 
 
@@ -165,31 +165,31 @@ are provided that make reading/writing data from/to files more convenient. These
 to a file as constructor argument and thus circumvent the need to explicitly create and manage instances of class 
 `CDPL.Base.FileIOStream`_.
 
-Each data format implemented by the *CDPL* is described by an instance of class `CDPL.Base.DataFormat`_ which
+Each data format implemented by the CDPL is described by an instance of class `CDPL.Base.DataFormat`_ which
 stores and gives access to relevant format-specific information such as common file-extensions or mime-type. 
 Pre-defined data format descriptors are exported as static attributes of classes following the naming scheme
-*CDPL.<PN>.DataFormat* where *<PN>* is the name of the *CDPL* sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
+*CDPL.<PN>.DataFormat* where *<PN>* is the name of the CDPL sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
 
 The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes implementing the 
 reading/writing of data in this format gets established by dedicated input- and output-handler classes. These classes provide 
 factory methods to create a reader/writer class instance for a given file path or `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
 *CDPL.<PN>.<FID><DT>InputHandler* and *CDPL.<PN>.<FID><DT>OutputHandler*, respectively (for the meaning of *<PN>*, 
 *<FID>* and *<DT>* see text above; examples: `CDPL.Chem.SDFMoleculeInputHandler`_, 
-`CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the *CDPL* an input- and/or 
+`CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the CDPL an input- and/or 
 output-handler class instance is registered at a data type-specific singleton class named 
 *CDPL.<PN>.<DT>IOManager* (for the meaning of *<PN>* and *<DT>* see text above; example: 
 `CDPL.Chem.MoleculeIOManager`_). Amongst others, the I/O manager classes provide methods to lookup a 
 registered handler instance for a given file extension, mime-type or `CDPL.Base.DataFormat`_ object. This way it is 
 possible to, e.g., write code that creates a reader class instance for the input of data from a file where the a
 ctual data format is determined lateron at runtime.  
-In order to facilitate the writing of data format-independent code the *CDPL* provides special reader and writer 
+In order to facilitate the writing of data format-independent code the CDPL provides special reader and writer 
 classes that perform the runtime lookup of a suitable input/output handler and reader/writer class 
 instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, 
 respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the 
 classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified 
 as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's 
 extension. Optionally, a characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in 
-case the file extension is missing or unknown to the *CDPL*. If the data source/sink is provided as a 
+case the file extension is missing or unknown to the CDPL. If the data source/sink is provided as a 
 `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
 
 Working with Molecules
@@ -198,13 +198,13 @@ Working with Molecules
 In-memory Representation of Molecular Structures
 ------------------------------------------------
 
-The *CDPL* models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. 
+The CDPL models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. 
 Concrete data structures for the in-memory representation of atoms, 
 bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods 
 for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
  
 The following table provides an overview of the most relevant interfaces and data structures provided by the 
-*CDPL* for molecular data representation and processing:
+CDPL for molecular data representation and processing:
    
 .. list-table::
    :widths: 15 12 30 30
@@ -1787,7 +1787,7 @@ will have no effect:
 
 
 
-Inpout of Molecule Data
+Input of Molecule Data
 -----------------------
 
 Parsing String Data
@@ -2230,7 +2230,7 @@ testing (see section `Dynamic Properties`_ for further information).
 Preparation for Downstream Processing
 -------------------------------------
 
-*CDPL* implementations of many methods and algorithms that operate on molecular structures 
+CDPL implementations of many methods and algorithms that operate on molecular structures 
 (e.g. code for data output, descriptor calculations, conformer generation, substructure searching, ...) 
 rely on secondary structure-derived information such as implicit hydrogen counts, atomic orbital hybridization, 
 the smallest set of smallest rings (SSSR), atom/bond ring membership, atom/bond aromaticity, and so forth. 
@@ -2247,7 +2247,7 @@ Implicit Hydrogen Count Calculation
 
 In general, valences of atoms that are not consumed by explicit incident bonds (represented by `Chem.Bond`_ 
 instances) are considered to be used up by imaginary single bonds to **virtually present** hydrogen atoms 
-(not explicitly represented by corresponding `Chem.Atom`_ instances). Within the *CDPL* such 
+(not explicitly represented by corresponding `Chem.Atom`_ instances). Within the CDPL such 
 virtual hydrogens are denoted as *Implicit Hydrogens*. The implicit hydrogen count of an atom gets
 stored as the unsigned integer value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ of the 
 associated `Chem.Atom`_ instance and not only depends on the chemical element (specified by the value of the property `Chem.AtomProperty.TYPE`_) but also on the values of the properties `Chem.AtomProperty.FORMAL_CHARGE`_ and 
@@ -2552,7 +2552,7 @@ The *Smallest Set of Smallest Rings (SSSR)* of a molecular graph is a so-called 
 whose knowledge is a prerequisite for a wide variety of cheminformatics algorithms (more information on this 
 matter can be found `here <https://depth-first.com/articles/2020/08/31/a-smallest-set-of-smallest-rings/>`__).
 Cycles of a molecular graph can be considered as simple substructures each comprising a distinct 
-subset of the overall atoms and bonds. For this reason, the *CDPL* uses memory-efficient 
+subset of the overall atoms and bonds. For this reason, the CDPL uses memory-efficient 
 `Chem.Fragment`_ instances to specify the `Chem.Atom`_ and `Chem.Bond`_ instances that constitute a cycle and 
 ring sets (like the SSSR) get represented by corresponding `Chem.FragmentList`_ instances.
 For the perception of the SSSR of a molecular graph the `CDPL.Chem`_ package provides the function 
