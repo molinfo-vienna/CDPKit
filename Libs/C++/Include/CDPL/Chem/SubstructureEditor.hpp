@@ -202,7 +202,6 @@ namespace CDPL
             typedef std::unordered_set<Atom*>       AtomSet;
             typedef std::unordered_set<Bond*>       BondSet;
 
-            const MolecularGraph*         molGraph;
             PatternList                   searchPatterns;
             PatternList                   excludePatterns;
             MolecularGraph::SharedPointer resultPattern;
