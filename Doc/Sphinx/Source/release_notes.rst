@@ -31,7 +31,7 @@ Release V1.3.0
   tautomerization rule that flips the orders of bonds in conjugated rings having one or more N, O, S, Se or P substituent(s) bearing at least one hydrogen (see API Changes)
 - New control-parameter allowing to specify what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an
   MDL CTab based format (see API Changes)
-- It is now possible to customize the way how atom, bond and molecular graph match expression functions employed for common connected substructure matching
+- It is now possible to customize the way atom, bond and molecular graph match expression functions employed for common connected substructure matching
   will be retrieved (see API Changes)
 - New function (see API Changes) that computes and carries out a transformation which aligns
   2D coordinates of a set of atoms with given reference coordinates in the best possible way 
