@@ -139,6 +139,8 @@ BOOST_AUTO_TEST_CASE(SubstructureEditorTest)
 
         calcBasicProperties(*start_mol, false);
         generateSMILES(*start_mol, res_smiles, true);
+
+        //BOOST_TEST_MESSAGE("edit result: " << res_smiles);
         
         BOOST_CHECK(res_smiles == *it);
     }

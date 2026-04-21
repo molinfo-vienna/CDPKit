@@ -352,11 +352,13 @@ bool Chem::SubstructureEditor::edit(Molecule& mol, const AtomMapping& mapping)
         changes |= copyPropertyWithChangeCheck<unsigned int>(res_ptn_atom, *mpd_atom, AtomProperty::RADICAL_TYPE);
         changes |= copyPropertyWithChangeCheck<std::size_t>(res_ptn_atom, *mpd_atom, AtomProperty::ISOTOPE);
 
-        if (copyPropertyWithChangeCheck<std::string>(res_ptn_atom, *mpd_atom, AtomProperty::SYMBOL) ||
-            copyPropertyWithChangeCheck<unsigned int>(res_ptn_atom, *mpd_atom, AtomProperty::TYPE) ||
-            copyPropertyWithChangeCheck<long>(res_ptn_atom, *mpd_atom, AtomProperty::FORMAL_CHARGE) ||
-            copyPropertyWithChangeCheck<std::size_t>(res_ptn_atom, *mpd_atom, AtomProperty::UNPAIRED_ELECTRON_COUNT)) {
+        auto config_changes = copyPropertyWithChangeCheck<std::string>(res_ptn_atom, *mpd_atom, AtomProperty::SYMBOL);
 
+        config_changes |= copyPropertyWithChangeCheck<unsigned int>(res_ptn_atom, *mpd_atom, AtomProperty::TYPE);
+        config_changes |= copyPropertyWithChangeCheck<long>(res_ptn_atom, *mpd_atom, AtomProperty::FORMAL_CHARGE);
+        config_changes |= copyPropertyWithChangeCheck<std::size_t>(res_ptn_atom, *mpd_atom, AtomProperty::UNPAIRED_ELECTRON_COUNT);
+        
+        if (config_changes) {
             configUpdateAtoms.insert(mpd_atom);
             
             changes = true;
