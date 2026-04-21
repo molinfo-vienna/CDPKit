@@ -213,10 +213,12 @@ void SubstructSearchQueryEditDialog::resetChanges()
         substructList->setItem(substructList->rowCount() - 1, 0, item);
     }
 
-    if (query.count() > 0)
+    if (query.count() > 0) {
         exprLineEdit->setText(query.back());
-    else
+
+    } else {
         exprLineEdit->setText("");
+    }
     
     emit(haveData(substructList->rowCount() > 0));
     emit(haveSelectedItems(false));
