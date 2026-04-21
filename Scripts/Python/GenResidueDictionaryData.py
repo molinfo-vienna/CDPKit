@@ -33,7 +33,7 @@ import CDPL.Biomol as Biomol
 def genResidueDictionaryData():
     
     if len(sys.argv) < 4:
-        print('Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [residue entry output file] [residue structure output file]', file=sys.stderr)
+        print('Usage:', sys.argv[0], '[PDB Chemical Component Dictionary mmCIF input file] [residue entry output file] [residue structure output file]', file=sys.stderr)
         sys.exit(2)
 
     comp_type_map = { 'other' : 'OTHER', \
