@@ -197,7 +197,7 @@ Release V1.3.0
 
 .. rubric:: Miscellaneous Changes 
 
-- Update of the builtin PDB chemical component dictionary (version 04/21/2026)
+- Update of the built-in PDB chemical component dictionary (version 04/21/2026)
 - Constructors of class templates *Util::FileDataReader* and *Util::FileDataWriter* now throw a *Base::IOError* if the file opening operation fails
 - Generated SMILES, SMARTS, JME and INCHI output data now, by default, end with a newline character which is more in line with
   user expectations

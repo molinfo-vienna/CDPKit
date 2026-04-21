@@ -25,13 +25,13 @@ together with a brief description of the kind of functionality they provide:
    * - Package
      - Contents
    * - `CDPL.Base`_
-     - Core classes defining a software framework for functionality implemented in the other CDPL packages
+     - Core classes defining a software framework for functionality implemented in other CDPL packages
    * - `CDPL.Util`_
      - Implementations of useful general purpose algorithms, containers, function objects and free functions
    * - `CDPL.Math`_
      - Data structures, algorithms and functions related to mathematics
    * - `CDPL.Chem`_
-     - Infrastructure for the in-memory representation, I/O and basic processing of molecular
+     - Infrastructure for the representation, I/O and basic processing of molecular
        structures and reactions
    * - `CDPL.MolProp`_
      - Functionality for the calculation/prediction of physicochemical and topological atom, bond and molecule properties
@@ -94,9 +94,9 @@ is not only tedious to write but also hard to read and error prone. Therefore, e
 properties also provides four free functions (at package level) per property that encapsulate the 
 low-level `CDPL.Base.PropertyContainer`_ method calls. These functions internally not only specify the correct property 
 key and value type but also constrain the type of the `CDPL.Base.PropertyContainer`_  
-subclass the property has been introduced for. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ 
-and `CDPL.Chem.clearOrder()`_ represent an example of such four functions that are provided
-for the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances using integer as value type.
+subclass the property is associated with. `CDPL.Chem.getOrder()`_, `CDPL.Chem.setOrder()`_, `CDPL.Chem.hasOrder()`_ 
+and `CDPL.Chem.clearOrder()`_ are an example of such four functions that are provided
+for the property `CDPL.Chem.BondProperty.ORDER`_ of `CDPL.Chem.Bond`_ instances with integer being the value type.
 Using property getter functions (like `CDPL.Chem.getOrder()`_) has the additional benefit that they will, if one 
 has been defined, automatically return a default value for unset properties. Defined property default values are 
 exported and accessible as static attributes of classes that follow the naming scheme 
@@ -121,16 +121,15 @@ CDPL classes employing the control-parameter infrastructure (directly or indirec
 `CDPL.Base.PropertyContainer`_ but also offers methods (`setParent()`_ and `getParent()`_) that allow to connect
 `CDPL.Base.ControlParameterContainer`_ instances in a parent-child manner. This way tree-like hierarchies of 
 `CDPL.Base.ControlParameterContainer`_ instances for resolving parameter value requests can be built. 
-If a requested parameter value is not stored in a given container, the request gets automatically forwarded to the
-registered parent container which may again forward the request to its parent until a value is found or the root of
-the tree has been reached. Furthermore, methods are provided which allow the registration of user-defined functions
-or function objects that get called on events such as parameter value change (methods 
+If a requested parameter value is not stored in a given container then the request is automatically forwarded 
+to the registered parent container which may again forward the request to its parent until a value is found or 
+the root of the tree has been reached. Furthermore, methods are provided which allow the registration of 
+user-defined functions or function objects that get called on events such as parameter value change (methods 
 `registerParameterChangedCallback()`_ and `unregisterParameterChangedCallback()`_), parameter value removal 
 (methods `registerParameterRemovedCallback()`_ and `unregisterParameterRemovedCallback()`_) and parent change 
 (methods `registerParentChangedCallback()`_ and `unregisterParentChangedCallback()`_).
 
-A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which 
-gets returned by the associated getter function if a parameter value has not been explicitly set. 
+A notable difference between dynamic properties and control-parameters is that the latter always possess a default value which gets returned by the associated getter function if a parameter value has not been explicitly set. 
 Control-parameter default values are exported and accessible as static attributes of classes that follow the 
 naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = CDPL sub-package name; example: 
 `CDPL.Chem.ControlParameterDefault`_). 
@@ -138,8 +137,7 @@ naming scheme *CDPL.<PN>.ControlParameterDefault* (*<PN>* = CDPL sub-package nam
 Data I/O Framework
 ------------------
 
-Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) 
-are derived from abstract base classes that follow the naming scheme 
+Classes implementing the input/output of data of a certain type in a particular format (e.g. molecular structures in SD-file format) are derived from abstract base classes that follow the naming scheme 
 *CDPL.<PN>.<DT>ReaderBase* and  *CDPL.<PN>.<DT>WriterBase*, respectively. *<PN>* denotes the CDPL sub-package
 name and *<DT>* is the name of the data type to read or write (e.g. classes `CDPL.Chem.MoleculeReaderBase`_ and
 `CDPL.Chem.MolecularGraphWriterBase`_).
@@ -155,24 +153,26 @@ Data reader classes all expect an instance of class `CDPL.Base.IStream`_ and dat
 `CDPL.Base.OStream`_ as argument to their constructor. 
 These stream-based I/O classes represent abstract storage devices which allow the same code to handle I/O to files, 
 in-memory strings, or custom adaptor devices that perform arbitrary operations (e.g. compression) on the fly.
-Concrete types of storage devices are implemented by dedicated subclasses of `CDPL.Base.IStream`_ and `CDPL.Base.OStream`_ 
-such as class `CDPL.Base.FileIOStream`_ for file I/O and `CDPL.Base.StringIOStream`_ for in-memory string data I/O, respectively. 
+Concrete types of storage devices are implemented by dedicated subclasses of `CDPL.Base.IStream`_ and 
+`CDPL.Base.OStream`_ such as class `CDPL.Base.FileIOStream`_ for file I/O and `CDPL.Base.StringIOStream`_ 
+for in-memory string data I/O, respectively. 
 
-Since files represent the most dealt-with kind of data storage, file I/O-specific variants of reader/writer classes 
+Since files represent the most common kind of data storage, file I/O-specific variants of reader/writer classes 
 are provided that make reading/writing data from/to files more convenient. These classes follow the naming scheme 
 *CDPL.<PN>.File<FID><DT>Reader* and *CDPL.<PN>.File<FID><DT>Writer* (for the meaning of *<PN>*, *<FID>* and 
 *<DT>* see text above). Instead of an instance of `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ they accept the path 
 to a file as constructor argument and thus circumvent the need to explicitly create and manage instances of class 
 `CDPL.Base.FileIOStream`_.
 
-Each data format implemented by the CDPL is described by an instance of class `CDPL.Base.DataFormat`_ which
+Each data format implemented in the CDPL is described by an instance of class `CDPL.Base.DataFormat`_ which
 stores and gives access to relevant format-specific information such as common file-extensions or mime-type. 
 Pre-defined data format descriptors are exported as static attributes of classes following the naming scheme
 *CDPL.<PN>.DataFormat* where *<PN>* is the name of the CDPL sub-package implementing the format (e.g. `CDPL.Chem.DataFormat`_).
 
-The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes implementing the 
-reading/writing of data in this format gets established by dedicated input- and output-handler classes. These classes provide 
-factory methods to create a reader/writer class instance for a given file path or `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
+The link between a `CDPL.Base.DataFormat`_ instance describing a particular data format and associated classes 
+implementing the reading/writing of data in this format gets established by dedicated input- and output-handler 
+classes. These classes provide factory methods to create a reader/writer class instance for a given file path or 
+`CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance and follow the naming scheme 
 *CDPL.<PN>.<FID><DT>InputHandler* and *CDPL.<PN>.<FID><DT>OutputHandler*, respectively (for the meaning of *<PN>*, 
 *<FID>* and *<DT>* see text above; examples: `CDPL.Chem.SDFMoleculeInputHandler`_, 
 `CDPL.Chem.SMILESMolecularGraphOutputHandler`_). For each data format supported by the CDPL an input- and/or 
@@ -180,17 +180,18 @@ output-handler class instance is registered at a data type-specific singleton cl
 *CDPL.<PN>.<DT>IOManager* (for the meaning of *<PN>* and *<DT>* see text above; example: 
 `CDPL.Chem.MoleculeIOManager`_). Amongst others, the I/O manager classes provide methods to lookup a 
 registered handler instance for a given file extension, mime-type or `CDPL.Base.DataFormat`_ object. This way it is 
-possible to, e.g., write code that creates a reader class instance for the input of data from a file where the a
-ctual data format is determined lateron at runtime.  
+possible to, e.g., write code that creates a reader class instance for the input of data from a file where the 
+actual data format is determined lateron at runtime.  
 In order to facilitate the writing of data format-independent code the CDPL provides special reader and writer 
-classes that perform the runtime lookup of a suitable input/output handler and reader/writer class 
-instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and *CDPL.<PN>.<DT>Writer*, 
-respectively (examples: `CDPL.Chem.MoleculeReader`_ and `CDPL.Chem.MolecularGraphWriter`_). The constructors of the 
-classes expect the data source/sink to be provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified 
-as path to a file. If a file path is specified it is attempted to deduce the data format from the file name's 
-extension. Optionally, a characteristic file extension string or a `CDPL.Base.DataFormat`_ instance can be provided in 
-case the file extension is missing or unknown to the CDPL. If the data source/sink is provided as a 
-`CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the explicit specification of the data format is mandatory.
+classes that perform the runtime lookup of a suitable input/output handler and the reader/writer class 
+instantiation automatically. The classes follow the naming scheme *CDPL.<PN>.<DT>Reader* and 
+*CDPL.<PN>.<DT>Writer*, respectively (examples: `CDPL.Chem.MoleculeReader`_ and 
+`CDPL.Chem.MolecularGraphWriter`_). The constructors of the classes expect the data source/sink to be provided as 
+a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance or specified as path to a file. If a file path is specified 
+it is attempted to deduce the data format from the file extension. Optionally, a characteristic file extension 
+string or a `CDPL.Base.DataFormat`_ instance can be provided in case the file extension is missing or unknown to 
+the CDPL. If the data source/sink is provided as a `CDPL.Base.IStream`_/`CDPL.Base.OStream`_ instance then the 
+explicit specification of the data format is mandatory.
 
 Working with Molecules
 ======================
@@ -198,10 +199,10 @@ Working with Molecules
 In-memory Representation of Molecular Structures
 ------------------------------------------------
 
-The CDPL models molecular structures as undirected graphs where atoms represent the graph nodes and bonds the edges. 
-Concrete data structures for the in-memory representation of atoms, 
-bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods 
-for common operations like atom/bond addition, removal, access, membership testing, counting, and so on. 
+The CDPL models molecular structures as undirected graphs where atoms represent the vertices of the graph and 
+bonds the edges. 
+Concrete data structures for the in-memory representation of atoms, bonds and molecular graphs implement a hierarchy of interfaces (abstract classes) that specify all necessary methods for common operations like 
+atom/bond addition, removal, access, membership testing, counting, and so forth. 
  
 The following table provides an overview of the most relevant interfaces and data structures provided by the 
 CDPL for molecular data representation and processing:
@@ -278,13 +279,14 @@ From scratch, a molecular graph can only be constructed via an instance of class
 Adding atoms and bonds by calling dedicated methods (see next section) will create new 
 `CDPL.Chem.Atom`_ and `CDPL.Chem.Bond`_ objects which from that point on are owned and managed by the 
 creating `CDPL.Chem.Molecule`_ instance. For the specification of arbitrary sets of `CDPL.Chem.Atom`_ and 
-`CDPL.Chem.Bond`_  objects that belong to one or more `CDPL.Chem.Molecule`_ instance(s) the `CDPL.Chem`_ package provides the 
-class `CDPL.Chem.Fragment`_. Like `CDPL.Chem.Molecule`_, this class also offers methods for adding 
-atoms and bonds except that the methods of `CDPL.Chem.Fragment`_ expect existing `CDPL.Chem.Atom`_ or 
+`CDPL.Chem.Bond`_  objects that belong to one or more `CDPL.Chem.Molecule`_ instance(s) the `CDPL.Chem`_ package 
+provides the class `CDPL.Chem.Fragment`_. As `CDPL.Chem.Molecule`_ this class also offers methods for adding 
+atoms and bonds with the exception that the methods of `CDPL.Chem.Fragment`_ expect existing `CDPL.Chem.Atom`_ or 
 `CDPL.Chem.Bond`_ instances as argument. These do not get stored as copies but as light-weight references to the 
-original instances which can be retrieved lateron by methods for atom/bond access.
+original instances which can be retrieved lateron by methods for atom/bond access. 
 `CDPL.Chem.Molecule`_ as well as `CDPL.Chem.Fragment`_ are subclasses of `CDPL.Chem.MolecularGraph`_ and 
-instances of both can be processed in the same way by any code that operates on `CDPL.Chem.MolecularGraph`_ objects.
+their instances thus can be processed in the same way by any code that operates on `CDPL.Chem.MolecularGraph`_ 
+objects.
 
 Basic Operations on `Molecule`_ Objects
 ---------------------------------------
@@ -298,9 +300,9 @@ Most of the classes for molecular structure representation, molecular data I/O a
 By the import line above the code in the remainder of this tutorial can conveniently access all package contents 
 via the prefix *Chem.\**.
 
-Furthermore, the *CDPL Python* bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ and
+Furthermore, the CDPL Python bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ and
 `Chem.FragmentList`_ instances in Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ 
-package and will be used in the following code snippets to display the skeletal formula of molecular graphs 
+package and will be used in the remainder of this tutorial to display the skeletal formula of molecular graphs 
 simply by typing the variable name at the end of a code cell.
 
 .. code:: ipython3
