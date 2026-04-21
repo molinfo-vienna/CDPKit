@@ -36,7 +36,7 @@ Release V1.3.0
 - New function (see API Changes) that computes and carries out a transformation which aligns
   2D coordinates of a set of atoms with given reference coordinates in the best possible way 
 - New class (see API Changes) implementing the perception of the functional groups of a molecular graph by P. Ertl's algorithm
-- New control-parameter (plus associated functions, see API Changes) that for SMILES output allows to determine whether implicit
+- New control-parameter (plus associated functions, see API Changes) for SMILES output that allows to specify whether implicit
   hydrogen count specifications for atoms requiring brackets shall be written or not (default: yes)
 - New utility functions that perform 2D visualization specific setup work for *Chem::MolecularGraph* and *Chem::Reaction* instances
 - New class and utility functions implementing the editing of atoms and/or bonds of molecular graph substructures according to
@@ -51,8 +51,8 @@ Release V1.3.0
 - CDPL Python bindings now also work with `free-threaded CPython builds (V3.13t and V3.14t) <https://docs.python.org/3/howto/free-threading-python.html>`_
 - The extraction of property table view column names from SD-file property record headers in program :doc:`ChOX </applications/chox>`
   is now more robust
-- The SDF reader now does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
-- Readers for various text-based file formats now allow the last line of a file to be terminated directly by EOF
+- The SDF reader does not raise an exception anymore if the last molecule record lacks a $$$$ delimiter
+- Readers for various text-based file formats now do not require anymore that the input data end with a newline character
 - Significant improvement of the tautomer scoring function with focus on the evaluation of hydroxy-pyridine
   containing and highly conjugated molecule tautomers
 - Made the ChEMBL standardization code also work with *Chem::MolecularGraph* instances if
@@ -66,7 +66,7 @@ Release V1.3.0
 - New Python cookbook script demonstrating the alignment of one or more input pharmacophores onto a given reference pharmacophore
 - New Python cookbook script demonstrating the calculation of Kuvek binding pocket shape and electrostatics descriptors
 - New Python cookbook script demonstrating the molecule substrucuture editing functionality
-- New Python cookbook script demonstrating the perception of functional groups of molecular graphs
+- New Python cookbook script demonstrating the perception of functional groups in molecular graphs
 - New Python cookbook script demonstrating the generation of visual 3D representations of pharmacophore models
    
 .. rubric:: Bug Fixes
@@ -78,11 +78,11 @@ Release V1.3.0
   was not properly set at program startup. In screening mode ``ALL-MATCHES``, multiple program executions
   using the same input files might thus have led to varying number of reported hits
 - Fixed an issue with spiro ring systems in the implementation of the *Extended Smallest Set of Smallest Sings (ESSSR)*
-  perception algorithm (class *Chem::ExtendedSSSR*)
+  perception algorithm (class *Chem::ExtendedSSSR*) needed for PubChem fingerprint generation
  
 .. rubric:: API Changes
 
-- Constructor of class *Pharm::PharmacophoreFitScore* via an additional argument (flag) now allows to specify whether an on-the-fly performed 3D feature overlap
+- Constructor of class *Pharm::PharmacophoreFitScore* via an additional flag argument now allows to specify whether an on-the-fly performed 3D feature overlap
   perception (prior to score calculation) shall be carried out in 'query mode' or not (before, ftr. mappings were always perceived in non-query
   mode which is still the default)
 - New class *Descr::KuvekPocketDescriptorCalculator* implementing a method developed by Kuvek et al. for the calculation of
@@ -135,7 +135,7 @@ Release V1.3.0
 - New control-parameters *Vis::ControlParameter::FEATURE_COLOR_TABLE*, *Vis::ControlParameter::DEFAULT_MATERIAL* and
   *Vis::ControlParameter::SHOW_FEATURE_CENTERS* plus associated functions
 - New data format descriptors *Vis::DataFormat::STL*, *Vis::DataFormat::PLY*, *Vis::DataFormat::VRML* and *Vis::DataFormat::R3D*
-- New class *Vis::FeatureContainerObject3DFactory* implementing the creation of a visual 3D representation of *Pharm::FeatureContainer* instances
+- New class *Vis::FeatureContainerObject3DFactory* implementing the creation of visual 3D representations of *Pharm::FeatureContainer* instances
 - New class *Vis::Object3DFactory* defining the common interface of classes which implement the creation of 3D representations (as *Vis::Object3D* instances)
   of different types of built-in data structures (e.g. *Pharm::FeatureContainer*, *Chem::MolecularGraph*, ...)
 - New class *Vis::DefaultFeatureColorTable* specifying default colors for built-in pharmacophoric feature types
@@ -163,7 +163,7 @@ Release V1.3.0
 - New control-parameter default value *Chem::ControlParameterDefault::MDL_ENABLE_AROMATIC_BOND_TYPES* 
 - New control-parameter *Chem::ControlParameter::MDL_ENABLE_AROMATIC_BOND_TYPES* plus associated functions allowing to specify
   what kind of bond type shall be output for aromatic bonds when writing molecular graph data in an MDL CTab based format.
-  If the control-parameter is *true* the on data reading the aromaticity flag of bonds with 'aromatic' type will be set to *true* and *false*, otherwise
+  If the control-parameter is *true* then on data reading the aromaticity flag of bonds with 'aromatic' type will be set to *true* and to *false*, otherwise
 - Added methods to class *Chem::CommonConnectedSubstructureSearch* that allow to customize the way atom, bond and molecular graph
   match expression functions employed for substructure matching will be retrieved (default: use the expressions provided as properties)
 - New function *Chem::align2DCoordinates()* that computes and carries out a transformation which aligns
@@ -204,8 +204,8 @@ Release V1.3.0
 - The default feature distance bin size used by Descr::NPointPharmacophoreFingerprintGenerator instances has been changed to 2.0 (before 0.5)
 - The calculation of Manhattan similarity scores has bee changed so that a value of 1.0 now indicates the highest possible similarity and 0.0 the lowest one
   (before: highest sim. = 0.0, lowest sim. = 1.0)
-- The command line tool :doc:`tautgen </applications/tautgen>` now removes all for the sake of processing added explicit hydrogens from the
-  generated tautomers before output
+- The command line tool :doc:`tautgen </applications/tautgen>` now removes all explicit hydrogens that were added by the tautomer generator from 
+  the generated tautomers prior to output
 - The screening hit rate reported by command line tool :doc:`psdscreen </applications/psdscreen>` now always specifies the number of
   matched unique database molecules in relation to the total amount of screened molecules -
   irrespective of the number of query pharmacophores and screening mode (**-m** option)
