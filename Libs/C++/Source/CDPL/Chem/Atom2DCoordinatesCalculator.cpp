@@ -1807,7 +1807,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::createChildLayouts(const At
             angle_offs += ang_demand + edge_spacing;
         }
 
-        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+        std::next_permutation(edges_beg, edges_end, [](const LGEdge* e1, const LGEdge* e2)
                                                         { return (e1->getID() < e2->getID()); });
     }
 
@@ -3436,7 +3436,7 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsD4()
             childLayouts[i].push_back(NodeLayoutInfo(edge, edge_angle));
         }
 
-        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+        std::next_permutation(edges_beg, edges_end, [](const LGEdge* e1, const LGEdge* e2)
                                                         { return (e1->getID() < e2->getID()); });
       }
 
@@ -3493,7 +3493,7 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsDN()
             childLayouts[i].push_back(NodeLayoutInfo(edge, edge_angle));
         }
 
-        std::next_permutation(edges_beg, edges_end, [this](const LGEdge* e1, const LGEdge* e2)
+        std::next_permutation(edges_beg, edges_end, [](const LGEdge* e1, const LGEdge* e2)
                                                         { return (e1->getID() < e2->getID()); });
     }
 
