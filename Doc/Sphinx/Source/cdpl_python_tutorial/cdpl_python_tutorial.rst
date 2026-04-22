@@ -2927,12 +2927,12 @@ one of the supported formats (including SMILES and InChI) is as follows:
 1. Create an instance of class `Base.StringIOStream`_ that wraps the string and serves as output data sink for the next steps.
 2. Create a suitable `Chem.MolecularGraphWriterBase`_ subclass instance that will perform the format-specific encoding of the molecule data in step 3.
 3. Call the `write()`_ method of the created data writer one or multiple times providing the `Chem.MolecularGraph`_ instance(s) to output as argument. 
-4. Call the `close()`_ method after all `Chem.MolecularGraph`_ instances have been written. 
+4. Call the `close()`_ method after all `Chem.MolecularGraph`_ instances have been output. 
 
 Molecular graph data writers for a specific format (Step 2) can be created in two ways:
 
 1. Via class `Chem.MolecularGraphWriter`_ providing the `Base.StringIOStream`_ instance (Step 1) and a data format specifier (= one of the data format descriptors defined in class `Chem.DataFormat`_) as constructor arguments.
-2. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.MOL2MolecularGraphWriter`_ implementing Sybyl MOL2 format output).
+2. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.MOL2MolecularGraphWriter`_ implementing Sybyl MOL2 data output).
 
 Example: Generating a string holding the MDL SDF record of a `Chem.MolecularGraph`_ instance
 
@@ -2998,13 +2998,13 @@ Example: Generating a string holding the MDL SDF record of a `Chem.MolecularGrap
 File Output
 ^^^^^^^^^^^
 
-Writing `Chem.MolecularGraph`_ instance data to file storage also requires the creation of a 
+Writing `Chem.MolecularGraph`_ data to file storage also requires the creation of a 
 `Chem.MolecularGraphWriterBase`_ subclass instance that performs the actual format-specific data encoding work. 
 As with string data output, several options exist:
 
 1. Instantiation of class `Chem.MolecularGraphWriter`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. ``'sdf'``, ``'smi'``, ``'mol2'``, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
-2. Instantiation of class `Chem.MolecularGraphWriter`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
-3. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.SDFMolecularGraphWriter`_ implementing writing MDL SD-file data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
+2. Instantiation of class `Chem.MolecularGraphWriter`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and a format specifier as second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
+3. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.SDFMolecularGraphWriter`_ implementing the output of MDL SD-file data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.FileSDFMolecularGraphWriter`_) that accepts a file path as constructor argument.
 
 .. code:: ipython3
@@ -3030,9 +3030,9 @@ As with string data output, several options exist:
 Once a data writer instance has been created, the `write()`_ method can be called one or multiple times with 
 the `Chem.MolecularGraph`_ instance(s) to output as argument. After all `Chem.MolecularGraph`_ instances have 
 been output the `close()`_ method needs to be called to flush all written data to disk and close the file (note: 
-although this method will be called automatically by the destructor of the data writer, an explicit call will have 
-an immediate effect and is preferred over a delayed destructor call by the garbage collector happening at an 
-indeterminate point in time). 
+although this method will be called automatically by the destructor of the writer instance, an explicit call 
+will have an immediate effect and is preferred over a delayed destructor call by the garbage collector happening 
+at an indeterminate point in time). 
 
 Example: SMILES output of two `Chem.Molecule`_ instances
 
