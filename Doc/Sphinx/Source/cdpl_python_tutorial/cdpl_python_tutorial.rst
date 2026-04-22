@@ -297,12 +297,12 @@ Most of the classes for molecular structure representation, molecular data I/O a
 
     import CDPL.Chem as Chem
 
-By the import line above the code in the remainder of this tutorial can conveniently access all package contents 
+By the import line above the code in the remainder of this tutorial can conveniently access all `CDPL.Chem`_ package contents 
 via the prefix *Chem.\**.
 
 Furthermore, the CDPL Python bindings implement the `Rich Output`_ of `Chem.MolecularGraph`_ and
 `Chem.FragmentList`_ instances in Jupyter notebooks. Rich output is activated by importing the `CDPL.Vis`_ 
-package and will be used in the remainder of this tutorial to display the skeletal formula of molecular graphs 
+package and will be used in the following sections to display the skeletal formula of molecular graphs 
 simply by typing the variable name at the end of a code cell.
 
 .. code:: ipython3
@@ -313,7 +313,7 @@ Creation
 ^^^^^^^^
 
 A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by instantiating the class `Chem.BasicMolecule`_ 
-(the provided default implementation of the`Chem.Molecule`_ interface):
+(the provided default implementation of the `Chem.Molecule`_ interface):
 
 .. code:: ipython3
 
@@ -361,23 +361,26 @@ of the `Chem.BondContainer`_ interface:
 Creating Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Atoms are created by calling the method `addAtom()`_ provided by the `Chem.Molecule`_ interface:
+Atoms are created by calling the method `addAtom()`_ of the `Chem.Molecule`_ interface:
 
 .. code:: ipython3
 
     a = mol.addAtom()
 
 The method returns a `Chem.Atom`_ object which is owned by the creating `Chem.Molecule`_ instance 
-**mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on. 
+**mol**. The created atom does not yet possess any chemical properties like element, formal charge, and so on (see section `Essential Properties`_). 
 The value of these properties needs to be set explicitly by invoking dedicated property functions which take 
-the atom and desired value of the property as arguments. For example
+the atom and desired value of the property as arguments. 
+
+Example:
 
 .. code:: ipython3
 
     Chem.setType(a, Chem.AtomType.C)
 
-The `Chem.setType()`_ function will set the type property of the atom to the atomic number of carbon. 
-The value of the type property can be retrieved by the associated function `Chem.getType()`_
+The `Chem.setType()`_ function will set the type property of the atom to the atomic number of carbon 
+(note: predefined atomic numbers and other types are exported as static attributes of class `Chem.AtomType`_). 
+The value of the type property can be retrieved by the associated function `Chem.getType()`_:
 
 .. code:: ipython3
 
@@ -403,7 +406,7 @@ of the two atoms to connect as arguments:
     b = mol.addBond(0, 1)
 
 The method returns a `Chem.Bond`_ object which is also owned and managed by the creating `Chem.Molecule`_ 
-instance *mol*. As with atoms, the created bond does not yet have any properties. To set the bond order 
+instance **mol**. As with atoms, the created bond does not yet have any properties. To set the bond order 
 to a value of ``2`` (= double bond) the property function `Chem.setOrder()`_ needs to be called:
 
 .. code:: ipython3
@@ -511,7 +514,7 @@ The first option is to pass the `Chem.MolecularGraph`_ instance as argument to t
 
 
 
-The second possibility is to replace the current atoms and bonds of an existing `Chem.Molecule`_ object by 
+The second possibility is to replace the current atoms and bonds of an existing `Chem.Molecule`_ instance by 
 calling the method `assign()`_ or `copy()`_:
 
 .. code:: ipython3
@@ -520,7 +523,7 @@ calling the method `assign()`_ or `copy()`_:
     
     Chem.setType(mol_copy.addAtom(), Chem.AtomType.C)
     
-    print(mol_copy.numAtoms)
+    print(f'Num. atoms before assign(): {mol_copy.numAtoms}')
     
     mol_copy.assign(mol)
     # or
@@ -531,7 +534,7 @@ calling the method `assign()`_ or `copy()`_:
 
 .. code-block:: text
 
-    1
+    Num. atoms before assign(): 1
 
 
 
@@ -546,7 +549,7 @@ A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ in
 
     mol_copy = mol.clone()
     
-    assert mol_copy.objectID != mol.objectID
+    assert mol_copy.objectID != mol.objectID # check if a new Chem.Molecule instance was created
     
     mol_copy
 
@@ -593,8 +596,9 @@ Atom and bonds of a molecular structure represented by a `Chem.MolecularGraph`_ 
 calling the methods `getAtom()`_ (`Chem.AtomContainer`_ interface) and `getBond()`_ (`Chem.BondContainer`_ 
 interface), respectively. These methods expect the zero-based index of the atom/bond in the parent molecular 
 graphs's atom/bond list as argument. Valid atom/bond indices are in the range 
-[0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an index outside the allowed range will trigger an 
-exception.
+[0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
+
+.. warning:: Specifying an index outside the allowed range will trigger an exception!
 
 Example: Counting atom types and bond orders
 
@@ -696,8 +700,9 @@ Removing single Atoms and Bonds
 
 Single atoms and bonds can be removed by calling the methods `removeAtom()`_ and `removeBond()`_, respectively. 
 The methods expect the zero-based index of the atom/bond in the molecule's atom/bond list as 
-argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). Specifying an 
-index outside the allowed range will raise an exception.
+argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
+
+.. warning:: Specifying an index outside the allowed range will trigger an exception!
 
 .. code:: ipython3
 
@@ -820,8 +825,8 @@ Testing Atom and Bond Ownership
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Whether a particular `Chem.Atom`_ instance belongs to a given `Chem.Molecule`_ instance can be checked either 
-by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by the membership 
-test operator ``ìn`` as follows:
+by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by the 
+`membership test operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ac9e33e6bbbc60173232b8a6927b3bf25>`__ ``ìn`` as follows:
 
 .. code:: ipython3
 
@@ -984,9 +989,9 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-159-835c00aa411f> in <module>
+    Cell In[38], line 1
     ----> 1 mol.getAtomIndex(mol_copy.atoms[0])
-    
+
 
     ItemNotFound: BasicMolecule: argument atom not part of the molecule
 
@@ -1003,9 +1008,9 @@ Examples:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-160-ae6b58adf8f3> in <module>
+    Cell In[39], line 1
     ----> 1 mol.getBondIndex(mol_copy.bonds[1])
-    
+
 
     ItemNotFound: BasicMolecule: argument bond not part of the molecule
 
@@ -1013,7 +1018,7 @@ Examples:
 Processing Bonds
 ^^^^^^^^^^^^^^^^
 
-`Chem.Bond`_ is a subclass of `Chem.AtomContainer`_ and methods/properties of the latter can thus be used 
+`Chem.Bond`_ is a subclass of `Chem.AtomContainer`_ and methods/properties of the latter thus can be used 
 to access the two bonded `Chem.Atom`_ objects in the same way as it was done for the parent `Chem.Molecule`_ 
 instance:
 
@@ -1089,7 +1094,7 @@ which both give access to the atom pair sequence:
 
 
 
-Additionally, the first atom (index=0) can be retrieved directly by calling the method `getBegin()`_ or via the property `begin`_:
+Additionally, the first atom (index=0) can be directly accessed by calling the method `getBegin()`_ or as value of the property `begin`_:
 
 .. code:: ipython3
 
@@ -1117,7 +1122,7 @@ Additionally, the first atom (index=0) can be retrieved directly by calling the 
 
 
 
-The second atom (index=1) can be accessed via the property `end`_ or by calling the method `getEnd()`_:
+The second atom (index=1) can be accessed as value of the property `end`_ or by calling the method `getEnd()`_:
 
 .. code:: ipython3
 
@@ -1145,8 +1150,8 @@ The second atom (index=1) can be accessed via the property `end`_ or by calling 
 
 
 
-If one `Chem.Atom`_ instance is given the other instance referenced by the `Chem.Bond`_ object can be retrieved 
-by the calling the method `getNeighbor()`_ as follows:
+If one `Chem.Atom`_ instance is given then the other instance referenced by the `Chem.Bond`_ object can be retrieved 
+by the calling the method `getNeighbor()`_:
 
 .. code:: ipython3
 
@@ -1175,9 +1180,9 @@ by the calling the method `getNeighbor()`_ as follows:
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-171-093f4eea5627> in <module>
+    Cell In[50], line 1
     ----> 1 bond.getNeighbor(mol.atoms[0])
-    
+
 
     ItemNotFound: BasicBond: argument atom not a member
 
@@ -1308,7 +1313,7 @@ The above code changed to use the mentioned properties:
       Bond index: 5
 
 
-The `Chem.Bond`_ instance that connects two specific atoms can be queried using the `Chem.Atom`_ method 
+The `Chem.Bond`_ instance that connects a pair of atoms can be queried using the `Chem.Atom`_ method 
 `getBondToAtom()`_. The method is called on one of the `Chem.Atom`_ instances and expects the bonded other 
 `Chem.Atom`_ instance as argument:
 
@@ -1339,9 +1344,9 @@ The `Chem.Bond`_ instance that connects two specific atoms can be queried using 
 
     ItemNotFound                              Traceback (most recent call last)
 
-    <ipython-input-175-8b35fac927c4> in <module>
+    Cell In[54], line 1
     ----> 1 mol.atoms[0].getBondToAtom(mol.atoms[2])
-    
+
 
     ItemNotFound: BasicAtom: argument atom is not a bonded neighbor
 
@@ -1363,7 +1368,7 @@ Basic Operations on `Fragment`_ Objects
 ---------------------------------------
 
 `Chem.Fragment`_ (see section `Representation of Molecule Substructures`_) implements the `Chem.MolecularGraph`_ 
-interface and thus provides the same methods and properties as `Chem.Molecule`_ for accessing/processing the 
+interface and thus provides the same methods and properties as class `Chem.Molecule`_ for accessing/processing the 
 referenced `Chem.Atom`_ and `Chem.Bond`_ instances (see section `Basic Operations on Molecule Objects`_). 
 In the following subsections therefore only those methods of `Chem.Fragment`_ will be treated that 
 are not present in class `Chem.Molecule`_ or for some other reasons deserve a more closer 
@@ -1474,7 +1479,7 @@ For adding individual `Chem.Atom`_ and `Chem.Bond`_ instances class `Chem.Fragme
 `addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#afcb879ed6470ef02b6b4bb2c6c8070e8>`__ and 
 `addBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, 
 respectively. 
-For molecular graph consistency reasons adding a `Chem.Bond`_ instance also adds the two 
+For molecular graph consistency reasons, adding a `Chem.Bond`_ instance also adds the two 
 `Chem.Atom`_ instances referenced by the bond (if not added already). Furthermore, pointers to `Chem.Atom`_ and 
 `Chem.Bond`_ instances get stored only once. In case a given `Chem.Atom`_ or `Chem.Bond`_ instance has already 
 been added the methods will do nothing and just return ``False``. 
@@ -1556,7 +1561,7 @@ which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as 
 
 
 
-The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** using the 
+The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** by using the 
 `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ 
 ``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
 
@@ -1573,7 +1578,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended**
 
 
 
-Note that only `Chem.Atom`_ and `Chem.Bond`_ instance will be added that are not already part of the `Chem.Fragment`_ instance:
+Note that only `Chem.Atom`_ and `Chem.Bond`_ instance will be added that are not yet part of the `Chem.Fragment`_ instance:
 
 .. code:: ipython3
 
@@ -1629,7 +1634,8 @@ Single atoms and bonds can be removed by calling the methods
 and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, 
 respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or the zero-based 
 index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
-Specifying an index outside the allowed range will raise an exception.
+
+.. warning:: Specifying an index outside the allowed range will trigger an exception!
 
 Examples:
 
@@ -1662,7 +1668,7 @@ Examples:
 
 
 In order to maintain molecular graph consistency, removing an atom automatically triggers the removal of all incident bonds. 
-Removal of a bond has no side effect on the atom count:
+Removal of a bond will have no effect on the atom count:
 
 .. code:: ipython3
 
@@ -1799,7 +1805,9 @@ Parsing String Data
 
 For the parsing of SMILES strings the `CDPL.Chem`_ package provides the built-in utility function `Chem.parseSMILES()`_. 
 The function returns a `Chem.BasicMolecule`_ object representing the chemical structure 
-encoded by the given SMILES string. For example:
+encoded by the given SMILES string. 
+
+Example:
 
 .. code:: ipython3
 
@@ -1838,12 +1846,12 @@ The general procedure for the construction of molecules from string data in one 
 2. Create a suitable `Chem.MoleculeReaderBase`_ subclass instance that will perform the format-specific decoding of the molecule data in step 3.
 3. Call the `read()`_ method of the created data reader providing an instance of class `Chem.BasicMolecule`_ for the storage of the read molecular structure as argument. 
 
-Molecule data readers for a specific format (Step 2) can be created in two ways:
+Molecule data readers for a specific format (step 2) can be created in two ways:
 
 1. Via class `Chem.MoleculeReader`_ providing the `Base.StringIOStream`_ instance (Step 1) and a data format specifier (= file extension or one of the data format descriptors defined in class `Chem.DataFormat`_) as constructor arguments.
 2. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.MOL2MoleculeReader`_ implementing the Sybyl MOL2 format input).
 
-Example: Reading a molecule from a string providing data in MDL SDF format
+Example: Reading a molecule from a string storing data in MDL SDF format
 
 .. code:: ipython3
 
@@ -1894,6 +1902,7 @@ Example: Reading a molecule from a string providing data in MDL SDF format
     #reader = Chem.SDFMoleculeReader(ios)
     
     reader.read(mol)
+    
     mol
 
 
@@ -1910,7 +1919,7 @@ Reading molecules from files also requires the creation of a `Chem.MoleculeReade
 instance that performs the actual format-specific data decoding work. As with string data, several options exist:
 
 1. Instantiation of class `Chem.MoleculeReader`_ passing the path to the file as constructor argument. When just a path is provided as argument then the data format will be determined automatically from the file extension. To override this behavior, a second argument specifying the actual file extension string to use (e.g. ``'sdf'``, ``'smi'``, ``'mol2'``, ..) or one one of the data format descriptors defined in class `Chem.DataFormat`_ has to be provided.
-2. Instantiation of class `Chem.MoleculeReader`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as the first and and a format specifier as the second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
+2. Instantiation of class `Chem.MoleculeReader`_ passing an instance of class `Base.FileIOStream`_ that was created for the file as first and and a format specifier as second argument. The format specification can be a characteristic file extension or one of the data format descriptors defined in class `Chem.DataFormat`_.
 3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.SDFMoleculeReader`_ implementing reading MDL SD-file format data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.FileSDFMoleculeReader`_) that accepts a file path as constructor argument.
 
@@ -1938,7 +1947,7 @@ Sequential Molecule Access
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molecules can be read in 
-the order provided by the input data by repeatedly calling the `read()`_ method. If there are no more 
+the order specified by the input data by repeatedly calling the `read()`_ method. If there are no more 
 molecules to read, the return value of the method will evaluate to ``False``:
 
 .. code:: ipython3
@@ -1968,8 +1977,8 @@ Random Molecule Access
 
 There is a special version of the `read()`_ method of class `Chem.MoleculeReaderBase`_ which expects the 
 index (zero-based) of the molecule to read as its first argument. This way molecules can be read in any order, 
-no matter what their order is in the input data. The number of available molecules can be queried either 
-by calling the method `getNumRecords()`_ or by accessing the property `numRecords`_.
+no matter what their position is in the input data. The number of available molecules can be queried either 
+by calling the method `getNumRecords()`_ or by accessing the value of the property `numRecords`_.
 
 Example:
 
@@ -2033,10 +2042,10 @@ Example:
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-206-4f5078ed4ed6> in <module>
+    Cell In[85], line 2
           1 # there is no 4th molecule
     ----> 2 reader.read(3, mol_copy)
-    
+
 
     IndexError: StreamDataReader: record index out of bounds
 
@@ -2081,7 +2090,7 @@ testing (see section `Dynamic Properties`_ for further information).
      - `Chem.setIsotope()`_, `Chem.getIsotope()`_, 
        `Chem.hasIsotope()`_, `Chem.clearIsotope()`_
      - *int*
-     - ``0`` (-> nat. mixture)
+     - ``0`` (= nat. mixture)
    * - Number of implicit hydrogens
      - `IMPLICIT_HYDROGEN_COUNT`_
      - `Chem.setImplicitHydrogenCount()`_, `Chem.getImplicitHydrogenCount()`_, 
@@ -2124,7 +2133,7 @@ testing (see section `Dynamic Properties`_ for further information).
        `Chem.has2DCoordinates()`_, `Chem.clear2DCoordinates()`_
      - `CDPL.Math.Vector2D`_
      - \-
-   * - 3D Coordinates
+   * - 3D coordinates
      - `COORDINATES_3D`_
      - `Chem.set3DCoordinates()`_, `Chem.get3DCoordinates()`_, 
        `Chem.has3DCoordinates()`_, `Chem.clear3DCoordinates()`_
@@ -2248,16 +2257,19 @@ Implicit Hydrogen Count Calculation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In general, valences of atoms that are not consumed by explicit incident bonds (represented by `Chem.Bond`_ 
-instances) are considered to be used up by imaginary single bonds to **virtually present** hydrogen atoms 
+instances) are considered to be used up by imaginary single bonds to **virtual** hydrogen atoms 
 (not explicitly represented by corresponding `Chem.Atom`_ instances). Within the CDPL such 
 virtual hydrogens are denoted as *Implicit Hydrogens*. The implicit hydrogen count of an atom gets
-stored as the unsigned integer value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ of the 
-associated `Chem.Atom`_ instance and not only depends on the chemical element (specified by the value of the property `Chem.AtomProperty.TYPE`_) but also on the values of the properties `Chem.AtomProperty.FORMAL_CHARGE`_ and 
+stored as value (of type unsigned integer) of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ of the 
+associated `Chem.Atom`_ instance and not only depends on the chemical element (specified by the value of the 
+property `Chem.AtomProperty.TYPE`_) but also on the values of the properties `Chem.AtomProperty.FORMAL_CHARGE`_ and 
 `Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT`_, respectively. Moreover, the implicit hydrogen count of an atom 
 depends on its structural context and the thus resulting number of incident explicit bonds as well as their 
 order (specified by the value of the `Chem.Bond`_ property `Chem.BondProperty.ORDER`_). 
 
-For the calculation of the implicit hydrogen count of a given atom represented by a `Chem.Atom`_ instance in a particular structural context specified by a `Chem.MolecularGraph`_ instance the `CDPL.Chem`_ package provides the function `Chem.calcImplicitHydrogenCount()`_.
+For the calculation of the implicit hydrogen count of a given atom represented by a `Chem.Atom`_ instance in a 
+particular structural context specified by a `Chem.MolecularGraph`_ instance, the `CDPL.Chem`_ package provides 
+the function `Chem.calcImplicitHydrogenCount()`_.
 
 Example 1: Implicit hydrogen count of nitrogen in Methylamine
 
@@ -2345,9 +2357,9 @@ values the convenience function `Chem.calcImplicitHydrogenCounts()`_ is provided
 `Chem.MolecularGraph`_ instance as first argument and a boolean value as second argument. The second argument 
 tells the function whether the implicit hydrogen shall be calculated even if all `Chem.Atom`_ instances already 
 have the value of the property `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_ set. This so-called *overwrite* flag 
-has to be ``True`` whenever the molecular graph has changed in a way (e.g. changed atom types, bond orders, 
+needs to be ``True`` whenever the molecular graph has changed in a way (e.g. changed atom types, bond orders, 
 formal charges, ...) so that previously calculated implicit hydrogen counts became invalid and thus 
-need to be updated. If the flag is ``False`` then the implicit hydrogen counts will only be calculated for 
+have to be updated. If the flag is ``False`` then the implicit hydrogen counts will only be calculated for 
 `Chem.Atom`_ instances that do not yet have the corresponding property value set. 
 An overwrite flag argument is also supported by many other property calculation functions and facilitates 
 computational efficiency by making sure calculations are carried out only once unless previous 
@@ -2408,9 +2420,11 @@ Atomic Orbital Hybridization Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The atomic orbital hybridization of a single atom represented by a `Chem.Atom`_ instance in a particular 
-structural context specified by a `Chem.MolecularGraph`_ instance can be determined by the function `Chem.perceiveHybridizationState()`_. The functions returns the identified hybrization state as an unsigned integer 
+structural context specified by a `Chem.MolecularGraph`_ instance can be determined by the function 
+`Chem.perceiveHybridizationState()`_. The functions returns the identified hybrization state as an unsigned integer 
 value. The meaning of this value is defined by the constants exported as static public attributes 
-of class `Chem.HybridizationState`_. The hybridization state of an atom depends on the chemical element (specified by the value of property `Chem.AtomProperty.TYPE`_), the formal charge (specified by the value of property 
+of class `Chem.HybridizationState`_. The hybridization state of an atom depends on the chemical element 
+(specified by the value of property `Chem.AtomProperty.TYPE`_), the formal charge (specified by the value of property 
 `Chem.AtomProperty.FORMAL_CHARGE`_), the implicit hydrogen count (specified by the value of property 
 `Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT`_, see section `Implicit Hydrogen Count Calculation`_) as well as 
 the number and order (specified by the value of property `Chem.BondProperty.ORDER`_) of any incident explicit 
@@ -2450,9 +2464,11 @@ Example 1: Hybridization state of carbon in Methane
     Hybridization of carbon in Methane: sp3
 
 
-For perceiving the hybridization state of all `Chem.Atom`_ instances contained in a `Chem.MolecularGraph`_ instance and saving the information for later use as value of the corresponding property 
-`Chem.AtomProperty.HYBRIDIZATION`_ the convenience function `Chem.perceiveHybridizationStates()`_ is provided. The function expects the `Chem.MolecularGraph`_ instance as first argument and the value of the *overwrite* flag (see 
-section `Implicit Hydrogen Count Calculation`_ for information) as second argument.
+For perceiving the hybridization state of all `Chem.Atom`_ instances contained in a `Chem.MolecularGraph`_ instance 
+and saving the information for later use as value of the corresponding property 
+`Chem.AtomProperty.HYBRIDIZATION`_ the convenience function `Chem.perceiveHybridizationStates()`_ is provided. 
+The function expects the `Chem.MolecularGraph`_ instance as first argument and the value of the *overwrite* 
+flag (see section `Implicit Hydrogen Count Calculation`_ for more information) as second argument.
 
 Example 2: Hybridization of Alanine atoms
 
@@ -2487,10 +2503,11 @@ Example 2: Hybridization of Alanine atoms
 Atom and Bond Ring Membership Perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Information about the membership of an atom or bond in a cycle of the molecular graph gets stored as boolean value of the `Chem.Atom`_ property `Chem.AtomProperty.RING_FLAG`_ and the `Chem.Bond`_ property `Chem.BondProperty.RING_FLAG`_, respectively. For the perception of atom/bond ring membership the `CDPL.Chem`_ 
-package provides the function `Chem.setRingFlags()`_ which expects the `Chem.MolecularGraph`_ instance as first 
-argument and the value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for 
-information) as second argument.
+Information about the membership of an atom or bond in a cycle of the molecular graph gets stored as boolean value of the 
+`Chem.Atom`_ property `Chem.AtomProperty.RING_FLAG`_ and the `Chem.Bond`_ property `Chem.BondProperty.RING_FLAG`_, 
+respectively. For the perception of atom/bond ring membership the `CDPL.Chem`_ package provides the function 
+`Chem.setRingFlags()`_ which expects the `Chem.MolecularGraph`_ instance as first argument and the value of the 
+*overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for more information) as second argument.
 
 Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
@@ -2533,8 +2550,8 @@ Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
 
 The function `Chem.setRingFlags()`_ also sets the value of the `Chem.MolecularGraph`_ property 
-`Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that specifies the subset 
-of `Chem.Atom`_ and `Chem.Bond`_ instances involved in a molecular graph cycle:
+`Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that 
+specifies the subset of `Chem.Atom`_ and `Chem.Bond`_ instances involved in a molecular graph cycle:
 
 .. code:: ipython3
 
@@ -2559,7 +2576,7 @@ subset of the overall atoms and bonds. For this reason, the CDPL uses memory-eff
 ring sets (like the SSSR) get represented by corresponding `Chem.FragmentList`_ instances.
 For the perception of the SSSR of a molecular graph the `CDPL.Chem`_ package provides the function 
 `Chem.perceiveSSSR()`_. The function expects the `Chem.MolecularGraph`_ instance as first argument and the 
-value of the  *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for information) as second 
+value of the  *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for more information) as second 
 argument. The perceived SSSR gets stored as value (of type `Chem.FragmentList`_) of the property 
 `Chem.MolecularGraphProperty.SSSR`_ for later use.
 
@@ -2599,7 +2616,7 @@ the `Chem.Atom`_ property `Chem.AtomProperty.AROMATICITY_FLAG`_ and the `Chem.Bo
 `Chem.BondProperty.AROMATICITY_FLAG`_, respectively. For the perception of atom/bond aromaticity the `CDPL.Chem`_ 
 package provides the function `Chem.setAromaticityFlags()`_ which expects the `Chem.MolecularGraph`_ instance as 
 first argument and the value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for 
-information) as second argument. Whether a ring is aromatic or not depends on its size as well as the value of 
+more information) as second argument. Whether a ring is aromatic or not depends on its size as well as the values of 
 several `Chem.Atom`_ and `Chem.Bond`_ properties of the respective ring atoms and bonds. Furthermore, for the 
 construction of fused ring systems, the SSSR of the parent molecular graph must be available.
 
@@ -2760,10 +2777,10 @@ Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
     IndexError                                Traceback (most recent call last)
 
-    <ipython-input-226-d8e5e933010b> in <module>
+    Cell In[105], line 2
           1 # there is no 3rd component
     ----> 2 comps[2]
-    
+
 
     IndexError: ComponentSet: element index out of bounds
 
@@ -2774,8 +2791,8 @@ All-in-one Property Calculation
 For computing all `Chem.Atom`_, `Chem.Bond`_ and `Chem.MolecularGraph`_ properties that were discussed in the 
 previous section via a single function call the `CDPL.Chem`_ package provides the convenience function 
 `Chem.calcBasicProperties()`_. The function expects the `Chem.MolecularGraph`_ instance as first argument and the 
-value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for information) as second 
-argument. Calling the function is equivalent to the following lines of code:
+value of the *overwrite* flag (see section `Implicit Hydrogen Count Calculation`_ for more information) as second 
+argument. A call of the function is equivalent to the execution of the following lines of code:
 
 .. code:: python3
 
@@ -3305,6 +3322,8 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 .. _TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
 .. _Chem.AtomProperty.TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+
+.. _Chem.AtomType: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html
 
 .. _Chem.AtomType.UNKNOWN: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html#a69fe4886bcac34ae4f279709c97370ea
 

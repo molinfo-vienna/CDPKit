@@ -100,7 +100,7 @@ software distributions.
 .. rubric:: Windows
 
 On Windows (8/10/11) the least error prone way to get started is to set up a :program:`MinGW` build environment by installing packages
-from the `MSYS2 <https://www.msys2.org/>`_ software distribution. However, the downside heare is that the built CDPL Python bindings
+from the `MSYS2 <https://www.msys2.org/>`_ software distribution. However, the downside is that the built CDPL Python bindings
 will only work with the Python interpreter shipped with MSYS2.
 In order to make the CDPL Python bindings work with an official Python distribution obtained from https://www.python.org, a build using
 Microsoft's Visual C++ compiler (:program:`MSVC`) toolchain is required. 
@@ -159,7 +159,7 @@ If :command:`cmake` is executed as shown above the default build type will be ``
 *-DCMAKE_BUILD_TYPE=<BUILD-TYPE>* on the :command:`cmake` command line. Possible values of ``<BUILD-TYPE>`` are:
 
 - Debug
-- Releasex
+- Release
 - RelWithDebInfo
 - MinSizeRel
 
@@ -195,7 +195,7 @@ This step is optional and needs to be carried out only if a build of offline CDP
 is required or desired. If the documentation should be installed together with the built binaries then this step must be
 executed *before* carrying out the installation procedure (see next section).
 Mandatory for a successful build is the availability of the `Sphinx <https://www.sphinx-doc.org/en/master>`_ documentation generator
-plus the listed extensions (see `Build requirements`_). Furthermore, for generating CDPL C++ and Python API-documentation (optional),
+plus the listed extensions (see `Build requirements`_). Furthermore, for the generation of CDPL C++ and Python API-documentation (optional),
 the program `Doxygen <https://www.doxygen.nl>`_ has to be installed.
 
 .. hint::
