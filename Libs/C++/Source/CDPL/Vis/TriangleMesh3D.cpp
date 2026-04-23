@@ -129,7 +129,7 @@ Vis::TriangleMesh3D& Vis::TriangleMesh3D::operator+=(const TriangleMesh3D& mesh)
 {
     auto& v_data = vertices.getData();
     auto& rhs_v_data = mesh.vertices.getData();
-    auto prev_num_verts = v_data.size();
+    unsigned long prev_num_verts = v_data.size();
     
     v_data.reserve(prev_num_verts + rhs_v_data.size());
     v_data.insert(v_data.end(), rhs_v_data.begin(), rhs_v_data.end());
