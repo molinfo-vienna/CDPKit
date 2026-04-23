@@ -218,7 +218,7 @@ CDPL::Util::CompoundDataReader<DataType>::read(std::size_t idx, DataType& obj, b
     std::size_t tmp_idx = idx;
     ReaderType* reader = getReaderForRecordIndex(tmp_idx);
 
-    if (!reader) {
+    if (reader) {
         recordIdx = idx;
     
         if ((state = reader->read(tmp_idx, obj, overwrite))) {
