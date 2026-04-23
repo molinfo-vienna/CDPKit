@@ -131,9 +131,11 @@
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_FONT</td><td>Specifies the font for bond labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_SIZE</td><td>Specifies the size of bond labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_FONT</td><td>Specifies the font for bond configuration labels</td></tr>
-#  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of bond configuration labels</td><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of bond configuration labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_SIZE</td><td>Specifies the size of bond configuration labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CONFIGURATION_LABEL_COLOR</td><td>Specifies the color of bond configuration labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_FONT</td><td>Specifies the font for bond custom labels</td></tr>
-#  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_SIZE</td><td>Specifies the size of bond custom labels</td></tr>
+#  <tr><td>Vis.MolecularGraphProperty.BOND_CUSTOM_LABEL_COLOR</td><td>Specifies the color of bond custom labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_LABEL_MARGIN</td><td>Specifies the margin of free space around bond labels</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_WIDTH</td><td>Specifies the width of bond highlighting areas</td></tr>
 #  <tr><td>Vis.MolecularGraphProperty.BOND_HIGHLIGHT_AREA_BRUSH</td><td>Specifies the brush to use for filling bond highlighting areas</td></tr>

@@ -38,8 +38,8 @@
 #  <tr><td>Chem.AtomProperty.RADICAL_TYPE</td><td>Specifies the radical type (see Chem.RadicalType)</td><td>-</td></tr>
 #  <tr><td>Chem.AtomProperty.STEREO_DESCRIPTOR</td><td>Specifies the atom stereo descriptor (see Chem.AtomConfiguration, Chem.StereoDescriptor)</td><td>Only required if no atom coordinates are written</td></tr>
 # </table>
-# 
-# <table>
+# <br>
+#  <table>
 #  <tr><th>Chem.Bond Property</th><th>Description</th><th>Notes</th></tr>
 #  <tr><td>Chem.BondProperty.ORDER</td><td>Specifies the order of the bond</td><td>-</td></tr>
 #  <tr><td>Chem.BondProperty.STEREO_2D_FLAG</td><td>Specifies the 2D stereo bond type (see Chem.BondStereoFlag)</td><td>Only required if 2D or 3D atom coordinates are written</td></tr>

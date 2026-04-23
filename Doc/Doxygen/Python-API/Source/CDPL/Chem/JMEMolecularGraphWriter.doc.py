@@ -37,8 +37,8 @@
 #  <tr><td>Chem.AtomProperty.AROMATICITY_FLAG</td><td>Tells whether the atom is a member of an aromatic ring</td><td>Only written if the atom is a query atom and a corresponding matching constraint has been specified</td></tr>
 #  <tr><td>Chem.AtomProperty.REACTION_ATOM_MAPPING_ID</td><td>Specifies the reactant to product atom mapping class</td><td>Only written if the specified mapping number is greater than zero</td></tr>
 # </table>
-# 
-# <table>
+# <br>
+#  <table>
 #  <tr><th>Chem.Bond Property</th><th>Description</th><th>Notes</th></tr>
 #  <tr><td>Chem.BondProperty.ORDER</td><td>Specifies the order of the bond</td><td>-</td></tr>
 #  <tr><td>Chem.BondProperty.STEREO_2D_FLAG</td><td>Specifies the 2D stereo bond type (see Chem.BondStereoFlag)</td><td>Either stereo bonds are not supported by the <em>JME</em> format and are written as plain single bonds</td></tr>
