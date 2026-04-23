@@ -107,7 +107,7 @@ namespace CDPL
          *   <td>Only set if 0D stereo information is available and the atom is a tetrahedral stereogenic center</td>
          *  </tr>
          * </table>
-         *
+         * <br>
          * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
          *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
          *   <th>Chem::Bond Property</th> <th>Description</th> <th>Notes</th>

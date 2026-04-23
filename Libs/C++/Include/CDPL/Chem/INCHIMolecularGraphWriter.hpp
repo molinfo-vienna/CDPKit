@@ -105,7 +105,7 @@ namespace CDPL
          *   <td>Only required if no atom coordinates are written</td>
          *  </tr>
          * </table>
-         *
+         * <br>
          * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
          *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
          *   <th>Chem::Bond Property</th> <th>Description</th> <th>Notes</th>
