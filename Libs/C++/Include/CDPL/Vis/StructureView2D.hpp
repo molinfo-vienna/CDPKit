@@ -486,6 +486,7 @@ namespace CDPL
          *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_SIZE</td>
          *   <td>Specifies the size of bond configuration labels</td>
          *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_CONFIGURATION_LABEL_COLOR</td>
          *   <td>Specifies the color of bond configuration labels</td>
          *  </tr>
@@ -497,6 +498,7 @@ namespace CDPL
          *   <td>Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_SIZE</td>
          *   <td>Specifies the size of bond custom labels</td>
          *  </tr>
+         *  <tr>
          *   <td>Vis::MolecularGraphProperty::BOND_CUSTOM_LABEL_COLOR</td>
          *   <td>Specifies the color of bond custom labels</td>
          *  </tr>
