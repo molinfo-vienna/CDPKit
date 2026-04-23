@@ -87,6 +87,11 @@ namespace
         return bs.test(idx);
     }
 
+    CDPL::Util::BitSet::size_type findFirst(CDPL::Util::BitSet& bs)
+    {
+        return bs.find_first();
+    }
+    
     CDPL::Util::BitSet::size_type findNext(CDPL::Util::BitSet& bs, CDPL::Util::BitSet::size_type idx)
     {
         checkIndex(bs, idx);
@@ -243,7 +248,7 @@ void CDPLPythonUtil::exportBitSet()
         .def("reset", NoArgMemFunc(&Util::BitSet::reset), python::arg("self"), python::return_self<>())
         .def("reset", &resetBit, (python::arg("self"), python::arg("idx")), python::return_arg<1>())
         .def("test", &testBit, (python::arg("self"), python::arg("idx")))
-        .def("findFirst", static_cast<Util::BitSet::size_type (Util::BitSet::*)() const>(&Util::BitSet::find_first), python::arg("self"))
+        .def("findFirst", &findFirst, python::arg("self"))
         .def("findNext", &findNext, (python::arg("self"), python::arg("idx")))
         .def("isSubsetOf", &isSubsetOf, (python::arg("self"), python::arg("bs")))
         .def("isProperSubsetOf", &isProperSubsetOf, (python::arg("self"), python::arg("bs")))
