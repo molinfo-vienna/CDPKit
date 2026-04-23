@@ -5,7 +5,7 @@ To be able to follow this tutorial the *CDPL Python* bindings have to be install
 The most straightforward way to accomplish this task is to install the latest official release deposited 
 on `PyPI`_ using the :program:`pip` command as follows:
 
-.. code:: ipython3
+.. code:: python3
 
     pip install cdpkit
 
@@ -293,7 +293,7 @@ Basic Operations on `Molecule`_ Objects
 
 Most of the classes for molecular structure representation, molecular data I/O and functions for basic processing reside in package `CDPL.Chem`_.
 
-.. code:: ipython3
+.. code:: python3
 
     import CDPL.Chem as Chem
 
@@ -305,7 +305,7 @@ Furthermore, the CDPL Python bindings implement the `Rich Output`_ of `Chem.Mole
 package and will be used in the following sections to display the skeletal formula of molecular graphs 
 simply by typing the variable name at the end of a code cell.
 
-.. code:: ipython3
+.. code:: python3
 
     import CDPL.Vis
 
@@ -315,7 +315,7 @@ Creation
 A `Chem.Molecule`_ object not yet having any atoms and bonds can be created by instantiating the class `Chem.BasicMolecule`_ 
 (the provided default implementation of the `Chem.Molecule`_ interface):
 
-.. code:: ipython3
+.. code:: python3
 
     mol = Chem.BasicMolecule()
 
@@ -325,7 +325,7 @@ Querying Atom and Bond Counts
 The number of (explicit) atoms can be queried either by acessing the property `numAtoms`_ or by calling the method `getNumAtoms()`_ 
 which are both provided by the `Chem.AtomContainer`_ interface:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.numAtoms
     # or
@@ -343,7 +343,7 @@ which are both provided by the `Chem.AtomContainer`_ interface:
 In the same manner, the number of explicit bonds can be retrieved by the property `numBonds`_ or by calling the method `getNumBonds()`_ 
 of the `Chem.BondContainer`_ interface:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.numBonds
     # or
@@ -363,7 +363,7 @@ Creating Atoms and Bonds
 
 Atoms are created by calling the method `addAtom()`_ of the `Chem.Molecule`_ interface:
 
-.. code:: ipython3
+.. code:: python3
 
     a = mol.addAtom()
 
@@ -374,7 +374,7 @@ the atom and desired value of the property as arguments.
 
 Example:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.setType(a, Chem.AtomType.C)
 
@@ -382,7 +382,7 @@ The `Chem.setType()`_ function will set the type property of the atom to the ato
 (note: predefined atomic numbers and other types are exported as static attributes of class `Chem.AtomType`_). 
 The value of the type property can be retrieved by the associated function `Chem.getType()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.getType(a)
 
@@ -398,7 +398,7 @@ The value of the type property can be retrieved by the associated function `Chem
 In a similar fashion, bonds are created by calling the method `addBond()`_ which expects the indices (zero-based) 
 of the two atoms to connect as arguments:
 
-.. code:: ipython3
+.. code:: python3
 
     # add second carbon atom
     Chem.setType(mol.addAtom(), Chem.AtomType.C)
@@ -409,13 +409,13 @@ The method returns a `Chem.Bond`_ object which is also owned and managed by the 
 instance **mol**. As with atoms, the created bond does not yet have any properties. To set the bond order 
 to a value of ``2`` (= double bond) the property function `Chem.setOrder()`_ needs to be called:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.setOrder(b, 2)
 
 A previously set bond order property value can be retrieved by the accompanying getter function `Chem.getOrder()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.getOrder(b)
 
@@ -428,7 +428,7 @@ A previously set bond order property value can be retrieved by the accompanying 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol
 
@@ -442,7 +442,7 @@ A previously set bond order property value can be retrieved by the accompanying 
 To create a more complex molecule, e.g. Pyridine, from the Ethene fragment that is currently described 
 by **mol** the following lines will do the trick:
 
-.. code:: ipython3
+.. code:: python3
 
     # create missing atoms and set atom types
     Chem.setType(mol.addAtom(), Chem.AtomType.C)
@@ -457,7 +457,7 @@ by **mol** the following lines will do the trick:
     Chem.setOrder(mol.addBond(4, 5), 2)
     Chem.setOrder(mol.addBond(5, 0), 1)
 
-.. code:: ipython3
+.. code:: python3
 
     mol.numBonds
 
@@ -470,7 +470,7 @@ by **mol** the following lines will do the trick:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.numAtoms
 
@@ -483,7 +483,7 @@ by **mol** the following lines will do the trick:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol
 
@@ -501,7 +501,7 @@ A deep copy of a chemical structure described by a `Chem.MolecularGraph`_ instan
 The first option is to pass the `Chem.MolecularGraph`_ instance as argument to the constructur of class 
 `Chem.BasicMolecule`_:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy = Chem.BasicMolecule(mol)
     
@@ -517,7 +517,7 @@ The first option is to pass the `Chem.MolecularGraph`_ instance as argument to t
 The second possibility is to replace the current atoms and bonds of an existing `Chem.Molecule`_ instance by 
 calling the method `assign()`_ or `copy()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy = Chem.BasicMolecule()
     
@@ -545,7 +545,7 @@ calling the method `assign()`_ or `copy()`_:
 
 A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ interface on the `Chem.Molecule`_ instance to copy:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy = mol.clone()
     
@@ -563,7 +563,7 @@ A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ in
 It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using 
 the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy.append(mol)
     
@@ -576,7 +576,7 @@ the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/c
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy += mol_copy
     
@@ -602,7 +602,7 @@ graphs's atom/bond list as argument. Valid atom/bond indices are in the range
 
 Example: Counting atom types and bond orders
 
-.. code:: ipython3
+.. code:: python3
 
     type_counts = {}
     order_counts = {}
@@ -640,7 +640,7 @@ lists. The atom sequence can be retrieved via the `Chem.MolecularGraph`_ interfa
 `getAtoms()`_ or accessing the property `atoms`_. The bond sequence by method `getBonds()`_ or property `bonds`_. 
 The following code is an alternative version of the one above that employs sequential atom/bond access:
 
-.. code:: ipython3
+.. code:: python3
 
     type_counts = {}
     order_counts = {}
@@ -676,7 +676,7 @@ Removing all Atoms and Bonds
 
 Atoms, bonds and properties can be removed completely by calling the method `clear()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     print(f'Num. atoms before clear(): {mol_copy.numAtoms}')
     print(f'Num. bonds before clear(): {mol_copy.numBonds}')
@@ -704,7 +704,7 @@ argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `ge
 
 .. warning:: Specifying an index outside the allowed range will trigger an exception!
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy.assign(mol)
     
@@ -738,7 +738,7 @@ As can be seen, the removal of an atom automatically triggers the removal of all
 This is necesessary to maintain molecular graph integrity. Removal of a bond, on the other hand, will only affect 
 the bond count:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy.assign(mol)
     
@@ -781,7 +781,7 @@ either by calling the method `remove()`_ with the fragment object as argument or
 `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ 
 (``-=``) of the fragment object:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy = mol.clone()
     frag = Chem.Fragment()
@@ -828,7 +828,7 @@ Whether a particular `Chem.Atom`_ instance belongs to a given `Chem.Molecule`_ i
 by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by the 
 `membership test operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ac9e33e6bbbc60173232b8a6927b3bf25>`__ ``ìn`` as follows:
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy.assign(mol)
     
@@ -843,7 +843,7 @@ by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtom(0) in mol
 
@@ -856,7 +856,7 @@ by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.containsAtom(mol_copy.getAtom(0))
 
@@ -869,7 +869,7 @@ by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol_copy.atoms[0] in mol
 
@@ -885,7 +885,7 @@ by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by 
 Similarly, a `Chem.Bond`_ instance membership test can be performed by calling the method `containsBond()`_ 
 (`Chem.BondContainer`_ interface) or by using the ``ìn`` operator:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.containsBond(mol.bonds[0])
 
@@ -898,7 +898,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getBond(0) in mol
 
@@ -911,7 +911,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.containsBond(mol_copy.getBond(0))
 
@@ -924,7 +924,7 @@ Similarly, a `Chem.Bond`_ instance membership test can be performed by calling t
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     
     mol_copy.bonds[0] in mol
@@ -946,7 +946,7 @@ instance can be retrieved by passing the atom as argument to the method `getAtom
 (`Chem.AtomContainer`_ interface). In a similar manner, the index of a `Chem.Bond`_ instance can be determined by 
 calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(mol.getAtom(3))
 
@@ -959,7 +959,7 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getBondIndex(mol.getBond(2))
 
@@ -977,7 +977,7 @@ calling the method `getBondIndex()`_ (`Chem.BondContainer`_ interface):
 
 Examples:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(mol_copy.atoms[0])
 
@@ -996,7 +996,7 @@ Examples:
     ItemNotFound: BasicMolecule: argument atom not part of the molecule
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getBondIndex(mol_copy.bonds[1])
 
@@ -1022,7 +1022,7 @@ Processing Bonds
 to access the two bonded `Chem.Atom`_ objects in the same way as it was done for the parent `Chem.Molecule`_ 
 instance:
 
-.. code:: ipython3
+.. code:: python3
 
     bond = mol.getBond(2)
     
@@ -1037,7 +1037,7 @@ instance:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getAtom(0))
 
@@ -1050,7 +1050,7 @@ instance:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getAtom(1))
 
@@ -1068,7 +1068,7 @@ Like class `Chem.MolecularGraph`_, `Chem.Bond`_ provides the property `atoms
 `getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ 
 which both give access to the atom pair sequence:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.atoms[0])
 
@@ -1081,7 +1081,7 @@ which both give access to the atom pair sequence:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getAtoms()[1])
 
@@ -1096,7 +1096,7 @@ which both give access to the atom pair sequence:
 
 Additionally, the first atom (index=0) can be directly accessed by calling the method `getBegin()`_ or as value of the property `begin`_:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getBegin())
 
@@ -1109,7 +1109,7 @@ Additionally, the first atom (index=0) can be directly accessed by calling the m
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.begin)
 
@@ -1124,7 +1124,7 @@ Additionally, the first atom (index=0) can be directly accessed by calling the m
 
 The second atom (index=1) can be accessed as value of the property `end`_ or by calling the method `getEnd()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getEnd())
 
@@ -1137,7 +1137,7 @@ The second atom (index=1) can be accessed as value of the property `end`_ or by 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.end)
 
@@ -1153,7 +1153,7 @@ The second atom (index=1) can be accessed as value of the property `end`_ or by 
 If one `Chem.Atom`_ instance is given then the other instance referenced by the `Chem.Bond`_ object can be retrieved 
 by the calling the method `getNeighbor()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getAtomIndex(bond.getNeighbor(bond.atoms[0]))
 
@@ -1168,7 +1168,7 @@ by the calling the method `getNeighbor()`_:
 
 .. warning:: Passing a `Chem.Atom`_ instance as argument that is not a member of the bond will trigger an  exception!
 
-.. code:: ipython3
+.. code:: python3
 
     bond.getNeighbor(mol.atoms[0])
 
@@ -1195,7 +1195,7 @@ properties that can be used to access incident bonds and connected atoms.
 
 Example:
 
-.. code:: ipython3
+.. code:: python3
 
     for atom in mol.atoms:
         print(f'Atom index: {mol.getAtomIndex(atom)}')
@@ -1259,7 +1259,7 @@ corresponding `Chem.Bond`_ instance access.
 
 The above code changed to use the mentioned properties:
 
-.. code:: ipython3
+.. code:: python3
 
     for atom in mol.atoms:
         print(f'Atom index: {mol.getAtomIndex(atom)}')
@@ -1317,7 +1317,7 @@ The `Chem.Bond`_ instance that connects a pair of atoms can be queried using the
 `getBondToAtom()`_. The method is called on one of the `Chem.Atom`_ instances and expects the bonded other 
 `Chem.Atom`_ instance as argument:
 
-.. code:: ipython3
+.. code:: python3
 
     mol.getBondIndex(mol.atoms[0].getBondToAtom(mol.atoms[5]))
 
@@ -1332,7 +1332,7 @@ The `Chem.Bond`_ instance that connects a pair of atoms can be queried using the
 
 .. warning:: If a `Chem.Bond`_ instance connecting the `Chem.Atom`_ instance pair does not exist then an exception will be raised!
 
-.. code:: ipython3
+.. code:: python3
 
     mol.atoms[0].getBondToAtom(mol.atoms[2])
 
@@ -1354,7 +1354,7 @@ The `Chem.Bond`_ instance that connects a pair of atoms can be queried using the
 Alternatively, the method `findBondToAtom()`_ can be used. In contrast to `getBondToAtom()`_ the method returns 
 ``None`` if a connecting `Chem.Bond`_ instance does not exist:
 
-.. code:: ipython3
+.. code:: python3
 
     print(mol.atoms[0].findBondToAtom(mol.atoms[2]))
 
@@ -1379,7 +1379,7 @@ Creation
 
 An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be created by:
 
-.. code:: ipython3
+.. code:: python3
 
     frag = Chem.Fragment()
     
@@ -1398,7 +1398,7 @@ An empty `Chem.Fragment`_ object not yet referencing any atoms and bonds can be 
 instance as argument. These constructors create a `Chem.Fragment`_ object that will then reference the same 
 `Chem.Atom`_ and `Chem.Bond`_ instances as the passed argument:
 
-.. code:: ipython3
+.. code:: python3
 
     frag = Chem.Fragment(mol)
     
@@ -1416,7 +1416,7 @@ instances added to a `Chem.Fragment`_ instance get stored as pointers (not as co
 Membership tests for `Chem.Atom`_ and `Chem.Bond`_ instances retrieved from a `Chem.Fragment`_ will therefore  
 evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ object:
 
-.. code:: ipython3
+.. code:: python3
 
     atom = frag.getAtom(0)
     
@@ -1431,7 +1431,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.containsAtom(atom)
 
@@ -1444,7 +1444,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     bond = frag.getBond(0)
     
@@ -1459,7 +1459,7 @@ evaluate to ``True`` when carried out on the source `Chem.MolecularGraph`_ objec
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     mol.containsBond(bond)
 
@@ -1486,7 +1486,7 @@ been added the methods will do nothing and just return ``False``.
 
 Examples:
 
-.. code:: ipython3
+.. code:: python3
 
     # atom already present -> False
     frag.addAtom(mol.atoms[0])
@@ -1500,7 +1500,7 @@ Examples:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     # bond already present -> False
     frag.addBond(mol.bonds[0])
@@ -1514,7 +1514,7 @@ Examples:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     frag = Chem.Fragment()
     
@@ -1548,7 +1548,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **replaced**
 `assign() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ 
 which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as argument:
 
-.. code:: ipython3
+.. code:: python3
 
     frag.assign(mol)
     
@@ -1565,7 +1565,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended**
 `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ 
 ``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
 
-.. code:: ipython3
+.. code:: python3
 
     frag += mol_copy
     
@@ -1580,7 +1580,7 @@ The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended**
 
 Note that only `Chem.Atom`_ and `Chem.Bond`_ instance will be added that are not yet part of the `Chem.Fragment`_ instance:
 
-.. code:: ipython3
+.. code:: python3
 
     # fragment remains unaltered
     frag += mol_copy
@@ -1600,7 +1600,7 @@ Exchanging Atom and Bond Lists
 The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances of two `Chem.Fragment`_ instances can be mutually 
 exchanged by calling the method `swap()`_ on one of the instances providing the other instance as argument:
 
-.. code:: ipython3
+.. code:: python3
 
     frag2 = Chem.Fragment(mol)
     
@@ -1615,7 +1615,7 @@ exchanged by calling the method `swap()`_ on one of the instances providing the 
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     frag2
 
@@ -1639,7 +1639,7 @@ index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_
 
 Examples:
 
-.. code:: ipython3
+.. code:: python3
 
     print(f'Num. atoms before removeAtom(1): {frag.numAtoms}')
     print(f'Num. bonds before removeAtom(1): {frag.numBonds}')
@@ -1670,7 +1670,7 @@ Examples:
 In order to maintain molecular graph consistency, removing an atom automatically triggers the removal of all incident bonds. 
 Removal of a bond will have no effect on the atom count:
 
-.. code:: ipython3
+.. code:: python3
 
     print(f'Num. atoms before removeBond(2): {frag.numAtoms}')
     print(f'Num. bonds before removeBond(2): {frag.numBonds}')
@@ -1702,7 +1702,7 @@ When the removal of a `Chem.Atom`_ or `Chem.Bond`_ instance is attempted that is
 `Chem.Fragment`_ instance then the corresponding methods return ``False`` to indicate that the removal
 operation failed:
 
-.. code:: ipython3
+.. code:: python3
 
     frag.removeAtom(mol_copy.getAtom(0))
 
@@ -1715,7 +1715,7 @@ operation failed:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     frag.removeBond(mol_copy.getBond(0))
 
@@ -1728,7 +1728,7 @@ operation failed:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     frag
 
@@ -1746,7 +1746,7 @@ Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via
 `inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ 
 (``-=``) of a `Chem.MolecularGraph`_ instance:
 
-.. code:: ipython3
+.. code:: python3
 
     frag.assign(mol)
     
@@ -1761,7 +1761,7 @@ Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     frag2.clear()
     
@@ -1782,7 +1782,7 @@ Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via
 Attempting to remove `Chem.Atom`_ and `Chem.Bond`_ instances that are not part of the `Chem.Fragment`_ instance 
 will have no effect:
 
-.. code:: ipython3
+.. code:: python3
 
     frag -= frag2
     
@@ -1809,7 +1809,7 @@ encoded by the given SMILES string.
 
 Example:
 
-.. code:: ipython3
+.. code:: python3
 
     mol = Chem.parseSMILES('c1c(C(=O)O)ccc(CNN)c1')
     
@@ -1824,7 +1824,7 @@ Example:
 
 A similar function called `Chem.parseSMARTS()`_ can be used to parse and and prepare SMARTS patterns for substructure searching:
 
-.. code:: ipython3
+.. code:: python3
 
     mol = Chem.parseSMARTS('c1:c:[n,o,s]:c:c:1-[C:2](-,=[*])-,=O')
     
@@ -1853,7 +1853,7 @@ Molecule data readers for a specific format (step 2) can be created in two ways:
 
 Example: Reading a molecule from a string storing data in MDL SDF format
 
-.. code:: ipython3
+.. code:: python3
 
     import CDPL.Base as Base
     
@@ -1923,7 +1923,7 @@ instance that performs the actual format-specific data decoding work. As with st
 3. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.SDFMoleculeReader`_ implementing reading MDL SD-file format data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MoleculeReaderBase`_ (e.g. `Chem.FileSDFMoleculeReader`_) that accepts a file path as constructor argument.
 
-.. code:: ipython3
+.. code:: python3
         
     # - Option 1 -
     reader = Chem.MoleculeReader('/path/to/input/file.sdf')
@@ -1950,7 +1950,7 @@ Given a properly initialized `Chem.MoleculeReaderBase`_ subclass instance, molec
 the order specified by the input data by repeatedly calling the `read()`_ method. If there are no more 
 molecules to read, the return value of the method will evaluate to ``False``:
 
-.. code:: ipython3
+.. code:: python3
 
     smi_data = """c1n(ccn1)c1ccc(cc1)c1ccc(n1c1c(cc(cc1)C(=O)N)C)CCC(=O)[O-] 022_3QJ5_A
     CNC(=O)[C@H](C(C)(C)C)NC(=O)[C@@H]([C@H](C)N([O-])C=O)CCCc1ccccc1 023_2WO9_B
@@ -1982,7 +1982,7 @@ by calling the method `getNumRecords()`_ or by accessing the value of the proper
 
 Example:
 
-.. code:: ipython3
+.. code:: python3
 
     ios = Base.StringIOStream(smi_data)
     reader = Chem.MoleculeReader(ios, 'smi')
@@ -1999,7 +1999,7 @@ Example:
     Number of input molecules: 3
 
 
-.. code:: ipython3
+.. code:: python3
 
     # read the 2nd molecule
     reader.read(1, mol_copy)
@@ -2013,7 +2013,7 @@ Example:
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     # read the 1st molecule
     reader.read(0, mol_copy)
@@ -2029,7 +2029,7 @@ Example:
 
 .. warning:: If the index is out of the valid range then a corresponding exception will be thrown!
 
-.. code:: ipython3
+.. code:: python3
 
     # there is no 4th molecule
     reader.read(3, mol_copy)
@@ -2273,7 +2273,7 @@ the function `Chem.calcImplicitHydrogenCount()`_.
 
 Example 1: Implicit hydrogen count of nitrogen in Methylamine
 
-.. code:: ipython3
+.. code:: python3
 
     methylamine = Chem.BasicMolecule()
     
@@ -2294,7 +2294,7 @@ Example 1: Implicit hydrogen count of nitrogen in Methylamine
 
 Example 2: Implicit hydrogen count of positively charged nitrogen in Methylamine
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.setFormalCharge(methylamine.atoms[0], 1) # N -> N+
     
@@ -2311,7 +2311,7 @@ Example 2: Implicit hydrogen count of positively charged nitrogen in Methylamine
 
 Example 3: Implicit hydrogen count of a positively charged nitrogen atom fragment
 
-.. code:: ipython3
+.. code:: python3
 
     # create substructure referencing only the nitrogen of Methylamine
     n_frag = Chem.Fragment()
@@ -2331,7 +2331,7 @@ Example 3: Implicit hydrogen count of a positively charged nitrogen atom fragmen
 
 Example 4: Implicit hydrogen count of carbon in carbene
 
-.. code:: ipython3
+.. code:: python3
 
     carbene = Chem.BasicMolecule()
     
@@ -2365,7 +2365,7 @@ An overwrite flag argument is also supported by many other property calculation 
 computational efficiency by making sure calculations are carried out only once unless previous 
 results are not correct anymore and calculations therefore need to be redone.
 
-.. code:: ipython3
+.. code:: python3
 
     def printImplHCounts(molgraph):
         for atom in molgraph.atoms:
@@ -2432,7 +2432,7 @@ bonds.
 
 Example 1: Hybridization state of carbon in Methane
 
-.. code:: ipython3
+.. code:: python3
 
     hyb_state_str = {
         Chem.HybridizationState.UNKNOWN : 'n.a.',
@@ -2472,7 +2472,7 @@ flag (see section `Implicit Hydrogen Count Calculation`_ for more information) a
 
 Example 2: Hybridization of Alanine atoms
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.calcImplicitHydrogenCounts(mol, False)
     Chem.perceiveHybridizationStates(mol, False)
@@ -2511,7 +2511,7 @@ respectively. For the perception of atom/bond ring membership the `CDPL.Chem`_ p
 
 Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
-.. code:: ipython3
+.. code:: python3
 
     mch = Chem.parseSMILES('C1C(C)CCCC1')
     
@@ -2524,7 +2524,7 @@ Example: Perception of cyclic atoms and bonds in Methylcyclohexane
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.setRingFlags(mch, False)
     
@@ -2553,7 +2553,7 @@ The function `Chem.setRingFlags()`_ also sets the value of the `Chem.MolecularGr
 `Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that 
 specifies the subset of `Chem.Atom`_ and `Chem.Bond`_ instances involved in a molecular graph cycle:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.getCyclicSubstructure(mch)
 
@@ -2582,7 +2582,7 @@ argument. The perceived SSSR gets stored as value (of type `Chem.FragmentList`_)
 
 Example: Perception of the SSSR of Morphine
 
-.. code:: ipython3
+.. code:: python3
 
     morphine = Chem.parseSMILES('CN1CC[C@]23C4=C5C=CC(O)=C4O[C@H]2[C@@H](O)C=C[C@H]3[C@H]1C5')
     
@@ -2595,7 +2595,7 @@ Example: Perception of the SSSR of Morphine
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.perceiveSSSR(morphine, False)
     
@@ -2631,7 +2631,7 @@ Property dependencies:
 
 Example: Perception of aromatic atoms and bonds of LSD
 
-.. code:: ipython3
+.. code:: python3
 
     lsd = Chem.parseSMILES('CCN(CC)C(=O)[C@H]1CN([C@@H]2Cc3c[nH]c4c3c(ccc4)C2=C1)C')
     
@@ -2644,7 +2644,7 @@ Example: Perception of aromatic atoms and bonds of LSD
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.calcImplicitHydrogenCounts(lsd, False)
     Chem.perceiveSSSR(lsd, False)
@@ -2676,7 +2676,7 @@ The function `Chem.setAromaticityFlags()`_ also sets the value of the `Chem.Mole
 `Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE`_ which is a `Chem.Fragment`_ instance that specifies the 
 subset of `Chem.Atom`_ and `Chem.Bond`_ instances found to be part of an aromatic ring system:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.getAromaticSubstructure(lsd)
 
@@ -2704,7 +2704,7 @@ argument. The perceived components gets stored as value (of type `Chem.FragmentL
 
 Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
-.. code:: ipython3
+.. code:: python3
 
     nfx_ox = Chem.parseSMILES('C1=CC=C(C=C1)[C@H](CC[NH3+])OC2=CC=C(C=C2)C(F)(F)F.C(=O)(C(=O)O)[O-]')
     
@@ -2717,7 +2717,7 @@ Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.perceiveComponents(nfx_ox, False)
     
@@ -2736,7 +2736,7 @@ Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     #comps.getElement(0)
     # or
@@ -2749,7 +2749,7 @@ Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
 
 
-.. code:: ipython3
+.. code:: python3
 
     #comps.getElement(1)
     # or
@@ -2764,7 +2764,7 @@ Example: Percpetion of the components of (S)-Norfluoxetine Oxalate
 
 .. warning:: The attempt to access a `Chem.FragmentList`_ element by an index that is out of bounds will trigger an exception!
 
-.. code:: ipython3
+.. code:: python3
 
     # there is no 3rd component
     comps[2]
@@ -2818,7 +2818,7 @@ Further optional arguments allow to customize the SMILES output in several aspec
 
 Example 1:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.calcBasicProperties(mol, False) # calculate required properties (see above)
     
@@ -2835,7 +2835,7 @@ Example 1:
 
 Example 2:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.generateSMILES(mol, True) # second arg. True -> generate canonical SMILES
 
@@ -2850,7 +2850,7 @@ Example 2:
 
 Example 3:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.generateSMILES(mol, True, False) # third arg. False -> output also standard H-atoms
 
@@ -2874,7 +2874,7 @@ that are output as part of the generated auxiliary information (if enabled by th
 
 Example 1:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.generateINCHI(mol)
 
@@ -2889,7 +2889,7 @@ Example 1:
 
 Example 2:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.generateINCHI(mol, '/WarnOnEmptyStructure /NEWPSOFF', 0) # outputs InChI as above + auxiliary information
 
@@ -2906,7 +2906,7 @@ Example 2:
 
 Similarly, the InChI Key of a given `Chem.MolecularGraph`_ instance can be generated via the utility function `Chem.generateINCHIKey()`_:
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.generateINCHIKey(mol)
 
@@ -2936,7 +2936,7 @@ Molecular graph data writers for a specific format (Step 2) can be created in tw
 
 Example: Generating a string holding the MDL SDF record of a `Chem.MolecularGraph`_ instance
 
-.. code:: ipython3
+.. code:: python3
 
     ios = Base.StringIOStream()
     
@@ -3007,7 +3007,7 @@ As with string data output, several options exist:
 3. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.SDFMolecularGraphWriter`_ implementing the output of MDL SD-file data) that accepts an instance of class `Base.FileIOStream`_ as constructor argument.
 4. Direct instantiation of a format-specific subclass of `Chem.MolecularGraphWriterBase`_ (e.g. `Chem.FileSDFMolecularGraphWriter`_) that accepts a file path as constructor argument.
 
-.. code:: ipython3
+.. code:: python3
         
     # - Option 1 -
     writer = Chem.MolecularGraphWriter('/path/to/output/file.sdf')
@@ -3036,7 +3036,7 @@ at an indeterminate point in time).
 
 Example: SMILES output of two `Chem.Molecule`_ instances
 
-.. code:: ipython3
+.. code:: python3
 
     Chem.calcBasicProperties(mol_copy, False) # calc. required properties
     
