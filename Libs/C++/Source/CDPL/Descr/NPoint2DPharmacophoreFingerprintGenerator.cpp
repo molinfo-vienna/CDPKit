@@ -39,6 +39,8 @@ using namespace CDPL;
 constexpr Descr::NPoint2DPharmacophoreFingerprintGenerator::FeatureDistanceType
 Descr::NPoint2DPharmacophoreFingerprintGenerator::DEF_FEATURE_DISTANCE_TYPE;
 
+constexpr double Descr::NPoint2DPharmacophoreFingerprintGenerator::DEF_BIN_SIZE;
+
 
 Descr::NPoint2DPharmacophoreFingerprintGenerator::NPoint2DPharmacophoreFingerprintGenerator():
     ftrDistType(DEF_FEATURE_DISTANCE_TYPE)

@@ -31,6 +31,9 @@
 using namespace CDPL;
 
 
+constexpr double Descr::NPoint3DPharmacophoreFingerprintGenerator::DEF_BIN_SIZE;
+
+
 Descr::NPoint3DPharmacophoreFingerprintGenerator::NPoint3DPharmacophoreFingerprintGenerator()
 {
     setBinSize(DEF_BIN_SIZE);
