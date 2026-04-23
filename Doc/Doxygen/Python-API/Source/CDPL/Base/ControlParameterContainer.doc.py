@@ -256,17 +256,17 @@ class ControlParameterContainer(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param arg1 
+    # \param key 
     # \return 
     #
-    def __delitem__(self: LookupKey) -> bool: pass
+    def __delitem__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the membership test operation <tt>self in arg1</tt>.
-    # \param self The value to test for membership.
+    # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(self: LookupKey, key: bool) -> bool: pass
+    def __contains__(key: LookupKey) -> bool: pass
 
     ##
     # \brief 

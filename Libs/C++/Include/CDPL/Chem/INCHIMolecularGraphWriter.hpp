@@ -118,7 +118,7 @@ namespace CDPL
          *  <tr>
          *   <td>Chem::BondProperty::STEREO_2D_FLAG</td>
          *   <td>Specifies the 2D stereo bond type (see Chem::BondStereoFlag)</td>
-         *   <td>Only required if 2D or 3D atom coordinates are written</td></td>
+         *   <td>Only required if 2D or 3D atom coordinates are written</td>
          *  </tr>
          *  <tr>
          *   <td>Chem::BondProperty::STEREO_DESCRIPTOR</td>

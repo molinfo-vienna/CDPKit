@@ -52,8 +52,8 @@ namespace CDPL
          * <em>JME Molecular Editor</em> applet. The output data are written by means of a \c std::ostream object that
          * was provided to the \c %JMEReactionWriter constructor.
          *
-         * %Atom and bond attributes that get written for a component of the output reaction are defined by the following Chem::Atom,
-         * Chem::Bond and Chem::BondContainer properties:
+         * %Atom and bond attributes that get written for a component of the output reaction are defined by the following Chem::Atom and
+         * Chem::Bond properties:
          *
          * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
          *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
@@ -121,17 +121,6 @@ namespace CDPL
          *   <td>Specifies the 2D stereo bond type (see Chem::BondStereoFlag)</td>
          *   <td>Either stereo bonds are not supported by the \e JME format and are written as plain
          *       single bonds</td>
-         *  </tr>
-         * </table>
-         *
-         * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Chem::BondContainer Property</th> <th>Description</th> <th>Notes</th>
-         *  </tr>
-         *  <tr>
-         *   <td>Chem::BondContainerProperty::HEAVY_BOND_COUNT</td>
-         *   <td>Specifies the heavy bond count of the atoms</td>
-         *   <td>Only written if the atom is a query atom and a corresponding matching constraint has been specified</td>
          *  </tr>
          * </table>
          *

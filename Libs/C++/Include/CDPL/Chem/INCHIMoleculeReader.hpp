@@ -120,7 +120,7 @@ namespace CDPL
          *  <tr>
          *   <td>Chem::BondProperty::STEREO_2D_FLAG</td>
          *   <td>Specifies the 2D stereo bond type (see Chem::BondStereoFlag)</td>
-         *   <td>Only set if auxiliary information with 2D stereo information is available</td></td>
+         *   <td>Only set if auxiliary information with 2D stereo information is available</td>
          *  </tr>
          *  <tr>
          *   <td>Chem::BondProperty::STEREO_DESCRIPTOR</td>

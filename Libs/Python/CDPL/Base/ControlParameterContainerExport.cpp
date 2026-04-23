@@ -53,6 +53,11 @@ namespace
         return cntnr.getParameter(key, true);
     }
 
+    bool containsItem(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Base::LookupKey& key)
+    {
+        return cntnr.isParameterSet(key);
+    }
+
     boost::python::list getParameterKeys(CDPL::Base::ControlParameterContainer& cntnr)
     {
         using namespace boost;
@@ -163,7 +168,7 @@ void CDPLPythonBase::exportControlParameterContainer()
         .add_property("numParameters", &Base::ControlParameterContainer::getNumParameters)
         .def("__getitem__", &getItem, python::return_value_policy<python::copy_const_reference>(), (python::arg("self"), python::arg("key")))
         .def("__setitem__", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
-        .def("__delitem__", &Base::ControlParameterContainer::removeParameter, python::arg("self"))
-        .def("__contains__", &Base::ControlParameterContainer::isParameterSet, (python::arg("self"), python::arg("key")))
+        .def("__delitem__", &Base::ControlParameterContainer::removeParameter,  (python::arg("self"), python::arg("key")))
+        .def("__contains__", &containsItem, (python::arg("self"), python::arg("key")))
         .def("__len__", &Base::ControlParameterContainer::getNumParameters, python::arg("self"));
 }

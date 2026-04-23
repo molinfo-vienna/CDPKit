@@ -24,7 +24,7 @@
 # 
 # <tt>JMEReactionWriter</tt> implements the output of Chem.Reaction objects in the native I/O format used by the <em>JME Molecular Editor</em> applet. The output data are written by means of a <tt>std::ostream</tt> object that was provided to the <tt>JMEReactionWriter</tt> constructor.
 # 
-# Atom and bond attributes that get written for a component of the output reaction are defined by the following Chem.Atom, Chem.Bond and Chem.BondContainer properties:
+# Atom and bond attributes that get written for a component of the output reaction are defined by the following Chem.Atom and Chem.Bond properties:
 # 
 # <table>
 #  <tr><th>Chem.Atom Property</th><th>Description</th><th>Notes</th></tr>
@@ -43,11 +43,6 @@
 #  <tr><th>Chem.Bond Property</th><th>Description</th><th>Notes</th></tr>
 #  <tr><td>Chem.BondProperty.ORDER</td><td>Specifies the order of the bond</td><td>-</td></tr>
 #  <tr><td>Chem.BondProperty.STEREO_FLAG</td><td>Specifies the 2D stereo bond type (see Chem.BondStereoFlag)</td><td>Either stereo bonds are not supported by the <em>JME</em> format and are written as plain single bonds</td></tr>
-# </table>
-# 
-# <table>
-#  <tr><th>Chem.BondContainer Property</th><th>Description</th><th>Notes</th></tr>
-#  <tr><td>Chem.BondContainerProperty.HEAVY_BOND_COUNT</td><td>Specifies the heavy bond count of the atoms</td><td>Only written if the atom is a query atom and a corresponding matching constraint has been specified</td></tr>
 # </table>
 # 
 # Beside the editing of conventional chemical structures, the <em>JME</em> applet allows to some extent the specification of atom matching constraints for the definition of substructure search queries. If an atom of a component of the output reaction specifies any constraints by a Chem.MatchConstraintList data structure that has been assigned to the property Chem.AtomProperty.MATCH_CONSTRAINTS, an attempt is made to convert the contained Chem.MatchConstraint objects to equivalent <em>JME</em> query expression primitives.

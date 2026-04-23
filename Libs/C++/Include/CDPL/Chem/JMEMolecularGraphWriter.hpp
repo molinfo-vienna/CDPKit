@@ -52,8 +52,8 @@ namespace CDPL
          * <em>JME Molecular Editor</em> applet. The output data are written by means of a \c std::ostream object
          * that was provided to the \c %JMEMolecularGraphWriter constructor.
          *
-         * %Atom and bond attributes that get written for an output molecular graph are defined by the following Chem::Atom,
-         * Chem::Bond and Chem::BondContainer properties:
+         * %Atom and bond attributes that get written for an output molecular graph are defined by the following Chem::Atom and
+         * Chem::Bond properties:
          *
          * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
          *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
@@ -117,12 +117,6 @@ namespace CDPL
          *   <td>Specifies the 2D stereo bond type (see Chem::BondStereoFlag)</td>
          *   <td>Either stereo bonds are not supported by the \e JME format and are written as plain
          *       single bonds</td>
-         *  </tr>
-         * </table>
-         *
-         * <table width="95%" bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-         *   <th>Chem::BondContainer Property</th> <th>Description</th> <th>Notes</th>
          *  </tr>
          * </table>
          *
