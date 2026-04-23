@@ -37,6 +37,8 @@ def process():
         for line in in_lines:
             if line == '.. parsed-literal::\n' or line == '::\n':
                 out_lines.append('.. code-block:: text\n')
+            elif line == '.. code:: ipython3\n':
+                out_lines.append('.. code:: python3\n')
             else:
                 out_lines.append(line)
 
