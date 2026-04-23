@@ -785,7 +785,7 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
         setFormalCharge(*atom, 0);
 
     //if (currModelID < 2)
-        numCoordRecords++;
+    numCoordRecords++;
 }
 
 void Biomol::PDBDataReader::appendRecordData(PDBData::RecordType type, const std::string& data) const
