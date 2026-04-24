@@ -30,11 +30,11 @@
 
 #include "ClassExports.hpp"
 
-#ifdef _MSC_VER
+//#ifdef _MSC_VER
 
-template class __declspec(dllimport) CDPL::Base::DataReader<CDPL::Vis::Object3D>;
+//template class __declspec(dllimport) CDPL::Base::DataReader<CDPL::Vis::Object3D>;
 
-#endif // _MSC_VER
+//#endif // _MSC_VER
 
 
 void CDPLPythonVis::exportObject3DReader()
