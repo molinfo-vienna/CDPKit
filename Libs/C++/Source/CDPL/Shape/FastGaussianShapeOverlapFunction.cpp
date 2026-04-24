@@ -22,8 +22,10 @@
  */
 
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing" // fastexp causes annoying aliasing warnings!
+#ifndef _MSC_VER
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wstrict-aliasing" // fastexp causes annoying aliasing warnings!
+#endif // !_MSC_VER
 
 #include "StaticInit.hpp"
 
@@ -1945,4 +1947,6 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
     return overlap;
 }
 
-#pragma GCC diagnostic pop
+#ifndef _MSC_VER
+# pragma GCC diagnostic pop
+#endif // !_MSC_VER

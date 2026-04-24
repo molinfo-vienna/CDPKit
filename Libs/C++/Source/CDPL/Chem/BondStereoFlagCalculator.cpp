@@ -41,7 +41,9 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
-#pragma GCC diagnostic ignored "-Warray-bounds"
+#ifndef _MSC_VER
+# pragma GCC diagnostic ignored "-Warray-bounds"
+#endif // !_MSC_VER
 
 
 using namespace CDPL;

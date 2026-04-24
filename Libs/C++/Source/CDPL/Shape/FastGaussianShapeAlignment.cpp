@@ -22,8 +22,10 @@
  */
 
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing" // fastexp causes annoying aliasing warnings!
+#ifndef _MSC_VER
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wstrict-aliasing" // fastexp causes annoying aliasing warnings!
+#endif // !_MSC_VER
 
 #include "StaticInit.hpp"
 
@@ -1373,4 +1375,6 @@ bool Shape::FastGaussianShapeAlignment::getResultIndex(const ResultID& res_id, s
     return false;
 }
 
-#pragma GCC diagnostic pop
+#ifndef _MSC_VER
+# pragma GCC diagnostic pop
+#endif // !_MSC_VER
