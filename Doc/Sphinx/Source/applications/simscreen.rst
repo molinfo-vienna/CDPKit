@@ -182,8 +182,8 @@ Other options
 
   -n [ --max-hits ] arg
 
-    Maximum number of found hits at which the screen will terminate (overrides the --
-    best-hits option, default: 0 - no limit).
+    Maximum number of found hits at which the screening will terminate (overrides the
+    --best-hits option, default: 0 -> no limit).
 
   -x [ --cutoff ] arg
 

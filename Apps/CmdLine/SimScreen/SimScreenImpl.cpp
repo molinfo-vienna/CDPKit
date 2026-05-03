@@ -148,7 +148,7 @@ SimScreenImpl::SimScreenImpl():
     addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
               std::to_string(numBestHits) + ").",
               value<std::size_t>(&numBestHits));
-    addOption("max-hits,n", "Maximum number of found hits at which the screen will terminate (overrides the --best-hits option, default: 0 - no limit).",
+    addOption("max-hits,n", "Maximum number of found hits at which the screening will terminate (overrides the --best-hits option, default: 0 -> no limit).",
               value<std::size_t>(&maxNumHits));
     addOption("cutoff,x", "Similarity/distance cutoff value which determines whether an database molecule is considered as a hit (default: -1.0 -> no cutoff).",
               value<double>(&scoreCutoff));

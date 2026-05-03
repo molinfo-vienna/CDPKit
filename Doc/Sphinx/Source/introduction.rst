@@ -41,7 +41,7 @@ functionality easily from Python code.
             
 CDPKit seamlessly integrates with machine learning libraries like `scikit-learn <https://scikit-learn.org>`_, `PyTorch <https://pytorch.org>`_, 
 and `TensorFlow <https://www.tensorflow.org>`_. Utilizing CDPKit for tasks like molecular data I/O, feature extraction, descriptor calculations, and so on,
-greatly aids scientists that intend to build ML models for the prediction of physicochemical properties, biological activity, site of metabolism ,
+greatly aids scientists that intend to build ML models for the prediction of physicochemical properties, biological activity, site of metabolism,
 toxicity, and other attributes of potential drug candidates. An example of such an integration with ML methods is showcased in the 
 source code of the software described in :cite:t:`molecules26206185`.
 
