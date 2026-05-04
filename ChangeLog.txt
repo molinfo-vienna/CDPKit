@@ -1,5 +1,10 @@
 master:
 
+ - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO plus associated functions
+ - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE plus associated functions
+
+v1.3.0:
+
  - New Python cookbook script demonstrating molecule atom/bond order canonicalization
  - New Python cookbook script reporting information about detected feature matches between one or more input pharmacophores and a given reference pharmacophore
  - Constructor of class Pharm::PharmacophoreFitScore via a flag now allows to specify whether an on-the-fly performed 3D feature overlap

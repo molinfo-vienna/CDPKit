@@ -104,6 +104,33 @@ def setSubstructure(feature: Feature, substruct: Chem.Fragment) -> None: pass
 # \brief 
 # \param feature 
 #
+def clearEnvironmentSubstructure(feature: Feature) -> None: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def hasEnvironmentSubstructure(feature: Feature) -> bool: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def getEnvironmentSubstructure(feature: Feature) -> Chem.Fragment: pass
+
+##
+# \brief 
+# \param feature 
+# \param substruct 
+#
+def setEnvironmentSubstructure(feature: Feature, substruct: Chem.Fragment) -> None: pass
+
+##
+# \brief 
+# \param feature 
+#
 def clearDisabledFlag(feature: Feature) -> None: pass
 
 ##
@@ -234,6 +261,33 @@ def getEnvironmentResidueInfo(feature: Feature) -> str: pass
 # \param res_info 
 #
 def setEnvironmentResidueInfo(feature: Feature, res_info: str) -> None: pass
+
+##
+# \brief 
+# \param feature 
+#
+def clearEnvironmentResidueAtomInfo(feature: Feature) -> None: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def hasEnvironmentResidueAtomInfo(feature: Feature) -> bool: pass
+
+##
+# \brief 
+# \param feature 
+# \return 
+#
+def getEnvironmentResidueAtomInfo(feature: Feature) -> str: pass
+
+##
+# \brief 
+# \param feature 
+# \param res_atom_info 
+#
+def setEnvironmentResidueAtomInfo(feature: Feature, res_atom_info: str) -> None: pass
 
 ##
 # \brief 

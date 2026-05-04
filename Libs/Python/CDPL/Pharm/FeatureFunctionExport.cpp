@@ -85,6 +85,8 @@ namespace
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Hydrophobicity)
     MAKE_FEATURE_FUNC_WRAPPERS(const std::string&, EnvironmentResidueInfo)
+    MAKE_FEATURE_FUNC_WRAPPERS(const std::string&, EnvironmentResidueAtomInfo)
+    MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, EnvironmentSubstructure)
 }
 
 
@@ -104,4 +106,6 @@ void CDPLPythonPharm::exportFeatureFunctions()
     EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
     EXPORT_FEATURE_FUNCS(Hydrophobicity, hyd)
     EXPORT_FEATURE_FUNCS_COPY_REF(EnvironmentResidueInfo, res_info)
+    EXPORT_FEATURE_FUNCS_COPY_REF(EnvironmentResidueAtomInfo, res_atom_info)
+    EXPORT_FEATURE_FUNCS_COPY_REF_CW(EnvironmentSubstructure, substruct)
 }

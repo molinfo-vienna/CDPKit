@@ -116,6 +116,28 @@ namespace CDPL
         CDPL_PHARM_API void clearEnvironmentResidueInfo(Feature& feature);
 
         CDPL_PHARM_API bool hasEnvironmentResidueInfo(const Feature& feature);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_PHARM_API const std::string& getEnvironmentResidueAtomInfo(const Feature& feature);
+
+        CDPL_PHARM_API void setEnvironmentResidueAtomInfo(Feature& feature, const std::string& res_atom_info);
+
+        CDPL_PHARM_API void clearEnvironmentResidueAtomInfo(Feature& feature);
+
+        CDPL_PHARM_API bool hasEnvironmentResidueAtomInfo(const Feature& feature);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_PHARM_API const Chem::Fragment::SharedPointer& getEnvironmentSubstructure(const Feature& feature);
+
+        CDPL_PHARM_API void setEnvironmentSubstructure(Feature& feature, const Chem::Fragment::SharedPointer& substruct);
+
+        CDPL_PHARM_API void clearEnvironmentSubstructure(Feature& feature);
+
+        CDPL_PHARM_API bool hasEnvironmentSubstructure(const Feature& feature);
         
 
         CDPL_PHARM_API bool getDisabledFlag(const Feature& feature);

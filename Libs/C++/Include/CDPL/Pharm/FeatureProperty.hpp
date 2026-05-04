@@ -69,6 +69,16 @@ namespace CDPL
              * \since 1.3
              */
             extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_RESIDUE_INFO;
+
+            /**
+             * \since 1.3
+             */
+            extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_RESIDUE_ATOM_INFO;
+
+            /**
+             * \since 1.4
+             */
+            extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_SUBSTRUCTURE;
             
         } // namespace FeatureProperty
     } // namespace Pharm
