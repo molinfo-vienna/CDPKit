@@ -2,22 +2,22 @@
  <ContainerPharmacophores>
   <alignmentElement name="LS2" id="alignmentElement0" flagCode="111000000">
    <pharmacophore name="LS2" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
-    <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
-     <position x3="28.532583" y3="14.177302" z3="15.227080" tolerance="1.500000" />
-    </point>
-    <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="ILE_10_A, LEU_134_A, VAL_18_A">
-     <position x3="29.260784" y3="11.546776" z3="14.690523" tolerance="1.500000" />
-    </point>
-    <point name="H" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A, LEU_134_A">
+    <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0" envCompound="ILE_10_A, LEU_134_A">
      <position x3="25.614904" y3="10.068927" z3="9.236705" tolerance="1.500000" />
     </point>
-    <vector name="HBD" featureId="4" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
-     <origin x3="26.550000" y3="15.569000" z3="13.408000" tolerance="1.500000" />
-     <target x3="25.103000" y3="18.159000" z3="13.412000" tolerance="2.250000" />
-    </vector>
-    <vector name="HBD" featureId="5" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+    <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1" envCompound="LEU_134_A, PHE_80_A, VAL_18_A, VAL_64_A">
+     <position x3="28.532583" y3="14.177302" z3="15.227080" tolerance="1.500000" />
+    </point>
+    <point name="H" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2" envCompound="ILE_10_A, LEU_134_A, VAL_18_A">
+     <position x3="29.260784" y3="11.546776" z3="14.690523" tolerance="1.500000" />
+    </point>
+    <vector name="HBD" featureId="4" optional="false" disabled="false" weight="1.000000" id="feature3" envCompound="LEU_83_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
      <origin x3="26.190000" y3="12.220000" z3="10.624000" tolerance="1.500000" />
      <target x3="24.487000" y3="14.204000" z3="8.555000" tolerance="2.250000" />
+    </vector>
+    <vector name="HBD" featureId="5" optional="false" disabled="false" weight="1.000000" id="feature4" envCompound="GLU_81_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
+     <origin x3="26.550000" y3="15.569000" z3="13.408000" tolerance="1.500000" />
+     <target x3="25.103000" y3="18.159000" z3="13.412000" tolerance="2.250000" />
     </vector>
     <vector name="HBD" featureId="6" optional="false" disabled="false" weight="1.000000" id="feature5" envCompound="ASP_86_A" hasSyntheticProjectedPoint="false" pointsToLigand="false">
      <origin x3="27.428000" y3="6.577000" z3="6.750000" tolerance="1.500000" />
