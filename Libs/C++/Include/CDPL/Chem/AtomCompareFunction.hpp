@@ -43,7 +43,7 @@ namespace CDPL
         /**
          * \brief A generic wrapper class used to store a user-defined atom compare function.
          */
-        typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> AtomCompareFunction;
+        typedef std::function<bool(const Atom&, const Atom&)> AtomCompareFunction;
     } // namespace Chem
 } // namespace CDPL
 
