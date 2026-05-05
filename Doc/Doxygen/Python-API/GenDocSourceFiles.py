@@ -776,7 +776,7 @@ def getFuncOverloads(func_obj, func_name):
     for line in func_obj.__doc__.splitlines():
         line = line.strip()    
         
-        if re.match(func_name + '\(.*\) -> .* :', line):
+        if re.match(func_name + '\\(.*\\) -> .* :', line):
             arg_list, sep, ret_type = line.rpartition(' -> ')
             
             ret_type = ret_type.rstrip(':').rstrip()
