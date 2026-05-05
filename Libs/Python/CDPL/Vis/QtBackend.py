@@ -310,7 +310,7 @@ class QtRenderer2D(Vis.Renderer2D):
             point1 = points[i]
             point2 = points[i + 1]
             
-            self._qPainter.drawLine(point1[0], point1[1], point2[0], point2[1])
+            self._qPainter.drawLine(QtCore.QPointF(point1[0], point1[1]), QtCore.QPointF(point2[0], point2[1]))
     
     def drawPoint(self, x, y):
         "drawPoint(QtRenderer2D self, float x, float y) -> None :"
