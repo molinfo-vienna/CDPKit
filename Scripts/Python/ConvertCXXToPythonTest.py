@@ -83,7 +83,7 @@ def cxxToPythonCode():
         line = re.sub('^\s\*', '#', line)
         line = re.sub('Test\.cpp', 'Test.py', line)
         line = re.sub(';', '', line)
-        line = re.sub('BOOST_CHECK\(', 'self.assert_(', line)
+        line = re.sub('BOOST_CHECK\(', 'self.assertTrue(', line)
         line = re.sub('^//', '    #', line)
         line = re.sub('::', '.', line)
         line = re.sub('&&', 'and', line)

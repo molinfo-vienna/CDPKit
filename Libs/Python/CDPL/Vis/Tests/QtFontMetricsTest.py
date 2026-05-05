@@ -273,6 +273,6 @@ class TestCase(unittest.TestCase):
     
         #-----
       
-        self.assert_(image.save('QtFontMetricsTest.png', 'PNG'))
+        self.assertTrue(image.save('QtFontMetricsTest.png', 'PNG'))
 
         view.end()

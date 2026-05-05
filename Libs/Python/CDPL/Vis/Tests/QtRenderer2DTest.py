@@ -167,7 +167,7 @@ class TestCase(unittest.TestCase):
                     
         view1.end()
     
-        self.assert_(image1.save('QtRenderer2DTest_1.png', 'PNG'))
+        self.assertTrue(image1.save('QtRenderer2DTest_1.png', 'PNG'))
     
         #-----
     
@@ -218,7 +218,7 @@ class TestCase(unittest.TestCase):
     
         view2.end()
     
-        self.assert_(image2.save('QtRenderer2DTest_2.png', 'PNG'))
+        self.assertTrue(image2.save('QtRenderer2DTest_2.png', 'PNG'))
     
         #-----
     
@@ -260,7 +260,7 @@ class TestCase(unittest.TestCase):
                 
         view3.end()
     
-        self.assert_(image3.save('QtRenderer2DTest_3.png', 'PNG'))
+        self.assertTrue(image3.save('QtRenderer2DTest_3.png', 'PNG'))
     
         #-----
     
@@ -289,7 +289,7 @@ class TestCase(unittest.TestCase):
                     
         view4.end()
     
-        self.assert_(image4.save('QtRenderer2DTest_4.png', 'PNG'))
+        self.assertTrue(image4.save('QtRenderer2DTest_4.png', 'PNG'))
     
         #-----
     
@@ -311,7 +311,7 @@ class TestCase(unittest.TestCase):
                 
         view5.end()
     
-        self.assert_(image5.save('QtRenderer2DTest_5.png', 'PNG'))
+        self.assertTrue(image5.save('QtRenderer2DTest_5.png', 'PNG'))
     
         #-----
     
@@ -367,7 +367,7 @@ class TestCase(unittest.TestCase):
     
         view6.end()
     
-        self.assert_(image6.save('QtRenderer2DTest_6.png', 'PNG'))
+        self.assertTrue(image6.save('QtRenderer2DTest_6.png', 'PNG'))
     
         #-----
     
@@ -421,7 +421,7 @@ class TestCase(unittest.TestCase):
     
         view7.end()
     
-        self.assert_(image7.save('QtRenderer2DTest_7.png', 'PNG'))
+        self.assertTrue(image7.save('QtRenderer2DTest_7.png', 'PNG'))
     
         #-----
     
@@ -449,7 +449,7 @@ class TestCase(unittest.TestCase):
                     
         view8.end()
     
-        self.assert_(image8.save('QtRenderer2DTest_8.png', 'PNG'))
+        self.assertTrue(image8.save('QtRenderer2DTest_8.png', 'PNG'))
     
         #-----
     
@@ -488,7 +488,7 @@ class TestCase(unittest.TestCase):
 
         view9.end()
                     
-        self.assert_(image9.save('QtRenderer2DTest_9.png', 'PNG'))
+        self.assertTrue(image9.save('QtRenderer2DTest_9.png', 'PNG'))
     
         #-----
     
@@ -532,4 +532,4 @@ class TestCase(unittest.TestCase):
 
         view10.end()
 
-        self.assert_(image10.save('QtRenderer2DTest_10.png', 'PNG'))
+        self.assertTrue(image10.save('QtRenderer2DTest_10.png', 'PNG'))

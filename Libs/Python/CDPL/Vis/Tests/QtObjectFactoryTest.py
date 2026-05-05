@@ -50,24 +50,24 @@ class TestCase(unittest.TestCase):
         self.compareColors(lhs.color(), rhs.color())
     
         self.assertAlmostEqual(lhs.widthF(), rhs.widthF(), 2)
-        self.assert_(lhs.capStyle() == rhs.capStyle())
-        self.assert_(lhs.joinStyle() == rhs.joinStyle())
-        self.assert_(lhs.style() == rhs.style())
+        self.assertTrue(lhs.capStyle() == rhs.capStyle())
+        self.assertTrue(lhs.joinStyle() == rhs.joinStyle())
+        self.assertTrue(lhs.style() == rhs.style())
     
     def compareBrushes(self, lhs, rhs):
         self.compareColors(lhs.color(), rhs.color())
     
-        self.assert_(lhs.style() == rhs.style())
+        self.assertTrue(lhs.style() == rhs.style())
     
     def compareFonts(self, lhs, rhs):
-        self.assert_(lhs.family() == rhs.family())
-        self.assert_(lhs.pointSizeF() == rhs.pointSizeF())
-        self.assert_(lhs.bold() == rhs.bold())
-        self.assert_(lhs.italic() == rhs.italic())
-        self.assert_(lhs.underline() == rhs.underline())
-        self.assert_(lhs.overline() == rhs.overline())
-        self.assert_(lhs.strikeOut() == rhs.strikeOut())
-        self.assert_(lhs.fixedPitch() == rhs.fixedPitch())
+        self.assertTrue(lhs.family() == rhs.family())
+        self.assertTrue(lhs.pointSizeF() == rhs.pointSizeF())
+        self.assertTrue(lhs.bold() == rhs.bold())
+        self.assertTrue(lhs.italic() == rhs.italic())
+        self.assertTrue(lhs.underline() == rhs.underline())
+        self.assertTrue(lhs.overline() == rhs.overline())
+        self.assertTrue(lhs.strikeOut() == rhs.strikeOut())
+        self.assertTrue(lhs.fixedPitch() == rhs.fixedPitch())
     
     def runTest(self):
         """Testing QtObjectFactory"""
