@@ -47,6 +47,64 @@ namespace
 
     typedef std::set<std::string> StringSet;
 
+    bool cmpFeatures(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2)
+    {
+        auto type1 = getType(ftr1);
+        auto type2 = getType(ftr2);
+
+        if (type1 < type2)
+            return true;
+
+        if (type1 > type2)
+            return false;
+
+        int has_pos1 = has3DCoordinates(ftr1);
+        int has_pos2 = has3DCoordinates(ftr2);
+
+        if (has_pos1 < has_pos2)
+            return true;
+
+        if (has_pos1 > has_pos2)
+            return false;
+
+        if (has_pos1 && has_pos2) {
+            auto& pos1 = get3DCoordinates(ftr1);
+            auto& pos2 = get3DCoordinates(ftr2);
+
+            for (std::size_t i = 0; i < 3; i++) {
+                if (pos1[i] < pos2[i])
+                    return true;
+
+                if (pos1[i] > pos2[i])
+                    return false;
+            }
+        }
+
+        int has_orient1 = hasOrientation(ftr1);
+        int has_orient2 = hasOrientation(ftr2);
+
+        if (has_orient1 < has_orient2)
+            return true;
+
+        if (has_orient1 > has_orient2)
+            return false;
+
+        if (has_orient1 && has_orient2) {
+            auto& orient1 = getOrientation(ftr1);
+            auto& orient2 = getOrientation(ftr2);
+
+            for (std::size_t i = 0; i < 3; i++) {
+                if (orient1[i] < orient2[i])
+                    return true;
+
+                if (orient1[i] > orient2[i])
+                    return false;
+            }
+        }
+
+        return false;
+    }
+    
     void stringSetToStr(const StringSet& str_set, std::string& out_str)
     {
         out_str.clear();
@@ -198,4 +256,6 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
         setEnvironmentSubstructure(new_ftr, env_substr);
         setEnvResidueAndAtomInfoProps(new_ftr);
     }
+
+    pharm.orderFeatures(&cmpFeatures);
 }
