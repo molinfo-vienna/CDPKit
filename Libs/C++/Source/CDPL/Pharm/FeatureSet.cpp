@@ -184,6 +184,17 @@ void Pharm::FeatureSet::clear()
     featureIndices.clear();
 }
 
+void Pharm::FeatureSet::orderFeatures(const FeatureCompareFunction& func)
+{
+    std::sort(features.begin(), features.end(), 
+              [&func](const Feature* ftr1, const Feature* ftr2) -> bool {
+                  return func(*ftr1, *ftr2);
+              });
+
+    for (std::size_t i = 0, num_ftrs = features.size(); i < num_ftrs; i++)
+        featureIndices[features[i]] = i;
+}
+
 Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureSet& ftr_set)
 {
     if (this == &ftr_set)

@@ -108,6 +108,7 @@
 #include "CDPL/Pharm/FeatureSetFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/UtilityFunctions.hpp"
+#include "CDPL/Pharm/FeatureCompareFunction.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 #include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"

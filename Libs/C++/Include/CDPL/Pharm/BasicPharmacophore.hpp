@@ -197,6 +197,8 @@ namespace CDPL
 
             void remove(const FeatureContainer& cntnr);
 
+            void orderFeatures(const FeatureCompareFunction& func);
+
           private:
             template <typename T>
             void doCopy(const T& pharm);

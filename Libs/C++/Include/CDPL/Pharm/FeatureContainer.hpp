@@ -32,6 +32,7 @@
 #include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/FeatureCompareFunction.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
@@ -160,6 +161,12 @@ namespace CDPL
              * \return A mutable iterator pointing to the end of the stored Pharm::Feature objects.
              */
             FeatureIterator end();
+
+            /**
+             * \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
+             * \param func The feature comparison function implementing the applied ordering criteria.
+             */
+            virtual void orderFeatures(const FeatureCompareFunction& func) = 0;
 
             virtual std::size_t getNumEntities() const;
 

@@ -30,6 +30,11 @@
 
 
 #define FEATURECONTAINER_IMPL()                                                                         \
+    void orderFeatures(const CDPL::Pharm::FeatureCompareFunction& func)                                 \
+    {                                                                                                   \
+        this->get_override("orderFeatures")(boost::ref(func));                                          \
+    }                                                                                                   \
+                                                                                                        \
     std::size_t getNumFeatures() const                                                                  \
     {                                                                                                   \
         return this->get_override("getNumFeatures")();                                                  \
@@ -122,6 +127,7 @@ namespace CDPLPythonPharm
                 .def("containsFeature", python::pure_virtual(&this->containsFeature), (python::arg("self"), python::arg("ftr")))
                 .def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("ftr")))
                 .def("getNumFeatures", python::pure_virtual(&Pharm::FeatureContainer::getNumFeatures), python::arg("self"))
+                .def("orderFeatures", python::pure_virtual(&Pharm::FeatureContainer::orderFeatures), (python::arg("self"), python::arg("func")))
                 .def("getEntity", static_cast<Chem::Entity3D& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getEntity),
                      &Wrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
                      python::return_internal_reference<1>())

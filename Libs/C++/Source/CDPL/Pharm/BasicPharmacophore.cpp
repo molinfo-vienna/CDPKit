@@ -291,6 +291,16 @@ void Pharm::BasicPharmacophore::remove(const FeatureContainer& cntnr)
     }
 }
 
+void Pharm::BasicPharmacophore::orderFeatures(const FeatureCompareFunction& func)
+{
+    std::sort(features.begin(), features.end(), 
+              [&func](const FeaturePointer& ftr1, const FeaturePointer& ftr2) -> bool {
+                  return func(*ftr1, *ftr2);
+              });
+
+    renumberFeatures(0);
+}
+
 template <typename T>
 void Pharm::BasicPharmacophore::doAppend(const T& pharm)
 {   

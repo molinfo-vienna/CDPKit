@@ -190,6 +190,12 @@ namespace CDPL
             void clear();
 
             /**
+             * \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
+             * \param func The feature comparison function implementing the applied ordering criteria.
+             */
+            void orderFeatures(const FeatureCompareFunction& func);
+            
+            /**
              * \brief Replaces the current set of features and properties by the features and properties
              *        of the feature set \a ftr_set.
              * \param ftr_set The feature set to copy.
