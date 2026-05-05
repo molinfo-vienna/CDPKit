@@ -1,5 +1,8 @@
 master:
 
+ - Fo each output interaction feature the function Pharm::generateInteractionPharmacophore() now sets properties
+   providing information about interacting environment atoms (property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO) and
+   and the interacting environment substructure (property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE) 
  - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO plus associated functions
  - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE plus associated functions
 
