@@ -561,7 +561,7 @@ A third option is to call the method `clone()`_ of the `Chem.MolecularGraph`_ in
 
 
 It is also possible to concatenate molecular structures either by calling the method `append()`_ or by using 
-the `inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
+the `inplace addition operator <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a83ddd4db763aede8ec3e2759609ff862>`__ ``+=``:
 
 .. code:: python3
 
@@ -778,7 +778,7 @@ Removing multiple Atoms and Bonds
 Multiple atoms and bonds can be removed at once via the help of a `Chem.Fragment`_ instance that specifies the 
 atoms and bonds to remove. After adding atoms and bonds to the Chem.Fragment`_ instance their removal is initiated 
 either by calling the method `remove()`_ with the fragment object as argument or by 
-`inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ 
+`inplace subtraction <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#abe20257ca62b55aa345276de4393887a>`__ 
 (``-=``) of the fragment object:
 
 .. code:: python3
@@ -826,7 +826,7 @@ Testing Atom and Bond Ownership
 
 Whether a particular `Chem.Atom`_ instance belongs to a given `Chem.Molecule`_ instance can be checked either 
 by calling the method `containsAtom()`_ (`Chem.AtomContainer`_ interface) or by the 
-`membership test operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ac9e33e6bbbc60173232b8a6927b3bf25>`__ ``ìn`` as follows:
+`membership test operator <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ac9e33e6bbbc60173232b8a6927b3bf25>`__ ``ìn`` as follows:
 
 .. code:: python3
 
@@ -1064,8 +1064,8 @@ instance:
 
 
 Like class `Chem.MolecularGraph`_, `Chem.Bond`_ provides the property `atoms 
-<https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ and the method 
-`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ 
+<../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ and the method 
+`getAtoms() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ad028eb1083a491b60a5060f769673743>`__ 
 which both give access to the atom pair sequence:
 
 .. code:: python3
@@ -1250,11 +1250,11 @@ Example:
 
 
 Additionally, `Chem.Atom`_ provides the method 
-`getAtoms() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#ad315d5b7c1755ffb65ddda9d9fe3819d>`__ 
-and the property `atoms <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html>`__ for 
+`getAtoms() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#ad315d5b7c1755ffb65ddda9d9fe3819d>`__ 
+and the property `atoms <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html>`__ for 
 accessing the list of bonded `Chem.Atom`_ instances as well as the method 
-`getBonds() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a4171f816134f0dcd7762a1648d8518ab>`__ 
-and the property `bonds <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ for 
+`getBonds() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a4171f816134f0dcd7762a1648d8518ab>`__ 
+and the property `bonds <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html>`__ for 
 corresponding `Chem.Bond`_ instance access.
 
 The above code changed to use the mentioned properties:
@@ -1476,8 +1476,8 @@ Adding single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For adding individual `Chem.Atom`_ and `Chem.Bond`_ instances class `Chem.Fragment`_ provides the methods 
-`addAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#afcb879ed6470ef02b6b4bb2c6c8070e8>`__ and 
-`addBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, 
+`addAtom() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#afcb879ed6470ef02b6b4bb2c6c8070e8>`__ and 
+`addBond() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a82b3b0457cfe048ea918b053b9fa37d4>`__, 
 respectively. 
 For molecular graph consistency reasons, adding a `Chem.Bond`_ instance also adds the two 
 `Chem.Atom`_ instances referenced by the bond (if not added already). Furthermore, pointers to `Chem.Atom`_ and 
@@ -1545,7 +1545,7 @@ Adding multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **replaced** by the method 
-`assign() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ 
+`assign() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a870930ae0a11c4614cef10e2d77b4305>`__ 
 which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as argument:
 
 .. code:: python3
@@ -1562,7 +1562,7 @@ which accepts either a `Chem.Fragment`_ or a `Chem.MolecularGraph`_ instance as 
 
 
 The current lists of `Chem.Atom`_ and `Chem.Bond`_ instances can be **extended** by using the 
-`inplace addition operator <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ 
+`inplace addition operator <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a4402deccbaf9c04fee0c40bb2714f4a2>`__ 
 ``+=`` with a `Chem.MolecularGraph`_ instance specifying the atoms and bond to add:
 
 .. code:: python3
@@ -1630,8 +1630,8 @@ Removing single Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Single atoms and bonds can be removed by calling the methods 
-`removeAtom() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ 
-and `removeBond() <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, 
+`removeAtom() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a2efe66d31aea184246191827019c164b>`__ 
+and `removeBond() <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ab5c1087e8ffa547824b8dbe787f5797c>`__, 
 respectively. The methods expect the `Chem.Atom`_/`Chem.Bond`_ instance to remove or the zero-based 
 index as argument. Valid atom/bond indices are in the range [0, `getNumAtoms()`_)/[0, `getNumBonds()`_). 
 
@@ -1743,7 +1743,7 @@ Removing multiple Atoms and Bonds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Multiple `Chem.Atom`_ and `Chem.Bond`_ instances can be removed at once via 
-`inplace subtraction <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ 
+`inplace subtraction <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#ad14ca8f184120fbf87435b06dbd5a060>`__ 
 (``-=``) of a `Chem.MolecularGraph`_ instance:
 
 .. code:: python3
@@ -2162,27 +2162,27 @@ testing (see section `Dynamic Properties`_ for further information).
      - *int*
      - ``0``  
    * - Stereo configuration descriptor
-     - `STEREO_DESCRIPTOR <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
-     - `Chem.setStereoDescriptor() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa7e63e7ea977a1b65fa995304f4b64ca>`__, 
-       `Chem.getStereoDescriptor() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a02bc3217d26fa95f78a1f098baded39d>`__, 
-       `Chem.hasStereoDescriptor() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a87854da497658af179b2361ce0a73614>`__,
-       `Chem.clearStereoDescriptor() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a848ac48b3bf5b0635f70e5a583f04997>`__
+     - `STEREO_DESCRIPTOR <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
+     - `Chem.setStereoDescriptor() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa7e63e7ea977a1b65fa995304f4b64ca>`__, 
+       `Chem.getStereoDescriptor() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a02bc3217d26fa95f78a1f098baded39d>`__, 
+       `Chem.hasStereoDescriptor() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a87854da497658af179b2361ce0a73614>`__,
+       `Chem.clearStereoDescriptor() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a848ac48b3bf5b0635f70e5a583f04997>`__
      - `Chem.StereoDescriptor`_
      - ``Chem.StereoDescriptor(Chem.BondConfiguration.UNDEF)``
    * - Ring system membership predicate
-     - `RING_FLAG <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
-     - `Chem.setRingFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a838bd87ffdcaed20646f0a08a54c1f11>`__, 
-       `Chem.getRingFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6fa775d73f81d22066fe79b514fc5151>`__, 
-       `Chem.hasRingFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb11d18f5f4bb06fb7c84f83096ff376>`__, 
-       `Chem.clearRingFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3d561cd635d20bbf45cc9ebba8dc2ae4>`__
+     - `RING_FLAG <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
+     - `Chem.setRingFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a838bd87ffdcaed20646f0a08a54c1f11>`__, 
+       `Chem.getRingFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6fa775d73f81d22066fe79b514fc5151>`__, 
+       `Chem.hasRingFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb11d18f5f4bb06fb7c84f83096ff376>`__, 
+       `Chem.clearRingFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3d561cd635d20bbf45cc9ebba8dc2ae4>`__
      - *bool*
      - \-
    * - Aromatic ring system membership predicate
-     - `AROMATICITY_FLAG <https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
-     - `Chem.setAromaticityFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a058fe12abc5a52d491ee94bb67316315>`__, 
-       `Chem.getAromaticityFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4e9048285f8c202ebdf77a86e3c972fe>`__,
-       `Chem.hasAromaticityFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a04bc22c5d758a93cd945251e9f0778fa>`__, 
-       `Chem.clearAromaticityFlag() <https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a149c10aaa090f009531c53222da2180c>`__
+     - `AROMATICITY_FLAG <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html>`__
+     - `Chem.setAromaticityFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a058fe12abc5a52d491ee94bb67316315>`__, 
+       `Chem.getAromaticityFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4e9048285f8c202ebdf77a86e3c972fe>`__,
+       `Chem.hasAromaticityFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a04bc22c5d758a93cd945251e9f0778fa>`__, 
+       `Chem.clearAromaticityFlag() <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a149c10aaa090f009531c53222da2180c>`__
      - *bool*
      - \-
    * - Stereo bond type in skeletal formulas
@@ -3063,553 +3063,553 @@ Example: SMILES output of two `Chem.Molecule`_ instances
 
 .. _\_\_dict\_\_: https://docs.python.org/3/reference/datamodel.html#object.__dict\_\_
 
-.. _Installation: https://cdpkit.org/installation.html
+.. _Installation: ../installation.html
 
-.. _CDPL.Base: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Base.html
+.. _CDPL.Base: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Base.html
 
-.. _CDPL.Util: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Util.html
+.. _CDPL.Util: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Util.html
 
-.. _CDPL.Math: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Math.html
+.. _CDPL.Math: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Math.html
 
-.. _CDPL.Chem: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html
+.. _CDPL.Chem: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html
 
-.. _CDPL.MolProp: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1MolProp.html
+.. _CDPL.MolProp: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1MolProp.html
 
-.. _CDPL.Biomol: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Biomol.html
+.. _CDPL.Biomol: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Biomol.html
 
-.. _CDPL.Descr: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Descr.html
+.. _CDPL.Descr: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Descr.html
 
-.. _CDPL.Pharm: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Pharm.html
+.. _CDPL.Pharm: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Pharm.html
 
-.. _CDPL.Shape: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Shape.html
+.. _CDPL.Shape: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Shape.html
 
-.. _CDPL.ForceField: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ForceField.html
+.. _CDPL.ForceField: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ForceField.html
 
-.. _CDPL.ConfGen: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ConfGen.html
+.. _CDPL.ConfGen: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ConfGen.html
 
-.. _CDPL.Grid: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Grid.html
+.. _CDPL.Grid: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Grid.html
 
-.. _CDPL.GRAIL: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1GRAIL.html
+.. _CDPL.GRAIL: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1GRAIL.html
 
-.. _CDPL.Vis: https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html
+.. _CDPL.Vis: ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Vis.html
 
-.. _CDPL.Base.IStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IStream.html
+.. _CDPL.Base.IStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IStream.html
 
-.. _CDPL.Base.OStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1OStream.html
+.. _CDPL.Base.OStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1OStream.html
 
-.. _CDPL.Base.IOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IOStream.html
+.. _CDPL.Base.IOStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1IOStream.html
 
-.. _CDPL.Base.StringIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
+.. _CDPL.Base.StringIOStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
 
-.. _Base.StringIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
+.. _Base.StringIOStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1StringIOStream.html
 
-.. _CDPL.Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
+.. _CDPL.Base.FileIOStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
-.. _Base.FileIOStream: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
+.. _Base.FileIOStream: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1FileIOStream.html
 
-.. _CDPL.Base.PropertyContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1PropertyContainer.html
+.. _CDPL.Base.PropertyContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1PropertyContainer.html
 
-.. _CDPL.Base.ControlParameterContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html
+.. _CDPL.Base.ControlParameterContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html
 
-.. _CDPL.Base.LookupKey: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1LookupKey.html
+.. _CDPL.Base.LookupKey: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1LookupKey.html
 
-.. _CDPL.Base.Any: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1Any.html
+.. _CDPL.Base.Any: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1Any.html
 
-.. _CDPL.Base.DataIOBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataIOBase.html
+.. _CDPL.Base.DataIOBase: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataIOBase.html
 
-.. _CDPL.Base.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataFormat.html
+.. _CDPL.Base.DataFormat: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1DataFormat.html
 
-.. _CDPL.Chem.ControlParameter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
+.. _CDPL.Chem.ControlParameter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameter.html
 
-.. _CDPL.Chem.ControlParameterDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameterDefault.html
+.. _CDPL.Chem.ControlParameterDefault: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ControlParameterDefault.html
 
-.. _Chem.Entity3DProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
+.. _Chem.Entity3DProperty: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
 
-.. _CDPL.Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _CDPL.Chem.AtomProperty: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _CDPL.Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _CDPL.Chem.BondProperty.ORDER: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.BondProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _Chem.BondProperty: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _CDPL.Chem.BondPropertyDefault: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondPropertyDefault.html
+.. _CDPL.Chem.BondPropertyDefault: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondPropertyDefault.html
 
-.. _Chem.MolecularGraphProperty: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _Chem.MolecularGraphProperty: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _CDPL.Chem.getOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
+.. _CDPL.Chem.getOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
 
-.. _CDPL.Chem.setOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
+.. _CDPL.Chem.setOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
 
-.. _CDPL.Chem.hasOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad021960310274a588d47cb4f2d25098c
+.. _CDPL.Chem.hasOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad021960310274a588d47cb4f2d25098c
 
-.. _CDPL.Chem.clearOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aedc63dddcd7838a82e1327dec7ca5504
+.. _CDPL.Chem.clearOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aedc63dddcd7838a82e1327dec7ca5504
 
-.. _CDPL.Chem.Entity3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3D.html
+.. _CDPL.Chem.Entity3D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3D.html
 
-.. _Chem.Entity3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3D.html
+.. _Chem.Entity3D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3D.html
 
-.. _CDPL.Chem.Entity3DContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DContainer.html
+.. _CDPL.Chem.Entity3DContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DContainer.html
 
-.. _CDPL.Chem.Atom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
+.. _CDPL.Chem.Atom: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
 
-.. _Chem.Atom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
+.. _Chem.Atom: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html
 
-.. _CDPL.Chem.BasicAtom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
+.. _CDPL.Chem.BasicAtom: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
 
-.. _Chem.BasicAtom: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
+.. _Chem.BasicAtom: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicAtom.html
 
-.. _CDPL.Chem.Bond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+.. _CDPL.Chem.Bond: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
-.. _Chem.Bond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+.. _Chem.Bond: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
-.. _CDPL.Chem.BasicBond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html
+.. _CDPL.Chem.BasicBond: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html
 
-.. _Chem.BasicBond: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html
+.. _Chem.BasicBond: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicBond.html
 
-.. _CDPL.Chem.AtomContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
+.. _CDPL.Chem.AtomContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
 
-.. _Chem.AtomContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
+.. _Chem.AtomContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
 
-.. _CDPL.Chem.BondContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
+.. _CDPL.Chem.BondContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
 
-.. _Chem.BondContainer: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
+.. _Chem.BondContainer: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
 
-.. _CDPL.Chem.MolecularGraph: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+.. _CDPL.Chem.MolecularGraph: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
 
-.. _Chem.MolecularGraph: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+.. _Chem.MolecularGraph: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
 
-.. _CDPL.Chem.Molecule: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
+.. _CDPL.Chem.Molecule: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
 
-.. _Chem.Molecule: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
+.. _Chem.Molecule: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
 
-.. _Molecule: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
+.. _Molecule: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html
 
-.. _CDPL.Chem.BasicMolecule: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html
+.. _CDPL.Chem.BasicMolecule: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html
 
-.. _Chem.BasicMolecule: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html
+.. _Chem.BasicMolecule: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BasicMolecule.html
 
-.. _CDPL.Chem.Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
+.. _CDPL.Chem.Fragment: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
 
-.. _Chem.Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
+.. _Chem.Fragment: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
 
-.. _Fragment: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
+.. _Fragment: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html
 
-.. _CDPL.Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
+.. _CDPL.Chem.MoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
 
-.. _Chem.MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
+.. _Chem.MoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html
 
-.. _CDPL.Chem.MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
+.. _CDPL.Chem.MolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
 
-.. _Chem.MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
+.. _Chem.MolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html
 
-.. _Chem.MOL2MoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html
+.. _Chem.MOL2MoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MoleculeReader.html
 
-.. _CDPL.Chem.SDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
+.. _CDPL.Chem.SDFMoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
 
-.. _Chem.SDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
+.. _Chem.SDFMoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeReader.html
 
-.. _Chem.FileSDFMoleculeReader: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html
+.. _Chem.FileSDFMoleculeReader: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html
 
-.. _CDPL.Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+.. _CDPL.Chem.MoleculeReaderBase: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
-.. _Chem.MoleculeReaderBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+.. _Chem.MoleculeReaderBase: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
-.. _CDPL.Chem.MolecularGraphWriterBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
+.. _CDPL.Chem.MolecularGraphWriterBase: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
 
-.. _Chem.MolecularGraphWriterBase: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
+.. _Chem.MolecularGraphWriterBase: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html
 
-.. _CDPL.Chem.SDFMolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
+.. _CDPL.Chem.SDFMolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
 
-.. _Chem.SDFMolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
+.. _Chem.SDFMolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMolecularGraphWriter.html
 
-.. _Chem.FileSDFMolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMolecularGraphWriter.html
+.. _Chem.FileSDFMolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMolecularGraphWriter.html
 
-.. _Chem.MOL2MolecularGraphWriter: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MolecularGraphWriter.html
+.. _Chem.MOL2MolecularGraphWriter: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MOL2MolecularGraphWriter.html
 
-.. _CDPL.Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
+.. _CDPL.Chem.DataFormat: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
-.. _Chem.DataFormat: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
+.. _Chem.DataFormat: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1DataFormat.html
 
-.. _CDPL.Chem.SDFMoleculeInputHandler: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeInputHandler.html
+.. _CDPL.Chem.SDFMoleculeInputHandler: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SDFMoleculeInputHandler.html
 
-.. _CDPL.Chem.SMILESMolecularGraphOutputHandler: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SMILESMolecularGraphOutputHandler.html
+.. _CDPL.Chem.SMILESMolecularGraphOutputHandler: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SMILESMolecularGraphOutputHandler.html
 
-.. _CDPL.Chem.MoleculeIOManager: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeIOManager.html
+.. _CDPL.Chem.MoleculeIOManager: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeIOManager.html
 
-.. _numAtoms: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
+.. _numAtoms: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html
 
-.. _getNumAtoms(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#aa18ef7240d27820c882998d8c8dbdfd7
+.. _getNumAtoms(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#aa18ef7240d27820c882998d8c8dbdfd7
 
-.. _numBonds: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
+.. _numBonds: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html
 
-.. _getNumBonds(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#ae0aa42f2445494d5e0bf3e3019545236
+.. _getNumBonds(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#ae0aa42f2445494d5e0bf3e3019545236
 
-.. _addAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ab998b55e7f56b00f47e3acbfa4511f2e
+.. _addAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ab998b55e7f56b00f47e3acbfa4511f2e
 
-.. _addBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#acd42f15d874185b4eea2cf497a509ea6
+.. _addBond(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#acd42f15d874185b4eea2cf497a509ea6
 
-.. _getAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ae4dc0c96b4675cdd0726a6a0a55c681f
+.. _getAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#ae4dc0c96b4675cdd0726a6a0a55c681f
 
-.. _getBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aad68f03787b42d08b22bfc820e5016a6
+.. _getBond(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aad68f03787b42d08b22bfc820e5016a6
 
-.. _getAtoms(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a19ccf5296f5354f6d9187cfa6d691277
+.. _getAtoms(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a19ccf5296f5354f6d9187cfa6d691277
 
-.. _getBonds(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a4a2419ae3fc47e3b71853c679df1eb06
+.. _getBonds(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a4a2419ae3fc47e3b71853c679df1eb06
 
-.. _atoms: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+.. _atoms: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
 
-.. _bonds: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
+.. _bonds: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html
 
-.. _assign(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#aeb88efb7a7e545f1255dd3525335ec9d
+.. _assign(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#aeb88efb7a7e545f1255dd3525335ec9d
 
-.. _copy(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a3a66552396e11b9f1661aaf2cb735c0f
+.. _copy(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a3a66552396e11b9f1661aaf2cb735c0f
 
-.. _clone(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a3b93772b99b46746a36302794f42cb6f
+.. _clone(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraph.html#a3b93772b99b46746a36302794f42cb6f
 
-.. _append(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a8adeff4dfaf59e1ae10d4ac70c8e1e95
+.. _append(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a8adeff4dfaf59e1ae10d4ac70c8e1e95
 
-.. _clear(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a1e86b5a4d16e62b1e59fad00b4addf4c
+.. _clear(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a1e86b5a4d16e62b1e59fad00b4addf4c
 
-.. _removeAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ac08a7c0881d235387268a219c97bf651
+.. _removeAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#ac08a7c0881d235387268a219c97bf651
 
-.. _removeBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a633c5d5776b547c5b0103dfc6fab9421
+.. _removeBond(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a633c5d5776b547c5b0103dfc6fab9421
 
-.. _remove(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a260a01ae4366901b071043f8617be64a
+.. _remove(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Molecule.html#a260a01ae4366901b071043f8617be64a
 
-.. _containsAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a14a7fa0141f6589604621099f6708cdd
+.. _containsAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a14a7fa0141f6589604621099f6708cdd
 
-.. _containsBond(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#ad32cbbec53ec26028a614beb8d1b9433
+.. _containsBond(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#ad32cbbec53ec26028a614beb8d1b9433
 
-.. _getAtomIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a0948b758760f41820137c161a17cb7ac
+.. _getAtomIndex(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomContainer.html#a0948b758760f41820137c161a17cb7ac
 
-.. _getBondIndex(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aa79fcf4b2cf4112b85e5e9fbf17146f6
+.. _getBondIndex(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondContainer.html#aa79fcf4b2cf4112b85e5e9fbf17146f6
 
-.. _getBegin(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ac0ee2582c2e1e5170cf177adb0f1b607
+.. _getBegin(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#ac0ee2582c2e1e5170cf177adb0f1b607
 
-.. _begin: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+.. _begin: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
-.. _getEnd(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a13715c1f120b748dbdfa831ab74645fb
+.. _getEnd(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a13715c1f120b748dbdfa831ab74645fb
 
-.. _end: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
+.. _end: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html
 
-.. _getNeighbor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a35bdb2637eb405a3da3cc359475a1e31
+.. _getNeighbor(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Bond.html#a35bdb2637eb405a3da3cc359475a1e31
 
-.. _getBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a497cb5e9b1a04c0cee82dfb52bc05211
+.. _getBondToAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a497cb5e9b1a04c0cee82dfb52bc05211
 
-.. _findBondToAtom(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a50618b3ee26e58792e35618622ff5697
+.. _findBondToAtom(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Atom.html#a50618b3ee26e58792e35618622ff5697
 
-.. _swap(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a7dd0fcc088c1a7da30e75e3f61d5ac1a
+.. _swap(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Fragment.html#a7dd0fcc088c1a7da30e75e3f61d5ac1a
 
-.. _read(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
+.. _read(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#a07056e4d2a6de5045d59f2356d3d5521
 
-.. _write(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html#abd69e3d91024fff2fe687d804e36f1ea
+.. _write(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html#abd69e3d91024fff2fe687d804e36f1ea
 
-.. _close(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html#a1b386f6cf1691ef956c6b8f6d2d1d0be
+.. _close(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriterBase.html#a1b386f6cf1691ef956c6b8f6d2d1d0be
 
-.. _numRecords: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
+.. _numRecords: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html
 
-.. _getNumRecords(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80
+.. _getNumRecords(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReaderBase.html#aedf59cb63964cb6d497d251acddd4c80
 
-.. _Chem.setType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b7bd15a77897e642d44ec56395db91f
+.. _Chem.setType(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b7bd15a77897e642d44ec56395db91f
 
-.. _Chem.getType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2ab1b85967b8f213bced1ac9b9dcbd6b
+.. _Chem.getType(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2ab1b85967b8f213bced1ac9b9dcbd6b
 
-.. _Chem.hasType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa11f75af056273ee405943b9b0242afe
+.. _Chem.hasType(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa11f75af056273ee405943b9b0242afe
 
-.. _Chem.clearType(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abbe331861f6f29ddbeb0eea7a342fea9
+.. _Chem.clearType(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abbe331861f6f29ddbeb0eea7a342fea9
 
-.. _TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _TYPE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.TYPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.TYPE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomType: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html
+.. _Chem.AtomType: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html
 
-.. _Chem.AtomType.UNKNOWN: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html#a69fe4886bcac34ae4f279709c97370ea
+.. _Chem.AtomType.UNKNOWN: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomType.html#a69fe4886bcac34ae4f279709c97370ea
 
-.. _Chem.setSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae467609c02f752b3455a080b62426dce
+.. _Chem.setSymbol(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae467609c02f752b3455a080b62426dce
 
-.. _Chem.getSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aad592b8ec08a6d4804b07755ae99c5b4
+.. _Chem.getSymbol(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aad592b8ec08a6d4804b07755ae99c5b4
 
-.. _Chem.hasSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac9f27c42aa7c5edf4f8585c03a06b707
+.. _Chem.hasSymbol(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac9f27c42aa7c5edf4f8585c03a06b707
 
-.. _Chem.clearSymbol(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a992a5a2f1ee26ec8d19a9b2b5e9c6225
+.. _Chem.clearSymbol(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a992a5a2f1ee26ec8d19a9b2b5e9c6225
 
-.. _SYMBOL: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _SYMBOL: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a47e6ee3db0608388012817480fe753f9
+.. _Chem.setFormalCharge(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a47e6ee3db0608388012817480fe753f9
 
-.. _Chem.getFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#afa634d2c287d1516f0345fcdd9e979a9
+.. _Chem.getFormalCharge(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#afa634d2c287d1516f0345fcdd9e979a9
 
-.. _Chem.hasFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a82ce1dd385e95fa1ed769e30208ff066
+.. _Chem.hasFormalCharge(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a82ce1dd385e95fa1ed769e30208ff066
 
-.. _Chem.clearFormalCharge(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a56b3f79baa71ebab789873a1ca4f4635
+.. _Chem.clearFormalCharge(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a56b3f79baa71ebab789873a1ca4f4635
 
-.. _FORMAL_CHARGE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _FORMAL_CHARGE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.FORMAL_CHARGE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.FORMAL_CHARGE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6a658c780e6f0cccf48ff2366cc6fd51
+.. _Chem.setIsotope(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6a658c780e6f0cccf48ff2366cc6fd51
 
-.. _Chem.getIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a96cc114a0487cb2c2b1285275d428a3f
+.. _Chem.getIsotope(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a96cc114a0487cb2c2b1285275d428a3f
 
-.. _Chem.hasIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a37bf75a872a76825a60a6a13f7285339
+.. _Chem.hasIsotope(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a37bf75a872a76825a60a6a13f7285339
 
-.. _Chem.clearIsotope(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7bde1102c99e94551ac6db93a78bfad0
+.. _Chem.clearIsotope(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7bde1102c99e94551ac6db93a78bfad0
 
-.. _ISOTOPE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _ISOTOPE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae7dd6d307727cf3b886712e360ce871a
+.. _Chem.setImplicitHydrogenCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae7dd6d307727cf3b886712e360ce871a
 
-.. _Chem.getImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a946cf1c558f4c117db1cf455f6257095
+.. _Chem.getImplicitHydrogenCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a946cf1c558f4c117db1cf455f6257095
 
-.. _Chem.hasImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a16f4bb56d2f221475adf43a6115e4512
+.. _Chem.hasImplicitHydrogenCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a16f4bb56d2f221475adf43a6115e4512
 
-.. _Chem.clearImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae9f0e4e2a80338931e02cf5c5cd55d23
+.. _Chem.clearImplicitHydrogenCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae9f0e4e2a80338931e02cf5c5cd55d23
 
-.. _IMPLICIT_HYDROGEN_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _IMPLICIT_HYDROGEN_COUNT: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.IMPLICIT_HYDROGEN_COUNT: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af73aba0d54fdb2e0c39655376d7c78df
+.. _Chem.setUnpairedElectronCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af73aba0d54fdb2e0c39655376d7c78df
 
-.. _Chem.getUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7030e4204ccfc678d9adbdd32eb36b9d
+.. _Chem.getUnpairedElectronCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7030e4204ccfc678d9adbdd32eb36b9d
 
-.. _Chem.hasUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab440cf0d8825176e08c97867b21018c3
+.. _Chem.hasUnpairedElectronCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab440cf0d8825176e08c97867b21018c3
 
-.. _Chem.clearUnpairedElectronCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3aeb5c8e37c4e4d8a5a54cfd3a08be08
+.. _Chem.clearUnpairedElectronCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3aeb5c8e37c4e4d8a5a54cfd3a08be08
 
-.. _UNPAIRED_ELECTRON_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _UNPAIRED_ELECTRON_COUNT: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.UNPAIRED_ELECTRON_COUNT: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac7eff0821c7792d9a9a5c34e34244900
+.. _Chem.setHybridizationState(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac7eff0821c7792d9a9a5c34e34244900
 
-.. _Chem.getHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a380460f2c06306105a8f2c8763b62ab7
+.. _Chem.getHybridizationState(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a380460f2c06306105a8f2c8763b62ab7
 
-.. _Chem.hasHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3a7d4d049946aa8ac2cb2fc86282803b
+.. _Chem.hasHybridizationState(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3a7d4d049946aa8ac2cb2fc86282803b
 
-.. _Chem.clearHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a50eed3c6b6e85f7def74057f0f2af6c5
+.. _Chem.clearHybridizationState(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a50eed3c6b6e85f7def74057f0f2af6c5
 
-.. _HYBRIDIZATION: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _HYBRIDIZATION: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.HYBRIDIZATION: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.HYBRIDIZATION: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a94ecf7f236b8873dc532fc702d6cd8d7
+.. _Chem.setStereoDescriptor(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a94ecf7f236b8873dc532fc702d6cd8d7
 
-.. _Chem.getStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3ab885adc327932cd3f9ce4bee93463e
+.. _Chem.getStereoDescriptor(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3ab885adc327932cd3f9ce4bee93463e
 
-.. _Chem.hasStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8f341fe5f048bd369c4500cc1d33c76a
+.. _Chem.hasStereoDescriptor(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8f341fe5f048bd369c4500cc1d33c76a
 
-.. _Chem.clearStereoDescriptor(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6024e2bfc9acff7940d17239e7f0eb64
+.. _Chem.clearStereoDescriptor(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6024e2bfc9acff7940d17239e7f0eb64
 
-.. _STEREO_DESCRIPTOR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _STEREO_DESCRIPTOR: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.StereoDescriptor: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StereoDescriptor.html
+.. _Chem.StereoDescriptor: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StereoDescriptor.html
 
-.. _Chem.setRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a10e2530cdef3c762e509ef20d3300f02
+.. _Chem.setRingFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a10e2530cdef3c762e509ef20d3300f02
 
-.. _Chem.getRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a38c3bdf64e44e6b9696c597216a8eb05
+.. _Chem.getRingFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a38c3bdf64e44e6b9696c597216a8eb05
 
-.. _Chem.hasRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a486e8c17e53b693612002759a19f70ad
+.. _Chem.hasRingFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a486e8c17e53b693612002759a19f70ad
 
-.. _Chem.clearRingFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0e21b20b73bdd2aa46ef04a7c16183aa
+.. _Chem.clearRingFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0e21b20b73bdd2aa46ef04a7c16183aa
 
-.. _RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _RING_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.RING_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.setAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a92138d75f1fe2915409a42f0da608330
+.. _Chem.setAromaticityFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a92138d75f1fe2915409a42f0da608330
 
-.. _Chem.getAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad1975a5b154e159811c97c6c8375bcd0
+.. _Chem.getAromaticityFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad1975a5b154e159811c97c6c8375bcd0
 
-.. _Chem.hasAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af5a737bbb0e86fc2d747a33d0523e6a6
+.. _Chem.hasAromaticityFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af5a737bbb0e86fc2d747a33d0523e6a6
 
-.. _Chem.clearAromaticityFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5d3ab79d30b082c3b22563fdd80851d1
+.. _Chem.clearAromaticityFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5d3ab79d30b082c3b22563fdd80851d1
 
-.. _AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _AROMATICITY_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.AtomProperty.AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _Chem.AtomProperty.AROMATICITY_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _Chem.set2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab6b9262e881dc745ff1829eb5025979e
+.. _Chem.set2DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab6b9262e881dc745ff1829eb5025979e
 
-.. _Chem.get2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad2454234fe3de841dc586bb99a666392
+.. _Chem.get2DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad2454234fe3de841dc586bb99a666392
 
-.. _Chem.has2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9d484c07a600531a72a24555dc015a39
+.. _Chem.has2DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9d484c07a600531a72a24555dc015a39
 
-.. _Chem.clear2DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5b9f2bd0833083236ee428f636d50d9a
+.. _Chem.clear2DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5b9f2bd0833083236ee428f636d50d9a
 
-.. _COORDINATES_2D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _COORDINATES_2D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _CDPL.Math.Vector2D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector2D.html
+.. _CDPL.Math.Vector2D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector2D.html
 
-.. _Chem.set3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6679f376362d76a2e3b15ab1bf4e1baf
+.. _Chem.set3DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6679f376362d76a2e3b15ab1bf4e1baf
 
-.. _Chem.get3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0c7fd49b633d548b3f3150b1996b4072
+.. _Chem.get3DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0c7fd49b633d548b3f3150b1996b4072
 
-.. _Chem.has3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4254dac14bbfb14104e8876b6155cd54
+.. _Chem.has3DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4254dac14bbfb14104e8876b6155cd54
 
-.. _Chem.clear3DCoordinates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae5ed69e4b63ef330a03c834bdb187aad
+.. _Chem.clear3DCoordinates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae5ed69e4b63ef330a03c834bdb187aad
 
-.. _COORDINATES_3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
+.. _COORDINATES_3D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1Entity3DProperty.html
 
-.. _CDPL.Math.Vector3D: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3D.html
+.. _CDPL.Math.Vector3D: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3D.html
 
-.. _Chem.set3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af97a16e29e54afda07d6b82933985771
+.. _Chem.set3DCoordinatesArray(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#af97a16e29e54afda07d6b82933985771
 
-.. _Chem.get3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5395b5ee402e0da698d818c0016afa1a
+.. _Chem.get3DCoordinatesArray(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5395b5ee402e0da698d818c0016afa1a
 
-.. _Chem.has3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2f655d01263a553bff6e4de859f61bea
+.. _Chem.has3DCoordinatesArray(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2f655d01263a553bff6e4de859f61bea
 
-.. _Chem.clear3DCoordinatesArray(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae6608943ee8e3304a384acb4dac7ec73
+.. _Chem.clear3DCoordinatesArray(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae6608943ee8e3304a384acb4dac7ec73
 
-.. _COORDINATES_3D_ARRAY: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
+.. _COORDINATES_3D_ARRAY: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1AtomProperty.html
 
-.. _CDPL.Math.Vector3DArray: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3DArray.html
+.. _CDPL.Math.Vector3DArray: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Math_1_1Vector3DArray.html
 
-.. _Chem.setOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
+.. _Chem.setOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ab4460ac3bac716de49c744c52d980181
 
-.. _Chem.getOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
+.. _Chem.getOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a2a3103e8e0338219a5703da063cd3ef5
 
-.. _Chem.hasOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad021960310274a588d47cb4f2d25098c
+.. _Chem.hasOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad021960310274a588d47cb4f2d25098c
 
-.. _Chem.clearOrder(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aedc63dddcd7838a82e1327dec7ca5504
+.. _Chem.clearOrder(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aedc63dddcd7838a82e1327dec7ca5504
 
-.. _ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _ORDER: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.BondProperty.ORDER: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _Chem.BondProperty.ORDER: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.BondProperty.RING_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _Chem.BondProperty.RING_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.BondProperty.AROMATICITY_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _Chem.BondProperty.AROMATICITY_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.set2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adcbcd27f825a498a2b991c90ff45cad2
+.. _Chem.set2DStereoFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adcbcd27f825a498a2b991c90ff45cad2
 
-.. _Chem.get2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abe0305f94e01b6f334e0433a4d75fa70
+.. _Chem.get2DStereoFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#abe0305f94e01b6f334e0433a4d75fa70
 
-.. _Chem.has2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a382bade30e26799065f84ac5479bebd7
+.. _Chem.has2DStereoFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a382bade30e26799065f84ac5479bebd7
 
-.. _Chem.clear2DStereoFlag(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a34ebd74ae75f2c616e428cd616446cb2
+.. _Chem.clear2DStereoFlag(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a34ebd74ae75f2c616e428cd616446cb2
 
-.. _STEREO_2D_FLAG: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
+.. _STEREO_2D_FLAG: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondProperty.html
 
-.. _Chem.BondStereoFlag.PLAIN: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondStereoFlag.html#a13876c0d0b8c87fd8a3bc6872ca26dac
+.. _Chem.BondStereoFlag.PLAIN: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1BondStereoFlag.html#a13876c0d0b8c87fd8a3bc6872ca26dac
 
-.. _Chem.setName(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7bb03057593ec21c5f0ea16224e19b24
+.. _Chem.setName(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7bb03057593ec21c5f0ea16224e19b24
 
-.. _Chem.getName(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a820c33b37c734e6da68e66a45c17799f
+.. _Chem.getName(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a820c33b37c734e6da68e66a45c17799f
 
-.. _Chem.hasName(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a63fe08e3353383c566a937d202725cbc
+.. _Chem.hasName(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a63fe08e3353383c566a937d202725cbc
 
-.. _Chem.clearName(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adc95d9ea3dea65d995e70ae057b0c86e
+.. _Chem.clearName(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adc95d9ea3dea65d995e70ae057b0c86e
 
-.. _NAME: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _NAME: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.setSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4b9452e5d51b5a204f47b6641a226faa
+.. _Chem.setSSSR(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a4b9452e5d51b5a204f47b6641a226faa
 
-.. _Chem.getSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a484af142bdf831d2ae66e6fef1ac1ccd
+.. _Chem.getSSSR(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a484af142bdf831d2ae66e6fef1ac1ccd
 
-.. _Chem.hasSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3b4d8f24bc72e04578a8f86dd4b16856
+.. _Chem.hasSSSR(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a3b4d8f24bc72e04578a8f86dd4b16856
 
-.. _Chem.clearSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a80b54e20a434c4568ffdd4614f74df29
+.. _Chem.clearSSSR(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a80b54e20a434c4568ffdd4614f74df29
 
-.. _SSSR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _SSSR: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.MolecularGraphProperty.SSSR: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _Chem.MolecularGraphProperty.SSSR: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.FragmentList: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FragmentList.html
+.. _Chem.FragmentList: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FragmentList.html
 
-.. _Chem.setAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6af8875f255f53594260c814b63e3f92
+.. _Chem.setAromaticSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6af8875f255f53594260c814b63e3f92
 
-.. _Chem.getAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8896fb1fbd0bd9cdc88a4990e92e2d4a
+.. _Chem.getAromaticSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8896fb1fbd0bd9cdc88a4990e92e2d4a
 
-.. _Chem.hasAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad9aafdfeac044bb65602551302ee82d2
+.. _Chem.hasAromaticSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ad9aafdfeac044bb65602551302ee82d2
 
-.. _Chem.clearAromaticSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9598e0b3def60f250898ca7e20fd6921
+.. _Chem.clearAromaticSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a9598e0b3def60f250898ca7e20fd6921
 
-.. _AROMATIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _AROMATIC_SUBSTRUCTURE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _Chem.MolecularGraphProperty.AROMATIC_SUBSTRUCTURE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.setCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aef5d266659dc218c95941abb65f4bc98
+.. _Chem.setCyclicSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aef5d266659dc218c95941abb65f4bc98
 
-.. _Chem.getCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5741bd8246a3b967e8b41ff8836f844b
+.. _Chem.getCyclicSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5741bd8246a3b967e8b41ff8836f844b
 
-.. _Chem.hasCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8d25800cde619cd6600177f85f3cb0bc
+.. _Chem.hasCyclicSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a8d25800cde619cd6600177f85f3cb0bc
 
-.. _Chem.clearCyclicSubstructure(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff443eeb049b638f27c2b2c084384580
+.. _Chem.clearCyclicSubstructure(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff443eeb049b638f27c2b2c084384580
 
-.. _CYCLIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _CYCLIC_SUBSTRUCTURE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _Chem.MolecularGraphProperty.CYCLIC_SUBSTRUCTURE: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.setComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a876cf8d98efe7463dc466db978256a51
+.. _Chem.setComponents(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a876cf8d98efe7463dc466db978256a51
 
-.. _Chem.getComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a90c6e6d94f82c3fcba45cee5d94b645a
+.. _Chem.getComponents(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a90c6e6d94f82c3fcba45cee5d94b645a
 
-.. _Chem.hasComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0788dfc0173f38f64973fb380a00adba
+.. _Chem.hasComponents(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a0788dfc0173f38f64973fb380a00adba
 
-.. _Chem.clearComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a663bc3801e1e4906e0a9cf798f5c8a0c
+.. _Chem.clearComponents(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a663bc3801e1e4906e0a9cf798f5c8a0c
 
-.. _COMPONENTS: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _COMPONENTS: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.MolecularGraphProperty.COMPONENTS: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _Chem.MolecularGraphProperty.COMPONENTS: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.setStructureData(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7ea9e8add9f147199d3cd8cf9608185b
+.. _Chem.setStructureData(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a7ea9e8add9f147199d3cd8cf9608185b
 
-.. _Chem.getStructureData(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97f09f9da4de013651397d22c6324294
+.. _Chem.getStructureData(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97f09f9da4de013651397d22c6324294
 
-.. _Chem.hasStructureData(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6f442b8b4ae059628fa79eca853df01a
+.. _Chem.hasStructureData(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6f442b8b4ae059628fa79eca853df01a
 
-.. _Chem.clearStructureData(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a528afe2ea2678c8be4e063f8d4ecf4e4
+.. _Chem.clearStructureData(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a528afe2ea2678c8be4e063f8d4ecf4e4
 
-.. _STRUCTURE_DATA: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
+.. _STRUCTURE_DATA: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphProperty.html
 
-.. _Chem.StringDataBlock: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StringDataBlock.html
+.. _Chem.StringDataBlock: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1StringDataBlock.html
 
-.. _Chem.calcImplicitHydrogenCount(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb38459bd2250e3771e77b0eb2925cbe
+.. _Chem.calcImplicitHydrogenCount(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#adb38459bd2250e3771e77b0eb2925cbe
 
-.. _Chem.calcImplicitHydrogenCounts(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a109bac8c8a869dd14d26e70361db7c28
+.. _Chem.calcImplicitHydrogenCounts(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a109bac8c8a869dd14d26e70361db7c28
 
-.. _Chem.perceiveHybridizationState(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa2acedb689dfdcd9cbba918a1ecabb86
+.. _Chem.perceiveHybridizationState(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa2acedb689dfdcd9cbba918a1ecabb86
 
-.. _Chem.perceiveHybridizationStates(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff960fb1895ebfdea29aa7eb93732afb
+.. _Chem.perceiveHybridizationStates(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aff960fb1895ebfdea29aa7eb93732afb
 
-.. _Chem.perceiveSSSR(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa230c0768046e81d53cd5ed515d2360d
+.. _Chem.perceiveSSSR(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aa230c0768046e81d53cd5ed515d2360d
 
-.. _Chem.HybridizationState: https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1HybridizationState.html
+.. _Chem.HybridizationState: ../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1HybridizationState.html
 
-.. _Chem.setRingFlags(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a658bcc38eaf6f5718c75eedae20869be
+.. _Chem.setRingFlags(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a658bcc38eaf6f5718c75eedae20869be
 
-.. _Chem.setAromaticityFlags(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a041765889242bbc38a22d97ae7e35e62
+.. _Chem.setAromaticityFlags(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a041765889242bbc38a22d97ae7e35e62
 
-.. _Chem.perceiveComponents(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a15aede5f6aaaf0c7c4215339e68507b0
+.. _Chem.perceiveComponents(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a15aede5f6aaaf0c7c4215339e68507b0
 
-.. _Chem.calcBasicProperties(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac0ce757b19290663fe5b267f1852a833
+.. _Chem.calcBasicProperties(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ac0ce757b19290663fe5b267f1852a833
 
-.. _Chem.parseSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
+.. _Chem.parseSMILES(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a97463a5b3b08debaa2b2299a2644e912
 
-.. _Chem.generateSMILES(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b2f4f87930cf893cc80c2930b268014
+.. _Chem.generateSMILES(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a6b2f4f87930cf893cc80c2930b268014
 
-.. _Chem.parseSMARTS(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc
+.. _Chem.parseSMARTS(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a5248eaa483ae5dc078a8f276c91ed5dc
 
-.. _Chem.generateINCHI(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae64b94b51bd619fb7cfcf1fc39fc3198
+.. _Chem.generateINCHI(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#ae64b94b51bd619fb7cfcf1fc39fc3198
 
-.. _Chem.generateINCHIKey(): https://cdpkit.org/cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aaed4c5b1939731a06640f651593e8908
+.. _Chem.generateINCHIKey(): ../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#aaed4c5b1939731a06640f651593e8908
 
-.. _setParent(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac6b8c89fead591acfcdc6d31996a3b84
+.. _setParent(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac6b8c89fead591acfcdc6d31996a3b84
 
-.. _getParent(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a9d4db56fae26568869b283896b10171a
+.. _getParent(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a9d4db56fae26568869b283896b10171a
 
-.. _registerParameterChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a18609f39cfa56248ac4191a1a24740cc
+.. _registerParameterChangedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a18609f39cfa56248ac4191a1a24740cc
 
-.. _unregisterParameterChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac4130ab4db30b557cc3cbe536c747cea
+.. _unregisterParameterChangedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#ac4130ab4db30b557cc3cbe536c747cea
 
-.. _registerParameterRemovedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a59d55eed967a82380c8b2ed2cd40405b
+.. _registerParameterRemovedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a59d55eed967a82380c8b2ed2cd40405b
 
-.. _unregisterParameterRemovedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a6e8209de7f5cfb7a7b3f94cf109b0156
+.. _unregisterParameterRemovedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#a6e8209de7f5cfb7a7b3f94cf109b0156
 
-.. _registerParentChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#acf09cf417dfc41787e89825762bb2e32
+.. _registerParentChangedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#acf09cf417dfc41787e89825762bb2e32
 
-.. _unregisterParentChangedCallback(): https://cdpkit.org/cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#aca5b0565223043518608dd7a84cb5e0f
+.. _unregisterParentChangedCallback(): ../cdpl_api_doc/python_api_doc/classCDPL_1_1Base_1_1ControlParameterContainer.html#aca5b0565223043518608dd7a84cb5e0f
 
