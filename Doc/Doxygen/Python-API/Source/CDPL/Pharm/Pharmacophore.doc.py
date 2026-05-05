@@ -154,6 +154,12 @@ class Pharmacophore(FeatureContainer):
 
     ##
     # \brief 
+    # \param func 
+    #
+    def orderFeatures(func: BoolFeature2Functor) -> None: pass
+
+    ##
+    # \brief 
     # \param idx 
     # \return 
     #

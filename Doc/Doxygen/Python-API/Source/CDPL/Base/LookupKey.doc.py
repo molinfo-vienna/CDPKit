@@ -22,7 +22,7 @@
 ##
 # \brief An unique lookup key for control-parameter and property values.
 # 
-# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards. <br>
+# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
 # 
 class LookupKey(Boost.Python.instance):
 

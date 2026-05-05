@@ -64,7 +64,8 @@ class TverskySimilarity(Boost.Python.instance):
     # 
     # The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
     # 
-    # \[ S_{ab} = \frac{N_{ab}}{\alpha * N_a + \beta * N_b + N_{ab}} \]
+    # \f[   S_{ab} = \frac{N_{ab}}{\alpha * N_a + \beta * N_b + N_{ab}} 
+    # \f]
     # 
     # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset. \f$ \alpha \f$ and \f$ \beta \f$ are bitset contribution weighting factors.
     # 

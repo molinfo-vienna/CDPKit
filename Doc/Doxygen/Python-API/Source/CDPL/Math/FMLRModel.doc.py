@@ -24,11 +24,13 @@
 # 
 # For each data point, \f$ y_i \f$ is the dependent (response) variable and \f$ \vec{X}_i \f$ is a \f$ M \f$-dimensional vector containing the independent (explanatory) variables of the modeled function \f$ y = f(\vec{X}) \f$. It is assumed that the relationship between the dependent variables \f$ y_i \f$ and the independent variables \f$ \vec{X}_i \f$ can be modeled by a linear function of \f$ M \f$ parameters \f$ \beta_i, \, i = 1, 2, \ldots, M \f$ (regression coefficients) plus an error term \f$ \epsilon_i \f$:
 # 
-# \[ y_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \ldots + \beta_M x_{iM} + \epsilon_i \]
+# \f[   y_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \ldots + \beta_M x_{iM} + \epsilon_i 
+# \f]
 # 
 # The parameters \f$ \beta_i \f$ are estimated by <em>Least Squares Analysis</em> [\ref WLSQRS] which minimizes the sum of squared residuals \f$ \chi^2 \f$
 # 
-# \[ \chi^2 = \sum_{i=1}^{N} (y_i - f(\vec{X}_i, \vec{\beta}))^2 \]
+# \f[   \chi^2 = \sum_{i=1}^{N} (y_i - f(\vec{X}_i, \vec{\beta}))^2
+# \f]
 # 
 # of the given set of \f$ N \f$ data points with respect to the adjustable parameters \f$ \vec{\beta} \f$. The parameters \f$ \beta_i \f$ are computed using <em>Singular Value Decomposition</em> [\ref WSVD] as implemented in [\ref NRIC]. This method is computationally intensive, but is particularly useful if the \f$ X \f$ matrix is ill-conditioned.
 # 
@@ -257,7 +259,8 @@ class FMLRModel(Boost.Python.instance):
     # 
     # \f$ \chi^2 \f$ is calculated by:
     # 
-    # \[ \chi^2 = \sum_{i=1}^{N} (y_i - \sum_{j=1}^{M}(x_{ij} \beta_j))^2 \]
+    # \f[   \chi^2 = \sum_{i=1}^{N} (y_i - \sum_{j=1}^{M}(x_{ij} \beta_j))^2
+    # \f]
     # 
     # \return The sum of squared residuals \f$ \chi^2 \f$. 
     # 
@@ -270,7 +273,8 @@ class FMLRModel(Boost.Python.instance):
     # 
     # The goodness of fit \f$ Q \f$ is given by:
     # 
-    # \[ Q = gammaq(\frac{N - 2}{2}, \frac{\chi^2}{2}) \]
+    # \f[   Q = gammaq(\frac{N - 2}{2}, \frac{\chi^2}{2}) 
+    # \f]
     # 
     # where \f$ gammaq \f$ is the incomplete gamma function (see [\ref NRIC] for details).
     # 
@@ -287,11 +291,16 @@ class FMLRModel(Boost.Python.instance):
     # 
     # The correlation coefficient \f$ r \f$ is calculated by:
     # 
-    # \[ r = \frac{\sum_{i=1}^{N} (\hat{y}_i - \bar{\hat{y}})(y_i - \bar{y})} {\sqrt{\sum_{i=1}^{N} (\hat{y}_i - \bar{\hat{y}})^2 \sum_{i=1}^{N} (y_i - \bar{y})^2 }} \]
+    # \f[   r = \frac{\sum_{i=1}^{N} (\hat{y}_i - \bar{\hat{y}})(y_i - \bar{y})} {\sqrt{\sum_{i=1}^{N} 
+    #        (\hat{y}_i - \bar{\hat{y}})^2 \sum_{i=1}^{N} (y_i - \bar{y})^2 }} 
+    # \f]
     # 
     # where
     # 
-    # \begin{eqnarray*} \hat{y}_i &=& \sum_{j=1}^{M}(x_{ij} \beta_j) \\ \bar{\hat{y}} &=& \frac{\sum_{i=1}^{N} \hat{y}_i}{N} \\ \bar{y} &=& \frac{\sum_{i=1}^{N} y_i}{N} \end{eqnarray*}
+    # \begin{eqnarray*}   \hat{y}_i     &=& \sum_{j=1}^{M}(x_{ij} \beta_j) \\
+    #    \bar{\hat{y}} &=& \frac{\sum_{i=1}^{N} \hat{y}_i}{N} \\
+    #    \bar{y}       &=& \frac{\sum_{i=1}^{N} y_i}{N} 
+    # \end{eqnarray*}
     # 
     # \return The correlation coefficient \f$ r \f$. 
     # 
@@ -304,7 +313,8 @@ class FMLRModel(Boost.Python.instance):
     # 
     # The standard deviation \f$ s_r \f$ is calculated by:
     # 
-    # \[ s_r = \sqrt{\frac{\sum_{i=1}^{N} (y_i - \sum_{j=1}^{M} (x_{ij} \beta_j))^2} {N - M}} \]
+    # \f[   s_r = \sqrt{\frac{\sum_{i=1}^{N} (y_i - \sum_{j=1}^{M} (x_{ij} \beta_j))^2} {N - M}} 
+    # \f]
     # 
     # \return The standard deviation of the residuals \f$ s_r \f$. 
     # 

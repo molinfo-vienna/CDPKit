@@ -24,7 +24,8 @@
 # 
 # The <em>Hamming Distance</em> \f$ D_{ab} \f$ is calculated by:
 # 
-# \[ D_{ab} = N_a + N_b \]
+# \f[   D_{ab} = N_a + N_b
+# \f]
 # 
 # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
 # 
@@ -42,7 +43,8 @@ def calcHammingDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> int: pass
 # 
 # The <em>Euclidean Distance</em> \f$ D_{ab} \f$ is calculated by:
 # 
-# \[ D_{ab} = \sqrt{N_a + N_b} \]
+# \f[   D_{ab} = \sqrt{N_a + N_b}
+# \f]
 # 
 # where \f$ N_a \f$ is the number of bits that are set in the first bitset but not in the second bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset but not in the first one.
 # 
@@ -60,7 +62,8 @@ def calcEuclideanDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Dice Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} \]
+# \f[   S_{ab} = \frac{2 * N_{ab}}{N_a + N_b + 2 * N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset.
 # 
@@ -78,7 +81,8 @@ def calcDiceSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = \frac{N_{ab}}{\sqrt{N_a * N_b}} \]
+# \f[   S_{ab} = \frac{N_{ab}}{\sqrt{N_a * N_b}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
 # 
@@ -96,7 +100,8 @@ def calcCosineSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Euclidean Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}} \]
+# \f[   S_{ab} = \sqrt{\frac{N_{ab} + N_{!ab}}{N_a + N_b + N_{ab} + N_{!ab}}}
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
 # 
@@ -114,7 +119,8 @@ def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Manhattan Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}} \]
+# \f[   S_{ab} = 1 - \frac{N_a + N_b}{N_a + N_b + N_{ab} + N_{!ab}}
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set only in the first bitset, \f$ N_b \f$ is the number of bits that are set only in the second bitset and \f$ N_{!ab} \f$ is the number of bits that are not set in both bitsets.
 # 
@@ -132,7 +138,8 @@ def calcManhattanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} \]
+# \f[   S_{ab} = \frac{N_{ab}}{N_a + N_b - N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are set in the first bitset and \f$ N_b \f$ is the number of bits that are set in the second bitset.
 # 
@@ -150,7 +157,8 @@ def calcTanimotoSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 # 
 # The <em>Tversky Similarity</em> \f$ S_{ab} \f$ is calculated by:
 # 
-# \[ S_{ab} = \frac{N_{ab}}{a * N_a + b * N_b + N_{ab}} \]
+# \f[   S_{ab} = \frac{N_{ab}}{a * N_a + b * N_b + N_{ab}} 
+# \f]
 # 
 # where \f$ N_{ab} \f$ is the number of bits that are set in both bitsets, \f$ N_a \f$ is the number of bits that are only set in the first bitset and \f$ N_b \f$ is the number of bits that are only set in the second bitset. \f$ a \f$ and \f$ b \f$ are bitset contribution weighting factors.
 # 

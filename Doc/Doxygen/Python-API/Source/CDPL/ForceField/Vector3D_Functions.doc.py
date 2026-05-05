@@ -188,15 +188,33 @@ def calcBondAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Mat
 ##
 # \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_x}} \f$ of the <em>cosine</em> of the angle \f$ \omega_{ijk;l} \f$ between the bond <em>j-l</em> and the normal of the plane defined by the atoms <em>i-j-k</em>.
 # 
-# \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} = \frac{\vec{v_{jk}} \times \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} - \cos(\omega_{ijk;l}) \: \frac{M_1 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
-#  \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} = \frac{\vec{v_{jl}} \times \vec{v_{ji}}}{|\vec{n_{ijk}}| \: r_{jl}} - \cos(\omega_{ijk;l}) \: \frac{M_2 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
-#  \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}} = \frac{-1}{|\vec{n_{ijk}}| \: r_{jl}} \: (\frac{\vec{v_{jl}} (\vec{n_{ijk}} \cdot \vec{v_{jl}})}{r_{jl}^2} + \vec{r_{kl}} \times \vec{v_{il}} + \vec{v_{jl}} \times \vec{v_{ji}} + \vec{v_{jk}} \times \vec{v_{jl}}) \f$<br>
-#  \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} + \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} + \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}}) \f$<br>
+# \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} = \frac{\vec{v_{jk}} \times \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} -
+#                                                                \cos(\omega_{ijk;l}) \: \frac{M_1 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
+#   \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} = \frac{\vec{v_{jl}} \times \vec{v_{ji}}}{|\vec{n_{ijk}}| \: r_{jl}} - 
+#                                                                \cos(\omega_{ijk;l}) \: \frac{M_2 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
+#    \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}} = \frac{-1}{|\vec{n_{ijk}}| \: r_{jl}} \: (\frac{\vec{v_{jl}} (\vec{n_{ijk}} \cdot \vec{v_{jl}})}{r_{jl}^2} +
+#                                                                \vec{r_{kl}} \times \vec{v_{il}} + \vec{v_{jl}} \times \vec{v_{ji}} + 
+#                                                                \vec{v_{jk}} \times \vec{v_{jl}}) \f$<br>
+#    \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} + 
+#                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} +
+#                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}}) \f$<br>
 #  \f$ \cos(\omega_{ijk;l}) = \frac{\vec{n_{ijk}} \cdot \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} \f$<br>
 # 
 # where<br>
-#  \f$ M_1 = \begin{vmatrix} 0 & -\vec{v_{jk}}.z & \vec{v_{jk}}.y \\ \vec{v_{jk}}.z & 0 & -\vec{v_{jk}}.x \\ -\vec{v_{jk}}.y & \vec{v_{jk}}.x & 0 \end{vmatrix} \f$<br>
-#  \f$ M_2 = \begin{vmatrix} 0 & \vec{v_{ji}}.z & -\vec{v_{ji}}.y \\ -\vec{v_{ji}}.z & 0 & \vec{v_{ji}}.x \\ \vec{v_{ji}}.y & -\vec{v_{ji}}.x & 0 \end{vmatrix} \f$<br>
+#        \f$ M_1 = 
+#      \begin{vmatrix}
+#       0 & -\vec{v_{jk}}.z & \vec{v_{jk}}.y \\
+#       \vec{v_{jk}}.z & 0 & -\vec{v_{jk}}.x \\
+#       -\vec{v_{jk}}.y & \vec{v_{jk}}.x & 0
+#      \end{vmatrix}
+# \f$<br>
+#        \f$ M_2 = 
+#      \begin{vmatrix}
+#       0 & \vec{v_{ji}}.z & -\vec{v_{ji}}.y \\
+#       -\vec{v_{ji}}.z & 0 & \vec{v_{ji}}.x \\
+#        \vec{v_{ji}}.y & -\vec{v_{ji}}.x & 0
+#      \end{vmatrix}
+# \f$<br>
 #  \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
 #  \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
 #  \f$ \vec{v_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
@@ -230,7 +248,9 @@ def calcOutOfPlaneAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom_po
 #  <br>
 #  \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} = \vec{r_{ki}} \times \vec{a} - \vec{v_{lk}} \times \vec{b} \f$<br>
 #  \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} = \vec{v_{jk}} \times \vec{b} \f$<br>
-#  \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} = -(\frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} + \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} + \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}}) \f$<br>
+#    \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} = -(\frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} +
+#                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} +
+#                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}}) \f$<br>
 #  \f$ \cos(\Phi_{ijkl}) = \frac{\vec{n_{ijk}} \cdot \vec{n_{jkl}}}{|\vec{n_{ijk}}| \: |\vec{n_{jkl}}|} \f$<br>
 # 
 # where<br>
@@ -391,9 +411,11 @@ def calcMMFF94ElectrostaticGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Ve
 # 
 # The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
 # 
-# \f$ \frac{\partial EBA_{ijk}}{\partial \vec{p_x}} = 2.5121 \: \Delta \vartheta_{ijk} \: (kba_{IJK} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} + kba_{KJI} \: \frac{\partial \Delta r_{kj}}{\partial \vec{p_x}}) + 2.5121 \: \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} \: (kba_{IJK} \: \Delta r_{ij} + kba_{KJI} \: \Delta r_{kj}) \f$<br>
+# \f$ \frac{\partial EBA_{ijk}}{\partial \vec{p_x}} = 2.5121 \: \Delta \vartheta_{ijk} \: (kba_{IJK} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} + kba_{KJI} \: \frac{\partial \Delta r_{kj}}{\partial \vec{p_x}}) + 
+#                                                     2.5121 \: \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} \: (kba_{IJK} \: \Delta r_{ij} + kba_{KJI} \: \Delta r_{kj}) \f$<br>
 # 
-# \f$ \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} = \frac{\partial \Delta \vartheta_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
+# \f$ \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} = \frac{\partial \Delta \vartheta_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: 
+#                                                                  \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
 #  \f$ \frac{\partial \Delta \vartheta_{ijk}}{\partial \vartheta_{ijk}} = \frac{180}{\pi} \f$<br>
 #  \f$ \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} = \frac{-1}{\sqrt{1 - \cos(\vartheta_{ijk})^2}} \f$<br>
 # 
@@ -436,10 +458,11 @@ def calcMMFF94StretchBendGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: M
 # 
 # The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
 # 
-# \f$ \frac{\partial EA_{ijk}}{\partial \vec{p_x}} = \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
+# \f$ \frac{\partial EA_{ijk}}{\partial \vec{p_x}} = \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: 
+#                                                    \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
 # 
-# \f$ \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} = -ka_{IJK} \: (86.58992538 \: \vartheta_{ijk}^2 - 3.022558594 \: \vartheta_{ijk} \: \vartheta_{IJK}^0 - 143.9313616 \: \vartheta_{ijk} + 0.02637679965 \: \vartheta_{IJK}^{0^2} + 2.512076157 \: \vartheta_{IJK}^0) \f$<br>
-# <br>
+# \f$ \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} = -ka_{IJK} \: (86.58992538 \: \vartheta_{ijk}^2 - 3.022558594 \: \vartheta_{ijk} \: \vartheta_{IJK}^0  
+#                                                          - 143.9313616 \: \vartheta_{ijk} + 0.02637679965 \: \vartheta_{IJK}^{0^2} + 2.512076157 \: \vartheta_{IJK}^0) \f$<br>
 #  \f$ \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} = \frac{-1}{\sqrt{1 - \cos(\vartheta_{ijk})^2}} \f$<br>
 # 
 # for the calculation of the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$ see calcBondAngleCosDerivatives().
@@ -483,7 +506,8 @@ def calcMMFF94AngleBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: 
 # 
 # The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
 # 
-# \f$ \frac{\partial EOOP_{ijk;l}}{\partial \vec{p_x}} = \frac{\partial EOOP_{ijk;l}}{\partial \chi_{ijk;l}} \: \frac{\partial \chi_{ijk;l}}{\partial \cos(\alpha_{ijk;l})} \: \frac{\partial \cos(\alpha_{ijk;l})}{\partial \vec{p_x}} \f$<br>
+# \f$ \frac{\partial EOOP_{ijk;l}}{\partial \vec{p_x}} = \frac{\partial EOOP_{ijk;l}}{\partial \chi_{ijk;l}} \: \frac{\partial \chi_{ijk;l}}{\partial \cos(\alpha_{ijk;l})} \:
+#                                                        \frac{\partial \cos(\alpha_{ijk;l})}{\partial \vec{p_x}} \f$<br>
 # 
 # \f$ \frac{\partial EOOP_{ijk;l}}{\partial \chi_{ijk;l}} = 0.043844 \: (\frac{180}{\pi})^2 \: \chi_{ijk;l} \: koop_{IJK \colon L} \f$<br>
 #  \f$ \chi_{ijk;l} = \frac{\pi}{2} - \alpha_{ijk;l} \f$<br>
@@ -523,7 +547,7 @@ def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_
 # 
 # \f$ \frac{\partial EB_{ij}}{\partial \vec{p_x}} = \frac{\partial EB_{ij}}{\partial \Delta r_{ij}} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$<br>
 # 
-# \f$ \frac{\partial EB_{ij}}{\partial \Delta r_{ij}} = (167.92125 \: \Delta r_{ij}^3 \: cs^2 + 215.89875 \: \Delta r_{ij}^2 \: cs + 143.9325 \: \Delta r_{ij}) \: kb_{IJ} \f$<br>
+# \f$ \frac{\partial EB_{ij}}{\partial \Delta r_{ij}} = (167.92125 \: \Delta r_{ij}^3 \: cs^2  + 215.89875 \: \Delta r_{ij}^2 \: cs + 143.9325 \: \Delta r_{ij}) \: kb_{IJ} \f$<br>
 # 
 # for the calculation of the partial derivatives \f$ \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
 # 
@@ -592,7 +616,8 @@ def calcElasticPotentialGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vecto
 # 
 # The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
 # 
-# \f$ \frac{\partial ET_{ijkl}}{\partial \vec{p_x}} = \frac{\partial ET_{ijkl}}{\partial \Phi_{ijkl}} \: \frac{\partial \Phi_{ijkl}}{\partial \cos(\Phi_{ijkl})} \: \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$<br>
+# \f$ \frac{\partial ET_{ijkl}}{\partial \vec{p_x}} = \frac{\partial ET_{ijkl}}{\partial \Phi_{ijkl}} \: \frac{\partial \Phi_{ijkl}}{\partial \cos(\Phi_{ijkl})} \:
+#                                                     \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$<br>
 # 
 # \f$ \frac{\partial ET_{ijkl}}{\partial \Phi_{ijkl}} = V_2 \: \sin(2 \: \Phi_{ijkl}) - 0.5 \: V_1 \: \sin(\Phi_{ijkl}) - 1.5 \: V_3 \: \sin(3 \: \Phi_{ijkl}) \f$<br>
 #  \f$ \frac{\partial \Phi_{ijkl}}{\partial \cos(\Phi_{ijkl})} = \frac{-1}{\sqrt{1 - \cos(\Phi_{ijkl})^2}} \f$<br>
@@ -632,7 +657,8 @@ def calcMMFF94TorsionGradient(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math
 # 
 # \f$ \frac{\partial E_{vdW_{ij}}}{\partial \vec{p_x}} = \frac{\partial E_{vdW_{ij}}}{\partial R_{ij}} \: \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$<br>
 # 
-# \f$ \frac{\partial E_{vdW_{ij}}}{\partial R_{ij}} = \frac{-R_{IJ}^{*^7} \: \varepsilon_{IJ}}{(R_{ij} + 0.07 \: R_{IJ}^*)^8 \: (R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})^2} \: (-22.48094067 \: R_{ij}^{14} + 19.78322779 \: R_{ij}^7 \: R_{IJ}^{*^7} + 0.8812528743 \: R_{ij}^6 \: R_{IJ}^{*^8} + 1.186993667 \: R_{IJ}^{*^{14}}) \f$<br>
+# \f$ \frac{\partial E_{vdW_{ij}}}{\partial R_{ij}} = \frac{-R_{IJ}^{*^7} \: \varepsilon_{IJ}}{(R_{ij} + 0.07 \: R_{IJ}^*)^8 \: (R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})^2} \: 
+#               (-22.48094067 \: R_{ij}^{14} + 19.78322779 \: R_{ij}^7 \: R_{IJ}^{*^7} + 0.8812528743 \: R_{ij}^6 \: R_{IJ}^{*^8} + 1.186993667 \: R_{IJ}^{*^{14}}) \f$<br>
 # 
 # for the calculation of the partial derivatives \f$ \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
 # 

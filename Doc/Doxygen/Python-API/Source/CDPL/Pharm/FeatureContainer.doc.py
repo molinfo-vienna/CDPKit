@@ -62,6 +62,13 @@ class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
     def getNumFeatures() -> int: pass
 
     ##
+    # \brief Orders the stored features according to criteria implemented by the provided feature comparison function.
+    # 
+    # \param func The feature comparison function implementing the applied ordering criteria.
+    # 
+    def orderFeatures(func: BoolFeature2Functor) -> None: pass
+
+    ##
     # \brief Returns a reference to the entity at index <em>idx</em>.
     # 
     # \param idx The zero-based index of the Chem.Entity3D instance to return.

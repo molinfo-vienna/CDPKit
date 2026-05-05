@@ -24,7 +24,8 @@
 # 
 # The <em>Euclidean Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|} \]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -40,7 +41,8 @@ def calcEuclideanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Manhattan Distance</em> \f$ D_{12} \f$ is calculated by:
 # 
-# \[ D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1 \]
+# \f[   D_{12} = {\left \| \vec{v}_1 - \vec{v}_2 \right \|}_1
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -56,7 +58,8 @@ def calcManhattanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Cosine Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} \]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}{\left \| \vec{v}_2 \right \|}} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
@@ -72,7 +75,8 @@ def calcCosineSimilarity(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 # 
 # The <em>Tanimoto Similarity</em> \f$ S_{12} \f$ is calculated by:
 # 
-# \[ S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} \]
+# \f[   S_{12} = \frac{\vec{v}_1 \cdot \vec{v}_2}{{\left \| \vec{v}_1 \right \|}^2 + {\left \| \vec{v}_2 \right \|}^2 - \vec{v}_1 \cdot \vec{v}_2} 
+# \f]
 # 
 # \param v1 The first vector.
 # \param v2 The second vector.
