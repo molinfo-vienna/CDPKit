@@ -34,6 +34,8 @@
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 
 
@@ -44,59 +46,68 @@ namespace
 {
 
     typedef std::set<std::string> StringSet;
-    
-    void addResidueInfo(const Pharm::Feature& ftr, StringSet& env_res_list, bool clear = false)
+
+    void stringSetToStr(const StringSet& str_set, std::string& out_str)
     {
-        if (clear)
-            env_res_list.clear();
+        out_str.clear();
 
-        auto& ftr_substr = getSubstructure(ftr);
-        
-        if (ftr_substr->getNumAtoms() == 0)
-            return;
-
-        auto& atom = ftr_substr->getAtom(0);
-        std::string res_id;
-        
-        if (Biomol::hasResidueCode(atom))
-            res_id.append(Biomol::getResidueCode(atom));
-        else
-            res_id.push_back('?');
-
-        res_id.push_back('_');
-
-        if (Biomol::hasResidueSequenceNumber(atom))
-            res_id.append(std::to_string(Biomol::getResidueSequenceNumber(atom)));
-        else
-            res_id.push_back('?');
-
-        res_id.push_back('_');
-
-        if (Biomol::hasChainID(atom))
-            res_id.append(Biomol::getChainID(atom));
-        else
-            res_id.push_back('?');
-
-        env_res_list.insert(res_id);
-    }
-
-    void setEnvironmentResidueInfoProp(Pharm::Feature& ftr, const StringSet& env_res_list)
-    {
-        if (env_res_list.empty())
-            return;
-
-        std::string info_str;
-
-        for (auto& res_id : env_res_list) {
-            if (!info_str.empty()) {
-                info_str.push_back(',');
-                info_str.push_back(' ');
+        for (auto& elem : str_set) {
+            if (!out_str.empty()) {
+                out_str.push_back(',');
+                out_str.push_back(' ');
             }
 
-            info_str.append(res_id);
+            out_str.append(elem);
+        }
+    }
+    
+    void setEnvResidueAndAtomInfoProps(Pharm::Feature& ftr)
+    {
+        StringSet env_res_list;
+        StringSet env_atom_list;
+        std::string tmp;
+        
+        auto& ftr_substr = getEnvironmentSubstructure(ftr);
+       
+        for (auto& atom : ftr_substr->getAtoms()) {
+            tmp.clear();
+        
+            if (Biomol::hasResidueCode(atom))
+                tmp.append(Biomol::getResidueCode(atom));
+            else
+                tmp.push_back('?');
+
+            tmp.push_back('_');
+            
+            if (Biomol::hasResidueSequenceNumber(atom))
+                tmp.append(std::to_string(Biomol::getResidueSequenceNumber(atom)));
+            else
+                tmp.push_back('?');
+            
+            tmp.push_back('_');
+
+            if (Biomol::hasChainID(atom))
+                tmp.append(Biomol::getChainID(atom));
+            else
+                tmp.push_back('?');
+
+            env_res_list.insert(tmp);
+
+            tmp.push_back('_');
+
+            if (Biomol::hasSerialNumber(atom))
+                tmp.append(std::to_string(Biomol::hasSerialNumber(atom)));
+            else
+                tmp.push_back('?');
+              
+            env_atom_list.insert(tmp);
         }
 
-        setEnvironmentResidueInfo(ftr, info_str);
+        stringSetToStr(env_res_list, tmp);
+        setEnvironmentResidueInfo(ftr, tmp);
+
+        stringSetToStr(env_atom_list, tmp);
+        setEnvironmentResidueAtomInfo(ftr, tmp);
     }
 }
 
@@ -105,9 +116,7 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
 {
     if (!append)
         pharm.clear();
-
-    StringSet env_res_list;
-    
+   
     for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
         if (!it->first || !it->second) {
             ++it;
@@ -115,7 +124,8 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
         }
 
         const Feature& ftr1 = *it->first;
-
+        Chem::Fragment::SharedPointer env_substr(new Chem::Fragment());
+ 
         if (has3DCoordinates(ftr1)) {
             double dir_factor = 0.0;
 
@@ -137,9 +147,7 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
             if (dir_factor != 0.0) {
                 bool created_ftrs = false;
                 const Math::Vector3D& ftr1_pos = get3DCoordinates(ftr1);
-
-                env_res_list.clear();
-                
+  
                 for ( ; it != end && &ftr1 == it->first; ++it) {
                     if (!it->second)
                         continue;
@@ -147,7 +155,7 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
                     const Feature& ftr2 = *it->second;
 
                     if (!has3DCoordinates(ftr2)) {
-                        addResidueInfo(ftr2, env_res_list);
+                        *env_substr += *getSubstructure(ftr2);
                         continue;
                     }
                     
@@ -163,15 +171,18 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
                     setOrientation(new_ftr, orient);
                     setGeometry(new_ftr, FeatureGeometry::VECTOR);
                     setLength(new_ftr, len);
-
-                    addResidueInfo(ftr2, env_res_list, true);
-                    setEnvironmentResidueInfoProp(new_ftr, env_res_list);
-       
+                    setEnvironmentSubstructure(new_ftr, getSubstructure(ftr2));
+                    setEnvResidueAndAtomInfoProps(new_ftr);
+                    
                     created_ftrs = true;
                 }
 
-                if (!created_ftrs)
-                    setEnvironmentResidueInfoProp(pharm.addFeature() = ftr1, env_res_list);
+                if (!created_ftrs) {
+                    auto& new_ftr = (pharm.addFeature() = ftr1);
+
+                    setEnvironmentSubstructure(new_ftr, env_substr);
+                    setEnvResidueAndAtomInfoProps(new_ftr);
+                }
                 
                 continue;
             }
@@ -179,11 +190,12 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
 
         auto& new_ftr = (pharm.addFeature() = ftr1);
 
-        addResidueInfo(*it->second, env_res_list, true);
+        *env_substr += *getSubstructure(*it->second);
             
         for (++it; it != end && &ftr1 == it->first; ++it)
-            addResidueInfo(*it->second, env_res_list);
+            *env_substr += *getSubstructure(*it->second);
 
-        setEnvironmentResidueInfoProp(new_ftr, env_res_list);
+        setEnvironmentSubstructure(new_ftr, env_substr);
+        setEnvResidueAndAtomInfoProps(new_ftr);
     }
 }
