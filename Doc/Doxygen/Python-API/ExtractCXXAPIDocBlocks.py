@@ -244,7 +244,7 @@ def getDocBlock(node):
     if detailed_doc:
         doc_block += '\n' + detailed_doc
 
-    return doc_block.replace('$', '\\f$')
+    return doc_block.replace('$', '\\f$').replace('\\[', '\\f[').replace('\\]', '\\f]')
     
 def processCXXAPIDocFile(file_path, api_doc_db):
     print('Processing file: %s...' % path.basename(file_path))
