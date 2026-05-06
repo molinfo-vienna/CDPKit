@@ -112,7 +112,8 @@ def outputInteractionData(ligand_idx: int, lig_mol: Chem.MolecularGraph, ia_ph4:
             else:
                 lig_atom_inds = str(atom_idx)
 
-        out_file.write(f'{ligand_idx}\t{ia_ph4.getFeatureIndex(ftr)}\t{Pharm.getType(ftr)}\t{lig_atom_inds}\t{Pharm.getEnvironmentResidueInfo(ftr)}\n')
+        out_file.write(f'{ligand_idx}\t{ia_ph4.getFeatureIndex(ftr)}\t{Pharm.getType(ftr)}' \
+                       f'\t{lig_atom_inds}\t{Pharm.getEnvironmentResidueInfo(ftr)}\t{Pharm.getEnvironmentResidueAtomInfo(ftr)}\n')
 
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Generates pharmacophores describing the interactions between a given receptor structure and a set of ligand molecules.')
@@ -179,7 +180,7 @@ def main() -> None:
         ia_out_file = open(args.ia_out_file, 'w')
         
         # write TSV file column headers
-        ia_out_file.write('Input Ligand Index\tPharm. Feature Index\tPharm. Feature Type\tLigand Atom Indices\tPocket Residues\n')
+        ia_out_file.write('Input Ligand Index\tPharm. Feature Index\tPharm. Feature Type\tLigand Atom Indices\tPocket Residues\tPocket Residue Atoms\n')
 
     lig_mol = Chem.BasicMolecule()          # create an instance of the default implementation of the
                                             # Chem.Molecule interface that will store the ligand structures
