@@ -1,12 +1,16 @@
 master:
 
+ - New pharm. feature functions Pharm::getEnvironmentResidueInfo() and Pharm::getEnvironmentResidueAtomInfo() which
+   convert the value of the property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE into human readable strings that provide
+   info about interacting residues and residue atoms, respectively
  - The order of output interaction pharmacophore features (class Pharm::InteractionPharmacophoreGenerator) is now
    always the same for given input data
- - Fo each output interaction feature the function Pharm::generateInteractionPharmacophore() now sets properties
-   providing information about interacting environment atoms (property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO) and
-   and the interacting environment substructure (property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE) 
- - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO plus associated functions
+ - New method Pharm::FeatureContainer::orderFeatures() which allows to reorder the feature sequence according to
+   user defined criterions
+ - The function Pharm::generateInteractionPharmacophore() now stores the interacting
+   environment substructure for each output interaction feature (property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE) 
  - New pharm. feature property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE plus associated functions
+ - Removed feature property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO plus associated functions
 
 v1.3.0:
 
