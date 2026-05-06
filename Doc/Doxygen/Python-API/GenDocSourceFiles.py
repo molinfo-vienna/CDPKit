@@ -28,6 +28,7 @@ import sys
 import inspect
 import re
 import pickle
+import functools
 
 import CDPL
 import CDPL.Base
@@ -712,22 +713,22 @@ def printFunctions(func_objects):
         return
 
     out_file = None
-    class_funcs = {}
+    funcs_to_output = []
+    ctrl_param_funcs_to_output = []
     
     for func_obj in func_objects:
         if func_obj.__name__.startswith('_'):
             continue
-        
+
+        is_ctrl_param_func = func_obj.__name__.endswith('Parameter')
         overloads = getFuncOverloads(func_obj, func_obj.__name__)
     
         if len(overloads) > 0:
             for func_data in overloads:
-                class_name = getFirstArgType(func_data)
-
-                if not class_name in class_funcs:
-                    class_funcs[class_name] = []
-
-                class_funcs[class_name].append(func_data)
+                if is_ctrl_param_func:
+                    ctrl_param_funcs_to_output.append(func_data)
+                else:
+                    funcs_to_output.append(func_data)
         else:
             if not out_file:
                 out_file = openOutputFile('Functions')
@@ -739,34 +740,69 @@ def printFunctions(func_objects):
             out_file.write('#\n')
             out_file.write('def ' + func_obj.__name__ + '() -> None: pass\n')
 
-    def func_sort_key(func_data):
-        return func_data['name'][::-1]
-    
-    for class_name, func_list in class_funcs.items():
-        out_file = openOutputFile(class_name + '_Functions')
+    def nameCmpFunc(func_data1, func_data2):
+        name1 = func_data1['name'] + getFirstArgType(func_data1)
+        name2 = func_data2['name'] + getFirstArgType(func_data2)
 
-        for func_data in sorted(func_list, key=func_sort_key):
-            out_file.write('\n')
-
-            doc_block = getAPIDocBlock(getFunctionKey(func_data), func_data=func_data, func_name=func_data['name'], class_name='')
-        
-            if doc_block:
-                out_file.write(doc_block)
-            else:
-                out_file.write('##\n')
-                #out_file.write('# \\brief ' + func_data['name'] + '.\n')
-                out_file.write('# \\brief \n')
-    
-                for arg_name in func_data['arg_names']:
-                    out_file.write('# \\param ' + arg_name + ' \n')
-
-                if func_data['ret_type'] != 'None':
-                    out_file.write('# \\return \n')
-
-                out_file.write('#\n')
-                    
-            out_file.write('def ' + func_data['name'] + '(' + func_data['arg_list'] + ') -> ' + func_data['ret_type'] + ': pass\n')
+        if name1.startswith('get') or name1.startswith('set') or name1.startswith('has'):
+            sname1 = name1[3:]
+        elif name1.startswith('clear'):
+            sname1 = name1[5:]
+        else:
+            sname1 = name1
             
+        if name2.startswith('get') or name2.startswith('set') or name2.startswith('has'):
+            sname2 = name2[3:]
+        elif name2.startswith('clear'):
+            sname2 = name2[5:]
+        else:
+            sname2 = name2
+
+        if sname1 == sname2:
+            if name1 > name2:
+                return -1
+                
+            if name1 < name2:
+                return 1
+                
+            return 0
+
+        if sname1 < sname2:
+            return -1
+            
+        if sname1 > sname2:
+            return 1
+            
+        return 0
+
+    funcs_to_output = sorted(funcs_to_output, key=functools.cmp_to_key(nameCmpFunc)) + \
+        sorted(ctrl_param_funcs_to_output, key=functools.cmp_to_key(nameCmpFunc))
+
+    for func_data in funcs_to_output:
+        if not out_file:
+            out_file = openOutputFile('Functions')
+                
+        out_file.write('\n')
+        
+        doc_block = getAPIDocBlock(getFunctionKey(func_data), func_data=func_data, func_name=func_data['name'], class_name='')
+        
+        if doc_block:
+            out_file.write(doc_block)
+        else:
+            out_file.write('##\n')
+            #out_file.write('# \\brief ' + func_data['name'] + '.\n')
+            out_file.write('# \\brief \n')
+    
+            for arg_name in func_data['arg_names']:
+                out_file.write('# \\param ' + arg_name + ' \n')
+
+            if func_data['ret_type'] != 'None':
+                out_file.write('# \\return \n')
+
+            out_file.write('#\n')
+                    
+        out_file.write('def ' + func_data['name'] + '(' + func_data['arg_list'] + ') -> ' + func_data['ret_type'] + ': pass\n')
+  
 def getFuncOverloads(func_obj, func_name):
     overloads = list()
 
