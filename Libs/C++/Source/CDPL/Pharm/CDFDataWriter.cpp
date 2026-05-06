@@ -121,9 +121,6 @@ void Pharm::CDFDataWriter::outputFeatures(const FeatureContainer& cntnr, Interna
         if (hasHydrophobicity(feature))
             putFloatProperty(CDF::FeatureProperty::HYDROPHOBICITY, getHydrophobicity(feature), bbuf);
 
-        if (hasEnvironmentResidueInfo(feature))
-            putStringProperty(CDF::FeatureProperty::ENV_RESIDUE_INFO, getEnvironmentResidueInfo(feature), bbuf);
-   
         putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
     }
 }

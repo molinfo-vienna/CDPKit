@@ -53,8 +53,6 @@ void CDPLPythonPharm::exportFeatureProperties()
         .def_readonly("DISABLED_FLAG", &Pharm::FeatureProperty::DISABLED_FLAG)
         .def_readonly("OPTIONAL_FLAG", &Pharm::FeatureProperty::OPTIONAL_FLAG)
         .def_readonly("HYDROPHOBICITY", &Pharm::FeatureProperty::HYDROPHOBICITY)
-        .def_readonly("ENVIRONMENT_RESIDUE_INFO", &Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_INFO)
-        .def_readonly("ENVIRONMENT_RESIDUE_ATOM_INFO", &Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO)
         .def_readonly("ENVIRONMENT_SUBSTRUCTURE", &Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE)
         ;
 }

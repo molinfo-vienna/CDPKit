@@ -24,8 +24,6 @@
 
 #include "StaticInit.hpp"
 
-#include <set>
-
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
@@ -35,81 +33,9 @@
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Biomol/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
-
-
-namespace
-{
-
-    typedef std::set<std::string> StringSet;
-
-    void stringSetToStr(const StringSet& str_set, std::string& out_str)
-    {
-        out_str.clear();
-
-        for (auto& elem : str_set) {
-            if (!out_str.empty()) {
-                out_str.push_back(',');
-                out_str.push_back(' ');
-            }
-
-            out_str.append(elem);
-        }
-    }
-    
-    void setEnvResidueAndAtomInfoProps(Pharm::Feature& ftr)
-    {
-        StringSet env_res_list;
-        StringSet env_atom_list;
-        std::string tmp;
-        
-        auto& ftr_substr = getEnvironmentSubstructure(ftr);
-       
-        for (auto& atom : ftr_substr->getAtoms()) {
-            tmp.clear();
-        
-            if (Biomol::hasResidueCode(atom))
-                tmp.append(Biomol::getResidueCode(atom));
-            else
-                tmp.push_back('?');
-
-            tmp.push_back('_');
-            
-            if (Biomol::hasResidueSequenceNumber(atom))
-                tmp.append(std::to_string(Biomol::getResidueSequenceNumber(atom)));
-            else
-                tmp.push_back('?');
-            
-            tmp.push_back('_');
-
-            if (Biomol::hasChainID(atom))
-                tmp.append(Biomol::getChainID(atom));
-            else
-                tmp.push_back('?');
-
-            env_res_list.insert(tmp);
-
-            tmp.push_back('_');
-
-            if (Biomol::hasSerialNumber(atom))
-                tmp.append(std::to_string(Biomol::getSerialNumber(atom)));
-            else
-                tmp.push_back('?');
-
-            env_atom_list.insert(tmp);
-        }
-
-        stringSetToStr(env_res_list, tmp);
-        setEnvironmentResidueInfo(ftr, tmp);
-
-        stringSetToStr(env_atom_list, tmp);
-        setEnvironmentResidueAtomInfo(ftr, tmp);
-    }
-}
 
 
 void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append)
@@ -172,17 +98,12 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
                     setGeometry(new_ftr, FeatureGeometry::VECTOR);
                     setLength(new_ftr, len);
                     setEnvironmentSubstructure(new_ftr, getSubstructure(ftr2));
-                    setEnvResidueAndAtomInfoProps(new_ftr);
                     
                     created_ftrs = true;
                 }
 
-                if (!created_ftrs) {
-                    auto& new_ftr = (pharm.addFeature() = ftr1);
-
-                    setEnvironmentSubstructure(new_ftr, env_substr);
-                    setEnvResidueAndAtomInfoProps(new_ftr);
-                }
+                if (!created_ftrs)
+                    setEnvironmentSubstructure(pharm.addFeature() = ftr1, env_substr);
                 
                 continue;
             }
@@ -196,6 +117,5 @@ void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const Feature
             *env_substr += *getSubstructure(*it->second);
 
         setEnvironmentSubstructure(new_ftr, env_substr);
-        setEnvResidueAndAtomInfoProps(new_ftr);
     }
 }

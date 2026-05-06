@@ -84,9 +84,10 @@ namespace
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Hydrophobicity)
-    MAKE_FEATURE_FUNC_WRAPPERS(const std::string&, EnvironmentResidueInfo)
-    MAKE_FEATURE_FUNC_WRAPPERS(const std::string&, EnvironmentResidueAtomInfo)
     MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, EnvironmentSubstructure)
+
+    MAKE_FUNCTION_WRAPPER1(std::string, getEnvironmentResidueInfo, CDPL::Pharm::Feature&)
+    MAKE_FUNCTION_WRAPPER1(std::string, getEnvironmentResidueAtomInfo, CDPL::Pharm::Feature&)
 }
 
 
@@ -94,7 +95,10 @@ void CDPLPythonPharm::exportFeatureFunctions()
 {
     using namespace boost;
     using namespace CDPL;
-    
+
+    python::def("getEnvironmentResidueInfo", &getEnvironmentResidueInfoWrapper1, python::arg("feature"));
+    python::def("getEnvironmentResidueAtomInfo", &getEnvironmentResidueAtomInfoWrapper1, python::arg("feature"));
+     
     EXPORT_FEATURE_FUNCS(Type, type)
     EXPORT_FEATURE_FUNCS(Geometry, geom)
     EXPORT_FEATURE_FUNCS(Length, length)
@@ -105,7 +109,5 @@ void CDPLPythonPharm::exportFeatureFunctions()
     EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
     EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
     EXPORT_FEATURE_FUNCS(Hydrophobicity, hyd)
-    EXPORT_FEATURE_FUNCS_COPY_REF(EnvironmentResidueInfo, res_info)
-    EXPORT_FEATURE_FUNCS_COPY_REF(EnvironmentResidueAtomInfo, res_atom_info)
     EXPORT_FEATURE_FUNCS_COPY_REF_CW(EnvironmentSubstructure, substruct)
 }

@@ -225,7 +225,7 @@ void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const
     writeXMLAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr));
     writeXMLAttribute(os, PML::Attribute::ID, FEATURE_ID_PREFIX + std::to_string(id));
 
-    if (hasEnvironmentResidueInfo(ftr))
+    if (hasEnvironmentSubstructure(ftr))
         writeXMLAttribute(os, PML::Attribute::ENV_COMPOUND, getEnvironmentResidueInfo(ftr));
 
     if (close)
@@ -244,9 +244,6 @@ void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, st
     writeXMLAttribute(os, PML::Attribute::DISABLED, getDisabledFlag(ftr));
     writeXMLAttribute(os, PML::Attribute::WEIGHT, getWeight(ftr));
     writeXMLAttribute(os, PML::Attribute::ID, FEATURE_ID_PREFIX + std::to_string(id));
-
-    if (hasEnvironmentResidueInfo(ftr))
-        writeXMLAttribute(os, PML::Attribute::ENV_COMPOUND, getEnvironmentResidueInfo(ftr));
 
     endXMLStartTag(os);
 

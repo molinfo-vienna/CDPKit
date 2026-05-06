@@ -219,6 +219,8 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
             }
         }
 
+        auto saved_num_ftrs = ia_pharm.getNumFeatures();
+        
         createExclusionVolumes(ia_pharm, iaEnvFeatures, 0.0, 0.1, false);
 
         iaEnvFeatureResAtoms.clear();
@@ -232,6 +234,12 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
 
         createExclusionVolumes(ia_pharm, iaEnvFeatureResAtoms, envPharmGen.getAtom3DCoordinatesFunction(), 1.0, 2.0, false);
         resizeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
+
+        for (auto i = saved_num_ftrs, num_ftrs = ia_pharm.getNumFeatures(); i < num_ftrs; i++) {
+            auto& x_vol = ia_pharm.getFeature(i);
+
+            setEnvironmentSubstructure(x_vol, getSubstructure(x_vol));
+        }
     }
 
     ia_pharm.orderFeatures(&cmpFeatures);

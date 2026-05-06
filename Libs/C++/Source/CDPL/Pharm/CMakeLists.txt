@@ -30,7 +30,7 @@ set(cdpl-pharm_LIB_SRCS
     FeatureSet.cpp
     Pharmacophore.cpp
     BasicPharmacophore.cpp
-  
+    
     FeatureContainerProperty.cpp
     FeatureProperty.cpp
     FeatureContainerPropertyDefault.cpp
@@ -38,7 +38,7 @@ set(cdpl-pharm_LIB_SRCS
     DataFormat.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
-  
+    
     FeatureGenerator.cpp
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
@@ -74,16 +74,16 @@ set(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionScore.cpp
     ParallelPiPiInteractionScore.cpp
     CationPiInteractionScore.cpp
-
+    
     FeatureTypeMatchFunctor.cpp
     FeaturePairDistanceMatchFunctor.cpp
     FeaturePositionMatchFunctor.cpp
     FeatureGeometryMatchFunctor.cpp
     SpatialFeatureMapping.cpp
     PharmacophoreAlignment.cpp
- 
+    
     PharmacophoreFitScore.cpp
-
+    
     ScreeningProcessor.cpp
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
@@ -97,7 +97,7 @@ set(cdpl-pharm_LIB_SRCS
     PSDScreeningDBAccessorImpl.cpp
     PSDScreeningDBAccessor.cpp
     SQLiteDataIOBase.cpp
-   
+    
     PSDPharmacophoreInputHandler.cpp
     PSDMoleculeInputHandler.cpp
     PSDMolecularGraphOutputHandler.cpp
@@ -114,9 +114,10 @@ set(cdpl-pharm_LIB_SRCS
     PMLDataWriter.cpp
     PMLPharmacophoreReader.cpp
     PMLFeatureContainerWriter.cpp
-
+    
     FeaturePropertyFunctions.cpp
-
+    FeatureEnvironmentResidueInfoFunctions.cpp
+    
     FeatureContainerPropertyFunctions.cpp
     FeatureContainerFeatureCountFunctions.cpp
     FeatureContainerFeatureTypeHistogramFunctions.cpp
@@ -126,7 +127,7 @@ set(cdpl-pharm_LIB_SRCS
     FeatureContainerClearOrientationsFunction.cpp
     FeatureContainerRemovePositionalDuplicatesFunction.cpp
     FeatureContainerRemoveFeaturesWithTypeFunction.cpp
-
+    
     FeatureSetGetFeaturesFunction.cpp
     FeatureSetRemovePositionalDuplicatesFunction.cpp
     FeatureSetRemoveFeaturesWithTypeFunction.cpp
@@ -140,7 +141,7 @@ set(cdpl-pharm_LIB_SRCS
     ControlParameterFunctions.cpp
     MoleculeFunctions.cpp
     UtilityFunctions.cpp
-
+    
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp
     QueryTwoPointPharmacophore.cpp

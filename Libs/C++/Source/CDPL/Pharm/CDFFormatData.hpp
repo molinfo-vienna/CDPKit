@@ -61,7 +61,6 @@ namespace CDPL
                 constexpr unsigned int OPTIONAL_FLAG    = 8;
                 constexpr unsigned int HYDROPHOBICITY   = 9;
                 constexpr unsigned int WEIGHT           = 10;
-                constexpr unsigned int ENV_RESIDUE_INFO = 11;
             } // namespace FeatureProperty
 
             namespace PharmacophoreProperty

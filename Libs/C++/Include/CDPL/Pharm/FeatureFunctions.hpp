@@ -109,25 +109,23 @@ namespace CDPL
         /**
          * \since 1.3
          */
-        CDPL_PHARM_API const std::string& getEnvironmentResidueInfo(const Feature& feature);
-
-        CDPL_PHARM_API void setEnvironmentResidueInfo(Feature& feature, const std::string& res_info);
-
-        CDPL_PHARM_API void clearEnvironmentResidueInfo(Feature& feature);
-
-        CDPL_PHARM_API bool hasEnvironmentResidueInfo(const Feature& feature);
+        CDPL_PHARM_API std::string getEnvironmentResidueInfo(const Feature& feature);
 
         /**
          * \since 1.4
          */
-        CDPL_PHARM_API const std::string& getEnvironmentResidueAtomInfo(const Feature& feature);
+        CDPL_PHARM_API std::string& getEnvironmentResidueInfo(const Feature& feature, std::string& info);
 
-        CDPL_PHARM_API void setEnvironmentResidueAtomInfo(Feature& feature, const std::string& res_atom_info);
+        /**
+         * \since 1.4
+         */
+        CDPL_PHARM_API std::string getEnvironmentResidueAtomInfo(const Feature& feature);
 
-        CDPL_PHARM_API void clearEnvironmentResidueAtomInfo(Feature& feature);
-
-        CDPL_PHARM_API bool hasEnvironmentResidueAtomInfo(const Feature& feature);
-
+        /**
+         * \since 1.4
+         */
+        CDPL_PHARM_API std::string& getEnvironmentResidueAtomInfo(const Feature& feature, std::string& info);
+        
         /**
          * \since 1.4
          */
