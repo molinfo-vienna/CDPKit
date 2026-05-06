@@ -77,14 +77,4 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    ENVIRONMENT_RESIDUE_INFO = CDPL.Base.LookupKey('ENVIRONMENT_RESIDUE_INFO')
-
-    ##
-    # \brief 
-    #
-    ENVIRONMENT_RESIDUE_ATOM_INFO = CDPL.Base.LookupKey('ENVIRONMENT_RESIDUE_ATOM_INFO')
-
-    ##
-    # \brief 
-    #
     ENVIRONMENT_SUBSTRUCTURE = CDPL.Base.LookupKey('ENVIRONMENT_SUBSTRUCTURE')
