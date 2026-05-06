@@ -1,5 +1,7 @@
 master:
 
+ - The order of output interaction pharmacophore features (class Pharm::InteractionPharmacophoreGenerator) is now
+   always the same for given input data
  - Fo each output interaction feature the function Pharm::generateInteractionPharmacophore() now sets properties
    providing information about interacting environment atoms (property Pharm::FeatureProperty::ENVIRONMENT_RESIDUE_ATOM_INFO) and
    and the interacting environment substructure (property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE) 
