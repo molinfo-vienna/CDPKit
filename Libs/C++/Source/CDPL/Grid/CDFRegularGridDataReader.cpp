@@ -109,7 +109,7 @@ void Grid::CDFRegularGridDataReader::readGridData(DRegularGrid& grid, Internal::
     std::uint8_t fp_len;
 
     bbuf.getInt(cell_data_mode);
-    grid.setDataMode(cell_data_mode ? DRegularGrid::CELL : DRegularGrid::POINT);
+    //obsolete: grid.setDataMode(cell_data_mode ? DRegularGrid::CELL : DRegularGrid::POINT);
 
     bbuf.getInt(fp_len);
 

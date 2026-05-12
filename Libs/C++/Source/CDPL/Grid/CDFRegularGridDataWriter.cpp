@@ -92,7 +92,7 @@ void Grid::CDFRegularGridDataWriter::outputGridHeader(const DRegularGrid& grid, 
 
 void Grid::CDFRegularGridDataWriter::outputGridData(const DRegularGrid& grid, Internal::ByteBuffer& bbuf)
 {    
-    bbuf.putInt(CDF::BoolType(grid.getDataMode() == DRegularGrid::CELL), false);
+    bbuf.putInt(true /* obsolete: CDF::BoolType(grid.getDataMode() == DRegularGrid::CELL) */, false);
 
     if (singlePrecisionFloats()) {
         bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(float)), false);                

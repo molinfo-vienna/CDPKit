@@ -85,13 +85,6 @@ namespace CDPL
             typedef RegularSpatialGrid<T, C, GD, XF> SelfType;
 
           public:
-            enum DataMode
-            {
-
-                CELL,
-                POINT
-            };
-
             typedef T                                                       ValueType;
             typedef C                                                       CoordinatesValueType;
             typedef GD                                                      GridDataType;
@@ -109,7 +102,7 @@ namespace CDPL
             typedef std::shared_ptr<SelfType>                               SharedPointer;
 
             RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
-                dataMode(POINT), xStep(xs), yStep(ys), zStep(zs)
+                xStep(xs), yStep(ys), zStep(zs)
             {
 
                 GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
@@ -117,7 +110,7 @@ namespace CDPL
             }
 
             RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs):
-                dataMode(POINT), data(data), xStep(xs), yStep(ys), zStep(zs)
+                data(data), xStep(xs), yStep(ys), zStep(zs)
             {
 
                 GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
@@ -125,7 +118,7 @@ namespace CDPL
             }
 
             explicit RegularSpatialGrid(const CoordinatesValueType& s):
-                dataMode(POINT), xStep(s), yStep(s), zStep(s)
+                xStep(s), yStep(s), zStep(s)
             {
 
                 GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
@@ -133,7 +126,7 @@ namespace CDPL
             }
 
             RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& s):
-                dataMode(POINT), data(data), xStep(s), yStep(s), zStep(s)
+                data(data), xStep(s), yStep(s), zStep(s)
             {
 
                 GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
@@ -141,24 +134,14 @@ namespace CDPL
             }
 
             RegularSpatialGrid(const RegularSpatialGrid& usg):
-                dataMode(usg.dataMode), data(usg.data), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
+                data(usg.data), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
                 xform(usg.xform), invXform(usg.invXform) {}
 
             RegularSpatialGrid(RegularSpatialGrid&& usg):
-                dataMode(usg.dataMode), data(std::move(usg.data)), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
+                data(std::move(usg.data)), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
                 xform(usg.xform), invXform(usg.invXform) {}
 
             virtual ~RegularSpatialGrid() {}
-
-            void setDataMode(DataMode mode)
-            {
-                dataMode = mode;
-            }
-
-            DataMode getDataMode() const
-            {
-                return dataMode;
-            }
 
             Reference operator()(SizeType i)
             {
@@ -252,25 +235,16 @@ namespace CDPL
 
             CoordinatesValueType getXExtent() const
             {
-                if (dataMode == POINT)
-                    return (data.getSize1() * xStep);
-
                 return ((data.getSize1() <= 1 ? SizeType(0) : (data.getSize1() - 1)) * xStep);
             }
 
             CoordinatesValueType getYExtent() const
             {
-                if (dataMode == POINT)
-                    return (data.getSize2() * yStep);
-
                 return ((data.getSize2() <= 1 ? SizeType(0) : (data.getSize2() - 1)) * yStep);
             }
 
             CoordinatesValueType getZExtent() const
             {
-                if (dataMode == POINT)
-                    return (data.getSize3() * zStep);
-
                 return ((data.getSize3() <= 1 ? SizeType(0) : (data.getSize3() - 1)) * zStep);
             }
 
@@ -304,13 +278,6 @@ namespace CDPL
             template <typename V>
             void getLocalCoordinates(SSizeType i, SSizeType j, SSizeType k, V& coords) const
             {
-                if (dataMode == POINT) {
-                    coords[0] = i * xStep + (xStep - getXExtent()) * CoordinatesValueType(0.5);
-                    coords[1] = j * yStep + (yStep - getYExtent()) * CoordinatesValueType(0.5);
-                    coords[2] = k * zStep + (zStep - getZExtent()) * CoordinatesValueType(0.5);
-                    return;
-                }
-
                 coords[0] = i * xStep - getXExtent() * CoordinatesValueType(0.5);
                 coords[1] = j * yStep - getYExtent() * CoordinatesValueType(0.5);
                 coords[2] = k * zStep - getZExtent() * CoordinatesValueType(0.5);
@@ -417,7 +384,6 @@ namespace CDPL
 
             RegularSpatialGrid& operator=(const RegularSpatialGrid& usg)
             {
-                dataMode = usg.dataMode;
                 data     = usg.data;
                 xform    = usg.xform;
                 invXform = usg.invXform;
@@ -429,7 +395,6 @@ namespace CDPL
 
             RegularSpatialGrid& operator=(RegularSpatialGrid&& usg)
             {
-                dataMode = usg.dataMode;
                 data     = std::move(usg.data);
                 xform    = usg.xform;
                 invXform = usg.invXform;
@@ -503,7 +468,6 @@ namespace CDPL
                 std::swap(xStep, usg.xStep);
                 std::swap(yStep, usg.yStep);
                 std::swap(zStep, usg.zStep);
-                std::swap(dataMode, dataMode);
             }
 
             friend void swap(RegularSpatialGrid& usg1, RegularSpatialGrid& usg2)
@@ -535,7 +499,6 @@ namespace CDPL
                 GridCoordinatesTransformTraits<InvCoordinatesTransformType>::transform(invXform, world_coords, local_coords);
             }
 
-            DataMode                    dataMode;
             GridDataType                data;
             CoordinatesValueType        xStep;
             CoordinatesValueType        yStep;
@@ -576,41 +539,9 @@ namespace CDPL
 
             SSizeType inds_p1[3];
 
-            if (grid.getDataMode() == GridType::POINT) {
-                bool recalc_xyz0 = false;
-
-                if (loc_pos[0] < xyz0[0]) {
-                    inds_p1[0] = inds[0];
-                    inds[0] -= 1;
-                    recalc_xyz0 = true;
-
-                } else
-                    inds_p1[0] = inds[0] + 1;
-
-                if (loc_pos[1] < xyz0[1]) {
-                    inds_p1[1] = inds[1];
-                    inds[1] -= 1;
-                    recalc_xyz0 = true;
-
-                } else
-                    inds_p1[1] = inds[1] + 1;
-
-                if (loc_pos[2] < xyz0[2]) {
-                    inds_p1[2] = inds[2];
-                    inds[2] -= 1;
-                    recalc_xyz0 = true;
-
-                } else
-                    inds_p1[2] = inds[2] + 1;
-
-                if (recalc_xyz0)
-                    grid.getLocalCoordinates(inds[0], inds[1], inds[2], xyz0);
-
-            } else {
-                inds_p1[0] = inds[0] + 1;
-                inds_p1[1] = inds[1] + 1;
-                inds_p1[2] = inds[2] + 1;
-            }
+            inds_p1[0] = inds[0] + 1;
+            inds_p1[1] = inds[1] + 1;
+            inds_p1[2] = inds[2] + 1;
 
             inds[0] = std::max(SSizeType(0), inds[0]);
             inds[1] = std::max(SSizeType(0), inds[1]);

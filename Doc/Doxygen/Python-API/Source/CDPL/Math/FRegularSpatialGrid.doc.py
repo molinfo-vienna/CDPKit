@@ -25,21 +25,6 @@
 class FRegularSpatialGrid(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
-    class DataMode(Boost.Python.enum):
-
-        ##
-        # \brief CELL.
-        #
-        CELL = 0
-
-        ##
-        # \brief POINT.
-        #
-        POINT = 1
-
-    ##
     # \brief Initializes a copy of the \e %FRegularSpatialGrid instance \a grid.
     # \param grid The \e %FRegularSpatialGrid instance to copy.
     # 
@@ -90,18 +75,6 @@ class FRegularSpatialGrid(Boost.Python.instance):
     # \param v 
     #
     def clear(v: float = 0.0) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getDataMode() -> DataMode: pass
-
-    ##
-    # \brief 
-    # \param mode 
-    #
-    def setDataMode(mode: DataMode) -> None: pass
 
     ##
     # \brief 
@@ -735,8 +708,6 @@ class FRegularSpatialGrid(Boost.Python.instance):
     data = property(getData)
 
     coordsTransform = property(getCoordinatesTransform, setCoordinatesTransform)
-
-    dataMode = property(getDataMode, setDataMode)
 
     xStepSize = property(getXStepSize, setXStepSize)
 

@@ -55,16 +55,7 @@ namespace
             typedef typename GridType::CoordinatesValueType CoordinatesValueType;
             typedef typename GridType::CoordinatesTransformType CoordinatesTransformType;
 
-            python::class_<GridType, typename GridType::SharedPointer> cls(name, python::no_init);
-
-            python::scope scope = cls;
-
-            python::enum_<typename GridType::DataMode>("DataMode")
-                .value("CELL", GridType::CELL)
-                .value("POINT", GridType::POINT)
-                .export_values();
-
-            cls
+            python::class_<GridType, typename GridType::SharedPointer>(name, python::no_init)
                 .def(python::init<const GridType&>((python::arg("self"), python::arg("grid"))))
                 .def(python::init<const GridDataType&, const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
                          (python::arg("self"), python::arg("data"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
@@ -78,8 +69,6 @@ namespace
                      (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("preserve") = true,
                       python::arg("v") = ValueType()))
                 .def("clear", &GridType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-                .def("getDataMode", &GridType::getDataMode, python::arg("self"))
-                .def("setDataMode", &GridType::setDataMode, (python::arg("self"), python::arg("mode")))
                 .def("getXExtent", &GridType::getXExtent, python::arg("self"))
                 .def("getYExtent", &GridType::getYExtent, python::arg("self"))
                 .def("getZExtent", &GridType::getZExtent, python::arg("self"))
@@ -164,7 +153,6 @@ namespace
                                                             python::return_internal_reference<>()))
                 .add_property("coordsTransform", python::make_function(&GridType::getCoordinatesTransform, python::return_internal_reference<>()), 
                               &GridType::template setCoordinatesTransform<CoordinatesTransformType>)
-                .add_property("dataMode", &GridType::getDataMode, &GridType::setDataMode)
                 .add_property("xStepSize", &GridType::getXStepSize, &GridType::setXStepSize)
                 .add_property("yStepSize", &GridType::getYStepSize, &GridType::setYStepSize)
                 .add_property("zStepSize", &GridType::getZStepSize, &GridType::setZStepSize)
