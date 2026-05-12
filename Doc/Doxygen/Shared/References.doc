@@ -143,7 +143,7 @@ An open source chemical structure curation pipeline using RDKit,
 <tr>
 <td valign="top">\anchor CTFILE<i>[CTFILE]</i></td>
 <td valign="top">
-MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/public/ctfile/ctfile.jsp
+MDL CTFile Formats Specification: https://discover.3ds.com/sites/default/files/2020-08/biovia_ctfileformats_2020.pdf
 </td>
 </tr>
 <tr><td></td>
@@ -151,6 +151,13 @@ MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/pu
 A. Dalby <i>et al.</i>,
 Description of several chemical structure file formats used by computer programs developed at Molecular Design Limited,
 <i>J. Chem. Inf. Comput. Sci.</i> <b>1992</b>, 32, 244-255
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor CUBE<i>[CUBE]</i></td>
+<td valign="top">
+Gaussian CUBE File Format specification: https://h5cube-spec.readthedocs.io/en/latest/cubeformat.html
 </td>
 </tr>
 
@@ -349,7 +356,7 @@ S. R. Hall, F. H. Allen, I. D. Brown, The Crystallographic Information File (CIF
 <tr>
 <td valign="top">\anchor MMTF<i>[MMTF]</i></td>
 <td valign="top">
-Macromolecular Transmission Format homepage: https://mmtf.rcsb.org
+Macromolecular Transmission Format specification: https://github.com/rcsb/mmtf/blob/v1.0/spec.md
 </td>
 </tr>
 
