@@ -127,15 +127,21 @@ class DataFormat(Boost.Python.instance):
     ##
     # \brief Provides meta-information about the <em>XYZ</em> format.
     # 
+    # \since 1.1
+    # 
     XYZ = CDPL.Base.DataFormat(name='XYZ', descr='Atomic Coordinates XYZ Format', mime_type'', file_exts=['xyz'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the gzip-compressed <em>XYZ</em> format.
     # 
+    # \since 1.1
+    # 
     XYZ_GZ = CDPL.Base.DataFormat(name='XYZ_GZ', descr='GZip-Compressed Atomic Coordinates XYZ Format', mime_type'', file_exts=['xyz.gz'], multi_rec=True)
 
     ##
     # \brief Provides meta-information about the bzip2-compressed <em>XYZ</em> format.
+    # 
+    # \since 1.1
     # 
     XYZ_BZ2 = CDPL.Base.DataFormat(name='XYZ_BZ2', descr='BZip2-Compressed Atomic Coordinates XYZ Format', mime_type'', file_exts=['xyz.bz2'], multi_rec=True)
 

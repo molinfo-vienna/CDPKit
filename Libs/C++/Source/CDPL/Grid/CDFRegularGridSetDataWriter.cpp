@@ -29,6 +29,8 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
+#include "CDPL/Grid/RegularGridSet.hpp"
+
 #include "CDFRegularGridSetDataWriter.hpp"
 #include "CDFFormatData.hpp"
 

@@ -38,3 +38,8 @@ class DataFormat(Boost.Python.instance):
     # \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
     # 
     CDF_BZ2 = CDPL.Base.DataFormat(name='CDF_BZ2', descr='BZip2-Compressed Native CDPL-Format', mime_type'', file_exts=['cdf.bz2'], multi_rec=True)
+
+    ##
+    # \brief Provides meta-information about the <em>Gaussian CUBE</em> [\ref CUBE] format.
+    # 
+    CUBE = CDPL.Base.DataFormat(name='CUBE', descr='Gaussian CUBE Format', mime_type'', file_exts=['cube', 'cdf.bz2'], multi_rec=False)

@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the output of gzip-compressed molecular graph data in the <em>XYZ</em> format.
+         * \since 1.1
          */
         typedef Util::DefaultDataOutputHandler<XYZGZMolecularGraphWriter, DataFormat::XYZ_GZ> XYZGZMolecularGraphOutputHandler;
     } // namespace Chem

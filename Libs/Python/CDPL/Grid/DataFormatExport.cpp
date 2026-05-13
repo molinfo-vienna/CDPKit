@@ -45,5 +45,7 @@ void CDPLPythonGrid::exportDataFormats()
     python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
         .def_readonly("CDF", &Grid::DataFormat::CDF)
         .def_readonly("CDF_GZ", &Grid::DataFormat::CDF_GZ)
-        .def_readonly("CDF_BZ2", &Grid::DataFormat::CDF_BZ2);
+        .def_readonly("CDF_BZ2", &Grid::DataFormat::CDF_BZ2)
+        .def_readonly("CUBE", &Grid::DataFormat::CUBE)
+        ;
 }

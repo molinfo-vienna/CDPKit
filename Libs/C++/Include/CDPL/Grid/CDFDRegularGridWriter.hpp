@@ -46,14 +46,14 @@ namespace CDPL
         class CDFRegularGridDataWriter;
 
         /**
-         * \brief A writer for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+         * \brief A writer for regular spatial grid data in the native I/O format of the <em>CDPL</em>.
          */
         class CDPL_GRID_API CDFDRegularGridWriter : public Base::DataWriter<DRegularGrid>
         {
 
           public:
             /**
-             * \brief Constructs a \c %CDFDRegularGridWriter instance that will write data of spatial regular grids to the output
+             * \brief Constructs a \c %CDFDRegularGridWriter instance that will write data of regular spatial grids to the output
              *        stream \a os.
              * \param os The output stream to write to.
              */
@@ -69,8 +69,8 @@ namespace CDPL
             CDFDRegularGridWriter& operator=(const CDFDRegularGridWriter&) = delete;
 
             /**
-             * \brief Writes data of the spatial regular grid \a grid to the output stream specified in the constructor.
-             * \param grid The spatial regular grid to write.
+             * \brief Writes data of the regular spatial grid \a grid to the output stream specified in the constructor.
+             * \param grid The regular spatial grid to write.
              * \return A reference to itself.
              */
             Base::DataWriter<DRegularGrid>& write(const DRegularGrid& grid);

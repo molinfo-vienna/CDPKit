@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the input of molecule data in the <em>XYZ</em> format.
+         * \since 1.1
          */
         typedef Util::DefaultDataInputHandler<XYZMoleculeReader, DataFormat::XYZ> XYZMoleculeInputHandler;
     } // namespace Chem

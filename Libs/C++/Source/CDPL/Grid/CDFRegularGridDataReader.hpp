@@ -28,7 +28,6 @@
 #include <iosfwd>
 
 #include "CDPL/Grid/CDFDataReader.hpp"
-#include "CDPL/Grid/RegularGrid.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 

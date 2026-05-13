@@ -26,6 +26,7 @@
 
 #include <cstdint>
 
+#include "CDPL/Grid/RegularGrid.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 

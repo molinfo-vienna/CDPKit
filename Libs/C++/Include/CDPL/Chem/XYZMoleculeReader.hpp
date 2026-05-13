@@ -43,7 +43,10 @@ namespace CDPL
 
         class XYZDataReader;
         class Molecule;
-
+        
+        /**
+         * \since 1.1
+         */
         class CDPL_CHEM_API XYZMoleculeReader : public Util::StreamDataReader<Molecule, XYZMoleculeReader>
         {
 

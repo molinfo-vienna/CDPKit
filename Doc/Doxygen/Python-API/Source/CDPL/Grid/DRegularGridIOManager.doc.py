@@ -162,7 +162,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numInputHandlers = 3
+    numInputHandlers = 4
 
     ##
     # \brief 
@@ -172,7 +172,7 @@ class DRegularGridIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numOutputHandlers = 3
+    numOutputHandlers = 4
 
     ##
     # \brief Registers the specified Grid.DRegularGridInputHandler implementation instance.

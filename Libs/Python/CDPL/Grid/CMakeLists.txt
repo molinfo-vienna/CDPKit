@@ -63,12 +63,16 @@ set(grid_MOD_SRCS
     CDFRegularGridOutputHandlerExport.cpp
     CDFRegularGridSetInputHandlerExport.cpp
     CDFRegularGridSetOutputHandlerExport.cpp
-
     CDFRegularGridReaderExport.cpp
     CDFRegularGridWriterExport.cpp
     CDFRegularGridSetReaderExport.cpp
     CDFRegularGridSetWriterExport.cpp
 
+    CUBERegularGridInputHandlerExport.cpp
+    CUBERegularGridOutputHandlerExport.cpp
+    CUBERegularGridReaderExport.cpp
+    CUBERegularGridWriterExport.cpp
+    
     AttributedGridFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
 

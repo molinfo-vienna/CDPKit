@@ -154,16 +154,19 @@ namespace CDPL
 
             /**
              * \brief Provides meta-information about the <em>XYZ</em> format.
+             * \since 1.1
              */
             extern CDPL_CHEM_API const Base::DataFormat XYZ;
 
             /**
              * \brief Provides meta-information about the gzip-compressed <em>XYZ</em> format.
+             * \since 1.1
              */
             extern CDPL_CHEM_API const Base::DataFormat XYZ_GZ;
 
             /**
              * \brief Provides meta-information about the bzip2-compressed <em>XYZ</em> format.
+             * \since 1.1
              */
             extern CDPL_CHEM_API const Base::DataFormat XYZ_BZ2;
 

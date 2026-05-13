@@ -45,6 +45,9 @@ namespace CDPL
         class XYZDataWriter;
         class MolecularGraph;
 
+        /**
+         * \since 1.1
+         */
         class CDPL_CHEM_API XYZMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
         {
 

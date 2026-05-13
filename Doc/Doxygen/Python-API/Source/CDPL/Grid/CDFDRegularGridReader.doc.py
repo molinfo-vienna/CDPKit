@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief A reader for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# \brief A reader for regular spatial grid data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFDRegularGridReader(DRegularGridReaderBase):
 
     ##
-    # \brief Constructs a <tt>CDFDRegularGridReader</tt> instance that will read the spatial regular grid data from the input stream <em>is</em>.
+    # \brief Constructs a <tt>CDFDRegularGridReader</tt> instance that will read the regular spatial grid data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 

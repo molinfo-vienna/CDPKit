@@ -25,8 +25,6 @@
 #ifndef CDPL_GRID_CDFREGULARGRIDSETDATAWRITER_HPP
 #define CDPL_GRID_CDFREGULARGRIDSETDATAWRITER_HPP
 
-#include "CDPL/Grid/RegularGridSet.hpp"
-
 #include "CDFRegularGridDataWriter.hpp"
 
 

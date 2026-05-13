@@ -22,6 +22,8 @@
 ##
 # \brief A handler for the input of gzip-compressed molecule data in the <em>XYZ</em> format.
 # 
+# \since 1.1
+# 
 class XYZGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##

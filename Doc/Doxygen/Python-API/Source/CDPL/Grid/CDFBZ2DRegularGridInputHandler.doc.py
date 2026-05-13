@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A handler for the input of bzip2-compressed spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# \brief A handler for the input of bzip2-compressed regular spatial grid data in the native I/O format of the <em>CDPL</em>.
 # 
 class CDFBZ2DRegularGridInputHandler(DRegularGridInputHandler):
 

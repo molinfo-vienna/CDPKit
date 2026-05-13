@@ -66,6 +66,11 @@ BOOST_PYTHON_MODULE(_grid)
     exportCDFRegularGridSetReader();
     exportCDFRegularGridSetWriter();
 
+    exportCUBERegularGridInputHandler();
+    exportCUBERegularGridOutputHandler();
+    exportCUBERegularGridReader();
+    exportCUBERegularGridWriter();
+    
     exportAttributedGridFunctions();
     exportControlParameterFunctions();
 

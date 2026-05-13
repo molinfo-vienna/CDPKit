@@ -64,6 +64,12 @@ namespace CDPL
              * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
              */
             extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
+
+            /**
+             * \brief Provides meta-information about the <em>Gaussian CUBE</em> [\ref CUBE] format.
+             */
+            extern CDPL_GRID_API const Base::DataFormat CUBE;
+            
         } // namespace DataFormat
     } // namespace Grid
 } // namespace CDPL

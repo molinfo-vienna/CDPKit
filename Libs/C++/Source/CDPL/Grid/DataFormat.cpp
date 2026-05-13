@@ -39,6 +39,8 @@
 #include "CDPL/Grid/CDFGZDRegularGridSetOutputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridSetInputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridSetOutputHandler.hpp"
+#include "CDPL/Grid/CUBEDRegularGridInputHandler.hpp"
+#include "CDPL/Grid/CUBEDRegularGridOutputHandler.hpp"
 
 
 namespace
@@ -47,6 +49,7 @@ namespace
     const char* cdfFileExtensions[]    = { "cdf" };
     const char* cdfGzFileExtensions[]  = { "cdf.gz" };
     const char* cdfBz2FileExtensions[] = { "cdf.bz2" };
+    const char* cubeFileExtensions[]   = { "cube" };
 
 }
 
@@ -60,6 +63,8 @@ const Base::DataFormat Grid::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Nativ
                                                 cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Grid::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
                                                  cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
+const Base::DataFormat Grid::DataFormat::CUBE("CUBE", "Gaussian CUBE Format", "", 
+                                              cubeFileExtensions, cdfBz2FileExtensions + 1, false);
 
 namespace CDPL
 {
@@ -81,11 +86,9 @@ namespace
         Init() {
             using namespace Base;
             using namespace Grid;
-            using namespace Chem;
 
             DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CDFDRegularGridInputHandler()));
             DataIOManager<DRegularGridSet>::registerInputHandler(DataIOManager<DRegularGridSet>::InputHandlerPointer(new CDFDRegularGridSetInputHandler()));
-
             DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFDRegularGridOutputHandler()));
             DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFDRegularGridSetOutputHandler()));
     
@@ -98,6 +101,9 @@ namespace
             DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFGZDRegularGridSetOutputHandler()));
             DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFBZ2DRegularGridOutputHandler()));
             DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFBZ2DRegularGridSetOutputHandler()));
+
+            DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CUBEDRegularGridInputHandler()));
+            DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CUBEDRegularGridOutputHandler()));
         }
 
     } init;

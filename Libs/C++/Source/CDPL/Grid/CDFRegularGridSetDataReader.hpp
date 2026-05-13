@@ -25,8 +25,6 @@
 #ifndef CDPL_GRID_CDFREGULARGRIDSETDATAREADER_HPP
 #define CDPL_GRID_CDFREGULARGRIDSETDATAREADER_HPP
 
-#include "CDPL/Grid/RegularGridSet.hpp"
-
 #include "CDFRegularGridDataReader.hpp"
 
 

@@ -283,13 +283,25 @@ namespace CDPL
              * \since 1.2.3
              */
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_FORMAL_CHARGES;
-            
+
+            /**
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const bool XYZ_COMMENT_IS_NAME;
             
+            /**
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_CONNECTIVITY;
 
+            /**
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const bool XYZ_PERCEIVE_BOND_ORDERS;
 
+            /**
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const bool XYZ_CALC_FORMAL_CHARGES;
 
             /**

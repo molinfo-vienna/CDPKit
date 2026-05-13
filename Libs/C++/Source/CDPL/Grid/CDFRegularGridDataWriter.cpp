@@ -29,6 +29,7 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
+#include "CDPL/Grid/RegularGrid.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 
 #include "CDFRegularGridDataWriter.hpp"

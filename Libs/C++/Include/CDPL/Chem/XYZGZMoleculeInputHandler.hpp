@@ -42,6 +42,7 @@ namespace CDPL
 
         /**
          * \brief A handler for the input of gzip-compressed molecule data in the <em>XYZ</em> format.
+         * \since 1.1
          */
         typedef Util::DefaultDataInputHandler<XYZGZMoleculeReader, DataFormat::XYZ_GZ> XYZGZMoleculeInputHandler;
     } // namespace Chem

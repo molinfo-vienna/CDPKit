@@ -24,6 +24,7 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Grid/RegularGridSet.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "CDFRegularGridSetDataReader.hpp"

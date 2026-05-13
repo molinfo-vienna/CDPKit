@@ -518,12 +518,28 @@ namespace CDPL
              */
             extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_FORMAL_CHARGES;
 
+            /**
+             * \valuetype \c bool
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_COMMENT_IS_NAME;
-            
+
+            /**
+             * \valuetype \c bool
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_CONNECTIVITY;
 
+            /**
+             * \valuetype \c bool
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_PERCEIVE_BOND_ORDERS;
 
+            /**
+             * \valuetype \c bool
+             * \since 1.1
+             */
             extern CDPL_CHEM_API const Base::LookupKey XYZ_CALC_FORMAL_CHARGES;
 
             /**

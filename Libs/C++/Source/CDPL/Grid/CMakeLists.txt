@@ -41,7 +41,11 @@ set(cdpl-grid_LIB_SRCS
     CDFRegularGridDataWriter.cpp
     CDFRegularGridSetDataReader.cpp
     CDFRegularGridSetDataWriter.cpp
-
+    CUBEDRegularGridReader.cpp
+    CUBEDRegularGridWriter.cpp
+    CUBEDataReader.cpp
+    CUBEDataWriter.cpp
+    
     AttributedGridPropertyFunctions.cpp
     ControlParameterFunctions.cpp
    )
