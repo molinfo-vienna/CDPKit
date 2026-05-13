@@ -43,5 +43,7 @@ void CDPLPythonGrid::exportAttributedGridProperties()
     using namespace CDPL;
 
     python::class_<AttributedGridProperty, boost::noncopyable>("AttributedGridProperty", python::no_init)
-        .def_readonly("NAME", &Grid::AttributedGridProperty::NAME);
+        .def_readonly("NAME", &Grid::AttributedGridProperty::NAME)
+        .def_readonly("COMMENT", &Grid::AttributedGridProperty::COMMENT)
+        ;
 }

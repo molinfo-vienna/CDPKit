@@ -39,6 +39,8 @@ namespace CDPL
             const bool STRICT_ERROR_CHECKING              = false;
             
             const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS = true;
+
+            const bool CUBE_COMMENT_IS_NAME               = false;
         }
 
         void initControlParameterDefaults() {}

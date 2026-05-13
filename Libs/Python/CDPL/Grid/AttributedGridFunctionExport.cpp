@@ -44,4 +44,5 @@ void CDPLPythonGrid::exportAttributedGridFunctions()
     using namespace CDPL;
 
     EXPORT_ATTRGRID_FUNCS_COPY_REF(Name, name)
+    EXPORT_ATTRGRID_FUNCS_COPY_REF(Comment, comment)
 }

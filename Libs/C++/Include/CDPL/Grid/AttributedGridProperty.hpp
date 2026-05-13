@@ -51,6 +51,12 @@ namespace CDPL
         {
 
             extern CDPL_GRID_API const Base::LookupKey NAME;
+
+            /**
+             * \since 1.4
+             */
+            extern CDPL_GRID_API const Base::LookupKey COMMENT;
+            
         }
     } // namespace Grid
 } // namespace CDPL

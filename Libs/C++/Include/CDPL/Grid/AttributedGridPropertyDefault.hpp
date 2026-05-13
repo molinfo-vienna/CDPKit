@@ -47,6 +47,7 @@ namespace CDPL
         {
 
             extern CDPL_GRID_API const std::string NAME;
+            extern CDPL_GRID_API const std::string COMMENT;
         }
     } // namespace Grid
 } // namespace CDPL

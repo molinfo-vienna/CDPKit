@@ -62,6 +62,18 @@ namespace CDPL
         CDPL_GRID_API bool hasCDFOutputSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_GRID_API void clearCDFOutputSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_GRID_API bool getCUBECommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void setCUBECommentIsNameParameter(Base::ControlParameterContainer& cntnr, bool is_name);
+
+        CDPL_GRID_API bool hasCUBECommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void clearCUBECommentIsNameParameter(Base::ControlParameterContainer& cntnr);
+        
     } // namespace Grid
 } // namespace CDPL
 

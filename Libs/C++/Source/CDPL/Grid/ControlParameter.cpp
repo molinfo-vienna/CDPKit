@@ -40,6 +40,8 @@ namespace CDPL
             CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
         
             CDPL_DEFINE_LOOKUP_KEY(CDF_OUTPUT_SINGLE_PRECISION_FLOATS);
+
+            CDPL_DEFINE_LOOKUP_KEY(CUBE_COMMENT_IS_NAME);
         }
 
         void initControlParameters() {}
