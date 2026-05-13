@@ -44,7 +44,12 @@ namespace CDPL
     {
 
         /**
-         * \brief MolecularGraph.
+         * \brief Abstract base class for representations of a chemical structure as a graph of bonded atoms.
+         *
+         * \c %MolecularGraph combines the atom-, bond- and property-related interfaces inherited from
+         * Chem::AtomContainer, Chem::BondContainer and Base::PropertyContainer. Concrete graph types
+         * (e.g. Chem::Molecule, Chem::Fragment) implement the pure virtual clone() method to provide
+         * a copy of the graph.
          */
         class CDPL_CHEM_API MolecularGraph : public AtomContainer,
                                              public BondContainer,

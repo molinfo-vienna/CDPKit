@@ -44,18 +44,41 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief TautomerScore.
+         * \brief Functor for the calculation of a heuristic stability score of a tautomeric form
+         *        represented as a molecular graph.
+         *
+         * The score is computed from contributions of atom-type, hybridization, ring-membership and
+         * specific structural motifs (amide-like nitrogens, carboxylic oxygens, exocyclic hydroxyls,
+         * 2,4-hydroxy-pyridine-like rings, etc.) and is typically used to rank tautomeric forms of a
+         * molecule from least to most stable.
          */
         class CDPL_CHEM_API TautomerScore
         {
 
           public:
+            /**
+             * \brief Constructs the \c %TautomerScore instance.
+             */
             TautomerScore();
 
+            /**
+             * \brief Copy constructor.
+             * \param ts The other \c %TautomerScore instance.
+             */
             TautomerScore(const TautomerScore& ts);
 
+            /**
+             * \brief Calculates the tautomer stability score of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph representing the tautomeric form to score.
+             * \return The calculated tautomer stability score.
+             */
             double operator()(const MolecularGraph& molgraph);
 
+            /**
+             * \brief Copy assignment operator.
+             * \param ts The other \c %TautomerScore instance.
+             * \return A reference to itself.
+             */
             TautomerScore& operator=(const TautomerScore& ts);
 
           private:

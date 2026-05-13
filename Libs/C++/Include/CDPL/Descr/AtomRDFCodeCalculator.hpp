@@ -48,7 +48,14 @@ namespace CDPL
     {
 
         /**
-         * \brief AtomRDFCodeCalculator.
+         * \brief RDFCodeCalculator implementation for the calculation of atom-centered radial distribution
+         *        function (RDF) codes of chemical structures.
+         *
+         * \c %AtomRDFCodeCalculator is a specialization of \c %RDFCodeCalculator for entities of type
+         * Chem::Atom. The atom 3D coordinates accessor function is preset to Chem::get3DCoordinates() and
+         * the entity-pair weight function as well as any other RDF calculation parameters can be configured
+         * via the inherited setter methods of the base class.
+         *
          * \see [\ref CITB, \ref HBMD]
          */
         class CDPL_DESCR_API AtomRDFCodeCalculator : public RDFCodeCalculator<Chem::Atom>
@@ -60,8 +67,25 @@ namespace CDPL
              */
             AtomRDFCodeCalculator();
 
+            /**
+             * \brief Constructs the \c %AtomRDFCodeCalculator instance and calculates the RDF code of the atoms
+             *        provided by \a cntnr.
+             *
+             * The calculated RDF code is stored in the vector \a rdf_code.
+             *
+             * \param cntnr The container with the atoms for which to calculate the RDF code.
+             * \param rdf_code The vector where to store the calculated RDF code.
+             */
             AtomRDFCodeCalculator(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
 
+            /**
+             * \brief Calculates the RDF code of the atoms provided by \a cntnr.
+             *
+             * The calculated RDF code is stored in the vector \a rdf_code.
+             *
+             * \param cntnr The container with the atoms for which to calculate the RDF code.
+             * \param rdf_code The vector where to store the calculated RDF code.
+             */
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
         };
     } // namespace Descr
