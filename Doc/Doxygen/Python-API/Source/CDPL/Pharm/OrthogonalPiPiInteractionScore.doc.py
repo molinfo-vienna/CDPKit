@@ -45,8 +45,8 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 20.0
 
     ##
-    # \brief Initializes a copy of the \e %OrthogonalPiPiInteractionScore instance \a score.
-    # \param score The \e %OrthogonalPiPiInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c %OrthogonalPiPiInteractionScore instance \a score.
+    # \param score The \c %OrthogonalPiPiInteractionScore instance to copy.
     # 
     def __init__(score: OrthogonalPiPiInteractionScore) -> None: pass
 

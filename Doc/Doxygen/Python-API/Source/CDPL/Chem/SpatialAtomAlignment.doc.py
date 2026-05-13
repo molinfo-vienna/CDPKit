@@ -25,13 +25,13 @@
 class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SpatialAtomAlignment instance.
+    # \brief Initializes the \c %SpatialAtomAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SpatialAtomAlignment instance \a alignment.
-    # \param alignment The \e %SpatialAtomAlignment instance to copy.
+    # \brief Initializes a copy of the \c %SpatialAtomAlignment instance \a alignment.
+    # \param alignment The \c %SpatialAtomAlignment instance to copy.
     # 
     def __init__(alignment: SpatialAtomAlignment) -> None: pass
 

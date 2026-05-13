@@ -54,7 +54,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     class DistanceConstraint(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %DistanceConstraint instance.
+        # \brief Initializes the \c %DistanceConstraint instance.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
@@ -63,8 +63,8 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %DistanceConstraint instance \a constr.
-        # \param constr The \e %DistanceConstraint instance to copy.
+        # \brief Initializes a copy of the \c %DistanceConstraint instance \a constr.
+        # \param constr The \c %DistanceConstraint instance to copy.
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
 
@@ -147,13 +147,13 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     DEF_LEARNING_RATE_DECREMENT = 0.019
 
     ##
-    # \brief Initializes the \e %DG2DCoordinatesGenerator instance.
+    # \brief Initializes the \c %DG2DCoordinatesGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DG2DCoordinatesGenerator instance \a gen.
-    # \param gen The \e %DG2DCoordinatesGenerator instance to copy.
+    # \brief Initializes a copy of the \c %DG2DCoordinatesGenerator instance \a gen.
+    # \param gen The \c %DG2DCoordinatesGenerator instance to copy.
     # 
     def __init__(gen: DG2DCoordinatesGenerator) -> None: pass
 

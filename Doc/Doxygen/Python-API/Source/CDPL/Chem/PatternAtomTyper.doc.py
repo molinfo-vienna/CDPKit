@@ -30,13 +30,13 @@ class PatternAtomTyper(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Pattern instance \a pattern.
-        # \param pattern The \e %Pattern instance to copy.
+        # \brief Initializes a copy of the \c %Pattern instance \a pattern.
+        # \param pattern The \c %Pattern instance to copy.
         # 
         def __init__(pattern: Pattern) -> None: pass
 
         ##
-        # \brief Initializes the \e %Pattern instance.
+        # \brief Initializes the \c %Pattern instance.
         # \param molgraph 
         # \param atom_label 
         # \param priority 
@@ -107,13 +107,13 @@ class PatternAtomTyper(Boost.Python.instance):
         uniqueMatches = property(processUniqueMatchesOnly)
 
     ##
-    # \brief Initializes the \e %PatternAtomTyper instance.
+    # \brief Initializes the \c %PatternAtomTyper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PatternAtomTyper instance \a typer.
-    # \param typer The \e %PatternAtomTyper instance to copy.
+    # \brief Initializes a copy of the \c %PatternAtomTyper instance \a typer.
+    # \param typer The \c %PatternAtomTyper instance to copy.
     # 
     def __init__(typer: PatternAtomTyper) -> None: pass
 

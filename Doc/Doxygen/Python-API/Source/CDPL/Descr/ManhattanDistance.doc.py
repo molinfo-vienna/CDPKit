@@ -27,13 +27,13 @@
 class ManhattanDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ManhattanDistance instance.
+    # \brief Initializes the \c %ManhattanDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ManhattanDistance instance \a func.
-    # \param func The \e %ManhattanDistance instance to copy.
+    # \brief Initializes a copy of the \c %ManhattanDistance instance \a func.
+    # \param func The \c %ManhattanDistance instance to copy.
     # 
     def __init__(func: ManhattanDistance) -> None: pass
 

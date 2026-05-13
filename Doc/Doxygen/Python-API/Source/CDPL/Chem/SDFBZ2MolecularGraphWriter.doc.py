@@ -25,7 +25,7 @@
 class SDFBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %SDFBZ2MolecularGraphWriter instance.
+    # \brief Initializes the \c %SDFBZ2MolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

@@ -25,6 +25,6 @@
 class MOL2GZMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %MOL2GZMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %MOL2GZMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

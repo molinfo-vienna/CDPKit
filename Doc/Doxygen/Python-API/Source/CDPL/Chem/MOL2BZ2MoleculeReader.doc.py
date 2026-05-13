@@ -25,7 +25,7 @@
 class MOL2BZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MOL2BZ2MoleculeReader instance.
+    # \brief Initializes the \c %MOL2BZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

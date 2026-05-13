@@ -27,6 +27,6 @@
 class CMLMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %CMLMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %CMLMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

@@ -25,13 +25,13 @@
 class TanimotoComboScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TanimotoComboScore instance.
+    # \brief Initializes the \c %TanimotoComboScore instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TanimotoComboScore instance \a score.
-    # \param score The \e %TanimotoComboScore instance to copy.
+    # \brief Initializes a copy of the \c %TanimotoComboScore instance \a score.
+    # \param score The \c %TanimotoComboScore instance to copy.
     # 
     def __init__(score: TanimotoComboScore) -> None: pass
 

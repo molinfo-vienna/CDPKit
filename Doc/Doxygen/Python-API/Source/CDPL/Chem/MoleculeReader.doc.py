@@ -25,14 +25,14 @@
 class MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MoleculeReader instance.
+    # \brief Initializes the \c %MoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeReader instance.
+    # \brief Initializes the \c %MoleculeReader instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -40,7 +40,7 @@ class MoleculeReader(MoleculeReaderBase):
     def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeReader instance.
+    # \brief Initializes the \c %MoleculeReader instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -48,14 +48,14 @@ class MoleculeReader(MoleculeReaderBase):
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeReader instance.
+    # \brief Initializes the \c %MoleculeReader instance.
     # \param is 
     # \param fmt 
     # 
     def __init__(is: Base.IStream, fmt: str) -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeReader instance.
+    # \brief Initializes the \c %MoleculeReader instance.
     # \param is 
     # \param fmt 
     # 

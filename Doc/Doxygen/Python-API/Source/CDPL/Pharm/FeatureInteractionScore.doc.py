@@ -25,7 +25,7 @@
 class FeatureInteractionScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScore instance.
+    # \brief Initializes the \c %FeatureInteractionScore instance.
     # 
     def __init__() -> None: pass
 

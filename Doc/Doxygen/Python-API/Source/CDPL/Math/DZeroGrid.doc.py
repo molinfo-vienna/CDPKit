@@ -25,18 +25,18 @@
 class DZeroGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DZeroGrid instance.
+    # \brief Initializes the \c %DZeroGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DZeroGrid instance \a g.
-    # \param g The \e %DZeroGrid instance to copy.
+    # \brief Initializes a copy of the \c %DZeroGrid instance \a g.
+    # \param g The \c %DZeroGrid instance to copy.
     # 
     def __init__(g: DZeroGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %DZeroGrid instance.
+    # \brief Initializes the \c %DZeroGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -193,7 +193,7 @@ class DZeroGrid(Boost.Python.instance):
     def __ne__(e: ConstDGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DZeroGrid instance.
+    # \brief Returns a string representation of the \c %DZeroGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

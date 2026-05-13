@@ -25,18 +25,18 @@
 class MMFF94BondTypeIndexFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
+    # \brief Initializes the \c %MMFF94BondTypeIndexFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94BondTypeIndexFunction instance \a func.
-    # \param func The \e %MMFF94BondTypeIndexFunction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94BondTypeIndexFunction instance \a func.
+    # \param func The \c %MMFF94BondTypeIndexFunction instance to copy.
     # 
     def __init__(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
+    # \brief Initializes the \c %MMFF94BondTypeIndexFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

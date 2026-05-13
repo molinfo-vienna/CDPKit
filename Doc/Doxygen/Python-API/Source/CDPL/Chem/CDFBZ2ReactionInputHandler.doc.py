@@ -25,6 +25,6 @@
 class CDFBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %CDFBZ2ReactionInputHandler instance.
+    # \brief Initializes the \c %CDFBZ2ReactionInputHandler instance.
     # 
     def __init__() -> None: pass

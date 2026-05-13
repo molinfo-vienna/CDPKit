@@ -25,14 +25,14 @@
 class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AlignedTotalOverlapTverskyScore instance.
+    # \brief Initializes the \c %AlignedTotalOverlapTverskyScore instance.
     # \param beta 
     # 
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AlignedTotalOverlapTverskyScore instance \a score.
-    # \param score The \e %AlignedTotalOverlapTverskyScore instance to copy.
+    # \brief Initializes a copy of the \c %AlignedTotalOverlapTverskyScore instance \a score.
+    # \param score The \c %AlignedTotalOverlapTverskyScore instance to copy.
     # 
     def __init__(score: AlignedTotalOverlapTverskyScore) -> None: pass
 

@@ -25,18 +25,18 @@
 class DoubleFVector2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleFVector2Functor instance.
+    # \brief Initializes the \c %DoubleFVector2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleFVector2Functor instance \a func.
-    # \param func The \e %DoubleFVector2Functor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleFVector2Functor instance \a func.
+    # \param func The \c %DoubleFVector2Functor instance to copy.
     # 
     def __init__(func: DoubleFVector2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleFVector2Functor instance.
+    # \brief Initializes the \c %DoubleFVector2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

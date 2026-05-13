@@ -45,8 +45,8 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 20.0
 
     ##
-    # \brief Initializes a copy of the \e %ParallelPiPiInteractionScore instance \a score.
-    # \param score The \e %ParallelPiPiInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c %ParallelPiPiInteractionScore instance \a score.
+    # \param score The \c %ParallelPiPiInteractionScore instance to copy.
     # 
     def __init__(score: ParallelPiPiInteractionScore) -> None: pass
 

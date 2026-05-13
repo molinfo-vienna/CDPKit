@@ -25,18 +25,18 @@
 class UInt64BondFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %UInt64BondFunctor instance.
+    # \brief Initializes the \c %UInt64BondFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %UInt64BondFunctor instance \a func.
-    # \param func The \e %UInt64BondFunctor instance to copy.
+    # \brief Initializes a copy of the \c %UInt64BondFunctor instance \a func.
+    # \param func The \c %UInt64BondFunctor instance to copy.
     # 
     def __init__(func: UInt64BondFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %UInt64BondFunctor instance.
+    # \brief Initializes the \c %UInt64BondFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

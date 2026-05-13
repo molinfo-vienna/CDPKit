@@ -25,13 +25,13 @@
 class ULTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULTranslationMatrix instance \a m.
-    # \param m The \e %ULTranslationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULTranslationMatrix instance \a m.
+    # \param m The \c %ULTranslationMatrix instance to copy.
     # 
     def __init__(m: ULTranslationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULTranslationMatrix instance.
+    # \brief Initializes the \c %ULTranslationMatrix instance.
     # \param n 
     # \param tx 
     # \param ty 
@@ -154,7 +154,7 @@ class ULTranslationMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULTranslationMatrix instance.
+    # \brief Returns a string representation of the \c %ULTranslationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

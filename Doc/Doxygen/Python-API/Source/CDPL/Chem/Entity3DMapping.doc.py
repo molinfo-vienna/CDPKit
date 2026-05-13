@@ -27,13 +27,13 @@
 class Entity3DMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Entity3DMapping instance.
+    # \brief Initializes the \c %Entity3DMapping instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Entity3DMapping instance \a mapping.
-    # \param mapping The \e %Entity3DMapping instance to copy.
+    # \brief Initializes a copy of the \c %Entity3DMapping instance \a mapping.
+    # \param mapping The \c %Entity3DMapping instance to copy.
     # 
     def __init__(mapping: Entity3DMapping) -> None: pass
 

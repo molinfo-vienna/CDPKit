@@ -25,7 +25,7 @@
 class CDFBZ2DRegularGridReader(DRegularGridReaderBase):
 
     ##
-    # \brief Initializes the \e %CDFBZ2DRegularGridReader instance.
+    # \brief Initializes the \c %CDFBZ2DRegularGridReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

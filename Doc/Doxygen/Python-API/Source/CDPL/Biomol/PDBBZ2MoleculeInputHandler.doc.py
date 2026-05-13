@@ -25,6 +25,6 @@
 class PDBBZ2MoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %PDBBZ2MoleculeInputHandler instance.
+    # \brief Initializes the \c %PDBBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

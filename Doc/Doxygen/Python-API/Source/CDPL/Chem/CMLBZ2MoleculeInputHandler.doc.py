@@ -27,6 +27,6 @@
 class CMLBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %CMLBZ2MoleculeInputHandler instance.
+    # \brief Initializes the \c %CMLBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

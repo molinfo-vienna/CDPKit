@@ -27,13 +27,13 @@
 class ManhattanSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ManhattanSimilarity instance.
+    # \brief Initializes the \c %ManhattanSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ManhattanSimilarity instance \a func.
-    # \param func The \e %ManhattanSimilarity instance to copy.
+    # \brief Initializes a copy of the \c %ManhattanSimilarity instance \a func.
+    # \param func The \c %ManhattanSimilarity instance to copy.
     # 
     def __init__(func: ManhattanSimilarity) -> None: pass
 

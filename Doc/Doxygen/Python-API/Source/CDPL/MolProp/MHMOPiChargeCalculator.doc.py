@@ -27,18 +27,18 @@
 class MHMOPiChargeCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MHMOPiChargeCalculator instance.
+    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MHMOPiChargeCalculator instance.
+    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
     # \param molgraph 
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes the \e %MHMOPiChargeCalculator instance.
+    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
     # \param pi_sys_list 
     # \param molgraph 
     # 

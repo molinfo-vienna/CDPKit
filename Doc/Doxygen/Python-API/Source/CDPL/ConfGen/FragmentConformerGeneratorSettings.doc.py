@@ -30,8 +30,8 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     class FragmentSettings(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %FragmentSettings instance \a settings.
-        # \param settings The \e %FragmentSettings instance to copy.
+        # \brief Initializes a copy of the \c %FragmentSettings instance \a settings.
+        # \param settings The \c %FragmentSettings instance to copy.
         # 
         def __init__(settings: FragmentSettings) -> None: pass
 
@@ -156,13 +156,13 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     THOROUGH = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %FragmentConformerGeneratorSettings instance.
+    # \brief Initializes the \c %FragmentConformerGeneratorSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FragmentConformerGeneratorSettings instance \a settings.
-    # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c %FragmentConformerGeneratorSettings instance \a settings.
+    # \param settings The \c %FragmentConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: FragmentConformerGeneratorSettings) -> None: pass
 

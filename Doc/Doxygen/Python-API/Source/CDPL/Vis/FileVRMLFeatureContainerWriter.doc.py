@@ -25,7 +25,7 @@
 class FileVRMLFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %FileVRMLFeatureContainerWriter instance.
+    # \brief Initializes the \c %FileVRMLFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

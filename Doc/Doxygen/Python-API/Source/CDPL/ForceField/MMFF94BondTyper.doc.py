@@ -25,18 +25,18 @@
 class MMFF94BondTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \c %MMFF94BondTyper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94BondTyper instance \a typer.
-    # \param typer The \e %MMFF94BondTyper instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94BondTyper instance \a typer.
+    # \param typer The \c %MMFF94BondTyper instance to copy.
     # 
     def __init__(typer: MMFF94BondTyper) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \c %MMFF94BondTyper instance.
     # \param molgraph 
     # \param types 
     # \param strict 

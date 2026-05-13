@@ -25,18 +25,18 @@
 class BoolSTPairArrayFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolSTPairArrayFunctor instance.
+    # \brief Initializes the \c %BoolSTPairArrayFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolSTPairArrayFunctor instance \a func.
-    # \param func The \e %BoolSTPairArrayFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolSTPairArrayFunctor instance \a func.
+    # \param func The \c %BoolSTPairArrayFunctor instance to copy.
     # 
     def __init__(func: BoolSTPairArrayFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolSTPairArrayFunctor instance.
+    # \brief Initializes the \c %BoolSTPairArrayFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

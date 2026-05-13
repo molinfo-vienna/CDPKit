@@ -45,7 +45,7 @@ class ScreeningDBCreator(Boost.Python.instance):
         APPEND = 2
 
     ##
-    # \brief Initializes the \e %ScreeningDBCreator instance.
+    # \brief Initializes the \c %ScreeningDBCreator instance.
     # 
     def __init__() -> None: pass
 

@@ -25,13 +25,13 @@
 class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %AtomArray3DCoordinatesFunctor instance \a func.
-    # \param func The \e %AtomArray3DCoordinatesFunctor instance to copy.
+    # \brief Initializes a copy of the \c %AtomArray3DCoordinatesFunctor instance \a func.
+    # \param func The \c %AtomArray3DCoordinatesFunctor instance to copy.
     # 
     def __init__(func: AtomArray3DCoordinatesFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomArray3DCoordinatesFunctor instance.
+    # \brief Initializes the \c %AtomArray3DCoordinatesFunctor instance.
     # \param coords 
     # \param molgraph 
     # 

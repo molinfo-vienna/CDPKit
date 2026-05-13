@@ -25,12 +25,12 @@
 class AmideImidicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %AmideImidicAcidTautomerization instance.
+    # \brief Initializes the \c %AmideImidicAcidTautomerization instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AmideImidicAcidTautomerization instance \a rule.
-    # \param rule The \e %AmideImidicAcidTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %AmideImidicAcidTautomerization instance \a rule.
+    # \param rule The \c %AmideImidicAcidTautomerization instance to copy.
     # 
     def __init__(rule: AmideImidicAcidTautomerization) -> None: pass

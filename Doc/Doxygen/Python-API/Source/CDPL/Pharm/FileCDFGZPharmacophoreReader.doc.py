@@ -25,7 +25,7 @@
 class FileCDFGZPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %FileCDFGZPharmacophoreReader instance.
+    # \brief Initializes the \c %FileCDFGZPharmacophoreReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -32,8 +32,8 @@ class HBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(static_h_bonds: bool) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %HBondDonorFeatureGenerator instance \a gen.
-    # \param gen The \e %HBondDonorFeatureGenerator instance to copy.
+    # \brief Initializes a copy of the \c %HBondDonorFeatureGenerator instance \a gen.
+    # \param gen The \c %HBondDonorFeatureGenerator instance to copy.
     # 
     def __init__(gen: HBondDonorFeatureGenerator) -> None: pass
 

@@ -25,8 +25,8 @@
 class FeatureTypeMatchFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FeatureTypeMatchFunctor instance \a func.
-    # \param func The \e %FeatureTypeMatchFunctor instance to copy.
+    # \brief Initializes a copy of the \c %FeatureTypeMatchFunctor instance \a func.
+    # \param func The \c %FeatureTypeMatchFunctor instance to copy.
     # 
     def __init__(func: FeatureTypeMatchFunctor) -> None: pass
 

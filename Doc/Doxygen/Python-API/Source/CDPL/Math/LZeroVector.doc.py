@@ -25,18 +25,18 @@
 class LZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LZeroVector instance.
+    # \brief Initializes the \c %LZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LZeroVector instance \a v.
-    # \param v The \e %LZeroVector instance to copy.
+    # \brief Initializes a copy of the \c %LZeroVector instance \a v.
+    # \param v The \c %LZeroVector instance to copy.
     # 
     def __init__(v: LZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %LZeroVector instance.
+    # \brief Initializes the \c %LZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -146,7 +146,7 @@ class LZeroVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LZeroVector instance.
+    # \brief Returns a string representation of the \c %LZeroVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

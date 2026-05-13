@@ -25,7 +25,7 @@
 class FileMOL2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FileMOL2MoleculeReader instance.
+    # \brief Initializes the \c %FileMOL2MoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

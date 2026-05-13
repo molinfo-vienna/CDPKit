@@ -30,8 +30,8 @@ class AromaticSSSRSubset(FragmentList):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AromaticSSSRSubset instance \a arom_sssr.
-    # \param arom_sssr The \e %AromaticSSSRSubset instance to copy.
+    # \brief Initializes a copy of the \c %AromaticSSSRSubset instance \a arom_sssr.
+    # \param arom_sssr The \c %AromaticSSSRSubset instance to copy.
     # 
     def __init__(arom_sssr: AromaticSSSRSubset) -> None: pass
 

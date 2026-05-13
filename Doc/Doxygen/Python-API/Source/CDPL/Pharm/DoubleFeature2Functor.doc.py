@@ -25,18 +25,18 @@
 class DoubleFeature2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleFeature2Functor instance.
+    # \brief Initializes the \c %DoubleFeature2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleFeature2Functor instance \a func.
-    # \param func The \e %DoubleFeature2Functor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleFeature2Functor instance \a func.
+    # \param func The \c %DoubleFeature2Functor instance to copy.
     # 
     def __init__(func: DoubleFeature2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleFeature2Functor instance.
+    # \brief Initializes the \c %DoubleFeature2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

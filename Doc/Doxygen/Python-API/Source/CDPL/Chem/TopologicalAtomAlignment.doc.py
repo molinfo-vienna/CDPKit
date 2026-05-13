@@ -25,13 +25,13 @@
 class TopologicalAtomAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TopologicalAtomAlignment instance.
+    # \brief Initializes the \c %TopologicalAtomAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TopologicalAtomAlignment instance \a alignment.
-    # \param alignment The \e %TopologicalAtomAlignment instance to copy.
+    # \brief Initializes a copy of the \c %TopologicalAtomAlignment instance \a alignment.
+    # \param alignment The \c %TopologicalAtomAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalAtomAlignment) -> None: pass
 

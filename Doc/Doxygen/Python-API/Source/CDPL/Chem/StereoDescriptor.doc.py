@@ -182,7 +182,7 @@ class StereoDescriptor(Boost.Python.instance):
     def isValid(atom: Atom) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %StereoDescriptor instance.
+    # \brief Returns a string representation of the \c %StereoDescriptor instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

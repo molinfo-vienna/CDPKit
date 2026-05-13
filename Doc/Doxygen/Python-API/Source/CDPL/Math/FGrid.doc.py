@@ -25,18 +25,18 @@
 class FGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FGrid instance \a g.
-    # \param g The \e %FGrid instance to copy.
+    # \brief Initializes a copy of the \c %FGrid instance \a g.
+    # \param g The \c %FGrid instance to copy.
     # 
     def __init__(g: FGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -44,7 +44,7 @@ class FGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -53,19 +53,19 @@ class FGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # \param e 
     # 
     def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # \param e 
     # 
     def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance.
+    # \brief Initializes the \c %FGrid instance.
     # \param e 
     # 
     def __init__(e: object) -> None: pass
@@ -265,7 +265,7 @@ class FGrid(Boost.Python.instance):
     def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FGrid instance.
+    # \brief Returns a string representation of the \c %FGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

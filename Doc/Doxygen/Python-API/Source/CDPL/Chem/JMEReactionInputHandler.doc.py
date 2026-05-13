@@ -25,6 +25,6 @@
 class JMEReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %JMEReactionInputHandler instance.
+    # \brief Initializes the \c %JMEReactionInputHandler instance.
     # 
     def __init__() -> None: pass

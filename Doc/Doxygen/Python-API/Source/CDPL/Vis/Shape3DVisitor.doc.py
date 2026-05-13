@@ -27,7 +27,7 @@
 class Shape3DVisitor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Shape3DVisitor instance.
+    # \brief Initializes the \c %Shape3DVisitor instance.
     # 
     def __init__() -> None: pass
 

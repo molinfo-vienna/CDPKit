@@ -37,8 +37,8 @@ class BuriednessScore(Boost.Python.instance):
     DEF_PROBE_RADIUS = 8.0
 
     ##
-    # \brief Initializes a copy of the \e %BuriednessScore instance \a score.
-    # \param score The \e %BuriednessScore instance to copy.
+    # \brief Initializes a copy of the \c %BuriednessScore instance \a score.
+    # \param score The \c %BuriednessScore instance to copy.
     # 
     def __init__(score: BuriednessScore) -> None: pass
 

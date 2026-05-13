@@ -30,13 +30,13 @@ class Vector2DArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector2DArray instance \a array.
-    # \param array The \e %Vector2DArray instance to copy.
+    # \brief Initializes a copy of the \c %Vector2DArray instance \a array.
+    # \param array The \c %Vector2DArray instance to copy.
     # 
     def __init__(array: Vector2DArray) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2DArray instance.
+    # \brief Initializes the \c %Vector2DArray instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass

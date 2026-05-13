@@ -30,8 +30,8 @@ class STArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %STArray instance \a array.
-    # \param array The \e %STArray instance to copy.
+    # \brief Initializes a copy of the \c %STArray instance \a array.
+    # \param array The \c %STArray instance to copy.
     # 
     def __init__(array: STArray) -> None: pass
 
@@ -258,7 +258,7 @@ class STArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param array The \e %STArray instance to be compared with.
+    # \param array The \c %STArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(array: STArray) -> bool: pass
@@ -272,7 +272,7 @@ class STArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param array The \e %STArray instance to be compared with.
+    # \param array The \c %STArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(array: STArray) -> bool: pass

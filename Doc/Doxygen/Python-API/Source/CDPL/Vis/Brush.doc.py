@@ -112,8 +112,8 @@ class Brush(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Brush instance \a brush.
-    # \param brush The \e %Brush instance to copy.
+    # \brief Initializes a copy of the \c %Brush instance \a brush.
+    # \param brush The \c %Brush instance to copy.
     # 
     def __init__(brush: Brush) -> None: pass
 
@@ -180,7 +180,7 @@ class Brush(Boost.Python.instance):
     def setStyle(style: Style) -> None: pass
 
     ##
-    # \brief Returns a string representation of the \e %Brush instance.
+    # \brief Returns a string representation of the \c %Brush instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

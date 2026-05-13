@@ -25,13 +25,13 @@
 class DRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DRotationMatrix instance \a m.
-    # \param m The \e %DRotationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %DRotationMatrix instance \a m.
+    # \param m The \c %DRotationMatrix instance to copy.
     # 
     def __init__(m: DRotationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRotationMatrix instance.
+    # \brief Initializes the \c %DRotationMatrix instance.
     # \param n 
     # \param w 
     # \param ux 
@@ -156,7 +156,7 @@ class DRotationMatrix(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DRotationMatrix instance.
+    # \brief Returns a string representation of the \c %DRotationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

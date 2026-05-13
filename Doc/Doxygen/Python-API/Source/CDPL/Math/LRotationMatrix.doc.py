@@ -25,13 +25,13 @@
 class LRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LRotationMatrix instance \a m.
-    # \param m The \e %LRotationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LRotationMatrix instance \a m.
+    # \param m The \c %LRotationMatrix instance to copy.
     # 
     def __init__(m: LRotationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LRotationMatrix instance.
+    # \brief Initializes the \c %LRotationMatrix instance.
     # \param n 
     # \param w 
     # \param ux 
@@ -156,7 +156,7 @@ class LRotationMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LRotationMatrix instance.
+    # \brief Returns a string representation of the \c %LRotationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

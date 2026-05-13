@@ -25,13 +25,13 @@
 class LVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LVectorSlice instance \a s.
-    # \param s The \e %LVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c %LVectorSlice instance \a s.
+    # \param s The \c %LVectorSlice instance to copy.
     # 
     def __init__(s: LVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %LVectorSlice instance.
+    # \brief Initializes the \c %LVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -196,7 +196,7 @@ class LVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LVectorSlice instance.
+    # \brief Returns a string representation of the \c %LVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

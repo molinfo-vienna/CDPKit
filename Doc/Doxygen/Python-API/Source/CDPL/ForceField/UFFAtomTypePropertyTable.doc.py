@@ -30,18 +30,18 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param atom_type 
         # \param atom_type_sym 
         # \param atomic_no 
@@ -160,13 +160,13 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         effectiveCharge = property(getEffectiveCharge)
 
     ##
-    # \brief Initializes the \e %UFFAtomTypePropertyTable instance.
+    # \brief Initializes the \c %UFFAtomTypePropertyTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %UFFAtomTypePropertyTable instance \a table.
-    # \param table The \e %UFFAtomTypePropertyTable instance to copy.
+    # \brief Initializes a copy of the \c %UFFAtomTypePropertyTable instance \a table.
+    # \param table The \c %UFFAtomTypePropertyTable instance to copy.
     # 
     def __init__(table: UFFAtomTypePropertyTable) -> None: pass
 

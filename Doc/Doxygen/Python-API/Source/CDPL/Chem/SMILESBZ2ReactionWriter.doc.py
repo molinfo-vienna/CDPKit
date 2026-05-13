@@ -25,7 +25,7 @@
 class SMILESBZ2ReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %SMILESBZ2ReactionWriter instance.
+    # \brief Initializes the \c %SMILESBZ2ReactionWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

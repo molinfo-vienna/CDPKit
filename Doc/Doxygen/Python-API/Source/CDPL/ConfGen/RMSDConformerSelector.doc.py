@@ -30,7 +30,7 @@ class RMSDConformerSelector(Boost.Python.instance):
     DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768
 
     ##
-    # \brief Initializes the \e %RMSDConformerSelector instance.
+    # \brief Initializes the \c %RMSDConformerSelector instance.
     # 
     def __init__() -> None: pass
 

@@ -25,13 +25,13 @@
 class MMFF94VanDerWaalsAtomParameters(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsAtomParameters instance \a params.
-    # \param params The \e %MMFF94VanDerWaalsAtomParameters instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94VanDerWaalsAtomParameters instance \a params.
+    # \param params The \c %MMFF94VanDerWaalsAtomParameters instance to copy.
     # 
     def __init__(params: MMFF94VanDerWaalsAtomParameters) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsAtomParameters instance.
+    # \brief Initializes the \c %MMFF94VanDerWaalsAtomParameters instance.
     # \param atom_pol 
     # \param eff_el_num 
     # \param fact_a 

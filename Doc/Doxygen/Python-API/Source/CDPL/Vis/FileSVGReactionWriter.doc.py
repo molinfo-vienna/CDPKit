@@ -25,7 +25,7 @@
 class FileSVGReactionWriter(Chem.ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %FileSVGReactionWriter instance.
+    # \brief Initializes the \c %FileSVGReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

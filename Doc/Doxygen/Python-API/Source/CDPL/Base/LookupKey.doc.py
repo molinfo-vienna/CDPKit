@@ -32,8 +32,8 @@ class LookupKey(Boost.Python.instance):
     NONE = LookupKey('NONE')
 
     ##
-    # \brief Initializes a copy of the \e %LookupKey instance \a key.
-    # \param key The \e %LookupKey instance to copy.
+    # \brief Initializes a copy of the \c %LookupKey instance \a key.
+    # \param key The \c %LookupKey instance to copy.
     # 
     def __init__(key: LookupKey) -> None: pass
 
@@ -119,7 +119,7 @@ class LookupKey(Boost.Python.instance):
     def __ne__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LookupKey instance.
+    # \brief Returns a string representation of the \c %LookupKey instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

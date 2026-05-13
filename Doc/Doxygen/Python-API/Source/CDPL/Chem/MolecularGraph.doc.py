@@ -77,7 +77,7 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \e %MolecularGraph instance.
+    # \brief Initializes the \c %MolecularGraph instance.
     # 
     def __init__() -> None: pass
 

@@ -27,13 +27,13 @@
 class AtomBondMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AtomBondMapping instance.
+    # \brief Initializes the \c %AtomBondMapping instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AtomBondMapping instance \a mapping.
-    # \param mapping The \e %AtomBondMapping instance to copy.
+    # \brief Initializes a copy of the \c %AtomBondMapping instance \a mapping.
+    # \param mapping The \c %AtomBondMapping instance to copy.
     # 
     def __init__(mapping: AtomBondMapping) -> None: pass
 

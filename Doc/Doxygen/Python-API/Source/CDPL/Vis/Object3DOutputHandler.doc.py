@@ -25,7 +25,7 @@
 class Object3DOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Object3DOutputHandler instance.
+    # \brief Initializes the \c %Object3DOutputHandler instance.
     # 
     def __init__() -> None: pass
 

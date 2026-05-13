@@ -25,18 +25,18 @@
 class VoidPharmacophoreFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidPharmacophoreFunctor instance.
+    # \brief Initializes the \c %VoidPharmacophoreFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %VoidPharmacophoreFunctor instance \a func.
-    # \param func The \e %VoidPharmacophoreFunctor instance to copy.
+    # \brief Initializes a copy of the \c %VoidPharmacophoreFunctor instance \a func.
+    # \param func The \c %VoidPharmacophoreFunctor instance to copy.
     # 
     def __init__(func: VoidPharmacophoreFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidPharmacophoreFunctor instance.
+    # \brief Initializes the \c %VoidPharmacophoreFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

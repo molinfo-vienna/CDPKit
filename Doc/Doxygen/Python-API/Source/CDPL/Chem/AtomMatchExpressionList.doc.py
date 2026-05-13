@@ -32,8 +32,8 @@ class AtomMatchExpressionList(AtomMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AtomMatchExpressionList instance \a expr.
-    # \param expr The \e %AtomMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %AtomMatchExpressionList instance \a expr.
+    # \param expr The \c %AtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: AtomMatchExpressionList) -> None: pass
 

@@ -25,25 +25,25 @@
 class FMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FMatrix instance \a m.
-    # \param m The \e %FMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FMatrix instance \a m.
+    # \param m The \c %FMatrix instance to copy.
     # 
     def __init__(m: FMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -51,31 +51,31 @@ class FMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance.
+    # \brief Initializes the \c %FMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -245,7 +245,7 @@ class FMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FMatrix instance.
+    # \brief Returns a string representation of the \c %FMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

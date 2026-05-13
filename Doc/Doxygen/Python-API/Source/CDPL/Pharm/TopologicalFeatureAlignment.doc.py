@@ -25,13 +25,13 @@
 class TopologicalFeatureAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TopologicalFeatureAlignment instance.
+    # \brief Initializes the \c %TopologicalFeatureAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TopologicalFeatureAlignment instance \a alignment.
-    # \param alignment The \e %TopologicalFeatureAlignment instance to copy.
+    # \brief Initializes a copy of the \c %TopologicalFeatureAlignment instance \a alignment.
+    # \param alignment The \c %TopologicalFeatureAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalFeatureAlignment) -> None: pass
 

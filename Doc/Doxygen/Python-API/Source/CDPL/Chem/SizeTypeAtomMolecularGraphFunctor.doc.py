@@ -25,18 +25,18 @@
 class SizeTypeAtomMolecularGraphFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SizeTypeAtomMolecularGraphFunctor instance.
+    # \brief Initializes the \c %SizeTypeAtomMolecularGraphFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SizeTypeAtomMolecularGraphFunctor instance \a func.
-    # \param func The \e %SizeTypeAtomMolecularGraphFunctor instance to copy.
+    # \brief Initializes a copy of the \c %SizeTypeAtomMolecularGraphFunctor instance \a func.
+    # \param func The \c %SizeTypeAtomMolecularGraphFunctor instance to copy.
     # 
     def __init__(func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %SizeTypeAtomMolecularGraphFunctor instance.
+    # \brief Initializes the \c %SizeTypeAtomMolecularGraphFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

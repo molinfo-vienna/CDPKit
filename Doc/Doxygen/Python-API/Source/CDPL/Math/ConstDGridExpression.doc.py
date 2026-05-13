@@ -112,7 +112,7 @@ class ConstDGridExpression(Boost.Python.instance):
     def __ne__(e: ConstDGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDGridExpression instance.
+    # \brief Returns a string representation of the \c %ConstDGridExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

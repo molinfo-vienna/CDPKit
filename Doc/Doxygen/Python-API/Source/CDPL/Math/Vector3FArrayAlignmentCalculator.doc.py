@@ -25,13 +25,13 @@
 class Vector3FArrayAlignmentCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector3FArrayAlignmentCalculator instance.
+    # \brief Initializes the \c %Vector3FArrayAlignmentCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector3FArrayAlignmentCalculator instance \a algo.
-    # \param algo The \e %Vector3FArrayAlignmentCalculator instance to copy.
+    # \brief Initializes a copy of the \c %Vector3FArrayAlignmentCalculator instance \a algo.
+    # \param algo The \c %Vector3FArrayAlignmentCalculator instance to copy.
     # 
     def __init__(algo: Vector3FArrayAlignmentCalculator) -> None: pass
 

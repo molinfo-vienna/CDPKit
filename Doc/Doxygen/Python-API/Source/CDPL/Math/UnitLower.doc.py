@@ -25,12 +25,12 @@
 class UnitLower(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %UnitLower instance.
+    # \brief Initializes the \c %UnitLower instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %UnitLower instance \a t.
-    # \param t The \e %UnitLower instance to copy.
+    # \brief Initializes a copy of the \c %UnitLower instance \a t.
+    # \param t The \c %UnitLower instance to copy.
     # 
     def __init__(t: UnitLower) -> None: pass

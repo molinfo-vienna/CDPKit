@@ -32,13 +32,13 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MoleculeRDFDescriptorCalculator instance \a calc.
-    # \param calc The \e %MoleculeRDFDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c %MoleculeRDFDescriptorCalculator instance \a calc.
+    # \param calc The \c %MoleculeRDFDescriptorCalculator instance to copy.
     # 
     def __init__(calc: MoleculeRDFDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
+    # \brief Initializes the \c %MoleculeRDFDescriptorCalculator instance.
     # \param cntnr 
     # \param descr 
     # 

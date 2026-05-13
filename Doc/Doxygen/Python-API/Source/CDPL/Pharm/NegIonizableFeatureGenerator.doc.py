@@ -32,8 +32,8 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %NegIonizableFeatureGenerator instance \a gen.
-    # \param gen The \e %NegIonizableFeatureGenerator instance to copy.
+    # \brief Initializes a copy of the \c %NegIonizableFeatureGenerator instance \a gen.
+    # \param gen The \c %NegIonizableFeatureGenerator instance to copy.
     # 
     def __init__(gen: NegIonizableFeatureGenerator) -> None: pass
 

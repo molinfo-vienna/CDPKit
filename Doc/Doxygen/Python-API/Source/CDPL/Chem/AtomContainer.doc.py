@@ -27,7 +27,7 @@
 class AtomContainer(Entity3DContainer):
 
     ##
-    # \brief Initializes the \e %AtomContainer instance.
+    # \brief Initializes the \c %AtomContainer instance.
     # 
     def __init__() -> None: pass
 

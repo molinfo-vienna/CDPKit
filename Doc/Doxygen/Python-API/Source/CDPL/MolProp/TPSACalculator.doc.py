@@ -34,8 +34,8 @@ class TPSACalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TPSACalculator instance \a calc.
-    # \param calc The \e %TPSACalculator instance to copy.
+    # \brief Initializes a copy of the \c %TPSACalculator instance \a calc.
+    # \param calc The \c %TPSACalculator instance to copy.
     # 
     def __init__(calc: TPSACalculator) -> None: pass
 

@@ -25,7 +25,7 @@
 class FileJMEReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %FileJMEReactionReader instance.
+    # \brief Initializes the \c %FileJMEReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -54,7 +54,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     class VolumeConstraint(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %VolumeConstraint instance.
+        # \brief Initializes the \c %VolumeConstraint instance.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param pt3_idx 
@@ -65,8 +65,8 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, pt3_idx: int, pt4_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %VolumeConstraint instance \a constr.
-        # \param constr The \e %VolumeConstraint instance to copy.
+        # \brief Initializes a copy of the \c %VolumeConstraint instance \a constr.
+        # \param constr The \c %VolumeConstraint instance to copy.
         # 
         def __init__(constr: VolumeConstraint) -> None: pass
 
@@ -169,7 +169,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     class DistanceConstraint(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %DistanceConstraint instance.
+        # \brief Initializes the \c %DistanceConstraint instance.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
@@ -178,8 +178,8 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %DistanceConstraint instance \a constr.
-        # \param constr The \e %DistanceConstraint instance to copy.
+        # \brief Initializes a copy of the \c %DistanceConstraint instance \a constr.
+        # \param constr The \c %DistanceConstraint instance to copy.
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
 
@@ -262,13 +262,13 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     DEF_LEARNING_RATE_DECREMENT = 0.019
 
     ##
-    # \brief Initializes the \e %DG3DCoordinatesGenerator instance.
+    # \brief Initializes the \c %DG3DCoordinatesGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DG3DCoordinatesGenerator instance \a gen.
-    # \param gen The \e %DG3DCoordinatesGenerator instance to copy.
+    # \brief Initializes a copy of the \c %DG3DCoordinatesGenerator instance \a gen.
+    # \param gen The \c %DG3DCoordinatesGenerator instance to copy.
     # 
     def __init__(gen: DG3DCoordinatesGenerator) -> None: pass
 

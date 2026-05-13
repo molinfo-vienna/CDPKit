@@ -25,13 +25,13 @@
 class FVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FVectorRange instance \a r.
-    # \param r The \e %FVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %FVectorRange instance \a r.
+    # \param r The \c %FVectorRange instance to copy.
     # 
     def __init__(r: FVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %FVectorRange instance.
+    # \brief Initializes the \c %FVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -190,7 +190,7 @@ class FVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FVectorRange instance.
+    # \brief Returns a string representation of the \c %FVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

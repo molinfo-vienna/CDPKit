@@ -25,18 +25,18 @@
 class MMFF94AtomChargeFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94AtomChargeFunction instance.
+    # \brief Initializes the \c %MMFF94AtomChargeFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AtomChargeFunction instance \a func.
-    # \param func The \e %MMFF94AtomChargeFunction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AtomChargeFunction instance \a func.
+    # \param func The \c %MMFF94AtomChargeFunction instance to copy.
     # 
     def __init__(func: MMFF94AtomChargeFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AtomChargeFunction instance.
+    # \brief Initializes the \c %MMFF94AtomChargeFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

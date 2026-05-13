@@ -25,7 +25,7 @@
 class FileCDFMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FileCDFMolecularGraphWriter instance.
+    # \brief Initializes the \c %FileCDFMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

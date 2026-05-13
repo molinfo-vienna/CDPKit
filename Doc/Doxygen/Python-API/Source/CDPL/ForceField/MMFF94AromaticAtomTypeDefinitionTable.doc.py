@@ -30,13 +30,13 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param old_type 
         # \param aro_type 
         # \param atomic_no 
@@ -125,13 +125,13 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         n5RingAnion = property(isN5RingAnion)
 
     ##
-    # \brief Initializes the \e %MMFF94AromaticAtomTypeDefinitionTable instance.
+    # \brief Initializes the \c %MMFF94AromaticAtomTypeDefinitionTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AromaticAtomTypeDefinitionTable instance \a table.
-    # \param table The \e %MMFF94AromaticAtomTypeDefinitionTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AromaticAtomTypeDefinitionTable instance \a table.
+    # \param table The \c %MMFF94AromaticAtomTypeDefinitionTable instance to copy.
     # 
     def __init__(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 

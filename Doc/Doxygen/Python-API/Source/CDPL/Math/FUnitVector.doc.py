@@ -25,18 +25,18 @@
 class FUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FUnitVector instance.
+    # \brief Initializes the \c %FUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FUnitVector instance \a v.
-    # \param v The \e %FUnitVector instance to copy.
+    # \brief Initializes a copy of the \c %FUnitVector instance \a v.
+    # \param v The \c %FUnitVector instance to copy.
     # 
     def __init__(v: FUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %FUnitVector instance.
+    # \brief Initializes the \c %FUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -154,7 +154,7 @@ class FUnitVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FUnitVector instance.
+    # \brief Returns a string representation of the \c %FUnitVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

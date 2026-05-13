@@ -27,7 +27,7 @@
 class CIPConfigurationLabeler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %CIPConfigurationLabeler instance.
+    # \brief Initializes the \c %CIPConfigurationLabeler instance.
     # 
     def __init__() -> None: pass
 

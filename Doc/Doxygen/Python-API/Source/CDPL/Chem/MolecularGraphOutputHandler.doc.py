@@ -25,7 +25,7 @@
 class MolecularGraphOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %MolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass
 

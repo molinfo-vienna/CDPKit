@@ -27,13 +27,13 @@
 class HammingDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %HammingDistance instance.
+    # \brief Initializes the \c %HammingDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %HammingDistance instance \a func.
-    # \param func The \e %HammingDistance instance to copy.
+    # \brief Initializes a copy of the \c %HammingDistance instance \a func.
+    # \param func The \c %HammingDistance instance to copy.
     # 
     def __init__(func: HammingDistance) -> None: pass
 

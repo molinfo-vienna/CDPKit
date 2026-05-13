@@ -30,13 +30,13 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %FragmentAssemblerSettings instance.
+    # \brief Initializes the \c %FragmentAssemblerSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FragmentAssemblerSettings instance \a settings.
-    # \param settings The \e %FragmentAssemblerSettings instance to copy.
+    # \brief Initializes a copy of the \c %FragmentAssemblerSettings instance \a settings.
+    # \param settings The \c %FragmentAssemblerSettings instance to copy.
     # 
     def __init__(settings: FragmentAssemblerSettings) -> None: pass
 

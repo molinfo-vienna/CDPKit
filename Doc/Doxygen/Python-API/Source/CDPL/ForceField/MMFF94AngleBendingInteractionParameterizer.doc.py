@@ -25,18 +25,18 @@
 class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94AngleBendingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94AngleBendingInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94AngleBendingInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94AngleBendingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94AngleBendingInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AngleBendingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94AngleBendingInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

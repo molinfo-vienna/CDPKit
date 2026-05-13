@@ -25,7 +25,7 @@
 class XYZBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %XYZBZ2MoleculeReader instance.
+    # \brief Initializes the \c %XYZBZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

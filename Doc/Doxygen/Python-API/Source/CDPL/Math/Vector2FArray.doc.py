@@ -30,13 +30,13 @@ class Vector2FArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector2FArray instance \a array.
-    # \param array The \e %Vector2FArray instance to copy.
+    # \brief Initializes a copy of the \c %Vector2FArray instance \a array.
+    # \param array The \c %Vector2FArray instance to copy.
     # 
     def __init__(array: Vector2FArray) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2FArray instance.
+    # \brief Initializes the \c %Vector2FArray instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass

@@ -25,18 +25,18 @@
 class ULScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULScalarVector instance.
+    # \brief Initializes the \c %ULScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULScalarVector instance \a v.
-    # \param v The \e %ULScalarVector instance to copy.
+    # \brief Initializes a copy of the \c %ULScalarVector instance \a v.
+    # \param v The \c %ULScalarVector instance to copy.
     # 
     def __init__(v: ULScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULScalarVector instance.
+    # \brief Initializes the \c %ULScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -147,7 +147,7 @@ class ULScalarVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULScalarVector instance.
+    # \brief Returns a string representation of the \c %ULScalarVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

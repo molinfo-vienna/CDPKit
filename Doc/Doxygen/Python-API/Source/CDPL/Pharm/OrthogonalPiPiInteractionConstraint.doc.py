@@ -45,8 +45,8 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ANGLE = 30.0
 
     ##
-    # \brief Initializes a copy of the \e %OrthogonalPiPiInteractionConstraint instance \a constr.
-    # \param constr The \e %OrthogonalPiPiInteractionConstraint instance to copy.
+    # \brief Initializes a copy of the \c %OrthogonalPiPiInteractionConstraint instance \a constr.
+    # \param constr The \c %OrthogonalPiPiInteractionConstraint instance to copy.
     # 
     def __init__(constr: OrthogonalPiPiInteractionConstraint) -> None: pass
 

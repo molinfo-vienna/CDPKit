@@ -25,6 +25,6 @@
 class RDFReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %RDFReactionInputHandler instance.
+    # \brief Initializes the \c %RDFReactionInputHandler instance.
     # 
     def __init__() -> None: pass

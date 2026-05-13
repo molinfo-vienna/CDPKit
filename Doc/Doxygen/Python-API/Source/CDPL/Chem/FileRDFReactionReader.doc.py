@@ -25,7 +25,7 @@
 class FileRDFReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %FileRDFReactionReader instance.
+    # \brief Initializes the \c %FileRDFReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

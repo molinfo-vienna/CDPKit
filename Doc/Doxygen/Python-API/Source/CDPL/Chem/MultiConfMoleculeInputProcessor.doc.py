@@ -25,7 +25,7 @@
 class MultiConfMoleculeInputProcessor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MultiConfMoleculeInputProcessor instance.
+    # \brief Initializes the \c %MultiConfMoleculeInputProcessor instance.
     # 
     def __init__() -> None: pass
 

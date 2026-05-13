@@ -96,7 +96,7 @@ class ConstULVectorExpression(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULVectorExpression instance.
+    # \brief Returns a string representation of the \c %ConstULVectorExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

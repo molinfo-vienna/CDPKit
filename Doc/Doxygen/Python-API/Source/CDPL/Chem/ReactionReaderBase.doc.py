@@ -35,7 +35,7 @@
 class ReactionReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %ReactionReaderBase instance.
+    # \brief Initializes the \c %ReactionReaderBase instance.
     # 
     def __init__() -> None: pass
 

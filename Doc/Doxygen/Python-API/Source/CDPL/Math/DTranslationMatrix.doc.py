@@ -25,13 +25,13 @@
 class DTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DTranslationMatrix instance \a m.
-    # \param m The \e %DTranslationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %DTranslationMatrix instance \a m.
+    # \param m The \c %DTranslationMatrix instance to copy.
     # 
     def __init__(m: DTranslationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %DTranslationMatrix instance.
+    # \brief Initializes the \c %DTranslationMatrix instance.
     # \param n 
     # \param tx 
     # \param ty 
@@ -154,7 +154,7 @@ class DTranslationMatrix(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DTranslationMatrix instance.
+    # \brief Returns a string representation of the \c %DTranslationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

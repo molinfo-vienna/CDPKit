@@ -25,18 +25,18 @@
 class ConformerData(Math.Vector3DArray):
 
     ##
-    # \brief Initializes the \e %ConformerData instance.
+    # \brief Initializes the \c %ConformerData instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ConformerData instance \a data.
-    # \param data The \e %ConformerData instance to copy.
+    # \brief Initializes a copy of the \c %ConformerData instance \a data.
+    # \param data The \c %ConformerData instance to copy.
     # 
     def __init__(data: ConformerData) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConformerData instance.
+    # \brief Initializes the \c %ConformerData instance.
     # \param coords 
     # \param energy 
     # 

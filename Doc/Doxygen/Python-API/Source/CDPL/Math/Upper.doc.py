@@ -25,12 +25,12 @@
 class Upper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Upper instance.
+    # \brief Initializes the \c %Upper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Upper instance \a t.
-    # \param t The \e %Upper instance to copy.
+    # \brief Initializes a copy of the \c %Upper instance \a t.
+    # \param t The \c %Upper instance to copy.
     # 
     def __init__(t: Upper) -> None: pass

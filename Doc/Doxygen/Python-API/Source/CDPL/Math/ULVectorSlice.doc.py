@@ -25,13 +25,13 @@
 class ULVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULVectorSlice instance \a s.
-    # \param s The \e %ULVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c %ULVectorSlice instance \a s.
+    # \param s The \c %ULVectorSlice instance to copy.
     # 
     def __init__(s: ULVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULVectorSlice instance.
+    # \brief Initializes the \c %ULVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -196,7 +196,7 @@ class ULVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULVectorSlice instance.
+    # \brief Returns a string representation of the \c %ULVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -30,13 +30,13 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param ptn 
         # \param sym_type 
         # \param fallback 
@@ -89,13 +89,13 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         fallbackType = property(isFallbackType)
 
     ##
-    # \brief Initializes the \e %MMFF94SymbolicAtomTypePatternTable instance.
+    # \brief Initializes the \c %MMFF94SymbolicAtomTypePatternTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94SymbolicAtomTypePatternTable instance \a table.
-    # \param table The \e %MMFF94SymbolicAtomTypePatternTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94SymbolicAtomTypePatternTable instance \a table.
+    # \param table The \c %MMFF94SymbolicAtomTypePatternTable instance to copy.
     # 
     def __init__(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 

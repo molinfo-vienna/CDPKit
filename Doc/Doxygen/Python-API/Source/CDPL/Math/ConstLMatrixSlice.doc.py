@@ -25,13 +25,13 @@
 class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstLMatrixSlice instance \a s.
-    # \param s The \e %ConstLMatrixSlice instance to copy.
+    # \brief Initializes a copy of the \c %ConstLMatrixSlice instance \a s.
+    # \param s The \c %ConstLMatrixSlice instance to copy.
     # 
     def __init__(s: ConstLMatrixSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstLMatrixSlice instance.
+    # \brief Initializes the \c %ConstLMatrixSlice instance.
     # \param e 
     # \param s1 
     # \param s2 
@@ -162,7 +162,7 @@ class ConstLMatrixSlice(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLMatrixSlice instance.
+    # \brief Returns a string representation of the \c %ConstLMatrixSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

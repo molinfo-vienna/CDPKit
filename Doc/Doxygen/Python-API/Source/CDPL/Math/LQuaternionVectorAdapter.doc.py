@@ -25,13 +25,13 @@
 class LQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LQuaternionVectorAdapter instance \a a.
-    # \param a The \e %LQuaternionVectorAdapter instance to copy.
+    # \brief Initializes a copy of the \c %LQuaternionVectorAdapter instance \a a.
+    # \param a The \c %LQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: LQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternionVectorAdapter instance.
+    # \brief Initializes the \c %LQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: LQuaternionExpression) -> None: pass
@@ -183,7 +183,7 @@ class LQuaternionVectorAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LQuaternionVectorAdapter instance.
+    # \brief Returns a string representation of the \c %LQuaternionVectorAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,18 +25,18 @@
 class ULZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULZeroVector instance.
+    # \brief Initializes the \c %ULZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULZeroVector instance \a v.
-    # \param v The \e %ULZeroVector instance to copy.
+    # \brief Initializes a copy of the \c %ULZeroVector instance \a v.
+    # \param v The \c %ULZeroVector instance to copy.
     # 
     def __init__(v: ULZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULZeroVector instance.
+    # \brief Initializes the \c %ULZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -146,7 +146,7 @@ class ULZeroVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULZeroVector instance.
+    # \brief Returns a string representation of the \c %ULZeroVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

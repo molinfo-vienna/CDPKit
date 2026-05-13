@@ -25,18 +25,18 @@
 class UInt64AtomFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %UInt64AtomFunctor instance.
+    # \brief Initializes the \c %UInt64AtomFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %UInt64AtomFunctor instance.
+    # \brief Initializes the \c %UInt64AtomFunctor instance.
     # \param func 
     # 
     def __init__(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %UInt64AtomFunctor instance.
+    # \brief Initializes the \c %UInt64AtomFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

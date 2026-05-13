@@ -25,7 +25,7 @@
 class CDFGZFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFGZFeatureContainerWriter instance.
+    # \brief Initializes the \c %CDFGZFeatureContainerWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

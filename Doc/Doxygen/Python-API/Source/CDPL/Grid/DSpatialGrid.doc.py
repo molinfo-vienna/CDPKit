@@ -25,7 +25,7 @@
 class DSpatialGrid(AttributedGrid):
 
     ##
-    # \brief Initializes the \e %DSpatialGrid instance.
+    # \brief Initializes the \c %DSpatialGrid instance.
     # 
     def __init__() -> None: pass
 

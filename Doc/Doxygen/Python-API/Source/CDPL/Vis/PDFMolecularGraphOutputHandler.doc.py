@@ -25,6 +25,6 @@
 class PDFMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %PDFMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %PDFMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

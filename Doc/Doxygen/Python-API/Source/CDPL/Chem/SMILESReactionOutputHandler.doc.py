@@ -25,6 +25,6 @@
 class SMILESReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %SMILESReactionOutputHandler instance.
+    # \brief Initializes the \c %SMILESReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

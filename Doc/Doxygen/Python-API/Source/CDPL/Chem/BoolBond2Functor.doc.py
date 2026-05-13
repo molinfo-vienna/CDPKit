@@ -25,18 +25,18 @@
 class BoolBond2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolBond2Functor instance.
+    # \brief Initializes the \c %BoolBond2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolBond2Functor instance \a func.
-    # \param func The \e %BoolBond2Functor instance to copy.
+    # \brief Initializes a copy of the \c %BoolBond2Functor instance \a func.
+    # \param func The \c %BoolBond2Functor instance to copy.
     # 
     def __init__(func: BoolBond2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolBond2Functor instance.
+    # \brief Initializes the \c %BoolBond2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

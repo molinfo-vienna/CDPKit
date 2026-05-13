@@ -25,7 +25,7 @@
 class AttributedGrid(Base.PropertyContainer):
 
     ##
-    # \brief Initializes the \e %AttributedGrid instance.
+    # \brief Initializes the \c %AttributedGrid instance.
     # 
     def __init__() -> None: pass
 

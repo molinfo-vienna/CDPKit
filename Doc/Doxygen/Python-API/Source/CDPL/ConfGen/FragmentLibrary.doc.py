@@ -25,13 +25,13 @@
 class FragmentLibrary(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FragmentLibrary instance.
+    # \brief Initializes the \c %FragmentLibrary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FragmentLibrary instance \a lib.
-    # \param lib The \e %FragmentLibrary instance to copy.
+    # \brief Initializes a copy of the \c %FragmentLibrary instance \a lib.
+    # \param lib The \c %FragmentLibrary instance to copy.
     # 
     def __init__(lib: FragmentLibrary) -> None: pass
 

@@ -27,7 +27,7 @@
 class ReactionMatchExpression(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ReactionMatchExpression instance.
+    # \brief Initializes the \c %ReactionMatchExpression instance.
     # 
     def __init__() -> None: pass
 

@@ -25,6 +25,6 @@
 class RDFReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %RDFReactionOutputHandler instance.
+    # \brief Initializes the \c %RDFReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

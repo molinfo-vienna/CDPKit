@@ -59,7 +59,7 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
         DELTAF_REACHED = 8
 
     ##
-    # \brief Initializes the \e %DVectorBFGSMinimizer instance.
+    # \brief Initializes the \c %DVectorBFGSMinimizer instance.
     # \param func 
     # \param grad_func 
     # 

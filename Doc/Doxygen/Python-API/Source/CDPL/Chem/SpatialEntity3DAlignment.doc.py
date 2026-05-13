@@ -25,13 +25,13 @@
 class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SpatialEntity3DAlignment instance.
+    # \brief Initializes the \c %SpatialEntity3DAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SpatialEntity3DAlignment instance \a alignment.
-    # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
+    # \brief Initializes a copy of the \c %SpatialEntity3DAlignment instance \a alignment.
+    # \param alignment The \c %SpatialEntity3DAlignment instance to copy.
     # 
     def __init__(alignment: SpatialEntity3DAlignment) -> None: pass
 

@@ -25,6 +25,6 @@
 class PNGReactionOutputHandler(Chem.ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %PNGReactionOutputHandler instance.
+    # \brief Initializes the \c %PNGReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

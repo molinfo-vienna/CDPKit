@@ -25,18 +25,18 @@
 class DZeroVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DZeroVector instance.
+    # \brief Initializes the \c %DZeroVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DZeroVector instance \a v.
-    # \param v The \e %DZeroVector instance to copy.
+    # \brief Initializes a copy of the \c %DZeroVector instance \a v.
+    # \param v The \c %DZeroVector instance to copy.
     # 
     def __init__(v: DZeroVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %DZeroVector instance.
+    # \brief Initializes the \c %DZeroVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -146,7 +146,7 @@ class DZeroVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DZeroVector instance.
+    # \brief Returns a string representation of the \c %DZeroVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

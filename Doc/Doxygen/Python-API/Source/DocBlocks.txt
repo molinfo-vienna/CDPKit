@@ -1,32 +1,32 @@
 .__init__
-\brief Initializes the \e %@CN@ instance.
-\param @A0@ The \e %@CN@ instance to initialize.
+\brief Initializes the \c %@CN@ instance.
+\param @A0@ The \c %@CN@ instance to initialize.
 \param @ARGS@ 
 $$$$
 
 .__copy__init__
-\brief Initializes a copy of the \e %@CN@ instance \a @A1@.
-\param @A0@ The \e %@CN@ instance to initialize.
-\param @A1@ The \e %@AT1@ instance to copy.
+\brief Initializes a copy of the \c %@CN@ instance \a @A1@.
+\param @A0@ The \c %@CN@ instance to initialize.
+\param @A1@ The \c %@AT1@ instance to copy.
 $$$$
 
 .__str__
-\brief Returns a string representation of the \e %@CN@ instance.
-\param @A0@ The \e %@CN@ instance this method is called upon.
+\brief Returns a string representation of the \c %@CN@ instance.
+\param @A0@ The \c %@CN@ instance this method is called upon.
 \return The generated string representation.
 $$$$
 
 .__lt__
 \brief Returns the result of the comparison operation <tt>@A0@ < @A1@</tt>.
-\param @A0@ The \e %@CN@ instance this method is called upon.
-\param @A1@ The \e %@AT1@ instance to be compared with.
+\param @A0@ The \c %@CN@ instance this method is called upon.
+\param @A1@ The \c %@AT1@ instance to be compared with.
 \return The result of the comparison operation.
 $$$$
 
 .__le__
 \brief Returns the result of the comparison operation <tt>@A0@ <= @A1@</tt>.
-\param @A0@ The \e %@CN@ instance this method is called upon.
-\param @A1@ The \e %@AT1@ instance to be compared with.
+\param @A0@ The \c %@CN@ instance this method is called upon.
+\param @A1@ The \c %@AT1@ instance to be compared with.
 \return The result of the comparison operation.
 $$$$
 

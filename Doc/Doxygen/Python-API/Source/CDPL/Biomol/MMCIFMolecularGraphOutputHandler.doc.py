@@ -27,6 +27,6 @@
 class MMCIFMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %MMCIFMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %MMCIFMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

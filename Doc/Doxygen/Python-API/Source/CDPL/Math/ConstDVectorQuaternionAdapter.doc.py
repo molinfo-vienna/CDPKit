@@ -25,13 +25,13 @@
 class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstDVectorQuaternionAdapter instance \a a.
-    # \param a The \e %ConstDVectorQuaternionAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ConstDVectorQuaternionAdapter instance \a a.
+    # \param a The \c %ConstDVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: ConstDVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstDVectorQuaternionAdapter instance.
+    # \brief Initializes the \c %ConstDVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
@@ -113,7 +113,7 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDVectorQuaternionAdapter instance.
+    # \brief Returns a string representation of the \c %ConstDVectorQuaternionAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

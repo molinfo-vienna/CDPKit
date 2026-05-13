@@ -30,7 +30,7 @@ class TorsionRule(Boost.Python.instance):
     class AngleEntry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %AngleEntry instance.
+        # \brief Initializes the \c %AngleEntry instance.
         # \param ang 
         # \param tol1 
         # \param tol2 
@@ -39,8 +39,8 @@ class TorsionRule(Boost.Python.instance):
         def __init__(ang: float, tol1: float, tol2: float, score: float) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %AngleEntry instance \a entry.
-        # \param entry The \e %AngleEntry instance to copy.
+        # \brief Initializes a copy of the \c %AngleEntry instance \a entry.
+        # \param entry The \c %AngleEntry instance to copy.
         # 
         def __init__(entry: AngleEntry) -> None: pass
 
@@ -98,13 +98,13 @@ class TorsionRule(Boost.Python.instance):
         tolerance2 = property(getTolerance2)
 
     ##
-    # \brief Initializes the \e %TorsionRule instance.
+    # \brief Initializes the \c %TorsionRule instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TorsionRule instance \a rule.
-    # \param rule The \e %TorsionRule instance to copy.
+    # \brief Initializes a copy of the \c %TorsionRule instance \a rule.
+    # \param rule The \c %TorsionRule instance to copy.
     # 
     def __init__(rule: TorsionRule) -> None: pass
 

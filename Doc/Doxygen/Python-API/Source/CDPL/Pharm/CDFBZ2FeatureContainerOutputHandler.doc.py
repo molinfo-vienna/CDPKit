@@ -25,6 +25,6 @@
 class CDFBZ2FeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \e %CDFBZ2FeatureContainerOutputHandler instance.
+    # \brief Initializes the \c %CDFBZ2FeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

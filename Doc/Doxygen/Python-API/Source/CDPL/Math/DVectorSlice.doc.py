@@ -25,13 +25,13 @@
 class DVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DVectorSlice instance \a s.
-    # \param s The \e %DVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c %DVectorSlice instance \a s.
+    # \param s The \c %DVectorSlice instance to copy.
     # 
     def __init__(s: DVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %DVectorSlice instance.
+    # \brief Initializes the \c %DVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -196,7 +196,7 @@ class DVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DVectorSlice instance.
+    # \brief Returns a string representation of the \c %DVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

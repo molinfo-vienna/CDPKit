@@ -25,18 +25,18 @@
 class DoubleVector3DFeatureFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleVector3DFeatureFunctor instance.
+    # \brief Initializes the \c %DoubleVector3DFeatureFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleVector3DFeatureFunctor instance \a func.
-    # \param func The \e %DoubleVector3DFeatureFunctor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleVector3DFeatureFunctor instance \a func.
+    # \param func The \c %DoubleVector3DFeatureFunctor instance to copy.
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleVector3DFeatureFunctor instance.
+    # \brief Initializes the \c %DoubleVector3DFeatureFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

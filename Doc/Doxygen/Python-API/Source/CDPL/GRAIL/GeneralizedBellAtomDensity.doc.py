@@ -35,13 +35,13 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     DEF_PROBE_RADIUS = 0.0
 
     ##
-    # \brief Initializes a copy of the \e %GeneralizedBellAtomDensity instance \a func.
-    # \param func The \e %GeneralizedBellAtomDensity instance to copy.
+    # \brief Initializes a copy of the \c %GeneralizedBellAtomDensity instance \a func.
+    # \param func The \c %GeneralizedBellAtomDensity instance to copy.
     # 
     def __init__(func: GeneralizedBellAtomDensity) -> None: pass
 
     ##
-    # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
+    # \brief Initializes the \c %GeneralizedBellAtomDensity instance.
     # \param probe_radius 
     # \param rad_scaling_factor 
     # 

@@ -25,18 +25,18 @@
 class VoidMolecularGraph2AlignmentResultFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidMolecularGraph2AlignmentResultFunctor instance.
+    # \brief Initializes the \c %VoidMolecularGraph2AlignmentResultFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %VoidMolecularGraph2AlignmentResultFunctor instance \a func.
-    # \param func The \e %VoidMolecularGraph2AlignmentResultFunctor instance to copy.
+    # \brief Initializes a copy of the \c %VoidMolecularGraph2AlignmentResultFunctor instance \a func.
+    # \param func The \c %VoidMolecularGraph2AlignmentResultFunctor instance to copy.
     # 
     def __init__(func: VoidMolecularGraph2AlignmentResultFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidMolecularGraph2AlignmentResultFunctor instance.
+    # \brief Initializes the \c %VoidMolecularGraph2AlignmentResultFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

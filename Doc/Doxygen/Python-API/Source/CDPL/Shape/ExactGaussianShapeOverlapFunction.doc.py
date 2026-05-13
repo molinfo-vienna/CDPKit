@@ -25,20 +25,20 @@
 class ExactGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
-    # \brief Initializes the \e %ExactGaussianShapeOverlapFunction instance.
+    # \brief Initializes the \c %ExactGaussianShapeOverlapFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ExactGaussianShapeOverlapFunction instance.
+    # \brief Initializes the \c %ExactGaussianShapeOverlapFunction instance.
     # \param ref_shape_func 
     # \param ovl_shape_func 
     # 
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ExactGaussianShapeOverlapFunction instance \a func.
-    # \param func The \e %ExactGaussianShapeOverlapFunction instance to copy.
+    # \brief Initializes a copy of the \c %ExactGaussianShapeOverlapFunction instance \a func.
+    # \param func The \c %ExactGaussianShapeOverlapFunction instance to copy.
     # 
     def __init__(func: ExactGaussianShapeOverlapFunction) -> None: pass
 

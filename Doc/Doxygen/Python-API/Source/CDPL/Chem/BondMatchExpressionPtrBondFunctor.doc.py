@@ -25,18 +25,18 @@
 class BondMatchExpressionPtrBondFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BondMatchExpressionPtrBondFunctor instance.
+    # \brief Initializes the \c %BondMatchExpressionPtrBondFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BondMatchExpressionPtrBondFunctor instance \a func.
-    # \param func The \e %BondMatchExpressionPtrBondFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BondMatchExpressionPtrBondFunctor instance \a func.
+    # \param func The \c %BondMatchExpressionPtrBondFunctor instance to copy.
     # 
     def __init__(func: BondMatchExpressionPtrBondFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BondMatchExpressionPtrBondFunctor instance.
+    # \brief Initializes the \c %BondMatchExpressionPtrBondFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

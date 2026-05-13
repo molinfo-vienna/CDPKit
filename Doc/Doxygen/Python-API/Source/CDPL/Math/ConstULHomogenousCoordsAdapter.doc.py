@@ -25,13 +25,13 @@
 class ConstULHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstULHomogenousCoordsAdapter instance \a a.
-    # \param a The \e %ConstULHomogenousCoordsAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ConstULHomogenousCoordsAdapter instance \a a.
+    # \param a The \c %ConstULHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: ConstULHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstULHomogenousCoordsAdapter instance.
+    # \brief Initializes the \c %ConstULHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
@@ -128,7 +128,7 @@ class ConstULHomogenousCoordsAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULHomogenousCoordsAdapter instance.
+    # \brief Returns a string representation of the \c %ConstULHomogenousCoordsAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

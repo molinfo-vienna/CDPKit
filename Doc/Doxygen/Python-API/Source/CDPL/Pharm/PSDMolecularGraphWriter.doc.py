@@ -25,7 +25,7 @@
 class PSDMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %PSDMolecularGraphWriter instance.
+    # \brief Initializes the \c %PSDMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

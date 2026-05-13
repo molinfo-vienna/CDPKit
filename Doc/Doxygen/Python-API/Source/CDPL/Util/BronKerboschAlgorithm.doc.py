@@ -25,18 +25,18 @@
 class BronKerboschAlgorithm(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BronKerboschAlgorithm instance.
+    # \brief Initializes the \c %BronKerboschAlgorithm instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BronKerboschAlgorithm instance \a bka.
-    # \param bka The \e %BronKerboschAlgorithm instance to copy.
+    # \brief Initializes a copy of the \c %BronKerboschAlgorithm instance \a bka.
+    # \param bka The \c %BronKerboschAlgorithm instance to copy.
     # 
     def __init__(bka: BronKerboschAlgorithm) -> None: pass
 
     ##
-    # \brief Initializes the \e %BronKerboschAlgorithm instance.
+    # \brief Initializes the \c %BronKerboschAlgorithm instance.
     # \param adj_mtx 
     # 
     def __init__(adj_mtx: BitSetArray) -> None: pass

@@ -25,7 +25,7 @@
 class CompoundPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %CompoundPharmacophoreReader instance.
+    # \brief Initializes the \c %CompoundPharmacophoreReader instance.
     # 
     def __init__() -> None: pass
 

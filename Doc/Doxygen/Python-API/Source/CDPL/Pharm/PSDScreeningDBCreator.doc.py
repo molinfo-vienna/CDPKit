@@ -25,7 +25,7 @@
 class PSDScreeningDBCreator(ScreeningDBCreator):
 
     ##
-    # \brief Initializes the \e %PSDScreeningDBCreator instance.
+    # \brief Initializes the \c %PSDScreeningDBCreator instance.
     # 
     def __init__() -> None: pass
 

@@ -30,13 +30,13 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Pattern instance \a pattern.
-        # \param pattern The \e %Pattern instance to copy.
+        # \brief Initializes a copy of the \c %Pattern instance \a pattern.
+        # \param pattern The \c %Pattern instance to copy.
         # 
         def __init__(pattern: Pattern) -> None: pass
 
         ##
-        # \brief Initializes the \e %Pattern instance.
+        # \brief Initializes the \c %Pattern instance.
         # \param molgraph 
         # \param id 
         # \param priority 
@@ -107,13 +107,13 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         uniqueMatches = property(processUniqueMatchesOnly)
 
     ##
-    # \brief Initializes the \e %SubstructureHistogramCalculator instance.
+    # \brief Initializes the \c %SubstructureHistogramCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SubstructureHistogramCalculator instance \a calc.
-    # \param calc The \e %SubstructureHistogramCalculator instance to copy.
+    # \brief Initializes a copy of the \c %SubstructureHistogramCalculator instance \a calc.
+    # \param calc The \c %SubstructureHistogramCalculator instance to copy.
     # 
     def __init__(calc: SubstructureHistogramCalculator) -> None: pass
 

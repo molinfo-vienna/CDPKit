@@ -30,8 +30,8 @@ class ElectronSystem(AtomContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ElectronSystem instance \a elec_sys.
-    # \param elec_sys The \e %ElectronSystem instance to copy.
+    # \brief Initializes a copy of the \c %ElectronSystem instance \a elec_sys.
+    # \param elec_sys The \c %ElectronSystem instance to copy.
     # 
     def __init__(elec_sys: ElectronSystem) -> None: pass
 

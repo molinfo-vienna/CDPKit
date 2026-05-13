@@ -25,7 +25,7 @@
 class FilePSReactionWriter(Chem.ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %FilePSReactionWriter instance.
+    # \brief Initializes the \c %FilePSReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

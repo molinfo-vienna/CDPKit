@@ -25,13 +25,13 @@
 class AlignmentResult(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AlignmentResult instance.
+    # \brief Initializes the \c %AlignmentResult instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AlignmentResult instance \a res.
-    # \param res The \e %AlignmentResult instance to copy.
+    # \brief Initializes a copy of the \c %AlignmentResult instance \a res.
+    # \param res The \c %AlignmentResult instance to copy.
     # 
     def __init__(res: AlignmentResult) -> None: pass
 

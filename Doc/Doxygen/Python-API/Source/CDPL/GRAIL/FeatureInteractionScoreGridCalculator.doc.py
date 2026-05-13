@@ -30,7 +30,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     class MaxScoreFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %MaxScoreFunctor instance.
+        # \brief Initializes the \c %MaxScoreFunctor instance.
         # 
         def __init__() -> None: pass
 
@@ -47,7 +47,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     class ScoreSumFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %ScoreSumFunctor instance.
+        # \brief Initializes the \c %ScoreSumFunctor instance.
         # 
         def __init__() -> None: pass
 
@@ -59,26 +59,26 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         def __call__(scores: Math.DVector) -> float: pass
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
     # \param func 
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
     # \param scoring_func 
     # \param comb_func 
     # 
     def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
-    # \param calc The \e %FeatureInteractionScoreGridCalculator instance to copy.
+    # \brief Initializes a copy of the \c %FeatureInteractionScoreGridCalculator instance \a calc.
+    # \param calc The \c %FeatureInteractionScoreGridCalculator instance to copy.
     # 
     def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass
 

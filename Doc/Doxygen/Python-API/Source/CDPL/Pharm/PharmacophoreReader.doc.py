@@ -25,14 +25,14 @@
 class PharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %PharmacophoreReader instance.
+    # \brief Initializes the \c %PharmacophoreReader instance.
     # \param file_name 
     # \param mode 
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreReader instance.
+    # \brief Initializes the \c %PharmacophoreReader instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -40,7 +40,7 @@ class PharmacophoreReader(PharmacophoreReaderBase):
     def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreReader instance.
+    # \brief Initializes the \c %PharmacophoreReader instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -48,14 +48,14 @@ class PharmacophoreReader(PharmacophoreReaderBase):
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreReader instance.
+    # \brief Initializes the \c %PharmacophoreReader instance.
     # \param is 
     # \param fmt 
     # 
     def __init__(is: Base.IStream, fmt: str) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreReader instance.
+    # \brief Initializes the \c %PharmacophoreReader instance.
     # \param is 
     # \param fmt 
     # 

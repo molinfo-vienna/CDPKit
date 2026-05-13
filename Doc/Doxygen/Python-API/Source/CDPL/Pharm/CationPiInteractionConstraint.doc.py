@@ -40,8 +40,8 @@ class CationPiInteractionConstraint(Boost.Python.instance):
     DEF_MAX_ANGLE = 45.0
 
     ##
-    # \brief Initializes a copy of the \e %CationPiInteractionConstraint instance \a constr.
-    # \param constr The \e %CationPiInteractionConstraint instance to copy.
+    # \brief Initializes a copy of the \c %CationPiInteractionConstraint instance \a constr.
+    # \param constr The \c %CationPiInteractionConstraint instance to copy.
     # 
     def __init__(constr: CationPiInteractionConstraint) -> None: pass
 

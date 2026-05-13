@@ -50,13 +50,13 @@ class TorsionRuleMatch(Boost.Python.instance):
         def __getitem__(idx: int) -> Chem.Atom: pass
 
     ##
-    # \brief Initializes a copy of the \e %TorsionRuleMatch instance \a match.
-    # \param match The \e %TorsionRuleMatch instance to copy.
+    # \brief Initializes a copy of the \c %TorsionRuleMatch instance \a match.
+    # \param match The \c %TorsionRuleMatch instance to copy.
     # 
     def __init__(match: TorsionRuleMatch) -> None: pass
 
     ##
-    # \brief Initializes the \e %TorsionRuleMatch instance.
+    # \brief Initializes the \c %TorsionRuleMatch instance.
     # \param rule 
     # \param bond 
     # \param atom1 

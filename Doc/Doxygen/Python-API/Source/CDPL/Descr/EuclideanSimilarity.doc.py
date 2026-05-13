@@ -27,13 +27,13 @@
 class EuclideanSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %EuclideanSimilarity instance.
+    # \brief Initializes the \c %EuclideanSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %EuclideanSimilarity instance \a func.
-    # \param func The \e %EuclideanSimilarity instance to copy.
+    # \brief Initializes a copy of the \c %EuclideanSimilarity instance \a func.
+    # \param func The \c %EuclideanSimilarity instance to copy.
     # 
     def __init__(func: EuclideanSimilarity) -> None: pass
 

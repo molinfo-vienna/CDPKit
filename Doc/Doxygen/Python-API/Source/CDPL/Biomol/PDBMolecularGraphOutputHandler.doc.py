@@ -25,6 +25,6 @@
 class PDBMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %PDBMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %PDBMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

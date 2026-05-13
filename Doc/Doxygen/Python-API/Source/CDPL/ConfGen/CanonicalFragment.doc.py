@@ -56,8 +56,8 @@ class CanonicalFragment(Chem.MolecularGraph):
     def __init__(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %CanonicalFragment instance \a frag.
-    # \param frag The \e %CanonicalFragment instance to copy.
+    # \brief Initializes a copy of the \c %CanonicalFragment instance \a frag.
+    # \param frag The \c %CanonicalFragment instance to copy.
     # 
     def __init__(frag: CanonicalFragment) -> None: pass
 

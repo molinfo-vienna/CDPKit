@@ -30,8 +30,8 @@ class UIArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %UIArray instance \a array.
-    # \param array The \e %UIArray instance to copy.
+    # \brief Initializes a copy of the \c %UIArray instance \a array.
+    # \param array The \c %UIArray instance to copy.
     # 
     def __init__(array: UIArray) -> None: pass
 
@@ -258,7 +258,7 @@ class UIArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param array The \e %UIArray instance to be compared with.
+    # \param array The \c %UIArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(array: UIArray) -> bool: pass
@@ -272,7 +272,7 @@ class UIArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param array The \e %UIArray instance to be compared with.
+    # \param array The \c %UIArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(array: UIArray) -> bool: pass

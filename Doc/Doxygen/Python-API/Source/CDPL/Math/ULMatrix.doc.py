@@ -25,25 +25,25 @@
 class ULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULMatrix instance \a m.
-    # \param m The \e %ULMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULMatrix instance \a m.
+    # \param m The \c %ULMatrix instance to copy.
     # 
     def __init__(m: ULMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -51,31 +51,31 @@ class ULMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance.
+    # \brief Initializes the \c %ULMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -245,7 +245,7 @@ class ULMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULMatrix instance.
+    # \brief Returns a string representation of the \c %ULMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

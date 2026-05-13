@@ -25,18 +25,18 @@
 class VoidLookupKeyAnyFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyAnyFunctor instance.
+    # \brief Initializes the \c %VoidLookupKeyAnyFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %VoidLookupKeyAnyFunctor instance \a func.
-    # \param func The \e %VoidLookupKeyAnyFunctor instance to copy.
+    # \brief Initializes a copy of the \c %VoidLookupKeyAnyFunctor instance \a func.
+    # \param func The \c %VoidLookupKeyAnyFunctor instance to copy.
     # 
     def __init__(func: VoidLookupKeyAnyFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyAnyFunctor instance.
+    # \brief Initializes the \c %VoidLookupKeyAnyFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

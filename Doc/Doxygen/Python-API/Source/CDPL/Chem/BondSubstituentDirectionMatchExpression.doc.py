@@ -27,13 +27,13 @@
 class BondSubstituentDirectionMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes the \e %BondSubstituentDirectionMatchExpression instance.
+    # \brief Initializes the \c %BondSubstituentDirectionMatchExpression instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BondSubstituentDirectionMatchExpression instance \a expr.
-    # \param expr The \e %BondSubstituentDirectionMatchExpression instance to copy.
+    # \brief Initializes a copy of the \c %BondSubstituentDirectionMatchExpression instance \a expr.
+    # \param expr The \c %BondSubstituentDirectionMatchExpression instance to copy.
     # 
     def __init__(expr: BondSubstituentDirectionMatchExpression) -> None: pass
 

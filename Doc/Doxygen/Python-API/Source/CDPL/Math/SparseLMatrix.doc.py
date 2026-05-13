@@ -25,49 +25,49 @@
 class SparseLMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SparseLMatrix instance \a m.
-    # \param m The \e %SparseLMatrix instance to copy.
+    # \brief Initializes a copy of the \c %SparseLMatrix instance \a m.
+    # \param m The \c %SparseLMatrix instance to copy.
     # 
     def __init__(m: SparseLMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLMatrix instance.
+    # \brief Initializes the \c %SparseLMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -240,7 +240,7 @@ class SparseLMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %SparseLMatrix instance.
+    # \brief Returns a string representation of the \c %SparseLMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

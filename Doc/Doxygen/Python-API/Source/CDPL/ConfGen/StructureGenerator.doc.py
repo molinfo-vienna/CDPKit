@@ -25,7 +25,7 @@
 class StructureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %StructureGenerator instance.
+    # \brief Initializes the \c %StructureGenerator instance.
     # 
     def __init__() -> None: pass
 

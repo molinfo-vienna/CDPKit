@@ -40,18 +40,18 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     DIELECTRIC_CONSTANT_WATER = 80.0
 
     ##
-    # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94ElectrostaticInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94ElectrostaticInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94ElectrostaticInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94ElectrostaticInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

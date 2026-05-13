@@ -25,13 +25,13 @@
 class DRegularSpatialGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DRegularSpatialGrid instance \a grid.
-    # \param grid The \e %DRegularSpatialGrid instance to copy.
+    # \brief Initializes a copy of the \c %DRegularSpatialGrid instance \a grid.
+    # \param grid The \c %DRegularSpatialGrid instance to copy.
     # 
     def __init__(grid: DRegularSpatialGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularSpatialGrid instance.
+    # \brief Initializes the \c %DRegularSpatialGrid instance.
     # \param data 
     # \param xs 
     # \param ys 
@@ -40,14 +40,14 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __init__(data: DGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularSpatialGrid instance.
+    # \brief Initializes the \c %DRegularSpatialGrid instance.
     # \param data 
     # \param s 
     # 
     def __init__(data: DGrid, s: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularSpatialGrid instance.
+    # \brief Initializes the \c %DRegularSpatialGrid instance.
     # \param xs 
     # \param ys 
     # \param zs 
@@ -55,7 +55,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularSpatialGrid instance.
+    # \brief Initializes the \c %DRegularSpatialGrid instance.
     # \param s 
     # 
     def __init__(s: float) -> None: pass
@@ -583,7 +583,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
     def __ne__(e: ConstDGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DRegularSpatialGrid instance.
+    # \brief Returns a string representation of the \c %DRegularSpatialGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

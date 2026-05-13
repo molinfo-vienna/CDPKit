@@ -25,13 +25,13 @@
 class ULQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULQuaternionVectorAdapter instance \a a.
-    # \param a The \e %ULQuaternionVectorAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ULQuaternionVectorAdapter instance \a a.
+    # \param a The \c %ULQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: ULQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternionVectorAdapter instance.
+    # \brief Initializes the \c %ULQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: ULQuaternionExpression) -> None: pass
@@ -183,7 +183,7 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULQuaternionVectorAdapter instance.
+    # \brief Returns a string representation of the \c %ULQuaternionVectorAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -35,8 +35,8 @@ class HydrophobicInteractionConstraint(FeatureDistanceConstraint):
     DEF_MAX_DISTANCE = 6.0
 
     ##
-    # \brief Initializes a copy of the \e %HydrophobicInteractionConstraint instance \a constr.
-    # \param constr The \e %HydrophobicInteractionConstraint instance to copy.
+    # \brief Initializes a copy of the \c %HydrophobicInteractionConstraint instance \a constr.
+    # \param constr The \c %HydrophobicInteractionConstraint instance to copy.
     # 
     def __init__(constr: HydrophobicInteractionConstraint) -> None: pass
 

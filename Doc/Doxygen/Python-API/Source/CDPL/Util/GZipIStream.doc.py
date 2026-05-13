@@ -25,12 +25,12 @@
 class GZipIStream(Base.IStream):
 
     ##
-    # \brief Initializes the \e %GZipIStream instance.
+    # \brief Initializes the \c %GZipIStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GZipIStream instance.
+    # \brief Initializes the \c %GZipIStream instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

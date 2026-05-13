@@ -25,18 +25,18 @@
 class LZeroMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LZeroMatrix instance.
+    # \brief Initializes the \c %LZeroMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LZeroMatrix instance \a m.
-    # \param m The \e %LZeroMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LZeroMatrix instance \a m.
+    # \param m The \c %LZeroMatrix instance to copy.
     # 
     def __init__(m: LZeroMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LZeroMatrix instance.
+    # \brief Initializes the \c %LZeroMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class LZeroMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LZeroMatrix instance.
+    # \brief Returns a string representation of the \c %LZeroMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

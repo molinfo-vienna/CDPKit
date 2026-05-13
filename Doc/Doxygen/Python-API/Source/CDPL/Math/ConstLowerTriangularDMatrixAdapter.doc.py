@@ -25,13 +25,13 @@
 class ConstLowerTriangularDMatrixAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstLowerTriangularDMatrixAdapter instance \a a.
-    # \param a The \e %ConstLowerTriangularDMatrixAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ConstLowerTriangularDMatrixAdapter instance \a a.
+    # \param a The \c %ConstLowerTriangularDMatrixAdapter instance to copy.
     # 
     def __init__(a: ConstLowerTriangularDMatrixAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstLowerTriangularDMatrixAdapter instance.
+    # \brief Initializes the \c %ConstLowerTriangularDMatrixAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
@@ -136,7 +136,7 @@ class ConstLowerTriangularDMatrixAdapter(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLowerTriangularDMatrixAdapter instance.
+    # \brief Returns a string representation of the \c %ConstLowerTriangularDMatrixAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

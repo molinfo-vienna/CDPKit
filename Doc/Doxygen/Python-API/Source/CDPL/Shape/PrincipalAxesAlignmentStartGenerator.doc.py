@@ -40,13 +40,13 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     DEF_MAX_RANDOM_TRANSLATION = 2.0
 
     ##
-    # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance.
+    # \brief Initializes the \c %PrincipalAxesAlignmentStartGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
-    # \param gen The \e %PrincipalAxesAlignmentStartGenerator instance to copy.
+    # \brief Initializes a copy of the \c %PrincipalAxesAlignmentStartGenerator instance \a gen.
+    # \param gen The \c %PrincipalAxesAlignmentStartGenerator instance to copy.
     # 
     def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
 

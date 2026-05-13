@@ -25,7 +25,7 @@
 class FileVRMLObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief Initializes the \e %FileVRMLObject3DWriter instance.
+    # \brief Initializes the \c %FileVRMLObject3DWriter instance.
     # \param file_name 
     # \param mode 
     # 

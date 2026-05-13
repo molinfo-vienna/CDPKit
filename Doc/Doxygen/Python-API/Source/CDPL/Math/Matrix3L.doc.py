@@ -25,48 +25,48 @@
 class Matrix3L(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param v 
     # 
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Matrix3L instance \a m.
-    # \param m The \e %Matrix3L instance to copy.
+    # \brief Initializes a copy of the \c %Matrix3L instance \a m.
+    # \param m The \c %Matrix3L instance to copy.
     # 
     def __init__(m: Matrix3L) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3L instance.
+    # \brief Initializes the \c %Matrix3L instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -227,7 +227,7 @@ class Matrix3L(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Matrix3L instance.
+    # \brief Returns a string representation of the \c %Matrix3L instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

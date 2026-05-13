@@ -25,7 +25,7 @@
 class CMLGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %CMLGZMolecularGraphWriter instance.
+    # \brief Initializes the \c %CMLGZMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

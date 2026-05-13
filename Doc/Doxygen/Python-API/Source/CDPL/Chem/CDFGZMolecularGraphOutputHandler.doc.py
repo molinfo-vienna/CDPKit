@@ -25,6 +25,6 @@
 class CDFGZMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %CDFGZMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %CDFGZMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

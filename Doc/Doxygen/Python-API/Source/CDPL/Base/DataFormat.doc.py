@@ -70,13 +70,13 @@ class DataFormat(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DataFormat instance \a fmt.
-    # \param fmt The \e %DataFormat instance to copy.
+    # \brief Initializes a copy of the \c %DataFormat instance \a fmt.
+    # \param fmt The \c %DataFormat instance to copy.
     # 
     def __init__(fmt: DataFormat) -> None: pass
 
     ##
-    # \brief Initializes the \e %DataFormat instance.
+    # \brief Initializes the \c %DataFormat instance.
     # \param name 
     # \param descr 
     # \param mime_type 
@@ -85,7 +85,7 @@ class DataFormat(Boost.Python.instance):
     def __init__(name: str, descr: str, mime_type: str, multi_rec: bool) -> None: pass
 
     ##
-    # \brief Initializes the \e %DataFormat instance.
+    # \brief Initializes the \c %DataFormat instance.
     # \param name 
     # \param descr 
     # \param mime_type 
@@ -258,7 +258,7 @@ class DataFormat(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DataFormat instance.
+    # \brief Returns a string representation of the \c %DataFormat instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

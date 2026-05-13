@@ -25,14 +25,14 @@
 class FileIOStream(IOStream):
 
     ##
-    # \brief Initializes the \e %FileIOStream instance.
+    # \brief Initializes the \c %FileIOStream instance.
     # \param file_name 
     # \param mode 
     # 
     def __init__(file_name: str, mode: str = 'r') -> None: pass
 
     ##
-    # \brief Initializes the \e %FileIOStream instance.
+    # \brief Initializes the \c %FileIOStream instance.
     # \param file_name 
     # \param mode 
     # 

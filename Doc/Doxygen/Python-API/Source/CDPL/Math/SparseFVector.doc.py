@@ -25,48 +25,48 @@
 class SparseFVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SparseFVector instance \a v.
-    # \param v The \e %SparseFVector instance to copy.
+    # \brief Initializes a copy of the \c %SparseFVector instance \a v.
+    # \param v The \c %SparseFVector instance to copy.
     # 
     def __init__(v: SparseFVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param e 
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance.
+    # \brief Initializes the \c %SparseFVector instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -229,7 +229,7 @@ class SparseFVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %SparseFVector instance.
+    # \brief Returns a string representation of the \c %SparseFVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

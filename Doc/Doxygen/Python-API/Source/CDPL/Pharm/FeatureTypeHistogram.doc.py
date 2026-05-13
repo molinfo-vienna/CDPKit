@@ -32,8 +32,8 @@ class FeatureTypeHistogram(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureTypeHistogram instance \a ft_hist.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to copy.
+    # \brief Initializes a copy of the \c %FeatureTypeHistogram instance \a ft_hist.
+    # \param ft_hist The \c %FeatureTypeHistogram instance to copy.
     # 
     def __init__(ft_hist: FeatureTypeHistogram) -> None: pass
 
@@ -226,7 +226,7 @@ class FeatureTypeHistogram(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= ft_hist</tt>.
-    # \param ft_hist The \e %object instance to be compared with.
+    # \param ft_hist The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(ft_hist: object) -> bool: pass
@@ -240,7 +240,7 @@ class FeatureTypeHistogram(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < ft_hist</tt>.
-    # \param ft_hist The \e %object instance to be compared with.
+    # \param ft_hist The \c %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(ft_hist: object) -> bool: pass

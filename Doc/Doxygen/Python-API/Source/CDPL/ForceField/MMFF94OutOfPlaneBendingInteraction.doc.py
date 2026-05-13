@@ -25,13 +25,13 @@
 class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94OutOfPlaneBendingInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94OutOfPlaneBendingInteraction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94OutOfPlaneBendingInteraction instance \a iactn.
+    # \param iactn The \c %MMFF94OutOfPlaneBendingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteraction instance.
+    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteraction instance.
     # \param term_atom1_idx 
     # \param ctr_atom_idx 
     # \param term_atom2_idx 

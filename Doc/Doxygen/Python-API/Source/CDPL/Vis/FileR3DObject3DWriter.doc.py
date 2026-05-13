@@ -25,7 +25,7 @@
 class FileR3DObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief Initializes the \e %FileR3DObject3DWriter instance.
+    # \brief Initializes the \c %FileR3DObject3DWriter instance.
     # \param file_name 
     # \param mode 
     # 

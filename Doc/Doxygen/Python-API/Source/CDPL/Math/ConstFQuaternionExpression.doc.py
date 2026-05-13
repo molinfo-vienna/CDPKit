@@ -81,7 +81,7 @@ class ConstFQuaternionExpression(Boost.Python.instance):
     def __ne__(e: ConstFQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstFQuaternionExpression instance.
+    # \brief Returns a string representation of the \c %ConstFQuaternionExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

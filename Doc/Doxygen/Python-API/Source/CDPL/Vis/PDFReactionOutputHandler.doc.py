@@ -25,6 +25,6 @@
 class PDFReactionOutputHandler(Chem.ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %PDFReactionOutputHandler instance.
+    # \brief Initializes the \c %PDFReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

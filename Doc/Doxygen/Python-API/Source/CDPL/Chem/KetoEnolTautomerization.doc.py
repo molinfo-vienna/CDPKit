@@ -25,12 +25,12 @@
 class KetoEnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %KetoEnolTautomerization instance.
+    # \brief Initializes the \c %KetoEnolTautomerization instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %KetoEnolTautomerization instance \a rule.
-    # \param rule The \e %KetoEnolTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %KetoEnolTautomerization instance \a rule.
+    # \param rule The \c %KetoEnolTautomerization instance to copy.
     # 
     def __init__(rule: KetoEnolTautomerization) -> None: pass

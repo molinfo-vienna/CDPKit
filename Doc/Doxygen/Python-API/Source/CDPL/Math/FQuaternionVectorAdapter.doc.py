@@ -25,13 +25,13 @@
 class FQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FQuaternionVectorAdapter instance \a a.
-    # \param a The \e %FQuaternionVectorAdapter instance to copy.
+    # \brief Initializes a copy of the \c %FQuaternionVectorAdapter instance \a a.
+    # \param a The \c %FQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: FQuaternionVectorAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %FQuaternionVectorAdapter instance.
+    # \brief Initializes the \c %FQuaternionVectorAdapter instance.
     # \param e 
     # 
     def __init__(e: FQuaternionExpression) -> None: pass
@@ -183,7 +183,7 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FQuaternionVectorAdapter instance.
+    # \brief Returns a string representation of the \c %FQuaternionVectorAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

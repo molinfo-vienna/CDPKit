@@ -25,6 +25,6 @@
 class CDFDRegularGridInputHandler(DRegularGridInputHandler):
 
     ##
-    # \brief Initializes the \e %CDFDRegularGridInputHandler instance.
+    # \brief Initializes the \c %CDFDRegularGridInputHandler instance.
     # 
     def __init__() -> None: pass

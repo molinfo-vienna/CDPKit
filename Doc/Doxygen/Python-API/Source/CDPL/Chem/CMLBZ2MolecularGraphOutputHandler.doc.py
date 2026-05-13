@@ -27,6 +27,6 @@
 class CMLBZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %CMLBZ2MolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %CMLBZ2MolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

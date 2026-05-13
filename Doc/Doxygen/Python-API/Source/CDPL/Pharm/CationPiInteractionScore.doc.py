@@ -40,8 +40,8 @@ class CationPiInteractionScore(FeatureInteractionScore):
     DEF_MAX_ANGLE = 30.0
 
     ##
-    # \brief Initializes a copy of the \e %CationPiInteractionScore instance \a score.
-    # \param score The \e %CationPiInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c %CationPiInteractionScore instance \a score.
+    # \param score The \c %CationPiInteractionScore instance to copy.
     # 
     def __init__(score: CationPiInteractionScore) -> None: pass
 

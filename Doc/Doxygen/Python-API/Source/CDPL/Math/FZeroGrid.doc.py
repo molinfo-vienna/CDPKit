@@ -25,18 +25,18 @@
 class FZeroGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FZeroGrid instance.
+    # \brief Initializes the \c %FZeroGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FZeroGrid instance \a g.
-    # \param g The \e %FZeroGrid instance to copy.
+    # \brief Initializes a copy of the \c %FZeroGrid instance \a g.
+    # \param g The \c %FZeroGrid instance to copy.
     # 
     def __init__(g: FZeroGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %FZeroGrid instance.
+    # \brief Initializes the \c %FZeroGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -193,7 +193,7 @@ class FZeroGrid(Boost.Python.instance):
     def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FZeroGrid instance.
+    # \brief Returns a string representation of the \c %FZeroGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

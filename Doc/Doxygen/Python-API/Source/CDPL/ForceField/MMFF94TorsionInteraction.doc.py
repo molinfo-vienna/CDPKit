@@ -25,13 +25,13 @@
 class MMFF94TorsionInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94TorsionInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94TorsionInteraction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94TorsionInteraction instance \a iactn.
+    # \param iactn The \c %MMFF94TorsionInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94TorsionInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94TorsionInteraction instance.
+    # \brief Initializes the \c %MMFF94TorsionInteraction instance.
     # \param term_atom1_idx 
     # \param ctr_atom1_idx 
     # \param ctr_atom2_idx 

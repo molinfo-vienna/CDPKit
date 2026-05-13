@@ -30,18 +30,18 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param atom_type 
         # \param atomic_no 
         # \param num_nbrs 
@@ -160,13 +160,13 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         multiOrSingleBonds = property(formsMultiOrSingleBonds)
 
     ##
-    # \brief Initializes the \e %MMFF94AtomTypePropertyTable instance.
+    # \brief Initializes the \c %MMFF94AtomTypePropertyTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AtomTypePropertyTable instance \a table.
-    # \param table The \e %MMFF94AtomTypePropertyTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AtomTypePropertyTable instance \a table.
+    # \param table The \c %MMFF94AtomTypePropertyTable instance to copy.
     # 
     def __init__(table: MMFF94AtomTypePropertyTable) -> None: pass
 

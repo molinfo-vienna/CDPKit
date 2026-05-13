@@ -25,7 +25,7 @@
 class FileR3DFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %FileR3DFeatureContainerWriter instance.
+    # \brief Initializes the \c %FileR3DFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

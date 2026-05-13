@@ -27,7 +27,7 @@
 class GraphicsPrimitive2D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %GraphicsPrimitive2D instance.
+    # \brief Initializes the \c %GraphicsPrimitive2D instance.
     # 
     def __init__() -> None: pass
 

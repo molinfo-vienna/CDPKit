@@ -25,7 +25,7 @@
 class FileMMCIFBZ2MolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FileMMCIFBZ2MolecularGraphWriter instance.
+    # \brief Initializes the \c %FileMMCIFBZ2MolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

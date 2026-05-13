@@ -30,18 +30,18 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param term_atom1_type 
         # \param ctr_atom_type 
         # \param term_atom2_type 
@@ -124,13 +124,13 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
         forceConstant = property(getForceConstant)
 
     ##
-    # \brief Initializes the \e %MMFF94OutOfPlaneBendingParameterTable instance.
+    # \brief Initializes the \c %MMFF94OutOfPlaneBendingParameterTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94OutOfPlaneBendingParameterTable instance \a table.
-    # \param table The \e %MMFF94OutOfPlaneBendingParameterTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94OutOfPlaneBendingParameterTable instance \a table.
+    # \param table The \c %MMFF94OutOfPlaneBendingParameterTable instance to copy.
     # 
     def __init__(table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
 

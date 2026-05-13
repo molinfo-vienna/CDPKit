@@ -35,7 +35,7 @@
 class MoleculeReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %MoleculeReaderBase instance.
+    # \brief Initializes the \c %MoleculeReaderBase instance.
     # 
     def __init__() -> None: pass
 

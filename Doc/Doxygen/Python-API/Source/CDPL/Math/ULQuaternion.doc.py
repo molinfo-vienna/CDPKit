@@ -25,18 +25,18 @@
 class ULQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULQuaternion instance \a q.
-    # \param q The \e %ULQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %ULQuaternion instance \a q.
+    # \param q The \c %ULQuaternion instance to copy.
     # 
     def __init__(q: ULQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param c1 
     # \param c2 
     # \param c3 
@@ -45,31 +45,31 @@ class ULQuaternion(Boost.Python.instance):
     def __init__(c1: int, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstDQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance.
+    # \brief Initializes the \c %ULQuaternion instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -226,7 +226,7 @@ class ULQuaternion(Boost.Python.instance):
     def __ne__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULQuaternion instance.
+    # \brief Returns a string representation of the \c %ULQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

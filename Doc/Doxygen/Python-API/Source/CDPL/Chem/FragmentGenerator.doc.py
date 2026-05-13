@@ -30,13 +30,13 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentationRule(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %FragmentationRule instance \a rule.
-        # \param rule The \e %FragmentationRule instance to copy.
+        # \brief Initializes a copy of the \c %FragmentationRule instance \a rule.
+        # \param rule The \c %FragmentationRule instance to copy.
         # 
         def __init__(rule: FragmentationRule) -> None: pass
 
         ##
-        # \brief Initializes the \e %FragmentationRule instance.
+        # \brief Initializes the \c %FragmentationRule instance.
         # \param match_ptn 
         # \param id 
         # 
@@ -97,13 +97,13 @@ class FragmentGenerator(Boost.Python.instance):
     class ExcludePattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %ExcludePattern instance \a excl_ptn.
-        # \param excl_ptn The \e %ExcludePattern instance to copy.
+        # \brief Initializes a copy of the \c %ExcludePattern instance \a excl_ptn.
+        # \param excl_ptn The \c %ExcludePattern instance to copy.
         # 
         def __init__(excl_ptn: ExcludePattern) -> None: pass
 
         ##
-        # \brief Initializes the \e %ExcludePattern instance.
+        # \brief Initializes the \c %ExcludePattern instance.
         # \param match_ptn 
         # \param rule_id 
         # 
@@ -178,13 +178,13 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentLink(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %FragmentLink instance \a link.
-        # \param link The \e %FragmentLink instance to copy.
+        # \brief Initializes a copy of the \c %FragmentLink instance \a link.
+        # \param link The \c %FragmentLink instance to copy.
         # 
         def __init__(link: FragmentLink) -> None: pass
 
         ##
-        # \brief Initializes the \e %FragmentLink instance.
+        # \brief Initializes the \c %FragmentLink instance.
         # \param frag1_idx 
         # \param frag2_idx 
         # \param bond 
@@ -269,8 +269,8 @@ class FragmentGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FragmentGenerator instance \a gen.
-    # \param gen The \e %FragmentGenerator instance to copy.
+    # \brief Initializes a copy of the \c %FragmentGenerator instance \a gen.
+    # \param gen The \c %FragmentGenerator instance to copy.
     # 
     def __init__(gen: FragmentGenerator) -> None: pass
 

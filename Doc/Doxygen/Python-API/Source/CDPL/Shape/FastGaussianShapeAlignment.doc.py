@@ -55,18 +55,18 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     DEF_MAX_RANDOM_TRANSLATION = 2.0
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeAlignment instance.
+    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeAlignment instance.
+    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
     # \param ref_shape 
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeAlignment instance.
+    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
     # \param ref_shapes 
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass

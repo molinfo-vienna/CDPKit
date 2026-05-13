@@ -25,18 +25,18 @@
 class DoubleEntity3D2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleEntity3D2Functor instance.
+    # \brief Initializes the \c %DoubleEntity3D2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleEntity3D2Functor instance \a func.
-    # \param func The \e %DoubleEntity3D2Functor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleEntity3D2Functor instance \a func.
+    # \param func The \c %DoubleEntity3D2Functor instance to copy.
     # 
     def __init__(func: DoubleEntity3D2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleEntity3D2Functor instance.
+    # \brief Initializes the \c %DoubleEntity3D2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

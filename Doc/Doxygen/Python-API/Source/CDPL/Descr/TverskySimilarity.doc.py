@@ -35,8 +35,8 @@ class TverskySimilarity(Boost.Python.instance):
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TverskySimilarity instance \a func.
-    # \param func The \e %TverskySimilarity instance to copy.
+    # \brief Initializes a copy of the \c %TverskySimilarity instance \a func.
+    # \param func The \c %TverskySimilarity instance to copy.
     # 
     def __init__(func: TverskySimilarity) -> None: pass
 

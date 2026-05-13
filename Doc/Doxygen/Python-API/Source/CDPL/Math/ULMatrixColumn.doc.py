@@ -25,13 +25,13 @@
 class ULMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULMatrixColumn instance \a mc.
-    # \param mc The \e %ULMatrixColumn instance to copy.
+    # \brief Initializes a copy of the \c %ULMatrixColumn instance \a mc.
+    # \param mc The \c %ULMatrixColumn instance to copy.
     # 
     def __init__(mc: ULMatrixColumn) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrixColumn instance.
+    # \brief Initializes the \c %ULMatrixColumn instance.
     # \param e 
     # \param i 
     # 
@@ -190,7 +190,7 @@ class ULMatrixColumn(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULMatrixColumn instance.
+    # \brief Returns a string representation of the \c %ULMatrixColumn instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

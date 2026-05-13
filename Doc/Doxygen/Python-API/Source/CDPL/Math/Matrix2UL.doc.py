@@ -25,48 +25,48 @@
 class Matrix2UL(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param v 
     # 
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Matrix2UL instance \a m.
-    # \param m The \e %Matrix2UL instance to copy.
+    # \brief Initializes a copy of the \c %Matrix2UL instance \a m.
+    # \param m The \c %Matrix2UL instance to copy.
     # 
     def __init__(m: Matrix2UL) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix2UL instance.
+    # \brief Initializes the \c %Matrix2UL instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -227,7 +227,7 @@ class Matrix2UL(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Matrix2UL instance.
+    # \brief Returns a string representation of the \c %Matrix2UL instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

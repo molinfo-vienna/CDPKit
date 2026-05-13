@@ -96,7 +96,7 @@ class ConstFVectorExpression(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstFVectorExpression instance.
+    # \brief Returns a string representation of the \c %ConstFVectorExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

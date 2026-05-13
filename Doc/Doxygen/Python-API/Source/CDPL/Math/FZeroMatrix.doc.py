@@ -25,18 +25,18 @@
 class FZeroMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FZeroMatrix instance.
+    # \brief Initializes the \c %FZeroMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FZeroMatrix instance \a m.
-    # \param m The \e %FZeroMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FZeroMatrix instance \a m.
+    # \param m The \c %FZeroMatrix instance to copy.
     # 
     def __init__(m: FZeroMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FZeroMatrix instance.
+    # \brief Initializes the \c %FZeroMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class FZeroMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FZeroMatrix instance.
+    # \brief Returns a string representation of the \c %FZeroMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

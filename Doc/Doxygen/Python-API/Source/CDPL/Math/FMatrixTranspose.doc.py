@@ -25,13 +25,13 @@
 class FMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FMatrixTranspose instance \a mt.
-    # \param mt The \e %FMatrixTranspose instance to copy.
+    # \brief Initializes a copy of the \c %FMatrixTranspose instance \a mt.
+    # \param mt The \c %FMatrixTranspose instance to copy.
     # 
     def __init__(mt: FMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrixTranspose instance.
+    # \brief Initializes the \c %FMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: FMatrixExpression) -> None: pass
@@ -192,7 +192,7 @@ class FMatrixTranspose(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FMatrixTranspose instance.
+    # \brief Returns a string representation of the \c %FMatrixTranspose instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

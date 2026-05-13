@@ -25,12 +25,12 @@
 class ImineEnamineTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %ImineEnamineTautomerization instance.
+    # \brief Initializes the \c %ImineEnamineTautomerization instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ImineEnamineTautomerization instance \a rule.
-    # \param rule The \e %ImineEnamineTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %ImineEnamineTautomerization instance \a rule.
+    # \param rule The \c %ImineEnamineTautomerization instance to copy.
     # 
     def __init__(rule: ImineEnamineTautomerization) -> None: pass

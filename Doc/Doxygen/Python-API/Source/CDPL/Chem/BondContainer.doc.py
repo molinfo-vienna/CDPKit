@@ -27,7 +27,7 @@
 class BondContainer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BondContainer instance.
+    # \brief Initializes the \c %BondContainer instance.
     # 
     def __init__() -> None: pass
 

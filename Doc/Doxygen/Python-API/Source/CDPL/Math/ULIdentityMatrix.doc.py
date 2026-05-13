@@ -25,18 +25,18 @@
 class ULIdentityMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULIdentityMatrix instance.
+    # \brief Initializes the \c %ULIdentityMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULIdentityMatrix instance \a m.
-    # \param m The \e %ULIdentityMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULIdentityMatrix instance \a m.
+    # \param m The \c %ULIdentityMatrix instance to copy.
     # 
     def __init__(m: ULIdentityMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULIdentityMatrix instance.
+    # \brief Initializes the \c %ULIdentityMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class ULIdentityMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULIdentityMatrix instance.
+    # \brief Returns a string representation of the \c %ULIdentityMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -30,8 +30,8 @@ class SArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SArray instance \a array.
-    # \param array The \e %SArray instance to copy.
+    # \brief Initializes a copy of the \c %SArray instance \a array.
+    # \param array The \c %SArray instance to copy.
     # 
     def __init__(array: SArray) -> None: pass
 
@@ -258,7 +258,7 @@ class SArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param array The \e %SArray instance to be compared with.
+    # \param array The \c %SArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(array: SArray) -> bool: pass
@@ -272,7 +272,7 @@ class SArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param array The \e %SArray instance to be compared with.
+    # \param array The \c %SArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(array: SArray) -> bool: pass

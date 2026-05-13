@@ -50,7 +50,7 @@ class Bond(AtomContainer, Base.PropertyContainer):
         def __contains__(atom: Atom) -> bool: pass
 
     ##
-    # \brief Initializes the \e %Bond instance.
+    # \brief Initializes the \c %Bond instance.
     # 
     def __init__() -> None: pass
 

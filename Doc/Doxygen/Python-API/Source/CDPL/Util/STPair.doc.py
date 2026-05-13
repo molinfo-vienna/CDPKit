@@ -25,18 +25,18 @@
 class STPair(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %STPair instance.
+    # \brief Initializes the \c %STPair instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %STPair instance \a pair.
-    # \param pair The \e %STPair instance to copy.
+    # \brief Initializes a copy of the \c %STPair instance \a pair.
+    # \param pair The \c %STPair instance to copy.
     # 
     def __init__(pair: STPair) -> None: pass
 
     ##
-    # \brief Initializes the \e %STPair instance.
+    # \brief Initializes the \c %STPair instance.
     # \param first 
     # \param second 
     # 
@@ -89,7 +89,7 @@ class STPair(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(pair: STPair) -> bool: pass
@@ -103,7 +103,7 @@ class STPair(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < pair</tt>.
-    # \param pair The \e %STPair instance to be compared with.
+    # \param pair The \c %STPair instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(pair: STPair) -> bool: pass

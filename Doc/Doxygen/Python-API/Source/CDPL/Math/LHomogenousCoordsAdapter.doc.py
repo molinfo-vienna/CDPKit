@@ -25,13 +25,13 @@
 class LHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LHomogenousCoordsAdapter instance \a a.
-    # \param a The \e %LHomogenousCoordsAdapter instance to copy.
+    # \brief Initializes a copy of the \c %LHomogenousCoordsAdapter instance \a a.
+    # \param a The \c %LHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: LHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %LHomogenousCoordsAdapter instance.
+    # \brief Initializes the \c %LHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: LVectorExpression) -> None: pass
@@ -183,7 +183,7 @@ class LHomogenousCoordsAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LHomogenousCoordsAdapter instance.
+    # \brief Returns a string representation of the \c %LHomogenousCoordsAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

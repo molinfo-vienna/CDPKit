@@ -25,7 +25,7 @@
 class FilePLYObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief Initializes the \e %FilePLYObject3DWriter instance.
+    # \brief Initializes the \c %FilePLYObject3DWriter instance.
     # \param file_name 
     # \param mode 
     # 

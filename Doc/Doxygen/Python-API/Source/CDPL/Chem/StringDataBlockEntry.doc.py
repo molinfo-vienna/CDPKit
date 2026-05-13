@@ -30,8 +30,8 @@ class StringDataBlockEntry(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %StringDataBlockEntry instance \a entry.
-    # \param entry The \e %StringDataBlockEntry instance to copy.
+    # \brief Initializes a copy of the \c %StringDataBlockEntry instance \a entry.
+    # \param entry The \c %StringDataBlockEntry instance to copy.
     # 
     def __init__(entry: StringDataBlockEntry) -> None: pass
 
@@ -114,7 +114,7 @@ class StringDataBlockEntry(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= entry</tt>.
-    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \param entry The \c %StringDataBlockEntry instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(entry: StringDataBlockEntry) -> bool: pass
@@ -128,7 +128,7 @@ class StringDataBlockEntry(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < entry</tt>.
-    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \param entry The \c %StringDataBlockEntry instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(entry: StringDataBlockEntry) -> bool: pass

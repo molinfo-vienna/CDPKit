@@ -25,7 +25,7 @@
 class DRegularGridSetOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DRegularGridSetOutputHandler instance.
+    # \brief Initializes the \c %DRegularGridSetOutputHandler instance.
     # 
     def __init__() -> None: pass
 

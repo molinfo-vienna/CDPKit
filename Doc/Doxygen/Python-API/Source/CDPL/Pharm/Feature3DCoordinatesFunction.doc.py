@@ -25,18 +25,18 @@
 class Feature3DCoordinatesFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Feature3DCoordinatesFunction instance.
+    # \brief Initializes the \c %Feature3DCoordinatesFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Feature3DCoordinatesFunction instance \a func.
-    # \param func The \e %Feature3DCoordinatesFunction instance to copy.
+    # \brief Initializes a copy of the \c %Feature3DCoordinatesFunction instance \a func.
+    # \param func The \c %Feature3DCoordinatesFunction instance to copy.
     # 
     def __init__(func: Feature3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %Feature3DCoordinatesFunction instance.
+    # \brief Initializes the \c %Feature3DCoordinatesFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

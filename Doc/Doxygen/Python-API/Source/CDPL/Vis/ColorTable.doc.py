@@ -25,13 +25,13 @@
 class ColorTable(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ColorTable instance.
+    # \brief Initializes the \c %ColorTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ColorTable instance \a table.
-    # \param table The \e %ColorTable instance to copy.
+    # \brief Initializes a copy of the \c %ColorTable instance \a table.
+    # \param table The \c %ColorTable instance to copy.
     # 
     def __init__(table: ColorTable) -> None: pass
 
@@ -186,7 +186,7 @@ class ColorTable(Boost.Python.instance):
     def __contains__(key: int) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ColorTable instance.
+    # \brief Returns a string representation of the \c %ColorTable instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

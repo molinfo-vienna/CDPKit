@@ -25,6 +25,6 @@
 class CDFBZ2DRegularGridOutputHandler(DRegularGridOutputHandler):
 
     ##
-    # \brief Initializes the \e %CDFBZ2DRegularGridOutputHandler instance.
+    # \brief Initializes the \c %CDFBZ2DRegularGridOutputHandler instance.
     # 
     def __init__() -> None: pass

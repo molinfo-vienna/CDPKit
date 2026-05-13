@@ -30,15 +30,15 @@ class DGConstraintGenerator(Boost.Python.instance):
     class StereoCenterData(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %StereoCenterData instance.
+        # \brief Initializes the \c %StereoCenterData instance.
         # \param ctr_idx 
         # \param descr 
         # 
         def __init__(ctr_idx: int, descr: Chem.StereoDescriptor) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %StereoCenterData instance \a data.
-        # \param data The \e %StereoCenterData instance to copy.
+        # \brief Initializes a copy of the \c %StereoCenterData instance \a data.
+        # \param data The \c %StereoCenterData instance to copy.
         # 
         def __init__(data: StereoCenterData) -> None: pass
 
@@ -73,13 +73,13 @@ class DGConstraintGenerator(Boost.Python.instance):
         descriptor = property(getDescriptor)
 
     ##
-    # \brief Initializes the \e %DGConstraintGenerator instance.
+    # \brief Initializes the \c %DGConstraintGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DGConstraintGenerator instance \a gen.
-    # \param gen The \e %DGConstraintGenerator instance to copy.
+    # \brief Initializes a copy of the \c %DGConstraintGenerator instance \a gen.
+    # \param gen The \c %DGConstraintGenerator instance to copy.
     # 
     def __init__(gen: DGConstraintGenerator) -> None: pass
 

@@ -25,18 +25,18 @@
 class DoubleULVector2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleULVector2Functor instance.
+    # \brief Initializes the \c %DoubleULVector2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleULVector2Functor instance \a func.
-    # \param func The \e %DoubleULVector2Functor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleULVector2Functor instance \a func.
+    # \param func The \c %DoubleULVector2Functor instance to copy.
     # 
     def __init__(func: DoubleULVector2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleULVector2Functor instance.
+    # \brief Initializes the \c %DoubleULVector2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

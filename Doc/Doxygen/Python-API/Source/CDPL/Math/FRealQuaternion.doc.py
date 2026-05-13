@@ -25,18 +25,18 @@
 class FRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FRealQuaternion instance.
+    # \brief Initializes the \c %FRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FRealQuaternion instance \a q.
-    # \param q The \e %FRealQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %FRealQuaternion instance \a q.
+    # \param q The \c %FRealQuaternion instance to copy.
     # 
     def __init__(q: FRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRealQuaternion instance.
+    # \brief Initializes the \c %FRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: float) -> None: pass
@@ -202,7 +202,7 @@ class FRealQuaternion(Boost.Python.instance):
     def __ne__(q: ConstFQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FRealQuaternion instance.
+    # \brief Returns a string representation of the \c %FRealQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

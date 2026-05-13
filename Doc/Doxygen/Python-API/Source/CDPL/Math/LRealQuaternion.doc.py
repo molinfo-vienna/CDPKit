@@ -25,18 +25,18 @@
 class LRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LRealQuaternion instance.
+    # \brief Initializes the \c %LRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LRealQuaternion instance \a q.
-    # \param q The \e %LRealQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %LRealQuaternion instance \a q.
+    # \param q The \c %LRealQuaternion instance to copy.
     # 
     def __init__(q: LRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %LRealQuaternion instance.
+    # \brief Initializes the \c %LRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: int) -> None: pass
@@ -202,7 +202,7 @@ class LRealQuaternion(Boost.Python.instance):
     def __ne__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LRealQuaternion instance.
+    # \brief Returns a string representation of the \c %LRealQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

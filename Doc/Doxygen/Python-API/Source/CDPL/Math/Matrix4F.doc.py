@@ -25,48 +25,48 @@
 class Matrix4F(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param v 
     # 
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Matrix4F instance \a m.
-    # \param m The \e %Matrix4F instance to copy.
+    # \brief Initializes a copy of the \c %Matrix4F instance \a m.
+    # \param m The \c %Matrix4F instance to copy.
     # 
     def __init__(m: Matrix4F) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4F instance.
+    # \brief Initializes the \c %Matrix4F instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -227,7 +227,7 @@ class Matrix4F(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Matrix4F instance.
+    # \brief Returns a string representation of the \c %Matrix4F instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

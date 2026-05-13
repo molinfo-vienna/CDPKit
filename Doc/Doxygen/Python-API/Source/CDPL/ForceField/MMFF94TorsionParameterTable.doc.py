@@ -30,18 +30,18 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param tor_type_idx 
         # \param term_atom1_type 
         # \param ctr_atom1_type 
@@ -151,13 +151,13 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
         torsionParam3 = property(getTorsionParameter3)
 
     ##
-    # \brief Initializes the \e %MMFF94TorsionParameterTable instance.
+    # \brief Initializes the \c %MMFF94TorsionParameterTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94TorsionParameterTable instance \a table.
-    # \param table The \e %MMFF94TorsionParameterTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94TorsionParameterTable instance \a table.
+    # \param table The \c %MMFF94TorsionParameterTable instance to copy.
     # 
     def __init__(table: MMFF94TorsionParameterTable) -> None: pass
 

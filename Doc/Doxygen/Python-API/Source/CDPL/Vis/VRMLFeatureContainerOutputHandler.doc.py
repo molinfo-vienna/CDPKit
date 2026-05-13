@@ -27,6 +27,6 @@
 class VRMLFeatureContainerOutputHandler(Pharm.FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \e %VRMLFeatureContainerOutputHandler instance.
+    # \brief Initializes the \c %VRMLFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

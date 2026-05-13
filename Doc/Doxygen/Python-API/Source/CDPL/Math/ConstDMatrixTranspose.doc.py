@@ -25,13 +25,13 @@
 class ConstDMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstDMatrixTranspose instance \a mt.
-    # \param mt The \e %ConstDMatrixTranspose instance to copy.
+    # \brief Initializes a copy of the \c %ConstDMatrixTranspose instance \a mt.
+    # \param mt The \c %ConstDMatrixTranspose instance to copy.
     # 
     def __init__(mt: ConstDMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstDMatrixTranspose instance.
+    # \brief Initializes the \c %ConstDMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
@@ -136,7 +136,7 @@ class ConstDMatrixTranspose(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDMatrixTranspose instance.
+    # \brief Returns a string representation of the \c %ConstDMatrixTranspose instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

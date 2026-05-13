@@ -25,13 +25,13 @@
 class MMFF94TorsionInteractionList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94TorsionInteractionList instance.
+    # \brief Initializes the \c %MMFF94TorsionInteractionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94TorsionInteractionList instance \a ia_list.
-    # \param ia_list The \e %MMFF94TorsionInteractionList instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94TorsionInteractionList instance \a ia_list.
+    # \param ia_list The \c %MMFF94TorsionInteractionList instance to copy.
     # 
     def __init__(ia_list: MMFF94TorsionInteractionList) -> None: pass
 

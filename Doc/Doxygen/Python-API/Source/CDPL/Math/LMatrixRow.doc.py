@@ -25,13 +25,13 @@
 class LMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LMatrixRow instance \a mr.
-    # \param mr The \e %LMatrixRow instance to copy.
+    # \brief Initializes a copy of the \c %LMatrixRow instance \a mr.
+    # \param mr The \c %LMatrixRow instance to copy.
     # 
     def __init__(mr: LMatrixRow) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrixRow instance.
+    # \brief Initializes the \c %LMatrixRow instance.
     # \param e 
     # \param i 
     # 
@@ -190,7 +190,7 @@ class LMatrixRow(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LMatrixRow instance.
+    # \brief Returns a string representation of the \c %LMatrixRow instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -30,20 +30,20 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     DEF_RADIUS_SCALING_FACTOR = 1.4
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
+    # \brief Initializes the \c %FastGaussianShapeOverlapFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
+    # \brief Initializes the \c %FastGaussianShapeOverlapFunction instance.
     # \param ref_shape_func 
     # \param ovl_shape_func 
     # 
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FastGaussianShapeOverlapFunction instance \a func.
-    # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
+    # \brief Initializes a copy of the \c %FastGaussianShapeOverlapFunction instance \a func.
+    # \param func The \c %FastGaussianShapeOverlapFunction instance to copy.
     # 
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 

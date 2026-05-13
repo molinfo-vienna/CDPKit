@@ -32,8 +32,8 @@ class TautomerScore(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TautomerScore instance \a score.
-    # \param score The \e %TautomerScore instance to copy.
+    # \brief Initializes a copy of the \c %TautomerScore instance \a score.
+    # \param score The \c %TautomerScore instance to copy.
     # 
     def __init__(score: TautomerScore) -> None: pass
 

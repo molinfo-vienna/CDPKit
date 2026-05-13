@@ -32,25 +32,25 @@ class BitSet(Boost.Python.instance):
     npos = 18446744073709551615
 
     ##
-    # \brief Initializes the \e %BitSet instance.
+    # \brief Initializes the \c %BitSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BitSet instance \a bs.
-    # \param bs The \e %BitSet instance to copy.
+    # \brief Initializes a copy of the \c %BitSet instance \a bs.
+    # \param bs The \c %BitSet instance to copy.
     # 
     def __init__(bs: BitSet) -> None: pass
 
     ##
-    # \brief Initializes the \e %BitSet instance.
+    # \brief Initializes the \c %BitSet instance.
     # \param num_bits 
     # \param value 
     # 
     def __init__(num_bits: int, value: int = 0) -> None: pass
 
     ##
-    # \brief Initializes the \e %BitSet instance.
+    # \brief Initializes the \c %BitSet instance.
     # \param bit_str 
     # 
     def __init__(bit_str: str) -> None: pass
@@ -334,14 +334,14 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
-    # \param bs The \e %BitSet instance to be compared with.
+    # \param bs The \c %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(bs: BitSet) -> bool: pass
@@ -379,7 +379,7 @@ class BitSet(Boost.Python.instance):
     def __bool__() -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %BitSet instance.
+    # \brief Returns a string representation of the \c %BitSet instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

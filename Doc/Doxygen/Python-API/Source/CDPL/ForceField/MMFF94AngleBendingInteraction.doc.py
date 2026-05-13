@@ -25,13 +25,13 @@
 class MMFF94AngleBendingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AngleBendingInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94AngleBendingInteraction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AngleBendingInteraction instance \a iactn.
+    # \param iactn The \c %MMFF94AngleBendingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94AngleBendingInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AngleBendingInteraction instance.
+    # \brief Initializes the \c %MMFF94AngleBendingInteraction instance.
     # \param term_atom1_idx 
     # \param ctr_atom_idx 
     # \param term_atom2_idx 

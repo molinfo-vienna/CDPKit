@@ -30,13 +30,13 @@ class StructureGeneratorSettings(Boost.Python.instance):
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %StructureGeneratorSettings instance.
+    # \brief Initializes the \c %StructureGeneratorSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %StructureGeneratorSettings instance \a settings.
-    # \param settings The \e %StructureGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c %StructureGeneratorSettings instance \a settings.
+    # \param settings The \c %StructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: StructureGeneratorSettings) -> None: pass
 

@@ -50,8 +50,8 @@ class MatchConstraintList(Boost.Python.instance):
         NOT_OR_LIST = 3
 
     ##
-    # \brief Initializes a copy of the \e %MatchConstraintList instance \a list.
-    # \param list The \e %MatchConstraintList instance to copy.
+    # \brief Initializes a copy of the \c %MatchConstraintList instance \a list.
+    # \param list The \c %MatchConstraintList instance to copy.
     # 
     def __init__(list: MatchConstraintList) -> None: pass
 
@@ -260,7 +260,7 @@ class MatchConstraintList(Boost.Python.instance):
     def __setitem__(index: int, value: MatchConstraint) -> None: pass
 
     ##
-    # \brief Returns a string representation of the \e %MatchConstraintList instance.
+    # \brief Returns a string representation of the \c %MatchConstraintList instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

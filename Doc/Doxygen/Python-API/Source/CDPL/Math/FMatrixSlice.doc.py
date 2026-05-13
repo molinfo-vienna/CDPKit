@@ -25,13 +25,13 @@
 class FMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FMatrixSlice instance \a s.
-    # \param s The \e %FMatrixSlice instance to copy.
+    # \brief Initializes a copy of the \c %FMatrixSlice instance \a s.
+    # \param s The \c %FMatrixSlice instance to copy.
     # 
     def __init__(s: FMatrixSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrixSlice instance.
+    # \brief Initializes the \c %FMatrixSlice instance.
     # \param e 
     # \param s1 
     # \param s2 
@@ -218,7 +218,7 @@ class FMatrixSlice(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FMatrixSlice instance.
+    # \brief Returns a string representation of the \c %FMatrixSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

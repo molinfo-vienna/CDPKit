@@ -32,13 +32,13 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     DEF_GRID_STEP_SIZE = 0.5
 
     ##
-    # \brief Initializes the \e %GRAILDataSetGenerator instance.
+    # \brief Initializes the \c %GRAILDataSetGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %GRAILDataSetGenerator instance \a gen.
-    # \param gen The \e %GRAILDataSetGenerator instance to copy.
+    # \brief Initializes a copy of the \c %GRAILDataSetGenerator instance \a gen.
+    # \param gen The \c %GRAILDataSetGenerator instance to copy.
     # 
     def __init__(gen: GRAILDataSetGenerator) -> None: pass
 

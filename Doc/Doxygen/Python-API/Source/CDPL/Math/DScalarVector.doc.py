@@ -25,18 +25,18 @@
 class DScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DScalarVector instance.
+    # \brief Initializes the \c %DScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DScalarVector instance \a v.
-    # \param v The \e %DScalarVector instance to copy.
+    # \brief Initializes a copy of the \c %DScalarVector instance \a v.
+    # \param v The \c %DScalarVector instance to copy.
     # 
     def __init__(v: DScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %DScalarVector instance.
+    # \brief Initializes the \c %DScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -147,7 +147,7 @@ class DScalarVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DScalarVector instance.
+    # \brief Returns a string representation of the \c %DScalarVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

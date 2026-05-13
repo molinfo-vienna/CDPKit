@@ -178,7 +178,7 @@
 class ReactionView2D(View2D):
 
     ##
-    # \brief Initializes the \e %ReactionView2D instance.
+    # \brief Initializes the \c %ReactionView2D instance.
     # 
     def __init__() -> None: pass
 

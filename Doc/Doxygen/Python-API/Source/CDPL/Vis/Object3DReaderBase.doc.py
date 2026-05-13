@@ -25,7 +25,7 @@
 class Object3DReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %Object3DReaderBase instance.
+    # \brief Initializes the \c %Object3DReaderBase instance.
     # 
     def __init__() -> None: pass
 

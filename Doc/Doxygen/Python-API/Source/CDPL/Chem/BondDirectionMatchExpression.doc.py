@@ -25,8 +25,8 @@
 class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \e %BondDirectionMatchExpression instance \a expr.
-    # \param expr The \e %BondDirectionMatchExpression instance to copy.
+    # \brief Initializes a copy of the \c %BondDirectionMatchExpression instance \a expr.
+    # \param expr The \c %BondDirectionMatchExpression instance to copy.
     # 
     def __init__(expr: BondDirectionMatchExpression) -> None: pass
 

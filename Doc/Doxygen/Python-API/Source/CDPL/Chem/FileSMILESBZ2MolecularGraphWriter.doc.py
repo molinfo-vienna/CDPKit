@@ -25,7 +25,7 @@
 class FileSMILESBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FileSMILESBZ2MolecularGraphWriter instance.
+    # \brief Initializes the \c %FileSMILESBZ2MolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

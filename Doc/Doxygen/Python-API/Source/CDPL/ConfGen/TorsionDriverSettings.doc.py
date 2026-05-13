@@ -30,13 +30,13 @@ class TorsionDriverSettings(Boost.Python.instance):
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %TorsionDriverSettings instance.
+    # \brief Initializes the \c %TorsionDriverSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TorsionDriverSettings instance \a settings.
-    # \param settings The \e %TorsionDriverSettings instance to copy.
+    # \brief Initializes a copy of the \c %TorsionDriverSettings instance \a settings.
+    # \param settings The \c %TorsionDriverSettings instance to copy.
     # 
     def __init__(settings: TorsionDriverSettings) -> None: pass
 

@@ -25,13 +25,13 @@
 class ElasticPotentialList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ElasticPotentialList instance.
+    # \brief Initializes the \c %ElasticPotentialList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ElasticPotentialList instance \a list.
-    # \param list The \e %ElasticPotentialList instance to copy.
+    # \brief Initializes a copy of the \c %ElasticPotentialList instance \a list.
+    # \param list The \c %ElasticPotentialList instance to copy.
     # 
     def __init__(list: ElasticPotentialList) -> None: pass
 

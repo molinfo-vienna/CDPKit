@@ -25,7 +25,7 @@
 class FileSMARTSReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %FileSMARTSReactionReader instance.
+    # \brief Initializes the \c %FileSMARTSReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

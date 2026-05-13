@@ -25,6 +25,6 @@
 class SMILESBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %SMILESBZ2MoleculeInputHandler instance.
+    # \brief Initializes the \c %SMILESBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

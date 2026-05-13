@@ -27,6 +27,6 @@
 class PLYObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief Initializes the \e %PLYObject3DOutputHandler instance.
+    # \brief Initializes the \c %PLYObject3DOutputHandler instance.
     # 
     def __init__() -> None: pass

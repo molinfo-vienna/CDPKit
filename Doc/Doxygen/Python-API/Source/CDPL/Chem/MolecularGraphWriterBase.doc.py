@@ -31,7 +31,7 @@
 class MolecularGraphWriterBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %MolecularGraphWriterBase instance.
+    # \brief Initializes the \c %MolecularGraphWriterBase instance.
     # 
     def __init__() -> None: pass
 

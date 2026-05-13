@@ -30,8 +30,8 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     def __init__(core_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG, env_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %InteractionPharmacophoreGenerator instance \a gen.
-    # \param gen The \e %InteractionPharmacophoreGenerator instance to copy.
+    # \brief Initializes a copy of the \c %InteractionPharmacophoreGenerator instance \a gen.
+    # \param gen The \c %InteractionPharmacophoreGenerator instance to copy.
     # 
     def __init__(gen: InteractionPharmacophoreGenerator) -> None: pass
 

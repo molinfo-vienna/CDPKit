@@ -25,48 +25,48 @@
 class Vector2D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector2D instance \a v.
-    # \param v The \e %Vector2D instance to copy.
+    # \brief Initializes a copy of the \c %Vector2D instance \a v.
+    # \param v The \c %Vector2D instance to copy.
     # 
     def __init__(v: Vector2D) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param v 
     # 
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param e 
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2D instance.
+    # \brief Initializes the \c %Vector2D instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -218,7 +218,7 @@ class Vector2D(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %Vector2D instance.
+    # \brief Returns a string representation of the \c %Vector2D instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,6 +25,6 @@
 class PSDPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
-    # \brief Initializes the \e %PSDPharmacophoreInputHandler instance.
+    # \brief Initializes the \c %PSDPharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass

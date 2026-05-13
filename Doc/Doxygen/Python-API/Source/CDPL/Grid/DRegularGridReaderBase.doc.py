@@ -35,7 +35,7 @@
 class DRegularGridReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %DRegularGridReaderBase instance.
+    # \brief Initializes the \c %DRegularGridReaderBase instance.
     # 
     def __init__() -> None: pass
 

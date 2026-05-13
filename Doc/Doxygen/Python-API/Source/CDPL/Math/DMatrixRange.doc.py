@@ -25,13 +25,13 @@
 class DMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DMatrixRange instance \a r.
-    # \param r The \e %DMatrixRange instance to copy.
+    # \brief Initializes a copy of the \c %DMatrixRange instance \a r.
+    # \param r The \c %DMatrixRange instance to copy.
     # 
     def __init__(r: DMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %DMatrixRange instance.
+    # \brief Initializes the \c %DMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -206,7 +206,7 @@ class DMatrixRange(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DMatrixRange instance.
+    # \brief Returns a string representation of the \c %DMatrixRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

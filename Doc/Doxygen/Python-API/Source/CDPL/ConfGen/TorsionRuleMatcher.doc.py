@@ -25,12 +25,12 @@
 class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TorsionRuleMatcher instance.
+    # \brief Initializes the \c %TorsionRuleMatcher instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TorsionRuleMatcher instance.
+    # \brief Initializes the \c %TorsionRuleMatcher instance.
     # \param lib 
     # 
     def __init__(lib: TorsionLibrary) -> None: pass

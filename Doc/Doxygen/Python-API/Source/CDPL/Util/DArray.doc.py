@@ -30,8 +30,8 @@ class DArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DArray instance \a array.
-    # \param array The \e %DArray instance to copy.
+    # \brief Initializes a copy of the \c %DArray instance \a array.
+    # \param array The \c %DArray instance to copy.
     # 
     def __init__(array: DArray) -> None: pass
 
@@ -258,7 +258,7 @@ class DArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param array The \e %DArray instance to be compared with.
+    # \param array The \c %DArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(array: DArray) -> bool: pass
@@ -272,7 +272,7 @@ class DArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param array The \e %DArray instance to be compared with.
+    # \param array The \c %DArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(array: DArray) -> bool: pass

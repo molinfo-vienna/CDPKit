@@ -42,7 +42,7 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     DEF_NUM_TEST_VECTORS = 492
 
     ##
-    # \brief Initializes the \e %KuvekPocketDescriptorCalculator instance.
+    # \brief Initializes the \c %KuvekPocketDescriptorCalculator instance.
     # \param sphere_radius 
     # \param num_test_vecs 
     # \param max_atom_to_sphr_surf_dist 
@@ -50,8 +50,8 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def __init__(sphere_radius: float = 20.0, num_test_vecs: int = 492, max_atom_to_sphr_surf_dist: float = 2.0) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %KuvekPocketDescriptorCalculator instance \a calc.
-    # \param calc The \e %KuvekPocketDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c %KuvekPocketDescriptorCalculator instance \a calc.
+    # \param calc The \c %KuvekPocketDescriptorCalculator instance to copy.
     # 
     def __init__(calc: KuvekPocketDescriptorCalculator) -> None: pass
 

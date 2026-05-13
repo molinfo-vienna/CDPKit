@@ -27,6 +27,6 @@
 class STLObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief Initializes the \e %STLObject3DOutputHandler instance.
+    # \brief Initializes the \c %STLObject3DOutputHandler instance.
     # 
     def __init__() -> None: pass

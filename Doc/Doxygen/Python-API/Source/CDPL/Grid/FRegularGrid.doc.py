@@ -25,13 +25,13 @@
 class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 
     ##
-    # \brief Initializes a copy of the \e %FRegularGrid instance \a grid.
-    # \param grid The \e %FRegularGrid instance to copy.
+    # \brief Initializes a copy of the \c %FRegularGrid instance \a grid.
+    # \param grid The \c %FRegularGrid instance to copy.
     # 
     def __init__(grid: FRegularGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRegularGrid instance.
+    # \brief Initializes the \c %FRegularGrid instance.
     # \param data 
     # \param xs 
     # \param ys 
@@ -40,14 +40,14 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __init__(data: Math.FGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRegularGrid instance.
+    # \brief Initializes the \c %FRegularGrid instance.
     # \param data 
     # \param s 
     # 
     def __init__(data: Math.FGrid, s: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRegularGrid instance.
+    # \brief Initializes the \c %FRegularGrid instance.
     # \param xs 
     # \param ys 
     # \param zs 
@@ -55,7 +55,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRegularGrid instance.
+    # \brief Initializes the \c %FRegularGrid instance.
     # \param s 
     # 
     def __init__(s: float) -> None: pass
@@ -285,7 +285,7 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __ne__(e: Math.ConstFGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FRegularGrid instance.
+    # \brief Returns a string representation of the \c %FRegularGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

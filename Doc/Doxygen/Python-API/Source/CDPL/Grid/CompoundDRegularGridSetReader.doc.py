@@ -25,7 +25,7 @@
 class CompoundDRegularGridSetReader(DRegularGridSetReaderBase):
 
     ##
-    # \brief Initializes the \e %CompoundDRegularGridSetReader instance.
+    # \brief Initializes the \c %CompoundDRegularGridSetReader instance.
     # 
     def __init__() -> None: pass
 

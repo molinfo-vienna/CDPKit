@@ -25,13 +25,13 @@
 class ULVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULVectorRange instance \a r.
-    # \param r The \e %ULVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %ULVectorRange instance \a r.
+    # \param r The \c %ULVectorRange instance to copy.
     # 
     def __init__(r: ULVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULVectorRange instance.
+    # \brief Initializes the \c %ULVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -190,7 +190,7 @@ class ULVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULVectorRange instance.
+    # \brief Returns a string representation of the \c %ULVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

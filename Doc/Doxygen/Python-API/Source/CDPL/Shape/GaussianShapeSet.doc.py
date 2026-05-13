@@ -25,13 +25,13 @@
 class GaussianShapeSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %GaussianShapeSet instance.
+    # \brief Initializes the \c %GaussianShapeSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %GaussianShapeSet instance \a list.
-    # \param list The \e %GaussianShapeSet instance to copy.
+    # \brief Initializes a copy of the \c %GaussianShapeSet instance \a list.
+    # \param list The \c %GaussianShapeSet instance to copy.
     # 
     def __init__(list: GaussianShapeSet) -> None: pass
 

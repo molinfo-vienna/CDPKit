@@ -30,8 +30,8 @@ class Line2D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Line2D instance \a line.
-    # \param line The \e %Line2D instance to copy.
+    # \brief Initializes a copy of the \c %Line2D instance \a line.
+    # \param line The \c %Line2D instance to copy.
     # 
     def __init__(line: Line2D) -> None: pass
 

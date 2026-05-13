@@ -25,7 +25,7 @@
 class RDFGZReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %RDFGZReactionWriter instance.
+    # \brief Initializes the \c %RDFGZReactionWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

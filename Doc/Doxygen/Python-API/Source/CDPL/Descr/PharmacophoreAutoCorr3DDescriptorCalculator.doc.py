@@ -30,13 +30,13 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
-    # \param calc The \e %PharmacophoreAutoCorr3DDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
+    # \param calc The \c %PharmacophoreAutoCorr3DDescriptorCalculator instance to copy.
     # 
     def __init__(calc: PharmacophoreAutoCorr3DDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreAutoCorr3DDescriptorCalculator instance.
+    # \brief Initializes the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance.
     # \param cntnr 
     # \param descr 
     # 

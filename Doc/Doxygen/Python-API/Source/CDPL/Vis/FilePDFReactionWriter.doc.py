@@ -25,7 +25,7 @@
 class FilePDFReactionWriter(Chem.ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %FilePDFReactionWriter instance.
+    # \brief Initializes the \c %FilePDFReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

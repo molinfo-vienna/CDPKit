@@ -25,18 +25,18 @@
 class ULZeroMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULZeroMatrix instance.
+    # \brief Initializes the \c %ULZeroMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULZeroMatrix instance \a m.
-    # \param m The \e %ULZeroMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULZeroMatrix instance \a m.
+    # \param m The \c %ULZeroMatrix instance to copy.
     # 
     def __init__(m: ULZeroMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULZeroMatrix instance.
+    # \brief Initializes the \c %ULZeroMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class ULZeroMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULZeroMatrix instance.
+    # \brief Returns a string representation of the \c %ULZeroMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

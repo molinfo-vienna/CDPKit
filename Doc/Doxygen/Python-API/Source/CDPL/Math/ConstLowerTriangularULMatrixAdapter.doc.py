@@ -25,13 +25,13 @@
 class ConstLowerTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstLowerTriangularULMatrixAdapter instance \a a.
-    # \param a The \e %ConstLowerTriangularULMatrixAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ConstLowerTriangularULMatrixAdapter instance \a a.
+    # \param a The \c %ConstLowerTriangularULMatrixAdapter instance to copy.
     # 
     def __init__(a: ConstLowerTriangularULMatrixAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstLowerTriangularULMatrixAdapter instance.
+    # \brief Initializes the \c %ConstLowerTriangularULMatrixAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
@@ -136,7 +136,7 @@ class ConstLowerTriangularULMatrixAdapter(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLowerTriangularULMatrixAdapter instance.
+    # \brief Returns a string representation of the \c %ConstLowerTriangularULMatrixAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

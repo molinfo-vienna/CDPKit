@@ -25,7 +25,7 @@
 class FileCDFDRegularGridReader(DRegularGridReaderBase):
 
     ##
-    # \brief Initializes the \e %FileCDFDRegularGridReader instance.
+    # \brief Initializes the \c %FileCDFDRegularGridReader instance.
     # \param file_name 
     # \param mode 
     # 

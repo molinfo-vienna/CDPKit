@@ -25,18 +25,18 @@
 class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94OutOfPlaneBendingInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

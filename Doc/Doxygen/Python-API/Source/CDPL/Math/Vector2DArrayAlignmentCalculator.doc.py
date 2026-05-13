@@ -25,13 +25,13 @@
 class Vector2DArrayAlignmentCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector2DArrayAlignmentCalculator instance.
+    # \brief Initializes the \c %Vector2DArrayAlignmentCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector2DArrayAlignmentCalculator instance \a algo.
-    # \param algo The \e %Vector2DArrayAlignmentCalculator instance to copy.
+    # \brief Initializes a copy of the \c %Vector2DArrayAlignmentCalculator instance \a algo.
+    # \param algo The \c %Vector2DArrayAlignmentCalculator instance to copy.
     # 
     def __init__(algo: Vector2DArrayAlignmentCalculator) -> None: pass
 

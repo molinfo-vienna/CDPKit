@@ -25,18 +25,18 @@
 class FScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FScalarVector instance.
+    # \brief Initializes the \c %FScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FScalarVector instance \a v.
-    # \param v The \e %FScalarVector instance to copy.
+    # \brief Initializes a copy of the \c %FScalarVector instance \a v.
+    # \param v The \c %FScalarVector instance to copy.
     # 
     def __init__(v: FScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalarVector instance.
+    # \brief Initializes the \c %FScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -147,7 +147,7 @@ class FScalarVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FScalarVector instance.
+    # \brief Returns a string representation of the \c %FScalarVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

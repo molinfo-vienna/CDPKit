@@ -35,7 +35,7 @@
 class PharmacophoreReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %PharmacophoreReaderBase instance.
+    # \brief Initializes the \c %PharmacophoreReaderBase instance.
     # 
     def __init__() -> None: pass
 

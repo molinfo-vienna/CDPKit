@@ -25,6 +25,6 @@
 class SVGMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %SVGMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %SVGMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

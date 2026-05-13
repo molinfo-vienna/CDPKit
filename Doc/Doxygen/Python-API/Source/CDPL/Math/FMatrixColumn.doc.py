@@ -25,13 +25,13 @@
 class FMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FMatrixColumn instance \a mc.
-    # \param mc The \e %FMatrixColumn instance to copy.
+    # \brief Initializes a copy of the \c %FMatrixColumn instance \a mc.
+    # \param mc The \c %FMatrixColumn instance to copy.
     # 
     def __init__(mc: FMatrixColumn) -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrixColumn instance.
+    # \brief Initializes the \c %FMatrixColumn instance.
     # \param e 
     # \param i 
     # 
@@ -190,7 +190,7 @@ class FMatrixColumn(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FMatrixColumn instance.
+    # \brief Returns a string representation of the \c %FMatrixColumn instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

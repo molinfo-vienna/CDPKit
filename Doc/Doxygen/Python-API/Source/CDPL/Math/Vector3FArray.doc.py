@@ -30,13 +30,13 @@ class Vector3FArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector3FArray instance \a array.
-    # \param array The \e %Vector3FArray instance to copy.
+    # \brief Initializes a copy of the \c %Vector3FArray instance \a array.
+    # \param array The \c %Vector3FArray instance to copy.
     # 
     def __init__(array: Vector3FArray) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3FArray instance.
+    # \brief Initializes the \c %Vector3FArray instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass

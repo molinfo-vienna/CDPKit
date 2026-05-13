@@ -30,18 +30,18 @@ class AtomDictionary(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param atom_type 
         # \param iso 
         # \param sym 
@@ -201,13 +201,13 @@ class AtomDictionary(Boost.Python.instance):
         isotopeMasses = property(getIsotopeMasses)
 
     ##
-    # \brief Initializes the \e %AtomDictionary instance.
+    # \brief Initializes the \c %AtomDictionary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AtomDictionary instance \a dict.
-    # \param dict The \e %AtomDictionary instance to copy.
+    # \brief Initializes a copy of the \c %AtomDictionary instance \a dict.
+    # \param dict The \c %AtomDictionary instance to copy.
     # 
     def __init__(dict: AtomDictionary) -> None: pass
 

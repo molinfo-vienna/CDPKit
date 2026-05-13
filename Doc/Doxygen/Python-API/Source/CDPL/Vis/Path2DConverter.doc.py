@@ -29,7 +29,7 @@
 class Path2DConverter(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Path2DConverter instance.
+    # \brief Initializes the \c %Path2DConverter instance.
     # 
     def __init__() -> None: pass
 

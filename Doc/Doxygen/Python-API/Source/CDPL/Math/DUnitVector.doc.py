@@ -25,18 +25,18 @@
 class DUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DUnitVector instance.
+    # \brief Initializes the \c %DUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DUnitVector instance \a v.
-    # \param v The \e %DUnitVector instance to copy.
+    # \brief Initializes a copy of the \c %DUnitVector instance \a v.
+    # \param v The \c %DUnitVector instance to copy.
     # 
     def __init__(v: DUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %DUnitVector instance.
+    # \brief Initializes the \c %DUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -154,7 +154,7 @@ class DUnitVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DUnitVector instance.
+    # \brief Returns a string representation of the \c %DUnitVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,7 +25,7 @@
 class FileSDFGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FileSDFGZMolecularGraphWriter instance.
+    # \brief Initializes the \c %FileSDFGZMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

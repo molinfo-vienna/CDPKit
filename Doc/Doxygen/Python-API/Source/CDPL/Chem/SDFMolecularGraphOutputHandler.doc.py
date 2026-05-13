@@ -25,6 +25,6 @@
 class SDFMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %SDFMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %SDFMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

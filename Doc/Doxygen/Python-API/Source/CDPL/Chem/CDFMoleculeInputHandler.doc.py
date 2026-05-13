@@ -25,6 +25,6 @@
 class CDFMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %CDFMoleculeInputHandler instance.
+    # \brief Initializes the \c %CDFMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass
