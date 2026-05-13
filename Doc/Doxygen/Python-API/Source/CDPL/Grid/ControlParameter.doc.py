@@ -37,3 +37,8 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
+
+    ##
+    # \brief 
+    #
+    CUBE_COMMENT_IS_NAME = CDPL.Base.LookupKey('CUBE_COMMENT_IS_NAME')

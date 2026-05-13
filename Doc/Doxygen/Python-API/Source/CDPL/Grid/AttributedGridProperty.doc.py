@@ -28,3 +28,8 @@ class AttributedGridProperty(Boost.Python.instance):
     # \brief 
     #
     NAME = CDPL.Base.LookupKey('NAME')
+
+    ##
+    # \brief 
+    #
+    COMMENT = CDPL.Base.LookupKey('COMMENT')

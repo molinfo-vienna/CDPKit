@@ -28,3 +28,8 @@ class AttributedGridPropertyDefault(Boost.Python.instance):
     # \brief 
     #
     NAME = ''
+
+    ##
+    # \brief 
+    #
+    COMMENT = ''
