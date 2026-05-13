@@ -40,12 +40,20 @@ namespace CDPL
     {
 
         /**
-         * \brief NitroAciTautomerizationRule.
+         * \brief Implementation of the nitro &harr; aci-nitro tautomerization rule.
+         *
+         * The rule is registered with TautomerizationType::NITRO_ACI and uses
+         * PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order
+         * transformations required for the interconversion of nitro and aci-nitro tautomers.
          */
         class CDPL_CHEM_API NitroAciTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the \c %NitroAciTautomerization instance and registers the
+             *        SMARTS patterns and bond-order changes of the rule.
+             */
             NitroAciTautomerization();
         };
     } // namespace Chem

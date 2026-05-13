@@ -49,7 +49,12 @@ namespace CDPL
     {
 
         /**
-         * \brief TPSACalculator.
+         * \brief Calculation of the \e topological \e polar \e surface \e area (TPSA) of molecular graphs
+         *        based on fragment contributions.
+         *
+         * The \e TPSA is computed from precomputed contributions of polar fragments matched against the
+         * molecular graph as described by Ertl, Rohde and Selzer.
+         *
          * \see [\ref TPSA]
          */
         class CDPL_MOLPROP_API TPSACalculator

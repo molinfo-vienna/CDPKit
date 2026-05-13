@@ -52,15 +52,23 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief Specifies the number of bits of the generated MACCS key fingerprint.
+             */
             static constexpr std::size_t NUM_BITS = 166;
-            
+
             /**
              * \brief Constructs the \c %MACCSFingerprintGenerator instance.
              */
             MACCSFingerprintGenerator();
 
+            /**
+             * \brief Copy constructor.
+             * \param gen The other \c %MACCSFingerprintGenerator instance.
+             * \note The internal state of \a gen is not copied; the new instance is default-initialized.
+             */
             MACCSFingerprintGenerator(const MACCSFingerprintGenerator& gen);
-            
+
             /**
              * \brief Constructs the \c %MACCSFingerprintGenerator instance and generates the fingerprint of the
              *        molecular graph \a molgraph.
@@ -76,6 +84,12 @@ namespace CDPL
              */
             void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
+            /**
+             * \brief Assignment operator.
+             * \param gen The other \c %MACCSFingerprintGenerator instance.
+             * \return A reference to itself.
+             * \note The internal state of \a gen is not copied; the assignee remains unchanged.
+             */
             MACCSFingerprintGenerator& operator=(const MACCSFingerprintGenerator& gen)
             {
                 return *this;

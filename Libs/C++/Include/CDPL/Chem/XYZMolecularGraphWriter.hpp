@@ -46,6 +46,12 @@ namespace CDPL
         class MolecularGraph;
 
         /**
+         * \brief Writer for molecular graph data in <em>XYZ</em> format to an output stream.
+         *
+         * The writer implements the Base::DataWriter interface for molecular graphs and emits one record
+         * per call to write(). The configuration of the output formatting is controlled by the I/O-related
+         * control parameters registered for the writer instance.
+         *
          * \since 1.1
          */
         class CDPL_CHEM_API XYZMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
@@ -75,7 +81,16 @@ namespace CDPL
              */
             Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
-                 operator const void*() const;
+            /**
+             * \brief Returns a non-zero value if the writer is in a good state, and zero otherwise.
+             * \return A non-zero value if the writer can accept further output, zero otherwise.
+             */
+            operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

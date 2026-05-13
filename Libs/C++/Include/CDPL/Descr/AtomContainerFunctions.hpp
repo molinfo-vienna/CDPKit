@@ -45,8 +45,28 @@ namespace CDPL
     namespace Descr
     {
 
+        /**
+         * \brief Calculates the \e geometrical \e radius of the atoms in \a cntnr.
+         *
+         * The geometrical radius is the minimum, taken over all atoms, of the maximum distance from a given
+         * atom to any other atom in the container. If \a cntnr contains at most one atom, \e 0 is returned.
+         *
+         * \param cntnr The container with the atoms for which to calculate the geometrical radius.
+         * \param coords_func A function that provides the 3D coordinates of an atom.
+         * \return The calculated geometrical radius.
+         */
         CDPL_DESCR_API double calcGeometricalRadius(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
 
+        /**
+         * \brief Calculates the \e geometrical \e diameter of the atoms in \a cntnr.
+         *
+         * The geometrical diameter is the maximum distance between any pair of atoms in the container.
+         * If \a cntnr contains at most one atom, \e 0 is returned.
+         *
+         * \param cntnr The container with the atoms for which to calculate the geometrical diameter.
+         * \param coords_func A function that provides the 3D coordinates of an atom.
+         * \return The calculated geometrical diameter.
+         */
         CDPL_DESCR_API double calcGeometricalDiameter(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
     } // namespace Descr
 } // namespace CDPL

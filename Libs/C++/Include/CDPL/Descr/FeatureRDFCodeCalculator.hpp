@@ -48,7 +48,14 @@ namespace CDPL
     {
 
         /**
-         * \brief FeatureRDFCodeCalculator.
+         * \brief RDFCodeCalculator implementation for the calculation of feature-centered radial distribution
+         *        function (RDF) codes of pharmacophores.
+         *
+         * \c %FeatureRDFCodeCalculator is a specialization of \c %RDFCodeCalculator for entities of type
+         * Pharm::Feature. The feature 3D coordinates accessor function is preset to Chem::get3DCoordinates() and
+         * the entity-pair weight function as well as any other RDF calculation parameters can be configured
+         * via the inherited setter methods of the base class.
+         *
          * \see [\ref CITB, \ref HBMD]
          */
         class CDPL_DESCR_API FeatureRDFCodeCalculator : public RDFCodeCalculator<Pharm::Feature>
@@ -60,8 +67,25 @@ namespace CDPL
              */
             FeatureRDFCodeCalculator();
 
+            /**
+             * \brief Constructs the \c %FeatureRDFCodeCalculator instance and calculates the RDF code of the features
+             *        provided by \a cntnr.
+             *
+             * The calculated RDF code is stored in the vector \a rdf_code.
+             *
+             * \param cntnr The container with the features for which to calculate the RDF code.
+             * \param rdf_code The vector where to store the calculated RDF code.
+             */
             FeatureRDFCodeCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
 
+            /**
+             * \brief Calculates the RDF code of the features provided by \a cntnr.
+             *
+             * The calculated RDF code is stored in the vector \a rdf_code.
+             *
+             * \param cntnr The container with the features for which to calculate the RDF code.
+             * \param rdf_code The vector where to store the calculated RDF code.
+             */
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
         };
     } // namespace Descr
