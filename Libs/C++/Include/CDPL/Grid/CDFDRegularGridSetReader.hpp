@@ -52,7 +52,7 @@ namespace CDPL
 
           public:
             /**
-             * \brief Constructs a \c %CDFDRegularGridSetReader instance that will read the pharmacophore data from the input
+             * \brief Constructs a \c %CDFDRegularGridSetReader instance that will read the spatial regular grid data from the input
              *        stream \a is.
              * \param is The input stream to read from.
              */

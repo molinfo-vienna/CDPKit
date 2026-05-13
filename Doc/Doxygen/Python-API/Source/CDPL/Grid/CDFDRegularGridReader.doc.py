@@ -25,7 +25,7 @@
 class CDFDRegularGridReader(DRegularGridReaderBase):
 
     ##
-    # \brief Constructs a <tt>CDFDRegularGridReader</tt> instance that will read the pharmacophore data from the input stream <em>is</em>.
+    # \brief Constructs a <tt>CDFDRegularGridReader</tt> instance that will read the spatial regular grid data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
