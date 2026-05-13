@@ -1,5 +1,8 @@
 master:
 
+ - Support for the I/O of Grid::DRegularGrid data in the Gaussian CUBE format
+ - New data format descriptor Grid::DataFormat::CUBE
+ - Removed the DataMode attribute from class Math::RegularSpatialGrid since it found no use and complicated data processing
  - New pharm. feature functions Pharm::getEnvironmentResidueInfo() and Pharm::getEnvironmentResidueAtomInfo() which
    convert the value of the property Pharm::FeatureProperty::ENVIRONMENT_SUBSTRUCTURE into human readable strings that provide
    info about interacting residues and residue atoms, respectively
