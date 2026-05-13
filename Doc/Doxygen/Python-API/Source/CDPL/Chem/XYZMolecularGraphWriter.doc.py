@@ -20,8 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for molecular graph data in <em>XYZ</em> format to an output stream.
+# 
+# The writer implements the Base.DataWriter interface for molecular graphs and emits one record per call to write(). The configuration of the output formatting is controlled by the I/O-related control parameters registered for the writer instance.
+# 
+# \since 1.1
+# 
 class XYZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##

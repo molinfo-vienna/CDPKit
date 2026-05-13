@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AtomRDFCodeCalculator.
+# \brief RDFCodeCalculator implementation for the calculation of atom-centered radial distribution function (RDF) codes of chemical structures.
+# 
+# <tt>AtomRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Chem.Atom. The atom 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity-pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 
@@ -38,9 +40,12 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     def __init__(calc: AtomRDFCodeCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param cntnr 
-    # \param rdf_code 
+    # \brief Constructs the <tt>AtomRDFCodeCalculator</tt> instance and calculates the RDF code of the atoms provided by <em>cntnr</em>.
+    # 
+    # The calculated RDF code is stored in the vector <em>rdf_code</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the RDF code.
+    # \param rdf_code The vector where to store the calculated RDF code.
     # 
     def __init__(cntnr: Chem.AtomContainer, rdf_code: Math.DVector) -> None: pass
 
@@ -148,10 +153,13 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param rdf_code 
-    #
+    # \brief Calculates the RDF code of the atoms provided by <em>cntnr</em>.
+    # 
+    # The calculated RDF code is stored in the vector <em>rdf_code</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the RDF code.
+    # \param rdf_code The vector where to store the calculated RDF code.
+    # 
     def calculate(cntnr: Chem.AtomContainer, rdf_code: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

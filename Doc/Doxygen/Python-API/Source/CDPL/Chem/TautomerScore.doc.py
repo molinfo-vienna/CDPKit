@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief TautomerScore.
+# \brief Functor for the calculation of a heuristic stability score of a tautomeric form represented as a molecular graph.
+# 
+# The score is computed from contributions of atom-type, hybridization, ring-membership and specific structural motifs (amide-like nitrogens, carboxylic oxygens, exocyclic hydroxyls, 2,4-hydroxy-pyridine-like rings, etc.) and is typically used to rank tautomeric forms of a molecule from least to most stable.
 # 
 class TautomerScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TautomerScore instance.
+    # \brief Constructs the <tt>TautomerScore</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -55,10 +57,12 @@ class TautomerScore(Boost.Python.instance):
     def assign(score: TautomerScore) -> TautomerScore: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Calculates the tautomer stability score of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph representing the tautomeric form to score.
+    # 
+    # \return The calculated tautomer stability score.
+    # 
     def __call__(molgraph: MolecularGraph) -> float: pass
 
     objectID = property(getObjectID)

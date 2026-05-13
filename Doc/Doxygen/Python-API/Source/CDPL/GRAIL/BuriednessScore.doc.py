@@ -20,18 +20,20 @@
 #
 
 ##
-# \brief BuriednessScore.
+# \brief Functor for the calculation of the <em>buriedness</em> of a 3D query position with respect to the surrounding atoms.
+# 
+# The buriedness score is computed by casting a configurable number of test rays evenly distributed over the surface of a probe sphere centered at the query position. For each ray it is checked whether the ray hits an atom of the input container (the van der Waals surface, expanded by a minimum distance) within the probe sphere. The returned score is the fraction of rays that hit an atom and thus reflects how surrounded by the atoms the query position is.
 # 
 class BuriednessScore(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default number of test rays cast from the query position.
+    # 
     DEF_NUM_TEST_RAYS = 200
 
     ##
-    # \brief 
-    #
+    # \brief Default probe sphere radius.
+    # 
     DEF_PROBE_RADIUS = 8.0
 
     ##
@@ -41,10 +43,11 @@ class BuriednessScore(Boost.Python.instance):
     def __init__(score: BuriednessScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %BuriednessScore instance.
-    # \param probe_radius 
-    # \param min_vdw_surf_dist 
-    # \param num_test_rays 
+    # \brief Constructs a <tt>BuriednessScore</tt> instance with the given configuration.
+    # 
+    # \param probe_radius The probe sphere radius.
+    # \param min_vdw_surf_dist The minimum distance to the van der Waals surface of an atom.
+    # \param num_test_rays The number of rays used in the calculation.
     # 
     def __init__(probe_radius: float = 8.0, min_vdw_surf_dist: float = 1.0, num_test_rays: float = 200) -> None: pass
 
@@ -61,39 +64,45 @@ class BuriednessScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param dist 
-    #
+    # \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
+    # 
+    # \param dist The minimum distance to the van der Waals surface.
+    # 
     def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
+    # 
+    # \return The configured minimum distance to the van der Waals surface.
+    # 
     def getMinVdWSurfaceDistance() -> float: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the probe sphere radius.
+    # 
+    # \param radius The probe sphere radius.
+    # 
     def setProbeRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured probe sphere radius.
+    # 
+    # \return The configured probe sphere radius.
+    # 
     def getProbeRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param num_rays 
-    #
+    # \brief Sets the number of test rays cast from the query position.
+    # 
+    # \param num_rays The number of test rays.
+    # 
     def setNumTestRays(num_rays: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of test rays.
+    # 
+    # \return The configured number of test rays.
+    # 
     def getNumTestRays() -> int: pass
 
     ##
@@ -104,9 +113,10 @@ class BuriednessScore(Boost.Python.instance):
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of atom 3D-coordinates.
+    # 
+    # \return The configured atom 3D-coordinates function.
+    # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
@@ -117,11 +127,13 @@ class BuriednessScore(Boost.Python.instance):
     def assign(score: BuriednessScore) -> BuriednessScore: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param atoms 
-    # \return 
-    #
+    # \brief Calculates the buriedness score of the query position <em>pos</em> with respect to <em>atoms</em>.
+    # 
+    # \param pos The 3D position for which to calculate the buriedness score.
+    # \param atoms The surrounding atoms used in the calculation.
+    # 
+    # \return The calculated buriedness score, a value in the range <em>[0, 1]</em>.
+    # 
     def __call__(pos: Math.Vector3D, atoms: Chem.AtomContainer) -> float: pass
 
     objectID = property(getObjectID)

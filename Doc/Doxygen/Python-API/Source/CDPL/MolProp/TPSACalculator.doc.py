@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief TPSACalculator.
+# \brief Calculation of the <em>topological</em> <em>polar</em> <em>surface</em> <em>area</em> (TPSA) of molecular graphs based on fragment contributions.
+# 
+# The <em>TPSA</em> is computed from precomputed contributions of polar fragments matched against the molecular graph as described by Ertl, Rohde and Selzer.
 # 
 # \see [\ref TPSA]
 # 
