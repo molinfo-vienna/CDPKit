@@ -13,6 +13,7 @@ operator>= % __ge__
 operator> % __gt__
 operator< % __lt__
 operator() % __call__
+operator[] % __getitem__
 '<tt>non-const</tt> ' % 
 pointer % reference
 'non-<tt>const</tt> ' % 
@@ -21,6 +22,12 @@ true % True
 false % False
 <em>null</em> % <em>None</em>
 A reference to itself. % \a self
+std::size_t % int
+unsigned int % int
+unsigned long % int
+long % int
+std::string % str
+int idx % idx: int
 
 #
 # --- CDPL package ---

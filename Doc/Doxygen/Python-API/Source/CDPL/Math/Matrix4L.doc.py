@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 4x4 matrix holding signed integers of type <tt>long</tt>.
+# \brief A bounded 4x4 matrix holding signed integers of type <tt>int</tt>.
 # 
 class Matrix4L(Boost.Python.instance):
 

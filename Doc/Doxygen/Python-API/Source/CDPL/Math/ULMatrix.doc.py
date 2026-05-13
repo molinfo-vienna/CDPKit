@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief An unbounded dense matrix holding integers of type <tt>int</tt>.
 # 
 class ULMatrix(Boost.Python.instance):
 

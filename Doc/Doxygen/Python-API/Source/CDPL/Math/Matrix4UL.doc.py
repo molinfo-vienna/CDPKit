@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 4x4 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief A bounded 4x4 matrix holding integers of type <tt>int</tt>.
 # 
 class Matrix4UL(Boost.Python.instance):
 

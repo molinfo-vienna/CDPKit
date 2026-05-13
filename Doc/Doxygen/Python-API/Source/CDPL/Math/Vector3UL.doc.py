@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3 element vector holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief A bounded 3 element vector holding integers of type <tt>int</tt>.
 # 
 class Vector3UL(Boost.Python.instance):
 

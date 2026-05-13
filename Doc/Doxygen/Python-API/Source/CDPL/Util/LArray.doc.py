@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of unsigned integers of type <tt>long</tt>.
+# \brief An array of integers of type <tt>int</tt>.
 # 
 class LArray(Boost.Python.instance):
 
@@ -196,7 +196,7 @@ class LArray(Boost.Python.instance):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

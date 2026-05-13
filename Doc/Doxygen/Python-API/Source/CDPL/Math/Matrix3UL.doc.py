@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief A bounded 3x3 matrix holding integers of type <tt>int</tt>.
 # 
 class Matrix3UL(Boost.Python.instance):
 

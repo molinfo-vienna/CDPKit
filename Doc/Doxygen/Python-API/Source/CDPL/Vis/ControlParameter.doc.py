@@ -38,7 +38,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The alignment is specified by a combination of the flags defined in namespace Vis.Alignment. If <tt>ALIGNMENT</tt> is left unspecified, the default alignment setting Vis.ControlParameterDefault.ALIGNMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
+    # <b>Value Type:</b> <tt>int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
     ALIGNMENT = CDPL.Base.LookupKey('ALIGNMENT')
 
@@ -284,7 +284,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported vertical alignment styles are defined in namespace Vis.Alignment. If <tt>REACTION_AGENT_ALIGNMENT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_ALIGNMENT is not set, the default alignment setting Vis.ControlParameterDefault.REACTION_AGENT_ALIGNMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_ALIGNMENT.
     # 
     REACTION_AGENT_ALIGNMENT = CDPL.Base.LookupKey('REACTION_AGENT_ALIGNMENT')
 
@@ -293,7 +293,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_AGENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT is not set, the default layout Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT.
     # 
     REACTION_AGENT_LAYOUT = CDPL.Base.LookupKey('REACTION_AGENT_LAYOUT')
 
@@ -302,7 +302,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_AGENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_AGENT_LAYOUT_DIRECTION will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.AGENT_LAYOUT_DIRECTION.
     # 
     REACTION_AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('REACTION_AGENT_LAYOUT_DIRECTION')
 
@@ -336,7 +336,7 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief Specifies the length of reaction arrows.
     # 
-    # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as long as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_LENGTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_LENGTH will be used.
+    # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as int as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. If the control-parameter is left unspecified and the property Vis.ReactionProperty.ARROW_LENGTH is not set, the default setting Vis.ControlParameterDefault.REACTION_ARROW_LENGTH will be used.
     # 
     # <b>Value Type:</b> Vis.SizeSpecification \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_LENGTH.
     # 
@@ -365,7 +365,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported styles are defined as constants in namespace Vis.ArrowStyle. If <tt>REACTION_ARROW_STYLE</tt> is left unspecified and the property Vis.ReactionProperty.ARROW_STYLE is not set, the default arrow style Vis.ControlParameterDefault.REACTION_ARROW_STYLE will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.ARROW_STYLE.
     # 
     REACTION_ARROW_STYLE = CDPL.Base.LookupKey('REACTION_ARROW_STYLE')
 
@@ -374,7 +374,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. If <tt>REACTION_COMPONENT_LAYOUT</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT is not set, the default layout setting Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT.
     # 
     REACTION_COMPONENT_LAYOUT = CDPL.Base.LookupKey('REACTION_COMPONENT_LAYOUT')
 
@@ -383,7 +383,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. If <tt>REACTION_COMPONENT_LAYOUT_DIRECTION</tt> is left unspecified and the property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION is not set, the default layout direction Vis.ControlParameterDefault.REACTION_COMPONENT_LAYOUT_DIRECTION will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
+    # <b>Value Type:</b> <tt>int</tt> \note The setting is overridden by the Chem.Reaction property Vis.ReactionProperty.COMPONENT_LAYOUT_DIRECTION.
     # 
     REACTION_COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('REACTION_COMPONENT_LAYOUT_DIRECTION')
 
@@ -634,7 +634,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Supported adjustment policies are defined in namespace Vis.SizeAdjustment. If <tt>SIZE_ADJUSTMENT</tt> is left unspecified, the default size adjustment setting Vis.ControlParameterDefault.SIZE_ADJUSTMENT will be used.
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
+    # <b>Value Type:</b> <tt>int</tt> \note The control-parameter setting only takes effect if a valid viewport area has been specified by the parameter Vis.ControlParameter.VIEWPORT.
     # 
     SIZE_ADJUSTMENT = CDPL.Base.LookupKey('SIZE_ADJUSTMENT')
 

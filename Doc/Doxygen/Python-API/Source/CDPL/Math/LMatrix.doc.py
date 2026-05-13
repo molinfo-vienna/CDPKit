@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An unbounded dense matrix holding signed integers of type <tt>long</tt>.
+# \brief An unbounded dense matrix holding signed integers of type <tt>int</tt>.
 # 
 class LMatrix(Boost.Python.instance):
 

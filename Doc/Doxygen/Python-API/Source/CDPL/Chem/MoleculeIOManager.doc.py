@@ -24,7 +24,7 @@
 # 
 # <tt>DataIOManager</tt> provides static methods for the registration and lookup of Chem.MoleculeInputHandler and Chem.MoleculeOutputHandler implementation instances that handle different input and output storage formats.
 # 
-# Input and output handlers are registered by the methods registerInputHandler() and registerOutputHandler(). These methods expect a reference to an instance of the respective handler implementation as an argument (please note that the registered instance <em>must not be destroyed</em> as long as it is accessible via the <tt>DataIOManager</tt> interface!).
+# Input and output handlers are registered by the methods registerInputHandler() and registerOutputHandler(). These methods expect a reference to an instance of the respective handler implementation as an argument (please note that the registered instance <em>must not be destroyed</em> as int as it is accessible via the <tt>DataIOManager</tt> interface!).
 # 
 # For the removal of registered handlers the unregisterInputHandler() and unregisterOutputHandler() family of overloaded methods is provided. These methods accept a reference to the registered handler instance, the handler index, the handled data format or an iterator pointing to the handler as an argument.
 # 
