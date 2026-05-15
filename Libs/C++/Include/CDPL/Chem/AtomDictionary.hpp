@@ -58,47 +58,135 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A single dictionary entry describing the properties of an (atom type, isotope) pair.
+             */
             class CDPL_CHEM_API Entry
             {
 
               public:
+                /**
+                 * \brief A map from isotope mass number to its relative isotopic mass.
+                 */
                 typedef Util::Map<std::size_t, double> IsotopeMassMap;
 
+                /**
+                 * \brief Constructs an empty entry.
+                 */
                 Entry();
 
+                /**
+                 * \brief Constructs an entry with the given properties.
+                 * \param atom_type The atom type (see namespace Chem::AtomType).
+                 * \param iso The mass number of the isotope (\e 0 if not specified).
+                 * \param sym The element symbol.
+                 * \param name The element name.
+                 * \param most_abdt_iso The mass number of the most abundant isotope of the element.
+                 * \param avg_weight The standard (average) atomic weight of the element.
+                 * \param iupac_grp The IUPAC group number of the element.
+                 * \param period The period of the element.
+                 * \param metal \c true if the element is a metal.
+                 * \param non_metal \c true if the element is a non-metal.
+                 * \param val_states The valence states of the element.
+                 * \param vdw_rad The van der Waals radius of the element.
+                 * \param cov_radii Array of covalent radii indexed by bond order (single, double, triple).
+                 * \param ar_eneg The Allred-Rochow electronegativity of the element.
+                 * \param iso_masses Map from isotope mass number to its relative isotopic mass.
+                 */
                 Entry(unsigned int atom_type, std::size_t iso, const std::string& sym,
                       const std::string& name, std::size_t most_abdt_iso, double avg_weight,
                       std::size_t iupac_grp, std::size_t period, bool metal, bool non_metal, const Util::STArray& val_states,
                       double vdw_rad, const double cov_radii[3], double ar_eneg, const IsotopeMassMap& iso_masses);
 
+                /**
+                 * \brief Returns the atom type of the entry.
+                 * \return The atom type.
+                 */
                 unsigned int getType() const;
 
+                /**
+                 * \brief Returns the mass number of the isotope of the entry.
+                 * \return The isotope mass number (\e 0 if not specified).
+                 */
                 std::size_t getIsotope() const;
 
+                /**
+                 * \brief Returns the element symbol of the entry.
+                 * \return The element symbol.
+                 */
                 const std::string& getSymbol() const;
 
+                /**
+                 * \brief Returns the element name of the entry.
+                 * \return The element name.
+                 */
                 const std::string& getName() const;
 
+                /**
+                 * \brief Returns the mass number of the most abundant isotope of the element.
+                 * \return The most abundant isotope mass number.
+                 */
                 std::size_t getMostAbundantIsotope() const;
 
+                /**
+                 * \brief Returns the standard (average) atomic weight of the element.
+                 * \return The standard atomic weight.
+                 */
                 double getAverageWeight() const;
 
+                /**
+                 * \brief Returns the IUPAC group number of the element.
+                 * \return The IUPAC group number.
+                 */
                 std::size_t getIUPACGroup() const;
 
+                /**
+                 * \brief Returns the period of the element.
+                 * \return The period.
+                 */
                 std::size_t getPeriod() const;
 
+                /**
+                 * \brief Tells whether the element is a metal.
+                 * \return \c true if the element is a metal, and \c false otherwise.
+                 */
                 bool isMetal() const;
 
+                /**
+                 * \brief Tells whether the element is a non-metal.
+                 * \return \c true if the element is a non-metal, and \c false otherwise.
+                 */
                 bool isNonMetal() const;
 
+                /**
+                 * \brief Returns the valence states of the element.
+                 * \return An array containing the valence states.
+                 */
                 const Util::STArray& getValenceStates() const;
 
+                /**
+                 * \brief Returns the van der Waals radius of the element.
+                 * \return The van der Waals radius.
+                 */
                 double getVdWRadius() const;
 
+                /**
+                 * \brief Returns the covalent radius of the element for the given bond order.
+                 * \param order The bond order (\e 1, \e 2 or \e 3).
+                 * \return The covalent radius for the specified bond order.
+                 */
                 double getCovalentRadius(std::size_t order) const;
 
+                /**
+                 * \brief Returns the Allred-Rochow electronegativity of the element.
+                 * \return The Allred-Rochow electronegativity.
+                 */
                 double getAllredRochowElectronegativity() const;
 
+                /**
+                 * \brief Returns the map from isotope mass number to its relative isotopic mass for the element.
+                 * \return The isotope-mass map.
+                 */
                 const IsotopeMassMap& getIsotopeMasses() const;
 
               private:
@@ -124,36 +212,98 @@ namespace CDPL
             typedef std::unordered_map<std::string, unsigned int>                                                                        SymbolToTypeLookupTable;
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomDictionary instances.
+             */
             typedef std::shared_ptr<AtomDictionary> SharedPointer;
 
+            /**
+             * \brief A constant iterator over the entries of the dictionary.
+             */
             typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
                                               EntryLookupTable::const_iterator>
                 ConstEntryIterator;
 
+            /**
+             * \brief Adds the given entry to the dictionary. Any pre-existing entry for the same (type, isotope) is replaced.
+             * \param entry The entry to add.
+             */
             void addEntry(const Entry& entry);
 
+            /**
+             * \brief Tells whether the dictionary contains an entry for the given (type, isotope) pair.
+             * \param type The atom type.
+             * \param isotope The isotope mass number.
+             * \return \c true if the entry exists, and \c false otherwise.
+             */
             bool containsEntry(unsigned int type, std::size_t isotope) const;
 
+            /**
+             * \brief Removes the entry for the given (type, isotope) pair, if present.
+             * \param type The atom type.
+             * \param isotope The isotope mass number.
+             */
             void removeEntry(unsigned int type, std::size_t isotope);
 
+            /**
+             * \brief Returns the entry for the given (type, isotope) pair.
+             * \param type The atom type.
+             * \param isotope The isotope mass number.
+             * \return A \c const reference to the matching entry, or to an empty entry if no
+             *         matching entry exists.
+             */
             const Entry& getEntry(unsigned int type, std::size_t isotope) const;
 
+            /**
+             * \brief Removes all entries from the dictionary.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of entries stored in the dictionary.
+             * \return The number of entries.
+             */
             std::size_t getNumEntries() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first entry.
+             * \return A constant iterator pointing to the first entry.
+             */
             ConstEntryIterator getEntriesBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry.
+             * \return A constant iterator pointing one past the last entry.
+             */
             ConstEntryIterator getEntriesEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first entry (range-based for support).
+             * \return A constant iterator pointing to the first entry.
+             */
             ConstEntryIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last entry (range-based for support).
+             * \return A constant iterator pointing one past the last entry.
+             */
             ConstEntryIterator end() const;
 
+            /**
+             * \brief Loads the default atom dictionary bundled with CDPKit.
+             */
             void loadDefaults();
 
+            /**
+             * \brief Sets the process-wide default atom dictionary used by the static accessor methods.
+             * \param dict The new default atom dictionary.
+             */
             static void set(const SharedPointer& dict);
 
+            /**
+             * \brief Returns the process-wide default atom dictionary.
+             * \return The current default atom dictionary.
+             */
             static const SharedPointer& get();
 
             /**

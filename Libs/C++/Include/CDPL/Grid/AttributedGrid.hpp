@@ -21,7 +21,7 @@
 
 /**
  * \file
- * \brief Definition of a  grid data type.
+ * \brief Definition of class CDPL::Grid::AttributedGrid.
  */
 
 #ifndef CDPL_GRID_ATTRIBUTEDGRID_HPP
@@ -40,21 +40,44 @@ namespace CDPL
     {
 
         /**
-         * \brief AttributedGrid.
+         * \brief Abstract base class for grid types that also carry generic key/value properties.
+         *
+         * \c %AttributedGrid combines the property-bag interface from Base::PropertyContainer with the
+         * minimal grid interface required to know the number of grid elements and whether the grid is
+         * empty. Concrete grid types (e.g. Grid::RegularGrid) implement the pure virtual member functions.
          */
         class AttributedGrid : public Base::PropertyContainer
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AttributedGrid instances.
+             */
             typedef std::shared_ptr<AttributedGrid> SharedPointer;
 
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~AttributedGrid() {}
 
+            /**
+             * \brief Returns the total number of grid elements.
+             * \return The number of grid elements.
+             */
             virtual std::size_t getNumElements() const = 0;
 
+            /**
+             * \brief Tells whether the grid is empty.
+             * \return \c true if the grid is empty, and \c false otherwise.
+             */
             virtual bool isEmpty() const = 0;
 
           protected:
+            /**
+             * \brief Assignment operator.
+             * \param grid The other \c %AttributedGrid instance.
+             * \return A reference to itself.
+             */
             AttributedGrid& operator=(const AttributedGrid& grid)
             {
                 Base::PropertyContainer::operator=(grid);

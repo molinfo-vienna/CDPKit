@@ -42,26 +42,59 @@ namespace CDPL
         namespace FeatureType
         {
 
+            /**
+             * \brief Specifies an unknown pharmacophore feature type.
+             */
             constexpr unsigned int UNKNOWN = 0;
 
+            /**
+             * \brief Specifies a hydrophobic feature.
+             */
             constexpr unsigned int HYDROPHOBIC = 1;
 
+            /**
+             * \brief Specifies an aromatic feature.
+             */
             constexpr unsigned int AROMATIC = 2;
 
+            /**
+             * \brief Specifies a negatively ionizable feature.
+             */
             constexpr unsigned int NEGATIVE_IONIZABLE = 3;
 
+            /**
+             * \brief Specifies a positively ionizable feature.
+             */
             constexpr unsigned int POSITIVE_IONIZABLE = 4;
 
+            /**
+             * \brief Specifies a hydrogen-bond donor feature.
+             */
             constexpr unsigned int H_BOND_DONOR = 5;
 
+            /**
+             * \brief Specifies a hydrogen-bond acceptor feature.
+             */
             constexpr unsigned int H_BOND_ACCEPTOR = 6;
 
+            /**
+             * \brief Specifies a halogen-bond donor feature.
+             */
             constexpr unsigned int HALOGEN_BOND_DONOR = 7;
 
+            /**
+             * \brief Specifies a halogen-bond acceptor feature.
+             */
             constexpr unsigned int HALOGEN_BOND_ACCEPTOR = 8;
 
+            /**
+             * \brief Specifies an excluded-volume feature.
+             */
             constexpr unsigned int EXCLUSION_VOLUME = 9;
 
+            /**
+             * \brief Specifies the highest feature type constant defined in this namespace.
+             */
             constexpr unsigned int MAX_TYPE = EXCLUSION_VOLUME;
         } // namespace FeatureType
     } // namespace Pharm

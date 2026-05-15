@@ -60,7 +60,13 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief CanonicalNumberingCalculator.
+         * \brief Calculation of canonical atom numberings for molecular graphs using McKay's algorithm
+         *        for practical graph isomorphism.
+         *
+         * The set of atom and bond properties used to break ties during numbering can be configured via
+         * setAtomPropertyFlags() and setBondPropertyFlags(); a custom hydrogen-count function used for
+         * label generation can be installed via setHydrogenCountFunction().
+         *
          * \see [\ref MCKAY]
          */
         class CDPL_CHEM_API CanonicalNumberingCalculator
@@ -82,6 +88,9 @@ namespace CDPL
             static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
+            /**
+             * \brief Type of the generic functor used to retrieve the (implicit + explicit) hydrogen count of an atom.
+             */
             typedef std::function<std::size_t(const Atom&, const MolecularGraph&)> HydrogenCountFunction;
 
             /**
@@ -152,8 +161,16 @@ namespace CDPL
              */
             unsigned int getBondPropertyFlags() const;
 
+            /**
+             * \brief Specifies a function for the retrieval of the hydrogen count of an atom.
+             * \param func The hydrogen count function.
+             */
             void setHydrogenCountFunction(const HydrogenCountFunction& func);
 
+            /**
+             * \brief Returns the function used for the retrieval of the hydrogen count of an atom.
+             * \return The currently configured hydrogen count function.
+             */
             const HydrogenCountFunction& getHydrogenCountFunction();
 
             /**

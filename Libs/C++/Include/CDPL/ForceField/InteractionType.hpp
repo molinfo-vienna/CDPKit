@@ -42,14 +42,49 @@ namespace CDPL
         namespace InteractionType
         {
 
+            /**
+             * \brief Specifies no interaction.
+             */
             constexpr unsigned int NONE                 = 0x00;
+
+            /**
+             * \brief Specifies a bond stretching interaction.
+             */
             constexpr unsigned int BOND_STRETCHING      = 0x01;
+
+            /**
+             * \brief Specifies an angle bending interaction.
+             */
             constexpr unsigned int ANGLE_BENDING        = 0x02;
+
+            /**
+             * \brief Specifies a stretch-bend coupling interaction.
+             */
             constexpr unsigned int STRETCH_BEND         = 0x04;
+
+            /**
+             * \brief Specifies an out-of-plane bending interaction.
+             */
             constexpr unsigned int OUT_OF_PLANE_BENDING = 0x08;
+
+            /**
+             * \brief Specifies a torsion interaction.
+             */
             constexpr unsigned int TORSION              = 0x10;
+
+            /**
+             * \brief Specifies a van der Waals interaction.
+             */
             constexpr unsigned int VAN_DER_WAALS        = 0x20;
+
+            /**
+             * \brief Specifies an electrostatic interaction.
+             */
             constexpr unsigned int ELECTROSTATIC        = 0x40;
+
+            /**
+             * \brief A bitmask covering all interaction types.
+             */
             constexpr unsigned int ALL                  = 0x7f;
         } // namespace InteractionType
     } // namespace ForceField

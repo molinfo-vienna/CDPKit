@@ -50,8 +50,16 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PDBData instances.
+             */
             typedef std::shared_ptr<PDBData> SharedPointer;
 
+            /**
+             * \brief Identifies a PDB record type. Values correspond to the record tags defined by
+             *        the <em>PDB File Format Description Version 3.30</em>, plus three derived
+             *        synthetic records (\c STRUCTURE_ID, \c DEPOSITION_DATE, \c RESOLUTION).
+             */
             enum RecordType
             {
 
@@ -105,56 +113,164 @@ namespace CDPL
             typedef std::map<RecordType, std::string> TypeToDataMap;
 
           public:
+            /**
+             * \brief The type of a stored (record-type, record-data) pair.
+             */
             typedef typename TypeToDataMap::value_type Record;
 
+            /**
+             * \brief A constant iterator over the stored records.
+             */
             typedef typename TypeToDataMap::const_iterator ConstRecordIterator;
 
+            /**
+             * \brief A mutable iterator over the stored records.
+             */
             typedef typename TypeToDataMap::iterator RecordIterator;
 
+            /**
+             * \brief Constructs an empty \c %PDBData instance.
+             */
             PDBData():
                 data() {}
 
+            /**
+             * \brief Constructs a copy of the \c %PDBData instance \a other.
+             * \param other The \c %PDBData to copy.
+             */
             PDBData(const PDBData& other):
                 data(other.data) {}
 
+            /**
+             * \brief Removes all stored records.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of stored records.
+             * \return The number of records.
+             */
             std::size_t getNumRecords() const;
 
+            /**
+             * \brief Tells whether no records are stored.
+             * \return \c true if no records are stored, and \c false otherwise.
+             */
             bool isEmpty() const;
 
+            /**
+             * \brief Tells whether a record of the given type is stored.
+             * \param type The queried record type.
+             * \return \c true if a record of the given type is stored, and \c false otherwise.
+             */
             bool containsRecord(const RecordType& type) const;
 
+            /**
+             * \brief Returns an iterator to the record of the given type.
+             * \param type The record type to look up.
+             * \return An iterator pointing to the matching record, or to getRecordsEnd() if no
+             *         matching record exists.
+             */
             RecordIterator getRecord(const RecordType& type);
 
+            /**
+             * \brief Returns a constant iterator to the record of the given type.
+             * \param type The record type to look up.
+             * \return A constant iterator pointing to the matching record, or to getRecordsEnd()
+             *         if no matching record exists.
+             */
             ConstRecordIterator getRecord(const RecordType& type) const;
 
+            /**
+             * \brief Returns the data string associated with the given record type.
+             * \param type The record type whose data is requested.
+             * \return A reference to the data string.
+             * \throw Base::ItemNotFound if no record of the given type is stored.
+             */
             std::string& getData(const RecordType& type);
 
+            /**
+             * \brief Returns the data string associated with the given record type.
+             * \param type The record type whose data is requested.
+             * \return A \c const reference to the data string.
+             * \throw Base::ItemNotFound if no record of the given type is stored.
+             */
             const std::string& getData(const RecordType& type) const;
 
+            /**
+             * \brief Removes the record referenced by the given iterator.
+             * \param it Iterator referencing the record to remove.
+             */
             void removeRecord(const RecordIterator& it);
 
+            /**
+             * \brief Removes the record of the given type.
+             * \param type The type of the record to remove.
+             * \return \c true if the record was removed, and \c false if no matching record existed.
+             */
             bool removeRecord(const RecordType& type);
 
+            /**
+             * \brief Stores the given record. Any pre-existing record of the same type is replaced.
+             * \param rec The record to store.
+             * \return An iterator referencing the stored record.
+             */
             RecordIterator setRecord(const Record& rec);
 
+            /**
+             * \brief Stores a record built from \a type and \a data. Any pre-existing record of the same type is replaced.
+             * \param type The record type.
+             * \param data The record data string.
+             * \return An iterator referencing the stored record.
+             */
             RecordIterator setRecord(const RecordType& type, const std::string& data);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first stored record.
+             * \return A constant iterator pointing to the first record.
+             */
             ConstRecordIterator getRecordsBegin() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first stored record.
+             * \return A mutable iterator pointing to the first record.
+             */
             RecordIterator getRecordsBegin();
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last stored record.
+             * \return A constant iterator pointing one past the last record.
+             */
             ConstRecordIterator getRecordsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last stored record.
+             * \return A mutable iterator pointing one past the last record.
+             */
             RecordIterator getRecordsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first stored record (range-based for support).
+             * \return A constant iterator pointing to the first record.
+             */
             ConstRecordIterator begin() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first stored record (range-based for support).
+             * \return A mutable iterator pointing to the first record.
+             */
             RecordIterator begin();
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last stored record (range-based for support).
+             * \return A constant iterator pointing one past the last record.
+             */
             ConstRecordIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last stored record (range-based for support).
+             * \return A mutable iterator pointing one past the last record.
+             */
             RecordIterator end();
 
           private:

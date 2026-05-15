@@ -50,22 +50,80 @@ namespace CDPL
         namespace FeatureProperty
         {
 
+            /**
+             * \brief Specifies the type of the pharmacophore feature (see namespace Pharm::FeatureType).
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_PHARM_API const Base::LookupKey TYPE;
 
+            /**
+             * \brief Specifies the geometric shape of the feature (see namespace Pharm::FeatureGeometry).
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_PHARM_API const Base::LookupKey GEOMETRY;
+
+            /**
+             * \brief Specifies the length of the feature (for directional features).
+             *
+             * \valuetype double
+             */
             extern CDPL_PHARM_API const Base::LookupKey LENGTH;
+
+            /**
+             * \brief Specifies the orientation of the feature in 3D space.
+             *
+             * \valuetype Math::Vector3D
+             */
             extern CDPL_PHARM_API const Base::LookupKey ORIENTATION;
+
+            /**
+             * \brief Specifies the positional tolerance of the feature.
+             *
+             * \valuetype double
+             */
             extern CDPL_PHARM_API const Base::LookupKey TOLERANCE;
+
+            /**
+             * \brief Specifies the weight (relative importance) of the feature.
+             *
+             * \valuetype double
+             */
             extern CDPL_PHARM_API const Base::LookupKey WEIGHT;
 
+            /**
+             * \brief Specifies the chemical substructure the feature was derived from.
+             *
+             * \valuetype Chem::Fragment::SharedPointer
+             */
             extern CDPL_PHARM_API const Base::LookupKey SUBSTRUCTURE;
-            
+
+            /**
+             * \brief Specifies whether the feature is currently disabled (and thus not considered in pharmacophore matching).
+             *
+             * \valuetype bool
+             */
             extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG;
+
+            /**
+             * \brief Specifies whether the feature is optional in pharmacophore matching.
+             *
+             * \valuetype bool
+             */
             extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
 
-            extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
-            
             /**
+             * \brief Specifies the calculated hydrophobicity contribution of the feature.
+             *
+             * \valuetype double
+             */
+            extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
+
+            /**
+             * \brief Specifies the environment substructure (e.g. surrounding residues) associated with the feature.
+             *
+             * \valuetype Chem::Fragment::SharedPointer
              * \since 1.4
              */
             extern CDPL_PHARM_API const Base::LookupKey ENVIRONMENT_SUBSTRUCTURE;

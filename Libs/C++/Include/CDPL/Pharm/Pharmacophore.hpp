@@ -42,7 +42,12 @@ namespace CDPL
     {
 
         /**
-         * \brief Pharmacophore.
+         * \brief Abstract base class for mutable containers of Pharm::Feature instances representing a pharmacophore model.
+         *
+         * \c %Pharmacophore extends the read-only Pharm::FeatureContainer interface with feature
+         * creation/removal, content replacement (copy, append, remove) and a cloning facility for
+         * polymorphic deep copies. Concrete subclasses (e.g. Pharm::BasicPharmacophore,
+         * Pharm::FeatureSet) implement the pure virtual member functions.
          */
         class CDPL_PHARM_API Pharmacophore : public FeatureContainer
         {

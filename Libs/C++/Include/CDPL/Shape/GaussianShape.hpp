@@ -51,48 +51,90 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
+             */
             class Element
             {
 
               public:
+                /**
+                 * \brief Constructs an \c %Element with the given attributes.
+                 * \param pos The position of the sphere center.
+                 * \param radius The sphere radius.
+                 * \param color The color (numeric identifier) used to attribute the sphere (e.g. for pharmacophore-aware overlays).
+                 * \param hardness The hardness of the Gaussian (default: \e 2.7).
+                 */
                 Element(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7):
                     position(pos), radius(radius), hardness(hardness), color(color) {}
 
+                /**
+                 * \brief Returns the position of the sphere center.
+                 * \return The sphere center position.
+                 */
                 const Math::Vector3D& getPosition() const
                 {
                     return position;
                 }
 
+                /**
+                 * \brief Sets the position of the sphere center.
+                 * \param pos The sphere center position.
+                 */
                 void setPosition(const Math::Vector3D& pos)
                 {
                     position = pos;
                 }
 
+                /**
+                 * \brief Returns the sphere radius.
+                 * \return The sphere radius.
+                 */
                 double getRadius() const
                 {
                     return radius;
                 }
 
+                /**
+                 * \brief Sets the sphere radius.
+                 * \param radius The sphere radius.
+                 */
                 void setRadius(double radius)
                 {
                     this->radius = radius;
                 }
 
+                /**
+                 * \brief Returns the color attribute of the sphere.
+                 * \return The color attribute.
+                 */
                 std::size_t getColor() const
                 {
                     return color;
                 }
 
+                /**
+                 * \brief Sets the color attribute of the sphere.
+                 * \param color The color attribute.
+                 */
                 void setColor(std::size_t color)
                 {
                     this->color = color;
                 }
 
+                /**
+                 * \brief Returns the hardness of the Gaussian.
+                 * \return The Gaussian hardness.
+                 */
                 double getHardness() const
                 {
                     return hardness;
                 }
 
+                /**
+                 * \brief Sets the hardness of the Gaussian.
+                 * \param hardness The Gaussian hardness.
+                 */
                 void setHardness(double hardness)
                 {
                     this->hardness = hardness;
@@ -109,39 +151,113 @@ namespace CDPL
             typedef std::vector<Element> ElementList;
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShape instances.
+             */
             typedef std::shared_ptr<GaussianShape> SharedPointer;
 
+            /**
+             * \brief A constant iterator over the elements of the shape.
+             */
             typedef ElementList::const_iterator ConstElementIterator;
+
+            /**
+             * \brief A mutable iterator over the elements of the shape.
+             */
             typedef ElementList::iterator       ElementIterator;
 
+            /**
+             * \brief Removes all elements from the shape.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of elements in the shape.
+             * \return The number of elements.
+             */
             std::size_t getNumElements() const;
 
+            /**
+             * \brief Adds a new element to the shape.
+             * \param pos The position of the new element's sphere center.
+             * \param radius The sphere radius.
+             * \param color The color attribute.
+             * \param hardness The hardness of the Gaussian.
+             */
             void addElement(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7);
 
+            /**
+             * \brief Adds the given element to the shape.
+             * \param elem The element to add.
+             */
             void addElement(const Element& elem);
 
+            /**
+             * \brief Removes the element at index \a idx.
+             * \param idx The index of the element to remove.
+             */
             void removeElement(std::size_t idx);
 
+            /**
+             * \brief Returns a \c const reference to the element at index \a idx.
+             * \param idx The index of the element.
+             * \return A \c const reference to the element.
+             */
             const Element& getElement(std::size_t idx) const;
 
+            /**
+             * \brief Returns a reference to the element at index \a idx.
+             * \param idx The index of the element.
+             * \return A reference to the element.
+             */
             Element& getElement(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first element.
+             * \return A constant iterator pointing to the first element.
+             */
             ConstElementIterator getElementsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last element.
+             * \return A constant iterator pointing one past the last element.
+             */
             ConstElementIterator getElementsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first element.
+             * \return A mutable iterator pointing to the first element.
+             */
             ElementIterator getElementsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last element.
+             * \return A mutable iterator pointing one past the last element.
+             */
             ElementIterator getElementsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first element (range-based for support).
+             * \return A constant iterator pointing to the first element.
+             */
             ConstElementIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last element (range-based for support).
+             * \return A constant iterator pointing one past the last element.
+             */
             ConstElementIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first element (range-based for support).
+             * \return A mutable iterator pointing to the first element.
+             */
             ElementIterator begin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last element (range-based for support).
+             * \return A mutable iterator pointing one past the last element.
+             */
             ElementIterator end();
 
           private:
