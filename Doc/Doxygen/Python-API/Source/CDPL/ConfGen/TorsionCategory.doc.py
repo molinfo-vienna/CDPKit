@@ -30,8 +30,8 @@ class TorsionCategory(Boost.Python.instance):
     class RuleSequence(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %RuleSequence instance \a rules.
-        # \param rules The \e %RuleSequence instance to copy.
+        # \brief Initializes a copy of the \c %RuleSequence instance \a rules.
+        # \param rules The \c %RuleSequence instance to copy.
         # 
         def __init__(rules: RuleSequence) -> None: pass
 
@@ -74,8 +74,8 @@ class TorsionCategory(Boost.Python.instance):
     class CategorySequence(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %CategorySequence instance \a cat.
-        # \param cat The \e %CategorySequence instance to copy.
+        # \brief Initializes a copy of the \c %CategorySequence instance \a cat.
+        # \param cat The \c %CategorySequence instance to copy.
         # 
         def __init__(cat: CategorySequence) -> None: pass
 
@@ -113,13 +113,13 @@ class TorsionCategory(Boost.Python.instance):
         objectID = property(getObjectID)
 
     ##
-    # \brief Initializes the \e %TorsionCategory instance.
+    # \brief Initializes the \c %TorsionCategory instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TorsionCategory instance \a cat.
-    # \param cat The \e %TorsionCategory instance to copy.
+    # \brief Initializes a copy of the \c %TorsionCategory instance \a cat.
+    # \param cat The \c %TorsionCategory instance to copy.
     # 
     def __init__(cat: TorsionCategory) -> None: pass
 

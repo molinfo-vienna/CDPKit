@@ -27,13 +27,13 @@
 class ConjugatedRingBondPatternSwitching(TautomerizationRule):
 
     ##
-    # \brief Initializes the \e %ConjugatedRingBondPatternSwitching instance.
+    # \brief Initializes the \c %ConjugatedRingBondPatternSwitching instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ConjugatedRingBondPatternSwitching instance \a rule.
-    # \param rule The \e %ConjugatedRingBondPatternSwitching instance to copy.
+    # \brief Initializes a copy of the \c %ConjugatedRingBondPatternSwitching instance \a rule.
+    # \param rule The \c %ConjugatedRingBondPatternSwitching instance to copy.
     # 
     def __init__(rule: ConjugatedRingBondPatternSwitching) -> None: pass
 

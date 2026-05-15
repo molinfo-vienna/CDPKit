@@ -25,13 +25,13 @@
 class FScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FScalingMatrix instance \a m.
-    # \param m The \e %FScalingMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FScalingMatrix instance \a m.
+    # \param m The \c %FScalingMatrix instance to copy.
     # 
     def __init__(m: FScalingMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalingMatrix instance.
+    # \brief Initializes the \c %FScalingMatrix instance.
     # \param n 
     # \param sx 
     # \param sy 
@@ -154,7 +154,7 @@ class FScalingMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FScalingMatrix instance.
+    # \brief Returns a string representation of the \c %FScalingMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

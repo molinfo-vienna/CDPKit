@@ -122,8 +122,8 @@ class Color(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Color instance \a color.
-    # \param color The \e %Color instance to copy.
+    # \brief Initializes a copy of the \c %Color instance \a color.
+    # \param color The \c %Color instance to copy.
     # 
     def __init__(color: Color) -> None: pass
 
@@ -255,7 +255,7 @@ class Color(Boost.Python.instance):
     def __ne__(color: Color) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Color instance.
+    # \brief Returns a string representation of the \c %Color instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

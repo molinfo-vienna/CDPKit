@@ -25,13 +25,13 @@
 class ULScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULScalingMatrix instance \a m.
-    # \param m The \e %ULScalingMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULScalingMatrix instance \a m.
+    # \param m The \c %ULScalingMatrix instance to copy.
     # 
     def __init__(m: ULScalingMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULScalingMatrix instance.
+    # \brief Initializes the \c %ULScalingMatrix instance.
     # \param n 
     # \param sx 
     # \param sy 
@@ -154,7 +154,7 @@ class ULScalingMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULScalingMatrix instance.
+    # \brief Returns a string representation of the \c %ULScalingMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

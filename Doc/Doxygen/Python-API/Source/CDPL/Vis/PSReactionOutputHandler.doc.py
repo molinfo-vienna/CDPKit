@@ -25,6 +25,6 @@
 class PSReactionOutputHandler(Chem.ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %PSReactionOutputHandler instance.
+    # \brief Initializes the \c %PSReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

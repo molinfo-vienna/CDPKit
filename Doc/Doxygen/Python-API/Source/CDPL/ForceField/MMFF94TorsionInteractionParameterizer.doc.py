@@ -25,18 +25,18 @@
 class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94TorsionInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94TorsionInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94TorsionInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94TorsionInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94TorsionInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94TorsionInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94TorsionInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94TorsionInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94TorsionInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

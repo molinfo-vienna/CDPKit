@@ -25,8 +25,8 @@
 class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
-    # \brief Initializes a copy of the \e %FeatureDistanceScore instance \a score.
-    # \param score The \e %FeatureDistanceScore instance to copy.
+    # \brief Initializes a copy of the \c %FeatureDistanceScore instance \a score.
+    # \param score The \c %FeatureDistanceScore instance to copy.
     # 
     def __init__(score: FeatureDistanceScore) -> None: pass
 

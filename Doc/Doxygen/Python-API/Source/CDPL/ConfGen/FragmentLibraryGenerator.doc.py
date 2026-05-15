@@ -25,12 +25,12 @@
 class FragmentLibraryGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FragmentLibraryGenerator instance.
+    # \brief Initializes the \c %FragmentLibraryGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentLibraryGenerator instance.
+    # \brief Initializes the \c %FragmentLibraryGenerator instance.
     # \param lib 
     # 
     def __init__(lib: FragmentLibrary) -> None: pass

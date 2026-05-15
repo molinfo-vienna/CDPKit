@@ -20,53 +20,53 @@
 #
 
 ##
-# \brief A bounded 4x4 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief A bounded 4x4 matrix holding integers of type <tt>int</tt>.
 # 
 class Matrix4UL(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param v 
     # 
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Matrix4UL instance \a m.
-    # \param m The \e %Matrix4UL instance to copy.
+    # \brief Initializes a copy of the \c %Matrix4UL instance \a m.
+    # \param m The \c %Matrix4UL instance to copy.
     # 
     def __init__(m: Matrix4UL) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4UL instance.
+    # \brief Initializes the \c %Matrix4UL instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -227,7 +227,7 @@ class Matrix4UL(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Matrix4UL instance.
+    # \brief Returns a string representation of the \c %Matrix4UL instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

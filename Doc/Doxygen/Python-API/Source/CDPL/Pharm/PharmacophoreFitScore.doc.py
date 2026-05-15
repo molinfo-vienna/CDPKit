@@ -40,13 +40,13 @@ class PharmacophoreFitScore(Boost.Python.instance):
     DEF_FTR_GEOM_MATCH_WEIGHT = 0.4
 
     ##
-    # \brief Initializes a copy of the \e %PharmacophoreFitScore instance \a score.
-    # \param score The \e %PharmacophoreFitScore instance to copy.
+    # \brief Initializes a copy of the \c %PharmacophoreFitScore instance \a score.
+    # \param score The \c %PharmacophoreFitScore instance to copy.
     # 
     def __init__(score: PharmacophoreFitScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreFitScore instance.
+    # \brief Initializes the \c %PharmacophoreFitScore instance.
     # \param query_mode 
     # \param match_cnt_weight 
     # \param pos_match_weight 

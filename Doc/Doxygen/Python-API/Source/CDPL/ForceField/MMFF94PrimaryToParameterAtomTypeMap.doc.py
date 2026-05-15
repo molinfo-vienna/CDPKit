@@ -35,18 +35,18 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         NUM_TYPES = 4
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param atom_type 
         # \param param_types 
         # 
@@ -102,13 +102,13 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         paramAtomTypes = property(getParameterAtomTypes)
 
     ##
-    # \brief Initializes the \e %MMFF94PrimaryToParameterAtomTypeMap instance.
+    # \brief Initializes the \c %MMFF94PrimaryToParameterAtomTypeMap instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94PrimaryToParameterAtomTypeMap instance \a map.
-    # \param map The \e %MMFF94PrimaryToParameterAtomTypeMap instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94PrimaryToParameterAtomTypeMap instance \a map.
+    # \param map The \c %MMFF94PrimaryToParameterAtomTypeMap instance to copy.
     # 
     def __init__(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 

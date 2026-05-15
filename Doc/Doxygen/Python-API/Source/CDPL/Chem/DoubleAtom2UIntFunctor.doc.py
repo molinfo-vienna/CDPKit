@@ -25,18 +25,18 @@
 class DoubleAtom2UIntFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleAtom2UIntFunctor instance.
+    # \brief Initializes the \c %DoubleAtom2UIntFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleAtom2UIntFunctor instance \a func.
-    # \param func The \e %DoubleAtom2UIntFunctor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleAtom2UIntFunctor instance \a func.
+    # \param func The \c %DoubleAtom2UIntFunctor instance to copy.
     # 
     def __init__(func: DoubleAtom2UIntFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleAtom2UIntFunctor instance.
+    # \brief Initializes the \c %DoubleAtom2UIntFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

@@ -39,7 +39,7 @@ class Exception(builtins.Exception):
     def what() -> str: pass
 
     ##
-    # \brief Returns a string representation of the \e %Exception instance.
+    # \brief Returns a string representation of the \c %Exception instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,13 +25,13 @@
 class ORBondMatchExpressionList(BondMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ORBondMatchExpressionList instance.
+    # \brief Initializes the \c %ORBondMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ORBondMatchExpressionList instance \a expr.
-    # \param expr The \e %ORBondMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ORBondMatchExpressionList instance \a expr.
+    # \param expr The \c %ORBondMatchExpressionList instance to copy.
     # 
     def __init__(expr: ORBondMatchExpressionList) -> None: pass
 

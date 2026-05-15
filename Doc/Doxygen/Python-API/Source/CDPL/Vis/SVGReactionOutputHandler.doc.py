@@ -25,6 +25,6 @@
 class SVGReactionOutputHandler(Chem.ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %SVGReactionOutputHandler instance.
+    # \brief Initializes the \c %SVGReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

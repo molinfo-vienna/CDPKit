@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief AtomTypeMatchExpression.
+# \brief MatchExpression that checks the atom type of a target atom against a query atom type.
+# 
+# The expression matches according to a table of equivalence rules: explicit atomic numbers (Chem.AtomType.H to Chem.AtomType.MAX_ATOMIC_NO) match the same target type, while generic query types like Chem.AtomType.ANY, A, Q, M and X expand to multiple target atom types (see __call__ for the complete table). The matching mode is selectable via the constructor argument <em>not_match</em>.
 # 
 class AtomTypeMatchExpression(AtomMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \e %AtomTypeMatchExpression instance \a expr.
-    # \param expr The \e %AtomTypeMatchExpression instance to copy.
+    # \brief Initializes a copy of the \c %AtomTypeMatchExpression instance \a expr.
+    # \param expr The \c %AtomTypeMatchExpression instance to copy.
     # 
     def __init__(expr: AtomTypeMatchExpression) -> None: pass
 

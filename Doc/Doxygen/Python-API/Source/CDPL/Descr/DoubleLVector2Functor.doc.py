@@ -25,18 +25,18 @@
 class DoubleLVector2Functor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleLVector2Functor instance.
+    # \brief Initializes the \c %DoubleLVector2Functor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleLVector2Functor instance \a func.
-    # \param func The \e %DoubleLVector2Functor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleLVector2Functor instance \a func.
+    # \param func The \c %DoubleLVector2Functor instance to copy.
     # 
     def __init__(func: DoubleLVector2Functor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleLVector2Functor instance.
+    # \brief Initializes the \c %DoubleLVector2Functor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

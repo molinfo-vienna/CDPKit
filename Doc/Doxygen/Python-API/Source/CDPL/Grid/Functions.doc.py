@@ -22,6 +22,33 @@
 ##
 # \brief 
 # \param grid 
+# \param comment 
+#
+def setComment(grid: AttributedGrid, comment: str) -> None: pass
+
+##
+# \brief 
+# \param grid 
+# \return 
+#
+def hasComment(grid: AttributedGrid) -> bool: pass
+
+##
+# \brief 
+# \param grid 
+# \return 
+#
+def getComment(grid: AttributedGrid) -> str: pass
+
+##
+# \brief 
+# \param grid 
+#
+def clearComment(grid: AttributedGrid) -> None: pass
+
+##
+# \brief 
+# \param grid 
 # \param name 
 #
 def setName(grid: AttributedGrid, name: str) -> None: pass
@@ -72,6 +99,33 @@ def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 # \param cntnr 
 #
 def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param is_name 
+#
+def setCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer, is_name: bool) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 

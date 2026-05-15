@@ -54,6 +54,11 @@ namespace CDPL
              */
             extern CDPL_GRID_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
+            /**
+             * \since 1.4
+             */
+            extern CDPL_GRID_API const bool CUBE_COMMENT_IS_NAME;
+
         } // namespace ControlParameterDefault
     } // namespace Grid
 } // namespace CDPL

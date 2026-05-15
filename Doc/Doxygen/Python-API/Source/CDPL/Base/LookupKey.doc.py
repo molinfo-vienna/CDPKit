@@ -22,7 +22,7 @@
 ##
 # \brief An unique lookup key for control-parameter and property values.
 # 
-# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
+# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const str& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>int</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
 # 
 class LookupKey(Boost.Python.instance):
 
@@ -32,15 +32,15 @@ class LookupKey(Boost.Python.instance):
     NONE = LookupKey('NONE')
 
     ##
-    # \brief Initializes a copy of the \e %LookupKey instance \a key.
-    # \param key The \e %LookupKey instance to copy.
+    # \brief Initializes a copy of the \c %LookupKey instance \a key.
+    # \param key The \c %LookupKey instance to copy.
     # 
     def __init__(key: LookupKey) -> None: pass
 
     ##
     # \brief Creates a new unique <tt>LookupKey</tt> instance and registers it under the specified name.
     # 
-    # <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
+    # <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>int</tt> does not overflow), i.e. the instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
     # 
     # \param name The name of the <tt>LookupKey</tt> instance.
     # 
@@ -119,7 +119,7 @@ class LookupKey(Boost.Python.instance):
     def __ne__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LookupKey instance.
+    # \brief Returns a string representation of the \c %LookupKey instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

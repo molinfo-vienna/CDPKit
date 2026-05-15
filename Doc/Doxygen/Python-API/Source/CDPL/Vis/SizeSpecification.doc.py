@@ -25,8 +25,8 @@
 class SizeSpecification(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %SizeSpecification instance \a spec.
-    # \param spec The \e %SizeSpecification instance to copy.
+    # \brief Initializes a copy of the \c %SizeSpecification instance \a spec.
+    # \param spec The \c %SizeSpecification instance to copy.
     # 
     def __init__(spec: SizeSpecification) -> None: pass
 
@@ -154,7 +154,7 @@ class SizeSpecification(Boost.Python.instance):
     def __ne__(spec: SizeSpecification) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %SizeSpecification instance.
+    # \brief Returns a string representation of the \c %SizeSpecification instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

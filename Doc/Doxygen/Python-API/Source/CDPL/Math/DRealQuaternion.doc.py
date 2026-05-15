@@ -25,18 +25,18 @@
 class DRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DRealQuaternion instance.
+    # \brief Initializes the \c %DRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DRealQuaternion instance \a q.
-    # \param q The \e %DRealQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %DRealQuaternion instance \a q.
+    # \param q The \c %DRealQuaternion instance to copy.
     # 
     def __init__(q: DRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRealQuaternion instance.
+    # \brief Initializes the \c %DRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: float) -> None: pass
@@ -202,7 +202,7 @@ class DRealQuaternion(Boost.Python.instance):
     def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DRealQuaternion instance.
+    # \brief Returns a string representation of the \c %DRealQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

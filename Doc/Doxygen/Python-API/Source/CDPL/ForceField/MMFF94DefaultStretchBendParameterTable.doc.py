@@ -30,18 +30,18 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param term_atom1_pte_row 
         # \param ctr_atom_pte_row 
         # \param term_atom2_pte_row 
@@ -124,13 +124,13 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
         kjiForceConstant = property(getKJIForceConstant)
 
     ##
-    # \brief Initializes the \e %MMFF94DefaultStretchBendParameterTable instance.
+    # \brief Initializes the \c %MMFF94DefaultStretchBendParameterTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94DefaultStretchBendParameterTable instance \a table.
-    # \param table The \e %MMFF94DefaultStretchBendParameterTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94DefaultStretchBendParameterTable instance \a table.
+    # \param table The \c %MMFF94DefaultStretchBendParameterTable instance to copy.
     # 
     def __init__(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 

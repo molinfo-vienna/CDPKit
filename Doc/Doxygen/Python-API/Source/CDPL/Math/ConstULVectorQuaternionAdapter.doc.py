@@ -25,13 +25,13 @@
 class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstULVectorQuaternionAdapter instance \a a.
-    # \param a The \e %ConstULVectorQuaternionAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ConstULVectorQuaternionAdapter instance \a a.
+    # \param a The \c %ConstULVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: ConstULVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstULVectorQuaternionAdapter instance.
+    # \brief Initializes the \c %ConstULVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
@@ -113,7 +113,7 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     def __ne__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULVectorQuaternionAdapter instance.
+    # \brief Returns a string representation of the \c %ConstULVectorQuaternionAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

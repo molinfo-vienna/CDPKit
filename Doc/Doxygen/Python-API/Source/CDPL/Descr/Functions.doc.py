@@ -232,11 +232,15 @@ def calcEuclideanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords_func 
-# \return 
-#
+# \brief Calculates the <em>geometrical</em> <em>diameter</em> of the atoms in <em>cntnr</em>.
+# 
+# The geometrical diameter is the maximum distance between any pair of atoms in the container. If <em>cntnr</em> contains at most one atom, <em>0</em> is returned.
+# 
+# \param cntnr The container with the atoms for which to calculate the geometrical diameter.
+# \param coords_func A function that provides the 3D coordinates of an atom.
+# 
+# \return The calculated geometrical diameter.
+# 
 def calcGeometricalDiameter(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass
 
 ##
@@ -247,11 +251,15 @@ def calcGeometricalDiameter(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DC
 def calcGeometricalDiameter(cntnr: Chem.Entity3DContainer) -> float: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param coords_func 
-# \return 
-#
+# \brief Calculates the <em>geometrical</em> <em>radius</em> of the atoms in <em>cntnr</em>.
+# 
+# The geometrical radius is the minimum, taken over all atoms, of the maximum distance from a given atom to any other atom in the container. If <em>cntnr</em> contains at most one atom, <em>0</em> is returned.
+# 
+# \param cntnr The container with the atoms for which to calculate the geometrical radius.
+# \param coords_func A function that provides the 3D coordinates of an atom.
+# 
+# \return The calculated geometrical radius.
+# 
 def calcGeometricalRadius(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass
 
 ##

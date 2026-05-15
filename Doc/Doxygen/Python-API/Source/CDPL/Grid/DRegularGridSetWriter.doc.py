@@ -25,14 +25,14 @@
 class DRegularGridSetWriter(DRegularGridSetWriterBase):
 
     ##
-    # \brief Initializes the \e %DRegularGridSetWriter instance.
+    # \brief Initializes the \c %DRegularGridSetWriter instance.
     # \param file_name 
     # \param mode 
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGridSetWriter instance.
+    # \brief Initializes the \c %DRegularGridSetWriter instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -40,7 +40,7 @@ class DRegularGridSetWriter(DRegularGridSetWriterBase):
     def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGridSetWriter instance.
+    # \brief Initializes the \c %DRegularGridSetWriter instance.
     # \param file_name 
     # \param fmt 
     # \param mode 
@@ -48,14 +48,14 @@ class DRegularGridSetWriter(DRegularGridSetWriterBase):
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGridSetWriter instance.
+    # \brief Initializes the \c %DRegularGridSetWriter instance.
     # \param ios 
     # \param fmt 
     # 
     def __init__(ios: Base.IOStream, fmt: str) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGridSetWriter instance.
+    # \brief Initializes the \c %DRegularGridSetWriter instance.
     # \param ios 
     # \param fmt 
     # 

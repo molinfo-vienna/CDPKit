@@ -31,7 +31,7 @@
 class DRegularGridWriterBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %DRegularGridWriterBase instance.
+    # \brief Initializes the \c %DRegularGridWriterBase instance.
     # 
     def __init__() -> None: pass
 

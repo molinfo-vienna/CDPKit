@@ -25,7 +25,7 @@
 class TorsionDriver(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TorsionDriver instance.
+    # \brief Initializes the \c %TorsionDriver instance.
     # 
     def __init__() -> None: pass
 

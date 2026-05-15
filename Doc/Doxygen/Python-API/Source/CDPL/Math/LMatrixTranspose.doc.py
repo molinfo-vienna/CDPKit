@@ -25,13 +25,13 @@
 class LMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LMatrixTranspose instance \a mt.
-    # \param mt The \e %LMatrixTranspose instance to copy.
+    # \brief Initializes a copy of the \c %LMatrixTranspose instance \a mt.
+    # \param mt The \c %LMatrixTranspose instance to copy.
     # 
     def __init__(mt: LMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrixTranspose instance.
+    # \brief Initializes the \c %LMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: LMatrixExpression) -> None: pass
@@ -192,7 +192,7 @@ class LMatrixTranspose(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LMatrixTranspose instance.
+    # \brief Returns a string representation of the \c %LMatrixTranspose instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

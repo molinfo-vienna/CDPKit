@@ -25,7 +25,7 @@
 class FileSTLFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %FileSTLFeatureContainerWriter instance.
+    # \brief Initializes the \c %FileSTLFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

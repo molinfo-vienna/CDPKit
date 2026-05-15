@@ -25,13 +25,13 @@
 class LMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LMatrixRange instance \a r.
-    # \param r The \e %LMatrixRange instance to copy.
+    # \brief Initializes a copy of the \c %LMatrixRange instance \a r.
+    # \param r The \c %LMatrixRange instance to copy.
     # 
     def __init__(r: LMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrixRange instance.
+    # \brief Initializes the \c %LMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -206,7 +206,7 @@ class LMatrixRange(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LMatrixRange instance.
+    # \brief Returns a string representation of the \c %LMatrixRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,7 +25,7 @@
 class SMILESGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %SMILESGZMolecularGraphWriter instance.
+    # \brief Initializes the \c %SMILESGZMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

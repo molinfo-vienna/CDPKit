@@ -25,13 +25,13 @@
 class DGStructureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DGStructureGenerator instance.
+    # \brief Initializes the \c %DGStructureGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DGStructureGenerator instance \a gen.
-    # \param gen The \e %DGStructureGenerator instance to copy.
+    # \brief Initializes a copy of the \c %DGStructureGenerator instance \a gen.
+    # \param gen The \c %DGStructureGenerator instance to copy.
     # 
     def __init__(gen: DGStructureGenerator) -> None: pass
 

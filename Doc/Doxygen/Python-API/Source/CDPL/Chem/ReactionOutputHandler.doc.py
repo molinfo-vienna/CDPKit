@@ -25,7 +25,7 @@
 class ReactionOutputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ReactionOutputHandler instance.
+    # \brief Initializes the \c %ReactionOutputHandler instance.
     # 
     def __init__() -> None: pass
 

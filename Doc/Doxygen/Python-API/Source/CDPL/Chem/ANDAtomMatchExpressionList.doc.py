@@ -25,13 +25,13 @@
 class ANDAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ANDAtomMatchExpressionList instance.
+    # \brief Initializes the \c %ANDAtomMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ANDAtomMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDAtomMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ANDAtomMatchExpressionList instance \a expr.
+    # \param expr The \c %ANDAtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDAtomMatchExpressionList) -> None: pass
 

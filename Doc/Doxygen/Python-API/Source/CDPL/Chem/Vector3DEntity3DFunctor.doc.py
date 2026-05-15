@@ -25,18 +25,18 @@
 class Vector3DEntity3DFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector3DEntity3DFunctor instance.
+    # \brief Initializes the \c %Vector3DEntity3DFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector3DEntity3DFunctor instance \a func.
-    # \param func The \e %Vector3DEntity3DFunctor instance to copy.
+    # \brief Initializes a copy of the \c %Vector3DEntity3DFunctor instance \a func.
+    # \param func The \c %Vector3DEntity3DFunctor instance to copy.
     # 
     def __init__(func: Vector3DEntity3DFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3DEntity3DFunctor instance.
+    # \brief Initializes the \c %Vector3DEntity3DFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

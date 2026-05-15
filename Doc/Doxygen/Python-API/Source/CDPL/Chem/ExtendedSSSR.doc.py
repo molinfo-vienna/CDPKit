@@ -30,8 +30,8 @@ class ExtendedSSSR(FragmentList):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ExtendedSSSR instance \a esssr.
-    # \param esssr The \e %ExtendedSSSR instance to copy.
+    # \brief Initializes a copy of the \c %ExtendedSSSR instance \a esssr.
+    # \param esssr The \c %ExtendedSSSR instance to copy.
     # 
     def __init__(esssr: ExtendedSSSR) -> None: pass
 

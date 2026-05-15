@@ -30,8 +30,8 @@ class InteractionAnalyzer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %InteractionAnalyzer instance \a analyzer.
-    # \param analyzer The \e %InteractionAnalyzer instance to copy.
+    # \brief Initializes a copy of the \c %InteractionAnalyzer instance \a analyzer.
+    # \param analyzer The \c %InteractionAnalyzer instance to copy.
     # 
     def __init__(analyzer: InteractionAnalyzer) -> None: pass
 

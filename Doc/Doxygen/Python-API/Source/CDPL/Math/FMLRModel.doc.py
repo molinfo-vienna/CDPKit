@@ -42,8 +42,8 @@ class FMLRModel(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FMLRModel instance \a model.
-    # \param model The \e %FMLRModel instance to copy.
+    # \brief Initializes a copy of the \c %FMLRModel instance \a model.
+    # \param model The \c %FMLRModel instance to copy.
     # 
     def __init__(model: FMLRModel) -> None: pass
 

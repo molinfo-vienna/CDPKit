@@ -25,18 +25,18 @@
 class DQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DQuaternion instance \a q.
-    # \param q The \e %DQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %DQuaternion instance \a q.
+    # \param q The \c %DQuaternion instance to copy.
     # 
     def __init__(q: DQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param c1 
     # \param c2 
     # \param c3 
@@ -45,31 +45,31 @@ class DQuaternion(Boost.Python.instance):
     def __init__(c1: float, c2: float = 0.0, c3: float = 0.0, c4: float = 0.0) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstDQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DQuaternion instance.
+    # \brief Initializes the \c %DQuaternion instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -226,7 +226,7 @@ class DQuaternion(Boost.Python.instance):
     def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DQuaternion instance.
+    # \brief Returns a string representation of the \c %DQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

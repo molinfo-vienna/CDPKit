@@ -25,6 +25,6 @@
 class RXNReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %RXNReactionOutputHandler instance.
+    # \brief Initializes the \c %RXNReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

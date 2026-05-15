@@ -25,7 +25,7 @@
 class ScreeningDBAccessor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ScreeningDBAccessor instance.
+    # \brief Initializes the \c %ScreeningDBAccessor instance.
     # 
     def __init__() -> None: pass
 

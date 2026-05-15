@@ -25,18 +25,18 @@
 class DoubleAtomFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleAtomFunctor instance.
+    # \brief Initializes the \c %DoubleAtomFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleAtomFunctor instance.
+    # \brief Initializes the \c %DoubleAtomFunctor instance.
     # \param func 
     # 
     def __init__(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleAtomFunctor instance.
+    # \brief Initializes the \c %DoubleAtomFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

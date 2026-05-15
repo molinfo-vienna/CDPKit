@@ -25,13 +25,13 @@
 class MMFF94VanDerWaalsInteractionList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteractionList instance.
+    # \brief Initializes the \c %MMFF94VanDerWaalsInteractionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsInteractionList instance \a ia_list.
-    # \param ia_list The \e %MMFF94VanDerWaalsInteractionList instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94VanDerWaalsInteractionList instance \a ia_list.
+    # \param ia_list The \c %MMFF94VanDerWaalsInteractionList instance to copy.
     # 
     def __init__(ia_list: MMFF94VanDerWaalsInteractionList) -> None: pass
 

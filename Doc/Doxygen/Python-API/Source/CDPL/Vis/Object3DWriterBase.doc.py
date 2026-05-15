@@ -25,7 +25,7 @@
 class Object3DWriterBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %Object3DWriterBase instance.
+    # \brief Initializes the \c %Object3DWriterBase instance.
     # 
     def __init__() -> None: pass
 

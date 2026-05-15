@@ -25,18 +25,18 @@
 class BoolDoubleFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolDoubleFunctor instance.
+    # \brief Initializes the \c %BoolDoubleFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolDoubleFunctor instance \a func.
-    # \param func The \e %BoolDoubleFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolDoubleFunctor instance \a func.
+    # \param func The \c %BoolDoubleFunctor instance to copy.
     # 
     def __init__(func: BoolDoubleFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolDoubleFunctor instance.
+    # \brief Initializes the \c %BoolDoubleFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

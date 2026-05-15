@@ -49,7 +49,7 @@
 class Renderer2D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Renderer2D instance.
+    # \brief Initializes the \c %Renderer2D instance.
     # 
     def __init__() -> None: pass
 

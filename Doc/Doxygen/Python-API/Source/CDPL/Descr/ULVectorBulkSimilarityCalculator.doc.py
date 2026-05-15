@@ -25,18 +25,18 @@
 class ULVectorBulkSimilarityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULVectorBulkSimilarityCalculator instance.
+    # \brief Initializes the \c %ULVectorBulkSimilarityCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULVectorBulkSimilarityCalculator instance \a calc.
-    # \param calc The \e %ULVectorBulkSimilarityCalculator instance to copy.
+    # \brief Initializes a copy of the \c %ULVectorBulkSimilarityCalculator instance \a calc.
+    # \param calc The \c %ULVectorBulkSimilarityCalculator instance to copy.
     # 
     def __init__(calc: ULVectorBulkSimilarityCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULVectorBulkSimilarityCalculator instance.
+    # \brief Initializes the \c %ULVectorBulkSimilarityCalculator instance.
     # \param sim_func 
     # 
     def __init__(sim_func: DoubleULVector2Functor) -> None: pass

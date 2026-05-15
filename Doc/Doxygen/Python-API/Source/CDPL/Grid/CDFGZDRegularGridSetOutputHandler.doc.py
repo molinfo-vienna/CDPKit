@@ -25,6 +25,6 @@
 class CDFGZDRegularGridSetOutputHandler(DRegularGridSetOutputHandler):
 
     ##
-    # \brief Initializes the \e %CDFGZDRegularGridSetOutputHandler instance.
+    # \brief Initializes the \c %CDFGZDRegularGridSetOutputHandler instance.
     # 
     def __init__() -> None: pass

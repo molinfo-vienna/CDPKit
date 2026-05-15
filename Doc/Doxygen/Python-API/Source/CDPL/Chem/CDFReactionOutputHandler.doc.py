@@ -25,6 +25,6 @@
 class CDFReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %CDFReactionOutputHandler instance.
+    # \brief Initializes the \c %CDFReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

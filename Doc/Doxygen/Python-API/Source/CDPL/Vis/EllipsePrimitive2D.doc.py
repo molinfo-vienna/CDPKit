@@ -35,8 +35,8 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     def __init__(pos: Math.Vector2D, width: float, height: float) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %EllipsePrimitive2D instance \a prim.
-    # \param prim The \e %EllipsePrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c %EllipsePrimitive2D instance \a prim.
+    # \param prim The \c %EllipsePrimitive2D instance to copy.
     # 
     def __init__(prim: EllipsePrimitive2D) -> None: pass
 

@@ -25,7 +25,7 @@
 class ConformerGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConformerGenerator instance.
+    # \brief Initializes the \c %ConformerGenerator instance.
     # 
     def __init__() -> None: pass
 

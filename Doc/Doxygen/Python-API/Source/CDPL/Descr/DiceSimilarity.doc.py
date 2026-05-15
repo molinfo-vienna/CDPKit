@@ -27,13 +27,13 @@
 class DiceSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DiceSimilarity instance.
+    # \brief Initializes the \c %DiceSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DiceSimilarity instance \a func.
-    # \param func The \e %DiceSimilarity instance to copy.
+    # \brief Initializes a copy of the \c %DiceSimilarity instance \a func.
+    # \param func The \c %DiceSimilarity instance to copy.
     # 
     def __init__(func: DiceSimilarity) -> None: pass
 

@@ -25,8 +25,8 @@
 class AtomConfigurationMatchExpression(AtomMatchExpression):
 
     ##
-    # \brief Initializes a copy of the \e %AtomConfigurationMatchExpression instance \a expr.
-    # \param expr The \e %AtomConfigurationMatchExpression instance to copy.
+    # \brief Initializes a copy of the \c %AtomConfigurationMatchExpression instance \a expr.
+    # \param expr The \c %AtomConfigurationMatchExpression instance to copy.
     # 
     def __init__(expr: AtomConfigurationMatchExpression) -> None: pass
 

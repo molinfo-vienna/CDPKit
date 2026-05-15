@@ -25,18 +25,18 @@
 class LIdentityMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LIdentityMatrix instance.
+    # \brief Initializes the \c %LIdentityMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LIdentityMatrix instance \a m.
-    # \param m The \e %LIdentityMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LIdentityMatrix instance \a m.
+    # \param m The \c %LIdentityMatrix instance to copy.
     # 
     def __init__(m: LIdentityMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LIdentityMatrix instance.
+    # \brief Initializes the \c %LIdentityMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class LIdentityMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LIdentityMatrix instance.
+    # \brief Returns a string representation of the \c %LIdentityMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

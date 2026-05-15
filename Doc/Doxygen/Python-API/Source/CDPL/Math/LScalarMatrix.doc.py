@@ -25,18 +25,18 @@
 class LScalarMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LScalarMatrix instance.
+    # \brief Initializes the \c %LScalarMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LScalarMatrix instance \a m.
-    # \param m The \e %LScalarMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LScalarMatrix instance \a m.
+    # \param m The \c %LScalarMatrix instance to copy.
     # 
     def __init__(m: LScalarMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LScalarMatrix instance.
+    # \brief Initializes the \c %LScalarMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -157,7 +157,7 @@ class LScalarMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LScalarMatrix instance.
+    # \brief Returns a string representation of the \c %LScalarMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

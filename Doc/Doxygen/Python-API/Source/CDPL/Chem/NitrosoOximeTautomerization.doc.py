@@ -25,12 +25,12 @@
 class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %NitrosoOximeTautomerization instance.
+    # \brief Initializes the \c %NitrosoOximeTautomerization instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %NitrosoOximeTautomerization instance \a rule.
-    # \param rule The \e %NitrosoOximeTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %NitrosoOximeTautomerization instance \a rule.
+    # \param rule The \c %NitrosoOximeTautomerization instance to copy.
     # 
     def __init__(rule: NitrosoOximeTautomerization) -> None: pass

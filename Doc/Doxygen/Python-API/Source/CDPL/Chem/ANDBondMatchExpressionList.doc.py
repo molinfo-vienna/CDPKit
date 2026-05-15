@@ -25,13 +25,13 @@
 class ANDBondMatchExpressionList(BondMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ANDBondMatchExpressionList instance.
+    # \brief Initializes the \c %ANDBondMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ANDBondMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDBondMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ANDBondMatchExpressionList instance \a expr.
+    # \param expr The \c %ANDBondMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDBondMatchExpressionList) -> None: pass
 

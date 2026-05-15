@@ -30,18 +30,18 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param sym_type 
         # \param num_type 
         # 
@@ -78,13 +78,13 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
         numericType = property(getNumericType)
 
     ##
-    # \brief Initializes the \e %MMFF94SymbolicToNumericAtomTypeMap instance.
+    # \brief Initializes the \c %MMFF94SymbolicToNumericAtomTypeMap instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94SymbolicToNumericAtomTypeMap instance \a map.
-    # \param map The \e %MMFF94SymbolicToNumericAtomTypeMap instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94SymbolicToNumericAtomTypeMap instance \a map.
+    # \param map The \c %MMFF94SymbolicToNumericAtomTypeMap instance to copy.
     # 
     def __init__(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 

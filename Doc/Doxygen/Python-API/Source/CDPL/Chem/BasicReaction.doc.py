@@ -30,13 +30,13 @@ class BasicReaction(Reaction):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BasicReaction instance \a mol.
-    # \param mol The \e %BasicReaction instance to copy.
+    # \brief Initializes a copy of the \c %BasicReaction instance \a mol.
+    # \param mol The \c %BasicReaction instance to copy.
     # 
     def __init__(mol: BasicReaction) -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicReaction instance.
+    # \brief Initializes the \c %BasicReaction instance.
     # \param mol 
     # 
     def __init__(mol: Reaction) -> None: pass

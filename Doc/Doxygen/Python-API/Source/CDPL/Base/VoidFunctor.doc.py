@@ -25,18 +25,18 @@
 class VoidFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidFunctor instance.
+    # \brief Initializes the \c %VoidFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %VoidFunctor instance \a func.
-    # \param func The \e %VoidFunctor instance to copy.
+    # \brief Initializes a copy of the \c %VoidFunctor instance \a func.
+    # \param func The \c %VoidFunctor instance to copy.
     # 
     def __init__(func: VoidFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidFunctor instance.
+    # \brief Initializes the \c %VoidFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

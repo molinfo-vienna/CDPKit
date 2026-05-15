@@ -59,8 +59,8 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DefaultPharmacophoreGenerator instance \a gen.
-    # \param gen The \e %DefaultPharmacophoreGenerator instance to copy.
+    # \brief Initializes a copy of the \c %DefaultPharmacophoreGenerator instance \a gen.
+    # \param gen The \c %DefaultPharmacophoreGenerator instance to copy.
     # 
     def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass
 

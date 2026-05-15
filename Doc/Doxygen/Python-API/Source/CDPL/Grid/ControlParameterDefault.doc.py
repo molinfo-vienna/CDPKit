@@ -33,3 +33,8 @@ class ControlParameterDefault(Boost.Python.instance):
     # \brief 
     #
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = True
+
+    ##
+    # \brief 
+    #
+    CUBE_COMMENT_IS_NAME = False

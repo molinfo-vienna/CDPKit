@@ -25,18 +25,18 @@
 class DScalarMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DScalarMatrix instance.
+    # \brief Initializes the \c %DScalarMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DScalarMatrix instance \a m.
-    # \param m The \e %DScalarMatrix instance to copy.
+    # \brief Initializes a copy of the \c %DScalarMatrix instance \a m.
+    # \param m The \c %DScalarMatrix instance to copy.
     # 
     def __init__(m: DScalarMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %DScalarMatrix instance.
+    # \brief Initializes the \c %DScalarMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -157,7 +157,7 @@ class DScalarMatrix(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DScalarMatrix instance.
+    # \brief Returns a string representation of the \c %DScalarMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

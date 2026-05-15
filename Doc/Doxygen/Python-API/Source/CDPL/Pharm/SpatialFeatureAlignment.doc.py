@@ -25,13 +25,13 @@
 class SpatialFeatureAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SpatialFeatureAlignment instance.
+    # \brief Initializes the \c %SpatialFeatureAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SpatialFeatureAlignment instance \a alignment.
-    # \param alignment The \e %SpatialFeatureAlignment instance to copy.
+    # \brief Initializes a copy of the \c %SpatialFeatureAlignment instance \a alignment.
+    # \param alignment The \c %SpatialFeatureAlignment instance to copy.
     # 
     def __init__(alignment: SpatialFeatureAlignment) -> None: pass
 

@@ -25,18 +25,18 @@
 class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94EnergyCalculator instance.
+    # \brief Initializes the \c %MMFF94EnergyCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94EnergyCalculator instance \a calc.
-    # \param calc The \e %MMFF94EnergyCalculator instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94EnergyCalculator instance \a calc.
+    # \param calc The \c %MMFF94EnergyCalculator instance to copy.
     # 
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94EnergyCalculator instance.
+    # \brief Initializes the \c %MMFF94EnergyCalculator instance.
     # \param ia_data 
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass

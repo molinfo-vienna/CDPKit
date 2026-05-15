@@ -45,13 +45,13 @@ class ProtonationStateStandardizer(Boost.Python.instance):
         MAX_CHARGE_COMPENSATION = 2
 
     ##
-    # \brief Initializes the \e %ProtonationStateStandardizer instance.
+    # \brief Initializes the \c %ProtonationStateStandardizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ProtonationStateStandardizer instance \a standardizer.
-    # \param standardizer The \e %ProtonationStateStandardizer instance to copy.
+    # \brief Initializes a copy of the \c %ProtonationStateStandardizer instance \a standardizer.
+    # \param standardizer The \c %ProtonationStateStandardizer instance to copy.
     # 
     def __init__(standardizer: ProtonationStateStandardizer) -> None: pass
 

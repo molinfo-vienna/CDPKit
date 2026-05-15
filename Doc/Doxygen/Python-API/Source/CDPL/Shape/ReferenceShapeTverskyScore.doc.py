@@ -25,14 +25,14 @@
 class ReferenceShapeTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ReferenceShapeTverskyScore instance.
+    # \brief Initializes the \c %ReferenceShapeTverskyScore instance.
     # \param alpha 
     # 
     def __init__(alpha: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ReferenceShapeTverskyScore instance \a score.
-    # \param score The \e %ReferenceShapeTverskyScore instance to copy.
+    # \brief Initializes a copy of the \c %ReferenceShapeTverskyScore instance \a score.
+    # \param score The \c %ReferenceShapeTverskyScore instance to copy.
     # 
     def __init__(score: ReferenceShapeTverskyScore) -> None: pass
 

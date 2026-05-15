@@ -25,18 +25,18 @@
 class ULUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULUnitVector instance.
+    # \brief Initializes the \c %ULUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULUnitVector instance \a v.
-    # \param v The \e %ULUnitVector instance to copy.
+    # \brief Initializes a copy of the \c %ULUnitVector instance \a v.
+    # \param v The \c %ULUnitVector instance to copy.
     # 
     def __init__(v: ULUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULUnitVector instance.
+    # \brief Initializes the \c %ULUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -154,7 +154,7 @@ class ULUnitVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULUnitVector instance.
+    # \brief Returns a string representation of the \c %ULUnitVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

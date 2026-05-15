@@ -25,13 +25,13 @@
 class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
     ##
-    # \brief Initializes a copy of the \e %PharmacophoreFitScreeningScore instance \a score.
-    # \param score The \e %PharmacophoreFitScreeningScore instance to copy.
+    # \brief Initializes a copy of the \c %PharmacophoreFitScreeningScore instance \a score.
+    # \param score The \c %PharmacophoreFitScreeningScore instance to copy.
     # 
     def __init__(score: PharmacophoreFitScreeningScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
+    # \brief Initializes the \c %PharmacophoreFitScreeningScore instance.
     # \param match_cnt_weight 
     # \param pos_match_weight 
     # \param geom_match_weight 

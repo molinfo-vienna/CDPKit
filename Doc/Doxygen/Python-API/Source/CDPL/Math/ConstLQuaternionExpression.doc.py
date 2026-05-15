@@ -81,7 +81,7 @@ class ConstLQuaternionExpression(Boost.Python.instance):
     def __ne__(e: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLQuaternionExpression instance.
+    # \brief Returns a string representation of the \c %ConstLQuaternionExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,7 +25,7 @@
 class GaussianShapeOverlapFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %GaussianShapeOverlapFunction instance.
+    # \brief Initializes the \c %GaussianShapeOverlapFunction instance.
     # 
     def __init__() -> None: pass
 

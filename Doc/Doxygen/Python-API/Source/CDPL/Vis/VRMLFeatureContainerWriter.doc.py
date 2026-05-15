@@ -27,7 +27,7 @@
 class VRMLFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %VRMLFeatureContainerWriter instance.
+    # \brief Initializes the \c %VRMLFeatureContainerWriter instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass

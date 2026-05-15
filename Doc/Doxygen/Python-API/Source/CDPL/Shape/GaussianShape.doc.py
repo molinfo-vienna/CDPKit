@@ -30,8 +30,8 @@ class GaussianShape(Base.PropertyContainer):
     class Element(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %Element instance \a elem.
-        # \param elem The \e %Element instance to copy.
+        # \brief Initializes a copy of the \c %Element instance \a elem.
+        # \param elem The \c %Element instance to copy.
         # 
         def __init__(elem: Element) -> None: pass
 
@@ -113,13 +113,13 @@ class GaussianShape(Base.PropertyContainer):
         position = property(getPosition, setPosition)
 
     ##
-    # \brief Initializes the \e %GaussianShape instance.
+    # \brief Initializes the \c %GaussianShape instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %GaussianShape instance \a shape.
-    # \param shape The \e %GaussianShape instance to copy.
+    # \brief Initializes a copy of the \c %GaussianShape instance \a shape.
+    # \param shape The \c %GaussianShape instance to copy.
     # 
     def __init__(shape: GaussianShape) -> None: pass
 

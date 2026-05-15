@@ -27,7 +27,7 @@
 class TorusMesh3D(TriangleMesh3D):
 
     ##
-    # \brief Initializes the \e %TorusMesh3D instance.
+    # \brief Initializes the \c %TorusMesh3D instance.
     # \param radius1 
     # \param radius2 
     # \param num_sect1 
@@ -38,7 +38,7 @@ class TorusMesh3D(TriangleMesh3D):
     def __init__(radius1: float, radius2: float, num_sect1: int, num_sect2: int, start_angle: float = 0.0, first_sect_size: float = 0.0) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TorusMesh3D instance \a mesh.
-    # \param mesh The \e %TorusMesh3D instance to copy.
+    # \brief Initializes a copy of the \c %TorusMesh3D instance \a mesh.
+    # \param mesh The \c %TorusMesh3D instance to copy.
     # 
     def __init__(mesh: TorusMesh3D) -> None: pass

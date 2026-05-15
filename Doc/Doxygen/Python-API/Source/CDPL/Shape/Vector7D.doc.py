@@ -25,48 +25,48 @@
 class Vector7D(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector7D instance \a v.
-    # \param v The \e %Vector7D instance to copy.
+    # \brief Initializes a copy of the \c %Vector7D instance \a v.
+    # \param v The \c %Vector7D instance to copy.
     # 
     def __init__(v: Math.Vector7D) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param v 
     # 
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param e 
     # 
     def __init__(e: Math.ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param e 
     # 
     def __init__(e: Math.ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param e 
     # 
     def __init__(e: Math.ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param e 
     # 
     def __init__(e: Math.ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector7D instance.
+    # \brief Initializes the \c %Vector7D instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -218,7 +218,7 @@ class Vector7D(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %Vector7D instance.
+    # \brief Returns a string representation of the \c %Vector7D instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

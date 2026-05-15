@@ -25,6 +25,6 @@
 class PSDMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %PSDMoleculeInputHandler instance.
+    # \brief Initializes the \c %PSDMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

@@ -25,7 +25,7 @@
 class ReactionInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ReactionInputHandler instance.
+    # \brief Initializes the \c %ReactionInputHandler instance.
     # 
     def __init__() -> None: pass
 

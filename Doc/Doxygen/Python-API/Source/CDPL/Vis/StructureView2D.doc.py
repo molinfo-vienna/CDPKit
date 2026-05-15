@@ -192,7 +192,7 @@
 class StructureView2D(View2D):
 
     ##
-    # \brief Initializes the \e %StructureView2D instance.
+    # \brief Initializes the \c %StructureView2D instance.
     # 
     def __init__() -> None: pass
 

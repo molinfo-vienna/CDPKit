@@ -25,7 +25,7 @@
 class FilePNGReactionWriter(Chem.ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %FilePNGReactionWriter instance.
+    # \brief Initializes the \c %FilePNGReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

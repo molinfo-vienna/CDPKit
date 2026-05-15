@@ -25,14 +25,14 @@
 class AlignedColorTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AlignedColorTverskyScore instance.
+    # \brief Initializes the \c %AlignedColorTverskyScore instance.
     # \param beta 
     # 
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AlignedColorTverskyScore instance \a score.
-    # \param score The \e %AlignedColorTverskyScore instance to copy.
+    # \brief Initializes a copy of the \c %AlignedColorTverskyScore instance \a score.
+    # \param score The \c %AlignedColorTverskyScore instance to copy.
     # 
     def __init__(score: AlignedColorTverskyScore) -> None: pass
 

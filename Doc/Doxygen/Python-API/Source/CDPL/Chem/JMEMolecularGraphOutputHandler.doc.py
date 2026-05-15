@@ -25,6 +25,6 @@
 class JMEMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
-    # \brief Initializes the \e %JMEMolecularGraphOutputHandler instance.
+    # \brief Initializes the \c %JMEMolecularGraphOutputHandler instance.
     # 
     def __init__() -> None: pass

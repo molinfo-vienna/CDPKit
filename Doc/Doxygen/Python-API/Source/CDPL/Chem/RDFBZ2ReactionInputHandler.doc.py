@@ -25,6 +25,6 @@
 class RDFBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %RDFBZ2ReactionInputHandler instance.
+    # \brief Initializes the \c %RDFBZ2ReactionInputHandler instance.
     # 
     def __init__() -> None: pass

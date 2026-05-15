@@ -25,18 +25,18 @@
 class MMFF94BondTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \c %MMFF94BondTyper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94BondTyper instance \a typer.
-    # \param typer The \e %MMFF94BondTyper instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94BondTyper instance \a typer.
+    # \param typer The \c %MMFF94BondTyper instance to copy.
     # 
     def __init__(typer: MMFF94BondTyper) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \c %MMFF94BondTyper instance.
     # \param molgraph 
     # \param types 
     # \param strict 
@@ -83,7 +83,7 @@ class MMFF94BondTyper(Boost.Python.instance):
     ##
     # \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
     # 
-    # Specifically, an nonstandard bond type index of <em>"1"</em> is assigned whenever a single bond (formal bond order 1) is found a) between non-aromatic atoms <em>i</em> and <em>j</em> of types <em>I</em> and <em>J</em> for which <em>"sbmb"</em> entries in of <em>"1"</em> appear in the "MMFFPROP.PAR" file or b) between aromatic atoms belonging to different aromatic rings (as in the case of the central C-C bond in biphenyl).
+    # Specifically, an nonstandard bond type index of <em>"1"</em> is assigned whenever a single bond (formal bond order 1) is found a) between non-aromatic atoms <em>i</em> and <em>j</em> of types <em>I</em> and <em>J</em> for which <em>"sbmb"</em> entries in of <em>"1"</em> appear in the "MMFFPROP.PAR" file or b) between aromatic atoms beinting to different aromatic rings (as in the case of the central C-C bond in biphenyl).
     # 
     # \param molgraph The molecular graph for which to assign bond type indices
     # \param types The output array storing the determined bond type indices.

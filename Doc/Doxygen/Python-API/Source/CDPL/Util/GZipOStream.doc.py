@@ -25,12 +25,12 @@
 class GZipOStream(Base.OStream):
 
     ##
-    # \brief Initializes the \e %GZipOStream instance.
+    # \brief Initializes the \c %GZipOStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GZipOStream instance.
+    # \brief Initializes the \c %GZipOStream instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass

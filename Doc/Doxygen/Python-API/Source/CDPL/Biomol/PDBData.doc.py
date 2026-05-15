@@ -250,13 +250,13 @@ class PDBData(Boost.Python.instance):
         RESOLUTION = 43
 
     ##
-    # \brief Initializes the \e %PDBData instance.
+    # \brief Initializes the \c %PDBData instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PDBData instance \a data.
-    # \param data The \e %PDBData instance to copy.
+    # \brief Initializes a copy of the \c %PDBData instance \a data.
+    # \param data The \c %PDBData instance to copy.
     # 
     def __init__(data: PDBData) -> None: pass
 

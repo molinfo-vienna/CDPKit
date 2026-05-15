@@ -25,18 +25,18 @@
 class LogMessageCallbackFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LogMessageCallbackFunction instance.
+    # \brief Initializes the \c %LogMessageCallbackFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LogMessageCallbackFunction instance \a func.
-    # \param func The \e %LogMessageCallbackFunction instance to copy.
+    # \brief Initializes a copy of the \c %LogMessageCallbackFunction instance \a func.
+    # \param func The \c %LogMessageCallbackFunction instance to copy.
     # 
     def __init__(func: LogMessageCallbackFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %LogMessageCallbackFunction instance.
+    # \brief Initializes the \c %LogMessageCallbackFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

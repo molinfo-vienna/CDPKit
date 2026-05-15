@@ -25,14 +25,14 @@
 class StringIOStream(IOStream):
 
     ##
-    # \brief Initializes the \e %StringIOStream instance.
+    # \brief Initializes the \c %StringIOStream instance.
     # \param string 
     # \param mode 
     # 
     def __init__(string: str = '', mode: str = 'r+') -> None: pass
 
     ##
-    # \brief Initializes the \e %StringIOStream instance.
+    # \brief Initializes the \c %StringIOStream instance.
     # \param string 
     # \param mode 
     # 

@@ -30,8 +30,8 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     class StructureData(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %StructureData instance \a data.
-        # \param data The \e %StructureData instance to copy.
+        # \brief Initializes a copy of the \c %StructureData instance \a data.
+        # \param data The \c %StructureData instance to copy.
         # 
         def __init__(data: StructureData) -> None: pass
 
@@ -78,8 +78,8 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ResonanceStructureGenerator instance \a gen.
-    # \param gen The \e %ResonanceStructureGenerator instance to copy.
+    # \brief Initializes a copy of the \c %ResonanceStructureGenerator instance \a gen.
+    # \param gen The \c %ResonanceStructureGenerator instance to copy.
     # 
     def __init__(gen: ResonanceStructureGenerator) -> None: pass
 

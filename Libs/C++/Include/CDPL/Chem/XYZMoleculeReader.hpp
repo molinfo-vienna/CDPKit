@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Reader for molecule data in <em>XYZ</em> format from an input stream.
          *
-         * The reader uses Util::StreamDataReader as base class and decodes one molecule per record. The
+         * The reader decodes one molecule per record. The
          * configuration of the input parsing is controlled by the I/O-related control parameters registered
          * for the reader instance.
          *

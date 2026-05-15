@@ -55,7 +55,7 @@ class Vector2FArrayBFGSMinimizer(Boost.Python.instance):
         DELTAF_REACHED = 8
 
     ##
-    # \brief Initializes the \e %Vector2FArrayBFGSMinimizer instance.
+    # \brief Initializes the \c %Vector2FArrayBFGSMinimizer instance.
     # \param func 
     # \param grad_func 
     # 

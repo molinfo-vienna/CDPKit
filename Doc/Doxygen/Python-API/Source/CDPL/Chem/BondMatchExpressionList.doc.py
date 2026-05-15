@@ -32,8 +32,8 @@ class BondMatchExpressionList(BondMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BondMatchExpressionList instance \a expr.
-    # \param expr The \e %BondMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %BondMatchExpressionList instance \a expr.
+    # \param expr The \c %BondMatchExpressionList instance to copy.
     # 
     def __init__(expr: BondMatchExpressionList) -> None: pass
 
@@ -198,7 +198,7 @@ class BondMatchExpressionList(BondMatchExpression):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

@@ -25,13 +25,13 @@
 class MMFF94InteractionData(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94InteractionData instance.
+    # \brief Initializes the \c %MMFF94InteractionData instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94InteractionData instance \a ia_data.
-    # \param ia_data The \e %MMFF94InteractionData instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94InteractionData instance \a ia_data.
+    # \param ia_data The \c %MMFF94InteractionData instance to copy.
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
 

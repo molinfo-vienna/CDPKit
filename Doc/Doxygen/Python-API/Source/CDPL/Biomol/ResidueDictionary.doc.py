@@ -30,13 +30,13 @@ class ResidueDictionary(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
@@ -149,13 +149,13 @@ class ResidueDictionary(Boost.Python.instance):
         structure = property(getStructure)
 
     ##
-    # \brief Initializes the \e %ResidueDictionary instance.
+    # \brief Initializes the \c %ResidueDictionary instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ResidueDictionary instance \a dict.
-    # \param dict The \e %ResidueDictionary instance to copy.
+    # \brief Initializes a copy of the \c %ResidueDictionary instance \a dict.
+    # \param dict The \c %ResidueDictionary instance to copy.
     # 
     def __init__(dict: ResidueDictionary) -> None: pass
 

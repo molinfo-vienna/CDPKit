@@ -25,13 +25,13 @@
 class ConstDMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstDMatrixRow instance \a r.
-    # \param r The \e %ConstDMatrixRow instance to copy.
+    # \brief Initializes a copy of the \c %ConstDMatrixRow instance \a r.
+    # \param r The \c %ConstDMatrixRow instance to copy.
     # 
     def __init__(r: ConstDMatrixRow) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstDMatrixRow instance.
+    # \brief Initializes the \c %ConstDMatrixRow instance.
     # \param e 
     # \param i 
     # 
@@ -135,7 +135,7 @@ class ConstDMatrixRow(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDMatrixRow instance.
+    # \brief Returns a string representation of the \c %ConstDMatrixRow instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

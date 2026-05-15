@@ -25,13 +25,13 @@
 class DVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %DVectorRange instance \a r.
-    # \param r The \e %DVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %DVectorRange instance \a r.
+    # \param r The \c %DVectorRange instance to copy.
     # 
     def __init__(r: DVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %DVectorRange instance.
+    # \brief Initializes the \c %DVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -190,7 +190,7 @@ class DVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %DVectorRange instance.
+    # \brief Returns a string representation of the \c %DVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

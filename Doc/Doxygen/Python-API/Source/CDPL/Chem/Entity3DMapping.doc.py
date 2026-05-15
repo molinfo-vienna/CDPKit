@@ -22,18 +22,18 @@
 ##
 # \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
 # 
-# Entity3Ds mappings are stored as pairs of references to the mapped Chem.Entity3D objects. Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible. If a mapping entry for a particular entity does not exist, the methods Entity3DMapping.getValue() and Entity3DMapping.operator[]() return a <em>None</em> reference to indicate that the lookup of the mapped entity has failed.
+# Entity3Ds mappings are stored as pairs of references to the mapped Chem.Entity3D objects. Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible. If a mapping entry for a particular entity does not exist, the methods Entity3DMapping.getValue() and Entity3DMapping.__getitem__() return a <em>None</em> reference to indicate that the lookup of the mapped entity has failed.
 # 
 class Entity3DMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Entity3DMapping instance.
+    # \brief Initializes the \c %Entity3DMapping instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Entity3DMapping instance \a mapping.
-    # \param mapping The \e %Entity3DMapping instance to copy.
+    # \brief Initializes a copy of the \c %Entity3DMapping instance \a mapping.
+    # \param mapping The \c %Entity3DMapping instance to copy.
     # 
     def __init__(mapping: Entity3DMapping) -> None: pass
 

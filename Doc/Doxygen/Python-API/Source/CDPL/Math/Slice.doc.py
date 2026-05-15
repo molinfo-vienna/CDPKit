@@ -25,18 +25,18 @@
 class Slice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Slice instance.
+    # \brief Initializes the \c %Slice instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Slice instance \a s.
-    # \param s The \e %Slice instance to copy.
+    # \brief Initializes a copy of the \c %Slice instance \a s.
+    # \param s The \c %Slice instance to copy.
     # 
     def __init__(s: Slice) -> None: pass
 
     ##
-    # \brief Initializes the \e %Slice instance.
+    # \brief Initializes the \c %Slice instance.
     # \param start 
     # \param stride 
     # \param size 

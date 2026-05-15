@@ -25,13 +25,13 @@
 class LVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LVectorQuaternionAdapter instance \a a.
-    # \param a The \e %LVectorQuaternionAdapter instance to copy.
+    # \brief Initializes a copy of the \c %LVectorQuaternionAdapter instance \a a.
+    # \param a The \c %LVectorQuaternionAdapter instance to copy.
     # 
     def __init__(a: LVectorQuaternionAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %LVectorQuaternionAdapter instance.
+    # \brief Initializes the \c %LVectorQuaternionAdapter instance.
     # \param e 
     # 
     def __init__(e: LVectorExpression) -> None: pass
@@ -187,7 +187,7 @@ class LVectorQuaternionAdapter(Boost.Python.instance):
     def __ne__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LVectorQuaternionAdapter instance.
+    # \brief Returns a string representation of the \c %LVectorQuaternionAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

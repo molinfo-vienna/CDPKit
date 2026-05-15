@@ -25,18 +25,18 @@
 class ULRealQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULRealQuaternion instance.
+    # \brief Initializes the \c %ULRealQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ULRealQuaternion instance \a q.
-    # \param q The \e %ULRealQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %ULRealQuaternion instance \a q.
+    # \param q The \c %ULRealQuaternion instance to copy.
     # 
     def __init__(q: ULRealQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULRealQuaternion instance.
+    # \brief Initializes the \c %ULRealQuaternion instance.
     # \param r 
     # 
     def __init__(r: int) -> None: pass
@@ -202,7 +202,7 @@ class ULRealQuaternion(Boost.Python.instance):
     def __ne__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULRealQuaternion instance.
+    # \brief Returns a string representation of the \c %ULRealQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

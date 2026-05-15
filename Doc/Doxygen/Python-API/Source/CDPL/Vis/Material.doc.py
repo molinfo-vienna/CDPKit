@@ -29,8 +29,8 @@
 class Material(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %Material instance \a material.
-    # \param material The \e %Material instance to copy.
+    # \brief Initializes a copy of the \c %Material instance \a material.
+    # \param material The \c %Material instance to copy.
     # 
     def __init__(material: Material) -> None: pass
 
@@ -181,7 +181,7 @@ class Material(Boost.Python.instance):
     def __ne__(material: Material) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Material instance.
+    # \brief Returns a string representation of the \c %Material instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

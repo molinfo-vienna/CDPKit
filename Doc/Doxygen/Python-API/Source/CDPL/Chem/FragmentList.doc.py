@@ -30,8 +30,8 @@ class FragmentList(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FragmentList instance \a list.
-    # \param list The \e %FragmentList instance to copy.
+    # \brief Initializes a copy of the \c %FragmentList instance \a list.
+    # \param list The \c %FragmentList instance to copy.
     # 
     def __init__(list: FragmentList) -> None: pass
 
@@ -196,7 +196,7 @@ class FragmentList(Boost.Python.instance):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

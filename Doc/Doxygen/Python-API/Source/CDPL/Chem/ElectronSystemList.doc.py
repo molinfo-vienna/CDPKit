@@ -25,13 +25,13 @@
 class ElectronSystemList(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ElectronSystemList instance.
+    # \brief Initializes the \c %ElectronSystemList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ElectronSystemList instance \a list.
-    # \param list The \e %ElectronSystemList instance to copy.
+    # \brief Initializes a copy of the \c %ElectronSystemList instance \a list.
+    # \param list The \c %ElectronSystemList instance to copy.
     # 
     def __init__(list: ElectronSystemList) -> None: pass
 

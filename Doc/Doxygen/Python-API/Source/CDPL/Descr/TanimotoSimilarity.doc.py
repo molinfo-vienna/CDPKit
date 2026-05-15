@@ -27,13 +27,13 @@
 class TanimotoSimilarity(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TanimotoSimilarity instance.
+    # \brief Initializes the \c %TanimotoSimilarity instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TanimotoSimilarity instance \a func.
-    # \param func The \e %TanimotoSimilarity instance to copy.
+    # \brief Initializes a copy of the \c %TanimotoSimilarity instance \a func.
+    # \param func The \c %TanimotoSimilarity instance to copy.
     # 
     def __init__(func: TanimotoSimilarity) -> None: pass
 

@@ -25,18 +25,18 @@
 class FIdentityMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FIdentityMatrix instance.
+    # \brief Initializes the \c %FIdentityMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FIdentityMatrix instance \a m.
-    # \param m The \e %FIdentityMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FIdentityMatrix instance \a m.
+    # \param m The \c %FIdentityMatrix instance to copy.
     # 
     def __init__(m: FIdentityMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FIdentityMatrix instance.
+    # \brief Initializes the \c %FIdentityMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class FIdentityMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FIdentityMatrix instance.
+    # \brief Returns a string representation of the \c %FIdentityMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

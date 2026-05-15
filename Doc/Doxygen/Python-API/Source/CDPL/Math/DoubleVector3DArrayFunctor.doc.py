@@ -25,18 +25,18 @@
 class DoubleVector3DArrayFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DoubleVector3DArrayFunctor instance.
+    # \brief Initializes the \c %DoubleVector3DArrayFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DoubleVector3DArrayFunctor instance \a func.
-    # \param func The \e %DoubleVector3DArrayFunctor instance to copy.
+    # \brief Initializes a copy of the \c %DoubleVector3DArrayFunctor instance \a func.
+    # \param func The \c %DoubleVector3DArrayFunctor instance to copy.
     # 
     def __init__(func: DoubleVector3DArrayFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleVector3DArrayFunctor instance.
+    # \brief Initializes the \c %DoubleVector3DArrayFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

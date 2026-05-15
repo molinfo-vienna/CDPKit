@@ -29,13 +29,13 @@
 class BemisMurckoAnalyzer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BemisMurckoAnalyzer instance.
+    # \brief Initializes the \c %BemisMurckoAnalyzer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BemisMurckoAnalyzer instance \a analyzer.
-    # \param analyzer The \e %BemisMurckoAnalyzer instance to copy.
+    # \brief Initializes a copy of the \c %BemisMurckoAnalyzer instance \a analyzer.
+    # \param analyzer The \c %BemisMurckoAnalyzer instance to copy.
     # 
     def __init__(analyzer: BemisMurckoAnalyzer) -> None: pass
 

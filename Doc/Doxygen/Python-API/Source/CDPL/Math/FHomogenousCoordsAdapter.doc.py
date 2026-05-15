@@ -25,13 +25,13 @@
 class FHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FHomogenousCoordsAdapter instance \a a.
-    # \param a The \e %FHomogenousCoordsAdapter instance to copy.
+    # \brief Initializes a copy of the \c %FHomogenousCoordsAdapter instance \a a.
+    # \param a The \c %FHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: FHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %FHomogenousCoordsAdapter instance.
+    # \brief Initializes the \c %FHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: FVectorExpression) -> None: pass
@@ -183,7 +183,7 @@ class FHomogenousCoordsAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %FHomogenousCoordsAdapter instance.
+    # \brief Returns a string representation of the \c %FHomogenousCoordsAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

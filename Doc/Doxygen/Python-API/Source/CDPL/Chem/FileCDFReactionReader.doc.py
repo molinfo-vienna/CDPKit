@@ -25,7 +25,7 @@
 class FileCDFReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %FileCDFReactionReader instance.
+    # \brief Initializes the \c %FileCDFReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

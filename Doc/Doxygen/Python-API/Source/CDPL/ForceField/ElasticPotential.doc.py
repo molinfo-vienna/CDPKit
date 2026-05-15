@@ -25,13 +25,13 @@
 class ElasticPotential(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ElasticPotential instance \a pot.
-    # \param pot The \e %ElasticPotential instance to copy.
+    # \brief Initializes a copy of the \c %ElasticPotential instance \a pot.
+    # \param pot The \c %ElasticPotential instance to copy.
     # 
     def __init__(pot: ElasticPotential) -> None: pass
 
     ##
-    # \brief Initializes the \e %ElasticPotential instance.
+    # \brief Initializes the \c %ElasticPotential instance.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param force_const 

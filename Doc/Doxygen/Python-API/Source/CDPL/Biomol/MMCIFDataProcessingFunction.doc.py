@@ -25,18 +25,18 @@
 class MMCIFDataProcessingFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMCIFDataProcessingFunction instance.
+    # \brief Initializes the \c %MMCIFDataProcessingFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMCIFDataProcessingFunction instance \a func.
-    # \param func The \e %MMCIFDataProcessingFunction instance to copy.
+    # \brief Initializes a copy of the \c %MMCIFDataProcessingFunction instance \a func.
+    # \param func The \c %MMCIFDataProcessingFunction instance to copy.
     # 
     def __init__(func: MMCIFDataProcessingFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMCIFDataProcessingFunction instance.
+    # \brief Initializes the \c %MMCIFDataProcessingFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

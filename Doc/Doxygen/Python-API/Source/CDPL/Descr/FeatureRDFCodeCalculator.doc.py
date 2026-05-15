@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief FeatureRDFCodeCalculator.
+# \brief RDFCodeCalculator implementation for the calculation of feature-centered radial distribution function (RDF) codes of pharmacophores.
+# 
+# <tt>FeatureRDFCodeCalculator</tt> is a specialization of <tt>RDFCodeCalculator</tt> for entities of type Pharm.Feature. The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity-pair weight function as well as any other RDF calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 
@@ -32,15 +34,18 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureRDFCodeCalculator instance \a calc.
-    # \param calc The \e %FeatureRDFCodeCalculator instance to copy.
+    # \brief Initializes a copy of the \c %FeatureRDFCodeCalculator instance \a calc.
+    # \param calc The \c %FeatureRDFCodeCalculator instance to copy.
     # 
     def __init__(calc: FeatureRDFCodeCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    # \param cntnr 
-    # \param rdf_code 
+    # \brief Constructs the <tt>FeatureRDFCodeCalculator</tt> instance and calculates the RDF code of the features provided by <em>cntnr</em>.
+    # 
+    # The calculated RDF code is stored in the vector <em>rdf_code</em>.
+    # 
+    # \param cntnr The container with the features for which to calculate the RDF code.
+    # \param rdf_code The vector where to store the calculated RDF code.
     # 
     def __init__(cntnr: Pharm.FeatureContainer, rdf_code: Math.DVector) -> None: pass
 
@@ -148,10 +153,13 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param rdf_code 
-    #
+    # \brief Calculates the RDF code of the features provided by <em>cntnr</em>.
+    # 
+    # The calculated RDF code is stored in the vector <em>rdf_code</em>.
+    # 
+    # \param cntnr The container with the features for which to calculate the RDF code.
+    # \param rdf_code The vector where to store the calculated RDF code.
+    # 
     def calculate(cntnr: Pharm.FeatureContainer, rdf_code: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

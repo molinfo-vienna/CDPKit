@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MolecularGraph.
+# \brief Abstract base class for representations of a chemical structure as a graph of bonded atoms.
+# 
+# <tt>MolecularGraph</tt> combines the atom-, bond- and property-related interfaces inherited from Chem.AtomContainer, Chem.BondContainer and Base.PropertyContainer. Concrete graph types (e.g. Chem.Molecule, Chem.Fragment) implement the pure virtual clone() method to provide a copy of the graph.
 # 
 class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
 
@@ -75,7 +77,7 @@ class MolecularGraph(AtomContainer, BondContainer, Base.PropertyContainer):
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \e %MolecularGraph instance.
+    # \brief Initializes the \c %MolecularGraph instance.
     # 
     def __init__() -> None: pass
 

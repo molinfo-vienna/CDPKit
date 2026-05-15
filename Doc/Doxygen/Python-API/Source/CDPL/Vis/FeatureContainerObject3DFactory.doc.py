@@ -27,12 +27,12 @@
 class FeatureContainerObject3DFactory(FeatureContainerObject3DFactoryBase):
 
     ##
-    # \brief Initializes the \e %FeatureContainerObject3DFactory instance.
+    # \brief Initializes the \c %FeatureContainerObject3DFactory instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureContainerObject3DFactory instance \a factory.
-    # \param factory The \e %FeatureContainerObject3DFactory instance to copy.
+    # \brief Initializes a copy of the \c %FeatureContainerObject3DFactory instance \a factory.
+    # \param factory The \c %FeatureContainerObject3DFactory instance to copy.
     # 
     def __init__(factory: FeatureContainerObject3DFactory) -> None: pass

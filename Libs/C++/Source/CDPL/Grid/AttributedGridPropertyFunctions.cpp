@@ -68,3 +68,4 @@ using namespace CDPL;
 
 
 MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(NAME, const std::string&, Name)
+MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(COMMENT, const std::string&, Comment)

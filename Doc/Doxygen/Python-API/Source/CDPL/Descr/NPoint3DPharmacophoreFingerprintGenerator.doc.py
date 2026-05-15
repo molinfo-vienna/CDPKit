@@ -32,27 +32,27 @@ class NPoint3DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     DEF_BIN_SIZE = 3.0
 
     ##
-    # \brief Initializes the \e %NPoint3DPharmacophoreFingerprintGenerator instance.
+    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %NPoint3DPharmacophoreFingerprintGenerator instance.
+    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
     # \param molgraph 
     # \param fp 
     # 
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes the \e %NPoint3DPharmacophoreFingerprintGenerator instance.
+    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
     # \param cntnr 
     # \param fp 
     # 
     def __init__(cntnr: Pharm.Pharmacophore, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %NPoint3DPharmacophoreFingerprintGenerator instance \a gen.
-    # \param gen The \e %NPoint3DPharmacophoreFingerprintGenerator instance to copy.
+    # \brief Initializes a copy of the \c %NPoint3DPharmacophoreFingerprintGenerator instance \a gen.
+    # \param gen The \c %NPoint3DPharmacophoreFingerprintGenerator instance to copy.
     # 
     def __init__(gen: NPoint3DPharmacophoreFingerprintGenerator) -> None: pass
 

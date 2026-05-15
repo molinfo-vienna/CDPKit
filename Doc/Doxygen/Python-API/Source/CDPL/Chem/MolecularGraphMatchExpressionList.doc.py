@@ -30,8 +30,8 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MolecularGraphMatchExpressionList instance \a expr.
-    # \param expr The \e %MolecularGraphMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %MolecularGraphMatchExpressionList instance \a expr.
+    # \param expr The \c %MolecularGraphMatchExpressionList instance to copy.
     # 
     def __init__(expr: MolecularGraphMatchExpressionList) -> None: pass
 
@@ -196,7 +196,7 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

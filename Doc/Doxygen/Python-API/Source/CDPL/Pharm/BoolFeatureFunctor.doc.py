@@ -25,18 +25,18 @@
 class BoolFeatureFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolFeatureFunctor instance.
+    # \brief Initializes the \c %BoolFeatureFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolFeatureFunctor instance \a func.
-    # \param func The \e %BoolFeatureFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolFeatureFunctor instance \a func.
+    # \param func The \c %BoolFeatureFunctor instance to copy.
     # 
     def __init__(func: BoolFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolFeatureFunctor instance.
+    # \brief Initializes the \c %BoolFeatureFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

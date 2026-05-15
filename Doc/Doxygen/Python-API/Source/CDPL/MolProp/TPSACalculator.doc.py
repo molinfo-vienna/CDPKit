@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief TPSACalculator.
+# \brief Calculation of the <em>topological</em> <em>polar</em> <em>surface</em> <em>area</em> (TPSA) of molecular graphs based on fragment contributions.
+# 
+# The <em>TPSA</em> is computed from precomputed contributions of polar fragments matched against the molecular graph as described by Ertl, Rohde and Selzer.
 # 
 # \see [\ref TPSA]
 # 
@@ -32,8 +34,8 @@ class TPSACalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TPSACalculator instance \a calc.
-    # \param calc The \e %TPSACalculator instance to copy.
+    # \brief Initializes a copy of the \c %TPSACalculator instance \a calc.
+    # \param calc The \c %TPSACalculator instance to copy.
     # 
     def __init__(calc: TPSACalculator) -> None: pass
 

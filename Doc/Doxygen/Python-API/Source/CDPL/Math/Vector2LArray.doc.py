@@ -30,13 +30,13 @@ class Vector2LArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector2LArray instance \a array.
-    # \param array The \e %Vector2LArray instance to copy.
+    # \brief Initializes a copy of the \c %Vector2LArray instance \a array.
+    # \param array The \c %Vector2LArray instance to copy.
     # 
     def __init__(array: Vector2LArray) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2LArray instance.
+    # \brief Initializes the \c %Vector2LArray instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -209,7 +209,7 @@ class Vector2LArray(Boost.Python.instance):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

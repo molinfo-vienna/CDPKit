@@ -25,7 +25,7 @@
 class FileMOLMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FileMOLMolecularGraphWriter instance.
+    # \brief Initializes the \c %FileMOLMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

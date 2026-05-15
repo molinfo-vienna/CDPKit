@@ -25,14 +25,14 @@
 class ReferenceTverskyComboScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ReferenceTverskyComboScore instance.
+    # \brief Initializes the \c %ReferenceTverskyComboScore instance.
     # \param alpha 
     # 
     def __init__(alpha: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ReferenceTverskyComboScore instance \a score.
-    # \param score The \e %ReferenceTverskyComboScore instance to copy.
+    # \brief Initializes a copy of the \c %ReferenceTverskyComboScore instance \a score.
+    # \param score The \c %ReferenceTverskyComboScore instance to copy.
     # 
     def __init__(score: ReferenceTverskyComboScore) -> None: pass
 

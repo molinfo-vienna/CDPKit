@@ -25,7 +25,7 @@
 class FragmentAssembler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FragmentAssembler instance.
+    # \brief Initializes the \c %FragmentAssembler instance.
     # 
     def __init__() -> None: pass
 

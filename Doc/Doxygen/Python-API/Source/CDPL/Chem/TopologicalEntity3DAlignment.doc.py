@@ -25,13 +25,13 @@
 class TopologicalEntity3DAlignment(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TopologicalEntity3DAlignment instance.
+    # \brief Initializes the \c %TopologicalEntity3DAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TopologicalEntity3DAlignment instance \a alignment.
-    # \param alignment The \e %TopologicalEntity3DAlignment instance to copy.
+    # \brief Initializes a copy of the \c %TopologicalEntity3DAlignment instance \a alignment.
+    # \param alignment The \c %TopologicalEntity3DAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalEntity3DAlignment) -> None: pass
 

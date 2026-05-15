@@ -25,12 +25,12 @@
 class Lower(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Lower instance.
+    # \brief Initializes the \c %Lower instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Lower instance \a t.
-    # \param t The \e %Lower instance to copy.
+    # \brief Initializes a copy of the \c %Lower instance \a t.
+    # \param t The \c %Lower instance to copy.
     # 
     def __init__(t: Lower) -> None: pass

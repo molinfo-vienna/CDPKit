@@ -25,18 +25,18 @@
 class BoolConstMolecularGraphFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolConstMolecularGraphFunctor instance.
+    # \brief Initializes the \c %BoolConstMolecularGraphFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolConstMolecularGraphFunctor instance \a func.
-    # \param func The \e %BoolConstMolecularGraphFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolConstMolecularGraphFunctor instance \a func.
+    # \param func The \c %BoolConstMolecularGraphFunctor instance to copy.
     # 
     def __init__(func: BoolConstMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolConstMolecularGraphFunctor instance.
+    # \brief Initializes the \c %BoolConstMolecularGraphFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

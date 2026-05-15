@@ -25,7 +25,7 @@
 class MMCIFGZMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MMCIFGZMoleculeReader instance.
+    # \brief Initializes the \c %MMCIFGZMoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

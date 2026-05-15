@@ -25,18 +25,18 @@
 class FScalarGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FScalarGrid instance.
+    # \brief Initializes the \c %FScalarGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FScalarGrid instance \a g.
-    # \param g The \e %FScalarGrid instance to copy.
+    # \brief Initializes a copy of the \c %FScalarGrid instance \a g.
+    # \param g The \c %FScalarGrid instance to copy.
     # 
     def __init__(g: FScalarGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalarGrid instance.
+    # \brief Initializes the \c %FScalarGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -194,7 +194,7 @@ class FScalarGrid(Boost.Python.instance):
     def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FScalarGrid instance.
+    # \brief Returns a string representation of the \c %FScalarGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

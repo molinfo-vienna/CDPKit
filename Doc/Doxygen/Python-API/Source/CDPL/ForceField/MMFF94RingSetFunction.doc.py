@@ -25,18 +25,18 @@
 class MMFF94RingSetFunction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94RingSetFunction instance.
+    # \brief Initializes the \c %MMFF94RingSetFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94RingSetFunction instance \a func.
-    # \param func The \e %MMFF94RingSetFunction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94RingSetFunction instance \a func.
+    # \param func The \c %MMFF94RingSetFunction instance to copy.
     # 
     def __init__(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94RingSetFunction instance.
+    # \brief Initializes the \c %MMFF94RingSetFunction instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

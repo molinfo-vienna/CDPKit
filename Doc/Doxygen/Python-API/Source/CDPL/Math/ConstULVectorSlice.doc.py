@@ -25,13 +25,13 @@
 class ConstULVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstULVectorSlice instance \a s.
-    # \param s The \e %ConstULVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c %ConstULVectorSlice instance \a s.
+    # \param s The \c %ConstULVectorSlice instance to copy.
     # 
     def __init__(s: ConstULVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstULVectorSlice instance.
+    # \brief Initializes the \c %ConstULVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -141,7 +141,7 @@ class ConstULVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULVectorSlice instance.
+    # \brief Returns a string representation of the \c %ConstULVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

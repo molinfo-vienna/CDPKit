@@ -25,7 +25,7 @@
 class FileRDFGZReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %FileRDFGZReactionWriter instance.
+    # \brief Initializes the \c %FileRDFGZReactionWriter instance.
     # \param file_name 
     # \param mode 
     # 

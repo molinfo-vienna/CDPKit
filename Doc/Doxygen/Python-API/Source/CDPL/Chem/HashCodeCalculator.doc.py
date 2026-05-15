@@ -32,7 +32,7 @@ class HashCodeCalculator(Boost.Python.instance):
     class DefAtomHashSeedFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %DefAtomHashSeedFunctor instance.
+        # \brief Initializes the \c %DefAtomHashSeedFunctor instance.
         # \param calc 
         # \param flags 
         # 

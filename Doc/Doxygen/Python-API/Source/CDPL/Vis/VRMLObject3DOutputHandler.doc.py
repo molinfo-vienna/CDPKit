@@ -27,6 +27,6 @@
 class VRMLObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief Initializes the \e %VRMLObject3DOutputHandler instance.
+    # \brief Initializes the \c %VRMLObject3DOutputHandler instance.
     # 
     def __init__() -> None: pass

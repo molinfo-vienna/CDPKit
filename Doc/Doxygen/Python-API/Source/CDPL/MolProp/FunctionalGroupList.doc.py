@@ -27,19 +27,19 @@
 class FunctionalGroupList(Chem.FragmentList):
 
     ##
-    # \brief Initializes the \e %FunctionalGroupList instance.
+    # \brief Initializes the \c %FunctionalGroupList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FunctionalGroupList instance.
+    # \brief Initializes the \c %FunctionalGroupList instance.
     # \param molgraph 
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FunctionalGroupList instance \a fg_list.
-    # \param fg_list The \e %FunctionalGroupList instance to copy.
+    # \brief Initializes a copy of the \c %FunctionalGroupList instance \a fg_list.
+    # \param fg_list The \c %FunctionalGroupList instance to copy.
     # 
     def __init__(fg_list: FunctionalGroupList) -> None: pass
 

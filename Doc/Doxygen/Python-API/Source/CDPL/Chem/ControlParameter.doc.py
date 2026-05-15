@@ -29,7 +29,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # A control-parameter value of <em>2</em> specifies 2D-coordinates and a value of <em>3</em> 3D-coordinates. Other values trigger the selection of an implementation defined default dimension.
     # 
-    # <b>Value Type:</b> <tt>std::size_t</tt>
+    # <b>Value Type:</b> <tt>int</tt>
     # 
     COORDINATES_DIMENSION = CDPL.Base.LookupKey('COORDINATES_DIMENSION')
 
@@ -76,7 +76,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Typical separators are, for example, space (" "), tab ("\t") or newline ("\n").
     # 
-    # <b>Value Type:</b> <tt>std::string</tt>
+    # <b>Value Type:</b> <tt>str</tt>
     # 
     RECORD_SEPARATOR = CDPL.Base.LookupKey('RECORD_SEPARATOR')
 
@@ -98,7 +98,7 @@ class ControlParameter(Boost.Python.instance):
     #  - if both the atom and bond count of the molecular graph is less than <em>1000</em>, data will be written in the <em>V2000</em> format
     #  - and in the format <em>V3000</em> otherwise
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # <b>Value Type:</b> <tt>int</tt>
     # 
     MDL_CTAB_VERSION = CDPL.Base.LookupKey('MDL_CTAB_VERSION')
 
@@ -120,7 +120,7 @@ class ControlParameter(Boost.Python.instance):
     #  - if both the reactant and product count of the output reaction is less than <em>1000</em>, data will be written in the <em>V2000</em> format
     #  - and in the format <em>V3000</em> otherwise
     # 
-    # <b>Value Type:</b> <tt>unsigned int</tt>
+    # <b>Value Type:</b> <tt>int</tt>
     # 
     MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey('MDL_RXN_FILE_VERSION')
 
@@ -200,14 +200,14 @@ class ControlParameter(Boost.Python.instance):
     # 
     # The character 'S' denotes the <em>SMILES</em> representation of the molecular graph or reaction, and 'N' the name of the molecular graph/reaction (see Chem.MolecularGraphProperty.NAME and Chem.ReactionProperty.NAME).
     # 
-    # <b>Value Type:</b> <tt>std::string</tt>
+    # <b>Value Type:</b> <tt>str</tt>
     # 
     SMILES_RECORD_FORMAT = CDPL.Base.LookupKey('SMILES_RECORD_FORMAT')
 
     ##
     # \brief Specifies the minimum ring size that is required for the specification of ring double bond geometries in generated <em>SMILES</em> strings [\ref SMILES].
     # 
-    # <b>Value Type:</b> <tt>std::size_t</tt> \see Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO
+    # <b>Value Type:</b> <tt>int</tt> \see Chem.ControlParameter.SMILES_OUTPUT_RING_BOND_STEREO
     # 
     SMILES_MIN_STEREO_BOND_RING_SIZE = CDPL.Base.LookupKey('SMILES_MIN_STEREO_BOND_RING_SIZE')
 
@@ -328,7 +328,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Please refer to the <em>InChI C-API</em> documentation [\ref INCHI] for further information about the syntax and meaning of the available options.
     # 
-    # <b>Value Type:</b> <tt>std::string</tt>
+    # <b>Value Type:</b> <tt>str</tt>
     # 
     INCHI_INPUT_OPTIONS = CDPL.Base.LookupKey('INCHI_INPUT_OPTIONS')
 
@@ -337,7 +337,7 @@ class ControlParameter(Boost.Python.instance):
     # 
     # Please refer to the <em>InChI C-API</em> documentation [\ref INCHI] for further information about the syntax and meaning of the available options.
     # 
-    # <b>Value Type:</b> <tt>std::string</tt>
+    # <b>Value Type:</b> <tt>str</tt>
     # 
     INCHI_OUTPUT_OPTIONS = CDPL.Base.LookupKey('INCHI_OUTPUT_OPTIONS')
 

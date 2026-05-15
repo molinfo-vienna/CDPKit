@@ -31,7 +31,7 @@
 class FeatureContainerWriterBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %FeatureContainerWriterBase instance.
+    # \brief Initializes the \c %FeatureContainerWriterBase instance.
     # 
     def __init__() -> None: pass
 

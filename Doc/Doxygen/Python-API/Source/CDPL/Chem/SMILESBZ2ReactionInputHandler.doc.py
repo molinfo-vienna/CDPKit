@@ -25,6 +25,6 @@
 class SMILESBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %SMILESBZ2ReactionInputHandler instance.
+    # \brief Initializes the \c %SMILESBZ2ReactionInputHandler instance.
     # 
     def __init__() -> None: pass

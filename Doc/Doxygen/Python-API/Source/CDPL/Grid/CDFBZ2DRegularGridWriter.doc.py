@@ -25,7 +25,7 @@
 class CDFBZ2DRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFBZ2DRegularGridWriter instance.
+    # \brief Initializes the \c %CDFBZ2DRegularGridWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

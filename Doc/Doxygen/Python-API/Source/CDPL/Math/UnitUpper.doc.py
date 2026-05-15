@@ -25,12 +25,12 @@
 class UnitUpper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %UnitUpper instance.
+    # \brief Initializes the \c %UnitUpper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %UnitUpper instance \a t.
-    # \param t The \e %UnitUpper instance to copy.
+    # \brief Initializes a copy of the \c %UnitUpper instance \a t.
+    # \param t The \c %UnitUpper instance to copy.
     # 
     def __init__(t: UnitUpper) -> None: pass

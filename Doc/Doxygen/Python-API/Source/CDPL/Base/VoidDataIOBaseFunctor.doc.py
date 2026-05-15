@@ -25,18 +25,18 @@
 class VoidDataIOBaseFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidDataIOBaseFunctor instance.
+    # \brief Initializes the \c %VoidDataIOBaseFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %VoidDataIOBaseFunctor instance \a func.
-    # \param func The \e %VoidDataIOBaseFunctor instance to copy.
+    # \brief Initializes a copy of the \c %VoidDataIOBaseFunctor instance \a func.
+    # \param func The \c %VoidDataIOBaseFunctor instance to copy.
     # 
     def __init__(func: VoidDataIOBaseFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidDataIOBaseFunctor instance.
+    # \brief Initializes the \c %VoidDataIOBaseFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

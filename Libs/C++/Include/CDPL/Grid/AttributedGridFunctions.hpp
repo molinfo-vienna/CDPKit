@@ -49,6 +49,18 @@ namespace CDPL
         CDPL_GRID_API void clearName(AttributedGrid& grid);
 
         CDPL_GRID_API bool hasName(const AttributedGrid& grid);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_GRID_API const std::string& getComment(const AttributedGrid& grid);
+
+        CDPL_GRID_API void setComment(AttributedGrid& grid, const std::string& comment);
+
+        CDPL_GRID_API void clearComment(AttributedGrid& grid);
+
+        CDPL_GRID_API bool hasComment(const AttributedGrid& grid);
+        
     } // namespace Grid
 } // namespace CDPL
 

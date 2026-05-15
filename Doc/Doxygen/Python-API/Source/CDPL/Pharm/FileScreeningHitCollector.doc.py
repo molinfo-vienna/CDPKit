@@ -25,13 +25,13 @@
 class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FileScreeningHitCollector instance \a collector.
-    # \param collector The \e %FileScreeningHitCollector instance to copy.
+    # \brief Initializes a copy of the \c %FileScreeningHitCollector instance \a collector.
+    # \param collector The \c %FileScreeningHitCollector instance to copy.
     # 
     def __init__(collector: FileScreeningHitCollector) -> None: pass
 
     ##
-    # \brief Initializes the \e %FileScreeningHitCollector instance.
+    # \brief Initializes the \c %FileScreeningHitCollector instance.
     # \param writer 
     # 
     def __init__(writer: Chem.MolecularGraphWriterBase) -> None: pass

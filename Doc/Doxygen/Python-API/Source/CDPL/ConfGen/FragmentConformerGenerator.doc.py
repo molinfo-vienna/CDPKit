@@ -25,7 +25,7 @@
 class FragmentConformerGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FragmentConformerGenerator instance.
+    # \brief Initializes the \c %FragmentConformerGenerator instance.
     # 
     def __init__() -> None: pass
 

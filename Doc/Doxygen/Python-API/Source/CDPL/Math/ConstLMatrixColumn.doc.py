@@ -25,13 +25,13 @@
 class ConstLMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstLMatrixColumn instance \a c.
-    # \param c The \e %ConstLMatrixColumn instance to copy.
+    # \brief Initializes a copy of the \c %ConstLMatrixColumn instance \a c.
+    # \param c The \c %ConstLMatrixColumn instance to copy.
     # 
     def __init__(c: ConstLMatrixColumn) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstLMatrixColumn instance.
+    # \brief Initializes the \c %ConstLMatrixColumn instance.
     # \param e 
     # \param i 
     # 
@@ -135,7 +135,7 @@ class ConstLMatrixColumn(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLMatrixColumn instance.
+    # \brief Returns a string representation of the \c %ConstLMatrixColumn instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

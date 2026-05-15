@@ -1,6 +1,11 @@
 master:
 
- - Support for the I/O of Grid::DRegularGrid data in the Gaussian CUBE format
+ - New control-paramter Grid::Controlarameter::CUBE_COMMENT_IS_NAME plus associated function
+ - New property Grid::AttributedGrid::COMMENT plus default value and associated function
+ - Declaration of new type Grid::CUBEDRegularGridOutputHandler mediating the output of Grid::DRegularGrid data in the Gaussian CUBE format
+ - Declaration of new type Grid::CUBEDRegularGridInputHandler mediating the input of Grid::DRegularGrid data in the Gaussian CUBE format
+ - New class Grid::CUBEDRegularGridWriter implementing the output of Grid::DRegularGrid data in the Gaussian CUBE format
+ - New class Grid::CUBEDRegularGridReader implementing the input of Grid::DRegularGrid data in the Gaussian CUBE format
  - New data format descriptor Grid::DataFormat::CUBE
  - Removed the DataMode attribute from class Math::RegularSpatialGrid since it found no use and complicated data processing
  - New pharm. feature functions Pharm::getEnvironmentResidueInfo() and Pharm::getEnvironmentResidueAtomInfo() which

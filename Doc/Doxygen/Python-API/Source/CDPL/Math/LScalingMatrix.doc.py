@@ -25,13 +25,13 @@
 class LScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LScalingMatrix instance \a m.
-    # \param m The \e %LScalingMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LScalingMatrix instance \a m.
+    # \param m The \c %LScalingMatrix instance to copy.
     # 
     def __init__(m: LScalingMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LScalingMatrix instance.
+    # \brief Initializes the \c %LScalingMatrix instance.
     # \param n 
     # \param sx 
     # \param sy 
@@ -154,7 +154,7 @@ class LScalingMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LScalingMatrix instance.
+    # \brief Returns a string representation of the \c %LScalingMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

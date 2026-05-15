@@ -25,7 +25,7 @@
 class FileCUBEDRegularGridReader(DRegularGridReaderBase):
 
     ##
-    # \brief Initializes the \e %FileCUBEDRegularGridReader instance.
+    # \brief Initializes the \c %FileCUBEDRegularGridReader instance.
     # \param file_name 
     # \param mode 
     # 

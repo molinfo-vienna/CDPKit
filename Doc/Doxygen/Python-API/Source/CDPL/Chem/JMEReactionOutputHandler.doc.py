@@ -25,6 +25,6 @@
 class JMEReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %JMEReactionOutputHandler instance.
+    # \brief Initializes the \c %JMEReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

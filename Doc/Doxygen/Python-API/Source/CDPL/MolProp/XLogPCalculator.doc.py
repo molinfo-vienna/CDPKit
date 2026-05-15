@@ -37,8 +37,8 @@ class XLogPCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %XLogPCalculator instance \a calc.
-    # \param calc The \e %XLogPCalculator instance to copy.
+    # \brief Initializes a copy of the \c %XLogPCalculator instance \a calc.
+    # \param calc The \c %XLogPCalculator instance to copy.
     # 
     def __init__(calc: XLogPCalculator) -> None: pass
 

@@ -25,7 +25,7 @@
 class Feature(Chem.Entity3D):
 
     ##
-    # \brief Initializes the \e %Feature instance.
+    # \brief Initializes the \c %Feature instance.
     # 
     def __init__() -> None: pass
 

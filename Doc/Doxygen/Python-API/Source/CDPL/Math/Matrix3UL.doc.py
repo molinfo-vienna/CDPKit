@@ -20,53 +20,53 @@
 #
 
 ##
-# \brief A bounded 3x3 matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief A bounded 3x3 matrix holding integers of type <tt>int</tt>.
 # 
 class Matrix3UL(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param v 
     # 
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Matrix3UL instance \a m.
-    # \param m The \e %Matrix3UL instance to copy.
+    # \brief Initializes a copy of the \c %Matrix3UL instance \a m.
+    # \param m The \c %Matrix3UL instance to copy.
     # 
     def __init__(m: Matrix3UL) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3UL instance.
+    # \brief Initializes the \c %Matrix3UL instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -227,7 +227,7 @@ class Matrix3UL(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Matrix3UL instance.
+    # \brief Returns a string representation of the \c %Matrix3UL instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

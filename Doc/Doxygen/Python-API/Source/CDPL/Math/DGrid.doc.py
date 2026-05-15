@@ -25,18 +25,18 @@
 class DGrid(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DGrid instance \a g.
-    # \param g The \e %DGrid instance to copy.
+    # \brief Initializes a copy of the \c %DGrid instance \a g.
+    # \param g The \c %DGrid instance to copy.
     # 
     def __init__(g: DGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -44,7 +44,7 @@ class DGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # \param m 
     # \param n 
     # \param o 
@@ -53,19 +53,19 @@ class DGrid(Boost.Python.instance):
     def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # \param e 
     # 
     def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # \param e 
     # 
     def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %DGrid instance.
+    # \brief Initializes the \c %DGrid instance.
     # \param e 
     # 
     def __init__(e: object) -> None: pass
@@ -265,7 +265,7 @@ class DGrid(Boost.Python.instance):
     def __ne__(e: ConstDGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DGrid instance.
+    # \brief Returns a string representation of the \c %DGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -104,7 +104,7 @@ class ConstFMatrixExpression(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstFMatrixExpression instance.
+    # \brief Returns a string representation of the \c %ConstFMatrixExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

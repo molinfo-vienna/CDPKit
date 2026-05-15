@@ -25,18 +25,18 @@
 class LScalarVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LScalarVector instance.
+    # \brief Initializes the \c %LScalarVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LScalarVector instance \a v.
-    # \param v The \e %LScalarVector instance to copy.
+    # \brief Initializes a copy of the \c %LScalarVector instance \a v.
+    # \param v The \c %LScalarVector instance to copy.
     # 
     def __init__(v: LScalarVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %LScalarVector instance.
+    # \brief Initializes the \c %LScalarVector instance.
     # \param n 
     # \param v 
     # 
@@ -147,7 +147,7 @@ class LScalarVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LScalarVector instance.
+    # \brief Returns a string representation of the \c %LScalarVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,13 +25,13 @@
 class StringDataBlock(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %StringDataBlock instance.
+    # \brief Initializes the \c %StringDataBlock instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %StringDataBlock instance \a data_block.
-    # \param data_block The \e %StringDataBlock instance to copy.
+    # \brief Initializes a copy of the \c %StringDataBlock instance \a data_block.
+    # \param data_block The \c %StringDataBlock instance to copy.
     # 
     def __init__(data_block: StringDataBlock) -> None: pass
 

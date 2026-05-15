@@ -25,18 +25,18 @@
 class BoolFeature2Matrix4DFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolFeature2Matrix4DFunctor instance.
+    # \brief Initializes the \c %BoolFeature2Matrix4DFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolFeature2Matrix4DFunctor instance \a func.
-    # \param func The \e %BoolFeature2Matrix4DFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolFeature2Matrix4DFunctor instance \a func.
+    # \param func The \c %BoolFeature2Matrix4DFunctor instance to copy.
     # 
     def __init__(func: BoolFeature2Matrix4DFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolFeature2Matrix4DFunctor instance.
+    # \brief Initializes the \c %BoolFeature2Matrix4DFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

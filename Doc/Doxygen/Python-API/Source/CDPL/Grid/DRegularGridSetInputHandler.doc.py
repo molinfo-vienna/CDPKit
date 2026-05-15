@@ -25,7 +25,7 @@
 class DRegularGridSetInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DRegularGridSetInputHandler instance.
+    # \brief Initializes the \c %DRegularGridSetInputHandler instance.
     # 
     def __init__() -> None: pass
 

@@ -32,8 +32,8 @@ class PathPrimitive2D(Path2D, GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PathPrimitive2D instance \a prim.
-    # \param prim The \e %PathPrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c %PathPrimitive2D instance \a prim.
+    # \param prim The \c %PathPrimitive2D instance to copy.
     # 
     def __init__(prim: PathPrimitive2D) -> None: pass
 

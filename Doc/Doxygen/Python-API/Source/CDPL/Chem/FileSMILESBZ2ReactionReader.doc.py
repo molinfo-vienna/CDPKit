@@ -25,7 +25,7 @@
 class FileSMILESBZ2ReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %FileSMILESBZ2ReactionReader instance.
+    # \brief Initializes the \c %FileSMILESBZ2ReactionReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -25,7 +25,7 @@
 class FileMMCIFMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FileMMCIFMoleculeReader instance.
+    # \brief Initializes the \c %FileMMCIFMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -75,7 +75,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \e %Atom instance.
+    # \brief Initializes the \c %Atom instance.
     # 
     def __init__() -> None: pass
 

@@ -25,13 +25,13 @@
 class ANDMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ANDMolecularGraphMatchExpressionList instance.
+    # \brief Initializes the \c %ANDMolecularGraphMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ANDMolecularGraphMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDMolecularGraphMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ANDMolecularGraphMatchExpressionList instance \a expr.
+    # \param expr The \c %ANDMolecularGraphMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDMolecularGraphMatchExpressionList) -> None: pass
 

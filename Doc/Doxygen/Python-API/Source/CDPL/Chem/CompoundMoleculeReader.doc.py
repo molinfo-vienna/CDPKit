@@ -25,7 +25,7 @@
 class CompoundMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %CompoundMoleculeReader instance.
+    # \brief Initializes the \c %CompoundMoleculeReader instance.
     # 
     def __init__() -> None: pass
 

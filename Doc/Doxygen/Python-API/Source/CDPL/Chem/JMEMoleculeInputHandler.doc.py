@@ -25,6 +25,6 @@
 class JMEMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %JMEMoleculeInputHandler instance.
+    # \brief Initializes the \c %JMEMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

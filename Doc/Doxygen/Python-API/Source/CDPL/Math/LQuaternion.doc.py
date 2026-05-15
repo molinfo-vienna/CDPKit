@@ -25,18 +25,18 @@
 class LQuaternion(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LQuaternion instance \a q.
-    # \param q The \e %LQuaternion instance to copy.
+    # \brief Initializes a copy of the \c %LQuaternion instance \a q.
+    # \param q The \c %LQuaternion instance to copy.
     # 
     def __init__(q: LQuaternion) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param c1 
     # \param c2 
     # \param c3 
@@ -45,31 +45,31 @@ class LQuaternion(Boost.Python.instance):
     def __init__(c1: int, c2: int = 0, c3: int = 0, c4: int = 0) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstFQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstDQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param e 
     # 
     def __init__(e: ConstULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LQuaternion instance.
+    # \brief Initializes the \c %LQuaternion instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -226,7 +226,7 @@ class LQuaternion(Boost.Python.instance):
     def __ne__(q: ConstLQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LQuaternion instance.
+    # \brief Returns a string representation of the \c %LQuaternion instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

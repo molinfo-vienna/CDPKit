@@ -37,8 +37,8 @@ class LogSCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LogSCalculator instance \a calc.
-    # \param calc The \e %LogSCalculator instance to copy.
+    # \brief Initializes a copy of the \c %LogSCalculator instance \a calc.
+    # \param calc The \c %LogSCalculator instance to copy.
     # 
     def __init__(calc: LogSCalculator) -> None: pass
 

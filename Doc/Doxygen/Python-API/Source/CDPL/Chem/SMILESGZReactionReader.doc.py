@@ -25,7 +25,7 @@
 class SMILESGZReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %SMILESGZReactionReader instance.
+    # \brief Initializes the \c %SMILESGZReactionReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

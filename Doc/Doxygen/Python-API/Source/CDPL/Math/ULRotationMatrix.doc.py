@@ -25,13 +25,13 @@
 class ULRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULRotationMatrix instance \a m.
-    # \param m The \e %ULRotationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %ULRotationMatrix instance \a m.
+    # \param m The \c %ULRotationMatrix instance to copy.
     # 
     def __init__(m: ULRotationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULRotationMatrix instance.
+    # \brief Initializes the \c %ULRotationMatrix instance.
     # \param n 
     # \param w 
     # \param ux 
@@ -156,7 +156,7 @@ class ULRotationMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULRotationMatrix instance.
+    # \brief Returns a string representation of the \c %ULRotationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

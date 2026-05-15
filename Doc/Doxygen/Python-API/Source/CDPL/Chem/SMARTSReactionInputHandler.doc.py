@@ -25,6 +25,6 @@
 class SMARTSReactionInputHandler(ReactionInputHandler):
 
     ##
-    # \brief Initializes the \e %SMARTSReactionInputHandler instance.
+    # \brief Initializes the \c %SMARTSReactionInputHandler instance.
     # 
     def __init__() -> None: pass

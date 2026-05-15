@@ -45,8 +45,8 @@ class XBondingInteractionScore(FeatureInteractionScore):
     DEF_MAX_ACC_ANGLE = 35.0
 
     ##
-    # \brief Initializes a copy of the \e %XBondingInteractionScore instance \a score.
-    # \param score The \e %XBondingInteractionScore instance to copy.
+    # \brief Initializes a copy of the \c %XBondingInteractionScore instance \a score.
+    # \param score The \c %XBondingInteractionScore instance to copy.
     # 
     def __init__(score: XBondingInteractionScore) -> None: pass
 

@@ -35,19 +35,19 @@ class GaussianShapeFunction(Boost.Python.instance):
     DEF_DISTANCE_CUTOFF = 0.0
 
     ##
-    # \brief Initializes the \e %GaussianShapeFunction instance.
+    # \brief Initializes the \c %GaussianShapeFunction instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShapeFunction instance.
+    # \brief Initializes the \c %GaussianShapeFunction instance.
     # \param shape 
     # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %GaussianShapeFunction instance \a func.
-    # \param func The \e %GaussianShapeFunction instance to copy.
+    # \brief Initializes a copy of the \c %GaussianShapeFunction instance \a func.
+    # \param func The \c %GaussianShapeFunction instance to copy.
     # 
     def __init__(func: GaussianShapeFunction) -> None: pass
 

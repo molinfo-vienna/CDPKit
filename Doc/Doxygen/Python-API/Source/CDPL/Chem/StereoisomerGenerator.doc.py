@@ -80,13 +80,13 @@ class StereoisomerGenerator(Boost.Python.instance):
         size = property(getSize)
 
     ##
-    # \brief Initializes the \e %StereoisomerGenerator instance.
+    # \brief Initializes the \c %StereoisomerGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %StereoisomerGenerator instance \a gen.
-    # \param gen The \e %StereoisomerGenerator instance to copy.
+    # \brief Initializes a copy of the \c %StereoisomerGenerator instance \a gen.
+    # \param gen The \c %StereoisomerGenerator instance to copy.
     # 
     def __init__(gen: StereoisomerGenerator) -> None: pass
 

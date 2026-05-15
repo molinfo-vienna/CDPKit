@@ -27,6 +27,6 @@
 class MMCIFBZ2MoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %MMCIFBZ2MoleculeInputHandler instance.
+    # \brief Initializes the \c %MMCIFBZ2MoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

@@ -30,13 +30,13 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     DEFAULT_ = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %DGStructureGeneratorSettings instance.
+    # \brief Initializes the \c %DGStructureGeneratorSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DGStructureGeneratorSettings instance \a settings.
-    # \param settings The \e %DGStructureGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c %DGStructureGeneratorSettings instance \a settings.
+    # \param settings The \c %DGStructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: DGStructureGeneratorSettings) -> None: pass
 

@@ -25,13 +25,13 @@
 class ULMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULMatrixSlice instance \a s.
-    # \param s The \e %ULMatrixSlice instance to copy.
+    # \brief Initializes a copy of the \c %ULMatrixSlice instance \a s.
+    # \param s The \c %ULMatrixSlice instance to copy.
     # 
     def __init__(s: ULMatrixSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrixSlice instance.
+    # \brief Initializes the \c %ULMatrixSlice instance.
     # \param e 
     # \param s1 
     # \param s2 
@@ -218,7 +218,7 @@ class ULMatrixSlice(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULMatrixSlice instance.
+    # \brief Returns a string representation of the \c %ULMatrixSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -25,13 +25,13 @@
 class LTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %LTranslationMatrix instance \a m.
-    # \param m The \e %LTranslationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LTranslationMatrix instance \a m.
+    # \param m The \c %LTranslationMatrix instance to copy.
     # 
     def __init__(m: LTranslationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LTranslationMatrix instance.
+    # \brief Initializes the \c %LTranslationMatrix instance.
     # \param n 
     # \param tx 
     # \param ty 
@@ -154,7 +154,7 @@ class LTranslationMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LTranslationMatrix instance.
+    # \brief Returns a string representation of the \c %LTranslationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

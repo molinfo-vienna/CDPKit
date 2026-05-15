@@ -25,13 +25,13 @@
 class FRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FRotationMatrix instance \a m.
-    # \param m The \e %FRotationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FRotationMatrix instance \a m.
+    # \param m The \c %FRotationMatrix instance to copy.
     # 
     def __init__(m: FRotationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FRotationMatrix instance.
+    # \brief Initializes the \c %FRotationMatrix instance.
     # \param n 
     # \param w 
     # \param ux 
@@ -156,7 +156,7 @@ class FRotationMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FRotationMatrix instance.
+    # \brief Returns a string representation of the \c %FRotationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

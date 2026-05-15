@@ -57,20 +57,20 @@ class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     DEF_FEATURE_DISTANCE_TYPE = 
 
     ##
-    # \brief Initializes the \e %NPoint2DPharmacophoreFingerprintGenerator instance.
+    # \brief Initializes the \c %NPoint2DPharmacophoreFingerprintGenerator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %NPoint2DPharmacophoreFingerprintGenerator instance.
+    # \brief Initializes the \c %NPoint2DPharmacophoreFingerprintGenerator instance.
     # \param molgraph 
     # \param fp 
     # 
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %NPoint2DPharmacophoreFingerprintGenerator instance \a gen.
-    # \param gen The \e %NPoint2DPharmacophoreFingerprintGenerator instance to copy.
+    # \brief Initializes a copy of the \c %NPoint2DPharmacophoreFingerprintGenerator instance \a gen.
+    # \param gen The \c %NPoint2DPharmacophoreFingerprintGenerator instance to copy.
     # 
     def __init__(gen: NPoint2DPharmacophoreFingerprintGenerator) -> None: pass
 

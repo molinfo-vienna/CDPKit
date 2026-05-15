@@ -25,7 +25,7 @@
 class CMLGZMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %CMLGZMoleculeReader instance.
+    # \brief Initializes the \c %CMLGZMoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

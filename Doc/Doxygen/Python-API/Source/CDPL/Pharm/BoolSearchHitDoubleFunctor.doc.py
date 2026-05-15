@@ -25,18 +25,18 @@
 class BoolSearchHitDoubleFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
+    # \brief Initializes the \c %BoolSearchHitDoubleFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolSearchHitDoubleFunctor instance \a func.
-    # \param func The \e %BoolSearchHitDoubleFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolSearchHitDoubleFunctor instance \a func.
+    # \param func The \c %BoolSearchHitDoubleFunctor instance to copy.
     # 
     def __init__(func: BoolSearchHitDoubleFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
+    # \brief Initializes the \c %BoolSearchHitDoubleFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

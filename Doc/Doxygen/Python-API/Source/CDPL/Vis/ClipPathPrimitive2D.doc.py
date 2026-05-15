@@ -32,8 +32,8 @@ class ClipPathPrimitive2D(Path2D, GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ClipPathPrimitive2D instance \a prim.
-    # \param prim The \e %ClipPathPrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c %ClipPathPrimitive2D instance \a prim.
+    # \param prim The \c %ClipPathPrimitive2D instance to copy.
     # 
     def __init__(prim: ClipPathPrimitive2D) -> None: pass
 

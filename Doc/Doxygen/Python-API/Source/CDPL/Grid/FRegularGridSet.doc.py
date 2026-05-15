@@ -25,13 +25,13 @@
 class FRegularGridSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FRegularGridSet instance.
+    # \brief Initializes the \c %FRegularGridSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FRegularGridSet instance \a set.
-    # \param set The \e %FRegularGridSet instance to copy.
+    # \brief Initializes a copy of the \c %FRegularGridSet instance \a set.
+    # \param set The \c %FRegularGridSet instance to copy.
     # 
     def __init__(set: FRegularGridSet) -> None: pass
 

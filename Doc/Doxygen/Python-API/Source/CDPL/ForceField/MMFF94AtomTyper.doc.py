@@ -25,18 +25,18 @@
 class MMFF94AtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94AtomTyper instance.
+    # \brief Initializes the \c %MMFF94AtomTyper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94AtomTyper instance \a typer.
-    # \param typer The \e %MMFF94AtomTyper instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94AtomTyper instance \a typer.
+    # \param typer The \c %MMFF94AtomTyper instance to copy.
     # 
     def __init__(typer: MMFF94AtomTyper) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AtomTyper instance.
+    # \brief Initializes the \c %MMFF94AtomTyper instance.
     # \param molgraph 
     # \param sym_types 
     # \param num_types 

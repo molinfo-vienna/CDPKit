@@ -25,13 +25,13 @@
 class ULMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULMatrixRange instance \a r.
-    # \param r The \e %ULMatrixRange instance to copy.
+    # \brief Initializes a copy of the \c %ULMatrixRange instance \a r.
+    # \param r The \c %ULMatrixRange instance to copy.
     # 
     def __init__(r: ULMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrixRange instance.
+    # \brief Initializes the \c %ULMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -206,7 +206,7 @@ class ULMatrixRange(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULMatrixRange instance.
+    # \brief Returns a string representation of the \c %ULMatrixRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -81,7 +81,7 @@ class ConstULQuaternionExpression(Boost.Python.instance):
     def __ne__(e: ConstULQuaternionExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULQuaternionExpression instance.
+    # \brief Returns a string representation of the \c %ConstULQuaternionExpression instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

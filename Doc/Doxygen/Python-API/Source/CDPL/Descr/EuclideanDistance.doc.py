@@ -27,13 +27,13 @@
 class EuclideanDistance(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %EuclideanDistance instance.
+    # \brief Initializes the \c %EuclideanDistance instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %EuclideanDistance instance \a func.
-    # \param func The \e %EuclideanDistance instance to copy.
+    # \brief Initializes a copy of the \c %EuclideanDistance instance \a func.
+    # \param func The \c %EuclideanDistance instance to copy.
     # 
     def __init__(func: EuclideanDistance) -> None: pass
 

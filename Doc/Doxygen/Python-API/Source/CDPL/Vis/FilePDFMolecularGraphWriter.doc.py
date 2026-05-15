@@ -25,7 +25,7 @@
 class FilePDFMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %FilePDFMolecularGraphWriter instance.
+    # \brief Initializes the \c %FilePDFMolecularGraphWriter instance.
     # \param file_name 
     # \param mode 
     # 

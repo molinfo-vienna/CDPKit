@@ -25,18 +25,18 @@
 class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94StretchBendInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94StretchBendInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94StretchBendInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94StretchBendInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94StretchBendInteractionParameterizer instance.
     # \param molgraph 
     # \param bs_ia_list 
     # \param ab_ia_list 

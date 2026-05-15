@@ -25,12 +25,12 @@
 class BZip2IOStream(Base.IOStream):
 
     ##
-    # \brief Initializes the \e %BZip2IOStream instance.
+    # \brief Initializes the \c %BZip2IOStream instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BZip2IOStream instance.
+    # \brief Initializes the \c %BZip2IOStream instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

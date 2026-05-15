@@ -25,7 +25,7 @@
 class MOL2GZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %MOL2GZMolecularGraphWriter instance.
+    # \brief Initializes the \c %MOL2GZMolecularGraphWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

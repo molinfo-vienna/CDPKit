@@ -25,7 +25,7 @@
 class CDFBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %CDFBZ2MoleculeReader instance.
+    # \brief Initializes the \c %CDFBZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

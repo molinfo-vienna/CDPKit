@@ -27,7 +27,7 @@
 class Entity3DContainer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Entity3DContainer instance.
+    # \brief Initializes the \c %Entity3DContainer instance.
     # 
     def __init__() -> None: pass
 

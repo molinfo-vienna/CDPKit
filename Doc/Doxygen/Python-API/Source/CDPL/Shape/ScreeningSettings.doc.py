@@ -105,13 +105,13 @@ class ScreeningSettings(Boost.Python.instance):
     NO_CUTOFF = nan
 
     ##
-    # \brief Initializes the \e %ScreeningSettings instance.
+    # \brief Initializes the \c %ScreeningSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ScreeningSettings instance \a settings.
-    # \param settings The \e %ScreeningSettings instance to copy.
+    # \brief Initializes a copy of the \c %ScreeningSettings instance \a settings.
+    # \param settings The \c %ScreeningSettings instance to copy.
     # 
     def __init__(settings: ScreeningSettings) -> None: pass
 

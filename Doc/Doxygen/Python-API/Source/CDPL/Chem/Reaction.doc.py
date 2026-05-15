@@ -56,7 +56,7 @@ class Reaction(Base.PropertyContainer):
         def __getitem__(idx: int) -> Molecule: pass
 
     ##
-    # \brief Initializes the \e %Reaction instance.
+    # \brief Initializes the \c %Reaction instance.
     # 
     def __init__() -> None: pass
 

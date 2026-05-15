@@ -25,18 +25,18 @@
 class BitSetBulkSimilarityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BitSetBulkSimilarityCalculator instance.
+    # \brief Initializes the \c %BitSetBulkSimilarityCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BitSetBulkSimilarityCalculator instance \a calc.
-    # \param calc The \e %BitSetBulkSimilarityCalculator instance to copy.
+    # \brief Initializes a copy of the \c %BitSetBulkSimilarityCalculator instance \a calc.
+    # \param calc The \c %BitSetBulkSimilarityCalculator instance to copy.
     # 
     def __init__(calc: BitSetBulkSimilarityCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %BitSetBulkSimilarityCalculator instance.
+    # \brief Initializes the \c %BitSetBulkSimilarityCalculator instance.
     # \param sim_func 
     # 
     def __init__(sim_func: DoubleBitSet2Functor) -> None: pass

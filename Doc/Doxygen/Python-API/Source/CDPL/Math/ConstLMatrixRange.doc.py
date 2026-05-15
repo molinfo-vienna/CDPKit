@@ -25,13 +25,13 @@
 class ConstLMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstLMatrixRange instance \a r.
-    # \param r The \e %ConstLMatrixRange instance to copy.
+    # \brief Initializes a copy of the \c %ConstLMatrixRange instance \a r.
+    # \param r The \c %ConstLMatrixRange instance to copy.
     # 
     def __init__(r: ConstLMatrixRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstLMatrixRange instance.
+    # \brief Initializes the \c %ConstLMatrixRange instance.
     # \param e 
     # \param r1 
     # \param r2 
@@ -150,7 +150,7 @@ class ConstLMatrixRange(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstLMatrixRange instance.
+    # \brief Returns a string representation of the \c %ConstLMatrixRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -50,8 +50,8 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SurfaceAtomExtractor instance \a extractor.
-    # \param extractor The \e %SurfaceAtomExtractor instance to copy.
+    # \brief Initializes a copy of the \c %SurfaceAtomExtractor instance \a extractor.
+    # \param extractor The \c %SurfaceAtomExtractor instance to copy.
     # 
     def __init__(extractor: SurfaceAtomExtractor) -> None: pass
 
@@ -102,7 +102,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     ##
     # \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
     # 
-    # \param size The distance between the grid-points along each axis.
+    # \param size The distance between the grid-points aint each axis.
     # 
     # \note The default value is specified by the constant SurfaceAtomExtractor.DEF_GRID_STEP_SIZE.
     # 
@@ -144,7 +144,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     ##
     # \brief Return the distance between the grid-points for proximal atom lookup.
     # 
-    # \return The used distance between the grid-points along each axis.
+    # \return The used distance between the grid-points aint each axis.
     # 
     def getGridStepSize() -> float: pass
 

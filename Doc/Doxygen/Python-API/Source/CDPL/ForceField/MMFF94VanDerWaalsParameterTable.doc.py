@@ -30,18 +30,18 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # 
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
+        # \brief Initializes a copy of the \c %Entry instance \a entry.
+        # \param entry The \c %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance.
+        # \brief Initializes the \c %Entry instance.
         # \param atom_type 
         # \param atom_pol 
         # \param eff_el_num 
@@ -137,13 +137,13 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         hDonorAcceptorType = property(getHDonorAcceptorType)
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsParameterTable instance.
+    # \brief Initializes the \c %MMFF94VanDerWaalsParameterTable instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsParameterTable instance \a table.
-    # \param table The \e %MMFF94VanDerWaalsParameterTable instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94VanDerWaalsParameterTable instance \a table.
+    # \param table The \c %MMFF94VanDerWaalsParameterTable instance to copy.
     # 
     def __init__(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 

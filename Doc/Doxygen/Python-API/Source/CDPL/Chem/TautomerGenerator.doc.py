@@ -50,8 +50,8 @@ class TautomerGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TautomerGenerator instance \a gen.
-    # \param gen The \e %TautomerGenerator instance to copy.
+    # \brief Initializes a copy of the \c %TautomerGenerator instance \a gen.
+    # \param gen The \c %TautomerGenerator instance to copy.
     # 
     def __init__(gen: TautomerGenerator) -> None: pass
 

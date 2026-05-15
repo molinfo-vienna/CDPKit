@@ -27,7 +27,7 @@
 class View2D(Base.ControlParameterContainer):
 
     ##
-    # \brief Initializes the \e %View2D instance.
+    # \brief Initializes the \c %View2D instance.
     # 
     def __init__() -> None: pass
 

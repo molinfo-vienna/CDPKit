@@ -25,13 +25,13 @@
 class ConstDVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstDVectorSlice instance \a s.
-    # \param s The \e %ConstDVectorSlice instance to copy.
+    # \brief Initializes a copy of the \c %ConstDVectorSlice instance \a s.
+    # \param s The \c %ConstDVectorSlice instance to copy.
     # 
     def __init__(s: ConstDVectorSlice) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstDVectorSlice instance.
+    # \brief Initializes the \c %ConstDVectorSlice instance.
     # \param e 
     # \param s 
     # 
@@ -141,7 +141,7 @@ class ConstDVectorSlice(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDVectorSlice instance.
+    # \brief Returns a string representation of the \c %ConstDVectorSlice instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

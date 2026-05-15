@@ -25,7 +25,7 @@
 class FileCDFGZFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %FileCDFGZFeatureContainerWriter instance.
+    # \brief Initializes the \c %FileCDFGZFeatureContainerWriter instance.
     # \param file_name 
     # \param mode 
     # 

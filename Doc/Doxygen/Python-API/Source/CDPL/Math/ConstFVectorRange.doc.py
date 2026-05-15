@@ -25,13 +25,13 @@
 class ConstFVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstFVectorRange instance \a r.
-    # \param r The \e %ConstFVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %ConstFVectorRange instance \a r.
+    # \param r The \c %ConstFVectorRange instance to copy.
     # 
     def __init__(r: ConstFVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstFVectorRange instance.
+    # \brief Initializes the \c %ConstFVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -135,7 +135,7 @@ class ConstFVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstFVectorRange instance.
+    # \brief Returns a string representation of the \c %ConstFVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -45,7 +45,7 @@ class BindingAffinityCalculator(Boost.Python.instance):
         PKD_PKI = 2
 
     ##
-    # \brief Initializes the \e %BindingAffinityCalculator instance.
+    # \brief Initializes the \c %BindingAffinityCalculator instance.
     # 
     def __init__() -> None: pass
 

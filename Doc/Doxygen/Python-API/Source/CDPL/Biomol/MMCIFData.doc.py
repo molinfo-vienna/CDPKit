@@ -32,14 +32,14 @@ class MMCIFData(Boost.Python.instance):
     class Item(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Item instance.
+        # \brief Initializes the \c %Item instance.
         # \param name 
         # 
         def __init__(name: str) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Item instance \a item.
-        # \param item The \e %Item instance to copy.
+        # \brief Initializes a copy of the \c %Item instance \a item.
+        # \param item The \c %Item instance to copy.
         # 
         def __init__(item: Item) -> None: pass
 
@@ -150,14 +150,14 @@ class MMCIFData(Boost.Python.instance):
     class Category(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Category instance.
+        # \brief Initializes the \c %Category instance.
         # \param name 
         # 
         def __init__(name: str) -> None: pass
 
         ##
-        # \brief Initializes a copy of the \e %Category instance \a cat.
-        # \param cat The \e %Category instance to copy.
+        # \brief Initializes a copy of the \c %Category instance \a cat.
+        # \param cat The \c %Category instance to copy.
         # 
         def __init__(cat: Category) -> None: pass
 
@@ -299,7 +299,7 @@ class MMCIFData(Boost.Python.instance):
         def __contains__(name: str) -> bool: pass
 
         ##
-        # \brief Returns a string representation of the \e %Category instance.
+        # \brief Returns a string representation of the \c %Category instance.
         # \return The generated string representation.
         # 
         def __str__() -> object: pass
@@ -313,18 +313,18 @@ class MMCIFData(Boost.Python.instance):
         name = property(getName)
 
     ##
-    # \brief Initializes the \e %MMCIFData instance.
+    # \brief Initializes the \c %MMCIFData instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMCIFData instance \a data.
-    # \param data The \e %MMCIFData instance to copy.
+    # \brief Initializes a copy of the \c %MMCIFData instance \a data.
+    # \param data The \c %MMCIFData instance to copy.
     # 
     def __init__(data: MMCIFData) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMCIFData instance.
+    # \brief Initializes the \c %MMCIFData instance.
     # \param id 
     # 
     def __init__(id: str) -> None: pass
@@ -466,7 +466,7 @@ class MMCIFData(Boost.Python.instance):
     def __contains__(name: str) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %MMCIFData instance.
+    # \brief Returns a string representation of the \c %MMCIFData instance.
     # \return The generated string representation.
     # 
     def __str__() -> object: pass

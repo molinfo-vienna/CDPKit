@@ -25,13 +25,13 @@
 class ULMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULMatrixTranspose instance \a mt.
-    # \param mt The \e %ULMatrixTranspose instance to copy.
+    # \brief Initializes a copy of the \c %ULMatrixTranspose instance \a mt.
+    # \param mt The \c %ULMatrixTranspose instance to copy.
     # 
     def __init__(mt: ULMatrixTranspose) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrixTranspose instance.
+    # \brief Initializes the \c %ULMatrixTranspose instance.
     # \param e 
     # 
     def __init__(e: ULMatrixExpression) -> None: pass
@@ -192,7 +192,7 @@ class ULMatrixTranspose(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULMatrixTranspose instance.
+    # \brief Returns a string representation of the \c %ULMatrixTranspose instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

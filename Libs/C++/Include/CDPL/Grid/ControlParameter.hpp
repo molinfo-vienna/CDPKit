@@ -66,6 +66,12 @@ namespace CDPL
              * \since 1.2
              */
             extern CDPL_GRID_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
+
+            /**
+             * \since 1.4
+             */
+            extern CDPL_GRID_API const Base::LookupKey CUBE_COMMENT_IS_NAME;
+            
         } // namespace ControlParameter
     } // namespace Grid
 } // namespace CDPL

@@ -25,18 +25,18 @@
 class BoolSizeTypeFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BoolSizeTypeFunctor instance.
+    # \brief Initializes the \c %BoolSizeTypeFunctor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BoolSizeTypeFunctor instance \a func.
-    # \param func The \e %BoolSizeTypeFunctor instance to copy.
+    # \brief Initializes a copy of the \c %BoolSizeTypeFunctor instance \a func.
+    # \param func The \c %BoolSizeTypeFunctor instance to copy.
     # 
     def __init__(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolSizeTypeFunctor instance.
+    # \brief Initializes the \c %BoolSizeTypeFunctor instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

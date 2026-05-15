@@ -25,7 +25,7 @@
 class FilePDBBZ2MoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FilePDBBZ2MoleculeReader instance.
+    # \brief Initializes the \c %FilePDBBZ2MoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

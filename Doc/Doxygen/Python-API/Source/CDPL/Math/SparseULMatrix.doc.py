@@ -20,54 +20,54 @@
 #
 
 ##
-# \brief An unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
+# \brief An unbounded sparse matrix holding integers of type <tt>int</tt>.
 # 
 class SparseULMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %SparseULMatrix instance \a m.
-    # \param m The \e %SparseULMatrix instance to copy.
+    # \brief Initializes a copy of the \c %SparseULMatrix instance \a m.
+    # \param m The \c %SparseULMatrix instance to copy.
     # 
     def __init__(m: SparseULMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance.
+    # \brief Initializes the \c %SparseULMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -240,7 +240,7 @@ class SparseULMatrix(Boost.Python.instance):
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %SparseULMatrix instance.
+    # \brief Returns a string representation of the \c %SparseULMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

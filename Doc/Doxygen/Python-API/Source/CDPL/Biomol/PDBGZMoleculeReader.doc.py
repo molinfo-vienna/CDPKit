@@ -25,7 +25,7 @@
 class PDBGZMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %PDBGZMoleculeReader instance.
+    # \brief Initializes the \c %PDBGZMoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

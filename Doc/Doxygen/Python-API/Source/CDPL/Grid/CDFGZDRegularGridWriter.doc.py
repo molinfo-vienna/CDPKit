@@ -25,7 +25,7 @@
 class CDFGZDRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFGZDRegularGridWriter instance.
+    # \brief Initializes the \c %CDFGZDRegularGridWriter instance.
     # \param ios 
     # 
     def __init__(ios: Base.IOStream) -> None: pass

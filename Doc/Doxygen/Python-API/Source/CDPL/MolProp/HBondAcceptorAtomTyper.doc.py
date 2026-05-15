@@ -25,18 +25,18 @@
 class HBondAcceptorAtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %HBondAcceptorAtomTyper instance.
+    # \brief Initializes the \c %HBondAcceptorAtomTyper instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %HBondAcceptorAtomTyper instance \a typer.
-    # \param typer The \e %HBondAcceptorAtomTyper instance to copy.
+    # \brief Initializes a copy of the \c %HBondAcceptorAtomTyper instance \a typer.
+    # \param typer The \c %HBondAcceptorAtomTyper instance to copy.
     # 
     def __init__(typer: HBondAcceptorAtomTyper) -> None: pass
 
     ##
-    # \brief Initializes the \e %HBondAcceptorAtomTyper instance.
+    # \brief Initializes the \c %HBondAcceptorAtomTyper instance.
     # \param molgraph 
     # \param types 
     # 

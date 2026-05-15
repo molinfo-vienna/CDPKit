@@ -36,7 +36,8 @@ namespace CDPL
         namespace AttributedGridPropertyDefault
         {
 
-            const std::string NAME = "";
+            const std::string NAME    = "";
+            const std::string COMMENT = "";
         }
 
         void initAttributedGridPropertyDefaults() {}

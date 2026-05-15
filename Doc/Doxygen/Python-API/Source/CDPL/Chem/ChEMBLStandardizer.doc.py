@@ -97,13 +97,13 @@ class ChEMBLStandardizer(Boost.Python.instance):
         DUPLICATE_COMPONENTS_REMOVED = 2048
 
     ##
-    # \brief Initializes the \e %ChEMBLStandardizer instance.
+    # \brief Initializes the \c %ChEMBLStandardizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ChEMBLStandardizer instance \a standardizer.
-    # \param standardizer The \e %ChEMBLStandardizer instance to copy.
+    # \brief Initializes a copy of the \c %ChEMBLStandardizer instance \a standardizer.
+    # \param standardizer The \c %ChEMBLStandardizer instance to copy.
     # 
     def __init__(standardizer: ChEMBLStandardizer) -> None: pass
 

@@ -25,12 +25,12 @@
 class LactamLactimTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %LactamLactimTautomerization instance.
+    # \brief Initializes the \c %LactamLactimTautomerization instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LactamLactimTautomerization instance \a rule.
-    # \param rule The \e %LactamLactimTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %LactamLactimTautomerization instance \a rule.
+    # \param rule The \c %LactamLactimTautomerization instance to copy.
     # 
     def __init__(rule: LactamLactimTautomerization) -> None: pass

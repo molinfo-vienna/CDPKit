@@ -25,18 +25,18 @@
 class DIdentityMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DIdentityMatrix instance.
+    # \brief Initializes the \c %DIdentityMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DIdentityMatrix instance \a m.
-    # \param m The \e %DIdentityMatrix instance to copy.
+    # \brief Initializes a copy of the \c %DIdentityMatrix instance \a m.
+    # \param m The \c %DIdentityMatrix instance to copy.
     # 
     def __init__(m: DIdentityMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %DIdentityMatrix instance.
+    # \brief Initializes the \c %DIdentityMatrix instance.
     # \param m 
     # \param n 
     # 
@@ -156,7 +156,7 @@ class DIdentityMatrix(Boost.Python.instance):
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DIdentityMatrix instance.
+    # \brief Returns a string representation of the \c %DIdentityMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -34,8 +34,8 @@ class Rectangle2D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Rectangle2D instance \a rect.
-    # \param rect The \e %Rectangle2D instance to copy.
+    # \brief Initializes a copy of the \c %Rectangle2D instance \a rect.
+    # \param rect The \c %Rectangle2D instance to copy.
     # 
     def __init__(rect: Rectangle2D) -> None: pass
 
@@ -293,7 +293,7 @@ class Rectangle2D(Boost.Python.instance):
     def translate(vec: Math.Vector2D) -> None: pass
 
     ##
-    # \brief Returns a string representation of the \e %Rectangle2D instance.
+    # \brief Returns a string representation of the \c %Rectangle2D instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

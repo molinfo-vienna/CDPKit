@@ -25,6 +25,6 @@
 class CDFBZ2PharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
-    # \brief Initializes the \e %CDFBZ2PharmacophoreInputHandler instance.
+    # \brief Initializes the \c %CDFBZ2PharmacophoreInputHandler instance.
     # 
     def __init__() -> None: pass

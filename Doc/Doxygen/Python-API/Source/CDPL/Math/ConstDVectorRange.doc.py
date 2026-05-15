@@ -25,13 +25,13 @@
 class ConstDVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstDVectorRange instance \a r.
-    # \param r The \e %ConstDVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %ConstDVectorRange instance \a r.
+    # \param r The \c %ConstDVectorRange instance to copy.
     # 
     def __init__(r: ConstDVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstDVectorRange instance.
+    # \brief Initializes the \c %ConstDVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -135,7 +135,7 @@ class ConstDVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstDVectorRange instance.
+    # \brief Returns a string representation of the \c %ConstDVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of unsigned integers of type <tt>long</tt>.
+# \brief An array of integers of type <tt>int</tt>.
 # 
 class LArray(Boost.Python.instance):
 
@@ -30,8 +30,8 @@ class LArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LArray instance \a array.
-    # \param array The \e %LArray instance to copy.
+    # \brief Initializes a copy of the \c %LArray instance \a array.
+    # \param array The \c %LArray instance to copy.
     # 
     def __init__(array: LArray) -> None: pass
 
@@ -196,7 +196,7 @@ class LArray(Boost.Python.instance):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 
@@ -258,7 +258,7 @@ class LArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param array The \e %LArray instance to be compared with.
+    # \param array The \c %LArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __le__(array: LArray) -> bool: pass
@@ -272,7 +272,7 @@ class LArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param array The \e %LArray instance to be compared with.
+    # \param array The \c %LArray instance to be compared with.
     # \return The result of the comparison operation.
     # 
     def __lt__(array: LArray) -> bool: pass

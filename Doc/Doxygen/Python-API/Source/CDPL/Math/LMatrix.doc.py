@@ -20,30 +20,30 @@
 #
 
 ##
-# \brief An unbounded dense matrix holding signed integers of type <tt>long</tt>.
+# \brief An unbounded dense matrix holding signed integers of type <tt>int</tt>.
 # 
 class LMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LMatrix instance \a m.
-    # \param m The \e %LMatrix instance to copy.
+    # \brief Initializes a copy of the \c %LMatrix instance \a m.
+    # \param m The \c %LMatrix instance to copy.
     # 
     def __init__(m: LMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param m 
     # \param n 
     # 
     def __init__(m: int, n: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param m 
     # \param n 
     # \param v 
@@ -51,31 +51,31 @@ class LMatrix(Boost.Python.instance):
     def __init__(m: int, n: int, v: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance.
+    # \brief Initializes the \c %LMatrix instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -245,7 +245,7 @@ class LMatrix(Boost.Python.instance):
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %LMatrix instance.
+    # \brief Returns a string representation of the \c %LMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

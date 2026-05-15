@@ -25,7 +25,7 @@
 class FileSDFBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FileSDFBZ2MoleculeReader instance.
+    # \brief Initializes the \c %FileSDFBZ2MoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

@@ -27,6 +27,6 @@
 class STLFeatureContainerOutputHandler(Pharm.FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \e %STLFeatureContainerOutputHandler instance.
+    # \brief Initializes the \c %STLFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

@@ -25,13 +25,13 @@
 class DKabschAlgorithm(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DKabschAlgorithm instance.
+    # \brief Initializes the \c %DKabschAlgorithm instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DKabschAlgorithm instance \a algo.
-    # \param algo The \e %DKabschAlgorithm instance to copy.
+    # \brief Initializes a copy of the \c %DKabschAlgorithm instance \a algo.
+    # \param algo The \c %DKabschAlgorithm instance to copy.
     # 
     def __init__(algo: DKabschAlgorithm) -> None: pass
 

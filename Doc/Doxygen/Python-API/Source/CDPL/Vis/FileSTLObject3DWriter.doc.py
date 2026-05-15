@@ -25,7 +25,7 @@
 class FileSTLObject3DWriter(Object3DWriterBase):
 
     ##
-    # \brief Initializes the \e %FileSTLObject3DWriter instance.
+    # \brief Initializes the \c %FileSTLObject3DWriter instance.
     # \param file_name 
     # \param mode 
     # 

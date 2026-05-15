@@ -25,13 +25,13 @@
 class FTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %FTranslationMatrix instance \a m.
-    # \param m The \e %FTranslationMatrix instance to copy.
+    # \brief Initializes a copy of the \c %FTranslationMatrix instance \a m.
+    # \param m The \c %FTranslationMatrix instance to copy.
     # 
     def __init__(m: FTranslationMatrix) -> None: pass
 
     ##
-    # \brief Initializes the \e %FTranslationMatrix instance.
+    # \brief Initializes the \c %FTranslationMatrix instance.
     # \param n 
     # \param tx 
     # \param ty 
@@ -154,7 +154,7 @@ class FTranslationMatrix(Boost.Python.instance):
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %FTranslationMatrix instance.
+    # \brief Returns a string representation of the \c %FTranslationMatrix instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -27,13 +27,13 @@
 class TriangleMesh3D(Shape3D):
 
     ##
-    # \brief Initializes the \e %TriangleMesh3D instance.
+    # \brief Initializes the \c %TriangleMesh3D instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TriangleMesh3D instance \a mesh.
-    # \param mesh The \e %TriangleMesh3D instance to copy.
+    # \brief Initializes a copy of the \c %TriangleMesh3D instance \a mesh.
+    # \param mesh The \c %TriangleMesh3D instance to copy.
     # 
     def __init__(mesh: TriangleMesh3D) -> None: pass
 

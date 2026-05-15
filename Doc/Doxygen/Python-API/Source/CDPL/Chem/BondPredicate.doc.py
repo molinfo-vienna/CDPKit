@@ -25,18 +25,18 @@
 class BondPredicate(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BondPredicate instance.
+    # \brief Initializes the \c %BondPredicate instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %BondPredicate instance \a func.
-    # \param func The \e %BondPredicate instance to copy.
+    # \brief Initializes a copy of the \c %BondPredicate instance \a func.
+    # \param func The \c %BondPredicate instance to copy.
     # 
     def __init__(func: BondPredicate) -> None: pass
 
     ##
-    # \brief Initializes the \e %BondPredicate instance.
+    # \brief Initializes the \c %BondPredicate instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

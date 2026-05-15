@@ -31,7 +31,7 @@
 class ReactionWriterBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %ReactionWriterBase instance.
+    # \brief Initializes the \c %ReactionWriterBase instance.
     # 
     def __init__() -> None: pass
 

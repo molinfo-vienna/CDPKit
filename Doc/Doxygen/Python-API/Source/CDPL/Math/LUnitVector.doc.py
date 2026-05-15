@@ -25,18 +25,18 @@
 class LUnitVector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LUnitVector instance.
+    # \brief Initializes the \c %LUnitVector instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LUnitVector instance \a v.
-    # \param v The \e %LUnitVector instance to copy.
+    # \brief Initializes a copy of the \c %LUnitVector instance \a v.
+    # \param v The \c %LUnitVector instance to copy.
     # 
     def __init__(v: LUnitVector) -> None: pass
 
     ##
-    # \brief Initializes the \e %LUnitVector instance.
+    # \brief Initializes the \c %LUnitVector instance.
     # \param n 
     # \param i 
     # 
@@ -154,7 +154,7 @@ class LUnitVector(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %LUnitVector instance.
+    # \brief Returns a string representation of the \c %LUnitVector instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

@@ -60,6 +60,7 @@ namespace
 
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
     MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CDFOutputSinglePrecisionFloats)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CUBECommentIsName)
 }
 
 
@@ -70,4 +71,5 @@ void CDPLPythonGrid::exportControlParameterFunctions()
 
     EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
     EXPORT_CONTROL_PARAM_FUNCS(CDFOutputSinglePrecisionFloats, single_prec)
+    EXPORT_CONTROL_PARAM_FUNCS(CUBECommentIsName, is_name)
 }

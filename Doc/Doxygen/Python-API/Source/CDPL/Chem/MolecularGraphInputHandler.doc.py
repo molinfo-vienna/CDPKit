@@ -25,7 +25,7 @@
 class MolecularGraphInputHandler(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MolecularGraphInputHandler instance.
+    # \brief Initializes the \c %MolecularGraphInputHandler instance.
     # 
     def __init__() -> None: pass
 

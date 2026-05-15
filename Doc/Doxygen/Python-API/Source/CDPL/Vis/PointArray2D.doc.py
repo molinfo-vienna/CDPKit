@@ -25,13 +25,13 @@
 class PointArray2D(Math.Vector2DArray):
 
     ##
-    # \brief Initializes the \e %PointArray2D instance.
+    # \brief Initializes the \c %PointArray2D instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PointArray2D instance \a array.
-    # \param array The \e %PointArray2D instance to copy.
+    # \brief Initializes a copy of the \c %PointArray2D instance \a array.
+    # \param array The \c %PointArray2D instance to copy.
     # 
     def __init__(array: PointArray2D) -> None: pass
 

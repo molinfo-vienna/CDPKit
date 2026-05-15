@@ -50,18 +50,18 @@ class GaussianShapeAlignment(Boost.Python.instance):
     DEF_RESULT_SELECTION_MODE = 3
 
     ##
-    # \brief Initializes the \e %GaussianShapeAlignment instance.
+    # \brief Initializes the \c %GaussianShapeAlignment instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShapeAlignment instance.
+    # \brief Initializes the \c %GaussianShapeAlignment instance.
     # \param ref_shape 
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShapeAlignment instance.
+    # \brief Initializes the \c %GaussianShapeAlignment instance.
     # \param ref_shapes 
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass

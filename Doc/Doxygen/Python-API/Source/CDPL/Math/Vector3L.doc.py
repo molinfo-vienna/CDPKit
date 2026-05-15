@@ -20,53 +20,53 @@
 #
 
 ##
-# \brief A bounded 3 element vector holding signed integers of type <tt>long</tt>.
+# \brief A bounded 3 element vector holding signed integers of type <tt>int</tt>.
 # 
 class Vector3L(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Vector3L instance \a v.
-    # \param v The \e %Vector3L instance to copy.
+    # \brief Initializes a copy of the \c %Vector3L instance \a v.
+    # \param v The \c %Vector3L instance to copy.
     # 
     def __init__(v: Vector3L) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param v 
     # 
     def __init__(v: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param e 
     # 
     def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param e 
     # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param e 
     # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3L instance.
+    # \brief Initializes the \c %Vector3L instance.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -218,7 +218,7 @@ class Vector3L(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %Vector3L instance.
+    # \brief Returns a string representation of the \c %Vector3L instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

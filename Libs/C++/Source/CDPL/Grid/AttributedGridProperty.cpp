@@ -38,6 +38,7 @@ namespace CDPL
         {
 
             CDPL_DEFINE_LOOKUP_KEY(NAME);
+            CDPL_DEFINE_LOOKUP_KEY(COMMENT);
         }
 
         void initAttributedGridProperties() {}

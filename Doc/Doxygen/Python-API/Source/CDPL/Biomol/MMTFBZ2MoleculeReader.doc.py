@@ -25,7 +25,7 @@
 class MMTFBZ2MoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MMTFBZ2MoleculeReader instance.
+    # \brief Initializes the \c %MMTFBZ2MoleculeReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

@@ -25,13 +25,13 @@
 class ConstULVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ConstULVectorRange instance \a r.
-    # \param r The \e %ConstULVectorRange instance to copy.
+    # \brief Initializes a copy of the \c %ConstULVectorRange instance \a r.
+    # \param r The \c %ConstULVectorRange instance to copy.
     # 
     def __init__(r: ConstULVectorRange) -> None: pass
 
     ##
-    # \brief Initializes the \e %ConstULVectorRange instance.
+    # \brief Initializes the \c %ConstULVectorRange instance.
     # \param e 
     # \param r 
     # 
@@ -135,7 +135,7 @@ class ConstULVectorRange(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ConstULVectorRange instance.
+    # \brief Returns a string representation of the \c %ConstULVectorRange instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

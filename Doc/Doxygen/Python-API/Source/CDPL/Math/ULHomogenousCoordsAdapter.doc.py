@@ -25,13 +25,13 @@
 class ULHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %ULHomogenousCoordsAdapter instance \a a.
-    # \param a The \e %ULHomogenousCoordsAdapter instance to copy.
+    # \brief Initializes a copy of the \c %ULHomogenousCoordsAdapter instance \a a.
+    # \param a The \c %ULHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: ULHomogenousCoordsAdapter) -> None: pass
 
     ##
-    # \brief Initializes the \e %ULHomogenousCoordsAdapter instance.
+    # \brief Initializes the \c %ULHomogenousCoordsAdapter instance.
     # \param e 
     # 
     def __init__(e: ULVectorExpression) -> None: pass
@@ -183,7 +183,7 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     def __len__() -> int: pass
 
     ##
-    # \brief Returns a string representation of the \e %ULHomogenousCoordsAdapter instance.
+    # \brief Returns a string representation of the \c %ULHomogenousCoordsAdapter instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

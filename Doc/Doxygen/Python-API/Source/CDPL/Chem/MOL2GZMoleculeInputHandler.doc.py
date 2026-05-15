@@ -25,6 +25,6 @@
 class MOL2GZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
-    # \brief Initializes the \e %MOL2GZMoleculeInputHandler instance.
+    # \brief Initializes the \c %MOL2GZMoleculeInputHandler instance.
     # 
     def __init__() -> None: pass

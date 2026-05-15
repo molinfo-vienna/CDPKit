@@ -32,8 +32,8 @@ class AtomMatchExpressionList(AtomMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %AtomMatchExpressionList instance \a expr.
-    # \param expr The \e %AtomMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %AtomMatchExpressionList instance \a expr.
+    # \param expr The \c %AtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: AtomMatchExpressionList) -> None: pass
 
@@ -198,7 +198,7 @@ class AtomMatchExpressionList(AtomMatchExpression):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to operator[](std::size_t).
+    # The method is equivalent to __getitem__(int).
     # 
     # \param idx The zero-based index of the element.
     # 

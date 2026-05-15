@@ -27,6 +27,6 @@
 class R3DObject3DOutputHandler(Object3DOutputHandler):
 
     ##
-    # \brief Initializes the \e %R3DObject3DOutputHandler instance.
+    # \brief Initializes the \c %R3DObject3DOutputHandler instance.
     # 
     def __init__() -> None: pass

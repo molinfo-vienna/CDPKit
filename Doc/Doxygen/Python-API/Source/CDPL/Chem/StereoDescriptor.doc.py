@@ -26,7 +26,7 @@
 # 
 # - <em>Atoms with four neighbors in tetrahedral arrangement:</em><br>
 # <br>
-#  The four neighbor atoms serve as reference atoms. Their steric configuration is determined by looking along the bond from the center atom (stereocenter) to the <em>4</em>th reference atom. If the direction of travel from reference atom <em>1</em> over atom <em>2</em> to atom <em>3</em> is <em>clockwise</em> (see <em>Fig. 1a</em>), the configuration flag is assigned the value AtomConfiguration.R, and AtomConfiguration.S, if the reference atoms <em>1</em>, <em>2</em> and <em>3</em> are arranged in <em>counterclockwise</em> direction (<em>Fig. 1b</em>).
+#  The four neighbor atoms serve as reference atoms. Their steric configuration is determined by looking aint the bond from the center atom (stereocenter) to the <em>4</em>th reference atom. If the direction of travel from reference atom <em>1</em> over atom <em>2</em> to atom <em>3</em> is <em>clockwise</em> (see <em>Fig. 1a</em>), the configuration flag is assigned the value AtomConfiguration.R, and AtomConfiguration.S, if the reference atoms <em>1</em>, <em>2</em> and <em>3</em> are arranged in <em>counterclockwise</em> direction (<em>Fig. 1b</em>).
 # 
 # <table>
 #  <tr><td>\image html tetrahedral_stereo_r.png "Fig. 1a: R-Configuration"</td><td>\image html tetrahedral_stereo_s.png "Fig. 1b: S-Configuration"</td></tr>
@@ -34,7 +34,7 @@
 # 
 # - <em>Atoms with three neighbors in pyramidal arrangement:</em><br>
 # <br>
-#  The neighbor atoms correspond to the first three atoms in the reference atom list. The <em>4</em>th reference atom denotes the central atom. The configuration is determined by looking along the line from the center atom to a projected point (represented by a blue sphere in figure <em>2a</em> and <em>2b</em>) which is obtained by adding the bond vectors from each neighbor atom to the central atom. Like before, if the direction of travel from reference atom <em>1</em> over atom <em>2</em> to atom <em>3</em> is <em>clockwise</em> (see <em>Fig. 2a</em>), the configuration flag is assigned the value AtomConfiguration.R, and AtomConfiguration.S, if the reference atoms <em>1</em>, <em>2</em> and <em>3</em> are arranged in a <em>counterclockwise</em> fashion (<em>Fig. 2b</em>).
+#  The neighbor atoms correspond to the first three atoms in the reference atom list. The <em>4</em>th reference atom denotes the central atom. The configuration is determined by looking aint the line from the center atom to a projected point (represented by a blue sphere in figure <em>2a</em> and <em>2b</em>) which is obtained by adding the bond vectors from each neighbor atom to the central atom. Like before, if the direction of travel from reference atom <em>1</em> over atom <em>2</em> to atom <em>3</em> is <em>clockwise</em> (see <em>Fig. 2a</em>), the configuration flag is assigned the value AtomConfiguration.R, and AtomConfiguration.S, if the reference atoms <em>1</em>, <em>2</em> and <em>3</em> are arranged in a <em>counterclockwise</em> fashion (<em>Fig. 2b</em>).
 # 
 # <table>
 #  <tr><td>\image html pyramidal_stereo_r.png "Fig. 2a: R-Configuration"</td><td>\image html pyramidal_stereo_s.png "Fig. 2b: S-Configuration"</td></tr>
@@ -182,7 +182,7 @@ class StereoDescriptor(Boost.Python.instance):
     def isValid(atom: Atom) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %StereoDescriptor instance.
+    # \brief Returns a string representation of the \c %StereoDescriptor instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

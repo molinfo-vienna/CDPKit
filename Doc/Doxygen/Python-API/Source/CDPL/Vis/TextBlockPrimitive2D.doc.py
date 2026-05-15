@@ -32,8 +32,8 @@ class TextBlockPrimitive2D(GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %TextBlockPrimitive2D instance \a prim.
-    # \param prim The \e %TextBlockPrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c %TextBlockPrimitive2D instance \a prim.
+    # \param prim The \c %TextBlockPrimitive2D instance to copy.
     # 
     def __init__(prim: TextBlockPrimitive2D) -> None: pass
 

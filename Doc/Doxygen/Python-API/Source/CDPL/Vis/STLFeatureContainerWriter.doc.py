@@ -27,7 +27,7 @@
 class STLFeatureContainerWriter(Pharm.FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %STLFeatureContainerWriter instance.
+    # \brief Initializes the \c %STLFeatureContainerWriter instance.
     # \param os 
     # 
     def __init__(os: Base.OStream) -> None: pass

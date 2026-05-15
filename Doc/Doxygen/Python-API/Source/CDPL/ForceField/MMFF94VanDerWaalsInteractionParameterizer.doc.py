@@ -25,18 +25,18 @@
 class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94VanDerWaalsInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94VanDerWaalsInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

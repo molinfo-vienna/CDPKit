@@ -32,13 +32,13 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PharmacophoreRDFDescriptorCalculator instance \a calc.
-    # \param calc The \e %PharmacophoreRDFDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c %PharmacophoreRDFDescriptorCalculator instance \a calc.
+    # \param calc The \c %PharmacophoreRDFDescriptorCalculator instance to copy.
     # 
     def __init__(calc: PharmacophoreRDFDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreRDFDescriptorCalculator instance.
+    # \brief Initializes the \c %PharmacophoreRDFDescriptorCalculator instance.
     # \param cntnr 
     # \param descr 
     # 

@@ -25,13 +25,13 @@
 class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
 
     ##
-    # \brief Initializes a copy of the \e %DRegularGrid instance \a grid.
-    # \param grid The \e %DRegularGrid instance to copy.
+    # \brief Initializes a copy of the \c %DRegularGrid instance \a grid.
+    # \param grid The \c %DRegularGrid instance to copy.
     # 
     def __init__(grid: DRegularGrid) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGrid instance.
+    # \brief Initializes the \c %DRegularGrid instance.
     # \param data 
     # \param xs 
     # \param ys 
@@ -40,14 +40,14 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def __init__(data: Math.DGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGrid instance.
+    # \brief Initializes the \c %DRegularGrid instance.
     # \param data 
     # \param s 
     # 
     def __init__(data: Math.DGrid, s: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGrid instance.
+    # \brief Initializes the \c %DRegularGrid instance.
     # \param xs 
     # \param ys 
     # \param zs 
@@ -55,7 +55,7 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %DRegularGrid instance.
+    # \brief Initializes the \c %DRegularGrid instance.
     # \param s 
     # 
     def __init__(s: float) -> None: pass
@@ -285,7 +285,7 @@ class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
     def __ne__(e: Math.ConstDGridExpression) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %DRegularGrid instance.
+    # \brief Returns a string representation of the \c %DRegularGrid instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

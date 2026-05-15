@@ -25,12 +25,12 @@
 class ScreeningProcessor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ScreeningProcessor instance.
+    # \brief Initializes the \c %ScreeningProcessor instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ScreeningProcessor instance.
+    # \brief Initializes the \c %ScreeningProcessor instance.
     # \param query 
     # 
     def __init__(query: Chem.MolecularGraph) -> None: pass

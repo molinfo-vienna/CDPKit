@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief NitroAciTautomerizationRule.
+# \brief Implementation of the nitro  aci-nitro tautomerization rule.
+# 
+# The rule is registered with TautomerizationType.NITRO_ACI and uses PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order transformations required for the interconversion of nitro and aci-nitro tautomers.
 # 
 class NitroAciTautomerization(PatternBasedTautomerizationRule):
 
     ##
-    # \brief Initializes the \e %NitroAciTautomerization instance.
+    # \brief Constructs the <tt>NitroAciTautomerization</tt> instance and registers the SMARTS patterns and bond-order changes of the rule.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %NitroAciTautomerization instance \a rule.
-    # \param rule The \e %NitroAciTautomerization instance to copy.
+    # \brief Initializes a copy of the \c %NitroAciTautomerization instance \a rule.
+    # \param rule The \c %NitroAciTautomerization instance to copy.
     # 
     def __init__(rule: NitroAciTautomerization) -> None: pass

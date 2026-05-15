@@ -28,14 +28,14 @@
 # 
 # Similar to low-level file I/O, data records may either be read in a sequential or in a random access manner. For sequential access the method read(mol: Molecule) is provided which will read the data record at the 'current' record index (similar to a file reference). The current record index is accessible by the method getRecordIndex() and can be modified using the method setRecordIndex() (similar to a seek operation).
 # 
-# For reading data records in a random access manner, the method read(std::size_t idx, mol: Molecule) is available. In contrast to the former read() method, this method expects the index of the record to read as the first argument.
+# For reading data records in a random access manner, the method read(idx: int, mol: Molecule) is available. In contrast to the former read() method, this method expects the index of the record to read as the first argument.
 # 
 # If a read() (or skip()) operation was successful, the current record index is updated to point to the record immediately following the just read (or skipped) data record. If an operation fails, the reader instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>MoleculeReaderBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
 class MoleculeReaderBase(Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %MoleculeReaderBase instance.
+    # \brief Initializes the \c %MoleculeReaderBase instance.
     # 
     def __init__() -> None: pass
 

@@ -27,6 +27,6 @@
 class PLYFeatureContainerOutputHandler(Pharm.FeatureContainerOutputHandler):
 
     ##
-    # \brief Initializes the \e %PLYFeatureContainerOutputHandler instance.
+    # \brief Initializes the \c %PLYFeatureContainerOutputHandler instance.
     # 
     def __init__() -> None: pass

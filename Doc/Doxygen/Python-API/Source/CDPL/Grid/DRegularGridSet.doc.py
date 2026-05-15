@@ -25,13 +25,13 @@
 class DRegularGridSet(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DRegularGridSet instance.
+    # \brief Initializes the \c %DRegularGridSet instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DRegularGridSet instance \a set.
-    # \param set The \e %DRegularGridSet instance to copy.
+    # \brief Initializes a copy of the \c %DRegularGridSet instance \a set.
+    # \param set The \c %DRegularGridSet instance to copy.
     # 
     def __init__(set: DRegularGridSet) -> None: pass
 

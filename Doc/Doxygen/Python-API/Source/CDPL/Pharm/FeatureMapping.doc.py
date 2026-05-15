@@ -22,7 +22,7 @@
 ##
 # \brief A data type for the storage and lookup of arbitrary feature to feature mappings.
 # 
-# Features mappings are stored as pairs of references to the mapped Pharm.Feature objects. Mappings do not have to be unique and multiple mappings of a given feature to other features are possible. If a mapping entry for a particular feature does not exist, the methods FeatureMapping.getValue() and FeatureMapping.operator[]() return a <em>None</em> reference to indicate that the lookup of the mapped feature has failed.
+# Features mappings are stored as pairs of references to the mapped Pharm.Feature objects. Mappings do not have to be unique and multiple mappings of a given feature to other features are possible. If a mapping entry for a particular feature does not exist, the methods FeatureMapping.getValue() and FeatureMapping.__getitem__() return a <em>None</em> reference to indicate that the lookup of the mapped feature has failed.
 # 
 class FeatureMapping(Boost.Python.instance):
 
@@ -32,8 +32,8 @@ class FeatureMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %FeatureMapping instance \a mapping.
-    # \param mapping The \e %FeatureMapping instance to copy.
+    # \brief Initializes a copy of the \c %FeatureMapping instance \a mapping.
+    # \param mapping The \c %FeatureMapping instance to copy.
     # 
     def __init__(mapping: FeatureMapping) -> None: pass
 

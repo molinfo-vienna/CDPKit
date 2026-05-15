@@ -25,6 +25,6 @@
 class RDFGZReactionOutputHandler(ReactionOutputHandler):
 
     ##
-    # \brief Initializes the \e %RDFGZReactionOutputHandler instance.
+    # \brief Initializes the \c %RDFGZReactionOutputHandler instance.
     # 
     def __init__() -> None: pass

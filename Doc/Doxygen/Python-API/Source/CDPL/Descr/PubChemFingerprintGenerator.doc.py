@@ -47,8 +47,8 @@ class PubChemFingerprintGenerator(Boost.Python.instance):
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PubChemFingerprintGenerator instance \a gen.
-    # \param gen The \e %PubChemFingerprintGenerator instance to copy.
+    # \brief Initializes a copy of the \c %PubChemFingerprintGenerator instance \a gen.
+    # \param gen The \c %PubChemFingerprintGenerator instance to copy.
     # 
     def __init__(gen: PubChemFingerprintGenerator) -> None: pass
 

@@ -25,7 +25,7 @@
 class RDFBZ2ReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %RDFBZ2ReactionReader instance.
+    # \brief Initializes the \c %RDFBZ2ReactionReader instance.
     # \param is 
     # 
     def __init__(is: Base.IStream) -> None: pass

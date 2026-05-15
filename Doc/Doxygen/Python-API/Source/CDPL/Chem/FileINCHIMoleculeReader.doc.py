@@ -25,7 +25,7 @@
 class FileINCHIMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FileINCHIMoleculeReader instance.
+    # \brief Initializes the \c %FileINCHIMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

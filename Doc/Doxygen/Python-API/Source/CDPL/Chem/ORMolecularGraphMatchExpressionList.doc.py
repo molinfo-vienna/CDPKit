@@ -25,13 +25,13 @@
 class ORMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ORMolecularGraphMatchExpressionList instance.
+    # \brief Initializes the \c %ORMolecularGraphMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ORMolecularGraphMatchExpressionList instance \a expr.
-    # \param expr The \e %ORMolecularGraphMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ORMolecularGraphMatchExpressionList instance \a expr.
+    # \param expr The \c %ORMolecularGraphMatchExpressionList instance to copy.
     # 
     def __init__(expr: ORMolecularGraphMatchExpressionList) -> None: pass
 

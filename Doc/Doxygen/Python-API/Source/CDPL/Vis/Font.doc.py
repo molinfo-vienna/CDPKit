@@ -32,8 +32,8 @@ class Font(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Font instance \a font.
-    # \param font The \e %Font instance to copy.
+    # \brief Initializes a copy of the \c %Font instance \a font.
+    # \param font The \c %Font instance to copy.
     # 
     def __init__(font: Font) -> None: pass
 
@@ -205,7 +205,7 @@ class Font(Boost.Python.instance):
     def __ne__(font: Font) -> bool: pass
 
     ##
-    # \brief Returns a string representation of the \e %Font instance.
+    # \brief Returns a string representation of the \c %Font instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

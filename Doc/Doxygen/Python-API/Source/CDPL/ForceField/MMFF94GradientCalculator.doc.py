@@ -25,18 +25,18 @@
 class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94GradientCalculator instance.
+    # \brief Initializes the \c %MMFF94GradientCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94GradientCalculator instance \a calc.
-    # \param calc The \e %MMFF94GradientCalculator instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94GradientCalculator instance \a calc.
+    # \param calc The \c %MMFF94GradientCalculator instance to copy.
     # 
     def __init__(calc: MMFF94GradientCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94GradientCalculator instance.
+    # \brief Initializes the \c %MMFF94GradientCalculator instance.
     # \param ia_data 
     # \param num_atoms 
     # 

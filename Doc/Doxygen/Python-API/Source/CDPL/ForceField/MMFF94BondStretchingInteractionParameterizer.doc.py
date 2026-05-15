@@ -25,18 +25,18 @@
 class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondStretchingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94BondStretchingInteractionParameterizer instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94BondStretchingInteractionParameterizer instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
+    # \param parameterizer The \c %MMFF94BondStretchingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondStretchingInteractionParameterizer instance.
+    # \brief Initializes the \c %MMFF94BondStretchingInteractionParameterizer instance.
     # \param molgraph 
     # \param ia_list 
     # \param strict 

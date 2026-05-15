@@ -107,8 +107,8 @@ class Pen(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Pen instance \a pen.
-    # \param pen The \e %Pen instance to copy.
+    # \brief Initializes a copy of the \c %Pen instance \a pen.
+    # \param pen The \c %Pen instance to copy.
     # 
     def __init__(pen: Pen) -> None: pass
 
@@ -224,7 +224,7 @@ class Pen(Boost.Python.instance):
     def setWidth(width: float) -> None: pass
 
     ##
-    # \brief Returns a string representation of the \e %Pen instance.
+    # \brief Returns a string representation of the \c %Pen instance.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

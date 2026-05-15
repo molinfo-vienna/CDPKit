@@ -30,8 +30,8 @@ class XBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %XBondDonorFeatureGenerator instance \a gen.
-    # \param gen The \e %XBondDonorFeatureGenerator instance to copy.
+    # \brief Initializes a copy of the \c %XBondDonorFeatureGenerator instance \a gen.
+    # \param gen The \c %XBondDonorFeatureGenerator instance to copy.
     # 
     def __init__(gen: XBondDonorFeatureGenerator) -> None: pass
 

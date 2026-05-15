@@ -60,13 +60,13 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     LARGE_SET_DENSE = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %ConformerGeneratorSettings instance.
+    # \brief Initializes the \c %ConformerGeneratorSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ConformerGeneratorSettings instance \a settings.
-    # \param settings The \e %ConformerGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c %ConformerGeneratorSettings instance \a settings.
+    # \param settings The \c %ConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: ConformerGeneratorSettings) -> None: pass
 

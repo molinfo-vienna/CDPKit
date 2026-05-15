@@ -25,13 +25,13 @@
 class ORAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
-    # \brief Initializes the \e %ORAtomMatchExpressionList instance.
+    # \brief Initializes the \c %ORAtomMatchExpressionList instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %ORAtomMatchExpressionList instance \a expr.
-    # \param expr The \e %ORAtomMatchExpressionList instance to copy.
+    # \brief Initializes a copy of the \c %ORAtomMatchExpressionList instance \a expr.
+    # \param expr The \c %ORAtomMatchExpressionList instance to copy.
     # 
     def __init__(expr: ORAtomMatchExpressionList) -> None: pass
 

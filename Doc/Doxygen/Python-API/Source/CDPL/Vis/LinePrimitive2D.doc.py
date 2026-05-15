@@ -30,8 +30,8 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %LinePrimitive2D instance \a prim.
-    # \param prim The \e %LinePrimitive2D instance to copy.
+    # \brief Initializes a copy of the \c %LinePrimitive2D instance \a prim.
+    # \param prim The \c %LinePrimitive2D instance to copy.
     # 
     def __init__(prim: LinePrimitive2D) -> None: pass
 

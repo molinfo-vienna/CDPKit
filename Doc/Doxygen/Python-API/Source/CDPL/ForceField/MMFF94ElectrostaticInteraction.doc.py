@@ -25,13 +25,13 @@
 class MMFF94ElectrostaticInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %MMFF94ElectrostaticInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94ElectrostaticInteraction instance to copy.
+    # \brief Initializes a copy of the \c %MMFF94ElectrostaticInteraction instance \a iactn.
+    # \param iactn The \c %MMFF94ElectrostaticInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94ElectrostaticInteraction instance.
+    # \brief Initializes the \c %MMFF94ElectrostaticInteraction instance.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param atom1_chg 

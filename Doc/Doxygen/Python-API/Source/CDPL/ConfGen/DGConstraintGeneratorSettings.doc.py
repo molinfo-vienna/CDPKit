@@ -30,13 +30,13 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief Initializes the \e %DGConstraintGeneratorSettings instance.
+    # \brief Initializes the \c %DGConstraintGeneratorSettings instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %DGConstraintGeneratorSettings instance \a settings.
-    # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
+    # \brief Initializes a copy of the \c %DGConstraintGeneratorSettings instance \a settings.
+    # \param settings The \c %DGConstraintGeneratorSettings instance to copy.
     # 
     def __init__(settings: DGConstraintGeneratorSettings) -> None: pass
 

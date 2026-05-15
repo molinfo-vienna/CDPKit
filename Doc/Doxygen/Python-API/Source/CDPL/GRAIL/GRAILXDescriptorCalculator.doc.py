@@ -927,13 +927,13 @@ class GRAILXDescriptorCalculator(Boost.Python.instance):
     LIGAND_DESCRIPTOR_SIZE = 31
 
     ##
-    # \brief Initializes the \e %GRAILXDescriptorCalculator instance.
+    # \brief Initializes the \c %GRAILXDescriptorCalculator instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %GRAILXDescriptorCalculator instance \a calc.
-    # \param calc The \e %GRAILXDescriptorCalculator instance to copy.
+    # \brief Initializes a copy of the \c %GRAILXDescriptorCalculator instance \a calc.
+    # \param calc The \c %GRAILXDescriptorCalculator instance to copy.
     # 
     def __init__(calc: GRAILXDescriptorCalculator) -> None: pass
 

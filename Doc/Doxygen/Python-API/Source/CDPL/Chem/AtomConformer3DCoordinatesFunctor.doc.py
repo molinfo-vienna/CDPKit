@@ -25,13 +25,13 @@
 class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes a copy of the \e %AtomConformer3DCoordinatesFunctor instance \a func.
-    # \param func The \e %AtomConformer3DCoordinatesFunctor instance to copy.
+    # \brief Initializes a copy of the \c %AtomConformer3DCoordinatesFunctor instance \a func.
+    # \param func The \c %AtomConformer3DCoordinatesFunctor instance to copy.
     # 
     def __init__(func: AtomConformer3DCoordinatesFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomConformer3DCoordinatesFunctor instance.
+    # \brief Initializes the \c %AtomConformer3DCoordinatesFunctor instance.
     # \param conf_idx 
     # 
     def __init__(conf_idx: int) -> None: pass
@@ -62,7 +62,7 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     # 
     # \return The 3D-coordinates of the atom. 
     # 
-    # \see Chem.getConformer3DCoordinates(const Atom&, std::size_t)
+    # \see Chem.getConformer3DCoordinates(const Atom&, int)
     # 
     def __call__(atom: Atom) -> Math.Vector3D: pass
 

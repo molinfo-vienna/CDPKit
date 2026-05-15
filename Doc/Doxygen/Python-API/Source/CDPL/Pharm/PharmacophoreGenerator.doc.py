@@ -30,8 +30,8 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %PharmacophoreGenerator instance \a gen.
-    # \param gen The \e %PharmacophoreGenerator instance to copy.
+    # \brief Initializes a copy of the \c %PharmacophoreGenerator instance \a gen.
+    # \param gen The \c %PharmacophoreGenerator instance to copy.
     # 
     def __init__(gen: PharmacophoreGenerator) -> None: pass
 

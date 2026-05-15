@@ -25,18 +25,18 @@
 class InteractionFilterFunction3(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %InteractionFilterFunction3 instance.
+    # \brief Initializes the \c %InteractionFilterFunction3 instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %InteractionFilterFunction3 instance \a func.
-    # \param func The \e %InteractionFilterFunction3 instance to copy.
+    # \brief Initializes a copy of the \c %InteractionFilterFunction3 instance \a func.
+    # \param func The \c %InteractionFilterFunction3 instance to copy.
     # 
     def __init__(func: InteractionFilterFunction3) -> None: pass
 
     ##
-    # \brief Initializes the \e %InteractionFilterFunction3 instance.
+    # \brief Initializes the \c %InteractionFilterFunction3 instance.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

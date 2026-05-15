@@ -25,7 +25,7 @@
 class FileCFLMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %FileCFLMoleculeReader instance.
+    # \brief Initializes the \c %FileCFLMoleculeReader instance.
     # \param file_name 
     # \param mode 
     # 

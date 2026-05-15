@@ -25,18 +25,18 @@
 class Range(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %Range instance.
+    # \brief Initializes the \c %Range instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \e %Range instance \a r.
-    # \param r The \e %Range instance to copy.
+    # \brief Initializes a copy of the \c %Range instance \a r.
+    # \param r The \c %Range instance to copy.
     # 
     def __init__(r: Range) -> None: pass
 
     ##
-    # \brief Initializes the \e %Range instance.
+    # \brief Initializes the \c %Range instance.
     # \param start 
     # \param stop 
     # 
