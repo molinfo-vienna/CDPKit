@@ -25,46 +25,62 @@
 class DRegularGridSetReader(DRegularGridSetReaderBase):
 
     ##
-    # \brief Initializes the \c %DRegularGridSetReader instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a reader for the file <em>file_name</em> with format detected from its extension.
+    # 
+    # \param file_name The path of the input file.
+    # \param mode The flags specifying the file open mode.
+    # 
+    # \throw Base.IOError if no input handler for the file extension is registered.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetReader instance.
-    # \param file_name 
-    # \param fmt 
-    # \param mode 
+    # \brief Constructs a reader for the file <em>file_name</em> using the format described by <em>fmt</em>.
+    # 
+    # \param file_name The path of the input file.
+    # \param fmt The Base.DataFormat instance describing the format.
+    # \param mode The flags specifying the file open mode.
+    # 
+    # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
     def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetReader instance.
-    # \param file_name 
-    # \param fmt 
-    # \param mode 
+    # \brief Constructs a reader for the file <em>file_name</em> using the format described by <em>fmt</em>.
+    # 
+    # \param file_name The path of the input file.
+    # \param fmt The Base.DataFormat instance describing the format.
+    # \param mode The flags specifying the file open mode.
+    # 
+    # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetReader instance.
-    # \param is 
-    # \param fmt 
+    # \brief Constructs a reader for the input stream <em>is</em> using the format described by <em>fmt</em>.
+    # 
+    # \param is The input stream providing the data.
+    # \param fmt The Base.DataFormat instance describing the format.
+    # 
+    # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
     def __init__(is: Base.IStream, fmt: str) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetReader instance.
-    # \param is 
-    # \param fmt 
+    # \brief Constructs a reader for the input stream <em>is</em> using the format described by <em>fmt</em>.
+    # 
+    # \param is The input stream providing the data.
+    # \param fmt The Base.DataFormat instance describing the format.
+    # 
+    # \throw Base.IOError if no input handler for <em>fmt</em> is registered.
     # 
     def __init__(is: Base.IStream, fmt: Base.DataFormat) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the data format the wrapped reader was instantiated for.
+    # 
+    # \return The data format.
+    # 
     def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

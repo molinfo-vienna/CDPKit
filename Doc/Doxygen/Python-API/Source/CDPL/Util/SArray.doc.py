@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief An array of <tt>str</tt> objects.
+# \brief An array of <tt>std::string</tt> objects.
 # 
 class SArray(Boost.Python.instance):
 
@@ -196,7 +196,7 @@ class SArray(Boost.Python.instance):
     ##
     # \brief Returns a reference to the element at index <em>idx</em>.
     # 
-    # The method is equivalent to __getitem__(int).
+    # The method is equivalent to __getitem__(std::size_t).
     # 
     # \param idx The zero-based index of the element.
     # 

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief RegularGrid.
+# \brief A regular 3D spatial grid storing single-precision floating-point values.
 # 
 class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 
@@ -31,32 +31,36 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __init__(grid: FRegularGrid) -> None: pass
 
     ##
-    # \brief Initializes the \c %FRegularGrid instance.
-    # \param data 
-    # \param xs 
-    # \param ys 
-    # \param zs 
+    # \brief Constructs a <tt>RegularGrid</tt> initialized from <em>data</em>, with the given grid spacing in <em>x</em>, <em>y</em> and <em>z</em> direction.
+    # 
+    # \param data The initial grid data.
+    # \param xs The grid spacing in the <em>x</em> direction.
+    # \param ys The grid spacing in the <em>y</em> direction.
+    # \param zs The grid spacing in the <em>z</em> direction.
     # 
     def __init__(data: Math.FGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %FRegularGrid instance.
-    # \param data 
-    # \param s 
+    # \brief Constructs a <tt>RegularGrid</tt> initialized from <em>data</em> with isotropic grid spacing.
+    # 
+    # \param data The initial grid data.
+    # \param s The isotropic grid spacing applied to all three spatial dimensions.
     # 
     def __init__(data: Math.FGrid, s: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %FRegularGrid instance.
-    # \param xs 
-    # \param ys 
-    # \param zs 
+    # \brief Constructs an empty <tt>RegularGrid</tt> with the given grid spacing in <em>x</em>, <em>y</em> and <em>z</em> direction.
+    # 
+    # \param xs The grid spacing in the <em>x</em> direction.
+    # \param ys The grid spacing in the <em>y</em> direction.
+    # \param zs The grid spacing in the <em>z</em> direction.
     # 
     def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
-    # \brief Initializes the \c %FRegularGrid instance.
-    # \param s 
+    # \brief Constructs an empty <tt>RegularGrid</tt> with isotropic grid spacing.
+    # 
+    # \param s The isotropic grid spacing applied to all three spatial dimensions.
     # 
     def __init__(s: float) -> None: pass
 
@@ -70,10 +74,11 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \param coords 
-    #
+    # \brief Returns the 3D coordinates of the grid element at linear index <em>i</em>.
+    # 
+    # \param i The linear element index.
+    # \param coords The output coordinates.
+    # 
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
@@ -123,9 +128,10 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def getSize3() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the grid is empty.
+    # 
+    # \return <tt>True</tt> if the grid is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
@@ -250,10 +256,12 @@ class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
     def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
-    # \brief 
-    # \param i 
-    # \return 
-    #
+    # \brief Returns a reference to the grid element at linear index <em>i</em>.
+    # 
+    # \param i The linear element index.
+    # 
+    # \return A reference to the grid element.
+    # 
     def __call__(i: int) -> float: pass
 
     ##

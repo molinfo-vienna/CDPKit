@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BasicReaction.
+# \brief Default concrete implementation of the Chem.Reaction abstract interface.
+# 
+# <tt>BasicReaction</tt> stores reaction components as Chem.BasicMolecule instances grouped by reaction role (reactant, agent, product). Components are pooled via a Util.ObjectPool to minimize allocation overhead in batch processing scenarios.
 # 
 class BasicReaction(Reaction):
 
@@ -42,13 +44,11 @@ class BasicReaction(Reaction):
     def __init__(mol: Reaction) -> None: pass
 
     ##
-    # \brief Creates a new reaction component with the specified role.
+    # \brief Adds a new empty component with the specified reaction role.
     # 
-    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param role The reaction role of the new component (see namespace Chem.ReactionRole).
     # 
-    # \return A reference to the newly created component molecule. 
-    # 
-    # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # \return A reference to the newly created component molecule.
     # 
     def addComponent(role: int) -> BasicMolecule: pass
 

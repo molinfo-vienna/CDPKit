@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief XLogPCalculator.
+# \brief Calculation of the octanol/water partition coefficient ( \f$ \log P \f$) of molecular graphs using the atom-additive method of Wang, Gao and Lai.
+# 
+# The model uses 90 atomic feature types plus 11 correction-factor features (101 features in total), combined linearly into a single \f$ \log P \f$ value.
 # 
 # \see [\ref XLOGP]
 # 
@@ -43,7 +45,7 @@ class XLogPCalculator(Boost.Python.instance):
     def __init__(calc: XLogPCalculator) -> None: pass
 
     ##
-    # \brief Constructs the <tt>LogSCalculator</tt> instance and calculates the \f$ \log P \f$ of the molecular graph <em>molgraph</em>.
+    # \brief Constructs the <tt>XLogPCalculator</tt> instance and calculates the \f$ \log P \f$ of the molecular graph <em>molgraph</em>.
     # 
     # The calculated \f$ \log P \f$ can be retrieved by a call to getResult().
     # 

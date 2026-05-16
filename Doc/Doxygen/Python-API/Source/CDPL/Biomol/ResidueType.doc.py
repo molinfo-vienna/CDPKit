@@ -20,161 +20,209 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the type of a chemical component (residue).
+# 
+# Type values follow the categories used by the <em>PDB Chemical Component Dictionary</em> for the classification of polymer residues, small-molecule ligands, and saccharide components.
+# 
 class ResidueType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an unknown residue type.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a residue type not covered by the other constants in this namespace.
+    # 
     OTHER = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a non-polymer chemical component (e.g. small-molecule ligand).
+    # 
     NON_POLYMER = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the C-terminal residue of an L-peptide chain.
+    # 
+    # \since 1.2
+    # 
     L_PEPTIDE_CARBOXY_TERMINUS = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the N-terminal residue of an L-peptide chain.
+    # 
+    # \since 1.2
+    # 
     L_PEPTIDE_AMINO_TERMINUS = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the N-terminal residue of a D-peptide chain.
+    # 
+    # \since 1.2
+    # 
     D_PEPTIDE_AMINO_TERMINUS = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking residue of unspecified chirality.
+    # 
     PEPTIDE_LINKING = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking L-amino acid residue.
+    # 
+    # \since 1.2
+    # 
     L_PEPTIDE_LINKING = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking D-amino acid residue.
+    # 
+    # \since 1.2
+    # 
     D_PEPTIDE_LINKING = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking L--amino acid residue.
+    # 
+    # \since 1.2
+    # 
     L_BETA_PEPTIDE_LINKING = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking D--amino acid residue.
+    # 
+    # \since 1.2
+    # 
     D_BETA_PEPTIDE_LINKING = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking L--amino acid residue.
+    # 
+    # \since 1.2
+    # 
     L_GAMMA_PEPTIDE_LINKING = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-linking D--amino acid residue.
+    # 
+    # \since 1.2
+    # 
     D_GAMMA_PEPTIDE_LINKING = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a peptide-like (non-standard) residue.
+    # 
     PEPTIDE_LIKE = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an RNA residue at the 3'-hydroxy terminus.
+    # 
+    # \since 1.2
+    # 
     RNA_3_HYDROXY_TERMINUS = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an RNA residue at the 5'-hydroxy terminus.
+    # 
+    # \since 1.2
+    # 
     RNA_5_HYDROXY_TERMINUS = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a DNA residue at the 3'-hydroxy terminus.
+    # 
+    # \since 1.2
+    # 
     DNA_3_HYDROXY_TERMINUS = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a DNA residue at the 5'-hydroxy terminus.
+    # 
+    # \since 1.2
+    # 
     DNA_5_HYDROXY_TERMINUS = 17
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an RNA-linking residue.
+    # 
     RNA_LINKING = 18
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a DNA-linking residue.
+    # 
     DNA_LINKING = 19
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-RNA-linking residue.
+    # 
+    # \since 1.2
+    # 
     L_RNA_LINKING = 20
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-DNA-linking residue.
+    # 
+    # \since 1.2
+    # 
     L_DNA_LINKING = 21
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-saccharide with a 1,4-glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     L_SACCHARIDE_1_4_LINKING = 22
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a D-saccharide with a 1,4-glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     D_SACCHARIDE_1_4_LINKING = 23
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-saccharide with an -glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     L_SACCHARIDE_ALPHA_LINKING = 24
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a D-saccharide with an -glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     D_SACCHARIDE_ALPHA_LINKING = 25
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-saccharide with a -glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     L_SACCHARIDE_BETA_LINKING = 26
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a D-saccharide with a -glycosidic linkage.
+    # 
+    # \since 1.2
+    # 
     D_SACCHARIDE_BETA_LINKING = 27
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an L-saccharide residue.
+    # 
+    # \since 1.2
+    # 
     L_SACCHARIDE = 28
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a D-saccharide residue.
+    # 
+    # \since 1.2
+    # 
     D_SACCHARIDE = 29
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a saccharide residue of unspecified chirality.
+    # 
     SACCHARIDE = 30

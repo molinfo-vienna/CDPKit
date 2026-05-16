@@ -25,8 +25,8 @@
 class PDBData(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Identifies a PDB record type. Values correspond to the record tags defined by the <em>PDB File Format Description Version 3.30</em>, plus three derived synthetic records (<tt>STRUCTURE_ID</tt>, <tt>DEPOSITION_DATE</tt>, <tt>RESOLUTION</tt>).
+    # 
     class RecordType(Boost.Python.enum):
 
         ##
@@ -250,7 +250,7 @@ class PDBData(Boost.Python.instance):
         RESOLUTION = 43
 
     ##
-    # \brief Initializes the \c %PDBData instance.
+    # \brief Constructs an empty <tt>PDBData</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -273,20 +273,22 @@ class PDBData(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored records.
+    # 
+    # \return The number of records.
+    # 
     def getNumRecords() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether no records are stored.
+    # 
+    # \return <tt>True</tt> if no records are stored, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all stored records.
+    # 
     def clear() -> None: pass
 
     ##
@@ -297,31 +299,42 @@ class PDBData(Boost.Python.instance):
     def assign(data: PDBData) -> PDBData: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether a record of the given type is stored.
+    # 
+    # \param type The queried record type.
+    # 
+    # \return <tt>True</tt> if a record of the given type is stored, and <tt>False</tt> otherwise.
+    # 
     def containsRecord(type: RecordType) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the data string associated with the given record type.
+    # 
+    # \param type The record type whose data is requested.
+    # 
+    # \return A reference to the data string. 
+    # 
+    # \throw Base.ItemNotFound if no record of the given type is stored.
+    # 
     def getData(type: RecordType) -> str: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Removes the record of the given type.
+    # 
+    # \param type The type of the record to remove.
+    # 
+    # \return <tt>True</tt> if the record was removed, and <tt>False</tt> if no matching record existed.
+    # 
     def removeRecord(type: RecordType) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param data 
-    #
+    # \brief Stores a record built from <em>type</em> and <em>data</em>. Any pre-existing record of the same type is replaced.
+    # 
+    # \param type The record type.
+    # \param data The record data string.
+    # 
+    # \return An iterator referencing the stored record.
+    # 
     def setRecord(type: RecordType, data: str) -> None: pass
 
     ##

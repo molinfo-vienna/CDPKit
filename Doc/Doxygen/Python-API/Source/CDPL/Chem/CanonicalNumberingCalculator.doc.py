@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief CanonicalNumberingCalculator.
+# \brief Calculation of canonical atom numberings for molecular graphs using McKay's algorithm for practical graph isomorphism.
+# 
+# The set of atom and bond properties used to break ties during numbering can be configured via setAtomPropertyFlags() and setBondPropertyFlags(); a custom hydrogen-count function used for label generation can be installed via setHydrogenCountFunction().
 # 
 # \see [\ref MCKAY]
 # 
@@ -111,15 +113,17 @@ class CanonicalNumberingCalculator(Boost.Python.instance):
     def getBondPropertyFlags() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for the retrieval of the hydrogen count of an atom.
+    # 
+    # \param func The hydrogen count function.
+    # 
     def setHydrogenCountFunction(func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of the hydrogen count of an atom.
+    # 
+    # \return The currently configured hydrogen count function.
+    # 
     def getHydrogenCountFunction() -> SizeTypeAtomMolecularGraphFunctor: pass
 
     ##

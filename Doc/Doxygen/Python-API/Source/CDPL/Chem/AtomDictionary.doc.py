@@ -25,12 +25,12 @@
 class AtomDictionary(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single dictionary entry describing the properties of an (atom type, isotope) pair.
+    # 
     class Entry(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \c %Entry instance.
+        # \brief Constructs an empty entry.
         # 
         def __init__() -> None: pass
 
@@ -80,94 +80,110 @@ class AtomDictionary(Boost.Python.instance):
         def assign(entry: Entry) -> Entry: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atom type of the entry.
+        # 
+        # \return The atom type.
+        # 
         def getType() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the mass number of the isotope of the entry.
+        # 
+        # \return The isotope mass number (<em>0</em> if not specified).
+        # 
         def getIsotope() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the element name of the entry.
+        # 
+        # \return The element name.
+        # 
         def getName() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the element symbol of the entry.
+        # 
+        # \return The element symbol.
+        # 
         def getSymbol() -> str: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the mass number of the most abundant isotope of the element.
+        # 
+        # \return The most abundant isotope mass number.
+        # 
         def getMostAbundantIsotope() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the standard (average) atomic weight of the element.
+        # 
+        # \return The standard atomic weight.
+        # 
         def getAverageWeight() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the IUPAC group number of the element.
+        # 
+        # \return The IUPAC group number.
+        # 
         def getIUPACGroup() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the period of the element.
+        # 
+        # \return The period.
+        # 
         def getPeriod() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the element is a metal.
+        # 
+        # \return <tt>True</tt> if the element is a metal, and <tt>False</tt> otherwise.
+        # 
         def isMetal() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Tells whether the element is a non-metal.
+        # 
+        # \return <tt>True</tt> if the element is a non-metal, and <tt>False</tt> otherwise.
+        # 
         def isNonMetal() -> bool: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the valence states of the element.
+        # 
+        # \return An array containing the valence states.
+        # 
         def getValenceStates() -> Util.STArray: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the van der Waals radius of the element.
+        # 
+        # \return The van der Waals radius.
+        # 
         def getVdWRadius() -> float: pass
 
         ##
-        # \brief 
-        # \param order 
-        # \return 
-        #
+        # \brief Returns the covalent radius of the element for the given bond order.
+        # 
+        # \param order The bond order (<em>1</em>, <em>2</em> or <em>3</em>).
+        # 
+        # \return The covalent radius for the specified bond order.
+        # 
         def getCovalentRadius(order: int) -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the Allred-Rochow electronegativity of the element.
+        # 
+        # \return The Allred-Rochow electronegativity.
+        # 
         def getAllredRochowElectronegativity() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the map from isotope mass number to its relative isotopic mass for the element.
+        # 
+        # \return The isotope-mass map.
+        # 
         def getIsotopeMasses() -> dict: pass
 
         objectID = property(getObjectID)
@@ -224,43 +240,50 @@ class AtomDictionary(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param entry 
-    #
+    # \brief Adds the given entry to the dictionary. Any pre-existing entry for the same (type, isotope) is replaced.
+    # 
+    # \param entry The entry to add.
+    # 
     def addEntry(entry: Entry) -> None: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    # \return 
-    #
+    # \brief Tells whether the dictionary contains an entry for the given (type, isotope) pair.
+    # 
+    # \param type The atom type.
+    # \param isotope The isotope mass number.
+    # 
+    # \return <tt>True</tt> if the entry exists, and <tt>False</tt> otherwise.
+    # 
     def containsEntry(type: int, isotope: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    #
+    # \brief Removes the entry for the given (type, isotope) pair, if present.
+    # 
+    # \param type The atom type.
+    # \param isotope The isotope mass number.
+    # 
     def removeEntry(type: int, isotope: int) -> None: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    # \return 
-    #
+    # \brief Returns the entry for the given (type, isotope) pair.
+    # 
+    # \param type The atom type.
+    # \param isotope The isotope mass number.
+    # 
+    # \return A reference to the matching entry, or to an empty entry if no matching entry exists.
+    # 
     def getEntry(type: int, isotope: int) -> Entry: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the dictionary.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries stored in the dictionary.
+    # 
+    # \return The number of entries.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -270,8 +293,8 @@ class AtomDictionary(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the default atom dictionary bundled with CDPKit.
+    # 
     def loadDefaults() -> None: pass
 
     ##
@@ -282,17 +305,18 @@ class AtomDictionary(Boost.Python.instance):
     def assign(dict: AtomDictionary) -> AtomDictionary: pass
 
     ##
-    # \brief 
-    # \param dict 
-    #
+    # \brief Sets the process-wide default atom dictionary used by the static accessor methods.
+    # 
+    # \param dict The new default atom dictionary.
+    # 
     @staticmethod
     def set(dict: AtomDictionary) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default atom dictionary.
+    # 
+    # \return The current default atom dictionary.
+    # 
     @staticmethod
     def get(: ) -> AtomDictionary: pass
 

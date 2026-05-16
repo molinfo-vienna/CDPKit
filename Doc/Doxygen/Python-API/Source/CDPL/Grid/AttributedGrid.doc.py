@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AttributedGrid.
+# \brief Abstract base class for grid types that also carry generic key/value properties.
+# 
+# <tt>AttributedGrid</tt> combines the property-bag interface from Base.PropertyContainer with the minimal grid interface required to know the number of grid elements and whether the grid is empty. Concrete grid types (e.g. Grid.RegularGrid) implement the pure virtual member functions.
 # 
 class AttributedGrid(Base.PropertyContainer):
 
@@ -30,15 +32,17 @@ class AttributedGrid(Base.PropertyContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the grid is empty.
+    # 
+    # \return <tt>True</tt> if the grid is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of grid elements.
+    # 
+    # \return The number of grid elements.
+    # 
     def getNumElements() -> int: pass
 
     ##

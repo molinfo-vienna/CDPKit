@@ -22,11 +22,6 @@ true % True
 false % False
 <em>null</em> % <em>None</em>
 A reference to itself. % \a self
-std::size_t % int
-unsigned int % int
-unsigned long % int
-long % int
-std::string % str
 int idx % idx: int
 
 #

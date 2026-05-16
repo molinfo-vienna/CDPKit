@@ -25,7 +25,7 @@
 class LayoutStyle(Boost.Python.instance):
 
     ##
-    # \brief Specifies that the objects have to be arranged aint a line.
+    # \brief Specifies that the objects have to be arranged along a line.
     # 
     LINEAR = 1
 

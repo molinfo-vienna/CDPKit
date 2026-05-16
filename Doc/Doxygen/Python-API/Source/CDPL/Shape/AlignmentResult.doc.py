@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Result of a Gaussian-shape alignment between a reference and an aligned shape.
+# 
+# Bundles the rigid-body transformation that brings the aligned shape onto the reference shape together with the resulting overlap-based score values, source/destination shape indices, and the self-overlap values used for normalization.
+# 
 class AlignmentResult(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %AlignmentResult instance.
+    # \brief Constructs the <tt>AlignmentResult</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -55,135 +57,157 @@ class AlignmentResult(Boost.Python.instance):
     def assign(res: AlignmentResult) -> AlignmentResult: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the rigid-body transformation matrix that maps the aligned shape onto the reference shape.
+    # 
+    # \return The transformation matrix.
+    # 
     def getTransform() -> Math.Matrix4D: pass
 
     ##
-    # \brief 
-    # \param xform 
-    #
+    # \brief Sets the rigid-body transformation matrix.
+    # 
+    # \param xform The transformation matrix.
+    # 
     def setTransform(xform: Math.Matrix4D) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the score of the alignment.
+    # 
+    # \return The alignment score.
+    # 
     def getScore() -> float: pass
 
     ##
-    # \brief 
-    # \param score 
-    #
+    # \brief Sets the score of the alignment.
+    # 
+    # \param score The alignment score.
+    # 
     def setScore(score: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the reference shape set the aligned shape was matched against.
+    # 
+    # \return The reference shape set index.
+    # 
     def getReferenceShapeSetIndex() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Sets the index of the reference shape set.
+    # 
+    # \param idx The reference shape set index.
+    # 
     def setReferenceShapeSetIndex(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the reference shape within its shape set.
+    # 
+    # \return The reference shape index.
+    # 
     def getReferenceShapeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Sets the index of the reference shape within its shape set.
+    # 
+    # \param idx The reference shape index.
+    # 
     def setReferenceShapeIndex(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the aligned shape.
+    # 
+    # \return The aligned shape index.
+    # 
     def getAlignedShapeIndex() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Sets the index of the aligned shape.
+    # 
+    # \param idx The aligned shape index.
+    # 
     def setAlignedShapeIndex(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the calculated overlap between the reference and the aligned shape (shape-only contribution).
+    # 
+    # \return The shape overlap value.
+    # 
     def getOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the overlap between the reference and the aligned shape (shape-only contribution).
+    # 
+    # \param overlap The shape overlap value.
+    # 
     def setOverlap(overlap: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the calculated overlap between the reference and the aligned shape (color/pharmacophore contribution).
+    # 
+    # \return The color overlap value.
+    # 
     def getColorOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the overlap between the reference and the aligned shape (color/pharmacophore contribution).
+    # 
+    # \param overlap The color overlap value.
+    # 
     def setColorOverlap(overlap: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the self-overlap of the reference shape (shape-only contribution).
+    # 
+    # \return The reference shape self-overlap value.
+    # 
     def getReferenceSelfOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the self-overlap of the reference shape (shape-only contribution).
+    # 
+    # \param overlap The reference shape self-overlap value.
+    # 
     def setReferenceSelfOverlap(overlap: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the self-overlap of the reference shape (color/pharmacophore contribution).
+    # 
+    # \return The reference shape color self-overlap value.
+    # 
     def getReferenceColorSelfOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the self-overlap of the reference shape (color/pharmacophore contribution).
+    # 
+    # \param overlap The reference shape color self-overlap value.
+    # 
     def setReferenceColorSelfOverlap(overlap: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the self-overlap of the aligned shape (shape-only contribution).
+    # 
+    # \return The aligned shape self-overlap value.
+    # 
     def getAlignedSelfOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the self-overlap of the aligned shape (shape-only contribution).
+    # 
+    # \param overlap The aligned shape self-overlap value.
+    # 
     def setAlignedSelfOverlap(overlap: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the self-overlap of the aligned shape (color/pharmacophore contribution).
+    # 
+    # \return The aligned shape color self-overlap value.
+    # 
     def getAlignedColorSelfOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param overlap 
-    #
+    # \brief Sets the self-overlap of the aligned shape (color/pharmacophore contribution).
+    # 
+    # \param overlap The aligned shape color self-overlap value.
+    # 
     def setAlignedColorSelfOverlap(overlap: float) -> None: pass
 
     objectID = property(getObjectID)

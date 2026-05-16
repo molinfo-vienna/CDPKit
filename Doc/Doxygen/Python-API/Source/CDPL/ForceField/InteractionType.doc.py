@@ -25,46 +25,46 @@
 class InteractionType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies no interaction.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a bond stretching interaction.
+    # 
     BOND_STRETCHING = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an angle bending interaction.
+    # 
     ANGLE_BENDING = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a stretch-bend coupling interaction.
+    # 
     STRETCH_BEND = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an out-of-plane bending interaction.
+    # 
     OUT_OF_PLANE_BENDING = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a torsion interaction.
+    # 
     TORSION = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a van der Waals interaction.
+    # 
     VAN_DER_WAALS = 32
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an electrostatic interaction.
+    # 
     ELECTROSTATIC = 64
 
     ##
-    # \brief 
-    #
+    # \brief A bitmask covering all interaction types.
+    # 
     ALL = 127

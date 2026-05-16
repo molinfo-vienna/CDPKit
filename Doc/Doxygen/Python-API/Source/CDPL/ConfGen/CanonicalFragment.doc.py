@@ -20,13 +20,17 @@
 #
 
 ##
-# \brief CanonicalFragment.
+# \brief A canonicalized molecular fragment with an associated hash code, used as the key for fragment-library lookup in conformer generation.
+# 
+# A <tt>CanonicalFragment</tt> is constructed from a fragment of a parent molecular graph and stores a canonicalized copy of the fragment's atoms and bonds. Canonicalization yields a stable atom ordering and an associated hash code that uniquely identifies the topology (and, optionally, the stereochemistry) of the fragment.
+# 
+# \see ConfGen.FragmentLibrary
 # 
 class CanonicalFragment(Chem.MolecularGraph):
 
     ##
-    # \brief 
-    #
+    # \brief Maps each atom of the fragment (in canonical order) to the corresponding atom of the parent molecular graph.
+    # 
     class AtomMapping(Boost.Python.instance):
 
         ##
@@ -48,16 +52,17 @@ class CanonicalFragment(Chem.MolecularGraph):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs a <tt>CanonicalFragment</tt> instance that contains the relevant atoms and bonds of the molecular graph <em>molgraph</em>.
+    # \brief Constructs a <tt>CanonicalFragment</tt> instance from the fragment <em>molgraph</em> of the parent molecular graph <em>parent</em>.
     # 
-    # \param molgraph The molecular graph for which to generate the fragments.
-    # \param parent The parent molecular graph the fragment is coming from.
+    # \param molgraph The molecular graph defining the fragment to canonicalize.
+    # \param parent The parent molecular graph the fragment was derived from.
     # 
     def __init__(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %CanonicalFragment instance \a frag.
-    # \param frag The \c %CanonicalFragment instance to copy.
+    # \brief Constructs a copy of the <tt>CanonicalFragment</tt> instance <em>frag</em>.
+    # 
+    # \param frag The <tt>CanonicalFragment</tt> to copy.
     # 
     def __init__(frag: CanonicalFragment) -> None: pass
 
@@ -74,36 +79,41 @@ class CanonicalFragment(Chem.MolecularGraph):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %CanonicalFragment instance \a frag.
-    # \param frag The \c %CanonicalFragment instance to copy.
+    # \brief Replaces the contents of this fragment with a copy of <em>frag</em>.
+    # 
+    # \param frag The source <tt>CanonicalFragment</tt>.
+    # 
     # \return \a self
     # 
     def assign(frag: CanonicalFragment) -> CanonicalFragment: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param parent 
-    # \param modify 
-    # \param strip_aro_subst 
-    #
+    # \brief Builds the canonical fragment from the fragment <em>molgraph</em> of the parent molecular graph <em>parent</em>.
+    # 
+    # \param molgraph The molecular graph defining the fragment to canonicalize.
+    # \param parent The parent molecular graph the fragment was derived from.
+    # \param modify If <tt>True</tt>, the fragment is modified prior to canonicalization (e.g. ring perception, hydrogenization).
+    # \param strip_aro_subst If <tt>True</tt>, aromatic-ring substituents are stripped during fragment construction.
+    # 
     def create(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph, modify: bool = True, strip_aro_subst: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the hash code of the fragment.
+    # 
+    # \return The fragment hash code (<em>0</em> if not yet computed).
+    # 
     def getHashCode() -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all atoms and bonds and resets the hash code.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the atom mapping from this fragment to the parent molecular graph.
+    # 
+    # \return A reference to the atom mapping.
+    # 
     def getAtomMapping() -> Chem.AtomMapping: pass
 
     objectID = property(getObjectID)

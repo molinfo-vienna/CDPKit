@@ -55,7 +55,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     # 
     # \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
     # \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
-    # \param max_h_dist The maximum allowed distance of the feature-position aint the their ring-planes.
+    # \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
     # \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
     # 
     def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 30.0) -> None: pass

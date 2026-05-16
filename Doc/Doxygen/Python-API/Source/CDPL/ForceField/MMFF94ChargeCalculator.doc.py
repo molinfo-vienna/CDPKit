@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Calculator for the MMFF94 partial atomic charges of a molecular graph.
+# 
+# Partial atomic charges are constructed from full or fractional formal atomic charges and per-bond charge-increment contributions according to the MMFF94 parameterization. Parameter tables and atom-/bond-typing functions can be customized via the corresponding setter methods; default tables and typing functions match the standard MMFF94 reference.
+# 
 class MMFF94ChargeCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MMFF94ChargeCalculator instance.
+    # \brief Constructs the <tt>MMFF94ChargeCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -36,10 +38,11 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     def __init__(calc: MMFF94ChargeCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %MMFF94ChargeCalculator instance.
-    # \param molgraph 
-    # \param charges 
-    # \param strict 
+    # \brief Constructs the <tt>MMFF94ChargeCalculator</tt> instance and immediately calculates partial charges for the atoms of <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to calculate partial atomic charges.
+    # \param charges The output array storing the calculated partial charges.
+    # \param strict If <tt>True</tt>, strict parameterization is performed (and may fail).
     # 
     def __init__(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 
@@ -56,51 +59,59 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to retrieve the aromatic ring set of a molecular graph.
+    # 
+    # \param func The aromatic ring set function.
+    # 
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to retrieve the numeric MMFF94 atom type of an atom.
+    # 
+    # \param func The numeric atom type function.
+    # 
     def setNumericAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to retrieve the symbolic MMFF94 atom type of an atom.
+    # 
+    # \param func The symbolic atom type function.
+    # 
     def setSymbolicAtomTypeFunction(func: MMFF94SymbolicAtomTypeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to retrieve the MMFF94 bond type index of a bond.
+    # 
+    # \param func The bond type index function.
+    # 
     def setBondTypeIndexFunction(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the atom-type property table to use.
+    # 
+    # \param table The table providing per-atom-type properties.
+    # 
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the formal-charge definition table to use.
+    # 
+    # \param table The table providing formal-charge definitions.
+    # 
     def setFormalChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the bond charge increment table to use.
+    # 
+    # \param table The table providing bond charge increments.
+    # 
     def setBondChargeIncrementTable(table: MMFF94BondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief 
-    # \param table 
-    #
+    # \brief Sets the partial bond charge increment table to use.
+    # 
+    # \param table The table providing partial bond charge increments.
+    # 
     def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
@@ -126,9 +137,10 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     def calculate(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the formal atomic charges assigned during the last calculation.
+    # 
+    # \return A reference to the array of formal charges.
+    # 
     def getFormalCharges() -> Util.DArray: pass
 
     ##

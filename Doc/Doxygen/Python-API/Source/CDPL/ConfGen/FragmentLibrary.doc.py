@@ -20,18 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief A library of pre-generated conformations for rigid molecular fragments, indexed by canonical-fragment hash code.
+# 
+# Entries are FragmentLibraryEntry instances keyed by the hash code of the associated ConfGen.CanonicalFragment. The library is iterable, supports lookup/insertion/removal, can be serialized to and from a stream, and provides a process-wide default instance via the static set() / get() accessors. A built-in mutex is exposed via getMutex() to allow callers to coordinate concurrent access.
+# 
 class FragmentLibrary(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %FragmentLibrary instance.
+    # \brief Constructs an empty <tt>FragmentLibrary</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FragmentLibrary instance \a lib.
-    # \param lib The \c %FragmentLibrary instance to copy.
+    # \brief Constructs a copy of the <tt>FragmentLibrary</tt> instance <em>lib</em>.
+    # 
+    # \param lib The <tt>FragmentLibrary</tt> to copy.
     # 
     def __init__(lib: FragmentLibrary) -> None: pass
 
@@ -48,48 +51,58 @@ class FragmentLibrary(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Adds all entries from <em>lib</em> to this library.
+    # 
+    # \param lib The source <tt>FragmentLibrary</tt>.
+    # 
     def addEntries(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param entry 
-    # \return 
-    #
+    # \brief Adds the given entry to the library.
+    # 
+    # \param entry The entry to add.
+    # 
+    # \return <tt>True</tt> if the entry was added, and <tt>False</tt> if an entry with the same hash code was already present.
+    # 
     def addEntry(entry: FragmentLibraryEntry) -> bool: pass
 
     ##
-    # \brief 
-    # \param hash_code 
-    # \return 
-    #
+    # \brief Removes the entry with the specified hash code.
+    # 
+    # \param hash_code The hash code of the entry to remove.
+    # 
+    # \return <tt>True</tt> if the entry was removed, and <tt>False</tt> if no matching entry existed.
+    # 
     def removeEntry(hash_code: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param hash_code 
-    # \return 
-    #
+    # \brief Returns the entry with the specified hash code.
+    # 
+    # \param hash_code The hash code of the queried entry.
+    # 
+    # \return A reference to the matching entry's smart reference, or to an empty smart reference if no entry with <em>hash_code</em> exists.
+    # 
     def getEntry(hash_code: int) -> FragmentLibraryEntry: pass
 
     ##
-    # \brief 
-    # \param hash_code 
-    # \return 
-    #
+    # \brief Tells whether the library contains an entry with the specified hash code.
+    # 
+    # \param hash_code The hash code of the queried entry.
+    # 
+    # \return <tt>True</tt> if the entry exists, and <tt>False</tt> otherwise.
+    # 
     def containsEntry(hash_code: int) -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all entries from the library.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries stored in the library.
+    # 
+    # \return The number of entries.
+    # 
     def getNumEntries() -> int: pass
 
     ##
@@ -99,41 +112,46 @@ class FragmentLibrary(Boost.Python.instance):
     def getEntries() -> list: pass
 
     ##
-    # \brief 
-    # \param is 
-    #
+    # \brief Loads the contents of the library from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def load(is: Base.IStream) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Loads the default fragment library bundled with CDPKit.
+    # 
     def loadDefaults() -> None: pass
 
     ##
-    # \brief 
-    # \param os 
-    #
+    # \brief Writes the contents of the library to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def save(os: Base.OStream) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FragmentLibrary instance \a lib.
-    # \param lib The \c %FragmentLibrary instance to copy.
+    # \brief Replaces the contents of this library with a copy of the contents of <em>lib</em>.
+    # 
+    # \param lib The source <tt>FragmentLibrary</tt>.
+    # 
     # \return \a self
     # 
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 
     ##
-    # \brief 
-    # \param lib 
-    #
+    # \brief Sets the process-wide default fragment library used by ConfGen routines.
+    # 
+    # \param lib The new default fragment library.
+    # 
     @staticmethod
     def set(lib: FragmentLibrary) -> None: pass
 
     ##
-    # \brief 
-    # \param  
-    # \return 
-    #
+    # \brief Returns the process-wide default fragment library.
+    # 
+    # \return The current default fragment library.
+    # 
     @staticmethod
     def get(: ) -> FragmentLibrary: pass
 

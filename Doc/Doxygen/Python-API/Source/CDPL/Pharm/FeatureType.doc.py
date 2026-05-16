@@ -25,56 +25,56 @@
 class FeatureType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an unknown pharmacophore feature type.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a hydrophobic feature.
+    # 
     HYDROPHOBIC = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic feature.
+    # 
     AROMATIC = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a negatively ionizable feature.
+    # 
     NEGATIVE_IONIZABLE = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a positively ionizable feature.
+    # 
     POSITIVE_IONIZABLE = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a hydrogen-bond donor feature.
+    # 
     H_BOND_DONOR = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a hydrogen-bond acceptor feature.
+    # 
     H_BOND_ACCEPTOR = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a halogen-bond donor feature.
+    # 
     HALOGEN_BOND_DONOR = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a halogen-bond acceptor feature.
+    # 
     HALOGEN_BOND_ACCEPTOR = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an excluded-volume feature.
+    # 
     EXCLUSION_VOLUME = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the highest feature type constant defined in this namespace.
+    # 
     MAX_TYPE = 9

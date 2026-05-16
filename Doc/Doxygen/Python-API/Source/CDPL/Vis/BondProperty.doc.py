@@ -187,7 +187,7 @@ class BondProperty(Boost.Python.instance):
     CUSTOM_LABEL_COLOR = CDPL.Base.LookupKey('CUSTOM_LABEL_COLOR')
 
     ##
-    # \brief Specifies the custom label text. <b>Value Type:</b> str.
+    # \brief Specifies the custom label text. <b>Value Type:</b> std::string.
     # 
     # \since 1.2
     # 

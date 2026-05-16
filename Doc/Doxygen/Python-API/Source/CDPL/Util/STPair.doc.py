@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A pair of integers of type <tt>int</tt>.
+# \brief A pair of unsigned integers of type <tt>std::size_t</tt>.
 # 
 class STPair(Boost.Python.instance):
 

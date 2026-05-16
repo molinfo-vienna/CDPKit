@@ -131,7 +131,7 @@
 #  <tr><td>Chem.MatchConstraint.NOT_EQUAL</td><td><tt>True</tt> <br>
 # (Chem.AtomProperty.RING_FLAG)</td></tr>
 #  <tr><td>Chem.AtomMatchConstraint.H_COUNT</td><td>Chem.MatchConstraint.EQUAL</td><td><n> <br>
-# (Chem.getAtomCount(const Chem.Atom&, const Chem.MolecularGraph&, int))</td><td>H<em><n></em></td><td>Hydrogen count</td></tr>
+# (Chem.getAtomCount(const Chem.Atom&, const Chem.MolecularGraph&, unsigned int))</td><td>H<em><n></em></td><td>Hydrogen count</td></tr>
 #  <tr><td>Chem.AtomMatchConstraint.HEAVY_BOND_COUNT</td><td>Chem.MatchConstraint.EQUAL</td><td><n> <br>
 # (Chem.getHeavyBondCount(const Chem.Atom&, const Chem.MolecularGraph&))</td><td>D<em><n></em></td><td>Heavy bond count</td></tr>
 # </table>

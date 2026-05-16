@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A bounded 3 element vector holding signed integers of type <tt>int</tt>.
+# \brief A bounded 3 element vector holding signed integers of type <tt>long</tt>.
 # 
 class Vector3L(Boost.Python.instance):
 

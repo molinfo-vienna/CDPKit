@@ -36,7 +36,7 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     def __init__(calc: AtomHydrophobicityCalculator) -> None: pass
 
     ##
-    # \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+    # \brief Perceives the hydrophobicities of the atoms in the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
     # \param hyd_table The output vector where to store the atom hydrophobicities.
@@ -63,7 +63,7 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     def assign(calc: AtomHydrophobicityCalculator) -> AtomHydrophobicityCalculator: pass
 
     ##
-    # \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+    # \brief Perceives the hydrophobicities of the atoms in the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
     # \param hyd_table The output vector where to store the atom hydrophobicities.

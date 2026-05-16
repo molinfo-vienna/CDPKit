@@ -25,8 +25,8 @@
 class GaussianShape(Base.PropertyContainer):
 
     ##
-    # \brief 
-    #
+    # \brief A single sphere of the Gaussian shape, characterized by a position, radius, hardness and color.
+    # 
     class Element(Boost.Python.instance):
 
         ##
@@ -55,51 +55,59 @@ class GaussianShape(Base.PropertyContainer):
         def assign(elem: Element) -> Element: pass
 
         ##
-        # \brief 
-        # \param pos 
-        #
+        # \brief Sets the position of the sphere center.
+        # 
+        # \param pos The sphere center position.
+        # 
         def setPosition(pos: Math.Vector3D) -> None: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the position of the sphere center.
+        # 
+        # \return The sphere center position.
+        # 
         def getPosition() -> Math.Vector3D: pass
 
         ##
-        # \brief 
-        # \param radius 
-        #
+        # \brief Sets the sphere radius.
+        # 
+        # \param radius The sphere radius.
+        # 
         def setRadius(radius: float) -> None: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the sphere radius.
+        # 
+        # \return The sphere radius.
+        # 
         def getRadius() -> float: pass
 
         ##
-        # \brief 
-        # \param color 
-        #
+        # \brief Sets the color attribute of the sphere.
+        # 
+        # \param color The color attribute.
+        # 
         def setColor(color: int) -> None: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the color attribute of the sphere.
+        # 
+        # \return The color attribute.
+        # 
         def getColor() -> int: pass
 
         ##
-        # \brief 
-        # \param hardness 
-        #
+        # \brief Sets the hardness of the Gaussian.
+        # 
+        # \param hardness The Gaussian hardness.
+        # 
         def setHardness(hardness: float) -> None: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the hardness of the Gaussian.
+        # 
+        # \return The Gaussian hardness.
+        # 
         def getHardness() -> float: pass
 
         objectID = property(getObjectID)
@@ -131,42 +139,48 @@ class GaussianShape(Base.PropertyContainer):
     def assign(shape: GaussianShape) -> GaussianShape: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all elements from the shape.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of elements in the shape.
+    # 
+    # \return The number of elements.
+    # 
     def getNumElements() -> int: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param radius 
-    # \param color 
-    # \param hardness 
-    #
+    # \brief Adds a new element to the shape.
+    # 
+    # \param pos The position of the new element's sphere center.
+    # \param radius The sphere radius.
+    # \param color The color attribute.
+    # \param hardness The hardness of the Gaussian.
+    # 
     def addElement(pos: Math.Vector3D, radius: float, color: int = 0, hardness: float = 2.7) -> None: pass
 
     ##
-    # \brief 
-    # \param elem 
-    #
+    # \brief Adds the given element to the shape.
+    # 
+    # \param elem The element to add.
+    # 
     def addElement(elem: Element) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the element at index <em>idx</em>.
+    # 
+    # \param idx The index of the element to remove.
+    # 
     def removeElement(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the element at index <em>idx</em>.
+    # 
+    # \param idx The index of the element.
+    # 
+    # \return A reference to the element.
+    # 
     def getElement(idx: int) -> Element: pass
 
     ##

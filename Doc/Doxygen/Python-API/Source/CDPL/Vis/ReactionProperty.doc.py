@@ -29,7 +29,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported vertical alignment styles are defined in namespace Vis.Alignment. The specified alignment takes precedence over the alignment specified by the parameter Vis.ControlParameter.REACTION_AGENT_ALIGNMENT.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     AGENT_ALIGNMENT = CDPL.Base.LookupKey('AGENT_ALIGNMENT')
 
@@ -38,7 +38,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     AGENT_LAYOUT = CDPL.Base.LookupKey('AGENT_LAYOUT')
 
@@ -47,7 +47,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_AGENT_LAYOUT_DIRECTION.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('AGENT_LAYOUT_DIRECTION')
 
@@ -81,7 +81,7 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief Specifies the length of the reaction arrow.
     # 
-    # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as int as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. The specified length takes precedence over the length specified by the parameter Vis.ControlParameter.REACTION_ARROW_LENGTH.
+    # Specifying the length as beeing relative has the effect, that the given length is interpreted as a minimum length for an arrow which is as long as the width of the overall area covered by the drawn reaction agents (if any). The output- and input-scaling settings are ignored and have no effect. The specified length takes precedence over the length specified by the parameter Vis.ControlParameter.REACTION_ARROW_LENGTH.
     # 
     # <b>Value Type:</b> Vis.SizeSpecification
     # 
@@ -110,7 +110,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported styles are defined as constants in namespace Vis.ArrowStyle. The arrow style specified by this property takes precedence over the style specified by the parameter Vis.ControlParameter.REACTION_ARROW_STYLE.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     ARROW_STYLE = CDPL.Base.LookupKey('ARROW_STYLE')
 
@@ -119,7 +119,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout styles are defined in namespace Vis.LayoutStyle. The specified layout style takes precedence over the layout specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     COMPONENT_LAYOUT = CDPL.Base.LookupKey('COMPONENT_LAYOUT')
 
@@ -128,7 +128,7 @@ class ReactionProperty(Boost.Python.instance):
     # 
     # Supported layout directions are defined in namespace Vis.LayoutDirection. The specified layout direction takes precedence over the direction specified by the parameter Vis.ControlParameter.REACTION_COMPONENT_LAYOUT_DIRECTION.
     # 
-    # <b>Value Type:</b> <tt>int</tt>
+    # <b>Value Type:</b> <tt>unsigned int</tt>
     # 
     COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey('COMPONENT_LAYOUT_DIRECTION')
 

@@ -62,7 +62,7 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     # 
     # \return The 3D-coordinates of the atom. 
     # 
-    # \see Chem.getConformer3DCoordinates(const Atom&, int)
+    # \see Chem.getConformer3DCoordinates(const Atom&, std::size_t)
     # 
     def __call__(atom: Atom) -> Math.Vector3D: pass
 
