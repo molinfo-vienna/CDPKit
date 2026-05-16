@@ -245,8 +245,7 @@ namespace CDPL
              * \param pool The other \c %ObjectPool instance.
              * \return A reference to itself.
              * \note The pool of allocated objects of \a pool is not copied; only the configuration
-             *       (max size, factory, destructor and init function) is taken over. The cleanup
-             *       function is **not** copied — re-install it via setCleanupFunction() if needed.
+             *       (max size, factory, destructor, cleanup and init function) is taken over.
              */
             ObjectPool& operator=(const ObjectPool& pool)
             {
@@ -257,7 +256,8 @@ namespace CDPL
                 ctorFunc = pool.ctorFunc;
                 dtorFunc = pool.dtorFunc;
                 initFunc = pool.initFunc;
-
+                cleanFunc = pool.cleanFunc;
+                
                 shrinkToMaxSize();
 
                 return *this;
