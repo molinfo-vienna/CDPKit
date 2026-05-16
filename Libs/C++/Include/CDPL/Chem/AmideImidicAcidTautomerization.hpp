@@ -40,12 +40,20 @@ namespace CDPL
     {
 
         /**
-         * \brief AmideImidicAcidTautomerizationRule.
+         * \brief Implementation of the amide &harr; imidic-acid tautomerization rule.
+         *
+         * The rule is registered with TautomerizationType::AMIDE_IMIDIC_ACID and uses
+         * PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order
+         * transformations required for the interconversion of amide and imidic-acid tautomers.
          */
         class CDPL_CHEM_API AmideImidicAcidTautomerization : public PatternBasedTautomerizationRule
         {
 
           public:
+            /**
+             * \brief Constructs the \c %AmideImidicAcidTautomerization instance and registers the
+             *        SMARTS patterns and bond-order changes of the rule.
+             */
             AmideImidicAcidTautomerization();
         };
     } // namespace Chem

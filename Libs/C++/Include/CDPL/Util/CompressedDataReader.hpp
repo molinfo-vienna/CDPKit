@@ -43,30 +43,91 @@ namespace CDPL
     {
 
         /**
-         * \brief CompressedDataReader.
+         * \brief Adapter that wraps a stream-based reader with a decompression stream to read records
+         *        from a compressed data stream.
+         *
+         * \c %CompressedDataReader is a thin template wrapper around an existing
+         * Base::DataReader implementation \a ReaderImpl. It constructs a decompression stream of type
+         * \a DecompStream around the supplied input stream and forwards all read operations to the
+         * inner reader. The reader exposes the standard Base::DataReader interface.
+         *
+         * \tparam ReaderImpl   The wrapped reader implementation type.
+         * \tparam DecompStream The decompression stream type to wrap around the input stream.
+         * \tparam DataType     The data record type produced by the reader.
          */
         template <typename ReaderImpl, typename DecompStream, typename DataType = typename ReaderImpl::DataType>
         class CompressedDataReader : public Base::DataReader<DataType>
         {
 
           public:
+            /**
+             * \brief Constructs a \c %CompressedDataReader instance reading from the input stream \a is.
+             * \param is The input stream providing the compressed data.
+             */
             CompressedDataReader(std::istream& is);
 
+            /**
+             * \brief Reads the next data record into \a obj.
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             */
             CompressedDataReader& read(DataType& obj, bool overwrite = true);
+
+            /**
+             * \brief Reads the data record at index \a idx into \a obj.
+             * \param idx The zero-based index of the record to read.
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             */
             CompressedDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Skips the next data record.
+             * \return A reference to itself.
+             */
             CompressedDataReader& skip();
 
+            /**
+             * \brief Tells whether more records are available.
+             * \return \c true if more records are available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the index of the current data record.
+             * \return The zero-based index of the current record.
+             */
             std::size_t getRecordIndex() const;
+
+            /**
+             * \brief Sets the index of the next data record to be read.
+             * \param idx The zero-based record index.
+             */
             void setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records in the input stream.
+             * \return The number of records.
+             */
             std::size_t getNumRecords();
 
+            /**
+             * \brief Returns a non-zero value if the reader is in a good state, and zero otherwise.
+             * \return A non-zero value if the reader is operational, zero otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the reader is in a bad state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
+            /**
+             * \brief Closes the wrapped reader and the decompression stream.
+             */
             void close();
 
           private:

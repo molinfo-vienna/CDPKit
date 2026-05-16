@@ -55,30 +55,83 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Calculator for the MMFF94 partial atomic charges of a molecular graph.
+         *
+         * Partial atomic charges are constructed from full or fractional formal atomic charges
+         * and per-bond charge-increment contributions according to the MMFF94 parameterization.
+         * Parameter tables and atom-/bond-typing functions can be customized via the corresponding
+         * setter methods; default tables and typing functions match the standard MMFF94 reference.
+         */
         class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94ChargeCalculator instances.
+             */
             typedef std::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
 
+            /**
+             * \brief Constructs the \c %MMFF94ChargeCalculator instance.
+             */
             MMFF94ChargeCalculator();
 
+            /**
+             * \brief Constructs the \c %MMFF94ChargeCalculator instance and immediately calculates partial charges
+             *        for the atoms of \a molgraph.
+             * \param molgraph The molecular graph for which to calculate partial atomic charges.
+             * \param charges The output array storing the calculated partial charges.
+             * \param strict If \c true, strict parameterization is performed (and may fail).
+             */
             MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
+            /**
+             * \brief Sets the bond charge increment table to use.
+             * \param table The table providing bond charge increments.
+             */
             void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the partial bond charge increment table to use.
+             * \param table The table providing partial bond charge increments.
+             */
             void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the atom-type property table to use.
+             * \param table The table providing per-atom-type properties.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the formal-charge definition table to use.
+             * \param table The table providing formal-charge definitions.
+             */
             void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
+            /**
+             * \brief Specifies the function used to retrieve the aromatic ring set of a molecular graph.
+             * \param func The aromatic ring set function.
+             */
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
+            /**
+             * \brief Specifies the function used to retrieve the numeric MMFF94 atom type of an atom.
+             * \param func The numeric atom type function.
+             */
             void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
+            /**
+             * \brief Specifies the function used to retrieve the symbolic MMFF94 atom type of an atom.
+             * \param func The symbolic atom type function.
+             */
             void setSymbolicAtomTypeFunction(const MMFF94SymbolicAtomTypeFunction& func);
 
+            /**
+             * \brief Specifies the function used to retrieve the MMFF94 bond type index of a bond.
+             * \param func The bond type index function.
+             */
             void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
             /**
@@ -119,6 +172,10 @@ namespace CDPL
              */
             void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
+            /**
+             * \brief Returns the formal atomic charges assigned during the last calculation.
+             * \return A \c const reference to the array of formal charges.
+             */
             const Util::DArray& getFormalCharges() const;
 
           private:

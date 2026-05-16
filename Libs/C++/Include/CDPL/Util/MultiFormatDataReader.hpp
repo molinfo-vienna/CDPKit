@@ -44,52 +44,141 @@ namespace CDPL
     {
 
         /**
-         * \brief MultiFormatDataReader.
+         * \brief Reader that auto-dispatches to a format-specific reader registered with Base::DataIOManager.
+         *
+         * The format is detected from the file extension or explicitly provided as a string or
+         * Base::DataFormat. The reader exposes the standard Base::DataReader interface and forwards
+         * all operations to the underlying format-specific reader instance.
+         *
+         * \tparam DataType The data record type produced by the reader.
          */
         template <typename DataType>
         class MultiFormatDataReader : public Base::DataReader<DataType>
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiFormatDataReader instances.
+             */
             typedef std::shared_ptr<MultiFormatDataReader> SharedPointer;
-            
-            MultiFormatDataReader(const std::string& file_name, 
+
+            /**
+             * \brief Constructs a reader for the file \a file_name with format detected from its extension.
+             * \param file_name The path of the input file.
+             * \param mode The flags specifying the file open mode.
+             * \throw Base::IOError if no input handler for the file extension is registered.
+             */
+            MultiFormatDataReader(const std::string& file_name,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a reader for the file \a file_name using the format identified by the string \a fmt.
+             * \param file_name The path of the input file.
+             * \param fmt The format identifier (e.g. the file extension associated with the format).
+             * \param mode The flags specifying the file open mode.
+             * \throw Base::IOError if no input handler for \a fmt is registered.
+             */
             MultiFormatDataReader(const std::string& file_name, const std::string& fmt,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a reader for the file \a file_name using the format described by \a fmt.
+             * \param file_name The path of the input file.
+             * \param fmt The Base::DataFormat instance describing the format.
+             * \param mode The flags specifying the file open mode.
+             * \throw Base::IOError if no input handler for \a fmt is registered.
+             */
             MultiFormatDataReader(const std::string& file_name, const Base::DataFormat& fmt,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a reader for the input stream \a is using the format identified by the string \a fmt.
+             * \param is The input stream providing the data.
+             * \param fmt The format identifier (e.g. the file extension associated with the format).
+             * \throw Base::IOError if no input handler for \a fmt is registered.
+             */
             MultiFormatDataReader(std::istream& is, const std::string& fmt);
 
+            /**
+             * \brief Constructs a reader for the input stream \a is using the format described by \a fmt.
+             * \param is The input stream providing the data.
+             * \param fmt The Base::DataFormat instance describing the format.
+             * \throw Base::IOError if no input handler for \a fmt is registered.
+             */
             MultiFormatDataReader(std::istream& is, const Base::DataFormat& fmt);
 
             MultiFormatDataReader(const MultiFormatDataReader&) = delete;
 
             MultiFormatDataReader& operator=(const MultiFormatDataReader&) = delete;
 
+            /**
+             * \brief Returns the data format the wrapped reader was instantiated for.
+             * \return The data format.
+             */
             const Base::DataFormat& getDataFormat() const;
-            
+
+            /**
+             * \brief Reads the next data record into \a obj.
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             */
             MultiFormatDataReader& read(DataType& obj, bool overwrite = true);
-            
+
+            /**
+             * \brief Reads the data record at index \a idx into \a obj.
+             * \param idx The zero-based index of the record to read.
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             */
             MultiFormatDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Skips the next data record.
+             * \return A reference to itself.
+             */
             MultiFormatDataReader& skip();
 
+            /**
+             * \brief Tells whether more records are available.
+             * \return \c true if more records are available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the index of the current data record.
+             * \return The zero-based index of the current record.
+             */
             std::size_t getRecordIndex() const;
 
+            /**
+             * \brief Sets the index of the next data record to be read.
+             * \param idx The zero-based record index.
+             */
             void setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records in the input source.
+             * \return The number of records.
+             */
             std::size_t getNumRecords();
 
+            /**
+             * \brief Returns a non-zero value if the reader is in a good state, and zero otherwise.
+             * \return A non-zero value if the reader is operational, zero otherwise.
+             */
             operator const void*() const;
-            
+
+            /**
+             * \brief Tells whether the reader is in a bad state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
+            /**
+             * \brief Closes the underlying reader.
+             */
             void close();
 
           private:

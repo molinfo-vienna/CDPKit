@@ -52,12 +52,20 @@ namespace CDPL
         class Bond;
 
         /**
-         * \brief BondStereoFlagCalculator.
+         * \brief Calculator that derives 2D wedge/hash bond stereo flags from atom 2D coordinates and
+         *        stereochemical descriptors of a molecular graph.
+         *
+         * The result is an array of stereo flag values (see namespace Chem::BondStereoFlag) indexed by
+         * the bond index in the molecular graph. The atom 2D-coordinates accessor function can be
+         * customized via setAtom2DCoordinatesFunction().
          */
         class CDPL_CHEM_API BondStereoFlagCalculator
         {
 
           public:
+            /**
+             * \brief Type of the generic functor class used to store a user-defined atom 2D-coordinates function.
+             */
             typedef std::function<const Math::Vector2D&(const Atom&)> Atom2DCoordinatesFunction;
 
             /**

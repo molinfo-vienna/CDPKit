@@ -48,22 +48,48 @@ namespace CDPL
     {
 
         /**
-         * \brief CanonicalFragment.
+         * \brief A canonicalized molecular fragment with an associated hash code, used as the key for
+         *        fragment-library lookup in conformer generation.
+         *
+         * A \c %CanonicalFragment is constructed from a fragment of a parent molecular graph and stores
+         * a canonicalized copy of the fragment's atoms and bonds. Canonicalization yields a stable
+         * atom ordering and an associated hash code that uniquely identifies the topology (and,
+         * optionally, the stereochemistry) of the fragment.
+         *
+         * \see ConfGen::FragmentLibrary
          */
         class CDPL_CONFGEN_API CanonicalFragment : public Chem::MolecularGraph
         {
 
           public:
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CanonicalFragment instances.
              */
             typedef std::shared_ptr<CanonicalFragment> SharedPointer;
 
+            /**
+             * \brief A mutable iterator over the contained atoms.
+             */
             typedef Chem::BasicMolecule::AtomIterator      AtomIterator;
+
+            /**
+             * \brief A constant iterator over the contained atoms.
+             */
             typedef Chem::BasicMolecule::ConstAtomIterator ConstAtomIterator;
+
+            /**
+             * \brief A mutable iterator over the contained bonds.
+             */
             typedef Chem::BasicMolecule::BondIterator      BondIterator;
+
+            /**
+             * \brief A constant iterator over the contained bonds.
+             */
             typedef Chem::BasicMolecule::ConstBondIterator ConstBondIterator;
 
+            /**
+             * \brief Maps each atom of the fragment (in canonical order) to the corresponding atom of the parent molecular graph.
+             */
             typedef std::vector<const Chem::Atom*> AtomMapping;
 
             /**
@@ -72,73 +98,209 @@ namespace CDPL
             CanonicalFragment();
 
             /**
-             * \brief Constructs a \c %CanonicalFragment instance that contains the relevant atoms and bonds of the molecular graph \a molgraph.
-             * \param molgraph The molecular graph for which to generate the fragments.
-             * \param parent The parent molecular graph the fragment is coming from.
+             * \brief Constructs a \c %CanonicalFragment instance from the fragment \a molgraph of the parent molecular graph \a parent.
+             * \param molgraph The molecular graph defining the fragment to canonicalize.
+             * \param parent The parent molecular graph the fragment was derived from.
              */
             CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
 
+            /**
+             * \brief Constructs a copy of the \c %CanonicalFragment instance \a frag.
+             * \param frag The \c %CanonicalFragment to copy.
+             */
             CanonicalFragment(const CanonicalFragment& frag);
 
+            /**
+             * \brief Removes all atoms and bonds and resets the hash code.
+             */
             void clear();
 
+            /**
+             * \brief Returns the number of atoms in the fragment.
+             * \return The number of atoms.
+             */
             std::size_t getNumAtoms() const;
 
+            /**
+             * \brief Returns a \c const reference to the atom at index \a idx.
+             * \param idx The index of the atom.
+             * \return A \c const reference to the atom.
+             */
             const Chem::Atom& getAtom(std::size_t idx) const;
 
+            /**
+             * \brief Returns a reference to the atom at index \a idx.
+             * \param idx The index of the atom.
+             * \return A reference to the atom.
+             */
             Chem::Atom& getAtom(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first atom.
+             * \return A constant iterator pointing to the first atom.
+             */
             ConstAtomIterator getAtomsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last atom.
+             * \return A constant iterator pointing one past the last atom.
+             */
             ConstAtomIterator getAtomsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first atom.
+             * \return A mutable iterator pointing to the first atom.
+             */
             AtomIterator getAtomsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last atom.
+             * \return A mutable iterator pointing one past the last atom.
+             */
             AtomIterator getAtomsEnd();
 
+            /**
+             * \brief Tells whether the fragment contains \a atom.
+             * \param atom The atom to look up.
+             * \return \c true if the atom is part of the fragment, and \c false otherwise.
+             */
             bool containsAtom(const Chem::Atom& atom) const;
 
+            /**
+             * \brief Returns the index of \a atom in the fragment.
+             * \param atom The atom whose index is requested.
+             * \return The index of the atom.
+             */
             std::size_t getAtomIndex(const Chem::Atom& atom) const;
 
+            /**
+             * \brief Returns the number of 3D entities in the fragment.
+             * \return The number of 3D entities (equal to getNumAtoms()).
+             */
             std::size_t getNumEntities() const;
 
+            /**
+             * \brief Returns a \c const reference to the 3D entity at index \a idx.
+             * \param idx The index of the entity.
+             * \return A \c const reference to the entity.
+             */
             const Chem::Entity3D& getEntity(std::size_t idx) const;
 
+            /**
+             * \brief Returns a reference to the 3D entity at index \a idx.
+             * \param idx The index of the entity.
+             * \return A reference to the entity.
+             */
             Chem::Entity3D& getEntity(std::size_t idx);
 
+            /**
+             * \brief Returns the number of bonds in the fragment.
+             * \return The number of bonds.
+             */
             std::size_t getNumBonds() const;
 
+            /**
+             * \brief Returns a \c const reference to the bond at index \a idx.
+             * \param idx The index of the bond.
+             * \return A \c const reference to the bond.
+             */
             const Chem::Bond& getBond(std::size_t idx) const;
 
+            /**
+             * \brief Returns a reference to the bond at index \a idx.
+             * \param idx The index of the bond.
+             * \return A reference to the bond.
+             */
             Chem::Bond& getBond(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first bond.
+             * \return A constant iterator pointing to the first bond.
+             */
             ConstBondIterator getBondsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last bond.
+             * \return A constant iterator pointing one past the last bond.
+             */
             ConstBondIterator getBondsEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first bond.
+             * \return A mutable iterator pointing to the first bond.
+             */
             BondIterator getBondsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last bond.
+             * \return A mutable iterator pointing one past the last bond.
+             */
             BondIterator getBondsEnd();
 
+            /**
+             * \brief Tells whether the fragment contains \a bond.
+             * \param bond The bond to look up.
+             * \return \c true if the bond is part of the fragment, and \c false otherwise.
+             */
             bool containsBond(const Chem::Bond& bond) const;
 
+            /**
+             * \brief Returns the index of \a bond in the fragment.
+             * \param bond The bond whose index is requested.
+             * \return The index of the bond.
+             */
             std::size_t getBondIndex(const Chem::Bond& bond) const;
 
+            /**
+             * \brief Reorders the atoms of the fragment according to \a func.
+             * \param func The comparison function used to define the new atom order.
+             */
             void orderAtoms(const Chem::AtomCompareFunction& func);
 
+            /**
+             * \brief Reorders the bonds of the fragment according to \a func.
+             * \param func The comparison function used to define the new bond order.
+             */
             void orderBonds(const Chem::BondCompareFunction& func);
 
+            /**
+             * \brief Returns the hash code of the fragment.
+             * \return The fragment hash code (\e 0 if not yet computed).
+             */
             std::uint64_t getHashCode() const;
 
+            /**
+             * \brief Creates and returns a deep copy of the fragment.
+             * \return A smart pointer to the cloned fragment.
+             */
             Chem::MolecularGraph::SharedPointer clone() const;
 
+            /**
+             * \brief Replaces the contents of this fragment with a copy of \a frag.
+             * \param frag The source \c %CanonicalFragment.
+             * \return A reference to itself.
+             */
             CanonicalFragment& operator=(const CanonicalFragment& frag);
 
+            /**
+             * \brief Builds the canonical fragment from the fragment \a molgraph of the parent molecular graph \a parent.
+             * \param molgraph The molecular graph defining the fragment to canonicalize.
+             * \param parent The parent molecular graph the fragment was derived from.
+             * \param modify If \c true, the fragment is modified prior to canonicalization (e.g. ring perception, hydrogenization).
+             * \param strip_aro_subst If \c true, aromatic-ring substituents are stripped during fragment construction.
+             */
             void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent,
                         bool modify = true, bool strip_aro_subst = true);
 
+            /**
+             * \brief Returns the atom mapping from this fragment to the parent molecular graph.
+             * \return A \c const reference to the atom mapping.
+             */
             const AtomMapping& getAtomMapping() const;
 
+            /**
+             * \brief Perceives the smallest set of smallest rings of the fragment.
+             */
             void perceiveSSSR();
 
           private:

@@ -62,7 +62,7 @@ namespace CDPL
             AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calculator);
 
             /**
-             * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+             * \brief Perceives the hydrophobicities of the atoms in the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
              * \param hyd_table The output vector where to store the atom hydrophobicities.
              */
@@ -74,7 +74,7 @@ namespace CDPL
             ~AtomHydrophobicityCalculator();
 
             /**
-             * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+             * \brief Perceives the hydrophobicities of the atoms in the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
              * \param hyd_table The output vector where to store the atom hydrophobicities.
              */
