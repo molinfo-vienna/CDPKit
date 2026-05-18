@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief MoleculeAutoCorr2DDescriptorCalculator.
+# \brief Calculation of a topological (2D) auto-correlation descriptor of a molecular graph with atom-pair weights resolved by per-atom modes.
+# 
+# Compared to Descr.AutoCorrelation2DVectorCalculator, this calculator emits a partitioned descriptor that splits the per-distance contributions by the atom-pair mode pair selected via the atom-pair weight function (see <tt>Mode</tt> for available partitioning schemes).
 # 
 class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies how the descriptor is partitioned by atom-pair modes.
+    # 
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief SEMI_SPLIT.
-        #
+        # \brief Semi-split partitioning: contributions are grouped by the unordered pair of modes.
+        # 
         SEMI_SPLIT = 0
 
         ##
-        # \brief FULL_SPLIT.
-        #
+        # \brief Full-split partitioning: contributions are grouped by the ordered pair of modes.
+        # 
         FULL_SPLIT = 1
 
     ##
@@ -99,9 +101,10 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def setMode(max_dist: Mode) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured descriptor partitioning mode.
+    # 
+    # \return The configured partitioning mode.
+    # 
     def getMode() -> Mode: pass
 
     ##

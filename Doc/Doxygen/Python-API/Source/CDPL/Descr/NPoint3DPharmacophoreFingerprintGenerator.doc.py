@@ -20,39 +20,44 @@
 #
 
 ##
-# \brief NPoint3DPharmacophoreFingerprintGenerator.
+# \brief N-point pharmacophore fingerprint generator that uses spatial 3D feature distances.
+# 
+# The fingerprint encodes the binned Euclidean distances between all combinations of feature tuples generated from a molecular graph or feature container.
 # 
 # \since 1.2
 # 
 class NPoint3DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Default distance bin size.
+    # 
+    # \since 1.3
+    # 
     DEF_BIN_SIZE = 3.0
 
     ##
-    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
+    # \brief Constructs the <tt>NPoint3DPharmacophoreFingerprintGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
-    # \param molgraph 
-    # \param fp 
+    # \brief Constructs the <tt>NPoint3DPharmacophoreFingerprintGenerator</tt> instance and generates the fingerprint of <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param fp The output bitset.
     # 
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
-    # \param cntnr 
-    # \param fp 
+    # \brief Constructs the <tt>NPoint3DPharmacophoreFingerprintGenerator</tt> instance and generates the fingerprint of <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param fp The output bitset.
     # 
     def __init__(cntnr: Pharm.Pharmacophore, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %NPoint3DPharmacophoreFingerprintGenerator instance \a gen.
-    # \param gen The \c %NPoint3DPharmacophoreFingerprintGenerator instance to copy.
+    # \brief Copy constructor.
     # 
     def __init__(gen: NPoint3DPharmacophoreFingerprintGenerator) -> None: pass
 
@@ -64,15 +69,17 @@ class NPoint3DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     def assign(gen: NPoint3DPharmacophoreFingerprintGenerator) -> NPoint3DPharmacophoreFingerprintGenerator: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fp 
-    #
+    # \brief Generates the fingerprint of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param fp The output bitset.
+    # 
     def generate(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param fp 
-    #
+    # \brief Generates the fingerprint of the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param fp The output bitset.
+    # 
     def generate(cntnr: Pharm.FeatureContainer, fp: Util.BitSet) -> None: pass

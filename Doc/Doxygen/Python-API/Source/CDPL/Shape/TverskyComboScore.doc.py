@@ -20,14 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcTverskyComboScore().
+# 
 class TverskyComboScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %TverskyComboScore instance.
-    # \param alpha 
-    # \param beta 
+    # \brief Constructs the functor with the given Tversky weighting factors.
+    # 
+    # \param alpha The reference-side Tversky weight.
+    # \param beta The aligned-side Tversky weight.
     # 
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
@@ -57,10 +58,8 @@ class TverskyComboScore(Boost.Python.instance):
     def assign(score: TverskyComboScore) -> TverskyComboScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the combined shape + color symmetric Tversky score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

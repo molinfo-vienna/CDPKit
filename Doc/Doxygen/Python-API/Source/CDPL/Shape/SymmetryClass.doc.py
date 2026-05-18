@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the rotational symmetry class of a Gaussian shape.
+# 
 class SymmetryClass(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an undefined symmetry class.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an asymmetric shape (all three principal moments of inertia distinct).
+    # 
     ASYMMETRIC = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an oblate (disc-shaped) symmetric top.
+    # 
     OBLATE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a prolate (cigar-shaped) symmetric top.
+    # 
     PROLATE = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a spherical top (all three principal moments of inertia equal).
+    # 
     SPHERICAL = 4

@@ -297,24 +297,30 @@ def calcGeometricalRadius(cntnr: Chem.Entity3DContainer) -> float: pass
 def calcHammingDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the first Kier shape index ( \f$ \kappa_1 \f$) of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The calculated Kier shape index \f$ \kappa_1 \f$.
+# 
 def calcKierShape1(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the second Kier shape index ( \f$ \kappa_2 \f$) of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The calculated Kier shape index \f$ \kappa_2 \f$.
+# 
 def calcKierShape2(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the third Kier shape index ( \f$ \kappa_3 \f$) of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The calculated Kier shape index \f$ \kappa_3 \f$.
+# 
 def calcKierShape3(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
@@ -405,24 +411,32 @@ def calcManhattanDistance(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 def calcManhattanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the molecular complexity of <em>molgraph</em> (Hendrickson, Huang and Toczko).
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The calculated molecular complexity. 
+# 
+# \see [\ref MCPLX]
+# 
 def calcMolecularComplexity(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the Randic connectivity index of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The Randic index.
+# 
 def calcRandicIndex(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the ring complexity of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The calculated ring complexity.
+# 
 def calcRingComplexity(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
@@ -513,24 +527,30 @@ def calcTanimotoSimilarity(v1: Math.LVector, v2: Math.LVector) -> float: pass
 def calcTanimotoSimilarity(v1: Math.ULVector, v2: Math.ULVector) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the topological diameter (maximum atom-pair topological distance) of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The topological diameter.
+# 
 def calcTopologicalDiameter(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the topological radius (minimum atom eccentricity) of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The topological radius.
+# 
 def calcTopologicalRadius(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the total walk count of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The total walk count.
+# 
 def calcTotalWalkCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -557,22 +577,34 @@ def calcTotalWalkCount(molgraph: Chem.MolecularGraph) -> int: pass
 def calcTverskySimilarity(bs1: Util.BitSet, bs2: Util.BitSet, a: float, b: float) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the Wiener index of <em>molgraph</em>.
+# 
+# The Wiener index is the sum of the topological distances over all pairs of heavy atoms.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The Wiener index.
+# 
 def calcWienerIndex(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the first Zagreb index ( \f$ M_1 \f$) of <em>molgraph</em>.
+# 
+# \f$ M_1 \f$ is the sum of squared heavy-atom degrees over all heavy atoms.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The first Zagreb index.
+# 
 def calcZagrebIndex1(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the second Zagreb index ( \f$ M_2 \f$) of <em>molgraph</em>.
+# 
+# \f$ M_2 \f$ is the sum of the products of the heavy-atom degrees over all heavy-atom bonds.
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The second Zagreb index.
+# 
 def calcZagrebIndex2(molgraph: Chem.MolecularGraph) -> int: pass

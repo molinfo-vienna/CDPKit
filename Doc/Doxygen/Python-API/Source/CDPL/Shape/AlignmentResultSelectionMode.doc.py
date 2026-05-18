@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for selecting which alignment results are kept by alignment routines.
+# 
 class AlignmentResultSelectionMode(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Keep all alignment results.
+    # 
     ALL = 0
 
     ##
-    # \brief 
-    #
+    # \brief Keep only the best alignment result per (reference shape, aligned shape) combination.
+    # 
     BEST_PER_SHAPE_COMBINATION = 1
 
     ##
-    # \brief 
-    #
+    # \brief Keep only the best alignment result per reference shape.
+    # 
     BEST_PER_REFERENCE_SHAPE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Keep only the best alignment result per reference shape set.
+    # 
     BEST_PER_REFERENCE_SET = 3
 
     ##
-    # \brief 
-    #
+    # \brief Keep only the single best alignment result overall.
+    # 
     BEST_OVERALL = 4

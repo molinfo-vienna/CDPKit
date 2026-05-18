@@ -25,6 +25,6 @@
 class FeatureContainerPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureContainerProperty.NAME property.
+    # 
     NAME = ''

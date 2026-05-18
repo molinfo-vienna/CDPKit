@@ -29,8 +29,8 @@
 class PubChemFingerprintGenerator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the number of bits of the generated PubChem fingerprint.
+    # 
     NUM_BITS = 881
 
     ##
@@ -47,8 +47,11 @@ class PubChemFingerprintGenerator(Boost.Python.instance):
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %PubChemFingerprintGenerator instance \a gen.
-    # \param gen The \c %PubChemFingerprintGenerator instance to copy.
+    # \brief Copy constructor.
+    # 
+    # \param gen The other <tt>PubChemFingerprintGenerator</tt> instance.
+    # 
+    # \note The internal state of <em>gen</em> is not copied; the new instance is default-initialized.
     # 
     def __init__(gen: PubChemFingerprintGenerator) -> None: pass
 
@@ -65,9 +68,13 @@ class PubChemFingerprintGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %PubChemFingerprintGenerator instance \a gen.
-    # \param gen The \c %PubChemFingerprintGenerator instance to copy.
-    # \return \a self
+    # \brief Assignment operator.
+    # 
+    # \param gen The other <tt>PubChemFingerprintGenerator</tt> instance.
+    # 
+    # \return \a self 
+    # 
+    # \note The internal state of <em>gen</em> is not copied; the assignee remains unchanged.
     # 
     def assign(gen: PubChemFingerprintGenerator) -> PubChemFingerprintGenerator: pass
 

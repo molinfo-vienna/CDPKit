@@ -547,109 +547,83 @@ def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomCont
 def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param single_prec 
-#
+# \brief Sets the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em> to <em>single_prec</em>.
+# 
 def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
+# 
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em>.
+# 
+# \since 1.2
+# 
 def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
+# 
 def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param allow 
-#
+# \brief Sets the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter of <em>cntnr</em> to <em>allow</em>.
+# 
 def setPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer, allow: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter.
+# 
 def hasPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter of <em>cntnr</em>.
+# 
 def getPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter from <em>cntnr</em>.
+# 
 def clearPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mode 
-#
+# \brief Sets the Pharm.ControlParameter.PSD_CREATION_MODE parameter of <em>cntnr</em> to <em>mode</em>.
+# 
 def setPSDCreationModeParameter(cntnr: Base.ControlParameterContainer, mode: Mode) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.PSD_CREATION_MODE parameter.
+# 
 def hasPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Pharm.ControlParameter.PSD_CREATION_MODE parameter of <em>cntnr</em>.
+# 
 def getPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> Mode: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Pharm.ControlParameter.PSD_CREATION_MODE parameter from <em>cntnr</em>.
+# 
 def clearPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param strict 
-#
+# \brief Sets the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em> to <em>strict</em>.
+# 
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter.
+# 
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the value of the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em>.
+# 
 def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
+# 
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass

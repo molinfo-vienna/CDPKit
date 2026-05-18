@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcReferenceShapeTverskyScore().
+# 
 class ReferenceShapeTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %ReferenceShapeTverskyScore instance.
-    # \param alpha 
+    # \brief Constructs the functor with the given Tversky weighting factor.
+    # 
+    # \param alpha The reference-side Tversky weight.
     # 
     def __init__(alpha: float = 0.95) -> None: pass
 
@@ -56,10 +57,8 @@ class ReferenceShapeTverskyScore(Boost.Python.instance):
     def assign(score: ReferenceShapeTverskyScore) -> ReferenceShapeTverskyScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the shape-only reference-normalized Tversky score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

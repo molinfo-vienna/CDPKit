@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief FeatureAutoCorrelation3DVectorCalculator.
+# \brief AutoCorrelation3DVectorCalculator specialization for feature-centered 3D auto-correlation vectors of pharmacophores.
+# 
+# The feature 3D coordinates accessor function is preset to Chem.get3DCoordinates(); the entity-pair weight function and other calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 
@@ -38,9 +40,10 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     def __init__(calc: FeatureAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %FeatureAutoCorrelation3DVectorCalculator instance.
-    # \param cntnr 
-    # \param vec 
+    # \brief Constructs the <tt>FeatureAutoCorrelation3DVectorCalculator</tt> instance and calculates the 3D auto-correlation vector of the features provided by <em>cntnr</em>.
+    # 
+    # \param cntnr The container with the features for which to calculate the auto-correlation vector.
+    # \param vec The vector where to store the calculated auto-correlation vector.
     # 
     def __init__(cntnr: Pharm.FeatureContainer, vec: Math.DVector) -> None: pass
 
@@ -112,10 +115,11 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     def getStartRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param vec 
-    #
+    # \brief Calculates the 3D auto-correlation vector of the features provided by <em>cntnr</em>.
+    # 
+    # \param cntnr The container with the features for which to calculate the auto-correlation vector.
+    # \param vec The vector where to store the calculated auto-correlation vector.
+    # 
     def calculate(cntnr: Pharm.FeatureContainer, vec: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

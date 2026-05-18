@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcShapeTanimotoScore().
+# 
 class ShapeTanimotoScore(Boost.Python.instance):
 
     ##
@@ -55,10 +55,8 @@ class ShapeTanimotoScore(Boost.Python.instance):
     def assign(score: ShapeTanimotoScore) -> ShapeTanimotoScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the shape-only Tanimoto score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

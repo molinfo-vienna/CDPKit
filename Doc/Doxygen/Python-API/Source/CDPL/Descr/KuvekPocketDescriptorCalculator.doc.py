@@ -27,25 +27,26 @@
 class KuvekPocketDescriptorCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default radius of the probe sphere centered at the query position.
+    # 
     DEF_PROBE_RADIUS = 20.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum distance between an atom and the probe sphere surface for the atom to contribute.
+    # 
     DEF_MAX_ATOM_TO_SPHERE_SURF_DIST = 2.0
 
     ##
-    # \brief 
-    #
+    # \brief Default number of test vectors used to sample the probe sphere surface.
+    # 
     DEF_NUM_TEST_VECTORS = 492
 
     ##
-    # \brief Initializes the \c %KuvekPocketDescriptorCalculator instance.
-    # \param sphere_radius 
-    # \param num_test_vecs 
-    # \param max_atom_to_sphr_surf_dist 
+    # \brief Constructs a <tt>KuvekPocketDescriptorCalculator</tt> instance with the given configuration.
+    # 
+    # \param sphere_radius The probe sphere radius.
+    # \param num_test_vecs The number of test vectors used to sample the probe sphere surface.
+    # \param max_atom_to_sphr_surf_dist The maximum distance between an atom and the probe sphere surface for the atom to contribute.
     # 
     def __init__(sphere_radius: float = 20.0, num_test_vecs: int = 492, max_atom_to_sphr_surf_dist: float = 2.0) -> None: pass
 
@@ -82,9 +83,10 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of atom 3D-coordinates.
+    # 
+    # \return The configured atom 3D-coordinates function.
+    # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
@@ -97,21 +99,24 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def setAtomChargeFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of atom charges.
+    # 
+    # \return The configured atom charge function.
+    # 
     def getAtomChargeFunction() -> ForceField.MMFF94AtomChargeFunction: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the probe sphere radius.
+    # 
+    # \param radius The probe sphere radius.
+    # 
     def setSphereRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured probe sphere radius.
+    # 
+    # \return The configured probe sphere radius.
+    # 
     def getSphereRadius() -> float: pass
 
     ##
@@ -121,36 +126,42 @@ class KuvekPocketDescriptorCalculator(Boost.Python.instance):
     def setMaxAtomToSphereSurfaceDistance(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum atom-to-sphere-surface distance.
+    # 
+    # \return The configured maximum distance.
+    # 
     def getMaxAtomToSphereSurfaceDistance() -> float: pass
 
     ##
-    # \brief 
-    # \param num_vectors 
-    #
+    # \brief Sets the number of test vectors used to sample the probe sphere surface.
+    # 
+    # \param num_vectors The number of test vectors.
+    # 
     def setNumTestVectors(num_vectors: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of test vectors.
+    # 
+    # \return The configured number of test vectors.
+    # 
     def getNumTestVectors() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the test vector at index <em>idx</em> (generated on demand).
+    # 
+    # \param idx The test vector index.
+    # 
+    # \return A reference to the test vector.
+    # 
     def getTestVector(idx: int) -> Math.Vector3D: pass
 
     ##
-    # \brief 
-    # \param sphere_ctr 
-    # \param atoms 
-    # \param descr 
-    #
+    # \brief Calculates the Kuvek pocket descriptor at the given query position.
+    # 
+    # \param sphere_ctr The 3D position of the probe sphere center.
+    # \param atoms The atoms used as the environment for the calculation.
+    # \param descr The output descriptor vector.
+    # 
     def calculate(sphere_ctr: Math.Vector3D, atoms: Chem.AtomContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

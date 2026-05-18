@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcColorTanimotoScore().
+# 
 class ColorTanimotoScore(Boost.Python.instance):
 
     ##
@@ -55,10 +55,8 @@ class ColorTanimotoScore(Boost.Python.instance):
     def assign(score: ColorTanimotoScore) -> ColorTanimotoScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the color (pharmacophore) Tanimoto score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

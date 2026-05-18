@@ -25,21 +25,21 @@
 class FeatureGeometry(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an undefined feature geometry.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a spherical feature geometry.
+    # 
     SPHERE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a directional (vector) feature geometry.
+    # 
     VECTOR = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a planar feature geometry.
+    # 
     PLANE = 3

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcTotalOverlapTanimotoScore().
+# 
 class TotalOverlapTanimotoScore(Boost.Python.instance):
 
     ##
@@ -55,10 +55,8 @@ class TotalOverlapTanimotoScore(Boost.Python.instance):
     def assign(score: TotalOverlapTanimotoScore) -> TotalOverlapTanimotoScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the (shape + color) total-overlap Tanimoto score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

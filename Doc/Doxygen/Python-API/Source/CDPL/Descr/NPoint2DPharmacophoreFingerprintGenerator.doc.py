@@ -20,15 +20,17 @@
 #
 
 ##
-# \brief NPoint2DPharmacophoreFingerprintGenerator.
+# \brief N-point pharmacophore fingerprint generator that uses topological feature distances.
+# 
+# The fingerprint encodes the binned topological distances between all combinations of feature tuples generated from a molecular graph. The choice of how feature-pair topological distance is computed (min, max or average over the topological distances between the underlying atoms) is configurable via FeatureDistanceType.
 # 
 # \since 1.2
 # 
 class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies how the topological distance between two features is derived from the topological distances between their underlying atoms.
+    # 
     class FeatureDistanceType(Boost.Python.enum):
 
         ##
@@ -47,30 +49,32 @@ class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
          = 2
 
     ##
-    # \brief 
-    #
+    # \brief Default distance bin size.
+    # 
+    # \since 1.3
+    # 
     DEF_BIN_SIZE = 2.0
 
     ##
-    # \brief 
-    #
+    # \brief Default feature distance type.
+    # 
     DEF_FEATURE_DISTANCE_TYPE = 
 
     ##
-    # \brief Initializes the \c %NPoint2DPharmacophoreFingerprintGenerator instance.
+    # \brief Constructs the <tt>NPoint2DPharmacophoreFingerprintGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %NPoint2DPharmacophoreFingerprintGenerator instance.
-    # \param molgraph 
-    # \param fp 
+    # \brief Constructs the <tt>NPoint2DPharmacophoreFingerprintGenerator</tt> instance and generates the fingerprint of <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param fp The output bitset.
     # 
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %NPoint2DPharmacophoreFingerprintGenerator instance \a gen.
-    # \param gen The \c %NPoint2DPharmacophoreFingerprintGenerator instance to copy.
+    # \brief Copy constructor.
     # 
     def __init__(gen: NPoint2DPharmacophoreFingerprintGenerator) -> None: pass
 
@@ -82,22 +86,25 @@ class NPoint2DPharmacophoreFingerprintGenerator(NPointPharmacophoreFingerprintGe
     def assign(gen: NPoint2DPharmacophoreFingerprintGenerator) -> NPoint2DPharmacophoreFingerprintGenerator: pass
 
     ##
-    # \brief 
-    # \param dist_type 
-    #
+    # \brief Sets the type of feature-pair topological distance to use.
+    # 
+    # \param dist_type The feature distance type.
+    # 
     def setFeatureDistanceType(dist_type: FeatureDistanceType) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured feature distance type.
+    # 
+    # \return The configured feature distance type.
+    # 
     def getFeatureDistanceType() -> FeatureDistanceType: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param fp 
-    #
+    # \brief Generates the fingerprint of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param fp The output bitset.
+    # 
     def generate(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     featureDistanceType = property(getFeatureDistanceType, setFeatureDistanceType)

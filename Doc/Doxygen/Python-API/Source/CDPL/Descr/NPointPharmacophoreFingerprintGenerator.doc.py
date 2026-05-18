@@ -20,20 +20,22 @@
 #
 
 ##
-# \brief NPointPharmacophoreFingerprintGenerator.
+# \brief Abstract base for N-point pharmacophore fingerprint generators.
+# 
+# The base class implements the common machinery for enumerating feature tuples of size in <em>[minTupleSize, maxTupleSize]</em>, binning the feature-pair distances of each tuple and setting the corresponding bits of the output fingerprint. The concrete distance (topological vs. spatial 3D) is provided by the derived class via the pure virtual <tt>getDistance()</tt> hook.
 # 
 # \since 1.2
 # 
 class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum size of generated feature tuples.
+    # 
     DEF_MIN_FEATURE_TUPLE_SIZE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum size of generated feature tuples.
+    # 
     DEF_MAX_FEATURE_TUPLE_SIZE = 3
 
     ##
@@ -56,57 +58,70 @@ class NPointPharmacophoreFingerprintGenerator(Boost.Python.instance):
     def assign(gen: NPointPharmacophoreFingerprintGenerator) -> NPointPharmacophoreFingerprintGenerator: pass
 
     ##
-    # \brief 
-    # \param min_size 
-    #
+    # \brief Sets the minimum size of generated feature tuples.
+    # 
+    # \param min_size The minimum tuple size.
+    # 
     def setMinFeatureTupleSize(min_size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum feature tuple size.
+    # 
+    # \return The configured minimum tuple size.
+    # 
     def getMinFeatureTupleSize() -> int: pass
 
     ##
-    # \brief 
-    # \param max_size 
-    #
+    # \brief Sets the maximum size of generated feature tuples.
+    # 
+    # \param max_size The maximum tuple size.
+    # 
     def setMaxFeatureTupleSize(max_size: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum feature tuple size.
+    # 
+    # \return The configured maximum tuple size.
+    # 
     def getMaxFeatureTupleSize() -> int: pass
 
     ##
-    # \brief 
-    # \param bin_size 
-    #
+    # \brief Sets the size of the bins used to discretize feature-pair distances.
+    # 
+    # \param bin_size The bin size.
+    # 
     def setBinSize(bin_size: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured distance bin size.
+    # 
+    # \return The configured bin size.
+    # 
     def getBinSize() -> float: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a predicate that selects which features participate in the fingerprint.
+    # 
+    # \param func The feature filter function.
+    # 
+    # \since 1.3
+    # 
     def setFeatureFilterFunction(func: Pharm.BoolFeatureFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured feature filter function.
+    # 
+    # \return The configured feature filter function. 
+    # 
+    # \since 1.3
+    # 
     def getFeatureFilterFunction() -> Pharm.BoolFeatureFunctor: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the internal pharmacophore generator used for the input molecular graph.
+    # 
+    # \return A reference to the pharmacophore generator.
+    # 
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     objectID = property(getObjectID)

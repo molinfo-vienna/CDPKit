@@ -20,14 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcTotalOverlapTverskyScore().
+# 
 class TotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %TotalOverlapTverskyScore instance.
-    # \param alpha 
-    # \param beta 
+    # \brief Constructs the functor with the given Tversky weighting factors.
+    # 
+    # \param alpha The reference-side Tversky weight.
+    # \param beta The aligned-side Tversky weight.
     # 
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
@@ -57,10 +58,8 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
     def assign(score: TotalOverlapTverskyScore) -> TotalOverlapTverskyScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the (shape + color) total-overlap symmetric Tversky score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

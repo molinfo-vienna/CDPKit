@@ -20,16 +20,16 @@
 #
 
 ##
-# \brief Provides default values for built-in Chem.Atom properties.
+# \brief Provides default values for MolProp-specific Chem.Atom properties.
 # 
 class AtomPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the MolProp.AtomProperty.H_BOND_DONOR_TYPE property.
+    # 
     H_BOND_DONOR_TYPE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the MolProp.AtomProperty.H_BOND_ACCEPTOR_TYPE property.
+    # 
     H_BOND_ACCEPTOR_TYPE = 0

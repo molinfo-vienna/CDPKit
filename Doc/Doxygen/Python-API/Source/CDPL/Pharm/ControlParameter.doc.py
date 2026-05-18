@@ -34,16 +34,22 @@ class ControlParameter(Boost.Python.instance):
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey('STRICT_ERROR_CHECKING')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether floating-point values stored in CDF output shall use single (instead of double) precision.
+    # 
+    # <b>Value Type:</b> bool \since 1.2
+    # 
     CDF_OUTPUT_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey('CDF_OUTPUT_SINGLE_PRECISION_FLOATS')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the creation mode for new pharmacophore screening databases (see Pharm.ScreeningDBCreator.Mode).
+    # 
+    # <b>Value Type:</b> Pharm.ScreeningDBCreator.Mode
+    # 
     PSD_CREATION_MODE = CDPL.Base.LookupKey('PSD_CREATION_MODE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether duplicate molecules shall be permitted when building a pharmacophore screening database.
+    # 
+    # <b>Value Type:</b> bool
+    # 
     PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey('PSD_ALLOW_DUPLICATES')

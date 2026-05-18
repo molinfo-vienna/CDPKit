@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief PathFingerprintGenerator.
+# \brief Generation of Daylight-style path fingerprints of molecular graphs.
+# 
+# The generator enumerates atom-bond-atom paths up to a configurable maximum length, derives a hash for each path from per-atom and per-bond descriptors (provided by the <tt>DefAtomDescriptorFunctor</tt> / <tt>DefBondDescriptorFunctor</tt> or user-supplied alternatives), and folds the hashes into a bitset of any size.
 # 
 # \see [\ref DTPFP]
 # 
@@ -190,15 +192,21 @@ class PathFingerprintGenerator(Boost.Python.instance):
     def getMaxPathLength() -> int: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether hydrogens shall be considered during path enumeration.
+    # 
+    # \param include If <tt>True</tt>, hydrogens are considered as regular atoms during fingerprint generation.
+    # 
+    # \since 1.3
+    # 
     def includeHydrogens(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether hydrogens are considered during path enumeration.
+    # 
+    # \return <tt>True</tt> if hydrogens are considered, and <tt>False</tt> otherwise. 
+    # 
+    # \since 1.3
+    # 
     def hydrogensIncluded() -> bool: pass
 
     ##

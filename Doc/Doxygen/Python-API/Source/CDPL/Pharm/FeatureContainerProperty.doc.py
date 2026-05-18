@@ -25,6 +25,8 @@
 class FeatureContainerProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the name of the feature container.
+    # 
+    # <b>Value Type:</b> std::string
+    # 
     NAME = CDPL.Base.LookupKey('NAME')

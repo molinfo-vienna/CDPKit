@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcAlignedColorTverskyScore().
+# 
 class AlignedColorTverskyScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %AlignedColorTverskyScore instance.
-    # \param beta 
+    # \brief Constructs the functor with the given Tversky weighting factor.
+    # 
+    # \param beta The aligned-side Tversky weight.
     # 
     def __init__(beta: float = 0.95) -> None: pass
 
@@ -56,10 +57,8 @@ class AlignedColorTverskyScore(Boost.Python.instance):
     def assign(score: AlignedColorTverskyScore) -> AlignedColorTverskyScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the color aligned-normalized Tversky score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

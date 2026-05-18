@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MoleculeAutoCorr3DDescriptorCalculator.
+# \brief Calculation of a 3D auto-correlation descriptor of a molecular graph using atom-pair weights resolved by a per-atom mode.
+# 
+# Compared to Descr.AutoCorrelation3DVectorCalculator, this calculator forwards the per-atom mode to the atom-pair weight function so callers can compute mode-partitioned descriptors.
 # 
 class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
 
@@ -36,9 +38,10 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def __init__(calc: MoleculeAutoCorr3DDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
-    # \param cntnr 
-    # \param descr 
+    # \brief Constructs the <tt>MoleculeAutoCorr3DDescriptorCalculator</tt> instance and calculates the descriptor of the atoms in <em>cntnr</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the descriptor.
+    # \param descr The output descriptor vector.
     # 
     def __init__(cntnr: Chem.AtomContainer, descr: Math.DVector) -> None: pass
 
@@ -128,10 +131,11 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def getStartRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param descr 
-    #
+    # \brief Calculates the 3D auto-correlation descriptor of the atoms in <em>cntnr</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the descriptor.
+    # \param descr The output descriptor vector.
+    # 
     def calculate(cntnr: Chem.AtomContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

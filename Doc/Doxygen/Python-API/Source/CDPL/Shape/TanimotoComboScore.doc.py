@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Functor wrapping Shape.calcTanimotoComboScore().
+# 
 class TanimotoComboScore(Boost.Python.instance):
 
     ##
@@ -55,10 +55,8 @@ class TanimotoComboScore(Boost.Python.instance):
     def assign(score: TanimotoComboScore) -> TanimotoComboScore: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Returns the combined shape + color Tanimoto score of <em>res</em>.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

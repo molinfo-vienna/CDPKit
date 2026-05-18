@@ -20,11 +20,13 @@
 #
 
 ##
-# \brief Provides keys for built-in Chem.Bond properties.
+# \brief Provides keys for MolProp-specific Chem.Bond properties.
 # 
 class BondProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the MHMO pi-bond order of the bond.
+    # 
+    # <b>Value Type:</b> double
+    # 
     MHMO_PI_ORDER = CDPL.Base.LookupKey('MHMO_PI_ORDER')

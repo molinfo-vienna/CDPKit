@@ -20,49 +20,49 @@
 #
 
 ##
-# \brief 
-#
+# \brief High-level driver for the alignment of Gaussian shapes against a set of reference shapes.
+# 
+# The class manages a list of reference Gaussian shapes (organised into reference sets), runs the underlying Shape.GaussianShapeFunctionAlignment for each (reference, aligned) pair, and collects the Shape.AlignmentResult instances filtered according to the configured selection mode and comparator/scoring functions.
+# 
 class GaussianShapeAlignment(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default gradient norm at which the overlap optimization is stopped.
+    # 
     DEF_OPTIMIZATION_STOP_GRADIENT = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum number of overlap-optimization iterations.
+    # 
     DEF_MAX_OPTIMIZATION_ITERATIONS = 20
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum order of the Gaussian-product expansion.
+    # 
     DEF_MAX_PRODUCT_ORDER = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default distance cutoff for pruning negligible overlap contributions.
+    # 
     DEF_DISTANCE_CUTOFF = 0.0
 
     ##
-    # \brief 
-    #
+    # \brief Default alignment-result selection mode.
+    # 
     DEF_RESULT_SELECTION_MODE = 3
 
     ##
-    # \brief Initializes the \c %GaussianShapeAlignment instance.
+    # \brief Constructs the <tt>GaussianShapeAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %GaussianShapeAlignment instance.
-    # \param ref_shape 
+    # \brief Constructs the <tt>GaussianShapeAlignment</tt> instance with <em>ref_shape</em> as the single reference shape.
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes the \c %GaussianShapeAlignment instance.
-    # \param ref_shapes 
+    # \brief Constructs the <tt>GaussianShapeAlignment</tt> instance with the shapes in <em>ref_shapes</em> as the reference set.
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
@@ -79,278 +79,242 @@ class GaussianShapeAlignment(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the Gaussian-shape overlap function used during alignment.
+    # 
     def setOverlapFunction(func: GaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap function.
+    # 
     def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the built-in default overlap function.
+    # 
     def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
     ##
-    # \brief 
-    # \param gen 
-    #
+    # \brief Specifies the alignment-start generator used to seed the overlap optimization.
+    # 
     def setStartGenerator(gen: GaussianShapeAlignmentStartGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured alignment-start generator.
+    # 
     def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the built-in principal-axes alignment-start generator.
+    # 
     def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to decide whether two color features match.
+    # 
     def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-match function.
+    # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to filter color features by type.
+    # 
     def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-filter function.
+    # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to compare two alignment results for sorting and filtering.
+    # 
     def setResultCompareFunction(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured result-compare function.
+    # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to score an alignment result.
+    # 
     def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured scoring function.
+    # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the alignment-result selection mode (see namespace Shape.AlignmentResultSelectionMode).
+    # 
     def setResultSelectionMode(mode: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured alignment-result selection mode.
+    # 
     def getResultSelectionMode() -> int: pass
 
     ##
-    # \brief 
-    # \param max_iter 
-    #
+    # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of overlap-optimization iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
-    # \brief 
-    # \param grad_norm 
-    #
+    # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap-optimization stop gradient.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
-    # \brief 
-    # \param perf_align 
-    #
+    # \brief Specifies whether the actual alignment shall be performed (vs. only computing overlaps in the initial pose).
+    # 
     def performAlignment(perf_align: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the actual alignment is performed.
+    # 
     def performAlignment() -> bool: pass
 
     ##
-    # \brief 
-    # \param optimize 
-    #
+    # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap is optimized iteratively.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
-    # \brief 
-    # \param greedy 
-    #
+    # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
     def greedyOptimization() -> bool: pass
 
     ##
-    # \brief 
-    # \param calc 
-    #
+    # \brief Specifies whether color overlaps shall be computed in addition to shape overlaps.
+    # 
     def calcColorOverlaps(calc: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether color overlaps are computed in addition to shape overlaps.
+    # 
     def calcColorOverlaps() -> bool: pass
 
     ##
-    # \brief 
-    # \param calc 
-    #
+    # \brief Specifies whether shape self-overlaps shall be computed for the involved shapes.
+    # 
     def calcSelfOverlaps(calc: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether shape self-overlaps are computed for the involved shapes.
+    # 
     def calcSelfOverlaps() -> bool: pass
 
     ##
-    # \brief 
-    # \param calc 
-    #
+    # \brief Specifies whether color self-overlaps shall be computed for the involved shapes.
+    # 
     def calcColorSelfOverlaps(calc: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether color self-overlaps are computed for the involved shapes.
+    # 
     def calcColorSelfOverlaps() -> bool: pass
 
     ##
-    # \brief 
-    # \param max_order 
-    #
+    # \brief Sets the maximum order of the Gaussian-product expansion used by the overlap function.
+    # 
     def setMaxOrder(max_order: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum order of the Gaussian-product expansion.
+    # 
     def getMaxOrder() -> int: pass
 
     ##
-    # \brief 
-    # \param cutoff 
-    #
+    # \brief Sets the distance cutoff for pruning negligible overlap contributions.
+    # 
     def setDistanceCutoff(cutoff: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured distance cutoff.
+    # 
     def getDistanceCutoff() -> float: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all reference shapes and reference shape sets.
+    # 
     def clearReferenceShapes() -> None: pass
 
     ##
-    # \brief 
-    # \param shape 
-    # \param new_set 
-    #
+    # \brief Adds <em>shape</em> to the reference shapes.
+    # 
+    # \param shape The reference shape.
+    # \param new_set If <tt>True</tt>, <em>shape</em> is added to a new reference set; otherwise it is appended to the most recent reference set.
+    # 
     def addReferenceShape(shape: GaussianShape, new_set: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param shapes 
-    # \param new_set 
-    #
+    # \brief Adds the shapes in <em>shapes</em> to the reference shapes.
+    # 
+    # \param shapes The reference shapes.
+    # \param new_set If <tt>True</tt>, the shapes are added to a new reference set; otherwise they are appended to the most recent reference set.
+    # 
     def addReferenceShapes(shapes: GaussianShapeSet, new_set: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of reference shapes.
+    # 
     def getNumReferenceShapes() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the reference shape at index <em>idx</em>.
+    # 
     def getReferenceShape(idx: int) -> GaussianShape: pass
 
     ##
-    # \brief 
-    # \param shape 
-    # \return 
-    #
+    # \brief Aligns <em>shape</em> against all reference shapes.
+    # 
+    # \param shape The shape to align.
+    # 
+    # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
+    # 
     def align(shape: GaussianShape) -> bool: pass
 
     ##
-    # \brief 
-    # \param shapes 
-    # \return 
-    #
+    # \brief Aligns each shape in <em>shapes</em> against all reference shapes.
+    # 
+    # \param shapes The shapes to align.
+    # 
+    # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
+    # 
     def align(shapes: GaussianShapeSet) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored alignment results.
+    # 
     def getNumResults() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the alignment result at index <em>idx</em>.
+    # 
     def getResult(idx: int) -> AlignmentResult: pass
 
     ##

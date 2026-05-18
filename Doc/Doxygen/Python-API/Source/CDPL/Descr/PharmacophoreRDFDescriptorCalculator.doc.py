@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief PharmacophoreRDFDescriptorCalculator.
+# \brief Calculation of an RDF descriptor of a pharmacophore using feature-pair weights resolved by a per-feature mode.
 # 
 # \see [\ref CITB, \ref HBMD]
 # 
@@ -38,9 +38,10 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     def __init__(calc: PharmacophoreRDFDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %PharmacophoreRDFDescriptorCalculator instance.
-    # \param cntnr 
-    # \param descr 
+    # \brief Constructs the <tt>PharmacophoreRDFDescriptorCalculator</tt> instance and calculates the descriptor of the features in <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param descr The output descriptor vector.
     # 
     def __init__(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
@@ -178,10 +179,11 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param descr 
-    #
+    # \brief Calculates the RDF descriptor of the features in <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param descr The output descriptor vector.
+    # 
     def calculate(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

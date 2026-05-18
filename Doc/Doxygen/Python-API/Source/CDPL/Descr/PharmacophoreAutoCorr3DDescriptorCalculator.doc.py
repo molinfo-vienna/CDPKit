@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief PharmacophoreAutoCorr3DDescriptorCalculator.
+# \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore using feature-pair weights resolved by a per-feature mode.
 # 
 class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
 
@@ -36,9 +36,10 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def __init__(calc: PharmacophoreAutoCorr3DDescriptorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance.
-    # \param cntnr 
-    # \param descr 
+    # \brief Constructs the <tt>PharmacophoreAutoCorr3DDescriptorCalculator</tt> instance and calculates the descriptor of the features in <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param descr The output descriptor vector.
     # 
     def __init__(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
@@ -128,10 +129,11 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def getStartRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param descr 
-    #
+    # \brief Calculates the 3D auto-correlation descriptor of the features in <em>cntnr</em>.
+    # 
+    # \param cntnr The feature container.
+    # \param descr The output descriptor vector.
+    # 
     def calculate(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
