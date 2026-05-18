@@ -44,7 +44,8 @@ namespace CDPL
     {
 
         /**
-         * \brief A data structure for the storage of imported PDB data records (see [\ref CTFILE]).
+         * \brief A data structure for the storage of data records found in PDB
+         *        formatted data [\ref PDB].
          */
         class CDPL_BIOMOL_API PDBData
         {
@@ -56,9 +57,7 @@ namespace CDPL
             typedef std::shared_ptr<PDBData> SharedPointer;
 
             /**
-             * \brief Identifies a PDB record type. Values correspond to the record tags defined by
-             *        the <em>PDB File Format Description Version 3.30</em>, plus three derived
-             *        synthetic records (\c STRUCTURE_ID, \c DEPOSITION_DATE, \c RESOLUTION).
+             * \brief Identifies the type of PDB data record.
              */
             enum RecordType
             {

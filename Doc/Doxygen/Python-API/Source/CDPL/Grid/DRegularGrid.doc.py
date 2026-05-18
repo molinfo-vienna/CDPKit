@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A regular 3D spatial grid storing double-precision floating-point values.
+# \brief A regular spatial grid storing double-precision floating-point values.
 # 
 class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
 

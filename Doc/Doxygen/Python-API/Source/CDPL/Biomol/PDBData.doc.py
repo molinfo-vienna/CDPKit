@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief A data structure for the storage of imported PDB data records (see [\ref CTFILE]).
+# \brief A data structure for the storage of data records found in PDB formatted data [\ref PDB].
 # 
 class PDBData(Boost.Python.instance):
 
     ##
-    # \brief Identifies a PDB record type. Values correspond to the record tags defined by the <em>PDB File Format Description Version 3.30</em>, plus three derived synthetic records (<tt>STRUCTURE_ID</tt>, <tt>DEPOSITION_DATE</tt>, <tt>RESOLUTION</tt>).
+    # \brief Identifies the type of PDB data record.
     # 
     class RecordType(Boost.Python.enum):
 

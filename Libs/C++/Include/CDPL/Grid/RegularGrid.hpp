@@ -40,7 +40,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A regular 3D spatial grid implementation of the SpatialGrid interface.
+         * \brief A regular spatial grid implementation of the SpatialGrid interface.
          *
          * \c %RegularGrid combines the property-bag/grid interface inherited from Grid::SpatialGrid with
          * the data storage and coordinate handling of Math::RegularSpatialGrid. The grid spacing can be
@@ -152,12 +152,12 @@ namespace CDPL
         };
 
         /**
-         * \brief A regular 3D spatial grid storing single-precision floating-point values.
+         * \brief A regular spatial grid storing single-precision floating-point values.
          */
         typedef RegularGrid<float>  FRegularGrid;
 
         /**
-         * \brief A regular 3D spatial grid storing double-precision floating-point values.
+         * \brief A regular spatial grid storing double-precision floating-point values.
          */
         typedef RegularGrid<double> DRegularGrid;
     } // namespace Grid

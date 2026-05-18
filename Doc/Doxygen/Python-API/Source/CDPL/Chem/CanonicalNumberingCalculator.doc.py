@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Calculation of canonical atom numberings for molecular graphs using McKay's algorithm for practical graph isomorphism.
+# \brief Calculation of canonical atom numberings for molecular graphs using McKay's algorithm.
 # 
 # The set of atom and bond properties used to break ties during numbering can be configured via setAtomPropertyFlags() and setBondPropertyFlags(); a custom hydrogen-count function used for label generation can be installed via setHydrogenCountFunction().
 # 

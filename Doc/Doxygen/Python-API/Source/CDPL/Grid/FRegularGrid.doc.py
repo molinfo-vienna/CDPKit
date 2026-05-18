@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A regular 3D spatial grid storing single-precision floating-point values.
+# \brief A regular spatial grid storing single-precision floating-point values.
 # 
 class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 

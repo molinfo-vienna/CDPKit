@@ -121,7 +121,7 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
 
             /**
-             * \brief Specifies the environment substructure (e.g. surrounding residues) associated with the feature.
+             * \brief Specifies the environment substructure (e.g. interacting pocket residues) associated with the feature.
              *
              * \valuetype Chem::Fragment::SharedPointer
              * \since 1.4

@@ -20,9 +20,11 @@
 #
 
 ##
-# \brief A library of pre-generated conformations for rigid molecular fragments, indexed by canonical-fragment hash code.
+# \brief A library of pre-generated conformations for molecular fragments, indexed by canonical-fragment hash code.
 # 
 # Entries are FragmentLibraryEntry instances keyed by the hash code of the associated ConfGen.CanonicalFragment. The library is iterable, supports lookup/insertion/removal, can be serialized to and from a stream, and provides a process-wide default instance via the static set() / get() accessors. A built-in mutex is exposed via getMutex() to allow callers to coordinate concurrent access.
+# 
+# \see [\ref CFRG]
 # 
 class FragmentLibrary(Boost.Python.instance):
 
