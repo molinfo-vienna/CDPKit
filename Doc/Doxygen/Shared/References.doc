@@ -104,6 +104,14 @@ J. Greene <i>et al.</i>, Chemical Function Queries for 3D Database Search,
 </tr>
 
 <tr>
+<td valign="top">\anchor CFRG<i>[CFRG]</i></td>
+<td valign="top">
+T. Seidel <i>et al.</i>, High-Quality Conformer Generation with CONFORGE: Algorithm and Performance Assessment,
+<i>J. Chem. Inf. Model.</i> <b>2023</b>, 63, 17, 5549-5570
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor CIPJM<i>[CIPJM]</i></td>
 <td valign="top">
 J. Mayfield <i>et al.</i>, Perception and labelling of stereogenic centres in chemical structures: https://github.com/SiMolecule/centres
