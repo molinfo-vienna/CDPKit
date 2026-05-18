@@ -28,6 +28,7 @@
 #include <locale>
 
 #include "CDPL/Grid/RegularGrid.hpp"
+#include "CDPL/Grid/ControlParameterFunctions.hpp"
 
 #include "CUBEDataWriter.hpp"
 
@@ -39,10 +40,18 @@ bool Grid::CUBEDataWriter::writeGrid(std::ostream& os, const DRegularGrid& grid)
 {
     init(os);
 
+    writeHeader(os, grid);
+    
     return true;
 }
 
 void Grid::CUBEDataWriter::init(std::ostream& os)
 {
     os.imbue(std::locale::classic());
+
+    commentIsName = getCUBECommentIsNameParameter(ctrlParams);
+}
+
+void Grid::CUBEDataWriter::writeHeader(std::ostream& os, const DRegularGrid& grid)
+{
 }

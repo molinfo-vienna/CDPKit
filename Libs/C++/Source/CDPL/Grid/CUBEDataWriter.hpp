@@ -52,7 +52,10 @@ namespace CDPL
           protected:
             void init(std::ostream& os);
 
+            void writeHeader(std::ostream& os, const DRegularGrid& grid);
+
             const Base::ControlParameterContainer& ctrlParams;
+            bool                                   commentIsName;
         };
     } // namespace Grid
 } // namespace CDPL
