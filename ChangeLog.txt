@@ -1,6 +1,8 @@
 master:
 
- - New control-paramter Grid::Controlarameter::CUBE_COMMENT_IS_NAME plus associated function
+ - New control-paramter Grid::ControlParameter::CUBE_COMMENT_IS_NAME plus associated function
+ - New control-paramter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR plus associated function
+ - New control-paramter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR plus associated function  
  - New property Grid::AttributedGrid::COMMENT plus default value and associated function
  - Declaration of new type Grid::CUBEDRegularGridOutputHandler mediating the output of Grid::DRegularGrid data in the Gaussian CUBE format
  - Declaration of new type Grid::CUBEDRegularGridInputHandler mediating the input of Grid::DRegularGrid data in the Gaussian CUBE format
