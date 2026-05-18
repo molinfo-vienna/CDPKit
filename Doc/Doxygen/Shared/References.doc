@@ -193,6 +193,14 @@ An algorithm to identify functional groups in organic molecules,
 </tr>
 
 <tr>
+<td valign="top">\anchor GRADE<i>[GRADE]</i></td>
+<td valign="top">
+C. Fellinger <i>et al.</i>, GRADE and X-GRADE: Unveiling Novel Protein–Ligand Interaction Fingerprints Based on GRAIL Scores, 
+<i>J. Chem. Inf. Model.</i> <b>2025</b>, 65, 5, 2456-2475
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor GRAIL<i>[GRAIL]</i></td>
 <td valign="top">
 D. A. Schuetz <i>et al.</i>, GRAIL: GRids of phArmacophore Interaction fieLds, 
@@ -341,7 +349,7 @@ W.-D. Ihlenfeldt, J. Gasteiger, Hash Codes for the Identification and Classifica
 <td valign="top">\anchor MHMO<i>[MHMO]</i></td>
 <td valign="top">
 T. Kleinoeder, PhD-Thesis: <i>Prediction of Properties of Organic Compounds - Empirical Methods and Management of Property Data</i>,
-Friedrich Alexander University of Erlangen-Nuremberg, <b>1994</b>
+Friedrich Alexander University of Erlangen-Nuremberg, <b>2005</b>
 </td>
 </tr>
 
