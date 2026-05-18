@@ -49,7 +49,14 @@ namespace CDPL
     {
 
         /**
-         * \brief BurdenMatrixGenerator.
+         * \brief Calculation of the \e Burden matrix of a molecular graph.
+         *
+         * The \e Burden matrix is a square matrix of dimension <em>N &times; N</em>, where <em>N</em>
+         * is the number of atoms of the molecular graph. The diagonal elements default to the atom
+         * type but can be replaced via a user-supplied atom weight function (see
+         * setAtomWeightFunction()). The off-diagonal elements encode the bond orders of the
+         * connecting bonds.
+         *
          * \see [\ref BURMA]
          */
         class CDPL_DESCR_API BurdenMatrixGenerator
@@ -71,7 +78,7 @@ namespace CDPL
             BurdenMatrixGenerator();
 
             /**
-             * \brief Constructs the \c %BCUTDescriptorGenerator instance and generates the \e Burden matrix of
+             * \brief Constructs the \c %BurdenMatrixGenerator instance and generates the \e Burden matrix of
              *        the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to generate the \e Burden matrix.
              * \param mtx The generated \e Burden matrix of the specified molecular graph.

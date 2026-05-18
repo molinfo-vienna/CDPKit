@@ -45,13 +45,23 @@ namespace CDPL
     {
 
         /**
-         * \brief AutoCorrelation3DVectorCalculator.
+         * \brief Generic implementation of the 3D auto-correlation vector calculation for sequences of
+         *        entities of arbitrary type.
+         *
+         * The actual entity type is specified by the template parameter \a T. User-defined functions for
+         * the retrieval of entity 3D coordinates and for the calculation of entity-pair weights can be
+         * provided via setEntity3DCoordinatesFunction() and setEntityPairWeightFunction().
+         *
+         * \tparam T The type of the entities for which the 3D auto-correlation vector shall be calculated.
          */
         template <typename T>
         class AutoCorrelation3DVectorCalculator
         {
 
           public:
+            /**
+             * \brief The type of the entities passed to calculate().
+             */
             typedef T EntityType;
 
             /**
@@ -136,16 +146,16 @@ namespace CDPL
             void setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func);
 
             /**
-             * \brief Calculates the RDF code of an entity sequence.
+             * \brief Calculates the 3D auto-correlation vector of an entity sequence.
              *
              * The elements of the returned vector correspond to the values of the 3D autocorrelation function
              * for the different interval centers. The total number of calculated vector elements is given by
              * the specified number of incrementation steps (see setNumSteps()).
-             * 
+             *
              * \param beg An iterator pointing to the beginning of the entity sequence.
              * \param end An iterator pointing one past the end of the entity sequence.
              * \param vec The calculated 3D autocorrelation vector.
-              */
+             */
             template <typename Iter, typename Vec>
             void calculate(Iter beg, Iter end, Vec& vec);
 

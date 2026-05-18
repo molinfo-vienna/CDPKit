@@ -44,7 +44,14 @@ namespace CDPL
         namespace AttributedGridPropertyDefault
         {
 
+            /**
+             * \brief Default value of the GRAIL::AttributedGridProperty::FEATURE_TYPE property.
+             */
             extern CDPL_GRAIL_API const unsigned int FEATURE_TYPE;
+
+            /**
+             * \brief Default value of the GRAIL::AttributedGridProperty::TARGET_FEATURE_TYPE property.
+             */
             extern CDPL_GRAIL_API const unsigned int TARGET_FEATURE_TYPE;
         } // namespace AttributedGridPropertyDefault
     } // namespace GRAIL

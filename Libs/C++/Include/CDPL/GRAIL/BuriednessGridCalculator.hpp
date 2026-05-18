@@ -55,28 +55,67 @@ namespace CDPL
     {
 
         /**
-         * \brief BuriednessGridCalculator.
+         * \brief Calculator that fills a spatial grid with per-cell buriedness scores derived from
+         *        GRAIL::BuriednessScore.
+         *
+         * For each grid cell, the buriedness score with respect to the surrounding atoms is computed
+         * and stored. The configurable parameters (probe radius, minimum van der Waals surface
+         * distance, number of test rays) are forwarded to the underlying BuriednessScore instance.
          */
         class CDPL_GRAIL_API BuriednessGridCalculator
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BuriednessGridCalculator instances.
+             */
             typedef std::shared_ptr<BuriednessGridCalculator> SharedPointer;
 
+            /**
+             * \brief Constructs the \c %BuriednessGridCalculator instance.
+             */
             BuriednessGridCalculator();
 
+            /**
+             * \brief Constructs a copy of the \c %BuriednessGridCalculator instance \a calc.
+             * \param calc The \c %BuriednessGridCalculator to copy.
+             */
             BuriednessGridCalculator(const BuriednessGridCalculator& calc);
 
+            /**
+             * \brief Sets the probe sphere radius used by the underlying GRAIL::BuriednessScore.
+             * \param radius The probe sphere radius.
+             */
             void setProbeRadius(double radius);
 
+            /**
+             * \brief Returns the currently configured probe sphere radius.
+             * \return The configured probe sphere radius.
+             */
             double getProbeRadius() const;
 
+            /**
+             * \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
+             * \param dist The minimum distance to the van der Waals surface.
+             */
             void setMinVdWSurfaceDistance(double dist);
 
+            /**
+             * \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
+             * \return The configured minimum distance to the van der Waals surface.
+             */
             double getMinVdWSurfaceDistance() const;
 
+            /**
+             * \brief Sets the number of test rays cast from each grid cell.
+             * \param num_rays The number of test rays.
+             */
             void setNumTestRays(std::size_t num_rays);
 
+            /**
+             * \brief Returns the currently configured number of test rays.
+             * \return The configured number of test rays.
+             */
             std::size_t getNumTestRays() const;
 
             /**
@@ -85,10 +124,24 @@ namespace CDPL
              */
             void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
+            /**
+             * \brief Returns the function used for the retrieval of atom 3D-coordinates.
+             * \return The configured atom 3D-coordinates function.
+             */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+            /**
+             * \brief Calculates the buriedness value at each cell of \a grid for the given atoms.
+             * \param atoms The atoms used as the environment for the buriedness calculation.
+             * \param grid The output grid populated with per-cell buriedness scores.
+             */
             void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
+            /**
+             * \brief Copy assignment operator.
+             * \param calc The other \c %BuriednessGridCalculator instance.
+             * \return A reference to itself.
+             */
             BuriednessGridCalculator& operator=(const BuriednessGridCalculator& calc);
 
           private:

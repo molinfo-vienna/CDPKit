@@ -48,7 +48,14 @@ namespace CDPL
     {
 
         /**
-         * \brief AtomAutoCorrelation3DVectorCalculator.
+         * \brief AutoCorrelation3DVectorCalculator implementation for the calculation of atom-centered
+         *        3D auto-correlation vectors of chemical structures.
+         *
+         * \c %AtomAutoCorrelation3DVectorCalculator is a specialization of
+         * \c %AutoCorrelation3DVectorCalculator for entities of type Chem::Atom. The atom 3D
+         * coordinates accessor function is preset to Chem::get3DCoordinates() and the entity-pair
+         * weight function as well as any other calculation parameters can be configured via the
+         * inherited setter methods of the base class.
          */
         class CDPL_DESCR_API AtomAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Chem::Atom>
         {
@@ -59,8 +66,25 @@ namespace CDPL
              */
             AtomAutoCorrelation3DVectorCalculator();
 
+            /**
+             * \brief Constructs the \c %AtomAutoCorrelation3DVectorCalculator instance and calculates
+             *        the 3D auto-correlation vector of the atoms provided by \a cntnr.
+             *
+             * The calculated vector is stored in \a vec.
+             *
+             * \param cntnr The container with the atoms for which to calculate the auto-correlation vector.
+             * \param vec The vector where to store the calculated auto-correlation vector.
+             */
             AtomAutoCorrelation3DVectorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& vec);
 
+            /**
+             * \brief Calculates the 3D auto-correlation vector of the atoms provided by \a cntnr.
+             *
+             * The calculated vector is stored in \a vec.
+             *
+             * \param cntnr The container with the atoms for which to calculate the auto-correlation vector.
+             * \param vec The vector where to store the calculated auto-correlation vector.
+             */
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& vec);
         };
     } // namespace Descr

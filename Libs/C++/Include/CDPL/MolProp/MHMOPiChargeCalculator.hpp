@@ -60,41 +60,106 @@ namespace CDPL
         class PEOESigmaChargeCalculator;
         
         /**
-         * \brief MHMOPiChargeCalculator.
+         * \brief Calculator that uses a Modified Hückel Molecular Orbital (MHMO) treatment to compute
+         *        pi-electron densities, pi-charges, pi-bond orders and the total pi-electron energy of a
+         *        molecular graph.
+         *
+         * The calculator can either perceive the pi-electron systems of the molecular graph itself
+         * (via Chem::ElectronSystemList) or accept a pre-computed list of pi-systems. The MHMO
+         * parameter set follows the parameterization described in Kleinöder's PhD thesis.
+         *
          * \see [\ref MHMO]
          */
         class CDPL_MOLPROP_API MHMOPiChargeCalculator
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MHMOPiChargeCalculator instances.
+             */
             typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
+            /**
+             * \brief Constructs the \c %MHMOPiChargeCalculator instance.
+             */
             MHMOPiChargeCalculator();
-            
+
+            /**
+             * \brief Constructs the \c %MHMOPiChargeCalculator instance and performs the MHMO calculation for \a molgraph.
+             *
+             * The pi-electron systems are perceived from \a molgraph.
+             *
+             * \param molgraph The molecular graph for which to perform the MHMO calculation.
+             */
             MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Constructs the \c %MHMOPiChargeCalculator instance and performs the MHMO calculation for the given
+             *        pi-electron systems of \a molgraph.
+             * \param pi_sys_list The list of pi-electron systems.
+             * \param molgraph The molecular graph.
+             */
             MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
             MHMOPiChargeCalculator(const MHMOPiChargeCalculator&) = delete;
 
+            /**
+             * \brief Destructor.
+             */
             ~MHMOPiChargeCalculator();
-      
+
             MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&) = delete;
 
+            /**
+             * \brief Specifies whether the calculation shall use localized pi-bonds.
+             * \param localized If \c true, conjugated pi-systems are treated as a set of localized pi-bonds.
+             */
             void localizedPiBonds(bool localized);
 
+            /**
+             * \brief Tells whether the calculation uses localized pi-bonds.
+             * \return \c true if the calculation uses localized pi-bonds, and \c false otherwise.
+             */
             bool localizedPiBonds() const;
 
+            /**
+             * \brief Performs the MHMO calculation for \a molgraph, perceiving the pi-electron systems on the fly.
+             * \param molgraph The molecular graph for which to perform the MHMO calculation.
+             */
             void calculate(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Performs the MHMO calculation for the given pi-electron systems of \a molgraph.
+             * \param pi_sys_list The list of pi-electron systems.
+             * \param molgraph The molecular graph.
+             */
             void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Returns the calculated pi-electron density of the atom at index \a atom_idx.
+             * \param atom_idx The zero-based atom index.
+             * \return The calculated pi-electron density.
+             */
             double getElectronDensity(std::size_t atom_idx) const;
 
+            /**
+             * \brief Returns the calculated pi-charge of the atom at index \a atom_idx.
+             * \param atom_idx The zero-based atom index.
+             * \return The calculated pi-charge.
+             */
             double getCharge(std::size_t atom_idx) const;
 
+            /**
+             * \brief Returns the calculated pi-bond order of the bond at index \a bond_idx.
+             * \param bond_idx The zero-based bond index.
+             * \return The calculated pi-bond order.
+             */
             double getBondOrder(std::size_t bond_idx) const;
 
+            /**
+             * \brief Returns the total pi-electron energy of the molecular graph from the last calculation.
+             * \return The total pi-electron energy.
+             */
             double getEnergy() const;
 
           private:

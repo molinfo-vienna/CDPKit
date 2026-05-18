@@ -49,6 +49,16 @@ namespace CDPL
     {
 
         /**
+         * \brief Calculator that performs a bulk pairwise comparison of a single query descriptor
+         *        against a stored set of target descriptors using a configurable similarity function.
+         *
+         * Stored descriptors are held by shared pointer; the calculator can therefore share descriptor
+         * ownership with external code. After a call to calculate() the per-target similarity values
+         * are available in stored order and can optionally be sorted.
+         *
+         * \tparam DT The descriptor type (defaults to Util::BitSet, suitable for fingerprint similarity).
+         * \tparam SVT The similarity-value type (defaults to \c double).
+         *
          * \since 1.2.3
          */
         template <typename DT = Util::BitSet, typename SVT = double>
@@ -56,11 +66,34 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief The descriptor type.
+             */
             typedef DT                                        Descriptor;
+
+            /**
+             * \brief A smart pointer to a stored descriptor.
+             */
             typedef std::shared_ptr<DT>                       DescriptorPointer;
+
+            /**
+             * \brief The similarity-value type.
+             */
             typedef SVT                                       SimilarityValue;
+
+            /**
+             * \brief Type of the generic functor used to compute the similarity of two descriptors.
+             */
             typedef std::function<SVT(const DT&, const DT&)>  SimilarityFunction;
+
+            /**
+             * \brief A single calculation result: (target descriptor index, similarity value).
+             */
             typedef std::pair<std::size_t, SVT>               Result;
+
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BulkSimilarityCalculator instances.
+             */
             typedef std::shared_ptr<BulkSimilarityCalculator> SharedPointer;
 
           private:
@@ -68,61 +101,209 @@ namespace CDPL
             typedef std::vector<Result>            ResultList;
 
           public:
+            /**
+             * \brief A constant iterator over the stored target descriptors.
+             */
             typedef boost::indirect_iterator<typename DescriptorList::const_iterator, DT>
                 ConstDescriptorIterator;
+
+            /**
+             * \brief A mutable iterator over the stored target descriptors.
+             */
             typedef boost::indirect_iterator<typename DescriptorList::iterator, DT>
                 DescriptorIterator;
 
+            /**
+             * \brief A constant iterator over the calculation results.
+             */
             typedef typename ResultList::const_iterator ConstResultIterator;
-            
+
+            /**
+             * \brief Constructs the \c %BulkSimilarityCalculator instance with the default similarity function
+             *        (TanimotoSimilarity).
+             */
             BulkSimilarityCalculator() = default;
 
+            /**
+             * \brief Copy constructor.
+             * \param calc The other \c %BulkSimilarityCalculator instance.
+             */
             BulkSimilarityCalculator(const BulkSimilarityCalculator& calc) = default;
+
+            /**
+             * \brief Move constructor.
+             * \param calc The other \c %BulkSimilarityCalculator instance.
+             */
             BulkSimilarityCalculator(BulkSimilarityCalculator&& calc) = default;
-            
+
+            /**
+             * \brief Constructs the \c %BulkSimilarityCalculator instance with the given similarity function.
+             * \tparam SF The similarity-function type.
+             * \param sim_func The similarity function.
+             */
             template <typename SF>
             BulkSimilarityCalculator(SF&& sim_func):
                 simFunc(std::forward<SF>(sim_func)) {}
 
+            /**
+             * \brief Copy assignment operator.
+             * \param calc The other \c %BulkSimilarityCalculator instance.
+             * \return A reference to itself.
+             */
             BulkSimilarityCalculator& operator=(const BulkSimilarityCalculator& calc) = default;
+
+            /**
+             * \brief Move assignment operator.
+             * \param calc The other \c %BulkSimilarityCalculator instance.
+             * \return A reference to itself.
+             */
             BulkSimilarityCalculator& operator=(BulkSimilarityCalculator&& calc) = default;
-            
+
+            /**
+             * \brief Returns the currently configured similarity function.
+             * \return A \c const reference to the similarity function.
+             */
             const SimilarityFunction& getSimilarityFunction() const;
 
+            /**
+             * \brief Sets the similarity function.
+             * \tparam SF The similarity-function type.
+             * \param func The new similarity function.
+             */
             template <typename SF>
             void setSimilarityFunction(SF&& func);
-            
+
+            /**
+             * \brief Removes all stored descriptors and calculation results.
+             */
             void clear();
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first stored descriptor.
+             * \return A mutable iterator pointing to the first stored descriptor.
+             */
             DescriptorIterator getDescriptorsBegin();
+
+            /**
+             * \brief Returns a mutable iterator pointing one past the last stored descriptor.
+             * \return A mutable iterator pointing one past the last stored descriptor.
+             */
             DescriptorIterator getDescriptorsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first stored descriptor.
+             * \return A constant iterator pointing to the first stored descriptor.
+             */
             ConstDescriptorIterator getDescriptorsBegin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last stored descriptor.
+             * \return A constant iterator pointing one past the last stored descriptor.
+             */
             ConstDescriptorIterator getDescriptorsEnd() const;
 
+            /**
+             * \brief Returns the number of stored descriptors.
+             * \return The number of descriptors.
+             */
             std::size_t getNumDescriptors() const;
 
+            /**
+             * \brief Adds a copy of \a descr to the stored descriptor list.
+             * \param descr The descriptor to copy.
+             */
             void addDescriptor(const Descriptor& descr);
+
+            /**
+             * \brief Adds the descriptor referenced by \a descr_ptr to the stored descriptor list, sharing ownership.
+             * \param descr_ptr A smart pointer to the descriptor.
+             */
             void addDescriptor(const DescriptorPointer& descr_ptr);
 
+            /**
+             * \brief Tells whether a descriptor that compares equal to \a descr is stored.
+             * \param descr The descriptor to look for.
+             * \return \c true if such a descriptor is stored, and \c false otherwise.
+             */
             bool containsDescriptor(const Descriptor& descr) const;
 
+            /**
+             * \brief Returns the stored descriptor at index \a idx.
+             * \param idx The zero-based descriptor index.
+             * \return A \c const reference to the descriptor.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             const Descriptor& getDescriptor(std::size_t idx) const;
 
+            /**
+             * \brief Removes the descriptor at index \a idx.
+             * \param idx The zero-based descriptor index.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             void removeDescriptor(std::size_t idx);
+
+            /**
+             * \brief Removes the descriptor referenced by \a it.
+             * \param it Iterator referencing the descriptor to remove.
+             * \return A mutable iterator pointing to the descriptor following the removed one.
+             * \throw Base::RangeError if \a it is out of range.
+             */
             DescriptorIterator removeDescriptor(const DescriptorIterator& it);
 
+            /**
+             * \brief Computes the similarity between the query \a descr and every stored descriptor.
+             * \param descr The query descriptor.
+             * \param sort If \c true, the resulting (index, similarity) pairs are sorted by similarity value.
+             * \param sort_desc If \c true (default), sorting is in descending order of similarity; if \c false, in ascending order.
+             */
             void calculate(const Descriptor& descr, bool sort = false, bool sort_desc = true);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first result of the last calculate() call.
+             * \return A constant iterator pointing to the first result.
+             */
             ConstResultIterator getResultsBegin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last result of the last calculate() call.
+             * \return A constant iterator pointing one past the last result.
+             */
             ConstResultIterator getResultsEnd() const;
 
+            /**
+             * \brief Returns a constant iterator pointing to the first result (range-based for support).
+             * \return A constant iterator pointing to the first result.
+             */
             ConstResultIterator begin() const;
+
+            /**
+             * \brief Returns a constant iterator pointing one past the last result (range-based for support).
+             * \return A constant iterator pointing one past the last result.
+             */
             ConstResultIterator end() const;
 
+            /**
+             * \brief Returns the result at the given index.
+             * \param idx The zero-based result index.
+             * \return A \c const reference to the (descriptor index, similarity) pair.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             const Result& getResult(std::size_t idx) const;
 
+            /**
+             * \brief Returns the similarity value of the result at the given index.
+             * \param idx The zero-based result index.
+             * \return A \c const reference to the similarity value.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             const SimilarityValue& getSimilarity(std::size_t idx) const;
+
+            /**
+             * \brief Returns the index of the target descriptor referenced by the result at the given result index.
+             * \param idx The zero-based result index.
+             * \return The descriptor index referenced by the result.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             std::size_t getDescriptorIndex(std::size_t idx) const;
 
           private:

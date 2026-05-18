@@ -50,6 +50,9 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ElementHistogram instances.
+             */
             typedef std::shared_ptr<ElementHistogram> SharedPointer;
 
           private:

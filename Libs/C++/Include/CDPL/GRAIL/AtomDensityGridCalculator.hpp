@@ -63,37 +63,94 @@ namespace CDPL
     {
 
         /**
-         * \brief AtomDensityGridCalculator.
+         * \brief Calculator that fills a spatial grid with combined per-atom density contributions.
+         *
+         * For each grid cell, the density contributions of all atoms within the configured cutoff
+         * distance are evaluated using a user-supplied density function and combined into a single
+         * cell value via a user-supplied combination function (defaulting to a sum).
          */
         class CDPL_GRAIL_API AtomDensityGridCalculator
         {
 
           public:
+            /**
+             * \brief Default cutoff distance beyond which atoms are not considered.
+             */
             static constexpr double DEF_DISTANCE_CUTOFF = 4.5;
 
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomDensityGridCalculator instances.
+             */
             typedef std::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 
+            /**
+             * \brief Type of the generic functor that evaluates the density contribution of an atom at a query position.
+             */
             typedef std::function<double(const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&)> DensityFunction;
+
+            /**
+             * \brief Type of the generic functor that combines per-atom density contributions into a single value.
+             */
             typedef std::function<double(const Math::DVector&)>                                            DensityCombinationFunction;
 
+            /**
+             * \brief Constructs the \c %AtomDensityGridCalculator instance.
+             */
             AtomDensityGridCalculator();
 
+            /**
+             * \brief Constructs a copy of the \c %AtomDensityGridCalculator instance \a calc.
+             * \param calc The \c %AtomDensityGridCalculator to copy.
+             */
             AtomDensityGridCalculator(const AtomDensityGridCalculator& calc);
 
+            /**
+             * \brief Constructs the \c %AtomDensityGridCalculator instance with the given density function.
+             * \param func The density function.
+             */
             AtomDensityGridCalculator(const DensityFunction& func);
 
+            /**
+             * \brief Constructs the \c %AtomDensityGridCalculator instance with the given density and density-combination functions.
+             * \param density_func The density function.
+             * \param comb_func The function used to combine per-atom density contributions.
+             */
             AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func);
 
+            /**
+             * \brief Sets the distance cutoff beyond which atoms are not considered.
+             * \param dist The cutoff distance.
+             */
             void setDistanceCutoff(double dist);
 
+            /**
+             * \brief Returns the currently configured distance cutoff.
+             * \return The configured cutoff distance.
+             */
             double getDistanceCutoff() const;
 
+            /**
+             * \brief Sets the density function used to evaluate per-atom contributions.
+             * \param func The density function.
+             */
             void setDensityFunction(const DensityFunction& func);
 
+            /**
+             * \brief Returns the currently configured density function.
+             * \return The configured density function.
+             */
             const DensityFunction& getDensityFunction() const;
 
+            /**
+             * \brief Sets the function used to combine per-atom density contributions.
+             * \param func The density-combination function.
+             */
             void setDensityCombinationFunction(const DensityCombinationFunction& func);
 
+            /**
+             * \brief Returns the currently configured density-combination function.
+             * \return The configured density-combination function.
+             */
             const DensityCombinationFunction& getDensityCombinationFunction() const;
 
             /**
@@ -102,10 +159,24 @@ namespace CDPL
              */
             void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
+            /**
+             * \brief Returns the function used for the retrieval of atom 3D-coordinates.
+             * \return The configured atom 3D-coordinates function.
+             */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+            /**
+             * \brief Calculates the combined per-atom density at each cell of \a grid for the given atoms.
+             * \param atoms The atoms contributing to the density.
+             * \param grid The output grid populated with per-cell density values.
+             */
             void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
+            /**
+             * \brief Copy assignment operator.
+             * \param calc The other \c %AtomDensityGridCalculator instance.
+             * \return A reference to itself.
+             */
             AtomDensityGridCalculator& operator=(const AtomDensityGridCalculator& calc);
 
           private:

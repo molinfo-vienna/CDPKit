@@ -51,7 +51,14 @@ namespace CDPL
     {
 
         /**
-         * \brief AutoCorrelation2DVectorCalculator.
+         * \brief Calculation of the topological (2D) auto-correlation vector of a molecular graph.
+         *
+         * For every topological distance \f$ d \in [0, d_{max}] \f$, the corresponding element of the
+         * auto-correlation vector is the sum of the atom-pair weights of all atom pairs whose
+         * topological distance equals \f$ d \f$. The atom-pair weight function and the maximum
+         * topological distance considered can be customized via setAtomPairWeightFunction() and
+         * setMaxDistance().
+         *
          * \see [\ref AUCOR, \ref HBMD]
          */
         class CDPL_DESCR_API AutoCorrelation2DVectorCalculator
@@ -76,10 +83,10 @@ namespace CDPL
              * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance and calculates the autocorrelation
              *        vector of the molecular graph \a molgraph.
              *
-             * The calculated autocorrelation vector can be retrieved by a call to getResult().
+             * The calculated autocorrelation vector is stored in \a corr_vec.
              *
              * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
-             * \param corr_vec The calculated autocorrelation vector. 
+             * \param corr_vec The calculated autocorrelation vector.
              */
             AutoCorrelation2DVectorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
 

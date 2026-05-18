@@ -40,22 +40,50 @@ namespace CDPL
     {
 
         /**
-         * \brief BindingAffinityCalculator.
+         * \brief Predicts the binding affinity of a ligand pose from its GRAIL descriptor vector.
+         *
+         * The prediction is performed using a pre-trained regression model that takes a GRAIL
+         * descriptor as input and returns a binding affinity estimate. The targeted affinity
+         * measure (\f$ pK_d \f$, \f$ pK_i \f$, or a combined \f$ pK_d/pK_i \f$ model) is selected
+         * at call time via the AffinityMeasure argument.
          */
         class CDPL_GRAIL_API BindingAffinityCalculator
         {
 
           public:
+            /**
+             * \brief Specifies the affinity measure the prediction targets.
+             */
             enum AffinityMeasure
             {
 
+                /**
+                 * \brief \f$ pK_d \f$ (dissociation constant).
+                 */
                 PKD,
+
+                /**
+                 * \brief \f$ pK_i \f$ (inhibition constant).
+                 */
                 PKI,
+
+                /**
+                 * \brief Combined \f$ pK_d/pK_i \f$ model.
+                 */
                 PKD_PKI
             };
 
+            /**
+             * \brief Constructs the \c %BindingAffinityCalculator instance.
+             */
             BindingAffinityCalculator() {}
 
+            /**
+             * \brief Predicts the binding affinity from the given GRAIL descriptor.
+             * \param grail_descr The GRAIL descriptor vector of the ligand pose.
+             * \param measure The targeted affinity measure.
+             * \return The predicted binding affinity.
+             */
             double operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const;
         };
     } // namespace GRAIL
