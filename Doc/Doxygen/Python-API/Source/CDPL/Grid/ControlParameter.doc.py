@@ -42,3 +42,17 @@ class ControlParameter(Boost.Python.instance):
     # \brief 
     #
     CUBE_COMMENT_IS_NAME = CDPL.Base.LookupKey('CUBE_COMMENT_IS_NAME')
+
+    ##
+    # \brief Specifies the scaling factor to apply to distances read from data in <em>Gaussian CUBE</em> [\ref CUBE] format. <b>Value Type:</b> double.
+    # 
+    # \since 1.4
+    # 
+    CUBE_INPUT_DISTANCE_SCALING_FACTOR = CDPL.Base.LookupKey('CUBE_INPUT_DISTANCE_SCALING_FACTOR')
+
+    ##
+    # \brief Specifies the scaling factor to apply to distances for <em>Gaussian CUBE</em> [\ref CUBE] format data output. <b>Value Type:</b> double.
+    # 
+    # \since 1.4
+    # 
+    CUBE_OUTPUT_DISTANCE_SCALING_FACTOR = CDPL.Base.LookupKey('CUBE_OUTPUT_DISTANCE_SCALING_FACTOR')

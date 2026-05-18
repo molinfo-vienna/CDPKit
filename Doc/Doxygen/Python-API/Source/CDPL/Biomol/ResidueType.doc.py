@@ -82,28 +82,28 @@ class ResidueType(Boost.Python.instance):
     D_PEPTIDE_LINKING = 8
 
     ##
-    # \brief Specifies a peptide-linking L--amino acid residue.
+    # \brief Specifies a peptide-linking L-&beta;-amino acid residue.
     # 
     # \since 1.2
     # 
     L_BETA_PEPTIDE_LINKING = 9
 
     ##
-    # \brief Specifies a peptide-linking D--amino acid residue.
+    # \brief Specifies a peptide-linking D-&beta;-amino acid residue.
     # 
     # \since 1.2
     # 
     D_BETA_PEPTIDE_LINKING = 10
 
     ##
-    # \brief Specifies a peptide-linking L--amino acid residue.
+    # \brief Specifies a peptide-linking L-&gamma;-amino acid residue.
     # 
     # \since 1.2
     # 
     L_GAMMA_PEPTIDE_LINKING = 11
 
     ##
-    # \brief Specifies a peptide-linking D--amino acid residue.
+    # \brief Specifies a peptide-linking D-&gamma;-amino acid residue.
     # 
     # \since 1.2
     # 
@@ -181,28 +181,28 @@ class ResidueType(Boost.Python.instance):
     D_SACCHARIDE_1_4_LINKING = 23
 
     ##
-    # \brief Specifies an L-saccharide with an -glycosidic linkage.
+    # \brief Specifies an L-saccharide with an &alpha;-glycosidic linkage.
     # 
     # \since 1.2
     # 
     L_SACCHARIDE_ALPHA_LINKING = 24
 
     ##
-    # \brief Specifies a D-saccharide with an -glycosidic linkage.
+    # \brief Specifies a D-saccharide with an &alpha;-glycosidic linkage.
     # 
     # \since 1.2
     # 
     D_SACCHARIDE_ALPHA_LINKING = 25
 
     ##
-    # \brief Specifies an L-saccharide with a -glycosidic linkage.
+    # \brief Specifies an L-saccharide with a &beta;-glycosidic linkage.
     # 
     # \since 1.2
     # 
     L_SACCHARIDE_BETA_LINKING = 26
 
     ##
-    # \brief Specifies a D-saccharide with a -glycosidic linkage.
+    # \brief Specifies a D-saccharide with a &beta;-glycosidic linkage.
     # 
     # \since 1.2
     # 

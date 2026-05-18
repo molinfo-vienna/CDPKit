@@ -118,6 +118,8 @@ def getTextRecursive(parent_node):
             rc.append(node.data)
         elif node.nodeName == 'para':
             rc.append(getTextRecursive(node))
+        elif node.nodeName == 'title':
+            rc.append(getTextRecursive(node)) 
         elif node.nodeName == 'computeroutput':
             rc.append('<tt>')
             rc.append(getTextRecursive(node))
@@ -141,6 +143,11 @@ def getTextRecursive(parent_node):
             rc.append('<sub>')
             rc.append(getTextRecursive(node))
             rc.append('</sub>')
+        elif node.nodeName == 'orderedlist':
+            rc.append(getTextRecursive(node))
+        elif node.nodeName == 'listitem':
+            rc.append(' - ')
+            rc.append(getTextRecursive(node))
         elif node.nodeName == 'ref':
             if 'References' in node.attributes['refid'].value:
                 rc.append('\\ref ')
@@ -149,6 +156,18 @@ def getTextRecursive(parent_node):
             rc.append('&Aring;')
         elif node.nodeName == 'eacute':
             rc.append('&eacute;')
+        elif node.nodeName == 'alpha':
+            rc.append('&alpha;')
+        elif node.nodeName == 'beta':
+            rc.append('&beta;')
+        elif node.nodeName == 'gamma':
+            rc.append('&gamma;')
+        elif node.nodeName == 'rarr':
+            rc.append('&rarr;')
+        elif node.nodeName == 'harr':
+            rc.append('&harr;')
+        elif node.nodeName == 'times':
+            rc.append('&times;')
         elif node.nodeName == 'table':
             rc.append(outputTable(node))
         elif node.nodeName == 'parameterlist':

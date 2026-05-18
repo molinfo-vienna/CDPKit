@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implementation of the nitro  aci-nitro tautomerization rule.
+# \brief Implementation of the nitro &harr; aci-nitro tautomerization rule.
 # 
 # The rule is registered with TautomerizationType.NITRO_ACI and uses PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order transformations required for the interconversion of nitro and aci-nitro tautomers.
 # 

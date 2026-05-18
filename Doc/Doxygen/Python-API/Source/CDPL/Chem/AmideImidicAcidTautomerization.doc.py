@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Implementation of the amide  imidic-acid tautomerization rule.
+# \brief Implementation of the amide &harr; imidic-acid tautomerization rule.
 # 
 # The rule is registered with TautomerizationType.AMIDE_IMIDIC_ACID and uses PatternBasedTautomerizationRule to encode the SMARTS patterns and bond-order transformations required for the interconversion of amide and imidic-acid tautomers.
 # 

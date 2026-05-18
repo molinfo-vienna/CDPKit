@@ -130,6 +130,60 @@ def clearCUBECommentIsNameParameter(cntnr: Base.ControlParameterContainer) -> No
 ##
 # \brief 
 # \param cntnr 
+# \param factor 
+#
+def setCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer, factor: float) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> float: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCUBEInputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \param factor 
+#
+def setCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer, factor: float) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def hasCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> float: pass
+
+##
+# \brief 
+# \param cntnr 
+#
+def clearCUBEOutputDistanceScalingFactorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
+
+##
+# \brief 
+# \param cntnr 
 # \param strict 
 #
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass

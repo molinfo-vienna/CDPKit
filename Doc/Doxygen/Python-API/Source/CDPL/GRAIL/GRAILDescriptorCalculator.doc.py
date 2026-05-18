@@ -120,22 +120,22 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
         ENV_HBD_OCC_MAX = 16
 
         ##
-        # \brief Sum of (ligand positive-ionizable  target aromatic) interaction scores.
+        # \brief Sum of (ligand positive-ionizable &rarr; target aromatic) interaction scores.
         # 
         PI_AR_SCORE_SUM = 17
 
         ##
-        # \brief Maximum (ligand positive-ionizable  target aromatic) interaction score.
+        # \brief Maximum (ligand positive-ionizable &rarr; target aromatic) interaction score.
         # 
         PI_AR_SCORE_MAX = 18
 
         ##
-        # \brief Sum of (ligand aromatic  target positive-ionizable) interaction scores.
+        # \brief Sum of (ligand aromatic &rarr; target positive-ionizable) interaction scores.
         # 
         AR_PI_SCORE_SUM = 19
 
         ##
-        # \brief Maximum (ligand aromatic  target positive-ionizable) interaction score.
+        # \brief Maximum (ligand aromatic &rarr; target positive-ionizable) interaction score.
         # 
         AR_PI_SCORE_MAX = 20
 
@@ -160,32 +160,32 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
         AR_AR_SCORE_MAX = 24
 
         ##
-        # \brief Sum of (ligand HBD  target HBA) interaction scores.
+        # \brief Sum of (ligand HBD &rarr; target HBA) interaction scores.
         # 
         HBD_HBA_SCORE_SUM = 25
 
         ##
-        # \brief Maximum (ligand HBD  target HBA) interaction score.
+        # \brief Maximum (ligand HBD &rarr; target HBA) interaction score.
         # 
         HBD_HBA_SCORE_MAX = 26
 
         ##
-        # \brief Sum of (ligand HBA  target HBD) interaction scores.
+        # \brief Sum of (ligand HBA &rarr; target HBD) interaction scores.
         # 
         HBA_HBD_SCORE_SUM = 27
 
         ##
-        # \brief Maximum (ligand HBA  target HBD) interaction score.
+        # \brief Maximum (ligand HBA &rarr; target HBD) interaction score.
         # 
         HBA_HBD_SCORE_MAX = 28
 
         ##
-        # \brief Sum of (ligand XBD  target XBA) interaction scores.
+        # \brief Sum of (ligand XBD &rarr; target XBA) interaction scores.
         # 
         XBD_XBA_SCORE_SUM = 29
 
         ##
-        # \brief Maximum (ligand XBD  target XBA) interaction score.
+        # \brief Maximum (ligand XBD &rarr; target XBA) interaction score.
         # 
         XBD_XBA_SCORE_MAX = 30
 
