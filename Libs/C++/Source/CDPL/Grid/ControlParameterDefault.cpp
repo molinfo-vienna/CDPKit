@@ -40,7 +40,9 @@ namespace CDPL
             
             const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS = true;
 
-            const bool CUBE_COMMENT_IS_NAME               = false;
+            const bool   CUBE_COMMENT_IS_NAME                = false;
+            const double CUBE_INPUT_DISTANCE_SCALING_FACTOR  = 0.52918;
+            const double CUBE_OUTPUT_DISTANCE_SCALING_FACTOR = 1.8897259886;
         }
 
         void initControlParameterDefaults() {}

@@ -59,6 +59,24 @@ namespace CDPL
              */
             extern CDPL_GRID_API const bool CUBE_COMMENT_IS_NAME;
 
+            /**
+             * \brief Default setting for the control-parameter Grid::ControlParameter::CUBE_INPUT_DISTANCE_SCALING_FACTOR.
+             *
+             * The default value (= \e 1.8897259886) performas a conversion from Bohr to Angstrom.
+             *
+             * \since 1.4
+             */
+            extern CDPL_GRID_API const double CUBE_INPUT_DISTANCE_SCALING_FACTOR;
+
+            /**
+             * \brief Default setting for the control-parameter Grid::ControlParameter::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR.
+             *
+             * The default value (= \e 0.52918) performas a conversion from Angstrom to Bohr.
+             *
+             * \since 1.4
+             */
+            extern CDPL_GRID_API const double CUBE_OUTPUT_DISTANCE_SCALING_FACTOR;
+
         } // namespace ControlParameterDefault
     } // namespace Grid
 } // namespace CDPL

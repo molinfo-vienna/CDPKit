@@ -73,6 +73,28 @@ namespace CDPL
         CDPL_GRID_API bool hasCUBECommentIsNameParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_GRID_API void clearCUBECommentIsNameParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_GRID_API double getCUBEInputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void setCUBEInputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr, double factor);
+
+        CDPL_GRID_API bool hasCUBEInputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void clearCUBEInputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr);
+
+        /**
+         * \since 1.4
+         */
+        CDPL_GRID_API double getCUBEOutputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void setCUBEOutputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr, double factor);
+
+        CDPL_GRID_API bool hasCUBEOutputDistanceScalingFactorParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_GRID_API void clearCUBEOutputDistanceScalingFactorParameter(Base::ControlParameterContainer& cntnr);
         
     } // namespace Grid
 } // namespace CDPL

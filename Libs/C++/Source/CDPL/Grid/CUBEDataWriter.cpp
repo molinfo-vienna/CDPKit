@@ -26,9 +26,11 @@
 
 #include <ostream>
 #include <locale>
+#include <algorithm>
 
 #include "CDPL/Grid/RegularGrid.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
+#include "CDPL/Grid/AttributedGridFunctions.hpp"
 
 #include "CUBEDataWriter.hpp"
 
@@ -36,13 +38,23 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+    constexpr char END_OF_LINE = '\n';
+}
+
+
 bool Grid::CUBEDataWriter::writeGrid(std::ostream& os, const DRegularGrid& grid)
 {
     init(os);
 
-    writeHeader(os, grid);
+    writeCommentLines(os, commentIsName ? getName(grid) : getComment(grid));
+    writeGridOriginAndNumPoints(os, grid);
+    writeGridAxesSpecs(os, grid);
+    writeGridData(os, grid);
     
-    return true;
+    return os.good();
 }
 
 void Grid::CUBEDataWriter::init(std::ostream& os)
@@ -50,8 +62,34 @@ void Grid::CUBEDataWriter::init(std::ostream& os)
     os.imbue(std::locale::classic());
 
     commentIsName = getCUBECommentIsNameParameter(ctrlParams);
+    distScalingFactor = getCUBEOutputDistanceScalingFactorParameter(ctrlParams);
 }
 
-void Grid::CUBEDataWriter::writeHeader(std::ostream& os, const DRegularGrid& grid)
+void Grid::CUBEDataWriter::writeCommentLines(std::ostream& os, const std::string& comment) const
+{
+    std::size_t lines_written = 0;
+
+    for (auto it = comment.begin(); (it < comment.end()) && (lines_written < 2); lines_written++) {
+        auto eol = std::find(it, comment.end(), END_OF_LINE);
+
+        os.write(&*it, eol - it);
+        os.put(END_OF_LINE);
+        
+        it = ++eol;
+    }
+
+    for (std::size_t i = lines_written; i < 2; i++)
+        os.put(END_OF_LINE);
+}
+
+void Grid::CUBEDataWriter::writeGridOriginAndNumPoints(std::ostream& os, const DRegularGrid& grid)
+{
+}
+
+void Grid::CUBEDataWriter::writeGridAxesSpecs(std::ostream& os, const DRegularGrid& grid)
+{
+}
+
+void Grid::CUBEDataWriter::writeGridData(std::ostream& os, const DRegularGrid& grid)
 {
 }

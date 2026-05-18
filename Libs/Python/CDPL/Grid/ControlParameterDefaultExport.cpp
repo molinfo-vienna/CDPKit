@@ -45,5 +45,7 @@ void CDPLPythonGrid::exportControlParameterDefaults()
         .def_readonly("STRICT_ERROR_CHECKING", &Grid::ControlParameterDefault::STRICT_ERROR_CHECKING)
         .def_readonly("CDF_OUTPUT_SINGLE_PRECISION_FLOATS", &Grid::ControlParameterDefault::CDF_OUTPUT_SINGLE_PRECISION_FLOATS)
         .def_readonly("CUBE_COMMENT_IS_NAME", &Grid::ControlParameterDefault::CUBE_COMMENT_IS_NAME)
+        .def_readonly("CUBE_INPUT_DISTANCE_SCALING_FACTOR", &Grid::ControlParameterDefault::CUBE_INPUT_DISTANCE_SCALING_FACTOR)
+        .def_readonly("CUBE_OUTPUT_DISTANCE_SCALING_FACTOR", &Grid::ControlParameterDefault::CUBE_OUTPUT_DISTANCE_SCALING_FACTOR)
         ;
 }
