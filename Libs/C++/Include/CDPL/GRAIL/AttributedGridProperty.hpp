@@ -50,7 +50,18 @@ namespace CDPL
         namespace AttributedGridProperty
         {
 
+            /**
+             * \brief Specifies the (extended) pharmacophore feature type the grid was generated for.
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE;
+
+            /**
+             * \brief Specifies the target (extended) pharmacophore feature type the grid scores interactions with.
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_GRAIL_API const Base::LookupKey TARGET_FEATURE_TYPE;
         } // namespace AttributedGridProperty
     } // namespace GRAIL

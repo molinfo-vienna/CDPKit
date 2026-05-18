@@ -42,7 +42,13 @@ namespace CDPL
     {
 
         /**
-         * \brief BCUTDescriptorCalculator.
+         * \brief Calculation of the \e BCUT (Burden-CAS-University-of-Texas) descriptor of a molecular graph.
+         *
+         * The descriptor is computed from the eigenvalues of an underlying \e Burden matrix (see
+         * Descr::BurdenMatrixGenerator) and returned in ascending order. A user-defined atom weight
+         * function can be installed via setAtomWeightFunction() to customize the diagonal elements
+         * of the Burden matrix prior to the eigenvalue decomposition.
+         *
          * \see [\ref BCUT]
          */
         class CDPL_DESCR_API BCUTDescriptorCalculator
