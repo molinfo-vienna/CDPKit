@@ -39,8 +39,19 @@ cp -r $1/Doc/html $2
 
 out_dir=${2##*/} 
 
-for i in `find $out_dir/cdpl_api_doc/python_api_doc/ -name "*.html"`; do sed -e "s|</head>|<link rel=\"canonical\" href=\"https://cdpkit.org/$i\" /></head>|g" -i $i; done
-for i in `find $out_dir/c++_api_doc/python_api_doc/ -name "*.html"`; do sed -e "s|</head>|<link rel=\"canonical\" href=\"https://cdpkit.org/$i\" /></head>|g" -i $i; done
+sed -e "s|</urlset>||g" -i $2/sitemap.xml
+
+for i in `find $out_dir/cdpl_api_doc/python_api_doc/ -name "*.html"`; do
+    sed -e "s|</head>|<link rel=\"canonical\" href=\"https://cdpkit.org/$i\" /></head>|g" -i $i
+    echo "<url><loc>https://cdpkit.org/$i</loc></url>" >> $2/sitemap.xml
+done
+
+for i in `find $out_dir/c++_api_doc/python_api_doc/ -name "*.html"`; do
+    sed -e "s|</head>|<link rel=\"canonical\" href=\"https://cdpkit.org/$i\" /></head>|g" -i $i
+    echo "<url><loc>https://cdpkit.org/$i</loc></url>" >> $2/sitemap.xml
+done
+
+echo "</urlset>" >> $2/sitemap.xml
 
 cd $2/..
 docs-versions-menu --no-downloads-file --no-write-index-html
