@@ -50,6 +50,11 @@ namespace CDPL
         namespace FeatureContainerProperty
         {
 
+            /**
+             * \brief Specifies the name of the feature container.
+             *
+             * \valuetype std::string
+             */
             extern CDPL_PHARM_API const Base::LookupKey NAME;
         }
     } // namespace Pharm

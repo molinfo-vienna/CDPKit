@@ -48,7 +48,13 @@ namespace CDPL
     {
 
         /**
-         * \brief FeatureAutoCorrelation3DVectorCalculator.
+         * \brief AutoCorrelation3DVectorCalculator specialization for feature-centered 3D
+         *        auto-correlation vectors of pharmacophores.
+         *
+         * The feature 3D coordinates accessor function is preset to Chem::get3DCoordinates(); the
+         * entity-pair weight function and other calculation parameters can be configured via the
+         * inherited setter methods of the base class.
+         *
          * \see [\ref CITB, \ref HBMD]
          */
         class CDPL_DESCR_API FeatureAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Pharm::Feature>
@@ -60,8 +66,19 @@ namespace CDPL
              */
             FeatureAutoCorrelation3DVectorCalculator();
 
+            /**
+             * \brief Constructs the \c %FeatureAutoCorrelation3DVectorCalculator instance and calculates
+             *        the 3D auto-correlation vector of the features provided by \a cntnr.
+             * \param cntnr The container with the features for which to calculate the auto-correlation vector.
+             * \param vec The vector where to store the calculated auto-correlation vector.
+             */
             FeatureAutoCorrelation3DVectorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
 
+            /**
+             * \brief Calculates the 3D auto-correlation vector of the features provided by \a cntnr.
+             * \param cntnr The container with the features for which to calculate the auto-correlation vector.
+             * \param vec The vector where to store the calculated auto-correlation vector.
+             */
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
         };
     } // namespace Descr

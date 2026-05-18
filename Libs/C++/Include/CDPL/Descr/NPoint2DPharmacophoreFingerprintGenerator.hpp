@@ -43,40 +43,90 @@ namespace CDPL
     {
 
         /**
-         * \brief NPoint2DPharmacophoreFingerprintGenerator.
+         * \brief N-point pharmacophore fingerprint generator that uses topological feature distances.
+         *
+         * The fingerprint encodes the binned topological distances between all combinations of
+         * feature tuples generated from a molecular graph. The choice of how feature-pair topological
+         * distance is computed (min, max or average over the topological distances between the
+         * underlying atoms) is configurable via FeatureDistanceType.
+         *
          * \since 1.2
          */
         class CDPL_DESCR_API NPoint2DPharmacophoreFingerprintGenerator : public NPointPharmacophoreFingerprintGenerator
         {
 
           public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NPoint2DPharmacophoreFingerprintGenerator instances.
+             */
             typedef std::shared_ptr<NPoint2DPharmacophoreFingerprintGenerator> SharedPointer;
 
+            /**
+             * \brief Specifies how the topological distance between two features is derived
+             *        from the topological distances between their underlying atoms.
+             */
             enum FeatureDistanceType
             {
 
+                /**
+                 * \brief Use the minimum topological distance between any two underlying atoms.
+                 */
                 MIN_PATH_LENGTH,
+                /**
+                 * \brief Use the maximum topological distance between any two underlying atoms.
+                 */
                 MAX_PATH_LENGTH,
+                /**
+                 * \brief Use the average topological distance between all pairs of underlying atoms.
+                 */
                 AVG_PATH_LENGTH
             };
 
             /**
+             * \brief Default distance bin size.
              * \since 1.3
              */
             static constexpr double DEF_BIN_SIZE = 2.0;
 
+            /**
+             * \brief Default feature distance type.
+             */
             static constexpr FeatureDistanceType DEF_FEATURE_DISTANCE_TYPE = MIN_PATH_LENGTH;
-            
+
+            /**
+             * \brief Constructs the \c %NPoint2DPharmacophoreFingerprintGenerator instance.
+             */
             NPoint2DPharmacophoreFingerprintGenerator();
 
+            /**
+             * \brief Copy constructor.
+             */
             NPoint2DPharmacophoreFingerprintGenerator(const NPoint2DPharmacophoreFingerprintGenerator& gen) = default;
 
+            /**
+             * \brief Constructs the \c %NPoint2DPharmacophoreFingerprintGenerator instance and generates the fingerprint of \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param fp The output bitset.
+             */
             NPoint2DPharmacophoreFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
+            /**
+             * \brief Sets the type of feature-pair topological distance to use.
+             * \param dist_type The feature distance type.
+             */
             void setFeatureDistanceType(FeatureDistanceType dist_type);
 
+            /**
+             * \brief Returns the currently configured feature distance type.
+             * \return The configured feature distance type.
+             */
             FeatureDistanceType getFeatureDistanceType() const;
-            
+
+            /**
+             * \brief Generates the fingerprint of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param fp The output bitset.
+             */
             void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
             
           private:

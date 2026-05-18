@@ -45,19 +45,51 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in Chem::Atom properties.
+         * \brief Provides keys for MolProp-specific Chem::Atom properties.
          */
         namespace AtomProperty
         {
 
+            /**
+             * \brief Specifies the calculated atom hydrophobicity contribution.
+             *
+             * \valuetype double
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
 
+            /**
+             * \brief Specifies the calculated PEOE sigma charge of the atom.
+             *
+             * \valuetype double
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_CHARGE;
+
+            /**
+             * \brief Specifies the calculated PEOE sigma electronegativity of the atom.
+             *
+             * \valuetype double
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
 
+            /**
+             * \brief Specifies the calculated MHMO pi charge of the atom.
+             *
+             * \valuetype double
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_CHARGE;
 
+            /**
+             * \brief Specifies the H-bond donor atom type (see namespace MolProp::HBondDonorAtomType).
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_DONOR_TYPE;
+
+            /**
+             * \brief Specifies the H-bond acceptor atom type (see namespace MolProp::HBondAcceptorAtomType).
+             *
+             * \valuetype unsigned int
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_ACCEPTOR_TYPE;
         } // namespace AtomProperty
     } // namespace MolProp

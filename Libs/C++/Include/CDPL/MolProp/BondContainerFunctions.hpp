@@ -46,18 +46,55 @@ namespace CDPL
     namespace MolProp
     {
 
+        /**
+         * \brief Returns the total number of explicit bonds in \a cntnr.
+         * \param cntnr The bond container.
+         * \return The number of explicit bonds.
+         */
         CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr);
 
+        /**
+         * \brief Returns the number of explicit bonds in \a cntnr that match the given bond order.
+         * \param cntnr The bond container.
+         * \param order The bond order to match.
+         * \param inc_aro If \c true, aromatic bonds are included in the count for any order.
+         * \return The number of matching explicit bonds.
+         */
         CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr, std::size_t order, bool inc_aro = true);
 
+        /**
+         * \brief Returns the number of explicit bonds in \a cntnr that involve a hydrogen atom.
+         * \param cntnr The bond container.
+         * \return The number of explicit hydrogen-involving bonds.
+         */
         CDPL_MOLPROP_API std::size_t getExplicitHydrogenBondCount(const Chem::BondContainer& cntnr);
 
+        /**
+         * \brief Returns the number of explicit chain (non-ring) bonds in \a cntnr.
+         * \param cntnr The bond container.
+         * \return The number of explicit chain bonds.
+         */
         CDPL_MOLPROP_API std::size_t getExplicitChainBondCount(const Chem::BondContainer& cntnr);
 
+        /**
+         * \brief Returns the number of ring bonds in \a cntnr.
+         * \param cntnr The bond container.
+         * \return The number of ring bonds.
+         */
         CDPL_MOLPROP_API std::size_t getRingBondCount(const Chem::BondContainer& cntnr);
 
+        /**
+         * \brief Returns the number of aromatic bonds in \a cntnr.
+         * \param cntnr The bond container.
+         * \return The number of aromatic bonds.
+         */
         CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::BondContainer& cntnr);
 
+        /**
+         * \brief Returns the number of heavy-atom bonds in \a cntnr (bonds where neither atom is hydrogen).
+         * \param cntnr The bond container.
+         * \return The number of heavy-atom bonds.
+         */
         CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::BondContainer& cntnr);
     } // namespace MolProp
 } // namespace CDPL

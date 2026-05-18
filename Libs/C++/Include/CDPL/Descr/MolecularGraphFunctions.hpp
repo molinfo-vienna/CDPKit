@@ -46,28 +46,98 @@ namespace CDPL
     namespace Descr
     {
 
+        /**
+         * \brief Calculates the topological radius (minimum atom eccentricity) of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The topological radius.
+         */
         CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the topological diameter (maximum atom-pair topological distance) of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The topological diameter.
+         */
         CDPL_DESCR_API std::size_t calcTopologicalDiameter(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the ring complexity of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The calculated ring complexity.
+         */
         CDPL_DESCR_API double calcRingComplexity(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the molecular complexity of \a molgraph (Hendrickson, Huang and Toczko).
+         * \param molgraph The molecular graph.
+         * \return The calculated molecular complexity.
+         * \see [\ref MCPLX]
+         */
         CDPL_DESCR_API double calcMolecularComplexity(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the first Kier shape index (\f$ \kappa_1 \f$) of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The calculated Kier shape index \f$ \kappa_1 \f$.
+         */
         CDPL_DESCR_API double calcKierShape1(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the second Kier shape index (\f$ \kappa_2 \f$) of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The calculated Kier shape index \f$ \kappa_2 \f$.
+         */
         CDPL_DESCR_API double calcKierShape2(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the third Kier shape index (\f$ \kappa_3 \f$) of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The calculated Kier shape index \f$ \kappa_3 \f$.
+         */
         CDPL_DESCR_API double calcKierShape3(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the Wiener index of \a molgraph.
+         *
+         * The Wiener index is the sum of the topological distances over all pairs of heavy atoms.
+         *
+         * \param molgraph The molecular graph.
+         * \return The Wiener index.
+         */
         CDPL_DESCR_API std::size_t calcWienerIndex(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the Randic connectivity index of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The Randic index.
+         */
         CDPL_DESCR_API double calcRandicIndex(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the first Zagreb index (\f$ M_1 \f$) of \a molgraph.
+         *
+         * \f$ M_1 \f$ is the sum of squared heavy-atom degrees over all heavy atoms.
+         *
+         * \param molgraph The molecular graph.
+         * \return The first Zagreb index.
+         */
         CDPL_DESCR_API std::size_t calcZagrebIndex1(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the second Zagreb index (\f$ M_2 \f$) of \a molgraph.
+         *
+         * \f$ M_2 \f$ is the sum of the products of the heavy-atom degrees over all heavy-atom bonds.
+         *
+         * \param molgraph The molecular graph.
+         * \return The second Zagreb index.
+         */
         CDPL_DESCR_API std::size_t calcZagrebIndex2(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the total walk count of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \return The total walk count.
+         */
         CDPL_DESCR_API std::size_t calcTotalWalkCount(const Chem::MolecularGraph& molgraph);
     } // namespace Descr
 } // namespace CDPL

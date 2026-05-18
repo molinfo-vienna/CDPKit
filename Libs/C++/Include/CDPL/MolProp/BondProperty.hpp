@@ -45,11 +45,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides keys for built-in Chem::Bond properties.
+         * \brief Provides keys for MolProp-specific Chem::Bond properties.
          */
         namespace BondProperty
         {
 
+            /**
+             * \brief Specifies the MHMO pi-bond order of the bond.
+             *
+             * \valuetype double
+             */
             extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_ORDER;
         }
     } // namespace MolProp

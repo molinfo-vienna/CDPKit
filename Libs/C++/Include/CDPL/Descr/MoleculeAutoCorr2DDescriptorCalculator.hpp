@@ -50,18 +50,39 @@ namespace CDPL
     {
 
         /**
-         * \brief MoleculeAutoCorr2DDescriptorCalculator.
+         * \brief Calculation of a topological (2D) auto-correlation descriptor of a molecular graph
+         *        with atom-pair weights resolved by per-atom modes.
+         *
+         * Compared to Descr::AutoCorrelation2DVectorCalculator, this calculator emits a partitioned
+         * descriptor that splits the per-distance contributions by the atom-pair mode pair selected
+         * via the atom-pair weight function (see \c Mode for available partitioning schemes).
          */
         class CDPL_DESCR_API MoleculeAutoCorr2DDescriptorCalculator
         {
 
           public:
+            /**
+             * \brief Type of the generic functor used to retrieve the weight of an atom pair.
+             *
+             * The function takes the two atoms and the two modes (one per atom) of an atom pair and
+             * returns the corresponding weight contribution.
+             */
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int, unsigned int)> AtomPairWeightFunction;
 
+            /**
+             * \brief Specifies how the descriptor is partitioned by atom-pair modes.
+             */
             enum Mode
             {
 
+                /**
+                 * \brief Semi-split partitioning: contributions are grouped by the unordered pair of modes.
+                 */
                 SEMI_SPLIT,
+
+                /**
+                 * \brief Full-split partitioning: contributions are grouped by the ordered pair of modes.
+                 */
                 FULL_SPLIT
             };
 
@@ -70,6 +91,11 @@ namespace CDPL
              */
             MoleculeAutoCorr2DDescriptorCalculator();
 
+            /**
+             * \brief Constructs the \c %MoleculeAutoCorr2DDescriptorCalculator instance and calculates the descriptor of \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param descr The output descriptor vector.
+             */
             MoleculeAutoCorr2DDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
             /**
@@ -91,10 +117,23 @@ namespace CDPL
              */
             void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
+            /**
+             * \brief Sets the descriptor partitioning mode.
+             * \param mode The partitioning mode.
+             */
             void setMode(Mode mode);
 
+            /**
+             * \brief Returns the currently configured descriptor partitioning mode.
+             * \return The configured partitioning mode.
+             */
             Mode getMode() const;
 
+            /**
+             * \brief Calculates the auto-correlation descriptor of \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param descr The output descriptor vector.
+             */
             void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
           private:

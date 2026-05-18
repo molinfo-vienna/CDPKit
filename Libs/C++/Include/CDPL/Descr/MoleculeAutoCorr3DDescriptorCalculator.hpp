@@ -50,7 +50,12 @@ namespace CDPL
     {
 
         /**
-         * \brief MoleculeAutoCorr3DDescriptorCalculator.
+         * \brief Calculation of a 3D auto-correlation descriptor of a molecular graph using
+         *        atom-pair weights resolved by a per-atom mode.
+         *
+         * Compared to Descr::AutoCorrelation3DVectorCalculator, this calculator forwards the
+         * per-atom mode to the atom-pair weight function so callers can compute mode-partitioned
+         * descriptors.
          */
         class CDPL_DESCR_API MoleculeAutoCorr3DDescriptorCalculator
         {
@@ -58,7 +63,17 @@ namespace CDPL
             typedef AutoCorrelation3DVectorCalculator<Chem::Atom> AutoCorr3DVectorCalculator;
 
           public:
+            /**
+             * \brief Type of the function used to retrieve the 3D coordinates of an atom.
+             */
             typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction                   Atom3DCoordinatesFunction;
+
+            /**
+             * \brief Type of the generic functor used to retrieve the weight of an atom pair.
+             *
+             * The function takes the two atoms and a single mode that resolves the partitioning of
+             * the atom-pair contribution.
+             */
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
 
             /**
@@ -66,6 +81,11 @@ namespace CDPL
              */
             MoleculeAutoCorr3DDescriptorCalculator();
 
+            /**
+             * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance and calculates the descriptor of the atoms in \a cntnr.
+             * \param cntnr The container with the atoms for which to calculate the descriptor.
+             * \param descr The output descriptor vector.
+             */
             MoleculeAutoCorr3DDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -125,6 +145,11 @@ namespace CDPL
              */
             void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
+            /**
+             * \brief Calculates the 3D auto-correlation descriptor of the atoms in \a cntnr.
+             * \param cntnr The container with the atoms for which to calculate the descriptor.
+             * \param descr The output descriptor vector.
+             */
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
           private:

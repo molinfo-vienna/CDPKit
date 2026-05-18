@@ -50,7 +50,11 @@ namespace CDPL
     {
 
         /**
-         * \brief MoleculeRDFDescriptorCalculator.
+         * \brief Calculation of an RDF descriptor of a molecular graph using atom-pair weights resolved by a per-atom mode.
+         *
+         * The calculator forwards the per-atom mode to the atom-pair weight function so callers can
+         * compute mode-partitioned RDF descriptors based on Descr::RDFCodeCalculator.
+         *
          * \see [\ref CITB, \ref HBMD]
          */
         class CDPL_DESCR_API MoleculeRDFDescriptorCalculator
@@ -59,7 +63,14 @@ namespace CDPL
             typedef Descr::RDFCodeCalculator<Chem::Atom> RDFCodeCalculator;
 
           public:
+            /**
+             * \brief Type of the function used to retrieve the 3D coordinates of an atom.
+             */
             typedef RDFCodeCalculator::Entity3DCoordinatesFunction                            Atom3DCoordinatesFunction;
+
+            /**
+             * \brief Type of the generic functor used to retrieve the weight of an atom pair (with a per-atom mode).
+             */
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
 
             /**
@@ -67,6 +78,11 @@ namespace CDPL
              */
             MoleculeRDFDescriptorCalculator();
 
+            /**
+             * \brief Constructs the \c %MoleculeRDFDescriptorCalculator instance and calculates the RDF descriptor of the atoms in \a cntnr.
+             * \param cntnr The container with the atoms for which to calculate the descriptor.
+             * \param descr The output descriptor vector.
+             */
             MoleculeRDFDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -167,6 +183,11 @@ namespace CDPL
              */
             bool distanceToIntervalsCenterRoundingEnabled() const;
 
+            /**
+             * \brief Calculates the RDF descriptor of the atoms in \a cntnr.
+             * \param cntnr The container with the atoms for which to calculate the descriptor.
+             * \param descr The output descriptor vector.
+             */
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
           private:
