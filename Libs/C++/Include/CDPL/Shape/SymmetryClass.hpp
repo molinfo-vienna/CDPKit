@@ -36,18 +36,36 @@ namespace CDPL
     namespace Shape
     {
 
+        /**
+         * \brief Provides constants for the rotational symmetry class of a Gaussian shape.
+         */
         namespace SymmetryClass
         {
 
 
+            /**
+             * \brief Specifies an undefined symmetry class.
+             */
             constexpr unsigned int UNDEF = 0;
 
+            /**
+             * \brief Specifies an asymmetric shape (all three principal moments of inertia distinct).
+             */
             constexpr unsigned int ASYMMETRIC = 1;
 
+            /**
+             * \brief Specifies an oblate (disc-shaped) symmetric top.
+             */
             constexpr unsigned int OBLATE = 2;
 
+            /**
+             * \brief Specifies a prolate (cigar-shaped) symmetric top.
+             */
             constexpr unsigned int PROLATE = 3;
 
+            /**
+             * \brief Specifies a spherical top (all three principal moments of inertia equal).
+             */
             constexpr unsigned int SPHERICAL = 4;
         } // namespace SymmetryClass
     } // namespace Shape

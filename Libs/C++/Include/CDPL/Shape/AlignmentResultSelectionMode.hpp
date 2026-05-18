@@ -36,13 +36,35 @@ namespace CDPL
     namespace Shape
     {
 
+        /**
+         * \brief Provides constants for selecting which alignment results are kept by alignment routines.
+         */
         namespace AlignmentResultSelectionMode
         {
 
+            /**
+             * \brief Keep all alignment results.
+             */
             constexpr unsigned int ALL                        = 0;
+
+            /**
+             * \brief Keep only the best alignment result per (reference shape, aligned shape) combination.
+             */
             constexpr unsigned int BEST_PER_SHAPE_COMBINATION = 1;
+
+            /**
+             * \brief Keep only the best alignment result per reference shape.
+             */
             constexpr unsigned int BEST_PER_REFERENCE_SHAPE   = 2;
+
+            /**
+             * \brief Keep only the best alignment result per reference shape set.
+             */
             constexpr unsigned int BEST_PER_REFERENCE_SET     = 3;
+
+            /**
+             * \brief Keep only the single best alignment result overall.
+             */
             constexpr unsigned int BEST_OVERALL               = 4;
         } // namespace AlignmentResultSelectionMode
     } // namespace Shape

@@ -49,54 +49,130 @@ namespace CDPL
     {
             
         /**
-         * \brief NPointPharmacophoreFingerprintGenerator.
+         * \brief Abstract base for N-point pharmacophore fingerprint generators.
+         *
+         * The base class implements the common machinery for enumerating feature tuples of size in
+         * <em>[minTupleSize, maxTupleSize]</em>, binning the feature-pair distances of each tuple and
+         * setting the corresponding bits of the output fingerprint. The concrete distance
+         * (topological vs. spatial 3D) is provided by the derived class via the pure virtual
+         * \c getDistance() hook.
+         *
          * \since 1.2
          */
         class CDPL_DESCR_API NPointPharmacophoreFingerprintGenerator
         {
 
           public:
+            /**
+             * \brief Default minimum size of generated feature tuples.
+             */
             static constexpr std::size_t DEF_MIN_FEATURE_TUPLE_SIZE = 1;
+
+            /**
+             * \brief Default maximum size of generated feature tuples.
+             */
             static constexpr std::size_t DEF_MAX_FEATURE_TUPLE_SIZE = 3;
 
+            /**
+             * \brief Type of the generic functor used to filter which features participate in the fingerprint.
+             */
             typedef std::function<bool(const Pharm::Feature&)> FeatureFilterFunction;
-            
+
+            /**
+             * \brief Virtual destructor.
+             */
             virtual ~NPointPharmacophoreFingerprintGenerator() {}
-            
+
+            /**
+             * \brief Sets the minimum size of generated feature tuples.
+             * \param min_size The minimum tuple size.
+             */
             void setMinFeatureTupleSize(std::size_t min_size);
 
+            /**
+             * \brief Returns the currently configured minimum feature tuple size.
+             * \return The configured minimum tuple size.
+             */
             std::size_t getMinFeatureTupleSize() const;
-            
+
+            /**
+             * \brief Sets the maximum size of generated feature tuples.
+             * \param max_size The maximum tuple size.
+             */
             void setMaxFeatureTupleSize(std::size_t max_size);
 
+            /**
+             * \brief Returns the currently configured maximum feature tuple size.
+             * \return The configured maximum tuple size.
+             */
             std::size_t getMaxFeatureTupleSize() const;
 
+            /**
+             * \brief Sets the size of the bins used to discretize feature-pair distances.
+             * \param bin_size The bin size.
+             */
             void setBinSize(double bin_size);
 
+            /**
+             * \brief Returns the currently configured distance bin size.
+             * \return The configured bin size.
+             */
             double getBinSize() const;
-            
+
+            /**
+             * \brief Returns the internal pharmacophore generator used for the input molecular graph.
+             * \return A reference to the pharmacophore generator.
+             */
             Pharm::PharmacophoreGenerator& getPharmacophoreGenerator();
 
+            /**
+             * \brief Returns the internal pharmacophore generator used for the input molecular graph.
+             * \return A \c const reference to the pharmacophore generator.
+             */
             const Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
 
             /**
+             * \brief Specifies a predicate that selects which features participate in the fingerprint.
+             * \param func The feature filter function.
              * \since 1.3
              */
             void setFeatureFilterFunction(const FeatureFilterFunction& func);
 
             /**
+             * \brief Returns the currently configured feature filter function.
+             * \return The configured feature filter function.
              * \since 1.3
              */
             const FeatureFilterFunction& getFeatureFilterFunction() const;
-            
+
           protected:
+            /**
+             * \brief Default distance bin size.
+             */
             static constexpr double DEF_BIN_SIZE = 2.0;
 
+            /**
+             * \brief Constructs the \c %NPointPharmacophoreFingerprintGenerator instance.
+             */
             NPointPharmacophoreFingerprintGenerator();
 
+            /**
+             * \brief Copy constructor.
+             */
             NPointPharmacophoreFingerprintGenerator(const NPointPharmacophoreFingerprintGenerator& gen) = default;
-            
+
+            /**
+             * \brief Generates the fingerprint of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param fp The output bitset.
+             */
             void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+
+            /**
+             * \brief Generates the fingerprint of the feature container \a cntnr.
+             * \param cntnr The feature container.
+             * \param fp The output bitset.
+             */
             void generate(const Pharm::FeatureContainer& cntnr, Util::BitSet& fp);
 
           private:

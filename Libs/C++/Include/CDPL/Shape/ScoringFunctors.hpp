@@ -38,53 +38,68 @@ namespace CDPL
     namespace Shape
     {
 
+        /** \brief Functor wrapping Shape::calcTotalOverlapTanimotoScore(). */
         class TotalOverlapTanimotoScore
         {
 
           public:
+            /** \brief Returns the (shape + color) total-overlap Tanimoto score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTotalOverlapTanimotoScore(res);
             }
         };
 
+        /** \brief Functor wrapping Shape::calcShapeTanimotoScore(). */
         class ShapeTanimotoScore
         {
 
           public:
+            /** \brief Returns the shape-only Tanimoto score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcShapeTanimotoScore(res);
             }
         };
 
+        /** \brief Functor wrapping Shape::calcColorTanimotoScore(). */
         class ColorTanimotoScore
         {
 
           public:
+            /** \brief Returns the color (pharmacophore) Tanimoto score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcColorTanimotoScore(res);
             }
         };
 
+        /** \brief Functor wrapping Shape::calcTanimotoComboScore(). */
         class TanimotoComboScore
         {
 
           public:
+            /** \brief Returns the combined shape + color Tanimoto score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTanimotoComboScore(res);
             }
         };
 
+        /** \brief Functor wrapping Shape::calcTotalOverlapTverskyScore(). */
         class TotalOverlapTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factors.
+             * \param alpha The reference-side Tversky weight.
+             * \param beta The aligned-side Tversky weight.
+             */
             TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
+            /** \brief Returns the (shape + color) total-overlap symmetric Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTotalOverlapTverskyScore(res, alpha, beta);
@@ -95,13 +110,20 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcShapeTverskyScore(). */
         class ShapeTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factors.
+             * \param alpha The reference-side Tversky weight.
+             * \param beta The aligned-side Tversky weight.
+             */
             ShapeTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
+            /** \brief Returns the shape-only symmetric Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcShapeTverskyScore(res, alpha, beta);
@@ -112,13 +134,20 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcColorTverskyScore(). */
         class ColorTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factors.
+             * \param alpha The reference-side Tversky weight.
+             * \param beta The aligned-side Tversky weight.
+             */
             ColorTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
+            /** \brief Returns the color symmetric Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcColorTverskyScore(res, alpha, beta);
@@ -129,13 +158,20 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcTverskyComboScore(). */
         class TverskyComboScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factors.
+             * \param alpha The reference-side Tversky weight.
+             * \param beta The aligned-side Tversky weight.
+             */
             TverskyComboScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
+            /** \brief Returns the combined shape + color symmetric Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTverskyComboScore(res, alpha, beta);
@@ -146,13 +182,19 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcReferenceTotalOverlapTverskyScore(). */
         class ReferenceTotalOverlapTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param alpha The reference-side Tversky weight.
+             */
             ReferenceTotalOverlapTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
+            /** \brief Returns the (shape + color) total-overlap reference-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceTotalOverlapTverskyScore(res, alpha);
@@ -162,13 +204,19 @@ namespace CDPL
             double alpha;
         };
 
+        /** \brief Functor wrapping Shape::calcReferenceShapeTverskyScore(). */
         class ReferenceShapeTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param alpha The reference-side Tversky weight.
+             */
             ReferenceShapeTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
+            /** \brief Returns the shape-only reference-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceShapeTverskyScore(res, alpha);
@@ -178,13 +226,19 @@ namespace CDPL
             double alpha;
         };
 
+        /** \brief Functor wrapping Shape::calcReferenceColorTverskyScore(). */
         class ReferenceColorTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param alpha The reference-side Tversky weight.
+             */
             ReferenceColorTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
+            /** \brief Returns the color reference-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceColorTverskyScore(res, alpha);
@@ -194,13 +248,19 @@ namespace CDPL
             double alpha;
         };
 
+        /** \brief Functor wrapping Shape::calcReferenceTverskyComboScore(). */
         class ReferenceTverskyComboScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param alpha The reference-side Tversky weight.
+             */
             ReferenceTverskyComboScore(double alpha = 0.95):
                 alpha(alpha) {}
 
+            /** \brief Returns the combined shape + color reference-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceTverskyComboScore(res, alpha);
@@ -210,13 +270,19 @@ namespace CDPL
             double alpha;
         };
 
+        /** \brief Functor wrapping Shape::calcAlignedTotalOverlapTverskyScore(). */
         class AlignedTotalOverlapTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param beta The aligned-side Tversky weight.
+             */
             AlignedTotalOverlapTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
+            /** \brief Returns the (shape + color) total-overlap aligned-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedTotalOverlapTverskyScore(res, beta);
@@ -226,13 +292,19 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcAlignedShapeTverskyScore(). */
         class AlignedShapeTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param beta The aligned-side Tversky weight.
+             */
             AlignedShapeTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
+            /** \brief Returns the shape-only aligned-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedShapeTverskyScore(res, beta);
@@ -242,13 +314,19 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcAlignedColorTverskyScore(). */
         class AlignedColorTverskyScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param beta The aligned-side Tversky weight.
+             */
             AlignedColorTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
+            /** \brief Returns the color aligned-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedColorTverskyScore(res, beta);
@@ -258,13 +336,19 @@ namespace CDPL
             double beta;
         };
 
+        /** \brief Functor wrapping Shape::calcAlignedTverskyComboScore(). */
         class AlignedTverskyComboScore
         {
 
           public:
+            /**
+             * \brief Constructs the functor with the given Tversky weighting factor.
+             * \param beta The aligned-side Tversky weight.
+             */
             AlignedTverskyComboScore(double beta = 0.95):
                 beta(beta) {}
 
+            /** \brief Returns the combined shape + color aligned-normalized Tversky score of \a res. */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedTverskyComboScore(res, beta);

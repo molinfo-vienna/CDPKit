@@ -51,12 +51,19 @@ namespace CDPL
             extern CDPL_PHARM_API const bool STRICT_ERROR_CHECKING;
 
             /**
+             * \brief Default setting for the control-parameter Pharm::ControlParameter::CDF_OUTPUT_SINGLE_PRECISION_FLOATS.
              * \since 1.2
              */
             extern CDPL_PHARM_API const bool CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
+            /**
+             * \brief Default setting for the control-parameter Pharm::ControlParameter::PSD_CREATION_MODE.
+             */
             extern CDPL_PHARM_API const ScreeningDBCreator::Mode PSD_CREATION_MODE;
 
+            /**
+             * \brief Default setting for the control-parameter Pharm::ControlParameter::PSD_ALLOW_DUPLICATES.
+             */
             extern CDPL_PHARM_API const bool PSD_ALLOW_DUPLICATES;
         } // namespace ControlParameterDefault
     } // namespace Pharm

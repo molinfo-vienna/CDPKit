@@ -42,7 +42,11 @@ namespace CDPL
     {
 
         /**
-         * \brief NPoint3DPharmacophoreFingerprintGenerator.
+         * \brief N-point pharmacophore fingerprint generator that uses spatial 3D feature distances.
+         *
+         * The fingerprint encodes the binned Euclidean distances between all combinations of feature
+         * tuples generated from a molecular graph or feature container.
+         *
          * \since 1.2
          */
         class CDPL_DESCR_API NPoint3DPharmacophoreFingerprintGenerator : public NPointPharmacophoreFingerprintGenerator
@@ -50,20 +54,40 @@ namespace CDPL
 
           public:
             /**
+             * \brief Default distance bin size.
              * \since 1.3
              */
             static constexpr double DEF_BIN_SIZE = 3.0;
 
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NPoint3DPharmacophoreFingerprintGenerator instances.
+             */
             typedef std::shared_ptr<NPoint3DPharmacophoreFingerprintGenerator> SharedPointer;
 
+            /**
+             * \brief Constructs the \c %NPoint3DPharmacophoreFingerprintGenerator instance.
+             */
             NPoint3DPharmacophoreFingerprintGenerator();
 
+            /**
+             * \brief Copy constructor.
+             */
             NPoint3DPharmacophoreFingerprintGenerator(const NPoint3DPharmacophoreFingerprintGenerator& gen) = default;
 
+            /**
+             * \brief Constructs the \c %NPoint3DPharmacophoreFingerprintGenerator instance and generates the fingerprint of \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param fp The output bitset.
+             */
             NPoint3DPharmacophoreFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
+            /**
+             * \brief Constructs the \c %NPoint3DPharmacophoreFingerprintGenerator instance and generates the fingerprint of \a cntnr.
+             * \param cntnr The feature container.
+             * \param fp The output bitset.
+             */
             NPoint3DPharmacophoreFingerprintGenerator(const Pharm::FeatureContainer& cntnr, Util::BitSet& fp);
-            
+
             using NPointPharmacophoreFingerprintGenerator::generate;
             
           private:

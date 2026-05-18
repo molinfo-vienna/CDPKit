@@ -50,7 +50,8 @@ namespace CDPL
     {
 
         /**
-         * \brief PharmacophoreAutoCorr3DDescriptorCalculator.
+         * \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore using
+         *        feature-pair weights resolved by a per-feature mode.
          */
         class CDPL_DESCR_API PharmacophoreAutoCorr3DDescriptorCalculator
         {
@@ -58,7 +59,14 @@ namespace CDPL
             typedef AutoCorrelation3DVectorCalculator<Pharm::Feature> AutoCorr3DVectorCalculator;
 
           public:
+            /**
+             * \brief Type of the function used to retrieve the 3D coordinates of a feature.
+             */
             typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction                           Feature3DCoordinatesFunction;
+
+            /**
+             * \brief Type of the generic functor used to retrieve the weight of a feature pair (with a per-feature mode).
+             */
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
 
             /**
@@ -66,6 +74,11 @@ namespace CDPL
              */
             PharmacophoreAutoCorr3DDescriptorCalculator();
 
+            /**
+             * \brief Constructs the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance and calculates the descriptor of the features in \a cntnr.
+             * \param cntnr The feature container.
+             * \param descr The output descriptor vector.
+             */
             PharmacophoreAutoCorr3DDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -125,6 +138,11 @@ namespace CDPL
              */
             void setFeaturePairWeightFunction(const FeaturePairWeightFunction& func);
 
+            /**
+             * \brief Calculates the 3D auto-correlation descriptor of the features in \a cntnr.
+             * \param cntnr The feature container.
+             * \param descr The output descriptor vector.
+             */
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
           private:

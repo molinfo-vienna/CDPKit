@@ -54,15 +54,23 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief Specifies the number of bits of the generated PubChem fingerprint.
+             */
             static constexpr std::size_t NUM_BITS = 881;
-            
+
             /**
              * \brief Constructs the \c %PubChemFingerprintGenerator instance.
              */
             PubChemFingerprintGenerator();
 
+            /**
+             * \brief Copy constructor.
+             * \param gen The other \c %PubChemFingerprintGenerator instance.
+             * \note The internal state of \a gen is not copied; the new instance is default-initialized.
+             */
             PubChemFingerprintGenerator(const PubChemFingerprintGenerator& gen);
-            
+
             /**
              * \brief Constructs the \c %PubChemFingerprintGenerator instance and generates the fingerprint of the
              *        molecular graph \a molgraph.
@@ -78,6 +86,12 @@ namespace CDPL
              */
             void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
+            /**
+             * \brief Assignment operator.
+             * \param gen The other \c %PubChemFingerprintGenerator instance.
+             * \return A reference to itself.
+             * \note The internal state of \a gen is not copied; the assignee remains unchanged.
+             */
             PubChemFingerprintGenerator& operator=(const PubChemFingerprintGenerator& gen)
             {
                 return *this;

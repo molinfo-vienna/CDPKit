@@ -39,12 +39,19 @@ namespace CDPL
     {
 
         /**
-         * \brief Provides default values for built-in Chem::Atom properties.
+         * \brief Provides default values for MolProp-specific Chem::Atom properties.
          */
         namespace AtomPropertyDefault
         {
 
+            /**
+             * \brief Default value of the MolProp::AtomProperty::H_BOND_DONOR_TYPE property.
+             */
             extern CDPL_MOLPROP_API const unsigned int H_BOND_DONOR_TYPE;
+
+            /**
+             * \brief Default value of the MolProp::AtomProperty::H_BOND_ACCEPTOR_TYPE property.
+             */
             extern CDPL_MOLPROP_API const unsigned int H_BOND_ACCEPTOR_TYPE;
         } // namespace AtomPropertyDefault
     } // namespace MolProp

@@ -50,7 +50,8 @@ namespace CDPL
     {
 
         /**
-         * \brief PharmacophoreRDFDescriptorCalculator.
+         * \brief Calculation of an RDF descriptor of a pharmacophore using feature-pair weights resolved by a per-feature mode.
+         *
          * \see [\ref CITB, \ref HBMD]
          */
         class CDPL_DESCR_API PharmacophoreRDFDescriptorCalculator
@@ -59,7 +60,14 @@ namespace CDPL
             typedef RDFCodeCalculator<Pharm::Feature> RDFCodeCalc;
 
           public:
+            /**
+             * \brief Type of the function used to retrieve the 3D coordinates of a feature.
+             */
             typedef RDFCodeCalc::Entity3DCoordinatesFunction                                          Feature3DCoordinatesFunction;
+
+            /**
+             * \brief Type of the generic functor used to retrieve the weight of a feature pair (with a per-feature mode).
+             */
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
 
             /**
@@ -67,6 +75,11 @@ namespace CDPL
              */
             PharmacophoreRDFDescriptorCalculator();
 
+            /**
+             * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance and calculates the descriptor of the features in \a cntnr.
+             * \param cntnr The feature container.
+             * \param descr The output descriptor vector.
+             */
             PharmacophoreRDFDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -167,6 +180,11 @@ namespace CDPL
              */
             bool distanceToIntervalsCenterRoundingEnabled() const;
 
+            /**
+             * \brief Calculates the RDF descriptor of the features in \a cntnr.
+             * \param cntnr The feature container.
+             * \param descr The output descriptor vector.
+             */
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
           private:

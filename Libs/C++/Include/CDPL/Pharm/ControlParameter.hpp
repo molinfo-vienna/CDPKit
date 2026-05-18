@@ -63,12 +63,25 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             /**
+             * \brief Specifies whether floating-point values stored in CDF output shall use single (instead of double) precision.
+             *
+             * \valuetype bool
              * \since 1.2
              */
             extern CDPL_PHARM_API const Base::LookupKey CDF_OUTPUT_SINGLE_PRECISION_FLOATS;
 
+            /**
+             * \brief Specifies the creation mode for new pharmacophore screening databases (see Pharm::ScreeningDBCreator::Mode).
+             *
+             * \valuetype Pharm::ScreeningDBCreator::Mode
+             */
             extern CDPL_PHARM_API const Base::LookupKey PSD_CREATION_MODE;
 
+            /**
+             * \brief Specifies whether duplicate molecules shall be permitted when building a pharmacophore screening database.
+             *
+             * \valuetype bool
+             */
             extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
         } // namespace ControlParameter
     } // namespace Pharm

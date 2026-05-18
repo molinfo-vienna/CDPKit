@@ -46,6 +46,9 @@ namespace CDPL
         namespace FeatureContainerPropertyDefault
         {
 
+            /**
+             * \brief Default value of the Pharm::FeatureContainerProperty::NAME property.
+             */
             extern CDPL_PHARM_API const std::string NAME;
         }
     } // namespace Pharm

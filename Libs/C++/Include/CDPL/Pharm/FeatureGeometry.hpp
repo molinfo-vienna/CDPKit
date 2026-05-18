@@ -42,12 +42,24 @@ namespace CDPL
         namespace FeatureGeometry
         {
 
+            /**
+             * \brief Specifies an undefined feature geometry.
+             */
             constexpr unsigned int UNDEF = 0;
 
+            /**
+             * \brief Specifies a spherical feature geometry.
+             */
             constexpr unsigned int SPHERE = 1;
 
+            /**
+             * \brief Specifies a directional (vector) feature geometry.
+             */
             constexpr unsigned int VECTOR = 2;
 
+            /**
+             * \brief Specifies a planar feature geometry.
+             */
             constexpr unsigned int PLANE = 3;
         } // namespace FeatureGeometry
     } // namespace Pharm
