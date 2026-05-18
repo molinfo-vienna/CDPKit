@@ -20,20 +20,22 @@
 #
 
 ##
-# \brief PEOESigmaChargeCalculator.
+# \brief Calculator that uses the <em>Partial Equalization of Orbital Electronegativities</em> (PEOE) method of Gasteiger and Marsili to compute sigma atomic charges and electronegativities of a molecular graph.
+# 
+# The calculation iteratively shifts partial charges between bonded atoms until the orbital electronegativities are (approximately) equalized. The number of iterations and the damping factor that controls the shift attenuation per iteration can be configured.
 # 
 # \see [\ref PEOE]
 # 
 class PEOESigmaChargeCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default number of charge-shifting iterations.
+    # 
     DEF_NUM_ITERATIONS = 20
 
     ##
-    # \brief 
-    #
+    # \brief Default per-iteration damping factor.
+    # 
     DEF_DAMPING_FACTOR = 0.48
 
     ##

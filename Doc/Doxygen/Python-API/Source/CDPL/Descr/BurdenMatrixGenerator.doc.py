@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BurdenMatrixGenerator.
+# \brief Calculation of the <em>Burden</em> matrix of a molecular graph.
+# 
+# The <em>Burden</em> matrix is a square matrix of dimension <em>N  N</em>, where <em>N</em> is the number of atoms of the molecular graph. The diagonal elements default to the atom type but can be replaced via a user-supplied atom weight function (see setAtomWeightFunction()). The off-diagonal elements encode the bond orders of the connecting bonds.
 # 
 # \see [\ref BURMA]
 # 
@@ -32,7 +34,7 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs the <tt>BCUTDescriptorGenerator</tt> instance and generates the <em>Burden</em> matrix of the molecular graph <em>molgraph</em>.
+    # \brief Constructs the <tt>BurdenMatrixGenerator</tt> instance and generates the <em>Burden</em> matrix of the molecular graph <em>molgraph</em>.
     # 
     # \param molgraph The molecular graph for which to generate the <em>Burden</em> matrix.
     # \param mtx The generated <em>Burden</em> matrix of the specified molecular graph.

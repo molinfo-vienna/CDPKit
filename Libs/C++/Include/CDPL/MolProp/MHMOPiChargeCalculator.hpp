@@ -66,7 +66,7 @@ namespace CDPL
          *
          * The calculator can either perceive the pi-electron systems of the molecular graph itself
          * (via Chem::ElectronSystemList) or accept a pre-computed list of pi-systems. The MHMO
-         * parameter set follows the parameterization described in Kleinöder's PhD thesis.
+         * parameter set follows the parameterization described in the PhD thesis of Thomas Kleinöder (Computer Chemistry Center, Univ. Erlangen-Nuremberg, 2005).
          *
          * \see [\ref MHMO]
          */
@@ -139,6 +139,7 @@ namespace CDPL
              * \brief Returns the calculated pi-electron density of the atom at index \a atom_idx.
              * \param atom_idx The zero-based atom index.
              * \return The calculated pi-electron density.
+             * \throw Base::IndexError if \a atom_idx is out of bounds.
              */
             double getElectronDensity(std::size_t atom_idx) const;
 
@@ -146,6 +147,7 @@ namespace CDPL
              * \brief Returns the calculated pi-charge of the atom at index \a atom_idx.
              * \param atom_idx The zero-based atom index.
              * \return The calculated pi-charge.
+             * \throw Base::IndexError if \a atom_idx is out of bounds.
              */
             double getCharge(std::size_t atom_idx) const;
 
@@ -153,6 +155,7 @@ namespace CDPL
              * \brief Returns the calculated pi-bond order of the bond at index \a bond_idx.
              * \param bond_idx The zero-based bond index.
              * \return The calculated pi-bond order.
+             * \throw Base::IndexError if \a bond_idx is out of bounds.
              */
             double getBondOrder(std::size_t bond_idx) const;
 

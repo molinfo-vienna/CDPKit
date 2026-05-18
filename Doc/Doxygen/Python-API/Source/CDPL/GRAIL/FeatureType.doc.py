@@ -20,7 +20,11 @@
 #
 
 ##
-# \brief Provides constants for the specification of pharmacophore feature types with extensions for H-bond acceptors and donors.
+# \brief Provides constants for the specification of GRAIL-specific extended pharmacophore feature types that refine H-bond donor and acceptor categories by the chemical environment (atom element + SYBYL-like type) of the participating heavy atom.
+# 
+# Re-exports all constants from namespace Pharm.FeatureType and adds extended donor/acceptor subtypes used by the GRAIL descriptor calculation.
+# 
+# \since 1.1
 # 
 class FeatureType(Boost.Python.instance):
 
@@ -80,126 +84,126 @@ class FeatureType(Boost.Python.instance):
     MAX_TYPE = 9
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with a generic nitrogen heavy atom.
+    # 
     H_BOND_DONOR_N = 10
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an sp3 (<em>N.3</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_N3 = 11
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an sp2 (<em>N.2</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_N2 = 12
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an aromatic (<em>N.ar</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_Nar = 13
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an amide (<em>N.am</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_Nam = 14
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with a trigonal-planar (<em>N.pl3</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_Npl3 = 15
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with a quaternary (<em>N.4</em>) nitrogen heavy atom.
+    # 
     H_BOND_DONOR_N4 = 16
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with a generic oxygen heavy atom.
+    # 
     H_BOND_DONOR_O = 17
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an sp3 (<em>O.3</em>) oxygen heavy atom.
+    # 
     H_BOND_DONOR_O3 = 18
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with a generic sulfur heavy atom.
+    # 
     H_BOND_DONOR_S = 19
 
     ##
-    # \brief 
-    #
+    # \brief H-bond donor with an sp3 (<em>S.3</em>) sulfur heavy atom.
+    # 
     H_BOND_DONOR_S3 = 20
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with a generic nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_N = 21
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp3 (<em>N.3</em>) nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_N3 = 22
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp2 (<em>N.2</em>) nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_N2 = 23
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp (<em>N.1</em>) nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_N1 = 24
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an aromatic (<em>N.ar</em>) nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_Nar = 25
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with a trigonal-planar (<em>N.pl3</em>) nitrogen heavy atom.
+    # 
     H_BOND_ACCEPTOR_Npl3 = 26
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with a generic oxygen heavy atom.
+    # 
     H_BOND_ACCEPTOR_O = 27
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp3 (<em>O.3</em>) oxygen heavy atom.
+    # 
     H_BOND_ACCEPTOR_O3 = 28
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp2 (<em>O.2</em>) oxygen heavy atom.
+    # 
     H_BOND_ACCEPTOR_O2 = 29
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with a carboxylate (<em>O.co2</em>) oxygen heavy atom.
+    # 
     H_BOND_ACCEPTOR_Oco2 = 30
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with a generic sulfur heavy atom.
+    # 
     H_BOND_ACCEPTOR_S = 31
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp3 (<em>S.3</em>) sulfur heavy atom.
+    # 
     H_BOND_ACCEPTOR_S3 = 32
 
     ##
-    # \brief 
-    #
+    # \brief H-bond acceptor with an sp2 (<em>S.2</em>) sulfur heavy atom.
+    # 
     H_BOND_ACCEPTOR_S2 = 33
 
     ##
-    # \brief 
-    #
+    # \brief Highest extended feature type constant defined in this namespace.
+    # 
     MAX_EXT_TYPE = 33

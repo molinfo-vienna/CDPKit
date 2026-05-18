@@ -20,32 +20,34 @@
 #
 
 ##
-# \brief BindingAffinityCalculator.
+# \brief Predicts the binding affinity of a ligand pose from its GRAIL descriptor vector.
+# 
+# The prediction is performed using a pre-trained regression model that takes a GRAIL descriptor as input and returns a binding affinity estimate. The targeted affinity measure ( \f$ pK_d \f$, \f$ pK_i \f$, or a combined \f$ pK_d/pK_i \f$ model) is selected at call time via the AffinityMeasure argument.
 # 
 class BindingAffinityCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the affinity measure the prediction targets.
+    # 
     class AffinityMeasure(Boost.Python.enum):
 
         ##
-        # \brief PKD.
-        #
+        # \brief \f$ pK_d \f$ (dissociation constant).
+        # 
         PKD = 0
 
         ##
-        # \brief PKI.
-        #
+        # \brief \f$ pK_i \f$ (inhibition constant).
+        # 
         PKI = 1
 
         ##
-        # \brief PKD_PKI.
-        #
+        # \brief Combined \f$ pK_d/pK_i \f$ model.
+        # 
         PKD_PKI = 2
 
     ##
-    # \brief Initializes the \c %BindingAffinityCalculator instance.
+    # \brief Constructs the <tt>BindingAffinityCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -62,11 +64,13 @@ class BindingAffinityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param grail_descr 
-    # \param measure 
-    # \return 
-    #
+    # \brief Predicts the binding affinity from the given GRAIL descriptor.
+    # 
+    # \param grail_descr The GRAIL descriptor vector of the ligand pose.
+    # \param measure The targeted affinity measure.
+    # 
+    # \return The predicted binding affinity.
+    # 
     def __call__(grail_descr: Math.DVector, measure: AffinityMeasure) -> float: pass
 
     objectID = property(getObjectID)

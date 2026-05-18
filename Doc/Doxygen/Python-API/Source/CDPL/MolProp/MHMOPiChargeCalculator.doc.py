@@ -20,27 +20,33 @@
 #
 
 ##
-# \brief MHMOPiChargeCalculator.
+# \brief Calculator that uses a Modified Hückel Molecular Orbital (MHMO) treatment to compute pi-electron densities, pi-charges, pi-bond orders and the total pi-electron energy of a molecular graph.
+# 
+# The calculator can either perceive the pi-electron systems of the molecular graph itself (via Chem.ElectronSystemList) or accept a pre-computed list of pi-systems. The MHMO parameter set follows the parameterization described in the PhD thesis of Thomas Kleinöder (Computer Chemistry Center, Univ. Erlangen-Nuremberg, 2005).
 # 
 # \see [\ref MHMO]
 # 
 class MHMOPiChargeCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
+    # \brief Constructs the <tt>MHMOPiChargeCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
-    # \param molgraph 
+    # \brief Constructs the <tt>MHMOPiChargeCalculator</tt> instance and performs the MHMO calculation for <em>molgraph</em>.
+    # 
+    # The pi-electron systems are perceived from <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perform the MHMO calculation.
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes the \c %MHMOPiChargeCalculator instance.
-    # \param pi_sys_list 
-    # \param molgraph 
+    # \brief Constructs the <tt>MHMOPiChargeCalculator</tt> instance and performs the MHMO calculation for the given pi-electron systems of <em>molgraph</em>.
+    # 
+    # \param pi_sys_list The list of pi-electron systems.
+    # \param molgraph The molecular graph.
     # 
     def __init__(pi_sys_list: Chem.ElectronSystemList, molgraph: Chem.MolecularGraph) -> None: pass
 
@@ -57,56 +63,72 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param localized 
-    #
+    # \brief Specifies whether the calculation shall use localized pi-bonds.
+    # 
+    # \param localized If <tt>True</tt>, conjugated pi-systems are treated as a set of localized pi-bonds.
+    # 
     def localizedPiBonds(localized: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param localized 
-    # \return 
-    #
+    # \brief Specifies whether the calculation shall use localized pi-bonds.
+    # 
+    # \param localized If <tt>True</tt>, conjugated pi-systems are treated as a set of localized pi-bonds.
+    # 
     def localizedPiBonds() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Performs the MHMO calculation for <em>molgraph</em>, perceiving the pi-electron systems on the fly.
+    # 
+    # \param molgraph The molecular graph for which to perform the MHMO calculation.
+    # 
     def calculate(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param pi_sys_list 
-    # \param molgraph 
-    #
+    # \brief Performs the MHMO calculation for the given pi-electron systems of <em>molgraph</em>.
+    # 
+    # \param pi_sys_list The list of pi-electron systems.
+    # \param molgraph The molecular graph.
+    # 
     def calculate(pi_sys_list: Chem.ElectronSystemList, molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_idx 
-    # \return 
-    #
+    # \brief Returns the calculated pi-electron density of the atom at index <em>atom_idx</em>.
+    # 
+    # \param atom_idx The zero-based atom index.
+    # 
+    # \return The calculated pi-electron density. 
+    # 
+    # \throw Base.IndexError if <em>atom_idx</em> is out of bounds.
+    # 
     def getElectronDensity(atom_idx: int) -> float: pass
 
     ##
-    # \brief 
-    # \param atom_idx 
-    # \return 
-    #
+    # \brief Returns the calculated pi-charge of the atom at index <em>atom_idx</em>.
+    # 
+    # \param atom_idx The zero-based atom index.
+    # 
+    # \return The calculated pi-charge. 
+    # 
+    # \throw Base.IndexError if <em>atom_idx</em> is out of bounds.
+    # 
     def getCharge(atom_idx: int) -> float: pass
 
     ##
-    # \brief 
-    # \param bond_idx 
-    # \return 
-    #
+    # \brief Returns the calculated pi-bond order of the bond at index <em>bond_idx</em>.
+    # 
+    # \param bond_idx The zero-based bond index.
+    # 
+    # \return The calculated pi-bond order. 
+    # 
+    # \throw Base.IndexError if <em>bond_idx</em> is out of bounds.
+    # 
     def getBondOrder(bond_idx: int) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total pi-electron energy of the molecular graph from the last calculation.
+    # 
+    # \return The total pi-electron energy.
+    # 
     def getEnergy() -> float: pass
 
     objectID = property(getObjectID)

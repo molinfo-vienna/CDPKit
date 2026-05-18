@@ -20,57 +20,69 @@
 #
 
 ##
-# \brief 
-# \param grid 
-# \param type 
-#
+# \brief Sets the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of <em>grid</em>.
+# 
+# \param grid The grid whose feature type to set.
+# \param type The new feature type value.
+# 
 def setFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 
 ##
-# \brief 
-# \param grid 
-# \return 
-#
+# \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.FEATURE_TYPE property.
+# 
+# \param grid The grid to query.
+# 
+# \return <tt>True</tt> if the property is set on the grid, and <tt>False</tt> otherwise.
+# 
 def hasFeatureType(grid: Grid.AttributedGrid) -> bool: pass
 
 ##
-# \brief 
-# \param grid 
-# \return 
-#
+# \brief Returns the value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property of <em>grid</em>.
+# 
+# \param grid The grid whose feature type is requested.
+# 
+# \return The feature type value.
+# 
 def getFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
-# \brief 
-# \param grid 
-#
+# \brief Removes the GRAIL.AttributedGridProperty.FEATURE_TYPE property from <em>grid</em>.
+# 
+# \param grid The grid to clear the property from.
+# 
 def clearFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
-# \brief 
-# \param grid 
-# \param type 
-#
+# \brief Sets the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of <em>grid</em>.
+# 
+# \param grid The grid whose target feature type to set.
+# \param type The new target feature type value.
+# 
 def setTargetFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 
 ##
-# \brief 
-# \param grid 
-# \return 
-#
+# \brief Tells whether <em>grid</em> carries an explicit GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property.
+# 
+# \param grid The grid to query.
+# 
+# \return <tt>True</tt> if the property is set on the grid, and <tt>False</tt> otherwise.
+# 
 def hasTargetFeatureType(grid: Grid.AttributedGrid) -> bool: pass
 
 ##
-# \brief 
-# \param grid 
-# \return 
-#
+# \brief Returns the value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property of <em>grid</em>.
+# 
+# \param grid The grid whose target feature type is requested.
+# 
+# \return The target feature type value.
+# 
 def getTargetFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
-# \brief 
-# \param grid 
-#
+# \brief Removes the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property from <em>grid</em>.
+# 
+# \param grid The grid to clear the property from.
+# 
 def clearTargetFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
@@ -82,8 +94,11 @@ def clearTargetFeatureType(grid: Grid.AttributedGrid) -> None: pass
 def perceiveExtendedType(feature: Pharm.Feature, ligand: bool) -> int: pass
 
 ##
-# \brief 
-# \param mol 
-# \param std_prot_state 
-#
+# \brief Prepares a molecule for GRAIL descriptor calculation.
+# 
+# Performs the pre-processing steps (e.g. ring perception, atom typing, hydrogen handling) required by GRAIL.GRAILDescriptorCalculator on the molecular structure.
+# 
+# \param mol The molecule to prepare. The molecule is modified in place.
+# \param std_prot_state If <tt>True</tt>, the standard protonation state of the molecule is assigned prior to the GRAIL-specific pre-processing.
+# 
 def prepareForGRAILDescriptorCalculation(mol: Chem.Molecule, std_prot_state: bool = False) -> None: pass

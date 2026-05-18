@@ -61,7 +61,7 @@ namespace CDPL
          * (N3, N2, Nar, Nam, Npl3, N4, O3, O2, Oco2, S3, S2) of the participating heavy atom.
          * The full element layout is given by ElementIndex.
          *
-         * \see [\ref GRAIL]
+         * \see [\ref GRADE]
          */
         class CDPL_GRAIL_API GRAILXDescriptorCalculator
         {
@@ -444,11 +444,11 @@ namespace CDPL
                 XBD_XBA_SCORE_MAX,
                 /** \brief Electrostatic interaction energy. */
                 ES_ENERGY,
-                /** \brief Electrostatic interaction energy weighted by squared atom-pair distance. */
+                /** \brief Electrostatic interaction energy with squared atom-pair distance dependency. */
                 ES_ENERGY_SQRD_DIST,
-                /** \brief Attractive part of the van der Waals interaction energy. */
+                /** \brief Attractive part of the Van der Waals interaction energy. */
                 VDW_ENERGY_ATT,
-                /** \brief Repulsive part of the van der Waals interaction energy. */
+                /** \brief Repulsive part of the Van der Waals interaction energy. */
                 VDW_ENERGY_REP
             };
 

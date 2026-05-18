@@ -25,11 +25,11 @@
 class AttributedGridPropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the GRAIL.AttributedGridProperty.FEATURE_TYPE property.
+    # 
     FEATURE_TYPE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the GRAIL.AttributedGridProperty.TARGET_FEATURE_TYPE property.
+    # 
     TARGET_FEATURE_TYPE = 0

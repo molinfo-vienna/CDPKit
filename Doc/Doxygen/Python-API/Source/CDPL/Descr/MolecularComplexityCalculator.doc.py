@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief MolecularComplexityCalculator.
+# \brief Calculation of the molecular complexity of a molecular graph after Hendrickson, Huang and Toczko.
+# 
+# The complexity is computed from contributions of atom-type counts, symmetry of atom neighborhoods, and the presence of multiple bonds; it captures how many distinct "kinds" of atoms and bonds the structure contains and how symmetric it is.
 # 
 # \see [\ref MCPLX]
 # 

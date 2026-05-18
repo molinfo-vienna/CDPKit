@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief FeatureInteractionScoreGridCalculator.
+# \brief Calculator that fills a spatial grid with per-cell feature-interaction scores against a set of target pharmacophore features.
+# 
+# For each grid cell, the configured scoring function is evaluated against every target feature within the configured cutoff distance and the resulting scores are combined into a single cell value via a user-supplied combination function (defaulting to a sum). The set of considered target features can be filtered by a feature-selection predicate.
 # 
 class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Score-combination functor returning the maximum (infinity norm) of the per-feature scores.
+    # 
     class MaxScoreFunctor(Boost.Python.instance):
 
         ##
@@ -42,8 +44,8 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         def __call__(scores: Math.DVector) -> float: pass
 
     ##
-    # \brief 
-    #
+    # \brief Score-combination functor returning the sum of the per-feature scores.
+    # 
     class ScoreSumFunctor(Boost.Python.instance):
 
         ##
@@ -59,26 +61,29 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         def __call__(scores: Math.DVector) -> float: pass
 
     ##
-    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
+    # \brief Constructs the <tt>FeatureInteractionScoreGridCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
-    # \param func 
+    # \brief Constructs the <tt>FeatureInteractionScoreGridCalculator</tt> instance with the given scoring function.
+    # 
+    # \param func The scoring function.
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %FeatureInteractionScoreGridCalculator instance.
-    # \param scoring_func 
-    # \param comb_func 
+    # \brief Constructs the <tt>FeatureInteractionScoreGridCalculator</tt> instance with the given scoring and score-combination functions.
+    # 
+    # \param scoring_func The scoring function.
+    # \param comb_func The function used to combine per-feature scores.
     # 
     def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FeatureInteractionScoreGridCalculator instance \a calc.
-    # \param calc The \c %FeatureInteractionScoreGridCalculator instance to copy.
+    # \brief Constructs a copy of the <tt>FeatureInteractionScoreGridCalculator</tt> instance <em>calc</em>.
+    # 
+    # \param calc The <tt>FeatureInteractionScoreGridCalculator</tt> to copy.
     # 
     def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass
 
@@ -95,46 +100,54 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FeatureInteractionScoreGridCalculator instance \a calc.
-    # \param calc The \c %FeatureInteractionScoreGridCalculator instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param calc The other <tt>FeatureInteractionScoreGridCalculator</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(calc: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
 
     ##
-    # \brief 
-    # \param dist 
-    #
+    # \brief Sets the cutoff distance beyond which target features are not considered.
+    # 
+    # \param dist The cutoff distance.
+    # 
     def setDistanceCutoff(dist: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured cutoff distance.
+    # 
+    # \return The configured cutoff distance.
+    # 
     def getDistanceCutoff() -> float: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the scoring function used to score the interaction between a grid cell and a target feature.
+    # 
+    # \param func The scoring function.
+    # 
     def setScoringFunction(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured scoring function.
+    # 
+    # \return The configured scoring function.
+    # 
     def getScoringFunction() -> DoubleVector3DFeatureFunctor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to combine per-feature scores into a single grid cell value.
+    # 
+    # \param func The score-combination function.
+    # 
     def setScoreCombinationFunction(func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured score-combination function.
+    # 
+    # \return The configured score-combination function.
+    # 
     def getScoreCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
     ##
@@ -144,28 +157,32 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     def setFeatureSelectionPredicate(func: Pharm.BoolFeatureFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured feature-selection predicate.
+    # 
+    # \return The configured feature-selection predicate.
+    # 
     def getFeatureSelectionPredicate() -> Pharm.BoolFeatureFunctor: pass
 
     ##
-    # \brief 
-    # \param normalize 
-    #
+    # \brief Enables or disables normalization of the combined per-cell scores to the range [0, 1].
+    # 
+    # \param normalize If <tt>True</tt>, the combined scores are normalized.
+    # 
     def normalizeScores(normalize: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the combined per-cell scores are normalized.
+    # 
+    # \return <tt>True</tt> if the combined scores are normalized, and <tt>False</tt> otherwise.
+    # 
     def scoresNormalized() -> bool: pass
 
     ##
-    # \brief 
-    # \param tgt_ftrs 
-    # \param grid 
-    #
+    # \brief Calculates the feature-interaction score at each cell of <em>grid</em> against <em>tgt_ftrs</em>.
+    # 
+    # \param tgt_ftrs The container with the target features.
+    # \param grid The output grid populated with per-cell scores.
+    # 
     def calculate(tgt_ftrs: Pharm.FeatureContainer, grid: Grid.DSpatialGrid) -> None: pass
 
     objectID = property(getObjectID)

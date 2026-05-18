@@ -20,31 +20,36 @@
 #
 
 ##
-# \brief AtomDensityGridCalculator.
+# \brief Calculator that fills a spatial grid with combined per-atom density contributions.
+# 
+# For each grid cell, the density contributions of all atoms within the configured cutoff distance are evaluated using a user-supplied density function and combined into a single cell value via a user-supplied combination function (defaulting to a sum).
 # 
 class AtomDensityGridCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %AtomDensityGridCalculator instance.
+    # \brief Constructs the <tt>AtomDensityGridCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %AtomDensityGridCalculator instance.
-    # \param func 
+    # \brief Constructs the <tt>AtomDensityGridCalculator</tt> instance with the given density function.
+    # 
+    # \param func The density function.
     # 
     def __init__(func: Chem.DoubleVector3D2AtomFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %AtomDensityGridCalculator instance.
-    # \param density_func 
-    # \param comb_func 
+    # \brief Constructs the <tt>AtomDensityGridCalculator</tt> instance with the given density and density-combination functions.
+    # 
+    # \param density_func The density function.
+    # \param comb_func The function used to combine per-atom density contributions.
     # 
     def __init__(density_func: Chem.DoubleVector3D2AtomFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %AtomDensityGridCalculator instance \a calc.
-    # \param calc The \c %AtomDensityGridCalculator instance to copy.
+    # \brief Constructs a copy of the <tt>AtomDensityGridCalculator</tt> instance <em>calc</em>.
+    # 
+    # \param calc The <tt>AtomDensityGridCalculator</tt> to copy.
     # 
     def __init__(calc: AtomDensityGridCalculator) -> None: pass
 
@@ -61,46 +66,54 @@ class AtomDensityGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %AtomDensityGridCalculator instance \a calc.
-    # \param calc The \c %AtomDensityGridCalculator instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param calc The other <tt>AtomDensityGridCalculator</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(calc: AtomDensityGridCalculator) -> AtomDensityGridCalculator: pass
 
     ##
-    # \brief 
-    # \param dist 
-    #
+    # \brief Sets the distance cutoff beyond which atoms are not considered.
+    # 
+    # \param dist The cutoff distance.
+    # 
     def setDistanceCutoff(dist: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured distance cutoff.
+    # 
+    # \return The configured cutoff distance.
+    # 
     def getDistanceCutoff() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured density function.
+    # 
+    # \return The configured density function.
+    # 
     def getDensityFunction() -> Chem.DoubleVector3D2AtomFunctor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the density function used to evaluate per-atom contributions.
+    # 
+    # \param func The density function.
+    # 
     def setDensityFunction(func: Chem.DoubleVector3D2AtomFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the function used to combine per-atom density contributions.
+    # 
+    # \param func The density-combination function.
+    # 
     def setDensityCombinationFunction(func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured density-combination function.
+    # 
+    # \return The configured density-combination function.
+    # 
     def getDensityCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
     ##
@@ -111,16 +124,18 @@ class AtomDensityGridCalculator(Boost.Python.instance):
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of atom 3D-coordinates.
+    # 
+    # \return The configured atom 3D-coordinates function.
+    # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
-    # \brief 
-    # \param atoms 
-    # \param grid 
-    #
+    # \brief Calculates the combined per-atom density at each cell of <em>grid</em> for the given atoms.
+    # 
+    # \param atoms The atoms contributing to the density.
+    # \param grid The output grid populated with per-cell density values.
+    # 
     def calculate(atoms: Chem.AtomContainer, grid: Grid.DSpatialGrid) -> None: pass
 
     objectID = property(getObjectID)

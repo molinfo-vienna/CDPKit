@@ -152,7 +152,7 @@ namespace CDPL
             ~FeatureInteractionScoreGridCalculator();
 
             /**
-             * \brief Enables or disables normalization of the combined per-cell scores by the number of contributing features.
+             * \brief Enables or disables normalization of the combined per-cell scores to the range [0, 1].
              * \param normalize If \c true, the combined scores are normalized.
              */
             void normalizeScores(bool normalize);

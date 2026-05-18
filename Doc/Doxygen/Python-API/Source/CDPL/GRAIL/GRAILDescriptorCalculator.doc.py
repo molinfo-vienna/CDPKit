@@ -20,210 +20,214 @@
 #
 
 ##
-# \brief GRAILDescriptorCalculator.
+# \brief Calculation of GRAIL descriptors for protein-ligand complexes.
 # 
-# \see [\ref GRAIL]
+# The descriptor is a vector of 35 elements that captures ligand-only properties (counts of pharmacophore features, heavy atoms, rotatable bonds, \f$ \log P \f$, \f$ TPSA \f$, etc.) and target-environment-specific scores (HBA/HBD occupancy sums and maxima, pi/aromatic/hydrophobic/halogen-bonding interaction scores, and electrostatic
+#  - Van der Waals energy contributions). See ElementIndex for the layout.
+# 
+# \see [\ref GRADE]
 # 
 class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Indices of the individual elements of the GRAIL descriptor vector.
+    # 
     class ElementIndex(Boost.Python.enum):
 
         ##
-        # \brief PI_COUNT.
-        #
+        # \brief Positive-ionizable feature count (ligand).
+        # 
         PI_COUNT = 0
 
         ##
-        # \brief NI_COUNT.
-        #
+        # \brief Negative-ionizable feature count (ligand).
+        # 
         NI_COUNT = 1
 
         ##
-        # \brief AR_COUNT.
-        #
+        # \brief Aromatic feature count (ligand).
+        # 
         AR_COUNT = 2
 
         ##
-        # \brief H_COUNT.
-        #
+        # \brief Hydrophobic feature count (ligand).
+        # 
         H_COUNT = 3
 
         ##
-        # \brief HBD_COUNT.
-        #
+        # \brief Hydrogen-bond donor feature count (ligand).
+        # 
         HBD_COUNT = 4
 
         ##
-        # \brief HBA_COUNT.
-        #
+        # \brief Hydrogen-bond acceptor feature count (ligand).
+        # 
         HBA_COUNT = 5
 
         ##
-        # \brief XBD_COUNT.
-        #
+        # \brief Halogen-bond donor feature count (ligand).
+        # 
         XBD_COUNT = 6
 
         ##
-        # \brief XBA_COUNT.
-        #
+        # \brief Halogen-bond acceptor feature count (ligand).
+        # 
         XBA_COUNT = 7
 
         ##
-        # \brief HVY_ATOM_COUNT.
-        #
+        # \brief Heavy atom count (ligand).
+        # 
         HVY_ATOM_COUNT = 8
 
         ##
-        # \brief ROT_BOND_COUNT.
-        #
+        # \brief Rotatable bond count (ligand).
+        # 
         ROT_BOND_COUNT = 9
 
         ##
-        # \brief TOTAL_HYD.
-        #
+        # \brief Total computed hydrophobicity (ligand).
+        # 
         TOTAL_HYD = 10
 
         ##
-        # \brief LOGP.
-        #
+        # \brief Computed \f$ \log P \f$ (ligand).
+        # 
         LOGP = 11
 
         ##
-        # \brief TPSA.
-        #
+        # \brief Computed topological polar surface area (ligand).
+        # 
         TPSA = 12
 
         ##
-        # \brief ENV_HBA_OCC_SUM.
-        #
+        # \brief Sum of HBA occupancy scores against the target environment.
+        # 
         ENV_HBA_OCC_SUM = 13
 
         ##
-        # \brief ENV_HBA_OCC_MAX.
-        #
+        # \brief Maximum HBA occupancy score against the target environment.
+        # 
         ENV_HBA_OCC_MAX = 14
 
         ##
-        # \brief ENV_HBD_OCC_SUM.
-        #
+        # \brief Sum of HBD occupancy scores against the target environment.
+        # 
         ENV_HBD_OCC_SUM = 15
 
         ##
-        # \brief ENV_HBD_OCC_MAX.
-        #
+        # \brief Maximum HBD occupancy score against the target environment.
+        # 
         ENV_HBD_OCC_MAX = 16
 
         ##
-        # \brief PI_AR_SCORE_SUM.
-        #
+        # \brief Sum of (ligand positive-ionizable  target aromatic) interaction scores.
+        # 
         PI_AR_SCORE_SUM = 17
 
         ##
-        # \brief PI_AR_SCORE_MAX.
-        #
+        # \brief Maximum (ligand positive-ionizable  target aromatic) interaction score.
+        # 
         PI_AR_SCORE_MAX = 18
 
         ##
-        # \brief AR_PI_SCORE_SUM.
-        #
+        # \brief Sum of (ligand aromatic  target positive-ionizable) interaction scores.
+        # 
         AR_PI_SCORE_SUM = 19
 
         ##
-        # \brief AR_PI_SCORE_MAX.
-        #
+        # \brief Maximum (ligand aromatic  target positive-ionizable) interaction score.
+        # 
         AR_PI_SCORE_MAX = 20
 
         ##
-        # \brief H_H_SCORE_SUM.
-        #
+        # \brief Sum of hydrophobic-hydrophobic interaction scores.
+        # 
         H_H_SCORE_SUM = 21
 
         ##
-        # \brief H_H_SCORE_MAX.
-        #
+        # \brief Maximum hydrophobic-hydrophobic interaction score.
+        # 
         H_H_SCORE_MAX = 22
 
         ##
-        # \brief AR_AR_SCORE_SUM.
-        #
+        # \brief Sum of aromatic-aromatic interaction scores.
+        # 
         AR_AR_SCORE_SUM = 23
 
         ##
-        # \brief AR_AR_SCORE_MAX.
-        #
+        # \brief Maximum aromatic-aromatic interaction score.
+        # 
         AR_AR_SCORE_MAX = 24
 
         ##
-        # \brief HBD_HBA_SCORE_SUM.
-        #
+        # \brief Sum of (ligand HBD  target HBA) interaction scores.
+        # 
         HBD_HBA_SCORE_SUM = 25
 
         ##
-        # \brief HBD_HBA_SCORE_MAX.
-        #
+        # \brief Maximum (ligand HBD  target HBA) interaction score.
+        # 
         HBD_HBA_SCORE_MAX = 26
 
         ##
-        # \brief HBA_HBD_SCORE_SUM.
-        #
+        # \brief Sum of (ligand HBA  target HBD) interaction scores.
+        # 
         HBA_HBD_SCORE_SUM = 27
 
         ##
-        # \brief HBA_HBD_SCORE_MAX.
-        #
+        # \brief Maximum (ligand HBA  target HBD) interaction score.
+        # 
         HBA_HBD_SCORE_MAX = 28
 
         ##
-        # \brief XBD_XBA_SCORE_SUM.
-        #
+        # \brief Sum of (ligand XBD  target XBA) interaction scores.
+        # 
         XBD_XBA_SCORE_SUM = 29
 
         ##
-        # \brief XBD_XBA_SCORE_MAX.
-        #
+        # \brief Maximum (ligand XBD  target XBA) interaction score.
+        # 
         XBD_XBA_SCORE_MAX = 30
 
         ##
-        # \brief ES_ENERGY.
-        #
+        # \brief Electrostatic interaction energy.
+        # 
         ES_ENERGY = 31
 
         ##
-        # \brief ES_ENERGY_SQRD_DIST.
-        #
+        # \brief Electrostatic interaction energy with squared atom-pair distance dependency.
+        # 
         ES_ENERGY_SQRD_DIST = 32
 
         ##
-        # \brief VDW_ENERGY_ATT.
-        #
+        # \brief Attractive part of the Van der Waals interaction energy.
+        # 
         VDW_ENERGY_ATT = 33
 
         ##
-        # \brief VDW_ENERGY_REP.
-        #
+        # \brief Repulsive part of the Van der Waals interaction energy.
+        # 
         VDW_ENERGY_REP = 34
 
     ##
-    # \brief 
-    #
+    # \brief Total number of elements in the calculated descriptor vector.
+    # 
     TOTAL_DESCRIPTOR_SIZE = 35
 
     ##
-    # \brief 
-    #
+    # \brief Number of ligand-only descriptor elements (the first <tt>LIGAND_DESCRIPTOR_SIZE</tt> entries of the vector).
+    # 
     LIGAND_DESCRIPTOR_SIZE = 13
 
     ##
-    # \brief Initializes the \c %GRAILDescriptorCalculator instance.
+    # \brief Constructs the <tt>GRAILDescriptorCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %GRAILDescriptorCalculator instance \a calc.
-    # \param calc The \c %GRAILDescriptorCalculator instance to copy.
+    # \brief Constructs a copy of the <tt>GRAILDescriptorCalculator</tt> instance <em>calc</em>.
+    # 
+    # \param calc The <tt>GRAILDescriptorCalculator</tt> to copy.
     # 
     def __init__(calc: GRAILDescriptorCalculator) -> None: pass
 
@@ -240,32 +244,39 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %GRAILDescriptorCalculator instance \a calc.
-    # \param calc The \c %GRAILDescriptorCalculator instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param calc The other <tt>GRAILDescriptorCalculator</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(calc: GRAILDescriptorCalculator) -> GRAILDescriptorCalculator: pass
 
     ##
-    # \brief 
-    # \param tgt_env 
-    # \param coords_func 
-    # \param tgt_env_changed 
-    #
+    # \brief Initializes the calculator with target-environment data for subsequent descriptor calculations.
+    # 
+    # \param tgt_env The target environment (e.g. binding-site residues).
+    # \param coords_func The function used to retrieve atom 3D-coordinates from <em>tgt_env</em>.
+    # \param tgt_env_changed If <tt>True</tt>, the target environment is reinitialized even if the same target was supplied previously.
+    # 
     def initTargetData(tgt_env: Chem.MolecularGraph, coords_func: Chem.Atom3DCoordinatesFunction, tgt_env_changed: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param ligand 
-    #
+    # \brief Initializes the calculator with the molecular graph of the ligand.
+    # 
+    # \param ligand The ligand molecular graph.
+    # 
     def initLigandData(ligand: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_coords 
-    # \param descr 
-    # \param update_lig_part 
-    #
+    # \brief Calculates the GRAIL descriptor for the current ligand pose.
+    # 
+    # The pose is supplied via per-atom 3D coordinates in <em>atom_coords</em> (same order as the atoms of the molecular graph passed to initLigandData()). The result is written to <em>descr</em>.
+    # 
+    # \param atom_coords The 3D coordinates of the ligand atoms.
+    # \param descr The output descriptor vector (resized to TOTAL_DESCRIPTOR_SIZE).
+    # \param update_lig_part If <tt>True</tt>, the ligand-only part of the descriptor is recomputed.
+    # 
     def calculate(atom_coords: Math.Vector3DArray, descr: Math.DVector, update_lig_part: bool = True) -> None: pass
 
     objectID = property(getObjectID)

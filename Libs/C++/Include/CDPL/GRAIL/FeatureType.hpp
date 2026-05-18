@@ -45,6 +45,8 @@ namespace CDPL
          *
          * Re-exports all constants from namespace Pharm::FeatureType and adds extended donor/acceptor
          * subtypes used by the GRAIL descriptor calculation.
+         *
+         * \since 1.1
          */
         namespace FeatureType
         {

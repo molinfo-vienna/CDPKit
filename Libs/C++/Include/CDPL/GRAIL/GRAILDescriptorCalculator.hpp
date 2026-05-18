@@ -59,9 +59,9 @@ namespace CDPL
          * (counts of pharmacophore features, heavy atoms, rotatable bonds, \f$ \log P \f$,
          * \f$ TPSA \f$, etc.) and target-environment-specific scores (HBA/HBD occupancy sums and
          * maxima, pi/aromatic/hydrophobic/halogen-bonding interaction scores, and electrostatic
-         * + van der Waals energy contributions). See ElementIndex for the layout.
+         * + Van der Waals energy contributions). See ElementIndex for the layout.
          *
-         * \see [\ref GRAIL]
+         * \see [\ref GRADE]
          */
         class CDPL_GRAIL_API GRAILDescriptorCalculator
         {
@@ -152,11 +152,11 @@ namespace CDPL
                 XBD_XBA_SCORE_MAX,
                 /** \brief Electrostatic interaction energy. */
                 ES_ENERGY,
-                /** \brief Electrostatic interaction energy weighted by squared atom-pair distance. */
+                /** \brief Electrostatic interaction energy with squared atom-pair distance dependency. */
                 ES_ENERGY_SQRD_DIST,
-                /** \brief Attractive part of the van der Waals interaction energy. */
+                /** \brief Attractive part of the Van der Waals interaction energy. */
                 VDW_ENERGY_ATT,
-                /** \brief Repulsive part of the van der Waals interaction energy. */
+                /** \brief Repulsive part of the Van der Waals interaction energy. */
                 VDW_ENERGY_REP
             };
 

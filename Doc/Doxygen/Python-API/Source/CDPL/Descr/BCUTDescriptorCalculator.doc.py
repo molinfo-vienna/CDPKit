@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief BCUTDescriptorCalculator.
+# \brief Calculation of the <em>BCUT</em> (Burden-CAS-University-of-Texas) descriptor of a molecular graph.
+# 
+# The descriptor is computed from the eigenvalues of an underlying <em>Burden</em> matrix (see Descr.BurdenMatrixGenerator) and returned in ascending order. A user-defined atom weight function can be installed via setAtomWeightFunction() to customize the diagonal elements of the Burden matrix prior to the eigenvalue decomposition.
 # 
 # \see [\ref BCUT]
 # 

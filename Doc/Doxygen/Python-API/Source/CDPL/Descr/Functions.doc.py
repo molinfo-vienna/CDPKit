@@ -244,10 +244,14 @@ def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 def calcGeometricalDiameter(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Calculates the <em>geometrical</em> <em>diameter</em> of the entities in <em>cntnr</em>.
+# 
+# The geometrical diameter is the maximum distance between any pair of entities in the container. If <em>cntnr</em> contains at most one entity, <em>0</em> is returned.
+# 
+# \param cntnr The container with the 3D entities for which to calculate the geometrical diameter.
+# 
+# \return The calculated geometrical diameter.
+# 
 def calcGeometricalDiameter(cntnr: Chem.Entity3DContainer) -> float: pass
 
 ##
@@ -263,10 +267,14 @@ def calcGeometricalDiameter(cntnr: Chem.Entity3DContainer) -> float: pass
 def calcGeometricalRadius(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Calculates the <em>geometrical</em> <em>radius</em> of the entities in <em>cntnr</em>.
+# 
+# The geometrical radius is the minimum, taken over all entities, of the maximum distance from a given entity to any other entity in the container. If <em>cntnr</em> contains at most one entity, <em>0</em> is returned.
+# 
+# \param cntnr The container with the 3D entities for which to calculate the geometrical radius.
+# 
+# \return The calculated geometrical radius.
+# 
 def calcGeometricalRadius(cntnr: Chem.Entity3DContainer) -> float: pass
 
 ##

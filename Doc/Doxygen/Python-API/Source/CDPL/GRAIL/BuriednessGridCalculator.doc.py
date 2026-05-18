@@ -20,18 +20,21 @@
 #
 
 ##
-# \brief BuriednessGridCalculator.
+# \brief Calculator that fills a spatial grid with per-cell buriedness scores derived from GRAIL.BuriednessScore.
+# 
+# For each grid cell, the buriedness score with respect to the surrounding atoms is computed and stored. The configurable parameters (probe radius, minimum van der Waals surface distance, number of test rays) are forwarded to the underlying BuriednessScore instance.
 # 
 class BuriednessGridCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %BuriednessGridCalculator instance.
+    # \brief Constructs the <tt>BuriednessGridCalculator</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %BuriednessGridCalculator instance \a calc.
-    # \param calc The \c %BuriednessGridCalculator instance to copy.
+    # \brief Constructs a copy of the <tt>BuriednessGridCalculator</tt> instance <em>calc</em>.
+    # 
+    # \param calc The <tt>BuriednessGridCalculator</tt> to copy.
     # 
     def __init__(calc: BuriednessGridCalculator) -> None: pass
 
@@ -48,46 +51,54 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BuriednessGridCalculator instance \a calc.
-    # \param calc The \c %BuriednessGridCalculator instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param calc The other <tt>BuriednessGridCalculator</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(calc: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 
     ##
-    # \brief 
-    # \param dist 
-    #
+    # \brief Sets the minimum required distance between a ray and the van der Waals surface of an atom.
+    # 
+    # \param dist The minimum distance to the van der Waals surface.
+    # 
     def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum distance to the van der Waals surface of an atom.
+    # 
+    # \return The configured minimum distance to the van der Waals surface.
+    # 
     def getMinVdWSurfaceDistance() -> float: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the probe sphere radius used by the underlying GRAIL.BuriednessScore.
+    # 
+    # \param radius The probe sphere radius.
+    # 
     def setProbeRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured probe sphere radius.
+    # 
+    # \return The configured probe sphere radius.
+    # 
     def getProbeRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param num_rays 
-    #
+    # \brief Sets the number of test rays cast from each grid cell.
+    # 
+    # \param num_rays The number of test rays.
+    # 
     def setNumTestRays(num_rays: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of test rays.
+    # 
+    # \return The configured number of test rays.
+    # 
     def getNumTestRays() -> int: pass
 
     ##
@@ -98,16 +109,18 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function used for the retrieval of atom 3D-coordinates.
+    # 
+    # \return The configured atom 3D-coordinates function.
+    # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
-    # \brief 
-    # \param atoms 
-    # \param grid 
-    #
+    # \brief Calculates the buriedness value at each cell of <em>grid</em> for the given atoms.
+    # 
+    # \param atoms The atoms used as the environment for the buriedness calculation.
+    # \param grid The output grid populated with per-cell buriedness scores.
+    # 
     def calculate(atoms: Chem.AtomContainer, grid: Grid.DSpatialGrid) -> None: pass
 
     objectID = property(getObjectID)

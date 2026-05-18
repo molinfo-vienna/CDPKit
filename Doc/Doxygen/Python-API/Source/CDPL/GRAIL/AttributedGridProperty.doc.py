@@ -25,11 +25,15 @@
 class AttributedGridProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the (extended) pharmacophore feature type the grid was generated for.
+    # 
+    # <b>Value Type:</b> unsigned int
+    # 
     FEATURE_TYPE = CDPL.Base.LookupKey('FEATURE_TYPE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the target (extended) pharmacophore feature type the grid scores interactions with.
+    # 
+    # <b>Value Type:</b> unsigned int
+    # 
     TARGET_FEATURE_TYPE = CDPL.Base.LookupKey('TARGET_FEATURE_TYPE')

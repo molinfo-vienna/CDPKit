@@ -20,18 +20,20 @@
 #
 
 ##
-# \brief GeneralizedBellAtomDensity.
+# \brief Functor for the evaluation of the generalized-bell atom density contribution of an atom at a query position.
+# 
+# The density falls off with distance from the atom according to a generalized bell function parameterized by the atom's van der Waals radius (scaled by a configurable factor) and the radius of a probe sphere.
 # 
 class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default scaling factor applied to atom van der Waals radii.
+    # 
     DEF_RADIUS_SCALING_FACTOR = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default probe sphere radius.
+    # 
     DEF_PROBE_RADIUS = 0.0
 
     ##
@@ -41,9 +43,10 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def __init__(func: GeneralizedBellAtomDensity) -> None: pass
 
     ##
-    # \brief Initializes the \c %GeneralizedBellAtomDensity instance.
-    # \param probe_radius 
-    # \param rad_scaling_factor 
+    # \brief Constructs a <tt>GeneralizedBellAtomDensity</tt> instance with the given configuration.
+    # 
+    # \param probe_radius The probe sphere radius.
+    # \param rad_scaling_factor The scaling factor applied to atom van der Waals radii.
     # 
     def __init__(probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
 
@@ -60,15 +63,17 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured probe sphere radius.
+    # 
+    # \return The configured probe sphere radius.
+    # 
     def getProbeRadius() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured van der Waals radius scaling factor.
+    # 
+    # \return The configured scaling factor.
+    # 
     def getRadiusScalingFactor() -> float: pass
 
     ##
@@ -79,12 +84,14 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def assign(func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \param atom_pos 
-    # \param atom 
-    # \return 
-    #
+    # \brief Evaluates the atom density contribution of <em>atom</em> at the query position <em>pos</em>.
+    # 
+    # \param pos The 3D query position.
+    # \param atom_pos The 3D position of <em>atom</em>.
+    # \param atom The atom whose density contribution is evaluated.
+    # 
+    # \return The calculated atom density value.
+    # 
     def __call__(pos: Math.Vector3D, atom_pos: Math.Vector3D, atom: Chem.Atom) -> float: pass
 
     objectID = property(getObjectID)

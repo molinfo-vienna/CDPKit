@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AutoCorrelation2DVectorCalculator.
+# \brief Calculation of the topological (2D) auto-correlation vector of a molecular graph.
+# 
+# For every topological distance \f$ d \in [0, d_{max}] \f$, the corresponding element of the auto-correlation vector is the sum of the atom-pair weights of all atom pairs whose topological distance equals \f$ d \f$. The atom-pair weight function and the maximum topological distance considered can be customized via setAtomPairWeightFunction() and setMaxDistance().
 # 
 # \see [\ref AUCOR, \ref HBMD]
 # 
@@ -40,7 +42,7 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     ##
     # \brief Constructs the <tt>AutoCorrelation2DVectorCalculator</tt> instance and calculates the autocorrelation vector of the molecular graph <em>molgraph</em>.
     # 
-    # The calculated autocorrelation vector can be retrieved by a call to getResult().
+    # The calculated autocorrelation vector is stored in <em>corr_vec</em>.
     # 
     # \param molgraph The molecular graph for which to calculate the autocorrelation vector.
     # \param corr_vec The calculated autocorrelation vector.

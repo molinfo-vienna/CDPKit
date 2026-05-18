@@ -63,6 +63,7 @@ namespace CDPL
          * target environment (e.g. for use as a buriedness or accessibility weight).
          *
          * \see [\ref GRAIL]
+         * \since 1.1
          */
         class CDPL_GRAIL_API GRAILDataSetGenerator
         {
@@ -183,7 +184,7 @@ namespace CDPL
             const ScoreCombinationFunction& getScoreCombinationFunction() const;
 
             /**
-             * \brief Enables or disables normalization of the combined per-cell scores by the number of contributing features.
+             * \brief Enables or disables normalization of the combined per-cell scores to the range [0, 1].
              * \param normalize If \c true, the combined scores are normalized.
              */
             void normalizeScores(bool normalize);

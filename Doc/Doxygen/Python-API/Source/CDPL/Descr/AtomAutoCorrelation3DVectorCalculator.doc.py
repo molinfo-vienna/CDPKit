@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief AtomAutoCorrelation3DVectorCalculator.
+# \brief AutoCorrelation3DVectorCalculator implementation for the calculation of atom-centered 3D auto-correlation vectors of chemical structures.
+# 
+# <tt>AtomAutoCorrelation3DVectorCalculator</tt> is a specialization of <tt>AutoCorrelation3DVectorCalculator</tt> for entities of type Chem.Atom. The atom 3D coordinates accessor function is preset to Chem.get3DCoordinates() and the entity-pair weight function as well as any other calculation parameters can be configured via the inherited setter methods of the base class.
 # 
 class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
 
@@ -36,9 +38,12 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     def __init__(calc: AtomAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \c %AtomAutoCorrelation3DVectorCalculator instance.
-    # \param cntnr 
-    # \param vec 
+    # \brief Constructs the <tt>AtomAutoCorrelation3DVectorCalculator</tt> instance and calculates the 3D auto-correlation vector of the atoms provided by <em>cntnr</em>.
+    # 
+    # The calculated vector is stored in <em>vec</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the auto-correlation vector.
+    # \param vec The vector where to store the calculated auto-correlation vector.
     # 
     def __init__(cntnr: Chem.AtomContainer, vec: Math.DVector) -> None: pass
 
@@ -110,10 +115,13 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     def getStartRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param vec 
-    #
+    # \brief Calculates the 3D auto-correlation vector of the atoms provided by <em>cntnr</em>.
+    # 
+    # The calculated vector is stored in <em>vec</em>.
+    # 
+    # \param cntnr The container with the atoms for which to calculate the auto-correlation vector.
+    # \param vec The vector where to store the calculated auto-correlation vector.
+    # 
     def calculate(cntnr: Chem.AtomContainer, vec: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
