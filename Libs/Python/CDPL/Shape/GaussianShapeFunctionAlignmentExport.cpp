@@ -98,8 +98,8 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
              (python::arg("self"), python::arg("func"), python::arg("xform")))
         .def("setupAligned", &Shape::GaussianShapeFunctionAlignment::setupAligned, 
              (python::arg("self"), python::arg("func"), python::arg("xform")))
-        .def("calcSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcSelfOverlap, (python::arg("self"), python::arg("calc")))
-        .def("calcColorSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap, (python::arg("self"), python::arg("calc")))
+        .def("calcSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcSelfOverlap, (python::arg("self"), python::arg("func")))
+        .def("calcColorSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap, (python::arg("self"), python::arg("func")))
         .def("calcColorOverlaps", SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::calcColorOverlaps),
              (python::arg("self"), python::arg("calc")))
         .def("calcColorOverlaps", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::calcColorOverlaps),
