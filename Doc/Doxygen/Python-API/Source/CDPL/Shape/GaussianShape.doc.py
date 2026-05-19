@@ -172,6 +172,8 @@ class GaussianShape(Base.PropertyContainer):
     # 
     # \param idx The index of the element to remove.
     # 
+    # \throw Base.IndexError if the number of elements is zero or <em>idx</em> is not in the range [0, getNumElements() - 1].
+    # 
     def removeElement(idx: int) -> None: pass
 
     ##
@@ -179,7 +181,9 @@ class GaussianShape(Base.PropertyContainer):
     # 
     # \param idx The index of the element.
     # 
-    # \return A reference to the element.
+    # \return A reference to the element. 
+    # 
+    # \throw Base.IndexError if the number of elements is zero or <em>idx</em> is not in the range [0, getNumElements() - 1].
     # 
     def getElement(idx: int) -> Element: pass
 

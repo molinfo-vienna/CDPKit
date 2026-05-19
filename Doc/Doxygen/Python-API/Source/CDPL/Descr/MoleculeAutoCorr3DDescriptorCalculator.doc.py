@@ -20,9 +20,19 @@
 #
 
 ##
-# \brief Calculation of a 3D auto-correlation descriptor of a molecular graph using atom-pair weights resolved by a per-atom mode.
+# \brief Calculation of a 3D auto-correlation descriptor of a molecular graph partitioned by specific atom types.
 # 
-# Compared to Descr.AutoCorrelation3DVectorCalculator, this calculator forwards the per-atom mode to the atom-pair weight function so callers can compute mode-partitioned descriptors.
+# Atom types considered for partitioning are:
+#  - Chem.AtomType.H
+#  - Chem.AtomType.C
+#  - Chem.AtomType.N
+#  - Chem.AtomType.O
+#  - Chem.AtomType.S
+#  - Chem.AtomType.P
+#  - Chem.AtomType.F
+#  - Chem.AtomType.Cl
+#  - Chem.AtomType.Br
+#  - Chem.AtomType.I
 # 
 class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
 
@@ -69,8 +79,6 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # 
     # \param func A Atom3DCoordinatesFunction instance that wraps the target function.
     # 
-    # \note The coordinates function must be specified before calling calculate(), otherwise a zero distance for each atom pair will be used for the calculation.
-    # 
     def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
@@ -83,7 +91,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Sets the number of desired radius incrementation steps.
     # 
-    # The number of performed radius incrementation steps defines the size of the calculated descriptor vector which is equal to the number of steps.
+    # The number of performed radius incrementation steps defines the size of the calculated descriptor vector which is equal to the number of steps plus <em>1</em> times <em>10</em>.
     # 
     # \param num_steps The number of radius incrementation steps.
     # 
@@ -108,7 +116,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
-    # \brief Returns the radius step size between successive <em>AutoCorr3D</em> code elements.
+    # \brief Returns the radius step size between successive descriptor elements.
     # 
     # \return The applied radius step size.
     # 

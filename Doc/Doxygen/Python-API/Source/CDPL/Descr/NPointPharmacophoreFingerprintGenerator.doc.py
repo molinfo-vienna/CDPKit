@@ -22,7 +22,7 @@
 ##
 # \brief Abstract base for N-point pharmacophore fingerprint generators.
 # 
-# The base class implements the common machinery for enumerating feature tuples of size in <em>[minTupleSize, maxTupleSize]</em>, binning the feature-pair distances of each tuple and setting the corresponding bits of the output fingerprint. The concrete distance (topological vs. spatial 3D) is provided by the derived class via the pure virtual <tt>getDistance()</tt> hook.
+# The base class implements the common machinery for enumerating feature tuples of size in <em>[minTupleSize, maxTupleSize]</em>, binning the feature-pair distances of each tuple and setting the corresponding bits of the output fingerprint. The concrete distance (topological vs. 3D) is provided by the derived class via the pure virtual <tt>getDistance()</tt> hook.
 # 
 # \since 1.2
 # 

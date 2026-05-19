@@ -51,11 +51,21 @@ namespace CDPL
 
         /**
          * \brief Calculation of a topological (2D) auto-correlation descriptor of a molecular graph
-         *        with atom-pair weights resolved by per-atom modes.
+         *        partitioned by specific atom types.
          *
-         * Compared to Descr::AutoCorrelation2DVectorCalculator, this calculator emits a partitioned
-         * descriptor that splits the per-distance contributions by the atom-pair mode pair selected
-         * via the atom-pair weight function (see \c Mode for available partitioning schemes).
+         * Atom types considered for partitioning are:
+         *  - Chem::AtomType::H
+         *  - Chem::AtomType::C
+         *  - Chem::AtomType::N
+         *  - Chem::AtomType::O
+         *  - Chem::AtomType::S
+         *  - Chem::AtomType::P
+         *  - Chem::AtomType::F
+         *  - Chem::AtomType::Cl
+         *  - Chem::AtomType::Br
+         *  - Chem::AtomType::I
+         *
+         * See MoleculeAutoCorr2DDescriptorCalculator::Mode for available partitioning schemes.
          */
         class CDPL_DESCR_API MoleculeAutoCorr2DDescriptorCalculator
         {
@@ -64,24 +74,27 @@ namespace CDPL
             /**
              * \brief Type of the generic functor used to retrieve the weight of an atom pair.
              *
-             * The function takes the two atoms and the two modes (one per atom) of an atom pair and
+             * The function receives the two atoms together with their types and
              * returns the corresponding weight contribution.
              */
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int, unsigned int)> AtomPairWeightFunction;
 
             /**
-             * \brief Specifies how the descriptor is partitioned by atom-pair modes.
+             * \brief Specifies how the descriptor is partitioned by atom types.
              */
             enum Mode
             {
 
                 /**
-                 * \brief Semi-split partitioning: contributions are grouped by the unordered pair of modes.
+                 * \brief Semi-split partitioning: atom pair contributions are grouped by 
+                 *        involved atom types (e.g. Chem::AtomType::Cl, see class documentation for considered atom types).
                  */
                 SEMI_SPLIT,
 
                 /**
-                 * \brief Full-split partitioning: contributions are grouped by the ordered pair of modes.
+                 * \brief Full-split partitioning: atom pair contributions are grouped by distinct
+                 *        combinations of involved atom types (e.g. Chem::AtomType::C <-> Chem::AtomType::Cl, see class documentation
+                 *        for considered atom types).
                  */
                 FULL_SPLIT
             };

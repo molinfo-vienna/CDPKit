@@ -20,7 +20,15 @@
 #
 
 ##
-# \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore using feature-pair weights resolved by a per-feature mode.
+# \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore partitioned by specific feature types.
+# 
+# Feature types considered for partitioning are:
+#  - Pharm.FeatureType.HYDROPHOBIC,
+#  - Pharm.FeatureType.AROMATIC,
+#  - Pharm.FeatureType.NEGATIVE_IONIZABLE,
+#  - Pharm.FeatureType.POSITIVE_IONIZABLE,
+#  - Pharm.FeatureType.H_BOND_DONOR,
+#  - Pharm.FeatureType.H_BOND_ACCEPTOR
 # 
 class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
 
@@ -67,8 +75,6 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # 
     # \param func A Feature3DCoordinatesFunction instance that wraps the target function.
     # 
-    # \note The coordinates function must be specified before calling calculate(), otherwise a zero distance for each feature pair will be used for the calculation.
-    # 
     def setFeature3DCoordinatesFunction(func: Pharm.Feature3DCoordinatesFunction) -> None: pass
 
     ##
@@ -81,7 +87,7 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Sets the number of desired radius incrementation steps.
     # 
-    # The number of performed radius incrementation steps defines the size of the calculated descriptor vector which is equal to the number of steps.
+    # The number of performed radius incrementation steps defines the size of the calculated descriptor vector which is equal to the number of steps plus <em>1</em> times <em>6</em>.
     # 
     # \param num_steps The number of radius incrementation steps.
     # 
@@ -106,7 +112,7 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
-    # \brief Returns the radius step size between successive <em>AutoCorr3D</em> code elements.
+    # \brief Returns the radius step size between successive descriptor vector elements.
     # 
     # \return The applied radius step size.
     # 

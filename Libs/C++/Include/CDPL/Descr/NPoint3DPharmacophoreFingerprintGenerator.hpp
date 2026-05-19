@@ -44,7 +44,7 @@ namespace CDPL
         /**
          * \brief N-point pharmacophore fingerprint generator that uses spatial 3D feature distances.
          *
-         * The fingerprint encodes the binned Euclidean distances between all combinations of feature
+         * The fingerprint encodes the binned Euclidean distances between all pairs of features in
          * tuples generated from a molecular graph or feature container.
          *
          * \since 1.2

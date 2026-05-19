@@ -50,7 +50,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Calculation of an RDF descriptor of a pharmacophore using feature-pair weights resolved by a per-feature mode.
+         * \brief Calculation of an RDF descriptor of a pharmacophore
+         *        partitioned by specific feature types.
+         *
+         * Feature types considered for partitioning are:
+         *  - Pharm::FeatureType::HYDROPHOBIC,
+         *  - Pharm::FeatureType::AROMATIC,
+         *  - Pharm::FeatureType::NEGATIVE_IONIZABLE,
+         *  - Pharm::FeatureType::POSITIVE_IONIZABLE,
+         *  - Pharm::FeatureType::H_BOND_DONOR,
+         *  - Pharm::FeatureType::H_BOND_ACCEPTOR
          *
          * \see [\ref CITB, \ref HBMD]
          */
@@ -66,7 +75,9 @@ namespace CDPL
             typedef RDFCodeCalc::Entity3DCoordinatesFunction                                          Feature3DCoordinatesFunction;
 
             /**
-             * \brief Type of the generic functor used to retrieve the weight of a feature pair (with a per-feature mode).
+             * \brief Type of the generic functor used to retrieve the weight of a feature pair.
+             *
+             * The function receives the two features and a single feature type specifying the descriptor partition.
              */
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
 
@@ -140,7 +151,7 @@ namespace CDPL
              * \brief Sets the number of desired radius incrementation steps.
              *
              * The number of performed radius incrementation steps defines the size of the calculated \e RDF code vector
-             * which is equal to the number of steps plus \e 1.
+             * which is equal to the number of steps plus \e 1 times \e 6.
              *
              * \param num_steps The number of radius incrementation steps.
              * \note The default number of steps is \e 99.
@@ -156,8 +167,6 @@ namespace CDPL
             /**
              * \brief Allows to specify the feature coordinates function.
              * \param func A Feature3DCoordinatesFunction instance that wraps the target function.
-             * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-             *       for each feature pair will be used for the calculation.
              */
             void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
 

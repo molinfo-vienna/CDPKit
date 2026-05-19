@@ -185,6 +185,8 @@ def getTextRecursive(parent_node):
                 rc.append('\\note ')
             elif kind == 'since':
                 rc.append('\\since ')
+            elif kind == 'warning':
+                rc.append('\\warning ')
             elif kind == 'pre':
                 rc.append('\\pre ')
             elif kind == 'post':

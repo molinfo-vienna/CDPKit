@@ -50,12 +50,20 @@ namespace CDPL
     {
 
         /**
-         * \brief Calculation of a 3D auto-correlation descriptor of a molecular graph using
-         *        atom-pair weights resolved by a per-atom mode.
+         * \brief Calculation of a 3D auto-correlation descriptor of a molecular graph 
+         *        partitioned by specific atom types.
          *
-         * Compared to Descr::AutoCorrelation3DVectorCalculator, this calculator forwards the
-         * per-atom mode to the atom-pair weight function so callers can compute mode-partitioned
-         * descriptors.
+         * Atom types considered for partitioning are:
+         *  - Chem::AtomType::H
+         *  - Chem::AtomType::C
+         *  - Chem::AtomType::N
+         *  - Chem::AtomType::O
+         *  - Chem::AtomType::S
+         *  - Chem::AtomType::P
+         *  - Chem::AtomType::F
+         *  - Chem::AtomType::Cl
+         *  - Chem::AtomType::Br
+         *  - Chem::AtomType::I
          */
         class CDPL_DESCR_API MoleculeAutoCorr3DDescriptorCalculator
         {
@@ -71,8 +79,7 @@ namespace CDPL
             /**
              * \brief Type of the generic functor used to retrieve the weight of an atom pair.
              *
-             * The function takes the two atoms and a single mode that resolves the partitioning of
-             * the atom-pair contribution.
+             * The function receives the two atoms and a single atom type specifying the descriptor partition.
              */
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
 
@@ -109,7 +116,7 @@ namespace CDPL
             void setRadiusIncrement(double radius_inc);
 
             /**
-             * \brief Returns the radius step size between successive \e AutoCorr3D code elements.
+             * \brief Returns the radius step size between successive descriptor elements.
              * \return The applied radius step size.
              */
             double getRadiusIncrement() const;
@@ -118,7 +125,7 @@ namespace CDPL
              * \brief Sets the number of desired radius incrementation steps.
              *
              * The number of performed radius incrementation steps defines the size of the calculated descriptor vector
-             * which is equal to the number of steps.
+             * which is equal to the number of steps plus \e 1 times \e 10.
              *
              * \param num_steps The number of radius incrementation steps.
              * \note The default number of steps is \e 99.
@@ -134,8 +141,6 @@ namespace CDPL
             /**
              * \brief Allows to specify the atom coordinates function.
              * \param func A Atom3DCoordinatesFunction instance that wraps the target function.
-             * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-             *       for each atom pair will be used for the calculation.
              */
             void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 

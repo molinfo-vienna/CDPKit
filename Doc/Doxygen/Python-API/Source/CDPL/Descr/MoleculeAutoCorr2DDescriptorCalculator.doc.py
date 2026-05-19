@@ -20,24 +20,36 @@
 #
 
 ##
-# \brief Calculation of a topological (2D) auto-correlation descriptor of a molecular graph with atom-pair weights resolved by per-atom modes.
+# \brief Calculation of a topological (2D) auto-correlation descriptor of a molecular graph partitioned by specific atom types.
 # 
-# Compared to Descr.AutoCorrelation2DVectorCalculator, this calculator emits a partitioned descriptor that splits the per-distance contributions by the atom-pair mode pair selected via the atom-pair weight function (see <tt>Mode</tt> for available partitioning schemes).
+# Atom types considered for partitioning are:
+#  - Chem.AtomType.H
+#  - Chem.AtomType.C
+#  - Chem.AtomType.N
+#  - Chem.AtomType.O
+#  - Chem.AtomType.S
+#  - Chem.AtomType.P
+#  - Chem.AtomType.F
+#  - Chem.AtomType.Cl
+#  - Chem.AtomType.Br
+#  - Chem.AtomType.I
+# 
+# See MoleculeAutoCorr2DDescriptorCalculator.Mode for available partitioning schemes.
 # 
 class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
-    # \brief Specifies how the descriptor is partitioned by atom-pair modes.
+    # \brief Specifies how the descriptor is partitioned by atom types.
     # 
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief Semi-split partitioning: contributions are grouped by the unordered pair of modes.
+        # \brief Semi-split partitioning: atom pair contributions are grouped by involved atom types (e.g. Chem.AtomType.Cl, see class documentation for considered atom types).
         # 
         SEMI_SPLIT = 0
 
         ##
-        # \brief Full-split partitioning: contributions are grouped by the ordered pair of modes.
+        # \brief Full-split partitioning: atom pair contributions are grouped by distinct combinations of involved atom types (e.g. Chem.AtomType.C <-> Chem.AtomType.Cl, see class documentation for considered atom types).
         # 
         FULL_SPLIT = 1
 

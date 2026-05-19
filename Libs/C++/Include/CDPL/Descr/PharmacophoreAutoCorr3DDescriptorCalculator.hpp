@@ -50,8 +50,16 @@ namespace CDPL
     {
 
         /**
-         * \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore using
-         *        feature-pair weights resolved by a per-feature mode.
+         * \brief Calculation of a 3D auto-correlation descriptor of a pharmacophore
+         *        partitioned by specific feature types.
+         *
+         * Feature types considered for partitioning are:
+         *  - Pharm::FeatureType::HYDROPHOBIC,
+         *  - Pharm::FeatureType::AROMATIC,
+         *  - Pharm::FeatureType::NEGATIVE_IONIZABLE,
+         *  - Pharm::FeatureType::POSITIVE_IONIZABLE,
+         *  - Pharm::FeatureType::H_BOND_DONOR,
+         *  - Pharm::FeatureType::H_BOND_ACCEPTOR
          */
         class CDPL_DESCR_API PharmacophoreAutoCorr3DDescriptorCalculator
         {
@@ -65,7 +73,9 @@ namespace CDPL
             typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction                           Feature3DCoordinatesFunction;
 
             /**
-             * \brief Type of the generic functor used to retrieve the weight of a feature pair (with a per-feature mode).
+             * \brief Type of the generic functor used to retrieve the weight of a feature pair.
+             *
+             * The function receives the two features and a single feature type specifying the descriptor partition.
              */
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
 
@@ -102,7 +112,7 @@ namespace CDPL
             void setRadiusIncrement(double radius_inc);
 
             /**
-             * \brief Returns the radius step size between successive \e AutoCorr3D code elements.
+             * \brief Returns the radius step size between successive descriptor vector elements.
              * \return The applied radius step size.
              */
             double getRadiusIncrement() const;
@@ -111,7 +121,7 @@ namespace CDPL
              * \brief Sets the number of desired radius incrementation steps.
              *
              * The number of performed radius incrementation steps defines the size of the calculated descriptor vector
-             * which is equal to the number of steps.
+             * which is equal to the number of steps plus \e 1 times \e 6.
              *
              * \param num_steps The number of radius incrementation steps.
              * \note The default number of steps is \e 99.
@@ -127,8 +137,6 @@ namespace CDPL
             /**
              * \brief Allows to specify the feature coordinates function.
              * \param func A Feature3DCoordinatesFunction instance that wraps the target function.
-             * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-             *       for each feature pair will be used for the calculation.
              */
             void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
 
