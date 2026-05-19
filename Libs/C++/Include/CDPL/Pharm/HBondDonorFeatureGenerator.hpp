@@ -40,7 +40,8 @@ namespace CDPL
     {
 
         /**
-         * \brief HBondDonorFeatureGenerator.
+         * \brief Pharm::FeatureGenerator implementation that perceives H-bond donor features by matching
+         *        a built-in set of SMARTS-like substructure patterns.
          */
         class CDPL_PHARM_API HBondDonorFeatureGenerator : public PatternBasedFeatureGenerator
         {
@@ -48,17 +49,17 @@ namespace CDPL
           public:
             /**
              * \brief Constructs the \c %HBondDonorFeatureGenerator instance.
-             * \param static_h_bonds \c true if hydrogens on donor atoms connected via rotatable bonds should be 
+             * \param static_h_bonds \c true if hydrogens on donor atoms connected via rotatable bonds should be
              *                       considered static and emitted features modeled as defined vectors, and \c false otherwise.
              */
             HBondDonorFeatureGenerator(bool static_h_bonds);
 
             /**
-             * \brief Perceives the hydrogen bond donor features of the molecular graph a\ molgraph and adds 
+             * \brief Perceives the hydrogen bond donor features of the molecular graph \a molgraph and adds
              *        them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The output pharmacophore where to add the generated features.
-             * \param static_h_bonds \c true if hydrogens on donor atoms connected via rotatable bonds should be 
+             * \param static_h_bonds \c true if hydrogens on donor atoms connected via rotatable bonds should be
              *                       considered static and emitted features modeled as defined vectors, and \c false otherwise.
              */
             HBondDonorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool static_h_bonds);

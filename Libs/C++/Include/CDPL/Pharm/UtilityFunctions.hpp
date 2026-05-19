@@ -40,6 +40,11 @@ namespace CDPL
     namespace Pharm
     {
 
+        /**
+         * \brief Returns a human-readable name for the given Pharm::FeatureType identifier (e.g. \e "H" for H-bond donor).
+         * \param ftr_type The Pharm::FeatureType identifier.
+         * \return A \c const reference to the type name string.
+         */
         CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
     }
 } // namespace CDPL

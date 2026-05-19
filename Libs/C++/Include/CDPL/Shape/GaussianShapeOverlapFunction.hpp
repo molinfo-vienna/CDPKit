@@ -78,48 +78,71 @@ namespace CDPL
             /**
              * \brief Returns the reference or aligned shape function.
              * \param ref If \c true, the reference shape function is returned; otherwise the aligned shape function.
+             * \return A pointer to the requested shape function (or \c nullptr if none is associated).
              */
             virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
 
-            /** \brief Specifies the function used to decide whether two color features match. */
+            /**
+             * \brief Specifies the function used to decide whether two color features match.
+             * \param func The color-match function.
+             */
             virtual void setColorMatchFunction(const ColorMatchFunction& func) = 0;
 
-            /** \brief Returns the currently configured color-match function. */
+            /**
+             * \brief Returns the currently configured color-match function.
+             * \return A \c const reference to the color-match function.
+             */
             virtual const ColorMatchFunction& getColorMatchFunction() const = 0;
 
-            /** \brief Specifies the function used to filter color features by type. */
+            /**
+             * \brief Specifies the function used to filter color features by type.
+             * \param func The color-filter function.
+             */
             virtual void setColorFilterFunction(const ColorFilterFunction& func) = 0;
 
-            /** \brief Returns the currently configured color-filter function. */
+            /**
+             * \brief Returns the currently configured color-filter function.
+             * \return A \c const reference to the color-filter function.
+             */
             virtual const ColorFilterFunction& getColorFilterFunction() const = 0;
 
             /**
              * \brief Calculates the shape-only self-overlap of the reference or aligned shape function.
              * \param ref If \c true, the reference self-overlap is returned; otherwise the aligned self-overlap.
+             * \return The self-overlap value.
              */
             virtual double calcSelfOverlap(bool ref) const = 0;
 
             /**
              * \brief Calculates the color self-overlap of the reference or aligned shape function.
              * \param ref If \c true, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
+             * \return The color self-overlap value.
              */
             virtual double calcColorSelfOverlap(bool ref) const = 0;
 
-            /** \brief Calculates the shape-only overlap of the reference and aligned shape functions. */
+            /**
+             * \brief Calculates the shape-only overlap of the reference and aligned shape functions.
+             * \return The shape overlap value.
+             */
             virtual double calcOverlap() const = 0;
 
-            /** \brief Calculates the color overlap of the reference and aligned shape functions. */
+            /**
+             * \brief Calculates the color overlap of the reference and aligned shape functions.
+             * \return The color overlap value.
+             */
             virtual double calcColorOverlap() const = 0;
 
             /**
              * \brief Calculates the shape-only overlap with the aligned shape element positions taken from \a coords.
              * \param coords The element 3D positions of the aligned shape.
+             * \return The shape overlap value.
              */
             virtual double calcOverlap(const Math::Vector3DArray& coords) const = 0;
 
             /**
              * \brief Calculates the color overlap with the aligned shape element positions taken from \a coords.
              * \param coords The element 3D positions of the aligned shape.
+             * \return The color overlap value.
              */
             virtual double calcColorOverlap(const Math::Vector3DArray& coords) const = 0;
 

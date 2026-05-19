@@ -64,67 +64,129 @@ namespace CDPL
             /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeGenerator instances. */
             typedef std::shared_ptr<GaussianShapeGenerator> SharedPointer;
 
-            /** \brief Constructs the \c %GaussianShapeGenerator instance. */
+            /**
+             * \brief Constructs the \c %GaussianShapeGenerator instance.
+             */
             GaussianShapeGenerator();
 
-            /** \brief Specifies whether a molecular (atom-based) shape shall be generated. */
+            /**
+             * \brief Specifies whether a molecular (atom-based) shape shall be generated.
+             * \param generate \c true to enable the generation of the molecular shape, and \c false to disable it.
+             */
             void generateMoleculeShape(bool generate);
 
-            /** \brief Tells whether a molecular (atom-based) shape is generated. */
+            /**
+             * \brief Tells whether a molecular (atom-based) shape is generated.
+             * \return \c true if the molecular shape is generated, and \c false otherwise.
+             */
             bool generateMoleculeShape() const;
 
-            /** \brief Specifies whether a pharmacophore (feature-based) shape shall be generated. */
+            /**
+             * \brief Specifies whether a pharmacophore (feature-based) shape shall be generated.
+             * \param generate \c true to enable the generation of the pharmacophore shape, and \c false to disable it.
+             */
             void generatePharmacophoreShape(bool generate);
 
-            /** \brief Tells whether a pharmacophore (feature-based) shape is generated. */
+            /**
+             * \brief Tells whether a pharmacophore (feature-based) shape is generated.
+             * \return \c true if the pharmacophore shape is generated, and \c false otherwise.
+             */
             bool generatePharmacophoreShape() const;
 
-            /** \brief Specifies whether to emit one shape per conformer (instead of using the first conformer only). */
+            /**
+             * \brief Specifies whether to emit one shape per conformer (instead of using the first conformer only).
+             * \param multi_conf \c true to enable multi-conformer mode, and \c false to use the first conformer only.
+             */
             void multiConformerMode(bool multi_conf);
 
-            /** \brief Tells whether the generator runs in multi-conformer mode. */
+            /**
+             * \brief Tells whether the generator runs in multi-conformer mode.
+             * \return \c true if multi-conformer mode is enabled, and \c false otherwise.
+             */
             bool multiConformerMode() const;
 
-            /** \brief Specifies whether hydrogens are included when generating the molecular shape. */
+            /**
+             * \brief Specifies whether hydrogens are included when generating the molecular shape.
+             * \param include \c true to include hydrogens, and \c false to ignore them.
+             */
             void includeHydrogens(bool include);
 
-            /** \brief Tells whether hydrogens are included when generating the molecular shape. */
+            /**
+             * \brief Tells whether hydrogens are included when generating the molecular shape.
+             * \return \c true if hydrogens are included, and \c false otherwise.
+             */
             bool includeHydrogens() const;
 
-            /** \brief Sets the sphere radius used for all atoms (negative value: use atom-specific van der Waals radii). */
+            /**
+             * \brief Sets the sphere radius used for all atoms (negative value: use atom-specific van der Waals radii).
+             * \param radius The new atom sphere radius.
+             */
             void setAtomRadius(double radius);
 
-            /** \brief Returns the currently configured atom sphere radius. */
+            /**
+             * \brief Returns the currently configured atom sphere radius.
+             * \return The atom sphere radius.
+             */
             double getAtomRadius() const;
 
-            /** \brief Sets the Gaussian hardness used for all atom spheres. */
+            /**
+             * \brief Sets the Gaussian hardness used for all atom spheres.
+             * \param hardness The new atom Gaussian hardness.
+             */
             void setAtomHardness(double hardness);
 
-            /** \brief Returns the currently configured atom Gaussian hardness. */
+            /**
+             * \brief Returns the currently configured atom Gaussian hardness.
+             * \return The atom Gaussian hardness.
+             */
             double getAtomHardness();
 
-            /** \brief Sets the sphere radius used for all features (negative value: use feature-specific tolerances). */
+            /**
+             * \brief Sets the sphere radius used for all features (negative value: use feature-specific tolerances).
+             * \param radius The new feature sphere radius.
+             */
             void setFeatureRadius(double radius);
 
-            /** \brief Returns the currently configured feature sphere radius. */
+            /**
+             * \brief Returns the currently configured feature sphere radius.
+             * \return The feature sphere radius.
+             */
             double getFeatureRadius() const;
 
-            /** \brief Sets the Gaussian hardness used for all feature spheres. */
+            /**
+             * \brief Sets the Gaussian hardness used for all feature spheres.
+             * \param hardness The new feature Gaussian hardness.
+             */
             void setFeatureHardness(double hardness);
 
-            /** \brief Returns the currently configured feature Gaussian hardness. */
+            /**
+             * \brief Returns the currently configured feature Gaussian hardness.
+             * \return The feature Gaussian hardness.
+             */
             double getFeatureHardness();
 
-            /** \brief Specifies the pharmacophore generator used when emitting pharmacophore shapes. */
+            /**
+             * \brief Specifies the pharmacophore generator used when emitting pharmacophore shapes.
+             * \param gen The pharmacophore generator.
+             */
             void setPharmacophoreGenerator(Pharm::PharmacophoreGenerator& gen);
 
-            /** \brief Returns the currently configured pharmacophore generator. */
+            /**
+             * \brief Returns the currently configured pharmacophore generator.
+             * \return A reference to the pharmacophore generator.
+             */
             Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
 
-            /** \brief Returns the built-in default pharmacophore generator. */
+            /**
+             * \brief Returns the built-in default pharmacophore generator.
+             * \return A \c const reference to the default pharmacophore generator.
+             */
             const Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator() const;
 
-            /** \brief Returns the built-in default pharmacophore generator (mutable). */
+            /**
+             * \brief Returns the built-in default pharmacophore generator (mutable).
+             * \return A reference to the default pharmacophore generator.
+             */
             Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator();
 
             /**

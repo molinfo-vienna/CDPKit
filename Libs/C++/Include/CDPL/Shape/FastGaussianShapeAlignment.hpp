@@ -98,71 +98,131 @@ namespace CDPL
             /** \brief Type of the function used to compare two alignment results. */
             typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
-            /** \brief Constructs the \c %FastGaussianShapeAlignment instance. */
+            /**
+             * \brief Constructs the \c %FastGaussianShapeAlignment instance.
+             */
             FastGaussianShapeAlignment();
 
-            /** \brief Constructs the \c %FastGaussianShapeAlignment instance with \a ref_shape as the single reference shape. */
+            /**
+             * \brief Constructs the \c %FastGaussianShapeAlignment instance with \a ref_shape as the single reference shape.
+             * \param ref_shape The reference shape.
+             */
             FastGaussianShapeAlignment(const GaussianShape& ref_shape);
 
-            /** \brief Constructs the \c %FastGaussianShapeAlignment instance with the shapes in \a ref_shapes as the reference set. */
+            /**
+             * \brief Constructs the \c %FastGaussianShapeAlignment instance with the shapes in \a ref_shapes as the reference set.
+             * \param ref_shapes The reference shapes.
+             */
             FastGaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
             FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment) = delete;
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~FastGaussianShapeAlignment();
 
             FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment) = delete;
 
-            /** \brief Specifies the function used to compare two alignment results for sorting and filtering. */
+            /**
+             * \brief Specifies the function used to compare two alignment results for sorting and filtering.
+             * \param func The result-compare function.
+             */
             void setResultCompareFunction(const ResultCompareFunction& func);
 
-            /** \brief Returns the currently configured result-compare function. */
+            /**
+             * \brief Returns the currently configured result-compare function.
+             * \return A \c const reference to the result-compare function.
+             */
             const ResultCompareFunction& getResultCompareFunction() const;
 
-            /** \brief Specifies the function used to score an alignment result. */
+            /**
+             * \brief Specifies the function used to score an alignment result.
+             * \param func The scoring function.
+             */
             void setScoringFunction(const ScoringFunction& func);
 
-            /** \brief Returns the currently configured scoring function. */
+            /**
+             * \brief Returns the currently configured scoring function.
+             * \return A \c const reference to the scoring function.
+             */
             const ScoringFunction& getScoringFunction() const;
 
-            /** \brief Sets the alignment-result selection mode (see namespace Shape::AlignmentResultSelectionMode). */
+            /**
+             * \brief Sets the alignment-result selection mode (see namespace Shape::AlignmentResultSelectionMode).
+             * \param mode The new result-selection mode.
+             */
             void setResultSelectionMode(unsigned int mode);
 
-            /** \brief Returns the currently configured alignment-result selection mode. */
+            /**
+             * \brief Returns the currently configured alignment-result selection mode.
+             * \return The result-selection mode (see namespace Shape::AlignmentResultSelectionMode).
+             */
             unsigned int getResultSelectionMode() const;
 
-            /** \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose). */
+            /**
+             * \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose).
+             * \param perf_align \c true to perform the alignment, and \c false to only evaluate the initial pose.
+             */
             void performAlignment(bool perf_align);
 
-            /** \brief Tells whether the actual alignment is performed. */
+            /**
+             * \brief Tells whether the actual alignment is performed.
+             * \return \c true if the alignment is performed, and \c false otherwise.
+             */
             bool performAlignment() const;
 
-            /** \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment. */
+            /**
+             * \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+             * \param optimize \c true to optimize the overlap, and \c false to skip optimization.
+             */
             void optimizeOverlap(bool optimize);
 
-            /** \brief Tells whether the overlap is optimized iteratively. */
+            /**
+             * \brief Tells whether the overlap is optimized iteratively.
+             * \return \c true if the overlap is optimized, and \c false otherwise.
+             */
             bool optimizeOverlap() const;
 
-            /** \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum. */
+            /**
+             * \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+             * \param greedy \c true to use the greedy strategy, and \c false to use the full optimization.
+             */
             void greedyOptimization(bool greedy);
 
-            /** \brief Tells whether the overlap optimization uses a greedy strategy. */
+            /**
+             * \brief Tells whether the overlap optimization uses a greedy strategy.
+             * \return \c true if the greedy strategy is used, and \c false otherwise.
+             */
             bool greedyOptimization() const;
 
-            /** \brief Sets the maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Sets the maximum number of overlap-optimization iterations.
+             * \param max_iter The new maximum number of iterations.
+             */
             void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-            /** \brief Returns the currently configured maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Returns the currently configured maximum number of overlap-optimization iterations.
+             * \return The maximum number of iterations.
+             */
             std::size_t getMaxNumOptimizationIterations() const;
 
-            /** \brief Sets the gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Sets the gradient norm at which the overlap optimization is stopped.
+             * \param grad_norm The new stop gradient norm.
+             */
             void setOptimizationStopGradient(double grad_norm);
 
-            /** \brief Returns the currently configured overlap-optimization stop gradient. */
+            /**
+             * \brief Returns the currently configured overlap-optimization stop gradient.
+             * \return The stop gradient norm.
+             */
             double getOptimizationStopGradient() const;
 
-            /** \brief Removes all reference shapes and reference shape sets. */
+            /**
+             * \brief Removes all reference shapes and reference shape sets.
+             */
             void clearReferenceShapes();
 
             /**
@@ -179,70 +239,136 @@ namespace CDPL
              */
             void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
 
-            /** \brief Returns the total number of reference shapes. */
+            /**
+             * \brief Returns the total number of reference shapes.
+             * \return The number of reference shapes.
+             */
             std::size_t getNumReferenceShapes() const;
 
-            /** \brief Enables or disables the generation of a starting transformation at the shape centroid. */
+            /**
+             * \brief Enables or disables the generation of a starting transformation at the shape centroid.
+             * \param generate \c true to enable the shape-centroid start, and \c false to disable it.
+             */
             void genShapeCenterStarts(bool generate);
 
-            /** \brief Tells whether a starting transformation at the shape centroid is generated. */
+            /**
+             * \brief Tells whether a starting transformation at the shape centroid is generated.
+             * \return \c true if a shape-centroid start is generated, and \c false otherwise.
+             */
             bool genShapeCenterStarts() const;
 
-            /** \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers. */
+            /**
+             * \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers.
+             * \param generate \c true to enable the color-center starts, and \c false to disable them.
+             */
             void genColorCenterStarts(bool generate);
 
-            /** \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated. */
+            /**
+             * \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated.
+             * \return \c true if color-center starts are generated, and \c false otherwise.
+             */
             bool genColorCenterStarts() const;
 
-            /** \brief Enables or disables the generation of starting transformations at non-color (shape) element centers. */
+            /**
+             * \brief Enables or disables the generation of starting transformations at non-color (shape) element centers.
+             * \param generate \c true to enable the non-color-center starts, and \c false to disable them.
+             */
             void genNonColorCenterStarts(bool generate);
 
-            /** \brief Tells whether starting transformations at non-color (shape) element centers are generated. */
+            /**
+             * \brief Tells whether starting transformations at non-color (shape) element centers are generated.
+             * \return \c true if non-color-center starts are generated, and \c false otherwise.
+             */
             bool genNonColorCenterStarts() const;
 
-            /** \brief Enables or disables the generation of random starting transformations. */
+            /**
+             * \brief Enables or disables the generation of random starting transformations.
+             * \param generate \c true to enable the random starts, and \c false to disable them.
+             */
             void genRandomStarts(bool generate);
 
-            /** \brief Tells whether random starting transformations are generated. */
+            /**
+             * \brief Tells whether random starting transformations are generated.
+             * \return \c true if random starts are generated, and \c false otherwise.
+             */
             bool genRandomStarts() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape. */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape.
+             * \param generate \c true to consider aligned-shape centers, and \c false to ignore them.
+             */
             void genForAlignedShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the aligned shape. */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the aligned shape.
+             * \return \c true if aligned-shape centers are considered, and \c false otherwise.
+             */
             bool genForAlignedShapeCenters() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape. */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape.
+             * \param generate \c true to consider reference-shape centers, and \c false to ignore them.
+             */
             void genForReferenceShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the reference shape. */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the reference shape.
+             * \return \c true if reference-shape centers are considered, and \c false otherwise.
+             */
             bool genForReferenceShapeCenters() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes). */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes).
+             * \param generate \c true to use only the centers of the larger shape, and \c false to use the centers of all configured shapes.
+             */
             void genForLargerShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes). */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes).
+             * \return \c true if only the centers of the larger shape are used, and \c false otherwise.
+             */
             bool genForLargerShapeCenters() const;
 
-            /** \brief Sets the relative threshold for treating two principal moments as equal. */
+            /**
+             * \brief Sets the relative threshold for treating two principal moments as equal.
+             * \param thresh The new symmetry threshold.
+             */
             void setSymmetryThreshold(double thresh);
 
-            /** \brief Returns the currently configured symmetry threshold. */
+            /**
+             * \brief Returns the currently configured symmetry threshold.
+             * \return The symmetry threshold.
+             */
             double getSymmetryThreshold();
 
-            /** \brief Sets the maximum random translation magnitude applied to random starts. */
+            /**
+             * \brief Sets the maximum random translation magnitude applied to random starts.
+             * \param max_trans The new maximum random translation magnitude.
+             */
             void setMaxRandomTranslation(double max_trans);
 
-            /** \brief Returns the currently configured maximum random translation. */
+            /**
+             * \brief Returns the currently configured maximum random translation.
+             * \return The maximum random translation magnitude.
+             */
             double getMaxRandomTranslation() const;
 
-            /** \brief Sets the number of random starting transformations. */
+            /**
+             * \brief Sets the number of random starting transformations.
+             * \param num_starts The new number of random starts.
+             */
             void setNumRandomStarts(std::size_t num_starts);
 
-            /** \brief Returns the currently configured number of random starts. */
+            /**
+             * \brief Returns the currently configured number of random starts.
+             * \return The number of random starts.
+             */
             std::size_t getNumRandomStarts() const;
 
-            /** \brief Sets the seed used by the random number generator that produces the random starts. */
+            /**
+             * \brief Sets the seed used by the random number generator that produces the random starts.
+             * \param seed The new random seed.
+             */
             void setRandomSeed(unsigned int seed);
 
             /**
@@ -259,7 +385,10 @@ namespace CDPL
              */
             bool align(const GaussianShapeSet& shapes);
 
-            /** \brief Returns the number of stored alignment results. */
+            /**
+             * \brief Returns the number of stored alignment results.
+             * \return The number of alignment results.
+             */
             std::size_t getNumResults() const;
 
             /**
@@ -278,28 +407,52 @@ namespace CDPL
              */
             AlignmentResult& getResult(std::size_t idx);
 
-            /** \brief Returns a constant iterator pointing to the first alignment result. */
+            /**
+             * \brief Returns a constant iterator pointing to the first alignment result.
+             * \return A constant iterator pointing to the first alignment result.
+             */
             ConstResultIterator getResultsBegin() const;
 
-            /** \brief Returns a constant iterator pointing one past the last alignment result. */
+            /**
+             * \brief Returns a constant iterator pointing one past the last alignment result.
+             * \return A constant iterator pointing one past the last alignment result.
+             */
             ConstResultIterator getResultsEnd() const;
 
-            /** \brief Returns a mutable iterator pointing to the first alignment result. */
+            /**
+             * \brief Returns a mutable iterator pointing to the first alignment result.
+             * \return A mutable iterator pointing to the first alignment result.
+             */
             ResultIterator getResultsBegin();
 
-            /** \brief Returns a mutable iterator pointing one past the last alignment result. */
+            /**
+             * \brief Returns a mutable iterator pointing one past the last alignment result.
+             * \return A mutable iterator pointing one past the last alignment result.
+             */
             ResultIterator getResultsEnd();
 
-            /** \brief Returns a constant iterator pointing to the first alignment result (range-based for support). */
+            /**
+             * \brief Returns a constant iterator pointing to the first alignment result (range-based for support).
+             * \return A constant iterator pointing to the first alignment result.
+             */
             ConstResultIterator begin() const;
 
-            /** \brief Returns a constant iterator pointing one past the last alignment result (range-based for support). */
+            /**
+             * \brief Returns a constant iterator pointing one past the last alignment result (range-based for support).
+             * \return A constant iterator pointing one past the last alignment result.
+             */
             ConstResultIterator end() const;
 
-            /** \brief Returns a mutable iterator pointing to the first alignment result (range-based for support). */
+            /**
+             * \brief Returns a mutable iterator pointing to the first alignment result (range-based for support).
+             * \return A mutable iterator pointing to the first alignment result.
+             */
             ResultIterator begin();
 
-            /** \brief Returns a mutable iterator pointing one past the last alignment result (range-based for support). */
+            /**
+             * \brief Returns a mutable iterator pointing one past the last alignment result (range-based for support).
+             * \return A mutable iterator pointing one past the last alignment result.
+             */
             ResultIterator end();
 
           private:

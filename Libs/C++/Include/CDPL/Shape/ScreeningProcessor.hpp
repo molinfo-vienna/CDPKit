@@ -78,7 +78,9 @@ namespace CDPL
             /** \brief Type of the callback invoked for each alignment hit (arguments: query, hit, alignment result). */
             typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
-            /** \brief Constructs an empty \c %ScreeningProcessor instance. */
+            /**
+             * \brief Constructs an empty \c %ScreeningProcessor instance.
+             */
             ScreeningProcessor();
 
             /**
@@ -89,24 +91,40 @@ namespace CDPL
 
             ScreeningProcessor(const ScreeningProcessor& proc) = delete;
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~ScreeningProcessor();
 
             ScreeningProcessor& operator=(const ScreeningProcessor& proc) = delete;
 
-            /** \brief Sets the callback that is invoked for every alignment hit produced by process(). */
+            /**
+             * \brief Sets the callback that is invoked for every alignment hit produced by process().
+             * \param func The hit-callback function.
+             */
             void setHitCallback(const HitCallbackFunction& func);
 
-            /** \brief Returns the currently configured hit callback. */
+            /**
+             * \brief Returns the currently configured hit callback.
+             * \return A \c const reference to the hit-callback function.
+             */
             const HitCallbackFunction& getHitCallback() const;
 
-            /** \brief Returns the current screening settings. */
+            /**
+             * \brief Returns the current screening settings.
+             * \return A \c const reference to the screening settings.
+             */
             const ScreeningSettings& getSettings() const;
 
-            /** \brief Returns the current screening settings (mutable). */
+            /**
+             * \brief Returns the current screening settings (mutable).
+             * \return A reference to the screening settings.
+             */
             ScreeningSettings& getSettings();
 
-            /** \brief Removes all query molecules. */
+            /**
+             * \brief Removes all query molecules.
+             */
             void clearQuerySet();
 
             /**
@@ -115,7 +133,10 @@ namespace CDPL
              */
             void addQuery(const Chem::MolecularGraph& molgraph);
 
-            /** \brief Returns the number of query molecules. */
+            /**
+             * \brief Returns the number of query molecules.
+             * \return The number of query molecules.
+             */
             std::size_t getQuerySetSize() const;
 
             /**
@@ -126,10 +147,16 @@ namespace CDPL
              */
             const Chem::MolecularGraph& getQuery(std::size_t idx) const;
 
-            /** \brief Returns a constant iterator pointing to the first query molecule. */
+            /**
+             * \brief Returns a constant iterator pointing to the first query molecule.
+             * \return A constant iterator pointing to the first query molecule.
+             */
             ConstMolecularGraphIterator getQuerySetBegin() const;
 
-            /** \brief Returns a constant iterator pointing one past the last query molecule. */
+            /**
+             * \brief Returns a constant iterator pointing one past the last query molecule.
+             * \return A constant iterator pointing one past the last query molecule.
+             */
             ConstMolecularGraphIterator getQuerySetEnd() const;
 
             /**

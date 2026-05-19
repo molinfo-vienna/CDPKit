@@ -52,20 +52,29 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief PatternBasedFeatureGenerator.
+         * \brief Pharm::FeatureGenerator implementation that perceives pharmacophore features by SMARTS-like
+         *        substructure pattern matching, with separate include and exclude pattern lists.
          */
         class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PatternBasedFeatureGenerator instances. */
             typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
+            /**
+             * \brief Flags used to label the role of an atom in a feature substructure pattern.
+             */
             enum PatternAtomLabelFlag
             {
 
+                /** \brief The atom contributes to the feature substructure. */
                 FEATURE_ATOM_FLAG   = 0x01,
+                /** \brief The atom defines the feature's 3D position. */
                 POS_REF_ATOM_FLAG   = 0x02,
+                /** \brief The atom defines the first orientation reference for vector- and plane-type features. */
                 GEOM_REF_ATOM1_FLAG = 0x04,
+                /** \brief The atom defines the second orientation reference for plane-type features. */
                 GEOM_REF_ATOM2_FLAG = 0x08
             };
 
@@ -113,7 +122,7 @@ namespace CDPL
             void clearExcludePatterns();
 
             /**
-             * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds 
+             * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds
              *        them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The output pharmacophore where to add the generated features.
@@ -128,6 +137,10 @@ namespace CDPL
              */
             PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
 
+            /**
+             * \brief Creates a deep copy of the \c %PatternBasedFeatureGenerator instance.
+             * \return A smart pointer to the cloned feature generator.
+             */
             FeatureGenerator::SharedPointer clone() const;
 
           protected:

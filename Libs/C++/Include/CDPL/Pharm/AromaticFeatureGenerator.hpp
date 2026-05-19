@@ -44,14 +44,18 @@ namespace CDPL
     {
 
         /**
-         * \brief AromaticFeatureGenerator.
+         * \brief Pharm::FeatureGenerator implementation that perceives aromatic ring features by enumerating
+         *        the aromatic SSSR subset of the input molecular graph.
          */
         class CDPL_PHARM_API AromaticFeatureGenerator : public PatternBasedFeatureGenerator
         {
 
           public:
+            /** \brief Default value for the feature tolerance property of generated aromatic features. */
             static constexpr double       DEF_FEATURE_TOL  = 0.9;
+            /** \brief Default value for the feature type property of generated aromatic features (Pharm::FeatureType::AROMATIC). */
             static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::AROMATIC;
+            /** \brief Default value for the feature geometry property of generated aromatic features (Pharm::FeatureGeometry::PLANE). */
             static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::PLANE;
 
             /**
@@ -66,7 +70,7 @@ namespace CDPL
             AromaticFeatureGenerator(const AromaticFeatureGenerator& gen);
 
             /**
-             * \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds 
+             * \brief Perceives aromatic ring features of the molecular graph \a molgraph and adds
              *        them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The output pharmacophore where to add the generated features.
@@ -74,7 +78,7 @@ namespace CDPL
             AromaticFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
             /**
-             * Destructor.
+             * \brief Destructor.
              */
             ~AromaticFeatureGenerator();
 
@@ -131,6 +135,10 @@ namespace CDPL
              */
             AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
 
+            /**
+             * \brief Creates a deep copy of the \c %AromaticFeatureGenerator instance.
+             * \return A smart pointer to the cloned feature generator.
+             */
             FeatureGenerator::SharedPointer clone() const;
 
           private:

@@ -101,19 +101,28 @@ namespace CDPL
                 Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
                     transform(xform), overlap(overlap), colOverlap(col_overlap) {}
 
-                /** \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape. */
+                /**
+                 * \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape.
+                 * \return A \c const reference to the rigid-body transformation matrix.
+                 */
                 const Math::Matrix4D& getTransform() const
                 {
                     return transform;
                 }
 
-                /** \brief Returns the shape overlap value of the alignment. */
+                /**
+                 * \brief Returns the shape overlap value of the alignment.
+                 * \return The shape overlap value.
+                 */
                 double getOverlap() const
                 {
                     return overlap;
                 }
 
-                /** \brief Returns the color overlap value of the alignment. */
+                /**
+                 * \brief Returns the color overlap value of the alignment.
+                 * \return The color overlap value.
+                 */
                 double getColorOverlap() const
                 {
                     return colOverlap;
@@ -130,7 +139,9 @@ namespace CDPL
                 double         colOverlap;
             };
 
-            /** \brief Constructs the \c %GaussianShapeFunctionAlignment instance without a reference shape. */
+            /**
+             * \brief Constructs the \c %GaussianShapeFunctionAlignment instance without a reference shape.
+             */
             GaussianShapeFunctionAlignment();
 
             /**
@@ -147,70 +158,136 @@ namespace CDPL
 
             GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment) = delete;
 
-            /** \brief Specifies the Gaussian-shape overlap function used during alignment. */
+            /**
+             * \brief Specifies the Gaussian-shape overlap function used during alignment.
+             * \param func The overlap function.
+             */
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
 
-            /** \brief Returns the currently configured overlap function. */
+            /**
+             * \brief Returns the currently configured overlap function.
+             * \return A reference to the overlap function.
+             */
             GaussianShapeOverlapFunction& getOverlapFunction() const;
 
-            /** \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction). */
+            /**
+             * \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction).
+             * \return A \c const reference to the default overlap function.
+             */
             const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
 
-            /** \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction). */
+            /**
+             * \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction).
+             * \return A reference to the default overlap function.
+             */
             FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
-            /** \brief Specifies the alignment-start generator used to seed the overlap optimization. */
+            /**
+             * \brief Specifies the alignment-start generator used to seed the overlap optimization.
+             * \param gen The alignment-start generator.
+             */
             void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
 
-            /** \brief Returns the currently configured alignment-start generator. */
+            /**
+             * \brief Returns the currently configured alignment-start generator.
+             * \return A reference to the alignment-start generator.
+             */
             GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
-            /** \brief Returns the built-in default principal-axes alignment-start generator. */
+            /**
+             * \brief Returns the built-in default principal-axes alignment-start generator.
+             * \return A \c const reference to the default alignment-start generator.
+             */
             const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
 
-            /** \brief Returns the built-in default principal-axes alignment-start generator. */
+            /**
+             * \brief Returns the built-in default principal-axes alignment-start generator.
+             * \return A reference to the default alignment-start generator.
+             */
             PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
 
-            /** \brief Specifies the function used to decide whether two color features match. */
+            /**
+             * \brief Specifies the function used to decide whether two color features match.
+             * \param func The color-match function.
+             */
             void setColorMatchFunction(const ColorMatchFunction& func);
 
-            /** \brief Returns the currently configured color-match function. */
+            /**
+             * \brief Returns the currently configured color-match function.
+             * \return A \c const reference to the color-match function.
+             */
             const ColorMatchFunction& getColorMatchFunction() const;
 
-            /** \brief Specifies the function used to filter color features by type. */
+            /**
+             * \brief Specifies the function used to filter color features by type.
+             * \param func The color-filter function.
+             */
             void setColorFilterFunction(const ColorFilterFunction& func);
 
-            /** \brief Returns the currently configured color-filter function. */
+            /**
+             * \brief Returns the currently configured color-filter function.
+             * \return A \c const reference to the color-filter function.
+             */
             const ColorFilterFunction& getColorFilterFunction() const;
 
-            /** \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose). */
+            /**
+             * \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose).
+             * \param perf_align \c true to perform the alignment, and \c false to only evaluate the initial pose.
+             */
             void performAlignment(bool perf_align);
 
-            /** \brief Tells whether the actual alignment is performed. */
+            /**
+             * \brief Tells whether the actual alignment is performed.
+             * \return \c true if the alignment is performed, and \c false otherwise.
+             */
             bool performAlignment() const;
 
-            /** \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment. */
+            /**
+             * \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+             * \param optimize \c true to optimize the overlap, and \c false to skip optimization.
+             */
             void optimizeOverlap(bool optimize);
 
-            /** \brief Tells whether the overlap is optimized iteratively. */
+            /**
+             * \brief Tells whether the overlap is optimized iteratively.
+             * \return \c true if the overlap is optimized, and \c false otherwise.
+             */
             bool optimizeOverlap() const;
 
-            /** \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum. */
+            /**
+             * \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+             * \param greedy \c true to use the greedy strategy, and \c false to use the full optimization.
+             */
             void greedyOptimization(bool greedy);
 
-            /** \brief Tells whether the overlap optimization uses a greedy strategy. */
+            /**
+             * \brief Tells whether the overlap optimization uses a greedy strategy.
+             * \return \c true if the greedy strategy is used, and \c false otherwise.
+             */
             bool greedyOptimization() const;
 
-            /** \brief Sets the maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Sets the maximum number of overlap-optimization iterations.
+             * \param max_iter The new maximum number of iterations.
+             */
             void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-            /** \brief Returns the currently configured maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Returns the currently configured maximum number of overlap-optimization iterations.
+             * \return The maximum number of iterations.
+             */
             std::size_t getMaxNumOptimizationIterations() const;
 
-            /** \brief Sets the gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Sets the gradient norm at which the overlap optimization is stopped.
+             * \param grad_norm The new stop gradient norm.
+             */
             void setOptimizationStopGradient(double grad_norm);
 
-            /** \brief Returns the currently configured overlap-optimization stop gradient. */
+            /**
+             * \brief Returns the currently configured overlap-optimization stop gradient.
+             * \return The stop gradient norm.
+             */
             double getOptimizationStopGradient() const;
 
             /**
@@ -256,10 +333,16 @@ namespace CDPL
              */
             double calcColorSelfOverlap(const GaussianShapeFunction& func);
 
-            /** \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps. */
+            /**
+             * \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps.
+             * \param calc \c true to evaluate color overlaps, and \c false to skip them.
+             */
             void calcColorOverlaps(bool calc);
 
-            /** \brief Tells whether color overlaps are evaluated. */
+            /**
+             * \brief Tells whether color overlaps are evaluated.
+             * \return \c true if color overlaps are evaluated, and \c false otherwise.
+             */
             bool calcColorOverlaps() const;
 
             /**
@@ -270,7 +353,10 @@ namespace CDPL
              */
             bool align(const GaussianShapeFunction& func, unsigned int sym_class);
 
-            /** \brief Returns the number of alignment results produced by the last align() call. */
+            /**
+             * \brief Returns the number of alignment results produced by the last align() call.
+             * \return The number of alignment results.
+             */
             std::size_t getNumResults() const;
 
             /**
@@ -281,16 +367,28 @@ namespace CDPL
              */
             const Result& getResult(std::size_t idx) const;
 
-            /** \brief Returns a constant iterator pointing to the first alignment result. */
+            /**
+             * \brief Returns a constant iterator pointing to the first alignment result.
+             * \return A constant iterator pointing to the first alignment result.
+             */
             ConstResultIterator getResultsBegin() const;
 
-            /** \brief Returns a constant iterator pointing one past the last alignment result. */
+            /**
+             * \brief Returns a constant iterator pointing one past the last alignment result.
+             * \return A constant iterator pointing one past the last alignment result.
+             */
             ConstResultIterator getResultsEnd() const;
 
-            /** \brief Returns a constant iterator pointing to the first alignment result (range-based for support). */
+            /**
+             * \brief Returns a constant iterator pointing to the first alignment result (range-based for support).
+             * \return A constant iterator pointing to the first alignment result.
+             */
             ConstResultIterator begin() const;
 
-            /** \brief Returns a constant iterator pointing one past the last alignment result (range-based for support). */
+            /**
+             * \brief Returns a constant iterator pointing one past the last alignment result (range-based for support).
+             * \return A constant iterator pointing one past the last alignment result.
+             */
             ConstResultIterator end() const;
 
           private:

@@ -40,7 +40,8 @@ namespace CDPL
     {
 
         /**
-         * \brief NegIonizableFeatureGenerator.
+         * \brief Pharm::FeatureGenerator implementation that perceives negative ionizable group features by
+         *        matching a built-in set of SMARTS-like substructure patterns.
          */
         class CDPL_PHARM_API NegIonizableFeatureGenerator : public PatternBasedFeatureGenerator
         {
@@ -48,16 +49,18 @@ namespace CDPL
           public:
             /**
              * \brief Constructs the \c %NegIonizableFeatureGenerator instance.
-             * \param chgd_groups_only \c true if features shall be generated only for charged groups.
+             * \param chgd_groups_only \c true if features shall be generated only for explicitly charged groups,
+             *                         and \c false if features shall be generated for both charged and ionizable neutral groups.
              */
             NegIonizableFeatureGenerator(bool chgd_groups_only);
 
             /**
-             * \brief Perceives the negative ionizable group features of the molecular graph a\ molgraph and adds 
+             * \brief Perceives the negative ionizable group features of the molecular graph \a molgraph and adds
              *        them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The output pharmacophore where to add the generated features.
-             * \param chgd_groups_only \c true if features shall be generated only for charged groups.
+             * \param chgd_groups_only \c true if features shall be generated only for explicitly charged groups,
+             *                         and \c false if features shall be generated for both charged and ionizable neutral groups.
              */
             NegIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
 
