@@ -42,10 +42,17 @@ namespace CDPL
     namespace Shape
     {
 
+        /**
+         * \brief An ordered set of (shared) Gaussian shapes.
+         *
+         * \c %GaussianShapeSet is an indirect array of Shape::GaussianShape smart pointers, typically used
+         * as input to alignment / overlap routines that operate on multiple shapes at once.
+         */
         class CDPL_SHAPE_API GaussianShapeSet : public Util::IndirectArray<GaussianShape>
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeSet instances. */
             typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
 
           private:

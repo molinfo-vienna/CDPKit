@@ -43,33 +43,63 @@ namespace CDPL
 
         class GaussianProductList;
 
+        /**
+         * \brief Shape::GaussianShapeOverlapFunction implementation that uses two approximation
+         *        techniques to trade some accuracy for a substantial speedup compared to
+         *        Shape::ExactGaussianShapeOverlapFunction.
+         *
+         * Two independent acceleration features can be enabled:
+         *   - **Proximity optimization** prunes Gaussian-product pair contributions based on a
+         *     scaled van-der-Waals proximity test (see setRadiusScalingFactor()).
+         *   - **Fast exponential function** replaces the expensive \c std::exp call with a fast
+         *     approximation that is accurate enough for screening-style overlap evaluation.
+         */
         class CDPL_SHAPE_API FastGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
         {
 
           public:
+            /** \brief Default scaling factor applied to van der Waals radii for the proximity-check pruning. */
             static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.4;
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeOverlapFunction instances. */
             typedef std::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 
+            /** \brief Constructs the \c %FastGaussianShapeOverlapFunction instance without associated shape functions. */
             FastGaussianShapeOverlapFunction();
 
+            /**
+             * \brief Constructs a copy of the \c %FastGaussianShapeOverlapFunction instance \a func.
+             * \param func The \c %FastGaussianShapeOverlapFunction to copy.
+             */
             FastGaussianShapeOverlapFunction(const FastGaussianShapeOverlapFunction& func);
 
+            /**
+             * \brief Constructs the \c %FastGaussianShapeOverlapFunction instance with the given reference and aligned shape functions.
+             * \param ref_shape_func The reference shape function.
+             * \param ovl_shape_func The aligned shape function.
+             */
             FastGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                              const GaussianShapeFunction& ovl_shape_func);
 
+            /** \brief Destructor. */
             ~FastGaussianShapeOverlapFunction();
 
+            /** \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions. */
             void proximityOptimization(bool enable);
 
+            /** \brief Tells whether the proximity-check pruning is enabled. */
             bool proximityOptimization() const;
 
+            /** \brief Sets the scaling factor applied to van der Waals radii during the proximity check. */
             void setRadiusScalingFactor(double factor);
 
+            /** \brief Returns the currently configured radius scaling factor. */
             double getRadiusScalingFactor() const;
 
+            /** \brief Enables or disables the use of a fast approximation for the exponential function. */
             void fastExpFunction(bool enable);
 
+            /** \brief Tells whether the fast-exponential approximation is enabled. */
             bool fastExpFunction() const;
 
             void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
@@ -98,6 +128,11 @@ namespace CDPL
 
             double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
+            /**
+             * \brief Copy assignment operator.
+             * \param func The other \c %FastGaussianShapeOverlapFunction instance.
+             * \return A reference to itself.
+             */
             FastGaussianShapeOverlapFunction& operator=(const FastGaussianShapeOverlapFunction& func);
 
           private:

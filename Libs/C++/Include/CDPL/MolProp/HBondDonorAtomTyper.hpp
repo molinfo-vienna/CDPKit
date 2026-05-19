@@ -42,16 +42,31 @@ namespace CDPL
     namespace MolProp
     {
 
+        /**
+         * \brief Perception of H-bond donor atom types (see namespace MolProp::HBondDonorAtomType) by SMARTS pattern matching.
+         */
         class CDPL_MOLPROP_API HBondDonorAtomTyper
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondDonorAtomTyper instances. */
             typedef std::shared_ptr<HBondDonorAtomTyper> SharedPointer;
 
+            /** \brief Constructs the \c %HBondDonorAtomTyper instance. */
             HBondDonorAtomTyper();
 
+            /**
+             * \brief Constructs the \c %HBondDonorAtomTyper instance and perceives the H-bond donor types of the atoms in \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param types The output array storing the perceived H-bond donor types (indexed by atom index).
+             */
             HBondDonorAtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
+            /**
+             * \brief Perceives the H-bond donor types of the atoms in \a molgraph.
+             * \param molgraph The molecular graph.
+             * \param types The output array storing the perceived H-bond donor types (indexed by atom index).
+             */
             void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
           private:
