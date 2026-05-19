@@ -304,18 +304,22 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
-    def calcSelfOverlap(calc: GaussianShapeFunction) -> float: pass
+    # \brief Calculates the shape-only self-overlap of <em>func</em> using the configured overlap function.
+    # 
+    # \param func The shape function.
+    # 
+    # \return The self-overlap value.
+    # 
+    def calcSelfOverlap(func: GaussianShapeFunction) -> float: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
-    def calcColorSelfOverlap(calc: GaussianShapeFunction) -> float: pass
+    # \brief Calculates the color self-overlap of <em>func</em> using the configured overlap function.
+    # 
+    # \param func The shape function.
+    # 
+    # \return The color self-overlap value.
+    # 
+    def calcColorSelfOverlap(func: GaussianShapeFunction) -> float: pass
 
     ##
     # \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps.
