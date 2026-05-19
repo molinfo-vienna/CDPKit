@@ -167,7 +167,7 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit Documentation**: Visit the [CDPKit documentation](https://cdpkit.org) for comprehensive information, tutorials, and examples.
 
-- **CDPL Python Tutorial**: Explore the [CDPL Python Tutorial](https://cdpkit.org/cdpl_python_tutorial/index.html) to learn how to effectively use
+- **CDPL Python Tutorial**: Explore the [CDPL Python Tutorial](https://cdpkit.org/cdpl_python_tutorial/index.html) to learn how to best use
   the vast amount of functionality offered by the *Chemical Data Processing Library (CDPL)* for your own Python software projects.
 
 - **CDPL Python Cookbook**: Explore the [CDPL Python Cookbook](https://cdpkit.org/cdpl_python_cookbook/index.html) for a collection of Python
