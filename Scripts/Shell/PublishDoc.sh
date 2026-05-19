@@ -37,7 +37,9 @@ make doc
 rm -rf $2
 cp -r $1/Doc/html $2
 
-out_dir=${2##*/} 
+cd $2/..
+
+out_dir=${2##*/}
 
 sed -e "s|</urlset>||g" -i $2/sitemap.xml
 
@@ -53,10 +55,11 @@ done
 
 echo "</urlset>" >> $2/sitemap.xml
 
-cd $2/..
 docs-versions-menu --no-downloads-file --no-write-index-html
 
-for i in `find . -name "docs-versions-menu.js"`; do cp docs-versions-menu-cdpkit.js $i; done
+for i in `find . -name "docs-versions-menu.js"`; do
+    cp docs-versions-menu-cdpkit.js $i
+done
 
 cp versions-cdpkit.json versions.json
 
