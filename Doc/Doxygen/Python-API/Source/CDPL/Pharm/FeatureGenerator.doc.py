@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureGenerator.
+# \brief Abstract base class for generators that perceive one type of pharmacophore feature (e.g. an aromatic ring or H-bond donor) and append the perceived features to a Pharm.Pharmacophore.
 # 
 class FeatureGenerator(Boost.Python.instance):
 
@@ -51,7 +51,7 @@ class FeatureGenerator(Boost.Python.instance):
     ##
     # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
     # 
-    # \return The registered atom 3D-coordinates function.
+    # \return A reference to the registered atom 3D-coordinates function.
     # 
     def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
@@ -64,9 +64,10 @@ class FeatureGenerator(Boost.Python.instance):
     def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Creates a deep copy of the <tt>FeatureGenerator</tt> instance.
+    # 
+    # \return A smart reference to the cloned feature generator.
+    # 
     def clone() -> FeatureGenerator: pass
 
     objectID = property(getObjectID)

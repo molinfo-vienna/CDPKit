@@ -168,6 +168,16 @@ def getTextRecursive(parent_node):
             rc.append('&harr;')
         elif node.nodeName == 'times':
             rc.append('&times;')
+        elif node.nodeName == 'lt':
+            rc.append('&lt;')
+        elif node.nodeName == 'le':
+            rc.append('&le;')
+        elif node.nodeName == 'gt':
+            rc.append('&gt;')
+        elif node.nodeName == 'ge':
+            rc.append('&ge;')
+        elif node.nodeName == 'pi':
+            rc.append('&pi;')
         elif node.nodeName == 'table':
             rc.append(outputTable(node))
         elif node.nodeName == 'parameterlist':

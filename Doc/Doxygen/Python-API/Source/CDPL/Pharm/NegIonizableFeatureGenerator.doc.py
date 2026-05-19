@@ -20,14 +20,14 @@
 #
 
 ##
-# \brief NegIonizableFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives negative ionizable group features by matching a built-in set of SMARTS-like substructure patterns.
 # 
 class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Constructs the <tt>NegIonizableFeatureGenerator</tt> instance.
     # 
-    # \param chgd_groups_only <tt>True</tt> if features shall be generated only for charged groups.
+    # \param chgd_groups_only <tt>True</tt> if features shall be generated only for explicitly charged groups, and <tt>False</tt> if features shall be generated for both charged and ionizable neutral groups.
     # 
     def __init__(chgd_groups_only: bool) -> None: pass
 
@@ -38,11 +38,11 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(gen: NegIonizableFeatureGenerator) -> None: pass
 
     ##
-    # \brief Perceives the negative ionizable group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives the negative ionizable group features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
-    # \param chgd_groups_only <tt>True</tt> if features shall be generated only for charged groups.
+    # \param chgd_groups_only <tt>True</tt> if features shall be generated only for explicitly charged groups, and <tt>False</tt> if features shall be generated for both charged and ionizable neutral groups.
     # 
     def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 

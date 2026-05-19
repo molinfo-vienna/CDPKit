@@ -59,95 +59,133 @@ class GaussianShapeGenerator(Boost.Python.instance):
     ##
     # \brief Specifies the pharmacophore generator used when emitting pharmacophore shapes.
     # 
+    # \param gen The pharmacophore generator.
+    # 
     def setPharmacophoreGenerator(gen: Pharm.PharmacophoreGenerator) -> None: pass
 
     ##
     # \brief Returns the currently configured pharmacophore generator.
+    # 
+    # \return A reference to the pharmacophore generator.
     # 
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     ##
     # \brief Returns the built-in default pharmacophore generator (mutable).
     # 
+    # \return A reference to the default pharmacophore generator.
+    # 
     def getDefaultPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
     # \brief Sets the sphere radius used for all atoms (negative value: use atom-specific van der Waals radii).
+    # 
+    # \param radius The new atom sphere radius.
     # 
     def setAtomRadius(radius: float) -> None: pass
 
     ##
     # \brief Returns the currently configured atom sphere radius.
     # 
+    # \return The atom sphere radius.
+    # 
     def getAtomRadius() -> float: pass
 
     ##
     # \brief Sets the Gaussian hardness used for all atom spheres.
+    # 
+    # \param hardness The new atom Gaussian hardness.
     # 
     def setAtomHardness(hardness: float) -> None: pass
 
     ##
     # \brief Returns the currently configured atom Gaussian hardness.
     # 
+    # \return The atom Gaussian hardness.
+    # 
     def getAtomHardness() -> float: pass
 
     ##
     # \brief Sets the sphere radius used for all features (negative value: use feature-specific tolerances).
+    # 
+    # \param radius The new feature sphere radius.
     # 
     def setFeatureRadius(radius: float) -> None: pass
 
     ##
     # \brief Returns the currently configured feature sphere radius.
     # 
+    # \return The feature sphere radius.
+    # 
     def getFeatureRadius() -> float: pass
 
     ##
     # \brief Sets the Gaussian hardness used for all feature spheres.
+    # 
+    # \param hardness The new feature Gaussian hardness.
     # 
     def setFeatureHardness(hardness: float) -> None: pass
 
     ##
     # \brief Returns the currently configured feature Gaussian hardness.
     # 
+    # \return The feature Gaussian hardness.
+    # 
     def getFeatureHardness() -> float: pass
 
     ##
     # \brief Specifies whether a pharmacophore (feature-based) shape shall be generated.
+    # 
+    # \param generate <tt>True</tt> to enable the generation of the pharmacophore shape, and <tt>False</tt> to disable it.
     # 
     def generatePharmacophoreShape(generate: bool) -> None: pass
 
     ##
     # \brief Tells whether a pharmacophore (feature-based) shape is generated.
     # 
+    # \return <tt>True</tt> if the pharmacophore shape is generated, and <tt>False</tt> otherwise.
+    # 
     def generatePharmacophoreShape() -> bool: pass
 
     ##
     # \brief Specifies whether a molecular (atom-based) shape shall be generated.
+    # 
+    # \param generate <tt>True</tt> to enable the generation of the molecular shape, and <tt>False</tt> to disable it.
     # 
     def generateMoleculeShape(generate: bool) -> None: pass
 
     ##
     # \brief Tells whether a molecular (atom-based) shape is generated.
     # 
+    # \return <tt>True</tt> if the molecular shape is generated, and <tt>False</tt> otherwise.
+    # 
     def generateMoleculeShape() -> bool: pass
 
     ##
     # \brief Specifies whether to emit one shape per conformer (instead of using the first conformer only).
+    # 
+    # \param multi_conf <tt>True</tt> to enable multi-conformer mode, and <tt>False</tt> to use the first conformer only.
     # 
     def multiConformerMode(multi_conf: bool) -> None: pass
 
     ##
     # \brief Tells whether the generator runs in multi-conformer mode.
     # 
+    # \return <tt>True</tt> if multi-conformer mode is enabled, and <tt>False</tt> otherwise.
+    # 
     def multiConformerMode() -> bool: pass
 
     ##
     # \brief Specifies whether hydrogens are included when generating the molecular shape.
     # 
+    # \param include <tt>True</tt> to include hydrogens, and <tt>False</tt> to ignore them.
+    # 
     def includeHydrogens(include: bool) -> None: pass
 
     ##
     # \brief Tells whether hydrogens are included when generating the molecular shape.
+    # 
+    # \return <tt>True</tt> if hydrogens are included, and <tt>False</tt> otherwise.
     # 
     def includeHydrogens() -> bool: pass
 

@@ -20,40 +20,40 @@
 #
 
 ##
-# \brief HydrophobicFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives hydrophobic features by grouping atoms into rings, chains and small fragment groups whose total atom hydrophobicity exceeds the per-class threshold.
 # 
 # \see [\ref CATA]
 # 
 class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature tolerance property of generated hydrophobic features.
+    # 
     DEF_FEATURE_TOL = 1.5
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature type property of generated hydrophobic features (Pharm.FeatureType.HYDROPHOBIC).
+    # 
     DEF_FEATURE_TYPE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature geometry property of generated hydrophobic features (Pharm.FeatureGeometry.SPHERE).
+    # 
     DEF_FEATURE_GEOM = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum total atom hydrophobicity required for emitting a ring feature.
+    # 
     DEF_HYD_THRESHOLD_RING = 2.0
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum total atom hydrophobicity required for emitting a chain feature.
+    # 
     DEF_HYD_THRESHOLD_CHAIN = 0.8
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum total atom hydrophobicity required for emitting a group feature.
+    # 
     DEF_HYD_THRESHOLD_GROUP = 0.8
 
     ##
@@ -62,7 +62,7 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives hydrophobic group features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.

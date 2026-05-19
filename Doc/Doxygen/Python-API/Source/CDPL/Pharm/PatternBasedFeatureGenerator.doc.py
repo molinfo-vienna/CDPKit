@@ -20,33 +20,33 @@
 #
 
 ##
-# \brief PatternBasedFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives pharmacophore features by SMARTS-like substructure pattern matching, with separate include and exclude pattern lists.
 # 
 class PatternBasedFeatureGenerator(FeatureGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Flags used to label the role of an atom in a feature substructure pattern.
+    # 
     class PatternAtomLabelFlag(Boost.Python.enum):
 
         ##
-        # \brief FEATURE_ATOM_FLAG.
-        #
+        # \brief The atom contributes to the feature substructure.
+        # 
         FEATURE_ATOM_FLAG = 1
 
         ##
-        # \brief POS_REF_ATOM_FLAG.
-        #
+        # \brief The atom defines the feature's 3D position.
+        # 
         POS_REF_ATOM_FLAG = 2
 
         ##
-        # \brief GEOM_REF_ATOM1_FLAG.
-        #
+        # \brief The atom defines the first orientation reference for vector- and plane-type features.
+        # 
         GEOM_REF_ATOM1_FLAG = 4
 
         ##
-        # \brief GEOM_REF_ATOM2_FLAG.
-        #
+        # \brief The atom defines the second orientation reference for plane-type features.
+        # 
         GEOM_REF_ATOM2_FLAG = 8
 
     ##

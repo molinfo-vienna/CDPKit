@@ -20,23 +20,23 @@
 #
 
 ##
-# \brief AromaticFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives aromatic ring features by enumerating the aromatic SSSR subset of the input molecular graph.
 # 
 class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature tolerance property of generated aromatic features.
+    # 
     DEF_FEATURE_TOL = 0.9
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature type property of generated aromatic features (Pharm.FeatureType.AROMATIC).
+    # 
     DEF_FEATURE_TYPE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature geometry property of generated aromatic features (Pharm.FeatureGeometry.PLANE).
+    # 
     DEF_FEATURE_GEOM = 3
 
     ##
@@ -52,7 +52,7 @@ class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(gen: AromaticFeatureGenerator) -> None: pass
 
     ##
-    # \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives aromatic ring features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.

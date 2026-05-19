@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief HBondAcceptorFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives H-bond acceptor features by matching a built-in set of SMARTS-like substructure patterns.
 # 
 class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
 
@@ -36,7 +36,7 @@ class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(gen: HBondAcceptorFeatureGenerator) -> None: pass
 
     ##
-    # \brief Perceives the hydrogen bond acceptor features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives the hydrogen bond acceptor features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.

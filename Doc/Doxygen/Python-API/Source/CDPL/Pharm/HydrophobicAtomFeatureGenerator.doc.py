@@ -20,30 +20,30 @@
 #
 
 ##
-# \brief HydrophobicAtomFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that emits one hydrophobic feature per atom whose individual hydrophobicity exceeds a configurable threshold.
 # 
 # \see [\ref CATA]
 # 
 class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature tolerance property of generated hydrophobic features.
+    # 
     DEF_FEATURE_TOL = 1.5
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature type property of generated hydrophobic features (Pharm.FeatureType.HYDROPHOBIC).
+    # 
     DEF_FEATURE_TYPE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default value for the feature geometry property of generated hydrophobic features (Pharm.FeatureGeometry.SPHERE).
+    # 
     DEF_FEATURE_GEOM = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum per-atom hydrophobicity required for emitting a feature.
+    # 
     DEF_HYD_THRESHOLD = 0.5
 
     ##
@@ -52,7 +52,7 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives hydrophobic atom features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.

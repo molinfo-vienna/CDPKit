@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief XBondAcceptorFeatureGenerator.
+# \brief Pharm.FeatureGenerator implementation that perceives halogen-bond acceptor features by matching a built-in set of SMARTS-like substructure patterns.
 # 
 class XBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
 
@@ -36,7 +36,7 @@ class XBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(gen: XBondAcceptorFeatureGenerator) -> None: pass
 
     ##
-    # \brief Perceives the halogen bond acceptor features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives the halogen bond acceptor features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.

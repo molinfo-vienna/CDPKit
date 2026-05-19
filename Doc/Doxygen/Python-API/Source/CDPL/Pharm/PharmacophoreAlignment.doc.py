@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief PharmacophoreAlignment.
+# \brief Pharmacophore alignment driver — a Chem.SpatialEntityAlignment specialization for Pharm.Feature objects that aligns two feature sets according to their type, geometry and 3D positions.
 # 
 class PharmacophoreAlignment(SpatialFeatureAlignment):
 

@@ -20,71 +20,93 @@
 #
 
 ##
-# \brief 
-# \param feature 
-# \param flag 
-#
+# \brief Sets the Pharm.FeatureProperty.DISABLED_FLAG property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param flag The new disabled-flag value.
+# 
 def setDisabledFlag(feature: Feature, flag: bool) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.DISABLED_FLAG property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the disabled flag is set, and <tt>False</tt> otherwise.
+# 
 def hasDisabledFlag(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.DISABLED_FLAG property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the feature is flagged as disabled, and <tt>False</tt> otherwise.
+# 
 def getDisabledFlag(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.DISABLED_FLAG property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearDisabledFlag(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Generates a string describing the per-atom residue environment of <em>feature</em> (residue names and atom names of interacting pocket atoms).
+# 
+# \param feature The feature.
+# 
+# \return The generated environment-residue-atom info string. 
+# 
+# \since 1.4
+# 
 def getEnvironmentResidueAtomInfo(feature: Feature) -> str: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Generates a string describing the residue environment of <em>feature</em> (residue names of interacting pocket residues).
+# 
+# \param feature The feature.
+# 
+# \return The generated environment-residue info string. 
+# 
+# \since 1.3
+# 
 def getEnvironmentResidueInfo(feature: Feature) -> str: pass
 
 ##
-# \brief 
-# \param feature 
-# \param substruct 
-#
+# \brief Sets the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param substruct The new environment substructure.
+# 
 def setEnvironmentSubstructure(feature: Feature, substruct: Chem.Fragment) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the environment substructure property is set, and <tt>False</tt> otherwise.
+# 
 def hasEnvironmentSubstructure(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property of <em>feature</em> (interacting pocket residues).
+# 
+# \param feature The feature.
+# 
+# \return A reference to the environment substructure. 
+# 
+# \since 1.4
+# 
 def getEnvironmentSubstructure(feature: Feature) -> Chem.Fragment: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.ENVIRONMENT_SUBSTRUCTURE property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearEnvironmentSubstructure(feature: Feature) -> None: pass
 
 ##
@@ -118,10 +140,12 @@ def getFeatureCount(cntnr: FeatureContainer) -> int: pass
 def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 
 ##
-# \brief 
-# \param ftr_type 
-# \return 
-#
+# \brief Returns a human-readable name for the given Pharm.FeatureType identifier (e.g. <em>"H"</em> for H-bond donor).
+# 
+# \param ftr_type The Pharm.FeatureType identifier.
+# 
+# \return A reference to the type name string.
+# 
 def getFeatureTypeString(ftr_type: int) -> str: pass
 
 ##
@@ -134,84 +158,102 @@ def getFeatureTypeString(ftr_type: int) -> str: pass
 def getFeatures(ftr_set: FeatureSet, mapping: FeatureMapping, first: bool) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param geom 
-#
+# \brief Sets the Pharm.FeatureProperty.GEOMETRY property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param geom The new Pharm.FeatureGeometry identifier.
+# 
 def setGeometry(feature: Feature, geom: int) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.GEOMETRY property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the geometry property is set, and <tt>False</tt> otherwise.
+# 
 def hasGeometry(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.GEOMETRY property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The Pharm.FeatureGeometry identifier.
+# 
 def getGeometry(feature: Feature) -> int: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.GEOMETRY property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearGeometry(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param hyd 
-#
+# \brief Sets the Pharm.FeatureProperty.HYDROPHOBICITY property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param hyd The new hydrophobicity value.
+# 
 def setHydrophobicity(feature: Feature, hyd: float) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.HYDROPHOBICITY property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the hydrophobicity property is set, and <tt>False</tt> otherwise.
+# 
 def hasHydrophobicity(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.HYDROPHOBICITY property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The hydrophobicity value.
+# 
 def getHydrophobicity(feature: Feature) -> float: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.HYDROPHOBICITY property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearHydrophobicity(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param length 
-#
+# \brief Sets the Pharm.FeatureProperty.LENGTH property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param length The new length value.
+# 
 def setLength(feature: Feature, length: float) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.LENGTH property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the length property is set, and <tt>False</tt> otherwise.
+# 
 def hasLength(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.LENGTH property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The length value.
+# 
 def getLength(feature: Feature) -> float: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.LENGTH property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearLength(feature: Feature) -> None: pass
 
 ##
@@ -248,57 +290,69 @@ def getName(cntnr: FeatureContainer) -> str: pass
 def clearName(cntnr: FeatureContainer) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param flag 
-#
+# \brief Sets the Pharm.FeatureProperty.OPTIONAL_FLAG property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param flag The new optional-flag value.
+# 
 def setOptionalFlag(feature: Feature, flag: bool) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.OPTIONAL_FLAG property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the optional flag is set, and <tt>False</tt> otherwise.
+# 
 def hasOptionalFlag(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.OPTIONAL_FLAG property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the feature is flagged as optional, and <tt>False</tt> otherwise.
+# 
 def getOptionalFlag(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.OPTIONAL_FLAG property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearOptionalFlag(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param orient 
-#
+# \brief Sets the Pharm.FeatureProperty.ORIENTATION property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param orient The new 3D orientation vector.
+# 
 def setOrientation(feature: Feature, orient: Math.Vector3D) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.ORIENTATION property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the orientation property is set, and <tt>False</tt> otherwise.
+# 
 def hasOrientation(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.ORIENTATION property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return A reference to the 3D orientation vector.
+# 
 def getOrientation(feature: Feature) -> Math.Vector3D: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.ORIENTATION property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearOrientation(feature: Feature) -> None: pass
 
 ##
@@ -312,111 +366,135 @@ def clearOrientation(feature: Feature) -> None: pass
 def clearOrientations(cntnr: FeatureContainer, fix_geom: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param substruct 
-#
+# \brief Sets the Pharm.FeatureProperty.SUBSTRUCTURE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param substruct The new feature substructure.
+# 
 def setSubstructure(feature: Feature, substruct: Chem.Fragment) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.SUBSTRUCTURE property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the substructure property is set, and <tt>False</tt> otherwise.
+# 
 def hasSubstructure(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.SUBSTRUCTURE property of <em>feature</em> (the underlying atoms/bonds).
+# 
+# \param feature The feature.
+# 
+# \return A reference to the feature substructure.
+# 
 def getSubstructure(feature: Feature) -> Chem.Fragment: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.SUBSTRUCTURE property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearSubstructure(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param tol 
-#
+# \brief Sets the Pharm.FeatureProperty.TOLERANCE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param tol The new tolerance value.
+# 
 def setTolerance(feature: Feature, tol: float) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.TOLERANCE property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the tolerance property is set, and <tt>False</tt> otherwise.
+# 
 def hasTolerance(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.TOLERANCE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The tolerance value.
+# 
 def getTolerance(feature: Feature) -> float: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.TOLERANCE property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearTolerance(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param type 
-#
+# \brief Sets the Pharm.FeatureProperty.TYPE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param type The new Pharm.FeatureType identifier.
+# 
 def setType(feature: Feature, type: int) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.TYPE property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the type property is set, and <tt>False</tt> otherwise.
+# 
 def hasType(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.TYPE property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The Pharm.FeatureType identifier.
+# 
 def getType(feature: Feature) -> int: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.TYPE property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearType(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \param weight 
-#
+# \brief Sets the Pharm.FeatureProperty.WEIGHT property of <em>feature</em>.
+# 
+# \param feature The feature.
+# \param weight The new weight value.
+# 
 def setWeight(feature: Feature, weight: float) -> None: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Tells whether the Pharm.FeatureProperty.WEIGHT property of <em>feature</em> has been set.
+# 
+# \param feature The feature.
+# 
+# \return <tt>True</tt> if the weight property is set, and <tt>False</tt> otherwise.
+# 
 def hasWeight(feature: Feature) -> bool: pass
 
 ##
-# \brief 
-# \param feature 
-# \return 
-#
+# \brief Returns the Pharm.FeatureProperty.WEIGHT property of <em>feature</em>.
+# 
+# \param feature The feature.
+# 
+# \return The weight value.
+# 
 def getWeight(feature: Feature) -> float: pass
 
 ##
-# \brief 
-# \param feature 
-#
+# \brief Removes the Pharm.FeatureProperty.WEIGHT property from <em>feature</em>.
+# 
+# \param feature The feature.
+# 
 def clearWeight(feature: Feature) -> None: pass
 
 ##
@@ -428,33 +506,35 @@ def clearWeight(feature: Feature) -> None: pass
 # \param atom_cntnr The atom container providing the test atoms.
 # \param coords_func The function returning the 3D coordinates of an atom.
 # \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
-# \param vdw_factor Scaling factor for the per-atom van der Waals radii; if  0 the atoms are treated as point particles.
+# \param vdw_factor Scaling factor for the per-atom van der Waals radii; if &le; 0 the atoms are treated as point particles.
 # 
 # \return <tt>True</tt> if no clash is detected, and <tt>False</tt> otherwise.
 # 
 def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, xform: Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param cntnr 
-# \param coords_func 
-# \param tol 
-# \param min_dist 
-# \param rel_dist 
-# \param append 
-#
+# \brief Creates exclusion-volume features at the 3D positions of the atoms in <em>cntnr</em> and appends them to <em>pharm</em>.
+# 
+# \param pharm The pharmacophore receiving the new exclusion volumes.
+# \param cntnr The atom container providing the seed positions.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-atom vdW radius is used).
+# \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
+# \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>; otherwise the absolute distance is tested.
+# \param append If <tt>False</tt>, <em>pharm</em> is cleared before any exclusion volumes are added.
+# 
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param cntnr 
-# \param tol 
-# \param min_dist 
-# \param rel_dist 
-# \param append 
-#
+# \brief Creates exclusion-volume features at the 3D positions of the features in <em>cntnr</em> and appends them to <em>pharm</em>.
+# 
+# \param pharm The pharmacophore receiving the new exclusion volumes.
+# \param cntnr The feature container providing the seed positions.
+# \param tol The position tolerance to assign to new exclusion volumes (if &le; 0, the per-feature tolerance is used).
+# \param min_dist Minimum distance (<em>rel_dist</em> controls absolute vs. tolerance-corrected) that a new exclusion volume must keep from existing ones.
+# \param rel_dist If <tt>True</tt>, the per-pair tolerance sum is subtracted from the pair distance before testing against <em>min_dist</em>; otherwise the absolute distance is tested.
+# \param append If <tt>False</tt>, <em>pharm</em> is cleared before any exclusion volumes are added.
+# 
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
@@ -474,29 +554,35 @@ def generateFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHisto
 def generateFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param iactions 
-# \param append 
-#
+# \brief Builds an interaction pharmacophore from the supplied feature-to-feature mapping by emitting one feature per source feature, optionally enriched with orientation vectors and environment substructures derived from the mapped partner features.
+# 
+# \param pharm The output pharmacophore where to add the generated features.
+# \param iactions The feature-to-feature mapping describing the interactions.
+# \param append If <tt>False</tt>, <em>pharm</em> is cleared before any features are added.
+# 
 def generateInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapping, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param mol 
-# \param calc_hyd 
-# \param from_logp 
-#
+# \brief Prepares <em>mol</em> for downstream pharmacophore generation by completing its hydrogens, perceiving SSSR, ring flags, implicit H counts, hybridization states and aromaticity, generating 3D coordinates for newly added hydrogens and (optionally) calculating per-atom hydrophobicities.
+# 
+# Failures of the hydrogen 3D-coordinate or residue-sequence-info derivation steps are silently caught and ignored; all other exceptions propagate.
+# 
+# \param mol The molecule to prepare (modified in place).
+# \param calc_hyd If <tt>True</tt>, atom hydrophobicities are also calculated and stored as atom properties.
+# \param from_logp If <tt>True</tt> and <em>calc_hyd</em> is set, the hydrophobicities are derived from the XLogP atom contributions instead of the Greene algorithm.
+# 
 def prepareForPharmacophoreGeneration(mol: Chem.Molecule, calc_hyd: bool = True, from_logp: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param cntnr 
-# \param coords_func 
-# \param vdw_scaling_fact 
-# \return 
-#
+# \brief Removes every Pharm.FeatureType.EXCLUSION_VOLUME feature of <em>pharm</em> whose tolerance sphere clashes with any atom of <em>cntnr</em>.
+# 
+# \param pharm The pharmacophore to filter.
+# \param cntnr The atom container providing the clash partners.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+# 
+# \return <tt>True</tt> if at least one exclusion volume was removed, and <tt>False</tt> otherwise.
+# 
 def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##
@@ -526,21 +612,25 @@ def removeFeaturesWithType(cntnr: FeatureContainer, tgt_set: FeatureSet, type: i
 def removeFeaturesWithType(ftr_set: FeatureSet, type: int) -> bool: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param type 
-# \return 
-#
+# \brief Removes every feature in <em>pharm</em> whose Pharm.FeatureType matches <em>type</em>.
+# 
+# \param pharm The pharmacophore to filter.
+# \param type The Pharm.FeatureType to remove.
+# 
+# \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removeFeaturesWithType(pharm: Pharmacophore, type: int) -> bool: pass
 
 ##
 # \brief Copies the features in <em>cntnr</em> into <em>tgt_set</em>, suppressing features that share both type and 3D position with an already-collected feature.
 # 
-# Two features count as duplicates if they have identical Pharm.FeatureType and their position vectors either match exactly (<em>pos_tol</em>  0) or lie within <em>pos_tol</em> from each other. When a duplicate is detected, the feature with the larger position tolerance is retained.
+# Two features count as duplicates if they have identical Pharm.FeatureType and their position vectors either match exactly (<em>pos_tol</em> &le; 0) or lie within <em>pos_tol</em> from each other. When a duplicate is detected, the feature with the larger position tolerance is retained.
 # 
 # \param cntnr The feature container providing the input features.
 # \param tgt_set The feature set receiving the deduplicated features.
-# \param pos_tol The position-equality tolerance in &Aring;ngstrom; values  0 require an exact position match.
+# \param pos_tol The position-equality tolerance in &Aring;ngstrom; values &le; 0 require an exact position match.
 # \param append If <tt>False</tt>, <em>tgt_set</em> is cleared before adding any features.
 # 
 # \return <tt>True</tt> if at least one duplicate was detected, and <tt>False</tt> otherwise. 
@@ -562,21 +652,29 @@ def removePositionalDuplicates(cntnr: FeatureContainer, tgt_set: FeatureSet, pos
 def removePositionalDuplicates(ftr_set: FeatureSet, pos_tol: float = 0.0) -> bool: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param pos_tol 
-# \return 
-#
+# \brief Removes positional duplicate features from <em>pharm</em> in place.
+# 
+# Two features count as duplicates if they have identical Pharm.FeatureType and their position vectors either match exactly (<em>pos_tol</em> &le; 0) or lie within <em>pos_tol</em> from each other. When a duplicate is detected, the feature with the larger position tolerance is retained.
+# 
+# \param pharm The pharmacophore to deduplicate.
+# \param pos_tol The position-equality tolerance in &Aring;ngstrom; values &le; 0 require an exact position match.
+# 
+# \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removePositionalDuplicates(pharm: Pharmacophore, pos_tol: float = 0.0) -> bool: pass
 
 ##
-# \brief 
-# \param pharm 
-# \param cntnr 
-# \param coords_func 
-# \param vdw_scaling_fact 
-# \return 
-#
+# \brief Shrinks the tolerance of every Pharm.FeatureType.EXCLUSION_VOLUME feature of <em>pharm</em> whose tolerance sphere clashes with any atom of <em>cntnr</em>; removes the exclusion volume when the resulting tolerance falls below 0.25.
+# 
+# \param pharm The pharmacophore to modify.
+# \param cntnr The atom container providing the clash partners.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param vdw_scaling_fact Scaling factor applied to the per-atom van der Waals radius during the clash test.
+# 
+# \return <tt>True</tt> if at least one exclusion volume was resized or removed, and <tt>False</tt> otherwise.
+# 
 def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##

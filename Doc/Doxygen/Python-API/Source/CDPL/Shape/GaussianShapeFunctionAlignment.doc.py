@@ -67,15 +67,21 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         ##
         # \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape.
         # 
+        # \return A reference to the rigid-body transformation matrix.
+        # 
         def getTransform() -> Math.Matrix4D: pass
 
         ##
         # \brief Returns the shape overlap value of the alignment.
         # 
+        # \return The shape overlap value.
+        # 
         def getOverlap() -> float: pass
 
         ##
         # \brief Returns the color overlap value of the alignment.
+        # 
+        # \return The color overlap value.
         # 
         def getColorOverlap() -> float: pass
 
@@ -125,15 +131,21 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Specifies the Gaussian-shape overlap function used during alignment.
     # 
+    # \param func The overlap function.
+    # 
     def setOverlapFunction(func: GaussianShapeOverlapFunction) -> None: pass
 
     ##
     # \brief Returns the currently configured overlap function.
     # 
+    # \return A reference to the overlap function.
+    # 
     def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
     # \brief Returns the built-in default overlap function (Shape.FastGaussianShapeOverlapFunction).
+    # 
+    # \return A reference to the default overlap function.
     # 
     def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
@@ -155,85 +167,119 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Specifies the alignment-start generator used to seed the overlap optimization.
     # 
+    # \param gen The alignment-start generator.
+    # 
     def setStartGenerator(gen: GaussianShapeAlignmentStartGenerator) -> None: pass
 
     ##
     # \brief Returns the currently configured alignment-start generator.
+    # 
+    # \return A reference to the alignment-start generator.
     # 
     def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
     # \brief Returns the built-in default principal-axes alignment-start generator.
     # 
+    # \return A reference to the default alignment-start generator.
+    # 
     def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
     ##
     # \brief Specifies the function used to decide whether two color features match.
+    # 
+    # \param func The color-match function.
     # 
     def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief Returns the currently configured color-match function.
     # 
+    # \return A reference to the color-match function.
+    # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief Specifies the function used to filter color features by type.
+    # 
+    # \param func The color-filter function.
     # 
     def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
     # \brief Returns the currently configured color-filter function.
     # 
+    # \return A reference to the color-filter function.
+    # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
     # \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose).
+    # 
+    # \param perf_align <tt>True</tt> to perform the alignment, and <tt>False</tt> to only evaluate the initial pose.
     # 
     def performAlignment(perf_align: bool) -> None: pass
 
     ##
     # \brief Tells whether the actual alignment is performed.
     # 
+    # \return <tt>True</tt> if the alignment is performed, and <tt>False</tt> otherwise.
+    # 
     def performAlignment() -> bool: pass
 
     ##
     # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
+    # \param max_iter The new maximum number of iterations.
     # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
     # \brief Returns the currently configured maximum number of overlap-optimization iterations.
     # 
+    # \return The maximum number of iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
     # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
+    # \param grad_norm The new stop gradient norm.
     # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief Returns the currently configured overlap-optimization stop gradient.
     # 
+    # \return The stop gradient norm.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
     # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
+    # \param optimize <tt>True</tt> to optimize the overlap, and <tt>False</tt> to skip optimization.
     # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
     # \brief Tells whether the overlap is optimized iteratively.
     # 
+    # \return <tt>True</tt> if the overlap is optimized, and <tt>False</tt> otherwise.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
     # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
     # 
+    # \param greedy <tt>True</tt> to use the greedy strategy, and <tt>False</tt> to use the full optimization.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
     # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
+    # \return <tt>True</tt> if the greedy strategy is used, and <tt>False</tt> otherwise.
     # 
     def greedyOptimization() -> bool: pass
 
@@ -274,10 +320,14 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     ##
     # \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps.
     # 
+    # \param calc <tt>True</tt> to evaluate color overlaps, and <tt>False</tt> to skip them.
+    # 
     def calcColorOverlaps(calc: bool) -> None: pass
 
     ##
     # \brief Tells whether color overlaps are evaluated.
+    # 
+    # \return <tt>True</tt> if color overlaps are evaluated, and <tt>False</tt> otherwise.
     # 
     def calcColorOverlaps() -> bool: pass
 
@@ -293,6 +343,8 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
     # \brief Returns the number of alignment results produced by the last align() call.
+    # 
+    # \return The number of alignment results.
     # 
     def getNumResults() -> int: pass
 

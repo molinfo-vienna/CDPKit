@@ -56,25 +56,35 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # 
     # \param ref If <tt>True</tt>, the reference shape function is returned; otherwise the aligned shape function.
     # 
+    # \return A reference to the requested shape function (or <tt>nullptr</tt> if none is associated).
+    # 
     def getShapeFunction(ref: bool) -> GaussianShapeFunction: pass
 
     ##
     # \brief Specifies the function used to decide whether two color features match.
+    # 
+    # \param func The color-match function.
     # 
     def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief Returns the currently configured color-match function.
     # 
+    # \return A reference to the color-match function.
+    # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief Specifies the function used to filter color features by type.
     # 
+    # \param func The color-filter function.
+    # 
     def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
     # \brief Returns the currently configured color-filter function.
+    # 
+    # \return A reference to the color-filter function.
     # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
@@ -83,6 +93,8 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # 
     # \param ref If <tt>True</tt>, the reference self-overlap is returned; otherwise the aligned self-overlap.
     # 
+    # \return The self-overlap value.
+    # 
     def calcSelfOverlap(ref: bool) -> float: pass
 
     ##
@@ -90,10 +102,14 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # 
     # \param ref If <tt>True</tt>, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
     # 
+    # \return The color self-overlap value.
+    # 
     def calcColorSelfOverlap(ref: bool) -> float: pass
 
     ##
     # \brief Calculates the shape-only overlap of the reference and aligned shape functions.
+    # 
+    # \return The shape overlap value.
     # 
     def calcOverlap() -> float: pass
 
@@ -102,10 +118,14 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # 
     # \param coords The element 3D positions of the aligned shape.
     # 
+    # \return The shape overlap value.
+    # 
     def calcOverlap(coords: Math.Vector3DArray) -> float: pass
 
     ##
     # \brief Calculates the color overlap of the reference and aligned shape functions.
+    # 
+    # \return The color overlap value.
     # 
     def calcColorOverlap() -> float: pass
 
@@ -113,6 +133,8 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \brief Calculates the color overlap with the aligned shape element positions taken from <em>coords</em>.
     # 
     # \param coords The element 3D positions of the aligned shape.
+    # 
+    # \return The color overlap value.
     # 
     def calcColorOverlap(coords: Math.Vector3DArray) -> float: pass
 

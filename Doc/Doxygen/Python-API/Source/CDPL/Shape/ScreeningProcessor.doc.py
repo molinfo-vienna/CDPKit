@@ -53,15 +53,21 @@ class ScreeningProcessor(Boost.Python.instance):
     ##
     # \brief Sets the callback that is invoked for every alignment hit produced by process().
     # 
+    # \param func The hit-callback function.
+    # 
     def setHitCallback(func: VoidMolecularGraph2AlignmentResultFunctor) -> None: pass
 
     ##
     # \brief Returns the currently configured hit callback.
     # 
+    # \return A reference to the hit-callback function.
+    # 
     def getHitCallback() -> VoidMolecularGraph2AlignmentResultFunctor: pass
 
     ##
     # \brief Returns the current screening settings (mutable).
+    # 
+    # \return A reference to the screening settings.
     # 
     def getSettings() -> ScreeningSettings: pass
 
@@ -79,6 +85,8 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief Returns the number of query molecules.
+    # 
+    # \return The number of query molecules.
     # 
     def getQuerySetSize() -> int: pass
 

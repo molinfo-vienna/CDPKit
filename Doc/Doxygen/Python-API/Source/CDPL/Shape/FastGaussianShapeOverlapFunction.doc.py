@@ -65,30 +65,42 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     ##
     # \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions.
     # 
+    # \param enable <tt>True</tt> to enable the proximity check, and <tt>False</tt> to disable it.
+    # 
     def proximityOptimization(enable: bool) -> None: pass
 
     ##
     # \brief Tells whether the proximity-check pruning is enabled.
+    # 
+    # \return <tt>True</tt> if the proximity check is enabled, and <tt>False</tt> otherwise.
     # 
     def proximityOptimization() -> bool: pass
 
     ##
     # \brief Sets the scaling factor applied to van der Waals radii during the proximity check.
     # 
+    # \param factor The new radius scaling factor.
+    # 
     def setRadiusScalingFactor(factor: float) -> None: pass
 
     ##
     # \brief Returns the currently configured radius scaling factor.
+    # 
+    # \return The radius scaling factor.
     # 
     def getRadiusScalingFactor() -> float: pass
 
     ##
     # \brief Enables or disables the use of a fast approximation for the exponential function.
     # 
+    # \param enable <tt>True</tt> to enable the fast-exponential approximation, and <tt>False</tt> to use the standard exponential.
+    # 
     def fastExpFunction(enable: bool) -> None: pass
 
     ##
     # \brief Tells whether the fast-exponential approximation is enabled.
+    # 
+    # \return <tt>True</tt> if the fast-exponential approximation is enabled, and <tt>False</tt> otherwise.
     # 
     def fastExpFunction() -> bool: pass
 

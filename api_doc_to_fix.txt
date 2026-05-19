@@ -1,0 +1,13 @@
+‎Libs/C++/Include/CDPL/Pharm/ControlParameterFunctions.hpp (missing param and return value doc)
+‎Libs/C++/Include/CDPL/Shape/GaussianShapeAlignment.hpp (partially missing param and return value doc)
+‎Libs/C++/Include/CDPL/Shape/ScoringFunctions.hpp (partially missing param and return value doc)
+‎Libs/C++/Include/CDPL/Shape/ScoringFunctors.hpp (partially missing param and return value doc)
+‎Libs/C++/Include/CDPL/MolProp/AtomFunctions.hpp (partially missing param and return value doc)
+‎Libs/C++/Include/CDPL/MolProp/AtomFunctions.hpp (missing param and return value doc)
+
+============
+
+‎Libs/C++/Include/CDPL/MolProp/MolecularGraphFunctions.hpp ("ordinary" H definition; \since spec; Lipinski RO5)
+‎Libs/C++/Include/CDPL/Pharm/PatternBasedFeatureGenerator.hpp (check PatternAtomLabelFlag doc)
+‎Libs/C++/Include/CDPL/Pharm/PharmacophoreFitScore.hpp (check query_mode arg doc)
+‎Libs/C++/Include/CDPL/Shape/GaussianShapeFunctionAlignment.hpp‎ (insert BFGS reference)

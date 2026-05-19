@@ -139,70 +139,98 @@ class ScreeningSettings(Boost.Python.instance):
     ##
     # \brief Sets the scoring function used to rank alignment results.
     # 
+    # \param func The scoring function.
+    # 
     def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
     # \brief Returns the currently configured scoring function.
+    # 
+    # \return A reference to the scoring function.
     # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
     # \brief Sets the minimum score below which alignment hits are discarded (or NO_CUTOFF).
     # 
+    # \param cutoff The new score cutoff (or NO_CUTOFF to disable cutoff filtering).
+    # 
     def setScoreCutoff(cutoff: float) -> None: pass
 
     ##
     # \brief Returns the currently configured score cutoff (or NO_CUTOFF).
+    # 
+    # \return The score cutoff (or NO_CUTOFF if cutoff filtering is disabled).
     # 
     def getScoreCutoff() -> float: pass
 
     ##
     # \brief Sets the color feature type to use during alignment.
     # 
+    # \param type The new color-feature type.
+    # 
     def setColorFeatureType(type: ColorFeatureType) -> None: pass
 
     ##
     # \brief Returns the currently configured color feature type.
+    # 
+    # \return The color-feature type.
     # 
     def getColorFeatureType() -> ColorFeatureType: pass
 
     ##
     # \brief Sets the screening mode.
     # 
+    # \param mode The new screening mode.
+    # 
     def setScreeningMode(mode: ScreeningMode) -> None: pass
 
     ##
     # \brief Returns the currently configured screening mode.
+    # 
+    # \return The screening mode.
     # 
     def getScreeningMode() -> ScreeningMode: pass
 
     ##
     # \brief Sets the alignment-mode bitmask (see AlignmentMode).
     # 
+    # \param mode The new alignment-mode bitmask.
+    # 
     def setAlignmentMode(mode: AlignmentMode) -> None: pass
 
     ##
     # \brief Returns the currently configured alignment-mode bitmask.
+    # 
+    # \return The alignment-mode bitmask.
     # 
     def getAlignmentMode() -> AlignmentMode: pass
 
     ##
     # \brief Sets the number of random starting transformations when AlignmentMode.RANDOM is enabled.
     # 
+    # \param num_starts The new number of random starts.
+    # 
     def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
     # \brief Returns the currently configured number of random starts.
+    # 
+    # \return The number of random starts.
     # 
     def getNumRandomStarts() -> int: pass
 
     ##
     # \brief Enables or disables the all-carbon mode (treats every heavy atom as carbon for shape generation).
     # 
+    # \param all_c <tt>True</tt> to enable the all-carbon mode, and <tt>False</tt> to use the actual atom types.
+    # 
     def allCarbonMode(all_c: bool) -> None: pass
 
     ##
     # \brief Tells whether the all-carbon mode is enabled.
+    # 
+    # \return <tt>True</tt> if the all-carbon mode is enabled, and <tt>False</tt> otherwise.
     # 
     def allCarbonMode() -> bool: pass
 
@@ -215,45 +243,63 @@ class ScreeningSettings(Boost.Python.instance):
     ##
     # \brief Tells whether only a single conformer of each molecule is considered.
     # 
+    # \return <tt>True</tt> if only a single conformer is considered, and <tt>False</tt> otherwise.
+    # 
     def singleConformerSearch() -> bool: pass
 
     ##
     # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
+    # \param max_iter The new maximum number of iterations.
     # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
     # \brief Returns the currently configured maximum number of overlap-optimization iterations.
     # 
+    # \return The maximum number of iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
     # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
+    # \param grad_norm The new stop gradient norm.
     # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief Returns the currently configured overlap-optimization stop gradient.
     # 
+    # \return The stop gradient norm.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
     # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
+    # \param optimize <tt>True</tt> to optimize the overlap, and <tt>False</tt> to skip optimization.
     # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
     # \brief Tells whether the overlap is optimized iteratively.
     # 
+    # \return <tt>True</tt> if the overlap is optimized, and <tt>False</tt> otherwise.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
     # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
     # 
+    # \param greedy <tt>True</tt> to use the greedy strategy, and <tt>False</tt> to use the full optimization.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
     # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
+    # \return <tt>True</tt> if the greedy strategy is used, and <tt>False</tt> otherwise.
     # 
     def greedyOptimization() -> bool: pass
 
