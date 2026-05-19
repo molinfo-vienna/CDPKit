@@ -378,7 +378,8 @@ namespace CDPL
 #ifdef CDPL_MATH_CHECKS_DISABLE
                 GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform);
 #else
-                CDPL_MATH_CHECK(GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform), "Inversion of transformation failed", Base::CalculationFailed);
+                CDPL_MATH_CHECK(GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform),
+                                "Inversion of transformation failed", Base::CalculationFailed);
 #endif // CDPL_MATH_CHECKS_DISABLE
             }
 
