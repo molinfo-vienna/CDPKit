@@ -57,46 +57,86 @@ namespace CDPL
 
         class AlignmentResult;
 
+        /**
+         * \brief High-level driver for shape-based virtual screening of molecular databases.
+         *
+         * The processor maintains a set of query molecules and aligns each incoming database
+         * molecule against all of them, reporting alignment hits through a user-supplied callback.
+         * The behaviour (similarity score type, shape generation, alignment options, etc.) is
+         * configured via the embedded Shape::ScreeningSettings instance.
+         */
         class CDPL_SHAPE_API ScreeningProcessor
         {
 
             typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ScreeningProcessor instances. */
             typedef std::shared_ptr<ScreeningProcessor>                                                                   SharedPointer;
+            /** \brief A constant iterator over the query molecules. */
             typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph>              ConstMolecularGraphIterator;
+            /** \brief Type of the callback invoked for each alignment hit (arguments: query, hit, alignment result). */
             typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
+            /** \brief Constructs an empty \c %ScreeningProcessor instance. */
             ScreeningProcessor();
 
+            /**
+             * \brief Constructs a \c %ScreeningProcessor instance with \a query as the single query molecule.
+             * \param query The query molecule.
+             */
             ScreeningProcessor(const Chem::MolecularGraph& query);
 
             ScreeningProcessor(const ScreeningProcessor& proc) = delete;
-              
+
+            /** \brief Destructor. */
             ~ScreeningProcessor();
 
             ScreeningProcessor& operator=(const ScreeningProcessor& proc) = delete;
 
+            /** \brief Sets the callback that is invoked for every alignment hit produced by process(). */
             void setHitCallback(const HitCallbackFunction& func);
 
+            /** \brief Returns the currently configured hit callback. */
             const HitCallbackFunction& getHitCallback() const;
 
+            /** \brief Returns the current screening settings. */
             const ScreeningSettings& getSettings() const;
 
+            /** \brief Returns the current screening settings (mutable). */
             ScreeningSettings& getSettings();
 
+            /** \brief Removes all query molecules. */
             void clearQuerySet();
 
+            /**
+             * \brief Adds \a molgraph to the query set.
+             * \param molgraph The query molecule.
+             */
             void addQuery(const Chem::MolecularGraph& molgraph);
 
+            /** \brief Returns the number of query molecules. */
             std::size_t getQuerySetSize() const;
 
+            /**
+             * \brief Returns the query molecule at index \a idx.
+             * \param idx The zero-based index of the query molecule.
+             * \return A \c const reference to the query molecule.
+             * \throw Base::IndexError if the number of query molecules is zero or \a idx is not in the range [0, getQuerySetSize() - 1].
+             */
             const Chem::MolecularGraph& getQuery(std::size_t idx) const;
 
+            /** \brief Returns a constant iterator pointing to the first query molecule. */
             ConstMolecularGraphIterator getQuerySetBegin() const;
 
+            /** \brief Returns a constant iterator pointing one past the last query molecule. */
             ConstMolecularGraphIterator getQuerySetEnd() const;
 
+            /**
+             * \brief Processes the database molecule \a molgraph, aligning it against all query molecules.
+             * \param molgraph The database molecule.
+             * \return \c true if at least one alignment hit was produced for \a molgraph, and \c false otherwise.
+             */
             bool process(const Chem::MolecularGraph& molgraph);
 
           private:

@@ -43,12 +43,14 @@ namespace CDPL
     {
 
         /**
-         * \brief PharmacophoreGenerator.
+         * \brief Base class for pharmacophore generators that orchestrate per-feature-type Pharm::FeatureGenerator
+         *        instances to produce the features of a Pharm::Pharmacophore from a Chem::MolecularGraph.
          */
         class CDPL_PHARM_API PharmacophoreGenerator
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PharmacophoreGenerator instances. */
             typedef std::shared_ptr<PharmacophoreGenerator> SharedPointer;
 
             /**
@@ -56,10 +58,20 @@ namespace CDPL
              */
             PharmacophoreGenerator();
 
+            /**
+             * \brief Constructs a copy of the \c %PharmacophoreGenerator instance \a gen.
+             * \param gen The \c %PharmacophoreGenerator to copy.
+             */
             PharmacophoreGenerator(const PharmacophoreGenerator& gen);
 
+            /** \brief Virtual destructor. */
             virtual ~PharmacophoreGenerator() {}
 
+            /**
+             * \brief Copy assignment operator.
+             * \param gen The \c %PharmacophoreGenerator instance to copy.
+             * \return A reference to itself.
+             */
             PharmacophoreGenerator& operator=(const PharmacophoreGenerator& gen);
 
             /**
@@ -106,7 +118,7 @@ namespace CDPL
             FeatureGenerator::SharedPointer getFeatureGenerator(unsigned int type) const;
 
             /**
-             * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
+             * \brief Perceives the enabled pharmacophore features of the molecular graph \a molgraph
              *        and adds them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The pharmacophore instance where the generated output features get appended.
@@ -126,6 +138,10 @@ namespace CDPL
              */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+            /**
+             * \brief Creates a deep copy of the \c %PharmacophoreGenerator instance (including all registered feature generators).
+             * \return A smart pointer to the cloned generator.
+             */
             SharedPointer clone() const;
 
           private:

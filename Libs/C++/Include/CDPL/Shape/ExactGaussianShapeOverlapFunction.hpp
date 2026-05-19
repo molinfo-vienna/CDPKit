@@ -43,19 +43,38 @@ namespace CDPL
 
         class GaussianProductList;
 
+        /**
+         * \brief Shape::GaussianShapeOverlapFunction implementation that evaluates the overlap
+         *        analytically using the full Gaussian-product expansion (no approximations).
+         *
+         * The exact evaluation is more accurate but typically slower than
+         * Shape::FastGaussianShapeOverlapFunction.
+         */
         class CDPL_SHAPE_API ExactGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ExactGaussianShapeOverlapFunction instances. */
             typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
 
+            /** \brief Constructs the \c %ExactGaussianShapeOverlapFunction instance without associated shape functions. */
             ExactGaussianShapeOverlapFunction();
 
+            /**
+             * \brief Constructs a copy of the \c %ExactGaussianShapeOverlapFunction instance \a func.
+             * \param func The \c %ExactGaussianShapeOverlapFunction to copy.
+             */
             ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func);
 
+            /**
+             * \brief Constructs the \c %ExactGaussianShapeOverlapFunction instance with the given reference and aligned shape functions.
+             * \param ref_shape_func The reference shape function.
+             * \param ovl_shape_func The aligned shape function.
+             */
             ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                               const GaussianShapeFunction& ovl_shape_func);
 
+            /** \brief Destructor. */
             ~ExactGaussianShapeOverlapFunction();
 
             void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
@@ -84,6 +103,11 @@ namespace CDPL
 
             double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
+            /**
+             * \brief Copy assignment operator.
+             * \param func The other \c %ExactGaussianShapeOverlapFunction instance.
+             * \return A reference to itself.
+             */
             ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
 
           private:

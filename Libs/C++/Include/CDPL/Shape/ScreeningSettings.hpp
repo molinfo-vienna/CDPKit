@@ -44,89 +44,145 @@ namespace CDPL
 
         class AlignmentResult;
 
+        /**
+         * \brief Bundle of configuration parameters for Shape::ScreeningProcessor.
+         *
+         * The settings select the scoring function, the type of color (pharmacophore) features used,
+         * the screening mode (e.g. best-overall vs. best-per-query), the alignment-start strategy,
+         * and the parameters of the iterative overlap optimization.
+         */
         class CDPL_SHAPE_API ScreeningSettings
         {
 
           public:
+            /** \brief A static instance with default-initialized values. */
             static const ScreeningSettings DEFAULT;
+
+            /** \brief Sentinel value (NaN) used to disable the score cutoff. */
             static constexpr double        NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
 
+            /** \brief Type of the function used to score an alignment result. */
             typedef std::function<double(const AlignmentResult&)> ScoringFunction;
 
+            /**
+             * \brief Specifies which alignment hits are reported by the screening processor.
+             */
             enum ScreeningMode
             {
 
+                /** \brief Report only the single best-scoring alignment hit across all queries. */
                 BEST_OVERALL_MATCH,
+                /** \brief Report the best-scoring alignment hit per query molecule. */
                 BEST_MATCH_PER_QUERY,
+                /** \brief Report the best-scoring alignment hit per (query, query conformer) pair. */
                 BEST_MATCH_PER_QUERY_CONF
             };
 
+            /**
+             * \brief Specifies which kind of color (pharmacophore) features are used during shape alignment.
+             */
             enum ColorFeatureType
             {
 
+                /** \brief Disable color features (shape-only alignment). */
                 NO_FEATURES,
+                /** \brief Use pharmacophore features derived from explicit charges. */
                 PHARMACOPHORE_EXP_CHARGES,
+                /** \brief Use pharmacophore features derived from perceived (implicit) charges. */
                 PHARMACOPHORE_IMP_CHARGES
             };
 
+            /**
+             * \brief Bitmask flags specifying the strategies used to seed alignment starting transformations.
+             */
             enum AlignmentMode
             {
 
+                /** \brief Disable alignment entirely (overlap is computed in the input pose only). */
                 NO_ALIGNMENT          = 0x0,
+                /** \brief Place the aligned shape at the centroid of the reference shape. */
                 SHAPE_CENTROID        = 0x1,
+                /** \brief Seed alignments by superimposing pairs of atom centers. */
                 ATOM_CENTERS          = 0x2,
+                /** \brief Seed alignments by superimposing pairs of color (pharmacophore) feature centers. */
                 COLOR_FEATURE_CENTERS = 0x4,
+                /** \brief Seed alignments with random rotations. */
                 RANDOM                = 0x8
             };
 
+            /** \brief Constructs a \c %ScreeningSettings instance with default values. */
             ScreeningSettings();
 
+            /** \brief Sets the scoring function used to rank alignment results. */
             void setScoringFunction(const ScoringFunction& func);
 
+            /** \brief Returns the currently configured scoring function. */
             const ScoringFunction& getScoringFunction() const;
 
+            /** \brief Sets the color feature type to use during alignment. */
             void setColorFeatureType(ColorFeatureType type);
 
+            /** \brief Returns the currently configured color feature type. */
             ColorFeatureType getColorFeatureType() const;
 
+            /** \brief Sets the screening mode. */
             void setScreeningMode(ScreeningMode mode);
 
+            /** \brief Returns the currently configured screening mode. */
             ScreeningMode getScreeningMode() const;
 
+            /** \brief Sets the alignment-mode bitmask (see AlignmentMode). */
             void setAlignmentMode(AlignmentMode mode);
 
+            /** \brief Returns the currently configured alignment-mode bitmask. */
             AlignmentMode getAlignmentMode() const;
 
+            /** \brief Sets the number of random starting transformations when AlignmentMode::RANDOM is enabled. */
             void setNumRandomStarts(std::size_t num_starts);
 
+            /** \brief Returns the currently configured number of random starts. */
             std::size_t getNumRandomStarts() const;
 
+            /** \brief Enables or disables the all-carbon mode (treats every heavy atom as carbon for shape generation). */
             void allCarbonMode(bool all_c);
 
+            /** \brief Tells whether the all-carbon mode is enabled. */
             bool allCarbonMode() const;
 
+            /** \brief Specifies whether only a single conformer of each molecule is considered. */
             void singleConformerSearch(bool single_conf);
 
+            /** \brief Tells whether only a single conformer of each molecule is considered. */
             bool singleConformerSearch() const;
 
+            /** \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment. */
             void optimizeOverlap(bool optimize);
 
+            /** \brief Tells whether the overlap is optimized iteratively. */
             bool optimizeOverlap() const;
 
+            /** \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum. */
             void greedyOptimization(bool greedy);
 
+            /** \brief Tells whether the overlap optimization uses a greedy strategy. */
             bool greedyOptimization() const;
 
+            /** \brief Sets the maximum number of overlap-optimization iterations. */
             void setMaxNumOptimizationIterations(std::size_t max_iter);
 
+            /** \brief Returns the currently configured maximum number of overlap-optimization iterations. */
             std::size_t getMaxNumOptimizationIterations() const;
 
+            /** \brief Sets the gradient norm at which the overlap optimization is stopped. */
             void setOptimizationStopGradient(double grad_norm);
 
+            /** \brief Returns the currently configured overlap-optimization stop gradient. */
             double getOptimizationStopGradient() const;
 
+            /** \brief Sets the minimum score below which alignment hits are discarded (or NO_CUTOFF). */
             void setScoreCutoff(double cutoff);
 
+            /** \brief Returns the currently configured score cutoff (or NO_CUTOFF). */
             double getScoreCutoff() const;
 
           private:

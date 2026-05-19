@@ -43,19 +43,57 @@ namespace CDPL
 
         class GaussianShapeFunction;
 
+        /**
+         * \brief Calculates the eigen-decomposition of a 3x3 quadrupole tensor.
+         * \param quad_tensor The input symmetric quadrupole tensor.
+         * \param eigen_vecs The output eigenvector matrix (columns are eigenvectors).
+         * \param eigen_vals The output eigenvalues.
+         */
         CDPL_SHAPE_API void calcQuadrupoleTensorEigenDecomposition(const Math::Matrix3D& quad_tensor, Math::Matrix3D& eigen_vecs,
                                                                    Math::Vector3D& eigen_vals);
 
+        /**
+         * \brief Calculates the principal axes and principal moments of a quadrupole tensor.
+         * \param quad_tensor The input symmetric quadrupole tensor.
+         * \param x_axis The output principal x-axis.
+         * \param y_axis The output principal y-axis.
+         * \param z_axis The output principal z-axis.
+         * \param moments The output principal moments.
+         */
         CDPL_SHAPE_API void calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D& x_axis, Math::Vector3D& y_axis,
                                               Math::Vector3D& z_axis, Math::Vector3D& moments);
 
+        /**
+         * \brief Classifies the rotational symmetry of a shape from its principal moments (see namespace Shape::SymmetryClass).
+         * \param moments The principal moments.
+         * \param eq_thresh The relative threshold below which two moments are considered equal.
+         * \return The perceived symmetry class.
+         */
         CDPL_SHAPE_API unsigned int perceiveSymmetryClass(const Math::Vector3D& moments, double eq_thresh = 0.15);
 
+        /**
+         * \brief Calculates the affine transformations that align a Gaussian shape to its center of mass and back.
+         * \param func The Gaussian shape function.
+         * \param to_ctr_xform The output transformation that places the shape at its center of mass with principal axes aligned to the coordinate axes.
+         * \param from_ctr_xform The output inverse transformation.
+         * \param mom_eq_thresh The relative threshold below which two principal moments are considered equal.
+         * \return The perceived symmetry class of the shape (see namespace Shape::SymmetryClass).
+         */
         CDPL_SHAPE_API unsigned int calcCenterAlignmentTransforms(const Shape::GaussianShapeFunction& func, Math::Matrix4D& to_ctr_xform,
                                                                   Math::Matrix4D& from_ctr_xform, double mom_eq_thresh = 0.15);
 
+        /**
+         * \brief Converts an affine 4x4 transformation matrix to a quaternion-plus-translation representation.
+         * \param mtx The input transformation matrix.
+         * \param quat The output Shape::QuaternionTransformation (4 quaternion + 3 translation components).
+         */
         CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
+        /**
+         * \brief Converts a quaternion-plus-translation representation back to an affine 4x4 transformation matrix.
+         * \param quat The input Shape::QuaternionTransformation (4 quaternion + 3 translation components).
+         * \param mtx The output transformation matrix.
+         */
         CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);
     } // namespace Shape
 } // namespace CDPL

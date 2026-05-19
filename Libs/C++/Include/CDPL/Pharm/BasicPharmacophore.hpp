@@ -46,7 +46,8 @@ namespace CDPL
     {
 
         /**
-         * \brief BasicPharmacophore.
+         * \brief Concrete Pharm::Pharmacophore implementation that owns its features as Pharm::BasicFeature
+         *        instances managed through an internal object pool.
          */
         class CDPL_PHARM_API BasicPharmacophore : public Pharmacophore
         {

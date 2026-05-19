@@ -55,17 +55,58 @@ namespace CDPL
         class GaussianShape;
         class GaussianShapeFunction;
 
+        /**
+         * \brief Builds a Gaussian shape from the atoms of \a atoms (using the default atom 3D coordinates accessor).
+         * \param atoms The atom container.
+         * \param shape The output Gaussian shape.
+         * \param append If \c true, the new elements are appended to \a shape; otherwise \a shape is cleared first.
+         * \param radius The sphere radius to use for all atoms, or a negative value to use atom-specific van der Waals radii.
+         * \param inc_h If \c true, hydrogen atoms are also included in the shape.
+         * \param p The Gaussian hardness used for all generated spheres.
+         */
         CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
                                                   bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
 
+        /**
+         * \brief Builds a Gaussian shape from the atoms of \a atoms using \a coords_func to retrieve atom positions.
+         * \param atoms The atom container.
+         * \param shape The output Gaussian shape.
+         * \param coords_func The function used to retrieve atom 3D-coordinates.
+         * \param append If \c true, the new elements are appended to \a shape; otherwise \a shape is cleared first.
+         * \param radius The sphere radius to use for all atoms, or a negative value to use atom-specific van der Waals radii.
+         * \param inc_h If \c true, hydrogen atoms are also included in the shape.
+         * \param p The Gaussian hardness used for all generated spheres.
+         */
         CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape, const Chem::Atom3DCoordinatesFunction& coords_func,
                                                   bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
 
+        /**
+         * \brief Builds a Gaussian shape from the pharmacophore features of \a features.
+         * \param features The feature container.
+         * \param shape The output Gaussian shape.
+         * \param append If \c true, the new elements are appended to \a shape; otherwise \a shape is cleared first.
+         * \param radius The sphere radius to use for all features, or a negative value to use feature-specific tolerances.
+         * \param inc_xv If \c true, exclusion-volume features are also included in the shape.
+         * \param p The Gaussian hardness used for all generated spheres.
+         */
         CDPL_SHAPE_API void generateGaussianShape(const Pharm::FeatureContainer& features, GaussianShape& shape,
                                                   bool append = false, double radius = -1.0, bool inc_xv = false, double p = 5.0);
 
+        /**
+         * \brief Applies an affine transformation to the element positions of \a shape.
+         * \param shape The Gaussian shape to transform (modified in place).
+         * \param xform The 4x4 transformation matrix.
+         */
         CDPL_SHAPE_API void transform(GaussianShape& shape, const Math::Matrix4D& xform);
 
+        /**
+         * \brief Centers \a shape at its centroid and aligns its principal axes with the coordinate axes.
+         * \param shape The Gaussian shape to align (modified in place).
+         * \param func The associated Shape::GaussianShapeFunction used to compute the principal axes.
+         * \param back_xform The output transformation that maps the aligned shape back to its original frame.
+         * \param mom_eq_thresh The relative threshold below which two principal moments are considered equal.
+         * \return The perceived symmetry class of the shape (see namespace Shape::SymmetryClass).
+         */
         CDPL_SHAPE_API unsigned int centerAndAlignPrincipalAxes(GaussianShape& shape, const GaussianShapeFunction& func, Math::Matrix4D& back_xform,
                                                                 double mom_eq_thresh = 0.15);
     } // namespace Shape

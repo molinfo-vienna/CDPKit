@@ -54,16 +54,35 @@ namespace CDPL
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FunctionalGroupList instances. */
             typedef std::shared_ptr<FunctionalGroupList> SharedPointer;
 
+            /** \brief Constructs an empty \c %FunctionalGroupList instance. */
             FunctionalGroupList();
 
+            /**
+             * \brief Constructs a copy of the \c %FunctionalGroupList instance \a fg_list.
+             * \param fg_list The \c %FunctionalGroupList to copy.
+             */
             FunctionalGroupList(const FunctionalGroupList& fg_list);
- 
+
+            /**
+             * \brief Constructs a \c %FunctionalGroupList instance and extracts the functional groups of \a molgraph.
+             * \param molgraph The molecular graph for which to extract the functional groups.
+             */
             FunctionalGroupList(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Replaces the contents of this list with a copy of \a fg_list.
+             * \param fg_list The source list.
+             * \return A reference to itself.
+             */
             FunctionalGroupList& operator=(FunctionalGroupList& fg_list);
-            
+
+            /**
+             * \brief Extracts the functional groups of \a molgraph and stores them as fragments of this list.
+             * \param molgraph The molecular graph for which to extract the functional groups.
+             */
             void extract(const Chem::MolecularGraph& molgraph);
 
           private:

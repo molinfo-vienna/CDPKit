@@ -42,7 +42,7 @@ namespace CDPL
         class BasicPharmacophore;
 
         /**
-         * \brief BasicFeature.
+         * \brief Pharm::Feature implementation owned by a Pharm::BasicPharmacophore parent.
          */
         class CDPL_PHARM_API BasicFeature : public Feature
         {

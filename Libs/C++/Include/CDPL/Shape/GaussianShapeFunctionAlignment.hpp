@@ -48,6 +48,15 @@ namespace CDPL
     namespace Shape
     {
 
+        /**
+         * \brief Driver for the alignment of one Shape::GaussianShapeFunction (the aligned shape)
+         *        against a fixed reference Shape::GaussianShapeFunction.
+         *
+         * The alignment iterates over starting transformations produced by a configurable
+         * Shape::GaussianShapeAlignmentStartGenerator, optionally refines each start via BFGS
+         * minimization of the overlap function, and collects the resulting transformations and
+         * overlap values in Result instances.
+         */
         class CDPL_SHAPE_API GaussianShapeFunctionAlignment
         {
 
@@ -58,33 +67,53 @@ namespace CDPL
             typedef std::vector<Result> ResultList;
 
           public:
+            /** \brief Default gradient norm at which the overlap optimization is stopped. */
             static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT       = 1.0;
+
+            /** \brief Default maximum number of overlap-optimization iterations. */
             static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GaussianShapeFunctionAlignment instances. */
             typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 
+            /** \brief A constant iterator over the alignment results. */
             typedef ResultList::const_iterator ConstResultIterator;
 
+            /** \brief Type of the function used to filter color (pharmacophore) features by type. */
             typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
+
+            /** \brief Type of the function used to decide whether two color features match. */
             typedef GaussianShapeOverlapFunction::ColorMatchFunction  ColorMatchFunction;
 
+            /**
+             * \brief A single alignment result: rigid-body transformation plus shape and color overlap values.
+             */
             class Result
             {
 
               public:
+                /**
+                 * \brief Constructs a \c %Result with the given values.
+                 * \param xform The rigid-body transformation.
+                 * \param overlap The shape overlap value.
+                 * \param col_overlap The color overlap value.
+                 */
                 Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
                     transform(xform), overlap(overlap), colOverlap(col_overlap) {}
 
+                /** \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape. */
                 const Math::Matrix4D& getTransform() const
                 {
                     return transform;
                 }
 
+                /** \brief Returns the shape overlap value of the alignment. */
                 double getOverlap() const
                 {
                     return overlap;
                 }
 
+                /** \brief Returns the color overlap value of the alignment. */
                 double getColorOverlap() const
                 {
                     return colOverlap;
@@ -101,88 +130,167 @@ namespace CDPL
                 double         colOverlap;
             };
 
+            /** \brief Constructs the \c %GaussianShapeFunctionAlignment instance without a reference shape. */
             GaussianShapeFunctionAlignment();
 
+            /**
+             * \brief Constructs the \c %GaussianShapeFunctionAlignment instance with the given reference shape function.
+             * \param ref_func The reference shape function.
+             * \param sym_class The symmetry class of the reference shape (see namespace Shape::SymmetryClass).
+             */
             GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class);
 
             GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment) = delete;
-            
+
+            /** \brief Destructor. */
             ~GaussianShapeFunctionAlignment();
 
             GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment) = delete;
- 
+
+            /** \brief Specifies the Gaussian-shape overlap function used during alignment. */
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
 
+            /** \brief Returns the currently configured overlap function. */
             GaussianShapeOverlapFunction& getOverlapFunction() const;
 
+            /** \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction). */
             const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
 
+            /** \brief Returns the built-in default overlap function (Shape::FastGaussianShapeOverlapFunction). */
             FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
+            /** \brief Specifies the alignment-start generator used to seed the overlap optimization. */
             void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
 
+            /** \brief Returns the currently configured alignment-start generator. */
             GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
+            /** \brief Returns the built-in default principal-axes alignment-start generator. */
             const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
 
+            /** \brief Returns the built-in default principal-axes alignment-start generator. */
             PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
 
+            /** \brief Specifies the function used to decide whether two color features match. */
             void setColorMatchFunction(const ColorMatchFunction& func);
 
+            /** \brief Returns the currently configured color-match function. */
             const ColorMatchFunction& getColorMatchFunction() const;
 
+            /** \brief Specifies the function used to filter color features by type. */
             void setColorFilterFunction(const ColorFilterFunction& func);
 
+            /** \brief Returns the currently configured color-filter function. */
             const ColorFilterFunction& getColorFilterFunction() const;
 
+            /** \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose). */
             void performAlignment(bool perf_align);
 
+            /** \brief Tells whether the actual alignment is performed. */
             bool performAlignment() const;
 
+            /** \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment. */
             void optimizeOverlap(bool optimize);
 
+            /** \brief Tells whether the overlap is optimized iteratively. */
             bool optimizeOverlap() const;
 
+            /** \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum. */
             void greedyOptimization(bool greedy);
 
+            /** \brief Tells whether the overlap optimization uses a greedy strategy. */
             bool greedyOptimization() const;
 
+            /** \brief Sets the maximum number of overlap-optimization iterations. */
             void setMaxNumOptimizationIterations(std::size_t max_iter);
 
+            /** \brief Returns the currently configured maximum number of overlap-optimization iterations. */
             std::size_t getMaxNumOptimizationIterations() const;
 
+            /** \brief Sets the gradient norm at which the overlap optimization is stopped. */
             void setOptimizationStopGradient(double grad_norm);
 
+            /** \brief Returns the currently configured overlap-optimization stop gradient. */
             double getOptimizationStopGradient() const;
 
+            /**
+             * \brief Delegates the reference-shape preparation to the configured start generator.
+             * \param func The reference shape function (may be modified).
+             * \param xform The output transformation that maps the prepared frame back to the original frame.
+             * \return The perceived symmetry class of the reference shape (see namespace Shape::SymmetryClass).
+             */
             unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
+            /**
+             * \brief Delegates the aligned-shape preparation to the configured start generator.
+             * \param func The aligned shape function (may be modified).
+             * \param xform The output transformation that maps the prepared frame back to the original frame.
+             * \return The perceived symmetry class of the aligned shape (see namespace Shape::SymmetryClass).
+             */
             unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
+            /**
+             * \brief Sets the reference shape function used by subsequent align() calls.
+             * \param func The reference shape function.
+             * \param sym_class The symmetry class of the reference shape (see namespace Shape::SymmetryClass).
+             */
             void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
+            /**
+             * \brief Returns the current reference shape function (or \c nullptr if none is set).
+             * \return A pointer to the reference shape function.
+             */
             const GaussianShapeFunction* getReference() const;
 
+            /**
+             * \brief Calculates the shape-only self-overlap of \a func using the configured overlap function.
+             * \param func The shape function.
+             * \return The self-overlap value.
+             */
             double calcSelfOverlap(const GaussianShapeFunction& func);
 
+            /**
+             * \brief Calculates the color self-overlap of \a func using the configured overlap function.
+             * \param func The shape function.
+             * \return The color self-overlap value.
+             */
             double calcColorSelfOverlap(const GaussianShapeFunction& func);
 
+            /** \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps. */
             void calcColorOverlaps(bool calc);
 
+            /** \brief Tells whether color overlaps are evaluated. */
             bool calcColorOverlaps() const;
 
+            /**
+             * \brief Aligns the shape function \a func against the configured reference shape.
+             * \param func The aligned shape function.
+             * \param sym_class The symmetry class of the aligned shape (see namespace Shape::SymmetryClass).
+             * \return \c true if at least one alignment result was produced, and \c false otherwise.
+             */
             bool align(const GaussianShapeFunction& func, unsigned int sym_class);
 
+            /** \brief Returns the number of alignment results produced by the last align() call. */
             std::size_t getNumResults() const;
 
+            /**
+             * \brief Returns the alignment result at index \a idx.
+             * \param idx The zero-based result index.
+             * \return A \c const reference to the result.
+             * \throw Base::IndexError if the number of results is zero or \a idx is not in the range [0, getNumResults() - 1].
+             */
             const Result& getResult(std::size_t idx) const;
 
+            /** \brief Returns a constant iterator pointing to the first alignment result. */
             ConstResultIterator getResultsBegin() const;
 
+            /** \brief Returns a constant iterator pointing one past the last alignment result. */
             ConstResultIterator getResultsEnd() const;
 
+            /** \brief Returns a constant iterator pointing to the first alignment result (range-based for support). */
             ConstResultIterator begin() const;
 
+            /** \brief Returns a constant iterator pointing one past the last alignment result (range-based for support). */
             ConstResultIterator end() const;
 
           private:

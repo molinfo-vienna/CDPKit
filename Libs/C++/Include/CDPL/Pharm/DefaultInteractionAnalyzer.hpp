@@ -40,7 +40,8 @@ namespace CDPL
     {
 
         /**
-         * \brief DefaultInteractionAnalyzer.
+         * \brief Interaction analyzer pre-configured with the built-in default set of interaction constraints
+         *        (hydrogen-bonding, ionic, aromatic-aromatic, cation-&pi;, hydrophobic, halogen-bonding).
          */
         class CDPL_PHARM_API DefaultInteractionAnalyzer : public InteractionAnalyzer
         {
@@ -51,6 +52,13 @@ namespace CDPL
              */
             DefaultInteractionAnalyzer();
 
+            /**
+             * \brief Constructs the \c %DefaultInteractionAnalyzer instance and immediately analyses the interactions
+             *        between the features of \a cntnr1 and \a cntnr2.
+             * \param cntnr1 The first feature container.
+             * \param cntnr2 The second feature container.
+             * \param interactions The output feature mapping populated with the detected interactions.
+             */
             DefaultInteractionAnalyzer(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& interactions);
 
           private:

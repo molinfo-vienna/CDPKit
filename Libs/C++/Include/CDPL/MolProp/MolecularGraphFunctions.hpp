@@ -51,10 +51,25 @@ namespace CDPL
     namespace MolProp
     {
 
+        /**
+         * \brief Calculates the total molecular mass of \a molgraph (sum of atom standard atomic weights including implicit hydrogens).
+         * \param molgraph The molecular graph.
+         * \return The molecular mass.
+         */
         CDPL_MOLPROP_API double calcMass(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the per-element mass composition of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \param comp The output mass composition.
+         */
         CDPL_MOLPROP_API void calcMassComposition(const Chem::MolecularGraph& molgraph, MassComposition& comp);
 
+        /**
+         * \brief Generates a string representation of the per-element mass composition of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \param comp The output mass composition string.
+         */
         CDPL_MOLPROP_API void generateMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp);
 
         /**
@@ -65,78 +80,166 @@ namespace CDPL
          */
         CDPL_MOLPROP_API void generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula, const std::string& sep = std::string());
 
+        /**
+         * \brief Generates the element histogram of \a molgraph.
+         * \param molgraph The molecular graph.
+         * \param hist The output element histogram.
+         * \param append If \c true, \a hist is appended to instead of cleared first.
+         */
         CDPL_MOLPROP_API void generateElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
 
+        /**
+         * \brief Calculates the cyclomatic number of \a molgraph (number of independent cycles).
+         * \param molgraph The molecular graph.
+         * \return The cyclomatic number.
+         */
         CDPL_MOLPROP_API std::size_t calcCyclomaticNumber(const Chem::MolecularGraph& molgraph);
 
 
+        /** \brief Returns the total number of atoms in \a molgraph (including implicit hydrogens). */
         CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Returns the number of atoms in \a molgraph that match the given atom type. */
         CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
 
+        /** \brief Returns the total number of implicit hydrogens in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getImplicitHydrogenCount(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Returns the number of ordinary hydrogens in \a molgraph.
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary".
+         */
         CDPL_MOLPROP_API std::size_t getOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
 
+        /**
+         * \brief Returns the number of explicit ordinary hydrogens in \a molgraph.
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary".
+         */
         CDPL_MOLPROP_API std::size_t getExplicitOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
 
+        /** \brief Returns the number of chain (non-ring) atoms in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getChainAtomCount(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Returns the number of H-bond acceptor atoms in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getHBondAcceptorAtomCount(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Returns the number of H-bond donor atoms in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getHBondDonorAtomCount(const Chem::MolecularGraph& molgraph);
 
 
+        /** \brief Returns the total number of bonds in \a molgraph (including bonds to implicit hydrogens). */
         CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Returns the number of bonds in \a molgraph with the given order, optionally including aromatic bonds. */
         CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph, std::size_t order, bool inc_aro = true);
 
+        /** \brief Returns the number of bonds in \a molgraph that involve at least one hydrogen atom. */
         CDPL_MOLPROP_API std::size_t getHydrogenBondCount(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Returns the number of chain (non-ring) bonds in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getChainBondCount(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Returns the number of rotatable bonds in \a molgraph.
+         * \param h_rotors If \c true, hydrogen-only rotors are counted.
+         * \param ring_bonds If \c true, ring bonds are also considered.
+         * \param amide_bonds If \c true, amide bonds are also considered.
+         */
         CDPL_MOLPROP_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
 
+        /** \brief Returns the number of connected components in \a molgraph. */
         CDPL_MOLPROP_API std::size_t getComponentCount(const Chem::MolecularGraph& molgraph);
 
 
+        /**
+         * \brief Calculates the \e XLogP value of \a molgraph using MolProp::XLogPCalculator.
+         * \see [\ref XLOGP]
+         */
         CDPL_MOLPROP_API double calcXLogP(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the \f$ \log S \f$ (aqueous solubility) of \a molgraph using MolProp::LogSCalculator.
+         * \see [\ref LOGS]
+         */
         CDPL_MOLPROP_API double calcLogS(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates the topological polar surface area (TPSA) of \a molgraph using MolProp::TPSACalculator.
+         * \see [\ref TPSA]
+         */
         CDPL_MOLPROP_API double calcTPSA(const Chem::MolecularGraph& molgraph);
 
 
+        /** \brief Returns the Lipinski rule-of-five violation score of \a molgraph (number of failed criteria, 0-4). */
         CDPL_MOLPROP_API std::size_t getRuleOfFiveScore(const Chem::MolecularGraph& molgraph);
 
 
+        /** \brief Calculates the mean atomic polarizability of \a molgraph. */
         CDPL_MOLPROP_API double calcMeanPolarizability(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Calculates PEOE sigma charges and electronegativities for the atoms of \a molgraph and stores them as atom properties.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, existing atom properties are overwritten; otherwise only atoms without the property are populated.
+         * \param num_iter The number of charge-shifting iterations.
+         * \param damping The per-iteration damping factor.
+         */
         CDPL_MOLPROP_API void calcPEOEProperties(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 20,
                                                  double damping = 0.48);
 
+        /**
+         * \brief Calculates MHMO pi charges and pi-bond orders for \a molgraph and stores them as atom/bond properties.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, existing atom/bond properties are overwritten.
+         */
         CDPL_MOLPROP_API void calcMHMOProperties(Chem::MolecularGraph& molgraph, bool overwrite);
 
+        /**
+         * \brief Calculates per-atom hydrophobicities for \a molgraph and stores them as atom properties.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, existing atom hydrophobicity properties are overwritten.
+         * \param from_logp If \c true, the hydrophobicities are derived from the XLogP atom contributions instead of the Greene algorithm.
+         */
         CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite, bool from_logp = false);
 
+        /**
+         * \brief Perceives the H-bond donor types of the atoms in \a molgraph and stores them as atom properties.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, existing atom H-bond donor type properties are overwritten.
+         */
         CDPL_MOLPROP_API void perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
 
+        /**
+         * \brief Perceives the H-bond acceptor types of the atoms in \a molgraph and stores them as atom properties.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, existing atom H-bond acceptor type properties are overwritten.
+         */
         CDPL_MOLPROP_API void perceiveHBondAcceptorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
 
         /**
+         * \brief Returns the value of the MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property of \a molgraph.
          * \since 1.3
          */
         CDPL_MOLPROP_API const Chem::FragmentList::SharedPointer& getFunctionalGroups(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Sets the value of the MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property of \a molgraph. */
         CDPL_MOLPROP_API void setFunctionalGroups(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& fg_list);
 
+        /** \brief Removes the MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property from \a molgraph. */
         CDPL_MOLPROP_API void clearFunctionalGroups(Chem::MolecularGraph& molgraph);
 
+        /** \brief Tells whether \a molgraph carries an explicit MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property. */
         CDPL_MOLPROP_API bool hasFunctionalGroups(const Chem::MolecularGraph& molgraph);
 
+        /** \brief Perceives the functional groups of \a molgraph using MolProp::FunctionalGroupList. */
         CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(const Chem::MolecularGraph& molgraph);
 
+        /**
+         * \brief Perceives the functional groups of \a molgraph and stores them as a property.
+         * \param molgraph The molecular graph (modified in place).
+         * \param overwrite If \c true, an existing FUNCTIONAL_GROUPS property is overwritten.
+         */
         CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(Chem::MolecularGraph& molgraph, bool overwrite);
         
     } // namespace MolProp

@@ -45,60 +45,96 @@ namespace CDPL
     namespace Shape
     {
 
+        /**
+         * \brief Generator that produces alignment starting transformations by aligning the
+         *        principal axes of the aligned shape to those of the reference shape.
+         *
+         * Starting transformations can be derived from any combination of (a) the shape centroid,
+         * (b) shape element (atom) centers, (c) color (pharmacophore) feature centers, and
+         * (d) random rotations applied to translated centers. The exact combination of starts is
+         * configured via the various \c gen* setter methods.
+         */
         class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
         {
 
           public:
+            /** \brief Default relative threshold for treating two principal moments as equal. */
             static constexpr double DEF_SYMMETRY_THRESHOLD          = 0.15;
+
+            /** \brief Default number of random starting transformations. */
             static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
+
+            /** \brief Default maximum random translation magnitude applied to random starts. */
             static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
 
+            /** \brief Constructs the \c %PrincipalAxesAlignmentStartGenerator instance. */
             PrincipalAxesAlignmentStartGenerator();
 
             unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
             unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
+            /** \brief Enables or disables the generation of a starting transformation at the shape centroid. */
             void genShapeCenterStarts(bool generate);
 
+            /** \brief Tells whether a starting transformation at the shape centroid is generated. */
             bool genShapeCenterStarts() const;
 
+            /** \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers. */
             void genColorCenterStarts(bool generate);
 
+            /** \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated. */
             bool genColorCenterStarts() const;
 
+            /** \brief Enables or disables the generation of starting transformations at non-color (shape) element centers. */
             void genNonColorCenterStarts(bool generate);
 
+            /** \brief Tells whether starting transformations at non-color (shape) element centers are generated. */
             bool genNonColorCenterStarts() const;
 
+            /** \brief Enables or disables the generation of random starting transformations. */
             void genRandomStarts(bool generate);
 
+            /** \brief Tells whether random starting transformations are generated. */
             bool genRandomStarts() const;
 
+            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape. */
             void genForAlignedShapeCenters(bool generate);
 
+            /** \brief Tells whether element-/color-center starts are generated for centers of the aligned shape. */
             bool genForAlignedShapeCenters() const;
 
+            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape. */
             void genForReferenceShapeCenters(bool generate);
 
+            /** \brief Tells whether element-/color-center starts are generated for centers of the reference shape. */
             bool genForReferenceShapeCenters() const;
 
+            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes). */
             void genForLargerShapeCenters(bool generate);
 
+            /** \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes). */
             bool genForLargerShapeCenters() const;
 
+            /** \brief Sets the relative threshold for treating two principal moments as equal. */
             void setSymmetryThreshold(double thresh);
 
+            /** \brief Returns the currently configured symmetry threshold. */
             double getSymmetryThreshold();
 
+            /** \brief Sets the maximum random translation magnitude applied to random starts. */
             void setMaxRandomTranslation(double max_trans);
 
+            /** \brief Returns the currently configured maximum random translation. */
             double getMaxRandomTranslation() const;
 
+            /** \brief Sets the number of random starting transformations. */
             void setNumRandomStarts(std::size_t num_starts);
 
+            /** \brief Returns the currently configured number of random starts. */
             std::size_t getNumRandomStarts() const;
 
+            /** \brief Sets the seed used by the random number generator that produces the random starts. */
             void setRandomSeed(unsigned int seed);
 
             void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
@@ -109,6 +145,12 @@ namespace CDPL
 
             std::size_t getNumStartSubTransforms() const;
 
+            /**
+             * \brief Returns the starting transformation at index \a idx.
+             * \param idx The zero-based index of the starting transformation.
+             * \return A \c const reference to the starting transformation.
+             * \throw Base::IndexError if the number of starting transformations is zero or \a idx is not in the range [0, getNumStartTransforms() - 1].
+             */
             const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 
           private:
