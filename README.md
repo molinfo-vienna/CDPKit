@@ -167,8 +167,11 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit Documentation**: Visit the [CDPKit documentation](https://cdpkit.org) for comprehensive information, tutorials, and examples.
 
-- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/v1.1.1/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
+- **CDPL Python Tutorial**: Explore the [CDPL Python Tutorial](https://cdpkit.org/cdpl_python_tutorial/index.html) to learn how to effectively use
+  the vast amount of functionality offered by the *Chemical Data Processing Library (CDPL)* for your own Python software projects.
 
-- **CDPKit Conformer Generator**: Have a look at the [CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563) paper for detailed information about the integrated high-quality conformer generator.
+- **CDPL Python Cookbook**: Explore the [CDPL Python Cookbook](https://cdpkit.org/cdpl_python_cookbook/index.html) for a collection of Python
+  code snippets and examples showcasing various CDPL features.
 
-- **CDPKit ML integration example**: Check out the [github](https://github.com/spudlig/graph_networks) page of the "Improved Lipophilicity and Aqueous Solubility Prediction with Composite Graph Neural Networks" publication for exploring the ML integration possibilities of CDPKit.
+- **CDPKit Conformer Generator**: Have a look at the [CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563) paper for detailed information
+  about the integrated high-quality conformer generator.
