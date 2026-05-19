@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Feature.
+# \brief Abstract base class representing a single pharmacophore feature within a parent Pharm.Pharmacophore.
 # 
 class Feature(Chem.Entity3D):
 

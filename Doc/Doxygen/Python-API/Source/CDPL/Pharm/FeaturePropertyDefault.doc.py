@@ -25,41 +25,41 @@
 class FeaturePropertyDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.OPTIONAL_FLAG property.
+    # 
     OPTIONAL_FLAG = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.DISABLED_FLAG property.
+    # 
     DISABLED_FLAG = False
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.LENGTH property.
+    # 
     LENGTH = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.TOLERANCE property.
+    # 
     TOLERANCE = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.WEIGHT property.
+    # 
     WEIGHT = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.HYDROPHOBICITY property.
+    # 
     HYDROPHOBICITY = 0.0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.TYPE property.
+    # 
     TYPE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default value of the Pharm.FeatureProperty.GEOMETRY property.
+    # 
     GEOMETRY = 0

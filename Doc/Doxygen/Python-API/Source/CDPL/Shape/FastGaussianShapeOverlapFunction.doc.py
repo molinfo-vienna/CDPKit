@@ -20,74 +20,76 @@
 #
 
 ##
-# \brief 
-#
+# \brief Shape.GaussianShapeOverlapFunction implementation that uses two approximation techniques to trade some accuracy for a substantial speedup compared to Shape.ExactGaussianShapeOverlapFunction.
+# 
+# Two independent acceleration features can be enabled:
+#  - <b>Proximity optimization</b> prunes Gaussian-product pair contributions based on a scaled van-der-Waals proximity test (see setRadiusScalingFactor()).
+#  - <b>Fast exponential function</b> replaces the expensive <tt>std::exp</tt> call with a fast approximation that is accurate enough for screening-style overlap evaluation.
+# 
 class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
-    # \brief 
-    #
+    # \brief Default scaling factor applied to van der Waals radii for the proximity-check pruning.
+    # 
     DEF_RADIUS_SCALING_FACTOR = 1.4
 
     ##
-    # \brief Initializes the \c %FastGaussianShapeOverlapFunction instance.
+    # \brief Constructs the <tt>FastGaussianShapeOverlapFunction</tt> instance without associated shape functions.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %FastGaussianShapeOverlapFunction instance.
-    # \param ref_shape_func 
-    # \param ovl_shape_func 
+    # \brief Constructs the <tt>FastGaussianShapeOverlapFunction</tt> instance with the given reference and aligned shape functions.
+    # 
+    # \param ref_shape_func The reference shape function.
+    # \param ovl_shape_func The aligned shape function.
     # 
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FastGaussianShapeOverlapFunction instance \a func.
-    # \param func The \c %FastGaussianShapeOverlapFunction instance to copy.
+    # \brief Constructs a copy of the <tt>FastGaussianShapeOverlapFunction</tt> instance <em>func</em>.
+    # 
+    # \param func The <tt>FastGaussianShapeOverlapFunction</tt> to copy.
     # 
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FastGaussianShapeOverlapFunction instance \a func.
-    # \param func The \c %FastGaussianShapeOverlapFunction instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param func The other <tt>FastGaussianShapeOverlapFunction</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 
     ##
-    # \brief 
-    # \param enable 
-    #
+    # \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions.
+    # 
     def proximityOptimization(enable: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the proximity-check pruning is enabled.
+    # 
     def proximityOptimization() -> bool: pass
 
     ##
-    # \brief 
-    # \param factor 
-    #
+    # \brief Sets the scaling factor applied to van der Waals radii during the proximity check.
+    # 
     def setRadiusScalingFactor(factor: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured radius scaling factor.
+    # 
     def getRadiusScalingFactor() -> float: pass
 
     ##
-    # \brief 
-    # \param enable 
-    #
+    # \brief Enables or disables the use of a fast approximation for the exponential function.
+    # 
     def fastExpFunction(enable: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the fast-exponential approximation is enabled.
+    # 
     def fastExpFunction() -> bool: pass
 
     proximityOpt = property(proximityOptimization, proximityOptimization)

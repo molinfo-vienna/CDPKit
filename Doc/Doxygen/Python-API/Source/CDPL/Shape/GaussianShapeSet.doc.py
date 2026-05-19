@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief An ordered set of (shared) Gaussian shapes.
+# 
+# <tt>GaussianShapeSet</tt> is an indirect array of Shape.GaussianShape smart references, typically used as input to alignment / overlap routines that operate on multiple shapes at once.
+# 
 class GaussianShapeSet(Boost.Python.instance):
 
     ##

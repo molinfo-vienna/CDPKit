@@ -20,27 +20,29 @@
 #
 
 ##
-# \brief 
-#
+# \brief Generator that produces alignment starting transformations by aligning the principal axes of the aligned shape to those of the reference shape.
+# 
+# Starting transformations can be derived from any combination of (a) the shape centroid, (b) shape element (atom) centers, (c) color (pharmacophore) feature centers, and (d) random rotations applied to translated centers. The exact combination of starts is configured via the various <tt>gen*</tt> setter methods.
+# 
 class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Default relative threshold for treating two principal moments as equal.
+    # 
     DEF_SYMMETRY_THRESHOLD = 0.15
 
     ##
-    # \brief 
-    #
+    # \brief Default number of random starting transformations.
+    # 
     DEF_NUM_RANDOM_STARTS = 4
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum random translation magnitude applied to random starts.
+    # 
     DEF_MAX_RANDOM_TRANSLATION = 2.0
 
     ##
-    # \brief Initializes the \c %PrincipalAxesAlignmentStartGenerator instance.
+    # \brief Constructs the <tt>PrincipalAxesAlignmentStartGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -51,129 +53,108 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Sets the relative threshold for treating two principal moments as equal.
+    # 
     def setSymmetryThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured symmetry threshold.
+    # 
     def getSymmetryThreshold() -> float: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of a starting transformation at the shape centroid.
+    # 
     def genShapeCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether a starting transformation at the shape centroid is generated.
+    # 
     def genShapeCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers.
+    # 
     def genColorCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated.
+    # 
     def genColorCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of starting transformations at non-color (shape) element centers.
+    # 
     def genNonColorCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether starting transformations at non-color (shape) element centers are generated.
+    # 
     def genNonColorCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of random starting transformations.
+    # 
     def genRandomStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether random starting transformations are generated.
+    # 
     def genRandomStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape.
+    # 
     def genForAlignedShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the aligned shape.
+    # 
     def genForAlignedShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape.
+    # 
     def genForReferenceShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the reference shape.
+    # 
     def genForReferenceShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes).
+    # 
     def genForLargerShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes).
+    # 
     def genForLargerShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param max_trans 
-    #
+    # \brief Sets the maximum random translation magnitude applied to random starts.
+    # 
     def setMaxRandomTranslation(max_trans: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum random translation.
+    # 
     def getMaxRandomTranslation() -> float: pass
 
     ##
-    # \brief 
-    # \param num_starts 
-    #
+    # \brief Sets the number of random starting transformations.
+    # 
     def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of random starts.
+    # 
     def getNumRandomStarts() -> int: pass
 
     ##
-    # \brief 
-    # \param seed 
-    #
+    # \brief Sets the seed used by the random number generator that produces the random starts.
+    # 
     def setRandomSeed(seed: int) -> None: pass
 
     ##

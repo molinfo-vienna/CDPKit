@@ -88,26 +88,33 @@ def getEnvironmentSubstructure(feature: Feature) -> Chem.Fragment: pass
 def clearEnvironmentSubstructure(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param atoms 
-# \param append 
-#
+# \brief Collects the atoms of the molecular substructures underlying the features of <em>cntnr</em> into <em>atoms</em>.
+# 
+# Features without an associated substructure (see Pharm.hasSubstructure()) are silently skipped.
+# 
+# \param cntnr The feature container providing the features.
+# \param atoms The output fragment receiving the contributing atoms.
+# \param append If <tt>False</tt>, <em>atoms</em> is cleared before any atoms are added.
+# 
 def getFeatureAtoms(cntnr: FeatureContainer, atoms: Chem.Fragment, append: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the total number of features stored in the feature container <em>cntnr</em>.
+# 
+# \param cntnr The feature container.
+# 
+# \return The number of stored features.
+# 
 def getFeatureCount(cntnr: FeatureContainer) -> int: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param type 
-# \return 
-#
+# \brief Returns the number of features in <em>cntnr</em> whose type matches <em>type</em>.
+# 
+# \param cntnr The feature container.
+# \param type The Pharm.FeatureType to count.
+# 
+# \return The number of features of the specified type.
+# 
 def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 
 ##
@@ -118,11 +125,12 @@ def getFeatureCount(cntnr: FeatureContainer, type: int) -> int: pass
 def getFeatureTypeString(ftr_type: int) -> str: pass
 
 ##
-# \brief 
-# \param ftr_set 
-# \param mapping 
-# \param first 
-#
+# \brief Extracts features from <em>mapping</em> into <em>ftr_set</em>.
+# 
+# \param ftr_set The output feature set.
+# \param mapping The feature mapping.
+# \param first If <tt>True</tt>, the first feature of each mapping pair is added; otherwise the second feature.
+# 
 def getFeatures(ftr_set: FeatureSet, mapping: FeatureMapping, first: bool) -> None: pass
 
 ##
@@ -207,30 +215,36 @@ def getLength(feature: Feature) -> float: pass
 def clearLength(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param name 
-#
+# \brief Sets the name of the feature container <em>cntnr</em>.
+# 
+# \param cntnr The feature container.
+# \param name The new name.
+# 
 def setName(cntnr: FeatureContainer, name: str) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Tells whether a name has been set for the feature container <em>cntnr</em>.
+# 
+# \param cntnr The feature container.
+# 
+# \return <tt>True</tt> if the name property is set, and <tt>False</tt> otherwise.
+# 
 def hasName(cntnr: FeatureContainer) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \return 
-#
+# \brief Returns the name of the feature container <em>cntnr</em> (stored as Pharm.FeatureContainerProperty.NAME).
+# 
+# \param cntnr The feature container.
+# 
+# \return The name (or an empty string if the property is not set).
+# 
 def getName(cntnr: FeatureContainer) -> str: pass
 
 ##
-# \brief 
-# \param cntnr 
-#
+# \brief Removes the name property from the feature container <em>cntnr</em>.
+# 
+# \param cntnr The feature container.
+# 
 def clearName(cntnr: FeatureContainer) -> None: pass
 
 ##
@@ -288,10 +302,13 @@ def getOrientation(feature: Feature) -> Math.Vector3D: pass
 def clearOrientation(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param fix_geom 
-#
+# \brief Clears the orientation property of every feature in <em>cntnr</em> and (optionally) resets each feature's geometry to Pharm.FeatureGeometry.SPHERE.
+# 
+# \param cntnr The feature container.
+# \param fix_geom If <tt>True</tt>, the geometry of each feature is set to Pharm.FeatureGeometry.SPHERE after clearing the orientation.
+# 
+# \since 1.2
+# 
 def clearOrientations(cntnr: FeatureContainer, fix_geom: bool = True) -> None: pass
 
 ##
@@ -403,14 +420,18 @@ def getWeight(feature: Feature) -> float: pass
 def clearWeight(feature: Feature) -> None: pass
 
 ##
-# \brief 
-# \param ftr_cntnr 
-# \param atom_cntnr 
-# \param coords_func 
-# \param xform 
-# \param vdw_factor 
-# \return 
-#
+# \brief Tests whether the exclusion-volume features in <em>ftr_cntnr</em> remain clash-free with respect to the transformed atom positions of <em>atom_cntnr</em>.
+# 
+# Each enabled feature of type Pharm.FeatureType.EXCLUSION_VOLUME is checked against every atom of <em>atom_cntnr:</em> a clash is reported as soon as the distance between feature and atom is smaller than the sum of the feature's position tolerance and <em>vdw_factor</em> times the atom's van der Waals radius.
+# 
+# \param ftr_cntnr The feature container providing the exclusion-volume features.
+# \param atom_cntnr The atom container providing the test atoms.
+# \param coords_func The function returning the 3D coordinates of an atom.
+# \param xform The 4x4 transformation applied to the atom coordinates before the clash test.
+# \param vdw_factor Scaling factor for the per-atom van der Waals radii; if  0 the atoms are treated as point particles.
+# 
+# \return <tt>True</tt> if no clash is detected, and <tt>False</tt> otherwise.
+# 
 def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, xform: Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
 
 ##
@@ -437,11 +458,12 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param hist 
-# \param append 
-#
+# \brief Computes a per-PharmFeatureType frequency histogram of the features in <em>cntnr</em>.
+# 
+# \param cntnr The feature container.
+# \param hist The output histogram (feature type &rarr; count).
+# \param append If <tt>False</tt>, <em>hist</em> is cleared before the counts are accumulated.
+# 
 def generateFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHistogram, append: bool = False) -> None: pass
 
 ##
@@ -478,21 +500,29 @@ def prepareForPharmacophoreGeneration(mol: Chem.Molecule, calc_hyd: bool = True,
 def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param tgt_set 
-# \param type 
-# \param append 
-# \return 
-#
+# \brief Copies the features in <em>cntnr</em> into <em>tgt_set</em>, skipping every feature whose Pharm.FeatureType matches <em>type</em>.
+# 
+# \param cntnr The feature container providing the input features.
+# \param tgt_set The feature set receiving the filtered features.
+# \param type The Pharm.FeatureType to exclude.
+# \param append If <tt>False</tt>, <em>tgt_set</em> is cleared before adding any features.
+# 
+# \return <tt>True</tt> if at least one feature was excluded, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removeFeaturesWithType(cntnr: FeatureContainer, tgt_set: FeatureSet, type: int, append: bool = False) -> bool: pass
 
 ##
-# \brief 
-# \param ftr_set 
-# \param type 
-# \return 
-#
+# \brief Removes features of the given type from <em>ftr_set</em>.
+# 
+# \param ftr_set The feature set to clean (modified in place).
+# \param type The feature type to remove (see namespace Pharm.FeatureType).
+# 
+# \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removeFeaturesWithType(ftr_set: FeatureSet, type: int) -> bool: pass
 
 ##
@@ -504,21 +534,31 @@ def removeFeaturesWithType(ftr_set: FeatureSet, type: int) -> bool: pass
 def removeFeaturesWithType(pharm: Pharmacophore, type: int) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param tgt_set 
-# \param pos_tol 
-# \param append 
-# \return 
-#
+# \brief Copies the features in <em>cntnr</em> into <em>tgt_set</em>, suppressing features that share both type and 3D position with an already-collected feature.
+# 
+# Two features count as duplicates if they have identical Pharm.FeatureType and their position vectors either match exactly (<em>pos_tol</em>  0) or lie within <em>pos_tol</em> from each other. When a duplicate is detected, the feature with the larger position tolerance is retained.
+# 
+# \param cntnr The feature container providing the input features.
+# \param tgt_set The feature set receiving the deduplicated features.
+# \param pos_tol The position-equality tolerance in &Aring;ngstrom; values  0 require an exact position match.
+# \param append If <tt>False</tt>, <em>tgt_set</em> is cleared before adding any features.
+# 
+# \return <tt>True</tt> if at least one duplicate was detected, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removePositionalDuplicates(cntnr: FeatureContainer, tgt_set: FeatureSet, pos_tol: float = 0.0, append: bool = False) -> bool: pass
 
 ##
-# \brief 
-# \param ftr_set 
-# \param pos_tol 
-# \return 
-#
+# \brief Removes features from <em>ftr_set</em> whose 3D position duplicates that of another feature of the same type.
+# 
+# \param ftr_set The feature set to clean (modified in place).
+# \param pos_tol The positional tolerance below which two features are considered duplicates.
+# 
+# \return <tt>True</tt> if at least one feature was removed, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def removePositionalDuplicates(ftr_set: FeatureSet, pos_tol: float = 0.0) -> bool: pass
 
 ##
@@ -540,10 +580,11 @@ def removePositionalDuplicates(pharm: Pharmacophore, pos_tol: float = 0.0) -> bo
 def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##
-# \brief 
-# \param cntnr 
-# \param mtx 
-#
+# \brief Applies the affine transformation <em>mtx</em> to the 3D position (and, if set, the orientation vector) of every feature in <em>cntnr</em>.
+# 
+# \param cntnr The feature container to transform.
+# \param mtx The 4x4 transformation matrix.
+# 
 def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##

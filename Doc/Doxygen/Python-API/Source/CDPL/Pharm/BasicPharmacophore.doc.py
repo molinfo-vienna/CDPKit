@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief BasicPharmacophore.
+# \brief Concrete Pharm.Pharmacophore implementation that owns its features as Pharm.BasicFeature instances managed through an internal object pool.
 # 
 class BasicPharmacophore(Pharmacophore):
 

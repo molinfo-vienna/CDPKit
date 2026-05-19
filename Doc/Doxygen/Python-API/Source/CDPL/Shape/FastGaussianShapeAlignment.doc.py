@@ -20,54 +20,54 @@
 #
 
 ##
-# \brief 
-#
+# \brief High-level driver for the fast alignment of Gaussian shapes against a set of reference shapes.
+# 
+# Unlike Shape.GaussianShapeAlignment, which delegates the alignment to a separate Shape.GaussianShapeFunctionAlignment instance, <tt>FastGaussianShapeAlignment</tt> integrates the entire pipeline (start-transform generation, BFGS overlap optimization, result selection) into one class and operates on a self-contained Gaussian-product representation. The configuration combines settings exposed by Shape.PrincipalAxesAlignmentStartGenerator (start-transform options) and the iterative overlap optimization.
+# 
 class FastGaussianShapeAlignment(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default gradient norm at which the overlap optimization is stopped.
+    # 
     DEF_OPTIMIZATION_STOP_GRADIENT = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum number of overlap-optimization iterations.
+    # 
     DEF_MAX_OPTIMIZATION_ITERATIONS = 20
 
     ##
-    # \brief 
-    #
+    # \brief Default alignment-result selection mode.
+    # 
     DEF_RESULT_SELECTION_MODE = 3
 
     ##
-    # \brief 
-    #
+    # \brief Default relative threshold for treating two principal moments as equal.
+    # 
     DEF_SYMMETRY_THRESHOLD = 0.15
 
     ##
-    # \brief 
-    #
+    # \brief Default number of random starting transformations.
+    # 
     DEF_NUM_RANDOM_STARTS = 4
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum random translation magnitude applied to random starts.
+    # 
     DEF_MAX_RANDOM_TRANSLATION = 2.0
 
     ##
-    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
+    # \brief Constructs the <tt>FastGaussianShapeAlignment</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
-    # \param ref_shape 
+    # \brief Constructs the <tt>FastGaussianShapeAlignment</tt> instance with <em>ref_shape</em> as the single reference shape.
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes the \c %FastGaussianShapeAlignment instance.
-    # \param ref_shapes 
+    # \brief Constructs the <tt>FastGaussianShapeAlignment</tt> instance with the shapes in <em>ref_shapes</em> as the reference set.
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
@@ -84,277 +84,248 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to compare two alignment results for sorting and filtering.
+    # 
     def setResultCompareFunction(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured result-compare function.
+    # 
     def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to score an alignment result.
+    # 
     def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured scoring function.
+    # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the alignment-result selection mode (see namespace Shape.AlignmentResultSelectionMode).
+    # 
     def setResultSelectionMode(mode: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured alignment-result selection mode.
+    # 
     def getResultSelectionMode() -> int: pass
 
     ##
-    # \brief 
-    # \param max_iter 
-    #
+    # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of overlap-optimization iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
-    # \brief 
-    # \param grad_norm 
-    #
+    # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap-optimization stop gradient.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
-    # \brief 
-    # \param perf_align 
-    #
+    # \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose).
+    # 
     def performAlignment(perf_align: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the actual alignment is performed.
+    # 
     def performAlignment() -> bool: pass
 
     ##
-    # \brief 
-    # \param optimize 
-    #
+    # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap is optimized iteratively.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
-    # \brief 
-    # \param greedy 
-    #
+    # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
     def greedyOptimization() -> bool: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Sets the relative threshold for treating two principal moments as equal.
+    # 
     def setSymmetryThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured symmetry threshold.
+    # 
     def getSymmetryThreshold() -> float: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of a starting transformation at the shape centroid.
+    # 
     def genShapeCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether a starting transformation at the shape centroid is generated.
+    # 
     def genShapeCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers.
+    # 
     def genColorCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated.
+    # 
     def genColorCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of starting transformations at non-color (shape) element centers.
+    # 
     def genNonColorCenterStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether starting transformations at non-color (shape) element centers are generated.
+    # 
     def genNonColorCenterStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Enables or disables the generation of random starting transformations.
+    # 
     def genRandomStarts(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether random starting transformations are generated.
+    # 
     def genRandomStarts() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape.
+    # 
     def genForAlignedShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the aligned shape.
+    # 
     def genForAlignedShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape.
+    # 
     def genForReferenceShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the reference shape.
+    # 
     def genForReferenceShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes).
+    # 
     def genForLargerShapeCenters(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes).
+    # 
     def genForLargerShapeCenters() -> bool: pass
 
     ##
-    # \brief 
-    # \param max_trans 
-    #
+    # \brief Sets the maximum random translation magnitude applied to random starts.
+    # 
     def setMaxRandomTranslation(max_trans: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum random translation.
+    # 
     def getMaxRandomTranslation() -> float: pass
 
     ##
-    # \brief 
-    # \param num_starts 
-    #
+    # \brief Sets the number of random starting transformations.
+    # 
     def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of random starts.
+    # 
     def getNumRandomStarts() -> int: pass
 
     ##
-    # \brief 
-    # \param seed 
-    #
+    # \brief Sets the seed used by the random number generator that produces the random starts.
+    # 
     def setRandomSeed(seed: int) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all reference shapes and reference shape sets.
+    # 
     def clearReferenceShapes() -> None: pass
 
     ##
-    # \brief 
-    # \param shape 
-    # \param new_set 
-    #
+    # \brief Adds <em>shape</em> to the reference shapes.
+    # 
+    # \param shape The reference shape.
+    # \param new_set If <tt>True</tt>, <em>shape</em> is added to a new reference set; otherwise it is appended to the most recent reference set.
+    # 
     def addReferenceShape(shape: GaussianShape, new_set: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param shapes 
-    # \param new_set 
-    #
+    # \brief Adds the shapes in <em>shapes</em> to the reference shapes.
+    # 
+    # \param shapes The reference shapes.
+    # \param new_set If <tt>True</tt>, the shapes are added to a new reference set; otherwise they are appended to the most recent reference set.
+    # 
     def addReferenceShapes(shapes: GaussianShapeSet, new_set: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of reference shapes.
+    # 
     def getNumReferenceShapes() -> int: pass
 
     ##
-    # \brief 
-    # \param shape 
-    # \return 
-    #
+    # \brief Aligns <em>shape</em> against all reference shapes.
+    # 
+    # \param shape The shape to align.
+    # 
+    # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
+    # 
     def align(shape: GaussianShape) -> bool: pass
 
     ##
-    # \brief 
-    # \param shapes 
-    # \return 
-    #
+    # \brief Aligns each shape in <em>shapes</em> against all reference shapes.
+    # 
+    # \param shapes The shapes to align.
+    # 
+    # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
+    # 
     def align(shapes: GaussianShapeSet) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored alignment results.
+    # 
     def getNumResults() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the alignment result at index <em>idx</em>.
+    # 
+    # \param idx The zero-based result index.
+    # 
+    # \return A reference to the result. 
+    # 
+    # \throw Base.IndexError if the number of results is zero or <em>idx</em> is not in the range [0, getNumResults() - 1].
+    # 
     def getResult(idx: int) -> AlignmentResult: pass
 
     ##

@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief FeatureSet.
+# \brief A concrete Pharm.FeatureContainer implementation that stores references to existing Pharm.Feature instances.
+# 
+# Unlike Pharm.BasicPharmacophore, a <tt>FeatureSet</tt> does not own its features. It is typically used to represent subsets/selections of features that live elsewhere (e.g. for feature mappings or for collecting features matching a query).
 # 
 class FeatureSet(FeatureContainer):
 

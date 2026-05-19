@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief BasicFeature.
+# \brief Pharm.Feature implementation owned by a Pharm.BasicPharmacophore parent.
 # 
 class BasicFeature(Feature):
 

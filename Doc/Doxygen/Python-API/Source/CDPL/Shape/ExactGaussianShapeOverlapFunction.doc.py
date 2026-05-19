@@ -20,31 +20,37 @@
 #
 
 ##
-# \brief 
-#
+# \brief Shape.GaussianShapeOverlapFunction implementation that evaluates the overlap analytically using the full Gaussian-product expansion (no approximations).
+# 
+# The exact evaluation is more accurate but typically slower than Shape.FastGaussianShapeOverlapFunction.
+# 
 class ExactGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
-    # \brief Initializes the \c %ExactGaussianShapeOverlapFunction instance.
+    # \brief Constructs the <tt>ExactGaussianShapeOverlapFunction</tt> instance without associated shape functions.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %ExactGaussianShapeOverlapFunction instance.
-    # \param ref_shape_func 
-    # \param ovl_shape_func 
+    # \brief Constructs the <tt>ExactGaussianShapeOverlapFunction</tt> instance with the given reference and aligned shape functions.
+    # 
+    # \param ref_shape_func The reference shape function.
+    # \param ovl_shape_func The aligned shape function.
     # 
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %ExactGaussianShapeOverlapFunction instance \a func.
-    # \param func The \c %ExactGaussianShapeOverlapFunction instance to copy.
+    # \brief Constructs a copy of the <tt>ExactGaussianShapeOverlapFunction</tt> instance <em>func</em>.
+    # 
+    # \param func The <tt>ExactGaussianShapeOverlapFunction</tt> to copy.
     # 
     def __init__(func: ExactGaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %ExactGaussianShapeOverlapFunction instance \a func.
-    # \param func The \c %ExactGaussianShapeOverlapFunction instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param func The other <tt>ExactGaussianShapeOverlapFunction</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(func: ExactGaussianShapeOverlapFunction) -> ExactGaussianShapeOverlapFunction: pass

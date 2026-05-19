@@ -20,34 +20,38 @@
 #
 
 ##
-# \brief 
-#
+# \brief Function representation of a Gaussian shape, used to evaluate the shape's density, volume, surface area and related quantities at arbitrary 3D positions.
+# 
+# Internally the function maintains a list of Gaussian products (up to a configurable order) derived from the underlying Shape.GaussianShape. The list is built when the shape is supplied via setShape() (or one of the corresponding constructors).
+# 
 class GaussianShapeFunction(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum order of the Gaussian-product expansion.
+    # 
     DEF_MAX_PRODUCT_ORDER = 6
 
     ##
-    # \brief 
-    #
+    # \brief Default distance cutoff for pruning negligible Gaussian-product contributions.
+    # 
     DEF_DISTANCE_CUTOFF = 0.0
 
     ##
-    # \brief Initializes the \c %GaussianShapeFunction instance.
+    # \brief Constructs the <tt>GaussianShapeFunction</tt> instance without an associated shape.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %GaussianShapeFunction instance.
-    # \param shape 
+    # \brief Constructs the <tt>GaussianShapeFunction</tt> instance associated with <em>shape</em>.
+    # 
+    # \param shape The Gaussian shape.
     # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %GaussianShapeFunction instance \a func.
-    # \param func The \c %GaussianShapeFunction instance to copy.
+    # \brief Constructs a copy of the <tt>GaussianShapeFunction</tt> instance <em>func</em>.
+    # 
+    # \param func The <tt>GaussianShapeFunction</tt> to copy.
     # 
     def __init__(func: GaussianShapeFunction) -> None: pass
 
@@ -64,109 +68,131 @@ class GaussianShapeFunction(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %GaussianShapeFunction instance \a func.
-    # \param func The \c %GaussianShapeFunction instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param func The other <tt>GaussianShapeFunction</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(func: GaussianShapeFunction) -> GaussianShapeFunction: pass
 
     ##
-    # \brief 
-    # \param shape 
-    #
+    # \brief Associates the function with the Gaussian shape <em>shape</em>.
+    # 
+    # \param shape The Gaussian shape.
+    # 
     def setShape(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the associated Gaussian shape (or <tt>nullptr</tt> if none is associated).
+    # 
+    # \return A reference to the associated Gaussian shape.
+    # 
     def getShape() -> GaussianShape: pass
 
     ##
-    # \brief 
-    # \param max_order 
-    #
+    # \brief Sets the maximum order of the Gaussian-product expansion.
+    # 
+    # \param max_order The maximum order.
+    # 
     def setMaxOrder(max_order: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum order of the Gaussian-product expansion.
+    # 
+    # \return The configured maximum order.
+    # 
     def getMaxOrder() -> int: pass
 
     ##
-    # \brief 
-    # \param cutoff 
-    #
+    # \brief Sets the distance cutoff for pruning negligible Gaussian-product contributions.
+    # 
+    # \param cutoff The cutoff distance.
+    # 
     def setDistanceCutoff(cutoff: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured distance cutoff.
+    # 
+    # \return The configured distance cutoff.
+    # 
     def getDistanceCutoff() -> float: pass
 
     ##
-    # \brief 
-    #
+    # \brief Resets the function by discarding the cached Gaussian-product expansion.
+    # 
     def reset() -> None: pass
 
     ##
-    # \brief 
-    # \param xform 
-    #
+    # \brief Applies an affine transformation to the element positions of the associated shape.
+    # 
+    # \param xform The 4x4 transformation matrix.
+    # 
     def transform(xform: Math.Matrix4D) -> None: pass
 
     ##
-    # \brief 
-    # \param coords 
-    #
+    # \brief Returns the 3D positions of all elements of the associated shape.
+    # 
+    # \param coords The output array of 3D positions.
+    # 
     def getElementPositions(coords: Math.Vector3DArray) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the 3D position of the element at index <em>idx</em>.
+    # 
+    # \param idx The element index.
+    # 
+    # \return A reference to the element 3D position. 
+    # 
+    # \throw Base.IndexError if no shape is associated with this function or <em>idx</em> is not in the range [0, getShape()->getNumElements() - 1].
+    # 
     def getElementPosition(idx: int) -> Math.Vector3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Calculates the total volume enclosed by the Gaussian shape.
+    # 
+    # \return The volume.
+    # 
     def calcVolume() -> float: pass
 
     ##
-    # \brief 
-    # \param pos 
-    # \return 
-    #
+    # \brief Evaluates the Gaussian density of the shape at the 3D position <em>pos</em>.
+    # 
+    # \param pos The 3D position.
+    # 
+    # \return The Gaussian density value.
+    # 
     def calcDensity(pos: Math.Vector3D) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Calculates the total surface area of the Gaussian shape.
+    # 
+    # \return The total surface area.
+    # 
     def calcSurfaceArea() -> float: pass
 
     ##
-    # \brief 
-    # \param elem_idx 
-    # \return 
-    #
+    # \brief Calculates the surface area contribution of the single element at index <em>elem_idx</em>.
+    # 
+    # \param elem_idx The element index.
+    # 
+    # \return The element surface area.
+    # 
     def calcSurfaceArea(elem_idx: int) -> float: pass
 
     ##
-    # \brief 
-    # \param ctr 
-    #
+    # \brief Calculates the centroid of the Gaussian shape.
+    # 
+    # \param ctr The output centroid position.
+    # 
     def calcCentroid(ctr: Math.Vector3D) -> None: pass
 
     ##
-    # \brief 
-    # \param ctr 
-    # \param quad_tensor 
-    #
+    # \brief Calculates the quadrupole tensor of the Gaussian shape with respect to the reference point <em>ctr</em>.
+    # 
+    # \param ctr The reference point (typically the shape centroid).
+    # \param quad_tensor The output 3x3 quadrupole tensor.
+    # 
     def calcQuadrupoleTensor(ctr: Math.Vector3D, quad_tensor: Math.Matrix3D) -> None: pass
 
     objectID = property(getObjectID)

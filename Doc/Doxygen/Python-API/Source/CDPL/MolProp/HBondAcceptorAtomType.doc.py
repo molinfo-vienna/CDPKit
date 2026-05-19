@@ -35,171 +35,171 @@ class HBondAcceptorAtomType(Boost.Python.instance):
     NONE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Water oxygen acceptor.
+    # 
     O_H2O = 2
 
     ##
-    # \brief 
-    #
+    # \brief Urea oxygen acceptor.
+    # 
     O_UREA = 3
 
     ##
-    # \brief 
-    #
+    # \brief Barbituric-acid oxygen acceptor.
+    # 
     O_BARBITURIC_ACID = 4
 
     ##
-    # \brief 
-    #
+    # \brief Uric-acid oxygen acceptor.
+    # 
     O_URIC_ACID = 5
 
     ##
-    # \brief 
-    #
+    # \brief Ether oxygen acceptor.
+    # 
     O_ETHER = 6
 
     ##
-    # \brief 
-    #
+    # \brief Amide oxygen acceptor.
+    # 
     O_AMIDE = 7
 
     ##
-    # \brief 
-    #
+    # \brief N-oxide oxygen acceptor.
+    # 
     O_N_OXIDE = 8
 
     ##
-    # \brief 
-    #
+    # \brief Carboxylic-acid oxygen acceptor.
+    # 
     O_ACID = 9
 
     ##
-    # \brief 
-    #
+    # \brief Ester oxygen acceptor.
+    # 
     O_ESTER = 10
 
     ##
-    # \brief 
-    #
+    # \brief Sulfoxide oxygen acceptor.
+    # 
     O_SULFOXIDE = 11
 
     ##
-    # \brief 
-    #
+    # \brief Nitro-group oxygen acceptor.
+    # 
     O_NITRO = 12
 
     ##
-    # \brief 
-    #
+    # \brief Selenium-oxide oxygen acceptor.
+    # 
     O_SELEN_OXIDE = 13
 
     ##
-    # \brief 
-    #
+    # \brief Aldehyde oxygen acceptor.
+    # 
     O_ALDEHYD = 14
 
     ##
-    # \brief 
-    #
+    # \brief Ketone oxygen acceptor.
+    # 
     O_KETONE = 15
 
     ##
-    # \brief 
-    #
+    # \brief Alcohol oxygen acceptor.
+    # 
     O_ALCOHOL = 16
 
     ##
-    # \brief 
-    #
+    # \brief Ammonia nitrogen acceptor.
+    # 
     N_NH3 = 17
 
     ##
-    # \brief 
-    #
+    # \brief Diamine nitrogen acceptor.
+    # 
     N_DIAMINE = 18
 
     ##
-    # \brief 
-    #
+    # \brief Mono-/di-nitro-aniline nitrogen acceptor.
+    # 
     N_MONO_DI_NITRO_ANILINE = 19
 
     ##
-    # \brief 
-    #
+    # \brief Tri-nitro-aniline nitrogen acceptor.
+    # 
     N_TRI_NITRO_ANILINE = 20
 
     ##
-    # \brief 
-    #
+    # \brief Halogeno-aniline nitrogen acceptor.
+    # 
     N_HALOGENO_ANILINE = 21
 
     ##
-    # \brief 
-    #
+    # \brief Aniline nitrogen acceptor.
+    # 
     N_ANILINE = 22
 
     ##
-    # \brief 
-    #
+    # \brief Nitrile nitrogen acceptor.
+    # 
     N_NITRILE = 23
 
     ##
-    # \brief 
-    #
+    # \brief Azole (five-membered aromatic) nitrogen acceptor.
+    # 
     N_AZOLE = 24
 
     ##
-    # \brief 
-    #
+    # \brief Aliphatic amine nitrogen acceptor.
+    # 
     N_AMINE = 25
 
     ##
-    # \brief 
-    #
+    # \brief Amidine nitrogen acceptor.
+    # 
     N_AMIDINE = 26
 
     ##
-    # \brief 
-    #
+    # \brief Imine nitrogen acceptor.
+    # 
     N_IMINE = 30
 
     ##
-    # \brief 
-    #
+    # \brief Azo (N=N) nitrogen acceptor.
+    # 
     N_AZO = 27
 
     ##
-    # \brief 
-    #
+    # \brief Azine (six-membered aromatic N) nitrogen acceptor.
+    # 
     N_AZINE = 28
 
     ##
-    # \brief 
-    #
+    # \brief Diazine (six-membered aromatic with two N) nitrogen acceptor.
+    # 
     N_DIAZINE = 29
 
     ##
-    # \brief 
-    #
+    # \brief Sulfide sulfur acceptor.
+    # 
     S_SULFIDE = 31
 
     ##
-    # \brief 
-    #
+    # \brief Thiourea sulfur acceptor.
+    # 
     S_THIOUREA = 32
 
     ##
-    # \brief 
-    #
+    # \brief Mono-/di-phosphine phosphorus acceptor.
+    # 
     P_MONO_DI_PHOSPHINE = 33
 
     ##
-    # \brief 
-    #
+    # \brief Tri-phosphine phosphorus acceptor.
+    # 
     P_TRI_PHOSPHINE = 34
 
     ##
-    # \brief 
-    #
+    # \brief Highest H-bond acceptor type constant defined in this namespace.
+    # 
     MAX_TYPE = 34

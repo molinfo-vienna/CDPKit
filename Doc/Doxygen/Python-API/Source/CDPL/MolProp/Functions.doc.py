@@ -58,19 +58,13 @@ def getAromaticBondCount(cntnr: Chem.BondContainer) -> int: pass
 def getAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the total number of atoms in <em>molgraph</em> (including implicit hydrogens).
+# 
 def getAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param type 
-# \param strict 
-# \return 
-#
+# \brief Returns the number of atoms in <em>molgraph</em> that match the given atom type.
+# 
 def getAtomCount(molgraph: Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
 
 ##
@@ -94,19 +88,13 @@ def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int) -> 
 def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the total number of bonds in <em>molgraph</em> (including bonds to implicit hydrogens).
+# 
 def getBondCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param order 
-# \param inc_aro 
-# \return 
-#
+# \brief Returns the number of bonds in <em>molgraph</em> with the given order, optionally including aromatic bonds.
+# 
 def getBondCount(molgraph: Chem.MolecularGraph, order: int, inc_aro: bool = True) -> int: pass
 
 ##
@@ -115,10 +103,8 @@ def getBondCount(molgraph: Chem.MolecularGraph, order: int, inc_aro: bool = True
 def getChainAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of chain (non-ring) atoms in <em>molgraph</em>.
+# 
 def getChainAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -127,17 +113,13 @@ def getChainAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 def getChainBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of chain (non-ring) bonds in <em>molgraph</em>.
+# 
 def getChainBondCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of connected components in <em>molgraph</em>.
+# 
 def getComponentCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -253,45 +235,37 @@ def getExplicitChainBondCount(cntnr: Chem.BondContainer) -> int: pass
 def getExplicitHydrogenBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param flags 
-# \return 
-#
+# \brief Returns the number of explicit ordinary hydrogens in <em>molgraph</em>.
+# 
+# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary".
+# 
 def getExplicitOrdinaryHydrogenCount(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param fg_list 
-#
+# \brief Sets the value of the MolProp.MolecularGraphProperty.FUNCTIONAL_GROUPS property of <em>molgraph</em>.
+# 
 def setFunctionalGroups(molgraph: Chem.MolecularGraph, fg_list: Chem.FragmentList) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Tells whether <em>molgraph</em> carries an explicit MolProp.MolecularGraphProperty.FUNCTIONAL_GROUPS property.
+# 
 def hasFunctionalGroups(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the value of the MolProp.MolecularGraphProperty.FUNCTIONAL_GROUPS property of <em>molgraph</em>.
+# 
+# \since 1.3
+# 
 def getFunctionalGroups(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
 ##
-# \brief 
-# \param molgraph 
-#
+# \brief Removes the MolProp.MolecularGraphProperty.FUNCTIONAL_GROUPS property from <em>molgraph</em>.
+# 
 def clearFunctionalGroups(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of H-bond acceptor atoms in <em>molgraph</em>.
+# 
 def getHBondAcceptorAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -315,10 +289,8 @@ def getHBondAcceptorType(atom: Chem.Atom) -> int: pass
 def clearHBondAcceptorType(atom: Chem.Atom) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of H-bond donor atoms in <em>molgraph</em>.
+# 
 def getHBondDonorAtomCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -375,10 +347,8 @@ def getHeavyBondCount(cntnr: Chem.BondContainer) -> int: pass
 def getHybridPolarizability(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the number of bonds in <em>molgraph</em> that involve at least one hydrogen atom.
+# 
 def getHydrogenBondCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -407,10 +377,8 @@ def clearHydrophobicity(atom: Chem.Atom) -> None: pass
 def getIUPACGroup(atom: Chem.Atom) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the total number of implicit hydrogens in <em>molgraph</em>.
+# 
 def getImplicitHydrogenCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -496,11 +464,10 @@ def getNumContainingSSSRRings(bond: Chem.Bond, molgraph: Chem.MolecularGraph) ->
 def getOrdinaryHydrogenCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param flags 
-# \return 
-#
+# \brief Returns the number of ordinary hydrogens in <em>molgraph</em>.
+# 
+# \param flags Bitmask of Chem.AtomPropertyFlag values that qualify "ordinary".
+# 
 def getOrdinaryHydrogenCount(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> int: pass
 
 ##
@@ -586,20 +553,17 @@ def getRingBondCount(cntnr: Chem.BondContainer) -> int: pass
 def getRotatableBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param h_rotors 
-# \param ring_bonds 
-# \param amide_bonds 
-# \return 
-#
+# \brief Returns the number of rotatable bonds in <em>molgraph</em>.
+# 
+# \param h_rotors If <tt>True</tt>, hydrogen-only rotors are counted.
+# \param ring_bonds If <tt>True</tt>, ring bonds are also considered.
+# \param amide_bonds If <tt>True</tt>, amide bonds are also considered.
+# 
 def getRotatableBondCount(molgraph: Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Returns the Lipinski rule-of-five violation score of <em>molgraph</em> (number of failed criteria, 0-4).
+# 
 def getRuleOfFiveScore(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -622,18 +586,21 @@ def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph,
 def getVdWRadius(atom: Chem.Atom) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-# \param from_logp 
-#
+# \brief Calculates per-atom hydrophobicities for <em>molgraph</em> and stores them as atom properties.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, existing atom hydrophobicity properties are overwritten.
+# \param from_logp If <tt>True</tt>, the hydrophobicities are derived from the XLogP atom contributions instead of the Greene algorithm.
+# 
 def calcAtomHydrophobicities(molgraph: Chem.MolecularGraph, overwrite: bool, from_logp: bool = False) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the cyclomatic number of <em>molgraph</em> (number of independent cycles).
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The cyclomatic number.
+# 
 def calcCyclomaticNumber(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
@@ -703,10 +670,10 @@ def calcFreeValenceElectronCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph)
 def calcInductiveEffect(atom: Chem.Atom, molgraph: Chem.MolecularGraph, num_bonds: int = 10) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the \f$ \log S \f$ (aqueous solubility) of <em>molgraph</em> using MolProp.LogSCalculator.
+# 
+# \see [\ref LOGS]
+# 
 def calcLogS(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
@@ -715,40 +682,43 @@ def calcLogS(molgraph: Chem.MolecularGraph) -> float: pass
 def calcLonePairElectronegativity(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-#
+# \brief Calculates MHMO pi charges and pi-bond orders for <em>molgraph</em> and stores them as atom/bond properties.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, existing atom/bond properties are overwritten.
+# 
 def calcMHMOProperties(molgraph: Chem.MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param comp 
-#
+# \brief Calculates the per-element mass composition of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# \param comp The output mass composition.
+# 
 def calcMassComposition(molgraph: Chem.MolecularGraph, comp: MassComposition) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the total molecular mass of <em>molgraph</em> (sum of atom standard atomic weights including implicit hydrogens).
+# 
+# \param molgraph The molecular graph.
+# 
+# \return The molecular mass.
+# 
 def calcMass(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the mean atomic polarizability of <em>molgraph</em>.
+# 
 def calcMeanPolarizability(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-# \param num_iter 
-# \param damping 
-#
+# \brief Calculates PEOE sigma charges and electronegativities for the atoms of <em>molgraph</em> and stores them as atom properties.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, existing atom properties are overwritten; otherwise only atoms without the property are populated.
+# \param num_iter The number of charge-shifting iterations.
+# \param damping The per-iteration damping factor.
+# 
 def calcPEOEProperties(molgraph: Chem.MolecularGraph, overwrite: bool, num_iter: int = 20, damping: float = 0.48) -> None: pass
 
 ##
@@ -773,10 +743,10 @@ def calcPolarizability(bond: Chem.Bond, molgraph: Chem.MolecularGraph, damping: 
 def calcStericNumber(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the topological polar surface area (TPSA) of <em>molgraph</em> using MolProp.TPSACalculator.
+# 
+# \see [\ref TPSA]
+# 
 def calcTPSA(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
@@ -795,18 +765,19 @@ def calcValence(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 def calcValenceElectronCount(atom: Chem.Atom) -> int: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Calculates the <em>XLogP</em> value of <em>molgraph</em> using MolProp.XLogPCalculator.
+# 
+# \see [\ref XLOGP]
+# 
 def calcXLogP(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param hist 
-# \param append 
-#
+# \brief Generates the element histogram of <em>molgraph</em>.
+# 
+# \param molgraph The molecular graph.
+# \param hist The output element histogram.
+# \param append If <tt>True</tt>, <em>hist</em> is appended to instead of cleared first.
+# 
 def generateElementHistogram(molgraph: Chem.MolecularGraph, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
@@ -1062,30 +1033,30 @@ def isTransitionMetal(atom: Chem.Atom) -> bool: pass
 def isUnsaturated(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \return 
-#
+# \brief Perceives the functional groups of <em>molgraph</em> using MolProp.FunctionalGroupList.
+# 
 def perceiveFunctionalGroups(molgraph: Chem.MolecularGraph) -> Chem.FragmentList: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-# \return 
-#
+# \brief Perceives the functional groups of <em>molgraph</em> and stores them as a property.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, an existing FUNCTIONAL_GROUPS property is overwritten.
+# 
 def perceiveFunctionalGroups(molgraph: Chem.MolecularGraph, overwrite: bool) -> Chem.FragmentList: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-#
+# \brief Perceives the H-bond acceptor types of the atoms in <em>molgraph</em> and stores them as atom properties.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, existing atom H-bond acceptor type properties are overwritten.
+# 
 def perceiveHBondAcceptorAtomTypes(molgraph: Chem.MolecularGraph, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-#
+# \brief Perceives the H-bond donor types of the atoms in <em>molgraph</em> and stores them as atom properties.
+# 
+# \param molgraph The molecular graph (modified in place).
+# \param overwrite If <tt>True</tt>, existing atom H-bond donor type properties are overwritten.
+# 
 def perceiveHBondDonorAtomTypes(molgraph: Chem.MolecularGraph, overwrite: bool) -> None: pass

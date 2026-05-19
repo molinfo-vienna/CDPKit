@@ -20,12 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief Generates Shape.GaussianShape instances from molecular graphs.
+# 
+# The generator can emit shape representations of the molecule itself (one sphere per atom), of a pharmacophore derived from the molecule (one sphere per feature), or both. In multi-conformer mode, one Gaussian shape is generated per conformer.
+# 
 class GaussianShapeGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %GaussianShapeGenerator instance.
+    # \brief Constructs the <tt>GaussianShapeGenerator</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -55,130 +57,114 @@ class GaussianShapeGenerator(Boost.Python.instance):
     def assign(gen: GaussianShapeGenerator) -> GaussianShapeGenerator: pass
 
     ##
-    # \brief 
-    # \param gen 
-    #
+    # \brief Specifies the pharmacophore generator used when emitting pharmacophore shapes.
+    # 
     def setPharmacophoreGenerator(gen: Pharm.PharmacophoreGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured pharmacophore generator.
+    # 
     def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the built-in default pharmacophore generator (mutable).
+    # 
     def getDefaultPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the sphere radius used for all atoms (negative value: use atom-specific van der Waals radii).
+    # 
     def setAtomRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured atom sphere radius.
+    # 
     def getAtomRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param hardness 
-    #
+    # \brief Sets the Gaussian hardness used for all atom spheres.
+    # 
     def setAtomHardness(hardness: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured atom Gaussian hardness.
+    # 
     def getAtomHardness() -> float: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the sphere radius used for all features (negative value: use feature-specific tolerances).
+    # 
     def setFeatureRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured feature sphere radius.
+    # 
     def getFeatureRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param hardness 
-    #
+    # \brief Sets the Gaussian hardness used for all feature spheres.
+    # 
     def setFeatureHardness(hardness: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured feature Gaussian hardness.
+    # 
     def getFeatureHardness() -> float: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether a pharmacophore (feature-based) shape shall be generated.
+    # 
     def generatePharmacophoreShape(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether a pharmacophore (feature-based) shape is generated.
+    # 
     def generatePharmacophoreShape() -> bool: pass
 
     ##
-    # \brief 
-    # \param generate 
-    #
+    # \brief Specifies whether a molecular (atom-based) shape shall be generated.
+    # 
     def generateMoleculeShape(generate: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether a molecular (atom-based) shape is generated.
+    # 
     def generateMoleculeShape() -> bool: pass
 
     ##
-    # \brief 
-    # \param multi_conf 
-    #
+    # \brief Specifies whether to emit one shape per conformer (instead of using the first conformer only).
+    # 
     def multiConformerMode(multi_conf: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the generator runs in multi-conformer mode.
+    # 
     def multiConformerMode() -> bool: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Specifies whether hydrogens are included when generating the molecular shape.
+    # 
     def includeHydrogens(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether hydrogens are included when generating the molecular shape.
+    # 
     def includeHydrogens() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Generates the set of Gaussian shapes for <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # 
+    # \return A reference to the generated Shape.GaussianShapeSet.
+    # 
     def generate(molgraph: Chem.MolecularGraph) -> GaussianShapeSet: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the shapes produced by the most recent call to generate().
+    # 
+    # \return A reference to the produced Shape.GaussianShapeSet.
+    # 
     def getShapes() -> GaussianShapeSet: pass
 
     objectID = property(getObjectID)

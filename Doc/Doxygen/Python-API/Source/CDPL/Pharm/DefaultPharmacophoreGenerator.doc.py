@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief DefaultPharmacophoreGenerator.
+# \brief Pharmacophore generator pre-configured with the built-in default set of feature generators.
+# 
+# The default generators cover eight canonical pharmacophore feature types: positive/negative ionizable, hydrophobic, aromatic, H-bond donor/acceptor, and halogen-bond donor/acceptor. The configuration can be adjusted via the Configuration enum (e.g. to restrict ionic-feature generation to explicitly charged groups, or to use static H-donor orientation vectors).
 # 
 class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
 
@@ -50,7 +52,7 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
     def __init__(config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
-    # \brief Perceives all pharmacophore features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives all pharmacophore features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
@@ -65,7 +67,8 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
     def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \param config 
-    #
+    # \brief Reconfigures the generator with the given Configuration bitmask.
+    # 
+    # \param config Bitwise combination of Configuration flags.
+    # 
     def applyConfiguration(config: int) -> None: pass

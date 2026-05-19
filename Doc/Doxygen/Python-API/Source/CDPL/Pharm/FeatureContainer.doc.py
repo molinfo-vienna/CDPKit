@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureContainer.
+# \brief Abstract container interface for a sequence of Pharm.Feature objects with associated properties (e.g. a pharmacophore or feature set).
 # 
 class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 

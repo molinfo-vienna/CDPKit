@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Driver for the alignment of one Shape.GaussianShapeFunction (the aligned shape) against a fixed reference Shape.GaussianShapeFunction.
+# 
+# The alignment iterates over starting transformations produced by a configurable Shape.GaussianShapeAlignmentStartGenerator, optionally refines each start via BFGS minimization of the overlap function, and collects the resulting transformations and overlap values in Result instances.
+# 
 class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief A single alignment result: rigid-body transformation plus shape and color overlap values.
+    # 
     class Result(Boost.Python.instance):
 
         ##
@@ -63,21 +65,18 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         def assign(res: Result) -> Result: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the rigid-body transformation that maps the aligned shape onto the reference shape.
+        # 
         def getTransform() -> Math.Matrix4D: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the shape overlap value of the alignment.
+        # 
         def getOverlap() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the color overlap value of the alignment.
+        # 
         def getColorOverlap() -> float: pass
 
         objectID = property(getObjectID)
@@ -89,24 +88,25 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         colorOverlap = property(getColorOverlap)
 
     ##
-    # \brief 
-    #
+    # \brief Default gradient norm at which the overlap optimization is stopped.
+    # 
     DEF_OPTIMIZATION_STOP_GRADIENT = 1.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum number of overlap-optimization iterations.
+    # 
     DEF_MAX_OPTIMIZATION_ITERATIONS = 20
 
     ##
-    # \brief Initializes the \c %GaussianShapeFunctionAlignment instance.
+    # \brief Constructs the <tt>GaussianShapeFunctionAlignment</tt> instance without a reference shape.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %GaussianShapeFunctionAlignment instance.
-    # \param ref_func 
-    # \param sym_class 
+    # \brief Constructs the <tt>GaussianShapeFunctionAlignment</tt> instance with the given reference shape function.
+    # 
+    # \param ref_func The reference shape function.
+    # \param sym_class The symmetry class of the reference shape (see namespace Shape.SymmetryClass).
     # 
     def __init__(ref_func: GaussianShapeFunction, sym_class: int) -> None: pass
 
@@ -123,152 +123,138 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the Gaussian-shape overlap function used during alignment.
+    # 
     def setOverlapFunction(func: GaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap function.
+    # 
     def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the built-in default overlap function (Shape.FastGaussianShapeOverlapFunction).
+    # 
     def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param sym_class 
-    #
+    # \brief Sets the reference shape function used by subsequent align() calls.
+    # 
+    # \param func The reference shape function.
+    # \param sym_class The symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # 
     def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current reference shape function (or <tt>nullptr</tt> if none is set).
+    # 
+    # \return A reference to the reference shape function.
+    # 
     def getReference() -> GaussianShapeFunction: pass
 
     ##
-    # \brief 
-    # \param gen 
-    #
+    # \brief Specifies the alignment-start generator used to seed the overlap optimization.
+    # 
     def setStartGenerator(gen: GaussianShapeAlignmentStartGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured alignment-start generator.
+    # 
     def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the built-in default principal-axes alignment-start generator.
+    # 
     def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to decide whether two color features match.
+    # 
     def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-match function.
+    # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to filter color features by type.
+    # 
     def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-filter function.
+    # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
-    # \brief 
-    # \param perf_align 
-    #
+    # \brief Specifies whether the actual alignment shall be performed (vs. only evaluating overlaps in the initial pose).
+    # 
     def performAlignment(perf_align: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the actual alignment is performed.
+    # 
     def performAlignment() -> bool: pass
 
     ##
-    # \brief 
-    # \param max_iter 
-    #
+    # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of overlap-optimization iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
-    # \brief 
-    # \param grad_norm 
-    #
+    # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap-optimization stop gradient.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
-    # \brief 
-    # \param optimize 
-    #
+    # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap is optimized iteratively.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
-    # \brief 
-    # \param greedy 
-    #
+    # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
     def greedyOptimization() -> bool: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param xform 
-    # \return 
-    #
+    # \brief Delegates the reference-shape preparation to the configured start generator.
+    # 
+    # \param func The reference shape function (may be modified).
+    # \param xform The output transformation that maps the prepared frame back to the original frame.
+    # 
+    # \return The perceived symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # 
     def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param xform 
-    # \return 
-    #
+    # \brief Delegates the aligned-shape preparation to the configured start generator.
+    # 
+    # \param func The aligned shape function (may be modified).
+    # \param xform The output transformation that maps the prepared frame back to the original frame.
+    # 
+    # \return The perceived symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # 
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
@@ -286,36 +272,39 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     def calcColorSelfOverlap(calc: GaussianShapeFunction) -> float: pass
 
     ##
-    # \brief 
-    # \param calc 
-    #
+    # \brief Specifies whether color overlaps shall be evaluated in addition to shape overlaps.
+    # 
     def calcColorOverlaps(calc: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether color overlaps are evaluated.
+    # 
     def calcColorOverlaps() -> bool: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param sym_class 
-    # \return 
-    #
+    # \brief Aligns the shape function <em>func</em> against the configured reference shape.
+    # 
+    # \param func The aligned shape function.
+    # \param sym_class The symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # 
+    # \return <tt>True</tt> if at least one alignment result was produced, and <tt>False</tt> otherwise.
+    # 
     def align(func: GaussianShapeFunction, sym_class: int) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of alignment results produced by the last align() call.
+    # 
     def getNumResults() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the alignment result at index <em>idx</em>.
+    # 
+    # \param idx The zero-based result index.
+    # 
+    # \return A reference to the result. 
+    # 
+    # \throw Base.IndexError if the number of results is zero or <em>idx</em> is not in the range [0, getNumResults() - 1].
+    # 
     def getResult(idx: int) -> Result: pass
 
     ##

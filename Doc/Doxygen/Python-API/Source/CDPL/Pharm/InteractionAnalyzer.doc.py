@@ -20,7 +20,9 @@
 #
 
 ##
-# \brief InteractionAnalyzer.
+# \brief Analyzer that detects pairwise interactions between features of two Pharm.FeatureContainer instances based on user-registered per-feature-type-pair interaction constraint functions.
+# 
+# A typical use case is the analysis of ligand &harr; target pharmacophore interactions: register one constraint function per (ligand feature type, target feature type) pair, then call analyze() to obtain a Pharm.FeatureMapping with the detected interactions.
 # 
 class InteractionAnalyzer(Boost.Python.instance):
 

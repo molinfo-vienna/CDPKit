@@ -20,38 +20,40 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bundle of configuration parameters for Shape.ScreeningProcessor.
+# 
+# The settings select the scoring function, the type of color (pharmacophore) features used, the screening mode (e.g. best-overall vs. best-per-query), the alignment-start strategy, and the parameters of the iterative overlap optimization.
+# 
 class ScreeningSettings(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies which alignment hits are reported by the screening processor.
+    # 
     class ScreeningMode(Boost.Python.enum):
 
         ##
-        # \brief BEST_OVERALL_MATCH.
-        #
+        # \brief Report only the single best-scoring alignment hit across all queries.
+        # 
         BEST_OVERALL_MATCH = 0
 
         ##
-        # \brief BEST_MATCH_PER_QUERY.
-        #
+        # \brief Report the best-scoring alignment hit per query molecule.
+        # 
         BEST_MATCH_PER_QUERY = 1
 
         ##
-        # \brief BEST_MATCH_PER_QUERY_CONF.
-        #
+        # \brief Report the best-scoring alignment hit per (query, query conformer) pair.
+        # 
         BEST_MATCH_PER_QUERY_CONF = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies which kind of color (pharmacophore) features are used during shape alignment.
+    # 
     class ColorFeatureType(Boost.Python.enum):
 
         ##
-        # \brief NO_FEATURES.
-        #
+        # \brief Disable color features (shape-only alignment).
+        # 
         NO_FEATURES = 0
 
         ##
@@ -60,52 +62,52 @@ class ScreeningSettings(Boost.Python.instance):
         PHARMACOPHORE_EXL_CHARGES = 1
 
         ##
-        # \brief PHARMACOPHORE_IMP_CHARGES.
-        #
+        # \brief Use pharmacophore features derived from perceived (implicit) charges.
+        # 
         PHARMACOPHORE_IMP_CHARGES = 2
 
     ##
-    # \brief 
-    #
+    # \brief Bitmask flags specifying the strategies used to seed alignment starting transformations.
+    # 
     class AlignmentMode(Boost.Python.enum):
 
         ##
-        # \brief NO_ALIGNMENT.
-        #
+        # \brief Disable alignment entirely (overlap is computed in the input pose only).
+        # 
         NO_ALIGNMENT = 0
 
         ##
-        # \brief SHAPE_CENTROID.
-        #
+        # \brief Place the aligned shape at the centroid of the reference shape.
+        # 
         SHAPE_CENTROID = 1
 
         ##
-        # \brief ATOM_CENTERS.
-        #
+        # \brief Seed alignments by superimposing pairs of atom centers.
+        # 
         ATOM_CENTERS = 2
 
         ##
-        # \brief COLOR_FEATURE_CENTERS.
-        #
+        # \brief Seed alignments by superimposing pairs of color (pharmacophore) feature centers.
+        # 
         COLOR_FEATURE_CENTERS = 4
 
         ##
-        # \brief RANDOM.
-        #
+        # \brief Seed alignments with random rotations.
+        # 
         RANDOM = 8
 
     ##
-    # \brief 
-    #
+    # \brief A static instance with default-initialized values.
+    # 
     DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief 
-    #
+    # \brief Sentinel value (NaN) used to disable the score cutoff.
+    # 
     NO_CUTOFF = nan
 
     ##
-    # \brief Initializes the \c %ScreeningSettings instance.
+    # \brief Constructs a <tt>ScreeningSettings</tt> instance with default values.
     # 
     def __init__() -> None: pass
 
@@ -135,87 +137,73 @@ class ScreeningSettings(Boost.Python.instance):
     def assign(settings: ScreeningSettings) -> ScreeningSettings: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the scoring function used to rank alignment results.
+    # 
     def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured scoring function.
+    # 
     def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
-    # \brief 
-    # \param cutoff 
-    #
+    # \brief Sets the minimum score below which alignment hits are discarded (or NO_CUTOFF).
+    # 
     def setScoreCutoff(cutoff: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured score cutoff (or NO_CUTOFF).
+    # 
     def getScoreCutoff() -> float: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the color feature type to use during alignment.
+    # 
     def setColorFeatureType(type: ColorFeatureType) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color feature type.
+    # 
     def getColorFeatureType() -> ColorFeatureType: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the screening mode.
+    # 
     def setScreeningMode(mode: ScreeningMode) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured screening mode.
+    # 
     def getScreeningMode() -> ScreeningMode: pass
 
     ##
-    # \brief 
-    # \param mode 
-    #
+    # \brief Sets the alignment-mode bitmask (see AlignmentMode).
+    # 
     def setAlignmentMode(mode: AlignmentMode) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured alignment-mode bitmask.
+    # 
     def getAlignmentMode() -> AlignmentMode: pass
 
     ##
-    # \brief 
-    # \param num_starts 
-    #
+    # \brief Sets the number of random starting transformations when AlignmentMode.RANDOM is enabled.
+    # 
     def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured number of random starts.
+    # 
     def getNumRandomStarts() -> int: pass
 
     ##
-    # \brief 
-    # \param all_c 
-    #
+    # \brief Enables or disables the all-carbon mode (treats every heavy atom as carbon for shape generation).
+    # 
     def allCarbonMode(all_c: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the all-carbon mode is enabled.
+    # 
     def allCarbonMode() -> bool: pass
 
     ##
@@ -225,57 +213,48 @@ class ScreeningSettings(Boost.Python.instance):
     def singleConformerSearch(all_c: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether only a single conformer of each molecule is considered.
+    # 
     def singleConformerSearch() -> bool: pass
 
     ##
-    # \brief 
-    # \param max_iter 
-    #
+    # \brief Sets the maximum number of overlap-optimization iterations.
+    # 
     def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum number of overlap-optimization iterations.
+    # 
     def getMaxNumOptimizationIterations() -> int: pass
 
     ##
-    # \brief 
-    # \param grad_norm 
-    #
+    # \brief Sets the gradient norm at which the overlap optimization is stopped.
+    # 
     def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured overlap-optimization stop gradient.
+    # 
     def getOptimizationStopGradient() -> float: pass
 
     ##
-    # \brief 
-    # \param optimize 
-    #
+    # \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+    # 
     def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap is optimized iteratively.
+    # 
     def optimizeOverlap() -> bool: pass
 
     ##
-    # \brief 
-    # \param greedy 
-    #
+    # \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+    # 
     def greedyOptimization(greedy: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the overlap optimization uses a greedy strategy.
+    # 
     def greedyOptimization() -> bool: pass
 
     objectID = property(getObjectID)

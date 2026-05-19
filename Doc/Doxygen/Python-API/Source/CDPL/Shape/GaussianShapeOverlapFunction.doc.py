@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Abstract base for functions evaluating the overlap between two Gaussian shape functions.
+# 
+# Concrete subclasses (e.g. Shape.ExactGaussianShapeOverlapFunction, Shape.FastGaussianShapeOverlapFunction) implement the overlap evaluation using different trade-offs of accuracy vs. speed.
+# 
 class GaussianShapeOverlapFunction(Boost.Python.instance):
 
     ##
@@ -42,89 +44,86 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param is_ref 
-    #
+    # \brief Specifies the reference or aligned shape function used by the overlap evaluation.
+    # 
+    # \param func The shape function.
+    # \param is_ref If <tt>True</tt>, <em>func</em> is the reference shape function; otherwise the aligned shape function.
+    # 
     def setShapeFunction(func: GaussianShapeFunction, is_ref: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param ref 
-    # \return 
-    #
+    # \brief Returns the reference or aligned shape function.
+    # 
+    # \param ref If <tt>True</tt>, the reference shape function is returned; otherwise the aligned shape function.
+    # 
     def getShapeFunction(ref: bool) -> GaussianShapeFunction: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to decide whether two color features match.
+    # 
     def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-match function.
+    # 
     def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function used to filter color features by type.
+    # 
     def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured color-filter function.
+    # 
     def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
-    # \brief 
-    # \param ref 
-    # \return 
-    #
+    # \brief Calculates the shape-only self-overlap of the reference or aligned shape function.
+    # 
+    # \param ref If <tt>True</tt>, the reference self-overlap is returned; otherwise the aligned self-overlap.
+    # 
     def calcSelfOverlap(ref: bool) -> float: pass
 
     ##
-    # \brief 
-    # \param ref 
-    # \return 
-    #
+    # \brief Calculates the color self-overlap of the reference or aligned shape function.
+    # 
+    # \param ref If <tt>True</tt>, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
+    # 
     def calcColorSelfOverlap(ref: bool) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Calculates the shape-only overlap of the reference and aligned shape functions.
+    # 
     def calcOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Calculates the shape-only overlap with the aligned shape element positions taken from <em>coords</em>.
+    # 
+    # \param coords The element 3D positions of the aligned shape.
+    # 
     def calcOverlap(coords: Math.Vector3DArray) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Calculates the color overlap of the reference and aligned shape functions.
+    # 
     def calcColorOverlap() -> float: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \return 
-    #
+    # \brief Calculates the color overlap with the aligned shape element positions taken from <em>coords</em>.
+    # 
+    # \param coords The element 3D positions of the aligned shape.
+    # 
     def calcColorOverlap(coords: Math.Vector3DArray) -> float: pass
 
     ##
-    # \brief 
-    # \param coords 
-    # \param grad 
-    # \return 
-    #
+    # \brief Calculates the shape overlap with the aligned shape element positions taken from <em>coords</em> and returns the gradient with respect to those positions.
+    # 
+    # \param coords The element 3D positions of the aligned shape.
+    # \param grad The output element-wise gradient of the overlap.
+    # 
+    # \return The shape overlap value.
+    # 
     def calcOverlapGradient(coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)

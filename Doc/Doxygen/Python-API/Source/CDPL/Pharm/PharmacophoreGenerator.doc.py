@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief PharmacophoreGenerator.
+# \brief Base class for pharmacophore generators that orchestrate per-feature-type Pharm.FeatureGenerator instances to produce the features of a Pharm.Pharmacophore from a Chem.MolecularGraph.
 # 
 class PharmacophoreGenerator(Boost.Python.instance):
 
@@ -30,8 +30,9 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %PharmacophoreGenerator instance \a gen.
-    # \param gen The \c %PharmacophoreGenerator instance to copy.
+    # \brief Constructs a copy of the <tt>PharmacophoreGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>PharmacophoreGenerator</tt> to copy.
     # 
     def __init__(gen: PharmacophoreGenerator) -> None: pass
 
@@ -48,7 +49,7 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # \brief Perceives the enabled pharmacophore features of the molecular graph <em>molgraph</em> and adds them to the pharmacophore <em>pharm</em>.
     # 
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The pharmacophore instance where the generated output features get appended.
@@ -57,9 +58,10 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, append: bool = False) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Creates a deep copy of the <tt>PharmacophoreGenerator</tt> instance (including all registered feature generators).
+    # 
+    # \return A smart reference to the cloned generator.
+    # 
     def clone() -> PharmacophoreGenerator: pass
 
     ##
@@ -123,8 +125,10 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def clearEnabledFeatures(self: int) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %PharmacophoreGenerator instance \a gen.
-    # \param gen The \c %PharmacophoreGenerator instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param gen The <tt>PharmacophoreGenerator</tt> instance to copy.
+    # 
     # \return \a self
     # 
     def assign(gen: PharmacophoreGenerator) -> PharmacophoreGenerator: pass

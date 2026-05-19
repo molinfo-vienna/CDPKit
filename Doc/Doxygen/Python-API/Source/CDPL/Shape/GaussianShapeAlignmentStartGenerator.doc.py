@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Abstract base for generators of starting transformations used to seed Gaussian-shape overlap optimization.
+# 
+# Concrete subclasses (e.g. Shape.PrincipalAxesAlignmentStartGenerator) implement the pure virtual member functions to provide a set of candidate transformations placing the aligned shape relative to the reference shape.
+# 
 class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
 
     ##
@@ -42,19 +44,23 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param xform 
-    # \return 
-    #
+    # \brief Prepares the reference shape function for use by the start generator.
+    # 
+    # \param func The reference shape function (may be modified, e.g. centered).
+    # \param xform The output transformation that maps the reference shape from its prepared frame back to its original frame.
+    # 
+    # \return The perceived symmetry class of the reference shape (see namespace Shape.SymmetryClass).
+    # 
     def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param xform 
-    # \return 
-    #
+    # \brief Prepares the aligned shape function for use by the start generator.
+    # 
+    # \param func The aligned shape function (may be modified, e.g. centered).
+    # \param xform The output transformation that maps the aligned shape from its prepared frame back to its original frame.
+    # 
+    # \return The perceived symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # 
     def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
@@ -65,30 +71,40 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \param sym_class 
-    # \return 
-    #
+    # \brief Generates the set of starting transformations for the alignment of <em>func</em>.
+    # 
+    # \param func The aligned shape function.
+    # \param sym_class The symmetry class of the aligned shape (see namespace Shape.SymmetryClass).
+    # 
+    # \return <tt>True</tt> if at least one starting transformation was produced, and <tt>False</tt> otherwise.
+    # 
     def generate(func: GaussianShapeFunction, sym_class: int) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of starting transformations produced by the last generate() call.
+    # 
+    # \return The number of starting transformations.
+    # 
     def getNumStartTransforms() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of sub-transformations sharing the same starting transformation index space.
+    # 
+    # Subclasses that produce multiple sub-transforms per logical start (e.g. for symmetry-related variants) use this method to expose the secondary count.
+    # 
+    # \return The number of sub-transformations per starting transformation.
+    # 
     def getNumStartSubTransforms() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the starting transformation at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the starting transformation.
+    # 
+    # \return A reference to the starting transformation. 
+    # 
+    # \throw Base.IndexError if the number of starting transformations is zero or <em>idx</em> is not in the range [0, getNumStartTransforms() - 1].
+    # 
     def getStartTransform(idx: int) -> Math.Vector7D: pass
 
     ##

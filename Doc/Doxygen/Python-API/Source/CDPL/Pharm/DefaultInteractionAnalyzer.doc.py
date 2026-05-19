@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief DefaultInteractionAnalyzer.
+# \brief Interaction analyzer pre-configured with the built-in default set of interaction constraints (hydrogen-bonding, ionic, aromatic-aromatic, cation-, hydrophobic, halogen-bonding).
 # 
 class DefaultInteractionAnalyzer(InteractionAnalyzer):
 

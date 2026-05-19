@@ -27,31 +27,36 @@
 class FunctionalGroupList(Chem.FragmentList):
 
     ##
-    # \brief Initializes the \c %FunctionalGroupList instance.
+    # \brief Constructs an empty <tt>FunctionalGroupList</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %FunctionalGroupList instance.
-    # \param molgraph 
+    # \brief Constructs a <tt>FunctionalGroupList</tt> instance and extracts the functional groups of <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the functional groups.
     # 
     def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %FunctionalGroupList instance \a fg_list.
-    # \param fg_list The \c %FunctionalGroupList instance to copy.
+    # \brief Constructs a copy of the <tt>FunctionalGroupList</tt> instance <em>fg_list</em>.
+    # 
+    # \param fg_list The <tt>FunctionalGroupList</tt> to copy.
     # 
     def __init__(fg_list: FunctionalGroupList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %FunctionalGroupList instance \a fg_list.
-    # \param fg_list The \c %FunctionalGroupList instance to copy.
+    # \brief Replaces the contents of this list with a copy of <em>fg_list</em>.
+    # 
+    # \param fg_list The source list.
+    # 
     # \return \a self
     # 
     def assign(fg_list: FunctionalGroupList) -> FunctionalGroupList: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Extracts the functional groups of <em>molgraph</em> and stores them as fragments of this list.
+    # 
+    # \param molgraph The molecular graph for which to extract the functional groups.
+    # 
     def extract(molgraph: Chem.MolecularGraph) -> None: pass

@@ -20,18 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief High-level driver for shape-based virtual screening of molecular databases.
+# 
+# The processor maintains a set of query molecules and aligns each incoming database molecule against all of them, reporting alignment hits through a user-supplied callback. The behaviour (similarity score type, shape generation, alignment options, etc.) is configured via the embedded Shape.ScreeningSettings instance.
+# 
 class ScreeningProcessor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %ScreeningProcessor instance.
+    # \brief Constructs an empty <tt>ScreeningProcessor</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \c %ScreeningProcessor instance.
-    # \param query 
+    # \brief Constructs a <tt>ScreeningProcessor</tt> instance with <em>query</em> as the single query molecule.
+    # 
+    # \param query The query molecule.
     # 
     def __init__(query: Chem.MolecularGraph) -> None: pass
 
@@ -48,52 +51,55 @@ class ScreeningProcessor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Sets the callback that is invoked for every alignment hit produced by process().
+    # 
     def setHitCallback(func: VoidMolecularGraph2AlignmentResultFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured hit callback.
+    # 
     def getHitCallback() -> VoidMolecularGraph2AlignmentResultFunctor: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current screening settings (mutable).
+    # 
     def getSettings() -> ScreeningSettings: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all query molecules.
+    # 
     def clearQuerySet() -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Adds <em>molgraph</em> to the query set.
+    # 
+    # \param molgraph The query molecule.
+    # 
     def addQuery(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of query molecules.
+    # 
     def getQuerySetSize() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the query molecule at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the query molecule.
+    # 
+    # \return A reference to the query molecule. 
+    # 
+    # \throw Base.IndexError if the number of query molecules is zero or <em>idx</em> is not in the range [0, getQuerySetSize() - 1].
+    # 
     def getQuery(idx: int) -> Chem.MolecularGraph: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Processes the database molecule <em>molgraph</em>, aligning it against all query molecules.
+    # 
+    # \param molgraph The database molecule.
+    # 
+    # \return <tt>True</tt> if at least one alignment hit was produced for <em>molgraph</em>, and <tt>False</tt> otherwise.
+    # 
     def process(molgraph: Chem.MolecularGraph) -> bool: pass
 
     objectID = property(getObjectID)

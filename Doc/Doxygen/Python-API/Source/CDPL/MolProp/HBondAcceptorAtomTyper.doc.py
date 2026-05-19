@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Perception of H-bond acceptor atom types (see namespace MolProp.HBondAcceptorAtomType) by SMARTS pattern matching.
+# 
 class HBondAcceptorAtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %HBondAcceptorAtomTyper instance.
+    # \brief Constructs the <tt>HBondAcceptorAtomTyper</tt> instance.
     # 
     def __init__() -> None: pass
 
@@ -36,9 +36,10 @@ class HBondAcceptorAtomTyper(Boost.Python.instance):
     def __init__(typer: HBondAcceptorAtomTyper) -> None: pass
 
     ##
-    # \brief Initializes the \c %HBondAcceptorAtomTyper instance.
-    # \param molgraph 
-    # \param types 
+    # \brief Constructs the <tt>HBondAcceptorAtomTyper</tt> instance and perceives the H-bond acceptor types of the atoms in <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param types The output array storing the perceived H-bond acceptor types (indexed by atom index).
     # 
     def __init__(molgraph: Chem.MolecularGraph, types: Util.UIArray) -> None: pass
 
@@ -62,10 +63,11 @@ class HBondAcceptorAtomTyper(Boost.Python.instance):
     def assign(typer: HBondAcceptorAtomTyper) -> HBondAcceptorAtomTyper: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param types 
-    #
+    # \brief Perceives the H-bond acceptor types of the atoms in <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph.
+    # \param types The output array storing the perceived H-bond acceptor types (indexed by atom index).
+    # 
     def perceiveTypes(molgraph: Chem.MolecularGraph, types: Util.UIArray) -> None: pass
 
     objectID = property(getObjectID)
