@@ -48,7 +48,7 @@ for i in `find $out_dir/cdpl_api_doc/python_api_doc/ -name "*.html"`; do
     echo "<url><loc>https://cdpkit.org/$i</loc></url>" >> $2/sitemap.xml
 done
 
-for i in `find $out_dir/c++_api_doc/python_api_doc/ -name "*.html"`; do
+for i in `find $out_dir/cdpl_api_doc/c++_api_doc/ -name "*.html"`; do
     sed -e "s|</head>|<link rel=\"canonical\" href=\"https://cdpkit.org/$i\" /></head>|g" -i $i
     echo "<url><loc>https://cdpkit.org/$i</loc></url>" >> $2/sitemap.xml
 done
