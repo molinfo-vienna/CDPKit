@@ -51,12 +51,14 @@ namespace CDPL
         class Pharmacophore;
 
         /**
-         * \brief FeatureGenerator.
+         * \brief Abstract base class for generators that perceive one type of pharmacophore feature
+         *        (e.g. an aromatic ring or H-bond donor) and append the perceived features to a Pharm::Pharmacophore.
          */
         class CDPL_PHARM_API FeatureGenerator
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureGenerator instances. */
             typedef std::shared_ptr<FeatureGenerator> SharedPointer;
 
             /**
@@ -65,7 +67,7 @@ namespace CDPL
             FeatureGenerator();
 
             /**
-             * Virtual destructor.
+             * \brief Virtual destructor.
              */
             virtual ~FeatureGenerator() {}
 
@@ -77,7 +79,7 @@ namespace CDPL
 
             /**
              * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
-             * \return The registered atom 3D-coordinates function.
+             * \return A \c const reference to the registered atom 3D-coordinates function.
              */
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
@@ -88,6 +90,10 @@ namespace CDPL
              */
             virtual void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) = 0;
 
+            /**
+             * \brief Creates a deep copy of the \c %FeatureGenerator instance.
+             * \return A smart pointer to the cloned feature generator.
+             */
             virtual SharedPointer clone() const = 0;
 
           protected:
@@ -97,6 +103,11 @@ namespace CDPL
              */
             FeatureGenerator(const FeatureGenerator& gen);
 
+            /**
+             * \brief Copy assignment operator.
+             * \param gen The \c %FeatureGenerator instance to copy.
+             * \return A reference to itself.
+             */
             FeatureGenerator& operator=(const FeatureGenerator& gen);
 
           private:

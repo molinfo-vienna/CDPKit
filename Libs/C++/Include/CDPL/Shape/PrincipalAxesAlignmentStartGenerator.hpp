@@ -67,82 +67,178 @@ namespace CDPL
             /** \brief Default maximum random translation magnitude applied to random starts. */
             static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
 
-            /** \brief Constructs the \c %PrincipalAxesAlignmentStartGenerator instance. */
+            /**
+             * \brief Constructs the \c %PrincipalAxesAlignmentStartGenerator instance.
+             */
             PrincipalAxesAlignmentStartGenerator();
 
+            /**
+             * \brief Prepares the reference shape function for use by the start generator.
+             * \param func The reference shape function (may be modified, e.g. centered).
+             * \param xform The output transformation that maps the reference shape from its prepared frame back to its original frame.
+             * \return The perceived symmetry class of the reference shape (see namespace Shape::SymmetryClass).
+             */
             unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
+            /**
+             * \brief Prepares the aligned shape function for use by the start generator.
+             * \param func The aligned shape function (may be modified, e.g. centered).
+             * \param xform The output transformation that maps the aligned shape from its prepared frame back to its original frame.
+             * \return The perceived symmetry class of the aligned shape (see namespace Shape::SymmetryClass).
+             */
             unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
-            /** \brief Enables or disables the generation of a starting transformation at the shape centroid. */
+            /**
+             * \brief Enables or disables the generation of a starting transformation at the shape centroid.
+             * \param generate \c true to enable the shape-centroid start, and \c false to disable it.
+             */
             void genShapeCenterStarts(bool generate);
 
-            /** \brief Tells whether a starting transformation at the shape centroid is generated. */
+            /**
+             * \brief Tells whether a starting transformation at the shape centroid is generated.
+             * \return \c true if a shape-centroid start is generated, and \c false otherwise.
+             */
             bool genShapeCenterStarts() const;
 
-            /** \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers. */
+            /**
+             * \brief Enables or disables the generation of starting transformations at color (pharmacophore) feature centers.
+             * \param generate \c true to enable the color-center starts, and \c false to disable them.
+             */
             void genColorCenterStarts(bool generate);
 
-            /** \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated. */
+            /**
+             * \brief Tells whether starting transformations at color (pharmacophore) feature centers are generated.
+             * \return \c true if color-center starts are generated, and \c false otherwise.
+             */
             bool genColorCenterStarts() const;
 
-            /** \brief Enables or disables the generation of starting transformations at non-color (shape) element centers. */
+            /**
+             * \brief Enables or disables the generation of starting transformations at non-color (shape) element centers.
+             * \param generate \c true to enable the non-color-center starts, and \c false to disable them.
+             */
             void genNonColorCenterStarts(bool generate);
 
-            /** \brief Tells whether starting transformations at non-color (shape) element centers are generated. */
+            /**
+             * \brief Tells whether starting transformations at non-color (shape) element centers are generated.
+             * \return \c true if non-color-center starts are generated, and \c false otherwise.
+             */
             bool genNonColorCenterStarts() const;
 
-            /** \brief Enables or disables the generation of random starting transformations. */
+            /**
+             * \brief Enables or disables the generation of random starting transformations.
+             * \param generate \c true to enable the random starts, and \c false to disable them.
+             */
             void genRandomStarts(bool generate);
 
-            /** \brief Tells whether random starting transformations are generated. */
+            /**
+             * \brief Tells whether random starting transformations are generated.
+             * \return \c true if random starts are generated, and \c false otherwise.
+             */
             bool genRandomStarts() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape. */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the aligned shape.
+             * \param generate \c true to consider aligned-shape centers, and \c false to ignore them.
+             */
             void genForAlignedShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the aligned shape. */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the aligned shape.
+             * \return \c true if aligned-shape centers are considered, and \c false otherwise.
+             */
             bool genForAlignedShapeCenters() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape. */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the reference shape.
+             * \param generate \c true to consider reference-shape centers, and \c false to ignore them.
+             */
             void genForReferenceShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the reference shape. */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the reference shape.
+             * \return \c true if reference-shape centers are considered, and \c false otherwise.
+             */
             bool genForReferenceShapeCenters() const;
 
-            /** \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes). */
+            /**
+             * \brief Specifies whether element-/color-center starts shall be generated for centers of the shape with more elements (instead of both shapes).
+             * \param generate \c true to use only the centers of the larger shape, and \c false to use the centers of all configured shapes.
+             */
             void genForLargerShapeCenters(bool generate);
 
-            /** \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes). */
+            /**
+             * \brief Tells whether element-/color-center starts are generated for centers of the shape with more elements (instead of both shapes).
+             * \return \c true if only the centers of the larger shape are used, and \c false otherwise.
+             */
             bool genForLargerShapeCenters() const;
 
-            /** \brief Sets the relative threshold for treating two principal moments as equal. */
+            /**
+             * \brief Sets the relative threshold for treating two principal moments as equal.
+             * \param thresh The new symmetry threshold.
+             */
             void setSymmetryThreshold(double thresh);
 
-            /** \brief Returns the currently configured symmetry threshold. */
+            /**
+             * \brief Returns the currently configured symmetry threshold.
+             * \return The symmetry threshold.
+             */
             double getSymmetryThreshold();
 
-            /** \brief Sets the maximum random translation magnitude applied to random starts. */
+            /**
+             * \brief Sets the maximum random translation magnitude applied to random starts.
+             * \param max_trans The new maximum random translation magnitude.
+             */
             void setMaxRandomTranslation(double max_trans);
 
-            /** \brief Returns the currently configured maximum random translation. */
+            /**
+             * \brief Returns the currently configured maximum random translation.
+             * \return The maximum random translation magnitude.
+             */
             double getMaxRandomTranslation() const;
 
-            /** \brief Sets the number of random starting transformations. */
+            /**
+             * \brief Sets the number of random starting transformations.
+             * \param num_starts The new number of random starts.
+             */
             void setNumRandomStarts(std::size_t num_starts);
 
-            /** \brief Returns the currently configured number of random starts. */
+            /**
+             * \brief Returns the currently configured number of random starts.
+             * \return The number of random starts.
+             */
             std::size_t getNumRandomStarts() const;
 
-            /** \brief Sets the seed used by the random number generator that produces the random starts. */
+            /**
+             * \brief Sets the seed used by the random number generator that produces the random starts.
+             * \param seed The new random seed.
+             */
             void setRandomSeed(unsigned int seed);
 
+            /**
+             * \brief Specifies the reference shape function and its symmetry class.
+             * \param func The reference shape function.
+             * \param sym_class The symmetry class of the reference shape (see namespace Shape::SymmetryClass).
+             */
             void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
+            /**
+             * \brief Generates the starting transformations for the alignment of \a func against the previously configured reference shape.
+             * \param func The aligned shape function.
+             * \param sym_class The symmetry class of the aligned shape (see namespace Shape::SymmetryClass).
+             * \return \c true if at least one starting transformation has been generated, and \c false otherwise.
+             */
             bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
 
+            /**
+             * \brief Returns the total number of starting transformations produced by the last generate() call.
+             * \return The number of starting transformations.
+             */
             std::size_t getNumStartTransforms() const;
 
+            /**
+             * \brief Returns the number of sub-transformations applied per generated starting transformation (e.g. axes-swap variants).
+             * \return The number of sub-transformations.
+             */
             std::size_t getNumStartSubTransforms() const;
 
             /**

@@ -64,7 +64,9 @@ namespace CDPL
             /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FastGaussianShapeOverlapFunction instances. */
             typedef std::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 
-            /** \brief Constructs the \c %FastGaussianShapeOverlapFunction instance without associated shape functions. */
+            /**
+             * \brief Constructs the \c %FastGaussianShapeOverlapFunction instance without associated shape functions.
+             */
             FastGaussianShapeOverlapFunction();
 
             /**
@@ -81,51 +83,131 @@ namespace CDPL
             FastGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                              const GaussianShapeFunction& ovl_shape_func);
 
-            /** \brief Destructor. */
+            /**
+             * \brief Destructor.
+             */
             ~FastGaussianShapeOverlapFunction();
 
-            /** \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions. */
+            /**
+             * \brief Enables or disables the proximity-check pruning of Gaussian-product pair contributions.
+             * \param enable \c true to enable the proximity check, and \c false to disable it.
+             */
             void proximityOptimization(bool enable);
 
-            /** \brief Tells whether the proximity-check pruning is enabled. */
+            /**
+             * \brief Tells whether the proximity-check pruning is enabled.
+             * \return \c true if the proximity check is enabled, and \c false otherwise.
+             */
             bool proximityOptimization() const;
 
-            /** \brief Sets the scaling factor applied to van der Waals radii during the proximity check. */
+            /**
+             * \brief Sets the scaling factor applied to van der Waals radii during the proximity check.
+             * \param factor The new radius scaling factor.
+             */
             void setRadiusScalingFactor(double factor);
 
-            /** \brief Returns the currently configured radius scaling factor. */
+            /**
+             * \brief Returns the currently configured radius scaling factor.
+             * \return The radius scaling factor.
+             */
             double getRadiusScalingFactor() const;
 
-            /** \brief Enables or disables the use of a fast approximation for the exponential function. */
+            /**
+             * \brief Enables or disables the use of a fast approximation for the exponential function.
+             * \param enable \c true to enable the fast-exponential approximation, and \c false to use the standard exponential.
+             */
             void fastExpFunction(bool enable);
 
-            /** \brief Tells whether the fast-exponential approximation is enabled. */
+            /**
+             * \brief Tells whether the fast-exponential approximation is enabled.
+             * \return \c true if the fast-exponential approximation is enabled, and \c false otherwise.
+             */
             bool fastExpFunction() const;
 
+            /**
+             * \brief Specifies the reference or aligned shape function used by the overlap evaluation.
+             * \param func The shape function.
+             * \param is_ref If \c true, \a func is the reference shape function; otherwise the aligned shape function.
+             */
             void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
 
+            /**
+             * \brief Returns the reference or aligned shape function.
+             * \param ref If \c true, the reference shape function is returned; otherwise the aligned shape function.
+             * \return A pointer to the requested shape function (or \c nullptr if none is associated).
+             */
             const GaussianShapeFunction* getShapeFunction(bool ref) const;
 
+            /**
+             * \brief Specifies the function used to decide whether two color features match.
+             * \param func The color-match function.
+             */
             void setColorMatchFunction(const ColorMatchFunction& func);
 
+            /**
+             * \brief Returns the currently configured color-match function.
+             * \return A \c const reference to the color-match function.
+             */
             const ColorMatchFunction& getColorMatchFunction() const;
 
+            /**
+             * \brief Specifies the function used to filter color features by type.
+             * \param func The color-filter function.
+             */
             void setColorFilterFunction(const ColorFilterFunction& func);
 
+            /**
+             * \brief Returns the currently configured color-filter function.
+             * \return A \c const reference to the color-filter function.
+             */
             const ColorFilterFunction& getColorFilterFunction() const;
 
+            /**
+             * \brief Calculates the shape-only self-overlap of the reference or aligned shape function.
+             * \param ref If \c true, the reference self-overlap is returned; otherwise the aligned self-overlap.
+             * \return The self-overlap value.
+             */
             double calcSelfOverlap(bool ref) const;
 
+            /**
+             * \brief Calculates the color self-overlap of the reference or aligned shape function.
+             * \param ref If \c true, the reference color self-overlap is returned; otherwise the aligned color self-overlap.
+             * \return The color self-overlap value.
+             */
             double calcColorSelfOverlap(bool ref) const;
 
+            /**
+             * \brief Calculates the shape-only overlap of the reference and aligned shape functions.
+             * \return The shape overlap value.
+             */
             double calcOverlap() const;
 
+            /**
+             * \brief Calculates the color overlap of the reference and aligned shape functions.
+             * \return The color overlap value.
+             */
             double calcColorOverlap() const;
 
+            /**
+             * \brief Calculates the shape-only overlap with the aligned shape element positions taken from \a coords.
+             * \param coords The element 3D positions of the aligned shape.
+             * \return The shape overlap value.
+             */
             double calcOverlap(const Math::Vector3DArray& coords) const;
 
+            /**
+             * \brief Calculates the color overlap with the aligned shape element positions taken from \a coords.
+             * \param coords The element 3D positions of the aligned shape.
+             * \return The color overlap value.
+             */
             double calcColorOverlap(const Math::Vector3DArray& coords) const;
 
+            /**
+             * \brief Calculates the shape overlap with the aligned shape element positions taken from \a coords and returns the gradient with respect to those positions.
+             * \param coords The element 3D positions of the aligned shape.
+             * \param grad The output element-wise gradient of the overlap.
+             * \return The shape overlap value.
+             */
             double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
             /**

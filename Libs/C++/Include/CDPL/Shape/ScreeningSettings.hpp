@@ -110,79 +110,153 @@ namespace CDPL
                 RANDOM                = 0x8
             };
 
-            /** \brief Constructs a \c %ScreeningSettings instance with default values. */
+            /**
+             * \brief Constructs a \c %ScreeningSettings instance with default values.
+             */
             ScreeningSettings();
 
-            /** \brief Sets the scoring function used to rank alignment results. */
+            /**
+             * \brief Sets the scoring function used to rank alignment results.
+             * \param func The scoring function.
+             */
             void setScoringFunction(const ScoringFunction& func);
 
-            /** \brief Returns the currently configured scoring function. */
+            /**
+             * \brief Returns the currently configured scoring function.
+             * \return A \c const reference to the scoring function.
+             */
             const ScoringFunction& getScoringFunction() const;
 
-            /** \brief Sets the color feature type to use during alignment. */
+            /**
+             * \brief Sets the color feature type to use during alignment.
+             * \param type The new color-feature type.
+             */
             void setColorFeatureType(ColorFeatureType type);
 
-            /** \brief Returns the currently configured color feature type. */
+            /**
+             * \brief Returns the currently configured color feature type.
+             * \return The color-feature type.
+             */
             ColorFeatureType getColorFeatureType() const;
 
-            /** \brief Sets the screening mode. */
+            /**
+             * \brief Sets the screening mode.
+             * \param mode The new screening mode.
+             */
             void setScreeningMode(ScreeningMode mode);
 
-            /** \brief Returns the currently configured screening mode. */
+            /**
+             * \brief Returns the currently configured screening mode.
+             * \return The screening mode.
+             */
             ScreeningMode getScreeningMode() const;
 
-            /** \brief Sets the alignment-mode bitmask (see AlignmentMode). */
+            /**
+             * \brief Sets the alignment-mode bitmask (see AlignmentMode).
+             * \param mode The new alignment-mode bitmask.
+             */
             void setAlignmentMode(AlignmentMode mode);
 
-            /** \brief Returns the currently configured alignment-mode bitmask. */
+            /**
+             * \brief Returns the currently configured alignment-mode bitmask.
+             * \return The alignment-mode bitmask.
+             */
             AlignmentMode getAlignmentMode() const;
 
-            /** \brief Sets the number of random starting transformations when AlignmentMode::RANDOM is enabled. */
+            /**
+             * \brief Sets the number of random starting transformations when AlignmentMode::RANDOM is enabled.
+             * \param num_starts The new number of random starts.
+             */
             void setNumRandomStarts(std::size_t num_starts);
 
-            /** \brief Returns the currently configured number of random starts. */
+            /**
+             * \brief Returns the currently configured number of random starts.
+             * \return The number of random starts.
+             */
             std::size_t getNumRandomStarts() const;
 
-            /** \brief Enables or disables the all-carbon mode (treats every heavy atom as carbon for shape generation). */
+            /**
+             * \brief Enables or disables the all-carbon mode (treats every heavy atom as carbon for shape generation).
+             * \param all_c \c true to enable the all-carbon mode, and \c false to use the actual atom types.
+             */
             void allCarbonMode(bool all_c);
 
-            /** \brief Tells whether the all-carbon mode is enabled. */
+            /**
+             * \brief Tells whether the all-carbon mode is enabled.
+             * \return \c true if the all-carbon mode is enabled, and \c false otherwise.
+             */
             bool allCarbonMode() const;
 
-            /** \brief Specifies whether only a single conformer of each molecule is considered. */
+            /**
+             * \brief Specifies whether only a single conformer of each molecule is considered.
+             * \param single_conf \c true to consider only a single conformer, and \c false to consider all conformers.
+             */
             void singleConformerSearch(bool single_conf);
 
-            /** \brief Tells whether only a single conformer of each molecule is considered. */
+            /**
+             * \brief Tells whether only a single conformer of each molecule is considered.
+             * \return \c true if only a single conformer is considered, and \c false otherwise.
+             */
             bool singleConformerSearch() const;
 
-            /** \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment. */
+            /**
+             * \brief Specifies whether the overlap shall be optimized iteratively after the initial alignment.
+             * \param optimize \c true to optimize the overlap, and \c false to skip optimization.
+             */
             void optimizeOverlap(bool optimize);
 
-            /** \brief Tells whether the overlap is optimized iteratively. */
+            /**
+             * \brief Tells whether the overlap is optimized iteratively.
+             * \return \c true if the overlap is optimized, and \c false otherwise.
+             */
             bool optimizeOverlap() const;
 
-            /** \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum. */
+            /**
+             * \brief Specifies whether the overlap optimization shall use a greedy strategy that stops at the first local maximum.
+             * \param greedy \c true to use the greedy strategy, and \c false to use the full optimization.
+             */
             void greedyOptimization(bool greedy);
 
-            /** \brief Tells whether the overlap optimization uses a greedy strategy. */
+            /**
+             * \brief Tells whether the overlap optimization uses a greedy strategy.
+             * \return \c true if the greedy strategy is used, and \c false otherwise.
+             */
             bool greedyOptimization() const;
 
-            /** \brief Sets the maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Sets the maximum number of overlap-optimization iterations.
+             * \param max_iter The new maximum number of iterations.
+             */
             void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-            /** \brief Returns the currently configured maximum number of overlap-optimization iterations. */
+            /**
+             * \brief Returns the currently configured maximum number of overlap-optimization iterations.
+             * \return The maximum number of iterations.
+             */
             std::size_t getMaxNumOptimizationIterations() const;
 
-            /** \brief Sets the gradient norm at which the overlap optimization is stopped. */
+            /**
+             * \brief Sets the gradient norm at which the overlap optimization is stopped.
+             * \param grad_norm The new stop gradient norm.
+             */
             void setOptimizationStopGradient(double grad_norm);
 
-            /** \brief Returns the currently configured overlap-optimization stop gradient. */
+            /**
+             * \brief Returns the currently configured overlap-optimization stop gradient.
+             * \return The stop gradient norm.
+             */
             double getOptimizationStopGradient() const;
 
-            /** \brief Sets the minimum score below which alignment hits are discarded (or NO_CUTOFF). */
+            /**
+             * \brief Sets the minimum score below which alignment hits are discarded (or NO_CUTOFF).
+             * \param cutoff The new score cutoff (or NO_CUTOFF to disable cutoff filtering).
+             */
             void setScoreCutoff(double cutoff);
 
-            /** \brief Returns the currently configured score cutoff (or NO_CUTOFF). */
+            /**
+             * \brief Returns the currently configured score cutoff (or NO_CUTOFF).
+             * \return The score cutoff (or NO_CUTOFF if cutoff filtering is disabled).
+             */
             double getScoreCutoff() const;
 
           private:

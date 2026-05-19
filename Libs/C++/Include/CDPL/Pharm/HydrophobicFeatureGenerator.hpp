@@ -48,21 +48,30 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief HydrophobicFeatureGenerator.
-         * \see [\ref CATA] 
+         * \brief Pharm::FeatureGenerator implementation that perceives hydrophobic features by grouping
+         *        atoms into rings, chains and small fragment groups whose total atom hydrophobicity
+         *        exceeds the per-class threshold.
+         * \see [\ref CATA]
          */
         class CDPL_PHARM_API HydrophobicFeatureGenerator : public PatternBasedFeatureGenerator
         {
 
           public:
+            /** \brief Default minimum total atom hydrophobicity required for emitting a ring feature. */
             static constexpr double DEF_HYD_THRESHOLD_RING  = 2.0;
+            /** \brief Default minimum total atom hydrophobicity required for emitting a chain feature. */
             static constexpr double DEF_HYD_THRESHOLD_CHAIN = 0.8;
+            /** \brief Default minimum total atom hydrophobicity required for emitting a group feature. */
             static constexpr double DEF_HYD_THRESHOLD_GROUP = 0.8;
 
+            /** \brief Default value for the feature tolerance property of generated hydrophobic features. */
             static constexpr double       DEF_FEATURE_TOL  = 1.5;
+            /** \brief Default value for the feature type property of generated hydrophobic features (Pharm::FeatureType::HYDROPHOBIC). */
             static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
+            /** \brief Default value for the feature geometry property of generated hydrophobic features (Pharm::FeatureGeometry::SPHERE). */
             static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
 
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicFeatureGenerator instances. */
             typedef std::shared_ptr<HydrophobicFeatureGenerator> SharedPointer;
 
             /**
@@ -77,7 +86,7 @@ namespace CDPL
             HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen);
 
             /**
-             * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
+             * \brief Perceives hydrophobic group features of the molecular graph \a molgraph and adds
              *        them to the pharmacophore \a pharm.
              * \param molgraph The molecular graph for which to perceive the features.
              * \param pharm The output pharmacophore where to add the generated features.
@@ -85,7 +94,7 @@ namespace CDPL
             HydrophobicFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
             /**
-             * Destructor.
+             * \brief Destructor.
              */
             ~HydrophobicFeatureGenerator();
 
@@ -186,6 +195,10 @@ namespace CDPL
              */
             HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
 
+            /**
+             * \brief Creates a deep copy of the \c %HydrophobicFeatureGenerator instance.
+             * \return A smart pointer to the cloned feature generator.
+             */
             FeatureGenerator::SharedPointer clone() const;
 
           private:
