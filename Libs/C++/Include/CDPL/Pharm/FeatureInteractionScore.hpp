@@ -44,13 +44,14 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeatureInteractionScore.
+         * \brief Abstract base class for scoring functors that quantify the strength of a directional pharmacophore-feature
+         *        interaction (e.g. H-bond, ionic, &pi;-&pi; stacking) between two Pharm::Feature instances.
          */
         class CDPL_PHARM_API FeatureInteractionScore
         {
 
           public:
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScore instances.
              */
             typedef std::shared_ptr<FeatureInteractionScore> SharedPointer;
@@ -60,8 +61,20 @@ namespace CDPL
              */
             virtual ~FeatureInteractionScore() {}
 
+            /**
+             * \brief Evaluates the interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The interaction score.
+             */
             virtual double operator()(const Feature& ftr1, const Feature& ftr2) const = 0;
 
+            /**
+             * \brief Evaluates the interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The interaction score.
+             */
             virtual double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const = 0;
 
           protected:

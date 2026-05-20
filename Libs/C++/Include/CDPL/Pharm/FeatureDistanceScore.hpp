@@ -44,35 +44,61 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeatureDistanceScore.
+         * \brief Pharm::FeatureInteractionScore implementation that scores a feature pair based on whether their 3D-position
+         *        distance falls within a configured [min, max] interval, optionally weighted by a distance-scoring function.
          */
         class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
         {
 
           public:
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
              */
             typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
+            /** \brief Type of the function mapping a raw feature-pair distance to a score contribution. */
             typedef std::function<double(double)> DistanceScoringFunction;
 
             /**
-             * \brief Constructs a \c %FeatureDistanceScore functor with a 
+             * \brief Constructs a \c %FeatureDistanceScore functor with a
              *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
              * \param min_dist The minimum feature pair distance.
              * \param max_dist The maximum feature pair distance.
              */
             FeatureDistanceScore(double min_dist, double max_dist);
 
+            /**
+             * \brief Returns the currently configured minimum feature pair distance.
+             * \return The minimum distance.
+             */
             double getMinDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum feature pair distance.
+             * \return The maximum distance.
+             */
             double getMaxDistance() const;
 
+            /**
+             * \brief Specifies the function that maps a feature-pair distance to its score contribution.
+             * \param func The distance-scoring function.
+             */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
+            /**
+             * \brief Evaluates the distance-based interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The distance-based interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the distance-based interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The distance-based interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
           private:

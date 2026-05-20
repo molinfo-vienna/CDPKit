@@ -42,23 +42,31 @@ namespace CDPL
     {
 
         /**
-         * \brief OrthogonalPiPiInteractionScore.
+         * \brief Pharm::FeatureInteractionScore implementation that scores an aromatic feature pair for an orthogonal
+         *        (T-shaped) &pi;-&pi; interaction by combining per-component scores for horizontal/vertical center
+         *        separations and ring-plane-normal angle.
          */
         class CDPL_PHARM_API OrthogonalPiPiInteractionScore : public FeatureInteractionScore
         {
 
           public:
+            /** \brief Default maximum vertical (out-of-plane) ring-center separation in &Aring;ngstrom. */
             static constexpr double DEF_MAX_V_DISTANCE = 1.4;
+            /** \brief Default minimum horizontal (in-plane) ring-center separation in &Aring;ngstrom. */
             static constexpr double DEF_MIN_H_DISTANCE = 4.0;
+            /** \brief Default maximum horizontal (in-plane) ring-center separation in &Aring;ngstrom. */
             static constexpr double DEF_MAX_H_DISTANCE = 6.0;
+            /** \brief Default maximum angle deviation from 90&deg; of the two ring-plane normals in degrees. */
             static constexpr double DEF_MAX_ANGLE      = 20.0;
 
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %OrthogonalPiPiInteractionScore instances.
              */
             typedef std::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
 
+            /** \brief Type of the function mapping a feature-pair distance to its score contribution. */
             typedef std::function<double(double)> DistanceScoringFunction;
+            /** \brief Type of the function mapping a ring-plane angle to its score contribution. */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**
@@ -71,20 +79,56 @@ namespace CDPL
             OrthogonalPiPiInteractionScore(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
                                            double max_v_dist = DEF_MAX_V_DISTANCE, double max_ang = DEF_MAX_ANGLE);
 
+            /**
+             * \brief Returns the currently configured minimum horizontal ring-center separation.
+             * \return The minimum horizontal distance.
+             */
             double getMinHDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum horizontal ring-center separation.
+             * \return The maximum horizontal distance.
+             */
             double getMaxHDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum vertical ring-center separation.
+             * \return The maximum vertical distance.
+             */
             double getMaxVDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum deviation from a 90&deg; angle between the two ring-plane normals.
+             * \return The maximum angle deviation in degrees.
+             */
             double getMaxAngle() const;
 
+            /**
+             * \brief Specifies the function that maps a feature-pair distance to its score contribution.
+             * \param func The distance-scoring function.
+             */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the ring-plane-normal angle to its score contribution.
+             * \param func The angle-scoring function.
+             */
             void setAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Evaluates the orthogonal &pi;-&pi; interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first aromatic feature.
+             * \param ftr2 The second aromatic feature.
+             * \return The orthogonal &pi;-&pi; interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the orthogonal &pi;-&pi; interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second aromatic feature.
+             * \return The orthogonal &pi;-&pi; interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
           private:

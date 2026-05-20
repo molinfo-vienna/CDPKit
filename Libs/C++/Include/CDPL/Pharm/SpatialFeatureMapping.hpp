@@ -49,7 +49,9 @@ namespace CDPL
         class FeatureContainer;
 
         /**
-         * \brief SpatialFeatureMapping.
+         * \brief Pharm::FeatureMapping specialization that perceives a reference-to-aligned feature mapping based on
+         *        type, position and geometry compatibility under a given transformation, caching per-pair position and
+         *        geometry match scores for later retrieval.
          */
         class CDPL_PHARM_API SpatialFeatureMapping : public FeatureMapping
         {
@@ -113,10 +115,29 @@ namespace CDPL
              */
             const GeometryMatchFunction& getGeometryMatchFunction() const;
 
+            /**
+             * \brief Returns the position-match score cached for the (\a ref_ftr, \a aligned_ftr) pair by the last perceive() call.
+             * \param ref_ftr The reference feature.
+             * \param aligned_ftr The aligned feature.
+             * \return The cached position-match score (or zero if no entry exists for the pair).
+             */
             double getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
+            /**
+             * \brief Returns the geometry-match score cached for the (\a ref_ftr, \a aligned_ftr) pair by the last perceive() call.
+             * \param ref_ftr The reference feature.
+             * \param aligned_ftr The aligned feature.
+             * \return The cached geometry-match score (or zero if no entry exists for the pair).
+             */
             double getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
+            /**
+             * \brief Computes the spatial feature mapping between the reference and aligned feature containers after
+             *        applying \a xform to the aligned features, populating this mapping and the per-pair score caches.
+             * \param ref_ftrs The reference feature container.
+             * \param aligned_ftrs The aligned feature container.
+             * \param xform The transformation applied to the aligned features before the mapping is perceived.
+             */
             void perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform);
 
           private:

@@ -41,15 +41,20 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief XBondingInteractionConstraint.
+         * \brief Constraint functor that tests whether a halogen-bond donor/acceptor feature pair satisfies the geometric
+         *        criteria for a halogen bond (halogen-acceptor distance plus the two characteristic angles).
          */
         class CDPL_PHARM_API XBondingInteractionConstraint
         {
 
           public:
+            /** \brief Default minimum halogen-acceptor distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
+            /** \brief Default maximum halogen-acceptor distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_AX_DISTANCE = 3.75;
+            /** \brief Default minimum acceptor-halogen-bound-atom angle in degrees. */
             static constexpr double DEF_MIN_AXB_ANGLE   = 135.0;
+            /** \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees. */
             static constexpr double DEF_MAX_ACC_ANGLE   = 45.0;
 
             /**
@@ -66,14 +71,36 @@ namespace CDPL
                 donAccOrder(don_acc),
                 minAXDist(min_ax_dist), maxAXDist(max_ax_dist), minAXBAngle(min_axb_ang), maxAccAngle(max_acc_ang) {}
 
+            /**
+             * \brief Returns the currently configured minimum halogen-acceptor distance.
+             * \return The minimum AX distance.
+             */
             double getMinAXDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum halogen-acceptor distance.
+             * \return The maximum AX distance.
+             */
             double getMaxAXDistance() const;
 
+            /**
+             * \brief Returns the currently configured minimum acceptor-halogen-bound-atom angle.
+             * \return The minimum AXB angle in degrees.
+             */
             double getMinAXBAngle() const;
 
+            /**
+             * \brief Returns the currently configured maximum deviation from the acceptor's preferred X-bonding direction.
+             * \return The maximum acceptor angle in degrees.
+             */
             double getMaxAcceptorAngle() const;
 
+            /**
+             * \brief Tests whether \a ftr1 and \a ftr2 satisfy the geometric halogen-bond criteria.
+             * \param ftr1 The first feature (donor or acceptor, depending on the constructor flag).
+             * \param ftr2 The second feature.
+             * \return \c true if the constraint is satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:

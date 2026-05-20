@@ -49,44 +49,112 @@ namespace CDPL
     {
 
         /**
-         * \brief FileScreeningHitCollector.
+         * \brief Hit-callback functor for use with Pharm::ScreeningProcessor that writes each accepted hit molecule
+         *        (optionally aligned and annotated with score/database properties) to a Base::DataWriter sink.
          */
         class CDPL_PHARM_API FileScreeningHitCollector
         {
 
           public:
+            /** \brief Type of the underlying molecular-graph data writer. */
             typedef Base::DataWriter<Chem::MolecularGraph> MolecularGraphWriter;
 
+            /**
+             * \brief Constructs the \c %FileScreeningHitCollector instance.
+             * \param writer The molecular-graph writer used to output hit molecules.
+             */
             FileScreeningHitCollector(MolecularGraphWriter& writer);
 
+            /**
+             * \brief Specifies the molecular-graph writer used to output hit molecules.
+             * \param writer The data writer.
+             */
             void setDataWriter(MolecularGraphWriter& writer);
 
+            /**
+             * \brief Returns the currently configured molecular-graph writer.
+             * \return A reference to the data writer.
+             */
             MolecularGraphWriter& getDataWriter() const;
 
+            /**
+             * \brief Specifies whether the hit molecule's coordinates shall be transformed by the alignment matrix before writing.
+             * \param align \c true to align the hit molecule, and \c false to write the original coordinates.
+             */
             void alignHitMolecule(bool align);
 
+            /**
+             * \brief Tells whether the hit molecule is aligned before writing.
+             * \return \c true if alignment is performed, and \c false otherwise.
+             */
             bool alignHitMolecule() const;
 
+            /**
+             * \brief Specifies whether the alignment score shall be written as a molecule property.
+             * \param output \c true to write the score property, and \c false to skip it.
+             */
             void outputScoreProperty(bool output);
 
+            /**
+             * \brief Tells whether the alignment score is written as a molecule property.
+             * \return \c true if the score property is written, and \c false otherwise.
+             */
             bool outputScoreProperty() const;
 
+            /**
+             * \brief Specifies whether the source-database name shall be written as a molecule property.
+             * \param output \c true to write the database-name property, and \c false to skip it.
+             */
             void outputDBNameProperty(bool output);
 
+            /**
+             * \brief Tells whether the source-database name is written as a molecule property.
+             * \return \c true if the database-name property is written, and \c false otherwise.
+             */
             bool outputDBNameProperty() const;
 
+            /**
+             * \brief Specifies whether the source-database molecule index shall be written as a molecule property.
+             * \param output \c true to write the molecule-index property, and \c false to skip it.
+             */
             void outputDBMoleculeIndexProperty(bool output);
 
+            /**
+             * \brief Tells whether the source-database molecule index is written as a molecule property.
+             * \return \c true if the molecule-index property is written, and \c false otherwise.
+             */
             bool outputDBMoleculeIndexProperty() const;
 
+            /**
+             * \brief Specifies whether the conformer index within the source molecule shall be written as a molecule property.
+             * \param output \c true to write the conformer-index property, and \c false to skip it.
+             */
             void outputMoleculeConfIndexProperty(bool output);
 
+            /**
+             * \brief Tells whether the conformer index within the source molecule is written as a molecule property.
+             * \return \c true if the conformer-index property is written, and \c false otherwise.
+             */
             bool outputMoleculeConfIndexProperty() const;
 
+            /**
+             * \brief Specifies whether emitted molecule and conformer indices are zero-based (rather than one-based).
+             * \param zero_based \c true to use zero-based indices, and \c false to use one-based indices.
+             */
             void outputZeroBasedIndices(bool zero_based);
 
+            /**
+             * \brief Tells whether emitted molecule and conformer indices are zero-based.
+             * \return \c true if zero-based indices are used, and \c false otherwise.
+             */
             bool outputZeroBasedIndices() const;
 
+            /**
+             * \brief Writes the search hit \a hit and its alignment score \a score to the configured data writer.
+             * \param hit The screening search hit.
+             * \param score The alignment score of the hit.
+             * \return \c true if the hit was successfully written, and \c false otherwise.
+             */
             bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
 
           private:

@@ -43,15 +43,25 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeaturePositionMatchFunctor.
+         * \brief Match functor that quantifies the goodness of the 3D-position match between two pharmacophore
+         *        features by comparing their separation against the configured per-feature tolerance.
          */
         class CDPL_PHARM_API FeaturePositionMatchFunctor
         {
 
           public:
+            /**
+             * \brief Constructs the \c %FeaturePositionMatchFunctor instance.
+             * \param query_mode If \c true, the tolerance of the first feature defines the allowed maximum distance;
+             *                   if \c false, the maximum of the two feature tolerances is used.
+             */
             FeaturePositionMatchFunctor(bool query_mode):
                 qryMode(query_mode) {}
 
+            /**
+             * \brief Tells whether the functor operates in query mode.
+             * \return \c true if query mode is active, and \c false otherwise.
+             */
             bool queryMode() const;
 
             /**

@@ -41,15 +41,21 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief ParallelPiPiInteractionConstraint.
+         * \brief Constraint functor that tests whether an aromatic feature pair satisfies the geometric criteria for
+         *        a parallel (sandwich/displaced) &pi;-&pi; interaction (vertical/horizontal center separations plus
+         *        ring-normal angle).
          */
         class CDPL_PHARM_API ParallelPiPiInteractionConstraint
         {
 
           public:
+            /** \brief Default maximum in-plane (horizontal) ring-center displacement in &Aring;ngstrom. */
             static constexpr double DEF_MAX_H_DISTANCE = 2.8;
+            /** \brief Default minimum out-of-plane (vertical) ring-center separation in &Aring;ngstrom. */
             static constexpr double DEF_MIN_V_DISTANCE = 3.0;
+            /** \brief Default maximum out-of-plane (vertical) ring-center separation in &Aring;ngstrom. */
             static constexpr double DEF_MAX_V_DISTANCE = 5.5;
+            /** \brief Default maximum angle deviation from 0&deg; of the two ring-plane normals in degrees. */
             static constexpr double DEF_MAX_ANGLE      = 30.0;
 
             /**
@@ -64,14 +70,36 @@ namespace CDPL
                 minVDist(min_v_dist),
                 maxVDist(max_v_dist), maxHDist(max_h_dist), maxAngle(max_ang) {}
 
+            /**
+             * \brief Returns the currently configured minimum out-of-plane ring-center separation.
+             * \return The minimum vertical distance.
+             */
             double getMinVDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum out-of-plane ring-center separation.
+             * \return The maximum vertical distance.
+             */
             double getMaxVDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum in-plane ring-center displacement.
+             * \return The maximum horizontal distance.
+             */
             double getMaxHDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum deviation from a 0&deg; angle between the two ring-plane normals.
+             * \return The maximum angle deviation in degrees.
+             */
             double getMaxAngle() const;
 
+            /**
+             * \brief Tests whether \a ftr1 and \a ftr2 satisfy the geometric parallel &pi;-&pi; criteria.
+             * \param ftr1 The first aromatic feature.
+             * \param ftr2 The second aromatic feature.
+             * \return \c true if the constraint is satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:

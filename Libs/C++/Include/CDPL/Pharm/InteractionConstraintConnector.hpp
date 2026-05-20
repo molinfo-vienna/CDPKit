@@ -43,7 +43,8 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief InteractionConstraintConnector.
+         * \brief Composite feature-interaction constraint that combines two underlying constraint functions via a logical
+         *        conjunction or disjunction.
          */
         class CDPL_PHARM_API InteractionConstraintConnector
         {
@@ -63,6 +64,12 @@ namespace CDPL
             InteractionConstraintConnector(bool and_expr, const ConstraintFunction& func1, const ConstraintFunction& func2):
                 andExpr(and_expr), function1(func1), function2(func2) {}
 
+            /**
+             * \brief Evaluates the combined constraint between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return \c true if the combined constraint is satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:

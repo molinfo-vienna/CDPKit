@@ -40,17 +40,20 @@ namespace CDPL
     {
 
         /**
-         * \brief HydrophobicInteractionConstraint.
+         * \brief Pharm::FeatureDistanceConstraint specialization that accepts a hydrophobic feature pair when its
+         *        center distance lies within the typical hydrophobic interaction range.
          */
         class CDPL_PHARM_API HydrophobicInteractionConstraint : public FeatureDistanceConstraint
         {
 
           public:
+            /** \brief Default minimum hydrophobic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_DISTANCE = 2.0;
+            /** \brief Default maximum hydrophobic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_DISTANCE = 6.0;
 
             /**
-             * \brief Constructs a \c %HydrophobicInteractionConstraint functor with a 
+             * \brief Constructs a \c %HydrophobicInteractionConstraint functor with a
              *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
              * \param min_dist The minimum allowed feature pair distance.
              * \param max_dist The maximum allowed feature pair distance.

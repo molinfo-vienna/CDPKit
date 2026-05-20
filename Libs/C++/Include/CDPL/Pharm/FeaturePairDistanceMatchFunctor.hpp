@@ -41,7 +41,8 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeaturePairDistanceMatchFunctor.
+         * \brief Match functor that tests whether two feature pairs share a compatible inter-feature distance, with the
+         *        compatibility relation switched between query-mode (asymmetric) and non-query-mode (symmetric).
          */
         class CDPL_PHARM_API FeaturePairDistanceMatchFunctor
         {
@@ -51,11 +52,15 @@ namespace CDPL
              * \brief Constructs the \c %FeaturePairDistanceMatchFunctor instance.
              * \param query_mode If \c true, the second pair feature distance must fall in the distance +/- tolerances
              *                   of the first pair for the compatibility check to succeed. If \c false, it is sufficient
-             *                   that any one of the pairs matches the distance range of the other. 
+             *                   that any one of the pairs matches the distance range of the other.
              */
             FeaturePairDistanceMatchFunctor(bool query_mode):
                 qryMode(query_mode) {}
 
+            /**
+             * \brief Tells whether the functor operates in query mode.
+             * \return \c true if query mode is active, and \c false otherwise.
+             */
             bool queryMode() const;
 
             /**

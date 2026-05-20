@@ -42,22 +42,28 @@ namespace CDPL
     {
 
         /**
-         * \brief CationPiInteractionScore.
+         * \brief Pharm::FeatureInteractionScore implementation that scores an aromatic/cationic feature pair by combining
+         *        per-component scores for cation-to-ring-center distance and cation-displacement to ring-plane-normal angle.
          */
         class CDPL_PHARM_API CationPiInteractionScore : public FeatureInteractionScore
         {
 
           public:
+            /** \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_DISTANCE = 3.5;
+            /** \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
+            /** \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees. */
             static constexpr double DEF_MAX_ANGLE    = 30.0;
 
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CationPiInteractionScore instances.
              */
             typedef std::shared_ptr<CationPiInteractionScore> SharedPointer;
 
+            /** \brief Type of the function mapping a cation-aromatic distance to its score contribution. */
             typedef std::function<double(double)> DistanceScoringFunction;
+            /** \brief Type of the function mapping a cation-displacement angle to its score contribution. */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**
@@ -71,18 +77,50 @@ namespace CDPL
             CationPiInteractionScore(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
                                      double max_ang = DEF_MAX_ANGLE);
 
+            /**
+             * \brief Returns the currently configured minimum cation-aromatic distance.
+             * \return The minimum distance.
+             */
             double getMinDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum cation-aromatic distance.
+             * \return The maximum distance.
+             */
             double getMaxDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum angle between cation displacement and aromatic-plane normal.
+             * \return The maximum angle in degrees.
+             */
             double getMaxAngle() const;
 
+            /**
+             * \brief Specifies the function that maps the cation-aromatic distance to its score contribution.
+             * \param func The distance-scoring function.
+             */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the cation-displacement angle to its score contribution.
+             * \param func The angle-scoring function.
+             */
             void setAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Evaluates the cation-&pi; interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The cation-&pi; interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the cation-&pi; interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The cation-&pi; interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
           private:

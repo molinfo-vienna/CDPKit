@@ -41,14 +41,15 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeatureDistanceConstraint.
+         * \brief Constraint functor that accepts a pair of features whose 3D-position distance lies within a configured
+         *        [min, max] interval.
          */
         class CDPL_PHARM_API FeatureDistanceConstraint
         {
 
           public:
             /**
-             * \brief Constructs a \c %FeatureDistanceConstraint functor with a 
+             * \brief Constructs a \c %FeatureDistanceConstraint functor with a
              *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
              * \param min_dist The minimum feature pair distance.
              * \param max_dist The maximum feature pair distance.
@@ -56,10 +57,24 @@ namespace CDPL
             FeatureDistanceConstraint(double min_dist, double max_dist):
                 minDist(min_dist), maxDist(max_dist) {}
 
+            /**
+             * \brief Returns the currently configured minimum feature pair distance.
+             * \return The minimum distance.
+             */
             double getMinDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum feature pair distance.
+             * \return The maximum distance.
+             */
             double getMaxDistance() const;
 
+            /**
+             * \brief Tests whether the 3D-position distance between \a ftr1 and \a ftr2 lies within the configured [min, max] interval.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return \c true if the constraint is satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:
