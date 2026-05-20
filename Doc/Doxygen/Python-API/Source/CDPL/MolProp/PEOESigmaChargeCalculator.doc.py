@@ -97,7 +97,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     ##
     # \brief Calculates the sigma charges and electronegativities of the atoms in the molecular graph <em>molgraph</em> by the <em>PEOE</em> method.
     # 
-    # \param molgraph The molecular graph for which to perform the calculations.
+    # \param molgraph The molecular graph for which to perform the calculations. <br>
     # 
     def calculate(molgraph: Chem.MolecularGraph) -> None: pass
 

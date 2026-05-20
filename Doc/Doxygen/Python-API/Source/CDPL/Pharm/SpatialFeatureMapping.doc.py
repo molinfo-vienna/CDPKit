@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief SpatialFeatureMapping.
+# \brief Pharm.FeatureMapping specialization that perceives a reference-to-aligned feature mapping based on type, position and geometry compatibility under a given transformation, caching per-pair position and geometry match scores for later retrieval.
 # 
 class SpatialFeatureMapping(FeatureMapping):
 
@@ -57,11 +57,12 @@ class SpatialFeatureMapping(FeatureMapping):
     def assign(mapping: SpatialFeatureMapping) -> SpatialFeatureMapping: pass
 
     ##
-    # \brief 
-    # \param ref_ftrs 
-    # \param aligned_ftrs 
-    # \param xform 
-    #
+    # \brief Computes the spatial feature mapping between the reference and aligned feature containers after applying <em>xform</em> to the aligned features, populating this mapping and the per-pair score caches.
+    # 
+    # \param ref_ftrs The reference feature container.
+    # \param aligned_ftrs The aligned feature container.
+    # \param xform The transformation applied to the aligned features before the mapping is perceived.
+    # 
     def perceive(ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: Math.Matrix4D) -> None: pass
 
     ##
@@ -107,19 +108,23 @@ class SpatialFeatureMapping(FeatureMapping):
     def getGeometryMatchFunction() -> DoubleFeature2Matrix4DFunctor: pass
 
     ##
-    # \brief 
-    # \param ref_ftr 
-    # \param aligned_ftr 
-    # \return 
-    #
+    # \brief Returns the position-match score cached for the (<em>ref_ftr</em>, <em>aligned_ftr</em>) pair by the last perceive() call.
+    # 
+    # \param ref_ftr The reference feature.
+    # \param aligned_ftr The aligned feature.
+    # 
+    # \return The cached position-match score (or zero if no entry exists for the pair).
+    # 
     def getPositionMatchScore(ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
 
     ##
-    # \brief 
-    # \param ref_ftr 
-    # \param aligned_ftr 
-    # \return 
-    #
+    # \brief Returns the geometry-match score cached for the (<em>ref_ftr</em>, <em>aligned_ftr</em>) pair by the last perceive() call.
+    # 
+    # \param ref_ftr The reference feature.
+    # \param aligned_ftr The aligned feature.
+    # 
+    # \return The cached geometry-match score (or zero if no entry exists for the pair).
+    # 
     def getGeometryMatchScore(ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
 
     objectID = property(getObjectID)

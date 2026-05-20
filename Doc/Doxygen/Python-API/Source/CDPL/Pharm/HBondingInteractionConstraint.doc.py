@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief HBondingInteractionConstraint.
+# \brief Constraint functor that tests whether a Pharm.Feature pair satisfies geometric H-bond criteria (H-bond length plus acceptor-H-donor and H-bond-direction-to-acceptor-vector angles).
 # 
 class HBondingInteractionConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum H-bond length in &Aring;ngstrom.
+    # 
     DEF_MIN_HB_LENGTH = 1.2
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond length in &Aring;ngstrom.
+    # 
     DEF_MAX_HB_LENGTH = 2.8
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum acceptor-hydrogen-donor angle in degrees.
+    # 
     DEF_MIN_AHD_ANGLE = 130.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond direction to acceptor-vector angle in degrees.
+    # 
     DEF_MAX_ACC_ANGLE = 85.0
 
     ##
@@ -74,27 +74,31 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum H-bond length.
+    # 
+    # \return The minimum H-bond length.
+    # 
     def getMinLength() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond length.
+    # 
+    # \return The maximum H-bond length.
+    # 
     def getMaxLength() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum acceptor-hydrogen-donor angle.
+    # 
+    # \return The minimum AHD angle in degrees.
+    # 
     def getMinAHDAngle() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+    # 
+    # \return The maximum acceptor angle in degrees.
+    # 
     def getMaxAcceptorAngle() -> float: pass
 
     ##
@@ -105,11 +109,13 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     def assign(constr: HBondingInteractionConstraint) -> HBondingInteractionConstraint: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Tests whether <em>ftr1</em> and <em>ftr2</em> satisfy the geometric H-bond constraints.
+    # 
+    # \param ftr1 The first feature (donor or acceptor, depending on the constructor flag).
+    # \param ftr2 The second feature.
+    # 
+    # \return <tt>True</tt> if the H-bond constraints are satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

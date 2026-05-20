@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Abstract base for generators of starting transformations used to seed Gaussian-shape overlap optimization.
+# \brief Abstract base class for generators of starting transformations used to seed Gaussian-shape overlap optimization.
 # 
 # Concrete subclasses (e.g. Shape.PrincipalAxesAlignmentStartGenerator) implement the pure virtual member functions to provide a set of candidate transformations placing the aligned shape relative to the reference shape.
 # 

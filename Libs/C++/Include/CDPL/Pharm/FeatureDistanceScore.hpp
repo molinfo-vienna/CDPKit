@@ -45,7 +45,7 @@ namespace CDPL
 
         /**
          * \brief Pharm::FeatureInteractionScore implementation that scores a feature pair based on whether their 3D-position
-         *        distance falls within a configured [min, max] interval, optionally weighted by a distance-scoring function.
+         *        distance falls within a configured [min, max] interval.
          */
         class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
         {

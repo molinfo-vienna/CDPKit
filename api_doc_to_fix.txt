@@ -11,3 +11,6 @@
 ‎Libs/C++/Include/CDPL/Pharm/PatternBasedFeatureGenerator.hpp (check PatternAtomLabelFlag doc)
 ‎Libs/C++/Include/CDPL/Pharm/PharmacophoreFitScore.hpp (check query_mode arg doc)
 ‎Libs/C++/Include/CDPL/Shape/GaussianShapeFunctionAlignment.hpp‎ (insert BFGS reference)
+
+============
+

@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief ParallelPiPiInteractionConstraint.
+# \brief Constraint functor that tests whether an aromatic feature pair satisfies the geometric criteria for a parallel (sandwich/displaced) &pi;-&pi; interaction (vertical/horizontal center separations plus ring-normal angle).
 # 
 class ParallelPiPiInteractionConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum out-of-plane (vertical) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MIN_V_DISTANCE = 3.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum out-of-plane (vertical) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MAX_V_DISTANCE = 5.5
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum in-plane (horizontal) ring-center displacement in &Aring;ngstrom.
+    # 
     DEF_MAX_H_DISTANCE = 2.8
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum angle deviation from 0&deg; of the two ring-plane normals in degrees.
+    # 
     DEF_MAX_ANGLE = 30.0
 
     ##
@@ -73,27 +73,31 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum out-of-plane ring-center separation.
+    # 
+    # \return The minimum vertical distance.
+    # 
     def getMinVDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum out-of-plane ring-center separation.
+    # 
+    # \return The maximum vertical distance.
+    # 
     def getMaxVDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum in-plane ring-center displacement.
+    # 
+    # \return The maximum horizontal distance.
+    # 
     def getMaxHDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum deviation from a 0&deg; angle between the two ring-plane normals.
+    # 
+    # \return The maximum angle deviation in degrees.
+    # 
     def getMaxAngle() -> float: pass
 
     ##
@@ -104,11 +108,13 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     def assign(constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Tests whether <em>ftr1</em> and <em>ftr2</em> satisfy the geometric parallel &pi;-&pi; criteria.
+    # 
+    # \param ftr1 The first aromatic feature.
+    # \param ftr2 The second aromatic feature.
+    # 
+    # \return <tt>True</tt> if the constraint is satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

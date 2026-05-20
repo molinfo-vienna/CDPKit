@@ -20,23 +20,23 @@
 #
 
 ##
-# \brief CationPiInteractionScore.
+# \brief Pharm.FeatureInteractionScore implementation that scores an aromatic/cationic feature pair by combining per-component scores for cation-to-ring-center distance and cation-displacement to ring-plane-normal angle.
 # 
 class CationPiInteractionScore(FeatureInteractionScore):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom.
+    # 
     DEF_MIN_DISTANCE = 3.5
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom.
+    # 
     DEF_MAX_DISTANCE = 5.5
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees.
+    # 
     DEF_MAX_ANGLE = 30.0
 
     ##
@@ -56,33 +56,38 @@ class CationPiInteractionScore(FeatureInteractionScore):
     def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 30.0) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the cation-aromatic distance to its score contribution.
+    # 
+    # \param func The distance-scoring function.
+    # 
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the cation-displacement angle to its score contribution.
+    # 
+    # \param func The angle-scoring function.
+    # 
     def setAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum cation-aromatic distance.
+    # 
+    # \return The minimum distance.
+    # 
     def getMinDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum cation-aromatic distance.
+    # 
+    # \return The maximum distance.
+    # 
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum angle between cation displacement and aromatic-plane normal.
+    # 
+    # \return The maximum angle in degrees.
+    # 
     def getMaxAngle() -> float: pass
 
     ##

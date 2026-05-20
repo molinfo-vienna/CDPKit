@@ -178,6 +178,8 @@ def getTextRecursive(parent_node):
             rc.append('&ge;')
         elif node.nodeName == 'pi':
             rc.append('&pi;')
+        elif node.nodeName == 'deg':
+            rc.append('&deg;')
         elif node.nodeName == 'table':
             rc.append(outputTable(node))
         elif node.nodeName == 'parameterlist':

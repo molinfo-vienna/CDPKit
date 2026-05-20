@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeaturePairDistanceMatchFunctor.
+# \brief Match functor that tests whether two feature pairs share a compatible inter-feature distance, with the compatibility relation switched between query-mode (asymmetric) and non-query-mode (symmetric).
 # 
 class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
@@ -50,9 +50,10 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the functor operates in query mode.
+    # 
+    # \return <tt>True</tt> if query mode is active, and <tt>False</tt> otherwise.
+    # 
     def queryMode() -> bool: pass
 
     ##

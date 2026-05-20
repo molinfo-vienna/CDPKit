@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief XBondingInteractionConstraint.
+# \brief Constraint functor that tests whether a halogen-bond donor/acceptor feature pair satisfies the geometric criteria for a halogen bond (halogen-acceptor distance plus the two characteristic angles).
 # 
 class XBondingInteractionConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum halogen-acceptor distance in &Aring;ngstrom.
+    # 
     DEF_MIN_AX_DISTANCE = 1.6
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum halogen-acceptor distance in &Aring;ngstrom.
+    # 
     DEF_MAX_AX_DISTANCE = 3.75
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum acceptor-halogen-bound-atom angle in degrees.
+    # 
     DEF_MIN_AXB_ANGLE = 135.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees.
+    # 
     DEF_MAX_ACC_ANGLE = 45.0
 
     ##
@@ -74,27 +74,31 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum halogen-acceptor distance.
+    # 
+    # \return The minimum AX distance.
+    # 
     def getMinAXDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum halogen-acceptor distance.
+    # 
+    # \return The maximum AX distance.
+    # 
     def getMaxAXDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum acceptor-halogen-bound-atom angle.
+    # 
+    # \return The minimum AXB angle in degrees.
+    # 
     def getMinAXBAngle() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum deviation from the acceptor's preferred X-bonding direction.
+    # 
+    # \return The maximum acceptor angle in degrees.
+    # 
     def getMaxAcceptorAngle() -> float: pass
 
     ##
@@ -105,11 +109,13 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     def assign(constr: XBondingInteractionConstraint) -> XBondingInteractionConstraint: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Tests whether <em>ftr1</em> and <em>ftr2</em> satisfy the geometric halogen-bond criteria.
+    # 
+    # \param ftr1 The first feature (donor or acceptor, depending on the constructor flag).
+    # \param ftr2 The second feature.
+    # 
+    # \return <tt>True</tt> if the constraint is satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

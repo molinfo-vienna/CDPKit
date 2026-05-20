@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureInteractionScore.
+# \brief Abstract base class for scoring functors that quantify the strength of a directional pharmacophore-feature interaction (e.g. H-bond, ionic, &pi;-&pi; stacking) between two Pharm.Feature instances.
 # 
 class FeatureInteractionScore(Boost.Python.instance):
 

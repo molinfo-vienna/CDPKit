@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureDistanceScore.
+# \brief Pharm.FeatureInteractionScore implementation that scores a feature pair based on whether their 3D-position distance falls within a configured [min, max] interval.
 # 
 class FeatureDistanceScore(FeatureInteractionScore):
 
@@ -39,21 +39,24 @@ class FeatureDistanceScore(FeatureInteractionScore):
     def __init__(min_dist: float, max_dist: float) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps a feature-pair distance to its score contribution.
+    # 
+    # \param func The distance-scoring function.
+    # 
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum feature pair distance.
+    # 
+    # \return The minimum distance.
+    # 
     def getMinDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum feature pair distance.
+    # 
+    # \return The maximum distance.
+    # 
     def getMaxDistance() -> float: pass
 
     ##

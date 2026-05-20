@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeaturePositionMatchFunctor.
+# \brief Match functor that quantifies the goodness of the 3D-position match between two pharmacophore features by comparing their separation against the configured per-feature tolerance.
 # 
 class FeaturePositionMatchFunctor(Boost.Python.instance):
 
@@ -31,8 +31,9 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     def __init__(func: FeaturePositionMatchFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %FeaturePositionMatchFunctor instance.
-    # \param query_mode 
+    # \brief Constructs the <tt>FeaturePositionMatchFunctor</tt> instance.
+    # 
+    # \param query_mode If <tt>True</tt>, the tolerance of the first feature defines the allowed maximum distance; if <tt>False</tt>, the maximum of the two feature tolerances is used.
     # 
     def __init__(query_mode: bool) -> None: pass
 
@@ -56,9 +57,10 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     def assign(func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the functor operates in query mode.
+    # 
+    # \return <tt>True</tt> if query mode is active, and <tt>False</tt> otherwise.
+    # 
     def queryMode() -> bool: pass
 
     ##

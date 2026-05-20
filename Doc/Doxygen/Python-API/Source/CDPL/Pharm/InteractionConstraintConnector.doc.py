@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief InteractionConstraintConnector.
+# \brief Composite feature-interaction constraint that combines two underlying constraint functions via a logical conjunction or disjunction.
 # 
 class InteractionConstraintConnector(Boost.Python.instance):
 
@@ -58,11 +58,13 @@ class InteractionConstraintConnector(Boost.Python.instance):
     def assign(con: InteractionConstraintConnector) -> InteractionConstraintConnector: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Evaluates the combined constraint between features <em>ftr1</em> and <em>ftr2</em>.
+    # 
+    # \param ftr1 The first feature.
+    # \param ftr2 The second feature.
+    # 
+    # \return <tt>True</tt> if the combined constraint is satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief HBondingInteractionScore.
+# \brief Pharm.FeatureInteractionScore implementation that scores a donor/acceptor feature pair by combining per-component scores for H-bond length, acceptor-hydrogen-donor angle and H-bond-direction to acceptor-vector angle.
 # 
 class HBondingInteractionScore(FeatureInteractionScore):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum H-bond length in &Aring;ngstrom.
+    # 
     DEF_MIN_HB_LENGTH = 1.2
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond length in &Aring;ngstrom.
+    # 
     DEF_MAX_HB_LENGTH = 2.8
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum acceptor-hydrogen-donor angle in degrees.
+    # 
     DEF_MIN_AHD_ANGLE = 150.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond direction to acceptor-vector angle in degrees.
+    # 
     DEF_MAX_ACC_ANGLE = 75.0
 
     ##
@@ -62,45 +62,52 @@ class HBondingInteractionScore(FeatureInteractionScore):
     def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 2.8, min_ahd_ang: float = 150.0, max_acc_ang: float = 75.0) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the H-bond length to its score contribution.
+    # 
+    # \param func The distance-scoring function.
+    # 
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the H-bond direction to acceptor-vector angle to its score contribution.
+    # 
+    # \param func The acceptor-angle scoring function.
+    # 
     def setAcceptorAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the acceptor-hydrogen-donor angle to its score contribution.
+    # 
+    # \param func The AHD-angle scoring function.
+    # 
     def setAHDAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum H-bond length.
+    # 
+    # \return The minimum H-bond length.
+    # 
     def getMinLength() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond length.
+    # 
+    # \return The maximum H-bond length.
+    # 
     def getMaxLength() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum acceptor-hydrogen-donor angle.
+    # 
+    # \return The minimum AHD angle in degrees.
+    # 
     def getMinAHDAngle() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+    # 
+    # \return The maximum acceptor angle in degrees.
+    # 
     def getMaxAcceptorAngle() -> float: pass
 
     ##

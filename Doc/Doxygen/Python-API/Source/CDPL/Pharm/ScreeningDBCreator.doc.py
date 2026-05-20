@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief A class for the creation of optimized pharmacophore screening databases.
+# \brief Abstract base class for creators that build optimized pharmacophore screening databases.
 # 
 class ScreeningDBCreator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies how an existing database file is treated by open().
+    # 
     class Mode(Boost.Python.enum):
 
         ##
-        # \brief CREATE.
-        #
+        # \brief Create a new database (replacing any existing file).
+        # 
         CREATE = 0
 
         ##
-        # \brief UPDATE.
-        #
+        # \brief Update an existing database in place.
+        # 
         UPDATE = 1
 
         ##
-        # \brief APPEND.
-        #
+        # \brief Append to an existing database.
+        # 
         APPEND = 2
 
     ##
@@ -62,73 +62,85 @@ class ScreeningDBCreator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \param mode 
-    # \param allow_dup_entries 
-    #
+    # \brief Opens the database identified by <em>name</em> in the specified <em>mode</em>.
+    # 
+    # \param name The database name (path, URI, etc., interpreted by the concrete subclass).
+    # \param mode The open mode (see Mode).
+    # \param allow_dup_entries If <tt>True</tt>, duplicate molecule entries are allowed; if <tt>False</tt>, duplicates are rejected.
+    # 
     def open(name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Closes the currently open database.
+    # 
     def close() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the mode in which the currently open database was opened.
+    # 
+    # \return The open mode.
+    # 
     def getMode() -> Mode: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether duplicate molecule entries are allowed.
+    # 
+    # \return <tt>True</tt> if duplicates are allowed, and <tt>False</tt> otherwise.
+    # 
     def allowDuplicateEntries() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Processes <em>molgraph</em> and adds it (or its derived pharmacophores) to the database.
+    # 
+    # \param molgraph The molecular graph to process.
+    # 
+    # \return <tt>True</tt> if at least one entry was inserted, and <tt>False</tt> otherwise (e.g. when duplicates are rejected).
+    # 
     def process(molgraph: Chem.MolecularGraph) -> bool: pass
 
     ##
-    # \brief 
-    # \param db_acc 
-    # \param func 
-    # \return 
-    #
+    # \brief Merges the contents of <em>db_acc</em> into the currently open database.
+    # 
+    # \param db_acc The source database accessor.
+    # \param func An optional progress-reporting callback (called repeatedly with a fraction in [0, 1]).
+    # 
+    # \return <tt>True</tt> if the merge completed successfully, and <tt>False</tt> if it was aborted by the callback.
+    # 
     def merge(db_acc: ScreeningDBAccessor, func: BoolDoubleFunctor) -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of molecules processed since the database was opened.
+    # 
+    # \return The processed-molecule count.
+    # 
     def getNumProcessed() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of molecules that were rejected (e.g. as duplicates) since the database was opened.
+    # 
+    # \return The rejected-molecule count.
+    # 
     def getNumRejected() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries that were deleted since the database was opened.
+    # 
+    # \return The deleted-entry count.
+    # 
     def getNumDeleted() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of entries that were inserted since the database was opened.
+    # 
+    # \return The inserted-entry count.
+    # 
     def getNumInserted() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the name of the currently open database.
+    # 
+    # \return A reference to the database name.
+    # 
     def getDatabaseName() -> str: pass
 
     objectID = property(getObjectID)

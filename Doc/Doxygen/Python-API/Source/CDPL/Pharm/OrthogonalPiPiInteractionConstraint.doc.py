@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief OrthogonalPiPiInteractionConstraint.
+# \brief Constraint functor that tests whether an aromatic feature pair satisfies the geometric criteria for an orthogonal (T-shaped) &pi;-&pi; interaction (horizontal/vertical center separations plus ring-normal angle).
 # 
 class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MIN_H_DISTANCE = 4.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MAX_H_DISTANCE = 6.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum vertical (out-of-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MAX_V_DISTANCE = 1.4
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum angle deviation from 90&deg; of the two ring-plane normals in degrees.
+    # 
     DEF_MAX_ANGLE = 30.0
 
     ##
@@ -73,27 +73,31 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum horizontal ring-center separation.
+    # 
+    # \return The minimum horizontal distance.
+    # 
     def getMinHDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum horizontal ring-center separation.
+    # 
+    # \return The maximum horizontal distance.
+    # 
     def getMaxHDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum vertical ring-center separation.
+    # 
+    # \return The maximum vertical distance.
+    # 
     def getMaxVDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum deviation from a 90&deg; angle between the two ring-plane normals.
+    # 
+    # \return The maximum angle deviation in degrees.
+    # 
     def getMaxAngle() -> float: pass
 
     ##
@@ -104,11 +108,13 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     def assign(constr: OrthogonalPiPiInteractionConstraint) -> OrthogonalPiPiInteractionConstraint: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Tests whether <em>ftr1</em> and <em>ftr2</em> satisfy the geometric orthogonal &pi;-&pi; criteria.
+    # 
+    # \param ftr1 The first aromatic feature.
+    # \param ftr2 The second aromatic feature.
+    # 
+    # \return <tt>True</tt> if the constraint is satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

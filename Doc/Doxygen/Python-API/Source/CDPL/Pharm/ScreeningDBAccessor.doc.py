@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A class for accessing the data stored in pharmacophore screening databases.
+# \brief Abstract base class for accessors that read the data stored in pharmacophore screening databases.
 # 
 class ScreeningDBAccessor(Boost.Python.instance):
 
@@ -42,93 +42,110 @@ class ScreeningDBAccessor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param name 
-    #
+    # \brief Opens the screening database identified by <em>name</em>.
+    # 
+    # \param name The database name (path, URI, etc., interpreted by the concrete subclass).
+    # 
     def open(name: str) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Closes the currently open database.
+    # 
     def close() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the name of the currently open database.
+    # 
+    # \return A reference to the database name.
+    # 
     def getDatabaseName() -> str: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of molecules stored in the database.
+    # 
+    # \return The molecule count.
+    # 
     def getNumMolecules() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of pharmacophores stored in the database (one per molecule conformer).
+    # 
+    # \return The pharmacophore count.
+    # 
     def getNumPharmacophores() -> int: pass
 
     ##
-    # \brief 
-    # \param mol_idx 
-    # \return 
-    #
+    # \brief Returns the number of pharmacophores stored for the molecule at index <em>mol_idx</em>.
+    # 
+    # \param mol_idx The zero-based molecule index.
+    # 
+    # \return The pharmacophore count for the molecule.
+    # 
     def getNumPharmacophores(mol_idx: int) -> int: pass
 
     ##
-    # \brief 
-    # \param mol_idx 
-    # \param mol 
-    # \param overwrite 
-    #
+    # \brief Reads the molecule at index <em>mol_idx</em> into <em>mol</em>.
+    # 
+    # \param mol_idx The zero-based molecule index.
+    # \param mol The output molecule.
+    # \param overwrite If <tt>True</tt>, <em>mol</em> is cleared before reading; if <tt>False</tt>, the atoms/bonds are appended.
+    # 
     def getMolecule(mol_idx: int, mol: Chem.Molecule, overwrite: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm_idx 
-    # \param pharm 
-    # \param overwrite 
-    #
+    # \brief Reads the pharmacophore at index <em>pharm_idx</em> into <em>pharm</em>.
+    # 
+    # \param pharm_idx The zero-based pharmacophore index (across all molecules).
+    # \param pharm The output pharmacophore.
+    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading; if <tt>False</tt>, the features are appended.
+    # 
     def getPharmacophore(pharm_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param mol_idx 
-    # \param mol_conf_idx 
-    # \param pharm 
-    # \param overwrite 
-    #
+    # \brief Reads the pharmacophore corresponding to conformer <em>mol_conf_idx</em> of molecule <em>mol_idx</em> into <em>pharm</em>.
+    # 
+    # \param mol_idx The zero-based molecule index.
+    # \param mol_conf_idx The zero-based conformer index within the molecule.
+    # \param pharm The output pharmacophore.
+    # \param overwrite If <tt>True</tt>, <em>pharm</em> is cleared before reading; if <tt>False</tt>, the features are appended.
+    # 
     def getPharmacophore(mol_idx: int, mol_conf_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm_idx 
-    # \return 
-    #
+    # \brief Returns the molecule index of the pharmacophore at index <em>pharm_idx</em>.
+    # 
+    # \param pharm_idx The zero-based pharmacophore index.
+    # 
+    # \return The zero-based molecule index.
+    # 
     def getMoleculeIndex(pharm_idx: int) -> int: pass
 
     ##
-    # \brief 
-    # \param pharm_idx 
-    # \return 
-    #
+    # \brief Returns the conformer index within the parent molecule of the pharmacophore at index <em>pharm_idx</em>.
+    # 
+    # \param pharm_idx The zero-based pharmacophore index.
+    # 
+    # \return The zero-based conformer index.
+    # 
     def getConformationIndex(pharm_idx: int) -> int: pass
 
     ##
-    # \brief 
-    # \param pharm_idx 
-    # \return 
-    #
+    # \brief Returns the cached per-Pharm.FeatureType frequency histogram of the pharmacophore at index <em>pharm_idx</em>.
+    # 
+    # \param pharm_idx The zero-based pharmacophore index.
+    # 
+    # \return A reference to the feature-type histogram.
+    # 
     def getFeatureCounts(pharm_idx: int) -> FeatureTypeHistogram: pass
 
     ##
-    # \brief 
-    # \param mol_idx 
-    # \param mol_conf_idx 
-    # \return 
-    #
+    # \brief Returns the cached per-Pharm.FeatureType frequency histogram of conformer <em>mol_conf_idx</em> of molecule <em>mol_idx</em>.
+    # 
+    # \param mol_idx The zero-based molecule index.
+    # \param mol_conf_idx The zero-based conformer index within the molecule.
+    # 
+    # \return A reference to the feature-type histogram.
+    # 
     def getFeatureCounts(mol_idx: int, mol_conf_idx: int) -> FeatureTypeHistogram: pass
 
     objectID = property(getObjectID)

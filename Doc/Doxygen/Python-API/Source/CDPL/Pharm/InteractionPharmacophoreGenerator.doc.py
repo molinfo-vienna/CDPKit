@@ -20,12 +20,15 @@
 #
 
 ##
-# \brief InteractionPharmacophoreGenerator.
+# \brief Driver that generates an interaction pharmacophore by perceiving a core pharmacophore on a ligand, an environment pharmacophore on the surrounding pocket residues, analyzing the inter-feature interactions and emitting features representing the detected interactions (optionally with exclusion volumes).
 # 
 class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Constructs the <tt>InteractionPharmacophoreGenerator</tt> instance.
+    # 
+    # \param core_ph4_gen_cfg Configuration flags for the core (ligand) pharmacophore generator.
+    # \param env_ph4_gen_cfg Configuration flags for the environment (pocket) pharmacophore generator.
     # 
     def __init__(core_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG, env_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
@@ -55,79 +58,91 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     def assign(gen: InteractionPharmacophoreGenerator) -> InteractionPharmacophoreGenerator: pass
 
     ##
-    # \brief 
-    # \param radius 
-    #
+    # \brief Sets the cutoff radius around the core used to extract the environment substructure.
+    # 
+    # \param radius The new core-environment radius.
+    # 
     def setCoreEnvironmentRadius(radius: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured core-environment cutoff radius.
+    # 
+    # \return The core-environment radius.
+    # 
     def getCoreEnvironmentRadius() -> float: pass
 
     ##
-    # \brief 
-    # \param add 
-    #
+    # \brief Specifies whether exclusion volume features shall be added to the output pharmacophore.
+    # 
+    # \param add <tt>True</tt> to add exclusion volumes, and <tt>False</tt> to skip them.
+    # 
     def addExclusionVolumes(add: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether exclusion volume features are added.
+    # 
+    # \return <tt>True</tt> if exclusion volumes are added, and <tt>False</tt> otherwise.
+    # 
     def exclusionVolumesAdded() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the core (ligand) pharmacophore generator.
+    # 
+    # \return A reference to the core pharmacophore generator.
+    # 
     def getCorePharmacophoreGenerator() -> PharmacophoreGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the environment (pocket) pharmacophore generator.
+    # 
+    # \return A reference to the environment pharmacophore generator.
+    # 
     def getEnvironmentPharmacophoreGenerator() -> PharmacophoreGenerator: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the interaction analyzer used to perceive feature-feature interactions.
+    # 
+    # \return A reference to the interaction analyzer.
+    # 
     def getInteractionAnalyzer() -> InteractionAnalyzer: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the core (ligand) pharmacophore produced by the last generate() call.
+    # 
+    # \return A reference to the core pharmacophore.
+    # 
     def getCorePharmacophore() -> Pharmacophore: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the environment (pocket) pharmacophore produced by the last generate() call.
+    # 
+    # \return A reference to the environment pharmacophore.
+    # 
     def getEnvironmentPharmacophore() -> Pharmacophore: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the feature-to-feature interaction mapping produced by the last generate() call.
+    # 
+    # \return A reference to the interaction mapping.
+    # 
     def getInteractionMapping() -> FeatureMapping: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the core-environment substructure extracted by the last generate() call (only valid when <em>extract_core_env</em> was <tt>True</tt>).
+    # 
+    # \return A reference to the core-environment fragment.
+    # 
     def getCoreEnvironment() -> Chem.Fragment: pass
 
     ##
-    # \brief 
-    # \param core 
-    # \param tgt 
-    # \param ia_pharm 
-    # \param extract_core_env 
-    # \param append 
-    #
+    # \brief Generates the interaction pharmacophore for the (<em>core</em>, <em>tgt</em>) molecular graph pair.
+    # 
+    # \param core The core (ligand) molecular graph.
+    # \param tgt The target (pocket) molecular graph.
+    # \param ia_pharm The output interaction pharmacophore.
+    # \param extract_core_env If <tt>True</tt>, the core environment is extracted from <em>tgt</em> before pharmacophore generation; if <tt>False</tt>, the environment pharmacophore is generated on <em>tgt</em> directly.
+    # \param append If <tt>False</tt>, <em>ia_pharm</em> is cleared before any features are added.
+    # 
     def generate(core: Chem.MolecularGraph, tgt: Chem.MolecularGraph, ia_pharm: Pharmacophore, extract_core_env: bool, append: bool = False) -> None: pass
 
     objectID = property(getObjectID)

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureTypeMatchFunctor.
+# \brief Match functor that accepts a feature pair when both features share the same Pharm.FeatureType identifier.
 # 
 class FeatureTypeMatchFunctor(Boost.Python.instance):
 

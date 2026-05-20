@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief XBondingInteractionScore.
+# \brief Pharm.FeatureInteractionScore implementation that scores a halogen-bond donor/acceptor feature pair by combining per-component scores for halogen-acceptor distance, acceptor-halogen-bound-atom angle and acceptor-direction angle.
 # 
 class XBondingInteractionScore(FeatureInteractionScore):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum halogen-acceptor distance in &Aring;ngstrom.
+    # 
     DEF_MIN_AX_DISTANCE = 1.6
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum halogen-acceptor distance in &Aring;ngstrom.
+    # 
     DEF_MAX_AX_DISTANCE = 4.0
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum acceptor-halogen-bound-atom angle in degrees.
+    # 
     DEF_MIN_AXB_ANGLE = 150.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees.
+    # 
     DEF_MAX_ACC_ANGLE = 35.0
 
     ##
@@ -62,45 +62,52 @@ class XBondingInteractionScore(FeatureInteractionScore):
     def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 4.0, min_axb_ang: float = 150.0, max_acc_ang: float = 35.0) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the halogen-acceptor distance to its score contribution.
+    # 
+    # \param func The distance-scoring function.
+    # 
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the acceptor-direction angle to its score contribution.
+    # 
+    # \param func The acceptor-angle scoring function.
+    # 
     def setAcceptorAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the acceptor-halogen-bound-atom angle to its score contribution.
+    # 
+    # \param func The AXB-angle scoring function.
+    # 
     def setAXBAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum halogen-acceptor distance.
+    # 
+    # \return The minimum AX distance.
+    # 
     def getMinAXDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum halogen-acceptor distance.
+    # 
+    # \return The maximum AX distance.
+    # 
     def getMaxAXDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum acceptor-halogen-bound-atom angle.
+    # 
+    # \return The minimum AXB angle in degrees.
+    # 
     def getMinAXBAngle() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum deviation from the acceptor's preferred X-bonding direction.
+    # 
+    # \return The maximum acceptor angle in degrees.
+    # 
     def getMaxAcceptorAngle() -> float: pass
 
     ##

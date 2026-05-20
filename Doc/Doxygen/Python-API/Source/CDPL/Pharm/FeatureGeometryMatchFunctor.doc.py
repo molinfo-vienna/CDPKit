@@ -20,38 +20,38 @@
 #
 
 ##
-# \brief FeatureGeometryMatchFunctor.
+# \brief Match functor that quantifies the goodness of the spatial orientation match between two pharmacophore features, applying type-specific tolerances for H-bond donor/acceptor, halogen-bond donor/acceptor and aromatic features.
 # 
 class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond acceptor interaction direction angle in degrees.
+    # 
     DEF_MAX_HBA_INTERACTION_DIR_ANGLE = 85.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond acceptor orientation deviation in degrees.
+    # 
     DEF_MAX_HBA_ORIENTATION_DEVIATION = 45.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum H-bond donor interaction direction deviation in degrees.
+    # 
     DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum halogen-bond acceptor interaction direction deviation in degrees.
+    # 
     DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum halogen-bond donor interaction direction deviation in degrees.
+    # 
     DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum aromatic feature orientation deviation in degrees.
+    # 
     DEF_MAX_AR_ORIENTATION_DEVIATION = 45.0
 
     ##
@@ -61,13 +61,14 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     def __init__(func: FeatureGeometryMatchFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \c %FeatureGeometryMatchFunctor instance.
-    # \param max_hba_int_dir_angle 
-    # \param max_hba_orient_dev 
-    # \param max_hbd_int_dir_dev 
-    # \param max_xba_int_dir_dev 
-    # \param max_xbd_int_dir_dev 
-    # \param max_ar_orient_dev 
+    # \brief Constructs a <tt>FeatureGeometryMatchFunctor</tt> with the specified per-type angle tolerances.
+    # 
+    # \param max_hba_int_dir_angle The maximum H-bond acceptor interaction direction angle.
+    # \param max_hba_orient_dev The maximum H-bond acceptor orientation deviation.
+    # \param max_hbd_int_dir_dev The maximum H-bond donor interaction direction deviation.
+    # \param max_xba_int_dir_dev The maximum halogen-bond acceptor interaction direction deviation.
+    # \param max_xbd_int_dir_dev The maximum halogen-bond donor interaction direction deviation.
+    # \param max_ar_orient_dev The maximum aromatic feature orientation deviation.
     # 
     def __init__(max_hba_int_dir_angle: float = 85.0, max_hba_orient_dev: float = 45.0, max_hbd_int_dir_dev: float = 45.0, max_xba_int_dir_dev: float = 45.0, max_xbd_int_dir_dev: float = 45.0, max_ar_orient_dev: float = 45.0) -> None: pass
 
@@ -91,75 +92,87 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     def assign(func: FeatureGeometryMatchFunctor) -> FeatureGeometryMatchFunctor: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond acceptor interaction direction angle.
+    # 
+    # \return The maximum HBA interaction direction angle in degrees.
+    # 
     def getMaxHBAInteractionDirAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum H-bond acceptor interaction direction angle.
+    # 
+    # \param angle The new maximum HBA interaction direction angle in degrees.
+    # 
     def setMaxHBAInteractionDirAngle(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond acceptor orientation deviation.
+    # 
+    # \return The maximum HBA orientation deviation in degrees.
+    # 
     def getMaxHBAOrientationDeviation() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum H-bond acceptor orientation deviation.
+    # 
+    # \param angle The new maximum HBA orientation deviation in degrees.
+    # 
     def setMaxHBAOrientationDeviation(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum H-bond donor interaction direction deviation.
+    # 
+    # \return The maximum HBD interaction direction deviation in degrees.
+    # 
     def getMaxHBDInteractionDirDeviation() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum H-bond donor interaction direction deviation.
+    # 
+    # \param angle The new maximum HBD interaction direction deviation in degrees.
+    # 
     def setMaxHBDInteractionDirDeviation(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum halogen-bond acceptor interaction direction deviation.
+    # 
+    # \return The maximum XBA interaction direction deviation in degrees.
+    # 
     def getMaxXBAInteractionDirDeviation() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum halogen-bond acceptor interaction direction deviation.
+    # 
+    # \param angle The new maximum XBA interaction direction deviation in degrees.
+    # 
     def setMaxXBAInteractionDirDeviation(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum halogen-bond donor interaction direction deviation.
+    # 
+    # \return The maximum XBD interaction direction deviation in degrees.
+    # 
     def getMaxXBDInteractionDirDeviation() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum halogen-bond donor interaction direction deviation.
+    # 
+    # \param angle The new maximum XBD interaction direction deviation in degrees.
+    # 
     def setMaxXBDInteractionDirDeviation(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum aromatic feature orientation deviation.
+    # 
+    # \return The maximum aromatic orientation deviation in degrees.
+    # 
     def getMaxAROrientationDeviation() -> float: pass
 
     ##
-    # \brief 
-    # \param angle 
-    #
+    # \brief Sets the maximum aromatic feature orientation deviation.
+    # 
+    # \param angle The new maximum aromatic orientation deviation in degrees.
+    # 
     def setMaxAROrientationDeviation(angle: float) -> None: pass
 
     ##

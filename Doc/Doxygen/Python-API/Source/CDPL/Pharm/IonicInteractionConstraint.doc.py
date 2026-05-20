@@ -20,18 +20,18 @@
 #
 
 ##
-# \brief IonicInteractionConstraint.
+# \brief Pharm.FeatureDistanceConstraint specialization that accepts an oppositely-charged ionic feature pair when its center distance lies within the typical salt-bridge range.
 # 
 class IonicInteractionConstraint(FeatureDistanceConstraint):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum ionic feature pair distance in &Aring;ngstrom.
+    # 
     DEF_MIN_DISTANCE = 1.5
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum ionic feature pair distance in &Aring;ngstrom.
+    # 
     DEF_MAX_DISTANCE = 5.5
 
     ##

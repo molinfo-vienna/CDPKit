@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureDistanceConstraint.
+# \brief Constraint functor that accepts a pair of features whose 3D-position distance lies within a configured [min, max] interval.
 # 
 class FeatureDistanceConstraint(Boost.Python.instance):
 
@@ -51,15 +51,17 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum feature pair distance.
+    # 
+    # \return The minimum distance.
+    # 
     def getMinDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum feature pair distance.
+    # 
+    # \return The maximum distance.
+    # 
     def getMaxDistance() -> float: pass
 
     ##
@@ -70,11 +72,13 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     def assign(constr: FeatureDistanceConstraint) -> FeatureDistanceConstraint: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Tests whether the 3D-position distance between <em>ftr1</em> and <em>ftr2</em> lies within the configured [min, max] interval.
+    # 
+    # \param ftr1 The first feature.
+    # \param ftr2 The second feature.
+    # 
+    # \return <tt>True</tt> if the constraint is satisfied, and <tt>False</tt> otherwise.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     objectID = property(getObjectID)

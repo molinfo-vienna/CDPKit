@@ -538,7 +538,7 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
-# \brief Computes a per-PharmFeatureType frequency histogram of the features in <em>cntnr</em>.
+# \brief Computes a per-Pharm.FeatureType frequency histogram of the features in <em>cntnr</em>.
 # 
 # \param cntnr The feature container.
 # \param hist The output histogram (feature type &rarr; count).

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FileScreeningHitCollector.
+# \brief Hit-callback functor for use with Pharm.ScreeningProcessor that writes each accepted hit molecule (optionally aligned and annotated with score/database properties) to a Base.DataWriter sink.
 # 
 class FileScreeningHitCollector(Boost.Python.instance):
 
@@ -31,8 +31,9 @@ class FileScreeningHitCollector(Boost.Python.instance):
     def __init__(collector: FileScreeningHitCollector) -> None: pass
 
     ##
-    # \brief Initializes the \c %FileScreeningHitCollector instance.
-    # \param writer 
+    # \brief Constructs the <tt>FileScreeningHitCollector</tt> instance.
+    # 
+    # \param writer The molecular-graph writer used to output hit molecules.
     # 
     def __init__(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
@@ -56,95 +57,111 @@ class FileScreeningHitCollector(Boost.Python.instance):
     def assign(collector: FileScreeningHitCollector) -> FileScreeningHitCollector: pass
 
     ##
-    # \brief 
-    # \param writer 
-    #
+    # \brief Specifies the molecular-graph writer used to output hit molecules.
+    # 
+    # \param writer The data writer.
+    # 
     def setDataWriter(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured molecular-graph writer.
+    # 
+    # \return A reference to the data writer.
+    # 
     def getDataWriter() -> Chem.MolecularGraphWriterBase: pass
 
     ##
-    # \brief 
-    # \param align 
-    #
+    # \brief Specifies whether the hit molecule's coordinates shall be transformed by the alignment matrix before writing.
+    # 
+    # \param align <tt>True</tt> to align the hit molecule, and <tt>False</tt> to write the original coordinates.
+    # 
     def alignHitMolecule(align: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the hit molecule is aligned before writing.
+    # 
+    # \return <tt>True</tt> if alignment is performed, and <tt>False</tt> otherwise.
+    # 
     def alignHitMolecule() -> bool: pass
 
     ##
-    # \brief 
-    # \param output 
-    #
+    # \brief Specifies whether the alignment score shall be written as a molecule property.
+    # 
+    # \param output <tt>True</tt> to write the score property, and <tt>False</tt> to skip it.
+    # 
     def outputScoreProperty(output: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the alignment score is written as a molecule property.
+    # 
+    # \return <tt>True</tt> if the score property is written, and <tt>False</tt> otherwise.
+    # 
     def outputScoreProperty() -> bool: pass
 
     ##
-    # \brief 
-    # \param output 
-    #
+    # \brief Specifies whether the source-database name shall be written as a molecule property.
+    # 
+    # \param output <tt>True</tt> to write the database-name property, and <tt>False</tt> to skip it.
+    # 
     def outputDBNameProperty(output: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the source-database name is written as a molecule property.
+    # 
+    # \return <tt>True</tt> if the database-name property is written, and <tt>False</tt> otherwise.
+    # 
     def outputDBNameProperty() -> bool: pass
 
     ##
-    # \brief 
-    # \param output 
-    #
+    # \brief Specifies whether the source-database molecule index shall be written as a molecule property.
+    # 
+    # \param output <tt>True</tt> to write the molecule-index property, and <tt>False</tt> to skip it.
+    # 
     def outputDBMoleculeIndexProperty(output: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the source-database molecule index is written as a molecule property.
+    # 
+    # \return <tt>True</tt> if the molecule-index property is written, and <tt>False</tt> otherwise.
+    # 
     def outputDBMoleculeIndexProperty() -> bool: pass
 
     ##
-    # \brief 
-    # \param output 
-    #
+    # \brief Specifies whether the conformer index within the source molecule shall be written as a molecule property.
+    # 
+    # \param output <tt>True</tt> to write the conformer-index property, and <tt>False</tt> to skip it.
+    # 
     def outputMoleculeConfIndexProperty(output: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the conformer index within the source molecule is written as a molecule property.
+    # 
+    # \return <tt>True</tt> if the conformer-index property is written, and <tt>False</tt> otherwise.
+    # 
     def outputMoleculeConfIndexProperty() -> bool: pass
 
     ##
-    # \brief 
-    # \param zero_based 
-    #
+    # \brief Specifies whether emitted molecule and conformer indices are zero-based (rather than one-based).
+    # 
+    # \param zero_based <tt>True</tt> to use zero-based indices, and <tt>False</tt> to use one-based indices.
+    # 
     def outputZeroBasedIndices(zero_based: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether emitted molecule and conformer indices are zero-based.
+    # 
+    # \return <tt>True</tt> if zero-based indices are used, and <tt>False</tt> otherwise.
+    # 
     def outputZeroBasedIndices() -> bool: pass
 
     ##
-    # \brief 
-    # \param hit 
-    # \param score 
-    # \return 
-    #
+    # \brief Writes the search hit <em>hit</em> and its alignment score <em>score</em> to the configured data writer.
+    # 
+    # \param hit The screening search hit.
+    # \param score The alignment score of the hit.
+    # 
+    # \return <tt>True</tt> if the hit was successfully written, and <tt>False</tt> otherwise.
+    # 
     def __call__(hit: SearchHit, score: float) -> bool: pass
 
     objectID = property(getObjectID)

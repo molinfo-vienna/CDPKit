@@ -20,18 +20,18 @@
 #
 
 ##
-# \brief HydrophobicInteractionScore.
+# \brief Pharm.FeatureDistanceScore specialization that scores a hydrophobic feature pair based on its center distance in the typical hydrophobic interaction range.
 # 
 class HydrophobicInteractionScore(FeatureDistanceScore):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum hydrophobic feature pair distance in &Aring;ngstrom.
+    # 
     DEF_MIN_DISTANCE = 2.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum hydrophobic feature pair distance in &Aring;ngstrom.
+    # 
     DEF_MAX_DISTANCE = 6.0
 
     ##

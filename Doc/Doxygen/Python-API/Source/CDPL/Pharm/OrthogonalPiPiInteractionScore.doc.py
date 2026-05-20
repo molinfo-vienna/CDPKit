@@ -20,28 +20,28 @@
 #
 
 ##
-# \brief OrthogonalPiPiInteractionScore.
+# \brief Pharm.FeatureInteractionScore implementation that scores an aromatic feature pair for an orthogonal (T-shaped) &pi;-&pi; interaction by combining per-component scores for horizontal/vertical center separations and ring-plane-normal angle.
 # 
 class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
 
     ##
-    # \brief 
-    #
+    # \brief Default minimum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MIN_H_DISTANCE = 4.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum horizontal (in-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MAX_H_DISTANCE = 6.0
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum vertical (out-of-plane) ring-center separation in &Aring;ngstrom.
+    # 
     DEF_MAX_V_DISTANCE = 1.4
 
     ##
-    # \brief 
-    #
+    # \brief Default maximum angle deviation from 90&deg; of the two ring-plane normals in degrees.
+    # 
     DEF_MAX_ANGLE = 20.0
 
     ##
@@ -61,39 +61,45 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, max_ang: float = 20.0) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps a feature-pair distance to its score contribution.
+    # 
+    # \param func The distance-scoring function.
+    # 
     def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies the function that maps the ring-plane-normal angle to its score contribution.
+    # 
+    # \param func The angle-scoring function.
+    # 
     def setAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured minimum horizontal ring-center separation.
+    # 
+    # \return The minimum horizontal distance.
+    # 
     def getMinHDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum horizontal ring-center separation.
+    # 
+    # \return The maximum horizontal distance.
+    # 
     def getMaxHDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum vertical ring-center separation.
+    # 
+    # \return The maximum vertical distance.
+    # 
     def getMaxVDistance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the currently configured maximum deviation from a 90&deg; angle between the two ring-plane normals.
+    # 
+    # \return The maximum angle deviation in degrees.
+    # 
     def getMaxAngle() -> float: pass
 
     ##

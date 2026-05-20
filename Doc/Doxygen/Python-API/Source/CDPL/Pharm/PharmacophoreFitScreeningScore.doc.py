@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief PharmacophoreFitScreeningScore.
+# \brief Pharm.PharmacophoreFitScore specialization that scores a Pharm.ScreeningProcessor.SearchHit by applying the underlying pharmacophore-fit score to its query and hit features.
 # 
 class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
@@ -39,8 +39,10 @@ class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
     def __init__(match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
 
     ##
-    # \brief 
-    # \param hit 
-    # \return 
-    #
+    # \brief Computes the pharmacophore-fit score of the screening search hit <em>hit</em>.
+    # 
+    # \param hit The screening search hit.
+    # 
+    # \return The pharmacophore-fit screening score.
+    # 
     def __call__(hit: SearchHit) -> float: pass

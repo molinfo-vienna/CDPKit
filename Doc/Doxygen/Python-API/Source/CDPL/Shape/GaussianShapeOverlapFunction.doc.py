@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief Abstract base for functions evaluating the overlap between two Gaussian shape functions.
+# \brief Abstract base class for functions evaluating the overlap between two Gaussian shape functions.
 # 
 # Concrete subclasses (e.g. Shape.ExactGaussianShapeOverlapFunction, Shape.FastGaussianShapeOverlapFunction) implement the overlap evaluation using different trade-offs of accuracy vs. speed.
 # 

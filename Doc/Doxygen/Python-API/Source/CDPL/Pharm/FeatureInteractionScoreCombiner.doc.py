@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief FeatureInteractionScoreCombiner.
+# \brief Composite Pharm.FeatureInteractionScore that combines two underlying interaction scores via a user-supplied binary combination function (default: maximum).
 # 
 class FeatureInteractionScoreCombiner(FeatureInteractionScore):
 

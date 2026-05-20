@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Driver that generates an interaction pharmacophore by perceiving a core pharmacophore on a ligand,
          *        an environment pharmacophore on the surrounding pocket residues, analyzing the inter-feature
-         *        interactions and emitting one feature per detected interaction (optionally with exclusion volumes).
+         *        interactions and emitting features representing the detected interactions (optionally with exclusion volumes).
          */
         class CDPL_PHARM_API InteractionPharmacophoreGenerator
         {
@@ -74,7 +74,7 @@ namespace CDPL
             double getCoreEnvironmentRadius() const;
 
             /**
-             * \brief Specifies whether exclusion volume features shall be added for environment atoms not part of any interaction feature.
+             * \brief Specifies whether exclusion volume features shall be added to the output pharmacophore.
              * \param add \c true to add exclusion volumes, and \c false to skip them.
              */
             void addExclusionVolumes(bool add);
