@@ -409,19 +409,19 @@ namespace CDPL
          * \param atom The atom.
          * \param molgraph The molecular graph.
          * \param c_only If \c true, only carbon centers are recognized.
-         * \param db_o_only If \c true, the multiple bond partner must be a double-bonded oxygen.
+         * \param db_o_only If \c true, a double bond to oxygen must be present. Otherwise, a double bond to sulfur is also allowed.
          * \return \c true if \a atom is a carbonyl-like center, and \c false otherwise.
          * \since 1.2
          */
         CDPL_MOLPROP_API bool isCarbonylLike(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
 
         /**
-         * \brief Tells whether \a atom is the carbon center of an amide group in \a molgraph.
+         * \brief Tells whether \a atom is the center of an amide group in \a molgraph.
          * \param atom The atom.
          * \param molgraph The molecular graph.
-         * \param c_only If \c true, only carbon centers are recognized.
-         * \param db_o_only If \c true, the C=O must be a double bond to oxygen specifically.
-         * \return \c true if \a atom is an amide carbon center, and \c false otherwise.
+         * \param c_only If \c true, only carbon amides are recognized.
+         * \param db_o_only If \c true, a double bond to oxygen must be present. Otherwise, a double bond to sulfur is also allowed.
+         * \return \c true if \a atom is an amide center, and \c false otherwise.
          * \since 1.2
          */
         CDPL_MOLPROP_API bool isAmideCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
@@ -430,8 +430,8 @@ namespace CDPL
          * \brief Tells whether \a atom is the nitrogen of an amide group in \a molgraph.
          * \param atom The atom.
          * \param molgraph The molecular graph.
-         * \param c_only If \c true, only carbon-bonded amides are recognized.
-         * \param db_o_only If \c true, the C=O must be a double bond to oxygen specifically.
+         * \param c_only If \c true, only carbon amides are recognized.
+         * \param db_o_only If \c true, the center atom must be double bonded to oxygen. Otherwise, a double bond to sulfur is also allowed. 
          * \return \c true if \a atom is an amide nitrogen, and \c false otherwise.
          */
         CDPL_MOLPROP_API bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);

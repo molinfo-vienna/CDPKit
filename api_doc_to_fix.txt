@@ -1,2 +1,1 @@
-‎Libs/C++/Include/CDPL/MolProp/AtomFunctions.hpp (refine 'Amide' class. func. docs)
 ‎Libs/C++/Include/CDPL/Util/CompoundDataReader.hpp (add \throw to member func. docs if exceptions might be thrown)

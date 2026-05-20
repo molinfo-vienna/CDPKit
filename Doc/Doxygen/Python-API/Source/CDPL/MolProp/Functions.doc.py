@@ -1217,14 +1217,14 @@ def generateMolecularFormula(molgraph: Chem.MolecularGraph, sep: str = '') -> ob
 def isAmideBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
 
 ##
-# \brief Tells whether <em>atom</em> is the carbon center of an amide group in <em>molgraph</em>.
+# \brief Tells whether <em>atom</em> is the center of an amide group in <em>molgraph</em>.
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
-# \param c_only If <tt>True</tt>, only carbon centers are recognized.
-# \param db_o_only If <tt>True</tt>, the C=O must be a double bond to oxygen specifically.
+# \param c_only If <tt>True</tt>, only carbon amides are recognized.
+# \param db_o_only If <tt>True</tt>, a double bond to oxygen must be present. Otherwise, a double bond to sulfur is also allowed.
 # 
-# \return <tt>True</tt> if <em>atom</em> is an amide carbon center, and <tt>False</tt> otherwise. 
+# \return <tt>True</tt> if <em>atom</em> is an amide center, and <tt>False</tt> otherwise. 
 # 
 # \since 1.2
 # 
@@ -1235,8 +1235,8 @@ def isAmideCenter(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool =
 # 
 # \param atom The atom.
 # \param molgraph The molecular graph.
-# \param c_only If <tt>True</tt>, only carbon-bonded amides are recognized.
-# \param db_o_only If <tt>True</tt>, the C=O must be a double bond to oxygen specifically.
+# \param c_only If <tt>True</tt>, only carbon amides are recognized.
+# \param db_o_only If <tt>True</tt>, the center atom must be double bonded to oxygen. Otherwise, a double bond to sulfur is also allowed.
 # 
 # \return <tt>True</tt> if <em>atom</em> is an amide nitrogen, and <tt>False</tt> otherwise.
 # 
@@ -1261,7 +1261,7 @@ def isBridgehead(atom: Chem.Atom, molgraph: Chem.MolecularGraph, bridged_only: b
 # \param atom The atom.
 # \param molgraph The molecular graph.
 # \param c_only If <tt>True</tt>, only carbon centers are recognized.
-# \param db_o_only If <tt>True</tt>, the multiple bond partner must be a double-bonded oxygen.
+# \param db_o_only If <tt>True</tt>, a double bond to oxygen must be present. Otherwise, a double bond to sulfur is also allowed.
 # 
 # \return <tt>True</tt> if <em>atom</em> is a carbonyl-like center, and <tt>False</tt> otherwise. 
 # 
