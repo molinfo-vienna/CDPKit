@@ -41,7 +41,7 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeatureTypeMatchFunctor.
+         * \brief Match functor that accepts a feature pair when both features share the same Pharm::FeatureType identifier.
          */
         class CDPL_PHARM_API FeatureTypeMatchFunctor
         {

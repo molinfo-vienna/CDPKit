@@ -47,8 +47,8 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief Abstract container interface for a sequence of Pharm::Feature objects with associated properties
-         *        (e.g. a pharmacophore or feature set).
+         * \brief Abstract base class for containers holding a sequence of Pharm::Feature objects with associated
+         *        properties (e.g. a pharmacophore or feature set).
          */
         class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer,
                                                 public Base::PropertyContainer

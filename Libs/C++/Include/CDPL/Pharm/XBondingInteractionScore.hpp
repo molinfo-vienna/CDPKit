@@ -44,23 +44,31 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief XBondingInteractionScore.
+         * \brief Pharm::FeatureInteractionScore implementation that scores a halogen-bond donor/acceptor feature pair
+         *        by combining per-component scores for halogen-acceptor distance, acceptor-halogen-bound-atom angle and
+         *        acceptor-direction angle.
          */
         class CDPL_PHARM_API XBondingInteractionScore : public FeatureInteractionScore
         {
 
           public:
+            /** \brief Default minimum halogen-acceptor distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
+            /** \brief Default maximum halogen-acceptor distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_AX_DISTANCE = 4.0;
+            /** \brief Default minimum acceptor-halogen-bound-atom angle in degrees. */
             static constexpr double DEF_MIN_AXB_ANGLE   = 150.0;
+            /** \brief Default maximum deviation from the acceptor's preferred X-bonding direction in degrees. */
             static constexpr double DEF_MAX_ACC_ANGLE   = 35.0;
 
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %XBondingInteractionScore instances.
              */
             typedef std::shared_ptr<XBondingInteractionScore> SharedPointer;
 
+            /** \brief Type of the function mapping a halogen-acceptor distance to its score contribution. */
             typedef std::function<double(double)> DistanceScoringFunction;
+            /** \brief Type of the function mapping a halogen-bond geometry angle to its score contribution. */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**
@@ -75,22 +83,62 @@ namespace CDPL
             XBondingInteractionScore(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,
                                      double min_axb_ang = DEF_MIN_AXB_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
 
+            /**
+             * \brief Returns the currently configured minimum halogen-acceptor distance.
+             * \return The minimum AX distance.
+             */
             double getMinAXDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum halogen-acceptor distance.
+             * \return The maximum AX distance.
+             */
             double getMaxAXDistance() const;
 
+            /**
+             * \brief Returns the currently configured minimum acceptor-halogen-bound-atom angle.
+             * \return The minimum AXB angle in degrees.
+             */
             double getMinAXBAngle() const;
 
+            /**
+             * \brief Returns the currently configured maximum deviation from the acceptor's preferred X-bonding direction.
+             * \return The maximum acceptor angle in degrees.
+             */
             double getMaxAcceptorAngle() const;
 
+            /**
+             * \brief Specifies the function that maps the halogen-acceptor distance to its score contribution.
+             * \param func The distance-scoring function.
+             */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the acceptor-direction angle to its score contribution.
+             * \param func The acceptor-angle scoring function.
+             */
             void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the acceptor-halogen-bound-atom angle to its score contribution.
+             * \param func The AXB-angle scoring function.
+             */
             void setAXBAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Evaluates the halogen-bond interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The halogen-bond interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the halogen-bond interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The halogen-bond interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
           private:

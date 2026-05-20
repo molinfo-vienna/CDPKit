@@ -45,7 +45,9 @@ namespace CDPL
     {
 
         /**
-         * \brief InteractionPharmacophoreGenerator.
+         * \brief Driver that generates an interaction pharmacophore by perceiving a core pharmacophore on a ligand,
+         *        an environment pharmacophore on the surrounding pocket residues, analyzing the inter-feature
+         *        interactions and emitting one feature per detected interaction (optionally with exclusion volumes).
          */
         class CDPL_PHARM_API InteractionPharmacophoreGenerator
         {
@@ -53,38 +55,105 @@ namespace CDPL
           public:
             /**
              * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
+             * \param core_ph4_gen_cfg Configuration flags for the core (ligand) pharmacophore generator.
+             * \param env_ph4_gen_cfg Configuration flags for the environment (pocket) pharmacophore generator.
              */
             InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
                                               DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg  = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
 
+            /**
+             * \brief Sets the cutoff radius around the core used to extract the environment substructure.
+             * \param radius The new core-environment radius.
+             */
             void setCoreEnvironmentRadius(double radius);
 
+            /**
+             * \brief Returns the currently configured core-environment cutoff radius.
+             * \return The core-environment radius.
+             */
             double getCoreEnvironmentRadius() const;
 
+            /**
+             * \brief Specifies whether exclusion volume features shall be added for environment atoms not part of any interaction feature.
+             * \param add \c true to add exclusion volumes, and \c false to skip them.
+             */
             void addExclusionVolumes(bool add);
 
+            /**
+             * \brief Tells whether exclusion volume features are added.
+             * \return \c true if exclusion volumes are added, and \c false otherwise.
+             */
             bool exclusionVolumesAdded() const;
 
+            /**
+             * \brief Returns the core (ligand) pharmacophore generator.
+             * \return A reference to the core pharmacophore generator.
+             */
             PharmacophoreGenerator& getCorePharmacophoreGenerator();
 
+            /**
+             * \brief Returns the core (ligand) pharmacophore generator.
+             * \return A \c const reference to the core pharmacophore generator.
+             */
             const PharmacophoreGenerator& getCorePharmacophoreGenerator() const;
 
+            /**
+             * \brief Returns the environment (pocket) pharmacophore generator.
+             * \return A reference to the environment pharmacophore generator.
+             */
             PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator();
 
+            /**
+             * \brief Returns the environment (pocket) pharmacophore generator.
+             * \return A \c const reference to the environment pharmacophore generator.
+             */
             const PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator() const;
 
+            /**
+             * \brief Returns the interaction analyzer used to perceive feature-feature interactions.
+             * \return A reference to the interaction analyzer.
+             */
             InteractionAnalyzer& getInteractionAnalyzer();
 
+            /**
+             * \brief Returns the interaction analyzer used to perceive feature-feature interactions.
+             * \return A \c const reference to the interaction analyzer.
+             */
             const InteractionAnalyzer& getInteractionAnalyzer() const;
 
+            /**
+             * \brief Returns the core (ligand) pharmacophore produced by the last generate() call.
+             * \return A \c const reference to the core pharmacophore.
+             */
             const Pharmacophore& getCorePharmacophore() const;
 
+            /**
+             * \brief Returns the environment (pocket) pharmacophore produced by the last generate() call.
+             * \return A \c const reference to the environment pharmacophore.
+             */
             const Pharmacophore& getEnvironmentPharmacophore() const;
 
+            /**
+             * \brief Returns the feature-to-feature interaction mapping produced by the last generate() call.
+             * \return A \c const reference to the interaction mapping.
+             */
             const FeatureMapping& getInteractionMapping() const;
 
+            /**
+             * \brief Returns the core-environment substructure extracted by the last generate() call (only valid when \a extract_core_env was \c true).
+             * \return A \c const reference to the core-environment fragment.
+             */
             const Chem::Fragment& getCoreEnvironment() const;
 
+            /**
+             * \brief Generates the interaction pharmacophore for the (\a core, \a tgt) molecular graph pair.
+             * \param core The core (ligand) molecular graph.
+             * \param tgt The target (pocket) molecular graph.
+             * \param ia_pharm The output interaction pharmacophore.
+             * \param extract_core_env If \c true, the core environment is extracted from \a tgt before pharmacophore generation;
+             *                         if \c false, the environment pharmacophore is generated on \a tgt directly.
+             * \param append If \c false, \a ia_pharm is cleared before any features are added.
+             */
             void generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, Pharmacophore& ia_pharm,
                           bool extract_core_env, bool append = false);
 

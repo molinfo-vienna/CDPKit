@@ -41,15 +41,20 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief HBondingInteractionConstraint.
+         * \brief Constraint functor that tests whether a Pharm::Feature pair satisfies geometric H-bond criteria
+         *        (H-bond length plus acceptor-H-donor and H-bond-direction-to-acceptor-vector angles).
          */
         class CDPL_PHARM_API HBondingInteractionConstraint
         {
 
           public:
+            /** \brief Default minimum H-bond length in &Aring;ngstrom. */
             static constexpr double DEF_MIN_HB_LENGTH = 1.2;
+            /** \brief Default maximum H-bond length in &Aring;ngstrom. */
             static constexpr double DEF_MAX_HB_LENGTH = 2.8;
+            /** \brief Default minimum acceptor-hydrogen-donor angle in degrees. */
             static constexpr double DEF_MIN_AHD_ANGLE = 130.0;
+            /** \brief Default maximum H-bond direction to acceptor-vector angle in degrees. */
             static constexpr double DEF_MAX_ACC_ANGLE = 85.0;
 
             /**
@@ -66,14 +71,36 @@ namespace CDPL
                 donAccOrder(don_acc),
                 minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), maxAccAngle(max_acc_ang) {}
 
+            /**
+             * \brief Returns the currently configured minimum H-bond length.
+             * \return The minimum H-bond length.
+             */
             double getMinLength() const;
 
+            /**
+             * \brief Returns the currently configured maximum H-bond length.
+             * \return The maximum H-bond length.
+             */
             double getMaxLength() const;
 
+            /**
+             * \brief Returns the currently configured minimum acceptor-hydrogen-donor angle.
+             * \return The minimum AHD angle in degrees.
+             */
             double getMinAHDAngle() const;
 
+            /**
+             * \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+             * \return The maximum acceptor angle in degrees.
+             */
             double getMaxAcceptorAngle() const;
 
+            /**
+             * \brief Tests whether \a ftr1 and \a ftr2 satisfy the geometric H-bond constraints.
+             * \param ftr1 The first feature (donor or acceptor, depending on the constructor flag).
+             * \param ftr2 The second feature.
+             * \return \c true if the H-bond constraints are satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:

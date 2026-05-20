@@ -40,17 +40,20 @@ namespace CDPL
     {
 
         /**
-         * \brief IonicInteractionConstraint.
+         * \brief Pharm::FeatureDistanceConstraint specialization that accepts an oppositely-charged ionic feature pair
+         *        when its center distance lies within the typical salt-bridge range.
          */
         class CDPL_PHARM_API IonicInteractionConstraint : public FeatureDistanceConstraint
         {
 
           public:
+            /** \brief Default minimum ionic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_DISTANCE = 1.5;
+            /** \brief Default maximum ionic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
 
             /**
-             * \brief Constructs a \c %IonicInteractionConstraint functor with a 
+             * \brief Constructs a \c %IonicInteractionConstraint functor with a
              *        minimum ionic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
              * \param min_dist The minimum allowed feature pair distance.
              * \param max_dist The maximum allowed feature pair distance.

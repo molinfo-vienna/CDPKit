@@ -40,22 +40,25 @@ namespace CDPL
     {
 
         /**
-         * \brief HydrophobicInteractionScore.
+         * \brief Pharm::FeatureDistanceScore specialization that scores a hydrophobic feature pair based on its
+         *        center distance in the typical hydrophobic interaction range.
          */
         class CDPL_PHARM_API HydrophobicInteractionScore : public FeatureDistanceScore
         {
 
           public:
+            /** \brief Default minimum hydrophobic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_DISTANCE = 2.0;
+            /** \brief Default maximum hydrophobic feature pair distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_DISTANCE = 6.0;
 
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
              */
             typedef std::shared_ptr<HydrophobicInteractionScore> SharedPointer;
 
             /**
-             * \brief Constructs a \c %HydrophobicInteractionScore functor with a 
+             * \brief Constructs a \c %HydrophobicInteractionScore functor with a
              *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
              * \param min_dist The minimum allowed feature pair distance.
              * \param max_dist The maximum allowed feature pair distance.

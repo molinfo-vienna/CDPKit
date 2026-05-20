@@ -44,19 +44,36 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief FeatureGeometryMatchFunctor.
+         * \brief Match functor that quantifies the goodness of the spatial orientation match between two pharmacophore
+         *        features, applying type-specific tolerances for H-bond donor/acceptor, halogen-bond donor/acceptor and
+         *        aromatic features.
          */
         class CDPL_PHARM_API FeatureGeometryMatchFunctor
         {
 
           public:
+            /** \brief Default maximum H-bond acceptor interaction direction angle in degrees. */
             static constexpr double DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
+            /** \brief Default maximum H-bond acceptor orientation deviation in degrees. */
             static constexpr double DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
+            /** \brief Default maximum H-bond donor interaction direction deviation in degrees. */
             static constexpr double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
+            /** \brief Default maximum halogen-bond acceptor interaction direction deviation in degrees. */
             static constexpr double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
+            /** \brief Default maximum halogen-bond donor interaction direction deviation in degrees. */
             static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
+            /** \brief Default maximum aromatic feature orientation deviation in degrees. */
             static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
+            /**
+             * \brief Constructs a \c %FeatureGeometryMatchFunctor with the specified per-type angle tolerances.
+             * \param max_hba_int_dir_angle The maximum H-bond acceptor interaction direction angle.
+             * \param max_hba_orient_dev The maximum H-bond acceptor orientation deviation.
+             * \param max_hbd_int_dir_dev The maximum H-bond donor interaction direction deviation.
+             * \param max_xba_int_dir_dev The maximum halogen-bond acceptor interaction direction deviation.
+             * \param max_xbd_int_dir_dev The maximum halogen-bond donor interaction direction deviation.
+             * \param max_ar_orient_dev The maximum aromatic feature orientation deviation.
+             */
             FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE,
                                         double max_hba_orient_dev    = DEF_MAX_HBA_ORIENTATION_DEVIATION,
                                         double max_hbd_int_dir_dev   = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
@@ -64,28 +81,76 @@ namespace CDPL
                                         double max_xbd_int_dir_dev   = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
                                         double max_ar_orient_dev     = DEF_MAX_AR_ORIENTATION_DEVIATION);
 
+            /**
+             * \brief Returns the currently configured maximum H-bond acceptor interaction direction angle.
+             * \return The maximum HBA interaction direction angle in degrees.
+             */
             double getMaxHBAInteractionDirAngle() const;
 
+            /**
+             * \brief Sets the maximum H-bond acceptor interaction direction angle.
+             * \param angle The new maximum HBA interaction direction angle in degrees.
+             */
             void setMaxHBAInteractionDirAngle(double angle);
 
+            /**
+             * \brief Returns the currently configured maximum H-bond acceptor orientation deviation.
+             * \return The maximum HBA orientation deviation in degrees.
+             */
             double getMaxHBAOrientationDeviation() const;
 
+            /**
+             * \brief Sets the maximum H-bond acceptor orientation deviation.
+             * \param angle The new maximum HBA orientation deviation in degrees.
+             */
             void setMaxHBAOrientationDeviation(double angle);
 
+            /**
+             * \brief Returns the currently configured maximum H-bond donor interaction direction deviation.
+             * \return The maximum HBD interaction direction deviation in degrees.
+             */
             double getMaxHBDInteractionDirDeviation() const;
 
+            /**
+             * \brief Sets the maximum H-bond donor interaction direction deviation.
+             * \param angle The new maximum HBD interaction direction deviation in degrees.
+             */
             void setMaxHBDInteractionDirDeviation(double angle);
 
+            /**
+             * \brief Returns the currently configured maximum halogen-bond donor interaction direction deviation.
+             * \return The maximum XBD interaction direction deviation in degrees.
+             */
             double getMaxXBDInteractionDirDeviation() const;
 
+            /**
+             * \brief Sets the maximum halogen-bond donor interaction direction deviation.
+             * \param angle The new maximum XBD interaction direction deviation in degrees.
+             */
             void setMaxXBDInteractionDirDeviation(double angle);
 
+            /**
+             * \brief Returns the currently configured maximum halogen-bond acceptor interaction direction deviation.
+             * \return The maximum XBA interaction direction deviation in degrees.
+             */
             double getMaxXBAInteractionDirDeviation() const;
 
+            /**
+             * \brief Sets the maximum halogen-bond acceptor interaction direction deviation.
+             * \param angle The new maximum XBA interaction direction deviation in degrees.
+             */
             void setMaxXBAInteractionDirDeviation(double angle);
 
+            /**
+             * \brief Returns the currently configured maximum aromatic feature orientation deviation.
+             * \return The maximum aromatic orientation deviation in degrees.
+             */
             double getMaxAROrientationDeviation() const;
 
+            /**
+             * \brief Sets the maximum aromatic feature orientation deviation.
+             * \param angle The new maximum aromatic orientation deviation in degrees.
+             */
             void setMaxAROrientationDeviation(double angle);
 
             /**

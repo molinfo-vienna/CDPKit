@@ -46,7 +46,7 @@ namespace CDPL
         class GaussianShapeFunction;
 
         /**
-         * \brief Abstract base for generators of starting transformations used to seed
+         * \brief Abstract base class for generators of starting transformations used to seed
          *        Gaussian-shape overlap optimization.
          *
          * Concrete subclasses (e.g. Shape::PrincipalAxesAlignmentStartGenerator) implement the

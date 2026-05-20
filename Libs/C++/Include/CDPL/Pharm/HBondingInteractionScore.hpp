@@ -42,23 +42,31 @@ namespace CDPL
     {
 
         /**
-         * \brief HBondingInteractionScore.
+         * \brief Pharm::FeatureInteractionScore implementation that scores a donor/acceptor feature pair by combining
+         *        per-component scores for H-bond length, acceptor-hydrogen-donor angle and H-bond-direction to
+         *        acceptor-vector angle.
          */
         class CDPL_PHARM_API HBondingInteractionScore : public FeatureInteractionScore
         {
 
           public:
+            /** \brief Default minimum H-bond length in &Aring;ngstrom. */
             static constexpr double DEF_MIN_HB_LENGTH = 1.2;
+            /** \brief Default maximum H-bond length in &Aring;ngstrom. */
             static constexpr double DEF_MAX_HB_LENGTH = 2.8;
+            /** \brief Default minimum acceptor-hydrogen-donor angle in degrees. */
             static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
+            /** \brief Default maximum H-bond direction to acceptor-vector angle in degrees. */
             static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
              */
             typedef std::shared_ptr<HBondingInteractionScore> SharedPointer;
 
+            /** \brief Type of the function mapping an H-bond length to its score contribution. */
             typedef std::function<double(double)> DistanceScoringFunction;
+            /** \brief Type of the function mapping an H-bond geometry angle to its score contribution. */
             typedef std::function<double(double)> AngleScoringFunction;
 
             /**
@@ -73,22 +81,62 @@ namespace CDPL
             HBondingInteractionScore(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
                                      double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
 
+            /**
+             * \brief Returns the currently configured minimum H-bond length.
+             * \return The minimum H-bond length.
+             */
             double getMinLength() const;
 
+            /**
+             * \brief Returns the currently configured maximum H-bond length.
+             * \return The maximum H-bond length.
+             */
             double getMaxLength() const;
 
+            /**
+             * \brief Returns the currently configured minimum acceptor-hydrogen-donor angle.
+             * \return The minimum AHD angle in degrees.
+             */
             double getMinAHDAngle() const;
 
+            /**
+             * \brief Returns the currently configured maximum H-bond direction to acceptor-vector angle.
+             * \return The maximum acceptor angle in degrees.
+             */
             double getMaxAcceptorAngle() const;
 
+            /**
+             * \brief Specifies the function that maps the H-bond length to its score contribution.
+             * \param func The distance-scoring function.
+             */
             void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the H-bond direction to acceptor-vector angle to its score contribution.
+             * \param func The acceptor-angle scoring function.
+             */
             void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Specifies the function that maps the acceptor-hydrogen-donor angle to its score contribution.
+             * \param func The AHD-angle scoring function.
+             */
             void setAHDAngleScoringFunction(const AngleScoringFunction& func);
 
+            /**
+             * \brief Evaluates the H-bond interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The H-bond interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the H-bond interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The H-bond interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
           private:

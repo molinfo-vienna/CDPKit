@@ -41,14 +41,18 @@ namespace CDPL
         class Feature;
 
         /**
-         * \brief CationPiInteractionConstraint.
+         * \brief Constraint functor that tests whether an aromatic/cationic feature pair satisfies the geometric
+         *        criteria for a cation-&pi; interaction (center distance plus cation-to-ring-plane-normal angle).
          */
         class CDPL_PHARM_API CationPiInteractionConstraint
         {
 
           public:
+            /** \brief Default minimum cation-to-aromatic-center distance in &Aring;ngstrom. */
             static constexpr double DEF_MIN_DISTANCE = 3.5;
+            /** \brief Default maximum cation-to-aromatic-center distance in &Aring;ngstrom. */
             static constexpr double DEF_MAX_DISTANCE = 5.5;
+            /** \brief Default maximum angle between cation displacement and aromatic-ring plane normal in degrees. */
             static constexpr double DEF_MAX_ANGLE    = 45.0;
 
             /**
@@ -64,12 +68,30 @@ namespace CDPL
                 aroCatOrder(aro_cat),
                 minDist(min_dist), maxDist(max_dist), maxAngle(max_ang) {}
 
+            /**
+             * \brief Returns the currently configured minimum cation-aromatic distance.
+             * \return The minimum distance.
+             */
             double getMinDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum cation-aromatic distance.
+             * \return The maximum distance.
+             */
             double getMaxDistance() const;
 
+            /**
+             * \brief Returns the currently configured maximum angle between cation displacement and aromatic-plane normal.
+             * \return The maximum angle in degrees.
+             */
             double getMaxAngle() const;
 
+            /**
+             * \brief Tests whether \a ftr1 and \a ftr2 satisfy the geometric cation-&pi; criteria.
+             * \param ftr1 The first feature (aromatic or cationic, depending on the constructor flag).
+             * \param ftr2 The second feature.
+             * \return \c true if the constraint is satisfied, and \c false otherwise.
+             */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:

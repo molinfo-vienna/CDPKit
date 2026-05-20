@@ -41,16 +41,28 @@ namespace CDPL
     {
 
         /**
-         * \brief PharmacophoreFitScreeningScore.
+         * \brief Pharm::PharmacophoreFitScore specialization that scores a Pharm::ScreeningProcessor::SearchHit by
+         *        applying the underlying pharmacophore-fit score to its query and hit features.
          */
         class CDPL_PHARM_API PharmacophoreFitScreeningScore : public PharmacophoreFitScore
         {
 
           public:
+            /**
+             * \brief Constructs the \c %PharmacophoreFitScreeningScore instance.
+             * \param ftr_match_cnt_weight Weight of the matched-feature-count contribution.
+             * \param ftr_pos_match_weight Weight of the feature-position-deviation contribution.
+             * \param ftr_geom_match_weight Weight of the feature-geometry-match contribution.
+             */
             PharmacophoreFitScreeningScore(double ftr_match_cnt_weight  = DEF_FTR_MATCH_COUNT_WEIGHT,
                                            double ftr_pos_match_weight  = DEF_FTR_POS_MATCH_WEIGHT,
                                            double ftr_geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
+            /**
+             * \brief Computes the pharmacophore-fit score of the screening search hit \a hit.
+             * \param hit The screening search hit.
+             * \return The pharmacophore-fit screening score.
+             */
             double operator()(const ScreeningProcessor::SearchHit& hit);
         };
     } // namespace Pharm

@@ -42,23 +42,26 @@ namespace CDPL
     {
 
         /**
-         * \brief FeatureInteractionScoreCombiner.
+         * \brief Composite Pharm::FeatureInteractionScore that combines two underlying interaction scores
+         *        via a user-supplied binary combination function (default: maximum).
          */
         class CDPL_PHARM_API FeatureInteractionScoreCombiner : public FeatureInteractionScore
         {
 
           public:
-            /**    
+            /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScoreCombiner instances.
              */
             typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
 
+            /** \brief Type of the binary function that combines two score values into the final score. */
             typedef std::function<double(double, double)> CombinationFunction;
 
+            /** \brief Type of the shared pointer to an underlying interaction score. */
             typedef FeatureInteractionScore::SharedPointer InteractionScore;
 
             /**
-             * \brief Constructs a \c %FeatureInteractionScoreCombiner that combines the score values calculated by two feature 
+             * \brief Constructs a \c %FeatureInteractionScoreCombiner that combines the score values calculated by two feature
              *        interaction scoring functions.
              * \param score1 The first interaction scoring function.
              * \param score2 The second interaction scoring function.
@@ -67,10 +70,27 @@ namespace CDPL
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2,
                                             const CombinationFunction& comb_func);
 
+            /**
+             * \brief Constructs a \c %FeatureInteractionScoreCombiner that returns the maximum of the two score values.
+             * \param score1 The first interaction scoring function.
+             * \param score2 The second interaction scoring function.
+             */
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2);
 
+            /**
+             * \brief Evaluates the combined interaction score with the first feature represented only by its 3D position \a ftr1_pos.
+             * \param ftr1_pos The 3D position of the first feature.
+             * \param ftr2 The second feature.
+             * \return The combined interaction score.
+             */
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
+            /**
+             * \brief Evaluates the combined interaction score between features \a ftr1 and \a ftr2.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return The combined interaction score.
+             */
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
           private:
