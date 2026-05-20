@@ -142,14 +142,14 @@ namespace CDPL
             virtual std::size_t getConformationIndex(std::size_t pharm_idx) const = 0;
 
             /**
-             * \brief Returns the cached per-Pharm::FeatureType frequency histogram of the pharmacophore at index \a pharm_idx.
+             * \brief Returns the cached per Pharm::FeatureType frequency histogram of the pharmacophore at index \a pharm_idx.
              * \param pharm_idx The zero-based pharmacophore index.
              * \return A \c const reference to the feature-type histogram.
              */
             virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const = 0;
 
             /**
-             * \brief Returns the cached per-Pharm::FeatureType frequency histogram of conformer \a mol_conf_idx of molecule \a mol_idx.
+             * \brief Returns the cached per Pharm::FeatureType frequency histogram of conformer \a mol_conf_idx of molecule \a mol_idx.
              * \param mol_idx The zero-based molecule index.
              * \param mol_conf_idx The zero-based conformer index within the molecule.
              * \return A \c const reference to the feature-type histogram.

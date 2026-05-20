@@ -22,28 +22,40 @@
 ##
 # \brief Returns the color (pharmacophore) aligned-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param beta The aligned-side Tversky weighting factor.
+# 
+# \return The color aligned-normalized Tversky similarity score.
 # 
 def calcAlignedColorTverskyScore(res: AlignmentResult, beta: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the shape-only aligned-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param beta The aligned-side Tversky weighting factor.
+# 
+# \return The shape-only aligned-normalized Tversky similarity score.
 # 
 def calcAlignedShapeTverskyScore(res: AlignmentResult, beta: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the (shape + color) total-overlap aligned-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param beta The aligned-side Tversky weighting factor.
+# 
+# \return The total-overlap aligned-normalized Tversky similarity score.
 # 
 def calcAlignedTotalOverlapTverskyScore(res: AlignmentResult, beta: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the combined shape + color aligned-normalized Tversky score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param beta The aligned-side Tversky weighting factor.
+# 
+# \return The aligned-normalized Tversky combo score (sum of shape and color aligned-Tversky scores).
 # 
 def calcAlignedTverskyComboScore(res: AlignmentResult, beta: float = 0.95) -> float: pass
 
@@ -62,6 +74,10 @@ def calcCenterAlignmentTransforms(func: GaussianShapeFunction, to_ctr_xform: Mat
 ##
 # \brief Returns the color (pharmacophore) Tanimoto similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
+# 
+# \return The color Tanimoto similarity score.
+# 
 def calcColorTanimotoScore(res: AlignmentResult) -> float: pass
 
 ##
@@ -70,6 +86,8 @@ def calcColorTanimotoScore(res: AlignmentResult) -> float: pass
 # \param res The alignment result.
 # \param alpha The weight of the reference self-overlap contribution.
 # \param beta The weight of the aligned self-overlap contribution.
+# 
+# \return The color symmetric Tversky similarity score.
 # 
 def calcColorTverskyScore(res: AlignmentResult, alpha: float = 0.95, beta: float = 0.05) -> float: pass
 
@@ -96,33 +114,49 @@ def calcQuadrupoleTensorEigenDecomposition(quad_tensor: Math.Matrix3D, eigen_vec
 ##
 # \brief Returns the color (pharmacophore) reference-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param alpha The reference-side Tversky weighting factor.
+# 
+# \return The color reference-normalized Tversky similarity score.
 # 
 def calcReferenceColorTverskyScore(res: AlignmentResult, alpha: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the shape-only reference-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param alpha The reference-side Tversky weighting factor.
+# 
+# \return The shape-only reference-normalized Tversky similarity score.
 # 
 def calcReferenceShapeTverskyScore(res: AlignmentResult, alpha: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the (shape + color) total-overlap reference-normalized Tversky similarity score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param alpha The reference-side Tversky weighting factor.
+# 
+# \return The total-overlap reference-normalized Tversky similarity score.
 # 
 def calcReferenceTotalOverlapTverskyScore(res: AlignmentResult, alpha: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the combined shape + color reference-normalized Tversky score of <em>res</em>.
 # 
+# \param res The alignment result.
 # \param alpha The reference-side Tversky weighting factor.
+# 
+# \return The reference-normalized Tversky combo score (sum of shape and color reference-Tversky scores).
 # 
 def calcReferenceTverskyComboScore(res: AlignmentResult, alpha: float = 0.95) -> float: pass
 
 ##
 # \brief Returns the shape-only Tanimoto similarity score of <em>res</em>.
+# 
+# \param res The alignment result.
+# 
+# \return The shape-only Tanimoto similarity score.
 # 
 def calcShapeTanimotoScore(res: AlignmentResult) -> float: pass
 
@@ -133,15 +167,25 @@ def calcShapeTanimotoScore(res: AlignmentResult) -> float: pass
 # \param alpha The weight of the reference self-overlap contribution.
 # \param beta The weight of the aligned self-overlap contribution.
 # 
+# \return The shape-only symmetric Tversky similarity score.
+# 
 def calcShapeTverskyScore(res: AlignmentResult, alpha: float = 0.95, beta: float = 0.05) -> float: pass
 
 ##
 # \brief Returns the combined shape + color Tanimoto score of <em>res</em>.
 # 
+# \param res The alignment result.
+# 
+# \return The Tanimoto combo score (sum of shape and color Tanimoto scores).
+# 
 def calcTanimotoComboScore(res: AlignmentResult) -> float: pass
 
 ##
 # \brief Returns the (shape + color) total-overlap Tanimoto similarity score of <em>res</em>.
+# 
+# \param res The alignment result.
+# 
+# \return The total-overlap Tanimoto similarity score.
 # 
 def calcTotalOverlapTanimotoScore(res: AlignmentResult) -> float: pass
 
@@ -152,6 +196,8 @@ def calcTotalOverlapTanimotoScore(res: AlignmentResult) -> float: pass
 # \param alpha The weight of the reference self-overlap contribution.
 # \param beta The weight of the aligned self-overlap contribution.
 # 
+# \return The total-overlap symmetric Tversky similarity score.
+# 
 def calcTotalOverlapTverskyScore(res: AlignmentResult, alpha: float = 0.95, beta: float = 0.05) -> float: pass
 
 ##
@@ -160,6 +206,8 @@ def calcTotalOverlapTverskyScore(res: AlignmentResult, alpha: float = 0.95, beta
 # \param res The alignment result.
 # \param alpha The weight of the reference self-overlap contribution.
 # \param beta The weight of the aligned self-overlap contribution.
+# 
+# \return The symmetric Tversky combo score (sum of shape and color Tversky scores).
 # 
 def calcTverskyComboScore(res: AlignmentResult, alpha: float = 0.95, beta: float = 0.05) -> float: pass
 

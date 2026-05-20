@@ -20,17 +20,17 @@
 #
 
 ##
-# \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
+# \brief Pharm.ScreeningDBAccessor implementation that reads pharmacophore screening databases stored in the built-in optimized PSD format.
 # 
 class PSDScreeningDBAccessor(ScreeningDBAccessor):
 
     ##
-    # \brief Initializes the \c %PSDScreeningDBAccessor instance.
+    # \brief Constructs a <tt>PSDScreeningDBAccessor</tt> instance without an associated database.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Constructs a <tt>ScreeningDBAccessor</tt> instance that will read data from the database-file specified by <em>name</em>.
+    # \brief Constructs a <tt>PSDScreeningDBAccessor</tt> instance that will read data from the database-file specified by <em>name</em>.
     # 
     # \param name The name of the database-file.
     # 

@@ -538,7 +538,7 @@ def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coor
 def createExclusionVolumes(pharm: Pharmacophore, cntnr: FeatureContainer, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
-# \brief Computes a per-Pharm.FeatureType frequency histogram of the features in <em>cntnr</em>.
+# \brief Computes a per Pharm.FeatureType frequency histogram of the features in <em>cntnr</em>.
 # 
 # \param cntnr The feature container.
 # \param hist The output histogram (feature type &rarr; count).
@@ -688,15 +688,30 @@ def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None:
 ##
 # \brief Sets the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em> to <em>single_prec</em>.
 # 
+# \param cntnr The control-parameter container.
+# \param single_prec <tt>True</tt> to write single-precision floats, and <tt>False</tt> to write double-precision floats.
+# 
+# \since 1.2
+# 
 def setCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass
 
 ##
 # \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise. 
+# 
+# \since 1.2
+# 
 def hasCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Returns the value of the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter of <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if CDF output uses single-precision floats, and <tt>False</tt> otherwise. 
 # 
 # \since 1.2
 # 
@@ -705,64 +720,107 @@ def getCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterConta
 ##
 # \brief Removes the Pharm.ControlParameter.CDF_OUTPUT_SINGLE_PRECISION_FLOATS parameter from <em>cntnr</em>.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \since 1.2
+# 
 def clearCDFOutputSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter of <em>cntnr</em> to <em>allow</em>.
+# 
+# \param cntnr The control-parameter container.
+# \param allow <tt>True</tt> to allow duplicate database entries, and <tt>False</tt> to reject them.
 # 
 def setPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer, allow: bool) -> None: pass
 
 ##
 # \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Returns the value of the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter of <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if duplicate database entries are allowed, and <tt>False</tt> otherwise.
 # 
 def getPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Pharm.ControlParameter.PSD_ALLOW_DUPLICATES parameter from <em>cntnr</em>.
 # 
+# \param cntnr The control-parameter container.
+# 
 def clearPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Pharm.ControlParameter.PSD_CREATION_MODE parameter of <em>cntnr</em> to <em>mode</em>.
+# 
+# \param cntnr The control-parameter container.
+# \param mode The new Pharm.ScreeningDBCreator.Mode value.
 # 
 def setPSDCreationModeParameter(cntnr: Base.ControlParameterContainer, mode: Mode) -> None: pass
 
 ##
 # \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.PSD_CREATION_MODE parameter.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Returns the value of the Pharm.ControlParameter.PSD_CREATION_MODE parameter of <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container.
+# 
+# \return The Pharm.ScreeningDBCreator.Mode value.
 # 
 def getPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> Mode: pass
 
 ##
 # \brief Removes the Pharm.ControlParameter.PSD_CREATION_MODE parameter from <em>cntnr</em>.
 # 
+# \param cntnr The control-parameter container.
+# 
 def clearPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief Sets the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em> to <em>strict</em>.
+# 
+# \param cntnr The control-parameter container.
+# \param strict <tt>True</tt> to enable strict error checking, and <tt>False</tt> to disable it.
 # 
 def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
 # \brief Tells whether <em>cntnr</em> carries an explicit Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if the parameter is set, and <tt>False</tt> otherwise.
+# 
 def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Returns the value of the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter of <em>cntnr</em>.
 # 
+# \param cntnr The control-parameter container.
+# 
+# \return <tt>True</tt> if strict error checking is enabled, and <tt>False</tt> otherwise.
+# 
 def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief Removes the Pharm.ControlParameter.STRICT_ERROR_CHECKING parameter from <em>cntnr</em>.
+# 
+# \param cntnr The control-parameter container.
 # 
 def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass

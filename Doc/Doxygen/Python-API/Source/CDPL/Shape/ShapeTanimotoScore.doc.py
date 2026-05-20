@@ -57,6 +57,10 @@ class ShapeTanimotoScore(Boost.Python.instance):
     ##
     # \brief Returns the shape-only Tanimoto score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The shape-only Tanimoto score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

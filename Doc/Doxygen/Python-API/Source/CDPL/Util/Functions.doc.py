@@ -20,18 +20,22 @@
 #
 
 ##
-# \brief 
-# \param path1 
-# \param path2 
-# \return 
-#
+# \brief Tells whether <em>path1</em> and <em>path2</em> refer to the same file (after resolving symlinks and case-insensitivity rules of the underlying file system).
+# 
+# \param path1 The first file-system path.
+# \param path2 The second file-system path.
+# 
+# \return <tt>True</tt> if both paths resolve to the same file, and <tt>False</tt> otherwise.
+# 
 def checkIfSameFile(path1: str, path2: str) -> bool: pass
 
 ##
-# \brief 
-# \param path 
-# \return 
-#
+# \brief Tells whether the file at <em>path</em> exists.
+# 
+# \param path The file-system path to test.
+# 
+# \return <tt>True</tt> if the file exists, and <tt>False</tt> otherwise.
+# 
 def fileExists(path: str) -> bool: pass
 
 ##
@@ -60,9 +64,11 @@ def forEachPair(seq1: object, seq2: object, func: object) -> None: pass
 def forEach(seq: object, func: object) -> None: pass
 
 ##
-# \brief 
-# \param dir 
-# \param ptn 
-# \return 
-#
+# \brief Generates a temporary file path inside <em>dir</em> whose basename matches the supplied randomization <em>ptn</em> and that is guaranteed not to collide with any existing file.
+# 
+# \param dir The directory in which to place the file (an empty string selects the platform's temporary directory).
+# \param ptn The Boost-filesystem-style randomization pattern for the basename (<tt>%</tt> characters are replaced with random hex digits).
+# 
+# \return The generated unique file-system path.
+# 
 def genCheckedTempFilePath(dir: str = '', ptn: str = '%%%%-%%%%-%%%%-%%%%') -> str: pass

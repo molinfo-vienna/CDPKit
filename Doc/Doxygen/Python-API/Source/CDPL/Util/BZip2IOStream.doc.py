@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bidirectional stream that transparently (de)compresses bzip2 data.
+# 
 class BZip2IOStream(Base.IOStream):
 
     ##

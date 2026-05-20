@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Output stream that transparently writes bzip2-compressed data.
+# 
 class BZip2OStream(Base.OStream):
 
     ##

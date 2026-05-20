@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for bzip2-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFBZ2PharmacophoreReader(PharmacophoreReaderBase):
 
     ##

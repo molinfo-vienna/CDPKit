@@ -20,12 +20,12 @@
 #
 
 ##
-# \brief A class for the creation of optimized pharmacophore screening databases.
+# \brief Pharm.ScreeningDBCreator implementation that builds optimized pharmacophore screening databases in the built-in PSD format.
 # 
 class PSDScreeningDBCreator(ScreeningDBCreator):
 
     ##
-    # \brief Initializes the \c %PSDScreeningDBCreator instance.
+    # \brief Constructs a <tt>PSDScreeningDBCreator</tt> instance without an associated database.
     # 
     def __init__() -> None: pass
 

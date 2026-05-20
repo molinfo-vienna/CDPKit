@@ -60,6 +60,10 @@ class ColorTverskyScore(Boost.Python.instance):
     ##
     # \brief Returns the color symmetric Tversky score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The color symmetric Tversky score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

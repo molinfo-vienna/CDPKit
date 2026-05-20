@@ -57,6 +57,10 @@ class TotalOverlapTanimotoScore(Boost.Python.instance):
     ##
     # \brief Returns the (shape + color) total-overlap Tanimoto score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The total-overlap Tanimoto score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

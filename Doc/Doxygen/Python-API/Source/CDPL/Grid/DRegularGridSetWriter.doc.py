@@ -25,46 +25,62 @@
 class DRegularGridSetWriter(DRegularGridSetWriterBase):
 
     ##
-    # \brief Initializes the \c %DRegularGridSetWriter instance.
-    # \param file_name 
-    # \param mode 
+    # \brief Constructs a <tt>MultiFormatDataWriter</tt> that opens <em>file_name</em> and deduces the output format from its name.
+    # 
+    # \param file_name The output-file name.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if no matching output handler was found.
     # 
     def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetWriter instance.
-    # \param file_name 
-    # \param fmt 
-    # \param mode 
+    # \brief Constructs a <tt>MultiFormatDataWriter</tt> that opens <em>file_name</em> and uses the output handler matching the Base.DataFormat <em>fmt</em>.
+    # 
+    # \param file_name The output-file name.
+    # \param fmt The output format identifier.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if no matching output handler was found.
     # 
     def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetWriter instance.
-    # \param file_name 
-    # \param fmt 
-    # \param mode 
+    # \brief Constructs a <tt>MultiFormatDataWriter</tt> that opens <em>file_name</em> and uses the output handler matching the Base.DataFormat <em>fmt</em>.
+    # 
+    # \param file_name The output-file name.
+    # \param fmt The output format identifier.
+    # \param mode The open mode of the underlying file stream.
+    # 
+    # \throw Base.IOError if no matching output handler was found.
     # 
     def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetWriter instance.
-    # \param ios 
-    # \param fmt 
+    # \brief Constructs a <tt>MultiFormatDataWriter</tt> that wraps <em>ios</em> and uses the output handler matching the Base.DataFormat <em>fmt</em>.
+    # 
+    # \param ios The output stream to wrap.
+    # \param fmt The output format identifier.
+    # 
+    # \throw Base.IOError if no matching output handler was found.
     # 
     def __init__(ios: Base.IOStream, fmt: str) -> None: pass
 
     ##
-    # \brief Initializes the \c %DRegularGridSetWriter instance.
-    # \param ios 
-    # \param fmt 
+    # \brief Constructs a <tt>MultiFormatDataWriter</tt> that wraps <em>ios</em> and uses the output handler matching the Base.DataFormat <em>fmt</em>.
+    # 
+    # \param ios The output stream to wrap.
+    # \param fmt The output format identifier.
+    # 
+    # \throw Base.IOError if no matching output handler was found.
     # 
     def __init__(ios: Base.IOStream, fmt: Base.DataFormat) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the data format actually used by the wrapped output handler.
+    # 
+    # \return A reference to the resolved Base.DataFormat.
+    # 
     def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

@@ -60,6 +60,10 @@ class TverskyComboScore(Boost.Python.instance):
     ##
     # \brief Returns the combined shape + color symmetric Tversky score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The symmetric Tversky combo score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

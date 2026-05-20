@@ -22,7 +22,9 @@
 ##
 # \brief Driver for the alignment of one Shape.GaussianShapeFunction (the aligned shape) against a fixed reference Shape.GaussianShapeFunction.
 # 
-# The alignment iterates over starting transformations produced by a configurable Shape.GaussianShapeAlignmentStartGenerator, optionally refines each start via BFGS minimization of the overlap function, and collects the resulting transformations and overlap values in Result instances.
+# The alignment iterates over starting transformations produced by a configurable Shape.GaussianShapeAlignmentStartGenerator, optionally refines each start via BFGS minimization (Math.BFGSMinimizer) of the overlap function, and collects the resulting transformations and overlap values in Result instances.
+# 
+# \see Math.BFGSMinimizer
 # 
 class GaussianShapeFunctionAlignment(Boost.Python.instance):
 

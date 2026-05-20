@@ -20,43 +20,48 @@
 #
 
 ##
-# \brief CompoundDataReader.
+# \brief Composite Base.DataReader that aggregates several underlying readers and presents their records as one contiguous record stream.
 # 
 class CompoundReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \c %CompoundReactionReader instance.
+    # \brief Constructs an empty <tt>CompoundDataReader</tt> instance.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of underlying readers.
+    # 
+    # \return The reader count.
+    # 
     def getNumReaders() -> int: pass
 
     ##
-    # \brief 
-    # \param reader 
-    #
+    # \brief Appends <em>reader</em> to the list of underlying readers.
+    # 
+    # \param reader The reader to add.
+    # 
     def addReader(reader: ReactionReaderBase) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the reader at index <em>idx</em> from the list of underlying readers.
+    # 
+    # \param idx The zero-based reader index.
+    # 
     def removeReader(idx: int) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all underlying readers.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns the underlying reader at index <em>idx</em>.
+    # 
+    # \param idx The zero-based reader index.
+    # 
+    # \return A reference to the reader shared reference.
+    # 
     def getReader(idx: int) -> ReactionReaderBase: pass
 
     numReaders = property(getNumReaders)

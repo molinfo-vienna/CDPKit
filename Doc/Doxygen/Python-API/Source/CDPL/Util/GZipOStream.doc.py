@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Output stream that transparently writes gzip-compressed data.
+# 
 class GZipOStream(Base.OStream):
 
     ##

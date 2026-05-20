@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bidirectional stream that transparently (de)compresses gzip data.
+# 
 class GZipIOStream(Base.IOStream):
 
     ##

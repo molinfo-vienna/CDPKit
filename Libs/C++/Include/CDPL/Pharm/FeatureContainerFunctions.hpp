@@ -98,7 +98,7 @@ namespace CDPL
         CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr, unsigned int type);
 
         /**
-         * \brief Computes a per-Pharm::FeatureType frequency histogram of the features in \a cntnr.
+         * \brief Computes a per Pharm::FeatureType frequency histogram of the features in \a cntnr.
          * \param cntnr The feature container.
          * \param hist The output histogram (feature type &rarr; count).
          * \param append If \c false, \a hist is cleared before the counts are accumulated.

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Writer for gzip-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##

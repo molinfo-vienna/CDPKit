@@ -59,6 +59,10 @@ class ReferenceTverskyComboScore(Boost.Python.instance):
     ##
     # \brief Returns the combined shape + color reference-normalized Tversky score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The reference-normalized Tversky combo score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

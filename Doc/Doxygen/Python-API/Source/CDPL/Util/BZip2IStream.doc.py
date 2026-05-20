@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Input stream that transparently decompresses bzip2-compressed data.
+# 
 class BZip2IStream(Base.IStream):
 
     ##

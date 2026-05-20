@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Input stream that transparently decompresses gzip-compressed data.
+# 
 class GZipIStream(Base.IStream):
 
     ##

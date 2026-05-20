@@ -25,19 +25,21 @@
 class BronKerboschAlgorithm(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \c %BronKerboschAlgorithm instance.
+    # \brief Constructs the <tt>BronKerboschAlgorithm</tt> instance without an associated adjacency matrix.
     # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes a copy of the \c %BronKerboschAlgorithm instance \a bka.
-    # \param bka The \c %BronKerboschAlgorithm instance to copy.
+    # \brief Constructs a copy of the <tt>BronKerboschAlgorithm</tt> instance <em>bka</em>.
+    # 
+    # \param bka The <tt>BronKerboschAlgorithm</tt> instance to copy.
     # 
     def __init__(bka: BronKerboschAlgorithm) -> None: pass
 
     ##
-    # \brief Initializes the \c %BronKerboschAlgorithm instance.
-    # \param adj_mtx 
+    # \brief Constructs the <tt>BronKerboschAlgorithm</tt> instance and immediately initializes it with the adjacency matrix <em>adj_mtx</em>.
+    # 
+    # \param adj_mtx The graph adjacency matrix (one Util.BitSet per node).
     # 
     def __init__(adj_mtx: BitSetArray) -> None: pass
 
@@ -54,21 +56,26 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param adj_mtx 
-    #
+    # \brief (Re-)initializes the algorithm with the adjacency matrix <em>adj_mtx</em> and resets the clique iterator.
+    # 
+    # \param adj_mtx The graph adjacency matrix (one Util.BitSet per node).
+    # 
     def init(adj_mtx: BitSetArray) -> None: pass
 
     ##
-    # \brief 
-    # \param clique 
-    # \return 
-    #
+    # \brief Advances the clique iterator and writes the next maximal clique into <em>clique</em>.
+    # 
+    # \param clique The output clique (set of node indices).
+    # 
+    # \return <tt>True</tt> if a clique was emitted, and <tt>False</tt> when the iteration is exhausted.
+    # 
     def nextClique(clique: BitSet) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \c %BronKerboschAlgorithm instance \a bka.
-    # \param bka The \c %BronKerboschAlgorithm instance to copy.
+    # \brief Copy assignment operator.
+    # 
+    # \param bka The other <tt>BronKerboschAlgorithm</tt> instance.
+    # 
     # \return \a self
     # 
     def assign(bka: BronKerboschAlgorithm) -> BronKerboschAlgorithm: pass

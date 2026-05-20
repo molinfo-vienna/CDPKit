@@ -57,6 +57,10 @@ class TanimotoComboScore(Boost.Python.instance):
     ##
     # \brief Returns the combined shape + color Tanimoto score of <em>res</em>.
     # 
+    # \param res The alignment result.
+    # 
+    # \return The Tanimoto combo score.
+    # 
     def __call__(res: AlignmentResult) -> float: pass
 
     objectID = property(getObjectID)

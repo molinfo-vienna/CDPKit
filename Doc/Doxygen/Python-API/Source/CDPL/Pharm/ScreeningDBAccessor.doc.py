@@ -130,7 +130,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     def getConformationIndex(pharm_idx: int) -> int: pass
 
     ##
-    # \brief Returns the cached per-Pharm.FeatureType frequency histogram of the pharmacophore at index <em>pharm_idx</em>.
+    # \brief Returns the cached per Pharm.FeatureType frequency histogram of the pharmacophore at index <em>pharm_idx</em>.
     # 
     # \param pharm_idx The zero-based pharmacophore index.
     # 
@@ -139,7 +139,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     def getFeatureCounts(pharm_idx: int) -> FeatureTypeHistogram: pass
 
     ##
-    # \brief Returns the cached per-Pharm.FeatureType frequency histogram of conformer <em>mol_conf_idx</em> of molecule <em>mol_idx</em>.
+    # \brief Returns the cached per Pharm.FeatureType frequency histogram of conformer <em>mol_conf_idx</em> of molecule <em>mol_idx</em>.
     # 
     # \param mol_idx The zero-based molecule index.
     # \param mol_conf_idx The zero-based conformer index within the molecule.
