@@ -70,13 +70,33 @@ namespace CDPL
              */
             PSDMolecularGraphWriter(const std::string& file_name);
 
+            /**
+             * \brief Destructor.
+             */
             ~PSDMolecularGraphWriter();
 
+            /**
+             * \brief Writes \a molgraph as the next record to the underlying PSD database.
+             * \param molgraph The molecular graph to write.
+             * \return A reference to itself.
+             */
             PSDMolecularGraphWriter& write(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Closes the underlying PSD database and finalizes the output stream/file.
+             */
             void close();
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

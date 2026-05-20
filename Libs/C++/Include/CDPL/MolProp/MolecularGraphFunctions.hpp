@@ -110,6 +110,7 @@ namespace CDPL
          * \param type The Chem::AtomType to count.
          * \param strict If \c true, the atom type must match \a type exactly; otherwise generic types match via Chem::atomTypesMatch().
          * \return The number of matching atoms (including implicit hydrogens when \a type matches Chem::AtomType::H).
+         * \since 1.1
          */
         CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
 
@@ -121,17 +122,17 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getImplicitHydrogenCount(const Chem::MolecularGraph& molgraph);
 
         /**
-         * \brief Returns the number of ordinary hydrogens in \a molgraph.
+         * \brief Returns the number of ordinary hydrogens in \a molgraph (see MolProp::isOrdinaryHydrogen() for the definition of "ordinary").
          * \param molgraph The molecular graph.
-         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary".
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
          * \return The ordinary-hydrogen count.
          */
         CDPL_MOLPROP_API std::size_t getOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
 
         /**
-         * \brief Returns the number of explicit ordinary hydrogens in \a molgraph.
+         * \brief Returns the number of explicit ordinary hydrogens in \a molgraph (see MolProp::isOrdinaryHydrogen() for the definition of "ordinary").
          * \param molgraph The molecular graph.
-         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary".
+         * \param flags Bitmask of Chem::AtomPropertyFlag values that qualify "ordinary"; an empty bitmask makes any hydrogen ordinary.
          * \return The explicit ordinary-hydrogen count.
          */
         CDPL_MOLPROP_API std::size_t getExplicitOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
@@ -232,7 +233,16 @@ namespace CDPL
 
 
         /**
-         * \brief Returns the Lipinski rule-of-five violation score of \a molgraph (number of failed criteria, 0-4).
+         * \brief Returns the Lipinski rule-of-five score of \a molgraph, defined as the number of satisfied criteria (0-4).
+         *
+         * The four criteria evaluated are:
+         *   - the number of H-bond donor atoms is &le; 5,
+         *   - the number of H-bond acceptor atoms is &le; 10,
+         *   - the \e XLogP value is &le; 5.0,
+         *   - the molecular mass is &le; 500.0.
+         *
+         * A score of 4 indicates full compliance with the Lipinski rule of five.
+         *
          * \param molgraph The molecular graph.
          * \return The rule-of-five score (0-4).
          */
@@ -297,12 +307,14 @@ namespace CDPL
          * \brief Sets the value of the MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property of \a molgraph.
          * \param molgraph The molecular graph.
          * \param fg_list The new functional-groups fragment list.
+         * \since 1.3
          */
         CDPL_MOLPROP_API void setFunctionalGroups(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& fg_list);
 
         /**
          * \brief Removes the MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property from \a molgraph.
          * \param molgraph The molecular graph.
+         * \since 1.3
          */
         CDPL_MOLPROP_API void clearFunctionalGroups(Chem::MolecularGraph& molgraph);
 
@@ -310,6 +322,7 @@ namespace CDPL
          * \brief Tells whether \a molgraph carries an explicit MolProp::MolecularGraphProperty::FUNCTIONAL_GROUPS property.
          * \param molgraph The molecular graph.
          * \return \c true if the FUNCTIONAL_GROUPS property is set, and \c false otherwise.
+         * \since 1.3
          */
         CDPL_MOLPROP_API bool hasFunctionalGroups(const Chem::MolecularGraph& molgraph);
 
@@ -317,6 +330,7 @@ namespace CDPL
          * \brief Perceives the functional groups of \a molgraph using MolProp::FunctionalGroupList.
          * \param molgraph The molecular graph.
          * \return A shared pointer to the perceived functional-groups fragment list.
+         * \since 1.3
          */
         CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(const Chem::MolecularGraph& molgraph);
 
@@ -325,6 +339,7 @@ namespace CDPL
          * \param molgraph The molecular graph (modified in place).
          * \param overwrite If \c true, an existing FUNCTIONAL_GROUPS property is overwritten.
          * \return A shared pointer to the perceived functional-groups fragment list.
+         * \since 1.3
          */
         CDPL_MOLPROP_API Chem::FragmentList::SharedPointer perceiveFunctionalGroups(Chem::MolecularGraph& molgraph, bool overwrite);
         

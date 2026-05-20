@@ -39,6 +39,9 @@ namespace CDPL
     namespace Pharm
     {
 
+        /**
+         * \brief Writer for bzip2-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::BZip2OStream> CDFBZ2FeatureContainerWriter;
     }
 } // namespace CDPL

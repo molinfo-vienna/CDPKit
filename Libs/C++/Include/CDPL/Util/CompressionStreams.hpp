@@ -46,32 +46,61 @@ namespace CDPL
     namespace Util
     {
 
+        /**
+         * \brief Identifiers for the compression algorithms supported by the Util compression-stream wrappers.
+         */
         enum CompressionAlgo
         {
 
+            /** \brief Identifier for the gzip compression algorithm. */
             GZIP,
+            /** \brief Identifier for the bzip2 compression algorithm. */
             BZIP2
         };
 
+        /**
+         * \brief Traits-style template selecting the boost::iostreams compression/decompression filters that implement
+         *        a given Util::CompressionAlgo. Specialized for each supported algorithm.
+         * \tparam CompAlgo The compression algorithm identifier.
+         */
         template <CompressionAlgo CompAlgo>
         struct CompressionAlgoTraits;
 
+        /**
+         * \brief Util::CompressionAlgoTraits specialization for the gzip algorithm.
+         */
         template <>
         struct CompressionAlgoTraits<GZIP>
         {
 
+            /** \brief Decompression filter type (gzip). */
             typedef boost::iostreams::gzip_decompressor DecompFilter;
+            /** \brief Compression filter type (gzip). */
             typedef boost::iostreams::gzip_compressor   CompFilter;
         };
 
+        /**
+         * \brief Util::CompressionAlgoTraits specialization for the bzip2 algorithm.
+         */
         template <>
         struct CompressionAlgoTraits<BZIP2>
         {
 
+            /** \brief Decompression filter type (bzip2). */
             typedef boost::iostreams::bzip2_decompressor DecompFilter;
+            /** \brief Compression filter type (bzip2). */
             typedef boost::iostreams::bzip2_compressor   CompFilter;
         };
 
+        /**
+         * \brief Base class for stream wrappers that buffer (de)compressed data through a temporary file.
+         *
+         * Subclasses inherit a hidden \c std::basic_filebuf and use it as the working buffer while transparently
+         * compressing/decompressing data on open/close.
+         *
+         * \tparam CompAlgo The compression algorithm identifier (see Util::CompressionAlgo).
+         * \tparam StreamType The standard stream type (std::basic_istream/ostream/iostream) to derive from.
+         */
         template <CompressionAlgo CompAlgo, typename StreamType>
         class CompressionStreamBase : public StreamType
         {
@@ -85,6 +114,9 @@ namespace CDPL
             typedef std::basic_istream<char_type, traits_type> IStreamType;
             typedef std::basic_ostream<char_type, traits_type> OStreamType;
 
+            /**
+             * \brief Constructs the \c %CompressionStreamBase instance and installs the temporary-file buffer.
+             */
             CompressionStreamBase();
 
           protected:
@@ -102,6 +134,13 @@ namespace CDPL
             FileBufType tmpFileBuf;
         };
 
+        /**
+         * \brief Input stream wrapper that transparently decompresses data read from an underlying compressed source stream.
+         *
+         * \tparam CompAlgo The compression algorithm identifier (see Util::CompressionAlgo).
+         * \tparam CharT The character type of the stream.
+         * \tparam TraitsT The character traits type of the stream.
+         */
         template <CompressionAlgo CompAlgo, typename CharT = char, typename TraitsT = std::char_traits<CharT> >
         class DecompressionIStream : public CompressionStreamBase<CompAlgo, std::basic_istream<CharT, TraitsT> >
         {
@@ -114,13 +153,37 @@ namespace CDPL
             typedef typename StreamType::pos_type               pos_type;
             typedef typename StreamType::off_type               off_type;
 
+            /**
+             * \brief Constructs the \c %DecompressionIStream instance without an associated source stream.
+             */
             DecompressionIStream();
+
+            /**
+             * \brief Constructs the \c %DecompressionIStream instance and immediately opens it on \a stream.
+             * \param stream The compressed source stream to read from.
+             */
             DecompressionIStream(StreamType& stream);
 
+            /**
+             * \brief Opens the decompression stream on \a stream.
+             * \param stream The compressed source stream to read from.
+             */
             void open(StreamType& stream);
+
+            /**
+             * \brief Closes the decompression stream and releases the temporary buffer.
+             */
             void close();
         };
 
+        /**
+         * \brief Output stream wrapper that transparently compresses data and writes it to an underlying sink stream
+         *        when the wrapper is closed or destroyed.
+         *
+         * \tparam CompAlgo The compression algorithm identifier (see Util::CompressionAlgo).
+         * \tparam CharT The character type of the stream.
+         * \tparam TraitsT The character traits type of the stream.
+         */
         template <CompressionAlgo CompAlgo, typename CharT = char, typename TraitsT = std::char_traits<CharT> >
         class CompressionOStream : public CompressionStreamBase<CompAlgo, std::basic_ostream<CharT, TraitsT> >
         {
@@ -133,12 +196,31 @@ namespace CDPL
             typedef typename StreamType::pos_type               pos_type;
             typedef typename StreamType::off_type               off_type;
 
+            /**
+             * \brief Constructs the \c %CompressionOStream instance without an associated sink stream.
+             */
             CompressionOStream();
+
+            /**
+             * \brief Constructs the \c %CompressionOStream instance and immediately opens it on \a stream.
+             * \param stream The sink stream that will receive the compressed output.
+             */
             CompressionOStream(StreamType& stream);
 
+            /**
+             * \brief Destructor. Flushes any buffered data to the sink stream as compressed output.
+             */
             ~CompressionOStream();
 
+            /**
+             * \brief Opens the compression stream on \a stream.
+             * \param stream The sink stream that will receive the compressed output.
+             */
             void open(StreamType& stream);
+
+            /**
+             * \brief Closes the compression stream and writes the compressed output to the sink stream.
+             */
             void close();
 
           private:
@@ -146,6 +228,14 @@ namespace CDPL
             off_type    outPos;
         };
 
+        /**
+         * \brief Bidirectional stream wrapper that decompresses data read from \a stream into a temporary buffer and
+         *        re-compresses the (possibly modified) buffer back to \a stream on close.
+         *
+         * \tparam CompAlgo The compression algorithm identifier (see Util::CompressionAlgo).
+         * \tparam CharT The character type of the stream.
+         * \tparam TraitsT The character traits type of the stream.
+         */
         template <CompressionAlgo CompAlgo, typename CharT = char, typename TraitsT = std::char_traits<CharT> >
         class CompressedIOStream : public CompressionStreamBase<CompAlgo, std::basic_iostream<CharT, TraitsT> >
         {
@@ -158,12 +248,31 @@ namespace CDPL
             typedef typename StreamType::pos_type                pos_type;
             typedef typename StreamType::off_type                off_type;
 
+            /**
+             * \brief Constructs the \c %CompressedIOStream instance without an associated source/sink stream.
+             */
             CompressedIOStream();
+
+            /**
+             * \brief Constructs the \c %CompressedIOStream instance and immediately opens it on \a stream.
+             * \param stream The compressed source/sink stream.
+             */
             CompressedIOStream(StreamType& stream);
 
+            /**
+             * \brief Destructor. Flushes any pending modifications back to the sink stream as compressed output.
+             */
             ~CompressedIOStream();
 
+            /**
+             * \brief Opens the bidirectional compression stream on \a stream.
+             * \param stream The compressed source/sink stream.
+             */
             void open(StreamType& stream);
+
+            /**
+             * \brief Closes the stream and writes any pending modifications back as compressed output.
+             */
             void close();
 
           private:
@@ -171,11 +280,17 @@ namespace CDPL
             off_type    outPos;
         };
 
+        /** \brief Input stream that transparently decompresses gzip-compressed data. */
         typedef DecompressionIStream<GZIP>  GZipIStream;
+        /** \brief Input stream that transparently decompresses bzip2-compressed data. */
         typedef DecompressionIStream<BZIP2> BZip2IStream;
+        /** \brief Output stream that transparently writes gzip-compressed data. */
         typedef CompressionOStream<GZIP>    GZipOStream;
+        /** \brief Output stream that transparently writes bzip2-compressed data. */
         typedef CompressionOStream<BZIP2>   BZip2OStream;
+        /** \brief Bidirectional stream that transparently (de)compresses gzip data. */
         typedef CompressedIOStream<GZIP>    GZipIOStream;
+        /** \brief Bidirectional stream that transparently (de)compresses bzip2 data. */
         typedef CompressedIOStream<BZIP2>   BZip2IOStream;
     } // namespace Util
 } // namespace CDPL

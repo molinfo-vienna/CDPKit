@@ -64,8 +64,9 @@ namespace CDPL
 
             /**
              * \brief Constructs the \c %PharmacophoreFitScore instance.
-             * \param query_mode If \c true, the reference features are interpreted as a query pharmacophore
-             *                   (with mandatory/optional distinction); if \c false, no such distinction is made.
+             * \param query_mode Forwarded to the embedded Pharm::SpatialFeatureMapping. If \c true, the reference feature container
+             *                   is interpreted as a query pharmacophore so that position matching uses only the reference feature's
+             *                   tolerance as the maximum allowed distance; if \c false, the maximum of the two feature tolerances is used.
              * \param match_cnt_weight Weight of the matched-feature-count contribution.
              * \param pos_match_weight Weight of the feature-position-deviation contribution.
              * \param geom_match_weight Weight of the feature-geometry-match contribution.

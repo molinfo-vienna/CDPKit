@@ -75,7 +75,16 @@ namespace CDPL
              */
             Base::DataWriter<FeatureContainer>& write(const FeatureContainer& cntnr);
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

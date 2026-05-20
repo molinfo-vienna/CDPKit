@@ -40,21 +40,48 @@ namespace CDPL
     namespace Util
     {
 
+        /**
+         * \brief RAII helper that deletes a file when the \c %FileRemover instance goes out of scope (unless released
+         *        beforehand). Useful for guaranteeing the cleanup of temporary files.
+         */
         class CDPL_UTIL_API FileRemover
         {
 
           public:
+            /**
+             * \brief Constructs a \c %FileRemover guarding the file at \a path.
+             * \param path The file-system path of the file to remove on destruction.
+             */
             FileRemover(const std::string& path):
                 path(path) {}
 
+            /**
+             * \brief Destructor. Removes the file at the currently held path unless release() has been called.
+             */
             ~FileRemover();
 
+            /**
+             * \brief Returns the file-system path currently guarded by the \c %FileRemover.
+             * \return A \c const reference to the file-system path.
+             */
             const std::string& getPath() const;
 
+            /**
+             * \brief Replaces the currently held path with \a new_path; the previously held file is removed immediately.
+             * \param new_path The new file-system path to guard.
+             */
             void reset(const std::string& new_path);
 
+            /**
+             * \brief Releases the \c %FileRemover from its current path so that the file will not be removed on destruction.
+             */
             void release();
 
+            /**
+             * \brief Move-style assignment: takes over the path held by \a rhs and releases \a rhs.
+             * \param rhs The \c %FileRemover to take over from.
+             * \return A reference to itself.
+             */
             FileRemover& operator=(FileRemover& rhs);
 
           private:

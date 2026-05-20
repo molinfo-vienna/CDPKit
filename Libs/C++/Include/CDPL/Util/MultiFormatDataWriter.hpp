@@ -44,43 +44,99 @@ namespace CDPL
     {
 
         /**
-         * \brief MultiFormatDataWriter.
+         * \brief Base::DataWriter front-end that automatically selects a concrete handler from Base::DataIOManager
+         *        based on the output file name or an explicitly supplied format identifier.
+         *
+         * \tparam DataType The data type to write.
          */
         template <typename DataType>
         class MultiFormatDataWriter : public Base::DataWriter<DataType>
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiFormatDataWriter instances. */
             typedef std::shared_ptr<MultiFormatDataWriter> SharedPointer;
-            
+
+            /**
+             * \brief Constructs a \c %MultiFormatDataWriter that opens \a file_name and deduces the output format from its name.
+             * \param file_name The output-file name.
+             * \param mode The open mode of the underlying file stream.
+             * \throw Base::IOError if no matching output handler was found.
+             */
             MultiFormatDataWriter(const std::string& file_name,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out |
                                   std::ios_base::trunc | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a \c %MultiFormatDataWriter that opens \a file_name and uses the output handler matching the file-extension/format name \a fmt.
+             * \param file_name The output-file name.
+             * \param fmt A file-extension or format name resolvable via Base::DataIOManager.
+             * \param mode The open mode of the underlying file stream.
+             * \throw Base::IOError if no matching output handler was found.
+             */
             MultiFormatDataWriter(const std::string& file_name, const std::string& fmt,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out |
                                   std::ios_base::trunc | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a \c %MultiFormatDataWriter that opens \a file_name and uses the output handler matching the Base::DataFormat \a fmt.
+             * \param file_name The output-file name.
+             * \param fmt The output format identifier.
+             * \param mode The open mode of the underlying file stream.
+             * \throw Base::IOError if no matching output handler was found.
+             */
             MultiFormatDataWriter(const std::string& file_name, const Base::DataFormat& fmt,
                                   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out |
                                   std::ios_base::trunc | std::ios_base::binary);
 
+            /**
+             * \brief Constructs a \c %MultiFormatDataWriter that wraps \a ios and uses the output handler matching the file-extension/format name \a fmt.
+             * \param ios The output stream to wrap.
+             * \param fmt A file-extension or format name resolvable via Base::DataIOManager.
+             * \throw Base::IOError if no matching output handler was found.
+             */
             MultiFormatDataWriter(std::iostream& ios, const std::string& fmt);
 
+            /**
+             * \brief Constructs a \c %MultiFormatDataWriter that wraps \a ios and uses the output handler matching the Base::DataFormat \a fmt.
+             * \param ios The output stream to wrap.
+             * \param fmt The output format identifier.
+             * \throw Base::IOError if no matching output handler was found.
+             */
             MultiFormatDataWriter(std::iostream& ios, const Base::DataFormat& fmt);
 
             MultiFormatDataWriter(const MultiFormatDataWriter&) = delete;
 
             MultiFormatDataWriter& operator=(const MultiFormatDataWriter&) = delete;
 
+            /**
+             * \brief Returns the data format actually used by the wrapped output handler.
+             * \return A \c const reference to the resolved Base::DataFormat.
+             */
             const Base::DataFormat& getDataFormat() const;
- 
+
+            /**
+             * \brief Writes \a obj via the wrapped writer.
+             * \param obj The object to write.
+             * \return A reference to itself.
+             */
             MultiFormatDataWriter& write(const DataType& obj);
 
+            /**
+             * \brief Closes the wrapped writer (and the underlying file stream if owned).
+             */
             void close();
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
 
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

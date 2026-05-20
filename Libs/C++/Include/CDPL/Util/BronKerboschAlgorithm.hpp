@@ -49,16 +49,41 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief Constructs the \c %BronKerboschAlgorithm instance without an associated adjacency matrix.
+             */
             BronKerboschAlgorithm() {}
 
+            /**
+             * \brief Constructs the \c %BronKerboschAlgorithm instance and immediately initializes it with the adjacency matrix \a adj_mtx.
+             * \param adj_mtx The graph adjacency matrix (one Util::BitSet per node).
+             */
             BronKerboschAlgorithm(const BitSetArray& adj_mtx);
 
+            /**
+             * \brief Constructs a copy of the \c %BronKerboschAlgorithm instance \a bka.
+             * \param bka The \c %BronKerboschAlgorithm instance to copy.
+             */
             BronKerboschAlgorithm(const BronKerboschAlgorithm& bka);
 
+            /**
+             * \brief (Re-)initializes the algorithm with the adjacency matrix \a adj_mtx and resets the clique iterator.
+             * \param adj_mtx The graph adjacency matrix (one Util::BitSet per node).
+             */
             void init(const BitSetArray& adj_mtx);
 
+            /**
+             * \brief Advances the clique iterator and writes the next maximal clique into \a clique.
+             * \param clique The output clique (set of node indices).
+             * \return \c true if a clique was emitted, and \c false when the iteration is exhausted.
+             */
             bool nextClique(BitSet& clique);
 
+            /**
+             * \brief Copy assignment operator.
+             * \param bka The other \c %BronKerboschAlgorithm instance.
+             * \return A reference to itself.
+             */
             BronKerboschAlgorithm& operator=(const BronKerboschAlgorithm& bka);
 
           private:

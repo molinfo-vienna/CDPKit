@@ -43,7 +43,11 @@ namespace CDPL
         {
 
           public:
-            /** \brief Returns the (shape + color) total-overlap Tanimoto score of \a res. */
+            /**
+             * \brief Returns the (shape + color) total-overlap Tanimoto score of \a res.
+             * \param res The alignment result.
+             * \return The total-overlap Tanimoto score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTotalOverlapTanimotoScore(res);
@@ -55,7 +59,11 @@ namespace CDPL
         {
 
           public:
-            /** \brief Returns the shape-only Tanimoto score of \a res. */
+            /**
+             * \brief Returns the shape-only Tanimoto score of \a res.
+             * \param res The alignment result.
+             * \return The shape-only Tanimoto score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcShapeTanimotoScore(res);
@@ -67,7 +75,11 @@ namespace CDPL
         {
 
           public:
-            /** \brief Returns the color (pharmacophore) Tanimoto score of \a res. */
+            /**
+             * \brief Returns the color (pharmacophore) Tanimoto score of \a res.
+             * \param res The alignment result.
+             * \return The color Tanimoto score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcColorTanimotoScore(res);
@@ -79,7 +91,11 @@ namespace CDPL
         {
 
           public:
-            /** \brief Returns the combined shape + color Tanimoto score of \a res. */
+            /**
+             * \brief Returns the combined shape + color Tanimoto score of \a res.
+             * \param res The alignment result.
+             * \return The Tanimoto combo score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTanimotoComboScore(res);
@@ -99,7 +115,11 @@ namespace CDPL
             TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            /** \brief Returns the (shape + color) total-overlap symmetric Tversky score of \a res. */
+            /**
+             * \brief Returns the (shape + color) total-overlap symmetric Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The total-overlap symmetric Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTotalOverlapTverskyScore(res, alpha, beta);
@@ -123,7 +143,11 @@ namespace CDPL
             ShapeTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            /** \brief Returns the shape-only symmetric Tversky score of \a res. */
+            /**
+             * \brief Returns the shape-only symmetric Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The shape-only symmetric Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcShapeTverskyScore(res, alpha, beta);
@@ -147,7 +171,11 @@ namespace CDPL
             ColorTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            /** \brief Returns the color symmetric Tversky score of \a res. */
+            /**
+             * \brief Returns the color symmetric Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The color symmetric Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcColorTverskyScore(res, alpha, beta);
@@ -171,7 +199,11 @@ namespace CDPL
             TverskyComboScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            /** \brief Returns the combined shape + color symmetric Tversky score of \a res. */
+            /**
+             * \brief Returns the combined shape + color symmetric Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The symmetric Tversky combo score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcTverskyComboScore(res, alpha, beta);
@@ -194,7 +226,11 @@ namespace CDPL
             ReferenceTotalOverlapTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            /** \brief Returns the (shape + color) total-overlap reference-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the (shape + color) total-overlap reference-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The total-overlap reference-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceTotalOverlapTverskyScore(res, alpha);
@@ -216,7 +252,11 @@ namespace CDPL
             ReferenceShapeTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            /** \brief Returns the shape-only reference-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the shape-only reference-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The shape-only reference-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceShapeTverskyScore(res, alpha);
@@ -238,7 +278,11 @@ namespace CDPL
             ReferenceColorTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            /** \brief Returns the color reference-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the color reference-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The color reference-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceColorTverskyScore(res, alpha);
@@ -260,7 +304,11 @@ namespace CDPL
             ReferenceTverskyComboScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            /** \brief Returns the combined shape + color reference-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the combined shape + color reference-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The reference-normalized Tversky combo score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcReferenceTverskyComboScore(res, alpha);
@@ -282,7 +330,11 @@ namespace CDPL
             AlignedTotalOverlapTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            /** \brief Returns the (shape + color) total-overlap aligned-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the (shape + color) total-overlap aligned-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The total-overlap aligned-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedTotalOverlapTverskyScore(res, beta);
@@ -304,7 +356,11 @@ namespace CDPL
             AlignedShapeTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            /** \brief Returns the shape-only aligned-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the shape-only aligned-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The shape-only aligned-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedShapeTverskyScore(res, beta);
@@ -326,7 +382,11 @@ namespace CDPL
             AlignedColorTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            /** \brief Returns the color aligned-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the color aligned-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The color aligned-normalized Tversky score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedColorTverskyScore(res, beta);
@@ -348,7 +408,11 @@ namespace CDPL
             AlignedTverskyComboScore(double beta = 0.95):
                 beta(beta) {}
 
-            /** \brief Returns the combined shape + color aligned-normalized Tversky score of \a res. */
+            /**
+             * \brief Returns the combined shape + color aligned-normalized Tversky score of \a res.
+             * \param res The alignment result.
+             * \return The aligned-normalized Tversky combo score.
+             */
             double operator()(const AlignmentResult& res) const
             {
                 return calcAlignedTverskyComboScore(res, beta);

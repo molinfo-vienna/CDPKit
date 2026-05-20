@@ -63,18 +63,20 @@ namespace CDPL
             typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
             /**
-             * \brief Flags used to label the role of an atom in a feature substructure pattern.
+             * \brief Role-flags assigned (via the atom-mapping-ID property) to atoms of feature substructure
+             *        patterns added through addIncludePattern(). The flags are bit-OR-combinable so that a single
+             *        pattern atom can act in several roles simultaneously.
              */
             enum PatternAtomLabelFlag
             {
 
-                /** \brief The atom contributes to the feature substructure. */
+                /** \brief The atom is part of the generated feature's substructure. */
                 FEATURE_ATOM_FLAG   = 0x01,
-                /** \brief The atom defines the feature's 3D position. */
+                /** \brief The atom contributes (via centroid averaging) to the feature's 3D position. */
                 POS_REF_ATOM_FLAG   = 0x02,
-                /** \brief The atom defines the first orientation reference for vector- and plane-type features. */
+                /** \brief The atom defines the first orientation reference (used by both vector- and plane-type features). */
                 GEOM_REF_ATOM1_FLAG = 0x04,
-                /** \brief The atom defines the second orientation reference for plane-type features. */
+                /** \brief The atom defines the second orientation reference (used by plane-type features). */
                 GEOM_REF_ATOM2_FLAG = 0x08
             };
 

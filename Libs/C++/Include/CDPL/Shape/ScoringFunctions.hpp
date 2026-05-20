@@ -40,16 +40,32 @@ namespace CDPL
 
         class AlignmentResult;
 
-        /** \brief Returns the (shape + color) total-overlap Tanimoto similarity score of \a res. */
+        /**
+         * \brief Returns the (shape + color) total-overlap Tanimoto similarity score of \a res.
+         * \param res The alignment result.
+         * \return The total-overlap Tanimoto similarity score.
+         */
         CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
 
-        /** \brief Returns the shape-only Tanimoto similarity score of \a res. */
+        /**
+         * \brief Returns the shape-only Tanimoto similarity score of \a res.
+         * \param res The alignment result.
+         * \return The shape-only Tanimoto similarity score.
+         */
         CDPL_SHAPE_API double calcShapeTanimotoScore(const AlignmentResult& res);
 
-        /** \brief Returns the color (pharmacophore) Tanimoto similarity score of \a res. */
+        /**
+         * \brief Returns the color (pharmacophore) Tanimoto similarity score of \a res.
+         * \param res The alignment result.
+         * \return The color Tanimoto similarity score.
+         */
         CDPL_SHAPE_API double calcColorTanimotoScore(const AlignmentResult& res);
 
-        /** \brief Returns the combined shape + color Tanimoto score of \a res. */
+        /**
+         * \brief Returns the combined shape + color Tanimoto score of \a res.
+         * \param res The alignment result.
+         * \return The Tanimoto combo score (sum of shape and color Tanimoto scores).
+         */
         CDPL_SHAPE_API double calcTanimotoComboScore(const AlignmentResult& res);
 
 
@@ -58,6 +74,7 @@ namespace CDPL
          * \param res The alignment result.
          * \param alpha The weight of the reference self-overlap contribution.
          * \param beta The weight of the aligned self-overlap contribution.
+         * \return The total-overlap symmetric Tversky similarity score.
          */
         CDPL_SHAPE_API double calcTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
@@ -66,6 +83,7 @@ namespace CDPL
          * \param res The alignment result.
          * \param alpha The weight of the reference self-overlap contribution.
          * \param beta The weight of the aligned self-overlap contribution.
+         * \return The shape-only symmetric Tversky similarity score.
          */
         CDPL_SHAPE_API double calcShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
@@ -74,6 +92,7 @@ namespace CDPL
          * \param res The alignment result.
          * \param alpha The weight of the reference self-overlap contribution.
          * \param beta The weight of the aligned self-overlap contribution.
+         * \return The color symmetric Tversky similarity score.
          */
         CDPL_SHAPE_API double calcColorTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
@@ -82,56 +101,73 @@ namespace CDPL
          * \param res The alignment result.
          * \param alpha The weight of the reference self-overlap contribution.
          * \param beta The weight of the aligned self-overlap contribution.
+         * \return The symmetric Tversky combo score (sum of shape and color Tversky scores).
          */
         CDPL_SHAPE_API double calcTverskyComboScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
 
         /**
          * \brief Returns the (shape + color) total-overlap reference-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param alpha The reference-side Tversky weighting factor.
+         * \return The total-overlap reference-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcReferenceTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
         /**
          * \brief Returns the shape-only reference-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param alpha The reference-side Tversky weighting factor.
+         * \return The shape-only reference-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcReferenceShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
         /**
          * \brief Returns the color (pharmacophore) reference-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param alpha The reference-side Tversky weighting factor.
+         * \return The color reference-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcReferenceColorTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
         /**
          * \brief Returns the combined shape + color reference-normalized Tversky score of \a res.
+         * \param res The alignment result.
          * \param alpha The reference-side Tversky weighting factor.
+         * \return The reference-normalized Tversky combo score (sum of shape and color reference-Tversky scores).
          */
         CDPL_SHAPE_API double calcReferenceTverskyComboScore(const AlignmentResult& res, double alpha = 0.95);
 
 
         /**
          * \brief Returns the (shape + color) total-overlap aligned-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param beta The aligned-side Tversky weighting factor.
+         * \return The total-overlap aligned-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcAlignedTotalOverlapTverskyScore(const AlignmentResult& res, double beta = 0.95);
 
         /**
          * \brief Returns the shape-only aligned-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param beta The aligned-side Tversky weighting factor.
+         * \return The shape-only aligned-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcAlignedShapeTverskyScore(const AlignmentResult& res, double beta = 0.95);
 
         /**
          * \brief Returns the color (pharmacophore) aligned-normalized Tversky similarity score of \a res.
+         * \param res The alignment result.
          * \param beta The aligned-side Tversky weighting factor.
+         * \return The color aligned-normalized Tversky similarity score.
          */
         CDPL_SHAPE_API double calcAlignedColorTverskyScore(const AlignmentResult& res, double beta = 0.95);
 
         /**
          * \brief Returns the combined shape + color aligned-normalized Tversky score of \a res.
+         * \param res The alignment result.
          * \param beta The aligned-side Tversky weighting factor.
+         * \return The aligned-normalized Tversky combo score (sum of shape and color aligned-Tversky scores).
          */
         CDPL_SHAPE_API double calcAlignedTverskyComboScore(const AlignmentResult& res, double beta = 0.95);
     } // namespace Shape
