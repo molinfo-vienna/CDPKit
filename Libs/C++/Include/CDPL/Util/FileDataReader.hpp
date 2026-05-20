@@ -44,33 +44,92 @@ namespace CDPL
     {
 
         /**
-         * \brief FileDataReader.
+         * \brief Convenience wrapper that adapts a stream-based reader implementation \a ReaderImpl into a file-based
+         *        Base::DataReader by opening an \c std::ifstream and forwarding all read operations to the wrapped reader.
+         *
+         * \tparam ReaderImpl The underlying stream-based reader implementation type.
+         * \tparam DataType The data type read by \a ReaderImpl.
          */
         template <typename ReaderImpl, typename DataType = typename ReaderImpl::DataType>
         class FileDataReader : public Base::DataReader<DataType>
         {
 
           public:
+            /**
+             * \brief Constructs a \c %FileDataReader instance that opens the file \a file_name in the given mode and
+             *        forwards all read operations to a freshly constructed \a ReaderImpl wrapping the file stream.
+             * \param file_name The path of the input file to open.
+             * \param mode The open mode of the underlying \c std::ifstream.
+             * \throw Base::IOError if the file could not be opened.
+             */
             FileDataReader(const std::string&      file_name,
                            std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
+            /**
+             * \brief Reads the next record into \a obj via the wrapped reader.
+             * \param obj The output object.
+             * \param overwrite If \c true, the output object is cleared before the record is copied into it.
+             * \return A reference to itself.
+             * \throw Base::IOError on read failure.
+             */
             FileDataReader& read(DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Reads the record at index \a idx into \a obj via the wrapped reader.
+             * \param idx The zero-based record index.
+             * \param obj The output object.
+             * \param overwrite If \c true, the output object is cleared before the record is copied into it.
+             * \return A reference to itself.
+             * \throw Base::IOError on read failure.
+             */
             FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Skips the next record via the wrapped reader.
+             * \return A reference to itself.
+             * \throw Base::IOError on read failure.
+             */
             FileDataReader& skip();
 
+            /**
+             * \brief Tells whether the wrapped reader has more records to read.
+             * \return \c true if at least one more record is available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the current record index of the wrapped reader.
+             * \return The zero-based record index of the next record to read.
+             */
             std::size_t getRecordIndex() const;
 
+            /**
+             * \brief Sets the current record index of the wrapped reader.
+             * \param idx The new zero-based record index.
+             */
             void setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records as reported by the wrapped reader.
+             * \return The record count.
+             */
             std::size_t getNumRecords();
 
+            /**
+             * \brief Tells whether the reader is in a good (readable) state.
+             * \return A non-\c nullptr pointer if the reader is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the reader is in a bad (non-readable) state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
+            /**
+             * \brief Closes the wrapped reader and the underlying file stream.
+             */
             void close();
 
           private:

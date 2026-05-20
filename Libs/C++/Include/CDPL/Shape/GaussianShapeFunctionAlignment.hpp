@@ -54,8 +54,10 @@ namespace CDPL
          *
          * The alignment iterates over starting transformations produced by a configurable
          * Shape::GaussianShapeAlignmentStartGenerator, optionally refines each start via BFGS
-         * minimization of the overlap function, and collects the resulting transformations and
-         * overlap values in Result instances.
+         * minimization (Math::BFGSMinimizer) of the overlap function, and collects the resulting
+         * transformations and overlap values in Result instances.
+         *
+         * \see Math::BFGSMinimizer
          */
         class CDPL_SHAPE_API GaussianShapeFunctionAlignment
         {

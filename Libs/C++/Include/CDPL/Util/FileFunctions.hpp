@@ -40,11 +40,29 @@ namespace CDPL
     namespace Util
     {
 
+        /**
+         * \brief Generates a temporary file path inside \a dir whose basename matches the supplied randomization \a ptn
+         *        and that is guaranteed not to collide with any existing file.
+         * \param dir The directory in which to place the file (an empty string selects the platform's temporary directory).
+         * \param ptn The Boost-filesystem-style randomization pattern for the basename (\c % characters are replaced with random hex digits).
+         * \return The generated unique file-system path.
+         */
         CDPL_UTIL_API std::string genCheckedTempFilePath(const std::string& dir = "",
                                                          const std::string& ptn = "%%%%-%%%%-%%%%-%%%%");
 
+        /**
+         * \brief Tells whether \a path1 and \a path2 refer to the same file (after resolving symlinks and case-insensitivity rules of the underlying file system).
+         * \param path1 The first file-system path.
+         * \param path2 The second file-system path.
+         * \return \c true if both paths resolve to the same file, and \c false otherwise.
+         */
         CDPL_UTIL_API bool checkIfSameFile(const std::string& path1, const std::string& path2);
 
+        /**
+         * \brief Tells whether the file at \a path exists.
+         * \param path The file-system path to test.
+         * \return \c true if the file exists, and \c false otherwise.
+         */
         CDPL_UTIL_API bool fileExists(const std::string& path);
     } // namespace Util
 } // namespace CDPL

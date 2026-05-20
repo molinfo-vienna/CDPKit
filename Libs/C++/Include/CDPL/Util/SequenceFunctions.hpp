@@ -38,9 +38,31 @@ namespace CDPL
     namespace Util
     {
 
+        /**
+         * \brief Invokes the binary function \a func on every pair of corresponding elements drawn from two parallel input sequences.
+         * \tparam InputIt1 The input iterator type of the first sequence.
+         * \tparam InputIt2 The input iterator type of the second sequence.
+         * \tparam BinaryFunc The type of the binary function.
+         * \param it1 An iterator pointing to the first element of the first sequence.
+         * \param end1 An iterator pointing one past the last element of the first sequence.
+         * \param it2 An iterator pointing to the first element of the second sequence (assumed to have at least as many elements as the first).
+         * \param func The binary function invoked for each pair.
+         */
         template <typename InputIt1, typename InputIt2, typename BinaryFunc>
         void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, BinaryFunc func);
 
+        /**
+         * \brief Invokes the binary function \a func on every pair of corresponding elements drawn from two parallel input sequences,
+         *        stopping when either sequence is exhausted.
+         * \tparam InputIt1 The input iterator type of the first sequence.
+         * \tparam InputIt2 The input iterator type of the second sequence.
+         * \tparam BinaryFunc The type of the binary function.
+         * \param it1 An iterator pointing to the first element of the first sequence.
+         * \param end1 An iterator pointing one past the last element of the first sequence.
+         * \param it2 An iterator pointing to the first element of the second sequence.
+         * \param end2 An iterator pointing one past the last element of the second sequence.
+         * \param func The binary function invoked for each pair.
+         */
         template <typename InputIt1, typename InputIt2, typename BinaryFunc>
         void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, InputIt2 end2, BinaryFunc func);
     } // namespace Util

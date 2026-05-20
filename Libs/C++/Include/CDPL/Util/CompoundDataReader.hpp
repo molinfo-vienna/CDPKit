@@ -44,51 +44,132 @@ namespace CDPL
     {
 
         /**
-         * \brief CompoundDataReader.
+         * \brief Composite Base::DataReader that aggregates several underlying readers and presents their records
+         *        as one contiguous record stream.
+         *
+         * \tparam DataType The data type read by the contained Base::DataReader instances.
          */
         template <typename DataType>
         class CompoundDataReader : public Base::DataReader<DataType>
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CompoundDataReader instances. */
             typedef std::shared_ptr<CompoundDataReader> SharedPointer;
 
+            /** \brief Type of the underlying Base::DataReader specialization. */
             typedef Base::DataReader<DataType>         ReaderType;
+            /** \brief Shared-pointer type for the underlying readers. */
             typedef typename ReaderType::SharedPointer ReaderPointer;
 
+            /**
+             * \brief Constructs an empty \c %CompoundDataReader instance.
+             */
             CompoundDataReader();
 
+            /**
+             * \brief Destructor.
+             */
             ~CompoundDataReader();
 
             CompoundDataReader(const CompoundDataReader&) = delete;
 
             CompoundDataReader& operator=(const CompoundDataReader&) = delete;
 
+            /**
+             * \brief Appends \a reader to the list of underlying readers.
+             * \param reader The reader to add.
+             */
             void addReader(const ReaderPointer& reader);
 
+            /**
+             * \brief Removes the reader at index \a idx from the list of underlying readers.
+             * \param idx The zero-based reader index.
+             */
             void removeReader(std::size_t idx);
 
+            /**
+             * \brief Returns the number of underlying readers.
+             * \return The reader count.
+             */
             std::size_t getNumReaders();
 
+            /**
+             * \brief Removes all underlying readers.
+             */
             void clear();
 
+            /**
+             * \brief Returns the index of the underlying reader that owns the global record index \a idx.
+             * \param idx The zero-based global record index.
+             * \return The zero-based reader index.
+             */
             std::size_t getReaderIDForRecordIndex(std::size_t idx) const;
 
+            /**
+             * \brief Returns the underlying reader at index \a idx.
+             * \param idx The zero-based reader index.
+             * \return A \c const reference to the reader shared pointer.
+             */
             const ReaderPointer& getReader(std::size_t idx) const;
 
+            /**
+             * \brief Reads the next record into \a obj.
+             * \param obj The output object.
+             * \param overwrite If \c true, the output object is cleared before the record is copied into it.
+             * \return A reference to itself.
+             */
             CompoundDataReader& read(DataType& obj, bool overwrite = true);
+
+            /**
+             * \brief Reads the record at the global index \a idx into \a obj.
+             * \param idx The zero-based global record index.
+             * \param obj The output object.
+             * \param overwrite If \c true, the output object is cleared before the record is copied into it.
+             * \return A reference to itself.
+             */
             CompoundDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Skips the next record.
+             * \return A reference to itself.
+             */
             CompoundDataReader& skip();
 
+            /**
+             * \brief Tells whether more records are available.
+             * \return \c true if at least one more record is available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the current global record index.
+             * \return The zero-based global record index of the next record to read.
+             */
             std::size_t getRecordIndex() const;
+
+            /**
+             * \brief Sets the current global record index.
+             * \param idx The new zero-based global record index.
+             */
             void setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records across all underlying readers.
+             * \return The combined record count.
+             */
             std::size_t getNumRecords();
 
+            /**
+             * \brief Tells whether the reader is in a good (readable) state.
+             * \return A non-\c nullptr pointer if the reader is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the reader is in a bad (non-readable) state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

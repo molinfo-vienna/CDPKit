@@ -40,25 +40,47 @@ namespace CDPL
     {
 
         /**
-         * \brief DefaultDataInputHandler.
+         * \brief Default Base::DataInputHandler implementation that exposes a fixed Base::DataFormat and instantiates
+         *        readers of the supplied stream-based \a ReaderImpl type (file-based readers are produced by wrapping it
+         *        in Util::FileDataReader).
+         *
+         * \tparam ReaderImpl The underlying stream-based reader implementation type.
+         * \tparam Format A reference to the Base::DataFormat constant advertised by the handler.
+         * \tparam DataType The data type read by \a ReaderImpl.
          */
         template <typename ReaderImpl, const Base::DataFormat& Format, typename DataType = typename ReaderImpl::DataType>
         class DefaultDataInputHandler : public Base::DataInputHandler<DataType>
         {
 
           public:
+            /** \brief Type of the Base::DataReader specialization produced by this handler. */
             typedef typename Base::DataInputHandler<DataType>::ReaderType ReaderType;
 
+            /**
+             * \brief Returns the data format advertised by this handler.
+             * \return A \c const reference to the fixed Base::DataFormat \a Format.
+             */
             const Base::DataFormat& getDataFormat() const
             {
                 return Format;
             }
 
+            /**
+             * \brief Creates a reader that reads from the input stream \a is.
+             * \param is The input stream to wrap.
+             * \return A shared pointer to a freshly constructed \a ReaderImpl.
+             */
             typename ReaderType::SharedPointer createReader(std::istream& is) const
             {
                 return typename ReaderType::SharedPointer(new ReaderImpl(is));
             }
 
+            /**
+             * \brief Creates a reader that reads from the file \a file_name (opened in mode \a mode).
+             * \param file_name The path of the input file.
+             * \param mode The open mode of the underlying file stream.
+             * \return A shared pointer to a freshly constructed Util::FileDataReader wrapping a \a ReaderImpl.
+             */
             typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const
             {
                 return typename ReaderType::SharedPointer(new Util::FileDataReader<ReaderImpl>(file_name, mode));

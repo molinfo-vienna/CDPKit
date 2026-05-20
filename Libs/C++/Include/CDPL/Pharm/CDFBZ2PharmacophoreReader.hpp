@@ -39,6 +39,9 @@ namespace CDPL
     namespace Pharm
     {
 
+        /**
+         * \brief Reader for bzip2-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
+         */
         typedef Util::CompressedDataReader<CDFPharmacophoreReader, Util::BZip2IStream> CDFBZ2PharmacophoreReader;
     }
 } // namespace CDPL

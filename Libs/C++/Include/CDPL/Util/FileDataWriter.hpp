@@ -44,21 +44,50 @@ namespace CDPL
     {
 
         /**
-         * \brief FileDataWriter.
+         * \brief Convenience wrapper that adapts a stream-based writer implementation \a WriterImpl into a file-based
+         *        Base::DataWriter by opening an \c std::fstream and forwarding all write operations to the wrapped writer.
+         *
+         * \tparam WriterImpl The underlying stream-based writer implementation type.
+         * \tparam DataType The data type written by \a WriterImpl.
          */
         template <typename WriterImpl, typename DataType = typename WriterImpl::DataType>
         class FileDataWriter : public Base::DataWriter<DataType>
         {
 
           public:
+            /**
+             * \brief Constructs a \c %FileDataWriter instance that opens the file \a file_name in the given mode and
+             *        forwards all write operations to a freshly constructed \a WriterImpl wrapping the file stream.
+             * \param file_name The path of the output file to open.
+             * \param mode The open mode of the underlying \c std::fstream.
+             * \throw Base::IOError if the file could not be opened.
+             */
             FileDataWriter(const std::string&      file_name,
                            std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary);
 
+            /**
+             * \brief Writes \a obj as the next record via the wrapped writer.
+             * \param obj The object to write.
+             * \return A reference to itself.
+             * \throw Base::IOError on write failure.
+             */
             FileDataWriter& write(const DataType& obj);
 
+            /**
+             * \brief Closes the wrapped writer and the underlying file stream.
+             */
             void close();
 
+            /**
+             * \brief Tells whether the writer is in a good (writable) state.
+             * \return A non-\c nullptr pointer if the writer is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the writer is in a bad (non-writable) state.
+             * \return \c true if the writer is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:

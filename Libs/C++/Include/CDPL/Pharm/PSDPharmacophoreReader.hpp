@@ -66,22 +66,68 @@ namespace CDPL
              */
             PSDPharmacophoreReader(const std::string& file_name);
 
+            /**
+             * \brief Destructor.
+             */
             ~PSDPharmacophoreReader();
 
+            /**
+             * \brief Reads the next pharmacophore into \a pharm.
+             * \param pharm The output pharmacophore.
+             * \param overwrite If \c true, the output pharmacophore is cleared before the database pharmacophore is copied into it.
+             * \return A reference to itself.
+             */
             PSDPharmacophoreReader& read(Pharmacophore& pharm, bool overwrite = true);
 
+            /**
+             * \brief Reads the pharmacophore at record index \a idx into \a pharm.
+             * \param idx The zero-based record index.
+             * \param pharm The output pharmacophore.
+             * \param overwrite If \c true, the output pharmacophore is cleared before the database pharmacophore is copied into it.
+             * \return A reference to itself.
+             */
             PSDPharmacophoreReader& read(std::size_t idx, Pharmacophore& pharm, bool overwrite = true);
 
+            /**
+             * \brief Skips the next pharmacophore record (advances the current record index).
+             * \return A reference to itself.
+             */
             PSDPharmacophoreReader& skip();
 
+            /**
+             * \brief Tells whether the reader has more records to read.
+             * \return \c true if at least one more record is available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the current record index.
+             * \return The zero-based record index of the next record to read.
+             */
             std::size_t getRecordIndex() const;
+
+            /**
+             * \brief Sets the current record index.
+             * \param idx The new zero-based record index.
+             */
             void        setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records.
+             * \return The record count.
+             */
             std::size_t getNumRecords();
 
-                 operator const void*() const;
+            /**
+             * \brief Tells whether the reader is in a good (readable) state.
+             * \return A non-\c nullptr pointer if the reader is in a good state, and \c nullptr otherwise.
+             */
+            operator const void*() const;
+
+            /**
+             * \brief Tells whether the reader is in a bad (non-readable) state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           private:
