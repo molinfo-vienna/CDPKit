@@ -33,16 +33,10 @@
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 
 #include "CUBEDataWriter.hpp"
+#include "CUBEFormatData.hpp"
 
 
 using namespace CDPL;
-
-
-namespace
-{
-
-    constexpr char END_OF_LINE = '\n';
-}
 
 
 bool Grid::CUBEDataWriter::writeGrid(std::ostream& os, const DRegularGrid& grid)
@@ -59,12 +53,12 @@ bool Grid::CUBEDataWriter::writeGrid(std::ostream& os, const DRegularGrid& grid)
 
 void Grid::CUBEDataWriter::init(std::ostream& os)
 {
+    commentIsName = getCUBECommentIsNameParameter(ctrlParams);
+    distScalingFactor = getCUBEOutputDistanceScalingFactorParameter(ctrlParams);
+
     os.imbue(std::locale::classic());
 
     os << std::scientific;
-    
-    commentIsName = getCUBECommentIsNameParameter(ctrlParams);
-    distScalingFactor = getCUBEOutputDistanceScalingFactorParameter(ctrlParams);
 }
 
 void Grid::CUBEDataWriter::writeCommentLines(std::ostream& os, const std::string& comment) const
@@ -72,16 +66,16 @@ void Grid::CUBEDataWriter::writeCommentLines(std::ostream& os, const std::string
     std::size_t lines_written = 0;
 
     for (auto it = comment.begin(); (it < comment.end()) && (lines_written < 2); lines_written++) {
-        auto eol = std::find(it, comment.end(), END_OF_LINE);
+        auto eol = std::find(it, comment.end(), CUBE::END_OF_LINE);
 
         os.write(&*it, eol - it);
-        os.put(END_OF_LINE);
+        os.put(CUBE::END_OF_LINE);
         
         it = ++eol;
     }
 
     for (std::size_t i = lines_written; i < 2; i++)
-        os.put(END_OF_LINE);
+        os.put(CUBE::END_OF_LINE);
 }
 
 void Grid::CUBEDataWriter::writeGridOriginSpec(std::ostream& os, const DRegularGrid& grid)
@@ -95,7 +89,7 @@ void Grid::CUBEDataWriter::writeGridOriginSpec(std::ostream& os, const DRegularG
        << (origin[1] * distScalingFactor)
        << (origin[2] * distScalingFactor)
        << 1
-       << END_OF_LINE;
+       << CUBE::END_OF_LINE;
 }
 
 void Grid::CUBEDataWriter::writeGridAxesSpecs(std::ostream& os, const DRegularGrid& grid)
@@ -107,7 +101,7 @@ void Grid::CUBEDataWriter::writeGridAxesSpecs(std::ostream& os, const DRegularGr
        << (xform(0, 0) * sclg_factor)
        << (xform(1, 0) * sclg_factor)
        << (xform(2, 0) * sclg_factor)
-       << END_OF_LINE;
+       << CUBE::END_OF_LINE;
 
     sclg_factor = grid.getYStepSize() * distScalingFactor;
 
@@ -115,7 +109,7 @@ void Grid::CUBEDataWriter::writeGridAxesSpecs(std::ostream& os, const DRegularGr
        << (xform(0, 1) * sclg_factor)
        << (xform(1, 1) * sclg_factor)
        << (xform(2, 1) * sclg_factor)
-       << END_OF_LINE;
+       << CUBE::END_OF_LINE;
 
     sclg_factor = grid.getZStepSize() * distScalingFactor;
 
@@ -123,7 +117,7 @@ void Grid::CUBEDataWriter::writeGridAxesSpecs(std::ostream& os, const DRegularGr
        << (xform(0, 2) * sclg_factor)
        << (xform(1, 2) * sclg_factor)
        << (xform(2, 2) * sclg_factor)
-       << END_OF_LINE;
+       << CUBE::END_OF_LINE;
 }
 
 void Grid::CUBEDataWriter::writeGridData(std::ostream& os, const DRegularGrid& grid)
@@ -137,13 +131,13 @@ void Grid::CUBEDataWriter::writeGridData(std::ostream& os, const DRegularGrid& g
                 at_nl = false;
                 
                 if ((k % 6) == 5) {
-                    os << END_OF_LINE;
+                    os << CUBE::END_OF_LINE;
                     at_nl = true;
                 }
             }
 
             if (!at_nl) {
-                os << END_OF_LINE;
+                os << CUBE::END_OF_LINE;
                 at_nl = true;
             }
         }

@@ -26,6 +26,7 @@
 #define CDPL_GRID_CUBEDATAREADER_HPP
 
 #include <iosfwd>
+#include <string>
 
 
 namespace CDPL
@@ -57,6 +58,9 @@ namespace CDPL
             void init(std::istream& is);
 
             const Base::ControlParameterContainer& ctrlParams;
+            bool                                   strictErrorChecking;
+            double                                 distScalingFactor;
+            std::string                            line;
         };
     } // namespace Grid
 } // namespace CDPL
