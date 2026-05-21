@@ -22,12 +22,12 @@
 ##
 # \brief <em>CDPL</em> build system information.
 # 
-BUILD_SYSTEM = 'Linux-5.14.0-427.22.1.el9_4.x86_64'
+BUILD_SYSTEM = 'Linux-6.12.0-124.52.1.el10_1.x86_64'
 
 ##
 # \brief The <em>CDPL</em> build time in the format <em>YYYYMMDDHHMM</em>.
 # 
-BUILD_TIME = 202605200858
+BUILD_TIME = 202605210822
 
 ##
 # \brief An identifier for the compiler that was used to build the <em>CDPL</em>.
@@ -37,7 +37,7 @@ COMPILER_ID = 'GNU'
 ##
 # \brief The version of the compiler that was used to build the <em>CDPL</em>.
 # 
-COMPILER_VERSION = '11.4.1'
+COMPILER_VERSION = '14.3.1'
 
 ##
 # \brief True if the <em>Cairo 2D Graphics Library</em> is available.

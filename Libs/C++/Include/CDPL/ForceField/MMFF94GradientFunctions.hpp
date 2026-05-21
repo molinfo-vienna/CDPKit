@@ -58,7 +58,7 @@ namespace CDPL
          * 
          * Energy function:<br>
          *
-         * \f$ EB_{ij} = 143.9325 \: \frac{kb_{IJ}}{2} \: \Delta r_{ij}^2 \times (1 + cs \: \Delta r_{ij} + \frac{7}{12} \: cs^2 \: \Delta r_{ij}^2) \f$
+         * \f$ EB_{ij} = 143.9325 \: \frac{kb_{IJ}}{2} \: \Delta r_{ij}^2 \: (1 + cs \: \Delta r_{ij} + \frac{7}{12} \: cs^2 \: \Delta r_{ij}^2) \f$
          *
          * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
          *

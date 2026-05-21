@@ -22,7 +22,7 @@
 ##
 # \brief BondSubstituentDirectionMatchExpression.
 # 
-# <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by indicating the relative direction of the bonds to its substituent atoms. <br>
+# <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by indicating the relative direction of the bonds to its substituent atoms.
 # 
 class BondSubstituentDirectionMatchExpression(BondMatchExpression):
 
