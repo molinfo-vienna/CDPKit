@@ -27,10 +27,12 @@
 #include <istream>
 #include <sstream>
 #include <locale>
-#include <cstddef>
 
 #include "CDPL/Grid/RegularGrid.hpp"
+#include "CDPL/Grid/AttributedGridFunctions.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
@@ -67,8 +69,138 @@ bool Grid::CUBEDataReader::readGrid(std::istream& is, DRegularGrid& grid)
     if (!hasMoreData(is))
         return false;
 
-    init(is);
-  
+    is.imbue(std::locale::classic());
+
+    auto dist_factor = getCUBEInputDistanceScalingFactorParameter(ctrlParams);
+
+    // comment lines
+    
+    readCUBELine(is, tmpString[0], "CUBEDataReader: error while reading first comment line");
+    readCUBELine(is, tmpString[1], "CUBEDataReader: error while reading second comment line");
+
+    if (getCUBECommentIsNameParameter(ctrlParams)) {
+        setName(grid, tmpString[0]);
+        setComment(grid, tmpString[1]);
+
+    } else {
+        tmpString[0].push_back('\n');
+        tmpString[0].append(tmpString[1]);
+
+        setComment(grid, tmpString[0]);
+    }
+
+    // num. atoms, origin coordinates and number of values per voxel
+    
+    readCUBELine(is, tmpString[0], "CUBEDataReader: error while reading number of atoms, origin coordinates and number of values per voxel");
+
+    Internal::trimString(tmpString[0], false, true);
+
+    std::istringstream iss(tmpString[0]);
+    long num_atoms;
+    long num_values = 1;
+    double grid_origin[3];
+
+    if (!(iss >> num_atoms))
+        throw Base::IOError("CUBEDataReader: error while reading number of atoms");
+
+    for (std::size_t i = 0; i < 3; i++) {
+        if (!(iss >> grid_origin[i]))
+            throw Base::IOError("CUBEDataReader: error while reading origin coordinates");
+
+        grid_origin[i] *= dist_factor;
+    }
+    
+    if ((num_atoms >= 0) && hasMoreData(iss) && !(iss >> num_values))
+        throw Base::IOError("CUBEDataReader: error while reading number of values per voxel");
+
+    // grid axes dimensions and directions
+    
+    long grid_dims[3];
+    Math::Vector3D grid_axes[3];
+    double cell_sizes[3];
+    
+    for (std::size_t i = 0; i < 3; i++) {
+        if (!(is >> grid_dims[i]))
+            throw Base::IOError("CUBEDataReader: error while reading axis voxel count");
+
+        if (grid_dims[i] < 0)
+            grid_dims[i] = -grid_dims[i];
+        
+        for (std::size_t j = 0; j < 3; j++) {
+            if (!(is >> grid_axes[i][j]))
+                throw Base::IOError("CUBEDataReader: error while reading axis vector coordinate");
+
+            grid_axes[i][j] *= dist_factor;
+        }
+
+        cell_sizes[i] = length(grid_axes[i]);
+        grid_axes[i] /= cell_sizes[i];
+
+        skipCUBELines(is, 1, "CUBEDataReader: error while reading axis specification line");
+    }
+
+    // target grid setup
+    
+    grid.resize(grid_dims[0], grid_dims[1], grid_dims[2], false);
+    grid.setXStepSize(cell_sizes[0]);
+    grid.setYStepSize(cell_sizes[1]);
+    grid.setZStepSize(cell_sizes[2]);
+
+    DRegularGrid::CoordinatesTransformType grid_xform;
+
+    grid_xform(3, 3) = 1;
+
+    for (std::size_t i = 0; i < 3; i++)
+        column(grid_xform, i) = grid_axes[i];
+
+    grid.setCoordinatesTransform(grid_xform); // only rotation for now
+
+    double curr_grid_origin[3];
+
+    grid.getCoordinates(0, 0, 0, curr_grid_origin);
+
+    for (std::size_t i = 0; i < 3; i++)
+        grid_xform(i, 3) = grid_origin[i] - curr_grid_origin[i];
+
+    grid.setCoordinatesTransform(grid_xform); // now rotation + translation
+
+    // atom block
+    
+    skipCUBELines(is, num_atoms < 0 ? -num_atoms : num_atoms, "CUBEDataReader: error while skipping atom lines");
+
+    // DSET_IDS block
+    
+    if (num_atoms < 0) {
+        if (!(is >> num_values))
+            throw Base::IOError("CUBEDataReader: error while reading number of value identifiers in DSET_IDS block");
+        
+        for (long i = 0; i < num_values; i++)
+            if (!(is >> tmpString[0]))
+                throw Base::IOError("CUBEDataReader: error while skipping voxel value identifier in DSET_IDS block");
+
+        skipCUBELines(is, 1, "CUBEDataReader: error while skipping DSET_IDS block");
+    }
+
+    // voxel values
+
+    for (long i = 0; i < grid_dims[0]; i++)
+        for (long j = 0; j < grid_dims[1]; j++)
+            for (long k = 0; k < grid_dims[2]; k++)
+                for (long l = 0; l < num_values; l++) {
+                    if (l == 0) { // save only the first cell value
+                        if (!(is >> grid(i, j, k)))
+                            throw Base::IOError("CUBEDataReader: error while reading voxel value");
+                         
+                    } else {
+                        if (!(is >> tmpString[0]))
+                            throw Base::IOError("CUBEDataReader: error while reading voxel value");
+                    }
+                }
+
+    // skip remainer of last line
+    
+    skipCUBELines(is, 1, "CUBEDataReader: error while reading voxel values");
+    
     return false;
 }
 
@@ -77,14 +209,14 @@ bool Grid::CUBEDataReader::skipGrid(std::istream& is)
     if (!hasMoreData(is))
         return false;
 
-    init(is);
-
-    skipCUBELines(is, 2, "CUBEDataReader: error while skipping comment lines");
-    readCUBELine(is, line, "CUBEDataReader: error while reading number of atoms and number of values");
-
-    Internal::trimString(line, false, true);
+    is.imbue(std::locale::classic());
     
-    std::istringstream iss(line);
+    skipCUBELines(is, 2, "CUBEDataReader: error while skipping comment lines");
+    readCUBELine(is, tmpString[0], "CUBEDataReader: error while reading number of atoms and number of values per voxel");
+
+    Internal::trimString(tmpString[0], false, true);
+    
+    std::istringstream iss(tmpString[0]);
     long num_atoms;
     long num_values = 1;
     double tmp;
@@ -94,7 +226,7 @@ bool Grid::CUBEDataReader::skipGrid(std::istream& is)
 
     for (std::size_t i = 0; i < 3; i++)
         if (!(iss >> tmp))
-            throw Base::IOError("CUBEDataReader: error while reading grid origin coordinates");
+            throw Base::IOError("CUBEDataReader: error while skipping origin coordinates");
    
     if ((num_atoms >= 0) && hasMoreData(iss) && !(iss >> num_values))
         throw Base::IOError("CUBEDataReader: error while reading number of values per voxel");
@@ -117,29 +249,21 @@ bool Grid::CUBEDataReader::skipGrid(std::istream& is)
     skipCUBELines(is, num_atoms < 0 ? -num_atoms : num_atoms, "CUBEDataReader: error while skipping atom lines");
 
     if (num_atoms < 0) {
-        if (!(iss >> num_values))
-            throw Base::IOError("CUBEDataReader: error while reading number of values per voxel from DSET_IDS block");
+        if (!(is >> num_values))
+            throw Base::IOError("CUBEDataReader: error while reading number of value identifiers in DSET_IDS block");
 
-        for (long i = 0; num_values; i++)
-            if (!(is >> line))
+        for (long i = 0; i < num_values; i++)
+            if (!(is >> tmpString[0]))
                 throw Base::IOError("CUBEDataReader: error while skipping voxel value identifier in DSET_IDS block");
 
         skipCUBELines(is, 1, "CUBEDataReader: error while skipping DSET_IDS block");
     }
 
     for (std::size_t i = 0, skip_cnt = grid_dims[0] * grid_dims[1] * grid_dims[2] * num_values; i < skip_cnt; i++)
-        if (!(is >> line))
+        if (!(is >> tmpString[0]))
             throw Base::IOError("CUBEDataReader: error while skipping voxel value");
 
     skipCUBELines(is, 1, "CUBEDataReader: error while skipping voxel values");
     
     return true;
-}
-
-void Grid::CUBEDataReader::init(std::istream& is)
-{
-    strictErrorChecking = getStrictErrorCheckingParameter(ctrlParams);
-    distScalingFactor = getCUBEInputDistanceScalingFactorParameter(ctrlParams);
-
-    is.imbue(std::locale::classic());
 }

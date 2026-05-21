@@ -50,16 +50,7 @@ namespace CDPL
             bool writeGrid(std::ostream& os, const DRegularGrid& grid);
 
           protected:
-            void init(std::ostream& os);
-
-            void writeCommentLines(std::ostream& os, const std::string& comment) const;
-            void writeGridOriginSpec(std::ostream& os, const DRegularGrid& grid);
-            void writeGridAxesSpecs(std::ostream& os, const DRegularGrid& grid);
-            void writeGridData(std::ostream& os, const DRegularGrid& grid);
-
             const Base::ControlParameterContainer& ctrlParams;
-            bool                                   commentIsName;
-            double                                 distScalingFactor;
         };
     } // namespace Grid
 } // namespace CDPL

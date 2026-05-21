@@ -55,12 +55,8 @@ namespace CDPL
             bool hasMoreData(std::istream& is);
 
           protected:
-            void init(std::istream& is);
-
             const Base::ControlParameterContainer& ctrlParams;
-            bool                                   strictErrorChecking;
-            double                                 distScalingFactor;
-            std::string                            line;
+            std::string                            tmpString[2];
         };
     } // namespace Grid
 } // namespace CDPL

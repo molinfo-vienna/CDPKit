@@ -42,7 +42,7 @@ namespace CDPL
 
             const bool   CUBE_COMMENT_IS_NAME                = false;
             const double CUBE_INPUT_DISTANCE_SCALING_FACTOR  = 0.52918;
-            const double CUBE_OUTPUT_DISTANCE_SCALING_FACTOR = 1.8897259886;
+            const double CUBE_OUTPUT_DISTANCE_SCALING_FACTOR = 1 / 0.52918;
         }
 
         void initControlParameterDefaults() {}
