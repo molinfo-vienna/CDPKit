@@ -39,6 +39,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Access functor used by Math::VectorIteratorTraits to read mutable vector elements via Util::IndexedElementIterator.
+         * \tparam E The vector expression type.
+         */
         template <typename E>
         class VectorElementAccessor
         {
@@ -65,6 +69,10 @@ namespace CDPL
             std::reference_wrapper<VectorType> vec;
         };
 
+        /**
+         * \brief Specialization of Math::VectorElementAccessor for const vector references (read-only iteration).
+         * \tparam E The vector expression type.
+         */
         template <typename E>
         class VectorElementAccessor<const E>
         {
@@ -100,6 +108,10 @@ namespace CDPL
             std::reference_wrapper<const VectorType> vec;
         };
 
+        /**
+         * \brief Traits selecting the element accessor and Util::IndexedElementIterator specialization for mutable iteration over \a E.
+         * \tparam E The vector expression type.
+         */
         template <typename E>
         struct VectorIteratorTraits
         {
@@ -110,12 +122,22 @@ namespace CDPL
             typedef VectorElementAccessor<E>                                        AccessorType;
             typedef Util::IndexedElementIterator<ValueType, AccessorType, SizeType> IteratorType;
 
+            /**
+             * \brief Creates an iterator pointing to the element at index \a idx of \a e.
+             * \param e The vector expression.
+             * \param idx The zero-based index of the element to point to.
+             * \return The constructed iterator.
+             */
             static IteratorType makeIterator(VectorType& e, SizeType idx)
             {
                 return IteratorType(AccessorType(e), idx);
             }
         };
 
+        /**
+         * \brief Specialization of Math::VectorIteratorTraits for read-only iteration over \a E.
+         * \tparam E The vector expression type.
+         */
         template <typename E>
         struct VectorIteratorTraits<const E>
         {
@@ -126,30 +148,60 @@ namespace CDPL
             typedef VectorElementAccessor<const E>                                        AccessorType;
             typedef Util::IndexedElementIterator<const ValueType, AccessorType, SizeType> IteratorType;
 
+            /**
+             * \brief Creates a constant iterator pointing to the element at index \a idx of \a e.
+             * \param e The vector expression.
+             * \param idx The zero-based index of the element to point to.
+             * \return The constructed iterator.
+             */
             static IteratorType makeIterator(const VectorType& e, SizeType idx)
             {
                 return IteratorType(AccessorType(e), idx);
             }
         };
 
+        /**
+         * \brief Returns a mutable iterator pointing to the first element of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A mutable iterator pointing to the first element.
+         */
         template <typename E>
         typename VectorIteratorTraits<E>::IteratorType vectorBegin(VectorExpression<E>& e)
         {
             return VectorIteratorTraits<E>::makeIterator(e(), 0);
         }
 
+        /**
+         * \brief Returns a mutable iterator pointing one past the last element of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A mutable iterator pointing one past the last element.
+         */
         template <typename E>
         typename VectorIteratorTraits<E>::IteratorType vectorEnd(VectorExpression<E>& e)
         {
             return VectorIteratorTraits<E>::makeIterator(e(), e().getSize());
         }
 
+        /**
+         * \brief Returns a constant iterator pointing to the first element of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A constant iterator pointing to the first element.
+         */
         template <typename E>
         typename VectorIteratorTraits<const E>::IteratorType vectorBegin(const VectorExpression<E>& e)
         {
             return VectorIteratorTraits<const E>::makeIterator(e(), 0);
         }
 
+        /**
+         * \brief Returns a constant iterator pointing one past the last element of the vector expression \a e.
+         * \tparam E The vector expression type.
+         * \param e The vector expression.
+         * \return A constant iterator pointing one past the last element.
+         */
         template <typename E>
         typename VectorIteratorTraits<const E>::IteratorType vectorEnd(const VectorExpression<E>& e)
         {

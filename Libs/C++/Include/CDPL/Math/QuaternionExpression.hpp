@@ -41,6 +41,11 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Expression-template node applying a unary functor \a F that returns a quaternion result to a quaternion expression \a E.
+         * \tparam E The wrapped quaternion expression type.
+         * \tparam F The unary functor type returning a quaternion.
+         */
         template <typename E, typename F>
         class QuaternionUnary1 : public QuaternionExpression<QuaternionUnary1<E, F> >
         {
@@ -143,6 +148,12 @@ namespace CDPL
             typedef ExpressionType         ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two quaternion expressions \a E1 and \a E2 component-wise via the binary functor \a F.
+         * \tparam E1 The first wrapped quaternion expression type.
+         * \tparam E2 The second wrapped quaternion expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class QuaternionBinary1 : public QuaternionExpression<QuaternionBinary1<E1, E2, F> >
         {

@@ -42,6 +42,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Vector expression that exposes a vector \a V as its homogeneous-coordinate extension by appending an implicit \c 1 at the end.
+         * \tparam V The wrapped vector type.
+         */
         template <typename V>
         class HomogenousCoordsAdapter : public VectorExpression<HomogenousCoordsAdapter<V> >
         {
@@ -196,6 +200,10 @@ namespace CDPL
             ValueType         extElem;
         };
 
+        /**
+         * \brief Quaternion expression that exposes a 4-element vector as a quaternion (component indices 0-3 map to C1-C4).
+         * \tparam V The wrapped 4-element vector type.
+         */
         template <typename V>
         class VectorQuaternionAdapter : public QuaternionExpression<VectorQuaternionAdapter<V> >
         {

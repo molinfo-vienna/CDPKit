@@ -40,6 +40,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief A half-open index range \f$ [start, stop) \f$ used for slicing vector and matrix expressions.
+         * \tparam S The integral size/index type.
+         */
         template <typename S>
         class Range
         {
@@ -47,53 +51,99 @@ namespace CDPL
             typedef Range<S> SelfType;
 
           public:
+            /** \brief The integral size/index type. */
             typedef S SizeType;
 
+            /**
+             * \brief Constructs an empty range \f$ [0, 0) \f$.
+             */
             Range():
                 start(0), stop(0) {}
 
+            /**
+             * \brief Constructs the range \f$ [start, stop) \f$.
+             * \param start The lower (inclusive) bound.
+             * \param stop The upper (exclusive) bound.
+             * \throw Base::RangeError if \a start \> \a stop.
+             */
             Range(SizeType start, SizeType stop):
                 start(start), stop(stop)
             {
                 CDPL_MATH_CHECK(start <= stop, "Invalid range specification", Base::RangeError);
             }
 
+            /**
+             * \brief Maps the local position \a i to the global index \a start + \a i.
+             * \param i The zero-based local position.
+             * \return The global index.
+             * \throw Base::IndexError if \a i is not in the range \f$ [0, size) \f$.
+             */
             SizeType operator()(SizeType i) const
             {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return (start + i);
             }
 
+            /**
+             * \brief Returns the lower (inclusive) bound.
+             * \return The lower bound.
+             */
             SizeType getStart() const
             {
                 return start;
             }
 
+            /**
+             * \brief Returns the upper (exclusive) bound.
+             * \return The upper bound.
+             */
             SizeType getStop() const
             {
                 return stop;
             }
 
+            /**
+             * \brief Returns the size of the range, \f$ stop - start \f$.
+             * \return The range size.
+             */
             SizeType getSize() const
             {
                 return (stop - start);
             }
 
+            /**
+             * \brief Tells whether the range is empty.
+             * \return \c true if the range is empty, and \c false otherwise.
+             */
             bool isEmpty() const
             {
                 return (stop == start);
             }
 
+            /**
+             * \brief Equality comparison.
+             * \param r The other range.
+             * \return \c true if both ranges have the same start and stop, and \c false otherwise.
+             */
             bool operator==(const Range& r) const
             {
                 return (start == r.start && stop == r.stop);
             }
 
+            /**
+             * \brief Inequality comparison.
+             * \param r The other range.
+             * \return \c true if the ranges differ in start or stop, and \c false otherwise.
+             */
             bool operator!=(const Range& r) const
             {
                 return !this->operator==(r);
             }
 
+            /**
+             * \brief Swaps the contents of \c *this and \a r.
+             * \param r The other range.
+             */
             void swap(Range& r)
             {
                 if (this == &r)
@@ -103,6 +153,11 @@ namespace CDPL
                 std::swap(stop, r.stop);
             }
 
+            /**
+             * \brief Free-function swap overload.
+             * \param r1 The first range.
+             * \param r2 The second range.
+             */
             friend void swap(Range& r1, Range& r2)
             {
                 r1.swap(r2);
@@ -113,6 +168,12 @@ namespace CDPL
             SizeType stop;
         };
 
+        /**
+         * \brief Convenience factory for Math::Range with \c std::size_t indices.
+         * \param start The lower (inclusive) bound.
+         * \param stop The upper (exclusive) bound.
+         * \return The constructed Math::Range instance.
+         */
         inline Range<std::size_t>
         range(std::size_t start, std::size_t stop)
         {

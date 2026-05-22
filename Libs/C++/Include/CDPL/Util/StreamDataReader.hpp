@@ -73,19 +73,65 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief Reads the next data record into \a obj by delegating to \a ReaderImpl::readData().
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             */
             Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
+
+            /**
+             * \brief Reads the data record at index \a idx into \a obj by delegating to \a ReaderImpl::readData().
+             * \param idx The zero-based index of the record to read.
+             * \param obj The output data object.
+             * \param overwrite If \c true, any pre-existing content of \a obj is replaced; otherwise the new data is merged.
+             * \return A reference to itself.
+             * \throw Base::IndexError if \a idx is out of bounds.
+             */
             Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
+            /**
+             * \brief Skips the next data record by delegating to \a ReaderImpl::skipData().
+             * \return A reference to itself.
+             */
             Base::DataReader<DataType>& skip();
 
+            /**
+             * \brief Tells whether more records are available by delegating to \a ReaderImpl::moreData().
+             * \return \c true if at least one more record is available, and \c false otherwise.
+             */
             bool hasMoreData();
 
+            /**
+             * \brief Returns the current record index.
+             * \return The zero-based record index of the next record to read.
+             */
             std::size_t getRecordIndex() const;
+
+            /**
+             * \brief Sets the current record index.
+             * \param idx The new zero-based record index.
+             * \throw Base::IndexError if \a idx exceeds the number of records.
+             */
             void setRecordIndex(std::size_t idx);
 
+            /**
+             * \brief Returns the total number of records (scanning the stream on first call).
+             * \return The record count.
+             */
             std::size_t getNumRecords();
 
+            /**
+             * \brief Tells whether the reader is in a good (readable) state.
+             * \return A non-\c nullptr pointer if the reader is in a good state, and \c nullptr otherwise.
+             */
             operator const void*() const;
+
+            /**
+             * \brief Tells whether the reader is in a bad (non-readable) state.
+             * \return \c true if the reader is in a bad state, and \c false otherwise.
+             */
             bool operator!() const;
 
           protected:

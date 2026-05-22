@@ -52,6 +52,15 @@ namespace CDPL
         template <typename T, typename A>
         class Matrix;
 
+        /**
+         * \brief An \f$ N \times N \f$ rotation matrix backed by a unit quaternion (or an axis-angle representation).
+         *
+         * The first \f$ 3 \times 3 \f$ block holds the rotation; the remaining diagonal entries are 1 (identity)
+         * and all other entries are 0. The size \f$ N \f$ is configurable and typically chosen to fit the surrounding
+         * coordinate system (e.g. 4 for homogeneous transformations).
+         *
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class RotationMatrix : public MatrixContainer<RotationMatrix<T> >
         {
@@ -238,6 +247,14 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief An \f$ N \times N \f$ diagonal scaling matrix.
+         *
+         * The diagonal entries hold the per-axis scale factors; all off-diagonal entries are 0. The size \f$ N \f$
+         * is configurable so the matrix can be combined with homogeneous coordinates.
+         *
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ScalingMatrix : public MatrixContainer<ScalingMatrix<T> >
         {
@@ -349,6 +366,15 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief An \f$ N \times N \f$ translation matrix in homogeneous coordinates.
+         *
+         * The diagonal entries are all 1; the last column (above the diagonal) holds the per-axis translation
+         * components; all other entries are 0. The size \f$ N \f$ is configurable to fit the embedding coordinate
+         * dimension plus one (e.g. 4 for translations of 3D points in homogeneous form).
+         *
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class TranslationMatrix : public MatrixContainer<TranslationMatrix<T> >
         {

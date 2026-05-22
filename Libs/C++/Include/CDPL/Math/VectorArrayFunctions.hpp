@@ -44,6 +44,9 @@ namespace CDPL
 
         /**
          * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
+         * \tparam T The vector value type.
+         * \tparam Dim The vector dimension.
+         * \tparam T1 The matrix value type.
          * \param va The vectors to transform.
          * \param xform The transformation matrix.
          */
@@ -77,6 +80,9 @@ namespace CDPL
 
         /**
          * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N+1 \f$-dimensional square matrix \a xform.
+         * \tparam T The vector value type.
+         * \tparam Dim The vector dimension.
+         * \tparam T1 The matrix value type.
          * \param va The vectors to transform.
          * \param xform The transformation matrix.
          * \note The missing vector element is taken to be \c 1.0.
@@ -113,6 +119,9 @@ namespace CDPL
 
         /**
          * \brief Calculates the centroid of the array elements.
+         * \tparam T The vector value type.
+         * \tparam Dim The vector dimension.
+         * \tparam T1 The centroid value type.
          * \param va The vectors for which to calculate the centroid.
          * \param ctr Stores the calculated centroid.
          * \return \c true if the array is not empty, and \c false otherwise.
@@ -135,6 +144,17 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Calculates the root-mean-square distance between the corresponding elements of \a va1 and \a va2.
+         *
+         * If the two arrays have different sizes, only the first \c min(va1.size, va2.size) elements are considered.
+         *
+         * \tparam T The vector value type.
+         * \tparam Dim The vector dimension.
+         * \param va1 The first vector array.
+         * \param va2 The second vector array.
+         * \return The RMSD value, or 0 if either array is empty.
+         */
         template <typename T, std::size_t Dim>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2)
         {
@@ -165,6 +185,20 @@ namespace CDPL
             return std::sqrt(sd / num_elem);
         }
 
+        /**
+         * \brief Calculates the root-mean-square distance between corresponding elements of \a va1 and \a va2 after
+         *        applying the \f$ (N+1) \times (N+1) \f$ homogeneous transformation \a va1_xform to the elements of \a va1.
+         *
+         * If the two arrays have different sizes, only the first \c min(va1.size, va2.size) elements are considered.
+         *
+         * \tparam T The vector value type.
+         * \tparam Dim The vector dimension.
+         * \tparam T1 The transformation matrix value type.
+         * \param va1 The first vector array (transformed via \a va1_xform on the fly).
+         * \param va2 The second vector array.
+         * \param va1_xform The transformation matrix applied to \a va1 (with implicit homogeneous coordinate 1).
+         * \return The RMSD value, or 0 if either array is empty.
+         */
         template <typename T, std::size_t Dim, typename T1>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2, const CMatrix<T1, Dim + 1, Dim + 1>& va1_xform)
         {

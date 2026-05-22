@@ -41,28 +41,55 @@ namespace CDPL
     namespace ConfGen
     {
 
+        /**
+         * \brief Container for the 3D coordinates of a generated conformer plus its associated energy value.
+         *
+         * \c %ConformerData extends Math::Vector3DArray with an energy field that is filled by force-field-based
+         * conformer-generation steps.
+         */
         class CDPL_CONFGEN_API ConformerData : public Math::Vector3DArray
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConformerData instances. */
             typedef std::shared_ptr<ConformerData> SharedPointer;
 
+            /**
+             * \brief Constructs an empty \c %ConformerData instance with zero energy.
+             */
             ConformerData():
                 energy(0.0) {}
 
+            /**
+             * \brief Constructs the \c %ConformerData instance with the given coordinates and energy.
+             * \param coords The 3D coordinate vectors of the conformer.
+             * \param energy The energy value to assign.
+             */
             ConformerData(const Math::Vector3DArray& coords, double energy = 0.0):
                 Math::Vector3DArray(coords), energy(energy) {}
 
+            /**
+             * \brief Sets the energy value.
+             * \param energy The new energy value.
+             */
             void setEnergy(double energy)
             {
                 this->energy = energy;
             }
 
+            /**
+             * \brief Returns the energy value.
+             * \return The currently stored energy value.
+             */
             double getEnergy() const
             {
                 return energy;
             }
 
+            /**
+             * \brief Swaps the contents (coordinates and energy) of this instance with \a data.
+             * \param data The other \c %ConformerData instance.
+             */
             void swap(ConformerData& data)
             {
                 Math::Vector3DArray::swap(data);

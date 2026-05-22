@@ -62,8 +62,11 @@ namespace CDPL
         {
 
           public:
+            /** \brief The scalar value type. */
             typedef T         ValueType;
+            /** \brief The matrix type used for the transformation, the covariance matrix and the working buffers. */
             typedef Matrix<T> MatrixType;
+            /** \brief The vector type used for the centroids and singular-value vectors. */
             typedef Vector<T> VectorType;
 
             /**
@@ -196,6 +199,10 @@ namespace CDPL
                 return align(dim, do_center, max_svd_iter);
             }
 
+            /**
+             * \brief Returns the rigid-body transformation produced by the most recent successful align() call.
+             * \return A \c const reference to the \f$ (D+1) \times (D+1) \f$ transformation matrix (homogeneous form).
+             */
             const MatrixType& getTransform() const
             {
                 return transform;

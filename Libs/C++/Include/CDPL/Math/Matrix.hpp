@@ -55,6 +55,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Lightweight matrix expression that proxies a reference to an underlying matrix container.
+         * \tparam M The wrapped matrix type.
+         */
         template <typename M>
         class MatrixReference : public MatrixExpression<MatrixReference<M> >
         {
@@ -207,6 +211,10 @@ namespace CDPL
         template <typename T, typename A>
         class Vector;
 
+        /**
+         * \brief Lightweight matrix container that wraps a nested \c std::initializer_list of \c T values.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class InitListMatrix : public MatrixContainer<InitListMatrix<T> >
         {
@@ -275,6 +283,11 @@ namespace CDPL
         template <typename T>
         const typename InitListMatrix<T>::ValueType InitListMatrix<T>::zero = InitListMatrix<T>::ValueType();
 
+        /**
+         * \brief Dynamically-sized dense row-major matrix with configurable underlying storage.
+         * \tparam T The scalar value type.
+         * \tparam A The underlying storage container type (default: \c std::vector).
+         */
         template <typename T, typename A = std::vector<T> >
         class Matrix : public MatrixContainer<Matrix<T, A> >
         {
@@ -549,6 +562,11 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief Sparse matrix that stores only non-default entries keyed by a packed (row, column) identifier.
+         * \tparam T The scalar value type.
+         * \tparam A The underlying associative container type (default: \c std::unordered_map keyed by \c std::uint64_t).
+         */
         template <typename T, typename A = std::unordered_map<std::uint64_t, T> >
         class SparseMatrix : public MatrixContainer<SparseMatrix<T, A> >
         {
@@ -849,6 +867,12 @@ namespace CDPL
         template <typename T, std::size_t N>
         class BoundedVector;
 
+        /**
+         * \brief Variable-size matrix with fixed upper capacities \a M \f$ \times \f$ \a N stored in a stack-allocated array.
+         * \tparam T The scalar value type.
+         * \tparam M The maximum number of rows.
+         * \tparam N The maximum number of columns.
+         */
         template <typename T, std::size_t M, std::size_t N>
         class BoundedMatrix : public MatrixContainer<BoundedMatrix<T, M, N> >
         {
@@ -1147,6 +1171,12 @@ namespace CDPL
         template <typename T, std::size_t M, std::size_t N>
         const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize2;
 
+        /**
+         * \brief Fixed-size dense matrix of dimensions \a M \f$ \times \f$ \a N backed by a 2D C-array (no dynamic allocation).
+         * \tparam T The scalar value type.
+         * \tparam M The fixed number of rows.
+         * \tparam N The fixed number of columns.
+         */
         template <typename T, std::size_t M, std::size_t N>
         class CMatrix : public MatrixContainer<CMatrix<T, M, N> >
         {
@@ -1413,6 +1443,10 @@ namespace CDPL
         template <typename T, std::size_t M, std::size_t N>
         const typename CMatrix<T, M, N>::SizeType CMatrix<T, M, N>::Size2;
 
+        /**
+         * \brief Constant matrix expression whose entries are all zero.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ZeroMatrix : public MatrixContainer<ZeroMatrix<T> >
         {
@@ -1508,6 +1542,10 @@ namespace CDPL
         template <typename T>
         const typename ZeroMatrix<T>::ValueType ZeroMatrix<T>::zero = ZeroMatrix<T>::ValueType();
 
+        /**
+         * \brief Constant matrix expression in which every entry equals the same scalar value.
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class ScalarMatrix : public MatrixContainer<ScalarMatrix<T> >
         {
@@ -1602,6 +1640,10 @@ namespace CDPL
             ValueType value;
         };
 
+        /**
+         * \brief Constant identity-matrix expression (\f$ 1 \f$ on the diagonal, \f$ 0 \f$ elsewhere).
+         * \tparam T The scalar value type.
+         */
         template <typename T>
         class IdentityMatrix : public MatrixContainer<IdentityMatrix<T> >
         {

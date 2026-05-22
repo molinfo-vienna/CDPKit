@@ -43,6 +43,15 @@ namespace CDPL
         template <typename E>
         class VectorExpression;
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (vector element, source element) pair, i.e. \c F::apply(v(i), e()(i)).
+         * \tparam F The element-wise binary functor template (e.g. assignment, plus-assign).
+         * \tparam V The destination vector container type.
+         * \tparam E The source vector expression type.
+         * \param v The destination vector.
+         * \param e The source vector expression.
+         * \throw Base::SizeError if the sizes of \a v and \a e differ.
+         */
         template <template <typename T1, typename T2> class F, typename V, typename E>
         void vectorAssignVector(V& v, const VectorExpression<E>& e)
         {
@@ -56,6 +65,14 @@ namespace CDPL
                 FunctorType::apply(v(i), e()(i));
         }
 
+        /**
+         * \brief Applies the element-wise functor \a F to every (vector element, scalar) pair, i.e. \c F::apply(v(i), t).
+         * \tparam F The element-wise binary functor template (e.g. assignment, multiply-assign).
+         * \tparam V The destination vector container type.
+         * \tparam T The scalar type.
+         * \param v The destination vector.
+         * \param t The scalar value applied to every element.
+         */
         template <template <typename T1, typename T2> class F, typename V, typename T>
         void vectorAssignScalar(V& v, const T& t)
         {
@@ -68,6 +85,14 @@ namespace CDPL
                 FunctorType::apply(v(i), t);
         }
 
+        /**
+         * \brief Swaps the elements of two equally sized vector expressions element by element.
+         * \tparam V The first vector container type.
+         * \tparam E The second vector expression type.
+         * \param v The first vector.
+         * \param e The second vector expression.
+         * \throw Base::SizeError if the sizes of \a v and \a e differ.
+         */
         template <typename V, typename E>
         void vectorSwap(V& v, VectorExpression<E>& e)
         {

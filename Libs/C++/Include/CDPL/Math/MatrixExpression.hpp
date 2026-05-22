@@ -48,6 +48,11 @@ namespace CDPL
         template <typename C>
         class MatrixContainer;
 
+        /**
+         * \brief Expression-template node applying a unary functor \a F element-wise to a matrix expression \a E.
+         * \tparam E The wrapped matrix expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         class MatrixUnary : public MatrixExpression<MatrixUnary<E, F> >
         {
@@ -144,6 +149,12 @@ namespace CDPL
             typedef ExpressionType          ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two matrix expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \tparam E1 The first wrapped matrix expression type.
+         * \tparam E2 The second wrapped matrix expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class MatrixBinary1 : public MatrixExpression<MatrixBinary1<E1, E2, F> >
         {

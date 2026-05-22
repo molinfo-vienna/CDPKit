@@ -43,6 +43,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief View adapter that exposes a quaternion as a 4-element vector expression (indices map to the components C1, C2, C3, C4).
+         * \tparam Q The wrapped quaternion type.
+         */
         template <typename Q>
         class QuaternionVectorAdapter : public VectorExpression<QuaternionVectorAdapter<Q> >
         {

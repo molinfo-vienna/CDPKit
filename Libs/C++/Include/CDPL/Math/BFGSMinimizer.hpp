@@ -54,51 +54,99 @@ namespace CDPL
         {
 
           public:
+            /** \brief The type of the variable array passed to the minimizer. */
             typedef VA  VariableArrayType;
+            /** \brief The scalar value type of \a VariableArrayType. */
             typedef VT  ValueType;
+            /** \brief The scalar return type of the objective and gradient functions. */
             typedef FVT FunctionValueType;
 
+            /** \brief Type of the gradient function (computes the objective value and writes the gradient into the second argument). */
             typedef typename std::function<FVT(const VA&, VA&)> GradientFunction;
+            /** \brief Type of the objective function. */
             typedef typename std::function<FVT(const VA&)>      ObjectiveFunction;
 
+            /**
+             * \brief Status bitmask reported by minimize() and getStatus(). Multiple flags may be combined.
+             */
             enum Status
             {
 
-                SUCCESS            = 0, // general success indicator
-                NO_PROGRESS        = 1, // no more progress towards solution
-                ITER_LIMIT_REACHED = 2, // the maximum number of minimization iterations has been reached
-                GNORM_REACHED      = 4, // the specified gradient norm has been reached
-                DELTAF_REACHED     = 8 // the specified function value delta between successive iterations has been reached
+                /** \brief Iteration step completed successfully (no termination condition met yet). */
+                SUCCESS            = 0,
+                /** \brief No more progress towards the solution can be made. */
+                NO_PROGRESS        = 1,
+                /** \brief The maximum number of minimization iterations has been reached. */
+                ITER_LIMIT_REACHED = 2,
+                /** \brief The configured gradient-norm threshold has been reached. */
+                GNORM_REACHED      = 4,
+                /** \brief The configured function-value delta between successive iterations has been reached. */
+                DELTAF_REACHED     = 8
             };
 
+            /**
+             * \brief Constructs the \c %BFGSMinimizer instance with the given objective and gradient functions.
+             * \param func The objective function.
+             * \param grad_func The gradient function (also computes the objective value).
+             */
             BFGSMinimizer(const ObjectiveFunction& func, const GradientFunction& grad_func):
                 rho(0.01), tau1(9), tau2(0.05), tau3(0.5), order(3), sigma(0.1), func(func), gradFunc(grad_func), status(SUCCESS) {}
 
+            /**
+             * \brief Returns the L2 norm of the gradient at the end of the most recent iterate() call.
+             * \return The gradient norm.
+             */
             ValueType getGradientNorm() const
             {
                 return g0Norm;
             }
 
+            /**
+             * \brief Returns the magnitude of the function-value decrease produced by the most recent iterate() call.
+             * \return The function-value delta (positive when the function decreased).
+             */
             ValueType getFunctionDelta() const
             {
                 return -deltaF;
             }
 
+            /**
+             * \brief Returns the function value at the end of the most recent iterate() call.
+             * \return The function value.
+             */
             ValueType getFunctionValue() const
             {
                 return fValue;
             }
 
+            /**
+             * \brief Returns the number of iterations performed by the most recent minimize() or iterate() loop.
+             * \return The iteration count.
+             */
             std::size_t getNumIterations() const
             {
                 return numIter;
             }
 
+            /**
+             * \brief Returns the current status of the minimizer.
+             * \return The Status bitmask.
+             */
             Status getStatus() const
             {
                 return status;
             }
 
+            /**
+             * \brief Runs the BFGS minimization loop on \a x.
+             * \param x The variable vector to be minimized (modified in place).
+             * \param g The gradient vector (modified in place).
+             * \param max_iter The maximum number of iterations (\e 0 means unlimited).
+             * \param g_norm The gradient-norm threshold below which the minimization is stopped (negative values disable this stop condition).
+             * \param delta_f The function-value-delta threshold below which the minimization is stopped (negative values disable this stop condition).
+             * \param do_setup If \c true, setup() is invoked at the start to initialize the minimizer.
+             * \return The terminal Status bitmask of the minimization.
+             */
             Status minimize(VariableArrayType& x, VariableArrayType& g, std::size_t max_iter,
                             const ValueType& g_norm, const ValueType& delta_f, bool do_setup = true)
             {
@@ -126,6 +174,14 @@ namespace CDPL
                 return (status = ITER_LIMIT_REACHED);
             }
 
+            /**
+             * \brief Initializes the minimizer state for a subsequent iterate() / minimize() loop.
+             * \param x The starting variable vector.
+             * \param g The gradient vector (filled with the gradient at \a x).
+             * \param step_size The initial step-size guess.
+             * \param tol The line-search tolerance.
+             * \return The objective-function value at \a x.
+             */
             ValueType setup(const VariableArrayType& x, VariableArrayType& g,
                             const ValueType& step_size = 0.001, const ValueType& tol = 0.15)
             {
@@ -158,6 +214,14 @@ namespace CDPL
                 return startF;
             }
 
+            /**
+             * \brief Performs a single BFGS iteration: line search along the current search direction, BFGS update of the
+             *        inverse Hessian approximation, and selection of the new search direction.
+             * \param f The current function value (updated in place).
+             * \param x The current variable vector (updated in place).
+             * \param g The current gradient vector (updated in place).
+             * \return Status::SUCCESS if the iteration produced a step, otherwise the bitmask of stop conditions met.
+             */
             Status iterate(ValueType& f, VariableArrayType& x, VariableArrayType& g)
             {
                 if (numIter == 0)

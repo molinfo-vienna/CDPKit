@@ -43,6 +43,10 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Lightweight quaternion expression that proxies a reference to an underlying quaternion container.
+         * \tparam Q The wrapped quaternion type.
+         */
         template <typename Q>
         class QuaternionReference : public QuaternionExpression<QuaternionReference<Q> >
         {
@@ -234,6 +238,10 @@ namespace CDPL
             QuaternionType& data;
         };
 
+        /**
+         * \brief A general 4-component quaternion \f$ q = c_1 + c_2 i + c_3 j + c_4 k \f$.
+         * \tparam T The scalar component value type.
+         */
         template <typename T>
         class Quaternion : public QuaternionContainer<Quaternion<T> >
         {
@@ -478,6 +486,10 @@ namespace CDPL
             ArrayType data;
         };
 
+        /**
+         * \brief A pure-real quaternion \f$ q = c_1 + 0i + 0j + 0k \f$ that stores only the real component.
+         * \tparam T The scalar component value type.
+         */
         template <typename T>
         class RealQuaternion : public QuaternionContainer<RealQuaternion<T> >
         {

@@ -78,6 +78,15 @@ namespace CDPL
         {};
 
 
+        /**
+         * \brief A regular 3D spatial grid combining a Math::Grid data store with a coordinate-system transformation
+         *        that maps grid-cell indices to 3D world positions.
+         *
+         * \tparam T The grid cell value type.
+         * \tparam C The coordinate (real) value type used in the world frame.
+         * \tparam GD The underlying grid data container type (default: Math::Grid).
+         * \tparam XF The transformation type that maps cell indices to world coordinates (default: Math::CMatrix \f$ 4 \times 4 \f$).
+         */
         template <typename T, typename C = typename TypeTraits<T>::RealType, typename GD = Grid<T>, typename XF = CMatrix<C, 4, 4> >
         class RegularSpatialGrid : public GridExpression<RegularSpatialGrid<T, C, GD, XF> >
         {

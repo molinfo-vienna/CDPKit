@@ -60,30 +60,70 @@ namespace CDPL
             typedef std::vector<DistanceConstraint> DistanceConstraintList;
 
           public:
+            /** \brief A mutable iterator over the configured distance constraints. */
             typedef typename DistanceConstraintList::iterator       DistanceConstraintIterator;
+            /** \brief A constant iterator over the configured distance constraints. */
             typedef typename DistanceConstraintList::const_iterator ConstDistanceConstraintIterator;
+            /** \brief The scalar value type used for coordinates and constraint bounds. */
             typedef T                                               ValueType;
 
+            /** \brief Dimensionality of the coordinate space. */
             static constexpr std::size_t COORDS_DIM                  = Dim;
+            /** \brief Default number of optimization cycles. */
             static constexpr std::size_t DEF_NUM_CYCLES              = 50;
+            /** \brief Default per-cycle step-count multiplier (steps per cycle = factor * number of constraints). */
             static constexpr double      DEF_CYCLE_STEP_COUNT_FACTOR = 1.0;
+            /** \brief Default initial learning rate. */
             static constexpr ValueType   DEF_START_LEARNING_RATE     = 1;
+            /** \brief Default per-cycle decrement subtracted from the learning rate. */
             static constexpr ValueType   DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
 
+            /**
+             * \brief A constraint that pins the distance between two points to the interval [\a lb, \a ub].
+             */
             class DistanceConstraint
             {
 
               public:
+                /**
+                 * \brief Constructs a distance constraint for the points with indices \a pt1_idx and \a pt2_idx
+                 *        whose Euclidean distance is to be kept in the interval [\a lb, \a ub].
+                 * \param pt1_idx The index of the first point.
+                 * \param pt2_idx The index of the second point.
+                 * \param lb The lower distance bound.
+                 * \param ub The upper distance bound.
+                 */
                 DistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, const ValueType& lb, const ValueType& ub);
 
+                /**
+                 * \brief Returns the index of the first constrained point.
+                 * \return The first point index.
+                 */
                 std::size_t getPoint1Index() const;
 
+                /**
+                 * \brief Returns the index of the second constrained point.
+                 * \return The second point index.
+                 */
                 std::size_t getPoint2Index() const;
 
+                /**
+                 * \brief Returns the lower distance bound.
+                 * \return A \c const reference to the lower distance bound.
+                 */
                 const ValueType& getLowerBound() const;
 
+                /**
+                 * \brief Returns the upper distance bound.
+                 * \return A \c const reference to the upper distance bound.
+                 */
                 const ValueType& getUpperBound() const;
 
+                /**
+                 * \brief Lexicographic less-than comparison on (point1Idx, point2Idx).
+                 * \param constr The constraint to compare against.
+                 * \return \c true if this constraint precedes \a constr in lexicographic order, and \c false otherwise.
+                 */
                 bool operator<(const DistanceConstraint& constr) const;
 
               private:
@@ -93,52 +133,151 @@ namespace CDPL
                 ValueType   upperBound;
             };
 
+            /**
+             * \brief Removes all configured distance constraints.
+             */
             void clearDistanceConstraints();
 
+            /**
+             * \brief Appends a new distance constraint to the list of configured constraints.
+             * \param pt1_idx The index of the first point.
+             * \param pt2_idx The index of the second point.
+             * \param lb The lower distance bound.
+             * \param ub The upper distance bound.
+             */
             void addDistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, const ValueType& lb, const ValueType& ub);
 
+            /**
+             * \brief Returns the number of configured distance constraints.
+             * \return The distance-constraint count.
+             */
             std::size_t getNumDistanceConstraints() const;
 
+            /**
+             * \brief Returns the distance constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             * \return A \c const reference to the distance constraint.
+             */
             const DistanceConstraint& getDistanceConstraint(std::size_t idx) const;
 
+            /**
+             * \brief Returns the distance constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             * \return A reference to the distance constraint.
+             */
             DistanceConstraint& getDistanceConstraint(std::size_t idx);
 
+            /**
+             * \brief Removes the distance constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             */
             void removeDistanceConstraint(std::size_t idx);
 
+            /**
+             * \brief Removes the distance constraint referenced by iterator \a it.
+             * \param it The iterator pointing to the distance constraint.
+             */
             void removeDistanceConstraint(const DistanceConstraintIterator& it);
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first distance constraint.
+             * \return A mutable iterator pointing to the first distance constraint.
+             */
             DistanceConstraintIterator getDistanceConstraintsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last distance constraint.
+             * \return A mutable iterator pointing one past the last distance constraint.
+             */
             DistanceConstraintIterator getDistanceConstraintsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first distance constraint.
+             * \return A constant iterator pointing to the first distance constraint.
+             */
             ConstDistanceConstraintIterator getDistanceConstraintsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last distance constraint.
+             * \return A constant iterator pointing one past the last distance constraint.
+             */
             ConstDistanceConstraintIterator getDistanceConstraintsEnd() const;
 
+            /**
+             * \brief Sets the number of optimization cycles.
+             * \param num_cycles The new cycle count.
+             */
             void setNumCycles(std::size_t num_cycles);
 
+            /**
+             * \brief Sets the multiplier that determines the per-cycle step count (steps per cycle = factor * number of constraints).
+             * \param fact The new per-cycle step-count factor.
+             */
             void setCycleStepCountFactor(double fact);
 
+            /**
+             * \brief Sets the initial learning rate used by the first optimization cycle.
+             * \param rate The new initial learning rate.
+             */
             void setStartLearningRate(const ValueType& rate);
 
+            /**
+             * \brief Sets the per-cycle learning-rate decrement.
+             * \param decr The new per-cycle learning-rate decrement.
+             */
             void setLearningRateDecrement(const ValueType& decr);
 
+            /**
+             * \brief Returns the currently configured number of optimization cycles.
+             * \return The cycle count.
+             */
             std::size_t getNumCycles() const;
 
+            /**
+             * \brief Returns the currently configured per-cycle step-count factor.
+             * \return The step-count factor.
+             */
             double getCycleStepCountFactor() const;
 
+            /**
+             * \brief Returns the currently configured initial learning rate.
+             * \return A \c const reference to the initial learning rate.
+             */
             const ValueType& getStartLearningRate() const;
 
+            /**
+             * \brief Returns the currently configured per-cycle learning-rate decrement.
+             * \return A \c const reference to the per-cycle learning-rate decrement.
+             */
             const ValueType& getLearningRateDecrement() const;
 
+            /**
+             * \brief Sets the seed of the internal random number generator used to initialize the coordinates.
+             * \param seed The new random seed.
+             */
             void setRandomSeed(unsigned int seed);
 
+            /**
+             * \brief Generates \a num_points coordinate vectors that try to satisfy the configured constraints and stores them in \a coords.
+             * \tparam CoordsArray The output coordinate-array type (must be index-accessible and writable).
+             * \param num_points The number of points whose coordinates are to be generated.
+             * \param coords The output coordinate array (resized as needed).
+             */
             template <typename CoordsArray>
             void generate(std::size_t num_points, CoordsArray& coords);
 
+            /**
+             * \brief Computes the cumulative squared distance error of \a coords against the configured distance constraints.
+             * \tparam CoordsArray The input coordinate-array type.
+             * \param coords The input coordinate array.
+             * \return The cumulative distance error.
+             */
             template <typename CoordsArray>
             ValueType getDistanceError(const CoordsArray& coords) const;
 
+            /**
+             * \brief Sorts the configured distance constraints in lexicographic order.
+             */
             void orderDistanceConstraints();
 
           protected:
@@ -225,23 +364,59 @@ namespace CDPL
             typedef typename VolumeConstraintList::iterator       VolumeConstraintIterator;
             typedef typename VolumeConstraintList::const_iterator ConstVolumeConstraintIterator;
 
+            /**
+             * \brief A constraint that pins the signed tetrahedral volume spanned by four points to the interval [\a lb, \a ub].
+             */
             class VolumeConstraint
             {
 
               public:
+                /**
+                 * \brief Constructs a volume constraint for the tetrahedron spanned by the four points with the given indices.
+                 * \param pt1_idx The index of the first point.
+                 * \param pt2_idx The index of the second point.
+                 * \param pt3_idx The index of the third point.
+                 * \param pt4_idx The index of the fourth point.
+                 * \param lb The lower volume bound.
+                 * \param ub The upper volume bound.
+                 */
                 VolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, std::size_t pt3_idx,
                                  std::size_t pt4_idx, const ValueType& lb, const ValueType& ub);
 
+                /**
+                 * \brief Returns the index of the first constrained point.
+                 * \return The first point index.
+                 */
                 std::size_t getPoint1Index() const;
 
+                /**
+                 * \brief Returns the index of the second constrained point.
+                 * \return The second point index.
+                 */
                 std::size_t getPoint2Index() const;
 
+                /**
+                 * \brief Returns the index of the third constrained point.
+                 * \return The third point index.
+                 */
                 std::size_t getPoint3Index() const;
 
+                /**
+                 * \brief Returns the index of the fourth constrained point.
+                 * \return The fourth point index.
+                 */
                 std::size_t getPoint4Index() const;
 
+                /**
+                 * \brief Returns the lower volume bound.
+                 * \return A \c const reference to the lower volume bound.
+                 */
                 const ValueType& getLowerBound() const;
 
+                /**
+                 * \brief Returns the upper volume bound.
+                 * \return A \c const reference to the upper volume bound.
+                 */
                 const ValueType& getUpperBound() const;
 
               private:
@@ -253,29 +428,85 @@ namespace CDPL
                 ValueType   upperBound;
             };
 
+            /**
+             * \brief Removes all configured volume constraints.
+             */
             void clearVolumeConstraints();
 
+            /**
+             * \brief Appends a new volume constraint to the list of configured constraints.
+             * \param pt1_idx The index of the first point.
+             * \param pt2_idx The index of the second point.
+             * \param pt3_idx The index of the third point.
+             * \param pt4_idx The index of the fourth point.
+             * \param lb The lower volume bound.
+             * \param ub The upper volume bound.
+             */
             void addVolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, std::size_t pt3_idx,
                                      std::size_t pt4_idx, const ValueType& lb, const ValueType& ub);
 
+            /**
+             * \brief Returns the number of configured volume constraints.
+             * \return The volume-constraint count.
+             */
             std::size_t getNumVolumeConstraints() const;
 
+            /**
+             * \brief Returns the volume constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             * \return A \c const reference to the volume constraint.
+             */
             const VolumeConstraint& getVolumeConstraint(std::size_t idx) const;
 
+            /**
+             * \brief Returns the volume constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             * \return A reference to the volume constraint.
+             */
             VolumeConstraint& getVolumeConstraint(std::size_t idx);
 
+            /**
+             * \brief Removes the volume constraint at index \a idx.
+             * \param idx The zero-based constraint index.
+             */
             void removeVolumeConstraint(std::size_t idx);
 
+            /**
+             * \brief Removes the volume constraint referenced by iterator \a it.
+             * \param it The iterator pointing to the volume constraint.
+             */
             void removeVolumeConstraint(const VolumeConstraintIterator& it);
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first volume constraint.
+             * \return A mutable iterator pointing to the first volume constraint.
+             */
             VolumeConstraintIterator getVolumeConstraintsBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last volume constraint.
+             * \return A mutable iterator pointing one past the last volume constraint.
+             */
             VolumeConstraintIterator getVolumeConstraintsEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first volume constraint.
+             * \return A constant iterator pointing to the first volume constraint.
+             */
             ConstVolumeConstraintIterator getVolumeConstraintsBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last volume constraint.
+             * \return A constant iterator pointing one past the last volume constraint.
+             */
             ConstVolumeConstraintIterator getVolumeConstraintsEnd() const;
 
+            /**
+             * \brief Computes the cumulative volume error of \a coords against the configured volume constraints.
+             * \tparam CoordsArray The input coordinate-array type.
+             * \param coords The input coordinate array.
+             * \return The cumulative volume error.
+             */
             template <typename CoordsArray>
             ValueType getVolumeError(const CoordsArray& coords) const;
 
@@ -293,6 +524,7 @@ namespace CDPL
             VolumeConstraintList volConstraints;
         };
 
+        /** \brief Convenience alias for the 3D coordinates generator with double-precision values. */
         typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
     } // namespace Util
 } // namespace CDPL

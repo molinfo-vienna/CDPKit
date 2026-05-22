@@ -48,10 +48,25 @@ namespace CDPL
         {
 
           public:
+            /**
+             * \brief Returns the data format advertised by this handler (Pharm::DataFormat::PSD).
+             * \return A \c const reference to the PSD Base::DataFormat instance.
+             */
             const Base::DataFormat& getDataFormat() const;
 
+            /**
+             * \brief Creates a Pharm::PSDPharmacophoreReader that reads from the input stream \a is.
+             * \param is The input stream to read from.
+             * \return A shared pointer to the constructed reader.
+             */
             ReaderType::SharedPointer createReader(std::istream& is) const;
 
+            /**
+             * \brief Creates a Pharm::PSDPharmacophoreReader that reads from the file \a file_name.
+             * \param file_name The input file to read from.
+             * \param mode The open mode of the underlying file stream.
+             * \return A shared pointer to the constructed reader.
+             */
             ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
         };
     } // namespace Pharm

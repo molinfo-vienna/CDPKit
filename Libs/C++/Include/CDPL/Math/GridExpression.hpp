@@ -46,6 +46,11 @@ namespace CDPL
         template <typename C>
         class GridContainer;
 
+        /**
+         * \brief Expression-template node applying a unary functor \a F element-wise to a grid expression \a E.
+         * \tparam E The wrapped grid expression type.
+         * \tparam F The unary functor type.
+         */
         template <typename E, typename F>
         class GridUnary : public GridExpression<GridUnary<E, F> >
         {
@@ -99,6 +104,12 @@ namespace CDPL
             typedef ExpressionType  ResultType;
         };
 
+        /**
+         * \brief Expression-template node combining two grid expressions \a E1 and \a E2 element-wise via the binary functor \a F.
+         * \tparam E1 The first wrapped grid expression type.
+         * \tparam E2 The second wrapped grid expression type.
+         * \tparam F The binary functor type.
+         */
         template <typename E1, typename E2, typename F>
         class GridBinary1 : public GridExpression<GridBinary1<E1, E2, F> >
         {

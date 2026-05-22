@@ -40,25 +40,47 @@ namespace CDPL
     {
 
         /**
-         * \brief DefaultDataOutputHandler.
+         * \brief Default Base::DataOutputHandler implementation that exposes a fixed Base::DataFormat and instantiates
+         *        writers of the supplied stream-based \a WriterImpl type (file-based writers are produced by wrapping it
+         *        in Util::FileDataWriter).
+         *
+         * \tparam WriterImpl The underlying stream-based writer implementation type.
+         * \tparam FORMAT A reference to the Base::DataFormat constant advertised by the handler.
+         * \tparam DataType The data type written by \a WriterImpl.
          */
         template <typename WriterImpl, const Base::DataFormat& FORMAT, typename DataType = typename WriterImpl::DataType>
         class DefaultDataOutputHandler : public Base::DataOutputHandler<DataType>
         {
 
           public:
+            /** \brief Type of the Base::DataWriter specialization produced by this handler. */
             typedef typename Base::DataOutputHandler<DataType>::WriterType WriterType;
 
+            /**
+             * \brief Returns the data format advertised by this handler.
+             * \return A \c const reference to the fixed Base::DataFormat \a FORMAT.
+             */
             const Base::DataFormat& getDataFormat() const
             {
                 return FORMAT;
             }
 
+            /**
+             * \brief Creates a writer that writes to the output stream \a os.
+             * \param os The output stream to wrap.
+             * \return A shared pointer to a freshly constructed \a WriterImpl.
+             */
             typename WriterType::SharedPointer createWriter(std::ostream& os) const
             {
                 return typename WriterType::SharedPointer(new WriterImpl(os));
             }
 
+            /**
+             * \brief Creates a writer that writes to the file \a file_name (opened in mode \a mode).
+             * \param file_name The path of the output file.
+             * \param mode The open mode of the underlying file stream.
+             * \return A shared pointer to a freshly constructed Util::FileDataWriter wrapping a \a WriterImpl.
+             */
             typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const
             {
                 return typename WriterType::SharedPointer(new Util::FileDataWriter<WriterImpl>(file_name, mode));

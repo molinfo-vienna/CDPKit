@@ -50,9 +50,15 @@ namespace CDPL
         namespace AttributedGridProperty
         {
 
+            /**
+             * \brief Specifies a textual name for an attributed grid.
+             * \valuetype \c std::string
+             */
             extern CDPL_GRID_API const Base::LookupKey NAME;
 
             /**
+             * \brief Specifies a textual comment/description for an attributed grid.
+             * \valuetype \c std::string
              * \since 1.4
              */
             extern CDPL_GRID_API const Base::LookupKey COMMENT;

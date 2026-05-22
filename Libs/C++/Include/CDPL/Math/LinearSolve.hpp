@@ -41,6 +41,14 @@ namespace CDPL
         template <typename E>
         class MatrixExpression;
 
+        /**
+         * \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where \a e1 is a lower-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The vector expression type of the right-hand side.
+         * \param e1 The lower-triangular coefficient matrix.
+         * \param e2 The right-hand side vector, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+         */
         template <typename E1, typename E2>
         bool
         solveLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
@@ -70,6 +78,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ L\,x = b \f$ in place by forward-substitution, where \a e1 is a unit lower-triangular matrix (1 on the diagonal).
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The vector expression type of the right-hand side.
+         * \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+         * \param e2 The right-hand side vector, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square or dimensions do not match.
+         */
         template <typename E1, typename E2>
         bool
         solveUnitLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
@@ -96,6 +112,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where \a e1 is a lower-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The matrix expression type of the right-hand side.
+         * \param e1 The lower-triangular coefficient matrix.
+         * \param e2 The right-hand side matrix, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+         */
         template <typename E1, typename E2>
         bool
         solveLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
@@ -128,6 +152,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ L\,X = B \f$ in place column-wise by forward-substitution, where \a e1 is a unit lower-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The matrix expression type of the right-hand side.
+         * \param e1 The unit lower-triangular coefficient matrix (diagonal entries are taken as 1).
+         * \param e2 The right-hand side matrix, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square or dimensions do not match.
+         */
         template <typename E1, typename E2>
         bool
         solveUnitLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
@@ -157,6 +189,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where \a e1 is an upper-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The vector expression type of the right-hand side.
+         * \param e1 The upper-triangular coefficient matrix.
+         * \param e2 The right-hand side vector, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+         */
         template <typename E1, typename E2>
         bool
         solveUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
@@ -187,6 +227,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ U\,x = b \f$ in place by back-substitution, where \a e1 is a unit upper-triangular matrix (1 on the diagonal).
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The vector expression type of the right-hand side.
+         * \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+         * \param e2 The right-hand side vector, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square or dimensions do not match.
+         */
         template <typename E1, typename E2>
         bool
         solveUnitUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
@@ -214,6 +262,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where \a e1 is an upper-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The matrix expression type of the right-hand side.
+         * \param e1 The upper-triangular coefficient matrix.
+         * \param e2 The right-hand side matrix, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square, dimensions do not match, or a zero diagonal pivot is encountered.
+         */
         template <typename E1, typename E2>
         bool
         solveUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
@@ -247,6 +303,14 @@ namespace CDPL
             return true;
         }
 
+        /**
+         * \brief Solves \f$ U\,X = B \f$ in place column-wise by back-substitution, where \a e1 is a unit upper-triangular matrix.
+         * \tparam E1 The matrix expression type of the coefficient matrix.
+         * \tparam E2 The matrix expression type of the right-hand side.
+         * \param e1 The unit upper-triangular coefficient matrix (diagonal entries are taken as 1).
+         * \param e2 The right-hand side matrix, overwritten with the solution.
+         * \return \c true if the substitution succeeded, and \c false if the system is not square or dimensions do not match.
+         */
         template <typename E1, typename E2>
         bool
         solveUnitUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)

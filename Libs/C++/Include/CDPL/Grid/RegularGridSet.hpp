@@ -40,13 +40,16 @@ namespace CDPL
     {
 
         /**
-         * \brief RegularGridSet.
+         * \brief An indirected array of dynamically allocated Grid::RegularGrid instances.
+         * \tparam T The grid cell value type.
+         * \tparam CVT The world-coordinate value type used by the wrapped Grid::RegularGrid (defaults to \a T).
          */
         template <typename T, typename CVT = T>
         class RegularGridSet : public Util::IndirectArray<RegularGrid<T, CVT> >
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %RegularGridSet instances. */
             typedef std::shared_ptr<RegularGridSet> SharedPointer;
 
           private:
@@ -56,7 +59,9 @@ namespace CDPL
             }
         };
 
+        /** \brief Convenience alias for the double-precision regular-grid set. */
         typedef RegularGridSet<double> DRegularGridSet;
+        /** \brief Convenience alias for the single-precision regular-grid set. */
         typedef RegularGridSet<float>  FRegularGridSet;
     } // namespace Grid
 } // namespace CDPL

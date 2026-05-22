@@ -36,10 +36,16 @@ namespace CDPL
     namespace Math
     {
 
+        /**
+         * \brief Trait that resolves the common arithmetic type of \a T1 and \a T2 via \c std::common_type.
+         * \tparam T1 The first type.
+         * \tparam T2 The second type.
+         */
         template <typename T1, typename T2>
         struct CommonType
         {
 
+            /** \brief The common type. */
             typedef typename std::common_type<T1, T2>::type Type;
         };
     } // namespace Math

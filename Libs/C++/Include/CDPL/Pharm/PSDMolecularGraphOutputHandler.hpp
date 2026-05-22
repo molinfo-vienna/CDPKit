@@ -46,16 +46,31 @@ namespace CDPL
     {
 
         /**
-     * \brief A handler for the output of molecular graph dara in the PSD-format of the <em>CDPL</em>.
-     */
+         * \brief A handler for the output of molecular graph data in the PSD-format of the <em>CDPL</em>.
+         */
         class CDPL_PHARM_API PSDMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
         {
 
           public:
+            /**
+             * \brief Returns the data format advertised by this handler (Pharm::DataFormat::PSD).
+             * \return A \c const reference to the PSD Base::DataFormat instance.
+             */
             const Base::DataFormat& getDataFormat() const;
 
+            /**
+             * \brief Creates a Pharm::PSDMolecularGraphWriter that writes to the output stream \a os.
+             * \param os The output stream to write to.
+             * \return A shared pointer to the constructed writer.
+             */
             WriterType::SharedPointer createWriter(std::ostream& os) const;
 
+            /**
+             * \brief Creates a Pharm::PSDMolecularGraphWriter that writes to the file \a file_name.
+             * \param file_name The output file to write to.
+             * \param mode The open mode of the underlying file stream.
+             * \return A shared pointer to the constructed writer.
+             */
             WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const;
         };
     } // namespace Pharm
