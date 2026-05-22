@@ -26,6 +26,32 @@ Libs/C++/Include/CDPL/Math/VectorIterator.hpp‎                (missing class m
 Libs/C++/Include/CDPL/Math/VectorProxy.hpp                   (missing class, member and function docs)
 ‎Libs/C++/Include/CDPL/Util/DGCoordinatesGenerator.hpp        (add \throw to member func. docs if exceptions might be thrown)
 
+--------
+
+Libs/C++/Include/CDPL/ConfGen/ConformerGenerator.hpp‎            (class doc ignores also implemented stochastic smapling approach,
+                                                                brief "setConformers(Chem::MolecularGraph& molgraph)" doc is wrong (no property with that name),
+                                                                add CONFORGE paper ref (CFRG))
+Libs/C++/Include/CDPL/ConfGen/ConformerGeneratorSettings.hpp‎    (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/DGConstraintGeneratorSettings.hpp (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/DGStructureGenerator.hpp‎          (brief member doc for "void setup(const Chem::MolecularGraph& molgraph)" is wrong,
+                                                                MMFF94 data are not generated on the fly, fallbacks based on atomic number and hybridization are used)
+‎Libs/C++/Include/CDPL/ConfGen/DGStructureGeneratorSettings.hpp  (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/FragmentAssembler.hpp             (generated conformers are only starting conformers for torsion driving!)
+‎Libs/C++/Include/CDPL/ConfGen/FragmentAssemblerSettings.hpp‎     (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/FragmentConformerGenerator.hpp‎    (missing class member docs)
+‎Libs/C++/Include/CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp     (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/StructureGenerator.hpp‎                     (brief member doc for "void setCoordinates(Chem::MolecularGraph& molgraph)" is wrong,
+                                                                         there is no atom property with that name)
+Libs/C++/Include/CDPL/ConfGen/TorsionCategory.hpp                        (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/TorsionDriver.hpp                          ('configuration' in doc text should be 'conformation')
+Libs/C++/Include/CDPL/ConfGen/TorsionDriverSettings.hpp                  (missing class member docs)
+Libs/C++/Include/CDPL/ConfGen/TorsionLibrary.hpp                         ('slot' in class doc is strange)
+
+
+
+
+
+
 
 
 
