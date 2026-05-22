@@ -42,8 +42,11 @@ namespace CDPL
         namespace ConformerSamplingMode
         {
 
+            /** \brief Selects the sampling strategy heuristically based on the input molecule (rotatable-bond count, ring topology, etc.). */
             constexpr unsigned int AUTO       = 0;
+            /** \brief Selects the systematic sampling strategy (fragment-based 2D-to-3D structure generation followed by exhaustive torsion driving). */
             constexpr unsigned int SYSTEMATIC = 1;
+            /** \brief Selects the stochastic sampling strategy (random sampling of rotatable-bond torsion-angle distributions). */
             constexpr unsigned int STOCHASTIC = 2;
         } // namespace ConformerSamplingMode
     } // namespace ConfGen

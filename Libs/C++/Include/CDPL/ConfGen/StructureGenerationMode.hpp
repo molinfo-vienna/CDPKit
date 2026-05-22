@@ -42,8 +42,11 @@ namespace CDPL
         namespace StructureGenerationMode
         {
 
+            /** \brief Selects the structure-generation strategy heuristically based on the input molecule. */
             constexpr unsigned int AUTO              = 0;
+            /** \brief Selects the fragment-based structure-generation strategy (assembly from pre-built fragment conformers). */
             constexpr unsigned int FRAGMENT          = 1;
+            /** \brief Selects the distance-geometry structure-generation strategy. */
             constexpr unsigned int DISTANCE_GEOMETRY = 2;
         } // namespace StructureGenerationMode
     } // namespace ConfGen

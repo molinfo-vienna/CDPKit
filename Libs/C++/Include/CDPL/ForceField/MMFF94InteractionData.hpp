@@ -47,42 +47,115 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Container holding the full set of MMFF94 interaction parameters for a molecular graph.
+         *
+         * The class aggregates the seven per-interaction lists that together describe the energy expression
+         * of the MMFF94 force field (bond stretching, angle bending, stretch-bend coupling, out-of-plane bending,
+         * torsion, electrostatic and van der Waals interactions). Instances are typically produced by
+         * ForceField::MMFF94InteractionParameterizer and consumed by ForceField::MMFF94EnergyCalculator and
+         * ForceField::MMFF94GradientCalculator.
+         */
         class CDPL_FORCEFIELD_API MMFF94InteractionData
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94InteractionData instances. */
             typedef std::shared_ptr<MMFF94InteractionData> SharedPointer;
 
+            /**
+             * \brief Returns the list of MMFF94 bond-stretching interactions.
+             * \return A \c const reference to the bond-stretching interaction list.
+             */
             const MMFF94BondStretchingInteractionList& getBondStretchingInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 bond-stretching interactions.
+             * \return A reference to the bond-stretching interaction list.
+             */
             MMFF94BondStretchingInteractionList& getBondStretchingInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 angle-bending interactions.
+             * \return A \c const reference to the angle-bending interaction list.
+             */
             const MMFF94AngleBendingInteractionList& getAngleBendingInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 angle-bending interactions.
+             * \return A reference to the angle-bending interaction list.
+             */
             MMFF94AngleBendingInteractionList& getAngleBendingInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+             * \return A \c const reference to the stretch-bend interaction list.
+             */
             const MMFF94StretchBendInteractionList& getStretchBendInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 stretch-bend coupling interactions.
+             * \return A reference to the stretch-bend interaction list.
+             */
             MMFF94StretchBendInteractionList& getStretchBendInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 out-of-plane bending interactions.
+             * \return A \c const reference to the out-of-plane bending interaction list.
+             */
             const MMFF94OutOfPlaneBendingInteractionList& getOutOfPlaneBendingInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 out-of-plane bending interactions.
+             * \return A reference to the out-of-plane bending interaction list.
+             */
             MMFF94OutOfPlaneBendingInteractionList& getOutOfPlaneBendingInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 torsion interactions.
+             * \return A \c const reference to the torsion interaction list.
+             */
             const MMFF94TorsionInteractionList& getTorsionInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 torsion interactions.
+             * \return A reference to the torsion interaction list.
+             */
             MMFF94TorsionInteractionList& getTorsionInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 electrostatic interactions.
+             * \return A \c const reference to the electrostatic interaction list.
+             */
             const MMFF94ElectrostaticInteractionList& getElectrostaticInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 electrostatic interactions.
+             * \return A reference to the electrostatic interaction list.
+             */
             MMFF94ElectrostaticInteractionList& getElectrostaticInteractions();
 
+            /**
+             * \brief Returns the list of MMFF94 van der Waals interactions.
+             * \return A \c const reference to the van der Waals interaction list.
+             */
             const MMFF94VanDerWaalsInteractionList& getVanDerWaalsInteractions() const;
 
+            /**
+             * \brief Returns the list of MMFF94 van der Waals interactions.
+             * \return A reference to the van der Waals interaction list.
+             */
             MMFF94VanDerWaalsInteractionList& getVanDerWaalsInteractions();
 
+            /**
+             * \brief Removes all stored interactions from every interaction list.
+             */
             void clear();
 
+            /**
+             * \brief Swaps the contents (all interaction lists) of this instance with \a ia_data.
+             * \param ia_data The other interaction-data container.
+             */
             void swap(MMFF94InteractionData& ia_data);
 
           private:

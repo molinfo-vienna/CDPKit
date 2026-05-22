@@ -171,27 +171,27 @@ namespace CDPL
             void clearInputCoordinates(std::size_t frag_idx);
 
             /**
-             * \brief Adds \a coords as a new starting configuration that the driver will torsion-drive.
+             * \brief Adds \a coords as a new starting conformation that the driver will torsion-drive.
              * \param coords The input 3D coordinates.
              */
             void addInputCoordinates(const Math::Vector3DArray& coords);
 
             /**
-             * \brief Adds \a coords as a new starting configuration restricted to the fragment at index \a frag_idx.
+             * \brief Adds \a coords as a new starting conformation restricted to the fragment at index \a frag_idx.
              * \param coords The input 3D coordinates of the fragment.
              * \param frag_idx The zero-based fragment index.
              */
             void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
 
             /**
-             * \brief Adds the conformer data \a conf_data as a new starting configuration restricted to the fragment at index \a frag_idx.
+             * \brief Adds the conformer data \a conf_data as a new starting conformation restricted to the fragment at index \a frag_idx.
              * \param conf_data The input conformer data.
              * \param frag_idx The zero-based fragment index.
              */
             void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
 
             /**
-             * \brief Adds the conformer data shared pointer \a conf_data as a new starting configuration restricted to the fragment at index \a frag_idx.
+             * \brief Adds the conformer data shared pointer \a conf_data as a new starting conformation restricted to the fragment at index \a frag_idx.
              * \param conf_data The input conformer data.
              * \param frag_idx The zero-based fragment index.
              */

@@ -47,16 +47,36 @@ namespace CDPL
         {
 
           public:
+            /** \brief Default settings used by a freshly-constructed DGStructureGeneratorSettings. */
             static const DGStructureGeneratorSettings DEFAULT;
 
+            /**
+             * \brief Constructs the settings instance with default values.
+             */
             DGStructureGeneratorSettings();
 
+            /**
+             * \brief Sets the edge length of the bounding box used by the distance-geometry embedder.
+             * \param size The new bounding-box edge length.
+             */
             void setBoxSize(double size);
 
+            /**
+             * \brief Returns the edge length of the bounding box used by the distance-geometry embedder.
+             * \return The bounding-box edge length.
+             */
             double getBoxSize() const;
 
+            /**
+             * \brief Specifies whether planarity (zero-volume) constraints shall be added for sp2 atoms and double/aromatic bonds.
+             * \param enable If \c true, planarity constraints are added.
+             */
             void enablePlanarityConstraints(bool enable);
 
+            /**
+             * \brief Tells whether planarity constraints are enabled.
+             * \return \c true if planarity constraints are enabled, and \c false otherwise.
+             */
             bool enablePlanarityConstraints() const;
 
           private:

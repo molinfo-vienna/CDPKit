@@ -74,65 +74,180 @@ namespace CDPL
 
             FragmentConformerGenerator(const FragmentConformerGenerator&) = delete;
 
+            /**
+             * \brief Destructor.
+             */
             ~FragmentConformerGenerator();
 
             FragmentConformerGenerator& operator=(const FragmentConformerGenerator&) = delete;
 
+            /**
+             * \brief Returns the current generator settings (mutable).
+             * \return A reference to the settings.
+             */
             FragmentConformerGeneratorSettings& getSettings();
 
+            /**
+             * \brief Returns the current generator settings.
+             * \return A \c const reference to the settings.
+             */
             const FragmentConformerGeneratorSettings& getSettings() const;
 
+            /**
+             * \brief Sets the callback invoked periodically to allow conformer generation to be aborted by the user.
+             * \param func The abort-check callback.
+             */
             void setAbortCallback(const CallbackFunction& func);
 
+            /**
+             * \brief Returns the currently configured abort-check callback.
+             * \return A \c const reference to the abort-check callback.
+             */
             const CallbackFunction& getAbortCallback() const;
 
+            /**
+             * \brief Sets the callback invoked periodically to check whether the configured generation timeout has elapsed.
+             * \param func The timeout-check callback.
+             */
             void setTimeoutCallback(const CallbackFunction& func);
 
+            /**
+             * \brief Returns the currently configured timeout-check callback.
+             * \return A \c const reference to the timeout-check callback.
+             */
             const CallbackFunction& getTimeoutCallback() const;
 
+            /**
+             * \brief Sets the callback that receives log messages produced during conformer generation.
+             * \param func The log-message callback.
+             */
             void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
+            /**
+             * \brief Returns the currently configured log-message callback.
+             * \return A \c const reference to the log-message callback.
+             */
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
+            /**
+             * \brief Generates a conformer ensemble for the fragment \a molgraph (the fragment type is perceived automatically).
+             * \param molgraph The fragment to process.
+             * \return A status code defined in ConfGen::ReturnCode.
+             */
             unsigned int generate(const Chem::MolecularGraph& molgraph);
 
+            /**
+             * \brief Generates a conformer ensemble for the fragment \a molgraph using the fragment-type-specific settings selected by \a frag_type.
+             * \param molgraph The fragment to process.
+             * \param frag_type One of the ConfGen::FragmentType values selecting the per-fragment-class settings.
+             * \return A status code defined in ConfGen::ReturnCode.
+             */
             unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
-            /*
+            /**
+             * \brief Generates a conformer ensemble for the fragment \a molgraph while keeping the substructure \a fixed_substr at the supplied 3D coordinates.
+             * \param molgraph The fragment to process.
+             * \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+             * \param fixed_substr_coords The 3D coordinates assigned to \a fixed_substr.
+             * \return A status code defined in ConfGen::ReturnCode.
              * \since 1.1
              */
             unsigned int generate(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& fixed_substr,
                                   const Math::Vector3DArray& fixed_substr_coords);
 
-            /*
+            /**
+             * \brief Generates a conformer ensemble for the fragment \a molgraph using the fragment-type-specific settings selected by \a frag_type
+             *        while keeping the substructure \a fixed_substr at the supplied 3D coordinates.
+             * \param molgraph The fragment to process.
+             * \param frag_type One of the ConfGen::FragmentType values selecting the per-fragment-class settings.
+             * \param fixed_substr The substructure that must retain the supplied 3D coordinates.
+             * \param fixed_substr_coords The 3D coordinates assigned to \a fixed_substr.
+             * \return A status code defined in ConfGen::ReturnCode.
              * \since 1.1
              */
             unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type,
                                   const Chem::MolecularGraph& fixed_substr,
                                   const Math::Vector3DArray& fixed_substr_coords);
 
+            /**
+             * \brief Transfers the generated conformer ensemble onto \a molgraph.
+             *
+             * The per-conformer 3D coordinates are written to each atom's 3D-coordinates array
+             * (via Chem::set3DCoordinatesArray) and the corresponding per-conformer energies are
+             * attached to the molecular graph (via Chem::setConformerEnergies).
+             *
+             * \param molgraph The molecular graph that receives the conformer coordinates and energies.
+             */
             void setConformers(Chem::MolecularGraph& molgraph) const;
 
+            /**
+             * \brief Returns the number of generated conformers.
+             * \return The conformer count.
+             */
             std::size_t getNumConformers() const;
 
+            /**
+             * \brief Returns the conformer at index \a idx.
+             * \param idx The zero-based conformer index.
+             * \return A \c const reference to the conformer data.
+             * \throw Base::IndexError if the number of conformers is zero or \a idx is not in the range [0, getNumConformers() - 1].
+             */
             const ConformerData& getConformer(std::size_t idx) const;
 
+            /**
+             * \brief Returns the conformer at index \a idx.
+             * \param idx The zero-based conformer index.
+             * \return A reference to the conformer data.
+             * \throw Base::IndexError if the number of conformers is zero or \a idx is not in the range [0, getNumConformers() - 1].
+             */
             ConformerData& getConformer(std::size_t idx);
 
+            /**
+             * \brief Returns a constant iterator pointing to the first generated conformer.
+             * \return A constant iterator pointing to the first conformer.
+             */
             ConstConformerIterator getConformersBegin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last generated conformer.
+             * \return A constant iterator pointing one past the last conformer.
+             */
             ConstConformerIterator getConformersEnd() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first generated conformer.
+             * \return A mutable iterator pointing to the first conformer.
+             */
             ConformerIterator getConformersBegin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last generated conformer.
+             * \return A mutable iterator pointing one past the last conformer.
+             */
             ConformerIterator getConformersEnd();
 
+            /**
+             * \brief Returns a constant iterator pointing to the first generated conformer (range-based for support).
+             * \return A constant iterator pointing to the first conformer.
+             */
             ConstConformerIterator begin() const;
 
+            /**
+             * \brief Returns a constant iterator pointing one past the last generated conformer (range-based for support).
+             * \return A constant iterator pointing one past the last conformer.
+             */
             ConstConformerIterator end() const;
 
+            /**
+             * \brief Returns a mutable iterator pointing to the first generated conformer (range-based for support).
+             * \return A mutable iterator pointing to the first conformer.
+             */
             ConformerIterator begin();
 
+            /**
+             * \brief Returns a mutable iterator pointing one past the last generated conformer (range-based for support).
+             * \return A mutable iterator pointing one past the last conformer.
+             */
             ConformerIterator end();
 
           private:

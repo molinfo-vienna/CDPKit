@@ -54,28 +54,73 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Generates the MMFF94 out-of-plane bending interactions for the trigonal centers of a molecular graph.
+         *
+         * For every atom \e j with exactly three neighbors that is a trigonal center (per the MMFF94 atom-type
+         * properties) the parameterizer generates three out-of-plane records — one for each permutation of the
+         * three neighbors as the out-of-plane atom \e l with the remaining two as in-plane terminal atoms.
+         * The required out-of-plane force constants are taken from the parameter table, falling back through
+         * the primary-to-parameter atom-type map when no exact entry is available.
+         */
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
         {
 
           public:
+            /** \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94OutOfPlaneBendingInteractionParameterizer instances. */
             typedef std::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
 
+            /**
+             * \brief Constructs an \c %MMFF94OutOfPlaneBendingInteractionParameterizer instance using the default MMFF94 tables.
+             */
             MMFF94OutOfPlaneBendingInteractionParameterizer();
 
+            /**
+             * \brief Constructs the parameterizer and immediately processes \a molgraph into \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the out-of-plane bending interactions.
+             * \param ia_list Output list receiving the generated MMFF94OutOfPlaneBendingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph&             molgraph,
                                                             MMFF94OutOfPlaneBendingInteractionList& ia_list,
                                                             bool                                    strict);
 
+            /**
+             * \brief Sets the filter function used to skip atom quadruplets during parameterization.
+             * \param func The new four-atom filter function (when it returns \c false, the quadruplet is skipped).
+             */
             void setFilterFunction(const InteractionFilterFunction4& func);
 
+            /**
+             * \brief Sets the function used to look up the MMFF94 numeric atom type of an atom.
+             * \param func The new numeric-atom-type lookup function.
+             */
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
+            /**
+             * \brief Sets the table providing per-atom-type-quadruplet out-of-plane bending force constants.
+             * \param table The new out-of-plane bending parameter table.
+             */
             void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the table providing per-numeric-atom-type property data (used to identify trigonal centers).
+             * \param table The new atom-type property table.
+             */
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+            /**
+             * \brief Sets the map used to translate primary atom types into their corresponding parameter-atom types.
+             * \param map The new primary-to-parameter atom-type map.
+             */
             void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
+            /**
+             * \brief Generates the MMFF94 out-of-plane bending interactions for \a molgraph and writes them to \a ia_list.
+             * \param molgraph The molecular graph for which to parameterize the out-of-plane bending interactions.
+             * \param ia_list Output list receiving the generated MMFF94OutOfPlaneBendingInteraction records.
+             * \param strict If \c true, missing/ambiguous parameters cause a parameterization failure.
+             */
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionList& ia_list, bool strict);
 
           private:

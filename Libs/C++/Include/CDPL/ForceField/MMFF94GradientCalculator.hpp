@@ -45,47 +45,141 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Evaluates the total MMFF94 force-field energy and its gradient with respect to the atomic coordinates.
+         *
+         * The calculator takes a ForceField::MMFF94InteractionData instance and the atom count of the molecule
+         * and computes both the total MMFF94 energy and the analytical Cartesian gradient
+         * \f$ \partial E / \partial \mathbf{r}_i \f$ for each atom. The per-component energies are retained
+         * and made available via the dedicated accessors. A bit mask can be set to mark atoms whose gradient
+         * contributions are zeroed, freezing them during an energy minimization.
+         *
+         * \tparam ValueType The floating-point value type used to represent the computed energies and gradients.
+         */
         template <typename ValueType>
         class MMFF94GradientCalculator
         {
 
           public:
+            /**
+             * \brief Constructs the calculator without any associated interaction data.
+             *
+             * Operator() will return zero until setup() has been called.
+             */
             MMFF94GradientCalculator();
 
+            /**
+             * \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+             * \param ia_data The MMFF94 interaction data to use during energy/gradient evaluation.
+             * \param num_atoms The number of atoms in the parameterized molecular graph.
+             */
             MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
+            /**
+             * \brief Enables/disables specific MMFF94 interaction-type contributions.
+             * \param types Bitwise-OR combination of ForceField::InteractionType flags. Only the listed contributions are evaluated.
+             */
             void setEnabledInteractionTypes(unsigned int types);
 
+            /**
+             * \brief Returns the currently enabled interaction-type contributions.
+             * \return The bitwise-OR combination of ForceField::InteractionType flags.
+             */
             unsigned int getEnabledInteractionTypes() const;
 
+            /**
+             * \brief Associates the calculator with the supplied MMFF94 interaction data and atom count.
+             * \param ia_data The new MMFF94 interaction data.
+             * \param num_atoms The number of atoms in the parameterized molecular graph.
+             */
             void setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
+            /**
+             * \brief Computes the total MMFF94 energy of the conformation \a coords without evaluating the gradient.
+             * \tparam CoordsArray The coordinate-array type.
+             * \param coords The 3D coordinates of the molecule.
+             * \return A \c const reference to the computed total energy.
+             */
             template <typename CoordsArray>
             const ValueType& operator()(const CoordsArray& coords);
 
+            /**
+             * \brief Computes the total MMFF94 energy and the per-atom gradient of the conformation \a coords.
+             *
+             * Gradients of atoms marked in the fixed-atom mask (see setFixedAtomMask()) are zeroed after evaluation.
+             *
+             * \tparam CoordsArray The coordinate-array type.
+             * \tparam GradVector The gradient-vector type (must satisfy ForceField::GradientVectorTraits requirements).
+             * \param coords The 3D coordinates of the molecule.
+             * \param grad The output gradient vector.
+             * \return A \c const reference to the computed total energy.
+             */
             template <typename CoordsArray, typename GradVector>
             const ValueType& operator()(const CoordsArray& coords, GradVector& grad);
 
+            /**
+             * \brief Returns the total MMFF94 energy computed by the most recent operator() call.
+             * \return A \c const reference to the total energy.
+             */
             const ValueType& getTotalEnergy() const;
 
+            /**
+             * \brief Returns the bond-stretching energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the bond-stretching energy.
+             */
             const ValueType& getBondStretchingEnergy() const;
 
+            /**
+             * \brief Returns the angle-bending energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the angle-bending energy.
+             */
             const ValueType& getAngleBendingEnergy() const;
 
+            /**
+             * \brief Returns the stretch-bend coupling energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the stretch-bend energy.
+             */
             const ValueType& getStretchBendEnergy() const;
 
+            /**
+             * \brief Returns the out-of-plane bending energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the out-of-plane bending energy.
+             */
             const ValueType& getOutOfPlaneBendingEnergy() const;
 
+            /**
+             * \brief Returns the torsion energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the torsion energy.
+             */
             const ValueType& getTorsionEnergy() const;
 
+            /**
+             * \brief Returns the electrostatic energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the electrostatic energy.
+             */
             const ValueType& getElectrostaticEnergy() const;
 
+            /**
+             * \brief Returns the van der Waals energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the van der Waals energy.
+             */
             const ValueType& getVanDerWaalsEnergy() const;
 
+            /**
+             * \brief Returns the bit mask flagging atoms whose gradient components are zeroed after evaluation.
+             * \return A \c const reference to the fixed-atom bit mask.
+             */
             const Util::BitSet& getFixedAtomMask() const;
 
+            /**
+             * \brief Sets the bit mask flagging atoms whose gradient components shall be zeroed after evaluation.
+             * \param mask The new fixed-atom bit mask (bit \e i set freezes atom \e i during minimization).
+             */
             void setFixedAtomMask(const Util::BitSet& mask);
 
+            /**
+             * \brief Clears the fixed-atom mask so that all atoms contribute to the gradient.
+             */
             void resetFixedAtomMask();
 
           private:

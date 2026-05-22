@@ -41,38 +41,111 @@ namespace CDPL
     namespace ForceField
     {
 
+        /**
+         * \brief Evaluates the total MMFF94 force-field energy of a 3D conformation.
+         *
+         * The calculator takes a ForceField::MMFF94InteractionData instance (typically produced by
+         * ForceField::MMFF94InteractionParameterizer) and computes the bond-stretching, angle-bending,
+         * stretch-bend, out-of-plane bending, torsion, electrostatic and van der Waals energy contributions
+         * for a supplied set of 3D coordinates. The per-component energies are retained and made available
+         * via the dedicated accessors; the sum is returned by operator() and getTotalEnergy().
+         *
+         * \tparam ValueType The floating-point value type used to represent the computed energies.
+         */
         template <typename ValueType>
         class MMFF94EnergyCalculator
         {
 
           public:
+            /**
+             * \brief Constructs the calculator without any associated interaction data.
+             *
+             * Operator() will return zero until setup() has been called.
+             */
             MMFF94EnergyCalculator();
 
+            /**
+             * \brief Constructs the calculator and associates it with the supplied MMFF94 interaction data.
+             * \param ia_data The MMFF94 interaction data to use during energy evaluation.
+             */
             MMFF94EnergyCalculator(const MMFF94InteractionData& ia_data);
 
+            /**
+             * \brief Enables/disables specific MMFF94 interaction-type contributions.
+             * \param types Bitwise-OR combination of ForceField::InteractionType flags. Only the listed contributions are evaluated.
+             */
             void setEnabledInteractionTypes(unsigned int types);
 
+            /**
+             * \brief Returns the currently enabled interaction-type contributions.
+             * \return The bitwise-OR combination of ForceField::InteractionType flags.
+             */
             unsigned int getEnabledInteractionTypes() const;
 
+            /**
+             * \brief Associates the calculator with the supplied MMFF94 interaction data.
+             * \param ia_data The new MMFF94 interaction data.
+             */
             void setup(const MMFF94InteractionData& ia_data);
 
+            /**
+             * \brief Computes the total MMFF94 energy of the conformation \a coords.
+             *
+             * The per-component energies are stored internally and can be retrieved via the dedicated accessors.
+             *
+             * \tparam CoordsArray The coordinate-array type (must provide operator[] returning a Math::Vector3 - compatible value).
+             * \param coords The 3D coordinates of the molecule.
+             * \return A \c const reference to the computed total energy (also accessible via getTotalEnergy()).
+             */
             template <typename CoordsArray>
             const ValueType& operator()(const CoordsArray& coords);
 
+            /**
+             * \brief Returns the total MMFF94 energy computed by the most recent operator() call.
+             * \return A \c const reference to the total energy.
+             */
             const ValueType& getTotalEnergy() const;
 
+            /**
+             * \brief Returns the bond-stretching energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the bond-stretching energy.
+             */
             const ValueType& getBondStretchingEnergy() const;
 
+            /**
+             * \brief Returns the angle-bending energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the angle-bending energy.
+             */
             const ValueType& getAngleBendingEnergy() const;
 
+            /**
+             * \brief Returns the stretch-bend coupling energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the stretch-bend energy.
+             */
             const ValueType& getStretchBendEnergy() const;
 
+            /**
+             * \brief Returns the out-of-plane bending energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the out-of-plane bending energy.
+             */
             const ValueType& getOutOfPlaneBendingEnergy() const;
 
+            /**
+             * \brief Returns the torsion energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the torsion energy.
+             */
             const ValueType& getTorsionEnergy() const;
 
+            /**
+             * \brief Returns the electrostatic energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the electrostatic energy.
+             */
             const ValueType& getElectrostaticEnergy() const;
 
+            /**
+             * \brief Returns the van der Waals energy contribution computed by the most recent operator() call.
+             * \return A \c const reference to the van der Waals energy.
+             */
             const ValueType& getVanDerWaalsEnergy() const;
 
           private:

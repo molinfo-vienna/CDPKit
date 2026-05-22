@@ -86,7 +86,12 @@ namespace CDPL
             const Util::BitSet& getExcludedHydrogenMask() const;
 
             /**
-             * \brief Sets up the generator for \a molgraph using force-field parameters perceived on the fly.
+             * \brief Sets up the generator for \a molgraph using geometry defaults derived from each atom's
+             *        element number and hybridization state.
+             *
+             * No MMFF94 parameterization is carried out; reference bond lengths and angles are taken from
+             * element-/hybridization-based lookup tables.
+             *
              * \param molgraph The input molecular graph.
              */
             void setup(const Chem::MolecularGraph& molgraph);

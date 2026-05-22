@@ -176,7 +176,7 @@ namespace CDPL
                                   const Math::Vector3DArray& fixed_substr_coords);
 
             /**
-             * \brief Transfers the generated 3D coordinates onto \a molgraph (sets the \c ATOM_COORDINATES_3D atom properties).
+             * \brief Transfers the generated 3D coordinates onto the atoms of \a molgraph (via Chem::set3DCoordinates).
              * \param molgraph The molecular graph receiving the 3D coordinates.
              */
             void setCoordinates(Chem::MolecularGraph& molgraph) const;
